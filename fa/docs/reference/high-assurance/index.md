@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-
 
 یک سرور مهر و موم‌شدهٔ ۲۴ ساعته و ۷ روز هفته در Hetzner یا Phala Cloud، DNS Gateway و چک‌هایی که شخص ثالث می‌تواند تکرار کند.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+استقرار با تضمین بالا، بررسی‌های مستقل محیط جمع‌آوری را به تأیید بایگانی اضافه می‌کند. بازبین، سوابق استقرار و دسترسی را که توسط ارائه‌دهنده ابری و کلودفلر نگهداری می‌شوند، استعلام می‌کند و استقرار Intel TDX، گواهی سخت‌افزاری محیط گردآورنده را اضافه می‌کند.
 
 استفادهٔ معمولی محلی و Docker بدون تغییر است. هیچ چیزی در اینجا اجرا نمی‌شود مگر اینکه با `python -m tgwitness.cloud`، و کالکتور تنها زمانی میزبان خود را می‌خواند که استقرار تنظیم کند. `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ High-assurance deployment adds independent checks of the collection environment 
 7. تأییدکننده، توکن‌های فقط-خواندنی → بیانیه تضمین امضا شده /api/
 8. تأییدکننده، توکن‌های فقط-خواندنی → فایل فشرده شواهد
 
-**On this page**
+**در این صفحه**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#reading-the-deployment-result)
+- [آنچه یک اعتبارسنج می‌تواند بررسی کند](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [ارائه‌دهندگان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#providers)
+- [ماشین مجازی محرمانه در Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [قبل از شروع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#before-you-start)
+- [از پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#from-the-panel)
+- [تونل سریع بدون دامنه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [راه‌اندازی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#deploy)
+- [عیب‌یابی استقرار و قفل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [حذف یک استقرار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#remove-a-deployment)
+- [هر سرور (خودگواهی‌شده)](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#any-server-self-attested)
+- [تأیید کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#verify)
+- [گزارش تحویل مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#report-for-evidence-handover)
+- [کلودفلر به‌عنوان شاهد بیرونی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [خواندن نتیجه استقرار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## آنچه یک راستی‌آزما می‌تواند بررسی کند
 
@@ -54,7 +54,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | کلید امضا روی آن سرور ایجاد شد | کلید بیانیه‌ای را امضا می‌کند که شامل شناسهٔ سرور ارائه‌دهنده و هش cloud-init دریافتی است. | کالکتور، بررسی‌شده در برابر ارائه‌دهنده |
 | این مجله متعلق به آن کلید و سرور است | هر فرایند در شواهد آغاز می‌شود ZIP اندازه‌گیری میزبان را برای آن سرور حمل می‌کند | شواهد ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+جمع‌آورنده وضعیت SSH، جلسات، تاریخچه ورود و اطلاعات بوت را در رکوردهای امضا شدهٔ شروع-فرآیند و `host.state` ثبت می‌کند. در یک ماشین مجازی معمولی، این‌ها رکوردهای موجودی محلی هستند که بازبین آن‌ها را با رکوردهای مستقل ارائه‌دهنده مقایسه می‌کند. استقرار Intel TDX در زیر، به‌طور اضافی اندازه‌گیری‌های پشتیبانی‌شده توسط سخت‌افزار را تأیید می‌کند.
 
 ## ارائه‌دهندگان
 
@@ -109,7 +109,7 @@ python -m tgwitness.cloud check-report --report certificate.pdf --verifier-finge
 
 این گزارش با امضاها و مهرهای زمانی به‌صورت دیجیتال در فایل‌های `certificate.seal.json` و `.tsq`/`.tsr` کنار آن مهر و موم شده است:
 
-| Seal | آنچه اضافه می‌کند |
+| مهر و موم | آنچه اضافه می‌کند |
 | --- | --- |
 | مهر زمانی الکترونیکی معتبر، `http://tsa.belgium.be/connect` | امضای زمانی RFC 3161 بر روی بایت‌های دقیق `certificate.json` از ارائه‌دهنده خدمات اعتماد معتبر دولت فدرال بلژیک (FPS Policy and Support, BOSA). واحد آن به عنوان یک سرویس مهر زمانی معتبر با وضعیت اعطا شده در فهرست مورد اعتماد اتحادیه اروپا برای بلژیک فهرست شده است؛ ریشه (Belgium Root CA6) و موارد موجود در این فهرست، بر اساس فهرستی که در تاریخ ۲۰ اکتبر ۲۰۲۶ منتشر شده است، در `tgwitness/tsa_roots.py` پین شده‌اند. بر اساس مقررات (اتحادیه اروپا) شماره ۹۱۰/۲۰۱۴، ماده ۴۱، چنین مهر زمانی از نظر تاریخ و زمان و همچنین از نظر یکپارچگی داده‌ها در هر یک از کشورهای عضو اتحادیه اروپا معتبر فرض می‌شود. |
 | مهر زمانی RFC 3161، FreeTSA | یک نشانگر زمانی دوم و مستقل |
@@ -292,6 +292,6 @@ DNS گیت‌وی، حل‌کننده سیستم را پوشش می‌دهد. DN
 
 ## خواندن نتیجه استقرار
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+برای یک ماشین مجازی معمولی، ارائه‌دهنده زیرساخت میزبان را کنترل می‌کند و موجودی محلی در کنار سوابق ارائه‌دهنده بررسی می‌شود. برای Intel TDX، راستی‌آزما علاوه بر این، استناد سخت‌افزاری، پیوند گردآورنده، ترکیب و اندازه‌گیری‌های سیستم‌عامل را بررسی می‌کند. نتایج فردی را بخوانید تا ببینید کدام بررسی‌ها با موفقیت انجام شده‌اند یا در دسترس نبوده‌اند.
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+جزئیات فایروال تاریخی به ارائه‌دهنده بستگی دارد؛ لینود نسخه‌های قوانین را حفظ می‌کند. [سوابق اعتبارسنجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/)، استقرارهای آزمایش‌شده و بررسی‌های زنده باقیمانده را فهرست می‌کند، و [دامنه تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)، این بررسی‌های محیطی را به دریافت و یکپارچگی آرشیو متصل می‌سازد.

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/showc
 
 Tanlangan ommaviy kanallarning saqlangan xabarlari va imzolangan snapshotlarini muddati tugaydigan, bekor qilinishi mumkin bo&#x27;lgan havolalar orqali e&#x27;lon qiling.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Kirish → Jamoat namoyishi** mavjud access-token tizimidan foydalangan holda alohida, faqat o'qish uchun mo'ljallangan sahifa yaratadi. U o'rnatmaning saqlangan kuzatuvlarini o'qiydi. U kollektorni ishga tushirmaydi, Telegramga kirishni amalga oshirmaydi yoki tashrif buyuruvchi uchun kanalni olmadi.
 

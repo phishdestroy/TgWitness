@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/webho
 
 将带 HMAC 签名的指定范围事件发送至 HTTPS 接收端，支持重试并提供投递状态。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [存档集成](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![存档集成](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

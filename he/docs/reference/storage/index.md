@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/stora
 
 גיבויים, העברת קבצים ישנים לענן, עותקים תחת Object Lock ושחזור במחשב חדש.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [פריסה ושחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![פריסה ושחזור](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 הלוח מחלק את העבודה לשלוש משימות:
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/stora
 
 תגובה להעלאה כשלעצמה אינה מהווה אישור למחיקת קובץ. TgWitness מוריד את האובייקט המוצפן במלואו, מאמת את גודלו ואת SHA-256, שומר את הקבלה, ואז בודק שוב את הבתים המקומיים מיד לפני ההסרה. כישלון בהעלאה, קריאה חוזרת שונה או העברה שבוטלה משאירים את הקובץ המקומי במקומו. אם גיבוי ראיות מופעל עדיין לא העתיק את הקובץ, ההסרה ממתינה גם לכך.
 
-**On this page**
+**בעמוד זה**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#operator-bot-and-completion-notices)
+- [כאשר הדיסק מתמלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#when-the-disk-is-filling-up)
+- [חבר יעד](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#connect-a-destination)
+- [שמור את קובץ השחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#keep-the-recovery-file)
+- [שחזור לאחר אובדן ההתקנה](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#recover-after-losing-the-installation)
+- [בוט מפעיל והודעות על השלמת פעולות](https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## כשהדיסק מתמלא
 

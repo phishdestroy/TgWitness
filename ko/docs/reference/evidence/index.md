@@ -6,31 +6,31 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/evide
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![증거 및 검증](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness는 계정에서 확인 가능한 텔레그램 관찰 내용을 서명된 저널에 보존합니다. 수신자는 신뢰할 수 있는 수집기 키를 사용하여 저장된 기록, 첨부 파일 및 보고서를 검증한 후, 저널을 독립적으로 보관된 체크포인트와 비교할 수 있습니다. 이 페이지에서는 인계 시 유지해야 할 형식, 검증 절차 및 자료를 설명합니다.
 
-Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+사용자는 Windows에서 **VERIFY.cmd를** 실행하여 시작할 수 있습니다. 이 프로그램은 원본 ZIP 파일과 독립적으로 확보한 키 지문을 요청하고, 설명이 포함된 결과를 표시하며, 별도의 검증 기록을 저장합니다. 설정 및 신뢰 한도에 대해서는 [검증 실행 프로그램과 휴대용 런타임을](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) 참조하십시오.
 
-**On this page**
+**이 페이지에서**
 
-- [What is signed](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#what-is-signed)
-- [Comparing chat exports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#comparing-chat-exports)
-- [Investigation handoff](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#investigation-handoff)
-- [Handover extract](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#handover-extract)
-- [Readable reports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#readable-reports)
-- [Event canonicalization](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#event-canonicalization)
-- [Actor semantics](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#actor-semantics)
-- [Coverage: continuity, gaps and unobserved IDs](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
-- [Producer](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#producer)
-- [People profiles](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#people-profiles)
-- [Independent witness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#independent-witness)
-- [Manifest and checkpoints](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#manifest-and-checkpoints)
-- [Verification scope](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)
-- [Attachments](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#attachments)
-- [Durable collection and process receipts (0.2)](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#durable-collection-and-process-receipts-02)
-- [RFC 3161 preparation and response verification (0.2)](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
-- [Optional records in evidence mode: drand and Telegram devices](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
+- [서명된 내용](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#what-is-signed)
+- [채팅 내역 내보내기 비교](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#comparing-chat-exports)
+- [수사 인계](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#investigation-handoff)
+- [인계 내용 발췌](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#handover-extract)
+- [읽기 쉬운 보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#readable-reports)
+- [이벤트 정규화](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#event-canonicalization)
+- [액터 의미론](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#actor-semantics)
+- [범위: 연속성, 누락 및 관측되지 않은 ID](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
+- [제작자](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#producer)
+- [사용자 프로필](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#people-profiles)
+- [독립적인 증인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#independent-witness)
+- [매니페스트 및 체크포인트](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#manifest-and-checkpoints)
+- [검증 범위](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)
+- [첨부 파일](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#attachments)
+- [내구성 있는 수집 및 처리 영수증 (0.2)](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#durable-collection-and-process-receipts-02)
+- [RFC 3161 준비 및 응답 검증 (0.2)](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
+- [증거 모드에서 선택적으로 포함되는 기록: drand 및 텔레그램 기기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
 
 ## 서명된 증거란 무엇인가
 
@@ -40,27 +40,27 @@ Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZI
 | 증거 ZIP 파일 내용 | `manifest.sig`는 콘텐츠 파일의 해시 값을 나열한 표준 매니페스트에 서명합니다. | 매니페스트 및 서명이 포함된 전체 ZIP 파일 |
 | 보존된 첨부 파일 | 서명된 `media.saved` 이벤트 내의 SHA-256 및 바이트 수; 서명된 ZIP 매니페스트 내의 파일 해시 | 검증된 ZIP 파일 내부의 원본 바이트 |
 | 체크포인트 | 저널 길이, 헤더 해시, 공개 키 및 생성 시간에 대한 Ed25519 서명 | 논란이 되는 변경 사항이 적용되기 전에 보관된 독립적인 사본 |
-| 실행 확인서 | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
+| 실행 확인서 | 수집기 버전, 소스 파일 해시 및 시작 설정에 대한 서명된 기록은 `process.started`에도 포함되어 있습니다. | 선택한 검증 모드에 대한 영수증, 관련 분개장 및 환경 증거 |
 | 읽기 쉬운 보고서: `report.html` 및 그 구성 요소인 `report.json`, `report.pdf`, `chat.pdf` | 파일당 내용에 대한 Ed25519 인장이 적용되며, PDF에는 표준 PDF 서명도 포함되어 있습니다([참조, 가독성 있는 보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#readable-reports)). | 수신된 파일 및 신뢰할 수 있는 키 지문; 해당 파일이 설명하는 ZIP 파일 |
 | 독립형 CSV | 독립적인 암호화 서명이 없으며, 이벤트 해시만으로는 불충분합니다. | 무결성 검증을 위해 검증된 ZIP 파일 내의 정확한 내용을 사용하십시오. |
 | 브라우저에서 생성된 스크린샷, 출력물 또는 PDF | 파생물에는 TgWitness 서명이 포함되어 있지 않습니다. | 원본 검증된 패키지를 보관하고, 파생본이 어떻게 생성되었는지 문서화하십시오. |
 
 컬렉터는 모든 내보내기 형식을 생성하기 전에 저널 서명을 검증합니다. 읽기 쉬운 HTML 및 PDF 보고서에는 자체 인장이 포함되며, 독립형 CSV 파일은 서명된 ZIP 파일의 일부로 확인됩니다. 첨부 파일 바이트와 매니페스트를 보존하려면 ZIP 파일을 유지하고, 이전 경계와 저널을 대조하여 확인하기 위해 별도의 체크포인트를 유지하십시오.
 
-## Comparing chat exports
+## 채팅 내역 내보내기 비교
 
-Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+독립적으로 보관된 서명자의 지문 정보를 사용하여 서명된 두 개의 채팅 내역 내보내기 ZIP 파일을 검증하고 비교하십시오:
 
 ```
 python -m tgwitness.verify first.zip --compare second.zip \
   --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
 ```
 
-When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+두 아카이브 모두 동일한 숫자형 계정 ID와 채팅 ID를 기록하는 경우, 기록은 메시지 ID를 기준으로 쌍을 이룹니다. **변경 없음(Unchanged)은** 저장된 전체 JSON 기록이 동일함을 의미합니다. 전체 텍스트, 작성자, 날짜, 답장 대상, 중첩된 메타데이터 및 알 수 없는 필드가 모두 포함됩니다. JSON 객체의 키 순서는 중요하지 않지만, 누락된 필드, null 값, 값의 유형 및 배열 순서는 중요합니다. 300자 미리보기는 표시용으로만 사용됩니다. 변경된 항목은 해당 미리보기에서는 보이지 않는 변경 사항을 포함하여, 상위 레벨 `changed_fields`로 명명됩니다. 일치 과정에서 중복된 메시지 ID는 서로 덮어쓰지 않고 거부됩니다.
 
-A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+차이점으로는 표시 이름, 조회수, 컬렉션 주석 또는 기타 관찰 메타데이터의 변경이 있을 수 있습니다. 이는 그 자체만으로는 텔레그램 편집 사실을 입증하거나, 누가 변경을 했는지 식별하거나, 상충되는 아카이브 중 어느 것이 정확한지 증명하지는 않습니다. 구문 분석되지 않은 기록은 비교 결과에 그대로 남아 있으며, 저장된 표현이 동일하다고 해서 해당 텔레그램 페이로드가 디코딩되었다는 의미는 아닙니다.
 
-For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
+계정/채팅 식별자가 다르거나 누락된 경우, 이 도구는 발신자, 전체 텍스트, 파일 해시, 미디어 유형 및 5초의 시간 허용 오차를 사용하여 가능한 일치 항목만 찾습니다. 이 도구는 **‘변경 없음(Unchanged)’이** 아닌 **‘일치(Matched)’로** 보고합니다. 이러한 후보 항목들은 메시지의 동일성이나 모든 메타데이터의 일치성을 입증하지는 않습니다. 구문 분석되지 않은 레코드는 일치하지 않은 상태로 남아 있습니다. 쌍을 이룬 레코드 간의 차이점은 콘텐츠 모드를 포함하여 `changed`에 계속 나열되지만, 이러한 차이점만으로는 동일한 메시지가 수정되었다고 증명할 수 없습니다. `--json` 옵션을 사용하면 `matched`는 쌍의 수를, `unchanged`는 저장된 전체 레코드가 동일한 쌍의 수를 집계합니다. 두 집계 값 모두 콘텐츠 모드에서 메시지 동일성을 증명하지는 않습니다. 기존의 `changed_fields` 및 정수형 `unchanged` 출력은 이전 비교 결과와 호환성을 유지합니다. 아카이브 형식 및 서명 검증은 변경되지 않았습니다.
 
 ## 조사 업무 인계
 
@@ -103,7 +103,7 @@ For different or missing account/chat identities, the tool only finds possible c
 
 채널이나 슈퍼그룹에서 Telegram 는 메시지 1, 2, 3…을 순서대로 번호를 매깁니다. 채팅 내보내기 파일에는 첫 번째 및 마지막 번호, 존재하는 메시지 수, `message-ids.json` 에 있는 누락된 번호의 모든 연속 구간, 매니페스트 및 `chat.json` 헤더가 나열되며, 대본 내에서 각 공백이 발생하는 위치를 표시합니다. `verify.py` 는 `chat.json` 부터 번호를 다시 세어 나갑니다. 누락된 번호란 Telegram 가 반환하지 않은 메시지(내보내기 전에 삭제되었거나, 해당 계정에서 볼 수 없는 메시지)를 의미합니다. 비공개 채팅 및 기본 그룹의 경우 번호는 해당 계정의 모든 채팅에서 공유되며, 누락된 번호는 집계되지 않습니다.
 
-After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
+이력을 읽은 후, 내보내기 기능은 누락된 모든 번호를 번호별로 텔레그램에 다시 요청합니다 (`channels.getMessages`, 최대 10,000개 번호). 결과는 `message-ids.json` 및 보고서에 포함됩니다. 빈 응답은 재확인 시점에 해당 계정이 해당 번호를 확인할 수 없음을 기록하며, 원인은 명시되지 않습니다. 재확인 시 반환된 메시지는 내보내기 파일에 추가되고 `found_on_recheck`로 표시됩니다.
 
 모든 보고서는 **로 시작하며, 요약**: 한 단락, 그 다음 자료가 보여주는 내용과 보여주지 않는 내용 (계정 소유자, 전달의 완전성, 관찰 전 삭제 내역, 타임스탬프가 없는 시각 정보). 브라우저가 페이지 자체가 아닌 봉인의 서명을 확인하면 페이지 자체의 봉인 스탬프가 호박색으로 바뀝니다: 브라우저는 페이지에 자체 바이트를 부여하지 않습니다. 독자가 페이지 하단의 검증 창에 파일을 드래그하여 모든 바이트가 일치할 때, 그리고 표시된 페이지가 해당 파일일 경우에만 녹색으로 변하며, 그렇지 않으면 빨간색으로 변합니다.
 
@@ -159,9 +159,9 @@ message.new의 actor_id는 메시지 발신자입니다. message.edited에는 �
 
 비공개 채팅 및 일반 그룹의 삭제 알림에는 메시지 ID만 포함됩니다. 이러한 채팅은 계정 전체에 걸쳐 하나의 ID 시퀀스를 공유하므로, ID는 해당 계정의 단일 메시지를 식별합니다. 해당 ID를 가진 메시지가 이전에 이 저널에 저장된 적이 있다면, 삭제 내역은 해당 채팅에서 message.deleted로 기록되며, 메서드 이름은 payload.chat_resolution 으로 지정됩니다. 저장된 적이 없는 ID는 chat_id 없이 deletion.unscoped로 유지되며, 어떤 추측도 이루어지지 않습니다. 채널과 슈퍼그룹은 채팅별로 메시지 번호를 부여하며, 이러한 방식으로 일치되는 일은 절대 없습니다. 삭제된 메시지가 관찰 대상 계정에 의해 전송된 경우, payload.deleted_message_was_outgoing이 true가 되지만, 삭제자는 여전히 제공되지 않습니다.
 
-An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+범위가 지정되지 않은 알림은 메시지가 절대 저장되지 않았음을 입증하지 않습니다. 일치하는 채팅이 현재 관찰 범위 밖에 있을 수도 있고, 고유한 일치 항목을 찾을 수 없을 수도 있습니다. 부재 재확인(recheck absence)은 보고서 집계, 필터 및 라벨에서 삭제 알림과는 별개의 관찰 사항으로 간주됩니다. 이후 복구가 이루어지면 현재의 누락 상태는 해제되지만, 서명된 기록에는 이전의 실패한 확인 기록이 유지됩니다. 두 관찰 사항 모두 삭제 알림을 입증하지는 않습니다.
 
-Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+단일 알림에서 동일한 채팅으로 확인된 여러 ID는 개수와 관계없이 `deletion.batch`로 그룹화됩니다. 이 알림만으로는 전체 기록이 삭제되었는지, 누가 삭제를 수행했는지, 또는 모든 참가자에게 적용되었는지는 확인할 수 없습니다. 저장된 발신 메시지는 이러한 제한 사항에 영향을 미치지 않습니다. 오래된 기록에는 10개 이상의 ID로 구성된 배치에서 추론된 `history.cleared` 이벤트가 포함될 수 있으며, 설명 문구를 통해 삭제가 다른 참가자에 의해 수행된 것으로 명시되어 있을 수 있습니다. 이러한 추론은 이번 업데이트에서 지원되지 않습니다. 해당 원본 서명 기록을 보존하되, 이를 그룹화된 삭제 알림으로 취급하십시오. 현재 인터페이스에서는 이를 그에 따라 표시합니다.
 
 ## 다루는 내용: 연속성, 누락 및 감지되지 않은 ID
 
@@ -197,13 +197,13 @@ Multiple IDs resolved to the same chat from one notification are grouped as `del
 
 `verify.py` 재계산 `gap_summary` from `events.jsonl` 서명된 `coverage.json` 멤버(구형 아카이브의 경우 기본값)의 매개변수를 사용하여재계산하고, 커버리지 요약에 계정 전체에 대한 행을 출력합니다. 아카이브의 `get_capture_status`(MCP 및 명령줄)은 특정 액세스가 읽을 수 있는 채팅에 대해 동일한 측정값을 반환하지만, 전체 작업 공간을 포괄하는 액세스에 대해서만 계정 전체 시퀀스를 반환합니다.
 
-Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
+동일한 서비스 메시지에 대한 반복적인 관측은 한 번만 집계되며, 계정 서비스 추정치는 측정 범위 내의 숫자만 사용합니다. 적용된 범위는 계정 전체 측정이 활성화되기 전에 계정 자체의 메시지를 명시적으로 보존해야 합니다. 해당 정보가 없는 오래된 기록은 이 조건을 충족할 수 없습니다. 관측을 중지해도 측정 범위가 확장되지 않으며, 재개 시에는 이를 기록합니다. 실시간 아카이브 쿼리에는 데이터베이스 스캔을 포함한 시간 예산이 할당되며, 완료되지 않은 측정은 ‘부분적’으로 표시됩니다.
 
-Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
+텔레그램은 [별도의 메시지 ID 시퀀스를](https://core.telegram.org/api/updates#message-id-sequences) 기록합니다. 이 숫자들은 관찰 내용을 설명할 뿐, 삭제 주체를 식별하거나 특정 숫자가 누락된 이유를 규명하지는 않습니다.
 
 Telegram가 계정 수신을 중단하면, 관찰을 종료하는 `coverage.gap` 레코드에는 `cause`(`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` 또는 `not_authorized`)와 Telegram 오류가 포함되며, `verify.py`는 해당 기간이 종료되는 원인을 명시합니다.
 
-Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
+적용 범위는 기록된 관찰 기간, 중단 사항 및 메시지 결과를 종합한 것입니다. 선택한 채팅, 기간 및 첨부 파일 정책과 함께 이를 평가해야 합니다. 단순히 지속적인 작동만으로는 텔레그램 업데이트가 완전히 전달되었다고 단정할 수 없습니다.
 
 ## 제작자
 
@@ -231,27 +231,27 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 manifest.json에는 형식, 내보내기 시간, 공개 키, 지문, 저널 길이, 헤드 해시, 범위, 생성자, 제한 사항 및 `manifest.json`와 `manifest.sig` 자체를 제외한 모든 콘텐츠 구성원의 SHA-256 해시가 포함됩니다. manifest.sig는 정규화된 매니페스트 JSON에 대한 base64 Ed25519 서명입니다. 검증기는 예상치 못한 항목이나 누락된 항목, 중복된 이름, 손상된 파일, 파손된 시퀀스/체인, 유효하지 않은 서명, 제공된 체크포인트와의 불일치를 거부합니다. 아카이브 경로는 절대 추출하지 않습니다. 선언된 총 압축 해제 크기를 4 GiB로 제한하며, **매개변수** 한도를 높인 `--max-gib N`를 사용하면 더 큰 아카이브를 만들 수 있습니다.
 
-Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
+설치된 TgWitness 버전이나 검토를 거친 체크아웃에서 검증 작업을 실행하십시오. 아카이브에 포함된 사본은 이동식 사용을 지원합니다. 실행하기 전에 해당 사본을 신뢰할 수 있는 설치본과 대조하여 확인하십시오.
 
-A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
+체크포인트는 공개 키, 저널 길이, 헤드 해시 및 생성 시간을 포함하는 진술에 서명합니다. 검증자는 이후 아카이브에 동일한 접두사가 포함되어 있는지 확인할 수 있습니다. 체크포인트는 수집기 외부에 보관하여, 이후 검증 시 아카이브를 수집기와 별도로 보관된 참조 자료와 비교할 수 있도록 하십시오.
 
 ## 검증 범위
 
-Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
+검증 과정에서는 아카이브와 이를 생성하는 데 사용된 수집 모드를 확인합니다. 해당 사례에 맞는 신뢰 경계를 가진 모드를 선택한 다음, 해당 모드의 검증 입력값을 유지하십시오.
 
 | 수집 모드 | 검증자가 확인하는 사항 | 검증 입력값 및 신뢰 경계 |
 | --- | --- | --- |
-| 로컬 작업 공간 | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
-| 독립적인 위트니스가 포함된 로컬 작업 공간 | 아카이브 검증 및 증인이 보관하고 있는 이전 저널 접두사와의 일치 여부 | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
-| [GitHub Actions 캡처](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
-| [클라우드 배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
-| [Intel TDX 기밀 VM](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
+| 로컬 작업 공간 | 서명, 해시 체인, 매니페스트 및 첨부 파일 바이트 기록 | 독립적으로 유지되는 수집기 지문; 호스트 관리자가 로컬 서명 키를 제어합니다. |
+| 독립적인 위트니스가 포함된 로컬 작업 공간 | 아카이브 검증 및 증인이 보관하고 있는 이전 저널 접두사와의 일치 여부 | 별도로 신뢰되는 위트니스 키와 기록; 체크포인트는 이미 관찰된 접두사를 바인딩합니다. |
+| [GitHub Actions 캡처](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | 아카이브 다이제스트, 승인된 워크플로우 및 수집기 커밋, 호스팅된 러너, 새로운 세션/키 출처 및 내부 아카이브 무결성에 대한 GitHub 인증 | 신뢰할 수 있는 검증자 정책, 호출자 저장소 및 GitHub 증명 번들; 수집 작업은 고정된 워크플로우에서 실행됩니다. |
+| [클라우드 배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) | 프로바이더의 라이프사이클 및 액세스 기록, 방화벽 및 Cloudflare 상태, 그리고 수집기의 서명된 실행 기록 | 프로바이더 및 Cloudflare에 대한 읽기 전용 쿼리; 개별 확인 기능의 이용 가능 여부는 프로바이더에 따라 다릅니다. |
+| [Intel TDX 기밀 VM](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | 서명 및 플랫폼 상태를 인용하고, 수집기 진술, 구성 및 OS 측정값과 연계하십시오. | 인텔 트러스트 체인 및 예상 배포 측정값; 모든 필수 TDX 검사 결과를 그대로 유지하십시오. |
 
-In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
+밀봉된 수집 방식에서, 승인된 수집자는 검증된 환경 내의 인증된 텔레그램 연결을 통해 데이터를 수신합니다. 증명(Attestation)은 아카이브를 해당 실행에 바인딩하므로, 검증은 수집 과정은 물론 이후의 파일 무결성까지 포함합니다. 이는 승인된 코드와 위에 나열된 플랫폼 신뢰 체인에 의존합니다. GitHub 캡처 검증은 실행 내부에서 생성된 세션을 요구하며, 가져온 세션(imported-session) 캡처는 거부합니다.
 
-The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/) identifies tested configurations.
+실행 영수증에는 수집기 버전, 파일 해시 및 시작 설정이 기록됩니다. GitHub 출처 정보와 TDX 측정값을 통해 환경 검증이 이루어지며, [유효성 검사](https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/) 기록을 통해 테스트된 구성이 식별됩니다.
 
-TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
+TgWitness는 수집한 관측 결과에 서명하며, 텔레그램이나 메시지 작성자는 이러한 서명을 발행하지 않습니다. 로컬 작업 공간에서, 첫 번째 독립적인 체크포인트 이전에 생성된 자료는 여전히 수집자와 해당 키 보유자에 의존합니다. 커버리지 기록은 선택된 범위와 수집 결과를 설명하는 반면, 검증된 외부 타임스탬프는 커밋된 아카이브 또는 저널의 경계를 시간적으로 고정시킵니다.
 
 ## 첨부 파일
 
@@ -265,9 +265,9 @@ ZIP 내보내기 기능은 저장된 미디어 파일을 파일명과 대조하�
 
 미디어 작업과 해당 메시지 이벤트 커밋이 하나의 트랜잭션으로 처리됩니다. 이 작업은 원본 TL 메시지 설명자를 저장하며, 서명된 관측 기록은 SHA-256, 계정, 및 크기 정책을 바인딩합니다. 복구 과정에서는 다운로드 전에 해당 바인딩을 검증합니다. 이 도구는 현재 메시지를 가져오지 않으며, 새로운 첨부 파일을 자동으로 대체합니다. 중단된 작업은 재시도되지만, 영구적인 실패는 명시적인 결과로 남습니다.
 
-Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope).
+각 작업 공간에는 고유한 저널과 서명 주체가 있습니다. process.started 이벤트에는 실행 ID, 로컬 시계, 종속성 버전, 소스 파일 해시, 초기 계정/범위, 및 캡처 설정이 포함됩니다. 하트비트에는 실행 ID, 단조 증가 시간 및 큐 상태가 포함됩니다. 실행 영수증은 별도로 서명된 명세서로도 다운로드할 수 있습니다. 실행 환경의 검증을 위해서는 [‘검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope)범위’에 설명된 GitHub 증명서 또는 TDX 검사와 함께 사용하십시오.
 
-Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
+자동 체크포인트는 시작 시, 관찰 중 5분마다 (**매개변수 → 서명된 체크포인트 간격**), 그리고 정상 종료 시 로컬에 보관됩니다. 시작 시 검증 및 내보내기 과정에서는 저널을 가장 최근에 보관된 로컬 체크포인트와 비교합니다. 이를 통해 체크포인트가 보존된 경우 데이터베이스 롤백을 감지할 수 있습니다. 독립적인 보존 기능을 통해 작업 공간 외부에서도 해당 참조를 이용할 수 있으며, 검증된 외부 타임스탬프를 통해 시간적 기준점을 추가로 확보합니다.
 
 재시작 후 저장된 텔레그램 업데이트 위치(`catch_up_from`에서 `observation.started`)가 재개되며, 누락된 업데이트가 요청됩니다. 주기적인 재확인 과정을 통해 누락된 메시지에 대해서는 `message.recovered`가 기록되고, 텔레그램이 더 이상 저장된 메시지를 반환하지 않을 경우 `message.missing_on_recheck`가 기록됩니다. 후자는 삭제 알림이 아니며, 삭제자나 시간을 명시하지 않습니다.
 

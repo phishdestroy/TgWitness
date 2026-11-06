@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/opera
 
 पैनल का दैनिक संचालन: मोड, निगरानी श्रेणियाँ, पैरामीटर, सूचनाएं, निर्यात, बैकअप और क्षमता।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [तैनाती और पुनर्प्राप्ति](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![तैनाती और पुनर्प्राप्ति](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 अपने पहले कनेक्शन के लिए, [खातों और सत्र प्रारूपों का](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) उपयोग करें। सहेजे गए संस्करणों, इवेंट नीतियों और अंतरालों की व्याख्या के लिए, देखें [कि संग्रहण कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)। यह गाइड दैनिक संचालन और पुनर्प्राप्ति को कवर करती है।
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/opera
 
 एक प्रबंधित अस्थायी Cloudflare टनल के लिए, `tgwitness tunnel off` सार्वजनिक पहुँच बंद कर देता है जबकि स्थानीय पैनल और संग्रहण चलते रहते हैं। `tgwitness tunnel on` इसे सक्षम करता है; `tgwitness tunnel restart` एक नया टनल कनेक्शन बनाता है। इसका वर्तमान पता देखने के लिए `tgwitness open` का उपयोग करें। एक स्पष्ट बंद सेटिंग सेवा के पुनरारंभ के बाद भी बनी रहती है। `tgwitness stop` पैनल और संग्रहण दोनों को रोकता है।
 
-**On this page**
+**इस पृष्ठ पर**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#capacity-and-retention)
+- [ऑपरेटर वर्कफ़्लो](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#operator-workflow)
+- [मुख्य कुंजी साझा किए बिना कार्य साझा करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [रनटाइम मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#runtime-modes)
+- [निगरानी श्रेणियाँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#monitoring-categories)
+- [सूचनाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#notifications)
+- [पैनल लेआउट](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#panel-layout)
+- [तैनाती वातावरण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#deployment-environments)
+- [स्टार्टअप जांच और निर्यात](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#startup-checks-and-exports)
+- [बैकअप, पुनर्स्थापना और रुकावटें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#backup-restore-and-interruptions)
+- [क्षमता और प्रतिधारण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/#capacity-and-retention)
 
 ## ऑपरेटर वर्कफ़्लो
 
@@ -132,7 +132,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/opera
 | विंडोज पीसी/सर्वर | पाइथन 3.11+, scripts\Setup.cmd/Start.cmd, निजी डेटा निर्देशिका | Windows/Python 3.12 पर स्थानीय रूप से जांचा गया |
 | लिनक्स सर्वर/वीपीएस | पाइथन वीएनवी, समर्पित सेवा उपयोगकर्ता, HTTPS/SSH | कोड, CI और systemd का उदाहरण प्रदान किया गया; इस होस्ट पर निष्पादित नहीं किया गया |
 | macOS | पाइथन वेंव, अग्रभूमि प्रक्रिया या उपयोगकर्ता एजेंट | launchd उदाहरण प्रदान किया गया; अलग इंस्टॉलेशन जांच आवश्यक है |
-| Docker/Compose | स्थायी वॉल्यूम, एक वर्कर | परिभाषा और CI रनटाइम जाँच प्रदान की गई; स्थानीय रूप से Docker उपलब्ध नहीं है |
+| डॉकर/कंपोज | स्थायी वॉल्यूम, एक वर्कर | परिभाषा और CI रनटाइम जाँच प्रदान की गई; स्थानीय रूप से Docker उपलब्ध नहीं है |
 | फ़ोन ब्राउज़र | चला रहे सर्वर पर सुरक्षित पैनल से कनेक्ट करें | संकीर्ण क्रोमियम लेआउट का परीक्षण किया गया; कलेक्टर iOS/Android पर नहीं चलता |
 
 पोर्टेबिलिटी का मतलब है कि कोई अनिवार्य क्लाउड सेवा या फ्रंटएंड बिल्ड नहीं है। प्रत्येक लक्ष्य को अभी भी संगत पाइथन/क्रिप्टो निर्भरताओं, स्थानीय डिस्क और नेटवर्क एक्सेस की आवश्यकता है। [DEPLOYMENT.md](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/) और [सेवा टेम्प्लेट](https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md) देखें।

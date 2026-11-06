@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/accou
 
 صادرات آنچه یک حساب اکنون می‌تواند بخواند: دامنه، کارهای قابل از سرگیری، یک آرشیو امضا شده و نسخه‌های اشتراک‌گذاری‌شدهٔ به حداقل‌رسیده.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شواهد و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![شواهد و تأیید](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 خروجی حساب، آن حساب را انحصاری رزرو می‌کند. پیش از شروع یا ازسرگیری، پایش یا گردآوری دیگر را صریحاً موقتاً متوقف کنید؛ برنامه هرگز آن را خودکار متوقف نمی‌کند.
 
@@ -16,11 +16,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/accou
 
 این گردش کار داده‌های در حال حاضر قابل دسترسی به حساب متصل را صادر می‌کند. پیش‌فرض از [Telegram Takeout](https://core.telegram.org/api/takeout) استفاده می‌کند؛ این یک نسخه پشتیبان از داده‌های در دسترس نبوده یا حذف‌شده تلگرام نیست. چت‌های مخفی، تاریخچه غیرقابل دسترسی و ویرایش‌های قبلی بازیابی نمی‌شوند. تلگرام می‌تواند قبل از شروع Takeout یک دوره انتظار تعیین کند. پنل آن دوره انتظار را نمایش می‌دهد؛ به‌طور بی‌صدا روش انتقال را تغییر نمی‌دهد. گزینه صریح regular-API پوشش متفاوتی دارد و دسته‌بندی‌های پشتیبانی‌نشده را ثبت می‌کند.
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout، API رسمی خروجی است که تلگرام دسکتاپ نیز از آن استفاده می‌کند. TgWitness می‌تواند مستقیماً از طریق جمع‌آوری داده‌های خود، JSON سازگار با دسکتاپ بنویسد؛ وارد کردن آرشیو شخص دیگر الزامی نیست. شناسه‌های چت و پیام از طریق هر دو روش انتقال در دسترس هستند. یک چت عمومی یا اجازه فوروارد کردن، تضمین‌کننده خروجی سریع‌تر نیست و تأخیر تأیید Takeout را از بین نمی‌برد. قبل از مقایسه سرعت، دامنه و تنظیمات رسانه را یکسان در نظر بگیرید.
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+برای حداکثر 20 شناسه چت صریحاً انتخاب‌شده، خروجی‌گیری با API معمولی، آن همتایان را مستقیماً قبل از در نظر گرفتن کل فهرست مکالمات حساب کاربری، حل می‌کند. بنابراین، یک کانال عمومی قابل‌خواندن را می‌توان بدون پیوستن به آن، حتی زمانی که در فهرست مکالمات وجود ندارد، صادر کرد. همکاران (peers) بدون کش به موجودی عادی بازمی‌گردند. فیلتر بایگانی همچنان اعمال می‌شود: اگر تلگرام یک گفتگوی جدید را بازنمی‌گرداند و چت‌های بایگانی‌شده حذف شده‌اند، وضعیت بایگانی نامشخص به عنوان یک حذف ثبت می‌شود. Takeout روش موجودی بازه-تقسیم‌شده خود را حفظ می‌کند. هیچ‌یک از مسیرها چت‌ها را به هم متصل نمی‌کنند یا مجوزهای فوروارد را تغییر نمی‌دهند. در JSON سازگار با دسکتاپ، کانال‌هایی که تلگرام به عنوان `left` علامت‌گذاری می‌کند، در زیر `left_chats` ظاهر می‌شوند، از جمله کانال‌های عمومی قابل خواندن که حساب کاربری به آن‌ها نپیوسته است.
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+هم `FLOOD_WAIT` و هم `FLOOD_PREMIUM_WAIT` درخواست‌ها را برای کل دورهٔ درخواستی سرور متوقف می‌کنند. مهلت حساب کاربری در طول اتصال مجددها و راه‌اندازی مجددها حفظ می‌شود؛ یک انتظار کوتاه‌تر بعدی نمی‌تواند آن را کوتاه‌تر کند. تلاش‌های مجدد محدود هستند، لغو، صفحات مهر و موم شده را حفظ می‌کند، و اعتبارنامه‌های API برای دور زدن محدودیت نرخ چرخانده نمی‌شوند. هیچ خرید پریمیومی انجام نمی‌شود.
 
 ## انتخاب کنید چه اطلاعاتی جمع‌آوری شود
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 تاریخچه عکس پروفایل و استوری‌ها به‌صورت پیش‌فرض انتخاب نمی‌شوند. همچنین وقتی پرونده تنها به پیام‌ها نیاز دارد، پروفایل و مخاطبین را غیرفعال کنید. اگر پیوست‌ها یا متادیتا غیرضروری هستند، حذف آن‌ها در حین جمع‌آوری از نگهداری یک نسخه خصوصی دیگر در این خروجی جلوگیری می‌کند.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+حمله‌های تصویری از نوع تصویر ثابت شناسایی‌شده در متادیتا و هش مانیفست‌های خود استفاده می‌کنند، از جمله عکس‌هایی با نوع آواتار متحرک. آن انیمیشن جایگزین تصویر ثابت انتخاب‌شده نمی‌شود. یک حمله‌ی کوتاه‌تر یا بلندتر از اندازه مشاهده‌شده به‌عنوان یک پیوست ناموفق ثبت می‌شود و نمایش تغییر‌یافته در هنگام تمدید ارجاع فایل رد می‌گردد. این خطاها آرشیو را ناقص باقی می‌گذارند، در حالی که سوابق پیام‌ها را حفظ می‌کنند. تأیید مستقل همچنین پیوست‌های ذخیره‌شده‌ای را که طول امضا شده‌شان با اندازه یا نمایش مشاهده‌شده‌شان تناقض دارد، رد می‌کند، حتی در آرشیوهای قدیمی‌تر.
 
 ## خلاصه، پوشش و تأیید
 
@@ -97,8 +97,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## اشتراک‌گذاری و ضبط میزبانی‌شده
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+پیام‌ها و فایل‌های مورد نیاز دریافت‌کننده را انتخاب کنید، نسخهٔ کامل اشتراک‌گذاری را بازبینی کنید و منبع را به‌طور جداگانه نگهداری کنید. هش فایل‌های ZIP ارسال‌شده را ثبت کنید تا دریافت‌کننده بتواند آن نسخهٔ دقیق را شناسایی و تأیید کند. مستعارسازی، شناسه‌های منتخب را جایگزین می‌کند؛ متن و فایل‌های اصلی همچنان بخشی از بازبینی باقی می‌مانند.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope).
+GitHub Actions از طریق Takeout یا API معمولی، از خروجی‌گیری کل حساب و چت‌های منتخب، و همچنین یک دفتر وقایع یک‌چت پشتیبانی می‌کند. [راهنمای ضبط میزبانی‌شده](https://phishdestroy.github.io/TgWitness/docs/capture/) تأیید تنظیمات و ... را توضیح می‌دهد. 120محدودیت - دقیقه‌ای. برای تأیید یک نسخه اشتراک‌گذاری‌شده مشتق‌شده از ضبط میزبانی‌شده، هش منبع آن را با آرشیو اصلی مطابقت دهید و تأییدیه آن آرشیو را با بررسی‌های مخصوص هر حالت تأیید کنید. [بررسی‌های ویژهٔ حالت](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope).
 
 [فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [گزارش‌های موردی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)

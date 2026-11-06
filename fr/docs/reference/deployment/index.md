@@ -6,7 +6,7 @@ Exécutez TgWitness en tant que service sous Windows, Linux, macOS ou Docker, vi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Déploiement et restauration](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Anglais** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ukrainien](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Portugais (Brésil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Chinois simplifié](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Chaque version GitHub comprend `TgWitness-<version>-windows-amd64-portable.zip` 
 | `TgWitness-Demo.cmd` | Lancez la démo synthétique à l'adresse `data\demo` |
 | `TgWitness-Check.cmd` | Lancez le contrôle de préparation sans démarrer |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Le dictionnaire de morphologie russe épinglé et les profils de couleurs au format PDF sont intégrés pour une utilisation hors ligne. Le packaging n'autorise que leurs chemins d'accès connus à l'intérieur des répertoires de dépendances `data` ; la présence de fichiers inattendus dans ces répertoires entraîne l'échec de la compilation.
 
 Décompressez l'intégralité de l'archive dans un dossier accessible en écriture, tel que « `Documents\TgWitness` » ; ne l'exécutez pas à partir du fichier ZIP ni du dossier « Program Files ». L'environnement d'exécution utilise un chemin d'accès isolé aux modules, de sorte que les autres installations Python et le dossier « `PYTHONPATH` » n'ont aucune incidence sur son fonctionnement. Les données sont conservées dans le dossier « `data` » du package. Pour effectuer une mise à jour, arrêtez TgWitness, extrayez la nouvelle version dans un nouveau dossier, puis copiez-y le dossier « `data` ».
 

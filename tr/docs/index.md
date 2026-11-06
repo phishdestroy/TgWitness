@@ -8,7 +8,7 @@ Kaydedilen mesajlar ve değişiklikler üzerinde çalışın, bulgularınızı k
 
 Resimli kılavuzlar
 
-[### Case Board Gözlemler, tam alıntılar ve ekip notları arasındaki bağlantıları koruyun.](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) [### Rapor stüdyosu Malzemeyi ve sekiz rapor tasarımından birini seçin.](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) [### Kopyalama paylaşımı Alıcının ihtiyaç duyduğu alanları içeren, imzalı bir özet hazırlayın.](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) [### Hesap grupları Hesapları birlikte inceleyin ve çalışma alanlarını ayrı tutun.](https://phishdestroy.github.io/TgWitness/tr/docs/groups/)
+[### Vaka Panosu Gözlemler, tam alıntılar ve ekip notları arasındaki bağlantıları koruyun.](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) [### Rapor stüdyosu Malzemeyi ve sekiz rapor tasarımından birini seçin.](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) [### Kopyalama paylaşımı Alıcının ihtiyaç duyduğu alanları içeren, imzalı bir özet hazırlayın.](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) [### Hesap grupları Hesapları birlikte inceleyin ve çalışma alanlarını ayrı tutun.](https://phishdestroy.github.io/TgWitness/tr/docs/groups/)
 
 [## Modlar, senaryolar ve kanıt düzeyleri Toplama kapsamları, olay sınırları, sekiz doğrulama mekanizması ve altı kurgusal soruşturma senaryosu.](https://phishdestroy.github.io/TgWitness/tr/guides/modes.html)
 
@@ -40,7 +40,7 @@ Kurulum
 
 Topla
 
-[Panel kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/)[Veri toplama süreci nasıl işliyor?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/)[Kaynak geçmişini yükle](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/)[İş akışları ve işlemler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/)[Soruşturma modu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)[Özellikler ve sınırlamalar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
+[Panel kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/)[Veri toplama süreci nasıl işliyor?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/)[Gizli Sohbetler: uygulama ve demo](https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/)[Kaynak geçmişini yükle](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/)[İş akışları ve işlemler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/)[Soruşturma modu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)[Özellikler ve sınırlamalar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
 
 Arşiv ve entegrasyonlar
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/searc
 
 保存されたメッセージを、単語の形態、完全なフレーズ、ドメイン、@ユーザー名で検索し、署名付きジャーナルに紐付けられたインデックスを用いて、最も一致度の高いものから順に表示します。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [調査](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![調査](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [アーカイブの分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/) · [ローカルでのOCRおよび文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/searc
 
 インデックスは派生データです。これは署名付きジャーナルから再構築されるものであり、それ自体は決して署名されず、 エクスポート対象にもなりません。元の記録は変更されません。
 
-**On this page**
+**このページでは**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#benchmark)
+- [検索構文](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#search-syntax)
+- [言語](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#languages)
+- [インデックスの保存場所](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#where-the-index-lives)
+- [結果および署名付きジャーナル](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#results-and-the-signed-journal)
+- [認識されたテキスト](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#recognized-text)
+- [アクセス](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#access)
+- [アーカイブおよびMCPにお問い合わせください](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#ask-the-archive-and-mcp)
+- [依存関係](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#dependencies)
+- [ベンチマーク](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/#benchmark)
 
 ## 検索構文
 
@@ -97,7 +97,7 @@ OCRデータと文字起こしデータは、暗号化されたアーティフ�
 
 MCPクライアントは以下を呼び出すことができます `search_messages` と `ranked=true` で呼び出し、 `next_offset`でページングを行うことができます。スコープ指定された接続では、自身のチャットのみを受信します。
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+順位付きページネーションは、ページサイズにかかわらず、最大で最初の1,000件の結果を対象とします。さらに一致する項目を確認するには、クエリ、チャット、または期間を絞り込んでください。「新しい順」検索では、各ページを選択する前に、メッセージ、OCR結果、および文字起こし結果が新しい順に並べ替えられます。
 
 ## 依存関係
 

@@ -4,32 +4,32 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/witne
 
 运行一个带有独立密钥和机器人的 Witness 实例，将签名后的检查点发布到频道中，并据此验证导出数据。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [证据与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![证据与验证](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [导出与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [高可信度](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/) · [面板指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+见证者会将已签名的检查点与收集器分开保存。它会检查 收集器的签名和日志连续性，使用自己的密钥对结果进行签名，并 将其发布到 Telegram 频道。请在单独的服务器上运行该程序，并确保该服务器对 收集器的见证端点仅具有只读访问权限。
 
-流程图 · 收集器 → Witness (签名检查点：记录条数 + 头部哈希值); Witness → Witness日志，自有密钥; Witness → Telegram 频道 (通过其自有机器人发布的签名帖子); 证据 ZIP → verify.py; Witness日志，自有密钥 → verify.py; Telegram 频道 → verify.py (Telegram 桌面版导出功能或 t.me/s 页面) · 收集器 · Witness · Witness日志，自有密钥 · Telegram 频道 · 证据 ZIP · verify.py · 签名检查点：记录条数 + · 头部哈希值 · 通过其自有机器人发布的签名帖 · 子 · Telegram 桌面版导出功能或 · t.me/s 页面
+流程图 · 收集器 → 见证人 (签名检查点：记录条数 + 头部哈希值); 见证人 → Witness日志，自有密钥; 见证人 → Telegram 频道 (通过其自有机器人发布的签名帖子); 证据 ZIP → verify.py; Witness日志，自有密钥 → verify.py; Telegram 频道 → verify.py (Telegram 桌面版导出功能或 t.me/s 页面) · 收集器 · 见证人 · Witness日志，自有密钥 · Telegram 频道 · 证据 ZIP · verify.py · 签名检查点：记录条数 + · 头部哈希值 · 通过其自有机器人发布的签名帖 · 子 · Telegram 桌面版导出功能或 · t.me/s 页面
 
 **图表转为文本**
 
-1. 收集器 → Witness (签名检查点：记录条数 + 头部哈希值)
-2. Witness → Witness日志，自有密钥
-3. Witness → Telegram 频道 (通过其自有机器人发布的签名帖子)
+1. 收集器 → 见证人 (签名检查点：记录条数 + 头部哈希值)
+2. 见证人 → Witness日志，自有密钥
+3. 见证人 → Telegram 频道 (通过其自有机器人发布的签名帖子)
 4. 证据 ZIP → verify.py
 5. Witness日志，自有密钥 → verify.py
 6. Telegram 频道 → verify.py (Telegram 桌面版导出功能或 t.me/s 页面)
 
-**On this page**
+**本页内容**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#verify)
+- [见证者能获取的内容，以及无法获取的内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [检查与记录的内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#what-it-checks-and-records)
+- [运行见证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#run-a-witness)
+- [多个工作区的公开证明页面](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/#verify)
 
 ## TgWitness 能做什么，以及它不能做什么
 
@@ -48,7 +48,7 @@ A witness retains signed checkpoints separately from the collector. It checks th
 每隔一段时间（默认间隔为 10 分钟），该工具会：
 
 1. 自行获取头部数据（收集器无法推送或跳过该数据）；
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. 验证收集器的签名、固定的收集器密钥（`--collector-fingerprint`， 或首个出现的密钥）、一个非递减计数，以及在未改变计数条件下未被修改的头部。 默克尔包含性证明和一致性证明用于验证不断增长的日志是否延伸了 保留的检查点。一旦连续性证明被使用，则拒绝移除它们；
 3. 将其签名记录追加到自身的日志中：`witness.anchor`，状态为 `ok`、 `key_changed`、`rollback`（记录数少于之前）、`fork`（长度相同，但 头部不同）或 `invalid`（响应未通过验证），或者当 收集器未响应时为 `witness.no_response`；
 4. 将结果发布到频道，并附带签名，包括“无响应”的情况——只要 TgWitness 正在运行且能够访问 Bot API。发布 ID 会被记录下来（`witness.posted`）， 发布失败的情况也会被记录（`witness.post_failed`）。
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 这需要独立保留的见证指纹以及与之匹配的检查点， 且该检查点必须位于本次导出的确切末尾。仅覆盖较早前缀的检查点 是不够的。暂停采集，让见证方观察最终状态，并在 进一步写入日志之前进行导出；如果日志发生变化，请保留另一个检查点并 导出该状态。 仅凭后续检查点无法验证较短导出文件的最终哈希值。 当同时提供`--channel`标志时，若声明的帖子缺失或匹配集为空，将导致此 严格检查失败。若未使用该标志，普通完整性检查仍会报告未被见证的 记录，但不会因此拒绝一个除此之外完整的存档。
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+请将见证日志及其固定密钥分开保存。在线检查用于验证各检查点之间的连续性； 离线验证则将每个保留的检查点与 导出文件进行比对。没有连续性证明的旧版节点仍保留离线比对结果，并在 报告中不包含在线连续性验证结果。报告按时间间隔列出了见证器的停机时间及 发布失败情况。
 
-### Daily seals and unavailable timestamp calendars
+### 每日印章和不可用的时间戳日历
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+见证人将前一天（UTC）的日志边界进行封装，并将 该签名封装的哈希值提交至 OpenTimestamps。日历提交属于待确认证据； 只有经过独立核查的比特币承诺才能在验证器中获得确认。
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+如果所有日历均失败，签名印章和未成功的尝试将保留在 日志中。每小时的维护循环会重试该原始记录，包括 在重启或更改日期之后。它最多扫描 32 个印章，最多提交 两个缺失的提交，并且每次循环在重试上最多花费 60 秒。一个 持久光标会轮流处理较旧的印章。保留的提交遵循 现有的证明升级路径。
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+重试不会重写封印、更改其原始日期，也不会声称 日历系统更早收到该数据。较晚的比特币承诺仍被视为较晚的外部 确认。缺失的证明仍为`none`；待处理的证明仍为`pending`，直到 验证者独立检查它们为止。

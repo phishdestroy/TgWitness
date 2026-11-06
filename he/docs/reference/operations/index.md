@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/opera
 
 תפעול יומיומי של לוח הבקרה: מצבי פעולה, קטגוריות ניטור, פרמטרים, התראות, ייצוא נתונים, גיבוי וקיבולת.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [פריסה ושחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![פריסה ושחזור](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 לחיבור הראשון, השתמש [בחשבונות ובפורמטים של הפעלה](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/). להסבר על גרסאות שמורות, מדיניות אירועים ופערים, ראה [כיצד פועל האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/). מדריך זה מכסה את התפעול השוטף והשחזור.
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/opera
 
 במקרה של מנהרה זמנית מנוהלת של Cloudflare, `tgwitness tunnel off` סוגר את הגישה הציבורית בעוד שהלוח המקומי והאיסוף ממשיכים לפעול. `tgwitness tunnel on` מפעיל אותה; `tgwitness tunnel restart` יוצר חיבור מנהרה חדש. השתמשו ב- `tgwitness open` כדי לראות את הכתובת הנוכחית שלה. הגדרת כיבוי מפורשת נשמרת גם לאחר הפעלה מחדש של השירות. `tgwitness stop` עוצר הן את הלוח והן את האיסוף.
 
-**On this page**
+**בעמוד זה**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#capacity-and-retention)
+- [תהליך העבודה של המפעיל](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#operator-workflow)
+- [שיתוף עבודה מבלי לחלוק את המפתח הראשי](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [מצבי ריצה](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#runtime-modes)
+- [קטגוריות ניטור](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#monitoring-categories)
+- [התראות](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#notifications)
+- [פריסת הפאנל](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#panel-layout)
+- [סביבות פריסה](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#deployment-environments)
+- [בדיקות בעת ההפעלה וייצוא](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#startup-checks-and-exports)
+- [גיבוי, שחזור והפרעות](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#backup-restore-and-interruptions)
+- [קיבולת ואחסון](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/#capacity-and-retention)
 
 ## זרימת העבודה של המפעיל
 

@@ -6,7 +6,7 @@ Eseguite TgWitness come servizio su Windows, Linux, macOS o Docker, tramite HTTP
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Inglese** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ucraino](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Portoghese (Brasile)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Hindi](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Cinese semplificato](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Ogni versione su GitHub include `TgWitness-<version>-windows-amd64-portable.zip`
 | `TgWitness-Demo.cmd` | Avviare la demo sintetica in `data\demo` |
 | `TgWitness-Check.cmd` | Eseguire il controllo di prontezza senza avviare il sistema |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Il dizionario morfologico russo aggiunto ai preferiti e i profili colore in formato PDF sono inclusi nel pacchetto per l’ utilizzo offline. Il pacchetto ammette solo i percorsi file noti all’interno delle directory di dipendenza `data`; la presenza di file inattesi in tali directory causa il fallimento della compilazione.
 
 Estraete l’intero archivio in una cartella scrivibile, ad esempio `Documents\TgWitness`; non eseguite il programma dall’interno del file ZIP né dalla cartella Programmi. Il runtime utilizza un percorso dei moduli isolato, pertanto altre installazioni di Python e `PYTHONPATH` non lo influenzano. I dati rimangono nella cartella `data` del pacchetto. Per effettuare l’aggiornamento, interrompa l’esecuzione di TgWitness, estragga la nuova versione in una nuova cartella e copi la cartella `data` nella nuova posizione.
 

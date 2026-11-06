@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/media
 
 ระบุภาพและเสียงที่บันทึกได้ด้วย local worker; รักษาข้อความที่สร้างขึ้นให้เชื่อมโยงกับไฟล์ต้นฉบับ
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การสอบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![การสอบสวน](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [คู่มือขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

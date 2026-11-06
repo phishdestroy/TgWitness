@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/webho
 
 Envoi d’événements ciblés vers des destinataires HTTPS avec signatures HMAC, tentatives de réenvoi et suivi de la livraison.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Intégrations d'archives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Intégrations d'archives](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [Guide des procédures](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

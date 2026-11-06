@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/showc
 
 Pubblica i messaggi salvati dei canali pubblici selezionati e le istantanee firmate tramite link a scadenza e revocabili.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Access → Public showcase** crea una pagina separata, di sola lettura, utilizzando il sistema esistente di token di accesso. Legge le osservazioni salvate dall’installazione. Non avvia un collettore, non effettua l’accesso a Telegram né acquisisce un canale per un visitatore.
 

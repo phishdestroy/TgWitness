@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 面板中的每個畫面：聊天、日誌、來源、匯出、額外功能、保護模式以及程式碼檢查。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [開始使用](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![開始使用](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [首次設定與設定選項](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/settings/) · [帳戶](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/) · [匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [案例報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)
 
 各畫面功能說明、其寫入簽名日誌的內容，以及詳細 指南的位置。面板每次僅顯示一個工作區：一個 Telegram 帳號及其專屬的 來源、日誌與簽名金鑰。側邊欄頂端的選取器可切換 工作區。網址包含工作區資訊（`?ws=…`）；若網址、 選擇器與已載入的帳號不一致，則所有操作將被封鎖。
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+請使用[「比較」彙整方法](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)，在即時 觀察、完整歷史紀錄、新帳戶／聊天室匯出檔，以及已儲存紀錄移交之間進行選擇。 「匯出」頁面在下載控制項上方亦包含相同的比較功能。
 
-**On this page**
+**本頁內容**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#more-tools)
+- [導覽指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#find-your-way)
+- [從這裡開始](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#start-here)
+- [聊天紀錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#chats)
+- [期刊](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#journal)
+- [來源](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#sources)
+- [匯出功能](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#exports)
+- [設定、帳戶與連線](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#settings-accounts-and-connection)
+- [附加內容](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)
+- [保護模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#protection-modes)
+- [更多工具](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#more-tools)
 
 ## 探索使用方法
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **來源類型**將「資料夾」與「整個帳戶」模式的範圍限制於頻道、群組、私人 聊天室及機器人。**自訂動作**則會新增該帳戶自身的訊息、編輯操作及 回覆鍵盤按鍵記錄。
 - **當出現新的聊天室或機器人時**：儲存其檔案，並儲存最多達指定數量 的最新可見訊息。
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+限制：已發布的雲端收集器無法接收「秘密聊天」。獨立的 [「偽秘密」介面及其示範版本，](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/)其文件中已註明 開發狀態與尚未解決的缺陷。 當 TgWitness 未 運行時，系統不會進行任何記錄；重新啟動後，它僅會擷取 Telegram 仍能回傳的資料，而 報告中會顯示此期間的資料缺口。超過聊天清單限制（1,000 個對話，除非在 「參數」中進行變更）的聊天室，將於下次變得活躍時被加入。在 其他應用程式中按下的內嵌機器人按鈕將無法被偵測；但機器人的回覆會被記錄下來。
 
 ### 涵蓋的聊天室
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | 通知 | 問題、已修改的訊息及每日摘要；您專屬的控制機器人 | [下方](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#notifications) |
 | 證據與備份 | 時間戳記、更多見證者以及加密的異地備份 | [下方](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#evidence-and-backups) |
 | 伺服器全年無休運作 | 一個不支援 SSH 的雲端伺服器，可透過控制面板進行建立與刪除 | [高可信度](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#from-the-panel) |
-| 獨立見證人 | 經簽署的檢查報告將發佈至您的 Telegram 頻道或 Discord | [Witness](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/) |
+| 獨立見證人 | 經簽署的檢查報告將發佈至您的 Telegram 頻道或 Discord | [見證者](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/) |
 | 程式碼檢查 | 將正在執行的程式與 GitHub 上的公開提交進行比對 | [下方](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#code-check) |
 
 ### 目標與保護等級

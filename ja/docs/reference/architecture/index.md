@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![開発](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 1つのPythonプロセスがFastAPIパネルと、任意の数の分離されたワークスペースをホストし、 各ワークスペースにはTelethonユーザーアカウントクライアントが配置されています。 SQLiteには、追記専用の署名付きイベントジャーナルと、変更可能な運用設定が格納されています。 暗号化された保管庫には、API認証情報、StringSession、および署名鍵が格納されています。 フロントエンドは、HTML/CSS/JavaScriptをバンドルしたシンプルな形式となっており、Nodeによるビルド、CDN、 あるいは実行時のフロントエンドダウンロードは一切必要ありません。
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | 明確なパネル操作、署名付き受信確認、永続的なリクエストID、およびタスク単位のコールバック／参加リトライポリシー |
 | message_content.py | 転送アクセスに関するメタデータを除外した、メッセージの可視的な比較 |
 | workers.py | キャンセル処理を行う前に、エクスポートファイルの処理が完了するまでお待ちください |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | 並行チャットジョブ、アカウントごとの予約、署名付きチェックポイント、およびアーカイブ検証後のクリーンアップ |
+| distributed_takeout.py / export_timing.py | 再開可能な「Takeout」セッションおよび各開始・再開時のタイミング |
 | store.py | WALトランザクション、順序付けられたイベントチェーン、クエリフィルター、運用設定 |
 | fulltext.py | 署名付きジャーナルのヘッダーに紐付けられた派生フルテキストインデックス（語形、BM25）。エクスポートは一切行われない。 |
 | security.py | プライベートファイルの作成、暗号化された保管庫、Ed25519による署名、シングルプロセスロック |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 各ワークスペースは1つのアカウントのみを受け入れ、独自のディレクトリと署名用IDを持っています。 互換性を確保するため、メインのワークスペースはルートディレクトリに配置され、追加のワークスペースは profiles/<id>/ に配置されます。1つのベアラートークンがインストール全体を管理しており、ワークスペースは 独立した認証テナントではありません。 プロセスロックによりディレクトリが保護され、データベースロックにより イベントの挿入がシリアライズされます。各追加処理は、FULL同期モードの SQLite WALに対して同期的にコミットされます。イベントの更新・削除トリガーにより、 通常のアプリケーションによる編集が防止され、ファイルシステム管理者は信頼境界内に留まります。
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+APIの認証はベアラートークン方式です。ログイン操作はシリアライズされ、時間制限があります。 アカウントへのアップロードには、12 MiBのエンコード済みボディ制限と8 MiBのデコード済みファイル 制限が適用されます。通常のAPIリクエストでは16 KiBの制限が維持されます。 変換はワーカースレッドで 実行され、アップロードデータをメモリ内に保持し、正規化された入力を認証済みの ブラウザに返します。QRログインには、ワークスペースごとの候補、短命な識別子、待機タスク、 および明示的なキャンセル機能があります。承認された認証のみがアクティブなクライアントとなります。 TelegramのFloodWaitはRetry-After値とともに返されます。認証情報および生のRPC エラーメッセージは、APIエラーでは公開されません。 ジャーナルのエクスポートは非同期 イベントループの外で実行され、ワークスペースごとにシリアル化されます。これらは、WALへの書き込みを継続しながら、安定した読み取りスナップショットを ストリーミングします。チャットの取得ジョブは、 別々のアカウントで並行して実行可能です。各アカウントは、そのジョブが停止するまで予約された状態のままです。一時停止または 失敗したジョブは、そのチェックポイントを保持します。アーカイブの検証に成功すると、その作業ファイルのクリーンアップが許可され、 ZIPファイル、署名付きプラン、およびステータスが残されます。ワークスペースコレクターは プロセス/イベントループを共有します。
 
 現在の履歴スナップショットとリアルタイムの更新情報は重複する場合があります。これらはそれぞれ独立した観測データであり、 ソースごとにラベル付けされています。重複データは自動的に折りたたまれることはありません。IDの欠落、 削除されたテキストの捏造、メンバーの強制的な列挙、またはグループへの自動参加 に基づく推論機能は実装されていません。
 

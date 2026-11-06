@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-
 
 Dấu trang, phần đánh dấu chính xác, các đoạn hành động, cuộc thảo luận, quyền truy cập có phạm vi và lịch sử chú thích đã ký được sử dụng bởi Case Board.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Điều tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Điều tra](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Case Board cung cấp cho đội điều tra một giao diện làm việc chung về các tài liệu đã lưu. Đánh dấu một quan sát, làm nổi bật một đoạn văn bản cụ thể, lưu lại một chuỗi hành động và thảo luận với đồng nghiệp. Các thẻ (Cards) giữ nguyên tham chiếu nguồn và lịch sử sửa đổi đã ký. Các chú thích của đội vẫn nằm trong không gian làm việc, có thể phân biệt riêng biệt với các quan sát gốc trên Telegram.
 
@@ -14,13 +14,13 @@ Case Board cung cấp cho đội điều tra một giao diện làm việc chung
 
 ![Nguồn cấp dữ liệu điều tra tổng hợp](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**Trên trang này**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#operating-limits)
+- [Làm việc với một trường hợp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#work-with-a-case)
+- [Quyền truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#permissions)
+- [Hợp đồng được lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#stored-contracts)
+- [API và các định dạng xuất](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#api-and-exports)
+- [Giới hạn hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/#operating-limits)
 
 ## Làm việc với một vụ việc
 

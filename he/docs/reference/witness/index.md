@@ -4,32 +4,32 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/witne
 
 הפעל את Witness עם מפתח ובוט משלו, פרסם נקודות ביקורת חתומות בערוץ ובדוק את הייצוא מולן.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [ראיות ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![ראיות ואימות](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [ייצוא ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [אמינות גבוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/) · [מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+עדה שומרת נקודות ביקורת חתומות בנפרד מהאוסף. היא בודקת את חתימת האוסף ואת רציפות היומן, חותמת על התוצאה באמצעות המפתח שלה, ו מפרסמת אותה בערוץ Telegram. יש להריץ אותה בשרת נפרד עם גישה לקריאה בלבד ל נקודת הקצה של העדה של האוסף.
 
-תרשים זרימה · Collector → Witness (נקודת ביקורת חתומה: מספר הרשומות + חתימת ה-hash של הכותרת); Witness → יומן Witness, מפתח פרטי; Witness → ערוץ טלגרם (הודעה חתומה באמצעות הבוט של האתר); קובץ ZIP של הראיות → verify.py; יומן Witness, מפתח פרטי → verify.py; ערוץ טלגרם → verify.py (ייצוא מ-Telegram Desktop או דף "t.me/s") · Collector · Witness · יומן Witness, מפתח פרטי · ערוץ טלגרם · קובץ ZIP של הראיות · verify.py · נקודת ביקורת חתומה: מספר · הרשומות + חתימת ה-hash של · הכותרת · הודעה חתומה באמצעות הבוט של · האתר · ייצוא מ-Telegram Desktop או · דף "t.me/s"
+תרשים זרימה · אספן → עד (נקודת ביקורת חתומה: מספר הרשומות + חתימת ה-hash של הכותרת); עד → יומן Witness, מפתח פרטי; עד → ערוץ טלגרם (הודעה חתומה באמצעות הבוט של האתר); קובץ ZIP של הראיות → verify.py; יומן Witness, מפתח פרטי → verify.py; ערוץ טלגרם → verify.py (ייצוא מ-Telegram Desktop או דף "t.me/s") · אספן · עד · יומן Witness, מפתח פרטי · ערוץ טלגרם · קובץ ZIP של הראיות · verify.py · נקודת ביקורת חתומה: מספר · הרשומות + חתימת ה-hash של · הכותרת · הודעה חתומה באמצעות הבוט של · האתר · ייצוא מ-Telegram Desktop או · דף "t.me/s"
 
 **תרשים כטקסט**
 
-1. Collector → Witness (נקודת ביקורת חתומה: מספר הרשומות + חתימת ה-hash של הכותרת)
-2. Witness → יומן Witness, מפתח פרטי
-3. Witness → ערוץ טלגרם (הודעה חתומה באמצעות הבוט של האתר)
+1. אספן → עד (נקודת ביקורת חתומה: מספר הרשומות + חתימת ה-hash של הכותרת)
+2. עד → יומן Witness, מפתח פרטי
+3. עד → ערוץ טלגרם (הודעה חתומה באמצעות הבוט של האתר)
 4. קובץ ZIP של הראיות → verify.py
 5. יומן Witness, מפתח פרטי → verify.py
 6. ערוץ טלגרם → verify.py (ייצוא מ-Telegram Desktop או דף "t.me/s")
 
-**On this page**
+**בעמוד זה**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#verify)
+- [מה ה-Witness מקבל, ומה הוא לא מקבל](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [מה הוא בודק ומתעד](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#what-it-checks-and-records)
+- [הפעל עד](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#run-a-witness)
+- [דף הוכחה ציבורי למספר סביבות עבודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [אמת](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/#verify)
 
 ## מה ה-TgWitness מספק, ומה הוא אינו מספק
 
@@ -48,7 +48,7 @@ A witness retains signed checkpoints separately from the collector. It checks th
 בכל פרק זמן (10 דקות כברירת מחדל) ה-Witness:
 
 1. מביא את הראש עצמו (האספן אינו יכול לדחוף או לדלג עליו);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. מאמת את חתימת האספן, את מפתח האספן המוצמד (`--collector-fingerprint`, או המפתח הראשון שנראה), ספירה שאינה פוחתת וראש שלא השתנה בספירה שלא השתנתה. הוכחות הכללה ועקביות של מרקל מאמתות כי יומן הולך וגדל מרחיב את נקודת הבדיקה שנשמרה. לאחר שהוכחות הרציפות שימשו, הסרתן נדחית;
 3. מוסיף רשומה חתומה ליומן שלו: `witness.anchor` עם הסטטוס `ok`, `key_changed`, `rollback` (פחות רשומות מבעבר), `fork` (אותו אורך, כותרת שונה ) או `invalid` (התשובה נכשלה באימות), או `witness.no_response` כאשר האספן לא ענה;
 4. מפרסם את התוצאה בערוץ, חתומה, כולל "אין תשובה" כל עוד ה-Witness פועל ומסוגל לגשת ל-Bot API. מזהה הפרסום נרשם (`witness.posted`), כמו גם פרסום שנכשל (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 לשם כך נדרשת טביעת אצבע של עד שנשמרה באופן עצמאי ונקודת ביקורת תואמת בדיוק בסוף הייצוא הזה. נקודת ביקורת המכסה רק קידומת מוקדמת יותר אינה מספיקה. יש להשהות את האיסוף, לאפשר לעד לבחון את המצב הסופי, ולייצא לפני כתיבות נוספות ביומן; אם היומן משתנה, יש לשמור נקודת ביקורת נוספת ו לייצא את המצב הזה. נקודת ביקורת מאוחרת יותר לבדה אינה יכולה לאמת את ה-hash הסופי של ייצוא קצר יותר. כאשר מסופק גם הדגל `--channel`, פוסטים נטענים חסרים או קבוצת התאמות ריקה נכשלים בבדיקה הקפדנית הזו. ללא הדגל, בדיקות תקינות רגילות עדיין מדווחות על רשומות שלא עברו אימות מבלי לדחות ארכיון שלם בכל שאר המובנים.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+יש לשמור את יומן העד ואת המפתח המוצמד אליו בנפרד. בדיקות מקוונות מאמתות את הרציפות בין נקודות הבדיקה; אימות לא מקוון משווה כל נקודת בדיקה שנשמרה עם הייצוא. כותרות ישנות ללא הוכחות רציפות שומרות על ההשוואה הלא מקוונת ומדווחות ללא אימות רציפות מקוון. הדוח מפרט את זמן ההשבתה של העד ואת הפרסומים שנכשלו לפי מרווחי זמן.
 
-### Daily seals and unavailable timestamp calendars
+### חותמות יומיות ולוחות שנה של חותמות זמן שאינם זמינים
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+ה-witness חותם את גבול היומן של היום הקודם לפי UTC ושולח את ה-hash של אותו חותם חתום ל-OpenTimestamps. הגשה ללוח השנה היא ראיה בהמתנה; רק התחייבויות ביטקוין שנבדקו באופן עצמאי מקבלות אישור במאמת.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+אם כל לוחות השנה נכשלים, החותם החתום והניסיון הכושל נשארים ב יומן. תהליך התחזוקה השעתי מנסה שוב את אותו הרישום המקורי, כולל לאחר הפעלה מחדש או שינוי תאריך. הוא סורק לכל היותר חותמות 32, מגיש לכל היותר שתי הגשות חסרות ומקדיש לכל היותר 60 שניות לניסיונות חוזרים בכל מחזור. סמן קבוע עובר בין החותמות הישנות יותר. הגשות שנשמרו עוקבות אחר נתיב שדרוג ההוכחה הקיים.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+ניסיון חוזר אינו כותב מחדש את החותם, אינו משנה את התאריך המקורי שלו ואינו טוען כי הלוח קיבל אותו מוקדם יותר. התחייבות מאוחרת יותר של ביטקוין נותרת אישור חיצוני מאוחר יותר. הוכחות חסרות נותרות ב-`none`; הוכחות בהמתנה נותרות ב-`pending` עד שהמאמת בודק אותן באופן עצמאי.

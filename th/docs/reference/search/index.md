@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/searc
 
 ค้นหาข้อความที่บันทึกไว้ตามรูปแบบคำ วลีที่ตรงกันเป๊ะ โดเมน และ @usernames โดยแสดงผลลัพธ์ที่ตรงกันมากที่สุดก่อน พร้อมทั้งดัชนีที่เชื่อมโยงกับบันทึกที่ลงนามแล้ว
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การสอบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![การสอบสวน](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [การวิเคราะห์ข้อมูลในคลัง](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/) · [OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/searc
 
 ดัชนีเป็นข้อมูลที่สร้างขึ้นใหม่ โดยถูกสร้างขึ้นใหม่จากบันทึกที่ลงนามแล้ว ไม่เคยถูกลงนาม ด้วยตัวเอง และไม่เคยถูกส่งออกเลย บันทึกต้นฉบับไม่เปลี่ยนแปลง
 
-**On this page**
+**บนหน้านี้**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#recognized-text)
+- [ไวยากรณ์การค้นหา](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#search-syntax)
+- [ภาษา](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#languages)
+- [ตำแหน่งของดัชนี](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#where-the-index-lives)
+- [ผลลัพธ์ และบันทึกที่ลงนาม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#results-and-the-signed-journal)
+- [ข้อความที่ได้รับการระบุ](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#recognized-text)
 - [Access](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#dependencies)
+- [สอบถามข้อมูลจากคลังข้อมูลและ MCP](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#ask-the-archive-and-mcp)
+- [การพึ่งพา](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/#benchmark)
 
 ## ไวยากรณ์การค้นหา
@@ -97,7 +97,7 @@ OCR และข้อความถอดเสียงจะยังคง�
 
 ลูกค้า MCP สามารถเรียกใช้ `search_messages` ด้วย `ranked=true` และหน้าด้วย `next_offset`. การเชื่อมต่อแบบจำกัดขอบเขตจะรับเฉพาะการสนทนาของตนเองเท่านั้น
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+การแบ่งหน้าตามอันดับจะครอบคลุมผลลัพธ์1,000แรกเท่านั้น ไม่ว่าขนาดหน้าจะเป็นเท่าใดก็ตาม ให้จำกัดการค้นหา แชท หรือช่วงเวลา เพื่อตรวจสอบผลลัพธ์ที่ตรงกันเพิ่มเติม การค้นหาแบบ ใหม่ที่สุดก่อน จะจัดเรียงข้อความ ผลลัพธ์ OCR และผลการถอดความ ก่อนที่จะเลือกแต่ละหน้า
 
 ## การพึ่งพา
 

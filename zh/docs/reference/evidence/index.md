@@ -6,31 +6,31 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/evide
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![证据与验证](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness 将账户可见的 Telegram 观察记录保存于经签名的日志中。 接收方可使用可信的 采集器密钥对保存的记录、附件和报告进行验证，随后将日志与独立保留的检查点进行比对。 本页介绍了格式、校验方法以及移交时需保留的材料。
 
-Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+Windows 用户可通过 **VERIFY.cmd** 开始操作：该程序会要求提供原始 ZIP 文件和独立获取的密钥指纹，显示附有说明的结果， 并保存一份独立的验证记录。有关设置和信任限制，请参阅[验证启动程序和 便携式运行时](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md)。
 
-**On this page**
+**本页内容**
 
-- [What is signed](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#what-is-signed)
-- [Comparing chat exports](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#comparing-chat-exports)
-- [Investigation handoff](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#investigation-handoff)
-- [Handover extract](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#handover-extract)
-- [Readable reports](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#readable-reports)
-- [Event canonicalization](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#event-canonicalization)
-- [Actor semantics](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#actor-semantics)
-- [Coverage: continuity, gaps and unobserved IDs](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
-- [Producer](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#producer)
-- [People profiles](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#people-profiles)
-- [Independent witness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#independent-witness)
-- [Manifest and checkpoints](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#manifest-and-checkpoints)
-- [Verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)
-- [Attachments](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#attachments)
-- [Durable collection and process receipts (0.2)](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#durable-collection-and-process-receipts-02)
-- [RFC 3161 preparation and response verification (0.2)](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
-- [Optional records in evidence mode: drand and Telegram devices](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
+- [什么是签名](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#what-is-signed)
+- [比较聊天记录导出文件](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#comparing-chat-exports)
+- [调查移交](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#investigation-handoff)
+- [交接摘要](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#handover-extract)
+- [易于阅读的报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#readable-reports)
+- [事件规范化](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#event-canonicalization)
+- [参与者语义](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#actor-semantics)
+- [涵盖范围：连续性、缺口及未观测到的 ID](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
+- [制作方](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#producer)
+- [用户资料](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#people-profiles)
+- [独立见证人](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#independent-witness)
+- [清单和检查点](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#manifest-and-checkpoints)
+- [验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)
+- [附件](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#attachments)
+- [持久的收据收集与处理（0.2）](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#durable-collection-and-process-receipts-02)
+- [RFC 3161 准备工作与响应验证（0.2）](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
+- [证据模式下的可选记录：drand 和 Telegram 设备](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
 
 ## 什么是签名
 
@@ -40,27 +40,27 @@ Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZI
 | 证据 ZIP 文件内容 | `manifest.sig` 对规范清单进行签名，该清单列出了内容文件的哈希值 | 完整的 ZIP 压缩包，包含其清单和签名 |
 | 保留的附件 | 带签名的`media.saved`事件中包含SHA-256和字节计数；带签名的ZIP清单中包含文件哈希值 | 经过验证的 ZIP 文件中的原始字节 |
 | 检查点 | 对日志长度、头部哈希值、公钥及创建时间进行 Ed25519 签名 | 在发生争议性更改前保留的独立副本 |
-| 运行收据 | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
+| 运行收据 | 包含采集器版本、源文件哈希值和启动设置的签名记录，该记录也包含在`process.started`中 | 所选验证模式对应的收据、相关日志及环境证据 |
 | 可读报告：`report.html`及其组成部分，`report.json`、`report.pdf`、`chat.pdf` | 每个文件均带有针对其内容的 Ed25519 密封；PDF 还包含一个标准的 PDF 签名（参见 [可读报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#readable-reports)） | 收到的文件及其可信密钥指纹；该文件所描述的 ZIP 压缩包 |
 | 独立版 CSV | 不包含独立的加密签名；仅凭事件哈希值是不够的 | 请使用经过验证的 ZIP 文件中的原文件进行完整性校验 |
 | 由浏览器生成的屏幕截图、打印件或 PDF 文件 | 衍生作品上不包含 TgWitness 的签名 | 保留原始的经过验证的软件包，并记录衍生版本的制作过程 |
 
 采集器在生成每种导出格式之前，都会验证日志签名。 可读的 HTML 和 PDF 报告带有各自的印章；独立的 CSV 文件作为 已签名 ZIP 文件的一部分进行验证。保留 ZIP 文件以保留附件字节和清单， 并设置单独的检查点，用于将日志与较早的边界进行比对。
 
-## Comparing chat exports
+## 比较聊天记录导出文件
 
-Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+使用独立保存的签名者 指纹，验证并比较两个已签名的聊天记录导出 ZIP 文件：
 
 ```
 python -m tgwitness.verify first.zip --compare second.zip \
   --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
 ```
 
-When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+当两个存档均记录了相同的数字账号和聊天 ID 时，记录将通过消息 ID 进行配对。 **未更改**指完整的保存 JSON 记录完全一致： 包括全文、作者、日期、回复对象、嵌套元数据和未知字段。 JSON 对象键的顺序无关紧要；缺失字段、空值、值类型 以及数组顺序则会影响匹配结果。300 字符的预览仅用于显示。 已更改的条目 会将差异列为顶级字段`changed_fields`，包括预览中不可见的更改。 匹配过程中，重复的消息 ID 会被拒绝，而非相互覆盖。
 
-A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+差异可能表现为显示名称、浏览次数、收藏注释或其他 观察元数据的变更。仅凭差异本身无法确定 Telegram 内容是否被编辑， 也无法识别修改者身份，更无法证明哪个相互矛盾的存档是准确的。 未解析的记录仍保留在比较结果中；其保存表示形式的相等性 并不意味着其 Telegram 有效载荷已被解码。
 
-For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
+对于不同或缺失的账户/聊天标识，该工具仅通过发件人、完整文本、文件哈希、媒体类型以及五秒 的时间容差来查找可能的 对应关系。它报告**匹配（Matched）**，而非**未更改（Unchanged）**。这些候选结果并不能 证明消息的同一性或所有元数据的完全一致。未解析的记录仍被视为 未匹配。 成对记录中的差异仍列在`changed`中，包括在 内容模式下；这些差异并不能证明同一消息被编辑过。使用 `--json`时，`matched`统计成对记录的数量，而`unchanged`统计完整保存 记录完全相等的成对记录数量。在内容模式下，这两种统计结果均不能证明消息的同一性。现有的 `changed_fields`和整数形式的`unchanged`输出仍与 早期的比较结果兼容。归档格式和签名验证保持不变。
 
 ## 调查移交
 
@@ -103,7 +103,7 @@ For different or missing account/chat identities, the tool only finds possible c
 
 在频道或超级群中，Telegram 按顺序为消息编号 1、2、3…… 聊天记录导出文件会列出 起始编号和结束编号、现有消息数量，以及所有缺失编号的连续区间（如 `message-ids.json` ）、清单和 `chat.json` 头部信息，并标记每个缺口在 聊天记录中的具体位置。 `verify.py` 从`chat.json` 开始重新计数。缺失的编号是指Telegram 未返回的消息（在导出前已被删除，或该账户无法查看）；在私聊和 基础群组中，编号在该账户的所有聊天中共享，且缺口不计入统计。
 
-After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
+读取历史记录后，导出功能会按号码逐一重新向 Telegram 查询所有缺失的号码 （`channels.getMessages`，最多 10,000 个号码）。结果保存在 `message-ids.json` 文件和报告中。 若返回空响应，则记录该号码在重新检查时对该账户不可用； 但未说明具体原因。重新检查时返回的消息将被添加到导出结果中 并标记为 `found_on_recheck`。
 
 每份报告均以**开头。简而言之**：先有一段概述，随后说明材料显示的内容以及未显示的内容 （账号背后是谁、消息传递的完整性、观察前的删除情况、无时间戳的 时间记录）。 当浏览器验证了印章的 签名（而非页面本身）后，页面自身的印章会变为琥珀色：浏览器不会为页面提供其自身的字节。 只有当 读者将文件拖放到页面底部的验证框中，且每个字节都匹配时，且仅当 显示的页面正是该文件时，印章才会变为绿色；否则将变为红色。
 
@@ -159,9 +159,9 @@ message.new 中的 actor_id 即为消息发送者。message.edited 未推断出 
 
 私人聊天和普通群组的删除通知仅包含消息 ID。 这些聊天共享一个全账户通用的 ID 序列，因此一个 ID 代表该账户中的一条 消息。 当具有该 ID 的消息此前已保存在此日志中时， 删除操作将在该聊天中记录为 message.deleted，并使用 payload.chat_resolution 作为方法名称。从未被保存过的 ID 将作为 deletion.unscoped 保存，且不包含 chat_id；系统不会进行任何推测。 频道和超级群组按聊天对消息进行编号， 绝不会通过这种方式进行匹配。当被删除的消息是由被观察账户发送时， payload.deleted_message_was_outgoing 为 true；但仍未提供删除者信息。
 
-An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+无范围的提示并不意味着消息从未被保存：匹配的 聊天记录可能不在当前观察范围内，或者可能无法找到 唯一的匹配项。在报告计数、过滤器和标签中，未检测到与删除 通知仍属于不同的观察结果。后续的恢复操作会清除 当前的缺失状态，同时在 签名历史记录中保留先前的检查失败记录；这两种观察结果均不构成删除通知。
 
-Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+来自同一条通知且解析为同一聊天室的多个 ID 将被归类为 `deletion.batch`，无论其数量多少。该通知无法证明整个聊天记录是否已被 清除、由谁执行了删除操作，或该操作是否适用于所有参与者。 已保存的已发送消息不会改变这些限制。较早的日志中可能包含由十个或更多 ID 批次推断出的 `history.cleared` 事件，其说明 文本将删除行为归因于另一位参与者。这些推断未 得到本次更新的支持。请保留这些原始的签名记录，但将其 视为分组删除通知；当前界面已据此对其进行标注。
 
 ## 覆盖范围：连续性、缺失内容及未被观察到的 ID
 
@@ -197,13 +197,13 @@ Multiple IDs resolved to the same chat from one notification are grouped as `del
 
 `verify.py` 重新计算 `gap_summary` 基于 `events.jsonl` 基于签名 `coverage.json` 成员中的参数（针对旧版存档使用默认值），并 在覆盖范围摘要中打印该账户范围内的行。该存档的 `get_capture_status`（MCP 和命令行）针对某次访问可能读取的聊天记录返回相同的测量结果； 而账户级序列仅适用于覆盖整个工作区的访问。
 
-Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
+对同一条服务消息的重复观察仅计为一次，且账户服务估算 仅使用测量范围内的数值。在启用全账户测量之前，所应用的范围必须明确保留 该账户自身的消息；未包含该信息的旧记录 无法满足此条件。停止观察不会 延长测量范围，且恢复观察会被记录。实时存档查询有时间 限制（包括其数据库扫描），并将未完成的测量标记为部分完成。
 
-Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
+Telegram 记录了[独立的消息 ID 序列](https://core.telegram.org/api/updates#message-id-sequences)。 这些数字描述的是观察结果；它们既不能识别删除行为者，也不能确定 某个数字缺失的原因。
 
 当Telegram停止接受该账户时，结束监视的`coverage.gap`记录 包含`cause`（`account_banned`、`account_frozen`、`account_deleted`、`session_duplicated`、 `session_revoked`、`session_expired`、`session_ended`或`not_authorized`）以及Telegram 错误；`verify.py`指明了该周期结束的原因。
 
-Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
+覆盖范围包括记录的观察时段、中断情况及消息结果。 请结合所选的聊天、时间段和附件策略进行评估；仅凭连续 运行并不能证明 Telegram 更新已完整送达。
 
 ## 制作人
 
@@ -231,27 +231,27 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 manifest.json 包含格式、导出时间、公钥、指纹、日志 长度、头部哈希、范围、生成者、限制条件，以及除 `manifest.json` 和 `manifest.sig` 本身之外 每个内容成员的 SHA-256 值。 manifest.sig 是规范化 manifest JSON 的 Base64 编码 Ed25519 签名。 验证器会拒绝处理意外/缺失的成员、名称重复、文件损坏、 序列/链断裂、签名无效以及与提供的检查点不匹配的情况。 它绝不会提取归档路径。它将声明的总未压缩大小限制为 4 GiB； 若提高 **Parameters** 限制，`--max-gib N` 允许创建更大的归档文件。
 
-Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
+请从您已安装的 TgWitness 版本或经过审核的代码检出中运行验证。 存档文件中包含的副本支持便携式使用；在执行该副本之前，请将其与您的 可信安装版本进行比对。
 
-A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
+检查点会对一条包含公钥、日志长度、头部 哈希值和创建时间的声明进行签名。验证者可以检查后续存档是否包含 相同的前缀。应将检查点保留在收集器之外，以便后续验证时将 存档与单独保存的参考值进行比对。
 
 ## 验证范围
 
-Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
+验证过程会检查存档文件及其生成所使用的采集模式。请选择 其信任边界与当前情况相匹配的模式，并保留该模式的验证输入。
 
 | 采集模式 | 验证器检查的内容 | 验证输入与信任边界 |
 | --- | --- | --- |
-| 本地工作区 | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
-| 带独立见证节点的本地工作区 | 归档校验以及与见证人保留的早期日志前缀的一致性 | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
-| [GitHub Actions 捕获](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
-| [云部署](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
-| [Intel TDX 机密虚拟机](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
+| 本地工作区 | 记录签名、哈希链、清单和附件字节 | 独立保留的收集器指纹；主机管理员控制本地签名密钥 |
+| 带独立见证节点的本地工作区 | 归档校验以及与见证人保留的早期日志前缀的一致性 | 独立受信任的见证密钥和记录；检查点将已观察到的前缀进行绑定 |
+| [GitHub Actions 捕获](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub 对存档摘要、已批准的工作流和收集器提交、托管运行器、新的会话/密钥来源以及内部存档完整性的认证 | 可信验证者策略、调用者存储库和 GitHub 证明包；数据采集在固定工作流下运行 |
+| [云部署](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/) | 提供商的生命周期和访问记录、防火墙和 Cloudflare 状态，以及收集器的签名运行记录 | 对服务提供商和 Cloudflare 进行只读查询；各项检查的可用性取决于服务提供商 |
+| [Intel TDX 机密虚拟机](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | 引用签名和平台状态，将其与收集器声明、组装及操作系统测量数据相关联 | Intel 信任链及预期部署指标；保留每次必需的 TDX 检查结果 |
 
-In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
+在密封采集过程中，经批准的采集器通过经过身份验证的 Telegram 连接在已验证的环境内接收数据。证明将归档文件与 该执行过程绑定，因此验证既涵盖采集过程，也涵盖后续的文件完整性。 这依赖于经批准的代码以及上文列出的平台信任链。 GitHub 捕获验证要求在运行过程中创建会话，并拒绝 导入会话的捕获。
 
-The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/) identifies tested configurations.
+运行收据记录了收集器的版本、文件哈希值和启动设置。GitHub 来源信息和 TDX 测量结果用于环境验证； [验证记录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/)标识了已测试的配置。
 
-TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
+TgWitness会对收集到的观察结果进行签名；Telegram及消息作者不会生成 这些签名。在本地工作区中，首次独立 检查点之前创建的内容仍依赖于收集器及其密钥持有者。覆盖范围记录描述了 选定的范围和收集结果，而经过验证的外部时间戳则将 已提交的存档或日志边界锚定在特定时间点。
 
 ## 附件
 
@@ -265,9 +265,9 @@ ZIP 导出工具会根据文件名对存储的媒体文件进行验证。JSONL�
 
 媒体任务及其消息事件提交在同一事务中完成。 该任务存储 原始 TL 消息描述符；签名的观测记录将其 SHA-256 值、账户 及大小策略进行绑定。恢复操作会在下载前验证该绑定。它绝不会获取 当前消息，也不会悄无声息地替换为更新版本的附件。中断的任务 会重试，而永久性失败则仍被视为明确的结果。
 
-Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope).
+每个工作区都有自己的日志和签名身份。process.started 事件包含 运行 ID、本地时钟、依赖项版本、源文件哈希值、初始账户/作用域， 以及捕获设置。心跳消息包含运行 ID、单调时间和队列状态。 运行收据也可作为单独签名的声明下载。若要验证 执行环境，请将其与[验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)中所述的 GitHub 证明或 TDX 检查 结合使用。
 
-Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
+系统会在启动时、观察过程中每五分钟（ **参数 → 每隔生成签名检查点**）以及有序停止时，在本地保留自动检查点。启动验证和导出操作会将日志 与最新保留的本地检查点进行比对。当检查点完好无损时，此机制可检测到数据库回滚 情况。独立的保留机制确保该参考信息在 工作区之外仍可获取；经过验证的外部时间戳则进一步将其锚定在特定时间点。
 
 重启后，将恢复已保存的 Telegram 更新位置（`catch_up_from` 位于 `observation.started`），并请求获取遗漏的更新。定期重新检查会记录 `message.recovered` 以获取遗漏的消息，并在 Telegram 不再 返回已保存消息时记录 `message.missing_on_recheck`；后者并非删除通知，且未指明删除者或时间。
 

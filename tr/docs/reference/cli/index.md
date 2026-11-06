@@ -6,7 +6,7 @@ Komut dosyaları ve ajanlardan arama yapın, bağlamı okuyun, etkinlikleri say�
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Arşiv entegrasyonları](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [Salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/) · [Tam metin arama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ Uzak panel için HTTPS gereklidir; düz HTTP yalnızca `127.0.0.1`, `localhost` 
 
 Tarihler `2026-10-01` (UTC gece yarısı) veya saat dilimi belirtilmiş ISO zamanlarıdır `2026-10-01T09:00+03:00`. `search`, `messages` ve `export` için gözlem zamanı seçilir. Sayfalar en fazla 50 kayıt tutar: sıralı arama için `next_offset` (`--offset`) sıralı arama için ve `next_before` (`--before`) başka yerler için.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+Sıralı arama, 1,000 sonuçta durur. Son sayfa, `--limit` değerinden daha kısa olabilir; daha fazla eşleşen gözlem varsa sorguyu, sohbeti veya dönemi daraltın.
 
 Her mesaj sonucu `untrusted_content: true`çalışma alanı, sohbet ve mesaj kimliklerini, günlük numarasını, kaydedilen kaydın hash değerini ve bir panel bağlantısını içerir. Düzenlemeler, silme bildirimleri ve `missing_on_recheck` ayrı kayıtlardır. Bir kaydın bulunmaması , bir olayın hiç gerçekleşmediğini kanıtlamaz.
 
@@ -76,7 +76,7 @@ Bu aralık, **Telegram tarafından bildirilen mesaj zamanını** seçer. Saat ve
 
 Panel üzerinden yapılan bir dışa aktarım işlemi, "**Mesajları Dışa Aktar"** seçeneğine izin veren bir bağlantıya ihtiyaç duyar **(yalnızca komut satırı)**; bu seçenek varsayılan olarak seçili değildir. Bu dosya bir çalışma kopyasıdır, kanıt değildir: doğrulanabilir bir devir için, "**Dışa Aktarımlar"** bölümündeki imzalı dışa aktarım seçeneğini kullanın; bu seçenek `python -m tgwitness.verify`kontrol eder.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+Panel, tamamlanma kaydı da dahil olmak üzere her kaydı göndermeden önce erişimi yeniden kontrol eder. İptal edilmiş veya süresi dolmuş erişim, eksik bir dışa aktarımla sonuçlanır. Gecikmeli sayfa okumaları, arşiv işleyicisi sınırını diğer sorgularla paylaşır ve sınırlı bir bekleme süresine sahiptir.
 
 ## Ajan becerisi
 

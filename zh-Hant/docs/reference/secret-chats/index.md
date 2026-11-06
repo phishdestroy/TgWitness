@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# 秘密聊天：實作與示範
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+請理解「秘密聊天」的獨立實作方式，試用虛構的介面，並檢視尚未解決的缺陷。
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**2026年11月6日狀態確認：**目前正開發一套獨立的「秘密聊天」實作 ，該實作尚未合併至已發布的 `main` 分支（版本 `3d23e52b647b`）。 一般收集器與 Takeout 匯出功能不會收集「秘密聊天」內容。 互動式網站示範使用虛構資料展示介面； 該示範無法啟用 Telegram 通訊功能。
 
-## Where the implementation lives
+## 實作位置
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+提交 `0e60f88e` 在本地開發分支 `fix/panel-routes-sessions` 中新增了「**來源 → 偽密鑰」**。已驗證的快照為 `bb8788fb685c`。 其實作包含 `tgwitness/secret_chats.py`、應用程式路由、 `tgwitness/static/views/secret-chats.js` 以及專用測試。
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+該分支中的可選 `secret-chats` 附加元件使用 [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat)， 並固定於 `d87bf037b90060383c7b704d8a06ebb98c621c6f`。該函式庫在帳戶現有的 Telethon 授權基礎上， 實作 Telegram 的端對端聊天協定。 僅安裝該函式庫並不會為 `main` 補足缺失的整合功能。
 
-## What the development interface does
+## 開發介面的功能說明
 
-| 操作說明 | Recorded behavior |
+| 操作說明 | 記錄的行為 |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| 透過使用者名稱或使用者 ID 建立聊天 | 發送請求；另一位參與者必須接受該請求。 |
+| 接受傳入的請求 | TgWitness 將成為該聊天室的接收端點。自動接受為一項獨立設定，預設為關閉狀態。 |
+| 傳送或接收訊息 | 新增一則發送或接收的 `secret_chat.message` 記錄，並在對話串中顯示該記錄。 |
+| 接收附件 | 請對其進行解密，並依 SHA-256 儲存其位元組，同時記錄 `secret_chat.file`。 |
+| 接收計時器或刪除通知 | 記錄該通知並保留先前擷取的內容。 |
+| 檢視對話內容 | 顯示訊息、檔案、通知及金鑰視覺化圖表。開啟的分頁每四秒自動重新整理一次。 |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+在包含此整合功能的開發版本中，操作員會針對 選定的帳號啟用該模組並進行連線。開始、接受及傳送操作均需 具備互動權限，且該帳號的唯讀保護必須關閉。另一位 參與者必須接受新的外發聊天。在上述版本的 已發布應用程式中，並未包含這些控制機制。
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+本文件僅涵蓋由此 TgWitness 會話所建立或接受的聊天室。手機上現有的 「秘密聊天室」仍保留於該裝置中。匯入會話並不會提供 其獨立的加密金鑰。「秘密聊天室」的金鑰資料與計數器儲存 於工作區金庫中；已保留的訊息與解密檔案則遵循一般 工作區儲存保護機制。
 
-## Website demonstration
+## 網站示範
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+該網站的「**嘗試秘密聊天**」情境展示了一段虛構的對話。它讓 讀者能夠發起請求、模擬其接受過程、發送範例訊息、接收 預設的回覆與檔案，並檢視計時器與刪除通知。收到的 請求亦可被接受。控制項會明確標示模擬的對等方動作。
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+此情境在瀏覽器記憶體中執行。重置或重新載入將清除其內容。它不會登入、 聯繫 Telegram、建立真實的加密金鑰，也不會變更已簽名的範例下載檔案。 其顯示的訊息並非經簽名的證據。此情境僅用於展示預期的 互動方式；並不代表開發實作已準備就緒。
 
-## Checks and outstanding defects
+## 檢查項目與待解決缺陷
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+現有的五項測試涵蓋加密金鑰的持久性、生命週期與訊息 記錄、傳入訊息接受政策、唯讀傳送及附件匯出。 這些測試在 11 月 6 日的審查中，針對固定版本的函式庫均通過測試。另外三項 合成檢查在同一快照中重現了缺陷：
 
-| Finding | Consequence |
+| 發現 | 後果 |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| 關閉時會繞過 `read_only` | 當應阻擋互動時，「關閉路徑」可執行遠端操作。 |
+| 重複檢測僅搜尋最近的 500 筆記錄 | 較舊的重播在重新啟動後可能會產生重複項目。 |
+| 附件下載失敗會移除其待處理項目 | 暫時性故障會導致重試工作失效。 |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+這些是已知缺陷，亦記錄於 [已發布的審計](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)報告中。五項通過的測試並未 涵蓋這些失敗情況。本次審查使用了合成工作區並模擬了 Telegram 的操作；並未重現實際的握手過程，亦未驗證生產環境的部署情況。

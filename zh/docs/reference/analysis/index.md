@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/analy
 
 搜索已保存的消息、审查 AI 输入内容，并保存附有来源参考信息的分析报告。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [调查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![调查](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

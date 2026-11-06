@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/stora
 
 Zaxira nusxalari, eski fayllarni bulutga ko&#x27;chirish, Object Lock ostidagi nusxalar va yangi qurilmada tiklash.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Panel uchta vazifani ajratadi:
 
@@ -20,13 +20,13 @@ Joyni bo'shatish imzolangan jurnalni hech qachon o'chirib tashlamaydi yoki qayta
 
 Faylni yuklash bo'yicha javob o'zi faylni o'chirishga ruxsat emas.TgWitness to'liq shifrlangan obyektni yuklab oladi va uning hajmi hamdaSHA-256 ni tekshiradi, kvitansiyani saqlaydi, so'ng faylni o'chirishdan oldin mahalliy baytlarni yana bir bor tekshiradi. Yuklash muvaffaqiyatsiz bo'lsa, qayta o'qish boshqacha bo'lsa yoki uzatish bekor qilinsa, mahalliy fayl o'z o'rnida qoladi. Agar yoqilgan dalil zaxirasi hali o'sha faylni nusxalamagan bo'lsa, o'chirish ham uning nusxasini kutadi.
 
-**On this page**
+**Ushbu sahifada**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#operator-bot-and-completion-notices)
+- [Disk to'lib borayotganda](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Maqsadni ulang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#connect-a-destination)
+- [Qayta tiklash faylini saqlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#keep-the-recovery-file)
+- [O'rnatishni yo'qotgandan keyin tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#recover-after-losing-the-installation)
+- [Operator bot va yakunlash bildirishnomalari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Diskdagi joy kamayganda
 

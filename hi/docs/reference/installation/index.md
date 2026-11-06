@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/insta
 
 एक कमांड से इंस्टॉल करें, हस्ताक्षरों और हैश की जांच करें, इंस्टॉलेशन को अपडेट और हटाएँ।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [शुरुआत करना](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![शुरुआत करना](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [परियोजना](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [त्वरित आरंभ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/) · [तैनाती](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
 
-**On this page**
+**इस पृष्ठ पर**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#remove-tgwitness)
+- [एक कमांड से इंस्टॉल करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#install-with-one-command)
+- [जहाँ सब कुछ चलता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#where-everything-runs)
+- [पूर्ण-पाठ खोज सेटिंग्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#full-text-search-settings)
+- [कमांड-लाइन पहुँच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#command-line-access)
+- [चलाने से पहले सत्यापित करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#verify-before-running)
+- [मौजूदा इंस्टॉलेशन को अपडेट करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#update-an-existing-installation)
+- [उबंटू पर दैनिक कमांड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness हटाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/#remove-tgwitness)
 
 ## एक कमांड से इंस्टॉल करें
 
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **एक नया प्रकाशन डाउनलोड साइट को अपडेट करता है; इंस्टॉल किए गए प्रोग्राम तब अपडेट होते हैं जब आप इंस्टॉलर को फिर से चलाते हैं।** कोई अनअटेंडेड अपडेटर या चल रहे संग्रह का स्वचालित पुनरारंभ नहीं है। वर्तमान इंस्टॉलर चैनल **पूर्वावलोकन** है; यह प्रकाशित, जाँचे गए बिल्ड का अनुसरण करता है `main`, जिसका कमिट पिछली क्रमांकित GitHub रिलीज़ से नया हो सकता है। पेज का संस्करण से आता है `pyproject.toml`; इसकी कमिट और बिल्ड आईडी एक ही प्रीव्यू संस्करण के भीतर अपडेट को अलग करती हैं।
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+उस सटीक कमिट के एप्लिकेशन और सुरक्षा जांचों को पास करने और साइन किए गए पैकेज के उबंटू सेवा और विंडोज पावरशेल इंस्टॉलेशन परीक्षणों को पास करने के बाद प्रकाशन स्वचालित हो जाता है। जब जांच चल रही हों, या यदि वे विफल हो जाएं, तो वही कमांड पिछले जाँचे गए बिल्ड को इंस्टॉल करना जारी रखते हैं। बिल्ड मैनिफेस्ट यह दिखाता है कि कौन सा कमिट वर्तमान में उपलब्ध है; पूर्वावलोकन अपडेट के बीच केवल संस्करण संख्या ही समान रह सकती है।
 
 पहले की तरह ही इंस्टॉलेशन फ़ोल्डर और OS उपयोगकर्ता का उपयोग करें। संग्रह को रोके बिना पूरी डेटा निर्देशिका का बैकअप लें; `tgwitness paths` इसकी पहचान करता है। एक हस्ताक्षरित एक्सपोर्ट एक पूर्ण इंस्टॉलेशन बैकअप नहीं है।
 

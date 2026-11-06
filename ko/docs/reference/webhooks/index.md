@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/webho
 
 HMAC 서명, 재시도 및 전달 상태를 포함하여 지정된 범위의 이벤트를 HTTPS 수신자에게 전송합니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [아카이브 연동](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![아카이브 연동](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

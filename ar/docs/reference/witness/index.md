@@ -4,32 +4,32 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/witne
 
 قم بتشغيل «شاهد» باستخدام مفتاحه الخاص وروبوته، وانشر نقاط التحقق الموقعة على قناة، وقارن الصادرات بها.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [الأدلة والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![الأدلة والتحقق](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [التصدير والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [ضمان عالي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/) · [دليل اللوحة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+يحتفظ الشاهد بنقاط التحقق الموقعة بشكل منفصل عن المجمع. ويقوم بالتحقق من توقيع المجمع واستمرارية السجل، ويوقع النتيجة بمفتاحه الخاص، ثم ينشرها على قناة Telegram. قم بتشغيله على خادم منفصل مع وصول للقراءة فقط إلى نقطة نهاية الشاهد الخاصة بالمجمع.
 
-مخطط تدفق · أداة التجميع → Witness (نقطة التحقق الموقعة: عدد السجلات + هاش الرأس); Witness → سجل الشهود، مفتاح خاص; Witness → قناة Telegram (منشور موقّع عبر الروبوت الخاص بها); ملف ZIP للأدلة → verify.py; سجل الشهود، مفتاح خاص → verify.py; قناة Telegram → verify.py (صفحة التصدير من Telegram Desktop أو صفحة t.me/s) · أداة التجميع · Witness · سجل الشهود، مفتاح خاص · قناة Telegram · ملف ZIP للأدلة · verify.py · نقطة التحقق الموقعة: عدد · السجلات + هاش الرأس · منشور موقّع عبر الروبوت · الخاص بها · صفحة التصدير من Telegram · Desktop أو صفحة t.me/s
+مخطط تدفق · أداة التجميع → الشاهد (نقطة التحقق الموقعة: عدد السجلات + هاش الرأس); الشاهد → سجل الشهود، مفتاح خاص; الشاهد → قناة Telegram (منشور موقّع عبر الروبوت الخاص بها); ملف ZIP للأدلة → verify.py; سجل الشهود، مفتاح خاص → verify.py; قناة Telegram → verify.py (صفحة التصدير من Telegram Desktop أو صفحة t.me/s) · أداة التجميع · الشاهد · سجل الشهود، مفتاح خاص · قناة Telegram · ملف ZIP للأدلة · verify.py · نقطة التحقق الموقعة: عدد · السجلات + هاش الرأس · منشور موقّع عبر الروبوت · الخاص بها · صفحة التصدير من Telegram · Desktop أو صفحة t.me/s
 
 **الرسم التخطيطي كنص**
 
-1. أداة التجميع → Witness (نقطة التحقق الموقعة: عدد السجلات + هاش الرأس)
-2. Witness → سجل الشهود، مفتاح خاص
-3. Witness → قناة Telegram (منشور موقّع عبر الروبوت الخاص بها)
+1. أداة التجميع → الشاهد (نقطة التحقق الموقعة: عدد السجلات + هاش الرأس)
+2. الشاهد → سجل الشهود، مفتاح خاص
+3. الشاهد → قناة Telegram (منشور موقّع عبر الروبوت الخاص بها)
 4. ملف ZIP للأدلة → verify.py
 5. سجل الشهود، مفتاح خاص → verify.py
 6. قناة Telegram → verify.py (صفحة التصدير من Telegram Desktop أو صفحة t.me/s)
 
-**On this page**
+**في هذه الصفحة**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#verify)
+- [ما يحصل عليه الشاهد، وما لا يحصل عليه](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [ما الذي تتحقق منه وتسجله](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#what-it-checks-and-records)
+- [تشغيل شاهد](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#run-a-witness)
+- [صفحة إثبات عامة لعدة مساحات عمل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [التحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/#verify)
 
 ## ما يحصل عليه الشاهد، وما لا يحصل عليه
 
@@ -48,7 +48,7 @@ A witness retains signed checkpoints separately from the collector. It checks th
 في كل فترة زمنية (10 دقائق بشكل افتراضي)، تقوم الأداة بما يلي:
 
 1. يسترد الرأس نفسه (لا يمكن للمجمع دفعه أو تخطيه)؛
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. يتحقق من توقيع المجمع، ومفتاح المجمع المثبت (`--collector-fingerprint`، أو أول مفتاح يظهر)، وعدد غير متناقص، ورأس لم يتغير عند عدد لم يتغير. تتحقق إثباتات تضمين ميركل والاتساق من أن السجل المتزايد يمتد إلى نقطة التحقق المحتفظ بها. وبمجرد استخدام إثباتات الاستمرارية، يتم رفض إزالتها؛
 3. يُلحق سجلًا موقّعًا بسجله الخاص: `witness.anchor` مع الحالة `ok`، `key_changed`، `rollback` (عدد سجلات أقل من ذي قبل)، `fork` (نفس الطول، رأس مختلف ) أو `invalid` (فشل التحقق من الإجابة)، أو `witness.no_response` عندما لم يرد المُجمِّع؛
 4. ينشر النتيجة على القناة، موقعة، بما في ذلك «لا يوجد رد» أثناء تشغيل TgWitness وإمكانية وصوله إلى واجهة برمجة تطبيقات الروبوت (Bot API). يتم تسجيل معرّف المنشور (`witness.posted`)، وكذلك المنشور الفاشل (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 وهذا يتطلب الاحتفاظ بشكل مستقل ببصمة الشاهد ونقطة تفتيش مطابقة في النهاية الدقيقة لعملية التصدير هذه. إن نقطة التفتيش التي تغطي فقط البادئة السابقة غير كافية. أوقف عملية التجميع مؤقتًا، ودع الشاهد يراقب الحالة النهائية، ثم قم بالتصدير قبل إجراء أي عمليات كتابة أخرى في السجل؛ إذا تغير السجل، فاحتفظ بنقطة تفتيش أخرى و قم بتصدير تلك الحالة. لا يمكن لنقطة فحص لاحقة بمفردها التحقق من التجزئة النهائية لعملية تصدير أقصر. عندما يتم توفير `--channel` أيضًا، فإن المنشورات المزعومة المفقودة أو مجموعة المطابقة الفارغة تفشل في اجتياز هذا الفحص الصارم. بدون العلامة، لا تزال فحوصات السلامة العادية تبلغ عن السجلات غير المشهودة دون رفض أرشيف سليم بخلاف ذلك.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+يجب الاحتفاظ بسجل الشاهد ومفتاحه المثبت بشكل منفصل. تتحقق عمليات الفحص عبر الإنترنت من الاستمرارية بين نقاط الفحص؛ بينما يقارن التحقق دون اتصال بالإنترنت كل نقطة فحص محفوظة مع الملف المصدَّر. أما الرؤوس القديمة التي تفتقر إلى أدلة الاستمرارية، فيتم الاحتفاظ بالمقارنة التي تتم دون اتصال بالإنترنت ويتم الإبلاغ عنها دون التحقق من الاستمرارية عبر الإنترنت. يسرد التقرير فترات توقف الشاهد و عمليات النشر الفاشلة حسب الفاصل الزمني.
 
-### Daily seals and unavailable timestamp calendars
+### الأختام اليومية وتقويمات الطوابع الزمنية غير المتاحة
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+يقوم الشاهد بإغلاق حدود سجل اليوم السابق بتوقيت UTC وإرسال التجزئة لتلك الختمة الموقعة إلى OpenTimestamps. يعتبر الإرسال إلى التقويم دليلاً معلقاً؛ ولا تتلقى التأكيد في أداة التحقق سوى التزامات Bitcoin التي تم التحقق منها بشكل مستقل.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+في حالة فشل جميع التقويمات، يبقى الختم الموقّع والمحاولة غير الناجحة في السجل. تقوم عملية الصيانة كل ساعة بإعادة محاولة ذلك السجل الأصلي، بما في ذلك بعد إعادة التشغيل أو تغيير التاريخ. يقوم بمسح ما لا يزيد عن 32 من الأختام، وإرسال ما لا يزيد عن إرسالتين مفقودتين، ويستغرق ما لا يزيد عن 60 ثانية في إعادة المحاولة لكل دورة. يقوم مؤشر ثابت بالتناوب بين الأختام الأقدم. تتبع الإرسالات المحتفظ بها مسار ترقية الإثبات الحالي.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+إعادة المحاولة لا تعيد كتابة الختم، ولا تغير تاريخه الأصلي، ولا تدعي أن التقويم قد استلمه في وقت سابق. يظل الالتزام اللاحق بـ Bitcoin تأكيدًا خارجيًا لاحقًا. تظل الأدلة المفقودة في حالة `none`؛ وتظل الأدلة المعلقة في حالة `pending` حتى يقوم المُحقق بفحصها بشكل مستقل.

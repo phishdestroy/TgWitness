@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/showc
 
 Veröffentlichen Sie gespeicherte Nachrichten ausgewählter öffentlicher Kanäle und signierte Momentaufnahmen über zeitlich begrenzte, widerrufbare Links.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/de/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bereitstellung und Wiederherstellung](https://phishdestroy.github.io/TgWitness/de/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Bereitstellung und Wiederherstellung](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **„Zugriff → Öffentliches Showcase“** erstellt eine separate, schreibgeschützte Seite unter Verwendung des bestehenden Access-Token-Systems. Es liest die gespeicherten Beobachtungen der Installation aus. Es startet keinen Kollektor, meldet sich nicht bei Telegram an und richtet keinen Kanal für einen Besucher ein.
 

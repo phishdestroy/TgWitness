@@ -57,7 +57,7 @@ Un paquete independiente vinculado al límite del diario de origen
 | Personas | Las personas seleccionadas conservan su nombre; las demás reciben seudónimos o quedan fuera. |
 | Texto | Todo el texto, solo el de las personas seleccionadas y su cuenta, o nada. |
 | Archivos | Archivos de las personas seleccionadas y su cuenta, todos los archivos mostrados o ninguno. |
-| Case Board | Nada, marcadores y fragmentos, o tarjetas con debate. |
+| Tablero de casos | Nada, marcadores y fragmentos, o tarjetas con debate. |
 
 Lea también el texto y los archivos: un seudónimo no borra los nombres escritos dentro de un mensaje o adjunto. Si falta un archivo seleccionado, restáurelo o deje fuera los adjuntos.
 

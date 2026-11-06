@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/accou
 
 导出该账户当前可读取的内容：范围、可恢复的任务、经签名的存档以及已缩减的共享副本。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [证据与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![证据与验证](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 账号导出会独占该账号。启动或恢复前，请明确暂停监控或其他采集任务；应用绝不会自动停止它们。
 
@@ -16,11 +16,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/accou
 
 此工作流会导出当前已连接账户可访问的数据。默认使用 [Telegram Takeout](https://core.telegram.org/api/takeout) 功能；这并非对不可用或已删除的 Telegram 数据的备份。秘密聊天、不可访问的历史记录以及早前的编辑内容均无法恢复。Telegram 可能会在 Takeout 开始前设置等待期。控制面板会显示该等待时间；系统不会在用户不知情的情况下切换传输方式。显式的常规 API 选项覆盖范围不同，并会记录不受支持的类别。
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout 是 Telegram Desktop 也使用的官方导出 API。TgWitness 可以直接从其自身的采集数据中写入 与 Desktop 兼容的 JSON；无需导入他人的 存档。两种传输方式均可获取聊天和消息 ID。 公开聊天或转发权限并不能保证导出速度更快，也无法消除 Takeout 的审批延迟。在比较速度之前，请先测量相同的范围和媒体设置。
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+对于最多20个明确选定的聊天ID，常规API导出会在考虑该账户完整的对话列表之前 直接解析这些对等方。因此，即使该公共频道未出现在对话列表中， 也可以在无需加入该频道的情况下将其导出。 未缓存的对等方将回退到普通对话列表。 归档过滤器仍会生效：如果 Telegram 未返回某个对话，且已归档 的聊天被排除在外，则未知归档状态将被记录为遗漏。 Takeout 保留其分段范围对话列表处理流程。两种路径均不会加入聊天或 更改转发权限。 在与桌面版兼容的 JSON 中，Telegram 标记为 `left` 的频道将显示在 `left_chats` 下，包括该账户尚未加入的可读公共频道。
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+`FLOOD_WAIT`和`FLOOD_PREMIUM_WAIT`都会在服务器要求的整个 时段内暂停请求。该账户的截止时间在重新连接和重启后仍会保留；后续设置的 较短等待时间无法缩短该截止时间。重试次数受限，取消操作会保留已密封的页面， 且 API 凭据不会轮换以绕过速率限制。不会进行任何 Premium 购买。
 
 ## 选择要收集的内容
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 个人资料照片历史记录和动态消息默认不被选中。当案件仅需消息时，请同时禁用个人资料和联系人。如果附件或元数据并非必需，在采集过程中将其排除可避免在本次导出中保留另一份私有副本。
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+照片有效载荷采用其元数据和哈希清单中标识的静态图像变体，包括带有动画头像变体的照片。该动画不会替代所选的静态图像。比观察到的大小更短或更长的有效载荷将被记录为附件失败，而在文件引用更新期间发生表示形式变更的情况将被拒绝。这些失败会导致存档不完整，但会保留消息记录。 独立验证还会拒绝那些签名长度与其实际大小或表示形式不符的已保存附件，包括旧存档中的附件。
 
 ## 简历、报道范围与验证
 
@@ -97,8 +97,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## 共享与托管捕获
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+选择收件人所需的消息和文件，审查完整的共享副本，并将源文件单独保留。记录已发送 ZIP 文件的哈希值，以便收件人能够识别并验证该确切副本。通过假名化处理替换所选标识符；包含的文本和原始文件仍作为审查内容的一部分。
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope).
+GitHub Actions 支持通过 Takeout 或常规 API 导出整个账户或选定聊天记录，还支持单个聊天的事件日志。[托管捕获指南](https://phishdestroy.github.io/TgWitness/docs/capture/)详细说明了设置验证及 120 分钟的时限。要验证从托管捕获生成的共享副本，请将该副本的源哈希值与原始存档进行比对，并使用[特定模式的检查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)方法验证该存档的认证信息。
 
 [证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [案例报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)

@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel
 
 جميع شاشات اللوحة: الدردشات، والمذكرات، والمصادر، وعمليات التصدير، والإضافات، وأنماط الحماية، وفحص الكود.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [البدء](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![البدء](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [الإعداد الأولي والإعدادات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/settings/) · [الحسابات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/) · [التصدير والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [تقارير الحالات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/)
 
 وظيفة كل شاشة، وما تكتبه في السجل الموقّع، ومكان وجود الدليل التفصيلي. تعرض اللوحة مساحة عمل واحدة في كل مرة: حساب Telegram واحد مع مصادره الخاصة، وسجله، ومفتاح التوقيع. يعمل المحدد الموجود في الجزء العلوي من الشريط الجانبي على التبديل بين مساحات العمل. يحمل العنوان مساحة العمل (`?ws=…`)؛ وطالما كان العنوان و أداة التحديد والحساب المحمّل غير متطابقين، تظل الإجراءات محظورة.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+استخدم [طرق المقارنة](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) لاختيار ما بين المراقبة المباشرة، والسجل الكامل، وعمليات تصدير الحسابات/الدردشات الحديثة، وتسليم السجلات المحفوظة. تتضمن صفحة التصدير نفس المقارنة المذكورة أعلاه فوق عناصر التحكم في التنزيل.
 
-**On this page**
+**في هذه الصفحة**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#more-tools)
+- [تعرّف على كيفية الاستخدام](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#find-your-way)
+- [ابدأ من هنا](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#start-here)
+- [المحادثات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#chats)
+- [المجلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#journal)
+- [المصادر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#sources)
+- [عمليات التصدير](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#exports)
+- [الإعدادات والحسابات والاتصال](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#settings-accounts-and-connection)
+- [إضافات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#extras)
+- [أوضاع الحماية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#protection-modes)
+- [المزيد من الأدوات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#more-tools)
 
 ## اكتشف طريقك
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - تحدد **أنواع المصادر** أوضاع المجلد والحساب بأكمله لتقتصر على القنوات والمجموعات والمحادثات الخاصة والروبوتات. تضيف **«الإجراءات الخاصة»** الرسائل الخاصة بالحساب، والتعديلات، و ضغطات لوحة مفاتيح الرد.
 - **عندما تظهر محادثة جديدة أو روبوت جديد**: احفظ ملفه الشخصي وما يصل إلى العدد المحدد من أحدث رسائله المرئية.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ar/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+القيود: لا يتلقى مجمع السحابة المنشور المحادثات السرية. تم توثيق [واجهة Pseudo-secret المنفصلة وعرضها التوضيحي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/secret-chats/) مع حالة تطويرها والعيوب المعلقة. لا يتم تسجيل أي شيء أثناء عدم تشغيل TgWitness؛ وبعد إعادة التشغيل، لا يلتقط سوى ما لا يزال Telegram يعيده، ويُظهر التقرير الفجوة. تُضاف المحادثات التي تتجاوز حد قائمة المحادثات (1,000 حوارًا ما لم يتم تغييرها في المعلمات) عندما تصبح نشطة في المرة التالية. أزرار الروبوت المضمنة التي يتم الضغط عليها في تطبيق آخر تكون غير مرئية؛ ويتم تسجيل رد الروبوت.
 
 ### المحادثات المشمولة
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | الإشعارات | المشاكل، والرسائل التي تم تعديلها، والملخص اليومي؛ روبوت التحكم الخاص بك | [أدناه](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#notifications) |
 | الأدلة والنسخ الاحتياطية | الطوابع الزمنية، والمزيد من الشهود، ونسخة مشفرة خارج الموقع | [أدناه](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#evidence-and-backups) |
 | الخادم يعمل على مدار الساعة طوال أيام الأسبوع | خادم سحابي بدون SSH، يتم إنشاؤه وحذفه من خلال لوحة التحكم | [ضمان عالي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/#from-the-panel) |
-| شاهد مستقل | الشيكات الموقعة التي يتم نشرها على قناتك على Telegram أو Discord | [Witness](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/) |
+| شاهد مستقل | الشيكات الموقعة التي يتم نشرها على قناتك على Telegram أو Discord | [الشاهد](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/) |
 | فحص الكود | يقارن البرنامج قيد التشغيل مع التزام GitHub عام | [أدناه](https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/#code-check) |
 
 ### الهدف ومستوى الحماية

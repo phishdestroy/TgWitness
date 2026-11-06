@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/showc
 
 通过有效期有限且可撤销的链接，发布所选公共频道的已保存消息和已签名的快照。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署与恢复](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署与恢复](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **“访问 → 公共展示**”功能利用现有的 访问令牌系统创建一个独立的只读页面。该功能读取安装实例中保存的观察记录，但不会 为访客启动采集器、登录 Telegram 或获取频道。
 

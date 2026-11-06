@@ -141,7 +141,7 @@ Copie programmate o manuali
 
 Copi subito oppure ogni 1－1.440 minuti， con l＇avanzamento nel pannello．
 
-Object Lock
+Blocco degli oggetti
 
 Scelga giorni e modalità di conservazione： il pannello verifica che siano davvero applicati．
 

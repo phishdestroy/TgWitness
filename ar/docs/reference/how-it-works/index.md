@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-i
 
 شرح سلسلة التجزئة والتوقيعات ونقاط التحقق والشهود باستخدام الصيغ الدقيقة التي يستخدمها المُحقق.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [الأدلة والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![الأدلة والتحقق](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 يحتفظ TgWitness بما رصده الحساب المجمع، ويربط تلك الملاحظات في سجل موقّع، ويسمح لشخص آخر بالتحقق من عملية التصدير باستخدام مفتاح موثوق ونقطة تحقق سابقة محفوظة.
 
 يضيف [موقع الوثائق المحلي](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) أمثلة تفاعلية في `/docs/concepts/`، ومستكشف قرارات نقاط الفحص في `/docs/witness/`، وإرشادات تفصيلية حول [«لوحة القضية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/)» [وتصميم التقارير](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/) [ومقتطفات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#handover-extract) [عملية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#handover-extract) [التسليم](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#handover-extract). جميع الرسائل النموذجية، وأعدادها، والتأخيرات المذكورة هي خيالية. يتم حساب التجزئات في بيئة الاختبار الخاصة بالسلسلة باستخدام خوارزمية SHA-256 في المتصفح. ولا يتم إرسال أي شيء إلى Telegram.
 
-**On this page**
+**في هذه الصفحة**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#pick-a-workflow)
+- [تغير الرسالة؛ تتراكم الملاحظات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [ما الذي يغطيه التجزئة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#what-a-hash-covers)
+- [ما يضيفه نقطة تفتيش سابقة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [مكان انتماء الشاهد](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#where-a-witness-belongs)
+- [اختبار التسليم مقابل الإجراءات المعروفة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [اختر مسار عمل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/#pick-a-workflow)
 
 ## تتغير الرسالة؛ وتتراكم الملاحظات
 

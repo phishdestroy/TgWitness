@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/conne
 
 احراز هویت، استخرهای خودکار پروکسی، حالت‌های IP، سیاست پشتیبان، درخواست‌های خارجی و ذخیره‌سازی مخفی.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 این سند رفتار و محدودیت‌های TgWitness 0.8.0 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش [«حساب‌ها و فرمت‌های جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/)» شروع کنید. برای سیاست‌های رویداد و رفتار راه‌اندازی مجدد، به بخش [«نحوه کارکرد جمع‌آوری»](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) مراجعه کنید.
 
@@ -123,19 +123,19 @@ MTProto پروتکل تلگرام است. Telethon کتابخانه کلاینت
 
 ****پارامترهای استخر خودکار****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+در **بخش پارامترها → MTProxy خودکار**، آستانه خرابی، زمان خنک‌سازی، چرخش برنامه‌ریزی‌شده، اشتراک‌گذاری پروکسی و تأخیر بازگشتی مجاز را پیکربندی کنید.
 
 | کنترل | پیش‌فرض |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| قطع اتصال‌ها قبل از جایگزینی | 3 دقیقه در 10 دقیقه |
+| پراکسی‌های امتحان‌شده در هر تلاش اتصال | 3 |
+| اولین / حداکثر استراحت پس از خرابی | 10 دقیقه / 6 ساعت |
+| چرخش برنامه‌ریزی‌شده | غیرفعال؛ در صورت خطا فعال شود |
+| حساب‌ها به ازای هر پروکسی | 0: ترجیحاً ورودی‌های جداگانه داشته باشید و در صورت نیاز آن‌ها را به اشتراک بگذارید. 1 را برای انتظار یک ورودی انحصاری تنظیم کنید. |
+| تاخیر قبل از بازگشت مستقیم مجاز | 10دقیقه؛ مخفی کردن آدرس هنوز امتناع می‌کند Direct |
+| تازهسازی فید / بررسی‌های انتقال | 60/10دقیقه؛ مقادیر فضای کاری اصلی برای استخر مشترک اعمال می‌شوند |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+پروکسی‌های مختلف، آدرس‌های خروجی متفاوتی را تضمین نمی‌کنند. این تنظیمات محدودیت‌های تلگرام را نادیده نمی‌گیرند و ناشناس بودن را اثبات نمی‌کنند.
 
 برای جایگزینی فهرست عمومی با کاتالوگ اپراتور خود، موارد زیر را برای بازنویسی پیکربندی کنید. این کار اشتراک‌های خارجی را به طور کامل غیرفعال می‌کند، حتی زمانی که آرایه `proxies` آن خالی باشد.
 

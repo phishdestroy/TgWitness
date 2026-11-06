@@ -8,7 +8,7 @@ Trabalhe com mensagens e alterações salvas, vincule suas descobertas às respe
 
 Guias ilustrados
 
-[### Case Board Mantenha as observações, citações exatas e notas da equipe interligadas.](https://phishdestroy.github.io/TgWitness/pt/docs/case-board/) [### Estúdio de Relatórios Escolha o material e um dos oito modelos de relatório.](https://phishdestroy.github.io/TgWitness/pt/docs/reports/) [### Compartilhamento de cópia Prepare um extrato assinado com os campos de que o destinatário precisa.](https://phishdestroy.github.io/TgWitness/pt/docs/handover/) [### Grupos de contas Analise as contas em conjunto e mantenha suas áreas de trabalho separadas.](https://phishdestroy.github.io/TgWitness/pt/docs/groups/)
+[### Painel de Casos Mantenha as observações, citações exatas e notas da equipe interligadas.](https://phishdestroy.github.io/TgWitness/pt/docs/case-board/) [### Estúdio de Relatórios Escolha o material e um dos oito modelos de relatório.](https://phishdestroy.github.io/TgWitness/pt/docs/reports/) [### Compartilhamento de cópia Prepare um extrato assinado com os campos de que o destinatário precisa.](https://phishdestroy.github.io/TgWitness/pt/docs/handover/) [### Grupos de contas Analise as contas em conjunto e mantenha suas áreas de trabalho separadas.](https://phishdestroy.github.io/TgWitness/pt/docs/groups/)
 
 [## Modos, cenários e níveis de evidência Escopos de coleta, limites de eventos, oito mecanismos de verificação e seis cenários fictícios de investigação.](https://phishdestroy.github.io/TgWitness/pt/guides/modes.html)
 
@@ -40,7 +40,7 @@ Configuração
 
 Coletar
 
-[Guia do painel](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/)[Como funciona a coleta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/)[Carregar histórico de origem](https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/)[Fluxos de trabalho e operações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/)[Modo de investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)[Recursos e limitações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
+[Guia do painel](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/)[Como funciona a coleta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/)[Chats secretos: implementação e demonstração](https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/)[Carregar histórico de origem](https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/)[Fluxos de trabalho e operações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/)[Modo de investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)[Recursos e limitações](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
 
 Arquivo e integrações
 

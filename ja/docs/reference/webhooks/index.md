@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/webho
 
 HMAC署名、再送信、配信ステータスを付加して、指定されたイベントをHTTPS受信先に送信します。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [アーカイブとの連携](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![アーカイブとの連携](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

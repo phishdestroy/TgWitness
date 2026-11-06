@@ -6,31 +6,31 @@ Kandungan ZIP yang disahkan, jenis rekod, resit proses, profil orang, salinan lu
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bukti & pengesahan](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness memelihara pemerhatian Telegram yang boleh dilihat oleh akaun dalam jurnal yang disahkan. Penerima boleh mengesahkan rekod yang disimpan, lampiran dan laporan dengan kunci pengumpul yang dipercayai, kemudian membandingkan jurnal dengan titik pemeriksaan yang disimpan secara bebas. Halaman ini menerangkan format, pemeriksaan dan bahan yang perlu disimpan untuk penyerahan.
 
-Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+Penerima boleh memulakan dengan **VERIFY.cmd** pada Windows: ia meminta ZIP asal dan cap jari kunci yang diperoleh secara bebas, memaparkan keputusan yang dijelaskan, dan menyimpan transkrip pengesahan berasingan. Lihat [pelancar pengesahan dan persekitaran larian mudah alih](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) untuk penyediaan dan had kepercayaan.
 
-**On this page**
+**Pada halaman ini**
 
-- [What is signed](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#what-is-signed)
-- [Comparing chat exports](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#comparing-chat-exports)
-- [Investigation handoff](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#investigation-handoff)
-- [Handover extract](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#handover-extract)
-- [Readable reports](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#readable-reports)
-- [Event canonicalization](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#event-canonicalization)
-- [Actor semantics](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#actor-semantics)
-- [Coverage: continuity, gaps and unobserved IDs](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
-- [Producer](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#producer)
-- [People profiles](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#people-profiles)
-- [Independent witness](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#independent-witness)
-- [Manifest and checkpoints](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#manifest-and-checkpoints)
-- [Verification scope](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)
-- [Attachments](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#attachments)
-- [Durable collection and process receipts (0.2)](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#durable-collection-and-process-receipts-02)
-- [RFC 3161 preparation and response verification (0.2)](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
-- [Optional records in evidence mode: drand and Telegram devices](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
+- [Apa yang ditandatangani](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#what-is-signed)
+- [Membandingkan eksport sembang](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#comparing-chat-exports)
+- [Serahan siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#investigation-handoff)
+- [Petikan penyerahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#handover-extract)
+- [Laporan yang boleh dibaca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#readable-reports)
+- [Kanonalisasi acara](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#event-canonicalization)
+- [Semantik pelaku](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#actor-semantics)
+- [Liputan: kesinambungan, jurang dan ID yang tidak diperhatikan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)
+- [Pengeluar](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#producer)
+- [Profil orang](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#people-profiles)
+- [Saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#independent-witness)
+- [Manifest dan checkpoint](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#manifest-and-checkpoints)
+- [Skop pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope)
+- [Lampiran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#attachments)
+- [Koleksi dan resit proses tahan lama (0.2)](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#durable-collection-and-process-receipts-02)
+- [Persiapan RFC 3161 dan pengesahan respons (0.2)](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)
+- [Rekod pilihan dalam mod bukti: drand dan peranti Telegram](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)
 
 ## Apa itu ditandatangani
 
@@ -40,27 +40,27 @@ Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZI
 | Kandungan ZIP bukti | `manifest.sig` menandatangani manif kanonik, yang menyenaraikan hash fail kandungan | Fail ZIP lengkap, termasuk manifes dan tandatangan |
 | Lampiran yang disimpan | SHA-256 dan kiraan bait dalam acara `media.saved` yang ditandatangani; hash fail dalam manifes ZIP yang ditandatangani | Byte asal di dalam ZIP yang disahkan |
 | Pemeriksaan | Tandatangan Ed25519 merangkumi keseluruhan jurnal, hash kepala, kunci awam, dan masa penciptaan | Salinan bebas yang disimpan sebelum perubahan yang dipertikaikan |
-| Resit pelaksanaan | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
+| Resit pelaksanaan | Rekod berasingan versi pengumpul, hash fail sumber dan tetapan permulaan, juga disertakan dalam `process.started` | Resit, jurnal berkaitan dan bukti persekitaran untuk mod pengesahan yang dipilih |
 | Laporan yang boleh dibaca: `report.html` dan bahagian-bahagiannya, `report.json`, `report.pdf`, `chat.pdf` | Setiap fail disegel dengan cap Ed25519; PDF juga membawa tandatangan piawai PDF (lihat [Laporan boleh dibaca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#readable-reports)) | Fail seperti yang diterima dan cap jari kunci dipercayai; ZIP yang diterangkan |
 | CSV berdiri sendiri | Tiada tandatangan kriptografi berdiri sendiri; hash peristiwa sahaja tidak mencukupi | Gunakan salinan tepat di dalam fail ZIP yang disahkan untuk pemeriksaan integriti |
 | Skrinshot, cetakan, atau PDF yang dihasilkan oleh pelayar | Tiada tandatangan TgWitness pada derivatif | Simpan pakej asal yang disahkan dan dokumentasikan bagaimana derivatif itu dibuat |
 
 Pengumpul mengesahkan tandatangan jurnal sebelum menjana setiap format eksport. Laporan HTML dan PDF yang boleh dibaca mempunyai meterai masing-masing; CSV berdiri sendiri diperiksa sebagai sebahagian daripada ZIP yang ditandatangani. Simpan ZIP untuk mengekalkan bait lampiran dan manifes, serta titik pemeriksaan berasingan untuk menyemak jurnal dengan sempadan terdahulu.
 
-## Comparing chat exports
+## Membandingkan eksport sembang
 
-Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+Sahkan dan bandingkan dua ZIP eksport sembang yang ditandatangani dengan cap jari penandatangan yang disimpan secara berasingan:
 
 ```
 python -m tgwitness.verify first.zip --compare second.zip \
   --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
 ```
 
-When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+Apabila kedua-dua arkib merekodkan ID akaun dan sembang numerik yang sama, rekod dipadankan oleh ID mesej. **Tidak berubah** bermaksud kesamaan rekod JSON yang disimpan sepenuhnya: teks penuh, pengarang, tarikh, sasaran balasan, metadata bersarang dan medan tidak diketahui semuanya disertakan. Susunan kunci objek JSON tidak penting; medan yang tiada, nilai null, jenis nilai dan susunan senarai adalah penting. Pratonton 300 aksara hanya untuk paparan. Kemasukan yang diubah dinamakan `changed_fields` aras atas yang berbeza, termasuk perubahan yang tidak kelihatan dalam pratonton tersebut. ID mesej ganda ditolak dan bukannya saling menimpa semasa padanan.
 
-A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+Perbezaan boleh berupa nama paparan yang diubah, bilangan tontonan, anotasi koleksi atau metadata pemerhatian lain. Ia sendiri tidak menetapkan penyuntingan Telegram, mengenal pasti siapa yang membuat perubahan, atau membuktikan arkib bertentangan yang tepat. Rekod yang belum diparsing kekal dalam perbandingan; kesaksamaan representasi yang disimpannya tidak bermakna muatan Telegram mereka telah didekod.
 
-For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
+Untuk identiti akaun/perbualan yang berbeza atau hilang, alat ini hanya mencari padanan yang mungkin menggunakan penghantar, teks lengkap, hash fail, jenis media dan toleransi masa lima saat. Ia melaporkan **'Matched'**, bukan **'Unchanged**'. Calon-calon ini tidak menetapkan identiti mesej atau kesetaraan semua metadata. Rekod yang tidak diparsekalkan kekal tidak dipadankan. Perbezaan dalam rekod berpasangan kekal disenaraikan dalam `changed`, termasuk dalam mod kandungan; perbezaan ini tidak membuktikan pengeditan pada mesej yang sama. Dengan `--json`, `matched` mengira pasangan dan `unchanged` mengira pasangan yang rekod simpanannya lengkap dan sama. Tiada satu pun kiraan ini membuktikan identiti mesej dalam mod kandungan. Keluaran `changed_fields` dan integer `unchanged` sedia ada kekal serasi dengan keputusan perbandingan terdahulu. Format arkib dan pengesahan tandatangan tidak berubah.
 
 ## Penyerahan siasatan
 
@@ -103,7 +103,7 @@ Bukti bertandatangan, handover dan fail ZIP sembang mengandungi laporan HTML dan
 
 Dalam saluran atau superkumpulan, Telegram menyusun nombor mesej 1, 2, 3… mengikut urutan. Eksport sembang menyenaraikan nombor pertama dan terakhir, berapa banyak yang hadir dan setiap siri nombor yang tiada dalam `message-ids.json` , manifes dan tajuk `chat.json` , serta menandakan setiap jurang di mana ia terletak dalam transkrip. `verify.py` menyenaraikannya semula daripada `chat.json` . Nombor yang tiada ialah mesej yang tidak dikembalikan oleh Telegram (dihapuskan sebelum eksport, atau tidak dapat dilihat oleh akaun); dalam sembang peribadi dan kumpulan asas, nombor dikongsi oleh semua sembang dalam akaun dan jurang tidak dikira.
 
-After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
+Selepas membaca sejarah, eksport meminta semula setiap nombor yang tiada daripada Telegram, mengikut nombor (`channels.getMessages`, sehingga 10,000 nombor). Keputusannya terdapat dalam `message-ids.json` dan laporan. Jawapan kosong merekodkan bahawa nombor tersebut tidak tersedia untuk akaun ini pada masa semakan semula; ia tidak menyatakan puncanya. Sebarang mesej yang dikembalikan semasa semakan semula akan ditambah ke dalam eksport dan ditandakan dengan `found_on_recheck`.
 
 Setiap laporan dibuka dengan **Secara ringkas**: satu perenggan, kemudian apa yang ditunjukkan oleh bahan tersebut dan apa yang tidak (siapa di sebalik akaun, kelengkapan penghantaran, pemadaman sebelum pemerhatian, masa jam tanpa cap masa). Cop meterai pada halaman itu sendiri bertukar menjadi amber apabila pelayar mengesahkan tandatangan meterai, bukan halaman: pelayar tidak memberikan halaman itu baitnya sendiri. Ia bertukar hijau hanya apabila pembaca meletakkan fail ke dalam pemeriksaan di hujung halaman dan setiap bait sepadan, dan hanya jika halaman yang dipaparkan adalah fail tersebut; jika tidak, ia bertukar merah.
 
@@ -159,9 +159,9 @@ message.new actor_id ialah penghantar mesej. message.edited tiada penyunting yan
 
 Notifikasi pemadaman untuk sembang peribadi dan kumpulan biasa hanya mengandungi ID mesej. Sembang-sembang tersebut berkongsi satu urutan ID untuk seluruh akaun, jadi satu ID mengenal pasti satu mesej tunggal bagi akaun ini. Apabila mesej dengan ID tersebut disimpan sebelum ini dalam jurnal ini, pemadaman itu direkodkan dalam sembang tersebut sebagai message.deleted dengan payload.chat_resolution yang menamakan kaedah tersebut. ID yang tidak pernah disimpan disimpan sebagai deletion.unscoped tanpa chat_id; tiada apa-apa yang diandaikan. Saluran dan superkumpulan mengira bilangan mesej bagi setiap sembang dan tidak pernah dipadankan dengan cara ini. Apabila mesej yang dipadam dihantar oleh akaun yang diperhatikan, payload.deleted_message_was_outgoing adalah benar; pemadam masih tidak disertakan.
 
-An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+Notis tanpa skop tidak menetapkan bahawa mesej tidak pernah disimpan: sembang yang sepadan mungkin berada di luar skop pemerhatian semasa, atau padanan unik mungkin tidak tersedia. Semakan semula ketiadaan kekal sebagai pemerhatian berasingan daripada pemberitahuan pemadaman dalam kiraan laporan, penapis dan label. Pemulihan kemudian membersihkan status hilang semasa sambil mengekalkan semakan tidak berjaya terdahulu dalam sejarah yang disahkan; tiada satu pun pemerhatian menetapkan pemberitahuan pemadaman.
 
-Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+Beberapa ID yang diselesaikan ke sembang yang sama daripada satu pemberitahuan digolongkan sebagai `deletion.batch`, tanpa mengira bilangannya. Pemberitahuan itu tidak menyatakan bahawa keseluruhan sejarah telah dipadamkan, siapa yang melakukan pemadaman, atau sama ada ia terpakai kepada semua peserta. Mesej keluar yang disimpan tidak mengubah had ini. Jurnal lama mungkin mengandungi acara `history.cleared` yang disimpulkan daripada kelompok sepuluh atau lebih ID, dengan teks penjelasan yang menyabitkan pemadaman itu kepada peserta lain. Kesimpulan tersebut tidak disokong oleh kemas kini ini. Pelihara rekod tandatangan asal tersebut, tetapi anggap ia sebagai pemberitahuan pemadaman berkumpulan; antara muka semasa menandanya dengan sewajarnya.
 
 ## Liputan: kesinambungan, jurang dan ID yang tidak diperhatikan
 
@@ -197,13 +197,13 @@ Kesahihan diperoleh daripada jurnal, tidak pernah diandaikan:
 
 `verify.py` mengira semula `gap_summary` daripada `events.jsonl` dengan parameter dalam jurnal yang ditandatangani `coverage.json` ahli (tetapan lalai untuk arkib lama) dan mencetak baris merentas akaun dalam ringkasan liputannya. Arkib tersebut `get_capture_status`(MCP dan baris perintah) mengembalikan ukuran yang sama untuk sembang yang boleh dibaca oleh capaian; urutan merentas akaun hanya untuk capaian yang merangkumi keseluruhan ruang kerja.
 
-Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
+Pengamatan berulang bagi satu mesej perkhidmatan dikira sekali, dan anggaran perkhidmatan akaun hanya menggunakan nombor dalam julat yang diukur. Skop yang digunakan mesti mengekalkan mesej akaun itu sendiri secara eksplisit sebelum pengukuran merentas akaun diaktifkan; rekod lama tanpa maklumat tersebut tidak dapat menetapkan syarat ini. Pengamatan yang dihentikan tidak memanjangkan julat yang diukur, dan memulakannya semula dicatatkan. Permintaan arkib langsung mempunyai bajet masa, termasuk imbasan pangkalan data, dan menandakan pengukuran yang belum selesai sebagai separa.
 
-Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
+Telegram mendokumenkan [urutan ID mesej yang berasingan](https://core.telegram.org/api/updates#message-id-sequences). Nombor-nombor ini menerangkan pemerhatian; ia tidak mengenal pasti pelaku pemadaman atau menentukan mengapa sesuatu nombor tiada.
 
 Apabila Telegram berhenti menerima akaun, rekod `coverage.gap` yang menamatkan pemerhatian membawa `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` atau `not_authorized`) dan ralat Telegram; `verify.py` menamakan punca di mana tempoh itu berakhir.
 
-Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
+Liputan menggabungkan tempoh pemerhatian yang direkodkan, gangguan dan hasil mesej. Nilai ia bersama sembang terpilih, tempoh dan dasar lampiran; operasi berterusan sahaja tidak mengesahkan penghantaran penuh kemas kini Telegram.
 
 ## Pengeluar
 
@@ -231,27 +231,27 @@ Jurnal saksi (`tgwitness-witness-v1`) dan kiriman saluran beliau disemak menenta
 
 manifest.json merangkumi format, masa eksport, kunci awam, cap jari, panjang jurnal, hash kepala, skop, pengeluar, had, dan SHA-256 bagi setiap ahli kandungan selain `manifest.json` dan `manifest.sig` itu sendiri. manifest.sig ialah tandatangan Ed25519 base64 ke atas JSON manifest kanonik. Pemverifikasi menolak ahli yang tidak dijangka/hilang, nama duplikat, fail rosak, urutan/rantaian terputus, tandatangan tidak sah, dan ketidakpadanan dengan checkpoint yang disediakan. Ia tidak pernah mengekstrak laluan arkib. Ia mengehadkan saiz keseluruhan yang diisytiharkan tanpa mampatan kepada 4 GiB; `--max-gib N` membenarkan arkib yang lebih besar yang dibuat dengan had **Parameter** yang ditingkatkan.
 
-Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
+Jalankan pengesahan daripada versi TgWitness yang dipasang atau keluaran semakan. Salinan yang disertakan dalam arkib menyokong penggunaan mudah alih; semak salinan itu dengan pemasangan anda yang dipercayai sebelum menjalankannya.
 
-A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
+Satu checkpoint menandatangani kenyataan yang mengandungi kunci awam, panjang jurnal, hash kepala, dan masa penciptaan. Pengesah boleh memeriksa bahawa arkib kemudian mengandungi pendahuluan yang sama. Kekalkan checkpoint di luar pengumpul, supaya pengesahan kemudian membandingkan arkib dengan rujukan yang disimpan secara berasingan daripadanya.
 
 ## Skop pengesahan
 
-Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
+Pengesahan memeriksa arkib dan mod pengumpulan yang digunakan untuk menjana ia. Pilih mod yang sempadan kepercayaannya sepadan dengan kes, kemudian simpan input pengesahannya.
 
 | Mod pengumpulan | Apa yang diperiksa oleh pengesah | Input pengesahan dan sempadan kepercayaan |
 | --- | --- | --- |
-| Ruang kerja tempatan | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
-| Ruang kerja tempatan dengan saksi bebas | Arkib memeriksa dan memadankan dengan awalan jurnal terdahulu yang disimpan oleh saksi | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
-| [Tangkapan GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
-| [Penyebaran awan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
-| [VM sulit Intel TDX](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
+| Ruang kerja tempatan | Rekod tandatangan, rantaian hash, manifes dan bait lampiran | Cap jari pengumpul yang disimpan secara bebas; pentadbir hos mengawal kunci tandatangan tempatan |
+| Ruang kerja tempatan dengan saksi bebas | Arkib memeriksa dan memadankan dengan awalan jurnal terdahulu yang disimpan oleh saksi | Pisahkan kunci saksi dipercayai dan rekod; titik pemeriksaan mengikat awalan yang telah diperhatikan |
+| [Tangkapan GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | Pengesahan GitHub bagi digest arkib, aliran kerja yang diluluskan dan komit pengumpul, pelaksana hos, asal sesi/kunci baharu dan integriti arkib dalaman | Dasar pengesah dipercayai, repositori penelefon dan bundel pengesahan GitHub; pengumpulan dijalankan di bawah aliran kerja yang dipin |
+| [Penyebaran awan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/) | Kitar hayat penyedia dan rekod akses, status firewall dan Cloudflare, serta rekod larian berasingan pengumpul yang disahkan | Permintaan baca sahaja kepada penyedia dan Cloudflare; ketersediaan pemeriksaan individu bergantung pada penyedia |
+| [VM sulit Intel TDX](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Petik tandatangan dan status platform, pengikatan kepada pernyataan pengumpul, susun dan pengukuran OS | Rantaian kepercayaan Intel dan ukuran penyebaran yang dijangka; kekalkan keputusan setiap pemeriksaan TDX yang diperlukan |
 
-In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
+Dalam pemerolehan bermeterai, pengumpul yang diluluskan menerima data melalui sambungan Telegram yang disahkan dalam persekitaran yang disahkan. Pengesahan mengikat arkib kepada pelaksanaan tersebut, jadi pengesahan merangkumi pemerolehan serta integriti fail kemudian. Ini bergantung pada kod yang diluluskan dan rantaian kepercayaan platform yang disenaraikan di atas. Pengesahan tangkapan GitHub memerlukan sesi yang dibuat dalam pelaksanaan dan menolak tangkapan sesi yang diimport.
 
-The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) identifies tested configurations.
+Resit pelaksanaan merekodkan versi pengumpul, hash fail dan tetapan permulaan. Provenans GitHub dan pengukuran TDX menyediakan semakan persekitaran; [rekod pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/) mengenal pasti konfigurasi yang diuji.
 
-TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
+TgWitness menandatangani pemerhatian yang dikumpulkannya; Telegram dan pengarang mesej tidak mengeluarkan tandatangan ini. Dalam ruang kerja tempatan, bahan yang dihasilkan sebelum titik pemeriksaan bebas pertama masih bergantung kepada pengumpul dan pemegang kuncinya. Rekod liputan menerangkan skop yang dipilih dan hasil pengumpulan, manakala cap masa luaran yang disahkan menetapkan sempadan arkib atau jurnal yang telah disimpan pada masa tertentu.
 
 ## Lampiran
 
@@ -265,9 +265,9 @@ Eksport sembang penuh menyimpan lampiran dalam tetapan lampiran ruang kerja ke d
 
 Satu job media dan acara pesannya disimpan dalam satu transaksi. Tugas ini menyimpan deskriptor mesej TL asal; pemerhatian yang disahkan mengikat SHA-256, akaun, dan dasar saiznya. Pemulihan mengesahkan ikatan tersebut sebelum memuat turun. Ia tidak pernah mengambil mesej semasa dan secara senyap menggantikan lampiran yang lebih baru. Tugas yang terhenti akan dicuba semula, manakala kegagalan kekal kekal sebagai hasil yang nyata.
 
-Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope).
+Setiap ruang kerja mempunyai jurnal dan identiti tandatangan tersendiri. Peristiwa process.started merangkumi ID larian, jam tempatan, versi kebergantungan, has ratah sumber, akaun/skop awal, dan tetapan rakaman. Denyutan jantung merangkumi ID larian, masa monotonik, dan status barisan. Risit pelaksanaan juga boleh dimuat turun sebagai kenyataan yang ditandatangani secara berasingan. Untuk pengesahan persekitaran pelaksanaan, padankan ia dengan pengesahan GitHub atau semakan TDX yang diterangkan dalam [Skop Pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope).
 
-Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
+Titik pemeriksaan automatik disimpan secara tempatan semasa permulaan, setiap lima minit semasa memerhati (**Parameter → Titik pemeriksaan berasingan setiap**), dan semasa pemberhentian yang teratur. Pengesahan permulaan dan eksport membandingkan jurnal dengan titik pemeriksaan tempatan terkini yang disimpan. Ini boleh mengesan pengunduran pangkalan data apabila titik pemeriksaan masih wujud. Penyimpanan bebas memastikan rujukan tersebut tersedia di luar ruang kerja; cap masa luaran yang disahkan juga mengukuhkan kedudukannya dari segi masa.
 
 Selepas dihidupkan semula, kedudukan kemas kini Telegram yang disimpan akan disambung semula (`catch_up_from` dalam `observation.started`) dan kemas kini yang terlepas akan diminta. Semakan semula berkala merekod `message.recovered` untuk mesej yang terlepas dan `message.missing_on_recheck` apabila Telegram tidak lagi memulangkan mesej yang disimpan; yang terakhir bukan notis pemadaman dan tidak menyatakan nama pemadam atau masa.
 

@@ -57,7 +57,7 @@ Oddzielny pakiet powiązany z granicą źródłowego dziennika
 | Osoby | Wybrane osoby pozostają z nazwiskiem, pozostałe dostają pseudonimy albo są pomijane. |
 | Tekst | Cały tekst, tylko tekst wybranych osób i Twojego konta albo żaden. |
 | Pliki | Pliki wybranych osób i Twojego konta, wszystkie pokazane pliki albo żadne. |
-| Case Board | Nic, zakładki i wycinki albo karty z dyskusją. |
+| Tablica spraw | Nic, zakładki i wycinki albo karty z dyskusją. |
 
 Przeczytaj też tekst i pliki: pseudonim nie usuwa nazwisk zapisanych w treści wiadomości czy załącznika. Jeśli brakuje wybranego pliku, przywróć go albo pomiń załączniki.
 

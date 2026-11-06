@@ -6,22 +6,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/histo
 
 [टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [संग्रह](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![संग्रह](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
-In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
+**स्रोतों** में, सक्षम चैट की समीक्षा करें, अवलोकन को रोकें, मानक एपीआई या टेकआउट एक्सपोर्ट चुनें, फिर **पूरा इतिहास लोड करें** चुनें। रन उस स्रोतों की सूची को ठीक करता है और उनके उपलब्ध पिछले संदेशों को चैट्स और हस्ताक्षरित अवलोकन जर्नल में पढ़ता है। मीडिया मौजूदा अटैचमेंट सेटिंग्स और स्थायी डाउनलोड कतार का उपयोग करता है। यह प्रत्येक चैट के लिए हस्ताक्षरित JSON/HTML एक्सपोर्ट से अलग है।
 
-For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+खाते-व्यापी संग्रह के लिए, **'पूरा खाता'** चुनें, इसकी स्रोत सूची लोड करने के लिए अवलोकन शुरू करें, और इतिहास शुरू करने से पहले उस सूची की समीक्षा करें। डायलॉग-सूची की सीमा अभी भी लागू होती है (डिफ़ॉल्ट रूप से 1,000, पैरामीटर में समायोज्य)। एक सफल रन यह साबित नहीं करता कि हर खाते के डायलॉग को सूचीबद्ध किया गया था। बाद में खोजी गई या सक्षम की गई चैट्स के लिए एक और रन की आवश्यकता होती है। इतिहास शुरू करने से पहले अवलोकन को रोकें; एक अधिग्रहण एक समय में एक खाते को संभालता है।
 
-Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
+एक से पाँच अटैचमेंट वर्कर्स चुनें और यह भी चुनें कि उपलब्ध हालिया क्रियाओं को संरक्षित करना है या नहीं और पहले से सहेजे गए संस्करणों की तुलना करनी है। टेकआउट के लिए टेलीग्राम में अनुमोदन और सर्वर-निर्दिष्ट प्रतीक्षा की आवश्यकता हो सकती है। ये विकल्प फिर से शुरू करने पर स्थिर रहते हैं। परिवहन, पुनः प्रयास और विश्वास विवरण के लिए [बैकफिल व्यवहार और साक्ष्य अनुबंध](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) देखें।
 
 ## विराम, पुनरारंभ और आंशिक परिणाम
 
-- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
+- **विराम इतिहास** पढ़ना रोक देता है। **जारी रखें प्रत्येक स्रोत में अंतिम committed संदेश से इतिहास को** फिर से शुरू करता है; ऐप को फिर से शुरू करने पर भी रन तब तक रुका रहता है जब तक कि उसे फिर से शुरू न किया जाए। फिर से शुरू करने के लिए उसी निष्क्रिय Telegram खाते की आवश्यकता होती है।
 - संदेश अवलोकन, अटैचमेंट जॉब और कर्सर कमिट एक ही लेनदेन में। एक फिर से शुरू किया गया रन अपने पहले से कमिट किए गए अवलोकनों को दोहराता नहीं है। लाइव कैप्चर या एक अलग, स्पष्ट रूप से शुरू किया गया रन स्वतंत्र रूप से उसी संदेश का अवलोकन कर सकता है।
-- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
+- प्रत्येक स्रोत (Takeout में प्रत्येक टेलीग्राम स्प्लिट रेंज) अपने पहले रीड पर एक ऊपरी मैसेज आईडी निर्धारित करता है। नए संदेश लाइव अवलोकन से संबंधित हैं, न कि उस स्रोत के शेष ऐतिहासिक पृष्ठों से।
 - पहुँच से बाहर के स्रोत और अधिग्रहण के दौरान अक्षम किए गए स्रोत 'असफल' या 'छूटा हुआ' के रूप में दिखाई देते रहते हैं। अन्य स्रोत जारी रहते हैं; कुल परिणाम अधूरा रहता है।
-- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
-- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
+- FloodWait विलंब सहेजे गए खाते के बैकऑफ़ का सम्मान करते हैं। अस्थायी विफलताएँ पाँच बार तक पुनः प्रयास करती हैं; संसाधन समाप्त होने और डिस्क स्थान कम होने पर कर्सर बरकरार रहते हुए प्रक्रिया रुकी रहती है।
+- **इतिहास रन समाप्त करने पर** सहेजे गए अवलोकन सुरक्षित रहते हैं। यह उन्हें हटाता नहीं है या मानक-API अटैचमेंट जॉब्स को रद्द नहीं करता है। टेकआउट समाप्त करने पर इसकी शेष टेकआउट फाइलों को स्किप्ड के रूप में चिह्नित कर दिया जाता है; रोकने पर वे फिर से शुरू करने योग्य बनी रहती हैं। एक नया रन सक्षम स्रोतों को फिर से पढ़ता है।
 
 इतिहास पूर्ण होने का अर्थ केवल इतिहास पढ़ना है। अटैचमेंट लंबित रह सकते हैं, विफल हो सकते हैं, या कॉन्फ़िगर की गई नीति द्वारा बाहर रखा जा सकते हैं। जर्नल और अटैचमेंट कतार में मीडिया रसीदों की जाँच करें; केवल संरक्षित बाइट्स वाली एक पूरी हुई रसीद ही एक सहेजा गया अटैचमेंट बनाती है। इतिहास संचालन एक स्पष्ट स्नैपशॉट अनुरोध है और यह भविष्य के लाइव घटनाओं की श्रेणियों का चयन करने वाले स्विच से अलग है।
 
@@ -33,8 +33,8 @@ Choose one to five attachment workers and whether to preserve available Recent A
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
+अपेक्षित साइनिंग-की फिंगरप्रिंट को स्वतंत्र रूप से बनाए रखें। सत्यापनकर्ता रिपोर्ट हस्ताक्षर, साक्ष्य संग्रह, रिपोर्ट चेकपॉइंट, स्रोत योजना, खाते और सहेजे गए/अनुपलब्ध संदेशों की गिनती की जाँच करता है। नए रन स्रोत प्रगति और विकल्पों को हस्ताक्षरित कर्सर इवेंट्स से भी जोड़ते हैं। `--evidence` के बिना, यह केवल हस्ताक्षरित रिपोर्ट और उसकी आंतरिक संगति की जाँच करता है। लेगेसी प्रगति फ़ील्ड और अटैचमेंट सारांश हस्ताक्षरित कलेक्टर स्टेटमेंट बने रहते हैं। साक्ष्य सत्यापनकर्ता संग्रहीत मीडिया बाइट्स की जाँच करता है।
 
-Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
+उपलब्ध इतिहास पर हस्ताक्षर करने या उसे समाप्त करने से टेलीग्राम की उत्पत्ति, एक परमाणु स्नैपशॉट, या ऐतिहासिक पूर्णता का प्रमाण नहीं मिलता। संदेश पढ़ते समय बदल सकते हैं; हटाए गए संदेश और उपलब्ध हालिया क्रियाओं (Recent Actions) और गुप्त चैट (Secret Chats) के बाहर के मध्यवर्ती संपादन पुनर्प्राप्त नहीं होते हैं। हस्ताक्षर कुंजी को नियंत्रित करने वाला एक ऑपरेटर, बाहरी प्रतिबद्धताएं मौजूद होने से पहले एक जर्नल तैयार कर सकता है। प्रलेखित छेड़छाड़-पहचान गुणों के लिए अलग से रखे गए चेकपॉइंट या एक स्वतंत्र गवाह का उपयोग करें।
 
 अधिग्रहण कर्सर स्थानीय कार्यक्षेत्र की स्थिति है। केवल साक्ष्य ZIP को पुनर्स्थापित करने से लंबित अधिग्रहण कार्य या टेलीग्राम सत्र पुनर्स्थापित नहीं होता है। यदि मूल कार्य को जारी रखने की आवश्यकता हो तो कार्यक्षेत्र का बैकअप रखें।

@@ -25,7 +25,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/concepts/
 
 01 / ШЛЯХ ПОВІДОМЛЕННЯІлюстративна послідовність
 
-Telegram delivers an update to the collector, which appends a journal record. · Telegram · Collector · Журнал · оновлення → · додати →
+Telegram delivers an update to the collector, which appends a journal record. · Telegram · Колектор · Журнал · оновлення → · додати →
 
 ПЕРЕГЛЯД ПОТОЧНОГО ЧАТУ Повідомлення № 42
 

@@ -14,7 +14,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/witness/
 
 ← طلب إجابة موقعة →
 
-HOST B / WITNESS**التحقق + الاحتفاظ**
+المضيف ب / الشاهد**التحقق + الاحتفاظ**
 
 بصمة المجمع المثبتة ومفتاح التوقيع المنفصل لـ Witness
 

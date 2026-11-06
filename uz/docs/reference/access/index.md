@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/acces
 
 Hisoblar va suhbatlarga cheklangan kirish huquqini bering, ruxsatlarni tanlang, sessiyalar va IP-manzillarni cheklang hamda kirishni bekor qiling.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Boshlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Boshlash](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 Ko'rib chiquvchiga bitta suhbatga, tahlilchiga ishni eksport qilishga yoki operatorga tanlangan hisoblarni boshqarishga ruxsat bering. Har bir kishiga o'z tokeni beriladi. Asosiy panel tokeni administrator qo'lida qoladi.
 
@@ -110,6 +110,6 @@ Kirishni berish, o'zgartirish va bekor qilish hamda sessiyalarni boshlash yoki y
 
 ****Asosiy administrator va ishonch chegarasi****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+Asosiy token cheklovsiz qoladi. U bilan brauzer orqali tizimga kirish administrator sozlagan sessiya cheklovlariga bo'ysunadigan sessiyalarni yaratadi. Asosiy tokenni to'g'ridan-to'g'ri yuboradigan skriptlar to'liq kirish huquqini saqlab qoladi va brauzer sessiyalari sifatida hisobga olinmaydi.
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+Bu bitta o'rnatmada ilova darajasidagi kirish nazoratidir. Barcha ish maydonchalari server jarayonini baham ko'radi; bu mezbon ma'muridan izolyatsiya emas. Asosiy token, Telegram sessiyalari, imzolash kalitlari va ma'lumotlar katalogini maxfiy saqlang. Witness token alohida tekshiruv nuqtasi/sog'liq guvohnomasi bo'lib, panelga kirish tokeni emas.

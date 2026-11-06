@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/webho
 
 إرسال الأحداث المحددة النطاق إلى مستقبلات HTTPS مع توقيعات HMAC، وإعادة المحاولة، وحالة التسليم.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تكاملات الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![تكاملات الأرشيف](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

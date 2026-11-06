@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/featu
 
 מודל האיסוף הנוכחי, תהליכי עבודה עם חשבונות מרובים, ייצוא ומגבלות תפעוליות של TgWitness.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [הפניה לפרויקט](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![הפניה לפרויקט](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness משמרת שיחות Telegram הנגישות לחשבונות מחוברים, מתעדת שינויים שנצפו ומכינה ייצוא הניתן לאימות. מסמך זה מתאר את מודל האיסוף, את תהליכי העבודה הנוכחיים ואת מגבלותיהם.
 
-**On this page**
+**בעמוד זה**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#stable-release-criteria)
+- [יישום עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#standalone-application)
+- [חקירות משותפות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#shared-investigations)
+- [כלי ארכיון](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#archive-tools)
+- [תוספות אופציונליות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#optional-extras)
+- [פרוטוקול ומקורות פרטיים](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#protocol-and-private-sources)
+- [חשבונות מרובים](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#multiple-accounts)
+- [תיעוד וייחוס](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#capture-and-attribution)
+- [קיבולת ומגבלות Telegram](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#capacity-and-telegram-limits)
+- [אמינות ושחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#reliability-and-recovery)
+- [מודל הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#evidence-model)
+- [ייצוא, פריסה והעברה](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#export-deployment-and-handoff)
+- [קריטריונים לגרסה יציבה](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/#stable-release-criteria)
 
 ## יישום עצמאי
 
@@ -93,9 +93,9 @@ MTProxy האוטומטי מתחזק נתיבי טלגרם פעילים מארב�
 | פעולות מנהל | עדכונים רלוונטיים שנמסרו ותמונת מצב של יומן המנהל בייצוא צ'אטים מערוצים/קבוצות-על | הייצוא קורא את היומן כאשר הוא זמין לחשבון המנהל המייצא; סריקה רציפה של יומן המנהל אינה כלולה בתהליך זה |
 | קובץ מצורף | תיאור הגרסה המקורית, בייטים שהורדו/SHA-256 ותוצאות הניסיונות | קובץ שנמחק עשוי להיות בלתי ניתן לשחזור; הגרסה האחרונה אינה מוחלפת |
 | היסטוריה | תמונת מצב מפורשת של ההודעות הגלויות כרגע | אינו משחזר את כל העריכות או התכנים שנמחקו |
-| תהליך האיסוף | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) |
+| תהליך האיסוף | הפעלה/כיבוי, פעימות, שגיאות, הגדרות, היקף ואישור ריצה חתום | מלאי מקומי; GitHub ו-TDX מוסיפים [בדיקות סביבה בלתי תלויות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+הממשק מציין את שם החשבון שסופק באירוע המקור ושומר על השמות ושמות המשתמש שנצפו. כאשר האירוע אינו מציין את מבצע הפעולה, הדוח משאיר שדה זה ללא ציון.
 
 ## קיבולת ומגבלות טלגרם
 

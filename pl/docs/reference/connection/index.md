@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/conne
 
 Uwierzytelnianie, automatyczne pule serwerów proxy, tryby adresów IP, zasady rezerwowe, żądania zewnętrzne oraz przechowywanie kluczy tajnych.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Wdrażanie i przywracanie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Wdrażanie i przywracanie](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Niniejszy dokument opisuje działanie programu TgWitness w wersji 0.8.0 oraz jego ograniczenia. Uwierzytelnianie, dostęp do źródła, łączność sieciowa oraz kompletność przechwytywania stanowią odrębne stany. W przypadku procedur logowania, formatów plików oraz obsługi wielu kont proszę zapoznać się najpierw z sekcją [„Konta i formaty sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/)”. Informacje na temat zasad dotyczących zdarzeń oraz zachowania po ponownym uruchomieniu można znaleźć w sekcji [„Jak działa gromadzenie danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/)”.
 
@@ -123,19 +123,19 @@ W przypadku usług prywatnych zarządzanych przez operatora istniejące ustawien
 
 ****Parametry automatycznego puli****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+W sekcji **Parametry → Automatyczny MTProxy** skonfiguruj próg awarii, czas oczekiwania, planowaną rotację, współdzielenie serwerów proxy oraz dopuszczalne opóźnienie przełączania awaryjnego.
 
 | Kontrola | Domyślnie |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Rozłącza się przed zastąpieniem | 3 w ciągu 10 minut |
+| Liczba serwerów proxy wypróbowanych przy każdej próbie nawiązania połączenia | 3 |
+| Pierwszy / maksymalny czas przerwy po awarii | 10 minut / 6 godzin |
+| Planowana rotacja | Wyłączone; włączyć w razie awarii |
+| Liczba kont na serwer proxy | 0: preferuj oddzielne wpisy, łącz je w razie potrzeby. Ustaw 1 na oczekiwanie na wpis wyłączny. |
+| Opóźnienie przed dozwolonym bezpośrednim przełączeniem na rezerwę | 10 minut; Ukrycie adresu nadal nie działa Direct |
+| Odświeżanie kanału / kontrole transmisji | Protokoły 60 / 10; wartości głównego obszaru roboczego mają zastosowanie do puli współdzielonej |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Różne serwery proxy nie gwarantują różnych adresów wyjściowych. Te ustawienia nie obejdą limitów Telegrama ani nie zapewnią anonimowości.
 
 Aby zastąpić publiczną listę własnym katalogiem operatorów, skonfiguruj poniższe nadpisanie. Powoduje to całkowite wyłączenie subskrypcji zewnętrznych, nawet jeśli tablica `proxies` jest pusta.
 

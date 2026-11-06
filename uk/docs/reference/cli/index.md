@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Інтеграції з архівами](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP тільки для читання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/) · [Повнотекстовий пошук](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 Дати вказано у форматі `2026-10-01` (північ за UTC) або час у форматі ISO із зазначенням часового поясу, `2026-10-01T09:00+03:00`. Щодо `search`, `messages` та `export` вони вибирають час спостереження. Сторінки вміщують до 50 записів: дотримуйтесь `next_offset` (`--offset`) для пошуку за рейтингом та `next_before` (`--before`) в інших розділах.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+Ранжований пошук зупиняється на 1,000 результатах. Остання сторінка може бути коротшою, ніж `--limit`; звузьте запит, чат або період, якщо існує більше відповідних спостережень.
 
 Кожен результат повідомлення містить `untrusted_content: true`ідентифікатори робочого простору, чату та повідомлення, порядковий номер у журналі, хеш збереженого запису та посилання на панель. Редагування, повідомлення про видалення та `missing_on_recheck` — це окремі записи. Відсутність запису не доводить, що подія ніколи не відбувалася.
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 Для експорту через панель потрібне з’єднання, яке дозволяє **експортувати повідомлення (лише з командного рядка)**; за замовчуванням ця опція не вибрана. Цей файл є робочою копією, а не доказом: для перевіреної передачі даних використовуйте підписаний експорт у **розділі** **«Експорт»**, який `python -m tgwitness.verify`перевіряється.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+Панель повторно перевіряє доступ перед виведенням кожного запису, включаючи запис про завершення. Скасований або прострочений доступ призводить до неповного експорту. Ліниве читання сторінок поділяє ліміт архівного модуля з іншими запитами та має обмежений час очікування.
 
 ## Навички агента
 

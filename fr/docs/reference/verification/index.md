@@ -4,91 +4,91 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/verif
 
 Le test Telegram en direct, les vérifications automatisées, les vérifications au niveau du navigateur et ce qui reste à vérifier.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Preuves et vérification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Preuves et vérification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
-**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+**Mise à jour le 6 novembre 2026.** Les résultats sont liés à la révision, à l’environnement et à la charge de travail enregistrés pour chaque exécution. La section [Capacités actuelles](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) décrit les workflows disponibles ; cette page consigne ce qui a effectivement été vérifié.
 
-[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+[Graphiques de performances](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Audit en anglais signé](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Mesures téléchargeables](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
 
-| Latest evidence | Résultat | Portée |
+| Dernières preuves | Résultat | Portée |
 | --- | --- | --- |
-| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
-| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
-| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
-| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
-| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+| Audit de la version · 6, novembre | Tests de base 1,461 réussis ; la plateforme 37 est ignorée | Source `92e539af40d8` ; conclusions ouvertes conservées |
+| Exportations récentes · 6 nov. | 127.713 et 141.781 enregistrements/s, cycle complet | Deux comptes par serveur ; texte et métadonnées via WARP |
+| Archives conservées · 6 nov. | Archives 48 ; enregistrements 3,598,381 vérifiés | Les archives existantes ont été vérifiées par rapport aux clés de l'espace de travail épinglées |
+| Trusted Live · 5 novembre | Enregistrement CPU sécurisé et contrôles WARP | La connexion officielle à l'application de bureau et l'exportation native ne sont pas prises en charge. |
+| Phala / Intel TDX · 4 novembre | Toutes les vérifications du vérificateur 16 ont été validées lors des exécutions ultérieures | Déploiement historique ; aucun compte Telegram sur le CVM |
 
-**On this page**
+**Sur cette page**
 
-- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
-- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
-- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
-- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
-- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
-- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
-- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
-- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
-- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#synthetic-local-capacity-measurement)
-- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
-- [Remaining qualification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#remaining-qualification)
+- [Audit de la version et nouvelles exportations · 6 novembre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [Trusted Live CPU Ubuntu et WARP · 5 novembre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [Déploiement en direct de Phala Cloud · 4 novembre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [Inventaire du journal du serveur en direct · 1er novembre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [Vérifications hors ligne et par injection de défauts récentes · 1er novembre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [Test Telegram en direct, compte complet · 29 octobre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [Fichier d’exportation protégé par mot de passe ouvert avec libarchive · 29 octobre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [Test Telegram en direct · du 27 au 29 octobre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [Mesure synthétique de la capacité locale](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [Recherche en texte intégral sur un million de messages · 5 novembre 2026](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [Qualification restante](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/#remaining-qualification)
 
-## Release audit and fresh exports · 6 November 2026
+## Audit de la version et nouvelles exportations · 6 novembre 2026
 
-The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+L'audit a utilisé la version v0.9.1 au niveau de la source `92e539af40d8368d198ff5e040f1d876f2c1310e`, version `92e539af40d8-83e41104669e`. Les tests de fonctionnement des paquets installés ont été réussis sur trois serveurs. Le rapport signé reflète l'état observé à ce moment-là.
 
-[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+[![Taux d’acquisition et d’exportation complets pour deux nouvelles charges de travail](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
 
-| Workload | Enregistre | Acquisition | Complete cycle | Complete-cycle rate |
+| Charge de travail | Enregistre | Acquisition | Cycle complet | Taux de cycle complet |
 | --- | --- | --- | --- | --- |
-| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
-| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+| Serveur A · deux comptes | 27,030 | 189.043 s | 211.647 s | 127.713 enregistrements/s |
+| Serveur B · deux comptes | 29,299 | 182.513 s | 206.650 s | 141.781 enregistrements/s |
 
-Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+Les deux exportations ont démarré sans reprise, ont exclu les pièces jointes et les avatars, et se sont terminées sans aucun enregistrement en double ou réutilisé. Le cycle complet comprend la préparation, l’acquisition, la sélection, le conditionnement et la vérification des archives. Le serveur A a également effectué un contrôle de lecture des discussions protégées. Quatre événements FloodWait sur A et trois sur B ont été respectés. Ces observations n’établissent pas de garantie générale de débit.
 
 | Vérifier | Résultat | Qualification |
 | --- | --- | --- |
-| Core pytest | 1,461 passed | 37 platform skips |
-| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
-| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
-| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
-| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
-| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+| Noyau pytest | 1,461: test réussi | Sauts de la plateforme 37 |
+| Navigateur / expérience utilisateur du navigateur / preuves / site | 102 / 66 / 15 / 9 réussis | Ces programmes recoupent d'autres tests ; les comptages ne sont pas cumulatifs. |
+| Module complémentaire Capture | 124: test réussi | Trois vérifications Web officielles bloquées par le bac à sable Chromium obligatoire |
+| Autorisation API | Itinéraires 269 ; requêtes 538 transmises | Identifiants manquants et accès révoqués |
+| Archives conservées | 48/48 vérifié | Enregistrements 3,598,381 ; clés d'espace de travail épinglées |
+| Vérifications en temps réel de la lecture de la flotte | 24 des profils 40 ont été validés | Les routes WARP 16n'ont pas satisfait aux critères de qualification ; ces profils n'étaient pas connectés |
 
-The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+Le rapport [signé](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) recense toutes les découvertes, y compris trois défauts dans un instantané de discussion secrète non publié, absent de la version principale auditée. La précédente [qualification de l'historique public](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) utilisait une révision et une charge de travail différentes ; ses taux ne doivent pas être combinés avec cette comparaison.
 
-Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
+Vérifier le rapport original à l'aide de la clé [épinglée et du vérificateur](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Sa signature protège le rapport de l'opérateur contre toute altération. Il ne s'agit pas d'une attestation indépendante, d'une preuve de la paternité du message Telegram ni d'une certification RGPD.
 
-## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+## Trusted Live CPU Ubuntu et WARP · 5 novembre 2026
 
-The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+L'exécution d'intégration retenue a utilisé un invité Ubuntu 24.04.5 fonctionnant uniquement sur CPU (vCPU 4, 8 GiB) sous QEMU au sein d'un hôte RunPod CPU. Le collecteur a utilisé `14e642a5` ; la vérification a utilisé `02072461`. Les corrections finales ont été fusionnées dans [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) sous le nom de `755f78f6`, dont l'arborescence correspondait à la tête du PR testé. Il ne s'agissait pas d'un TEE.
 
-- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
-- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
-- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
-- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
-- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+- Un véritable connecteur WARP a été signalé comme fonctionnant correctement ; le HTTPS par proxy a signalé que WARP et Gateway étaient activés. Trois sondes ont détecté la même adresse de sortie, ce qui ne garantit pas une adresse IP fixe.
+- La déconnexion de WARP a entraîné l'échec de la requête relayée. Le protocole HTTPS direct vers le service de passerelle a été rejeté. Dans l'espace de noms de l'enregistreur, les adresses IPv4/IPv6 directes, le DNS externe et le résolveur UDP intégré à Docker ont été bloqués.
+- Un jeton de fournisseur en lecture seule et à portée limitée pouvait lire les informations d’état et de connexion, mais ne pouvait pas lire le jeton d’inscription du connecteur. Les observations signées du fournisseur comprenaient des échantillons explicitement indisponibles. Le témoin s’exécutait sur l’hôte de l’opérateur, ce qui démontre l’enregistrement et la conservation des données, et non leur conservation par un tiers indépendant.
+- Official Desktop a affiché son écran d’accueil non authentifié. La saisie au clavier protégée a été rejetée lors de la capture. Trois segments d’affichage H.264 ont été décodés et leur superposition d’horloge a été inspectée. L’archive de pré-vol de l’événement 18 a été vérifiée par rapport à la clé d’enregistrement épinglée et au point de contrôle conservé.
+- Les derniers tests de capture ont réussi les cas 114 sur les environnements CI Windows et Linux, avec les versions réelles de Chromium/FFmpeg. Cinq tests de référence et vérifications des avis de dépendance ont été réussis.
 
-An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+Un premier démarrage 2 vCPU/4 GiB a expiré sous la charge simultanée de la création d’images et s’est arrêté via le garde ; il n’est pas comptabilisé comme un succès. La connexion manuelle au compte de test, l’exportation native du chat, la comparaison hybride réelle et la déconnexion côté Telegram restent en attente. Aucune session Telethon fournie n’a été importée. Les pièces jointes, la reconnaissance optique de caractères (OCR) automatique, la vérification BLS drand locale et l’attestation Trusted Live TDX n’ont pas été validées.
 
 ## Déploiement en production sur Phala Cloud · 4 novembre 2026
 
-**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+**Résultat historique : les déploiements ultérieurs** ont passé avec succès tous les contrôles du vérificateur 16, y compris Intel TDX et le tunnel rapide. La reprise des preuves, la découverte des adresses signées et les horodatages des rapports ont été vérifiés séparément. Chaque CVM de test a été supprimé après son exécution.
 
-| Configuration | Recorded value |
+| Configuration | Valeur enregistrée |
 | --- | --- |
 | Fournisseur | Phala Cloud · `tdx.small` · US-WEST-1 |
-| Déploiement | `--provider phala --quick-tunnel`; initially empty workspace |
-| Initial collector | `df7d860c` · v0.8.1 |
-| Collector with all fixes | `53a0f7e9` |
-| Production guest | `dstack-0.5.12`; SSH access disabled |
-| External services | ntfy.sh, GitHub and Intel PCS |
-| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+| Déploiement | `--provider phala --quick-tunnel` ; espace de travail initialement vide |
+| Collecteur initial | `df7d860c` · v0.8.1 |
+| Collecteur avec toutes les corrections | `53a0f7e9` |
+| Invité de production | `dstack-0.5.12` ; accès SSH désactivé |
+| Services externes | ntfy.sh, GitHub et Intel PCS |
+| Coût observé | Sept CVM, représentant au total environ 1.9s cents américains ; tarification historique des tests |
 
-The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+La séquence ci-dessous distingue les échecs initiaux, les corrections et les vérifications terminées. Aucun compte Telegram n’était associé à ces CVM.
 
-**Deployments 1–2 · provider differences and regression checks**
+**Déploiements 1–2 · différences entre fournisseurs et contrôles de régression**
 
 Les deux premiers déploiements ont révélé cinq différences par rapport au Phala Cloud simulé. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) reproduit désormais chacune d’entre elles et échoue sans sa correction :
 
@@ -100,7 +100,7 @@ Les deux premiers déploiements ont révélé cinq différences par rapport au P
 | Lorsque la passerelle dstack est désactivée, les détails du CVM n’affichent jamais le code d’erreur `instance_id` | Le déploiement attend 30 minutes puis échoue | L’identifiant de l’instance est extrait de l’état du CVM |
 | Les redémarrages, arrêts et démarrages sont des opérations CVM, et non des révisions d’application | `provider_actions` n’a pas répertorié les redémarrages | Les opérations de lecture sont également prises en compte |
 
-**Deployment 3 · attestation, access checks and restart evidence**
+**Déploiement 3 · attestation, contrôles d'accès et preuves de redémarrage**
 
 - La CVM a exécuté `dstack-0.5.12` avec l’accès SSH désactivé. Le collecteur a publié son adresse signée environ 1,5 minute après sa création. Le déploiement a ensuite validé `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, enregistrement d’attestation matérielle v4, FMSPC `20a06f000000`, pas en mode débogage, non migrable, prenant en charge les données de vérification cryptographique récupérées auprès d’Intel), `tdx_compose_hash`, `tdx_compose` (octet par octet) et `tdx_identity` (clés KMS).
 - Le panneau accessible à l’adresse trycloudflare.com a renvoyé un code d’erreur 401 en l’absence de jeton ou avec un jeton incorrect, et un code 200 avec le jeton du panneau.
@@ -109,66 +109,66 @@ Les deux premiers déploiements ont révélé cinq différences par rapport au P
 - La commande `destroy` n’a supprimé que cette CVM. L’espace de travail s’est alors retrouvé vide, et l’adresse du panneau a cessé de répondre.
 - La vérification du prix dans l’assistant du panneau indiquait `tdx.small` à 0,058 $ de l’heure. Une clé erronée a généré un simple message « la clé API n’a pas été acceptée ».
 
-**Follow-up fixes · signed address discovery and OS measurements**
+**Corrections ultérieures · détection des adresses signées et mesures du système d'exploitation**
 
 - En l’absence de clé d’adresse, `verify` a suivi la dernière publication bien formée relative au sujet de l’adresse, qui figure dans la configuration Docker Compose publiée. Une publication falsifiée l’a redirigé vers un hôte qui n’ existe pas, et `statement` a échoué : un faussaire ne pouvait pas se faire passer pour le collecteur, mais pouvait bloquer la vérification par un tiers, pendant jusqu’à 12 heures à l’aide d’un horodatage futur falsifié. Le collecteur publie désormais également son adresse signée avec sa propre clé ; `verify` n’accepte que ces publications lorsque le collecteur les effectue, et les publications sont classées par ordre de réception par ntfy.sh. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) rejoue les publications falsifiées. Un CVM n’exécute cela qu’à partir d’un commit qui le contient ; par conséquent, le collecteur de cette exécution n’avait pas encore signé son adresse et `verify` l’a signalé.
 - `tdx_os` ne pouvait pas s’exécuter sans `dstack-mr`, dont la version actuelle porte le nom `measure-os` plutôt que le `measure --json` mentionné dans la documentation. Le vérificateur calcule désormais lui-même les valeurs MRTD et RTMR0-2 à partir de l’image publiée et de la configuration de la machine virtuelle, tables ACPI comprises.
 
-**Deployment 4 · all 16 checks, report seals and restart verification**
+**Déploiement 4 · toutes les vérifications 16, les sceaux de rapport et la vérification du redémarrage**
 
 - Le déploiement a téléchargé une fois le fichier `dstack-0.5.12` publié, l’a comparé au hachage de l’image du système d’exploitation signalé par la CVM , et `tdx_os` a été validé : MRTD, RTMR0, RTMR1 et RTMR2 correspondent aux valeurs calculées pour QEMU 8.2.2, 1 vCPU et 2 GiB. Le même calcul a donné une valeur RTMR0 différente pour une configuration déclarée de 4 GiB, 2 vCPU, QEMU 9.2.1 ou une deuxième carte réseau, et a échoué en cas de modification du noyau, du micrologiciel ou de la ligne de commande ainsi que pour l’image de développement.
 - `verify` a réussi l’ensemble de ses 16 contrôles, y compris celui du connecteur du tunnel rapide, ce qui a donné lieu à un résultat « PASS ». Il a généré le certificat au format HTML et PDF, scellé numériquement à l’aide de signatures et d’horodatages comprenant un horodatage eIDAS qualifié provenant de l’unité d’horodatage du gouvernement belge TSU 202301 (statut accordé sur la liste de confiance belge), un horodatage FreeTSA et la signature du vérificateur ; `check-report` a confirmé l’ensemble de ces éléments ainsi que la signature du fichier PDF.
 - Après un redémarrage, `verify --evidence` a confirmé deux démarrages, chacun accompagné d’une attestation matérielle générée au sein de la CVM et chacun ayant démarré à partir du fichier `dstack-0.5.12` publié ; le redémarrage et le nouveau démarrage ont été classés REVIEW.
 - `destroy` a laissé l’espace de travail vide.
 
-**Deployment 5 · collector-signed discovery and forged-post rejection**
+**Déploiement 5 · détection des messages signés par le collecteur et rejet des messages falsifiés**
 
-The collector ran from commit `53a0f7e9`, which includes the fixes above.
+Le collecteur a été exécuté à partir du commit `53a0f7e9`, qui inclut les corrections mentionnées ci-dessus.
 
 - Le collecteur a publié son adresse signée avec sa propre clé, à côté de la publication HMAC de l’opérateur. Deux publications falsifiées ont ensuite été ajoutées au sujet, l’une avec un HMAC remis à zéro et l’autre signée par une autre clé Ed25519, toutes deux indiquant une date en l’an 2096. `verify` a pris l’adresse signée par la clé du collecteur et a réussi les 16 contrôles ; le sceau portait à nouveau l’horodatage belge qualifié, l’horodatage de FreeTSA et la signature du vérificateur, et `check-report` les a confirmés.
 - Après un redémarrage, le collecteur a publié la nouvelle adresse signée : `verify` l’a détectée immédiatement, l’ opérateur **a trouvé l’adresse actuelle** 27 secondes plus tard à partir de la publication HMAC, et tous deux ont ignoré les publications falsifiées. `verify --evidence` a confirmé deux démarrages à partir de `dstack-0.5.12`.
 - Le déploiement a indiqué le montant facturé par Phala pour la CVM, disque compris : 0,06078 $ par heure.
 
-### Panel wizard and remaining scope
+### Assistant de configuration des panneaux et périmètre restant
 
 L’assistant du panneau a été exécuté deux fois sur Phala Cloud, une fois via son API de tâches et une fois via le navigateur avec un véritable Chromium : la vérification du prix, la création avec la validation sous **Advanced**, les six vérifications d’attestation ont toutes été réussies, la liste des serveurs affichant le prix facturé (44,37 USD par mois), **Find l'adresse actuelle**, le téléchargement de la configuration Docker Compose mesurée, ainsi que la suppression. Le navigateur n’a signalé aucune erreur de page. À chaque fois, l’espace de travail était vide par la suite.
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
+Non pris en compte : un domaine Cloudflare sur Phala, un compte Telegram sur le CVM et l’image `dstack-0.6.1` . Le prix de l’assistant avant la création correspond uniquement au prix de calcul de Phala, car son API n’indique le prix du disque que pour un CVM existant ; la liste des serveurs affiche le prix facturé après la création. Tous les prix mentionnés dans cette section ont été observés le 4 novembre 2026.
 
-## Live server journal inventory · 1 November 2026
+## Inventaire du journal du serveur en direct · 1er novembre 2026
 
-At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
+Vers 19:15 UTC, des requêtes SQLite `query_only` séquentielles en lecture seule ont compté les événements dans dix bases de données d'espaces de travail sur un serveur en fonctionnement. La collecte s'est poursuivie pendant les requêtes ; il ne s'agit donc pas d'un instantané atomique couvrant l'ensemble des espaces de travail.
 
-| Observed across the ten workspace databases | Nombre |
+| Observé dans les dix bases de données d'espaces de travail | Nombre |
 | --- | --- |
-| Workspaces with at least one `message.new` event | 8 |
-| Journal records, including operational events | 1,610,818 |
-| `message.new` events | 900,232 |
-| `message.edited` events | 80,683 |
-| `message.deleted` events | 400,536 |
-| `message.recovered` events | 53,403 |
-| `message.snapshot` events | 2,183 |
-| `media.saved` events | 50,418 |
-| `media.failed` events | 5,575 |
-| `coverage.gap` events | 11 |
-| Database bytes, excluding WAL files and media | 7,909,003,264 |
+| Espaces de travail comportant au moins un événement `message.new` | 8 |
+| Enregistrements du journal, y compris les événements opérationnels | 1,610,818 |
+| Événements `message.new` | 900,232 |
+| Événements `message.edited` | 80,683 |
+| Événements `message.deleted` | 400,536 |
+| Événements `message.recovered` | 53,403 |
+| Événements `message.snapshot` | 2,183 |
+| Événements `media.saved` | 50,418 |
+| Événements `media.failed` | 5,575 |
+| Événements `coverage.gap` | 11 |
+| Octets de la base de données, à l'exclusion des fichiers WAL et des médias | 7,909,003,264 |
 
-These are **event counts**, not unique messages, people or media files. The same message can appear in more than one workspace, and an edit or deletion can produce another journal event. `media.failed` counts historical failure events, not the current media queue. The queries did **not** newly verify signatures and the full hash chain of all 1,610,818 records, measure delivery or throughput, or establish that every Telegram event was captured. No message content, account or chat IDs, workspace labels, credentials or private files are published here.
+Il s’agit de **nombres d’événements**, et non de messages, de personnes ou de fichiers multimédias uniques. Un même message peut apparaître dans plusieurs espaces de travail, et une modification ou une suppression peut générer un autre événement du journal. `media.failed` comptabilise les événements d’échec historiques, et non la file d’attente multimédia actuelle. Les requêtes **n’ont pas** vérifié à nouveau les signatures ni la chaîne de hachage complète des 1,610,818 enregistrements, ni mesuré la livraison ou le débit, ni établi que chaque événement Telegram avait été capturé. Aucun contenu de message, identifiant de compte ou de discussion, étiquette d’espace de travail, identifiant de connexion ou fichier privé n’est publié ici.
 
-At this review, the separately configured public monitor covered three sources: one capture response was OK and two reported `no_response`. That monitor is not a ten-workspace health summary. `no_response` means the observer could not obtain a response at that check; it does not establish message loss. The smaller 29 October test below has its own explicit signature and hash-chain verification.
+Au moment de cette révision, le moniteur public configuré séparément couvrait trois sources : une réponse de capture était OK et deux ont signalé `no_response`. Ce moniteur n’est pas un résumé de l’état de santé de dix espaces de travail. `no_response` signifie que l’observateur n’a pas pu obtenir de réponse lors de cette vérification ; cela n’implique pas une perte de message. Le test plus restreint du 29 octobre ci-dessous dispose de sa propre signature explicite et d’une vérification par chaîne de hachage.
 
-## Recent offline and fault-injection checks · 1 November 2026
+## Vérifications hors ligne et par injection de défauts récentes · 1er novembre 2026
 
-These checks use fictional data and local files; they add regression evidence for the current source, not another live Telegram delivery measurement:
+Ces vérifications utilisent des données fictives et des fichiers locaux ; elles fournissent des preuves de régression pour la source actuelle, et non pour une autre mesure de livraison en temps réel sur Telegram :
 
-| Vérifier | What it exercised |
+| Vérifier | Ce qu'il a testé |
 | --- | --- |
-| [Source archive](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact. |
-| [Account export recovery](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow. |
-| [Minimized disclosure privacy](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged. |
-| [Linux media decoder and OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | A [Linux Docker CI check](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) at commit `5a9e0814` passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model. |
+| [Archive source](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Deux versions présentant des octets source identiques mais des dates de modification différentes ont produit le même fichier ZIP et la même somme de contrôle. Les octets archivés et les hachages de fichiers correspondaient exactement ; les fichiers de test privés n’ont pas été inclus. Une simulation d’échec d’écriture a laissé l’archive et la somme de contrôle précédentes intactes. |
+| [Récupération de l'exportation du compte](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | Une erreur de disque simulée sur le deuxième membre du fichier ZIP n’a laissé aucun fichier ZIP publié ou partiel. La reprise a conservé chaque octet des reçus signés à l’identique, a produit une archive vérifiable de manière indépendante à l’aide de l’empreinte de signature attendue, et a conservé la lacune de couverture synthétique en tant que résultat partiel. Les assertions d’échelle empêchent les analyses répétées des tâches et des reçus à mesure que l’historique s’allonge. |
+| [Confidentialité par divulgation minimisée](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Les noms et alias Unicode synthétiques, les métadonnées imbriquées, les expéditeurs inconnus et les champs multimédias ont été vérifiés dans les trois modes d’identité et en cas d’omission de texte. Une défaillance de la limite de masquage n’a pas affaibli silencieusement la rédaction ; l’exportation originale et signée du compte est restée inchangée. |
+| [Décodeur multimédia Linux et OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | Un [contrôle CI Docker sous Linux](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) lors de la validation `5a9e0814` a réussi les tests avec des entrées générées aux formats Ogg/Opus, MP3, M4A, MP4 avec vidéo, WAV et FLAC ; les contrôles de durée falsifiée et de référence à un fichier secondaire ; ainsi que 48 fixtures de parseur mutées (34 rejetées, 14 décodées dans les limites). L’OCR Tesseract réel a fonctionné sans modification des octets d’origine. Le décodeur et l’OCR ont fonctionné dans des conteneurs isolés du réseau sans modèle Whisper. |
 
-The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) and [full Checks](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) workflows. They test these failure boundaries, not every possible storage failure or whether a disclosure is automatically safe to publish. The media check does not measure speech recognition accuracy or Telegram delivery. Review each derivative before sharing.
+Les vérifications s'exécutent dans les workflows [(pull-request)](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) et [(vérifications complètes)](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml). Elles testent ces limites de défaillance, et non toutes les défaillances de stockage possibles, ni si la publication d'une divulgation est automatiquement sans risque. La vérification des médias ne mesure pas la précision de la reconnaissance vocale ni la livraison par Telegram. Vérifiez chaque dérivé avant de le partager.
 
 ## Test Telegram en direct, compte complet · 29 octobre 2026
 
@@ -249,6 +249,6 @@ Un journal signé et déterministe contenant 1 000 000 de messages synthétiques
 
 Le journal en temps réel conservé consigne les collectes effectives, les modifications, les notifications de suppression, les pièces jointes, les vérifications croisées et la gestion des limites de débit. Il ne rend pas compte de manière exhaustive des envois ni ne fournit une matrice contrôlée de visibilité des rôles, des acteurs intervenant dans les réactions, des délais prolongés de « FloodWait », des suspensions de compte et de la reprise après interruption du réseau ou des processus. L’émission de jetons QR reste distincte de la confirmation QR mobile finalisée.
 
-Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
+Les vérifications Docker/Compose et d’installation sont enregistrées dans le pipeline de CI ; le déploiement réel de Phala et la vérification externe des horodatages sont décrits ci-dessus. Ils ne garantissent pas une charge élevée soutenue, une matrice complète des plateformes/rôles en production, un audit de sécurité indépendant, une validation de l’archivage à long terme ni une certification médico-légale. L’état MTProto enregistré et la mise à jour sont implémentés ; la relecture en direct atomique sans perte reste à établir. Le nouveau backfill valide les messages et les curseurs de manière atomique et préserve les actions récentes disponibles, mais sa couverture synthétique est distincte de la qualification en direct. Voir [acceptation en direct](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) pour la matrice de qualification contrôlée.
 
-The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.
+Le répertoire d'audit public  ne contient que le rapport signé et les mesures agrégées. Les justificatifs opérationnels détaillés, les captures brutes et les données relatives aux comptes restent confidentiels. Les captures d'écran de l'application dans `docs/assets/` utilisent des données de démonstration fictives.

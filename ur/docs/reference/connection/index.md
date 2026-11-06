@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/conne
 
 تصدیق، خودکار پراکسی پولز، آئی پی موڈز، فال بیک پالیسی، بیرونی درخواستیں اور خفیہ ذخیرہ۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تیناری اور بحالی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![تیناری اور بحالی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 یہ دستاویز TgWitness 0.8.0 کے طرز عمل اور اس کی حدود کو بیان کرتی ہے۔ تصدیق، ماخذ تک رسائی، نیٹ ورک کنیکٹیویٹی اور مکمل کپچر الگ الگ حالتें ہیں۔ سائن ان کے مراحل، فائل فارمیٹس، اور متعدد اکاؤنٹس کے لیے، [اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) سے شروع کریں۔ ایونٹ پالیسیاں اور دوبارہ شروع کرنے کے طرز عمل کے لیے، دیکھیں [کہ کلیکشن کیسے کام کرتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) ہے۔
 
@@ -123,19 +123,19 @@ MTProxy صرف ٹیلیگرام ٹریفک منتقل کرتا ہے۔ ورک ا�
 
 ****خودکار پول کے پیرامیٹرز****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+**پیرامیٹرز → آٹومیٹک MTProxy** کے تحت ناکامی کی حد، کول ڈاؤن، منصوبہ بند گردش، پروکسی شیئرنگ اور اجازت یافتہ فال بیک تاخیر کو ترتیب دیں۔
 
 | کنٹرول | ڈیفالٹ |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| متبادل سے پہلے منقطع | 3 کے اندر 10 منٹ |
+| ہر کنکشن کی کوشش کے دوران آزمائے گئے پروکسیز | 3 |
+| ناکامی کے بعد پہلی / زیادہ سے زیادہ آرام | 10 منٹ / 6 گھنٹے |
+| منصوبہ بند گردش | غیر فعال؛ ناکامی پر فعال کریں |
+| فی پروکسی اکاؤنٹس | 0: ترجیحاً الگ اندراجات استعمال کریں، ضرورت پڑنے پر شیئر کریں۔ 1 کو خصوصی اندراج کے لیے انتظار پر سیٹ کریں۔ |
+| مجاز براہِ راست متبادل سے پہلے تاخیر | 10منٹ؛ Hide the address still refuses Direct |
+| فیڈ ریفریش / ٹرانسپورٹ چیکس | 60/10 منٹ؛ مرکزی ورک اسپیس کی قدریں مشترکہ پول پر لاگو ہوتی ہیں۔ |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+مختلف پراکسیز مختلف ایگزٹ ایڈریسز کی ضمانت نہیں دیتیں۔ یہ ترتیبات ٹیلیگرام کی حدود کو ختم نہیں کرتیں اور گمنامی ثابت نہیں کرتیں۔
 
 پبلک لسٹ کو اپنی آپریٹر کیٹلاگ سے تبدیل کرنے کے لیے نیچے دی گئی اووررائیڈ کو کنفیگر کریں۔ یہ بیرونی سبسکرپشنز کو مکمل طور پر غیر فعال کر دیتا ہے، بشمول اس کے کہ جب اس کا `proxies` اری خالی ہو۔
 

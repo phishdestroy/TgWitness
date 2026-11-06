@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/security/
 - **时间戳权威性**可选 · 默认关闭
 
   仅包含已签名的检查点的 SHA-256 哈希值和一个随机非ce值。不包含任何消息内容，也不包含聊天昵称。
-- **Witness**可选 · 默认关闭
+- **见证人**可选 · 默认关闭
 
   使用只读令牌提取带签名的检查点和捕获计数器。该工具无法读取对话内容或更改设置。
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/searc
 
 Encontre mensagens salvas por formas de palavras, frases exatas, domínios e @nomes de usuário, com as melhores correspondências exibidas primeiro, tendo o índice vinculado ao diário assinado.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Investigação](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Análise de arquivos](https://phishdestroy.github.io/TgWitness/pt/docs/reference/analysis/) · [OCR local e transcrição](https://phishdestroy.github.io/TgWitness/pt/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Encontre mensagens salvas por formas de palavras, frases exatas, domínios e @no
 
 O índice é um dado derivado. Ele é reconstruído a partir do diário assinado, nunca é assinado por si só e nunca é incluído em uma exportação. Os registros originais não sofrem alterações.
 
-**On this page**
+**Nesta página**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#dependencies)
+- [Sintaxe de pesquisa](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#search-syntax)
+- [Idiomas](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#languages)
+- [Onde fica o índice](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#where-the-index-lives)
+- [Resultados e o diário assinado](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#results-and-the-signed-journal)
+- [Texto reconhecido](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#recognized-text)
+- [Acesso](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#access)
+- [Consulte o arquivo e o MCP](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependências](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/#benchmark)
 
 ## Sintaxe de pesquisa
@@ -97,7 +97,7 @@ O acesso restrito ao chat localiza apenas registros de seus chats, incluindo o t
 
 Os clientes MCP podem chamar `search_messages` com `ranked=true` e acessar com `next_offset`. Conexões com escopo restrito recebem apenas seus chats.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+A paginação ordenada abrange, no máximo, os primeiros resultados 1,000, independentemente do tamanho da página. Restrinja a consulta, o chat ou o período para examinar mais correspondências. As buscas que priorizam as mensagens mais recentes ordenam as mensagens, os resultados de OCR e de transcrição antes de selecionar cada página.
 
 ## Dependências
 

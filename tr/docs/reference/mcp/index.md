@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/
 
 Bir MCP istemcisini, süresi dolan ve iptal edilebilir erişim izniyle seçilen çalışma alanlarına ve sohbetlere bağlayın.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Arşiv entegrasyonları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Arşiv entegrasyonları](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Bir analist istemcisini seçilen çalışma alanlarına ve sohbetlere bağlayın. TgWitness, **panel sürecinde `/mcp` adresinde Streamable HTTP hizmeti** sunar. Her bağlantının kendine ait bir token'ı, geçerlilik süresi ve izin verilen araçları vardır. MCP, Telegram mesajları gönderemez, ayarları değiştiremez veya imzalı günlüğü düzenleyemez. Aynı bağlantılar [komut satırı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/) ile de çalışır.
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**Bu sayfada**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#tools-and-boundaries)
+- [Yükleme ve kontrol](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#install-and-check)
+- [Bağlantı kur](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#issue-a-connection)
+- [İstemcinizi bağlayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#connect-your-client)
+- [Cloudflare Tüneli](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#cloudflare-tunnel)
+- [Araçlar ve sınırlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/#tools-and-boundaries)
 
 ## Kurulum ve kontrol
 
@@ -57,12 +57,12 @@ Panelde istemciyi seçin ve oluşturulan yapılandırmayı kopyalayın. Yapılan
 
 | İstemci | Yapılandırma | Bağlantı |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, bearer üstbilgisi |
+| Claude Kodu | `.mcp.json` | HTTP, `type: "http"`, bearer üstbilgisi |
 | Claude Desktop | `claude_desktop_config.json` | Yerel stdio köprüsü |
 | Cursor | `.cursor/mcp.json` | Ortam değişkeni üstbilgili HTTP |
 | VS Code Local | `.vscode/mcp.json` | Parola `promptString` girdili HTTP |
 | Windsurf | `mcp_config.json` | Bearer üstbilgisi yer tutuculu HTTP |
-| Diğer istemciler | URL ve Authorization üstbilgisi | Streamable HTTP |
+| Diğer istemciler | URL ve Authorization üstbilgisi | Akışlanabilir HTTP |
 
 TgWitness, OAuth keşfi olmadan bearer belirteçleri kullanır. Uzak bağlayıcısı OAuth gerektiren istemciler için yerel stdio köprüsünü kullanın. VS Code için girdi değişkenleri **Local** çalışma ortamına uygulanır ve Copilot oturumlarına iletilmez. Yapılandırma referansları: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

@@ -4,35 +4,35 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-i
 
 Wyjaśnienie pojęć łańcucha skrótów, podpisów, punktów kontrolnych i świadków wraz z dokładnymi wzorami stosowanymi przez weryfikatora.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dowody i weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Dowody i weryfikacja](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness zachowuje dane zebrane przez konto gromadzące, łączy te obserwacje w podpisany dziennik i umożliwia innej osobie weryfikację eksportowanych danych przy użyciu zaufanego klucza oraz wcześniej zachowanego punktu kontrolnego.
 
 [Lokalna strona internetowa z dokumentacją](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) zawiera interaktywne przykłady w sekcji `/docs/concepts/`, narzędzie do przeglądania decyzji dotyczących punktów kontrolnych w sekcji `/docs/witness/` oraz instrukcje dotyczące [Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-board/), [projektowania raportów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/) i [fragmentów dokumentacji przekazywania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#handover-extract). Wszystkie przykładowe wiadomości, liczby i opóźnienia są fikcyjne. Skróty w piaskownicy łańcucha są obliczane za pomocą algorytmu SHA-256 w przeglądarce. Żadne dane nie są wysyłane do serwisu Telegram.
 
-**On this page**
+**Na tej stronie**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#pick-a-workflow)
+- [Zmiany w wiadomościach; gromadzenie obserwacji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Co obejmuje skrót](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#what-a-hash-covers)
+- [Co dodaje wcześniejszy punkt kontrolny](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Gdzie należy umieścić świadka](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Sprawdzenie działania w odniesieniu do znanych działań](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Wybierz schemat działania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Wiadomość ulega zmianie; obserwacje się kumulują
 
-Diagram sekwencji · Telegram → Collector: Nowa wiadomość: Spotkanie o godz. 10:00; Collector → Podpisany dziennik: Dodaj wiadomość.new; Telegram → Collector: Aktualizacja: Spotkanie o godz. 11:00; Collector → Podpisany dziennik: Dodaj wiadomość.edited; Telegram → Collector: Powiadomienie o usunięciu; Collector → Podpisany dziennik: Dodaj wiadomość.usunięto; Uwaga dotycząca Podpisany dziennik: Zachowane są informacje o treści oryginalnej, edycjach oraz usunięciach · Telegram · Collector · Podpisany dziennik · Nowa wiadomość: Spotkanie o godz. 10:00 · Dodaj wiadomość.new · Aktualizacja: Spotkanie o godz. 11:00 · Dodaj wiadomość.edited · Powiadomienie o usunięciu · Dodaj wiadomość.usunięto · Zachowane są informacje o treści oryginalnej,edycjach oraz usunięciach
+Diagram sekwencji · Telegram → Kolektor: Nowa wiadomość: Spotkanie o godz. 10:00; Kolektor → Podpisany dziennik: Dodaj wiadomość.new; Telegram → Kolektor: Aktualizacja: Spotkanie o godz. 11:00; Kolektor → Podpisany dziennik: Dodaj wiadomość.edited; Telegram → Kolektor: Powiadomienie o usunięciu; Kolektor → Podpisany dziennik: Dodaj wiadomość.usunięto; Uwaga dotycząca Podpisany dziennik: Zachowane są informacje o treści oryginalnej, edycjach oraz usunięciach · Telegram · Kolektor · Podpisany dziennik · Nowa wiadomość: Spotkanie o godz. 10:00 · Dodaj wiadomość.new · Aktualizacja: Spotkanie o godz. 11:00 · Dodaj wiadomość.edited · Powiadomienie o usunięciu · Dodaj wiadomość.usunięto · Zachowane są informacje o treści oryginalnej,edycjach oraz usunięciach
 
 **Schemat w formie tekstowej**
 
-1. Telegram → Collector: Nowa wiadomość: Spotkanie o godz. 10:00
-2. Collector → Podpisany dziennik: Dodaj wiadomość.new
-3. Telegram → Collector: Aktualizacja: Spotkanie o godz. 11:00
-4. Collector → Podpisany dziennik: Dodaj wiadomość.edited
-5. Telegram → Collector: Powiadomienie o usunięciu
-6. Collector → Podpisany dziennik: Dodaj wiadomość.usunięto
+1. Telegram → Kolektor: Nowa wiadomość: Spotkanie o godz. 10:00
+2. Kolektor → Podpisany dziennik: Dodaj wiadomość.new
+3. Telegram → Kolektor: Aktualizacja: Spotkanie o godz. 11:00
+4. Kolektor → Podpisany dziennik: Dodaj wiadomość.edited
+5. Telegram → Kolektor: Powiadomienie o usunięciu
+6. Kolektor → Podpisany dziennik: Dodaj wiadomość.usunięto
 7. Uwaga dotycząca Podpisany dziennik: Zachowane są informacje o treści oryginalnej, edycjach oraz usunięciach
 
 Ta uproszczona sekwencja zakłada, że Telegram dostarczył każdą aktualizację, a wybrane konto miało do niej wgląd. W dzienniku odnotowywane są również zdarzenia operacyjne. Powiadomienie o usunięciu nie podaje osoby dokonującej usunięcia ani dokładnego czasu usunięcia. Powtarzające się dostarczenia są oddzielnymi obserwacjami; nie ma funkcji eliminacji duplikatów w całym dzienniku.

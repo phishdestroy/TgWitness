@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/conne
 
 Kimlik doğrulama, otomatik proxy havuzları, IP modları, yedekleme politikası, harici istekler ve gizli depolama.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Bu belge, TgWitness 0.8.0 sürümünün davranışını ve sınırlarını açıklamaktadır. Kimlik doğrulama, kaynağa erişim, ağ bağlantısı ve yakalama eksiksizliği ayrı durumlardır. Oturum açma adımları, dosya biçimleri ve birden fazla hesap hakkında bilgi için [hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) bölümünden başlayın. Olay ilkeleri ve yeniden başlatma davranışı hakkında bilgi için [toplama işleminin nasıl çalıştığına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) bakın.
 
@@ -123,19 +123,19 @@ Operatör tarafından yönetilen özel hizmetler için, mevcut sunucu ortamı ay
 
 ****Otomatik havuz parametreleri****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+**Parametreler → Otomatik MTProxy** altında, hata eşiğini, bekleme süresini, planlı rotasyonu, proxy paylaşımını ve izin verilen yedekleme gecikmesini yapılandırın.
 
 | Kontrol | Varsayılan |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Değiştirilmeden önce bağlantı kesilir | 3, 10 dakika içinde |
+| Her bağlantı denemesi için denenmiş proxy'ler | 3 |
+| İlk / arıza sonrası maksimum dinlenme süresi | 10 dakika / 6 saat |
+| Planlanan rotasyon | Devre dışı; arıza durumunda etkinleştirin |
+| Proxy başına hesap sayısı | 0: ayrı girdileri tercih edin, gerektiğinde birleştirin. 1'i, özel bir girdi gelene kadar bekleyecek şekilde ayarlayın. |
+| İzin verilen doğrudan yedekleme öncesi gecikme süresi | 10. dakika; Adres gizleme özelliği hâlâ Direct'i reddediyor |
+| Besleme yenileme / aktarım kontrolleri | 60 / 10 dakikaları; ana çalışma alanı değerleri paylaşılan havuz için geçerlidir |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Farklı proxy'ler, farklı çıkış adreslerini garanti etmez. Bu ayarlar, Telegram sınırlamalarını geçersiz kılmaz veya anonimliği kanıtlamaz.
 
 Genel listeyi kendi operatör kataloğunuzla değiştirmek için aşağıdaki geçersiz kılma ayarını yapılandırın. Bu ayar, `proxies` dizisi boş olduğunda da dahil olmak üzere harici abonelikleri tamamen devre dışı bırakır.
 

@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![تكاملات الأرشيف](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/) · [البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 التواريخ هي `2026-10-01` (منتصف الليل بتوقيت UTC) أو التوقيت الدولي (ISO) مع تحديد المنطقة الزمنية، `2026-10-01T09:00+03:00`. بالنسبة `search`, `messages` و `export` يختارون وقت الملاحظة. تستوعب الصفحات ما يصل إلى 50 سجلاً: اتبع `next_offset` (`--offset`) من أجل البحث حسب الترتيب و `next_before` (`--before`) في مكان آخر.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+يتوقف البحث المُصنَّف عند 1,000 نتيجة. قد تكون الصفحة الأخيرة أقصر من `--limit`؛ قم بتضييق نطاق الاستعلام أو الدردشة أو الفترة الزمنية عندما توجد المزيد من الملاحظات المطابقة.
 
 تتضمن كل نتيجة رسالة `untrusted_content: true`معرفات مساحة العمل والدردشة والرسالة، وتسلسل السجل، وتجزئة السجل المحفوظ، ورابط اللوحة. التعديلات، وإشعارات الحذف، و `missing_on_recheck` تُعد سجلات منفصلة. وغياب السجل لا يثبت أن الحدث لم يحدث أبدًا.
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 يتطلب التصدير عبر اللوحة اتصالاً يسمح **بتصدير الرسائل (خط الأوامر فقط)**؛ وهو غير محدد بشكل افتراضي. هذا الملف هو نسخة عمل، وليس دليلاً: من أجل تسليم قابل للتحقق ، استخدم التصدير الموقّع في **قسم** **«التصدير» (Exports)**، والذي `python -m tgwitness.verify`التحقق منها.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+تقوم اللوحة بإعادة التحقق من الصلاحية قبل إصدار كل سجل، بما في ذلك سجل الإكمال. تؤدي الصلاحية الملغاة أو المنتهية الصلاحية إلى تصدير غير مكتمل. عمليات قراءة الصفحات المؤجلة تتشارك حد عامل الأرشيف مع الاستعلامات الأخرى ولها فترة انتظار محددة.
 
 ## مهارة الوكيل
 

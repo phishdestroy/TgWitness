@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/conne
 
 認証、自動プロキシプール、IPモード、フォールバックポリシー、外部リクエスト、およびシークレットストレージ。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [導入と復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![展開と復旧](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 このドキュメントでは、TgWitness 0.8.0 の動作とその制限事項について説明します。認証、 ソースへのアクセス、ネットワーク接続、およびキャプチャの完全性は、それぞれ独立した状態です。 サインインの手順、ファイル形式、および複数アカウントについては、「 [アカウントとセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)」からご確認ください。イベントポリシーや再起動時の 動作については、[「収集の仕組み」](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)をご覧ください。
 
@@ -45,8 +45,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/conne
 | 電話番号、コード、オプションの2段階認証 | アカウントへのアクセス；APIペアは任意です | パネルへのログイン |
 | 認証キー（HEX）＋DC ID | 512文字の完全なキーおよびDC 1～5 | 「Direct **Auth key」**タブ；認証が保存される前に、オプションのユーザーIDがチェックされます |
 | Telethon StringSession | 有効なセッション文字列 | パネルへのログイン |
-| Telethon SQLite `.session` | 完成済みで一貫性のある文章 | スキーマのパネルからの直接インポート 7/8；オプションのオフラインCLI |
-| Pyrogram SQLite `.session` | 本番環境のユーザーセッションを終了しました | スキーマのパネルからの直接インポート 2/3 |
+| Telethon SQLite`.session` | 完成済みで一貫性のある文章 | スキーマのパネルからの直接インポート 7/8；オプションのオフラインCLI |
+| Pyrogram SQLite`.session` | 本番環境のユーザーセッションを終了しました | スキーマのパネルからの直接インポート 2/3 |
 | Telegram Desktop TData ZIP | 最新のアカウント1つ。保護されている場合はローカルパスコード | チェックサムおよび復号化の検証を伴うインメモリ変換 |
 | アカウントのJSON | サポートされているAPI/セッション/キーフィールド | API認証情報はメタデータのみで自動的に設定されますが、セッション/キーまたは電話番号/QRコードによるログインは依然として必要です。 |
 | QRコードによるログイン | Telegramの公式アプリによる確認 | ローカルでのQRコード生成、有効期限設定・再試行、オプションの2段階認証 |
@@ -123,19 +123,19 @@ MTProxyはTelegramのトラフィックのみを伝送します。タイムス�
 
 ****自動プールパラメータ****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+[**パラメータ] → [自動 MTProxy]** で、失敗閾値、クールダウン、 計画的なローテーション、プロキシの共有、および許容されるフォールバック遅延を設定してください。
 
 | 制御 | デフォルト |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| 置換前に接続を切断します | 3件を10分以内に |
+| 接続試行ごとに試行されたプロキシ | 3 |
+| 初回／障害発生後の最大再試行回数 | 10分 / 6時間 |
+| 予定されているローテーション | 無効化済み；失敗時に有効化 |
+| プロキシごとのアカウント数 | 0：個別のエントリを優先し、必要に応じて共有する。排他的なエントリを待つ場合は 1 に設定する。 |
+| 許可されるダイレクトフォールバックまでの遅延時間 | 所要時間：10分；「アドレスを非表示にする」を選択しても、Directへのアクセスは依然として拒否される |
+| フィードの更新／転送チェック | 60 / 10分；メインワークスペースの値は共有プールに適用されます |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+異なるプロキシを使用しても、異なる出口アドレスが保証されるわけではありません。これらの設定は、 Telegramの制限を無効にしたり、匿名性を保証したりするものではありません。
 
 公開リストを独自のオペレーターカタログに置き換えるには、以下のオーバーライドを設定してください。 これにより、`proxies`配列が空の場合を含め、外部サブスクリプションが完全に無効化されます。
 

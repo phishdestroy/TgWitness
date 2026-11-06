@@ -57,7 +57,7 @@ Un pacchetto separato collegato ai confini del registro di origine
 | Persone | Le persone scelte restano con il nome; le altre ricevono pseudonimi o vengono escluse. |
 | Testo | Tutto il testo, solo quello delle persone scelte e del Suo account, oppure nessuno. |
 | File | File delle persone scelte e del Suo account, tutti i file mostrati oppure nessuno. |
-| Case Board | Niente, segnalibri e porzioni, oppure schede con discussione. |
+| Scheda del caso | Niente, segnalibri e porzioni, oppure schede con discussione. |
 
 Legga anche testo e file: uno pseudonimo non toglie i nomi scritti dentro un messaggio o un allegato. Se manca un file scelto, lo ripristini o escluda gli allegati.
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 レポートフィルター、8種類のデザイン、コンテンツのプリセット、保存された変更履歴、および署名付きエクスポートに含まれる評価。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [調査](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![調査](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 選択した観察事項を、案件に関する読みやすい報告書にまとめます。その内容には、案件の課題、 範囲、保存された変更点、図表、調査結果、およびソースの参照先が含まれます。各レポートは、 受領者が提供された資料を確認し、その収集範囲を 検証する手段を提供します。
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 データプレビューでは、初期サンプルではなく、完全かつ安定したログのプレフィックスがカウントされます。 表示されているサンプル行および長いリストのみが範囲に含まれており、省略された件数が 表示されます。後日のエクスポートでは新しい安定版スナップショットが取得されるため、収集が継続されている場合、 数値が増加する可能性があります。範囲、件数、およびソースの識別情報は、 署名付きレポートに含まれます。フォームを開いたりプレビューしたりしても、保存はされません。
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**管轄に関するガイダンス。** 「ドキュメントの詳細」の下にある**「管轄に関するガイダンス・オプション」** を開き、管轄区域および民事／商事手続きまたは刑事手続きを選択してください。付録には、 法的根拠、出典リンク、作成上の注意事項、および調査状況が記載されています。 現地語による 収集の安全対策に関する要約および説明は任意です。デフォルトでは、 管轄区域は選択されていません。これらの選択はワークスペースに属し、 保存されたレイアウト設定や暗黙の共有・コピーのデフォルト設定からは除外されます。 [「デフォルト設定」、「サポートされているレポート」、および「調査の制限」](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) を参照してください。
 
 **受取人用のコピーを選択してください。** グラフおよびトランスクリプトには、選択された記録が使用されます。 完全性、保管、および網羅性は、ソースジャーナル全体を記述するものです。証拠用ZIPファイルには、 元の記録と添付ファイルが含まれています。受取人が選択された許可されたデータのみを受け取る必要がある場合は、[最小限の引き渡し](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#handover-extract) を行ってください。
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 `analytics.json` が含まれている場合、アーカイブの署名付きファイルハッシュによって保護されます。 ジャーナル `report.json` には、選択された同じ集計値が埋め込まれています。署名の検証により 変更されたバイトが検出されます。数値を確認するには、 `report_analytics.Analytics` および `selected` を使用してジャーナルの集計値を再計算するか、 `snapshot_analytics.collect` および `project` を使用してスナップショットの集計値を再計算してください。
 
-### Anomaly indicators
+### 異常の指標
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**プレビュー。**証拠レポートには、 登録されたプロセッサ（`tgwitness/metrics/`、メトリクスごとに1ファイル）によって計算された**「異常指標」**セクションが追加されます。レポートには、実行されたすべての プロセッサとそのバージョン名が記載され、各プロセッサのテーブルの下にその計算方法が表示されるため、 `events.jsonl` ファイルと `tgwitness.metrics.run` を使用して計算を再現することができます。
 
-| Processor | 表示内容 |
+| プロセッサ | 表示内容 |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | UTC日あたりの初回投稿者数およびメッセージ数。フラグを立てるには、少なくとも5人の初回投稿者と、その中央値の3倍の投稿者数が必要であり、メッセージ量は中央値の1.5倍以下でなければなりません。ベースラインは、7日間のウォームアップ期間を経て、過去14暦日以内に少なくとも7日間の観測データを使用します。 |
+| `service_vs_message_ratio` v1 | チャットごとに保存されたメッセージ番号は個別に管理されており、サービスメッセージによって使用される割り当て分があります。これは番号付けの仕組みを説明するものであり、特定の番号が欠落している理由を説明するものではありません。 |
+| `join_leave_per_month` v1 | 月ごとの参加、離脱、削除または利用停止について、1人、1チャット、1変更、1日につき1件ずつ記載されています。 |
+| `pinned_per_month` v1 | チャット状態のスナップショット間で追加または削除された、サービスメッセージの固定、固定解除通知、および固定されたメッセージを月ごとに集計します。 |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**「パラメータ」→「レポート指標」では**、プロセッサと表示行数を選択します。 これはフィルタリングされたレポートにも適用されます。日次および月次の表には直近の行が表示され、サービス別シェア 表では、保存されたメッセージ数に基づいてチャットがランク付けされます。合計値はすべての行を対象としています。
 
 ソースコードをチェックアウトし、上記の8つのデザインすべてを、同じ架空のジャーナルに基づいて作成してください：
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 元のZIPファイルとそのハッシュ値を保持してください。各保持者、転送、日付 および目的を記録してください。それらに関連付けられたオペレーターの陳述およびケースノートも保持してください。
 5. 機密性の高いVMについては、見積もり、チャレンジ、 Intel証明書チェーン、測定値、正確なソース、および鍵の取り扱い条件を保存し、独立して検証してください。 検証済みのアーティファクトとともに、アテステーションの検証結果も保管してください。
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+各モードにおける取得、 アーカイブの完全性、時刻、および収集範囲のチェックについては、「[検証範囲」](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)を参照してください。
 
 ## 受領者によるレビュー
 

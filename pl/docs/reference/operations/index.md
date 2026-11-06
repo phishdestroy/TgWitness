@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/opera
 
 Codzienne działanie panelu: tryby pracy, kategorie monitorowania, parametry, powiadomienia, eksport danych, tworzenie kopii zapasowych oraz pojemność.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Wdrażanie i przywracanie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Wdrażanie i przywracanie](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 W przypadku pierwszego połączenia proszę skorzystać z [kont i formatów sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/). Wyjaśnienie dotyczące zapisanych wersji, zasad dotyczących zdarzeń oraz luk można znaleźć w sekcji [„Jak działa gromadzenie danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/)”. Niniejszy przewodnik obejmuje codzienne działanie oraz odzyskiwanie danych.
 
@@ -14,18 +14,18 @@ Zainstalowana wersja zawiera pliki **, START-HERE.html,** oraz **START-HERE.txt 
 
 W przypadku zarządzanego tymczasowego tunelu Cloudflare, `tgwitness tunnel off` blokuje publiczny dostęp, podczas gdy lokalny panel i zbieranie danych nadal działają. `tgwitness tunnel on` włączają go; `tgwitness tunnel restart` tworzy nowe połączenie tunelowe. Użyj `tgwitness open`, aby sprawdzić jego aktualny adres. Wyraźne wyłączenie pozostaje aktywne po ponownym uruchomieniu usługi. `tgwitness stop` zatrzymuje zarówno panel, jak i zbieranie danych.
 
-**On this page**
+**Na tej stronie**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#capacity-and-retention)
+- [Przebieg pracy operatora](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#operator-workflow)
+- [Udostępnianie wyników pracy bez udostępniania klucza głównego](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Tryby działania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#runtime-modes)
+- [Kategorie monitorowania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#monitoring-categories)
+- [Powiadomienia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#notifications)
+- [Układ panelu](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#panel-layout)
+- [Środowiska wdrożeniowe](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#deployment-environments)
+- [Kontrole podczas uruchamiania i eksporty](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#startup-checks-and-exports)
+- [Tworzenie kopii zapasowych, przywracanie i przerwy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#backup-restore-and-interruptions)
+- [Pojemność i okres przechowywania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/#capacity-and-retention)
 
 ## Przebieg pracy operatora
 

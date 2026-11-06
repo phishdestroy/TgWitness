@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/
 
 חבר לקוח MCP לסביבות עבודה וצ'אטים נבחרים עם גישה מוגבלת בזמן וניתנת לביטול.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [שילוב עם מערכות ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![שילוב עם מערכות ארכיונים](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 חברו לקוח אנליסט לסביבות עבודה וצ'אטים נבחרים. TgWitness מספק **Streamable HTTP בכתובת `/mcp` בתהליך הפאנל**. לכל חיבור יש אסימון, תוקף וכלים מותרים משלו. MCP אינו יכול לשלוח הודעות Telegram, לשנות הגדרות או לערוך את היומן החתום. אותם חיבורים פועלים גם בשורת [הפקודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/).
 
 [מדריך לתהליך העבודה](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**בעמוד זה**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#tools-and-boundaries)
+- [התקנה ובדיקה](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#install-and-check)
+- [יצירת חיבור](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#issue-a-connection)
+- [חבר את הלקוח שלך](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#connect-your-client)
+- [מנהרת Cloudflare](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#cloudflare-tunnel)
+- [כלים ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/#tools-and-boundaries)
 
 ## התקנה ובדיקה
 
@@ -57,12 +57,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/
 
 | לקוח | תצורה | קישור |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, כותרת bearer |
+| קוד קלוד | `.mcp.json` | HTTP, `type: "http"`, כותרת bearer |
 | Claude Desktop | `claude_desktop_config.json` | גשר stdio מקומי |
 | Cursor | `.cursor/mcp.json` | HTTP עם כותרת ממשתנה סביבה |
 | VS Code Local | `.vscode/mcp.json` | HTTP עם קלט סיסמה מסוג `promptString` |
 | Windsurf | `mcp_config.json` | HTTP עם מציין מיקום לכותרת bearer |
-| לקוחות אחרים | כתובת URL וכותרת Authorization | Streamable HTTP |
+| לקוחות אחרים | כתובת URL וכותרת Authorization | HTTP הניתן להזרמה |
 
 TgWitness משתמשת באסימוני bearer, ללא גילוי OAuth. השתמשו בגשר ה-stdio המקומי עבור לקוחות שהמחבר המרוחק שלהם מחייב OAuth. עבור VS Code, משתני קלט חלים על סביבת הריצה **Local** ואינם מועברים להפעלות Copilot. סימוכין להגדרות תצורה: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

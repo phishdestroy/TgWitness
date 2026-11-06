@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/case-
 
 Berichtsfilter, acht Designs, Inhaltsvorlagen, gespeicherte Änderungsverläufe und die Bewertung sind in den signierten Exporten enthalten.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Untersuchung](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Untersuchung](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Verwandeln Sie ausgewählte Beobachtungen in einen lesbaren Fallbericht: mit Fragestellung, Umfang, gespeicherten Änderungen, Diagrammen, Ergebnissen und Quellenangaben. Jeder Bericht bietet dem Empfänger die Möglichkeit, das gelieferte Material zu überprüfen und den Erfassungsumfang der Datenerhebung zu begutachten.
 
@@ -24,7 +24,7 @@ Der Abschnitt **„Grundlage des Vertrauens und Einschränkungen“** erscheint 
 
 Die Datenvorschau erfasst das vollständige, stabile Protokollpräfix, nicht nur eine anfängliche Stichprobe. Nur angezeigte Beispielzeilen und lange Listen sind begrenzt; ihre ausgelassenen Zählwerte werden angezeigt. Ein späterer Export erstellt einen neuen stabilen Snapshot, sodass die laufende Erfassung die Zahlen erhöhen kann. Umfang, Zählwerte und Quellenidentität sind im signierten Bericht enthalten. Das Öffnen oder Anzeigen des Formulars in der Vorschau speichert es nicht.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Leitfaden zur Rechtsordnung.** Öffnen Sie unter Dokumentdetails den Punkt **Leitfaden zur Rechtsordnung · optional** , um eine Rechtsordnung sowie ein zivil-/handels- oder strafrechtliches Verfahren auszuwählen. Der Anhang enthält die Rechtsgrundlage, Quellenlinks, Vorbereitungshinweise und den Stand der Forschung. Zusammenfassungen und Erläuterungen zu den Erfassungssicherheitsmaßnahmen in der Landessprache sind optional. Standardmäßig ist keine Gerichtsbarkeit ausgewählt. Diese Auswahlmöglichkeiten gehören zum Arbeitsbereich und sind von gespeicherten Layoutkonfigurationen sowie impliziten Standardeinstellungen für das Teilen und Kopieren ausgeschlossen. Siehe [Standardwerte, unterstützte Berichte und Recherchegrenzen](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Wählen Sie die Empfängerkopie aus.** Diagramme und das Protokoll verwenden die ausgewählten Datensätze. Integrität, Aufbewahrung und Erfassungsbereich beschreiben das vollständige Quellprotokoll. Die Beweismittel-ZIP-Datei enthält die Originaldatensätze und Anhänge. Verwenden Sie [eine minimierte Übergabe,](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#handover-extract) wenn ein Empfänger nur ausgewählte, zulässige Daten erhalten soll.
 
@@ -42,7 +42,7 @@ Für HTML-Berichte zu Protokollen und Einzelchats sowie für signierte PDF-Beric
 | --- | --- |
 | Klassisch | Eine klassische Akte mit dunklem Einband und nummerierten Abschnitten. |
 | Redaktionelle Hinweise | Eine gerahmte Titelseite mit Serifenschrift, breiten Rändern und einer schmalen Kapitelleiste. |
-| Briefing | Ein kompaktes Deckblatt mit marineblauem Buchrücken, kurzen Überschriften und eng gesetzten Tabellen. |
+| Hintergrundinformationen | Ein kompaktes Deckblatt mit marineblauem Buchrücken, kurzen Überschriften und eng gesetzten Tabellen. |
 | Analytik | Ein Cover im Umfrage-Stil, modulare Diagrammtafeln und Abbildungen in Monospace-Schrift. |
 | Technisch | Ein liniertes Register, eine nummerierte Referenzleiste und präzise Vergleichstabellen. |
 | Übersicht | Ein Panorama-Titelbild, großzügige Abstände und auffällige Übersichtsgrafiken. |
@@ -60,7 +60,7 @@ Diese beiden Entwürfe umfassen ein lesbares Protokoll ohne JavaScript. Bei umfa
 | Inhaltsverzeichnis | Standardmäßig enthalten |
 | --- | --- |
 | Fallakte | Aktivitäten, Beobachtungszeitpunkte, Teilnehmer, Chats und das Transkript der Aufzeichnung. |
-| Briefing | Eine Aktivitätsübersicht ohne Teilnehmerranglisten oder das Transkript. |
+| Hintergrundinformationen | Eine Aktivitätsübersicht ohne Teilnehmerranglisten oder das Transkript. |
 | Überprüfung der Aktivitäten | Aktivitäten, Beobachtungszeitpunkte, Teilnehmer, Chats und deren Zusammensetzung, mit Quellenangaben und genauen Zahlen. |
 | Individueller Bericht | Ihre eigene Kombination aus Diagrammen, Transkripten und Vorschauen. |
 
@@ -90,18 +90,18 @@ Ein leeres Intervall bedeutet, dass keine Beobachtungen enthalten sind; bei Lüc
 
 Sofern enthalten, wird „`analytics.json`“ durch die signierten Datei-Hashes des Archivs geschützt. Der Journal-`report.json` bettet dieselbe ausgewählte Aggregation ein. Die Signaturprüfung erkennt geänderte Bytes. Um die Zahlen zu überprüfen, berechnen Sie die Journal-Aggregate mit „`report_analytics.Analytics`“ und „`selected`“ neu oder die Snapshot-Aggregate mit „`snapshot_analytics.collect`“ und „`project`“.
 
-### Anomaly indicators
+### Anomalieindikatoren
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Vorschau.** Beweisberichte enthalten einen Abschnitt **Anomalieindikatoren**, der von registrierten Prozessoren berechnet wird (`tgwitness/metrics/`, eine Datei pro Metrik). Der Bericht nennt jeden Prozessor, der ausgeführt wurde, zusammen mit seiner Version und gibt dessen Methode unter der Tabelle an, sodass die Berechnung anhand von `events.jsonl` mit `tgwitness.metrics.run` wiederholt werden kann.
 
-| Processor | Was es zeigt |
+| Prozessor | Was es zeigt |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time`, Version 1 | Erstmalige Poster und Nachrichten pro UTC-Tag. Eine Markierung erfordert mindestens fünf erstmalige Poster und das Dreifache ihres Medians, wobei das Nachrichtenvolumen höchstens das 1.5-fache ihres Medians betragen darf. Die Basislinie umfasst mindestens sieben Beobachtungstage innerhalb der letzten 14 Kalendertage, nach einer sieben Tage dauernden Aufwärmphase. |
+| `service_vs_message_ratio`, Version 1 | Unterscheidung zwischen den gespeicherten Nachrichtennummern pro Chat und dem Anteil, der von Servicemeldungen belegt wird. Es wird eine Nummerierung beschrieben; es wird keine bestimmte fehlende Nummer erklärt. |
+| `join_leave_per_month`, Version 1 | Neuanmeldungen, Abmeldungen sowie Löschungen oder Sperren pro Monat, jeweils eine pro Person, Chat, Änderung und Tag. |
+| `pinned_per_month`, Version 1 | Gefestigte Servicemeldungen, Aufhebungen der Feststellung sowie festgesteckte Nachrichten, die zwischen Momentaufnahmen des Chat-Status hinzugefügt oder entfernt wurden, pro Monat. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Parameter → Berichtsmetriken** wählt Prozessoren und die Anzahl der angezeigten Zeilen aus, auch in gefilterten Berichten. Tages- und Monatstabellen zeigen die neuesten Zeilen an, Tabellen zum Service-Anteil ordnen Chats nach der Anzahl der gespeicherten Nachrichten. Die Summen beziehen sich auf jede Zeile.
 
 Erstellen Sie ausgehend von einem Quell-Checkout alle acht oben aufgeführten Entwürfe aus derselben fiktiven Zeitschrift:
 
@@ -153,7 +153,7 @@ Ein verwendbarer Zeitstempel muss alle folgenden Prüfungen bestehen: Sein Abdru
 4. Behalten Sie die ursprünglichen ZIP-Dateien und deren Hashes bei. Erfassen Sie jeden Inhaber, jede Übertragung, jedes Datum und jeden Zweck. Behalten Sie die zugeordneten Aussagen der Betreiber und Fallnotizen dazu bei.
 5. Bei vertraulichen VMs sind das Zitat, die Challenge, die Intel-Zertifikatskette, die Messwerte, die genaue Quelle und die Bedingungen für den Umgang mit Schlüsseln zu bewahren und unabhängig zu überprüfen. Das Ergebnis der Beglaubigungsprüfung ist zusammen mit den geprüften Artefakten aufzubewahren.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Siehe „[Überprüfungsumfang](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope)“ für die Prüfungen hinsichtlich Erfassung, Archivintegrität, Zeit und Erfassungsumfang in jedem Modus.
 
 ## Überprüfung durch den Empfänger
 

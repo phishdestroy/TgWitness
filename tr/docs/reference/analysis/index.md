@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/analy
 
 Kaydedilen mesajları arayın, yapay zeka girdilerini inceleyin ve kaynak referanslarıyla birlikte analitik raporlar tutun.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Araştırma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Araştırma](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

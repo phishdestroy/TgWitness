@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署與復原](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **英文** · [俄語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [烏克蘭語](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [西班牙語](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [葡萄牙語（巴西）](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [土耳其語](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [阿拉伯語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [波斯語](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [烏爾都語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [印地語](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [印尼語](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [越南語](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [簡體中文](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | 在 `data\demo` 啟動合成示範 |
 | `TgWitness-Check.cmd` | 在不啟動的情況下執行就緒檢查 |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+已將釘選的俄語形態學辭典與 PDF 色彩設定檔打包，供 離線使用。打包機制僅允許在依賴項的 `data` 目錄內放置已知的檔案路徑；若該目錄中出現預期之外的檔案，將導致建置失敗。
 
 將整個壓縮檔解壓縮至可寫入的資料夾（例如 `Documents\TgWitness`）；請勿 直接從 ZIP 檔案內部或 Program Files 資料夾執行。執行環境採用隔離的模組路徑， 因此其他 Python 安裝程式及 `PYTHONPATH` 皆不會影響其運作。 資料會儲存於 套件的 `data` 資料夾中。若要更新，請先停止 TgWitness，將新版本解壓縮至新的 資料夾，並將 `data` 資料夾複製過去。
 

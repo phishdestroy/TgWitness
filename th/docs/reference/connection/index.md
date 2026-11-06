@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/conne
 
 การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 เอกสารนี้อธิบายการทำงานและข้อจำกัดของ TgWitness 0.8.0 การยืนยันตัวตน, การเข้าถึงแหล่งข้อมูล, การเชื่อมต่อเครือข่าย และความครบถ้วนของการบันทึก เป็นสถานะที่แยกกัน สำหรับขั้นตอนการลงชื่อเข้าใช้ รูปแบบไฟล์ และบัญชีหลายบัญชี ให้เริ่มจาก [ส่วนบัญชีและรูปแบบเซสชัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) สำหรับนโยบายเหตุการณ์และพฤติกรรม เมื่อเริ่มต้นใหม่ ให้ดู[ส่วนวิธีการทำงานของการเก็บรวบรวมข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)
 
@@ -123,19 +123,19 @@ MTProxy ส่งผ่านเฉพาะการรับส่งข้อ
 
 ****พารามิเตอร์พูลอัตโนมัติ****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+ในส่วน **Parameters → Automatic MTProxy** ให้กำหนดค่าเกณฑ์ความล้มเหลว (failure threshold), ระยะเวลาพัก (cooldown), การหมุนเวียนตามแผน (planned rotation), การแบ่งปันพร็อกซี (proxy sharing) และระยะเวลาการเปลี่ยนไปใช้ระบบสำรองที่อนุญาต (permitted fallback delay)
 
-| Control | ค่าเริ่มต้น |
+| การควบคุม | ค่าเริ่มต้น |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| ตัดการเชื่อมต่อก่อนการแทนที่ | 3 ภายใน 10 นาที |
+| จำนวนพร็อกซีที่ลองใช้ในแต่ละครั้งการเชื่อมต่อ | 3 |
+| การพักครั้งแรก / การพักสูงสุดหลังเกิดข้อผิดพลาด | 10 นาที / 6 ชั่วโมง |
+| แผนการหมุนเวียน | ถูกปิดใช้งาน; เปิดใช้งานเมื่อเกิดข้อผิดพลาด |
+| บัญชีต่อพร็อกซี | 0: ให้ใช้รายการแยกกันเป็นหลัก และใช้รายการร่วมเมื่อจำเป็น ตั้งค่า 1 เพื่อรอรายการแบบเอกสิทธิ์ |
+| ระยะเวลาหน่วงก่อนที่ระบบจะอนุญาตให้ใช้ Direct fallback | 10 นาที; การซ่อนที่อยู่ยังคงปฏิเสธ Direct |
+| การอัปเดตฟีด / การตรวจสอบการส่งข้อมูล | 60 / 10 นาที; ค่าพื้นที่ทำงานหลักใช้กับกลุ่มงานร่วม |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+การใช้พร็อกซีที่ต่างกันไม่รับประกันว่าจะมีที่อยู่ทางออกที่ต่างกัน การตั้งค่าเหล่านี้ไม่ สามารถแทนที่ข้อจำกัดของ Telegram หรือพิสูจน์ความเป็นนิรนามได้
 
 เพื่อแทนที่รายชื่อสาธารณะด้วยแคตตาล็อกผู้ให้บริการของคุณเอง ให้กำหนดค่าการแทนที่ด้านล่างนี้ การตั้งค่านี้จะปิดการสมัครรับข้อมูลจากภายนอกอย่างสมบูรณ์ รวมถึงเมื่ออาร์เรย์ `proxies` ของมันว่างเปล่า
 

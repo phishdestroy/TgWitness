@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/analy
 
 Saqlangan xabarlarni qidiring, sun'iy intellekt kirimlarini ko'rib chiqing va manba havolalari bilan analitik hisobotlarni saqlang.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Tergov](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Tergov](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

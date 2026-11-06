@@ -25,7 +25,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/concepts/
 
 01 / מסלול ההודעהרצף איורי
 
-Telegram delivers an update to the collector, which appends a journal record. · Telegram · Collector · יומן · עדכון → · הוסף →
+Telegram delivers an update to the collector, which appends a journal record. · Telegram · אספן · יומן · עדכון → · הוסף →
 
 תצוגת הצ'אט הנוכחית הודעה מס' 42
 

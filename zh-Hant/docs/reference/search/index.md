@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 可透過詞形、精確短語、網域及 @用戶名 搜尋已儲存的訊息，結果依最符合的順序排列，且索引與簽名日誌綁定。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [調查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![調查](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [檔案分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/) · [本地 OCR 與文字轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 索引屬衍生資料。它由簽名日誌重建而成，本身從未經過簽名， 也絕不會被導出。原始記錄不會被更改。
 
-**On this page**
+**本頁內容**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#benchmark)
+- [搜尋語法](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#search-syntax)
+- [語言](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#languages)
+- [索引的位置](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#where-the-index-lives)
+- [結果與已簽署的日誌](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#results-and-the-signed-journal)
+- [已識別的文字](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#recognized-text)
+- [存取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#access)
+- [請諮詢檔案庫與 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#ask-the-archive-and-mcp)
+- [依賴項](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#dependencies)
+- [基準測試](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/#benchmark)
 
 ## 搜尋語法
 
@@ -97,14 +97,14 @@ OCR 結果與轉錄內容仍保留於其加密的原始檔中。其索引僅存�
 
 MCP 客戶端可呼叫 `search_messages` 透過 `ranked=true` ，並透過 `next_offset`。範圍限定連線僅會接收其對應的聊天內容。
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+排序分頁最多涵蓋前 1,000 筆結果，無論頁面大小為何。請縮小查詢範圍、聊天室或時間範圍，以檢視更多匹配結果。按「最新優先」搜尋時，系統會在選取各頁面之前，先將訊息、OCR 及轉錄結果依此順序排列。
 
 ## 依賴項
 
 | 套件 | 授權條款 | 原因 |
 | --- | --- | --- |
 | pymorphy3、pymorphy3-dicts-ru、DAWG2-Python | MIT | 俄語與烏克蘭語詞幹；詞典於本地載入 |
-| snowballstemmer | BSD-3-Clause | 英文詞幹，純 Python |
+| snowballstemmer | BSD-3 條款 | 英文詞幹，純 Python |
 | jieba | MIT | 中文查詢分詞，純 Python 實作（僅提供原始碼發行版） |
 | pymorphy3-dicts-uk（可選） | GPL-3.0 | 完整的烏克蘭語詞典 |
 

@@ -14,7 +14,7 @@ Point de contrôle en lecture seule
 
 ← Demander une réponse signée →
 
-HOST B / WITNESS**Vérifier + conserver**
+HÔTE B / TÉMOIN**Vérifier + conserver**
 
 Empreinte digitale du collecteur épinglée Clé de signature distincte du témoin
 

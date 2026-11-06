@@ -6,21 +6,21 @@ Enquêtes portant sur l’intégralité d’un compte, couvrant les chaînes, le
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Enquête](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Suivez une affaire à travers les canaux, les groupes, les discussions privées et les bots, depuis l’acquisition initiale jusqu’à une chronologie référencée et un transfert vérifiable. La version interactive du site web est disponible à l’adresse `/docs/cases/` ; [instructions de prévisualisation](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**Sur cette page**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#adapt-the-investigation)
+- [Cas traité : une destination change au cours de quatre conversations](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Définir le cas et recueillir l'intégralité du récit](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Répertorier toutes les sources et recueillir le contexte historique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Conserver l'évolution du cas et les interactions délibérées](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Relier les observations entre les différentes discussions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Créer la chronologie inter-discussions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Ajouter des perspectives de compte sans perdre leur origine](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Constituer et vérifier le dossier de transfert](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Adapter l'enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/#adapt-the-investigation)
 
 ## Exemple concret : un changement de destination au cours de quatre conversations
 
@@ -117,7 +117,7 @@ Dans l’exemple ci-dessous :
 | Même fichier enregistré | Réceptions multimédias n° 151 et n° 209 terminées | Les valeurs SHA-256 complètes concordent pour les octets conservés |
 | Attribution de la chaîne | #101 et #188 | Ne pas attribuer une publication de chaîne à l’utilisateur 71001 sans mentionner l’expéditeur. |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+Comparer les hachages des pièces jointes et les références de messages associées, et conserver les chronologies des comptes regroupées par les identifiants Telegram fournis dans ces enregistrements.
 
 Conservez les notes de travail de l’équipe sur [Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/) : ajoutez aux favoris les enregistrements sur lesquels vous vous appuyez, tels que #146, #188 et #205, mettez en surbrillance la chaîne de destination exacte, et enregistrez un extrait de chaque action enregistrée entre deux enregistrements ou sur une plage horaire. Les notes et les statuts conservent l’examen effectué par l’équipe dans leur propre historique signé, distinct des observations sources.
 
@@ -177,6 +177,6 @@ Conservez les résultats de vérification réels et les artefacts d’origine. E
 | --- | --- | --- |
 | Litige relatif à une commande ou à un paiement géré par un bot | Annonce de l’entrée → aperçu du lien enregistré → paramètre de démarrage du bot → versions « message » et « clavier » → accusés de réception des rappels du panneau → suivi des conversations privées/de groupe | Chronologie des offres et des réponses observée et sources vérifiées ; un lien de paiement ne suffit pas à lui seul à prouver qu’un paiement a bien eu lieu |
 | Messages supprimés à la suite d’un incident | Toutes les conversations concernées → originaux et modifications enregistrés → résultats des suppressions ou des éléments manquants lors d’une nouvelle vérification → médias conservés → couverture et autres points de vue des comptes | Versions conservées et intervalles d’inconnues explicites ; aucun acteur de suppression inventé |
-| Un participant change de nom d’une conversation à l’autre | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Chronologie de l'activité d'un compte Telegram avec des liens vers les enregistrements sources correspondants |
+| Un participant change de nom d’une conversation à l’autre | ID numérique de l'expéditeur → historique des noms/noms d'utilisateur → réponses → autres discussions observées → destinations/fichiers cités | Chronologie de l'activité d'un compte Telegram avec des liens vers les enregistrements sources correspondants |
 
 [Référence de la collection](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/) · [Vérification des profils de personnes](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#people-profiles) · [Transfert des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#investigation-handoff) · [Validation terminée](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/)

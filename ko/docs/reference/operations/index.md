@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/opera
 
 패널의 일상적인 운영: 모드, 모니터링 범주, 매개변수, 알림, 내보내기, 백업 및 용량.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [배포 및 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![배포 및 복구](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 처음 연결할 때는 [계정 및 세션 형식을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) 사용하십시오. 저장된 버전, 이벤트 정책 및 누락에 대한 설명은 [수집 방식에서 확인하십시오. 이 가이드는 일상적인 운영 및 복구 절차를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/) 다룹니다.
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/opera
 
 관리형 임시 Cloudflare 터널의 경우, `tgwitness tunnel off`는 로컬 패널과 수집 기능이 계속 실행되는 동안 공개 액세스를 차단합니다. `tgwitness tunnel on`는 공개 액세스를 활성화하고, `tgwitness tunnel restart`는 새로운 터널 연결을 생성합니다. `tgwitness open`를 사용하여 현재 주소를 확인하십시오. 명시적인 비활성화 설정은 서비스 재시작 후에도 유지됩니다. `tgwitness stop`는 패널과 수집 기능을 모두 중지합니다.
 
-**On this page**
+**이 페이지에서**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#capacity-and-retention)
+- [운영자 워크플로우](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#operator-workflow)
+- [주 키를 공유하지 않고 작업을 공유하기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [실행 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#runtime-modes)
+- [모니터링 카테고리](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#monitoring-categories)
+- [알림](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#notifications)
+- [패널 레이아웃](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#panel-layout)
+- [배포 환경](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#deployment-environments)
+- [시작 시 점검 및 내보내기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#startup-checks-and-exports)
+- [백업, 복원 및 중단](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#backup-restore-and-interruptions)
+- [용량 및 보존 기간](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/#capacity-and-retention)
 
 ## 운영자 워크플로우
 

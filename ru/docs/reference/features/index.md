@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/featu
 
 Текущая модель сбора данных, рабочие процессы с несколькими учетными записями, экспорт данных и операционные ограничения TgWitness.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Ссылка на проект](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![Ссылка на проект](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness сохраняет переписки в Telegram, доступные для подключенных учетных записей, фиксирует наблюдаемые изменения и готовит поддающиеся проверке экспортные файлы. В данном руководстве описаны модель сбора данных, текущие рабочие процессы и их ограничения.
 
-**On this page**
+**На этой странице**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#stable-release-criteria)
+- [Автономное приложение](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#standalone-application)
+- [Совместные расследования](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#shared-investigations)
+- [Инструменты архивирования](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#archive-tools)
+- [Дополнительные возможности](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#optional-extras)
+- [Протокол и закрытые источники](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#protocol-and-private-sources)
+- [Несколько учетных записей](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#multiple-accounts)
+- [Захват и указание авторства](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#capture-and-attribution)
+- [Пропускная способность и ограничения Telegram](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#capacity-and-telegram-limits)
+- [Надёжность и восстановление](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#reliability-and-recovery)
+- [Модель доказательств](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#evidence-model)
+- [Экспорт, развертывание и передача](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#export-deployment-and-handoff)
+- [Критерии стабильного выпуска](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/#stable-release-criteria)
 
 ## Автономное приложение
 
@@ -93,9 +93,9 @@ TgWitness имеет собственную процедуру установк�
 | Действия администратора | Соответствующие предоставленные обновления и моментальный снимок журнала администратора в экспортах чатов каналов/супергрупп | Функция экспорта считывает журнал, если он доступен для учетной записи администратора, осуществляющего экспорт; непрерывный опрос журнала администратора не входит в этот процесс. |
 | Вложение | Описание исходной версии, количество загруженных байтов/SHA-256 и результаты попыток | Удаленный файл может оказаться невозможным для восстановления; последняя версия не заменяется |
 | История | Явный снимок текущих видимых сообщений | Не восстанавливает все изменения или удалённый контент |
-| Процесс сбора данных | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#verification-scope) |
+| Процесс сбора данных | Запуск/остановка, пульс, ошибки, настройки, область действия и подписанное подтверждение запуска | Локальный реестр; GitHub и TDX добавляют [независимые проверки среды](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+Интерфейс указывает аккаунт, указанный в исходном событии, и сохраняет наблюдаемые имена и имена пользователей. Если в событии не указан его участник, в отчете это поле оставляется незаполненным.
 
 ## Вместимость и ограничения Telegram
 

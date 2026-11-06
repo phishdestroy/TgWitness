@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![פיתוח](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 תהליך Python אחד מארח את לוח הבקרה של FastAPI ומספר בלתי מוגבל של סביבות עבודה מבודדות, כשכל אחת מהן כוללת לקוח חשבון משתמש של Telethon. SQLite מכיל יומן אירועים חתום שניתן להוסיף אליו בלבד, וכן הגדרות תפעוליות הניתנות לשינוי. כספת מוצפנת מאחסנת את פרטי הזיהוי של ה-API, את ה-StringSession ואת מפתח החתימה. ה-frontend מורכב מקובצי HTML/CSS/JavaScript רגילים: אין צורך בבניית Node, ב-CDNs או בהורדות frontend בזמן ריצה.
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | פעולות פאנל מפורטות, קבלות חתומות, מזהי בקשות קבועים ומדיניות ניסיונות חוזרים מקומיים למשימות של שיחות חוזרות/הצטרפות |
 | message_content.py | השוואת הודעות נראית לעין, ללא מטא-נתוני גישה לתעבורה |
 | workers.py | יש להמתין לעובדי ייצוא הקבצים לפני ביצוע ניקוי הביטולים |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | משימות צ'אט מקבילות, הקצאות לכל חשבון, נקודות ביקורת חתומות וניקוי לאחר אימות הארכיון |
+| distributed_takeout.py / export_timing.py | הפעלות Takeout הניתנות לחידוש וזמני התחלה או חידוש עבור כל הפעלה |
 | store.py | עסקאות WAL, שרשרת אירועים מסודרת, מסנני שאילתות, הגדרות תפעוליות |
 | fulltext.py | אינדקס טקסט מלא נגזר (צורות מילים, BM25), המקושר לכותרת היומן החתום; לא מיוצא לעולם |
 | security.py | יצירת קובץ פרטי, כספת מוצפנת, חתימה ב-Ed25519, נעילת תהליך יחיד |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 כל סביבת עבודה מקבלת חשבון אחד ויש לה ספרייה וזהות חתימה משלה. סביבת העבודה הראשית נשארת בשורש למען תאימות; סביבות עבודה נוספות נמצאות ב- profiles/<id>/. אסימון נושא אחד שולט על כל ההתקנה; סביבות העבודה אינן דיירים נפרדים לצורך אישור. נעילות תהליכים מגנות על הספריות; נעילות מסד הנתונים מסדרות את הוספת האירועים. כל תוספת נרשמת באופן סינכרוני ל-SQLite WAL במצב סינכרוני מלא (FULL). מפעילים לעדכון/מחיקה של אירועים מונעים עריכות רגילות של היישום; מנהלי מערכת הקבצים נשארים בתוך גבול האמון.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+אישור ה-API הוא אסימון נושא. פעולות הכניסה מסודרות בסדר סדרתי ומוגבלות בזמן. העלאות לחשבון משתמשות במגבלה ייעודית של 12 MiB לגוף מקודד ובמגבלה של 8 MiB לקובץ מפוענח; בקשות API רגילות שומרות על המגבלה של 16 KiB. ההמרה פועלת ב-thread של עובד, שומרת את ההעלאות בזיכרון, ומחזירה קלט מנורמל לדפדפן המאומת. לכניסה באמצעות QR יש מועמד לכל סביבת עבודה, מזהה קצר-טווח, משימת המתנה, ובטול מפורש. רק אישור שהתקבל הופך ללקוח הפעיל. Telegram FloodWait מוחזר עם ערך Retry-After; פרטי הזדהות והודעות שגיאה גולמיות של RPC אינן נחשפות בשגיאות API. ייצוא יומנים מתבצע מחוץ ל-loop האירוע האסינכרוני ומרוצף לפי סביבת עבודה. הם מזרימים תמונת מצב קריאה יציבה במקביל לכתיבות WAL מתמשכות. משימות איסוף צ'אט יכולות לפעול במקביל בחשבונות נפרדים; כל חשבון נשאר שמור עד שהמשימה שלו מסתיימת. משימה שהושעתה או נכשלה שומרת על נקודות הבדיקה שלה. אימות ארכיון מוצלח מאפשר ניקוי של קבצי העבודה שלה, תוך השארת קובץ ה-ZIP, התוכנית החתומה והסטטוס. אספני סביבות העבודה חולקים את לולאת התהליך/האירוע.
 
 תמונות מצב היסטוריות עדכניות ועדכונים בזמן אמת עשויים לחפוף. שתיהן מהוות תצפיות נפרדות, המסומנות לפי מקור; כפילויות אינן מוסתרות באופן אוטומטי. לא מיושמת כל הסקה הנובעת מ- מזהים חסרים, טקסט שנמחק באופן מזויף, ספירת חברים בכפייה או הצטרפות אוטומטית לקבוצות. .
 

@@ -57,7 +57,7 @@ Ein separates Paket, das mit den Grenzen des zugehörigen Quellprotokolls verkn�
 | Personen | Ausgewählte Personen bleiben namentlich genannt, andere bekommen Pseudonyme oder werden weggelassen. |
 | Text | Der ganze Text, nur der der ausgewählten Personen und Ihres Kontos, oder keiner. |
 | Dateien | Dateien der ausgewählten Personen und Ihres Kontos, alle angezeigten Dateien oder keine. |
-| Case Board | Nichts, Lesezeichen und Ausschnitte oder Karten mit Diskussion. |
+| Fallübersicht | Nichts, Lesezeichen und Ausschnitte oder Karten mit Diskussion. |
 
 Lesen Sie auch Text und Dateien: Ein Pseudonym entfernt keine Namen, die in einer Nachricht oder einem Anhang stehen. Fehlt eine ausgewählte Datei, stellen Sie sie wieder her oder lassen Sie Anhänge weg.
 

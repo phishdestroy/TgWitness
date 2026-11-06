@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/stora
 
 备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署与恢复](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署与恢复](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 该面板将任务分为三类：
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/stora
 
 仅凭上传响应本身并不意味着可以删除文件。TgWitness会下载 完整的加密对象并验证其大小，SHA-256保存收据， 然后在删除前立即再次检查本地字节。如果上传失败、 回读结果不同或传输被取消，本地文件将保留原位。如果 已启用的证据备份尚未复制该文件，删除操作也会等待备份完成。
 
-**On this page**
+**本页内容**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#operator-bot-and-completion-notices)
+- [当磁盘空间即将用尽时](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#when-the-disk-is-filling-up)
+- [连接目标](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#connect-a-destination)
+- [保留恢复文件](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#keep-the-recovery-file)
+- [安装丢失后的恢复](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#recover-after-losing-the-installation)
+- [操作员机器人和操作提示](https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## 磁盘空间即将耗尽时
 

@@ -6,7 +6,7 @@ TgWitness를 설치하고 실행하는 모든 방법: Windows 패키지, Python,
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![시작하기](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 **영어** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [우크라이나어](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [포르투갈어 (브라질)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [우르두어](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [인도네시아어](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [베트남어](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [간체 중국어](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 

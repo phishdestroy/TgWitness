@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/times
 
 Horodatages RFC 3161 pour les points de contrôle signés : ce qui est envoyé à l’autorité et comment la réponse est vérifiée.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Preuves et vérification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Preuves et vérification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness prépare des requêtes RFC 3161 et vérifie les réponses de l’autorité d’horodatage (TSA). Cette procédure manuelle ne sélectionne pas de TSA et n’envoie pas de données ; le mode « preuves » effectue ces deux opérations selon un calendrier défini ([format de preuve](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Une requête préparée **ne** constitue **pas encore une preuve d’horodatage**.
 

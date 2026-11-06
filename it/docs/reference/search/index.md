@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/searc
 
 Ricerca dei messaggi salvati in base a forme lessicali, frasi esatte, domini e @nomiutente, con i risultati più pertinenti in primo piano, grazie all’indice collegato al registro firmato.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/it/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Indagine](https://phishdestroy.github.io/TgWitness/it/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Indagine](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Analisi dell'archivio](https://phishdestroy.github.io/TgWitness/it/docs/reference/analysis/) · [OCR locale e trascrizione](https://phishdestroy.github.io/TgWitness/it/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Ricerca dei messaggi salvati in base a forme lessicali, frasi esatte, domini e @
 
 L’indice è un dato derivato. Viene ricostruito dal registro firmato, non è mai firmato di per sé e non viene mai esportato. I record originali non subiscono alcuna modifica.
 
-**On this page**
+**In questa pagina**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#recognized-text)
+- [Sintassi di ricerca](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#search-syntax)
+- [Lingue](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#languages)
+- [Dove si trova l'indice](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#where-the-index-lives)
+- [Risultati e il registro firmato](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#results-and-the-signed-journal)
+- [Testo riconosciuto](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#recognized-text)
 - [Access](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#dependencies)
+- [Chiedi all’archivio e MCP](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dipendenze](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/it/docs/reference/search/#benchmark)
 
 ## Sintassi di ricerca
@@ -66,7 +66,7 @@ Il dizionario ucraino (`pymorphy3-dicts-uk`) è distribuito sotto licenza GPL-3.
 | --- | --- | --- |
 | Su disco (impostazione predefinita) | `search/fulltext.sqlite3` nella directory dell'area di lavoro | Archivi di grandi dimensioni; resiste ai riavvii |
 | Solo in memoria | Nulla viene salvato su disco; viene ricostruito ad ogni avvio | Nessuna copia derivata del testo dei messaggi su disco |
-| Off | Nessun indice; **i più recenti per primi · il testo esatto** rimane invariato | Installazioni minime |
+| Disattivato | Nessun indice; **i più recenti per primi · il testo esatto** rimane invariato | Installazioni minime |
 
 L'amministratore principale sceglie la modalità in **Registro → Filtri → Indice di ricerca** per ogni area di lavoro. `TGWITNESS_FULLTEXT=disk|memory|off` Imposta il valore predefinito per gli spazi di lavoro che non hanno una propria impostazione. Passando alla modalità «memoria» o disattivando l’opzione, il file viene eliminato. Il file dell’indice ha la stessa protezione del registro: si trova nella directory dei dati privati . Non è crittografato e non fa parte dei backup né delle copie fuori sede.
 
@@ -97,7 +97,7 @@ L'accesso limitato alle chat individua solo i record provenienti dalle proprie c
 
 I client MCP possono chiamare `search_messages` con `ranked=true` e inviare messaggi con `next_offset`. Le connessioni con ambito ricevono solo le proprie chat.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+L'impaginazione ordinata copre al massimo i primi risultati 1,000, indipendentemente dalle dimensioni della pagina. Restringere la query, la chat o il periodo per esaminare ulteriori corrispondenze. Le ricerche più recenti per prime ordinano i messaggi, i risultati OCR e di trascrizione prima di selezionare ciascuna pagina.
 
 ## Dipendenze
 

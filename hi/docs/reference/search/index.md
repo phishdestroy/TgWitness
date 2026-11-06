@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/searc
 
 हस्ताक्षरित जर्नल से जुड़े सूचकांक के साथ, शब्द रूपों, सटीक वाक्यांशों, डोमेनों और @usernames के आधार पर सहेजे गए संदेश खोजें, सर्वोत्तम मिलान पहले।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [जांच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![जांच](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [संग्रह विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/) · [स्थानीय OCR और प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/searc
 
 इंडेक्स व्युत्पन्न डेटा है। इसे हस्ताक्षरित जर्नल से फिर से बनाया जाता है, यह स्वयं कभी हस्ताक्षरित नहीं होता है और कभी निर्यात में शामिल नहीं होता है। मूल रिकॉर्ड नहीं बदलते हैं।
 
-**On this page**
+**इस पृष्ठ पर**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#benchmark)
+- [खोज सिंटैक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#search-syntax)
+- [भाषाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#languages)
+- [जहाँ इंडेक्स स्थित है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#where-the-index-lives)
+- [परिणाम और हस्ताक्षरित जर्नल](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#results-and-the-signed-journal)
+- [मान्यता प्राप्त पाठ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#recognized-text)
+- [पहुँच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#access)
+- [आर्काइव और MCP से पूछें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#ask-the-archive-and-mcp)
+- [निर्भरताएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#dependencies)
+- [बेंचमार्क](https://phishdestroy.github.io/TgWitness/hi/docs/reference/search/#benchmark)
 
 ## खोज सिंटैक्स
 
@@ -97,14 +97,14 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 MCP क्लाइंट कॉल कर सकते हैं `search_messages` के साथ `ranked=true` और पेज के साथ `next_offset`. स्कोप्ड कनेक्शन केवल अपनी चैट्स ही प्राप्त करते हैं।
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+रैंक की गई पन्नीकरण प्रणाली पृष्ठ आकार की परवाह किए बिना अधिकतम पहले 1,000 परिणामों को कवर करती है। अधिक मिलान देखने के लिए क्वेरी, चैट या अवधि को सीमित करें। नवीनतम-प्रथम खोजें प्रत्येक पृष्ठ को चुनने से पहले संदेशों, OCR और ट्रांसक्रिप्शन परिणामों को क्रमबद्ध करती हैं।
 
 ## निर्भरताएँ
 
 | पैकेज | लाइसेंस | क्यों |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | रूसी और यूक्रेनी लम्बा; शब्दकोश स्थानीय रूप से लोड किए गए हैं |
-| snowballstemmer | BSD-3-क्लॉज | अंग्रेज़ी स्टैम्स, शुद्ध पाइथन |
+| स्नोबॉलस्टेमर | BSD-3-क्लॉज | अंग्रेज़ी स्टैम्स, शुद्ध पाइथन |
 | जीबा | MIT | चीनी क्वेरी विभाजन, शुद्ध पाइथन (केवल स्रोत वितरण) |
 | pymorphy3-dicts-uk (वैकल्पिक) | GPL-3.0 | पूर्ण यूक्रेनी शब्दकोश |
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/setti
 
 Wizard pengaturan, tujuan, tingkat antarmuka, rute koneksi, dan pengaturan yang dibagikan oleh sebuah grup akun.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Memulai](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Memulai](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/) · [Koneksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) · [Akses](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/)
 
@@ -16,7 +16,7 @@ Bahasa, zona waktu IANA, tema, dan tingkat disimpan per operator dan per ruang k
 
 `/settings` mengedit catatan yang sama seperti yang dilakukan oleh wizard. Pencarian mencakup bidang utama, parameter, dan formulir tambahan; bidang tersembunyi dapat dibuka tanpa mengubah tingkat akses. Tingkat akses hanya mengubah apa yang ditampilkan: server memeriksa izin secara otomatis. Pengaturan koleksi dan koneksi pertama menjadi tanggung jawab administrator ruang kerja.
 
-| Level | Bidang | Sidebar |
+| Tingkat | Bidang | Sidebar |
 | --- | --- | --- |
 | Sederhana | Hanya hal-hal yang penting | Beranda, Obrolan, Perubahan, Arsip, Pengaturan |
 | Standar | Pengaturan umum beserta penjelasannya | Menambahkan Case Board, Akun, dan Akses |

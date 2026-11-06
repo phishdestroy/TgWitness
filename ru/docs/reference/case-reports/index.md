@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-
 
 Фильтры отчетов, восемь шаблонов дизайна, предустановленные настройки содержания, сохраненная история изменений и оценка, включённая в подписанные экспортные файлы.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Расследование](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Расследование](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Превратите выбранные наблюдения в удобочитаемый отчёт по делу: его постановку, объём, сохраненные изменения, диаграммы, выводы и ссылки на источники. Каждый отчёт предоставляет получателю возможность проверить предоставленный материал и оценить полноту сбора данных.
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-
 
 В предварительном просмотре данных учитывается полный стабильный префикс журнала, а не начальная выборка. Ограничиваются только отображаемые образцы строк и длинные списки; количество пропущенных элементов указывается. При последующем экспорте создаётся новый стабильный снимок, поэтому продолжающийся сбор данных может привести к увеличению этих цифр. Объём, количество и идентификаторы источников включаются в подписанный отчёт. Открытие или предварительный просмотр формы не приводит к её сохранению.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Руководство по юрисдикции.** В разделе Сведения о документе откройте **Руководство по юрисдикции · опционально** , чтобы выбрать юрисдикцию и гражданско-коммерческую или уголовную процедуру. В приложении приведены правовые основания, ссылки на источники, примечания по подготовке и статус исследования. Резюме на местном языке и пояснения по мерам защиты данных при сборе являются необязательными. По умолчанию юрисдикция не выбрана. Эти настройки относятся к рабочей области и исключаются из сохраненных конфигураций макета и неявных настроек по умолчанию для совместного доступа и копирования. См. [Настройки по умолчанию, Поддерживаемые отчеты и Ограничения исследования](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Выберите версию для получателя.** В диаграммах и стенограмме используются выбранные записи. Целостность, сохранность и полнота описывают полный журнал источников. Архив с доказательствами в формате ZIP содержит исходные записи и вложения. Используйте [упрощенную процедуру передачи](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#handover-extract) , если получателю необходимо предоставить только выбранные, разрешенные данные.
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-
 
 Если файл `analytics.json` включен, он защищен подписанными хешами файлов архива. Журнал `report.json` содержит те же выбранные агрегаты. Проверка подписи обнаруживает измененные байты. Чтобы проверить цифры, пересчитайте агрегаты журнала с помощью `report_analytics.Analytics` и `selected`, либо агрегаты моментальных снимков с помощью `snapshot_analytics.collect` и `project`.
 
-### Anomaly indicators
+### Индикаторы аномалий
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Предварительный просмотр.** В отчёты о доказательствах добавляется раздел **Индикаторы аномалий**, рассчитанный зарегистрированными процессорами (`tgwitness/metrics/`, по одному файлу на каждый показатель). В отчёте указывается каждый процессор, на котором выполнялся расчёт, с указанием его версии, а под таблицей приводится описание используемого метода, чтобы расчёт можно было повторить из `events.jsonl` с помощью `tgwitness.metrics.run`.
 
-| Processor | Что здесь показано |
+| Процессор | Что здесь показано |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time`, версия 1 | Количество новых пользователей и сообщений за день по UTC. Для установки флага требуется не менее пяти новых пользователей и количество сообщений, в три раза превышающее их медиану, при этом объем сообщений не должен превышать 1.5-кратную медиану. Базовые данные включают не менее семи дней наблюдений в течение предыдущих 14 календарных дней после семидневного периода разогрева. |
+| `service_vs_message_ratio`, версия 1 | Отдельные номера сохраненных сообщений для каждого чата и доля, используемая служебными сообщениями. Здесь описывается система нумерации; не дается объяснение конкретного отсутствующего номера. |
+| `join_leave_per_month`, версия 1 | Присоединения, уходы и удаления или баны в месяц, по одному на человека, чат, изменение и день. |
+| `pinned_per_month`, версия 1 | Закрепленные служебные сообщения, открепленные уведомления, а также закрепленные сообщения, добавленные или удаленные между моментальными снимками состояния чата, в расчете на месяц. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Параметры → Показатели отчёта** выбирает процессоры и количество отображаемых строк, в том числе в отфильтрованных отчётах. Ежедневные и ежемесячные таблицы показывают последние строки, таблицы доли сервиса ранжируют чаты по количеству сохраненных сообщений. Итоговые значения охватывают каждую строку.
 
 На основе выгруженного исходного кода создайте все восемь макетов, перечисленных выше, на примере одного и того же вымышленного журнала:
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. Сохраните исходные ZIP-архивы и их хэши. Зафиксируйте каждого владельца, передачу, дату и цель. Сохраните при этом приписываемые оператору заявления и примечания по делу.
 5. В случае конфиденциальных виртуальных машин необходимо сохранить и независимо проверить цитату, запрос, цепочку сертификатов Intel, измерения, точный источник и условия обращения с ключами. Результат проверки аттестации следует хранить вместе с проверенными артефактами.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+См. раздел «[Область верификации](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#verification-scope)» для ознакомления с проверками получения данных, целостности архива, времени и охвата сбора данных в каждом режиме.
 
 ## Проверка получателем
 

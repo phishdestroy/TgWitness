@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/conne
 
 Xác thực, nhóm proxy tự động, chế độ IP, chính sách dự phòng, yêu cầu bên ngoài và lưu trữ khóa bí mật.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Triển khai và khôi phục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Triển khai & khôi phục](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Tài liệu này mô tả cách thức hoạt động và các giới hạn của TgWitness phiên bản 0.8.0. Quá trình xác thực, quyền truy cập nguồn, kết nối mạng và tính đầy đủ của dữ liệu thu thập là các trạng thái độc lập. Để tìm hiểu về các bước đăng nhập, định dạng tệp và quản lý nhiều tài khoản, quý vị hãy bắt đầu từ phần [“Tài khoản và định dạng phiên làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/)”. Đối với chính sách sự kiện và hành vi khởi động lại, xin vui lòng tham khảo phần [“Cách thức thu thập dữ liệu hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/)”.
 
@@ -123,19 +123,19 @@ Một MTProxy chỉ truyền tải lưu lượng Telegram. Các thao tác HTTP c
 
 ****Các tham số nhóm tự động****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+Trong phần **Tham số → MTProxy tự động**, hãy cấu hình ngưỡng lỗi, thời gian chờ, lịch luân phiên, chia sẻ proxy và độ trễ dự phòng được phép.
 
 | Kiểm soát | Mặc định |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Ngắt kết nối trước khi thay thế | 3 trong vòng 10 phút |
+| Số lượng proxy được thử cho mỗi lần kết nối | 3 |
+| Thời gian nghỉ đầu tiên / tối đa sau khi xảy ra lỗi | 10 phút / 6 giờ |
+| Lịch trình luân phiên | Đã tắt; bật khi gặp lỗi |
+| Số lượng tài khoản trên mỗi proxy | 0: ưu tiên các mục riêng biệt, chia sẻ khi cần thiết. Đặt 1 để chờ một mục độc quyền. |
+| Thời gian trễ trước khi được phép chuyển sang phương án dự phòng trực tiếp | 10 phút; Ẩn địa chỉ vẫn từ chối Direct |
+| Kiểm tra làm mới nguồn cấp dữ liệu / kiểm tra truyền tải | Biên bản 60/10; các giá trị của không gian làm việc chính áp dụng cho nhóm chia sẻ |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Việc sử dụng các proxy khác nhau không đảm bảo sẽ có các địa chỉ thoát khác nhau. Các cài đặt này không vượt qua các giới hạn của Telegram hoặc chứng minh tính ẩn danh.
 
 Để thay thế danh sách công khai bằng danh mục nhà mạng của riêng quý vị, vui lòng cấu hình tùy chọn ghi đè dưới đây. Tùy chọn này sẽ vô hiệu hóa hoàn toàn các đăng ký bên ngoài, kể cả khi mảng `proxies` của nó trống.
 

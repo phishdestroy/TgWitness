@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-
 
 Hetzner یا Phala Cloud پر ایک سیل شدہ 24/7 سرور، Gateway DNS اور وہ چیکس جنہیں تیسری پارٹی دہرا سکتی ہے۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تیناری اور بحالی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![تیناری اور بحالی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+اعلیٰ یقین والی تعیناتی آرکائیو کی تصدیق میں جمع کرنے کے ماحول کی آزادانہ جانچ شامل کرتی ہے۔ جائزہ لینے والا کلاؤڈ فراہم کنندہ اور Cloudflare کے پاس موجود تعیناتی اور رسائی کے ریکارڈز کو دریافت کرتا ہے، اور Intel TDX تعیناتی جمع کرنے والے کے ماحول کی ہارڈویئر تصدیق شامل کرتی ہے۔
 
 عام مقامی اور Docker استعمال میں کوئی تبدیلی نہیں آئی۔ یہاں کچھ بھی نہیں چلتا جب تک آپ کو `python -m tgwitness.cloud` کے ساتھ تعینات کریں، اور کلیکٹر صرف اسی وقت اپنے ہوسٹ کو پڑھتا ہے جب تعیناتی سیٹ کرتی ہے۔ `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ High-assurance deployment adds independent checks of the collection environment 
 7. تصدیق کنندہ، صرف پڑھنے کے لیے ٹوکنز → دستخط شدہ /api/assurance بیان
 8. تصدیق کنندہ، صرف پڑھنے کے لیے ٹوکنز → شواہد کا زپ
 
-**On this page**
+**اس صفحے پر**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#reading-the-deployment-result)
+- [ایک تصدیق کنندہ کیا چیک کر سکتا ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [فراہم کنندگان](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#providers)
+- [Phala Cloud پر خفیہ VM (Intel TDX)](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [شروع کرنے سے پہلے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#before-you-start)
+- [پینل سے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#from-the-panel)
+- [ڈومین کے بغیر فوری سرنگ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [نشر کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#deploy)
+- [ڈی بیگ تعیناتی اور لاک](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [ایک تعیناتی ہٹائیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#remove-a-deployment)
+- [کوئی بھی سرور (خود تصدیق شدہ)](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#any-server-self-attested)
+- [تصدیق کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#verify)
+- [شواہد کی حوالگی کے لیے رپورٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare بطور بیرونی گواہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [تینفاذ کے نتیجے کی پڑھائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## ایک تصدیق کنندہ کیا چیک کر سکتا ہے
 
@@ -54,7 +54,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | دستخطی کلید اسی سرور پر بنائی گئی تھی۔ | کلیدی بیان کو دستخط کرتی ہے جس میں فراہم کنندہ کے سرور آئی ڈی اور موصول شدہ cloud-init کے ہیش کا ذکر ہوتا ہے۔ | کلیکٹر، فراہم کنندہ کے خلاف چیک کیا گیا |
 | یہ جرنل اُس کلید اور سرور کا ہے۔ | ہر عمل ثبوت میں شروع ہوتا ہے ZIP اس سرور کے لیے میزبان کی پیمائش کو لے کر جاتا ہے۔ | شواہد ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+جمع کرنے والا SSH کی حالت، سیشنز، لاگ ان کی تاریخ اور بوٹ کی معلومات کو دستخط شدہ process-start اور `host.state` ریکارڈز میں درج کرتا ہے۔ ایک عام VM پر یہ مقامی انوینٹری ریکارڈز ہوتے ہیں، جن کا جائزہ لینے والا فراہم کنندہ کے آزاد ریکارڈز سے موازنہ کرتا ہے۔ ذیل میں Intel TDX تعیناتی اضافی طور پر ہارڈویئر کی پشت پناہی والے پیمائشوں کی تصدیق بھی کرتی ہے۔
 
 ## فراہم کنندگان
 
@@ -292,6 +292,6 @@ Cloudflare ٹیلیگرام کی انکرپشن کے اندر نہیں دیکھ 
 
 ## تینخانے کے نتیجے کی پڑھائی
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+ایک عام VM کے لیے، فراہم کنندہ ہوسٹ انفراسٹرکچر اور مقامی انوینٹری کو کنٹرول کرتا ہے، اور اسے فراہم کنندہ کے ریکارڈز کے ساتھ چیک کیا جاتا ہے۔ Intel TDX کے لیے، تصدیق کنندہ اضافی طور پر ہارڈویئر کوٹ، کلیکٹر بائنڈنگ، کمپوز اور OS کی پیمائشوں کو چیک کرتا ہے۔ یہ دیکھنے کے لیے انفرادی نتائج پڑھیں کہ کون سی چیک پاس ہوئیں یا دستیاب نہیں تھیں۔
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+تاریخی فائر وال کی تفصیل فراہم کنندہ پر منحصر ہے؛ Linode قواعد کے ورژنز کو برقرار رکھتا ہے۔ [تصدیقی ریکارڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/) میں آزمائش شدہ تعیناتیوں اور باقی ماندہ لائیو چیکس کی فہرست ہوتی ہے، اور [تصدیقی دائرہ کار](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) ان ماحولیاتی چیکس کو آرکائیو حصول اور سالمیت سے جوڑتا ہے۔

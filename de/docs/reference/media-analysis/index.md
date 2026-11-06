@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/media
 
 Erkennen Sie erfasste Bilder und Audiodateien mit einem lokalen Worker; verknüpfen Sie den abgeleiteten Text weiterhin mit der Quelldatei.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Untersuchung](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Untersuchung](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

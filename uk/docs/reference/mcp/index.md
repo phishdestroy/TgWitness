@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/
 
 Підключіть клієнт MCP до вибраних робочих просторів та чатів із тимчасовим, відкличним доступом.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Інтеграції з архівами](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Інтеграції з архівами](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Підключіть клієнт-аналітик до вибраних робочих просторів та чатів. TgWitness надає доступ до **Streamable HTTP за адресою `/mcp` у процесі панелі**. Кожне з’єднання має власний токен, термін дії та дозволені інструменти. MCP не може надсилати повідомлення Telegram, змінювати налаштування або модифікувати підписаний журнал. Ці ж з’єднання працюють із [командним рядком](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/).
 
 [Посібник з організації робочого процесу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**На цій сторінці**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#tools-and-boundaries)
+- [Встановити та перевірити](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#install-and-check)
+- [Встановити з’єднання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#issue-a-connection)
+- [Підключіть свій клієнт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#connect-your-client)
+- [Тунель Cloudflare](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#cloudflare-tunnel)
+- [Інструменти та обмеження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/#tools-and-boundaries)
 
 ## Встановлення та перевірка
 
@@ -57,12 +57,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/
 
 | Клієнт | Конфігурація | Зв’язок |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, заголовок Bearer |
+| Код Claude | `.mcp.json` | HTTP, `type: "http"`, заголовок Bearer |
 | Claude Desktop | `claude_desktop_config.json` | Локальний міст stdio |
 | Cursor | `.cursor/mcp.json` | HTTP із заголовком через змінну середовища |
 | VS Code Local | `.vscode/mcp.json` | HTTP із введенням пароля через `promptString` |
 | Windsurf | `mcp_config.json` | HTTP із заповнювачем у заголовку Bearer |
-| Інші клієнти | URL-адреса та заголовок Authorization | Streamable HTTP |
+| Інші клієнти | URL-адреса та заголовок Authorization | HTTP із можливістю потокової передачі |
 
 TgWitness використовує токени Bearer без виявлення OAuth. Використовуйте локальний міст stdio для клієнтів, чий віддалений конектор вимагає OAuth. У VS Code вхідні змінні застосовуються до середовища **Local** і не передаються в сеанси Copilot. Довідники з конфігурації: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

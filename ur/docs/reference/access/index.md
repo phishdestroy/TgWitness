@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/acces
 
 اکاؤنٹس اور چیٹس کے لیے محدود رسائی فراہم کریں، اجازت نامے منتخب کریں، سیشنز اور آئی پی پتے محدود کریں، اور رسائی واپس لیں۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کرنا](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کرنا](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 ایک جائزہ نگار کو ایک چیٹ تک رسائی دیں، ایک تجزیہ کار کو کیس برآمد کرنے کی اجازت دیں، یا ایک آپریٹر کو منتخب اکاؤنٹس پر کنٹرول دیں۔ ہر شخص کو اپنا ٹوکن دیا جاتا ہے۔ مرکزی پینل کا ٹوکن منتظم کے پاس رہتا ہے۔
 
@@ -110,6 +110,6 @@ API ہر کلائنٹ IP پر فی منٹ 600 درخواستیں قبول کرت
 
 ****اہم منتظم اور اعتماد کی حد****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+مرکزی ٹوکن بلا روک ٹوک رہتا ہے۔ اس کے ساتھ براؤزر سائن ان سیشنز بناتا ہے جو منتظم کی ترتیب کردہ سیشن حدود کے تابع ہیں۔ وہ اسکرپٹس جو مرکزی ٹوکن براہ راست بھیجتی ہیں مکمل رسائی برقرار رکھتی ہیں اور انہیں براؤزر سیشنز کے طور پر شمار نہیں کیا جاتا۔
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+یہ ایک تنصیب میں ایپلیکیشن سطح کا رسائی کنٹرول ہے۔ تمام ورک اسپیسز سرور کے عمل کو شیئر کرتے ہیں؛ یہ ہوسٹ کے منتظم سے علیحدگی نہیں ہے۔ مرکزی ٹوکن، ٹیلیگرام سیشنز، دستخطی کلیدیں اور ڈیٹا ڈائریکٹری کو نجی رکھیں۔ ایک ویٹنس ٹوکن ایک الگ چیک پوائنٹ/صحت کی سند ہے، نہ کہ پینل کے رسائی کا ٹوکن۔

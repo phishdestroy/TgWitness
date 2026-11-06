@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/case-
 
 Filtros de informes, ocho diseños, plantillas de contenido, historiales de cambios guardados y la evaluación incluida en las exportaciones firmadas.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigación](https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Investigación](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Convierta las observaciones seleccionadas en un resumen legible del caso: su cuestión, alcance, cambios guardados, gráficos, conclusiones y referencias a las fuentes. Cada informe ofrece al destinatario una forma de comprobar el material entregado e inspeccionar la cobertura de la recopilación.
 
@@ -24,7 +24,7 @@ Abre **«Exportaciones» → «Configurar» y «Vista previa**». Sigue el proce
 
 La vista previa de los datos incluye el prefijo completo y estable del registro, no una muestra inicial. Solo se limitan las filas de muestra mostradas y las listas largas; se muestran sus recuentos omitidos. Una exportación posterior toma una nueva instantánea estable, por lo que la recopilación en curso puede aumentar las cifras. El alcance, los recuentos y la identidad de la fuente se incluyen en el informe firmado. Abrir o previsualizar el formulario no lo guarda.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Orientación sobre jurisdicciones.** En Detalles del documento, abre **Orientación sobre jurisdicciones · opcional** para elegir una jurisdicción y un procedimiento civil/mercantil o penal. El apéndice incluye la base jurídica, los enlaces a las fuentes, las notas de preparación y el estado de la investigación. Los resúmenes y explicaciones en el idioma local sobre las garantías de recopilación son opcionales. No hay ninguna jurisdicción seleccionada por defecto. Estas opciones pertenecen al espacio de trabajo y quedan excluidas de las configuraciones de diseño guardadas y de los valores predeterminados implícitos de copia compartida. Véase [valores predeterminados, informes compatibles y límites de investigación](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Elige la copia destinada al destinatario.** Los gráficos y la transcripción utilizan los registros seleccionados. La integridad, la custodia y la cobertura describen el diario de fuentes completo. El archivo ZIP de pruebas contiene sus registros originales y archivos adjuntos. Utiliza [una entrega minimizada](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#handover-extract) cuando el destinatario solo deba recibir datos seleccionados y autorizados.
 
@@ -90,18 +90,18 @@ Un intervalo vacío significa que no hay observaciones incluidas; consulta la co
 
 Cuando se incluye, el archivo «`analytics.json`» queda protegido por los hash de los archivos firmados del archivo. El informe de registro «`report.json`» incorpora el mismo agregado seleccionado. La verificación de la firma detecta los bytes modificados. Para comprobar las cifras, vuelva a calcular los agregados del registro con «`report_analytics.Analytics`» y «`selected`», o los agregados de la instantánea con «`snapshot_analytics.collect`» y «`project`».
 
-### Anomaly indicators
+### Indicadores de anomalías
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Vista previa.** Los informes de pruebas añaden una sección **Indicadores de anomalías** calculada por procesadores registrados (`tgwitness/metrics/`, un archivo por métrica). El informe nombra a cada procesador que se ha ejecutado junto con su versión, y muestra su método debajo de su tabla, de modo que el cálculo se pueda repetir a partir de `events.jsonl` con `tgwitness.metrics.run`.
 
-| Processor | Qué muestra |
+| Procesador | Qué muestra |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time`, v1 | Usuarios que publican por primera vez y mensajes por día UTC. Para que se active una alerta, se requieren al menos cinco usuarios que publiquen por primera vez y tres veces su mediana, con un volumen de mensajes de, como máximo, 1.5 veces su mediana. La línea de base utiliza al menos siete días observados dentro de los últimos 14 días naturales, tras siete días de calentamiento. |
+| `service_vs_message_ratio`, v1 | Se distinguen los números de mensajes guardados por chat y la cuota utilizada por los mensajes de servicio. Se describe un sistema de numeración; no se explica la ausencia de un número concreto. |
+| `join_leave_per_month`, v1 | Altas, bajas y eliminaciones o bloqueos por mes, uno por persona, chat, cambio y día. |
+| `pinned_per_month`, v1 | Mensajes de servicio fijados, avisos desfijados y mensajes fijados añadidos o eliminados entre instantáneas del estado del chat, por mes. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Parámetros → Métricas del informe** selecciona los procesadores y el número de filas mostradas, incluso en los informes filtrados. Las tablas diarias y mensuales muestran las filas recientes; las tablas de cuota de servicio clasifican los chats según el recuento de mensajes guardados. Los totales abarcan todas las filas.
 
 A partir de una copia del código fuente, crea los ocho diseños mencionados anteriormente a partir de la misma revista ficticia:
 
@@ -153,7 +153,7 @@ Revisa cada comprobación por separado, junto con la cobertura de la recopilaci�
 4. Conserve los archivos ZIP originales y sus hash. Registre cada titular, transferencia, fecha y finalidad. Mantenga junto a ellos las declaraciones atribuidas a los operadores y las notas del caso.
 5. En el caso de los mensajes de voz confidenciales, se deben conservar y verificar de forma independiente la cotización, la verificación, la cadena de certificados de Intel, las mediciones, la fuente exacta y las condiciones de gestión de claves. Se debe conservar el resultado de la verificación de la certificación junto con los artefactos revisados.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Consulte «[Ámbito de verificación](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope)» para conocer las comprobaciones de adquisición, integridad del archivo, tiempo y cobertura de la recopilación en cada modo.
 
 ## Revisión del destinatario
 

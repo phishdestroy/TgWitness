@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/insta
 
 Bir buyruq bilan o&#x27;rnatish, imzo va xeshlarni tekshirish, o&#x27;rnatmani yangilash va o&#x27;chirish.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Boshlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Boshlash](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Loyiha](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Tez boshlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/) · [Joylashtirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
 
-**On this page**
+**Ushbu sahifada**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#remove-tgwitness)
+- [Bir buyruq bilan o'rnating](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#install-with-one-command)
+- [Har narsa ishlaydigan joy](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#where-everything-runs)
+- [To'liq matnli qidiruv sozlamalari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#full-text-search-settings)
+- [Komanda satri orqali kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#command-line-access)
+- [Ijro etishdan oldin tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#verify-before-running)
+- [Mavjud o'rnatishni yangilash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#update-an-existing-installation)
+- [Ubuntudagi kundalik buyruqlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness so'zini olib tashlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/#remove-tgwitness)
 
 ## Bir buyruq bilan o'rnating
 
@@ -137,7 +137,7 @@ Windows o'rnatilishi o'zi .NET yordamida paket imzolarini tekshiradi va OpenSSL 
 
 **Yangi nashr yuklab olish saytini yangilaydi; o'rnatilgan dasturlar installyerni yana ishga tushirganingizda yangilanadi.** Nazoratsiz yangilovchi yoki ishlayotgan to'plamni avtomatik qayta ishga tushirish mavjud emas. Joriy installyer kanali **ko'rgazmali**; u e'lon qilingan, tekshirilgan build-larni kuzatadi `main`, uning commit-i oxirgi raqamli GitHub relizidan yangiroq bo'lishi mumkin. Sahifaning versiyasi _____ dan olinadi. `pyproject.toml`; uning commit va build IDlari bir xil preview versiyasi ichidagi yangilanishlarni ajratib ko'rsatadi.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+Ushbu aniq commit ilova va xavfsizlik tekshiruvlaridan o'tib, imzolangan paket Ubuntu xizmati va Windows PowerShell o'rnatish testlaridan muvaffaqiyatli o'tgach, nashr avtomatik amalga oshiriladi. Tekshiruvlar davom etayotgan paytda yoki ular muvaffaqiyatsiz tugasa, xuddi shu buyruqlar avvalgi tekshirilgan buildni o'rnatishni davom ettiradi. Build manifesti hozir qaysi commit mavjudligini ko'rsatadi; preview yangilanishlari orasida faqat versiya raqami o'zgarmasligi mumkin.
 
 Avvalgidek o'rnatish papkasi va operatsion tizim foydalanuvchisini ishlating. To'plam to'xtatilgan holda to'liq ma'lumotlar katalogini zaxiralang; `tgwitness paths` uni aniqlaydi. Imzolangan eksport to'liq o'rnatish zaxira nusxasi emas.
 

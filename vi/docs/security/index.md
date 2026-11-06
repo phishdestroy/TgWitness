@@ -6,7 +6,7 @@ Những gì rời khỏi máy của bạn, mỗi khóa bí mật mở được g
 
 **127.0.0.1**Địa chỉ bảng điều khiển theo mặc định
 
-**256-bit**mã thông báo bảng ngẫu nhiên
+**256 bit**mã thông báo bảng ngẫu nhiên
 
 **0**CDN, phân tích dữ liệu hoặc phông chữ từ xa
 

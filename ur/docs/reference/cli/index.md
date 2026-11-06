@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/
 
 [ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![آرکائیو انٹیگریشنز](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/) · [مکمل متن تلاش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 تاریخیں ہیں `2026-10-01` (UTC نصف شب) یا وقت کے زون کے ساتھ ISO اوقات، `2026-10-01T09:00+03:00`۔ کے لیے `search`, `messages` اور `export` وہ مشاہدے کا وقت منتخب کرتے ہیں۔ صفحات میں زیادہ سے زیادہ 50 ریکارڈز ہوتے ہیں: فالو کریں `next_offset` (`--offset`) درجہ بندی شدہ تلاش کے لیے اور `next_before` (`--before`) کہیں اور۔
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+درجہ بندی شدہ تلاش 1,000 نتائج پر رک جاتی ہے۔ آخری صفحہ `--limit` سے کم ہو سکتا ہے؛ جب زیادہ مماثل مشاہدات موجود ہوں تو سوال، چیٹ یا مدت کو محدود کریں۔
 
 ہر پیغام کے نتیجے میں شامل ہوتا ہے `untrusted_content: true`، ورک اسپیس، چیٹ اور میسج آئی ڈیز، جرنل کا تسلسل، محفوظ شدہ ریکارڈ ہیش اور ایک پینل لنک۔ ترامیم، حذف کرنے کے نوٹس اور `missing_on_recheck` الگ الگ ریکارڈز ہیں۔ کسی ریکارڈ کی عدم موجودگی اس بات کا ثبوت نہیں کہ کوئی واقعہ کبھی پیش ہی نہیں آیا۔
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 پینل کے ذریعے ایکسپورٹ کے لیے ایک ایسے کنکشن کی ضرورت ہوتی ہے جو **پیغامات کو ایکسپورٹ کرنے** **کی** اجازت دیتا ہو **(صرف کمانڈ لائن)**؛ یہ بطورِ ڈیفالٹ منتخب نہیں ہوتا۔ یہ فائل ایک کام کرنے والی کاپی ہے، ثبوت نہیں: تصدیق شدہ حوالگی کے لیے **Exports** میں موجود دستخط شدہ ایکسپورٹ استعمال کریں، جو `python -m tgwitness.verify`چیک کرتا ہے۔
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+پینل ہر ریکارڈ کو جاری کرنے سے پہلے رسائی کی دوبارہ جانچ کرتا ہے، بشمول تکمیل ریکارڈ کے۔ منسوخ شدہ یا میعاد ختم شدہ رسائی ایک نامکمل برآمد چھوڑ دیتی ہے۔ سست صفحہ خوانی دیگر استفسارات کے ساتھ آرکائیو ورکر کی حد شیئر کرتی ہے اور اس کا انتظار محدود ہوتا ہے۔
 
 ## ایجنٹ کی مہارت
 

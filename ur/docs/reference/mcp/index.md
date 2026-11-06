@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/
 
 ایک MCP کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں، جس کی رسائی ختم ہونے والی اور منسوخ کی جانے والی ہو۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [آرکائیو انٹیگریشنز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![آرکائیو انٹیگریشنز](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 ایک تجزیہ کار کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے جوڑیں۔ TgWitness **پینل کے عمل میں `/mcp` پر Streamable HTTP** فراہم کرتا ہے۔ ہر کنکشن کا اپنا ٹوکن، میعادِ ختم اور مجاز ٹولز ہوتے ہیں۔ MCP ٹیلیگرام پیغامات بھیجنے، ترتیبات تبدیل کرنے یا دستخط شدہ جرنل میں ترمیم کرنے کے قابل نہیں ہے۔ یہی کنکشنز [کمانڈ لائن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/cli/) کے ساتھ بھی کام کرتے ہیں۔
 
 [ورک فلو گائیڈ](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**اس صفحے پر**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#connect-your-client)
+- [انسٹال کریں اور چیک کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#install-and-check)
+- [ایک کنکشن جاری کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#issue-a-connection)
+- [اپنا کلائنٹ کنیکٹ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#tools-and-boundaries)
+- [اوزار اور حدود](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/#tools-and-boundaries)
 
 ## انسٹال اور چیک کریں
 
@@ -57,12 +57,12 @@ MCP ایکسٹرا سرکاری [MCP پائتھن SDK](https://github.com/modelc
 
 | کلائنٹ | کنفیگریشن | کنیکشن |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP، `type: "http"`، بیئرر ہیڈر |
-| Claude Desktop | `claude_desktop_config.json` | لوکل stdio برج |
+| کلاڈ کوڈ | `.mcp.json` | HTTP، `type: "http"`، بیئرر ہیڈر |
+| کلود ڈیسک ٹاپ | `claude_desktop_config.json` | لوکل stdio برج |
 | Cursor | `.cursor/mcp.json` | انوائرنمنٹ ویری ایبل ہیڈر کے ساتھ HTTP |
-| VS Code Local | `.vscode/mcp.json` | پاس ورڈ `promptString` ان پٹ کے ساتھ HTTP |
+| VS کوڈ لوکل | `.vscode/mcp.json` | پاس ورڈ `promptString` ان پٹ کے ساتھ HTTP |
 | Windsurf | `mcp_config.json` | بیئرر ہیڈر پلیس ہولڈر کے ساتھ HTTP |
-| دیگر کلائنٹس | URL اور Authorization ہیڈر | Streamable HTTP |
+| دیگر کلائنٹس | URL اور Authorization ہیڈر | اسٹریمیبل HTTP |
 
 TgWitness بغیر OAuth ڈسکوری کے بیئرر ٹوکنز استعمال کرتا ہے۔ ایسے کلائنٹس کے لیے جن کے ریموٹ کنیکٹر کو OAuth کی ضرورت ہوتی ہے، لوکل stdio برج استعمال کریں۔ VS Code کے لیے، ان پٹ ویری ایبلز **Local** ہارنس پر لاگو ہوتے ہیں اور Copilot سیشنز کو فارورڈ نہیں کیے جاتے۔ کنفیگریشن کے حوالہ جات: [Claude Code](https://code.claude.com/docs/en/mcp)، [Cursor](https://prod.cursor.com/docs/mcp)، [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)۔
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/accou
 
 Xuất những nội dung mà tài khoản có thể truy cập hiện tại: phạm vi, các tác vụ có thể tiếp tục, tệp lưu trữ đã được ký và các bản sao chia sẻ đã được thu gọn.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bằng chứng và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bằng chứng & xác minh](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 Xuất tài khoản giữ riêng tài khoản đó. Hãy chủ động tạm dừng giám sát hoặc một hoạt động thu thập khác trước khi bắt đầu hay tiếp tục; ứng dụng không bao giờ tự dừng chúng.
 
@@ -16,11 +16,11 @@ Các bộ lọc người gửi và nội dung tin nhắn sẽ mở rộng khi ch
 
 Quy trình làm việc này xuất dữ liệu hiện có thể truy cập được từ tài khoản đã kết nối. Mặc định sử dụng [Telegram Takeout](https://core.telegram.org/api/takeout); đây không phải là bản sao lưu dữ liệu Telegram không khả dụng hoặc đã bị xóa. Các cuộc trò chuyện bí mật, lịch sử không thể truy cập và các bản chỉnh sửa trước đó sẽ không được khôi phục. Telegram có thể áp đặt thời gian chờ trước khi Takeout bắt đầu. Bảng điều khiển sẽ hiển thị thời gian chờ đó; nó sẽ không tự động chuyển đổi phương thức truyền tải. Tùy chọn API thông thường rõ ràng có phạm vi bao phủ khác và ghi lại các danh mục không được hỗ trợ.
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout là API xuất chính thức cũng được Telegram Desktop sử dụng. TgWitness có thể ghi JSON tương thích với Desktop trực tiếp từ dữ liệu thu thập của chính nó; không cần phải nhập tập tin lưu trữ của người khác. ID cuộc trò chuyện và tin nhắn có sẵn qua cả hai phương thức truyền tải. Một cuộc trò chuyện công khai hoặc quyền chuyển tiếp không đảm bảo quá trình xuất sẽ nhanh hơn hoặc loại bỏ thời gian chờ phê duyệt của Takeout. Hãy đo lường cùng phạm vi và cài đặt phương tiện trước khi so sánh tốc độ.
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+Đối với tối đa 20 ID cuộc trò chuyện được chọn rõ ràng, việc xuất qua API thông thường sẽ giải quyết các đối tác đó trực tiếp trước khi xem xét danh sách cuộc trò chuyện đầy đủ của tài khoản. Do đó, một kênh công khai có thể đọc được có thể được xuất mà không cần tham gia vào kênh đó, ngay cả khi kênh đó không có trong danh sách cuộc trò chuyện. Các đối tác không được lưu trong bộ nhớ đệm sẽ chuyển sang danh sách thông thường. Bộ lọc lưu trữ vẫn được áp dụng: nếu Telegram không trả về cuộc trò chuyện và các cuộc trò chuyện đã lưu trữ bị loại trừ, trạng thái lưu trữ không xác định sẽ được ghi nhận là thiếu sót. Takeout vẫn giữ quy trình danh sách phạm vi phân chia. Cả hai phương thức đều không tham gia vào các cuộc trò chuyện hoặc thay đổi quyền chuyển tiếp. Trong định dạng JSON tương thích với Desktop, các kênh mà Telegram đánh dấu là `left` sẽ xuất hiện dưới `left_chats`, bao gồm cả các kênh công khai có thể đọc được mà tài khoản chưa tham gia.
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+Cả yêu cầu tạm dừng `FLOOD_WAIT` và `FLOOD_PREMIUM_WAIT` đều áp dụng cho toàn bộ khoảng thời gian do máy chủ yêu cầu. Hạn chót của tài khoản được duy trì qua các lần kết nối lại và khởi động lại; thời gian chờ ngắn hơn sau đó không thể rút ngắn hạn chót này. Số lần thử lại bị giới hạn, việc hủy bỏ sẽ giữ nguyên các trang đã niêm phong, và thông tin đăng nhập API không được xoay vòng để vượt qua giới hạn tốc độ. Không có giao dịch mua gói Premium nào được thực hiện.
 
 ## Chọn những gì cần thu thập
 
@@ -41,7 +41,7 @@ Cài đặt sẵn **bộ sưu tập “Minimize”** sẽ vô hiệu hóa các t
 
 Lịch sử ảnh đại diện và các câu chuyện không được chọn theo mặc định. Hãy tắt tính năng hiển thị ảnh đại diện và danh bạ khi vụ việc chỉ cần các tin nhắn. Nếu các tệp đính kèm hoặc siêu dữ liệu không cần thiết, việc loại trừ chúng trong quá trình thu thập sẽ giúp tránh lưu giữ một bản sao riêng tư khác trong tệp xuất này.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+Dữ liệu ảnh sử dụng biến thể hình ảnh tĩnh được xác định trong siêu dữ liệu và bản kê khai băm của chúng, bao gồm cả ảnh có biến thể hình đại diện động. Hình động đó không được thay thế cho hình ảnh tĩnh đã chọn. Dữ liệu tải có kích thước ngắn hơn hoặc dài hơn kích thước quan sát được sẽ được ghi nhận là tệp đính kèm không thành công, và biểu diễn bị thay đổi trong quá trình làm mới tham chiếu tệp sẽ bị từ chối. Những lỗi này khiến kho lưu trữ trở nên không đầy đủ trong khi vẫn giữ lại các bản ghi tin nhắn. Quá trình xác minh độc lập cũng từ chối các tệp đính kèm đã lưu trữ có độ dài đã ký mâu thuẫn với kích thước hoặc biểu diễn quan sát được, bao gồm cả trong các kho lưu trữ cũ hơn.
 
 ## Tóm tắt, phạm vi và xác minh
 
@@ -97,8 +97,8 @@ Liên kết nguồn không tự nó chứng minh rằng quá trình chuyển đ�
 
 ## Chia sẻ và lưu trữ dữ liệu ghi lại
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+Chọn các tin nhắn và tệp mà người nhận cần, xem xét bản sao chia sẻ đầy đủ và lưu giữ bản gốc riêng biệt. Ghi lại giá trị băm (hash) của tệp ZIP đã gửi để người nhận có thể xác định và xác minh chính xác bản sao đó. Quá trình ẩn danh hóa sẽ thay thế các định danh đã chọn; văn bản và tệp gốc vẫn là một phần của quá trình xem xét.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope).
+GitHub Actions hỗ trợ xuất toàn bộ tài khoản và các cuộc trò chuyện được chọn thông qua Takeout hoặc API thông thường, cùng với nhật ký sự kiện của một cuộc trò chuyện. Hướng dẫn sao lưu được lưu trữ  giải thích việc xác minh cài đặt và giới hạn 120 phút. Để xác minh bản sao chia sẻ được tạo từ bản sao lưu được lưu trữ, hãy so sánh băm nguồn của nó với kho lưu trữ gốc và xác minh chứng nhận của kho lưu trữ đó bằng các kiểm tra [dành riêng cho chế độ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope).
 
 [Định dạng bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Báo cáo trường hợp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/)

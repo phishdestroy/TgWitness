@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/times
 
 Sygnatury czasowe zgodne z RFC 3161 dla podpisanych punktów kontrolnych: jakie dane są przesyłane do organu certyfikującego oraz w jaki sposób weryfikowana jest odpowiedź.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dowody i weryfikacja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Dowody i weryfikacja](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness przygotowuje żądania zgodne z RFC 3161 i weryfikuje odpowiedzi od podmiotu uprawnionego do nadawania znaczników czasu (TSA). Ta procedura ręczna nie obejmuje ani wyboru podmiotu TSA, ani przesyłania danych; tryb dowodowy wykonuje obie te czynności zgodnie z harmonogramem ([format dowodowy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Przygotowane żądanie **nie** stanowi **jeszcze dowodu w postaci znacznika czasu**.
 

@@ -25,7 +25,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/concepts/
 
 01 / ПУТЬ СООБЩЕНИЯИллюстративная последовательность
 
-Telegram delivers an update to the collector, which appends a journal record. · Telegram · Collector · Журнал · обновление → · добавить →
+Telegram delivers an update to the collector, which appends a journal record. · Telegram · Коллектор · Журнал · обновление → · добавить →
 
 ПРОСМОТР ТЕКУЩЕГО ЧАТА Сообщение № 42
 
@@ -67,7 +67,7 @@ Telegram не сообщает, кто удалил сообщение и ког
 
 Каждая запись содержит хеш предыдущей. Контрольная точка, сохранённая в другом месте, фиксирует длину журнала и последний хеш.
 
-02 / HASH-CHAIN SANDBOXНастоящий SHA-256 · примеры записей
+02 / ПЕСЧАНКА HASH-CHAINНастоящий SHA-256 · примеры записей
 
 ЗАПИСЬ 01**Сообщение получено**`h₁ = SHA-256(e₁)`Ссылки на 64 нуля
 

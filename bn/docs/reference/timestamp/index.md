@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/times
 
 স্বাক্ষরিত চেকপয়েন্টের জন্য RFC 3161 টাইমস্ট্যাম্প: কর্তৃপক্ষের কাছে কী পাঠানো হয় এবং কীভাবে প্রতিক্রিয়া যাচাই করা হয়।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [প্রমাণ এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![প্রমাণ ও যাচাইকরণ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness RFC 3161 অনুরোধ প্রস্তুত করে এবং টাইমস্ট্যাম্প অথরিটি (TSA) প্রতিক্রিয়া যাচাই করে। এই ম্যানুয়াল প্রক্রিয়াটি না TSA নির্বাচন করে, না ডেটা জমা দেয়; ইভিডেন্স মোড নির্ধারিত সময়সূচি ([ইভিডেন্স ফরম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)) অনুযায়ী উভয়ই করে। একটি প্রস্তুতকৃত অনুরোধ **এখনও টাইমস্ট্যাম্প প্রুফ নয়**।
 

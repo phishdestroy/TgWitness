@@ -51,7 +51,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 | Field | สิ่งที่ต้องกรอก |
 | --- | --- |
-| Endpoint | URL ของที่เก็บข้อมูล ไม่มีพาธ bucket หรือข้อมูลรับรอง ตัวอย่าง: `https://s3.example.invalid` |
+| จุดปลายทาง | URL ของที่เก็บข้อมูล ไม่มีพาธ bucket หรือข้อมูลรับรอง ตัวอย่าง: `https://s3.example.invalid` |
 | ภูมิภาค | ตามที่ผู้ให้บริการของคุณกำหนด ค่าเริ่มต้น `us-east-1` |
 | Bucket | bucket ที่มีอยู่แล้วซึ่งคุณเขียนได้ ตัวอย่าง: `example-case-backup` |
 | โฟลเดอร์ใน bucket | คำนำหน้า ค่าเริ่มต้น `tgwitness` จะมีคำนำหน้าของแต่ละพื้นที่ทำงานต่อท้ายเพิ่ม |

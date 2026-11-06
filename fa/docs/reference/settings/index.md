@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/setti
 
 جادوگر راه‌اندازی، اهداف، سطوح رابط، مسیرهای اتصال و تنظیمات مشترک یک گروه حساب.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کار](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [حساب‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/) · [اتصال](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/) · [دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/)
 

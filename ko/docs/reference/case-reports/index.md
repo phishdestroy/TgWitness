@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-
 
 보고서 필터, 8가지 디자인, 콘텐츠 사전 설정, 저장된 변경 내역 및 서명된 내보내기 파일에 포함된 평가 결과가 제공됩니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [조사](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![조사](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 선택한 관찰 내용을 사건에 대한 읽기 쉬운 기록으로 정리하십시오: 사건의 질문, 범위, 저장된 변경 사항, 차트, 조사 결과 및 출처 참조. 각 보고서는 수신자가 전달된 자료를 확인하고 수집 범위를 검토할 수 있는 방법을 제공합니다.
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-
 
 데이터 미리보기에는 초기 샘플이 아닌, 완전하고 안정적인 저널 접두사가 집계됩니다. 표시된 샘플 행과 긴 목록만 범위가 제한되며, 생략된 개수는 표시됩니다. 이후 내보내기 시 새로운 안정된 스냅샷이 생성되므로, 수집이 진행됨에 따라 수치가 증가할 수 있습니다. 범위, 개수 및 출처 정보는 서명된 보고서에 포함됩니다. 양식을 열거나 미리 보는 것만으로는 저장되지 않습니다.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**관할권 지침.** ‘문서 세부 정보’에서 **‘관할권 지침 · 선택 사항** ’을 열어 관할권과 민사/상사 또는 형사 절차를 선택하십시오. 부록에는 법적 근거, 출처 링크, 작성 참고 사항 및 연구 현황이 수록되어 있습니다. 현지 언어로 된 수집 안전 장치에 대한 요약 및 설명은 선택 사항입니다. 기본적으로 선택된 관할권은 없습니다. 이러한 선택 사항은 작업 공간에 속하며, 저장된 레이아웃 구성 및 암시적 공유-복사 기본값에서 제외됩니다. [기본값, 지원되는 보고서 및 연구 제한 사항을](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) 참조하십시오.
 
 **수신자용 사본을 선택하십시오.** 차트 및 기록문은 선택된 기록을 사용합니다. 무결성, 보관 및 범위 항목은 전체 원본 일지를 설명합니다. 증거 ZIP 파일에는 원본 기록과 첨부 파일이 포함되어 있습니다. 수신자가 선택된 허용된 데이터만 받아야 하는 경우, [최소한의 인계 방식을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#handover-extract) 사용하십시오.
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-
 
 `analytics.json` 파일이 포함된 경우, 아카이브의 서명된 파일 해시에 의해 보호됩니다. 저널 `report.json`에는 선택된 동일한 집계값이 포함됩니다. 서명 검증 을 통해 변경된 바이트를 감지할 수 있습니다. 수치를 확인하려면 `report_analytics.Analytics` 및 `selected`을 사용하여 저널 집계값을 재계산하거나, `snapshot_analytics.collect` 및 `project`을 사용하여 스냅샷 집계값을 재계산하십시오.
 
-### Anomaly indicators
+### 이상 징후 지표
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**미리 보기.** 증거 보고서에는 등록된 프로세서(`tgwitness/metrics/`, 지표당 하나의 파일)에 의해 계산된 **‘이상 징후** 지표’ 섹션이 추가됩니다. 보고서는 실행된 모든 프로세서의 이름과 버전을 명시하고, 해당 테이블 아래에 계산 방법을 표시하므로, `events.jsonl` 파일을 사용하여 `tgwitness.metrics.run` 명령어로 계산을 재현할 수 있습니다.
 
-| Processor | 이 도구가 제공하는 기능 |
+| 프로세서 | 이 도구가 제공하는 기능 |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | UTC 기준 일별 첫 게시자 수 및 메시지 수. 플래그를 설정하려면 최소 5명의 첫 게시자가 있어야 하며, 그 수의 3배에 해당하는 중앙값을 충족해야 하고, 메시지 양은 중앙값의 최대 1.5배를 초과해서는 안 됩니다. 기준선은 7일간의 워밍업 기간 후, 지난 14일 중 최소 7일의 관측 데이터를 사용합니다. |
+| `service_vs_message_ratio` v1 | 채팅별로 저장된 메시지 번호가 서로 다르며, 서비스 메시지가 차지하는 비율도 다릅니다. 이는 번호 매기기를 설명하는 것이며, 특정 번호가 누락된 이유를 설명하는 것은 아닙니다. |
+| `join_leave_per_month` v1 | 월별 가입, 탈퇴, 삭제 또는 차단 건수는 1인당, 채팅당, 변경당, 일별로 각각 1건씩 집계됩니다. |
+| `pinned_per_month` v1 | 월별 기준으로, 서비스 메시지를 고정하거나 고정 해제한 횟수, 그리고 채팅 상태 스냅샷 간에 추가되거나 제거된 고정 메시지 수를 기록합니다. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**‘매개변수 → 보고서 지표’에서는** 프로세서와 표시될 행 수를 선택할 수 있으며, 여기에는 필터링된 보고서도 포함됩니다. 일별 및 월별 표에는 최근 행이 표시되며, 서비스별 점유율 표는 저장된 메시지 수에 따라 채팅 순위를 매깁니다. 합계는 모든 행을 포함합니다.
 
 소스 체크아웃을 바탕으로, 동일한 가상의 저널에서 위에 나열된 8가지 디자인을 모두 제작하십시오:
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 원본 ZIP 파일과 해당 해시 값을 그대로 유지하십시오. 각 보유자, 전송 내역, 날짜 및 목적을 기록하십시오. 해당 운영자의 진술 및 사건 메모도 함께 보존하십시오.
 5. 기밀 VM의 경우, 견적, 검증 요청, Intel 인증서 체인, 측정값, 정확한 출처 및 키 처리 조건을 보존하고 독립적으로 검증하십시오. 검증 결과를 검토된 아티팩트와 함께 보관하십시오.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+각 모드별 수집, 아카이브 무결성, 시간 및 수집 범위 검사에 대해서는 [검증 범위를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) 참조하십시오.
 
 ## 수신자 검토
 

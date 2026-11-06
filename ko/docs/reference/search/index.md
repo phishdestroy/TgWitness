@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/searc
 
 저장된 메시지를 단어 형태, 정확한 구문, 도메인 및 @사용자명으로 검색하며, 서명된 저널에 인덱스가 연동되어 가장 일치도가 높은 결과부터 우선적으로 표시됩니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [조사](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![조사](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [아카이브 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/) · [로컬 OCR 및 텍스트 변환](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/searc
 
 인덱스는 파생 데이터입니다. 이 인덱스는 서명된 저널을 기반으로 재구성되며, 그 자체로는 서명되지 않으며 내보내기 대상에도 포함되지 않습니다. 원본 기록은 변경되지 않습니다.
 
-**On this page**
+**이 페이지에서**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#benchmark)
+- [검색 구문](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#search-syntax)
+- [언어](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#languages)
+- [목차의 위치](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#where-the-index-lives)
+- [결과 및 서명된 저널](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#results-and-the-signed-journal)
+- [인식된 텍스트](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#recognized-text)
+- [접근](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#access)
+- [아카이브 및 MCP에 문의하기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#ask-the-archive-and-mcp)
+- [의존성](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#dependencies)
+- [벤치마크](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/#benchmark)
 
 ## 검색 구문
 
@@ -97,7 +97,7 @@ OCR 및 전사본은 암호화된 아티팩트 내에 그대로 유지됩니다.
 
 MCP 클라이언트는 다음을 호출할 수 있습니다 `search_messages` 다음과 같이 호출할 수 있습니다 `ranked=true` 를 사용하여 호출하고 `next_offset`를 사용하여 페이지를 호출할 수 있습니다. 범위 지정된 연결은 해당 채팅 내용만 수신합니다.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+순위 기반 페이지 나누기는 페이지 크기와 관계없이 최대 첫 1,000개의 결과만 표시합니다. 더 많은 일치 항목을 확인하려면 검색어, 채팅 또는 기간을 좁혀 주세요. 최신순 검색은 각 페이지를 선택하기 전에 메시지, OCR 및 전사 결과를 최신 순으로 정렬합니다.
 
 ## 의존성
 

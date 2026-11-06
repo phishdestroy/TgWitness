@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/conne
 
 Autenticação, conjuntos automáticos de proxies, modos de IP, política de fallback, solicitações externas e armazenamento de segredos.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implantação e recuperação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implantação e recuperação](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Este documento descreve o comportamento do TgWitness 0.8.0 e suas limitações. A autenticação, o acesso à fonte, a conectividade de rede e a integridade da captura são estados distintos. Para etapas de login, formatos de arquivo e contas múltiplas, comece por [“Contas e formatos de sessão](https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/)”. Para políticas de eventos e comportamento de reinício, consulte [“Como funciona a coleta](https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/)”.
 
@@ -123,19 +123,19 @@ Para serviços privados gerenciados por operadores, a configuração existente d
 
 ****Parâmetros automáticos do pool****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+Em **Parâmetros → MTProxy automático**, configure o limite de falha, o tempo de espera, a rotação planejada, o compartilhamento de proxy e o atraso de fallback permitido.
 
 | Controle | Padrão |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Desconecta antes da substituição | 3, em 10 minutos |
+| Proxies testados por tentativa de conexão | 3 |
+| Primeiro / intervalo máximo após falha | 10 minutos / 6 horas |
+| Rotação planejada | Desativado; ativar em caso de falha |
+| Contas por proxy | 0: dar preferência a entradas separadas, compartilhar quando necessário. Definir 1 para aguardar uma entrada exclusiva. |
+| Atraso antes do fallback direto permitido | Minutos 10; Ocultar o endereço ainda recusa o Direct |
+| Verificações de atualização/transporte do feed | Minutos 60/10; os valores da área de trabalho principal se aplicam ao pool compartilhado |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Proxies diferentes não garantem endereços de saída diferentes. Essas configurações não anulam os limites do Telegram nem comprovam o anonimato.
 
 Para substituir a lista pública pelo seu próprio catálogo de operadoras, configure a substituição abaixo. Isso desativa totalmente as assinaturas externas, inclusive quando a matriz `proxies` estiver vazia.
 

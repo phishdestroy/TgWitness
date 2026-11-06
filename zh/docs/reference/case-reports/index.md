@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-
 
 报告过滤器、八种设计模板、内容预设、已保存的变更历史记录以及评估结果均包含在已签名的导出文件中。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [调查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![调查](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 将选定的观察结果转化为一份通俗易懂的案件报告：包括案件问题、 范围、已保存的更改、图表、调查结果及来源参考。每份报告都为 接收方提供了核查所交付材料并检查其采集 覆盖范围的途径。
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-
 
 数据预览统计的是完整的稳定日志前缀，而非初始样本。 仅显示的样本行和长列表有边界限制；其省略的计数会 显示出来。后续导出将生成新的稳定快照，因此持续采集可能会 增加这些数字。范围、计数和来源标识包含在 已签名的报告中。打开或预览表单不会将其保存。
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**管辖权指南。** 在文档详情下，打开**“管辖权指南 · 可选** ”以选择管辖权及民事/商业或刑事程序。附录包含 法律依据、来源链接、准备说明及研究进展。 本地语言 的摘要和数据收集保障措施说明为可选内容。默认情况下未 选择任何管辖权。这些选项属于工作区，不包含在 已保存的布局配置和隐式共享-复制默认设置中。请参阅 [默认设置、支持的报告及研究限制](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) 。
 
 **选择收件人的副本。** 图表和记录文本均基于所选记录生成。 完整性、保管和覆盖范围描述了完整的源日志。证据 ZIP 文件 包含原始记录及其附件。当收件人仅需接收选定且获准的数据时，请采用[精简移交方式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#handover-extract) 。
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-
 
 若包含 `analytics.json` 文件，该文件将受到归档文件签名哈希值的保护。 日志 `report.json` 嵌入了相同的选定聚合值。签名验证 可检测到字节变更。若要核对数据，请使用 `report_analytics.Analytics` 和 `selected` 重新计算日志聚合值，或 使用 `snapshot_analytics.collect` 和 `project` 重新计算快照聚合值。
 
-### Anomaly indicators
+### 异常指标
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**预览。**证据报告中新增了**异常指标**部分，该部分由 已注册的处理器计算得出（`tgwitness/metrics/`，每个指标对应一个文件）。报告会列出每个 运行过的处理器的名称及其版本，并在其表格下方显示其计算方法，因此 可通过 `events.jsonl` 结合 `tgwitness.metrics.run` 重新进行计算。
 
-| Processor | 功能展示 |
+| 处理器 | 功能展示 |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | UTC日内的首次发帖者数量及消息数量。触发警报需满足：首次发帖者数量至少为五人，且其数量需达到中位数的3倍；消息量最多为中位数的1.5倍。基准线采用经过7天预热期后，在过去14个日历日内至少7天的观测数据。 |
+| `service_vs_message_ratio` v1 | 每个聊天室的已保存消息编号各不相同，且服务消息会占用部分配额。本文描述的是编号规则，并未解释特定编号缺失的原因。 |
+| `join_leave_per_month` v1 | 每月的新加入、离开、移除或封禁情况，按每人、每个聊天群、每次变更及每天统计一次。 |
+| `pinned_per_month` v1 | 按月统计：固定服务消息、取消固定通知，以及在聊天状态快照之间新增或移除的已固定消息。 |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**参数 → 报告指标**用于选择处理器和显示的行数， 包括在过滤后的报告中。日表和月表显示最近的行，服务份额 表则按已保存消息数量对聊天进行排序。总计涵盖每一行。
 
 从源代码检出开始，基于同一份虚构期刊构建上述所有八种设计：
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 保留原始 ZIP 文件及其哈希值。记录每个持有者、传输情况、日期 及目的。同时保留归属的操作员陈述和案件笔记。
 5. 对于机密虚拟机，需保留并独立验证引文、挑战、 Intel 证书链、测量数据、确切来源及密钥处理条件。 将证明验证结果与已审查的证据一并保存。
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+请参阅[验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)部分，了解各模式下对采集、 归档完整性、时间及采集覆盖范围的检查。
 
 ## 收件人审核
 

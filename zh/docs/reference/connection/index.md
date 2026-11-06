@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/conne
 
 身份验证、自动代理池、IP 模式、备用策略、外部请求及密钥存储。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署与恢复](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署与恢复](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 本文档描述了 TgWitness 0.8.0 的行为及其限制。身份验证、 源访问、网络连接和捕获完整性属于各自独立的状态。 有关登录步骤、文件格式和多账户管理，请先参阅 [“账户与会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)”部分。有关事件策略和重启 行为，请参阅[“数据采集原理”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)。
 
@@ -123,19 +123,19 @@ MTProxy仅承载Telegram流量。工作区的HTTP操作（如时间戳、 通知
 
 ****自动池参数****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+**在参数→自动 MTProxy**下，配置失败阈值、冷却时间、 计划轮换、代理共享和允许的备用延迟。
 
 | 控制 | 默认 |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| 替换前断开连接 | 3 项，耗时 10 分钟 |
+| 每次连接尝试中尝试的代理数量 | 3 |
+| 首次 / 故障后最大恢复时间 | 10分钟 / 6小时 |
+| 计划轮换 | 已禁用；失败时启用 |
+| 每个代理的账户数量 | 0：优先单独条目，必要时合并。设置为 1 以等待独占条目。 |
+| 允许直接回退前的延迟时间 | 10分钟；隐藏地址仍被直接拒绝 |
+| 数据源刷新/传输检查 | 60 / 10 分钟；主工作区值适用于共享池 |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+使用不同的代理服务器并不能保证获得不同的出口地址。这些设置无法 绕过 Telegram 的限制，也无法证明匿名性。
 
 若要用您自己的运营商目录替换公共列表，请配置以下覆盖设置。 这将完全禁用外部订阅，包括当其 `proxies` 数组为空时。
 

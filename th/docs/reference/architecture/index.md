@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![การพัฒนา](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 กระบวนการ Python หนึ่งกระบวนการจะโฮสต์แผงควบคุม FastAPI และพื้นที่ทำงานที่แยกกันจำนวนเท่าใดก็ได้ แต่ละพื้นที่ทำงานมีไคลเอนต์บัญชีผู้ใช้ Telethon SQLite เก็บรักษาบันทึกเหตุการณ์ที่ลงนามและสามารถเพิ่มข้อมูลได้เท่านั้น รวมถึงการตั้งค่าการทำงานที่สามารถปรับเปลี่ยนได้ Vault ที่เข้ารหัสเก็บรักษาข้อมูลรับรอง API, StringSession และกุญแจลงนาม ส่วนหน้า (frontend) เป็น HTML/CSS/JavaScript ที่รวมเป็นไฟล์เดียว: ไม่จำเป็นต้องสร้างด้วย Node, CDNs หรือดาวน์โหลดส่วนหน้า ในระหว่างการทำงาน
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | การดำเนินการของแผงควบคุมที่ชัดเจน ใบยืนยันที่ลงนาม ID คำขอที่คงอยู่ และนโยบายการเรียกกลับ/เข้าร่วมใหม่ตามงานเฉพาะ |
 | message_content.py | การเปรียบเทียบข้อความที่สามารถสังเกตได้ โดยไม่รวมข้อมูลเมตาดาต้าการเข้าถึงระบบขนส่ง |
 | workers.py | รอให้กระบวนการส่งออกไฟล์เสร็จสิ้นก่อนดำเนินการล้างข้อมูลหลังการยกเลิก |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | งานแชทแบบพร้อมกัน การจองตามบัญชี จุดตรวจสอบที่ลงนาม และการทำความสะอาดหลังการตรวจสอบไฟล์ที่เก็บถาวร |
+| distributed_takeout.py / export_timing.py | เซสชัน Takeout ที่สามารถต่อได้ และเวลาสำหรับแต่ละครั้งที่เริ่มหรือต่อ |
 | store.py | ธุรกรรม WAL, ลำดับเหตุการณ์, ตัวกรองการค้นหา, การตั้งค่าการทำงาน |
 | fulltext.py | ดัชนีข้อความเต็มที่ได้มา (รูปแบบคำ, BM25) ที่ผูกกับส่วนหัวของบันทึกที่ลงนาม; ไม่เคยถูกส่งออก |
 | security.py | การสร้างไฟล์ส่วนตัว, ห้องเก็บข้อมูลที่เข้ารหัส, การลงนามด้วย Ed25519, การล็อกด้วยกระบวนการเดียว |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 แต่ละพื้นที่ทำงาน (workspace) รับบัญชีได้หนึ่งบัญชี และมีไดเรกทอรีและตัวตนสำหรับการลงนามเป็นของตัวเอง พื้นที่ทำงานหลักยังคงอยู่ที่ราก (root) เพื่อความเข้ากันได้; พื้นที่ทำงานเพิ่มเติมจะอยู่ใน profiles/<id>/. โทเค็นแบบ bearer เดียวควบคุมการติดตั้งทั้งหมด; พื้นที่ทำงานไม่ใช่ ผู้เช่าการอนุญาตที่แยกต่างหาก กลไกล็อกกระบวนการปกป้องไดเรกทอรี; กลไกล็อกฐานข้อมูล จัดลำดับการแทรกเหตุการณ์แบบซีเรียล แต่ละการเพิ่มข้อมูลจะบันทึกแบบซิงโครนัส ไปยัง SQLite WAL ในโหมดซิงโครนัสแบบเต็ม (FULL synchronous mode) ตัวทริกเกอร์การอัปเดต/ลบเหตุการณ์ป้องกัน การแก้ไขข้อมูลโดยแอปพลิเคชันทั่วไป; ผู้ดูแลระบบไฟล์ยังคงอยู่ภายในขอบเขตความเชื่อถือ
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+การอนุญาต API เป็นโทเค็นแบบ bearer การดำเนินการเข้าสู่ระบบถูกซีเรียลไลซ์และมีข้อจำกัดด้านเวลา การอัปโหลดบัญชีใช้ขีดจำกัดตัวเนื้อหาที่เข้ารหัส12 MiB และขีดจำกัดไฟล์ที่ถอดรหัส8 MiB; คำขอ API ปกติยังคงใช้ขีดจำกัด16 KiB การแปลงข้อมูลทำงานในเธรด ผู้ทำงาน เก็บการอัปโหลดไว้ในหน่วยความจำ และส่งคืนข้อมูลนำเข้าที่ปรับให้เป็นมาตรฐานไปยัง เบราว์เซอร์ที่ผ่านการยืนยันตัวตน การเข้าสู่ระบบด้วย QR มีผู้สมัครต่อพื้นที่ทำงาน ตัวระบุที่มีอายุสั้น งานรอ และการยกเลิกอย่างชัดเจน เฉพาะการอนุญาตที่ได้รับการยอมรับเท่านั้นที่จะกลายเป็นไคลเอนต์ที่ใช้งานอยู่ Telegram FloodWait จะถูกส่งคืนพร้อมค่า Retry-After; ข้อมูลรับรองและข้อความข้อผิดพลาด RPC แบบดิบจะไม่ถูกเปิดเผยในข้อผิดพลาดของ API การส่งออกบันทึก (Journal exports) ทำงานนอกวงจรเหตุการณ์แบบอะซิงโครนัส และถูกจัดลำดับตามพื้นที่ทำงาน (workspace) แต่ละแห่ง มันส่งสตรีมภาพสแนปช็อตการอ่านที่เสถียร พร้อมกับการเขียน WAL ที่ดำเนินต่อไป งานการรับข้อมูลแชท (Chat acquisition jobs) สามารถทำงานพร้อมกันบน บัญชีที่แยกต่างหาก; แต่ละบัญชีจะยังคงถูกจองไว้จนกว่างานของมันจะหยุดลง งานที่ถูกหยุดชั่วคราวหรือ ล้มเหลวจะยังคงเก็บจุดตรวจสอบ (checkpoints) ของมันไว้ การตรวจสอบการเก็บถาวรที่สำเร็จจะอนุญาตให้ทำความสะอาด ไฟล์ทำงานของมัน โดยเหลือ ZIP แผนที่ลงนาม และสถานะไว้ ผู้รวบรวมพื้นที่ทำงาน (Workspace collectors) ใช้กระบวนการ/วงจรเหตุการณ์ร่วมกัน
 
 ภาพถ่ายประวัติปัจจุบันและการอัปเดตแบบเรียลไทม์อาจทับซ้อนกันได้ ทั้งสองเป็นข้อมูลการสังเกตที่แยกกัน และถูกระบุด้วยแหล่งที่มา; ข้อมูลที่ซ้ำกันจะไม่ถูกรวมเข้าด้วยกันโดยอัตโนมัติ ไม่มีการดำเนินการ การอนุมานจาก ID ที่ขาดหายไป ข้อความที่ถูกลบที่ถูกสร้างขึ้น การระบุสมาชิกแบบบังคับ หรือการเข้าร่วมกลุ่มอัตโนมัติ ถูกนำมาใช้
 

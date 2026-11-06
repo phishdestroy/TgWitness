@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/searc
 
 Suche nach gespeicherten Nachrichten anhand von Wortformen, genauen Phrasen, Domains und @Benutzernamen, wobei die besten Treffer zuerst angezeigt werden und der Index mit dem signierten Protokoll verknüpft ist.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Untersuchung](https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Untersuchung](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Analyse des Archivs](https://phishdestroy.github.io/TgWitness/de/docs/reference/analysis/) · [Lokale OCR und Transkription](https://phishdestroy.github.io/TgWitness/de/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Suche nach gespeicherten Nachrichten anhand von Wortformen, genauen Phrasen, Dom
 
 Der Index besteht aus abgeleiteten Daten. Er wird aus dem signierten Protokoll neu erstellt, ist selbst niemals signiert und wird niemals exportiert. Die ursprünglichen Datensätze bleiben unverändert.
 
-**On this page**
+**Auf dieser Seite**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#dependencies)
+- [Suchsyntax](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#search-syntax)
+- [Sprachen](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#languages)
+- [Speicherort des Index](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#where-the-index-lives)
+- [Ergebnisse und das signierte Journal](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#results-and-the-signed-journal)
+- [Erkannter Text](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#recognized-text)
+- [Zugriff](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#access)
+- [Das Archiv und MCP befragen](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#ask-the-archive-and-mcp)
+- [Abhängigkeiten](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/#benchmark)
 
 ## Suchsyntax
@@ -97,7 +97,7 @@ Der Chat-bezogene Zugriff findet nur Datensätze aus den jeweiligen Chats, einsc
 
 MCP-Clients können `search_messages` mit `ranked=true` aufrufen und mit `next_offset`. Verbindungen mit eingeschränktem Zugriff erhalten nur ihre eigenen Chats.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Die nummerierte Paginierung umfasst unabhängig von der Seitengröße höchstens die ersten 1,000-Ergebnisse. Grenzen Sie die Suche, den Chat oder den Zeitraum ein, um weitere Treffer zu prüfen. Bei der Suche nach Neueste zuerst werden Nachrichten, OCR- und Transkriptionsergebnisse vor der Auswahl jeder Seite sortiert.
 
 ## Abhängigkeiten
 

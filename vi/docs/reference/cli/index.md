@@ -6,7 +6,7 @@ Tìm kiếm, đọc bối cảnh, đếm hoạt động và xuất các tin nh�
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Tích hợp với các nền tảng lưu trữ](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/) · [Tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ Bảng điều khiển từ xa cần sử dụng HTTPS; HTTP thuần túy chỉ 
 
 Ngày tháng được tính theo `2026-10-01` (nửa đêm theo giờ UTC) hoặc theo định dạng giờ ISO kèm múi giờ, `2026-10-01T09:00+03:00`. Đối với `search`, `messages` và `export` họ chọn thời gian quan sát. Các trang chứa tối đa 50 bản ghi: làm theo `next_offset` (`--offset`) để tìm kiếm theo thứ hạng và `next_before` (`--before`) ở nơi khác.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+Tìm kiếm theo thứ hạng dừng lại ở 1,000 kết quả. Trang cuối cùng có thể ngắn hơn `--limit`; hãy thu hẹp phạm vi truy vấn, cuộc trò chuyện hoặc khoảng thời gian khi có nhiều quan sát phù hợp hơn.
 
 Mỗi kết quả tin nhắn đều chứa `untrusted_content: true`ID không gian làm việc, ID cuộc trò chuyện và ID tin nhắn, số thứ tự trong nhật ký, mã băm của bản ghi đã lưu và liên kết đến bảng điều khiển. Các thao tác chỉnh sửa, thông báo xóa và `missing_on_recheck` đều là các bản ghi riêng biệt. Việc thiếu một bản ghi không chứng minh rằng sự kiện đó chưa từng xảy ra.
 
@@ -76,7 +76,7 @@ Khoảng thời gian này chọn **thời gian tin nhắn được Telegram báo
 
 Việc xuất dữ liệu qua bảng điều khiển yêu cầu kết nối cho phép **xuất tin nhắn (chỉ qua dòng lệnh)**; tùy chọn này không được chọn mặc định. Tệp này là bản sao làm việc, không phải bằng chứng: để có bản chuyển giao có thể xác minh , hãy sử dụng bản xuất có chữ ký trong **phần** **"Exports"**, phần này `python -m tgwitness.verify`kiểm tra.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+Bảng điều khiển sẽ kiểm tra lại quyền truy cập trước khi xuất mỗi bản ghi, bao gồm cả bản ghi hoàn tất. Quyền truy cập bị thu hồi hoặc hết hạn sẽ dẫn đến việc xuất dữ liệu không đầy đủ. Các lần đọc trang theo cơ chế lười biếng chia sẻ giới hạn công việc lưu trữ với các truy vấn khác và có thời gian chờ giới hạn.
 
 ## Kỹ năng của Agent
 

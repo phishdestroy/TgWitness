@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/case-
 
 ตัวกรองรายงาน, แปดแบบออกแบบ, การตั้งค่าเนื้อหาล่วงหน้า, ประวัติการเปลี่ยนแปลงที่บันทึกไว้ และการประเมินผลที่รวมอยู่ในไฟล์ส่งออกที่ลงนามแล้ว
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การสอบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![การสอบสวน](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 แปลงข้อสังเกตที่เลือกไว้เป็นรายงานคดีที่อ่านได้: คำถามของคดี, ขอบเขต, การเปลี่ยนแปลงที่บันทึกไว้, แผนภูมิ, ผลการค้นพบ และแหล่งอ้างอิง แต่ละรายงานให้ ผู้รับสามารถตรวจสอบข้อมูลที่ส่งมาและประเมินความครบถ้วน ของการเก็บรวบรวมข้อมูลได้
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/case-
 
 การดูตัวอย่างข้อมูลนับจากส่วนนำของบันทึกที่เสถียรทั้งหมด ไม่ใช่ตัวอย่างเริ่มต้น มีเพียงแถวตัวอย่างที่แสดงและรายการยาวเท่านั้นที่ถูกจำกัด; จำนวนที่ถูกตัดออกจะ แสดงไว้ การส่งออกในภายหลังจะสร้างภาพถ่ายสแนปช็อตที่เสถียรใหม่ ดังนั้นการเก็บรวบรวมที่ยังดำเนินอยู่ อาจทำให้ตัวเลขเพิ่มขึ้น ขอบเขต จำนวน และตัวตนของแหล่งข้อมูลถูกรวมอยู่ใน รายงานที่ลงนามแล้ว การเปิดหรือดูตัวอย่างแบบฟอร์มจะไม่บันทึกข้อมูล
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**คำแนะนำเกี่ยวกับเขตอำนาจศาล** ในส่วน รายละเอียดเอกสาร ให้เปิด **คำแนะนำเกี่ยวกับเขตอำนาจศาล · สามารถเลือกเขตอำนาจศาลและประเภทกระบวนการ (แพ่ง/พาณิชย์ หรืออาญา) ได้ตามความจำเป็น** ส่วนภาคผนวกประกอบด้วย ฐานทางกฎหมาย ลิงก์แหล่งที่มา หมายเหตุการเตรียมการ และสถานะการวิจัย บทสรุปและคำอธิบาย เกี่ยวกับมาตรการคุ้มครองการเก็บข้อมูลในภาษาท้องถิ่นเป็นตัวเลือกเสริม ไม่มีการเลือกเขตอำนาจศาล เป็นค่าเริ่มต้น ตัวเลือกเหล่านี้เป็นส่วนหนึ่งของพื้นที่ทำงาน และไม่ถูกรวมอยู่ใน การตั้งค่าเลย์เอาต์ที่บันทึกไว้และค่าเริ่มต้นการแชร์-คัดลอกโดยอัตโนมัติ ดู [ค่าเริ่มต้น รายงานที่รองรับ และข้อจำกัดการวิจัย](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md)
 
 **เลือกสำเนาสำหรับผู้รับ** แผนภูมิและบันทึกการถอดความใช้ข้อมูลที่เลือกไว้ ความสมบูรณ์ การเก็บรักษา และขอบเขตการครอบคลุม อธิบายบันทึกต้นฉบับทั้งหมด ไฟล์ ZIP ของหลักฐาน ประกอบด้วยข้อมูลต้นฉบับและไฟล์แนบ [ใช้การส่งต่อข้อมูลแบบจำกัด](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#handover-extract) เมื่อผู้รับควรได้รับเฉพาะข้อมูลที่เลือกและได้รับอนุญาตเท่านั้น
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/case-
 
 เมื่อรวมไฟล์ `analytics.json` เข้าไป ไฟล์นี้จะได้รับการปกป้องโดยแฮชไฟล์ที่ลงนามของอาร์ไคฟ์ `report.json` ของ Journal จะฝังข้อมูลรวมที่เลือกไว้เดียวกัน การตรวจสอบลายเซ็น จะตรวจจับไบต์ที่เปลี่ยนแปลง เพื่อตรวจสอบตัวเลข ให้คำนวณข้อมูลรวมของ Journal ใหม่ด้วย `report_analytics.Analytics` และ `selected` หรือ คำนวณข้อมูลรวมของ snapshot ด้วย `snapshot_analytics.collect` และ `project`
 
-### Anomaly indicators
+### ตัวชี้วัดความผิดปกติ
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**ตัวอย่าง.** รายงานหลักฐานเพิ่มส่วน **ตัวชี้วัดความผิดปกติ** ที่คำนวณโดย ตัวประมวลผลที่ลงทะเบียน (`tgwitness/metrics/`, ไฟล์หนึ่งต่อตัวชี้วัดหนึ่ง) รายงานจะระบุชื่อ ตัวประมวลผลทุกตัวที่ทำงานพร้อมเวอร์ชันของมัน และแสดงวิธีการคำนวณใต้ตารางของมัน เพื่อให้ การคำนวณสามารถทำซ้ำได้จาก `events.jsonl` โดยใช้ `tgwitness.metrics.run`
 
-| Processor | สิ่งที่แสดง |
+| ผู้แปล | สิ่งที่แสดง |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | ผู้โพสต์ครั้งแรกและจำนวนข้อความต่อวัน UTC. การตั้งค่าสถานะต้องใช้ผู้โพสต์ครั้งแรกอย่างน้อยห้าคน และจำนวนข้อความต้องเป็นสามเท่าของค่ามัธยฐานของผู้โพสต์ครั้งแรก โดยปริมาณข้อความต้องไม่เกิน1.5 เท่าของค่ามัธยฐานนั้น ฐานข้อมูลอ้างอิงใช้ข้อมูลการสังเกตอย่างน้อยเจ็ดวันภายใน14 วันปฏิทินที่ผ่านมา หลังจากช่วงเตรียมระบบเจ็ดวัน |
+| `service_vs_message_ratio` v1 | หมายเลขข้อความที่เก็บไว้จะแตกต่างกันตามแต่ละแชท และส่วนแบ่งที่ข้อความบริการใช้ไป เอกสารนี้อธิบายระบบการจัดหมายเลขเท่านั้น ไม่ชี้แจงถึงหมายเลขที่ขาดหายไปใด ๆ |
+| `join_leave_per_month` v1 | การเข้าร่วม การออกจากระบบ การลบ หรือการแบนต่อเดือน โดยนับหนึ่งครั้งต่อคน ต่อห้องสนทนา ต่อการเปลี่ยนแปลง และต่อวัน |
+| `pinned_per_month` v1 | ข้อความบริการที่ถูกปักหมุด, การยกเลิกปักหมุด, และข้อความที่ถูกปักหมุดที่เพิ่มหรือลบระหว่างการถ่ายภาพสถานะการสนทนา (chat-state snapshots) ต่อเดือน |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**พารามิเตอร์ → Report metrics** (เลือกตัวประมวลผลและจำนวนแถวที่แสดง) รวมถึงในรายงานที่กรองแล้ว ตารางรายวันและรายเดือนแสดงแถวล่าสุด ส่วนตารางส่วนแบ่งบริการ จัดอันดับการสนทนาตามจำนวนข้อความที่บันทึกไว้ ยอดรวมครอบคลุมทุกแถว
 
 จากแหล่งที่มาที่ตรวจสอบแล้ว ให้สร้างแบบทั้งแปดแบบที่กล่าวถึงข้างต้นจากนิตยสารสมมติเดียวกัน:
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. รักษาไฟล์ ZIP ต้นฉบับและค่าแฮชของพวกมันไว้ บันทึกผู้ถือแต่ละราย การโอนย้าย วันที่ และวัตถุประสงค์ เก็บรักษาคำชี้แจงของผู้ดำเนินการและบันทึกคดีที่ระบุไว้พร้อมกับข้อมูลเหล่านั้น
 5. สำหรับ VM ที่เป็นความลับ ให้รักษาและตรวจสอบอย่างอิสระต่อคำเสนอราคา, การท้าทาย, ห่วงโซ่ใบรับรอง Intel, การวัดค่า, แหล่งที่มาที่แม่นยำ และเงื่อนไขการจัดการกุญแจ เก็บผลการตรวจสอบการรับรองไว้พร้อมกับหลักฐานที่ได้รับการตรวจสอบแล้ว
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+ดู[ส่วนขอบเขตการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)ตรวจสอบเพื่อทราบการตรวจสอบการรับข้อมูล, ความสมบูรณ์ของไฟล์เก็บถาวร, เวลา และความครอบคลุมของการเก็บข้อมูลในแต่ละโหมด
 
 ## การตรวจสอบของผู้รับ
 

@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/
 
 เชื่อมต่อไคลเอนต์ MCP กับพื้นที่ทำงานและห้องสนทนาที่เลือกไว้ โดยให้สิทธิ์การเข้าถึงที่มีระยะเวลาจำกัดและสามารถเพิกถอนได้
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การบูรณาการกับระบบเก็บถาวร](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![การบูรณาการกับระบบเก็บถาวร](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 เชื่อมต่อไคลเอนต์นักวิเคราะห์กับพื้นที่ทำงานและแชทที่เลือกไว้ TgWitness ให้บริการ **Streamable HTTP ที่ `/mcp` ในกระบวนการของ panel** แต่ละการเชื่อมต่อมี token ระยะเวลาหมดอายุ และเครื่องมือที่ได้รับอนุญาตเป็นของตัวเอง MCP ไม่สามารถส่งข้อความ Telegram เปลี่ยนแปลง การตั้งค่า หรือแก้ไขบันทึกที่ลงนามได้ การเชื่อมต่อเดียวกันนี้สามารถใช้งานได้กับ [บรรทัดคำสั่ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)
 
 [คู่มือขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**บนหน้านี้**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#connect-your-client)
+- [ติดตั้งและตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#install-and-check)
+- [สร้างการเชื่อมต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#issue-a-connection)
+- [เชื่อมต่อไคลเอนต์ของคุณ](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#tools-and-boundaries)
+- [เครื่องมือและขอบเขต](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/#tools-and-boundaries)
 
 ## การติดตั้งและการตรวจสอบ
 
@@ -62,7 +62,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/
 | Cursor | `.cursor/mcp.json` | HTTP พร้อมเฮดเดอร์ตัวแปรสภาพแวดล้อม |
 | VS Code Local | `.vscode/mcp.json` | HTTP พร้อมอินพุตรหัสผ่าน `promptString` |
 | Windsurf | `mcp_config.json` | HTTP พร้อมตัวยึดตำแหน่งเฮดเดอร์ Bearer |
-| ไคลเอนต์อื่นๆ | URL และเฮดเดอร์ Authorization | Streamable HTTP |
+| ไคลเอนต์อื่นๆ | URL และเฮดเดอร์ Authorization | HTTP ที่สามารถสตรีมได้ |
 
 TgWitness ใช้โทเค็น Bearer โดยไม่มีการค้นหา OAuth โปรดใช้บริดจ์ stdio ภายในเครื่อง สำหรับไคลเอนต์ที่ตัวเชื่อมต่อระยะไกลต้องใช้ OAuth สำหรับ VS Code ตัวแปรอินพุต จะมีผลกับฮาร์เนส **Local** เท่านั้น และจะไม่ถูกส่งต่อไปยังเซสชัน Copilot ข้อมูลอ้างอิงการกำหนดค่า: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)
 

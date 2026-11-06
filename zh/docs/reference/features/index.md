@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/featu
 
 TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [项目参考](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![项目参考](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness 可保存已连接账户可访问的 Telegram 对话， 记录观察到的变更，并生成可验证的导出文件。本参考文档描述了 采集模型、当前工作流程及其边界。
 
-**On this page**
+**本页内容**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#stable-release-criteria)
+- [独立应用程序](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#standalone-application)
+- [共享调查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#shared-investigations)
+- [归档工具](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#archive-tools)
+- [可选内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#optional-extras)
+- [协议与私有源代码](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#protocol-and-private-sources)
+- [多个账户](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#multiple-accounts)
+- [捕获与来源标注](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#capture-and-attribution)
+- [容量与 Telegram 限制](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#capacity-and-telegram-limits)
+- [可靠性与恢复](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#reliability-and-recovery)
+- [证据模型](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#evidence-model)
+- [导出、部署与移交](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#export-deployment-and-handoff)
+- [稳定版发布标准](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/#stable-release-criteria)
 
 ## 独立应用程序
 
@@ -93,9 +93,9 @@ TgWitness 拥有独立的安装流程、数据目录和发布生命周期。随�
 | 管理员操作 | 频道/超级群聊天导出中包含的相关已交付更新及管理员日志快照 | 导出功能会在导出管理员账户可访问日志时读取日志；持续轮询管理员日志的功能不属于此流程范围 |
 | 附件 | 原始版本描述符、下载字节数/SHA-256 及尝试结果 | 已消失的文件可能无法恢复；最新版本不会被替换 |
 | 历史 | 当前可见消息的明确快照 | 不会还原所有编辑或已删除的内容 |
-| 采集进程 | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) |
+| 采集进程 | 启动/停止、心跳、错误、设置、作用域和签名运行收据 | 本地库存；GitHub 和 TDX 增加了[独立的环境检查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+界面会标注源事件中提供的账户名称，并保留观察到的 名称和用户名。当事件未指明行为者时，报告将该字段留空。
 
 ## 容量与 Telegram 限制
 

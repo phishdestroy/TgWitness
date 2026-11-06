@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/times
 
 RFC 3161 timestamplari imzolangan tekshiruv nuqtalari uchun: vakolatli organiga nima yuboriladi va javob qanday tasdiqlanadi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dalil va tasdiqlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Dalil va tasdiqlash](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness RFC 3161 so'rovlarini tayyorlaydi va timestamp authority (TSA) javoblarini tasdiqlaydi. Ushbu qo'lda bajariladigan protsedura na TSA tanlaydi, na ma'lumot yuboradi; dalil rejimi esa bularning ikkalasini ham jadval ([dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)) bo'yicha bajaradi. Tayyorlangan so'rov **hali timestamp isbotini** tashkil **etmaydi**.
 

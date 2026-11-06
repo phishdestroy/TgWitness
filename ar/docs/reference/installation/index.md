@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/insta
 
 يمكن التثبيت بأمر واحد، والتحقق من التوقيعات والتجزئات، والتحديث، وإزالة التثبيت.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [البدء](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![البدء](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [المشروع](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [البداية السريعة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/) · [النشر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
 
-**On this page**
+**في هذه الصفحة**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#remove-tgwitness)
+- [التثبيت بأمر واحد](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#install-with-one-command)
+- [حيث يعمل كل شيء](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#where-everything-runs)
+- [إعدادات البحث عن النص الكامل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#full-text-search-settings)
+- [الوصول عبر سطر الأوامر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#command-line-access)
+- [التحقق قبل التشغيل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#verify-before-running)
+- [تحديث تثبيت موجود](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#update-an-existing-installation)
+- [الأوامر اليومية في نظام Ubuntu](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [إزالة TgWitness](https://phishdestroy.github.io/TgWitness/ar/docs/reference/installation/#remove-tgwitness)
 
 ## التثبيت بأمر واحد
 
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **يؤدي إصدار جديد إلى تحديث موقع التنزيل؛ وتتم تحديث البرامج المثبتة عند تشغيل المثبت مرة أخرى.** لا يوجد محدث يعمل تلقائيًا أو إعادة تشغيل تلقائية لـ مجموعة قيد التشغيل. قناة المثبت الحالية هي قناة **«معاينة**»؛ وهي تتبع الإصدارات المنشورة والمُراجعة من `main`، والتي قد يكون التزامها أحدث من آخر إصدار مرقّم على GitHub. يأتي إصدار الصفحة من `pyproject.toml`؛ حيث يميز التزامها ومعرف البنية التحديثات داخل نفس الإصدار التجريبي.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+يتم النشر تلقائيًا بعد اجتياز ذلك الالتزام المحدد لفحوصات التطبيق و الأمان، واجتياز الحزمة الموقعة لاختبارات خدمة Ubuntu و تثبيت Windows PowerShell. أثناء إجراء الفحوصات، أو في حالة فشلها، تستمر الأوامر نفسها في تثبيت الإصدار الذي تم فحصه سابقًا. يُظهر بيان الإصدار الالتزام المتاح حاليًا؛ وقد يظل رقم الإصدار وحده كما هو بين تحديثات المعاينة.
 
 استخدم مجلد التثبيت نفسه ومستخدم نظام التشغيل نفسه كما في السابق. قم بعمل نسخة احتياطية من دليل البيانات بالكامل مع إيقاف عملية التجميع؛ `tgwitness paths` يحددها. التصدير الموقّع ليس نسخة احتياطية كاملة للتثبيت.
 

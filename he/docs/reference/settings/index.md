@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/setti
 
 אשף ההתקנה, היעדים, רמות הממשק, נתיבי החיבור וההגדרות המשותפות לקבוצת חשבונות.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [התחלת עבודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![התחלת עבודה](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [חשבונות](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/) · [קישור](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/) · [גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/access/)
 

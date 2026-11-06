@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/stora
 
 การสำรองข้อมูล การย้ายไฟล์เก่าไปยังคลาวด์ การคัดลอกภายใต้ Object Lock และการกู้คืนบนเครื่องใหม่
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 แผงควบคุมนี้แบ่งงานออกเป็นสามส่วน:
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/stora
 
 การตอบกลับการอัปโหลดเพียงอย่างเดียวไม่ถือเป็นสิทธิ์ในการลบไฟล์ TgWitness ดาวน์โหลด วัตถุที่เข้ารหัสอย่างครบถ้วนและตรวจสอบขนาดของมัน SHA-256, บันทึกใบเสร็จรับเงิน, จากนั้นตรวจสอบไบต์ในเครื่องอีกครั้งทันทีก่อนการลบ การอัปโหลดล้มเหลว, การอ่านกลับที่ต่างกัน หรือการถ่ายโอนที่ถูกยกเลิก จะทำให้ไฟล์ในเครื่องยังคงอยู่ หาก การสำรองหลักฐานที่เปิดใช้งานยังไม่ได้คัดลอกไฟล์นั้น การลบจะรอจนกว่าการสำรองข้อมูลจะเสร็จสิ้น
 
-**On this page**
+**บนหน้านี้**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#operator-bot-and-completion-notices)
+- [เมื่อพื้นที่ดิสก์เริ่มเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#when-the-disk-is-filling-up)
+- [เชื่อมต่อปลายทาง](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#connect-a-destination)
+- [เก็บไฟล์กู้คืนไว้](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#keep-the-recovery-file)
+- [กู้คืนระบบหลังการสูญเสียการติดตั้ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#recover-after-losing-the-installation)
+- [บอทผู้ดำเนินการและข้อความแจ้งเตือนการเสร็จสิ้น](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## เมื่อพื้นที่ดิสก์ใกล้เต็ม
 

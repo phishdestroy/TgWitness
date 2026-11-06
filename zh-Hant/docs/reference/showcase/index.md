@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 透過會過期且可撤銷的連結，發佈所選公開頻道的已儲存訊息及經簽名的快照。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署與復原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署與復原](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **「存取 → 公開展示」**會利用現有的 存取憑證系統，建立一個獨立的唯讀頁面。該頁面會讀取安裝程式中儲存的觀察記錄，但不會 為訪客啟動資料收集器、登入 Telegram 或取得頻道。
 

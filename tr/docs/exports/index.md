@@ -53,7 +53,7 @@ Gelişmiş seçeneklerin de yer aldığı tam panel açılmış haldedir. Depola
 | --- | --- |
 | Uç nokta | Depolama URL'si, bucket yolu ya da kimlik bilgisi olmadan. Örnek: `https://s3.example.invalid`. |
 | Bölge | Sağlayıcınızın istediği. Varsayılan `us-east-1`. |
-| Bucket | Yazabildiğiniz mevcut bir bucket. Örnek: `example-case-backup`. |
+| Kova | Yazabildiğiniz mevcut bir bucket. Örnek: `example-case-backup`. |
 | Bucket içindeki klasör | Önek, varsayılan `tgwitness`. Üstüne çalışma alanı başına bir önek eklenir. |
 | Erişim anahtarı kimliği / Gizli erişim anahtarı | İkisi birlikte, kasada saklanır. Korumak için sonradan ikisini de boş bırakın. |
 | Yol biçimli adresler | Açık: `endpoint/bucket`. Kapalı: `bucket.endpoint`. Sağlayıcıya bağlı. |

@@ -6,7 +6,7 @@ Cari, baca konteks, hitung aktivitas, dan ekspor pesan yang disimpan dari skrip 
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Integrasi arsip](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP hanya baca](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/) · [Pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ Panel jarak jauh memerlukan HTTPS; HTTP biasa hanya diterima untuk `127.0.0.1`, 
 
 Tanggalnya adalah `2026-10-01` (pukul 00.00 UTC) atau waktu ISO dengan zona waktu, `2026-10-01T09:00+03:00`. Untuk `search`, `messages` dan `export` mereka memilih waktu pengamatan. Setiap halaman menampung hingga 50 catatan: ikuti `next_offset` (`--offset`) untuk pencarian berdasarkan peringkat dan `next_before` (`--before`) di tempat lain.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+Pencarian berdasarkan peringkat berhenti pada 1,000 hasil. Halaman terakhir mungkin lebih pendek dari `--limit`; persempit kueri, obrolan, atau periode jika terdapat lebih banyak pengamatan yang cocok.
 
 Setiap hasil pesan memuat `untrusted_content: true`ID ruang kerja, obrolan, dan pesan, urutan jurnal, hash catatan yang disimpan, serta tautan panel. Pengeditan, pemberitahuan penghapusan, dan `missing_on_recheck` merupakan catatan terpisah. Tidak adanya suatu catatan tidak membuktikan bahwa suatu peristiwa tidak pernah terjadi.
 
@@ -76,7 +76,7 @@ Periode ini memilih **waktu pesan yang dilaporkan oleh Telegram**. Jumlah jam da
 
 Ekspor melalui panel memerlukan koneksi yang memungkinkan **ekspor pesan (hanya melalui baris perintah)**; opsi ini tidak dipilih secara default. Berkas ini adalah salinan kerja, bukan bukti: untuk penyerahan yang dapat diverifikasi, gunakan ekspor yang ditandatangani di **bagian** **Ekspor**, yang `python -m tgwitness.verify`melakukan verifikasi.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+Panel memeriksa kembali akses sebelum mengeluarkan setiap catatan, termasuk catatan penyelesaian. Akses yang dicabut atau kedaluwarsa akan menghasilkan ekspor yang tidak lengkap. Pembacaan halaman secara bertahap berbagi batas pekerja arsip dengan kueri lain dan memiliki batas waktu tunggu.
 
 ## Keterampilan agen
 

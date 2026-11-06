@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/insta
 
 Cài đặt chỉ với một lệnh, kiểm tra chữ ký và mã băm, cập nhật và gỡ bỏ cài đặt.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bắt đầu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Bắt đầu](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Dự án](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Hướng dẫn nhanh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/) · [Triển khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
 
-**On this page**
+**Trên trang này**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#remove-tgwitness)
+- [Cài đặt bằng một lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#install-with-one-command)
+- [Nơi mọi thứ diễn ra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#where-everything-runs)
+- [Cài đặt tìm kiếm toàn văn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#full-text-search-settings)
+- [Truy cập qua dòng lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#command-line-access)
+- [Xác minh trước khi chạy](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#verify-before-running)
+- [Cập nhật bản cài đặt hiện có](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#update-an-existing-installation)
+- [Các lệnh thường dùng trên Ubuntu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Xóa TgWitness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/installation/#remove-tgwitness)
 
 ## Cài đặt chỉ với một lệnh
 
@@ -137,7 +137,7 @@ Quá trình cài đặt trên Windows tự động xác minh chữ ký gói bằ
 
 **Một bản phát hành mới sẽ cập nhật trang tải xuống; các chương trình đã cài đặt sẽ được cập nhật khi bạn chạy trình cài đặt lại.** Không có trình cập nhật tự động hoặc tính năng khởi động lại tự động cho bộ sưu tập đang chạy. Kênh trình cài đặt hiện tại là **bản xem trước**; nó dựa trên các bản dựng đã được phát hành và kiểm tra từ `main`, trong đó commit có thể mới hơn so với bản phát hành GitHub được đánh số gần nhất. Phiên bản của trang này xuất phát từ `pyproject.toml`; cam kết và ID bản dựng của nó giúp phân biệt các bản cập nhật trong cùng một phiên bản xem trước.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+Việc xuất bản diễn ra tự động sau khi commit cụ thể đó vượt qua các kiểm tra ứng dụng và kiểm tra bảo mật, đồng thời gói đã ký vượt qua các bài kiểm tra cài đặt dịch vụ Ubuntu và Windows PowerShell. Trong khi các kiểm tra đang chạy, hoặc nếu chúng thất bại, các lệnh tương tự sẽ tiếp tục cài đặt bản dựng đã được kiểm tra trước đó. Bản kê khai bản dựng hiển thị commit nào hiện đang có sẵn; riêng số phiên bản có thể giữ nguyên giữa các bản cập nhật bản xem trước.
 
 Sử dụng cùng thư mục cài đặt và tài khoản người dùng hệ điều hành như trước đây. Sao lưu toàn bộ thư mục dữ liệu khi quá trình thu thập dữ liệu đã dừng; `tgwitness paths` xác định nó. Một tệp xuất đã được ký không phải là bản sao lưu cài đặt đầy đủ.
 

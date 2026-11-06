@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 文中以驗證者實際使用的精確公式，詳盡闡述了雜湊鏈、簽名、檢查點及見證者的運作原理。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [證據與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![證據與驗證](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness 會保存收集帳戶所觀察到的內容，將這些觀察結果 串聯成一份經簽署的日誌，並允許其他人透過可信 金鑰及先前保留的檢查點，對匯出內容進行驗證。
 
 [本地文件網站](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)新增了 位於 `/docs/concepts/` 的互動式範例、位於 `/docs/witness/` 的檢查點決策探索工具，以及關於「[案件看板](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/)」、「 [報告設計](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)」與「[移交摘錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#handover-extract)」的操作指南。 所有範例訊息、 計數值及延遲時間均為虛構。鏈式沙盒中的雜湊值是透過 瀏覽器中的 SHA-256 演算法計算得出。任何資料均不會傳送至 Telegram。
 
-**On this page**
+**本頁內容**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#pick-a-workflow)
+- [訊息會隨時間變化；觀察結果則會累積](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [哈希值的涵蓋範圍](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#what-a-hash-covers)
+- [早期檢查點新增的內容](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [見證的歸屬位置](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#where-a-witness-belongs)
+- [針對已知操作進行傳遞測試](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [選擇工作流程](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/#pick-a-workflow)
 
 ## 訊息隨之改變；觀察結果不斷累積
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/webho
 
 Kapsam dahilindeki olayları, HMAC imzaları, yeniden deneme ve teslim durumu bilgileriyle birlikte HTTPS alıcılarına gönderin.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Arşiv entegrasyonları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Arşiv entegrasyonları](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

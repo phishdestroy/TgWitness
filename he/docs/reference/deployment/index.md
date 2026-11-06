@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/deplo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![פריסה ושחזור](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **אנגלית** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [אוקראינית](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [פורטוגזית (ברזיל)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [אורדו](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [באסהה אינדונזיה](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [סינית פשוטה](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | הפעל את ההדגמה הסינתטית ב-`data\demo` |
 | `TgWitness-Check.cmd` | הפעל את בדיקת המוכנות מבלי להפעיל את התוכנה |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+מילון המורפולוגיה הרוסי המוצמד ופרופילי הצבעים ב-PDF נכללים בחבילה לשימוש לא מקוון. תהליך האריזה מאפשר רק נתיבי קבצים ידועים בתוך ספריות התלות `data`; קבצים בלתי צפויים בספריות אלה יגרמו לכישלון הבנייה.
 
 חלץ את הארכיון כולו לתיקייה הניתנת לכתיבה, כגון `Documents\TgWitness`; אל תפעיל אותו מתוך קובץ ה-ZIP או מתוך תיקיית Program Files. סביבת ההרצה משתמשת בנתיב מודול מבודד, כך שהתקנות Python אחרות ו-`PYTHONPATH` אינן משפיעות עליה. הנתונים נשמרים בתיקיית `data` של החבילה. כדי לעדכן, עצרו את TgWitness, חלצו את הגרסה החדשה לתיקייה חדשה והעתיקו את תיקיית `data` אליה.
 

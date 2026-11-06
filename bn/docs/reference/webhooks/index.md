@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/webho
 
 এইচএমএসি স্বাক্ষর, পুনঃচেষ্টা এবং ডেলিভারি স্ট্যাটাস সহ স্কোপড ইভেন্টগুলি HTTPS রিসিভারদের কাছে পাঠান।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [আর্কাইভ ইন্টিগ্রেশনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![আর্কাইভ ইন্টিগ্রেশনসমূহ](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

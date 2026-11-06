@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 只需一則指令即可安裝、檢查簽名與雜湊值，並更新或移除安裝。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [開始使用](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![開始使用](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [專案](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [快速入門](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/) · [部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
 
-**On this page**
+**本頁內容**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#remove-tgwitness)
+- [一指令即可安裝](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#install-with-one-command)
+- [萬物運行的所在](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#where-everything-runs)
+- [全文搜尋設定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#full-text-search-settings)
+- [命令列存取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#command-line-access)
+- [執行前請先驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#verify-before-running)
+- [更新現有安裝](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#update-an-existing-installation)
+- [Ubuntu 上的常用指令](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [移除 TgWitness](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/installation/#remove-tgwitness)
 
 ## 只需一則指令即可安裝
 
@@ -137,7 +137,7 @@ Windows 安裝程式會透過 .NET 自行驗證套件簽名，無需 OpenSSL。�
 
 **新發布的版本會更新下載網站；當您 再次執行安裝程式時，已安裝的程式便會更新。**本工具不提供無人值守的更新程式，也不會自動重新啟動 正在運行的集合。當前的安裝程式通道為**預覽版**；它遵循 來自 `main`發布並經過驗證的建置版本，其提交時間可能比上一個 編號的 GitHub 發行版更晚。該頁面的版本來自 `pyproject.toml`；其提交 與建置 ID 用於區分同一預覽版本內的更新。
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+當該特定提交通過應用程式與 安全性檢查，且簽名套件通過 Ubuntu 服務及 Windows PowerShell 安裝測試後，系統將自動發布。在檢查執行期間，或若檢查失敗時， 系統將繼續執行相同指令以安裝先前已通過檢查的建置版本。建置清單 會顯示目前可用的提交；預覽更新期間，僅版本號可能保持 不變。
 
 請使用與先前相同的安裝資料夾及作業系統使用者。在停止資料收集時，備份完整的資料 目錄； `tgwitness paths` 以識別該資料夾。經簽名的匯出檔 並非完整的安裝備份。
 

@@ -6,7 +6,7 @@ TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 �
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![배포 및 복구](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **영어** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [우크라이나어](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [포르투갈어 (브라질)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [우르두어](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [인도네시아어](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [베트남어](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [간체 중국어](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo`에서 시뮬레이션 데모를 시작하세요. |
 | `TgWitness-Check.cmd` | 시작하지 않고 준비 상태 확인 실행 |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+고정된 러시아어 형태소 사전과 PDF 색상 프로필은 오프라인 사용을 위해 번들로 제공됩니다. 패키징 시 의존성 `data` 디렉터리 내의 알려진 파일 경로만 허용되며, 해당 디렉터리에 예상치 못한 파일이 존재할 경우 빌드가 실패합니다.
 
 전체 아카이브를 `Documents\TgWitness`와 같은 쓰기 가능한 폴더에 압축을 풀어 주십시오. ZIP 파일 내부나 Program Files 폴더에서 실행하지 마십시오. 런타임은 격리된 모듈 경로를 사용하므로, 다른 Python 설치본이나 `PYTHONPATH`는 이에 영향을 미치지 않습니다. 데이터는 패키지의 `data` 폴더에 저장됩니다. 업데이트하려면 TgWitness를 중지하고, 새 버전을 새로운 폴더에 압축을 풀고 `data` 폴더를 해당 위치로 복사하십시오.
 

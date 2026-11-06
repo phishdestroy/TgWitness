@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-i
 
 해시 체인, 서명, 체크포인트 및 위트니스에 대해 검증자가 사용하는 정확한 수식을 바탕으로 설명합니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [증거 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![증거 및 검증](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness는 수집 계정이 감지한 내용을 보존하고, 이러한 감지 내용을 서명된 기록부에 연결하며, 다른 사용자가 신뢰할 수 있는 키와 이전에 보관된 체크포인트를 기준으로 내보낸 데이터를 검증할 수 있도록 합니다.
 
 [로컬 문서 웹사이트](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)에는 `/docs/concepts/`에 대화형 예시, `/docs/witness/`에 체크포인트 결정 탐색기, 그리고 [Case Board](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/), [보고서 설계](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/) 및 [인계 발췌문에](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#handover-extract) 대한 단계별 안내가 추가되어 있습니다. 모든 예시 메시지, 카운트 및 지연 시간은 가상의 것입니다. 체인 샌드박스 내의 해시는 브라우저에서 SHA-256을 사용하여 계산됩니다. 텔레그램으로 전송되는 정보는 없습니다.
 
-**On this page**
+**이 페이지에서**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#pick-a-workflow)
+- [메시지는 변하고, 관찰 결과는 축적됩니다](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [해시가 포함하는 내용](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#what-a-hash-covers)
+- [이전 체크포인트에서 추가된 내용](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [위트니스의 위치](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#where-a-witness-belongs)
+- [알려진 동작에 대한 테스트 실행](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [워크플로우 선택](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/#pick-a-workflow)
 
 ## 메시지가 변경되고, 관찰 기록이 축적됩니다
 

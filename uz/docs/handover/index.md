@@ -57,7 +57,7 @@ Manba jurnali chegarasiga bog'langan alohida paket
 | Odamlar | Tanlangan odamlar ismi bilan qoladi; boshqalar taxallus oladi yoki chiqarib tashlanadi. |
 | Matn | Barcha matn, faqat tanlangan odamlar va hisobingiz matni yoki hech narsa. |
 | Fayllar | Tanlangan odamlar va hisobingiz fayllari, barcha ko'rsatilgan fayllar yoki hech narsa. |
-| Case Board | Hech narsa, xatcho'plar va kesimlar yoki muhokamali kartalar. |
+| Holat paneli | Hech narsa, xatcho'plar va kesimlar yoki muhokamali kartalar. |
 
 Matn va fayllarni ham o'qing: taxallus xabar yoki ilova ichida yozilgan ismlarni olib tashlamaydi. Tanlangan fayl yo'q bo'lsa, uni tiklang yoki ilovalarni chiqarib tashlang.
 

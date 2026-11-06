@@ -141,7 +141,7 @@ Pencadangan terjadwal atau manual
 
 Salin sekarang atau setiap 1－1.440 menit， kemajuannya ada di panel．
 
-Object Lock
+Kunci Objek
 
 Pilih jumlah hari dan mode retensi； panel memeriksa apakah benar－benar berlaku．
 

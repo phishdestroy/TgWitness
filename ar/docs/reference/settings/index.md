@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/setti
 
 معالج الإعداد، والأهداف، ومستويات الواجهة، ومسارات الاتصال، والإعدادات التي تشاركها مجموعة الحسابات.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [البدء](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![البدء](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [الحسابات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/) · [الارتباط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/) · [الوصول](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/)
 

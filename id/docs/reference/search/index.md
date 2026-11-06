@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/searc
 
 Temukan pesan yang disimpan berdasarkan bentuk kata, frasa persis, domain, dan @nama pengguna, dengan hasil yang paling sesuai ditampilkan terlebih dahulu, serta indeks yang terikat pada jurnal yang ditandatangani.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Penyelidikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Penyelidikan](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Analisis arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/) · [OCR dan transkripsi lokal](https://phishdestroy.github.io/TgWitness/id/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Temukan pesan yang disimpan berdasarkan bentuk kata, frasa persis, domain, dan @
 
 Indeks merupakan data turunan. Indeks ini dibangun ulang dari jurnal yang ditandatangani, tidak pernah ditandatangani sendiri, dan tidak pernah dimasukkan ke dalam ekspor. Catatan asli tidak berubah.
 
-**On this page**
+**Di halaman ini**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#benchmark)
+- [Sintaks pencarian](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#search-syntax)
+- [Bahasa](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#languages)
+- [Di mana indeks berada](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#where-the-index-lives)
+- [Hasil dan jurnal yang ditandatangani](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#results-and-the-signed-journal)
+- [Teks yang dikenali](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#recognized-text)
+- [Akses](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#access)
+- [Tanyakan ke arsip dan MCP](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#ask-the-archive-and-mcp)
+- [Ketergantungan](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#dependencies)
+- [Uji Kinerja](https://phishdestroy.github.io/TgWitness/id/docs/reference/search/#benchmark)
 
 ## Sintaks pencarian
 
@@ -97,7 +97,7 @@ Akses yang dibatasi pada obrolan hanya menemukan catatan dari obrolan tersebut, 
 
 Klien MCP dapat memanggil `search_messages` dengan `ranked=true` dan halaman dengan `next_offset`. Koneksi yang dibatasi cakupannya hanya menerima obrolan mereka sendiri.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Pagination berurutan mencakup paling banyak hasil 1,000, terlepas dari ukuran halaman. Persempit kueri, obrolan, atau periode untuk memeriksa kecocokan lebih lanjut. Pencarian terbaru terlebih dahulu mengurutkan pesan, hasil OCR, dan transkripsi sebelum memilih setiap halaman.
 
 ## Ketergantungan
 

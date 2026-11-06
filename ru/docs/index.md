@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/
 
 Иллюстрированные руководства
 
-[### Case Board Сохраняйте связь между замечаниями, точными цитатами и примечаниями команды.](https://phishdestroy.github.io/TgWitness/ru/docs/case-board/) [### Студия отчетов Выберите материал и один из восьми вариантов оформления отчета.](https://phishdestroy.github.io/TgWitness/ru/docs/reports/) [### Совместное использование текста Подготовьте подписанный выдержку с полями, необходимыми получателю.](https://phishdestroy.github.io/TgWitness/ru/docs/handover/) [### Группы аккаунтов Просматривайте учетные записи совместно, но держите их рабочие пространства отдельно.](https://phishdestroy.github.io/TgWitness/ru/docs/groups/)
+[### Доска дел Сохраняйте связь между замечаниями, точными цитатами и примечаниями команды.](https://phishdestroy.github.io/TgWitness/ru/docs/case-board/) [### Студия отчетов Выберите материал и один из восьми вариантов оформления отчета.](https://phishdestroy.github.io/TgWitness/ru/docs/reports/) [### Совместное использование текста Подготовьте подписанный выдержку с полями, необходимыми получателю.](https://phishdestroy.github.io/TgWitness/ru/docs/handover/) [### Группы аккаунтов Просматривайте учетные записи совместно, но держите их рабочие пространства отдельно.](https://phishdestroy.github.io/TgWitness/ru/docs/groups/)
 
 [## Режимы, сценарии и уровни доказательства Области сбора данных, границы событий, восемь механизмов проверки и шесть вымышленных сценариев расследования.](https://phishdestroy.github.io/TgWitness/ru/guides/modes.html)
 
@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/
 
 Сбор
 
-[Руководство по панелям](https://phishdestroy.github.io/TgWitness/ru/docs/reference/panel/)[Как устроен сбор](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/ru/docs/reference/secret-chats/)[Загрузить историю источников](https://phishdestroy.github.io/TgWitness/ru/docs/reference/history/)[Работа и обслуживание](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/)[Режим расследования](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)[Возможности и ограничения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/)
+[Руководство по панелям](https://phishdestroy.github.io/TgWitness/ru/docs/reference/panel/)[Как устроен сбор](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)[Секретные чаты: реализация и демонстрация](https://phishdestroy.github.io/TgWitness/ru/docs/reference/secret-chats/)[Загрузить историю источников](https://phishdestroy.github.io/TgWitness/ru/docs/reference/history/)[Работа и обслуживание](https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/)[Режим расследования](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)[Возможности и ограничения](https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/)
 
 Архив и интеграции
 

@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel
 
 Кожен екран панелі: чати, щоденник, джерела, експорт, додаткові функції, режими захисту та перевірка коду.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Початок роботи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Початок роботи](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Перше налаштування та параметри](https://phishdestroy.github.io/TgWitness/uk/docs/reference/settings/) · [Акаунти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/) · [Експорт та перевірка](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Звіти про справи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)
 
 Що робить кожен екран, що записується в підписаний журнал і де знаходиться детальний посібник. Панель відображає по одному робочому простору за раз: один обліковий запис Telegram із власними джерелами, журналом та ключем підпису. Селектор у верхній частині бічної панелі дозволяє перемикатися між робочими просторами. Адреса містить робочий простір (`?ws=…`); доки адреса, селектор та завантажений обліковий запис не збігаються, дії залишаються заблокованими.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+Використовуйте методи порівняння колекцій , щоб вибрати між спостереженням у реальному часі, повним історією, експортом даних з нових облікових записів/чатів та передачею збережених записів. На сторінці Експорт над елементами керування завантаженням розміщено те саме порівняння.
 
-**On this page**
+**На цій сторінці**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#more-tools)
+- [Знайдіть свій шлях](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#find-your-way)
+- [Почніть звідси](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#start-here)
+- [Чати](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#chats)
+- [Журнал](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#journal)
+- [Джерела](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#sources)
+- [Експорт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#exports)
+- [Налаштування, облікові записи та підключення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#settings-accounts-and-connection)
+- [Додатки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#extras)
+- [Режими захисту](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#protection-modes)
+- [Інші інструменти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#more-tools)
 
 ## Орієнтуйтеся
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **Типи джерел** обмежують режими «папка» та «весь обліковий запис» каналами, групами, приватними чатами та ботами. **«Власні дії»** додають власні повідомлення облікового запису, редагування та натискання клавіш під час відповіді.
 - **Коли з’являється новий чат або бот**: збережіть його профіль та до обраної кількості його останніх видимих повідомлень.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/uk/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Обмеження: опублікований хмарний колектор не отримує секретних чатів. Окремий інтерфейс [Pseudo-secret та його демо-версія](https://phishdestroy.github.io/TgWitness/uk/docs/reference/secret-chats/) задокументовані з зазначенням їхнього статусу розробки та невирішених дефектів. Нічого не записується, поки TgWitness не працює; після перезапуску він фіксує лише те, що Telegram ще повертає, і у звіті відображається прогалина. Чати, що виходять за межі списку чатів (діалоги 1,000, якщо це не змінено в параметрах), додаються, коли вони наступного разу стають активними. Кнопки бота, натиснуті в іншому додатку, невидимі; відповідь бота записується.
 
 ### Чати, що входять до сфери застосування
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | Сповіщення | Проблеми, змінені повідомлення та щоденний звіт; ваш власний бот-контролер | [нижче](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#notifications) |
 | Докази та резервні копії | Часові мітки, додаткові свідки та зашифрована зовнішня копія | [нижче](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#evidence-and-backups) |
 | Сервер працює цілодобово без перерв | Хмарний сервер без SSH, який створюється та видаляється з панелі управління | [Високий рівень безпеки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/#from-the-panel) |
-| Незалежний свідок | Підписані перевірки, опубліковані у вашому каналі Telegram або на Discord | [Witness](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/) |
+| Незалежний свідок | Підписані перевірки, опубліковані у вашому каналі Telegram або на Discord | [Свідок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/) |
 | Перевірка коду | Порівнює запущену програму з публічним комітом на GitHub | [нижче](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/#code-check) |
 
 ### Мета та рівень захисту

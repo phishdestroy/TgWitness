@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/setti
 
 설정 마법사, 목표, 인터페이스 수준, 연결 경로 및 계정 그룹에서 공유되는 설정.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [시작하기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![시작하기](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [계정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) · [연결](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/) · [접근](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/)
 

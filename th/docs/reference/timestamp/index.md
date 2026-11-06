@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/times
 
 การประทับเวลาตาม RFC 3161 สำหรับจุดตรวจสอบที่ลงนาม: สิ่งที่ส่งไปยังหน่วยงานที่มีอำนาจ และวิธีการตรวจสอบความถูกต้องของคำตอบ
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [หลักฐานและการตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![หลักฐานและการตรวจสอบ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness จัดเตรียมคำขอตาม RFC 3161 และตรวจสอบคำตอบจากหน่วยงานรับรองเวลา (TSA) ขั้นตอนด้วยมือนี้ไม่เลือก TSA หรือส่งข้อมูล; โหมดหลักฐานจะดำเนินการทั้งสองอย่างตาม กำหนดเวลา ([รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)) คำขอที่จัดเตรียมไว้ **ยังไม่ถือเป็นหลักฐานการประทับเวลา**
 

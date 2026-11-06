@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/acces
 
 खातों और चैट्स के लिए सीमित पहुँच प्रदान करें, अनुमतियाँ चुनें, सत्रों और आईपी पतों को सीमित करें, और पहुँच वापस ले लें।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [शुरुआत करना](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![शुरुआत करना](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 एक समीक्षक को एक चैट तक पहुंच दें, एक विश्लेषक को एक मामले को निर्यात करने की अनुमति दें, या एक ऑपरेटर को चयनित खातों का नियंत्रण दें। प्रत्येक व्यक्ति को अपना टोकन मिलता है। मुख्य पैनल का टोकन प्रशासक के पास रहता है।
 
@@ -110,6 +110,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/acces
 
 ****मुख्य प्रशासक और विश्वास सीमा****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+मुख्य पैनल टोकन अप्रतिबंधित बना रहता है। इसके साथ ब्राउज़र साइन-इन सत्र बनाते हैं जो प्रशासक द्वारा कॉन्फ़िगर की गई सत्र सीमाओं के अधीन होते हैं। मुख्य टोकन को सीधे भेजने वाली स्क्रिप्ट्स पूरी पहुँच बनाए रखती हैं और उन्हें ब्राउज़र सत्रों के रूप में नहीं गिना जाता है।
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+यह एक इंस्टॉलेशन में एप्लिकेशन-स्तर का एक्सेस कंट्रोल है। सभी वर्कस्पेस सर्वर प्रक्रिया को साझा करते हैं; यह होस्ट प्रशासक से अलगाव नहीं है। मुख्य टोकन, टेलीग्राम सत्र, साइनिंग कुंजियाँ और डेटा निर्देशिका को निजी रखें। एक विटनेस टोकन एक अलग चेकपॉइंट/स्वास्थ्य प्रमाण-पत्र है, न कि पैनल एक्सेस टोकन।

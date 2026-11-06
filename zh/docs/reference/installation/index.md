@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/insta
 
 只需一条命令即可完成安装、验证签名和哈希值，以及更新和卸载该工具。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [入门指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![入门指南](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [项目](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [快速入门](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/) · [部署](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
 
-**On this page**
+**本页内容**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#remove-tgwitness)
+- [仅需一条命令即可安装](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#install-with-one-command)
+- [万物运行之处](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#where-everything-runs)
+- [全文搜索设置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#full-text-search-settings)
+- [命令行访问](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#command-line-access)
+- [运行前请先验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#verify-before-running)
+- [更新现有安装](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#update-an-existing-installation)
+- [Ubuntu 上的常用命令](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [删除 TgWitness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/installation/#remove-tgwitness)
 
 ## 只需一条命令即可安装
 
@@ -137,7 +137,7 @@ Windows 安装程序会通过 .NET 自行验证软件包签名，无需 OpenSSL�
 
 **新版本发布后，下载站点会相应更新；当您 再次运行安装程序时，已安装的程序将自动更新。**该工具不提供无人值守更新程序，也不会自动重启 正在运行的集合。当前安装程序通道处于**预览阶段**；它遵循 来自 `main`发布的、经过验证的构建版本，其提交时间可能晚于 GitHub 上最近的编号版本。该页面的版本号来源于 `pyproject.toml`；其提交 和构建 ID 可区分同一预览版本内的更新。
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+当该特定提交通过应用程序和 安全检查，且签名包通过 Ubuntu 服务和 Windows PowerShell 安装测试后，系统将自动发布。在检查运行期间，或检查失败时， 系统将使用相同的命令继续安装之前已通过检查的构建版本。构建清单 显示当前可用的提交；在预览更新之间，版本号本身可能保持 不变。
 
 请使用与之前相同的安装文件夹和操作系统用户。在停止数据收集后，备份完整的数据 目录； `tgwitness paths` 用于标识该数据。已签名的导出文件 并非完整的安装备份。
 

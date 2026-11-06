@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/insta
 
 התקן בפקודה אחת, בדוק חתימות ו-hash, עדכן והסר את ההתקנה.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [התחלת עבודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![התחלת עבודה](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [פרויקט](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [התחלה מהירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/) · [פריסה](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
 
-**On this page**
+**בעמוד זה**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#remove-tgwitness)
+- [התקנה בפקודה אחת](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#install-with-one-command)
+- [המקום שבו הכל פועל](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#where-everything-runs)
+- [הגדרות חיפוש בטקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#full-text-search-settings)
+- [גישה משורת הפקודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#command-line-access)
+- [אמת לפני ההפעלה](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#verify-before-running)
+- [עדכון התקנה קיימת](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#update-an-existing-installation)
+- [פקודות יומיומיות ב-Ubuntu](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [הסר TgWitness](https://phishdestroy.github.io/TgWitness/he/docs/reference/installation/#remove-tgwitness)
 
 ## התקנה בפקודה אחת
 
 מתקין מודרך כולל סביבת ריצה פרטית של Python. השתמש באותה כתובת עבור התקנות עתידיות: כל פרסום מעדכן את המתקין, את ה-hash, את החתימות ואת פרטי הבנייה יחד.
 
-**Linux / macOS (Bash):**
+**לינוקס / macOS (Bash):**
 
 ```
 curl -fsSL https://get.destroy.tools/install.sh | bash
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **פרסום חדש מעדכן את אתר ההורדות; תוכניות מותקנות מתעדכנות כאשר מפעילים את תוכנית ההתקנה שוב.** אין מתקן עדכונים אוטומטי או הפעלה מחדש אוטומטית של אוסף פועל. ערוץ ההתקנה הנוכחי הוא ערוץ **תצוגה מקדימה**; הוא עוקב אחר גרסאות שפורסמו ונבדקו מ `main`, שה-commit שלהן עשוי להיות חדש יותר מהמהדורה האחרונה המספרית ב-GitHub. גרסת הדף נובעת `pyproject.toml`; ה-commit ומזהה ה-build שלה מבחינים בין עדכונים בתוך אותה גרסת תצוגה מקדימה.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+הפרסום מתבצע באופן אוטומטי לאחר שה-commit הספציפי עובר את בדיקות היישום וה אבטחה, והחבילה החתומה עוברת את בדיקות השירות של Ubuntu ואת בדיקות ההתקנה של Windows PowerShell. בזמן שהבדיקות פועלות, או אם הן נכשלות, אותן פקודות ממשיכות להתקין את ה-build שנבדק קודם לכן. מניפסט ה-build מציג איזה commit זמין כרגע; מספר הגרסה לבדו עשוי להישאר זהה בין עדכוני התצוגה המקדימה.
 
 השתמש באותה תיקיית התקנה ובאותו משתמש מערכת הפעלה כמו קודם. גבה את ספריית הנתונים המלאה כשהאיסוף מופסק; `tgwitness paths` זה מזהה אותה. ייצוא חתום אינו גיבוי התקנה מלא.
 

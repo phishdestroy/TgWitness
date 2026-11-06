@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/featu
 
 वर्तमान संग्रह मॉडल, बहु-खाता वर्कफ़्लो, निर्यात और TgWitness की परिचालन सीमाएँ।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [परियोजना संदर्भ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![परियोजना संदर्भ](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness जुड़े खातों के लिए सुलभ टेलीग्राम बातचीत को संरक्षित करता है, देखे गए परिवर्तनों को रिकॉर्ड करता है और सत्यापन योग्य एक्सपोर्ट तैयार करता है। यह संदर्भ संग्रह मॉडल, वर्तमान वर्कफ़्लो और उनकी सीमाओं का वर्णन करता है।
 
-**On this page**
+**इस पृष्ठ पर**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#stable-release-criteria)
+- [स्वतंत्र एप्लिकेशन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#standalone-application)
+- [साझा जांचें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#shared-investigations)
+- [आर्काइव उपकरण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#archive-tools)
+- [वैकल्पिक अतिरिक्त](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#optional-extras)
+- [प्रोटोकॉल और निजी स्रोत](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#protocol-and-private-sources)
+- [कई खाते](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#multiple-accounts)
+- [कब्ज़ा और श्रेय](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#capture-and-attribution)
+- [क्षमता और टेलीग्राम सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#capacity-and-telegram-limits)
+- [विश्वसनीयता और पुनर्प्राप्ति](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#reliability-and-recovery)
+- [साक्ष्य मॉडल](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#evidence-model)
+- [निर्यात, परिनियोजन और हस्तांतरण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#export-deployment-and-handoff)
+- [स्थिर रिलीज़ मानदंड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/#stable-release-criteria)
 
 ## स्वतंत्र एप्लिकेशन
 
@@ -93,9 +93,9 @@ TgWitness की अपनी इंस्टॉलेशन, डेटा ड�
 | प्रशासनिक क्रियाएँ | प्रासंगिक डिलीवर किए गए अपडेट्स और चैनल/सुपरग्रुप चैट एक्सपोर्ट्स में एडमिन-लॉग का स्नैपशॉट | एक्सपोर्ट उपलब्ध होने पर लॉग को एक्सपोर्टिंग एडमिन खाते से पढ़ता है; निरंतर एडमिन-लॉग पोलिंग इस पथ के बाहर है |
 | संलग्नक | मूल संस्करण वर्णनकर्ता, डाउनलोड किए गए बाइट्स/SHA-256 और प्रयास के परिणाम | एक गायब फ़ाइल पुनर्प्राप्त नहीं की जा सकती; नवीनतम संस्करण प्रतिस्थापित नहीं किया जाता |
 | इतिहास | वर्तमान दृश्यमान संदेशों का स्पष्ट स्नैपशॉट | सभी संपादनों या हटाई गई सामग्री का पुनर्निर्माण नहीं करता |
-| कलेक्टर प्रक्रिया | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) |
+| कलेक्टर प्रक्रिया | शुरुआत/रोकें, हृदयगति, त्रुटियाँ, सेटिंग्स, दायरा और हस्ताक्षरित रन रसीद | स्थानीय सूची; GitHub और TDX [स्वतंत्र वातावरण जांच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) जोड़ते हैं |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+इंटरफ़ेस स्रोत घटना में प्रदान किए गए खाते का नाम बताता है और देखे गए नामों और उपयोगकर्ता नामों को बनाए रखता है। जब घटना अपने कर्ता को छोड़ देती है, तो रिपोर्ट उस क्षेत्र को अनिर्दिष्ट छोड़ देती है।
 
 ## क्षमता और टेलीग्राम सीमाएँ
 

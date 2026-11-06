@@ -6,22 +6,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/histo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [אוסף](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![אוסף](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
-In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
+ב-**Sources**, סקרו את הצ'אטים המופעלים, השעו את הניטור, בחרו ב-Standard API או בייצוא Takeout, ולאחר מכן בחרו ב-**Load full history**. הריצה מתקנת את רשימת המקורות וקוראת את ההודעות העבר הזמינות שלהם אל תוך הצ'אטים ואל יומן הניטור החתום. המדיה משתמשת בהגדרות הקובצים המצורפים הקיימות ובתור ההורדות הקבוע. זה נפרד מהייצוא החתום ב-JSON/HTML לכל צ'אט בנפרד.
 
-For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+לאיסוף ברמת החשבון כולו, בחר **"חשבון שלם"**, התחל תצפית כדי לטעון את רשימת המקורות שלו, ובדוק רשימה זו לפני תחילת ההיסטוריה. מגבלת רשימת הדיאלוגים עדיין חלה (1,000 כברירת מחדל, ניתן להתאמה ב"פרמטרים"). ריצה מוצלחת אינה מוכיחה שכל דיאלוג בחשבון נכלל ברשימה. צ'אטים שהתגלו או הופעלו מאוחר יותר דורשים ריצה נוספת. השהה את התצפית לפני תחילת ההיסטוריה; רכישה אחת שולטת בחשבון אחד בכל פעם.
 
-Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
+בחרו בין עובד אחד לחמישה עובדי קבצים מצורפים, והחליטו אם לשמר את 'פעולות אחרונות' הזמינות ולהשוות גרסאות שנשמרו בעבר. הוצאת נתונים עשויה לדרוש אישור ב-Telegram ו המתנה המוגדרת על ידי השרת. אפשרויות אלו נשארות קבועות בעת חידוש הפעולה. ראו [התנהגות מילוי רטרואקטיבי ו חוזה ראיות](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) לפרטים בנוגע להעברה, ניסיון חוזר ואמון.
 
 ## השהיה, התחלה מחדש ותוצאות חלקיות
 
-- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
+- **השהיית היסטוריה** מפסיק את הקריאה. **המשך היסטוריה** ממשיך מההודעה האחרונה שנשמרה בכל מקור; הפעלה מחדש של האפליקציה גם היא משאירה את הריצה בהשהיה עד לחידושה. לצורך חידוש נדרש אותו חשבון Telegram שאינו פעיל.
 - תצפית על הודעה, משימת צירוף קובץ ואישור באמצעות הסמן מתבצעים בעסקה אחת. הפעלה מחודשת אינה חוזרת על תצפיות שכבר אושרו. לכידה בזמן אמת או הפעלה נפרדת, שהושקה במפורש, עשויות לתעד באופן עצמאי את אותה ההודעה.
-- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
+- כל מקור (כל טווח מפוצל של Telegram ב-Takeout) קובע מזהה הודעה עליון בקריאה הראשונה שלו. הודעות חדשות יותר שייכות לניטור בזמן אמת, ולא לדפים ההיסטוריים הנותרים של אותו מקור.
 - מקורות שאינם נגישים ומקורות שהושבתו במהלך האיסוף נשארים גלויים כ "נכשלו" או "הוחסרו". מקורות אחרים ממשיכים לפעול; התוצאה הכוללת אינה שלמה.
-- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
-- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
+- עיכובים של FloodWait מכבדים את זמן ההמתנה שנשמר עבור החשבון. במקרה של תקלות זמניות מתבצעת ניסיון חוזר עד חמש פעמים; במקרה של מיצוי או שטח דיסק נמוך, הפעולה מושהית תוך שמירה על מיקום הסמן.
+- **סיום ריצת היסטוריה זו** משמר את התצפיות השמורות. הוא אינו מסיר אותן או מבטל משימות צירוף באמצעות ה-API הסטנדרטי. סיום Takeout מסמן את קבצי ה-Takeout הנותרים כ"דילוג"; השהיה מאפשרת לחדש אותם. ריצה חדשה קוראת מחדש את המקורות המופעלים.
 
 השלמת ההיסטוריה מתייחסת לקריאת ההיסטוריה בלבד. קבצים מצורפים עשויים להישאר במצב "ממתין", להיכשל, או להיכלל במדיניות שהוגדרה. יש לבדוק את אישורי קבלת המדיה ביומן ובתור הקבצים המצורפים; רק אישור שהושלם עם בייטים שנשמרו מהווה קובץ מצורף שנשמר. פעולת ההיסטוריה היא בקשה מפורשת לצילום מצב והיא נפרדת מהמתגים שבוחרים קטגוריות של אירועים חיים עתידיים.
 
@@ -33,8 +33,8 @@ Choose one to five attachment workers and whether to preserve available Recent A
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
+יש לשמור בנפרד את טביעת האצבע הצפויה של מפתח החתימה. המאמת בודק את חתימת הדוח, ארכיון הראיות, נקודת הבדיקה של הדוח, תוכנית המקור, החשבון ומספר ההודעות השמורות/שאינן זמינות. ריצות חדשות גם מקשרות את התקדמות המקור ואת האפשרויות לאירועי סמן חתומים. ללא ה-`--evidence`, הוא בודק רק את הדוח החתום ואת העקביות הפנימית שלו. שדות התקדמות ישנים וסיכומי קבצים מצורפים נשארים כהצהרות אספן חתומות. בודק הראיות בודק בתים של מדיה בארכיון.
 
-Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
+לא החתימה ולא השלמת ההיסטוריה הזמינה מוכיחות את מקור ה-Telegram, תמונת מצב אטומית או שלמות היסטורית. הודעות עשויות להשתנות בזמן הקריאה; הודעות שנמחקו ועריכות ביניים מחוץ ל"פעולות אחרונות" הזמינות, וכן צ'אטים סודיים, אינן משוחזרות. מפעיל השולט במפתח החתימה יכול לזייף יומן לפני שקיימות התחייבויות חיצוניות. יש להשתמש בנקודות ביקורת שנשמרו בנפרד או בעד עצמאי לצורך המאפיינים המתועדים של זיהוי חבלה.
 
 סמן הרכישה מייצג את מצב סביבת העבודה המקומית. שחזור קובץ ZIP של הראיות בלבד אינו משחזר משימת רכישה תלויה או הפעלת טלגרם. שמרו את גיבוי סביבת העבודה אם נדרשת המשך המשימה המקורית.

@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# シークレットチャット：実装とデモ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+独立した「シークレットチャット」の実装を理解し、架空のインターフェースを試用し、未解決の不具合を確認してください。
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**確認日： 6 11月 2026:** 別の「シークレットチャット」の実装が 開発中です。これは、公開された `main` at `3d23e52b647b`. 通常のコレクターおよびTakeoutエクスポートは、シークレットチャットを収集しません。 インタラクティブなウェブサイトのシナリオでは、架空のデータを用いてインターフェースを実演していますが、 Telegramでの通信は行えません。
 
-## Where the implementation lives
+## 実装の場所
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+コミット `0e60f88e` により、ローカル開発ブランチ `fix/panel-routes-sessions` に**「Sources → Pseudo-secret」**が追加されました。チェックされたスナップショットは `bb8788fb685c` です。 その実装には、`tgwitness/secret_chats.py`、アプリケーションルート、 `tgwitness/static/views/secret-chats.js`、および専用のテストが含まれています。
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+そのブランチのオプション機能である`secret-chats`は、 [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat) を使用し、`d87bf037b90060383c7b704d8a06ebb98c621c6f`にピン留めされています。このライブラリは、 アカウントの既存のTelethon認証に基づいて、Telegramのエンドツーエンドチャットプロトコルを実装しています。 このライブラリを単独でインストールしても、`main`に不足している統合機能は追加されません。
 
-## What the development interface does
+## 開発インターフェースの機能
 
-| アクション | Recorded behavior |
+| アクション | 記録された動作 |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| ユーザー名またはユーザーIDでチャットを開始する | リクエストを送信してください。相手側がそれを受け入れる必要があります。 |
+| 着信リクエストを受け付ける | TgWitnessは、そのチャットの受信エンドポイントとなります。自動受諾は別の設定であり、デフォルトではオフになっています。 |
+| メッセージの送受信 | 送信または受信の`secret_chat.message`レコードを追加し、スレッドに表示します。 |
+| 添付ファイルを受信する | これを復号し、SHA-256でバイト列を保存し、`secret_chat.file`を記録してください。 |
+| タイマーまたは削除通知を受け取る | 通知を記録し、以前にキャプチャされたコンテンツを保持してください。 |
+| 会話の内容を確認する | メッセージ、ファイル、通知、および主要な可視化情報を表示します。開いているタブは4秒ごとに更新されます。 |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+この統合機能が含まれる開発ビルドにおいて、オペレーターは選択したアカウントに対してモジュールを有効化し、接続します。開始、受諾、送信には、 やり取りを行うための権限と、アカウントの読み取り専用保護がオフになっていることが必要です。もう一方の 参加者は、新しい送信チャットを受諾する必要があります。これらの制御機能は、 上記のリビジョン時点では公開アプリケーションには存在しません。
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+このTgWitnessセッションによって作成または承認されたチャットのみが対象となります。端末上に既存の シークレットチャットは、その端末に残ります。セッションのインポートでは、 それらの個別の暗号化キーは提供されません。シークレットチャットの鍵素材およびカウンターは ワークスペースの保管庫に保存され、保存されたメッセージおよび復号化されたファイルは、通常の ワークスペースの保存保護措置に従います。
 
-## Website demonstration
+## Webサイトでのデモ
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+ウェブサイトの「**Try Secret Chat」**シナリオでは、架空の会話が開かれます。これにより、 読者はリクエストを開始し、その受け入れをシミュレートし、サンプルメッセージを送信し、 スクリプト化された返信とファイルを受信し、タイマーや削除通知を確認することができます。受信した リクエストを受け入れることも可能です。コントロールには、シミュレートされた相手側のアクションが明示的に表示されます。
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+このシナリオはブラウザのメモリ上で実行されます。リセットまたは再読み込みを行うと、内容は消去されます。ログインを行ったり、 Telegramに接続したり、実際の暗号化キーを作成したり、署名付きサンプルのダウンロードを変更したりすることはありません。 表示されるメッセージは、署名付き証拠ではありません。このシナリオは意図された 操作を実証するものであり、開発実装が完成していることを保証するものではありません。
 
-## Checks and outstanding defects
+## 確認事項および未解決の不具合
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+既存の5つのテストは、暗号化された鍵の永続性、ライフサイクルおよびメッセージ レコード、受信受け入れポリシー、読み取り専用送信、および添付ファイルのエクスポートを網羅しています。 これらは、11月6日のレビューにおいて、固定されたライブラリに対して合格しました。さらに3つの 合成チェックにより、同じスナップショットで欠陥が再現されました：
 
-| Finding | Consequence |
+| 発見事項 | 結果 |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| `read_only`のバイパスを閉じる | close path は、インタラクションをブロックすべき場合にリモートアクションを実行できます。 |
+| 重複検出は、直近500件のレコードのみを対象とします。 | 古いリプレイは、再起動後に重複データが生成される可能性があります。 |
+| 添付ファイルのダウンロードに失敗すると、その保留中のエントリは削除されます | 一時的な障害が発生すると、リトライジョブが失われます。 |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+これらは未修正の不具合であり、 [公開された](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)監査報告書にも記録されています。5つの合格テストでは、 これらの不具合は網羅されていません。本レビューでは、合成ワークスペースを使用し、Telegramの 動作を模擬して実施したものであり、実際のハンドシェイクを再現したり、本番環境への展開を検証したりしたものではありません。

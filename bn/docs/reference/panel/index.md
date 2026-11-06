@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel
 
 প্যানেলের প্রতিটি স্ক্রিন: চ্যাট, জার্নাল, সোর্স, এক্সপোর্ট, এক্সট্রা, সুরক্ষা মোড এবং কোড চেক।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [শুরু করা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![শুরু করা](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [প্রাথমিক সেটআপ এবং সেটিংস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/settings/) · [অ্যাকাউন্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) · [রপ্তানি এবং যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [কেস রিপোর্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)
 
 প্রতিটি স্ক্রিন কী করে, এটি স্বাক্ষরিত জার্নালে কী লেখে এবং বিস্তারিত গাইড কোথায়। প্যানেল একবারে একটি ওয়ার্কস্পেস দেখায়: একটি টেলিগ্রাম অ্যাকাউন্ট যার নিজস্ব সোর্স, জার্নাল এবং স্বাক্ষর কী রয়েছে। সাইডবারের শীর্ষে থাকা সিলেক্টর ওয়ার্কস্পেস পরিবর্তন করে। ঠিকানাটি ওয়ার্কস্পেস বহন করে (`?ws=…`); ঠিকানা যখন workspace-কে বহন করে (); ঠিকানা, সিলেক্টর এবং লোডকৃত অ্যাকাউন্টের মধ্যে অমিল থাকলে, অ্যাকশনগুলো ব্লক থাকে।
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+লাইভ পর্যবেক্ষণ, সম্পূর্ণ ইতিহাস, নতুন অ্যাকাউন্ট/চ্যাট এক্সপোর্ট এবং সংরক্ষিত রেকর্ড হস্তান্তর—এইগুলির মধ্যে বেছে নিতে [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) ব্যবহার করুন। Exports পৃষ্ঠায় ডাউনলোড নিয়ন্ত্রণের উপরে একই তুলনা অন্তর্ভুক্ত রয়েছে।
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#more-tools)
+- [আপনার পথ খুঁজে নিন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#find-your-way)
+- [এখান থেকে শুরু করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#start-here)
+- [চ্যাটসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#chats)
+- [জার্নাল](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#journal)
+- [উৎসসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#sources)
+- [রপ্তানি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#exports)
+- [সেটিংস, অ্যাকাউন্ট এবং সংযোগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#settings-accounts-and-connection)
+- [অতিরিক্ত](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#extras)
+- [সুরক্ষা মোডসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#protection-modes)
+- [আরও সরঞ্জাম](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#more-tools)
 
 ## আপনার পথ খুঁজে নিন
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **সোর্স ধরনগুলো** ফোল্ডার এবং পুরো-অ্যাকাউন্ট মোডকে চ্যানেল, গ্রুপ, ব্যক্তিগত চ্যাট এবং বটগুলিতে সীমাবদ্ধ করে। **নিজস্ব ক্রিয়া** অ্যাকাউন্টের নিজস্ব বার্তা, সম্পাদনা এবং উত্তর-কীবোর্ড চাপ যোগ করে।
 - **যখন একটি নতুন চ্যাট বা বট দেখা যায়**: এর প্রোফাইল সংরক্ষণ করুন এবং নির্বাচিত সংখ্যক এর সর্বশেষ দৃশ্যমান বার্তা সংরক্ষণ করুন।
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/bn/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+সীমাবদ্ধতা: প্রকাশিত ক্লাউড কালেক্টর সিক্রেট চ্যাট গ্রহণ করে না। পৃথক [ছদ্ম-সিক্রেট ইন্টারফেস এবং এর ডেমো](https://phishdestroy.github.io/TgWitness/bn/docs/reference/secret-chats/) তাদের উন্নয়ন অবস্থা এবং অমীমাংসিত ত্রুটিসহ নথিভুক্ত করা হয়েছে। TgWitness চলমান না থাকলে কিছুই রেকর্ড হয় না; রিস্টার্ট করার পর এটি শুধুমাত্র টেলিগ্রাম এখনও যা ফেরত দেয় তা সংগ্রহ করে, এবং রিপোর্টে ফাঁকটি দেখায়। চ্যাট তালিকার সীমা (প্যারামিটারে পরিবর্তন না করা হলে 1,000টি ডায়ালগ) ছাড়িয়ে যাওয়া চ্যাটগুলো পরেরবার সক্রিয় হলে যোগ করা হয়। অন্য অ্যাপে চাপানো ইনলাইন বট বোতামগুলো অদৃশ্য থাকে; বটের উত্তর রেকর্ড হয়।
 
 ### পরিধির মধ্যে চ্যাটসমূহ
 

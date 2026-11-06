@@ -6,27 +6,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/colle
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [אוסף](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![אוסף](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
 TgWitness מתעד את מה שחשבון Telegram מחובר רואה. היומן משמר את התצפיות הללו, את סדרן ואת ההקשר הנלווה אליהן. הוא אינו מסיק פעולות בלתי נראות מהיעדר הודעה או מהיות החשבון מחובר.
 
-**On this page**
+**בעמוד זה**
 
-- [From login to a journal](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#from-login-to-a-journal)
-- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
-- [Scope and event selection](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#scope-and-event-selection)
-- [Own actions](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#own-actions)
-- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
-- [Recheck tiers](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#recheck-tiers)
-- [Message history and attribution](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#message-history-and-attribution)
-- [History snapshots](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#history-snapshots)
-- [Attachment handling](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#attachment-handling)
-- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#pause-lock-disconnect-and-restart)
-- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#account-isolation-and-verification)
+- [מהכניסה למערכת ועד ליומן](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#from-login-to-a-journal)
+- [היקף הניטור: צ'אטים נבחרים, תיקייה או החשבון כולו](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [היקף ובחירת אירועים](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#scope-and-event-selection)
+- [פעולות עצמיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#own-actions)
+- [מצב חקירה: הצטרפות לצוותים ושיחה עם בוטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [רמות בדיקה חוזרת](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#recheck-tiers)
+- [היסטוריית הודעות וייחוס](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#message-history-and-attribution)
+- [תמונות מצב היסטוריות](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#history-snapshots)
+- [טיפול בקבצים מצורפים](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#attachment-handling)
+- [השהיה, נעילה, ניתוק והפעלה מחדש](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [בידוד ואימות חשבונות](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/#account-isolation-and-verification)
 
 ## מהכניסה למערכת ועד ליומן
 
-For self-destructing photos and files, see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md). It explains the priority worker, saved and unavailable outcomes, and the limits of read-receipt blocking in the API collector.
+לגבי תמונות וקבצים המתכלים מעצמם, ראו [מדיה המתכלה מעצמה](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md). המסמך מסביר את ה-priority worker, תוצאות שנשמרו ותוצאות שאינן זמינות, וכן את המגבלות של חסימת אישור הקריאה באספן ה-API.
 
 תרשים זרימה · אישור חשבון משתמש → בחר קבוצות וערוצים נגישים; בחר קבוצות וערוצים נגישים → שמור את הגדרות האירוע והקבצים המצורפים; שמור את הגדרות האירוע והקבצים המצורפים → התחל במעקב; התחל במעקב → קבל עדכונים מהלקוח הפעיל; קבל עדכונים מהלקוח הפעיל → יש ליישם את מדיניות המקורות והאירועים; יש ליישם את מדיניות המקורות והאירועים → הוסף תצפית חתומה; הוסף תצפית חתומה → סקירת היומן או ייצואו; הוסף תצפית חתומה → עיבוד כל קובץ מצורף בתור; עיבוד כל קובץ מצורף בתור → הוסף את תוצאת ההורדה · אישור חשבון משתמש · בחר קבוצות וערוציםנגישים · שמור את הגדרות האירועוהקבצים המצורפים · התחל במעקב · קבל עדכונים מהלקוחהפעיל · יש ליישם את מדיניותהמקורות והאירועים · הוסף תצפית חתומה · סקירת היומן או ייצואו · עיבוד כל קובץ מצורףבתור · הוסף את תוצאת ההורדה
 
@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 מה שהמצבים הללו אינם יכולים לעשות:
 
-- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
+- **צ'אטים סודיים** אינם נכללים במצבי איסוף הענן הללו. יישום נפרד [של צ'אט סודי](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/) נמצא בפיתוח; הוא אינו כלול באספן שפורסם בגרסה המתועדת שם.
 - **אין תיעוד כלשהו כאשר TgWitness אינו פועל.** לאחר הפעלה מחדש, התוכנה מבקשת מ-Telegram עדכונים שהוחמצו ובודקת מחדש את הצ'אטים, אך Telegram אינה מחזירה את כל הנתונים לאחר הפסקות ארוכות. הדוחות ו-`verify.py` מציגים תקופות כאלה כפערים (ראו [כיסוי](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)).
 - בתחילה מופיעים רק 1,000 השיחות הראשונות (ההגבלה מפורטת תחת **"פרמטרים"**); שיחות ישנות יותר מתווספות ברגע שהן הופכות לפעילות שוב. ההיסטוריה המוקדמת יותר של שיחה שנוספה אינה נטענת — צרו תמונת מצב של ההיסטוריה או ייצאו את השיחה במלואה כשתזדקקו לכך.
 - תנאי תיקיות המשתנים כל הזמן (מושתק, נקרא) אינם חלים: צ'אטים כאלה נשארים תחת מעקב.
@@ -103,7 +103,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
   - הפרופיל שלו כקובץ `source.profile`: תיאור הבוט והפקודות, הטקסט "אודות" של משתמש, קבוצה או ערוץ, חברים, צ'אט מקושר וקישור הזמנה כאשר Telegram מחזיר אחד כזה;
   - ההודעות הגלויות האחרונות שלו (עד 1,000) כתמונת מצב של ההיסטוריה המסומנת ב-`new_chat`: ההודעות המוקדמות יותר בצ'אט קבוצתי שאליו הצטרף זה עתה, או מה שהבוט אמר לפני שהמעקב הבחין בצ'אט. הודעות שכבר נשמרו בזמן אמת אינן חוזרות על עצמן.
 
-  Chats already in the list when the mode is switched on are added without snapshots. A FloodWait pauses this work and it resumes afterwards; failures are recorded and live recording of the chat continues. This includes waits while resolving the new chat's identity: the pending profile/history task is retained for retry, and an existing longer account-wide wait is not shortened. - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile of any source; the newest one is shown above the messages. - **Chat state snapshots (preview).** State outside the message stream changes without a message: unpinning every message leaves no message-level trace, an administrator loses rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled source is read periodically and saved as a signed `chat.state` record: title, usernames, description, member and administrator counts, linked chat, slow mode, pinned message IDs (up to 100), administrators with their rights and titles, and gifts shown on channels and user profiles (up to 100). Each record lists the differences from the previous snapshot: changed fields with before and after, pinned messages added or removed, administrators and gifts added, changed or no longer listed. Telegram does not say who changed anything or when between snapshots. - A part Telegram refuses (for example the administrator list of a channel for a member who is not an administrator) is named in `errors`; its earlier value is kept and listed in `carried_forward`, never reported as removed. - A record whose only changes are counts, and a check that found no change, refer to the last full state with `state_seq` and cumulative `state_overrides`. A full state is written at least every seven days and whenever anything other than a count changes. - `parts_complete` marks capped lists. Additions require a complete earlier list, removals require a complete current list, and explicit empty values record clearing. - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots off), the pause between sources, which parts are read, and whether checks that found no change are recorded. `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` stop the remaining snapshot requests, preserve any longer account-wide deadline, and leave the interrupted chat eligible for another attempt after that wait. - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or link a bot answers such a press with, and invite links used in another app do not reach TgWitness. What the bot sends or edits afterwards is recorded.
+  צ'אטים שכבר נמצאים ברשימה בעת הפעלת המצב מתווספים ללא צילומי מסך. FloodWait מעכב את העבודה הזו והיא מתחדשת לאחר מכן; תקלות נרשמות וההקלטה החיה של הצ'אט נמשכת. זה כולל המתנות בזמן פתרון זהות הצ'אט החדש: המשימה הממתינה של פרופיל/היסטוריה נשמרת לניסיון חוזר, והמתנה קיימת ארוכה יותר ברמת החשבון לא מתקצרת. - **פרופילים לפי בקשה.** **צ'אטים → פרופיל → שמור פרופיל עכשיו** שומר את הפרופיל הנוכחי של כל מקור; הפרופיל החדש ביותר מוצג מעל ההודעות. - **תמונות מצב של הצ'אט (תצוגה מקדימה).** המצב מחוץ לזרם ההודעות משתנה ללא הודעה: הסרת הסימון מכל הודעה לא משאירה עקבות ברמת ההודעה, מנהל מאבד זכויות, מתנה מוסתרת, מומר, משודרגת או מוחזרת. במהלך התצפית, כל מקור מופעל נקרא באופן תקופתי ונשמר כרשומת `chat.state` חתומה: כותרת, שמות משתמש, תיאור, מספר חברים ומנהלים, צ'אט מקושר, מצב איטי, מזהי הודעות מוצמדות (עד 100), מנהלים עם זכויותיהם ותאריהם, ומתנות המוצגות בערוצים וב פרופילי המשתמשים (עד 100). כל רשומה מפרטת את ההבדלים ביחס לתמונת המצב הקודמת: שדות ששונו עם מצב לפני ואחרי, הודעות מוצמדות שנוספו או הוסרו, מנהלים ו מתנות שנוספו, שונו או אינן מופיעות עוד ברשימה. טלגרם אינה מציינת מי שינה מה או מתי בין תמונות המצב. - חלק ש-Telegram מסרב לחשוף (לדוגמה, רשימת המנהלים של ערוץ עבור חבר שאינו מנהל) מוזכר ב-`errors`; הערך הקודם שלו נשמר ומופיע ב-`carried_forward`, אך לעולם לא מדווח כ"הוסר". - רשומה שהשינויים היחידים בה הם ספירות, ובדיקה שלא מצאה שינוי, מתייחסת למצב המלא האחרון באמצעות `state_seq` והמצב המצטבר `state_overrides`. מצב מלא נרשם לפחות אחת לשבעה ימים ובכל פעם שמשתנה משהו מלבד ספירה. - `parts_complete` מסמן רשימות מוגבלות. תוספות דורשות רשימה קודמת מלאה, הסרות דורשות רשימה נוכחית מלאה, וערכים ריקים מפורשים מתעדים מחיקה. - **פרמטרים → מצב צ'אט** קובע את המרווח (12 שעות כברירת מחדל, 0 מכבה את הצילומים ), את ההשהיה בין מקורות, אילו חלקים נקראים, והאם בדיקות שלא מצאו שינוי נרשמות. `FLOOD_WAIT` ו-`FLOOD_PREMIUM_WAIT` עוצרים את בקשות הצילום הנותרות, משמרים כל מועד אחרון ארוך יותר ברמת החשבון, ומשאירים את הצ'אט שהופרע זכאי לניסיון נוסף לאחר ההמתנה הזו. - **לא נראה לעין.** לחצני מוטמע (callback) שנלחצו באפליקציית Telegram אחרת, החלון הקופץ או הקישור שבו הבוט מגיב ללחיצה כזו, וקישורי הזמנה המשמשים באפליקציה אחרת אינם מגיעים ל-TgWitness. מה שהבוט שולח או עורך לאחר מכן נרשם.
 
 ### פעולה מהפאנל
 
@@ -176,4 +176,4 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 **יומן האימות** בודק את שרשרת האירועים ואת החתימות דרך הגבול המוצג. תוצאותיו נמחקות כאשר סביבת העבודה משתנה, והלוח מזהה רשומות חדשות שנוספו לאחר הבדיקה. ייצוא ZIP מאמת גם את המדיה שנאספה.
 
-Retain fingerprints and checkpoints independently. See the [verification scope](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) for acquisition checks in each mode, and [daily operations](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/) for routine collection.
+יש לשמור על טביעות אצבעות ונקודות ביקורת בנפרד. ראו את [היקף האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) לבדיקות איסוף בכל מצב, ואת [פעולות יומיומיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/) לאיסוף שגרתי.

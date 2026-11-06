@@ -6,7 +6,7 @@ Tất cả các phương thức cài đặt và khởi chạy TgWitness: gói ph
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Bắt đầu](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 **Tiếng Anh** · [Tiếng Nga](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [Tiếng Ukraina](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [Tiếng Tây Ban Nha](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [Tiếng Bồ Đào Nha (Brazil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [Tiếng Thổ Nhĩ Kỳ](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [Tiếng Ả Rập](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [Tiếng Ba Tư](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [Tiếng Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [Tiếng Hindi](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [Tiếng Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [Tiếng Trung giản thể](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 

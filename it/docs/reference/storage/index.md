@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/stora
 
 Backup, trasferimento dei file più vecchi sul cloud, copie protette da Object Lock e ripristino su un nuovo dispositivo.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Il pannello distingue tre attività:
 
@@ -20,13 +20,13 @@ La liberazione di spazio non elimina né sovrascrive mai il registro firmato. Og
 
 Una risposta di caricamento da sola non costituisce autorizzazione alla cancellazione di un file. TgWitness scarica l’oggetto crittografato completo e ne verifica le dimensioni; SHA-256 salva la ricevuta, quindi ricontrolla immediatamente i byte locali prima della rimozione. Un errore di caricamento, una lettura diversa o un trasferimento annullato lasciano il file locale al suo posto. Se un backup delle prove abilitato non ha ancora copiato quel file, anche la rimozione attende che ciò avvenga.
 
-**On this page**
+**In questa pagina**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#operator-bot-and-completion-notices)
+- [Quando il disco si sta riempiendo](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Collegare una destinazione](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#connect-a-destination)
+- [Conservare il file di ripristino](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#keep-the-recovery-file)
+- [Ripristino dopo la perdita dell’installazione](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#recover-after-losing-the-installation)
+- [Bot operatore e notifiche di completamento](https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Quando il disco si sta riempiendo
 

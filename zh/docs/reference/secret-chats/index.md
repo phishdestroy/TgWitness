@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# 秘密聊天：实现与演示
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+了解独立的秘密聊天实现方式，试用虚构的界面，并审查未解决的缺陷。
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**2026年11月6日状态核查：**目前正在开发一个独立的秘密聊天实现 。该实现尚未合并到已发布的`main`分支（版本号为`3d23e52b647b`）。 普通收集器和Takeout导出功能不收集秘密聊天数据。 交互式网站演示场景使用虚构数据展示界面； 该演示不支持Telegram通信。
 
-## Where the implementation lives
+## 实现位置
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+提交 `0e60f88e` 在本地开发分支 `fix/panel-routes-sessions` 中添加了**Sources → Pseudo-secret**。已检查的快照为 `bb8788fb685c`。 其实现包括 `tgwitness/secret_chats.py`、应用程序路由、 `tgwitness/static/views/secret-chats.js` 以及专用测试。
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+该分支中的可选组件 `secret-chats` 使用 [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat)， 并已固定到 `d87bf037b90060383c7b704d8a06ebb98c621c6f`。该库基于账户现有的 Telethon 授权， 实现了 Telegram 的端到端聊天协议。 仅安装该库并不会为 `main` 添加缺失的集成功能。
 
-## What the development interface does
+## 开发接口的功能
 
-| 操作 | Recorded behavior |
+| 操作 | 记录的行为 |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| 通过用户名或用户 ID 发起聊天 | 发送请求；另一位参与者必须接受该请求。 |
+| 接受传入请求 | TgWitness将成为该聊天的接收端点。自动接受是一项独立设置，默认处于关闭状态。 |
+| 发送或接收消息 | 添加一条发出的或收到的`secret_chat.message`记录，并在对话中显示该记录。 |
+| 接收附件 | 对其进行解密，按 SHA-256 存储其字节，并记录 `secret_chat.file`。 |
+| 接收计时器或删除通知 | 记录该通知并保留先前捕获的内容。 |
+| 审查对话内容 | 展示消息、文件、通知以及密钥可视化图表。打开的标签页每四秒刷新一次。 |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+在包含该集成的开发版本中，操作员需为所选账户启用该模块 并建立连接。发起、接受和发送操作均需 获得交互权限，且该账户的只读保护必须处于关闭状态。另一位 参与者必须接受新的外发聊天。在上述版本的 已发布应用程序中，这些控制功能尚不存在。
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+仅涵盖由本次 TgWitness 会话创建或接受的聊天。手机上现有的 秘密聊天仍保留在该设备上。会话导入不会提供 其独立的加密密钥。秘密聊天的密钥素材和计数器存储 在工作区保险库中；保留的消息和解密后的文件遵循常规 的工作区存储保护机制。
 
-## Website demonstration
+## 网站演示
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+该网站的“**尝试秘密聊天**”场景展示了一段虚构的对话。它允许 读者发起请求、模拟请求的接受、发送示例消息、接收 预设的回复和文件，并查看计时器和删除通知。还可以接受 传入的请求。控制项会明确标注模拟的对等方操作。
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+该场景在浏览器内存中运行。重置或刷新页面将清除其内容。它不会登录、 联系 Telegram、生成真实的加密密钥，也不会修改已签名的样本下载文件。 其显示的消息并非经过签名的证据。该场景旨在演示预期 的交互方式；并不证明开发实现已准备就绪。
 
-## Checks and outstanding defects
+## 检查项与未解决的缺陷
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+现有的五项测试涵盖了加密密钥的持久性、生命周期和消息 记录、传入消息接受策略、只读发送以及附件导出。 在 11 月 6 日的审查中，这些测试针对固定库均通过了验证。另外三项 合成检查在同一快照中重现了缺陷：
 
-| Finding | Consequence |
+| 发现 | 后果 |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| 关闭时绕过`read_only` | 当需要阻止交互时，关闭路径可执行远程操作。 |
+| 重复检测仅搜索最近的500条记录 | 较早的重放数据在重启后可能会生成重复项。 |
+| 附件下载失败将删除其待处理条目 | 短暂故障会导致重试任务丢失。 |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+这些是已知的缺陷，在 [已发布的审计](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)报告中亦有记录。五项通过的测试并未 涵盖这些缺陷。本次审查使用了合成工作区并模拟了 Telegram 的操作；并未重复实际的握手过程，也未验证生产环境部署情况。

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/searc
 
 Wyszukuj zapisane wiadomości według form słów, dokładnych fraz, domen i nazw użytkowników z symbolem @, z najlepszymi wynikami na początku, przy czym indeks jest powiązany z podpisanym dziennikiem.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dochodzenie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Dochodzenie](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Analiza archiwum](https://phishdestroy.github.io/TgWitness/pl/docs/reference/analysis/) · [Lokalne rozpoznawanie tekstu (OCR) i transkrypcja](https://phishdestroy.github.io/TgWitness/pl/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Wyszukuj zapisane wiadomości według form słów, dokładnych fraz, domen i naz
 
 Indeks jest danymi pochodnymi. Jest on odtwarzany na podstawie podpisanego dziennika, sam nigdy nie jest podpisywany i nigdy nie jest eksportowany. Oryginalne zapisy pozostają niezmienione.
 
-**On this page**
+**Na tej stronie**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#benchmark)
+- [Składnia wyszukiwania](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#search-syntax)
+- [Języki](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#languages)
+- [Gdzie znajduje się indeks](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#where-the-index-lives)
+- [Wyniki i podpisany dziennik](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#results-and-the-signed-journal)
+- [Rozpoznany tekst](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#recognized-text)
+- [Dostęp](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#access)
+- [Zapytaj archiwum i MCP](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#ask-the-archive-and-mcp)
+- [Zależności](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#dependencies)
+- [Test porównawczy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/search/#benchmark)
 
 ## Składnia wyszukiwania
 
@@ -97,14 +97,14 @@ Po zakończeniu tworzenia indeksu**archiwum** pobiera z niego źródła: najleps
 
 Klienci MCP mogą wywołać `search_messages` z `ranked=true` oraz wyświetlać strony za pomocą `next_offset`. Połączenia z ograniczeniem zakresu odbierają wyłącznie swoje czaty.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Paginacja według rankingu obejmuje co najwyżej pierwsze wyniki 1,000, niezależnie od rozmiaru strony. Aby sprawdzić kolejne dopasowania, należy zawęzić zapytanie, czat lub okres. Wyszukiwanie według najnowszych wyników sortuje wiadomości, wyniki OCR i transkrypcji przed wybraniem każdej strony.
 
 ## Zależności
 
 | Pakiet | Licencja | Dlaczego |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | Lematy rosyjskie i ukraińskie; słowniki są ładowane lokalnie |
-| snowballstemmer | BSD-3-Clause | Rdzenie angielskie, czysty Python |
+| snowballstemmer | Klauzula BSD-3 | Rdzenie angielskie, czysty Python |
 | jieba | MIT | Segmentacja zapytań w języku chińskim, napisane wyłącznie w języku Python (tylko dystrybucja kodu źródłowego) |
 | pymorphy3-dicts-uk (opcjonalnie) | GPL-3.0 | Pełny słownik języka ukraińskiego |
 

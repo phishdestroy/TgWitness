@@ -20,7 +20,7 @@ Toplayıcı, panel ve tüm kayıtlar makinenizde kalır. Varsayılan olarak yaln
 
 BİLGİSAYARINIZ VEYA SUNUCUNUZ
 
-**Panel**127.0.0.1:8787 · bearer token
+**Panel**127.0.0.1:8787 · taşıyıcı belirteci
 
 **Toplayıcı**Her çalışma alanı için bir Telegram istemcisi
 
@@ -44,7 +44,7 @@ VERİ DİZİNİ
 - **Zaman damgası yetkisi**İsteğe bağlı · varsayılan olarak kapalı
 
   Yalnızca imzalı bir kontrol noktasının SHA-256 değeri ve rastgele bir nonce. Mesaj yok, sohbet adları yok.
-- **Witness**İsteğe bağlı · varsayılan olarak kapalı
+- **Tanık**İsteğe bağlı · varsayılan olarak kapalı
 
   Salt okunur bir jetonla imzalı kontrol noktalarını ve yakalama sayaçlarını alır. Sohbetleri okuyamaz veya ayarları değiştiremez.
 

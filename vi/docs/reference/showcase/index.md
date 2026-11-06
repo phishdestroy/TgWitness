@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/showc
 
 Xuất bản các tin nhắn đã lưu từ các kênh công khai được chọn và các bản chụp màn hình đã được ký thông qua các liên kết có thời hạn và có thể thu hồi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Triển khai và khôi phục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Triển khai & khôi phục](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Truy cập → Public showcase** tạo ra một trang riêng biệt, chỉ đọc, sử dụng hệ thống access-token hiện có. Nó đọc các quan sát đã lưu của bản cài đặt. Nó không khởi chạy trình thu thập dữ liệu, đăng nhập vào Telegram hoặc tạo kênh cho người truy cập.
 

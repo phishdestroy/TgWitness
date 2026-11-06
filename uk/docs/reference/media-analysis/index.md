@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/media
 
 Розпізнавайте захоплені зображення та аудіо за допомогою локального робочого процесу; зберігайте отриманий текст із посиланням на вихідний файл.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Розслідування](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Розслідування](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Посібник з організації робочого процесу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

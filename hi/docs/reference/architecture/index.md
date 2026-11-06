@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/archi
 
 [टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![विकास](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 एक पाइथन प्रक्रिया फ़ास्टएपीआई पैनल और किसी भी संख्या में अलग-थलग वर्कस्पेस को होस्ट करती है, जिनमें से प्रत्येक में एक टेलीथॉन यूज़र-अकाउंट क्लाइंट होता है। SQLite एक केवल-जोड़ने वाला (append-only) हस्ताक्षरित इवेंट जर्नल और परिवर्तनीय परिचालन सेटिंग्स रखता है। एक एन्क्रिप्टेड वॉल्ट में API क्रेडेंशियल, स्ट्रिंगसेशन, और साइनिंग कुंजी होती है। फ्रंटएंड साधारण बंडल HTML/CSS/जावास्क्रिप्ट है: नोड बिल्ड, CDN, या रनटाइम फ्रंटएंड डाउनलोड की आवश्यकता नहीं है।
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | स्पष्ट पैनल क्रियाएँ, हस्ताक्षरित रसीदें, स्थायी अनुरोध आईडी और कार्य-स्थानीय कॉलबैक/जॉइन पुनःप्रयास नीति |
 | message_content.py | परिवहनीय संदेश तुलना, परिवहन पहुँच मेटाडेटा को छोड़कर |
 | workers.py | रद्द करने की सफ़ाई से पहले एक्सपोर्ट फ़ाइल वर्कर्स का इंतज़ार करें |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | समांतर चैट जॉब्स, प्रति-खाते आरक्षण, हस्ताक्षरित चेकपॉइंट्स और आर्काइव सत्यापन के बाद सफाई |
+| distributed_takeout.py / export_timing.py | पुनः आरंभ योग्य टेकआउट सत्र और प्रत्येक आरंभ या पुनः आरंभ के समय |
 | store.py | WAL लेनदेन, क्रमिक घटना श्रृंखला, क्वेरी फ़िल्टर, परिचालन सेटिंग्स |
 | fulltext.py | उत्पन्न पूर्ण-पाठ सूचकांक (शब्द रूप, BM25), हस्ताक्षरित जर्नल हेड से जुड़ा हुआ; कभी निर्यात नहीं किया गया |
 | security.py | निजी फ़ाइल निर्माण, एन्क्रिप्टेड वॉल्ट, Ed25519 हस्ताक्षर, एकल-प्रक्रिया लॉक |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 प्रत्येक वर्कस्पेस एक खाता स्वीकार करता है और इसकी अपनी निर्देशिका और हस्ताक्षर पहचान होती है। संगतता के लिए मुख्य वर्कस्पेस रूट पर बना रहता है; अतिरिक्त वर्कस्पेस profiles/<id>/ में रहते हैं। एक बेयरर टोकन पूरे इंस्टॉलेशन को नियंत्रित करता है; वर्कस्पेस अलग प्राधिकरण किरायेदार नहीं हैं। प्रोसेस लॉक निर्देशिकाओं की सुरक्षा करते हैं; डेटाबेस लॉक घटनाओं को क्रमबद्ध करते हैं। प्रत्येक जोड़ (एपेंड) पूर्ण समकालिक मोड के साथ SQLite WAL में समकालिक रूप से प्रतिबद्ध होता है। इवेंट अपडेट/डिलीट ट्रिगर सामान्य एप्लिकेशन संपादन को रोकते हैं; फ़ाइल सिस्टम प्रशासक विश्वास की सीमा के अंदर रहते हैं।
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+एपीआई प्राधिकरण एक बेयरर टोकन है। लॉगिन संचालन सीरियलाइज़्ड और समय-सीमित होते हैं। खाते के अपलोड के लिए एक समर्पित 12 MiB एन्कोडेड-बॉडी सीमा और 8 MiB डिकोडेड-फ़ाइल सीमा का उपयोग किया जाता है; सामान्य एपीआई अनुरोध 16 KiB सीमा को बनाए रखते हैं। परिवर्तन एक वर्कर थ्रेड में चलता है, अपलोड को मेमोरी में रखता है, और प्रमाणीकृत ब्राउज़र को मानकीकृत इनपुट लौटाता है। QR लॉगिन में प्रति-वर्कस्पेस एक उम्मीदवार, अल्पकालिक पहचानकर्ता, वेटर टास्क, और स्पष्ट रद्दीकरण होता है। केवल स्वीकृत प्राधिकरण ही सक्रिय क्लाइंट बनता है। टेलीग्राम फ्लडवेट एक Retry-After मान के साथ लौटाया जाता है; क्रेडेंशियल और कच्चे RPC त्रुटि संदेश API त्रुटियों में प्रदर्शित नहीं किए जाते हैं। जर्नल एक्सपोर्ट्स एसिंक इवेंट लूप के बाहर चलते हैं और प्रत्येक वर्कस्पेस के अनुसार सीरियलाइज़ किए जाते हैं। वे चल रहे WAL राइट्स के साथ एक स्थिर रीड स्नैपशॉट स्ट्रीम करते हैं। चैट अधिग्रहण जॉब अलग-अलग खातों पर एक साथ चल सकती हैं; प्रत्येक खाता तब तक आरक्षित रहता है जब तक उसकी जॉब बंद नहीं हो जाती। एक रुकी हुई या विफल हुई जॉब अपने चेकपॉइंट्स को बनाए रखती है। सफल आर्काइव सत्यापन इसकी वर्किंग फाइलों की सफाई की अनुमति देता है, जिससे केवल ज़िप, साइन किए गए प्लान और स्थिति बच जाती है। वर्कस्पेस कलेक्टर प्रोसेस/इवेंट लूप को साझा करते हैं।
 
 वर्तमान इतिहास स्नैपशॉट और लाइव अपडेट ओवरलैप हो सकते हैं। दोनों अलग-अलग अवलोकन हैं, जिन्हें स्रोत द्वारा लेबल किया गया है; डुप्लिकेट को चुपचाप नहीं जोड़ा जाता है। कोई निष्कर्ष नहीं निकाला जाता है लगे-भुगते आईडी, गढ़े गए हटाए गए टेक्स्ट, जबरन सदस्य सूचीकरण, या स्वचालित समूह जुड़ाव से कोई निष्कर्ष नहीं निकाला जाता है।
 

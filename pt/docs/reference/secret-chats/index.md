@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# Chats secretos: implementação e demonstração
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+Compreenda a implementação separada do Secret Chat, experimente a interface fictícia e analise os defeitos pendentes.
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**Status verificado em 6 de novembro de 2026:** existe uma implementação separada do Secret Chat em desenvolvimento. Ela ainda não foi incorporada ao `main` publicado em `3d23e52b647b`. O coletor comum e a exportação via Takeout não coletam Secret Chats. O cenário do site interativo demonstra a interface com dados fictícios; ele não permite a comunicação pelo Telegram.
 
-## Where the implementation lives
+## Onde a implementação está localizada
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+O commit `0e60f88e` adicionou **Sources → Pseudo-secret** no ramo de desenvolvimento local `fix/panel-routes-sessions`. O snapshot verificado é `bb8788fb685c`. Sua implementação inclui `tgwitness/secret_chats.py`, rotas do aplicativo, `tgwitness/static/views/secret-chats.js` e testes dedicados.
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+O complemento opcional `secret-chats` nesse ramo utiliza [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), fixado em `d87bf037b90060383c7b704d8a06ebb98c621c6f`. A biblioteca implementa o protocolo de bate-papo ponta a ponta do Telegram na autorização Telethon existente da conta. A instalação dessa biblioteca por si só não adiciona a integração ausente ao `main`.
 
-## What the development interface does
+## O que a interface de desenvolvimento faz
 
-| Ação | Recorded behavior |
+| Ação | Comportamento registrado |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| Inicie um bate-papo pelo nome de usuário ou ID do usuário | Envie uma solicitação; o outro participante deve aceitá-la. |
+| Aceitar uma solicitação recebida | TgWitness passa a ser o ponto de extremidade de recebimento desse chat. A aceitação automática é uma configuração separada, desativada por padrão. |
+| Enviar ou receber uma mensagem | Adicione um registro `secret_chat.message` de saída ou entrada e exiba-o na conversa. |
+| Receber um anexo | Descriptografe-os, armazene seus bytes por SHA-256 e registre `secret_chat.file`. |
+| Receber um aviso de temporizador ou de exclusão | Registrar o aviso e manter o conteúdo capturado anteriormente. |
+| Revisar a conversa | Exiba mensagens, arquivos, avisos e a visualização da chave. A aba aberta é atualizada a cada quatro segundos. |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+Em uma versão de desenvolvimento que contenha a integração, o operador habilita o módulo para a conta selecionada e o conecta. Iniciar, aceitar e enviar exigem permissão para interagir e que a proteção de somente leitura da conta esteja desativada. O outro participante deve aceitar um novo chat de saída. Esses controles não estão presentes no aplicativo publicado na revisão acima.
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+Apenas os chats criados ou aceitos por esta sessão TgWitness são abrangidos. Os chats secretos existentes em um celular permanecem nesse dispositivo. A importação de uma sessão não fornece suas chaves de criptografia separadas. O material de chave e os contadores dos chats secretos são armazenados no cofre do espaço de trabalho; as mensagens preservadas e os arquivos descriptografados seguem as proteções normais de armazenamento do espaço de trabalho.
 
-## Website demonstration
+## Demonstração no site
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+O cenário “**Try Secret Chat**” do site apresenta uma conversa fictícia. Ele permite que o leitor inicie uma solicitação, simule sua aceitação, envie uma mensagem de exemplo, receba uma resposta e um arquivo pré-definidos e inspecione um cronômetro e um aviso de exclusão. Uma solicitação recebida também pode ser aceita. Os controles identificam explicitamente as ações simuladas dos pares.
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+Este cenário é executado na memória do navegador. Ao reiniciar ou recarregar a página, ele é apagado. Ele não faz login, não entra em contato com o Telegram, não cria chaves de criptografia reais nem altera os downloads de amostras assinadas. As mensagens exibidas não constituem evidências assinadas. O cenário demonstra a interação pretendida; não certifica que a implementação do desenvolvimento esteja pronta.
 
-## Checks and outstanding defects
+## Verificações e defeitos pendentes
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+Os cinco testes existentes abrangem a persistência de chaves criptografadas, o ciclo de vida e os registros de mensagens, a política de aceitação de entradas, o envio somente leitura e a exportação de anexos. Eles foram aprovados em relação à biblioteca fixada durante a revisão de 6 de novembro. Três verificações sintéticas adicionais reproduziram defeitos no mesmo snapshot:
 
-| Finding | Consequence |
+| Conclusão | Consequência |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| Fechamento contorna o `read_only` | O caminho de fechamento pode executar uma ação remota quando as interações devem ser bloqueadas. |
+| A detecção de duplicatas pesquisa apenas registros recentes do 500 | Uma reprodução mais antiga pode criar uma duplicata após a reinicialização. |
+| Um download de anexo com falha remove sua entrada pendente | Uma falha temporária faz com que a tarefa de repetição seja perdida. |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+Essas são falhas conhecidas, também registradas na auditoria [publicada](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Cinco testes aprovados não abrangem essas falhas. A análise utilizou espaços de trabalho sintéticos e simulações de operações do Telegram; ela não repetiu um handshake em ambiente real nem qualificou a implantação em produção.

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/setti
 
 Der Einrichtungsassistent, Ziele, Benutzeroberflächenebenen, Verbindungswege und Einstellungen, die von einer Kontengruppe gemeinsam genutzt werden.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Erste Schritte](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Erste Schritte](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Konten](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/) · [Zusammenhang](https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/) · [Zugriff](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/)
 

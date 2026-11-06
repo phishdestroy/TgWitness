@@ -67,7 +67,7 @@ O Telegram não diz quem excluiu uma mensagem nem quando exatamente. O TgWitness
 
 Cada registro contém o hash do anterior. Um ponto de verificação guardado em outro lugar fixa o tamanho do diário e o último hash.
 
-02 / HASH-CHAIN SANDBOXSHA-256 real · registros de amostra
+02 / SANDBOX DA HASH-CHAINSHA-256 real · registros de amostra
 
 REGISTRO 01**Mensagem recebida**`h₁ = SHA-256(e₁)`Links para 64 zeros
 

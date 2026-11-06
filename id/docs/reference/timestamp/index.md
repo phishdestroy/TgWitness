@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/times
 
 Stempel waktu RFC 3161 untuk titik pemeriksaan yang ditandatangani: apa yang dikirimkan ke otoritas dan bagaimana responsnya diverifikasi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bukti dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bukti & verifikasi](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness menyiapkan permintaan RFC 3161 dan memverifikasi respons otoritas cap waktu (TSA). Prosedur manual ini tidak memilih TSA maupun mengirimkan data; mode bukti melakukan keduanya sesuai jadwal ([format bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Permintaan yang telah disiapkan **belum** merupakan **bukti cap waktu**.
 

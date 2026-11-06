@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/analy
 
 Recherchez des messages enregistrés, examinez les contributions de l'IA et conservez des rapports analytiques accompagnés de leurs références sources.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Enquête](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Guide des procédures](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

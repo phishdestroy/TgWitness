@@ -6,21 +6,21 @@ Các cuộc điều tra toàn diện về tài khoản trên các kênh, nhóm, 
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Điều tra](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Theo dõi một vụ việc qua các kênh, nhóm, cuộc trò chuyện riêng tư và bot, từ giai đoạn thu thập ban đầu cho đến dòng thời gian được trích dẫn và quá trình chuyển giao có thể xác minh. Phiên bản trang web tương tác có tại `/docs/cases/`; [hướng dẫn xem trước](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**Trên trang này**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#adapt-the-investigation)
+- [Trường hợp đã được kiểm chứng: địa chỉ đích thay đổi qua bốn cuộc trò chuyện](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Xác định trường hợp và thu thập toàn bộ thông tin](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Liệt kê tất cả các nguồn và thu thập bối cảnh lịch sử](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Giữ nguyên bối cảnh phát triển và các tương tác có chủ đích](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Kết nối các quan sát giữa các cuộc trò chuyện](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Xây dựng dòng thời gian liên cuộc trò chuyện](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Thêm góc nhìn tài khoản mà không làm mất nguồn gốc của chúng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Tổng hợp và xác minh việc chuyển giao vụ việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Thích ứng quá trình điều tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/#adapt-the-investigation)
 
 ## Ví dụ thực tế: sự thay đổi về điểm đến trong bốn cuộc trò chuyện
 
@@ -117,7 +117,7 @@ Trong ví dụ minh họa:
 | Tệp lưu trữ tương tự | Đã hoàn tất các biên nhận phương tiện truyền thông số #151 và #209 | Các giá trị SHA-256 đầy đủ trùng khớp với các byte được lưu giữ |
 | Nguồn thông tin kênh | #101 và #188 | Không được quy cho người dùng 71001 là tác giả của bài đăng trên kênh nếu không có thông tin xác định người gửi |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+So sánh các giá trị băm của tệp đính kèm và các tham chiếu tin nhắn liên quan, đồng thời sắp xếp dòng thời gian tài khoản theo các ID Telegram được cung cấp trong các bản ghi đó.
 
 Lưu giữ các ghi chú làm việc của nhóm trên [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/): đánh dấu các bản ghi mà bạn dựa vào, chẳng hạn như #146, #188 và #205, đánh dấu chuỗi đích chính xác, và lưu một đoạn của mọi hành động được ghi lại giữa hai bản ghi hoặc trong một khoảng thời gian. Các ghi chú và trạng thái lưu giữ quá trình rà soát của nhóm trong lịch sử đã ký riêng biệt, có thể nhận diện độc lập với các quan sát từ nguồn.
 
@@ -173,10 +173,10 @@ Giữ nguyên kết quả xác minh thực tế và các bằng chứng gốc. X
 
 ## Thích ứng với quá trình điều tra
 
-| Trường hợp | Trace | Gửi |
+| Trường hợp | Dấu vết | Gửi |
 | --- | --- | --- |
 | Tranh chấp về đơn hàng/thanh toán do bot xử lý | Thông báo đăng ký → xem trước liên kết đã lưu → tham số khởi động bot → phiên bản tin nhắn và bàn phím → biên nhận gọi lại trên bảng điều khiển → theo dõi tin nhắn riêng tư/nhóm | Dòng thời gian đề nghị/phản hồi được ghi nhận và các nguồn tin đã được xác minh; riêng một liên kết thanh toán không đủ để chứng minh việc thanh toán đã diễn ra |
 | Các tin nhắn đã bị xóa sau khi xảy ra sự cố | Tất cả các cuộc trò chuyện bị ảnh hưởng → bản gốc/bản chỉnh sửa đã được lưu trữ → kết quả xóa hoặc không còn tồn tại khi kiểm tra lại → phương tiện truyền thông được bảo toàn → phạm vi bao quát và các góc nhìn khác từ tài khoản | Các phiên bản được lưu giữ và các khoảng thời gian không xác định được nêu rõ; không có đối tượng xóa tin nhắn nào được giả định |
-| Một người tham gia thay đổi tên trong các cuộc trò chuyện | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Dòng thời gian hoạt động của tài khoản Telegram kèm theo các liên kết đến các bản ghi nguồn tương ứng |
+| Một người tham gia thay đổi tên trong các cuộc trò chuyện | ID người gửi dạng số → lịch sử tên/tên người dùng → các phản hồi → các cuộc trò chuyện khác được quan sát → các đích đến/tệp được trích dẫn | Dòng thời gian hoạt động của tài khoản Telegram kèm theo các liên kết đến các bản ghi nguồn tương ứng |
 
 [Tham chiếu bộ sưu tập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/) · [Xác minh hồ sơ cá nhân](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#people-profiles) · [Việc chuyển giao bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#investigation-handoff) · [Đã hoàn tất quá trình xác thực](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/)

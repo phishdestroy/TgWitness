@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/setti
 
 سیٹ اپ وزرڈ، اہداف، انٹرفیس کی سطحیں، کنکشن راستے اور ایک اکاؤنٹ گروپ کے ذریعے شیئر کی جانے والی ترتیبات۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کرنا](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کرنا](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [اکاؤنٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) · [کنیکشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/) · [رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/)
 

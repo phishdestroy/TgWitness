@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/opera
 
 Panelin günlük işleyişi: modlar, izleme kategorileri, parametreler, bildirimler, dışa aktarma işlemleri, yedekleme ve kapasite.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 İlk bağlantınız için [hesapları ve oturum biçimlerini](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) kullanın. Kaydedilen sürümler, olay ilkeleri ve boşluklar hakkında açıklama için, [toplama işleminin nasıl çalıştığına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) bakın. Bu kılavuz, günlük işlemleri ve kurtarma işlemlerini kapsamaktadır.
 
@@ -14,18 +14,18 @@ Yönetilen bir kurulumda, başlatıcının yanı sıra **, START-HERE.html,** ve
 
 Yönetilen geçici bir Cloudflare tüneli için, `tgwitness tunnel off`, yerel panel ve toplama işlemi çalışmaya devam ederken genel erişimi kapatır. `tgwitness tunnel on` erişimi etkinleştirir; `tgwitness tunnel restart` yeni bir tünel bağlantısı oluşturur. Mevcut adresini görmek için `tgwitness open`'yi kullanın. Açıkça belirtilmiş bir kapatma ayarı, hizmetin yeniden başlatılmasından sonra da geçerliliğini korur. `tgwitness stop` hem paneli hem de toplama işlemini durdurur.
 
-**On this page**
+**Bu sayfada**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#capacity-and-retention)
+- [Operatör iş akışı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#operator-workflow)
+- [Ana anahtarı paylaşmadan çalışmayı paylaşın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Çalışma zamanı modları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#runtime-modes)
+- [İzleme kategorileri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#monitoring-categories)
+- [Bildirimler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#notifications)
+- [Panel düzeni](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#panel-layout)
+- [Dağıtım ortamları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#deployment-environments)
+- [Başlangıç kontrolleri ve dışa aktarmalar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#startup-checks-and-exports)
+- [Yedekleme, geri yükleme ve kesintiler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#backup-restore-and-interruptions)
+- [Kapasite ve saklama süresi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/#capacity-and-retention)
 
 ## Operatör iş akışı
 

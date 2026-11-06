@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/conne
 
 Autenticazione, pool di proxy automatici, modalità IP, politica di fallback, richieste esterne e archiviazione dei dati riservati.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementazione e ripristino](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Il presente documento descrive il funzionamento di TgWitness 0.8.0 e i suoi limiti. L’autenticazione, l’accesso alla fonte, la connettività di rete e la completezza dell’acquisizione costituiscono stati distinti. Per le procedure di accesso, i formati dei file e la gestione di più account, si prega di consultare la sezione relativa [agli account e ai formati di sessione](https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/). Per le politiche relative agli eventi e il comportamento in caso di riavvio, si prega di consultare [la sezione dedicata al funzionamento della raccolta](https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/).
 
@@ -48,7 +48,7 @@ I profili WireGuard caricati devono contenere un'interfaccia e un peer, percorsi
 | Telethon SQLite `.session` | Testo completo e coerente | Importazione diretta degli schemi tramite pannello 7/8; CLI offline opzionale |
 | Pyrogram SQLite `.session` | Sessione utente di produzione chiusa | Importazione diretta degli schemi tramite pannello 2/3 |
 | Telegram Desktop TData ZIP | Un unico account moderno; codice di accesso locale, se protetto | Conversione in memoria con controlli di checksum e decrittografia |
-| Account JSON | Campi API/sessione/chiave supportati | I metadati da soli non sono sufficienti per compilare le credenziali API; è comunque necessario un accesso tramite sessione/chiave o numero di telefono/codice QR |
+| JSON dell'account | Campi API/sessione/chiave supportati | I metadati da soli non sono sufficienti per compilare le credenziali API; è comunque necessario un accesso tramite sessione/chiave o numero di telefono/codice QR |
 | Accesso tramite codice QR | Conferma da parte di un’app Telegram autorizzata | Generazione locale di codici QR, scadenza/riprova, autenticazione a due fattori (2FA) opzionale |
 | TDLib / Pyrogram StringSession | Altri formati specifici per le librerie | Non supportato |
 | Token del bot | Un bot dotato di un proprio modello di accesso e aggiornamento | Non utilizzato da questo raccoglitore |
@@ -123,19 +123,19 @@ Per i servizi privati gestiti dall’operatore, l’impostazione esistente dell�
 
 ****Parametri automatici del pool****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+In **Parametri → MTProxy automatico**, configurare la soglia di errore, il tempo di attesa, la rotazione pianificata, la condivisione del proxy e il ritardo di fallback consentito.
 
 | Controllo | Impostazione predefinita |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Si disconnette prima della sostituzione | 3 entro 10 minuti |
+| Proxy provati per ogni tentativo di connessione | 3 |
+| Primo / massimo riposo dopo un errore | 10 minuti / 6 ore |
+| Rotazione prevista | Disabilitato; attivare in caso di errore |
+| Account per proxy | 0: preferire voci separate, unire quando necessario. Impostare 1 in modo da attendere una voce esclusiva. |
+| Ritardo prima del fallback diretto consentito | 10 minuti; Nascondi l'indirizzo, ma continua a rifiutare Direct |
+| Controlli di aggiornamento / trasporto dei feed | Minuti 60 / 10; i valori dell’area di lavoro principale si applicano al pool condiviso |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+L'utilizzo di proxy diversi non garantisce indirizzi di uscita diversi. Queste impostazioni non superano i limiti di Telegram né garantiscono l'anonimato.
 
 Per sostituire l’elenco pubblico con il proprio catalogo di operatori, configurare l’override riportato di seguito. Ciò disabilita completamente gli abbonamenti esterni, anche quando l’array `proxies` è vuoto.
 

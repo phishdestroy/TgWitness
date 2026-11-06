@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![การบูรณาการกับระบบเก็บถาวร](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP แบบอ่านอย่างเดียว](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/) · [การค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 วันที่คือ `2026-10-01` (เที่ยงคืน UTC) หรือเวลา ISO พร้อมเขตเวลา, `2026-10-01T09:00+03:00`. สำหรับ `search`, `messages` และ `export` พวกเขาเลือก เวลาการสังเกตการณ์ หน้าหนึ่งสามารถเก็บได้สูงสุด 50 รายการ: ทำตาม `next_offset` (`--offset`) เพื่อ ค้นหาตามอันดับและ `next_before` (`--before`) ที่อื่น ๆ
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+การค้นหาตามอันดับจะหยุดที่ 1,000 ผลลัพธ์ หน้าสุดท้ายอาจสั้นกว่า `--limit`; ให้จำกัดการค้นหา แชท หรือช่วงเวลา เมื่อมีข้อมูลการสังเกตที่ตรงกันมากขึ้น
 
 ผลลัพธ์ของทุกข้อความจะประกอบด้วย `untrusted_content: true`ID ของพื้นที่ทำงาน, ID ของห้องแชท และ ID ของข้อความ, ลำดับของบันทึก, ค่าแฮชของบันทึกที่เก็บไว้ และลิงก์ไปยังแผงควบคุม การแก้ไข, การแจ้งเตือนการลบ และ `missing_on_recheck` ถือเป็นบันทึกแยกต่างหาก การไม่มีบันทึก ไม่ได้เป็นหลักฐานว่าเหตุการณ์นั้นไม่เคยเกิดขึ้น
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 การส่งออกผ่านแผงควบคุมจำเป็นต้องมีการเชื่อมต่อที่อนุญาตให้**ส่งออกข้อความ (เฉพาะบรรทัดคำสั่ง)**; ตัวเลือกนี้ไม่ได้ถูกเลือกไว้โดยค่าเริ่มต้น ไฟล์นี้เป็นสำเนาทำงาน ไม่ใช่หลักฐาน: เพื่อการส่งต่อที่สามารถตรวจสอบได้ ให้ใช้การส่งออกที่ลงนามในส่วน **Exports** ซึ่ง `python -m tgwitness.verify`ตรวจสอบได้
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+แผงควบคุมจะตรวจสอบสิทธิ์การเข้าถึงอีกครั้งก่อนส่งแต่ละบันทึก รวมถึงบันทึก การเสร็จสิ้นด้วย สิทธิ์การเข้าถึงที่ถูกเพิกถอนหรือหมดอายุจะทำให้การส่งออกไม่สมบูรณ์ การอ่านหน้าแบบ Lazy จะแบ่งปันขีดจำกัดของ archive worker กับคำขออื่นๆ และมีเวลารอที่จำกัด
 
 ## ทักษะของเอเจนต์
 

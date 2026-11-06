@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/analy
 
 ค้นหาข้อความที่บันทึกไว้ ตรวจสอบข้อมูลที่ AI ให้มา และเก็บรายงานวิเคราะห์พร้อมแหล่งอ้างอิง
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การสอบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![การสอบสวน](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [คู่มือขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

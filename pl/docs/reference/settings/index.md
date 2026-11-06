@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/setti
 
 Kreator konfiguracji, cele, poziomy interfejsu, trasy połączeń oraz ustawienia współdzielone przez grupę kont.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/pl/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Pierwsze kroki](https://phishdestroy.github.io/TgWitness/pl/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Pierwsze kroki](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Konta](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/) · [Połączenie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/) · [Dostęp](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/)
 

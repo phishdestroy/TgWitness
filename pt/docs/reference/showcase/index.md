@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/showc
 
 Publique mensagens salvas de canais públicos selecionados e instantâneos assinados por meio de links com validade limitada e revogáveis.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implantação e recuperação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implantação e recuperação](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Acessar → Vitrine pública** cria uma página separada, somente para leitura, utilizando o sistema de tokens de acesso existente. Ela lê as observações salvas na instalação. Ela não inicia um coletor, não faz login no Telegram nem adquire um canal para um visitante.
 

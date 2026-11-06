@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![아카이브 연동](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/) · [전체 텍스트 검색](https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 날짜는 `2026-10-01` (UTC 자정) 또는 시간대가 명시된 ISO 형식입니다. `2026-10-01T09:00+03:00`. `search`, `messages` 및 `export` 의 경우 관찰 시간을 선택합니다. 각 페이지에는 최대 50개의 기록이 표시되며, 순위 기반 검색을 위해서는 `next_offset` (`--offset`)를 따라 순위별 검색을 수행하고 `next_before` (`--before`)는 다른 곳에서 참조하십시오.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+순위별 검색은 1,000개의 결과에서 중단됩니다. 마지막 페이지의 결과 수는 `--limit`보다 적을 수 있습니다. 일치하는 관측 결과가 더 많은 경우, 검색어, 채팅 또는 기간을 좁혀 주세요.
 
 모든 메시지 결과에는 `untrusted_content: true`, 워크스페이스, 채팅 및 메시지 ID, 저널 순서, 저장된 기록 해시, 패널 링크를 포함합니다. 수정, 삭제 알림 및 `missing_on_recheck` 는 별도의 기록으로 처리됩니다. 기록이 없다고 해서 해당 사건이 발생하지 않았음을 증명하는 것은 아닙니다.
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 패널을 통한 내보내기를 수행하려면 **메시지 내보내기가** 허용되는 연결이 필요합니다 **(명령줄 전용)**; 이 기능은 기본적으로 선택되어 있지 않습니다. 이 파일은 작업용 사본일 뿐 증거 자료가 아닙니다. 검증 가능한 인계를 위해서는 **‘내보내기’** 메뉴에서 서명된 내보내기 파일을 사용하십시오. 이 파일은 `python -m tgwitness.verify`검증 과정을 거칩니다.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+패널은 완료 레코드를 포함하여 각 레코드를 출력하기 전에 액세스 권한을 재확인합니다. 취소되거나 만료된 액세스 권한은 불완전한 내보내기 결과를 초래합니다. 지연 페이지 읽기는 다른 쿼리와 아카이브 작업자 한도를 공유하며 대기 시간이 제한되어 있습니다.
 
 ## 에이전트 스킬
 

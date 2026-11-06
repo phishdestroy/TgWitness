@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/searc
 
 根据词形、精确短语、域名和 @用户名 查找已保存的消息，按最匹配结果优先排序，索引与签名日志绑定。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [调查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![调查](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [存档分析](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/) · [本地 OCR 和转录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/searc
 
 索引是衍生数据。它由签名日志重建而成，本身从未被签名， 也从未被导出。原始记录不会发生任何变化。
 
-**On this page**
+**本页内容**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#benchmark)
+- [搜索语法](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#search-syntax)
+- [语言](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#languages)
+- [索引的位置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#where-the-index-lives)
+- [结果和已签名的日志](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#results-and-the-signed-journal)
+- [识别出的文本](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#recognized-text)
+- [访问](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#access)
+- [咨询存档和 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#ask-the-archive-and-mcp)
+- [依赖项](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#dependencies)
+- [基准测试](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/#benchmark)
 
 ## 搜索语法
 
@@ -97,7 +97,7 @@ OCR 结果和转录文本保留在其加密的原始文件中。其索引仅存�
 
 MCP 客户端可调用 `search_messages` 使用 `ranked=true` ，并使用 `next_offset`。范围限定连接仅接收其所属的聊天内容。
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+排序分页最多显示前1,000条结果，无论页面大小如何。请缩小查询范围、聊天范围或时间范围以查看更多匹配结果。按最新优先搜索会在选择每页之前，对消息、OCR 结果和转录结果进行排序。
 
 ## 依赖项
 

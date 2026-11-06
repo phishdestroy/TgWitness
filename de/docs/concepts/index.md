@@ -67,7 +67,7 @@ Telegram sagt nicht, wer eine Nachricht gelöscht hat oder wann genau. TgWitness
 
 Jeder Eintrag enthält den Hash des vorherigen. Ein anderswo aufbewahrter Prüfpunkt hält Journallänge und letzten Hash fest.
 
-02 / HASH-CHAIN SANDBOXEchtes SHA-256 · Beispieldatensätze
+02 / HASH-CHAIN-SANDBOXEchtes SHA-256 · Beispieldatensätze
 
 AUFZEICHNUNG 01**Nachricht empfangen**`h₁ = SHA-256(e₁)`Links zu 64 Nullen
 

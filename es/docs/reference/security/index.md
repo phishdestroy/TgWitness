@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/secur
 
 Modelo de amenazas, modelo de acceso, información confidencial en reposo, exposición de la red, importación de sesiones y cómo notificar una vulnerabilidad.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implementación y recuperación](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementación y recuperación](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
+Esta página describe el acceso, el almacenamiento y la protección de la red en un espacio de trabajo local o en un servidor. Para la recopilación en un GitHub Runner o en una máquina virtual confidencial de Intel TDX, consulta los modos de [verificación](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope), que añaden comprobaciones del entorno de recopilación. Las conexiones de cuentas, las notificaciones, las marcas de tiempo, las copias externas y los testigos tienen su propia configuración de enrutamiento.
 
 | Área | En resumen |
 | --- | --- |
@@ -16,20 +16,20 @@ This page describes access, storage and network protection in a local or server 
 | Secretos en reposo | La sesión, el par de API, la clave de firma y la configuración del proxy se cifran con Fernet |
 | Mensajes y archivos multimedia | Se almacena sin cifrar: utilice el cifrado de disco y permisos estrictos |
 | Integridad | Cadena de hash SHA-256 y una firma Ed25519 en cada registro |
-| Límite de confianza local | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
+| Límite de confianza local | El administrador del servidor controla el espacio de trabajo y su clave de firma; los puntos de control independientes conservan un límite de registro anterior. |
 
 Para informar sobre vulnerabilidades, consulte la [política de seguridad](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
-**On this page**
+**En esta página**
 
-- [Access model](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#access-model)
-- [Panel content and exports](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#panel-content-and-exports)
-- [Secrets at rest](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#secrets-at-rest)
-- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#proxies-and-network-routes)
-- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#sign-in-and-session-imports)
-- [Logs and transport](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#logs-and-transport)
-- [Integrity limits](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#integrity-limits)
-- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#if-you-suspect-a-problem)
+- [Modelo de acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#access-model)
+- [Contenido del panel y exportaciones](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#panel-content-and-exports)
+- [Secretos en reposo](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#secrets-at-rest)
+- [Proxies y rutas de red](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#proxies-and-network-routes)
+- [Inicio de sesión e importación de sesiones](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#sign-in-and-session-imports)
+- [Registros y transporte](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#logs-and-transport)
+- [Límites de integridad](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#integrity-limits)
+- [Si sospechas que hay un problema](https://phishdestroy.github.io/TgWitness/es/docs/reference/security/#if-you-suspect-a-problem)
 
 ## Modelo de acceso
 
@@ -53,13 +53,13 @@ Las exportaciones excluyen los secretos de autenticación y firma, pero contiene
 
 ## Secretos en reposo
 
-Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
+Las credenciales de la API de Telegram, la sesión y la clave de firma se cifran con Fernet. En el caso de los mensajes y archivos multimedia locales, el cifrado lo proporciona el disco o volumen del host; el espacio de trabajo almacena archivos normales. Las exportaciones pueden utilizar un ZIP AES-256 protegido con contraseña, y las copias externas utilizan AES-256-GCM.
 
-The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
+La clave de la bóveda se establece por defecto en el directorio de datos protegidos. Utiliza un archivo externo de clave maestra como se indica a continuación para almacenarla por separado. En Unix, los nuevos archivos de clave privada utilizan el modo 0600 y los nuevos directorios de datos utilizan el modo 0700; en Windows, configura la lista de control de acceso (ACL) del directorio para la cuenta de servicio y los administradores autorizados. Se conservan los permisos existentes del directorio.
 
 ### Clave maestra externa
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/) for setup details.
+Para un nuevo directorio de datos, TGWITNESS_VAULT_KEY_FILE puede proporcionar una clave maestra aleatoria externa. HKDF-SHA256 y una sal aleatoria independiente derivan una clave Fernet diferente para cada espacio de trabajo. Se debe conservar el archivo vault.external.json para la recuperación. Si faltan o las claves maestras son incorrectas, el sistema no se inicia. Las bóvedas locales existentes no se migran de forma silenciosa. El panel muestra el modo de almacenamiento de claves seleccionado. El cifrado de disco protege los archivos de mensajes y multimedia locales en cualquiera de los dos modos; consulte « [conexión» y «protección de datos](https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/)» para obtener detalles sobre la configuración.
 
 ## Proxies y rutas de red
 
@@ -83,10 +83,10 @@ Se sustituye la respuesta predeterminada de validación de la API para que no re
 
 ## Límites de integridad
 
-Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
+Las comprobaciones de verificación local verifican las firmas de los registros, la cadena de hash, los archivos adjuntos y el manifiesto de exportación. El administrador posee la clave de firma local y puede crear otro diario firmado; un punto de control conservado de forma independiente detecta la sustitución del prefijo que cubre. Conserva la huella digital de la clave y los puntos de control con el destinatario o con un testigo independiente.
 
-For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/#verification-scope) describes the checks for each mode.
+Para una recopilación verificada de forma independiente, elige [Captura de GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) o [Implementación de Intel TDX](https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Sus verificadores comprueban la procedencia del flujo de trabajo o las mediciones de hardware, además de la integridad del archivo. Las marcas de tiempo opcionales y las copias cifradas externas proporcionan puntos de referencia temporales y copias recuperables; el formato de pruebas  describe las comprobaciones para cada modo.
 
 ## Si sospecha que hay algún problema
 
-Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.
+Conservar el directorio de datos original y utilizar una copia independiente para el análisis. Informar de la versión afectada, la operación y los pasos reproducibles a través de la [política de seguridad](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), manteniendo la privacidad de los datos de la cuenta y las credenciales.

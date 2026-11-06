@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 報告篩選器、八種設計範本、內容預設值、已儲存的變更歷史紀錄，以及簽署後匯出檔案中所包含的評估結果。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [調查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![調查](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 將選定的觀察結果轉化為敘述案件的易讀報告：包含案件問題、 範圍、已儲存的變更、圖表、調查結果及來源參考。每份報告皆提供 收件者一種方式，用以核對所交付的資料，並檢視其蒐集 範圍。
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 資料預覽所統計的是完整的穩定日誌前綴，而非初始樣本。 僅顯示的樣本列與長清單會被截斷；其省略的計數會 一併顯示。後續匯出將擷取新的穩定快照，因此持續的蒐集作業可能會 增加相關數字。範圍、計數及來源身分均包含於 經簽署的報告中。開啟或預覽表單並不會將其儲存。
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**司法管轄權指引。** 在「文件詳情」下，開啟「**司法管轄權指引 · 可選」** 以選擇司法管轄區及民事／商業或刑事程序。附錄包含 法律依據、來源連結、準備說明及研究進度。 以當地語言 撰寫的資料蒐集保障措施摘要與說明屬可選項目。預設情況下未 選取任何司法管轄區。這些選項屬於工作區範疇，且不包含在 儲存的版面配置及隱含的分享與複製預設設定中。請參閱 [預設設定、支援的報告類型及研究限制](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) 。
 
 **請選擇收件者的副本。** 圖表和對話紀錄均採用所選的紀錄。 完整性、保管與涵蓋範圍描述了完整的原始日誌。證據 ZIP 檔案 包含其原始紀錄及附件。當收件者僅需接收經選取且獲准的資料時，請採用[精簡版移交流程](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#handover-extract) 。
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 若包含 `analytics.json` 檔案，該檔案將受存檔的簽名檔案雜湊值保護。 日誌 `report.json` 嵌入相同的選取彙總值。簽名驗證 可偵測字節變更。若要核對數值，請使用 `report_analytics.Analytics` 和 `selected` 重新計算日誌彙總值，或 使用 `snapshot_analytics.collect` 和 `project` 重新計算快照彙總值。
 
-### Anomaly indicators
+### 異常指標
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**預覽。**證據報告會新增一個「**異常指標」**區段，該區段由 已註冊的處理器（`tgwitness/metrics/`，每個指標對應一個檔案）計算得出。報告會列出每個 曾運行的處理器及其版本，並在其表格下方顯示其計算方法，因此 可透過 `events.jsonl` 搭配 `tgwitness.metrics.run` 重現該計算結果。
 
-| Processor | 功能展示 |
+| 處理器 | 功能展示 |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | 首次發文者人數及每日（UTC）訊息量。一則警示需至少五名首次發文者，且其人數須達中位數的三倍，而訊息量則不得超過中位數的1.5倍。基準值採用經過七天預熱期後，於過去14個日曆日內至少七天的觀察數據。 |
+| `service_vs_message_ratio` v1 | 每則聊天室的已儲存訊息編號各不相同，且服務訊息會佔用部分配額。此處僅說明編號規則，並未解釋特定編號缺失的原因。 |
+| `join_leave_per_month` v1 | 每月的新加入、離開、移除或封禁次數，以每人、每個聊天室、每次變更及每日為單位，各計一次。 |
+| `pinned_per_month` v1 | 每月固定顯示的服務訊息、取消固定的通知，以及在聊天狀態快照之間新增或移除的已固定訊息。 |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**「參數 → 報告指標」**可選取處理器及顯示的列數， 包括在篩選後的報告中。每日與每月表格顯示最近的資料列，服務佔比 表格則根據儲存訊息的數量對聊天室進行排序。總計涵蓋每一列。
 
 請從原始碼檢出點開始，根據同一份虛構期刊，建置上述列出的全部八種設計：
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 請保留原始 ZIP 檔案及其雜湊值。記錄每位持有者、轉移情況、日期 及目的。並將附有來源標示的操作員陳述與案件筆記一併保留。
 5. 針對機密虛擬機器，請保留並獨立驗證引述、挑戰、 Intel 憑證鏈、測量結果、確切來源及金鑰處理條件。 請將驗證結果與已審查的證據一併保存。
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+請參閱「[驗證範圍」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)部分，了解各模式下針對資料擷取、 檔案完整性、時間及蒐集範圍的檢查項目。
 
 ## 收件人審閱
 

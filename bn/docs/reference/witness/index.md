@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/witne
 
 নিজের কী এবং বট সহ একটি উইটনেস চালান, চ্যানেলে স্বাক্ষরিত চেকপয়েন্ট প্রকাশ করুন এবং এর বিপরীতে এক্সপোর্টগুলো যাচাই করুন।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [প্রমাণ এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![প্রমাণ ও যাচাইকরণ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [রপ্তানি এবং যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [উচ্চ নিশ্চয়তা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/) · [প্যানেল গাইড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+একজন সাক্ষী স্বাক্ষরিত চেকপয়েন্টগুলো সংগ্রহকারীর থেকে আলাদাভাবে সংরক্ষণ করে। এটি সংগ্রহকারীর স্বাক্ষর এবং জার্নাল ধারাবাহিকতা যাচাই করে, ফলাফলটি নিজের কী দিয়ে স্বাক্ষর করে এবং একটি টেলিগ্রাম চ্যানেলে প্রকাশ করে। এটিকে একটি পৃথক সার্ভারে চালান, যেখানে সংগ্রহকারীর সাক্ষী এন্ডপয়েন্টে শুধুমাত্র পড়ার (read-only) অ্যাক্সেস রয়েছে।
 
 প্রবাহ চিত্র · সংগ্রাহক → সাক্ষী (স্বাক্ষরিত চেকপয়েন্ট: রেকর্ড গণনা + হেড হ্যাশ); সাক্ষী → সাক্ষী জার্নাল, নিজস্ব কী; সাক্ষী → টেলিগ্রাম চ্যানেল (নিজের বটের মাধ্যমে স্বাক্ষরিত পোস্ট); প্রমাণ ZIP → verify.py; সাক্ষী জার্নাল, নিজস্ব কী → verify.py; টেলিগ্রাম চ্যানেল → verify.py (টেলিগ্রাম ডেস্কটপ এক্সপোর্ট অথবা t.me/s পৃষ্ঠা) · সংগ্রাহক · সাক্ষী · সাক্ষী জার্নাল, নিজস্ব কী · টেলিগ্রাম চ্যানেল · প্রমাণ ZIP · verify.py · স্বাক্ষরিত চেকপয়েন্ট: · রেকর্ড গণনা + হেড হ্যাশ · নিজের বটের মাধ্যমে · স্বাক্ষরিত পোস্ট · টেলিগ্রাম ডেস্কটপ এক্সপোর্ট · অথবা t.me/s পৃষ্ঠা
 
@@ -23,13 +23,13 @@ A witness retains signed checkpoints separately from the collector. It checks th
 5. সাক্ষী জার্নাল, নিজস্ব কী → verify.py
 6. টেলিগ্রাম চ্যানেল → verify.py (টেলিগ্রাম ডেস্কটপ এক্সপোর্ট অথবা t.me/s পৃষ্ঠা)
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#verify)
+- [সাক্ষী যা পায়, এবং যা পায় না](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [এটি যা যা পরীক্ষা করে এবং রেকর্ড করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#what-it-checks-and-records)
+- [একজন সাক্ষীকে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#run-a-witness)চালান
+- [বিভিন্ন ওয়ার্কস্পেসের জন্য পাবলিক প্রমাণ পৃষ্ঠা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/#verify)
 
 ## সাক্ষী যা পায় এবং যা পায় না
 
@@ -48,7 +48,7 @@ A witness retains signed checkpoints separately from the collector. It checks th
 প্রতিটি ব্যবধান (ডিফল্ট ১০ মিনিট) সাক্ষী:
 
 1. এটি হেডটিকে নিজেই আনয়ন করে (কলেক্টর এটিকে পুশ বা স্কিপ করতে পারে না);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. সংগ্রাহকের স্বাক্ষর, পিন করা সংগ্রাহক কী (`--collector-fingerprint` বা প্রথম দেখা কী), একটি অ-হ্রাসমান গণনা এবং অপরিবর্তিত গণনায় অপরিবর্তিত হেড যাচাই করে। মার্কল অন্তর্ভুক্তি এবং সামঞ্জস্য প্রমাণগুলি যাচাই করে যে একটি বর্ধিত জার্নাল সংরক্ষিত চেকপয়েন্টকে প্রসারিত করে। একবার ধারাবাহিকতা প্রমাণগুলি ব্যবহার হয়ে গেলে, সেগুলি অপসারণ প্রত্যাখ্যাত হয়;
 3. নিজের জার্নালে একটি স্বাক্ষরিত রেকর্ড সংযুক্ত করে: `witness.anchor`, স্ট্যাটাস `ok`, `key_changed`, `rollback` (আগের তুলনায় কম রেকর্ড), `fork` (একই দৈর্ঘ্য, ভিন্ন হেড) অথবা `invalid` (উত্তর যাচাইকরণে ব্যর্থ), অথবা `witness.no_response` যখন কালেক্টর উত্তর দেয়নি;
 4. চ্যানেলে ফলাফলটি স্বাক্ষরিত অবস্থায় পোস্ট করা হয়, যার মধ্যে "no answer" অন্তর্ভুক্ত, যখন সাক্ষী চলছে এবং Bot API-তে পৌঁছাতে পারে। পোস্ট আইডি (`witness.posted`) এবং একটি ব্যর্থ পোস্ট (`witness.post_failed`) রেকর্ড করা হয়।
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 এর জন্য স্বাধীনভাবে সংরক্ষিত সাক্ষীর আঙ্গুলের ছাপ এবং এই রপ্তানির একেবারে শেষে একটি মিলিত চেকপয়েন্ট প্রয়োজন। শুধুমাত্র পূর্ববর্তী প্রিফিক্সকে অন্তর্ভুক্ত করে এমন একটি চেকপয়েন্ট অপর্যাপ্ত। সংগ্রহ স্থগিত করুন, সাক্ষীকে চূড়ান্ত অবস্থা পর্যবেক্ষণ করতে দিন, এবং আরও জার্নাল লেখার আগে রপ্তানি করুন; যদি জার্নাল পরিবর্তিত হয়, আরেকটি চেকপয়েন্ট সংরক্ষণ করুন এবং সেই অবস্থা রপ্তানি করুন। শুধুমাত্র পরবর্তী একটি চেকপয়েন্ট ছোট এক্সপোর্টের চূড়ান্ত হ্যাশ যাচাই করতে পারে না। যখন `--channel` ফ্ল্যাগও সরবরাহ করা হয়, দাবি করা পোস্টগুলি অনুপস্থিত থাকা বা খালি মিল সেট এই কঠোর পরীক্ষাটি ব্যর্থ করে। ফ্ল্যাগ ছাড়া, সাধারণ অখণ্ডতা পরীক্ষাগুলি অন্যথায় অক্ষত একটি আর্কাইভ প্রত্যাখ্যান না করেই পর্যবেক্ষণহীন রেকর্ডগুলি রিপোর্ট করে।
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+উইটনেস জার্নাল এবং এর পিন করা কী আলাদাভাবে রাখুন। অনলাইন চেকপয়েন্টগুলো চেকপয়েন্টগুলোর মধ্যে ধারাবাহিকতা যাচাই করে; অফলাইন যাচাইকরণ প্রতিটি সংরক্ষিত চেকপয়েন্টকে এক্সপোর্টের সাথে তুলনা করে। ধারাবাহিকতার প্রমাণ ছাড়া লিগ্যাসি হেডগুলো অফলাইন তুলনা ধরে রাখে এবং অনলাইন ধারাবাহিকতা যাচাই ছাড়া রিপোর্ট করা হয়। রিপোর্টে ইন্টারভাল অনুযায়ী উইটনেসের ডাউনটাইম এবং ব্যর্থ প্রকাশনা তালিকাভুক্ত করা হয়।
 
-### Daily seals and unavailable timestamp calendars
+### দৈনিক সীল এবং অনুপলব্ধ টাইমস্ট্যাম্প ক্যালেন্ডার
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+উইটনেস পূর্ববর্তী UTC দিনের জার্নাল সীমানা সিল করে এবং সেই স্বাক্ষরিত সিলের হ্যাশ OpenTimestamps-এ জমা দেয়। ক্যালেন্ডার জমা প্রমাণের জন্য অপেক্ষমাণ; শুধুমাত্র স্বতন্ত্রভাবে যাচাইকৃত বিটকয়েন কমitmenই ভেরিফায়ারে নিশ্চিতকরণ পায়।
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+যদি সব ক্যালেন্ডার ব্যর্থ হয়, স্বাক্ষরিত সীল এবং ব্যর্থ প্রচেষ্টা জার্নালে থেকে যায়। ঘণ্টাভিত্তিক রক্ষণাবেক্ষণ পাস সেই মূল রেকর্ডটি পুনরায় চেষ্টা করে, রিস্টার্ট বা তারিখ পরিবর্তনের পরও। এটি সর্বোচ্চ 32টি সীল স্ক্যান করে, সর্বোচ্চ দুইটি অনুপস্থিত জমা জমা দেয় এবং প্রতি পাসে পুনঃচেষ্টায় সর্বোচ্চ 60 সেকেন্ড সময় ব্যয় করে। একটি স্থায়ী কার্সর পুরনো সীলগুলোর মধ্য দিয়ে ঘুরে। সংরক্ষিত জমাগুলি বিদ্যমান প্রুফ-আপগ্রেড পথ অনুসরণ করে।
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+পুনরায় চেষ্টা সীল পুনঃলিখন করে না, এর মূল তারিখ পরিবর্তন করে না বা দাবি করে না যে ক্যালেন্ডার এটি আগে পেয়েছিল। পরবর্তী বিটকয়েন কমিটমেন্ট একটি পরবর্তী বাহ্যিক নিশ্চিতকরণ হিসেবেই থাকে। অনুপস্থিত প্রমাণসমূহ `none` হিসেবেই থাকে; অপেক্ষমান প্রমাণসমূহ `pending` হিসেবে থাকে যতক্ষণ না যাচাইকারী সেগুলো স্বতন্ত্রভাবে পরীক্ষা করে।

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/opera
 
 パネルの日常的な運用：モード、監視カテゴリ、パラメータ、通知、エクスポート、バックアップ、および容量について。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [導入と復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![展開と復旧](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 初回接続の際は、[アカウントおよびセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)をご利用ください。 保存されたバージョン、イベントポリシー、およびデータ欠落に関する説明については、 [「収集の仕組み」](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)をご覧ください。本ガイドでは、日常的な運用と復旧について解説しています。
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/opera
 
 管理対象の一時的なCloudflareトンネルにおいて、`tgwitness tunnel off`は、 ローカルパネルと収集機能は稼働したまま、外部からのアクセスを遮断します。`tgwitness tunnel on`は アクセスを有効にし、`tgwitness tunnel restart`は新しいトンネル接続を作成します。 `tgwitness open`を使用すると、現在のアドレスを確認できます。明示的な停止設定は、 サービスの再起動後も維持されます。`tgwitness stop`は、パネルと収集機能の両方を停止します。
 
-**On this page**
+**このページでは**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#capacity-and-retention)
+- [オペレーターのワークフロー](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#operator-workflow)
+- [メインキーを共有せずに作業内容を共有する](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [実行モード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#runtime-modes)
+- [監視カテゴリ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#monitoring-categories)
+- [通知](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#notifications)
+- [パネルのレイアウト](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#panel-layout)
+- [導入環境](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#deployment-environments)
+- [起動時のチェックとエクスポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#startup-checks-and-exports)
+- [バックアップ、復元、および中断](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#backup-restore-and-interruptions)
+- [容量と保存期間](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/#capacity-and-retention)
 
 ## オペレーターのワークフロー
 

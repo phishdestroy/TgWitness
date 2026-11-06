@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/accou
 
 Bir hesabın şu anda okuyabileceği içeriği dışa aktarın: kapsam, devam ettirilebilir işler, imzalanmış bir arşiv ve küçültülmüş paylaşım kopyaları.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 Hesap dışa aktarımı hesabı yalnızca kendisi için ayırır. Başlatmadan veya sürdürmeden önce izlemeyi ya da diğer veri toplama görevini açıkça duraklatın; uygulama bunları otomatik olarak durdurmaz.
 
@@ -16,11 +16,11 @@ Gönderen ve metin filtreleri, **“Gönderen veya mesaj metnine göre filtrele�
 
 Bu iş akışı, bağlı hesaba şu anda erişilebilen verileri dışa aktarır. Varsayılan olarak [Telegram Takeout](https://core.telegram.org/api/takeout) kullanılır; bu, erişilemeyen veya silinmiş Telegram verilerinin yedeği değildir. Gizli Sohbetler, erişilemeyen geçmiş ve önceki düzenlemeler kurtarılamaz. Telegram, Takeout işleminin başlamasından önce bir bekleme süresi uygulayabilir. Panel bu bekleme süresini gösterir; aktarım yöntemini sessizce değiştirmez. Açıkça belirtilen normal API seçeneği farklı bir kapsam sunar ve desteklenmeyen kategorileri kaydeder.
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout, Telegram Desktop tarafından da kullanılan resmi dışa aktarma API'sidir. TgWitness, kendi topladığı verilerden doğrudan Desktop ile uyumlu JSON dosyası oluşturabilir; başka birinin arşivini içe aktarmak gerekli değildir. Sohbet ve mesaj kimlikleri her iki aktarım yöntemiyle de erişilebilir. Genel bir sohbet veya iletme izni, daha hızlı bir dışa aktarım garantisi vermez veya Takeout’un onay gecikmesini ortadan kaldırmaz. Hız karşılaştırması yapmadan önce aynı kapsam ve medya ayarlarını ölçün.
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+20'a kadar açıkça seçilen sohbet kimlikleri için, normal API dışa aktarımı, hesabın tam diyalog envanterini dikkate almadan önce bu eşleri doğrudan çözümler. Bu sayede, okunabilir bir genel kanal, diyalog listesinde yer almıyor olsa bile, kanala katılmadan dışa aktarılabilir. Önbelleğe alınmamış eşler, normal envantere geri döner. Önbelleğe alınmamış eşler, normal envantere geri döner. Arşiv filtresi uygulanmaya devam eder: Telegram bir diyalog döndürmezse ve arşivlenmiş sohbetler hariç tutulursa, bilinmeyen arşiv durumu bir eksiklik olarak kaydedilir. Takeout, aralık bölmeli envanter prosedürünü korur. Her iki yol da sohbetlere katılmamakta veya yönlendirme izinlerini değiştirmemektedir. Masaüstü uyumlu JSON'da, Telegram'ın `left` olarak işaretlediği kanallar, `left_chats` altında görünür; buna, hesabın katılmadığı okunabilir genel kanallar da dahildir.
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+Hem `FLOOD_WAIT` hem de `FLOOD_PREMIUM_WAIT`, sunucu tarafından talep edilen sürenin tamamı boyunca duraklatma isteklerini askıya alır. Hesabın son tarihi, yeniden bağlanma ve yeniden başlatma işlemlerinde korunur; daha kısa bir sonraki bekleme süresi bunu kısaltamaz. Yeniden deneme sayısı sınırlıdır, iptal işlemi mühürlenmiş sayfaları korur ve API kimlik bilgileri, hız sınırını aşmak için değiştirilmez. Premium satın alımı yapılmaz.
 
 ## Nelerin toplanacağını seçin
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 Profil fotoğrafı geçmişi ve hikayeler varsayılan olarak seçili değildir. Vakanın yalnızca mesajlara ihtiyaç duyduğu durumlarda profil ve kişileri de devre dışı bırakın. Ekler veya meta veriler gereksizse, bunları toplama sırasında hariç tutmak, bu dışa aktarımda başka bir özel kopyanın saklanmasını önler.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+Fotoğraf yükleri, meta verilerinde ve hash manifestolarında tanımlanan sabit görüntü varyantını kullanır; buna animasyonlu avatar varyantına sahip fotoğraflar da dahildir. Bu animasyon, seçilen sabit görüntünün yerine geçmez. Gözlemlenen boyuttan daha kısa veya daha uzun bir yük, başarısız bir ek olarak kaydedilir ve dosya referansının yenilenmesi sırasında değiştirilen temsil reddedilir. Bu hatalar, mesaj kayıtlarını korurken arşivi eksik bırakır. Bağımsız doğrulama, eski arşivler de dahil olmak üzere, imzalı uzunluğu gözlemlenen boyut veya temsil ile çelişen kaydedilmiş ekleri de reddeder.
 
 ## Özet, kapsam ve doğrulama
 
@@ -97,8 +97,8 @@ Kaynak bağlantısı, dönüştürme işleminin gerekli tüm öğeleri seçtiği
 
 ## Paylaşım ve barındırılan yakalama
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+Alıcının ihtiyaç duyduğu mesajları ve dosyaları seçin, paylaşılacak kopyanın tamamını gözden geçirin ve kaynağı ayrı olarak saklayın. Alıcının tam olarak bu kopyayı tanımlayıp doğrulayabilmesi için teslim edilen ZIP dosyasının hash değerini kaydedin. Seçilen tanımlayıcılar takma adlandırma işlemiyle değiştirilir; dahil edilen metin ve orijinal dosyalar incelemenin bir parçası olarak kalır.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope).
+GitHub Actions, Takeout veya normal API aracılığıyla tam hesap ve seçili sohbet dışa aktarımlarının yanı sıra tek sohbetlik bir olay günlüğünü de destekler. [barındırılan yakalama kılavuzu](https://phishdestroy.github.io/TgWitness/docs/capture/), ayarların doğrulanmasını ve 120 dakikalık sınırı açıklamaktadır. Barındırılan yakalamadan türetilen bir paylaşım kopyasını doğrulamak için, kaynak hash değerini orijinal arşivle karşılaştırın ve [moduna özgü kontroller](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) ile arşivin doğruluğunu teyit edin.
 
 [Kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Vaka raporları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)

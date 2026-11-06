@@ -6,7 +6,7 @@ Proszę uruchomić TgWitness jako usługę w systemach Windows, Linux, macOS lub
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Wdrażanie i przywracanie](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Język angielski** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ukraiński](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Chiński uproszczony](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Każda wersja opublikowana na GitHubie zawiera plik `TgWitness-<version>-windows
 | `TgWitness-Demo.cmd` | Uruchom demonstrację syntetyczną pod adresem `data\demo` |
 | `TgWitness-Check.cmd` | Proszę uruchomić sprawdzanie gotowości bez uruchamiania |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Przypięty słownik morfologii języka rosyjskiego oraz profile kolorów w formacie PDF są dołączone do pakietu w celu korzystania w trybie offline. Pakiet dopuszcza wyłącznie znane ścieżki do tych plików w katalogach zależności oznaczonych jako `data`; obecność nieoczekiwanych plików w tych katalogach powoduje niepowodzenie kompilacji.
 
 Rozpakuj całe archiwum do folderu z uprawnieniami do zapisu, np. `Documents\TgWitness`; nie uruchamiaj programu z poziomu pliku ZIP ani z folderu Program Files. Środowisko uruchomieniowe korzysta z izolowanej ścieżki modułów, więc inne instalacje języka Python oraz folder `PYTHONPATH` nie mają na nie wpływu. Dane pozostają w folderze `data` pakietu. Aby zaktualizować oprogramowanie, należy zatrzymać TgWitness, rozpakować nową wersję do nowego folderu, a następnie skopiować do niego folder `data`.
 

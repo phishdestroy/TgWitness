@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/featu
 
 Model pengumpulan saat ini, alur kerja multi-akun, ekspor, dan batasan operasional TgWitness.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Referensi proyek](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![Referensi proyek](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness melestarikan percakapan Telegram yang dapat diakses oleh akun yang terhubung, mencatat perubahan yang teramati, dan menyiapkan ekspor yang dapat diverifikasi. Referensi ini menjelaskan model pengumpulan, alur kerja saat ini, dan batas-batasnya.
 
-**On this page**
+**Di halaman ini**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#stable-release-criteria)
+- [Aplikasi mandiri](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#standalone-application)
+- [Penyelidikan bersama](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#shared-investigations)
+- [Alat arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#archive-tools)
+- [Fitur tambahan opsional](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#optional-extras)
+- [Protokol dan sumber pribadi](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#protocol-and-private-sources)
+- [Akun ganda](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#multiple-accounts)
+- [Penangkapan dan atribusi](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#capture-and-attribution)
+- [Kapasitas dan batasan Telegram](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#capacity-and-telegram-limits)
+- [Keandalan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#reliability-and-recovery)
+- [Model bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#evidence-model)
+- [Ekspor, penerapan, dan serah terima](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#export-deployment-and-handoff)
+- [Kriteria rilis stabil](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/#stable-release-criteria)
 
 ## Aplikasi mandiri
 
@@ -93,9 +93,9 @@ Sumber menyediakan pengaturan per akun untuk pesan baru, pengeditan, penghapusan
 | Tindakan admin | Pembaruan yang relevan dan cuplikan log admin dalam ekspor obrolan saluran/supergrup | Proses ekspor membaca log jika tersedia untuk akun admin yang melakukan ekspor; pemantauan log admin secara berkelanjutan berada di luar alur ini |
 | Lampiran | Deskripsi versi asli, jumlah byte yang diunduh/SHA-256, dan hasil upaya | File yang hilang mungkin tidak dapat dipulihkan; versi terbaru tidak akan menggantikannya |
 | Sejarah | Cuplikan eksplisit dari pesan-pesan yang saat ini terlihat | Tidak merekonstruksi semua pengeditan atau konten yang dihapus |
-| Proses pengumpulan | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) |
+| Proses pengumpulan | Mulai/berhenti, detak jantung, kesalahan, pengaturan, cakupan, dan tanda terima eksekusi yang ditandatangani | Inventaris lokal; GitHub dan TDX menambahkan [pemeriksaan lingkungan yang independen](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+Antarmuka tersebut mencantumkan nama akun yang tercantum dalam peristiwa sumber dan mempertahankan nama serta nama pengguna yang diamati. Jika peristiwa tersebut tidak mencantumkan pelakunya, laporan akan membiarkan kolom tersebut kosong.
 
 ## Kapasitas dan batasan Telegram
 

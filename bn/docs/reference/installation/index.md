@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/insta
 
 একটি কমান্ডে ইনস্টল করুন, স্বাক্ষর ও হ্যাশ যাচাই করুন, ইনস্টলেশন আপডেট ও অপসারণ করুন।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [শুরু করা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![শুরু করা](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [প্রকল্প](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [দ্রুত শুরু](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/) · [নিয়োগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#remove-tgwitness)
+- [একটি কমান্ডে ইনস্টল করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#install-with-one-command)
+- [যেখানে সবকিছু চলে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#where-everything-runs)
+- [পূর্ণ-পাঠ অনুসন্ধান সেটিংস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#full-text-search-settings)
+- [কমান্ড-লাইন অ্যাক্সেস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#command-line-access)
+- [চালানোর আগে যাচাই করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#verify-before-running)
+- [বিদ্যমান ইনস্টলেশন আপডেট করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#update-an-existing-installation)
+- [উবুন্টুতে দৈনন্দিন কমান্ডসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness সরিয়ে ফেলুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/#remove-tgwitness)
 
 ## একটি কমান্ডে ইনস্টল করুন
 
@@ -137,7 +137,7 @@ Windows ইনস্টলেশন নিজেই .NET দিয়ে প্�
 
 **একটি নতুন প্রকাশনা ডাউনলোড সাইট আপডেট করে; ইনস্টল করা প্রোগ্রামগুলো আপডেট হয় যখন আপনি ইনস্টলারটি আবার চালান।** কোনো আনঅ্যাটেন্ডেড আপডেটার নেই বা চলমান সংগ্রহের স্বয়ংক্রিয় পুনঃসূচনা নেই। বর্তমান ইনস্টলার চ্যানেলটি **প্রিভিউ**; এটি প্রকাশিত, যাচাইকৃত বিল্ডগুলো অনুসরণ করে `main`, যার commit শেষ সংখ্যাযুক্ত GitHub রিলিজের তুলনায় নতুন হতে পারে। পৃষ্ঠার সংস্করণ আসে `pyproject.toml`; এর commit এবং build ID একই প্রিভিউ সংস্করণের মধ্যে আপডেটগুলোকে পৃথক করে।
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+নির্দিষ্ট সেই কমিটটি অ্যাপ্লিকেশন এবং নিরাপত্তা যাচাই-বাছাই পাস করার পর এবং স্বাক্ষরিত প্যাকেজটি উবুন্টু সার্ভিস ও উইন্ডোজ পাওয়ারশেল ইনস্টলেশন পরীক্ষা পাস করার পর প্রকাশ স্বয়ংক্রিয়ভাবে সম্পন্ন হয়। যাচাই-বাছাই চলমান থাকা অবস্থায় বা ব্যর্থ হলে, একই কমান্ডগুলো পূর্ববর্তী যাচাইকৃত বিল্ড ইনস্টল করতে থাকে। বিল্ড ম্যানিফেস্ট দেখায় কোন কমিটটি বর্তমানে উপলব্ধ; প্রিভিউ আপডেটের মধ্যে শুধুমাত্র সংস্করণ নম্বর অপরিবর্তিত থাকতে পারে।
 
 আগের মতো একই ইনস্টলেশন ফোল্ডার এবং OS ব্যবহারকারী ব্যবহার করুন। সংগ্রহ বন্ধ রেখে সম্পূর্ণ ডেটা ডিরেক্টরি ব্যাকআপ করুন; `tgwitness paths` এটি সনাক্ত করে। একটি স্বাক্ষরিত এক্সপোর্ট সম্পূর্ণ ইনস্টলেশন ব্যাকআপ নয়।
 

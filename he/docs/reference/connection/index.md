@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/conne
 
 אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [פריסה ושחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![פריסה ושחזור](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 מסמך זה מתאר את התנהגות TgWitness 0.8.0 ואת מגבלותיו. אימות, גישה למקור, קישוריות רשת ושלמות הלכידה הם מצבים נפרדים. לפרטים על שלבי הכניסה, פורמטי קבצים וחשבונות מרובים, התחל בסעיף " [חשבונות ופורמטי הפעלה](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/)". לגבי מדיניות אירועים והתנהגות לאחר הפעלה מחדש, ראה [כיצד פועל תהליך האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/).
 
@@ -123,19 +123,19 @@ MTProxy מעביר תעבורת Telegram בלבד. פעולות HTTP של סבי
 
 ****פרמטרים אוטומטיים של מאגר****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+תחת **פרמטרים → MTProxy אוטומטי**, הגדר את סף הכשל, זמן ההמתנה, הרוטציה המתוכננת, שיתוף הפרוקסי ועיכוב הגיבוי המותר.
 
 | בקרה | ברירת מחדל |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| ניתוק לפני החלפה | 3 בתוך 10 דקות |
+| מספר ה-proxies שנבדקו בכל ניסיון חיבור | 3 |
+| מנוחה ראשונה / מקסימלית לאחר כשל | 10 דקות / 6 שעות |
+| רוטציה מתוכננת | מושבת; הפעל במקרה של כשל |
+| חשבונות לכל פרוקסי | 0: העדיפו ערכים נפרדים, צרו ערכים משותפים במידת הצורך. הגדירו את 1 להמתנה לערך בלעדי. |
+| השהיה לפני מעבר לגיבוי ישיר המותר | 10 דקות; הסתרת הכתובת עדיין מסרבת ל-Direct |
+| בדיקות רענון/העברה של פיד | פרוטוקולים 60/10; ערכי סביבת העבודה הראשית חלים על המאגר המשותף |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+שימוש בפרוקסי שונים אינו מבטיח כתובות יציאה שונות. הגדרות אלה אינן עוקפות את המגבלות של Telegram ואינן מוכיחות אנונימיות.
 
 כדי להחליף את הרשימה הציבורית בקטלוג המפעילים שלך, הגדר את העקיפה שלהלן. פעולה זו מבטלת לחלוטין את המנויים החיצוניים, גם כאשר מערך ה-`proxies` שלו ריק.
 

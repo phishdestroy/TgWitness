@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/archi
 
 [ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![ترقی](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 ایک پائتھن پراسیس FastAPI پینل اور کسی بھی تعداد میں الگ تھلگ ورک اسپیسز کو ہوسٹ کرتا ہے، جن میں سے ہر ایک میں Telethon یوزر اکاؤنٹ کلائنٹ ہوتا ہے۔ SQLite ایک صرف-ضم (append-only) شدہ دستخط شدہ ایونٹ جرنل اور قابلِ تبدیلی آپریشنل ترتیبات کو محفوظ رکھتا ہے۔ ایک انکرپٹڈ والٹ میں API کی تفصیلات، StringSession، اور دستخطی کلید محفوظ ہوتی ہے۔ فرنٹ اینڈ محض بنڈل شدہ HTML/CSS/JavaScript پر مشتمل ہے: Node بلڈ، CDNs، یا فرنٹ اینڈ ڈاؤن لوڈز کی ضرورت نہیں ہے۔
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | مخصوص پینل ایکشنز، دستخط شدہ رسیدیں، مستقل درخواست آئی ڈیز اور ٹاسک-مقامی کال بیک/جوائن ری ٹرائی پالیسی |
 | پیغام_مواد.پی ای وائی | مشاہدہ کے قابل پیغامات کا موازنہ، ٹرانسپورٹ رسائی میٹا ڈیٹا کو خارج کرتے ہوئے |
 | workers.py | منسوخی کی صفائی سے پہلے ایکسپورٹ فائل ورکرز کے مکمل ہونے کا انتظار کریں |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | متوازی چیٹ جابز، فی اکاؤنٹ ریزرویشنز، دستخط شدہ چیک پوائنٹس اور آرکائیو کی تصدیق کے بعد صفائی |
+| distributed_takeout.py / export_timing.py | دوبارہ شروع کیے جانے والے Takeout سیشنز اور ہر آغاز یا دوبارہ شروع کے اوقات |
 | store.py | WAL ٹرانزیکشنز، ترتیب وار واقعہ زنجیر، استفساری فلٹرز، عملیاتی ترتیبات |
 | fulltext.py | مشتق مکمل متن انڈیکس (لفظی اشکال، BM25)، دستخط شدہ جرنل ہیڈ سے منسلک؛ کبھی برآمد نہیں کیا گیا |
 | security.py | نجی فائل کی تخلیق، انکرپٹڈ والٹ، Ed25519 دستخط، سنگل پروسیس لاک |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 ہر ورک اسپیس ایک اکاؤنٹ قبول کرتا ہے اور اس کی اپنی ڈائریکٹری اور دستخطی شناخت ہوتی ہے۔ مطابقت کے لیے مرکزی ورک اسپیس روٹ پر ہی رہتا ہے؛ اضافی ورک اسپیس profiles/<id>/ میں موجود ہوتے ہیں۔ ایک بیئرر ٹوکن پوری تنصیب کو کنٹرول کرتا ہے؛ ورک اسپیس علیحدہ اجازت نامہ یافتہ کرایہ دار نہیں ہیں۔ پروسیس لاکس ڈائریکٹریز کا تحفظ کرتے ہیں؛ ڈیٹا بیس لاکس ایونٹ داخل کرنے کو ترتیب وار انجام دیتے ہیں۔ ہر اپنڈ (append) ایک ساتھ (synchronously) SQLite WAL میں FULL ہم وقت موڈ کے ساتھ کمٹ ہوتا ہے۔ ایونٹ اپ ڈیٹ/ڈیلیٹ ٹریگرز عام ایپلیکیشن ترمیمات کو روکتے ہیں؛ فائل سسٹم کے منتظمین اعتماد کی حد کے اندر رہتے ہیں۔
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+API کی اجازت ایک بیئرر ٹوکن ہے۔ لاگ ان کے عمل ترتیب وار اور وقتی حد کے پابند ہیں۔ اکاؤنٹ اپلوڈز کے لیے ایک مخصوص 12 MiB انکوڈڈ باڈی کی حد اور 8 MiB ڈی کوڈڈ فائل کی حد استعمال ہوتی ہے؛ معمول کے API درخواستوں کے لیے 16 KiB کی حد برقرار رہتی ہے۔ تبدیلی ایک ورکر تھریڈ میں چلتی ہے، اپ لوڈز کو میموری میں رکھتی ہے، اور تصدیق شدہ براؤزر کو معیاری ان پٹ واپس کرتی ہے۔ QR لاگ ان میں ہر ورک اسپیس کے لیے ایک عارضی امیدوار، مختصر مدتی شناختی نام، ایک انتظار کرنے والا ٹاسک، اور واضح منسوخی ہوتی ہے۔ صرف منظور شدہ اجازت ہی فعال کلائنٹ بنتی ہے۔ ٹیلیگرام فلڈ ویٹ (Telegram FloodWait) ایک Retry-After قدر کے ساتھ واپس کیا جاتا ہے؛ اسناد اور خام RPC ایرر پیغامات API کی غلطیوں میں ظاہر نہیں کیے جاتے۔ جرنل ایکسپورٹس ایسنک ایونٹ لوپ کے باہر چلتی ہیں اور ہر ورک اسپیس کے لیے سیریلائز کی جاتی ہیں۔ یہ جاری WAL لکھائی کے ساتھ ایک مستحکم ریڈ سنپ شاٹ اسٹریم کرتی ہیں۔ چیٹ حصول کی جابز الگ الگ اکاؤنٹس پر بیک وقت چل سکتی ہیں؛ ہر اکاؤنٹ اس کی جاب رک جانے تک محفوظ رہتا ہے۔ ایک معطل یا ناکام جاب اپنے چیک پوائنٹس کو برقرار رکھتی ہے۔ کامیاب آرکائیو تصدیق اس کی ورکنگ فائلوں کی صفائی کی اجازت دیتی ہے، جس سے صرف ZIP، دستخط شدہ پلان اور اسٹیٹس باقی رہتا ہے۔ ورک اسپیس کلیکٹرز پروسیس/ایونٹ لوپ کو شیئر کرتے ہیں۔
 
 موجودہ ہسٹری کے سنپ شاٹس اور لائیو اپ ڈیٹس ایک دوسرے میں شامل ہو سکتے ہیں۔ دونوں الگ مشاہدات ہیں، جنہیں ماخذ کے مطابق لیبل کیا گیا ہے؛ ڈپلیکیٹس کو خاموشی سے ضم نہیں کیا جاتا۔ غائب آئی ڈیز، من گھڑی ہوئی حذف شدہ عبارت، زبردستی ممبر کی فہرست سازی، یا خودکار گروپ شمولیت سے کوئی نتیجہ اخذ نہیں کیا جاتا۔
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/analy
 
 Cari pesan yang disimpan, tinjau masukan AI, dan simpan laporan analitis beserta referensi sumbernya.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Penyelidikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Penyelidikan](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

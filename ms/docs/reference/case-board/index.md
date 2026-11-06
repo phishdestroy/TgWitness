@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-
 
 Penanda buku, sorotan tepat, hirisan tindakan, perbincangan, akses terhad dan sejarah anotasi bertandatangan yang digunakan oleh Case Board.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Siasatan](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Case Board memberikan pasukan penyiasatan paparan kerja bersama bagi bahan yang disimpan. Tandakan pemerhatian, sorot petikan tepat, simpan satu siri tindakan, dan bincangkannya dengan rakan sekerja. Kad mengekalkan rujukan sumber dan sejarah semakan yang disahkan. Anotasi pasukan kekal di ruang kerja, boleh dibezakan secara berasingan daripada pemerhatian Telegram asal.
 
@@ -14,13 +14,13 @@ Case Board memberikan pasukan penyiasatan paparan kerja bersama bagi bahan yang 
 
 ![Suapan siasatan sintetik](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**Pada halaman ini**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#operating-limits)
+- [Bekerja dengan satu kes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#work-with-a-case)
+- [Kebenaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#permissions)
+- [Kontrak yang disimpan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#stored-contracts)
+- [API dan eksport](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#api-and-exports)
+- [Had operasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/#operating-limits)
 
 ## Bekerja dengan satu kes
 

@@ -6,7 +6,7 @@ TgWitness ইনস্টল ও চালু করার প্রতিটি
 
 [টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![শুরু করা](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 **ইংরেজি** · [রাশিয়ান](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [ইউক্রেনীয়](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [স্প্যানিশ](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [পর্তুগিজ (ব্রাজিল)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [তুরস্কী](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [আরবি](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [ফার্সি](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [উর্দু](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [হিন্দি](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [ইন্দোনেশীয় ভাষা](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [ভিয়েতনামী ভাষা](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [সরলীকৃত চীনা](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 

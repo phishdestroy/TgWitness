@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/times
 
 Dấu thời gian theo tiêu chuẩn RFC 3161 cho các điểm kiểm tra có chữ ký: những thông tin nào được gửi đến cơ quan có thẩm quyền và cách thức xác minh phản hồi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bằng chứng và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bằng chứng & xác minh](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness chuẩn bị các yêu cầu theo tiêu chuẩn RFC 3161 và xác minh các phản hồi từ Cơ quan Chứng thực Dấu thời gian (TSA). Quy trình thủ công này không thực hiện việc lựa chọn TSA cũng như không gửi dữ liệu; chế độ bằng chứng sẽ thực hiện cả hai tác vụ này theo lịch trình ([định dạng bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Một yêu cầu đã được chuẩn bị **vẫn chưa** phải **là bằng chứng dấu thời gian**.
 

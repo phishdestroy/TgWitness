@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/searc
 
 محفوظ شدہ پیغامات کو لفظی شکلوں، بالکل درست عبارتوں، ڈومینز اور @usernames کی بنیاد پر تلاش کریں، بہترین مماثلتیں پہلے، انڈیکس کو دستخط شدہ جرنل سے منسلک کریں۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تفتیش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![تفتیش](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [آرکائیو تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/) · [مقامی OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/searc
 
 انڈیکس مشتق ڈیٹا ہے۔ یہ دستخط شدہ جرنل سے دوبارہ تیار کیا جاتا ہے، خود کبھی دستخط نہیں کیا جاتا اور کبھی برآمد نہیں ہوتا۔ اصل ریکارڈز میں کوئی تبدیلی نہیں ہوتی۔
 
-**On this page**
+**اس صفحے پر**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#benchmark)
+- [تلاش کی ترکیب](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#search-syntax)
+- [زبانیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#languages)
+- [جہاں انڈیکس موجود ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#where-the-index-lives)
+- [نتائج اور دستخط شدہ جرنل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#results-and-the-signed-journal)
+- [تسلیم شدہ متن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#recognized-text)
+- [رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#access)
+- [آرکائیو اور MCP سے پوچھیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#ask-the-archive-and-mcp)
+- [انحصار](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#dependencies)
+- [بینچ مارک](https://phishdestroy.github.io/TgWitness/ur/docs/reference/search/#benchmark)
 
 ## سرچ سنٹیکس
 
@@ -97,7 +97,7 @@ OCR اور ٹرانسکرپٹس اپنے انکرپٹڈ آرٹیفیکٹس می�
 
 MCP کلائنٹس کال کر سکتے ہیں `search_messages` کے ساتھ `ranked=true` اور صفحہ کے ساتھ `next_offset`. Scoped کنکشنز صرف اپنی چیٹس وصول کرتے ہیں۔
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+درجہ بند صفحہ بندی زیادہ سے زیادہ پہلے 1,000 نتائج کو کور کرتی ہے، قطع نظر صفحے کے سائز کے۔ مزید میچز دیکھنے کے لیے سوال، چیٹ یا مدت کو محدود کریں۔ نئے سے پہلے تلاش پیغامات، OCR اور ٹرانسکرپشن کے نتائج کو ہر صفحہ منتخب کرنے سے پہلے ترتیب دیتی ہے۔
 
 ## انحصار
 

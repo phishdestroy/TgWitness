@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel
 
 Panelning har bir ekrani: suhbatlar, jurnal, manbalar, eksportlar, Extras, himoya rejimlari va kod tekshiruvi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Boshlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Boshlash](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Birinchi sozlash va parametrlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/settings/) · [Hisoblar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) · [Eksport va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Holat hisobotlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/)
 
 Har bir ekran nima qilishini, imzolangan jurnalga nimalarni yozishini va batafsil qo'llanma qaerda ekanligini ko'rsatadi. Panel bir vaqtning o'zida bitta ish maydonini ko'rsatadi: o'z manbalari, jurnali va imzolash kalitiga ega bitta Telegram hisob. Yon panelning yuqori qismidagi selektor ish maydonlarini almashtiradi. Manzil ish maydonini o'zida saqlaydi (`?ws=…`); manzil ish maydonini o'zida saqlaydi ( manzil, selektor va yuklangan hisob bir-biriga to'g'ri kelmasa, harakatlar bloklanib qoladi.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+Jonli kuzatuv, to'liq tarix, yangi hisob/suhbat eksportlari va saqlangan yozuvlarni topshirish o'rtasida tanlash uchun [Eksport usullarini solishtirish](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)dan foydalaning. Eksportlar sahifasi yuklab olish boshqaruvlaridan yuqorida xuddi shu solishtirishni o'z ichiga oladi.
 
-**On this page**
+**Ushbu sahifada**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#more-tools)
+- [Yo'l toping](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#find-your-way)
+- [Mana bu yerdan boshlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#start-here)
+- [Suhbatlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#chats)
+- [Jurnal](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#journal)
+- [Manbalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#sources)
+- [Eksportlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#exports)
+- [Sozlamalar, hisoblar va ulanish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#settings-accounts-and-connection)
+- [Qo'shimchalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#extras)
+- [Himoya rejimlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#protection-modes)
+- [Qo'shimcha vositalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#more-tools)
 
 ## Yo'lingizni toping
 
@@ -92,7 +92,7 @@ Ushbu ish maydoni qaysi suhbatlarni yozib olishini va ulardan nimalarni saqlab q
 - **Manba turlari** papka va butun-akun rejimlarini faqat kanallar, guruhlar, shaxsiy suhbatlar va botlarga cheklaydi. **O'z harakatlari** akunning o'z xabarlari, tahrirlari va javob-klaviatura bosishlarini qo'shadi.
 - **Yangi chat yoki bot paydo bo'lganda**: uning profilini va tanlangan sonigacha bo'lgan eng so'nggi ko'rinadigan xabarlarini saqlang.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Cheklovlar: e'lon qilingan bulutli yig'uvchi Sirli suhbatlarni qabul qilmaydi. Alohida [Pseudo-sirli interfeys va uning demos](https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/)ida rivojlantirish holati hamda bartaraf etilmagan nuqsonlar hujjatlashtirilgan. TgWitness ishlamayotgan paytda hech narsa qayd etilmaydi; qayta ishga tushirilgandan so'ng u faqat Telegram hali ham qaytarayotgan ma'lumotlarni to'playdi va hisobotdagi bo'shliqni ko'rsatadi. Suhbatlar ro'yxati chegarasidan (Parametrlarda o'zgartirilmagan bo'lsa, 1,000 dialog) oshadigan suhbatlar keyingi faollashuvida qo'shiladi. Boshqa ilovada bosilgan inline bot tugmalari ko'rinmaydi; botning javobi qayd etiladi.
 
 ### Doiradagi suhbatlar
 

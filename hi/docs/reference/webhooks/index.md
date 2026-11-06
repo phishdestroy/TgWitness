@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/webho
 
 HMAC हस्ताक्षरों, पुनः प्रयासों और वितरण स्थिति के साथ HTTPS रिसीवरों को स्कोप्ड इवेंट्स भेजें।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [एकीकरण संग्रह](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![एकीकरण संग्रह](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [कार्यप्रवाह मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/docs/archive/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

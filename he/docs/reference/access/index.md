@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/acces
 
 הגדירו את היקף הגישה לחשבונות ולצ'אטים, בחרו הרשאות, הגבלו את משך ההפעלה ואת כתובות ה-IP, ובטלו את הגישה.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [התחלת עבודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![התחלת עבודה](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 הענק למבקר גישה לצ'אט אחד, לאנליסט הרשאה לייצא תיק, או למפעיל שליטה על חשבונות נבחרים. כל אדם מקבל אסימון משלו. האסימון של לוח הבקרה הראשי נשאר בידי המנהל.
 
@@ -110,6 +110,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/acces
 
 ****מנהל ראשי וגבולות האמון****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+אסימון הלוח הראשי נותר ללא הגבלות. כניסות לדפדפן באמצעותו יוצרות הפעלות הכפופות למגבלות ההפעלה שהוגדרו על ידי המנהל. סקריפטים השולחים את האסימון הראשי ישירות שומרים על גישה מלאה ואינם נספרים כהפעלות דפדפן.
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+זוהי בקרת גישה ברמת היישום בהתקנה אחת. כל סביבות העבודה חולקות את תהליך השרת; אין מדובר בבידוד ממנהל המערכת המארח. יש לשמור על פרטיות האסימון הראשי, הפעלות Telegram, מפתחות החתימה וספריית הנתונים. אסימון עד הוא אמצעי אימות נפרד לבדיקת תקינות, ולא אסימון גישה לפאנל.

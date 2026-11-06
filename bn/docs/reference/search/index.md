@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/searc
 
 সigned journal-এ সূচকের সাথে আবদ্ধ ইনডেক্স ব্যবহার করে শব্দরূপ, সঠিক বাক্যাংশ, ডোমেইন এবং @usernames অনুসারে সংরক্ষিত বার্তাগুলো খুঁজুন, প্রথমে সেরা মিলগুলো দেখান।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [তদন্ত](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![তদন্ত](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/) · [স্থানীয় OCR এবং ট্রান্সক্রিপশন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/searc
 
 সূচী হল প্রাপ্ত তথ্য। এটি স্বাক্ষরিত জার্নাল থেকে পুনর্নির্মাণ করা হয়, নিজে কখনো স্বাক্ষরিত হয় না এবং কখনো রপ্তানি হয় না। মূল রেকর্ডগুলো অপরিবর্তিত থাকে।
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#benchmark)
+- [অনুসন্ধান সিনট্যাক্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#search-syntax)
+- [ভাষা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#languages)
+- [যেখানে সূচকটি অবস্থান করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#where-the-index-lives)
+- [ফলাফল এবং স্বাক্ষরিত জার্নাল](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#results-and-the-signed-journal)
+- [স্বীকৃত পাঠ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#recognized-text)
+- [অ্যাক্সেস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#access)
+- [আর্কাইভ এবং MCP-কে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#ask-the-archive-and-mcp)
+- [নির্ভরতা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#dependencies)
+- [বেঞ্চমার্ক](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/#benchmark)
 
 ## অনুসন্ধান সিনট্যাক্স
 
@@ -97,7 +97,7 @@ OCR এবং ট্রান্সক্রিপ্টগুলো তাদ�
 
 MCP ক্লায়েন্টরা কল করতে পারে `search_messages` with `ranked=true` এবং পৃষ্ঠা সঙ্গে `next_offset`. স্কোপড সংযোগগুলো শুধুমাত্র তাদের চ্যাটগুলোই গ্রহণ করে।
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+র‍্যাঙ্কড পেজিনেশন সর্বোচ্চ প্রথম 1,000 ফলাফলই দেখায়, পৃষ্ঠার আকার যাই হোক। আরও মিল খুঁজে দেখতে অনুসন্ধান, চ্যাট বা সময়সীমা সংকীর্ণ করুন। নতুন-প্রথমে অনুসন্ধান প্রতিটি পৃষ্ঠা নির্বাচন করার আগে বার্তা, OCR এবং ট্রান্সক্রিপশন ফলাফলগুলোকে সাজায়।
 
 ## নির্ভরতা
 

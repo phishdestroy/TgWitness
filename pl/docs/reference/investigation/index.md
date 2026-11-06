@@ -6,21 +6,21 @@ Kompleksowe dochodzenia dotyczące całych kont, obejmujące kanały, grupy, cza
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Dochodzenie](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Śledź przebieg sprawy w różnych kanałach, grupach, czatach prywatnych i botach, od momentu pozyskania danych po sporządzenie osi czasu z odniesieniami oraz weryfikowalne przekazanie materiałów. Interaktywna wersja strony internetowej znajduje się pod adresem `/docs/cases/`; [instrukcje dotyczące podglądu](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**Na tej stronie**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#adapt-the-investigation)
+- [Przykład działający: miejsce docelowe zmienia się w czterech rozmowach](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Zdefiniuj przypadek i zebraj pełny opis](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Sporządź spis wszystkich źródeł i zgromadź kontekst historyczny](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Zachować ewoluujący kontekst i celowe interakcje](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Łączenie obserwacji z różnych czatów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Stworzenie osi czasu obejmującej różne czaty](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Dodaj perspektywy kont bez utraty ich pochodzenia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Zbierz i zweryfikuj przekazanie sprawy](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Dostosuj dochodzenie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/#adapt-the-investigation)
 
 ## Przykładowa sprawa: zmiana miejsca docelowego w czterech rozmowach
 
@@ -117,7 +117,7 @@ W przykładzie:
 | Ten sam zapisany plik | Zrealizowano potwierdzenia odbioru plików multimedialnych nr 151 i nr 209 | Pełne wartości SHA-256 są zgodne dla zachowanych bajtów |
 | Źródło kanału | #101 i #188 | Nie należy przypisywać wpisu na kanale użytkownikowi 71001 bez podania nazwy nadawcy |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+Porównaj skróty załączników i powiązane z nimi odniesienia do wiadomości oraz zachowaj osie czasu kont pogrupowane według identyfikatorów Telegramu podanych w tych rekordach.
 
 Zachowaj notatki robocze zespołu w [Case Board](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-board/): dodaj do zakładek zapisy, na których się opierasz, takie jak #146, #188 i #205, zaznacz dokładny ciąg docelowy oraz zapisz fragment każdej zarejestrowanej czynności pomiędzy dwoma zapisami lub w danym przedziale czasowym. Notatki i statusy zachowują przegląd zespołu w osobnej, podpisanej historii, którą można odróżnić od obserwacji źródłowych.
 
@@ -177,6 +177,6 @@ Należy zachować rzeczywiste wyniki weryfikacji oraz oryginalne artefakty. Nale
 | --- | --- | --- |
 | Spór dotyczący zamówienia/płatności obsługiwany przez bota | Ogłoszenie o dodaniu wpisu → podgląd zapisanego linku → parametr uruchamiania bota → wersje wiadomości i klawiatury → potwierdzenia wywołania panelu → dalsze działania dotyczące wiadomości prywatnych/grupowych | Uwzględniono chronologię ofert i odpowiedzi oraz zweryfikowane źródła; sam link do płatności nie stanowi dowodu dokonania płatności |
 | Wiadomości usunięte po zdarzeniu | Wszystkie czaty, których to dotyczy → zapisane oryginały/zmiany → wyniki dotyczące usunięcia lub braku wiadomości przy ponownej weryfikacji → zachowane pliki multimedialne → zakres monitorowania oraz inne perspektywy związane z kontem | Zachowane wersje oraz wyraźnie zaznaczone nieznane przedziały czasowe; brak fikcyjnych podmiotów odpowiedzialnych za usunięcie wiadomości |
-| Uczestnik zmienia imiona w różnych czatach | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Oś czasu aktywności konta w Telegramie wraz z linkami do źródłowych wpisów |
+| Uczestnik zmienia imiona w różnych czatach | Numeryczny identyfikator nadawcy → historia nazw/nazw użytkowników → odpowiedzi → inne obserwowane czaty → cytowane miejsca docelowe/pliki | Oś czasu aktywności konta w Telegramie wraz z linkami do źródłowych wpisów |
 
 [Odniesienie do zbioru](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/) · [Weryfikacja profili osób](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#people-profiles) · [Przekazywanie dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#investigation-handoff) · [Weryfikacja zakończona](https://phishdestroy.github.io/TgWitness/pl/docs/reference/verification/)

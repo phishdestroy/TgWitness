@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/stora
 
 Sao lưu, di chuyển các tệp cũ lên đám mây của bạn, các bản sao được bảo vệ bởi Object Lock và khôi phục trên máy mới.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Triển khai và khôi phục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Triển khai & khôi phục](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Bảng điều khiển này phân chia thành ba tác vụ:
 
@@ -20,13 +20,13 @@ Việc giải phóng dung lượng không bao giờ xóa hoặc ghi đè lên nh
 
 Chỉ riêng phản hồi tải lên không phải là quyền xóa tệp. TgWitness tải xuống toàn bộ đối tượng được mã hóa và xác minh kích thước của nó, SHA-256 lưu biên nhận, sau đó kiểm tra lại các byte cục bộ ngay trước khi xóa. Nếu việc tải lên thất bại, kết quả đọc lại khác hoặc quá trình truyền tải bị hủy, tệp cục bộ sẽ vẫn được giữ nguyên. Nếu bản sao lưu bằng chứng đã được kích hoạt chưa sao chép tệp đó, quá trình xóa cũng sẽ chờ cho đến khi bản sao lưu hoàn tất.
 
-**On this page**
+**Trên trang này**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#operator-bot-and-completion-notices)
+- [Khi đĩa đang đầy](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Kết nối đích](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#connect-a-destination)
+- [Giữ lại tệp khôi phục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#keep-the-recovery-file)
+- [Khôi phục sau khi mất bản cài đặt](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#recover-after-losing-the-installation)
+- [Bot điều hành và thông báo hoàn tất](https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Khi ổ đĩa sắp đầy
 

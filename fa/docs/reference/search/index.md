@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/searc
 
 پیام‌های ذخیره‌شده را بر اساس شکل‌های واژه‌ای، عبارات دقیق، دامنه‌ها و نام‌های کاربری @ پیدا کنید، بهترین تطابق‌ها در اولویت، با شاخص متصل به دفترچهٔ امضا‌شده.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تحقیق](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![تحقیق](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [تحلیل بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/) · [شناسایی نوری حروف (OCR) و رونویسی محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/searc
 
 این شاخص داده‌ای مشتق‌شده است. این شاخص از دفترچهٔ امضا‌شده بازسازی می‌شود، خود هرگز امضا نمی‌شود و هرگز صادر نمی‌گردد. سوابق اصلی تغییر نمی‌کنند.
 
-**On this page**
+**در این صفحه**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#benchmark)
+- [سینتکس جستجو](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#search-syntax)
+- [زبان‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#languages)
+- [محل قرارگیری ایندکس](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#where-the-index-lives)
+- [نتایج و دفترچهٔ ثبت‌شدهٔ امضاشده](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#results-and-the-signed-journal)
+- [متن شناسایی‌شده](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#recognized-text)
+- [دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#access)
+- [از آرشیو و MCP بپرسید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#ask-the-archive-and-mcp)
+- [وابستگی‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#dependencies)
+- [معیار سنجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/#benchmark)
 
 ## سینتکس جستجو
 
@@ -97,7 +97,7 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 کلاینت‌های MCP می‌توانند فراخوانی کنند `search_messages` با `ranked=true` و صفحه با `next_offset`اتصالات محدود‌دامنه تنها چت‌های خود را دریافت می‌کنند.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+پagination رتبه‌بندی‌شده حداکثر شامل اولین 1,000 نتیجه است، صرف‌نظر از اندازه صفحه. برای بررسی نتایج بیشتر، پرس‌وجو، گفتگو یا دوره را محدود کنید. جستجوها بر اساس جدیدترین-ابتدا، پیام‌ها، نتایج OCR و رونویسی را قبل از انتخاب هر صفحه مرتب می‌کنند.
 
 ## وابستگی‌ها
 

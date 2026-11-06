@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-i
 
 ہیш چین، دستخط، چیک پوائنٹس اور گواہوں کی وضاحت ان عین فارمولوں کے ساتھ کی گئی ہے جو تصدیق کنندہ استعمال کرتا ہے۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شواہد اور تصدیق](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![شواہد اور تصدیق](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness وہ سب کچھ محفوظ کرتا ہے جو اکٹھا کرنے والے اکاؤنٹ نے دیکھا، ان مشاہدات کو ایک دستخط شدہ جرنل میں مربوط کرتا ہے اور کسی دوسرے شخص کو ایک معتبر کلید اور پہلے محفوظ کیے گئے چیک پوائنٹ کے خلاف ایکسپورٹ کی تصدیق کرنے دیتا ہے۔
 
 [مقامی دستاویزاتی ویب](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) سائٹ `/docs/concepts/` پر انٹرایکٹو مثالیں، `/docs/witness/` پر ایک چیک پوائنٹ ڈسیژن ایکسپلورر، اور [کیس بورڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/)، [رپورٹ ڈیزائن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/) اور [ہینڈ اوور](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#handover-extract)کے لیے واک تھرو شامل کرتی ہے۔ تمام مثال کے پیغامات، گنتی اور تاخیر فرضی ہیں۔ چین سینڈباکس میں ہیشز براؤزر میں SHA-256 کے ساتھ کیلکولیٹ کیے جاتے ہیں۔ کچھ بھی ٹیلیگرام کو بھیجا نہیں جاتا۔
 
-**On this page**
+**اس صفحے پر**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#pick-a-workflow)
+- [ایک پیغام بدل جاتا ہے؛ مشاہدات جمع ہوتے رہتے ہیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [ہیش کیا کور کرتا ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#what-a-hash-covers)
+- [ایک سابقہ چیک پوائنٹ کیا شامل کرتا ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [جہاں ایک گواہ کا تعلق ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#where-a-witness-belongs)
+- [جانا پہچانا اقدامات کے خلاف ٹیسٹ کی ترسیل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [ایک ورک فلو منتخب کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/#pick-a-workflow)
 
 ## پیغام بدل جاتا ہے؛ مشاہدات جمع ہوتے جاتے ہیں
 

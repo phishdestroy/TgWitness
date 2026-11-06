@@ -44,7 +44,7 @@ DIRETÓRIO DE DADOS
 - **Autoridade de carimbo de data e hora**Opcional · desativado por padrão
 
   Apenas o SHA-256 de um ponto de verificação assinado e um nonce aleatório. Sem mensagens, sem nomes de chat.
-- **Witness**Opcional · desativado por padrão
+- **Testemunha**Opcional · desativado por padrão
 
   Oferece pontos de verificação assinados e contadores de captura por meio de um token somente leitura. Não é capaz de ler conversas nem alterar configurações.
 

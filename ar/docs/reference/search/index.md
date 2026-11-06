@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/searc
 
 ابحث عن الرسائل المحفوظة حسب أشكال الكلمات، والعبارات الدقيقة، والنطاقات، وأسماء المستخدمين @، مع عرض أفضل النتائج أولاً، مع ربط الفهرس بالسجل الموقّع.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![التحقيق](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/) · [التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/searc
 
 الفهرس عبارة عن بيانات مشتقة. يتم إعادة بنائه من السجل الموقّع، ولا يتم توقيعه أبدًا ولا يدخل أبدًا في عملية التصدير. لا تتغير السجلات الأصلية.
 
-**On this page**
+**في هذه الصفحة**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#benchmark)
+- [صيغة البحث](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#search-syntax)
+- [اللغات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#languages)
+- [موقع الفهرس](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#where-the-index-lives)
+- [النتائج والمجلة الموقعة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#results-and-the-signed-journal)
+- [النص المعترف به](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#recognized-text)
+- [الوصول](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#access)
+- [اسأل الأرشيف وMCP](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#ask-the-archive-and-mcp)
+- [التبعيات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#dependencies)
+- [معيار الأداء](https://phishdestroy.github.io/TgWitness/ar/docs/reference/search/#benchmark)
 
 ## صيغة البحث
 
@@ -97,14 +97,14 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 يمكن لعملاء MCP استدعاء `search_messages` من خلال `ranked=true` وإرسال رسائل باستخدام `next_offset`. لا تتلقى الاتصالات المحددة النطاق سوى محادثاتها الخاصة.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+يغطي ترقيم الصفحات المرتبة نتائج 1,000 الأولى كحد أقصى، بغض النظر عن حجم الصفحة. قم بتضييق نطاق الاستعلام أو الدردشة أو الفترة لفحص المزيد من النتائج المطابقة. تعمل عمليات البحث التي ترتب النتائج من الأحدث إلى الأقدم على ترتيب الرسائل ونتائج التعرف الضوئي على الحروف (OCR) ونتائج النسخ قبل اختيار كل صفحة.
 
 ## التبعيات
 
 | الحزمة | الترخيص | لماذا |
 | --- | --- | --- |
 | pymorphy3، pymorphy3-dicts-ru، DAWG2-Python | MIT | المصطلحات الروسية والأوكرانية؛ يتم تحميل القواميس محليًّا |
-| snowballstemmer | BSD-3-Clause | جذور الكلمات باللغة الإنجليزية، لغة Python الخالصة |
+| snowballstemmer | بند BSD-3 | جذور الكلمات باللغة الإنجليزية، لغة Python الخالصة |
 | jieba | MIT | تجزئة الاستعلامات الصينية، بلغة Python الخالصة (توزيع المصدر فقط) |
 | pymorphy3-dicts-uk (اختياري) | GPL-3.0 | قاموس أوكراني كامل |
 

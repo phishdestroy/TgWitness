@@ -73,7 +73,7 @@
     </div>
 
     <section class="workspace wrap" id="workspace" aria-labelledby="workspace-title">
-      <div class="section-heading"><div><p class="eyebrow"><span class="section-index">01</span> THE WORKSPACE</p><h2 id="workspace-title">記録されたすべての変更。必要な場所に、すぐに。</h2></div><p>本物の画面に、架空のデータを入れています。</p></div>
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-index">01</span> ワークスペース</p><h2 id="workspace-title">記録されたすべての変更。必要な場所に、すぐに。</h2></div><p>本物の画面に、架空のデータを入れています。</p></div>
       <div class="switcher" data-tabs aria-label="ワークスペースのスクリーンショット">
         <div class="tab-buttons" data-tab-buttons>
           <button type="button" id="tour-chats" aria-controls="panel-chats">01 <span>保存されたチャット</span></button>
@@ -127,7 +127,7 @@
             <dl class="s3-features">
               <div><dt>クライアント側暗号化</dt><dd><code>AES-256-GCM</code> はあなたのマシン上で動きます。プロバイダーが見るのは暗号文だけです。</dd></div>
               <div><dt>定期的または手動でのコピー</dt><dd>今すぐ、または 1〜1，440 分ごとにコピーし、進行状況はパネルに表示されます。</dd></div>
-              <div><dt>Object Lock</dt><dd>保持日数とモードを選ぶと、実際に適用されたかをパネルが確認します。</dd></div>
+              <div><dt>オブジェクトロック</dt><dd>保持日数とモードを選ぶと、実際に適用されたかをパネルが確認します。</dd></div>
               <div><dt>検証済みの復元</dt><dd>鍵は別に保管してください。どこでも復元でき、ファイルは検証に通ってから出力されます。</dd></div>
             </dl>
             </details>
@@ -173,7 +173,7 @@
     <section class="start wrap" id="start" aria-labelledby="start-title">
       <div class="section-heading"><div><p class="eyebrow">ご自身のマシン上で</p><h2 id="start-title">最初のワークスペースはここから始まります。</h2></div><div class="section-intro"><p>まずデモを試し、準備ができたら予備のアカウントを接続してください。<br>Windows、Linux、macOS、Docker に対応。</p><a class="text-link" href="../demo/guide.html?lang=ja">セットアップガイド「<span aria-hidden="true">→</span>」をご覧ください。</a></div></div>
       <aside class="session-warning" id="session-warning" aria-labelledby="session-warning-title"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><div><strong id="session-warning-title">インポートされたセッションは1つ、実行中のクライアントは1つです。</strong><p>インポートした TData やセッションを Telegram Desktop と TgWitness で同時に動かさないでください。Telegram が両方を無効にすることがあります（AUTH_KEY_DUPLICATED）。両方必要な場合は、電話番号か QR で TgWitness に別途ログインしてください。</p><a href="../demo/guide.html?lang=ja#session-warning">セッションのインポートに関する警告をお読みください</a></div></aside>
-      <div class="demo-callout"><span class="demo-symbol" aria-hidden="true">↗</span><div><strong>接続する前に、ぜひご一読ください。</strong><p>Telegramアカウントがなくても、架空のワークスペースをお試しいただけます。</p><p><a class="demo-link" href="../demo/?lang=ja">オンラインデモを開く →</a></p></div><div class="demo-commands"><span>Windows <code>scripts\Demo.cmd</code></span><span>Linux ／ macOS <code>sh start.sh --demo</code></span></div></div>
+      <div class="demo-callout"><span class="demo-symbol" aria-hidden="true">↗</span><div><strong>接続する前に、ぜひご一読ください。</strong><p>Telegramアカウントがなくても、架空のワークスペースをお試しいただけます。</p><p><a class="demo-link" href="../demo/?lang=ja">オンラインデモを開く →</a></p></div><div class="demo-commands"><span>Windows <code>scripts\Demo.cmd</code></span><span>Linux ／ macOS<code>sh start.sh --demo</code></span></div></div>
       <details class="presentation-details installation-details"><summary>ローカルインストール用コマンド</summary>
       <div class="start-layout">
         <div class="start-intro"><span class="step-label">ステップ 01</span><h3>ソースを入手する。</h3><p><a class="download-link" href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">ソースのZIPファイルをダウンロードして</a>解凍するか、リポジトリをクローンしてください：</p><div class="code-block"><pre><code id="clone-command">git clone https://github.com/phishdestroy/TgWitness.git

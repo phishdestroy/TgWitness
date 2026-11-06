@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/
 
 MCP mijozini tanlangan ish maydonlari va suhbatlarga muddati tugaydigan, bekor qilinishi mumkin bo'lgan kirish huquqi bilan ulashing.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Arxiv integratsiyalari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Arxiv integratsiyalari](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Analitik klientni tanlangan ish maydonlari va suhbatlarga ulang. TgWitness **panel jarayonida `/mcp` manzilida Streamable HTTP xizmatini** taqdim etadi. Har bir ulanishning o'z tokeni, amal qilish muddati va ruxsat etilgan vositalari mavjud. MCP Telegram xabarlarini yubora olmaydi, sozlamalarni o'zgartira olmaydi yoki imzolangan jurnalni tahrir qila olmaydi. Xuddi shu ulanishlar [buyruq qatori](https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/) bilan ham ishlaydi.
 
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**Ushbu sahifada**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#connect-your-client)
+- [O'rnatish va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#install-and-check)
+- [Ulanishni o'rnatish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#issue-a-connection)
+- [Klientingizni ulang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#tools-and-boundaries)
+- [Vositalar va chegaralar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/#tools-and-boundaries)
 
 ## O‘rnatish va tekshirish
 
@@ -57,12 +57,12 @@ Panelda mijozni tanlang va yaratilgan konfiguratsiyani nusxalab oling. Konfigura
 
 | Mijoz | Konfiguratsiya | Ulanish |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, bearer sarlavhasi |
+| Klaud Kod | `.mcp.json` | HTTP, `type: "http"`, bearer sarlavhasi |
 | Claude Desktop | `claude_desktop_config.json` | Lokal stdio ko‘prigi |
 | Cursor | `.cursor/mcp.json` | Muhit o‘zgaruvchisi sarlavhasiga ega HTTP |
-| VS Code Local | `.vscode/mcp.json` | Parolli `promptString` kiritmasiga ega HTTP |
+| VS Code mahalliy | `.vscode/mcp.json` | Parolli `promptString` kiritmasiga ega HTTP |
 | Windsurf | `mcp_config.json` | Bearer sarlavhasi o‘rinbosariga ega HTTP |
-| Boshqa mijozlar | URL va Authorization sarlavhasi | Streamable HTTP |
+| Boshqa mijozlar | URL va Authorization sarlavhasi | Oqimga bo'linadigan HTTP |
 
 TgWitness OAuth aniqlashisiz bearer tokenlardan foydalanadi. Masofaviy ulagichi OAuth talab qiladigan mijozlar uchun lokal stdio ko‘prigidan foydalaning. VS Code uchun kiritish o‘zgaruvchilari **Local** muhitiga taalluqli bo‘lib, Copilot sessiyalariga uzatilmaydi. Konfiguratsiya bo‘yicha ma’lumotnomalar: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

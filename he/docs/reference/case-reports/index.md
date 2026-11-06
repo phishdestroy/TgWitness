@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 מסנני דוחות, שמונה עיצובים, הגדרות קבועות מראש לתוכן, היסטוריית שינויים שנשמרה וההערכה הכלולה בייצואים חתומים.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![חקירה](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 הפכו את התצפיות שנבחרו לתיאור קריא של המקרה: השאלה, היקף החקירה, השינויים שנשמרו, התרשימים, הממצאים והפניות למקורות. כל דוח מספק למקבל דרך לבדוק את החומר שנמסר ולבחון את היקף האיסוף שלו.
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 תצוגה מקדימה של הנתונים סופרת את קידומת היומן היציבה המלאה, ולא מדגם ראשוני. רק שורות הדוגמה המוצגות ורשימות ארוכות מוגבלות; ספירת הנתונים שהושמטו מוצגת. ייצוא מאוחר יותר לוקח תמונת מצב יציבה חדשה, ולכן איסוף מתמשך עשוי להגדיל את המספרים. ההיקף, הספירות וזהות המקור כלולים ב הדוח החתום. פתיחת הטופס או הצגתו בתצוגה מקדימה אינן שומרות אותו.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**הנחיות בנושא תחום שיפוט.** תחת פרטי המסמך, פתחו את **הנחיות בנושא תחום שיפוט · אופציונלי** כדי לבחור תחום שיפוט והליך אזרחי/מסחרי או פלילי. הנספח מכיל את הבסיס המשפטי, קישורי המקור, הערות הכנה ומצב המחקר. סיכומים והסברים בשפה המקומית על אמצעי הגנה על איסוף הנתונים הם אופציונליים. לא נבחרה שיפוט כברירת מחדל. בחירות אלה שייכות לסביבת העבודה, והן אינן נכללות בתצורות הפריסה השמורות ובברירות המחדל המרומזות לשיתוף והעתקה. ראו [ברירות מחדל, דוחות נתמכים ומגבלות מחקר](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **יש לבחור את הגרסה המיועדת למקבל.** התרשימים והתמליל משתמשים ברשומות שנבחרו. שלמות, שמירה וכיסוי מתארים את יומן המקור המלא. קובץ ה-ZIP של הראיות מכיל את הרשומות המקוריות והנספחים. יש להשתמש [בהעברה מצומצמת](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract) כאשר על המקבל לקבל רק נתונים נבחרים ומותרים.
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-
 
 כאשר הוא כלול, הקובץ `analytics.json` מוגן על ידי חתימות ה-hash של הארכיון. הקובץ `report.json` משלב את אותו סיכום נבחר. אימות החתימה מזהה ביטים ששונו. כדי לבדוק את הנתונים, יש לחשב מחדש את הסיכומים של ה-journal באמצעות `report_analytics.Analytics` ו-`selected`, או את הסיכומים של ה-snapshot באמצעות `snapshot_analytics.collect` ו-`project`.
 
-### Anomaly indicators
+### אינדיקטורים לחריגות
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**תצוגה מקדימה.**דוחות ראיות מוסיפים סעיף **אינדיקטורים לחריגות** המחושב על ידי מעבדים רשומים (`tgwitness/metrics/`, קובץ אחד לכל מדד). הדוח מציין את כל המעבדים שהפעילו את התוכנה עם גרסתם, ומציג את השיטה שלהם מתחת לטבלה, כך ש ניתן לחזור על החישוב מ-`events.jsonl` באמצעות `tgwitness.metrics.run`.
 
-| Processor | מה הוא מציג |
+| מעבד | מה הוא מציג |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` גרסה 1 | מפרסמים חדשים והודעות ליום לפי UTC. דרישה לדגל כוללת לפחות חמישה מפרסמים חדשים ופי שלושה מהחציון שלהם, כאשר נפח ההודעות אינו עולה על פי 1.5 מהחציון. קו הבסיס משתמש בלפחות שבעה ימים שנצפו מתוך 14 הימים הקלנדריים הקודמים, לאחר שבעה ימי חימום. |
+| `service_vs_message_ratio` גרסה 1 | יש להבחין בין מספרי ההודעות השמורות לכל צ'אט לבין החלק המשמש להודעות שירות. התיאור מתייחס לשיטת המספור; הוא אינו מסביר את הסיבה להיעדר מספר מסוים. |
+| `join_leave_per_month` גרסה 1 | הצטרפויות, עזיבות והסרות או חסימות לפי חודש, אחת לכל אדם, צ'אט, שינוי ויום. |
+| `pinned_per_month` גרסה 1 | הודעות שירות מוצמדות, הודעות על הסרת הצמדה, והודעות מוצמדות שנוספו או הוסרו בין תמונות מצב של הצ'אט, לפי חודש. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**פרמטרים → מדדי דוח** בוחר מעבדים ואת מספר השורות המוצגות, כולל בדוחות מסוננים. טבלאות יומיות וחודשיות מציגות שורות אחרונות, טבלאות חלוקת שירות מדרגות צ'אטים לפי מספר ההודעות השמורות. הסכומים כוללים כל שורה.
 
 מתוך גרסת המקור, צרו את כל שמונה העיצובים המפורטים לעיל מאותו כתב עת בדיוני:
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. יש לשמור על קבצי ה-ZIP המקוריים ועל חתימות ה-hash שלהם. יש לתעד כל מחזיק, העברה, תאריך ומטרה. יש לשמור יחד איתם את הצהרות המפעילים המיוחסות ואת הערות התיק.
 5. במקרה של הודעות קוליות חסויות, יש לשמור ולאמת באופן עצמאי את הציטוט, האתגר, שרשרת האישורים של Intel, המדידות, המקור המדויק ותנאי הטיפול במפתחות. יש לשמור את תוצאת אימות האישור יחד עם הממצאים שנבדקו.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+ראו [היקף האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) לבדיקות הרכישה, שלמות הארכיון, הזמן והיקף האיסוף בכל מצב.
 
 ## בדיקה על ידי הנמען
 

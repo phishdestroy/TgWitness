@@ -25,7 +25,7 @@ Un nouveau message, une modification et une suppression deviennent trois entrée
 
 01 / PARCOURS DU MESSAGESéquence illustrative
 
-Telegram delivers an update to the collector, which appends a journal record. · Telegram · Collector · Journal · mise à jour → · ajouter →
+Telegram delivers an update to the collector, which appends a journal record. · Telegram · Collecteur · Journal · mise à jour → · ajouter →
 
 AFFICHAGE ACTUEL DE LA CONVERSATION Message n° 42
 

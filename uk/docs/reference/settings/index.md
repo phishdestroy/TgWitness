@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/setti
 
 Майстер налаштування, цілі, рівні інтерфейсу, маршрути підключення та налаштування, спільні для групи облікових записів.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Початок роботи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Початок роботи](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Акаунти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/) · [Зв’язок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/) · [Доступ](https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/)
 

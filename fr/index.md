@@ -141,7 +141,7 @@ Copies programmées ou manuelles
 
 Copiez maintenant ou toutes les 1 à 1 440 minutes， avec la progression dans le panneau．
 
-Object Lock
+Verrouillage d＇objet
 
 Choisissez les jours et le mode de rétention ； le panneau vérifie que c＇est bien appliqué．
 
@@ -159,7 +159,7 @@ Journal et médias`AES-256-GCM`Stockage compatible S3
 
 **Clé de récupération** Gardez－la à part ： sans elle， la copie est illisible．
 
-### Notifications · Apprise
+### Notifications · Informer
 
 Problèmes， changements dans les chats et résumé quotidien vers messageries， e－mail ou votre propre webhook．
 

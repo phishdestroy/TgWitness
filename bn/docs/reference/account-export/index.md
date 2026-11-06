@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/accou
 
 এখন একটি অ্যাকাউন্ট যা পড়তে পারে তা রপ্তানি করুন: স্কোপ, পুনরায় চালানো যাবে এমন কাজ, স্বাক্ষরিত আর্কাইভ এবং মিনিমাইজড শেয়ারিং কপি।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [প্রমাণ এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![প্রমাণ ও যাচাইকরণ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 অ্যাকাউন্ট রপ্তানি সেই অ্যাকাউন্টকে এককভাবে সংরক্ষণ করে। শুরু বা আবার চালানোর আগে পর্যবেক্ষণ বা অন্য সংগ্রহ স্পষ্টভাবে সাময়িক বন্ধ করুন; অ্যাপ কখনো সেগুলো নিজে বন্ধ করে না।
 
@@ -16,11 +16,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/accou
 
 এই ওয়ার্কফ্লো সংযুক্ত অ্যাকাউন্টে বর্তমানে অ্যাক্সেসযোগ্য ডেটা রপ্তানি করে। ডিফল্ট হিসেবে [Telegram Takeout](https://core.telegram.org/api/takeout) ব্যবহার করা হয়; এটি অনুপলব্ধ বা মুছে ফেলা Telegram ডেটার ব্যাকআপ নয়। গোপন চ্যাট, অ্যাক্সেসযোগ্য নয় এমন ইতিহাস এবং পূর্বের সম্পাদনা পুনরুদ্ধার করা হয় না। Telegram Takeout শুরু হওয়ার আগে একটি অপেক্ষার সময় আরোপ করতে পারে। প্যানেল সেই অপেক্ষা প্রদর্শন করে; এটি নীরবে পরিবহন পরিবর্তন করে না। স্পষ্ট regular-API বিকল্পের কভারেজ ভিন্ন এবং এটি অ-সমর্থিত বিভাগগুলিও রেকর্ড করে।
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout হল অফিসিয়াল এক্সপোর্ট API যা Telegram Desktop-এও ব্যবহৃত হয়। TgWitness সরাসরি তার নিজস্ব সংগ্রহ থেকে ডেস্কটপ-সামঞ্জস্যপূর্ণ JSON লিখতে পারে; অন্য কারো আর্কাইভ আমদানি করার প্রয়োজন নেই। চ্যাট এবং মেসেজ আইডি উভয় ট্রান্সপোর্টই উপলব্ধ। পাবলিক চ্যাট বা ফরওয়ার্ড করার অনুমতি দ্রুত এক্সপোর্ট নিশ্চিত করে না বা Takeout-এর অনুমোদন বিলম্ব দূর করে না। গতি তুলনা করার আগে একই পরিসর এবং মিডিয়া সেটিংস পরিমাপ করুন।
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+20টি স্পষ্টভাবে নির্বাচিত চ্যাট আইডি পর্যন্ত, নিয়মিত-API রপ্তানি সেই পিয়ারগুলোকে সরাসরি সমাধান করে অ্যাকাউন্টের সম্পূর্ণ ডায়ালগ ইনভেন্টরি বিবেচনা করার আগে। একটি পাঠযোগ্য পাবলিক চ্যানেল তাই এতে যোগ না করেই রপ্তানি করা যেতে পারে, এমনকি এটি ডায়ালগ তালিকায় অনুপস্থিত থাকলেও। ক্যাশ না করা পিয়ারগুলো সাধারণ ইনভেন্টরিতে ফিরে যায়। আর্কাইভ ফিল্টার বলবৎ থাকে: যদি টেলিগ্রাম কোনো ডায়ালগ ফেরত না দেয় এবং আর্কাইভকৃত চ্যাটগুলো বাদ দেওয়া হয়, তাহলে অজানা আর্কাইভ স্ট্যাটাসকে বাদ দেওয়া হিসেবে রেকর্ড করা হয়। টেকআউট তার স্প্লিট-রেঞ্জ ইনভেন্টরি পদ্ধতি বজায় রাখে। কোনো পথই চ্যাট যুক্ত করে না বা ফরওয়ার্ডিং অনুমতি পরিবর্তন করে না। ডেস্কটপ-সামঞ্জস্যপূর্ণ JSON-এ, টেলিগ্রাম যেসব চ্যানেলকে `left` হিসেবে চিহ্নিত করে, সেগুলো `left_chats`-এর অধীনে প্রদর্শিত হয়, এতে সেইসব পাঠযোগ্য পাবলিক চ্যানেলও অন্তর্ভুক্ত থাকে যেগুলোতে অ্যাকাউন্টটি যোগদান করেনি।
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+`FLOOD_WAIT` এবং `FLOOD_PREMIUM_WAIT` উভয়ই সার্ভার-অনুরোধকৃত পূর্ণ সময়ের জন্য অনুরোধগুলিকে বিরতি দেয়। অ্যাকাউন্টের সময়সীমা পুনঃসংযোগ এবং পুনঃশুরুতেও বজায় থাকে; পরবর্তীতে স্বল্প সময়ের অপেক্ষা এটিকে সংক্ষিপ্ত করতে পারে না। পুনঃচেষ্টা সীমাবদ্ধ, বাতিলকরণ সিল করা পৃষ্ঠাগুলি সংরক্ষণ করে, এবং API শংসাপত্রগুলি রেট লিমিট এড়াতে ঘুরানো হয় না। কোনো প্রিমিয়াম কেনা হয় না।
 
 ## সংগৃহীত হবে এমন তথ্য নির্বাচন করুন
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 প্রোফাইল-ছবির ইতিহাস এবং স্টোরিগুলো ডিফল্টভাবে নির্বাচিত হয় না। যখন কেসে শুধুমাত্র বার্তা প্রয়োজন, তখন প্রোফাইল এবং যোগাযোগও নিষ্ক্রিয় করুন। যদি সংযুক্তি বা মেটাডেটা অপ্রয়োজনীয় হয়, সংগ্রহের সময় সেগুলো বাদ দিলে এই রপ্তানিতে আরেকটি ব্যক্তিগত অনুলিপি সংরক্ষণ এড়ানো যায়।
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+ফটো পেলোডগুলো তাদের মেটাডেটা এবং হ্যাশ ম্যানিফেস্টে চিহ্নিত স্থির-চিত্র ভ্যারিয়েন্ট ব্যবহার করে, যার মধ্যে অ্যানিমেটেড অবতার ভ্যারিয়েন্টসহ ছবিও রয়েছে। সেই অ্যানিমেশনটি নির্বাচিত স্থির চিত্রের বিকল্প হিসেবে ব্যবহার করা হয় না। পর্যবেক্ষিত আকারের তুলনায় ছোট বা বড় পেলোডকে ব্যর্থ সংযুক্তি হিসেবে রেকর্ড করা হয়, এবং ফাইল-রেফারেন্স নবায়নের সময় পরিবর্তিত উপস্থাপনা প্রত্যাখ্যাত হয়। এই ব্যর্থতাগুলো আর্কাইভকে আংশিক রেখে দেয়, তবে বার্তা রেকর্ডগুলো সংরক্ষিত রাখে। স্বতন্ত্র যাচাইকরণ সঞ্চিত সংযুক্তিগুলিকেও প্রত্যাখ্যান করে, যখন স্বাক্ষরিত দৈর্ঘ্য তাদের পর্যবেক্ষিত আকার বা উপস্থাপনার সাথে বিরোধপূর্ণ হয়, এমনকি পুরনো সংরক্ষণাগারেও।
 
 ## রিজ্যুম, কভারেজ এবং যাচাইকরণ
 
@@ -97,8 +97,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## শেয়ারিং এবং হোস্টেড ক্যাপচার
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+প্রাপ্তকারী যে বার্তা ও ফাইলগুলো প্রয়োজন তা নির্বাচন করুন, সম্পূর্ণ শেয়ারকৃত কপি পর্যালোচনা করুন, এবং উৎস আলাদাভাবে সংরক্ষণ করুন। প্রেরিত ZIP-এর হ্যাশ রেকর্ড করুন যাতে প্রাপ্তকারী সেই নির্দিষ্ট কপিটি সনাক্ত ও যাচাই করতে পারে। ছদ্মনামকরণ নির্বাচিত শনাক্তকারীগুলোকে প্রতিস্থাপন করে; অন্তর্ভুক্ত টেক্সট ও মূল ফাইলগুলো পর্যালোচনার অংশ হিসেবে থাকে।
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope).
+GitHub Actions Takeout বা নিয়মিত API-এর মাধ্যমে পূর্ণ-অ্যাকাউন্ট এবং নির্বাচিত-চ্যাট এক্সপোর্ট সমর্থন করে, পাশাপাশি একটি একক-চ্যাট ইভেন্ট জার্নাল। [হোস্টেড ক্যাপচার গাইডে](https://phishdestroy.github.io/TgWitness/docs/capture/) সেটিংস যাচাইকরণ এবং 120 মিনিটের সীমা ব্যাখ্যা করা হয়েছে। হোস্টেড ক্যাপচার থেকে প্রাপ্ত শেয়ারিং কপি যাচাই করতে, এর সোর্স হ্যাশ মূল আর্কাইভের সাথে মিলিয়ে দেখুন এবং সেই আর্কাইভের প্রত্যয়ন [মোড-নির্দিষ্ট চে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope)কের মাধ্যমে যাচাই করুন।
 
 [প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/) · [কেস রিপোর্টসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)

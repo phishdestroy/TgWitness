@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/showc
 
 Publica mensajes guardados de canales públicos seleccionados e instantáneas firmadas a través de enlaces caducables y revocables.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implementación y recuperación](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementación y recuperación](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **«Acceso → Vitrina pública»** crea una página independiente de solo lectura utilizando el sistema de tokens de acceso existente. Lee las observaciones guardadas de la instalación. No inicia un recopilador, ni inicia sesión en Telegram, ni adquiere un canal para un visitante.
 

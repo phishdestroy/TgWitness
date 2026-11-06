@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel
 
 هر صفحه از پنل: چت‌ها، دفترچه یادداشت، منابع، خروجی‌ها، موارد اضافی، حالت‌های حفاظتی و بررسی کد.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کار](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [راه‌اندازی اولیه و تنظیمات](https://phishdestroy.github.io/TgWitness/fa/docs/reference/settings/) · [حساب‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/) · [صادرات و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [گزارش‌های موردی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)
 
 هر صفحه چه کاری انجام می‌دهد، چه چیزی را به دفترچه یادداشت امضا‌شده می‌نویسد و راهنمای دقیق در کجا قرار دارد. پنل هر بار یک فضای کاری را نشان می‌دهد: یک حساب تلگرام با منابع، دفترچه یادداشت و کلید امضای مخصوص به خود. انتخابگر در بالای نوار کناری، فضاهای کاری را جابجا می‌کند. آدرس، فضای کاری را در خود حمل می‌کند (`?ws=…`)؛ در حالی که آدرس، انتخابگر و حساب بارگذاری‌شده با هم اختلاف دارند، اقدامات مسدود باقی می‌مانند.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+برای انتخاب بین مشاهده زنده، تاریخچه کامل، خروجی‌های تازه حساب/چت و تحویل سوابق ذخیره شده، از [مقایسه روش‌های جمع‌آوری](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) استفاده کنید. صفحه خروجی‌ها شامل همین مقایسه در بالای کنترل‌های دانلود خود است.
 
-**On this page**
+**در این صفحه**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#more-tools)
+- [راه خود را پیدا کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#find-your-way)
+- [از اینجا شروع کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#start-here)
+- [چت‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#chats)
+- [مجله](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#journal)
+- [منابع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#sources)
+- [خروجی‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#exports)
+- [تنظیمات، حساب‌ها و اتصال](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#settings-accounts-and-connection)
+- [اضافه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#extras)
+- [حالت‌های محافظت](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#protection-modes)
+- [ابزارهای بیشتر](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#more-tools)
 
 ## راه خود را بیابید
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **انواع منبع** حالت‌های پوشه و کل حساب را به کانال‌ها، گروه‌ها، چت‌های خصوصی و ربات‌ها محدود می‌کنند. **«اقدامات خود** حساب» پیام‌ها، ویرایش‌ها و فشارهای صفحه‌کلید پاسخ‌دادنِ خودِ حساب را اضافه می‌کند.
 - **وقتی یک چت یا ربات جدید ظاهر می‌شود**: پروفایل آن و تا تعداد انتخاب‌شده از جدیدترین پیام‌های قابل مشاهده‌اش را ذخیره کنید.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/fa/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+محدودیت‌ها: کلکسیونر ابری منتشرشده، گفتگوهای مخفی را دریافت نمی‌کند. [رابط نیمه‌مخفی جداگانه و دمو آن](https://phishdestroy.github.io/TgWitness/fa/docs/reference/secret-chats/) به همراه وضعیت توسعه و نقص‌های باقی‌مانده‌شان مستندسازی شده‌اند. هیچ چیزی در حالی که TgWitness در حال اجرا نیست، ثبت نمی‌شود؛ پس از راه‌اندازی مجدد، فقط مواردی را که تلگرام همچنان برمی‌گرداند، ثبت می‌کند و گزارش این شکاف را نشان می‌دهد. گفتگوهایی که از حد مجاز لیست گفتگوها فراتر هستند (1,000 مکالمه مگر اینکه در پارامترها تغییر داده شود) هنگام فعال شدن بعدی اضافه می‌شوند. دکمه‌های بات درون‌خطی که در اپلیکیشن دیگری فشرده می‌شوند، نامرئی هستند؛ پاسخ بات ثبت می‌شود.
 
 ### چت‌های در محدوده
 

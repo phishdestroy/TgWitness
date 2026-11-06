@@ -6,7 +6,7 @@ Suchen, Kontext lesen, Aktivitäten zählen und gespeicherte Nachrichten aus Skr
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Archiv-Integrationen](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [Schreibgeschütztes MCP](https://phishdestroy.github.io/TgWitness/de/docs/reference/mcp/) · [Volltextsuche](https://phishdestroy.github.io/TgWitness/de/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ Ein Remote-Panel benötigt HTTPS; einfaches HTTP wird nur für `127.0.0.1`, `loc
 
 Datumsangaben erfolgen `2026-10-01` (UTC-Mitternacht) oder ISO-Zeiten mit Zeitzone `2026-10-01T09:00+03:00`. Für `search`, `messages` und `export` wählen sie den Beobachtungszeitpunkt. Seiten fassen bis zu 50 Datensätze: Befolgen Sie `next_offset` (`--offset`) für die rangierte Suche und `next_before` (`--before`) an anderer Stelle.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+Die rangbasierte Suche endet bei 1,000 Ergebnissen. Die letzte Seite kann kürzer sein als `--limit`; schränken Sie die Abfrage, den Chat oder den Zeitraum ein, wenn mehr passende Beobachtungen vorhanden sind.
 
 Jedes Nachrichtenergebnis enthält `untrusted_content: true`den Arbeitsbereich, den Chat und die Nachrichten-IDs, die Protokollsequenz, den Hash des gespeicherten Datensatzes und einen Panel-Link. Bearbeitungen, Löschhinweise und `missing_on_recheck` sind separate Datensätze. Das Fehlen eines Datensatzes bedeutet nicht, dass ein Ereignis nie stattgefunden hat.
 
@@ -76,7 +76,7 @@ Der Zeitraum bezieht sich auf **die von Telegram gemeldete Zeit der Nachricht**.
 
 Ein Export über das Panel erfordert eine Verbindung, die **den Export von Nachrichten** zulässt **(nur über die Befehlszeile)**; diese Option ist standardmäßig nicht ausgewählt. Diese Datei ist eine Arbeitskopie und kein Beweismittel: Für eine überprüfbare Übergabe verwenden Sie den signierten Export unter **„Exporte“**, der `python -m tgwitness.verify`überprüft wird.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+Das Panel überprüft den Zugriff vor der Ausgabe jedes Datensatzes erneut, einschließlich des Abschlussdatensatzes. Ein widerrufener oder abgelaufener Zugriff führt zu einem unvollständigen Export. Lazy-Page-Lesevorgänge teilen sich das Limit der Archiv-Worker mit anderen Abfragen und unterliegen einer begrenzten Wartezeit.
 
 ## Agent-Fähigkeit
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 設定精靈、目標、介面層級、連線路徑，以及由帳戶群組共享的設定。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [開始使用](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![開始使用](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [帳戶](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/) · [連結](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/) · [存取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)
 

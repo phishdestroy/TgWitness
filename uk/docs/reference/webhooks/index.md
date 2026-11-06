@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/webho
 
 Надсилайте визначені події на HTTPS-приймачі з HMAC-підписами, повторними спробами та статусом доставки.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Інтеграції з архівами](https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Інтеграції з архівами](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [Посібник з організації робочого процесу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

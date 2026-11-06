@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/searc
 
 Знайдіть збережені повідомлення за формами слів, точними фразами, доменами та @іменами користувачів, з найкращими збігами на початку, з індексом, прив’язаним до підписаного журналу.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Розслідування](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Розслідування](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Аналіз архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/) · [Локальне розпізнавання тексту та транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/) · [Вікі](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/searc
 
 Індекс є похідними даними. Він відтворюється на основі підписаного журналу, сам ніколи не підписується і ніколи не потрапляє до експорту. Оригінальні записи не змінюються.
 
-**On this page**
+**На цій сторінці**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#benchmark)
+- [Синтаксис пошуку](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#search-syntax)
+- [Мови](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#languages)
+- [Де знаходиться індекс](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#where-the-index-lives)
+- [Результати та підписаний журнал](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#results-and-the-signed-journal)
+- [Розпізнаний текст](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#recognized-text)
+- [Доступ](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#access)
+- [Запитайте в архіві та MCP](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#ask-the-archive-and-mcp)
+- [Залежності](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#dependencies)
+- [Бенчмарк](https://phishdestroy.github.io/TgWitness/uk/docs/reference/search/#benchmark)
 
 ## Синтаксис пошуку
 
@@ -97,14 +97,14 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 Клієнти MCP можуть викликати `search_messages` за допомогою `ranked=true` , а для перегляду сторінок — `next_offset`. З'єднання з обмеженим доступом отримують лише свої чати.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Нумерація сторінок за рейтингом охоплює щонайбільше перші 1,000 результатів, незалежно від розміру сторінки. Звузьте запит, чат або період, щоб переглянути інші збіги. Пошук спочатку найновіші сортує повідомлення, результати OCR та транскрипції перед вибором кожної сторінки.
 
 ## Залежності
 
 | Пакет | Ліцензія | Чому |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | Російські та українські леми; словники завантажуються локально |
-| snowballstemmer | BSD-3-Clause | Англійські основи слів, чистий Python |
+| snowballstemmer | Положення BSD-3 | Англійські основи слів, чистий Python |
 | jieba | MIT | Сегментація китайських запитів, написано на чистому Python (лише дистрибутив вихідного коду) |
 | pymorphy3-dicts-uk (опціонально) | GPL-3.0 | Повний український словник |
 

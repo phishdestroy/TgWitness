@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-i
 
 Rantaian hash, tandatangan, titik pemeriksaan dan saksi dijelaskan dengan formula tepat yang digunakan oleh pengesah.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bukti dan pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bukti & pengesahan](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness mengekalkan apa yang diperhatikan oleh akaun pengumpul, memautkan pemerhatian tersebut ke dalam jurnal yang ditandatangani dan membolehkan pihak lain mengesahkan eksport tersebut terhadap kunci yang dipercayai dan checkpoint yang telah disimpan sebelum ini.
 
 [Laman web dokumentasi tempatan](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) menambah contoh interaktif di `/docs/concepts/`, penjelajah keputusan checkpoint di `/docs/witness/`, dan panduan langkah demi langkah untuk [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/), [reka bentuk laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/) dan [ekstrak penyerahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#handover-extract). Semua mesej contoh, kiraan dan kelewatan adalah rekaan. Hashes dalam sandbox rantaian dikira dengan SHA-256 dalam pelayar. Tiada apa yang dihantar ke Telegram.
 
-**On this page**
+**Pada halaman ini**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#pick-a-workflow)
+- [Satu mesej berubah; pemerhatian terkumpul](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Apa yang dilindungi oleh hash](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#what-a-hash-covers)
+- [Apa yang ditambah oleh titik pemeriksaan awal](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Di mana saksi itu berada](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Uji penghantaran terhadap tindakan yang diketahui](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Pilih aliran kerja](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Satu mesej berubah; pemerhatian terkumpul
 

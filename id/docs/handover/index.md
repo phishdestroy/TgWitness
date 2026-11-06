@@ -57,7 +57,7 @@ Sebuah paket terpisah yang terhubung dengan batas jurnal sumbernya
 | Orang | Orang yang dipilih tetap bernama; yang lain mendapat nama samaran atau dikeluarkan. |
 | Teks | Semua teks, hanya teks orang yang dipilih dan akun Anda, atau tidak ada. |
 | Berkas | Berkas orang yang dipilih dan akun Anda, semua berkas yang ditampilkan, atau tidak ada. |
-| Case Board | Tidak ada, penanda dan potongan, atau kartu dengan diskusi. |
+| Papan Kasus | Tidak ada, penanda dan potongan, atau kartu dengan diskusi. |
 
 Baca juga teks dan berkasnya: nama samaran tidak menghapus nama yang tertulis di dalam pesan atau lampiran. Jika berkas yang dipilih hilang, pulihkan atau keluarkan lampirannya.
 

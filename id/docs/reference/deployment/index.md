@@ -6,7 +6,7 @@ Jalankan TgWitness sebagai layanan di Windows, Linux, macOS, atau Docker, melalu
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Penerapan & pemulihan](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Bahasa Inggris** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ukraina](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Bahasa Turki](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Hindi](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Bahasa Vietnam](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Bahasa Mandarin (Sederhana)](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Setiap Rilis GitHub menyertakan `TgWitness-<version>-windows-amd64-portable.zip`
 | `TgWitness-Demo.cmd` | Jalankan demo sintetis di `data\demo` |
 | `TgWitness-Check.cmd` | Jalankan pemeriksaan kesiapan tanpa memulai |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Kamus morfologi bahasa Rusia yang disematkan dan profil warna PDF disertakan untuk penggunaan offline. Pengemasan hanya mengizinkan jalur file yang diketahui di dalam direktori dependensi `data`; file yang tidak terduga di direktori tersebut akan menyebabkan proses build gagal.
 
 Ekstrak seluruh arsip ke folder yang dapat ditulis seperti `Documents\TgWitness`; jangan jalankan dari dalam ZIP atau dari Program Files. Runtime menggunakan jalur modul yang terisolasi, sehingga instalasi Python lain dan `PYTHONPATH` tidak memengaruhinya. Data tetap berada di folder `data` dalam paket tersebut. Untuk memperbarui, hentikan TgWitness, ekstrak versi baru ke folder baru, lalu salin folder `data` ke sana.
 

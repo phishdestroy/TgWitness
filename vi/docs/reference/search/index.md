@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/searc
 
 Tìm các tin nhắn đã lưu theo dạng từ, cụm từ chính xác, tên miền và @tên người dùng, hiển thị kết quả phù hợp nhất trước tiên, với chỉ mục được liên kết với nhật ký có chữ ký.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Điều tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Điều tra](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/) · [OCR và chuyển đổi văn bản tại địa phương](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Tìm các tin nhắn đã lưu theo dạng từ, cụm từ chính xác, tên mi
 
 Chỉ mục là dữ liệu được trích xuất. Nó được tái tạo từ nhật ký đã ký, bản thân nó không bao giờ được ký và không bao giờ được xuất ra. Các bản ghi gốc không bị thay đổi.
 
-**On this page**
+**Trên trang này**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#benchmark)
+- [Cú pháp tìm kiếm](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#search-syntax)
+- [Ngôn ngữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#languages)
+- [Vị trí của chỉ mục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#where-the-index-lives)
+- [Kết quả và nhật ký đã ký](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#results-and-the-signed-journal)
+- [Văn bản đã được nhận diện](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#recognized-text)
+- [Truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#access)
+- [Hỏi kho lưu trữ và MCP](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#ask-the-archive-and-mcp)
+- [Các phụ thuộc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#dependencies)
+- [Đánh giá hiệu năng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/#benchmark)
 
 ## Cú pháp tìm kiếm
 
@@ -97,14 +97,14 @@ Khi quá trình lập chỉ mục hoàn tất,**hệ thống lưu trữ** sẽ t
 
 Các khách hàng MCP có thể gọi `search_messages` với `ranked=true` và truy cập trang với `next_offset`. Các kết nối có phạm vi chỉ nhận được các cuộc trò chuyện của riêng họ.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Chức năng phân trang theo thứ tự xếp hạng chỉ hiển thị tối đa các kết quả đầu tiên thuộc nhóm 1,000, bất kể kích thước trang. Hãy thu hẹp phạm vi truy vấn, cuộc trò chuyện hoặc khoảng thời gian để xem thêm các kết quả phù hợp. Chế độ tìm kiếm theo thứ tự từ mới nhất đến cũ nhất sẽ sắp xếp các tin nhắn, kết quả OCR và phiên âm trước khi chọn từng trang.
 
 ## Các thành phần phụ thuộc
 
 | Gói | Giấy phép | Tại sao |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | Các từ gốc tiếng Nga và tiếng Ukraina; các từ điển được tải cục bộ |
-| snowballstemmer | BSD-3-Clause | Các từ gốc tiếng Anh, Python thuần túy |
+| snowballstemmer | Điều khoản BSD-3 | Các từ gốc tiếng Anh, Python thuần túy |
 | jieba | MIT | Phân đoạn truy vấn tiếng Trung, viết hoàn toàn bằng Python (chỉ phân phối mã nguồn) |
 | pymorphy3-dicts-uk (tùy chọn) | GPL-3.0 | Từ điển tiếng Ukraina đầy đủ |
 

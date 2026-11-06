@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![التطوير](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 تستضيف عملية واحدة بلغة Python لوحة FastAPI وأي عدد من مساحات العمل المعزولة، كل منها مزودة بعميل حساب مستخدم Telethon. يحتوي SQLite على سجل أحداث موقّع قابل للإضافة فقط وإعدادات تشغيلية قابلة للتعديل. يحتوي خزينة مشفرة على بيانات اعتماد واجهة برمجة التطبيقات (API) وStringSession ومفتاح التوقيع. الواجهة الأمامية عبارة عن حزمة بسيطة من HTML/CSS/JavaScript: لا حاجة إلى بناء Node أو شبكات توزيع المحتوى (CDNs) أو تنزيلات للواجهة الأمامية أثناء التشغيل.
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | إجراءات لوحة التحكم الصريحة، والإيصالات الموقعة، ومعرّفات الطلبات الدائمة، وسياسة إعادة المحاولة للاتصال/الانضمام على مستوى المهمة |
 | message_content.py | مقارنة مرئية للرسائل، باستثناء بيانات الوصف الوصفية الخاصة بالوصول إلى شبكة النقل |
 | workers.py | انتظر حتى ينتهي العاملون من تصدير الملفات قبل إجراء عملية التنظيف بعد الإلغاء |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | مهام الدردشة المتزامنة، والقيود الخاصة بكل حساب، ونقاط التحقق الموقعة، وعملية التنظيف بعد التحقق من الأرشيف |
+| distributed_takeout.py / export_timing.py | جلسات Takeout القابلة للاستئناف وتوقيتات كل بدء أو استئناف |
 | store.py | معاملات WAL، سلسلة الأحداث المرتبة، مرشحات الاستعلام، الإعدادات التشغيلية |
 | fulltext.py | فهرس النص الكامل المشتق (أشكال الكلمات، BM25)، مرتبط برأس السجل الموقّع؛ لا يتم تصديره أبدًا |
 | security.py | إنشاء ملفات خاصة، وخزينة مشفرة، وتوقيع Ed25519، وقفل أحادي العملية |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 تقبل كل مساحة عمل حسابًا واحدًا ولها دليلها الخاص وهويتها التوقيعية. تظل مساحة العمل الرئيسية في الجذر لضمان التوافق؛ بينما توجد مساحات العمل الإضافية في profiles/<id>/. يتحكم رمز حامل واحد في التثبيت بأكمله؛ ومساحات العمل ليست مستأجرين منفصلين للتفويض. تحمي أقفال العمليات الدلائل؛ بينما تعمل أقفال قاعدة البيانات على تسلسل إدراج الأحداث. يتم تسجيل كل عملية إضافة بشكل متزامن في سجل التغييرات (WAL) لـ SQLite باستخدام الوضع المتزامن الكامل (FULL). تمنع مشغلات تحديث/حذف الأحداث التعديلات العادية على التطبيق؛ ويبقى مسؤولو نظام الملفات داخل حدود الثقة.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+تتمثل تفويضات واجهة برمجة التطبيقات (API) في رمز حامل. عمليات تسجيل الدخول مُسلسلة ومحددة زمنيًا. تستخدم عمليات تحميل الحساب حدًا مخصصًا يبلغ 12 MiB للنص المُشفَّر وحدًا يبلغ 8 MiB للملف المُفكَّك؛ بينما تحتفظ طلبات واجهة برمجة التطبيقات (API) العادية بالحد البالغ 16 KiB. يتم تنفيذ التحويل في خيط عمل ، ويحتفظ بعمليات التحميل في الذاكرة، ويعيد المدخلات المعيارية إلى المتصفح المصادق عليه. يحتوي تسجيل الدخول عبر رمز الاستجابة السريعة (QR) على مرشح لكل مساحة عمل، ومعرّف قصير الأمد، ومهمة انتظار، وإلغاء صريح. لا يصبح العميل النشط سوى التفويض المقبول. يتم إرجاع Telegram FloodWait بقيمة Retry-After؛ ولا يتم الكشف عن بيانات الاعتماد ورسائل أخطاء RPC الخام في أخطاء واجهة برمجة التطبيقات. يتم تنفيذ عمليات تصدير السجل خارج حلقة الأحداث غير المتزامنة ويتم تسلسلها لكل مساحة عمل. وهي تبث لقطة قراءة مستقرة إلى جانب استمرار عمليات الكتابة في WAL. يمكن أن تعمل مهام الحصول على الدردشات بشكل متزامن على حسابات منفصلة؛ ويظل كل حساب محجوزًا حتى تتوقف مهمته. تحتفظ المهمة المتوقفة مؤقتًا أو الفاشلة بنقاط فحصها. يسمح التحقق الناجح من الأرشيف بتنظيف ملفات العمل الخاصة به، مع الاحتفاظ بملف ZIP والخطة الموقعة والحالة. يتشارك جامعو مساحات العمل في حلقة العمليات/الأحداث.
 
 قد تتداخل اللقطات التاريخية الحالية والتحديثات المباشرة. وكلاهما ملاحظات منفصلة، مُصنَّفة حسب المصدر؛ ولا يتم إخفاء التكرارات تلقائيًا. ولا يتم تنفيذ أي استنتاجات من المعرّفات المفقودة، أو النصوص المحذوفة الملفقة، أو التعداد القسري للأعضاء، أو الانضمام التلقائي إلى المجموعات. يتم تنفيذ ذلك.
 

@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![アーカイブとの連携](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/) · [全文検索](https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 日付は `2026-10-01` （UTC 0時）またはタイムゾーンを明記したISO形式の時刻 `2026-10-01T09:00+03:00`。 `search`, `messages` および `export` については、 観測時刻を選択します。各ページには最大50件のレコードが格納されます：ランク付け検索については `next_offset` (`--offset`) を参照して 順位付き検索を行い、 `next_before` (`--before`) については他の箇所を参照してください。
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+ランク付け検索は1,000件の結果で終了します。最終ページは`--limit`で指定した件数より少なくなる場合があります。一致する観測結果がさらに存在する場合は、クエリ、チャット、または期間を絞り込んでください。
 
 各メッセージの結果には `untrusted_content: true`、ワークスペース、チャット、および メッセージID、ジャーナルのシーケンス番号、保存されたレコードのハッシュ、パネルへのリンクが含まれます。編集、 削除通知、および `missing_on_recheck` は個別のレコードとして扱われます。レコードが存在しない からといって、そのイベントが決して発生しなかったことを証明するものではありません。
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 パネル経由でのエクスポートには、「**メッセージのエクスポート」**を許可する接続が必要です **（コマンドラインのみ）**。これはデフォルトでは選択されていません。このファイルは作業用コピーであり、証拠ではありません。検証可能な 引き渡しを行うには、「**エクスポート**」にある署名付きエクスポートを使用してください。 `python -m tgwitness.verify`検証が行われます。
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+パネルは、完了 レコードを含め、各レコードを出力する前にアクセス権を再確認します。アクセス権が取り消されたり有効期限が切れたりしている場合、エクスポートは不完全なままとなります。遅延ページ読み取りは 、他のクエリとアーカイブワーカーの制限を共有し、待機時間には上限があります。
 
 ## エージェントスキル
 

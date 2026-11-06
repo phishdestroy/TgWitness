@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/opera
 
 控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署与恢复](https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署与恢复](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 首次连接时，请[使用账户和会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)。 有关保存版本、事件策略和数据缺失的说明，请参阅 [“数据采集原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)”。本指南涵盖日常操作和数据恢复。
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/opera
 
 对于托管式临时 Cloudflare 隧道，`tgwitness tunnel off` 将关闭公共 访问，同时本地控制面板和数据收集功能仍继续运行。`tgwitness tunnel on` 将其启用；`tgwitness tunnel restart` 创建新的隧道连接。使用 `tgwitness open` 查看其当前地址。显式关闭设置在 服务重启后仍会保留。`tgwitness stop` 将同时停止控制面板和数据收集功能。
 
-**On this page**
+**本页内容**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#capacity-and-retention)
+- [操作员工作流程](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#operator-workflow)
+- [在不共享主密钥的情况下共享工作成果](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [运行模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#runtime-modes)
+- [监控类别](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#monitoring-categories)
+- [通知](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#notifications)
+- [面板布局](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#panel-layout)
+- [部署环境](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#deployment-environments)
+- [启动检查与导出](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#startup-checks-and-exports)
+- [备份、恢复和中断](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#backup-restore-and-interruptions)
+- [容量与保留期限](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/#capacity-and-retention)
 
 ## 操作员工作流程
 

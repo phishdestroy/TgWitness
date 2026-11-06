@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/
 
 Sambungkan klien MCP ke ruang kerja dan sembang terpilih dengan akses yang akan tamat tempoh dan boleh ditarik balik.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Integrasi arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Integrasi arkib](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Sambungkan klien penganalisis kepada ruang kerja dan sembang terpilih. TgWitness menyediakan **Streamable HTTP di `/mcp` dalam proses panel**. Setiap sambungan mempunyai token, tarikh luput dan alat yang dibenarkan masing-masing. MCP tidak boleh menghantar mesej Telegram, mengubah tetapan atau mengubah jurnal yang disahkan. Sambungan yang sama berfungsi dengan [baris perintah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/).
 
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**Pada halaman ini**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#tools-and-boundaries)
+- [Pasang dan semak](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#install-and-check)
+- [Terbitkan sambungan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#issue-a-connection)
+- [Sambungkan klien anda](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#connect-your-client)
+- [Terowong Cloudflare](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#cloudflare-tunnel)
+- [Alat dan sempadan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/#tools-and-boundaries)
 
 ## Pasang dan semak
 
@@ -57,12 +57,12 @@ Pilih klien dalam panel dan salin konfigurasi yang dijana. Konfigurasi menggunak
 
 | Klien | Konfigurasi | Sambungan |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, pengepala pembawa |
+| Kod Claude | `.mcp.json` | HTTP, `type: "http"`, pengepala pembawa |
 | Claude Desktop | `claude_desktop_config.json` | Jambatan stdio tempatan |
 | Cursor | `.cursor/mcp.json` | HTTP dengan pengepala pemboleh ubah persekitaran |
-| VS Code Local | `.vscode/mcp.json` | HTTP dengan input `promptString` kata laluan |
+| VS Code Tempatan | `.vscode/mcp.json` | HTTP dengan input `promptString` kata laluan |
 | Windsurf | `mcp_config.json` | HTTP dengan pemegang tempat pengepala pembawa |
-| Klien lain | URL dan pengepala Authorization | Streamable HTTP |
+| Klien lain | URL dan pengepala Authorization | HTTP yang boleh dialirkan |
 
 TgWitness menggunakan token pembawa, tanpa penemuan OAuth. Gunakan jambatan stdio tempatan untuk klien yang penyambung jauhnya memerlukan OAuth. Bagi VS Code, pemboleh ubah input terpakai pada abah-abah **Local** dan tidak dimajukan ke sesi Copilot. Rujukan konfigurasi: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 
@@ -74,7 +74,7 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 
 Gunakan Python tempatan klien dengan tambahan MCP yang dipasang. Tetapkan `TGWITNESS_MCP_TOKEN` dalam persekitaran terlindungnya. Pastikan bukti kelayakan tidak berada dalam argumen perintah dan URL. `tgwitness-mcp` ialah titik masuk yang sama. Modul `tgwitness.mcp_bridge` dan nama `TGWITNESS_ARCHIVE_TOKEN` yang lama kekal sebagai laluan keserasian dengan amaran; konfigurasi baharu menggunakan `mcp_server` dan `TGWITNESS_MCP_TOKEN`.
 
-## Cloudflare Tunnel
+## Terowong Cloudflare
 
 Majukan laluan `/mcp` panel dan kekalkan pengepala pembawa. Membuka tetapan MCP sebagai pentadbir mendaftarkan asalan semasa panel untuk larian ini. Untuk alamat stabil yang tersedia serta-merta selepas mula semula, konfigurasikan `TGWITNESS_PUBLIC_URL` dengan asalan HTTPS panel sebelum memulakan panel. Pengepala Host dan yang dimajukan secara sembarangan tidak mendaftarkan alamat yang dipercayai. Semakan Host dan Origin menolak asalan pelayar yang tidak berkaitan. Respons menggunakan `Cache-Control: no-store`; nilai kebenaran tidak pernah dilog.
 

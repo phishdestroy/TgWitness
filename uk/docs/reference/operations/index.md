@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/opera
 
 Щоденна робота панелі: режими, категорії моніторингу, параметри, сповіщення, експорт даних, резервне копіювання та ємність.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Розгортання та відновлення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Розгортання та відновлення](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Для першого підключення використовуйте [облікові записи та формати сеансів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/). Пояснення щодо збережених версій, політик подій та пропусків див. у розділі [«Як працює збір даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/)». Цей посібник охоплює щоденну експлуатацію та відновлення.
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/opera
 
 Для керованого тимчасового тунелю Cloudflare код `tgwitness tunnel off` закриває публічний доступ, тоді як локальна панель та збір даних продовжують працювати. Код `tgwitness tunnel on` увімкне його; код `tgwitness tunnel restart` створює нове тунельне з’єднання. Використовуйте код `tgwitness open`, щоб переглянути його поточну адресу. Явне вимкнення зберігається після перезапуску служби. Код `tgwitness stop` зупиняє як панель, так і збір даних.
 
-**On this page**
+**На цій сторінці**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#capacity-and-retention)
+- [Робочий процес оператора](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#operator-workflow)
+- [Поділитися результатами роботи без передачі головного ключа](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Режими виконання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#runtime-modes)
+- [Категорії моніторингу](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#monitoring-categories)
+- [Повідомлення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#notifications)
+- [Розташування панелі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#panel-layout)
+- [Середовища розгортання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#deployment-environments)
+- [Перевірки під час запуску та експорт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#startup-checks-and-exports)
+- [Резервне копіювання, відновлення та переривання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#backup-restore-and-interruptions)
+- [Ємність та термін зберігання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/#capacity-and-retention)
 
 ## Робочий процес оператора
 

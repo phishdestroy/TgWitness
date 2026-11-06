@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/times
 
 İmzalı kontrol noktaları için RFC 3161 zaman damgaları: yetkili kuruma ne gönderilir ve yanıt nasıl doğrulanır?
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness, RFC 3161 isteklerini hazırlar ve zaman damgası otoritesi (TSA) yanıtlarını doğrular. Bu manuel prosedür ne bir TSA seçer ne de veri gönderir; kanıt modu ise her ikisini de bir zaman çizelgesine göre gerçekleştirir ([kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Hazırlanan bir istek, **henüz bir zaman damgası kanıtı değildir**.
 

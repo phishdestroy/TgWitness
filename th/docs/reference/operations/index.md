@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/opera
 
 การดำเนินงานประจำวันของแผงควบคุม: โหมดการทำงาน, หมวดหมู่การติดตาม, พารามิเตอร์, การแจ้งเตือน, การส่งออกข้อมูล, การสำรองข้อมูล และขีดความสามารถ
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 สำหรับการเชื่อมต่อครั้งแรก ให้[ใช้บัญชีและรูปแบบเซสชัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) เพื่อดูคำอธิบายเกี่ยวกับเวอร์ชันที่บันทึกไว้ นโยบายเหตุการณ์ และช่องว่าง โปรด [ดูวิธีการทำงานของระบบการเก็บข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/) คู่มือนี้ครอบคลุมการดำเนินงานประจำวันและการกู้คืนข้อมูล
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/opera
 
 สำหรับอุโมงค์ Cloudflare ชั่วคราวที่ได้รับการจัดการ `tgwitness tunnel off` จะปิดการเข้าถึงสาธารณะ ในขณะที่แผงควบคุมและระบบเก็บข้อมูลท้องถิ่นยังคงทำงานต่อไป `tgwitness tunnel on` เปิดใช้งานอุโมงค์; `tgwitness tunnel restart` สร้างการเชื่อมต่ออุโมงค์ใหม่ ใช้ `tgwitness open` เพื่อดูที่อยู่ปัจจุบันของอุโมงค์ การตั้งค่าปิดอย่างชัดเจนจะคงอยู่ แม้หลังการรีสตาร์ทบริการ `tgwitness stop` หยุดการทำงานของทั้งแผงควบคุมและระบบเก็บข้อมูล
 
-**On this page**
+**บนหน้านี้**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#capacity-and-retention)
+- [ขั้นตอนการทำงานของผู้ดำเนินการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#operator-workflow)
+- [แบ่งปันงานโดยไม่แบ่งปันกุญแจหลัก](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [โหมดการทำงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#runtime-modes)
+- [หมวดหมู่การติดตาม](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#monitoring-categories)
+- [การแจ้งเตือน](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#notifications)
+- [การจัดวางแผง](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#panel-layout)
+- [สภาพแวดล้อมการติดตั้ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#deployment-environments)
+- [การตรวจสอบเมื่อเริ่มต้นระบบและการส่งออกข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#startup-checks-and-exports)
+- [การสำรองข้อมูล การกู้คืนข้อมูล และการหยุดชะงัก](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#backup-restore-and-interruptions)
+- [ความจุและการเก็บรักษา](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/#capacity-and-retention)
 
 ## ขั้นตอนการทำงานของผู้ใช้
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/opera
 
 Operasi harian panel: mod, kategori pemantauan, parameter, pemberitahuan, eksport, sandaran dan kapasiti.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Penyebaran dan pemulihan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Penyebaran & pemulihan](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Untuk sambungan pertama anda, gunakan [akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Untuk penjelasan mengenai versi yang disimpan, dasar peristiwa, dan jurang, lihat [bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/). Panduan ini merangkumi operasi harian dan pemulihan.
 
@@ -14,18 +14,18 @@ Pemasangan yang diuruskan merangkumi **START-HERE.html** dan **START-HERE.txt** 
 
 Untuk terowong Cloudflare sementara yang diuruskan, `tgwitness tunnel off` menutup akses awam manakala panel tempatan dan pengumpulan terus beroperasi. `tgwitness tunnel on` membenarkannya; `tgwitness tunnel restart` mewujudkan sambungan terowong baru. Gunakan `tgwitness open` untuk melihat alamat semasa. Tetapan 'off' yang eksplisit kekal walaupun perkhidmatan dihidupkan semula. `tgwitness stop` menghentikan kedua-dua panel dan pengumpulan.
 
-**On this page**
+**Pada halaman ini**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#capacity-and-retention)
+- [Aliran kerja pengendali](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#operator-workflow)
+- [Berkongsi kerja tanpa berkongsi kunci utama](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [Mod masa larian](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#runtime-modes)
+- [Kategori pemantauan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#monitoring-categories)
+- [Pemberitahuan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#notifications)
+- [Susun atur panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#panel-layout)
+- [Persekitaran penyebaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#deployment-environments)
+- [Semakan permulaan dan eksport](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#startup-checks-and-exports)
+- [Sandaran, pemulihan dan gangguan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#backup-restore-and-interruptions)
+- [Kapasiti dan penyimpanan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/#capacity-and-retention)
 
 ## Aliran kerja operator
 
@@ -58,7 +58,7 @@ Gunakan **sesi Terbuka** untuk menamatkan sambungan atau mencabut akses untuk me
 | Demo | scripts\Demo.cmd atau `--demo` | Data sintetik; sambungan akaun sebenar dilumpuhkan |
 | Perhatian | Mulakan pemerhatian | Merekod kemas kini yang dihantar untuk sumber terpilih |
 | Siaran sejarah | Sumber → potret sejarah | Sehingga 500 mesej semasa; tiada pembinaan semula semua perubahan lalu |
-| Pause | Jeda pemerhatian | Hentikan pengumpulan sambil mengekalkan data dan kerja yang sedang menunggu giliran |
+| Jeda | Jeda pemerhatian | Hentikan pengumpulan sambil mengekalkan data dan kerja yang sedang menunggu giliran |
 | Semakan/penyerahan | Eksport | ZIP, JSONL/CSV/HTML, checkpoint, resit proses dan permintaan cap masa |
 | Beberapa akaun | Ruang kerja atau butang teratas **+** | Sebarang bilangan ruang kerja berasingan dalam satu proses |
 

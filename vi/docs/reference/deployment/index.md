@@ -6,7 +6,7 @@ Vui lòng chạy TgWitness dưới dạng dịch vụ trên Windows, Linux, macO
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Triển khai & khôi phục](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Tiếng Anh** · [Tiếng Nga](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Tiếng Ukraina](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Tiếng Tây Ban Nha](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Tiếng Bồ Đào Nha (Brazil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Tiếng Thổ Nhĩ Kỳ](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [Tiếng Ả Rập](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [Tiếng Ba Tư](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Tiếng Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Tiếng Hindi](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Tiếng Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Tiếng Trung giản thể](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Mỗi bản phát hành trên GitHub đều bao gồm `TgWitness-<version>-windo
 | `TgWitness-Demo.cmd` | Khởi chạy bản demo tổng hợp tại `data\demo` |
 | `TgWitness-Check.cmd` | Vui lòng thực hiện kiểm tra sẵn sàng mà không cần khởi động |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Từ điển hình thái tiếng Nga được ghim và các cấu hình màu PDF được gói sẵn để sử dụng ngoại tuyến. Quy trình đóng gói chỉ cho phép các đường dẫn tệp đã biết bên trong các thư mục phụ thuộc `data`; các tệp không mong đợi trong các thư mục đó sẽ khiến quá trình xây dựng thất bại.
 
 Vui lòng giải nén toàn bộ tệp lưu trữ vào một thư mục có quyền ghi như `Documents\TgWitness`; không chạy chương trình từ bên trong tệp ZIP hoặc từ thư mục Program Files. Môi trường chạy sử dụng đường dẫn mô-đun cách ly, do đó các bản cài đặt Python khác và thư mục `PYTHONPATH` sẽ không ảnh hưởng đến nó. Dữ liệu được lưu trữ trong thư mục `data` của gói phần mềm. Để cập nhật, hãy dừng TgWitness, giải nén phiên bản mới vào một thư mục mới và sao chép thư mục `data` sang đó.
 
@@ -74,7 +74,7 @@ Tự xây dựng trên hệ điều hành Windows 64-bit bằng Python 3.12:
 python tools/build_portable.py
 ```
 
-## Container
+## Thùng chứa
 
 ```
 docker compose up -d --build --wait

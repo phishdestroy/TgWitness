@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/searc
 
 Busca mensajes guardados por formas de palabras, frases exactas, dominios y @nombres de usuario, mostrando primero los resultados más relevantes, con el índice vinculado al diario firmado.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigación](https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Investigación](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Análisis de archivos](https://phishdestroy.github.io/TgWitness/es/docs/reference/analysis/) · [OCR y transcripción locales](https://phishdestroy.github.io/TgWitness/es/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Busca mensajes guardados por formas de palabras, frases exactas, dominios y @nom
 
 El índice es un dato derivado. Se reconstruye a partir del diario firmado, nunca está firmado en sí mismo y nunca se incluye en una exportación. Los registros originales no se modifican.
 
-**On this page**
+**En esta página**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#benchmark)
+- [Sintaxis de búsqueda](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#search-syntax)
+- [Idiomas](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#languages)
+- [Dónde se encuentra el índice](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#where-the-index-lives)
+- [Resultados y el diario firmado](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#results-and-the-signed-journal)
+- [Texto reconocido](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#recognized-text)
+- [Acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#access)
+- [Consultar el archivo y MCP](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dependencias](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#dependencies)
+- [Prueba de rendimiento](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/#benchmark)
 
 ## Sintaxis de búsqueda
 
@@ -97,7 +97,7 @@ Cuando **el archivo** esté completo, **la consulta** recuperará sus fuentes a 
 
 Los clientes de MCP pueden llamar a `search_messages` con `ranked=true` y enviar mensajes con `next_offset`. Las conexiones con ámbito limitado solo reciben sus propios chats.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+La paginación ordenada abarca, como máximo, los primeros resultados de 1,000, independientemente del tamaño de la página. Limita la consulta, el chat o el periodo para examinar más coincidencias. Las búsquedas más recientes primero ordenan los mensajes, los resultados de OCR y de transcripción antes de seleccionar cada página.
 
 ## Dependencias
 

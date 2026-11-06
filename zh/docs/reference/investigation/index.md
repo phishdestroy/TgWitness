@@ -6,21 +6,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![调查](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 可跨频道、群组、私聊和机器人追踪案件全过程，从最初的 数据采集到带引用时间线及可验证的交接记录。交互式网站 版本位于 `/docs/cases/`；[预览说明](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)。
 
-**On this page**
+**本页内容**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#adapt-the-investigation)
+- [已验证案例：四个对话中目标地址发生变化](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. 界定案例并收集完整记录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. 盘点所有来源并获取历史背景](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. 保留不断演变的案例和有意的交互](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. 关联不同聊天中的观察结果](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. 构建跨聊天室时间线](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. 添加账户视角，同时保留其来源](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. 整理并验证案件移交](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [调整调查内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/#adapt-the-investigation)
 
 ## 案例分析：四个对话中目的地发生变化
 
@@ -117,7 +117,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/inves
 | 相同的保存文件 | 已完成媒体收据 #151 和 #209 | 所保存字节的完整 SHA-256 值完全一致 |
 | 频道来源说明 | #101 和 #188 | 若未注明发件人，请勿将频道帖子归因于用户 71001 |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+比较附件哈希值及其关联的消息引用，并按这些记录中提供的 Telegram ID 将账户 时间线分组。
 
 请将团队的工作笔记保存在[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)”上：对您依赖的记录 （如 #146、#188 和 #205）添加书签，突出显示确切的目标字符串，并 保存两个记录之间或某个时间范围内所有记录操作的片段。 笔记 和状态会将团队的审查记录保留在其各自的已签名历史记录中，可与 源观察记录区分开来。
 
@@ -177,6 +177,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | 由机器人驱动的订单/支付纠纷 | 条目公告 → 已保存链接预览 → 机器人启动参数 → 消息和键盘版本 → 面板回调收据 → 私信/群组跟进 | 已观察到的报价/响应时间线及经过验证的来源；仅凭支付链接无法证明已发生支付 |
 | 事件发生后被删除的消息 | 所有受影响的聊天记录 → 保存的原始内容/编辑记录 → 删除或复查时缺失的结果 → 保留的媒体文件 → 覆盖范围及其他账户视角 | 保留版本及明确标注的未知时间段；不假设任何虚构的删除行为者 |
-| 某参与者在不同聊天群中使用了不同的名字 | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Telegram 账号的活动时间线，附有其源记录的链接 |
+| 某参与者在不同聊天群中使用了不同的名字 | 数值发件人 ID → 姓名/用户名历史记录 → 回复 → 其他被观察到的聊天 → 引用的目的地/文件 | Telegram 账号的活动时间线，附有其源记录的链接 |
 
 [收藏参考](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/) · [个人资料验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#people-profiles) · [证据移交](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#investigation-handoff) · [验证已完成](https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/)

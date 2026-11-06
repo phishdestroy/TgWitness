@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/panel
 
 ทุกหน้าจอของแผงควบคุม: การสนทนา, บันทึก, แหล่งข้อมูล, การส่งออก, Extras, โหมดการป้องกัน และการตรวจสอบโค้ด
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [เริ่มต้นใช้งาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![เริ่มต้นใช้งาน](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [การตั้งค่าและปรับแต่งครั้งแรก](https://phishdestroy.github.io/TgWitness/th/docs/reference/settings/) · [บัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) · [ส่งออกและตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/) · [รายงานกรณี](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/)
 
 หน้าที่ของแต่ละหน้าจอ, ข้อมูลที่บันทึกไว้ในสมุดบันทึกที่ลงนามแล้ว และตำแหน่งของ คู่มือรายละเอียด แผงควบคุมแสดงพื้นที่ทำงานหนึ่งพื้นที่ต่อครั้ง: บัญชี Telegram หนึ่งบัญชีพร้อม แหล่งข้อมูล สมุดบันทึก และกุญแจลงนามของตัวเอง ตัวเลือกที่ด้านบนของแถบข้างใช้เพื่อ เปลี่ยนพื้นที่ทำงาน ที่อยู่จะนำพื้นที่ทำงาน (`?ws=…`); ในขณะที่ที่อยู่, ตัวเลือก และบัญชีที่โหลดมาไม่ตรงกัน การดำเนินการจะถูกบล็อกไว้
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+[ใช้วิธีการเปรียบเทียบคอลเลก](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)ชันเพื่อเลือกระหว่าง การสังเกตแบบเรียลไทม์ ประวัติทั้งหมด การส่งออกบัญชี/แชทใหม่ และการส่งต่อบันทึกที่เก็บไว้ หน้า Exports มีตัวเลือกการเปรียบเทียบเดียวกันอยู่เหนือปุ่มควบคุมการดาวน์โหลด
 
-**On this page**
+**บนหน้านี้**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#more-tools)
+- [ค้นหาทางของคุณ](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#find-your-way)
+- [เริ่มจากที่นี่](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#start-here)
+- [การสนทนา](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#chats)
+- [วารสาร](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#journal)
+- [แหล่งข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#sources)
+- [การส่งออก](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#exports)
+- [การตั้งค่า บัญชี และการเชื่อมต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#settings-accounts-and-connection)
+- [ส่วนเพิ่มเติม](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#extras)
+- [โหมดการป้องกัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#protection-modes)
+- [เครื่องมืออื่นๆ](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/#more-tools)
 
 ## ค้นหาทางของคุณ
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **ประเภทแหล่ง**ข้อมูลจำกัดโหมดโฟลเดอร์และโหมดบัญชีทั้งหมดให้ใช้ได้เฉพาะกับช่อง กลุ่ม การสนทนาส่วนตัว และบอต ส่วน "**การกระทำ**ของบัญชี" จะเพิ่มข้อความ การแก้ไข และ การกดปุ่มบนคีย์บอร์ดเพื่อตอบกลับของบัญชีนั้นเอง
 - **เมื่อมีแชทหรือบอทใหม่ปรากฏขึ้น**: บันทึกโปรไฟล์ของมันและข้อความล่าสุดที่มองเห็นได้ ตามจำนวนที่เลือกไว้
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+ข้อจำกัด: ตัวเก็บข้อมูลบนคลาวด์ที่เผยแพร่แล้วไม่รับข้อความใน Secret Chats (การสนทนาลับ) ส่วน [อินเทอร์เฟซ Pseudo-secret ที่แยกต่างหาก และเวอร์ชันสาธิตของมัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/)ได้รับการบันทึกไว้พร้อม สถานะการพัฒนาและข้อบกพร่องที่ยังไม่ได้แก้ไข ไม่มีการบันทึกข้อมูลใดๆ เมื่อ TgWitness ไม่ทำงาน; หลังจากรีสตาร์ท มันจะบันทึกข้อมูลเพิ่มเติมได้เพียงเท่าที่ Telegram ยังส่งกลับมา และ รายงานจะแสดงช่องว่างดังกล่าว การสนทนาที่เกินขีดจำกัดของรายการสนทนา (1,000 บทสนทนา เว้นแต่จะเปลี่ยนใน Parameters) จะถูกเพิ่มเมื่อมันกลับมาใช้งานได้อีกครั้ง ปุ่มบอทแบบฝังที่กดใน แอปอื่นจะไม่ปรากฏ; แต่คำตอบของบอทจะถูกบันทึกไว้
 
 ### การสนทนาที่อยู่ในขอบเขต
 
@@ -206,7 +206,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | --- | --- | --- |
 | 🟢 ง่าย | ติดตามการสนทนาและเก็บสำเนา | Chats, บันทึกประจำวัน และการส่งออกการสนทนา; การลงนามดำเนินการในพื้นหลัง |
 | 🟡 ลงนามแล้ว | ส่งรายงานไปยังแพลตฟอร์ม ผู้ให้บริการ หรือศูนย์รับเรื่องร้องเรียน | ไฟล์เก็บถาวรที่ลงนาม, การตรวจสอบบันทึก, จุดตรวจสอบ, ข้อมูลสรุปการส่งต่อ |
-| 🟠 Witnessed | กรณีที่อาจมีผู้อ้างว่าบันทึกถูกแก้ไข | พยานอิสระที่โพสต์ส่วนหัวบันทึกที่ลงนามแล้ว |
+| 🟠 ได้รับการยืนยันจากพยาน | กรณีที่อาจมีผู้อ้างว่าบันทึกถูกแก้ไข | พยานอิสระที่โพสต์ส่วนหัวบันทึกที่ลงนามแล้ว |
 | 🔴 พร้อมสำหรับศาล | หลักฐานสำหรับทนายความ ตำรวจ หรือศาล | Timestamps, สำเนาที่เข้ารหัสและเก็บไว้นอกระบบ, รายละเอียดคดีในรายงาน |
 | 🟣 ได้รับการยืนยันจาก GitHub | บันทึกที่ซอฟต์แวร์ต้องสามารถตรวจสอบได้โดยทุกคน | การตรวจสอบโค้ดและการบันทึกผ่าน GitHub Actions |
 | ⚫ Mossad | คดีที่มีความเสี่ยงสูงต่อฝ่ายตรงข้ามที่มีทุนสนับสนุนอย่างเพียงพอ | เซิร์ฟเวอร์ที่ปิดผนึกทำงานตลอด 24/7, ที่อยู่ IP ที่ซ่อนอยู่, และทั้ง 18 ชั้น |

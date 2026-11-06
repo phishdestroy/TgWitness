@@ -25,7 +25,7 @@ Nowa wiadomość, edycja i usunięcie stają się trzema osobnymi wpisami. Edycj
 
 01 / PRZEBIEG WIADOMOŚCIPrzykładowa sekwencja
 
-Telegram delivers an update to the collector, which appends a journal record. · Telegram · Collector · Rejestr · aktualizacja → · dodaj →
+Telegram delivers an update to the collector, which appends a journal record. · Telegram · Kolektor · Rejestr · aktualizacja → · dodaj →
 
 AKTUALNY WIDOK CZATU Wiadomość nr 42
 

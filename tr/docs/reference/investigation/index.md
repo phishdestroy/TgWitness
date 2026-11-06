@@ -6,21 +6,21 @@ Kapsam belirlemeden doğrulanmış vaka dosyasına kadar, kanallar, gruplar, öz
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Araştırma](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Bir vakayı, ilk toplamadan alıntılanan zaman çizelgesine ve doğrulanabilir devir teslimine kadar kanallar, gruplar, özel sohbetler ve botlar üzerinden takip edin. Etkileşimli web sitesi sürümü `/docs/cases/` adresinde bulunur; [önizleme talimatları](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**Bu sayfada**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#adapt-the-investigation)
+- [Çalışan örnek: dört sohbet boyunca bir hedef değişiyor](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Durumu tanımlayın ve tüm bilgileri toplayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Tüm kaynakları listeleyin ve tarihsel bağlamı belirleyin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Gelişen durumu ve kasıtlı etkileşimleri koruyun](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Sohbetler arasındaki gözlemleri birbirine bağlayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Sohbetler arası zaman çizelgesini oluşturun](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Kaynaklarını kaybetmeden hesap bakış açılarını ekleyin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Vaka devrini derleyin ve doğrulayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Araştırmayı uyarlayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/#adapt-the-investigation)
 
 ## Örnek vaka: Dört farklı sohbet boyunca bir hedef adresin değişmesi
 
@@ -117,7 +117,7 @@ Bir bulguda türetilmiş bir profili kullanmadan önce, alıntılanan kayıtlar�
 | Aynı kaydedilmiş dosya | #151 ve #209 numaralı medya makbuzları tamamlandı | Korunan baytlar için tam SHA-256 değerleri birbiriyle uyumludur |
 | Kanal kaynağı | #101 ve #188 | Göndereni belirtilmedikçe, bir kanal gönderisini 71001 numaralı kullanıcıya atfetmeyin. |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+Eklerin hash değerlerini ve bunlara ait mesaj referanslarını karşılaştırın ve hesap zaman çizelgelerini, bu kayıtlarda verilen Telegram kimliklerine göre gruplandırılmış halde tutun.
 
 Ekibin çalışma notlarını [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/)'da tutun: #146, #188 ve #205 gibi güvendiğiniz kayıtları yer imlerine ekleyin, tam hedef dizgisini vurgulayın ve iki kayıt arasında veya belirli bir zaman aralığında kaydedilen her eylemin bir kesitini kaydedin. Notlar ve durumlar, ekibin incelemesini kendi imzalı geçmişinde tutar; bu geçmiş, kaynak gözlemlerinden ayrı olarak tanımlanabilir.
 
@@ -173,10 +173,10 @@ Gerçek doğrulama sonuçlarını ve orijinal kanıtları koruyun. Case Board’
 
 ## Soruşturmaya uyarlama
 
-| Örnek | Trace | Sun |
+| Örnek | İz | Sun |
 | --- | --- | --- |
 | Bot destekli sipariş/ödeme anlaşmazlığı | Giriş duyurusu → kaydedilmiş bağlantı önizlemesi → bot başlatma parametresi → mesaj ve klavye sürümleri → panel geri arama makbuzları → özel/grup takibi | Gözlemlenen teklif/yanıt zaman çizelgesi ve doğrulanmış kaynaklar; tek başına bir ödeme bağlantısı, ödeme yapıldığını kanıtlamaz |
 | Bir olayın ardından silinen mesajlar | Etkilenen tüm sohbetler → kaydedilen orijinaller/düzenlemeler → silme veya yeniden kontrol edildiğinde eksiklik sonuçları → korunan medya → kapsam ve diğer hesap perspektifleri | Korunmuş sürümler ve açıkça belirtilmiş bilinmeyen aralıklar; uydurma silme failleri yok |
-| Bir katılımcı, farklı sohbetlerde farklı isimler kullanıyor | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Kaynak kayıtlarına bağlantılar içeren bir Telegram hesabı etkinlik zaman çizelgesi |
+| Bir katılımcı, farklı sohbetlerde farklı isimler kullanıyor | Sayısal gönderen kimliği → isim/kullanıcı adı geçmişi → yanıtlar → gözlemlenen diğer sohbetler → alıntılanan hedefler/dosyalar | Kaynak kayıtlarına bağlantılar içeren bir Telegram hesabı etkinlik zaman çizelgesi |
 
 [Koleksiyon referansı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) · [Kişi profili doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#people-profiles) · [Kanıt devri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#investigation-handoff) · [Doğrulama tamamlandı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/)

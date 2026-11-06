@@ -6,7 +6,7 @@ Toplayıcı, panel, günlük, işleyiciler ve tanık bileşenleri ile verilerin 
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![Geliştirme](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 Tek bir Python işlemi, FastAPI panelini ve her biri bir Telethon kullanıcı hesabı istemcisine sahip, istediğiniz sayıda izole çalışma alanını barındırır. SQLite, yalnızca ekleme yapılabilen imzalı bir olay günlüğü ve değiştirilebilir operasyonel ayarları tutar. Şifrelenmiş bir kasa, API kimlik bilgilerini, StringSession'ı ve imzalama anahtarını barındırır. Ön uç, basit bir şekilde paketlenmiş HTML/CSS/JavaScript'ten oluşur: Node derlemesi, CDN'ler veya çalışma zamanı ön uç indirmelerine gerek yoktur.
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | Açıkça belirtilen panel eylemleri, imzalı makbuzlar, kalıcı istek kimlikleri ve görev bazlı geri arama/katılım yeniden deneme politikası |
 | message_content.py | Aktarım erişim meta verileri hariç tutulmuş, gözlemlenebilir mesaj karşılaştırması |
 | workers.py | İptal temizliği işleminden önce dosya dışa aktarma işlemlerinin tamamlanmasını bekleyin |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | Eşzamanlı sohbet işleri, hesap başına kısıtlamalar, imzalı kontrol noktaları ve arşiv doğrulamasından sonra temizleme |
+| distributed_takeout.py / export_timing.py | Devam ettirilebilir Takeout oturumları ve her başlatma veya devam ettirme için zamanlamalar |
 | store.py | WAL işlemleri, sıralı olay zinciri, sorgu filtreleri, operasyonel ayarlar |
 | fulltext.py | Türetilmiş tam metin dizini (kelime biçimleri, BM25), imzalı günlük başlığına bağlı; asla dışa aktarılmaz |
 | security.py | Özel dosya oluşturma, şifreli depo, Ed25519 imzalaması, tek işlem kilidi |
@@ -50,7 +50,7 @@ Gözlem işleyicileri, bağlanmadan önce kaydedilir. Canlı toplama, aktif iste
 
 Her çalışma alanı bir hesap kabul eder ve kendi dizini ile imzalama kimliğine sahiptir. Ana çalışma alanı, uyumluluk amacıyla kök dizinde kalır; ek çalışma alanları ise profiles/<id>/ dizininde bulunur. Tek bir taşıyıcı jeton tüm kurulumu kontrol eder; çalışma alanları ayrı yetkilendirme kiracıları değildir. İşlem kilitleri dizinleri korur; veritabanı kilitleri olay ekleme işlemlerini sıralar. Her ekleme işlemi, FULL senkron modunda SQLite WAL’a senkron olarak kaydedilir. Olay güncelleme/silme tetikleyicileri, sıradan uygulama düzenlemelerini engeller; dosya sistemi yöneticileri güven sınırları içinde kalır.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+API yetkilendirmesi, taşıyıcı jeton şeklindedir. Oturum açma işlemleri serileştirilir ve zaman sınırlıdır. Hesap yüklemeleri, 12 MiB'lik özel kodlanmış gövde sınırı ve 8 MiB'lik kod çözülmüş dosya sınırı kullanır; normal API istekleri ise 16 KiB sınırını korur. Dönüştürme işlemi bir işçi iş parçacığında çalışır, yüklemeleri bellekte tutar ve normalleştirilmiş girdiyi kimliği doğrulanmış tarayıcıya döndürür. QR oturum açma işleminin çalışma alanı başına bir adayı, kısa ömürlü bir tanımlayıcısı, bekleme görevi ve açık iptal özelliği vardır. Yalnızca kabul edilen yetkilendirme aktif istemci olur. Telegram FloodWait, bir Retry-After değeri ile döndürülür; kimlik bilgileri ve ham RPC hata mesajları API hatalarında gösterilmez. Günlük dışa aktarımları, asenkron olay döngüsünün dışında çalışır ve çalışma alanı başına serileştirilir. Devam eden WAL yazma işlemlerinin yanı sıra kararlı bir okuma anlık görüntüsünü akış olarak gönderirler. Sohbet toplama işleri, ayrı hesaplarda eşzamanlı olarak çalışabilir; her hesap, işi durana kadar ayrılmış durumda kalır. Duraklatılmış veya başarısız bir iş, kontrol noktalarını korur. Başarılı bir arşiv doğrulaması, çalışma dosyalarının temizlenmesine izin verir; ZIP dosyası, imzalı plan ve durum bilgisi kalır. Çalışma alanı toplayıcıları işlem/olay döngüsünü paylaşır.
 
 Güncel geçmiş anlık görüntüleri ve canlı güncellemeler birbiriyle çakışabilir. Her ikisi de kaynağa göre etiketlenmiş ayrı gözlemlerdir; çift girişler sessizce gizlenmez. Eksik kimlik numaralarından, uydurulmuş silinmiş metinlerden, zorla üye numaralandırmasından veya otomatik grup katılımından herhangi bir çıkarım yapılmaz.
 

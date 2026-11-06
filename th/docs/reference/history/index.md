@@ -6,22 +6,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/histo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [คอลเลกชัน](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![คอลเลกชัน](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
-In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
+ใน **Sources** ให้ตรวจสอบแชทที่เปิดใช้งาน หยุดการสังเกตการณ์ เลือก Standard API หรือ Takeout export แล้วเลือก **Load full history** การรันนี้จะแก้ไขรายการแหล่งข้อมูลดังกล่าวและอ่านข้อความในอดีตที่มีอยู่ เข้าสู่ Chats และบันทึกการสังเกตการณ์ที่ลงนาม สื่อจะใช้การตั้งค่าไฟล์แนบ ที่มีอยู่และคิวดาวน์โหลดที่คงอยู่ ซึ่งแยกต่างหากจาก การส่งออก JSON/HTML ที่ลงนามสำหรับแต่ละแชท
 
-For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+สำหรับการเก็บข้อมูลทั่วทั้งบัญชี ให้เลือก **Whole account (บัญชี**ทั้งหมด) แล้วเริ่มการสังเกตเพื่อโหลด รายการแหล่งที่มา และตรวจสอบรายการนั้นก่อนเริ่มประวัติ ข้อจำกัดของรายการในหน้าสนทนายังคง มีผล (ค่าเริ่มต้น 1,000 สามารถปรับได้ในส่วน Parameters) การทำงานที่สำเร็จไม่ได้พิสูจน์ ว่าหน้าสนทนาของทุกบัญชีถูกรวมอยู่ในรายการแล้ว การสนทนาที่ค้นพบหรือเปิดใช้งานในภายหลังจำเป็นต้องทำงานอีกครั้ง หยุดการสังเกตก่อนเริ่มประวัติ; การเก็บข้อมูลแต่ละครั้งสามารถครอบครองบัญชีได้เพียงบัญชีเดียวเท่านั้น
 
-Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
+เลือกผู้ทำงานไฟล์แนบ 1 ถึง 5 คน และเลือกว่าจะรักษา Recent Actions ที่มีอยู่ และเปรียบเทียบเวอร์ชันที่บันทึกไว้ก่อนหน้านี้หรือไม่ การนำข้อมูลออก (Takeout) อาจต้องได้รับการอนุมัติใน Telegram และ รอระยะเวลาที่เซิร์ฟเวอร์กำหนด ตัวเลือกเหล่านี้จะคงที่เมื่อดำเนินการต่อ ดู[พฤติกรรม Backfill และ สัญญาหลักฐาน (evidence contract)](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) สำหรับรายละเอียดเกี่ยวกับการส่งข้อมูล การลองใหม่ และความเชื่อถือ
 
 ## หยุดชั่วคราว, เริ่มใหม่ และผลลัพธ์บางส่วน
 
-- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
+- **ประวัติการหยุดชั่วคราว** หยุดการอ่าน **ประวัติการดำเนินการต่อ** ดำเนินการต่อจากข้อความสุดท้ายที่บันทึก ในแต่ละแหล่งข้อมูล; การเริ่มต้นแอปใหม่จะทำให้การดำเนินการยังคงหยุดชั่วคราวจนกว่าจะดำเนินการต่อ การดำเนินการต่อต้องใช้บัญชี Telegram ที่ไม่ได้ใช้งานเดียวกัน
 - การสังเกตข้อความ การบันทึกไฟล์แนบ และการบันทึกตำแหน่งเคอร์เซอร์ จะดำเนินการในธุรกรรมเดียว การดำเนินการที่ต่อจากเดิมจะไม่ทำซ้ำการสังเกตที่ได้บันทึกไว้แล้ว การจับภาพแบบเรียลไทม์หรือ การดำเนินการที่แยกต่างหากและเริ่มต้นอย่างชัดเจน อาจสังเกตข้อความเดียวกันได้อย่างอิสระ
-- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
+- แต่ละแหล่งข้อมูล (แต่ละช่วงการแบ่ง Telegram ใน Takeout) จะกำหนด ID ข้อความสูงสุดในการอ่านครั้งแรก ข้อความที่ใหม่กว่าจะอยู่ใน การสังเกตแบบเรียลไทม์ ไม่ใช่ในหน้าประวัติที่เหลือของแหล่งข้อมูลนั้น
 - แหล่งข้อมูลที่เข้าถึงไม่ได้หรือแหล่งข้อมูลที่ถูกปิดใช้งานระหว่างการเก็บข้อมูลจะยังคงแสดงเป็น ล้มเหลวหรือถูกข้ามไป แหล่งข้อมูลอื่น ๆ จะดำเนินการต่อไป; ผลลัพธ์โดยรวมจึงไม่สมบูรณ์
-- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
-- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
+- การหน่วงเวลา FloodWait จะปฏิบัติตามค่า backoff ที่บันทึกไว้ของบัญชี ความล้มเหลวชั่วคราวจะลองใหม่ได้สูงสุด ห้าครั้ง; เมื่อทรัพยากรหมดหรือพื้นที่ดิสก์เหลือน้อย ระบบจะหยุดชั่วคราวโดยรักษาตำแหน่งเคอร์เซอร์ไว้
+- **End this history run** จะเก็บรักษาการสังเกตการณ์ที่บันทึกไว้ มันจะไม่ลบข้อมูลเหล่านั้นหรือ ยกเลิกงานแนบไฟล์ผ่าน API มาตรฐาน การสิ้นสุด Takeout จะทำเครื่องหมายไฟล์ Takeout ที่เหลืออยู่ว่าถูกข้ามไป; การหยุดชั่วคราวจะทำให้ไฟล์เหล่านั้นสามารถดำเนินการต่อได้ การรันใหม่จะอ่านแหล่งข้อมูลที่เปิดใช้งานใหม่ทั้งหมด
 
 การเสร็จสิ้นประวัติหมายถึงการอ่านประวัติเท่านั้น ไฟล์แนบอาจยังคงอยู่ในสถานะรอการประมวลผล ล้มเหลว หรือถูกยกเว้นตามนโยบายที่ตั้งค่าไว้ ตรวจสอบใบยืนยันการรับสื่อในบันทึก และคิวไฟล์แนบ; เฉพาะใบยืนยันการรับที่เสร็จสิ้นพร้อมข้อมูลไบต์ที่ถูกรักษาไว้เท่านั้น จึงถือเป็นไฟล์แนบที่บันทึกไว้แล้ว การดำเนินการประวัติเป็นคำขอสร้างภาพสแนปช็อตอย่างชัดเจน และ แยกต่างหากจากสวิตช์ที่เลือกประเภทของเหตุการณ์สดในอนาคต
 
@@ -33,8 +33,8 @@ Choose one to five attachment workers and whether to preserve available Recent A
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
+เก็บลายนิ้วมือของกุญแจลงนามที่คาดไว้ไว้อย่างอิสระ ผู้ตรวจสอบจะตรวจสอบ ลายนิ้วมือของรายงาน, ไฟล์เก็บหลักฐาน, จุดตรวจสอบของรายงาน, แผนต้นทาง, บัญชี และจำนวนข้อความที่เก็บไว้/ไม่สามารถเข้าถึงได้ การรันใหม่ยังผูกความคืบหน้าของแหล่งที่มาและ ตัวเลือกกับเหตุการณ์เคอร์เซอร์ที่ลงนามแล้ว โดยหากไม่มี`--evidence` จะตรวจสอบเพียง รายงานที่ลงนามแล้วและความสอดคล้องภายในของมันเท่านั้น ส่วนสนามความคืบหน้าแบบเดิมและ สรุปไฟล์แนบยังคงเป็นคำชี้แจงของผู้เก็บรวบรวมที่ลงนามแล้ว ผู้ตรวจสอบหลักฐานจะตรวจสอบไบต์ของสื่อที่เก็บถาวร
 
-Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
+การลงนามหรือการปิดประวัติที่มีอยู่ไม่ได้พิสูจน์ถึงต้นกำเนิดจาก Telegram, ภาพถ่ายแบบอะตอมิก หรือความครบถ้วนทางประวัติศาสตร์ ข้อความสามารถเปลี่ยนแปลงได้ระหว่างการอ่าน; ข้อความที่ถูกลบ และการแก้ไขระหว่างทางที่อยู่นอกขอบเขตของ Recent Actions ที่มีอยู่ และ Secret Chats ไม่สามารถกู้คืนได้ ผู้ดำเนินการ ที่ควบคุมกุญแจลงนามสามารถสร้างบันทึกกิจกรรมขึ้นมาก่อนที่จะมีการยืนยันจากภายนอก ใช้จุดตรวจสอบที่เก็บไว้แยกต่างหากหรือผู้เป็นพยานอิสระเพื่อยืนยัน คุณสมบัติการตรวจจับการแก้ไขที่บันทึกไว้
 
 เคอร์เซอร์การเก็บข้อมูลแสดงสถานะของพื้นที่ทำงานท้องถิ่น การกู้คืนไฟล์ ZIP ของหลักฐานเพียงอย่างเดียว จะไม่กู้คืนงานเก็บข้อมูลที่ยังค้างอยู่หรือเซสชัน Telegram ให้กลับคืนมา ให้เก็บสำรองพื้นที่ทำงานไว้ หากต้องการดำเนินการต่องานเดิม

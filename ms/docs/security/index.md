@@ -56,7 +56,7 @@ Tujuan pilihan dikonfigurasikan mengikut ruang kerja. Teks mesej dan media disim
 
 | Rahsia | Di mana ia disimpan | Apa yang dibukanya | Jika bocor |
 | --- | --- | --- | --- |
-| **Panel token** | `panel-token.txt` dalam direktori data; pelayar menyimpannya bagi setiap tab | Segala-galanya dalam setiap ruang kerja | Hentikan TgWitness, padam `panel-token.txt`, mulakan semula: anda mendapat yang baharu |
+| Token panel**** | `panel-token.txt` dalam direktori data; pelayar menyimpannya bagi setiap tab | Segala-galanya dalam setiap ruang kerja | Hentikan TgWitness, padam `panel-token.txt`, mulakan semula: anda mendapat yang baharu |
 | **Sesi Telegram** | Vault, disulitkan (`credentials.enc`) | Akaun Telegram itu sendiri | Batalkan sesi di Telegram di bawah *Tetapan → Peranti* |
 | **Kunci penandatangan** | Vault, disulitkan (`signing.enc`) | Menandatangani rekod di bawah cap jari anda | Checkpoint di tempat lain, saksi dan cap masa masih menunjukkan apa yang wujud sebelum ini |
 | **Kunci peti besi** | `vault.key` di sebelah data, atau kunci induk luaran | Peti besi | Anggap sesi dan kunci tandatangan juga bocor |

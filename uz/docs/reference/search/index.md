@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/searc
 
 Imzolangan jurnalga bog'langan indeks yordamida so'z shakllari, aniq iboralar, domenlar va @foydalanuvchi nomlari bo'yicha saqlangan xabarlarni toping, eng yaxshi mos keladiganlarini birinchi qilib ko'rsating.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Tergov](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Tergov](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/) · [Mahalliy OCR va transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Imzolangan jurnalga bog'langan indeks yordamida so'z shakllari, aniq iboralar, d
 
 Indeks – bu hosil qilingan ma'lumot. U imzolangan jurnal asosida qayta tuziladi, hech qachon o'zi imzolanmaydi va hech qachon eksportga kiritilmaydi. Asl yozuvlar o'zgarmaydi.
 
-**On this page**
+**Ushbu sahifada**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#dependencies)
+- [Qidiruv sintaksi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#search-syntax)
+- [tillar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#languages)
+- [Indeks qaerda joylashgan](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#where-the-index-lives)
+- [Natijalar va imzolangan jurnal](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#results-and-the-signed-journal)
+- [Tan olingan matn](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#recognized-text)
+- [Kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#access)
+- [Arxiv va MCPdan so'rang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#ask-the-archive-and-mcp)
+- [Qarorgohlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/#benchmark)
 
 ## Qidiruv sintaksi
@@ -97,7 +97,7 @@ Suhbat doirasidagi kirish faqat o'z suhbatlaridagi yozuvlarni, ularning ilovalar
 
 MCP mijozlari chaqirishi mumkin `search_messages` bilan `ranked=true` va sahifa bilan `next_offset`. Doiraga ajratilgan ulanishlar faqat o'z chatlarini oladi.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Ranglab tartiblangan sahifalash sahifa hajmiga qaramasdan, eng ko'pi bilan birinchi 1,000 ta natijani qamrab oladi. Qo'shimcha mosliklarni ko'rib chiqish uchun so'rov, suhbat yoki davrni toraytiring. Eng yangi avval qidiruvlar har bir sahifani tanlashdan oldin xabarlar, OCR va transkripsiya natijalarini tartiblaydi.
 
 ## Qaramliklar
 

@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-
 
 Hetzner yoki Phala Cloud&#x27;da joylashgan, 24/7 yopiq server, Gateway DNS va uchinchi tomon takrorlay oladigan tekshiruvlar.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+Yuqori ishonchlilikka ega joylashtirish arxivni tekshirishga yig'ish muhitining mustaqil tekshiruvlarini qo'shadi. Ko'rib chiquvchi bulut provayderi va Cloudflare'da saqlangan joylashtirish va kirish yozuvlarini so'raydi, Intel TDX joylashtirishi esa yig'uvchining muhitini apparat tasdiqlash bilan to'ldiradi.
 
 Oddiy mahalliy va Docker ishlatish o'zgarmagan. Bu yerda hech narsa ishlamaydi, agar siz uni bilan joylashtirmang `python -m tgwitness.cloud`, va collector faqat joylashtirishda sozlamalar belgilanganida mezbonini o'qiydi. `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ Oqim sxemasi · Operator → Server, kirish qoidalarsiz firewall (provayder API)
 7. Verifier, faqat o&#x27;qish uchun tokenlar → Imzolangan /api/kafolat bayonoti
 8. Verifier, faqat o&#x27;qish uchun tokenlar → Dalil ZIP
 
-**On this page**
+**Ushbu sahifada**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#reading-the-deployment-result)
+- [Verifikator tekshira oladigan narsalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Provayderlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#providers)
+- [Phala Cloud'dagi maxfiy VM (Intel TDX)](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Boshlashdan oldin](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#before-you-start)
+- [Panelidan](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#from-the-panel)
+- [Domensiz tezkor tunnel](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Joylashtirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#deploy)
+- [Xatoliklarni tuzatish, joylashtirish va qulflash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Joylashtirishni olib tashlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#remove-a-deployment)
+- [Har qanday server (o'zini tasdiqlagan)](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#any-server-self-attested)
+- [Tasdiqlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#verify)
+- [Dalillarni topshirish bo'yicha hisobot](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare tashqi guvoh sifatida](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Joylashtirish natijasini o'qish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## Verifikator nima tekshira oladi
 
@@ -54,7 +54,7 @@ Oqim sxemasi · Operator → Server, kirish qoidalarsiz firewall (provayder API)
 | Imzo kaliti shu serverda yaratilgan | Kalit provayderning server IDsi va olgan cloud-initning xeshini ko'rsatadigan bayonotni imzolaydi | Provayderga qarshi tekshirilgan Collector |
 | Jurnal o'sha kalit va serverga tegishli | Har bir jarayon dalillarda boshlanadiZIP o'sha server uchun mezbon o'lchovini o'zida saqlaydi | Dalil ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+Yig'uvchi imzolangan process-start va `host.state` yozuvlarida SSH holatini, sessiyalarni, kirish tarixini va ishga tushirish ma'lumotlarini qayd etadi. Oddiy VMda bu mahalliy inventarizatsiya yozuvlari bo'lib, ko'rib chiquvchi ularni provayderning mustaqil yozuvlari bilan solishtiradi. Quyidagi Intel TDX joriy etilishi esa apparat bilan ta'minlangan o'lchovlarni ham tasdiqlaydi.
 
 ## Provayderlar
 
@@ -292,6 +292,6 @@ Cloudflare Telegramning shifrlash ichki qismiga, Telegram hisobidagi boshqa quri
 
 ## Joylashtirish natijasini o'qish
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+Oddiy VM uchun provayder host infratuzilmasini va mahalliy inventarizatsiyani nazorat qiladi hamda provayder yozuvlari bilan birga tekshiradi. Intel TDX uchun verifikator shuningdek apparat iqtibosi, yig'uvchi bog'lanishi, kompozitsiya va operatsion tizim o'lchovlarini ham tekshiradi. Qaysi tekshiruvlar o'tgani yoki mavjud emasligini ko'rish uchun yakka natijalarni o'qing.
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+Tarixiy firewall tafsilotlari provayderga bog'liq; Linode qoidalar versiyalarini saqlab qoladi. [Validatsiya yozuvi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/) sinovdan o'tkazilgan joylashtirishlarni va qolgan jonli tekshiruvlarni ro'yxatlaydi, hamda [tasdiqlash doirasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) ushbu muhit tekshiruvlarini arxiv olish va yaxlitlik bilan bog'laydi.

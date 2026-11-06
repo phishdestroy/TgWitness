@@ -6,7 +6,7 @@ Qidiruv, kontekstni o'qish, faoliyatni hisoblash va skriptlar hamda agentlardan 
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Arxiv integratsiyalari](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [Faqat o'qish uchun MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/) · [To'liq matnli qidiruv](https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ Masofaviy panel uchun HTTPS talab etiladi; oddiy HTTP faqat uchun qabul qilinadi
 
 Sanalar `2026-10-01` (UTC yarim kecha) yoki vaqt zonasini hisobga olgan ISO vaqtlari, `2026-10-01T09:00+03:00`. Uchun `search`, `messages` va `export` ular kuzatuv vaqtini tanlaydilar. Sahifalar 50 tagacha yozuvni saqlaydi: kuzatib boring `next_offset` (`--offset`) reytingli qidiruv va `next_before` (`--before`) boshqa joylarda.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+Reyting bo'yicha qidiruv 1,000 ta natijaga to'xtaydi. Oxirgi sahifa `--limit` dan qisqaroq bo'lishi mumkin; mos keladigan kuzatuvlar ko'proq bo'lgan so'rov, suhbat yoki davrni toraytiring.
 
 Har bir xabar natijasi quyidagilarni o'z ichiga oladi `untrusted_content: true`, ish maydoni, suhbat va xabar IDlari, jurnal ketma-ketligi, saqlangan yozuvning xeshini va panel havolasini o'z ichiga oladi. Tahrirlar, o'chirish bildirishnomalari va `missing_on_recheck` alohida yozuvlardir. Yozuvning yo'qligi voqeaning hech qachon sodir bo'lmagani isbotlanmaydi.
 
@@ -76,7 +76,7 @@ Davr **Telegram tomonidan xabar vaqtini hisobot berish** muddatini belgilaydi. S
 
 Panel orqali eksport qilish uchun **"Xabarlarni eksport qilish"**ga ruxsat beruvchi ulanish talab etiladi **(faqat buyruq satri)**; bu bo'yicha avtomatik tanlanmagan. Ushbu fayl ishlash nusxasi bo'lib, dalil emas: tekshiriladigan topshirish uchun "**Eksportlar**" bo'limidagi imzolangan eksportdan foydalaning, `python -m tgwitness.verify`tekshiradi.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+Panel har bir yozuvni, jumladan yakuniy yozuvni chiqarishdan oldin kirishni qayta tekshiradi. Bekor qilingan yoki muddati tugagan kirish to'liq bo'lmagan eksportga olib keladi. Keyingi yuklash orqali sahifalarni o'qish arxiv ishchisi limitini boshqa so'rovlar bilan bo'lishadi va cheklangan kutish muddatiga ega.
 
 ## Agent mahorati
 

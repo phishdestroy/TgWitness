@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/setti
 
 Penyihir persediaan, matlamat, tahap antara muka, laluan sambungan dan tetapan yang dikongsi oleh kumpulan akaun.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Permulaan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Memulakan](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Akaun](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/) · [Sambungan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/) · [Akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/)
 

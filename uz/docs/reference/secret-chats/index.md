@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# Yashirin suhbatlar: amalga oshirish va demo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+Alohida Maxfiy Suhbat implementatsiyasini tushunib oling, badiiy interfeysni sinab ko'ring va qoldirilgan nuqsonlarni ko'rib chiqing.
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**Holati tekshirilgan 6 Noyabr 2026:** alohida Secret Chat amalga oshirilishi ishlab chiqilmoqda. U e'lon qilingan `main` da `3d23e52b647b`. Oddiy yig'uvchi va Takeout eksporti Maxfiy suhbatlarni yig'maydi. Interaktiv veb-sayt ssenariysi soxta ma'lumotlar bilan interfeysni namoyish etadi; u Telegram muloqotini yoqmaydi.
 
-## Where the implementation lives
+## Ijro etish joyi
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+`0e60f88e` qo'shildi **Manbalar → Pseudo-maxfiy** mahalliy rivojlantirish filialida `fix/panel-routes-sessions`. Tekshirilgan snapshot `bb8788fb685c`. Uning amalga oshirilishi `tgwitness/secret_chats.py`, ilova yo'llari, `tgwitness/static/views/secret-chats.js` va maxsus testlarni o'z ichiga oladi.
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+Ushbu filialdagi ixtiyoriy `secret-chats` qo'shimchasi [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat) ni `d87bf037b90060383c7b704d8a06ebb98c621c6f` ga bog'laydi. Kutubxona mavjud Telethon ruxsatnomasi asosida Telegramning end-to-end chat protokolini amalga oshiradi. Faqatgina ushbu kutubxonani o'rnatish `main` ga yetishmayotgan integratsiyani qo'shmaydi.
 
-## What the development interface does
+## Rivojlantirish interfeysi nima qiladi
 
-| Harakat | Recorded behavior |
+| Harakat | Qayd etilgan xatti-harakatlar |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| Foydalanuvchi nomi yoki foydalanuvchi ID bo'yicha suhbatni boshlang | So'rov yuboring; boshqa ishtirokchi uni qabul qilishi kerak. |
+| Kiruvchi so'rovni qabul qiling | TgWitness o'sha suhbat uchun qabul qiluvchi nuqta bo'ladi. Avtomatik qabul qilish alohida sozlama bo'lib, standartda o'chirilgan. |
+| Xabar yuborish yoki qabul qilish | Chiqish yoki kirish `secret_chat.message` yozuvini qo'shing va uni mavzuda ko'rsating. |
+| Ilovani qabul qiling | Uni dekript qiling, baytlarini SHA-256 bo'yicha saqlang va `secret_chat.file` ni qayd eting. |
+| Timer yoki o'chirish bildirishnomasini qabul qiling | Ogohlantirishni qayd eting va oldin saqlangan kontentni saqlab qoling. |
+| Suhbatni ko'rib chiqing | Xabarlar, fayllar, bildirishnomalar va asosiy vizualizatsiyani ko'rsating. Ochiq yorliq har to'rt soniyada yangilanadi. |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+Integratsiyani o'z ichiga olgan rivojlantirish versiyasida operator tanlangan hisob uchun modulni yoqadi va uni ulaydi. Boshlash, qabul qilish va yuborish uchun o'zaro aloqada bo'lish ruxsati hamda hisobning faqat o'qish uchun himoyasi o'chirilgan bo'lishi talab etiladi. Boshqa ishtirokchi yangi chiquvchi suhbatni qabul qilishi kerak. Ushbu nazorat elementlari yuqoridagi reviziyadagi e'lon qilingan ilovada mavjud emas.
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+Faqat ushbu TgWitness sessiyasi tomonidan yaratilgan yoki qabul qilingan suhbatlar qamrab olinadi. Telefonidagi mavjud Yashirin Suhbatlar shu qurilmada qoladi. Sessiyani import qilish ularning alohida shifrlash kalitlarini taqdim etmaydi. Yashirin suhbat kalit materiallari va hisoblagichlar ish maydoni seyfida saqlanadi; saqlangan xabarlar va dekriptlangan fayllar odatiy ish maydoni saqlash himoyalariga bo'ysunadi.
 
-## Website demonstration
+## Veb-sayt namoyishi
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+Veb-saytning "**Try Secret Chat**" ssenariysi badiiy suhbatni ochadi. U o'quvchiga so'rov yuborish, uning qabul qilinishini simulyatsiya qilish, namunaviy xabar yuborish, skriptlangan javob va faylni qabul qilish hamda taymer va o'chirish bildirishnomasini ko'rib chiqish imkonini beradi. Kiruvchi so'rov ham qabul qilinishi mumkin. Boshqaruv elementlari simulyatsiya qilingan tengdosh harakatlarini aniq belgilaydi.
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+Ushbu ssenariy brauzer xotirasida ishlaydi. Qayta tiklash yoki qayta yuklash uni tozalaydi. U tizimga kira olmaydi, Telegram bilan bog'lanmaydi, haqiqiy shifrlash kalitlarini yaratmaydi yoki imzolangan namunalarni yuklab olishni o'zgartirmaydi. Uning ko'rsatilgan xabarlari imzolangan dalil emas. Ssenariy mo'ljallangan o'zaro ta'sirni namoyish etadi; u rivojlantirish amalga oshirilganligi tayyorligini tasdiqlamaydi.
 
-## Checks and outstanding defects
+## Tekshiruvlar va hal qilinmagan nuqsonlar
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+Mavjud beshta test shifrlangan kalit saqlanuvchanligi, hayotiy tsikli va xabar yozuvlari, kiruvchi qabul qilish siyosati, faqat o'qish uchun yuborish va ilova eksportini qamrab oladi. Ular 6-noyabr ko'rigida belgilangan kutubxona bilan muvaffaqiyatli o'tkazildi. Qo'shimcha uchta sintetik tekshiruv shu snapshotda nuqsonlarni qayta ishlab chiqdi:
 
-| Finding | Consequence |
+| Topilma | Oqibat |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| Yopilish`read_only`ni chetlab o'tadi | Yopiq yo'l o'zaro ta'sirlar bloklanishi kerak bo'lgan hollarda masofaviy harakatni bajarishi mumkin. |
+| Takrorlarni aniqlash faqat so500t yangi yozuvlarni tekshiradi | Eskirgan qayta ijro qayta ishga tushirgandan so'ng nusxa yaratishi mumkin. |
+| Muvaffaqiyatsiz ilova yuklab olish uning kutib turgan yozuvini o'chirib tashlaydi | Vaqtinchalik xato qayta urinish ishni yo'qotishga olib keladi. |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+Bu ochiq nuqsonlar bo'lib, ular [nashr qilingan auditori](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)da ham qayd etilgan. Besh muvaffaqiyatli test ushbu xatoliklarni qamrab olmaydi. Ko'rib chiqish sintetik ish maydonchalari va Telegram operatsiyalarining soxta nusxalaridan foydalangan; u jonli qo'l siqishni takrorlamagan yoki ishlab chiqarishga joriy etishni tasdiqlamagan.

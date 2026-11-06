@@ -57,7 +57,7 @@ Um pacote separado vinculado ao limite do diário de origem
 | Pessoas | As pessoas selecionadas continuam nomeadas; as demais recebem pseudônimos ou ficam de fora. |
 | Texto | Todo o texto, só o das pessoas selecionadas e da sua conta, ou nenhum. |
 | Arquivos | Arquivos das pessoas selecionadas e da sua conta, todos os arquivos mostrados ou nenhum. |
-| Case Board | Nada, favoritos e recortes, ou cartões com discussão. |
+| Painel de Casos | Nada, favoritos e recortes, ou cartões com discussão. |
 
 Leia também o texto e os arquivos: um pseudônimo não remove nomes escritos dentro de uma mensagem ou anexo. Se faltar um arquivo selecionado, restaure-o ou deixe os anexos de fora.
 

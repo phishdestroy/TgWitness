@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/setti
 
 设置向导、目标、界面层级、连接路径以及账户组共享的设置。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [入门指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![入门指南](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [账户](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/) · [连接](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/) · [访问](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/)
 

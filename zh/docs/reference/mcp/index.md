@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/
 
 将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [存档集成](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![存档集成](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 将分析客户端连接到选定的工作区和聊天群组。TgWitness **在面板进程的 `/mcp` 端点**提供 **可流式传输的 HTTP** 服务。每个连接都有其专属的 令牌、有效期和允许使用的工具。MCP 无法发送 Telegram 消息、更改 设置或修改签名日志。这些连接同样适用于 [命令行](https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/)。
 
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**本页内容**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#connect-your-client)
+- [安装与检查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#install-and-check)
+- [建立连接](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#issue-a-connection)
+- [连接您的客户端](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#tools-and-boundaries)
+- [工具与边界](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/#tools-and-boundaries)
 
 ## 安装与检查
 
@@ -57,12 +57,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/
 
 | 客户端 | 配置 | 连接 |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP，`type: "http"`，Bearer 请求头 |
+| Claude 代码 | `.mcp.json` | HTTP，`type: "http"`，Bearer 请求头 |
 | Claude Desktop | `claude_desktop_config.json` | 本地 stdio 桥接 |
 | Cursor | `.cursor/mcp.json` | 带环境变量请求头的 HTTP |
-| VS Code Local | `.vscode/mcp.json` | 带密码 `promptString` 输入的 HTTP |
+| VS Code 本地版 | `.vscode/mcp.json` | 带密码 `promptString` 输入的 HTTP |
 | Windsurf | `mcp_config.json` | 带 Bearer 请求头占位符的 HTTP |
-| 其他客户端 | URL 和 Authorization 请求头 | Streamable HTTP |
+| 其他客户端 | URL 和 Authorization 请求头 | 可流式传输的 HTTP |
 
 TgWitness 使用 Bearer 令牌，不支持 OAuth 发现。对于远程连接器需要 OAuth 的客户端，请使用本地 stdio 桥接。对于 VS Code，输入变量适用于 **Local** 环境，不会转发到 Copilot 会话。配置参考：[Claude Code](https://code.claude.com/docs/en/mcp)、[Cursor](https://prod.cursor.com/docs/mcp)、[VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)。
 

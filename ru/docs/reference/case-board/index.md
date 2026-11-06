@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-
 
 Закладки, точные выделения, фрагменты действий, обсуждения, ограниченный доступ и история подписанных аннотаций, используемые в Case Board.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Расследование](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Расследование](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Case Board предоставляет следственной группе общий рабочий обзор сохраненных материалов. Добавляйте в закладки наблюдения, выделяйте конкретные фрагменты, сохраняйте набор действий и обсуждайте их с коллегами. Карточки сохраняют ссылки на источники и подписанную историю изменений. Аннотации команды остаются в рабочей области и четко отделяются от исходных наблюдений в Telegram.
 
@@ -14,13 +14,13 @@ Case Board предоставляет следственной группе об
 
 ![Синтетическая лента расследования](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**На этой странице**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#operating-limits)
+- [Работа с делом](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#work-with-a-case)
+- [Права доступа](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#permissions)
+- [Сохраненные контракты](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#stored-contracts)
+- [API и экспортные данные](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#api-and-exports)
+- [Пределы эксплуатации](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/#operating-limits)
 
 ## Работа с делом
 

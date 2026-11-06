@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![开发](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 一个 Python 进程托管 FastAPI 控制面板和任意数量的隔离工作区， 每个工作区都配有一个 Telethon 用户账户客户端。 SQLite 存储着一个仅支持追加的、经过签名的事件日志以及可变的操作设置。 加密保险库中存储着 API 凭据、StringSession 以及签名密钥。 前端采用打包的纯 HTML/CSS/JavaScript 形式：无需 Node 构建、CDN 或运行时 前端下载。
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | 明确的面板操作、带签名的收据、持久的请求 ID 以及针对特定任务的回调/加入重试策略 |
 | message_content.py | 可视化消息对比，不包含传输访问元数据 |
 | workers.py | 在取消操作前，请等待导出文件处理程序完成 |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | 并发聊天任务、按账户预留、签名检查点以及归档验证后的清理工作 |
+| distributed_takeout.py / export_timing.py | 可恢复的 Takeout 会话以及每次开始或恢复的时长 |
 | store.py | WAL 事务、有序事件链、查询过滤器、运行设置 |
 | fulltext.py | 衍生全文索引（词形变体、BM25），与签名日志头关联；绝不导出 |
 | security.py | 私有文件的创建、加密存储库、Ed25519 签名、单进程锁定 |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 每个工作区仅支持一个账户，并拥有独立的目录和签名身份。 主工作区出于兼容性考虑仍位于根目录下；其他工作区位于 profiles/<id>/ 目录中。一个承载令牌控制整个安装环境；工作区并非 独立的授权租户。 进程锁保护目录；数据库锁 对事件插入进行序列化。每次追加操作均以FULL同步模式 同步提交至SQLite WAL。事件更新/删除触发器可防止 普通应用程序进行编辑；文件系统管理员始终处于信任边界之内。
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+API 授权采用承载者令牌（bearer token）机制。登录操作经过序列化处理，且受时间限制。 账户上传采用专用的 12 MiB 编码正文限制和 8 MiB 解码文件 限制；普通 API 请求仍保留 16 KiB 的限制。 转换在工作 线程中运行，将上传数据保存在内存中，并向经过身份验证的 浏览器返回规范化的输入。QR 登录具有每个工作区的候选码、短效标识符、等待任务 以及显式取消机制。只有被接受的授权才会成为活动客户端。 Telegram FloodWait 返回时包含 Retry-After 值；凭据和原始 RPC 错误消息不会在 API 错误中暴露。 日志导出在异步 事件循环之外运行，并按工作区进行序列化。它们在持续进行 WAL 写入的同时， 流式传输一个稳定的读取快照。聊天数据采集任务可在 不同账户上并行运行；每个账户在任务停止前始终处于预留状态。已暂停或 失败的任务将保留其检查点。成功完成归档验证后，可清理 其工作文件，仅保留 ZIP 文件、签名计划和状态信息。工作区收集器 共享同一进程/事件循环。
 
 当前的历史快照与实时更新可能存在重叠。两者均为独立的观察记录， 并按来源进行标注；重复内容不会被自动合并。系统不会根据缺失的 ID、伪造的已删除文本、强制成员枚举或自动加入群组 等情况进行推断。
 

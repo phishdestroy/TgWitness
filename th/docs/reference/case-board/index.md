@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/case-
 
 บุ๊กมาร์ก, การเน้นข้อความที่แม่นยำ, ส่วนการดำเนินการ, การสนทนา, การเข้าถึงตามขอบเขต และประวัติคำอธิบายประกอบที่ลงนาม ซึ่งใช้โดย Case Board.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การสอบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![การสอบสวน](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Case Board ให้ทีมสอบสวนมีมุมมองการทำงานร่วมกันของข้อมูลที่บันทึกไว้ สามารถทำเครื่องหมาย การสังเกตการณ์, ไฮไลต์ข้อความเฉพาะ, บันทึกชุดการดำเนินการ และหารือกับเพื่อนร่วมงาน บัตรข้อมูลจะเก็บรักษาการอ้างอิงแหล่งที่มาและประวัติการแก้ไขที่ลงนามไว้ หมายเหตุของทีมจะอยู่ใน พื้นที่ทำงาน และสามารถแยกแยะได้ชัดเจนจากบันทึกการสังเกตการณ์ Telegram ต้นฉบับ
 
@@ -14,13 +14,13 @@ Case Board ให้ทีมสอบสวนมีมุมมองการ
 
 ![ข้อมูลการสืบสวนที่สร้างขึ้น](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**บนหน้านี้**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#operating-limits)
+- [ทำงานกับกรณีหนึ่ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#work-with-a-case)
+- [สิทธิ์](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#permissions)
+- [สัญญาที่เก็บไว้](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#stored-contracts)
+- [API และการส่งออก](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#api-and-exports)
+- [ขีดจำกัดการทำงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/#operating-limits)
 
 ## ทำงานกับคดี
 

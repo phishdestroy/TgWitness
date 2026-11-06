@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 備份功能、將舊檔案移至您的雲端儲存空間、在 Object Lock 下的副本，以及在新裝置上的資料恢復。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署與復原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署與復原](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 該面板將任務分為三類：
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 僅憑上傳回應並不能作為刪除檔案的授權。TgWitness 會下載 完整的加密物件並驗證其大小，SHA-256 則會儲存收據， 並在刪除前立即再次檢查本機的位元組數。若發生上傳失敗、 讀回結果不符或傳輸被取消的情況，本機檔案將保留原狀。若 已啟用的證據備份尚未複製該檔案，刪除操作亦會等待備份完成。
 
-**On this page**
+**本頁內容**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#operator-bot-and-completion-notices)
+- [當磁碟空間即將用盡時](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#when-the-disk-is-filling-up)
+- [連接目標位置](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#connect-a-destination)
+- [保留還原檔案](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#keep-the-recovery-file)
+- [安裝資料遺失後的恢復步驟](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#recover-after-losing-the-installation)
+- [操作員機器人與完成通知](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## 磁碟空間即將耗盡時
 

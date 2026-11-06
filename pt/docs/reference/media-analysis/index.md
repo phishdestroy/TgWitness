@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/media
 
 Reconheça imagens e áudios capturados com um worker local; mantenha o texto derivado vinculado ao seu arquivo de origem.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Investigação](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

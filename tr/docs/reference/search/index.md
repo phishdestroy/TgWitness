@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/searc
 
 İndeks, imzalı günlüğe bağlı olarak, kelime biçimleri, tam ifadeler, etki alanları ve @kullanıcıadları ile kaydedilmiş mesajları en iyi eşleşmelerden başlayarak bulun.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Araştırma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Araştırma](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/) · [Yerel OCR ve transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/searc
 
 Dizin, türetilmiş verilerdir. İmzalı günlüğünden yeniden oluşturulur, kendisi asla imzalanmaz ve hiçbir zaman dışa aktarıma dahil edilmez. Orijinal kayıtlarda herhangi bir değişiklik olmaz.
 
-**On this page**
+**Bu sayfada**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#benchmark)
+- [Arama sözdizimi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#search-syntax)
+- [Diller](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#languages)
+- [Dizin nerede bulunur](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#where-the-index-lives)
+- [Sonuçlar ve imzalı günlük](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#results-and-the-signed-journal)
+- [Tanınan metin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#recognized-text)
+- [Erişim](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#access)
+- [Arşive ve MCP'ye sor](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#ask-the-archive-and-mcp)
+- [Bağımlılıklar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#dependencies)
+- [Karşılaştırma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/#benchmark)
 
 ## Arama sözdizimi
 
@@ -97,7 +97,7 @@ Sohbet kapsamlı erişim, yalnızca kendi sohbetlerinden gelen kayıtları bulur
 
 MCP istemcileri `search_messages` ile `ranked=true` komutuyla çağırabilir ve `next_offset`ile çağrı yapabilir. Kapsamlı bağlantılar yalnızca kendi sohbetlerini alır.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Sıralı sayfalandırma, sayfa boyutuna bakılmaksızın en fazla ilk 1,000 sonucunu kapsar. Daha fazla eşleşmeyi incelemek için sorguyu, sohbeti veya dönemi daraltın. En yenisi önce arama özelliği, her sayfayı seçmeden önce mesajları, OCR ve transkripsiyon sonuçlarını sıralar.
 
 ## Bağımlılıklar
 

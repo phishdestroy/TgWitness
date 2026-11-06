@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/times
 
 Carimbos de data e hora RFC 3161 para pontos de verificação assinados: o que é enviado à autoridade e como a resposta é verificada.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidências e verificação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Evidências e verificação](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 O TgWitness prepara solicitações RFC 3161 e verifica as respostas da autoridade de carimbo de data/hora (TSA). Este procedimento manual não seleciona uma TSA nem envia dados; o modo de evidência realiza ambas as ações de acordo com uma programação ([formato de evidência](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Uma solicitação preparada **ainda não** constitui **uma prova de carimbo de data/hora**.
 

@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/featu
 
 โมเดลการเก็บรวบรวมข้อมูลปัจจุบัน กระบวนการทำงานแบบหลายบัญชี การส่งออกข้อมูล และขอบเขตการดำเนินงานของ TgWitness
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [ข้อมูลอ้างอิงโครงการ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![ข้อมูลอ้างอิงโครงการ](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness เก็บรักษาการสนทนาใน Telegram ที่บัญชีที่เชื่อมต่อสามารถเข้าถึงได้, บันทึกการเปลี่ยนแปลงที่สังเกตได้ และเตรียมไฟล์ส่งออกที่สามารถตรวจสอบได้ เอกสารอ้างอิงนี้อธิบาย โมเดลการเก็บรวบรวม, กระบวนการทำงานปัจจุบัน และขอบเขตของกระบวนการเหล่านั้น
 
-**On this page**
+**บนหน้านี้**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#stable-release-criteria)
+- [แอปพลิเคชันแบบสแตนด์อโลน](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#standalone-application)
+- [การสอบสวนร่วมกัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#shared-investigations)
+- [เครื่องมือเก็บถาวร](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#archive-tools)
+- [ส่วนเสริม (ไม่บังคับ)](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#optional-extras)
+- [โปรโตคอลและแหล่งข้อมูลส่วนตัว](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#protocol-and-private-sources)
+- [หลายบัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#multiple-accounts)
+- [การเก็บรวบรวมและระบุแหล่งที่มา](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#capture-and-attribution)
+- [ความจุและข้อจำกัดของ Telegram](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#capacity-and-telegram-limits)
+- [ความน่าเชื่อถือและการกู้คืน](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#reliability-and-recovery)
+- [โมเดลหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#evidence-model)
+- [การส่งออก การติดตั้ง และการส่งต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#export-deployment-and-handoff)
+- [เกณฑ์การปล่อยเวอร์ชันที่เสถียร](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/#stable-release-criteria)
 
 ## แอปพลิเคชันแบบสแตนด์อโลน
 
@@ -93,9 +93,9 @@ MTProxy อัตโนมัติจะรักษาเส้นทาง Te
 | การดำเนินการของผู้ดูแลระบบ | อัปเดตที่เกี่ยวข้องที่ส่งมาและภาพถ่ายหน้าจอของบันทึกผู้ดูแลระบบ (admin-log) ในการส่งออกแชทของช่อง/กลุ่มซูเปอร์กรุ๊ป | การส่งออกจะอ่านบันทึกเมื่อมีให้สำหรับบัญชีผู้ดูแลระบบที่ทำการส่งออก; การตรวจสอบบันทึกผู้ดูแลระบบอย่างต่อเนื่องอยู่นอกกระบวนการนี้ |
 | ไฟล์แนบ | คำอธิบายเวอร์ชันต้นฉบับ, จำนวนไบต์ที่ดาวน์โหลด/SHA-256 และผลการลอง | ไฟล์ที่หายไปอาจไม่สามารถกู้คืนได้; เวอร์ชันล่าสุดจะไม่ถูกแทนที่ |
 | ประวัติ | ภาพถ่ายหน้าจอที่แสดงข้อความที่มองเห็นได้ในปัจจุบันอย่างชัดเจน | ไม่สร้างใหม่ทุกการแก้ไขหรือเนื้อหาที่ถูกลบ |
-| กระบวนการเก็บรวบรวม | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) |
+| กระบวนการเก็บรวบรวม | เริ่ม/หยุด, สัญญาณชีพ, ข้อผิดพลาด, การตั้งค่า, ขอบเขต และใบรับการรันที่ลงนาม | รายการในเครื่อง; GitHub และ TDX เพิ่ม[การตรวจสอบสภาพแวดล้อมแบบอิสระ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+อินเทอร์เฟซจะระบุชื่อบัญชีที่ระบุในเหตุการณ์ต้นทาง และรักษา ชื่อและชื่อผู้ใช้ที่สังเกตได้ไว้ เมื่อเหตุการณ์ไม่ระบุผู้ดำเนินการ รายงานจะทิ้งช่องนั้นไว้โดยไม่ระบุ
 
 ## ความจุและข้อจำกัดของ Telegram
 

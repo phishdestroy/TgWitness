@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/featu
 
 مدل جمع‌آوری فعلی، گردش کارهای چندحساب، خروجی‌ها و مرزهای عملیاتی TgWitness.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [مرجع پروژه](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![مرجع پروژه](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness گفتگوهای تلگرام را که برای حساب‌های متصل قابل دسترسی هستند، حفظ می‌کند، تغییرات مشاهده‌شده را ثبت می‌کند و خروجی‌های قابل تأیید را آماده می‌سازد. این مرجع مدل جمع‌آوری، گردش کارهای فعلی و محدودیت‌های آن‌ها را توصیف می‌کند.
 
-**On this page**
+**در این صفحه**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#stable-release-criteria)
+- [برنامهٔ مستقل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#standalone-application)
+- [تحقیقات مشترک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#shared-investigations)
+- [ابزارهای بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#archive-tools)
+- [افزودنی‌های اختیاری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#optional-extras)
+- [پروتکل و منابع خصوصی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#protocol-and-private-sources)
+- [حساب‌های متعدد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#multiple-accounts)
+- [ثبت و انتساب](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#capture-and-attribution)
+- [ظرفیت و محدودیت‌های تلگرام](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#capacity-and-telegram-limits)
+- [اعتمادپذیری و بازیابی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#reliability-and-recovery)
+- [مدل شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#evidence-model)
+- [صادرات، استقرار و تحویل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#export-deployment-and-handoff)
+- [معیارهای انتشار پایدار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/#stable-release-criteria)
 
 ## برنامهٔ مستقل
 
@@ -93,9 +93,9 @@ MTProxy خودکار، مسیرهای فعال تلگرام را از چهار �
 | اقدامات ادمین | به‌روزرسانی‌های مرتبط تحویل‌شده و یک نمای کلی از لاگ ادمین در خروجی‌های چت کانال/ابر‌گروه | خروجی، در صورت موجود بودن، لاگ را برای حساب ادمین صادرکننده می‌خواند؛ بررسی مداوم لاگ ادمین خارج از این مسیر است. |
 | پیوست | توضیح‌دهنده نسخه اصلی، بایت‌های دانلودشده/SHA-256 و نتایج تلاش‌ها | یک فایل ناپدیدشده ممکن است بازیابی‌ناپذیر باشد؛ آخرین نسخه جایگزین نمی‌شود |
 | تاریخچه | اسکرین‌شات صریح پیام‌های قابل مشاهدهٔ فعلی | تمام ویرایش‌ها یا محتوای حذف‌شده را بازسازی نمی‌کند |
-| فرآیند جمع‌آوری | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) |
+| فرآیند جمع‌آوری | شروع/توقف، ضربان قلب، خطاها، تنظیمات، دامنه و رسید اجرای امضا شده | فهرست محلی؛ گیت‌هاب و TDX [بررسی‌های مستقل محیط را](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) اضافه می‌کنند |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+رابط کاربری نام حساب ارائه‌شده در رویداد منبع را نام‌گذاری می‌کند و نام‌های مشاهده‌شده و نام‌های کاربری را حفظ می‌کند. وقتی رویداد عامل خود را حذف کند، گزارش آن فیلد را نامشخص باقی می‌گذارد.
 
 ## ظرفیت و محدودیت‌های تلگرام
 

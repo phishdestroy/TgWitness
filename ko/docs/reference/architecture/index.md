@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![개발](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 단일 Python 프로세스가 FastAPI 패널과 여러 개의 분리된 작업 공간을 호스팅하며, 각 작업 공간에는 Telethon 사용자 계정 클라이언트가 포함됩니다. SQLite는 추가 전용 서명된 이벤트 저널과 변경 가능한 운영 설정을 저장합니다. 암호화된 볼트에는 API 자격 증명, StringSession 및 서명 키가 저장됩니다. 프론트엔드는 단순한 번들형 HTML/CSS/JavaScript로 구성되어 있어, Node 빌드, CDN 또는 런타임 프론트엔드 다운로드가 필요하지 않습니다.
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | 명시적인 패널 동작, 서명된 수신 확인, 영구적인 요청 ID 및 작업별 콜백/참가 재시도 정책 |
 | message_content.py | 전송 액세스 메타데이터를 제외한 메시지 비교 기능 |
 | workers.py | 취소 정리 작업을 수행하기 전에 파일 내보내기 작업이 완료될 때까지 대기 |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | 동시 채팅 작업, 계정별 예약, 서명된 체크포인트 및 아카이브 검증 후 정리 |
+| distributed_takeout.py / export_timing.py | 중단 후 재개 가능한 Takeout 세션 및 각 시작 또는 재개 시점 |
 | store.py | WAL 트랜잭션, 순차적 이벤트 체인, 쿼리 필터, 운영 설정 |
 | fulltext.py | 파생된 전체 텍스트 색인(단어 형태, BM25)은 서명된 저널 헤더에 바인딩되며, 절대 내보내지지 않습니다. |
 | security.py | 비공개 파일 생성, 암호화된 보관소, Ed25519 서명, 단일 프로세스 잠금 |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 각 워크스페이스는 하나의 계정만 허용하며, 고유한 디렉터리와 서명 식별자를 갖습니다. 호환성을 위해 메인 워크스페이스는 루트에 위치하며, 추가 워크스페이스는 profiles/<id>/에 위치합니다. 하나의 베어러 토큰이 전체 설치를 제어하며, 워크스페이스는 별도의 인증 테넌트가 아닙니다. 프로세스 잠금이 디렉터리를 보호하며, 데이터베이스 잠금은 이벤트 삽입을 순차적으로 처리합니다. 각 추가 작업은 FULL 동기 모드를 사용하여 SQLite WAL에 동기식으로 커밋됩니다. 이벤트 업데이트/삭제 트리거는 일반적인 애플리케이션 수정을 방지하며, 파일 시스템 관리자는 신뢰 경계 내에 머무릅니다.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+API 인증은 베어러 토큰 방식입니다. 로그인 작업은 직렬화되며 시간 제한이 적용됩니다. 계정 업로드는 전용 12 MiB 인코딩된 본문 제한과 8 MiB 디코딩된 파일 제한을 사용하며, 일반 API 요청은 16 KiB 제한을 유지합니다. 변환은 워커 스레드에서 실행되며, 업로드를 메모리에 유지하고, 인증된 브라우저에 정규화된 입력을 반환합니다. QR 로그인에는 워크스페이스별 후보, 단기 유효 식별자, 대기 작업, 및 명시적 취소 기능이 있습니다. 승인된 인증만 활성 클라이언트가 됩니다. Telegram FloodWait는 Retry-After 값과 함께 반환되며, 자격 증명 및 원시 RPC 오류 메시지는 API 오류에 노출되지 않습니다. 저널 내보내기는 비동기 이벤트 루프 외부에서 실행되며, 워크스페이스별로 직렬화됩니다. 이는 지속적인 WAL 쓰기 작업과 병행하여 안정적인 읽기 스냅샷을 스트리밍합니다. 채팅 수집 작업은 별도의 계정에서 동시에 실행될 수 있으며, 각 계정은 해당 작업이 중지될 때까지 예약된 상태로 유지됩니다. 일시 중지되거나 실패한 작업은 체크포인트를 유지합니다. 아카이브 검증이 성공하면 작업 파일을 정리할 수 있으며, ZIP 파일, 서명된 계획 및 상태만 남게 됩니다. 워크스페이스 수집기는 프로세스/이벤트 루프를 공유합니다.
 
 현재의 기록 스냅샷과 실시간 업데이트가 중복될 수 있습니다. 두 가지 모두 별도의 관측값으로, 출처별로 라벨이 지정되며, 중복 항목은 자동으로 접히지 않습니다. 누락된 ID, 조작된 삭제된 텍스트, 강제 회원 열거, 또는 자동 그룹 가입에 따른 추론 기능은 구현되지 않았습니다.
 

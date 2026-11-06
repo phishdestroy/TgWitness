@@ -6,7 +6,7 @@ TgWitness را به‌عنوان یک سرویس روی ویندوز، لینو�
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **انگلیسی** · [روسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [اوکراینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [اسپانیایی](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [پرتغالی (برزیل)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [ترکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [عربی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [هندی](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [بهاسا اندونزی](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [تایلندی](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [فونت ساده‌شدهٔ چینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | دموی مصنوعی را در `data\demo` آغاز کنید |
 | `TgWitness-Check.cmd` | بدون راه‌اندازی، بررسی آمادگی را اجرا کنید |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+واژه‌نامه مورفولوژی روسی سنجاق‌شده و پروفایل‌های رنگی PDF برای استفاده آفلاین بسته‌بندی شده‌اند. بسته‌بندی تنها مسیرهای فایل شناخته‌شده آن‌ها را در دایرکتوری‌های وابستگی `data` مجاز می‌داند؛ فایل‌های غیرمنتظره در آن دایرکتوری‌ها باعث شکست ساخت می‌شوند.
 
 کل آرشیو را در یک پوشه قابل نوشتن مانند `Documents\TgWitness` استخراج کنید؛ آن را از داخل فایل ZIP یا پوشه Program Files اجرا نکنید. محیط اجرای برنامه از یک مسیر ماژول ایزوله استفاده می‌کند، بنابراین نصب‌های دیگر پایتون و `PYTHONPATH` بر آن تأثیری ندارند. داده‌ها در پوشه `data` این بسته باقی می‌مانند. برای به‌روزرسانی، TgWitness را متوقف کنید، نسخه جدید را در یک پوشه جدید استخراج کرده و پوشه `data` را کپی کنید.
 

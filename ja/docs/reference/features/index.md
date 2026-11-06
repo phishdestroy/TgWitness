@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/featu
 
 TgWitnessの現在の収集モデル、マルチアカウントワークフロー、エクスポート機能、および運用上の制限事項。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [プロジェクト参照](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![プロジェクト参照](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitnessは、接続されたアカウントからアクセス可能なTelegramの会話内容を保存し、 観測された変更を記録し、検証可能なエクスポートデータを生成します。このリファレンスでは、 収集モデル、現在のワークフロー、およびその範囲について説明します。
 
-**On this page**
+**このページでは**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#stable-release-criteria)
+- [スタンドアロンアプリケーション](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#standalone-application)
+- [共有された調査](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#shared-investigations)
+- [アーカイブツール](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#archive-tools)
+- [オプションの追加項目](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#optional-extras)
+- [プロトコルおよび非公開情報源](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#protocol-and-private-sources)
+- [複数のアカウント](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#multiple-accounts)
+- [キャプチャと出典明記](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#capture-and-attribution)
+- [容量とTelegramの制限](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#capacity-and-telegram-limits)
+- [信頼性と復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#reliability-and-recovery)
+- [証拠モデル](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#evidence-model)
+- [エクスポート、デプロイ、および引き継ぎ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#export-deployment-and-handoff)
+- [安定版のリリース基準](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/#stable-release-criteria)
 
 ## スタンドアロンアプリケーション
 
@@ -93,9 +93,9 @@ TgWitnessには、独自のインストール手順、データディレクト�
 | 管理者の操作 | チャンネル／スーパーグループのチャットエクスポートに含まれる、関連する配信済み更新情報および管理ログのスナップショット | エクスポート機能は、エクスポートを行う管理者アカウントが利用可能な場合にログを読み取ります。管理者ログの継続的なポーリングは、この処理の流れには含まれません。 |
 | 添付ファイル | オリジナルバージョンの記述、ダウンロードされたバイト数／SHA-256、および試行結果 | 削除されたファイルは復元できない場合があります。最新バージョンが置き換えられることはありません。 |
 | 沿革 | 現在表示されているメッセージの明確なスナップショット | すべての編集や削除されたコンテンツを復元するわけではありません |
-| コレクタープロセス | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) |
+| コレクタープロセス | 開始/停止、ハートビート、エラー、設定、スコープ、および署名付き実行受領証 | ローカルインベントリ；GitHubおよびTDXによる[独立した環境チェックの](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)追加 |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+インターフェースでは、ソースイベントで指定されたアカウント名が使用され、観測された 名前やユーザー名はそのまま保持されます。イベントに実行者が記載されていない場合、レポートではそのフィールドは未指定のままとなります。
 
 ## 容量とTelegramの制限
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/setti
 
 सेटअप विज़ार्ड, लक्ष्य, इंटरफ़ेस स्तर, कनेक्शन मार्ग और एक खाता समूह द्वारा साझा की गई सेटिंग्स।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [शुरुआत करना](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![शुरुआत करना](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [खाते](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) · [कनेक्शन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/) · [पहुँच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/)
 

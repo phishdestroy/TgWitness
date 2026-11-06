@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/searc
 
 Recherchez les messages enregistrés par formes de mots, expressions exactes, domaines et @noms d'utilisateurs, en affichant les résultats les plus pertinents en premier, grâce à l'index lié au journal signé.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Enquête](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Analyse des archives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/) · [OCR et transcription en local](https://phishdestroy.github.io/TgWitness/fr/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Recherchez les messages enregistrés par formes de mots, expressions exactes, do
 
 L'index est constitué de données dérivées. Il est reconstruit à partir du journal signé, n'est jamais signé en soi et n'est jamais inclus dans une exportation. Les enregistrements d'origine ne sont pas modifiés.
 
-**On this page**
+**Sur cette page**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#dependencies)
+- [Syntaxe de recherche](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#search-syntax)
+- [Langues](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#languages)
+- [Emplacement de l'index](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#where-the-index-lives)
+- [Résultats et journal signé](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#results-and-the-signed-journal)
+- [Texte reconnu](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#recognized-text)
+- [Accès](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#access)
+- [Consulter les archives et MCP](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#ask-the-archive-and-mcp)
+- [Dépendances](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/fr/docs/reference/search/#benchmark)
 
 ## Syntaxe de recherche
@@ -97,14 +97,14 @@ L'accès limité aux discussions ne trouve que les enregistrements provenant de 
 
 Les clients MCP peuvent appeler `search_messages` avec `ranked=true` et les pages avec `next_offset`. Les connexions à portée restreinte ne reçoivent que leurs propres discussions.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+La pagination classée couvre au maximum les premiers résultats 1,000, quelle que soit la taille de la page. Affiner la requête, la conversation ou la période pour examiner d’autres correspondances. Les recherches les plus récents en premier classent les messages, les résultats OCR et les transcriptions avant la sélection de chaque page.
 
 ## Dépendances
 
-| Package | Licence | Pourquoi |
+| Paquet | Licence | Pourquoi |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | Lemmes en russe et en ukrainien ; les dictionnaires sont chargés localement |
-| snowballstemmer | BSD-3-Clause | Racines en anglais, Python pur |
+| snowballstemmer | Clause BSD-3 | Racines en anglais, Python pur |
 | jieba | MIT | Segmentation des requêtes en chinois, en Python pur (distribution du code source uniquement) |
 | pymorphy3-dicts-uk (facultatif) | GPL-3.0 | Dictionnaire ukrainien complet |
 

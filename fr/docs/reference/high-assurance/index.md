@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-
 
 Un serveur sécurisé disponible 24 h/24 et 7 j/7 sur Hetzner ou Phala Cloud, un DNS Gateway et des vérifications reproductibles par un tiers.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Déploiement et restauration](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Déploiement et restauration](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+Un déploiement à haute fiabilité ajoute des contrôles indépendants de l’environnement de collecte à la vérification des archives. Le réviseur interroge les enregistrements de déploiement et d’accès détenus par le fournisseur de services cloud et Cloudflare, et un déploiement Intel TDX ajoute une attestation matérielle de l’environnement du collecteur.
 
 L'utilisation classique en local et avec Docker reste inchangée. Rien ne fonctionne ici à moins que vous ne déployiez avec `python -m tgwitness.cloud`, et le collecteur ne lit son hôte que lorsque le déploiement est configuré `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ Organigramme · Opérateur → Serveur, pare-feu sans règles entrantes (API du 
 7. Verifier, jetons en lecture seule → Déclaration /api/assurance signée
 8. Verifier, jetons en lecture seule → Fichier ZIP de preuves
 
-**On this page**
+**Sur cette page**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#reading-the-deployment-result)
+- [Ce qu'un vérificateur peut contrôler](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Fournisseurs](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#providers)
+- [Machine virtuelle confidentielle sur Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Avant de commencer](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#before-you-start)
+- [Extrait du panneau](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#from-the-panel)
+- [Tunnel rapide sans domaine](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Déployer](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#deploy)
+- [Déploiement de débogage et verrouillage](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Supprimer un déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#remove-a-deployment)
+- [N'importe quel serveur (auto-certifié)](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#any-server-self-attested)
+- [Vérifier](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#verify)
+- [Rapport pour la remise des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare en tant que témoin externe](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Lecture du résultat du déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## Ce qu’un vérificateur peut contrôler
 
@@ -54,7 +54,7 @@ Organigramme · Opérateur → Serveur, pare-feu sans règles entrantes (API du 
 | La clé de signature a été créée sur ce serveur | La clé signe une déclaration indiquant l’identifiant du serveur du fournisseur et le hachage du fichier cloud-init qu’elle a reçu. | Collector, vérifié par le fournisseur |
 | Le journal appartient à cette clé et à ce serveur | Chaque processus lancé dans la preuve ZIP comporte la mesure de l'hôte pour ce serveur | Preuves ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+Le collecteur enregistre l'état SSH, les sessions, l'historique des connexions et les informations de démarrage dans des enregistrements signés process-start et `host.state`. Sur une machine virtuelle ordinaire, il s'agit d'enregistrements d'inventaire locaux, que le vérificateur compare aux enregistrements indépendants du fournisseur. Le déploiement Intel TDX ci-dessous vérifie en outre les mesures basées sur le matériel.
 
 ## Fournisseurs
 
@@ -109,7 +109,7 @@ Pour un déploiement Phala, `verify --report certificate.md` écrit également l
 
 Le rapport est scellé numériquement à l’aide de signatures et d’horodatages, dans le fichier `certificate.seal.json` et dans les fichiers `.tsq`/`.tsr` qui l’accompagnent :
 
-| Seal | Ce qu'il apporte |
+| Sceau | Ce qu'il apporte |
 | --- | --- |
 | Horodatage électronique qualifié, `http://tsa.belgium.be/connect` | Horodatage RFC 3161 portant sur les octets exacts de `certificate.json`, émis par le prestataire de services de confiance qualifié du gouvernement fédéral belge (SPF Politique et Soutien, BOSA). Cette entité figure sur la liste de confiance de l’UE de la Belgique en tant que service d’horodatage qualifié, statut accordé ; la racine (Belgium Root CA6) et les entrées de la liste, telles qu’elles figurent dans la liste publiée le 20 octobre 2026, sont intégrées dans `tgwitness/tsa_roots.py`. En vertu de l’article 41 du règlement (UE) n° 910/2014, un tel horodatage est présumé exact quant à la date et à l’heure, ainsi qu’à l’intégrité des données, dans chaque État membre de l’UE |
 | Horodatage RFC 3161, FreeTSA | Un deuxième horodatage, indépendant |
@@ -275,7 +275,7 @@ Tout ce qui est présenté ici est facultatif. Même sans compte Cloudflare, le 
 | Qu'est-ce que | Ce qu’il présente | Dans TgWitness |
 | --- | --- | --- |
 | Tunnel rapide ou tunnel de votre domaine | L'accès au panneau se fait uniquement via le tunnel | L'assistant de configuration du serveur, voir ci-dessus |
-| drand relay `drand.cloudflare.com` | Les enregistrements postérieurs à une session de drand sont plus récents que celui-ci : le journal a été rédigé au fur et à mesure. | mode « evidence », « **More witnesses** », « no account » ([format](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)) |
+| relais drand `drand.cloudflare.com` | Les enregistrements postérieurs à une session de drand sont plus récents que celui-ci : le journal a été rédigé au fur et à mesure. | mode « evidence », « **More witnesses** », « no account » ([format](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices)) |
 | Notifications sur l'état du tunnel | lorsque le tunnel était hors service, par e-mail ou via un webhook de Cloudflare | Configurez-les dans le tableau de bord Cloudflare |
 | Gateway DNS (`--gateway-dns`, ou **DNS de la passerelle Cloudflare** dans l'assistant) | chaque nom recherché par le serveur, auquel Cloudflare a répondu via TLS ; le pare-feu Hetzner empêche le DNS d’accéder à quoi que ce soit d’autre ; si une politique de passerelle pouvait réécrire les réponses | Hetzner, forfait Zero Trust gratuit, sans domaine ; `verify` vérifie le pare-feu, l’emplacement, la journalisation, les politiques, les requêtes du serveur et le journal d’audit ; le mode « evidence » copie le journal dans le registre |
 | Passerelle avec le client Cloudflare One sur le serveur, un pare-feu sortant qui n'autorise que Cloudflare | chaque connexion établie par le serveur, et pas seulement les requêtes DNS | pas encore développé |
@@ -292,6 +292,6 @@ Cloudflare ne peut pas accéder au contenu chiffré de Telegram, ni aux autres a
 
 ## Lecture du résultat du déploiement
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+Pour une machine virtuelle classique, le fournisseur contrôle l’infrastructure hôte, et l’inventaire local est vérifié parallèlement aux enregistrements du fournisseur. Pour Intel TDX, le vérificateur contrôle en outre la configuration matérielle, la liaison du collecteur, la composition et les mesures du système d’exploitation. Consultez les résultats individuels pour voir quelles vérifications ont été réussies ou n’étaient pas disponibles.
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+Les détails historiques relatifs au pare-feu dépendent du fournisseur ; Linode conserve les versions des règles. L'enregistrement de validation   répertorie les déploiements testés et les vérifications en cours, et la portée de vérification   relie ces vérifications d'environnement à l'acquisition et à l'intégrité des archives.

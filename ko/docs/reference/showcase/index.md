@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/showc
 
 선택한 공개 채널의 저장된 메시지와 서명된 스냅샷을 유효 기간이 정해져 있고 취소 가능한 링크를 통해 게시합니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [배포 및 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![배포 및 복구](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **'Access → Public showcase'는** 기존의 액세스 토큰 시스템을 사용하여 별도의 읽기 전용 페이지를 생성합니다. 이 페이지는 설치 환경에 저장된 관측 데이터를 읽어옵니다. 이 기능은 방문자를 위해 수집기를 시작하거나, 텔레그램에 로그인하거나, 채널을 확보하지는 않습니다.
 

@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-i
 
 通过验证者实际使用的精确公式，详细解释了哈希链、签名、检查点和见证人等概念。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [证据与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![证据与验证](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness 保存收集账户所观察到的内容，将这些观察结果 整合到一份经过签名的日志中，并允许其他人使用可信 密钥和先前保留的检查点来验证导出内容。
 
 [本地文档网站](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)新增了 位于 `/docs/concepts/` 的交互式示例、位于 `/docs/witness/` 的检查点决策探索器，以及关于[“案件看板](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-board/)”、 [报告设计](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)和[移交摘录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#handover-extract)的操作指南。 所有示例消息、 计数和延迟均为虚构。链式沙盒中的哈希值是在浏览器中使用 SHA-256 算法计算得出的。没有任何数据会被发送至 Telegram。
 
-**On this page**
+**本页内容**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#pick-a-workflow)
+- [消息会发生变化；观察结果会不断积累](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [哈希值的覆盖范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#what-a-hash-covers)
+- [早期检查点新增的内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [见证的归属](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#where-a-witness-belongs)
+- [针对已知操作进行测试](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [选择工作流](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/#pick-a-workflow)
 
 ## 消息在变；观察在积累
 

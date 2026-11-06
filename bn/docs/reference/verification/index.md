@@ -4,91 +4,91 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/verif
 
 লাইভ টেলিগ্রাম পরীক্ষা, স্বয়ংক্রিয় যাচাইকরণ, ব্রাউজার যাচাইকরণ এবং যা যাচাই করা যায়নি।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [প্রমাণ এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![প্রমাণ ও যাচাইকরণ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
-**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+**6 নভেম্বর 2026 আপডেট করা হয়েছে।** ফলাফলগুলি প্রতিটি রানের জন্য রেকর্ডকৃত সংশোধন, পরিবেশ এবং ওয়ার্কলোড-এর সাথে আবদ্ধ। [বর্তমান সক্ষমতাগুলি](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) উপলব্ধ ওয়ার্কফ্লো বর্ণনা করে; এই পৃষ্ঠাটি প্রকৃতপক্ষে যা যা যাচাই করা হয়েছে তা রেকর্ড করে।
 
-[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+[পারফরম্যান্স গ্রাফ](https://phishdestroy.github.io/TgWitness/docs/validation/) · [স্বাক্ষরিত ইংরেজি নিরীক্ষা](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [ডাউনলোডযোগ্য পরিমাপ](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
 
-| Latest evidence | ফলাফল | পরিধি |
+| সর্বশেষ প্রমাণ | ফলাফল | পরিধি |
 | --- | --- | --- |
-| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
-| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
-| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
-| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
-| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+| মুক্তি নিরীক্ষা · 6 নভেম্বর | 1,461 মূল পরীক্ষাগুলি উত্তীর্ণ হয়েছে; 37 প্ল্যাটফর্ম স্কিপ করে | উৎস `92e539af40d8`; উন্মুক্ত ফলাফল সংরক্ষিত |
+| নতুন রপ্তানি · 6 নভেম্বর | 127.713 এবং 141.781 রেকর্ড/সে, সম্পূর্ণ চক্র | প্রতি সার্ভারে দুটি অ্যাকাউন্ট; WARP-এর মাধ্যমে টেক্সট এবং মেটাডেটা |
+| সংরক্ষিত আর্কাইভ · 6 নভেম্বর | 48 সংরক্ষণাগার; 3,598,381 যাচাইকৃত রেকর্ড | বিদ্যমান আর্কাইভগুলি পিন করা ওয়ার্কস্পেস কী-গুলির বিরুদ্ধে যাচাই করা হয়েছে |
+| ট্রাস্টেড লাইভ · 5 নভেম্বর | রক্ষিত CPU রেকর্ডিং এবং WARP চেকসমূহ | অফিসিয়াল ডেস্কটপ লগইন এবং নেটিভ এক্সপোর্ট অনির্ধারিতই থাকবে |
+| Phala / Intel TDX · 4 নভেম্বর | 16-এর সব যাচাইকরণ পরবর্তী চালানগুলোতে সফল হয়েছে | ঐতিহাসিক মোতায়েন; CVM-এ কোনো টেলিগ্রাম অ্যাকাউন্ট নেই |
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
-- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
-- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
-- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
-- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
-- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
-- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
-- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
-- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#synthetic-local-capacity-measurement)
-- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
-- [Remaining qualification](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#remaining-qualification)
+- [রিলিজ অডিট এবং নতুন এক্সপোর্ট · 6 নভেম্বর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [ট্রাস্টেড লাইভ CPU উবুন্টু এবং WARP · 5 নভেম্বর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [লাইভ ফালা ক্লাউড মোতায়েন · 4 নভেম্বর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [লাইভ সার্ভার জার্নাল ইনভেন্টরি · 1 নভেম্বর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [সাম্প্রতিক অফলাইন এবং ত্রুটি-ইনজেকশন পরীক্ষা · 1 নভেম্বর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [লাইভ টেলিগ্রাম পরীক্ষা, সম্পূর্ণ অ্যাকাউন্ট · 29 অক্টোবর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [পাসওয়ার্ড-সুরক্ষিত রপ্তানি libarchive দিয়ে খোলা হয়েছে · 29 অক্টোবর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [লাইভ টেলিগ্রাম পরীক্ষা · 27 থেকে 29 অক্টোবর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [কৃত্রিম স্থানীয় ক্ষমতার পরিমাপ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [এক মিলিয়ন বার্তায় পূর্ণ-পাঠ অনুসন্ধান · 5 নভেম্বর 2026](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [অবশিষ্ট যোগ্যতা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/#remaining-qualification)
 
-## Release audit and fresh exports · 6 November 2026
+## রিলিজ অডিট এবং নতুন এক্সপোর্ট · 6 নভেম্বর 2026
 
-The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+অডিটে উৎস হিসেবে v0.9.1 এবং `92e539af40d8368d198ff5e040f1d876f2c1310e` ব্যবহার করা হয়েছিল, রিলিজ `92e539af40d8-83e41104669e`। ইনস্টলকৃত প্যাকেজের স্মোক চেক তিনটি সার্ভারে সফল হয়েছে। স্বাক্ষরিত রিপোর্টে সেই সময় পর্যবেক্ষিত অবস্থা সংরক্ষিত রয়েছে।
 
-[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+[![দুটি নতুন ওয়ার্কলোডের জন্য অধিগ্রহণ এবং সম্পূর্ণ রপ্তানি হার](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
 
-| Workload | রেকর্ডসমূহ | Acquisition | Complete cycle | Complete-cycle rate |
+| কাজের চাপ | রেকর্ডসমূহ | অর্জন | সম্পূর্ণ চক্র | সম্পূর্ণ-চক্রের হার |
 | --- | --- | --- | --- | --- |
-| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
-| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+| সার্ভার A · দুইটি অ্যাকাউন্ট | 27,030 | 189.043s | 211.647s | 127.713 রেকর্ড/সে |
+| সার্ভার বি · দুইটি অ্যাকাউন্ট | 29,299 | 182.513s | 206.650s | 141.781 রেকর্ড/সে |
 
-Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+উভয় এক্সপোর্টই রিজিউম ছাড়া শুরু হয়েছিল, সংযুক্তি ও অবতার বাদ দিয়ে, এবং শূন্য ডুপ্লিকেট বা পুনর্ব্যবহৃত রেকর্ড নিয়ে শেষ হয়েছিল। সম্পূর্ণ চক্রে প্রস্তুতি, সংগ্রহ, নির্বাচন, প্যাকেজিং এবং আর্কাইভ যাচাই অন্তর্ভুক্ত। সার্ভার A একটি সুরক্ষিত-চ্যাট পড়ার যাচাইকরণও চালিয়েছিল। A-তে চারটি FloodWait ইভেন্ট এবং B-তে তিনটি ইভেন্ট সম্মানিত হয়েছে। এই পর্যবেক্ষণগুলো সাধারণ থ্রুপুট গ্যারান্টি প্রতিষ্ঠা করে না।
 
-| যাচাই করুন | ফলাফল | Qualification |
+| যাচাই করুন | ফলাফল | যোগ্যতা |
 | --- | --- | --- |
-| Core pytest | 1,461 passed | 37 platform skips |
-| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
-| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
-| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
-| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
-| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+| মূল pytest | 1,461 পাস হয়েছে | 37 প্ল্যাটফর্ম স্কিপ করে |
+| ব্রাউজার / ব্রাউজার ইউএক্স / প্রমাণ / সাইট | 102/66/15/9 উত্তীর্ণ হয়েছে | এই প্রোগ্রামগুলো অন্যান্য পরীক্ষার সাথে ওভারল্যাপ করে; গণনাগুলো যোগাত্মক নয় |
+| অ্যাড-অন ক্যাপচার | 124 উত্তীর্ণ হয়েছে | প্রয়োজনীয় Chromium স্যান্ডবক্স দ্বারা তিনটি অফিসিয়াল ওয়েব চেক ব্লক করা হয়েছে |
+| API অনুমোদন | 269 রুট; 538 অনুরোধসমূহ পাস | অভাবিত শংসাপত্র এবং বাতিলকৃত অ্যাক্সেস |
+| সংরক্ষিত আর্কাইভ | 48 যাচাইকৃত 48 | 3,598,381 রেকর্ড; পিন করা ওয়ার্কস্পেস কীসমূহ |
+| লাইভ ফ্লিট রিড চেকস | 40 প্রোফাইলের 24 পাস হয়েছে | 16 WARP রুটগুলো যোগ্যতা পরীক্ষায় ব্যর্থ হয়েছে; সেই প্রোফাইলগুলো সংযুক্ত ছিল না |
 
-The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+[স্বাক্ষরিত প্রতিবেদন](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)সমস্ত খোলা ফাইন্ডিং রেকর্ড করে, যার মধ্যে রয়েছে অপ্রকাশিত গোপন-চ্যাটের একটি স্ন্যাপশটে তিনটি ত্রুটি যা অডিটকৃত প্রধান বিল্ডে অনুপস্থিত। পূর্বের [পাবলিক-ইতিহাস যোগ্যতা](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md)একটি ভিন্ন রিভিশন এবং ওয়ার্কলোড ব্যবহার করেছিল; এর হারগুলো এই তুলনার সাথে একত্রিত করা যাবে না।
 
-Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
+[পিন করা কী এবং ভেরিফায়ার](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files) ব্যবহার করে মূল রিপোর্ট যাচাই করুন। এর স্বাক্ষর অপারেটরের রিপোর্টকে পরিবর্তনের হাত থেকে রক্ষা করে। এটি স্বাধীন প্রত্যয়ন, টেলিগ্রামের লেখকত্বের প্রমাণ বা GDPR সার্টিফিকেশন নয়।
 
-## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+## ট্রাস্টেড লাইভ CPU উবুন্টু এবং WARP · 5 নভেম্বর 2026
 
-The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+সংরক্ষিত ইন্টিগ্রেশন রানটি RunPod CPU হোস্টের ভিতরে QEMU-এর অধীনে শুধুমাত্র CPU-নির্ভর Ubuntu 24.04.5 অতিথি (4 vCPU, 8 GiB) ব্যবহার করেছিল। কালেক্টরে `14e642a5` ব্যবহৃত হয়েছিল; যাচাইকরণে `02072461` ব্যবহৃত হয়েছিল। চূড়ান্ত ফিক্সগুলো [PR #114](https://github.com/phishdestroy/TgWitness/pull/114)-এ মার্জ করা হয়েছিল `755f78f6` হিসেবে, যার ট্রি পরীক্ষিত PR হেডের সাথে মিল ছিল। এটি TEE ছিল না।
 
-- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
-- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
-- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
-- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
-- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+- একটি প্রকৃত WARP কানেক্টর সুস্থ রিপোর্ট করেছে; প্রক্সি করা HTTPS রিপোর্ট করেছে WARP এবং গেটওয়ে সক্ষম। তিনটি প্রব্‌স একই প্রস্থান ঠিকানা দেখেছে, স্থায়ী IP গ্যারান্টি নয়।
+- WARP বিচ্ছিন্ন করার ফলে প্রক্সি করা অনুরোধটি ব্যর্থ হয়েছে। সরাসরি গেটওয়ে-সার্ভিস HTTPS প্রত্যাখ্যাত হয়েছে। রেকর্ডার নেমস্পেসে, সরাসরি IPv4/IPv6, বাহ্যিক DNS এবং Docker-এর এমবেডেড UDP রিজলভার ব্লক করা হয়েছে।
+- একটি স্কোপড রিড-অনলি প্রভাইডার টোকেন health/connections পড়তে পারতো এবং connector enrollment টোকেন পড়তে পারতো না। স্বাক্ষরিত প্রভাইডার পর্যবেক্ষণে স্পষ্টভাবে অনুপলব্ধ নমুনা অন্তর্ভুক্ত ছিল। উইটনেস অপারেটরের হোস্টে চলেছিল, তাই এটি স্বাধীন তৃতীয় পক্ষের হেফাজত নয়, বরং রেকর্ডিং এবং সংরক্ষণ প্রদর্শন করে।
+- অফিসিয়াল ডেস্কটপ তার অননুমোদিত স্বাগত স্ক্রিনে পৌঁছেছে। সুরক্ষিত কীবোর্ড ইনপুট ক্যাপচারের সময় প্রত্যাখ্যাত হয়েছে। তিনটি H.264 ডিসপ্লে সেগমেন্ট ডিকোড করা হয়েছে এবং তাদের ক্লক ওভারলে পরিদর্শন করা হয়েছে। 18 ইভেন্ট প্রিফ্লাইট আর্কাইভ পিন করা রেকর্ডার কী-এর বিরুদ্ধে যাচাই করা হয়েছে এবং চেকপয়েন্ট সংরক্ষণ করা হয়েছে।
+- চূড়ান্ত ক্যাপচার পরীক্ষা Windows এবং Linux CI-তে বাস্তব Chromium/FFmpeg সহ114 কেসগুলো পাস করেছে। পাঁচটি এঙ্কর পরীক্ষা এবং নির্ভরতা পরামর্শ চেক পাস হয়েছে।
 
-An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+একটি প্রাথমিক 2 vCPU/4 GiB স্টার্টআপ সমান্তরাল ইমেজ-বিল্ড লোডের অধীনে টাইমআউট হয়ে গার্ডের মাধ্যমে বন্ধ হয়ে যায়; এটি সফল হিসেবে গণ্য হবে না। ম্যানুয়াল টেস্ট-অ্যাকাউন্ট লগইন, নেটিভ চ্যাট এক্সপোর্ট, বাস্তব হাইব্রিড তুলনা এবং টেলিগ্রাম-সাইড লগআউট এখনও বাকি রয়েছে। কোনও সরবরাহিত টেলিথন সেশন আমদানি করা হয়নি। সংযুক্তি, স্বয়ংক্রিয় OCR, স্থানীয় drand BLS যাচাইকরণ এবং ট্রাস্টেড লাইভ TDX প্রত্যয়ন যোগ্য ছিল না।
 
 ## লাইভ ফালা ক্লাউড ডিপ্লয়মেন্ট · ৪ নভেম্বর ২০২৬
 
-**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+**ঐতিহাসিক ফলাফল:**পরবর্তী স্থাপনাগুলি সমস্ত 16 যাচাইকারী পরীক্ষা উত্তীর্ণ হয়েছে, যেমন Intel TDX এবং কুইক টানেল। প্রমাণ, স্বাক্ষরিত ঠিকানা আবিষ্কার এবং রিপোর্ট টাইমস্ট্যাম্প পুনরায় শুরু করা হয়েছিল এবং পৃথকভাবে যাচাই করা হয়েছিল। প্রতিটি পরীক্ষা CVM তার রান শেষে সরিয়ে ফেলা হয়েছিল।
 
-| সেটআপ | Recorded value |
+| সেটআপ | রেকর্ডকৃত মান |
 | --- | --- |
 | প্রদানকারী | Phala Cloud · `tdx.small` · US-WEST-1 |
-| নিয়োগ | `--provider phala --quick-tunnel`; initially empty workspace |
-| Initial collector | `df7d860c` · v0.8.1 |
-| Collector with all fixes | `53a0f7e9` |
-| Production guest | `dstack-0.5.12`; SSH access disabled |
-| External services | ntfy.sh, GitHub and Intel PCS |
-| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+| নিয়োগ | `--provider phala --quick-tunnel`; প্রাথমিকভাবে খালি কর্মক্ষেত্র |
+| প্রাথমিক সংগ্রাহক | `df7d860c` · v0.8.1 |
+| সমস্ত ফিক্সসহ কালেক্টর | `53a0f7e9` |
+| প্রোডাকশন অতিথি | `dstack-0.5.12`; SSH অ্যাক্সেস নিষ্ক্রিয় |
+| বহিঃসেবা | ntfy.sh, GitHub এবং Intel PCS |
+| পর্যবেক্ষিত খরচ | সাতটি CVM, মোট প্রায় 1.9টি মার্কিন সেন্ট; ঐতিহাসিক পরীক্ষার মূল্য নির্ধারণ |
 
-The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+নিচের ক্রমটি প্রাথমিক ব্যর্থতা, মেরামত এবং সম্পন্ন যাচাইকরণকে পৃথক করে। এই CVM-গুলোর সাথে কোনো টেলিগ্রাম অ্যাকাউন্ট সংযুক্ত ছিল না।
 
-**Deployments 1–2 · provider differences and regression checks**
+**1–2 মোতায়েন · প্রদানকারী পার্থক্য এবং রিগ্রেশন পরীক্ষা**
 
 প্রথম দুইটি ডিপ্লয়মেন্ট সিমুলেটেড Phala Cloud থেকে পাঁচটি পার্থক্য খুঁজে পেয়েছিল। [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) এখন প্রতিটি পুনরুত্পাদন করে, এবং এর ফিক্স ছাড়া ব্যর্থ হয়:
 
@@ -100,7 +100,7 @@ The sequence below separates initial failures, fixes and completed checks. No Te
 | dstack গেটওয়ে বন্ধ থাকায়, CVM বিবরণে কখনই `instance_id` পাওয়া যায় না। | ডিপ্লয় ৩০ মিনিট অপেক্ষা করে এবং ব্যর্থ হয় | ইনস্ট্যান্স আইডি CVM-এর অবস্থা থেকে পড়া হয় |
 | রিস্টার্ট, স্টপ এবং স্টার্ট হল CVM অপারেশন, অ্যাপ্লিকেশন রিভিশনের নয়। | `provider_actions` রিস্টার্ট তালিকাভুক্ত করেনি | অপারেশনগুলোও পড়া হয় |
 
-**Deployment 3 · attestation, access checks and restart evidence**
+**3-এ মোতায়েন · প্রত্যয়ন, অ্যাক্সেস যাচাই এবং পুনঃশুরু প্রমাণ**
 
 - CVM SSH অ্যাক্সেস বন্ধ রেখে `dstack-0.5.12` চালিয়েছিল। কালেক্টর তৈরি হওয়ার প্রায় ১.৫ মিনিট পর তার স্বাক্ষরিত ঠিকানা পোস্ট করেছিল। Deploy তারপর `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, হার্ডওয়্যার অ্যাটেস্টেশন রেকর্ড v4, FMSPC `20a06f000000`, ডিবাগ মোডে নেই, স্থানান্তরযোগ্য নয়, Intel থেকে প্রাপ্ত ক্রিপ্টোগ্রাফিক যাচাইকরণ ডেটা সমর্থন করে `tdx_compose_hash`, `tdx_compose` (বাইট অনুযায়ী) এবং `tdx_identity` (KMS কী)।
 - trycloudflare.com ঠিকানায় প্যানেল টোকেন ছাড়া বা ভুল টোকেন দিয়ে 401 উত্তর দিয়েছে, এবং প্যানেল টোকেন দিয়ে 200।
@@ -109,66 +109,66 @@ The sequence below separates initial failures, fixes and completed checks. No Te
 - `destroy` শুধুমাত্র সেই CVM-টি মুছে ফেলেছে। এরপর ওয়ার্কস্পেস ফাঁকা হয়ে যায়, এবং প্যানেলের ঠিকানা সাড়া দেওয়া বন্ধ করে দেয়।
 - প্যানেল উইজার্ডের মূল্য যাচাইয়ে `tdx.small` প্রতি ঘণ্টায় $0.058 দেখিয়েছে। একটি ভুল কী-তে একটি সাধারণ "API কী গ্রহণ করা হয়নি" বার্তা এসেছে।
 
-**Follow-up fixes · signed address discovery and OS measurements**
+**পরবর্তী সংশোধনসমূহ · স্বাক্ষরিত ঠিকানা আবিষ্কার এবং অপারেটিং সিস্টেম পরিমাপ**
 
 - ঠিকানা কী ছাড়া, `verify` ঠিকানা বিষয়ের সর্বশেষ সুগঠিত পোস্টটি অনুসরণ করেছিল, যা প্রকাশিত Docker Compose কনফিগারেশনে মুদ্রিত আছে। একটি জাল পোস্ট এটিকে এমন একটি হোস্টে পাঠিয়েছিল যা বিদ্যমান নেই, এবং `statement` ব্যর্থ হয়েছিল: একজন জালকারী সংগ্রাহক হিসেবে নিজেকে চালাতে পারেনি, তবে ব্লক করতে পারত তৃতীয় পক্ষের যাচাইকরণ, সর্বোচ্চ ১২ ঘণ্টা পর্যন্ত একটি জাল ভবিষ্যতের টাইমস্ট্যাম্প সহ। কালেক্টর এখন তার ঠিকানাটি নিজের কী দিয়ে স্বাক্ষরিত অবস্থায় পোস্ট করে, `verify` শুধুমাত্র তখনই এমন পোস্টগুলো গ্রহণ করে যখন সেগুলো কালেক্টর নিজে করে, এবং পোস্টগুলো ntfy.sh-এর প্রাপ্তির সময় অনুযায়ী সাজানো হয়। [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) জাল পোস্টগুলো পুনরায় চালায়। একটি CVM এটিকে শুধুমাত্র সেই কমিট থেকে চালায় যাতে এটি থাকে, তাই এই রানের কালেক্টর এখনও তার ঠিকানায় স্বাক্ষর করেনি এবং `verify` তাই বলেছে।
 - `tdx_os` `dstack-mr` ছাড়া চলতে পারেনি, যার বর্তমান সংস্করণে ডকুমেন্টেশনে উল্লেখিত `measure --json`-এর পরিবর্তে `measure-os` রয়েছে। যাচাইকারী এখন প্রকাশিত ইমেজ এবং VM-এর আকৃতি (ACPI টেবিলসহ) থেকে নিজেই MRTD এবং RTMR0-2 গণনা করে।
 
-**Deployment 4 · all 16 checks, report seals and restart verification**
+**নিয়োগ 4 · সব 16 চেক, রিপোর্ট সীল এবং পুনঃপ্রমাণীকরণ**
 
 - Deploy প্রকাশিত `dstack-0.5.12` একবার ডাউনলোড করল, CVM রিপোর্টকৃত OS ইমেজ হ্যাশের সাথে মিলিয়ে দেখল, এবং `tdx_os` পাস করল: MRTD, RTMR0, RTMR1 এবং RTMR2 QEMU-এর জন্য গণনা করা মানগুলোর সমান। ৮.২.২, ১ vCPU এবং ২ GiB। একই গণনা দাবি করা ৪ GiB, ২ vCPU, QEMU 9.2.1 বা দ্বিতীয় নেটওয়ার্ক কার্ডের জন্য ভিন্ন RTMR0 দিয়েছে, এবং পরিবর্তিত কার্নেল, ফার্মওয়্যার বা কমান্ড লাইন এবং ডেভেলপমেন্ট ইমেজের জন্য ব্যর্থ হয়েছে।
 - `verify` তার ১৬টি চেকের প্রত্যেকটি পাস করেছে, দ্রুত টানেলের সংযোগকারী সহ, তাই ফলাফল ছিল PASS। এটি HTML এবং PDF সার্টিফিকেট তৈরি করেছে, যা স্বাক্ষর এবং টাইমস্ট্যাম্প দিয়ে ডিজিটালি সিল করা হয়েছে, যার মধ্যে রয়েছে বেলজিয়াম সরকারের টাইমস্ট্যাম্পিং ইউনিট TSU 202301 (বেলজিয়ামের ট্রাস্টেড লিস্টে গ্রান্টেড স্ট্যাটাস) থেকে প্রাপ্ত একটি যোগ্য eIDAS টাইমস্ট্যাম্প, একটি FreeTSA টাইমস্ট্যাম্প এবং ভেরিফায়ারের স্বাক্ষর; `check-report` এগুলো এবং PDF-এর স্বাক্ষর সবই নিশ্চিত করেছে।
 - পুনঃশুরু করার পর, `verify --evidence` দুটি শুরু নিশ্চিত করেছে, প্রতিটি CVM-এর ভিতরে তৈরি হওয়া হার্ডওয়্যার অ্যাটেস্টেশনের সাথে এবং প্রতিটি প্রকাশিত `dstack-0.5.12` থেকে বুট করা হয়েছে; পুনঃশুরু এবং নতুন বুট REVIEW ছিল।
 - `destroy` ওয়ার্কস্পেস ফাঁকা রেখেছে।
 
-**Deployment 5 · collector-signed discovery and forged-post rejection**
+**নিয়োগ 5· কালেক্টর-স্বাক্ষরিত আবিষ্কার এবং জাল-পোস্ট প্রত্যাখ্যান**
 
-The collector ran from commit `53a0f7e9`, which includes the fixes above.
+সংগ্রাহক commit `53a0f7e9` থেকে চালানো হয়েছে, যাতে উপরের সংশোধনগুলি অন্তর্ভুক্ত রয়েছে।
 
 - কলেক্টর তার নিজস্ব কী দিয়ে স্বাক্ষরিত ঠিকানাটি অপারেটরের HMAC পোস্টের পাশে পোস্ট করল। তারপর টপিকে দুটি জাল পোস্ট যোগ করা হল, একটি শূন্য HMAC সহ এবং অন্যটি অন্য একটি Ed25519 কী দিয়ে স্বাক্ষরিত, উভয়ই ২০৯৬ সালের একটি সময় দাবি করছে। `verify` কালেক্টর কী দ্বারা স্বাক্ষরিত ঠিকানাটি গ্রহণ করে এবং সব ১৬টি যাচাই সফলভাবে সম্পন্ন করে; সীলটিতে আবার যোগ্য বেলজিয়ান টাইম স্ট্যাম্প, FreeTSA-এর টাইম স্ট্যাম্প এবং যাচাইকারীর স্বাক্ষর ছিল, এবং `check-report` সেগুলো নিশ্চিত করে।
 - পুনঃশুরু করার পর কালেক্টর স্বাক্ষরিত নতুন ঠিকানা পোস্ট করল: `verify` তা সঙ্গে সঙ্গেই খুঁজে পেল, অপারেটরের **বর্তমান ঠিকানা খুঁজে পেল** HMAC পোস্টের ২৭ সেকেন্ড পর, এবং উভয়েই জাল পোস্টগুলো উপেক্ষা করল। `verify --evidence` নিশ্চিত করল যে দুইটি স্টার্ট `dstack-0.5.12` থেকে বুট হয়েছে।
 - Deploy প্রিন্ট করেছে Phala CVM-কে কী বিল করে, ডিস্ক সহ: প্রতি ঘণ্টায় $0.06078।
 
-### Panel wizard and remaining scope
+### প্যানেল উইজার্ড এবং বাকি স্কোপ
 
 প্যানেল উইজার্ড Phala Cloud-এ দুইবার চালানো হয়েছিল, একবার এর জব API-এর মাধ্যমে এবং একবার একটি প্রকৃত Chromium-সহ ব্রাউজারের মাধ্যমে: মূল্য যাচাই, **Advanced**-এর অধীনে commit-সহ তৈরি, সব ছয়টি attestation যাচাই পাস, সার্ভার তালিকা বিল করা মূল্য (মাসে 44.37 USD) দেখিয়েছিল, **বর্তমান ঠিকানা খুঁজে বের করা**, পরিমাপকৃত Docker Compose কনফিগারেশন ডাউনলোড, এবং মুছে ফেলা। ব্রাউজারে কোনো পৃষ্ঠা ত্রুটি দেখা যায়নি। প্রতিবার পরবর্তীতে ওয়ার্কস্পেস খালি ছিল।
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
+অন্তর্ভুক্ত নয়: Phala-এ একটি Cloudflare ডোমেইন, CVM-এ একটি Telegram অ্যাকাউন্ট, এবং `dstack-0.6.1` ইমেজ। উইজার্ডের তৈরি করার পূর্ববর্তী মূল্য শুধুমাত্র Phala-এর কম্পিউট মূল্য, কারণ এর API শুধুমাত্র বিদ্যমান CVM-এর ডিস্ক মূল্য দেখায়; সার্ভার তালিকা তৈরি করার পর বিলকৃত মূল্য দেখায়। এই বিভাগের সমস্ত মূল্য 4 নভেম্বর 2026-এ পর্যবেক্ষণ করা হয়েছে।
 
-## Live server journal inventory · 1 November 2026
+## লাইভ সার্ভার জার্নাল ইনভেন্টরি · 1 নভেম্বর 2026
 
-At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
+প্রায় 19:15 UTC-এ, ধারাবাহিক শুধুমাত্র-পঠন SQLite `query_only` কুয়েরিগুলি একটি চলমান সার্ভারে দশটি ওয়ার্কস্পেস ডাটাবেসে ইভেন্টগুলি গণনা করেছিল। কুয়েরিগুলির সময় সংগ্রহ চলতে থাকায়, এটি ওয়ার্কস্পেসগুলির মধ্যে একটি পরমাণুবৎ স্ন্যাপশট নয়।
 
-| Observed across the ten workspace databases | গণুন |
+| দশটি ওয়ার্কস্পেস ডাটাবেসে পর্যবেক্ষিত | গণুন |
 | --- | --- |
-| Workspaces with at least one `message.new` event | 8 |
-| Journal records, including operational events | 1,610,818 |
-| `message.new` events | 900,232 |
-| `message.edited` events | 80,683 |
-| `message.deleted` events | 400,536 |
-| `message.recovered` events | 53,403 |
-| `message.snapshot` events | 2,183 |
-| `media.saved` events | 50,418 |
-| `media.failed` events | 5,575 |
-| `coverage.gap` events | 11 |
-| Database bytes, excluding WAL files and media | 7,909,003,264 |
+| `message.new` ইভেন্টসহ অন্তত একটি ওয়ার্কস্পেস | 8 |
+| জার্নাল রেকর্ড, যার মধ্যে রয়েছে অপারেশনাল ইভেন্ট | 1,610,818 |
+| `message.new` ইভেন্টসমূহ | 900,232 |
+| `message.edited` ইভেন্টসমূহ | 80,683 |
+| `message.deleted` ইভেন্টসমূহ | 400,536 |
+| `message.recovered` ইভেন্টসমূহ | 53,403 |
+| `message.snapshot` ইভেন্টসমূহ | 2,183 |
+| `media.saved` ইভেন্টসমূহ | 50,418 |
+| `media.failed` ইভেন্টসমূহ | 5,575 |
+| `coverage.gap` ইভেন্টসমূহ | 11 |
+| ডাটাবেস বাইট, WAL ফাইল এবং মিডিয়া বাদে | 7,909,003,264 |
 
-These are **event counts**, not unique messages, people or media files. The same message can appear in more than one workspace, and an edit or deletion can produce another journal event. `media.failed` counts historical failure events, not the current media queue. The queries did **not** newly verify signatures and the full hash chain of all 1,610,818 records, measure delivery or throughput, or establish that every Telegram event was captured. No message content, account or chat IDs, workspace labels, credentials or private files are published here.
+এগুলো **ইভেন্টের সংখ্যা**, অনন্য বার্তা, মানুষ বা মিডিয়া ফাইল নয়। একই বার্তা একাধিক ওয়ার্কস্পেসে উপস্থিত হতে পারে, এবং সম্পাদনা বা মুছে ফেলা আরেকটি জার্নাল ইভেন্ট তৈরি করতে পারে। `media.failed` ঐতিহাসিক ব্যর্থতার ইভেন্টগুলো গণনা করে, বর্তমান মিডিয়া ক্যু নয়। কোয়েরিগুলো করেছিল **না** নতুন করে স্বাক্ষর এবং সমস্ত সম্পূর্ণ হ্যাশ চেইন যাচাই করেনি 1,610,818 রেকর্ড, ডেলিভারি বা থ্রুপুট পরিমাপ, অথবা নিশ্চিত করে না যে প্রতিটি টেলিগ্রাম ইভেন্ট ক্যাপচার করা হয়েছে। কোনো বার্তার বিষয়বস্তু, অ্যাকাউন্ট বা চ্যাট আইডি, ওয়ার্কস্পেস লেবেল, শংসাপত্র বা ব্যক্তিগত ফাইল এখানে প্রকাশিত হয় না।
 
-At this review, the separately configured public monitor covered three sources: one capture response was OK and two reported `no_response`. That monitor is not a ten-workspace health summary. `no_response` means the observer could not obtain a response at that check; it does not establish message loss. The smaller 29 October test below has its own explicit signature and hash-chain verification.
+এই পর্যালোচনায়, পৃথকভাবে কনফিগার করা পাবলিক মনিটর তিনটি উৎস কভার করেছে: একটি ক্যাপচার রেসপন্স OK ছিল এবং দুটি রিপোর্ট করেছে `no_response`। সেই মনিটরটি দশ-ওয়ার্কস্পেসের স্বাস্থ্য সারসংক্ষেপ নয়। `no_response` মানে পর্যবেক্ষক সেই চেক-এ কোনো রেসপন্স পেতে পারেনি; এটি বার্তা হারানোর প্রমাণ নয়। নিচের ছোট 29 অক্টোবরের পরীক্ষায় নিজস্ব স্পষ্ট স্বাক্ষর এবং হ্যাশ-চেইন যাচাইকরণ রয়েছে।
 
-## Recent offline and fault-injection checks · 1 November 2026
+## সাম্প্রতিক অফলাইন এবং ত্রুটি-ইনজেকশন পরীক্ষা · 1 নভেম্বর 2026
 
-These checks use fictional data and local files; they add regression evidence for the current source, not another live Telegram delivery measurement:
+এই চেকগুলো কাল্পনিক ডেটা এবং স্থানীয় ফাইল ব্যবহার করে; এগুলো বর্তমান সোর্সের জন্য রিগ্রেশন প্রমাণ যোগ করে, অন্য কোনো লাইভ টেলিগ্রাম ডেলিভারি পরিমাপের জন্য নয়:
 
-| যাচাই করুন | What it exercised |
+| যাচাই করুন | এটি যা অনুশীলন করেছিল |
 | --- | --- |
-| [Source archive](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact. |
-| [Account export recovery](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow. |
-| [Minimized disclosure privacy](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged. |
-| [Linux media decoder and OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | A [Linux Docker CI check](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) at commit `5a9e0814` passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model. |
+| [উৎস আর্কাইভ](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | একই সোর্স বাইট থাকা সত্ত্বেও ফাইলের সময় পরিবর্তিত দুটি বিল্ড একই ZIP এবং চেকসাম তৈরি করেছে। সংরক্ষিত বাইট এবং ফাইল হ্যাশগুলো হুবহু মিলিয়েছে; ব্যক্তিগত পরীক্ষা ফাইলগুলো অন্তর্ভুক্ত করা হয়নি। একটি সিমুলেটেড লেখার ব্যর্থতা পূর্ববর্তী আর্কাইভ এবং চেকসাম অক্ষত রেখেছে। |
+| [অ্যাকাউন্ট রপ্তানি পুনরুদ্ধার](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | দ্বিতীয় ZIP সদস্যে একটি সিমুলেটেড ডিস্ক ত্রুটির ফলে কোনো প্রকাশিত বা আংশিক ZIP তৈরি হয়নি। Resume প্রতিটি স্বাক্ষরিত রসিদকে বাইট-আইডেন্টিকালভাবে সংরক্ষণ করেছে, প্রত্যাশিত স্বাক্ষর ফিঙ্গারপ্রিন্ট ব্যবহার করে স্বতন্ত্রভাবে যাচাইযোগ্য একটি আর্কাইভ তৈরি করেছে, এবং আংশিক ফলাফল হিসেবে কৃত্রিম কভারেজ ফাঁক বজায় রেখেছে। Scale assertion-গুলো ইতিহাস বাড়ার সাথে সাথে পুনরাবৃত্তি হওয়া টাস্ক এবং রসিদ স্ক্যানের বিরুদ্ধে সুরক্ষা দেয়। |
+| [নূন্যতম প্রকাশ গোপনীয়তা](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | কৃত্রিম ইউনিকোড নাম ও ছদ্মনাম, স্তরযুক্ত মেটাডেটা, অজানা প্রেরক এবং মিডিয়া ক্ষেত্রগুলি তিনটি পরিচয় মোডেই এবং পাঠ্য বাদ দিয়ে পরীক্ষা করা হয়েছিল। একটি মাস্কিং-সীমা ত্রুটি নীরবে সম্পাদনা দুর্বল করেনি; মূল স্বাক্ষরিত অ্যাকাউন্ট রপ্তানি অপরিবর্তিত ছিল। |
+| [লিনাক্স মিডিয়া ডিকোডার এবং OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | `5a9e0814`-এ একটি [লিনাক্স ডকার CI চেক](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) পাস হয়েছে; এটি Ogg/Opus, MP3, M4A, ভিডিওসহ MP4, WAV এবং FLAC ইনপুট জেনারেট করেছে; forged-duration এবং secondary-file-reference কন্ট্রোল ব্যবহার করেছে; এবং 48টি মিউটেটেড পার্সার ফিক্সচার (34টি প্রত্যাখ্যাত, 14টি সীমার মধ্যে ডিকোড হয়েছে) হিসেবে কাজ করেছে। আসল Tesseract OCR মূল বাইটগুলো অপরিবর্তিত রেখেই চলেছে। ডিকোডার এবং OCR Whisper মডেল ছাড়া নেটওয়ার্ক-আইসোলেটেড কন্টেইনারে চলেছে। |
 
-The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) and [full Checks](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) workflows. They test these failure boundaries, not every possible storage failure or whether a disclosure is automatically safe to publish. The media check does not measure speech recognition accuracy or Telegram delivery. Review each derivative before sharing.
+চেকগুলো [পুল-রিকোয়েস্ট](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) এবং [পূর্ণ চেক](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) ওয়ার্কফ্লোতে চলে। এগুলো এই ব্যর্থতার সীমা পরীক্ষা করে, প্রতিটি সম্ভাব্য স্টোরেজ ব্যর্থতা বা কোনো প্রকাশ স্বয়ংক্রিয়ভাবে প্রকাশের জন্য নিরাপদ কিনা তা নয়। মিডিয়া চেক বক্তৃতা স্বীকৃতি নির্ভুলতা বা টেলিগ্রাম ডেলিভারি পরিমাপ করে না। শেয়ার করার আগে প্রতিটি ডেরিভেটিভ পর্যালোচনা করুন।
 
 ## লাইভ টেলিগ্রাম পরীক্ষা, সম্পূর্ণ অ্যাকাউন্ট · ২৯ অক্টোবর ২০২৬
 
@@ -249,6 +249,6 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 সংরক্ষিত লাইভ জার্নাল প্রকৃত সংগ্রহ, সম্পাদনা, মুছে ফেলার বিজ্ঞপ্তি, সংযুক্তি, পুনঃপরীক্ষা এবং রেট-লিমিট হ্যান্ডলিং প্রতিষ্ঠা করে। এটি সম্পূর্ণ ডেলিভারি বা ভূমিকা দৃশ্যমানতা, প্রতিক্রিয়াশীল অভিনেতারা, দীর্ঘায়িত FloodWait, অ্যাকাউন্ট নিষেধাজ্ঞা এবং নেটওয়ার্ক/প্রক্রিয়া বিঘ্ন পুনরুদ্ধারের নিয়ন্ত্রিত ম্যাট্রিক্স প্রতিষ্ঠা করে না। QR-টোকেন ইস্যু সম্পূর্ণ মোবাইল QR নিশ্চিতকরণের থেকে পৃথক।
 
-Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
+Docker/Compose এবং ইনস্টলেশন চেক CI-তে রেকর্ড করা হয়েছে; বাস্তব Phala ডিপ্লয়মেন্ট এবং বাহ্যিক টাইমস্ট্যাম্প যাচাইকরণ উপরে বর্ণনা করা হয়েছে। এগুলো টেকসই উচ্চ লোড, একটি সম্পূর্ণ লাইভ প্ল্যাটফর্ম/রোল ম্যাট্রিক্স, স্বাধীন নিরাপত্তা পর্যালোচনা, দীর্ঘমেয়াদী আর্কাইভ্যাল ভ্যালিডেஷன் বা ফরেনসিক সার্টিফিকেশন প্রতিষ্ঠা করে না। সংরক্ষিত MTProto স্টেট এবং ক্যাচ-আপ বাস্তবায়িত হয়েছে; অ্যাটমিক ক্ষতিহীন লাইভ রিপ্লে এখনও প্রতিষ্ঠিত হয়নি। নতুন ব্যাকফিল কমিট বার্তা এবং কার্সরগুলো অ্যাটমিকভাবে প্রেরণ করে এবং উপলব্ধ সাম্প্রতিক ক্রিয়া (Recent Actions) সংরক্ষণ করে, তবে এর সিন্থেটিক কভারেজ লাইভ যোগ্যতা থেকে পৃথক। নিয়ন্ত্রিত যোগ্যতা ম্যাট্রিক্সের জন্য দেখুন [লাইভ গ্রহণ](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md)।
 
-The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.
+[পাবলিক অডিট ডিরেক্টরি](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md)-এ শুধুমাত্র স্বাক্ষরিত রিপোর্ট এবং সম্মিলিত পরিমাপ রয়েছে। বিস্তারিত অপারেশনাল রসিদ, কাঁচা ক্যাপচার এবং অ্যাকাউন্ট সম্পর্কিত উপকরণ ব্যক্তিগত রাখা হয়েছে। `docs/assets/`-এ অ্যাপ্লিকেশন স্ক্রিনশটগুলোতে কাল্পনিক প্রদর্শনী ডেটা ব্যবহার করা হয়েছে।

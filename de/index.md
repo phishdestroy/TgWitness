@@ -141,7 +141,7 @@ Geplante oder manuelle Kopien
 
 Jetzt kopieren oder alle 1 bis 1.440 Minuten， Fortschritt im Panel．
 
-Object Lock
+Objekt－Sperre
 
 Wählen Sie Aufbewahrungstage und Modus， das Panel prüft， ob es wirklich greift．
 

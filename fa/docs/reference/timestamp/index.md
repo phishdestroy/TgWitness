@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/times
 
 تمبرهای زمانی RFC 3161 برای نقاط کنترل امضا شده: چه چیزی به مرجع ارسال می‌شود و چگونه پاسخ تأیید می‌شود.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شواهد و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![شواهد و تأیید](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness درخواست‌های RFC 3161 را آماده می‌کند و پاسخ‌های مرجع تاریخ‌نگاری (TSA) را تأیید می‌کند. این رویه دستی نه یک مرجع تاریخ‌نگاری را انتخاب می‌کند و نه داده‌ای را ارسال می‌نماید؛ حالت مدرک هر دو را طبق یک برنامه زمان‌بندی‌شده ([قالب مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)) انجام می‌دهد. یک درخواست آماده‌شده **هنوز یک مدرک تاریخ‌نگاری نیست**.
 

@@ -6,21 +6,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/inves
 
 [টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![তদন্ত](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 একটি কেস চ্যানেল, গ্রুপ, ব্যক্তিগত চ্যাট এবং বট জুড়ে অনুসরণ করুন, প্রাথমিক অধিগ্রহণ থেকে শুরু করে উল্লিখিত সময়রেখা এবং যাচাইযোগ্য হস্তান্তর পর্যন্ত। ইন্টারেক্টিভ ওয়েবসাইট সংস্করণটি `/docs/cases/`-এ; [প্রিভিউ নির্দেশাবলী](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)।
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#adapt-the-investigation)
+- [কাজ করা কেস: একটি গন্তব্য চারটি কথোপকথনে পরিবর্তিত হয়](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1। মামলাটি সংজ্ঞায়িত করুন এবং সম্পূর্ণ বিবরণ সংগ্রহ করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2। প্রতিটি উৎস তালিকাভুক্ত করুন এবং ঐতিহাসিক প্রেক্ষাপট সংগ্রহ করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3। বিকাশমান ঘটনা এবং ইচ্ছাকৃত মিথস্ক্রিয়া](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions) সংরক্ষণ করুন।
+- [4। চ্যাট জুড়ে পর্যবেক্ষণ সংযোগ করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5। ক্রস-চ্যাট টাইমলাইন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#5-build-the-cross-chat-timeline) তৈরি করুন।
+- [6। অ্যাকাউন্টের দৃষ্টিভঙ্গি যোগ করুন, তাদের উৎপত্তি হারিয়ে ছাড়া](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7। কেস হস্তান্তর](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff) একত্রিত ও যাচাই করুন।
+- [তদন্ত অভিযোজিত করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/#adapt-the-investigation)
 
 ## সমাধানকৃত কেস: চারটি কথোপকথনের মধ্যে গন্তব্য পরিবর্তন হয়।
 
@@ -117,7 +117,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/inves
 | একই সংরক্ষিত ফাইল | সম্পূর্ণ মিডিয়া রসিদ #151 এবং #209 | সংরক্ষিত বাইটগুলির জন্য পূর্ণ SHA-256 মানগুলো মিলছে। |
 | চ্যানেল অ্যাট্রিবিউশন | একশ এক এবং একশ আশি আট | প্রেরক উল্লেখ না থাকলে চ্যানেল পোস্টটি ব্যবহারকারী ৭১০०১-এর নামে বরাদ্দ করবেন না। |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+সংযুক্তি হ্যাশ এবং সংশ্লিষ্ট বার্তা রেফারেন্সগুলো তুলনা করুন এবং সেগুলোর রেকর্ড রাখুন, সেই রেকর্ডগুলোতে প্রদত্ত টেলিগ্রাম আইডি অনুযায়ী টাইমলাইনগুলো গ্রুপ করুন।
 
 [Case Board](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/)-এ দলের কর্ম-নোট রাখুন: আপনি যে রেকর্ডগুলোর উপর নির্ভর করেন, যেমন #146, #188 এবং #205, সেগুলো বুকমার্ক করুন, সঠিক গন্তব্য স্ট্রিংটি হাইলাইট করুন, এবং দুইটি রেকর্ডের মধ্যে বা একটি সময়সীমার মধ্যে প্রতিটি রেকর্ডকৃত কর্মকাণ্ডের একটি স্লাইস সংরক্ষণ করুন। নোট এবং স্ট্যাটাসগুলো স্বাক্ষরিত ইতিহাসে দলের পর্যালোচনা সংরক্ষণ করে, যা উৎস পর্যবেক্ষণ থেকে পৃথকভাবে শনাক্তযোগ্য।
 
@@ -177,6 +177,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | বট-চালিত অর্ডার/পেমেন্ট বিরোধ | প্রবেশ ঘোষণা → সংরক্ষিত লিঙ্ক পূর্বরূপ → বট শুরু প্যারামিটার → বার্তা এবং কীবোর্ড সংস্করণ → প্যানেল কলব্যাক রসিদ → ব্যক্তিগত/গ্রুপ ফলো-আপ | প্রস্তাব/প্রতিক্রিয়া সময়রেখা পর্যবেক্ষণ করা হয়েছে এবং উৎসগুলো যাচাই করা হয়েছে; শুধুমাত্র একটি পেমেন্ট লিঙ্ক পেমেন্ট প্রমাণ করে না। |
 | ঘটনার পর বার্তাগুলো মুছে ফেলা হয়েছে | সকল প্রভাবিত চ্যাট → সংরক্ষিত মূল ফাইল/সম্পাদনা → মুছে ফেলা বা পুনঃপরীক্ষায় অনুপস্থিত ফলাফল → সংরক্ষিত মিডিয়া → কভারেজ এবং অন্যান্য অ্যাকাউন্টের দৃষ্টিভঙ্গি | সংরক্ষিত সংস্করণ এবং স্পষ্ট অজানা ব্যবধান; কোনো কাল্পনিক মুছে ফেলা অভিনেতাই নেই |
-| একজন অংশগ্রহণকারী বিভিন্ন চ্যাটে নাম পরিবর্তন করে। | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | টেলিগ্রাম অ্যাকাউন্টের কার্যকলাপের একটি টাইমলাইন, যার সাথে এর উৎস রেকর্ডগুলির লিঙ্ক রয়েছে |
+| একজন অংশগ্রহণকারী বিভিন্ন চ্যাটে নাম পরিবর্তন করে। | সংখ্যাতাত্ত্বিক প্রেরক আইডি → নাম/ব্যবহারকারীর নাম ইতিহাস → উত্তর → অন্যান্য পর্যবেক্ষিত চ্যাট → উদ্ধৃত গন্তব্য/ফাইলসমূহ | টেলিগ্রাম অ্যাকাউন্টের কার্যকলাপের একটি টাইমলাইন, যার সাথে এর উৎস রেকর্ডগুলির লিঙ্ক রয়েছে |
 
 [সংগ্রহ রেফারেন্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/) · [ব্যক্তি প্রোফাইল যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#people-profiles) · [প্রমাণ হস্তান্তর](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#investigation-handoff) · [যাচাইকরণ সম্পন্ন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/)

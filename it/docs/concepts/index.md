@@ -67,7 +67,7 @@ Telegram non dice chi ha eliminato un messaggio né quando esattamente. TgWitnes
 
 Ogni voce contiene l’hash della precedente. Un punto di controllo conservato altrove fissa la lunghezza del diario e l’ultimo hash.
 
-02 / HASH-CHAIN SANDBOXSHA-256 reale · esempi di registrazioni
+02 / SANDBOX HASH-CHAINSHA-256 reale · esempi di registrazioni
 
 REGISTRAZIONE 01**Messaggio ricevuto**`h₁ = SHA-256(e₁)`Link a 64 zeri
 

@@ -6,21 +6,21 @@ Kanal, guruh, shaxsiy suhbatlar va botlar bo'ylab butun hisob tekshiruvlari, das
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Tergov](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Bir ishni kanallar, guruhlar, shaxsiy suhbatlar va botlar bo'ylab dastlabki olishdan tortib, keltirilgan vaqt chizig'i va tasdiqlanadigan topshirishgacha kuzatib boring. Interaktiv veb-sayt versiyasi `/docs/cases/` manzilida; [ko'rinishni oldindan ko'rish bo'yicha ko'rsatmalar](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**Ushbu sahifada**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#adapt-the-investigation)
+- [Ish holati: manzil to'rtta suhbat davomida o'zgaradi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Holatni aniqlang va to'liq hisobotni to'plang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Har bir manbani inventarizatsiya qiling va tarixiy kontekstni oling](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Rivojlanayotgan holat va ataylab o'tkazilgan o'zaro ta'sirlarni saqlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Suhbatlar bo'ylab kuzatuvlarni bog'lash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Sohbetlararo vaqt chizig'ini tuzing](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Hisob nuqtai nazarlarini ularning kelib chiqishini yo'qotmasdan qo'shish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Ishni topshirishni yig'ish va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Tergovni moslashtiring](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/#adapt-the-investigation)
 
 ## Tahlil qilingan holat: manzil to'rtta suhbat davomida o'zgargan
 
@@ -117,7 +117,7 @@ Ishlangan misolda:
 | Xuddi shu saqlangan fayl | Yakunlangan media kvitansiyalari #151 va #209 | Saqlangan baytlar uchun to'liq SHA-256 qiymatlari mos keladi |
 | Kanalga tegishlilik | #101 va #188 | Tasdiqlangan jo'natuvchi bo'lmasa, kanal postini foydalanuvchi 71001 ga tegishli deb hisoblamang |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+Ilova hashlarini va ularga tegishli xabar havolalarini solishtiring hamda hisob yozuvlarida ularni saqlang. Telegram IDlari bo'yicha guruhlangan vaqt chiziqlarini yozuvlarda ko'rsatilgan Telegram IDlari bo'yicha guruhlang.
 
 Jamoaning [Case Board](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/)'dagi ish yozuvlarini saqlang: #146, #188 va #205 kabi tayanadigan yozuvlarni belgilab qo'ying, aniq manzil satrini ajratib ko'rsating va har bir yozib olingan harakatning ikki yozuv orasidagi yoki vaqt oralig'idagi bo'lagini saqlang. Eslatmalar va holatlar jamoaning ko'rib chiqishini o'z imzolangan tarixida saqlaydi, ularni manba kuzatuvlaridan alohida aniqlash mumkin.
 
@@ -177,6 +177,6 @@ Haqiqiy tekshiruv natijalari va asl artefaktlarni saqlang. Case Board'dagi ish m
 | --- | --- | --- |
 | Bot tomonidan boshqariladigan buyurtma/to'lov nizosi | Yozuv e'lon qilish → saqlangan havola ko'rinishi → botni ishga tushirish parametri → xabar va klaviatura versiyalari → panel chaqiruvlari kvitansiyalari → shaxsiy/guruh bo'yicha keyingi kuzatuv | Kuzatilgan taklif/javob vaqt chizig'i va tasdiqlangan manbalar; faqat to'lov havolasi to'lovni isbotlamaydi |
 | Voqeadan keyin o'chirib tashlangan xabarlar | Ta'sirlangan barcha suhbatlar → saqlangan asl nusxalar/tahrirlar → o'chirish yoki qayta tekshirishda yo'qolish natijalari → saqlangan media → yoritish va boshqa hisob nuqtai nazarlari | Saqlangan versiyalar va aniq noma'lum oraliklar; ixtiro qilingan o'chirish sub'ekti yo'q |
-| Ishtirokchi suhbatlar bo'ylab ismlarini o'zgartiradi | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Telegram hisobining faoliyat kronologiyasi va uning manba yozuvlariga havolalar |
+| Ishtirokchi suhbatlar bo'ylab ismlarini o'zgartiradi | Raqamli jo'natuvchi ID → ism/foydalanuvchi nomi tarixi → javoblar → boshqa kuzatilgan suhbatlar → keltirilgan manzillar/fayllar | Telegram hisobining faoliyat kronologiyasi va uning manba yozuvlariga havolalar |
 
 [Yig'ish manbai](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) · [Foydalanuvchi profilini tasdiqlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#people-profiles) · [Dalillarni topshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#investigation-handoff) · [Validatsiya yakunlandi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/)

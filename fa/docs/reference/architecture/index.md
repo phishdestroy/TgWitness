@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/archi
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![توسعه](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 یک فرآیند پایتون میزبان پنل FastAPI و هر تعداد فضای کاری ایزوله است، که هر کدام دارای یک کلاینت حساب کاربری تل‌هان (Telethon) هستند. SQLite یک دفترچه وقایع امضا شده با قابلیت الحاق تنها و تنظیمات عملیاتی قابل تغییر را در خود جای می‌دهد. یک گاوصندوق رمزگذاری‌شده حاوی اعتبارنامه‌های API، StringSession و کلید امضا است. فرانت‌اند، HTML/CSS/JavaScript بسته‌بندی‌شده و ساده‌ای است: نیازی به ساخت با Node، CDNها یا دانلودهای فرانت‌اند در زمان اجرا نیست.
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | اقدامات واضح پنل، رسیدهای امضا‌شده، شناسه‌های درخواست پایدار و سیاست تلاش مجدد فراخوانی/پیوست‌شدن محلی وظیفه |
 | message_content.py | مقایسهٔ قابل مشاهدهٔ پیام‌ها، بدون در نظر گرفتن متادیتای دسترسی به انتقال |
 | workers.py | منتظر کارگران فایل خروجی قبل از پاکسازی لغو باشید |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | وظایف هم‌زمان چت، رزروهای هر حساب، نقاط کنترل امضا شده و پاک‌سازی پس از تأیید بایگانی |
+| distributed_takeout.py / export_timing.py | جلسات از سرگیری‌پذیر Takeout و زمان‌بندی برای هر شروع یا از سرگیری |
 | store.py | معاملات WAL، زنجیره رویداد مرتب‌شده، فیلترهای پرس‌وجو، تنظیمات عملیاتی |
 | fulltext.py | شاخص متن کامل مشتق‌شده (شکل‌های واژگان، BM25)، متصل به سرآیند دفترچهٔ امضا شده؛ هرگز صادر نمی‌شود |
 | security.py | ایجاد فایل خصوصی، گاوصندوق رمزگذاری‌شده، امضای Ed25519، قفل تک‌فرآیندی |
@@ -50,7 +50,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 هر فضای کاری یک حساب کاربری را می‌پذیرد و دارای دایرکتوری و هویت امضای خود است. فضای کاری اصلی برای سازگاری در ریشه باقی می‌ماند؛ فضاهای کاری اضافی در profiles/<id>/ قرار دارند. یک توکن حامل کل نصب را کنترل می‌کند؛ فضاهای کاری اجزای مجزای مجوزدهی نیستند. قفل‌های فرآیند از دایرکتوری‌ها محافظت می‌کنند؛ قفل‌های پایگاه داده، درج رویدادها را به صورت سریالی انجام می‌دهند. هر افزودنی به طور همزمان در WAL (لاگ پیش‌رونده) SQLite با حالت همگام کامل commit می‌شود. رویدادهای به‌روزرسانی/حذف، ویرایش‌های عادی برنامه را متوقف می‌کنند؛ مدیران فایل‌سیستم در محدوده اعتماد باقی می‌مانند.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+مجازیت API یک توکن حمل‌کننده است. عملیات ورود به سیستم سریالی و دارای محدودیت زمانی هستند. بارگذاری‌ها در حساب کاربری از یک اختصاصی استفاده می‌کنند 12 محدودیت بدنه‌ی رمزگذاری‌شده MiB و یک 8 محدودیت فایل رمزگشایی‌شده MiB؛ درخواست‌های عادی API حفظ می‌کنند 16 محدودیت KiB. تبدیل در یک نخ کارگر (worker thread) اجرا می‌شود، بارگذاری‌ها را در حافظه نگه می‌دارد و ورودی نرمال‌شده را به مرورگر احراز شده بازمی‌گرداند. ورود با QR دارای یک شناسه موقت برای هر فضای کاری، یک وظیفه منتظر (waiter task) و لغو صریح است. تنها مجوز پذیرفته‌شده به مشتری فعال تبدیل می‌شود. Telegram FloodWait با یک مقدار Retry-After بازگشته می‌شود؛ اعتبارنامه‌ها و پیام‌های خطای خام RPC در خطاهای API فاش نمی‌شوند. خروجی‌های ژورنال خارج از حلقه رویداد غیرهمزمان اجرا می‌شوند و به ازای هر فضای کاری به صورت سریالی انجام می‌گیرند. آن‌ها همزمان با ادامه نوشته‌های WAL، یک نمای خواندنی پایدار را استریم می‌کنند. وظایف دریافت چت می‌توانند به طور همزمان روی حساب‌های مجزا اجرا شوند؛ هر حساب تا زمانی که وظیفه‌اش متوقف نشود، رزرو باقی می‌ماند. یک وظیفه متوقف‌شده یا ناموفق، نقاط کنترل خود را حفظ می‌کند. تأیید موفق بایگانی، پاکسازی فایل‌های کاری آن را مجاز می‌سازد و فقط فایل ZIP، طرح امضا شده و وضعیت را باقی می‌گذارد. گردآورندگان فضای کاری حلقه فرآیند/رویداد را به اشتراک می‌گذارند.
 
 اسنپ‌شات‌های تاریخچهٔ جاری و به‌روزرسانی‌های زنده می‌توانند هم‌پوشانی داشته باشند. هر دو مشاهدات جداگانه‌ای هستند که با برچسب منبع مشخص شده‌اند؛ موارد تکراری به‌صورت خودکار حذف نمی‌شوند. هیچ نتیجه‌گیری‌ای از روی شناسه‌های گمشده، متن‌های حذف‌شدهٔ ساختگی، فهرست‌کردن اجباری اعضا یا پیوستن خودکار به گروه‌ها اعمال نمی‌شود.
 

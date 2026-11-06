@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/times
 
 Timestamp RFC 3161 per i checkpoint firmati: cosa viene inviato all’autorità e come viene verificata la risposta.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Prove e verifica](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Prove e verifica](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness prepara richieste RFC 3161 e verifica le risposte dell’autorità di marcatura temporale (TSA). Questa procedura manuale non seleziona una TSA né invia dati; la modalità «evidence» esegue entrambe le operazioni secondo una frequenza prestabilita ([formato «evidence»](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Una richiesta preparata **non** costituisce **ancora una prova di marcatura temporale**.
 

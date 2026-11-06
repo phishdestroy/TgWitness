@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/media
 
 التعرف على الصور والتسجيلات الصوتية الملتقطة باستخدام عامل محلي؛ والحفاظ على ارتباط النص المستخرج بملف المصدر.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![التحقيق](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

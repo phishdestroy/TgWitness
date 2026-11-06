@@ -4,32 +4,32 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/witne
 
 Kendi anahtarı ve botu olan bir tanık çalıştırın, imzalı kontrol noktalarını bir kanala yayınlayın ve dışa aktarımları bu kontrol noktalarıyla karşılaştırarak doğrulayın.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [Dışa aktarma ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Yüksek güvenilirlik](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/) · [Panel kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+Bir tanık, imzalanmış kontrol noktalarını toplayıcıdan ayrı olarak saklar. Toplayıcının imzasını ve günlük sürekliliğini kontrol eder, sonucu kendi anahtarıyla imzalar ve bunu bir Telegram kanalında yayınlar. Toplayıcının tanık uç noktasına salt okunur erişimi olan ayrı bir sunucuda çalıştırın.
 
-Akış şeması · Toplayıcı → Witness (imzalı kontrol noktası: kayıt sayısı + başlık hash'i); Witness → Witness günlüğü, özel anahtar; Witness → Telegram kanalı (kendi botu aracılığıyla imzalanmış gönderi); Kanıt ZIP dosyası → verify.py; Witness günlüğü, özel anahtar → verify.py; Telegram kanalı → verify.py (Telegram Desktop dışa aktarma veya t.me/s sayfası) · Toplayıcı · Witness · Witness günlüğü, özelanahtar · Telegram kanalı · Kanıt ZIP dosyası · verify.py · imzalı kontrol noktası: · kayıt sayısı + başlık hash'i · kendi botu aracılığıyla · imzalanmış gönderi · Telegram Desktop dışa · aktarma veya t.me/s sayfası
+Akış şeması · Toplayıcı → Tanık (imzalı kontrol noktası: kayıt sayısı + başlık hash'i); Tanık → Witness günlüğü, özel anahtar; Tanık → Telegram kanalı (kendi botu aracılığıyla imzalanmış gönderi); Kanıt ZIP dosyası → verify.py; Witness günlüğü, özel anahtar → verify.py; Telegram kanalı → verify.py (Telegram Desktop dışa aktarma veya t.me/s sayfası) · Toplayıcı · Tanık · Witness günlüğü, özelanahtar · Telegram kanalı · Kanıt ZIP dosyası · verify.py · imzalı kontrol noktası: · kayıt sayısı + başlık hash'i · kendi botu aracılığıyla · imzalanmış gönderi · Telegram Desktop dışa · aktarma veya t.me/s sayfası
 
 **Diyagramın metin olarak gösterimi**
 
-1. Toplayıcı → Witness (imzalı kontrol noktası: kayıt sayısı + başlık hash'i)
-2. Witness → Witness günlüğü, özel anahtar
-3. Witness → Telegram kanalı (kendi botu aracılığıyla imzalanmış gönderi)
+1. Toplayıcı → Tanık (imzalı kontrol noktası: kayıt sayısı + başlık hash'i)
+2. Tanık → Witness günlüğü, özel anahtar
+3. Tanık → Telegram kanalı (kendi botu aracılığıyla imzalanmış gönderi)
 4. Kanıt ZIP dosyası → verify.py
 5. Witness günlüğü, özel anahtar → verify.py
 6. Telegram kanalı → verify.py (Telegram Desktop dışa aktarma veya t.me/s sayfası)
 
-**On this page**
+**Bu sayfada**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#verify)
+- [Tanığın elde ettikleri ve elde edemedikleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [Neleri kontrol eder ve kaydeder?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#what-it-checks-and-records)
+- [Bir tanık çalıştırın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#run-a-witness)
+- [Birkaç çalışma alanı için genel kanıt sayfası](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Doğrula](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#verify)
 
 ## TgWitness'in sundukları ve sunmadıkları
 
@@ -48,7 +48,7 @@ Yeni tanıklar her oylamada rastgele bir doğrulama mesajı gönderir; yakalama 
 Her aralıkta (varsayılan olarak 10 dakikada bir) TgWitness:
 
 1. başlığı kendisi alır (toplayıcı bunu zorlayamaz veya atlayamaz);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. toplayıcının imzasını, sabitlenmiş toplayıcı anahtarını (`--collector-fingerprint`, veya görülen ilk anahtar), azalmayan bir sayıyı ve değişmemiş bir sayıdaki değişmemiş başlığı doğrular. Merkle dahil etme ve tutarlılık kanıtları, büyüyen bir günlüğün saklanan kontrol noktasını genişlettiğini doğrular. Süreklilik kanıtları bir kez kullanıldıktan sonra, bunların kaldırılması reddedilir;
 3. kendi günlüğüne imzalı bir kayıt ekler: `witness.anchor`, durumu `ok`, `key_changed`, `rollback` (öncekinden daha az kayıt), `fork` (aynı uzunlukta, farklı başlık) veya `invalid` (yanıt doğrulamayı geçemedi) ya da `witness.no_response` (toplayıcı yanıt vermediğinde);
 4. Witness çalışırken ve Bot API'ye erişebiliyorken, sonucu "cevap yok" dahil olmak üzere imzalı olarak kanala gönderir. Gönderi kimliği kaydedilir (`witness.posted`), başarısız bir gönderi de kaydedilir (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Bunun için bağımsız olarak saklanan tanık parmak izi ve bu dışa aktarımın tam sonunda bulunan eşleşen bir kontrol noktası gereklidir. Yalnızca daha önceki bir önekini kapsayan bir kontrol noktası yeterli değildir. Toplamayı duraklatın, tanığın son durumu gözlemlemesine izin verin ve günlüğe başka bir kayıt yapılmadan önce dışa aktarın; günlüğü değişirse, başka bir kontrol noktası saklayın ve o durumu dışa aktarın. Daha sonraki bir kontrol noktası tek başına, daha kısa bir dışa aktarımın son hash değerini doğrulayamaz. `--channel` da sağlandığında, eksik olduğu iddia edilen gönderiler veya boş bir eşleşme kümesi bu sıkı kontrolü geçemez. Bayrak olmadan, sıradan bütünlük kontrolleri, aksi takdirde sağlam olan bir arşivi reddetmeden tanıklanmamış kayıtları yine de rapor eder.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+Tanık günlüğünü ve sabitlenmiş anahtarını ayrı tutun. Çevrimiçi kontroller, kontrol noktaları arasındaki sürekliliği doğrular; çevrimdışı doğrulama ise saklanan her kontrol noktasını dışa aktarılan verilerle karşılaştırır. Süreklilik kanıtı olmayan eski başlıklar, çevrimdışı karşılaştırmayı korur ve çevrimiçi süreklilik doğrulaması yapılmadan raporlanır. Rapor, tanığın hizmet dışı kalma sürelerini ve aralık bazında başarısız yayınları listeler.
 
-### Daily seals and unavailable timestamp calendars
+### Günlük mühürler ve kullanılamayan zaman damgası takvimleri
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+Tanık, önceki UTC gününün günlük sınırını mühürler ve imzalanmış bu mührün hash değerini OpenTimestamps'a gönderir. Takvim gönderimi, bekleyen bir kanıttır; yalnızca bağımsız olarak kontrol edilmiş Bitcoin taahhütleri, doğrulayıcıda onay alır.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+Tüm takvimler başarısız olursa, imzalı mühür ve başarısız deneme günlükte kalır. Saatlik bakım geçişi, yeniden başlatma veya tarih değişikliğinden sonra da dahil olmak üzere orijinal kaydı yeniden dener. Her geçişte en fazla 32 mührünü tarar, en fazla iki eksik gönderimi iletir ve her geçişte yeniden denemeler için en fazla 60 saniye harcar. Kalıcı bir imleç, eski mühürler arasında dönüşümlü olarak ilerler. Saklanan gönderimler, mevcut kanıt yükseltme yolunu izler.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+Yeniden deneme, mührü yeniden yazmaz, orijinal tarihini değiştirmez veya takvimin onu daha önce aldığını iddia etmez. Daha geç bir Bitcoin taahhüdü, daha geç bir harici onay olarak kalır. Eksik kanıtlar `none` olarak kalır; bekleyen kanıtlar, doğrulayıcı bunları bağımsız olarak kontrol edene kadar `pending` olarak kalır.

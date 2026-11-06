@@ -53,7 +53,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 | --- | --- |
 | נקודת קצה | כתובת האחסון, בלי נתיב bucket או פרטי גישה. דוגמה: `https://s3.example.invalid`. |
 | אזור | מה שהספק שלכם צריך. ברירת מחדל `us-east-1`. |
-| Bucket | bucket קיים שאפשר לכתוב אליו. דוגמה: `example-case-backup`. |
+| דלי | bucket קיים שאפשר לכתוב אליו. דוגמה: `example-case-backup`. |
 | תיקייה בסל | קידומת, ברירת מחדל `tgwitness`. קידומת לכל סביבת עבודה מתווספת מעליה. |
 | מזהה מפתח גישה / מפתח גישה סודי | שניהם יחד, נשמרים בכספת. השאירו את שניהם ריקים בהמשך כדי לשמור אותם. |
 | כתובות בסגנון Path | פעיל: `endpoint/bucket`. כבוי: `bucket.endpoint`. תלוי בספק. |

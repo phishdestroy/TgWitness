@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/opera
 
 প্যানেলের দৈনন্দিন পরিচালনা: মোড, পর্যবেক্ষণ বিভাগ, প্যারামিটার, বিজ্ঞপ্তি, রপ্তানি, ব্যাকআপ এবং ধারণক্ষমতা।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [নিয়োগ এবং পুনরুদ্ধার](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![নিয়োগ ও পুনরুদ্ধার](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 আপনার প্রথম সংযোগের জন্য, [অ্যাকাউন্ট এবং সেশন ফরম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) ব্যবহার করুন। সংরক্ষিত সংস্করণ, ইভেন্ট নীতি এবং ফাঁক সম্পর্কে ব্যাখ্যার জন্য, [সংগ্রহ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/) দেখুন। এই গাইডে দৈনন্দিন পরিচালনা এবং পুনরুদ্ধার অন্তর্ভুক্ত রয়েছে।
 
@@ -14,18 +14,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/opera
 
 একটি পরিচালিত অস্থায়ী Cloudflare টানেলের জন্য, `tgwitness tunnel off` পাবলিক অ্যাক্সেস বন্ধ করে, যখন স্থানীয় প্যানেল এবং সংগ্রহ চলতেই থাকে। `tgwitness tunnel on` এটি সক্ষম করে; `tgwitness tunnel restart` একটি নতুন টানেল সংযোগ তৈরি করে। এর বর্তমান ঠিকানা দেখতে `tgwitness open` ব্যবহার করুন। একটি স্পষ্ট বন্ধ সেটিংস সার্ভিস রিস্টার্টের পরও টিকে থাকে। `tgwitness stop` প্যানেল এবং সংগ্রহ উভয়ই বন্ধ করে।
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Operator workflow](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#operator-workflow)
-- [Share work without sharing the main key](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#share-work-without-sharing-the-main-key)
-- [Runtime modes](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#runtime-modes)
-- [Monitoring categories](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#monitoring-categories)
-- [Notifications](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#notifications)
-- [Panel layout](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#panel-layout)
-- [Deployment environments](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#deployment-environments)
-- [Startup checks and exports](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#startup-checks-and-exports)
-- [Backup, restore and interruptions](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#backup-restore-and-interruptions)
-- [Capacity and retention](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#capacity-and-retention)
+- [অপারেটর কর্মপ্রবাহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#operator-workflow)
+- [মূল কী শেয়ার না করে কাজ শেয়ার করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#share-work-without-sharing-the-main-key)
+- [রuntime মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#runtime-modes)
+- [মনিটরিং বিভাগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#monitoring-categories)
+- [অবহিতকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#notifications)
+- [প্যানেল বিন্যাস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#panel-layout)
+- [মোতায়েন পরিবেশ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#deployment-environments)
+- [স্টার্টআপ চেক এবং এক্সপোর্ট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#startup-checks-and-exports)
+- [ব্যাকআপ, পুনরুদ্ধার এবং বিঘ্ন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#backup-restore-and-interruptions)
+- [ক্ষমতা এবং সংরক্ষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/#capacity-and-retention)
 
 ## অপারেটর কর্মপ্রবাহ
 

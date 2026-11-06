@@ -6,22 +6,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/histo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [컬렉션](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![모음](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
-In **Sources**, review the enabled chats, pause observation, choose Standard API or Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
+In **소스**, 활성화된 채팅을 검토하고, 관찰을 일시 중지한 후, 표준 API 또는 Takeout 내보내기를 선택한 다음, **전체 기록 불러오기**. 이 실행은 소스 목록을 수정하고, 해당 소스의 사용 가능한 과거 메시지를 '채팅' 및 서명된 관찰 일지에 읽어옵니다. 미디어는 기존 첨부 파일 설정 및 영구 다운로드 대기열을 사용합니다. 이는 채팅별 서명된 JSON/HTML 내보내기 기능과는 별개입니다.
 
-For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run. Pause observation before starting history; one acquisition owns an account at a time.
+계정 전체를 수집하려면 **‘전체 계정’을** 선택하고, 관찰을 시작하여 소스 목록을 불러온 다음, 기록을 시작하기 전에 해당 목록을 검토하십시오. 대화 목록 제한은 여전히 적용됩니다(기본값 1,000개, ‘매개변수’에서 조정 가능). 실행이 성공적으로 완료되었다고 해서 모든 계정 대화가 목록에 포함되었다는 것을 의미하지는 않습니다. 나중에 발견되거나 활성화된 채팅은 다시 실행해야 합니다. 기록을 시작하기 전에 관찰을 일시 중지하십시오. 한 번에 하나의 수집 작업만 계정을 처리할 수 있습니다.
 
-Choose one to five attachment workers and whether to preserve available Recent Actions and compare previously saved versions. Takeout may require approval in Telegram and a server-specified wait. These options remain fixed on resume. See [Backfill behavior and evidence contract](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) for transport, retry and trust details.
+1~5명의 첨부 파일 작업자를 선택하고, 사용 가능한 ‘최근 작업’을 유지할지 여부를 선택하십시오. 또한 이전에 저장된 버전을 비교할 수 있습니다. 데이터 추출(Takeout)에는 텔레그램에서의 승인 및 서버에서 지정한 대기 시간이 필요할 수 있습니다. 이러한 옵션은 작업 재개 시에도 유지됩니다. 전송, 재시도 및 신뢰에 대한 자세한 내용은 [‘백필(Backfill) 동작’ 및 ‘증거 계약’을](https://github.com/phishdestroy/TgWitness/blob/main/docs/BACKFILL.md) 참조하십시오.
 
 ## 일시 중지, 재개 및 부분 결과
 
-- **Pause history** stops reading. **Continue history** resumes from the last committed message in each source; restarting the app also leaves the run paused until resumed. Resuming requires the same idle Telegram account.
+- **'기록 일시 중지'를 선택하면** 읽기가 중단됩니다. **'기록 계속'을 선택하면** 각 소스의 마지막으로 커밋된 메시지부터 다시 읽기가 재개됩니다. 앱을 다시 시작해도 재개될 때까지 실행이 일시 중지된 상태로 유지됩니다. 재개하려면 동일한 비활성 텔레그램 계정이 필요합니다.
 - 메시지 관찰, 첨부 파일 처리 및 커서 커밋이 하나의 트랜잭션으로 수행됩니다. 실행이 재개되더라도 이미 커밋된 관찰 내용은 반복되지 않습니다. 실시간 캡처 또는 별도로 명시적으로 시작된 실행에서는 동일한 메시지를 독립적으로 관찰할 수 있습니다.
-- Each source (each Telegram split range in Takeout) fixes an upper message ID on its first read. Newer messages belong to live observation, not to that source's remaining historical pages.
+- 각 소스(Takeout 내의 각 텔레그램 분할 범위)는 첫 번째 읽기 시 상한 메시지 ID를 고정합니다. 더 최근의 메시지는 실시간 관찰에 속하며, 해당 소스의 나머지 기록 페이지에는 속하지 않습니다.
 - 접근할 수 없는 소스나 수집 과정에서 비활성화된 소스는 '실패' 또는 '건너뜀'으로 표시됩니다. 다른 소스는 계속 수집되며, 전체 결과는 불완전합니다.
-- FloodWait delays respect the saved account backoff. Transient failures retry up to five times; exhaustion and low disk space pause with the cursor intact.
-- **End this history run** preserves saved observations. It does not remove them or cancel standard-API attachment jobs. Ending Takeout marks its remaining Takeout files as skipped; pausing keeps them resumable. A new run reads enabled sources anew.
+- FloodWait 지연 시간은 저장된 계정 백오프 설정을 따릅니다. 일시적인 오류의 경우 최대 5회까지 재시도하며, 리소스 소진 및 디스크 공간 부족 시 커서는 그대로 유지된 채로 일시 중지됩니다.
+- **'이 기록 실행 종료'는** 저장된 관측 결과를 보존합니다. 이를 제거하거나 표준 API 첨부 작업은 취소하지 않습니다. 'Takeout 종료'를 선택하면 남아 있는 Takeout 파일이 건너뛴 것으로 표시되며, '일시 중지'를 선택하면 나중에 다시 재개할 수 있습니다. 새로운 실행을 시작하면 활성화된 소스를 다시 읽습니다.
 
 이력 완료는 이력 읽기 작업에 대해서만 설명합니다. 첨부 파일은 대기 상태로 남아 있거나, 실패하거나, 구성된 정책에 따라 제외될 수 있습니다. 저널과 첨부 파일 대기열에서 미디어 수신 확인을 확인하십시오. 바이트가 보존된 완료된 수신 확인만 저장된 첨부 파일로 간주됩니다. 이력 작업은 명시적인 스냅샷 요청이며, 향후 실시간 이벤트의 범주를 선택하는 스위치와는 별개입니다.
 
@@ -33,8 +33,8 @@ Choose one to five attachment workers and whether to preserve available Recent A
 python tgwitness/verify.py tgwitness-history-report.json --evidence evidence.zip --fingerprint TRUSTED_FINGERPRINT
 ```
 
-Keep the expected signing-key fingerprint independently. The verifier checks the report signature, the evidence archive, the report checkpoint, source plan, account and counts of saved/unavailable messages. New runs also bind source progress and options to signed cursor events. Without `--evidence`, it checks only the signed report and its internal consistency. Legacy progress fields and attachment summaries remain signed collector statements. The evidence verifier checks archived media bytes.
+예상되는 서명 키 지문은 별도로 유지하십시오. 검증기는 보고서 서명, 증거 아카이브, 보고서 체크포인트, 소스 플랜, 계정 및 저장된/사용 불가능한 메시지 수를 확인합니다. 새로운 실행에서는 소스 진행 상황과 옵션도 서명된 커서 이벤트에 바인딩됩니다. `--evidence` 옵션이 없으면, 서명된 보고서와 그 내부 일관성만 확인합니다. 기존 진행 상황 필드와 첨부 파일 요약은 서명된 수집기 진술로 유지됩니다. 증거 검증기는 아카이브된 미디어 바이트를 확인합니다.
 
-Neither signing nor finishing the available history proves Telegram origin, an atomic snapshot, or historical completeness. Messages can change while reading; deleted messages and intermediate edits outside available Recent Actions, and Secret Chats, are not recovered. An operator controlling the signing key can fabricate a journal before outside commitments exist. Use separately retained checkpoints or an independent witness for the documented tamper-detection properties.
+사용 가능한 기록을 서명하거나 완료한다고 해서 텔레그램 출처, 원자적 스냅샷 또는 기록의 완전성이 입증되는 것은 아닙니다. 메시지는 읽는 동안 변경될 수 있으며, 삭제된 메시지와 사용 가능한 ‘최근 작업’ 범위를 벗어난 중간 편집 내용, 그리고 ‘비밀 채팅’은 복구되지 않습니다. 서명 키를 관리하는 운영자는 외부 약속이 존재하기 전에 일지를 조작할 수 있습니다. 문서화된 변조 감지 속성을 확인하려면 별도로 보관된 체크포인트나 독립적인 증인을 사용하십시오.
 
 획득 커서는 로컬 작업 공간의 상태를 나타냅니다. 증거 ZIP 파일만 복원한다고 해서 진행 중인 획득 작업이나 텔레그램 세션이 복원되는 것은 아닙니다. 원래 작업을 계속 진행해야 하는 경우 작업 공간 백업을 보관해 두십시오.

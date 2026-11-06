@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/featu
 
 TgWitness의 현재 수집 모델, 다중 계정 워크플로우, 내보내기 기능 및 운영 범위.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [프로젝트 참조](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![프로젝트 참조](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness는 연결된 계정에서 접근 가능한 텔레그램 대화를 보존하고, 관찰된 변경 사항을 기록하며, 검증 가능한 내보내기 파일을 생성합니다. 이 참조 문서는 수집 모델, 현재 워크플로우 및 그 범위를 설명합니다.
 
-**On this page**
+**이 페이지에서**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#stable-release-criteria)
+- [독립 실행형 애플리케이션](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#standalone-application)
+- [공유된 조사 결과](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#shared-investigations)
+- [아카이브 도구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#archive-tools)
+- [선택적 추가 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#optional-extras)
+- [프로토콜 및 비공개 소스](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#protocol-and-private-sources)
+- [여러 계정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#multiple-accounts)
+- [출처 표기 및 출처 명시](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#capture-and-attribution)
+- [용량 및 텔레그램 제한 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#capacity-and-telegram-limits)
+- [신뢰성 및 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#reliability-and-recovery)
+- [증거 모델](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#evidence-model)
+- [내보내기, 배포 및 인계](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#export-deployment-and-handoff)
+- [안정 버전 출시 기준](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/#stable-release-criteria)
 
 ## 독립형 애플리케이션
 
@@ -93,9 +93,9 @@ TgWitness는 자체 설치 절차, 데이터 디렉터리 및 릴리스 라이�
 | 관리자 작업 | 채널/슈퍼그룹 채팅 내보내기 파일 내 관련 업데이트 내역 및 관리자 로그 스냅샷 | 내보내기 기능은 내보내기 권한이 있는 관리자 계정에 로그가 제공될 때 이를 읽으며, 관리자 로그에 대한 지속적인 폴링은 이 경로에서 제외됩니다. |
 | 첨부 파일 | 원본 버전 설명자, 다운로드된 바이트 수/SHA-256 및 시도 결과 | 삭제된 파일은 복구할 수 없을 수도 있으며, 최신 버전이 이를 대체하지 않습니다. |
 | 연혁 | 현재 표시된 메시지의 명확한 스냅샷 | 모든 수정 내역이나 삭제된 콘텐츠를 재구성하지는 않습니다. |
-| 수집 프로세스 | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) |
+| 수집 프로세스 | 시작/중지, 하트비트, 오류, 설정, 범위 및 서명된 실행 영수증 | 로컬 인벤토리; GitHub 및 TDX에 [독립적인 환경 검사 기능](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) 추가 |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+인터페이스는 소스 이벤트에 제공된 계정 이름을 사용하며, 관찰된 이름과 사용자 이름을 그대로 유지합니다. 이벤트에서 행위자가 생략된 경우, 보고서에서는 해당 필드를 미지정 상태로 둡니다.
 
 ## 용량 및 텔레그램 제한 사항
 

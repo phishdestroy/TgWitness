@@ -6,21 +6,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/inves
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![חקירה](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 עקבו אחר מקרה על פני ערוצים, קבוצות, צ'אטים פרטיים ובוטים, החל מהאיסוף הראשוני ועד לציר זמן מצוטט והעברה הניתנת לאימות. הגרסה האינטראקטיבית של האתר נמצאת בכתובת `/docs/cases/`; [הוראות לתצוגה מקדימה](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**בעמוד זה**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#adapt-the-investigation)
+- [מקרה שנבדק: יעד משתנה לאורך ארבע שיחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. הגדירו את המקרה ואספו את כל הפרטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. ערכו רשימה של כל המקורות והשיגו את ההקשר ההיסטורי](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. יש לשמור על התפתחות המקרה ועל האינטראקציות המכוונות](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. קישור תצפיות בין צ'אטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. בניית ציר הזמן הבין-צ'אטי](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. הוספת נקודות מבט של חשבונות מבלי לאבד את מקורן](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. לאסוף ולאמת את העברת התיק](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [התאמת החקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/#adapt-the-investigation)
 
 ## מקרה לדוגמה: שינוי יעד לאורך ארבע שיחות
 
@@ -117,7 +117,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/inves
 | אותו קובץ שמור | הושלמו קבלות מדיה מס' 151 ו-209 | ערכי ה-SHA-256 המלאים תואמים עבור הבתים שנשמרו |
 | ייחוס הערוץ | #101 ו-#188 | אין לייחס פוסט בערוץ למשתמש 71001 ללא ציון השולח |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+יש להשוות את חתימות ההאש של הקבצים המצורפים והפניות להודעות הקשורות אליהם, ולשמור על ציר הזמן של החשבונות מקובץ לפי מזהי Telegram המופיעים ברשומות אלה.
 
 שמרו את הערות העבודה של הצוות ב-[Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/): הוסיפו סימניות לרשומות עליהן אתם מסתמכים, כגון #146, #188 ו-#205, הדגישו את מחרוזת היעד המדויקת, ו שמרו קטע מכל פעולה שנרשמה בין שתי רשומות או בטווח זמן מסוים. הערות ומצבים שומרים את סקירת הצוות בהיסטוריה החתומה שלהם, הנפרדת והניתנת לזיהוי מהתצפיות המקוריות.
 
@@ -173,10 +173,10 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 
 ## התאמת החקירה
 
-| מקרה | Trace | מסירה |
+| מקרה | עקבות | מסירה |
 | --- | --- | --- |
 | סכסוכים בנושא הזמנות/תשלומים המנוהלים על ידי בוט | הודעת כניסה → תצוגה מקדימה של קישור שמור → פרמטר הפעלה של הבוט → גרסאות הודעה ומקלדת → קבלות החזרה של פאנל → מעקב פרטי/קבוצתי | נבדקו ציר הזמן של ההצעה והתגובה וכן מקורות מאומתים; קישור לתשלום כשלעצמו אינו מהווה הוכחה לתשלום |
 | הודעות שהוסרו לאחר אירוע | כל הצ'אטים הרלוונטיים → מסמכים מקוריים/עריכות שנשמרו → תוצאות מחיקה או היעדרות בבדיקה חוזרת → מדיה שנשמרה → כיסוי ונקודות מבט אחרות של החשבון | גרסאות משומרות ופרקי זמן לא ידועים המפורשים במפורש; ללא ייחוס כוזב של הגורם למחיקה |
-| משתתף משנה את שמו בצ'אטים שונים | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | ציר זמן של פעילות חשבון Telegram עם קישורים לרישומי המקור שלו |
+| משתתף משנה את שמו בצ'אטים שונים | מזהה שולח מספרי → היסטוריית שמות/שמות משתמש → תשובות → צ'אטים נצפים אחרים → יעדים/קבצים שצוטטו | ציר זמן של פעילות חשבון Telegram עם קישורים לרישומי המקור שלו |
 
 [הפניה לאוסף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/) · [אימות פרופילים אישיים](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#people-profiles) · [העברת ראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#investigation-handoff) · [אימות הושלם](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/)

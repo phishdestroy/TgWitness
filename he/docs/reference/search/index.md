@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/searc
 
 חפש הודעות שנשמרו לפי צורות מילים, ביטויים מדויקים, דומיינים ושמות משתמש @, כשהתוצאות המתאימות ביותר מוצגות ראשונות, והאינדקס מקושר ליומן החתום.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![חקירה](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [ניתוח ארכיונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/) · [OCR מקומי ותמלול](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,16 +14,16 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/searc
 
 האינדקס הוא נתון נגזר. הוא נבנה מחדש מתוך היומן החתום, אינו חתום לעולם ואינו נכלל בייצוא. הרשומות המקוריות אינן משתנות.
 
-**On this page**
+**בעמוד זה**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#dependencies)
+- [תחביר חיפוש](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#search-syntax)
+- [שפות](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#languages)
+- [מיקום האינדקס](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#where-the-index-lives)
+- [תוצאות והיומן החתום](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#results-and-the-signed-journal)
+- [טקסט מזוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#recognized-text)
+- [גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#access)
+- [שאל את הארכיון ואת MCP](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#ask-the-archive-and-mcp)
+- [תלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#dependencies)
 - [Benchmark](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/#benchmark)
 
 ## תחביר חיפוש
@@ -97,14 +97,14 @@ OCR ותמלולים נשארים בארכיונים המוצפנים שלהם. 
 
 לקוחות MCP יכולים לקרוא `search_messages` עם `ranked=true` ו-page באמצעות `next_offset`. חיבורים מוגבלים מקבלים רק את הצ'אטים שלהם.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+מספור העמודים המדורג מכסה לכל היותר את תוצאות ה-1,000 הראשונות, ללא תלות בגודל העמוד. צמצמו את השאילתה, הצ'אט או התקופה כדי לבדוק התאמות נוספות. חיפושים לפי החדשים ביותר תחילה ממיינים הודעות, תוצאות OCR ותמלולים לפני בחירת כל עמוד.
 
 ## תלות
 
 | חבילה | רישיון | למה |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | לממות ברוסית ובאוקראינית; המילונים נטענים באופן מקומי |
-| snowballstemmer | BSD-3-Clause | שורשי מילים באנגלית, Python טהור |
+| snowballstemmer | סעיף BSD-3 | שורשי מילים באנגלית, Python טהור |
 | jieba | MIT | פיצול שאילתות בסינית, Python טהור (הפצת קוד מקור בלבד) |
 | pymorphy3-dicts-uk (אופציונלי) | GPL-3.0 | מילון אוקראיני מלא |
 

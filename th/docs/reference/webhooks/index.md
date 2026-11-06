@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/webho
 
 ส่งเหตุการณ์ที่ระบุขอบเขตไปยังผู้รับ HTTPS พร้อมลายเซ็น HMAC การลองส่งซ้ำ และสถานะการส่ง
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การบูรณาการกับระบบเก็บถาวร](https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![การบูรณาการกับระบบเก็บถาวร](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [คู่มือขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

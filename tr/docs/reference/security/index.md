@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/secur
 
 Tehdit modeli, erişim modeli, depolanan gizli bilgiler, ağ maruziyeti, oturum içe aktarmaları ve bir güvenlik açığının nasıl bildirileceği.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
+Bu sayfa, yerel veya sunucu çalışma alanında erişim, depolama ve ağ korumasını açıklamaktadır. GitHub runner'da veya Intel TDX gizli sanal makinesinde veri toplama için, toplama ortamına yönelik kontroller ekleyen [doğrulama modları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) bölümüne bakın. Hesap bağlantıları, bildirimler, zaman damgaları, site dışı kopyalar ve tanıkların kendi yönlendirme ayarları vardır.
 
 | Alan | Kısacası |
 | --- | --- |
@@ -16,20 +16,20 @@ This page describes access, storage and network protection in a local or server 
 | Depolanan gizli bilgiler | Oturum, API çifti, imzalama anahtarı ve proxy ayarları Fernet ile şifrelenmiştir. |
 | Mesajlar ve medya | Şifrelenmemiş olarak saklanır: disk şifreleme ve sıkı izin ayarları kullanın |
 | Bütünlük | Her kayıtta SHA-256 hash zinciri ve Ed25519 imzası bulunur |
-| Yerel güven sınırı | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
+| Yerel güven sınırı | Ana bilgisayar yöneticisi, çalışma alanını ve imzalama anahtarını kontrol eder; bağımsız kontrol noktaları, önceki günlük sınırını korur. |
 
 Güvenlik açıkları bildirimleri için [güvenlik](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)politikasına bakınız.
 
-**On this page**
+**Bu sayfada**
 
-- [Access model](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#access-model)
-- [Panel content and exports](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#panel-content-and-exports)
-- [Secrets at rest](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#secrets-at-rest)
-- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#proxies-and-network-routes)
-- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#sign-in-and-session-imports)
-- [Logs and transport](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#logs-and-transport)
-- [Integrity limits](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#integrity-limits)
-- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#if-you-suspect-a-problem)
+- [Erişim modeli](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#access-model)
+- [Panel içeriği ve dışa aktarımlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#panel-content-and-exports)
+- [Depolanan gizli bilgiler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#secrets-at-rest)
+- [Proxy'ler ve ağ rotaları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#proxies-and-network-routes)
+- [Oturum açma ve oturum içe aktarma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#sign-in-and-session-imports)
+- [Günlükler ve aktarım](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#logs-and-transport)
+- [Bütünlük sınırları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#integrity-limits)
+- [Bir sorun olduğundan şüpheleniyorsanız](https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/#if-you-suspect-a-problem)
 
 ## Erişim modeli
 
@@ -53,13 +53,13 @@ Dışa aktarımlar, kimlik doğrulama ve imzalama gizli bilgilerini içermez, an
 
 ## Depolanan gizli bilgiler
 
-Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
+Telegram API kimlik bilgileri, oturum ve imzalama anahtarı Fernet ile şifrelenmiştir. Yerel mesajlar ve medya için şifreleme, ana bilgisayarın diski veya birimi tarafından sağlanır; çalışma alanı ise sıradan dosyaları depolar. Dışa aktarımlarda parola korumalı AES-256 ZIP kullanılabilir, ve site dışı kopyalar için AES-256-GCM kullanılır.
 
-The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
+Kasa anahtarı varsayılan olarak korumalı veri dizinine ayarlanmıştır. Aşağıdaki harici ana anahtar dosyasını kullanarak anahtarı ayrı bir yerde saklayın. Unix'te, yeni özel anahtar dosyaları 0600 modunu ve yeni veri dizinleri 0700 modunu kullanır; Windows'ta ise hizmet hesabı ve yetkili yöneticiler için dizin ACL'sini ayarlayın. Mevcut dizin izinleri korunur.
 
 ### Harici ana anahtar
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/) for setup details.
+Yeni bir veri dizini için, TGWITNESS_VAULT_KEY_FILE harici bir rastgele ana anahtar sağlayabilir. HKDF-SHA256 ve ayrı bir rastgele tuz, her çalışma alanı için farklı bir Fernet anahtarı türetir. Kurtarma amacıyla vault.external.json dosyası saklanmalıdır. Eksik veya yanlış anahtarlar, işlem başarısızlıkla sonuçlanır. Mevcut yerel kasalar sessizce taşınmaz. Panel, seçilen anahtar depolama modunu gösterir. Disk şifreleme, her iki modda da yerel mesaj ve medya dosyalarını korur; kurulum ayrıntıları için bkz. [bağlantı ve veri koruması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/).
 
 ## Proxy'ler ve ağ yolları
 
@@ -83,10 +83,10 @@ Varsayılan API doğrulama yanıtı, kimlik bilgilerini yansıtmayacak şekilde 
 
 ## Bütünlük sınırları
 
-Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
+Yerel doğrulama, kayıt imzalarını, hash zincirini, ekleri ve dışa aktarım manifestosunu kontrol eder. Yönetici, yerel imzalama anahtarını elinde bulundurur ve başka bir imzalı günlük oluşturabilir; bağımsız olarak saklanan bir kontrol noktası, kapsadığı öneklerin değiştirilmesini tespit eder. Anahtar parmak izini ve kontrol noktalarını alıcıda veya bağımsız bir tanıkta saklayın.
 
-For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) describes the checks for each mode.
+Bağımsız olarak kontrol edilen toplama için [GitHub Actions yakalama](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) veya [Intel TDX dağıtımı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) seçeneklerinden birini seçin. Bu araçların doğrulayıcıları, arşiv bütünlüğünün yanı sıra iş akışı kökenini veya donanım ölçümlerini de kontrol eder. İsteğe bağlı zaman damgaları ve şifrelenmiş harici kopyalar, zaman referansları ve kurtarılabilir kopyalar sağlar; [kanıt biçimi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope), her mod için yapılan kontrolleri açıklar.
 
 ## Bir sorun olduğundan şüpheleniyorsanız
 
-Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.
+Orijinal veri dizinini koruyun ve analiz için ayrı bir kopya kullanın. [güvenlik politikası](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) aracılığıyla etkilenen sürümü, işlemi ve tekrarlanabilir adımları bildirin; hesap verilerini ve kimlik bilgilerini gizli tutun.

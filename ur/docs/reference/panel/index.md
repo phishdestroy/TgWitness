@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel
 
 پینل کی ہر اسکرین: چیٹس، جرنل، ذرائع، برآمدات، اضافی خصوصیات، حفاظتی طریقے اور کوڈ چیک۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کرنا](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کرنا](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [ابتدائی سیٹ اپ اور ترتیبات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/settings/) · [اکاؤنٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) · [ایکسپورٹ اور تصدیق کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/) · [کیس رپورٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/)
 
 ہر اسکرین کیا کرتی ہے، یہ دستخط شدہ جرنل میں کیا لکھتی ہے اور تفصیلی رہنما کہاں ہے۔ پینل ایک وقت میں ایک ورک اسپیس دکھاتا ہے: ایک ٹیلیگرام اکاؤنٹ اپنے ذرائع، جرنل اور دستخطی کلید کے ساتھ۔ سائیڈبار کے اوپر موجود سلیکٹر ورک اسپیسز کو تبدیل کرتا ہے۔ ایڈریس ورک اسپیس کو لے کر جاتا ہے (`?ws=…`)؛ جبکہ پتہ، سلیکٹر اور لوڈ شدہ اکاؤنٹ میں اختلاف ہو تو، ایکشنز بلاک رہتے ہیں۔
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+[موازنہ کے مجموعی طریقوں](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) کا استعمال کرتے ہوئے براہِ راست مشاہدہ، مکمل تاریخ، تازہ اکاؤنٹ/چٹ ایکسپورٹس اور محفوظ شدہ ریکارڈ کے حوالے کے درمیان انتخاب کریں۔ ایکسپورٹس صفحے پر اس کے ڈاؤن لوڈ کنٹرولز کے اوپر وہی موازنہ شامل ہے۔
 
-**On this page**
+**اس صفحے پر**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#more-tools)
+- [اپنا راستہ تلاش کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#find-your-way)
+- [یہاں سے شروع کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#start-here)
+- [چٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#chats)
+- [جرنل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#journal)
+- [ماخذ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#sources)
+- [برآمدات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#exports)
+- [سیٹنگز، اکاؤنٹس اور کنکشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#settings-accounts-and-connection)
+- [اضافی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#extras)
+- [حفاظتی طریقے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#protection-modes)
+- [مزید اوزار](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/#more-tools)
 
 ## اپنا راستہ تلاش کریں
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **ماخذ کی اقسام** فولڈر اور پورے اکاؤنٹ کے موڈز کو چینلز، گروپس، نجی چیٹس اور بوٹس تک محدود کرتی ہیں۔ **اپنے اعمال** اکاؤنٹ کے اپنے پیغامات، ترامیم اور جوابی کی بورڈ دباؤ کو شامل کرتا ہے۔
 - **جب کوئی نیا چیٹ یا بوٹ ظاہر ہوتا ہے**: اس کا پروفائل محفوظ کریں اور منتخب کردہ تعداد تک اس کے تازہ ترین دکھائی دینے والے پیغامات محفوظ کریں۔
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ur/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+حدود: شائع شدہ کلاؤڈ کلیکٹر سیکرٹ چیٹس وصول نہیں کرتا۔ الگ [سوئوڈو-سیکرٹ انٹرفیس اور اس کا ڈیمو](https://phishdestroy.github.io/TgWitness/ur/docs/reference/secret-chats/) ان کی ترقیاتی حیثیت اور زیر التواء نقائص کے ساتھ دستاویزی شکل میں ہیں۔ جب TgWitness چل نہیں رہا ہوتا تو کچھ بھی ریکارڈ نہیں ہوتا؛ دوبارہ شروع کرنے کے بعد یہ صرف وہی معلومات حاصل کرتا ہے جو ٹیلیگرام اب بھی واپس کرتا ہے، اور رپورٹ میں اس کمی کو دکھاتا ہے۔ چیٹ لسٹ کی حد سے زیادہ چیٹس (جب تک پیرامیٹرز میں تبدیل نہ کیا جائے، 1,000 ڈائیلاگز) اگلی بار فعال ہونے پر شامل کی جاتی ہیں۔ دوسری ایپ میں دبائے گئے ان لائن بوٹ بٹن نظر نہیں آتے؛ بوٹ کا جواب ریکارڈ کیا جاتا ہے۔
 
 ### شامل چیٹس
 

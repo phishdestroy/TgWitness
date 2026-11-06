@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/insta
 
 Instal dengan satu perintah, periksa tanda tangan dan hash, perbarui, dan hapus instalasi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Memulai](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Memulai](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Proyek](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Panduan cepat](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/) · [Penerapan](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
 
-**On this page**
+**Di halaman ini**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#remove-tgwitness)
+- [Instal dengan satu perintah](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#install-with-one-command)
+- [Tempat segalanya berjalan](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#where-everything-runs)
+- [Pengaturan pencarian teks lengkap](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#full-text-search-settings)
+- [Akses baris perintah](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#command-line-access)
+- [Verifikasi sebelum menjalankan](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#verify-before-running)
+- [Perbarui instalasi yang sudah ada](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#update-an-existing-installation)
+- [Perintah sehari-hari di Ubuntu](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Hapus TgWitness](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/#remove-tgwitness)
 
 ## Instal dengan satu perintah
 
@@ -137,7 +137,7 @@ Instalasi Windows sendiri memverifikasi tanda tangan paket dengan .NET dan tidak
 
 **Publikasi baru memperbarui situs unduhan; program yang sudah terinstal akan diperbarui saat Anda menjalankan penginstal lagi.** Tidak ada pembaruan tanpa pengawasan atau restart otomatis pada koleksi yang sedang berjalan. Saluran penginstal saat ini adalah **pratinjau**; saluran ini mengikuti build yang telah diterbitkan dan diperiksa dari `main`, yang commit-nya bisa lebih baru daripada rilis GitHub bernomor terakhir. Versi halaman ini berasal dari `pyproject.toml`; commit dan ID build-nya membedakan pembaruan dalam versi pratinjau yang sama.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+Publikasi dilakukan secara otomatis setelah commit tersebut lulus pemeriksaan aplikasi dan keamanan, serta paket yang ditandatangani lulus uji layanan Ubuntu dan instalasi Windows PowerShell. Selama pemeriksaan berlangsung, atau jika gagal, perintah yang sama akan terus menginstal build yang telah diperiksa sebelumnya. Manifest build menunjukkan commit mana yang saat ini tersedia; nomor versi saja mungkin tetap sama di antara pembaruan pratinjau.
 
 Gunakan folder instalasi dan pengguna OS yang sama seperti sebelumnya. Cadangkan seluruh direktori data dengan menghentikan pengumpulan data; `tgwitness paths` mengidentifikasinya. Ekspor yang ditandatangani bukanlah cadangan instalasi yang lengkap.
 

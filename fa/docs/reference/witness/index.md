@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/witne
 
 یک ویژنس را با کلید و بات اختصاصی خود اجرا کنید، نقاط کنترل امضا شده را در یک کانال منتشر کنید و خروجی‌ها را با آن مطابقت دهید.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شواهد و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![شواهد و تأیید](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [صادرات و تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/) · [اطمینان بالا](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/) · [راهنمای پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+شاهد، نقاط کنترل امضا شده را به طور جداگانه‌ای از گردآورنده نگهداری می‌کند. این ابزار امضای گردآورنده و پیوستگی دفترچه خاطرات را بررسی می‌کند، نتیجه را با کلید خود امضا می‌کند و آن را در یک کانال تلگرام منتشر می‌نماید. آن را روی یک سرور جداگانه با دسترسی فقط-خواندنی به نقطه پایانی شاهدِ گردآورنده اجرا کنید.
 
 نمودار جریان · جمع‌آور → شاهد (نقطهٔ کنترل امضا شده: تعداد رکوردها + هش سرآیند); شاهد → دفترچه شواهد، کلید شخصی; شاهد → کانال تلگرام (ارسال امضا شده از طریق ربات اختصاصی خود); فایل فشرده شواهد → verify.py; دفترچه شواهد، کلید شخصی → verify.py; کانال تلگرام → verify.py (صادرات تلگرام دسکتاپ یا صفحهٔ t.me/s) · جمع‌آور · شاهد · دفترچه شواهد، کلید شخصی · کانال تلگرام · فایل فشرده شواهد · verify.py · نقطهٔ کنترل امضا شده: تعداد · رکوردها + هش سرآیند · ارسال امضا شده از طریق ربات · اختصاصی خود · صادرات تلگرام دسکتاپ یا · صفحهٔ t.me/s
 
@@ -23,13 +23,13 @@ A witness retains signed checkpoints separately from the collector. It checks th
 5. دفترچه شواهد، کلید شخصی → verify.py
 6. کانال تلگرام → verify.py (صادرات تلگرام دسکتاپ یا صفحهٔ t.me/s)
 
-**On this page**
+**در این صفحه**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#verify)
+- [آنچه شاهد دریافت می‌کند و آنچه دریافت نمی‌کند](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [آنچه بررسی و ثبت می‌کند](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#what-it-checks-and-records)
+- [اجرای یک شاهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#run-a-witness)
+- [صفحه اثبات عمومی برای چندین فضای کاری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [تأیید کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/#verify)
 
 ## آنچه ویجت دریافت می‌کند و آنچه دریافت نمی‌کند
 
@@ -48,7 +48,7 @@ A witness retains signed checkpoints separately from the collector. It checks th
 در هر بازه زمانی (به طور پیش‌فرض ۱۰ دقیقه) شاهد:
 
 1. خودِ سر را بازیابی می‌کند (جمع‌کننده نمی‌تواند آن را جابجا کند یا از آن بگذرد)؛
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. امضای گردآورنده، کلید ثابت‌شده گردآورنده (`--collector-fingerprint`، یا اولین کلید مشاهده‌شده)، یک شمارش غیرکاهشی و یک سر که در شمارش ثابت‌شده تغییر نکرده است را تأیید می‌کند. اثبات‌های گنجاندن و سازگاری مرکل تأیید می‌کنند که یک دفترچه خاطرات رو به رشد، نقطه کنترل نگهداری‌شده را گسترش می‌دهد. پس از استفاده از اثبات‌های پیوستگی، حذف آن‌ها رد می‌شود؛
 3. یک رکورد امضا شده را به ژورنال خود ضمیمه می‌کند: `witness.anchor` با وضعیت `ok`، `key_changed`، `rollback` (رکوردهای کمتر از قبل)، `fork` (طول یکسان، هدر متفاوت) یا `invalid` (پاسخ در اعتبارسنجی شکست خورد)، یا `witness.no_response` وقتی گردآورنده پاسخ نداد؛
 4. نتیجه را در حالی که شاهد در حال اجرا است و می‌تواند به API ربات دسترسی داشته باشد، امضا شده و همراه با «بدون پاسخ» در کانال ارسال می‌کند. شناسه پست ثبت می‌شود (`witness.posted`)، یک پست ناموفق نیز (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 این امر مستلزم اثر انگشت شاهدی است که به‌طور مستقل نگهداری شده و یک نقطه کنترل تطابق‌دار در انتهای دقیق این خروجی. یک نقطه کنترل که فقط پیشوند قبلی را پوشش می‌دهد ناکافی است. جمع‌آوری را متوقف کنید، اجازه دهید شاهد وضعیت نهایی را مشاهده کند و قبل از نوشتن‌های بیشتر در ژورنال، خروجی را صادر کنید؛ اگر ژورنال تغییر کرد، یک نقطه کنترل دیگر نگهداری کرده و آن وضعیت را صادر کنید. یک نقطه کنترل بعدی به تنهایی نمی‌تواند هش نهایی یک خروجی کوتاه‌تر را تأیید کند. هنگامی که `--channel` نیز ارائه شود، عدم وجود پست‌های ادعا شده یا یک مجموعه تطابق خالی، این بررسی سخت‌گیرانه را ناموفق می‌کند. بدون این پرچم، بررسی‌های یکپارچگی عادی همچنان رکوردهای بدون شاهد را گزارش می‌کنند بدون اینکه آرشیوی را که در غیر این صورت سالم است، رد کنند.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+مجله شاهد و کلید پین‌شده آن را جداگانه نگه دارید. بررسی‌های آنلاین، پیوستگی بین نقاط کنترل را تأیید می‌کنند؛ تأیید آفلاین هر نقطه کنترل نگهداری‌شده را با خروجی مقایسه می‌کند. سرهای قدیمی بدون اثبات پیوستگی، مقایسه آفلاین را حفظ کرده و بدون تأیید پیوستگی آنلاین گزارش می‌شوند. گزارش، زمان‌های از کار افتادگی شاهد و انتشارهای ناموفق را بر حسب بازه زمانی فهرست می‌کند.
 
-### Daily seals and unavailable timestamp calendars
+### مهرهای روزانه و تقویم‌های زمان‌بندی در دسترس نبوده
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+شاهد مرز دفترچه روز UTC قبلی را مهر و موم می‌کند و هش آن مهر و موم امضا شده را به OpenTimestamps ارسال می‌نماید. یک ارسال تقویمی در انتظار مدرک است؛ تنها تعهدات بیت‌کوین که به‌طور مستقل بررسی شده‌اند در اعتبارسنج تأیید می‌شوند.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+اگر همه تقویم‌ها با شکست مواجه شوند، مهر امضا شده و تلاش ناموفق در مجله باقی می‌مانند. پاس نگهداری ساعتی آن رکورد اصلی را، حتی پس از راه‌اندازی مجدد یا تغییر تاریخ، مجدداً امتحان می‌کند. این پاس حداکثر 32 مهر را اسکن می‌کند، حداکثر دو ارسال از دست رفته را ارسال می‌کند و برای هر پاس حداکثر 60 ثانیه برای تلاش‌های مجدد صرف می‌کند. یک نشانگر پایدار به صورت چرخشی مهرهای قدیمی‌تر را بررسی می‌کند. ارسال‌های نگهداری‌شده از مسیر ارتقاء-اثبات موجود پیروی می‌کنند.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+یک تلاش مجدد مهر را بازنویسی نمی‌کند، تاریخ اصلی آن را تغییر نمی‌دهد یا ادعا نمی‌کند که تقویم آن را زودتر دریافت کرده است. یک تعهد بیت‌کوین بعدی همچنان یک تأیید خارجی بعدی باقی می‌ماند. اثبات‌های از دست رفته همچنان `none` باقی می‌مانند؛ اثبات‌های در انتظار تا زمانی که اعتبارسنج به طور مستقل آنها را بررسی کند، همچنان `pending` باقی می‌مانند.

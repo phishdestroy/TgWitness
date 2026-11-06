@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/
 
 MCP क्लाइंट को चयनित वर्कस्पेस और चैट्स से समाप्त होने वाली, रद्द की जा सकने वाली पहुँच के साथ कनेक्ट करें।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [एकीकरण संग्रह](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![एकीकरण संग्रह](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 एक एनालिस्ट क्लाइंट को चयनित वर्कस्पेस और चैट से कनेक्ट करें। TgWitness **पैनल प्रक्रिया में `/mcp` पर स्ट्रीमएबल HTTP** प्रदान करता है। प्रत्येक कनेक्शन का अपना टोकन, समाप्ति और अनुमत टूल होते हैं। MCP टेलीग्राम संदेश नहीं भेज सकता, सेटिंग्स नहीं बदल सकता या साइन किए गए जर्नल को संशोधित नहीं कर सकता। वही कनेक्शन [कमांड लाइन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/cli/) के साथ भी काम करते हैं।
 
 [कार्यप्रवाह मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/docs/archive/) · [विकी](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**इस पृष्ठ पर**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#tools-and-boundaries)
+- [इंस्टॉल करें और जांचें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#install-and-check)
+- [कनेक्शन जारी करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#issue-a-connection)
+- [अपने क्लाइंट को कनेक्ट करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#connect-your-client)
+- [क्लाउडफ्लेयर टनल](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#cloudflare-tunnel)
+- [उपकरण और सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/#tools-and-boundaries)
 
 ## इंस्टॉल करें और जांचें
 
@@ -57,12 +57,12 @@ MCP एक्स्ट्रा आधिकारिक [MCP Python SDK](https:
 
 | क्लाइंट | कॉन्फ़िगरेशन | कनेक्शन |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, बियरर हेडर |
-| Claude Desktop | `claude_desktop_config.json` | लोकल stdio ब्रिज |
+| क्लॉड कोड | `.mcp.json` | HTTP, `type: "http"`, बियरर हेडर |
+| क्लॉड डेस्कटॉप | `claude_desktop_config.json` | लोकल stdio ब्रिज |
 | Cursor | `.cursor/mcp.json` | एनवायरनमेंट-वेरिएबल हेडर के साथ HTTP |
-| VS Code Local | `.vscode/mcp.json` | पासवर्ड `promptString` इनपुट के साथ HTTP |
+| VS कोड लोकल | `.vscode/mcp.json` | पासवर्ड `promptString` इनपुट के साथ HTTP |
 | Windsurf | `mcp_config.json` | बियरर-हेडर प्लेसहोल्डर के साथ HTTP |
-| अन्य क्लाइंट | URL और Authorization हेडर | Streamable HTTP |
+| अन्य क्लाइंट | URL और Authorization हेडर | स्ट्रीम करने योग्य HTTP |
 
 TgWitness बिना OAuth डिस्कवरी के बियरर टोकन का उपयोग करता है। जिन क्लाइंट के रिमोट कनेक्टर को OAuth की आवश्यकता होती है, उनके लिए लोकल stdio ब्रिज का उपयोग करें। VS Code के लिए, इनपुट वेरिएबल **Local** हार्नेस पर लागू होते हैं और Copilot सेशन को फॉरवर्ड नहीं किए जाते हैं। कॉन्फ़िगरेशन संदर्भ: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 
@@ -74,7 +74,7 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 
 इंस्टॉल किए गए MCP एक्स्ट्रा के साथ क्लाइंट के लोकल Python का उपयोग करें। इसके सुरक्षित एनवायरनमेंट में `TGWITNESS_MCP_TOKEN` सेट करें। क्रेडेंशियल को कमांड आर्ग्यूमेंट्स और URL से बाहर रखें। `tgwitness-mcp` भी समान एंट्री पॉइंट है। पुराना `tgwitness.mcp_bridge` मॉड्यूल और `TGWITNESS_ARCHIVE_TOKEN` नाम एक चेतावनी के साथ संगतता (compatibility) पथ बने हुए हैं; नई कॉन्फ़िगरेशन `mcp_server` और `TGWITNESS_MCP_TOKEN` का उपयोग करती हैं।
 
-## Cloudflare Tunnel
+## क्लाउडफ्लेयर टनल
 
 पैनल के `/mcp` रूट को फॉरवर्ड करें और बियरर हेडर को बनाए रखें। व्यवस्थापक (administrator) के रूप में MCP सेटिंग्स खोलने से इस रन के लिए पैनल का वर्तमान ओरिजिन रजिस्टर हो जाता है। रीस्टार्ट के तुरंत बाद उपलब्ध होने वाले स्थिर पते के लिए, पैनल शुरू करने से पहले पैनल के HTTPS ओरिजिन के साथ `TGWITNESS_PUBLIC_URL` को कॉन्फ़िगर करें। मनमाने (Arbitrary) Host और फॉरवर्ड किए गए हेडर्स किसी विश्वसनीय पते को रजिस्टर नहीं करते हैं। Host और Origin जांच असंबंधित ब्राउज़र ओरिजिन को अस्वीकार कर देती हैं। रिस्पॉन्स `Cache-Control: no-store` का उपयोग करते हैं; ऑथोराइजेशन मान कभी भी लॉग नहीं किए जाते हैं।
 

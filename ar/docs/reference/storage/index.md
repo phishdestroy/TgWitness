@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/stora
 
 النسخ الاحتياطية، ونقل الملفات القديمة إلى السحابة الخاصة بك، والنسخ الخاضعة لـ Object Lock، والاستعادة على جهاز جديد.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [النشر والاستعادة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![النشر والاستعادة](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 تُقسّم اللوحة المهام إلى ثلاث مهام:
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/stora
 
 لا يُعد رد التحميل بحد ذاته إذنًا بحذف الملف. TgWitness يقوم بتنزيل الكائن المشفر بالكامل ويتحقق من حجمه وSHA-256، ويحفظ الإيصال، ثم يتحقق من البايتات المحلية مرة أخرى مباشرةً قبل الحذف. في حالة فشل التحميل، أو اختلاف القراءة، أو إلغاء النقل، يبقى الملف المحلي في مكانه. إذا لم تكن نسخة احتياطية للأدلة المُفعَّلة قد نسخت هذا الملف بعد، فإن عملية الحذف تنتظر ذلك أيضًا.
 
-**On this page**
+**في هذه الصفحة**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#operator-bot-and-completion-notices)
+- [عندما يمتلئ القرص](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#when-the-disk-is-filling-up)
+- [ربط وجهة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#connect-a-destination)
+- [الاحتفاظ بملف الاستعادة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#keep-the-recovery-file)
+- [استعادة البيانات بعد فقدان التثبيت](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#recover-after-losing-the-installation)
+- [روبوت المشغل وإشعارات الإكمال](https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## عندما توشك مساحة القرص على النفاد
 

@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![یکپارچه‌سازی‌های آرشیو](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/) · [جستجوی متن کامل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 تاریخ‌ها هستند `2026-10-01` (نیمه‌شب به وقت UTC) یا زمان‌های ISO با منطقه زمانی، `2026-10-01T09:00+03:00`. برای `search`, `messages` و `export` آنها زمان مشاهده را انتخاب می‌کنند. صفحات تا ۵۰ رکورد را در خود جای می‌دهند: دنبال کنید `next_offset` (`--offset`) برای جستجوی رتبه‌بندی‌شده و `next_before` (`--before`) در جاهای دیگر.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+جستجوی رتبه‌بندی‌شده در 1,000 نتیجه متوقف می‌شود. صفحهٔ نهایی ممکن است کوتاه‌تر از `--limit` باشد؛ در صورتی که مشاهدات تطابق‌دار بیشتری وجود داشته باشد، عبارت جستجو، گفتگوی یا دورهٔ زمانی را محدود کنید.
 
 هر نتیجه پیام شامل `untrusted_content: true`، فضای کاری، چت و شناسه پیام‌ها، توالی دفترچه، هش رکورد ذخیره شده و یک لینک پنل. ویرایش‌ها، اعلان‌های حذف و `missing_on_recheck` سوابق جداگانه‌ای هستند. عدم وجود یک سابقه، اثبات نمی‌کند که یک رویداد هرگز رخ نداده است.
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 صادرات از طریق پنل نیاز به ارتباطی دارد که امکان **«صادرات پیام‌ها» (فقط خط فرمان)** را فراهم کند؛ این گزینه به‌صورت پیش‌فرض انتخاب نشده است. این فایل یک نسخهٔ کاری است، نه مدرک: برای تحویل قابل تأیید، از صادرات امضا شده در **بخش** **«صادرات»** استفاده کنید، که `python -m tgwitness.verify`بررسی می‌کند.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+پنل پیش از ارسال هر رکورد، از جمله رکورد تکمیل، دسترسی را مجدداً بررسی می‌کند. دسترسی لغو شده یا منقضی شده منجر به خروجی ناقص می‌شود. خوانش‌های تنبل صفحه، محدودیت کارگر بایگانی را با سایر پرس‌وجوها به اشتراک می‌گذارند و دارای زمان انتظار محدودی هستند.
 
 ## مهارت عامل
 

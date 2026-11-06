@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 威脅模型、存取模型、靜態機密資料、網路暴露風險、會話匯入，以及如何回報漏洞。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署與復原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署與復原](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
+本頁說明在本地或伺服器工作區中的存取、儲存及網路保護機制。 若要在 GitHub Runner 或 Intel TDX 機密虛擬機器中進行資料蒐集，請參閱 [驗證模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)，該模式會額外對蒐集環境進行檢查。 帳戶連線、通知、時間戳記、異地副本及見證者各有其專屬的路由設定。
 
 | 領域 | 簡而言之 |
 | --- | --- |
@@ -16,20 +16,20 @@ This page describes access, storage and network protection in a local or server 
 | 靜態資料的隱私 | 會話、API 配對、簽名金鑰及代理伺服器設定均採用 Fernet 進行加密 |
 | 訊息與媒體 | 資料以未加密形式儲存：請啟用磁碟加密並設定嚴格的存取權限 |
 | 完整性 | 每筆記錄均附有 SHA-256 雜湊鏈及 Ed25519 數位簽名 |
-| 本地信任邊界 | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
+| 本地信任邊界 | 主機管理員負責管理工作區及其簽署金鑰；獨立檢查點則保留較早的日誌邊界 |
 
 有關漏洞通報，請參閱[安全政策](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)。
 
-**On this page**
+**本頁內容**
 
-- [Access model](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#access-model)
-- [Panel content and exports](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#panel-content-and-exports)
-- [Secrets at rest](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#secrets-at-rest)
-- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#proxies-and-network-routes)
-- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#sign-in-and-session-imports)
-- [Logs and transport](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#logs-and-transport)
-- [Integrity limits](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#integrity-limits)
-- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#if-you-suspect-a-problem)
+- [存取模型](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#access-model)
+- [面板內容與匯出功能](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#panel-content-and-exports)
+- [靜態機密](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#secrets-at-rest)
+- [代理伺服器與網路路徑](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#proxies-and-network-routes)
+- [登入與會話匯入](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#sign-in-and-session-imports)
+- [日誌與傳輸](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#logs-and-transport)
+- [完整性限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#integrity-limits)
+- [若您懷疑有問題](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/#if-you-suspect-a-problem)
 
 ## 存取模式
 
@@ -53,13 +53,13 @@ This page describes access, storage and network protection in a local or server 
 
 ## 靜態資料的隱私
 
-Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
+Telegram API 憑證、會話金鑰及簽名金鑰均採用 Fernet 進行加密。 針對本機訊息與媒體檔案，其加密由主機的磁碟或磁碟區負責； 工作區則儲存一般檔案。匯出檔案可採用密碼保護的 AES-256 ZIP 格式， 而異地備份則採用 AES-256-GCM 加密。
 
-The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
+金庫金鑰預設位於受保護的資料目錄中。請使用下方的外部主金鑰檔案 將其分開儲存。在 Unix 系統上，新的私密金鑰檔案使用權限模式 0600，新的資料 目錄則使用 0700；在 Windows 系統上，請為服務帳戶及 授權管理員設定目錄存取控制清單 (ACL)。現有的目錄權限將予以保留。
 
 ### 外部主金鑰
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/) for setup details.
+對於新的資料目錄，TGWITNESS_VAULT_KEY_FILE 可提供外部隨機 主金鑰。系統會透過 HKDF-SHA256 及獨立的隨機鹽值，為每個工作區 衍生出不同的 Fernet 金鑰。為確保資料復原，必須保留 vault.external.json 檔案。若主金鑰遺失或 錯誤，系統將無法正常運作。現有的本機金庫不會被自動遷移。 此面板會顯示所選的金鑰儲存模式。無論採用何種模式，磁碟加密皆會保護本機的 訊息與媒體檔案；有關設定詳情，請參閱「 [連線與資料保護」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/)。
 
 ## 代理伺服器與網路路由
 
@@ -83,10 +83,10 @@ MTProxy 僅傳輸 Telegram 流量。外部請求可使用獨立的 SOCKS5/HTTP �
 
 ## 完整性限制
 
-Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
+本地驗證會檢查記錄簽名、雜湊鏈、附件及匯出清單。 管理員持有本地簽署金鑰，並可建立另一份已簽署的日誌； 獨立保存的檢查點可偵測其所涵蓋的前綴是否遭替換。 請將金鑰指紋與檢查點交由收件者或獨立見證人保管。
 
-For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) describes the checks for each mode.
+若需經過獨立驗證的資料蒐集，請選擇 [GitHub Actions 擷取](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) 或 [Intel TDX 部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)。 其驗證器除檢查檔案庫完整性外，還會驗證工作流程的來源追溯性或硬體測量結果。 可選的時間戳記與加密的異地副本可提供時間錨點及可恢復的副本； [證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)描述了各模式下的驗證流程。
 
 ## 若您懷疑有問題
 
-Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.
+請保留原始資料目錄，並使用另一份副本進行分析。 請透過 [安全政策](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)回報受影響的版本、操作及可重現步驟，同時確保帳戶資料與憑證的隱私。

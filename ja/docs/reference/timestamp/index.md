@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/times
 
 署名付きチェックポイントにおけるRFC 3161タイムスタンプ：認証機関に送信される内容と、応答の検証方法について。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [証拠と検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![証拠と検証](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitnessは、RFC 3161リクエストを作成し、タイムスタンプ認証機関（TSA）からの応答を検証します。 この手動手順では、TSAの選択もデータの送信も行われませんが、証拠モードでは、 スケジュールに従ってその両方を実行します（[証拠形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)）。作成されたリクエストは、 **まだタイムスタンプの証明とはなりません**。
 

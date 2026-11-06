@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/stora
 
 バックアップ、古いファイルのクラウドへの移動、Object Lock によるデータの複製、および新しいマシンでの復元。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [導入と復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![展開と復旧](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 このパネルでは、以下の3つのタスクを区別しています：
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/stora
 
 アップロードの応答だけでは、ファイルを削除する許可とはなりません。TgWitnessは 暗号化されたオブジェクト全体をダウンロードし、そのサイズとSHA-256を検証してレシートを保存し、 削除の直前にローカルのバイト数を再度確認します。アップロードの失敗、 読み取り結果の不一致、または転送の中止があった場合、ローカルファイルはそのまま残ります。もし 有効になっている証拠バックアップがそのファイルをまだコピーしていない場合、削除もそれが完了するまで待機します。
 
-**On this page**
+**このページでは**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#operator-bot-and-completion-notices)
+- [ディスクの容量が不足している場合](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#when-the-disk-is-filling-up)
+- [宛先を接続する](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#connect-a-destination)
+- [復元ファイルは保持してください](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#keep-the-recovery-file)
+- [インストールデータを紛失した場合の復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#recover-after-losing-the-installation)
+- [オペレーターボットおよび完了通知](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## ディスクの空き容量が少なくなった場合
 

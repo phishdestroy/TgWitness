@@ -22,7 +22,7 @@ TgWitness מופץ תחת [רישיון MIT](https://phishdestroy.github.io/TgWi
 >
 >
 >
-> Mathematik verhandelt nicht.
+> המתמטיקה אינה מתפשרת.
 
 [תיעוד המקור](https://phishdestroy.io/steam_dossier/taylor_wessing) · [הודעה אתית והמשכיות היסטורית](https://phishdestroy.github.io/TgWitness/he/docs/reference/notice/)
 

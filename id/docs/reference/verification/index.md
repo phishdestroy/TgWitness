@@ -4,91 +4,91 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/verif
 
 Uji coba Telegram secara langsung, pemeriksaan otomatis, pemeriksaan browser, dan hal-hal yang masih belum terverifikasi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bukti dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bukti & verifikasi](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
-**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+**Diperbarui pada 6 November 2026.** Hasil terkait dengan revisi, lingkungan, dan beban kerja yang dicatat untuk setiap eksekusi. [Kemampuan saat ini](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) menjelaskan alur kerja yang tersedia; halaman ini mencatat apa yang sebenarnya telah diperiksa.
 
-[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+[Grafik kinerja](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Audit bahasa Inggris yang ditandatangani](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Pengukuran yang dapat diunduh](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
 
-| Latest evidence | Hasil | Ruang Lingkup |
+| Bukti terbaru | Hasil | Ruang Lingkup |
 | --- | --- | --- |
-| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
-| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
-| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
-| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
-| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+| Audit rilis · 6 November | Uji inti 1,461 berhasil; uji platform 37 dilewati | Sumber `92e539af40d8`; temuan terbuka dipertahankan |
+| Ekspor terbaru · 6 Nov | 127.713 dan 141.781 catatan per detik, siklus lengkap | Dua akun per server; teks dan metadata melalui WARP |
+| Arsip yang disimpan · 6 Nov | Arsip 48; catatan 3,598,381 telah diverifikasi | Arsip yang ada telah diverifikasi menggunakan kunci ruang kerja yang disematkan |
+| Trusted Live · 5 November | Perekaman CPU yang dilindungi dan pemeriksaan WARP | Proses masuk ke Desktop resmi dan ekspor asli tetap tidak memenuhi syarat |
+| Phala / Intel TDX · 4 Nov | Semua pemeriksaan verifikator 16 telah lulus pada eksekusi selanjutnya | Penerapan historis; tidak ada akun Telegram di CVM |
 
-**On this page**
+**Di halaman ini**
 
-- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
-- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
-- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
-- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
-- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
-- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
-- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
-- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
-- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#synthetic-local-capacity-measurement)
-- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
-- [Remaining qualification](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#remaining-qualification)
+- [Audit rilis dan ekspor terbaru · 6 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [Trusted Live CPU Ubuntu dan WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [Penerapan Phala Cloud secara langsung · 4 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [Inventaris jurnal server langsung · 1 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [Pemeriksaan offline dan injeksi kesalahan terbaru · 1 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [Pengujian Telegram langsung, seluruh akun · 29 Oktober 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [Ekspor yang dilindungi kata sandi dibuka dengan libarchive · 29 Oktober 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [Uji coba Telegram langsung · 27 hingga 29 Oktober 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [Pengukuran kapasitas lokal sintetis](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [Pencarian teks lengkap pada satu juta pesan · 5 November 2026](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [Kualifikasi yang tersisa](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/#remaining-qualification)
 
-## Release audit and fresh exports · 6 November 2026
+## Audit rilis dan ekspor terbaru · 6 November 2026
 
-The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+Audit ini menggunakan v0.9.1 pada sumber `92e539af40d8368d198ff5e040f1d876f2c1310e`, rilis `92e539af40d8-83e41104669e`. Pemeriksaan awal paket yang terinstal berhasil di tiga server. Laporan yang ditandatangani mempertahankan kondisi yang diamati pada saat itu.
 
-[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+[![Tingkat akuisisi dan ekspor lengkap untuk dua beban kerja baru](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
 
-| Workload | Merekam | Acquisition | Complete cycle | Complete-cycle rate |
+| Beban kerja | Merekam | Akuisisi | Siklus lengkap | Tingkat siklus lengkap |
 | --- | --- | --- | --- | --- |
-| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
-| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+| Server A · dua akun | 27,030 | 189.043 s | 211.647 s | 127.713 catatan/detik |
+| Server B · dua akun | 29,299 | 182.513 s | 206.650 s | 141.781 catatan/detik |
 
-Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+Kedua ekspor dimulai tanpa melanjutkan proses sebelumnya, mengecualikan lampiran dan avatar, serta berakhir tanpa adanya catatan duplikat atau yang digunakan kembali. Siklus lengkap mencakup persiapan, akuisisi, seleksi, pengemasan, dan verifikasi arsip. Server A juga menjalankan pemeriksaan pembacaan obrolan terlindungi. Empat peristiwa FloodWait di A dan tiga di B dipatuhi. Pengamatan ini tidak menjamin throughput secara umum.
 
-| Periksa | Hasil | Qualification |
+| Periksa | Hasil | Kualifikasi |
 | --- | --- | --- |
-| Core pytest | 1,461 passed | 37 platform skips |
-| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
-| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
-| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
-| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
-| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+| Inti pytest | 1,461 lulus | Platform 37 melewati |
+| Browser / pengalaman pengguna browser / bukti / situs | 102 / 66 / 15 / 9 lulus | Program-program ini tumpang tindih dengan pengujian lain; jumlahnya tidak dapat dijumlahkan |
+| Addon Capture | 124 lulus | Tiga pemeriksaan Web Resmi diblokir oleh sandbox Chromium yang diwajibkan |
+| Otorisasi API | Rute 269; permintaan 538 berhasil | Kredensial yang hilang dan akses yang dicabut |
+| Arsip yang disimpan | 48 dari 48 telah diverifikasi | Catatan 3,598,381; kunci ruang kerja yang disematkan |
+| Pemeriksaan pembacaan armada secara langsung | Profil 24 dari 40 lulus | Rute WARP 16 gagal memenuhi syarat; profil-profil tersebut tidak terhubung |
 
-The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+Laporan [yang ditandatangani](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) mencatat semua temuan terbuka, termasuk tiga cacat dalam cuplikan obrolan rahasia yang belum dipublikasikan dan tidak terdapat dalam build utama yang diaudit. Kualifikasi [riwayat publik](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) sebelumnya menggunakan revisi dan beban kerja yang berbeda; tingkatnya tidak boleh digabungkan dengan perbandingan ini.
 
-Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
+Verifikasi laporan asli menggunakan kunci [yang disematkan dan verifikator](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Tanda tangannya melindungi laporan operator dari perubahan. Ini bukanlah pengesahan independen, bukti kepenulisan Telegram, atau sertifikasi GDPR.
 
-## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+## Trusted Live CPU Ubuntu dan WARP · 5 November 2026
 
-The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+Proses integrasi yang dipertahankan menggunakan mesin tamu Ubuntu 24.04.5 yang hanya menggunakan CPU (4 vCPU, 8 GiB) di bawah QEMU di dalam host CPU RunPod. Pengumpul menggunakan `14e642a5`; verifikasi menggunakan `02072461`. Perbaikan akhir digabungkan dalam [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) sebagai `755f78f6`, yang pohonnya sesuai dengan kepala PR yang diuji. Ini bukan TEE.
 
-- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
-- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
-- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
-- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
-- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+- Sebuah WARP Connector asli dilaporkan dalam kondisi baik; HTTPS yang diproksi melaporkan bahwa WARP dan Gateway telah diaktifkan. Tiga probe mendeteksi alamat keluar yang sama, bukan jaminan alamat IP tetap.
+- Memutuskan koneksi WARP menyebabkan permintaan yang diproksi gagal. HTTPS layanan gateway langsung ditolak. Di ruang nama perekam, IPv4/IPv6 langsung, DNS eksternal, dan penyelesai UDP tertanam Docker diblokir.
+- Token penyedia yang hanya dapat dibaca dan memiliki cakupan tertentu dapat membaca status kesehatan/koneksi, tetapi tidak dapat membaca token pendaftaran konektor. Pengamatan penyedia yang ditandatangani mencakup sampel yang secara eksplisit tidak tersedia. Saksi berjalan di host operator, sehingga hal ini menunjukkan proses perekaman dan penyimpanan, bukan penyimpanan oleh pihak ketiga yang independen.
+- Desktop Resmi mencapai layar sambutan tanpa otentikasi. Masukan keyboard yang dilindungi ditolak selama proses penangkapan. Tiga segmen tampilan H.264 telah diterjemahkan dan overlay jamnya telah diperiksa. Arsip pra-penerbangan peristiwa 18 telah diverifikasi berdasarkan kunci perekam yang disematkan dan titik pemeriksaan yang disimpan.
+- Uji penangkapan akhir berhasil melewati kasus-kasus 114 di CI Windows dan Linux, dengan Chromium/FFmpeg yang sebenarnya. Lima uji jangkar dan pemeriksaan saran ketergantungan berhasil dilalui.
 
-An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+Proses awal 2 vCPU/4 GiB mengalami timeout saat beban pembuatan gambar bersamaan dan dihentikan oleh mekanisme pengaman; hal ini tidak dihitung sebagai keberhasilan. Masuk akun uji coba secara manual, ekspor obrolan asli, perbandingan hibrida nyata, dan keluar dari Telegram masih menunggu. Tidak ada sesi Telethon yang disediakan yang diimpor. Lampiran, OCR otomatis, verifikasi drand BLS lokal, dan pengesahan Trusted Live TDX tidak memenuhi syarat.
 
 ## Penerapan Phala Cloud langsung · 4 November 2026
 
-**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+**Hasil historis:** penerapan selanjutnya lulus semua pemeriksaan verifikator 16, termasuk Intel TDX dan quick tunnel. Bukti restart, penemuan alamat yang ditandatangani, dan cap waktu laporan diperiksa secara terpisah. Setiap CVM pengujian dihapus setelah dijalankan.
 
-| Pengaturan | Recorded value |
+| Pengaturan | Nilai yang terekam |
 | --- | --- |
 | Penyedia | Phala Cloud · `tdx.small` · US-WEST-1 |
-| Penerapan | `--provider phala --quick-tunnel`; initially empty workspace |
-| Initial collector | `df7d860c` · v0.8.1 |
-| Collector with all fixes | `53a0f7e9` |
-| Production guest | `dstack-0.5.12`; SSH access disabled |
-| External services | ntfy.sh, GitHub and Intel PCS |
-| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+| Penerapan | `--provider phala --quick-tunnel`; ruang kerja awalnya kosong |
+| Pengumpul awal | `df7d860c` · v0.8.1 |
+| Collector dengan semua perbaikan | `53a0f7e9` |
+| Tamu produksi | `dstack-0.5.12`; Akses SSH dinonaktifkan |
+| Layanan eksternal | ntfy.sh, GitHub, dan Intel PCS |
+| Biaya yang diamati | Tujuh CVM, total sekitar 1.9 sen AS; harga uji historis |
 
-The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+Urutan di bawah ini memisahkan kegagalan awal, perbaikan, dan pemeriksaan yang telah diselesaikan. Tidak ada akun Telegram yang terhubung ke CVM-CVM ini.
 
-**Deployments 1–2 · provider differences and regression checks**
+**Penerapan 1–2 · perbedaan penyedia dan pemeriksaan regresi**
 
 Dua deployment pertama menemukan lima perbedaan dari Phala Cloud yang disimulasikan. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) kini mereproduksi masing-masing perbedaan tersebut, dan gagal tanpa perbaikan:
 
@@ -100,7 +100,7 @@ Dua deployment pertama menemukan lima perbedaan dari Phala Cloud yang disimulasi
 | Dengan gateway dstack dimatikan, detail CVM tidak pernah menerima kode kesalahan `instance_id` | Proses penyebaran menunggu selama 30 menit dan gagal | ID instans dibaca dari status CVM |
 | Restart, penghentian, dan penyalaan adalah operasi CVM, bukan revisi aplikasi | `provider_actions` tidak mencantumkan restart | Operasi-operasi tersebut juga dibaca |
 
-**Deployment 3 · attestation, access checks and restart evidence**
+**Penerapan 3 · pengesahan, pemeriksaan akses, dan bukti restart**
 
 - CVM menjalankan `dstack-0.5.12` dengan akses SSH dinonaktifkan. Pengumpul memposting alamat yang telah ditandatanganinya sekitar 1,5 menit setelah pembuatan. Proses penyebaran kemudian berhasil melewati `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, catatan pengesahan perangkat keras v4, FMSPC `20a06f000000`, tidak dalam mode debug, tidak dapat dimigrasikan, mendukung data verifikasi kriptografi yang diambil dari Intel), `tdx_compose_hash`, `tdx_compose` (byte per byte), dan `tdx_identity` (kunci KMS).
 - Panel di alamat trycloudflare.com merespons dengan kode 401 tanpa token atau dengan token yang salah, dan 200 dengan token panel.
@@ -109,66 +109,66 @@ Dua deployment pertama menemukan lima perbedaan dari Phala Cloud yang disimulasi
 - `destroy` hanya menghapus CVM tersebut. Ruang kerja kemudian menjadi kosong, dan alamat panel berhenti menanggapi.
 - Pemeriksaan harga pada panel wizard menunjukkan `tdx.small` sebesar $0,058 per jam. Kunci yang salah menghasilkan pesan sederhana "tidak menerima kunci API".
 
-**Follow-up fixes · signed address discovery and OS measurements**
+**Perbaikan lanjutan · penemuan alamat yang ditandatangani dan pengukuran sistem operasi**
 
 - Tanpa kunci alamat, `verify` mengikuti posting terbaru yang terstruktur dengan baik mengenai topik alamat, yang tercantum dalam konfigurasi Docker Compose yang dipublikasikan. Satu posting palsu mengirimkannya ke host yang tidak ada, dan `statement` gagal: seorang pemalsu tidak dapat menyamar sebagai pengumpul, tetapi dapat menghalangi verifikasi pihak ketiga, hingga 12 jam dengan cap waktu masa depan yang dipalsukan. Kolektor kini juga memposting alamatnya yang ditandatangani dengan kuncinya sendiri; `verify` hanya menerima postingan semacam itu ketika kolektor yang membuatnya, dan postingan diurutkan berdasarkan waktu penerimaan ntfy.sh. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) memutar ulang postingan yang dipalsukan. Sebuah CVM hanya menjalankan ini dari sebuah commit yang mengandungnya, sehingga pengumpul pada eksekusi ini belum menandatangani alamatnya dan `verify` menyatakan hal tersebut.
 - `tdx_os` tidak dapat dijalankan tanpa `dstack-mr`, yang versi saat ini memiliki `measure-os`, bukan `measure --json` seperti yang disebutkan dalam dokumentasi. Verifikator kini menghitung MRTD dan RTMR0-2 sendiri dari gambar yang dipublikasikan dan bentuk VM, termasuk tabel ACPI.
 
-**Deployment 4 · all 16 checks, report seals and restart verification**
+**Penerapan 4 · semua pemeriksaan 16, segel laporan, dan verifikasi ulang**
 
 - Deploy mengunduh `dstack-0.5.12` yang dipublikasikan sekali, mencocokkannya dengan hash gambar OS yang dilaporkan oleh CVM , dan `tdx_os` lulus: MRTD, RTMR0, RTMR1, dan RTMR2 sama dengan nilai yang dihitung untuk QEMU 8.2.2, 1 vCPU, dan 2 GiB. Perhitungan yang sama menghasilkan nilai RTMR0 yang berbeda untuk klaim 4 GiB, 2 vCPU, QEMU 9.2.1, atau kartu jaringan kedua, serta gagal untuk kernel, firmware, atau baris perintah yang diubah serta untuk citra pengembangan.
 - `verify` lulus semua dari 16 pemeriksaan yang dilakukannya, termasuk konektor quick tunnel, sehingga hasilnya adalah LULUS. Sistem tersebut menulis sertifikat HTML dan PDF, yang disegel secara digital dengan tanda tangan dan cap waktu menggunakan cap waktu eIDAS yang memenuhi syarat dari unit cap waktu pemerintah Belgia TSU 202301 (status disetujui dalam daftar tepercaya Belgia), cap waktu FreeTSA, dan tanda tangan verifikator; `check-report` mengonfirmasi semuanya serta tanda tangan pada PDF tersebut.
 - Setelah restart, `verify --evidence` mengonfirmasi dua kali proses booting, masing-masing disertai dengan pengesahan perangkat keras yang dihasilkan di dalam CVM dan masing-masing dibooting dari `dstack-0.5.12` yang telah dipublikasikan; proses restart dan booting baru tersebut berstatus REVIEW.
 - `destroy` meninggalkan ruang kerja dalam keadaan kosong.
 
-**Deployment 5 · collector-signed discovery and forged-post rejection**
+**Penerapan 5 · penemuan yang ditandatangani oleh pengumpul dan penolakan posting palsu**
 
-The collector ran from commit `53a0f7e9`, which includes the fixes above.
+Pengumpul dijalankan mulai dari commit `53a0f7e9`, yang mencakup perbaikan di atas.
 
 - Pengumpul memposting alamatnya yang ditandatangani dengan kunci miliknya sendiri, di samping postingan HMAC milik operator. Dua postingan palsu kemudian ditambahkan ke topik tersebut, satu dengan HMAC bernilai nol dan satu lagi ditandatangani oleh kunci Ed25519 lain, keduanya mengklaim waktu pada tahun 2096. `verify` mengambil alamat yang ditandatangani oleh kunci pengumpul dan lulus semua 16 pemeriksaan; segel tersebut kembali memuat cap waktu Belgia yang terakreditasi, cap waktu FreeTSA, dan tanda tangan verifikator, dan `check-report` mengonfirmasi semuanya.
 - Setelah restart, pengumpul memposting alamat baru yang ditandatangani: `verify` langsung menemukannya, **operator menemukan alamat saat ini,** 27 detik kemudian dari postingan HMAC, dan keduanya mengabaikan postingan palsu tersebut. `verify --evidence` mengonfirmasi dua kali booting dari `dstack-0.5.12`.
 - Deploy mencantumkan biaya yang ditagihkan Phala kepada CVM, termasuk disk: $0,06078 per jam.
 
-### Panel wizard and remaining scope
+### Wizard panel dan cakupan yang tersisa
 
 Wizard panel dijalankan di Phala Cloud dua kali, sekali melalui API tugasnya dan sekali melalui browser dengan Chromium asli: pemeriksaan harga, pembuatan dengan commit di bawah **Advanced**, keenam pemeriksaan sertifikasi lulus, daftar server menampilkan harga yang ditagih (44,37 USD per bulan), **Find alamat saat ini**, pengunduhan konfigurasi Docker Compose yang diukur, dan penghapusan. Browser tidak mendeteksi kesalahan halaman apa pun. Setiap kali, ruang kerja menjadi kosong setelahnya.
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
+Tidak termasuk: domain Cloudflare di Phala, akun Telegram di CVM, dan gambar `dstack-0.6.1`. Harga wizard sebelum pembuatan hanya mencakup harga komputasi Phala, karena API-nya hanya mencantumkan harga disk untuk CVM yang sudah ada; daftar server menampilkan harga yang ditagihkan setelah pembuatan. Semua harga dalam bagian ini diamati pada tanggal 4 November 2026.
 
-## Live server journal inventory · 1 November 2026
+## Inventaris jurnal server langsung · 1 November 2026
 
-At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
+Sekitar pukul 19:15 UTC, kueri SQLite `query_only` berurutan yang hanya dapat dibaca menghitung peristiwa dalam sepuluh basis data ruang kerja pada server yang sedang berjalan. Pengumpulan data berlanjut selama kueri berlangsung, sehingga ini bukanlah cuplikan data atomik yang mencakup seluruh ruang kerja.
 
-| Observed across the ten workspace databases | Jumlah |
+| Teramati di sepuluh basis data ruang kerja | Jumlah |
 | --- | --- |
-| Workspaces with at least one `message.new` event | 8 |
-| Journal records, including operational events | 1,610,818 |
-| `message.new` events | 900,232 |
-| `message.edited` events | 80,683 |
-| `message.deleted` events | 400,536 |
-| `message.recovered` events | 53,403 |
-| `message.snapshot` events | 2,183 |
-| `media.saved` events | 50,418 |
-| `media.failed` events | 5,575 |
-| `coverage.gap` events | 11 |
-| Database bytes, excluding WAL files and media | 7,909,003,264 |
+| Ruang kerja dengan setidaknya satu peristiwa `message.new` | 8 |
+| Catatan jurnal, termasuk peristiwa operasional | 1,610,818 |
+| Peristiwa `message.new` | 900,232 |
+| Peristiwa `message.edited` | 80,683 |
+| Peristiwa `message.deleted` | 400,536 |
+| Peristiwa `message.recovered` | 53,403 |
+| Peristiwa `message.snapshot` | 2,183 |
+| Peristiwa `media.saved` | 50,418 |
+| Peristiwa `media.failed` | 5,575 |
+| Peristiwa `coverage.gap` | 11 |
+| Byte basis data, tidak termasuk berkas WAL dan media | 7,909,003,264 |
 
-These are **event counts**, not unique messages, people or media files. The same message can appear in more than one workspace, and an edit or deletion can produce another journal event. `media.failed` counts historical failure events, not the current media queue. The queries did **not** newly verify signatures and the full hash chain of all 1,610,818 records, measure delivery or throughput, or establish that every Telegram event was captured. No message content, account or chat IDs, workspace labels, credentials or private files are published here.
+Ini adalah **jumlah peristiwa**, bukan pesan, orang, atau file media yang unik. Pesan yang sama dapat muncul di lebih dari satu ruang kerja, dan pengeditan atau penghapusan dapat menghasilkan peristiwa jurnal lainnya. `media.failed` menghitung peristiwa kegagalan historis, bukan antrian media saat ini. Kueri-kueri tersebut **tidak** memverifikasi ulang tanda tangan dan rantai hash lengkap dari seluruh 1,610,818 catatan, mengukur pengiriman atau throughput, atau memastikan bahwa setiap peristiwa Telegram terekam. Tidak ada isi pesan, ID akun atau obrolan, label ruang kerja, kredensial, atau berkas pribadi yang dipublikasikan di sini.
 
-At this review, the separately configured public monitor covered three sources: one capture response was OK and two reported `no_response`. That monitor is not a ten-workspace health summary. `no_response` means the observer could not obtain a response at that check; it does not establish message loss. The smaller 29 October test below has its own explicit signature and hash-chain verification.
+Pada tinjauan ini, monitor publik yang dikonfigurasi secara terpisah mencakup tiga sumber: satu respons penangkapan berstatus OK dan dua lainnya melaporkan `no_response`. Monitor tersebut bukan ringkasan kesehatan sepuluh ruang kerja. `no_response` berarti pengamat tidak dapat mendapatkan respons pada pemeriksaan tersebut; hal ini tidak menunjukkan adanya kehilangan pesan. Uji coba yang lebih kecil pada 29 Oktober di bawah ini memiliki tanda tangan eksplisit dan verifikasi rantai hash tersendiri.
 
-## Recent offline and fault-injection checks · 1 November 2026
+## Pemeriksaan offline dan injeksi kesalahan terbaru · 1 November 2026
 
-These checks use fictional data and local files; they add regression evidence for the current source, not another live Telegram delivery measurement:
+Pemeriksaan ini menggunakan data fiktif dan berkas lokal; pemeriksaan ini menambahkan bukti regresi untuk sumber saat ini, bukan pengukuran pengiriman Telegram langsung lainnya:
 
-| Periksa | What it exercised |
+| Periksa | Apa yang telah diuji |
 | --- | --- |
-| [Source archive](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact. |
-| [Account export recovery](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow. |
-| [Minimized disclosure privacy](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged. |
-| [Linux media decoder and OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | A [Linux Docker CI check](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) at commit `5a9e0814` passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model. |
+| [Arsip sumber](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Dua build dengan byte sumber yang identik namun waktu file yang berbeda menghasilkan ZIP dan checksum yang sama. Byte arsip dan hash file yang persis sama cocok; file pengujian pribadi tetap tidak termasuk. Kegagalan penulisan yang disimulasikan membuat arsip dan checksum sebelumnya tetap utuh. |
+| [Pemulihan ekspor akun](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | Kesalahan disk simulasi pada anggota ZIP kedua tidak menghasilkan ZIP yang dipublikasikan maupun ZIP parsial. Proses melanjutkan pemulihan mempertahankan setiap byte tanda terima yang ditandatangani secara identik, menghasilkan arsip yang dapat diverifikasi secara independen menggunakan sidik jari penandatanganan yang diharapkan, dan mempertahankan celah cakupan sintetis sebagai hasil parsial. Pernyataan skala mencegah pemindaian tugas dan tanda terima yang berulang seiring bertambahnya riwayat. |
+| [Privasi dengan pengungkapan minimal](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Nama dan alias Unicode sintetis, metadata bersarang, pengirim yang tidak diketahui, serta bidang media telah diperiksa di ketiga mode identitas dan dengan penghilangan teks. Kegagalan batas penyamaran tidak secara diam-diam melemahkan proses penyuntingan; ekspor akun asli yang ditandatangani tetap tidak berubah. |
+| [Pengkode media Linux dan OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | [Pemeriksaan CI Docker Linux](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) pada commit `5a9e0814` berhasil melewati uji dengan masukan Ogg/Opus, MP3, M4A, MP4 dengan video, WAV, dan FLAC; kontrol durasi palsu dan referensi berkas sekunder; serta 48 fixture parser yang dimutasi (34 ditolak, 14 berhasil didekode dalam batas). OCR Tesseract asli berjalan dengan byte asli tetap tidak berubah. Dekoder dan OCR berjalan dalam kontainer yang terisolasi dari jaringan tanpa model Whisper. |
 
-The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) and [full Checks](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) workflows. They test these failure boundaries, not every possible storage failure or whether a disclosure is automatically safe to publish. The media check does not measure speech recognition accuracy or Telegram delivery. Review each derivative before sharing.
+Pemeriksaan ini dijalankan dalam alur kerja [(pull-request)](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) dan [(pemeriksaan lengkap)](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml). Pemeriksaan ini menguji batas-batas kegagalan ini, bukan setiap kemungkinan kegagalan penyimpanan atau apakah pengungkapan informasi tersebut secara otomatis aman untuk dipublikasikan. Pemeriksaan media tidak mengukur akurasi pengenalan suara atau pengiriman Telegram. Tinjau setiap turunan sebelum membagikannya.
 
 ## Uji coba Telegram langsung, seluruh akun · 29 Oktober 2026
 
@@ -249,6 +249,6 @@ Jurnal bertanda deterministik berisi 1.000.000 pesan sintetis dalam 200 obrolan 
 
 Jurnal langsung yang disimpan ini mencatat pengumpulan yang sebenarnya, pengeditan, pemberitahuan penghapusan, lampiran, pemeriksaan ulang, dan penanganan batasan laju. Jurnal ini tidak mencatat pengiriman yang lengkap atau matriks terkontrol mengenai visibilitas peran, pihak yang bereaksi, FloodWait yang berkepanjangan, pemblokiran akun, dan pemulihan gangguan jaringan/proses. Penerbitan token QR tetap terpisah dari konfirmasi QR seluler yang telah diselesaikan.
 
-Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
+Pemeriksaan Docker/Compose dan instalasi dicatat dalam CI; penerapan Phala yang sebenarnya serta verifikasi cap waktu eksternal dijelaskan di atas. Hal-hal tersebut tidak menjamin beban tinggi yang berkelanjutan, matriks platform/peran langsung yang lengkap, tinjauan keamanan independen, validasi pengarsipan jangka panjang, atau sertifikasi forensik. Status MTProto yang disimpan dan proses penyesuaian telah diimplementasikan; pemutaran ulang langsung atomik tanpa kehilangan data masih belum terwujud. Backfill yang lebih baru melakukan commit pesan dan kursor secara atomik serta mempertahankan Tindakan Terkini yang tersedia, namun cakupan sintetisnya berbeda dari kualifikasi langsung. Lihat [(penerimaan langsung) dan](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) untuk matriks kualifikasi terkendali.
 
-The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.
+Direktori audit publik  hanya berisi laporan yang telah ditandatangani dan pengukuran agregat. Bukti operasional terperinci, tangkapan layar mentah, dan materi akun tetap bersifat pribadi. Tangkapan layar aplikasi di `docs/assets/` menggunakan data demonstrasi fiktif.

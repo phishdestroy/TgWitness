@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-
 
 رپورٹ فلٹرز، آٹھ ڈیزائنز، مواد کے پری سیٹس، محفوظ شدہ تبدیلیوں کی تاریخ اور دستخط شدہ برآمدات میں شامل تشخیص۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تفتیش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![تفتیش](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 منتخب مشاہدات کو کیس کا ایک پڑھنے کے قابل بیان بنائیں: اس کے سوال، دائرہ کار، محفوظ تبدیلیاں، چارٹس، نتائج اور ماخذ حوالہ جات۔ ہر رپورٹ وصول کنندہ کو فراہم کردہ مواد کی جانچ اور اس کے مجموعے کی کوریج کا معائنہ کرنے کا طریقہ فراہم کرتی ہے۔
 
@@ -24,7 +24,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-
 
 ڈیٹا پریویو مکمل مستحکم جرنل پری فکس کی گنتی کرتا ہے، ابتدائی نمونے کی نہیں۔ صرف نمونے کی قطاریں اور طویل فہرستیں محدود ہیں؛ ان کی چھوڑی گئی تعداد دکھائی گئی ہے۔ بعد میں کیا گیا ایکسپورٹ ایک نیا مستحکم سنپ شاٹ لیتا ہے، لہٰذا جاری جمع‌آوری اعداد و شمار میں اضافہ کر سکتی ہے۔ دائرہ کار، تعداد اور ماخذ کی شناخت دستخط شدہ رپورٹ میں شامل ہیں۔ فارم کو کھولنے یا اس کا پیش نظارہ کرنے سے یہ محفوظ نہیں ہوتا۔
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**عدالتی دائرہ اختیار کی رہنمائی۔** دستاویز کی تفصیلات کے تحت، **عدالتی دائرہ اختیار کی رہنمائی · اختیاری** کو کھولیں تاکہ کوئی دائرہ اختیار اور سول/تجارتی یا فوجداری طریقہ کار منتخب کیا جا سکے۔ ضمیمہ قانونی بنیاد، ماخذ کے روابط، تیاری کے نوٹس اور تحقیقی حیثیت پر مشتمل ہے۔ مقامی زبان میں جمع کے حفاظتی اقدامات کے خلاصے اور وضاحتیں اختیاری ہیں۔ ڈیفالٹ کے طور پر کوئی دائرہ اختیار منتخب نہیں ہوتا۔ یہ انتخاب ورک اسپیس سے متعلق ہیں، اور محفوظ شدہ لے آؤٹ کنفیگریشنز اور ضمنی شیئرنگ-کاپی ڈیفالٹس سے مستثنیٰ ہیں۔ [ڈیفالٹس، سپورٹڈ رپورٹس اور تحقیق کی حدود](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) دیکھیں۔
 
 **موصول کنندہ کی کاپی منتخب کریں۔** چارٹس اور ٹرانسکرپٹ منتخب کردہ ریکارڈز استعمال کرتے ہیں۔ دیانتداری، تحویل اور احاطہ مکمل ماخذ جریدے کی وضاحت کرتے ہیں۔ ثبوت کا ZIP اس کے اصل ریکارڈز اور منسلکات پر مشتمل ہوتا ہے۔ جب موصول کنندہ کو صرف منتخب شدہ، مجاز ڈیٹا وصول کرنا ہو تو [مختصر حوالگی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#handover-extract) استعمال کریں۔
 
@@ -90,18 +90,18 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-
 
 جب شامل کیا جائے، تو `analytics.json` کو آرکائیو کے دستخط شدہ فائل ہیشز کے ذریعے محفوظ کیا جاتا ہے۔ جرنل `report.json` اسی منتخب شدہ مجموعے کو ضم کرتا ہے۔ دستخط کی تصدیق تبدیل شدہ بائٹس کا پتہ لگاتی ہے۔ اعداد و شمار کی جانچ کے لیے، جرنل کے مجموعات کو `report_analytics.Analytics` اور `selected` کے ساتھ دوبارہ حساب کریں، یا `snapshot_analytics.collect` اور `project` کے ساتھ مجموعات کا اسنیپ شاٹ لیں۔
 
-### Anomaly indicators
+### انومالی اشارے
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**پریویو۔** ثبوت کی رپورٹس میں ایک **'Anomaly indicators'** سیکشن شامل ہوتا ہے جو رجسٹرڈ پروسیسرز (`tgwitness/metrics/`، ہر میٹرک کے لیے ایک فائل) کے ذریعے مرتب کیا جاتا ہے۔ رپورٹ ہر پروسیسر کا نام اس کے ورژن کے ساتھ درج کرتی ہے، اور اپنی ٹیبل کے نیچے اس کا طریقہ کار چھاپتی ہے، تاکہ `events.jsonl` سے `tgwitness.metrics.run` کے ذریعے حساب دہرائی جا سکے۔
 
-| Processor | یہ کیا دکھاتا ہے |
+| پروسیسر | یہ کیا دکھاتا ہے |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | UTC کے ایک دن میں پہلی بار پوسٹ کرنے والوں اور پیغامات کی تعداد۔ ایک فلیگ کے لیے کم از کم پانچ پہلی بار پوسٹ کرنے والے اور ان کے درمیانی کے تین گنا درکار ہیں، جبکہ پیغامات کا حجم زیادہ سے زیادہ درمیانی کے 1.5 گنا ہو سکتا ہے۔ بنیادی لائن پچھلے 14 کیلنڈر دنوں میں سے کم از کم سات مشاہدہ شدہ دنوں کو استعمال کرتی ہے، سات دن کی وارم اپ کے بعد۔ |
+| `service_vs_message_ratio` v1 | ہر چیٹ کے لیے مخصوص محفوظ کردہ پیغام نمبر اور سروس پیغامات کے لیے استعمال ہونے والا حصہ۔ یہ نمبرنگ بیان کرتا ہے؛ یہ کسی مخصوص غائب نمبر کی وضاحت نہیں کرتا۔ |
+| `join_leave_per_month` v1 | ہر ماہ شمولیت، علیحدگی اور ہٹانے یا پابندیوں کی تعداد، فی شخص، فی چیٹ، فی تبدیلی اور فی دن۔ |
+| `pinned_per_month` v1 | ماہانہ بنیادوں پر چیٹ اسٹیٹ کے سنپ شاٹس کے درمیان شامل یا حذف کیے گئے پِن کردہ پیغامات، ان پِن نوٹس اور پِن شدہ پیغامات۔ |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**پیرامیٹرز → رپورٹ میٹرکس** پروسیسرز اور دکھائی جانے والی قطاروں کی تعداد کا انتخاب کرتا ہے، فلٹر شدہ رپورٹس میں بھی شامل۔ روزانہ اور ماہانہ جدولیں حالیہ قطاریں دکھاتی ہیں، سروس-شیئر جدولیں محفوظ پیغامات کی تعداد کے لحاظ سے چیٹس کو درجہ بندی کرتی ہیں۔ کل ہر قطار کو شامل کرتا ہے۔
 
 ماخذ کے چیک آؤٹ سے، ایک ہی فرضی جریدے سے اوپر درج تمام آٹھ ڈیزائنز تیار کریں:
 
@@ -153,7 +153,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. اصل ZIP فائلوں اور ان کے ہیشز کو محفوظ رکھیں۔ ہر ہولڈر، منتقلی، تاریخ اور مقصد کو ریکارڈ کریں۔ منسوب کردہ آپریٹر کے بیانات اور کیس نوٹس کو بھی برقرار رکھیں۔
 5. خفیہ VMs کے لیے اقتباس، چیلنج، انٹیل سرٹیفکیٹ چین، پیمائشیں، عین ماخذ اور کلید کے استعمال کی شرائط کو محفوظ کریں اور آزادانہ طور پر تصدیق کریں۔ جائزہ شدہ آرتفیکٹس کے ساتھ تصدیق کے نتیجے کو محفوظ رکھیں۔
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+حصول، آرکائیو سالمیت، وقت اور ہر موڈ میں مجموعی کوریج کے چیکس کے لیے [توثیق کے دائرہ کار کو](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) دیکھیں۔
 
 ## موصول کنندہ کا جائزہ
 

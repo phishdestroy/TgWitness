@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/insta
 
 Встановіть за допомогою однієї команди, перевіряйте підписи та хеші, оновлюйте та видаляйте інсталяцію.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Початок роботи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Початок роботи](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Проєкт](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Швидкий старт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/) · [Розгортання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
 
-**On this page**
+**На цій сторінці**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#remove-tgwitness)
+- [Встановити однією командою](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#install-with-one-command)
+- [Де все працює](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#where-everything-runs)
+- [Налаштування повнотекстового пошуку](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#full-text-search-settings)
+- [Доступ через командний рядок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#command-line-access)
+- [Перевірити перед запуском](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#verify-before-running)
+- [Оновлення існуючої інсталяції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#update-an-existing-installation)
+- [Повсякденні команди в Ubuntu](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Видалити TgWitness](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/#remove-tgwitness)
 
 ## Встановіть за допомогою однієї команди
 
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **Нова публікація оновлює сайт завантаження; встановлені програми оновлюються, коли ви запускаєте інсталятор знову.** Не існує автоматичного оновлення або автоматичного перезапуску колекції, що працює. Поточний канал інсталятора — це **попередній перегляд**; він слідує за опублікованими, перевіреними збірками з `main`, коміт яких може бути новішим за останній пронумерований реліз на GitHub. Версія сторінки походить з `pyproject.toml`; її коміт та ідентифікатор збірки дозволяють розрізняти оновлення в межах однієї попередньої версії.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+Публікація відбувається автоматично після того, як саме це коміт пройде перевірку додатка та безпеки, а підписаний пакет — тести на роботу в службі Ubuntu та на інсталяцію в Windows PowerShell. Під час виконання перевірок або у разі їхнього збою ті самі команди продовжують інсталювати попередню перевірену збірку. Маніфест збірки показує, яке коміт наразі доступне; сам номер версії може залишатися незмінним між оновленнями попереднього перегляду.
 
 Використовуйте ту саму папку інсталяції та того самого користувача ОС, що й раніше. Створіть резервну копію всього каталогу даних після зупинки збору даних; `tgwitness paths` що дозволяє його ідентифікувати. Підписаний експорт не є повною резервною копією інсталяції.
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/conne
 
 Avtorizatsiya, avtomatik proksi havzalari, IP rejimlari, zaxira siyosati, tashqi so'rovlar va maxfiy saqlash.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Ushbu hujjat TgWitness 0.8.0 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to'liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo'yicha [hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) bo'limidan boshlang. Hodisalar siyosati va qayta ishga tushirish xatti-harakatlari uchun [to'plash qanday ishlashini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) ko'ring.
 
@@ -123,19 +123,19 @@ Operator boshqariladigan xususiy xizmatlar uchun mavjud server muhit sozlamasi `
 
 ****Avtomatik havza parametrlari****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+**Parametrlar → Avtomatik MTProxy** bo'limida nosozlik chegarasi, sovish vaqti, rejalashtirilgan aylanish, proxy ulashish va ruxsat etilgan zaxira kechikishini sozlang.
 
 | Boshqaruv | O'rnatilgan |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Almashishdan oldin uzilishlar | 3 ichida 10 daqiqa |
+| Har bir ulanish urinishida sinab ko'rilgan proksilar | 3 |
+| Birinchi / maksimal tanaffus nosozlikdan keyin | 10 daqiqa / 6 soat |
+| Rejalashtirilgan aylanish | O'chirib qo'yilgan; xato bo'lganda yoqiladi |
+| Har bir proxy bo'yicha hisoblar | 0: alohida yozuvlarni afzal ko'ring, zarur bo'lganda ulashing. 1ni eksklyuziv yozuvni kutishga o'rnating. |
+| Ruxsat etilgan to'g'ridan-to'g'ri zaxira variantga o'tishdan oldingi kechikish | 10 daqiqa; Yashirish manzili hanuzgacha rad etadi To'g'ridan-to'g'ri |
+| Feedni yangilash / transport tekshiruvlari | 60/10 daqiqa; asosiy ish maydoni qiymatlari umumiy havzaga tatbiq etiladi |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Turli proxy-lar turli chiqish manzillarini kafolatlamaydi. Ushbu sozlamalar Telegram limitlarini bekor qilmaydi yoki anonimlikni isbotlamaydi.
 
 Ommaviy ro'yxatni o'zingizning operator katalogingiz bilan almashtirish uchun quyidagi ustunlikni sozlang. Bu tashqi obunalarni butunlay o'chirib qo'yadi, hatto uning `proxies` massivida hech narsa bo'lmaganida ham.
 

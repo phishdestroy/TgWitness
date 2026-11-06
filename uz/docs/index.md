@@ -8,7 +8,7 @@ Saqlangan xabarlar va o'zgarishlar bilan ishlang, topilmalaringizni ularning man
 
 Illyustratsiyalangan qo'llanmalar
 
-[### Case Board Kuzatuvlar, aniq iqtiboslar va jamoa eslatmalarini bog'lab saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/) [### Report studio Materialni va sakkizta hisobot dizaynidan birini tanlang.](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) [### Ko'chirishni baham ko'rish Qabul qiluvchiga kerak bo'lgan maydonlarni o'z ichiga olgan imzolangan qismini tayyorlang.](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) [### Hisob guruhlari Hisoblarni birgalikda ko'rib chiqing va ularning ish maydonlarini alohida saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/groups/)
+[### Holat paneli Kuzatuvlar, aniq iqtiboslar va jamoa eslatmalarini bog'lab saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/) [### Report studio Materialni va sakkizta hisobot dizaynidan birini tanlang.](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) [### Ko'chirishni baham ko'rish Qabul qiluvchiga kerak bo'lgan maydonlarni o'z ichiga olgan imzolangan qismini tayyorlang.](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) [### Hisob guruhlari Hisoblarni birgalikda ko'rib chiqing va ularning ish maydonlarini alohida saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/groups/)
 
 [## Rejimlar, ssenariylar va dalillar darajalari Yig'ish doiralari, voqea chegaralari, sakkizta tasdiqlash mexanizmi va oltita badiiy tergov ssenariysi.](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html)
 
@@ -40,7 +40,7 @@ Sozlash
 
 Yig'ish
 
-[Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/)[Yig'ish qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/)[Manba tarixini yuklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/)[Ish jarayonlari va operatsiyalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/)[Tergov rejimi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)[Imkoniyatlar va cheklovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
+[Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/)[Yig'ish qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/)[Yashirin suhbatlar: amalga oshirish va demo](https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/)[Manba tarixini yuklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/)[Ish jarayonlari va operatsiyalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/)[Tergov rejimi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)[Imkoniyatlar va cheklovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
 Arxiv va integratsiyalar
 

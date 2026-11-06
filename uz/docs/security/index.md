@@ -6,7 +6,7 @@ Kompyuteringizdan nima chiqadi, har bir sir nimani ochadi va himoyalar nimani qa
 
 **127.0.0.1**paneldagi manzil bo'yicha
 
-**256-bit**tasodifiy panel tokeni
+**256 bitli**tasodifiy panel tokeni
 
 **0**CDNlar, analitika yoki masofaviy shriftlar
 
@@ -20,7 +20,7 @@ Kollektor, panel va har bir yozuv kompyuteringizda qoladi. Standart holatda faqa
 
 SIZNING KOMPYUTERINGIZ YOKI SERVERINGIZ
 
-**Panel**127.0.0.1:8787 · bearer token
+**Panel**127.0.0.1:8787· egasi token
 
 **Yig'uvchi**har bir ish maydoni uchun bitta Telegram klient
 

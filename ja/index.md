@@ -141,7 +141,7 @@ tgwitness-evidence.zip署名付きバンドル
 
 今すぐ、または 1〜1，440 分ごとにコピーし、進行状況はパネルに表示されます。
 
-Object Lock
+オブジェクトロック
 
 保持日数とモードを選ぶと、実際に適用されたかをパネルが確認します。
 
@@ -210,7 +210,7 @@ Telegramアカウントがなくても、架空のワークスペースをお試
 
 [オンラインデモを開く →](https://phishdestroy.github.io/TgWitness/demo/?lang=ja)
 
-Windows `scripts\Demo.cmd`Linux ／ macOS `sh start.sh --demo`
+Windows `scripts\Demo.cmd`Linux ／ macOS`sh start.sh --demo`
 
 **ローカルインストール用コマンド**
 

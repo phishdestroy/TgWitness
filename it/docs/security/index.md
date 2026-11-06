@@ -28,7 +28,7 @@ DIRECTORY DEI DATI
 
 **Registro**SQLite · concatenazione di hash · firmato
 
-**Media**file denominati in base all’SHA-256
+**Multimedia**file denominati in base all’SHA-256
 
 **Vault**Fernet · sessione, coppia API, chiave di firma, proxy
 
@@ -44,7 +44,7 @@ DIRECTORY DEI DATI
 - **Autorità di marcatura temporale**Opzionale · disattivato per impostazione predefinita
 
   Solo l’SHA-256 di un checkpoint firmato e un nonce casuale. Nessun messaggio, nessun nome utente.
-- **Witness**Opzionale · disattivato per impostazione predefinita
+- **Testimone**Opzionale · disattivato per impostazione predefinita
 
   Estrae i checkpoint firmati e i contatori di acquisizione tramite un token di sola lettura. Non è in grado di leggere le conversazioni né di modificare le impostazioni.
 

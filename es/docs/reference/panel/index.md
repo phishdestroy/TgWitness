@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/panel
 
 Todas las pantallas del panel: chats, diario, fuentes, exportaciones, Extras, modos de protección y la comprobación de código.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Primeros pasos](https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Primeros pasos](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Primera configuración y ajustes](https://phishdestroy.github.io/TgWitness/es/docs/reference/settings/) · [Cuentas](https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/) · [Exportar y verificar](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/) · [Informes de casos](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/)
 
 Qué hace cada pantalla, qué escribe en el diario firmado y dónde se encuentra la guía detallada. El panel muestra un espacio de trabajo cada vez: una cuenta de Telegram con sus propias fuentes, diario y clave de firma. El selector situado en la parte superior de la barra lateral permite cambiar de espacio de trabajo. La dirección identifica el espacio de trabajo (`?ws=…`); mientras la dirección, el selector y la cuenta cargada no coincidan, las acciones permanecerán bloqueadas.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+Utiliza [los métodos de comparación de colecciones](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) para elegir entre observación en tiempo real, historial completo, exportaciones recientes de cuentas o chats y transferencia de registros guardados. La página Exportaciones incluye la misma comparación encima de los controles de descarga.
 
-**On this page**
+**En esta página**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#start-here)
+- [Orientación](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#find-your-way)
+- [Empieza aquí](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#start-here)
 - [Chats](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#settings-accounts-and-connection)
+- [Revista](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#journal)
+- [Fuentes](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#sources)
+- [Exportaciones](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#exports)
+- [Configuración, cuentas y conexión](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#settings-accounts-and-connection)
 - [Extras](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#more-tools)
+- [Modos de protección](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#protection-modes)
+- [Más herramientas](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#more-tools)
 
 ## Oriéntate
 
@@ -92,7 +92,7 @@ Este espacio de trabajo registra determinadas conversaciones y conserva la infor
 - **Los tipos de fuente** limitan los modos de carpeta y de cuenta completa a canales, grupos, chats privados y bots. **«Acciones propias»** añade los mensajes propios de la cuenta, las ediciones y las pulsaciones del teclado al responder.
 - **Cuando aparece un nuevo chat o bot**: guarda su perfil y hasta el número elegido de sus últimos mensajes visibles.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/es/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Limitaciones: el recopilador en la nube publicado no recibe chats secretos. La [interfaz Pseudo-secret, independiente, y su demostración](https://phishdestroy.github.io/TgWitness/es/docs/reference/secret-chats/) se documentan con su estado de desarrollo y los defectos pendientes. No se registra nada mientras TgWitness no esté en ejecución; tras un reinicio, solo recoge lo que Telegram sigue devolviendo, y el informe muestra la diferencia. Los chats que superen el límite de la lista de chats (1,000 diálogos, salvo que se modifique en Parámetros) se añaden la próxima vez que se activen. Los botones del bot integrados en otra aplicación son invisibles; se registra la respuesta del bot.
 
 ### Chats incluidos
 
@@ -146,7 +146,7 @@ Opcional: basta con una cuenta y unas fuentes para empezar a recopilar informaci
 | Notificaciones | Problemas, mensajes modificados y un resumen diario; tu propio bot de control | [a continuación](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#notifications) |
 | Pruebas y copias de seguridad | Marcas de tiempo, más testigos y una copia cifrada externa | [a continuación](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#evidence-and-backups) |
 | Servidor disponible las 24 horas del día, los 7 días de la semana | Un servidor en la nube sin SSH, que se crea y se elimina desde el panel | [Alta fiabilidad](https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/#from-the-panel) |
-| Testigo independiente | Comprobantes firmados publicados en tu canal de Telegram o en Discord | [Witness](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/) |
+| Testigo independiente | Comprobantes firmados publicados en tu canal de Telegram o en Discord | [Testigo](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/) |
 | Revisión del código | Compara el programa en ejecución con una confirmación pública de GitHub. | [a continuación](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#code-check) |
 
 ### Objetivo y nivel de protección

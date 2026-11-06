@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/secur
 
 מודל איומים, מודל גישה, מידע סודי במאגר, חשיפה ברשת, ייבוא הפעלות וכיצד לדווח על פגיעות אבטחה.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [פריסה ושחזור](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![פריסה ושחזור](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
+דף זה מתאר את הגישה, האחסון וההגנה על הרשת בסביבת עבודה מקומית או בשרת. לגבי איסוף ב-GitHub Runner או במכונה וירטואלית סודית של Intel TDX, ראו את [מצבי אימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope), המוסיפים בדיקות של סביבת האיסוף. לחיבורי חשבונות, התראות, חותמות זמן, עותקים מחוץ לאתר ועדים יש הגדרות ניתוב משלהם.
 
 | תחום | בקיצור |
 | --- | --- |
@@ -16,20 +16,20 @@ This page describes access, storage and network protection in a local or server 
 | סודות במנוחה | ההגדרות של ההפעלה, זוג ה-API, מפתח החתימה והגדרות ה-proxy מוצפנות באמצעות Fernet |
 | הודעות ומדיה | מאוחסן ללא הצפנה: יש להשתמש בהצפנת דיסק ובהגבלות גישה קפדניות |
 | יושרה | שרשרת חשיש SHA-256 וחתימת Ed25519 על כל רשומה |
-| גבול אמון מקומי | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
+| גבול אמון מקומי | מנהל המערכת שולט בסביבת העבודה ובמפתח החתימה שלה; נקודות ביקורת עצמאיות שומרות על גבול יומן קודם |
 
 לדיווחים על פגיעויות, ראו את [מדיניות האבטחה](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
-**On this page**
+**בעמוד זה**
 
-- [Access model](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#access-model)
-- [Panel content and exports](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#panel-content-and-exports)
-- [Secrets at rest](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#secrets-at-rest)
-- [Proxies and network routes](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#proxies-and-network-routes)
-- [Sign-in and session imports](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#sign-in-and-session-imports)
-- [Logs and transport](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#logs-and-transport)
-- [Integrity limits](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#integrity-limits)
-- [If you suspect a problem](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#if-you-suspect-a-problem)
+- [מודל גישה](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#access-model)
+- [תוכן הפאנל וייצוא](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#panel-content-and-exports)
+- [סודות במנוחה](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#secrets-at-rest)
+- [פרוקסי ונתיבי רשת](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#proxies-and-network-routes)
+- [כניסה וייבוא הפעלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#sign-in-and-session-imports)
+- [יומנים ותעבורה](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#logs-and-transport)
+- [מגבלות תקינות](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#integrity-limits)
+- [אם אתם חושדים בבעיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/security/#if-you-suspect-a-problem)
 
 ## מודל גישה
 
@@ -53,13 +53,13 @@ This page describes access, storage and network protection in a local or server 
 
 ## סודות במנוחה
 
-Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
+אמצעי הזיהוי של ממשק ה-API של Telegram, מפתח ההפעלה ומפתח החתימה מוצפנים באמצעות Fernet. עבור הודעות ומדיה מקומיות, ההצפנה מתבצעת על ידי הדיסק או אמצעי האחסון של המארח; סביבת העבודה מאחסנת קבצים רגילים. ייצוא יכול להשתמש בקובץ ZIP מסוג AES-256 המוגן בסיסמה, ועותקים מחוץ לאתר משתמשים ב-AES-256-GCM.
 
-The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
+מפתח הכספת מוגדר כברירת מחדל לספריית הנתונים המוגנת. השתמש בקובץ מפתח ראשי חיצוני להלן כדי לאחסן אותו בנפרד. במערכת Unix, קבצי מפתח פרטי חדשים משתמשים במצב 0600 וספריות נתונים חדשות משתמשות במצב 0700; ב-Windows, הגדר את רשימת הגישה (ACL) של הספרייה עבור חשבון השירות ו המנהלים המורשים. הרשאות הספרייה הקיימות נשמרות.
 
 ### מפתח ראשי חיצוני
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/) for setup details.
+עבור ספריית נתונים חדשה, TGWITNESS_VAULT_KEY_FILE יכול לספק מפתח ראשי אקראי חיצוני. HKDF-SHA256 ומלח אקראי נפרד מפיקים מפתח Fernet שונה עבור כל סביבת עבודה. יש לשמור את הקובץ vault.external.json לצורך שחזור. מפתחות ראשיים חסרים או שגויים יגרמו לכישלון. כספות מקומיות קיימות אינן מועברות באופן אוטומטי. הלוח מציג את מצב אחסון המפתחות הנבחר. הצפנת דיסק מגנה על קובצי ההודעות והמדיה המקומיים בשני המצבים; ראו [חיבור והגנת נתונים](https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/) לפרטי ההגדרה.
 
 ## פרוקסי ונתיבי רשת
 
@@ -83,10 +83,10 @@ MTProxy מעביר רק תעבורת טלגרם. בקשות חיצוניות י�
 
 ## מגבלות שלמות
 
-Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
+בדיקות האימות המקומיות בודקות חתימות רשומות, שרשרת ההאש, קבצים מצורפים ומניפסט הייצוא. המנהל מחזיק במפתח החתימה המקומי ויכול ליצור יומן חתום נוסף; נקודת ביקורת הנשמרת באופן עצמאי מזהה החלפה של הקידומת שהיא מכסה. יש לשמור את טביעת האצבע של המפתח ונקודות הביקורת אצל הנמען או אצל עד בלתי תלוי.
 
-For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) describes the checks for each mode.
+לאיסוף שנבדק באופן עצמאי, בחרו ב-[GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) או ב-[פריסת Intel TDX](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). המאמתים שלהם בודקים את מקור זרימת העבודה או את מדידות החומרה, בנוסף לשלמות הארכיון. חותמות זמן אופציונליות ועותקים מוצפנים מחוץ לאתר מספקים נקודות ציון זמן ועותקים הניתנים לשחזור; פורמט הראיות  מתאר את הבדיקות עבור כל מצב.
 
 ## אם אתם חושדים בבעיה
 
-Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.
+יש לשמור על ספריית הנתונים המקורית ולהשתמש בעותק נפרד לצורך ניתוח. יש לדווח על הגרסה המושפעת, הפעולה והשלבים הניתנים לשחזור באמצעות מדיניות האבטחה , תוך שמירה על פרטיות נתוני החשבון ופרטי ההזדהות.

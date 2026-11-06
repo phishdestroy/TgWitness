@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/witne
 
 O'z kaliti va botiga ega Witnessni ishga tushiring, imzolangan tekshiruv nuqtalarini kanalga joylashtiring va eksportlarni ularga solishtiring.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dalil va tasdiqlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Dalil va tasdiqlash](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [Eksport va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Yuqori ishonchlilik](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/) · [Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+Guvox imzolangan tekshiruv nuqtalarini yig'uvchidan alohida saqlaydi. U yig'uvchining imzosi va jurnal uzluksizligini tekshiradi, natijani o'z kaliti bilan imzolaydi va Telegram kanalida e'lon qiladi. Uni yig'uvchining guvoxlik oxirgi nuqtasiga faqat o'qish huquqi bilan alohida serverda ishga tushiring.
 
 Oqim sxemasi · Yig'uvchi → Guvoh (imzolangan tekshiruv nuqtasi: yozuvlar soni + sarlavha xesh); Guvoh → Witness jurnali, o'z kalitingiz; Guvoh → Telegram kanali (o'z boti orqali imzolangan post); Dalil ZIP → verify.py; Witness jurnali, o'z kalitingiz → verify.py; Telegram kanali → verify.py (Telegram Desktop eksporti yoki t.me/s sahifasi) · Yig'uvchi · Guvoh · Witness jurnali, o'zkalitingiz · Telegram kanali · Dalil ZIP · verify.py · imzolangan tekshiruv · nuqtasi: yozuvlar soni + · sarlavha xesh · o'z boti orqali imzolangan · post · Telegram Desktop eksporti · yoki t.me/s sahifasi
 
@@ -23,13 +23,13 @@ Oqim sxemasi · Yig'uvchi → Guvoh (imzolangan tekshiruv nuqtasi: yozuvlar soni
 5. Witness jurnali, o'z kalitingiz → verify.py
 6. Telegram kanali → verify.py (Telegram Desktop eksporti yoki t.me/s sahifasi)
 
-**On this page**
+**Ushbu sahifada**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#verify)
+- [Guvoh nimani oladi va nimani olmaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [U nima tekshiradi va qayd etadi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#what-it-checks-and-records)
+- [Witnessni ishga tushiring](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#run-a-witness)
+- [Bir nechta ish maydonchalari uchun ommaviy isbot sahifasi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Tasdiqlang](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/#verify)
 
 ## Guvoh nimani oladi va nimani olmaydi
 
@@ -48,7 +48,7 @@ Yangi guvohlar har bir so'rov bo'yicha tasodifiy chaqiriq yuboradilar; capture b
 Har bir intervaldan (o'rnatilgan bo'yicha 10 daqiqa) guvoh:
 
 1. bosh qismni o'zi oladi (yig'uvchi uni sura olmaydi yoki o'tkazib yubora olmaydi);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. yig'uvchining imzosini, mahkamlangan yig'uvchi kalitini (`--collector-fingerprint` yoki birinchi ko'rilgan kalit), kamaymaydigan hisobni va o'zgarmagan hisobda o'zgarmagan boshni tasdiqlaydi. Merkle kiritish va moslik isbotlari o'sib borayotgan jurnal saqlangan tekshiruv nuqtasini kengaytirishini tasdiqlaydi. Uzluksizlik isbotlari bir marta qo'llangach, ularni olib tashlash rad etiladi;
 3. o'z jurnaliga imzolangan yozuvni ilova qiladi: `witness.anchor`, `ok`, `key_changed`, `rollback` (oldingisiga qaraganda kamroq yozuvlar), `fork` (uzunligi bir xil, boshqacha sarlavha) yoki `invalid` (javob tasdiqdan o'tmadi), yoki `witness.no_response` (to'plovchi javob bermaganida);
 4. natijani kanalga joylaydi, imzolangan, shu jumladan "no answer", guvoh ishlayotgan va Bot API ga ulanish imkoniga ega bo'lgan paytda. Post ID yozib olinadi (`witness.posted`), shuningdek muvaffaqiyatsiz post ham (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Buning uchun mustaqil ravishda saqlangan guvoh barmoq izi va aynan ushbu eksport oxirida mos keladigan tekshiruv nuqtasi talab etiladi. Faqat avvalgi prefiksni qamrab oladigan tekshiruv nuqtasi yetarli emas. Yig'ishni to'xtating, guvohga yakuniy holatni kuzatishga imkon bering va jurnalga keyingi yozuvlar kiritilmasidan oldin eksport qiling; agar jurnal o'zgarsa, boshqa tekshiruv nuqtasini saqlang va o'sha holatni eksport qiling. Keyingi tekshiruv nuqtasi yolgʻiz oʻzi qisqaroq eksportning yakuniy xeshini tasdiqlay olmaydi. `--channel` ham taqdim etilganda, da'vo qilingan, ammo yoʻqolgan postlar yoki boʻsh moslik toʻplami ushbu qat'iy tekshiruvdan oʻtmaydi. Bayroq qoʻllanilmasa, oddiy yaxlitlik tekshiruvlari guvoh ishtirokisiz yozuvlarni aniqlaydi, ammo aks holda yaxlit arxivni rad etmaydi.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+Witness jurnalini va uning biriktirilgan kalitini alohida saqlang. Onlayn tekshiruvlar nazorat nuqtalari o'rtasidagi uzluksizlikni tasdiqlaydi; oflayn tekshiruv esa saqlangan har bir nazorat nuqtasini eksport bilan solishtiradi. Uzluksizlik isbotlarisiz eski boshqaruv elementlari oflayn solishtirishni saqlab qoladi va onlayn uzluksizlik tekshiruvisiz hisobotga kiritiladi. Hisobotda guvohning ishlamagan vaqtlari va intervallar bo'yicha muvaffaqiyatsiz nashrlar ko'rsatiladi.
 
-### Daily seals and unavailable timestamp calendars
+### Kundalik muhrlar va mavjud bo'lmagan timestamp taqvimlari
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+Guvoh avvalgi UTC kunining jurnal chegarasini muhrlaydi va imzolangan muhrning xeshini OpenTimestampsga yuboradi. Taqvim topshirig'i dalillarni kutmoqda; faqat mustaqil ravishda tekshirilgan Bitcoin majburiyatlari verifikator tomonidan tasdiqlanadi.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+Agar barcha taqvimlar ishdan chiqsa, imzolangan muhr va muvaffaqiyatsiz urinish jurnalda qoladi. Soatlik texnik xizmat ko'rsatish pasporti ushbu dastlabki yozuvni qayta sinab ko'radi, jumladan qayta ishga tushirish yoki sana o'zgarishi holatlarida ham. U eng ko'pi bilan32ta muhrni skanerlaydi, eng ko'pi bilan ikkita yetishmayotgan topshiruvni yuboradi va har bir urinishda qayta urinishlarga eng ko'pi bilan 60 soniya sarflaydi. Doimiy kursor eski muhrlar bo'ylab aylanib turadi. Saqlangan topshiruvlar mavjud isbotni yangilash yo'lini kuzatadi.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+Qayta urinish muhrni qayta yozmaydi, uning asl sanasini o'zgartirmaydi yoki kalendar uni erta qabul qilganini da'vo qilmaydi. Keyingi Bitcoin majburiyati keyingi tashqi tasdiq bo'lib qoladi. Yetishmayotgan isbotlar `none` bo'lib qoladi; kutayotgan isbotlar esa verifikator ularni mustaqil tekshirgunga qadar `pending` bo'lib qoladi.

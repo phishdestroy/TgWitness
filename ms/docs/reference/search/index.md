@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/searc
 
 Cari mesej yang disimpan mengikut bentuk kata, frasa tepat, domain dan @nama pengguna, padanan terbaik diutamakan, dengan indeks diikat kepada jurnal yang disahkan.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Siasatan](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Analisis arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/) · [OCR tempatan dan transkripsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Cari mesej yang disimpan mengikut bentuk kata, frasa tepat, domain dan @nama pen
 
 Indeks adalah data terbitan. Ia dibina semula daripada jurnal yang disahkan, tidak pernah disahkan sendiri dan tidak pernah dieksport. Rekod asal tidak berubah.
 
-**On this page**
+**Pada halaman ini**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#benchmark)
+- [Sintaks carian](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#search-syntax)
+- [Bahasa](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#languages)
+- [Di mana indeks berada](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#where-the-index-lives)
+- [Keputusan dan jurnal yang ditandatangani](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#results-and-the-signed-journal)
+- [Teks diiktiraf](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#recognized-text)
+- [Akses](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#access)
+- [Tanya arkib dan MCP](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#ask-the-archive-and-mcp)
+- [Kebergantungan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#dependencies)
+- [Penanda aras](https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/#benchmark)
 
 ## Sintaks carian
 
@@ -97,7 +97,7 @@ Akses skop sembang hanya menemui rekod daripada sembang anda, termasuk teks yang
 
 Klien MCP boleh memanggil `search_messages` dengan `ranked=true` dan halaman dengan `next_offset`Sambungan berbeza menerima hanya sembang mereka.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Pemaginasi berperingkat merangkumi paling banyak 1,000 keputusan pertama, tanpa mengira saiz halaman. Sekat carian, sembang atau tempoh untuk menyemak padanan selanjutnya. Carian terbaru-dahulu menyusun mesej, keputusan OCR dan transkripsi sebelum memilih setiap halaman.
 
 ## Kebergantungan
 

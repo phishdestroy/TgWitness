@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/
 
 MCPクライアントを、有効期限付きかつ取り消し可能なアクセス権限で、選択したワークスペースやチャットに接続します。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [アーカイブとの連携](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![アーカイブとの連携](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 アナリストクライアントを、選択したワークスペースやチャットに接続します。TgWitnessは、 **パネルプロセス内の`/mcp`でStreamable HTTP**を提供します。各接続には、独自の トークン、有効期限、および許可されたツールが割り当てられます。MCPは、Telegramメッセージの送信、 設定の変更、または署名付きジャーナルの修正を行うことはできません。これらの接続は、 [コマンドライン](https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/)でも同様に機能します。
 
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**このページでは**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#connect-your-client)
+- [インストールと確認](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#install-and-check)
+- [接続を確立する](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#issue-a-connection)
+- [クライアントを接続する](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#tools-and-boundaries)
+- [ツールと範囲](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/#tools-and-boundaries)
 
 ## インストールと確認
 
@@ -57,12 +57,12 @@ MCPクライアントを、有効期限付きかつ取り消し可能なアク�
 
 | クライアント | 設定 | 接続 |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP、`type: "http"`、Bearer ヘッダー |
+| Claudeコード | `.mcp.json` | HTTP、`type: "http"`、Bearer ヘッダー |
 | Claude Desktop | `claude_desktop_config.json` | ローカル stdio ブリッジ |
 | Cursor | `.cursor/mcp.json` | 環境変数ヘッダーを使用した HTTP |
 | VS Code Local | `.vscode/mcp.json` | パスワード `promptString` 入力を使用した HTTP |
 | Windsurf | `mcp_config.json` | Bearer ヘッダーのプレースホルダーを使用した HTTP |
-| その他のクライアント | URL と Authorization ヘッダー | Streamable HTTP |
+| その他のクライアント | URL と Authorization ヘッダー | ストリーミング可能なHTTP |
 
 TgWitness は OAuth ディスカバリを使用せず、Bearer トークンを使用します。リモートコネクタに OAuth が必要なクライアントには、ローカル stdio ブリッジを使用してください。VS Code の場合、入力変数は **Local** ハーネスに適用され、Copilot セッションには転送されません。設定リファレンス: [Claude Code](https://code.claude.com/docs/en/mcp)、[Cursor](https://prod.cursor.com/docs/mcp)、[VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)。
 

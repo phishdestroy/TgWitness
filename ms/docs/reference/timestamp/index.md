@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/times
 
 Cap masa RFC 3161 untuk checkpoint berasingan: apa yang dihantar kepada pihak berkuasa dan bagaimana respons disahkan.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bukti dan pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bukti & pengesahan](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness menyediakan permintaan RFC 3161 dan mengesahkan respons pihak berkuasa cap masa (TSA). Prosedur manual ini tidak memilih TSA mahupun menghantar data; mod bukti melakukan kedua-duanya mengikut jadual ([format bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). Permintaan yang telah disediakan **belum lagi** merupakan **bukti cap masa**.
 

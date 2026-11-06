@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/accou
 
 Exporte o que uma conta pode ler no momento: escopo, tarefas retomáveis, um arquivo assinado e cópias de compartilhamento minimizadas.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentação](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidências e verificação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Evidências e verificação](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 Uma exportação de conta reserva essa conta exclusivamente. Pause explicitamente o monitoramento ou outra coleta antes de iniciar ou retomar; o aplicativo nunca a interrompe automaticamente.
 
@@ -16,11 +16,11 @@ Os filtros de remetente e de texto são expandidos em **“Filtrar por remetente
 
 Este fluxo de trabalho exporta os dados atualmente acessíveis à conta conectada. Por padrão, utiliza-se [o Telegram Takeout](https://core.telegram.org/api/takeout); não se trata de um backup de dados do Telegram indisponíveis ou excluídos. Bate-papos secretos, histórico inacessível e edições anteriores não são recuperados. O Telegram pode impor um período de espera antes do início do Takeout. O painel exibe esse tempo de espera; ele não altera o método de transporte silenciosamente. A opção explícita da API regular tem cobertura diferente e registra categorias não suportadas.
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+O Takeout é a API oficial de exportação também utilizada pelo Telegram Desktop. O TgWitness pode gerar JSON compatível com o Desktop diretamente a partir de sua própria aquisição; não é necessário importar o arquivo de outra pessoa. Os IDs de bate-papo e de mensagens estão disponíveis por meio de ambos os meios de transporte. Um chat público ou permissão para encaminhar não garante uma exportação mais rápida nem elimina o atraso na aprovação do Takeout. Avalie o mesmo escopo e as mesmas configurações de mídia antes de comparar a velocidade.
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+Para até 20 IDs de bate-papo explicitamente selecionados, a exportação via API padrão resolve esses pares diretamente antes de considerar o inventário completo de diálogos da conta. Um canal público legível pode, portanto, ser exportado sem a necessidade de ingressar nele, mesmo quando estiver ausente da lista de diálogos. Os pares não armazenados em cache recorrem ao inventário comum. O filtro de arquivo continua em vigor: se o Telegram não retornar um diálogo e os chats arquivados forem excluídos, o status de arquivo desconhecido é registrado como uma omissão. O Takeout mantém seu procedimento de inventário de intervalo dividido. Nenhum dos caminhos entra em chats nem altera permissões de encaminhamento. No JSON compatível com Desktop, os canais que o Telegram marca como `left` aparecem sob `left_chats`, incluindo canais públicos legíveis dos quais a conta não participou.
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+Tanto o `FLOOD_WAIT` quanto o `FLOOD_PREMIUM_WAIT` suspendem as solicitações durante todo o período solicitado pelo servidor. O prazo da conta é mantido mesmo após reconexões e reinicializações; um tempo de espera posterior mais curto não pode reduzi-lo. As tentativas de repetição são limitadas, o cancelamento preserva as páginas seladas, e as credenciais da API não são alternadas para contornar um limite de taxa. Nenhuma compra do plano Premium é realizada.
 
 ## Escolha o que será coletado
 
@@ -41,7 +41,7 @@ A predefinição **“Minimize”** desativa arquivos e metadados de contas. Os 
 
 O histórico de fotos de perfil e as histórias não são selecionados por padrão. Desative também o perfil e os contatos quando o caso precisar apenas de mensagens. Se anexos ou metadados forem desnecessários, excluí-los durante a aquisição evita a retenção de outra cópia privada nesta exportação.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+As cargas úteis de fotos utilizam a variante de imagem estática identificada em seus metadados e manifestos de hash, incluindo fotos com uma variante de avatar animado. Essa animação não substitui a imagem estática selecionada. Uma carga útil menor ou maior do que o tamanho observado é registrada como um anexo com falha, e uma representação alterada durante a renovação da referência do arquivo é rejeitada. Essas falhas deixam o arquivo incompleto, embora os registros das mensagens sejam mantidos. A verificação independente também rejeita anexos salvos cujo comprimento assinado contradiga seu tamanho ou representação observados, inclusive em arquivos mais antigos.
 
 ## Resumo, cobertura e verificação
 
@@ -97,8 +97,8 @@ A vinculação à fonte não prova, por si só, que a transformação selecionou
 
 ## Compartilhamento e captura hospedada
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+Selecione as mensagens e os arquivos de que o destinatário precisa, revise a cópia completa a ser compartilhada e mantenha a fonte separadamente. Registre o hash do ZIP entregue para que o destinatário possa identificar e verificar essa cópia exata. A pseudonimização substitui os identificadores selecionados; o texto incluído e os arquivos originais continuam fazendo parte da revisão.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/#verification-scope).
+O GitHub Actions oferece suporte à exportação de contas completas e de chats selecionados por meio do Takeout ou da API padrão, além de um diário de eventos de um único chat. O guia de captura hospedada  explica a verificação das configurações e o limite de 120 minutos. Para verificar uma cópia compartilhada derivada da captura hospedada, compare o hash de origem com o arquivo original e verifique o atestado desse arquivo por meio das verificações específicas do modo .
 
 [Formato das evidências](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/) · [Relatórios de casos](https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-reports/)

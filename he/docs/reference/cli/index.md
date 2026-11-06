@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![שילוב עם מערכות ארכיונים](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/) · [חיפוש בטקסט מלא](https://phishdestroy.github.io/TgWitness/he/docs/reference/search/) · [ויקי](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 התאריכים הם `2026-10-01` (חצות UTC) או לפי שעון ISO עם ציון אזור הזמן, `2026-10-01T09:00+03:00`. לגבי `search`, `messages` ובמקרה `export` הם בוחרים את זמן התצפית. דפים מכילים עד 50 רשומות: עקבו `next_offset` (`--offset`) עבור חיפוש לפי דירוג ו `next_before` (`--before`) במקומות אחרים.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+חיפוש מדורג נעצר ב-1,000 תוצאות. העמוד האחרון עשוי להיות קצר יותר מ-`--limit`; צמצמו את השאילתה, הצ'אט או התקופה כאשר קיימות תצפיות תואמות נוספות.
 
 כל תוצאת הודעה כוללת `untrusted_content: true`, את מזהי סביבת העבודה, הצ'אט וה הודעה, את מספר הרצף ביומן, את ה-hash של הרשומה השמורה וקישור לפאנל. עריכות, הודעות מחיקה ו `missing_on_recheck` מהווים רשומות נפרדות. היעדר רשומה אינו מהווה הוכחה לכך שהאירוע מעולם לא התרחש.
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 ייצוא דרך הלוח דורש חיבור המאפשר **ייצוא הודעות (בשורת הפקודה בלבד)**; אפשרות זו אינה נבחרת כברירת מחדל. קובץ זה הוא עותק עבודה, ולא ראיה: לצורך העברה הניתנת לאימות , יש להשתמש בייצוא החתום הנמצא תחת **"ייצוא**", אשר `python -m tgwitness.verify`מבצע בדיקה.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+הלוח בודק מחדש את הגישה לפני שליחת כל רשומה, כולל רשומת ההשלמה. גישה שבוטלה או שפג תוקפה תותיר ייצוא לא שלם. קריאות דפים מושהות חולקות את מגבלת עובד הארכיון עם שאילתות אחרות וכפופות לזמן המתנה מוגבל.
 
 ## מיומנות הסוכן
 

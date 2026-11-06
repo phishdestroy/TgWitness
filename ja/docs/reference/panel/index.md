@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel
 
 パネルのすべての画面：チャット、ジャーナル、ソース、エクスポート、エクストラ、保護モード、コードチェック。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [はじめに](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![はじめに](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [初期設定と設定](https://phishdestroy.github.io/TgWitness/ja/docs/reference/settings/) · [アカウント](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/) · [エクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [事例レポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)
 
 各画面の機能、署名付きジャーナルへの書き込み内容、および詳細な ガイドの場所について説明します。パネルには一度に1つのワークスペースが表示されます。これは、独自の ソース、ジャーナル、署名鍵を持つ1つのTelegramアカウントです。サイドバー上部のセレクターで ワークスペースを切り替えます。アドレスにはワークスペース情報が含まれます（`?ws=…`）を識別します。アドレス、 セレクター、および読み込まれたアカウントのいずれかが一致しない場合、操作はブロックされたままになります。
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+[「コレクション方法の比較」](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)を使用して、ライブ 観測、全履歴、新規アカウント／チャットのエクスポート、保存済み記録の引き渡しの中から選択してください。 「エクスポート」ページには、ダウンロード操作ボタンの上に、上記と同じ比較表が表示されています。
 
-**On this page**
+**このページでは**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#more-tools)
+- [目次](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#find-your-way)
+- [ここから開始](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#start-here)
+- [チャット](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#chats)
+- [ジャーナル](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#journal)
+- [ソース](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#sources)
+- [エクスポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#exports)
+- [設定、アカウント、接続](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#settings-accounts-and-connection)
+- [追加情報](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#extras)
+- [保護モード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#protection-modes)
+- [その他のツール](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#more-tools)
 
 ## 使い方のガイド
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **ソースタイプにより、**フォルダモードおよびアカウント全体モードの対象は、チャンネル、グループ、プライベート チャット、ボットに限定されます。「**自身のアクション」では**、そのアカウント自身のメッセージ、編集、 返信時のキーボード入力などが追加されます。
 - **新しいチャットやボットが表示されたら**、そのプロファイルと、指定した数までの 最新の表示可能なメッセージを保存します。
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+制限事項：公開されているクラウドコレクターは、シークレットチャットを受信しません。別途用意されている「 [疑似シークレット」インターフェースとそのデモ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/)については、 開発状況および未解決の不具合とともに文書化されています。 TgWitnessが 実行されていない間は何も記録されません。再起動後は、Telegramが依然として返している情報のみを捕捉し、 レポートにはその間の空白期間が表示されます。チャットリストの上限（1,000件のダイアログ。 パラメータで変更されていない場合）を超えるチャットは、次にアクティブになった時点で追加されます。別のアプリ内で 押されたインラインボットボタンは表示されませんが、ボットの返信は記録されます。
 
 ### 対象となるチャット
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | 通知 | 問題点、変更されたメッセージ、日次サマリー、そして自分専用のコントロールボット | [以下](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#notifications) |
 | 証拠とバックアップ | タイムスタンプ、追加のウィットネス、および暗号化されたオフサイトコピー | [以下](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#evidence-and-backups) |
 | サーバーは24時間365日稼働しています | SSH 機能のないクラウドサーバーで、パネルから作成・削除が可能です。 | [高信頼性](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#from-the-panel) |
-| 独立した証人 | TelegramチャンネルやDiscordに投稿される署名済みチェック | [Witness](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/) |
+| 独立した証人 | TelegramチャンネルやDiscordに投稿される署名済みチェック | [ウィットネス](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/) |
 | コードチェック | 実行中のプログラムと、GitHub上の公開コミットを比較します | [以下](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#code-check) |
 
 ### 目的と保護レベル

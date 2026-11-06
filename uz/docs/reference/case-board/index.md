@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-
 
 Belgilar, aniq ajratmalar, harakat bo'laklari, muhokamalar, chegaralangan kirish va Case Board tomonidan ishlatiladigan imzolangan izohlar tarixi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Tergov](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Tergov](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Case Board tergov guruhiga saqlangan materiallarning umumiy ishlash ko'rinishini taqdim etadi. Kuzatuvni belgilash, aniq parchani ajratib ko'rsatish, bir qator harakatlarni saqlash va uni hamkasblar bilan muhokama qilish mumkin. Kartalar manba havolalarini va imzolangan tahrir tarixini saqlaydi. Guruh izohlari ish maydonida qoladi, ular asl Telegram kuzatuvlaridan alohida ajratib ko'rsatiladi.
 
@@ -14,13 +14,13 @@ Case Board tergov guruhiga saqlangan materiallarning umumiy ishlash ko'rinishini
 
 ![Sun'iy tergov lentasi](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**Ushbu sahifada**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#operating-limits)
+- [Holat bilan ishlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#work-with-a-case)
+- [Ruxsatlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#permissions)
+- [Saqlangan shartnomalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#stored-contracts)
+- [API va eksportlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#api-and-exports)
+- [Ishlash chegaralari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/#operating-limits)
 
 ## Ish bilan ishlash
 

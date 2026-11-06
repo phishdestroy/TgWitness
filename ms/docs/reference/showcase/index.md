@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/showc
 
 Menerbitkan mesej yang disimpan daripada saluran awam terpilih dan snapshot yang ditandatangani melalui pautan yang akan tamat tempoh dan boleh ditarik balik.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Penyebaran dan pemulihan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Penyebaran & pemulihan](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Akses → Pameran Awam** mencipta halaman berasingan yang hanya untuk dibaca menggunakan sistem token-akses sedia ada. Ia membaca pemerhatian yang disimpan oleh pemasangan. Ia tidak memulakan pengumpul, log masuk ke Telegram atau mendapatkan saluran untuk pelawat.
 

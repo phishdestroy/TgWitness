@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 簽名檢查點的 RFC 3161 時間戳記：傳送至授權機構的內容，以及如何驗證回應。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [證據與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![證據與驗證](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness 會準備 RFC 3161 請求，並驗證時間戳記授權機構（TSA）的回應。 此手動程序既不會選擇 TSA，也不會提交資料；而「證據模式」則會依照 預定時程（[證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)）同時執行這兩項操作。已準備好的請求 **尚不**構成 **時間戳記證明**。
 

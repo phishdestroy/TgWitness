@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/
 
 Hubungkan klien MCP ke ruang kerja dan obrolan yang dipilih dengan akses yang memiliki batas waktu dan dapat dicabut.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Integrasi arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Integrasi arsip](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Hubungkan klien analis ke ruang kerja dan obrolan yang dipilih. TgWitness menyediakan layanan **Streamable HTTP di `/mcp` dalam proses panel**. Setiap koneksi memiliki token, masa berlaku, dan alat yang diizinkan masing-masing. MCP tidak dapat mengirim pesan Telegram, mengubah pengaturan, atau memodifikasi jurnal yang ditandatangani. Koneksi yang sama juga berfungsi melalui [baris perintah](https://phishdestroy.github.io/TgWitness/id/docs/reference/cli/).
 
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**Di halaman ini**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#tools-and-boundaries)
+- [Instal dan periksa](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#install-and-check)
+- [Membuat koneksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#issue-a-connection)
+- [Hubungkan klien Anda](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#connect-your-client)
+- [Terowongan Cloudflare](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#cloudflare-tunnel)
+- [Alat dan batasan](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/#tools-and-boundaries)
 
 ## Instal dan periksa
 
@@ -57,12 +57,12 @@ Pilih klien di panel dan salin konfigurasi yang dihasilkan. Konfigurasi mengguna
 
 | Klien | Konfigurasi | Koneksi |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, header bearer |
+| Kode Claude | `.mcp.json` | HTTP, `type: "http"`, header bearer |
 | Claude Desktop | `claude_desktop_config.json` | Jembatan stdio lokal |
 | Cursor | `.cursor/mcp.json` | HTTP dengan header variabel lingkungan |
-| VS Code Local | `.vscode/mcp.json` | HTTP dengan input kata sandi `promptString` |
+| VS Code Lokal | `.vscode/mcp.json` | HTTP dengan input kata sandi `promptString` |
 | Windsurf | `mcp_config.json` | HTTP dengan placeholder header bearer |
-| Klien lainnya | URL dan header Authorization | Streamable HTTP |
+| Klien lainnya | URL dan header Authorization | HTTP yang dapat dialirkan |
 
 TgWitness menggunakan token bearer, tanpa penemuan OAuth. Gunakan jembatan stdio lokal untuk klien yang konektor jarak jauhnya memerlukan OAuth. Untuk VS Code, variabel input berlaku pada harness **Local** dan tidak diteruskan ke sesi Copilot. Referensi konfigurasi: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

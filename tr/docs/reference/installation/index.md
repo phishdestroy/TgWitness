@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/insta
 
 Tek bir komutla kurun, imzaları ve hash değerlerini kontrol edin, güncelleyin ve kurulumu kaldırın.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Başlangıç](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Başlangıç](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Proje](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Hızlı başlangıç](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/) · [Dağıtım](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/)
 
-**On this page**
+**Bu sayfada**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#remove-tgwitness)
+- [Tek bir komutla yükleyin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#install-with-one-command)
+- [Her şeyin çalıştığı yer](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#where-everything-runs)
+- [Tam metin arama ayarları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#full-text-search-settings)
+- [Komut satırı erişimi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#command-line-access)
+- [Çalıştırmadan önce doğrulayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#verify-before-running)
+- [Mevcut bir kurulumu güncelle](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#update-an-existing-installation)
+- [Ubuntu'da günlük komutlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness'yi kaldırın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/installation/#remove-tgwitness)
 
 ## Tek bir komutla kurun
 
@@ -137,7 +137,7 @@ Windows kurulum sistemi, paket imzalarını .NET ile doğrular ve OpenSSL gerekt
 
 **Yeni bir yayın, indirme sitesini günceller; yüklü programlar, kurulum programını tekrar çalıştırdığınızda güncellenir.** Katılımsız güncelleyici veya çalışmakta olan bir koleksiyonun otomatik olarak yeniden başlatılması yoktur. Mevcut kurulum kanalı **önizleme** aşamasındadır; yayınlanmış ve kontrol edilmiş derlemeleri takip eder `main`; bu sürümlerin commit'leri, son numaralandırılmış GitHub sürümünden daha yeni olabilir. Sayfanın sürümü `pyproject.toml`; commit ve derleme kimliği, aynı önizleme sürümü içindeki güncellemeleri birbirinden ayırır.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+Yayınlama, söz konusu commit uygulama ve güvenlik kontrollerinden geçtikten ve imzalı paket Ubuntu hizmeti ile Windows PowerShell kurulum testlerini geçtikten sonra otomatik olarak gerçekleşir. Kontroller devam ederken veya başarısız olursa, aynı komutlar önceki kontrol edilmiş derlemeyi yüklemeye devam eder. Derleme manifestosu şu anda hangi commit'in mevcut olduğunu gösterir; sürüm numarası tek başına önizleme güncellemeleri arasında aynı kalabilir.
 
 Daha önce kullandığınız kurulum klasörünü ve işletim sistemi kullanıcısını kullanın. Toplama işlemi durdurulmuşken tüm veri dizinini yedekleyin; `tgwitness paths` bunu tanımlar. İmzalı bir dışa aktarım tam bir kurulum yedeği değildir.
 

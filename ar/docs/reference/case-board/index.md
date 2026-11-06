@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-
 
 الإشارات المرجعية، والمقاطع المحددة بدقة، وشرائح الإجراءات، والمناقشات، والوصول المحدود النطاق، وسجل التعليقات التوضيحية الموقعة التي يستخدمها «Case Board».
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [التحقيق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![التحقيق](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 يوفر «Case Board» لفريق التحقيق رؤية عمل مشتركة للمواد المحفوظة. يمكنك وضع إشارة مرجعية على ملاحظة ما، وتمييز مقطع محدد، وحفظ مجموعة من الإجراءات، ومناقشتها مع الزملاء. تحتفظ البطاقات بمراجع مصادرها وسجل المراجعات الموقّع. وتبقى تعليقات الفريق في مساحة العمل، ويمكن تمييزها بشكل منفصل عن الملاحظات الأصلية في Telegram.
 
@@ -14,13 +14,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-
 
 ![موجز التحقيقات المركب](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**في هذه الصفحة**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#operating-limits)
+- [العمل على حالة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#work-with-a-case)
+- [الأذونات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#permissions)
+- [العقود المخزنة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#stored-contracts)
+- [API والتصدير](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#api-and-exports)
+- [حدود التشغيل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/#operating-limits)
 
 ## العمل على قضية
 

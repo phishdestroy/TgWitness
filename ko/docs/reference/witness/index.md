@@ -4,32 +4,32 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witne
 
 자체 키와 봇을 사용하여 위트니스를 실행하고, 서명된 체크포인트를 채널에 게시한 후, 내보낸 데이터를 이를 기준으로 대조하여 확인하십시오.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [증거 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![증거 및 검증](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [높은 신뢰도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) · [패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+위트니스는 서명된 체크포인트를 컬렉터와 별도로 보관합니다. 위트니스는 컬렉터의 서명과 저널의 연속성을 확인하고, 자체 키로 결과에 서명한 후, 이를 텔레그램 채널에 게시합니다. 컬렉터의 위트니스 엔드포인트에 대한 읽기 전용 액세스 권한이 있는 별도의 서버에서 실행하십시오.
 
-흐름도 · 수집기 → Witness (서명된 체크포인트: 기록 수 + 헤더 해시); Witness → Witness 저널, 자체 키; Witness → 텔레그램 채널 (자체 봇을 통해 서명된 게시물); 증거 ZIP → verify.py; Witness 저널, 자체 키 → verify.py; 텔레그램 채널 → verify.py (텔레그램 데스크톱 내보내기 또는 t.me/s 페이지) · 수집기 · Witness · Witness 저널, 자체키 · 텔레그램채널 · 증거 ZIP · verify.py · 서명된체크포인트: 기록수 + · 헤더해시 · 자체봇을통해서명된게시물 · 텔레그램데스크톱내보내기또는 · t.me/s 페이지
+흐름도 · 수집기 → 위트니스 (서명된 체크포인트: 기록 수 + 헤더 해시); 위트니스 → Witness 저널, 자체 키; 위트니스 → 텔레그램 채널 (자체 봇을 통해 서명된 게시물); 증거 ZIP → verify.py; Witness 저널, 자체 키 → verify.py; 텔레그램 채널 → verify.py (텔레그램 데스크톱 내보내기 또는 t.me/s 페이지) · 수집기 · 위트니스 · Witness 저널, 자체키 · 텔레그램채널 · 증거 ZIP · verify.py · 서명된체크포인트: 기록수 + · 헤더해시 · 자체봇을통해서명된게시물 · 텔레그램데스크톱내보내기또는 · t.me/s 페이지
 
 **도표를 텍스트로 변환**
 
-1. 수집기 → Witness (서명된 체크포인트: 기록 수 + 헤더 해시)
-2. Witness → Witness 저널, 자체 키
-3. Witness → 텔레그램 채널 (자체 봇을 통해 서명된 게시물)
+1. 수집기 → 위트니스 (서명된 체크포인트: 기록 수 + 헤더 해시)
+2. 위트니스 → Witness 저널, 자체 키
+3. 위트니스 → 텔레그램 채널 (자체 봇을 통해 서명된 게시물)
 4. 증거 ZIP → verify.py
 5. Witness 저널, 자체 키 → verify.py
 6. 텔레그램 채널 → verify.py (텔레그램 데스크톱 내보내기 또는 t.me/s 페이지)
 
-**On this page**
+**이 페이지에서**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#verify)
+- [위트니스가 제공하는 기능과 제공하지 않는 기능](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [검증 및 기록 대상](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#what-it-checks-and-records)
+- [위트니스 실행](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#run-a-witness)
+- [여러 워크스페이스를 위한 공개 증명 페이지](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [확인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#verify)
 
 ## TgWitness가 제공하는 기능과 제공하지 않는 기능
 
@@ -48,7 +48,7 @@ A witness retains signed checkpoints separately from the collector. It checks th
 지정된 간격(기본값 10분)마다 TgWitness는 다음과 같은 작업을 수행합니다:
 
 1. 헤드 자체를 가져옵니다(수집기는 이를 푸시하거나 건너뛸 수 없습니다);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. 수집자의 서명, 고정된 수집자 키(`--collector-fingerprint`, 또는 가장 먼저 확인된 키), 비감소 카운트, 그리고 변경되지 않은 카운트에서 변경되지 않은 헤드를 검증합니다. 머클 포함 및 일관성 증명은 증가하는 저널이 보존된 체크포인트를 확장함을 검증합니다. 연속성 증명이 사용된 후에는 이를 제거하는 것이 거부됩니다;
 3. 자체 저널에 서명된 기록을 추가합니다: `witness.anchor` (상태 `ok`, `key_changed`, `rollback`(이전보다 기록 수가 적음), `fork`(길이는 동일하지만 헤더가 다름) 또는 `invalid`(검증에 실패함), 또는 `witness.no_response`( 수집기가 응답하지 않은 경우);
 4. TgWitness가 실행 중이고 봇 API에 접속할 수 있는 동안에는 “응답 없음”을 포함하여 서명된 결과를 채널에 게시합니다. 게시물 ID(`witness.posted`)가 기록되며, 게시 실패 시에도 ID(`witness.post_failed`)가 기록됩니다.
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 이를 위해서는 독립적으로 보관된 위트니스 지문과 이 내보내기 파일의 정확한 끝 부분에 위치한 일치하는 체크포인트가 필요합니다. 이전 접두사만 포함하는 체크포인트는 불충분합니다. 수집을 일시 중지하고, 위트니스가 최종 상태를 관찰하도록 한 뒤, 저널에 추가 기록이 이루어지기 전에 내보내십시오. 저널이 변경되면 다른 체크포인트를 보관하고 해당 상태를 내보내십시오. 후속 체크포인트만으로는 더 짧은 내보내기 파일의 최종 해시를 검증할 수 없습니다. `--channel` 플래그가 함께 제공될 경우, 주장된 게시물이 누락되었거나 일치 세트가 비어 있으면 이 엄격한 검사에 실패합니다. 플래그가 없어도 일반적인 무결성 검사에서는 여전히 증인이 없는 레코드를 보고하지만, 그 외에는 손상되지 않은 아카이브를 거부하지는 않습니다.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+위트니스 저널과 고정된 키는 별도로 보관하십시오. 온라인 검증을 통해 체크포인트 간의 연속성을 확인하며, 오프라인 검증에서는 보존된 모든 체크포인트를 내보낸 파일과 비교합니다. 연속성 증명이 없는 레거시 헤드는 오프라인 비교 결과를 유지하며, 온라인 연속성 검증 없이 보고됩니다. 보고서에는 위트니스 가동 중단 시간 및 간격별 게시 실패 내역이 나열됩니다.
 
-### Daily seals and unavailable timestamp calendars
+### 일일 봉인 및 사용 불가 타임스탬프 캘린더
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+위트니스는 전날(UTC 기준)의 저널 경계를 봉인하고, 서명된 봉인의 해시를 OpenTimestamps에 제출합니다. 캘린더 제출은 보류 중인 증거이며, 독립적으로 검증된 비트코인 커밋먼트만이 검증기에서 확인을 받습니다.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+모든 캘린더가 실패할 경우, 서명된 인장과 실패한 시도는 저널에 남아 있습니다. 시간별 유지보수 패스는 재시작이나 날짜 변경 후를 포함하여 해당 원본 기록을 재시도합니다. 이 패스는 최대 32개의 인장을 스캔하고, 최대 두 건의 누락된 제출을 처리하며, 패스당 재시도에 최대 60초를 소요합니다. 지속적인 커서는 오래된 인장들을 순차적으로 처리합니다. 보존된 제출물은 기존의 증명 업그레이드 경로를 따릅니다.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+재시도 시 씰이 다시 작성되거나 원래 날짜가 변경되거나, 캘린더가 이를 더 일찍 수신했다고 주장하지 않습니다. 이후의 비트코인 커밋먼트는 여전히 후순위의 외부 확인으로 남아 있습니다. 누락된 증명은 `none`으로 유지되며, 보류 중인 증명은 검증자가 독립적으로 확인할 때까지 `pending` 상태로 유지됩니다.

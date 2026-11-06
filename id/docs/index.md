@@ -8,7 +8,7 @@ Kerjakan pesan dan perubahan yang disimpan, hubungkan temuan Anda dengan sumbern
 
 Panduan bergambar
 
-[### Case Board Pastikan pengamatan, kutipan tepat, dan catatan tim tetap terhubung.](https://phishdestroy.github.io/TgWitness/id/docs/case-board/) [### Studio Laporan Pilih materi dan salah satu dari delapan desain laporan.](https://phishdestroy.github.io/TgWitness/id/docs/reports/) [### Berbagi salinan Siapkan cuplikan yang telah ditandatangani dengan kolom-kolom yang dibutuhkan oleh penerima.](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [### Grup akun Tinjau akun secara bersama-sama dan jaga agar ruang kerja masing-masing tetap terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/groups/)
+[### Papan Kasus Pastikan pengamatan, kutipan tepat, dan catatan tim tetap terhubung.](https://phishdestroy.github.io/TgWitness/id/docs/case-board/) [### Studio Laporan Pilih materi dan salah satu dari delapan desain laporan.](https://phishdestroy.github.io/TgWitness/id/docs/reports/) [### Berbagi salinan Siapkan cuplikan yang telah ditandatangani dengan kolom-kolom yang dibutuhkan oleh penerima.](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [### Grup akun Tinjau akun secara bersama-sama dan jaga agar ruang kerja masing-masing tetap terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/groups/)
 
 [## Mode, skenario, dan tingkat bukti Ruang lingkup pengumpulan, batas peristiwa, delapan mekanisme verifikasi, dan enam skenario investigasi fiktif.](https://phishdestroy.github.io/TgWitness/id/guides/modes.html)
 
@@ -40,7 +40,7 @@ Pengaturan
 
 Kumpulkan
 
-[Panduan panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/)[Cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/id/docs/reference/secret-chats/)[Muat riwayat sumber](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/)[Alur kerja dan operasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/)[Mode penyelidikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)[Fitur dan batasan](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
+[Panduan panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/)[Cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/)[Obrolan Rahasia: implementasi dan demo](https://phishdestroy.github.io/TgWitness/id/docs/reference/secret-chats/)[Muat riwayat sumber](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/)[Alur kerja dan operasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/)[Mode penyelidikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)[Fitur dan batasan](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
 
 Arsip & integrasi
 

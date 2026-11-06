@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/setti
 
 L&#x27;assistant de configuration, les objectifs, les niveaux d&#x27;interface, les chemins de connexion et les paramètres partagés par un groupe de comptes.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Pour commencer](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Pour commencer](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Comptes](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/) · [Connexion](https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/) · [Accès](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/)
 
@@ -19,14 +19,14 @@ La langue, le fuseau horaire IANA, le thème et le niveau sont enregistrés par 
 | Niveau | Champs | Barre latérale |
 | --- | --- | --- |
 | Simple | L'essentiel, rien que l'essentiel | Accueil, Discussions, Modifications, Archives, Paramètres |
-| Standard | Paramètres communs avec explications | Ajout de Case Board, Comptes et Accès |
+| Norme | Paramètres communs avec explications | Ajout de Case Board, Comptes et Accès |
 | Expert | Tous les champs, limites et détails techniques | Ajoute les rubriques Sources, Extras, Demander à l'archive, Paramètres, Compte, Journal système et Intégrations |
 
 [Le guide des panneaux](https://phishdestroy.github.io/TgWitness/fr/docs/reference/panel/) décrit chaque section.
 
 ## Objectifs
 
-| Objectif | Collection | Fichiers | Services externes | Adresse du serveur |
+| Objectif | Collecte | Fichiers | Services externes | Adresse du serveur |
 | --- | --- | --- | --- | --- |
 | Copie d'archive | Désactivé ; « **Démarrer »** lance une exportation | Photos jusqu’à 20 Mo | Désactivé | Automatique |
 | Suivre les discussions | En continu | Photos et vidéos d'une durée maximale de 60 secondes / 20 Mo | Horodatages et notifications de problèmes | Automatique |

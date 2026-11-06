@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/deplo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Развертывание и восстановление](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Английский язык** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Украинский](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Португальский (Бразилия)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [Фарси](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Урду](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Хинди](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Индонезийский язык](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Упрощённый китайский](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | Запустите синтетическую демонстрацию по ссылке `data\demo` |
 | `TgWitness-Check.cmd` | Запустите проверку готовности, не запуская программу |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Закреплённый словарь русской морфологии и цветовые профили PDF включены в пакет для офлайн-использования. Упаковка допускает только известные пути к файлам внутри каталогов зависимости `data`; наличие неожиданных файлов в этих каталогах приводит к сбою сборки.
 
 Распакуйте весь архив в папку с правами на запись, например `Documents\TgWitness`; не запускайте программу из ZIP-архива или из папки «Program Files». Среда выполнения использует изолированный путь к модулям, поэтому другие установки Python и `PYTHONPATH` не влияют на её работу. Данные хранятся в папке «`data`» данного пакета. Для обновления остановите TgWitness, распакуйте новую версию в новую папку и скопируйте туда папку «`data`».
 

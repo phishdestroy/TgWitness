@@ -6,7 +6,7 @@ Jalankan TgWitness sebagai perkhidmatan pada Windows, Linux, macOS atau Docker, 
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Penyebaran & pemulihan](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Inggeris** · [Bahasa Rusia](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Bahasa Ukraine](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Sepanyol](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Portugis (Brazil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Bahasa Turki](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [Bahasa Arab](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [Bahasa Parsi](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Hindi](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Bahasa Vietnam](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Teks ringkas Cina](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Setiap Pelepasan GitHub mengandungi `TgWitness-<version>-windows-amd64-portable.
 | `TgWitness-Demo.cmd` | Mulakan demo sintetik di `data\demo` |
 | `TgWitness-Check.cmd` | Jalankan pemeriksaan kesiapsiagaan tanpa memulakan |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Kamus morfologi Rusia yang dipin dan profil warna PDF disertakan untuk kegunaan luar talian. Pembungkusan hanya membenarkan laluan fail yang diketahui di dalam direktori kebergantungan `data`; fail yang tidak dijangka dalam direktori tersebut akan menyebabkan pembinaan gagal.
 
 Ekstrak keseluruhan arkib ke dalam folder yang boleh ditulis seperti `Documents\TgWitness`; jangan jalankan ia dari dalam ZIP atau dari Program Files. Runtime menggunakan laluan modul terasing, jadi pemasangan Python lain dan `PYTHONPATH` tidak menjejaskannya. Data kekal dalam folder `data` pada pakej ini. Untuk mengemas kini, hentikan TgWitness, ekstrak versi baru ke dalam folder baru dan salin folder `data`.
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/setti
 
 Trình hướng dẫn thiết lập, mục tiêu, cấp độ giao diện, đường dẫn kết nối và các cài đặt được chia sẻ bởi một nhóm tài khoản.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bắt đầu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Bắt đầu](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/) · [Kết nối](https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/) · [Truy cập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/)
 

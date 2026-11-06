@@ -53,7 +53,7 @@ El panel completo con las opciones avanzadas desplegadas. No se muestran credenc
 | --- | --- |
 | Punto final | URL del almacenamiento, sin ruta de bucket ni credenciales. Ejemplo: `https://s3.example.invalid`. |
 | Región | Lo que pida su proveedor. Por defecto `us-east-1`. |
-| Bucket | Un bucket existente en el que pueda escribir. Ejemplo: `example-case-backup`. |
+| Depósito | Un bucket existente en el que pueda escribir. Ejemplo: `example-case-backup`. |
 | Carpeta en el repositorio | Prefijo, por defecto `tgwitness`. Se añade encima un prefijo por espacio. |
 | ID de clave de acceso / Clave de acceso secreta | Las dos juntas, guardadas en la bóveda. Déjelas vacías más adelante para conservarlas. |
 | Direcciones en formato de ruta | Activado: `endpoint/bucket`. Desactivado: `bucket.endpoint`. Depende del proveedor. |

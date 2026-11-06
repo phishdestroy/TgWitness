@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/showc
 
 選択した公開チャンネルの保存済みメッセージや署名付きスナップショットを、有効期限付きかつ取り消し可能なリンクを通じて公開します。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [導入と復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![展開と復旧](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **[アクセス] → [パブリックショーケース] を選択すると**、既存の アクセストークンシステムを使用して、独立した読み取り専用のページが作成されます。このページは、インストール先に保存された観測データを読み込みます。ただし、 コレクターを起動したり、Telegram にログインしたり、訪問者用にチャンネルを取得したりすることはありません。
 

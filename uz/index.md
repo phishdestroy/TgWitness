@@ -141,7 +141,7 @@ Rejalashtirilgan yoki qo＇lda nusxalar
 
 Hozir yoki har 1 dan 1，440 daqiqada nusxa oling， jarayon panelda ko＇rinadi．
 
-Object Lock
+Ob＇ekt qulfi
 
 Saqlash kunlari va rejimini tanlang， panel uning haqiqatan qo＇llanganini tekshiradi．
 

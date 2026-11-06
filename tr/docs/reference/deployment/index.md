@@ -6,7 +6,7 @@ TgWitness'i Windows, Linux, macOS veya Docker üzerinde, HTTPS üzerinden, yedek
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Dağıtım ve kurtarma](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **İngilizce** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ukraynaca](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Portugizce (Brezilya)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urduca](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Hintçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Endonezyaca](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Basitleştirilmiş Çince](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Her GitHub sürümü, `TgWitness-<version>-windows-amd64-portable.zip` ve bunun 
 | `TgWitness-Demo.cmd` | `data\demo` adresinden sentetik demoyu başlatın |
 | `TgWitness-Check.cmd` | Başlatmadan hazırlık kontrolünü çalıştırın |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Sabitlenmiş Rusça morfoloji sözlüğü ve PDF renk profilleri, çevrimdışı kullanım için pakete dahil edilmiştir. Paketleme, yalnızca bağımlılık `data` dizinleri içindeki bilinen dosya yollarına izin verir; bu dizinlerde beklenmeyen dosyalar bulunursa derleme başarısız olur.
 
 Arşivin tamamını `Documents\TgWitness` gibi yazılabilir bir klasöre çıkarın; ZIP dosyasının içinden veya Program Files klasöründen çalıştırmayın. Çalışma ortamı izole bir modül yolu kullanır, bu nedenle diğer Python kurulumları ve `PYTHONPATH` onu etkilemez. Veriler, paketin `data` klasöründe kalır. Güncellemek için TgWitness’i durdurun, yeni sürümü yeni bir klasöre çıkarın ve `data` klasörünü buraya kopyalayın.
 

@@ -6,7 +6,7 @@ Buscar, leer el contexto, contabilizar la actividad y exportar mensajes guardado
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Integraciones con archivos](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [MCP de solo lectura](https://phishdestroy.github.io/TgWitness/es/docs/reference/mcp/) · [Búsqueda de texto completo](https://phishdestroy.github.io/TgWitness/es/docs/reference/search/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ Un panel remoto requiere HTTPS; el HTTP sin cifrar solo se acepta para `127.0.0.
 
 Las fechas son `2026-10-01` (medianoche UTC) o en formato ISO con la zona horaria, `2026-10-01T09:00+03:00`. Para `search`, `messages` y `export` se selecciona la hora de la observación. Las páginas admiten hasta 50 registros: sigue `next_offset` (`--offset`) para la búsqueda por orden de relevancia y `next_before` (`--before`) en otros lugares.
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+La búsqueda por relevancia se detiene en 1,000 resultados. La última página puede ser más corta que `--limit`; limita la consulta, el chat o el periodo cuando existan más observaciones coincidentes.
 
 Cada resultado de mensaje incluye `untrusted_content: true`los ID del espacio de trabajo, del chat y del mensaje, la secuencia del registro, el hash del registro guardado y un enlace al panel. Las modificaciones, los avisos de eliminación y `missing_on_recheck` son registros independientes. La ausencia de un registro no demuestra que un evento no haya ocurrido nunca.
 
@@ -76,7 +76,7 @@ El periodo selecciona **la hora del mensaje indicada por Telegram**. El recuento
 
 Para realizar una exportación a través del panel se necesita una conexión que permita **exportar mensajes (solo desde la línea de comandos)**; esta opción no está seleccionada por defecto. Este archivo es una copia de trabajo, no una prueba: para una entrega verificable, utiliza la exportación firmada en **«Exportaciones»**, que `python -m tgwitness.verify`se verifica.
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+El panel vuelve a comprobar el acceso antes de emitir cada registro, incluido el registro de finalización. Un acceso revocado o caducado da lugar a una exportación incompleta. Las lecturas diferidas de páginas comparten el límite del proceso de archivo con otras consultas y tienen un tiempo de espera limitado.
 
 ## Habilidad del agente
 

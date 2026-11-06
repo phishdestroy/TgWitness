@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/stora
 
 Резервне копіювання, переміщення старих файлів у хмарне сховище, копії під захистом Object Lock та відновлення на новому комп’ютері.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Розгортання та відновлення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Розгортання та відновлення](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Панель розділяє три завдання:
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/stora
 
 Сама по собі відповідь на завантаження не є дозволом на видалення файлу. TgWitness завантажує повний зашифрований об’єкт, перевіряє його розмір та SHA-256, зберігає квитанцію, а потім ще раз перевіряє локальні байти безпосередньо перед видаленням. У разі невдалого завантаження, відмінного результату зчитування або скасованого перенесення локальний файл залишається на місці. Якщо увімкнена резервна копія доказів ще не скопіювала цей файл, видалення також чекає на це.
 
-**On this page**
+**На цій сторінці**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#operator-bot-and-completion-notices)
+- [Коли диск заповнюється](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#when-the-disk-is-filling-up)
+- [Підключити пункт призначення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#connect-a-destination)
+- [Зберегти файл відновлення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#keep-the-recovery-file)
+- [Відновлення після втрати інсталяції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#recover-after-losing-the-installation)
+- [Бот-оператор та повідомлення про завершення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## Коли закінчується місце на диску
 

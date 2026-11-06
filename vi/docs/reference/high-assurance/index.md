@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-
 
 Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Triển khai và khôi phục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Triển khai & khôi phục](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+Việc triển khai có độ tin cậy cao bổ sung các kiểm tra độc lập đối với môi trường thu thập vào quá trình xác minh kho lưu trữ. Người đánh giá sẽ truy vấn các bản ghi triển khai và truy cập do nhà cung cấp dịch vụ đám mây và Cloudflare lưu giữ, đồng thời việc triển khai Intel TDX bổ sung chứng thực phần cứng cho môi trường của bộ thu thập.
 
 Việc sử dụng thông thường trên máy cục bộ và Docker vẫn không thay đổi. Không có gì ở đây hoạt động trừ khi bạn triển khai bằng `python -m tgwitness.cloud`, và trình thu thập dữ liệu chỉ đọc máy chủ của nó khi quá trình triển khai được thiết lập `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ Sơ đồ quy trình · Người vận hành → Máy chủ, tường lửa khô
 7. Verifier, các token chỉ đọc → Tuyên bố /api/assurance đã được ký
 8. Verifier, các token chỉ đọc → Tệp ZIP chứa bằng chứng
 
-**On this page**
+**Trên trang này**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#reading-the-deployment-result)
+- [Những gì trình xác minh có thể kiểm tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Nhà cung cấp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#providers)
+- [Máy ảo bảo mật trên Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Trước khi bắt đầu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#before-you-start)
+- [Từ bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#from-the-panel)
+- [Kênh nhanh không cần tên miền](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Triển khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#deploy)
+- [Triển khai gỡ lỗi và khóa](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Xóa một bản triển khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#remove-a-deployment)
+- [Bất kỳ máy chủ nào (tự chứng thực)](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#any-server-self-attested)
+- [Xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#verify)
+- [Báo cáo về việc bàn giao bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare với tư cách là bên chứng kiến độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Đọc kết quả triển khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## Những gì người xác minh có thể kiểm tra
 
@@ -54,7 +54,7 @@ Sơ đồ quy trình · Người vận hành → Máy chủ, tường lửa khô
 | Khóa ký đã được tạo trên máy chủ đó | Khóa này ký một tuyên bố nêu rõ ID máy chủ của nhà cung cấp và giá trị băm của tệp cloud-init mà nó đã nhận được | Collector, đã được kiểm tra với nhà cung cấp |
 | Nhật ký này thuộc về khóa và máy chủ đó | Mỗi quá trình bắt đầu trong bằng chứng ZIP đều chứa thông số đo lường máy chủ cho máy chủ đó | Bằng chứng ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+Trình thu thập ghi lại trạng thái SSH, các phiên, lịch sử đăng nhập và thông tin khởi động trong các bản ghi process-start và `host.state` đã được ký. Trên một máy ảo thông thường, đây là các bản ghi kiểm kê cục bộ, mà người đánh giá sẽ so sánh với các bản ghi độc lập của nhà cung cấp. Việc triển khai Intel TDX dưới đây còn xác minh thêm các phép đo được hỗ trợ bởi phần cứng.
 
 ## Nhà cung cấp
 
@@ -109,7 +109,7 @@ python -m tgwitness.cloud check-report --report certificate.pdf --verifier-finge
 
 Báo cáo được niêm phong kỹ thuật số bằng chữ ký và dấu thời gian, trong tệp `certificate.seal.json` cùng các tệp `.tsq`/`.tsr` đi kèm:
 
-| Seal | Tính năng mới |
+| Con dấu | Tính năng mới |
 | --- | --- |
 | Dấu thời gian điện tử được chứng nhận, `http://tsa.belgium.be/connect` | Dấu thời gian theo tiêu chuẩn RFC 3161 được áp dụng lên chính xác các byte của `certificate.json` từ nhà cung cấp dịch vụ chứng thực đủ điều kiện của Chính phủ Liên bang Bỉ (FPS Policy and Support, BOSA). Đơn vị này được liệt kê là dịch vụ đóng dấu thời gian đủ điều kiện, với trạng thái đã được cấp phép, trong danh sách tin cậy của EU tại Bỉ; chứng chỉ gốc (Belgium Root CA6) và các mục trong danh sách, tính đến danh sách được ban hành vào ngày 20 tháng 10 năm 2026, đã được cố định trong `tgwitness/tsa_roots.py`. Theo Điều 41 của Quy định (EU) số 910/2014, dấu thời gian như vậy được coi là chính xác về ngày giờ cũng như tính toàn vẹn của dữ liệu tại mọi quốc gia thành viên EU |
 | Dấu thời gian theo RFC 3161, FreeTSA | Một dấu thời gian thứ hai, độc lập |
@@ -292,6 +292,6 @@ Cloudflare không thể xem nội dung bên trong lớp mã hóa của Telegram,
 
 ## Xem kết quả triển khai
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+Đối với một máy ảo (VM) thông thường, nhà cung cấp kiểm soát cơ sở hạ tầng máy chủ, và danh mục tài nguyên cục bộ được kiểm tra song song với các bản ghi của nhà cung cấp. Đối với Intel TDX, người xác minh còn kiểm tra thêm thông số phần cứng, liên kết bộ thu thập, quá trình tạo lệnh và các chỉ số hệ điều hành. Hãy xem xét từng kết quả để biết các kiểm tra nào đã vượt qua hoặc không khả dụng.
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+Chi tiết tường lửa lịch sử phụ thuộc vào nhà cung cấp; Linode lưu giữ các phiên bản quy tắc. Bản ghi xác thực   liệt kê các triển khai đã được kiểm tra và các kiểm tra trực tiếp còn lại, và phạm vi xác minh   kết nối các kiểm tra môi trường này với việc thu thập và tính toàn vẹn của kho lưu trữ.

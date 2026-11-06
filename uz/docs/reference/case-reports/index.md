@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-
 
 Hisobot filtrlari, sakkizta dizayn, kontent uchun oldindan belgilangan sozlamalar, saqlangan o'zgarish tarixlari va imzolangan eksportlarga kiritilgan baholash.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Tergov](https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Tergov](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Tanlangan kuzatuvlarni ishning o'qiladigan hisobotiga aylantiring: uning savoli, doirasi, saqlangan o'zgarishlari, diagrammalari, topilmalari va manba havolalari. Har bir hisobot qabul qiluvchiga yetkazilgan materialni tekshirish va uning to'plam qamrovini ko'zdan kechirish imkonini beradi.
 
@@ -24,7 +24,7 @@ Tanlangan kuzatuvlarni ishning o'qiladigan hisobotiga aylantiring: uning savoli,
 
 Ma'lumotlarning oldindan ko'rinishi to'liq barqaror jurnal prefiksini hisoblaydi, dastlabki namunani emas. Faqat ko'rsatilgan namunaviy qatorlar va uzun ro'yxatlar chegaralangan; ularning kiritilmagan sonlari ko'rsatiladi. Keyingi eksport yangi barqaror snapshot oladi, shuning uchun davom etayotgan yig'ish raqamlarni oshirishi mumkin. Doira, sonlar va manba identifikatori imzolangan hisobotga kiritilgan. Formani ochish yoki ko'rinishini ko'rish uni saqlamaydi.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Yurisdiktsiya bo'yicha ko'rsatmalar.** Hujjat tafsilotlari bo'limida **Yurisdiktsiya bo'yicha ko'rsatmalar · ixtiyoriy** bo'limini ochib, yurisdiktsiya hamda fuqarolik/tijorat yoki jinoyat protsedurasini tanlash mumkin. Ilovada huquqiy asos, manba havolalari, tayyorlash eslatmalari va tadqiqot holati keltirilgan. Yig'ishni himoya qilish choralari bo'yicha mahalliy tilidagi qisqacha mazmun va izohlar ixtiyoriy. Hech qanday yurisdiktsiya standart bo'yicha tanlanmaydi. Ushbu tanlovlar ish maydoniga tegishli bo'lib, saqlangan tartib sozlamalari va bilvosita ulashish/nusxa ko'chirish bo'yicha standart parametrlardan chiqarib tashlanadi. Qarang: [standart parametrlar, qo'llab-quvvatlanadigan hisobotlar va tadqiqot cheklovlari](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Qabul qiluvchining nusxasini tanlang.** Jadvallar va transkript tanlangan yozuvlardan foydalanadi. To'liqlik, saqlash va qamrov butun manba jurnalini tasvirlaydi. Dalil ZIP hujjati uning asl yozuvlari va ilovalarini o'z ichiga oladi. Qabul qiluvchi faqat tanlangan, ruxsat etilgan ma'lumotlarni olishi kerak bo'lgan hollarda [minimal topshirishdan](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#handover-extract) foydalaning.
 
@@ -90,18 +90,18 @@ Bo'sh interval hech qanday kuzatuv kiritilmaganligini anglatadi; bo'shliqlar uch
 
 Qo'shilganda, `analytics.json` arxivning imzolangan fayl xeshlari bilan himoyalangan. Journal `report.json` shu tanlangan agregatni o'z ichiga oladi. Imzo tekshiruvi o'zgargan baytlarni aniqlaydi. Raqamlarni tekshirish uchun jurnal agregatlarini qayta hisoblang `report_analytics.Analytics` va `selected` bilan, yoki snapshot agregatlarini `snapshot_analytics.collect` va `project` bilan.
 
-### Anomaly indicators
+### Anomaliya ko'rsatkichlari
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Oldindan ko'rish.** Dalil hisobotlariga ro'yxatdan o'tgan protsessorlar (`tgwitness/metrics/`, har bir metrika uchun alohida fayl) tomonidan hisoblangan **Anomaliya ko'rsatkichlari** bo'limi qo'shiladi. Hisobot har bir protsessorni uning versiyasi bilan birga nomlaydi va jadval ostida uning usulini chop etadi, shunda hisoblashni `events.jsonl` faylidan `tgwitness.metrics.run` yordamida takrorlash mumkin.
 
-| Processor | U nimani ko'rsatadi |
+| Protsessor | U nimani ko'rsatadi |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | Har bir UTC kunida birinchi marta post qilgan foydalanuvchilar va xabarlar soni. Bayroq uchun kamida beshta birinchi marta post qilgan foydalanuvchi va ularning mediani uch barobariga teng bo'lgan xabarlar soni, xabar hajmi esa mediani ko'pi bilan 1.5 barobar bo'lishi talab etiladi. Asosiy chiziq 7 kunlik tayyorgarlikdan so'ng, so'nggi 14 ta kalendar kun ichida kamida 7 ta kuzatilgan kunni hisobga oladi. |
+| `service_vs_message_ratio` v1 | Har bir suhbat bo'yicha alohida saqlangan xabar raqamlari va xizmat xabarlari ulushi. Bu raqamlashni tasvirlaydi; ma'lum bir yo'qolgan raqamni tushuntirmaydi. |
+| `join_leave_per_month` v1 | Qo'shilishlar, tark etishlar va oylik, shaxs, suhbat, o'zgarish va kun bo'yicha olib tashlashlar yoki taqiqlar. |
+| `pinned_per_month` v1 | Oylik chat holati snapshotlari orasida qo'shilgan yoki olib tashlangan xizmat xabarlari, bildirishnomalar va biriktirilgan xabarlar. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Parametrlar → Hisobot metrikalari** protsessorlar va ko'rsatiladigan qatorlar sonini tanlaydi, shu jumladan filtrlangan hisobotlarda ham. Kunlik va oylik jadvallar so'nggi qatorlarni ko'rsatadi, xizmat ulushi jadvallari esa saqlangan xabarlar soniga qarab suhbatlarni reytinglaydi. Yakunlar har bir qatorni o'z ichiga oladi.
 
 Manba kodini olgandan so'ng, yuqorida sanab o'tilgan sakkizta dizaynni bir xil badiiy jurnal asosida tuzing:
 
@@ -153,7 +153,7 @@ Har bir tekshiruvni yozib olingan to'plam qamrovi bilan birga alohida ko'rib chi
 4. Asl ZIP-fayllarni va ularning hashlarini saqlang. Har bir saqlovchi, uzatish, sana va maqsadini qayd eting. Tegishli operator bayonotlari va ish yozuvlarini ular bilan birga saqlang.
 5. Maxfiy VMlar uchun iqtibos, chaqiriq, Intel sertifikat zanjiri, o'lchovlar, aniq manba va kalit boshqaruv shartlarini saqlang va mustaqil ravishda tasdiqlang. Attestatsiya tekshiruv natijasini ko'rib chiqilgan artefaktlar bilan birga saqlang.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Har bir rejimda ma'lumotlarni olish, arxiv yaxlitligi, vaqt va to'plam qamrovini tekshirish uchun [tekshiruv doirasiga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) qarang.
 
 ## Qabul qiluvchi ko'rib chiqishi
 

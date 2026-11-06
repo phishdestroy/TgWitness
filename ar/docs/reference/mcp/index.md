@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/
 
 قم بتوصيل عميل MCP بمساحات العمل والدردشات المحددة مع وصول قابل للانتهاء وقابل للإلغاء.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [تكاملات الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![تكاملات الأرشيف](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 قم بتوصيل عميل المحلل بمساحات العمل والدردشات المحددة. تقدم TgWitness خدمة **Streamable HTTP على `/mcp` في عملية اللوحة**. لكل اتصال رمز مميز خاص به، وتاريخ انتهاء صلاحية، وأدوات مسموح بها. لا يمكن لـ MCP إرسال رسائل Telegram، أو تغيير الإعدادات، أو تعديل السجل الموقّع. تعمل نفس الاتصالات مع [سطر الأوامر](https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/).
 
 [دليل سير العمل](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ويكي](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**في هذه الصفحة**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#connect-your-client)
+- [التثبيت والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#install-and-check)
+- [إنشاء اتصال](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#issue-a-connection)
+- [قم بتوصيل عميلك](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#tools-and-boundaries)
+- [الأدوات والحدود](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/#tools-and-boundaries)
 
 ## التثبيت والتحقق
 
@@ -57,12 +57,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/
 
 | العميل | الإعدادات | الارتباط |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP، `type: "http"`، ترويسة bearer |
+| كود كلود | `.mcp.json` | HTTP، `type: "http"`، ترويسة bearer |
 | Claude Desktop | `claude_desktop_config.json` | جسر stdio محلي |
 | Cursor | `.cursor/mcp.json` | HTTP مع ترويسة متغير بيئة |
 | VS Code Local | `.vscode/mcp.json` | HTTP مع إدخال كلمة مرور من نوع `promptString` |
 | Windsurf | `mcp_config.json` | HTTP مع عنصر نائب لترويسة bearer |
-| عملاء آخرون | عنوان URL وترويسة Authorization | Streamable HTTP |
+| عملاء آخرون | عنوان URL وترويسة Authorization | HTTP القابل للبث |
 
 يستخدم TgWitness رموز bearer دون اكتشاف OAuth. استخدم جسر stdio المحلي للعملاء الذين يتطلب موصلهم البعيد استخدام OAuth. بالنسبة لـ VS Code، تنطبق متغيرات الإدخال على بيئة التشغيل **Local** ولا تتم إعادة توجيهها إلى جلسات Copilot. مراجع الإعدادات: [Claude Code](https://code.claude.com/docs/en/mcp)، [Cursor](https://prod.cursor.com/docs/mcp)، [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

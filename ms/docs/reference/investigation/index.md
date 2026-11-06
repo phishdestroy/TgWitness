@@ -6,21 +6,21 @@ Siasatan keseluruhan akaun merentas saluran, kumpulan, sembang peribadi dan bot,
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Siasatan](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Ikuti satu kes merentasi saluran, kumpulan, sembang peribadi dan bot, daripada pemerolehan awal hingga garis masa yang dirujuk dan penyerahan yang boleh disahkan. Versi laman web interaktif boleh diakses di `/docs/cases/`; [arahan pratonton](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally).
 
-**On this page**
+**Pada halaman ini**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#adapt-the-investigation)
+- [Kes yang dikerjakan: destinasi berubah merentasi empat perbualan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1. Tetapkan kes dan kumpulkan keseluruhan keterangan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2. Senaraikan setiap sumber dan peroleh konteks sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3. Pelihara kes yang berkembang dan interaksi yang disengajakan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Menghubungkan pemerhatian merentas sembang](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5. Bina garis masa merentas sembang](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6. Tambah perspektif akaun tanpa kehilangan asal usulnya](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7. Himpunkan dan sahkan penyerahan kes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [Sesuaikan siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/#adapt-the-investigation)
 
 ## Kes yang dikaji: destinasi berubah merentasi empat perbualan
 
@@ -117,7 +117,7 @@ Dalam contoh terperinci:
 | Fail yang sama disimpan | Resit media yang diselesaikan #151 dan #209 | Nilai SHA-256 penuh adalah serasi untuk bait yang dipelihara |
 | Penetapan saluran | #101 dan #188 | Jangan kaitkan kiriman saluran kepada pengguna 71001 tanpa pengirim yang disahkan |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+Bandingkan hash lampiran dan rujukan mesej yang berkaitan, dan rekodkan garis masa akaun yang dikumpulkan mengikut ID Telegram yang disediakan dalam rekod tersebut.
 
 Simpan nota kerja pasukan di [Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/): tandakan rekod yang anda gunakan, seperti #146, #188 dan #205, sorot rentetan destinasi yang tepat, dan simpan potongan setiap tindakan yang direkodkan antara dua rekod atau dalam julat masa. Nota dan status mengekalkan semakan pasukan dalam sejarah berasingan yang disahkan, boleh dikenal pasti secara berasingan daripada pemerhatian sumber.
 
@@ -177,6 +177,6 @@ Pelihara keputusan pengesahan sebenar dan artifak asal. Eksport nota ruang kerja
 | --- | --- | --- |
 | Pertikaian pesanan/pembayaran yang diuruskan oleh bot | Pengumuman entri → pratonton pautan yang disimpan → parameter permulaan bot → versi mesej dan papan kekunci → resit panggilan balik panel → susulan peribadi/kumpulan | Garis masa tawaran/tindak balas yang diperhatikan dan sumber yang disahkan; pautan pembayaran sahaja tidak membuktikan pembayaran |
 | Mesej yang dipadam selepas insiden | Semua sembang terjejas → asal/suntingan yang disimpan → hasil pemadaman atau ketiadaan semasa semakan semula → media yang dipelihara → liputan dan perspektif akaun lain | Versi yang disimpan dan selang masa tidak diketahui secara eksplisit; tiada pelaku pemadaman rekaan |
-| Seorang peserta menukar nama di merata sembang | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Garis masa aktiviti akaun Telegram dengan pautan ke rekod sumbernya |
+| Seorang peserta menukar nama di merata sembang | ID penghantar numerik → sejarah nama/nama pengguna → balasan → sembang lain yang diperhatikan → destinasi/fail yang dirujuk | Garis masa aktiviti akaun Telegram dengan pautan ke rekod sumbernya |
 
 [Rujukan pengumpulan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/) · [Pengesahan profil orang](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#people-profiles) · [Penyerahan bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#investigation-handoff) · [Pengesahan selesai](https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/)

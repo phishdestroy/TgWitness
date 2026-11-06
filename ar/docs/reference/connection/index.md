@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/conne
 
 المصادقة، ومجموعات البروكسي التلقائية، وأنماط عناوين IP، وسياسة الحل البديل، والطلبات الخارجية، والتخزين السري.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [النشر والاستعادة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![النشر والاستعادة](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 يصف هذا المستند سلوك TgWitness 0.8.0 وحدوده. تعتبر المصادقة، والوصول إلى المصدر، والاتصال بالشبكة، واكتمال التقاط البيانات حالات منفصلة. للاطلاع على خطوات تسجيل الدخول، وتنسيقات الملفات، والحسابات المتعددة، ابدأ بـ [«الحسابات وتنسيقات الجلسات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/)». وللاطلاع على سياسات الأحداث وسلوك إعادة التشغيل، انظر [«كيفية عمل عملية التجميع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)».
 
@@ -123,19 +123,19 @@ MTProto هو بروتوكول Telegram. Telethon هي مكتبة عميل لغة
 
 ****معلمات التجميع التلقائي****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+تحت **Parameters → Automatic MTProxy**، قم بتكوين عتبة الفشل، وفترة التهدئة، والتناوب المخطط، ومشاركة الوكيل، وتأخير اللجوء البديل المسموح به.
 
 | التحكم | الافتراضي |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| يتم قطع الاتصال قبل الاستبدال | 3 خلال 10 دقيقة |
+| عدد الوكلاء الذين تم تجربتهم في كل محاولة اتصال | 3 |
+| الراحة الأولى / القصوى بعد الفشل | 10 دقيقة / 6 ساعة |
+| التناوب المخطط له | معطل؛ قم بتشغيله في حالة الفشل |
+| عدد الحسابات لكل وكيل | 0: يُفضل إنشاء مدخلات منفصلة، ومشاركتها عند الحاجة. اضبط 1 على الانتظار حتى يتم إنشاء مدخل حصري. |
+| الفترة الزمنية المسموح بها قبل اللجوء المباشر إلى الخطة البديلة | محضر اجتماع 10؛ لا يزال إخفاء العنوان يرفض Direct |
+| تحديث الخلاصة / فحوصات النقل | محاضر 60/10؛ تنطبق قيم مساحة العمل الرئيسية على المجمع المشترك |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+لا تضمن البروكسيات المختلفة وجود عناوين خروج مختلفة. هذه الإعدادات لا تتجاوز حدود Telegram ولا تثبت إخفاء الهوية.
 
 لاستبدال القائمة العامة بكتالوج المشغل الخاص بك، قم بتكوين التجاوز أدناه. يؤدي ذلك إلى تعطيل الاشتراكات الخارجية تمامًا، بما في ذلك عندما تكون مصفوفة `proxies` فارغة.
 

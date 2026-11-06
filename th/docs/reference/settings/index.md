@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/setti
 
 ตัวช่วยตั้งค่า, เป้าหมาย, ระดับอินเทอร์เฟซ, เส้นทางการเชื่อมต่อ และการตั้งค่าที่กลุ่มบัญชีใช้ร่วมกัน
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [เริ่มต้นใช้งาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![เริ่มต้นใช้งาน](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [บัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/) · [การเชื่อมต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/) · [เข้าถึง](https://phishdestroy.github.io/TgWitness/th/docs/reference/access/)
 

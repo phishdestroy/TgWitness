@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# 비밀 채팅: 구현 및 데모
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+별도의 비밀 채팅(Secret Chat) 구현 방식을 이해하고, 가상의 인터페이스를 체험해 보며, 미해결 결함 사항을 검토하십시오.
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**상태 확인일: 6 11월 2026:** 별도의 시크릿 채팅 구현체가 개발 중입니다. 이 구현체는 3d23e52b647b 시점에 공개된 메인 브랜치에 병합되지 않았습니다. `main` at `3d23e52b647b`. 일반 수집기 및 Takeout 내보내기 기능은 비밀 채팅을 수집하지 않습니다. 대화형 웹사이트 시나리오는 가상의 데이터를 사용하여 인터페이스를 시연할 뿐이며, 텔레그램 통신 기능을 지원하지 않습니다.
 
-## Where the implementation lives
+## 구현 위치
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+커밋 `0e60f88e`가 로컬 개발 브랜치 `fix/panel-routes-sessions`의 **Sources → Pseudo-secret에** 추가되었습니다. 확인된 스냅샷은 `bb8788fb685c`입니다. 이 구현에는 `tgwitness/secret_chats.py`, 애플리케이션 라우트, `tgwitness/static/views/secret-chats.js` 및 전용 테스트가 포함됩니다.
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+해당 브랜치의 선택적 `secret-chats` 추가 기능은 [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat)를 사용하며, `d87bf037b90060383c7b704d8a06ebb98c621c6f`에 고정되어 있습니다. 이 라이브러리는 계정의 기존 Telethon 인증을 기반으로 텔레그램의 종단 간 채팅 프로토콜을 구현합니다. 이 라이브러리만 설치한다고 해서 `main`에 누락된 통합 기능이 추가되지는 않습니다.
 
-## What the development interface does
+## 개발자 인터페이스의 기능
 
-| 조치 | Recorded behavior |
+| 조치 | 기록된 동작 |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| 사용자 이름 또는 사용자 ID로 채팅을 시작하세요 | 요청을 보내면, 상대방이 이를 수락해야 합니다. |
+| 수신 요청 수락 | TgWitness는 해당 채팅의 수신 엔드포인트가 됩니다. 자동 수락은 별도의 설정이며, 기본적으로 비활성화되어 있습니다. |
+| 메시지 보내기 또는 받기 | 발신 또는 수신 `secret_chat.message` 레코드를 추가하고 스레드에 표시하십시오. |
+| 첨부 파일 수신 | 이를 복호화하고, SHA-256에 따라 바이트를 저장한 후 `secret_chat.file`을 기록하십시오. |
+| 타이머 또는 삭제 알림 수신 | 알림을 기록하고 이전에 캡처된 콘텐츠를 보존하십시오. |
+| 대화 내용 검토 | 메시지, 파일, 알림 및 주요 시각화 자료를 표시하십시오. 열린 탭은 4초마다 새로 고침됩니다. |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+이 통합 기능이 포함된 개발 빌드에서 운영자는 선택한 계정에 대해 모듈을 활성화하고 연결합니다. 시작, 수락 및 전송을 위해서는 상호작용 권한이 필요하며, 해당 계정의 읽기 전용 보호 기능이 해제되어 있어야 합니다. 다른 참가자는 새로운 발신 채팅을 수락해야 합니다. 이러한 제어 기능은 위 버전의 공개된 애플리케이션에는 포함되어 있지 않습니다.
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+이 TgWitness 세션에서 생성되거나 수락된 채팅만 포함됩니다. 휴대폰에 이미 존재하는 비밀 채팅은 해당 기기에 그대로 남아 있습니다. 세션을 가져와도 해당 채팅의 별도 암호화 키는 제공되지 않습니다. 비밀 채팅의 키 자료와 카운터는 작업 공간 볼트에 저장되며, 보존된 메시지와 복호화된 파일은 일반적인 작업 공간 저장소 보호 정책을 따릅니다.
 
-## Website demonstration
+## 웹사이트 데모
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+웹사이트의 **비밀 채팅 체험(Try Secret Chat)** 시나리오는 가상의 대화를 보여줍니다. 이를 통해 독자는 요청을 시작하고, 요청 수락을 시뮬레이션하며, 샘플 메시지를 보내고, 사전 작성된 답장과 파일을 수신하고, 타이머 및 삭제 알림을 확인할 수 있습니다. 수신된 요청을 수락할 수도 있습니다. 제어 항목에는 시뮬레이션된 상대방의 행동이 명확하게 표시되어 있습니다.
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+이 시나리오는 브라우저 메모리에서 실행됩니다. 재설정하거나 새로 고침하면 내용이 지워집니다. 이 시나리오는 로그인하지 않으며, 텔레그램에 접속하지 않고, 실제 암호화 키를 생성하지 않으며, 서명된 샘플 다운로드 파일을 변경하지 않습니다. 표시되는 메시지는 서명된 증거가 아닙니다. 이 시나리오는 의도된 상호 작용을 시연하는 것이며, 개발 구현이 준비되었음을 보증하지는 않습니다.
 
-## Checks and outstanding defects
+## 검토 사항 및 미해결 결함
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+기존의 5가지 테스트는 암호화된 키의 지속성, 수명 주기 및 메시지 기록, 수신 허용 정책, 읽기 전용 전송 및 첨부 파일 내보내기를 다룹니다. 이 테스트들은 11월 6일 검토 당시 고정된 라이브러리를 대상으로 통과했습니다. 세 가지 추가적인 합성 검사에서 동일한 스냅샷에서 결함이 재현되었습니다:
 
-| Finding | Consequence |
+| 결과 | 결과 |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| `read_only`를 우회하는 클로징 | 닫기 경로는 상호 작용을 차단해야 할 때 원격 작업을 수행할 수 있습니다. |
+| 중복 검출은 최근 500건의 기록만 검색합니다. | 이전 리플레이는 재시작 후 중복본을 생성할 수 있습니다. |
+| 첨부 파일 다운로드에 실패하면 대기 중인 항목이 삭제됩니다. | 일시적인 오류가 발생하면 재시도 작업이 손실됩니다. |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+다음은 공개된 결함으로, [발표된](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)감사 보고서에도 기록되어 있습니다. 통과한 5개의 테스트는 이러한 오류를 다루지 않습니다. 이번 검토에서는 합성 작업 공간과 모의 텔레그램 작업을 사용했으며, 실제 핸드셰이크를 재현하거나 운영 환경 배포에 대한 적합성을 검증하지는 않았습니다.

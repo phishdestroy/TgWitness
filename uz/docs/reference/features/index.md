@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/featu
 
 Joriy yig'ish modeli, ko'p hisobli ish jarayonlari, eksportlar va TgWitness'ning operatsion chegaralari.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Loyiha havolasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![Loyiha havolasi](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness ulanilgan hisoblarga kirish mumkin bo'lgan Telegram suhbatlarini saqlaydi, kuzatilgan o'zgarishlarni qayd etadi va tekshirilishi mumkin bo'lgan eksportlarni tayyorlaydi. Ushbu qo'llanma to'plash modelini, joriy ish jarayonlarini va ularning chegaralarini tasvirlaydi.
 
-**On this page**
+**Ushbu sahifada**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#stable-release-criteria)
+- [Mustaqil ilova](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#standalone-application)
+- [Hamkorlikdagi tergovlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#shared-investigations)
+- [Arxivlash vositalari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#archive-tools)
+- [Ixtiyoriy qo'shimchalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#optional-extras)
+- [Protokol va xususiy manbalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#protocol-and-private-sources)
+- [Bir nechta akkauntlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#multiple-accounts)
+- [Yozib olish va mualliflikni aniqlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#capture-and-attribution)
+- [Sig'im va Telegram chegaralari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#capacity-and-telegram-limits)
+- [Ishonchlilik va tiklash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#reliability-and-recovery)
+- [Dalil modeli](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#evidence-model)
+- [Eksport, joylashtirish va topshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#export-deployment-and-handoff)
+- [Barqaror chiqarish mezonlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/#stable-release-criteria)
 
 ## Mustaqil ilova
 
@@ -93,9 +93,9 @@ Manbalar har bir akkaunt bo'yicha yangi xabarlar, tahrirlar, o'chirishlar, munos
 | Ma'mur harakatlari | Mavzuga oid yetkazilgan yangilanishlar va admin-log snapshoti kanal/superguruh chat eksportlarida | Eksport mavjud bo'lganda eksport qilayotgan admin akkauntining logini o'qiydi; admin-logni uzluksiz so'rov qilish ushbu yo'ldan tashqarida |
 | Ilova | Asl versiya tavsifi, yuklab olingan baytlar/SHA-256 va urinish natijalari | Yo'qolgan fayl tiklanmasligi mumkin; eng so'nggi versiya o'rniga qo'yilmaydi |
 | Tarix | Joriy ko'rinadigan xabarlarning aniq snapshoti | Barcha tahrirlar yoki o'chirilgan kontentni qayta tiklamaydi |
-| Yig'uvchi jarayon | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) |
+| Yig'uvchi jarayon | Boshlash/to'xtatish, yurak urishi, xatolar, sozlamalar, doira va imzolangan ishga tushirish kvitasi | Mahalliy inventarizatsiya; GitHub va TDX [mustaqil muhit tekshiruvlarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) qo'shadi |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+Interfeys manba voqeasida taqdim etilgan hisob nomini ko'rsatadi va kuzatilgan nomlar hamda foydalanuvchi nomlarini saqlaydi. Voqea o'z ijrochisini ko'rsatmasa, hisobot bu maydonni aniqlamay qoldiradi.
 
 ## Sig'im va Telegram cheklovlari
 

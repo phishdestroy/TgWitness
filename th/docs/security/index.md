@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/security/
 
 คอมพิวเตอร์หรือเซิร์ฟเวอร์ของคุณ
 
-**Panel**127.0.0.1:8787 · bearer token
+**Panel**127.0.0.1:8787 · โทเค็น bearer
 
 **Collector**ใช้ Telegram client หนึ่งตัวต่อพื้นที่ทำงาน
 
 ไดเรกทอรีข้อมูล
 
-**บันทึก**SQLite · hash-chained · signed
+**บันทึก**SQLite · เชื่อมต่อด้วยแฮช · ลงนาม
 
 **สื่อ**ไฟล์ที่มีชื่อตาม SHA-256
 

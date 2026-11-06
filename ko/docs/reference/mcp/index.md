@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/
 
 만료 및 취소 가능한 액세스 권한을 통해 MCP 클라이언트를 선택한 작업 공간 및 채팅에 연결합니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [아카이브 연동](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![아카이브 연동](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 분석가 클라이언트를 선택한 워크스페이스 및 채팅에 연결합니다. TgWitness는 **패널 프로세스 내 `/mcp`에서 Streamable HTTP를** 제공합니다. 각 연결에는 고유한 토큰, 만료 시간 및 허용된 도구가 있습니다. MCP는 텔레그램 메시지를 전송하거나, 설정을 변경하거나, 서명된 저널을 수정할 수 없습니다. 동일한 연결을 [명령줄에서도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/)사용할 수 있습니다.
 
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**이 페이지에서**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#connect-your-client)
+- [설치 및 확인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#install-and-check)
+- [연결 요청](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#issue-a-connection)
+- [클라이언트 연결](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#tools-and-boundaries)
+- [도구 및 한계](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/#tools-and-boundaries)
 
 ## 설치 및 확인
 
@@ -57,12 +57,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/
 
 | 클라이언트 | 구성 | 연결 |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, Bearer 헤더 |
+| Claude 코드 | `.mcp.json` | HTTP, `type: "http"`, Bearer 헤더 |
 | Claude Desktop | `claude_desktop_config.json` | 로컬 stdio 브리지 |
 | Cursor | `.cursor/mcp.json` | 환경 변수 헤더를 사용하는 HTTP |
-| VS Code Local | `.vscode/mcp.json` | 비밀번호 `promptString` 입력을 사용하는 HTTP |
+| VS Code 로컬 | `.vscode/mcp.json` | 비밀번호 `promptString` 입력을 사용하는 HTTP |
 | Windsurf | `mcp_config.json` | Bearer 헤더 플레이스홀더를 사용하는 HTTP |
-| 기타 클라이언트 | URL 및 Authorization 헤더 | Streamable HTTP |
+| 기타 클라이언트 | URL 및 Authorization 헤더 | 스트리밍 가능한 HTTP |
 
 TgWitness는 OAuth 검색(discovery) 없이 Bearer 토큰을 사용합니다. 원격 커넥터에 OAuth가 필요한 클라이언트의 경우 로컬 stdio 브리지를 사용하세요. VS Code의 경우 입력 변수는 **Local** 하네스에 적용되며 Copilot 세션으로 전달되지 않습니다. 구성 참고 자료: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

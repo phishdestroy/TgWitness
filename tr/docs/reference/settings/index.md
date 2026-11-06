@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/setti
 
 Kurulum sihirbazı, hedefler, arayüz seviyeleri, bağlantı yolları ve bir hesap grubu tarafından paylaşılan ayarlar.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Başlangıç](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Başlangıç](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Hesaplar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) · [Bağlantı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/) · [Erişim](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/)
 

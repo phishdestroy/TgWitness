@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/conne
 
 প্রমাণীকরণ, স্বয়ংক্রিয় প্রক্সি পুল, আইপি মোড, ফ্যালব্যাক নীতি, বাহ্যিক অনুরোধ এবং গোপন সঞ্চয়।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [নিয়োগ এবং পুনরুদ্ধার](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![নিয়োগ ও পুনরুদ্ধার](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 এই নথিটি TgWitness 0.8.0 এর কার্যপ্রণালী এবং এর সীমাবদ্ধতা বর্ণনা করে। প্রমাণীকরণ, উৎস অ্যাক্সেস, নেটওয়ার্ক সংযোগ এবং ক্যাপচার পরিপূর্ণতা পৃথক অবস্থা। সাইন-ইন ধাপ, ফাইল ফরম্যাট এবং একাধিক অ্যাকাউন্টের জন্য, [অ্যাকাউন্ট এবং সেশন ফরম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/) দিয়ে শুরু করুন। ইভেন্ট নীতি এবং পুনরায় শুরু করার কার্যপ্রণালীর জন্য, [সংগ্রহ কীভাবে কাজ করে তা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/) দেখুন।
 
@@ -123,19 +123,19 @@ MTProxy শুধুমাত্র টেলিগ্রাম ট্র্য�
 
 ****স্বয়ংক্রিয় পুল পরামিতিসমূহ****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+**প্যারামিটার → অটোমেটিক MTProxy**এর অধীনে ব্যর্থতার থ্রেশহোল্ড, কুলডাউন, পরিকল্পিত রোটেশন, প্রক্সি শেয়ারিং এবং অনুমোদিত ফলব্যাক বিলম্ব কনফিগার করুন।
 
 | নিয়ন্ত্রণ | ডিফল্ট |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| প্রতিস্থাপনের আগে বিচ্ছিন্নতা | 3ের মধ্যে 10 মিনিট |
+| প্রতি সংযোগ প্রচেষ্টায় প্রক্সি পরীক্ষা করা হয়েছে | 3 |
+| ব্যর্থতার পর প্রথম / সর্বোচ্চ বিশ্রাম | 10 মিনিট / 6 ঘণ্টা |
+| পরিকল্পিত রোটেশন | অক্ষম; ব্যর্থতার সময় সক্রিয় করুন |
+| প্রতি প্রক্সির অ্যাকাউন্ট | 0: পৃথক এন্ট্রি পছন্দ করুন, প্রয়োজনে শেয়ার করুন। 1-কে একচেটিয়া এন্ট্রির জন্য অপেক্ষায় সেট করুন। |
+| অনুমোদিত সরাসরি বিকল্পে যাওয়ার আগে বিলম্ব | 10 মিনিট; লুকান ঠিকানা এখনও সরাসরি অস্বীকার করে |
+| ফিড রিফ্রেশ / পরিবহন যাচাই | 60/10 মিনিট; প্রধান কর্মক্ষেত্রের মানগুলো ভাগ করা পুলে প্রযোজ্য |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+বিভিন্ন প্রক্সি ভিন্ন এক্সিট ঠিকানার নিশ্চয়তা দেয় না। এই সেটিংস টেলিগ্রামের সীমা অতিক্রম করে না বা অজ্ঞাতনামা প্রমাণ করে না।
 
 পাবলিক তালিকা আপনার নিজস্ব অপারেটর ক্যাটালগ দিয়ে প্রতিস্থাপন করতে, নিচের ওভাররাইড কনফিগার করুন। এটি বাহ্যিক সাবস্ক্রিপশন সম্পূর্ণরূপে নিষ্ক্রিয় করে, এমনকি যখন এর `proxies` অ্যারে খালি থাকে তখনও।
 

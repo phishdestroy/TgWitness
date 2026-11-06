@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/
 
 یک کلاینت MCP را به فضاهای کاری و چت‌های منتخب با دسترسی منقضی‌شونده و قابل فسخ متصل کنید.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [یکپارچه‌سازی‌های آرشیو](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![یکپارچه‌سازی‌های آرشیو](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 یک کلاینت تحلیلگر را به فضاهای کاری و چت‌های منتخب متصل کنید. TgWitness **در فرآیند پنل، HTTP قابل جریانی‌سازی را در `/mcp`** ارائه می‌دهد. هر اتصال دارای توکن، تاریخ انقضا و ابزارهای مجاز خاص خود است. MCP نمی‌تواند پیام‌های تلگرام ارسال کند، تنظیمات را تغییر دهد یا دفترچه یادداشت امضا شده را اصلاح کند. همین اتصالات با [خط فرمان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/)نیز کار می‌کنند.
 
 [راهنمای گردش کار](https://phishdestroy.github.io/TgWitness/docs/archive/) · [ویکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**در این صفحه**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#tools-and-boundaries)
+- [نصب و بررسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#install-and-check)
+- [ایجاد یک اتصال](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#issue-a-connection)
+- [کلاینت خود را وصل کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#connect-your-client)
+- [تونل کلودفلر](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#cloudflare-tunnel)
+- [ابزارها و مرزها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/#tools-and-boundaries)
 
 ## نصب و بررسی
 
@@ -57,12 +57,12 @@ MCP extra از [SDK رسمی MCP Python](https://github.com/modelcontextprotocol
 
 | کلاینت | پیکربندی | اتصال |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP، `type: "http"`، هدر bearer |
-| Claude Desktop | `claude_desktop_config.json` | پل محلی stdio |
+| کد کلاود | `.mcp.json` | HTTP، `type: "http"`، هدر bearer |
+| کلود دسکتاپ | `claude_desktop_config.json` | پل محلی stdio |
 | Cursor | `.cursor/mcp.json` | HTTP با یک هدر متغیر محیطی |
-| VS Code Local | `.vscode/mcp.json` | HTTP با یک ورودی رمز عبور `promptString` |
+| کد محلی VS Code | `.vscode/mcp.json` | HTTP با یک ورودی رمز عبور `promptString` |
 | Windsurf | `mcp_config.json` | HTTP با یک متغیر جایگزین هدر bearer |
-| سایر کلاینت‌ها | URL و هدر Authorization | Streamable HTTP |
+| سایر کلاینت‌ها | URL و هدر Authorization | HTTP قابل پخش |
 
 TgWitness از توکن‌های bearer بدون اکتشاف OAuth استفاده می‌کند. برای کلاینت‌هایی که اتصال‌دهنده راه‌دور آن‌ها نیازمند OAuth است، از پل محلی stdio استفاده کنید. برای VS Code، متغیرهای ورودی روی بستر **Local** اعمال می‌شوند و به نشست‌های Copilot ارسال نمی‌گردند. مراجع پیکربندی: [Claude Code](https://code.claude.com/docs/en/mcp)، [Cursor](https://prod.cursor.com/docs/mcp)، [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 
@@ -74,7 +74,7 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 
 از پایتون محلی کلاینت که افزونه MCP روی آن نصب شده است استفاده کنید. متغیر `TGWITNESS_MCP_TOKEN` را در محیط حفاظت‌شده آن تنظیم کنید. اطلاعات احراز هویت را خارج از آرگومان‌های دستور و URLها نگه دارید. دستور `tgwitness-mcp` همان نقطه ورود است. ماژول قدیمی `tgwitness.mcp_bridge` و نام `TGWITNESS_ARCHIVE_TOKEN` به‌عنوان مسیرهای سازگاری همراه با یک هشدار باقی می‌مانند؛ پیکربندی‌های جدید از `mcp_server` و `TGWITNESS_MCP_TOKEN` استفاده می‌کنند.
 
-## Cloudflare Tunnel
+## تونل کلودفلر
 
 مسیر `/mcp` پنل را فوروارد کرده و هدر bearer را حفظ کنید. باز کردن تنظیمات MCP به‌عنوان مدیر، مبدأ (Origin) فعلی پنل را برای این نوبت اجرا ثبت می‌کند. برای داشتن یک آدرس پایدار که بلافاصله پس از راه‌اندازی مجدد در دسترس باشد، پیش از شروع پنل، متغیر `TGWITNESS_PUBLIC_URL` را با مبدأ HTTPS پنل پیکربندی کنید. هدرهای دلخواه Host و فورواردشده، یک آدرس مورد اعتماد را ثبت نمی‌کنند. بررسی‌های Host و Origin، مبدأهای مرورگر نامرتبط را رد می‌کنند. پاسخ‌ها از `Cache-Control: no-store` استفاده می‌کنند؛ مقادیر احراز هویت هرگز در گزارش‌ها (لاگ) ثبت نمی‌شوند.
 

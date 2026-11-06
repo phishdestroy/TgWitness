@@ -53,7 +53,7 @@ Le panneau complet avec les options avancées est déployé. Aucune information 
 | --- | --- |
 | Point d'extrémité | URL du stockage, sans chemin de bucket ni identifiants. Exemple : `https://s3.example.invalid`. |
 | Région | Ce que demande votre fournisseur. Par défaut `us-east-1`. |
-| Bucket | Un bucket existant où vous pouvez écrire. Exemple : `example-case-backup`. |
+| Compartiment | Un bucket existant où vous pouvez écrire. Exemple : `example-case-backup`. |
 | Dossier dans le compartiment | Préfixe, par défaut `tgwitness`. Un préfixe par espace s’y ajoute. |
 | Identifiant de la clé d'accès / Clé d'accès secrète | Les deux ensemble, stockées dans le coffre. Laissez-les vides plus tard pour les conserver. |
 | Adresses au format « path » | Activé : `endpoint/bucket`. Désactivé : `bucket.endpoint`. Selon le fournisseur. |

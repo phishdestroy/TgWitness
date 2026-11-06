@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/accou
 
 ส่งออกข้อมูลที่บัญชีสามารถอ่านได้ในขณะนี้: ขอบเขตการเข้าถึง, งานที่สามารถต่อได้, ไฟล์เก็บถาวรที่ลงนามแล้ว และสำเนาที่แชร์ในโหมดย่อ
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [หลักฐานและการตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![หลักฐานและการตรวจสอบ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 การส่งออกบัญชีจะจองบัญชีนั้นไว้แต่เพียงผู้เดียว ก่อนเริ่มหรือทำต่อ ให้หยุดการเฝ้าติดตามหรืองานเก็บข้อมูลอื่นชั่วคราวอย่างชัดเจน แอปจะไม่หยุดงานเหล่านั้นให้อัตโนมัติ
 
@@ -16,11 +16,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/accou
 
 กระบวนการทำงานนี้ส่งออกข้อมูลที่บัญชีที่เชื่อมต่อสามารถเข้าถึงได้ในขณะนี้ การตั้งค่าเริ่มต้นใช้ [Telegram Takeout](https://core.telegram.org/api/takeout); นี่ไม่ใช่การสำรองข้อมูล Telegram ที่ไม่สามารถเข้าถึงได้หรือถูกลบไปแล้ว การสนทนาลับ ประวัติการสนทนาที่ไม่สามารถเข้าถึงได้ และการแก้ไขก่อนหน้านี้จะไม่ถูกกู้คืน Telegram อาจกำหนดช่วงเวลาการรอคอยก่อนที่ Takeout จะเริ่มทำงาน แผงควบคุมจะแสดงช่วงเวลาการรอคอยนั้น; มันจะไม่เปลี่ยนวิธีการส่งข้อมูลโดยเงียบๆ ตัวเลือก API ปกติที่ระบุไว้อย่างชัดเจนมีขอบเขตการบันทึกที่ต่างออกไป และบันทึกหมวดหมู่ที่ไม่ได้รับการสนับสนุน
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout คือ API การส่งออกอย่างเป็นทางการที่ Telegram Desktop ก็ใช้เช่นกัน TgWitness สามารถเขียน JSON ที่เข้ากันได้กับ Desktop ได้โดยตรงจากข้อมูลที่เก็บรวบรวมเอง; ไม่จำเป็นต้องนำเข้า ไฟล์เก็บถาวรของผู้อื่น ID ของการสนทนาและข้อความสามารถเข้าถึงได้ผ่านทั้งสองช่องทาง การสนทนาสาธารณะหรือสิทธิ์ในการส่งต่อไม่รับประกันว่าการส่งออกจะเร็วขึ้นหรือขจัด ความล่าช้าในการอนุมัติของ Takeout ได้ ให้วัดขอบเขตและตั้งค่าสื่อให้เหมือนกันก่อนที่จะเปรียบเทียบความเร็ว
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+สำหรับ ID การสนทนาที่เลือกอย่างชัดเจนสูงสุด20 รายการ การส่งออกผ่าน API ปกติจะแก้ไขเพียร์เหล่านั้น โดยตรงก่อนที่จะพิจารณารายการสนทนาทั้งหมดของบัญชี ดังนั้น ช่องสาธารณะ ที่อ่านได้จึงสามารถส่งออกได้โดยไม่ต้องเข้าร่วม แม้เมื่อช่องนั้นไม่ปรากฏ ในรายการสนทนา เพื่อนที่ไม่ได้เก็บไว้ในแคชจะกลับไปยังรายการปกติ ตัวกรองการเก็บถาวรยังคงถูกบังคับใช้: หาก Telegram ไม่ส่งคืนการสนทนาและ การสนทนาที่เก็บถาวรถูกยกเว้น สถานะการเก็บถาวรที่ไม่ทราบจะถูกบันทึกเป็นการละเว้น Takeout ยังคงใช้ขั้นตอนการจัดการรายการแบบแบ่งช่วง ทั้งสองวิธีจะไม่เข้าร่วมการสนทนาหรือ เปลี่ยนแปลงสิทธิ์การส่งต่อ ใน JSON ที่เข้ากันได้กับเดสก์ท็อป ช่องที่ Telegram ระบุว่า `left` จะปรากฏภายใต้ `left_chats` รวมถึงช่องสาธารณะที่อ่านได้ซึ่งบัญชีนั้นยังไม่ได้เข้าร่วม
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+ทั้ง `FLOOD_WAIT` และ `FLOOD_PREMIUM_WAIT` จะหยุดการส่งคำขอเป็นระยะเวลาที่เซิร์ฟเวอร์กำหนดไว้ ทั้งหมด กำหนดเวลาสิ้นสุดของบัญชีจะถูกเก็บรักษาไว้แม้มีการเชื่อมต่อใหม่หรือรีสตาร์ทระบบ; การรอ ที่สั้นลงในภายหลังไม่สามารถทำให้กำหนดเวลาสิ้นสุดนี้สั้นลงได้ การลองใหม่มีขีดจำกัด การยกเลิกจะรักษาหน้าเว็บที่ถูกปิดผนึกไว้ และข้อมูลรับรอง API จะไม่ถูกหมุนเวียนเพื่อหลีกเลี่ยงข้อจำกัดอัตรา ไม่มีการซื้อบริการ Premium เกิดขึ้น
 
 ## เลือกข้อมูลที่จะเก็บรวบรวม
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 ประวัติรูปโปรไฟล์และสตอรีไม่ถูกเลือกไว้เป็นค่าเริ่มต้น ให้ปิดรูปโปรไฟล์และรายชื่อผู้ติดต่อด้วย เมื่อเคสต้องการเฉพาะข้อความเท่านั้น หากไฟล์แนบหรือข้อมูลเมตาไม่จำเป็น การยกเว้นพวกมันระหว่างการเก็บข้อมูลจะช่วยหลีกเลี่ยงการเก็บสำเนาส่วนตัวเพิ่มเติมในไฟล์ส่งออกนี้
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+ข้อมูลภาพ (payload) ใช้รูปแบบภาพนิ่งที่ระบุในเมตาดาต้าและแมนิเฟสต์แฮช รวมถึงภาพที่มีรูปแบบอวาตาร์แบบเคลื่อนไหว การเคลื่อนไหวนั้นจะไม่ถูกแทนที่ด้วยภาพนิ่งที่เลือกไว้ หากขนาดของข้อมูลภาพสั้นกว่าหรือยาวกว่าขนาดที่สังเกตได้ จะถูกบันทึกเป็นไฟล์แนบที่ล้มเหลว และการเปลี่ยนแปลงรูปแบบระหว่างการต่ออายุการอ้างอิงไฟล์จะถูกปฏิเสธ ความล้มเหลวเหล่านี้ทำให้ไฟล์เก็บถาวรไม่สมบูรณ์ แต่ยังคงรักษาบันทึกข้อความไว้ การตรวจสอบอย่างอิสระยังปฏิเสธไฟล์แนบที่บันทึกไว้ซึ่งความยาวที่ลงนามขัดแย้งกับขนาดหรือรูปแบบที่สังเกตได้ รวมถึงในไฟล์เก็บถาวรที่เก่ากว่า
 
 ## สรุป, ครอบคลุม และตรวจสอบ
 
@@ -97,8 +97,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## การแบ่งปันและการบันทึกข้อมูลบนเซิร์ฟเวอร์
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+เลือกข้อความและไฟล์ที่ผู้รับต้องการ ตรวจสอบสำเนาที่แชร์ทั้งหมด และเก็บรักษาต้นฉบับไว้แยกต่างหาก บันทึกค่าแฮชของไฟล์ ZIP ที่ส่งไป เพื่อให้ผู้รับสามารถระบุและตรวจสอบสำเนาที่ส่งไปนั้นได้อย่างถูกต้อง การใช้ชื่อปลอมจะแทนที่ตัวระบุที่เลือกไว้ ส่วนข้อความและไฟล์ต้นฉบับที่รวมอยู่จะยังคงเป็นส่วนหนึ่งของการตรวจสอบ
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope).
+GitHub Actions รองรับการส่งออกข้อมูลทั้งบัญชีและแชทที่เลือกผ่าน Takeout หรือ API ปกติ รวมถึงบันทึกเหตุการณ์ของแชทเดียว [คู่มือการจับภาพที่โฮสต์ไว้ (hosted capture](https://phishdestroy.github.io/TgWitness/docs/capture/)) อธิบายการตรวจสอบการตั้งค่าและข้อจำกัด120 นาที เพื่อตรวจสอบสำเนาที่แชร์ซึ่งสร้างจากข้อมูลที่จับภาพที่โฮสต์ไว้ ให้ตรวจสอบแฮชของแหล่งที่มาเทียบกับไฟล์เก็บถาวรต้นฉบับ และตรวจสอบการรับรองของไฟล์เก็บถาวรนั้นด้วยการตรวจสอบ[ตามโหมดเฉพาะ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)
 
 [รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/) · [รายงานกรณี](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/)

@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel
 
 패널의 모든 화면: 채팅, 일지, 소스, 내보내기, 추가 기능, 보호 모드 및 코드 확인.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [시작하기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![시작하기](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [초기 설정 및 구성](https://phishdestroy.github.io/TgWitness/ko/docs/reference/settings/) · [계정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) · [내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [사례 보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)
 
 각 화면의 기능, 서명된 저널에 기록되는 내용, 그리고 자세한 가이드의 위치에 대한 설명입니다. 패널에는 한 번에 하나의 작업 공간이 표시됩니다. 즉, 고유한 소스, 저널 및 서명 키를 가진 하나의 텔레그램 계정입니다. 사이드바 상단의 선택기를 통해 작업 공간을 전환할 수 있습니다. 주소에는 작업 공간이 포함되며(`?ws=…`); 주소, 선택기 및 로드된 계정이 일치하지 않으면 작업이 차단된 상태로 유지됩니다.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+[수집 방법 비교 기능을](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) 사용하여 실시간 관찰, 전체 기록, 신규 계정/채팅 내보내기 및 저장된 기록 인계 중에서 선택하십시오. 내보내기 페이지의 다운로드 제어 버튼 위에도 동일한 비교 기능이 포함되어 있습니다.
 
-**On this page**
+**이 페이지에서**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#more-tools)
+- [길 찾기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#find-your-way)
+- [여기서 시작하세요](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#start-here)
+- [채팅](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#chats)
+- [저널](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#journal)
+- [출처](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#sources)
+- [내보내기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#exports)
+- [설정, 계정 및 연결](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#settings-accounts-and-connection)
+- [추가 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
+- [보호 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#protection-modes)
+- [기타 도구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#more-tools)
 
 ## 사용 방법 알아보기
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **소스 유형은** 폴더 및 전체 계정 모드를 채널, 그룹, 비공개 채팅 및 봇으로 제한합니다. **‘자신의 활동’은** 계정의 메시지, 편집 내역 및 답장 키 입력 내역을 추가합니다.
 - **새로운 채팅이나 봇이 나타나면**: 해당 프로필과 선택한 개수만큼의 가장 최근에 표시된 메시지를 저장합니다.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+제한 사항: 공개된 클라우드 수집기는 비밀 채팅을 수신하지 않습니다. 별도의 [의사-비밀(Pseudo-secret) 인터페이스와 해당 데모는](https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/) 개발 현황 및 미해결 결함과 함께 문서화되어 있습니다. TgWitness가 실행 중이지 않을 때는 아무것도 기록되지 않습니다. 재시작 후에는 텔레그램이 여전히 반환하는 내용만 수집하며, 보고서에는 그 간극이 표시됩니다. 채팅 목록 제한(매개변수에서 변경하지 않는 한 1,000개 대화)을 초과한 채팅은 다음에 활성화될 때 추가됩니다. 다른 앱에서 누른 인라인 봇 버튼은 표시되지 않지만, 봇의 응답은 기록됩니다.
 
 ### 적용 대상 채팅
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | 알림 | 문제점, 수정된 메시지 및 일일 요약; 나만의 제어 봇 | [아래](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#notifications) |
 | 증거 및 백업 | 타임스탬프, 추가 증인, 암호화된 외부 백업본 | [아래](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#evidence-and-backups) |
 | 서버 24시간 연중무휴 운영 | 패널에서 생성 및 삭제할 수 있는 SSH 기능이 없는 클라우드 서버 | [높은 신뢰도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/#from-the-panel) |
-| 독립적인 증인 | 서명된 확인 내역이 텔레그램 채널이나 디스코드에 게시됩니다. | [Witness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/) |
+| 독립적인 증인 | 서명된 확인 내역이 텔레그램 채널이나 디스코드에 게시됩니다. | [위트니스](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/) |
 | 코드 검토 | 실행 중인 프로그램을 공개된 GitHub 커밋과 비교합니다. | [아래](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#code-check) |
 
 ### 목표 및 보호 수준

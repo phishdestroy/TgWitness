@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/witne
 
 Vui lòng chạy một bản sao TgWitness với khóa và bot riêng, đăng các điểm kiểm tra đã được ký lên một kênh và đối chiếu các tệp xuất với các điểm kiểm tra đó.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bằng chứng và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bằng chứng & xác minh](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Độ tin cậy cao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/) · [Hướng dẫn sử dụng bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+Một nhân chứng lưu trữ các điểm kiểm tra đã ký riêng biệt với bộ thu thập. Nó kiểm tra chữ ký và tính liên tục của nhật ký của bộ thu thập, ký kết quả bằng khóa riêng của mình, và đăng tải lên một kênh Telegram. Chạy công cụ này trên một máy chủ riêng biệt với quyền truy cập chỉ đọc vào điểm cuối nhân chứng của bộ thu thập.
 
 Sơ đồ quy trình · Trình thu thập → Witness (điểm kiểm tra có chữ ký: số lượng bản ghi + băm tiêu đề); Witness → Sổ nhật ký chứng cứ, khóa riêng; Witness → Kênh Telegram (bài đăng có chữ ký được gửi qua bot riêng của nền tảng này); Tệp ZIP chứa bằng chứng → verify.py; Sổ nhật ký chứng cứ, khóa riêng → verify.py; Kênh Telegram → verify.py (Tính năng xuất dữ liệu từ Telegram Desktop hoặc trang t.me/s) · Trình thu thập · Witness · Sổ nhật ký chứng cứ, khóariêng · Kênh Telegram · Tệp ZIP chứa bằng chứng · verify.py · điểm kiểm tra có chữ ký: số · lượng bản ghi + băm tiêu đề · bài đăng có chữ ký được gửi · qua bot riêng của nền tảng · này · Tính năng xuất dữ liệu từ · Telegram Desktop hoặc trang · t.me/s
 
@@ -23,13 +23,13 @@ Sơ đồ quy trình · Trình thu thập → Witness (điểm kiểm tra có ch
 5. Sổ nhật ký chứng cứ, khóa riêng → verify.py
 6. Kênh Telegram → verify.py (Tính năng xuất dữ liệu từ Telegram Desktop hoặc trang t.me/s)
 
-**On this page**
+**Trên trang này**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#verify)
+- [Những gì công cụ này thu thập được và những gì nó không thu thập được](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [Những gì công cụ này kiểm tra và ghi lại](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#what-it-checks-and-records)
+- [Chạy một witness](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#run-a-witness)
+- [Trang bằng chứng công khai cho một số không gian làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/#verify)
 
 ## Những gì TgWitness cung cấp và những gì nó không cung cấp
 
@@ -48,7 +48,7 @@ Các nhân chứng mới sẽ gửi một thách thức ngẫu nhiên trong mỗ
 Cứ sau mỗi khoảng thời gian (mặc định là 10 phút), công cụ TgWitness sẽ:
 
 1. tự động lấy phần đầu (bộ thu thập không thể đẩy hoặc bỏ qua phần này);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. xác minh chữ ký của người thu thập, khóa người thu thập được ghim (`--collector-fingerprint`, hoặc khóa đầu tiên được phát hiện), một số đếm không giảm và một đầu không thay đổi tại một số đếm không thay đổi. Các bằng chứng bao gồm và nhất quán Merkle xác minh rằng một nhật ký đang mở rộng nối tiếp với điểm kiểm tra được lưu giữ. Một khi các bằng chứng liên tục đã được sử dụng, việc xóa chúng sẽ bị từ chối;
 3. ghi thêm một bản ghi đã được ký vào nhật ký của chính nó: `witness.anchor` với trạng thái `ok`, `key_changed`, `rollback` (số lượng bản ghi ít hơn trước), `fork` (độ dài tương tự, tiêu đề khác ) hoặc `invalid` (câu trả lời không qua được quá trình xác minh), hoặc `witness.no_response` khi bộ thu thập không phản hồi;
 4. đăng kết quả lên kênh, kèm chữ ký, bao gồm cả trường hợp “không có phản hồi” trong khi TgWitness đang hoạt động và có thể kết nối với Bot API. ID bài đăng được ghi lại (`witness.posted`), kể cả khi việc đăng không thành công (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Điều này yêu cầu phải có dấu vân tay chứng nhân được lưu giữ độc lập và một điểm kiểm tra khớp tại chính xác điểm kết thúc của quá trình xuất này. Một điểm kiểm tra chỉ bao phủ một tiền tố trước đó là không đủ. Hãy tạm dừng việc thu thập, để chứng nhân quan sát trạng thái cuối cùng, và tiến hành xuất trước khi có thêm các ghi chép vào nhật ký; nếu nhật ký thay đổi, hãy lưu giữ một điểm kiểm tra khác và xuất trạng thái đó. Chỉ riêng điểm kiểm tra sau đó không thể xác minh hàm băm cuối cùng của một tệp xuất ngắn hơn. Khi cờ `--channel` cũng được cung cấp, việc thiếu các bài đăng được tuyên bố hoặc tập kết quả khớp trống sẽ khiến quá trình này không vượt qua được kiểm tra nghiêm ngặt này. Nếu không có cờ này, các kiểm tra tính toàn vẹn thông thường vẫn báo cáo các bản ghi chưa được chứng kiến mà không từ chối một kho lưu trữ vốn vẫn còn nguyên vẹn.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+Giữ nhật ký chứng nhân và khóa được ghim của nó riêng biệt. Kiểm tra trực tuyến xác minh tính liên tục giữa các điểm kiểm tra; xác minh ngoại tuyến so sánh từng điểm kiểm tra được lưu giữ với bản xuất. Các đầu máy cũ không có bằng chứng tính liên tục vẫn giữ lại so sánh ngoại tuyến và được báo cáo mà không cần xác minh tính liên tục trực tuyến. Báo cáo liệt kê thời gian ngừng hoạt động của chứng nhân và các lần xuất bản thất bại theo khoảng thời gian.
 
-### Daily seals and unavailable timestamp calendars
+### Con dấu hàng ngày và lịch dấu thời gian không khả dụng
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+Witness đóng dấu ranh giới nhật ký của ngày UTC trước đó và gửi hàm băm của con dấu đã ký đó đến OpenTimestamps. Một bản gửi lịch là bằng chứng đang chờ xử lý; chỉ các cam kết Bitcoin đã được kiểm tra độc lập mới nhận được xác nhận trong trình xác minh.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+Nếu tất cả các lịch đều thất bại, con dấu đã ký và nỗ lực không thành công vẫn được lưu lại trong nhật ký. Quy trình bảo trì hàng giờ sẽ thử lại bản ghi gốc đó, kể cả sau khi khởi động lại hoặc thay đổi ngày. Nó quét tối đa 32 con dấu, gửi tối đa hai bản nộp còn thiếu và dành tối đa 60 giây cho các lần thử lại mỗi lần quét. Một con trỏ liên tục luân phiên qua các con dấu cũ hơn. Các bản nộp được giữ lại tuân theo quy trình nâng cấp bằng chứng hiện có.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+Việc thử lại không ghi đè lên con dấu, không thay đổi ngày ban đầu của nó hoặc khẳng định rằng lịch đã nhận được nó sớm hơn. Một cam kết Bitcoin muộn hơn vẫn là một xác nhận bên ngoài muộn hơn. Các bằng chứng còn thiếu vẫn là `none`; các bằng chứng đang chờ xử lý vẫn là `pending` cho đến khi người xác minh kiểm tra chúng một cách độc lập.

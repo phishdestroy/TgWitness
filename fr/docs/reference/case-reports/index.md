@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-
 
 Filtres de rapports, huit modèles, préréglages de contenu, historiques des modifications enregistrés et évaluation incluse dans les exportations signées.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Enquête](https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Enquête](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Transformez les observations sélectionnées en un compte rendu lisible de l’affaire : son objet, sa portée, les modifications enregistrées, les graphiques, les conclusions et les références aux sources. Chaque rapport offre au destinataire un moyen de vérifier les éléments fournis et d’examiner l’étendue de la collecte .
 
@@ -24,7 +24,7 @@ Ouvrez « **Exports » → « Configure » et « Preview** ». Parcourez « **Da
 
 L’aperçu des données prend en compte l’intégralité du préfixe du journal stable, et non un échantillon initial. Seules les lignes d’échantillon affichées et les longues listes sont limitées ; leur nombre omis est indiqué. Une exportation ultérieure effectue un nouvel instantané stable, de sorte que la collecte en cours peut augmenter ces chiffres. La portée, les nombres et l’identité de la source sont inclus dans le rapport signé. L’ouverture ou la prévisualisation du formulaire ne l’enregistre pas.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Conseils relatifs à la juridiction.** Sous Détails du document, ouvrez **Conseils relatifs à la juridiction · facultatif** pour choisir une juridiction et une procédure civile/commerciale ou pénale. L’annexe contient la base juridique, les liens vers les sources, les notes de préparation et l’état d’avancement des recherches. Les résumés et explications en langue locale concernant les garanties de collecte sont facultatifs. Aucune juridiction n’est sélectionnée par défaut. Ces choix relèvent de l’espace de travail et sont exclus des configurations de mise en page enregistrées et des paramètres par défaut implicites de partage et de copie. Voir [paramètres par défaut, rapports pris en charge et limites de recherche](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Choisissez la version destinée au destinataire.** Les graphiques et la transcription utilisent les enregistrements sélectionnés. L’intégrité, la conservation et la couverture décrivent l’intégralité du journal source. Le fichier ZIP de preuves contient ses enregistrements originaux et ses pièces jointes. Optez pour [un transfert allégé](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#handover-extract) lorsque le destinataire ne doit recevoir que les données sélectionnées et autorisées.
 
@@ -42,7 +42,7 @@ Huit mises en page sont disponibles pour les rapports HTML (journal et conversat
 | --- | --- |
 | Classique | Un dossier traditionnel avec une couverture sombre et des sections numérotées. |
 | Rédaction | Une page de titre encadrée avec des caractères à empattement, de larges marges et une barre de chapitres étroite. |
-| Briefing | Une couverture compacte avec un dos bleu marine, des titres courts et des tableaux rapprochés. |
+| Note d’information | Une couverture compacte avec un dos bleu marine, des titres courts et des tableaux rapprochés. |
 | Analyses | Une page de garde de type questionnaire, des tableaux modulaires et des figures en police à espacement fixe. |
 | Technique | Un registre ligné, une barre de référence numérotée et des tableaux de comparaison précis. |
 | Présentation générale | Une couverture panoramique, une mise en page aérée et des chiffres récapitulatifs bien mis en évidence. |
@@ -60,7 +60,7 @@ Ces deux modèles comprennent un journal lisible sans JavaScript. Pour les expor
 | Table des matières prédéfinie | Inclus par défaut |
 | --- | --- |
 | Dossier d'affaire | Activité, heures d’observation, participants, discussions et transcription de l’enregistrement. |
-| Briefing | Un aperçu des activités sans classement des participants ni transcription. |
+| Note d’information | Un aperçu des activités sans classement des participants ni transcription. |
 | Bilan des activités | Activités, heures d’observation, participants, discussions et composition, avec références aux sources et chiffres exacts. |
 | Rapport personnalisé | Votre propre combinaison de graphiques, de transcriptions et d'aperçus. |
 
@@ -90,18 +90,18 @@ Un intervalle vide signifie qu’aucune observation n’est incluse ; consultez 
 
 Lorsqu’il est inclus, le fichier `analytics.json` est protégé par les hachages signés de l’archive. Le fichier journal `report.json` intègre le même agrégat sélectionné. La vérification de la signature détecte les octets modifiés. Pour vérifier les chiffres, recalculez les agrégats du journal à l’aide de `report_analytics.Analytics` et `selected`, ou les agrégats d’instantanés à l’aide de `snapshot_analytics.collect` et `project`.
 
-### Anomaly indicators
+### Indicateurs d'anomalies
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Aperçu.** Les rapports de preuves ajoutent une section **Indicateurs d'anomalies** calculée par les processeurs enregistrés (`tgwitness/metrics/`, un fichier par métrique). Le rapport nomme chaque processeur ayant exécuté le calcul avec sa version, et affiche sa méthode sous son tableau, afin que le calcul puisse être répété à partir de `events.jsonl` avec `tgwitness.metrics.run`.
 
-| Processor | Ce qu’il présente |
+| Processeur | Ce qu’il présente |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | Nouveaux contributeurs et messages par jour UTC. Un signalement nécessite au moins cinq nouveaux contributeurs et trois fois leur médiane, le volume de messages ne devant pas dépasser 1.5 fois sa médiane. La référence utilise au moins sept jours d'observation parmi les 14 derniers jours calendaires, après sept jours de préchauffage. |
+| `service_vs_message_ratio` v1 | Les numéros des messages enregistrés sont distincts pour chaque discussion, tout comme la part utilisée par les messages de service. Ce document décrit un système de numérotation ; il n'explique pas l'absence d'un numéro en particulier. |
+| `join_leave_per_month` v1 | Inscriptions, départs, suppressions ou bannissements par mois, à raison d’un par personne, par discussion, par modification et par jour. |
+| `pinned_per_month` v1 | Messages de service épinglés, notifications de désépinglage et messages épinglés ajoutés ou supprimés entre deux instantanés de l'état du chat, par mois. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Paramètres → Métriques du rapport** sélectionne les processeurs et le nombre de lignes affichées, y compris dans les rapports filtrés. Les tableaux quotidiens et mensuels affichent les lignes récentes, tandis que les tableaux de répartition par service classent les discussions en fonction du nombre de messages enregistrés. Les totaux s'appliquent à chaque ligne.
 
 À partir d'un extrait du code source, créez les huit modèles énumérés ci-dessus à partir du même journal fictif :
 
@@ -153,7 +153,7 @@ Vérifiez chaque point séparément, en vous référant à la couverture de coll
 4. Conservez les fichiers ZIP d’origine et leurs hachages. Enregistrez chaque détenteur, transfert, date et objet. Conservez les déclarations attribuées aux opérateurs et les notes de dossier qui les accompagnent.
 5. Pour les messages vocaux confidentiels, conservez et vérifiez de manière indépendante la citation, la contestation, la chaîne de certificats Intel, les mesures, la source exacte et les conditions de gestion des clés. Conservez le résultat de la vérification de l’attestation avec les artefacts examinés.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Voir « [Portée de la vérification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) » pour les contrôles relatifs à l'acquisition, à l'intégrité des archives, à la chronologie et à la couverture de la collecte dans chaque mode.
 
 ## Révision par le destinataire
 

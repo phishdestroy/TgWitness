@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-
 
 बुकमार्क, सटीक हाइलाइट्स, एक्शन स्लाइस, चर्चाएँ, स्कोप्ड एक्सेस और केस बोर्ड द्वारा उपयोग की जाने वाली हस्ताक्षरित एनोटेशन इतिहास।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [जांच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![जांच](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 केस बोर्ड एक जांच टीम को सहेजी गई सामग्री का एक साझा कार्यशील दृश्य प्रदान करता है। किसी अवलोकन को बुकमार्क करें, एक सटीक अंश को हाइलाइट करें, क्रियाओं की एक श्रृंखला सहेजें, और अपने सहकर्मियों के साथ चर्चा करें। कार्ड अपने स्रोत संदर्भों और हस्ताक्षरित संशोधन इतिहास को बनाए रखते हैं। टीम की टिप्पणियाँ कार्यक्षेत्र में रहती हैं, जो मूल टेलीग्राम अवलोकनों से अलग पहचान योग्य होती हैं।
 
@@ -14,13 +14,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-
 
 ![कृत्रिम जांच फ़ीड](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 
-**On this page**
+**इस पृष्ठ पर**
 
-- [Work with a case](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#work-with-a-case)
-- [Permissions](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#permissions)
-- [Stored contracts](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#stored-contracts)
-- [API and exports](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#api-and-exports)
-- [Operating limits](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#operating-limits)
+- [एक मामले के साथ काम करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#work-with-a-case)
+- [अनुमतियाँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#permissions)
+- [संग्रहीत अनुबंध](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#stored-contracts)
+- [एपीआई और एक्सपोर्ट्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#api-and-exports)
+- [संचालन सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/#operating-limits)
 
 ## एक मामले के साथ काम करें
 

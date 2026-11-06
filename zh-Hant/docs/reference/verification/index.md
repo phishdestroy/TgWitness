@@ -4,91 +4,91 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 Telegram 即時測試、自動化檢查、瀏覽器檢查，以及尚未經核實的內容。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [證據與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![證據與驗證](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
-**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+**更新於 6 年 11 月 2026 日。**結果與每次執行所記錄的修訂版本、環境及 工作負載相關聯。[「當前功能](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md)」描述了 可用的工作流程；本頁面記錄了實際已驗證的內容。
 
-[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+[效能圖表](https://phishdestroy.github.io/TgWitness/docs/validation/) · [經簽署的英文審計報告](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [可下載的測量數據](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
 
-| Latest evidence | 結果 | 範圍 |
+| 最新證據 | 結果 | 範圍 |
 | --- | --- | --- |
-| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
-| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
-| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
-| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
-| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+| 版本審計 · 11 月 6 日 | 1,461 項核心測試通過；37 項平台測試跳過 | 來源 `92e539af40d8`；保留已公開的調查結果 |
+| 最新匯出檔 · 11 月 6 日 | 127.713 和 141.781 筆/秒，完整週期 | 每台伺服器限兩個帳戶；文字與元資料透過 WARP 傳輸 |
+| 保留的存檔 · 11 月 6 日 | 48 個檔案；已驗證 3,598,381 筆記錄 | 已將現有存檔與固定工作區金鑰進行比對 |
+| Trusted Live · 11 月 5 日 | 受保護的 CPU 記錄與 WARP 檢查 | 官方桌面版登入功能與原生匯出功能仍未完善 |
+| Phala / Intel TDX · 11 月 4 日 | 後續執行中，所有 16 項驗證器檢查均通過 | 歷史部署；CVM 上沒有 Telegram 帳戶 |
 
-**On this page**
+**本頁內容**
 
-- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
-- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
-- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
-- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
-- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
-- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
-- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
-- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
-- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#synthetic-local-capacity-measurement)
-- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
-- [Remaining qualification](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#remaining-qualification)
+- [版本審計與最新匯出 · 6 年 11 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [Trusted Live CPU Ubuntu 與 WARP · 5 年 11 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [Phala Cloud 即時部署 · 4 年 11 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [即時伺服器日誌清單 · 1 年 2026 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [近期離線與故障注入檢查 · 1 2026 年 11 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [Telegram 即時測試，完整帳戶 · 29 年 10 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [使用 libarchive 開啟的密碼保護匯出檔 · 29 年 10 月 2026 日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [Telegram 即時測試 · 2026年10月27日至29日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [合成本地容量測量](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [對一百萬則訊息進行全文搜尋 · 5年11月2026日](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [剩餘資格說明](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/#remaining-qualification)
 
-## Release audit and fresh exports · 6 November 2026
+## 版本審計與最新匯出 · 6 年 11 月 2026 日
 
-The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+本次審計採用原始碼版本 v0.9.1 `92e539af40d8368d198ff5e040f1d876f2c1310e`，發行版 `92e539af40d8-83e41104669e`。三台 伺服器均通過已安裝套件的煙霧測試。簽名報告保留了當時觀察到的狀態。
 
-[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+[![兩項新工作負載的擷取率與完整匯出率](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
 
-| Workload | 記錄 | Acquisition | Complete cycle | Complete-cycle rate |
+| 工作量 | 記錄 | 取得 | 完整週期 | 完整週期速率 |
 | --- | --- | --- | --- | --- |
-| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
-| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+| 伺服器 A · 兩個帳戶 | 27,030 | 189.043 秒 | 211.647 秒 | 127.713 筆/秒 |
+| 伺服器 B · 兩個帳戶 | 29,299 | 182.513 秒 | 206.650 秒 | 141.781 筆/秒 |
 
-Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+兩次匯出均未啟用「繼續傳輸」功能，排除附件與頭像，且最終 未產生任何重複或重複使用的記錄。完整週期包含準備、 擷取、篩選、封裝及存檔驗證。伺服器 A 亦執行了 受保護聊天室的讀取檢查。A 端發生四次 FloodWait 事件，B 端發生三次， 均獲得妥善處理。這些觀察結果並不能確立普遍的吞吐量保證。
 
-| 檢查 | 結果 | Qualification |
+| 檢查 | 結果 | 資格要求 |
 | --- | --- | --- |
-| Core pytest | 1,461 passed | 37 platform skips |
-| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
-| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
-| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
-| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
-| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+| 核心 pytest | 1,461 項通過 | 37 處平台跳過 |
+| 瀏覽器 / 瀏覽器使用者體驗 / 證據 / 網站 | 102 / 66 / 15 / 9 項通過 | 這些程式與其他測試存在重疊；計數結果不可相加 |
+| Capture 外掛程式 | 124 項通過 | 三項官方網頁檢查因必需的 Chromium 沙盒機制而受阻 |
+| API 授權 | 269 條路徑；538 個請求通過 | 憑證遺失與存取權限遭撤銷 |
+| 保留的存檔 | 48 筆中已驗證 48 筆 | 3,598,381 筆記錄；已釘選的工作區金鑰 |
+| 即時車隊讀取檢查 | 40 個設定檔中有 24 個通過驗證 | 16條 WARP 路徑未通過資格認證；這些配置檔未建立連線 |
 
-The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+這份[經簽署的報告](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)記錄了所有已公開的 發現結果，包括未公開的秘密聊天快照中存在的三項缺陷，這些缺陷 未出現在經審計的主建置版本中。先前 [針對公開歷史紀錄的](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md)評估採用了不同的 修訂版本和工作負載；其比率不得與本次比較結果合併。
 
-Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
+請使用 [固定金鑰和驗證器](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files)來驗證原始報告。 其簽名可保護操作員的報告免遭篡改。這並非 獨立證明、Telegram 作者身份證明或 GDPR 認證。
 
-## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+## Trusted Live CPU Ubuntu 與 WARP · 5 年 2026 月 5 日
 
-The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+本次保留的整合執行環境採用了僅使用 CPU 的 Ubuntu 24.04.5.5 來賓系統（4 個 vCPU、8 GiB）， 在 RunPod CPU 主機內的 QEMU 環境中運行。資料收集器使用 `14e642a5`；驗證使用 `02072461`。最終的修正已合併至 [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) ，代號為 `755f78f6`，其代碼樹與測試中的 PR 頭部一致。此環境並非 TEE。
 
-- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
-- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
-- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
-- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
-- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+- 一個真實的 WARP Connector 報告狀態正常；經代理的 HTTPS 報告顯示 WARP 和 Gateway 已啟用。三個探測器觀察到相同的出站位址，這並不代表固定 IP 的保證。
+- 斷開 WARP 連接導致代理請求失敗。直接連至閘道服務的 HTTPS 請求遭拒絕。在記錄器命名空間中，直接的 IPv4/IPv6、外部 DNS 以及 Docker 的內嵌 UDP 解析器均遭封鎖。
+- 具有範圍限制的唯讀提供者代幣可讀取「健康狀態/連線」資訊，但無法 讀取連接器註冊代幣。簽署過的提供者觀察結果包含 明確標示為不可用的樣本。由於該見證程式運行於操作員的主機上，因此這 僅證明了記錄與保留功能，而非獨立第三方保管。
+- 官方桌面版已進入未經認證的歡迎畫面。在擷取過程中，受保護的鍵盤 輸入遭拒。已解碼三個 H.264 顯示區段，並 檢查其時鐘疊加層。針對 18 個事件的預檢存檔，已 根據固定記錄器金鑰及保留的檢查點進行驗證。
+- 最終的擷取測試在 Windows 和 Linux 持續整合環境中，使用真實的 Chromium/FFmpeg 通過了 114 個案例。五項錨點測試與依賴項警示檢查均已通過。
 
-An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+初始配置的 2 vCPU/4 GiB 環境在承受並發影像建置負載時發生超時， 並透過防護機制停止運作；此情況不被視為成功。手動測試帳號 登入、原生聊天記錄匯出、真實混合模式比較以及 Telegram 端登出功能仍 待處理。未導入任何提供的 Telethon 會話。附件、自動 OCR、 本地 drand BLS 驗證以及 Trusted Live TDX 證明均未通過資格審查。
 
 ## Phala Cloud 即時部署 · 2026 年 11 月 4 日
 
-**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+**歷史結果：**後續部署均通過所有16項驗證器檢查， 包括 Intel TDX 及快速隧道。重新啟動證據、簽名位址 發現及報告時間戳記均分別進行了檢查。每個測試 CVM 均 在執行完畢後被移除。
 
-| 設定 | Recorded value |
+| 設定 | 記錄值 |
 | --- | --- |
 | 提供者 | Phala Cloud · `tdx.small` · US-WEST-1 |
-| 部署 | `--provider phala --quick-tunnel`; initially empty workspace |
-| Initial collector | `df7d860c` · v0.8.1 |
-| Collector with all fixes | `53a0f7e9` |
-| Production guest | `dstack-0.5.12`; SSH access disabled |
-| External services | ntfy.sh, GitHub and Intel PCS |
-| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+| 部署 | `--provider phala --quick-tunnel`；初始工作區為空 |
+| 初始收集器 | `df7d860c` · v0.8.1 |
+| 包含所有修正的收集器 | `53a0f7e9` |
+| 正式環境訪客 | `dstack-0.5.12`；SSH 存取已停用 |
+| 外部服務 | ntfy.sh、GitHub 及 Intel PCS |
+| 觀察到的成本 | 七種 CVM，總計約1.9美分；歷史測試定價 |
 
-The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+以下序列分別列出初始失敗、修正及已完成的檢查。 這些 CVM 未連接任何 Telegram 帳戶。
 
-**Deployments 1–2 · provider differences and regression checks**
+**部署版本 1–2 · 服務供應商差異與回歸測試**
 
 前兩次部署發現與模擬的 Phala Cloud 有五處差異。 [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) 現已能重現每項差異，若未進行修正則會失敗：
 
@@ -100,7 +100,7 @@ The sequence below separates initial failures, fixes and completed checks. No Te
 | 當 dstack 閘道器關閉時，CVM 詳細資訊中永遠不會出現 `instance_id` | 部署等待 30 分鐘後失敗 | 實例 ID 取自 CVM 狀態 |
 | 重新啟動、停止及啟動均屬 CVM 操作，而非應用程式版本更新 | `provider_actions` 未列出重新啟動紀錄 | 這些操作也包含讀取操作 |
 
-**Deployment 3 · attestation, access checks and restart evidence**
+**部署3 · 認證、存取檢查與重新啟動證據**
 
 - 該 CVM 在關閉 SSH 存取的情況下執行 `dstack-0.5.12`。收集器在建立後約 1.5 分鐘發布其簽名位址。部署後通過 `tdx_binding`、`tdx_quote`（Intel TCB UpToDate、硬體驗證記錄 v4、FMSPC `20a06f000000`、非除錯模式、不可遷移、支援從 Intel 擷取的 加密驗證資料）、`tdx_compose_hash`、`tdx_compose`（逐位元組）以及 `tdx_identity`（KMS 金鑰）。
 - 位於 trycloudflare.com 網址的控制面板在未提供令牌或提供錯誤令牌時會返回 401 狀態碼， 而使用控制面板令牌時則會返回 200 狀態碼。
@@ -109,66 +109,66 @@ The sequence below separates initial failures, fixes and completed checks. No Te
 - `destroy` 僅移除了該 CVM。隨後工作區變為空狀態，且控制台網址停止 回應。
 - 控制台精靈的價格查詢顯示 `tdx.small`，每小時 0.058 美元。若輸入錯誤的金鑰，則會顯示 「未接受該 API 金鑰」的純文字訊息。
 
-**Follow-up fixes · signed address discovery and OS measurements**
+**後續修正 · 簽名位址偵測與作業系統測量**
 
 - 若無地址金鑰，`verify` 會遵循關於地址主題的最新且格式正確的貼文， 該貼文印在已發佈的 Docker Compose 配置中。一則偽造的貼文將其傳送至一個不 存在的宿主，導致 `statement` 失敗：偽造者無法冒充收集器，但能阻擋 第三方驗證，透過偽造的未來時間戳記，最長可阻擋長達 12 小時。收集器現在 也會發佈以其自身金鑰簽署的地址，當 收集器發佈此類貼文時，`verify` 僅接受此類貼文，且貼文會依照 ntfy.sh 的接收時間排序。 [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) 會重播這些偽造的發布。CVM 僅會從包含此程式碼的提交中執行此程式，因此本次執行的收集器尚未簽署其地址， 而 `verify` 亦已指出此情況。
 - `tdx_os` 原先依賴 `dstack-mr`，而該工具目前的版本提供的是 `measure-os`，並非文件中提到的 `measure --json`。驗證器現在會根據已發布的映像檔和虛擬機器設定（包含 ACPI 表格）自行計算 MRTD 和 RTMR0-2。
 
-**Deployment 4 · all 16 checks, report seals and restart verification**
+**部署4 · 所有16項檢查、報告封印及重新啟動驗證**
 
 - 部署程序曾一次下載已發佈的 `dstack-0.5.12`，並將其與 CVM 回報的作業系統映像雜湊值進行比對，而 `tdx_os` 通過驗證：MRTD、RTMR0、RTMR1 及 RTMR2 均等於針對 QEMU 8.2.2、1 個 vCPU 及 2 GiB 所計算的數值相符。然而，針對聲稱具備 4 GiB、2 個 vCPU、 QEMU 9.2.1 或第二張網路卡的配置，相同計算方式得出的 RTMR0 數值則不同；若內核、韌體或命令列 發生變更，以及針對開發版映像，驗證均會失敗。
 - `verify` 通過了全部 16 項檢查（包含快速隧道連接器），因此結果 為「通過」。 它寫入了 HTML 和 PDF 憑證，並以數位印章加蓋簽名與時間戳記，其中包含來自 比利時政府時間戳記單位 TSU 202301（已列入比利時可信 清單）的合格 eIDAS 時間戳記、FreeTSA 時間戳記以及驗證者的簽名；`check-report` 確認了所有這些 內容以及 PDF 文件的簽名。
 - 重新啟動後，`verify --evidence` 確認了兩次啟動，每次均伴隨在 CVM 內部生成的硬體驗證，且每次 皆從已發佈的 `dstack-0.5.12` 啟動；重新啟動與新一次的啟動均為 REVIEW 狀態。
 - `destroy` 使工作區保持空置狀態。
 
-**Deployment 5 · collector-signed discovery and forged-post rejection**
+**部署版本5 · 由收集器簽署的發現機制與偽造貼文的拒絕機制**
 
-The collector ran from commit `53a0f7e9`, which includes the fixes above.
+此資料收集器自提交版本 `53a0f7e9` 開始運行，該版本已包含上述修正。
 
 - 該收集器在其地址旁發布了以自身金鑰簽署的地址，緊鄰操作員的 HMAC 貼文。 隨後，該主題中新增了兩則偽造貼文，一則 HMAC 值為零，另一則由另一把 Ed25519 金鑰簽署，兩者均聲稱時間為 2096 年。 `verify` 採用由 收集器金鑰簽署的地址，並通過了全部 16 項驗證；該印章再次附有符合資格的比利時時間戳記、 FreeTSA 的時間戳記以及驗證者的簽名，而 `check-report` 則確認了這些資訊。
 - 重新啟動後，收集器發佈了經簽名的全新位址：`verify` 立即偵測到該位址， 營運商的 **透過 HMAC 發佈，於 27 秒後偵測到當前位址**，兩者均忽略了 偽造的發佈。`verify --evidence` 確認有兩台裝置從 `dstack-0.5.12` 啟動。
 - 部署過程列出了 Phala 向 CVM 收取的費用（含磁碟空間）：每小時 0.06078 美元。
 
-### Panel wizard and remaining scope
+### 面板精靈與剩餘範圍
 
 面板精靈在 Phala Cloud 上執行了兩次，一次透過其工作 API，另一次則透過 搭載真實 Chromium 核心的瀏覽器：價格查核、以 **Advanced** 為提交標籤進行建立，全部六項 驗證檢查均通過，伺服器清單顯示計費價格（每月 44.37 美元）， **Find 當前位址**、下載已量測的 Docker Compose 配置，以及刪除操作。瀏覽器未出現任何頁面錯誤。 每次操作結束後，工作區均呈空狀態。
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
+未涵蓋內容：Phala 上的 Cloudflare 網域、CVM 上的 Telegram 帳號，以及 `dstack-0.6.1` 映像檔。精靈在建立前的價格僅為 Phala 的運算價格，因為其 API 僅針對現有 CVM 列出 磁碟價格；伺服器清單則顯示建立後的計費價格。 本節中所有價格均於 4 年 2026 月 4 日觀察所得。
 
-## Live server journal inventory · 1 November 2026
+## 即時伺服器日誌清單 · 1 年 2026 月 2026 日
 
-At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
+大約在 UTC 19:15，透過序列化的唯讀 SQLite `query_only` 查詢，統計了 正在運行的伺服器上十個工作區資料庫中的事件數量。在查詢期間， 資料收集仍持續進行，因此這並非橫跨所有工作區的原子快照。
 
-| Observed across the ten workspace databases | 計數 |
+| 在十個工作區資料庫中觀察到 | 計數 |
 | --- | --- |
-| Workspaces with at least one `message.new` event | 8 |
-| Journal records, including operational events | 1,610,818 |
-| `message.new` events | 900,232 |
-| `message.edited` events | 80,683 |
-| `message.deleted` events | 400,536 |
-| `message.recovered` events | 53,403 |
-| `message.snapshot` events | 2,183 |
-| `media.saved` events | 50,418 |
-| `media.failed` events | 5,575 |
-| `coverage.gap` events | 11 |
-| Database bytes, excluding WAL files and media | 7,909,003,264 |
+| 包含至少一個 `message.new` 事件的工作區 | 8 |
+| 日誌記錄，包括運作事件 | 1,610,818 |
+| `message.new` 事件 | 900,232 |
+| `message.edited`事件 | 80,683 |
+| `message.deleted`事件 | 400,536 |
+| `message.recovered`事件 | 53,403 |
+| `message.snapshot` 事件 | 2,183 |
+| `media.saved`事件 | 50,418 |
+| `media.failed`事件 | 5,575 |
+| `coverage.gap`事件 | 11 |
+| 資料庫位元組（不包含 WAL 檔案及媒體檔案） | 7,909,003,264 |
 
-These are **event counts**, not unique messages, people or media files. The same message can appear in more than one workspace, and an edit or deletion can produce another journal event. `media.failed` counts historical failure events, not the current media queue. The queries did **not** newly verify signatures and the full hash chain of all 1,610,818 records, measure delivery or throughput, or establish that every Telegram event was captured. No message content, account or chat IDs, workspace labels, credentials or private files are published here.
+這些是 **事件計數**，而非唯一的訊息、使用者或媒體檔案。同一則 訊息可能出現在多個工作區中，且編輯或刪除操作可能會產生 另一個日誌事件。 `media.failed` 統計的是歷史失敗事件，而非 當前的媒體佇列。這些查詢並未 **不** 重新驗證簽名以及所有 紀錄的完整 1,610,818 記錄、測量傳送狀況或吞吐量，亦未確認 是否已擷取每個 Telegram 事件。此處未發布任何訊息內容、帳號或聊天室 ID、 工作區標籤、憑證或私人檔案。
 
-At this review, the separately configured public monitor covered three sources: one capture response was OK and two reported `no_response`. That monitor is not a ten-workspace health summary. `no_response` means the observer could not obtain a response at that check; it does not establish message loss. The smaller 29 October test below has its own explicit signature and hash-chain verification.
+在本次審查中，獨立配置的公開監測器涵蓋了三個來源： 其中一個擷取回應為「OK」，另外兩個則回報 `no_response`。該監測器 並非十個工作區的健康狀態摘要。`no_response` 表示觀察者無法 在該次檢查中取得回應；這並不代表訊息遺失。下方規模較小的 10月29日測試擁有其專屬的明確簽名與雜湊鏈驗證。
 
-## Recent offline and fault-injection checks · 1 November 2026
+## 近期離線與故障注入檢查 · 1 年 11 月 2026 日
 
-These checks use fictional data and local files; they add regression evidence for the current source, not another live Telegram delivery measurement:
+這些檢查使用虛構資料和本機檔案；它們為 當前來源提供回歸測試證據，而非針對其他實際運作中的 Telegram 傳送測量：
 
-| 檢查 | What it exercised |
+| 檢查 | 測試項目 |
 | --- | --- |
-| [Source archive](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact. |
-| [Account export recovery](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow. |
-| [Minimized disclosure privacy](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged. |
-| [Linux media decoder and OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | A [Linux Docker CI check](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) at commit `5a9e0814` passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model. |
+| [原始檔案](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | 兩個建置版本的原始碼位元組內容完全相同，但檔案時間已變更，所產生的 ZIP 檔案及校驗和均相同。壓縮檔的位元組內容與檔案雜湊值完全吻合；私人測試檔案未被包含在內。模擬寫入失敗的情況下，先前壓縮檔及其校驗和均保持不變。 |
+| [帳戶匯出與還原](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | 第二個 ZIP 成員發生模擬磁碟錯誤後，未產生任何已發布或不完整的 ZIP 檔案。恢復作業將每個簽名收據維持字節級別完全一致，並使用預期的簽名指紋產生可獨立驗證的壓縮檔，同時將合成覆蓋缺口保留為部分結果。規模斷言機制可防止隨著歷史記錄增長而重複掃描任務與收據。 |
+| [最小化資訊披露以保障隱私](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | 在所有三種身分識別模式下，以及在文字省略的情況下，均已對合成 Unicode 名稱與別名、嵌套元資料、未知發送者及媒體欄位進行了檢查。遮蔽限制失敗並未在未經提示的情況下削弱遮蔽效果；原始的簽名帳戶匯出檔保持不變。 |
+| [Linux 多媒體解碼器與 OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | 在提交 `5a9e0814` 時，[Linux Docker CI 檢查](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192)通過了以下項目：以 Ogg/Opus、MP3、M4A、含影片的 MP4、WAV 及 FLAC 為輸入的生成檔案；偽造時長與次級檔案參照的控制測試；以及 48 個變異解析器測試案例（34 個被拒絕，14 個在範圍內解碼成功）。真實的 Tesseract OCR 在原始位元組未經變更的情況下成功運行。解碼器與 OCR 均在網路隔離的容器中運行，且未使用 Whisper 模型。 |
 
-The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) and [full Checks](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) workflows. They test these failure boundaries, not every possible storage failure or whether a disclosure is automatically safe to publish. The media check does not measure speech recognition accuracy or Telegram delivery. Review each derivative before sharing.
+這些檢查會在[「拉取請求」](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml)及 [「完整檢查」](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml)工作流程中執行。 它們旨在測試這些失敗邊界，而非每種可能的儲存失敗情況，亦非 評估洩露內容是否自動安全可發布。媒體檢查不會測量 語音辨識準確度或 Telegram 傳送狀況。分享前請審閱每個衍生內容。
 
 ## Telegram 即時測試，完整帳戶 · 2026年10月29日
 
@@ -249,6 +249,6 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 所保留的即時日誌可記錄實際的訊息收集、編輯、刪除通知、附件、 重新檢查及速率限制處理。 它並未完整記錄訊息送達狀況，亦未建立受控的 角色可見性矩陣、反應主體、延長的 FloodWait、帳號封禁以及 網路／程序中斷恢復等資訊。QR 代幣的發行仍與已完成的 行動端 QR 碼確認程序有所區別。
 
-Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
+Docker/Compose 及安裝檢查已記錄於 CI 中；實際的 Phala 部署 與外部時間戳記驗證已於上文說明。這些並未建立 持續的高負載、完整的實時平台／角色矩陣、獨立的安全 審查、長期歸檔驗證或鑑識認證。已實作儲存的 MTProto 狀態 與補齊功能；原子無損實時重播功能尚未建立。 較新的後補機制會以原子方式提交訊息與游標，並保留可用的 「近期操作」，但其合成覆蓋範圍有別於實時驗證。 有關受控驗證矩陣，請參閱[實時驗收部分](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md)。
 
-The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.
+[公開審計目錄](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md)僅包含 已簽署的報告及彙總測量結果。詳細的操作紀錄、 原始擷取資料及帳戶資料仍屬私有。位於 `docs/assets/` 中的應用程式截圖使用虛構的示範資料。

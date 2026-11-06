@@ -44,7 +44,7 @@ DATENVERZEICHNIS
 - **Zeitstempel-Autorität**Optional · standardmäßig deaktiviert
 
   Lediglich der SHA-256-Hash eines signierten Checkpoints und ein zufälliger Nonce. Keine Nachrichten, keine Chat-Namen.
-- **Witness**Optional · standardmäßig deaktiviert
+- **Zeuge**Optional · standardmäßig deaktiviert
 
   Ruft signierte Checkpoints und Erfassungszähler mit einem schreibgeschützten Token ab. Es kann weder Unterhaltungen lesen noch Einstellungen ändern.
 

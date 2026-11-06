@@ -4,32 +4,32 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/witne
 
 Ejecute un «witness» con su propia clave y bot, publique puntos de control firmados en un canal y compruebe las exportaciones comparándolas con ellos.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Pruebas y verificación](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Pruebas y verificación](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [Exportar y verificar](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/) · [Alta fiabilidad](https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/) · [Guía de paneles](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+Un testigo conserva los puntos de control firmados por separado del recopilador. Comprueba la firma del recopilador y la continuidad del diario, firma el resultado con su propia clave y lo publica en un canal de Telegram. Ejecútalo en un servidor independiente con acceso de solo lectura al punto final del testigo del recopilador.
 
-Diagrama de flujo · Recopilador → Witness (Punto de control firmado: recuento de registros + hash de cabecera); Witness → Registro de pruebas, clave propia; Witness → Canal de Telegram (Publicación firmada a través de su propio bot); Archivo ZIP de pruebas → verify.py; Registro de pruebas, clave propia → verify.py; Canal de Telegram → verify.py (Exportación desde Telegram Desktop o página t.me/s) · Recopilador · Witness · Registro de pruebas, clavepropia · Canal de Telegram · Archivo ZIP de pruebas · verify.py · Punto de control firmado: · recuento de registros + hash · de cabecera · Publicación firmada a través · de su propio bot · Exportación desde Telegram · Desktop o página t.me/s
+Diagrama de flujo · Recopilador → Testigo (Punto de control firmado: recuento de registros + hash de cabecera); Testigo → Registro de pruebas, clave propia; Testigo → Canal de Telegram (Publicación firmada a través de su propio bot); Archivo ZIP de pruebas → verify.py; Registro de pruebas, clave propia → verify.py; Canal de Telegram → verify.py (Exportación desde Telegram Desktop o página t.me/s) · Recopilador · Testigo · Registro de pruebas, clavepropia · Canal de Telegram · Archivo ZIP de pruebas · verify.py · Punto de control firmado: · recuento de registros + hash · de cabecera · Publicación firmada a través · de su propio bot · Exportación desde Telegram · Desktop o página t.me/s
 
 **Diagrama en formato de texto**
 
-1. Recopilador → Witness (Punto de control firmado: recuento de registros + hash de cabecera)
-2. Witness → Registro de pruebas, clave propia
-3. Witness → Canal de Telegram (Publicación firmada a través de su propio bot)
+1. Recopilador → Testigo (Punto de control firmado: recuento de registros + hash de cabecera)
+2. Testigo → Registro de pruebas, clave propia
+3. Testigo → Canal de Telegram (Publicación firmada a través de su propio bot)
 4. Archivo ZIP de pruebas → verify.py
 5. Registro de pruebas, clave propia → verify.py
 6. Canal de Telegram → verify.py (Exportación desde Telegram Desktop o página t.me/s)
 
-**On this page**
+**En esta página**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#verify)
+- [Lo que obtiene el testigo y lo que no](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [Qué comprueba y registra](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#what-it-checks-and-records)
+- [Ejecutar un testigo](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#run-a-witness)
+- [Página de pruebas pública para varios espacios de trabajo](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verificar](https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/#verify)
 
 ## Lo que TgWitness ofrece y lo que no ofrece
 
@@ -48,7 +48,7 @@ Los nuevos testigos envían un desafío aleatorio en cada encuesta; la declaraci
 Cada intervalo (10 minutos por defecto), TgWitness:
 
 1. recoge el encabezado por sí mismo (el recopilador no puede forzarlo ni omitirlo);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. Verifica la firma del recopilador, la clave del recopilador fijada (`--collector-fingerprint`, o la primera clave vista), un recuento no decreciente y una cabecera inalterada con un recuento inalterado. Las pruebas de inclusión y consistencia de Merkle verifican que un diario creciente amplíe el punto de control conservado. Una vez que se han utilizado las pruebas de continuidad, se rechaza su eliminación;
 3. añade un registro firmado a su propio diario: `witness.anchor` con estado `ok`, `key_changed`, `rollback` (menos registros que antes), `fork` (misma longitud, diferente encabezado) o `invalid` (la respuesta no superó la verificación), o `witness.no_response` cuando el recopilador no respondió;
 4. Publica el resultado en el canal, firmado, incluyendo «sin respuesta» mientras TgWitness está en funcionamiento y puede acceder a la API del bot. Se registra el ID de la publicación (`witness.posted`), así como una publicación fallida (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Para ello se requiere la huella digital del testigo conservada de forma independiente y un punto de control coincidente justo al final de esta exportación. Un punto de control que abarque únicamente un prefijo anterior resulta insuficiente. Detenga la recopilación, permita que el testigo observe el estado final y realice la exportación antes de que se produzcan nuevas escrituras en el registro; si el registro cambia, conserve otro punto de control y exporte ese estado. Un punto de control posterior por sí solo no puede verificar el hash final de una exportación más corta. Cuando también se proporciona «`--channel`», la falta de publicaciones declaradas o un conjunto de coincidencias vacío hacen que se falle esta estricta comprobación. Sin el indicador, las comprobaciones de integridad habituales siguen informando de registros sin testificar sin rechazar un archivo que, por lo demás, está intacto.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+Mantener el diario de testigos y su clave fijada por separado. Las comprobaciones en línea verifican la continuidad entre los puntos de control; la verificación fuera de línea compara cada punto de control conservado con la exportación. Los cabezales heredados sin pruebas de continuidad conservan la comparación fuera de línea y se incluyen en el informe sin la verificación de continuidad en línea. El informe enumera el tiempo de inactividad de los testigos y las publicaciones fallidas por intervalos.
 
-### Daily seals and unavailable timestamp calendars
+### Sellos diarios y calendarios de marcas de tiempo no disponibles
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+El testigo sella el límite del diario del día anterior (UTC) y envía el hash de ese sello firmado a OpenTimestamps. Un envío al calendario es una prueba pendiente; solo los compromisos de Bitcoin verificados de forma independiente reciben confirmación en el verificador.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+Si fallan todos los calendarios, el sello firmado y el intento fallido permanecen en el registro. La ronda de mantenimiento horaria vuelve a intentar ese registro original, incluso tras un reinicio o un cambio de fecha. Analiza como máximo 32 sellos, envía como máximo dos envíos pendientes y dedica como máximo 60 segundos a los reintentos por pasada. Un cursor persistente va rotando por los sellos más antiguos. Los envíos retenidos siguen la ruta de actualización de pruebas existente.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+Un nuevo intento no reescribe el sello, ni cambia su fecha original, ni afirma que el calendario lo haya recibido antes. Un compromiso posterior de Bitcoin sigue siendo una confirmación externa posterior. Las pruebas que faltan siguen siendo `none`; las pruebas pendientes siguen siendo `pending` hasta que el verificador las compruebe de forma independiente.

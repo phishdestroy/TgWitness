@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/stora
 
 백업, 오래된 파일을 클라우드로 이동, Object Lock 하의 복사본, 새 기기에서 복구.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [배포 및 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![배포 및 복구](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 이 패널은 다음 세 가지 작업을 구분합니다:
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/stora
 
 업로드 응답만으로는 파일을 삭제할 수 있는 권한이 부여되지 않습니다. TgWitness는 암호화된 전체 객체를 다운로드하여 크기를 확인하고, SHA-256 수신 확인증을 저장한 후, 삭제 직전에 로컬 바이트를 다시 한 번 확인합니다. 업로드 실패, 읽어온 내용이 다르거나 전송이 취소된 경우, 로컬 파일은 그대로 유지됩니다. 만약 활성화된 증거 백업이 해당 파일을 아직 복사하지 않은 경우, 삭제 작업도 백업이 완료될 때까지 대기합니다.
 
-**On this page**
+**이 페이지에서**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#operator-bot-and-completion-notices)
+- [디스크 용량이 가득 차면](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#when-the-disk-is-filling-up)
+- [대상 연결](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#connect-a-destination)
+- [복구 파일은 그대로 유지하십시오](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#keep-the-recovery-file)
+- [설치 파일 분실 후 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#recover-after-losing-the-installation)
+- [운영자 봇 및 완료 알림](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## 디스크 공간이 부족해질 때
 

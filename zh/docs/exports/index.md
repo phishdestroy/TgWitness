@@ -51,9 +51,9 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 
 
 | 字段 | 输入内容 |
 | --- | --- |
-| Endpoint | 存储 URL，不含存储桶路径或凭据。示例：`https://s3.example.invalid`。 |
+| 端点 | 存储 URL，不含存储桶路径或凭据。示例：`https://s3.example.invalid`。 |
 | 地区 | 按服务商要求填写。默认 `us-east-1`。 |
-| Bucket | 一个您有写入权限的现有存储桶。示例：`example-case-backup`。 |
+| 存储桶 | 一个您有写入权限的现有存储桶。示例：`example-case-backup`。 |
 | 存储桶中的文件夹 | 前缀，默认 `tgwitness`。其上还会追加每个工作区的前缀。 |
 | 访问密钥 ID / 秘密访问密钥 | 两者一起填写，保存在保险库中。之后两者都留空即可保留原值。 |
 | 路径风格的地址 | 开启：`endpoint/bucket`。关闭：`bucket.endpoint`。取决于服务商。 |

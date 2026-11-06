@@ -4,34 +4,34 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/panel
 
 Setiap layar pada panel: obrolan, jurnal, sumber, ekspor, Ekstra, mode perlindungan, dan pemeriksaan kode.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Memulai](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Memulai](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Pengaturan awal dan konfigurasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/settings/) · [Akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/) · [Ekspor dan verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/) · [Laporan kasus](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/)
 
 Fungsi setiap layar, apa yang ditulis ke jurnal yang ditandatangani, dan di mana panduan terperinci tersedia. Panel menampilkan satu ruang kerja pada satu waktu: satu akun Telegram dengan sumber, jurnal, dan kunci penandatanganan miliknya sendiri. Pemilih di bagian atas bilah samping digunakan untuk berganti ruang kerja. Alamat membawa informasi ruang kerja (`?ws=…`); selama alamat, pemilih, dan akun yang dimuat tidak sesuai, tindakan akan tetap diblokir.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+Gunakan metode pengumpulan [Compare](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) untuk memilih antara pengamatan langsung, riwayat lengkap, ekspor akun/obrolan terbaru, dan penyerahan catatan yang disimpan. Halaman Ekspor menampilkan perbandingan yang sama di atas kontrol unduhannya.
 
-**On this page**
+**Di halaman ini**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#more-tools)
+- [Temukan jalan Anda](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#find-your-way)
+- [Mulailah dari sini](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#start-here)
+- [Obrolan](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#chats)
+- [Jurnal](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#journal)
+- [Sumber](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#sources)
+- [Ekspor](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#exports)
+- [Pengaturan, akun, dan koneksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#settings-accounts-and-connection)
+- [Tambahan](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#extras)
+- [Mode perlindungan](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#protection-modes)
+- [Alat lainnya](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#more-tools)
 
 ## Temukan jalannya
 
 Bagian harian terletak di bagian atas bilah samping, **"Akun"** berada di bawah **"Ruang Kerja"** , dan semua yang lain berada di bawah **"Alat & pengaturan lainnya"** . Tombol pengalih **tingkat antarmuka** di bilah atas menentukan berapa banyak bagian yang ditampilkan:
 
-| Level | Bagian-bagian di bilah samping |
+| Tingkat | Bagian-bagian di bilah samping |
 | --- | --- |
 | Sederhana | Beranda, Obrolan, Perubahan, Arsip, dan Pengaturan |
 | Standar | Lihat juga Case Board, Akun dan Akses |
@@ -92,7 +92,7 @@ Percakapan mana saja yang direkam oleh ruang kerja ini, dan apa saja yang disimp
 - **Jenis sumber** membatasi mode folder dan seluruh akun hanya untuk saluran, grup, obrolan pribadi, dan bot. **Tindakan sendiri** menambahkan pesan, pengeditan, dan penekanan tombol balasan dari akun tersebut.
 - **Saat obrolan atau bot baru muncul**: simpan profilnya dan hingga sejumlah pesan terbarunya yang terlihat.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/id/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Batasan: pengumpul cloud yang telah dipublikasikan tidak menerima Obrolan Rahasia. Antarmuka [Pseudo-secret yang terpisah dan demo-nya](https://phishdestroy.github.io/TgWitness/id/docs/reference/secret-chats/) didokumentasikan beserta status pengembangannya dan cacat yang masih ada. Tidak ada yang direkam saat TgWitness tidak berjalan; setelah di-restart, ia hanya menangkap apa yang masih dikembalikan oleh Telegram, dan laporan menunjukkan kesenjangan tersebut. Obrolan yang melebihi batas daftar obrolan (dialog 1,000 kecuali diubah dalam Parameter) akan ditambahkan saat obrolan tersebut aktif kembali. Tombol bot yang ditekan di dalam aplikasi lain tidak terlihat; balasan bot dicatat.
 
 ### Obrolan yang termasuk dalam cakupan
 
@@ -146,7 +146,7 @@ Opsional: akun dan sumber saja sudah cukup untuk mulai mengumpulkan data. Hanya 
 | Pemberitahuan | Masalah, pesan yang diubah, dan ringkasan harian; bot kontrol milik Anda sendiri | [di bawah ini](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#notifications) |
 | Bukti & cadangan | Cap waktu, saksi tambahan, dan salinan terenkripsi di luar lokasi | [di bawah ini](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#evidence-and-backups) |
 | Server beroperasi 24/7 | Server cloud tanpa SSH, yang dibuat dan dihapus melalui panel | [Jaminan tinggi](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#from-the-panel) |
-| Saksi independen | Pemeriksaan yang telah ditandatangani diposting ke saluran Telegram atau Discord Anda | [Witness](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/) |
+| Saksi independen | Pemeriksaan yang telah ditandatangani diposting ke saluran Telegram atau Discord Anda | [Saksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/) |
 | Pemeriksaan kode | Membandingkan program yang sedang berjalan dengan commit GitHub publik | [di bawah ini](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/#code-check) |
 
 ### Tujuan dan tingkat perlindungan

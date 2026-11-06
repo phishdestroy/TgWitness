@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# Geheime Chats: Implementierung und Demo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+Machen Sie sich mit der separaten Secret Chat-Implementierung vertraut, probieren Sie die fiktive Benutzeroberfläche aus und überprüfen Sie noch offene Fehler.
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**Status geprüft am 6. November 2026:** Eine separate Implementierung für Secret Chats befindet sich in der Entwicklung. Sie wurde noch nicht in den veröffentlichten `main`-Zweig unter `3d23e52b647b` integriert. Der normale Collector und der Takeout-Export erfassen keine Secret Chats. Das interaktive Website-Szenario demonstriert die Benutzeroberfläche anhand fiktiver Daten; es ermöglicht keine Telegram-Kommunikation.
 
-## Where the implementation lives
+## Wo sich die Implementierung befindet
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+Commit `0e60f88e` hat **Sources → Pseudo-secret** im lokalen Entwicklungszweig `fix/panel-routes-sessions` hinzugefügt. Der überprüfte Snapshot ist `bb8788fb685c`. Die Implementierung umfasst `tgwitness/secret_chats.py`, Anwendungsrouten, `tgwitness/static/views/secret-chats.js` und spezielle Tests.
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+Das optionale `secret-chats`-Extra in diesem Zweig verwendet [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), das an `d87bf037b90060383c7b704d8a06ebb98c621c6f` angeheftet ist. Die Bibliothek implementiert das End-to-End-Chat-Protokoll von Telegram auf Basis der bestehenden Telethon-Autorisierung des Kontos. Die Installation dieser Bibliothek allein fügt die fehlende Integration zu `main` nicht hinzu.
 
-## What the development interface does
+## Funktionen der Entwicklungsschnittstelle
 
-| Maßnahme | Recorded behavior |
+| Maßnahme | Aufgezeichnetes Verhalten |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| Starte einen Chat anhand des Benutzernamens oder der Benutzer-ID | Senden Sie eine Anfrage; der andere Teilnehmer muss diese annehmen. |
+| Eine eingehende Anfrage annehmen | TgWitness wird zum empfangenden Endpunkt für diesen Chat. Die automatische Annahme ist eine separate Einstellung, die standardmäßig deaktiviert ist. |
+| Eine Nachricht senden oder empfangen | Füge einen ausgehenden oder eingehenden `secret_chat.message`-Eintrag hinzu und zeige ihn im Thread an. |
+| Anhang empfangen | Entschlüsseln Sie diese, speichern Sie die Bytes nach SHA-256 und protokollieren Sie `secret_chat.file`. |
+| Erhalten Sie eine Zeitangabe oder eine Löschbenachrichtigung | Halten Sie den Hinweis fest und bewahren Sie zuvor erfasste Inhalte auf. |
+| Überprüfen Sie die Unterhaltung | Zeige Nachrichten, Dateien, Hinweise und die Schlüsselvisualisierung an. Die geöffnete Registerkarte wird alle vier Sekunden aktualisiert. |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+In einer Entwicklungsversion, die die Integration enthält, aktiviert der Betreiber das Modul für das ausgewählte Konto und verbindet es. Das Starten, Akzeptieren und Senden erfordern die Berechtigung zur Interaktion sowie die Deaktivierung des Lese-Schutzes des Kontos. Der andere Teilnehmer muss einen neuen ausgehenden Chat akzeptieren. Diese Steuerelemente sind in der veröffentlichten Anwendung in der oben genannten Version nicht vorhanden.
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+Es werden nur Chats berücksichtigt, die von dieser TgWitness-Sitzung erstellt oder akzeptiert wurden. Bestehende geheime Chats auf einem Smartphone verbleiben auf diesem Gerät. Ein Sitzungsimport liefert keine separaten Verschlüsselungsschlüssel dafür. Schlüsselmaterial und Zähler für geheime Chats werden im Workspace-Tresor gespeichert; gespeicherte Nachrichten und entschlüsselte Dateien unterliegen den üblichen Sicherheitsvorkehrungen für den Workspace-Speicher.
 
-## Website demonstration
+## Demonstration auf der Website
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+Das Szenario „**Try Secret Chat**“ auf der Website eröffnet eine fiktive Unterhaltung. Es ermöglicht dem Leser, eine Anfrage zu starten, deren Annahme zu simulieren, eine Beispielnachricht zu senden, eine vorgefertigte Antwort und eine Datei zu erhalten sowie einen Timer und einen Löschhinweis zu überprüfen. Eine eingehende Anfrage kann ebenfalls angenommen werden. Die Steuerelemente kennzeichnen simulierte Aktionen des Gegenübers explizit.
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+Dieses Szenario läuft im Browser-Speicher. Durch Zurücksetzen oder Neuladen wird es gelöscht. Es erfolgt keine Anmeldung, kein Kontakt zu Telegram, keine Erstellung echter Verschlüsselungsschlüssel und keine Änderung der signierten Beispiel-Downloads. Die angezeigten Nachrichten stellen keine signierten Beweise dar. Das Szenario veranschaulicht die beabsichtigte Interaktion; es bescheinigt nicht, dass die Entwicklungsimplementierung fertiggestellt ist.
 
-## Checks and outstanding defects
+## Prüfungen und noch bestehende Mängel
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+Die fünf bestehenden Tests decken die Persistenz verschlüsselter Schlüssel, den Lebenszyklus und Nachrichtenaufzeichnungen sowie die Richtlinie zur Annahme eingehender Nachrichten, das schreibgeschützte Senden und den Export von Anhängen ab. Sie wurden bei der Überprüfung am 6. November anhand der festgesteckten Bibliothek erfolgreich bestanden. Drei zusätzliche synthetische Prüfungen reproduzierten Fehler im selben Snapshot:
 
-| Finding | Consequence |
+| Ergebnis | Folge |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| Schließung umgeht `read_only` | Der Close-Pfad kann eine Remote-Aktion ausführen, wenn Interaktionen blockiert werden sollen. |
+| Die Duplikatsuche durchsucht nur die jüngsten Datensätze v500. | Eine ältere Wiedergabe kann nach einem Neustart ein Duplikat erzeugen. |
+| Ein fehlgeschlagener Download eines Anhangs löscht dessen ausstehenden Eintrag | Ein vorübergehender Fehler führt zum Verlust des Wiederholungsauftrags. |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+Es handelt sich um offene Fehler, die auch im veröffentlichten Audit  dokumentiert sind. Fünf bestandene Tests decken diese Fehler nicht ab. Die Überprüfung erfolgte anhand synthetischer Arbeitsbereiche und simulierter Telegram- Vorgänge; ein Live-Handshake wurde nicht wiederholt und die Eignung für den produktiven Einsatz nicht geprüft.

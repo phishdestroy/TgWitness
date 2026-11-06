@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/insta
 
 ایک کمانڈ کے ساتھ انسٹال کریں، دستخط اور ہیشز کی تصدیق کریں، انسٹالیشن کو اپ ڈیٹ اور ہٹائیں۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کرنا](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کرنا](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [پروجیکٹ](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [تیز آغاز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/) · [تیناری](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
 
-**On this page**
+**اس صفحے پر**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#remove-tgwitness)
+- [ایک کمانڈ کے ساتھ انسٹال کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#install-with-one-command)
+- [جہاں سب کچھ چلتا ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#where-everything-runs)
+- [مکمل متن تلاش کی ترتیبات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#full-text-search-settings)
+- [کمانڈ لائن تک رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#command-line-access)
+- [چلانے سے پہلے تصدیق کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#verify-before-running)
+- [موجودہ تنصیب کو اپ ڈیٹ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#update-an-existing-installation)
+- [اوبنٹو پر روزمرہ کے احکامات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness کو ہٹا دیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/#remove-tgwitness)
 
 ## ایک کمانڈ کے ساتھ انسٹال کریں
 
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **ایک نئی اشاعت ڈاؤن لوڈ سائٹ کو اپ ڈیٹ کرتی ہے؛ انسٹال شدہ پروگرامز آپ کے انسٹالر دوبارہ چلانے پر اپ ڈیٹ ہوتے ہیں۔** کوئی خودکار اپڈیٹر یا چلتی ہوئی کلیکشن کا خودکار ری اسٹارٹ موجود نہیں ہے۔ موجودہ انسٹالر چینل **پیش نظارہ** ہے؛ یہ شائع شدہ، چیک شدہ بلڈز کی پیروی کرتا ہے جو `main`، جس کا کمٹ آخری نمبر شدہ GitHub ریلیز سے نیا ہو سکتا ہے۔ صفحے کا ورژن سے آتا ہے۔ `pyproject.toml`؛ اس کا کمٹ اور بلڈ آئی ڈی ایک ہی پیش نظارہ ورژن کے اندر اپ ڈیٹس کو ممتاز کرتا ہے۔
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+اس کے بعد اشاعت خودکار ہو جاتی ہے جب وہ مخصوص کمٹ ایپلیکیشن اور سیکیورٹی چیکس پاس کر لے اور دستخط شدہ پیکیج اوبنٹو سروس اور ونڈوز پاور شیل انسٹالیشن ٹیسٹ پاس کر لے۔ جب چیکس چل رہے ہوں، یا اگر وہ ناکام ہو جائیں، تو وہی کمانڈز پچھلی چیک شدہ بلڈ انسٹال کرنا جاری رکھتی ہیں۔ بلڈ مینفیسٹ دکھاتا ہے کہ کون سا کمٹ فی الحال دستیاب ہے؛ پیش نظارہ اپ ڈیٹس کے درمیان صرف ورژن نمبر ایک جیسا رہ سکتا ہے۔
 
 پہلے کی طرح ایک ہی انسٹالیشن فولڈر اور OS صارف استعمال کریں۔ مکمل ڈیٹا ڈائریکٹری کا بیک اپ لیں جب کلیکشن رک گیا ہو؛ `tgwitness paths` اس کی شناخت کرتا ہے۔ ایک دستخط شدہ ایکسپورٹ مکمل انسٹالیشن بیک اپ نہیں ہے۔
 

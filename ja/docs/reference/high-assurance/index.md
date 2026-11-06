@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-
 
 Hetzner または Phala Cloud 上の 24 時間 365 日稼働のシールドサーバー、Gateway DNS、および第三者が再現可能な検証手順。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [導入と復旧](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![展開と復旧](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+高信頼性デプロイメントでは、アーカイブの検証に加え、収集環境に対する独立したチェックが 追加されます。レビュー担当者は、クラウドプロバイダーおよびCloudflareが保持する デプロイメントおよびアクセス記録を照会し、Intel TDXデプロイメントでは、コレクターの 環境に対するハードウェア認証が追加されます。
 
 通常のローカル環境およびDockerでの使用方法は変更ありません。 `python -m tgwitness.cloud`を使用してデプロイしない限り、ここで実行されるものはありません。また、コレクターはデプロイ設定で指定された場合にのみホストを読み取ります。 `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ High-assurance deployment adds independent checks of the collection environment 
 7. Verifier、読み取り専用トークン → 署名済み /api/assurance ステートメント
 8. Verifier、読み取り専用トークン → 証拠 ZIP
 
-**On this page**
+**このページでは**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#reading-the-deployment-result)
+- [検証者が確認できる事項](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [プロバイダー](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#providers)
+- [Phala Cloud上の機密VM（Intel TDX）](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [開始する前に](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#before-you-start)
+- [パネルより](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#from-the-panel)
+- [ドメイン不要のクイックトンネル](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [デプロイ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#deploy)
+- [デバッグ展開とロック](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [デプロイを削除する](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#remove-a-deployment)
+- [任意のサーバー（自己認証済み）](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#any-server-self-attested)
+- [検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#verify)
+- [証拠引渡しに関する報告書](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#report-for-evidence-handover)
+- [外部証人としてのCloudflare](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [デプロイ結果の読み取り](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## 検証者が確認できる内容
 
@@ -54,7 +54,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | 署名鍵はそのサーバー上で作成されました | この鍵は、プロバイダのサーバーIDと、受信したcloud-initのハッシュ名を記載したステートメントに署名します。 | Collector：プロバイダーとの照合済み |
 | このジャーナルは、そのキーおよびサーバーに属しています | 証拠ZIP内のすべてのプロセス開始には、そのサーバーのホスト測定値が含まれています。 | 証拠 ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+コレクターは、SSHの状態、セッション、ログイン履歴、および起動情報を、署名付き process-start レコードおよび `host.state` レコードに記録します。通常のVMでは、これらはローカルのインベントリ レコードであり、レビュー担当者はこれらをプロバイダーの独立した記録と比較します。以下の Intel TDXの展開では、さらにハードウェアによる測定値の検証も行われます。
 
 ## プロバイダー
 
@@ -292,6 +292,6 @@ Cloudflareは、Telegramの暗号化内部、Telegramアカウントに紐づく
 
 ## デプロイ結果の確認
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+通常の仮想マシン（VM）の場合、プロバイダーがホストインフラストラクチャを管理し、ローカルインベントリは プロバイダーの記録と併せて確認されます。Intel TDX の場合、検証者はさらに ハードウェアの仕様、コレクターのバインディング、コンポーズ、および OS の測定値を確認します。個々の 結果を確認して、どのチェックが合格したか、または利用できなかったかを確認してください。
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+過去のファイアウォールの詳細はプロバイダによって異なりますが、Linodeではルールのバージョンが保持されます。 [検証記録には](https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/)、テスト済みのデプロイメントと残りの稼働中の チェックが記載されており、[検証範囲は](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)これらの環境 チェックをアーカイブの取得および完全性と結びつけています。

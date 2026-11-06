@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/conne
 
 Otentikasi, kumpulan proxy otomatis, mode IP, kebijakan cadangan, permintaan eksternal, dan penyimpanan rahasia.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Penerapan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Penerapan & pemulihan](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Dokumen ini menjelaskan perilaku TgWitness 0.8.0 dan batasannya. Otentikasi, akses sumber, konektivitas jaringan, dan kelengkapan penangkapan merupakan kondisi yang terpisah. Untuk langkah-langkah masuk, format berkas, dan pengelolaan beberapa akun, mulailah dengan [bagian akun dan format sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/). Untuk kebijakan peristiwa dan perilaku saat dimulai ulang, lihat [cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/).
 
@@ -123,19 +123,19 @@ Untuk layanan pribadi yang dikelola operator, pengaturan lingkungan server yang 
 
 ****Parameter kolam otomatis****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+Di bawah **Parameter → MTProxy Otomatis**, konfigurasikan ambang batas kegagalan, waktu tunggu, rotasi terjadwal, berbagi proxy, dan penundaan fallback yang diizinkan.
 
 | Kontrol | Default |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Terputus sebelum penggantian | 3 dalam 10 menit |
+| Proksi yang dicoba per upaya koneksi | 3 |
+| Istirahat pertama / maksimum setelah kegagalan | 10 menit / 6 jam |
+| Rotasi yang direncanakan | Dinonaktifkan; aktifkan jika terjadi kegagalan |
+| Akun per proxy | 0: utamakan entri terpisah, gabungkan jika diperlukan. Atur 1 untuk menunggu entri eksklusif. |
+| Penundaan sebelum fallback langsung diizinkan | 10 menit; Menyembunyikan alamat masih ditolak secara langsung |
+| Pemeriksaan penyegaran / pengiriman data | Notulen 60/10; nilai ruang kerja utama berlaku untuk kumpulan bersama |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Penggunaan proxy yang berbeda tidak menjamin alamat keluar yang berbeda. Pengaturan ini tidak menggantikan batasan Telegram atau membuktikan anonimitas.
 
 Untuk mengganti daftar publik dengan katalog operator Anda sendiri, konfigurasikan pengaturan penggantian di bawah ini. Pengaturan ini menonaktifkan langganan eksternal sepenuhnya, termasuk ketika array `proxies`-nya kosong.
 

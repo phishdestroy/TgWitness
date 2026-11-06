@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 針對帳戶和聊天室設定權限範圍、選擇權限、限制連線數與 IP 位址，並撤銷存取權限。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [開始使用](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![開始使用](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 可授予審閱者存取單一聊天室的權限、分析師匯出個案的權限，或 操作員對選定帳戶的控制權。每位使用者皆擁有專屬的憑證。主 控制面板的憑證則由管理員持有。
 
@@ -110,6 +110,6 @@ API 中的 `ws` 查詢選擇器必須在請求路徑中識別工作區； 未知
 
 ****主要管理員與信任邊界****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+主面板憑證不受任何限制。透過該憑證進行瀏覽器登入所建立的會話， 將受限於管理員所設定的會話限制。直接傳送 主憑證的腳本將保留完整存取權限，且不被計入瀏覽器會話中。
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+這是單一安裝環境中的應用層級存取控制。所有工作區皆共用 伺服器程序；這並非與主機管理員隔離。請將主 憑證、Telegram 連線、簽名金鑰及資料目錄保密。見證憑證 是一種獨立的檢查點／狀態憑證，並非面板存取憑證。

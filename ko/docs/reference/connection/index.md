@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/conne
 
 인증, 자동 프록시 풀, IP 모드, 대체 정책, 외부 요청 및 비밀 정보 저장.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [배포 및 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![배포 및 복구](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 이 문서는 TgWitness 0.8.0의 동작 방식과 그 한계를 설명합니다. 인증, 소스 액세스, 네트워크 연결 및 캡처 완전성은 각각 별개의 상태입니다. 로그인 절차, 파일 형식 및 다중 계정에 대해서는 [‘계정 및 세션 형식’](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) 섹션부터 확인하십시오. 이벤트 정책 및 재시작 동작에 대해서는 [‘수집 방식’ 섹션을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/) 참조하십시오.
 
@@ -45,8 +45,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/conne
 | 전화번호, 코드, 선택 사항인 2단계 인증(2FA) | 계정 접속; API 페어 선택 사항 | 패널 로그인 |
 | 인증 키 HEX + DC ID | 전체 512자 키 및 DC 1–5 | 'Direct **Auth 키'** 탭; 인증이 저장되기 전에 선택 사항인 사용자 ID가 확인됩니다. |
 | Telethon StringSession | 유효한 세션 문자열 | 패널 로그인 |
-| Telethon SQLite `.session` | 완결되고 일관된 문구 | 스키마의 직접 패널 가져오기 7/8; 선택적 오프라인 CLI |
-| Pyrogram SQLite `.session` | 종료된 프로덕션 사용자 세션 | 스키마의 직접 패널 가져오기 2/3 |
+| Telethon SQLite`.session` | 완결되고 일관된 문구 | 스키마의 직접 패널 가져오기 7/8; 선택적 오프라인 CLI |
+| Pyrogram SQLite`.session` | 종료된 프로덕션 사용자 세션 | 스키마의 직접 패널 가져오기 2/3 |
 | Telegram Desktop TData ZIP | 최신 계정 1개; 보호된 경우 로컬 비밀번호 | 체크섬/복호화 검증을 포함한 인메모리 변환 |
 | 계정 JSON | 지원되는 API/세션/키 필드 | 메타데이터만으로는 API 인증 정보를 채울 수 없으며, 세션/키 또는 전화번호/QR 코드 로그인이 여전히 필요합니다. |
 | QR 로그인 | 공식 텔레그램 앱의 확인 | 로컬 QR 생성, 만료/재시도, 선택적 2단계 인증(2FA) |
@@ -123,19 +123,19 @@ MTProxy는 텔레그램 트래픽만 처리합니다. 타임스탬프, 알림, �
 
 ****자동 풀 매개변수****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+**‘매개변수(Parameters)’ → ‘자동 MTProxy’에서** 실패 임계값, 대기 시간, 계획된 로테이션, 프록시 공유 및 허용되는 폴백 지연 시간을 구성하십시오.
 
 | 제어 | 기본값 |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| 교체 전에 연결이 끊어집니다 | 3분 이내에 10개 완료 |
+| 연결 시도당 시도된 프록시 수 | 3 |
+| 첫 번째 / 실패 후 최대 재시도 횟수 | 10분 / 6시간 |
+| 예정된 교대 근무 | 비활성화됨; 오류 발생 시 켜기 |
+| 프록시당 계정 수 | 0: 별도의 항목을 우선적으로 작성하고, 필요한 경우 병합하십시오. 1을 설정하면 해당 항목에 대한 독점적인 처리를 기다립니다. |
+| 허용된 직접 대체로 전환되기 전의 지연 시간 | 10분; 주소를 숨겨도 여전히 Direct 접속을 거부함 |
+| 피드 새로고침 / 전송 상태 확인 | 60 / 10분; 메인 작업 공간 값이 공유 풀에 적용됩니다. |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+다른 프록시를 사용한다고 해서 다른 출구 주소가 보장되는 것은 아닙니다. 이러한 설정은 텔레그램의 제한을 무효화하지 않으며, 익명성을 보장하지도 않습니다.
 
 공개 목록을 자체 운영자 카탈로그로 대체하려면 아래의 오버라이드 설정을 구성하십시오. 이 설정은 `proxies` 배열이 비어 있는 경우를 포함하여 외부 구독을 완전히 비활성화합니다.
 

@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/insta
 
 단 한 줄의 명령어로 설치하고, 서명과 해시를 확인하며, 업데이트 및 제거할 수 있습니다.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [문서](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [시작하기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![시작하기](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [프로젝트](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [빠른 시작](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/) · [배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
 
-**On this page**
+**이 페이지에서**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#remove-tgwitness)
+- [단 한 줄의 명령어로 설치](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#install-with-one-command)
+- [모든 것이 실행되는 곳](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#where-everything-runs)
+- [전체 텍스트 검색 설정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#full-text-search-settings)
+- [명령줄 액세스](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#command-line-access)
+- [실행 전에 확인하십시오](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#verify-before-running)
+- [기존 설치 환경 업데이트](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#update-an-existing-installation)
+- [Ubuntu에서 자주 사용하는 명령어](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness 제거](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/#remove-tgwitness)
 
 ## 단 한 줄의 명령어로 설치하기
 
@@ -137,7 +137,7 @@ Windows 설치 과정 자체에서 .NET을 통해 패키지 서명을 검증하�
 
 **새로운 버전이 출시되면 다운로드 사이트가 업데이트되며, 설치된 프로그램은 설치 프로그램을 다시 실행할 때 업데이트됩니다..** 실행 중인 컬렉션에 대해서는 무인 업데이트 기능이나 자동 재시작 기능이 제공되지 않습니다. 현재 설치 프로그램 채널은 **미리보기**이며, 다음에서 게시되고 검증된 빌드를 따릅니다 `main`에서 게시되고 검증된 빌드를 따르며, 해당 커밋은 마지막 번호가 매겨진 GitHub 릴리스보다 최신일 수 있습니다. 페이지의 버전은 `pyproject.toml`에서 제공되며, 해당 커밋 및 빌드 ID를 통해 동일한 프리뷰 버전 내의 업데이트를 구분할 수 있습니다.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+해당 커밋이 애플리케이션 및 보안 검사를 통과하고, 서명된 패키지가 Ubuntu 서비스 및 Windows PowerShell 설치 테스트를 통과하면 자동으로 게시됩니다. 검사가 진행 중이거나 실패한 경우, 동일한 명령어가 이전에 검사가 완료된 빌드를 계속 설치합니다. 빌드 매니페스트에는 현재 사용 가능한 커밋이 표시되며, 프리뷰 업데이트 간에는 버전 번호만 동일하게 유지될 수 있습니다.
 
 이전과 동일한 설치 폴더와 OS 사용자를 사용하십시오. 수집을 중지한 상태에서 전체 데이터 디렉터리를 백업하십시오; `tgwitness paths` 이를 식별합니다. 서명된 내보내기 파일은 전체 설치 백업이 아닙니다.
 

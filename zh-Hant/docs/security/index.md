@@ -44,7 +44,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/security/
 - **時間戳權威性**可選 · 預設為關閉
 
   僅包含簽名檢查點的 SHA-256 值與一個隨機的非ce值。不包含任何訊息內容，亦不包含聊天室名稱。
-- **Witness**可選 · 預設為關閉
+- **見證者**可選 · 預設為關閉
 
   透過唯讀憑證擷取經簽名的檢查點與擷取計數器。該工具無法讀取對話內容或變更設定。
 

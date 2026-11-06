@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/accou
 
 Hisob hozirda o&#x27;qiy oladigan narsalarni eksport qiling: doira, qayta boshlanadigan ishlar, imzolangan arxiv va minimallashtirilgan ulashish nusxalari.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Dalil va tasdiqlash](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Dalil va tasdiqlash](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 Akkaunt eksporti akkauntni faqat o‘zi uchun band qiladi. Boshlash yoki davom ettirishdan oldin monitoringni yoki boshqa yig‘ish vazifasini aniq to‘xtatib turing; ilova ularni avtomatik to‘xtatmaydi.
 
@@ -16,11 +16,11 @@ Jo'natuvchi va xabar matni bo'yicha filtrlar **"Jo'natuvchi yoki xabar matni bo'
 
 Ushbu ish jarayoni ulangan hisobga hozirda kirish mumkin bo'lgan ma'lumotlarni eksport qiladi. Standart bo'yicha [Telegram Takeout](https://core.telegram.org/api/takeout) ishlatiladi; bu mavjud bo'lmagan yoki o'chirilgan Telegram ma'lumotlarining zaxira nusxasi emas. Maxfiy suhbatlar, kirib bo'lmaydigan tarix va avvalgi tahrirlar tiklanmaydi. Telegram Takeout boshlanishidan oldin kutish muddatini belgilashi mumkin. Panel bu kutishni ko'rsatadi; transportni jimlik bilan almashtirmaydi. Aniq regular-API opsiyasi boshqacha qamrovga ega va qo'llab-quvvatlanmagan kategoriyalarni ham yozib oladi.
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeout — bu Telegram Desktop tomonidan ham ishlatiladigan rasmiy eksport API. TgWitness o'zining ma'lumot yig'ish jarayonidan to'g'ridan-to'g'ri Desktop bilan mos JSON yozishi mumkin; boshqasining arxivini import qilish shart emas. Chat va xabar IDlari har ikkala transport orqali mavjud. Ochiq chat yoki jo'natishga ruxsat tezroq eksportni kafolatlamaydi yoki Takeout tasdiqlash kechikishini bartaraf etmaydi. Sür'atni solishtirishdan oldin bir xil hajm va media sozlamalarini o'lchab ko'ring.
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+20tagacha aniq tanlangan chat IDlari uchun, oddiy API eksporti hisobning to'liq dialog inventarizatsiyasini ko'rib chiqishdan oldin ushbu tengdoshlarni to'g'ridan-to'g'ri aniqlaydi. Shuning uchun o'qiladigan ommaviy kanalga qo'shilmasdan ham, u dialoglar ro'yxatida bo'lmasa ham eksport qilish mumkin. Keshga olinmagan tengdoshlar oddiy inventarizatsiyaga qaytadi. Arxiv filtri majburiy bo'lib qoladi: agar Telegram dialogni qaytarmasa va arxivlangan suhbatlar chiqarib tashlangan bo'lsa, noma'lum arxiv holati o'tkazib yuborilganlik sifatida qayd etiladi. Takeout o'zining bo'lingan diapazonli inventarizatsiya protsedurasini saqlab qoladi. Hech bir yo'nalish suhbatlarni birlashtirmaydi yoki jo'natish ruxsatlarini o'zgartirmaydi. Desktop-ga mos JSON-da, Telegram `left` deb belgilagan kanallar `left_chats` ostida paydo bo'ladi, bu jumladan hisobga qo'shilmagan o'qiladigan ommaviy kanallarni ham o'z ichiga oladi.
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+`FLOOD_WAIT` va `FLOOD_PREMIUM_WAIT` ikkalasi ham server so'ragan to'liq muddat davomida so'rovlarni to'xtatadi. Hisobning muddati qayta ulanishlar va qayta ishga tushirishlar davomida saqlanadi; keyinchalik qisqaroq kutish uni qisqartira olmaydi. Qayta urinishlar cheklangan, bekor qilish muhrlangan sahifalarni saqlaydi va API ma'lumotlari tezlik chegarasini chetlab o'tish uchun aylantirilmaydi. Premium sotib olinmaydi.
 
 ## Qaysi ma'lumotlar yig'ilishini tanlang
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 Profil-foto tarixi va hikoyalar standart bo'yicha tanlanmaydi. Ish faqat xabarlarni talab qilganda profil va kontaktlarni ham o'chirib qo'ying. Ilovalar yoki metadata keraksiz bo'lsa, ularni yig'ish paytida chiqarib tashlash ushbu eksportda yana bir xususiy nusxa saqlanishining oldini oladi.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+Foto yuklamalar metadata va xesh manifestlarida ko'rsatilgan statik tasvir varianti, shu jumladan animatsiyalangan avatar variantiga ega fotosuratlardan foydalanadi. Ushbu animatsiya tanlangan statik tasvir o'rnini bosmaydi. Kuzatilgan o'lchamdan qisqaroq yoki uzunroq yuklama muvaffaqiyatsiz ilova sifatida qayd etiladi va faylga havola yangilanishi paytida vakillik o'zgartirilishi rad etiladi. Ushbu xatoliklar arxivni qisman saqlaydi, ammo xabar yozuvlarini saqlab qoladi. Mustaqil tekshiruv shuningdek, imzolangan uzunligi ularning kuzatilgan o'lchami yoki vakilligiga zid bo'lgan saqlangan ilovalarni, jumladan eski arxivlarda ham rad etadi.
 
 ## Qayta tiklash, qamrov va tasdiqlash
 
@@ -97,8 +97,8 @@ Manba bog'lanishi mustaqil ravishda tanlangan o'zgartirish har bir zarur element
 
 ## Ulashish va mezbonlik qilingan yozib olish
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+Qabul qiluvchiga kerak bo'lgan xabarlar va fayllarni tanlang, to'liq ulashish nusxasini ko'rib chiqing va manbani alohida saqlang. Yetkazilgan ZIP-ning hashini qayd eting, shunda qabul qiluvchi aynan shu nusxani aniqlab, tasdiqlay oladi. Psevdonimizatsiya tanlangan identifikatorlarni almashtiradi; kiritilgan matn va asl fayllar ko'rib chiqishning bir qismi bo'lib qoladi.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope).
+GitHub Actions Takeout yoki oddiy API orqali to'liq akkaunt va tanlangan chat eksportlarini, shuningdek, bitta chat voqealar jurnalini qo'llab-quvvatlaydi. [Joylashtirilgan capture qo'llanmasi](https://phishdestroy.github.io/TgWitness/docs/capture/) sozlamalarni tekshirish va 120 daqiqalik cheklovni tushuntiradi. Joylashtirilgan capture'dan olingan ulashish nusxasini tekshirish uchun uning manba hashini asl arxiv bilan solishtiring va arxivning guvohnomasini [tegishli rejim bo'yicha tekshiruvlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) yordamida tasdiqlang.
 
 [Dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Holat hisobotlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/)

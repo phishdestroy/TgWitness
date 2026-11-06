@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 將 MCP 客戶端連接到選定的工作區和聊天室，並賦予其具有有效期限且可撤銷的存取權限。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [檔案庫整合](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![檔案庫整合](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 將分析師客戶端連接到選定的工作區和聊天室。TgWitness **在面板進程的 `/mcp` 端點**提供 **可串流的 HTTP**服務。每個連線皆擁有專屬的 憑證、有效期限及允許使用的工具。MCP 無法發送 Telegram 訊息、變更 設定或修改簽名日誌。這些連線亦可透過 [命令列](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/)操作。
 
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**本頁內容**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#connect-your-client)
+- [安裝與檢查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#install-and-check)
+- [建立連線](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#issue-a-connection)
+- [連接您的客戶端](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#tools-and-boundaries)
+- [工具與限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/#tools-and-boundaries)
 
 ## 安裝與檢查
 
@@ -57,12 +57,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 | 用戶端 | 設定 | 連結 |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP、`type: "http"`、Bearer 標頭 |
+| Claude 程式碼 | `.mcp.json` | HTTP、`type: "http"`、Bearer 標頭 |
 | Claude Desktop | `claude_desktop_config.json` | 本機 stdio 橋接器 |
 | Cursor | `.cursor/mcp.json` | 使用環境變數標頭的 HTTP |
-| VS Code Local | `.vscode/mcp.json` | 使用密碼 `promptString` 輸入的 HTTP |
+| VS Code 本地版 | `.vscode/mcp.json` | 使用密碼 `promptString` 輸入的 HTTP |
 | Windsurf | `mcp_config.json` | 使用 Bearer 標頭預留位置的 HTTP |
-| 其他用戶端 | URL 與 Authorization 標頭 | Streamable HTTP |
+| 其他用戶端 | URL 與 Authorization 標頭 | 可串流的 HTTP |
 
 TgWitness 使用 Bearer 權杖，不支援 OAuth 自動探索。若用戶端的遠端連接器要求使用 OAuth，請改用本機 stdio 橋接器。針對 VS Code，輸入變數僅適用於 **Local** 執行環境，不會轉發至 Copilot 工作階段。 設定參考文件：[Claude Code](https://code.claude.com/docs/en/mcp)、[Cursor](https://prod.cursor.com/docs/mcp)、[VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)。
 

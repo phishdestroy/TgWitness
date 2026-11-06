@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 可透過手機、QR 碼或授權金鑰登入，匯入 Telethon、Pyrogram 或 Telegram Desktop 的會話紀錄，並同時管理多個帳戶。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [開始使用](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![開始使用](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 TgWitness 透過 MTProto 協議，使用 Telethon 以 Telegram 用戶帳戶（而非機器人）身分登入。每個帳戶皆位於獨立的工作區中（在 API 和命令列工具中稱為「工作區」），並擁有專屬的會話、來源、日誌及簽名金鑰。
 
@@ -38,25 +38,25 @@ TgWitness 根據檔案**內容**而非檔案名稱來識別檔案。重新命名
 
 ## 開始之前：API ID 與 API 雜湊值
 
-You can sign in without creating a Telegram API application. When no pair is entered, imported or already saved in the workspace, TgWitness picks a pair from its built-in pool of 50 public API pairs (`tgwitness/api_pool.py`), preferring Telegram Desktop for a fresh login and retaining a saved pair first; remaining candidates are shuffled. If Telegram refuses a pair (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried, up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they do not authorize an account by themselves.
+您無需建立 Telegram API 應用程式即可登入。當未輸入、 未匯入或工作區中尚未儲存任何密鑰對時，TgWitness 會從其內建的 50 組公開 API 密鑰對池（`tgwitness/api_pool.py`）中選取一組，若為首次 登入則優先選用 Telegram Desktop 的密鑰對，並優先保留已儲存的密鑰對；其餘候選密鑰對則會隨機排序。 若 Telegram 拒絕某組密鑰對 （`API_ID_INVALID`、`API_ID_PUBLISHED_FLOOD`、`UPDATE_APP_TO_LOGIN`），系統將嘗試下一組， 每次登入最多嘗試八組；遭拒絕的密鑰對將被跳過，直至重新啟動。成功登入的密鑰對將 與該帳戶一同儲存，並供該帳戶重複使用。**API ID** 與 **API 雜**湊值用於向 Telegram 識別應用程式；它們 本身並不會授權任何帳戶。
 
-Missing connection fields use a deterministic device/OS pair from the bundled [opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735): Desktop `2040`, Android `6`, Android X `21724`, iOS `10840`, macOS `2834`, and Web `2496`. Android's source-build ID `4` also uses the Android catalog, as identified in [Telegram Android's BuildVars](https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java). Web defaults to A; an imported `K` app-version suffix or `macos` language pack selects K, and version `0.7.0` selects Webogram. Unknown application IDs keep Telethon's host defaults. Imported fields always win, including an older app version and an empty language pack. The catalog never changes the API ID/hash. Its version snapshot is reviewed explicitly, not fetched during login. A saved profile stays stable after updates.
+若缺少連線欄位，則使用捆綁的 [opentele2 2.0.0 目錄](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735)中預設的確定性裝置/作業系統組合： 桌面版 `2040`、Android `6`、Android X `21724`、iOS `10840`、macOS `2834` 以及 Web `2496`。 Android 的原始碼建置 ID `4` 亦採用 Android 目錄，此資訊可於 [Telegram Android 的 BuildVars](https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java) 中查證。 Web 預設為 A；若導入 `K` 應用程式版本後綴或 `macos` 語言套件，則選取 K；版本 `0.7.0` 則選取 Webogram。未知應用程式 ID 將維持 Telethon 的主機 預設值。導入的欄位始終具有優先權，包括較舊的應用程式版本及空的 語言套件。目錄絕不會變更 API ID/雜湊值。其版本快照會 經過明確審查，而非於登入時自動擷取。儲存的設定檔在更新後仍保持穩定。
 
-`account.getAuthorizations` reports Telegram's saved authorization metadata; it is not an echo of each new `initConnection`. Compare it with the actual sent profile. Connecting an existing authorization does not validate its companion API hash: `initConnection` sends the API ID, while the hash is used by login requests.
+`account.getAuthorizations` 會回報 Telegram 儲存的授權元資料；這 並非每次執行 `initConnection` 時的即時回響。請將其與實際傳送的設定檔進行比對。 連接現有授權並不會驗證其對應的 API 雜湊值： `initConnection` 會傳送 API ID，而雜湊值則用於登入請求。
 
-After a new phone or QR authorization, TgWitness requests config, nearest DC, online status, languages (when the language pack is nonempty), app updates and terms-of-service updates, with 0.3–1.5 seconds between requests. Updating status briefly marks the account online. This sequence runs once at login completion, not on imports, reconnects or restarts. The authorization is saved first; a failed request stops the sequence without retrying or discarding the login. Results are recorded as `account.initialized`, with error names rather than response bodies. The sequence is not a guarantee against account restrictions.
+在進行新手機或 QR 碼授權後，TgWitness 會依序請求設定檔、最近的數據中心、 線上狀態、語言（當語言套件不為空時）、應用程式更新及 服務條款更新，各次請求之間間隔 0.3 至 1.5 秒。 更新狀態 會短暫將帳戶標記為線上狀態。此流程僅在登入完成時執行一次， 不會在匯入資料、重新連線或重新啟動時執行。授權資訊會優先儲存；若請求失敗， 流程將立即中止，不會重試或捨棄登入資料。結果會 記錄為 `account.initialized`，內容為錯誤名稱而非回應正文。 此流程無法保證帳戶不會受到限制。
 
-For `tdesktop`, a missing `tz_offset` uses the server's local UTC offset, rounded to 900 seconds using the [opentele2 algorithm](https://github.com/DedInc/opentele2/blob/7e973bc71cd7a714ad13ac703c0895a90d36a735/crates/opentele2-core/src/fingerprint.rs) (MIT; license in `tgwitness/client_profiles.LICENSE`). It is refreshed on each connection so daylight-saving changes are reflected. An imported `tz_offset` takes precedence on every platform and is kept exactly, including zero. Other `initConnection.params` entries are retained. The HTTP sign-in form accepts the numeric timezone returned by file import; booleans, fractions and offsets outside the supported range are rejected.
+對於 `tdesktop` ，若未指定 `tz_offset` ，則會使用伺服器的本地 UTC 偏移量，並透過 [opentele2 演算法](https://github.com/DedInc/opentele2/blob/7e973bc71cd7a714ad13ac703c0895a90d36a735/crates/opentele2-core/src/fingerprint.rs) 四捨五入至 900 秒 （MIT；授權條款見 `tgwitness/client_profiles.LICENSE` ）。此值會在每次 連線時更新，以反映夏令時變更。在所有平台上，已匯入的 `tz_offset` 均具有優先權，且會精確保留（包括零值）。其他 `initConnection.params` 項目則予以保留。 HTTP 登入表單接受檔案匯入所回傳的數值時區； 布林值、小數以及超出支援範圍的偏移量均會被拒絕。
 
-Direct, SOCKS5 and HTTP CONNECT routes use Telethon's `ConnectionTcpObfuscated` (obfuscated abridged MTProto). HTTPS CONNECT retains TLS to the proxy and uses the same obfuscated transport inside the tunnel. MTProxy retains its required randomized intermediate transport and secret handling. Route switches apply the same choices. Obfuscation changes packet framing; it does not hide the account or its client metadata from Telegram or imply immunity to restrictions.
+直接、SOCKS5 及 HTTP CONNECT 路由均採用 Telethon 的 `ConnectionTcpObfuscated` （經混淆的簡化版 MTProto）。HTTPS CONNECT 維持與代理伺服器之間的 TLS 連線，並在隧道內使用 相同的混淆傳輸協定。MTProxy 則維持其所需的 隨機化中間傳輸協定與密鑰處理機制。路由切換時亦採用 相同的選項。 混淆處理會改變封包的幀結構；它並不會向 Telegram 隱藏 帳戶或其客戶端元資料，亦不表示能免受限制。
 
-After connecting an authorized client, TgWitness checks config, nearest DC, the current authorization, the reviewed layer baseline, languages, app updates and terms-of-service updates. These diagnostics run once per client instance, before collection, and are shown under the connection details with their time. `account.connection_checked` records the result without session hashes, IPs, tokens or API hashes. They never accept terms or install updates. A request failure or FloodWait stops subsequent requests; a missing result stays unknown. Local checks can still report their results while network checks are skipped.
+在連線至授權客戶端後，TgWitness 會檢查設定、最近的資料中心、 當前授權狀態、已審核的層級基準、語言、應用程式更新 以及服務條款更新。這些診斷程序會在每個客戶端實例中執行一次， 且在資料蒐集之前進行，並會連同執行時間一併顯示於連線詳細資訊中。 `account.connection_checked`會記錄結果，但不包含會話雜湊、IP 位址、 標記或 API 雜湊。它們絕不會接受條款或安裝更新。若發生 請求失敗或 FloodWait 狀態，後續請求將停止；若結果缺失，則維持未知狀態。 即使跳過網路檢查，本地檢查仍可回報其結果。
 
-FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers, the server-requested wait and the effective deadline in `telegram.backoff`. Connection details show the method and deadline while requests are paused. The diagnostic includes per-method client-call counters since that client was created; they count nested peer resolution separately, but do not count packets or Telethon's internal retry attempts. Current counters are also available as `collector.rpc_activity` in the status API. No request arguments, usernames, access hashes or exception text are included. The last diagnostic and full deadline survive restart. Earlier waits without a method record cannot be attributed retrospectively. See [export limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-LIMITS.md) for the source review and the distinction between discovery and history acquisition.
+FloodWait 診斷資訊會保留失敗的 TL 方法、任何 Takeout/range 封裝器、 伺服器要求的等待時間，以及 `telegram.backoff` 中的有效截止時間。 當請求暫停時，連線詳細資訊會顯示方法與截止時間。 該診斷資訊包含自該客戶端建立以來 各方法的客戶端呼叫計數器；這些計數器會分別統計嵌套的對等節點解析次數，但不會計入封包 或 Telethon 的內部重試次數。當前計數器亦可透過狀態 API 中的 `collector.rpc_activity` 取得。 不包含任何請求參數、使用者名稱、存取 雜湊值或例外訊息。最後的診斷記錄與完整截止時間 在重新啟動後仍會保留。較早且未記錄方法的等待狀態 無法事後歸因。請參閱來源審查的[匯出限制](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-LIMITS.md)， 以及「發現」與「歷史資料擷取」之間的區別。
 
-`official_app=True` or `False` is Telegram's current-authorization flag. Neither value establishes whether the account is restricted, trusted or under observation. The existing evidence-mode `account.devices` snapshots remain the history of all signed-in devices; connection diagnostics retain only the current device description.
+`official_app=True` 或 `False` 是 Telegram 的當前授權標誌。這兩種 值均無法判定該帳號是否受限、受信任或正處於監測狀態。 現有的證據模式 `account.devices` 快照仍保留所有 已登入裝置的歷史紀錄；連線診斷則僅保留當前裝置的描述。
 
-Before connection, advisory checks compare the API platform, language pack, device/OS and app-version formats, mobile system locale, and Telethon's actual schema layer against the reviewed catalog baseline. Warnings appear in the server log and account status metadata; they never replace imported values or change the schema layer. A different layer is a compatibility review signal, not proof of a broken or restricted account. These checks and `official_app` do not certify that Telegram considers the account safe from restrictions. Disconnected account status uses the saved profile instead of generating another device description.
+連線前，諮詢性檢查會將 API 平台、語言套件、 裝置／作業系統與應用程式版本格式、行動系統地區設定，以及 Telethon 的實際 架構層，與已審核的目錄基準進行比對。警告訊息會顯示於伺服器 日誌及帳戶狀態元資料中；這些警告絕不會取代匯入的值，也不會變更 架構層。 不同層級僅代表相容性審查訊號，並非證明該 帳號已失效或受限。這些檢查及 `official_app` 並未保證 Telegram 認定該帳號不受限制。已斷開連線的帳號狀態 會使用儲存的個人資料，而非重新生成另一份裝置描述。
 
 若要改用您自己的應用程式（註冊該應用程式的帳戶將面臨風險；請參閱「 [為何需要內建的 API 池？](https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account)」）：
 
@@ -112,24 +112,24 @@ Before connection, advisory checks compare the API platform, language pack, devi
 
 開啟**「新增帳戶」→「檔案」**，並選取最多**四個屬於同一帳戶的檔案**（總計 **8 MiB**），然後按下「**連線帳戶」**。
 
-The **Files**, **Auth key** and bulk-import forms show the parallel-session warning before connecting. By default imported authorizations are reused. Keep the original client closed while its key is in use here. **Files** and **Auth key** also offer **Create an independent authorization**, described below. Bulk import still uses the direct mode. Phone and interactive QR login create separate authorizations. The warning heading stays visible in the import form; its full explanation opens automatically when files or a key/session string are supplied. It can be collapsed after reading, so the file picker and connection controls remain usable on a phone.
+「**檔案**」、**「授權金鑰」**及「批量匯入」表單會在連線前顯示 「並行會話」警告。預設情況下，匯入的授權將被重複使用。當其金鑰 在此處使用時，請保持原始 客戶端關閉。**檔案**與**授權金鑰**亦提供 「**建立獨立授權**」功能，詳見下文說明。批量匯入仍使用 直接模式。手機及互動式 QR 碼登入會建立獨立的授權。 警告標題在匯入表單中始終可見；當提供檔案或金鑰／會話字串時，其完整說明會 自動展開。閱讀後可將其收起， 以便在手機上仍能正常使用檔案瀏覽器與連線控制項。
 
 - 檔案會在您的 TgWitness 伺服器**記憶體中**進行轉換。上傳的檔案不會被儲存， ZIP 檔案不會解壓縮至磁碟，也不會與任何外部服務進行連線。
 - 隨後會將生成的會話記錄與 Telegram 進行比對。若檔案中載明使用者 ID， 則該 ID 必須與 Telegram 回報的帳戶相符。
 - 描述不同帳戶或不同 API 憑證的檔案將被拒絕 而非僅選擇其中一個。
 - **密碼或會話文字**欄位包含 TData 的本地密碼欄位，此處可貼上 StringSession 並**讀取檔案**，**無需登入**（填寫表單時無需 聯繫 Telegram）。
 
-### Create an independent authorization
+### 建立獨立的授權機制
 
-Select **Create an independent authorization** before connecting imported files or an Auth Key. TgWitness connects the imported donor briefly, uses it to approve the new client's QR login token, and disconnects the donor immediately after approval. The new client has its own authorization key and a separately selected Desktop profile. The donor's supplied API credentials and device profile are used only for the donor connection. No existing authorization is logged out or revoked.
+請選擇「在連線前**建立獨立授權」**並匯入檔案，或 選用「授權金鑰」。TgWitness 會短暫連線至匯入的「捐贈者」，利用其核准 新客戶端的 QR 登入憑證，並在核准後立即斷開與「捐贈者」的連線。 新客戶端擁有專屬的授權金鑰，以及獨立選定的桌面 設定檔。「捐贈者」提供的 API 憑證與裝置設定檔僅用於 與「捐贈者」的連線。現有的授權不會被登出或撤銷。
 
-**Keep the donor's original client fully closed during this step.** The initial connection still uses its copied key, so this mode cannot remove that initial parallel-use risk. Once the new authorization is connected, the owner can reopen the original client and use both independently. Interactive **QR code** login lets the original client approve the login without copying or connecting its key here.
+**在此步驟中，請務必將捐贈者的原始客戶端完全關閉。**初始 連線仍使用其複製的金鑰，因此此模式無法消除該初始 並行使用的風險。一旦建立新的授權連線，擁有者即可重新開啟 原始客戶端，並獨立使用兩者。互動式 **QR 碼**登入功能可讓 原始客戶端在無需在此處複製或連線其金鑰的情況下，批准此次登入。
 
-If Telegram requests 2FA, this mode uses `twoFA` from the selected JSON when present, or asks for the password. A rejected imported password returns to the password form. Passwords are not saved. The candidate key is saved encrypted in `independent_login.enc`, including changes during data-centre migration. After an interruption, select the same donor and this option to resume the saved candidate. The workspace remains reserved for that account; failed completion does not delete the new workspace. Keep its data directory and vault key. The final credentials and `account.authorized` journal record include the import method, input formats and donor API ID, without the donor key or password.
+若 Telegram 要求雙因素驗證（2FA），此模式會使用選取的 JSON 檔案中的 `twoFA`（若存在）， 否則將要求輸入密碼。若匯入的密碼遭拒，系統將返回密碼輸入表單。 密碼不會被儲存。候選金鑰會以加密形式儲存於 `independent_login.enc` 中，包含資料中心遷移期間的變更。發生 中斷後，請選取相同的來源帳號並選擇此選項，以恢復已儲存的候選金鑰。 工作區仍會為該帳戶保留；即使完成進程失敗，也不會刪除 新的工作區。請保留其資料目錄和金庫金鑰。最終的憑證及 `account.authorized`日誌記錄將包含匯入方法、輸入格式以及 來源 API ID，但不會包含來源金鑰或密碼。
 
-On 5 November 2026, a dedicated account passed live checks with Telethon, Pyrogram and TData donors: 2FA completion, distinct new authorization keys, concurrent access by the donor and new client, and reading a public channel. The Telethon case also resumed a saved candidate after an interruption at the password step. Each new authorization completed the six post-login initialization requests, and its signed journal verified. The original session remained usable in all four supplied formats.
+2026年11月5日，一個專用帳戶通過了 Telethon、Pyrogram 及 TData 捐贈者的即時驗證：2 因素驗證（2FA）完成、獨特的新授權金鑰、捐贈者與新客戶端 的並行存取，以及閱讀公開頻道。 Telethon 案例中， 系統亦在密碼輸入步驟中發生中斷後，成功恢復了已儲存的候選帳戶。每個新的 授權皆完成了登入後的六項初始化請求，且其簽署過的 日誌已通過驗證。原始會話在所有四種提供的格式中均保持可用。
 
-Telegram's [RPC error database](https://core.telegram.org/api/errors.json) associates `FRESH_CHANGE_ADMINS_FORBIDDEN` with changing admins, `FRESH_CHANGE_PHONE_FORBIDDEN` with changing the phone number, and `FRESH_RESET_AUTHORISATION_FORBIDDEN` with revoking other sessions, changing their lifetime or registering a passkey. `SESSION_TOO_FRESH_*` and `PASSWORD_TOO_FRESH_*` concern ownership transfers and revenue or gift withdrawals. These are not collection operations; a new login does not imply a blanket 24-hour reading ban. Export can separately return `TAKEOUT_INIT_DELAY_*`. TgWitness retains server-requested pauses and does not retry token acceptance automatically or revoke sessions to work around restrictions.
+Telegram 的 [RPC 錯誤資料庫](https://core.telegram.org/api/errors.json)將 `FRESH_CHANGE_ADMINS_FORBIDDEN` 與變更管理員、`FRESH_CHANGE_PHONE_FORBIDDEN` 與變更電話號碼，以及 `FRESH_RESET_AUTHORISATION_FORBIDDEN` 與 撤銷其他會話、變更其有效期或註冊通行金鑰相關聯。 `SESSION_TOO_FRESH_*` 和 `PASSWORD_TOO_FRESH_*` 涉及所有權轉移以及 收益或禮物提領。這些並非資料擷取操作；新登入並不 意味著全面性的 24 小時讀取禁令。匯出功能可另行返回 `TAKEOUT_INIT_DELAY_*`。TgWitness 會保留伺服器要求的暫停狀態，且不會自動重試 代幣接受或撤銷會話以規避限制。
 
 ### Telethon `.session`
 
@@ -156,9 +156,9 @@ Telegram's [RPC error database](https://core.telegram.org/api/errors.json) assoc
 帳戶資料通常以兩個同名檔案的形式分發，例如 `447700900123.session` 和 `447700900123.json`。請一次選取**兩者**。
 
 - 根據 JSON 資料，TgWitness 使用 `app_id`/`api_id` 及 `app_hash`/`api_hash`，因此您 通常無需手動輸入 API 憑證。
-- The connection profile uses `device_model` (alias `device`), `system_version` (alias `sdk`), `app_version`, `lang_code`, `system_lang_code` (alias `system_lang_pack`), `lang_pack` and optional `tz_offset` (seconds from UTC, -43200 to 50400). Supplied fields take priority over generated defaults and the panel/browser language. Conflicting aliases are rejected. The resolved profile is saved in the encrypted workspace credentials and reused after restart, including its app version.
-- `phone`, proxy settings and device tokens are **ignored**. `twoFA` is read only when **Create an independent authorization** is selected; direct import ignores it.
-- A JSON without a supported authorization field is only metadata. Add its session file or continue with phone or QR login. A JSON containing a supported session or Auth Key can authorize on its own; see [Account JSON](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/#account-json).
+- 連線設定檔使用 `device_model`（別名 `device`）、`system_version` （別名 `sdk`）、`app_version`、`lang_code`、`system_lang_code`（別名 `system_lang_pack`）、 `lang_pack` 以及可選的 `tz_offset`（以秒為單位的 UTC 偏移量，範圍為 -43200 至 50400）。 手動填入的欄位優先於系統生成的預設值及控制面板／瀏覽器的 語言設定。若別名發生衝突，則不予接受。解析後的設定檔將儲存於 加密的工作區憑證中，並在重新啟動後重新使用，其中包含其應用程式版本。
+- `phone`、代理伺服器設定及裝置代碼將被**忽略**。`twoFA` 僅在 選取「**建立獨立授權」**時為唯讀；直接匯入則會忽略此項目。
+- 若 JSON 缺乏受支援的授權欄位，則僅為元資料。請新增其 會話檔案，或繼續使用手機或 QR 碼登入。若 JSON 包含受支援的會話或 授權金鑰，即可自行完成授權；詳見「[帳戶 JSON](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/#account-json)」。
 
 ### Telegram 桌面版 (TData)
 
@@ -172,11 +172,11 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 
 若要導入此工具：
 
-> **Parallel session warning.** Direct TData import reuses Telegram Desktop's authorization key. Do not use that key in Desktop and TgWitness simultaneously. Telegram can invalidate the authorization with `AUTH_KEY_DUPLICATED`, leaving both copies unusable until a new login.
+> **並行會話警告。**直接匯入 TData 會重複使用 Telegram Desktop 的授權 金鑰。請勿同時在 Desktop 和 TgWitness 中使用該金鑰。Telegram 可能會透過 `AUTH_KEY_DUPLICATED` 使授權失效，導致兩份副本在重新登入前皆無法使用。
 >
 >
 >
-> Fully quit Desktop, including its tray process, and keep that copy closed while TgWitness uses the imported session. **Quit, do not log out or revoke the session:** revocation also invalidates the imported copy. If you need both clients running, select **Create an independent authorization** and keep Desktop closed until the new login succeeds, or sign in to TgWitness by phone or QR. A dedicated account is recommended, but does not make cloned keys safe to use in parallel.
+> 請完全關閉 Desktop（包括其系統托盤進程），並在 TgWitness 使用匯入的會話期間保持該副本關閉。**請直接關閉程式，切勿登出或撤銷會話：** 撤銷會話也會使匯入的副本失效。若您需要同時運行兩個客戶端， 請選擇**「建立獨立授權」**，並在 新登入成功前保持 Desktop 關閉，或透過手機或 QR 碼登入 TgWitness。建議使用 專用帳戶，但這並不能確保複製的金鑰在並行使用時是安全的。
 >
 >
 >
@@ -204,16 +204,16 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 | --- | --- |
 | `api_id` (`app_id`) | 應用程式 ID，一個正整數 |
 | `api_hash` (`app_hash`) | 應用程式雜湊值，32 個十六進位字元 |
-| `string_session` (`session_string`, `session_str`; legacy `session`) | Telethon StringSession 文字內容，並非檔案名稱 |
+| `string_session`（`session_string`、`session_str`；舊版 `session`） | Telethon StringSession 文字內容，並非檔案名稱 |
 | `auth_key` (`auth_key_hex`) + `dc_id` | 完整的 512 字元授權金鑰及 DC 1–5 |
 | `user_id` (`id`) | 可選；在儲存授權前會與 Telegram 進行比對 |
-| `device_model` (`device`) | Connection device description |
-| `system_version` (`sdk`) | Connection OS version |
-| `app_version` | Application version sent to Telegram |
-| `lang_code`, `system_lang_code` (`system_lang_pack`), `lang_pack` | Client language, system language and client language pack; an empty `lang_pack` is allowed |
-| `tz_offset` | Optional UTC offset in seconds, sent in `initConnection.params`; integer or decimal integer string |
+| `device_model` (`device`) | 連線裝置說明 |
+| `system_version` (`sdk`) | 連線作業系統版本 |
+| `app_version` | 發送至 Telegram 的應用程式版本 |
+| `lang_code`, `system_lang_code` (`system_lang_pack`), `lang_pack` | 客戶端語言、系統語言及客戶端語言套件；允許使用空的 `lang_pack` |
+| `tz_offset` | 可選的 UTC 偏移量（以秒為單位），透過 `initConnection.params` 傳送；格式為整數或十進位整數字串 |
 
-If both an alias and the main name are present, they must agree. Explicit Telethon session fields take priority over a generic `session` blob in another format. If both contain recognizable Telethon sessions, they must describe the same authorization. Without an explicit field, `session` must be a valid Telethon StringSession. Examples:
+若同時存在別名與主名稱，兩者必須一致。明確的 Telethon 會話欄位優先於其他格式的通用 `session` 二進位資料。若 兩者均包含可識別的 Telethon 會話，則必須描述相同的授權。 若無明確欄位，`session` 必須為有效的 Telethon StringSession。範例：
 
 ```
 { "app_id": 1234567, "app_hash": "0123456789abcdef0123456789abcdef" }

@@ -20,7 +20,7 @@ To'g'ridan-to'g'ri ulanish mumkin. U siz uchun VPN'ni sozlamaydi va tekshirmaydi
 
 Yo'l ulanishni tanlaydi. IP rejimi to'g'ridan-to'g'ri ulanishga ruxsat berilishini aniqlaydi.
 
-## Let the pool maintain the route
+## Pool marshrutni saqlab tursin
 
 1. **Hisob → Sozlamalar → Ulanish sozlamalari**.
 2. IP rejimini va **Avtomatik MTProxy**ni yoki qat'iy marshrutni tanlang.

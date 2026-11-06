@@ -22,7 +22,7 @@ VOTRE ORDINATEUR OU VOTRE SERVEUR
 
 **Panneau**127.0.0.1:8787 · jeton « bearer »
 
-**Collector**Un client Telegram par espace de travail
+**Collecteur**Un client Telegram par espace de travail
 
 RÉPERTOIRE DE DONNÉES
 
@@ -44,7 +44,7 @@ RÉPERTOIRE DE DONNÉES
 - **Autorité en matière d’horodatage**Facultatif · désactivé par défaut
 
   Uniquement la valeur SHA-256 d’un point de contrôle signé et d’un nonce aléatoire. Aucun message, aucun nom d’utilisateur.
-- **Witness**Facultatif · désactivé par défaut
+- **Témoin**Facultatif · désactivé par défaut
 
   Il extrait les points de contrôle signés et les compteurs de captures à l’aide d’un jeton en lecture seule. Il ne peut ni lire les conversations ni modifier les paramètres.
 

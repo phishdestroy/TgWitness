@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/times
 
 RFC 3161 ٹائم اسٹیمپس دستخط شدہ چیک پوائنٹس کے لیے: اتھارٹی کو کیا بھیجا جاتا ہے اور جواب کیسے تصدیق کیا جاتا ہے۔
 
-[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)
+[ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شواہد اور تصدیق](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![شواہد اور تصدیق](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness RFC 3161 درخواستیں تیار کرتا ہے اور ٹائم اسٹیمپ اتھارٹی (TSA) کے جوابات کی تصدیق کرتا ہے۔ یہ دستی طریقہ کار نہ تو TSA کا انتخاب کرتا ہے اور نہ ہی ڈیٹا جمع کرواتا ہے؛ ثبوت موڈ شیڈول ([ثبوت فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)) کے مطابق دونوں کام کرتا ہے۔ ایک تیار شدہ درخواست **ابھی ٹائم اسٹیمپ ثبوت نہیں** ہوتی۔
 

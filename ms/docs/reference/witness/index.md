@@ -4,13 +4,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/witne
 
 Jalankan witness dengan kunci dan botnya sendiri, terbitkan titik pemeriksaan yang ditandatangani ke saluran dan periksa eksport menentangnya.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bukti dan pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bukti & pengesahan](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 [Eksport dan sahkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/) · [Jaminan tinggi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/) · [Panduan panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
+Saksi menyimpan titik pemeriksaan yang ditandatangani secara berasingan daripada pengumpul. Ia memeriksa tandatangan pengumpul dan kesinambungan jurnal, menandatangani hasil tersebut dengan kuncinya sendiri, dan menerbitkannya ke saluran Telegram. Jalankan ia pada pelayan berasingan dengan akses baca sahaja ke hujung saksi pengumpul.
 
 Diyagram aliran · Pengumpul → Saksi (titik pemeriksaan yang ditandatangani: jumlah rekod + hash kepala); Saksi → Jurnal saksi, kunci sendiri; Saksi → Saluran Telegram (pos yang disahkan melalui botnya sendiri); ZIP Bukti → verify.py; Jurnal saksi, kunci sendiri → verify.py; Saluran Telegram → verify.py (Eksport Telegram Desktop atau halaman t.me/s) · Pengumpul · Saksi · Jurnal saksi, kuncisendiri · Saluran Telegram · ZIP Bukti · verify.py · titik pemeriksaan yang · ditandatangani: jumlah rekod · + hash kepala · pos yang disahkan melalui · botnya sendiri · Eksport Telegram Desktop · atau halaman t.me/s
 
@@ -23,13 +23,13 @@ Diyagram aliran · Pengumpul → Saksi (titik pemeriksaan yang ditandatangani: j
 5. Jurnal saksi, kunci sendiri → verify.py
 6. Saluran Telegram → verify.py (Eksport Telegram Desktop atau halaman t.me/s)
 
-**On this page**
+**Pada halaman ini**
 
-- [What the witness gets, and what it does not](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
-- [What it checks and records](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#what-it-checks-and-records)
-- [Run a witness](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#run-a-witness)
-- [Public proof page for several workspaces](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#public-proof-page-for-several-workspaces)
-- [Verify](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#verify)
+- [Apa yang diperoleh oleh saksi, dan apa yang tidak](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#what-the-witness-gets-and-what-it-does-not)
+- [Apa yang ia semak dan rekod](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#what-it-checks-and-records)
+- [Jalankan saksi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#run-a-witness)
+- [Halaman bukti awam untuk beberapa ruang kerja](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#public-proof-page-for-several-workspaces)
+- [Verifikasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/#verify)
 
 ## Apa yang diperoleh oleh saksi, dan apa yang tidak
 
@@ -48,7 +48,7 @@ Saksi baharu menghantar cabaran rawak pada setiap undian; pernyataan tangkapan m
 Setiap selang (10 minit secara lalai) saksi:
 
 1. mengambil kepala itu sendiri (pengumpul tidak boleh menolaknya atau melangkauinya);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
+2. memeriksa sahih tandatangan pengumpul, kunci pengumpul yang dipaku (`--collector-fingerprint`, atau kunci pertama yang dilihat), kiraan yang tidak berkurangan dan kepala yang tidak berubah pada kiraan yang tidak berubah. Bukti inklusi Merkle dan konsistensi mengesahkan bahawa jurnal yang berkembang memanjangkan titik pemeriksaan yang disimpan. Setelah bukti kesinambungan digunakan, pemindahannya ditolak;
 3. menambah rekod yang disahkan ke jurnalnya sendiri: `witness.anchor` dengan status `ok`, `key_changed`, `rollback` (lebih sedikit rekod berbanding sebelum ini), `fork` (panjang sama, kepala berbeza) atau `invalid` (jawapan gagal pengesahan), atau `witness.no_response` apabila pengumpul tidak menjawab;
 4. menyiarkan hasil ke saluran, ditandatangani, termasuk "tiada jawapan" selagi saksi sedang berjalan dan boleh mengakses Bot API. ID siaran direkodkan (`witness.posted`), siaran gagal juga (`witness.post_failed`).
 
@@ -208,12 +208,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Ini memerlukan cap jari saksi yang disimpan secara berasingan dan checkpoint yang sepadan di hujung tepat eksport ini. Satu checkpoint yang hanya merangkumi pratonton awal adalah tidak mencukupi. Jeda pengumpulan, biarkan saksi memerhati keadaan akhir, dan eksport sebelum penulisan jurnal selanjutnya; jika jurnal berubah, simpan satu lagi checkpoint dan eksport keadaan itu. Satu checkpoint kemudian sahaja tidak dapat mengesahkan hash akhir eksport yang lebih pendek. Apabila `--channel` turut disertakan, pos yang didakwa hilang atau set padanan kosong akan menyebabkan pemeriksaan ketat ini gagal. Tanpa penanda itu, pemeriksaan integriti biasa masih melaporkan rekod yang tidak disaksikan tanpa menolak arkib yang sebaliknya utuh.
 
-Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+Simpan jurnal saksi dan kunci terpasangnya secara berasingan. Semakan dalam talian mengesahkan kesinambungan antara titik pemeriksaan; pengesahan luar talian membandingkan setiap titik pemeriksaan yang disimpan dengan eksport. Kepala warisan tanpa bukti kesinambungan mengekalkan perbandingan luar talian dan dilaporkan tanpa pengesahan kesinambungan dalam talian. Laporan menyenaraikan masa henti saksi dan penerbitan yang gagal mengikut selang masa.
 
-### Daily seals and unavailable timestamp calendars
+### Segel harian dan kalendar cap masa yang tidak tersedia
 
-The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+Saksi menutup sempadan jurnal hari UTC sebelumnya dan menghantar hash meterai yang ditandatangani itu ke OpenTimestamps. Penyerahan kalendar menunggu bukti; hanya komitmen Bitcoin yang diperiksa secara bebas menerima pengesahan dalam pengesah.
 
-If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+Jika semua kalendar gagal, meterai yang ditandatangani dan percubaan yang tidak berjaya kekal dalam jurnal. Pas penyelenggaraan setiap jam akan mencuba semula rekod asal itu, termasuk selepas but semula atau pertukaran tarikh. Ia mengimbas paling banyak 32 meterai, menghantar paling banyak dua penghantaran yang hilang dan mengambil masa paling banyak 60 saat untuk percubaan semula setiap pusingan. Penunjuk arah berterusan akan berputar melalui meterai yang lebih lama. Penghantaran yang disimpan mengikuti laluan peningkatan bukti sedia ada.
 
-A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
+Percubaan semula tidak menulis semula meterai, mengubah tarikh asalnya atau mendakwa bahawa kalendar menerimanya lebih awal. Komitmen Bitcoin yang kemudian kekal sebagai pengesahan luaran yang kemudian. Bukti yang hilang kekal `none`; bukti yang menunggu kekal `pending` sehingga pengesah memeriksanya secara bebas.

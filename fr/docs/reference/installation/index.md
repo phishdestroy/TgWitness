@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/insta
 
 Installez-le en une seule commande, vérifiez les signatures et les hachages, mettez à jour et désinstallez l&#x27;application.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Pour commencer](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Pour commencer](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Projet](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [Mise en route rapide](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/) · [Déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/)
 
-**On this page**
+**Sur cette page**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#remove-tgwitness)
+- [Installation en une seule commande](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#install-with-one-command)
+- [Où tout fonctionne](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#where-everything-runs)
+- [Paramètres de recherche en texte intégral](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#full-text-search-settings)
+- [Accès en ligne de commande](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#command-line-access)
+- [Vérifier avant l'exécution](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#verify-before-running)
+- [Mise à jour d'une installation existante](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#update-an-existing-installation)
+- [Commandes courantes sous Ubuntu](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [Supprimer TgWitness](https://phishdestroy.github.io/TgWitness/fr/docs/reference/installation/#remove-tgwitness)
 
 ## Installation en une seule commande
 
@@ -137,7 +137,7 @@ L'installation sous Windows vérifie elle-même les signatures des paquets à l'
 
 **Une nouvelle publication met à jour le site de téléchargement ; les programmes installés se mettent à jour lorsque vous relancez le programme d’installation.** Il n’y a pas de programme de mise à jour en mode silencieux ni de redémarrage automatique d’une collection en cours d’exécution. Le canal d’installation actuel est **« preview »** ; il suit les versions publiées et vérifiées provenant de `main`, dont le commit peut être plus récent que la dernière version numérotée sur GitHub. La version de la page provient de `pyproject.toml`; son commit et son identifiant de build permettent de distinguer les mises à jour au sein d’une même version « preview ».
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+La publication est automatique dès que ce commit précis a passé les contrôles d’application et de sécurité et que le paquet signé a réussi les tests d’installation sur le service Ubuntu et Windows PowerShell. Pendant l’exécution des contrôles, ou en cas d’échec de ceux-ci, les mêmes commandes continuent d’installer la version précédemment validée. Le manifeste de la version indique quel commit est actuellement disponible ; le numéro de version seul peut rester le même entre les mises à jour de préversion.
 
 Utilisez le même dossier d’installation et le même utilisateur du système d’exploitation que précédemment. Sauvegardez l’intégralité du répertoire de données une fois la collecte arrêtée ; `tgwitness paths` qui l’identifie. Une exportation signée ne constitue pas une sauvegarde complète de l’installation.
 

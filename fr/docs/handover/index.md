@@ -57,7 +57,7 @@ Un dossier distinct lié aux limites du journal source
 | Personnes | Les personnes choisies restent nommées ; les autres reçoivent un pseudonyme ou sont écartées. |
 | Texte | Tout le texte, seulement celui des personnes choisies et de votre compte, ou aucun. |
 | Fichiers | Fichiers des personnes choisies et de votre compte, tous les fichiers affichés, ou aucun. |
-| Case Board | Rien, signets et extraits, ou cartes avec discussion. |
+| Tableau des cas | Rien, signets et extraits, ou cartes avec discussion. |
 
 Lisez aussi le texte et les fichiers : un pseudonyme n’efface pas les noms écrits dans un message ou une pièce jointe. S’il manque un fichier choisi, restaurez-le ou écartez les pièces jointes.
 

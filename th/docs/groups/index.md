@@ -23,7 +23,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/groups/
 
 #### ทีม Case
 
-Channel collector · Group collector · Reference account
+ผู้รวบรวมช่อง · ผู้รวบรวมกลุ่ม · บัญชีอ้างอิง
 
 3 พื้นที่ทำงานแยกกัน
 

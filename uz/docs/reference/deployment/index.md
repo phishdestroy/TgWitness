@@ -6,7 +6,7 @@ TgWitness-ni Windows, Linux, macOS yoki Docker-da xizmat sifatida, HTTPS orqali,
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Joylashtirish va tiklash](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Inglizcha** · [Rus tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ukrain tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Ispancha](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Portugalscha (Braziliya)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Turkcha](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [Arab tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [Farsi](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [O'rdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [hindicha](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Indoneziya tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Vyetnam tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Xoʻllashma xitoycha](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Har bir GitHub Release `TgWitness-<version>-windows-amd64-portable.zip` va uning
 | `TgWitness-Demo.cmd` | `data\demo`da sintetik demo-ni ishga tushiring |
 | `TgWitness-Check.cmd` | Boshlashni boshlamadan tayyorgarlik tekshiruvini ishga tushiring |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Mahkam biriktirilgan rus morfologiyasi lug'ati va PDF rang profillari oflayn foydalanish uchun to'plamga kiritilgan. Qadoqlash faqat ularning `data` bog'liqlik papkalaridagi ma'lum fayl yo'llariga ruxsat beradi; kutilmagan fayllar kompilyatsiyani muvaffaqiyatsiz yakunlaydi.
 
 Butun arxivni yozish mumkin bo'lgan papkaga, masalan `Documents\TgWitness` ga chiqarib oling; uni ZIP ichida yoki Program Files katalogidan ishga tushirmang. Ijro vaqti alohida modul yo'lidan foydalanadi, shuning uchun boshqa Python o'rnatmalari va `PYTHONPATH` unga ta'sir qilmaydi. Ma'lumotlar paketning `data` papkasida saqlanadi. Yangilash uchun TgWitness-ni to'xtating, yangi versiyani yangi papkaga chiqarib oling va `data` papkasini nusxalab o'tkazing.
 

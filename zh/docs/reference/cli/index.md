@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![存档集成](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [只读 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/) · [全文搜索](https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 日期格式为 `2026-10-01` （UTC 午夜）或带时区的 ISO 时间， `2026-10-01T09:00+03:00`。关于 `search`, `messages` 和 `export` ，它们表示 观察时间。每页最多显示50条记录：请遵循 `next_offset` (`--offset`)进行 排序搜索， `next_before` (`--before`) 其他内容。
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+排序搜索结果上限为 1,000 条。最后一页的显示结果可能少于 `--limit`；若存在更多匹配的观察结果，请缩小查询范围、聊天范围或时间范围。
 
 每条消息结果都包含 `untrusted_content: true`工作区、聊天和 消息 ID、日志序列号、保存记录的哈希值以及面板链接。编辑、 删除通知和 `missing_on_recheck` 属于独立的记录。某条记录的缺失 并不证明该事件从未发生。
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 通过控制面板进行导出需要连接到允许**“导出消息” （仅限命令行）**的服务器；该选项默认未勾选。此文件仅为工作副本，并非证据：如需可验证的 移交，请使用**“导出**”中的签名导出文件，该文件 `python -m tgwitness.verify`会进行验证。
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+该面板在输出每条记录（包括完成 记录）之前都会重新检查访问权限。被撤销或过期的访问权限会导致导出不完整。延迟页面读取 与其他查询共享归档工作线程的限制，且具有有限的等待时间。
 
 ## 代理技能
 

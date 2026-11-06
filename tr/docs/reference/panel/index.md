@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel
 
 Panelin tüm ekranları: sohbetler, günlük, kaynaklar, dışa aktarmalar, Ekstralar, koruma modları ve kod kontrolü.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Başlangıç](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Başlangıç](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [İlk kurulum ve ayarlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/settings/) · [Hesaplar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) · [Dışa aktarma ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Vaka raporları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/)
 
 Her ekranın işlevi, imzalı günlüğe ne yazdığı ve ayrıntılı kılavuzun bulunduğu yer. Panel, her seferinde tek bir çalışma alanını gösterir: kendi kaynakları, günlüğü ve imzalama anahtarı olan bir Telegram hesabı. Kenar çubuğunun üst kısmındaki seçici, çalışma alanları arasında geçiş yapar. Adres, çalışma alanını taşır (`?ws=…`); adres, seçici ve yüklü hesap birbiriyle uyuşmadığında işlemler engelli kalır.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+[Karşılaştırma toplama yöntemleri](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)'yi kullanarak canlı gözlem, tam geçmiş, yeni hesap/sohbet dışa aktarımları ve kaydedilmiş kayıt devri arasında seçim yapın. Dışa Aktarımlar sayfasında, indirme denetimlerinin üzerinde yukarıdaki aynı karşılaştırma yer almaktadır.
 
-**On this page**
+**Bu sayfada**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#more-tools)
+- [Yolunuzu bulun](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#find-your-way)
+- [Buradan başlayın](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#start-here)
+- [Sohbetler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#chats)
+- [Günlük](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#journal)
+- [Kaynaklar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#sources)
+- [Dışa Aktarımlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#exports)
+- [Ayarlar, hesaplar ve bağlantı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#settings-accounts-and-connection)
+- [Ekler](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras)
+- [Koruma modları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#protection-modes)
+- [Diğer araçlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#more-tools)
 
 ## Yolunuzu bulun
 
@@ -92,7 +92,7 @@ Bu çalışma alanı hangi sohbetleri kaydeder ve bunlardan neleri saklar? Deği
 - **Kaynak türleri**, klasör ve tüm hesap modlarını kanallar, gruplar, özel sohbetler ve botlarla sınırlar. **Kendi eylemleri**, hesabın kendi mesajlarını, düzenlemelerini ve yanıt klavyesi tuş vuruşlarını ekler.
 - **Yeni bir sohbet veya bot ortaya çıktığında**: profilini ve seçilen sayıya kadar en son görünür mesajlarını kaydedin.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Sınırlamalar: Yayınlanan bulut toplayıcı, Gizli Sohbetleri almaz. Ayrı [Pseudo-secret arayüzü ve bunun demo sürümü](https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/), geliştirme durumları ve mevcut kusurlarıyla birlikte belgelenmiştir. TgWitness çalışmıyorken hiçbir şey kaydedilmez; yeniden başlatıldıktan sonra yalnızca Telegram'ın hâlâ döndürdüğü verileri yakalar ve rapor bu boşluğu gösterir. Sohbet listesi sınırını aşan sohbetler (1,000 diyalogları, Parametreler'de değiştirilmedikçe), bir sonraki aktif hale geldiklerinde eklenir. Başka bir uygulamada basılan satır içi bot düğmeleri görünmez; botun yanıtı kaydedilir.
 
 ### Kapsamdaki sohbetler
 
@@ -146,7 +146,7 @@ Etkinleştirilmiş her kaynağın mevcut geçmişini Sohbetler ve günlüğe yü
 | Bildirimler | Sorunlar, değiştirilen mesajlar ve günlük özet; size özel kontrol botu | [aşağıda](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#notifications) |
 | Kanıtlar ve yedeklemeler | Zaman damgaları, daha fazla tanık ve şifrelenmiş bir dış kopya | [aşağıda](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#evidence-and-backups) |
 | Sunucu 7/24 | SSH'siz bir bulut sunucusu; panelden oluşturulur ve silinir | [Yüksek güvenilirlik](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/#from-the-panel) |
-| Bağımsız tanık | Telegram kanalınıza veya Discord'a gönderilen imzalı kontroller | [Witness](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/) |
+| Bağımsız tanık | Telegram kanalınıza veya Discord'a gönderilen imzalı kontroller | [Tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/) |
 | Kod denetimi | Çalışan programı, GitHub’daki herkese açık bir commit ile karşılaştırır | [aşağıda](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#code-check) |
 
 ### Amaç ve koruma seviyesi

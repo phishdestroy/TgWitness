@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/featu
 
 বর্তমান সংগ্রহ মডেল, মাল্টি-অ্যাকাউন্ট ওয়ার্কফ্লো, এক্সপোর্ট এবং TgWitness-এর অপারেশনাল সীমা।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [প্রজেক্ট রেফারেন্স](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![প্রকল্প রেফারেন্স](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness সংযুক্ত অ্যাকাউন্টগুলির জন্য Telegram কথোপকথন সংরক্ষণ করে, পর্যবেক্ষিত পরিবর্তনগুলি রেকর্ড করে এবং যাচাইযোগ্য রপ্তানি প্রস্তুত করে। এই রেফারেন্সে সংগ্রহ মডেল, বর্তমান কর্মপ্রবাহ এবং তাদের সীমাবদ্ধতা বর্ণনা করা হয়েছে।
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#stable-release-criteria)
+- [স্বতন্ত্র অ্যাপ্লিকেশন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#standalone-application)
+- [সন্ধানসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#shared-investigations)
+- [আর্কাইভ টুলস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#archive-tools)
+- [ঐচ্ছিক অতিরিক্ত](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#optional-extras)
+- [প্রোটোকল এবং ব্যক্তিগত উৎস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#protocol-and-private-sources)
+- [অনেকগুলো অ্যাকাউন্ট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#multiple-accounts)
+- [ক্যাপচার এবং অ্যাট্রিবিউশন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#capture-and-attribution)
+- [ক্ষমতা এবং টেলিগ্রাম সীমা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#capacity-and-telegram-limits)
+- [নির্ভরযোগ্যতা এবং পুনরুদ্ধার](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#reliability-and-recovery)
+- [প্রমাণ মডেল](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#evidence-model)
+- [রপ্তানি, মোতায়েন এবং হস্তান্তর](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#export-deployment-and-handoff)
+- [স্থিতিশীল রিলিজের মানদণ্ড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/#stable-release-criteria)
 
 ## স্বতন্ত্র অ্যাপ্লিকেশন
 
@@ -93,9 +93,9 @@ TgWitness-এর নিজস্ব ইনস্টলেশন, ডেটা �
 | প্রশাসনিক কার্যক্রম | প্রাসঙ্গিক সরবরাহকৃত আপডেট এবং চ্যানেল/সুপারগ্রুপ চ্যাট এক্সপোর্টে অ্যাডমিন-লগ স্ন্যাপশট | রপ্তানি লগটি উপলব্ধ হলে রপ্তানি প্রশাসক অ্যাকাউন্টে পড়ে; ধারাবাহিক অ্যাডমিন-লগ পোলিং এই পথের বাইরে। |
 | সংযুক্তি | মূল সংস্করণ বর্ণনাকারী, ডাউনলোড করা বাইট/SHA-256 এবং প্রচেষ্টার ফলাফল | অদৃশ্য হয়ে যাওয়া ফাইল পুনরুদ্ধার করা নাও যেতে পারে; সর্বশেষ সংস্করণটি প্রতিস্থাপন করা হয় না। |
 | ইতিহাস | বর্তমান দৃশ্যমান বার্তাগুলির স্পষ্ট স্ন্যাপশট | সমস্ত সম্পাদনা বা মুছে ফেলা বিষয়বস্তু পুনর্গঠন করে না |
-| সংগ্রাহক প্রক্রিয়া | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) |
+| সংগ্রাহক প্রক্রিয়া | স্টার্ট/স্টপ, হার্টবিট, ত্রুটি, সেটিংস, স্কোপ এবং স্বাক্ষরিত রান রসিদ | স্থানীয় ইনভেন্টরি; GitHub এবং TDX যোগ করে[স্বতন্ত্র পরিবেশ পরীক্ষা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+ইন্টারফেসটি সোর্স ইভেন্টে প্রদত্ত অ্যাকাউন্টের নাম উল্লেখ করে এবং পর্যবেক্ষিত নাম ও ব্যবহারকারীর নাম সংরক্ষণ করে। যখন ইভেন্টে এর অভিনেতাই উল্লেখ না থাকে, রিপোর্ট সেই ক্ষেত্রটি অনির্দিষ্ট রেখে দেয়।
 
 ## ক্ষমতা এবং টেলিগ্রাম সীমা
 

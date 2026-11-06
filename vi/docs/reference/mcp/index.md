@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/
 
 Kết nối một máy khách MCP với các không gian làm việc và cuộc trò chuyện đã chọn bằng quyền truy cập có thời hạn và có thể thu hồi.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Tích hợp với các nền tảng lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Tích hợp với các nền tảng lưu trữ](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Kết nối máy khách phân tích với các không gian làm việc và cuộc trò chuyện đã chọn. TgWitness cung cấp dịch **vụ Streamable HTTP tại `/mcp` trong quy trình bảng điều khiển**. Mỗi kết nối có mã thông báo, thời hạn và các công cụ được phép riêng. MCP không thể gửi tin nhắn Telegram, thay đổi cài đặt hoặc sửa đổi nhật ký có chữ ký. Các kết nối này cũng hoạt động với [dòng lệnh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/cli/).
 
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**Trên trang này**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#connect-your-client)
+- [Cài đặt và kiểm tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#install-and-check)
+- [Thiết lập kết nối](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#issue-a-connection)
+- [Kết nối ứng dụng khách của bạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#connect-your-client)
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#tools-and-boundaries)
+- [Công cụ và giới hạn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/#tools-and-boundaries)
 
 ## Cài đặt và kiểm tra
 
@@ -57,12 +57,12 @@ Chọn ứng dụng khách trong bảng điều khiển và sao chép cấu hìn
 
 | Ứng dụng khách | Cấu hình | Kết nối |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, tiêu đề bearer |
+| Mã Claude | `.mcp.json` | HTTP, `type: "http"`, tiêu đề bearer |
 | Claude Desktop | `claude_desktop_config.json` | Cầu nối stdio cục bộ |
 | Cursor | `.cursor/mcp.json` | HTTP với tiêu đề biến môi trường |
 | VS Code Local | `.vscode/mcp.json` | HTTP với đầu vào mật khẩu `promptString` |
 | Windsurf | `mcp_config.json` | HTTP với trình giữ chỗ tiêu đề bearer |
-| Các ứng dụng khách khác | URL và tiêu đề Authorization | Streamable HTTP |
+| Các ứng dụng khách khác | URL và tiêu đề Authorization | HTTP có thể truyền phát |
 
 TgWitness sử dụng mã thông báo bearer mà không cần khám phá OAuth. Sử dụng cầu nối stdio cục bộ cho các ứng dụng khách có trình kết nối từ xa yêu cầu OAuth. Đối với VS Code, các biến đầu vào áp dụng cho môi trường **Local** và không được chuyển tiếp tới các phiên Copilot. Tài liệu tham khảo cấu hình: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

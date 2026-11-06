@@ -44,7 +44,7 @@ DIRECTORIO DE DATOS
 - **Autoridad de sellado de tiempo**Opcional · desactivado por defecto
 
   Únicamente el SHA-256 de un punto de control firmado y un nonce aleatorio. Sin mensajes ni nombres de chat.
-- **Witness**Opcional · desactivado por defecto
+- **Testigo**Opcional · desactivado por defecto
 
   Obtiene puntos de control firmados y contadores de capturas mediante un token de solo lectura. No puede leer conversaciones ni modificar la configuración.
 

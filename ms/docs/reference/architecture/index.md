@@ -6,7 +6,7 @@ Komponen pengumpul, panel, jurnal, pekerja dan saksi, dan bagaimana data bergera
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Development](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
+![Pembangunan](https://phishdestroy.github.io/TgWitness/assets/chapter-develop.svg)
 
 Satu proses Python menjadi hos panel FastAPI dan sebarang bilangan ruang kerja terasing, setiap satu dengan klien akaun pengguna Telethon. SQLite menyimpan jurnal peristiwa berasingan yang hanya menambah dan tetapan operasi yang boleh diubah. Sebuah peti besi yang disulitkan menyimpan kelayakan API, StringSession, dan kunci penandatanganan. Bahagian hadapan adalah HTML/CSS/JavaScript biasa yang dibundel: tiada pembinaan Node, CDN, atau muat turun bahagian hadapan semasa runtime diperlukan.
 
@@ -18,8 +18,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | Tindakan panel yang jelas, resit yang disahkan, ID permintaan berterusan dan dasar percubaan semula callback/sertai tempatan tugas |
 | message_content.py | Perbandingan mesej yang dapat diperhatikan, mengecualikan metadata capaian penghantaran |
 | workers.py | Tunggu pekerja fail eksport sebelum pembersihan pembatalan |
-| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
-| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
+| distributed_export.py / distributed_pages.py | Tugas sembang serentak, tempahan bagi setiap akaun, checkpoint yang ditandatangani dan pembersihan selepas pengesahan arkib |
+| distributed_takeout.py / export_timing.py | Sesi Takeout yang boleh disambung semula dan masa untuk setiap permulaan atau sambungan semula |
 | store.py | Transaksi WAL, rantaian peristiwa teratur, penapis pertanyaan, tetapan operasi |
 | fulltext.py | Indeks penuh terbitan (bentuk kata, BM25), diikat pada kepala jurnal yang ditandatangani; tidak pernah dieksport |
 | security.py | Penciptaan fail peribadi, peti simpanan disulitkan, tandatangan Ed25519, kunci proses tunggal |
@@ -50,7 +50,7 @@ Pengendali pemerhatian didaftarkan sebelum sambungan. Pengumpulan langsung dikaw
 
 Setiap ruang kerja menerima satu akaun dan mempunyai direktori serta identiti tandatangan sendiri. Ruang kerja utama kekal di root untuk keserasian; ruang kerja tambahan terletak di profiles/<id>/. Satu token pemegang mengawal keseluruhan pemasangan; ruang kerja bukan penyewa kebenaran berasingan. Kunci proses melindungi direktori; kunci pangkalan data menyusun selingan peristiwa secara bersiri. Setiap tampalan melakukan komitmen secara serentak ke WAL SQLite dengan mod serentak PENUH. Pencetus kemas kini/pembuangan peristiwa menghalang suntingan aplikasi biasa; pentadbir sistem fail kekal di dalam sempadan kepercayaan.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
+Autentikasi API adalah token pembawa. Operasi log masuk disusun secara bersiri dan terhad mengikut masa. Pemunggahan akaun menggunakan had badan disulitkan khusus 12 MiB dan had fail terdekod 8 MiB; permintaan API biasa mengekalkan had 16 KiB. Penukaran dijalankan dalam benang pekerja, menyimpan muat naik dalam memori, dan memulangkan input yang dinormalisasi kepada pelayar yang disahkan. Log masuk QR mempunyai calon bagi setiap ruang kerja, pengecam jangka pendek, tugas penunggu, dan pembatalan eksplisit. Hanya kebenaran yang diterima akan menjadi klien aktif. Telegram FloodWait dikembalikan dengan nilai Retry-After; kelayakan dan mesej ralat RPC mentah tidak didedahkan dalam ralat API. Eksport jurnal dijalankan di luar gelung acara asenkron dan disusun mengikut ruang kerja. Ia menyalurkan snapshot baca yang stabil bersama-sama dengan penulisan WAL yang berterusan. Tugas pemerolehan sembang boleh dijalankan serentak pada akaun berasingan; setiap akaun kekal diperuntukkan sehingga tugasnya berhenti. Tugas yang ditangguhkan atau gagal mengekalkan titik pemeriksaan (checkpoint)nya. Pengesahan arkib yang berjaya membenarkan pembersihan fail kerjanya, meninggalkan ZIP, pelan yang ditandatangani dan status. Pengumpul ruang kerja berkongsi gelung proses/acara.
 
 Snapshot sejarah semasa dan kemas kini langsung boleh bertindih. Kedua-duanya adalah pemerhatian berasingan, dilabel mengikut sumber; duplikat tidak digabungkan secara senyap. Tiada inferens daripada ID yang hilang, teks yang dipadam tetapi dicipta, penyenaraian paksa ahli, atau penyertaan automatik dalam kumpulan dilaksanakan.
 

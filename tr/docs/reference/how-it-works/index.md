@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-i
 
 Hash zinciri, imzalar, kontrol noktaları ve tanıklar, doğrulayıcının kullandığı tam formüllerle açıklanmaktadır.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Kanıt ve doğrulama](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness, toplama hesabının gözlemlediklerini korur, bu gözlemleri imzalı bir günlüğe bağlar ve başka bir kişinin, güvenilir bir anahtar ve daha önce saklanan bir kontrol noktası ile karşılaştırarak dışa aktarılan verileri doğrulamasına olanak tanır.
 
 [Yerel dokümantasyon web](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) sitesinde `/docs/concepts/` adresinde etkileşimli örnekler, `/docs/witness/` adresinde bir kontrol noktası karar gezgini ve [Case Board](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/), [rapor tasarımı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/) ile [devir-teslim özetleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#handover-extract) için adım adım kılavuzlar bulunmaktadır. Tüm örnek mesajlar, sayımlar ve gecikmeler kurgusaldır. Zincir sanal ortamındaki hash değerleri, tarayıcıda SHA-256 ile hesaplanır. Telegram'a hiçbir şey gönderilmez.
 
-**On this page**
+**Bu sayfada**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#pick-a-workflow)
+- [Mesaj değişir; gözlemler birikir](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Bir hash neyi kapsar?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#what-a-hash-covers)
+- [Daha önceki bir kontrol noktasının ekledikleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Bir tanığın ait olduğu yer](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Bilinen eylemler karşısında test sunumu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Bir iş akışı seçin](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Bir mesaj değişir; gözlemler birikir
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/conne
 
 Autenticación, grupos de proxies automáticos, modos de IP, política de respaldo, solicitudes externas y almacenamiento de claves secretas.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentación](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Implementación y recuperación](https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Implementación y recuperación](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 Este documento describe el comportamiento de TgWitness 0.8.0 y sus limitaciones. La autenticación, el acceso a la fuente, la conectividad de red y la integridad de la captura son estados independientes. Para conocer los pasos de inicio de sesión, los formatos de archivo y la gestión de cuentas múltiples, comience por la sección [«Cuentas y formatos de sesión](https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/)». Para conocer las políticas de eventos y el comportamiento ante reinicios, consulte [«Cómo funciona la recopilación](https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/)».
 
@@ -123,19 +123,19 @@ Para los servicios privados gestionados por el operador, la configuración exist
 
 ****Parámetros automáticos del grupo****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+En **Parámetros → MTProxy automático**, configura el umbral de fallo, el tiempo de espera, la rotación planificada, el uso compartido del proxy y el retraso de recambio permitido.
 
 | Control | Por defecto |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Se desconecta antes de la sustitución | 3, en un plazo de 10 minutos |
+| Proxies probados por cada intento de conexión | 3 |
+| Primer / máximo reposo tras un fallo | 10 minutos / 6 horas |
+| Rotación prevista | Desactivado; activar en caso de fallo |
+| Cuentas por proxy | 0: dar preferencia a las entradas independientes; compartir cuando sea necesario. Establecer 1 en esperar para una entrada exclusiva. |
+| Retardo antes de que se permita el recurso directo | 10 minutos; Ocultar la dirección sigue sin funcionar Direct |
+| Comprobaciones de actualización y transporte de la fuente de datos | Actas de 60/10; los valores del espacio de trabajo principal se aplican al grupo compartido |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+El uso de diferentes proxies no garantiza direcciones de salida diferentes. Estos ajustes no anulan los límites de Telegram ni garantizan el anonimato.
 
 Para sustituir la lista pública por su propio catálogo de operadores, configure la sustitución que se indica a continuación. Esto desactiva por completo las suscripciones externas, incluso cuando su matriz «`proxies`» está vacía.
 

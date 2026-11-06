@@ -22,13 +22,13 @@ PAN/PANI KOMPUTER LUB SERWER
 
 **Panel**127.0.0.1:8787 · token bearer
 
-**Collector**Jeden klient Telegramu na obszar roboczy
+**Kolektor**Jeden klient Telegramu na obszar roboczy
 
 KATALOG DANYCH
 
 **Rejestr**SQLite · łańcuchowanie skrótów · podpisane
 
-**Media**pliki nazwane na podstawie skrótu SHA-256
+**Pliki multimedialne**pliki nazwane na podstawie skrótu SHA-256
 
 **Vault**Fernet · sesja, para API, klucz podpisujący, serwer proxy
 
@@ -44,7 +44,7 @@ KATALOG DANYCH
 - **Autorytet w zakresie znaczników czasu**Opcjonalne · domyślnie wyłączone
 
   Wyłącznie skrót SHA-256 podpisanego punktu kontrolnego oraz losowy nonce. Brak wiadomości, brak nazw użytkowników czatu.
-- **Witness**Opcjonalne · domyślnie wyłączone
+- **Świadek**Opcjonalne · domyślnie wyłączone
 
   Narzędzie pobiera podpisane punkty kontrolne i liczniki przechwyceń za pomocą tokenu tylko do odczytu. Nie ma możliwości odczytu treści rozmów ani zmiany ustawień.
 

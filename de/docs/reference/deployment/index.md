@@ -6,7 +6,7 @@ Führen Sie TgWitness als Dienst unter Windows, Linux, macOS oder Docker hinter 
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Bereitstellung und Wiederherstellung](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Englisch** · [Russisch](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [Ukrainisch](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [Farsi](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [Urdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [Hindi](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [Bahasa Indonesia](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [Vereinfachtes Chinesisch](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ Jede GitHub-Veröffentlichung enthält `TgWitness-<version>-windows-amd64-portab
 | `TgWitness-Demo.cmd` | Starten Sie die synthetische Demo unter `data\demo` |
 | `TgWitness-Check.cmd` | Führen Sie die Bereitschaftsprüfung durch, ohne das Programm zu starten |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+Das angeheftete russische Morphologie-Wörterbuch und die PDF-Farbprofile sind für die Offline-Nutzung gebündelt. Die Paketierung erlaubt nur ihre bekannten Dateipfade innerhalb der Verzeichnisse der Abhängigkeit `data`; unerwartete Dateien in diesen Verzeichnissen führen zum Fehlschlagen des Builds.
 
 Entpacken Sie das gesamte Archiv in einen beschreibbaren Ordner wie beispielsweise „`Documents\TgWitness`“; führen Sie das Programm nicht direkt aus der ZIP-Datei oder aus dem Ordner „Programme“ aus. Die Laufzeitumgebung verwendet einen isolierten Modulpfad, sodass andere Python-Installationen und „`PYTHONPATH`“ keinen Einfluss darauf haben. Die Daten verbleiben im `data`-Ordner des Pakets. Um ein Update durchzuführen, beenden Sie TgWitness, entpacken Sie die neue Version in einen neuen Ordner und kopieren Sie den `data`-Ordner dorthin.
 

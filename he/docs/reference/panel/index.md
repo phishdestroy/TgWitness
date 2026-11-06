@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/panel
 
 כל מסך בלוח הבקרה: צ&#x27;אטים, יומן, מקורות, ייצוא, תוספות, מצבי הגנה ובדיקת קוד.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [התחלת עבודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![התחלת עבודה](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [התקנה ראשונית והגדרות](https://phishdestroy.github.io/TgWitness/he/docs/reference/settings/) · [חשבונות](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/) · [ייצוא ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [דוחות מקרה](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)
 
 מה כל מסך עושה, מה הוא רושם ביומן החתום והיכן נמצא המדריך המפורט . הלוח מציג סביבת עבודה אחת בכל פעם: חשבון Telegram אחד עם המקורות, היומן ומפתח החתימה שלו. הבורר בחלק העליון של סרגל הצד מאפשר מעבר בין סביבות עבודה. הכתובת נושאת את סביבת העבודה (`?ws=…`); כל עוד הכתובת, הבוחר והחשבון הטעון אינם תואמים, הפעולות נותרות חסומות.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+השתמש בשיטות האיסוף של [Compare](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) כדי לבחור בין תצפית בזמן אמת, היסטוריה מלאה, ייצוא חשבונות/צ'אטים עדכניים והעברת רשומות שמורות. דף הייצוא כולל את אותה השוואה מעל פקדי ההורדה שלו.
 
-**On this page**
+**בעמוד זה**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#more-tools)
+- [מצא את דרכך](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#find-your-way)
+- [התחילו כאן](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#start-here)
+- [צ'אטים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#chats)
+- [יומן](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#journal)
+- [מקורות](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#sources)
+- [ייצוא](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#exports)
+- [הגדרות, חשבונות וחיבור](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#settings-accounts-and-connection)
+- [תוספות](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#extras)
+- [מצבי הגנה](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#protection-modes)
+- [כלים נוספים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#more-tools)
 
 ## התמצא באתר
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **סוגי המקורות** מגבילים את מצבי התיקייה והחשבון כולו לערוצים, קבוצות, צ'אטים פרטיים ובוטים. "**פעולות משלך**" מוסיף את ההודעות, העריכות והקשות המקלדת בתגובה של החשבון עצמו.
 - **כאשר מופיע צ'אט או בוט חדש**: שמור את הפרופיל שלו ואת מספר ההודעות האחרון הנראות שלו, עד למספר שנבחר .
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+מגבלות: אספן הענן שפורסם אינו מקבל צ'אטים סודיים. הממשק הנפרד [Pseudo-secret והדגמה שלו](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/) מתועדים עם סטטוס הפיתוח שלהם והפגמים הקיימים. שום דבר לא נרשם בזמן ש-TgWitness אינו פועל; לאחר הפעלה מחדש הוא מתעד רק את מה ש-Telegram עדיין מחזיר, וה דוח מציג את הפער. צ'אטים החורגים ממגבלת רשימת הצ'אטים (דיאלוגים מסוג 1,000, אלא אם שונו ב- Parameters) מתווספים ברגע שהם הופכים לפעילים. לחצני בוט מוטמעים שנלחצו ב- אפליקציה אחרת אינם נראים; תשובת הבוט נרשמת.
 
 ### צ'אטים הנכללים בהיקף
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | התראות | בעיות, הודעות ששונו וסיכום יומי; בוט בקרה משלכם | [להלן](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#notifications) |
 | ראיות וגיבויים | חותמות זמן, עדים נוספים ועותק מוצפן מחוץ לאתר | [להלן](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#evidence-and-backups) |
 | השרת פועל 24/7 | שרת ענן ללא SSH, שנוצר ונמחק מהלוח הבקרה | [אמינות גבוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/#from-the-panel) |
-| עד עצמאי | צ'קים חתומים שפורסמו בערוץ ה-Telegram או ב-Discord שלכם | [Witness](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/) |
+| עד עצמאי | צ'קים חתומים שפורסמו בערוץ ה-Telegram או ב-Discord שלכם | [עד](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/) |
 | בדיקת קוד | משווה את התוכנית הפועלת עם commit ציבורי ב-GitHub | [להלן](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#code-check) |
 
 ### מטרה ורמת הגנה

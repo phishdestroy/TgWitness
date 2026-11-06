@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/featu
 
 Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Tham chiếu dự án](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![Tham chiếu dự án](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness lưu trữ các cuộc trò chuyện trên Telegram mà các tài khoản được kết nối có thể truy cập, ghi lại các thay đổi được quan sát và chuẩn bị các tệp xuất có thể xác minh. Tài liệu tham khảo này mô tả mô hình thu thập, các quy trình làm việc hiện tại và phạm vi áp dụng của chúng.
 
-**On this page**
+**Trên trang này**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#stable-release-criteria)
+- [Ứng dụng độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#standalone-application)
+- [Các cuộc điều tra chung](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#shared-investigations)
+- [Công cụ lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#archive-tools)
+- [Tính năng bổ sung tùy chọn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#optional-extras)
+- [Giao thức và các nguồn riêng tư](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#protocol-and-private-sources)
+- [Nhiều tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#multiple-accounts)
+- [Ghi lại và xác định nguồn gốc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#capture-and-attribution)
+- [Dung lượng và giới hạn của Telegram](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#capacity-and-telegram-limits)
+- [Độ tin cậy và khả năng phục hồi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#reliability-and-recovery)
+- [Mô hình bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#evidence-model)
+- [Xuất, triển khai và bàn giao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#export-deployment-and-handoff)
+- [Tiêu chí phát hành phiên bản ổn định](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/#stable-release-criteria)
 
 ## Ứng dụng độc lập
 
@@ -93,9 +93,9 @@ Tính năng Nguồn cung cấp các tùy chọn riêng cho từng tài khoản �
 | Các thao tác của quản trị viên | Các bản cập nhật liên quan đã được cung cấp và bản chụp nhanh nhật ký quản trị trong các tệp xuất từ cuộc trò chuyện kênh/siêu nhóm | Quá trình xuất dữ liệu sẽ đọc nhật ký khi có sẵn cho tài khoản quản trị viên thực hiện xuất; việc kiểm tra liên tục nhật ký quản trị nằm ngoài quy trình này |
 | Tệp đính kèm | Mô tả phiên bản gốc, số byte đã tải xuống/SHA-256 và kết quả các lần thử | Một tệp đã biến mất có thể không thể khôi phục được; phiên bản mới nhất sẽ không được thay thế |
 | Lịch sử | Ảnh chụp màn hình chi tiết các tin nhắn hiện đang hiển thị | Không tái tạo lại toàn bộ các nội dung đã được chỉnh sửa hoặc xóa bỏ |
-| Quy trình thu thập dữ liệu | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) |
+| Quy trình thu thập dữ liệu | Bắt đầu/dừng, tín hiệu hoạt động, lỗi, cài đặt, phạm vi và biên nhận chạy có chữ ký | Danh mục cục bộ; GitHub và TDX bổ sung [các kiểm tra môi trường độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+Giao diện sẽ sử dụng tên tài khoản được cung cấp trong sự kiện nguồn và giữ nguyên các tên và tên người dùng đã quan sát được. Khi sự kiện không đề cập đến chủ thể, báo cáo sẽ để trống trường đó.
 
 ## Dung lượng và các giới hạn của Telegram
 

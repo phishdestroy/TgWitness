@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/times
 
 हस्ताक्षरित चेकपॉइंट्स के लिए RFC 3161 टाइमस्टैम्प: प्राधिकरण को क्या भेजा जाता है और प्रतिक्रिया कैसे सत्यापित की जाती है।
 
-[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)
+[टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [साक्ष्य और सत्यापन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![साक्ष्य और सत्यापन](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness RFC 3161 अनुरोध तैयार करता है और टाइमस्टैम्प अथॉरिटी (TSA) प्रतिक्रियाओं को सत्यापित करता है। यह मैन्युअल प्रक्रिया न तो कोई TSA चुनती है और न ही डेटा सबमिट करती है; एविडेंस मोड एक शेड्यूल ([एविडेंस फॉर्मेट](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)) पर दोनों काम करता है। एक तैयार अनुरोध **अभी तक एक टाइमस्टैम्प प्रमाण नहीं** है।
 

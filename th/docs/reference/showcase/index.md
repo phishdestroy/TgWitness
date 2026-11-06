@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/showc
 
 เผยแพร่ข้อความที่บันทึกไว้จากช่องสาธารณะที่เลือกไว้และภาพสแนปช็อตที่ลงนามแล้ว ผ่านลิงก์ที่มีอายุการใช้งานจำกัดและสามารถยกเลิกได้
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **Access → Public showcase** สร้างหน้าแยกต่างหากแบบอ่านอย่างเดียวโดยใช้ระบบ access-token ที่มีอยู่ มันอ่านข้อมูลการสังเกตที่บันทึกไว้ของระบบติดตั้ง แต่ไม่ เริ่มทำงานของ collector ไม่ลงชื่อเข้าใช้ Telegram และไม่สร้างช่องสำหรับผู้เยี่ยมชม
 
@@ -22,7 +22,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/showc
 
 ## สิ่งที่ผู้เยี่ยมชมเห็น
 
-| Visible | ตั้งเป็นส่วนตัว |
+| มองเห็นได้ | ตั้งเป็นส่วนตัว |
 | --- | --- |
 | ชื่อช่องสาธารณะที่เลือกไว้ ชื่อผู้ใช้ และวันที่ตรวจสอบโปรไฟล์ | ข้อมูลประจำตัวบัญชี, ป้ายกำกับพื้นที่ทำงานภายใน และแหล่งข้อมูลที่ยังไม่ถูกเลือก |
 | ข้อความที่บันทึกไว้และการแก้ไขแต่ละครั้งที่บันทึก | ID ผู้ส่งที่จัดโครงสร้าง, ชื่อ, ชื่อผู้ใช้, หมายเลขโทรศัพท์ และค่าโปรไฟล์ |

@@ -6,7 +6,7 @@ TgWitness کو Windows، Linux، macOS یا Docker پر ایک سروس کے ط�
 
 [ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![تیناری اور بحالی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **انگریزی** · [روسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [یوکرینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [اسپینش](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [پرتگالی (برازیل)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [ترکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [عربی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [ہندی](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [انڈونیشیائی زبان](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [ویتنام زبان](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [سادہ چینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo` میں مصنوعی ڈیمو شروع کریں۔ |
 | `TgWitness-Check.cmd` | بغیر شروع کیے تیاری کی جانچ چلائیں |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+پِن کی گئی روسی مورفولوجی ڈکشنری اور PDF رنگین پروفائلز آف لائن استعمال کے لیے بنڈل کی گئی ہیں۔ پیکجنگ صرف ان کے معلوم فائل راستوں کو dependency `data` ڈائریکٹریز کے اندر اجازت دیتی ہے؛ ان ڈائریکٹریز میں غیر متوقع فائلیں بلڈ کو ناکام کر دیتی ہیں۔
 
 پورے آرکائیو کو کسی لکھنے کے قابل فولڈر میں نکالیں، جیسے `Documents\TgWitness`؛ اسے ZIP کے اندر یا Program Files سے نہ چلائیں۔ رن ٹائم ایک الگ موڈیول پاتھ استعمال کرتا ہے، لہٰذا دیگر Python تنصیبات اور `PYTHONPATH` اس پر اثر نہیں ڈالتیں۔ ڈیٹا پیکج کے فولڈر `data` میں محفوظ رہتا ہے۔ اپ ڈیٹ کرنے کے لیے، TgWitness کو روک دیں، نیا ورژن ایک نئے فولڈر میں نکالیں اور فولڈر `data` کو منتقل کر دیں۔
 

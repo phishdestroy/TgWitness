@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-
 
 Các bộ lọc báo cáo, tám mẫu thiết kế, cài đặt sẵn nội dung, lịch sử thay đổi đã lưu và phần đánh giá được bao gồm trong các tệp xuất có chữ ký.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Điều tra](https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Điều tra](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Chuyển các quan sát đã chọn thành một bản tường trình dễ đọc về vụ việc: câu hỏi, phạm vi, các thay đổi đã lưu, biểu đồ, kết quả và tham chiếu nguồn. Mỗi báo cáo cung cấp cho người nhận một cách để kiểm tra tài liệu được giao và xem xét phạm vi thu thập của nó.
 
@@ -24,7 +24,7 @@ Mở **Exports → Cấu hình và xem trước**. Thực hiện theo trình t�
 
 Bản xem trước dữ liệu tính toán tiền tố nhật ký ổn định hoàn chỉnh, không phải mẫu ban đầu. Chỉ các hàng mẫu được hiển thị và các danh sách dài mới bị giới hạn; số lượng bị bỏ qua của chúng được hiển thị. Việc xuất dữ liệu sau này sẽ tạo ra một bản chụp ổn định mới, do đó việc thu thập đang diễn ra có thể làm tăng các con số này. Phạm vi, số lượng và danh tính nguồn được bao gồm trong báo cáo đã ký. Việc mở hoặc xem trước biểu mẫu sẽ không lưu lại biểu mẫu đó.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Hướng dẫn về thẩm quyền pháp lý.** Trong phần Chi tiết tài liệu, mở **Hướng dẫn về thẩm quyền pháp lý · tùy chọn** để chọn thẩm quyền pháp lý và thủ tục dân sự/thương mại hoặc hình sự. Phụ lục bao gồm cơ sở pháp lý, liên kết nguồn, ghi chú chuẩn bị và tình trạng nghiên cứu. Tóm tắt và giải thích bằng ngôn ngữ địa phương về các biện pháp bảo vệ dữ liệu thu thập là tùy chọn. Không có khu vực pháp lý nào được chọn theo mặc định. Các lựa chọn này thuộc về không gian làm việc và không được bao gồm trong các cấu hình bố cục đã lưu cũng như các thiết lập mặc định ngầm định về chia sẻ và sao chép. Xem [thiết lập mặc định, báo cáo được hỗ trợ và giới hạn nghiên cứu](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Chọn bản sao dành cho người nhận.** Các biểu đồ và bản ghi chép sử dụng các bản ghi đã chọn. Tính toàn vẹn, việc lưu giữ và phạm vi bao quát mô tả toàn bộ nhật ký nguồn. Tệp ZIP chứa bằng chứng chứa các bản ghi gốc và tệp đính kèm. Sử dụng [quy trình bàn giao tối thiểu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#handover-extract) khi người nhận chỉ cần nhận dữ liệu đã chọn và được phép.
 
@@ -90,18 +90,18 @@ Một khoảng trống có nghĩa là không có quan sát nào được bao g�
 
 Khi được bao gồm, tệp `analytics.json` được bảo vệ bởi các hàm băm tệp đã ký của kho lưu trữ. Tệp `report.json` của nhật ký nhúng cùng một tổng hợp đã chọn. Xác minh chữ ký phát hiện các byte bị thay đổi. Để kiểm tra các con số, hãy tính lại các tổng hợp nhật ký bằng `report_analytics.Analytics` và `selected`, hoặc các tổng hợp ảnh chụp nhanh bằng `snapshot_analytics.collect` và `project`.
 
-### Anomaly indicators
+### Các chỉ số bất thường
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Xem trước.** Báo cáo bằng chứng bổ sung phần **Chỉ số bất thường** được tính toán bởi các bộ xử lý đã đăng ký (`tgwitness/metrics/`, một tệp cho mỗi chỉ số). Báo cáo liệt kê tên của mọi bộ xử lý đã chạy kèm theo phiên bản của nó, và hiển thị phương pháp tính toán dưới bảng dữ liệu của nó, để quá trình tính toán có thể được lặp lại từ `events.jsonl` với `tgwitness.metrics.run`.
 
-| Processor | Nội dung hiển thị |
+| Bộ xử lý | Nội dung hiển thị |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | Số người đăng bài lần đầu và số tin nhắn mỗi ngày theo giờ UTC. Một cờ cảnh báo yêu cầu ít nhất năm người đăng bài lần đầu và gấp ba lần giá trị trung vị của số người này, với khối lượng tin nhắn tối đa bằng 1.5 lần giá trị trung vị của khối lượng tin nhắn. Mức cơ sở sử dụng ít nhất bảy ngày quan sát trong vòng 14 ngày lịch trước đó, sau bảy ngày khởi động. |
+| `service_vs_message_ratio` v1 | Số tin nhắn đã lưu riêng biệt cho từng cuộc trò chuyện và phần được sử dụng bởi các tin nhắn dịch vụ. Tài liệu này mô tả hệ thống đánh số; nó không giải thích về một số cụ thể nào đó bị thiếu. |
+| `join_leave_per_month` v1 | Số lượt tham gia, rời khỏi, xóa hoặc cấm mỗi tháng, mỗi người, mỗi cuộc trò chuyện, mỗi thay đổi và mỗi ngày. |
+| `pinned_per_month` v1 | Số lượng tin nhắn dịch vụ được ghim, thông báo gỡ ghim, cũng như tin nhắn được ghim được thêm vào hoặc xóa đi giữa các bản chụp trạng thái cuộc trò chuyện, tính theo tháng. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Tham số → Chỉ số báo cáo** chọn bộ xử lý và số hàng hiển thị, bao gồm cả trong các báo cáo đã lọc. Các bảng hàng ngày và hàng tháng hiển thị các hàng gần đây, các bảng chia sẻ dịch vụ xếp hạng các cuộc trò chuyện theo số lượng tin nhắn đã lưu. Tổng số bao gồm mọi hàng.
 
 Từ bản sao nguồn, hãy xây dựng tất cả tám mẫu thiết kế được liệt kê ở trên dựa trên cùng một tạp chí hư cấu:
 
@@ -153,7 +153,7 @@ Kiểm tra từng mục riêng biệt, cùng với phạm vi thu thập đã ghi
 4. Giữ nguyên các tệp ZIP gốc và các giá trị băm của chúng. Ghi lại từng người nắm giữ, lần chuyển giao, ngày tháng và mục đích. Giữ lại các tuyên bố của người vận hành được ghi nhận và các ghi chú vụ việc kèm theo chúng.
 5. Đối với các máy ảo (VM) bí mật, cần bảo toàn và xác minh độc lập các thông tin sau: trích dẫn, thách thức, chuỗi chứng chỉ Intel, các phép đo, nguồn chính xác và điều kiện xử lý khóa. Giữ lại kết quả xác minh chứng nhận cùng với các bằng chứng đã được xem xét.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Xem [Phạm vi xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#verification-scope) để biết các kiểm tra về việc thu thập, tính toàn vẹn của kho lưu trữ, thời gian và phạm vi thu thập trong từng chế độ.
 
 ## Xem xét của người nhận
 

@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/times
 
 חותמות זמן לפי RFC 3161 עבור נקודות ביקורת חתומות: מה נשלח לרשות וכיצד מאמתים את התגובה.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [ראיות ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![ראיות ואימות](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness מכין בקשות לפי RFC 3161 ומאמת תגובות של רשות חותמת זמן (TSA). תהליך ידני זה אינו בוחר TSA ואינו שולח נתונים; מצב הראיות מבצע את שני הדברים על פי לוח זמנים ([פורמט ראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). בקשה שהוכנה **אינה** מהווה **עדיין הוכחת חותמת זמן**.
 

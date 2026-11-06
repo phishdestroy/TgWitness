@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-i
 
 Các khái niệm về chuỗi băm, chữ ký, điểm kiểm tra và nhân chứng được giải thích kèm theo các công thức chính xác mà bên xác minh sử dụng.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bằng chứng và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bằng chứng & xác minh](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness lưu giữ những gì tài khoản thu thập đã quan sát được, liên kết các quan sát đó vào một nhật ký có chữ ký và cho phép người khác xác minh bản xuất dữ liệu dựa trên một khóa đáng tin cậy cùng với một điểm kiểm tra đã được lưu giữ trước đó.
 
 [Trang web tài liệu địa](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) [phương](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) bổ sung các ví dụ tương tác tại `/docs/concepts/`, công cụ khám phá quyết định tại `/docs/witness/`, và các hướng dẫn chi tiết về [Case Board](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-board/), [thiết kế báo cáo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/) và [trích xuất quá trình bàn giao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/#handover-extract). Tất cả các tin nhắn ví dụ, số lượng và thời gian trễ đều là hư cấu. Các giá trị băm trong môi trường thử nghiệm chuỗi được tính toán bằng SHA-256 trong trình duyệt. Không có dữ liệu nào được gửi đến Telegram.
 
-**On this page**
+**Trên trang này**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#pick-a-workflow)
+- [Tin nhắn thay đổi; các quan sát tích lũy](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Phạm vi bao phủ của một hàm băm](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#what-a-hash-covers)
+- [Điều mà một điểm kiểm tra trước đó bổ sung](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Vị trí của một nhân chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Kiểm tra việc thực hiện so với các hành động đã biết](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Chọn quy trình làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Một tin nhắn thay đổi; các quan sát được tích lũy
 

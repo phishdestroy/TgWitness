@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![開始使用](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 **英文** · [俄語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [烏克蘭語](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [西班牙語](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [葡萄牙語（巴西）](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [土耳其語](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [阿拉伯語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [波斯語](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [烏爾都語](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [印地語](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [印尼語](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [越南語](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [簡體中文](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 

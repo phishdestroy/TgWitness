@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel
 
 面板的每个界面：聊天、日志、来源、导出、扩展功能、保护模式和代码检查。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [入门指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![入门指南](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [初始设置与配置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/settings/) · [账户](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/) · [导出与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/) · [案例报告](https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/)
 
 各屏幕的功能说明、其向签名日志写入的内容，以及详细 指南的所在位置。面板每次仅显示一个工作区：一个 Telegram 账户及其专属的 来源、日志和签名密钥。侧边栏顶部的选择器用于切换 工作区。地址包含工作区信息（`?ws=…`）；当地址、 选择器与已加载的账户不一致时，所有操作将被阻止。
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+使用[比较收集方法](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)在实时 观察、完整历史记录、新账户/聊天记录导出以及已保存记录移交之间进行选择。 导出页面在下载控件上方包含与上述相同的比较功能。
 
-**On this page**
+**本页内容**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#more-tools)
+- [导航指南](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#find-your-way)
+- [从这里开始](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#start-here)
+- [聊天记录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#chats)
+- [日志](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#journal)
+- [来源](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#sources)
+- [导出功能](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#exports)
+- [设置、账户和连接](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#settings-accounts-and-connection)
+- [附加内容](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#extras)
+- [保护模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#protection-modes)
+- [更多工具](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#more-tools)
 
 ## 快速入门
 
@@ -92,7 +92,7 @@ Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/
 - **源类型**将文件夹模式和整个账户模式限制为频道、群组、私聊 和机器人。**自有操作**会添加该账户自身的消息、编辑操作以及 回复时的键盘按键记录。
 - **当出现新的聊天或机器人时**：保存其资料，并保存最多（根据所选数量） 其最新的可见消息。
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+限制：已发布的云端收集器无法接收秘密聊天。独立的 [伪秘密接口及其演示版本的](https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/)文档中已注明其 开发状态和未解决的缺陷。 当 TgWitness 未运行时不会记录任何内容；重启后，它仅能捕获 Telegram 仍返回的数据，且 报告中会显示数据缺口。超出聊天列表限制（除非在 参数中更改，否则为 1,000 个对话）的聊天将在下次激活时被添加。在 其他应用中点击的内联机器人按钮不可见；但机器人的回复会被记录。
 
 ### 涵盖的聊天
 
@@ -146,7 +146,7 @@ Limits: the published cloud collector does not receive Secret Chats. The separat
 | 通知 | 问题、已修改的消息和每日摘要；您专属的控制机器人 | [下方](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#notifications) |
 | 证据与备份 | 时间戳、更多见证人以及加密的异地副本 | [下方](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#evidence-and-backups) |
 | 服务器全天候运行 | 一个不支持 SSH 的云服务器，可通过控制面板进行创建和删除 | [高可信度](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#from-the-panel) |
-| 独立见证者 | 已签名的检查结果将发布到您的 Telegram 频道或 Discord 上 | [Witness](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/) |
+| 独立见证者 | 已签名的检查结果将发布到您的 Telegram 频道或 Discord 上 | [见证人](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/) |
 | 代码检查 | 将正在运行的程序与 GitHub 上的公开提交进行比较 | [下方](https://phishdestroy.github.io/TgWitness/zh/docs/reference/panel/#code-check) |
 
 ### 目标与保护级别

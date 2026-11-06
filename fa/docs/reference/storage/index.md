@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/stora
 
 نسخه‌برداری، انتقال فایل‌های قدیمی‌تر به فضای ابری شما، نسخه‌های کپی‌شده تحت Object Lock و بازیابی روی دستگاه جدید.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![راه‌اندازی و بازیابی](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 پنل سه وظیفه را جدا می‌کند:
 
@@ -20,13 +20,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/stora
 
 پاسخ بارگذاری به تنهایی مجوز حذف یک فایل را نمی‌دهد. TgWitness شیء رمزگذاری‌شده کامل را دانلود کرده و اندازه و SHA-256 آن را تأیید می‌کند، رسید را ذخیره می‌کند، سپس بلافاصله قبل از حذف، بایت‌های محلی را دوباره بررسی می‌کند. یک خطای بارگذاری، بازخوانی متفاوت یا لغو انتقال، فایل محلی را سر جای خود باقی می‌گذارد. اگر یک نسخه پشتیبان مدرک فعال هنوز آن فایل را کپی نکرده باشد، حذف آن نیز منتظر می‌ماند.
 
-**On this page**
+**در این صفحه**
 
-- [When the disk is filling up](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#when-the-disk-is-filling-up)
-- [Connect a destination](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#connect-a-destination)
-- [Keep the recovery file](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#keep-the-recovery-file)
-- [Recover after losing the installation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#recover-after-losing-the-installation)
-- [Operator bot and completion notices](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#operator-bot-and-completion-notices)
+- [وقتی دیسک در حال پر شدن است](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#when-the-disk-is-filling-up)
+- [اتصال به مقصد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#connect-a-destination)
+- [فایل بازیابی را حفظ کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#keep-the-recovery-file)
+- [بازیابی پس از از دست دادن نصب](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#recover-after-losing-the-installation)
+- [ربات اپراتور و اعلان‌های تکمیل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/#operator-bot-and-completion-notices)
 
 ## وقتی فضای دیسک رو به اتمام است
 

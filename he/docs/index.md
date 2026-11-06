@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 מדריכים מאוירים
 
-[### Case Board יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/) [### סטודיו לדוחות בחרו את החומר ואת אחד משמונת עיצובי הדוחות.](https://phishdestroy.github.io/TgWitness/he/docs/reports/) [### שיתוף העתק הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [### קבוצות חשבונות יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
+[### לוח מקרים יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/) [### סטודיו לדוחות בחרו את החומר ואת אחד משמונת עיצובי הדוחות.](https://phishdestroy.github.io/TgWitness/he/docs/reports/) [### שיתוף העתק הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [### קבוצות חשבונות יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
 
 [## מצבים, תרחישים ורמות ראיות היקפי איסוף, גבולות אירועים, שמונה מנגנוני אימות וששה תרחישי חקירה בדיוניים.](https://phishdestroy.github.io/TgWitness/he/guides/modes.html)
 
@@ -40,7 +40,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 אסף
 
-[מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/)[כיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/)[Secret Chats: implementation and demo](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/)[טען היסטוריית המקור](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/)[תהליכי עבודה ותפעול](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/)[מצב חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)[תכונות ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
+[מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/)[כיצד מתבצע האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/)[צ'אטים סודיים: יישום והדגמה](https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/)[טען היסטוריית המקור](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/)[תהליכי עבודה ותפעול](https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/)[מצב חקירה](https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/)[תכונות ומגבלות](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
 
 ארכיון ושילובים
 

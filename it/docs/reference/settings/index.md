@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/setti
 
 La procedura guidata di configurazione, gli obiettivi, i livelli dell’interfaccia, i percorsi di connessione e le impostazioni condivise da un gruppo di account.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Introduzione](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Introduzione](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Account](https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/) · [Collegamento](https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/) · [Accesso](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/)
 
@@ -28,7 +28,7 @@ La lingua, il fuso orario IANA, il tema e il livello vengono memorizzati per ope
 
 | Obiettivo | Raccolta | File | Servizi esterni | Indirizzo del server |
 | --- | --- | --- | --- | --- |
-| Copia d’archivio | Off; **Start** avvia un'esportazione | Foto fino a 20 MB | Off | Automatico |
+| Copia d’archivio | Off; **Start** avvia un'esportazione | Foto fino a 20 MB | Disattivato | Automatico |
 | Segui le chat | Continuo | Foto e video fino a 60 secondi / 20 MB | Marcatori temporali e notifiche dei problemi | Automatico |
 | Prove | Continuo | Tutti i file fino a 1 GB | Timestamp, drand, notifiche | No, nascondilo |
 

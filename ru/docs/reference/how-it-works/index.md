@@ -4,35 +4,35 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-i
 
 Объяснение принципов работы цепочки хешей, подписей, контрольных точек и свидетелей с указанием точных формул, используемых верификатором.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Доказательства и верификация](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Доказательства и верификация](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness сохраняет данные, зафиксированные учетной записью-сборщиком, объединяет эти данные в подписанный журнал и позволяет другому лицу проверить экспортированные данные с помощью доверенного ключа и ранее сохраненной контрольной точки.
 
 На [локальном веб-сайте документации](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) добавлены интерактивные примеры в разделе `/docs/concepts/`, инструмент для анализа решений по контрольным точкам в разделе `/docs/witness/`, а также пошаговые инструкции по работе с [Case Board](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/), [оформлению отчетов](https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-reports/) и [передаче выдержек](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/#handover-extract). Все примеры сообщений, количественные показатели и задержки являются вымышленными. Хэши в тестовой среде цепочки рассчитываются с помощью алгоритма SHA-256 в браузере. Никакие данные не отправляются в Telegram.
 
-**On this page**
+**На этой странице**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#pick-a-workflow)
+- [Сообщение изменяется; наблюдения накапливаются](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Что охватывает хеш](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#what-a-hash-covers)
+- [Что добавляет более ранний контрольный пункт](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Куда относится свидетель](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Проверка доставки по отношению к известным действиям](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Выберите рабочий процесс](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Сообщение изменяется; наблюдения накапливаются
 
-Диаграмма последовательности · Telegram → Collector: Новое сообщение: Встречаемся в 10:00; Collector → Подписанный журнал: Добавить сообщение.new; Telegram → Collector: Изменение: Встреча в 11:00; Collector → Подписанный журнал: Добавить сообщение.отредактировано; Telegram → Collector: Уведомление об удалении; Collector → Подписанный журнал: Добавить сообщение.deleted; Примечание относительно Подписанный журнал: Сохраняются данные об оригинале, редактировании и удалении · Telegram · Collector · Подписанный журнал · Новое сообщение: Встречаемся в 10:00 · Добавить сообщение.new · Изменение: Встреча в 11:00 · Добавить сообщение.отредактировано · Уведомление об удалении · Добавить сообщение.deleted · Сохраняются данные об оригинале, редактировании иудалении
+Диаграмма последовательности · Telegram → Коллектор: Новое сообщение: Встречаемся в 10:00; Коллектор → Подписанный журнал: Добавить сообщение.new; Telegram → Коллектор: Изменение: Встреча в 11:00; Коллектор → Подписанный журнал: Добавить сообщение.отредактировано; Telegram → Коллектор: Уведомление об удалении; Коллектор → Подписанный журнал: Добавить сообщение.deleted; Примечание относительно Подписанный журнал: Сохраняются данные об оригинале, редактировании и удалении · Telegram · Коллектор · Подписанный журнал · Новое сообщение: Встречаемся в 10:00 · Добавить сообщение.new · Изменение: Встреча в 11:00 · Добавить сообщение.отредактировано · Уведомление об удалении · Добавить сообщение.deleted · Сохраняются данные об оригинале, редактировании иудалении
 
 **Схема в текстовом формате**
 
-1. Telegram → Collector: Новое сообщение: Встречаемся в 10:00
-2. Collector → Подписанный журнал: Добавить сообщение.new
-3. Telegram → Collector: Изменение: Встреча в 11:00
-4. Collector → Подписанный журнал: Добавить сообщение.отредактировано
-5. Telegram → Collector: Уведомление об удалении
-6. Collector → Подписанный журнал: Добавить сообщение.deleted
+1. Telegram → Коллектор: Новое сообщение: Встречаемся в 10:00
+2. Коллектор → Подписанный журнал: Добавить сообщение.new
+3. Telegram → Коллектор: Изменение: Встреча в 11:00
+4. Коллектор → Подписанный журнал: Добавить сообщение.отредактировано
+5. Telegram → Коллектор: Уведомление об удалении
+6. Коллектор → Подписанный журнал: Добавить сообщение.deleted
 7. Примечание относительно Подписанный журнал: Сохраняются данные об оригинале, редактировании и удалении
 
 В данной упрощённой последовательности предполагается, что Telegram доставил каждое обновление и что выбранный аккаунт мог его увидеть. Операционные события также фиксируются в журнале. Уведомление об удалении не содержит информации об авторе удаления или точном времени удаления. Повторные доставки считаются отдельными наблюдениями; в журнале не происходит подавления дубликатов.

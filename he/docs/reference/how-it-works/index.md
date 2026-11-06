@@ -4,35 +4,35 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/how-i
 
 הסבר על שרשרת חשישים, חתימות, נקודות ביקורת ועדים, תוך שימוש בנוסחאות המדויקות שבהן משתמש המאמת.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [תיעוד](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [ראיות ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![ראיות ואימות](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness שומר את מה שנצפה על ידי חשבון האיסוף, מקשר תצפיות אלה ליומן חתום ומאפשר לאדם אחר לאמת ייצוא באמצעות מפתח מהימן ונקודת ביקורת שנשמרה קודם לכן.
 
 [אתר התיעוד המקומי](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) מוסיף דוגמאות אינטראקטיביות ב-`/docs/concepts/`, מחשבון החלטות בנקודות ביקורת ב- `/docs/witness/`, ומדריכים מפורטים [ל-Case Board](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/), [לעיצוב דוחות](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/) [ולתקצירי](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract) [מסירת התיק](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#handover-extract). כל הודעות הדוגמה, הספירות והעיכובים הם פיקטיביים. חתימות ה-hash בסביבת הבדיקה של ה-chain מחושבות באמצעות SHA-256 בדפדפן. שום דבר לא נשלח ל-Telegram.
 
-**On this page**
+**בעמוד זה**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#pick-a-workflow)
+- [שינויים בהודעה; תצפיות מצטברות](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [מה מכסה ה-hash](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#what-a-hash-covers)
+- [מה מוסיף נקודת ביקורת מוקדמת יותר](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [היכן שייך עד](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#where-a-witness-belongs)
+- [בדיקת ביצוע מול פעולות ידועות](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [בחר תהליך עבודה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/#pick-a-workflow)
 
 ## הודעה משתנה; התצפיות מצטברות
 
-תרשים רצף · Telegram → Collector: הודעה חדשה: נפגש ב-10:00; Collector → יומן חתום: הוסף message.new; Telegram → Collector: עריכה: נפגש ב-11:00; Collector → יומן חתום: הוסף message.edited; Telegram → Collector: הודעת מחיקה; Collector → יומן חתום: הוסף message.deleted; הערה לגבי יומן חתום: תצפית על הודעות מקוריות, עריכות ומחיקות נשמרת · Telegram · Collector · יומן חתום · הודעה חדשה: נפגש ב-10:00 · הוסף message.new · עריכה: נפגש ב-11:00 · הוסף message.edited · הודעת מחיקה · הוסף message.deleted · תצפית על הודעות מקוריות, עריכות ומחיקות נשמרת
+תרשים רצף · Telegram → אספן: הודעה חדשה: נפגש ב-10:00; אספן → יומן חתום: הוסף message.new; Telegram → אספן: עריכה: נפגש ב-11:00; אספן → יומן חתום: הוסף message.edited; Telegram → אספן: הודעת מחיקה; אספן → יומן חתום: הוסף message.deleted; הערה לגבי יומן חתום: תצפית על הודעות מקוריות, עריכות ומחיקות נשמרת · Telegram · אספן · יומן חתום · הודעה חדשה: נפגש ב-10:00 · הוסף message.new · עריכה: נפגש ב-11:00 · הוסף message.edited · הודעת מחיקה · הוסף message.deleted · תצפית על הודעות מקוריות, עריכות ומחיקות נשמרת
 
 **תרשים כטקסט**
 
-1. Telegram → Collector: הודעה חדשה: נפגש ב-10:00
-2. Collector → יומן חתום: הוסף message.new
-3. Telegram → Collector: עריכה: נפגש ב-11:00
-4. Collector → יומן חתום: הוסף message.edited
-5. Telegram → Collector: הודעת מחיקה
-6. Collector → יומן חתום: הוסף message.deleted
+1. Telegram → אספן: הודעה חדשה: נפגש ב-10:00
+2. אספן → יומן חתום: הוסף message.new
+3. Telegram → אספן: עריכה: נפגש ב-11:00
+4. אספן → יומן חתום: הוסף message.edited
+5. Telegram → אספן: הודעת מחיקה
+6. אספן → יומן חתום: הוסף message.deleted
 7. הערה לגבי יומן חתום: תצפית על הודעות מקוריות, עריכות ומחיקות נשמרת
 
 רצף אירועים מפושט זה מניח ש-Telegram העביר כל עדכון והחשבון הנבחר יכול היה לראות אותו. אירועים תפעוליים נכללים גם הם ביומן. הודעת מחיקה אינה מציינת את המוחק או את זמן המחיקה המדויק. העברות חוזרות הן תצפיות נפרדות; אין דיכוי כפילויות ברמת היומן כולו.

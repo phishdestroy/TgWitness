@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/quick
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کار](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 **انگلیسی** · [روسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [اوکراینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [اسپانیایی](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [پرتغالی (برزیل)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [ترکی](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [عربی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [هندی](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [بهاسا اندونزی](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [تایلندی](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [فونت ساده‌شدهٔ چینی](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 

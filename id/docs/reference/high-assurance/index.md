@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/high-
 
 Server yang diamankan 24/7 di Hetzner atau Phala Cloud, Gateway DNS, serta pemeriksaan yang dapat diulang oleh pihak ketiga.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Penerapan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Penerapan & pemulihan](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+Penerapan dengan jaminan tinggi menambahkan pemeriksaan independen terhadap lingkungan pengumpulan ke dalam verifikasi arsip. Peninjau memeriksa catatan penerapan dan akses yang disimpan oleh penyedia layanan cloud dan Cloudflare, dan penerapan Intel TDX menambahkan pengesahan perangkat keras terhadap lingkungan pengumpul.
 
 Penggunaan lokal dan Docker biasa tetap tidak berubah. Tidak ada yang berjalan di sini kecuali Anda melakukan deployment dengan `python -m tgwitness.cloud`, dan pengumpul hanya membaca hostnya saat penyebaran tersebut ditetapkan `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ Diagram alur · Operator → Server, firewall tanpa aturan masuk (API penyedia);
 7. Verifier, token yang hanya dapat dibaca → Pernyataan /api/assurance yang ditandatangani
 8. Verifier, token yang hanya dapat dibaca → Berkas ZIP Bukti
 
-**On this page**
+**Di halaman ini**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [Apa yang dapat diperiksa oleh verifikator](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [Penyedia](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#providers)
+- [VM Rahasia di Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [Sebelum Anda memulai](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#before-you-start)
+- [Dari panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#from-the-panel)
+- [Terowongan cepat tanpa domain](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
 - [Deploy](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#reading-the-deployment-result)
+- [Penerapan debug dan penguncian](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [Hapus penyebaran](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#remove-a-deployment)
+- [Server apa pun (diverifikasi sendiri)](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#any-server-self-attested)
+- [Verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#verify)
+- [Laporan untuk penyerahan bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare sebagai saksi eksternal](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [Membaca hasil penyebaran](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## Apa yang dapat diperiksa oleh verifikator
 
@@ -54,7 +54,7 @@ Diagram alur · Operator → Server, firewall tanpa aturan masuk (API penyedia);
 | Kunci penandatanganan dibuat di server tersebut | Kunci tersebut menandatangani pernyataan yang mencantumkan ID server penyedia dan hash dari cloud-init yang diterimanya | Collector, telah diverifikasi oleh penyedia |
 | Jurnal tersebut terkait dengan kunci dan server tersebut | Setiap proses yang dimulai di bukti ZIP membawa pengukuran host untuk server tersebut | Bukti ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+Pengumpul mencatat status SSH, sesi, riwayat login, dan informasi boot dalam catatan process-start dan `host.state` yang telah ditandatangani. Pada VM biasa, ini merupakan catatan inventaris lokal, yang kemudian dibandingkan oleh peninjau dengan catatan independen dari penyedia layanan. Penerapan Intel TDX di bawah ini juga memverifikasi pengukuran yang didukung perangkat keras.
 
 ## Penyedia
 
@@ -109,7 +109,7 @@ Untuk penyebaran Phala, `verify --report certificate.md` juga menulis sertifikat
 
 Laporan ini disegel secara digital dengan tanda tangan dan cap waktu, dalam berkas `certificate.seal.json` serta berkas `.tsq`/`.tsr` di sampingnya:
 
-| Seal | Fitur tambahan |
+| Segel | Fitur tambahan |
 | --- | --- |
 | Cap waktu elektronik yang terverifikasi, `http://tsa.belgium.be/connect` | Cap waktu RFC 3161 pada byte yang tepat dari `certificate.json` dari penyedia layanan kepercayaan yang memenuhi syarat pemerintah federal Belgia (FPS Policy and Support, BOSA). Unit tersebut terdaftar sebagai layanan penandaan waktu yang memenuhi syarat, dengan status "diberikan", dalam daftar tepercaya UE Belgia; akar (Belgium Root CA6) dan entri-entri dalam daftar tersebut, berdasarkan daftar yang diterbitkan pada 20 Oktober 2026, disematkan dalam `tgwitness/tsa_roots.py`. Berdasarkan Peraturan (UE) No. 910/2014, Pasal 41, cap waktu semacam itu dianggap akurat dalam hal tanggal dan waktu serta integritas data di setiap negara anggota UE |
 | Stempel waktu RFC 3161, FreeTSA | Stempel waktu kedua yang independen |
@@ -155,7 +155,7 @@ Seorang verifikator tidak memiliki kunci alamat, dan siapa pun yang membaca topi
 
 Biayanya: tidak ada akun Cloudflare yang menyimpan catatan tentang terowongan cepat, sehingga `verify` melaporkan terowongan, konektor, dan pemeriksaan DNS sebagai tidak tersedia, dan hasilnya paling baik adalah `incomplete` (di Phala Cloud, pemeriksaan justru lulus: konektor berjalan di dalam konfigurasi Docker Compose yang diukur); catatan penyedia, firewall, pernyataan yang ditandatangani, pengukuran host, dan perbandingan penginstal diperiksa seperti biasa. Perbandingan byte dengan penginstal referensi memerlukan commit yang telah diterapkan yang sudah mengenal `--quick-tunnel`; checkout versi 0.7.0 membangun penginstal domain dan melaporkan perbedaannya. Cloudflare tidak memberikan jaminan waktu aktif untuk terowongan cepat, mengizinkan 200 permintaan yang sedang diproses, dan tidak mendukung Server-Sent Events, sehingga pembaruan langsung pada panel (versi setelah 0.7.0) mungkin tidak sampai melalui terowongan tersebut dan tampilan perlu dimuat ulang; bagian tersebut belum dicoba. Untuk kasus yang harus tetap berfungsi, gunakan domain Anda sendiri.
 
-## Deploy
+## Lakukan penyebaran
 
 Periksa terlebih dahulu semua yang akan dikirim. `plan` tidak melakukan permintaan ke penyedia layanan atau Cloudflare:
 
@@ -292,6 +292,6 @@ Cloudflare tidak dapat melihat isi enkripsi Telegram, perangkat lain pada akun T
 
 ## Membaca hasil penyebaran
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+Untuk VM biasa, penyedia mengontrol infrastruktur host, dan inventaris lokal diverifikasi bersamaan dengan catatan penyedia. Untuk Intel TDX, verifikator juga memeriksa spesifikasi perangkat keras, pengikatan pengumpul, komposisi, dan pengukuran sistem operasi. Baca hasil masing-masing untuk melihat pemeriksaan mana yang lulus atau tidak tersedia.
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+Rincian firewall historis bergantung pada penyedia; Linode menyimpan versi aturan. Catatan validasi   mencantumkan penerapan yang telah diuji dan pemeriksaan aktif yang tersisa, serta ruang lingkup verifikasi   menghubungkan pemeriksaan lingkungan ini dengan akuisisi arsip dan integritasnya.

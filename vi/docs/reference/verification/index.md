@@ -4,91 +4,91 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/verif
 
 Thử nghiệm Telegram trực tiếp, các kiểm tra tự động, kiểm tra trên trình duyệt và những nội dung vẫn chưa được xác minh.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bằng chứng và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Bằng chứng & xác minh](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
-**Updated 6 November 2026.** Results are tied to the revision, environment and workload recorded for each run. [Current capabilities](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) describes the available workflows; this page records what has actually been checked.
+**Cập nhật ngày 6 tháng 11 năm 2026.** Kết quả gắn liền với phiên bản, môi trường và tải công việc được ghi lại cho mỗi lần chạy. [Các tính năng hiện tại](https://github.com/phishdestroy/TgWitness/blob/main/docs/STATUS.md) mô tả các luồng công việc có sẵn; trang này ghi lại những gì đã thực sự được kiểm tra.
 
-[Performance graphs](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Signed English audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Downloadable measurements](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
+[Biểu đồ hiệu suất](https://phishdestroy.github.io/TgWitness/docs/validation/) · [Bản kiểm toán tiếng Anh đã được ký tên](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) · [Các số liệu có thể tải xuống](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/MEASUREMENTS.csv)
 
-| Latest evidence | Kết quả | Phạm vi |
+| Bằng chứng mới nhất | Kết quả | Phạm vi |
 | --- | --- | --- |
-| Release audit · 6 Nov | 1,461 core tests passed; 37 platform skips | Source `92e539af40d8`; open findings retained |
-| Fresh exports · 6 Nov | 127.713 and 141.781 records/s, complete cycle | Two accounts per server; text and metadata through WARP |
-| Retained archives · 6 Nov | 48 archives; 3,598,381 records verified | Existing archives checked against pinned workspace keys |
-| Trusted Live · 5 Nov | Guarded CPU recording and WARP checks | Official Desktop login and native export remain unqualified |
-| Phala / Intel TDX · 4 Nov | All 16 verifier checks passed on later runs | Historical deployment; no Telegram account on the CVM |
+| Kiểm toán phiên bản · 6/11 | Các bài kiểm tra lõi 1,461 đã vượt qua; các bài kiểm tra nền tảng 37 bị bỏ qua | Nguồn `92e539af40d8`; các phát hiện mở được giữ nguyên |
+| Dữ liệu xuất mới · 6/11 | 127.713 và 141.781 bản ghi/giây, chu kỳ hoàn chỉnh | Hai tài khoản trên mỗi máy chủ; văn bản và siêu dữ liệu được truyền qua WARP |
+| Lưu trữ đã được giữ lại · 6/11 | Tệp lưu trữ 48; bản ghi 3,598,381 đã được xác minh | Các kho lưu trữ hiện có đã được kiểm tra so với các khóa không gian làm việc được ghim |
+| Trusted Live · 5/11 | Ghi lại hoạt động CPU được bảo vệ và kiểm tra WARP | Đăng nhập trên máy tính để bàn chính thức và tính năng xuất dữ liệu gốc vẫn chưa được xác nhận |
+| Phala / Intel TDX · 4/11 | Tất cả các kiểm tra của trình xác minh 16 đều đã vượt qua trong các lần chạy sau đó | Triển khai trước đây; không có tài khoản Telegram trên CVM |
 
-**On this page**
+**Trên trang này**
 
-- [Release audit and fresh exports · 6 November 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
-- [Trusted Live CPU Ubuntu and WARP · 5 November 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
-- [Live Phala Cloud deployment · 4 November 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
-- [Live server journal inventory · 1 November 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
-- [Recent offline and fault-injection checks · 1 November 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
-- [Live Telegram test, whole account · 29 October 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
-- [Password-protected export opened with libarchive · 29 October 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
-- [Live Telegram test · 27 to 29 October 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
-- [Synthetic local capacity measurement](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#synthetic-local-capacity-measurement)
-- [Full-text search on one million messages · 5 November 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
-- [Remaining qualification](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#remaining-qualification)
+- [Kiểm toán bản phát hành và các bản xuất mới · 6 tháng 11 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#release-audit-and-fresh-exports--6-november-2026)
+- [Trusted Live CPU Ubuntu và WARP · 5 tháng 11 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#trusted-live-cpu-ubuntu-and-warp--5-november-2026)
+- [Triển khai Phala Cloud trực tiếp · 4 tháng 11 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-phala-cloud-deployment--4-november-2026)
+- [Danh mục nhật ký máy chủ trực tiếp · 1 tháng 11 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-server-journal-inventory--1-november-2026)
+- [Các kiểm tra ngoại tuyến và kiểm tra tiêm lỗi gần đây · 1 tháng 11 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#recent-offline-and-fault-injection-checks--1-november-2026)
+- [Thử nghiệm Telegram trực tiếp, toàn bộ tài khoản · 29 tháng 10 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-telegram-test-whole-account--29-october-2026)
+- [Tệp xuất được bảo vệ bằng mật khẩu, mở bằng libarchive · 29 tháng 10 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#password-protected-export-opened-with-libarchive--29-october-2026)
+- [Thử nghiệm Telegram trực tiếp · Từ ngày 27 đến 29 tháng 10 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#live-telegram-test--27-to-29-october-2026)
+- [Đo lường dung lượng cục bộ tổng hợp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#synthetic-local-capacity-measurement)
+- [Tìm kiếm toàn văn trên một triệu tin nhắn · 5 tháng 11 năm 2026](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#full-text-search-on-one-million-messages--5-november-2026)
+- [Điều kiện còn lại](https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/#remaining-qualification)
 
-## Release audit and fresh exports · 6 November 2026
+## Kiểm toán bản phát hành và các bản xuất mới · 6 tháng 11 năm 2026
 
-The audit used v0.9.1 at source `92e539af40d8368d198ff5e040f1d876f2c1310e`, release `92e539af40d8-83e41104669e`. Installed-package smoke checks passed on three servers. The signed report retains the state observed at that time.
+Cuộc kiểm toán đã sử dụng phiên bản v0.9.1 tại nguồn `92e539af40d8368d198ff5e040f1d876f2c1310e`, bản phát hành `92e539af40d8-83e41104669e`. Các kiểm tra sơ bộ gói đã cài đặt đã vượt qua trên ba máy chủ. Báo cáo đã ký giữ nguyên trạng thái được quan sát tại thời điểm đó.
 
-[![Acquisition and complete export rates for two fresh workloads](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
+[![Tỷ lệ thu thập và xuất hoàn chỉnh cho hai khối lượng công việc mới](https://phishdestroy.github.io/TgWitness/assets/performance.svg)](https://phishdestroy.github.io/TgWitness/docs/validation/)
 
-| Workload | Ghi lại | Acquisition | Complete cycle | Complete-cycle rate |
+| Khối lượng công việc | Ghi lại | Thu thập | Hoàn thành chu trình | Tỷ lệ hoàn thành chu kỳ |
 | --- | --- | --- | --- | --- |
-| Server A · two accounts | 27,030 | 189.043 s | 211.647 s | 127.713 records/s |
-| Server B · two accounts | 29,299 | 182.513 s | 206.650 s | 141.781 records/s |
+| Máy chủ A · hai tài khoản | 27,030 | 189.043 s | 211.647 s | 127.713 bản ghi/giây |
+| Máy chủ B · hai tài khoản | 29,299 | 182.513 s | 206.650 s | 141.781 bản ghi/giây |
 
-Both exports began without resume, excluded attachments and avatars, and ended with zero duplicate or reused records. The complete cycle includes preparation, acquisition, selection, packaging and archive verification. Server A also ran a protected-chat read check. Four FloodWait events on A and three on B were respected. These observations do not establish a general throughput guarantee.
+Cả hai lần xuất dữ liệu đều bắt đầu mà không có tính năng tiếp tục, loại trừ các tệp đính kèm và ảnh đại diện, và kết thúc với không có bản ghi trùng lặp hoặc được tái sử dụng nào. Chu trình hoàn chỉnh bao gồm chuẩn bị, thu thập, lựa chọn, đóng gói và xác minh kho lưu trữ. Máy chủ A cũng đã thực hiện kiểm tra đọc cuộc trò chuyện được bảo vệ. Bốn sự kiện FloodWait trên máy chủ A và ba sự kiện trên máy chủ B đã được tuân thủ. Các quan sát này không xác lập một đảm bảo thông lượng chung.
 
-| Kiểm tra | Kết quả | Qualification |
+| Kiểm tra | Kết quả | Yêu cầu |
 | --- | --- | --- |
-| Core pytest | 1,461 passed | 37 platform skips |
-| Browser / browser UX / evidence / site | 102 / 66 / 15 / 9 passed | These programs overlap other tests; counts are not additive |
-| Capture addon | 124 passed | Three Official Web checks blocked by the required Chromium sandbox |
-| API authorization | 269 routes; 538 requests passed | Missing credentials and revoked access |
-| Retained archives | 48 of 48 verified | 3,598,381 records; pinned workspace keys |
-| Live fleet read checks | 24 of 40 profiles passed | 16 WARP routes failed qualification; those profiles were not connected |
+| Lõi pytest | Đã vượt qua 1,461 | Nền tảng 37 bỏ qua |
+| Trình duyệt / trải nghiệm người dùng trình duyệt / bằng chứng / trang web | 102 / 66 / 15 / 9 đã vượt qua | Các chương trình này trùng lặp với các thử nghiệm khác; số lượng không được cộng dồn |
+| Tiện ích mở rộng Capture | Đã vượt qua 124 | Ba kiểm tra Web chính thức bị chặn bởi hộp cát Chromium bắt buộc |
+| Ủy quyền API | Các tuyến 269; các yêu cầu 538 đã được xử lý | Thiếu thông tin đăng nhập và quyền truy cập bị thu hồi |
+| Các kho lưu trữ được giữ lại | 48/48 đã được xác minh | Bản ghi 3,598,381; khóa không gian làm việc được ghim |
+| Kiểm tra trạng thái trực tuyến của đội tàu | 24/40 hồ sơ đã vượt qua | Các tuyến WARP 16 không đạt tiêu chuẩn; các cấu hình đó không được kết nối |
 
-The [signed report](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) records all open findings, including three defects in an unpublished secret-chat snapshot absent from the audited main build. The earlier [public-history qualification](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) used a different revision and workload; its rates must not be combined with this comparison.
+Báo cáo [đã ký](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md) ghi lại tất cả các phát hiện còn mở, bao gồm ba lỗi trong một bản chụp nhanh cuộc trò chuyện bí mật chưa được công bố, không có trong bản dựng chính đã được kiểm toán. Báo cáo [đánh giá lịch sử công khai](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-BENCHMARK-2026-11-06.md) trước đó đã sử dụng một phiên bản và khối lượng công việc khác; các tỷ lệ của báo cáo đó không được kết hợp với so sánh này.
 
-Verify the original report using the [pinned key and verifier](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Its signature protects the operator's report from alteration. It is not independent attestation, proof of Telegram authorship or GDPR certification.
+Xác minh báo cáo gốc bằng khóa [được ghim và trình xác minh](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md#verify-the-original-files). Chữ ký này bảo vệ báo cáo của người vận hành khỏi bị thay đổi. Đây không phải là chứng nhận độc lập, bằng chứng về quyền tác giả của Telegram hoặc chứng nhận GDPR.
 
-## Trusted Live CPU Ubuntu and WARP · 5 November 2026
+## Trusted Live CPU Ubuntu và WARP · 5 tháng 11 năm 2026
 
-The retained integration run used a CPU-only Ubuntu 24.04.5 guest (4 vCPU, 8 GiB) under QEMU inside a RunPod CPU host. The collector used `14e642a5`; verification used `02072461`. The final fixes merged in [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) as `755f78f6`, whose tree matched the tested PR head. This was not a TEE.
+Quá trình tích hợp được giữ lại đã sử dụng máy ảo Ubuntu 24.04.5 chỉ chạy trên CPU (4 vCPU, 8 GiB) trong môi trường QEMU bên trong máy chủ RunPod CPU. Bộ thu thập dữ liệu sử dụng `14e642a5`; quá trình xác minh sử dụng `02072461`. Các bản sửa lỗi cuối cùng đã được hợp nhất vào [PR #114](https://github.com/phishdestroy/TgWitness/pull/114) dưới dạng `755f78f6`, với cây mã nguồn trùng khớp với đầu nhánh PR đã được thử nghiệm. Đây không phải là TEE.
 
-- A real WARP Connector reported healthy; proxied HTTPS reported WARP and Gateway enabled. Three probes saw the same egress address, not a fixed-IP guarantee.
-- Disconnecting WARP made the proxied request fail. Direct gateway-service HTTPS was rejected. In the recorder namespace, direct IPv4/IPv6, external DNS and Docker's embedded UDP resolver were blocked.
-- A scoped read-only provider token could read health/connections and could not read the connector enrollment token. Signed provider observations included explicit unavailable samples. The witness ran on the operator's host, so this demonstrates recording and retention, not independent third-party custody.
-- Official Desktop reached its unauthenticated welcome screen. Guarded keyboard input was rejected during capture. Three H.264 display segments decoded and their clock overlay was inspected. The 18-event preflight archive verified against the pinned recorder key and retained checkpoint.
-- The final capture tests passed 114 cases on Windows and Linux CI, with real Chromium/FFmpeg. Five anchor tests and dependency advisory checks passed.
+- Một WARP Connector thực tế được báo cáo là hoạt động bình thường; HTTPS qua proxy báo cáo WARP và Gateway đã được kích hoạt. Ba lần kiểm tra đều ghi nhận cùng một địa chỉ xuất, không đảm bảo địa chỉ IP cố định.
+- Việc ngắt kết nối WARP đã khiến yêu cầu qua proxy thất bại. Kết nối HTTPS trực tiếp với dịch vụ cổng đã bị từ chối. Trong không gian tên của trình ghi, các kết nối IPv4/IPv6 trực tiếp, DNS bên ngoài và bộ giải quyết UDP nhúng của Docker đã bị chặn.
+- Một mã thông báo nhà cung cấp chỉ đọc có phạm vi giới hạn có thể đọc các thông tin về tình trạng hoạt động/kết nối nhưng không thể đọc mã thông báo đăng ký kết nối. Các quan sát của nhà cung cấp đã ký bao gồm các mẫu không khả dụng được chỉ định rõ ràng. Công cụ chứng kiến chạy trên máy chủ của nhà điều hành, do đó điều này chứng minh khả năng ghi lại và lưu trữ, chứ không phải việc lưu giữ bởi bên thứ ba độc lập.
+- Phiên bản Desktop chính thức đã hiển thị màn hình chào mừng không cần xác thực. Dữ liệu nhập từ bàn phím được bảo vệ đã bị từ chối trong quá trình ghi lại. Ba phân đoạn hiển thị H.264 đã được giải mã và lớp phủ đồng hồ của chúng đã được kiểm tra. Tệp lưu trữ kiểm tra trước sự kiện 18 đã được xác minh dựa trên khóa ghi âm được ghim và điểm kiểm tra được lưu giữ.
+- Các bài kiểm tra ghi lại cuối cùng đã vượt qua các trường hợp 114 trên CI Windows và Linux, với Chromium/FFmpeg thực tế. Năm bài kiểm tra mốc và các kiểm tra khuyến cáo về phụ thuộc đã vượt qua.
 
-An initial 2 vCPU/4 GiB startup timed out under concurrent image-build load and stopped through the guard; it is not counted as success. Manual test-account login, native chat export, real hybrid comparison and Telegram-side logout remain pending. No supplied Telethon session was imported. Attachments, automatic OCR, local drand BLS verification and Trusted Live TDX attestation were not qualified.
+Quá trình khởi động ban đầu với cấu hình 2 vCPU/4 GiB đã hết thời gian chờ dưới tải xây dựng hình ảnh đồng thời và bị dừng bởi cơ chế bảo vệ; trường hợp này không được tính là thành công. Việc đăng nhập tài khoản thử nghiệm thủ công, xuất dữ liệu trò chuyện gốc, so sánh lai thực tế và đăng xuất từ phía Telegram vẫn chưa được thực hiện. Không có phiên Telethon nào được cung cấp được nhập vào. Các tệp đính kèm, OCR tự động, xác minh drand BLS cục bộ và chứng nhận Trusted Live TDX không đáp ứng yêu cầu.
 
 ## Triển khai trên Phala Cloud · Ngày 4 tháng 11 năm 2026
 
-**Historical result:** later deployments passed all 16 verifier checks, including Intel TDX and the quick tunnel. Restart evidence, signed address discovery and report timestamps were checked separately. Each test CVM was removed after its run.
+**Kết quả lịch sử: Các lần triển khai sau đó** đã vượt qua tất cả các kiểm tra xác minh 16, bao gồm Intel TDX và đường hầm nhanh. Bằng chứng khởi động lại, phát hiện địa chỉ đã ký và dấu thời gian báo cáo đã được kiểm tra riêng biệt. Mỗi CVM thử nghiệm đã được loại bỏ sau khi chạy xong.
 
-| Cài đặt | Recorded value |
+| Cài đặt | Giá trị đã ghi lại |
 | --- | --- |
 | Nhà cung cấp | Phala Cloud · `tdx.small` · US-WEST-1 |
-| Triển khai | `--provider phala --quick-tunnel`; initially empty workspace |
-| Initial collector | `df7d860c` · v0.8.1 |
-| Collector with all fixes | `53a0f7e9` |
-| Production guest | `dstack-0.5.12`; SSH access disabled |
-| External services | ntfy.sh, GitHub and Intel PCS |
-| Observed cost | Seven CVMs, about 1.9 US cents together; historical test pricing |
+| Triển khai | `--provider phala --quick-tunnel`; không gian làm việc ban đầu trống |
+| Trình thu thập ban đầu | `df7d860c` · v0.8.1 |
+| Bộ thu thập với tất cả các bản sửa lỗi | `53a0f7e9` |
+| Khách hàng sản xuất | `dstack-0.5.12`; Tắt quyền truy cập SSH |
+| Dịch vụ bên ngoài | ntfy.sh, GitHub và Intel PCS |
+| Chi phí quan sát được | Bảy CVM, tổng trị giá khoảng 1.9 cent Mỹ; giá thử nghiệm lịch sử |
 
-The sequence below separates initial failures, fixes and completed checks. No Telegram account was connected to these CVMs.
+Dãy sự kiện dưới đây phân biệt các lỗi ban đầu, các bản sửa lỗi và các kiểm tra đã hoàn tất. Không có tài khoản Telegram nào được kết nối với các CVM này.
 
-**Deployments 1–2 · provider differences and regression checks**
+**Các phiên bản triển khai 1–2 · sự khác biệt giữa các nhà cung cấp và kiểm tra hồi quy**
 
 Hai lần triển khai đầu tiên đã phát hiện ra năm điểm khác biệt so với Phala Cloud mô phỏng. [`tools/check_phala.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_phala.py) hiện đã tái hiện từng trường hợp này và sẽ thất bại nếu không có bản sửa lỗi tương ứng:
 
@@ -100,7 +100,7 @@ Hai lần triển khai đầu tiên đã phát hiện ra năm điểm khác bi�
 | Khi cổng dstack bị tắt, thông tin chi tiết về CVM không bao giờ hiển thị mã lỗi `instance_id` | Quá trình triển khai chờ 30 phút rồi thất bại | ID phiên bản được đọc từ trạng thái CVM |
 | Các thao tác khởi động lại, dừng và khởi động là các thao tác trên CVM, không phải các bản cập nhật ứng dụng | `provider_actions` không liệt kê các lần khởi động lại | Các thao tác này cũng được ghi nhận |
 
-**Deployment 3 · attestation, access checks and restart evidence**
+**Triển khai 3 · xác thực, kiểm tra quyền truy cập và bằng chứng khởi động lại**
 
 - CVM đã chạy `dstack-0.5.12` với quyền truy cập SSH bị tắt. Bộ thu thập đã đăng địa chỉ đã ký của mình khoảng 1,5 phút sau khi được tạo. Quá trình triển khai sau đó đã thông qua `tdx_binding`, `tdx_quote` (Intel TCB UpToDate, bản ghi chứng thực phần cứng v4, FMSPC `20a06f000000`, không ở chế độ gỡ lỗi, không thể di chuyển, hỗ trợ dữ liệu xác minh mật mã lấy từ Intel), `tdx_compose_hash`, `tdx_compose` (từng byte) và `tdx_identity` (khóa KMS).
 - Bảng điều khiển tại địa chỉ trycloudflare.com trả về mã trạng thái 401 khi không có mã thông báo hoặc sử dụng mã thông báo sai, và trả về mã trạng thái 200 khi sử dụng mã thông báo của bảng điều khiển.
@@ -109,66 +109,66 @@ Hai lần triển khai đầu tiên đã phát hiện ra năm điểm khác bi�
 - Lệnh `destroy` chỉ xóa CVM đó. Sau đó, không gian làm việc trở nên trống rỗng và địa chỉ bảng điều khiển ngừng phản hồi.
 - Kết quả kiểm tra giá trên trình hướng dẫn bảng điều khiển hiển thị `tdx.small` với mức giá 0,058 USD mỗi giờ. Khi nhập sai khóa, hệ thống sẽ hiển thị thông báo đơn giản “không chấp nhận khóa API”.
 
-**Follow-up fixes · signed address discovery and OS measurements**
+**Các bản sửa lỗi tiếp theo · phát hiện địa chỉ đã ký và đo lường hệ điều hành**
 
 - Nếu không có khóa địa chỉ, `verify` sẽ tuân theo bài đăng hợp lệ mới nhất về chủ đề địa chỉ, được in trong cấu hình Docker Compose đã công bố. Một bài đăng giả mạo đã gửi nó đến một máy chủ không tồn tại, và `statement` đã thất bại: kẻ giả mạo không thể giả danh là người thu thập, nhưng có thể ngăn chặn quá trình xác minh của bên thứ ba, trong tối đa 12 giờ bằng cách sử dụng dấu thời gian giả mạo trong tương lai. Hiện tại, bộ thu thập cũng đăng địa chỉ của mình kèm chữ ký bằng khóa riêng, `verify` chỉ chấp nhận các bài đăng như vậy khi chính bộ thu thập tạo ra chúng, và các bài đăng được sắp xếp theo thời gian nhận của ntfy.sh. [`tools/check_cloud_wizard.py`](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_cloud_wizard.py) phát lại các bài đăng giả mạo. Một CVM chỉ chạy quy trình này từ một bản cam kết (commit) chứa nó, do đó người thu thập của lần chạy này chưa ký địa chỉ của mình và `verify` đã thông báo điều đó.
 - `tdx_os` không thể chạy nếu thiếu `dstack-mr`; phiên bản hiện tại của công cụ này có lệnh `measure-os` thay vì `measure --json` được nêu trong tài liệu. Công cụ xác minh hiện tự tính MRTD và RTMR0-2 từ ảnh hệ điều hành đã công bố và cấu hình máy ảo, bao gồm các bảng ACPI.
 
-**Deployment 4 · all 16 checks, report seals and restart verification**
+**Triển khai 4 · tất cả các kiểm tra 16, niêm phong báo cáo và xác minh khởi động lại**
 
 - Quá trình triển khai đã tải xuống tệp `dstack-0.5.12` đã được công bố một lần, đối chiếu nó với băm hình ảnh hệ điều hành mà CVM báo cáo, và tệp `tdx_os` đã vượt qua kiểm tra: các giá trị MRTD, RTMR0, RTMR1 và RTMR2 trùng khớp với các giá trị được tính toán cho QEMU 8.2.2, 1 vCPU và 2 GiB. Cùng một phép tính này lại cho kết quả RTMR0 khác khi đối với cấu hình được khai báo là 4 GiB, 2 vCPU, QEMU 9.2.1 hoặc có thêm thẻ mạng thứ hai, và không đạt yêu cầu khi nhân hệ điều hành, phần sụn hoặc dòng lệnh bị thay đổi cũng như đối với hình ảnh phát triển.
 - `verify` đã vượt qua toàn bộ 16 bài kiểm tra, bao gồm cả bộ kết nối của đường hầm nhanh, do đó kết quả là ĐẠT. Hệ thống đã tạo ra chứng chỉ dưới dạng HTML và PDF, được niêm phong kỹ thuật số bằng chữ ký và dấu thời gian, bao gồm dấu thời gian eIDAS đủ điều kiện từ đơn vị đóng dấu thời gian TSU 202301 của Chính phủ Bỉ (tình trạng được cấp trên danh sách tin cậy của Bỉ), dấu thời gian FreeTSA và chữ ký của bên xác minh; `check-report` đã xác nhận tất cả các yếu tố này cùng với chữ ký trên tệp PDF.
 - Sau khi khởi động lại, `verify --evidence` đã xác nhận hai lần khởi động, mỗi lần đều đi kèm với một chứng nhận phần cứng được tạo ra bên trong CVM và mỗi lần đều được khởi động từ `dstack-0.5.12` đã được công bố; cả lần khởi động lại và lần khởi động mới đều ở trạng thái REVIEW.
 - `destroy` đã để không gian làm việc trống rỗng.
 
-**Deployment 5 · collector-signed discovery and forged-post rejection**
+**Triển khai 5 · phát hiện có chữ ký của bộ thu thập và từ chối bài đăng giả mạo**
 
-The collector ran from commit `53a0f7e9`, which includes the fixes above.
+Trình thu thập dữ liệu đã chạy từ bản cam kết (commit) `53a0f7e9`, bao gồm các bản sửa lỗi nêu trên.
 
 - Bộ thu thập đã đăng địa chỉ của mình được ký bằng khóa riêng, ngay bên cạnh bài đăng HMAC của nhà điều hành. Sau đó, hai bài đăng giả mạo đã được thêm vào chủ đề này, một bài có HMAC bằng 0 và một bài được ký bằng một khóa Ed25519 khác, cả hai đều tuyên bố thời gian là năm 2096. `verify` đã lấy địa chỉ được ký bằng khóa của bộ thu thập và vượt qua tất cả 16 bước kiểm tra; con dấu này một lần nữa mang dấu thời gian đủ điều kiện của Bỉ, dấu thời gian của FreeTSA và chữ ký của bên xác minh, và `check-report` đã xác nhận các thông tin này.
 - Sau khi khởi động lại, bộ thu thập đã đăng địa chỉ mới đã được ký: `verify` đã phát hiện ngay lập tức, **của nhà điều hành đã tìm thấy địa chỉ hiện tại** 27 giây sau đó từ bài đăng HMAC, và cả hai đều bỏ qua các bài đăng giả mạo. `verify --evidence` đã xác nhận hai lần khởi động từ `dstack-0.5.12`.
 - Quá trình triển khai đã hiển thị mức phí mà Phala tính cho CVM, bao gồm cả đĩa: 0,06078 USD mỗi giờ.
 
-### Panel wizard and remaining scope
+### Trình hướng dẫn bảng điều khiển và phạm vi còn lại
 
 Trình hướng dẫn bảng điều khiển đã chạy trên Phala Cloud hai lần, một lần thông qua API công việc của nền tảng này và một lần thông qua trình duyệt sử dụng Chromium thực: kiểm tra giá, tạo cấu hình với cam kết dưới **Advanced**, cả sáu kiểm tra chứng thực đều đạt yêu cầu, danh sách máy chủ hiển thị mức giá được tính (44,37 USD mỗi tháng), **Find địa chỉ hiện tại**, quá trình tải xuống cấu hình Docker Compose đã được đo lường, và quá trình xóa. Trình duyệt không ghi nhận bất kỳ lỗi trang nào. Sau mỗi lần thực hiện, không gian làm việc đều trống rỗng.
 
-Not covered: a Cloudflare domain on Phala, a Telegram account on the CVM, and the `dstack-0.6.1` image. The wizard's price before creation is Phala's compute price only, as its API names the disk price only for an existing CVM; the server list shows the billed price after creation. All prices in this section were observed on 4 November 2026.
+Không bao gồm: tên miền Cloudflare trên Phala, tài khoản Telegram trên CVM và hình ảnh `dstack-0.6.1` . Giá của trình hướng dẫn trước khi tạo chỉ bao gồm giá tính toán của Phala, vì API của nó chỉ liệt kê giá đĩa cho một CVM hiện có; danh sách máy chủ hiển thị giá được tính sau khi tạo. Tất cả giá trong phần này được ghi nhận vào ngày 4 tháng 11 năm 2026.
 
-## Live server journal inventory · 1 November 2026
+## Danh mục nhật ký máy chủ trực tiếp · 1 tháng 11 năm 2026
 
-At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
+Vào khoảng 19:15 UTC, các truy vấn SQLite `query_only` chỉ đọc liên tiếp đã đếm số sự kiện trong mười cơ sở dữ liệu không gian làm việc trên một máy chủ đang hoạt động. Việc thu thập dữ liệu vẫn tiếp tục trong suốt quá trình thực hiện các truy vấn, do đó đây không phải là một bản chụp nhanh nguyên tử trên các không gian làm việc.
 
-| Observed across the ten workspace databases | Số lượng |
+| Được quan sát trên mười cơ sở dữ liệu không gian làm việc | Số lượng |
 | --- | --- |
-| Workspaces with at least one `message.new` event | 8 |
-| Journal records, including operational events | 1,610,818 |
-| `message.new` events | 900,232 |
-| `message.edited` events | 80,683 |
-| `message.deleted` events | 400,536 |
-| `message.recovered` events | 53,403 |
-| `message.snapshot` events | 2,183 |
-| `media.saved` events | 50,418 |
-| `media.failed` events | 5,575 |
-| `coverage.gap` events | 11 |
-| Database bytes, excluding WAL files and media | 7,909,003,264 |
+| Các không gian làm việc có ít nhất một sự kiện `message.new` | 8 |
+| Các bản ghi nhật ký, bao gồm các sự kiện vận hành | 1,610,818 |
+| Sự kiện `message.new` | 900,232 |
+| Các sự kiện `message.edited` | 80,683 |
+| Các sự kiện `message.deleted` | 400,536 |
+| Các sự kiện `message.recovered` | 53,403 |
+| Các sự kiện `message.snapshot` | 2,183 |
+| Các sự kiện `media.saved` | 50,418 |
+| Các sự kiện `media.failed` | 5,575 |
+| Các sự kiện `coverage.gap` | 11 |
+| Dung lượng cơ sở dữ liệu, không bao gồm các tệp WAL và tệp phương tiện | 7,909,003,264 |
 
-These are **event counts**, not unique messages, people or media files. The same message can appear in more than one workspace, and an edit or deletion can produce another journal event. `media.failed` counts historical failure events, not the current media queue. The queries did **not** newly verify signatures and the full hash chain of all 1,610,818 records, measure delivery or throughput, or establish that every Telegram event was captured. No message content, account or chat IDs, workspace labels, credentials or private files are published here.
+Đây là **số lượng sự kiện**, không phải tin nhắn, người dùng hoặc tệp phương tiện duy nhất. Cùng một tin nhắn có thể xuất hiện trong nhiều không gian làm việc, và việc chỉnh sửa hoặc xóa có thể tạo ra một sự kiện nhật ký khác. `media.failed` đếm các sự kiện thất bại lịch sử, không phải hàng đợi phương tiện hiện tại. Các truy vấn **không** xác minh lại chữ ký và chuỗi băm đầy đủ của tất cả 1,610,818 bản ghi, không đo lường tỷ lệ giao hàng hoặc thông lượng, cũng như không xác nhận rằng mọi sự kiện Telegram đều được ghi lại. Không có nội dung tin nhắn, ID tài khoản hoặc ID cuộc trò chuyện, nhãn không gian làm việc, thông tin đăng nhập hoặc tệp tin riêng tư nào được công bố tại đây.
 
-At this review, the separately configured public monitor covered three sources: one capture response was OK and two reported `no_response`. That monitor is not a ten-workspace health summary. `no_response` means the observer could not obtain a response at that check; it does not establish message loss. The smaller 29 October test below has its own explicit signature and hash-chain verification.
+Tại thời điểm đánh giá này, bộ giám sát công khai được cấu hình riêng biệt đã bao quát ba nguồn: một phản hồi thu thập là OK và hai phản hồi báo cáo `no_response`. Bộ giám sát này không phải là bản tóm tắt tình trạng hoạt động của mười không gian làm việc. `no_response` có nghĩa là người quan sát không thể nhận được phản hồi tại lần kiểm tra đó; điều này không chứng minh việc mất tin nhắn. Thử nghiệm nhỏ hơn vào ngày 29 tháng 10 dưới đây có chữ ký rõ ràng và xác minh chuỗi băm riêng.
 
-## Recent offline and fault-injection checks · 1 November 2026
+## Các kiểm tra ngoại tuyến và kiểm tra tiêm lỗi gần đây · 1 tháng 11 năm 2026
 
-These checks use fictional data and local files; they add regression evidence for the current source, not another live Telegram delivery measurement:
+Các kiểm tra này sử dụng dữ liệu giả định và tệp cục bộ; chúng cung cấp bằng chứng hồi quy cho nguồn hiện tại, chứ không phải một phép đo giao nhận Telegram thực tế khác:
 
-| Kiểm tra | What it exercised |
+| Kiểm tra | Những gì đã được kiểm tra |
 | --- | --- |
-| [Source archive](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact. |
-| [Account export recovery](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow. |
-| [Minimized disclosure privacy](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged. |
-| [Linux media decoder and OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | A [Linux Docker CI check](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) at commit `5a9e0814` passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model. |
+| [Tập tin lưu trữ nguồn](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Hai bản dựng có các byte nguồn giống hệt nhau nhưng thời gian tạo tệp khác nhau đã tạo ra cùng một tệp ZIP và tổng kiểm tra. Các byte lưu trữ chính xác và các hàm băm tệp khớp nhau; các tệp thử nghiệm riêng tư vẫn được giữ nguyên. Một lỗi ghi mô phỏng đã để lại tệp lưu trữ và tổng kiểm tra trước đó nguyên vẹn. |
+| [Khôi phục dữ liệu xuất tài khoản](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | Một lỗi đĩa mô phỏng trên thành viên ZIP thứ hai không để lại tệp ZIP nào được công bố hoặc tệp ZIP không đầy đủ. Chức năng tiếp tục tải xuống đã giữ nguyên từng byte của biên nhận đã ký, tạo ra một tệp lưu trữ có thể xác minh độc lập bằng cách sử dụng dấu vân tay ký tên dự kiến, và giữ lại khoảng trống phạm vi tổng hợp như một kết quả không đầy đủ. Các khẳng định về quy mô giúp ngăn chặn việc quét lặp lại các tác vụ và biên nhận khi lịch sử ngày càng dài. |
+| [Bảo mật thông tin tối thiểu](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Các tên và biệt danh Unicode tổng hợp, siêu dữ liệu lồng nhau, người gửi chưa xác định và các trường phương tiện đã được kiểm tra trong cả ba chế độ nhận dạng và trong trường hợp thiếu văn bản. Lỗi giới hạn che giấu không làm suy yếu quá trình che giấu một cách âm thầm; tệp xuất tài khoản đã ký gốc vẫn giữ nguyên. |
+| [Bộ giải mã phương tiện Linux và OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | Một [kiểm tra CI Docker trên Linux](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) tại commit `5a9e0814` đã vượt qua các đầu vào được tạo ra ở định dạng Ogg/Opus, MP3, M4A, MP4 kèm video, WAV và FLAC; các kiểm soát về thời lượng giả mạo và tham chiếu tệp thứ cấp; cùng 48 bộ dữ liệu thử nghiệm trình phân tích cú pháp đã biến đổi (34 bộ bị từ chối, 14 bộ được giải mã trong giới hạn). OCR Tesseract thực tế hoạt động mà không thay đổi các byte gốc. Trình giải mã và OCR chạy trong các container cách ly mạng mà không cần mô hình Whisper. |
 
-The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) and [full Checks](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) workflows. They test these failure boundaries, not every possible storage failure or whether a disclosure is automatically safe to publish. The media check does not measure speech recognition accuracy or Telegram delivery. Review each derivative before sharing.
+Các kiểm tra được thực hiện trong các quy trình làm việc [(yêu cầu kéo)](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) và [(kiểm tra đầy đủ)](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml). Chúng kiểm tra các giới hạn lỗi này, chứ không phải mọi lỗi lưu trữ có thể xảy ra hoặc liệu việc tiết lộ thông tin có tự động an toàn để công bố hay không. Kiểm tra phương tiện truyền thông không đo lường độ chính xác của nhận dạng giọng nói hoặc khả năng gửi tin nhắn trên Telegram. Hãy xem xét kỹ từng bản sao trước khi chia sẻ.
 
 ## Thử nghiệm Telegram trực tiếp, toàn bộ tài khoản · Ngày 29 tháng 10 năm 2026
 
@@ -249,6 +249,6 @@ Một nhật ký có chữ ký xác định gồm 1.000.000 tin nhắn tổng h�
 
 Nhật ký trực tiếp được lưu giữ này ghi nhận chính xác các hoạt động thu thập, chỉnh sửa, thông báo xóa, tệp đính kèm, việc kiểm tra lại và xử lý giới hạn tốc độ. Nó không ghi lại toàn bộ quá trình gửi tin nhắn hay một ma trận được kiểm soát về phạm vi hiển thị theo vai trò, các chủ thể phản ứng, thời gian chờ FloodWait kéo dài, việc khóa tài khoản và quá trình khôi phục sau sự cố gián đoạn mạng/quy trình. Việc phát hành mã QR-token vẫn tách biệt với quá trình xác nhận mã QR trên thiết bị di động đã hoàn tất.
 
-Docker/Compose and installation checks are recorded in CI; real Phala deployment and external timestamp verification are described above. They do not establish sustained high load, a complete live platform/role matrix, independent security review, long-term archival validation or forensic certification. Saved MTProto state and catch-up are implemented; atomic lossless live replay remains unestablished. The newer backfill commits messages and cursors atomically and preserves available Recent Actions, but its synthetic coverage is distinct from live qualification. See [live acceptance](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) for the controlled qualification matrix.
+Các kiểm tra Docker/Compose và cài đặt được ghi lại trong CI; việc triển khai Phala thực tế và xác minh dấu thời gian bên ngoài được mô tả ở trên. Chúng không thiết lập tải trọng cao liên tục, ma trận nền tảng/vai trò trực tiếp hoàn chỉnh, đánh giá bảo mật độc lập , xác thực lưu trữ dài hạn hoặc chứng nhận pháp y. Trạng thái MTProto đã lưu và cơ chế bù đắp đã được triển khai; việc phát lại trực tiếp nguyên tử không mất dữ liệu vẫn chưa được thiết lập. Phiên bản mới hơn thực hiện việc điền lại các thông điệp và con trỏ một cách nguyên tử và bảo toàn các Hành động Gần đây có sẵn, nhưng phạm vi bao phủ tổng hợp của nó khác biệt so với quá trình kiểm định trực tiếp. Xem [(chấp nhận trực tiếp) và](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md) để biết ma trận kiểm định có kiểm soát.
 
-The [public audit directory](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/README.md) contains only the signed report and aggregate measurements. Detailed operational receipts, raw captures and account material remain private. Application screenshots in `docs/assets/` use fictional demonstration data.
+Thư mục kiểm toán công khai  chỉ chứa báo cáo đã ký và các số liệu tổng hợp. Các biên lai hoạt động chi tiết, dữ liệu ghi lại thô và tài liệu tài khoản vẫn được giữ riêng tư. Các ảnh chụp màn hình ứng dụng trong `docs/assets/` sử dụng dữ liệu minh họa hư cấu.

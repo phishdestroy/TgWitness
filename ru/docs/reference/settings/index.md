@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/setti
 
 Мастер настройки, цели, уровни интерфейса, маршруты подключения и настройки, общие для группы аккаунтов.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Начало работы](https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Начало работы](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Аккаунты](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/) · [Связь](https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/) · [Доступ](https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/)
 

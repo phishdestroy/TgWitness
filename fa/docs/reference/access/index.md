@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/acces
 
 اعطای دسترسی محدود به حساب‌ها و چت‌ها، انتخاب مجوزها، محدود کردن جلسات و آدرس‌های IP و لغو دسترسی.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کار](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 به یک بازبین دسترسی به یک چت، به یک تحلیلگر اجازه صدور یک پرونده، یا به یک اپراتور کنترل حساب‌های منتخب بدهید. هر شخص توکن مخصوص به خود را دریافت می‌کند. توکن پنل اصلی نزد مدیر باقی می‌ماند.
 
@@ -110,6 +110,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/acces
 
 ****مدیر اصلی و مرز اعتماد****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+توکن پنل اصلی بدون محدودیت باقی می‌ماند. ورود با آن به مرورگر، جلسات را ایجاد می‌کند که تابع محدودیت‌های جلسه‌ای است که مدیر پیکربندی کرده است. اسکریپت‌هایی که توکن اصلی را مستقیماً ارسال می‌کنند، دسترسی کامل خود را حفظ می‌کنند و به عنوان جلسات مرورگر شمرده نمی‌شوند.
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+این کنترل دسترسی در سطح برنامه در یک نصب واحد است. تمام فضاهای کاری فرآیند سرور را به اشتراک می‌گذارند؛ این جداسازی از مدیر میزبان نیست. توکن اصلی، جلسات تلگرام، کلیدهای امضا و دایرکتوری داده را خصوصی نگه دارید. توکن شاهد یک نقطه کنترل/اعتبار سلامت جداگانه است، نه توکن دسترسی به پنل.

@@ -53,7 +53,7 @@ Panel lengkap dengan pilihan lanjutan dibuka. Tiada kelayakan storan dipaparkan.
 | --- | --- |
 | Titik hujung | URL storan, tanpa laluan bucket atau kelayakan. Contoh: `https://s3.example.invalid`. |
 | Wilayah | Apa sahaja yang diperlukan penyedia anda. Lalai `us-east-1`. |
-| Bucket | Bucket sedia ada yang boleh anda tulis. Contoh: `example-case-backup`. |
+| Tong | Bucket sedia ada yang boleh anda tulis. Contoh: `example-case-backup`. |
 | Folder dalam baldi | Awalan, lalai `tgwitness`. Awalan bagi setiap ruang kerja ditambah di atasnya. |
 | ID kunci akses / Kunci akses rahsia | Kedua-duanya bersama, disimpan dalam peti besi. Biarkan kedua-duanya kosong kemudian untuk mengekalkannya. |
 | Alamat gaya Path | Hidup: `endpoint/bucket`. Mati: `bucket.endpoint`. Bergantung pada penyedia. |

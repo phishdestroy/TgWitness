@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/conne
 
 Аутентификация, автоматические пулы прокси-серверов, режимы работы с IP-адресами, политика резервного переключения, внешние запросы и хранение секретных данных.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Развертывание и восстановление](https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![Развертывание и восстановление](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 В данном документе описывается поведение TgWitness версии 0.8.0 и его ограничения. Аутентификация, доступ к источнику, сетевое соединение и полнота сбора данных представляют собой отдельные состояния. Для ознакомления с этапами входа в систему, форматами файлов и работой с несколькими учетными записями начните с раздела [«Учетные записи и форматы сеансов](https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/)». Информацию о правилах обработки событий и поведении при перезапуске см. в разделе [«Как работает сбор данных](https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/)».
 
@@ -123,19 +123,19 @@ MTProxy передаёт только трафик Telegram. HTTP-операци
 
 ****Параметры автоматического пула****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+В разделе «**Параметры» → «Автоматический MTProxy**» настройте порог сбоя, время ожидания, плановую ротацию, совместное использование прокси и допустимую задержку переключения на резервный сервер.
 
 | Контроль | По умолчанию |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| Отключается перед заменой | 3 в течение 10 минут |
+| Количество проб прокси-серверов на каждую попытку подключения | 3 |
+| Первый / максимальный перерыв после сбоя | 10 минут / 6 часов |
+| Планируемая ротация | Отключено; включить при сбое |
+| Учётные записи на один прокси | 0: предпочтительно создавать отдельные записи, объединять их при необходимости. Установите 1, чтобы дождаться появления эксклюзивной записи. |
+| Задержка перед разрешенным прямым переходом на резервный вариант | Протоколы 10; Скрытие адреса по-прежнему не работает Direct |
+| Обновление ленты / проверки передачи данных | Протоколы 60 / 10; значения основного рабочего пространства применяются к общему пулу |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+Использование разных прокси-серверов не гарантирует получения разных адресов выхода. Эти настройки не обходят ограничения Telegram и не обеспечивают анонимность.
 
 Чтобы заменить общедоступный список на свой собственный каталог операторов, настройте приведённую ниже переопределение. Это полностью отключает внешние подписки, в том числе в случае, когда массив `proxies` пуст.
 

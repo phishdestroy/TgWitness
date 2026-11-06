@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/times
 
 الطوابع الزمنية وفقًا لمعيار RFC 3161 لنقاط التحقق الموقعة: ما الذي يتم إرساله إلى الجهة المختصة وكيف يتم التحقق من الرد.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [الأدلة والتحقق](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![الأدلة والتحقق](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 تقوم TgWitness بإعداد طلبات RFC 3161 والتحقق من استجابات سلطة الطابع الزمني (TSA). لا يقوم هذا الإجراء اليدوي باختيار TSA ولا بإرسال البيانات؛ بينما يقوم «وضع الأدلة» بكلا الأمرين وفقًا لجدول زمني ([تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/#rfc-3161-preparation-and-response-verification-02)). الطلب المُعدّ **لا** يُعدّ **بعد دليلاً على الطابع الزمني**.
 

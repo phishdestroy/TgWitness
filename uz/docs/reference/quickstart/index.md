@@ -6,7 +6,7 @@ TgWitness-ni o'rnatish va ishga tushirishning barcha usullari: Windows paketi, P
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Hujjatlash](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Boshlash](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 **Inglizcha** · [Rus tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md) · [Ukrain tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md) · [Ispancha](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md) · [Portugalscha (Braziliya)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md) · [Turkcha](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md) · [Arab tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md) · [Farsi](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md) · [O'rdu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md) · [hindicha](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md) · [Indoneziya tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md) · [Vyetnam tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md) · [Xoʻllashma xitoycha](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md)
 

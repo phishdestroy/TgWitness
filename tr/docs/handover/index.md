@@ -57,7 +57,7 @@ Kaynak derginin sınırlarına bağlı ayrı bir paket
 | Kişiler | Seçili kişiler adlarıyla kalır; diğerleri takma ad alır ya da dışarıda bırakılır. |
 | Metin | Tüm metin, yalnızca seçili kişilerin ve hesabınızın metni ya da hiçbiri. |
 | Dosyalar | Seçili kişilerin ve hesabınızın dosyaları, gösterilen tüm dosyalar ya da hiçbiri. |
-| Case Board | Hiçbir şey, yer imleri ve kesitler ya da tartışmalı kartlar. |
+| Vaka Panosu | Hiçbir şey, yer imleri ve kesitler ya da tartışmalı kartlar. |
 
 Metni ve dosyaları da okuyun: takma ad, bir mesajın ya da ekin içine yazılmış adları kaldırmaz. Seçili bir dosya eksikse geri yükleyin ya da ekleri dışarıda bırakın.
 

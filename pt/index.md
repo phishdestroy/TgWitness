@@ -141,7 +141,7 @@ Cópias programadas ou manuais
 
 Copie agora ou a cada 1 a 1.440 minutos， com o progresso no painel．
 
-Object Lock
+Bloqueio de Objetos
 
 Escolha os dias e o modo de retenção； o painel confere se realmente pegou．
 

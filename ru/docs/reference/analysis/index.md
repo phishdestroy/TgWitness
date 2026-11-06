@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/analy
 
 Выполняйте поиск по сохраненным сообщениям, просматривайте данные, обработанные искусственным интеллектом, и ведите аналитические отчеты с указанием источников.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Расследование](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Расследование](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Руководство по рабочему процессу](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

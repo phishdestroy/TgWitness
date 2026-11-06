@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/accou
 
 アカウントが現在閲覧可能な内容をエクスポートします：スコープ、再開可能なジョブ、署名付きアーカイブ、および最小化された共有コピー。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [証拠と検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![証拠と検証](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 アカウントエクスポートは対象アカウントを排他的に予約します。開始・再開前に監視や他の収集を明示的に一時停止してください。アプリが自動停止することはありません。
 
@@ -16,11 +16,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/accou
 
 このワークフローは、接続されたアカウントから現在アクセス可能なデータをエクスポートします。デフォルトでは [Telegram Takeout](https://core.telegram.org/api/takeout) を使用します。これは、利用できないデータや削除された Telegram データのバックアップではありません。シークレットチャット、アクセスできない履歴、および以前の編集内容は復元されません。Telegram 側で、Takeout が開始されるまでの待機期間が設定される場合があります。パネルにはその待機時間が表示され、転送方式が黙って切り替わることはありません。「explicit regular-API」オプションでは、対象範囲が異なり、サポートされていないカテゴリも記録されます。
 
-Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+Takeoutは、Telegram Desktopでも使用されている公式のエクスポートAPIです。TgWitnessは、 独自の取得データから直接、Desktop互換のJSONを書き出すことができます。他者の アーカイブをインポートする必要はありません。チャットIDおよびメッセージIDは、どちらの転送方式でも利用可能です。 公開チャットであることや転送許可があっても、エクスポート速度が速くなることや、 Takeoutの承認遅延が解消されることは保証されません。速度を比較する際は、同じ範囲およびメディア設定で測定してください。
 
-For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+明示的に選択された最大20個のチャットIDについては、通常APIによるエクスポートでは、アカウントの完全なダイアログ一覧を検討する前に、それらのピアを 直接解決します。したがって、ダイアログ一覧に存在しない場合でも、 公開チャンネルは、参加することなくエクスポートすることができます。 キャッシュされていないピアについては、通常のインベントリが使用されます。 アーカイブフィルターは引き続き適用されます。Telegramがダイアログを返さず、 アーカイブされたチャットが除外されている場合、アーカイブ状態が不明なものは省略として記録されます。 Takeoutは、範囲分割によるインベントリ処理手順を維持します。どちらのパスもチャットに参加したり、 転送権限を変更したりすることはありません。 デスクトップ互換のJSONでは、Telegramが`left`とマークしたチャンネルは、 `left_chats`の下に表示されます。これには、アカウントが参加していない読み取り可能なパブリックチャンネルも含まれます。
 
-Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+`FLOOD_WAIT`と`FLOOD_PREMIUM_WAIT`の両方とも、サーバーが要求した全期間にわたってリクエストを一時停止します。 アカウントの期限は再接続や再起動後も維持され、後に行われるより短い待機時間によって その期限を短縮することはできません。再試行回数には上限があり、キャンセルしてもシールされたページは保持され、 レート制限を回避するためにAPI認証情報がローテーションされることはありません。プレミアムの購入は行われません。
 
 ## 収集対象を選択する
 
@@ -41,7 +41,7 @@ Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-re
 
 プロフィール写真の履歴やストーリーは、デフォルトでは選択されません。ケースでメッセージのみが必要な場合は、プロフィールと連絡先も無効にしてください。添付ファイルやメタデータが不要な場合は、取得時にそれらを除外することで、このエクスポートに別のプライベートコピーが残るのを防ぐことができます。
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
+写真のペイロードは、メタデータおよびハッシュマニフェストで識別される静止画像バリアントを使用します。これには、アニメーションアバターバリアントを含む写真も含まれます。そのアニメーションは、選択された静止画像に置き換えられることはありません。観測されたサイズより短い、または長いペイロードは添付ファイルの失敗として記録され、ファイル参照の更新中に表現が変更された場合は拒否されます。これらの失敗により、メッセージレコードは保持されたまま、アーカイブは不完全な状態となります。 独立した検証では、署名された長さが観測されたサイズや表現と矛盾する保存済み添付ファイルも拒否されます。これには、古いアーカイブ内のものも含まれます。
 
 ## 概要、対応範囲、検証
 
@@ -97,8 +97,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## 共有とホスト型キャプチャ
 
-Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
+受信者が必要とするメッセージとファイルを選択し、共有するコピー全体を確認した上で、ソースは別途保管してください。受信者がその正確なコピーを特定・検証できるよう、送信した ZIP ファイルのハッシュ値を記録してください。選択された識別子は仮名化されますが、含まれるテキストおよび元のファイルは引き続き確認対象となります。
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope).
+GitHub Actionsは、Takeoutまたは通常のAPIを介したアカウント全体および選択したチャットのエクスポートに加え、1つのチャットに関するイベントログのエクスポートをサポートしています。[ホスト型キャプチャガイド](https://phishdestroy.github.io/TgWitness/docs/capture/)では、設定の確認方法と120分という制限について説明しています。ホスト型キャプチャから生成された共有コピーを検証するには、そのソースハッシュを元のアーカイブと照合し、[モード固有のチェック](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)を用いてそのアーカイブの認証情報を確認してください。
 
 [証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [事例レポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)

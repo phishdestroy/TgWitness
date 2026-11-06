@@ -4,26 +4,26 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 TgWitness 的現行蒐集模型、多帳號工作流程、匯出功能及操作範圍。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Project reference](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [專案參考資料](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Project reference](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
+![專案參考](https://phishdestroy.github.io/TgWitness/assets/chapter-project.svg)
 
 TgWitness 可保存連線帳戶可存取的 Telegram 對話內容， 記錄觀察到的變更，並準備可驗證的匯出檔案。本參考文件說明 資料蒐集模型、現行工作流程及其範圍。
 
-**On this page**
+**本頁內容**
 
-- [Standalone application](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#standalone-application)
-- [Shared investigations](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#shared-investigations)
-- [Archive tools](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#archive-tools)
-- [Optional extras](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#optional-extras)
-- [Protocol and private sources](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#protocol-and-private-sources)
-- [Multiple accounts](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#multiple-accounts)
-- [Capture and attribution](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#capture-and-attribution)
-- [Capacity and Telegram limits](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#capacity-and-telegram-limits)
-- [Reliability and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#reliability-and-recovery)
-- [Evidence model](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#evidence-model)
-- [Export, deployment and handoff](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#export-deployment-and-handoff)
-- [Stable release criteria](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#stable-release-criteria)
+- [獨立應用程式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#standalone-application)
+- [共享調查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#shared-investigations)
+- [歸檔工具](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#archive-tools)
+- [可選附加內容](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#optional-extras)
+- [協定與私有來源](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#protocol-and-private-sources)
+- [多個帳戶](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#multiple-accounts)
+- [擷取與來源標示](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#capture-and-attribution)
+- [容量與 Telegram 限制](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#capacity-and-telegram-limits)
+- [可靠性與恢復](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#reliability-and-recovery)
+- [證據模型](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#evidence-model)
+- [匯出、部署與移交](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#export-deployment-and-handoff)
+- [穩定版發布標準](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/#stable-release-criteria)
 
 ## 獨立應用程式
 
@@ -93,9 +93,9 @@ TgWitness 擁有專屬的安裝程序、資料目錄及發行週期。內建的 
 | 管理員操作 | 相關已交付更新及管理員日誌快照，皆包含於頻道／超級群組聊天記錄的匯出檔案中 | 匯出功能會在匯出管理員帳戶可存取時讀取日誌；持續輪詢管理員日誌的功能不屬於此流程範圍 |
 | 附件 | 原始版本描述、下載位元組數／SHA-256 及嘗試結果 | 已消失的檔案可能無法恢復；最新版本不會被替換 |
 | 歷史沿革 | 當前可見訊息的明確快照 | 不會還原所有編輯或刪除的內容 |
-| 收集程序 | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) |
+| 收集程序 | 啟動／停止、心跳訊號、錯誤、設定、範圍及簽名執行收據 | 本地清單；GitHub 與 TDX 新增[獨立環境檢查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
+介面會標示來源事件中提供的帳號，並保留觀察到的 名稱與使用者名稱。當事件未標示行為者時，報告會將該欄位留空。
 
 ## 儲存容量與 Telegram 限制
 

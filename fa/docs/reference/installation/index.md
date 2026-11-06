@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/insta
 
 نصب با یک دستور، بررسی امضاها و هش‌ها، به‌روزرسانی و حذف یک نصب.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [مستندسازی](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [شروع کار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![شروع کار](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [پروژه](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [راه‌اندازی سریع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/) · [استقرار](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
 
-**On this page**
+**در این صفحه**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#remove-tgwitness)
+- [نصب با یک دستور](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#install-with-one-command)
+- [جایی که همه‌چیز اجرا می‌شود](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#where-everything-runs)
+- [تنظیمات جستجوی متن کامل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#full-text-search-settings)
+- [دسترسی خط فرمان](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#command-line-access)
+- [پیش از اجرا تأیید کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#verify-before-running)
+- [به‌روزرسانی یک نصب موجود](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#update-an-existing-installation)
+- [دستورهای روزمره در اوبونتو](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [TgWitness را حذف کنید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/#remove-tgwitness)
 
 ## با یک دستور نصب کنید
 
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **یک انتشار جدید، سایت دانلود را به‌روزرسانی می‌کند؛ برنامه‌های نصب‌شده وقتی دوباره نصب‌کننده را اجرا می‌کنید، به‌روزرسانی می‌شوند.** هیچ به‌روزرسانی‌کننده‌ی بدون نظارت یا راه‌اندازی مجدد خودکار برای مجموعه‌ی در حال اجرا وجود ندارد. کانال نصب‌کننده‌ی فعلی **پیش‌نمایشی** است؛ این کانال از نسخه‌های منتشرشده و بررسی‌شده‌ی `main`، که commit آن می‌تواند جدیدتر از آخرین نسخه شماره‌گذاری‌شده GitHub باشد. نسخه صفحه از `pyproject.toml`؛ commit و شناسه build آن، به‌روزرسانی‌ها را در همان نسخه پیش‌نمایش از هم متمایز می‌کند.
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+انتشار پس از آنکه آن commit خاص از بررسی‌های کاربردی و امنیتی عبور کند و بسته امضا شده، تست‌های نصب سرویس اوبونتو و پاورشل ویندوز را پشت سر بگذارد، به‌صورت خودکار انجام می‌شود. در حین اجرای بررسی‌ها، یا در صورت شکست آن‌ها، همان دستورات به نصب نسخه قبلی بررسی‌شده ادامه می‌دهند. مانیفست build نشان می‌دهد که کدام commit در حال حاضر در دسترس است؛ شماره نسخه به تنهایی ممکن است بین به‌روزرسانی‌های پیش‌نمایشی ثابت بماند.
 
 از همان پوشه نصب و کاربر سیستم‌عامل قبلی استفاده کنید. از دایرکتوری کامل داده با متوقف کردن جمع‌آوری نسخه پشتیبان تهیه کنید؛ `tgwitness paths` آن را شناسایی می‌کند. یک خروجی امضا شده نسخه پشتیبان کامل نصب نیست.
 

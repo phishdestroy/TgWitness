@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/acces
 
 يمكنك تحديد نطاق الوصول إلى الحسابات والمحادثات، واختيار الأذونات، وتقييد الجلسات وعناوين IP، وسحب حق الوصول.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [البدء](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![البدء](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 امنح المراجع حق الوصول إلى محادثة واحدة، أو امنح المحلل إذنًا لتصدير قضية، أو امنح المشغل حق التحكم في حسابات محددة. يحصل كل شخص على رمزه الخاص. ويبقى رمز لوحة التحكم الرئيسية بحوزة المسؤول.
 
@@ -110,6 +110,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/acces
 
 ****المسؤول الرئيسي وحدود الثقة****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+يظل رمز اللوحة الرئيسية غير مقيد. تؤدي عمليات تسجيل الدخول إلى المتصفح باستخدامه إلى إنشاء جلسات تخضع لحدود الجلسات التي حددها المسؤول. تحتفظ البرامج النصية التي ترسل الرمز الرئيسي مباشرةً بالوصول الكامل ولا تُحسب كجلسات متصفح.
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+هذا هو التحكم في الوصول على مستوى التطبيق في تثبيت واحد. تتشارك جميع مساحات العمل في عملية الخادم؛ وهذا لا يعني العزل عن مسؤول المضيف. حافظ على خصوصية الرمز الرئيسي وجلسات Telegram ومفاتيح التوقيع ودليل البيانات. رمز الشاهد هو نقطة تفتيش/بيانات اعتماد حالة منفصلة، وليس رمز وصول إلى اللوحة.

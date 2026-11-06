@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/
 
 [টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![আর্কাইভ ইন্টিগ্রেশনসমূহ](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [শুধুমাত্র-পঠনযোগ্য MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/) · [পূর্ণ-পাঠ অনুসন্ধান](https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 তারিখগুলো `2026-10-01` (UTC মধ্যরাত) অথবা টাইমজোনসহ ISO সময়, `2026-10-01T09:00+03:00`. জন্য `search`, `messages` এবং `export` তারা পর্যবেক্ষণের সময় নির্বাচন করে। পৃষ্ঠাগুলো সর্বোচ্চ ৫০টি রেকর্ড ধারণ করে: অনুসরণ করুন `next_offset` (`--offset`) র‌্যাঙ্কড অনুসন্ধানের জন্য এবং `next_before` (`--before`) অন্যত্র।
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+র‍্যাঙ্কড অনুসন্ধান 1,000টি ফলাফলে থেমে যায়। চূড়ান্ত পৃষ্ঠা `--limit`-এর চেয়ে ছোট হতে পারে; যখন আরও মিলিত পর্যবেক্ষণ থাকে, তখন অনুসন্ধান, চ্যাট বা সময়সীমা সংকীর্ণ করুন।
 
 প্রতিটি বার্তার ফলাফল বহন করে `untrusted_content: true`, ওয়ার্কস্পেস, চ্যাট এবং মেসেজ আইডি, জার্নাল ক্রম, সংরক্ষিত রেকর্ড হ্যাশ এবং একটি প্যানেল লিঙ্ক। সম্পাদনা, মুছে ফেলার বিজ্ঞপ্তি এবং `missing_on_recheck` সম্পাদনা, মুছে ফেলার বিজ্ঞপ্তি এবং ___ পৃথক রেকর্ড। কোনো রেকর্ডের অনুপস্থিতি কোনো ঘটনা কখনোই ঘটেনি তা প্রমাণ করে না।
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 প্যানেলের মাধ্যমে রপ্তানি করতে একটি সংযোগ প্রয়োজন যা **'বার্তা রপ্তানি' (শুধুমাত্র কমান্ড লাইন)** অনুমতি দেয়; এটি ডিফল্টভাবে নির্বাচিত নয়। এই ফাইলটি একটি কার্যকরী কপি, প্রমাণ নয়: যাচাইযোগ্য হস্তান্তরের জন্য **Exports**-এ স্বাক্ষরিত রপ্তানি ব্যবহার করুন, যা `python -m tgwitness.verify`চেক করে।
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+প্যানেল প্রতিটি রেকর্ড, সমাপ্তি রেকর্ড সহ, প্রেরণের আগে অ্যাক্সেস পুনরায় যাচাই করে। বাতিল বা মেয়াদোত্তীর্ণ অ্যাক্সেস একটি অসম্পূর্ণ রপ্তানি রেখে যায়। অলস পৃষ্ঠা পড়া অন্যান্য কোয়েরির সাথে আর্কাইভ ওয়ার্কার সীমা ভাগ করে এবং একটি সীমিত অপেক্ষার সময় থাকে।
 
 ## এজেন্ট দক্ষতা
 

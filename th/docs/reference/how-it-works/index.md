@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/how-i
 
 อธิบายเกี่ยวกับโซ่แฮช (hash chain), ลายเซ็น (signatures), จุดตรวจสอบ (checkpoints) และพยาน (witnesses) ด้วยสูตรที่ผู้ตรวจสอบใช้จริง
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [หลักฐานและการตรวจสอบ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![หลักฐานและการตรวจสอบ](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness เก็บรักษาข้อมูลที่บัญชีผู้เก็บข้อมูลสังเกตเห็น เชื่อมโยงข้อมูลเหล่านั้น เข้าในบันทึกที่ลงนาม และให้บุคคลอื่นสามารถตรวจสอบข้อมูลที่ส่งออกได้ โดยใช้ กุญแจที่เชื่อถือได้และจุดตรวจสอบที่เก็บไว้ก่อนหน้านี้
 
 [เว็บไซต์เอกสาร](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)ท้องถิ่นเพิ่ม ตัวอย่างแบบโต้ตอบที่ `/docs/concepts/`, เครื่องมือสำรวจการตัดสินใจจุดตรวจสอบที่ `/docs/witness/`, และคู่มือการใช้งานสำหรับ [Case Board](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/), [การออกแบบรายงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/) และ[ส่วนที่คัดลอกสำหรับการส่งต่อ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#handover-extract) ข้อความตัวอย่างทั้งหมด, จำนวน และระยะเวลาล่าช้า เป็นข้อมูลสมมติทั้งหมด ค่าแฮชในแซนด์บ็อกซ์ของเชนถูกคำนวณด้วย SHA-256 ในเบราว์เซอร์ ไม่มีข้อมูลใดถูกส่งไปยัง Telegram
 
-**On this page**
+**บนหน้านี้**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#pick-a-workflow)
+- [ข้อความเปลี่ยนแปลง; ข้อมูลการสังเกตการณ์สะสม](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [สิ่งที่แฮชครอบคลุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#what-a-hash-covers)
+- [สิ่งที่จุดตรวจสอบก่อนหน้าเพิ่มเข้ามา](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [ตำแหน่งของพยาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#where-a-witness-belongs)
+- [ทดสอบการส่งข้อมูลเทียบกับการดำเนินการที่ทราบแล้ว](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [เลือกขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/#pick-a-workflow)
 
 ## ข้อความเปลี่ยนแปลง; ข้อมูลการสังเกตถูกสะสม
 

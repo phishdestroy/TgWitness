@@ -4,28 +4,28 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel
 
 Mọi màn hình của bảng điều khiển: cuộc trò chuyện, nhật ký, nguồn, xuất dữ liệu, Tính năng bổ sung, chế độ bảo vệ và kiểm tra mã nguồn.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Tài liệu](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Bắt đầu](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Bắt đầu](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [Cài đặt ban đầu và cấu hình](https://phishdestroy.github.io/TgWitness/vi/docs/reference/settings/) · [Tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/) · [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Báo cáo trường hợp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/)
 
 Chức năng của từng màn hình, nội dung được ghi vào nhật ký đã ký và vị trí của hướng dẫn chi tiết. Bảng điều khiển hiển thị một không gian làm việc tại một thời điểm: một tài khoản Telegram với các nguồn, nhật ký và khóa ký riêng. Bộ chọn ở đầu thanh bên dùng để chuyển đổi giữa các không gian làm việc. Địa chỉ chứa thông tin về không gian làm việc (`?ws=…`); trong khi địa chỉ, công cụ chọn và tài khoản đã tải không khớp nhau, các thao tác sẽ bị chặn.
 
-Use [Compare collection methods](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) to choose between live observation, full history, fresh account/chat exports and saved-record handover. The Exports page includes the same comparison above its download controls.
+Sử dụng phương pháp so sánh [Compare](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md) để lựa chọn giữa quan sát trực tiếp, lịch sử đầy đủ, xuất dữ liệu tài khoản/cuộc trò chuyện mới và chuyển giao bản ghi đã lưu. Trang Xuất dữ liệu bao gồm bảng so sánh tương tự ở phía trên các nút điều khiển tải xuống.
 
-**On this page**
+**Trên trang này**
 
-- [Find your way](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#find-your-way)
-- [Start here](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#start-here)
-- [Chats](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#chats)
-- [Journal](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#journal)
-- [Sources](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#sources)
-- [Exports](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#exports)
-- [Settings, accounts and connection](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#settings-accounts-and-connection)
-- [Extras](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
-- [Protection modes](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#protection-modes)
-- [More tools](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#more-tools)
+- [Tìm đường](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#find-your-way)
+- [Bắt đầu từ đây](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#start-here)
+- [Trò chuyện](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#chats)
+- [Nhật ký](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#journal)
+- [Nguồn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#sources)
+- [Xuất](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#exports)
+- [Cài đặt, tài khoản và kết nối](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#settings-accounts-and-connection)
+- [Phụ lục](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
+- [Chế độ bảo vệ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#protection-modes)
+- [Các công cụ khác](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#more-tools)
 
 ## Tìm hiểu cách sử dụng
 
@@ -92,7 +92,7 @@ Không gian làm việc này ghi lại những cuộc trò chuyện nào và lư
 - **Các loại nguồn** giới hạn chế độ thư mục và chế độ toàn tài khoản cho các kênh, nhóm, cuộc trò chuyện riêng tư và bot. **Các hành động của chính mình** thêm các tin nhắn, thao tác chỉnh sửa và các lần nhấn phím trả lời của chính tài khoản đó.
 - **Khi có cuộc trò chuyện hoặc bot mới xuất hiện**: lưu hồ sơ của nó và tối đa số lượng tin nhắn mới nhất hiển thị đã chọn.
 
-Limits: the published cloud collector does not receive Secret Chats. The separate [Pseudo-secret interface and its demo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/) are documented with their development status and outstanding defects. Nothing is recorded while TgWitness is not running; after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active. Inline bot buttons pressed in another app are invisible; the bot's reply is recorded.
+Hạn chế: trình thu thập đám mây đã được công bố không nhận được các Cuộc trò chuyện bí mật. Giao diện [Pseudo-secret riêng biệt và bản demo](https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/) của nó được ghi chép kèm theo tình trạng phát triển và các lỗi chưa được khắc phục. Không có dữ liệu nào được ghi lại khi TgWitness không hoạt động; sau khi khởi động lại, nó chỉ thu thập những gì Telegram vẫn trả về, và báo cáo sẽ hiển thị khoảng trống đó. Các cuộc trò chuyện vượt quá giới hạn danh sách trò chuyện (các cuộc đối thoại 1,000 trừ khi được thay đổi trong Tham số) sẽ được thêm vào khi chúng hoạt động trở lại. Các nút bot nhúng được nhấn trong một ứng dụng khác sẽ không hiển thị; phản hồi của bot sẽ được ghi lại.
 
 ### Các cuộc trò chuyện trong phạm vi
 

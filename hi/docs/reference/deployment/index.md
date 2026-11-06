@@ -6,7 +6,7 @@ Windows, Linux, macOS या Docker पर HTTPS के पीछे बैक�
 
 [टीजीविटनेस](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [दस्तावेज़ीकरण](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![तैनाती और पुनर्प्राप्ति](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **अंग्रेज़ी** · [रूसी](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [यूक्रेनी](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [स्पेनिश](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [पुर्तगाली (ब्राज़ील)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [तुर्की](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [अरबी](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [फ़ारसी](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [उर्दू](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिंदी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [बाहासा इंडोनेशिया](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [वियतनामी](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [सरलीकृत चीनी](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo` में सिंथेटिक डेमो शुरू करें |
 | `TgWitness-Check.cmd` | बिना शुरू किए तत्परता जाँच चलाएँ |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+पिन की गई रूसी रूप-विज्ञान शब्दकोश और PDF रंग प्रोफ़ाइल ऑफ़लाइन उपयोग के लिए बंडल की गई हैं। पैकेजिंग केवल निर्भरता की `data` निर्देशिकाओं के भीतर उनकी ज्ञात फ़ाइल पथों की अनुमति देती है; उन निर्देशिकाओं में अप्रत्याशित फ़ाइलें बिल्ड को विफल कर देती हैं।
 
 पूरे आर्काइव को `Documents\TgWitness` जैसे किसी लिखने योग्य फ़ोल्डर में निकालें; इसे ZIP के अंदर या Program Files से न चलाएँ। रनटाइम एक अलग मॉड्यूल पथ का उपयोग करता है, इसलिए अन्य पाइथन इंस्टॉलेशन और `PYTHONPATH` इसका प्रभावित नहीं करते। डेटा पैकेज के `data` फ़ोल्डर में रहता है। अपडेट करने के लिए, TgWitness को रोकें, नए संस्करण को एक नए फ़ोल्डर में एक्सट्रेक्ट करें और `data` फ़ोल्डर को वहीं पर कॉपी करें।
 

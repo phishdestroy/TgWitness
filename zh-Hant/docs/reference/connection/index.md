@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 驗證、自動代理伺服器池、IP 模式、備用策略、外部請求及機密資料儲存。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署與復原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署與復原](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 本文檔說明 TgWitness 0.8.0 的運作方式及其限制。驗證、 來源存取、網路連線及擷取完整性均為獨立的狀態。 關於登入步驟、檔案格式及多重帳戶，請先參閱「 [帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)」；關於事件政策及重新啟動 行為，請參閱[「資料擷取運作方式」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)。
 
@@ -123,19 +123,19 @@ MTProxy 僅傳輸 Telegram 流量。工作區的 HTTP 操作（例如時間戳�
 
 ****自動池參數****
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown, planned rotation, proxy sharing and permitted fallback delay.
+在**「參數」→「自動 MTProxy**」中，設定失敗閾值、冷卻時間、 預定輪替、代理伺服器共享及允許的備用延遲。
 
 | 控制 | 預設 |
 | --- | --- |
-| Disconnects before replacement | 3 within 10 minutes |
-| Proxies tried per connection attempt | 3 |
-| First / maximum rest after failure | 10 minutes / 6 hours |
-| Planned rotation | Disabled; switch on failure |
-| Accounts per proxy | 0: prefer separate entries, share when needed. Set 1 to wait for an exclusive entry. |
-| Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
-| Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
+| 在替換前斷開連線 | 3 項，耗時 10 分鐘 |
+| 每次連線嘗試所嘗試的代理伺服器數量 | 3 |
+| 首次 / 失敗後的最大休息時間 | 10 分鐘 / 6 小時 |
+| 預定輪替 | 已停用；若啟用失敗 |
+| 每個代理伺服器的帳戶數量 | 0：優先採用獨立條目，必要時合併。設定為 1 則會等待獲得專屬條目。 |
+| 允許直接回退前的延遲時間 | 10 分鐘；隱藏地址仍拒絕 Direct |
+| 資料源刷新／傳輸檢查 | 60 / 10 分鐘；主要工作區的數值適用於共享資源池 |
 
-Different proxies do not guarantee different exit addresses. These settings do not override Telegram limits or prove anonymity.
+使用不同的代理伺服器並不能保證會產生不同的出口位址。這些設定無法 繞過 Telegram 的限制，亦無法證明匿名性。
 
 若要將公開清單替換為您自己的營運商目錄，請配置以下覆寫設定。 此設定將完全停用外部訂閱功能，即使其 `proxies` 陣列為空時亦然。
 

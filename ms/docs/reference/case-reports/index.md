@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-
 
 Penapis laporan, lapan reka bentuk, pratetap kandungan, sejarah perubahan yang disimpan dan penilaian yang disertakan dalam eksport yang ditandatangani.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Siasatan](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Ubah pemerhatian terpilih menjadi satu akaun kes yang mudah dibaca: persoalannya, skopnya, perubahan yang disimpan, carta, penemuan dan rujukan sumber. Setiap laporan memberi penerima cara untuk menyemak bahan yang dihantar dan memeriksa liputan pengumpulannya.
 
@@ -24,7 +24,7 @@ Buka **Eksport → Konfigurasi dan pratonton**. Lalui **Data → Reka bentuk & k
 
 Pratinjau data mengira keseluruhan awalan jurnal yang stabil, bukan sampel awal. Hanya baris sampel yang dipaparkan dan senarai panjang yang dihadkan; bilangan yang terlepas dipaparkan. Eksport kemudian mengambil tangkapan stabil baharu, jadi pengumpulan berterusan mungkin meningkatkan angka. Skop, bilangan dan identiti sumber disertakan dalam laporan yang ditandatangani. Membuka atau pratonton borang tidak menyimpannya.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Panduan bidang kuasa.** Di bawah Butiran Dokumen, buka **Panduan bidang kuasa · pilihan** untuk memilih bidang kuasa dan prosedur sivil/komersial atau jenayah. Lampiran mengandungi asas undang-undang, pautan sumber, nota penyediaan dan status penyelidikan. Ringkasan dan penjelasan dalam bahasa tempatan mengenai langkah keselamatan pengumpulan adalah pilihan. Tiada bidang kuasa dipilih secara lalai. Pilihan ini milik ruang kerja, dan dikecualikan daripada konfigurasi susun atur yang disimpan dan tetapan lalai kongsi/salin tersirat. Lihat [lalai, laporan yang disokong dan had penyelidikan](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Pilih salinan penerima.** Carta dan transkrip menggunakan rekod yang dipilih. Integriti, pemilikan dan liputan menerangkan jurnal sumber penuh. ZIP bukti mengandungi rekod asal dan lampirannya. Gunakan [penyerahan minimum](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#handover-extract) apabila penerima hanya perlu menerima data terpilih yang dibenarkan.
 
@@ -90,18 +90,18 @@ Selang kosong bermaksud tiada pemerhatian disertakan; semak liputan untuk menget
 
 Apabila disertakan, `analytics.json` dilindungi oleh hash fail berasingan yang ditandatangani. Jurnal `report.json` menyelitkan agregat terpilih yang sama. Pengesahan tandatangan mengesan bait yang telah diubah. Untuk menyemak angka, kira semula agregat jurnal dengan `report_analytics.Analytics` dan `selected`, atau ambil gambaran agregat dengan `snapshot_analytics.collect` dan `project`.
 
-### Anomaly indicators
+### Penunjuk anomali
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Pratinjau.** Laporan bukti menambah seksyen **Penunjuk Anomali** yang dikira oleh pemproses berdaftar (`tgwitness/metrics/`, satu fail bagi setiap metrik). Laporan itu menamakan setiap pemproses yang dijalankan beserta versinya, dan mencetak metodnya di bawah jadualnya, supaya pengiraan boleh diulang daripada `events.jsonl` dengan `tgwitness.metrics.run`.
 
-| Processor | Apa yang dipaparkan |
+| Pemproses | Apa yang dipaparkan |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | Pengirim pertama kali dan mesej setiap hari UTC. Satu penanda memerlukan sekurang-kurangnya lima pengirim pertama kali dan tiga kali median mereka, dengan jumlah mesej tidak melebihi 1.5 kali mediannya. Garis asas menggunakan sekurang-kurangnya tujuh hari pemerhatian dalam tempoh 14 hari kalendar sebelumnya, selepas tujuh hari pemanasan. |
+| `service_vs_message_ratio` v1 | Bezakan nombor mesej yang disimpan bagi setiap sembang dan bahagian yang digunakan oleh mesej perkhidmatan. Ia menerangkan satu sistem penomboran; ia tidak menjelaskan tentang nombor tertentu yang hilang. |
+| `join_leave_per_month` v1 | Sertaan, pelepasan dan pemindahan atau larangan setiap bulan, satu bagi setiap orang, sembang, perubahan dan hari. |
+| `pinned_per_month` v1 | Pautkan mesej perkhidmatan, lepaskan pautan pemberitahuan, dan mesej yang dipautkan yang ditambah atau dialih keluar antara tangkapan keadaan sembang, setiap bulan. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Parameter → Metric Laporan** memilih pemproses dan bilangan baris yang dipaparkan, termasuk dalam laporan yang disaring. Jadual harian dan bulanan memaparkan baris terkini, jadual perkongsian perkhidmatan menaraikan sembang mengikut bilangan mesej yang disimpan. Jumlah merangkumi setiap baris.
 
 Daripada checkout sumber, bina semua lapan reka bentuk yang disenaraikan di atas daripada jurnal fiksyen yang sama:
 
@@ -153,7 +153,7 @@ Semak setiap semakan secara berasingan, bersama liputan pengumpulan yang direkod
 4. Pelihara ZIP asal dan hash mereka. Catatkan setiap pemegang, pemindahan, tarikh dan tujuan. Simpan kenyataan pengendali yang dikaitkan dan nota kes bersamanya.
 5. Untuk VM sulit, pelihara dan sahkan secara bebas petikan, cabaran, rantaian sijil Intel, ukuran, sumber tepat dan syarat pengendalian kunci. Simpan keputusan pengesahan pengakuan bersama artifak yang telah disemak.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Lihat [skop pengesahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope) untuk pemeriksaan pemerolehan, integriti arkib, masa dan liputan koleksi dalam setiap mod.
 
 ## Semakan penerima
 

@@ -6,21 +6,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/inves
 
 [ٹی جی وٹنس](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [دستاویزات](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![تفتیش](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 ایک کیس کو چینلز، گروپس، نجی چیٹس اور بوٹس میں فالو کریں، ابتدائی حصول سے لے کر حوالہ شدہ ٹائم لائن اور تصدیق شدہ حوالگی تک۔ انٹرایکٹو ویب سائٹ ورژن `/docs/cases/` پر دستیاب ہے؛ [پیش نظارہ ہدایات](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally)۔
 
-**On this page**
+**اس صفحے پر**
 
-- [Worked case: a destination changes across four conversations](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
-- [1. Define the case and collect the whole account](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
-- [2. Inventory every source and acquire historical context](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
-- [3. Preserve the evolving case and deliberate interactions](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
-- [4. Connect observations across chats](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#4-connect-observations-across-chats)
-- [5. Build the cross-chat timeline](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#5-build-the-cross-chat-timeline)
-- [6. Add account perspectives without losing their origin](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
-- [7. Assemble and verify the case handoff](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
-- [Adapt the investigation](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#adapt-the-investigation)
+- [کام کا کیس: ایک منزل چار گفتگوؤں میں تبدیل ہوتی ہے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#worked-case-a-destination-changes-across-four-conversations)
+- [1۔ کیس کی تعریف کریں اور پورا بیان جمع کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#1-define-the-case-and-collect-the-whole-account)
+- [2۔ ہر ماخذ کا انوینٹری بنائیں اور تاریخی سیاق و سباق حاصل کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#2-inventory-every-source-and-acquire-historical-context)
+- [3۔ ترقی پذیر کیس اور جان بوجھ کر کی جانے والی تعاملات کو برقرار رکھیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4۔ چیٹس کے درمیان مشاہدات کو مربوط کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#4-connect-observations-across-chats)
+- [5۔ کراس چیٹ ٹائم لائن بنائیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#5-build-the-cross-chat-timeline)
+- [6۔ اکاؤنٹ کے نقطۂ نظر کو ان کے ماخذ کے ضائع کیے بغیر شامل کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#6-add-account-perspectives-without-losing-their-origin)
+- [7۔ کیس ہینڈ آف کو مرتب کریں اور اس کی تصدیق کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#7-assemble-and-verify-the-case-handoff)
+- [تحقیق کو ڈھالیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/#adapt-the-investigation)
 
 ## کیس کا جائزہ: چار گفتگوؤں میں منزل تبدیل ہوئی
 
@@ -117,7 +117,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/inves
 | ایک ہی محفوظ شدہ فائل | میڈیا رسیدیں #151 اور #209 مکمل ہو چکی ہیں | محفوظ شدہ بائٹس کے لیے مکمل SHA-256 ویلیوز مطابقت رکھتے ہیں۔ |
 | چینل کی نسبت | #101 اور #188 | بغیر معتبر بھیجنے والے کے صارف 71001 کو کسی چینل پوسٹ کا مصنف نہ ٹھہرایا جائے |
 
-Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
+منسلک ہیشز اور ان کے متعلقہ پیغام حوالہ جات کا موازنہ کریں، اور ان ریکارڈز میں فراہم کردہ ٹیلیگرام آئی ڈیز کے مطابق پیغامات کے اوقات کار کو گروپ کرکے محفوظ رکھیں۔
 
 [کیس بورڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/) پر ٹیم کے کام کرنے کے نوٹس رکھیں: ان ریکارڈز کو بک مارک کریں جن پر آپ انحصار کرتے ہیں، جیسے #146، #188 اور #205، درست منزل والی سٹرنگ کو نمایاں کریں، اور دو ریکارڈز کے درمیان یا کسی مخصوص وقت کی حد میں ہر ریکارڈ شدہ عمل کا ایک حصہ محفوظ کریں۔ نوٹس اور اسٹیٹس ٹیم کے جائزے کو اپنی دستخط شدہ تاریخ میں برقرار رکھتے ہیں، جو ماخذ مشاہدات سے الگ طور پر قابل شناخت ہیں۔
 
@@ -177,6 +177,6 @@ python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprin
 | --- | --- | --- |
 | بوٹ کے ذریعے چلایا گیا آرڈر/ادائیگی کا تنازعہ | انٹری کا اعلان → محفوظ شدہ لنک کا پیش نظارہ → بوٹ کے آغاز کا پیرامیٹر → پیغام اور کی بورڈ ورژنز → پینل کال بیک رسیدیں → نجی/گروپ فالو اپ | مشاہدہ شدہ پیشکش/جواب کے اوقات اور تصدیق شدہ ذرائع؛ صرف ایک ادائیگی کا لنک ادائیگی ثابت نہیں کرتا۔ |
 | واقعات کے بعد پیغامات حذف کیے گئے | تمام متاثرہ چیٹس → محفوظ شدہ اصل پیغامات/ترمیمات → حذف یا دوبارہ چیک پر غائب ہونے کے نتائج → محفوظ شدہ میڈیا → کوریج اور دیگر اکاؤنٹ کے نقطۂ نظر | محفوظ شدہ ورژنز اور واضح نامعلوم وقفے؛ کوئی من گھڑا حذف کرنے والا کردار نہیں |
-| ایک شرکاء چیٹس میں نام تبدیل کرتا ہے | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | ایک ٹیلیگرام اکاؤنٹ کی سرگرمیوں کا ٹائم لائن جس میں اس کے ماخذ ریکارڈز کے لنکس شامل ہیں۔ |
+| ایک شرکاء چیٹس میں نام تبدیل کرتا ہے | عددی بھیجنے والا شناختی نمبر → نام/صارف نام کی تاریخ → جوابات → دیگر مشاہدہ شدہ چیٹس → حوالہ شدہ مقامات/فائلیں | ایک ٹیلیگرام اکاؤنٹ کی سرگرمیوں کا ٹائم لائن جس میں اس کے ماخذ ریکارڈز کے لنکس شامل ہیں۔ |
 
 [جمع کرنے کا حوالہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) · [افراد کے پروفائل کی تصدیق](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#people-profiles) · [شواہد کی حوالگی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#investigation-handoff) · [تصدیق مکمل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/)

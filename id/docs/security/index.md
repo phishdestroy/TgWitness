@@ -44,7 +44,7 @@ DIREKTORI DATA
 - **Otoritas cap waktu**Opsional · dinonaktifkan secara default
 
   Hanya nilai SHA-256 dari titik pemeriksaan yang ditandatangani dan nilai nonce acak. Tidak ada pesan, tidak ada nama obrolan.
-- **Witness**Opsional · dinonaktifkan secara default
+- **Saksi**Opsional · dinonaktifkan secara default
 
   Mengekstrak titik pemeriksaan yang ditandatangani dan penghitung penangkapan menggunakan token baca-saja. Alat ini tidak dapat membaca percakapan atau mengubah pengaturan.
 

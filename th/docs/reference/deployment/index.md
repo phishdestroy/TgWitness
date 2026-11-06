@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/deplo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![การติดตั้งและกู้คืน](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **ภาษาอังกฤษ** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [ภาษายูเครน](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [Português (Brasil)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [ภาษาตุรกี](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [اردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [हिन्दी](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [ภาษาอินโดนีเซีย](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [Tiếng Việt](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [ภาษาจีนตัวย่อ](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | เริ่มการสาธิตจำลองที่ `data\demo` |
 | `TgWitness-Check.cmd` | ดำเนินการตรวจสอบความพร้อมโดยไม่เริ่มระบบ |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+พจนานุกรมรูปคำภาษารัสเซียที่ถูกตรึงไว้และโปรไฟล์สี PDF ถูกรวมไว้เพื่อ ใช้งานแบบออฟไลน์ การแพ็กเกจอนุญาตให้ใช้เฉพาะเส้นทางไฟล์ที่ทราบอยู่ภายในไดเรกทอรี `data` ของ dependency เท่านั้น; ไฟล์ที่ไม่คาดคิดในไดเรกทอรีเหล่านั้นจะทำให้การสร้างล้มเหลว
 
 แตกไฟล์อาร์ไคฟ์ทั้งหมดไปยังโฟลเดอร์ที่สามารถเขียนได้ เช่น `Documents\TgWitness`; อย่า เรียกใช้จากภายในไฟล์ ZIP หรือจากโฟลเดอร์ Program Files เนื่องจากระบบรันไทม์ใช้เส้นทางโมดูลที่แยกออกมา ดังนั้นการติดตั้ง Python อื่น ๆ และ `PYTHONPATH` จึงไม่ส่งผลต่อมัน ข้อมูลจะเก็บอยู่ใน โฟลเดอร์ `data` ของแพ็กเกจ เพื่ออัปเดต ให้หยุด TgWitness ก่อน จากนั้นแตกไฟล์เวอร์ชันใหม่ไปยัง โฟลเดอร์ใหม่ และคัดลอกโฟลเดอร์ `data` ไปยังโฟลเดอร์เดิม
 

@@ -6,27 +6,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/colle
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ドキュメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [コレクション](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![コレクション](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
 TgWitnessは、接続されたTelegramアカウントが検知した内容を記録します。このジャーナルは、 それらの検知内容、その順序、および付随するコンテキストを保存します。また、 欠落したメッセージやアカウントの接続状態から、目に見えない行動を推測することはありません。
 
-**On this page**
+**このページでは**
 
-- [From login to a journal](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#from-login-to-a-journal)
-- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
-- [Scope and event selection](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#scope-and-event-selection)
-- [Own actions](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#own-actions)
-- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
-- [Recheck tiers](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#recheck-tiers)
-- [Message history and attribution](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#message-history-and-attribution)
-- [History snapshots](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#history-snapshots)
-- [Attachment handling](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#attachment-handling)
-- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#pause-lock-disconnect-and-restart)
-- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#account-isolation-and-verification)
+- [ログインからジャーナルまで](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#from-login-to-a-journal)
+- [監視範囲：選択したチャット、フォルダ、またはアカウント全体](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [適用範囲とイベントの選択](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#scope-and-event-selection)
+- [自身のアクション](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#own-actions)
+- [調査モード：チームへの参加とボットとの対話](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [階層の再確認](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#recheck-tiers)
+- [メッセージ履歴と出典](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#message-history-and-attribution)
+- [履歴のスナップショット](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#history-snapshots)
+- [添付ファイルの取り扱い](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#attachment-handling)
+- [一時停止、ロック、切断、再起動](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [アカウントの分離と検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/#account-isolation-and-verification)
 
 ## ログインからジャーナルまで
 
-For self-destructing photos and files, see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md). It explains the priority worker, saved and unavailable outcomes, and the limits of read-receipt blocking in the API collector.
+自己消滅型写真およびファイルについては、「[自己消滅型メディア」](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)を参照してください。 ここでは、優先度ワーカー、保存済みおよび利用不可の結果、およびAPIコレクターにおける 既読通知ブロックの制限について説明しています。
 
 フローチャート · ユーザーアカウントの認証 → アクセス可能なグループおよびチャンネルを選択してください; アクセス可能なグループおよびチャンネルを選択してください → イベントおよび添付ファイルの設定を保存する; イベントおよび添付ファイルの設定を保存する → 監視を開始する; 監視を開始する → アクティブなクライアントからの更新情報を受け取る; アクティブなクライアントからの更新情報を受け取る → 情報源およびイベントに関するポリシーを適用する; 情報源およびイベントに関するポリシーを適用する → 署名付き観測記録を追加する; 署名付き観測記録を追加する → ジャーナルの確認またはエクスポート; 署名付き観測記録を追加する → キューに格納された添付ファイルを処理する; キューに格納された添付ファイルを処理する → ダウンロード結果を追加してください · ユーザーアカウントの認証 · アクセス可能なグループおよびチャンネルを選択してください · イベントおよび添付ファイルの設定を保存する · 監視を開始する · アクティブなクライアントからの更新情報を受け取る · 情報源およびイベントに関するポリシーを適用する · 署名付き観測記録を追加する · ジャーナルの確認またはエクスポート · キューに格納された添付ファイルを処理する · ダウンロード結果を追加してください
 
@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 これらのモードでは以下のことができません：
 
-- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
+- **シークレットチャットは、**これらのクラウド収集モードの対象外です。別の [シークレットチャットの実装](https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/)が開発中ですが、 そこに記載されているリビジョン時点では、公開されているコレクターには含まれていません。
 - **TgWitnessが実行されていない間は、何も記録されません。**再起動後、TgWitnessはTelegramに 見逃した更新情報を問い合わせ、チャットを再確認しますが、長時間の サービス停止後には、Telegramがすべてのデータを返してくれるわけではありません。レポートおよび`verify.py`では、そのような期間はギャップとして表示されます（[カバレッジを](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)参照）。
 - 最初は最初の 1,000 件のダイアログのみが表示されます（上限は**「パラメータ」**に記載されています）。それより古い チャットは、次にアクティブになった時点で追加されます。追加されたチャットのそれ以前の履歴は取得されません。必要な場合は、履歴の スナップショットまたはチャットの完全なエクスポートを行ってください。
 - 常に変化するフォルダの状態（ミュート、既読）は適用されません。そのようなチャットは 引き続き監視対象となります。
@@ -103,7 +103,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
   - `source.profile`レコードとしてのプロファイル：ボットの説明とコマンド、ユーザー、グループ、またはチャンネルの「概要」テキスト、 メンバー、リンクされたチャット、およびTelegramが返した際の招待リンク ；
   - `new_chat` とマークされた履歴スナップショットとして、最新の表示可能なメッセージ（最大 1,000 件）を保存します。これには、 参加したばかりのチームチャットの以前のメッセージや、監視がチャットに 気付く前にボットが発信した内容などが含まれます。すでに保存済みのメッセージは重複して記録されません。
 
-  Chats already in the list when the mode is switched on are added without snapshots. A FloodWait pauses this work and it resumes afterwards; failures are recorded and live recording of the chat continues. This includes waits while resolving the new chat's identity: the pending profile/history task is retained for retry, and an existing longer account-wide wait is not shortened. - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile of any source; the newest one is shown above the messages. - **Chat state snapshots (preview).** State outside the message stream changes without a message: unpinning every message leaves no message-level trace, an administrator loses rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled source is read periodically and saved as a signed `chat.state` record: title, usernames, description, member and administrator counts, linked chat, slow mode, pinned message IDs (up to 100), administrators with their rights and titles, and gifts shown on channels and user profiles (up to 100). Each record lists the differences from the previous snapshot: changed fields with before and after, pinned messages added or removed, administrators and gifts added, changed or no longer listed. Telegram does not say who changed anything or when between snapshots. - A part Telegram refuses (for example the administrator list of a channel for a member who is not an administrator) is named in `errors`; its earlier value is kept and listed in `carried_forward`, never reported as removed. - A record whose only changes are counts, and a check that found no change, refer to the last full state with `state_seq` and cumulative `state_overrides`. A full state is written at least every seven days and whenever anything other than a count changes. - `parts_complete` marks capped lists. Additions require a complete earlier list, removals require a complete current list, and explicit empty values record clearing. - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots off), the pause between sources, which parts are read, and whether checks that found no change are recorded. `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` stop the remaining snapshot requests, preserve any longer account-wide deadline, and leave the interrupted chat eligible for another attempt after that wait. - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or link a bot answers such a press with, and invite links used in another app do not reach TgWitness. What the bot sends or edits afterwards is recorded.
+  モードがオンになった時点で既にリストにあるチャットは、スナップショットなしで追加されます。 FloodWaitが発生すると、この処理は一時停止し、その後再開されます。失敗は記録され、チャットの リアルタイム記録は継続されます。これには、新しいチャットの IDを解決している間の待機時間も含まれます。保留中のプロファイル/履歴タスクは再試行のために保持され、既存の アカウント全体にわたるより長い待機時間は短縮されません。 - **オンデマンドのプロファイル。****「チャット」→「プロファイル」→「プロファイルを保存」で、**任意のソースの現在のプロファイルが保存され、 メッセージの上部に最新のプロファイルが表示されます。 - **チャット状態のスナップショット（プレビュー）。**メッセージストリーム外の状態は、 メッセージなしでも変化します。すべてのメッセージの固定を解除するとメッセージレベルの痕跡は残らず、管理者が 権限を失ったり、ギフトが非表示、変換、アップグレード、または返金されたりする場合などです。 監視中は、有効になっている すべてのソースが定期的に読み取られ、署名付き`chat.state`レコードとして保存されます。これには、タイトル、ユーザー名、 説明、メンバー数および管理者数、リンクされたチャット、スローモード、固定メッセージID （最大100件）、権限と肩書きを持つ管理者、およびチャンネルや ユーザープロフィールに表示されているギフト（最大100件）が含まれます。 各レコードには、前回のスナップショットとの相違点が記載されています： 変更されたフィールド（変更前と変更後）、追加または削除された固定メッセージ、管理者および ギフトの追加、変更、またはリストから削除されたもの。Telegramは、スナップショット間の変更を行った人物や 変更時期については明示しません。 - Telegramが拒否する部分（例：管理者ではないメンバーに対するチャンネルの管理者リスト など）は`errors`に指定されます。その以前の値は保持され、 `carried_forward`にリストされ、削除されたものとして報告されることはありません。 - 変更点がカウントのみであるレコード、および変更がないと判定されたチェックは、 `state_seq`と累積的な`state_overrides`を持つ最後の完全な状態を参照します。完全な状態は、 少なくとも7日ごとに、またカウント以外の何かが変更された際には常に書き込まれます。 - `parts_complete`は上限が設定されたリストを示します。追加には以前の完全なリストが必要で、 削除には現在の完全なリストが必要であり、明示的な空の値はリストのクリアを記録します。 - **[パラメータ] → [チャット状態]** では、間隔（デフォルトは12時間、0に設定するとスナップショットが 無効化されます）、ソース間の待機時間、読み取る部分、および変更が 見つからなかったチェックを記録するかどうかを設定します。`FLOOD_WAIT`および`FLOOD_PREMIUM_WAIT`は、残りの スナップショットリクエストを停止し、アカウント全体のより長い期限を保持し、 中断されたチャットが、その待機時間後に再試行可能となるようにします。 - **表示されません。**別のTelegramアプリで押されたインライン（コールバック）ボタン、ボットがそのような押下に対して返すポップアップや リンク、および別のアプリで使用された招待リンクは、 TgWitnessには届きません。その後、ボットが送信または編集した内容は記録されます。
 
 ### パネルからの発言
 
@@ -176,4 +176,4 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 **「ジャーナルの検証」機能は、**表示された 境界を通じてイベントの連鎖と署名を検証します。ワークスペースが変更されると結果はクリアされ、パネルには 検証後に追加された新しい記録が表示されます。ZIP形式でのエクスポートでは、収集されたメディアの検証も行われます。
 
-Retain fingerprints and checkpoints independently. See the [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) for acquisition checks in each mode, and [daily operations](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/) for routine collection.
+フィンガープリントとチェックポイントは個別に保持してください。各モードにおける取得チェックについては「 [検証範囲](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)」を、 日常的な収集については「[日常業務](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/)」を参照してください。

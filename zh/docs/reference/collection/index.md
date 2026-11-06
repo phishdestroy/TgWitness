@@ -6,27 +6,27 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/colle
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文档](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [收藏集](https://github.com/phishdestroy/TgWitness/blob/main/docs/COLLECTION-MODES.md)
 
-![Collection](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
+![集合](https://phishdestroy.github.io/TgWitness/assets/chapter-collect.svg)
 
 TgWitness 记录已连接的 Telegram 账户所观察到的内容。该日志保存 这些观察结果、其时间顺序以及随附的上下文信息。它不会 根据缺失的消息或账户处于连接状态的情况，推断出未被观察到的操作。
 
-**On this page**
+**本页内容**
 
-- [From login to a journal](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#from-login-to-a-journal)
-- [Observation scope: chosen chats, a folder or the whole account](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
-- [Scope and event selection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#scope-and-event-selection)
-- [Own actions](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#own-actions)
-- [Investigation mode: joining teams and talking to bots](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
-- [Recheck tiers](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#recheck-tiers)
-- [Message history and attribution](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#message-history-and-attribution)
-- [History snapshots](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#history-snapshots)
-- [Attachment handling](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#attachment-handling)
-- [Pause, lock, disconnect, and restart](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#pause-lock-disconnect-and-restart)
-- [Account isolation and verification](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#account-isolation-and-verification)
+- [从登录到日志](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#from-login-to-a-journal)
+- [观察范围：选定的聊天、某个文件夹或整个账户](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [范围与事件选择](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#scope-and-event-selection)
+- [自主操作](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#own-actions)
+- [调查模式：加入团队并与机器人对话](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#investigation-mode-joining-teams-and-talking-to-bots)
+- [重新检查分级](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#recheck-tiers)
+- [消息历史记录与来源说明](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#message-history-and-attribution)
+- [历史快照](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#history-snapshots)
+- [附件处理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#attachment-handling)
+- [暂停、锁定、断开连接和重启](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#pause-lock-disconnect-and-restart)
+- [账户隔离与验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/#account-isolation-and-verification)
 
 ## 从登录到日志
 
-For self-destructing photos and files, see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md). It explains the priority worker, saved and unavailable outcomes, and the limits of read-receipt blocking in the API collector.
+关于自毁照片和文件，请参阅[自毁媒体](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)。 本文阐述了优先级处理程序、已保存和不可用结果，以及 API 收集器中阅读回执屏蔽功能的限制。
 
 流程图 · 授权用户账户 → 选择可访问的群组和频道; 选择可访问的群组和频道 → 保存事件和附件设置; 保存事件和附件设置 → 开始监控; 开始监控 → 接收来自活跃客户端的更新; 接收来自活跃客户端的更新 → 应用来源与事件政策; 应用来源与事件政策 → 追加一份经过签名的观察记录; 追加一份经过签名的观察记录 → 查看或导出日志; 追加一份经过签名的观察记录 → 处理队列中的任何附件; 处理队列中的任何附件 → 附上下载结果 · 授权用户账户 · 选择可访问的群组和频道 · 保存事件和附件设置 · 开始监控 · 接收来自活跃客户端的更新 · 应用来源与事件政策 · 追加一份经过签名的观察记录 · 查看或导出日志 · 处理队列中的任何附件 · 附上下载结果
 
@@ -62,7 +62,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 以下情况不适用：
 
-- **Secret chats** are outside these cloud-collection modes. A separate [Secret Chat implementation](https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/) exists in development; it is not included in the published collector at the revision documented there.
+- **秘密聊天**不属于这些云端收集模式的范围。目前正在开发一个独立的 [秘密聊天实现](https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/)；该实现未 包含在本文档所述版本的已发布收集器中。
 - **当 TgWitness 未运行时，不会进行任何记录。**重启后，它会向 Telegram 查询遗漏的更新并重新检查聊天记录，但在长时间 中断后，Telegram 无法返回所有数据。报告和 `verify.py` 会将此类时段显示为数据缺口（参见[覆盖范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#coverage-continuity-gaps-and-unobserved-ids)）。
 - 初始仅列出前 1,000 个对话（限制值可在**“参数”**中查看）；较早的 聊天记录将在下次激活时被添加。已添加聊天的早期历史记录不会被获取——如有需要，请 创建历史记录快照或导出完整聊天记录。
 - 不会应用那些随时变化的文件夹条件（如静音、已读）：此类聊天 仍会受到监控。
@@ -103,7 +103,7 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
   - 其作为`source.profile`记录的概况：机器人描述和命令、用户、群组或频道的“关于”文本 、成员、关联聊天以及Telegram返回邀请链接时的 邀请链接；
   - 将其最新的可见消息（最多 1,000 条）作为标记为 `new_chat` 的历史快照： 刚加入的团队聊天中的早期消息，或观察者注意到该聊天之前 机器人所说的话。已实时保存的消息不会重复记录。
 
-  Chats already in the list when the mode is switched on are added without snapshots. A FloodWait pauses this work and it resumes afterwards; failures are recorded and live recording of the chat continues. This includes waits while resolving the new chat's identity: the pending profile/history task is retained for retry, and an existing longer account-wide wait is not shortened. - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile of any source; the newest one is shown above the messages. - **Chat state snapshots (preview).** State outside the message stream changes without a message: unpinning every message leaves no message-level trace, an administrator loses rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled source is read periodically and saved as a signed `chat.state` record: title, usernames, description, member and administrator counts, linked chat, slow mode, pinned message IDs (up to 100), administrators with their rights and titles, and gifts shown on channels and user profiles (up to 100). Each record lists the differences from the previous snapshot: changed fields with before and after, pinned messages added or removed, administrators and gifts added, changed or no longer listed. Telegram does not say who changed anything or when between snapshots. - A part Telegram refuses (for example the administrator list of a channel for a member who is not an administrator) is named in `errors`; its earlier value is kept and listed in `carried_forward`, never reported as removed. - A record whose only changes are counts, and a check that found no change, refer to the last full state with `state_seq` and cumulative `state_overrides`. A full state is written at least every seven days and whenever anything other than a count changes. - `parts_complete` marks capped lists. Additions require a complete earlier list, removals require a complete current list, and explicit empty values record clearing. - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots off), the pause between sources, which parts are read, and whether checks that found no change are recorded. `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` stop the remaining snapshot requests, preserve any longer account-wide deadline, and leave the interrupted chat eligible for another attempt after that wait. - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or link a bot answers such a press with, and invite links used in another app do not reach TgWitness. What the bot sends or edits afterwards is recorded.
+  启用该模式时，列表中已有的聊天将不带快照被添加进来。 FloodWait 会暂停此操作，并在之后恢复；失败情况会被记录，而 聊天的实时记录将继续进行。这包括在解析新聊天 身份时的等待：待处理的个人资料/历史记录任务将保留以供重试，而现有的 更长的全账户范围等待时间不会缩短。 - **按需生成配置文件。****聊天 → 配置文件 → 保存配置文件 现**可保存任何来源的当前配置文件； 最新配置文件将显示在消息上方。 - **聊天状态快照（预览版）。**消息流之外的状态会在没有 消息的情况下发生变化：取消固定所有消息不会留下消息级别的痕迹；管理员失去 权限；礼物被隐藏、转换、升级或退款。 在监控期间，每个已启用的 消息源都会被定期读取，并保存为带签名的`chat.state`记录：标题、用户名、 描述、成员和管理员数量、关联聊天、慢速模式、置顶消息 ID （最多 100 个）、管理员及其权限和头衔，以及频道和 用户个人资料中显示的礼物（最多 100 个）。 每条记录都会列出与上一快照的差异： 已更改字段（含更改前后的值）、新增或移除的置顶消息，以及新增、 更改或不再列出的管理员和礼物。Telegram 不会说明在两次快照之间 是谁进行了更改，也不说明更改发生的时间。 - Telegram 拒绝显示的部分内容（例如，对于非管理员的成员而言， 该频道的管理员列表）会在 `errors` 中标注；其先前值会被保留并列在 `carried_forward` 中，绝不会被报告为已移除。 - 仅计数发生变化的记录，以及未检测到变化的检查，均引用 带有 `state_seq` 和累积 `state_overrides` 的最后一个完整状态。完整状态至少 每七天写入一次，且只要计数以外的任何内容发生变化，也会写入。 - `parts_complete` 标记上限列表。添加需要完整的早期列表， 移除需要完整的当前列表，而显式的空值则记录清空操作。 - **参数 → 聊天状态**用于设置间隔（默认 12 小时，0 将快照 功能关闭）、数据源之间的暂停时间、读取哪些部分，以及是否记录未发现 变更的检查结果。`FLOOD_WAIT` 和 `FLOOD_PREMIUM_WAIT` 将停止剩余的 快照请求，保留任何更长的全账户级截止时间，并使 中断的聊天在等待结束后仍可再次尝试。 - **不可见。**在其他 Telegram 应用中点击的内联（回调）按钮、机器人对此类点击作出的响应弹窗或 链接，以及在其他应用中使用的邀请链接均不会传送到 TgWitness。但机器人随后发送或编辑的内容会被记录下来。
 
 ### 面板操作指南
 
@@ -176,4 +176,4 @@ For self-destructing photos and files, see [Self-destructing media](https://gith
 
 **“验证日志”**功能会通过显示的 边界检查事件链和签名。当工作区发生变化时，其结果将被清空，面板会标识 检查后新增的记录。ZIP导出功能还会对收集的媒体文件进行验证。
 
-Retain fingerprints and checkpoints independently. See the [verification scope](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) for acquisition checks in each mode, and [daily operations](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/) for routine collection.
+请分别保留指纹和检查点。有关各模式下的采集检查，请参阅 [验证范围](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)部分， 有关常规采集，请参阅[日常操作](https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/)部分。

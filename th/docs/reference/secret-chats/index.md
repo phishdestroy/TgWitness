@@ -1,48 +1,48 @@
-# Secret Chats: implementation and demo
+# การสนทนาลับ: การนำไปใช้และตัวอย่าง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/
 
-Understand the separate Secret Chat implementation, try the fictional interface and review outstanding defects.
+ทำความเข้าใจการนำ Secret Chat มาใช้ในส่วนที่แยกต่างหาก ทดลองใช้ส่วนติดต่อผู้ใช้สมมติ และตรวจสอบข้อบกพร่องที่ยังไม่ได้แก้ไข
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-**Status checked on 6 November 2026:** a separate Secret Chat implementation exists in development. It has not been merged into published `main` at `3d23e52b647b`. The ordinary collector and Takeout export do not collect Secret Chats. The interactive website scenario demonstrates the interface with fictional data; it does not enable Telegram communication.
+**สถานะตรวจสอบเมื่อวันที่ 6 พฤศจิกายน 2026:** มีระบบ Secret Chat ที่พัฒนาแยกต่างหาก อยู่ระหว่างการพัฒนา ยังไม่ถูกรวมเข้ากับ `main` ที่เผยแพร่แล้ว ณ `3d23e52b647b` Collector ปกติและ Takeout export ไม่เก็บรวบรวม Secret Chats ตัวอย่างเว็บไซต์แบบโต้ตอบแสดงอินเทอร์เฟซด้วยข้อมูลสมมติ; ไม่สนับสนุนการสื่อสารผ่าน Telegram
 
-## Where the implementation lives
+## สถานที่ที่โค้ดถูกพัฒนา
 
-Commit `0e60f88e` added **Sources → Pseudo-secret** in the local development branch `fix/panel-routes-sessions`. The checked snapshot is `bb8788fb685c`. Its implementation includes `tgwitness/secret_chats.py`, application routes, `tgwitness/static/views/secret-chats.js` and dedicated tests.
+Commit `0e60f88e` ได้เพิ่ม **Sources → Pseudo-secret** ในสาขาการพัฒนาท้องถิ่น `fix/panel-routes-sessions` สแนปช็อตที่ตรวจสอบแล้วคือ `bb8788fb685c` การนำไปใช้รวมถึง `tgwitness/secret_chats.py` เส้นทางแอปพลิเคชัน `tgwitness/static/views/secret-chats.js` และการทดสอบเฉพาะ
 
-The optional `secret-chats` extra in that branch uses [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), pinned to `d87bf037b90060383c7b704d8a06ebb98c621c6f`. The library implements Telegram's end-to-end chat protocol on the account's existing Telethon authorization. Installing that library alone does not add the missing integration to `main`.
+ส่วนเสริม `secret-chats` ที่เลือกได้ในสาขาดังกล่าวใช้ [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat), ที่ถูกตรึงไว้ที่ `d87bf037b90060383c7b704d8a06ebb98c621c6f` ไลบรารีนี้ดำเนินการ โปรโตคอลการสนทนาแบบ end-to-end ของ Telegram บนการอนุญาต Telethon ที่มีอยู่ของบัญชี การติดตั้งไลบรารีนี้เพียงอย่างเดียวจะไม่เพิ่มการบูรณาการที่ขาดหายไปให้กับ `main`
 
-## What the development interface does
+## หน้าที่ของอินเทอร์เฟซการพัฒนา
 
-| การดำเนินการ | Recorded behavior |
+| การดำเนินการ | พฤติกรรมที่บันทึกไว้ |
 | --- | --- |
-| Start a chat by username or user ID | Send a request; the other participant must accept it. |
-| Accept an incoming request | TgWitness becomes the receiving endpoint for that chat. Automatic acceptance is a separate setting, off by default. |
-| Send or receive a message | Add an outgoing or incoming `secret_chat.message` record and show it in the thread. |
-| Receive an attachment | Decrypt it, store its bytes by SHA-256 and record `secret_chat.file`. |
-| Receive a timer or deletion notice | Record the notice and retain previously captured content. |
-| Review the conversation | Show messages, files, notices and the key visualization. The open tab refreshes every four seconds. |
+| เริ่มการสนทนาโดยใช้ชื่อผู้ใช้หรือ ID ผู้ใช้ | ส่งคำขอ; ผู้เข้าร่วมอีกฝ่ายต้องยอมรับคำขอนั้น |
+| รับคำขอที่เข้ามา | TgWitness จะกลายเป็นจุดปลายทางรับสำหรับแชทนั้น การรับอัตโนมัติเป็นการตั้งค่าแยกต่างหาก ซึ่งถูกปิดไว้ตามค่าเริ่มต้น |
+| ส่งหรือรับข้อความ | เพิ่มบันทึก`secret_chat.message` ที่ส่งออกไปหรือรับเข้ามา และแสดงมันในสายสนทนา |
+| รับไฟล์แนบ | ถอดรหัสมัน เก็บบายต์ตาม SHA-256 และบันทึก `secret_chat.file` |
+| รับการแจ้งเตือนเกี่ยวกับตัวจับเวลาหรือการลบข้อมูล | บันทึกคำเตือนและเก็บรักษาเนื้อหาที่บันทึกไว้ก่อนหน้านี้ |
+| ตรวจสอบการสนทนา | แสดงข้อความ ไฟล์ การแจ้งเตือน และภาพแสดงข้อมูลหลัก แท็บที่เปิดอยู่จะอัปเดตทุกสี่วินาที |
 
-In a development build containing the integration, the operator enables the module for the selected account and connects it. Starting, accepting and sending require permission to interact and the account's read-only protection to be off. The other participant must accept a new outgoing chat. These controls are not present in the published application at the revision above.
+ในเวอร์ชันพัฒนาที่รวมการบูรณาการนี้ ผู้ดำเนินการจะเปิดใช้งานโมดูล สำหรับบัญชีที่เลือกและเชื่อมต่อมัน การเริ่มต้น การรับ และการส่งข้อความ จำเป็นต้องมีสิทธิ์ในการโต้ตอบ และต้องปิดการป้องกันแบบอ่านอย่างเดียวของบัญชี ผู้เข้าร่วม อีกฝ่ายต้องยอมรับการสนทนาขาออกใหม่ การควบคุมเหล่านี้ไม่มีอยู่ใน แอปพลิเคชันที่เผยแพร่ในเวอร์ชันข้างต้น
 
-Only chats created or accepted by this TgWitness session are covered. Existing Secret Chats on a phone remain on that device. A session import does not supply their separate encryption keys. Secret-chat key material and counters are stored in the workspace vault; preserved messages and decrypted files follow the normal workspace storage protections.
+ครอบคลุมเฉพาะการสนทนาที่ถูกสร้างหรือรับโดยเซสชันTgWitness นี้เท่านั้น การสนทนาลับ ที่มีอยู่เดิมบนโทรศัพท์จะยังคงอยู่บนอุปกรณ์นั้น การนำเข้าเซสชันจะไม่ให้ กุญแจการเข้ารหัสแยกต่างหากของพวกมัน วัสดุกุญแจและตัวนับของการสนทนาลับถูกเก็บไว้ ในคลังข้อมูลของพื้นที่ทำงาน; ข้อความที่เก็บรักษาไว้และไฟล์ที่ถอดรหัสแล้วจะปฏิบัติตาม มาตรการป้องกันการเก็บข้อมูลในพื้นที่ทำงานตามปกติ
 
-## Website demonstration
+## การสาธิตบนเว็บไซต์
 
-The website's **Try Secret Chat** scenario opens a fictional conversation. It lets the reader start a request, simulate its acceptance, send a sample message, receive a scripted reply and file, and inspect a timer and deletion notice. An incoming request can also be accepted. The controls label simulated peer actions explicitly.
+สถานการณ์ "**Try Secret Chat**" บนเว็บไซต์เปิดการสนทนาสมมติขึ้น ซึ่งช่วยให้ ผู้อ่านสามารถส่งคำขอ จำลองการรับคำขอ ส่งข้อความตัวอย่าง รับ คำตอบและไฟล์ตามสคริปต์ และตรวจสอบตัวจับเวลาและแจ้งเตือนการลบได้ นอกจากนี้ ยังสามารถ รับคำขอที่เข้ามาได้อีกด้วย ส่วนควบคุมจะระบุการกระทำของคู่สนทนาที่จำลองไว้อย่างชัดเจน
 
-This scenario runs in browser memory. Reset or reload clears it. It does not log in, contact Telegram, create real encryption keys or alter the signed sample downloads. Its displayed messages are not signed evidence. The scenario demonstrates intended interaction; it does not certify that the development implementation is ready.
+สคริปต์นี้ทำงานในหน่วยความจำของเบราว์เซอร์ การรีเซ็ตหรือรีโหลดจะลบข้อมูลทั้งหมด สคริปต์นี้ไม่ทำการเข้าสู่ระบบ, ไม่ติดต่อกับ Telegram, ไม่สร้างกุญแจการเข้ารหัสจริง และไม่เปลี่ยนแปลงไฟล์ตัวอย่างที่ลงนามแล้ว ข้อความที่แสดงขึ้นไม่ใช่หลักฐานที่ลงนาม สคริปต์นี้แสดงการโต้ตอบตามวัตถุประสงค์ เท่านั้น และไม่รับรองว่าการพัฒนาและนำไปใช้งานจริงนั้นพร้อมแล้ว
 
-## Checks and outstanding defects
+## การตรวจสอบและข้อบกพร่องที่ยังไม่ได้รับการแก้ไข
 
-The five existing tests cover encrypted key persistence, lifecycle and message records, incoming acceptance policy, read-only sending and attachment export. They passed against the pinned library during the 6 November review. Three additional synthetic checks reproduced defects in the same snapshot:
+การทดสอบทั้งห้าที่มีอยู่ครอบคลุมการคงอยู่ของกุญแจที่เข้ารหัส วงจรชีวิต และบันทึกข้อความ นโยบายการรับข้อความขาเข้า การส่งแบบอ่านอย่างเดียว และการส่งออกไฟล์แนบ การทดสอบเหล่านี้ผ่านการตรวจสอบกับไลบรารีที่ตรึงไว้ในการทบทวนเมื่อวันที่6 พฤศจิกายน การตรวจสอบ สังเคราะห์เพิ่มเติมอีกสามรายการได้จำลองข้อบกพร่องในสแนปช็อตเดียวกัน:
 
-| Finding | Consequence |
+| ผลการค้นหา | ผลที่ตามมา |
 | --- | --- |
-| Closing bypasses `read_only` | The close path can perform a remote action when interactions should be blocked. |
-| Duplicate detection searches only 500 recent records | An older replay can create a duplicate after restart. |
-| A failed attachment download removes its pending entry | A transient failure loses the retry job. |
+| การปิดช่องโหว่ `read_only` | เส้นทางปิด (close path) สามารถดำเนินการจากระยะไกลได้เมื่อจำเป็นต้องบล็อกการโต้ตอบ |
+| การตรวจหาข้อมูลซ้ำจะค้นหาเฉพาะบันทึกล่าสุด500 | การเล่นซ้ำจากข้อมูลเก่าอาจสร้างสำเนาซ้ำหลังจากรีสตาร์ท |
+| การดาวน์โหลดไฟล์แนบที่ล้มเหลวจะลบรายการที่รอการดำเนินการออก | ความผิดพลาดชั่วคราวจะทำให้งานลองใหม่ถูกยกเลิก |
 
-These are open defects, also recorded in the [published audit](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md). Five passing tests do not cover these failures. The review used synthetic workspaces and mocked Telegram operations; it did not repeat a live handshake or qualify production deployment.
+นี่คือข้อบกพร่องที่ยังไม่ได้รับการแก้ไข ซึ่งยังถูกบันทึกไว้ในรายงานการตรวจสอบ  ที่เผยแพร่แล้ว การทดสอบ 5 รายการที่ผ่านการตรวจสอบไม่ได้ ครอบคลุมข้อบกพร่องเหล่านี้ การตรวจสอบนี้ใช้พื้นที่ทำงานสังเคราะห์และจำลองการทำงานของ Telegram โดยไม่ได้ทำซ้ำกระบวนการจับมือ (handshake) ในสภาพแวดล้อมจริง หรือประเมินความเหมาะสมสำหรับการปรับใช้ในสภาพแวดล้อมการผลิต

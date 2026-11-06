@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/deplo
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [التوثيق](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![النشر والاستعادة](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
 **اللغة الإنجليزية** · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md) · [الأوكرانية](https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md) · [Español](https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md) · [البرتغالية (البرازيل)](https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md) · [Türkçe](https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md) · [العربية](https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md) · [فارسي](https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md) · [الأردو](https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md) · [الهندية](https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md) · [اللغة الإندونيسية](https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md) · [الفيتنامية](https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md) · [الصينية المبسطة](https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md)
 
@@ -64,7 +64,7 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | ابدأ العرض التوضيحي الاصطناعي في `data\demo` |
 | `TgWitness-Check.cmd` | قم بإجراء فحص الجاهزية دون بدء التشغيل |
 
-The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+يتم تجميع قاموس الصرف الروسي المثبت وملفات تعريف الألوان بصيغة PDF للاستخدام دون اتصال بالإنترنت. لا يسمح التجميع إلا بمسارات الملفات المعروفة داخل دلائل التبعيات `data`؛ وتؤدي الملفات غير المتوقعة في تلك الدلائل إلى فشل عملية البناء.
 
 قم باستخراج الأرشيف بالكامل إلى مجلد قابل للكتابة مثل `Documents\TgWitness`؛ لا تقم بتشغيله من داخل ملف ZIP أو من مجلد Program Files. يستخدم وقت التشغيل مسار وحدة معزولة، لذلك لا تؤثر عليه تثبيتات Python الأخرى ولا `PYTHONPATH`. تبقى البيانات في مجلد `data` الخاص بالحزمة. للتحديث، أوقف تشغيل TgWitness، ثم قم باستخراج الإصدار الجديد إلى مجلد جديد وانسخ مجلد `data` إليه.
 

@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/
 
 নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটে মেয়াদোত্তীর্ণ, প্রত্যাহারযোগ্য অ্যাক্সেস সহ একটি MCP ক্লায়েন্ট সংযুক্ত করুন।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [আর্কাইভ ইন্টিগ্রেশনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![আর্কাইভ ইন্টিগ্রেশনসমূহ](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 নির্বাচিত ওয়ার্কস্পেস এবং চ্যাটে একজন বিশ্লেষক ক্লায়েন্ট সংযুক্ত করুন। TgWitness **প্যানেল প্রক্রিয়ায় `/mcp`-এ Streamable HTTP** পরিবেশন করে। প্রতিটি সংযোগের নিজস্ব টোকেন, মেয়াদোত্তীর্ণ সময় এবং অনুমোদিত টুল রয়েছে। MCP টেলিগ্রাম বার্তা পাঠাতে, সেটিংস পরিবর্তন করতে বা স্বাক্ষরিত জার্নাল সম্পাদনা করতে পারে না। একই সংযোগগুলো [কমান্ড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/)লাইনেও কাজ করে।
 
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**এই পৃষ্ঠায়**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#connect-your-client)
+- [ইনস্টল করুন এবং](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#install-and-check)যাচাই করুন
+- [সংযোগ ইস্যু করুন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#issue-a-connection)
+- [আপনার ক্লায়েন্ট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#connect-your-client)সংযোগ করুন
 - [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#tools-and-boundaries)
+- [টুলস এবং সীমা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/#tools-and-boundaries)
 
 ## ইনস্টল এবং যাচাই
 
@@ -57,12 +57,12 @@ MCP এক্সট্রা অফিসিয়াল [MCP Python SDK](https:
 
 | ক্লায়েন্ট | কনফিগারেশন | সংযোগ |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, বেয়ারার হেডার |
-| Claude Desktop | `claude_desktop_config.json` | লোকাল stdio ব্রিজ |
+| ক্লড কোড | `.mcp.json` | HTTP, `type: "http"`, বেয়ারার হেডার |
+| ক্লড ডেস্কটপ | `claude_desktop_config.json` | লোকাল stdio ব্রিজ |
 | Cursor | `.cursor/mcp.json` | এনভায়রনমেন্ট-ভেরিয়েবল হেডারসহ HTTP |
-| VS Code Local | `.vscode/mcp.json` | পাসওয়ার্ড `promptString` ইনপুটসহ HTTP |
+| VS Code লোকাল | `.vscode/mcp.json` | পাসওয়ার্ড `promptString` ইনপুটসহ HTTP |
 | Windsurf | `mcp_config.json` | বেয়ারার-হেডার প্লেসহোল্ডারসহ HTTP |
-| অন্যান্য ক্লায়েন্ট | URL এবং Authorization হেডার | Streamable HTTP |
+| অন্যান্য ক্লায়েন্ট | URL এবং Authorization হেডার | স্ট্রিমযোগ্য HTTP |
 
 TgWitness কোনো OAuth ডিসকভারি ছাড়াই বেয়ারার টোকেন ব্যবহার করে। যেসব ক্লায়েন্টের রিমোট কানেক্টরের জন্য OAuth প্রয়োজন হয়, সেগুলোর ক্ষেত্রে লোকাল stdio ব্রিজ ব্যবহার করুন। VS Code-এর ক্ষেত্রে, ইনপুট ভেরিয়েবলগুলো **Local** হারনেসে প্রযোজ্য হয় এবং Copilot সেশনে ফরোয়ার্ড করা হয় না। কনফিগারেশন রেফারেন্স: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)।
 
@@ -74,7 +74,7 @@ python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 
 ক্লায়েন্টের যে লোকাল Python-এ MCP এক্সট্রা ইনস্টল করা আছে সেটি ব্যবহার করুন। এর সুরক্ষিত এনভায়রনমেন্টে `TGWITNESS_MCP_TOKEN` সেট করুন। কমান্ড আর্গুমেন্ট এবং URL থেকে ক্রেডেনশিয়াল দূরে রাখুন। `tgwitness-mcp` একই এন্ট্রি পয়েন্ট হিসেবে কাজ করে। পুরনো `tgwitness.mcp_bridge` মডিউল এবং `TGWITNESS_ARCHIVE_TOKEN` নামটি একটি সতর্কবার্তাসহ কম্প্যাটিবিলিটি পাথ হিসেবে রয়ে গেছে; নতুন কনফিগারেশনে `mcp_server` এবং `TGWITNESS_MCP_TOKEN` ব্যবহৃত হয়।
 
-## Cloudflare Tunnel
+## ক্লাউডফ্লেয়ার টানেল
 
 প্যানেলের `/mcp` রাউট ফরোয়ার্ড করুন এবং বেয়ারার হেডারটি অক্ষুণ্ণ রাখুন। অ্যাডমিনিস্ট্রেটর হিসেবে MCP সেটিংস ওপেন করলে তা এই রানের জন্য প্যানেলের বর্তমান অরিজিনকে নিবন্ধিত করে। রিস্টার্টের পরপরই একটি স্থায়ী অ্যাড্রেস পাওয়ার জন্য, প্যানেল চালু করার আগে প্যানেলের HTTPS অরিজিন দিয়ে `TGWITNESS_PUBLIC_URL` কনফিগার করুন। যেকোনো সাধারণ Host এবং ফরোয়ার্ড করা হেডার কোনো ট্রাস্টেড অ্যাড্রেস নিবন্ধন করে না। Host এবং Origin চেকগুলো অপ্রাসঙ্গিক ব্রাউজার অরিজিন প্রত্যাখ্যান করে। রেসপন্সগুলোতে `Cache-Control: no-store` ব্যবহৃত হয়; অথরাইজেশন ভ্যালু কখনোই লগ করা হয় না।
 

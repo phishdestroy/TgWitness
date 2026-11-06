@@ -57,7 +57,7 @@ Một gói riêng biệt được liên kết với ranh giới nhật ký ngu�
 | Người dùng | Người được chọn giữ nguyên tên; những người khác nhận bí danh hoặc bị loại bỏ. |
 | Văn bản | Toàn bộ nội dung, chỉ nội dung của người được chọn và tài khoản của bạn, hoặc không gì cả. |
 | Tệp tin | Tệp của người được chọn và tài khoản của bạn, tất cả tệp đang hiển thị, hoặc không gì cả. |
-| Case Board | Không gì cả, dấu trang và lát cắt, hoặc thẻ kèm thảo luận. |
+| Bảng trường hợp | Không gì cả, dấu trang và lát cắt, hoặc thẻ kèm thảo luận. |
 
 Hãy đọc cả nội dung và tệp: bí danh không xóa những cái tên được viết bên trong tin nhắn hay tệp đính kèm. Nếu một tệp được chọn bị thiếu, hãy khôi phục nó hoặc loại tệp đính kèm ra.
 

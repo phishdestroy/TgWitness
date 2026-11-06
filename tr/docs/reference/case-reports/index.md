@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-
 
 Rapor filtreleri, sekiz tasarım, içerik ön ayarları, kaydedilmiş değişiklik geçmişleri ve imzalı dışa aktarımlara dahil edilen değerlendirme.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Belgeler](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Araştırma](https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Araştırma](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 Seçilen gözlemleri, vakanın okunabilir bir özetine dönüştürün: vakanın sorusu, kapsamı, kaydedilen değişiklikler, grafikler, bulgular ve kaynak referansları. Her rapor, alıcıya teslim edilen materyali kontrol etme ve toplama kapsamını inceleme imkanı sunar.
 
@@ -24,7 +24,7 @@ Seçilen gözlemleri, vakanın okunabilir bir özetine dönüştürün: vakanın
 
 Veri önizlemesi, ilk bir örnek değil, tam ve kararlı günlük önekini sayar. Yalnızca görüntülenen örnek satırlar ve uzun listeler sınırlandırılmıştır; atlanan sayıların toplamı gösterilir. Daha sonraki bir dışa aktarım işlemi yeni bir kararlı anlık görüntü alır, bu nedenle devam eden toplama işlemi rakamları artırabilir. Kapsam, sayı ve kaynak kimliği imzalı raporda yer alır. Formu açmak veya önizlemek, formun kaydedilmesine yol açmaz.
 
-**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+**Yargı yetkisi kılavuzu.** Belge ayrıntıları altında, **Yargı yetkisi kılavuzu · isteğe bağlı** 'ü açarak bir yargı yetkisi ve medeni/ticari veya cezai usul seçin. Ek bölümde yasal dayanak, kaynak bağlantıları, hazırlık notları ve araştırma durumu yer almaktadır. Yerel dilde toplama güvenlik önlemlerine ilişkin özetler ve açıklamalar isteğe bağlıdır. Varsayılan olarak hiçbir yargı alanı seçili değildir. Bu seçimler çalışma alanına aittir ve kaydedilmiş düzen yapılandırmalarından ve örtük paylaşım-kopyalama varsayılanlarından hariç tutulur. Bkz. [varsayılanlar, desteklenen raporlar ve araştırma sınırları](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md) .
 
 **Alıcının kopyasını seçin.** Grafikler ve transkript, seçilen kayıtları kullanır. Bütünlük, saklama ve kapsam, kaynak günlüğünün tamamını tanımlar. Kanıt ZIP dosyası orijinal kayıtları ve ekleri içerir. Alıcının yalnızca seçilmiş, izin verilen verileri alması gerektiğinde, [en az miktarda veri içeren bir devir işlemi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#handover-extract) kullanın.
 
@@ -90,18 +90,18 @@ Boş bir aralık, ilgili gözlemlerin bulunmadığı anlamına gelir; eksiklikle
 
 `analytics.json` dosyası dahil edildiğinde, arşivin imzalı dosya hash'leri tarafından korunur. `report.json` dosyası, aynı seçilmiş toplamı içerir. İmza doğrulama değiştirilen baytları tespit eder. Rakamları kontrol etmek için, `report_analytics.Analytics` ve `selected` ile günlük toplamlarını yeniden hesaplayın veya `snapshot_analytics.collect` ve `project` ile anlık görüntü toplamlarını yeniden hesaplayın.
 
-### Anomaly indicators
+### Anormallik göstergeleri
 
-**Preview.** Evidence reports add an **Anomaly indicators** section computed by registered processors (`tgwitness/metrics/`, one file per metric). The report names every processor that ran with its version, and prints its method under its table, so the computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+**Önizleme.** Kanıt raporları, kayıtlı işlemciler tarafından hesaplanan bir **Anormallik göstergeleri** bölümü ekler (`tgwitness/metrics/`, her metrik için bir dosya). Rapor, çalıştırılan her işlemcinin adını ve sürümünü belirtir ve tablosunun altına yöntemini yazdırır; böylece hesaplama, `events.jsonl`'ten `tgwitness.metrics.run` ile tekrarlanabilir.
 
-| Processor | Neleri gösterir? |
+| İşlemci | Neleri gösterir? |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
-| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
-| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
-| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+| `first_time_posters_over_time` v1 | UTC gün başına ilk kez mesaj gönderen kullanıcı sayısı ve mesaj sayısı. Bir bayrağın oluşması için en az beş ilk kez mesaj gönderen kullanıcı ve bunların medyan değerinin üç katı gerekir; mesaj hacmi ise medyan değerinin en fazla 1.5 katı olabilir. Temel değer, yedi günlük hazırlık süresinin ardından, önceki 14 takvim günü içindeki en az yedi gözlem gününü kullanır. |
+| `service_vs_message_ratio` v1 | Sohbet başına kaydedilen mesaj numaraları ile hizmet mesajları tarafından kullanılan pay ayrıdır. Burada numaralandırma sistemi açıklanmaktadır; belirli bir eksik numara hakkında açıklama yapılmamaktadır. |
+| `join_leave_per_month` v1 | Aylık katılımlar, ayrılmalar ve kaldırmalar veya yasaklamalar; kişi, sohbet, değişiklik ve gün başına birer adet. |
+| `pinned_per_month` v1 | Aylık bazda, sabitlenmiş hizmet mesajları, sabitlemenin kaldırılmasına ilişkin bildirimler ve sohbet durumu anlık görüntüleri arasında eklenen veya kaldırılan sabitlenmiş mesajlar. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
+**Parametreler → Rapor metrikleri**, işlemcileri ve görüntülenen satır sayısını seçer; bu, filtrelenmiş raporları da içerir. Günlük ve aylık tablolar son satırları gösterir; hizmet paylaşımı tabloları ise sohbetleri kaydedilen mesaj sayısına göre sıralar. Toplamlar her satırı kapsar.
 
 Kaynak kodundan, yukarıda listelenen sekiz tasarımı da aynı hayali dergiden oluşturun:
 
@@ -153,7 +153,7 @@ Her bir kontrolü, kaydedilen toplama kapsamıyla birlikte ayrı ayrı gözden g
 4. Orijinal ZIP dosyalarını ve bunların hash değerlerini koruyun. Her bir tutucuyu, aktarımı, tarihi ve amacı kaydedin. Atfedilen operatör ifadelerini ve vaka notlarını bunlarla birlikte koruyun.
 5. Gizli VM'ler için, fiyat teklifi, doğrulama sorusu, Intel sertifika zinciri, ölçümler, kesin kaynak ve anahtar işleme koşullarını koruyun ve bağımsız olarak doğrulayın. Doğrulama sonucunu, incelenen kanıtlarla birlikte saklayın.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
+Her modda veri toplama, arşiv bütünlüğü, zaman ve toplama kapsamı kontrolleriyle ilgili olarak [doğrulama kapsamı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) bölümüne bakınız.
 
 ## Alıcı tarafından incelenmesi
 

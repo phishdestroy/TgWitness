@@ -4,35 +4,35 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-i
 
 Пояснення щодо хеш-ланцюга, підписів, контрольних точок та свідків із зазначенням точних формул, які використовує верифікатор.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документація](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Докази та верифікація](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Докази та верифікація](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness зберігає дані, зафіксовані обліковим акаунтом, пов’язує ці спостереження у підписаний журнал і дозволяє іншій особі перевірити експорт за допомогою надійного ключа та раніше збереженої контрольної точки.
 
 На [локальному веб-сайті документації](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) додано інтерактивні приклади за адресою `/docs/concepts/`, інструмент для аналізу рішень на контрольних точках за адресою `/docs/witness/`, а також покрокові інструкції щодо [Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-board/), [оформлення звітів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/) та [витягів із передачі матеріалів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#handover-extract). Усі приклади повідомлень, кількість та затримки є вигаданими. Хеші в пісочниці ланцюга обчислюються за допомогою алгоритму SHA-256 у браузері. Ніщо не надсилається до Telegram.
 
-**On this page**
+**На цій сторінці**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#pick-a-workflow)
+- [Зміни в повідомленні; накопичення спостережень](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Що охоплює хеш](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#what-a-hash-covers)
+- [Що додає попередній контрольний пункт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [До чого належить свідок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Перевірка доставки щодо відомих дій](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Оберіть робочий процес](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Повідомлення змінюється; спостереження накопичуються
 
-Діаграма послідовності · Telegram → Collector: Нове повідомлення: Зустріч о 10:00; Collector → Підписаний журнал: Додати повідомлення.new; Telegram → Collector: Редагування: Зустріч о 11:00; Collector → Підписаний журнал: Додати повідомлення.edited; Telegram → Collector: Повідомлення про видалення; Collector → Підписаний журнал: Додати повідомлення.deleted; Примітка щодо Підписаний журнал: Зберігаються спостереження за оригінальними повідомленнями, редагуваннями та видаленнями · Telegram · Collector · Підписаний журнал · Нове повідомлення: Зустріч о 10:00 · Додати повідомлення.new · Редагування: Зустріч о 11:00 · Додати повідомлення.edited · Повідомлення про видалення · Додати повідомлення.deleted · Зберігаються спостереження за оригінальнимиповідомленнями, редагуваннями та видаленнями
+Діаграма послідовності · Telegram → Колектор: Нове повідомлення: Зустріч о 10:00; Колектор → Підписаний журнал: Додати повідомлення.new; Telegram → Колектор: Редагування: Зустріч о 11:00; Колектор → Підписаний журнал: Додати повідомлення.edited; Telegram → Колектор: Повідомлення про видалення; Колектор → Підписаний журнал: Додати повідомлення.deleted; Примітка щодо Підписаний журнал: Зберігаються спостереження за оригінальними повідомленнями, редагуваннями та видаленнями · Telegram · Колектор · Підписаний журнал · Нове повідомлення: Зустріч о 10:00 · Додати повідомлення.new · Редагування: Зустріч о 11:00 · Додати повідомлення.edited · Повідомлення про видалення · Додати повідомлення.deleted · Зберігаються спостереження за оригінальнимиповідомленнями, редагуваннями та видаленнями
 
 **Діаграма у вигляді тексту**
 
-1. Telegram → Collector: Нове повідомлення: Зустріч о 10:00
-2. Collector → Підписаний журнал: Додати повідомлення.new
-3. Telegram → Collector: Редагування: Зустріч о 11:00
-4. Collector → Підписаний журнал: Додати повідомлення.edited
-5. Telegram → Collector: Повідомлення про видалення
-6. Collector → Підписаний журнал: Додати повідомлення.deleted
+1. Telegram → Колектор: Нове повідомлення: Зустріч о 10:00
+2. Колектор → Підписаний журнал: Додати повідомлення.new
+3. Telegram → Колектор: Редагування: Зустріч о 11:00
+4. Колектор → Підписаний журнал: Додати повідомлення.edited
+5. Telegram → Колектор: Повідомлення про видалення
+6. Колектор → Підписаний журнал: Додати повідомлення.deleted
 7. Примітка щодо Підписаний журнал: Зберігаються спостереження за оригінальними повідомленнями, редагуваннями та видаленнями
 
 Ця спрощена послідовність передбачає, що Telegram доставив кожне оновлення і що вибраний акаунт міг його побачити. Операційні події також заносяться до журналу. Повідомлення про видалення не вказує особу, яка здійснила видалення, або точний час видалення. Повторні доставки є окремими спостереженнями; у журналі не відбувається придушення дублікатів.

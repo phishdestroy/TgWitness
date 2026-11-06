@@ -4,22 +4,22 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/insta
 
 ติดตั้งด้วยคำสั่งเดียว ตรวจสอบลายเซ็นและค่าแฮช อัปเดตและลบการติดตั้ง
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [เอกสารประกอบ](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [เริ่มต้นใช้งาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![เริ่มต้นใช้งาน](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 [โครงการ](https://github.com/phishdestroy/TgWitness/blob/main/README.md) · [เริ่มต้นอย่างรวดเร็ว](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/) · [การติดตั้ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
 
-**On this page**
+**บนหน้านี้**
 
-- [Install with one command](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#install-with-one-command)
-- [Where everything runs](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#where-everything-runs)
-- [Full-text search settings](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#full-text-search-settings)
-- [Command-line access](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#command-line-access)
-- [Verify before running](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#verify-before-running)
-- [Update an existing installation](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#update-an-existing-installation)
-- [Everyday commands on Ubuntu](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#everyday-commands-on-ubuntu)
-- [Remove TgWitness](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#remove-tgwitness)
+- [ติดตั้งด้วยคำสั่งเดียว](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#install-with-one-command)
+- [ที่ทุกสิ่งทำงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#where-everything-runs)
+- [การตั้งค่าการค้นหาข้อความเต็ม](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#full-text-search-settings)
+- [การเข้าถึงผ่านบรรทัดคำสั่ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#command-line-access)
+- [ตรวจสอบก่อนที่จะดำเนินการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#verify-before-running)
+- [อัปเดตการติดตั้งที่มีอยู่](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#update-an-existing-installation)
+- [คำสั่งทั่วไปบน Ubuntu](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#everyday-commands-on-ubuntu)
+- [ลบTgWitness](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/#remove-tgwitness)
 
 ## ติดตั้งด้วยคำสั่งเดียว
 
@@ -137,7 +137,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **การเผยแพร่เวอร์ชันใหม่จะอัปเดตเว็บไซต์ดาวน์โหลด; โปรแกรมที่ติดตั้งแล้วจะอัปเดตเมื่อคุณ เรียกใช้ตัวติดตั้งอีกครั้ง** ไม่มีตัวอัปเดตอัตโนมัติหรือการรีสตาร์ทอัตโนมัติของ คอลเลกชันที่กำลังทำงานอยู่ ช่องตัวติดตั้งปัจจุบันเป็นเวอร์ชัน**พรีวิว**; มันติดตาม บิลด์ที่เผยแพร่และตรวจสอบแล้วจาก `main`, ซึ่งการ commit อาจใหม่กว่า การปล่อยเวอร์ชัน GitHub ที่มีการกำหนดหมายเลขล่าสุด เวอร์ชันของหน้านี้มาจาก `pyproject.toml`; commit และ build ID ของมันช่วยแยกแยะการอัปเดตภายในเวอร์ชันพรีวิวเดียวกัน
 
-Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+การเผยแพร่จะเกิดขึ้นโดยอัตโนมัติหลังจากที่ commit ที่ระบุนั้นผ่านการตรวจสอบแอปพลิเคชันและ ความปลอดภัย และแพ็กเกจที่ลงนามแล้วผ่านการทดสอบบริการ Ubuntu และ Windows PowerShell การติดตั้ง ในขณะที่การตรวจสอบกำลังดำเนินการอยู่ หรือหากการตรวจสอบล้มเหลว คำสั่งเดียวกันจะยังคงติดตั้งบิลด์ที่ผ่านการตรวจสอบก่อนหน้านี้ต่อไป บิลด์แมนิเฟสต์ จะแสดงว่า commit ใดที่มีอยู่ในขณะนี้; หมายเลขเวอร์ชันเพียงอย่างเดียวอาจยังคง ไม่เปลี่ยนแปลงระหว่างการอัปเดตเวอร์ชันพรีวิว
 
 ใช้โฟลเดอร์การติดตั้งและผู้ใช้ระบบปฏิบัติการเดียวกันกับครั้งก่อน สำรองข้อมูล ในไดเรกทอรีทั้งหมดโดยปิดการเก็บข้อมูลไว้ก่อน; `tgwitness paths` เพื่อระบุมัน การส่งออกที่ลงนาม ไม่ใช่การสำรองข้อมูลการติดตั้งที่สมบูรณ์
 

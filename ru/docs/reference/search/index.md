@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/searc
 
 Поиск сохраненных сообщений по формам слов, точным фразам, доменам и @именам пользователей, с отображением наиболее подходящих результатов в первую очередь, при этом индекс привязан к подписанному журналу.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Документация](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Расследование](https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![Расследование](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [Анализ архива](https://phishdestroy.github.io/TgWitness/ru/docs/reference/analysis/) · [Локальное распознавание текста (OCR) и транскрипция](https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/) · [Вики](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -14,17 +14,17 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/searc
 
 Индекс представляет собой производные данные. Он воссоздаётся на основе подписанного журнала, сам по себе никогда не подписывается и никогда не попадает в экспорт. Исходные записи не изменяются.
 
-**On this page**
+**На этой странице**
 
-- [Search syntax](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#search-syntax)
-- [Languages](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#languages)
-- [Where the index lives](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#where-the-index-lives)
-- [Results and the signed journal](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#results-and-the-signed-journal)
-- [Recognized text](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#recognized-text)
-- [Access](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#access)
-- [Ask the archive and MCP](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#ask-the-archive-and-mcp)
-- [Dependencies](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#dependencies)
-- [Benchmark](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#benchmark)
+- [Синтаксис поиска](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#search-syntax)
+- [Языки](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#languages)
+- [Где находится индекс](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#where-the-index-lives)
+- [Результаты и подписанный журнал](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#results-and-the-signed-journal)
+- [Распознанный текст](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#recognized-text)
+- [Доступ](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#access)
+- [Запросить архив и MCP](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#ask-the-archive-and-mcp)
+- [Зависимости](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#dependencies)
+- [Бенчмарк](https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/#benchmark)
 
 ## Синтаксис поиска
 
@@ -97,14 +97,14 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 Клиенты MCP могут вызывать `search_messages` с `ranked=true` и переходить на страницу с помощью `next_offset`. Подключения с ограниченной областью действия получают только свои чаты.
 
-Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
+Пагинация по рейтингу охватывает не более первых 1,000 результатов, независимо от размера страницы. Сузьте запрос, чат или период, чтобы просмотреть дополнительные совпадения. Поиск Сначала самые новые сортирует сообщения, результаты OCR и транскрипции перед выбором каждой страницы.
 
 ## Зависимости
 
 | Пакет | Лицензия | Почему |
 | --- | --- | --- |
 | pymorphy3, pymorphy3-dicts-ru, DAWG2-Python | MIT | Русские и украинские леммы; словари загружаются локально |
-| snowballstemmer | BSD-3-Clause | Английские корни слов, чистый Python |
+| snowballstemmer | Положение BSD-3 | Английские корни слов, чистый Python |
 | jieba | MIT | Сегментация китайских запросов, на чистом Python (только исходный код) |
 | pymorphy3-dicts-uk (необязательно) | GPL-3.0 | Полный украинский словарь |
 

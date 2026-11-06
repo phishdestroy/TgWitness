@@ -4,35 +4,35 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-i
 
 Explication de la chaîne de hachage, des signatures, des points de contrôle et des témoins à l’aide des formules exactes utilisées par le vérificateur.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Evidence and verification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentation](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Preuves et vérification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)
 
-![Evidence & verification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
+![Preuves et vérification](https://phishdestroy.github.io/TgWitness/assets/chapter-evidence.svg)
 
 TgWitness conserve ce qu’un compte de collecte a observé, relie ces observations dans un journal signé et permet à une autre personne de vérifier une exportation à l’aide d’une clé de confiance et d’un point de contrôle conservé antérieurement.
 
 Le [site web de documentation local](https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally) propose des exemples interactifs à l’adresse `/docs/concepts/`, un explorateur de décisions de points de contrôle à l’adresse `/docs/witness/`, ainsi que des guides pas à pas pour [le Case Board](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-board/), [la conception des rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/) et [les extraits de transfert](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#handover-extract). Tous les exemples de messages, les comptages et les délais sont fictifs. Les hachages dans le bac à sable de la chaîne sont calculés avec SHA-256 dans le navigateur. Aucune donnée n’est envoyée à Telegram.
 
-**On this page**
+**Sur cette page**
 
-- [A message changes; observations accumulate](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
-- [What a hash covers](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#what-a-hash-covers)
-- [What an earlier checkpoint adds](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
-- [Where a witness belongs](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#where-a-witness-belongs)
-- [Test delivery against known actions](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#test-delivery-against-known-actions)
-- [Pick a workflow](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#pick-a-workflow)
+- [Un message change ; les observations s'accumulent](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#a-message-changes-observations-accumulate)
+- [Ce que couvre un hachage](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#what-a-hash-covers)
+- [Ce qu'ajoute un point de contrôle antérieur](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#what-an-earlier-checkpoint-adds)
+- [Où se situe un témoin](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#where-a-witness-belongs)
+- [Test de la transmission par rapport à des actions connues](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#test-delivery-against-known-actions)
+- [Choisissez un workflow](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/#pick-a-workflow)
 
 ## Un message évolue ; les observations s’accumulent
 
-Diagramme de séquence · Telegram → Collector: Nouveau message : Rendez-vous à 10 h; Collector → Registre signé: Ajouter message.new; Telegram → Collector: Modification : rendez-vous à 11 h; Collector → Registre signé: Ajouter « message.edited »; Telegram → Collector: Avis de suppression; Collector → Registre signé: Ajouter message.deleted; Remarque concernant Registre signé: Les observations relatives aux messages originaux, modifiés et supprimés sont conservées. · Telegram · Collector · Registre signé · Nouveau message : Rendez-vous à 10 h · Ajouter message.new · Modification : rendez-vous à 11 h · Ajouter « message.edited » · Avis de suppression · Ajouter message.deleted · Les observations relatives aux messages originaux,modifiés et supprimés sont conservées.
+Diagramme de séquence · Telegram → Collecteur: Nouveau message : Rendez-vous à 10 h; Collecteur → Registre signé: Ajouter message.new; Telegram → Collecteur: Modification : rendez-vous à 11 h; Collecteur → Registre signé: Ajouter « message.edited »; Telegram → Collecteur: Avis de suppression; Collecteur → Registre signé: Ajouter message.deleted; Remarque concernant Registre signé: Les observations relatives aux messages originaux, modifiés et supprimés sont conservées. · Telegram · Collecteur · Registre signé · Nouveau message : Rendez-vous à 10 h · Ajouter message.new · Modification : rendez-vous à 11 h · Ajouter « message.edited » · Avis de suppression · Ajouter message.deleted · Les observations relatives aux messages originaux,modifiés et supprimés sont conservées.
 
 **Schéma sous forme de texte**
 
-1. Telegram → Collector: Nouveau message : Rendez-vous à 10 h
-2. Collector → Registre signé: Ajouter message.new
-3. Telegram → Collector: Modification : rendez-vous à 11 h
-4. Collector → Registre signé: Ajouter « message.edited »
-5. Telegram → Collector: Avis de suppression
-6. Collector → Registre signé: Ajouter message.deleted
+1. Telegram → Collecteur: Nouveau message : Rendez-vous à 10 h
+2. Collecteur → Registre signé: Ajouter message.new
+3. Telegram → Collecteur: Modification : rendez-vous à 11 h
+4. Collecteur → Registre signé: Ajouter « message.edited »
+5. Telegram → Collecteur: Avis de suppression
+6. Collecteur → Registre signé: Ajouter message.deleted
 7. Remarque concernant Registre signé: Les observations relatives aux messages originaux, modifiés et supprimés sont conservées.
 
 Cette séquence simplifiée part du principe que Telegram a bien transmis chaque mise à jour et que le compte sélectionné a pu la consulter. Les événements opérationnels sont également consignés dans le journal. Une notification de suppression n’indique ni l’auteur de la suppression ni l’heure exacte de celle-ci. Les transmissions répétées constituent des observations distinctes ; il n’y a pas de suppression des doublons à l’échelle du journal.

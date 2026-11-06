@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 [TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![檔案庫整合](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 [唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/) · [全文搜尋](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -54,7 +54,7 @@ tgwitness search 'перевод карта' --json
 
 日期格式為 `2026-10-01` （UTC 午夜）或附有時區的 ISO 時間格式， `2026-10-01T09:00+03:00`。關於 `search`, `messages` 及 `export` ，它們代表 觀察時間。每個頁面最多可容納 50 筆記錄：請遵循 `next_offset` (`--offset`) 進行 排序搜尋，並 `next_before` (`--before`) 其他功能。
 
-Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
+排序搜尋結果上限為 1,000 筆。最後一頁的結果數量可能少於 `--limit`；若存在更多符合條件的觀察結果，請縮小查詢範圍、聊天室或時間範圍。
 
 每則訊息結果皆包含 `untrusted_content: true`工作區、聊天室及 訊息 ID、日誌序號、儲存紀錄的雜湊值，以及一個面板連結。編輯、 刪除通知與 `missing_on_recheck` 均為獨立的記錄。若某項記錄缺失 ，並不代表該事件從未發生。
 
@@ -76,7 +76,7 @@ Ranked search stops at 1,000 results. The final page may be shorter than `--limi
 
 透過控制面板進行匯出時，需具備允許**「匯出訊息」 （僅限命令列）**的連線；此選項預設為未勾選狀態。此檔案僅為工作副本，並非證據：若需可驗證的 移交，請使用「**匯出」**區段中的簽名匯出檔，該檔 `python -m tgwitness.verify`會進行驗證。
 
-The panel rechecks access before emitting each record, including the completion record. Revoked or expired access leaves an incomplete export. Lazy page reads share the archive worker limit with other queries and have a bounded wait.
+該面板在輸出每筆記錄（包括完成 記錄）之前，會重新檢查存取權限。若存取權限已被撤銷或過期，將導致匯出不完整。延遲頁面讀取 會與其他查詢共享存檔工作程序的限制，且設有等待時間上限。
 
 ## 代理技能
 

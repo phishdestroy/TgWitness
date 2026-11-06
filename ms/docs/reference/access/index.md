@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/acces
 
 Keluarkan akses terhad kepada akaun dan sembang, pilih kebenaran, hadkan sesi dan alamat IP, dan tarik balik akses.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Permulaan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Memulakan](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 Beri seorang penilai akses kepada satu sembang, seorang penganalisis kebenaran untuk mengeksport satu kes, atau seorang pengendali kawalan ke atas akaun terpilih. Setiap orang mendapat token mereka sendiri. Token panel utama kekal dengan pentadbir.
 
@@ -110,6 +110,6 @@ Penerbitan, perubahan dan pembatalan akses, serta permulaan atau penamatan sesi,
 
 ****Pentadbir utama dan sempadan kepercayaan****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+Token panel utama kekal tidak terhad. Log masuk pelayar dengannya mewujudkan sesi yang tertakluk kepada had sesi yang dikonfigurasikan oleh pentadbir. Skrip yang menghantar token utama secara langsung mengekalkan akses penuh dan tidak dikira sebagai sesi pelayar.
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+Ini adalah kawalan capaian peringkat aplikasi dalam satu pemasangan. Semua ruang kerja berkongsi proses pelayan; ini bukan pengasingan daripada pentadbir hos. Kekalkan token utama, sesi Telegram, kunci penandatanganan dan direktori data secara peribadi. Token saksi adalah titik pemeriksaan/kredensial kesihatan berasingan, bukan token capaian panel.

@@ -4,21 +4,21 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/
 
 Połącz klienta MCP z wybranymi obszarami roboczymi i czatami, korzystając z dostępu ograniczonego czasowo i podlegającego odwołaniu.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Archive integrations](https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Dokumentacja](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Integracje z archiwami](https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/)
 
-![Archive integrations](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
+![Integracje z archiwami](https://phishdestroy.github.io/TgWitness/assets/chapter-integrations.svg)
 
 Połącz klienta analitycznego z wybranymi obszarami roboczymi i czatami. TgWitness udostępnia **protokół Streamable HTTP pod adresem `/mcp` w procesie panelowym**. Każde połączenie ma swój własny token, termin ważności oraz zestaw dozwolonych narzędzi. MCP nie może wysyłać wiadomości w Telegramie, zmieniać ustawień ani modyfikować podpisanego dziennika. Te same połączenia działają również z [wierszem poleceń](https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/).
 
 [Przewodnik po procesie pracy](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-**On this page**
+**Na tej stronie**
 
-- [Install and check](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#install-and-check)
-- [Issue a connection](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#issue-a-connection)
-- [Connect your client](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#connect-your-client)
-- [Cloudflare Tunnel](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#cloudflare-tunnel)
-- [Tools and boundaries](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#tools-and-boundaries)
+- [Instalacja i sprawdzenie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#install-and-check)
+- [Nawiązanie połączenia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#issue-a-connection)
+- [Podłącz swojego klienta](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#connect-your-client)
+- [Tunel Cloudflare](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#cloudflare-tunnel)
+- [Narzędzia i ograniczenia](https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/#tools-and-boundaries)
 
 ## Instalacja i weryfikacja
 
@@ -57,12 +57,12 @@ Wybierz klienta w panelu i skopiuj wygenerowaną dla niego konfigurację. Konfig
 
 | Klient | Konfiguracja | Połączenie |
 | --- | --- | --- |
-| Claude Code | `.mcp.json` | HTTP, `type: "http"`, nagłówek bearer |
+| Kod Claude'a | `.mcp.json` | HTTP, `type: "http"`, nagłówek bearer |
 | Claude Desktop | `claude_desktop_config.json` | Lokalny mostek stdio |
 | Cursor | `.cursor/mcp.json` | HTTP z nagłówkiem opartym na zmiennej środowiskowej |
 | VS Code Local | `.vscode/mcp.json` | HTTP z wprowadzaniem hasła typu `promptString` |
 | Windsurf | `mcp_config.json` | HTTP z symbolem zastępczym nagłówka bearer |
-| Inni klienci | Adres URL i nagłówek Authorization | Streamable HTTP |
+| Inni klienci | Adres URL i nagłówek Authorization | Strumieniowy protokół HTTP |
 
 TgWitness używa tokenów bearer bez wykrywania OAuth. Użyj lokalnego mostka stdio dla klientów, których zdalny konektor wymaga OAuth. W przypadku VS Code zmienne wejściowe mają zastosowanie do środowiska **Local** i nie są przekazywane do sesji Copilot. Dokumentacja konfiguracji: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
 

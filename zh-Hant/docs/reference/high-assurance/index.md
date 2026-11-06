@@ -4,11 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 位於 Hetzner 或 Phala Cloud 上的全天候密封伺服器、Gateway DNS，以及第三方可重複驗證的檢查機制。
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Deployment and recovery](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [文件說明](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [部署與復原](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)
 
-![Deployment & recovery](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
+![部署與復原](https://phishdestroy.github.io/TgWitness/assets/chapter-operate.svg)
 
-High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
+高可信度部署會在 檔案驗證過程中，額外加入對資料蒐集環境的獨立檢查。審查人員會查詢由 雲端服務供應商及 Cloudflare 持有的部署與存取紀錄，而 Intel TDX 部署則會針對 資料蒐集器的環境進行硬體驗證。
 
 一般的本地端及 Docker 使用方式維持不變。除非您使用 `python -m tgwitness.cloud`進行部署，且收集器僅在部署設定為 `TGWITNESS_ASSURANCE`.
 
@@ -25,22 +25,22 @@ High-assurance deployment adds independent checks of the collection environment 
 7. Verifier，唯讀代幣 → 已簽署的 /api/assurance 聲明
 8. Verifier，唯讀代幣 → 證據 ZIP 檔案
 
-**On this page**
+**本頁內容**
 
-- [What a verifier can check](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#what-a-verifier-can-check)
-- [Providers](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#providers)
-- [Confidential VM on Phala Cloud (Intel TDX)](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
-- [Before you start](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#before-you-start)
-- [From the panel](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#from-the-panel)
-- [Quick tunnel without a domain](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
-- [Deploy](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#deploy)
-- [Debug deployment and lock](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#debug-deployment-and-lock)
-- [Remove a deployment](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#remove-a-deployment)
-- [Any server (self-attested)](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#any-server-self-attested)
-- [Verify](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#verify)
-- [Report for evidence handover](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#report-for-evidence-handover)
-- [Cloudflare as an outside witness](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
-- [Reading the deployment result](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#reading-the-deployment-result)
+- [驗證者可檢查的內容](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#what-a-verifier-can-check)
+- [提供者](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#providers)
+- [Phala Cloud 上的機密虛擬機器 (Intel TDX)](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)
+- [開始之前](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#before-you-start)
+- [來自控制面板](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#from-the-panel)
+- [無需網域的快速隧道](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#quick-tunnel-without-a-domain)
+- [部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#deploy)
+- [除錯部署與鎖定](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#debug-deployment-and-lock)
+- [移除部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#remove-a-deployment)
+- [任何伺服器（自我認證）](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#any-server-self-attested)
+- [驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#verify)
+- [證據移交報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#report-for-evidence-handover)
+- [Cloudflare 作為外部見證者](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)
+- [閱讀部署結果](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/#reading-the-deployment-result)
 
 ## 驗證者可檢查的內容
 
@@ -54,7 +54,7 @@ High-assurance deployment adds independent checks of the collection environment 
 | 該簽署金鑰是在該伺服器上建立的 | 該金鑰會簽署一份聲明，其中載明服務提供者的伺服器 ID 以及其收到的 cloud-init 檔的雜湊值 | Collector，已與服務提供商進行比對 |
 | 該日誌屬於該金鑰與伺服器 | 每個在證據 ZIP 中啟動的程序，皆包含該伺服器的主機測量值 | 證據 ZIP |
 
-The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
+收集器會將 SSH 狀態、連線、登入歷史紀錄及開機資訊記錄於經簽名的 process-start 及 `host.state` 記錄中。在一般虛擬機器上，這些屬於本機清單 記錄，審查人員會將其與服務供應商的獨立記錄進行比對。下文所述的 Intel TDX 部署方案，則會額外驗證由硬體支援的測量結果。
 
 ## 提供者
 
@@ -292,6 +292,6 @@ Cloudflare 無法窺見 Telegram 的加密內容、該 Telegram 帳戶上的其�
 
 ## 閱讀部署結果
 
-For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
+對於一般虛擬機器，服務供應商負責管理主機基礎架構，並會同步核對 本地資源清單與供應商紀錄。針對 Intel TDX，驗證者還會額外檢查 硬體規格、收集器綁定、編組及作業系統測量值。請閱讀各項 結果，以確認哪些檢查通過或無法取得。
 
-Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
+歷史防火牆詳情取決於服務供應商；Linode 會保留規則版本。 [驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/)記錄列出了已測試的部署及剩餘的即時 檢查，而[驗證範圍](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)則將這些環境 檢查與存檔的取得及完整性連結起來。

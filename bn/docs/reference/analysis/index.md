@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/analy
 
 সংরক্ষিত বার্তাগুলি অনুসন্ধান করুন, এআই ইনপুটগুলি পর্যালোচনা করুন এবং উত্স রেফারেন্সসহ বিশ্লেষণাত্মক প্রতিবেদনগুলি সংরক্ষণ করুন।
 
-[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Investigation](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
+[টিজিউইটনেস](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [ডকুমেন্টেশন](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [তদন্ত](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)
 
-![Investigation](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
+![তদন্ত](https://phishdestroy.github.io/TgWitness/assets/chapter-investigate.svg)
 
 [ওয়ার্কফ্লো গাইড](https://phishdestroy.github.io/TgWitness/docs/archive/) · [উইকি](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 

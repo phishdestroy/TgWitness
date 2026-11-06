@@ -4,9 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/acces
 
 Configurare l’accesso limitato agli account e alle chat, selezionare le autorizzazioni, limitare le sessioni e gli indirizzi IP e revocare l’accesso.
 
-[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Getting started](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
+[TgWitness](https://github.com/phishdestroy/TgWitness/blob/main/README.md) / [Documentazione](https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md) · [Introduzione](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
 
-![Getting started](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
+![Introduzione](https://phishdestroy.github.io/TgWitness/assets/chapter-start.svg)
 
 Conceda a un revisore l’accesso a una chat, a un analista l’autorizzazione a esportare un caso o a un operatore il controllo su account selezionati. A ciascuna persona viene assegnato un proprio token. Il token del pannello principale rimane in possesso dell’amministratore.
 
@@ -110,6 +110,6 @@ Anche il rilascio, la modifica e la revoca dell’accesso, nonché l’avvio o l
 
 ****Amministratore principale e confine di fiducia****
 
-The main panel token remains unrestricted. Browser sign-ins with it create sessions subject to the administrator's configured session limits. Scripts sending the main token directly retain full access and are not counted as browser sessions.
+Il token del pannello principale rimane senza restrizioni. Gli accessi al browser effettuati con esso creano sessioni soggette ai limiti di sessione configurati dall’amministratore. Gli script che inviano direttamente il token principale mantengono l’accesso completo e non vengono conteggiati come sessioni del browser.
 
-This is application-level access control in one installation. All workspaces share the server process; this is not isolation from the host administrator. Keep the main token, Telegram sessions, signing keys and data directory private. A witness token is a separate checkpoint/health credential, not a panel access token.
+Si tratta di un controllo degli accessi a livello di applicazione in un'unica installazione. Tutti gli spazi di lavoro condividono il processo del server; non si tratta di un isolamento dall’amministratore dell’host. Mantenere privati il token principale, le sessioni di Telegram, le chiavi di firma e la directory dei dati. Un token witness è una credenziale separata di controllo/integrità, non un token di accesso al pannello.
