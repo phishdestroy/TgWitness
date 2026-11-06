@@ -2,8 +2,10 @@
 import asyncio
 from datetime import date
 import hashlib
+import os
 from pathlib import Path
 import sys
+import time
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -97,10 +99,11 @@ def test_daily_upgrade_retains_original_and_stays_unconfirmed_offline(tmp_path):
     observer = Witness(tmp_path / 'witness', 'https://collector.invalid', 'synthetic')
     try:
         folder = observer.store.root / 'anchors'
+        for proof in folder.glob('*.ots'):
+            os.utime(proof, (time.time() - 7200, time.time() - 7200))
         # Direct Bitcoin attestation is structurally valid, but is not a Bitcoin proof until independently checked.
         answer = b'\x00' + OTS_BITCOIN + b'\x01\x64'
-        with patch('tgwitness.anchoring.OTS_UPGRADE_AGE', -1), \
-                patch('tgwitness.anchoring.request', AsyncMock(return_value=(200, {}, answer))):
+        with patch('tgwitness.anchoring.request', AsyncMock(return_value=(200, {}, answer))):
             result = asyncio.run(upgrade_pending_ots(observer.store, observer.network,
                                 {'ots_calendars': [CALENDAR.decode()]}, folder=folder))
         assert result and all(r['ok'] for r in result)

@@ -625,15 +625,17 @@ def openssl_verify_timestamp(data, reply, query, ca_path):
                 raise ValueError("Timestamp signature check failed: " + done.stderr.decode(errors="replace")[-500:])
 
 
-def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None):
+def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None, check_bitcoin=False):
     results = []
     for name in sorted(n for n in names if n.startswith("anchors/") and n.endswith(".json")):
         data = read_member(archive, name)
-        verify_checkpoint(strict_json(data), public_key, event_count, hash_at)
+        retained_checkpoint = strict_json(data)
+        verify_checkpoint(retained_checkpoint, public_key, event_count, hash_at)
         digest, stem = hashlib.sha256(data).digest(), name[:-len(".json")] + "."
         for proof_name in sorted(n for n in names if n.startswith(stem) and n != name):
             service = proof_name[len(stem):].rsplit(".", 1)[0]
-            entry = {"checkpoint": name[len("anchors/"):], "service": service}
+            entry = {"checkpoint": name[len("anchors/"):], "service": service,
+                     "event_count": retained_checkpoint["statement"]["event_count"]}
             if proof_name.endswith(".tsr"):
                 reply = read_member(archive, proof_name)
                 query_name = proof_name[:-4] + ".tsq"
@@ -643,8 +645,8 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                     openssl_verify_timestamp(data, reply, query, tsa_ca)
                 entry["signature"] = "checked against the given root" if tsa_ca else "not checked (use --tsa-ca)"
             elif proof_name.endswith(".ots"):
-                entry.update(kind="opentimestamps", **ots_summary(read_member(archive, proof_name), digest),
-                             attestation="as the calendar states it; ots verify checks it against Bitcoin")
+                proof = read_member(archive, proof_name)
+                entry.update(kind="opentimestamps", **(confirm_ots(proof, digest) if check_bitcoin else ots_summary(proof, digest)))
             else:
                 continue
             results.append(entry)
@@ -2069,7 +2071,8 @@ def verify_board_document(path, expected_fingerprint=None, evidence=None):
             "annotations_checked": bool(evidence), "meaning": "Team opinions; signature authenticates the signed document, not the truth of a conclusion"}
 
 
-def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None, check_drand=False, max_gib=None):
+def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None, check_drand=False, max_gib=None,
+                  check_bitcoin=False):
     with open_archive(path, max_gib=max_gib) as archive:
         names = archive.namelist()
         manifest = read_manifest(archive)
@@ -2167,10 +2170,11 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
             return None
         if checkpoint:
             verify_checkpoint(checkpoint, public, result["events"], hash_at)
-        result["anchors"] = verify_anchors(archive, names, public, result["events"], hash_at, tsa_ca)
+        result["anchors"] = verify_anchors(archive, names, public, result["events"], hash_at, tsa_ca, check_bitcoin)
         result["board"] = verify_board(archive, manifest, checkpoint)
         result["key_pinned"] = bool(expected_fingerprint)
         result["checkpoint_checked"] = checkpoint is not None
+        result["assurance"] = assurance(result)
         return result
 
 
@@ -3628,6 +3632,10 @@ def cross_check_witness(witness, bundle_path, bundle_result):
     verified_through = max((a["event_count"] for a in matched), default=0)
     continuity_through = max((a["event_count"] for a in matched if a.get("root")), default=0)
     invalid = sum(1 for a in witness["anchors"] if a["status"] == "invalid")
+    exact = [a for a in matched if a["event_count"] == count]
+    fresh = [a for a in exact if a.get("freshness", {}).get("verified")]
+    sealed_days = [d for d in witness.get("days", []) if d["bitcoin"] == "confirmed"
+                   and any(a["seq"] <= d["to_seq"] for a in exact)]
     return {"witness_fingerprint": witness["fingerprint"], "anchors_for_this_key": len(mine),
             "other_keys": len(witness["anchors"]) - len(mine) - invalid, "invalid_answers": invalid,
             "consistent": consistent, "conflicts": conflicts,
@@ -3638,7 +3646,70 @@ def cross_check_witness(witness, bundle_path, bundle_result):
             "export_head_witnessed": any(a["event_count"] == count for a in matched),
             "export_head_witness_records": [a["seq"] for a in matched if a["event_count"] == count],
             "witness_key_pinned": bool(witness.get("key_pinned")),
-            "collector_keys": witness.get("collector_keys", {}).get(key)}
+            "collector_keys": witness.get("collector_keys", {}).get(key),
+            "days": witness.get("days", []), "missing_days": witness.get("missing_days", []),
+            "head_not_before": min((a["freshness"]["not_before"] for a in fresh), default=None),
+            "head_not_after": min((d["not_after"] for d in sealed_days), default=None),
+            "head_witnessed_at": min((a["at"] for a in exact), default=None),
+            "head_witness_record": min((a["seq"] for a in exact), default=None)}
+
+
+ASSURANCE_TIERS = ("self_attested", "timestamped", "witnessed", "fresh", "witness_anchored", "sealed")
+
+
+def assurance(result):
+    """Credit only checks performed by this verifier, with coverage of the export head."""
+    witness = result.get("witness") or {}
+    anchors = result.get("anchors") or []
+    stamps = [a for a in anchors if a.get("event_count") == result.get("events") and (
+        a.get("kind") == "rfc3161" and a.get("signature", "").startswith("checked against") or
+        a.get("kind") == "opentimestamps" and a.get("status") == "confirmed")]
+    times = [a["time"] for a in stamps]
+    if witness.get("head_not_after"):
+        times.append(witness["head_not_after"])
+    independent = bool(witness.get("witness_key_pinned") and witness.get("export_head_witnessed")
+                       and witness.get("witness_fingerprint") != result.get("fingerprint"))
+    days = witness.get("days", result.get("days", []))
+    missing = witness.get("missing_days", result.get("missing_days", []))
+    bad_witness = bool(witness.get("conflicts") or witness.get("anomalies") or any(d["status"] == "fail" for d in days))
+    complete_days = bool(days and not missing and all(d["bitcoin"] == "confirmed" for d in days)
+                         and witness.get("head_not_after"))
+    runtime = result.get("runtime_attestation") or {}
+    ladder = [
+        {"tier": "self_attested", "status": "pass", "detail": "signature, hashes and applicable chain/manifest checks"},
+        {"tier": "timestamped", "status": "pass" if times else "absent",
+         "detail": "export head existed by " + min(times) if times else "no authenticated external time covering the export head"},
+        {"tier": "witnessed", "status": "fail" if bad_witness else "pass" if independent else "absent",
+         "detail": ("witness " + str(witness.get("witness_fingerprint")) + "; records 1.." + str(result.get("events"))
+                    + "; witness clock " + str(witness.get("head_witnessed_at"))) if independent else "no pinned independent witness at the export head"},
+        {"tier": "fresh", "status": "pass" if independent and witness.get("head_not_before") else "absent",
+         "detail": "relay-confirmed drand challenge; not before " + str(witness.get("head_not_before"))
+                   if witness.get("head_not_before") else "no independently checked drand binding for the export head"},
+        {"tier": "witness_anchored", "status": "fail" if bad_witness else "pass" if independent and complete_days else "absent",
+         "detail": "Bitcoin-confirmed daily seals: " + str(sum(d["bitcoin"] == "confirmed" for d in days))
+                   + "; missing days: " + str(len(missing))},
+        {"tier": "sealed", "status": "pass" if runtime.get("verified") is True and runtime.get("key_origin") == "created" else "absent",
+         "detail": runtime.get("limitation") or "no independently checked runtime attestation bound to this export and a created key"},
+    ]
+    tier = "self_attested"
+    for row in ladder:
+        if row["status"] != "pass":
+            break
+        tier = row["tier"]
+    return {"tier": tier, "ladder": ladder, "scope": "complete exported head; no claim of continuous or complete Telegram observation"}
+
+
+def assurance_line(result):
+    value = result["assurance"]
+    if value["tier"] == "self_attested":
+        return "ASSURANCE: self_attested — only the collector's own key vouches for this record"
+    witness = result.get("witness") or {}
+    detail = (" since #" + str(witness["head_witness_record"]) + " (" + str(witness["head_witnessed_at"]) + ")"
+              if witness.get("head_witness_record") else "")
+    absent = {row["tier"] for row in value["ladder"] if row["status"] != "pass"}
+    limits = [text for tier, text in (("fresh", "not fresh"), ("witness_anchored", "witness not anchored"),
+                                    ("sealed", "not sealed")) if tier in absent]
+    return "ASSURANCE: " + value["tier"] + detail + (" · " + " · ".join(limits) if limits else "")
 
 
 def channel_texts(source):
@@ -4140,6 +4211,8 @@ class Console:
             self.say("  " + self.paint(self.t("… and {n} more", n=len(lines) - limit), "dim"))
 
     def show(self, shown, path, result, notes, pinned):
+        self.say(assurance_line(result))
+        self.banner()
         self.field("File", str(path))
         self.field("Type", self.t(KINDS[shown]) + self.paint("  " + str(result.get("format") or ""), "dim"))
         self.signer(result.get("fingerprint"))
@@ -4290,6 +4363,10 @@ def main():
                         help="Compare the drand rounds in the journal with drand relays (needs internet)")
     parser.add_argument("--check-bitcoin", action="store_true",
                         help="Evaluate OTS proofs against block headers agreed by two HTTPS explorers (needs internet)")
+    parser.add_argument("--require-tier", choices=ASSURANCE_TIERS, help="Exit 2 if the complete export does not reach this tier")
+    parser.add_argument("--sealed-attestation", type=Path, help="GitHub attestation bundle; checked with the existing gh verifier")
+    parser.add_argument("--sealed-policy", type=Path, help="Independently trusted policy listing reviewed workflow and collector commits")
+    parser.add_argument("--sealed-repo", default="phishdestroy/TgWitness", help="Repository identity expected in GitHub attestation")
     parser.add_argument("--board", action="store_true", help="Print Case Board collections, dangling references and slice changes")
     parser.add_argument("--compare", type=Path, metavar="SECOND_ZIP",
                         help="Compare two chat exports: messages present in only one of them and changed messages")
@@ -4303,6 +4380,12 @@ def main():
     parser.add_argument("--no-color", action="store_true", help="No colours (also with the NO_COLOR variable)")
     parser.add_argument("--lang", choices=("en", "ru", "uk"), help="Language of the readable answer")
     args = parser.parse_args()
+    if bool(args.sealed_attestation) != bool(args.sealed_policy):
+        parser.error("--sealed-attestation and --sealed-policy must be supplied together")
+    if args.require_tier and ASSURANCE_TIERS.index(args.require_tier) >= ASSURANCE_TIERS.index("fresh"):
+        args.check_drand = True
+    if args.require_tier and ASSURANCE_TIERS.index(args.require_tier) >= ASSURANCE_TIERS.index("timestamped"):
+        args.check_bitcoin = True
     if args.require_witness and (not args.witness or not args.witness_fingerprint):
         parser.error("--require-witness requires --witness and --witness-fingerprint")
     globals()["MAX_UNCOMPRESSED_GIB"] = max(1, args.max_gib)
@@ -4312,7 +4395,7 @@ def main():
     if args.compare:
         unsupported = ["--" + name.replace("_", "-") for name in
                        ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
-                        "evidence", "check_drand", "check_bitcoin", "board") if getattr(args, name)]
+                        "evidence", "check_drand", "check_bitcoin", "require_tier", "sealed_attestation", "board") if getattr(args, name)]
         if unsupported:
             parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
         try:
@@ -4329,10 +4412,6 @@ def main():
         return
     console = Console(sys.stdout, console_language(args.lang), not args.no_color and not os.environ.get("NO_COLOR")) \
         if mode == "pretty" else None
-    if console:
-        console.banner()
-    elif mode == "plain":
-        print("TgWitness verifier - PhishDestroy - https://github.com/phishdestroy/TgWitness")
     notes = []
 
     pinned = bool(args.fingerprint or args.witness_fingerprint)
@@ -4420,13 +4499,13 @@ def main():
         else:
             result = verify_bundle(args.bundle, args.fingerprint,
                                    read_json_file(args.checkpoint) if args.checkpoint else None, args.tsa_ca,
-                                   args.check_drand)
+                                   args.check_drand, check_bitcoin=args.check_bitcoin)
             notes += coverage_lines(result["coverage"]) + outside_lines(result["outside"])
             pinned = bool(args.fingerprint)
             if not args.checkpoint:
                 notes.append("No retained checkpoint supplied: records removed from the end of this journal are not "
                              "detected. Pass --checkpoint with a checkpoint kept away from the collector.")
-            if any(a.get("kind") == "opentimestamps" for a in result.get("anchors", [])):
+            if any(a.get("kind") == "opentimestamps" and a.get("status") != "confirmed" for a in result.get("anchors", [])):
                 notes.append("OpenTimestamps structure only: run ots verify to authenticate the Bitcoin timestamp.")
             if args.witness and not args.witness_fingerprint:
                 notes.append("The witness key is not pinned: the witness journal is checked only against itself.")
@@ -4472,25 +4551,52 @@ def main():
                           set(check["matching_records"]).intersection(witnessed["export_head_witness_records"])):
                 raise ValueError("Requested channel evidence is missing signed witness posts at the export boundary")
             result["witness_required"] = True
+        if args.sealed_attestation:
+            if shown != "evidence":
+                raise ValueError("Runtime attestation requires a full evidence ZIP")
+            try:
+                from tgwitness.sealed_verify import verify as verify_runtime
+            except ImportError:
+                raise ValueError("Runtime verification needs the installed TgWitness sealed verifier and gh") from None
+            checked_runtime = verify_runtime(args.bundle, args.sealed_attestation, args.sealed_repo,
+                                             policy=args.sealed_policy, max_gib=args.max_gib)
+            if checked_runtime["journal"]["fingerprint"] != result["fingerprint"]:
+                raise ValueError("Runtime attestation names another collector key")
+            result["runtime_attestation"] = {k: checked_runtime[k] for k in ("verified", "sha256", "workflow", "limitation")}
+            result["runtime_attestation"]["key_origin"] = "created"
+        result["assurance"] = assurance(result)
+        if any(row["status"] == "fail" for row in result["assurance"]["ladder"]):
+            raise ValueError("Assurance checks found contradictory witness evidence")
     except Exception as exc:
         if spinner:
             spinner.__exit__(None, None, None)
         if console:
+            console.say("ASSURANCE: fail")
             console.failure(args.bundle, exc)
             raise SystemExit(1)
         if mode == "json":
             print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))
             raise SystemExit(1)
+        print("ASSURANCE: fail")
         parser.exit(1, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + str(exc) + "\n")
     if spinner:
         spinner.__exit__(None, None, None)
+    unmet = bool(args.require_tier and ASSURANCE_TIERS.index(result["assurance"]["tier"]) < ASSURANCE_TIERS.index(args.require_tier))
+    if unmet:
+        notes.append("Required assurance tier was not reached: " + args.require_tier)
     if console:
         console.show(shown, args.bundle, result, notes, pinned)
+        if unmet:
+            raise SystemExit(2)
         return
     if mode == "json":
-        print(json.dumps({"verified": True, "kind": shown, "signer_pinned": pinned, "notes": notes, "result": result},
+        print(json.dumps({"verified": True, "kind": shown, "signer_pinned": pinned, "notes": notes, "result": result,
+                          "requirements_met": not unmet},
                          indent=2, ensure_ascii=False))
+        if unmet:
+            raise SystemExit(2)
         return
+    print(assurance_line(result))
     print(json.dumps(result, indent=2))
     print(producer_line(result.get("producer")))
     seal = result.get("report_seal")
@@ -4517,6 +4623,8 @@ def main():
     print("Integrity verified. Source authenticity and clock accuracy are not established.")
     if not pinned:
         print("Signer identity is unpinned: retain and compare the fingerprint independently.")
+    if unmet:
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":
