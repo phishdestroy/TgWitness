@@ -30,6 +30,7 @@ DYNAMIC_SCRIPT_KEYS = (
     "Channels", "Groups", "Bots", "Private chats", "Auto-discovered", "Access unconfirmed", "Excluded",
     "Paused", "Priority", "Mark regular", "Mark priority", "No chats match these filters.",
     "Recheck", "Media", "People", "Notifications", "Exports", "Gaps", "Chat state", "Telegram", "MTProxy",
+        "Metrics",
     "Photos", "Videos", "GIFs & animations", "Round video messages", "Voice messages", "Music & audio", "Stickers", "Files & documents",
     "Show affected sources", "Exclude from scope", "Ignore until visible", "Enable downloads",
     "Clear waiting queue", "Skip download-disabled notices",

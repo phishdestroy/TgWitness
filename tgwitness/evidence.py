@@ -172,7 +172,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
             from . import board
             board_export = board.export_state(snapshot.connection, vault) if include_board and board.head(snapshot.connection)["seq"] else None
             from .gap_analysis import settings as gap_settings
-            observed, digest = Coverage(gap_settings(store)), report.Digest()
+            from . import metrics
+            observed, digest = Coverage(gap_settings(store)), report.Digest(*metrics.from_store(store))
             journal_bytes = hashlib.sha256()
 
             def measured(events):

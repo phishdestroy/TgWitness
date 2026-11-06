@@ -54,6 +54,7 @@ SUITES = {
         "test_capture_liveness.py",
         "test_chat_state.py",
         "test_archive_views.py",
+        "test_metrics.py",
         "check_audit_frontend_browser.py",
         "check_bootstrap_recovery_browser.py",
         "check_import_preflight.py", "check_chat_safety_browser.py", "check_workspace_downloads_browser.py",

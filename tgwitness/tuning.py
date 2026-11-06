@@ -43,6 +43,8 @@ GROUPS = (
                              "assigns the numbers; a gap names no actor and no reason."),
     ("chatstate", "Chat state", "Periodic snapshots of title, description, member counts, pinned messages, administrators "
                                 "and gifts of every enabled source, with differences from the previous snapshot."),
+    ("metrics", "Report metrics", "Anomaly indicators in evidence reports. Each processor is listed in the report with "
+                                  "its version and method."),
     ("connection", "Telegram connection", "Timeouts and retries. Request timeouts and retries apply the next "
                                           "time the account connects."),
     ("proxies", "Automatic MTProxy", "When this account's listed proxy is replaced. List downloads and checks are "
@@ -74,6 +76,13 @@ PARAMETERS = (
               help="Gifts can be hidden, converted, upgraded or refunded without a service message."),
     Parameter("chat_state_unchanged", "chatstate", True, label="Record checks that found no change",
               help="A short record keeps the time of each check; turn off to record changes only."),
+    Parameter("metric_first_time_posters", "metrics", True, label="First-time posters per day",
+              help="Flags days with many new speakers and unchanged activity, as in bot injection."),
+    Parameter("metric_service_ratio", "metrics", True, label="Service messages among message numbers"),
+    Parameter("metric_join_leave", "metrics", True, label="Joins and departures per month"),
+    Parameter("metric_pinned", "metrics", True, label="Pins and unpins per month"),
+    Parameter("metric_rows_listed", "metrics", 60, 10, 400, "rows", "Rows listed per metric",
+              "The most recent rows are listed; totals cover every row."),
     Parameter("board_max_cards", "exports", 10000, 100, 100000, "cards", "Case Board card soft limit",
               "Warn after this many cards. Existing annotations remain available."),
     Parameter("board_max_comments", "exports", 50000, 100, 500000, "comments", "Case Board comment soft limit"),
