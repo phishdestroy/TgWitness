@@ -31,7 +31,7 @@ describes each workflow's scope，output and recovery behavior．
 
 The merged search and export integration passed
 [127 hosted panel checks](https://github.com/phishdestroy/TgWitness/actions/runs/42151012349)．
-The combined export，search and gap-analysis tree then passed 352 local regression tests，
+The combined export，search，gap-analysis，disclosure and route-control tree passed 362 local regression tests，
 eight website checks and MCP transport checks on 6 November 2026．The earlier preview
 readiness and report-metadata failures were fixed and covered by regression checks．
 The [Actions results](https://github.com/phishdestroy/TgWitness/actions) record checks

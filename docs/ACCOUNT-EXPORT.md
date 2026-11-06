@@ -86,12 +86,10 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 Source linkage does not independently prove that the transformation selected every required item or removed every identifying detail. Original plaintext is not embedded as a proof. A fresh review is needed for that judgment.
 
-## Data protection and the hosted Capture preview
+## Sharing and hosted capture
 
-These controls support purpose limitation and data minimization; they are not an automatic legal compliance check. [GDPR Articles 5 and 25](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) address those principles and protection by design/default. A lawful basis, necessity, special-category conditions where applicable, retention, security and recipient access still need a decision appropriate to the case. A litigation purpose alone does not make every disclosure lawful. Pseudonymized data generally remains personal data; see the [EDPB explanation](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en).
+Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
 
-Free text, dates, rare events and combinations of facts can identify people even after names are removed. Prefer text omission where message content is unnecessary; inspect the full derivative where it is necessary. Keep the source and vault protected, agree retention and sharing with the responsible person, and record which exact ZIP was handed over.
-
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．Local exports and sharing copies do not inherit GitHub attestation，and synthetic tests do not establish live Telegram acceptance．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](EVIDENCE.md#verification-scope)．
 
 [Evidence format](EVIDENCE.md) · [Case reports](CASE_REPORTS.md)
