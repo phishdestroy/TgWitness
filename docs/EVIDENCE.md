@@ -309,10 +309,22 @@ Validity is derived from the journal, never assumed:
 - Service messages are journal records with their own numbers, so they close their gaps
   themselves; the optional estimate is only context.
 
-`verify.py` recomputes `gap_summary` from `events.jsonl` with the default parameters and
+`verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed
+`coverage.json` member (defaults for older archives) and
 prints the account-wide line in its coverage summary. The archive's `get_capture_status`
 (MCP and the command line) returns the same measurement for the chats an access may read;
 the account-wide sequence only to access covering the whole workspace.
+
+Repeated observations of one service message count once，and the account service estimate
+uses only numbers inside the measured range．An applied scope must explicitly preserve
+the account's own messages before account-wide measurement is enabled；older records
+without that information cannot establish this condition．Stopped observation does not
+extend the measured range，and resuming it is noted．The live archive query has a time
+budget，including its database scan，and marks an unfinished measurement as partial．
+
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)．
+These numbers describe observations；they do not identify a deletion actor or establish
+why a number is absent．
 
 When Telegram stops accepting the account, the `coverage.gap` record that ends observation
 carries `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`,

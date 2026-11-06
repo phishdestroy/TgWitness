@@ -698,6 +698,7 @@ class Collector:
             if added or paused or resumed:
                 self.store.append("scope.applied", {
                     "mode": scope["mode"], "folder": (rule or {}).get("title"), "types": scope["types"],
+                    "own_actions": scope["own_actions"],
                     "added": [{"chat_id": c, "title": self.dialog_cache[c]["title"], "kind": self.dialog_cache[c]["kind"]}
                               for c in added],
                     "paused": paused, "resumed": resumed, "excluded": sorted(excluded),

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Repeat gap analysis with the settings carried by the signed export，count each service-message number once，and bound account estimates to the measured interval．Require explicit whole-account scope，retain pause／resume boundaries，and interrupt expensive archive scans at their time budget．
+
 - Add missing message numbers (preview): `coverage.json`, the HTML and PDF reports, `verify.py` and the archive's `get_capture_status` measure numbers Telegram assigned and this collector never saw, per channel or supergroup and for the account-wide sequence of private chats, bots and ordinary groups during whole-account collection. Each result states whether it applies and why, lists its parameters, and anchors listed gaps to the neighbouring observations. **Parameters → Gap analysis** sets the listed gaps, the account-wide sequence and an optional service-message estimate that is never subtracted. A gap names no actor and no reason.
 - Keep ranked-search pages within the first 1，000 results regardless of page size，order OCR／transcription results before pagination，and retain exact match positions when Unicode expansions and invisible-character removal cancel each other's length changes．
 
