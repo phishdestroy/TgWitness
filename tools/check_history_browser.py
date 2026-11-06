@@ -50,6 +50,7 @@ def main():
             navigate_panel(page, "sources")
             page.locator("#sources-tab-chats").click()
             expect(page.locator("#history-start")).to_be_disabled()
+            expect(page.locator("#history-availability")).to_contain_text("This account is busy")
             rejected = context.request.post(server.url + "/api/history/start", data={}, headers=headers)
             assert rejected.status == 400 and "busy" in rejected.text()
             assert context.request.post(server.url + "/api/collector/stop", data={}, headers=headers).ok
@@ -57,6 +58,7 @@ def main():
             navigate_panel(page, "sources")
             page.locator("#sources-tab-chats").click()
             page.locator("#history-workers").select_option("3")
+            expect(page.locator("#history-availability")).to_be_hidden()
             page.locator("#history-admin").uncheck()
             page.locator("#history-start").click()
             expect(page.locator("#history-progress")).to_contain_text("2 messages", timeout=12000)
