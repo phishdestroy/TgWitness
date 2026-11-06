@@ -4316,6 +4316,7 @@ async function showAccountSessions(){
       const end=node("button","quiet danger",tr("End session"));end.type="button";
       end.addEventListener("click",e=>busy(e.currentTarget,async()=>{
         if(!(await askConfirm(tr("End this session in Telegram? The device signed in there is logged out. This cannot be undone from TgWitness."),{danger:true,confirmText:tr("End session")})))return;
+        if(!owner.current())return;
         await json("account/sessions/end",{hash:s.hash},{profile:owner.profile,token:owner.token});
         toast(tr("Session ended."));await showAccountSessions();
       }));
