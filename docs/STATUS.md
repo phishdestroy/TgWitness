@@ -1,6 +1,6 @@
 # Current capabilities and test results
 
-Source version: **0.9.1 preview**．Integration review：6 November 2026．
+Source version: **0.9.1 preview**. Integration review：6 November 2026．
 
 The version label identifies the publication channel．Capabilities and their test results
 are listed below so a deployment can be assessed against its intended workload and settings．
