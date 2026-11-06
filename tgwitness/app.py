@@ -721,7 +721,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(400, "Telegram authorization expired. Sign in again.") from None
         except RPCError as exc:
             raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
-        except (ProtectedSession, KeyInUse) as exc:
+        except (ProtectedSession, KeyInUse, interactions.AccountRestricted) as exc:
             raise HTTPException(409, str(exc)) from None
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from None

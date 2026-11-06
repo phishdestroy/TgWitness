@@ -445,6 +445,7 @@ class Collector:
             "api_pool_size": len(api_pool.POOL) - len(api_pool.rejected),
             "account": self.store.get_setting("account", None),
             "account_loss": self.store.get_setting("account_loss", None),
+            "account_restriction": self.store.get_setting("account_restriction", None),
             "client": self.client_identity(credentials=credentials),
             "last_error": self.last_error, "last_heartbeat": self.last_heartbeat,
             "media_pending": sum(n for s, n in self.store.media_stats().items()
