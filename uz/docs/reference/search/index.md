@@ -1,4 +1,4 @@
-# To'liq matnli qidiruv
+# Telegram · To'liq matnli qidiruv
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/search/
 

@@ -1,4 +1,4 @@
-# Erfahren Sie, wie die Beweissicherung funktioniert
+# Telegram · Erfahren Sie, wie die Beweissicherung funktioniert
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/concepts/
 

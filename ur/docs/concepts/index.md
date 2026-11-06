@@ -1,4 +1,4 @@
-# دیکھیں کہ شواہد کیسے کام کرتا ہے
+# Telegram · دیکھیں کہ شواہد کیسے کام کرتا ہے
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/concepts/
 

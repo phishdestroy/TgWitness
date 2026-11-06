@@ -1,4 +1,4 @@
-# Cap waktu
+# Telegram · Cap waktu
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/
 

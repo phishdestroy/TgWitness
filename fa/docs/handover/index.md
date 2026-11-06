@@ -1,4 +1,4 @@
-# یک نسخهٔ اشتراک‌گذاری آماده کنید
+# Telegram · یک نسخهٔ اشتراک‌گذاری آماده کنید
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/handover/
 

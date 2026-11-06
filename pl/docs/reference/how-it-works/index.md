@@ -1,4 +1,4 @@
-# Jak działa ten rejestr dowodów
+# Telegram · Jak działa ten rejestr dowodów
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/
 

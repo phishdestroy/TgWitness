@@ -1,4 +1,4 @@
-# المرجع الكامل
+# Telegram · مرجع
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/
 

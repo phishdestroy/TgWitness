@@ -1,4 +1,4 @@
-# 문제가 발생한 원인을 파악하세요
+# Telegram · 문제가 발생한 원인을 파악하세요
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/troubleshooting/
 

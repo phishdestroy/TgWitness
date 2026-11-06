@@ -1,4 +1,4 @@
-# Build a Case Board
+# Telegram Case Board: Evidence & Annotations
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/case-board/
 

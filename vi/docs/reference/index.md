@@ -1,4 +1,4 @@
-# Tài liệu tham khảo đầy đủ
+# Telegram · Tham khảo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/
 

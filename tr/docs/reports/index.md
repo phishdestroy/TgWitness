@@ -1,4 +1,4 @@
-# Bir rapor tasarlayın
+# Telegram · Bir rapor tasarlayın
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reports/
 

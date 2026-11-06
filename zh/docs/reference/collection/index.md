@@ -1,4 +1,4 @@
-# 数据采集原理
+# Telegram · 数据采集原理
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/
 

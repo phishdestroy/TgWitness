@@ -1,4 +1,4 @@
-# Niezależny świadek
+# Telegram · Niezależny świadek
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/
 

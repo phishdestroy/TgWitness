@@ -1,4 +1,4 @@
-# الوصول والأذونات
+# Telegram · الوصول والأذونات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/
 

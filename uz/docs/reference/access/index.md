@@ -1,4 +1,4 @@
-# Kirish va ruxsatnomalar
+# Telegram · Kirish va ruxsatnomalar
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/
 

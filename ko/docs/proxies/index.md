@@ -1,4 +1,4 @@
-# 프록시 선택
+# Telegram · 프록시 선택
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/proxies/
 

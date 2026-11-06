@@ -1,4 +1,4 @@
-# Quellhistorie laden
+# Telegram · Quellhistorie laden
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/history/
 

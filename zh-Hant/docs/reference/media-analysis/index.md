@@ -1,4 +1,4 @@
-# 本地 OCR 與文字轉錄
+# Telegram · 本地 OCR 與文字轉錄
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/
 

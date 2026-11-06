@@ -1,4 +1,4 @@
-# วิธีการเก็บรวบรวมข้อมูล
+# Telegram · วิธีการเก็บรวบรวมข้อมูล
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/
 

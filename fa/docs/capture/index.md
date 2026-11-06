@@ -1,4 +1,4 @@
-# GitHub Actions ضبط می‌کند
+# Telegram · GitHub Actions ضبط می‌کند
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/capture/
 

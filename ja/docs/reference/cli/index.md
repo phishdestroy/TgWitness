@@ -1,4 +1,4 @@
-# コマンドライン
+# Telegram · コマンドライン
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/cli/
 

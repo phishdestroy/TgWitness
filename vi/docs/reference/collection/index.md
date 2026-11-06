@@ -1,4 +1,4 @@
-# Cách thức thu thập dữ liệu
+# Telegram · Cách thức thu thập dữ liệu
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/
 

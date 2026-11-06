@@ -1,4 +1,4 @@
-# Bağımsız tanık
+# Telegram · Bağımsız tanık
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/
 

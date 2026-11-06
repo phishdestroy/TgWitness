@@ -1,4 +1,4 @@
-# 從 Telegram 紀錄到清晰的案件。
+# Telegram · 文件說明
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 

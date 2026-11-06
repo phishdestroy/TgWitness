@@ -1,4 +1,4 @@
-# Постоянная работа на сервере
+# Сервер TgWitness для сбора данных Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/server/
 

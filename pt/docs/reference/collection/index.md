@@ -1,4 +1,4 @@
-# Como funciona a coleta
+# Telegram · Como funciona a coleta
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/
 

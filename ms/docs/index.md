@@ -1,4 +1,4 @@
-# Daripada rekod Telegram kepada kes yang jelas.
+# Telegram · Dokumentasi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/
 

@@ -1,4 +1,4 @@
-# 存取與權限
+# Telegram · 存取與權限
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/
 

@@ -1,4 +1,4 @@
-# Pełne odniesienie
+# Telegram · Odniesienie
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/
 

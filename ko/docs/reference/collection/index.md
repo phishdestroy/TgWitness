@@ -1,4 +1,4 @@
-# 데이터 수집 방식
+# Telegram · 데이터 수집 방식
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/
 

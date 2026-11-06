@@ -1,4 +1,4 @@
-# Wdrożenie
+# Telegram · Wdrożenie
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/
 

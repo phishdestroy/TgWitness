@@ -1,4 +1,4 @@
-# उच्च-आश्वासन परिनियोजन
+# Phala / Intel TDX · उच्च-आश्वासन परिनियोजन
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/
 

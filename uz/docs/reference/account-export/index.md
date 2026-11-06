@@ -1,4 +1,4 @@
-# Hisobni eksport qilish
+# Telegram · Hisobni eksport qilish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/account-export/
 

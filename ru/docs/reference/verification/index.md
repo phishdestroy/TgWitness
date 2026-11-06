@@ -1,4 +1,4 @@
-# Что проверено
+# Проверки TgWitness: результаты и ограничения
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/verification/
 

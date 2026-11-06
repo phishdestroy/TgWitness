@@ -1,4 +1,4 @@
-# Pendaftaran awal dan tetapan
+# Telegram · Pendaftaran awal dan tetapan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/settings/
 

@@ -1,4 +1,4 @@
-# รักษาความปลอดภัย
+# Telegram · รักษาความปลอดภัย
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/security/
 

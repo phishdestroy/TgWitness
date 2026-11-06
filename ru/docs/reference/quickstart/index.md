@@ -1,4 +1,4 @@
-# Быстрый старт
+# Установка TgWitness: Windows, Linux, macOS и Docker
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/
 

@@ -1,4 +1,4 @@
-# שמרו על האבטחה
+# Telegram · שמרו על האבטחה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/security/
 

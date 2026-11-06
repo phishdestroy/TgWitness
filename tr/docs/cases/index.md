@@ -1,4 +1,4 @@
-# Tüm sohbetleri inceleyin
+# Telegram · Tüm sohbetleri inceleyin
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/cases/
 

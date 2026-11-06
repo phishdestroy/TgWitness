@@ -1,4 +1,4 @@
-# Features and limits
+# TgWitness Features & Telegram Collection Limits
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/features/
 

@@ -1,4 +1,4 @@
-# Доступ та дозволи
+# Telegram · Доступ та дозволи
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/
 

@@ -1,4 +1,4 @@
-# Assurez son bon fonctionnement
+# Telegram · Assurez son bon fonctionnement
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/server/
 

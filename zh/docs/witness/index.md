@@ -1,4 +1,4 @@
-# 设置 Witness 机器人
+# Telegram · 设置 Witness 机器人
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/witness/
 

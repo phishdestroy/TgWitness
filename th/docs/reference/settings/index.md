@@ -1,4 +1,4 @@
-# การตั้งค่าและกำหนดค่าครั้งแรก
+# Telegram · การตั้งค่าและกำหนดค่าครั้งแรก
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/settings/
 

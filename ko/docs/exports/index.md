@@ -1,4 +1,4 @@
-# 내보내기 및 검증
+# Telegram · 내보내기 및 검증
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/exports/
 

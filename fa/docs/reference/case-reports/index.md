@@ -1,4 +1,4 @@
-# پیکربندی و اعتبارسنجی گزارش
+# Telegram · پیکربندی و اعتبارسنجی گزارش
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/
 

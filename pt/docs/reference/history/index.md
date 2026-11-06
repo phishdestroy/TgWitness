@@ -1,4 +1,4 @@
-# Carregar histórico de origem
+# Telegram · Carregar histórico de origem
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/history/
 

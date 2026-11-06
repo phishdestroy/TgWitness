@@ -1,4 +1,4 @@
-# La referencia completa
+# Telegram · Referencia
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/
 

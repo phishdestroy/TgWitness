@@ -1,4 +1,4 @@
-# स्रोत इतिहास लोड करें
+# Telegram · स्रोत इतिहास लोड करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/
 

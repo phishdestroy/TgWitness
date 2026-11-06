@@ -1,4 +1,4 @@
-# Quick start
+# TgWitness Setup: Windows, Linux, macOS & Docker
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/
 

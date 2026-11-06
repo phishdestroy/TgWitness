@@ -1,4 +1,4 @@
-# เชื่อมต่อบัญชี
+# Telegram · เชื่อมต่อบัญชี
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/accounts/
 

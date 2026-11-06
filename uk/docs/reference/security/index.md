@@ -1,4 +1,4 @@
-# Безпека та обробка даних
+# Telegram · Безпека та обробка даних
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/security/
 

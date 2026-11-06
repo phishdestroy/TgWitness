@@ -1,4 +1,4 @@
-# Akaun dan format sesi
+# Telegram · Akaun dan format sesi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/
 

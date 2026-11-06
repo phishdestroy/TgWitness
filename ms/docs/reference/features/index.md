@@ -1,4 +1,4 @@
-# Ciri dan had
+# Telegram · Ciri dan had
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/
 

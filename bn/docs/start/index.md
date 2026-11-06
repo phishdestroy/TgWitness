@@ -1,4 +1,4 @@
-# মিনিটখানেকের মধ্যে শুরু করুন
+# Telegram · মিনিটখানেকের মধ্যে শুরু করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/start/
 

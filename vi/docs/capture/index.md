@@ -1,4 +1,4 @@
-# Ghi lại các hành động trên GitHub Actions
+# Telegram · Ghi lại các hành động trên GitHub Actions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/capture/
 

@@ -1,4 +1,4 @@
-# تمام چیٹس میں تفتیش کریں
+# Telegram · تمام چیٹس میں تفتیش کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/cases/
 

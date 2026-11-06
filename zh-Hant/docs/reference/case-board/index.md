@@ -1,4 +1,4 @@
-# 「案件看板」參考說明
+# Telegram · 「案件看板」參考說明
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-board/
 

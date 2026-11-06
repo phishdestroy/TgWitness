@@ -1,4 +1,4 @@
-# اكتشف ما الذي حدث
+# Telegram · اكتشف ما الذي حدث
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/troubleshooting/
 

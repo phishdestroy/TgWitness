@@ -1,4 +1,4 @@
-# Opracuj raport
+# Telegram · Opracuj raport
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reports/
 

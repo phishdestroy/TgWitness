@@ -1,4 +1,4 @@
-# Từ các bản ghi Telegram đến một vụ án rõ ràng.
+# Telegram · Tài liệu hướng dẫn
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/
 

@@ -1,4 +1,4 @@
-# Запуск за несколько минут
+# Установка TgWitness для экспорта чатов Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/start/
 

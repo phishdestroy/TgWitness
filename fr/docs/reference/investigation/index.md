@@ -1,4 +1,4 @@
-# Mode enquête
+# Telegram · Mode enquête
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/
 

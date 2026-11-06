@@ -1,4 +1,4 @@
-# Phân tích kho lưu trữ
+# Telegram · Phân tích kho lưu trữ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/
 

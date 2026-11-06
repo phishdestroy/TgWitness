@@ -1,4 +1,4 @@
-# Podłącz konto
+# Telegram · Podłącz konto
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/accounts/
 

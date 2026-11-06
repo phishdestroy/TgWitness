@@ -1,4 +1,4 @@
-# Veri toplama süreci nasıl işliyor?
+# Telegram · Veri toplama süreci nasıl işliyor?
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/
 

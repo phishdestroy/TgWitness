@@ -1,4 +1,4 @@
-# תצוגה ציבורית
+# Telegram · תצוגה ציבורית
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/showcase/
 

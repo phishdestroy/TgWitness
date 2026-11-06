@@ -1,4 +1,4 @@
-# Güvenliği sağlayın
+# Telegram · Güvenliği sağlayın
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/security/
 

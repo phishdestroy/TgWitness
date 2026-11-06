@@ -1,4 +1,4 @@
-# Mahalliy OCR va transkripsiya
+# Telegram · Mahalliy OCR va transkripsiya
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/
 

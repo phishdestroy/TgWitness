@@ -1,4 +1,4 @@
-# Wiersz poleceń
+# Telegram · Wiersz poleceń
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/cli/
 

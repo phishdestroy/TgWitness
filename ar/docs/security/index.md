@@ -1,4 +1,4 @@
-# حافظ على أمانها
+# Telegram · حافظ على أمانها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/security/
 

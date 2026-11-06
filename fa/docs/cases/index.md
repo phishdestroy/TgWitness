@@ -1,4 +1,4 @@
-# تحقیق در تمام چت‌ها
+# Telegram · تحقیق در تمام چت‌ها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/cases/
 

@@ -1,4 +1,4 @@
-# Commencez en quelques minutes
+# Telegram · Commencez en quelques minutes
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/start/
 

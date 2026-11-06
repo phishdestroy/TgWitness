@@ -1,4 +1,4 @@
-# 讓它持續運作
+# Telegram · 讓它持續運作
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/server/
 

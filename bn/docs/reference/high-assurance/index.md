@@ -1,4 +1,4 @@
-# উচ্চ-আশ্বাসজনক মোতায়েন
+# Phala / Intel TDX · উচ্চ-আশ্বাসজনক মোতায়েন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/
 

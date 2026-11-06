@@ -1,4 +1,4 @@
-# Hızlı başlangıç
+# Telegram · Hızlı başlangıç
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/
 

@@ -1,4 +1,4 @@
-# 何が問題だったのかを確認する
+# Telegram · 何が問題だったのかを確認する
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/troubleshooting/
 

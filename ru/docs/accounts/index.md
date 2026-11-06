@@ -1,4 +1,4 @@
-# Подключение аккаунта
+# Подключение Telegram: QR, телефон и импорт сессий
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/accounts/
 

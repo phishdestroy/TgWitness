@@ -1,4 +1,4 @@
-# Dấu thời gian
+# Telegram · Dấu thời gian
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/
 

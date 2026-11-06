@@ -1,4 +1,4 @@
-# 快速入门
+# Telegram · 快速入门
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/
 

@@ -1,4 +1,4 @@
-# Chọn một máy chủ proxy
+# Telegram · Chọn một máy chủ proxy
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/proxies/
 

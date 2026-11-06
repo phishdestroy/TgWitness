@@ -1,4 +1,4 @@
-# ایک پروکسی منتخب کریں
+# Telegram · ایک پروکسی منتخب کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/proxies/
 

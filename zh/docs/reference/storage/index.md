@@ -1,4 +1,4 @@
-# 存储与恢复
+# Telegram · 存储与恢复
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/
 

@@ -1,4 +1,4 @@
-# Незалежний свідок
+# Telegram · Незалежний свідок
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/
 

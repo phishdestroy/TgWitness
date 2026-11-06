@@ -1,4 +1,4 @@
-# Quyền truy cập và quyền hạn
+# Telegram · Quyền truy cập và quyền hạn
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/
 

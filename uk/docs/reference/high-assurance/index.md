@@ -1,4 +1,4 @@
-# Розгортання з високим рівнем безпеки
+# Phala / Intel TDX · Розгортання з високим рівнем безпеки
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/
 

@@ -1,4 +1,4 @@
-# Mise en route rapide
+# Telegram · Mise en route rapide
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/
 

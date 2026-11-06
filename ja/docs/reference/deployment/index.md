@@ -1,4 +1,4 @@
-# 導入
+# Telegram · 導入
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/
 

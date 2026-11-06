@@ -1,4 +1,4 @@
-# نشر عالي الأمان
+# Phala / Intel TDX · نشر عالي الأمان
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/
 

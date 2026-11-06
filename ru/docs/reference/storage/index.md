@@ -1,4 +1,4 @@
-# Хранение и восстановление
+# Резервные копии Telegram: S3, Object Lock и восстановление
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/storage/
 

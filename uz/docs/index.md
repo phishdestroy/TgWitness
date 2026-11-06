@@ -1,4 +1,4 @@
-# Telegram yozuvlaridan aniq ishga.
+# Telegram · Dokumentatsiya
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/
 

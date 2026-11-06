@@ -1,4 +1,4 @@
-# 고신뢰도 배포
+# Phala / Intel TDX · 고신뢰도 배포
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/
 

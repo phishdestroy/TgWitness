@@ -1,4 +1,4 @@
-# Список изменений
+# TgWitness Changelog & Release Notes
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelog/
 

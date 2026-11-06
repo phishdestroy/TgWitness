@@ -1,4 +1,4 @@
-# Explorer les archives
+# Telegram · Explorer les archives
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/archive/
 

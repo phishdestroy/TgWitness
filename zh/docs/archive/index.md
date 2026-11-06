@@ -1,4 +1,4 @@
-# 浏览存档
+# Telegram · 浏览存档
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/archive/
 

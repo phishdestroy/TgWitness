@@ -1,4 +1,4 @@
-# Security and data handling
+# TgWitness Security Model & Telegram Session Storage
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/security/
 

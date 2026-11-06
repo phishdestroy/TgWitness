@@ -1,4 +1,4 @@
-# จากบันทึก Telegram สู่คดีที่ชัดเจน
+# Telegram · เอกสาร
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/
 

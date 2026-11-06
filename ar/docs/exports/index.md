@@ -1,4 +1,4 @@
-# التصدير والتحقق
+# Telegram · التصدير والتحقق
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/exports/
 

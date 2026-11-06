@@ -1,4 +1,4 @@
-# webhooks יוצאים
+# Telegram · webhooks יוצאים
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/
 

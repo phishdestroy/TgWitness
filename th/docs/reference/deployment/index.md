@@ -1,4 +1,4 @@
-# การติดตั้ง
+# Telegram · การติดตั้ง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/
 

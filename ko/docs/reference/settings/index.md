@@ -1,4 +1,4 @@
-# 초기 설정 및 구성
+# Telegram · 초기 설정 및 구성
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/settings/
 

@@ -1,4 +1,4 @@
-# Od zapisów z Telegrama do przejrzystej sprawy.
+# Telegram · Dokumentacja
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/
 

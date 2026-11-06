@@ -1,4 +1,4 @@
-# Public showcase
+# Publish Captured Telegram Channel Evidence
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/showcase/
 

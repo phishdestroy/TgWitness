@@ -1,4 +1,4 @@
-# クイックスタート
+# Telegram · クイックスタート
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/
 

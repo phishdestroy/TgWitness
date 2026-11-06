@@ -1,4 +1,4 @@
-# टाइमस्टैम्प
+# Telegram · टाइमस्टैम्प
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/
 

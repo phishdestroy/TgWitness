@@ -1,4 +1,4 @@
-# التحقيق في جميع الدردشات
+# Telegram · التحقيق في جميع الدردشات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/cases/
 

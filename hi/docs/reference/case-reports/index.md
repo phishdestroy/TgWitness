@@ -1,4 +1,4 @@
-# रिपोर्ट कॉन्फ़िगरेशन और सत्यापन
+# Telegram · रिपोर्ट कॉन्फ़िगरेशन और सत्यापन
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/
 

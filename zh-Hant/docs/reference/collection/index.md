@@ -1,4 +1,4 @@
-# 資料蒐集原理
+# Telegram · 資料蒐集原理
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/
 

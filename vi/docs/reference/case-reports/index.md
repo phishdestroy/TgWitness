@@ -1,4 +1,4 @@
-# Cấu hình và xác minh báo cáo
+# Telegram · Cấu hình và xác minh báo cáo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/case-reports/
 

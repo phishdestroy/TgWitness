@@ -1,4 +1,4 @@
-# পূর্ণ-পাঠ অনুসন্ধান
+# Telegram · পূর্ণ-পাঠ অনুসন্ধান
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/search/
 

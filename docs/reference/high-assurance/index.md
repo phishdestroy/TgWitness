@@ -1,4 +1,4 @@
-# High-assurance deployment
+# Phala Intel TDX: Attested Telegram Collection
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/
 

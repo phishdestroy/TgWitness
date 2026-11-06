@@ -1,4 +1,4 @@
-# الإعداد الأولي والإعدادات
+# Telegram · الإعداد الأولي والإعدادات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/settings/
 

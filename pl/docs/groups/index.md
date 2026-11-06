@@ -1,4 +1,4 @@
-# Zarządzanie grupą kont
+# Telegram · Zarządzanie grupą kont
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/groups/
 

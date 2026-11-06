@@ -1,4 +1,4 @@
-# Формат доказательств
+# Формат архива доказательств Telegram и проверка
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/
 

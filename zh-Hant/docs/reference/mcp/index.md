@@ -1,4 +1,4 @@
-# 唯讀 MCP
+# Telegram · 唯讀 MCP
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/
 

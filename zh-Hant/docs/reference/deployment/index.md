@@ -1,4 +1,4 @@
-# 部署
+# Telegram · 部署
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/
 

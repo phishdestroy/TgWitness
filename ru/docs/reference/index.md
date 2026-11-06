@@ -1,4 +1,4 @@
-# Полный справочник
+# Справочник по сбору и проверке данных Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/
 

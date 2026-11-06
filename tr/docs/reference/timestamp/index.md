@@ -1,4 +1,4 @@
-# Zaman damgaları
+# Telegram · Zaman damgaları
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/
 

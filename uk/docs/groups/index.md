@@ -1,4 +1,4 @@
-# Управління групою облікових записів
+# Telegram · Управління групою облікових записів
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/groups/
 

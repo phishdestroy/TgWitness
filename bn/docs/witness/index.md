@@ -1,4 +1,4 @@
-# একটি উইটনেস বট সেট আপ করুন
+# Telegram · একটি উইটনেস বট সেট আপ করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/witness/
 

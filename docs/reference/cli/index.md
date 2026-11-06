@@ -1,4 +1,4 @@
-# Command line
+# Telegram Archive CLI: Search & JSONL Export
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/cli/
 

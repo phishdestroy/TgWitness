@@ -1,4 +1,4 @@
-# Секретные чаты: реализация и демонстрация
+# Секретные чаты Telegram: состояние реализации
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/secret-chats/
 

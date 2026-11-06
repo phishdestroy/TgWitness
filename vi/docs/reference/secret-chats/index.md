@@ -1,4 +1,4 @@
-# Trò chuyện bí mật: triển khai và demo
+# Telegram · Trò chuyện bí mật: triển khai và demo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/secret-chats/
 

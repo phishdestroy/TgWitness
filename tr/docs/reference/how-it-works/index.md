@@ -1,4 +1,4 @@
-# Kanıt sistemi nasıl çalışır?
+# Telegram · Kanıt sistemi nasıl çalışır?
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/
 

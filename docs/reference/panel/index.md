@@ -1,4 +1,4 @@
-# Panel guide
+# TgWitness Panel: Chats, Journal & Exports
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/panel/
 

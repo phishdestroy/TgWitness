@@ -1,4 +1,4 @@
-# Bagaimana pengumpulan berfungsi
+# Telegram · Bagaimana pengumpulan berfungsi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/
 

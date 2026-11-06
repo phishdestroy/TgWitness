@@ -1,4 +1,4 @@
-# Tez boshlash
+# Telegram · Tez boshlash
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/
 

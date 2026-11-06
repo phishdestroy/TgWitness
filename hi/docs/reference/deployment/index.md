@@ -1,4 +1,4 @@
-# तैनाती
+# Telegram · तैनाती
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/
 

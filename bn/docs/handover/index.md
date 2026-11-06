@@ -1,4 +1,4 @@
-# একটি শেয়ার করার কপি প্রস্তুত করুন
+# Telegram · একটি শেয়ার করার কপি প্রস্তুত করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/handover/
 

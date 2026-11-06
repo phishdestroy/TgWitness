@@ -1,4 +1,4 @@
-# Escolha um proxy
+# Telegram · Escolha um proxy
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/proxies/
 

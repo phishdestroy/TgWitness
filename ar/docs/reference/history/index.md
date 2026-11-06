@@ -1,4 +1,4 @@
-# تحميل سجل المصدر
+# Telegram · تحميل سجل المصدر
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/
 

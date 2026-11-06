@@ -1,4 +1,4 @@
-# 面板指南
+# Telegram · 面板指南
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/
 

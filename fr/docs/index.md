@@ -1,4 +1,4 @@
-# Des messages Telegram à un dossier clair.
+# Telegram · Documentation
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/
 

@@ -1,4 +1,4 @@
-# اتصال، پروکسی‌ها و حفاظت از داده‌ها
+# Telegram · اتصال، پروکسی‌ها و حفاظت از داده‌ها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/
 

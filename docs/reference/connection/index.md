@@ -1,4 +1,4 @@
-# Connection, proxies and data protection
+# Telegram Proxy Routing & Connection Security
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/connection/
 

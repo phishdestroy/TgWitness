@@ -1,4 +1,4 @@
-# 連結帳戶
+# Telegram · 連結帳戶
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/accounts/
 

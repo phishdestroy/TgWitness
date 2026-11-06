@@ -1,4 +1,4 @@
-# Halka açık vitrin
+# Telegram · Halka açık vitrin
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/showcase/
 

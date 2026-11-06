@@ -1,4 +1,4 @@
-# Xavfsiz saqlang
+# Telegram · Xavfsiz saqlang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/security/
 

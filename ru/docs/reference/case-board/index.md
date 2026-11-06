@@ -1,4 +1,4 @@
-# Справочная информация по Case Board
+# Аннотации Telegram со ссылками на исходные записи
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-board/
 

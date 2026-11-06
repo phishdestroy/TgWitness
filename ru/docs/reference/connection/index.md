@@ -1,4 +1,4 @@
-# Подключение, прокси и защита данных
+# Прокси Telegram и безопасность подключения
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/
 

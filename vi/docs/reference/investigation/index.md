@@ -1,4 +1,4 @@
-# Chế độ điều tra
+# Telegram · Chế độ điều tra
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/
 

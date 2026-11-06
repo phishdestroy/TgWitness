@@ -1,4 +1,4 @@
-# Gizli Sohbetler: uygulama ve demo
+# Telegram · Gizli Sohbetler: uygulama ve demo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/secret-chats/
 

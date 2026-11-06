@@ -1,4 +1,4 @@
-# Sygnatury czasowe
+# Telegram · Sygnatury czasowe
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/timestamp/
 

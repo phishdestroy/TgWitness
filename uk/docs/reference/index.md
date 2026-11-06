@@ -1,4 +1,4 @@
-# Повний довідник
+# Telegram · Довідка
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/
 

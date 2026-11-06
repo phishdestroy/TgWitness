@@ -1,4 +1,4 @@
-# وضع التحقيق
+# Telegram · وضع التحقيق
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/
 

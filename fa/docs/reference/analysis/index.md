@@ -1,4 +1,4 @@
-# تحلیل بایگانی
+# Telegram · تحلیل بایگانی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/
 

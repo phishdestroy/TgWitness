@@ -1,4 +1,4 @@
-# Установка, проверка и обновление
+# Установка, проверка подписи и обновление TgWitness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/installation/
 

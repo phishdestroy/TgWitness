@@ -1,4 +1,4 @@
-# Rapor yapılandırması ve doğrulama
+# Telegram · Rapor yapılandırması ve doğrulama
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-reports/
 

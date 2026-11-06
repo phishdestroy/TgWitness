@@ -1,4 +1,4 @@
-# تصدير الحساب
+# Telegram · تصدير الحساب
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/account-export/
 

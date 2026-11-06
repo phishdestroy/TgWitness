@@ -1,4 +1,4 @@
-# শুধুমাত্র-পঠন MCP
+# Telegram · শুধুমাত্র-পঠন MCP
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/
 

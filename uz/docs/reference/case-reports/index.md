@@ -1,4 +1,4 @@
-# Hisobotni sozlash va tekshirish
+# Telegram · Hisobotni sozlash va tekshirish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-reports/
 

@@ -1,4 +1,4 @@
-# המשך להפעיל את האתר
+# Telegram · המשך להפעיל את האתר
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/server/
 

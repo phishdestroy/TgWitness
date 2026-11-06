@@ -1,4 +1,4 @@
-# Cara kerja pengumpulan data
+# Telegram · Cara kerja pengumpulan data
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/
 

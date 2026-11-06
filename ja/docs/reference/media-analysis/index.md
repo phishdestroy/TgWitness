@@ -1,4 +1,4 @@
-# ローカルでのOCRおよび文字起こし
+# Telegram · ローカルでのOCRおよび文字起こし
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/
 

@@ -1,4 +1,4 @@
-# ワークフローと操作方法
+# Telegram · ワークフローと操作方法
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/
 

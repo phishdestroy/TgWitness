@@ -1,4 +1,4 @@
-# Mantenha-o em funcionamento
+# Telegram · Mantenha-o em funcionamento
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/server/
 

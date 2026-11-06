@@ -1,4 +1,4 @@
-# स्वतंत्र गवाह
+# Telegram · स्वतंत्र गवाह
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/
 

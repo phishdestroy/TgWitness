@@ -1,4 +1,4 @@
-# 确保安全
+# Telegram · 确保安全
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/security/
 

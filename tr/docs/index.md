@@ -1,4 +1,4 @@
-# Telegram kayıtlarından net bir davaya.
+# Telegram · Belgeler
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/
 

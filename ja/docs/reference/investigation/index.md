@@ -1,4 +1,4 @@
-# 調査モード
+# Telegram · 調査モード
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/
 

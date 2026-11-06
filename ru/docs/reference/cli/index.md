@@ -1,4 +1,4 @@
-# Командная строка
+# CLI для Telegram: поиск по архиву и экспорт JSONL
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/cli/
 

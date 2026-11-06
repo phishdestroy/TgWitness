@@ -1,4 +1,4 @@
-# เลือกพร็อกซี
+# Telegram · เลือกพร็อกซี
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/proxies/
 

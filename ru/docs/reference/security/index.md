@@ -1,4 +1,4 @@
-# Безопасность и обращение с данными
+# Модель безопасности TgWitness и хранение сессий
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/security/
 

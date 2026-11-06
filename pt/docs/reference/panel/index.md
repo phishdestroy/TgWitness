@@ -1,4 +1,4 @@
-# Guia do painel
+# Telegram · Guia do painel
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/
 

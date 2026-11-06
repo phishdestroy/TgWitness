@@ -1,4 +1,4 @@
-# استقرار با تضمین بالا
+# Phala / Intel TDX · استقرار با تضمین بالا
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/
 

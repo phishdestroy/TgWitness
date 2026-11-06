@@ -1,4 +1,4 @@
-# 连接、代理和数据保护
+# Telegram · 连接、代理和数据保护
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/
 

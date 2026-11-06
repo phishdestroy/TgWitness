@@ -1,4 +1,4 @@
-# Поделиться делом
+# Доступ рецензентов к материалам дела Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/access/
 

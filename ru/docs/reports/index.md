@@ -1,4 +1,4 @@
-# Создание отчета
+# Отчёты по Telegram: HTML и подписанный PDF
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reports/
 

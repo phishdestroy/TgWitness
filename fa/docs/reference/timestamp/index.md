@@ -1,4 +1,4 @@
-# برچسب‌های زمانی
+# Telegram · برچسب‌های زمانی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/
 

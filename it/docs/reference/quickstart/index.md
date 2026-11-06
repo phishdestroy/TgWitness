@@ -1,4 +1,4 @@
-# Guida rapida
+# Telegram · Guida rapida
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/
 

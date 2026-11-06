@@ -1,4 +1,4 @@
-# MCP tylko do odczytu
+# Telegram · MCP tylko do odczytu
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/mcp/
 

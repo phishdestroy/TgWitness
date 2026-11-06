@@ -1,4 +1,4 @@
-# Работа и обслуживание
+# Эксплуатация TgWitness: сбор, экспорт и восстановление
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/
 

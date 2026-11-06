@@ -1,4 +1,4 @@
-# 数分で始められます
+# Telegram · 数分で始められます
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/start/
 

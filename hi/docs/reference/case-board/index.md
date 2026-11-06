@@ -1,4 +1,4 @@
-# केस बोर्ड संदर्भ
+# Telegram · केस बोर्ड संदर्भ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/
 

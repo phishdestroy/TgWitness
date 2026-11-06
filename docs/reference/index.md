@@ -1,4 +1,4 @@
-# The complete reference
+# Telegram Collection & Evidence Technical Reference
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/
 

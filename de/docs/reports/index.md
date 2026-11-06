@@ -1,4 +1,4 @@
-# Erstellen Sie einen Bericht
+# Telegram · Erstellen Sie einen Bericht
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reports/
 

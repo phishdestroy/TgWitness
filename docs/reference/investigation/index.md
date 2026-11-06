@@ -1,4 +1,4 @@
-# Investigation mode
+# Telegram Investigation Mode & Account Scope
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/investigation/
 

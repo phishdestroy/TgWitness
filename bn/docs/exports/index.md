@@ -1,4 +1,4 @@
-# রপ্তানি এবং যাচাই করুন
+# Telegram · রপ্তানি এবং যাচাই করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/exports/
 

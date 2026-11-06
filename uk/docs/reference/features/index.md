@@ -1,4 +1,4 @@
-# Можливості та обмеження
+# Telegram · Можливості та обмеження
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/
 

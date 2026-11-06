@@ -1,4 +1,4 @@
-# कार्यप्रवाह और संचालन
+# Telegram · कार्यप्रवाह और संचालन
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/
 

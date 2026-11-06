@@ -1,4 +1,4 @@
-# ให้ระบบทำงานต่อไป
+# Telegram · ให้ระบบทำงานต่อไป
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/server/
 

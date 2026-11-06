@@ -1,4 +1,4 @@
-# חבר חשבון
+# Telegram · חבר חשבון
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/accounts/
 

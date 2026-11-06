@@ -1,4 +1,4 @@
-# پینل گائیڈ
+# Telegram · پینل گائیڈ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/
 

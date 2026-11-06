@@ -1,4 +1,4 @@
-# Tergov rejimi
+# Telegram · Tergov rejimi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/
 

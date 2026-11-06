@@ -1,4 +1,4 @@
-# Effectuez des recherches dans toutes les discussions
+# Telegram · Effectuez des recherches dans toutes les discussions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/cases/
 

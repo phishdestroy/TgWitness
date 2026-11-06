@@ -1,4 +1,4 @@
-# اکاؤنٹ کی برآمد
+# Telegram · اکاؤنٹ کی برآمد
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/account-export/
 

@@ -1,4 +1,4 @@
-# Bir hesap grubunu yönetin
+# Telegram · Bir hesap grubunu yönetin
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/groups/
 

@@ -1,4 +1,4 @@
-# إعداد روبوت «Witness»
+# Telegram · إعداد روبوت «Witness»
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/witness/
 

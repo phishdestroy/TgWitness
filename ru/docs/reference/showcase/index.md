@@ -1,4 +1,4 @@
-# Публичная витрина
+# Публикация сохранённых сообщений каналов Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/showcase/
 

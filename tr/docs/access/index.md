@@ -1,4 +1,4 @@
-# Bir vaka paylaşın
+# Telegram · Bir vaka paylaşın
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/access/
 

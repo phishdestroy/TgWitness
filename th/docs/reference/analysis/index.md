@@ -1,4 +1,4 @@
-# การวิเคราะห์ข้อมูลในคลัง
+# Telegram · การวิเคราะห์ข้อมูลในคลัง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/
 

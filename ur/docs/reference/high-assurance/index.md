@@ -1,4 +1,4 @@
-# اعلیٰ یقین دہانی کے ساتھ تعیناتی
+# Phala / Intel TDX · اعلیٰ یقین دہانی کے ساتھ تعیناتی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/
 

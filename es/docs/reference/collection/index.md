@@ -1,4 +1,4 @@
-# Cómo funciona la recopilación
+# Telegram · Cómo funciona la recopilación
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/
 

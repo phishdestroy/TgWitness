@@ -1,4 +1,4 @@
-# การสนทนาลับ: การนำไปใช้และตัวอย่าง
+# Telegram · การสนทนาลับ: การนำไปใช้และตัวอย่าง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/secret-chats/
 

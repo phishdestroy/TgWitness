@@ -1,4 +1,4 @@
-# كيفية عمل عملية الجمع
+# Telegram · كيفية عمل عملية الجمع
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/
 

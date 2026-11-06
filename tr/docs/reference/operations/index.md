@@ -1,4 +1,4 @@
-# İş akışları ve işlemler
+# Telegram · İş akışları ve işlemler
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/
 

@@ -1,4 +1,4 @@
-# Mod siasatan
+# Telegram · Mod siasatan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/
 

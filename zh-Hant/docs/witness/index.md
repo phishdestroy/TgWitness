@@ -1,4 +1,4 @@
-# 設定 Witness 機器人
+# Telegram · 設定 Witness 機器人
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/witness/
 

@@ -1,4 +1,4 @@
-# Barcha suhbatlarni tergov qiling
+# Telegram · Barcha suhbatlarni tergov qiling
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/cases/
 

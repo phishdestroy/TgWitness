@@ -1,4 +1,4 @@
-# חשבונות ופורמטים של הפעלות
+# Telegram · חשבונות ופורמטים של הפעלות
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/
 

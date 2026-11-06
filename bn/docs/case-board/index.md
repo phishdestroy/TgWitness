@@ -1,4 +1,4 @@
-# একটি কেস বোর্ড তৈরি করুন
+# Telegram · একটি কেস বোর্ড তৈরি করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/case-board/
 

@@ -1,4 +1,4 @@
-# اتصال یک حساب
+# Telegram · اتصال یک حساب
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/accounts/
 

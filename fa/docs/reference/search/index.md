@@ -1,4 +1,4 @@
-# جستجوی متن کامل
+# Telegram · جستجوی متن کامل
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/search/
 

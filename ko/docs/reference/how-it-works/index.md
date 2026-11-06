@@ -1,4 +1,4 @@
-# 증거 기록의 작동 방식
+# Telegram · 증거 기록의 작동 방식
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/
 

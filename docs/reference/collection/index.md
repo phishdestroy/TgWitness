@@ -1,4 +1,4 @@
-# How collection works
+# Telegram Collection: Updates, Edits & Deletions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/collection/
 

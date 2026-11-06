@@ -1,4 +1,4 @@
-# Cargar historial de fuentes
+# Telegram · Cargar historial de fuentes
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/history/
 

@@ -1,4 +1,4 @@
-# Как устроены доказательства
+# Доказательства Telegram: цепочка хешей и подписи
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/concepts/
 

@@ -1,4 +1,4 @@
-# التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي
+# Telegram · التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/
 

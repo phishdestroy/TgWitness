@@ -1,4 +1,4 @@
-# 조사 모드
+# Telegram · 조사 모드
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/
 

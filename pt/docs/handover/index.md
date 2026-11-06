@@ -1,4 +1,4 @@
-# Prepare uma cópia para compartilhamento
+# Telegram · Prepare uma cópia para compartilhamento
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/handover/
 

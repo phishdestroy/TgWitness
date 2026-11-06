@@ -1,4 +1,4 @@
-# Manage a group of accounts
+# Manage Multiple Telegram Collection Accounts
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/groups/
 

@@ -1,4 +1,4 @@
-# Funktionen und Einschränkungen
+# Telegram · Funktionen und Einschränkungen
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/features/
 

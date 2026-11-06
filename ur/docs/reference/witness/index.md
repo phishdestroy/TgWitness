@@ -1,4 +1,4 @@
-# آزاد شاہد
+# Telegram · آزاد شاہد
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/
 

@@ -1,4 +1,4 @@
-# アカウントを連携する
+# Telegram · アカウントを連携する
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/accounts/
 

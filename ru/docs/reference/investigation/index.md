@@ -1,4 +1,4 @@
-# Режим расследования
+# Режим расследования Telegram и область наблюдения
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/
 

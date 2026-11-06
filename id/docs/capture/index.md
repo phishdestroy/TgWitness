@@ -1,4 +1,4 @@
-# Penangkapan GitHub Actions
+# Telegram · Penangkapan GitHub Actions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/capture/
 

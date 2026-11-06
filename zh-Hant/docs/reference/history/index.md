@@ -1,4 +1,4 @@
-# 載入來源歷史紀錄
+# Telegram · 載入來源歷史紀錄
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/
 

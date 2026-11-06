@@ -1,4 +1,4 @@
-# Analyse des archives
+# Telegram · Analyse des archives
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/
 

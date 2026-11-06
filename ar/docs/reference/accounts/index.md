@@ -1,4 +1,4 @@
-# الحسابات وتنسيقات الجلسات
+# Telegram · الحسابات وتنسيقات الجلسات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/
 

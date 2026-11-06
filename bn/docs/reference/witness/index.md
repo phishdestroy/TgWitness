@@ -1,4 +1,4 @@
-# স্বতন্ত্র সাক্ষী
+# Telegram · স্বতন্ত্র সাক্ষী
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/
 

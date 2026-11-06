@@ -1,4 +1,4 @@
-# 秘密聊天：實作與示範
+# Telegram · 秘密聊天：實作與示範
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/secret-chats/
 

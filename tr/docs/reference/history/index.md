@@ -1,4 +1,4 @@
-# Kaynak geçmişini yükle
+# Telegram · Kaynak geçmişini yükle
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/
 

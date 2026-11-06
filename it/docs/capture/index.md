@@ -1,4 +1,4 @@
-# Acquisizione tramite GitHub Actions
+# Telegram · Acquisizione tramite GitHub Actions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/capture/
 

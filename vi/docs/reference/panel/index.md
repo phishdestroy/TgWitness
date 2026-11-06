@@ -1,4 +1,4 @@
-# Hướng dẫn sử dụng bảng điều khiển
+# Telegram · Hướng dẫn sử dụng bảng điều khiển
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/
 

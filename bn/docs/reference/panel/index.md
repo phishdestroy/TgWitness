@@ -1,4 +1,4 @@
-# প্যানেল গাইড
+# Telegram · প্যানেল গাইড
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/
 

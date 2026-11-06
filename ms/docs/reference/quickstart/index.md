@@ -1,4 +1,4 @@
-# Permulaan pantas
+# Telegram · Permulaan pantas
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/
 

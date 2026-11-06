@@ -1,4 +1,4 @@
-# এটি নিরাপদ রাখুন
+# Telegram · এটি নিরাপদ রাখুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/security/
 

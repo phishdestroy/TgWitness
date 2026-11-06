@@ -1,4 +1,4 @@
-# جمع کرنے کا طریقہ
+# Telegram · جمع کرنے کا طریقہ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/
 

@@ -1,4 +1,4 @@
-# النشر
+# Telegram · النشر
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/
 

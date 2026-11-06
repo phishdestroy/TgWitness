@@ -1,4 +1,4 @@
-# اختر وكيلًا
+# Telegram · اختر وكيلًا
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/proxies/
 

@@ -1,4 +1,4 @@
-# Architecture
+# TgWitness Architecture: Collector, Journal & API
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/architecture/
 

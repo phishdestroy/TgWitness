@@ -1,4 +1,4 @@
-# Fonctionnement des preuves
+# Telegram · Fonctionnement des preuves
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/
 

@@ -1,4 +1,4 @@
-# 查找问题所在
+# Telegram · 查找问题所在
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/troubleshooting/
 

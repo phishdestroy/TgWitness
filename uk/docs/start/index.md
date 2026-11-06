@@ -1,4 +1,4 @@
-# Почніть за лічені хвилини
+# Telegram · Почніть за лічені хвилини
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/start/
 

@@ -1,4 +1,4 @@
-# سطر الأوامر
+# Telegram · سطر الأوامر
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/cli/
 

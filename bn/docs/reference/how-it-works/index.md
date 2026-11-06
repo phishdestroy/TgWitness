@@ -1,4 +1,4 @@
-# প্রমাণ কীভাবে কাজ করে
+# Telegram · প্রমাণ কীভাবে কাজ করে
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/
 

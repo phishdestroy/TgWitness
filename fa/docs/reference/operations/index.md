@@ -1,4 +1,4 @@
-# روندها و عملیات‌ها
+# Telegram · روندها و عملیات‌ها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/
 

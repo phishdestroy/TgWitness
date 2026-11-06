@@ -1,4 +1,4 @@
-# Triển khai có độ tin cậy cao
+# Phala / Intel TDX · Triển khai có độ tin cậy cao
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/
 

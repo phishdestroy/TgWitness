@@ -1,4 +1,4 @@
-# Keep it secure
+# Secure Telegram Sessions & Evidence Storage
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/security/
 

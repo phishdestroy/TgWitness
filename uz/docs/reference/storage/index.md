@@ -1,4 +1,4 @@
-# Saqlash va tiklash
+# Telegram · Saqlash va tiklash
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/
 

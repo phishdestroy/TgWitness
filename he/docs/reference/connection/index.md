@@ -1,4 +1,4 @@
-# חיבור, פרוקסי והגנה על נתונים
+# Telegram · חיבור, פרוקסי והגנה על נתונים
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/
 

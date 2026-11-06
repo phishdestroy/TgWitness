@@ -1,4 +1,4 @@
-# Tìm kiếm toàn văn
+# Telegram · Tìm kiếm toàn văn
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/search/
 

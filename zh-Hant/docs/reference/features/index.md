@@ -1,4 +1,4 @@
-# 功能與限制
+# Telegram · 功能與限制
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/
 

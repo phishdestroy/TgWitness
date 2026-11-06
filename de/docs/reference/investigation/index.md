@@ -1,4 +1,4 @@
-# Untersuchungsmodus
+# Telegram · Untersuchungsmodus
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/
 

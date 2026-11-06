@@ -1,4 +1,4 @@
-# 全文搜索
+# Telegram · 全文搜索
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/search/
 

@@ -1,4 +1,4 @@
-# מדריך לפאנלים
+# Telegram · מדריך לפאנלים
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/
 

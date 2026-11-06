@@ -1,4 +1,4 @@
-# 创建案件看板
+# Telegram · 创建案件看板
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/case-board/
 

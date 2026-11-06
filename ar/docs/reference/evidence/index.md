@@ -1,4 +1,4 @@
-# تنسيق الأدلة
+# Telegram · تنسيق الأدلة
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/
 

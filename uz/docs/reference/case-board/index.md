@@ -1,4 +1,4 @@
-# Case Board havolasi
+# Telegram · Case Board havolasi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-board/
 

@@ -1,4 +1,4 @@
-# הקימו לוח תיקים
+# Telegram · הקימו לוח תיקים
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/case-board/
 

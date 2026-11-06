@@ -1,4 +1,4 @@
-# Armazenamento e recuperação
+# Telegram · Armazenamento e recuperação
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/storage/
 

@@ -1,4 +1,4 @@
-# Ulashish uchun nusxa tayyorlang
+# Telegram · Ulashish uchun nusxa tayyorlang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/handover/
 

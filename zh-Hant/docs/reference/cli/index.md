@@ -1,4 +1,4 @@
-# 命令列
+# Telegram · 命令列
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/cli/
 

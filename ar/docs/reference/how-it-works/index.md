@@ -1,4 +1,4 @@
-# كيف تعمل الأدلة
+# Telegram · كيف تعمل الأدلة
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/
 

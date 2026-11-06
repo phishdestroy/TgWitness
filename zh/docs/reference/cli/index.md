@@ -1,4 +1,4 @@
-# 命令行
+# Telegram · 命令行
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/cli/
 

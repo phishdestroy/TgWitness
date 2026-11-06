@@ -1,4 +1,4 @@
-# Déploiement hautement sécurisé
+# Phala / Intel TDX · Déploiement hautement sécurisé
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/
 

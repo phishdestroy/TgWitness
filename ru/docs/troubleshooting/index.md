@@ -1,4 +1,4 @@
-# Поиск неисправностей
+# Telegram: ошибки входа, FloodWait и пропуски сбора
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/troubleshooting/
 

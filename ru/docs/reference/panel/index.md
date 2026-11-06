@@ -1,4 +1,4 @@
-# Руководство по панелям
+# Панель TgWitness: чаты, журнал и экспорт Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/panel/
 

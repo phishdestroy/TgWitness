@@ -1,4 +1,4 @@
-# Galeri publik
+# Telegram · Galeri publik
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/showcase/
 

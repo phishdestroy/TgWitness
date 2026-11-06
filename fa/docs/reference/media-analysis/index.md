@@ -1,4 +1,4 @@
-# شناسایی نوری حروف (OCR) و رونویسی محلی
+# Telegram · شناسایی نوری حروف (OCR) و رونویسی محلی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/
 

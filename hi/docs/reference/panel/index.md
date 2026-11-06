@@ -1,4 +1,4 @@
-# पैनल मार्गदर्शिका
+# Telegram · पैनल मार्गदर्शिका
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/
 

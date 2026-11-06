@@ -1,4 +1,4 @@
-# ขั้นตอนการทำงานและการดำเนินการ
+# Telegram · ขั้นตอนการทำงานและการดำเนินการ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/
 

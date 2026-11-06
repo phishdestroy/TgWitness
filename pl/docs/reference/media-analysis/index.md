@@ -1,4 +1,4 @@
-# Lokalne rozpoznawanie tekstu (OCR) i transkrypcja
+# Telegram · Lokalne rozpoznawanie tekstu (OCR) i transkrypcja
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/media-analysis/
 

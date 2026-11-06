@@ -1,4 +1,4 @@
-# Rancang laporan
+# Telegram · Rancang laporan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reports/
 

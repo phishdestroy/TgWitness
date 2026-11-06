@@ -1,4 +1,4 @@
-# Kanıtların nasıl işlediğini görün
+# Telegram · Kanıtların nasıl işlediğini görün
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/concepts/
 

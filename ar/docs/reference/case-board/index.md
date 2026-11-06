@@ -1,4 +1,4 @@
-# مرجع «لوحة القضية»
+# Telegram · مرجع «لوحة القضية»
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-board/
 

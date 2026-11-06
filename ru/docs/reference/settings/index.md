@@ -1,4 +1,4 @@
-# Первоначальная настройка и параметры
+# Настройка сбора Telegram и параметров TgWitness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/settings/
 

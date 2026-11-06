@@ -1,4 +1,4 @@
-# 高信頼性の導入
+# Phala / Intel TDX · 高信頼性の導入
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/
 

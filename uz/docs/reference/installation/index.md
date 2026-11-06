@@ -1,4 +1,4 @@
-# O&#x27;rnatish, tekshirish va yangilash
+# O&#x27; rnatish, tekshirish va yangilash
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/installation/
 

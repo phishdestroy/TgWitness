@@ -1,4 +1,4 @@
-# Compartir un caso
+# Telegram · Compartir un caso
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/access/
 

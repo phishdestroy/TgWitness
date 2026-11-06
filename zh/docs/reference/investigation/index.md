@@ -1,4 +1,4 @@
-# 调查模式
+# Telegram · 调查模式
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/
 

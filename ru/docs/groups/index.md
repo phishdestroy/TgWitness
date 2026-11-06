@@ -1,4 +1,4 @@
-# Управление группой учетных записей
+# Управление группами аккаунтов Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/groups/
 

@@ -1,4 +1,4 @@
-# تحقیقاتی موڈ
+# Telegram · تحقیقاتی موڈ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/
 

@@ -1,4 +1,4 @@
-# Mustaqil guvoh
+# Telegram · Mustaqil guvoh
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/
 

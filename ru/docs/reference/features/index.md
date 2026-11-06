@@ -1,4 +1,4 @@
-# Возможности и ограничения
+# Возможности TgWitness и ограничения сбора Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/
 

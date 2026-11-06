@@ -1,4 +1,4 @@
-# Chats secretos: implementação e demonstração
+# Telegram · Chats secretos: implementação e demonstração
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/secret-chats/
 

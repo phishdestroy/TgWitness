@@ -1,4 +1,4 @@
-# Línea de comandos
+# Telegram · Línea de comandos
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/cli/
 

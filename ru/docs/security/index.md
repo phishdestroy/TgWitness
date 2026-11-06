@@ -1,4 +1,4 @@
-# Безопасность установки
+# Защита сессий Telegram и хранилища доказательств
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/security/
 

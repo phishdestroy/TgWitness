@@ -1,4 +1,4 @@
-# Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương
+# Telegram · Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/
 

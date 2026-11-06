@@ -1,4 +1,4 @@
-# Investigue en todos los chats
+# Telegram · Investigue en todos los chats
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/cases/
 

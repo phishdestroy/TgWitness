@@ -1,4 +1,4 @@
-# Виберіть проксі-сервер
+# Telegram · Виберіть проксі-сервер
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/proxies/
 

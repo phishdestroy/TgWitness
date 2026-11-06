@@ -1,4 +1,4 @@
-# Публічна вітрина
+# Telegram · Публічна вітрина
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/showcase/
 

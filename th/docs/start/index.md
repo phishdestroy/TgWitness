@@ -1,4 +1,4 @@
-# เริ่มใช้งานได้ภายในไม่กี่นาที
+# Telegram · เริ่มใช้งานได้ภายในไม่กี่นาที
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/start/
 

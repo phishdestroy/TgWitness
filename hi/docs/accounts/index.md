@@ -1,4 +1,4 @@
-# एक खाता कनेक्ट करें
+# Telegram · एक खाता कनेक्ट करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/accounts/
 

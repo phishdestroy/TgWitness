@@ -1,4 +1,4 @@
-# الاتصال، والوكلاء، وحماية البيانات
+# Telegram · الاتصال، والوكلاء، وحماية البيانات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/
 

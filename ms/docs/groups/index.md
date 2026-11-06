@@ -1,4 +1,4 @@
-# Kelola sekumpulan akaun
+# Telegram · Kelola sekumpulan akaun
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/groups/
 

@@ -1,4 +1,4 @@
-# 기능 및 제한 사항
+# Telegram · 기능 및 제한 사항
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/
 

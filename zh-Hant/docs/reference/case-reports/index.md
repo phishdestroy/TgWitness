@@ -1,4 +1,4 @@
-# 報告配置與驗證
+# Telegram · 報告配置與驗證
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/
 

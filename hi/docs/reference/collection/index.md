@@ -1,4 +1,4 @@
-# संग्रह कैसे काम करता है
+# Telegram · संग्रह कैसे काम करता है
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/
 

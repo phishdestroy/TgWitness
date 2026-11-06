@@ -1,4 +1,4 @@
-# 稼働を継続してください
+# Telegram · 稼働を継続してください
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/server/
 

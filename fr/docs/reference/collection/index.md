@@ -1,4 +1,4 @@
-# Fonctionnement de la collecte
+# Telegram · Fonctionnement de la collecte
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/
 

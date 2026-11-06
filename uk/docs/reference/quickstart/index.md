@@ -1,4 +1,4 @@
-# Швидкий старт
+# Telegram · Швидкий старт
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/
 

@@ -1,4 +1,4 @@
-# Hisoblar guruhini boshqarish
+# Telegram · Hisoblar guruhini boshqarish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/groups/
 

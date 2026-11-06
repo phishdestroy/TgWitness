@@ -1,4 +1,4 @@
-# Depolama ve kurtarma
+# Telegram · Depolama ve kurtarma
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/
 

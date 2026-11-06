@@ -1,4 +1,4 @@
-# एक केस बोर्ड बनाएँ
+# Telegram · एक केस बोर्ड बनाएँ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/case-board/
 

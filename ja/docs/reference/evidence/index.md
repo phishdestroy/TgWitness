@@ -1,4 +1,4 @@
-# 証拠の形式
+# Telegram · 証拠の形式
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/
 

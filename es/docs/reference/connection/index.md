@@ -1,4 +1,4 @@
-# Conexión, servidores proxy y protección de datos
+# Telegram · Conexión, servidores proxy y protección de datos
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/
 

@@ -1,4 +1,4 @@
-# Export and verify
+# Export Telegram Chats & Verify Signed Evidence
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/exports/
 

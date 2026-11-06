@@ -1,4 +1,4 @@
-# Забезпечте його безперебійну роботу
+# Telegram · Забезпечте його безперебійну роботу
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/server/
 

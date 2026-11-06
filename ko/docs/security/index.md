@@ -1,4 +1,4 @@
-# 보안을 유지하세요
+# Telegram · 보안을 유지하세요
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/security/
 

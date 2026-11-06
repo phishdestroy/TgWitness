@@ -1,4 +1,4 @@
-# Güvenlik ve veri işleme
+# Telegram · Güvenlik ve veri işleme
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/
 

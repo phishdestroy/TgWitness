@@ -1,4 +1,4 @@
-# একটি প্রক্সি নির্বাচন করুন
+# Telegram · একটি প্রক্সি নির্বাচন করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/proxies/
 

@@ -1,4 +1,4 @@
-# Reka laporan
+# Telegram · Reka laporan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reports/
 

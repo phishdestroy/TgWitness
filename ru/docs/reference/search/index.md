@@ -1,4 +1,4 @@
-# Полнотекстовый поиск
+# Полнотекстовый поиск по архиву Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/search/
 

@@ -1,4 +1,4 @@
-# ตั้งค่าบอทพยาน
+# Telegram · ตั้งค่าบอทพยาน
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/witness/
 

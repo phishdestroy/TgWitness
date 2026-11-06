@@ -1,4 +1,4 @@
-# การปรับใช้ที่มีความมั่นใจสูง
+# Phala / Intel TDX · การปรับใช้ที่มีความมั่นใจสูง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/
 

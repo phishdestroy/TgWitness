@@ -1,4 +1,4 @@
-# Telegramの記録から、明確な事件へ。
+# Telegram · ドキュメント
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 

@@ -1,4 +1,4 @@
-# قم بإعداد نسخة للمشاركة
+# Telegram · قم بإعداد نسخة للمشاركة
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/handover/
 

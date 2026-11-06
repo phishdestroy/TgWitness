@@ -1,4 +1,4 @@
-# Cap masa
+# Telegram · Cap masa
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/
 

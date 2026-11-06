@@ -1,4 +1,4 @@
-# Penyebaran berjaminan tinggi
+# Phala / Intel TDX · Penyebaran berjaminan tinggi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/
 

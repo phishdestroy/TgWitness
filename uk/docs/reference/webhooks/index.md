@@ -1,4 +1,4 @@
-# Вихідні веб-хуки
+# Telegram · Вихідні веб-хуки
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/
 

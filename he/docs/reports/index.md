@@ -1,4 +1,4 @@
-# עיצוב דוח
+# Telegram · עיצוב דוח
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reports/
 

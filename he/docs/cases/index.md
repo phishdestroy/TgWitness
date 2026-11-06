@@ -1,4 +1,4 @@
-# חקור בכל הצ'אטים
+# Telegram · חקור בכל הצ'אטים
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/cases/
 

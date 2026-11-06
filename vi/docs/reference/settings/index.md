@@ -1,4 +1,4 @@
-# Cài đặt ban đầu và cấu hình
+# Telegram · Cài đặt ban đầu và cấu hình
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/settings/
 

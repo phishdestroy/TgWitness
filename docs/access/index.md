@@ -1,4 +1,4 @@
-# Share a case
+# Share Telegram Case Access with Reviewers
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/access/
 

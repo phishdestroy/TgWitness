@@ -1,4 +1,4 @@
-# آن را در حال اجرا نگه دارید
+# Telegram · آن را در حال اجرا نگه دارید
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/server/
 

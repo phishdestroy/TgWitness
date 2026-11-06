@@ -1,4 +1,4 @@
-# एक विटनेस बॉट सेट अप करें
+# Telegram · एक विटनेस बॉट सेट अप करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/witness/
 

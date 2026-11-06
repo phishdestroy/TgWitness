@@ -1,4 +1,4 @@
-# 設計報告
+# Telegram · 設計報告
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/
 

@@ -1,4 +1,4 @@
-# 首次設定與設定選項
+# Telegram · 首次設定與設定選項
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/settings/
 

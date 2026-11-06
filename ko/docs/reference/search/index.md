@@ -1,4 +1,4 @@
-# 전체 텍스트 검색
+# Telegram · 전체 텍스트 검색
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/search/
 

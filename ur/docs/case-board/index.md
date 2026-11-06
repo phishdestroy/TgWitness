@@ -1,4 +1,4 @@
-# کیس بورڈ بنائیں
+# Telegram · کیس بورڈ بنائیں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/case-board/
 

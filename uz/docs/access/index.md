@@ -1,4 +1,4 @@
-# Bir ishni baham ko'ring
+# Telegram · Bir ishni baham ko'ring
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/access/
 

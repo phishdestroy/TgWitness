@@ -1,4 +1,4 @@
-# Bir necha daqiqada boshlang
+# Telegram · Bir necha daqiqada boshlang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/start/
 

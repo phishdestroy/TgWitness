@@ -1,4 +1,4 @@
-# Hesaplar ve oturum biçimleri
+# Telegram · Hesaplar ve oturum biçimleri
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/
 

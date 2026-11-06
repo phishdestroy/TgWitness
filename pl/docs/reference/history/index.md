@@ -1,4 +1,4 @@
-# Wczytaj historię źródła
+# Telegram · Wczytaj historię źródła
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/history/
 

@@ -1,4 +1,4 @@
-# 収集の仕組み
+# Telegram · 収集の仕組み
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/
 

@@ -1,4 +1,4 @@
-# Rujukan lengkap
+# Telegram · Rujukan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/
 

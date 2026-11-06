@@ -1,4 +1,4 @@
-# โหมดการสืบสวน
+# Telegram · โหมดการสืบสวน
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/
 

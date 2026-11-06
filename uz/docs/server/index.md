@@ -1,4 +1,4 @@
-# Uni ishlashda davom ettiring
+# Telegram · Uni ishlashda davom ettiring
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/server/
 

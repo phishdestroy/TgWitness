@@ -1,4 +1,4 @@
-# بارگذاری تاریخچه منبع
+# Telegram · بارگذاری تاریخچه منبع
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/
 

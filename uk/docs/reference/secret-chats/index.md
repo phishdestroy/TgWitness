@@ -1,4 +1,4 @@
-# Таємні чати: реалізація та демонстрація
+# Telegram · Таємні чати: реалізація та демонстрація
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/secret-chats/
 

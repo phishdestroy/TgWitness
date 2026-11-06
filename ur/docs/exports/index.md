@@ -1,4 +1,4 @@
-# ایکسپورٹ اور تصدیق کریں
+# Telegram · ایکسپورٹ اور تصدیق کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/exports/
 

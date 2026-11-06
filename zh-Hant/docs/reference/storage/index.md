@@ -1,4 +1,4 @@
-# 儲存與還原
+# Telegram · 儲存與還原
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/
 

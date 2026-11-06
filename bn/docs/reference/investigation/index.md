@@ -1,4 +1,4 @@
-# তদন্ত মোড
+# Telegram · তদন্ত মোড
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/
 

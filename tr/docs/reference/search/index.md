@@ -1,4 +1,4 @@
-# Tam metin arama
+# Telegram · Tam metin arama
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/search/
 

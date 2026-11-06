@@ -1,4 +1,4 @@
-# แหล่งอ้างอิงครบถ้วน
+# Telegram · อ้างอิง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/
 

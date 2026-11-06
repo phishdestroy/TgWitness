@@ -1,4 +1,4 @@
-# สืบสวนในทุกการสนทนา
+# Telegram · สืบสวนในทุกการสนทนา
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/cases/
 

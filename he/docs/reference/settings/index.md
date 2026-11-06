@@ -1,4 +1,4 @@
-# התקנה ראשונית והגדרות
+# Telegram · התקנה ראשונית והגדרות
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/settings/
 

@@ -1,4 +1,4 @@
-# ค้นหาว่าเกิดข้อผิดพลาดอะไร
+# Telegram · ค้นหาว่าเกิดข้อผิดพลาดอะไร
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/troubleshooting/
 

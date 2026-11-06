@@ -1,4 +1,4 @@
-# セキュリティおよびデータ取り扱い
+# Telegram · セキュリティおよびデータ取り扱い
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/
 

@@ -1,4 +1,4 @@
-# 소스 기록 불러오기
+# Telegram · 소스 기록 불러오기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/
 

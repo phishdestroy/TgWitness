@@ -1,4 +1,4 @@
-# 時間戳記
+# Telegram · 時間戳記
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/
 

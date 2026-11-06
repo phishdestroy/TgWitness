@@ -1,4 +1,4 @@
-# 完全な参照情報
+# Telegram · 参考文献
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/
 

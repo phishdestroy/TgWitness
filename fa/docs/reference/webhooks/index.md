@@ -1,4 +1,4 @@
-# وب‌هوک‌های خروجی
+# Telegram · وب‌هوک‌های خروجی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/
 

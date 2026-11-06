@@ -1,4 +1,4 @@
-# सुरक्षा और डेटा प्रबंधन
+# Telegram · सुरक्षा और डेटा प्रबंधन
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/security/
 

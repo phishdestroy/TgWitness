@@ -1,4 +1,4 @@
-# Design a report
+# Telegram Evidence Reports: HTML & Signed PDF
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reports/
 

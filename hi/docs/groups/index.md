@@ -1,4 +1,4 @@
-# खातों के एक समूह का प्रबंधन करें
+# Telegram · खातों के एक समूह का प्रबंधन करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/groups/
 

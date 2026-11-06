@@ -1,4 +1,4 @@
-# 명령줄
+# Telegram · 명령줄
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/cli/
 

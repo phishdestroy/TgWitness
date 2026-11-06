@@ -1,4 +1,4 @@
-# Cómo funciona el registro de pruebas
+# Telegram · Cómo funciona el registro de pruebas
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/how-it-works/
 

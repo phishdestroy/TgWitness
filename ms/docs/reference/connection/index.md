@@ -1,4 +1,4 @@
-# Sambungan, proksi dan perlindungan data
+# Telegram · Sambungan, proksi dan perlindungan data
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/
 

@@ -1,4 +1,4 @@
-# ייצוא ואימות
+# Telegram · ייצוא ואימות
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/exports/
 

@@ -1,4 +1,4 @@
-# Бот-свидетель
+# Настройка бота-свидетеля для доказательств Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/witness/
 

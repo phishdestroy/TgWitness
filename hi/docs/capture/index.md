@@ -1,4 +1,4 @@
-# GitHub Actions कैप्चर
+# Telegram · GitHub Actions कैप्चर
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/capture/
 

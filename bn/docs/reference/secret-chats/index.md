@@ -1,4 +1,4 @@
-# গোপন চ্যাট: বাস্তবায়ন এবং ডেমো
+# Telegram · গোপন চ্যাট: বাস্তবায়ন এবং ডেমো
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/secret-chats/
 

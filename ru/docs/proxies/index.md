@@ -1,4 +1,4 @@
-# Выбор прокси
+# Прокси Telegram: MTProxy, SOCKS5 и маршрутизация
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/proxies/
 

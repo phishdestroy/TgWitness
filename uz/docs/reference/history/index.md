@@ -1,4 +1,4 @@
-# Manba tarixini yuklash
+# Telegram · Manba tarixini yuklash
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/
 

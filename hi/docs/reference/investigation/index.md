@@ -1,4 +1,4 @@
-# जांच मोड
+# Telegram · जांच मोड
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/
 

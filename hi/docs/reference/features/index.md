@@ -1,4 +1,4 @@
-# विशेषताएँ और सीमाएँ
+# Telegram · विशेषताएँ और सीमाएँ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/
 

@@ -1,4 +1,4 @@
-# از سوابق تلگرام تا یک پرونده شفاف.
+# Telegram · مستندسازی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/
 

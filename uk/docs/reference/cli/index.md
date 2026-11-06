@@ -1,4 +1,4 @@
-# Командний рядок
+# Telegram · Командний рядок
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/cli/
 

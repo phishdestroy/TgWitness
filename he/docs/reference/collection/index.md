@@ -1,4 +1,4 @@
-# כיצד מתבצע האיסוף
+# Telegram · כיצד מתבצע האיסוף
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/
 

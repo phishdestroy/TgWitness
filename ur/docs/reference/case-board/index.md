@@ -1,4 +1,4 @@
-# کیس بورڈ حوالہ
+# Telegram · کیس بورڈ حوالہ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/
 

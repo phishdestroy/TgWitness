@@ -1,4 +1,4 @@
-# Account export
+# Telegram Account Export: Scope & Signed Archives
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/account-export/
 

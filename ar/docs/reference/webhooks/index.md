@@ -1,4 +1,4 @@
-# الويب هوكس الصادرة
+# Telegram · الويب هوكس الصادرة
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/
 

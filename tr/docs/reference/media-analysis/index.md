@@ -1,4 +1,4 @@
-# Yerel OCR ve transkripsiyon
+# Telegram · Yerel OCR ve transkripsiyon
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/
 

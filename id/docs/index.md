@@ -1,4 +1,4 @@
-# Dari catatan Telegram menuju kasus yang jelas.
+# Telegram · Dokumentasi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/
 

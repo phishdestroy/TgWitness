@@ -1,4 +1,4 @@
-# 계정 그룹 관리
+# Telegram · 계정 그룹 관리
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/groups/
 

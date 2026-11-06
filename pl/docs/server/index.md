@@ -1,4 +1,4 @@
-# Prosimy o dalsze prowadzenie tej strony
+# Telegram · Prosimy o dalsze prowadzenie tej strony
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/server/
 

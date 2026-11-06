@@ -1,4 +1,4 @@
-# Choose a proxy
+# Telegram Proxies: MTProxy, SOCKS5 & Routing
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/proxies/
 

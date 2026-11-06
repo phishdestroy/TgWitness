@@ -1,4 +1,4 @@
-# Посібник з панелей
+# Telegram · Посібник з панелей
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/
 

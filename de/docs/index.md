@@ -1,4 +1,4 @@
-# Von Telegram-Datensätzen zu einem klaren Fall.
+# Telegram · Dokumentation
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/
 

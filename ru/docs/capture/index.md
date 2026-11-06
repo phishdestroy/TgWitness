@@ -1,4 +1,4 @@
-# Выгрузка через GitHub Actions
+# Экспорт Telegram через GitHub Actions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/capture/
 

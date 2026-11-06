@@ -1,4 +1,4 @@
-# إدارة مجموعة من الحسابات
+# Telegram · إدارة مجموعة من الحسابات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/groups/
 

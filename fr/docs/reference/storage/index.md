@@ -1,4 +1,4 @@
-# Stockage et restauration
+# Telegram · Stockage et restauration
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/storage/
 

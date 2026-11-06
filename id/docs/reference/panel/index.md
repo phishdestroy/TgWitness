@@ -1,4 +1,4 @@
-# Panduan panel
+# Telegram · Panduan panel
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/
 

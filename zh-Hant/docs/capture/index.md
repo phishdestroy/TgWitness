@@ -1,4 +1,4 @@
-# GitHub Actions 擷取
+# Telegram · GitHub Actions 擷取
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/capture/
 

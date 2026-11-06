@@ -1,4 +1,4 @@
-# 选择代理
+# Telegram · 选择代理
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/proxies/
 

@@ -1,4 +1,4 @@
-# सभी चैट्स में जांच करें
+# Telegram · सभी चैट्स में जांच करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/cases/
 

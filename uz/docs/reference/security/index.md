@@ -1,4 +1,4 @@
-# Xavfsizlik va ma'lumotlarni boshqarish
+# Telegram · Xavfsizlik va ma'lumotlarni boshqarish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/security/
 

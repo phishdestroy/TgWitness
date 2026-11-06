@@ -1,4 +1,4 @@
-# 選擇代理伺服器
+# Telegram · 選擇代理伺服器
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/proxies/
 

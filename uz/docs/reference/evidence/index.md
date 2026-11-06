@@ -1,4 +1,4 @@
-# Dalil formati
+# Telegram · Dalil formati
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/
 

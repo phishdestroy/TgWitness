@@ -1,4 +1,4 @@
-# Dışa aktarma ve doğrulama
+# Telegram · Dışa aktarma ve doğrulama
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/exports/
 

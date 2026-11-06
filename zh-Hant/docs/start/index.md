@@ -1,4 +1,4 @@
-# 幾分鐘內即可開始使用
+# Telegram · 幾分鐘內即可開始使用
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/start/
 

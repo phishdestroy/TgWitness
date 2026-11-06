@@ -1,4 +1,4 @@
-# Descubra o que deu errado
+# Telegram · Descubra o que deu errado
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/troubleshooting/
 

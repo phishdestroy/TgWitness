@@ -1,4 +1,4 @@
-# در چند دقیقه شروع کنید
+# Telegram · در چند دقیقه شروع کنید
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/start/
 

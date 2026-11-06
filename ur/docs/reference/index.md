@@ -1,4 +1,4 @@
-# مکمل حوالہ
+# Telegram · حوالہ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/
 

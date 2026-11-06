@@ -1,4 +1,4 @@
-# راه‌اندازی
+# Telegram · راه‌اندازی
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/
 

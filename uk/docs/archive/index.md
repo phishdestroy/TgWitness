@@ -1,4 +1,4 @@
-# Робота з архівом
+# Telegram · Робота з архівом
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/archive/
 

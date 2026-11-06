@@ -1,4 +1,4 @@
-# ببینید مدرک چگونه کار می‌کند
+# Telegram · ببینید مدرک چگونه کار می‌کند
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/concepts/
 

@@ -1,4 +1,4 @@
-# טען היסטוריית המקור
+# Telegram · טען היסטוריית המקור
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/history/
 

@@ -1,4 +1,4 @@
-# See how evidence works
+# Telegram Evidence: Hash Chains & Signatures
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/concepts/
 

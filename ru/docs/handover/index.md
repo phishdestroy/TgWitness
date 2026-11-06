@@ -1,4 +1,4 @@
-# Подготовьте копию для распространения
+# Передача доказательств Telegram с ограничением данных
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/handover/
 

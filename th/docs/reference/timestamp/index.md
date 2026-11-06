@@ -1,4 +1,4 @@
-# ข้อมูลเวลา
+# Telegram · ข้อมูลเวลา
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/timestamp/
 

@@ -1,4 +1,4 @@
-# حالت تحقیق
+# Telegram · حالت تحقیق
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/
 

@@ -1,4 +1,4 @@
-# 공개 쇼케이스
+# Telegram · 공개 쇼케이스
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/showcase/
 

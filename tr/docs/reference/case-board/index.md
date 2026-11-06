@@ -1,4 +1,4 @@
-# Case Board referansı
+# Telegram · Case Board referansı
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/case-board/
 

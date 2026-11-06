@@ -1,4 +1,4 @@
-# Hesap dışa aktarma
+# Telegram · Hesap dışa aktarma
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/account-export/
 

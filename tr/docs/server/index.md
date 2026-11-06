@@ -1,4 +1,4 @@
-# Çalışır durumda tutun
+# Telegram · Çalışır durumda tutun
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/server/
 

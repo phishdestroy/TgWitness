@@ -1,4 +1,4 @@
-# Завантажити історію джерел
+# Telegram · Завантажити історію джерел
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/
 

@@ -1,4 +1,4 @@
-# Witnessボットの設定
+# Telegram · Witnessボットの設定
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/witness/
 

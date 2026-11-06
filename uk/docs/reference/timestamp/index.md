@@ -1,4 +1,4 @@
-# Часові мітки
+# Telegram · Часові мітки
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/
 

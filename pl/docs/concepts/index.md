@@ -1,4 +1,4 @@
-# Zobacz, jak działa system gromadzenia dowodów
+# Telegram · Zobacz, jak działa system gromadzenia dowodów
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/concepts/
 

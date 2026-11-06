@@ -1,4 +1,4 @@
-# Tam referans
+# Telegram · Referans
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/
 

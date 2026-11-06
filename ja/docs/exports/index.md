@@ -1,4 +1,4 @@
-# エクスポートと検証
+# Telegram · エクスポートと検証
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/exports/
 

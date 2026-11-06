@@ -1,4 +1,4 @@
-# 全文検索
+# Telegram · 全文検索
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/search/
 

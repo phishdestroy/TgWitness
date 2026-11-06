@@ -1,4 +1,4 @@
-# Bağlantı, proxy'ler ve veri koruma
+# Telegram · Bağlantı, proxy'ler ve veri koruma
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/
 

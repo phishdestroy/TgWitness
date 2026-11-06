@@ -1,4 +1,4 @@
-# 계정 및 세션 형식
+# Telegram · 계정 및 세션 형식
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/
 

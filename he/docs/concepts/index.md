@@ -1,4 +1,4 @@
-# ראו כיצד הראיות פועלות
+# Telegram · ראו כיצד הראיות פועלות
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/concepts/
 

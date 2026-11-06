@@ -1,4 +1,4 @@
-# GitHub Actions merakam
+# Telegram · GitHub Actions merakam
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/capture/
 

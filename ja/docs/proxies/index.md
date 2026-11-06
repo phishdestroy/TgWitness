@@ -1,4 +1,4 @@
-# プロキシを選択してください
+# Telegram · プロキシを選択してください
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/proxies/
 

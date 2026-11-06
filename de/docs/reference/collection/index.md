@@ -1,4 +1,4 @@
-# So funktioniert die Datenerfassung
+# Telegram · So funktioniert die Datenerfassung
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/
 

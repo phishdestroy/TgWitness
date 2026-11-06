@@ -1,4 +1,4 @@
-# Vitrine pública
+# Telegram · Vitrine pública
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/showcase/
 

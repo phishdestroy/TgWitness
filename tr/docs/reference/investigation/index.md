@@ -1,4 +1,4 @@
-# Soruşturma modu
+# Telegram · Soruşturma modu
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/
 

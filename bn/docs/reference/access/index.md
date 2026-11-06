@@ -1,4 +1,4 @@
-# অ্যাক্সেস এবং অনুমতিসমূহ
+# Telegram · অ্যাক্সেস এবং অনুমতিসমূহ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/
 

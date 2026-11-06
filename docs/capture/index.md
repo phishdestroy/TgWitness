@@ -1,4 +1,4 @@
-# GitHub Actions capture
+# Export Telegram with GitHub Actions Capture
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/capture/
 

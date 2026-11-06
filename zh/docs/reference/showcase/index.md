@@ -1,4 +1,4 @@
-# 公开展示
+# Telegram · 公开展示
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/showcase/
 

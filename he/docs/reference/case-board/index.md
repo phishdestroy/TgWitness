@@ -1,4 +1,4 @@
-# הפניה ל-Case Board
+# Telegram · הפניה ל-Case Board
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/case-board/
 

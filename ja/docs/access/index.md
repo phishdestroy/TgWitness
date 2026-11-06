@@ -1,4 +1,4 @@
-# 事例を共有する
+# Telegram · 事例を共有する
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/access/
 

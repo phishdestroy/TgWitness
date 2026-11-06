@@ -1,4 +1,4 @@
-# Como funciona a evidência
+# Telegram · Como funciona a evidência
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/how-it-works/
 

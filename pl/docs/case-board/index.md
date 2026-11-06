@@ -1,4 +1,4 @@
-# Utwórz tablicę sprawy
+# Telegram · Utwórz tablicę sprawy
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/case-board/
 

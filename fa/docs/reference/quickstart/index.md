@@ -1,4 +1,4 @@
-# راه‌اندازی سریع
+# Telegram · راه‌اندازی سریع
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/
 

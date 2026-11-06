@@ -1,4 +1,4 @@
-# כיצד פועלת הראיה
+# Telegram · כיצד פועלת הראיה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/
 

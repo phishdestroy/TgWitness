@@ -1,4 +1,4 @@
-# راه‌اندازی یک بات شاهد
+# Telegram · راه‌اندازی یک بات شاهد
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/witness/
 

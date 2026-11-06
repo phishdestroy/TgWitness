@@ -1,4 +1,4 @@
-# An ninh và xử lý dữ liệu
+# Telegram · An ninh và xử lý dữ liệu
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/security/
 

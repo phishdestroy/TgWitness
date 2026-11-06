@@ -1,4 +1,4 @@
-# 访问与权限
+# Telegram · 访问与权限
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/
 

@@ -1,4 +1,4 @@
-# کنیکشن، پراکسیز اور ڈیٹا کی حفاظت
+# Telegram · کنیکشن، پراکسیز اور ڈیٹا کی حفاظت
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/
 

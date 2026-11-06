@@ -1,4 +1,4 @@
-# Eksport va tekshirish
+# Telegram · Eksport va tekshirish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/exports/
 

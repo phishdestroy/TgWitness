@@ -1,4 +1,4 @@
-# خصوصیات اور حدود
+# Telegram · خصوصیات اور حدود
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/
 

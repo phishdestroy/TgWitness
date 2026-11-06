@@ -1,4 +1,4 @@
-# 接続、プロキシ、およびデータ保護
+# Telegram · 接続、プロキシ、およびデータ保護
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/
 

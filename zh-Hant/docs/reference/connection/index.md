@@ -1,4 +1,4 @@
-# 連線、代理伺服器與資料保護
+# Telegram · 連線、代理伺服器與資料保護
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/
 

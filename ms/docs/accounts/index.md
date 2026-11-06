@@ -1,4 +1,4 @@
-# Sambungkan akaun
+# Telegram · Sambungkan akaun
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/accounts/
 

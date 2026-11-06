@@ -1,4 +1,4 @@
-# آرکائیو کا تجزیہ
+# Telegram · آرکائیو کا تجزیہ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/
 

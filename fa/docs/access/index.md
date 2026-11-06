@@ -1,4 +1,4 @@
-# یک مورد را به اشتراک بگذارید
+# Telegram · یک مورد را به اشتراک بگذارید
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/access/
 

@@ -1,4 +1,4 @@
-# 저장 및 복구
+# Telegram · 저장 및 복구
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/
 

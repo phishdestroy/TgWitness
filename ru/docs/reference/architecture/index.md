@@ -1,4 +1,4 @@
-# Архитектура
+# Архитектура TgWitness: сборщик, журнал и API
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/
 

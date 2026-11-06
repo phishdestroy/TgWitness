@@ -1,4 +1,4 @@
-# Paylaşım kopyası hazırlayın
+# Telegram · Paylaşım kopyası hazırlayın
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/handover/
 

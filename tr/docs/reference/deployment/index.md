@@ -1,4 +1,4 @@
-# Uygulama
+# Telegram · Uygulama
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/
 

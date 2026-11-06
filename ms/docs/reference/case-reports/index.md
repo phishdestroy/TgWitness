@@ -1,4 +1,4 @@
-# Konfigurasi dan pengesahan laporan
+# Telegram · Konfigurasi dan pengesahan laporan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/
 

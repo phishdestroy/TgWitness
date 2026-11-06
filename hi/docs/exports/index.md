@@ -1,4 +1,4 @@
-# निर्यात करें और सत्यापित करें
+# Telegram · निर्यात करें और सत्यापित करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/exports/
 

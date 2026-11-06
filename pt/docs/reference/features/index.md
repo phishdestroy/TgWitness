@@ -1,4 +1,4 @@
-# Recursos e limitações
+# Telegram · Recursos e limitações
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/
 

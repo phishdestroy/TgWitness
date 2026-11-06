@@ -1,4 +1,4 @@
-# 秘密聊天：实现与演示
+# Telegram · 秘密聊天：实现与演示
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/secret-chats/
 

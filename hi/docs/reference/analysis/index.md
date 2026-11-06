@@ -1,4 +1,4 @@
-# संग्रह विश्लेषण
+# Telegram · संग्रह विश्लेषण
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/
 

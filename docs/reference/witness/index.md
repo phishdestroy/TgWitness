@@ -1,4 +1,4 @@
-# Independent witness
+# Independent Evidence Witness & Journal Continuity
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/witness/
 

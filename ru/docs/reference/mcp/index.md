@@ -1,4 +1,4 @@
-# MCP только для чтения
+# MCP-сервер архива Telegram: доступ только для чтения
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/mcp/
 

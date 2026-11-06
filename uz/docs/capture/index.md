@@ -1,4 +1,4 @@
-# GitHub Actions yozib oladi
+# Telegram · GitHub Actions yozib oladi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/capture/
 

@@ -1,4 +1,4 @@
-# Schreibgeschütztes MCP
+# Telegram · Schreibgeschütztes MCP
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/mcp/
 

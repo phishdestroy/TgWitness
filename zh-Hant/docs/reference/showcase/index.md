@@ -1,4 +1,4 @@
-# 公開展示
+# Telegram · 公開展示
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/showcase/
 

@@ -1,4 +1,4 @@
-# কমান্ড লাইন
+# Telegram · কমান্ড লাইন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/cli/
 

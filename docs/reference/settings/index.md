@@ -1,4 +1,4 @@
-# First setup and settings
+# Telegram Collection Setup & TgWitness Settings
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/settings/
 

@@ -1,4 +1,4 @@
-# 公開ショーケース
+# Telegram · 公開ショーケース
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/showcase/
 

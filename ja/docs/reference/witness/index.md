@@ -1,4 +1,4 @@
-# 独立した証人
+# Telegram · 独立した証人
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/
 

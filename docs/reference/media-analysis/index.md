@@ -1,4 +1,4 @@
-# Local OCR and transcription
+# Telegram Media OCR & Audio Transcription
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/
 

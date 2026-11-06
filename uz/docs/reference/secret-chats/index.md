@@ -1,4 +1,4 @@
-# Yashirin suhbatlar: amalga oshirish va demo
+# Telegram · Yashirin suhbatlar: amalga oshirish va demo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/secret-chats/
 

@@ -1,4 +1,4 @@
-# یک بورد پرونده بسازید
+# Telegram · یک بورد پرونده بسازید
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/case-board/
 

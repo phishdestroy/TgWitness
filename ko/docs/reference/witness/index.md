@@ -1,4 +1,4 @@
-# 독립적인 증인
+# Telegram · 독립적인 증인
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/
 

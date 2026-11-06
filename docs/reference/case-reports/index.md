@@ -1,4 +1,4 @@
-# Report configuration and verification
+# Telegram Report Formats & Signed PDF Verification
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/
 

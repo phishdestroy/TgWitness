@@ -1,4 +1,4 @@
-# Работа с архивом
+# Поиск и анализ сохранённого архива Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/archive/
 

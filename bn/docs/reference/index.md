@@ -1,4 +1,4 @@
-# সম্পূর্ণ রেফারেন্স
+# Telegram · তথ্যসূত্র
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/
 

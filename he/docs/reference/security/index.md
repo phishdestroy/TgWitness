@@ -1,4 +1,4 @@
-# אבטחה וטיפול בנתונים
+# Telegram · אבטחה וטיפול בנתונים
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/security/
 

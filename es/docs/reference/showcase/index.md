@@ -1,4 +1,4 @@
-# Mostrador público
+# Telegram · Mostrador público
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/showcase/
 

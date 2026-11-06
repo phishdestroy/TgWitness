@@ -1,4 +1,4 @@
-# ההפניה המלאה
+# Telegram · הפניה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/
 

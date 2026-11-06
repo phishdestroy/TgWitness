@@ -1,4 +1,4 @@
-# Запис дій на GitHub Actions
+# Telegram · Запис дій на GitHub Actions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/capture/
 

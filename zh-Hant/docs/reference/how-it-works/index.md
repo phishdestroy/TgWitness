@@ -1,4 +1,4 @@
-# 證據的運作方式
+# Telegram · 證據的運作方式
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/
 

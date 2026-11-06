@@ -1,4 +1,4 @@
-# Tryb dochodzeniowy
+# Telegram · Tryb dochodzeniowy
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/
 

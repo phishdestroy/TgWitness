@@ -1,4 +1,4 @@
-# खाते और सत्र प्रारूप
+# Telegram · खाते और सत्र प्रारूप
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/
 

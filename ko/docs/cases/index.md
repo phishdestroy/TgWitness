@@ -1,4 +1,4 @@
-# 모든 채팅을 대상으로 조사하기
+# Telegram · 모든 채팅을 대상으로 조사하기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/cases/
 

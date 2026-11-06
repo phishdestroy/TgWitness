@@ -1,4 +1,4 @@
-# مدیریت گروهی از حساب‌ها
+# Telegram · مدیریت گروهی از حساب‌ها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/groups/
 

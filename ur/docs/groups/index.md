@@ -1,4 +1,4 @@
-# اکاؤنٹس کے ایک گروپ کا انتظام کریں
+# Telegram · اکاؤنٹس کے ایک گروپ کا انتظام کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/groups/
 

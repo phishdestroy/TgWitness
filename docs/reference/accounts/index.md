@@ -1,4 +1,4 @@
-# Accounts and session formats
+# Telegram Session Formats: TData & Telethon
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/accounts/
 

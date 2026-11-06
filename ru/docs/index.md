@@ -1,4 +1,4 @@
-# От записей Telegram до четкого дела.
+# Telegram: экспорт, расследования и проверка доказательств
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/
 

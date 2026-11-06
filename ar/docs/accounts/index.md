@@ -1,4 +1,4 @@
-# ربط حساب
+# Telegram · ربط حساب
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/accounts/
 

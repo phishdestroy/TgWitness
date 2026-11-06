@@ -1,4 +1,4 @@
-# Muat riwayat sumber
+# Telegram · Muat riwayat sumber
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/history/
 

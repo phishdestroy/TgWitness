@@ -1,4 +1,4 @@
-# Assurez-en la sécurité
+# Telegram · Assurez-en la sécurité
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/security/
 

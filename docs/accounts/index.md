@@ -1,4 +1,4 @@
-# Connect an account
+# Connect Telegram: QR, Phone & Session Import
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/accounts/
 

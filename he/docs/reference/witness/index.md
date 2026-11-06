@@ -1,4 +1,4 @@
-# עד עצמאי
+# Telegram · עד עצמאי
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/
 

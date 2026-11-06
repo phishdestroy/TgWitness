@@ -1,4 +1,4 @@
-# Toʻliq ma'lumotnoma
+# Telegram · Manba
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/
 

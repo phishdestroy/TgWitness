@@ -1,4 +1,4 @@
-# Dalillar qanday ishlashini ko'ring
+# Telegram · Dalillar qanday ishlashini ko'ring
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/concepts/
 

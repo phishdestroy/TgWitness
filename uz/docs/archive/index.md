@@ -1,4 +1,4 @@
-# Arxiv bilan ishlash
+# Telegram · Arxiv bilan ishlash
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/archive/
 

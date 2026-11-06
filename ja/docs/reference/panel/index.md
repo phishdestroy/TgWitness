@@ -1,4 +1,4 @@
-# パネルガイド
+# Telegram · パネルガイド
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/
 

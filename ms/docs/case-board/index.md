@@ -1,4 +1,4 @@
-# Bina Papan Kes
+# Telegram · Bina Papan Kes
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/case-board/
 

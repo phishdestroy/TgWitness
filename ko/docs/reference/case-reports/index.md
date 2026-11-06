@@ -1,4 +1,4 @@
-# 보고서 구성 및 검증
+# Telegram · 보고서 구성 및 검증
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/
 

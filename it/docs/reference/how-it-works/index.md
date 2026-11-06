@@ -1,4 +1,4 @@
-# Come funziona la raccolta delle prove
+# Telegram · Come funziona la raccolta delle prove
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/how-it-works/
 

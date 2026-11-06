@@ -1,4 +1,4 @@
-# Формати облікових записів та сеансів
+# Telegram · Формати облікових записів та сеансів
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/
 

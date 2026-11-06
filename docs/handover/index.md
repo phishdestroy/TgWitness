@@ -1,4 +1,4 @@
-# Prepare a sharing copy
+# Share Telegram Evidence with Limited Disclosure
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/handover/
 

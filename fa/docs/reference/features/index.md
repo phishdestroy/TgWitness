@@ -1,4 +1,4 @@
-# ویژگی‌ها و محدودیت‌ها
+# Telegram · ویژگی‌ها و محدودیت‌ها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/
 

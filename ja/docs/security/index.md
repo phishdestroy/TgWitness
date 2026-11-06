@@ -1,4 +1,4 @@
-# セキュリティを確保してください
+# Telegram · セキュリティを確保してください
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/security/
 

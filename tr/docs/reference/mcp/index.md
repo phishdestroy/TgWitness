@@ -1,4 +1,4 @@
-# Salt okunur MCP
+# Telegram · Salt okunur MCP
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/
 

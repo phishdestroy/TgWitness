@@ -1,4 +1,4 @@
-# Komut satırı
+# Telegram · Komut satırı
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/cli/
 

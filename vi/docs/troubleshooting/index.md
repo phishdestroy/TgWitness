@@ -1,4 +1,4 @@
-# Tìm hiểu nguyên nhân sự cố
+# Telegram · Tìm hiểu nguyên nhân sự cố
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/troubleshooting/
 

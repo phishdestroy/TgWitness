@@ -1,4 +1,4 @@
-# Discussions secrètes : implémentation et démonstration
+# Telegram · Discussions secrètes : implémentation et démonstration
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/secret-chats/
 

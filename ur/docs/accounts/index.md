@@ -1,4 +1,4 @@
-# اکاؤنٹ منسلک کریں
+# Telegram · اکاؤنٹ منسلک کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/accounts/
 

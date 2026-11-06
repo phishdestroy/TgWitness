@@ -1,4 +1,4 @@
-# Öffentliches Showcase
+# Telegram · Öffentliches Showcase
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/showcase/
 

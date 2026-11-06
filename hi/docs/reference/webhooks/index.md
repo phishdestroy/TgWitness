@@ -1,4 +1,4 @@
-# आउटगोइंग वेबहुक्स
+# Telegram · आउटगोइंग वेबहुक्स
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/
 

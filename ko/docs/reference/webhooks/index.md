@@ -1,4 +1,4 @@
-# 발신 웹훅
+# Telegram · 발신 웹훅
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/
 

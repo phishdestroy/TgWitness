@@ -1,4 +1,4 @@
-# גלה מה השתבש
+# Telegram · גלה מה השתבש
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/troubleshooting/
 

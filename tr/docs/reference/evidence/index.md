@@ -1,4 +1,4 @@
-# Kanıt formatı
+# Telegram · Kanıt formatı
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/
 

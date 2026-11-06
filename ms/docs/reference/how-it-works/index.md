@@ -1,4 +1,4 @@
-# Bagaimana bukti berfungsi
+# Telegram · Bagaimana bukti berfungsi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/
 

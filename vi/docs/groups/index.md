@@ -1,4 +1,4 @@
-# Quản lý một nhóm tài khoản
+# Telegram · Quản lý một nhóm tài khoản
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/groups/
 

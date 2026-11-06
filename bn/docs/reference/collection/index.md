@@ -1,4 +1,4 @@
-# সংগ্রহ কীভাবে কাজ করে
+# Telegram · সংগ্রহ কীভাবে কাজ করে
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/
 

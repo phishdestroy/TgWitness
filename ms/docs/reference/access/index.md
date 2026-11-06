@@ -1,4 +1,4 @@
-# Akses dan kebenaran
+# Telegram · Akses dan kebenaran
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/
 

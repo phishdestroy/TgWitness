@@ -1,4 +1,4 @@
-# レポートの作成
+# Telegram · レポートの作成
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reports/
 

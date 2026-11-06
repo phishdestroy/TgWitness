@@ -1,4 +1,4 @@
-# Marcatori temporali
+# Telegram · Marcatori temporali
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/timestamp/
 

@@ -1,4 +1,4 @@
-# すべてのチャットを横断的に調査する
+# Telegram · すべてのチャットを横断的に調査する
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/cases/
 

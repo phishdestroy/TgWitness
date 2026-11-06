@@ -1,4 +1,4 @@
-# 送信されるWebhook
+# Telegram · 送信されるWebhook
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/
 

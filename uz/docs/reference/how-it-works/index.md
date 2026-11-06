@@ -1,4 +1,4 @@
-# Dalil qanday ishlaydi
+# Telegram · Dalil qanday ishlaydi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/
 

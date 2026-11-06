@@ -1,4 +1,4 @@
-# गुप्त चैट्स: कार्यान्वयन और डेमो
+# Telegram · गुप्त चैट्स: कार्यान्वयन और डेमो
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/secret-chats/
 

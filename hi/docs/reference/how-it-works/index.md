@@ -1,4 +1,4 @@
-# साक्ष्य कैसे काम करता है
+# Telegram · साक्ष्य कैसे काम करता है
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/
 

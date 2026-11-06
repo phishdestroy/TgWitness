@@ -1,4 +1,4 @@
-# مشخص کنید چه چیزی اشتباه پیش رفته است
+# Telegram · مشخص کنید چه چیزی اشتباه پیش رفته است
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/troubleshooting/
 

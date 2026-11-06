@@ -1,4 +1,4 @@
-# Keep it running
+# Host TgWitness: Telegram Collection Server
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/server/
 

@@ -1,4 +1,4 @@
-# シークレットチャット：実装とデモ
+# Telegram · シークレットチャット：実装とデモ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/secret-chats/
 

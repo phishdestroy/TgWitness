@@ -1,4 +1,4 @@
-# Evidence format
+# Telegram Evidence Archive Format & Verification
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/evidence/
 

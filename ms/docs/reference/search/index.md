@@ -1,4 +1,4 @@
-# Carian penuh
+# Telegram · Carian penuh
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/search/
 

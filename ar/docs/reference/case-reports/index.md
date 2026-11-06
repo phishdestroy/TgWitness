@@ -1,4 +1,4 @@
-# تكوين التقارير والتحقق منها
+# Telegram · تكوين التقارير والتحقق منها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/
 

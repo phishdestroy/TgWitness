@@ -1,4 +1,4 @@
-# Modalità di indagine
+# Telegram · Modalità di indagine
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/investigation/
 

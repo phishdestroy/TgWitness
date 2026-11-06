@@ -1,4 +1,4 @@
-# Read-only MCP
+# Telegram Archive MCP Server: Read-Only Access
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/mcp/
 

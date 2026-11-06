@@ -1,4 +1,4 @@
-# 調查模式
+# Telegram · 調查模式
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/
 

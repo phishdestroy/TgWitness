@@ -1,4 +1,4 @@
-# Як працює система збереження доказів
+# Telegram · Як працює система збереження доказів
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/
 

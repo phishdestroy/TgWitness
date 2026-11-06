@@ -1,4 +1,4 @@
-# Set up a witness bot
+# Set Up a Telegram Evidence Witness Bot
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/witness/
 

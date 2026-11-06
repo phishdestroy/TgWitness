@@ -1,4 +1,4 @@
-# اکاؤنٹس اور سیشن فارمیٹس
+# Telegram · اکاؤنٹس اور سیشن فارمیٹس
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/
 

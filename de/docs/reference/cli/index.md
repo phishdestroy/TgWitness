@@ -1,4 +1,4 @@
-# Befehlszeile
+# Telegram · Befehlszeile
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/cli/
 

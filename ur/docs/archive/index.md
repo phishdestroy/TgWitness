@@ -1,4 +1,4 @@
-# آرکائیو پر کام کریں
+# Telegram · آرکائیو پر کام کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/archive/
 

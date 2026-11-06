@@ -1,4 +1,4 @@
-# การเข้าถึงและสิทธิ์
+# Telegram · การเข้าถึงและสิทธิ์
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/access/
 

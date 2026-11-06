@@ -1,4 +1,4 @@
-# בחר פרוקסי
+# Telegram · בחר פרוקסי
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/proxies/
 

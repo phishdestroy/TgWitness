@@ -1,4 +1,4 @@
-# रिपोर्ट डिज़ाइन करें
+# Telegram · रिपोर्ट डिज़ाइन करें
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reports/
 

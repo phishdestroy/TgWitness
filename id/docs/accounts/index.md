@@ -1,4 +1,4 @@
-# Hubungkan akun
+# Telegram · Hubungkan akun
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/accounts/
 

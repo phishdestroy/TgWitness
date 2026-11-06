@@ -1,4 +1,4 @@
-# Implementazione ad alta sicurezza
+# Phala / Intel TDX · Implementazione ad alta sicurezza
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/
 

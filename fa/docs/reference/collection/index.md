@@ -1,4 +1,4 @@
-# نحوهٔ کارکرد جمع‌آوری
+# Telegram · نحوهٔ کارکرد جمع‌آوری
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/
 

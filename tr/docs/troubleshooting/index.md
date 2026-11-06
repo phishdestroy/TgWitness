@@ -1,4 +1,4 @@
-# Neyin yanlış gittiğini bulun
+# Telegram · Neyin yanlış gittiğini bulun
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/troubleshooting/
 

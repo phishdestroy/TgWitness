@@ -1,4 +1,4 @@
-# Ulanish, proksi va ma'lumotlarni himoya qilish
+# Telegram · Ulanish, proksi va ma'lumotlarni himoya qilish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/
 

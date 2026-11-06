@@ -1,4 +1,4 @@
-# การบันทึกด้วย GitHub Actions
+# Telegram · การบันทึกด้วย GitHub Actions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/capture/
 

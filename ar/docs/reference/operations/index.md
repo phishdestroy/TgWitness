@@ -1,4 +1,4 @@
-# سير العمل والعمليات
+# Telegram · سير العمل والعمليات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/
 

@@ -1,4 +1,4 @@
-# Penyebaran
+# Telegram · Penyebaran
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/
 

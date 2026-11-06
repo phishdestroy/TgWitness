@@ -1,4 +1,4 @@
-# عرض عام
+# Telegram · عرض عام
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/showcase/
 

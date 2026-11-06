@@ -1,4 +1,4 @@
-# Quản lý kho lưu trữ
+# Telegram · Quản lý kho lưu trữ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/archive/
 

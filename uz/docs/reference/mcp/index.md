@@ -1,4 +1,4 @@
-# Faqat o'qish uchun MCP
+# Telegram · Faqat o'qish uchun MCP
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/
 

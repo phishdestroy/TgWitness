@@ -1,4 +1,4 @@
-# Zeitstempel
+# Telegram · Zeitstempel
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/timestamp/
 

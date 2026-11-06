@@ -1,4 +1,4 @@
-# 本地 OCR 和转录
+# Telegram · 本地 OCR 和转录
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/
 

@@ -1,4 +1,4 @@
-# MCP للقراءة فقط
+# Telegram · MCP للقراءة فقط
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/
 

@@ -1,4 +1,4 @@
-# دليل اللوحة
+# Telegram · دليل اللوحة
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel/
 

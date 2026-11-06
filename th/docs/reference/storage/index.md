@@ -1,4 +1,4 @@
-# การเก็บรักษาและกู้คืนข้อมูล
+# Telegram · การเก็บรักษาและกู้คืนข้อมูล
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/
 

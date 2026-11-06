@@ -1,4 +1,4 @@
-# Bagikan sebuah kasus
+# Telegram · Bagikan sebuah kasus
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/access/
 

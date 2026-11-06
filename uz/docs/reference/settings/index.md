@@ -1,4 +1,4 @@
-# Birinchi sozlash va parametrlar
+# Telegram · Birinchi sozlash va parametrlar
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/settings/
 

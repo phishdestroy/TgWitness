@@ -1,4 +1,4 @@
-# 高可信度部署
+# Phala / Intel TDX · 高可信度部署
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/
 

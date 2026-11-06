@@ -1,4 +1,4 @@
-# Экспорт и проверка
+# Экспорт чатов Telegram и проверка подписанного архива
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/exports/
 

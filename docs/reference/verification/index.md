@@ -1,4 +1,4 @@
-# What has been tested
+# TgWitness Test Evidence & Qualification Limits
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/verification/
 

@@ -1,4 +1,4 @@
-# תכונות ומגבלות
+# Telegram · תכונות ומגבלות
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/features/
 

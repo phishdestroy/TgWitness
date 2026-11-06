@@ -1,4 +1,4 @@
-# Kết nối, máy chủ trung gian và bảo vệ dữ liệu
+# Telegram · Kết nối, máy chủ trung gian và bảo vệ dữ liệu
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/
 

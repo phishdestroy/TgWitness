@@ -1,4 +1,4 @@
-# Temui apa yang salah
+# Telegram · Temui apa yang salah
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/troubleshooting/
 

@@ -1,4 +1,4 @@
-# 檔案分析
+# Telegram · 檔案分析
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/
 

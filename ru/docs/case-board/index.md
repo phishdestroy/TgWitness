@@ -1,4 +1,4 @@
-# Создание Case Board
+# Доска дела: сообщения и доказательства Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/case-board/
 

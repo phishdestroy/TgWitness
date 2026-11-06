@@ -1,4 +1,4 @@
-# Access and permissions
+# TgWitness Access Tokens, Scopes & Permissions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/access/
 

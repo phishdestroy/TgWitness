@@ -1,4 +1,4 @@
-# Исходящие веб-хуки
+# Вебхуки TgWitness: HMAC-подпись и доставка событий
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/webhooks/
 

@@ -1,4 +1,4 @@
-# Як відбувається збір даних
+# Telegram · Як відбувається збір даних
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/
 

@@ -1,4 +1,4 @@
-# নিরাপত্তা এবং ডেটা হ্যান্ডলিং
+# Telegram · নিরাপত্তা এবং ডেটা হ্যান্ডলিং
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/security/
 

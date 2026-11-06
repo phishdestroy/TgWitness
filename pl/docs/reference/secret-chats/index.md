@@ -1,4 +1,4 @@
-# Ciche czaty: implementacja i demonstracja
+# Telegram · Ciche czaty: implementacja i demonstracja
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/secret-chats/
 

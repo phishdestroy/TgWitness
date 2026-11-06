@@ -1,4 +1,4 @@
-# جاں نکلنے والے ویب ہُکس
+# Telegram · جاں نکلنے والے ویب ہُکس
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/
 

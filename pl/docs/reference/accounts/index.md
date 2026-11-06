@@ -1,4 +1,4 @@
-# Konta i formaty sesji
+# Telegram · Konta i formaty sesji
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/
 

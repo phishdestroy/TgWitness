@@ -1,4 +1,4 @@
-# Доступ и разрешения
+# Токены, области доступа и разрешения TgWitness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/
 

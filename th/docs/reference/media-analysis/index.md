@@ -1,4 +1,4 @@
-# OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น
+# Telegram · OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/
 

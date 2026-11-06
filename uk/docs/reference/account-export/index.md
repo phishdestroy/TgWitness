@@ -1,4 +1,4 @@
-# Експорт облікового запису
+# Telegram · Експорт облікового запису
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/account-export/
 

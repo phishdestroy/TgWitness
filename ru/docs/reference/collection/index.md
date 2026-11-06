@@ -1,4 +1,4 @@
-# Как устроен сбор
+# Сбор Telegram: сообщения, правки и уведомления об удалении
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/
 

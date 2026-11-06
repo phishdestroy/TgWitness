@@ -1,4 +1,4 @@
-# Аккаунты и форматы сессий
+# Сессии Telegram: TData, Telethon и способы импорта
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/
 

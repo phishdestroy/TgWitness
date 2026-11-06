@@ -1,4 +1,4 @@
-# সমস্ত চ্যাট জুড়ে তদন্ত করুন
+# Telegram · সমস্ত চ্যাট জুড়ে তদন্ত করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/cases/
 

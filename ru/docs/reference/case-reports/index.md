@@ -1,4 +1,4 @@
-# Настройка и проверка отчетов
+# Форматы отчётов Telegram и проверка подписанного PDF
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/case-reports/
 

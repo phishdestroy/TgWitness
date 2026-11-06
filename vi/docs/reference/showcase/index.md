@@ -1,4 +1,4 @@
-# Trưng bày công khai
+# Telegram · Trưng bày công khai
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/showcase/
 

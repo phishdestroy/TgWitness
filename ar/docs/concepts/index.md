@@ -1,4 +1,4 @@
-# تعرف على كيفية عمل الأدلة
+# Telegram · تعرف على كيفية عمل الأدلة
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/concepts/
 

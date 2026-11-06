@@ -1,4 +1,4 @@
-# Sorgen Sie für Sicherheit
+# Telegram · Sorgen Sie für Sicherheit
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/security/
 

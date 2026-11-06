@@ -1,4 +1,4 @@
-# 로컬 OCR 및 텍스트 변환
+# Telegram · 로컬 OCR 및 텍스트 변환
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/
 

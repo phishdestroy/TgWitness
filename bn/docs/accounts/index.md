@@ -1,4 +1,4 @@
-# একটি অ্যাকাউন্ট সংযুক্ত করুন
+# Telegram · একটি অ্যাকাউন্ট সংযুক্ত করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/accounts/
 

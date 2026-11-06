@@ -1,4 +1,4 @@
-# アカウントとセッション形式
+# Telegram · アカウントとセッション形式
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/
 

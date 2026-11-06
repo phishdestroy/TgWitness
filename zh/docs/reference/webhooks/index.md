@@ -1,4 +1,4 @@
-# 外发 webhook
+# Telegram · 外发 webhook
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/
 

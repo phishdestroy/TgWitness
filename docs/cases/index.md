@@ -1,4 +1,4 @@
-# Investigate across all chats
+# Telegram OSINT Investigations Across Chats
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/cases/
 

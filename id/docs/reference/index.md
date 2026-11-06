@@ -1,4 +1,4 @@
-# Referensi lengkap
+# Telegram · Referensi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/
 

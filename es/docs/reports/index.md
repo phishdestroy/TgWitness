@@ -1,4 +1,4 @@
-# Diseñar un informe
+# Telegram · Diseñar un informe
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reports/
 

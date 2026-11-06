@@ -1,4 +1,4 @@
-# Підключити обліковий запис
+# Telegram · Підключити обліковий запис
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/accounts/
 

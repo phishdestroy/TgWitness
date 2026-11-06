@@ -1,4 +1,4 @@
-# 계속 운영해 주세요
+# Telegram · 계속 운영해 주세요
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/server/
 

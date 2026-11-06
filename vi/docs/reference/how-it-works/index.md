@@ -1,4 +1,4 @@
-# Cách thức hoạt động của bằng chứng
+# Telegram · Cách thức hoạt động của bằng chứng
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/
 

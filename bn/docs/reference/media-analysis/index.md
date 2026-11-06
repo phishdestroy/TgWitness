@@ -1,4 +1,4 @@
-# স্থানীয় OCR এবং প্রতিলিপি
+# Telegram · স্থানীয় OCR এবং প্রতিলিপি
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/
 

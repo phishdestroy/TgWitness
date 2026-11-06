@@ -1,4 +1,4 @@
-# Proxy tanlang
+# Telegram · Proxy tanlang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/proxies/
 

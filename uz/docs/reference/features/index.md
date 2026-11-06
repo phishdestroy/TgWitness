@@ -1,4 +1,4 @@
-# Imkoniyatlar va cheklovlar
+# Telegram · Imkoniyatlar va cheklovlar
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/
 

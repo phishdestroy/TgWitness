@@ -1,4 +1,4 @@
-# פריסה ברמת אבטחה גבוהה
+# Phala / Intel TDX · פריסה ברמת אבטחה גבוהה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/
 

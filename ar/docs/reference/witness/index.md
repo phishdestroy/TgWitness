@@ -1,4 +1,4 @@
-# شاهد مستقل
+# Telegram · شاهد مستقل
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/
 

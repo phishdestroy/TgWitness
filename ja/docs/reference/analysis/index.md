@@ -1,4 +1,4 @@
-# アーカイブ分析
+# Telegram · アーカイブ分析
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/
 

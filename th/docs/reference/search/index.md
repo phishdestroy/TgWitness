@@ -1,4 +1,4 @@
-# การค้นหาข้อความเต็ม
+# Telegram · การค้นหาข้อความเต็ม
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/search/
 

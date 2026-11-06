@@ -1,4 +1,4 @@
-# 사례 공유하기
+# Telegram · 사례 공유하기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/access/
 

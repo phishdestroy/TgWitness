@@ -1,4 +1,4 @@
-# অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ
+# Telegram · অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/
 

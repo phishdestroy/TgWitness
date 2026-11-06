@@ -1,4 +1,4 @@
-# چگونگی کارکرد شواهد
+# Telegram · چگونگی کارکرد شواهد
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/
 

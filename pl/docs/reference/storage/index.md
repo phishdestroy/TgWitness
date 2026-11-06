@@ -1,4 +1,4 @@
-# Przechowywanie i odzyskiwanie
+# Telegram · Przechowywanie i odzyskiwanie
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/storage/
 

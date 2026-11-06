@@ -1,4 +1,4 @@
-# ابدأ في غضون دقائق
+# Telegram · ابدأ في غضون دقائق
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/start/
 

@@ -1,4 +1,4 @@
-# Témoin indépendant
+# Telegram · Témoin indépendant
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/
 

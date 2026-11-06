@@ -1,4 +1,4 @@
-# Przeprowadzanie dochodzeń we wszystkich czatach
+# Telegram · Przeprowadzanie dochodzeń we wszystkich czatach
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/cases/
 

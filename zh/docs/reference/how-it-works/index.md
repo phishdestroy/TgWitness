@@ -1,4 +1,4 @@
-# 证据的运作原理
+# Telegram · 证据的运作原理
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/
 

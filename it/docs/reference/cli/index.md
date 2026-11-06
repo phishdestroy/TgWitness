@@ -1,4 +1,4 @@
-# Riga di comando
+# Telegram · Riga di comando
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/cli/
 

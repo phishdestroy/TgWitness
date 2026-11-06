@@ -1,4 +1,4 @@
-# Anleitung zum Panel
+# Telegram · Anleitung zum Panel
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/panel/
 

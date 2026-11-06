@@ -1,4 +1,4 @@
-# Mengelola arsip
+# Telegram · Mengelola arsip
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/archive/
 

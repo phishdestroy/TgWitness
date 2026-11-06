@@ -1,4 +1,4 @@
-# Загрузить историю источников
+# Загрузка истории Telegram и подписанный отчёт о ходе
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/history/
 

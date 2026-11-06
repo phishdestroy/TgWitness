@@ -1,4 +1,4 @@
-# Configuração e verificação de relatórios
+# Telegram · Configuração e verificação de relatórios
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-reports/
 

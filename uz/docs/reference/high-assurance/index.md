@@ -1,4 +1,4 @@
-# Yuqori ishonchlilikka ega joylashtirish
+# Phala / Intel TDX · Yuqori ishonchlilikka ega joylashtirish
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/
 

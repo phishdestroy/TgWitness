@@ -1,4 +1,4 @@
-# اسے چلتا رکھیں
+# Telegram · اسے چلتا رکھیں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/server/
 

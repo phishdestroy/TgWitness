@@ -1,4 +1,4 @@
-# Режим розслідування
+# Telegram · Режим розслідування
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/
 

@@ -1,4 +1,4 @@
-# การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล
+# Telegram · การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/
 

@@ -1,4 +1,4 @@
-# פריסה
+# Telegram · פריסה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/
 

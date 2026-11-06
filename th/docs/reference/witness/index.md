@@ -1,4 +1,4 @@
-# พยานอิสระ
+# Telegram · พยานอิสระ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/
 

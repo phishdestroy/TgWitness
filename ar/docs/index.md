@@ -1,4 +1,4 @@
-# من سجلات Telegram إلى قضية واضحة.
+# Telegram · التوثيق
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 

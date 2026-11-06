@@ -1,4 +1,4 @@
-# Case Board yarating
+# Telegram · Case Board yarating
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/case-board/
 

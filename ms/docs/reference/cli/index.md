@@ -1,4 +1,4 @@
-# Baris perintah
+# Telegram · Baris perintah
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/cli/
 

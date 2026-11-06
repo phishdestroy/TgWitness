@@ -1,4 +1,4 @@
-# Hisoblar va sessiya formatlari
+# Telegram · Hisoblar va sessiya formatlari
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/
 

@@ -1,4 +1,4 @@
-# 읽기 전용 MCP
+# Telegram · 읽기 전용 MCP
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/
 

@@ -1,4 +1,4 @@
-# Eksportowanie i weryfikacja
+# Telegram · Eksportowanie i weryfikacja
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/exports/
 

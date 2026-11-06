@@ -1,4 +1,4 @@
-# Jamoat namoyishi
+# Telegram · Jamoat namoyishi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/showcase/
 

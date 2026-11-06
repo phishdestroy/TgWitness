@@ -1,4 +1,4 @@
-# Registros de data e hora
+# Telegram · Registros de data e hora
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/timestamp/
 

@@ -1,4 +1,4 @@
-# Account e formati delle sessioni
+# Telegram · Account e formati delle sessioni
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/
 

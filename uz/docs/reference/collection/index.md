@@ -1,4 +1,4 @@
-# Yig'ish qanday ishlaydi
+# Telegram · Yig'ish qanday ishlaydi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/
 

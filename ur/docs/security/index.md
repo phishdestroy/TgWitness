@@ -1,4 +1,4 @@
-# اسے محفوظ رکھیں
+# Telegram · اسے محفوظ رکھیں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/security/
 

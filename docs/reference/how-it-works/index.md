@@ -1,4 +1,4 @@
-# How the evidence works
+# Evidence Verification: SHA-256 & Ed25519
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/
 

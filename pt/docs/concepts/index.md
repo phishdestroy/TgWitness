@@ -1,4 +1,4 @@
-# Veja como funciona o registro de evidências
+# Telegram · Veja como funciona o registro de evidências
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/concepts/
 

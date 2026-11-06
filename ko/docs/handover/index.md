@@ -1,4 +1,4 @@
-# 공유용 사본을 준비하십시오
+# Telegram · 공유용 사본을 준비하십시오
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/handover/
 

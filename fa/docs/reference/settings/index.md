@@ -1,4 +1,4 @@
-# راه‌اندازی اولیه و تنظیمات
+# Telegram · راه‌اندازی اولیه و تنظیمات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/settings/
 

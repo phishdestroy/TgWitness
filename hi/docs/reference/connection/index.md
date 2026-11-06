@@ -1,4 +1,4 @@
-# कनेक्शन, प्रॉक्सी और डेटा सुरक्षा
+# Telegram · कनेक्शन, प्रॉक्सी और डेटा सुरक्षा
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/
 

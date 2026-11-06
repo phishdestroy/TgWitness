@@ -1,4 +1,4 @@
-# So funktioniert das Beweismaterial
+# Telegram · So funktioniert das Beweismaterial
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/
 

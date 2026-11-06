@@ -1,4 +1,4 @@
-# アーカイブの操作
+# Telegram · アーカイブの操作
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/archive/
 

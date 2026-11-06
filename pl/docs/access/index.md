@@ -1,4 +1,4 @@
-# Przedstaw proszę przypadek
+# Telegram · Przedstaw proszę przypadek
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/access/
 

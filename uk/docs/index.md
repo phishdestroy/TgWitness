@@ -1,4 +1,4 @@
-# Від записів Telegram до чіткої справи.
+# Telegram · Документація
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/
 

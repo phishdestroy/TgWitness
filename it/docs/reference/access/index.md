@@ -1,4 +1,4 @@
-# Accesso e autorizzazioni
+# Telegram · Accesso e autorizzazioni
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/access/
 

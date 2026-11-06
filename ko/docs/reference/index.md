@@ -1,4 +1,4 @@
-# 전체 참조 자료
+# Telegram · 참고 문헌
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/
 

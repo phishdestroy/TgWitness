@@ -1,4 +1,4 @@
-# آن را امن نگه دارید
+# Telegram · آن را امن نگه دارید
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/security/
 

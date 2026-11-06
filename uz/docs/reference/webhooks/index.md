@@ -1,4 +1,4 @@
-# Chiquvchi webhooks
+# Telegram · Chiquvchi webhooks
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/
 

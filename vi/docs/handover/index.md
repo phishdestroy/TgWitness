@@ -1,4 +1,4 @@
-# Chuẩn bị bản sao để chia sẻ
+# Telegram · Chuẩn bị bản sao để chia sẻ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/handover/
 

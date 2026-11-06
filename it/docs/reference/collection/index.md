@@ -1,4 +1,4 @@
-# Come funziona la raccolta dei dati
+# Telegram · Come funziona la raccolta dei dati
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/
 

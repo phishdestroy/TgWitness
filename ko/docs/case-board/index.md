@@ -1,4 +1,4 @@
-# 케이스 보드 구축하기
+# Telegram · 케이스 보드 구축하기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/case-board/
 

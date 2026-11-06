@@ -1,4 +1,4 @@
-# Marcas de tiempo
+# Telegram · Marcas de tiempo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/timestamp/
 

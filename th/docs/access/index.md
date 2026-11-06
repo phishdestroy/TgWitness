@@ -1,4 +1,4 @@
-# แบ่งปันกรณีศึกษา
+# Telegram · แบ่งปันกรณีศึกษา
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/access/
 

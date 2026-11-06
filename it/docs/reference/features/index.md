@@ -1,4 +1,4 @@
-# Caratteristiche e limiti
+# Telegram · Caratteristiche e limiti
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/features/
 

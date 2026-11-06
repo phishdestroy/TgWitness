@@ -1,4 +1,4 @@
-# Расследование по всем чатам
+# OSINT-расследования по чатам Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/cases/
 

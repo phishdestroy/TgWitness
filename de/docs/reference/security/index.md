@@ -1,4 +1,4 @@
-# Sicherheit und Datenumgang
+# Telegram · Sicherheit und Datenumgang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/security/
 

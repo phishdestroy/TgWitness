@@ -1,4 +1,4 @@
-# Panel bo&#x27;yicha qo&#x27;llanma
+# Telegram · Panel bo&#x27; yicha qo&#x27; llanma
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/
 

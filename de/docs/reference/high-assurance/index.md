@@ -1,4 +1,4 @@
-# Hochsichere Bereitstellung
+# Phala / Intel TDX · Hochsichere Bereitstellung
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/
 

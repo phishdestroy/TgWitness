@@ -1,4 +1,4 @@
-# ابتدائی سیٹ اپ اور ترتیبات
+# Telegram · ابتدائی سیٹ اپ اور ترتیبات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/settings/
 

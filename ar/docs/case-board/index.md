@@ -1,4 +1,4 @@
-# إنشاء لوحة القضية (Case Board)
+# Telegram · إنشاء لوحة القضية (Case Board)
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/case-board/
 

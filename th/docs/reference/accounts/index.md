@@ -1,4 +1,4 @@
-# รูปแบบบัญชีและเซสชัน
+# Telegram · รูปแบบบัญชีและเซสชัน
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/
 

@@ -1,4 +1,4 @@
-# บรรทัดคำสั่ง
+# Telegram · บรรทัดคำสั่ง
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/cli/
 

@@ -1,4 +1,4 @@
-# Penerapan dengan jaminan keamanan tinggi
+# Phala / Intel TDX · Penerapan dengan jaminan keamanan tinggi
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/
 

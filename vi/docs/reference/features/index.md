@@ -1,4 +1,4 @@
-# Các tính năng và giới hạn
+# Telegram · Các tính năng và giới hạn
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/
 

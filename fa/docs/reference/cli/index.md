@@ -1,4 +1,4 @@
-# خط فرمان
+# Telegram · خط فرمان
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/cli/
 

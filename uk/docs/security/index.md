@@ -1,4 +1,4 @@
-# Забезпечте безпеку
+# Telegram · Забезпечте безпеку
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/security/
 

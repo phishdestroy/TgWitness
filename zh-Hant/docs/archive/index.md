@@ -1,4 +1,4 @@
-# 瀏覽檔案庫
+# Telegram · 瀏覽檔案庫
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/archive/
 

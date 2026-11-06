@@ -1,4 +1,4 @@
-# Hesap bağla
+# Telegram · Hesap bağla
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/accounts/
 

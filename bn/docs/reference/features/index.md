@@ -1,4 +1,4 @@
-# বৈশিষ্ট্য এবং সীমাবদ্ধতা
+# Telegram · বৈশিষ্ট্য এবং সীমাবদ্ধতা
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/
 

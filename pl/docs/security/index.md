@@ -1,4 +1,4 @@
-# Dbaj o bezpieczeństwo
+# Telegram · Dbaj o bezpieczeństwo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/security/
 

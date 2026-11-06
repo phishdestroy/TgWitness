@@ -1,4 +1,4 @@
-# شواہد کیسے کام کرتے ہیں
+# Telegram · شواہد کیسے کام کرتے ہیں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/
 

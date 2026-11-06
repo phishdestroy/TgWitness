@@ -1,4 +1,4 @@
-# תהליכי עבודה ותפעול
+# Telegram · תהליכי עבודה ותפעול
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/
 

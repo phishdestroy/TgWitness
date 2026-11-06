@@ -1,4 +1,4 @@
-# Horodatages
+# Telegram · Horodatages
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/timestamp/
 

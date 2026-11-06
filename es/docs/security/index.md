@@ -1,4 +1,4 @@
-# Mantenga la seguridad
+# Telegram · Mantenga la seguridad
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/security/
 

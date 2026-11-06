@@ -1,4 +1,4 @@
-# Thiết lập bot chứng cứ
+# Telegram · Thiết lập bot chứng cứ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/witness/
 

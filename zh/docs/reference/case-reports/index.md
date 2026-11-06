@@ -1,4 +1,4 @@
-# 报告配置与验证
+# Telegram · 报告配置与验证
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/case-reports/
 

@@ -1,4 +1,4 @@
-# Jak przebiega gromadzenie danych
+# Telegram · Jak przebiega gromadzenie danych
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/
 

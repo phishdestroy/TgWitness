@@ -1,4 +1,4 @@
-# 全文搜尋
+# Telegram · 全文搜尋
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/search/
 

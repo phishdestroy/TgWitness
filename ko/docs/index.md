@@ -1,4 +1,4 @@
-# 텔레그램 기록에서 명확한 사건으로.
+# Telegram · 문서
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 

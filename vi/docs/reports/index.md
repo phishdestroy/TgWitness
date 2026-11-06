@@ -1,4 +1,4 @@
-# Thiết kế báo cáo
+# Telegram · Thiết kế báo cáo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reports/
 

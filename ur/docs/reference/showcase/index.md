@@ -1,4 +1,4 @@
-# عوامی نمائش
+# Telegram · عوامی نمائش
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/showcase/
 

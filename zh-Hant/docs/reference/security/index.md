@@ -1,4 +1,4 @@
-# 安全性與資料處理
+# Telegram · 安全性與資料處理
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/
 

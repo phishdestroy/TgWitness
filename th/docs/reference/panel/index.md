@@ -1,4 +1,4 @@
-# คู่มือแผงควบคุม
+# Telegram · คู่มือแผงควบคุม
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/
 

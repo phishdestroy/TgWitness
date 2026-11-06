@@ -1,4 +1,4 @@
-# צ'אטים סודיים: יישום והדגמה
+# Telegram · צ'אטים סודיים: יישום והדגמה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/secret-chats/
 

@@ -1,4 +1,4 @@
-# রিপোর্ট কনফিগারেশন এবং যাচাইকরণ
+# Telegram · রিপোর্ট কনফিগারেশন এবং যাচাইকরণ
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/
 

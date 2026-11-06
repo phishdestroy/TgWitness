@@ -1,4 +1,4 @@
-# 完整参考资料
+# Telegram · 参考
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/
 

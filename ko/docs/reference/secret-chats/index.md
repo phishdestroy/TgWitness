@@ -1,4 +1,4 @@
-# 비밀 채팅: 구현 및 데모
+# Telegram · 비밀 채팅: 구현 및 데모
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/secret-chats/
 

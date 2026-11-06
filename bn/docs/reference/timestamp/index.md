@@ -1,4 +1,4 @@
-# টাইমস্ট্যাম্পস
+# Telegram · টাইমস্ট্যাম্পস
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/
 

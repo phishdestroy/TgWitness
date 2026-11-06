@@ -1,4 +1,4 @@
-# Экспорт аккаунта
+# Экспорт аккаунта Telegram в подписанный архив
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/account-export/
 

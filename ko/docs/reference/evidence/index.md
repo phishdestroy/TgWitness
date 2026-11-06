@@ -1,4 +1,4 @@
-# 증거 형식
+# Telegram · 증거 형식
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/
 

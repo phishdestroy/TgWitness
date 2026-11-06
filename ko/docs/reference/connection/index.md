@@ -1,4 +1,4 @@
-# 연결, 프록시 및 데이터 보호
+# Telegram · 연결, 프록시 및 데이터 보호
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/
 

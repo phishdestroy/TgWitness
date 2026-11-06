@@ -1,4 +1,4 @@
-# حافظ على استمرار عملها
+# Telegram · حافظ على استمرار عملها
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/server/
 

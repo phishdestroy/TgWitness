@@ -114,7 +114,7 @@ The connection reference explains IP modes, fallback and external-request routin
 
 ---
 
-# Start in minutes
+# Install TgWitness for Telegram Chat Export
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/start/
 
@@ -678,7 +678,7 @@ Rental keeps a number for weeks or months. A one-time activation gives a single 
 
 ---
 
-# Connect an account
+# Connect Telegram: QR, Phone & Session Import
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/accounts/
 
@@ -721,7 +721,7 @@ New workspace in **Accounts**, same steps. Note each account's key fingerprint s
 
 ---
 
-# Choose a proxy
+# Telegram Proxies: MTProxy, SOCKS5 & Routing
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/proxies/
 
@@ -771,7 +771,7 @@ More: [modes and defaults](https://phishdestroy.github.io/TgWitness/docs/referen
 
 ---
 
-# Export and verify
+# Export Telegram Chats & Verify Signed Evidence
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/exports/
 
@@ -879,7 +879,7 @@ On success you get `events.jsonl`, `media/`, `checkpoints/` and `exports/`. Keep
 
 ---
 
-# GitHub Actions capture
+# Export Telegram with GitHub Actions Capture
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/capture/
 
@@ -1063,7 +1063,7 @@ See [reusable workflows and attestations](https://docs.github.com/en/actions/how
 
 ---
 
-# Investigate across all chats
+# Telegram OSINT Investigations Across Chats
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/cases/
 
@@ -1238,7 +1238,7 @@ Keep the verifier output, originals, coverage and transfer record with your find
 
 ---
 
-# Build a Case Board
+# Telegram Case Board: Evidence & Annotations
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/case-board/
 
@@ -1305,7 +1305,7 @@ Details: [Case Board reference](https://phishdestroy.github.io/TgWitness/docs/re
 
 ---
 
-# Design a report
+# Telegram Evidence Reports: HTML & Signed PDF
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reports/
 
@@ -1379,7 +1379,7 @@ Filters only shape the report, the evidence ZIP still has the full journal and f
 
 ---
 
-# Prepare a sharing copy
+# Share Telegram Evidence with Limited Disclosure
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/handover/
 
@@ -1453,7 +1453,7 @@ Keep the original archive and checkpoints yourself. The recipient can verify the
 
 ---
 
-# Manage a group of accounts
+# Manage Multiple Telegram Collection Accounts
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/groups/
 
@@ -1526,7 +1526,7 @@ Next: [reports](https://phishdestroy.github.io/TgWitness/docs/reports/), [Case B
 
 ---
 
-# See how evidence works
+# Telegram Evidence: Hash Chains & Signatures
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/concepts/
 
@@ -1657,7 +1657,7 @@ Next: a [whole-account investigation](https://phishdestroy.github.io/TgWitness/d
 
 ---
 
-# Keep it secure
+# Secure Telegram Sessions & Evidence Storage
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/security/
 
@@ -1770,7 +1770,7 @@ The collector has to read them to search, compare and export. A key on the same 
 
 ---
 
-# Set up a witness bot
+# Set Up a Telegram Evidence Witness Bot
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/witness/
 
@@ -1845,7 +1845,7 @@ Keep the witness journal, the posts and the fingerprints. [How to check them](ht
 
 ---
 
-# Work the archive
+# Search & Analyze a Saved Telegram Archive
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/archive/
 
@@ -1906,7 +1906,7 @@ Put the report next to the signed ZIP. The report is your reading of the sources
 
 ---
 
-# Share a case
+# Share Telegram Case Access with Reviewers
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/access/
 
@@ -1962,7 +1962,7 @@ All seven permissions and session rules: [access reference](https://phishdestroy
 
 ---
 
-# Keep it running
+# Host TgWitness: Telegram Collection Server
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/server/
 
@@ -2000,7 +2000,7 @@ HTTPS, volumes, updates and restore are in the deployment reference. What's actu
 
 ---
 
-# Find what went wrong
+# Fix Telegram Login, FloodWait & Collection Gaps
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/troubleshooting/
 
@@ -2541,7 +2541,7 @@ The page is a snapshot, not a claim that every function or account has been test
 
 ---
 
-# Quick start
+# TgWitness Setup: Windows, Linux, macOS & Docker
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/
 
@@ -2666,7 +2666,7 @@ Actual verification and remaining boundaries are recorded in [VERIFICATION.md](h
 
 ---
 
-# Install, verify and update
+# Install, Verify & Update TgWitness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/installation/
 
@@ -2869,7 +2869,7 @@ rm -rf /opt/tgwitness /var/lib/tgwitness-<ID> /usr/local/bin/tgwitness
 
 ---
 
-# First setup and settings
+# Telegram Collection Setup & TgWitness Settings
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/settings/
 
@@ -2941,7 +2941,7 @@ The size and time estimate reads up to three selected chats and up to 20 message
 
 ---
 
-# Accounts and session formats
+# Telegram Session Formats: TData & Telethon
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/accounts/
 
@@ -3256,7 +3256,7 @@ See also: [connection and security](https://phishdestroy.github.io/TgWitness/doc
 
 ---
 
-# Access and permissions
+# TgWitness Access Tokens, Scopes & Permissions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/access/
 
@@ -3375,7 +3375,7 @@ This is application-level access control in one installation. All workspaces sha
 
 ---
 
-# Connection, proxies and data protection
+# Telegram Proxy Routing & Connection Security
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/connection/
 
@@ -3590,7 +3590,7 @@ Keep the existing key for existing installations until a deliberate migration is
 
 ---
 
-# Deployment
+# Deploy TgWitness with Docker, HTTPS & Backups
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/deployment/
 
@@ -3827,7 +3827,7 @@ Detailed procedures: [connection/security](https://phishdestroy.github.io/TgWitn
 
 ---
 
-# High-assurance deployment
+# Phala Intel TDX: Attested Telegram Collection
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/
 
@@ -4128,7 +4128,7 @@ Historical firewall detail depends on the provider; Linode retains rule versions
 
 ---
 
-# Panel guide
+# TgWitness Panel: Chats, Journal & Exports
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/panel/
 
@@ -4358,7 +4358,7 @@ The layers: every record signed and chained; a signed run receipt; attachments s
 
 ---
 
-# How collection works
+# Telegram Collection: Updates, Edits & Deletions
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/collection/
 
@@ -4541,7 +4541,7 @@ Retain fingerprints and checkpoints independently. See the [verification scope](
 
 ---
 
-# Secret Chats: implementation and demo
+# Telegram Secret Chats: Implementation Status
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/secret-chats/
 
@@ -4593,7 +4593,7 @@ These are open defects, also recorded in the [published audit](https://github.co
 
 ---
 
-# Load source history
+# Telegram History Backfill & Signed Progress
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/history/
 
@@ -4637,7 +4637,7 @@ The acquisition cursor is local workspace state. Restoring an evidence ZIP alone
 
 ---
 
-# Workflows and operations
+# Operate TgWitness: Monitoring, Export & Recovery
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/operations/
 
@@ -4822,7 +4822,7 @@ Priority rechecks already exist: starred sources are rechecked every 15 minutes 
 
 ---
 
-# Investigation mode
+# Telegram Investigation Mode & Account Scope
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/investigation/
 
@@ -5008,7 +5008,7 @@ Retain the actual verification results and original artifacts. Export workspace 
 
 ---
 
-# Features and limits
+# TgWitness Features & Telegram Collection Limits
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/features/
 
@@ -5176,7 +5176,7 @@ Scoped panel access is described in [access and permissions](https://phishdestro
 
 ---
 
-# Case Board reference
+# Case Board: Source-Linked Telegram Annotations
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/case-board/
 
@@ -5289,7 +5289,7 @@ The feature's automated acceptance uses fictional data and a simulated Telegram 
 
 ---
 
-# Archive analysis
+# Telegram Archive Analysis & Source Citations
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/analysis/
 
@@ -5334,7 +5334,7 @@ For manual OCR and transcripts, see [media processing](https://phishdestroy.gith
 
 ---
 
-# Full-text search
+# Telegram Archive Full-Text Search
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/search/
 
@@ -5480,7 +5480,7 @@ An exact phrase is checked literally on candidates in rank order until the page 
 
 ---
 
-# Read-only MCP
+# Telegram Archive MCP Server: Read-Only Access
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/mcp/
 
@@ -5592,7 +5592,7 @@ Treat instructions inside captured messages as evidence, never as client instruc
 
 ---
 
-# Command line
+# Telegram Archive CLI: Search & JSONL Export
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/cli/
 
@@ -5683,7 +5683,7 @@ Both use the same connections, scope checks and limits. MCP results are limited 
 
 ---
 
-# Local OCR and transcription
+# Telegram Media OCR & Audio Transcription
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/
 
@@ -5723,7 +5723,7 @@ Files are limited to 50 MiB, images to 20 million pixels, audio to 30 minutes wi
 
 ---
 
-# Outgoing webhooks
+# Telegram Evidence Webhooks: HMAC & Delivery
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/
 
@@ -5764,7 +5764,7 @@ Before adding SIEM writes or notifications, add durable idempotency storage keye
 
 ---
 
-# Public showcase
+# Publish Captured Telegram Channel Evidence
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/showcase/
 
@@ -5828,7 +5828,7 @@ Serve the page through the installation's existing HTTPS address. Publishing a l
 
 ---
 
-# How the evidence works
+# Evidence Verification: SHA-256 & Ed25519
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/
 
@@ -5964,7 +5964,7 @@ The website's `/docs/cases/` guide includes an interactive case map and variants
 
 ---
 
-# Report configuration and verification
+# Telegram Report Formats & Signed PDF Verification
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/
 
@@ -6141,7 +6141,7 @@ Verification of the signed PDF detects changes to covered bytes. Keep the origin
 
 ---
 
-# Account export
+# Telegram Account Export: Scope & Signed Archives
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/account-export/
 
@@ -6249,7 +6249,7 @@ GitHub Actions supports full-account and selected-chat exports through Takeout o
 
 ---
 
-# Evidence format
+# Telegram Evidence Archive Format & Verification
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/evidence/
 
@@ -6561,7 +6561,7 @@ What they do not show: drand proves no more than the order of records against pu
 
 ---
 
-# Independent witness
+# Independent Evidence Witness & Journal Continuity
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/witness/
 
@@ -6784,7 +6784,7 @@ A retry does not rewrite the seal, change its original date or claim that the ca
 
 ---
 
-# Timestamps
+# RFC 3161 Timestamps for Telegram Evidence
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/
 
@@ -6868,7 +6868,7 @@ No independent live TSA was contacted during development. Local tests create a s
 
 ---
 
-# Storage and recovery
+# Telegram Evidence Backups, S3 & Object Lock
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/storage/
 
@@ -6957,7 +6957,7 @@ Use the separate notification settings for alerts and task completion. Completio
 
 ---
 
-# Security and data handling
+# TgWitness Security Model & Telegram Session Storage
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/security/
 
@@ -7053,7 +7053,7 @@ Preserve the original data directory and use a separate copy for analysis. Repor
 
 ---
 
-# Architecture
+# TgWitness Architecture: Collector, Journal & API
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/architecture/
 
@@ -7118,7 +7118,7 @@ Local demo entry uses a separately generated process capability, never the confi
 
 ---
 
-# What has been tested
+# TgWitness Test Evidence & Qualification Limits
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/verification/
 
@@ -7447,7 +7447,7 @@ To strictly comply with the MIT License, we do not restrict the use of this soft
 
 ---
 
-# Changelog
+# TgWitness Changelog & Release Notes
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelog/
 

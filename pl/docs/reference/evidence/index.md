@@ -1,4 +1,4 @@
-# Format dowodów
+# Telegram · Format dowodów
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/
 

@@ -1,4 +1,4 @@
-# Configurar un bot de TgWitness
+# Telegram · Configurar un bot de TgWitness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/witness/
 

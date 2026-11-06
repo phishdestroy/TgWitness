@@ -1,4 +1,4 @@
-# Paparan awam
+# Telegram · Paparan awam
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/showcase/
 

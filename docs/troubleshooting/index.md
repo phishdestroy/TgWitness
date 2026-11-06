@@ -1,4 +1,4 @@
-# Find what went wrong
+# Fix Telegram Login, FloodWait & Collection Gaps
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/troubleshooting/
 

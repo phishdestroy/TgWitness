@@ -1,4 +1,4 @@
-# Локальное распознавание текста (OCR) и транскрипция
+# OCR изображений и расшифровка аудио Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/media-analysis/
 

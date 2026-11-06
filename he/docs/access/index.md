@@ -1,4 +1,4 @@
-# שתף מקרה
+# Telegram · שתף מקרה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/access/
 

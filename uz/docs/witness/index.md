@@ -1,4 +1,4 @@
-# Witness botini sozlang
+# Telegram · Witness botini sozlang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/witness/
 

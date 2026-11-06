@@ -1,4 +1,4 @@
-# ویٹنس بوٹ قائم کریں
+# Telegram · ویٹنس بوٹ قائم کریں
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/witness/
 

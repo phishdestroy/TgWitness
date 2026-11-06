@@ -1,4 +1,4 @@
-# Saksi independen
+# Telegram · Saksi independen
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/
 

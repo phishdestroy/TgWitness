@@ -1,4 +1,4 @@
-# ورک فلو اور آپریشنز
+# Telegram · ورک فلو اور آپریشنز
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/
 

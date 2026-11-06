@@ -1,4 +1,4 @@
-# 証拠の仕組みをご覧ください
+# Telegram · 証拠の仕組みをご覧ください
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/concepts/
 

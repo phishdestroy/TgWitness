@@ -1,4 +1,4 @@
-# מצב חקירה
+# Telegram · מצב חקירה
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/
 

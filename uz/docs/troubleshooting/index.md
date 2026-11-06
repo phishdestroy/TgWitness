@@ -1,4 +1,4 @@
-# Nima noto'g'ri ketganini aniqlang
+# Telegram · Nima noto'g'ri ketganini aniqlang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/troubleshooting/
 

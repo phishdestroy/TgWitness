@@ -1,4 +1,4 @@
-# টেলিগ্রাম রেকর্ড থেকে একটি স্পষ্ট মামলা।
+# Telegram · ডকুমেন্টেশন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 

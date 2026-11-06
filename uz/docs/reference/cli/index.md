@@ -1,4 +1,4 @@
-# Buyruq satri
+# Telegram · Buyruq satri
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/cli/
 

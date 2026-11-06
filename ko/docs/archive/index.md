@@ -1,4 +1,4 @@
-# 아카이브 활용하기
+# Telegram · 아카이브 활용하기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/archive/
 

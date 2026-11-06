@@ -1,4 +1,4 @@
-# 共有用コピーを作成してください
+# Telegram · 共有用コピーを作成してください
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/handover/
 

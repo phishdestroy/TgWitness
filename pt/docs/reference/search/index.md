@@ -1,4 +1,4 @@
-# Pesquisa de texto completo
+# Telegram · Pesquisa de texto completo
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/search/
 

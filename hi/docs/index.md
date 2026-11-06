@@ -1,4 +1,4 @@
-# टेलीग्राम रिकॉर्ड्स से एक स्पष्ट मामला।
+# Telegram · दस्तावेज़ीकरण
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/
 

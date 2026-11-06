@@ -1,4 +1,4 @@
-# 보고서 설계
+# Telegram · 보고서 설계
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reports/
 

@@ -1,4 +1,4 @@
-# 증거가 어떻게 활용되는지 확인하기
+# Telegram · 증거가 어떻게 활용되는지 확인하기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/concepts/
 

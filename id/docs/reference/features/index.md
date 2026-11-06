@@ -1,4 +1,4 @@
-# Fitur dan batasan
+# Telegram · Fitur dan batasan
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/features/
 

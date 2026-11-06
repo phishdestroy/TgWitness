@@ -1,4 +1,4 @@
-# Lihat cara kerja bukti ini
+# Telegram · Lihat cara kerja bukti ini
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/concepts/
 

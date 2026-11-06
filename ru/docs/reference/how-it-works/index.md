@@ -1,4 +1,4 @@
-# Как устроены доказательства
+# Проверка доказательств: SHA-256 и Ed25519
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/
 

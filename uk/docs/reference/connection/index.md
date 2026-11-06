@@ -1,4 +1,4 @@
-# Підключення, проксі-сервери та захист даних
+# Telegram · Підключення, проксі-сервери та захист даних
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/
 

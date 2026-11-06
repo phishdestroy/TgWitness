@@ -1,4 +1,4 @@
-# Install, verify and update
+# Install, Verify & Update TgWitness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/installation/
 

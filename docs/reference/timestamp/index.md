@@ -1,4 +1,4 @@
-# Timestamps
+# RFC 3161 Timestamps for Telegram Evidence
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/
 

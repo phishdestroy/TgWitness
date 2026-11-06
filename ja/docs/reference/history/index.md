@@ -1,4 +1,4 @@
-# ソース履歴を読み込む
+# Telegram · ソース履歴を読み込む
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/
 

@@ -1,4 +1,4 @@
-# ٹیلیگرام ریکارڈز سے ایک واضح کیس تک۔
+# Telegram · دستاویزات
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/
 

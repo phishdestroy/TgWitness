@@ -1,4 +1,4 @@
-# 獨立見證人
+# Telegram · 獨立見證人
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/
 

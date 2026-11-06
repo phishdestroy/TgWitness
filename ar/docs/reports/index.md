@@ -1,4 +1,4 @@
-# تصميم تقرير
+# Telegram · تصميم تقرير
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reports/
 

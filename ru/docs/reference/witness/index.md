@@ -1,4 +1,4 @@
-# Независимый свидетель
+# Независимый свидетель и непрерывность журнала
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/
 

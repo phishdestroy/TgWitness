@@ -1,4 +1,4 @@
-# সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা
+# Telegram · সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/
 

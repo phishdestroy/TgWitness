@@ -1,4 +1,4 @@
-# Procesy i operacje
+# Telegram · Procesy i operacje
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/
 

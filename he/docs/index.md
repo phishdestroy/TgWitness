@@ -1,4 +1,4 @@
-# מרשומות Telegram לתיק ברור.
+# Telegram · תיעוד
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 

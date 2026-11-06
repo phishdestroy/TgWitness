@@ -1,4 +1,4 @@
-# Hisobni bog'lang
+# Telegram · Hisobni bog'lang
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/accounts/
 

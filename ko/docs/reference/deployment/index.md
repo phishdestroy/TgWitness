@@ -1,4 +1,4 @@
-# 배포
+# Telegram · 배포
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/
 

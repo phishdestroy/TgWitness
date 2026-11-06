@@ -1,4 +1,4 @@
-# 계정 내보내기
+# Telegram · 계정 내보내기
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/account-export/
 

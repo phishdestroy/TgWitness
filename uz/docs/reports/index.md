@@ -1,4 +1,4 @@
-# Hisobotni loyihalash
+# Telegram · Hisobotni loyihalash
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reports/
 

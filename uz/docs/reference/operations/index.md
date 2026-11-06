@@ -1,4 +1,4 @@
-# Ish jarayonlari va operatsiyalar
+# Telegram · Ish jarayonlari va operatsiyalar
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/
 

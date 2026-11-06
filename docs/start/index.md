@@ -1,4 +1,4 @@
-# Start in minutes
+# Install TgWitness for Telegram Chat Export
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/start/
 

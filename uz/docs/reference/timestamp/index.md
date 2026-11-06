@@ -1,4 +1,4 @@
-# Vaqt tamg'alari
+# Telegram · Vaqt tamg'alari
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/
 

@@ -1,4 +1,4 @@
-# 아카이브 분석
+# Telegram · 아카이브 분석
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/
 

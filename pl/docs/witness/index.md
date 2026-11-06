@@ -1,4 +1,4 @@
-# Skonfiguruj bota Witness
+# Telegram · Skonfiguruj bota Witness
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/witness/
 

@@ -1,4 +1,4 @@
-# Развертывание с высоким уровнем безопасности
+# Phala и Intel TDX: аттестация сборщика Telegram
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/
 

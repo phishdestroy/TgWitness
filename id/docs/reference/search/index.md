@@ -1,4 +1,4 @@
-# Pencarian teks lengkap
+# Telegram · Pencarian teks lengkap
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/search/
 

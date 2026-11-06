@@ -1,4 +1,4 @@
-# Yüksek güvenilirlikli dağıtım
+# Phala / Intel TDX · Yüksek güvenilirlikli dağıtım
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/
 

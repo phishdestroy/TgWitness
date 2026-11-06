@@ -1,4 +1,4 @@
-# অ্যাকাউন্টের একটি গ্রুপ পরিচালনা করুন
+# Telegram · অ্যাকাউন্টের একটি গ্রুপ পরিচালনা করুন
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/groups/
 

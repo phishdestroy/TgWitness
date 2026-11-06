@@ -1,4 +1,4 @@
-# วิธีการทำงานของหลักฐาน
+# Telegram · วิธีการทำงานของหลักฐาน
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/
 

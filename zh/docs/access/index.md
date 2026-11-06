@@ -1,4 +1,4 @@
-# 分享案例
+# Telegram · 分享案例
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/access/
 

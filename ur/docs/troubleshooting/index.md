@@ -1,4 +1,4 @@
-# پتہ لگائیں کہ کیا غلط ہوا
+# Telegram · پتہ لگائیں کہ کیا غلط ہوا
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/troubleshooting/
 
