@@ -330,5 +330,32 @@ def test_preflight_counts_ttl_bytes_with_excluded_type(workspace):
     c.client.download_media.assert_not_awaited()
 
 
+@pytest.mark.parametrize("transport", ["standard", "takeout"])
+def test_merged_backfill_preserves_ttl_using_the_selected_transport(tmp_path, transport):
+    from tools.test_history_backfill import make, finished, media_message
+    from tgwitness.history_options import HistoryOptions
+
+    async def scenario():
+        item = media_message(5)
+        item.media.ttl_seconds = ephemeral.VIEW_ONCE
+        c, store = make(tmp_path, [item])
+        store.set_setting("capture", {"messages_first": True,
+            "types": {"document": {"enabled": False, "max_mb": 1}}})
+        try:
+            await c.history.start(HistoryOptions(transport=transport, admin_log=False))
+            state = await finished(c.history)
+            assert state["phase"] == "complete" and state["media"] == {"done": 1}
+            saved = store.events(kind="media.saved")[0]["payload"]
+            assert saved["ephemeral_media"]["mode"] == "view_once"
+            assert saved["ephemeral_media"]["outcome"] == "saved"
+            assert (store.root / "media" / saved["media_sha256"]).read_bytes() == b"data"
+            transfers = [call for call in c.client.rpc if isinstance(call, tuple)]
+            assert transfers == [("media", 999 if transport == "takeout" else None)]
+        finally:
+            store.close()
+
+    asyncio.run(scenario())
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
