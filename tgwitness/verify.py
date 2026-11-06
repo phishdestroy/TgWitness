@@ -760,6 +760,7 @@ class Coverage:
         self.periods, self.gaps, self.notes = [], [], []
         self.start = self.alive = self.closed_at = self.close_reason = None
         self.observing = self.disconnected = False
+        self.silent = False
         self.ids, self.titles = {}, {}
         self.first = self.last = None
         self.allowed = LIVENESS_GAP_SECONDS
@@ -778,12 +779,18 @@ class Coverage:
     def add(self, event):
         at, kind, payload, chat_id = event["observed_at"], event["kind"], event["payload"], event["chat_id"]
         self.first, self.last = self.first or at, at
+        activity = (kind == "collector.heartbeat" and payload.get("connected") is not False) or (
+            kind in ("message.new", "message.edited", "message.deleted")
+            and payload.get("source", "live_update") == "live_update")
         if self.observing and kind not in ("observation.started", "process.started"):
             silent = (parse_time(at) - parse_time(self.alive)).total_seconds()
             if silent > self.allowed:
                 self.close(self.alive, "no records for " + str(round(silent / 60)) + " min while observing: "
                            "the process stopped, froze or the computer slept")
-                self.open(at)
+                self.silent = True
+        if self.silent and activity:
+            self.open(at)
+            self.silent = False
         interval = payload.get("interval_seconds") if kind == "collector.heartbeat" else \
             (payload.get("parameters") or {}).get("heartbeat_seconds") if kind == "observation.started" else None
         if type(interval) is int and interval > 0:
@@ -796,25 +803,44 @@ class Coverage:
             self.close(self.alive, "observation restarted")
             self.open(at)
             self.disconnected = False
+            self.silent = False
         elif kind == "observation.stopped":
+            self.silent = self.disconnected = False
             self.close(at, "observation paused by the operator" if payload.get("reason") == "operator"
                        else "observation stopped: " + str(payload.get("reason") or "unknown"))
         elif kind == "process.stopped":
+            self.silent = self.disconnected = False
             self.close(at, "collector process stopped")
         elif kind == "process.started":
+            self.silent = self.disconnected = False
             self.close(self.alive, "collector process ended without an orderly stop")
+        elif kind == "collector.error" and payload.get("observation_stopped"):
+            self.silent = self.disconnected = False
+            self.close(at, "observation stopped: collector_error")
+        elif (kind == "connection.closed" and payload.get("role", "current") == "current"
+              and (self.observing or self.silent)):
+            self.silent = False
+            self.close(at, "connection to Telegram closed")
+            self.disconnected = True
+        elif (kind == "collector.heartbeat" and payload.get("connected") is False
+              and (self.observing or self.silent)):
+            self.silent = False
+            self.close(self.alive, "connection to Telegram lost")
+            self.disconnected = True
         elif kind == "coverage.gap":
             reason = payload.get("reason")
             if chat_id is None and reason in INTERRUPTIONS:
                 cause = ACCOUNT_LOSS.get(payload.get("cause")) if reason == "authorization_required" else None
                 self.close(at, INTERRUPTIONS[reason] + (": " + cause if cause else ""))
+                self.silent = False
                 self.disconnected = reason == "transport_disconnected"
             else:
                 self.notes.append({"at": at, "chat_id": chat_id, "reason": reason})
-        elif kind == "connection.restored" and self.disconnected:
+        elif self.disconnected and (kind == "connection.restored" or
+                                    kind == "collector.heartbeat" and payload.get("connected") is True):
             self.disconnected = False
             self.open(at)
-        if self.observing:
+        if self.observing and activity:
             self.alive = at
         if chat_id is not None and isinstance(payload.get("title"), str) and kind in (
                 "target.changed", "source.discovered", "target.removed"):
@@ -2113,9 +2139,11 @@ def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
 
 
 COMPARE_MEANING = {
-    "number": "Both archives come from the same chat and account, so messages are matched by their number.",
+    "number": "Both archives come from the same chat and account, so messages are matched by their number. "
+              "Unchanged means all recorded fields match; changed_fields lists differences.",
     "content": "The archives come from different chats or accounts (for example both sides of a private chat), "
-               "so messages are matched by time, sender and text or file hash.",
+               "so messages are matched by time, sender and text or file hash. "
+               "These pairs are heuristic; unchanged still requires every recorded field to match, including IDs.",
 }
 
 
@@ -2137,17 +2165,21 @@ def chat_rows(path, max_gib=None):
         return manifest, list(chat_messages(archive))
 
 
-def row_brief(row):
+def row_text(row):
     text = row.get("text")
     if isinstance(text, list):
         text = "".join(part if isinstance(part, str) else str(part.get("text", "")) for part in text)
+    return text or ""
+
+
+def row_brief(row):
     return {"id": row.get("id"), "date": row.get("date"), "from": row.get("from"), "from_id": row.get("from_id"),
-            "text": (text or "")[:300], "file_sha256": row.get("file_sha256"), "edited": row.get("edited")}
+            "text": row_text(row)[:300], "file_sha256": row.get("file_sha256"), "edited": row.get("edited"),
+            "reply_to_message_id": row.get("reply_to_message_id")}
 
 
 def row_content(row):
-    brief = row_brief(row)
-    return brief["text"], brief["file_sha256"], row.get("media_type"), brief["edited"]
+    return canonical(row)
 
 
 def compare_chat_exports(first, second, first_fingerprint=None, second_fingerprint=None, max_gib=None):
@@ -2167,8 +2199,7 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
         only_second = [right[k] for k in right.keys() - left.keys()]
     else:
         def content_key(row):
-            brief = row_brief(row)
-            return brief["from_id"], brief["file_sha256"] or brief["text"]
+            return row.get("from_id"), row.get("file_sha256") or row_text(row)
 
         waiting, pairs, only_first = {}, [], []
         for row in order(second_rows):
@@ -2182,8 +2213,11 @@ def compare_chat_exports(first, second, first_fingerprint=None, second_fingerpri
                 candidates.remove(match)
                 pairs.append((row, match))
         only_second = [row for rows in waiting.values() for row in rows]
-    changed = [{"first": row_brief(a), "second": row_brief(b)} for a, b in pairs
-               if method == "number" and row_content(a) != row_content(b)]
+    changed = [{"first": row_brief(a), "second": row_brief(b),
+                "changed_fields": sorted(key for key in a.keys() | b.keys()
+                                         if key not in a or key not in b or canonical(a[key]) != canonical(b[key]))}
+               for a, b in pairs
+               if row_content(a) != row_content(b)]
     return {"format": "tgwitness-chat-comparison-v1", "method": method, "meaning": COMPARE_MEANING[method],
             "first": {"file": str(first), "fingerprint": checked[0]["fingerprint"], "exported_at": first_manifest.get("exported_at"),
                       "chat_id": (first_manifest.get("chat") or {}).get("id"), "messages": len(first_rows),
@@ -3392,7 +3426,8 @@ SAY = {
         "signature chained to your root": "подпись проверена до вашего корня",
         "signature not checked: add --tsa-ca": "подпись не проверена: добавьте --tsa-ca",
         "pending: run ots upgrade, then ots verify": "ожидает: выполните ots upgrade, затем ots verify",
-        "in Bitcoin: confirm with ots verify": "в Bitcoin: подтвердите через ots verify",
+        "Bitcoin attestation present; run ots verify": "Есть Bitcoin-аттестация，проверьте через ots verify",
+        "unknown attestation type; no verified Bitcoin timestamp": "Неизвестный тип аттестации，метка Bitcoin не подтверждена",
         "No independent timestamps: times come from the collector's clock.":
             "Независимых меток нет: время — по часам коллектора.",
         "INTEGRITY VERIFIED": "ЦЕЛОСТНОСТЬ ПОДТВЕРЖДЕНА", "VERIFICATION FAILED": "ПРОВЕРКА НЕ ПРОЙДЕНА",
@@ -3436,7 +3471,8 @@ SAY = {
         "signature chained to your root": "підпис перевірено до вашого кореня",
         "signature not checked: add --tsa-ca": "підпис не перевірено: додайте --tsa-ca",
         "pending: run ots upgrade, then ots verify": "очікує: виконайте ots upgrade, потім ots verify",
-        "in Bitcoin: confirm with ots verify": "у Bitcoin: підтвердіть через ots verify",
+        "Bitcoin attestation present; run ots verify": "Є Bitcoin-атестація，перевірте через ots verify",
+        "unknown attestation type; no verified Bitcoin timestamp": "Невідомий тип атестації，мітку Bitcoin не підтверджено",
         "No independent timestamps: times come from the collector's clock.":
             "Незалежних міток немає: час — за годинником колектора.",
         "INTEGRITY VERIFIED": "ЦІЛІСНІСТЬ ПІДТВЕРДЖЕНО", "VERIFICATION FAILED": "ПЕРЕВІРКУ НЕ ПРОЙДЕНО",
@@ -3621,10 +3657,12 @@ class Console:
                 self.say("  " + " " * 27 + self.paint(self.t("signature chained to your root" if checked
                                                                else "signature not checked: add --tsa-ca"), "dim"))
             else:
-                pending = anchor.get("status") == "pending"
-                self.check("wait" if pending else "ok", "OpenTimestamps · " + anchor["service"][:10],
-                           point + " · " + self.t("pending: run ots upgrade, then ots verify" if pending
-                                                  else "in Bitcoin: confirm with ots verify"))
+                status = anchor.get("status")
+                detail = {"pending": "pending: run ots upgrade, then ots verify",
+                          "bitcoin-unverified": "Bitcoin attestation present; run ots verify"}.get(
+                              status, "unknown attestation type; no verified Bitcoin timestamp")
+                self.check("wait" if status == "pending" else "warn", "OpenTimestamps · " + anchor["service"][:10],
+                           point + " · " + self.t(detail))
 
     def lines(self, label, lines, limit=8):
         if not lines:
@@ -3804,8 +3842,13 @@ def main():
         sys.stdout.reconfigure(errors="backslashreplace")
     mode = "json" if args.json else "pretty" if args.pretty or (not args.plain and sys.stdout.isatty()) else "plain"
     if args.compare:
+        unsupported = ["--" + name.replace("_", "-") for name in
+                       ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
+                        "evidence", "check_drand", "board") if getattr(args, name)]
+        if unsupported:
+            parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
         try:
-            compared = compare_chat_exports(args.bundle, args.compare, args.fingerprint, args.compare_fingerprint)
+            compared = compare_chat_exports(args.bundle, args.compare, args.fingerprint, args.compare_fingerprint, args.max_gib)
         except Exception as exc:
             if mode == "json":
                 print(json.dumps({"verified": False, "error": type(exc).__name__ + ": " + str(exc)}, indent=2))

@@ -247,13 +247,19 @@ def signed_document(collateral, name, root, crls, now, what):
 
 
 def converge(platform, component):
-    if component == "Revoked":
+    if platform not in STATUSES or component not in STATUSES:
+        raise QuoteError("Unrecognized TCB status in component aggregation")
+    states = {platform, component}
+    if "Revoked" in states:
         return "Revoked"
-    if component == "OutOfDate" and platform in ("UpToDate", "SWHardeningNeeded"):
-        return "OutOfDate"
-    if component == "OutOfDate" and platform in ("ConfigurationNeeded", "ConfigurationAndSWHardeningNeeded"):
-        return "OutOfDateConfigurationNeeded"
-    return platform
+    configuration = bool(states & {"ConfigurationNeeded", "OutOfDateConfigurationNeeded",
+                                   "ConfigurationAndSWHardeningNeeded"})
+    if states & {"OutOfDate", "OutOfDateConfigurationNeeded"}:
+        return "OutOfDateConfigurationNeeded" if configuration else "OutOfDate"
+    hardening = bool(states & {"SWHardeningNeeded", "ConfigurationAndSWHardeningNeeded"})
+    if configuration:
+        return "ConfigurationAndSWHardeningNeeded" if hardening else "ConfigurationNeeded"
+    return "SWHardeningNeeded" if hardening else "UpToDate"
 
 
 def relaunch(launch, current):

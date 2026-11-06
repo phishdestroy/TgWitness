@@ -248,6 +248,46 @@ def test_a_forged_quote_verifies_only_against_its_own_root(forge):
         tdx.verify_quote(raw, genuine, window(genuine))
 
 
+@pytest.mark.parametrize("status", tdx.QE_STATUSES)
+def test_qe_status_survives_signed_quote_verification(forge, status):
+    collateral = forge.collateral()
+    identity = json.loads(collateral["qe_identity"])
+    identity["tcbLevels"][0]["tcbStatus"] = status
+    text = json.dumps(identity, separators=(",", ":"))
+    collateral.update(qe_identity=text,
+                      qe_identity_signature=raw_signature(forge.signer_key, text.encode()).hex())
+    raw = forge.quote(b"qe-status-regression")
+    if status == "Revoked":
+        with pytest.raises(tdx.QuoteError, match="revoked"):
+            tdx.verify_quote(raw, collateral, NOW, root=forge.root)
+    else:
+        found = tdx.verify_quote(raw, collateral, NOW, root=forge.root)
+        assert found["qe_status"] == status and found["status"] == status
+    with pytest.raises(tdx.QuoteError, match="Intel SGX Root CA"):
+        tdx.verify_quote(raw, collateral, NOW)
+
+
+@pytest.mark.parametrize("platform,component", [(p, c) for p in tdx.STATUSES for c in tdx.STATUSES])
+def test_tcb_aggregation_preserves_all_component_requirements(platform, component):
+    states = {platform, component}
+    result = tdx.converge(platform, component)
+    assert result == tdx.converge(component, platform)
+    assert (result == "UpToDate") == (states == {"UpToDate"})
+    if "Revoked" in states:
+        assert result == "Revoked"
+    else:
+        if states & {"ConfigurationNeeded", "OutOfDateConfigurationNeeded", "ConfigurationAndSWHardeningNeeded"}:
+            assert result in {"ConfigurationNeeded", "OutOfDateConfigurationNeeded", "ConfigurationAndSWHardeningNeeded"}
+        if states & {"OutOfDate", "OutOfDateConfigurationNeeded"}:
+            assert result in {"OutOfDate", "OutOfDateConfigurationNeeded"}
+
+
+def test_tcb_aggregation_rejects_unknown_status():
+    for pair in (("UpToDate", "unknown"), ("unknown", "UpToDate")):
+        with pytest.raises(tdx.QuoteError, match="Unrecognized"):
+            tdx.converge(*pair)
+
+
 def test_every_break_in_the_chain_is_refused(forge):
     raw, collateral = forge.quote(b"x"), forge.collateral()
     body = bytearray(raw)

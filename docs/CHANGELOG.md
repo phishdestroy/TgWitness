@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Plan sealed exports against the remaining session time，offer smaller selections，update progress estimates and reserve time for packaging．
+- Compare complete message content，enforce CLI verification options，and display OpenTimestamps states separately．
+- Close capture coverage on worker failure，use collection activity for liveness，and preserve every accepted component status in TDX verification．
+
 - Show each account's selected route and checked exit address，group session controls，and retain interface preferences when adding an account．Record connection changes without repeating identical background checks．Validate withheld-marker contents and reply states in minimized exports，including rejection of a missing-source label for an included record．
 
 - Describe local，witnessed，GitHub-hosted and Intel TDX collection separately，with their actual verification inputs．Remove repeated identity／certification digressions，update stale publication and WARP test descriptions，and refresh Russian guidance．Allow a bounded publication-settling interval while still requiring exact installer bytes．

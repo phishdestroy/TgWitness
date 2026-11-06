@@ -1950,8 +1950,8 @@ class Collector:
         except Exception as exc:
             if self.handle_authorization_error(exc, name, client=client):
                 return
-            await self.failure(exc, name)
             self.running = False
+            await self.failure(exc, name, stopping=True)
             if self.phase not in ("storage_error", "authorization_required"):
                 self.phase = "collector_error"
             await self.cancel_workers()
@@ -2086,13 +2086,17 @@ class Collector:
                 await catch_up()
             self.recheck_wakeup.set()
 
-    async def failure(self, exc, context, *, client=None):
+    async def failure(self, exc, context, *, client=None, stopping=False):
         if self.handle_authorization_error(exc, context, client=client):
             return
         self.last_error = type(exc).__name__
         try:
             self.store.append("collector.error", {"operation": context, "error_type": type(exc).__name__,
+                                                 "observation_stopped": stopping,
                                                  "coverage": "this update may not have been recorded"})
+            if stopping:
+                self.store.append("observation.stopped", {"reason": "collector_error", "operation": context,
+                                                         "error_type": type(exc).__name__})
         except Exception:
             self.running, self.phase = False, "storage_error"
             await self.cancel_workers()
