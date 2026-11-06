@@ -9,6 +9,12 @@ Open a chat and choose **Export chat**. Select idle account workspaces that alre
 
 ## History acquisition
 
+With **Download media** off, distributed acquisition also skips downloading the
+chat's profile photo. Its available photo ID and other profile metadata remain
+in the export. Photo retrieval requires both the export's media option and the
+workspace's media/avatar settings. Message-ID rechecks share account pacing with
+history reads; any server-requested wait still applies to every caller.
+
 **Regular session** preserves the existing acquisition path. **Telegram Takeout session** is an opt-in path for public channels and supergroups. It opens an export session for each participating account, uses the last Telegram split range for this public-only scope, and reads history without Telethon's additional iterator delay. Telegram's own FloodWait remains fully enforced. The current implementation still has one outgoing RPC per account; choosing Takeout does not increase same-account concurrency.
 
 The initial source/date boundaries are measured with regular requests and frozen in the signed plan. Takeout reads those planned ranges. Profiles, admin logs, optional context and attachment retrieval continue to use regular requests; the archive identifies that scope. The Takeout flags request the selected chat type without contacts or file export. Private chats and private groups remain available through the regular path or [account export](ACCOUNT-EXPORT.md).
