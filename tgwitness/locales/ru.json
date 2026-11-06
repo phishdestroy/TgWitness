@@ -6532,5 +6532,18 @@
 "This search could not be read. Remove special characters and retry.": "Этот запрос не удалось прочитать. Удалите специальные символы и повторите попытку.",
 "Transcripts": "Стенограммы",
 "Use at most 24 search terms.": "Используйте не более 24 поисковых терминов.",
-"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Используйте даты в формате, например, since:2026-01-31 или until:2026-02-01T12:00+00:00."
+"Use dates such as since:2026-01-31 or until:2026-02-01T12:00+00:00.": "Используйте даты в формате, например, since:2026-01-31 или until:2026-02-01T12:00+00:00.",
+"Include self-destructing media from excluded types": "Сохранять исчезающие вложения исключённых типов",
+"Self-destructing media bypasses type and duration exclusions．Size limits still apply；a later download may be impossible．Metadata-only and hash-only modes remain unchanged．": "Исчезающие вложения сохраняются независимо от ограничений типа и длительности．Лимит размера действует；позже файл может стать недоступен．Режимы только метаданных и только хешей сохраняются．",
+"View-once media": "Одноразовое вложение",
+"Self-destructing media：{n} s": "Исчезающее вложение：{n} с",
+"File preserved": "Файл сохранён",
+"Attachment unavailable when observed": "Вложение недоступно при наблюдении",
+"File not preserved": "Файл не сохранён",
+"Preservation pending": "Сохранение ожидается",
+"Saving this attachment does not establish that a person viewed it.": "Сохранение вложения не подтверждает，что человек его просмотрел．",
+"Self-destructing media may disappear before another attempt.": "Исчезающее вложение может стать недоступным до следующей попытки．",
+"File hashes; content not downloaded": "Хеши файла；содержимое не скачано",
+"Self-destructing media": "Исчезающие вложения",
+"Available files are saved after their messages，with the result recorded in the journal．": "Доступные файлы сохраняются после записи сообщения，результат остаётся в журнале．"
 }

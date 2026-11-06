@@ -2836,5 +2836,18 @@
   "… and {n} more, listed in authors.csv and authors.json.",
   "… and {n} more, listed in manifest.json and SHA256SUMS.",
   "… and {n} more, listed under Records.",
-  "🔓 Unlock in mode: {mode}"
+  "🔓 Unlock in mode: {mode}",
+  "Self-destructing media",
+  "Attachment unavailable when observed",
+  "File hashes; content not downloaded",
+  "File not preserved",
+  "File preserved",
+  "Preservation pending",
+  "Include self-destructing media from excluded types",
+  "Saving this attachment does not establish that a person viewed it.",
+  "Self-destructing media bypasses type and duration exclusions．Size limits still apply；a later download may be impossible．Metadata-only and hash-only modes remain unchanged．",
+  "Self-destructing media may disappear before another attempt.",
+  "Self-destructing media：{n} s",
+  "View-once media",
+  "Available files are saved after their messages，with the result recorded in the journal．"
 ]

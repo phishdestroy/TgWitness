@@ -1478,6 +1478,8 @@ $("account-add-form").addEventListener("submit",event=>{
 $("accounts-refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await loadProfiles();}));
 function excerpt(e) {
   const p=e.payload;
+  if (p.ephemeral_media) return [excerpt({...e,payload:{...p,ephemeral_media:null}}),
+    ephemeralMediaText(p.ephemeral_media)].filter(Boolean).join(" · ");
   if (p.text) return p.text;
   if (e.kind==="message.deleted") return tr("Earlier captured versions remain available. Telegram does not report who deleted the message.");
   if (e.kind==="message.missing_on_recheck") return tr("Telegram no longer returns this message; no deletion notice was received.");
@@ -1666,6 +1668,14 @@ $("collector-toggle").addEventListener("click",e=>busy(e.currentTarget,async()=>
 }));
 function detailBlock(label,text,cls="") {
   const n=node("div","detail-block "+cls); n.append(node("small","",label),window.TgWitnessPrivacy.render(text||tr("(No text in this version)"),{className:"message-text",tr})); return n;
+}
+function ephemeralMediaText(facts) {
+  const title=facts.mode==="view_once"?tr("View-once media"):tr("Self-destructing media：{n} s",{n:facts.ttl_seconds});
+  const outcomes={saved:"File preserved",unavailable:"Attachment unavailable when observed",not_saved:"File not preserved",
+    retry:"Preservation pending",hashed:"File hashes; content not downloaded"};
+  const detail=outcomes[facts.outcome]||(facts.availability==="unavailable_at_observation"?outcomes.unavailable:null);
+  return [title,detail?tr(detail):null,tr("Saving this attachment does not establish that a person viewed it."),
+    facts.outcome&&facts.outcome!=="saved"?tr("Self-destructing media may disappear before another attempt."):null].filter(Boolean).join(" · ");
 }
 async function openDetail(e,options={}) {
   const detailView=state.view,detailRevision=state.workspaceRevision;await journalReady;

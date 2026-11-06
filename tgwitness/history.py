@@ -209,8 +209,8 @@ class History:
                 client = self.collector.client
                 try:
                     await asyncio.wait_for(self.read_page(job), self.collector.param("operation_timeout_seconds"))
-                    if not capture_settings(self.store)["messages_first"]:
-                        await self.collector.download_worker(owner="history:" + run_id, history_run=run_id)
+                    lane = "ephemeral" if capture_settings(self.store)["messages_first"] else "all"
+                    await self.collector.download_worker(lane, owner="history:" + run_id, history_run=run_id)
                 except FloodWaitError as exc:
                     with self.store.transaction():
                         self.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
