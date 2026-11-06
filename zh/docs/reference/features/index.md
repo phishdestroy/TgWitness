@@ -74,9 +74,9 @@ TgWitness 拥有独立的安装流程、数据目录和发布生命周期。随�
 | 管理员操作 | 频道/超级群聊天导出中包含的相关已交付更新及管理员日志快照 | 导出功能会在导出管理员账户可访问日志时读取日志；持续轮询管理员日志的功能不属于此流程范围 |
 | 附件 | 原始版本描述符、下载字节数/SHA-256 及尝试结果 | 已消失的文件可能无法恢复；最新版本不会被替换 |
 | 历史 | 当前可见消息的明确快照 | 不会还原所有编辑或已删除的内容 |
-| 采集进程 | 启动／停止、心跳、错误、设置、范围和签名运行回执 | 本地库存；GitHub 和 TDX 添加了[独立的环境检查](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) |
+| 采集进程 | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) |
 
-该界面会标注源事件中提供的账户名称，并保留被观察到的 名称和用户名。当事件未指明行为者时，报告将该字段留空。
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## 容量与 Telegram 限制
 

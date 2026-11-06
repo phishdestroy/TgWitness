@@ -14,6 +14,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | 明確的面板操作、簽名收據、持久性請求 ID 以及任務本地的回調／加入重試政策 |
 | message_content.py | 可觀察的訊息比對，不包含傳輸存取元資料 |
 | workers.py | 在執行取消清理操作前，請先等待匯出檔案工作程序完成 |
+| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
+| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
 | store.py | WAL 交易、有序事件鏈、查詢篩選器、運作設定 |
 | fulltext.py | 衍生出的全文索引（詞形變體、BM25），與簽名日誌的開頭部分綁定；絕不外匯 |
 | security.py | 建立私人檔案、加密儲存庫、Ed25519 簽名、單一進程鎖定 |
@@ -44,7 +46,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 每個工作區僅接受一個帳戶，並擁有專屬的目錄及簽署身分。 主工作區為維持相容性而保留在根目錄下；額外的工作區則位於 profiles/<id>/ 目錄中。一個攜帶者憑證（bearer token）控制整個安裝環境；工作區並非 獨立的授權租戶。 流程鎖用於保護目錄；資料庫鎖則 用於序列化事件插入。每次追加操作皆會以 FULL 同步模式同步提交至 SQLite WAL。事件更新／刪除觸發器可防止 一般應用程式進行編輯；檔案系統管理員仍處於信任邊界之內。
 
-API 授權採用承載者憑證（bearer token）。登入操作會被序列化並設有時間限制。 帳戶上傳採用專用的 12 MiB 編碼本體限制及 8 MiB 解碼檔案 限制；一般 API 請求則維持 16 KiB 的限制。 轉換在工作 執行緒中執行，將上傳資料保留在記憶體中，並將正規化的輸入傳回已驗證的 瀏覽器。QR 碼登入具備每個工作區專屬的候選識別碼、短效識別碼、等待任務， 以及明確的取消機制。僅接受的授權才會成為活躍的客戶端。 Telegram FloodWait 會回傳 Retry-After 值；憑證與原始 RPC 錯誤訊息不會在 API 錯誤中公開。匯出操作在非同步事件 迴圈外執行，並按工作區進行序列化。它們會串流穩定的讀取快照，且可 與持續進行的 WAL 寫入並存。 工作區收集器共用同一個程序／事件迴圈。
+API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
 
 當前的歷史快照與即時更新可能有所重疊。兩者皆為獨立的觀察記錄， 並標註來源；重複項目不會被靜默合併。系統不會根據缺失的 ID、捏造的已刪除文字、強制成員枚舉或自動加入群組 等情況進行推論。
 

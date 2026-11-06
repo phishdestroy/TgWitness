@@ -74,9 +74,9 @@ Kaynaklar, yeni mesajlar, düzenlemeler, silme işlemleri, tepkiler ve üyelik i
 | Yönetici işlemleri | İlgili teslim edilen güncellemeler ve kanal/süper grup sohbeti dışa aktarımlarında bir yönetici günlüğü anlık görüntüsü | Dışa aktarma işlemi, dışa aktarma yetkisine sahip yönetici hesabı için mevcut olduğunda günlüğü okur; yönetici günlüğünün sürekli olarak taranması bu yolun dışındadır. |
 | Ek | Orijinal sürüm tanımlayıcısı, indirilen bayt sayısı/SHA-256 ve deneme sonuçları | Silinen bir dosya geri kazanılamayabilir; en son sürüm bunun yerine geçmez |
 | Tarihçe | O anda görünür olan mesajların açık bir anlık görüntüsü | Tüm düzenlemeleri veya silinen içeriği yeniden oluşturmaz |
-| Toplayıcı süreci | Başlatma/durdurma, kalp atışı, hatalar, ayarlar, kapsam ve imzalı çalıştırma makbuzu | Yerel envanter; GitHub ve TDX'e [bağımsız ortam kontrolleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) eklendi |
+| Toplayıcı süreci | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) |
 
-Arayüz, kaynak olayda belirtilen hesabı adlandırır ve gözlemlenen adları ve kullanıcı adlarını korur. Olayda fail belirtilmediğinde, rapor bu alanı boş bırakır.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Kapasite ve Telegram sınırları
 

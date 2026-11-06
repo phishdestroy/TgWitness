@@ -50,7 +50,7 @@ Panel zdalny wymaga protokołu HTTPS; zwykły protokół HTTP jest akceptowany w
 
 Daty podaje się jako `2026-10-01` (północ czasu UTC) lub w formacie ISO z podaniem strefy czasowej `2026-10-01T09:00+03:00`. W przypadku `search`, `messages` i `export` wybierają czas obserwacji. Strony mieszczą do 50 rekordów: postępuj zgodnie z `next_offset` (`--offset`) w celu wyszukiwania według rankingu oraz `next_before` (`--before`) w innych miejscach.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Każdy wynik wiadomości zawiera `untrusted_content: true`, identyfikatory obszaru roboczego, czatu i wiadomości, numer sekwencyjny w dzienniku, skrót zapisanego rekordu oraz link do panelu. Edycje, powiadomienia o usunięciu oraz `missing_on_recheck` stanowią oddzielne zapisy. Brak zapisu nie dowodzi, że zdarzenie nigdy nie miało miejsca.
 

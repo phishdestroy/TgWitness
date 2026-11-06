@@ -50,7 +50,7 @@ Un pannello remoto richiede HTTPS; l'HTTP semplice è accettato solo per `127.0.
 
 Le date sono `2026-10-01` (mezzanotte UTC) oppure in formato ISO con indicazione del fuso orario, `2026-10-01T09:00+03:00`. Per quanto riguarda `search`, `messages` e `export` si seleziona l’ora dell’osservazione. Le pagine contengono fino a 50 record: seguire `next_offset` (`--offset`) per la ricerca per ordine di priorità e `next_before` (`--before`) altrove.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Ogni risultato di messaggio riporta `untrusted_content: true`, gli ID dell’area di lavoro, della chat e del messaggio, la sequenza del registro, l’hash del record salvato e un link al pannello. Le modifiche, le notifiche di cancellazione e `missing_on_recheck` costituiscono record separati. L’assenza di un record non dimostra che un evento non sia mai avvenuto.
 

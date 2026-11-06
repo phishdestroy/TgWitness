@@ -20,6 +20,8 @@ Aprire **Esportazioni → Configura e anteprima**. Procedere attraverso **Dati �
 
 L’anteprima dei dati riporta il prefisso completo e stabile del registro, non un campione iniziale. Solo le righe di esempio visualizzate e gli elenchi lunghi sono limitati; i relativi conteggi omessi vengono mostrati. Un’esportazione successiva acquisisce una nuova istantanea stabile, pertanto la raccolta in corso potrebbe aumentare le cifre. Ambito, conteggi e identità della fonte sono inclusi nel rapporto firmato. L’apertura o l’anteprima del modulo non ne comporta il salvataggio.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Scegliere la copia destinata al destinatario.** I grafici e la trascrizione utilizzano i record selezionati. Integrità, custodia e copertura descrivono l’intero registro delle fonti. Il file ZIP delle prove contiene i record originali e gli allegati. Utilizzare [una consegna ridotta al minimo](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#handover-extract) quando un destinatario deve ricevere solo i dati selezionati e autorizzati.
 
 ### Leggi le modifiche, le cancellazioni e gli ID mancanti
@@ -90,12 +92,12 @@ Quando incluso, il file `analytics.json` è protetto dagli hash dei file firmati
 
 | Processor | Cosa mostra |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 Partendo da un checkout del codice sorgente, creare tutti e otto i modelli sopra elencati a partire dallo stesso diario fittizio:
 
@@ -147,7 +149,7 @@ Esaminare ogni controllo separatamente, insieme alla copertura della raccolta re
 4. Mantenere i file ZIP originali e i relativi hash. Registrare ogni detentore, trasferimento, data e scopo. Conservare insieme a essi le dichiarazioni attribuite agli operatori e le note relative al caso.
 5. Per i messaggi vocali riservati, conservare e verificare in modo indipendente la citazione, la verifica, la catena di certificati Intel, le misurazioni, la fonte esatta e le condizioni di gestione delle chiavi. Conservare il risultato della verifica dell’attestazione insieme agli artefatti esaminati.
 
-Consultare [l’ambito di verifica](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) per i controlli relativi all’acquisizione, all’integrità dell’archivio, alla copertura temporale e alla copertura della raccolta in ciascuna modalità.
+See [verification scope](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Revisione da parte del destinatario
 

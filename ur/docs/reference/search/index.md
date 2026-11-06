@@ -81,7 +81,7 @@ OCR اور ٹرانسکرپٹس اپنے انکرپٹڈ آرٹیفیکٹس می�
 
 MCP کلائنٹس کال کر سکتے ہیں `search_messages` کے ساتھ `ranked=true` اور صفحہ کے ساتھ `next_offset`. Scoped کنکشنز صرف اپنی چیٹس وصول کرتے ہیں۔
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## انحصار
 

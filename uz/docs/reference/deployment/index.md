@@ -60,6 +60,8 @@ Har bir GitHub Release `TgWitness-<version>-windows-amd64-portable.zip` va uning
 | `TgWitness-Demo.cmd` | `data\demo`da sintetik demo-ni ishga tushiring |
 | `TgWitness-Check.cmd` | Boshlashni boshlamadan tayyorgarlik tekshiruvini ishga tushiring |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Butun arxivni yozish mumkin bo'lgan papkaga, masalan `Documents\TgWitness` ga chiqarib oling; uni ZIP ichida yoki Program Files katalogidan ishga tushirmang. Ijro vaqti alohida modul yo'lidan foydalanadi, shuning uchun boshqa Python o'rnatmalari va `PYTHONPATH` unga ta'sir qilmaydi. Ma'lumotlar paketning `data` papkasida saqlanadi. Yangilash uchun TgWitness-ni to'xtating, yangi versiyani yangi papkaga chiqarib oling va `data` papkasini nusxalab o'tkazing.
 
 Uni 64-bit Windowsda Python 3.12 bilan o'zingiz quring:
@@ -117,7 +119,7 @@ Xizmat Compose tarmog'idagi `http://tgwitness:8787` manzildagi yig'uvchiga ulana
 `deploy/env.example` nusxasini `.env` ga nusxalang. `TGWITNESS_IMAGE` ni e'lon qilingan versiyaga, **kichik harfli** ombor yo'lidan foydalangan holda o'rnating, masalan:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

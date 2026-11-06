@@ -74,9 +74,9 @@ TgWitness는 자체 설치 절차, 데이터 디렉터리 및 릴리스 라이�
 | 관리자 작업 | 채널/슈퍼그룹 채팅 내보내기 파일 내 관련 업데이트 내역 및 관리자 로그 스냅샷 | 내보내기 기능은 내보내기 권한이 있는 관리자 계정에 로그가 제공될 때 이를 읽으며, 관리자 로그에 대한 지속적인 폴링은 이 경로에서 제외됩니다. |
 | 첨부 파일 | 원본 버전 설명자, 다운로드된 바이트 수/SHA-256 및 시도 결과 | 삭제된 파일은 복구할 수 없을 수도 있으며, 최신 버전이 이를 대체하지 않습니다. |
 | 연혁 | 현재 표시된 메시지의 명확한 스냅샷 | 모든 수정 내역이나 삭제된 콘텐츠를 재구성하지는 않습니다. |
-| 수집 프로세스 | 시작/중지, 하트비트, 오류, 설정, 범위 및 서명된 실행 영수증 | 로컬 인벤토리; GitHub 및 TDX에 [독립적인 환경 점검 기능](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) 추가 |
+| 수집 프로세스 | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/#verification-scope) |
 
-이 인터페이스는 소스 이벤트에 제공된 계정 이름을 명시하며, 관찰된 이름과 사용자 이름을 그대로 유지합니다. 이벤트에 행위자가 누락된 경우, 보고서는 해당 필드를 미지정 상태로 둡니다.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## 용량 및 텔레그램 제한 사항
 

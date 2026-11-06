@@ -60,6 +60,8 @@ Cada versão do GitHub inclui o `TgWitness-<version>-windows-amd64-portable.zip`
 | `TgWitness-Demo.cmd` | Inicie a demonstração sintética em `data\demo` |
 | `TgWitness-Check.cmd` | Execute a verificação de prontidão sem iniciar |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Extraia todo o arquivo compactado para uma pasta gravável, como `Documents\TgWitness`; não o execute de dentro do ZIP nem da pasta “Arquivos de Programas”. O ambiente de execução utiliza um caminho de módulo isolado, portanto, outras instalações do Python e a pasta `PYTHONPATH` não o afetam. Os dados permanecem na pasta “`data`” do pacote. Para atualizar, interrompa o TgWitness, extraia a nova versão para uma nova pasta e copie a pasta “`data`” para lá.
 
 Compile-o você mesmo no Windows de 64 bits com Python 3.12:
@@ -117,7 +119,7 @@ O serviço acessa o coletor dentro da rede Compose em `http://tgwitness:8787` (`
 Copie `deploy/env.example` para `.env`. Defina `TGWITNESS_IMAGE` como a versão publicada, utilizando o caminho do repositório **em letras minúsculas**, por exemplo:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

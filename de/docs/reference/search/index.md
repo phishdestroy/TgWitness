@@ -81,7 +81,7 @@ Der Chat-bezogene Zugriff findet nur Datensätze aus den jeweiligen Chats, einsc
 
 MCP-Clients können `search_messages` mit `ranked=true` aufrufen und mit `next_offset`. Verbindungen mit eingeschränktem Zugriff erhalten nur ihre eigenen Chats.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Abhängigkeiten
 

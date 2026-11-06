@@ -122,6 +122,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **ایک نئی اشاعت ڈاؤن لوڈ سائٹ کو اپ ڈیٹ کرتی ہے؛ انسٹال شدہ پروگرامز آپ کے انسٹالر دوبارہ چلانے پر اپ ڈیٹ ہوتے ہیں۔** کوئی خودکار اپڈیٹر یا چلتی ہوئی کلیکشن کا خودکار ری اسٹارٹ موجود نہیں ہے۔ موجودہ انسٹالر چینل **پیش نظارہ** ہے؛ یہ شائع شدہ، چیک شدہ بلڈز کی پیروی کرتا ہے جو `main`، جس کا کمٹ آخری نمبر شدہ GitHub ریلیز سے نیا ہو سکتا ہے۔ صفحے کا ورژن سے آتا ہے۔ `pyproject.toml`؛ اس کا کمٹ اور بلڈ آئی ڈی ایک ہی پیش نظارہ ورژن کے اندر اپ ڈیٹس کو ممتاز کرتا ہے۔
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 پہلے کی طرح ایک ہی انسٹالیشن فولڈر اور OS صارف استعمال کریں۔ مکمل ڈیٹا ڈائریکٹری کا بیک اپ لیں جب کلیکشن رک گیا ہو؛ `tgwitness paths` اس کی شناخت کرتا ہے۔ ایک دستخط شدہ ایکسپورٹ مکمل انسٹالیشن بیک اپ نہیں ہے۔
 
 **اوبنٹو روٹ انسٹالیشن پر `/opt/tgwitness`:**

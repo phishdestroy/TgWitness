@@ -81,7 +81,7 @@ L'accès limité aux discussions ne trouve que les enregistrements provenant de 
 
 Les clients MCP peuvent appeler `search_messages` avec `ranked=true` et les pages avec `next_offset`. Les connexions à portée restreinte ne reçoivent que leurs propres discussions.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Dépendances
 

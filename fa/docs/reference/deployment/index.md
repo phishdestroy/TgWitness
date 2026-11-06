@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | دموی مصنوعی را در `data\demo` آغاز کنید |
 | `TgWitness-Check.cmd` | بدون راه‌اندازی، بررسی آمادگی را اجرا کنید |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 کل آرشیو را در یک پوشه قابل نوشتن مانند `Documents\TgWitness` استخراج کنید؛ آن را از داخل فایل ZIP یا پوشه Program Files اجرا نکنید. محیط اجرای برنامه از یک مسیر ماژول ایزوله استفاده می‌کند، بنابراین نصب‌های دیگر پایتون و `PYTHONPATH` بر آن تأثیری ندارند. داده‌ها در پوشه `data` این بسته باقی می‌مانند. برای به‌روزرسانی، TgWitness را متوقف کنید، نسخه جدید را در یک پوشه جدید استخراج کرده و پوشه `data` را کپی کنید.
 
 خودتان آن را روی ویندوز ۶۴ بیتی با پایتون ۳.۱۲ بسازید:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 محتویات `deploy/env.example` را به `.env` کپی کنید. `TGWITNESS_IMAGE` را با استفاده از نسخه منتشرشده و مسیر مخزن **با حروف کوچک** تنظیم کنید، برای مثال:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

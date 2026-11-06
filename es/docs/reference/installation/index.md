@@ -122,6 +122,8 @@ La propia instalación de Windows verifica las firmas de los paquetes con .NET y
 
 **Una nueva publicación actualiza el sitio de descargas; los programas instalados se actualizan cuando se vuelve a ejecutar el instalador.** No hay ningún actualizador automático ni reinicio automático de una colección en ejecución. El canal actual del instalador es **«preview»**; sigue las compilaciones publicadas y comprobadas de `main`, cuyo commit puede ser más reciente que la última versión numerada de GitHub. La versión de la página procede de `pyproject.toml`; su commit y el ID de la compilación distinguen las actualizaciones dentro de la misma versión de vista previa.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Utiliza la misma carpeta de instalación y el mismo usuario del sistema operativo que antes. Haz una copia de seguridad del directorio de datos completo con la recopilación detenida; `tgwitness paths` lo identifica. Una exportación firmada no es una copia de seguridad completa de la instalación.
 
 **Instalación como root en Ubuntu en `/opt/tgwitness`:**

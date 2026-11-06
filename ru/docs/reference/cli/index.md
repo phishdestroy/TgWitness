@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 Даты указаны `2026-10-01` (полночь по UTC) или время в формате ISO с указанием часового пояса, `2026-10-01T09:00+03:00`. Что касается `search`, `messages` и `export` они выбирают время наблюдения. Страницы вмещают до 50 записей: следуйте `next_offset` (`--offset`) для поиска по рейтингу и `next_before` (`--before`) в других разделах.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Каждый результат сообщения содержит `untrusted_content: true`идентификаторы рабочего пространства, чата и сообщения, порядковый номер в журнале, хеш сохраненной записи и ссылку на панель. Редактирования, уведомления об удалении и `missing_on_recheck` являются отдельными записями. Отсутствие записи не доказывает, что событие никогда не происходило.
 

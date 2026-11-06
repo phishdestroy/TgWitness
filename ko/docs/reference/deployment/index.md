@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo`에서 시뮬레이션 데모를 시작하세요. |
 | `TgWitness-Check.cmd` | 시작하지 않고 준비 상태 확인 실행 |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 전체 아카이브를 `Documents\TgWitness`와 같은 쓰기 가능한 폴더에 압축을 풀어 주십시오. ZIP 파일 내부나 Program Files 폴더에서 실행하지 마십시오. 런타임은 격리된 모듈 경로를 사용하므로, 다른 Python 설치본이나 `PYTHONPATH`는 이에 영향을 미치지 않습니다. 데이터는 패키지의 `data` 폴더에 저장됩니다. 업데이트하려면 TgWitness를 중지하고, 새 버전을 새로운 폴더에 압축을 풀고 `data` 폴더를 해당 위치로 복사하십시오.
 
 Python 3.12를 사용하여 64비트 Windows 환경에서 직접 빌드하는 방법:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`를 `.env`로 복사하십시오. `TGWITNESS_IMAGE`를 공개된 버전으로 설정할 때는 **소문자** 리포지토리 경로를 사용하십시오. 예:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

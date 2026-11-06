@@ -107,3 +107,7 @@ The connection reference explains IP modes, fallback and external-request routin
 ## Controlled experiment
 
 - [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/index.md): Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.
+
+## Checks and measurements
+
+- [Checks & measurements](https://phishdestroy.github.io/TgWitness/docs/validation/index.md): 56,329 Telegram messages exported in two measured runs. Compare message counts, collection speed, export time and signed archives.

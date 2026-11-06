@@ -20,6 +20,8 @@ Tanlangan kuzatuvlarni ishning o'qiladigan hisobotiga aylantiring: uning savoli,
 
 Ma'lumotlarning oldindan ko'rinishi to'liq barqaror jurnal prefiksini hisoblaydi, dastlabki namunani emas. Faqat ko'rsatilgan namunaviy qatorlar va uzun ro'yxatlar chegaralangan; ularning kiritilmagan sonlari ko'rsatiladi. Keyingi eksport yangi barqaror snapshot oladi, shuning uchun davom etayotgan yig'ish raqamlarni oshirishi mumkin. Doira, sonlar va manba identifikatori imzolangan hisobotga kiritilgan. Formani ochish yoki ko'rinishini ko'rish uni saqlamaydi.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Qabul qiluvchining nusxasini tanlang.** Jadvallar va transkript tanlangan yozuvlardan foydalanadi. To'liqlik, saqlash va qamrov butun manba jurnalini tasvirlaydi. Dalil ZIP hujjati uning asl yozuvlari va ilovalarini o'z ichiga oladi. Qabul qiluvchi faqat tanlangan, ruxsat etilgan ma'lumotlarni olishi kerak bo'lgan hollarda [minimal topshirishdan](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#handover-extract) foydalaning.
 
 ### Tahrirlar, o'chirishlar va yetishmayotgan IDlarni o'qing
@@ -90,12 +92,12 @@ Qo'shilganda, `analytics.json` arxivning imzolangan fayl xeshlari bilan himoyala
 
 | Processor | U nimani ko'rsatadi |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 Manba kodini olgandan so'ng, yuqorida sanab o'tilgan sakkizta dizaynni bir xil badiiy jurnal asosida tuzing:
 
@@ -147,7 +149,7 @@ Har bir tekshiruvni yozib olingan to'plam qamrovi bilan birga alohida ko'rib chi
 4. Asl ZIP-fayllarni va ularning hashlarini saqlang. Har bir saqlovchi, uzatish, sana va maqsadini qayd eting. Tegishli operator bayonotlari va ish yozuvlarini ular bilan birga saqlang.
 5. Maxfiy VMlar uchun iqtibos, chaqiriq, Intel sertifikat zanjiri, o'lchovlar, aniq manba va kalit boshqaruv shartlarini saqlang va mustaqil ravishda tasdiqlang. Attestatsiya tekshiruv natijasini ko'rib chiqilgan artefaktlar bilan birga saqlang.
 
-Har bir rejimda ma'lumotlarni olish, arxiv yaxlitligi, vaqt va yig'ish qamrovini tekshirish uchun [tasdiqlash doirasiga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) qarang.
+See [verification scope](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Qabul qiluvchi ko'rib chiqishi
 

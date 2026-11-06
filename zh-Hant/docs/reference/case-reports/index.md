@@ -20,6 +20,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 資料預覽所統計的是完整的穩定日誌前綴，而非初始樣本。 僅顯示的樣本列與長清單會被截斷；其省略的計數會 一併顯示。後續匯出將擷取新的穩定快照，因此持續的蒐集作業可能會 增加相關數字。範圍、計數及來源身分均包含於 經簽署的報告中。開啟或預覽表單並不會將其儲存。
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **請選擇收件者的副本。** 圖表和對話紀錄均採用所選的紀錄。 完整性、保管與涵蓋範圍描述了完整的原始日誌。證據 ZIP 檔案 包含其原始紀錄及附件。當收件者僅需接收經選取且獲准的資料時，請採用[精簡版移交流程](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#handover-extract) 。
 
 ### 讀取編輯、刪除及缺失的 ID
@@ -90,12 +92,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 | Processor | 功能展示 |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 請從原始碼檢出點開始，根據同一份虛構期刊，建置上述列出的全部八種設計：
 
@@ -147,7 +149,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 請保留原始 ZIP 檔案及其雜湊值。記錄每位持有者、轉移情況、日期 及目的。並將附有來源標示的操作員陳述與案件筆記一併保留。
 5. 針對機密虛擬機器，請保留並獨立驗證引述、挑戰、 Intel 憑證鏈、測量結果、確切來源及金鑰處理條件。 請將驗證結果與已審查的證據一併保存。
 
-請參閱[驗證範圍，](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)了解各模式下針對資料擷取、 檔案完整性、時間及蒐集範圍的檢查項目。
+See [verification scope](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## 收件人審閱
 

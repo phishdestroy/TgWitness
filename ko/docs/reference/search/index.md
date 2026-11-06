@@ -81,7 +81,7 @@ OCR 및 전사본은 암호화된 아티팩트 내에 그대로 유지됩니다.
 
 MCP 클라이언트는 다음을 호출할 수 있습니다 `search_messages` 다음과 같이 호출할 수 있습니다 `ranked=true` 를 사용하여 호출하고 `next_offset`를 사용하여 페이지를 호출할 수 있습니다. 범위 지정된 연결은 해당 채팅 내용만 수신합니다.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## 의존성
 

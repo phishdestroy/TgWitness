@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 日付は `2026-10-01` （UTC 0時）またはタイムゾーンを明記したISO形式の時刻 `2026-10-01T09:00+03:00`。 `search`, `messages` および `export` については、 観測時刻を選択します。各ページには最大50件のレコードが格納されます：ランク付け検索については `next_offset` (`--offset`) を参照して 順位付き検索を行い、 `next_before` (`--before`) については他の箇所を参照してください。
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 各メッセージの結果には `untrusted_content: true`、ワークスペース、チャット、および メッセージID、ジャーナルのシーケンス番号、保存されたレコードのハッシュ、パネルへのリンクが含まれます。編集、 削除通知、および `missing_on_recheck` は個別のレコードとして扱われます。レコードが存在しない からといって、そのイベントが決して発生しなかったことを証明するものではありません。
 

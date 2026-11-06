@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 날짜는 `2026-10-01` (UTC 자정) 또는 시간대가 명시된 ISO 형식입니다. `2026-10-01T09:00+03:00`. `search`, `messages` 및 `export` 의 경우 관찰 시간을 선택합니다. 각 페이지에는 최대 50개의 기록이 표시되며, 순위 기반 검색을 위해서는 `next_offset` (`--offset`)를 따라 순위별 검색을 수행하고 `next_before` (`--before`)는 다른 곳에서 참조하십시오.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 모든 메시지 결과에는 `untrusted_content: true`, 워크스페이스, 채팅 및 메시지 ID, 저널 순서, 저장된 기록 해시, 패널 링크를 포함합니다. 수정, 삭제 알림 및 `missing_on_recheck` 는 별도의 기록으로 처리됩니다. 기록이 없다고 해서 해당 사건이 발생하지 않았음을 증명하는 것은 아닙니다.
 

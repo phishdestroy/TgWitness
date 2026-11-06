@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 تاریخ‌ها هستند `2026-10-01` (نیمه‌شب به وقت UTC) یا زمان‌های ISO با منطقه زمانی، `2026-10-01T09:00+03:00`. برای `search`, `messages` و `export` آنها زمان مشاهده را انتخاب می‌کنند. صفحات تا ۵۰ رکورد را در خود جای می‌دهند: دنبال کنید `next_offset` (`--offset`) برای جستجوی رتبه‌بندی‌شده و `next_before` (`--before`) در جاهای دیگر.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 هر نتیجه پیام شامل `untrusted_content: true`، فضای کاری، چت و شناسه پیام‌ها، توالی دفترچه، هش رکورد ذخیره شده و یک لینک پنل. ویرایش‌ها، اعلان‌های حذف و `missing_on_recheck` سوابق جداگانه‌ای هستند. عدم وجود یک سابقه، اثبات نمی‌کند که یک رویداد هرگز رخ نداده است.
 

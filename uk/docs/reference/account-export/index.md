@@ -12,6 +12,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/accou
 
 Цей робочий процес експортує дані, доступні на даний момент для підключеного облікового запису. За замовчуванням використовується [Telegram Takeout](https://core.telegram.org/api/takeout); це не є резервною копією недоступних або видалених даних Telegram. Таємні чати, недоступна історія та попередні редагування не відновлюються. Telegram може встановити період очікування перед початком роботи Takeout. Панель відображає цей час очікування; вона не перемикає транспортний протокол без попередження. Опція явного використання стандартного API має інший обсяг охоплення та записує категорії, що не підтримуються.
 
+Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+
+For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+
+Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+
 ## Виберіть, що збирати
 
 | Налаштування | Значення |
@@ -31,7 +37,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/accou
 
 Історія фотографій профілю та історії за замовчуванням не відбираються. Якщо для справи потрібні лише повідомлення, також вимкніть профіль та контакти. Якщо вкладення чи метадані не потрібні, їх виключення під час збору даних дозволить уникнути збереження ще однієї приватної копії в цьому експорті.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
 ## Підсумок, охоплення та перевірка
 
@@ -87,8 +93,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## Обмін даними та розміщення записів на сервері
 
-Виберіть повідомлення та файли, які потрібні одержувачу, перегляньте повну копію для обміну та збережіть оригінал окремо. Запишіть хеш доставленого ZIP-файлу, щоб одержувач міг ідентифікувати та перевірити саме цю копію. Псевдонімізація замінює вибрані ідентифікатори; включений текст та оригінальні файли залишаються частиною перегляду.
+Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
 
-GitHub Actions підтримує експорт даних усього облікового запису та вибраних чатів через Takeout або звичайний API, а також журнал подій одного чату. У [посібнику](https://phishdestroy.github.io/TgWitness/docs/capture/) з [хостованого збору](https://phishdestroy.github.io/TgWitness/docs/capture/) даних пояснюються перевірка налаштувань та обмеження у 120 хвилин. Щоб перевірити копію, отриману з хостованого збору даних, порівняйте її вихідний хеш з оригінальним архівом та перевірте сертифікацію архіву за допомогою перевірок, [специфічних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) [для](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) [відповідного](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) [режиму](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope).
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope).
 
 [Формат доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Звіти про справи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)

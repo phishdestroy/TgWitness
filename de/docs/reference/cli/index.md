@@ -50,7 +50,7 @@ Ein Remote-Panel benötigt HTTPS; einfaches HTTP wird nur für `127.0.0.1`, `loc
 
 Datumsangaben erfolgen `2026-10-01` (UTC-Mitternacht) oder ISO-Zeiten mit Zeitzone `2026-10-01T09:00+03:00`. Für `search`, `messages` und `export` wählen sie den Beobachtungszeitpunkt. Seiten fassen bis zu 50 Datensätze: Befolgen Sie `next_offset` (`--offset`) für die rangierte Suche und `next_before` (`--before`) an anderer Stelle.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Jedes Nachrichtenergebnis enthält `untrusted_content: true`den Arbeitsbereich, den Chat und die Nachrichten-IDs, die Protokollsequenz, den Hash des gespeicherten Datensatzes und einen Panel-Link. Bearbeitungen, Löschhinweise und `missing_on_recheck` sind separate Datensätze. Das Fehlen eines Datensatzes bedeutet nicht, dass ein Ereignis nie stattgefunden hat.
 

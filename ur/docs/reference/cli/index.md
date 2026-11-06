@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 تاریخیں ہیں `2026-10-01` (UTC نصف شب) یا وقت کے زون کے ساتھ ISO اوقات، `2026-10-01T09:00+03:00`۔ کے لیے `search`, `messages` اور `export` وہ مشاہدے کا وقت منتخب کرتے ہیں۔ صفحات میں زیادہ سے زیادہ 50 ریکارڈز ہوتے ہیں: فالو کریں `next_offset` (`--offset`) درجہ بندی شدہ تلاش کے لیے اور `next_before` (`--before`) کہیں اور۔
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 ہر پیغام کے نتیجے میں شامل ہوتا ہے `untrusted_content: true`، ورک اسپیس، چیٹ اور میسج آئی ڈیز، جرنل کا تسلسل، محفوظ شدہ ریکارڈ ہیش اور ایک پینل لنک۔ ترامیم، حذف کرنے کے نوٹس اور `missing_on_recheck` الگ الگ ریکارڈز ہیں۔ کسی ریکارڈ کی عدم موجودگی اس بات کا ثبوت نہیں کہ کوئی واقعہ کبھی پیش ہی نہیں آیا۔
 

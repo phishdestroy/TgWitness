@@ -81,7 +81,7 @@ OCR 結果與轉錄內容仍保留於其加密的原始檔中。其索引僅存�
 
 MCP 客戶端可呼叫 `search_messages` 透過 `ranked=true` ，並透過 `next_offset`。範圍限定連線僅會接收其對應的聊天內容。
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## 依賴項
 

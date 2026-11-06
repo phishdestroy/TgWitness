@@ -20,6 +20,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-
 
 У попередньому перегляді даних враховується повний стабільний префікс журналу, а не початкова вибірка. Обмежуються лише відображені зразкові рядки та довгі списки; кількість пропущених елементів показано. Під час подальшого експорту створюється новий стабільний знімок, тому тривале збирання даних може збільшити ці показники. Обсяг, кількість та ідентифікація джерел включені до підписаного звіту. Відкриття або попередній перегляд форми не призводить до її збереження.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Виберіть копію для одержувача.** Діаграми та стенограма використовують вибрані записи. Цілісність, зберігання та охоплення описують повний журнал джерел. Архів ZIP із доказами містить оригінальні записи та вкладення. Використовуйте [мінімізовану передачу,](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#handover-extract) коли одержувач має отримати лише вибрані, дозволені дані.
 
 ### Перегляньте редагування, видалення та відсутні ідентифікатори
@@ -90,12 +92,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-
 
 | Processor | Що він показує |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 На основі вихідного коду створіть усі вісім макетів, перелічених вище, на прикладі одного й того ж вигаданого журналу:
 
@@ -147,7 +149,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. Збережіть оригінальні ZIP-архіви та їхні хеші. Зафіксуйте кожного власника, передачу, дату та мету. Збережіть разом із ними відповідні заяви операторів та примітки щодо справи.
 5. Для конфіденційних віртуальних машин збережіть та незалежно перевірте цитату, запит, ланцюжок сертифікатів Intel, вимірювання, точне джерело та умови поводження з ключами. Зберігайте результат перевірки атестації разом із перевіреними артефактами.
 
-Дивіться [розділ «Обсяг верифікації»](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) для ознайомлення з перевірками збору даних, цілісності архіву, часу та охоплення збору в кожному режимі.
+See [verification scope](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Перевірка одержувачем
 

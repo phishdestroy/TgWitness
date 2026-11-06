@@ -122,6 +122,8 @@ Windows へのインストール時、.NET によってパッケージの署名�
 
 **新しい公開版がダウンロードサイトを更新します。インストール済みのプログラムは、 インストーラーを再度実行すると更新されます。**無人更新機能や、 実行中のコレクションの自動再起動機能はありません。現在のインストーラーチャネルは**プレビュー版**であり、 公開済みで検証済みのビルドに基づいています。 `main`公開・検証済みのビルドに準拠しており、そのコミットは、直近の 番号付きGitHubリリースよりも新しい場合があります。ページのバージョンは `pyproject.toml`から取得されます。そのコミット およびビルドIDにより、同じプレビューバージョン内での更新が区別されます。
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 以前と同じインストールフォルダとOSユーザーを使用してください。コレクションを停止した状態で、データ ディレクトリ全体をバックアップしてください。 `tgwitness paths` これを識別します。署名付きエクスポート は、完全なインストールバックアップではありません。
 
 **Ubuntuへのルートインストールは `/opt/tgwitness`:**

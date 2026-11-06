@@ -60,6 +60,8 @@ Setiap Pelepasan GitHub mengandungi `TgWitness-<version>-windows-amd64-portable.
 | `TgWitness-Demo.cmd` | Mulakan demo sintetik di `data\demo` |
 | `TgWitness-Check.cmd` | Jalankan pemeriksaan kesiapsiagaan tanpa memulakan |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Ekstrak keseluruhan arkib ke dalam folder yang boleh ditulis seperti `Documents\TgWitness`; jangan jalankan ia dari dalam ZIP atau dari Program Files. Runtime menggunakan laluan modul terasing, jadi pemasangan Python lain dan `PYTHONPATH` tidak menjejaskannya. Data kekal dalam folder `data` pada pakej ini. Untuk mengemas kini, hentikan TgWitness, ekstrak versi baru ke dalam folder baru dan salin folder `data`.
 
 Bina sendiri pada Windows 64-bit dengan Python 3.12:
@@ -117,7 +119,7 @@ Perkhidmatan ini mencapai pengumpul di dalam rangkaian Compose di `http://tgwitn
 Salin `deploy/env.example` ke `.env`. Tetapkan `TGWITNESS_IMAGE` ke versi terbitan, menggunakan laluan repositori **huruf kecil**, contohnya:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

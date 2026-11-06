@@ -81,7 +81,7 @@ Sohbet kapsamlı erişim, yalnızca kendi sohbetlerinden gelen kayıtları bulur
 
 MCP istemcileri `search_messages` ile `ranked=true` komutuyla çağırabilir ve `next_offset`ile çağrı yapabilir. Kapsamlı bağlantılar yalnızca kendi sohbetlerini alır.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Bağımlılıklar
 

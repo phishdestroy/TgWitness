@@ -12,6 +12,12 @@ Filtry nadawców i tekstu rozwijają się w sekcji **„Filtruj według nadawcy 
 
 Ten przepływ pracy eksportuje dane, do których obecnie ma dostęp podłączone konto. Domyślnie wykorzystywana jest [funkcja Telegram Takeout](https://core.telegram.org/api/takeout); nie jest to kopia zapasowa niedostępnych lub usuniętych danych z Telegrama. Tajne czaty, niedostępna historia i wcześniejsze edycje nie są odzyskiwane. Telegram może nałożyć okres oczekiwania przed uruchomieniem funkcji Takeout. Panel wyświetla ten czas oczekiwania; nie przełącza transportu w tle. Opcja „explicit regular-API” ma inny zakres i rejestruje kategorie, które nie są obsługiwane.
 
+Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+
+For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+
+Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+
 ## Wybierz, co ma być gromadzone
 
 | Kontekst | Znaczenie |
@@ -31,7 +37,7 @@ Ustawienie domyślne **kolekcji „Minimize”** wyłącza pliki i metadane kont
 
 Historia zdjęć profilowych i relacje nie są domyślnie zaznaczone. Jeśli w sprawie potrzebne są wyłącznie wiadomości, należy również wyłączyć profil i kontakty. Jeśli załączniki lub metadane nie są potrzebne, wykluczenie ich podczas pozyskiwania danych pozwala uniknąć zachowania kolejnej prywatnej kopii w tym eksporcie.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
 ## Podsumowanie, zakres i weryfikacja
 
@@ -87,8 +93,8 @@ Powiązanie ze źródłem nie stanowi samodzielnego dowodu na to, że podczas pr
 
 ## Udostępnianie i przechowywanie zrzutów
 
-Należy wybrać wiadomości i pliki potrzebne odbiorcy, przejrzeć kompletną kopię udostępnioną oraz zachować osobno kopię źródłową. Należy zapisać skrót pliku ZIP, który został dostarczony, aby odbiorca mógł zidentyfikować i zweryfikować tę konkretną kopię. Wybrane identyfikatory są zastępowane pseudonimami; zawarty tekst i oryginalne pliki pozostają częścią przeglądu.
+Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
 
-GitHub Actions obsługuje eksport całych kont i wybranych czatów za pośrednictwem Takeout lub standardowego API, a także dziennik zdarzeń z jednego czatu. Przewodnik dotyczący [przechwytywania hostowanego](https://phishdestroy.github.io/TgWitness/docs/capture/) wyjaśnia weryfikację ustawień oraz limit 120 minut. Aby zweryfikować kopię udostępnioną pochodzącą z przechwytywania hostowanego, należy porównać jej skrót źródłowy z oryginalnym archiwum oraz zweryfikować poświadczenie tego archiwum za pomocą kontroli [specyficznych dla](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) [danego](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) [trybu](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope).
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope).
 
 [Format dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/) · [Raporty dotyczące spraw](https://phishdestroy.github.io/TgWitness/pl/docs/reference/case-reports/)

@@ -122,6 +122,8 @@ Windows 安装程序会通过 .NET 自行验证软件包签名，无需 OpenSSL�
 
 **新版本发布后，下载站点会相应更新；当您 再次运行安装程序时，已安装的程序将自动更新。**该工具不提供无人值守更新程序，也不会自动重启 正在运行的集合。当前安装程序通道处于**预览阶段**；它遵循 来自 `main`发布的、经过验证的构建版本，其提交时间可能晚于 GitHub 上最近的编号版本。该页面的版本号来源于 `pyproject.toml`；其提交 和构建 ID 可区分同一预览版本内的更新。
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 请使用与之前相同的安装文件夹和操作系统用户。在停止数据收集后，备份完整的数据 目录； `tgwitness paths` 用于标识该数据。已签名的导出文件 并非完整的安装备份。
 
 **Ubuntu 根目录安装位于 `/opt/tgwitness`:**

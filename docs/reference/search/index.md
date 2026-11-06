@@ -81,7 +81,7 @@ Chat-scoped access finds only records from its chats, including recognized text 
 
 MCP clients can call `search_messages` with `ranked=true` and page with `next_offset`. Scoped connections receive only their chats.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Dependencies
 

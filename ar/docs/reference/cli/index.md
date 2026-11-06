@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 التواريخ هي `2026-10-01` (منتصف الليل بتوقيت UTC) أو التوقيت الدولي (ISO) مع تحديد المنطقة الزمنية، `2026-10-01T09:00+03:00`. بالنسبة `search`, `messages` و `export` يختارون وقت الملاحظة. تستوعب الصفحات ما يصل إلى 50 سجلاً: اتبع `next_offset` (`--offset`) من أجل البحث حسب الترتيب و `next_before` (`--before`) في مكان آخر.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 تتضمن كل نتيجة رسالة `untrusted_content: true`معرفات مساحة العمل والدردشة والرسالة، وتسلسل السجل، وتجزئة السجل المحفوظ، ورابط اللوحة. التعديلات، وإشعارات الحذف، و `missing_on_recheck` تُعد سجلات منفصلة. وغياب السجل لا يثبت أن الحدث لم يحدث أبدًا.
 

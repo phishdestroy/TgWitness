@@ -20,6 +20,8 @@ Buka **Ekspor → Konfigurasi dan pratinjau**. Lanjutkan ke **Data → Desain & 
 
 Pratinjau data menghitung prefiks jurnal stabil secara lengkap, bukan sampel awal. Hanya baris sampel yang ditampilkan dan daftar panjang yang dibatasi; jumlah yang dihilangkan ditampilkan. Ekspor selanjutnya akan mengambil snapshot stabil yang baru, sehingga pengumpulan yang sedang berlangsung dapat meningkatkan angka-angka tersebut. Cakupan, jumlah, dan identitas sumber disertakan dalam laporan yang ditandatangani. Membuka atau melihat pratinjau formulir tidak akan menyimpannya.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Pilih salinan untuk penerima.** Bagan dan transkrip menggunakan catatan yang dipilih. Integritas, penyimpanan, dan cakupan menggambarkan jurnal sumber secara lengkap. File ZIP bukti berisi catatan asli dan lampirannya. Gunakan [serah terima yang dipersempit](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#handover-extract) jika penerima hanya perlu menerima data yang dipilih dan diizinkan.
 
 ### Baca perubahan, penghapusan, dan ID yang hilang
@@ -90,12 +92,12 @@ Jika disertakan, `analytics.json` dilindungi oleh hash file yang ditandatangani 
 
 | Processor | Apa yang ditampilkannya |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 Dari checkout sumber, buatlah kedelapan desain yang tercantum di atas dari jurnal fiktif yang sama:
 
@@ -147,7 +149,7 @@ Tinjau setiap pemeriksaan secara terpisah, bersamaan dengan cakupan pengumpulan 
 4. Pertahankan file ZIP asli beserta hash-nya. Catat setiap pemegang, transfer, tanggal, dan tujuan. Pertahankan pernyataan operator yang dikaitkan serta catatan kasus bersama dengan data tersebut.
 5. Untuk VM rahasia, pertahankan dan verifikasi secara independen kutipan, tantangan, rantai sertifikat Intel, pengukuran, sumber yang tepat, dan kondisi penanganan kunci. Simpan hasil verifikasi attestation bersama artefak yang telah ditinjau.
 
-Lihat [ruang lingkup verifikasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) untuk pemeriksaan akuisisi, integritas arsip, waktu, dan cakupan pengumpulan dalam setiap mode.
+See [verification scope](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Tinjauan penerima
 

@@ -108,6 +108,10 @@ The connection reference explains IP modes, fallback and external-request routin
 
 - [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/index.md): Watch a controlled Telegram Desktop export experiment, compare seven test conversations, and inspect the original recording and paired files.
 
+## Checks and measurements
+
+- [Checks & measurements](https://phishdestroy.github.io/TgWitness/docs/validation/index.md): 56,329 Telegram messages exported in two measured runs. Compare message counts, collection speed, export time and signed archives.
+
 ---
 
 # Start in minutes
@@ -887,7 +891,7 @@ Enable JavaScript to generate a key and decrypt your archive.
 
 **Preview available from `main`.** A fork launches a pinned reusable workflow from `phishdestroy/TgWitness`. The workflow exports an account, selected chats or one chat's event journal using a newly created Telegram session, attests the evidence ZIP or multipart manifest, and uploads only recipient-encrypted handoffs. The normal administration panel is not exposed.
 
-Choose `client=official_web` to run the [official-client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) with guarded Telegram Web controls and video．It requires your own upstream proxy and observes one rendered chat．The default `client=api` retains the full-account export modes described below．
+Choose `client=official_web` to run the [official-client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) with guarded Telegram Web controls and video. It requires your own upstream proxy and observes one rendered chat. The default `client=api` retains the full-account export modes described below.
 
 The verifier checks the archive against its GitHub attestation, the approved workflow and collector commits, and the signed journal and attachment hashes. The collection process uses pinned upstream code and fresh storage. A reviewer can inspect that code and verify the delivered archive against its recorded run.
 
@@ -908,9 +912,9 @@ The repository must contain the published pinned source and reusable-workflow co
 
 ## Session time budget
 
-Before collection，**Calculate time and size** estimates the selected history and files from message counts and a bounded sample．The display includes time already spent signing in，estimated collection time and a reserve for packaging．For files，the initial estimate uses 1 MiB/s and a twofold time margin；progress replaces that assumption with the measured rate．Use **Messages only** or select fewer chats when the estimate exceeds the remaining time．
+Before collection, **Calculate time and size** estimates the selected history and files from message counts and a bounded sample. The display includes time already spent signing in, estimated collection time and a reserve for packaging. For files, the initial estimate uses 1 MiB/s and a twofold time margin; progress replaces that assumption with the measured rate. Use **Messages only** or select fewer chats when the estimate exceeds the remaining time.
 
-Telegram's reported Takeout wait is added to the budget．The collector stops acquisition when the remaining time is needed for packaging，retains acquired data and marks a partial result．A 120-minute session therefore uses its remaining collection window rather than waiting for the deadline before preparing the archive．The display identifies selections whose full size could not be sampled．
+Telegram's reported Takeout wait is added to the budget. The collector stops acquisition when the remaining time is needed for packaging, retains acquired data and marks a partial result. A 120-minute session therefore uses its remaining collection window rather than waiting for the deadline before preparing the archive. The display identifies selections whose full size could not be sampled.
 
 ## Choose this mode or a persistent workspace
 
@@ -2246,6 +2250,280 @@ Full SHA-256 copied
 
 ---
 
+# 56 329 messages.
+
+Canonical page: https://phishdestroy.github.io/TgWitness/docs/validation/
+
+TGWITNESS / REAL EXPORTS
+
+Captured. Exported.
+
+Two fresh Telegram exports, timed from collection to the finished archive. Explore the workspace, inspect the numbers and download a sample.
+
+[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/?lang=en)[Download sample export](https://phishdestroy.github.io/TgWitness/demo/downloads/tgwitness-demo.zip)
+
+The interactive demo and sample use fictional messages. The measurements below come from real export runs.
+
+TGW / 001
+
+Recorded snapshot · not live monitoring
+
+Checked at
+
+2026-11-06 18:37:38 UTC
+
+Tested revision
+
+[92e539af](https://github.com/phishdestroy/TgWitness/commit/92e539af40d8368d198ff5e040f1d876f2c1310e)
+
+Text + metadata · signed archives
+
+**56 329**Messages exported
+
+**160.531**Messages/s · best collection run
+
+**2**Signed export runs
+
+**3**Servers inspected
+
+Server AWARP · 2 accounts
+
+**27 030**Messages exported
+
+**142.983**messages/s
+
+Collection only
+
+189.043 s
+
+Complete export
+
+211.647 s
+
+Server BWARP · 2 accounts
+
+**29 299**Messages exported
+
+**160.531**messages/s
+
+Collection only
+
+182.513 s
+
+Complete export
+
+206.650 s
+
+01 /
+
+## Measured on real exports.
+
+One new export per server, using two accounts on each. Text and metadata through WARP; attachments excluded. These are individual runs, not a capacity guarantee.
+
+messages/s
+
+Server A**142.983 messages/s**
+
+Server B**160.531 messages/s**
+
+Server C
+
+Not measured
+
+—
+
+Messages ÷ collection time. Preparation, selection and packaging are outside this interval.
+
+Messages ÷ total measured export time, including preparation and packaging.
+
+No collection benchmark receipt for server C.
+
+No reused records or duplicate IDs in either run. Server A also had a protected-source read running in the background. FloodWait pauses were respected: A · 4, B · 3.
+
+**Exact measurements & archive hashes**
+
+| Server | Messages | Collection only | Complete export |
+| --- | --- | --- | --- |
+| Server A | 27 030 | 189.043 s **142.983 messages/s** | 211.647 s **127.713 messages/s** |
+| 2026-11-06T18:26:51.500Z → 2026-11-06T18:30:23.228Z SHA-256 `20e507fc68446680ed002fd486d0968a944ec0c71e02f937331ae2b19ab4cd66` |  |  |  |
+| Server B | 29 299 | 182.513 s **160.531 messages/s** | 206.650 s **141.781 messages/s** |
+| 2026-11-06T18:25:40.419Z → 2026-11-06T18:29:07.173Z SHA-256 `824601b502762efaabb8ff9afdb1e8d7fff189862ef2cbc4d8d26d0d68c83e4c` |  |  |  |
+
+Both archives passed verification with a pinned collector key. This establishes integrity relative to that key, not Telegram authorship.
+
+02 /
+
+## All three, with the scope spelled out.
+
+Journal integrity, file permissions, storage, network routes and running processes were inspected on every server.
+
+A Inspected
+
+### Server A
+
+Collection & export
+
+8 vCPU · 16 GiB · Ubuntu 24.04
+
+Journals checked
+
+21
+
+Journal events
+
+4 517
+
+Checkpoints
+
+147
+
+Fresh collection benchmark, archive verification and backup integrity checks.
+
+B Inspected
+
+### Server B
+
+Collection & export
+
+8 vCPU · 16 GiB · Ubuntu 24.04
+
+Journals checked
+
+21
+
+Journal events
+
+1 993
+
+Checkpoints
+
+147
+
+Fresh collection benchmark, archive verification and backup integrity checks.
+
+C Inspected
+
+### Server C
+
+Panel & nested VM
+
+8 vCPU · 32 GiB · Ubuntu 24.04
+
+Journals checked
+
+14
+
+Journal events
+
+7 185
+
+Checkpoints
+
+973
+
+Panel authentication, loopback binding and a nested VM inspected. No collection benchmark on this server.
+
+**Test results, scope & technical notes**
+
+03 /
+
+## Passes and gaps, side by side.
+
+Latest result per pytest case, including reruns. Standalone browser and evidence suites are counted separately below; they are not added to the pytest total.
+
+**1 585**Passed
+
+**3**Failed
+
+**37**Skipped
+
+Three capture browser tests failed because the required Chromium sandbox is unavailable in these containers. The sandbox was not disabled. The 37 platform skips do not count as passes.
+
+- Browser suites**102 passed**
+- Interface suites**66 passed**
+- Evidence suites**15 passed**
+- Website suites**9 passed**
+- Additional suites**13 passed**
+
+04 /
+
+## What this snapshot leaves open.
+
+1. 01
+
+   ### Browser sandbox
+
+   Three browser failures remain in this environment. A successful run elsewhere does not replace these results.
+2. 02
+
+   ### Backup recency
+
+   42 backup journals and 51,285 files passed integrity checks. At the snapshot, 3,507 live events were newer than the latest backups. Active data also needs durable storage.
+3. 03
+
+   ### Network coverage
+
+   16 of 40 route qualifications were unavailable. Those accounts were not connected to Telegram through a direct fallback.
+4. 04
+
+   ### Independent time
+
+   The retained witness journal passed integrity checks. Its last event was at 07:27 UTC on 6 November; independent timestamp verification was not performed.
+5. 05
+
+   ### Open security work
+
+   Key protection, account protection, durable storage and release controls still have open findings. Successful integrity checks are not a security certification.
+6. 06
+
+   ### Access limits
+
+   The separate CI host and the publishing account were not inspected at operating-system or account level. The three inspected servers are the scope of this page.
+7. 07
+
+   ### Measurement limits
+
+   Two public sources, two individual runs, no attachment download and no repeated trials. Server C has no measured collection rate. These numbers do not predict other workloads.
+
+05 /
+
+## A dated record, with a way back to the numbers.
+
+These are operator measurements, not an independent attestation. The JSON contains only aggregate data. Source and account identities, message contents, credentials and private archives are not published.
+
+1. Pin the source revision and verify the installed release.
+2. Collect into a new workspace, retaining zero reused records.
+3. Measure collection and complete-export intervals separately.
+4. Verify the archive against its pinned key; retain its SHA-256 digest.
+
+Tested release `92e539af40d8-83e41104669e`
+
+[Download the data ↓](https://phishdestroy.github.io/TgWitness/validation/snapshot.json)
+
+SIGNED AUDIT / ENGLISH
+
+### Check the numbers.
+
+The English report includes the measured results, open findings and a reproducible signature check.
+
+[Read the report ↗](https://github.com/phishdestroy/TgWitness/blob/main/website/validation/audit/REPORT.md)[Signed statement ↓](https://phishdestroy.github.io/TgWitness/validation/audit/PROOF.json)[Measurements CSV ↓](https://phishdestroy.github.io/TgWitness/validation/audit/MEASUREMENTS.csv)[Python verifier ↓](https://phishdestroy.github.io/TgWitness/validation/audit/VERIFY.py)[File checksums ↓](https://phishdestroy.github.io/TgWitness/validation/audit/SHA256SUMS.txt)
+
+The signature protects the report against alteration. It does not independently attest the measurements or certify GDPR compliance. The report records the completed audit at 19:08 UTC; the infrastructure snapshot above was taken earlier.
+
+**Source receipt digests**
+
+These hashes identify retained receipts. A hash alone does not prove the measurements; the private originals are not downloadable from this page.
+
+- benchmark-1.json`66cdf2db25901ee1f780a0e2d14b9b84888dbe525bff73bae19819b217f95d0c`
+- benchmark-2.json`ad2978fe2a7563476da43293eaaf5f498ee12522f0ea3e401bc43205c64874d1`
+- test-totals.json`922cf87d9320b149f2fc6791fc05f98335ec0952f9258e6eaeff179aeef33bb1`
+- infra-summary.json`325d390ef752b15f44203f97348863e24f0f631fe88998d5e1f398a5311a9339`
+
+The page is a snapshot, not a claim that every function or account has been tested. Absence of a measurement is shown explicitly.
+
+
+---
+
 # Quick start
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/
@@ -2491,6 +2769,8 @@ Windows installation itself verifies package signatures with .NET and does not r
 
 **A new publication updates the download site; installed programs update when you run the installer again.** There is no unattended updater or automatic restart of a running collection. The current installer channel is **preview**; it follows published, checked builds from `main`, whose commit can be newer than the last numbered GitHub release. The page's version comes from `pyproject.toml`; its commit and build ID distinguish updates within the same preview version.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Use the same installation folder and OS user as before. Back up the complete data directory with collection stopped; `tgwitness paths` identifies it. A signed export is not a complete installation backup.
 
 **Ubuntu root installation at `/opt/tgwitness`:**
@@ -2657,7 +2937,25 @@ TgWitness recognises files by their **contents**, not their names. Renaming a fi
 
 ## Before you start: API ID and API hash
 
-You can sign in without creating a Telegram API application. When no pair is entered, imported or already saved in the workspace, TgWitness picks a pair from its built-in pool of 50 public API pairs (`tgwitness/api_pool.py`) in random order. If Telegram refuses a pair (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried, up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they do not authorize an account by themselves.
+You can sign in without creating a Telegram API application. When no pair is entered, imported or already saved in the workspace, TgWitness picks a pair from its built-in pool of 50 public API pairs (`tgwitness/api_pool.py`), preferring Telegram Desktop for a fresh login and retaining a saved pair first; remaining candidates are shuffled. If Telegram refuses a pair (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried, up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they do not authorize an account by themselves.
+
+Missing connection fields use a deterministic device/OS pair from the bundled [opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735): Desktop `2040`, Android `6`, Android X `21724`, iOS `10840`, macOS `2834`, and Web `2496`. Android's source-build ID `4` also uses the Android catalog, as identified in [Telegram Android's BuildVars](https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java). Web defaults to A; an imported `K` app-version suffix or `macos` language pack selects K, and version `0.7.0` selects Webogram. Unknown application IDs keep Telethon's host defaults. Imported fields always win, including an older app version and an empty language pack. The catalog never changes the API ID/hash. Its version snapshot is reviewed explicitly, not fetched during login. A saved profile stays stable after updates.
+
+`account.getAuthorizations` reports Telegram's saved authorization metadata; it is not an echo of each new `initConnection`. Compare it with the actual sent profile. Connecting an existing authorization does not validate its companion API hash: `initConnection` sends the API ID, while the hash is used by login requests.
+
+After a new phone or QR authorization, TgWitness requests config, nearest DC, online status, languages (when the language pack is nonempty), app updates and terms-of-service updates, with 0.3–1.5 seconds between requests. Updating status briefly marks the account online. This sequence runs once at login completion, not on imports, reconnects or restarts. The authorization is saved first; a failed request stops the sequence without retrying or discarding the login. Results are recorded as `account.initialized`, with error names rather than response bodies. The sequence is not a guarantee against account restrictions.
+
+For `tdesktop`, a missing `tz_offset` uses the server's local UTC offset, rounded to 900 seconds using the [opentele2 algorithm](https://github.com/DedInc/opentele2/blob/7e973bc71cd7a714ad13ac703c0895a90d36a735/crates/opentele2-core/src/fingerprint.rs) (MIT; license in `tgwitness/client_profiles.LICENSE`). It is refreshed on each connection so daylight-saving changes are reflected. An imported `tz_offset` takes precedence on every platform and is kept exactly, including zero. Other `initConnection.params` entries are retained. The HTTP sign-in form accepts the numeric timezone returned by file import; booleans, fractions and offsets outside the supported range are rejected.
+
+Direct, SOCKS5 and HTTP CONNECT routes use Telethon's `ConnectionTcpObfuscated` (obfuscated abridged MTProto). HTTPS CONNECT retains TLS to the proxy and uses the same obfuscated transport inside the tunnel. MTProxy retains its required randomized intermediate transport and secret handling. Route switches apply the same choices. Obfuscation changes packet framing; it does not hide the account or its client metadata from Telegram or imply immunity to restrictions.
+
+After connecting an authorized client, TgWitness checks config, nearest DC, the current authorization, the reviewed layer baseline, languages, app updates and terms-of-service updates. These diagnostics run once per client instance, before collection, and are shown under the connection details with their time. `account.connection_checked` records the result without session hashes, IPs, tokens or API hashes. They never accept terms or install updates. A request failure or FloodWait stops subsequent requests; a missing result stays unknown. Local checks can still report their results while network checks are skipped.
+
+FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers, the server-requested wait and the effective deadline in `telegram.backoff`. Connection details show the method and deadline while requests are paused. The diagnostic includes per-method client-call counters since that client was created; they count nested peer resolution separately, but do not count packets or Telethon's internal retry attempts. Current counters are also available as `collector.rpc_activity` in the status API. No request arguments, usernames, access hashes or exception text are included. The last diagnostic and full deadline survive restart. Earlier waits without a method record cannot be attributed retrospectively. See [export limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-LIMITS.md) for the source review and the distinction between discovery and history acquisition.
+
+`official_app=True` or `False` is Telegram's current-authorization flag. Neither value establishes whether the account is restricted, trusted or under observation. The existing evidence-mode `account.devices` snapshots remain the history of all signed-in devices; connection diagnostics retain only the current device description.
+
+Before connection, advisory checks compare the API platform, language pack, device/OS and app-version formats, mobile system locale, and Telethon's actual schema layer against the reviewed catalog baseline. Warnings appear in the server log and account status metadata; they never replace imported values or change the schema layer. A different layer is a compatibility review signal, not proof of a broken or restricted account. These checks and `official_app` do not certify that Telegram considers the account safe from restrictions. Disconnected account status uses the saved profile instead of generating another device description.
 
 To use your own application instead (the account that registers it is the one at risk; see [Why a built-in API pool?](https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account)):
 
@@ -2713,10 +3011,24 @@ An Auth Key (512 characters) is not an API hash (32 characters). The same key ca
 
 Open **Add account → Files** and select up to **four files belonging to one account**, **8 MiB** in total, then press **Connect account**.
 
+The **Files**, **Auth key** and bulk-import forms show the parallel-session warning before connecting. By default imported authorizations are reused. Keep the original client closed while its key is in use here. **Files** and **Auth key** also offer **Create an independent authorization**, described below. Bulk import still uses the direct mode. Phone and interactive QR login create separate authorizations. The warning heading stays visible in the import form; its full explanation opens automatically when files or a key/session string are supplied. It can be collapsed after reading, so the file picker and connection controls remain usable on a phone.
+
 - Files are converted **in memory** on your TgWitness server. Uploads are not stored, ZIPs are not extracted to disk and no external service is contacted.
 - The resulting session is then checked with Telegram. If a file states a user ID, it must match the account Telegram reports.
 - Files that describe different accounts or different API credentials are rejected instead of picking one.
 - **Passcode or session text** holds the TData local passcode field, a box for pasting a StringSession and **Read files without signing in** (fills the form without contacting Telegram).
+
+### Create an independent authorization
+
+Select **Create an independent authorization** before connecting imported files or an Auth Key. TgWitness connects the imported donor briefly, uses it to approve the new client's QR login token, and disconnects the donor immediately after approval. The new client has its own authorization key and a separately selected Desktop profile. The donor's supplied API credentials and device profile are used only for the donor connection. No existing authorization is logged out or revoked.
+
+**Keep the donor's original client fully closed during this step.** The initial connection still uses its copied key, so this mode cannot remove that initial parallel-use risk. Once the new authorization is connected, the owner can reopen the original client and use both independently. Interactive **QR code** login lets the original client approve the login without copying or connecting its key here.
+
+If Telegram requests 2FA, this mode uses `twoFA` from the selected JSON when present, or asks for the password. A rejected imported password returns to the password form. Passwords are not saved. The candidate key is saved encrypted in `independent_login.enc`, including changes during data-centre migration. After an interruption, select the same donor and this option to resume the saved candidate. The workspace remains reserved for that account; failed completion does not delete the new workspace. Keep its data directory and vault key. The final credentials and `account.authorized` journal record include the import method, input formats and donor API ID, without the donor key or password.
+
+On 5 November 2026, a dedicated account passed live checks with Telethon, Pyrogram and TData donors: 2FA completion, distinct new authorization keys, concurrent access by the donor and new client, and reading a public channel. The Telethon case also resumed a saved candidate after an interruption at the password step. Each new authorization completed the six post-login initialization requests, and its signed journal verified. The original session remained usable in all four supplied formats.
+
+Telegram's [RPC error database](https://core.telegram.org/api/errors.json) associates `FRESH_CHANGE_ADMINS_FORBIDDEN` with changing admins, `FRESH_CHANGE_PHONE_FORBIDDEN` with changing the phone number, and `FRESH_RESET_AUTHORISATION_FORBIDDEN` with revoking other sessions, changing their lifetime or registering a passkey. `SESSION_TOO_FRESH_*` and `PASSWORD_TOO_FRESH_*` concern ownership transfers and revenue or gift withdrawals. These are not collection operations; a new login does not imply a blanket 24-hour reading ban. Export can separately return `TAKEOUT_INIT_DELAY_*`. TgWitness retains server-requested pauses and does not retry token acceptance automatically or revoke sessions to work around restrictions.
 
 ### Telethon `.session`
 
@@ -2743,8 +3055,9 @@ The stored user ID is checked against Telegram during login.
 Accounts are often distributed as two files with the same name, for example `447700900123.session` and `447700900123.json`. Select **both** at once.
 
 - From the JSON, TgWitness uses `app_id`/`api_id` and `app_hash`/`api_hash`, so you usually do not have to type API credentials.
-- Other fields such as `phone`, `device`, `sdk`, `app_version`, `lang_pack` or a stored `twoFA` password are **ignored**. If the account has 2FA, TgWitness asks for it.
-- A JSON on its own is only metadata. Without the session file, continue with phone or QR login.
+- The connection profile uses `device_model` (alias `device`), `system_version` (alias `sdk`), `app_version`, `lang_code`, `system_lang_code` (alias `system_lang_pack`), `lang_pack` and optional `tz_offset` (seconds from UTC, -43200 to 50400). Supplied fields take priority over generated defaults and the panel/browser language. Conflicting aliases are rejected. The resolved profile is saved in the encrypted workspace credentials and reused after restart, including its app version.
+- `phone`, proxy settings and device tokens are **ignored**. `twoFA` is read only when **Create an independent authorization** is selected; direct import ignores it.
+- A JSON without a supported authorization field is only metadata. Add its session file or continue with phone or QR login. A JSON containing a supported session or Auth Key can authorize on its own; see [Account JSON](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/#account-json).
 
 ### Telegram Desktop (TData)
 
@@ -2758,11 +3071,11 @@ TData is the `tdata` folder of the Telegram Desktop application (the cross-platf
 
 To import it:
 
-> **Parallel session warning.** Importing TData reuses Telegram Desktop's authorization key; it does not create an independent login. Do not use that key in Desktop and TgWitness simultaneously. Telegram can invalidate the authorization with `AUTH_KEY_DUPLICATED`, leaving both copies unusable until a new login.
+> **Parallel session warning.** Direct TData import reuses Telegram Desktop's authorization key. Do not use that key in Desktop and TgWitness simultaneously. Telegram can invalidate the authorization with `AUTH_KEY_DUPLICATED`, leaving both copies unusable until a new login.
 >
 >
 >
-> Fully quit Desktop, including its tray process, and keep that copy closed while TgWitness uses the imported session. **Quit, do not log out or revoke the session:** revocation also invalidates the imported copy. If you need both clients running, sign in to TgWitness by phone or QR to create its own authorization. A dedicated account is recommended, but does not make cloned keys safe to use in parallel.
+> Fully quit Desktop, including its tray process, and keep that copy closed while TgWitness uses the imported session. **Quit, do not log out or revoke the session:** revocation also invalidates the imported copy. If you need both clients running, select **Create an independent authorization** and keep Desktop closed until the new login succeeds, or sign in to TgWitness by phone or QR. A dedicated account is recommended, but does not make cloned keys safe to use in parallel.
 >
 >
 >
@@ -2790,11 +3103,16 @@ One JSON object, at most **64 KiB**, in a file ending in **`.json`**.
 | --- | --- |
 | `api_id` (`app_id`) | Application ID, a positive number |
 | `api_hash` (`app_hash`) | Application hash, 32 hexadecimal characters |
-| `string_session` (`session_string`, `session`) | Telethon StringSession text, not a file name |
+| `string_session` (`session_string`, `session_str`; legacy `session`) | Telethon StringSession text, not a file name |
 | `auth_key` (`auth_key_hex`) + `dc_id` | Complete 512-character Auth Key and DC 1–5 |
 | `user_id` (`id`) | Optional; checked against Telegram before the authorization is saved |
+| `device_model` (`device`) | Connection device description |
+| `system_version` (`sdk`) | Connection OS version |
+| `app_version` | Application version sent to Telegram |
+| `lang_code`, `system_lang_code` (`system_lang_pack`), `lang_pack` | Client language, system language and client language pack; an empty `lang_pack` is allowed |
+| `tz_offset` | Optional UTC offset in seconds, sent in `initConnection.params`; integer or decimal integer string |
 
-If both an alias and the main name are present, they must agree. Examples:
+If both an alias and the main name are present, they must agree. Explicit Telethon session fields take priority over a generic `session` blob in another format. If both contain recognizable Telethon sessions, they must describe the same authorization. Without an explicit field, `session` must be a valid Telethon StringSession. Examples:
 
 ```
 { "app_id": 1234567, "app_hash": "0123456789abcdef0123456789abcdef" }
@@ -3264,6 +3582,8 @@ Each GitHub Release carries `TgWitness-<version>-windows-amd64-portable.zip` and
 | `TgWitness-Demo.cmd` | Start the synthetic demo in `data\demo` |
 | `TgWitness-Check.cmd` | Run the readiness check without starting |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Extract the whole archive to a writable folder such as `Documents\TgWitness`; do not run it from inside the ZIP or from Program Files. The runtime uses an isolated module path, so other Python installations and `PYTHONPATH` do not affect it. Data stays in the package's `data` folder. To update, stop TgWitness, extract the new version to a new folder and copy the `data` folder across.
 
 Build it yourself on 64-bit Windows with Python 3.12:
@@ -3321,7 +3641,7 @@ The service reaches the collector inside the Compose network at `http://tgwitnes
 Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using the **lowercase** repository path, for example:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 
@@ -3439,7 +3759,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/high-ass
 
 A sealed 24/7 server on Hetzner or Phala Cloud, Gateway DNS and the checks a third party can repeat.
 
-High-assurance deployment adds independent checks of the collection environment to archive verification．The reviewer queries deployment and access records held by the cloud provider and Cloudflare，and an Intel TDX deployment adds hardware attestation of the collector's environment．
+High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 Ordinary local and Docker use is unchanged. Nothing here runs unless you deploy with `python -m tgwitness.cloud`, and the collector reads its host only when the deployment sets `TGWITNESS_ASSURANCE`.
 
@@ -3468,7 +3788,7 @@ Flow diagram · Operator → Server, firewall without inbound rules (provider AP
 | The signing key was created on that server | The key signs a statement naming the provider's server ID and the hash of the cloud-init it received | Collector, checked against the provider |
 | The journal belongs to that key and server | Every process start in the evidence ZIP carries the host measurement for that server | Evidence ZIP |
 
-The collector records SSH state，sessions，login history and boot information in signed process-start and `host.state` records．On an ordinary VM these are local inventory records，which the reviewer compares with the provider's independent records．The Intel TDX deployment below additionally verifies hardware-backed measurements．
+The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
 
 ## Providers
 
@@ -3706,9 +4026,9 @@ Cloudflare cannot see inside Telegram's encryption, other devices on the Telegra
 
 ## Reading the deployment result
 
-For an ordinary VM，the provider controls the host infrastructure，and local inventory is checked alongside provider records．For Intel TDX，the verifier additionally checks the hardware quote，collector binding，compose and OS measurements．Read the individual results to see which checks passed or were unavailable．
+For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
 
-Historical firewall detail depends on the provider；Linode retains rule versions． The [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) lists tested deployments and remaining live checks，and [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity．
+Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.
 
 
 ---
@@ -3936,7 +4256,7 @@ TgWitness records what a connected Telegram account observes. The journal preser
 
 ## From login to a journal
 
-For self-destructing photos and files，see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md)． It explains the priority worker，saved and unavailable outcomes，and the limits of read-receipt blocking in the API collector．
+For self-destructing photos and files, see [Self-destructing media](https://github.com/phishdestroy/TgWitness/blob/main/docs/EPHEMERAL-MEDIA.md). It explains the priority worker, saved and unavailable outcomes, and the limits of read-receipt blocking in the API collector.
 
 Flow diagram · Authorize a user account → Select accessible groups and channels; Select accessible groups and channels → Save event and attachment settings; Save event and attachment settings → Start observation; Start observation → Receive updates from the active client; Receive updates from the active client → Apply source and event policy; Apply source and event policy → Append a signed observation; Append a signed observation → Review or export the journal; Append a signed observation → Process any queued attachment; Process any queued attachment → Append the download outcome · Authorize a useraccount · Select accessiblegroups and channels · Save event andattachment settings · Start observation · Receive updates fromthe active client · Apply source and eventpolicy · Append a signedobservation · Review or export thejournal · Process any queuedattachment · Append the downloadoutcome
 
@@ -4013,7 +4333,7 @@ Excluding own actions also applies to background rechecks and automatic new-chat
   - its profile as a `source.profile` record: bot description and commands, the about text of a user, group or channel, members, linked chat and invite link when Telegram returns one;
   - its latest visible messages (up to 1,000) as a history snapshot marked `new_chat`: the earlier messages of a team chat just joined, or what a bot said before observation noticed the chat. Messages already saved live are not repeated.
 
-  Chats already in the list when the mode is switched on are added without snapshots. A FloodWait pauses this work and it resumes afterwards; failures are recorded and live recording of the chat continues. - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile of any source; the newest one is shown above the messages. - **Chat state snapshots (preview).** State outside the message stream changes without a message: unpinning every message leaves no message-level trace, an administrator loses rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled source is read periodically and saved as a signed `chat.state` record: title, usernames, description, member and administrator counts, linked chat, slow mode, pinned message IDs (up to 100), administrators with their rights and titles, and gifts shown on channels and user profiles (up to 100). Each record lists the differences from the previous snapshot: changed fields with before and after, pinned messages added or removed, administrators and gifts added, changed or no longer listed. Telegram does not say who changed anything or when between snapshots. - A part Telegram refuses (for example the administrator list of a channel for a member who is not an administrator) is named in `errors`; its earlier value is kept and listed in `carried_forward`, never reported as removed. - A record whose only changes are counts, and a check that found no change, refer to the last full state with `state_seq` and cumulative `state_overrides`. A full state is written at least every seven days and whenever anything other than a count changes. - `parts_complete` marks capped lists．Additions require a complete earlier list， removals require a complete current list，and explicit empty values record clearing． - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots off), the pause between sources, which parts are read, and whether checks that found no change are recorded. A FloodWait pauses snapshots and they resume afterwards. - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or link a bot answers such a press with, and invite links used in another app do not reach TgWitness. What the bot sends or edits afterwards is recorded.
+  Chats already in the list when the mode is switched on are added without snapshots. A FloodWait pauses this work and it resumes afterwards; failures are recorded and live recording of the chat continues. This includes waits while resolving the new chat's identity: the pending profile/history task is retained for retry, and an existing longer account-wide wait is not shortened. - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile of any source; the newest one is shown above the messages. - **Chat state snapshots (preview).** State outside the message stream changes without a message: unpinning every message leaves no message-level trace, an administrator loses rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled source is read periodically and saved as a signed `chat.state` record: title, usernames, description, member and administrator counts, linked chat, slow mode, pinned message IDs (up to 100), administrators with their rights and titles, and gifts shown on channels and user profiles (up to 100). Each record lists the differences from the previous snapshot: changed fields with before and after, pinned messages added or removed, administrators and gifts added, changed or no longer listed. Telegram does not say who changed anything or when between snapshots. - A part Telegram refuses (for example the administrator list of a channel for a member who is not an administrator) is named in `errors`; its earlier value is kept and listed in `carried_forward`, never reported as removed. - A record whose only changes are counts, and a check that found no change, refer to the last full state with `state_seq` and cumulative `state_overrides`. A full state is written at least every seven days and whenever anything other than a count changes. - `parts_complete` marks capped lists. Additions require a complete earlier list, removals require a complete current list, and explicit empty values record clearing. - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots off), the pause between sources, which parts are read, and whether checks that found no change are recorded. `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` stop the remaining snapshot requests, preserve any longer account-wide deadline, and leave the interrupted chat eligible for another attempt after that wait. - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or link a bot answers such a press with, and invite links used in another app do not reach TgWitness. What the bot sends or edits afterwards is recorded.
 
 ### Act from the panel
 
@@ -4086,7 +4406,7 @@ Each event includes the previous hash and an Ed25519 signature. Exports cover th
 
 **Verify journal** checks the event chain and signatures through the displayed boundary. Its result is cleared when the workspace changes, and the panel identifies new records added after the check. ZIP export also verifies collected media.
 
-Retain fingerprints and checkpoints independently．See the [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for acquisition checks in each mode， and [daily operations](https://phishdestroy.github.io/TgWitness/docs/reference/operations/) for routine collection．
+Retain fingerprints and checkpoints independently. See the [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for acquisition checks in each mode, and [daily operations](https://phishdestroy.github.io/TgWitness/docs/reference/operations/) for routine collection.
 
 
 ---
@@ -4402,7 +4722,7 @@ In the worked example:
 | Same saved file | Completed media receipts #151 and #209 | The full SHA-256 values agree for the preserved bytes |
 | Channel attribution | #101 and #188 | Do not attribute a channel post to user 71001 without an attributed sender |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
 
 Keep the team's working notes on [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/): bookmark the records you rely on, such as #146, #188 and #205, highlight the exact destination string, and save a slice of every recorded action between two records or in a time range. Notes and statuses retain the team's review in their own signed history, separately identifiable from the source observations.
 
@@ -4462,7 +4782,7 @@ Retain the actual verification results and original artifacts. Export workspace 
 | --- | --- | --- |
 | Bot-driven order/payment dispute | Entry announcement → saved link preview → bot start parameter → message and keyboard versions → panel callback receipts → private/group follow-up | Observed offer/response timeline and verified sources; a payment link alone does not prove a payment |
 | Removed messages after an incident | All affected chats → saved originals/edits → deletion or missing-on-recheck outcomes → preserved media → coverage and other account perspectives | Preserved versions and explicit unknown intervals; no invented deletion actor |
-| A participant changes names across chats | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| A participant changes names across chats | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | A Telegram-account activity timeline with links to its source records |
 
 [Collection reference](https://phishdestroy.github.io/TgWitness/docs/reference/collection/) · [People-profile verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#people-profiles) · [Evidence handoff](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#investigation-handoff) · [Completed validation](https://phishdestroy.github.io/TgWitness/docs/reference/verification/)
 
@@ -4545,9 +4865,9 @@ Sources provides per-account switches for new messages, edits, deletions, reacti
 | Admin actions | Relevant delivered updates and an admin-log snapshot in channel/supergroup chat exports | The export reads the log when available to the exporting admin account; continuous admin-log polling is outside this path |
 | Attachment | Original version descriptor, downloaded bytes/SHA-256 and attempt outcomes | A vanished file may be unrecoverable; the latest version is not substituted |
 | History | Explicit snapshot of current visible messages | Does not reconstruct all edits or deleted content |
-| Collector process | Start／stop，heartbeat，errors，settings，scope and signed run receipt | Local inventory；GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) |
+| Collector process | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) |
 
-The interface names the account supplied in the source event and retains observed names and usernames．When the event omits its actor，the report leaves that field unspecified．
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Capacity and Telegram limits
 
@@ -4843,7 +5163,7 @@ Chat-scoped access finds only records from its chats, including recognized text 
 
 MCP clients can call `search_messages` with `ranked=true` and page with `next_offset`. Scoped connections receive only their chats.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Dependencies
 
@@ -5042,7 +5362,7 @@ A remote panel needs HTTPS; plain HTTP is accepted only for `127.0.0.1`, `localh
 
 Dates are `2026-10-01` (UTC midnight) or ISO times with a timezone, `2026-10-01T09:00+03:00`. For `search`, `messages` and `export` they select observation time. Pages hold up to 50 records: follow `next_offset` (`--offset`) for ranked search and `next_before` (`--before`) elsewhere.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Every message result carries `untrusted_content: true`, the workspace, chat and message IDs, the journal sequence, the saved record hash and a panel link. Edits, deletion notices and `missing_on_recheck` are separate records. Absence of a record does not prove that an event never happened.
 
@@ -5355,6 +5675,8 @@ Open **Exports → Configure and preview**. Work through **Data → Design & con
 
 The data preview counts the complete stable journal prefix, not an initial sample. Only displayed sample rows and long lists are bounded; their omitted counts are shown. A later export takes a fresh stable snapshot, so ongoing collection may increase the figures. Scope, counts and source identity are included in the signed report. Opening or previewing the form does not save it.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Choose the recipient's copy.** Charts and the transcript use the selected records. Integrity, custody and coverage describe the full source journal. The evidence ZIP contains its original records and attachments. Use [a minimized handover](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#handover-extract) when a recipient should receive only selected, permitted data.
 
 ### Read edits, deletions and missing IDs
@@ -5425,12 +5747,12 @@ When included, `analytics.json` is protected by the archive's signed file hashes
 
 | Processor | What it shows |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 From a source checkout, build all eight designs listed above from the same fictional journal:
 
@@ -5482,7 +5804,7 @@ Review each check separately, alongside the recorded collection coverage.
 4. Preserve original ZIPs and their hashes. Record each holder, transfer, date and purpose. Retain the attributed operator statements and case notes with them.
 5. For confidential VMs, preserve and independently verify the quote, challenge, Intel certificate chain, measurements, exact source and key-handling conditions. Keep the attestation verification result with the reviewed artifacts.
 
-See [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the checks of acquisition， archive integrity，time and collection coverage in each mode．
+See [verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Recipient review
 
@@ -5518,6 +5840,12 @@ Sender and text filters expand under **Filter by sender or message text**. **Acc
 
 This workflow exports data currently accessible to the connected account. The default uses [Telegram Takeout](https://core.telegram.org/api/takeout); it is not a backup of unavailable or deleted Telegram data. Secret Chats, inaccessible history and earlier edits are not recovered. Telegram can impose a waiting period before Takeout starts. The panel displays that wait; it does not silently switch transport. The explicit regular-API option has different coverage and records unsupported categories.
 
+Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+
+For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+
+Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+
 ## Choose what is collected
 
 | Setting | Meaning |
@@ -5537,7 +5865,7 @@ The **Minimize collection** preset disables files and account metadata. Sender/c
 
 Profile-photo history and stories are not selected by default. Disable profile and contacts as well when the case needs messages only. If attachments or metadata are unnecessary, excluding them during acquisition avoids retaining another private copy in this export.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
 ## Resume, coverage and verification
 
@@ -5593,9 +5921,9 @@ Source linkage does not independently prove that the transformation selected eve
 
 ## Sharing and hosted capture
 
-Select the messages and files the recipient needs，review the complete sharing copy，and retain the source separately．Record the delivered ZIP's hash so the recipient can identify and verify that exact copy．Pseudonymization replaces the selected identifiers；included text and original files remain part of the review．
+Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
 
-GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API，plus a one-chat event journal．The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit．To verify a sharing copy derived from hosted capture，check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)．
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope).
 
 [Evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [Case reports](https://phishdestroy.github.io/TgWitness/docs/reference/case-reports/)
 
@@ -5610,6 +5938,8 @@ Contents of the signed ZIP, record kinds, process receipts, people profiles, off
 
 TgWitness preserves account-visible Telegram observations in a signed journal. Recipients can verify the saved records, attachments and reports against a trusted collector key, then compare the journal with an independently retained checkpoint. This page describes the formats, the checks and the material to keep for handover.
 
+Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
 ## What is signed
 
 | Material | Protection | What to retain |
@@ -5618,12 +5948,27 @@ TgWitness preserves account-visible Telegram observations in a signed journal. R
 | Evidence ZIP contents | `manifest.sig` signs the canonical manifest, which lists hashes of the content files | The complete ZIP, including its manifest and signature |
 | Preserved attachments | SHA-256 and byte count in a signed `media.saved` event; file hash in the signed ZIP manifest | The original bytes inside the verified ZIP |
 | Checkpoint | Ed25519 signature over journal length, head hash, public key, and creation time | An independent copy retained before a disputed change |
-| Run receipt | Signed record of the collector version，source-file hashes and start settings，also included in `process.started` | The receipt，associated journal and the environment evidence for the selected verification mode |
+| Run receipt | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
 | Readable reports: `report.html` and its parts, `report.json`, `report.pdf`, `chat.pdf` | An Ed25519 seal per file over its content; the PDF also carries a standard PDF signature (see [Readable reports](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#readable-reports)) | The file as received and the trusted key fingerprint; the ZIP it describes |
 | Standalone CSV | No standalone cryptographic signature; event hashes alone are insufficient | Use the exact copy inside the verified ZIP for integrity checking |
 | Screenshots, printouts, or PDF produced by a browser | No TgWitness signature on the derivative | Keep the original verified package and document how the derivative was made |
 
 The collector verifies journal signatures before generating every export format. Readable HTML and PDF reports carry their own seals; standalone CSV is checked as part of a signed ZIP. Keep the ZIP to retain the attachment bytes and manifest, and a separate checkpoint to check the journal against an earlier boundary.
+
+## Comparing chat exports
+
+Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+
+```
+python -m tgwitness.verify first.zip --compare second.zip \
+  --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
+```
+
+When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+
+A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+
+For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
 
 ## Investigation handoff
 
@@ -5666,7 +6011,7 @@ Signed evidence, handover and chat ZIPs carry readable HTML and JSON reports, pl
 
 In a channel or supergroup Telegram numbers messages 1, 2, 3… in order. A chat export lists the first and last number, how many are present and every run of absent numbers in `message-ids.json`, the manifest and the `chat.json` header, and marks each gap where it falls in the transcript. `verify.py` recounts them from `chat.json`. An absent number is a message Telegram did not return (deleted before the export, or not visible to the account); in private chats and basic groups numbers are shared by all of the account's chats and gaps are not counted.
 
-After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time； it leaves the cause unspecified．A message returned on recheck is added to the export and marked `found_on_recheck`．
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
 
 Every report opens with **In brief**: one paragraph, then what the material shows and what it does not (who is behind an account, completeness of delivery, deletions before observation, clock time without a timestamp). The page's own seal stamp turns amber when the browser has checked the seal's signature, not the page: a browser does not give a page its own bytes. It turns green only when the reader drops the file into the check at the end of the page and every byte matches, and only if the page shown is that file; otherwise it turns red.
 
@@ -5722,6 +6067,10 @@ message.new actor_id is the message sender. message.edited has no inferred edito
 
 Deletion notifications for private chats and ordinary groups contain only message IDs. Those chats share one account-wide ID sequence, so an ID identifies a single message of this account. When a message with that ID was saved earlier in this journal, the deletion is recorded in that chat as message.deleted with payload.chat_resolution naming the method. IDs that were never saved are kept as deletion.unscoped with no chat_id; nothing is guessed. Channels and supergroups number messages per chat and are never matched this way. When the deleted message was sent by the observed account, payload.deleted_message_was_outgoing is true; the deleter is still not supplied.
 
+An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+
+Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+
 ## Coverage: continuity, gaps and unobserved IDs
 
 Every signed ZIP carries `coverage.json`, the HTML report opens with the same summary, and `verify.py` recomputes it from `events.jsonl` instead of trusting the file:
@@ -5756,13 +6105,13 @@ Validity is derived from the journal, never assumed:
 
 `verify.py` recomputes `gap_summary` from `events.jsonl` with the parameters in the signed `coverage.json` member (defaults for older archives) and prints the account-wide line in its coverage summary. The archive's `get_capture_status` (MCP and the command line) returns the same measurement for the chats an access may read; the account-wide sequence only to access covering the whole workspace.
 
-Repeated observations of one service message count once，and the account service estimate uses only numbers inside the measured range．An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled；older records without that information cannot establish this condition．Stopped observation does not extend the measured range，and resuming it is noted．The live archive query has a time budget，including its database scan，and marks an unfinished measurement as partial．
+Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
 
-Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences)． These numbers describe observations；they do not identify a deletion actor or establish why a number is absent．
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
 
 When Telegram stops accepting the account, the `coverage.gap` record that ends observation carries `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` or `not_authorized`) and the Telegram error; `verify.py` names the cause where the period ends.
 
-Coverage combines recorded observation periods，interruptions and message outcomes． Assess it together with the selected chats，period and attachment policy；continuous operation alone does not establish complete delivery of Telegram updates．
+Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
 
 ## Producer
 
@@ -5790,27 +6139,27 @@ A witness journal (`tgwitness-witness-v1`) and its channel posts are checked aga
 
 manifest.json includes the format, export time, public key, fingerprint, journal length, head hash, scope, producer, limitations, and SHA-256 of every content member other than `manifest.json` and `manifest.sig` themselves. manifest.sig is the base64 Ed25519 signature over canonical manifest JSON. The verifier rejects unexpected/missing members, duplicate names, corrupt files, broken sequence/chain, invalid signatures, and mismatch with a provided checkpoint. It never extracts archive paths. It limits total declared uncompressed size to 4 GiB; `--max-gib N` allows larger archives made with a raised **Parameters** limit.
 
-Run verification from your installed TgWitness version or a reviewed checkout． The copy included in an archive supports portable use；check that copy against your trusted installation before executing it．
+Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
 
-A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix．Retain the checkpoint outside the collector，so later verification compares the archive with a reference held separately from it．
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
 
 ## Verification scope
 
-Verification checks the archive and the collection mode used to produce it．Choose the mode whose trust boundary matches the case，then retain its verification inputs．
+Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
 
 | Collection mode | What the verifier checks | Verification inputs and trust boundary |
 | --- | --- | --- |
-| Local workspace | Record signatures，hash chain，manifest and attachment bytes | Independently retained collector fingerprint；the host administrator controls the local signing key |
-| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records；the checkpoint binds the prefix already observed |
-| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest，approved workflow and collector commits，hosted runner，fresh session/key origin and internal archive integrity | Trusted verifier policy，caller repository and GitHub attestation bundle；collection runs under the pinned workflow |
-| [Cloud deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/) | Provider lifecycle and access records，firewall and Cloudflare state，plus the collector's signed run record | Read-only queries to the provider and Cloudflare；availability of individual checks depends on the provider |
-| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status，binding to the collector statement，compose and OS measurements | Intel trust chain and expected deployment measurements；retain the results of every required TDX check |
+| Local workspace | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
+| [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
+| [Cloud deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
+| [Intel TDX confidential VM](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
 
-In sealed acquisition，the approved collector receives data through an authenticated Telegram connection inside the verified environment．Attestation binds the archive to that execution，so verification covers acquisition as well as later file integrity． This relies on the approved code and the platform trust chain listed above． GitHub capture verification requires a session created inside the run and rejects imported-session captures．
+In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
 
-The run receipt records the collector version，file hashes and startup settings．GitHub provenance and TDX measurements provide the environment checks；the [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) identifies tested configurations．
+The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/docs/reference/verification/) identifies tested configurations.
 
-TgWitness signs the observations it collects；Telegram and message authors do not issue these signatures．In a local workspace，material created before the first independent checkpoint still depends on the collector and its key holder．Coverage records describe the selected scope and collection outcomes，while verified external timestamps anchor the committed archive or journal boundary in time．
+TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
 
 ## Attachments
 
@@ -5824,9 +6173,9 @@ A full chat export saves attachments within the workspace's attachment settings 
 
 A media job and its message event commit in one transaction. The job stores the original TL message descriptor; the signed observation binds its SHA-256, account, and size policy. Recovery verifies that binding before downloading. It never fetches the current message and silently substitutes a newer attachment. Interrupted jobs are retried, while permanent failure remains an explicit outcome.
 
-Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement．For verification of the execution environment，pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)．
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope).
 
-Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives．Independent retention keeps that reference available outside the workspace；a verified external timestamp additionally anchors it in time．
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
 
 After a restart the saved Telegram update position is resumed (`catch_up_from` in `observation.started`) and missed updates are requested. A periodic recheck records `message.recovered` for missed messages and `message.missing_on_recheck` when Telegram no longer returns a saved message; the latter is not a deletion notice and names no deleter or time.
 
@@ -5877,7 +6226,7 @@ Run a witness with its own key and bot, publish signed checkpoints to a channel 
 
 [Export and verify](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/) · [High assurance](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/) · [Panel guide](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
+A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
 
 Flow diagram · Collector → Witness (signed checkpoint: record count + head hash); Witness → Witness journal, own key; Witness → Telegram channel (signed post via its own bot); Evidence ZIP → verify.py; Witness journal, own key → verify.py; Telegram channel → verify.py (Telegram Desktop export or t.me/s page) · Collector · Witness · Witness journal, own key · Telegram channel · Evidence ZIP · verify.py · signed checkpoint: record · count + head hash · signed post via its own bot · Telegram Desktop export or · t.me/s page
 
@@ -5907,7 +6256,7 @@ New witnesses send a random challenge on each poll; the capture statement echoes
 Every interval (10 minutes by default) the witness:
 
 1. fetches the head itself (the collector cannot push or skip it);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
 3. appends a signed record to its own journal: `witness.anchor` with status `ok`, `key_changed`, `rollback` (fewer records than before), `fork` (same length, different head) or `invalid` (the answer failed verification), or `witness.no_response` when the collector did not answer;
 4. posts the result to the channel, signed, including "no answer" while the witness is running and can reach the Bot API. The post ID is recorded (`witness.posted`), a failed post too (`witness.post_failed`).
 
@@ -6067,7 +6416,15 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 This requires the independently retained witness fingerprint and a matching checkpoint at the exact end of this export. A checkpoint covering only an earlier prefix is insufficient. Pause collection, let the witness observe the final state, and export before further journal writes; if the journal changes, retain another checkpoint and export that state. A later checkpoint alone cannot verify a shorter export's final hash. When `--channel` is also supplied, missing claimed posts or an empty match set fail this strict check. Without the flag, ordinary integrity checks still report unwitnessed records without rejecting an otherwise intact archive.
 
-Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．
+Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+
+### Daily seals and unavailable timestamp calendars
+
+The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+
+If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+
+A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.
 
 
 ---
@@ -6235,7 +6592,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/security
 
 Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.
 
-This page describes access，storage and network protection in a local or server workspace． For collection on a GitHub runner or in an Intel TDX confidential VM，see the [verification modes](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope)，which add checks of the collection environment． Account connections，notifications，timestamps，off-site copies and witnesses have their own routing settings．
+This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | Area | In short |
 | --- | --- |
@@ -6243,7 +6600,7 @@ This page describes access，storage and network protection in a local or server
 | Secrets at rest | Session, API pair, signing key and proxy settings are encrypted with Fernet |
 | Messages and media | Stored unencrypted: use disk encryption and strict permissions |
 | Integrity | SHA-256 hash chain and an Ed25519 signature on every record |
-| Local trust boundary | The host administrator controls the workspace and its signing key；independent checkpoints retain an earlier journal boundary |
+| Local trust boundary | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 For vulnerability reports, see the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md).
 
@@ -6269,13 +6626,13 @@ Exports exclude authentication and signing secrets, but deliberately contain col
 
 ## Secrets at rest
 
-Telegram API credentials，the session and signing key are encrypted with Fernet． For local messages and media，encryption is provided by the host's disk or volume； the workspace stores ordinary files．Exports can use a password-protected AES-256 ZIP， and off-site copies use AES-256-GCM．
+Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
 
-The vault key defaults to the protected data directory．Use an external master-key file below to store it separately．On Unix，new private-key files use mode 0600 and new data directories use 0700；on Windows，set the directory ACL for the service account and authorized administrators．Existing directory permissions are retained．
+The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
 
 ### External master key
 
-For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode．Disk encryption protects the local message and media files in either mode；see [connection and data protection](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) for setup details．
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/docs/reference/connection/) for setup details.
 
 ## Proxies and network routes
 
@@ -6299,13 +6656,13 @@ The default API validation response is replaced so it does not echo credential v
 
 ## Integrity limits
 
-Local verification checks record signatures，the hash chain，attachments and the export manifest． The administrator holds the local signing key and can create another signed journal； an independently retained checkpoint detects replacement of the prefix it covers． Keep the key fingerprint and checkpoints with the recipient or an independent witness．
+Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
 
-For independently checked collection，choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)． Their verifiers check workflow provenance or hardware measurements in addition to archive integrity． Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies； the [evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) describes the checks for each mode．
+For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#verification-scope) describes the checks for each mode.
 
 ## If you suspect a problem
 
-Preserve the original data directory and use a separate copy for analysis． Report the affected version，operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)，keeping account data and credentials private．
+Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.
 
 
 ---
@@ -6326,6 +6683,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | Explicit panel actions, signed receipts, persistent request IDs and task-local callback/join retry policy |
 | message_content.py | Observable message comparison, excluding transport access metadata |
 | workers.py | Wait for export file workers before cancellation cleanup |
+| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
+| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
 | store.py | WAL transactions, ordered event chain, query filters, operational settings |
 | fulltext.py | Derived full-text index (word forms, BM25), bound to the signed journal head; never exported |
 | security.py | Private-file creation, encrypted vault, Ed25519 signing, single-process lock |
@@ -6356,7 +6715,7 @@ Observation handlers are registered before connecting. Live collection is gated 
 
 Each workspace accepts one account and has its own directory and signing identity. The main workspace remains at the root for compatibility; additional workspaces live in profiles/<id>/. One bearer token controls the whole installation; workspaces are not separate authorization tenants. Process locks protect directories; database locks serialize event insertion. Each append commits synchronously to SQLite WAL with FULL synchronous mode. Event update/delete triggers prevent ordinary application edits; filesystem administrators remain inside the trust boundary.
 
-API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot, and can coexist with continuing WAL writes. Workspace collectors share the process/event loop.
+API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
 
 Current history snapshots and live updates can overlap. Both are separate observations, labeled by source; duplicates are not silently collapsed. No inference from missing IDs, fabricated deleted text, forced member enumeration, or automatic group joining is implemented.
 
@@ -6634,25 +6993,34 @@ Every change by version, including the changes not yet released.
 
 ## Unreleased
 
-- Reconstruct compact chat snapshots consistently in MCP，retain unknown fields，and distinguish capped lists from removals．Resume date scans，preserve topic names across history reads，and bound image previews．Apply metric choices to filtered reports and count historical service messages separately．
-- Plan sealed exports against the remaining session time，offer smaller selections，update progress estimates and reserve time for packaging．
-- Compare every message field，validate record counts and structure，enforce CLI verification options，and display OpenTimestamps states separately．
-- Close coverage on worker failure，bind heartbeats to the capture run，and verify TDX signing-key binding and supported component statuses．
+- Remove the unused one-shot exporter and check recovery against the current exporter. Reject unexpected or repeated message IDs in recheck responses.
+- Combine concurrent exports with resumable Standard API and Takeout acquisition. Each job retains its own progress, timings and signed checkpoints; accounts remain reserved until that job stops. Include the account controls, batch import and report-verification updates in the same build.
+- Add offline `VERIFY.cmd` / `VERIFY.sh` launchers, plain-language verification explanations and saved UTF-8 transcripts to signed exports in all 25 panel languages. Build a separate Windows verifier with an embedded runtime and a language menu. Unpinned signers remain unconfirmed; successful integrity verification does not establish admissibility.
+- Add optional jurisdiction guidance for 25 countries to Report Studio and exported assessments, with separate civil/criminal sources, local-language summaries and next steps derived from the actual package. Guidance remains a research draft, does not raise assurance, and is excluded from reusable layout profiles and inherited sharing-copy settings.
+- Allow the pinned Russian morphology dictionary resources in Windows portable builds while continuing to reject unrecognized files in dependency data directories.
+- Keep missing-on-recheck observations separate from deletion notices in HTML, JSON and PDF counts and viewer labels. Do not claim unscoped deletion IDs were never saved when their chat is outside the current observation scope.
+- Record multiple deleted IDs as a deletion batch without inferring a whole-history clear, the deleting participant, or deletion for everyone. Relabel legacy history-clear events without changing their signed records.
+- Publish the one-command installer only after application and security checks pass for the exact main commit and the signed package passes Ubuntu local/HTTPS service and Windows PowerShell acceptance. Keep the previous download when checks fail or time out. Add authenticated tests of the actual public installer URLs.
+- Preserve `previous_hash` in the signed-record preview even when its hexadecimal digits resemble a payment card number. Secret masking still applies to message content; the stored record is unchanged.
+- Reconstruct compact chat snapshots consistently in MCP, retain unknown fields, and distinguish capped lists from removals. Resume date scans, preserve topic names across history reads, and bound image previews. Apply metric choices to filtered reports and count historical service messages separately.
+- Plan sealed exports against the remaining session time, offer smaller selections, update progress estimates and reserve time for packaging.
+- Compare every message field, validate record counts and structure, enforce CLI verification options, and display OpenTimestamps states separately.
+- Close coverage on worker failure, bind heartbeats to the capture run, and verify TDX signing-key binding and supported component statuses.
 - Add read-only MCP tools (preview): `get_messages_by_date` (one calendar day in a named time zone, computed server-side), `get_pinned_messages`, `get_chat_stats` with `gap_summary`, `get_topics`, and `get_media`, which returns a verified, downscaled image preview anchored to its SHA-256 and `media.saved` record. Every MCP tool now declares an output schema. New connections include these tools; existing connections keep the tools they were issued with.
-- Show each account's selected route and checked exit address，group session controls，and retain interface preferences when adding an account．Record connection changes without repeating identical background checks．Validate withheld-marker contents and reply states in minimized exports，including rejection of a missing-source label for an included record．
-- Update collection-mode instructions and Russian guidance．Allow a bounded publication-settling interval while requiring exact installer bytes．
+- Show each account's selected route and checked exit address, group session controls, and retain interface preferences when adding an account. Record connection changes without repeating identical background checks. Validate withheld-marker contents and reply states in minimized exports, including rejection of a missing-source label for an included record.
+- Update collection-mode instructions and Russian guidance. Allow a bounded publication-settling interval while requiring exact installer bytes.
 - Mark messages left out of a minimized disclosure (preview): inside each disclosed chat, withheld messages appear as content-free markers naming the selection rule, one per run or one per message, and disclosed replies state whether they answer a disclosed message, a withheld one or one that is not in the source export. The package format becomes `tgwitness-account-disclosure-v2`; `verify.py` rejects markers with content and replies pointing at missing records, and still verifies version 1 packages.
-- Repeat gap analysis with the settings carried by the signed export，count each service-message number once，and bound account estimates to the measured interval．Require explicit whole-account scope，retain pause／resume boundaries，and interrupt expensive archive scans at their time budget．
+- Repeat gap analysis with the settings carried by the signed export, count each service-message number once, and bound account estimates to the measured interval. Require explicit whole-account scope, retain pause/resume boundaries, and interrupt expensive archive scans at their time budget.
 - Add missing message numbers (preview): `coverage.json`, the HTML and PDF reports, `verify.py` and the archive's `get_capture_status` measure numbers Telegram assigned and this collector never saw, per channel or supergroup and for the account-wide sequence of private chats, bots and ordinary groups during whole-account collection. Each result states whether it applies and why, lists its parameters, and anchors listed gaps to the neighbouring observations. **Parameters → Gap analysis** sets the listed gaps, the account-wide sequence and an optional service-message estimate that is never subtracted. A gap names no actor and no reason.
 - Record in the signed message when self-destructing media is fetched despite a type or duration rule (`media_capture.rule_override`), with the limits that still applied.
 - Add chat-state snapshots (preview): while observing, every enabled source is read periodically and saved as a signed `chat.state` record with title, description, counts, pinned messages, administrators with rights, and gifts on channels and profiles, plus the differences from the previous snapshot. Unpinning, rights changes and gift conversions or upgrades without a service message become visible. Parts Telegram refuses are named and carried forward, never reported as removed. **Parameters → Chat state** sets the interval, pause and parts.
 - Add anomaly indicators to evidence reports (preview) as registered, versioned processors in `tgwitness/metrics/`: first-time posters per day with flagged injection-like days, service messages among message numbers, joins and departures per month, and pins and unpins per month. Reports list every processor that ran with its version and print its method; **Parameters → Report metrics** chooses them.
-- Keep ranked-search pages within the first 1，000 results regardless of page size，order OCR／transcription results before pagination，and retain exact match positions when Unicode expansions and invisible-character removal cancel each other's length changes．
-- Keep photo downloads on the still variant named by their metadata and hash manifests，including after file-reference renewal．Reject truncated photo／chat attachments and corrupt reused files instead of counting them as saved．Check recovered multi-account message IDs against missing intervals without expanding large gaps．
-- Release a session's local connection lock after transport shutdown，including when a disconnected client was already removed from the workspace．Cancelling the waiting operation cannot release the lock early，and closing an older session cannot unlock a different current key．
-- Apply a chat export's skip／hash-only choice to recovered messages and profile photos，and record that choice in the acquisition metadata．Reject changed messages before fetching attachments in the separate files stage．Count missing message numbers as intervals so sparse histories do not exhaust memory，including during a cancellable full recheck．
-- Preserve available self-destructing photos，videos and files in the API journal with a dedicated immediate queue，explicit TTL／view-once labels and signed saved／unavailable／not-saved outcomes．Block read receipts in the API client，including batches and wrapped requests．Keep byte limits，disk reserves and Telegram backoff；saved bytes do not establish human viewing．
-- Preserve image-rendered Unicode emoji in official Web message text，reply previews，reactions and derived page text without changing the client DOM．A live account test exposed the omission；video and saved pages already retained the image．
+- Keep ranked-search pages within the first 1,000 results regardless of page size, order OCR/transcription results before pagination, and retain exact match positions when Unicode expansions and invisible-character removal cancel each other's length changes.
+- Keep photo downloads on the still variant named by their metadata and hash manifests, including after file-reference renewal. Reject truncated photo/chat attachments and corrupt reused files instead of counting them as saved. Check recovered multi-account message IDs against missing intervals without expanding large gaps.
+- Release a session's local connection lock after transport shutdown, including when a disconnected client was already removed from the workspace. Cancelling the waiting operation cannot release the lock early, and closing an older session cannot unlock a different current key.
+- Apply a chat export's skip/hash-only choice to recovered messages and profile photos, and record that choice in the acquisition metadata. Reject changed messages before fetching attachments in the separate files stage. Count missing message numbers as intervals so sparse histories do not exhaust memory, including during a cancellable full recheck.
+- Preserve available self-destructing photos, videos and files in the API journal with a dedicated immediate queue, explicit TTL/view-once labels and signed saved/unavailable/not-saved outcomes. Block read receipts in the API client, including batches and wrapped requests. Keep byte limits, disk reserves and Telegram backoff; saved bytes do not establish human viewing.
+- Preserve image-rendered Unicode emoji in official Web message text, reply previews, reactions and derived page text without changing the client DOM. A live account test exposed the omission; video and saved pages already retained the image.
 - Improve chat-export Takeout, unreadable-message recovery, shared absent-number rechecks and bounded range retries. Preserve observed deletions in export scope, compare verified archives, and distinguish archive integrity from an independently confirmed signer.
 - Protect imported sessions from remote logout, close idle connections and prevent simultaneous reuse of a session key. Add explicit session management and masked two-step password entry; cancellation or switching workspaces prevents submission. Read single-account export messages before their separate attachment stage.
 - Keep source export and AI actions disabled while local source search is pending, empty or has failed; clear stale previews before the next search. Exercise delayed replies explicitly in browser checks.
@@ -6673,12 +7041,12 @@ Every change by version, including the changes not yet released.
 
 ## 0.9.1 preview · 5 November 2026
 
-- Keep message and attachment outcomes visible after single-chat sealed capture，including missing data，failed files and unfinished downloads．Translate final status when changing language after shutdown，and clear connection or export errors once they recover while retaining rejected-action and unconfirmed-revocation warnings．
-- Update the pinned OAuthLib dependency to 4．0．1 for CVE-2026-49272 and regenerate the runtime，browser and MCP hash locks．
-- Show in-flight attachment bytes without counting them as preserved evidence，reset progress on retries and clear it on pause．Keep official-client chat controls disabled during QR／2FA login and until a chat is available．Explain that Takeout approval requires another previously signed-in device．Bound CI dependency installation and avoid the stalled Azure package mirror．
-- Add explicitly selected direct networking for official Web capture through GitHub Actions．Proxy remains the default and never falls back to direct．The panel and signed verification report disclose direct IP exposure，and verification rejects a mismatch between the selected route and the hosted network．
-- Add an optional official Telegram Web observation mode with passive or sequential paced viewing，a fresh profile，restricted UI actions，login-excluded video and signed rendered observations．A required proxy bridge prevents direct fallback；exit changes stop recording．The GitHub Actions mode uses the approved sealed workflow and recipient encryption．
-- Bind official recordings to independently saved source/settings，check video segment order and clean endings，record fresh drand rounds and support independent public-relay comparison．Report unfinished procedures，unconfirmed logout and the limits of local or Cloudflare assurance explicitly．See [Official client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) for scope and validation．
+- Keep message and attachment outcomes visible after single-chat sealed capture, including missing data, failed files and unfinished downloads. Translate final status when changing language after shutdown, and clear connection or export errors once they recover while retaining rejected-action and unconfirmed-revocation warnings.
+- Update the pinned OAuthLib dependency to 4.0.1 for CVE-2026-49272 and regenerate the runtime, browser and MCP hash locks.
+- Show in-flight attachment bytes without counting them as preserved evidence, reset progress on retries and clear it on pause. Keep official-client chat controls disabled during QR/2FA login and until a chat is available. Explain that Takeout approval requires another previously signed-in device. Bound CI dependency installation and avoid the stalled Azure package mirror.
+- Add explicitly selected direct networking for official Web capture through GitHub Actions. Proxy remains the default and never falls back to direct. The panel and signed verification report disclose direct IP exposure, and verification rejects a mismatch between the selected route and the hosted network.
+- Add an optional official Telegram Web observation mode with passive or sequential paced viewing, a fresh profile, restricted UI actions, login-excluded video and signed rendered observations. A required proxy bridge prevents direct fallback; exit changes stop recording. The GitHub Actions mode uses the approved sealed workflow and recipient encryption.
+- Bind official recordings to independently saved source/settings, check video segment order and clean endings, record fresh drand rounds and support independent public-relay comparison. Report unfinished procedures, unconfirmed logout and the limits of local or Cloudflare assurance explicitly. See [Official client witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/OFFICIAL-WITNESS.md) for scope and validation.
 - Add opt-in Trusted Live preview: isolated official Desktop/Web sessions, native JSON preservation, guarded visual recording, per-chat continuity annotations, and verifier-recomputed reports. Supply a Linux network guard with no direct fallback, periodic proxy-routed drand observations, and optional independent read-only Cloudflare samples. Account/WARP/TDX qualification remains pending; see `docs/TRUSTED-LIVE.md`.
 - Make sealed export modes explicit: Telegram Takeout by default, regular API account export, or a single-chat event journal, with differences and limits shown before collection. Select multiple chats, save agreed settings, verify them with `--expected-selection`, and reject incomplete account exports with `--require-complete`. Correct the outdated one-chat-only hosted documentation.
 - Preserve signed message pages before requesting files or hashes. Resume from frozen history, retain completed attachments, and finish an interrupted export with explicit gaps when time or disk is limited.

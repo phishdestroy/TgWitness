@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/high-
 
 Ein gesicherter 24/7-Server bei Hetzner oder Phala Cloud, Gateway-DNS und Überprüfungen, die von Dritten wiederholt werden können.
 
-Eine hochsichere Bereitstellung ergänzt die Archivüberprüfung um unabhängige Prüfungen der Erfassungsumgebung. Der Prüfer fragt die vom Cloud-Anbieter und von Cloudflare geführten Bereitstellungs- und Zugriffsprotokolle ab, und eine Intel-TDX-Bereitstellung ergänzt dies um eine Hardware-Attestierung der Umgebung des Erfassungssystems.
+High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 Die normale Nutzung lokal und mit Docker bleibt unverändert. Hier läuft nichts, es sei denn, Sie führen eine Bereitstellung mit `python -m tgwitness.cloud`, und der Collector liest seinen Host nur, wenn die Bereitstellung `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Ablaufdiagramm · Operator → Server, Firewall ohne Eingangsregeln (Anbieter-AP
 | Der Signaturschlüssel wurde auf diesem Server erstellt | Der Schlüssel signiert eine Erklärung, in der die Server-ID des Anbieters und der Hash des empfangenen „cloud-init“ angegeben sind. | Collector, vom Anbieter überprüft |
 | Das Journal gehört zu diesem Schlüssel und diesem Server | Jeder Prozessstart im Evidenz-ZIP enthält die Host-Messung für diesen Server | Beweismaterial ZIP |
 
-Der Collector zeichnet den SSH-Status, Sitzungen, den Anmeldeverlauf und Startinformationen in signierten Prozessstart- und `host.state` Aufzeichnungen. Auf einer gewöhnlichen VM handelt es sich dabei um lokale Bestandsaufzeichnungen, die der Prüfer mit den unabhängigen Aufzeichnungen des Anbieters vergleicht. Die unten beschriebene Intel-TDX-Bereitstellung überprüft zusätzlich hardwaregestützte Messwerte.
+The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
 
 ## Anbieter
 
@@ -271,6 +271,6 @@ Cloudflare hat keinen Einblick in die Verschlüsselung von Telegram, in andere G
 
 ## Auswerten des Bereitstellungsergebnisses
 
-Bei einer gewöhnlichen VM kontrolliert der Anbieter die Host-Infrastruktur, und der lokale Bestand wird zusammen mit den Aufzeichnungen des Anbieters überprüft. Bei Intel TDX überprüft der Verifizierer zusätzlich die Hardware-Quote, die Collector-Bindung, „Compose“ und Betriebssystemmessungen. Lesen Sie die einzelnen Ergebnisse, um zu sehen, welche Prüfungen bestanden wurden oder nicht verfügbar waren.
+For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
 
-Historische Firewall-Details hängen vom Anbieter ab; Linode speichert Regelversionen. Der [Validierungsbericht](https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/) listet getestete Bereitstellungen und verbleibende Live-Prüfungen auf, und [der Verifizierungsumfang](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) verknüpft diese Umgebungsprüfungen mit der Archivierung und Integritätsprüfung.
+Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.

@@ -81,7 +81,7 @@ Akses skop sembang hanya menemui rekod daripada sembang anda, termasuk teks yang
 
 Klien MCP boleh memanggil `search_messages` dengan `ranked=true` dan halaman dengan `next_offset`Sambungan berbeza menerima hanya sembang mereka.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Kebergantungan
 

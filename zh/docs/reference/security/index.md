@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/secur
 
 威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。
 
-本页面描述了在本地或服务器工作区中的访问、存储和网络保护机制。 若要在 GitHub Runner 或 Intel TDX 机密虚拟机中进行数据采集，请参阅 [“验证](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)模式”，该模式会增加对采集环境的检查。 账户连接、通知、时间戳、异地副本和见证人各有其独立的路由设置。
+This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | 领域 | 简而言之 |
 | --- | --- |
@@ -12,7 +12,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/secur
 | 静态数据中的秘密 | 会话、API 对、签名密钥和代理设置均采用 Fernet 算法进行加密 |
 | 消息和媒体文件 | 数据以明文形式存储：请使用磁盘加密并设置严格的权限 |
 | 完整性 | 每条记录均带有 SHA-256 哈希链和 Ed25519 签名 |
-| 本地信任边界 | 主机管理员控制工作区及其签名密钥；独立检查点保留了较早的日志边界 |
+| 本地信任边界 | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 有关漏洞报告，请参阅[安全政策](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)。
 
@@ -38,13 +38,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/secur
 
 ## 静态数据中的秘密
 
-Telegram API 凭据、会话密钥和签名密钥均采用 Fernet 算法进行加密。 对于本地消息和媒体文件，加密由主机磁盘或卷提供； 工作区用于存储普通文件。导出数据可采用受密码保护的 AES-256 ZIP 格式， 异地备份则采用 AES-256-GCM 加密。
+Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
 
-保险库密钥默认位于受保护的数据目录中。请使用下方的外部主密钥文件 将其单独存储。在 Unix 系统上，新建的私钥文件应使用权限模式 0600，新建的数据 目录应使用 0700；在 Windows 系统上，请为服务账户和 授权管理员设置目录访问控制列表 (ACL)。现有目录权限将予以保留。
+The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
 
 ### 外部主密钥
 
-对于新的数据目录，TGWITNESS_VAULT_KEY_FILE 可提供外部随机 主密钥。系统会通过 HKDF-SHA256 及独立的随机盐值，为每个工作区 生成不同的 Fernet 密钥。为确保数据恢复，必须保留 vault.external.json 文件。若主密钥缺失或 错误，系统将无法启动。现有本地保险库不会被自动迁移。 面板上会显示所选的密钥存储模式。无论采用哪种模式，磁盘加密都会保护本地 消息和媒体文件；有关设置的详细信息，请参阅 [“连接和数据保护”](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/)部分。
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/) for setup details.
 
 ## 代理服务器与网络路由
 
@@ -68,10 +68,10 @@ MTProxy 仅传输 Telegram 流量。外部请求可使用独立的 SOCKS5/HTTP �
 
 ## 完整性限制
 
-本地验证会检查记录的签名、哈希链、附件以及导出清单。 管理员持有本地签名密钥，并可创建另一份签名日志； 一个独立保存的检查点可检测其所覆盖的前缀是否被替换。 请将密钥指纹和检查点交由接收方或独立见证人保管。
+Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
 
-对于经过独立验证的采集，请选择 [GitHub Actions 捕获](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) 或 [Intel TDX 部署](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)。 其验证器除检查归档完整性外，还会验证工作流溯源或硬件测量数据。 可选的时间戳和加密的异地副本可提供时间锚点和可恢复的副本； [证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope)描述了每种模式下的验证流程。
+For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/#verification-scope) describes the checks for each mode.
 
 ## 如果您怀疑存在问题
 
-保留原始数据目录，并使用另一份副本进行分析。 通过 [安全](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)政策报告受影响的版本、操作及可重现步骤，同时确保账户数据和凭据的私密性。
+Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.

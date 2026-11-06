@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo` में सिंथेटिक डेमो शुरू करें |
 | `TgWitness-Check.cmd` | बिना शुरू किए तत्परता जाँच चलाएँ |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 पूरे आर्काइव को `Documents\TgWitness` जैसे किसी लिखने योग्य फ़ोल्डर में निकालें; इसे ZIP के अंदर या Program Files से न चलाएँ। रनटाइम एक अलग मॉड्यूल पथ का उपयोग करता है, इसलिए अन्य पाइथन इंस्टॉलेशन और `PYTHONPATH` इसका प्रभावित नहीं करते। डेटा पैकेज के `data` फ़ोल्डर में रहता है। अपडेट करने के लिए, TgWitness को रोकें, नए संस्करण को एक नए फ़ोल्डर में एक्सट्रेक्ट करें और `data` फ़ोल्डर को वहीं पर कॉपी करें।
 
 इसे स्वयं 64-बिट विंडोज पर पाइथन 3.12 के साथ बनाएं:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example` की प्रतिलिपि `.env` पर करें। `TGWITNESS_IMAGE` को प्रकाशित संस्करण पर सेट करें, **छोटे अक्षरों वाले** रिपॉजिटरी पथ का उपयोग करके, उदाहरण के लिए:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

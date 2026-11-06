@@ -81,7 +81,7 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 MCP क्लाइंट कॉल कर सकते हैं `search_messages` के साथ `ranked=true` और पेज के साथ `next_offset`. स्कोप्ड कनेक्शन केवल अपनी चैट्स ही प्राप्त करते हैं।
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## निर्भरताएँ
 

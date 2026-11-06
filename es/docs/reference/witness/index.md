@@ -6,7 +6,7 @@ Ejecute un «witness» con su propia clave y bot, publique puntos de control fir
 
 [Exportar y verificar](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/) · [Alta fiabilidad](https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/) · [Guía de paneles](https://phishdestroy.github.io/TgWitness/es/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
+A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
 
 Diagrama de flujo · Recopilador → Witness (Punto de control firmado: recuento de registros + hash de cabecera); Witness → Registro de pruebas, clave propia; Witness → Canal de Telegram (Publicación firmada a través de su propio bot); Archivo ZIP de pruebas → verify.py; Registro de pruebas, clave propia → verify.py; Canal de Telegram → verify.py (Exportación desde Telegram Desktop o página t.me/s) · Recopilador · Witness · Registro de pruebas, clavepropia · Canal de Telegram · Archivo ZIP de pruebas · verify.py · Punto de control firmado: · recuento de registros + hash · de cabecera · Publicación firmada a través · de su propio bot · Exportación desde Telegram · Desktop o página t.me/s
 
@@ -36,7 +36,7 @@ Los nuevos testigos envían un desafío aleatorio en cada encuesta; la declaraci
 Cada intervalo (10 minutos por defecto), TgWitness:
 
 1. recoge el encabezado por sí mismo (el recopilador no puede forzarlo ni omitirlo);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
 3. añade un registro firmado a su propio diario: `witness.anchor` con estado `ok`, `key_changed`, `rollback` (menos registros que antes), `fork` (misma longitud, diferente encabezado) o `invalid` (la respuesta no superó la verificación), o `witness.no_response` cuando el recopilador no respondió;
 4. Publica el resultado en el canal, firmado, incluyendo «sin respuesta» mientras TgWitness está en funcionamiento y puede acceder a la API del bot. Se registra el ID de la publicación (`witness.posted`), así como una publicación fallida (`witness.post_failed`).
 
@@ -196,4 +196,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Para ello se requiere la huella digital del testigo conservada de forma independiente y un punto de control coincidente justo al final de esta exportación. Un punto de control que abarque únicamente un prefijo anterior resulta insuficiente. Detenga la recopilación, permita que el testigo observe el estado final y realice la exportación antes de que se produzcan nuevas escrituras en el registro; si el registro cambia, conserve otro punto de control y exporte ese estado. Un punto de control posterior por sí solo no puede verificar el hash final de una exportación más corta. Cuando también se proporciona «`--channel`», la falta de publicaciones declaradas o un conjunto de coincidencias vacío hacen que se falle esta estricta comprobación. Sin el indicador, las comprobaciones de integridad habituales siguen informando de registros sin testificar sin rechazar un archivo que, por lo demás, está intacto.
 
-Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．
+Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+
+### Daily seals and unavailable timestamp calendars
+
+The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+
+If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+
+A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.

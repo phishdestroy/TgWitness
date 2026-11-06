@@ -101,7 +101,7 @@ Dalam contoh yang telah disusun:
 | File yang disimpan sama | Telah diselesaikan: tanda terima media #151 dan #209 | Nilai SHA-256 lengkapnya cocok dengan byte yang disimpan |
 | Sumber saluran | #101 dan #188 | Jangan mengaitkan postingan saluran kepada pengguna 71001 tanpa menyebutkan pengirimnya |
 
-Bandingkan hash lampiran dan referensi pesan yang terkait, serta pertahankan garis waktu akun yang dikelompokkan berdasarkan ID Telegram yang tercantum dalam catatan tersebut.
+Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
 
 Simpan catatan kerja tim di [Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/): tandai catatan yang Anda andalkan, seperti #146, #188, dan #205, sorot string tujuan yang tepat, dan simpan potongan dari setiap tindakan yang terekam di antara dua catatan atau dalam rentang waktu tertentu. Catatan dan status menyimpan tinjauan tim dalam riwayat bertanda tangan tersendiri, yang dapat diidentifikasi secara terpisah dari pengamatan sumber.
 
@@ -161,6 +161,6 @@ Pertahankan hasil verifikasi yang sebenarnya dan artefak asli. Ekspor catatan ru
 | --- | --- | --- |
 | Sengketa pesanan/pembayaran yang ditangani oleh bot | Pengumuman entri → pratinjau tautan yang disimpan → parameter awal bot → versi pesan dan keyboard → tanda terima panggilan balik panel → tindak lanjut pribadi/grup | Jadwal penawaran/tanggapan yang teramati dan sumber yang terverifikasi; tautan pembayaran saja tidak membuktikan adanya pembayaran |
 | Pesan yang dihapus setelah terjadinya insiden | Semua obrolan yang terpengaruh → salinan asli/suntingan yang disimpan → hasil penghapusan atau tidak ditemukan saat diperiksa ulang → media yang disimpan → cakupan dan perspektif akun lainnya | Versi yang disimpan dan interval yang tidak diketahui secara eksplisit; tidak ada aktor penghapusan yang dibuat-buat |
-| Seorang peserta mengganti nama di berbagai obrolan | ID pengirim numerik → riwayat nama／nama pengguna → balasan → obrolan lain yang diamati → tujuan／file yang disebutkan | Garis waktu aktivitas akun Telegram dengan tautan ke catatan sumbernya |
+| Seorang peserta mengganti nama di berbagai obrolan | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | Garis waktu aktivitas akun Telegram dengan tautan ke catatan sumbernya |
 
 [Referensi koleksi](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/) · [Verifikasi profil orang](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#people-profiles) · [Penyerahan bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#investigation-handoff) · [Validasi telah selesai](https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/)

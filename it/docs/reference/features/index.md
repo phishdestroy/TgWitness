@@ -74,9 +74,9 @@ La sezione «Fonti» offre opzioni per singolo account relative a nuovi messaggi
 | Azioni dell’amministratore | Aggiornamenti rilevanti forniti e un’istantanea del registro di amministrazione nelle esportazioni delle chat di canali/supergruppi | L’esportazione legge il log quando è disponibile per l’account amministratore che esegue l’esportazione; il polling continuo del log di amministrazione non rientra in questo percorso |
 | Allegato | Descrizione della versione originale, byte scaricati/SHA-256 ed esiti dei tentativi | Un file cancellato potrebbe risultare irrecuperabile; la versione più recente non viene sostituita |
 | Cronologia | Istantanea esplicita dei messaggi attualmente visibili | Non ricostruisce tutte le modifiche né i contenuti cancellati |
-| Processo di raccolta | Avvio/arresto, heartbeat, errori, impostazioni, ambito e ricevuta di esecuzione firmata | Inventario locale; GitHub e TDX aggiungono [controlli indipendenti dell’ambiente](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) |
+| Processo di raccolta | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/#verification-scope) |
 
-L’interfaccia riporta l’account fornito nell’evento di origine e conserva i nomi e gli username osservati. Quando l’evento omette l’autore, il rapporto lascia quel campo non specificato.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Capacità e limiti di Telegram
 

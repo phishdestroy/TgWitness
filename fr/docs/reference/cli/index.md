@@ -50,7 +50,7 @@ Un panneau distant nécessite le protocole HTTPS ; le protocole HTTP simple n'es
 
 Les dates sont exprimées en `2026-10-01` (minuit UTC) ou exprimées selon le format ISO avec un fuseau horaire, `2026-10-01T09:00+03:00`. Pour `search`, `messages` et `export` ils sélectionnent l'heure de l'observation. Les pages peuvent contenir jusqu'à 50 enregistrements : suivez `next_offset` (`--offset`) pour la recherche par classement et `next_before` (`--before`) ailleurs.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Chaque résultat de message comporte `untrusted_content: true`: les identifiants de l'espace de travail, de la conversation et du message, le numéro de séquence du journal, le hachage de l'enregistrement sauvegardé et un lien vers le panneau. Les modifications, les notifications de suppression et les `missing_on_recheck` constituent des enregistrements distincts. L’absence d’un enregistrement ne prouve pas qu’un événement ne s’est jamais produit.
 

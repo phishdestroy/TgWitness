@@ -20,6 +20,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 データプレビューでは、初期サンプルではなく、完全かつ安定したログのプレフィックスがカウントされます。 表示されているサンプル行および長いリストのみが範囲に含まれており、省略された件数が 表示されます。後日のエクスポートでは新しい安定版スナップショットが取得されるため、収集が継続されている場合、 数値が増加する可能性があります。範囲、件数、およびソースの識別情報は、 署名付きレポートに含まれます。フォームを開いたりプレビューしたりしても、保存はされません。
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **受取人用のコピーを選択してください。** グラフおよびトランスクリプトには、選択された記録が使用されます。 完全性、保管、および網羅性は、ソースジャーナル全体を記述するものです。証拠用ZIPファイルには、 元の記録と添付ファイルが含まれています。受取人が選択された許可されたデータのみを受け取る必要がある場合は、[最小限の引き渡し](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#handover-extract) を行ってください。
 
 ### 編集内容、削除箇所、およびIDの欠落を確認してください
@@ -90,12 +92,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-
 
 | Processor | 表示内容 |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 ソースコードをチェックアウトし、上記の8つのデザインすべてを、同じ架空のジャーナルに基づいて作成してください：
 
@@ -147,7 +149,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. 元のZIPファイルとそのハッシュ値を保持してください。各保持者、転送、日付 および目的を記録してください。それらに関連付けられたオペレーターの陳述およびケースノートも保持してください。
 5. 機密性の高いVMについては、見積もり、チャレンジ、 Intel証明書チェーン、測定値、正確なソース、および鍵の取り扱い条件を保存し、独立して検証してください。 検証済みのアーティファクトとともに、アテステーションの検証結果も保管してください。
 
-各モードにおける取得、 アーカイブの完全性、時刻、および収集範囲のチェックについては、[検証範囲を](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope)参照してください。
+See [verification scope](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## 受領者によるレビュー
 

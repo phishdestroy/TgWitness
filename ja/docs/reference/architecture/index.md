@@ -14,6 +14,8 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 | interactions.py / telegram_client.py | 明確なパネル操作、署名付き受信確認、永続的なリクエストID、およびタスク単位のコールバック／参加リトライポリシー |
 | message_content.py | 転送アクセスに関するメタデータを除外した、メッセージの可視的な比較 |
 | workers.py | キャンセル処理を行う前に、エクスポートファイルの処理が完了するまでお待ちください |
+| distributed_export.py / distributed_pages.py | Concurrent chat jobs, per-account reservations, signed checkpoints and cleanup after archive verification |
+| distributed_takeout.py / export_timing.py | Resumable Takeout sessions and timings for each start or resume |
 | store.py | WALトランザクション、順序付けられたイベントチェーン、クエリフィルター、運用設定 |
 | fulltext.py | 署名付きジャーナルのヘッダーに紐付けられた派生フルテキストインデックス（語形、BM25）。エクスポートは一切行われない。 |
 | security.py | プライベートファイルの作成、暗号化された保管庫、Ed25519による署名、シングルプロセスロック |
@@ -44,7 +46,7 @@ Optional browser and AyuGram recorders run in **separate processes or containers
 
 各ワークスペースは1つのアカウントのみを受け入れ、独自のディレクトリと署名用IDを持っています。 互換性を確保するため、メインのワークスペースはルートディレクトリに配置され、追加のワークスペースは profiles/<id>/ に配置されます。1つのベアラートークンがインストール全体を管理しており、ワークスペースは 独立した認証テナントではありません。 プロセスロックによりディレクトリが保護され、データベースロックにより イベントの挿入がシリアライズされます。各追加処理は、FULL同期モードの SQLite WALに対して同期的にコミットされます。イベントの更新・削除トリガーにより、 通常のアプリケーションによる編集が防止され、ファイルシステム管理者は信頼境界内に留まります。
 
-APIの認証にはベアラートークンが使用されます。ログイン操作はシリアル化され、時間制限が設けられています。 アカウントへのアップロードには、エンコード済みボディの制限として12 MiB、デコード済みファイルの 制限として8 MiBが設定されています。通常のAPIリクエストについては、16 KiBの制限が維持されます。 変換処理はワーカースレッドで実行され、 アップロードデータをメモリ内に保持し、正規化された入力を認証済みの ブラウザに返します。QRログインには、ワークスペースごとの候補、短命な識別子、待機タスク、 および明示的なキャンセル機能が備わっています。承認された認証のみがアクティブなクライアントとなります。 Telegram FloodWaitはRetry-After値と共に返されます。認証情報および生のRPC エラーメッセージは、APIエラーでは公開されません。エクスポートは非同期イベント ループの外で実行され、ワークスペースごとにシリアル化されます。これらは安定した読み取りスナップショットをストリーミングし、 継続中のWAL書き込みと共存することができます。 ワークスペースコレクターは、プロセスおよびイベントループを共有します。
+API authorization is a bearer token. Login operations are serialized and time-bounded. Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker thread, keeps uploads in memory, and returns normalized input to the authenticated browser. QR login has a per-workspace candidate, short-lived identifier, waiter task, and explicit cancellation. Only accepted authorization becomes the active client. Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC error messages are not exposed in API errors. Journal exports run outside the async event loop and are serialized per workspace. They stream a stable read snapshot alongside continuing WAL writes. Chat acquisition jobs can run concurrently on separate accounts; each account remains reserved until its job stops. A paused or failed job retains its checkpoints. Successful archive verification permits cleanup of its working files, leaving the ZIP, signed plan and status. Workspace collectors share the process/event loop.
 
 現在の履歴スナップショットとリアルタイムの更新情報は重複する場合があります。これらはそれぞれ独立した観測データであり、 ソースごとにラベル付けされています。重複データは自動的に折りたたまれることはありません。IDの欠落、 削除されたテキストの捏造、メンバーの強制的な列挙、またはグループへの自動参加 に基づく推論機能は実装されていません。
 

@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/evide
 
 TgWitness हस्ताक्षरित जर्नल में खाते में दिखाई देने वाले टेलीग्राम अवलोकनों को संरक्षित करता है। प्राप्तकर्ता एक विश्वसनीय कलेक्टर कुंजी के विरुद्ध सहेजे गए रिकॉर्ड, संलग्नक और रिपोर्टों का सत्यापन कर सकते हैं, फिर जर्नल की तुलना स्वतंत्र रूप से रखे गए चेकपॉइंट से कर सकते हैं। यह पृष्ठ प्रारूपों, जाँचों और हैंडओवर के लिए रखे जाने वाले सामग्री का वर्णन करता है।
 
+Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
 ## हस्ताक्षरित क्या है
 
 | सामग्री | सुरक्षा | क्या बनाए रखना है |
@@ -14,12 +16,27 @@ TgWitness हस्ताक्षरित जर्नल में खात�
 | साक्ष्य ZIP सामग्री | `manifest.sig` कैनोनिकल मैनिफेस्ट पर हस्ताक्षर करता है, जिसमें सामग्री फ़ाइलों के हैश सूचीबद्ध होते हैं। | पूर्ण ZIP, जिसमें इसका मैनिफेस्ट और हस्ताक्षर शामिल हैं |
 | संरक्षित संलग्नक | SHA-256 और बाइट काउंट एक हस्ताक्षरित `media.saved` इवेंट में; फ़ाइल हैश हस्ताक्षरित ZIP मैनिफेस्ट में | सत्यापित ZIP के अंदर के मूल बाइट्स |
 | चेकपॉइंट | जर्नल की लंबाई पर Ed25519 हस्ताक्षर, हेड हैश, सार्वजनिक कुंजी, और निर्माण समय | एक स्वतंत्र प्रति, विवादित परिवर्तन से पहले सुरक्षित रखी गई |
-| रन रसीद | कलेक्टर संस्करण, स्रोत-फ़ाइल हैश और प्रारंभ सेटिंग्स का हस्ताक्षरित रिकॉर्ड, भी शामिल है `process.started` | चयनित सत्यापन मोड के लिए रसीद, संबंधित जर्नल और पर्यावरण साक्ष्य |
+| रन रसीद | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
 | पठनीय रिपोर्टें: `report.html` और इसके भाग, `report.json`, `report.pdf`, `chat.pdf` | प्रति फ़ाइल उसकी सामग्री पर एक Ed25519 सील; PDF में एक मानक PDF हस्ताक्षर भी होता है (देखें [पठनीय रिपोर्ट](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#readable-reports)) | प्राप्त हुई फ़ाइल और विश्वसनीय कुंजी फिंगरप्रिंट; उस ZIP का वर्णन |
 | स्वतंत्र CSV | कोई स्वतंत्र क्रिप्टोग्राफिक हस्ताक्षर नहीं; केवल इवेंट हैश पर्याप्त नहीं हैं | अखंडता जांच के लिए सत्यापित ज़िप के अंदर मौजूद सटीक प्रतिलिपि का उपयोग करें |
 | ब्राउज़र द्वारा उत्पन्न स्क्रीनशॉट, प्रिंटआउट या PDF | उप-उत्पाद पर TgWitness हस्ताक्षर नहीं | मूल सत्यापित पैकेज को बनाए रखें और व्युत्पन्न कैसे बनाया गया, इसका दस्तावेजीकरण करें |
 
 कलेक्टर प्रत्येक एक्सपोर्ट फॉर्मेट उत्पन्न करने से पहले जर्नल हस्ताक्षरों को सत्यापित करता है। पठनीय HTML और PDF रिपोर्टों में अपनी मुहरें होती हैं; स्टैंडअलोन CSV को एक हस्ताक्षरित ZIP के हिस्से के रूप में जांचा जाता है। अटैचमेंट बाइट्स और मैनिफेस्ट को बनाए रखने के लिए ZIP को रखें, और एक अलग चेकपॉइंट रखें ताकि जर्नल की जांच पहले की सीमा के विरुद्ध की जा सके।
+
+## Comparing chat exports
+
+Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+
+```
+python -m tgwitness.verify first.zip --compare second.zip \
+  --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
+```
+
+When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+
+A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+
+For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
 
 ## जांच हस्तांतरण
 
@@ -62,7 +79,7 @@ TgWitness हस्ताक्षरित जर्नल में खात�
 
 एक चैनल या सुपरग्रुप में Telegram संदेशों को क्रम से 1, 2, 3… संख्या देता है। एक चैट एक्सपोर्ट सूचीबद्ध करता है कि पहले और आखिरी संख्या क्या है, कितने संदेश मौजूद हैं और `message-ids.json` में अनुपस्थित संदेशों के हर समूह, मैनिफेस्ट और `chat.json` हेडर में हर अंतराल को चिह्नित करता है, और ट्रांसक्रिप्ट में हर अंतराल को दिखाता है। `verify.py` उन्हें `chat.json` से फिर से गिनता है। एक अनुपस्थित संख्या वह संदेश है जिसे Telegram ने वापस नहीं किया (निर्यात से पहले हटा दिया गया, या खाते के लिए दिखाई नहीं दे रहा है); निजी चैट और बुनियादी समूहों में, संख्याएँ खाते की सभी चैट द्वारा साझा की जाती हैं और अंतराल नहीं गिना जाता है।
 
-इतिहास पढ़ने के बाद, एक्सपोर्ट हर अनुपस्थित नंबर के लिए फिर से टेलीग्राम से पूछता है, नंबर के अनुसार (`channels.getMessages`, 10,000 नंबरों तक)। परिणाम `message-ids.json` और रिपोर्ट में। एक खाली उत्तर रिकॉर्ड करता है कि पुनः जाँच के समय यह नंबर इस खाते के लिए अनुपलब्ध है; यह कारण निर्दिष्ट नहीं करता है। पुनः जाँच पर लौटा गया संदेश निर्यात में जोड़ा जाता है और चिह्नित किया जाता है `found_on_recheck`．
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
 
 हर रिपोर्ट**से शुरू होती है। संक्षेप में**: एक पैराग्राफ, फिर सामग्री क्या दिखाती है और क्या नहीं (किसी खाते के पीछे कौन है, डिलीवरी की पूर्णता, अवलोकन से पहले की गई हटाई गई सामग्री, बिना टाइमस्टैम्प के घड़ी का समय)। पृष्ठ की अपनी सील स्टैम्प तब एम्बर हो जाती है जब ब्राउज़र ने सील के हस्ताक्षर की जाँच की हो, न कि पृष्ठ की: एक ब्राउज़र किसी पृष्ठ को उसके अपने बाइट्स नहीं देता। यह केवल तभी हरा हो जाता है जब पाठक फ़ाइल को पेज के अंत में दिए गए जाँच में डालता है और हर बाइट का मिलान हो जाता है, और केवल तभी जब दिखाई गया पेज वही फ़ाइल हो; अन्यथा यह लाल हो जाता है।
 
@@ -118,6 +135,10 @@ message.new actor_id संदेश प्रेषक है। message.edited
 
 निजी चैट और साधारण समूहों के लिए हटाने की सूचनाओं में केवल संदेश आईडी होते हैं। वे चैट एक ही खाते-व्यापी आईडी अनुक्रम साझा करते हैं, इसलिए एक आईडी इस खाते के एक ही संदेश की पहचान करती है। जब उस आईडी वाला कोई संदेश पहले इस जर्नल में सहेजा गया था, तो उस चैट में उसे message.deleted के रूप में रिकॉर्ड किया जाता है, जिसमें payload.chat_resolution को मेथड के रूप में नामित किया गया है। जिन आईडी को कभी सहेजा नहीं गया है, उन्हें बिना किसी chat_id के deletion.unscoped के रूप में रखा जाता है; कुछ भी अनुमान नहीं लगाया जाता है। चैनल और सुपरग्रुप प्रति चैट संदेशों की गिनती करते हैं और इस तरह कभी भी मेल नहीं खाते। जब हटाया गया संदेश देखे गए खाते द्वारा भेजा गया था, तो payload.deleted_message_was_outgoing true होता है; हटाने वाले की जानकारी अभी भी प्रदान नहीं की जाती है।
 
+An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+
+Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+
 ## कवरेज: निरंतरता, अंतराल और अवलोकित नहीं की गई आईडी
 
 प्रत्येक हस्ताक्षरित ZIP में `coverage.json` होता है, HTML रिपोर्ट उसी सारांश के साथ खुलती है, और `verify.py` फ़ाइल पर भरोसा करने के बजाय इसे `events.jsonl` से पुनः गणना करता है:
@@ -152,13 +173,13 @@ message.new actor_id संदेश प्रेषक है। message.edited
 
 `verify.py` पुनः गणना करता है `gap_summary` से `events.jsonl` हस्ताक्षरित में पैरामीटर के साथ `coverage.json` सदस्य (पुराने आर्काइव के लिए डिफ़ॉल्ट) और इसकी कवरेज सारांश में खाते-व्यापी लाइन को प्रिंट करता है। आर्काइव का `get_capture_status`(MCP और कमांड लाइन) उन चैट्स के लिए समान माप लौटाता है जिन्हें एक्सेस पढ़ सकता है; पूरे वर्कस्पेस को कवर करने वाले एक्सेस के लिए ही खाता-व्यापी अनुक्रम।
 
-एक सेवा संदेश के बार-बार अवलोकनों को एक बार गिना जाता है, और खाता सेवा अनुमान केवल मापी गई सीमा के अंदर के नंबरों का उपयोग करता है। एक लागू किए गए स्कोप को खाता-व्यापी मापन सक्षम होने से पहले स्पष्ट रूप से खाते के अपने संदेशों को संरक्षित करना चाहिए; उस जानकारी के बिना पुराने रिकॉर्ड इस स्थिति को स्थापित नहीं कर सकते। रुका हुआ अवलोकन मापी गई सीमा का विस्तार नहीं करता है, और इसे फिर से शुरू करने को नोट किया जाता है। लाइव आर्काइव क्वेरी का एक समय बजट होता है, जिसमें इसका डेटाबेस स्कैन शामिल है, और यह एक अधूरे मापन को आंशिक के रूप में चिह्नित करता है।
+Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
 
-टेलीग्राम [अलग-अलग संदेश आईडी](https://core.telegram.org/api/updates#message-id-sequences)अनुक्रमों को दस्तावेज़ करता है। ये नंबर अवलोकनों का वर्णन करते हैं; वे किसी हटाने वाले कर्ता की पहचान नहीं करते हैं या यह स्थापित नहीं करते कि कोई संख्या अनुपस्थित क्यों है।
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
 
 जब Telegram खाते को स्वीकार करना बंद कर देता है, तो `coverage.gap` रिकॉर्ड जो अवलोकन समाप्त करता है, वह `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` या `not_authorized`) और Telegram त्रुटि को ले जाता है; `verify.py` उस कारण का नाम बताता है जहाँ अवधि समाप्त होती है।
 
-कवरेज में रिकॉर्ड की गई अवलोकन अवधि, रुकावटें और संदेश के परिणाम शामिल होते हैं। इसे चयनित चैट्स, अवधि और अटैचमेंट नीति के साथ मिलाकर आकलन करें; केवल निरंतर संचालन से टेलीग्राम अपडेट की पूर्ण डिलीवरी स्थापित नहीं होती।
+Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
 
 ## निर्माता
 
@@ -186,27 +207,27 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 manifest.json में स्वयं `manifest.json` और `manifest.sig` को छोड़कर हर कंटेंट सदस्य का फ़ॉर्मेट, एक्सपोर्ट समय, पब्लिक की, फ़िंगरप्रिंट, जर्नल लंबाई, हेड हैश, स्कोप, प्रोड्यूसर, सीमाएँ, और SHA-256 शामिल होता है। manifest.sig कैनोनिकल मैनिफ़ेस्ट JSON पर बेस64 Ed25519 सिग्नेचर है। सत्यापनकर्ता अप्रत्याशित/गैर-मौजूद सदस्यों, डुप्लिकेट नामों, दूषित फ़ाइलों, टूटे हुए अनुक्रम/श्रृंखला, अमान्य हस्ताक्षरों, और प्रदान किए गए चेकपॉइंट के साथ असंगति को अस्वीकार कर देता है। यह कभी भी आर्काइव पथों को निकालता नहीं है। यह कुल घोषित बिना-संपीडित आकार को 4 GiB तक सीमित करता है; `--max-gib N`, बढ़ाई गई **पैरामीटर** सीमा के साथ बनाए गए बड़े आर्काइव की अनुमति देता है।
 
-अपने इंस्टॉल किए गए TgWitness संस्करण या एक समीक्षित चेकआउट से सत्यापन चलाएँ। आर्काइव में शामिल प्रति पोर्टेबल उपयोग का समर्थन करती है; इसे निष्पादित करने से पहले उस प्रति की अपनी विश्वसनीय इंस्टॉलेशन से जाँच करें।
+Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
 
-एक चेकपॉइंट एक बयान पर हस्ताक्षर करता है जिसमें सार्वजनिक कुंजी, जर्नल की लंबाई, हेड हैश, और निर्माण समय शामिल होता है। सत्यापनकर्ता यह जांच सकता है कि बाद के आर्काइव में वही प्रीफ़िक्स मौजूद है। चेकपॉइंट को कलेक्टर के बाहर बनाए रखें, ताकि बाद के सत्यापन में आर्काइव की तुलना उससे अलग रखे गए संदर्भ से की जा सके।
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
 
 ## प्रमाणीकरण का दायरा
 
-प्रमाणीकरण आर्काइव और उसे उत्पन्न करने के लिए उपयोग किए गए संग्रह मोड की जाँच करता है। उस मोड का चयन करें जिसकी विश्वास सीमा मामले से मेल खाती हो, फिर उसके प्रमाणीकरण इनपुट्स को बनाए रखें।
+Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
 
 | संग्रह मोड | प्रमाणीकरणकर्ता क्या जाँचता है | प्रमाणीकरण इनपुट्स और विश्वास सीमा |
 | --- | --- | --- |
-| स्थानीय कार्यक्षेत्र | हस्ताक्षर, हैश चेन, मैनिफेस्ट और अटैचमेंट बाइट्स रिकॉर्ड करें | स्वतंत्र रूप से संग्रहीत कलेक्टर फिंगरप्रिंट; होस्ट प्रशासक स्थानीय हस्ताक्षर कुंजी को नियंत्रित करता है |
-| एक स्वतंत्र गवाह के साथ स्थानीय कार्यक्षेत्र | आर्काइव जांच करता है और गवाह द्वारा बनाए रखे गए पहले के जर्नल उपसर्ग के साथ सहमति भी करता है | विश्वासित गवाह कुंजी और रिकॉर्ड्स को अलग-अलग रखें; चेकपॉइंट पहले से देखे गए उपसर्ग को बाँधता है |
-| [GitHub Actions कैप्चर](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub द्वारा आर्काइव डिजस्ट, अनुमोदित वर्कफ़्लो और कलेक्टर कमिट्स, होस्टेड रनर, ताज़ा सत्र/कुंजी उत्पत्ति और आंतरिक आर्काइव अखंडता की पुष्टि | ट्रस्टेड वेरिफायर नीति, कॉलर रिपॉजिटरी और GitHub अटेस्टेशन बंडल; संग्रह पिन किए गए वर्कफ़्लो के तहत चलता है |
-| [क्लाउड परिनियोजन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/) | प्रोवाइडर जीवनचक्र और एक्सेस रिकॉर्ड, फ़ायरवॉल और Cloudflare की स्थिति, साथ ही कलेक्टर का हस्ताक्षरित रन रिकॉर्ड | प्रदाता और Cloudflare के लिए केवल-पढ़ने योग्य क्वेरीज़; व्यक्तिगत जाँचों की उपलब्धता प्रदाता पर निर्भर करती है |
-| [इंटेल टीडीएक्स गोपनीय वीएम](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | हस्ताक्षर और प्लेटफ़ॉर्म स्थिति का उद्धरण, कलेक्टर स्टेटमेंट से बाध्य, OS मापों का संयोजन | इंटेल ट्रस्ट चेन और अपेक्षित परिनियोजन माप; प्रत्येक आवश्यक TDX जांच के परिणामों को बनाए रखें |
+| स्थानीय कार्यक्षेत्र | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
+| एक स्वतंत्र गवाह के साथ स्थानीय कार्यक्षेत्र | आर्काइव जांच करता है और गवाह द्वारा बनाए रखे गए पहले के जर्नल उपसर्ग के साथ सहमति भी करता है | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
+| [GitHub Actions कैप्चर](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
+| [क्लाउड परिनियोजन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
+| [इंटेल टीडीएक्स गोपनीय वीएम](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
 
-सीलबंद अधिग्रहण में, स्वीकृत कलेक्टर सत्यापित वातावरण के अंदर एक प्रमाणीकृत टेलीग्राम कनेक्शन के माध्यम से डेटा प्राप्त करता है। अटेस्टेशन आर्काइव को उस निष्पादन से जोड़ता है, इसलिए सत्यापन अधिग्रहण के साथ-साथ बाद की फ़ाइल अखंडता को भी कवर करता है। यह ऊपर सूचीबद्ध स्वीकृत कोड और प्लेटफ़ॉर्म ट्रस्ट चेन पर निर्भर करता है। गिटहब कैप्चर सत्यापन के लिए रन के अंदर बनाए गए एक सत्र की आवश्यकता होती है और यह आयात किए गए सत्र कैप्चर को अस्वीकार करता है।
+In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
 
-रन रसीद कलेक्टर संस्करण, फ़ाइल हैश और स्टार्टअप सेटिंग्स को रिकॉर्ड करती है। GitHub प्रूवनेंस और TDX माप पर्यावरण जांच प्रदान करते हैं; [सत्यापन रिकॉर्ड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/) परीक्षण की गई कॉन्फ़िगरेशनों की पहचान करता है।
+The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/) identifies tested configurations.
 
-TgWitness द्वारा एकत्र किए गए अवलोकनों पर हस्ताक्षर किए जाते हैं; टेलीग्राम और संदेश लेखक ये हस्ताक्षर जारी नहीं करते हैं। एक स्थानीय कार्यक्षेत्र में, पहले स्वतंत्र चेकपॉइंट से पहले बनाई गई सामग्री अभी भी कलेक्टर और उसके कुंजी धारक पर निर्भर करती है। कवरेज रिकॉर्ड चयनित दायरे और संग्रह के परिणामों का वर्णन करते हैं, जबकि सत्यापित बाहरी टाइमस्टैम्प समय में प्रतिबद्ध अभिलेखागार या जर्नल की सीमा को स्थिर करते हैं।
+TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
 
 ## संलग्नक
 
@@ -220,9 +241,9 @@ ZIP एक्सपोर्टर संग्रहीत मीडिया �
 
 एक मीडिया जॉब और उसका संदेश इवेंट एक ही ट्रांजैक्शन में कमिट होते हैं। यह जॉब मूल TL संदेश डिस्क्रिप्टर को संग्रहीत करता है; हस्ताक्षरित अवलोकन इसकी SHA-256, खाता, और आकार नीति को बांधता है। रिकवरी डाउनलोड करने से पहले उस बाइंडिंग को सत्यापित करती है। यह कभी भी वर्तमान संदेश को प्राप्त नहीं करता है और चुपचाप एक नए अटैचमेंट को प्रतिस्थापित कर देता है। रुकी हुई जॉब्स को फिर से आज़माया जाता है, जबकि स्थायी विफलता एक स्पष्ट परिणाम बना रहता है।
 
-प्रत्येक वर्कस्पेस का अपना जर्नल और साइनिंग पहचान होती है। एक process.started इवेंट में रन आईडी, लोकल क्लॉक, डिपेंडेंसी संस्करण, सोर्स-फ़ाइल हैश, प्रारंभिक खाता/स्कोप, और कैप्चर सेटिंग्स शामिल होती हैं। हार्टबीट्स में रन आईडी, मोनोटोनिक समय, और क्यू स्थिति शामिल होती है। रन रसीद को एक अलग से हस्ताक्षरित बयान के रूप में भी डाउनलोड किया जा सकता है। निष्पादन वातावरण के सत्यापन के लिए, इसे [सत्यापन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope)दायरे में वर्णित GitHub प्रमाणीकरण या TDX जांचों के साथ जोड़ें।
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope).
 
-स्वचालित चेकपॉइंट्स स्टार्टअप पर, निरीक्षण के दौरान हर पांच मिनट में (**पैरामीटर → हर बार हस्ताक्षरित चेकपॉइंट**), और व्यवस्थित रूप से बंद करने पर स्थानीय रूप से बनाए रखे जाते हैं। स्टार्टअप सत्यापन और एक्सपोर्ट जर्नल की तुलना नवीनतम बनाए रखे गए स्थानीय चेकपॉइंट से करते हैं। यह तब डेटाबेस रोलबैक का पता लगा सकता है जब चेकपॉइंट बरकरार रहता है। स्वतंत्र प्रतिधारण उस संदर्भ को वर्कस्पेस के बाहर उपलब्ध रखता है; एक सत्यापित बाहरी टाइमस्टैम्प अतिरिक्त रूप से इसे समय में स्थिर करता है।
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
 
 रीस्टार्ट के बाद, सहेजी गई टेलीग्राम अपडेट स्थिति को फिर से शुरू किया जाता है (`catch_up_from` में `observation.started`) और छूटी हुई अपडेट्स का अनुरोध किया जाता है। एक आवधिक पुनः जाँच छूटे हुए संदेशों के लिए `message.recovered` और तब `message.missing_on_recheck` रिकॉर्ड करती है जब टेलीग्राम अब कोई सहेजा हुआ संदेश वापस नहीं करता; बाद वाला कोई हटाने की सूचना नहीं है और न ही इसमें कोई हटाने वाला या समय बताया गया है।
 

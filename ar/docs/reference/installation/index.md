@@ -122,6 +122,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **يؤدي إصدار جديد إلى تحديث موقع التنزيل؛ وتتم تحديث البرامج المثبتة عند تشغيل المثبت مرة أخرى.** لا يوجد محدث يعمل تلقائيًا أو إعادة تشغيل تلقائية لـ مجموعة قيد التشغيل. قناة المثبت الحالية هي قناة **«معاينة**»؛ وهي تتبع الإصدارات المنشورة والمُراجعة من `main`، والتي قد يكون التزامها أحدث من آخر إصدار مرقّم على GitHub. يأتي إصدار الصفحة من `pyproject.toml`؛ حيث يميز التزامها ومعرف البنية التحديثات داخل نفس الإصدار التجريبي.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 استخدم مجلد التثبيت نفسه ومستخدم نظام التشغيل نفسه كما في السابق. قم بعمل نسخة احتياطية من دليل البيانات بالكامل مع إيقاف عملية التجميع؛ `tgwitness paths` يحددها. التصدير الموقّع ليس نسخة احتياطية كاملة للتثبيت.
 
 **تثبيت Ubuntu كجذر في `/opt/tgwitness`:**

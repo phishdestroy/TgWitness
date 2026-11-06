@@ -81,7 +81,7 @@ python -m tgwitness index rebuild --data-dir data/live --json
 
 يمكن لعملاء MCP استدعاء `search_messages` من خلال `ranked=true` وإرسال رسائل باستخدام `next_offset`. لا تتلقى الاتصالات المحددة النطاق سوى محادثاتها الخاصة.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## التبعيات
 

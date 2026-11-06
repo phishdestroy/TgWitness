@@ -81,7 +81,7 @@ Akses yang dibatasi pada obrolan hanya menemukan catatan dari obrolan tersebut, 
 
 Klien MCP dapat memanggil `search_messages` dengan `ranked=true` dan halaman dengan `next_offset`. Koneksi yang dibatasi cakupannya hanya menerima obrolan mereka sendiri.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Ketergantungan
 

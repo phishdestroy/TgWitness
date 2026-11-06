@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 התאריכים הם `2026-10-01` (חצות UTC) או לפי שעון ISO עם ציון אזור הזמן, `2026-10-01T09:00+03:00`. לגבי `search`, `messages` ובמקרה `export` הם בוחרים את זמן התצפית. דפים מכילים עד 50 רשומות: עקבו `next_offset` (`--offset`) עבור חיפוש לפי דירוג ו `next_before` (`--before`) במקומות אחרים.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 כל תוצאת הודעה כוללת `untrusted_content: true`, את מזהי סביבת העבודה, הצ'אט וה הודעה, את מספר הרצף ביומן, את ה-hash של הרשומה השמורה וקישור לפאנל. עריכות, הודעות מחיקה ו `missing_on_recheck` מהווים רשומות נפרדות. היעדר רשומה אינו מהווה הוכחה לכך שהאירוע מעולם לא התרחש.
 

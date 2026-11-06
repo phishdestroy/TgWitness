@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/high-
 
 เซิร์ฟเวอร์ที่ได้รับการรักษาความปลอดภัยอย่างแน่นหนาและทำงานตลอด 24/7 บน Hetzner หรือ Phala Cloud, Gateway DNS และขั้นตอนการตรวจสอบที่ฝ่ายที่สามสามารถทำซ้ำได้
 
-การปรับใช้แบบความมั่นใจสูง (High-assurance deployment) เพิ่มการตรวจสอบอิสระต่อสภาพแวดล้อมการเก็บข้อมูลเพื่อ การตรวจสอบความถูกต้องของไฟล์เก็บถาวร ผู้ตรวจสอบจะสอบถามบันทึกการปรับใช้และการเข้าถึงที่เก็บไว้โดย ผู้ให้บริการคลาวด์และ Cloudflare และการปรับใช้ Intel TDX จะเพิ่มการรับรองด้วยฮาร์ดแวร์ สำหรับสภาพแวดล้อมของตัวเก็บข้อมูล
+High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 การใช้งานในเครื่องท้องถิ่นและ Docker ปกติยังคงไม่เปลี่ยนแปลง ไม่มีอะไรที่นี่จะทำงานได้จนกว่าคุณจะ deploy ด้วย `python -m tgwitness.cloud`, และตัวเก็บข้อมูลจะอ่านข้อมูลจากโฮสต์เฉพาะเมื่อการปรับใช้ตั้งค่า `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/high-
 | กุญแจการลงนามได้ถูกสร้างขึ้นบนเซิร์ฟเวอร์นั้น | กุญแจจะลงนามในข้อความที่ระบุ ID เซิร์ฟเวอร์ของผู้ให้บริการและค่าแฮชของ cloud-init ที่ได้รับ | Collector, ตรวจสอบกับผู้ให้บริการ |
 | บันทึกนี้เกี่ยวข้องกับกุญแจและเซิร์ฟเวอร์ดังกล่าว | ทุกกระบวนการที่เริ่มต้นในหลักฐาน ZIP จะนำค่าการวัดของโฮสต์สำหรับเซิร์ฟเวอร์นั้นมาด้วย | หลักฐานZIP |
 
-เครื่องมือเก็บข้อมูลนี้บันทึกสถานะ SSH, เซสชัน, ประวัติการเข้าสู่ระบบ และข้อมูลการบูตใน บันทึกการเริ่มต้นกระบวนการและ `host.state` บันทึกบน VM ปกติ ข้อมูลเหล่านี้เป็นบันทึกข้อมูลในเครื่อง ที่ผู้ตรวจสอบจะเปรียบเทียบกับบันทึกอิสระของผู้ให้บริการ ส่วน การปรับใช้ Intel TDX ด้านล่างยังตรวจสอบการวัดผลที่ได้รับการสนับสนุนจากฮาร์ดแวร์เพิ่มเติมด้วย
+The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
 
 ## ผู้ให้บริการ
 
@@ -271,6 +271,6 @@ Cloudflare ไม่สามารถเข้าถึงข้อมูลภ
 
 ## การอ่านผลการปรับใช้
 
-สำหรับ VM ทั่วไป ผู้ให้บริการจะควบคุมโครงสร้างพื้นฐานของโฮสต์ และข้อมูลในระบบท้องถิ่น จะถูกตรวจสอบควบคู่กับบันทึกของผู้ให้บริการ สำหรับ Intel TDX ผู้ตรวจสอบจะตรวจสอบเพิ่มเติม ข้อมูลสเปกฮาร์ดแวร์ การผูกมัดของตัวเก็บข้อมูล การจัดองค์ประกอบ และการวัดค่าของระบบปฏิบัติการ อ่านผลลัพธ์แต่ละรายการ เพื่อดูว่าการตรวจสอบใดผ่านหรือไม่สามารถดำเนินการได้
+For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
 
-รายละเอียดประวัติไฟร์วอลล์ขึ้นอยู่กับผู้ให้บริการ；Linode เก็บเวอร์ชันของกฎไว้． [บันทึกการตรวจสอบความ](https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/)ถูกต้องแสดงรายการการปรับใช้ที่ผ่านการทดสอบและ การตรวจสอบที่ยังใช้งานอยู่ รวมถึง[ขอบเขตการตรวจสอบที่](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)เชื่อมโยงการตรวจสอบสภาพแวดล้อม เหล่านี้กับการเก็บรวบรวมข้อมูลจากอาร์ไคฟ์และความสมบูรณ์ของข้อมูล．
+Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.

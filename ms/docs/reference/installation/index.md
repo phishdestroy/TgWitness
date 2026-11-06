@@ -122,6 +122,8 @@ Pemasangan Windows sendiri mengesahkan tandatangan pakej dengan .NET dan tidak m
 
 **Penerbitan baru mengemas kini laman muat turun; program yang dipasang dikemas kini apabila anda menjalankan pemasang sekali lagi.** Tiada pengemas kini tanpa pengawasan atau permulaan semula automatik untuk koleksi yang sedang berjalan. Saluran pemasang semasa adalah **pratonton**; ia mengikuti bina yang diterbitkan dan diperiksa daripada `main`, yang komitnya boleh lebih baru daripada keluaran GitHub bernombor terakhir. Versi halaman ini berasal daripada `pyproject.toml`; komit dan ID binaannya membezakan kemas kini dalam versi pratonton yang sama.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Gunakan folder pemasangan dan pengguna OS yang sama seperti sebelum ini. Sediakan sandaran direktori data lengkap dengan pengumpulan dihentikan; `tgwitness paths` mengidentifikasinya. Eksport yang ditandatangani bukan sandaran pemasangan yang lengkap.
 
 **Pemasangan root Ubuntu di `/opt/tgwitness`:**

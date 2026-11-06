@@ -122,6 +122,8 @@ A própria instalação no Windows verifica as assinaturas dos pacotes com o .NE
 
 **Uma nova publicação atualiza o site de download; os programas instalados são atualizados quando você executa o instalador novamente.** Não há atualizador automático nem reinício automático de uma coleção em execução. O canal atual do instalador é **o “preview”**; ele segue versões publicadas e verificadas de `main`, cujo commit pode ser mais recente do que a última versão numerada do GitHub. A versão da página provém de `pyproject.toml`; seu commit e o ID da compilação distinguem as atualizações dentro da mesma versão de pré-visualização.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Use a mesma pasta de instalação e o mesmo usuário do sistema operacional de antes. Faça backup do diretório de dados completo com a coleta interrompida; `tgwitness paths` identifica-o. Uma exportação assinada não é um backup completo da instalação.
 
 **Instalação como root no Ubuntu em `/opt/tgwitness`:**

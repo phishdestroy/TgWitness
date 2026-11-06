@@ -122,6 +122,8 @@ Windows ইনস্টলেশন নিজেই .NET দিয়ে প্�
 
 **একটি নতুন প্রকাশনা ডাউনলোড সাইট আপডেট করে; ইনস্টল করা প্রোগ্রামগুলো আপডেট হয় যখন আপনি ইনস্টলারটি আবার চালান।** কোনো আনঅ্যাটেন্ডেড আপডেটার নেই বা চলমান সংগ্রহের স্বয়ংক্রিয় পুনঃসূচনা নেই। বর্তমান ইনস্টলার চ্যানেলটি **প্রিভিউ**; এটি প্রকাশিত, যাচাইকৃত বিল্ডগুলো অনুসরণ করে `main`, যার commit শেষ সংখ্যাযুক্ত GitHub রিলিজের তুলনায় নতুন হতে পারে। পৃষ্ঠার সংস্করণ আসে `pyproject.toml`; এর commit এবং build ID একই প্রিভিউ সংস্করণের মধ্যে আপডেটগুলোকে পৃথক করে।
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 আগের মতো একই ইনস্টলেশন ফোল্ডার এবং OS ব্যবহারকারী ব্যবহার করুন। সংগ্রহ বন্ধ রেখে সম্পূর্ণ ডেটা ডিরেক্টরি ব্যাকআপ করুন; `tgwitness paths` এটি সনাক্ত করে। একটি স্বাক্ষরিত এক্সপোর্ট সম্পূর্ণ ইনস্টলেশন ব্যাকআপ নয়।
 
 **উবুন্টু রুট ইনস্টলেশন at `/opt/tgwitness`:**

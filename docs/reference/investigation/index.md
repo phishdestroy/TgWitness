@@ -101,7 +101,7 @@ In the worked example:
 | Same saved file | Completed media receipts #151 and #209 | The full SHA-256 values agree for the preserved bytes |
 | Channel attribution | #101 and #188 | Do not attribute a channel post to user 71001 without an attributed sender |
 
-Compare attachment hashes and their associated message references，and keep account timelines grouped by the Telegram IDs supplied in those records．
+Compare attachment hashes and their associated message references, and keep account timelines grouped by the Telegram IDs supplied in those records.
 
 Keep the team's working notes on [Case Board](https://phishdestroy.github.io/TgWitness/docs/reference/case-board/): bookmark the records you rely on, such as #146, #188 and #205, highlight the exact destination string, and save a slice of every recorded action between two records or in a time range. Notes and statuses retain the team's review in their own signed history, separately identifiable from the source observations.
 
@@ -161,6 +161,6 @@ Retain the actual verification results and original artifacts. Export workspace 
 | --- | --- | --- |
 | Bot-driven order/payment dispute | Entry announcement → saved link preview → bot start parameter → message and keyboard versions → panel callback receipts → private/group follow-up | Observed offer/response timeline and verified sources; a payment link alone does not prove a payment |
 | Removed messages after an incident | All affected chats → saved originals/edits → deletion or missing-on-recheck outcomes → preserved media → coverage and other account perspectives | Preserved versions and explicit unknown intervals; no invented deletion actor |
-| A participant changes names across chats | Numeric sender ID → name／username history → replies → other observed chats → cited destinations／files | A Telegram-account activity timeline with links to its source records |
+| A participant changes names across chats | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | A Telegram-account activity timeline with links to its source records |
 
 [Collection reference](https://phishdestroy.github.io/TgWitness/docs/reference/collection/) · [People-profile verification](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#people-profiles) · [Evidence handoff](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/#investigation-handoff) · [Completed validation](https://phishdestroy.github.io/TgWitness/docs/reference/verification/)

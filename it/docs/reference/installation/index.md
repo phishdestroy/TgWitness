@@ -122,6 +122,8 @@ L’installazione su Windows verifica autonomamente le firme dei pacchetti trami
 
 **Una nuova pubblicazione aggiorna il sito di download; i programmi installati si aggiornano quando si esegue nuovamente il programma di installazione.** Non è previsto alcun sistema di aggiornamento automatico né il riavvio automatico di una collezione in esecuzione. Il canale di installazione attuale è **"preview"**; segue le build pubblicate e verificate da `main`, il cui commit può essere più recente dell’ultima versione numerata su GitHub. La versione della pagina deriva dal `pyproject.toml`; il suo commit e l’ID della build distinguono gli aggiornamenti all’interno della stessa versione di anteprima.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Utilizzare la stessa cartella di installazione e lo stesso utente del sistema operativo di prima. Eseguire il backup dell’intera directory dei dati con la raccolta disattivata; `tgwitness paths` identificala. Un’esportazione firmata non costituisce un backup completo dell’installazione.
 
 **Installazione come root su Ubuntu all'indirizzo `/opt/tgwitness`:**

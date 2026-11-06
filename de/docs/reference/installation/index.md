@@ -122,6 +122,8 @@ Die Windows-Installation selbst überprüft die Paketsignaturen mit .NET und ben
 
 **Eine neue Veröffentlichung aktualisiert die Download-Seite; installierte Programme werden aktualisiert, wenn Sie das Installationsprogramm erneut ausführen.** Es gibt keinen unbeaufsichtigten Updater und keinen automatischen Neustart einer laufenden Sammlung. Der aktuelle Installationskanal ist **„Preview“**; er folgt veröffentlichten, geprüften Builds von `main`, deren Commit neuer sein kann als die letzte nummerierte GitHub-Version. Die Versionsangabe der Seite stammt aus `pyproject.toml`; ihr Commit und ihre Build-ID unterscheiden Aktualisierungen innerhalb derselben Preview-Version.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Verwenden Sie denselben Installationsordner und denselben Betriebssystembenutzer wie zuvor. Sichern Sie das gesamte Datenverzeichnis, während die Erfassung angehalten ist; `tgwitness paths` identifiziert es. Ein signierter Export ist keine vollständige Installationssicherung.
 
 **Ubuntu-Root-Installation unter `/opt/tgwitness`:**

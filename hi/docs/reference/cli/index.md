@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 तारीखें हैं `2026-10-01` (UTC आधी रात) या समय क्षेत्र के साथ ISO समय, `2026-10-01T09:00+03:00`. के लिए `search`, `messages` और `export` वे अवलोकन समय चुनते हैं। पृष्ठ 50 रिकॉर्ड तक रख सकते हैं: follow `next_offset` (`--offset`) रैंक किए गए खोज और `next_before` (`--before`) अन्यत्र।
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 प्रत्येक संदेश परिणाम वहन करता है `untrusted_content: true`, कार्यक्षेत्र, चैट और संदेश आईडी, जर्नल अनुक्रम, सहेजा गया रिकॉर्ड हैश और एक पैनल लिंक। संपादन, हटाने की सूचनाएं और `missing_on_recheck` अलग रिकॉर्ड होते हैं। किसी रिकॉर्ड की अनुपस्थिति यह साबित नहीं करती कि कोई घटना कभी हुई ही नहीं।
 

@@ -81,7 +81,7 @@ OCR এবং ট্রান্সক্রিপ্টগুলো তাদ�
 
 MCP ক্লায়েন্টরা কল করতে পারে `search_messages` with `ranked=true` এবং পৃষ্ঠা সঙ্গে `next_offset`. স্কোপড সংযোগগুলো শুধুমাত্র তাদের চ্যাটগুলোই গ্রহণ করে।
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## নির্ভরতা
 

@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/evide
 
 TgWitness зберігає видимі в обліковому записі спостереження Telegram у підписаному журналі. Одержувачі можуть перевірити збережені записи, вкладення та звіти за допомогою надійного ключа колектора, а потім порівняти журнал із незалежно збереженою контрольною точкою. На цій сторінці описано формати, перевірки та матеріали, які слід зберегти для передачі.
 
+Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
 ## Що підписується
 
 | Матеріал | Захист | Що слід зберігати |
@@ -14,12 +16,27 @@ TgWitness зберігає видимі в обліковому записі с�
 | Вміст ZIP-архіву з доказами | `manifest.sig` підписує канонічний маніфест, у якому перелічено хеші файлів вмісту | Повний ZIP-архів, що містить маніфест та підпис |
 | Збережені вкладення | SHA-256 та кількість байтів у підписаній події `media.saved`; хеш файлу у підписаному маніфесті ZIP | Оригінальні байти всередині перевіреного ZIP-файлу |
 | Checkpoint | Підпис Ed25519, що охоплює довжину журналу, хеш заголовка, відкритий ключ та час створення | Незалежна копія, збережена до внесення спірного зміни |
-| Квитанція про виконання | Підписаний запис про версію колектора, хеші вихідних файлів та початкові налаштування, також включений у `process.started` | Квитанція, відповідний журнал та докази середовища для обраного режиму перевірки |
+| Квитанція про виконання | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
 | Зрозумілі звіти: `report.html` та його частини, `report.json`, `report.pdf`, `chat.pdf` | На кожному файлі розміщується печатка Ed25519, що підтверджує його вміст; PDF також містить стандартний підпис PDF (див. [Читабельні звіти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#readable-reports)) | Отриманий файл та відбиток надійного ключа; ZIP-архів, який він описує |
 | Автономний CSV | Відсутність окремого криптографічного підпису; самих хеш-значень подій недостатньо | Для перевірки цілісності використовуйте точну копію, що міститься у перевіреному ZIP-файлі |
 | Знімки екрана, роздруківки або PDF-файли, створені браузером | Відсутність підпису TgWitness на похідному матеріалі | Зберігайте оригінальний перевірений пакет і задокументуйте, як було створено похідний пакет |
 
 Колектор перевіряє підписи журналу перед генерацією кожного формату експорту. Зручні для читання звіти у форматах HTML та PDF мають власні печатки; автономний файл CSV перевіряється як частина підписаного ZIP-архіву. Зберігайте ZIP-архів, щоб зберегти байти вкладень та маніфест, а також окремий контрольний пункт для перевірки журналу щодо попередньої межі.
+
+## Comparing chat exports
+
+Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+
+```
+python -m tgwitness.verify first.zip --compare second.zip \
+  --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
+```
+
+When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+
+A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+
+For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
 
 ## Передача розслідування
 
@@ -62,7 +79,7 @@ TgWitness зберігає видимі в обліковому записі с�
 
 У каналі або супергрупі Telegram нумерує повідомлення 1, 2, 3… по порядку. Експорт чату містить перший і останній номер, кількість присутніх повідомлень та кожну серію відсутніх номерів у `message-ids.json` , маніфесті та заголовку `chat.json` , а також позначає кожну прогалину там, де вона трапляється у транскрипті. `verify.py` перераховує їх, починаючи з `chat.json` . Відсутній номер — це повідомлення, яке Telegram не повернуло (видалено до експорту або невидиме для облікового запису); у приватних чатах та базових групах номери спільні для всіх чатів облікового запису, і пропуски не враховуються.
 
-Після прочитання історії експорт знову запитує у Telegram кожен відсутній номер, за номером (`channels.getMessages`, до 10 000 номерів). Результат міститься в `message-ids.json` та у звіті. Порожня відповідь означає, що номер був недоступний для цього облікового запису на момент повторної перевірки; причина не вказується. Повідомлення, отримане під час повторної перевірки, додається до експорту та позначається `found_on_recheck`．
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
 
 Кожен звіт починається з **. Коротко**: один абзац, потім — що показує матеріал і чого він не показує (хто стоїть за акаунтом, повнота передачі даних, видалення перед спостереженням, час без часової мітки). Власна печатка сторінки стає бурштиновою, коли браузер перевірив підпис печатки, а не саму сторінку: браузер не надає сторінці власних байтів. Вона стає зеленою лише тоді, коли читач перетягує файл у поле перевірки внизу сторінки і кожен байт збігається, і лише якщо сторінка, що відображається, є саме цим файлом; в іншому разі вона стає червоною.
 
@@ -118,6 +135,10 @@ message.new actor_id — це ідентифікатор відправника 
 
 Повідомлення про видалення для приватних чатів та звичайних груп містять лише ідентифікатори повідомлень. Ці чати мають спільну послідовність ідентифікаторів для всього облікового запису, тому ідентифікатор ідентифікує одне повідомлення цього облікового запису. Якщо повідомлення з цим ідентифікатором було раніше збережено в цьому журналі, його видалення фіксується в цьому чаті як message.deleted із методом payload.chat_resolution у назві. Ідентифікатори, які ніколи не зберігалися, зберігаються як deletion.unscoped без chat_id; ніщо не припускається. Канали та супергрупи нумерують повідомлення за кожним чатом і ніколи не зіставляються таким чином. Якщо видалене повідомлення було надіслано обстежуваним обліковим записом, payload.deleted_message_was_outgoing має значення true; інформація про того, хто здійснив видалення, все ще не надається.
 
+An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+
+Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+
 ## Охоплення: безперервність, прогалини та неспостережувані ідентифікатори
 
 Кожен підписаний ZIP-файл містить `coverage.json`, HTML-звіт відкривається з тим самим резюме, а `verify.py` перераховує його на основі `events.jsonl`, замість того щоб довіряти файлу:
@@ -152,13 +173,13 @@ message.new actor_id — це ідентифікатор відправника 
 
 `verify.py` перераховує `gap_summary` з `events.jsonl` з параметрами у підписаному `coverage.json` елемента (за замовчуванням для старих архівів) та виводить рядок для всього облікового запису у зведеній таблиці охоплення. `get_capture_status`(MCP та командний рядок) повертає однакове значення для чатів, які може переглянути користувач; послідовність для всього облікового запису — лише для доступу, що охоплює весь робочий простір.
 
-Повторні спостереження за одним службовим повідомленням враховуються лише один раз, а оцінка активності облікового запису використовує лише числа, що знаходяться в межах вимірюваного діапазону. Застосовувана область дії повинна явно зберігати власні повідомлення облікового запису до того, як буде увімкнено вимірювання для всього облікового запису; старі записи без цієї інформації не можуть задовольнити цю умову. Припинення спостереження не розширює вимірюваний діапазон, а його відновлення фіксується. Запит до архіву в режимі реального часу має часовий ліміт, включаючи сканування бази даних, і позначає незавершене вимірювання як часткове.
+Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
 
-Telegram документує [окремі](https://core.telegram.org/api/updates#message-id-sequences) послідовності [ідентифікаторів повідомлень](https://core.telegram.org/api/updates#message-id-sequences). Ці номери описують спостереження; вони не ідентифікують особу, яка здійснила видалення, і не встановлюють, чому певний номер відсутній.
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
 
 Коли Telegram припиняє приймати обліковий запис, запис `coverage.gap`, що завершує спостереження, містить `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` або `not_authorized`) та Telegram помилку; `verify.py` вказує причину, через яку період завершується.
 
-Обсяг охоплення включає записані періоди спостереження, переривання та результати повідомлень. Оцінюйте його разом із вибраними чатами, періодом та політикою щодо вкладень; сама по собі безперервна робота не гарантує повної доставки оновлень Telegram.
+Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
 
 ## Виробник
 
@@ -186,27 +207,27 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 Файл manifest.json містить формат, час експорту, відкритий ключ, відбиток, довжину журналу, хеш заголовка, область дії, виробника, обмеження та SHA-256 кожного елемента вмісту, крім самих `manifest.json` та `manifest.sig`. manifest.sig — це підпис Ed25519 у кодуванні base64 над канонічним JSON-маніфестом. Верифікатор відхиляє несподівані/відсутні елементи, дублікати імен, пошкоджені файли, порушену послідовність/ланцюг, недійсні підписи та невідповідність наданій контрольній точці. Він ніколи не витягує шляхи до архівів. Він обмежує загальний заявлений розмір у нестисненому вигляді до 4 ГіБ; файл `--max-gib N` дозволяє створювати більші архіви за допомогою підвищеного обмеження **параметрів**.
 
-Виконайте перевірку з вашої встановленої версії TgWitness або перевіреної версії з репозиторію. Копія, що міститься в архіві, підтримує портативне використання; перед запуском порівняйте цю копію з вашою довіреною інсталяцією.
+Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
 
-Контрольна точка підписує запис, що містить відкритий ключ, довжину журналу, хеш-суму початку та час створення. Верифікатор може перевірити, чи містить пізніший архів той самий префікс. Зберігайте контрольну точку поза межами колектора, щоб під час подальшої верифікації можна було порівняти архів з еталонним записом, що зберігається окремо від нього.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
 
 ## Обсяг перевірки
 
-Верифікація перевіряє архів та режим збору даних, який використовувався для його створення. Оберіть режим, межа довіри якого відповідає конкретному випадку, а потім збережіть його вхідні дані для верифікації.
+Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
 
 | Режим збору даних | Що перевіряє верифікатор | Вхідні дані для верифікації та межа довіри |
 | --- | --- | --- |
-| Локальна робоча область | Записувати підписи, хеш-ланцюжок, маніфест та байти вкладень | Самостійно збережений відбиток колектора; адміністратор хосту контролює локальний ключ підпису |
-| Локальна робоча область із незалежним свідком | Перевірка архіву та відповідність префіксу попереднього журналу, збереженого свідком | Окремо довірений ключ свідка та записи; контрольна точка прив’язує префікс, який вже було зафіксовано |
-| [Запис дій у GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | Підтвердження на GitHub: дайджест архіву, затверджені коміти робочого процесу та колектора, розміщений запускач, свіжі сесії/джерела ключів та цілісність внутрішнього архіву | Політика довіреного верифікатора, репозиторій викликів та пакет атестації GitHub; збір даних відбувається в рамках закріпленого робочого процесу |
-| [Розгортання у хмарі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/) | Записи про життєвий цикл провайдера та доступ, стан брандмауера та Cloudflare, а також підписаний запис про роботу колектора | Запити до провайдера та Cloudflare лише для читання; доступність окремих перевірок залежить від провайдера |
-| [Конфіденційна віртуальна машина Intel TDX](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Цитата підпису та стану платформи, прив’язка до заяви колектора, композиція та вимірювання ОС | Ланцюг довіри Intel та очікувані показники розгортання; збережіть результати кожної необхідної перевірки TDX |
+| Локальна робоча область | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
+| Локальна робоча область із незалежним свідком | Перевірка архіву та відповідність префіксу попереднього журналу, збереженого свідком | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
+| [Запис дій у GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
+| [Розгортання у хмарі](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
+| [Конфіденційна віртуальна машина Intel TDX](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
 
-Під час «запечатаного» збору затверджений збирач отримує дані через автентифіковане з’єднання Telegram у перевіреному середовищі. Атестація прив’язує архів до цього виконання, тому перевірка охоплює як сам збір, так і подальшу цілісність файлів. Це базується на затвердженому коді та ланцюжку довіри платформи, перелічених вище. Перевірка записів на GitHub вимагає сеансу, створеного під час виконання, і відхиляє записи з імпортованих сеансів.
+In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
 
-У квитанції про запуск фіксуються версія колектора, хеші файлів та налаштування запуску. Походження з GitHub та вимірювання TDX забезпечують перевірку середовища; [запис валідації](https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/) ідентифікує перевірені конфігурації.
+The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/) identifies tested configurations.
 
-TgWitness підписує зібрані спостереження; Telegram та автори повідомлень не створюють цих підписів. У локальному робочому просторі матеріали, створені до першого незалежного контрольного пункту, все ще залежать від колектора та власника його ключа. Записи про охоплення описують обрану сферу та результати збору, тоді як перевірені зовнішні часові мітки фіксують межі зафіксованого архіву або журналу в часі.
+TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
 
 ## Вкладення
 
@@ -220,9 +241,9 @@ TgWitness підписує зібрані спостереження; Telegram �
 
 Медіа-завдання та фіксація події повідомлення відбуваються в одній транзакції. Завдання зберігає оригінальний дескриптор повідомлення TL; підписане спостереження пов’язує його SHA-256, обліковий запис та політику розміру. Функція відновлення перевіряє цю прив’язку перед завантаженням. Вона ніколи не завантажує поточне повідомлення і непомітно замінює його на новіше вкладення. Перервані завдання повторюються, тоді як постійна помилка залишається явним результатом.
 
-Кожна робоча область має власний журнал та ідентифікатор підпису. Подія process.started містить ідентифікатор запуску, час за локальним годинником, версії залежностей, хеші вихідних файлів, початковий обліковий запис/область дії, а також налаштування збору даних. Імпульси містять ідентифікатор запуску, монотонний час та стан черги. Квитанцію про запуск також можна завантажити як окремо підписану заяву. Для перевірки середовища виконання поєднайте її з атестацією GitHub або перевірками TDX, описаними у розділі [«Область перевірки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope)».
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/#verification-scope).
 
-Автоматичні контрольні точки зберігаються локально під час запуску, кожні п’ять хвилин під час спостереження (**Параметри → Підписана контрольна точка кожні**) та під час упорядкованого зупинення. Під час перевірки при запуску та експорту журнал порівнюється з останньою збереженою локальною контрольною точкою. Це дозволяє виявити відкат бази даних, якщо контрольна точка збереглася. Незалежне зберігання забезпечує доступність цього посилання поза робочою областю; перевірена зовнішня мітка часу додатково закріплює його в часі.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
 
 Після перезапуску відновлюється збережена позиція оновлення Telegram (`catch_up_from` у `observation.started`), і надсилається запит на пропущені оновлення. Періодична повторна перевірка фіксує `message.recovered` для пропущених повідомлень та `message.missing_on_recheck`, коли Telegram більше не повертає збережене повідомлення; останнє не є повідомленням про видалення і не вказує ні імені особи, яка видалила повідомлення, ні часу.
 

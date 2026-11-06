@@ -122,6 +122,8 @@ Windows 설치 과정 자체에서 .NET을 통해 패키지 서명을 검증하�
 
 **새로운 버전이 출시되면 다운로드 사이트가 업데이트되며, 설치된 프로그램은 설치 프로그램을 다시 실행할 때 업데이트됩니다..** 실행 중인 컬렉션에 대해서는 무인 업데이트 기능이나 자동 재시작 기능이 제공되지 않습니다. 현재 설치 프로그램 채널은 **미리보기**이며, 다음에서 게시되고 검증된 빌드를 따릅니다 `main`에서 게시되고 검증된 빌드를 따르며, 해당 커밋은 마지막 번호가 매겨진 GitHub 릴리스보다 최신일 수 있습니다. 페이지의 버전은 `pyproject.toml`에서 제공되며, 해당 커밋 및 빌드 ID를 통해 동일한 프리뷰 버전 내의 업데이트를 구분할 수 있습니다.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 이전과 동일한 설치 폴더와 OS 사용자를 사용하십시오. 수집을 중지한 상태에서 전체 데이터 디렉터리를 백업하십시오; `tgwitness paths` 이를 식별합니다. 서명된 내보내기 파일은 전체 설치 백업이 아닙니다.
 
 **Ubuntu 루트 설치 경로: `/opt/tgwitness`:**

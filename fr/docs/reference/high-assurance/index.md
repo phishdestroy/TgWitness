@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-
 
 Un serveur sécurisé disponible 24 h/24 et 7 j/7 sur Hetzner ou Phala Cloud, un DNS Gateway et des vérifications reproductibles par un tiers.
 
-Un déploiement à haute fiabilité ajoute des contrôles indépendants de l’environnement de collecte à la vérification des archives. L’auditeur interroge les enregistrements de déploiement et d’accès détenus par le fournisseur de services cloud et Cloudflare, et un déploiement Intel TDX ajoute une attestation matérielle de l’environnement du collecteur.
+High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 L'utilisation classique en local et avec Docker reste inchangée. Rien ne fonctionne ici à moins que vous ne déployiez avec `python -m tgwitness.cloud`, et le collecteur ne lit son hôte que lorsque le déploiement est configuré `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Organigramme · Opérateur → Serveur, pare-feu sans règles entrantes (API du 
 | La clé de signature a été créée sur ce serveur | La clé signe une déclaration indiquant l’identifiant du serveur du fournisseur et le hachage du fichier cloud-init qu’elle a reçu. | Collector, vérifié par le fournisseur |
 | Le journal appartient à cette clé et à ce serveur | Chaque processus lancé dans la preuve ZIP comporte la mesure de l'hôte pour ce serveur | Preuves ZIP |
 
-Le collecteur enregistre l'état SSH, les sessions, l'historique des connexions et les informations de démarrage dans des enregistrements signés de démarrage de processus et `host.state` enregistrements de démarrage de processus signés. Sur une machine virtuelle ordinaire, il s’agit d’enregistrements d’inventaire locaux que l’auditeur compare aux enregistrements indépendants du fournisseur. Le déploiement Intel TDX ci-dessous vérifie en outre les mesures basées sur le matériel.
+The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
 
 ## Fournisseurs
 
@@ -271,6 +271,6 @@ Cloudflare ne peut pas accéder au contenu chiffré de Telegram, ni aux autres a
 
 ## Lecture du résultat du déploiement
 
-Pour une machine virtuelle classique, le fournisseur contrôle l’infrastructure hôte, et l’inventaire local est vérifié parallèlement aux enregistrements du fournisseur. Pour Intel TDX, le vérificateur contrôle en outre la configuration matérielle, la liaison du collecteur, la composition et les mesures du système d’exploitation. Consultez les résultats individuels pour voir quelles vérifications ont réussi ou n’étaient pas disponibles.
+For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
 
-Les détails historiques du pare-feu dépendent du fournisseur ; Linode conserve les versions des règles. Le [rapport de validation](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/) répertorie les déploiements testés et les contrôles en cours, et [le périmètre de vérification](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) relie ces contrôles d’environnement à l’acquisition et à l’intégrité des archives.
+Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.

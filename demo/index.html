@@ -8,7 +8,7 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="mark.svg">
-<link rel="stylesheet" href="style.css?v=0.8.0-report-studio3">
+<link rel="stylesheet" href="style.css?v=0.8.0-report-studio4">
 <link rel="stylesheet" href="components/shell.css?v=1">
 <link rel="stylesheet" href="components/health.css?v=1">
 <link rel="stylesheet" href="components/collection.css?v=1">
@@ -32,21 +32,21 @@
 <link rel="stylesheet" href="views/board.css?v=1">
 <link rel="stylesheet" href="cloud-capture.css?v=5"><link rel="stylesheet" href="cloud-capture-story.css?v=3">
 <script src="theme.js?v=0.7.0"></script>
-<script src="mock.js?v=handoff1"></script><script>(function(){var known=["en", "ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh", "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn"],saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1];try{saved=saved&&decodeURIComponent(saved)}catch(e){saved=''}function match(tag){tag=String(tag||'').toLowerCase().replace(/_/g,'-');var exact=known.find(function(x){return x.toLowerCase()===tag});if(exact)return exact;if(/^zh-/.test(tag)&&/(?:^|-)(?:hant|tw|hk|mo)(?:-|$)/.test(tag))return known.find(function(x){return x==='zh-Hant'});return known.find(function(x){return x===tag.split('-')[0]})}var asked=new URLSearchParams(location.search).get('lang'),browser=navigator.languages||[navigator.language||'en'],pick=[asked,saved].concat(browser).map(match).find(Boolean)||'en';document.write('<script src="locales/'+pick+'.js?v=e97e90ade5945d33"><\/script>');})();</script>
+<script src="mock.js?v=handoff1"></script><script>(function(){var known=["en", "ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh", "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn"],saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1];try{saved=saved&&decodeURIComponent(saved)}catch(e){saved=''}function match(tag){tag=String(tag||'').toLowerCase().replace(/_/g,'-');var exact=known.find(function(x){return x.toLowerCase()===tag});if(exact)return exact;if(/^zh-/.test(tag)&&/(?:^|-)(?:hant|tw|hk|mo)(?:-|$)/.test(tag))return known.find(function(x){return x==='zh-Hant'});return known.find(function(x){return x===tag.split('-')[0]})}var asked=new URLSearchParams(location.search).get('lang'),browser=navigator.languages||[navigator.language||'en'],pick=[asked,saved].concat(browser).map(match).find(Boolean)||'en';document.write('<script src="locales/'+pick+'.js?v=68b8207fe273d742"><\/script>');})();</script>
 <script defer src="i18n.js?v=0.7.0"></script>
 <script defer src="dialogs.js?v=2"></script>
 <script defer src="privacy.js?v=1"></script>
 <script defer src="chat-safety.js?v=1"></script>
-<script defer src="app.js?v=0.9.1-withheld1"></script>
+<script defer src="app.js?v=0.9.1-collection1"></script>
 <script defer src="services.js?v=1"></script>
 <script defer src="independent-capture.js?v=2"></script>
-<script defer src="account-import.js?v=1"></script>
+<script defer src="account-import.js?v=2"></script>
 <script defer src="integrations.js?v=5"></script>
 <script defer src="analysis.js?v=4"></script>
 <script defer src="media-analysis.js?v=2"></script>
 <script defer src="webhooks.js?v=2"></script>
 <script defer src="proxies.js?v=3"></script>
-<script defer src="fleet.js?v=6"></script>
+<script defer src="fleet.js?v=7"></script>
 <script defer src="review.js?v=1"></script>
 <script defer src="live.js?v=2"></script>
 <script defer src="cloud-capture-locales.js?v=1"></script><script defer src="cloud-capture-story.js?v=4"></script><script defer src="cloud-capture.js?v=6"></script>
@@ -817,6 +817,19 @@
     </div>
     <label for="report-notes">Notes for the report</label><textarea id="report-notes" maxlength="4000" rows="3"></textarea>
     </fieldset>
+    <details class="report-guidance" id="report-guidance"><summary>Jurisdiction guidance · optional</summary>
+      <p class="hint">Choose the intended court's jurisdiction and procedure. Guidance helps prepare the material; it does not certify admissibility.</p>
+      <div class="report-grid">
+        <div><label for="report-guidance-country">Jurisdiction</label><select id="report-guidance-country" data-no-translate></select></div>
+        <div><label for="report-guidance-procedure">Procedure</label><select id="report-guidance-procedure"><option value="civil">Civil / commercial</option><option value="criminal">Criminal</option></select></div>
+      </div>
+      <label class="check-label"><input id="report-guidance-include" type="checkbox" checked> Include guidance in the report</label>
+      <label class="check-label"><input id="report-guidance-local" type="checkbox"> Add the local-language summary</label>
+      <label class="check-label"><input id="report-guidance-methods" type="checkbox"> Explain collection safeguards</label>
+      <p class="hint">Legal guidance is supplied in English. Local summaries are not certified translations. Sources and research dates travel with the report.</p>
+      <p class="hint">These choices belong to this workspace, not to saved layout configurations. Sharing copies do not inherit this selection.</p>
+      <div id="report-guidance-detail" data-no-translate lang="en" dir="ltr" aria-live="polite"></div>
+    </details>
     <details class="report-examination"><summary>Examination notes</summary>
       <p class="hint">Write the questions, method and findings in your own words. These signed notes are attributed to the report author.</p>
       <label for="report-review-question">Questions to examine</label><textarea id="report-review-question" maxlength="2000" rows="2" placeholder="What does this material need to establish?"></textarea>
@@ -835,7 +848,7 @@
       <div class="report-part-size"><label for="report-part-size">Maximum records or messages per data file</label><input id="report-part-size" required max="100000" min="500" step="1" type="number"><p class="hint">Also sets the PDF transcript limit. Larger transcripts remain in the HTML viewer and signed source files. Large data files may be split earlier.</p></div>
     </fieldset>
     <p class="studio-fixed">Trust assessment, coverage limitations and verification instructions stay in every report. Display choices do not remove signed source records.</p>
-    </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
+    </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button><button type="button" data-preview-section="guidance" aria-pressed="false" hidden>Guidance</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
     <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title">
       <div class="report-section-heading"><span aria-hidden="true">03</span><div><h3 id="report-preview-title" tabindex="-1">Inspect the actual data</h3><p class="hint">This preview uses your current choices. It does not save them or create a signed export.</p></div></div>
       <div class="report-preview-toolbar"><button class="primary" type="button" id="report-preview-run">Build preview</button><button class="secondary" type="button" id="report-preview-retry" hidden>Retry preview</button><span id="report-preview-stale" class="report-preview-stale" hidden>Choices changed. Rebuild the preview.</span></div>
@@ -926,6 +939,9 @@
       <label for="replica-interval">How often, every … minutes (1 to 1,440)</label><input id="replica-interval" max="1440" min="1" required step="1" type="number">
       <label for="replica-retention">Object Lock retention in days (0 uses the bucket's default)</label><input id="replica-retention" type="number" min="0" max="36500">
       <label for="replica-mode">Object Lock mode</label><select id="replica-mode"><option value="GOVERNANCE">Governance</option><option value="COMPLIANCE">Compliance: nobody can delete or shorten it, including the bucket owner</option></select>
+      <label class="check-label"><input id="replica-evidence" type="checkbox"> Require Compliance retention for every copied object</label>
+      <label for="replica-recipient">Recipient public key (X25519, base64; optional)</label><input id="replica-recipient" maxlength="44" spellcheck="false" autocomplete="off">
+      <p class="hint">With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.</p>
     </details>
     <button class="secondary" type="submit">Save off-site copy</button> <button class="quiet" id="replica-test" type="button">Test connection</button> <button class="quiet" id="replica-sync" type="button">Copy now</button> <button class="quiet" id="replica-key" type="button">Download encryption key</button>
     <div class="hint health-detail" id="replica-status" role="status"></div>
@@ -1269,7 +1285,7 @@
     <form class="github-form" id="github-form">
       <div class="replica-fields">
         <div><label for="github-repository">Repository</label><input data-no-translate id="github-repository" maxlength="200" placeholder="github.com/phishdestroy/TgWitness" required spellcheck="false" autocomplete="off"></div>
-        <div><label for="github-ref">Tag, branch or commit</label><input data-no-translate id="github-ref" maxlength="200" placeholder="v0.8.1" required spellcheck="false" autocomplete="off"></div>
+        <div><label for="github-ref">Tag, branch or commit</label><input data-no-translate id="github-ref" maxlength="200" placeholder="v0.9.1" required spellcheck="false" autocomplete="off"></div>
       </div>
       <button class="primary" type="submit">Check now</button>
     </form>
@@ -1354,6 +1370,19 @@
       </div>
       <p class="method-description" id="method-description">Receive a login code in Telegram. Enter your 2FA password if asked.</p>
       <p class="hint" id="login-note" role="status"></p>
+      <div id="independent-session-option" hidden>
+        <label class="check-label"><input type="checkbox" id="import-new-session">Create an independent authorization</label>
+        <p class="hint" id="independent-session-pending" hidden>An independent login is pending. Select the same donor files and this option to resume it. No existing Telegram sessions are terminated.</p>
+      </div>
+      <details class="session-import-warning" id="session-import-warning" hidden aria-labelledby="session-import-warning-title">
+        <summary id="session-import-warning-title">Parallel session warning</summary>
+        <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+        <p>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</p>
+        <p>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
+        <p>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
+        <p>With “Create an independent authorization”, the donor still connects briefly. Close its original client for this step. Reopen it after TgWitness confirms that the new authorization is connected.</p>
+        <p>Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.</p>
+      </details>
       <div id="phone-fields"><label for="phone">Phone number</label><input autocomplete="tel" id="phone" pattern="\+[0-9]{7,16}" placeholder="+1 234 567 8900" required type="tel"></div>
       <div hidden id="qr-intro"><div class="qr-instructions"><span>1</span><p>Open Telegram on your phone.</p><span>2</span><p>Settings → Devices → Link Desktop Device.</p><span>3</span><p>Scan the code shown here.</p></div></div>
       <div hidden id="auth-key-fields">
@@ -1371,7 +1400,6 @@
           <button class="quiet" id="import-account" type="button">Read files without signing in</button>
         </details>
         <p class="hint" id="import-result" role="status"></p>
-        <a class="format-help" href="guide.html#formats" rel="noopener" target="_blank">Format details &amp; examples ↗</a>
       </div>
       <details id="api-details"><summary>API ID + Hash <span id="api-state">Built-in</span></summary>
         <p class="hint" id="api-required">Optional. Leave empty: TgWitness picks a working pair from its built-in pool, or uses the pair from your account file. To use your own app, <a href="https://my.telegram.org" rel="noopener noreferrer" target="_blank">get it at my.telegram.org ↗</a>
@@ -1381,6 +1409,7 @@
       </details>
       <div class="auth-actions"><button class="primary" id="auth-continue" type="submit">Continue</button><button class="primary" hidden id="start-qr" type="button">Show QR code</button></div>
       <p class="auth-progress hint" hidden id="auth-progress" role="status"></p>
+      <a class="format-help" href="guide.html#formats" rel="noopener" target="_blank">Format details &amp; examples ↗</a>
         <dl class="import-formats" aria-label="Supported account files">
           <div><dt><code>.session</code></dt><dd><strong>Telethon or Pyrogram</strong></dd></div>
           <div><dt><code>.zip</code></dt><dd><strong>Telegram Desktop · TData</strong></dd></div>
@@ -1392,7 +1421,7 @@
     <form hidden id="code-form"><h2>Enter your login code</h2><label for="code">Code from Telegram</label><input autocomplete="one-time-code" id="code" inputmode="numeric" pattern="[0-9 \-]{3,12}" required><button class="primary" type="submit">Confirm code</button></form>
     <form hidden id="password-form"><h2>Two-step verification</h2><label for="password">Telegram password</label><input autocomplete="off" id="password" required type="password"><button class="primary" type="submit">Sign in</button></form>
     <button class="quiet auth-back" hidden id="auth-back" type="button">← Change sign-in method</button>
-    <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="account-restriction" hidden id="account-restriction" role="status"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><div class="account-tools" role="group" aria-labelledby="account-tools-title"><h3 id="account-tools-title">Account security</h3><div class="account-tools-row"><button class="secondary" id="account-sessions-show" type="button">Sessions of this account</button><button class="secondary" id="account-password" type="button">Two-step password</button></div><div class="account-sessions" hidden id="account-sessions"></div></div><div class="account-manage" id="account-manage" role="group" aria-labelledby="account-manage-title"><h3 id="account-manage-title">Sign-in and removal</h3><div class="account-manage-row"><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button><button class="quiet" hidden id="forget-session" type="button">Forget on this computer</button></div><p class="hint" hidden id="sign-out-locked">This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.</p></div></div>
+    <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="account-restriction" hidden id="account-restriction" role="status"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><div class="account-tools" role="group" aria-labelledby="account-tools-title"><h3 id="account-tools-title">Account security</h3><div class="account-tools-row"><button class="secondary" id="account-sessions-show" type="button">Sessions of this account</button><button class="secondary" id="account-password" type="button">Two-step password</button></div><div class="account-sessions" hidden id="account-sessions"></div></div><div class="account-actions" role="group" aria-labelledby="account-actions-title"><h3 id="account-actions-title">Telegram actions</h3><label class="check-label"><input id="account-read-only" type="checkbox"> Read-only: no sending, joining or bot buttons from this account</label><p class="hint">On by default for imported sessions. Turning it on cancels queued actions. Their pace is set in Parameters.</p><p class="hint" hidden id="account-action-queue" role="status"></p></div><div class="account-manage" id="account-manage" role="group" aria-labelledby="account-manage-title"><h3 id="account-manage-title">Sign-in and removal</h3><div class="account-manage-row"><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button><button class="quiet" hidden id="forget-session" type="button">Forget on this computer</button></div><p class="hint" hidden id="sign-out-locked">This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.</p></div></div>
     <div class="route-line" hidden id="route-line"><svg aria-hidden="true" class="icon"><use href="#i-link"/></svg><span id="route-line-text"></span><button class="text-link" id="route-open" type="button">Change route</button></div>
     <section aria-labelledby="seen-by-title" class="seen-by" hidden id="seen-by"><h3 id="seen-by-title">What Telegram sees</h3><dl id="seen-by-list"></dl></section>
   </div>
@@ -1553,6 +1582,8 @@
     <h2 id="export-dialog-title">Export chat messages</h2>
     <div id="export-dialog-facts"></div>
     <div id="export-saved-jobs"></div>
+    <label>History acquisition <select id="export-transport"><option value="regular">Regular session</option><option value="takeout">Telegram Takeout session</option></select></label>
+    <p class="hint">Takeout can accelerate public channel and supergroup history. Telegram may require export approval. Server-requested waits still apply.</p>
     <fieldset class="export-accounts"><legend>Period and message selection</legend>
       <label>Period <select id="export-period"><option value="all">All available history</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="month">Previous calendar month</option><option value="custom">Custom dates</option></select></label>
       <div class="field-row"><label>From date <input id="export-from" type="datetime-local"></label><label>Until (excluded) <input id="export-to" type="datetime-local"></label></div>
@@ -1582,14 +1613,23 @@
   </div>
   <section class="card padded fleet-import" hidden id="fleet-import">
     <div class="fleet-import-head"><div><div class="eyebrow">Bulk import</div><h2>Import many accounts at once</h2><p class="muted">Each account gets its own workspace, signing key and proxy. Files with the same name form one account, for example <code>name.session</code> with <code>name.json</code>. A session that does not sign in is not kept.</p></div><button class="quiet" id="fleet-import-close" type="button">Close</button></div>
-    <label class="pool-drop fleet-drop" id="fleet-drop"><input accept=".session,.json,.zip,.txt" id="fleet-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop account files here or choose them: .session, .json, TData .zip, StringSession .txt</span></label>
+    <label class="pool-drop fleet-drop" id="fleet-drop"><input accept=".session,.json,.zip,.txt" id="fleet-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop account files, a folder or a ZIP of accounts here, or choose files: .session, .json, TData .zip, StringSession .txt</span></label>
+    <input hidden id="fleet-folder" multiple type="file" webkitdirectory>
+    <aside class="session-import-warning" id="fleet-session-warning" aria-labelledby="fleet-session-warning-title">
+      <h3 id="fleet-session-warning-title">Parallel session warning</h3>
+      <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+      <p>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</p>
+      <p>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
+      <p>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
+    </aside>
     <div class="fleet-import-grid">
       <div><label for="fleet-group">Add to group</label><select id="fleet-group"></select></div>
       <div><label for="fleet-group-name">New group name</label><input id="fleet-group-name" maxlength="80" placeholder="e.g. Scam monitors"></div>
       <div><label for="fleet-passcode">TData passcode · optional</label><input autocomplete="off" id="fleet-passcode" maxlength="512" type="password"></div>
       <div><label for="fleet-api">API ID:Hash · optional</label><input autocomplete="off" id="fleet-api" placeholder="Built-in pool when empty" spellcheck="false"></div>
     </div>
-    <div class="fleet-import-run"><button class="primary" disabled id="fleet-import-start" type="button">Import accounts</button><button class="secondary" hidden id="fleet-import-stop" type="button">Stop after this account</button><span class="hint" id="fleet-import-summary" role="status"></span></div>
+    <p class="hint">Check sessions only reads each account's profile and settings: it signs nothing out, resets nothing and joins nothing. Only live sessions are imported. Spam blocks are not checked, because that needs a message to @SpamBot.</p>
+    <div class="fleet-import-run"><button class="secondary" id="fleet-folder-open" type="button">Choose a folder</button><button class="secondary" disabled id="fleet-import-check" type="button">Check sessions</button><button class="primary" disabled id="fleet-import-start" type="button">Import active accounts</button><button class="secondary" hidden id="fleet-import-stop" type="button">Stop after this account</button><span class="hint" id="fleet-import-summary" role="status"></span></div>
     <ol class="fleet-results" id="fleet-results"></ol>
   </section>
   <div class="accounts-overview" id="accounts-overview" aria-label="Workspace totals"></div>

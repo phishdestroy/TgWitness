@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/secur
 
 थ्रेट मॉडल, एक्सेस मॉडल, रेस्ट में सिक्रेट्स, नेटवर्क एक्सपोजर, सेशन इम्पोर्ट्स और भेद्यता की रिपोर्ट कैसे करें।
 
-यह पेज एक स्थानीय या सर्वर वर्कस्पेस में एक्सेस, स्टोरेज और नेटवर्क सुरक्षा का वर्णन करता है। GitHub रनर या Intel TDX कॉन्फिडेंशियल VM पर संग्रह के लिए, [सत्यापन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope)मोड देखें, जो संग्रह वातावरण की जांच जोड़ते हैं। खाता कनेक्शन, सूचनाएं, टाइमस्टैम्प, ऑफ-साइट कॉपी और विटनेस की अपनी राउटिंग सेटिंग्स होती हैं।
+This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | क्षेत्र | संक्षेप में |
 | --- | --- |
@@ -12,7 +12,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/secur
 | विश्राम में रहस्य | सत्र, एपीआई जोड़ी, हस्ताक्षर कुंजी और प्रॉक्सी सेटिंग्स Fernet के साथ एन्क्रिप्ट की जाती हैं |
 | संदेश और मीडिया | अनएन्क्रिप्टेड संग्रहीत: डिस्क एन्क्रिप्शन और सख्त अनुमतियों का उपयोग करें |
 | अखंडता | हर रिकॉर्ड पर SHA-256 हैश चेन और Ed25519 हस्ताक्षर |
-| स्थानीय विश्वास सीमा | होस्ट प्रशासक कार्यक्षेत्र और इसकी हस्ताक्षर कुंजी को नियंत्रित करता है; स्वतंत्र चेकपॉइंट्स पूर्व जर्नल सीमा को बनाए रखते हैं |
+| स्थानीय विश्वास सीमा | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 कमजोरियों की रिपोर्टों के लिए, [सुरक्षा नीति](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) देखें।
 
@@ -38,13 +38,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/secur
 
 ## विश्राम में रहस्य
 
-Telegram API क्रेडेंशियल, सत्र और साइनिंग कुंजी Fernet से एन्क्रिप्ट किए गए हैं। स्थानीय संदेशों और मीडिया के लिए, एन्क्रिप्शन होस्ट की डिस्क या वॉल्यूम द्वारा प्रदान किया जाता है; वर्कस्पेस सामान्य फ़ाइलों को संग्रहीत करता है। एक्सपोर्ट्स पासवर्ड-संरक्षित AES-256 ZIP का उपयोग कर सकते हैं, और ऑफ-साइट कॉपीज़ AES-256-GCM का उपयोग करती हैं।
+Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
 
-वॉल्ट कुंजी डिफ़ॉल्ट रूप से सुरक्षित डेटा निर्देशिका पर सेट होती है। इसे अलग से संग्रहीत करने के लिए नीचे एक बाहरी मास्टर-कुंजी फ़ाइल का उपयोग करें। यूनिक्स पर, नई प्राइवेट-की फ़ाइलें मोड 0600 का उपयोग करती हैं और नई डेटा निर्देशिकाएँ 0700 का उपयोग करती हैं; विंडोज़ पर, सेवा खाते और अधिकृत प्रशासकों के लिए निर्देशिका ACL सेट करें। मौजूदा निर्देशिका अनुमतियाँ बरकरार रहती हैं।
+The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
 
 ### बाहरी मास्टर कुंजी
 
-एक नई डेटा निर्देशिका के लिए, TGWITNESS_VAULT_KEY_FILE एक बाहरी यादृच्छिक मास्टर कुंजी प्रदान कर सकता है। HKDF-SHA256 और एक अलग यादृच्छिक सॉल्ट प्रत्येक वर्कस्पेस के लिए एक अलग फर्नेट कुंजी उत्पन्न करते हैं। रिकवरी के लिए vault.external.json को बरकरार रखना आवश्यक है। खोई हुई या गलत मास्टर कुंजियों के कारण क्लोज़र विफल हो जाता है। मौजूदा स्थानीय वॉल्ट्स को चुपचाप माइग्रेट नहीं किया जाता है। पैनल चयनित कुंजी-भंडारण मोड प्रदर्शित करता है। डिस्क एन्क्रिप्शन किसी भी मोड में स्थानीय संदेश और मीडिया फ़ाइलों की सुरक्षा करता है; सेटअप विवरण के लिए [कनेक्शन और डेटा सुरक्षा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/) देखें।
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/) for setup details.
 
 ## प्रॉक्सी और नेटवर्क मार्ग
 
@@ -68,10 +68,10 @@ TData प्रोसेसिंग कंटेनर चेक्सम, स�
 
 ## अखंडता सीमाएँ
 
-स्थानीय सत्यापन जांचें हस्ताक्षर, हैश चेन, अटैचमेंट और एक्सपोर्ट मैनिफेस्ट को रिकॉर्ड करती हैं। प्रशासक के पास स्थानीय साइनिंग कुंजी होती है और वह एक और हस्ताक्षरित जर्नल बना सकता है; एक स्वतंत्र रूप से रखी गई चेकपॉइंट, उस प्रीफ़िक्स की अदला-बदली का पता लगाती है जिसे वह कवर करती है। कुंजी फिंगरप्रिंट और चेकपॉइंट्स को प्राप्तकर्ता या एक स्वतंत्र गवाह के पास रखें।
+Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
 
-स्वतंत्र रूप से जाँचे गए संग्रह के लिए, [GitHub Actions कैप्चर](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) या [Intel TDX डिप्लॉय](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)मेंट चुनें। उनके सत्यापनकर्ता संग्रह की अखंडता के अलावा वर्कफ़्लो की उत्पत्ति या हार्डवेयर माप की जाँच करते हैं। वैकल्पिक टाइमस्टैम्प और एन्क्रिप्टेड ऑफ़-साइट प्रतियाँ समय एंकर और पुनर्प्राप्त करने योग्य प्रतियाँ प्रदान करती हैं; [सबूत प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) प्रत्येक मोड के लिए जाँचों का वर्णन करता है।
+For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/#verification-scope) describes the checks for each mode.
 
 ## यदि आपको कोई समस्या संदेह हो
 
-मूल डेटा निर्देशिका को सुरक्षित रखें और विश्लेषण के लिए एक अलग प्रतिलिपि का उपयोग करें। [सुरक्षा](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)नीति के माध्यम से प्रभावित संस्करण, संचालन और पुन: उत्पन्न करने योग्य चरणों की रिपोर्ट करें, खाते के डेटा और क्रेडेंशियल्स को निजी रखते हुए।
+Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.

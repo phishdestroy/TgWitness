@@ -6,7 +6,7 @@ Vui lòng chạy một bản sao TgWitness với khóa và bot riêng, đăng c�
 
 [Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Độ tin cậy cao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/) · [Hướng dẫn sử dụng bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
+A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
 
 Sơ đồ quy trình · Trình thu thập → Witness (điểm kiểm tra có chữ ký: số lượng bản ghi + băm tiêu đề); Witness → Sổ nhật ký chứng cứ, khóa riêng; Witness → Kênh Telegram (bài đăng có chữ ký được gửi qua bot riêng của nền tảng này); Tệp ZIP chứa bằng chứng → verify.py; Sổ nhật ký chứng cứ, khóa riêng → verify.py; Kênh Telegram → verify.py (Tính năng xuất dữ liệu từ Telegram Desktop hoặc trang t.me/s) · Trình thu thập · Witness · Sổ nhật ký chứng cứ, khóariêng · Kênh Telegram · Tệp ZIP chứa bằng chứng · verify.py · điểm kiểm tra có chữ ký: số · lượng bản ghi + băm tiêu đề · bài đăng có chữ ký được gửi · qua bot riêng của nền tảng · này · Tính năng xuất dữ liệu từ · Telegram Desktop hoặc trang · t.me/s
 
@@ -36,7 +36,7 @@ Các nhân chứng mới sẽ gửi một thách thức ngẫu nhiên trong mỗ
 Cứ sau mỗi khoảng thời gian (mặc định là 10 phút), công cụ TgWitness sẽ:
 
 1. tự động lấy phần đầu (bộ thu thập không thể đẩy hoặc bỏ qua phần này);
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
 3. ghi thêm một bản ghi đã được ký vào nhật ký của chính nó: `witness.anchor` với trạng thái `ok`, `key_changed`, `rollback` (số lượng bản ghi ít hơn trước), `fork` (độ dài tương tự, tiêu đề khác ) hoặc `invalid` (câu trả lời không qua được quá trình xác minh), hoặc `witness.no_response` khi bộ thu thập không phản hồi;
 4. đăng kết quả lên kênh, kèm chữ ký, bao gồm cả trường hợp “không có phản hồi” trong khi TgWitness đang hoạt động và có thể kết nối với Bot API. ID bài đăng được ghi lại (`witness.posted`), kể cả khi việc đăng không thành công (`witness.post_failed`).
 
@@ -196,4 +196,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 Điều này yêu cầu phải có dấu vân tay chứng nhân được lưu giữ độc lập và một điểm kiểm tra khớp tại chính xác điểm kết thúc của quá trình xuất này. Một điểm kiểm tra chỉ bao phủ một tiền tố trước đó là không đủ. Hãy tạm dừng việc thu thập, để chứng nhân quan sát trạng thái cuối cùng, và tiến hành xuất trước khi có thêm các ghi chép vào nhật ký; nếu nhật ký thay đổi, hãy lưu giữ một điểm kiểm tra khác và xuất trạng thái đó. Chỉ riêng điểm kiểm tra sau đó không thể xác minh hàm băm cuối cùng của một tệp xuất ngắn hơn. Khi cờ `--channel` cũng được cung cấp, việc thiếu các bài đăng được tuyên bố hoặc tập kết quả khớp trống sẽ khiến quá trình này không vượt qua được kiểm tra nghiêm ngặt này. Nếu không có cờ này, các kiểm tra tính toàn vẹn thông thường vẫn báo cáo các bản ghi chưa được chứng kiến mà không từ chối một kho lưu trữ vốn vẫn còn nguyên vẹn.
 
-Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．
+Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+
+### Daily seals and unavailable timestamp calendars
+
+The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+
+If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+
+A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.

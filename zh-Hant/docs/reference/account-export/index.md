@@ -12,6 +12,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 此工作流程會匯出目前連線帳戶可存取的資料。預設使用 [Telegram Takeout](https://core.telegram.org/api/takeout) 功能；這並非針對無法存取或已刪除的 Telegram 資料所做的備份。秘密聊天、無法存取的歷史紀錄及較早的編輯內容均無法恢復。Telegram 可能會在 Takeout 開始前設定一段等待時間。控制面板會顯示該等待時間；系統不會在未提示的情況下切換傳輸方式。明確選用的「標準 API」選項涵蓋範圍不同，並會記錄不支援的類別。
 
+Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+
+For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+
+Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+
 ## 選擇要收集的內容
 
 | 設定 | 含義 |
@@ -31,7 +37,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 個人檔案照片歷史紀錄與限時動態預設不會被選中。若案件僅需訊息內容，請一併停用個人檔案與聯絡人功能。若附件或元資料非必要，在擷取過程中將其排除，可避免在本次匯出中保留另一份私人副本。
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
 ## 簡介、涵蓋範圍與驗證
 
@@ -87,8 +93,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## 分享與託管擷取
 
-選取收件者所需的訊息與檔案，審閱完整的共享副本，並將原始檔另行保留。記錄已傳送 ZIP 檔案的雜湊值，以便收件者能識別並驗證該精確副本。透過假名化處理替換選定的識別碼；所包含的文字及原始檔案仍為審閱內容的一部分。
+Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
 
-GitHub Actions 支援透過 Takeout 或標準 API 匯出完整帳戶及選定聊天室的資料，並提供單一聊天室事件日誌。[託管擷取指南說明了](https://phishdestroy.github.io/TgWitness/docs/capture/)設定驗證及 120 分鐘的時限。若要驗證源自託管擷取的共享副本，請將其來源雜湊值與原始存檔進行比對，並透過[特定模式的](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope)檢查來驗證該存檔的證明。
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope).
 
 [證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [案例報告](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/case-reports/)

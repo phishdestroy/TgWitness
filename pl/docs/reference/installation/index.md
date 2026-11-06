@@ -122,6 +122,8 @@ Sam system Windows weryfikuje podpisy pakietów za pomocą .NET i nie wymaga Ope
 
 **Nowa publikacja aktualizuje stronę pobierania; zainstalowane programy aktualizują się po ponownym uruchomieniu instalatora.** Nie ma funkcji automatycznej aktualizacji ani automatycznego restartu uruchomionej kolekcji. Obecny kanał instalatora to **wersja zapoznawcza**; opiera się on na opublikowanych, sprawdzonych kompilacjach z `main`, których commit może być nowszy niż ostatnia numerowana wersja na GitHubie. Wersja strony pochodzi z `pyproject.toml`; jej commit i identyfikator kompilacji pozwalają rozróżnić aktualizacje w ramach tej samej wersji podglądowej.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Należy użyć tego samego folderu instalacyjnego i tego samego użytkownika systemu operacyjnego, co poprzednio. Należy wykonać kopię zapasową całego katalogu danych przy wyłączonej funkcji gromadzenia danych; `tgwitness paths` który go identyfikuje. Podpisany eksport nie stanowi pełnej kopii zapasowej instalacji.
 
 **Instalacja w katalogu głównym systemu Ubuntu pod adresem `/opt/tgwitness`:**

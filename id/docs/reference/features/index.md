@@ -74,9 +74,9 @@ Sumber menyediakan pengaturan per akun untuk pesan baru, pengeditan, penghapusan
 | Tindakan admin | Pembaruan yang relevan dan cuplikan log admin dalam ekspor obrolan saluran/supergrup | Proses ekspor membaca log jika tersedia untuk akun admin yang melakukan ekspor; pemantauan log admin secara berkelanjutan berada di luar alur ini |
 | Lampiran | Deskripsi versi asli, jumlah byte yang diunduh/SHA-256, dan hasil upaya | File yang hilang mungkin tidak dapat dipulihkan; versi terbaru tidak akan menggantikannya |
 | Sejarah | Cuplikan eksplisit dari pesan-pesan yang saat ini terlihat | Tidak merekonstruksi semua pengeditan atau konten yang dihapus |
-| Proses pengumpulan | Mulai／berhenti, detak jantung, kesalahan, pengaturan, cakupan, dan tanda terima eksekusi yang ditandatangani | Inventaris lokal; GitHub dan TDX menambahkan [pemeriksaan lingkungan independen](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) |
+| Proses pengumpulan | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/#verification-scope) |
 
-Antarmuka tersebut mencantumkan akun yang tercantum dalam peristiwa sumber dan mempertahankan nama serta nama pengguna yang diamati. Jika peristiwa tersebut tidak mencantumkan pelakunya, laporan tersebut akan membiarkan kolom tersebut kosong.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Kapasitas dan batasan Telegram
 

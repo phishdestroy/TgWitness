@@ -74,9 +74,9 @@ W sekcji „Źródła” dostępne są przełączniki dla poszczególnych kont, 
 | Działania administratora | Odpowiednie dostarczone aktualizacje oraz migawka dziennika administratora w eksportach czatów z kanałów/supergrup | Funkcja eksportu odczytuje dziennik, o ile jest on dostępny dla konta administratora odpowiedzialnego za eksport; ciągłe sprawdzanie dziennika administratora wykracza poza ten proces. |
 | Załącznik | Opis wersji oryginalnej, liczba pobranych bajtów/SHA-256 oraz wyniki prób | Utracony plik może okazać się niemożliwy do odzyskania; najnowsza wersja nie zastępuje poprzedniej. |
 | Historia | Wyraźny zrzut ekranu przedstawiający aktualnie widoczne wiadomości | Nie odtwarza wszystkich zmian ani usuniętych treści |
-| Proces gromadzenia danych | Uruchomienie/zatrzymanie, sygnał kontrolny, błędy, ustawienia, zakres oraz podpisane potwierdzenie uruchomienia | Lokalny spis zasobów; GitHub i TDX dodają [niezależne kontrole środowiska](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) |
+| Proces gromadzenia danych | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) |
 
-Interfejs nadaje nazwę kontu podanemu w zdarzeniu źródłowym oraz zachowuje zaobserwowane nazwy i nazwy użytkowników. Gdy w zdarzeniu pominięto podmiot, w raporcie pole to pozostaje nieokreślone.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Pojemność i ograniczenia serwisu Telegram
 

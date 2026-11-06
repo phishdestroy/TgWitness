@@ -122,6 +122,8 @@ Quá trình cài đặt trên Windows tự động xác minh chữ ký gói bằ
 
 **Một bản phát hành mới sẽ cập nhật trang tải xuống; các chương trình đã cài đặt sẽ được cập nhật khi bạn chạy trình cài đặt lại.** Không có trình cập nhật tự động hoặc tính năng khởi động lại tự động cho bộ sưu tập đang chạy. Kênh trình cài đặt hiện tại là **bản xem trước**; nó dựa trên các bản dựng đã được phát hành và kiểm tra từ `main`, trong đó commit có thể mới hơn so với bản phát hành GitHub được đánh số gần nhất. Phiên bản của trang này xuất phát từ `pyproject.toml`; cam kết và ID bản dựng của nó giúp phân biệt các bản cập nhật trong cùng một phiên bản xem trước.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Sử dụng cùng thư mục cài đặt và tài khoản người dùng hệ điều hành như trước đây. Sao lưu toàn bộ thư mục dữ liệu khi quá trình thu thập dữ liệu đã dừng; `tgwitness paths` xác định nó. Một tệp xuất đã được ký không phải là bản sao lưu cài đặt đầy đủ.
 
 **Cài đặt Ubuntu với quyền root tại `/opt/tgwitness`:**

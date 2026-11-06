@@ -20,6 +20,8 @@ Seçilen gözlemleri, vakanın okunabilir bir özetine dönüştürün: vakanın
 
 Veri önizlemesi, ilk bir örnek değil, tam ve kararlı günlük önekini sayar. Yalnızca görüntülenen örnek satırlar ve uzun listeler sınırlandırılmıştır; atlanan sayıların toplamı gösterilir. Daha sonraki bir dışa aktarım işlemi yeni bir kararlı anlık görüntü alır, bu nedenle devam eden toplama işlemi rakamları artırabilir. Kapsam, sayı ve kaynak kimliği imzalı raporda yer alır. Formu açmak veya önizlemek, formun kaydedilmesine yol açmaz.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Alıcının kopyasını seçin.** Grafikler ve transkript, seçilen kayıtları kullanır. Bütünlük, saklama ve kapsam, kaynak günlüğünün tamamını tanımlar. Kanıt ZIP dosyası orijinal kayıtları ve ekleri içerir. Alıcının yalnızca seçilmiş, izin verilen verileri alması gerektiğinde, [en az miktarda veri içeren bir devir işlemi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#handover-extract) kullanın.
 
 ### Düzenlemeleri, silme işlemlerini ve eksik kimlik numaralarını okuyun
@@ -90,12 +92,12 @@ Boş bir aralık, ilgili gözlemlerin bulunmadığı anlamına gelir; eksiklikle
 
 | Processor | Neleri gösterir? |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 Kaynak kodundan, yukarıda listelenen sekiz tasarımı da aynı hayali dergiden oluşturun:
 
@@ -147,7 +149,7 @@ Her bir kontrolü, kaydedilen toplama kapsamıyla birlikte ayrı ayrı gözden g
 4. Orijinal ZIP dosyalarını ve bunların hash değerlerini koruyun. Her bir tutucuyu, aktarımı, tarihi ve amacı kaydedin. Atfedilen operatör ifadelerini ve vaka notlarını bunlarla birlikte koruyun.
 5. Gizli VM'ler için, fiyat teklifi, doğrulama sorusu, Intel sertifika zinciri, ölçümler, kesin kaynak ve anahtar işleme koşullarını koruyun ve bağımsız olarak doğrulayın. Doğrulama sonucunu, incelenen kanıtlarla birlikte saklayın.
 
-Her modda veri toplama, arşiv bütünlüğü, zaman ve toplama kapsamı kontrolleriyle ilgili olarak [doğrulama kapsamına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) bakınız.
+See [verification scope](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Alıcı tarafından incelenmesi
 

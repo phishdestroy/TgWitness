@@ -122,6 +122,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **การเผยแพร่เวอร์ชันใหม่จะอัปเดตเว็บไซต์ดาวน์โหลด; โปรแกรมที่ติดตั้งแล้วจะอัปเดตเมื่อคุณ เรียกใช้ตัวติดตั้งอีกครั้ง** ไม่มีตัวอัปเดตอัตโนมัติหรือการรีสตาร์ทอัตโนมัติของ คอลเลกชันที่กำลังทำงานอยู่ ช่องตัวติดตั้งปัจจุบันเป็นเวอร์ชัน**พรีวิว**; มันติดตาม บิลด์ที่เผยแพร่และตรวจสอบแล้วจาก `main`, ซึ่งการ commit อาจใหม่กว่า การปล่อยเวอร์ชัน GitHub ที่มีการกำหนดหมายเลขล่าสุด เวอร์ชันของหน้านี้มาจาก `pyproject.toml`; commit และ build ID ของมันช่วยแยกแยะการอัปเดตภายในเวอร์ชันพรีวิวเดียวกัน
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 ใช้โฟลเดอร์การติดตั้งและผู้ใช้ระบบปฏิบัติการเดียวกันกับครั้งก่อน สำรองข้อมูล ในไดเรกทอรีทั้งหมดโดยปิดการเก็บข้อมูลไว้ก่อน; `tgwitness paths` เพื่อระบุมัน การส่งออกที่ลงนาม ไม่ใช่การสำรองข้อมูลการติดตั้งที่สมบูรณ์
 
 **การติดตั้ง Ubuntu ในสิทธิ์ root ที่ `/opt/tgwitness`:**

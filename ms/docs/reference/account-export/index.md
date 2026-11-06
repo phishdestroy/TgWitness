@@ -12,6 +12,12 @@ Penapis penghantar dan teks berkembang di bawah **Tapis mengikut penghantar atau
 
 Aliran kerja ini mengeksport data yang kini boleh diakses oleh akaun yang disambungkan. Lalai menggunakan [Telegram Takeout](https://core.telegram.org/api/takeout); ia bukan sandaran data Telegram yang tidak tersedia atau telah dipadam. Perbualan Rahsia, sejarah yang tidak dapat diakses dan suntingan terdahulu tidak dipulihkan. Telegram boleh mengenakan tempoh menunggu sebelum Takeout bermula. Panel memaparkan tempoh menunggu itu; ia tidak menukar pengangkutan secara senyap. Pilihan API biasa secara eksplisit mempunyai liputan berbeza dan merekod kategori yang tidak disokong.
 
+Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+
+For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+
+Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+
 ## Pilih apa yang dikumpul
 
 | Persetelan | Maksud |
@@ -31,7 +37,7 @@ Preset **koleksi Minimize** menyahaktifkan metadata fail dan akaun. Penapis peng
 
 Sejarah foto profil dan cerita tidak dipilih secara lalai. Matikan profil dan kenalan juga apabila kes hanya memerlukan mesej. Jika lampiran atau metadata tidak diperlukan, mengeluarkannya semasa pemerolehan mengelakkan penyimpanan satu lagi salinan peribadi dalam eksport ini.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
 ## Ringkasan, liputan dan pengesahan
 
@@ -87,8 +93,8 @@ Pautan sumber tidak membuktikan secara bebas bahawa transformasi telah memilih s
 
 ## Perkongsian dan tangkapan hos
 
-Pilih mesej dan fail yang diperlukan oleh penerima, semak salinan perkongsian lengkap, dan simpan sumber secara berasingan. Rekodkan hash ZIP yang dihantar supaya penerima dapat mengenal pasti dan mengesahkan salinan tepat tersebut. Pseudonimisasi menggantikan pengecam terpilih; teks dan fail asal yang disertakan kekal sebagai sebahagian daripada semakan.
+Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
 
-GitHub Actions menyokong eksport akaun penuh dan sembang terpilih melalui Takeout atau API biasa, serta jurnal peristiwa satu sembang. Panduan [tangkapan](https://phishdestroy.github.io/TgWitness/docs/capture/) [hos](https://phishdestroy.github.io/TgWitness/docs/capture/) menerangkan pengesahan tetapan dan had 120 minit. Untuk mengesahkan salinan perkongsian yang diperoleh daripada tangkapan hos, periksa hash sumbernya dengan arkib asal dan sahkan pengesahan arkib tersebut dengan pemeriksaan [khusus mod](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope).
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/#verification-scope).
 
 [Format bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/) · [Laporan kes](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/)

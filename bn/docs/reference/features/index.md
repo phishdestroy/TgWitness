@@ -74,9 +74,9 @@ TgWitness-এর নিজস্ব ইনস্টলেশন, ডেটা �
 | প্রশাসনিক কার্যক্রম | প্রাসঙ্গিক সরবরাহকৃত আপডেট এবং চ্যানেল/সুপারগ্রুপ চ্যাট এক্সপোর্টে অ্যাডমিন-লগ স্ন্যাপশট | রপ্তানি লগটি উপলব্ধ হলে রপ্তানি প্রশাসক অ্যাকাউন্টে পড়ে; ধারাবাহিক অ্যাডমিন-লগ পোলিং এই পথের বাইরে। |
 | সংযুক্তি | মূল সংস্করণ বর্ণনাকারী, ডাউনলোড করা বাইট/SHA-256 এবং প্রচেষ্টার ফলাফল | অদৃশ্য হয়ে যাওয়া ফাইল পুনরুদ্ধার করা নাও যেতে পারে; সর্বশেষ সংস্করণটি প্রতিস্থাপন করা হয় না। |
 | ইতিহাস | বর্তমান দৃশ্যমান বার্তাগুলির স্পষ্ট স্ন্যাপশট | সমস্ত সম্পাদনা বা মুছে ফেলা বিষয়বস্তু পুনর্গঠন করে না |
-| সংগ্রাহক প্রক্রিয়া | স্টার্ট/স্টপ, হার্টবিট, ত্রুটি, সেটিংস, স্কোপ এবং স্বাক্ষরিত রান রসিদ | স্থানীয় ইনভেন্টরি; GitHub এবং TDX [স্বাধীন পরিবেশ যাচাই](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) যোগ করে |
+| সংগ্রাহক প্রক্রিয়া | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) |
 
-ইন্টারফেস সোর্স ইভেন্টে প্রদত্ত অ্যাকাউন্টের নাম উল্লেখ করে এবং পর্যবেক্ষিত নাম ও ব্যবহারকারীর নাম সংরক্ষণ করে। যখন ইভেন্টে এর অভিনেতাই উল্লেখ না থাকে, রিপোর্ট সেই ক্ষেত্রটি অনির্দিষ্ট রেখে দেয়।
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## ক্ষমতা এবং টেলিগ্রাম সীমা
 

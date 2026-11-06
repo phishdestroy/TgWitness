@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | เริ่มการสาธิตจำลองที่ `data\demo` |
 | `TgWitness-Check.cmd` | ดำเนินการตรวจสอบความพร้อมโดยไม่เริ่มระบบ |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 แตกไฟล์อาร์ไคฟ์ทั้งหมดไปยังโฟลเดอร์ที่สามารถเขียนได้ เช่น `Documents\TgWitness`; อย่า เรียกใช้จากภายในไฟล์ ZIP หรือจากโฟลเดอร์ Program Files เนื่องจากระบบรันไทม์ใช้เส้นทางโมดูลที่แยกออกมา ดังนั้นการติดตั้ง Python อื่น ๆ และ `PYTHONPATH` จึงไม่ส่งผลต่อมัน ข้อมูลจะเก็บอยู่ใน โฟลเดอร์ `data` ของแพ็กเกจ เพื่ออัปเดต ให้หยุด TgWitness ก่อน จากนั้นแตกไฟล์เวอร์ชันใหม่ไปยัง โฟลเดอร์ใหม่ และคัดลอกโฟลเดอร์ `data` ไปยังโฟลเดอร์เดิม
 
 ติดตั้งด้วยตัวเองบน Windows 64-bit ด้วย Python 3.12:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 คัดลอก `deploy/env.example` ไปยัง `.env` ตั้งค่า `TGWITNESS_IMAGE` เป็นเวอร์ชันที่เผยแพร่ โดยใช้ เส้นทางรีโพสิตอรี**แบบตัวพิมพ์เล็ก** เช่น:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

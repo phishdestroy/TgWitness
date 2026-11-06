@@ -122,6 +122,8 @@ Windows o'rnatilishi o'zi .NET yordamida paket imzolarini tekshiradi va OpenSSL 
 
 **Yangi nashr yuklab olish saytini yangilaydi; o'rnatilgan dasturlar installyerni yana ishga tushirganingizda yangilanadi.** Nazoratsiz yangilovchi yoki ishlayotgan to'plamni avtomatik qayta ishga tushirish mavjud emas. Joriy installyer kanali **ko'rgazmali**; u e'lon qilingan, tekshirilgan build-larni kuzatadi `main`, uning commit-i oxirgi raqamli GitHub relizidan yangiroq bo'lishi mumkin. Sahifaning versiyasi _____ dan olinadi. `pyproject.toml`; uning commit va build IDlari bir xil preview versiyasi ichidagi yangilanishlarni ajratib ko'rsatadi.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Avvalgidek o'rnatish papkasi va operatsion tizim foydalanuvchisini ishlating. To'plam to'xtatilgan holda to'liq ma'lumotlar katalogini zaxiralang; `tgwitness paths` uni aniqlaydi. Imzolangan eksport to'liq o'rnatish zaxira nusxasi emas.
 
 **Ubuntu root o'rnatilishi `/opt/tgwitness`:**

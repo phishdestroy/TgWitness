@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/evide
 
 TgWitness, hesapta görülebilen Telegram gözlemlerini imzalı bir günlükte saklar. Alıcılar, kaydedilen kayıtları, ekleri ve raporları güvenilir bir toplayıcı anahtarıyla doğrulayabilir, ardından günlüğü bağımsız olarak saklanan bir kontrol noktasıyla karşılaştırabilir. Bu sayfada, devir için saklanması gereken formatlar, kontroller ve materyaller açıklanmaktadır.
 
+Recipients can start with **VERIFY.cmd** on Windows: it asks for the original ZIP and independently obtained key fingerprint, displays an explained result, and saves a separate verification transcript. See [verification launchers and the portable runtime](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION_LAUNCHER.md) for setup and trust limits.
+
 ## Neler imzalanır?
 
 | Materyal | Koruma | Neler saklanmalı |
@@ -14,12 +16,27 @@ TgWitness, hesapta görülebilen Telegram gözlemlerini imzalı bir günlükte s
 | Kanıt ZIP dosyasının içeriği | `manifest.sig`, içerik dosyalarının hash değerlerini listeleyen kanonik manifestoyu imzalar | Manifestosu ve imzası dahil olmak üzere eksiksiz ZIP dosyası |
 | Ekler korunur | İmzalı bir `media.saved` olayındaki SHA-256 ve bayt sayısı; imzalı ZIP manifestosundaki dosya hash değeri | Doğrulanmış ZIP dosyasının içindeki orijinal baytlar |
 | Kontrol Noktası | Günlük uzunluğu, başlık hash değeri, açık anahtar ve oluşturulma zamanı üzerinde Ed25519 imzası | Tartışmalı bir değişiklikten önce saklanan bağımsız bir kopya |
-| Çalıştırma makbuzu | Toplayıcı sürümünün, kaynak dosya hash değerlerinin ve başlangıç ayarlarının imzalı kaydı; ayrıca şunlara da dahil edilmiştir: `process.started` | Seçilen doğrulama modu için makbuz, ilgili günlük ve ortam kanıtları |
+| Çalıştırma makbuzu | Signed record of the collector version, source-file hashes and start settings, also included in `process.started` | The receipt, associated journal and the environment evidence for the selected verification mode |
 | Okunabilir raporlar: `report.html` ve bileşenleri, `report.json`, `report.pdf`, `chat.pdf` | Her dosyanın içeriği üzerinde bir Ed25519 mührü bulunur; PDF ayrıca standart bir PDF imzası da taşır (bkz. [Okunabilir raporlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#readable-reports)) | Alınan dosya ve güvenilir anahtar parmak izi; belgede açıklanan ZIP dosyası |
 | Bağımsız CSV | Tek başına kriptografik imza yoktur; olay hash'leri tek başına yetersizdir | Bütünlük kontrolü için doğrulanmış ZIP dosyasının içindeki metni aynen kullanın |
 | Tarayıcı tarafından oluşturulan ekran görüntüleri, çıktılar veya PDF dosyaları | Türetilmiş sürümde TgWitness imzası bulunmamaktadır. | Orijinal doğrulanmış paketi saklayın ve türev sürümün nasıl oluşturulduğunu belgelendirin |
 
 Toplayıcı, her dışa aktarım formatını oluşturmadan önce günlük imzalarını doğrular. Okunabilir HTML ve PDF raporları kendi mühürlerini taşır; bağımsız CSV dosyası, imzalı bir ZIP dosyasının parçası olarak kontrol edilir. Ek baytlarını ve manifestosunu korumak için ZIP dosyasını koruyun ve günlüğü önceki bir sınırla karşılaştırmak için ayrı bir kontrol noktası oluşturun.
+
+## Comparing chat exports
+
+Verify and compare two signed chat-export ZIPs with independently retained signer fingerprints:
+
+```
+python -m tgwitness.verify first.zip --compare second.zip \
+  --fingerprint FIRST_TRUSTED_KEY_SHA256 --compare-fingerprint SECOND_TRUSTED_KEY_SHA256
+```
+
+When both archives record the same numeric account and chat IDs, records are paired by message ID. **Unchanged** means equality of the complete saved JSON record: full text, author, dates, reply target, nested metadata and unknown fields are all included. JSON object key order does not matter; absent fields, nulls, value types and array order do. The 300-character preview is only for display. Changed entries name the differing top-level `changed_fields`, including changes invisible in that preview. Duplicate message IDs are rejected instead of overwriting one another during matching.
+
+A difference can be a changed display name, view count, collection annotation or other observation metadata. It does not by itself establish a Telegram edit, identify who made a change, or prove which contradictory archive is accurate. Unparsed records remain in the comparison; equality of their saved representation does not mean their Telegram payload was decoded.
+
+For different or missing account/chat identities, the tool only finds possible correspondences using sender, complete text, file hash, media type and a five-second time tolerance. It reports **Matched**, not **Unchanged**. These candidates do not establish message identity or equality of all metadata. Unparsed records remain unmatched. Differences in paired records remain listed in `changed`, including in content mode; these differences do not prove edits of the same message. With `--json`, `matched` counts pairs and `unchanged` counts pairs whose complete saved records are equal. Neither count proves message identity in content mode. The existing `changed_fields` and integer `unchanged` output remain compatible with earlier comparison results. Archive format and signature verification are unchanged.
 
 ## Soruşturma devri
 
@@ -62,7 +79,7 @@ Başarılı bir doğrulama, güvenilir toplayıcı anahtarı ve korunan sınır 
 
 Bir kanalda veya süper grupta Telegram , mesajları 1, 2, 3… şeklinde sıralar. Bir sohbet dışa aktarımında ilk ve son numara, mevcut olanların sayısı ve eksik numaraların her bir dizisi `message-ids.json` , manifest ve `chat.json` başlığında listelenir ve her bir boşluk, transkriptte bulunduğu yerde işaretlenir. `verify.py` , `chat.json` 'den itibaren numaraları yeniden sayar. Eksik bir numara, Telegram 'nin geri döndürmediği bir mesajdır (dışa aktarımdan önce silinmiş veya hesap tarafından görülemiyor olabilir); özel sohbetlerde ve temel gruplarda numaralar hesabın tüm sohbetleri arasında paylaşılır ve boşluklar sayılmaz.
 
-Geçmişi okuduktan sonra, dışa aktarma işlemi Telegram'dan eksik olan her numarayı tekrar, numaraya göre (`channels.getMessages`, en fazla 10.000 numara). Sonuç, `message-ids.json` dosyasında ve raporda yer alır. Boş bir yanıt, yeniden kontrol sırasında numaranın bu hesap için ulaşılamadığını gösterir; nedeni belirtilmez. Yeniden kontrol sırasında döndürülen bir mesaj, dışa aktarıma eklenir ve işaretlenir `found_on_recheck`．
+After reading the history, the export asks Telegram for every absent number again, by number (`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report. An empty answer records that the number is unavailable to this account at recheck time; it leaves the cause unspecified. A message returned on recheck is added to the export and marked `found_on_recheck`.
 
 Her rapor **ile başlar. Özetle**: bir paragraf, ardından materyalin neyi gösterdiği ve neyi göstermediği (bir hesabın arkasında kim olduğu, teslimatın eksiksizliği, gözlemden önce yapılan silme işlemleri, zaman damgası olmayan saat bilgisi). Tarayıcı, sayfanın kendisini değil, mührün imzasını doğruladığında sayfanın kendi mühür damgası kehribar rengine döner: bir tarayıcı, bir sayfaya kendi baytlarını vermez. Yalnızca okuyucu dosyayı sayfanın sonundaki kontrol alanına sürüklediğinde ve her bayt eşleştiğinde yeşile döner; ancak bu, gösterilen sayfanın o dosya olması durumunda geçerlidir; aksi takdirde kırmızıya döner.
 
@@ -118,6 +135,10 @@ message.new actor_id, mesajın gönderenidir. message.edited'de çıkarılan bir
 
 Özel sohbetler ve normal gruplar için silme bildirimleri yalnızca mesaj kimliklerini içerir. Bu sohbetler hesap genelinde tek bir kimlik dizisini paylaşır; dolayısıyla bir kimlik, bu hesaba ait tek bir mesajı tanımlar. Bu kimlik numarasına sahip bir mesaj daha önce bu günlüğe kaydedilmişse, silme işlemi o sohbette message.deleted olarak kaydedilir ve yöntem adı olarak payload.chat_resolution kullanılır. Hiç kaydedilmemiş kimlik numaraları, chat_id olmadan deletion.unscoped olarak tutulur; hiçbir şey tahmin edilmez. Kanallar ve süper gruplar, mesajları sohbet başına numaralandırır ve bu şekilde asla eşleştirilmez. Silinen mesaj gözlemlenen hesap tarafından gönderilmişse, payload.deleted_message_was_outgoing değeri true olur; silen kişinin bilgisi yine de sağlanmaz.
 
+An unscoped notice does not establish that a message was never saved: a matching chat may be outside the current observation scope, or a unique match may be unavailable. Recheck absence remains a separate observation from a deletion notification in report counts, filters and labels. A later recovery clears the current missing state while preserving the earlier unsuccessful check in the signed history; neither observation establishes a deletion notice.
+
+Multiple IDs resolved to the same chat from one notification are grouped as `deletion.batch`, regardless of their count. The notification does not establish that the entire history was cleared, who performed the deletion, or whether it applied to all participants. Saved outgoing messages do not change these limits. Older journals may contain `history.cleared` events inferred from batches of ten or more IDs, with explanatory text attributing the deletion to the other participant. Those inferences are not supported by the update. Preserve those original signed records, but treat them as grouped deletion notifications; the current interface labels them accordingly.
+
 ## Kapsam: süreklilik, boşluklar ve gözlemlenmemiş kimlikler
 
 Her imzalı ZIP dosyası `coverage.json`'yi içerir; HTML raporu aynı özetle açılır ve `verify.py`, dosyaya güvenmek yerine `events.jsonl`'den bu özeti yeniden hesaplar:
@@ -152,13 +173,13 @@ Geçerlilik, günlüğünden türetilir; asla varsayılmaz:
 
 `verify.py` yeniden hesaplar `gap_summary` 'den `events.jsonl` imzalı `coverage.json` (eski arşivler için varsayılanlar) ve kapsam özetinde hesap genelindeki satırı yazdırır. Arşivin `get_capture_status`(MCP ve komut satırı), bir erişimin okuyabileceği sohbetler için aynı ölçümü döndürür; hesap genelindeki dizi ise yalnızca tüm çalışma alanını kapsayan erişimler için geçerlidir.
 
-Bir hizmet mesajının tekrarlanan gözlemleri bir kez sayılır ve hesap hizmet tahmini yalnızca ölçülen aralık içindeki sayıları kullanır. Uygulanan kapsam, hesap genelinde ölçüm etkinleştirilmeden önce hesabın kendi mesajlarını açıkça korumalıdır; bu bilgiyi içermeyen eski kayıtlar bu koşulu sağlayamaz. Durdurulan gözlem, ölçülen aralığı genişletmez ve yeniden başlatılması not edilir. Canlı arşiv sorgusunun, veritabanı taraması da dahil olmak üzere bir zaman bütçesi vardır ve tamamlanmamış bir ölçümü kısmi olarak işaretler.
+Repeated observations of one service message count once, and the account service estimate uses only numbers inside the measured range. An applied scope must explicitly preserve the account's own messages before account-wide measurement is enabled; older records without that information cannot establish this condition. Stopped observation does not extend the measured range, and resuming it is noted. The live archive query has a time budget, including its database scan, and marks an unfinished measurement as partial.
 
-Telegram, [ayrı mesaj kimlik](https://core.telegram.org/api/updates#message-id-sequences)dizilerini belgeler. Bu numaralar gözlemleri tanımlar; bir silme eylemini gerçekleştiren kişiyi tanımlamaz veya bir numaranın neden eksik olduğunu belirlemez.
+Telegram documents the [separate message ID sequences](https://core.telegram.org/api/updates#message-id-sequences). These numbers describe observations; they do not identify a deletion actor or establish why a number is absent.
 
 Telegram, hesabı kabul etmeyi durdurduğunda, gözlemi sonlandıran `coverage.gap` kaydı `cause` (`account_banned`, `account_frozen`, `account_deleted`, `session_duplicated`, `session_revoked`, `session_expired`, `session_ended` veya `not_authorized`) değerini ve Telegram hatasını taşır; `verify.py` ise dönemin sona erme nedenini belirtir.
 
-Kapsam, kaydedilen gözlem dönemlerini, kesintileri ve mesaj sonuçlarını birleştirir. Seçilen sohbetler, dönem ve ek politikası ile birlikte değerlendirin; yalnızca sürekli çalışma, Telegram güncellemelerinin tam olarak iletildiğini kanıtlamaz.
+Coverage combines recorded observation periods, interruptions and message outcomes. Assess it together with the selected chats, period and attachment policy; continuous operation alone does not establish complete delivery of Telegram updates.
 
 ## Yapımcı
 
@@ -186,27 +207,27 @@ Bir tanık günlüğü (`tgwitness-witness-v1`) ve kanalındaki gönderiler, `ve
 
 manifest.json dosyası, formatı, dışa aktarım zamanını, açık anahtarı, parmak izini, günlüğün uzunluğunu, baş hash değerini, kapsamı, üreticiyi, sınırlamaları ve `manifest.json` ile `manifest.sig`'nin kendileri dışındaki her içerik elemanının SHA-256 değerini içerir. manifest.sig dosyası, kanonik manifest JSON dosyası üzerinde oluşturulan base64 Ed25519 imzasını içerir. Doğrulayıcı, beklenmeyen/eksik elemanları, yinelenen adları, bozuk dosyaları, kırık sıra/zinciri, geçersiz imzaları ve sağlanan kontrol noktasıyla uyuşmazlıkları reddeder. Arşiv yollarını asla ayıklamaz. Beyan edilen toplam sıkıştırılmamış boyutu 4 GiB ile sınırlar; `--max-gib N`, artırılmış **Parameters** sınırıyla oluşturulan daha büyük arşivlere izin verir.
 
-Yüklediğiniz TgWitness sürümünden veya incelenmiş bir checkout'tan doğrulama işlemini çalıştırın. Arşivde bulunan kopya taşınabilir kullanım için uygundur; çalıştırmadan önce bu kopyayı güvenilir kurulumunuzla karşılaştırın.
+Run verification from your installed TgWitness version or a reviewed checkout. The copy included in an archive supports portable use; check that copy against your trusted installation before executing it.
 
-Bir kontrol noktası, açık anahtar, günlük uzunluğu, başlangıç hash'i ve oluşturulma zamanını içeren bir beyanı imzalar. Doğrulayıcı, daha sonraki bir arşivin aynı önek içerdiğini kontrol edebilir. Kontrol noktasını toplayıcının dışında tutun, böylece daha sonraki doğrulama işlemi sırasında arşiv, ondan ayrı olarak tutulan bir referansla karşılaştırılır.
+A checkpoint signs a statement containing the public key, journal length, head hash, and creation time. The verifier can check that a later archive contains the same prefix. Retain the checkpoint outside the collector, so later verification compares the archive with a reference held separately from it.
 
 ## Doğrulama kapsamı
 
-Doğrulama, arşivi ve arşivin oluşturulmasında kullanılan toplama modunu kontrol eder. Duruma uygun güven sınırına sahip modu seçin, ardından doğrulama girdilerini koruyun.
+Verification checks the archive and the collection mode used to produce it. Choose the mode whose trust boundary matches the case, then retain its verification inputs.
 
 | Toplama modu | Doğrulayıcının kontrol ettiği unsurlar | Doğrulama girdileri ve güven sınırı |
 | --- | --- | --- |
-| Yerel çalışma alanı | İmzaları, hash zincirini, manifestoyu ve eklerin baytlarını kaydedin | Bağımsız olarak saklanan toplayıcı parmak izi; yerel imzalama anahtarını ana bilgisayar yöneticisi kontrol eder |
-| Bağımsız bir tanık içeren yerel çalışma alanı | Arşiv kontrolleri ve tanık tarafından saklanan önceki günlük önekiyle uyumluluk | Ayrı olarak güvenilen tanık anahtarı ve kayıtlar; kontrol noktası, daha önce gözlemlenmiş olan önekle bağlanır |
-| [GitHub Actions kaydı](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | Arşiv özetinin GitHub onayı, onaylanmış iş akışı ve toplayıcı taahhütleri, barındırılan çalıştırıcı, yeni oturum/anahtar kaynağı ve dahili arşiv bütünlüğü | Güvenilir doğrulayıcı politikası, arayan depo ve GitHub tasdik paketi; toplama işlemi sabitlenmiş iş akışı altında çalışır |
-| [Bulut dağıtımı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/) | Sağlayıcı yaşam döngüsü ve erişim kayıtları, güvenlik duvarı ve Cloudflare durumu ile toplayıcının imzalı çalışma kaydı | Sağlayıcıya ve Cloudflare'e yönelik salt okunur sorgular; tek tek kontrollerinin kullanılabilirliği sağlayıcıya bağlıdır |
-| [Intel TDX gizli sanal makinesi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Alıntı imzası ve platform durumu, toplayıcı ifadesine bağlanma, kompozisyon ve işletim sistemi ölçümleri | Intel güven zinciri ve beklenen dağıtım ölçümleri; gerekli tüm TDX kontrollerinin sonuçlarını koruyun |
+| Yerel çalışma alanı | Record signatures, hash chain, manifest and attachment bytes | Independently retained collector fingerprint; the host administrator controls the local signing key |
+| Bağımsız bir tanık içeren yerel çalışma alanı | Arşiv kontrolleri ve tanık tarafından saklanan önceki günlük önekiyle uyumluluk | Separately trusted witness key and records; the checkpoint binds the prefix already observed |
+| [GitHub Actions kaydı](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
+| [Bulut dağıtımı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
+| [Intel TDX gizli sanal makinesi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |
 
-Mühürlü veri toplama işleminde, onaylanmış toplayıcı, doğrulanmış ortam içindeki kimliği doğrulanmış bir Telegram bağlantısı aracılığıyla verileri alır. Tasdik, arşivi o yürütme işlemine bağlar; böylece doğrulama, veri toplama işleminin yanı sıra daha sonraki dosya bütünlüğünü de kapsar. Bu, onaylanmış koda ve yukarıda listelenen platform güven zincirine dayanır. GitHub yakalama doğrulaması, çalıştırma sırasında oluşturulan bir oturum gerektirir ve ithal edilmiş oturum yakalamalarını reddeder.
+In sealed acquisition, the approved collector receives data through an authenticated Telegram connection inside the verified environment. Attestation binds the archive to that execution, so verification covers acquisition as well as later file integrity. This relies on the approved code and the platform trust chain listed above. GitHub capture verification requires a session created inside the run and rejects imported-session captures.
 
-Çalıştırma makbuzu, toplayıcı sürümünü, dosya hash değerlerini ve başlangıç ayarlarını kaydeder. GitHub kaynak bilgisi ve TDX ölçümleri ortam kontrollerini sağlar; [doğrulama kaydı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) ise test edilen yapılandırmaları tanımlar.
+The run receipt records the collector version, file hashes and startup settings. GitHub provenance and TDX measurements provide the environment checks; the [validation record](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) identifies tested configurations.
 
-TgWitness, topladığı gözlemleri imzalar; Telegram ve mesaj yazarları bu imzaları düzenlemez. Yerel bir çalışma alanında, ilk bağımsız kontrol noktası öncesinde oluşturulan materyaller hâlâ toplayıcıya ve anahtar sahibine bağlıdır. Kapsam kayıtları, seçilen kapsamı ve toplama sonuçlarını açıklar; doğrulanmış harici zaman damgaları ise kaydedilen arşivin veya günlüğün zaman sınırını sabitler.
+TgWitness signs the observations it collects; Telegram and message authors do not issue these signatures. In a local workspace, material created before the first independent checkpoint still depends on the collector and its key holder. Coverage records describe the selected scope and collection outcomes, while verified external timestamps anchor the committed archive or journal boundary in time.
 
 ## Ekler
 
@@ -220,9 +241,9 @@ Tam bir sohbet dışa aktarma işlemi, çalışma alanının ek ayarlarında bel
 
 Bir medya işi ve ilgili mesaj olayı, tek bir işlemde kaydedilir. İş, orijinal TL mesaj tanımlayıcısını depolar; imzalı gözlem, SHA-256 değerini, hesabı ve boyut politikasını bağlar. Kurtarma işlemi, indirme öncesinde bu bağlamayı doğrular. Asla mevcut mesajı almaz ve sessizce daha yeni bir eki ikame eder. Kesintiye uğrayan işler yeniden denenirken, kalıcı hata açık bir sonuç olarak kalır.
 
-Her çalışma alanı kendi günlüğüne ve imzalama kimliğine sahiptir. Bir process.started olayı şunları içerir: çalıştırma kimliği, yerel saatler, bağımlılık sürümleri, kaynak dosya hash'leri, başlangıç hesabı/kapsamı ve yakalama ayarları. Heartbeat'ler çalıştırma kimliğini, monotonik zamanı ve kuyruk durumunu içerir. Çalıştırma makbuzu, ayrı olarak imzalanmış bir bildirim olarak da indirilebilir. Yürütme ortamının doğrulanması için, bunu [“Doğrulama Kapsamı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope)” bölümünde açıklanan GitHub tasdiki veya TDX kontrolleriyle eşleştirin.
+Each workspace has its own journal and signing identity. A process.started event includes a run ID, local clocks, dependency versions, source-file hashes, initial account/scope, and capture settings. Heartbeats include the run ID, monotonic time, and queue state. The run receipt can also be downloaded as a separately signed statement. For verification of the execution environment, pair it with the GitHub attestation or TDX checks described in [Verification scope](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope).
 
-Otomatik kontrol noktaları, başlangıçta, gözlem sırasında her beş dakikada bir (**Parametreler → Her [süre] imzalı kontrol noktası**) ve düzgün bir şekilde durdurulduğunda yerel olarak saklanır. Başlangıç doğrulaması ve dışa aktarma işlemi, günlüğü en son saklanan yerel kontrol noktasıyla karşılaştırır. Bu, kontrol noktası korunmuşsa bir veritabanı geri alma işlemini tespit edebilir. Bağımsız saklama, bu referansı çalışma alanı dışında kullanılabilir tutar; doğrulanmış bir harici zaman damgası ise bunu zamana sabitler.
+Automatic checkpoints are retained locally on startup, every five minutes while observing (**Parameters → Signed checkpoint every**), and on orderly stop. Startup verification and export compare the journal against the latest retained local checkpoint. This can detect a database rollback when the checkpoint survives. Independent retention keeps that reference available outside the workspace; a verified external timestamp additionally anchors it in time.
 
 Yeniden başlatmanın ardından, kaydedilmiş Telegram güncelleme konumu devam ettirilir (`catch_up_from`'den `observation.started`'ye) ve kaçırılan güncellemeler istenir. Periyodik bir yeniden kontrol, kaçırılan mesajlar için `message.recovered`'yi ve Telegram'ın artık kaydedilmiş bir mesajı döndürmemesi durumunda `message.missing_on_recheck`'yi kaydeder; ikincisi bir silme bildirimi değildir ve silen kişinin adını veya zamanı belirtmez.
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/secur
 
 دھمکی کا ماڈل، رسائی کا ماڈل، ذخیرہ شدہ راز، نیٹ ورک کی نمائش، سیشن امپورٹس اور کمزوری کی رپورٹنگ کا طریقہ۔
 
-یہ صفحہ ایک مقامی یا سرور ورک اسپیس میں رسائی، ذخیرہ اور نیٹ ورک کی حفاظت کو بیان کرتا ہے۔ GitHub runner یا Intel TDX خفیہ VM میں کلیکشن کے لیے، [تصدیقی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) طریقوں کو دیکھیں، جو کلیکشن ماحول کی جانچ پڑتال شامل کرتے ہیں۔ اکاؤنٹ کنکشنز، نوٹیفیکیشنز، ٹائم اسٹیمپس، آف سائٹ کاپیز اور ویٹنسز کی اپنی روٹنگ سیٹنگز ہوتی ہیں۔
+This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | علاقہ | مختصراً |
 | --- | --- |
@@ -12,7 +12,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/secur
 | محفوظ راز | سیشن، API جوڑی، دستخطی کلید اور پروکسی ترتیبات Fernet کے ساتھ خفیہ کردی گئی ہیں۔ |
 | پیغامات اور میڈیا | غیر انکرپٹڈ محفوظ: ڈسک انکرپشن اور سخت اجازت نامے استعمال کریں |
 | دیانتداری | ہر ریکارڈ پر SHA-256 ہیش چین اور Ed25519 دستخط |
-| مقامی اعتماد کی حد | ہوسٹ ایڈمنسٹریٹر ورک اسپیس اور اس کی دستخطی کلید کو کنٹرول کرتا ہے؛ آزاد چیک پوائنٹس پہلے کے جرنل کی حد کو برقرار رکھتے ہیں |
+| مقامی اعتماد کی حد | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 کمزوریوں کی رپورٹس کے لیے [سیکیورٹی پالیسی](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) ملاحظہ کریں۔
 
@@ -38,13 +38,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/secur
 
 ## محفوظ راز
 
-Telegram API کی اسناد، سیشن اور دستخطی کلید Fernet کے ذریعے خفیہ کی گئی ہیں۔ مقامی پیغامات اور میڈیا کے لیے، ہوسٹ کی ڈسک یا والیوم کے ذریعے انکرپشن فراہم کی جاتی ہے؛ ورک اسپیس عام فائلوں کو محفوظ کرتا ہے۔ برآمدات پاس ورڈ سے محفوظ شدہ AES-256 ZIP استعمال کر سکتی ہیں، اور آف سائٹ نقول AES-256-GCM استعمال کرتی ہیں۔
+Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
 
-والٹ کی ڈیفالٹ طور پر محفوظ ڈیٹا ڈائریکٹری پر سیٹ ہوتی ہے۔ اسے الگ سے محفوظ کرنے کے لیے نیچے دی گئی بیرونی ماسٹر-کی فائل استعمال کریں۔ یونکس پر، نئی پرائیویٹ-کی فائلیں موڈ 0600 استعمال کرتی ہیں اور نئی ڈیٹا ڈائریکٹریاں 0700 استعمال کرتی ہیں؛ ونڈوز پر، سروس اکاؤنٹ اور مجاز منتظمین کے لیے ڈائریکٹری ACL سیٹ کریں۔ موجودہ ڈائریکٹری اجازت نامے برقرار رکھے جاتے ہیں۔
+The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
 
 ### بیرونی ماسٹر کلید
 
-نئی ڈیٹا ڈائریکٹری کے لیے، TGWITNESS_VAULT_KEY_FILE بیرونی بے ترتیب ماسٹر کلید فراہم کر سکتا ہے۔ HKDF-SHA256 اور ایک الگ بے ترتیب سالٹ ہر ورک اسپیس کے لیے ایک مختلف فرنیٹ کلید تیار کرتے ہیں۔ بحالی کے لیے vault.external.json کو برقرار رکھنا ضروری ہے۔ ماسٹر کلید کے غائب یا غلط ہونے پر بندش ناکام ہو جاتی ہے۔ موجودہ مقامی والٹس خاموشی سے منتقل نہیں کیے جاتے۔ پینل منتخب کردہ کی اسٹوریج موڈ دکھاتا ہے۔ ڈسک انکرپشن دونوں موڈز میں مقامی پیغامات اور میڈیا فائلوں کی حفاظت کرتی ہے؛ سیٹ اپ کی تفصیلات کے لیے [کنکشن اور ڈیٹا پروٹیکشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/) دیکھیں۔
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/) for setup details.
 
 ## پراکسیز اور نیٹ ورک راستے
 
@@ -68,10 +68,10 @@ MTProxy صرف ٹیلیگرام ٹریفک منتقل کرتا ہے۔ بیرون
 
 ## دیانتداری کی حدود
 
-مقامی تصدیقی چیکس میں دستخط، ہیش چین، منسلکات اور ایکسپورٹ مینفیسٹ ریکارڈ کیے جاتے ہیں۔ انتظامیہ کے پاس مقامی سگننگ کلید ہوتی ہے اور وہ ایک اور دستخط شدہ جرنل بنا سکتا ہے؛ ایک آزادانہ طور پر محفوظ کردہ چیک پوائنٹ اس پریفکس کی تبدیلی کا پتہ لگاتا ہے جسے یہ کور کرتا ہے۔ کلید کے فنگر پرنٹ اور چیک پوائنٹس کو وصول کنندہ یا کسی آزاد گواہ کے پاس محفوظ رکھیں۔
+Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
 
-آزادانہ طور پر تصدیق شدہ کلیکشن کے لیے، [GitHub Actions کیپچر](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) یا [Intel TDX ڈیپلائمن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx)ٹ کا انتخاب کریں۔ ان کے ویریفائرز آرکائیو کی سالمیت کے علاوہ ورک فلو کی اصلیت یا ہارڈویئر کی پیمائشوں کی جانچ کرتے ہیں۔ اختیاری ٹائم اسٹیمپس اور انکرپٹڈ آف سائٹ کاپیاں وقتی لنگر اور بازیافت کے قابل کاپیاں فراہم کرتی ہیں؛ [ثبوت](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) [کا فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) ہر موڈ کے لیے جانچوں کی وضاحت کرتا ہے۔
+For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/#verification-scope) describes the checks for each mode.
 
 ## اگر آپ کو کسی مسئلے کا شبہ ہو
 
-اصلی ڈیٹا ڈائریکٹری کو محفوظ رکھیں اور تجزیے کے لیے ایک الگ کاپی استعمال کریں۔ متاثرہ ورژن، آپریشن اور قابلِ تکرار اقدامات کو [سیکیورٹی](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md) پالیسی کے تحت رپورٹ کریں، اکاؤنٹ کے ڈیٹا اور کریڈینشلز کو نجی رکھیں۔
+Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.

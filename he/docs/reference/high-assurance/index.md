@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/high-
 
 שרת מאובטח הפועל 24/7 ב-Hetzner או ב-Phala Cloud, Gateway DNS ובדיקות שצד שלישי יכול לחזור עליהן.
 
-פריסה ברמת אמינות גבוהה מוסיפה בדיקות עצמאיות של סביבת האיסוף לאימות הארכיון. הבודק בודק את רשומות הפריסה והגישה המוחזקות על ידי ספק הענן ו-Cloudflare, ופריסת Intel TDX מוסיפה אימות חומרה של סביבת האספן.
+High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 השימוש הרגיל בסביבה מקומית וב-Docker נותר ללא שינוי. שום דבר כאן לא פועל אלא אם כן אתם מבצעים פריסה באמצעות `python -m tgwitness.cloud`, והאספן קורא את המארח שלו רק כאשר הפריסה מוגדרת `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/high-
 | מפתח החתימה נוצר בשרת זה | המפתח חותם על הצהרה המציינת את מזהה השרת של הספק ואת ה-hash של ה-cloud-init שקיבל | Collector, נבדק מול הספק |
 | היומן שייך למפתח ולשרת הזה | כל תהליך שמתחיל בראיות ZIP נושא את מדידת המארח עבור אותו שרת | ראיות ZIP |
 
-האספן מתעד את מצב ה-SSH, הפעלות, היסטוריית הכניסות ומידע האתחול ברשומות חתומות של הפעלת תהליכים ו `host.state` . במכונה וירטואלית רגילה מדובר ברשומות מלאי מקומיות, שהבוחן משווה לרשומות העצמאיות של הספק. פריסת Intel TDX המוצגת להלן מאמתת בנוסף מדידות הנתמכות בחומרה.
+The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
 
 ## ספקים
 
@@ -271,6 +271,6 @@ Cloudflare אינה יכולה לראות את תוכן ההצפנה של Telegr
 
 ## קריאת תוצאות הפריסה
 
-במקרה של מכונה וירטואלית רגילה, הספק שולט בתשתית המארחת, והמלאי המקומי נבדק לצד הרישומים של הספק. עבור Intel TDX, המאמת בודק בנוסף את ציטוט החומרה, קישור האספן, ה-compose ומדידות מערכת ההפעלה. קראו את התוצאות הפרטניות כדי לראות אילו בדיקות עברו או לא היו זמינות.
+For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
 
-פרטי חומת האש ההיסטוריים תלויים בספק; Linode שומר את גרסאות הכללים. [רישום](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/) [האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/) מפרט פריסות שנבדקו ובדיקות פעילות שנותרו, וה[יקף](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) [האימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) מקשר בין בדיקות סביבה אלה לרכישת ארכיונים ושלמותם.
+Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.

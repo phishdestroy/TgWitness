@@ -81,7 +81,7 @@ Po zakończeniu tworzenia indeksu**archiwum** pobiera z niego źródła: najleps
 
 Klienci MCP mogą wywołać `search_messages` z `ranked=true` oraz wyświetlać strony za pomocą `next_offset`. Połączenia z ograniczeniem zakresu odbierają wyłącznie swoje czaty.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Zależności
 

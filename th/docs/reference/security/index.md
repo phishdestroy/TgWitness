@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/secur
 
 โมเดลภัยคุกคาม, โมเดลการเข้าถึง, ข้อมูลลับที่เก็บไว้, ความเสี่ยงในการเปิดเผยผ่านเครือข่าย, การนำเข้าเซสชัน และวิธีการรายงานช่องโหว่
 
-หน้านี้อธิบายเกี่ยวกับการเข้าถึง การจัดเก็บ และการป้องกันเครือข่ายในพื้นที่ทำงานท้องถิ่นหรือบนเซิร์ฟเวอร์ สำหรับการเก็บข้อมูลบน GitHub Runner หรือในเครื่องเสมือน Intel TDX ที่มีความลับ [โปรดดูโหมดการตรวจสอบ ซึ่งเพิ่มการตรวจสอบสภาพแวดล้อม](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)การเก็บข้อมูล การเชื่อมต่อบัญชี การแจ้งเตือน เวลาประทับ สำเนาภายนอก และพยาน มีตั้งค่าการกำหนดเส้นทางของตนเอง
+This page describes access, storage and network protection in a local or server workspace. For collection on a GitHub runner or in an Intel TDX confidential VM, see the [verification modes](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope), which add checks of the collection environment. Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | พื้นที่ | สรุป |
 | --- | --- |
@@ -12,7 +12,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/secur
 | ข้อมูลลับที่เก็บไว้ | การตั้งค่าเซสชัน คู่ API กุญแจลงนาม และพร็อกซี ถูกเข้ารหัสด้วย Fernet |
 | ข้อความและสื่อ | ข้อมูลถูกเก็บไว้โดยไม่เข้ารหัส: ควรใช้การเข้ารหัสดิสก์และกำหนดสิทธิ์การเข้าถึงอย่างเคร่งครัด |
 | ความซื่อสัตย์ | โซ่แฮช SHA-256 และลายเซ็น Ed25519 บนทุกบันทึก |
-| ขอบเขตความเชื่อถือในท้องถิ่น | ผู้ดูแลระบบโฮสต์ควบคุมพื้นที่ทำงานและกุญแจลงนาม；จุดตรวจสอบอิสระจะเก็บรักษาขอบเขตของบันทึกก่อนหน้านี้ |
+| ขอบเขตความเชื่อถือในท้องถิ่น | The host administrator controls the workspace and its signing key; independent checkpoints retain an earlier journal boundary |
 
 สำหรับรายงานช่องโหว่ โปรดดู[นโยบายความปลอดภัย](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)
 
@@ -38,13 +38,13 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/secur
 
 ## ข้อมูลลับที่เก็บไว้
 
-ข้อมูลรับรอง API ของ Telegram รวมถึงเซสชันและกุญแจลงนาม ถูกเข้ารหัสด้วย Fernet． สำหรับข้อความและสื่อในเครื่อง การเข้ารหัสถูกดำเนินการโดยดิสก์หรือโวลุ่มของเครื่องโฮสต์； พื้นที่ทำงาน (workspace) เก็บไฟล์ทั่วไป．การส่งออกสามารถใช้ ZIP ที่ได้รับการป้องกันด้วยรหัสผ่าน AES-256， และสำเนาที่เก็บไว้นอกสถานที่ใช้ AES-256-GCM．
+Telegram API credentials, the session and signing key are encrypted with Fernet. For local messages and media, encryption is provided by the host's disk or volume; the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP, and off-site copies use AES-256-GCM.
 
-กุญแจ vault ตั้งค่าเริ่มต้นไว้ในไดเรกทอรีข้อมูลที่ได้รับการป้องกัน．ใช้ไฟล์กุญแจหลักภายนอก ด้านล่างเพื่อเก็บไว้อย่างแยกต่างหาก．บน Unix ไฟล์กุญแจส่วนตัวใหม่ใช้โหมด 0600 และไดเรกทอรีข้อมูลใหม่ ใช้ 0700；บน Windows ให้ตั้งค่า ACL ของไดเรกทอรีสำหรับบัญชีบริการและ ผู้ดูแลระบบที่ได้รับอนุญาต．สิทธิ์การเข้าถึงของไดเรกทอรีที่มีอยู่จะถูกรักษาไว้
+The vault key defaults to the protected data directory. Use an external master-key file below to store it separately. On Unix, new private-key files use mode 0600 and new data directories use 0700; on Windows, set the directory ACL for the service account and authorized administrators. Existing directory permissions are retained.
 
 ### กุญแจหลักภายนอก
 
-สำหรับไดเรกทอรีข้อมูลใหม่ TGWITNESS_VAULT_KEY_FILE สามารถจัดหาคีย์หลักแบบสุ่มจากภายนอก ได้ HKDF-SHA256 และ salt แบบสุ่มที่แยกต่างหากจะสร้างคีย์ Fernet ที่แตกต่างกัน สำหรับแต่ละพื้นที่ทำงาน vault.external.json ต้องถูกเก็บรักษาไว้เพื่อการกู้คืน หากคีย์หลักขาดหายหรือ ผิดพลาด ระบบจะปิดการทำงานโดยอัตโนมัติ Vault ท้องถิ่นที่มีอยู่จะไม่ถูกย้ายโดยอัตโนมัติ แผงควบคุมจะแสดงโหมดการเก็บรักษาคีย์ที่เลือกไว้ การเข้ารหัสดิสก์จะปกป้อง ไฟล์ข้อความและไฟล์สื่อในเครื่องในทั้งสองโหมด; ดู [ส่วนการเชื่อมต่อและการป้องกันข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/)เพื่อรายละเอียดการตั้งค่า
+For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random master key. HKDF-SHA256 and a separate random salt derive a different Fernet key for each workspace. vault.external.json must be retained for recovery. Missing or wrong master keys fail closed. Existing local vaults are not silently migrated. The panel displays the selected key-storage mode. Disk encryption protects the local message and media files in either mode; see [connection and data protection](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/) for setup details.
 
 ## พร็อกซีและเส้นทางเครือข่าย
 
@@ -68,10 +68,10 @@ MTProxy รับส่งข้อมูลการสื่อสารขอ
 
 ## ข้อจำกัดด้านความสมบูรณ์
 
-การตรวจสอบการยืนยันในท้องถิ่นจะตรวจสอบลายเซ็นของบันทึก, ห่วงโซ่แฮช, ไฟล์แนบ และเอกสารแสดงรายการส่งออก ผู้ดูแลระบบถือกุญแจลงนามในท้องถิ่นและสามารถสร้างสมุดบันทึกที่ลงนามอีกเล่มได้; จุดตรวจสอบที่เก็บรักษาอย่างอิสระจะตรวจจับการแทนที่ของคำนำหน้าที่มันครอบคลุม เก็บลายนิ้วมือของกุญแจและจุดตรวจสอบไว้กับผู้รับหรือผู้เป็นพยานอิสระ
+Local verification checks record signatures, the hash chain, attachments and the export manifest. The administrator holds the local signing key and can create another signed journal; an independently retained checkpoint detects replacement of the prefix it covers. Keep the key fingerprint and checkpoints with the recipient or an independent witness.
 
-สำหรับการเก็บรวบรวมข้อมูลที่ได้รับการตรวจสอบอย่างอิสระ ให้เลือกการบันทึกด้วย [GitHub Actions](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) หรือ[การปรับใช้](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) [Intel TDX．](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx) ผู้ตรวจสอบของพวกเขาจะตรวจสอบที่มาของเวิร์กโฟลว์หรือการวัดค่าฮาร์ดแวร์ นอกเหนือจากความสมบูรณ์ของไฟล์เก็บถาวร． การประทับเวลา (timestamps) ที่เลือกใช้ได้และสำเนาที่เข้ารหัสและเก็บไว้นอกสถานที่ ให้จุดอ้างอิงเวลาและสำเนาที่สามารถกู้คืนได้； [รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope)อธิบายขั้นตอนการตรวจสอบสำหรับแต่ละโหมด．
+For independently checked collection, choose [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) or [Intel TDX deployment](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/#confidential-vm-on-phala-cloud-intel-tdx). Their verifiers check workflow provenance or hardware measurements in addition to archive integrity. Optional timestamps and encrypted off-site copies provide time anchors and recoverable copies; the [evidence format](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/#verification-scope) describes the checks for each mode.
 
 ## หากคุณสงสัยว่ามีปัญหา
 
-รักษาไดเรกทอรีข้อมูลต้นฉบับไว้ และใช้สำเนาแยกต่างหากสำหรับการวิเคราะห์． รายงานเวอร์ชันที่ได้รับผลกระทบ การดำเนินการ และขั้นตอนที่สามารถทำซ้ำ [ได้](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md)ผ่านนโยบายความปลอดภัย โดยรักษาข้อมูลบัญชีและข้อมูลรับรองให้คงเป็นความลับ．
+Preserve the original data directory and use a separate copy for analysis. Report the affected version, operation and reproducible steps through the [security policy](https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md), keeping account data and credentials private.

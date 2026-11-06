@@ -81,7 +81,7 @@ O acesso restrito ao chat localiza apenas registros de seus chats, incluindo o t
 
 Os clientes MCP podem chamar `search_messages` com `ranked=true` e acessar com `next_offset`. Conexões com escopo restrito recebem apenas seus chats.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Dependências
 

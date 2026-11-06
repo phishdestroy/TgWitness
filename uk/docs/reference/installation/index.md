@@ -122,6 +122,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **Нова публікація оновлює сайт завантаження; встановлені програми оновлюються, коли ви запускаєте інсталятор знову.** Не існує автоматичного оновлення або автоматичного перезапуску колекції, що працює. Поточний канал інсталятора — це **попередній перегляд**; він слідує за опублікованими, перевіреними збірками з `main`, коміт яких може бути новішим за останній пронумерований реліз на GitHub. Версія сторінки походить з `pyproject.toml`; її коміт та ідентифікатор збірки дозволяють розрізняти оновлення в межах однієї попередньої версії.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Використовуйте ту саму папку інсталяції та того самого користувача ОС, що й раніше. Створіть резервну копію всього каталогу даних після зупинки збору даних; `tgwitness paths` що дозволяє його ідентифікувати. Підписаний експорт не є повною резервною копією інсталяції.
 
 **Встановлення з правами суперкористувача в Ubuntu за адресою `/opt/tgwitness`:**

@@ -60,6 +60,8 @@ Mỗi bản phát hành trên GitHub đều bao gồm `TgWitness-<version>-windo
 | `TgWitness-Demo.cmd` | Khởi chạy bản demo tổng hợp tại `data\demo` |
 | `TgWitness-Check.cmd` | Vui lòng thực hiện kiểm tra sẵn sàng mà không cần khởi động |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Vui lòng giải nén toàn bộ tệp lưu trữ vào một thư mục có quyền ghi như `Documents\TgWitness`; không chạy chương trình từ bên trong tệp ZIP hoặc từ thư mục Program Files. Môi trường chạy sử dụng đường dẫn mô-đun cách ly, do đó các bản cài đặt Python khác và thư mục `PYTHONPATH` sẽ không ảnh hưởng đến nó. Dữ liệu được lưu trữ trong thư mục `data` của gói phần mềm. Để cập nhật, hãy dừng TgWitness, giải nén phiên bản mới vào một thư mục mới và sao chép thư mục `data` sang đó.
 
 Tự xây dựng trên hệ điều hành Windows 64-bit bằng Python 3.12:
@@ -117,7 +119,7 @@ Dịch vụ này kết nối với bộ thu thập (collector) trong mạng Comp
 Sao chép `deploy/env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phiên bản đã được phát hành, bằng cách sử dụng đường dẫn kho lưu trữ **viết thường**, ví dụ:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

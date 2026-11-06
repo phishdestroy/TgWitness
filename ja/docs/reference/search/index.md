@@ -81,7 +81,7 @@ OCRデータと文字起こしデータは、暗号化されたアーティフ�
 
 MCPクライアントは以下を呼び出すことができます `search_messages` と `ranked=true` で呼び出し、 `next_offset`でページングを行うことができます。スコープ指定された接続では、自身のチャットのみを受信します。
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## 依存関係
 

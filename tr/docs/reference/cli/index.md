@@ -50,7 +50,7 @@ Uzak panel için HTTPS gereklidir; düz HTTP yalnızca `127.0.0.1`, `localhost` 
 
 Tarihler `2026-10-01` (UTC gece yarısı) veya saat dilimi belirtilmiş ISO zamanlarıdır `2026-10-01T09:00+03:00`. `search`, `messages` ve `export` için gözlem zamanı seçilir. Sayfalar en fazla 50 kayıt tutar: sıralı arama için `next_offset` (`--offset`) sıralı arama için ve `next_before` (`--before`) başka yerler için.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Her mesaj sonucu `untrusted_content: true`çalışma alanı, sohbet ve mesaj kimliklerini, günlük numarasını, kaydedilen kaydın hash değerini ve bir panel bağlantısını içerir. Düzenlemeler, silme bildirimleri ve `missing_on_recheck` ayrı kayıtlardır. Bir kaydın bulunmaması , bir olayın hiç gerçekleşmediğini kanıtlamaz.
 

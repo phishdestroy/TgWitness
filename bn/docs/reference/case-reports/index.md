@@ -20,6 +20,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-
 
 ডেটা প্রিভিউ সম্পূর্ণ স্থিতিশীল জার্নাল প্রিফিক্স গণনা করে, প্রাথমিক নমুনা নয়। শুধুমাত্র প্রদর্শিত নমুনা সারি এবং দীর্ঘ তালিকা সীমাবদ্ধ; তাদের বাদ দেওয়া গণনা দেখানো হয়েছে। পরবর্তী এক্সপোর্ট একটি নতুন স্থিতিশীল স্ন্যাপশট নেয়, তাই চলমান সংগ্রহ সংখ্যা বাড়িয়ে দিতে পারে। পরিধি, গণনা এবং উৎসের পরিচয় স্বাক্ষরিত রিপোর্টে অন্তর্ভুক্ত। ফর্ম খোলা বা প্রিভিউ করলে তা সংরক্ষণ হয় না।
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **প্রাপ্তকারীর অনুলিপি নির্বাচন করুন।** চার্ট এবং ট্রান্সক্রিপ্ট নির্বাচিত রেকর্ডগুলো ব্যবহার করে। অখণ্ডতা, হেফাজত এবং কভারেজ সম্পূর্ণ সোর্স জার্নালকে বর্ণনা করে। প্রমাণের ZIP ফাইলে এর মূল রেকর্ড এবং সংযুক্তি রয়েছে। যখন প্রাপ্তকারীকে শুধুমাত্র নির্বাচিত, অনুমোদিত ডেটা গ্রহণ করতে হবে, তখন [হ্যান্ডওভারকে সীমিত](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#handover-extract) করুন।
 
 ### সম্পাদনা, মুছে ফেলা এবং অনুপস্থিত আইডি পড়ুন
@@ -90,12 +92,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-
 
 | Processor | এটি যা দেখায় |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 একটি সোর্স চেকআউট থেকে, একই কাল্পনিক জার্নাল থেকে উপরে তালিকাভুক্ত সব আটটি ডিজাইন তৈরি করুন:
 
@@ -147,7 +149,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. মূল ZIP ফাইল এবং তাদের হ্যাশ সংরক্ষণ করুন। প্রতিটি ধারক, স্থানান্তর, তারিখ এবং উদ্দেশ্য রেকর্ড করুন। সংশ্লিষ্ট অপারেটর বিবৃতি এবং কেস নোটগুলোও সংরক্ষণ করুন।
 5. গোপনীয় ভেরচুয়াল মেশিনের জন্য উদ্ধৃতি, চ্যালেঞ্জ, ইন্টেল সার্টিফিকেট চেইন, পরিমাপ, সঠিক উৎস এবং কী-হ্যান্ডলিং শর্তাবলী সংরক্ষণ ও স্বতন্ত্রভাবে যাচাই করুন। পর্যালোচিত আর্টিফ্যাক্টগুলোর সাথে এটেস্টিশন যাচাইয়ের ফলাফল সংরক্ষণ করুন।
 
-অর্জন, আর্কাইভ অখণ্ডতা, সময় এবং সংগ্রহের কভারেজ যাচাইয়ের জন্য [যাচাইকরণ পরিসর](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) দেখুন।
+See [verification scope](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## প্রাপ্তকারী পর্যালোচনা
 

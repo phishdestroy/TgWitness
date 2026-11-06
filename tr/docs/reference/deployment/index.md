@@ -60,6 +60,8 @@ Her GitHub sürümü, `TgWitness-<version>-windows-amd64-portable.zip` ve bunun 
 | `TgWitness-Demo.cmd` | `data\demo` adresinden sentetik demoyu başlatın |
 | `TgWitness-Check.cmd` | Başlatmadan hazırlık kontrolünü çalıştırın |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Arşivin tamamını `Documents\TgWitness` gibi yazılabilir bir klasöre çıkarın; ZIP dosyasının içinden veya Program Files klasöründen çalıştırmayın. Çalışma ortamı izole bir modül yolu kullanır, bu nedenle diğer Python kurulumları ve `PYTHONPATH` onu etkilemez. Veriler, paketin `data` klasöründe kalır. Güncellemek için TgWitness’i durdurun, yeni sürümü yeni bir klasöre çıkarın ve `data` klasörünü buraya kopyalayın.
 
 Python 3.12 kullanarak 64 bit Windows üzerinde kendiniz derleyin:
@@ -117,7 +119,7 @@ Hizmet, Compose ağı içindeki toplayıcıya `http://tgwitness:8787` adresinden
 `deploy/env.example`'yi `.env`'ye kopyalayın. `TGWITNESS_IMAGE`'yi, **küçük harfli** depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

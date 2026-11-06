@@ -81,7 +81,7 @@ OCR และข้อความถอดเสียงจะยังคง�
 
 ลูกค้า MCP สามารถเรียกใช้ `search_messages` ด้วย `ranked=true` และหน้าด้วย `next_offset`. การเชื่อมต่อแบบจำกัดขอบเขตจะรับเฉพาะการสนทนาของตนเองเท่านั้น
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## การพึ่งพา
 

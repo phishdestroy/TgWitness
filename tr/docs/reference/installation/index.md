@@ -122,6 +122,8 @@ Windows kurulum sistemi, paket imzalarını .NET ile doğrular ve OpenSSL gerekt
 
 **Yeni bir yayın, indirme sitesini günceller; yüklü programlar, kurulum programını tekrar çalıştırdığınızda güncellenir.** Katılımsız güncelleyici veya çalışmakta olan bir koleksiyonun otomatik olarak yeniden başlatılması yoktur. Mevcut kurulum kanalı **önizleme** aşamasındadır; yayınlanmış ve kontrol edilmiş derlemeleri takip eder `main`; bu sürümlerin commit'leri, son numaralandırılmış GitHub sürümünden daha yeni olabilir. Sayfanın sürümü `pyproject.toml`; commit ve derleme kimliği, aynı önizleme sürümü içindeki güncellemeleri birbirinden ayırır.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 Daha önce kullandığınız kurulum klasörünü ve işletim sistemi kullanıcısını kullanın. Toplama işlemi durdurulmuşken tüm veri dizinini yedekleyin; `tgwitness paths` bunu tanımlar. İmzalı bir dışa aktarım tam bir kurulum yedeği değildir.
 
 **Ubuntu'da kök kurulum adresi: `/opt/tgwitness`:**

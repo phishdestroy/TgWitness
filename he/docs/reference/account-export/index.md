@@ -12,6 +12,12 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/accou
 
 זרימת עבודה זו מייצאת נתונים הנגישים כרגע לחשבון המחובר. ברירת המחדל היא שימוש ב[-Telegram Takeout](https://core.telegram.org/api/takeout); זהו אינו גיבוי של נתוני Telegram שאינם זמינים או שנמחקו. צ'אטים סודיים, היסטוריה שאינה נגישה ועריכות קודמות אינן משוחזרות. Telegram עשויה להטיל תקופת המתנה לפני תחילת ה-Takeout. הלוח מציג את זמן ההמתנה הזה; הוא אינו מחליף את אמצעי ההעברה בשקט. האפשרות המפורשת של ה-API הרגיל כוללת כיסוי שונה ומתעדת קטגוריות שאינן נתמכות.
 
+Takeout is the official export API also used by Telegram Desktop. TgWitness can write Desktop-compatible JSON directly from its own acquisition; importing someone else's archive is not required. Chat and message IDs are available through both transports. A public chat or permission to forward does not guarantee a faster export or remove Takeout's approval delay. Measure the same scope and media settings before comparing speed.
+
+For up to 20 explicitly selected chat IDs, regular-API export resolves those peers directly before considering the account's complete dialog inventory. A readable public channel can therefore be exported without joining it, even when it is absent from the dialog list. Uncached peers fall back to the ordinary inventory. The archive filter remains enforced: if Telegram does not return a dialog and archived chats are excluded, the unknown archive status is recorded as an omission. Takeout keeps its split-range inventory procedure. Neither path joins chats or changes forwarding permissions. In Desktop-compatible JSON, channels that Telegram marks `left` appear under `left_chats`, including readable public channels the account has not joined.
+
+Both `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` pause requests for the full server-requested period. The account's deadline is persisted across reconnects and restarts; a shorter later wait cannot shorten it. Retries are bounded, cancellation preserves sealed pages, and API credentials are not rotated to bypass a rate limit. No Premium purchase is made.
+
 ## בחרו מה ייאסף
 
 | הגדרה | משמעות |
@@ -31,7 +37,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/accou
 
 היסטוריית תמונות הפרופיל והסיפורים אינם נבחרים כברירת מחדל. יש להשבית גם את הפרופיל ואת אנשי הקשר כאשר התיק דורש הודעות בלבד. אם קבצים מצורפים או מטא-נתונים אינם נחוצים, אי-הכללתם במהלך האיסוף תמנע שמירת עותק פרטי נוסף בייצוא זה.
 
-Photo payloads use the still-image variant identified in their metadata and hash manifests，including photos with an animated avatar variant．That animation is not substituted for the selected still image．A shorter or longer payload than the observed size is recorded as a failed attachment，and a changed representation during file-reference renewal is rejected．These failures leave the archive partial while retaining the message records．Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation，including in older archives．
+Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
 ## סיכום, כיסוי ואימות
 
@@ -87,8 +93,8 @@ python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
 
 ## שיתוף ותיעוד מאוחסן
 
-בחרו את ההודעות והקבצים הדרושים למקבל, עברו על העותק המלא שנשלח, ושמרו את המקור בנפרד. תיעדו את ה-hash של קובץ ה-ZIP שנשלח, כדי שהמקבל יוכל לזהות ולאמת שמדובר באותו עותק בדיוק. תהליך הפסאודונימיזציה מחליף את המזהים שנבחרו; הטקסט הכלול והקבצים המקוריים נשארים חלק מהבדיקה.
+Select the messages and files the recipient needs, review the complete sharing copy, and retain the source separately. Record the delivered ZIP's hash so the recipient can identify and verify that exact copy. Pseudonymization replaces the selected identifiers; included text and original files remain part of the review.
 
-GitHub Actions תומך בייצוא של חשבונות מלאים וצ'אטים נבחרים באמצעות Takeout או ה-API הרגיל, בנוסף ליומן אירועים של צ'אט בודד. המדריך ללכידה [מאוחסנת](https://phishdestroy.github.io/TgWitness/docs/capture/) מסביר את אימות ההגדרות ואת מגבלת 120 הדקות. כדי לאמת עותק משותף שמקורו בלכידה מאוחסנת, יש להשוות את ה-hash של המקור לארכיון המקורי ולאמת את האישור של הארכיון באמצעות בדיקות [ספציפיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope) [למצב](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope).
+GitHub Actions supports full-account and selected-chat exports through Takeout or the regular API, plus a one-chat event journal. The [hosted capture guide](https://phishdestroy.github.io/TgWitness/docs/capture/) explains settings verification and the 120-minute limit. To verify a sharing copy derived from hosted capture, check its source hash against the original archive and verify that archive's attestation with the [mode-specific checks](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/#verification-scope).
 
 [פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [דוחות מקרה](https://phishdestroy.github.io/TgWitness/he/docs/reference/case-reports/)

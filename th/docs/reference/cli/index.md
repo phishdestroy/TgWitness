@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 วันที่คือ `2026-10-01` (เที่ยงคืน UTC) หรือเวลา ISO พร้อมเขตเวลา, `2026-10-01T09:00+03:00`. สำหรับ `search`, `messages` และ `export` พวกเขาเลือก เวลาการสังเกตการณ์ หน้าหนึ่งสามารถเก็บได้สูงสุด 50 รายการ: ทำตาม `next_offset` (`--offset`) เพื่อ ค้นหาตามอันดับและ `next_before` (`--before`) ที่อื่น ๆ
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 ผลลัพธ์ของทุกข้อความจะประกอบด้วย `untrusted_content: true`ID ของพื้นที่ทำงาน, ID ของห้องแชท และ ID ของข้อความ, ลำดับของบันทึก, ค่าแฮชของบันทึกที่เก็บไว้ และลิงก์ไปยังแผงควบคุม การแก้ไข, การแจ้งเตือนการลบ และ `missing_on_recheck` ถือเป็นบันทึกแยกต่างหาก การไม่มีบันทึก ไม่ได้เป็นหลักฐานว่าเหตุการณ์นั้นไม่เคยเกิดขึ้น
 

@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | הפעל את ההדגמה הסינתטית ב-`data\demo` |
 | `TgWitness-Check.cmd` | הפעל את בדיקת המוכנות מבלי להפעיל את התוכנה |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 חלץ את הארכיון כולו לתיקייה הניתנת לכתיבה, כגון `Documents\TgWitness`; אל תפעיל אותו מתוך קובץ ה-ZIP או מתוך תיקיית Program Files. סביבת ההרצה משתמשת בנתיב מודול מבודד, כך שהתקנות Python אחרות ו-`PYTHONPATH` אינן משפיעות עליה. הנתונים נשמרים בתיקיית `data` של החבילה. כדי לעדכן, עצרו את TgWitness, חלצו את הגרסה החדשה לתיקייה חדשה והעתיקו את תיקיית `data` אליה.
 
 הקימו אותו בעצמכם ב-Windows 64 סיביות עם Python 3.12:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 העתיקו את `deploy/env.example` ל-`.env`. הגדירו את `TGWITNESS_IMAGE` לגרסה שפורסמה, תוך שימוש בנתיב המאגר **באותיות קטנות**, לדוגמה:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

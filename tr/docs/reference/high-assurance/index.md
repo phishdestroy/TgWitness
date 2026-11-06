@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-
 
 Hetzner veya Phala Cloud üzerinde 7/24 çalışan, mühürlenmiş bir sunucu, Gateway DNS ve üçüncü tarafların tekrarlayabileceği kontroller.
 
-Yüksek güvenilirlikli dağıtım, arşiv doğrulamasına toplama ortamının bağımsız kontrollerini ekler. Denetçi, bulut sağlayıcısı ve Cloudflare tarafından tutulan dağıtım ve erişim kayıtlarını sorgular; ayrıca Intel TDX dağıtımı, toplayıcının ortamına ilişkin donanım doğrulaması sağlar.
+High-assurance deployment adds independent checks of the collection environment to archive verification. The reviewer queries deployment and access records held by the cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation of the collector's environment.
 
 Sıradan yerel ve Docker kullanımı değişmemiştir. `python -m tgwitness.cloud`komutuyla dağıtmadıkça hiçbir şey çalışmaz ve toplayıcı, yalnızca dağıtım ayarlandığında ana bilgisayarını okur `TGWITNESS_ASSURANCE`.
 
@@ -33,7 +33,7 @@ Akış şeması · Operatör → Sunucu, gelen trafiğe izin vermeyen güvenlik 
 | İmza anahtarı o sunucuda oluşturuldu | Anahtar, sağlayıcının sunucu kimliğini ve aldığı cloud-init'in hash değerini belirten bir beyanı imzalar | Collector, sağlayıcıyla karşılaştırılarak kontrol edilir |
 | Günlük, o anahtara ve sunucuya aittir | ZIP kanıtındaki her işlem başlangıcı, o sunucu için ana bilgisayar ölçümünü içerir | Kanıt ZIP |
 
-Toplayıcı, SSH durumunu, oturumları, oturum açma geçmişini ve önyükleme bilgilerini imzalı işlem başlangıcı ve `host.state` kayıtlarına kaydeder. Sıradan bir sanal makinede bunlar yerel envanter kayıtlarıdır ve denetçi bunları sağlayıcının bağımsız kayıtlarıyla karşılaştırır. Aşağıdaki Intel TDX dağıtımı, donanım destekli ölçümleri de ek olarak doğrular.
+The collector records SSH state, sessions, login history and boot information in signed process-start and `host.state` records. On an ordinary VM these are local inventory records, which the reviewer compares with the provider's independent records. The Intel TDX deployment below additionally verifies hardware-backed measurements.
 
 ## Sağlayıcılar
 
@@ -271,6 +271,6 @@ Cloudflare, Telegram’ın şifrelemesinin içini, Telegram hesabındaki diğer 
 
 ## Dağıtım sonucunu okuma
 
-Sıradan bir sanal makine (VM) için, sağlayıcı ana bilgisayar altyapısını kontrol eder ve yerel envanter sağlayıcının kayıtlarıyla birlikte kontrol edilir. Intel TDX için, doğrulayıcı ek olarak donanım bilgilerini, toplayıcı bağlamasını, bileşimi ve işletim sistemi ölçümlerini de kontrol eder. Hangi kontrollerin başarılı olduğunu veya kullanılamadığını görmek için tek tek sonuçları okuyun.
+For an ordinary VM, the provider controls the host infrastructure, and local inventory is checked alongside provider records. For Intel TDX, the verifier additionally checks the hardware quote, collector binding, compose and OS measurements. Read the individual results to see which checks passed or were unavailable.
 
-Geçmiş güvenlik duvarı ayrıntıları sağlayıcıya bağlıdır; Linode kural sürümlerini saklar. [Doğrulama kaydı,](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) test edilen dağıtımları ve kalan canlı kontrolleri listeler; [doğrulama kapsamı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) ise bu ortam kontrollerini arşiv edinimi ve bütünlüğüyle ilişkilendirir.
+Historical firewall detail depends on the provider; Linode retains rule versions. The [validation record](https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/) lists tested deployments and remaining live checks, and [verification scope](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/#verification-scope) connects these environment checks to archive acquisition and integrity.

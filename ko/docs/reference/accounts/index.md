@@ -34,7 +34,25 @@ TgWitness는 파일 이름이 아닌 **내용을** 기준으로 파일을 식별
 
 ## 시작하기 전에: API ID 및 API 해시
 
-텔레그램 API 애플리케이션을 생성하지 않고도 로그인할 수 있습니다. 키 쌍을 입력하지 않았거나, 가져오지 않았거나, 작업 공간에 이미 저장되어 있지 않은 경우, TgWitness는 내장된 50개의 공개 API 키 쌍(`tgwitness/api_pool.py`) 풀에서 무작위 순서로 한 쌍을 선택합니다. 텔레그램이 페어 (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`)를 거부하면 다음 페어를 시도하며, 로그인당 최대 8개까지 시도됩니다. 거부된 페어는 재시작할 때까지 건너뜁니다. 로그인에 사용된 페어는 계정과 함께 저장되어 해당 계정에 재사용됩니다. **API** ID와 **API**해시는 텔레그램에 애플리케이션을 식별하는 용도로 사용되며, 이들 자체만으로는 계정을 인증하지 않습니다.
+You can sign in without creating a Telegram API application. When no pair is entered, imported or already saved in the workspace, TgWitness picks a pair from its built-in pool of 50 public API pairs (`tgwitness/api_pool.py`), preferring Telegram Desktop for a fresh login and retaining a saved pair first; remaining candidates are shuffled. If Telegram refuses a pair (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried, up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they do not authorize an account by themselves.
+
+Missing connection fields use a deterministic device/OS pair from the bundled [opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735): Desktop `2040`, Android `6`, Android X `21724`, iOS `10840`, macOS `2834`, and Web `2496`. Android's source-build ID `4` also uses the Android catalog, as identified in [Telegram Android's BuildVars](https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java). Web defaults to A; an imported `K` app-version suffix or `macos` language pack selects K, and version `0.7.0` selects Webogram. Unknown application IDs keep Telethon's host defaults. Imported fields always win, including an older app version and an empty language pack. The catalog never changes the API ID/hash. Its version snapshot is reviewed explicitly, not fetched during login. A saved profile stays stable after updates.
+
+`account.getAuthorizations` reports Telegram's saved authorization metadata; it is not an echo of each new `initConnection`. Compare it with the actual sent profile. Connecting an existing authorization does not validate its companion API hash: `initConnection` sends the API ID, while the hash is used by login requests.
+
+After a new phone or QR authorization, TgWitness requests config, nearest DC, online status, languages (when the language pack is nonempty), app updates and terms-of-service updates, with 0.3–1.5 seconds between requests. Updating status briefly marks the account online. This sequence runs once at login completion, not on imports, reconnects or restarts. The authorization is saved first; a failed request stops the sequence without retrying or discarding the login. Results are recorded as `account.initialized`, with error names rather than response bodies. The sequence is not a guarantee against account restrictions.
+
+For `tdesktop`, a missing `tz_offset` uses the server's local UTC offset, rounded to 900 seconds using the [opentele2 algorithm](https://github.com/DedInc/opentele2/blob/7e973bc71cd7a714ad13ac703c0895a90d36a735/crates/opentele2-core/src/fingerprint.rs) (MIT; license in `tgwitness/client_profiles.LICENSE`). It is refreshed on each connection so daylight-saving changes are reflected. An imported `tz_offset` takes precedence on every platform and is kept exactly, including zero. Other `initConnection.params` entries are retained. The HTTP sign-in form accepts the numeric timezone returned by file import; booleans, fractions and offsets outside the supported range are rejected.
+
+Direct, SOCKS5 and HTTP CONNECT routes use Telethon's `ConnectionTcpObfuscated` (obfuscated abridged MTProto). HTTPS CONNECT retains TLS to the proxy and uses the same obfuscated transport inside the tunnel. MTProxy retains its required randomized intermediate transport and secret handling. Route switches apply the same choices. Obfuscation changes packet framing; it does not hide the account or its client metadata from Telegram or imply immunity to restrictions.
+
+After connecting an authorized client, TgWitness checks config, nearest DC, the current authorization, the reviewed layer baseline, languages, app updates and terms-of-service updates. These diagnostics run once per client instance, before collection, and are shown under the connection details with their time. `account.connection_checked` records the result without session hashes, IPs, tokens or API hashes. They never accept terms or install updates. A request failure or FloodWait stops subsequent requests; a missing result stays unknown. Local checks can still report their results while network checks are skipped.
+
+FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers, the server-requested wait and the effective deadline in `telegram.backoff`. Connection details show the method and deadline while requests are paused. The diagnostic includes per-method client-call counters since that client was created; they count nested peer resolution separately, but do not count packets or Telethon's internal retry attempts. Current counters are also available as `collector.rpc_activity` in the status API. No request arguments, usernames, access hashes or exception text are included. The last diagnostic and full deadline survive restart. Earlier waits without a method record cannot be attributed retrospectively. See [export limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/EXPORT-LIMITS.md) for the source review and the distinction between discovery and history acquisition.
+
+`official_app=True` or `False` is Telegram's current-authorization flag. Neither value establishes whether the account is restricted, trusted or under observation. The existing evidence-mode `account.devices` snapshots remain the history of all signed-in devices; connection diagnostics retain only the current device description.
+
+Before connection, advisory checks compare the API platform, language pack, device/OS and app-version formats, mobile system locale, and Telethon's actual schema layer against the reviewed catalog baseline. Warnings appear in the server log and account status metadata; they never replace imported values or change the schema layer. A different layer is a compatibility review signal, not proof of a broken or restricted account. These checks and `official_app` do not certify that Telegram considers the account safe from restrictions. Disconnected account status uses the saved profile instead of generating another device description.
 
 대신 자체 애플리케이션을 사용하려면(해당 애플리케이션을 등록한 계정이 위험에 노출됩니다. [‘내장 API 풀이 필요한 이유’](https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account) 참조):
 
@@ -90,10 +108,24 @@ QR 이미지는 로컬에서 생성됩니다. 코드는 유효 기간이 만료�
 
 '계정 추가' → '파일'을 열고, 하나의 계정에 속한 파일을 최대 4개까지 선택하고, 총 용량이 8 MiB 이내가 되도록 한 다음, '계정 연결'을 누르십시오.
 
+The **Files**, **Auth key** and bulk-import forms show the parallel-session warning before connecting. By default imported authorizations are reused. Keep the original client closed while its key is in use here. **Files** and **Auth key** also offer **Create an independent authorization**, described below. Bulk import still uses the direct mode. Phone and interactive QR login create separate authorizations. The warning heading stays visible in the import form; its full explanation opens automatically when files or a key/session string are supplied. It can be collapsed after reading, so the file picker and connection controls remain usable on a phone.
+
 - 파일은 TgWitness 서버의 **메모리 내에서** 변환됩니다. 업로드된 파일은 저장되지 않으며, ZIP 파일은 디스크에 압축 해제되지 않고, 외부 서비스와도 연결되지 않습니다.
 - 생성된 세션은 이후 텔레그램을 통해 확인됩니다. 파일에 사용자 ID가 명시된 경우, 해당 ID는 텔레그램이 보고하는 계정과 일치해야 합니다.
 - 서로 다른 계정이나 서로 다른 API 인증 정보를 설명하는 파일은 하나를 선택하지 않은 경우 거부됩니다.
 - **‘패스코드’ 또는 ‘세션 텍스트’** 필드에는 TData의 로컬 패스코드 필드가 있으며, 이 필드에 StringSession을 붙여넣거나 **로그인 없이 Read 파일을** 불러올 수 있습니다(텔레그램에 접속하지 않고도 양식을 채울 수 있음).
+
+### Create an independent authorization
+
+Select **Create an independent authorization** before connecting imported files or an Auth Key. TgWitness connects the imported donor briefly, uses it to approve the new client's QR login token, and disconnects the donor immediately after approval. The new client has its own authorization key and a separately selected Desktop profile. The donor's supplied API credentials and device profile are used only for the donor connection. No existing authorization is logged out or revoked.
+
+**Keep the donor's original client fully closed during this step.** The initial connection still uses its copied key, so this mode cannot remove that initial parallel-use risk. Once the new authorization is connected, the owner can reopen the original client and use both independently. Interactive **QR code** login lets the original client approve the login without copying or connecting its key here.
+
+If Telegram requests 2FA, this mode uses `twoFA` from the selected JSON when present, or asks for the password. A rejected imported password returns to the password form. Passwords are not saved. The candidate key is saved encrypted in `independent_login.enc`, including changes during data-centre migration. After an interruption, select the same donor and this option to resume the saved candidate. The workspace remains reserved for that account; failed completion does not delete the new workspace. Keep its data directory and vault key. The final credentials and `account.authorized` journal record include the import method, input formats and donor API ID, without the donor key or password.
+
+On 5 November 2026, a dedicated account passed live checks with Telethon, Pyrogram and TData donors: 2FA completion, distinct new authorization keys, concurrent access by the donor and new client, and reading a public channel. The Telethon case also resumed a saved candidate after an interruption at the password step. Each new authorization completed the six post-login initialization requests, and its signed journal verified. The original session remained usable in all four supplied formats.
+
+Telegram's [RPC error database](https://core.telegram.org/api/errors.json) associates `FRESH_CHANGE_ADMINS_FORBIDDEN` with changing admins, `FRESH_CHANGE_PHONE_FORBIDDEN` with changing the phone number, and `FRESH_RESET_AUTHORISATION_FORBIDDEN` with revoking other sessions, changing their lifetime or registering a passkey. `SESSION_TOO_FRESH_*` and `PASSWORD_TOO_FRESH_*` concern ownership transfers and revenue or gift withdrawals. These are not collection operations; a new login does not imply a blanket 24-hour reading ban. Export can separately return `TAKEOUT_INIT_DELAY_*`. TgWitness retains server-requested pauses and does not retry token acceptance automatically or revoke sessions to work around restrictions.
 
 ### 텔레톤 `.session`
 
@@ -120,8 +152,9 @@ QR 이미지는 로컬에서 생성됩니다. 코드는 유효 기간이 만료�
 계정 정보는 종종 `447700900123.session`와 `447700900123.json`와 같이 동일한 이름을 가진 두 개의 파일로 제공됩니다. **두 파일을** 한 번에 **모두** 선택하십시오.
 
 - JSON을 기반으로 하는 TgWitness는 `app_id`/`api_id` 및 `app_hash`/`api_hash`를 사용하므로, 일반적으로 API 인증 정보를 직접 입력할 필요가 없습니다.
-- `phone`, `device`, `sdk`, `app_version`, `lang_pack` 또는 저장된 `twoFA` 비밀번호와 같은 다른 항목은 무시됩니다. 계정에 2단계 인증(2FA)이 설정되어 있는 경우, TgWitness는 이를 요청합니다.
-- JSON 파일 자체는 메타데이터에 불과합니다. 세션 파일이 없는 경우, 휴대폰 또는 QR 로그인을 통해 계속 진행하십시오.
+- The connection profile uses `device_model` (alias `device`), `system_version` (alias `sdk`), `app_version`, `lang_code`, `system_lang_code` (alias `system_lang_pack`), `lang_pack` and optional `tz_offset` (seconds from UTC, -43200 to 50400). Supplied fields take priority over generated defaults and the panel/browser language. Conflicting aliases are rejected. The resolved profile is saved in the encrypted workspace credentials and reused after restart, including its app version.
+- `phone`, proxy settings and device tokens are **ignored**. `twoFA` is read only when **Create an independent authorization** is selected; direct import ignores it.
+- A JSON without a supported authorization field is only metadata. Add its session file or continue with phone or QR login. A JSON containing a supported session or Auth Key can authorize on its own; see [Account JSON](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/#account-json).
 
 ### 텔레그램 데스크톱 (TData)
 
@@ -135,11 +168,11 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 
 가져오기 방법:
 
-> **병렬 세션 경고.** TData를 가져오면 텔레그램 데스크톱의 인증 키가 재사용되며, 별도의 로그인이 생성되지 않습니다. 해당 키를 데스크톱과 TgWitness에서 동시에 사용하지 마십시오. 텔레그램이 `AUTH_KEY_DUPLICATED`를 통해 인증을 무효화할 경우, 새 로그인을 할 때까지 두 버전 모두 사용할 수 없게 됩니다.
+> **Parallel session warning.** Direct TData import reuses Telegram Desktop's authorization key. Do not use that key in Desktop and TgWitness simultaneously. Telegram can invalidate the authorization with `AUTH_KEY_DUPLICATED`, leaving both copies unusable until a new login.
 >
 >
 >
-> 데스크톱 애플리케이션을 트레이 프로세스를 포함하여 완전히 종료하고, TgWitness가 가져온 세션을 사용하는 동안 해당 인스턴스를 닫은 상태로 유지하십시오. **종료하십시오. 로그아웃하거나 세션을 취소하지 마십시오.** 세션을 취소하면 가져온 사본도 무효화됩니다. 두 클라이언트를 모두 실행해야 하는 경우, 휴대폰이나 QR 코드를 통해 TgWitness에 로그인하여 별도의 인증을 생성하십시오. 전용 계정을 사용하는 것이 권장되지만, 클론된 키를 병렬로 사용하는 것이 안전해지는 것은 아닙니다.
+> Fully quit Desktop, including its tray process, and keep that copy closed while TgWitness uses the imported session. **Quit, do not log out or revoke the session:** revocation also invalidates the imported copy. If you need both clients running, select **Create an independent authorization** and keep Desktop closed until the new login succeeds, or sign in to TgWitness by phone or QR. A dedicated account is recommended, but does not make cloned keys safe to use in parallel.
 >
 >
 >
@@ -167,11 +200,16 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 | --- | --- |
 | `api_id` (`app_id`) | 애플리케이션 ID, 양수 |
 | `api_hash` (`app_hash`) | 애플리케이션 해시, 32자리 16진수 |
-| `string_session` (`session_string`, `session`) | Telethon StringSession 텍스트이며, 파일 이름이 아닙니다. |
+| `string_session` (`session_string`, `session_str`; legacy `session`) | Telethon StringSession 텍스트이며, 파일 이름이 아닙니다. |
 | `auth_key` (`auth_key_hex`) + `dc_id` | 512자 전체 인증 키(Auth Key) 및 DC 1–5 |
 | `user_id` (`id`) | 선택 사항; 권한 부여가 저장되기 전에 텔레그램과 대조하여 확인됨 |
+| `device_model` (`device`) | Connection device description |
+| `system_version` (`sdk`) | Connection OS version |
+| `app_version` | Application version sent to Telegram |
+| `lang_code`, `system_lang_code` (`system_lang_pack`), `lang_pack` | Client language, system language and client language pack; an empty `lang_pack` is allowed |
+| `tz_offset` | Optional UTC offset in seconds, sent in `initConnection.params`; integer or decimal integer string |
 
-별명과 본명이 모두 있는 경우, 두 이름이 일치해야 합니다. 예시:
+If both an alias and the main name are present, they must agree. Explicit Telethon session fields take priority over a generic `session` blob in another format. If both contain recognizable Telethon sessions, they must describe the same authorization. Without an explicit field, `session` must be a valid Telethon StringSession. Examples:
 
 ```
 { "app_id": 1234567, "app_hash": "0123456789abcdef0123456789abcdef" }

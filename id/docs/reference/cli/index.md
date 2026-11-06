@@ -50,7 +50,7 @@ Panel jarak jauh memerlukan HTTPS; HTTP biasa hanya diterima untuk `127.0.0.1`, 
 
 Tanggalnya adalah `2026-10-01` (pukul 00.00 UTC) atau waktu ISO dengan zona waktu, `2026-10-01T09:00+03:00`. Untuk `search`, `messages` dan `export` mereka memilih waktu pengamatan. Setiap halaman menampung hingga 50 catatan: ikuti `next_offset` (`--offset`) untuk pencarian berdasarkan peringkat dan `next_before` (`--before`) di tempat lain.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Setiap hasil pesan memuat `untrusted_content: true`ID ruang kerja, obrolan, dan pesan, urutan jurnal, hash catatan yang disimpan, serta tautan panel. Pengeditan, pemberitahuan penghapusan, dan `missing_on_recheck` merupakan catatan terpisah. Tidak adanya suatu catatan tidak membuktikan bahwa suatu peristiwa tidak pernah terjadi.
 

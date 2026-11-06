@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 [匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [高可信度](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/) · [面板指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)
 
-A witness retains signed checkpoints separately from the collector．It checks the collector's signature and journal continuity，signs the result with its own key，and publishes it to a Telegram channel．Run it on a separate server with read-only access to the collector's witness endpoint．
+A witness retains signed checkpoints separately from the collector. It checks the collector's signature and journal continuity, signs the result with its own key, and publishes it to a Telegram channel. Run it on a separate server with read-only access to the collector's witness endpoint.
 
 流程圖 · 收集器 → Witness (簽名檢查點：記錄數 + 頭部雜湊值); Witness → Witness 日誌，自有金鑰; Witness → Telegram 頻道 (透過其自有機器人發布的簽名貼文); 證據 ZIP 檔案 → verify.py; Witness 日誌，自有金鑰 → verify.py; Telegram 頻道 → verify.py (Telegram 桌面版匯出功能或 t.me/s 頁面) · 收集器 · Witness · Witness 日誌，自有金鑰 · Telegram 頻道 · 證據 ZIP 檔案 · verify.py · 簽名檢查點：記錄數 + · 頭部雜湊值 · 透過其自有機器人發布的簽名貼 · 文 · Telegram 桌面版匯出功能或 · t.me/s 頁面
 
@@ -36,7 +36,7 @@ A witness retains signed checkpoints separately from the collector．It checks t
 每隔一段時間（預設為 10 分鐘），Witness 會：
 
 1. 自行擷取頭部資料（收集器無法推送或跳過該部分）；
-2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen)，a nondecreasing count and an unchanged head at an unchanged count． Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint．Once continuity proofs have been used，removing them is rejected；
+2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`, or the first key seen), a nondecreasing count and an unchanged head at an unchanged count. Merkle inclusion and consistency proofs verify that a growing journal extends the retained checkpoint. Once continuity proofs have been used, removing them is rejected;
 3. 將一份經簽署的記錄附加至其自身的日誌中：`witness.anchor`，狀態為 `ok`、 `key_changed`、`rollback`（記錄數量少於先前）、`fork`（長度相同，但 標頭不同）或 `invalid`（回應未能通過驗證），或當 收集器未回應時為 `witness.no_response`；
 4. 將結果發佈至頻道，並附有簽名，包含「無回應」的情況，只要 TgWitness 正在運行且能連線至 Bot API。發佈 ID 已記錄（`witness.posted`）， 發佈失敗的情況亦同（`witness.post_failed`）。
 
@@ -196,4 +196,12 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
 
 這需要獨立保留的「見證者指紋」以及與此匯出檔案 精確末尾相符的檢查點。僅涵蓋較早前前綴的檢查點 是不夠的。請暫停收集，讓見證者觀察最終狀態，並在 進一步寫入日誌之前進行匯出；若日誌發生變更，請保留另一個檢查點並 匯出該狀態。 僅憑後續的檢查點無法驗證較短匯出檔的最終雜湊值。 當同時提供 `--channel` 時，若聲稱的貼文缺失或匹配集為空，將導致此 嚴格檢查失敗。若未啟用此標誌，一般完整性檢查仍會報告未經見證的 記錄，但不會因此拒絕一個在其他方面完整的存檔。
 
-Keep the witness journal and its pinned key separately．Online checks verify continuity between checkpoints；offline verification compares every retained checkpoint with the export．Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification．The report lists witness downtime and failed publications by interval．
+Keep the witness journal and its pinned key separately. Online checks verify continuity between checkpoints; offline verification compares every retained checkpoint with the export. Legacy heads without continuity proofs retain the offline comparison and are reported without online continuity verification. The report lists witness downtime and failed publications by interval.
+
+### Daily seals and unavailable timestamp calendars
+
+The witness seals the previous UTC day's journal boundary and submits the hash of that signed seal to OpenTimestamps. A calendar submission is pending evidence; only independently checked Bitcoin commitments receive confirmation in the verifier.
+
+If all calendars fail, the signed seal and unsuccessful attempt remain in the journal. The hourly maintenance pass retries that original record, including after a restart or a change of date. It scans at most 32 seals, submits at most two missing submissions and spends at most 60 seconds on retries per pass. A persistent cursor rotates through older seals. Retained submissions follow the existing proof-upgrade path.
+
+A retry does not rewrite the seal, change its original date or claim that the calendar received it earlier. A later Bitcoin commitment remains a later external confirmation. Missing proofs remain `none`; pending proofs remain `pending` until the verifier checks them independently.

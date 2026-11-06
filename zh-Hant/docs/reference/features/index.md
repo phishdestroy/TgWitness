@@ -74,9 +74,9 @@ TgWitness 擁有專屬的安裝程序、資料目錄及發行週期。內建的 
 | 管理員操作 | 相關已交付更新及管理員日誌快照，皆包含於頻道／超級群組聊天記錄的匯出檔案中 | 匯出功能會在匯出管理員帳戶可存取時讀取日誌；持續輪詢管理員日誌的功能不屬於此流程範圍 |
 | 附件 | 原始版本描述、下載位元組數／SHA-256 及嘗試結果 | 已消失的檔案可能無法恢復；最新版本不會被替換 |
 | 歷史沿革 | 當前可見訊息的明確快照 | 不會還原所有編輯或刪除的內容 |
-| 收集程序 | 啟動／停止、心跳、錯誤、設定、範圍及簽名執行收據 | 本地清單；GitHub 與 TDX 新增[獨立環境檢查](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) |
+| 收集程序 | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/#verification-scope) |
 
-介面會標示來源事件中提供的帳號，並保留被觀察到的 名稱與使用者名稱。當事件未標明行為者時，報告會將該欄位留空。
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## 儲存容量與 Telegram 限制
 

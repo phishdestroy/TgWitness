@@ -81,7 +81,7 @@ Suhbat doirasidagi kirish faqat o'z suhbatlaridagi yozuvlarni, ularning ilovalar
 
 MCP mijozlari chaqirishi mumkin `search_messages` bilan `ranked=true` va sahifa bilan `next_offset`. Doiraga ajratilgan ulanishlar faqat o'z chatlarini oladi.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Qaramliklar
 

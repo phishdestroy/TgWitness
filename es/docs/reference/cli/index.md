@@ -50,7 +50,7 @@ Un panel remoto requiere HTTPS; el HTTP sin cifrar solo se acepta para `127.0.0.
 
 Las fechas son `2026-10-01` (medianoche UTC) o en formato ISO con la zona horaria, `2026-10-01T09:00+03:00`. Para `search`, `messages` y `export` se selecciona la hora de la observación. Las páginas admiten hasta 50 registros: sigue `next_offset` (`--offset`) para la búsqueda por orden de relevancia y `next_before` (`--before`) en otros lugares.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Cada resultado de mensaje incluye `untrusted_content: true`los ID del espacio de trabajo, del chat y del mensaje, la secuencia del registro, el hash del registro guardado y un enlace al panel. Las modificaciones, los avisos de eliminación y `missing_on_recheck` son registros independientes. La ausencia de un registro no demuestra que un evento no haya ocurrido nunca.
 

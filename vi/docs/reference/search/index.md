@@ -81,7 +81,7 @@ Khi quá trình lập chỉ mục hoàn tất,**hệ thống lưu trữ** sẽ t
 
 Các khách hàng MCP có thể gọi `search_messages` với `ranked=true` và truy cập trang với `next_offset`. Các kết nối có phạm vi chỉ nhận được các cuộc trò chuyện của riêng họ.
 
-Ranked pagination covers at most the first 1，000 results，regardless of page size．Narrow the query，chat or period to inspect further matches．Newest-first searches order messages，OCR and transcription results before selecting each page．
+Ranked pagination covers at most the first 1,000 results, regardless of page size. Narrow the query, chat or period to inspect further matches. Newest-first searches order messages, OCR and transcription results before selecting each page.
 
 ## Các thành phần phụ thuộc
 

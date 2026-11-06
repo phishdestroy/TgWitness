@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo` میں مصنوعی ڈیمو شروع کریں۔ |
 | `TgWitness-Check.cmd` | بغیر شروع کیے تیاری کی جانچ چلائیں |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 پورے آرکائیو کو کسی لکھنے کے قابل فولڈر میں نکالیں، جیسے `Documents\TgWitness`؛ اسے ZIP کے اندر یا Program Files سے نہ چلائیں۔ رن ٹائم ایک الگ موڈیول پاتھ استعمال کرتا ہے، لہٰذا دیگر Python تنصیبات اور `PYTHONPATH` اس پر اثر نہیں ڈالتیں۔ ڈیٹا پیکج کے فولڈر `data` میں محفوظ رہتا ہے۔ اپ ڈیٹ کرنے کے لیے، TgWitness کو روک دیں، نیا ورژن ایک نئے فولڈر میں نکالیں اور فولڈر `data` کو منتقل کر دیں۔
 
 Python 3.12 کے ساتھ 64-بٹ ونڈوز پر خود بنائیں:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example` کی کاپی `.env` میں کریں۔ `TGWITNESS_IMAGE` کو شائع شدہ ورژن پر سیٹ کریں، **چھوٹے حروف کے** ریپوزیٹری راستے کا استعمال کرتے ہوئے، مثال کے طور پر:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

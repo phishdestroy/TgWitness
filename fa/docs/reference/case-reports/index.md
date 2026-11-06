@@ -20,6 +20,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-
 
 پیش‌نمایش داده‌ها کل پیش‌وند ثابت دفترچه را می‌شمارد، نه یک نمونه اولیه. تنها سطرهای نمونه نمایش داده شده و لیست‌های بلند محدود شده‌اند؛ شمارش‌های حذف شده آنها نشان داده می‌شود. یک خروجی‌گیری بعدی یک اسنپ‌شات پایدار جدید می‌گیرد، بنابراین جمع‌آوری در حال انجام ممکن است اعداد را افزایش دهد. دامنه، شمارش‌ها و هویت منبع در گزارش امضا شده گنجانده شده‌اند. باز کردن یا پیش‌نمایش فرم، آن را ذخیره نمی‌کند.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **نسخه دریافت‌کننده را انتخاب کنید.** نمودارها و متن رونوشت از رکوردهای انتخاب‌شده استفاده می‌کنند. یکپارچگی، نگهداری و پوشش، دفترچه منبع کامل را توصیف می‌کنند. فایل فشرده (ZIP) مدرک حاوی رکوردهای اصلی و پیوست‌های آن است. در صورتی که دریافت‌کننده باید فقط داده‌های انتخاب‌شده و مجاز را دریافت کند، از [تحویل‌دهی حداقلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#handover-extract) استفاده کنید.
 
 ### ویرایش‌ها، حذف‌ها و شناسه‌های از دست رفته را بخوانید
@@ -90,12 +92,12 @@ PDFهای چینی، ژاپنی و کره‌ای علاوه بر این به ی�
 
 | Processor | آنچه نشان می‌دهد |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 از یک چک‌اوت منبع، هر هشت طرح فهرست‌شده در بالا را از همان مجلهٔ خیالی بسازید:
 
@@ -147,7 +149,7 @@ python tools/build_dossier_example.py --output test-results/my-new-dossier
 4. فایل‌های ZIP اصلی و هش‌های آن‌ها را حفظ کنید. هر دارنده، انتقال، تاریخ و هدف را ثبت کنید. بیانیه‌های اپراتور منسوب و یادداشت‌های پرونده را همراه آن‌ها نگهداری کنید.
 5. برای ماشین‌های مجازی محرمانه، نقل‌قول، چالش، زنجیره گواهی اینتل، اندازه‌گیری‌ها، منبع دقیق و شرایط مدیریت کلید را حفظ کرده و به‌طور مستقل تأیید کنید. نتیجه تأیید اعتبار را همراه با مصنوعات بازبینی‌شده نگه دارید.
 
-برای بررسی‌های [حوزه‌ی تأیید](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope)، به دامنه‌ی [تصدیق](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) برای بررسی‌های اکتساب، یکپارچگی آرشیو، زمان و پوشش جمع‌آوری در هر حالت مراجعه کنید.
+See [verification scope](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## بازبینی دریافت‌کننده
 

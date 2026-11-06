@@ -20,6 +20,8 @@ Der Abschnitt **„Grundlage des Vertrauens und Einschränkungen“** erscheint 
 
 Die Datenvorschau erfasst das vollständige, stabile Protokollpräfix, nicht nur eine anfängliche Stichprobe. Nur angezeigte Beispielzeilen und lange Listen sind begrenzt; ihre ausgelassenen Zählwerte werden angezeigt. Ein späterer Export erstellt einen neuen stabilen Snapshot, sodass die laufende Erfassung die Zahlen erhöhen kann. Umfang, Zählwerte und Quellenidentität sind im signierten Bericht enthalten. Das Öffnen oder Anzeigen des Formulars in der Vorschau speichert es nicht.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Wählen Sie die Empfängerkopie aus.** Diagramme und das Protokoll verwenden die ausgewählten Datensätze. Integrität, Aufbewahrung und Erfassungsbereich beschreiben das vollständige Quellprotokoll. Die Beweismittel-ZIP-Datei enthält die Originaldatensätze und Anhänge. Verwenden Sie [eine minimierte Übergabe,](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#handover-extract) wenn ein Empfänger nur ausgewählte, zulässige Daten erhalten soll.
 
 ### Lesen Sie Änderungen, Löschungen und fehlende IDs
@@ -90,12 +92,12 @@ Sofern enthalten, wird „`analytics.json`“ durch die signierten Datei-Hashes 
 
 | Processor | Was es zeigt |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 Erstellen Sie ausgehend von einem Quell-Checkout alle acht oben aufgeführten Entwürfe aus derselben fiktiven Zeitschrift:
 
@@ -147,7 +149,7 @@ Ein verwendbarer Zeitstempel muss alle folgenden Prüfungen bestehen: Sein Abdru
 4. Behalten Sie die ursprünglichen ZIP-Dateien und deren Hashes bei. Erfassen Sie jeden Inhaber, jede Übertragung, jedes Datum und jeden Zweck. Behalten Sie die zugeordneten Aussagen der Betreiber und Fallnotizen dazu bei.
 5. Bei vertraulichen VMs sind das Zitat, die Challenge, die Intel-Zertifikatskette, die Messwerte, die genaue Quelle und die Bedingungen für den Umgang mit Schlüsseln zu bewahren und unabhängig zu überprüfen. Das Ergebnis der Beglaubigungsprüfung ist zusammen mit den geprüften Artefakten aufzubewahren.
 
-Siehe [Verifizierungsumfang](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) für die Prüfungen der Erfassung, der Archivintegrität, der Zeitangaben und der Erfassungsreichweite in den einzelnen Modi.
+See [verification scope](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Überprüfung durch den Empfänger
 

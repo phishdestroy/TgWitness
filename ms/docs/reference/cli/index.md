@@ -50,7 +50,7 @@ Panel jauh memerlukan HTTPS; HTTP biasa hanya diterima untuk `127.0.0.1`, `local
 
 Tarikh adalah `2026-10-01` (tengah malam UTC) atau masa ISO dengan zon waktu, `2026-10-01T09:00+03:00`. Untuk `search`, `messages` dan `export` mereka memilih masa pemerhatian. Halaman memuat sehingga 50 rekod: ikuti `next_offset` (`--offset`) untuk carian berperingkat dan `next_before` (`--before`) di tempat lain.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Setiap keputusan mesej membawa `untrusted_content: true`, ruang kerja, sembang dan ID mesej, urutan jurnal, hash rekod yang disimpan dan pautan panel. Suntingan, notis pemadaman dan `missing_on_recheck` adalah rekod berasingan. Ketiadaan rekod tidak membuktikan bahawa sesuatu peristiwa tidak pernah berlaku.
 

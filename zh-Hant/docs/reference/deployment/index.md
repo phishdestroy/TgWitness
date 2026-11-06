@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | 在 `data\demo` 啟動合成示範 |
 | `TgWitness-Check.cmd` | 在不啟動的情況下執行就緒檢查 |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 將整個壓縮檔解壓縮至可寫入的資料夾（例如 `Documents\TgWitness`）；請勿 直接從 ZIP 檔案內部或 Program Files 資料夾執行。執行環境採用隔離的模組路徑， 因此其他 Python 安裝程式及 `PYTHONPATH` 皆不會影響其運作。 資料會儲存於 套件的 `data` 資料夾中。若要更新，請先停止 TgWitness，將新版本解壓縮至新的 資料夾，並將 `data` 資料夾複製過去。
 
 請在 64 位元 Windows 系統上使用 Python 3.12 自行建置：
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 將 `deploy/env.example` 複製到 `.env`。將 `TGWITNESS_IMAGE` 設定為已發布的版本，並使用 **小寫的**儲存庫路徑，例如：
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

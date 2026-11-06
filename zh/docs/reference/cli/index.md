@@ -50,7 +50,7 @@ tgwitness search 'перевод карта' --json
 
 日期格式为 `2026-10-01` （UTC 午夜）或带时区的 ISO 时间， `2026-10-01T09:00+03:00`。关于 `search`, `messages` 和 `export` ，它们表示 观察时间。每页最多显示50条记录：请遵循 `next_offset` (`--offset`)进行 排序搜索， `next_before` (`--before`) 其他内容。
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 每条消息结果都包含 `untrusted_content: true`工作区、聊天和 消息 ID、日志序列号、保存记录的哈希值以及面板链接。编辑、 删除通知和 `missing_on_recheck` 属于独立的记录。某条记录的缺失 并不证明该事件从未发生。
 

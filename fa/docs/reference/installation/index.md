@@ -122,6 +122,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **یک انتشار جدید، سایت دانلود را به‌روزرسانی می‌کند؛ برنامه‌های نصب‌شده وقتی دوباره نصب‌کننده را اجرا می‌کنید، به‌روزرسانی می‌شوند.** هیچ به‌روزرسانی‌کننده‌ی بدون نظارت یا راه‌اندازی مجدد خودکار برای مجموعه‌ی در حال اجرا وجود ندارد. کانال نصب‌کننده‌ی فعلی **پیش‌نمایشی** است؛ این کانال از نسخه‌های منتشرشده و بررسی‌شده‌ی `main`، که commit آن می‌تواند جدیدتر از آخرین نسخه شماره‌گذاری‌شده GitHub باشد. نسخه صفحه از `pyproject.toml`؛ commit و شناسه build آن، به‌روزرسانی‌ها را در همان نسخه پیش‌نمایش از هم متمایز می‌کند.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 از همان پوشه نصب و کاربر سیستم‌عامل قبلی استفاده کنید. از دایرکتوری کامل داده با متوقف کردن جمع‌آوری نسخه پشتیبان تهیه کنید؛ `tgwitness paths` آن را شناسایی می‌کند. یک خروجی امضا شده نسخه پشتیبان کامل نصب نیست.
 
 **نصب ریشهٔ اوبونتو در `/opt/tgwitness`:**

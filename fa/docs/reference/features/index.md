@@ -74,9 +74,9 @@ MTProxy خودکار، مسیرهای فعال تلگرام را از چهار �
 | اقدامات ادمین | به‌روزرسانی‌های مرتبط تحویل‌شده و یک نمای کلی از لاگ ادمین در خروجی‌های چت کانال/ابر‌گروه | خروجی، در صورت موجود بودن، لاگ را برای حساب ادمین صادرکننده می‌خواند؛ بررسی مداوم لاگ ادمین خارج از این مسیر است. |
 | پیوست | توضیح‌دهنده نسخه اصلی، بایت‌های دانلودشده/SHA-256 و نتایج تلاش‌ها | یک فایل ناپدیدشده ممکن است بازیابی‌ناپذیر باشد؛ آخرین نسخه جایگزین نمی‌شود |
 | تاریخچه | اسکرین‌شات صریح پیام‌های قابل مشاهدهٔ فعلی | تمام ویرایش‌ها یا محتوای حذف‌شده را بازسازی نمی‌کند |
-| فرآیند جمع‌آوری | شروع/توقف، ضربان قلب، خطاها، تنظیمات، دامنه و رسید اجرای امضا‌شده | انبار محلی؛ گیت‌هاب و TDX [بررسی‌های مستقل محیط را](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) اضافه می‌کنند |
+| فرآیند جمع‌آوری | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/#verification-scope) |
 
-رابط کاربری نام حسابی را که در رویداد منبع ارائه شده است نام‌گذاری می‌کند و نام‌های مشاهده‌شده و نام‌های کاربری را حفظ می‌کند. وقتی رویداد عامل خود را حذف کند، گزارش آن فیلد را نامشخص باقی می‌گذارد.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## ظرفیت و محدودیت‌های تلگرام
 

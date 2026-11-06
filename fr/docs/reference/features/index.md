@@ -74,9 +74,9 @@ La section « Sources » propose des options par compte pour les nouveaux messag
 | Actions de l'administrateur | Mises à jour pertinentes fournies et instantané du journal d'administration dans les exportations de discussions de canaux/supergroupes | L'exportation lit le journal lorsqu'il est accessible au compte administrateur chargé de l'exportation ; l'interrogation continue du journal d'administration ne fait pas partie de ce processus. |
 | Pièce jointe | Descripteur de la version d’origine, nombre d’octets téléchargés/SHA-256 et résultats des tentatives | Un fichier supprimé peut être irrécupérable ; la dernière version n'est pas remplacée. |
 | Historique | Instantané explicite des messages actuellement visibles | Ne reconstitue pas l’intégralité des modifications ni du contenu supprimé |
-| Processus de collecte | Démarrage/arrêt, signal de présence, erreurs, paramètres, portée et accusé de réception signé | Inventaire local ; GitHub et TDX ajoutent [des vérifications d'environnement indépendantes](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) |
+| Processus de collecte | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/#verification-scope) |
 
-L'interface mentionne le compte fourni dans l'événement source et conserve les noms et identifiants observés. Lorsque l'événement omet d'indiquer son auteur, le rapport laisse ce champ non renseigné.
+The interface names the account supplied in the source event and retains observed names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Capacité et limites de Telegram
 

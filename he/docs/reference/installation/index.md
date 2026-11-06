@@ -122,6 +122,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1
 
 **פרסום חדש מעדכן את אתר ההורדות; תוכניות מותקנות מתעדכנות כאשר מפעילים את תוכנית ההתקנה שוב.** אין מתקן עדכונים אוטומטי או הפעלה מחדש אוטומטית של אוסף פועל. ערוץ ההתקנה הנוכחי הוא ערוץ **תצוגה מקדימה**; הוא עוקב אחר גרסאות שפורסמו ונבדקו מ `main`, שה-commit שלהן עשוי להיות חדש יותר מהמהדורה האחרונה המספרית ב-GitHub. גרסת הדף נובעת `pyproject.toml`; ה-commit ומזהה ה-build שלה מבחינים בין עדכונים בתוך אותה גרסת תצוגה מקדימה.
 
+Publication is automatic after that exact commit passes the application and security checks and the signed package passes Ubuntu service and Windows PowerShell installation tests. While checks are running, or if they fail, the same commands continue to install the previous checked build. The build manifest shows which commit is currently available; the version number alone may stay the same between preview updates.
+
 השתמש באותה תיקיית התקנה ובאותו משתמש מערכת הפעלה כמו קודם. גבה את ספריית הנתונים המלאה כשהאיסוף מופסק; `tgwitness paths` זה מזהה אותה. ייצוא חתום אינו גיבוי התקנה מלא.
 
 **התקנת root ב-Ubuntu בכתובת `/opt/tgwitness`:**

@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | `data\demo`-এ সিন্থেটিক ডেমো শুরু করুন। |
 | `TgWitness-Check.cmd` | শুরু না করেই প্রস্তুতি পরীক্ষা চালান |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 পুরো আর্কাইভটি `Documents\TgWitness`-এর মতো একটি লেখার যোগ্য ফোল্ডারে বের করুন; এটিকে ZIP-এর ভিতর থেকে বা Program Files থেকে চালাবেন না। রানটাইম একটি বিচ্ছিন্ন মডিউল পথ ব্যবহার করে, তাই অন্যান্য পাইথন ইনস্টলেশন এবং `PYTHONPATH` এর উপর কোনো প্রভাব ফেলে না। ডেটা প্যাকেজের `data` ফোল্ডারে থাকে। আপডেট করতে, TgWitness বন্ধ করুন, নতুন সংস্করণটি একটি নতুন ফোল্ডারে এক্সট্র্যাক্ট করুন এবং `data` ফোল্ডারটি কপি করুন।
 
 Python 3.12 দিয়ে 64-বিট উইন্ডোজে নিজেই তৈরি করুন:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`-কে `.env`-এ কপি করুন। `TGWITNESS_IMAGE`-কে প্রকাশিত সংস্করণে সেট করুন, ছোট হাতের রেপোজিটরি পথ ব্যবহার করে, উদাহরণস্বরূপ:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

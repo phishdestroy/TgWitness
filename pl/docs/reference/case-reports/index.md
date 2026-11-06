@@ -20,6 +20,8 @@ Otwórz **menu Eksportuj → Skonfiguruj i wyświetl podgląd**. Przejdź przez 
 
 Podgląd danych uwzględnia kompletny, stabilny prefiks dziennika, a nie początkową próbkę. Ograniczone są wyłącznie wyświetlane przykładowe wiersze i długie listy; ich pominięte liczby są wyświetlane. Późniejszy eksport tworzy nową, stabilną migawkę, więc trwające gromadzenie danych może zwiększyć te liczby. Zakres, liczby i tożsamość źródła są zawarte w podpisanym raporcie. Otwarcie lub podgląd formularza nie powoduje jego zapisania.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional** to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries the legal basis, source links, preparation notes and research status. Local-language summaries and explanations of collection safeguards are optional. No jurisdiction is selected by default. These choices belong to the workspace, and are excluded from saved layout configurations and implicit sharing-copy defaults. See [defaults, supported reports and research limits](https://github.com/phishdestroy/TgWitness/blob/main/docs/JURISDICTION_GUIDANCE.md).
+
 **Należy wybrać wersję przeznaczoną dla odbiorcy.** Wykresy i transkrypcja opierają się na wybranych zapisach. Integralność, nadzór i zakres opisują pełny dziennik źródłowy. Plik ZIP z dowodami zawiera oryginalne zapisy i załączniki. Należy zastosować [zminimalizowane przekazanie,](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#handover-extract) gdy odbiorca ma otrzymać wyłącznie wybrane, dozwolone dane.
 
 ### Odczytuj zmiany, usunięcia i brakujące identyfikatory
@@ -90,12 +92,12 @@ W przypadku dołączenia plik `analytics.json` jest chroniony przez podpisane sk
 
 | Processor | Co pokazuje |
 | --- | --- |
-| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day．A flag requires at least five first-time posters and three times their median，with message volume at most 1.5 times its median．The baseline uses at least seven observed days within the previous 14 calendar days，after seven days of warm-up． |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
 | `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
 | `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
 | `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
 
-**Parameters → Report metrics** selects processors and the number of displayed rows， including in filtered reports．Daily and monthly tables show recent rows，service-share tables rank chats by saved message count．Totals cover every row．
+**Parameters → Report metrics** selects processors and the number of displayed rows, including in filtered reports. Daily and monthly tables show recent rows, service-share tables rank chats by saved message count. Totals cover every row.
 
 Na podstawie pobranego kodu źródłowego należy stworzyć wszystkie osiem wymienionych powyżej projektów na podstawie tego samego fikcyjnego dziennika:
 
@@ -147,7 +149,7 @@ Należy sprawdzić każdy punkt osobno, biorąc pod uwagę zakres zgromadzonych 
 4. Należy zachować oryginalne pliki ZIP i ich skróty. Należy odnotować każdego posiadacza, transfer, datę i cel. Należy zachować przypisane oświadczenia operatorów i notatki dotyczące sprawy wraz z nimi.
 5. W przypadku poufnych komunikatów głosowych należy zachować i niezależnie zweryfikować cytat, wyzwanie, łańcuch certyfikatów Intel, pomiary, dokładne źródło oraz warunki obsługi kluczy. Wynik weryfikacji poświadczenia należy zachować wraz ze zweryfikowanymi artefaktami.
 
-Zobacz [zakres weryfikacji,](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) aby zapoznać się z kontrolami dotyczącymi pozyskiwania danych, integralności archiwum, czasu oraz zakresu gromadzenia danych w każdym trybie.
+See [verification scope](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/#verification-scope) for the checks of acquisition, archive integrity, time and collection coverage in each mode.
 
 ## Weryfikacja przez odbiorcę
 

@@ -50,7 +50,7 @@ Um painel remoto requer HTTPS; o HTTP simples é aceito apenas para `127.0.0.1`,
 
 As datas são `2026-10-01` (meia-noite UTC) ou horários ISO com fuso horário, `2026-10-01T09:00+03:00`. Para `search`, `messages` e `export` eles selecionam a hora da observação. As páginas comportam até 50 registros: siga `next_offset` (`--offset`) para busca por classificação e `next_before` (`--before`) em outros lugares.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Cada resultado de mensagem contém `untrusted_content: true`os IDs do espaço de trabalho, do chat e da mensagem, a sequência do diário, o hash do registro salvo e um link para o painel. Edições, notificações de exclusão e `missing_on_recheck` são registros separados. A ausência de um registro não prova que um evento nunca tenha ocorrido.
 

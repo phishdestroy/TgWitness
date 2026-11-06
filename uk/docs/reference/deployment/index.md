@@ -60,6 +60,8 @@ python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 878
 | `TgWitness-Demo.cmd` | Запустіть синтетичну демонстрацію за посиланням `data\demo` |
 | `TgWitness-Check.cmd` | Виконайте перевірку готовності, не запускаючи програму |
 
+The pinned Russian morphology dictionary and PDF color profiles are bundled for offline use. Packaging permits only their known file paths inside dependency `data` directories; unexpected files in those directories fail the build.
+
 Розпакуйте весь архів у папку з правами на запис, наприклад `Documents\TgWitness`; не запускайте програму зсередини ZIP-архіву або з папки «Program Files». Середовище виконання використовує ізольований шлях до модулів, тому інші інсталяції Python та `PYTHONPATH` не впливають на нього. Дані зберігаються у папці `data` цього пакету. Для оновлення зупиніть TgWitness, розпакуйте нову версію в нову папку та скопіюйте туди папку `data`.
 
 Створіть його самостійно на 64-бітній Windows із Python 3.12:
@@ -117,7 +119,7 @@ docker compose logs witness                     # witness key fingerprint
 Скопіюйте `deploy/env.example` у `.env`. Встановіть `TGWITNESS_IMAGE` на опубліковану версію, використовуючи шлях до репозиторію **з малими літерами**, наприклад:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.9.1
 TGWITNESS_PORT=8787
 ```
 

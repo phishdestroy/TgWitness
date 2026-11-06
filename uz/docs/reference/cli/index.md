@@ -50,7 +50,7 @@ Masofaviy panel uchun HTTPS talab etiladi; oddiy HTTP faqat uchun qabul qilinadi
 
 Sanalar `2026-10-01` (UTC yarim kecha) yoki vaqt zonasini hisobga olgan ISO vaqtlari, `2026-10-01T09:00+03:00`. Uchun `search`, `messages` va `export` ular kuzatuv vaqtini tanlaydilar. Sahifalar 50 tagacha yozuvni saqlaydi: kuzatib boring `next_offset` (`--offset`) reytingli qidiruv va `next_before` (`--before`) boshqa joylarda.
 
-Ranked search stops at 1，000 results．The final page may be shorter than `--limit`；narrow the query，chat or period when more matching observations exist．
+Ranked search stops at 1,000 results. The final page may be shorter than `--limit`; narrow the query, chat or period when more matching observations exist.
 
 Har bir xabar natijasi quyidagilarni o'z ichiga oladi `untrusted_content: true`, ish maydoni, suhbat va xabar IDlari, jurnal ketma-ketligi, saqlangan yozuvning xeshini va panel havolasini o'z ichiga oladi. Tahrirlar, o'chirish bildirishnomalari va `missing_on_recheck` alohida yozuvlardir. Yozuvning yo'qligi voqeaning hech qachon sodir bo'lmagani isbotlanmaydi.
 
