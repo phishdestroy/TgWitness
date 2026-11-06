@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--site", type=Path, default=ROOT / "dist" / "installer-site")
     parser.add_argument("--install", action="store_true", help="Install with real uv/Python/packages; map only the unpublished site's downloads locally")
     parser.add_argument("--service", choices=["local", "quick"], help="Linux root: also exercise an isolated systemd panel")
+    parser.add_argument("--public", action="store_true", help="Use real HTTPS for the authenticated public installer snapshot")
     args = parser.parse_args()
     site = args.site.resolve()
     manifest = json.loads((site / "manifest.json").read_text())
@@ -111,14 +112,15 @@ with open(os.environ['TGW_CHECK_DOWNLOADS'], 'a') as stream:
         assert rejected.returncode != 0 and "Release signature rejected" in rejected.stderr, "A corrupt signature was not rejected"
         assert not list((rejected_app / "versions").glob("*/.ready")), "A rejected package was activated"
         print("Altered release signature: refused before package installation", flush=True)
-        subprocess.run([bash, script, "--no-start"], env=env, check=True, timeout=900)
+        install_env = dict(env, PATH=os.environ["PATH"]) if args.public else env
+        subprocess.run([bash, script, "--no-start"], env=install_env, check=True, timeout=900)
         launcher = app / "bin" / "tgwitness"
         original = launcher.read_bytes()
         (app / "data").mkdir(exist_ok=True)
         sentinel = app / "data" / "keep-this-record"
         sentinel.write_text("unchanged\n")
         reads = (scratch / "downloads").read_bytes()
-        subprocess.run([bash, script, "--no-start"], env=env, check=True, timeout=120)
+        subprocess.run([bash, script, "--no-start"], env=install_env, check=True, timeout=120)
         assert launcher.read_bytes() == original and sentinel.read_text() == "unchanged\n"
         assert (scratch / "downloads").read_bytes() == reads, "Repeated setup downloaded files again"
         assert not (app / "data" / "live").exists(), "Installer initialized live user data"
