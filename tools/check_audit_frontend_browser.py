@@ -602,6 +602,33 @@ def password_actions(page, child):
     page.unroute('**/api/account/password', capture)
 
 
+def session_action_owners(page, child):
+    ended = []
+    def listing(route):
+        route.fulfill(json={'sessions': [{'hash': '22', 'device_model': 'Synthetic phone',
+            'app_name': 'Telegram', 'app_version': 'test', 'country': '',
+            'created_at': '2026-11-05', 'current': False}]})
+    def terminate(route):
+        ended.append(route.request.post_data_json)
+        route.fulfill(json={'ended': True})
+    page.route('**/api/account/sessions', listing)
+    page.route('**/api/account/sessions/end', terminate)
+    switch(page, 'default', 'connection')
+    page.locator('#account-sessions-show').click()
+    page.locator('#account-sessions button').click()
+    switch(page, child, 'connection')
+    accept(page)
+    assert not ended, 'An old confirmation ended a Telegram session after a workspace switch'
+    switch(page, 'default', 'connection')
+    page.locator('#account-sessions-show').click()
+    page.locator('#account-sessions button').click()
+    accept(page)
+    expect(page.locator('#toast')).to_contain_text('Session ended.')
+    assert ended == [{'hash': '22'}]
+    page.unroute('**/api/account/sessions', listing)
+    page.unroute('**/api/account/sessions/end', terminate)
+
+
 def main():
     with tempfile.TemporaryDirectory(prefix='audit-frontend-check-') as folder, RunningApp(Path(folder)) as server, sync_playwright() as p:
         store = server.app.state.store
@@ -629,6 +656,7 @@ def main():
         presentation(page)
         pending_action_owners(page, server, child)
         password_actions(page, child)
+        session_action_owners(page, child)
         group_confirmation_owners(page, server)
         print('ok  pending workspace, session and group confirmations', flush=True)
         assert not errors, errors
