@@ -91,8 +91,8 @@ Arguments and exception text are omitted. Counters begin with the client instanc
 they are not wire-level attempts and do not expose retries inside Telethon.
 The existing event kind and signed export format remain unchanged.
 
-The integrated main branch also supplies `AccountPacer` for history, dialogs and
-admin-log reads, including Takeout-wrapped requests. It starts with a one-second
+`AccountPacer` covers history, dialogs, admin logs, message-ID rechecks and
+participant pages, including Takeout-wrapped requests. It starts with a one-second
 interval, decreases it after twenty successful bulk calls to a floor of half a
 second, and increases it after FloodWait, capped at ten seconds. These are local
 policy values, not Telegram quotas. The learned delay is persisted per account;
@@ -101,10 +101,19 @@ authoritative, including FLOOD_PREMIUM_WAIT.
 
 The earlier source probe concerned the pre-integration branch: its serial queue
 alone did not add pacing. The current bulk pacer still does not cover unknown
-username discovery or participant enumeration, and does not give ordinary and
+username discovery, and does not give ordinary and
 Takeout history separate budgets. The existing profile guard rejects adding the same Telegram account
 to another workspace; that guard was also exercised and must not be duplicated.
 It does not coordinate independent installations on separate servers.
+
+A 50-source benchmark pilot exposed a 31-second `channels.getMessages` FloodWait
+while rechecking missing IDs. Those calls previously shared the account's server
+cooldown but bypassed the local bulk interval. ID rechecks and participant pages
+now use that interval too. This prevents that unpaced burst; it does not establish
+a flood-free quota. The completed qualification retained 690 backoff events across
+pilots and interrupted runs, with requested waits of 3–31 seconds. Both history
+and ID rechecks triggered waits. These observations do not establish a universal
+quota; the qualification identifies the source revisions and counter coverage.
 
 The next pacing change should:
 
