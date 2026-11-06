@@ -42,6 +42,7 @@
 <details><summary><span data-en="File types, size limits and overrides" data-ru="Типы файлов，пределы размера и отдельные правила"></span></summary><div id="media-rules"></div></details>
 <label><input id="include-avatars" type="checkbox"> <span data-en="Download participant avatars" data-ru="Скачивать аватары участников"></span></label>
 <label><input id="messages-first" type="checkbox" checked> <span data-en="Read message history before processing attachments" data-ru="Сначала читать историю，затем обрабатывать вложения"></span></label>
+<label><input id="preserve-ephemeral-media" type="checkbox" checked> <span data-en="Include self-destructing media from excluded types．Size limits still apply．" data-ru="Сохранять исчезающие вложения исключённых типов，включая исключённые типы．Лимит размера сохраняется．"></span></label>
 <p class="hint"><span data-en="Hashes identify byte ranges of the selected photo or file. They let you compare an existing file later; they do not recreate a missing file. Avatars are a separate download choice." data-ru="Хеши относятся к диапазонам байтов выбранного фото или файла，с ними можно сравнить имеющийся файл，но восстановить отсутствующий файл нельзя．Аватары скачиваются по отдельному выбору．"></span></p>
 </fieldset>
 <button class="secondary" id="preflight" disabled data-en="Check settings and size" data-ru="Проверить настройки и размер"></button><p id="preflight-result" class="hint" role="status" aria-live="polite"></p>

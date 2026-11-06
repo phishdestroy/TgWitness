@@ -124,7 +124,7 @@ function selection() {
   }
   return {chat_id: Number($("chats").value), capture: {download_media: true, media_action: $("media-action").value,
     oversized_media: $("oversized-media").value, include_avatars: $("include-avatars").checked,
-    messages_first: $("messages-first").checked, types}};
+    messages_first: $("messages-first").checked, preserve_ephemeral_media: $("preserve-ephemeral-media").checked, types}};
 }
 let assessedSelection = null, assessmentResult = null;
 function describeMode() {
@@ -157,6 +157,8 @@ function clearAssessment() {
   $("include-avatars").parentElement.hidden = !journal;
   if (!journal) $("include-avatars").checked = false;
   $("messages-first").disabled = !journal;
+  $("preserve-ephemeral-media").disabled = !journal;
+  $("preserve-ephemeral-media").parentElement.hidden = !journal;
   if (!journal) $("messages-first").checked = true;
   $("chat-picker").hidden = !journal && $("export-scope").value === "account";
   $("chats").multiple = !journal; $("chats").size = journal ? 1 : 6;

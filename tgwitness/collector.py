@@ -14,7 +14,7 @@ from collections import deque
 
 from telethon import __version__ as telethon_version, events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
-from telethon.errors import FileReferenceExpiredError
+from telethon.errors import FileReferenceExpiredError, TakeoutInvalidError
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                              FrozenMethodInvalidError, SessionExpiredError, SessionRevokedError,
                              UserDeactivatedBanError, UserDeactivatedError)
@@ -40,8 +40,10 @@ from .evidence import retain_checkpoint
 from .netclient import RouteError, proxy_address
 from .network import NetworkConfig, NoRoute, RoutePolicy, saved_route
 from .proxy_catalog import NoProxyAvailable, ProxyPool, PublicCatalog
-from .monitoring import capture_settings, media_kind, monitoring_settings, duration_allowed, media_action
+from .monitoring import (capture_settings, media_kind, monitoring_settings, duration_allowed, media_action,
+                         effective_media_rule)
 from . import file_hashes
+from . import ephemeral
 from .scope import allowed, folder_rule, in_folder, kind_of, recheck_settings, scope_settings
 from .verify import fingerprint
 
@@ -333,6 +335,7 @@ class Collector:
         self.media_wakeup = asyncio.Event()
         self.media_worker = None
         self.urgent_media_worker = None
+        self.ephemeral_media_worker = None
         self.last_heartbeat = None
         self.source_status = {}
         self.last_update_at = None
@@ -665,6 +668,8 @@ class Collector:
         client.rpc_backoff_getter = lambda: self.store.get_setting("rpc_backoff_until", 0)
         client.rpc_backoff_setter = lambda until: self.store.set_setting("rpc_backoff_until", max(
             until, self.store.get_setting("rpc_backoff_until", 0)))
+        from .rpc_pacing import AccountPacer
+        client.bulk_pacer = AccountPacer(self.store)
         request = getattr(client, "_init_request", None)
         if isinstance(request, functions.InitConnectionRequest):
             request.lang_pack = device["lang_pack"]
@@ -1663,7 +1668,8 @@ class Collector:
             self.observation_starting = False
 
     async def start_observation(self):
-        if self.watchdog or self.media_worker or self.urgent_media_worker or self.reconciler or self.intake_worker:
+        if (self.watchdog or self.media_worker or self.urgent_media_worker or self.ephemeral_media_worker
+                or self.reconciler or self.intake_worker):
             await self.stop()
         if scope_settings(self.store)["mode"] == "selected" and not self.store.targets(True):
             raise ValueError("Select at least one group or channel first.")
@@ -1705,6 +1711,8 @@ class Collector:
         self.media_worker = asyncio.create_task(self.supervise(lambda: self.download_worker("bulk"), "media worker"))
         self.urgent_media_worker = asyncio.create_task(
             self.supervise(lambda: self.download_worker("urgent"), "urgent media worker"))
+        self.ephemeral_media_worker = asyncio.create_task(
+            self.supervise(lambda: self.download_worker("ephemeral"), "self-destructing media worker"))
         self.reconciler = asyncio.create_task(self.supervise(self.recheck_loop, "recheck"))
         self.intake_worker = asyncio.create_task(self.supervise(self.intake_loop, "new chat intake"))
         catch_up = getattr(self.client, "catch_up", None)
@@ -1749,7 +1757,8 @@ class Collector:
                 await self.client.disconnect()
 
     async def cancel_workers(self):
-        tasks = (self.watchdog, self.media_worker, self.urgent_media_worker, self.reconciler, self.intake_worker)
+        tasks = (self.watchdog, self.media_worker, self.urgent_media_worker, self.ephemeral_media_worker,
+                 self.reconciler, self.intake_worker)
         tasks = tuple(task for task in tasks if task and task is not asyncio.current_task())
         for task in tasks:
             task.cancel()
@@ -1768,6 +1777,7 @@ class Collector:
         self.buffered, self.buffering = [], False
         await self.cancel_workers()
         self.watchdog = self.media_worker = self.urgent_media_worker = self.reconciler = self.intake_worker = None
+        self.ephemeral_media_worker = None
         await self.avatar_history.close()
         if not shutdown:
             self.store.set_setting("resume", False)
@@ -1884,7 +1894,8 @@ class Collector:
             if self.client and not (self.export_busy() or self.export_claim):
                 await self.client.disconnect()
 
-    async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None):
+    async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
+                              acquisition=None):
         started = time.perf_counter()
         payload = describe_message(message)
         payload["source"] = source or ("history_snapshot" if kind == "message.snapshot" else "live_update")
@@ -1892,6 +1903,8 @@ class Collector:
         payload["run_id"] = self.run_id
         if history_run_id is not None:
             payload["history_run_id"] = history_run_id
+        if acquisition is not None:
+            payload["acquisition"] = acquisition
         if update is not None:
             payload["transport_update"] = plain(update)
 
@@ -1912,13 +1925,18 @@ class Collector:
                                "inline (callback) button presses are not visible to another session"}
         job = None
         media_skip = None
+        ephemeral_media = ephemeral.describe(getattr(message, "media", None))
+        if ephemeral_media:
+            payload["ephemeral_media"] = ephemeral_media
         if message.media:
             settings = capture_settings(self.store)
             account = self.store.get_setting("account", {}) or {}
             media_type = media_kind(message) if message.file else None
-            rule = settings["types"].get(media_type) if media_type else None
-            if not settings["download_media"]:
-                if settings["record_disabled_media"]:
+            rule = effective_media_rule(settings, media_type, ephemeral_media) if media_type else None
+            if ephemeral_media and ephemeral_media["availability"] == "unavailable_at_observation":
+                media_skip = "ephemeral_attachment_unavailable_at_observation"
+            elif not settings["download_media"]:
+                if settings["record_disabled_media"] or ephemeral_media:
                     media_skip = "media download disabled"
             elif not message.file:
                 media_skip = "metadata-only media type; no downloadable file"
@@ -1940,6 +1958,8 @@ class Collector:
                     "priority": job["priority"], "estimated_bytes": size,
                     "action": media_action(settings, rule, size),
                     "policy": "original observed descriptor; never substitute a newer message"}
+                if ephemeral_media:
+                    payload["media_capture"]["ephemeral_media"] = ephemeral_media
         event = self.store.append(kind, payload, chat_id, message.id,
                                   message.sender_id if kind in ("message.new", "message.recovered") else None,
                                   date_string(getattr(message, "edit_date", None) or message.date),
@@ -1954,7 +1974,9 @@ class Collector:
                 "attribution": "service-message sender; meaning depends on the action type"
             }, chat_id, message.id, message.sender_id, date_string(message.date))
         if media_skip:
-            self.store.append("media.skipped", {"message_event": event["seq"], "reason": media_skip},
+            status = "unavailable" if media_skip == "ephemeral_attachment_unavailable_at_observation" else "not_saved"
+            self.store.append("media.skipped", {"message_event": event["seq"], "reason": media_skip,
+                **(ephemeral.outcome(ephemeral_media, status) if ephemeral_media else {})},
                               chat_id, message.id)
         if job:
             self.media_wakeup.set()
@@ -2714,23 +2736,24 @@ class Collector:
             temporary.replace(path)
             return path
 
-    async def refresh_media_reference(self, message, job):
+    async def refresh_media_reference(self, message, job, client=None):
         identity = attachment_identity(message)
         if identity is None:
             raise ValueError("original_attachment_has_no_stable_id")
-        fresh = await asyncio.wait_for(self.client.get_messages(job["chat_id"], ids=job["message_id"]), 30)
-        if fresh is None or not getattr(fresh, "media", None):
+        fresh = await asyncio.wait_for((client or self.client).get_messages(job["chat_id"], ids=job["message_id"]), 30)
+        if fresh is None or not getattr(fresh, "media", None) or attachment_identity(fresh) is None:
             raise ValueError("original_attachment_no_longer_available")
         if (attachment_identity(fresh) != identity or fresh.id != job["message_id"]
                 or fresh.chat_id != job["chat_id"]):
             raise ValueError("refreshed_attachment_differs_from_signed_observation")
         return downloadable_media(fresh)
 
-    async def download_worker(self, lane="all", *, owner=None, history_run=None):
+    async def download_worker(self, lane="all", *, owner=None, history_run=None, producer_done=None,
+                              client_for_job=None):
         media_root = self.store.root / "media"
         media_root.mkdir(exist_ok=True)
         while self.running or owner and self.export_claim == owner:
-            if not owner and capture_settings(self.store)["messages_first"] and self.history.status()["phase"] in ("none", "running", "paused"):
+            if lane != "ephemeral" and not owner and capture_settings(self.store)["messages_first"] and self.history.status()["phase"] in ("none", "running", "paused"):
                 await asyncio.sleep(.2)
                 continue
             if not capture_settings(self.store)["download_media"]:
@@ -2758,15 +2781,25 @@ class Collector:
                 self.storage_low = False
                 self.store.append("storage.ok", {"free_bytes": free, "media_jobs": self.store.media_stats()})
             account = self.store.get_setting("account", {}) or {}
-            limits = {"max_priority": 1} if lane == "urgent" else {"min_priority": 2} if lane == "bulk" else {}
+            limits = ({"max_priority": 0} if lane == "ephemeral" else
+                      {"min_priority": 1, "max_priority": 1} if lane == "urgent" else
+                      {"min_priority": 2} if lane == "bulk" else {})
             capture = capture_settings(self.store)
             job = self.store.claim_media(account.get("id", 0), history_run=history_run,
+                                         allow_takeout=client_for_job is not None,
                                          **limits) if capture["download_media"] else None
             if not job:
                 if owner:
-                    retry_at = self.store.next_history_media_attempt(account.get("id", 0), history_run)
+                    retry_at = self.store.next_history_media_attempt(account.get("id", 0), history_run, **limits)
                     if retry_at is not None:
                         await asyncio.sleep(max(.05, min(1, retry_at - time.time())))
+                        continue
+                    if producer_done is not None and not producer_done.is_set():
+                        self.media_wakeup.clear()
+                        try:
+                            await asyncio.wait_for(self.media_wakeup.wait(), 1)
+                        except TimeoutError:
+                            pass
                         continue
                     return
                 self.media_wakeup.clear()
@@ -2779,6 +2812,8 @@ class Collector:
             client = self.client
             try:
                 original = self.store.events(before=job["message_event"] + 1, limit=1)[0]
+                if client_for_job is not None:
+                    client = client_for_job(original)
                 policy = original["payload"].get("media_capture", {})
                 if (hashlib.sha256(job["descriptor"]).hexdigest() != policy.get("descriptor_sha256")
                         or job["max_bytes"] != policy.get("max_bytes")
@@ -2789,10 +2824,17 @@ class Collector:
                     raise ValueError("queue_descriptor_differs_from_signed_observation")
                 with BinaryReader(job["descriptor"]) as reader:
                     message = reader.tgread_object()
+                ephemeral_media = ephemeral.describe(message.media)
                 size = getattr(message.file, "size", None) if message.file else None
                 kind = policy.get("media_type") or media_kind(message)
-                rule, limit = capture["types"][kind], capture["types"][kind]["max_mb"] * 1024**2
+                rule = effective_media_rule(capture, kind, ephemeral_media)
+                limit = rule["max_mb"] * 1024**2
                 action = policy.get("action", "download")
+                if action == "exclude":
+                    self.store.finish_media(job, "skipped", {
+                        "reason": "above the size limit of the attachment settings"
+                        if size is not None and size > job["max_bytes"] else "excluded by the observed media policy"})
+                    continue
                 current_action = media_action(capture, rule, size)
                 if (not rule["enabled"] or not duration_allowed(message, rule) or current_action == "exclude"
                         or (action == "download" and size is not None and limit < size <= job["max_bytes"])):
@@ -2801,14 +2843,11 @@ class Collector:
                         else "attachment type not collected by policy: " + kind,
                         "meaning": "the attachment settings changed after this file was queued"})
                     continue
-                if action == "exclude":
-                    self.store.finish_media(job, "skipped", {"reason": "excluded by the observed media policy"})
-                    continue
                 if action == "download" and current_action != "download":
                     self.store.finish_media(job, "skipped", {"reason": "media action changed after this attachment was queued"})
                     continue
                 if action == "hashes_only":
-                    hashes = await self.attachment_hashes(message, job=job)
+                    hashes = await self.attachment_hashes(message, job=job, client=client)
                     self.store.finish_media(job, "hashed" if hashes["status"] == "complete" else "failed", {
                         "server_hashes": hashes, "original_name": getattr(message.file, "name", None),
                         "reason": "hashes_only" if hashes["status"] == "complete" else "incomplete_server_hashes",
@@ -2836,7 +2875,7 @@ class Collector:
                 try:
                     result = await download(media)
                 except FileReferenceExpiredError:
-                    media = await self.refresh_media_reference(message, job)
+                    media = await self.refresh_media_reference(message, job, client=client)
                     refreshed = True
                     result = await download(media)
                 if result is None:
@@ -2864,7 +2903,7 @@ class Collector:
                 self.store.finish_media(job, "retry", {"reason": "collector stopped; durable job retained"})
                 raise
             except AUTHORIZATION_ERRORS as exc:
-                self.handle_authorization_error(exc, "media download", client=client)
+                self.handle_authorization_error(exc, "media download", client=getattr(client, "_export_client", client))
                 self.store.finish_media(job, "retry", {"error_type": type(exc).__name__,
                     "reason": "Telegram authorization expired; durable job retained"})
                 return
@@ -2873,6 +2912,9 @@ class Collector:
                 self.store.set_setting("rpc_backoff_until", until)
                 self.store.finish_media(job, "retry", {"error_type": type(exc).__name__,
                                                       "retry_after_seconds": exc.seconds}, delay=exc.seconds)
+            except TakeoutInvalidError:
+                self.store.finish_media(job, "retry", {"reason": "Takeout expired; durable job retained"})
+                raise
             except Exception as exc:
                 retry = (isinstance(exc, (OSError, TimeoutError, ConnectionError))
                          and job["attempts"] < self.param("media_attempts"))
@@ -2884,7 +2926,8 @@ class Collector:
             finally:
                 temp.unlink(missing_ok=True)
 
-    async def attachment_hashes(self, message, *, job=None):
+    async def attachment_hashes(self, message, *, job=None, client=None):
+        client = client or self.client
         # Bound this cache independently of the number of messages in a chat.
         if not hasattr(self, "_file_hash_cache"):
             self._file_hash_cache, self._file_hash_cache_bytes = {}, 0
@@ -2896,13 +2939,13 @@ class Collector:
             if key in self._file_hash_cache:
                 return self._file_hash_cache[key][0]
             try:
-                result = await asyncio.wait_for(file_hashes.collect(self.client, media), self.param("media_timeout_seconds"))
+                result = await asyncio.wait_for(file_hashes.collect(client, media), self.param("media_timeout_seconds"))
             except FileReferenceExpiredError:
                 job = job or {"chat_id": message.chat_id, "message_id": message.id}
-                media = await self.refresh_media_reference(message, job)
+                media = await self.refresh_media_reference(message, job, client=client)
                 if file_hashes.representation(media) != identity:
                     raise ValueError("refreshed_hash_representation_changed") from None
-                result = await asyncio.wait_for(file_hashes.collect(self.client, media), self.param("media_timeout_seconds"))
+                result = await asyncio.wait_for(file_hashes.collect(client, media), self.param("media_timeout_seconds"))
             size = len(canonical(result))
             if result["status"] == "complete" and size <= 8 * 1024**2:
                 while self._file_hash_cache and (len(self._file_hash_cache) >= 512 or self._file_hash_cache_bytes + size > 8 * 1024**2):
