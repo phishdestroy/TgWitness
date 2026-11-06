@@ -165,7 +165,9 @@ account asks for the usual confirmation.
     removals require a complete current list，and explicit empty values record clearing．
   - **Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots
     off), the pause between sources, which parts are read, and whether checks that found no
-    change are recorded. A FloodWait pauses snapshots and they resume afterwards.
+    change are recorded. `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` stop the remaining
+    snapshot requests, preserve any longer account-wide deadline, and leave the
+    interrupted chat eligible for another attempt after that wait.
 - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or
   link a bot answers such a press with, and invite links used in another app do not reach
   TgWitness. What the bot sends or edits afterwards is recorded.
