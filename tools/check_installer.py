@@ -112,15 +112,18 @@ with open(os.environ['TGW_CHECK_DOWNLOADS'], 'a') as stream:
         assert rejected.returncode != 0 and "Release signature rejected" in rejected.stderr, "A corrupt signature was not rejected"
         assert not list((rejected_app / "versions").glob("*/.ready")), "A rejected package was activated"
         print("Altered release signature: refused before package installation", flush=True)
-        install_env = dict(env, PATH=os.environ["PATH"]) if args.public else env
-        subprocess.run([bash, script, "--no-start"], env=install_env, check=True, timeout=900)
+        install_env = dict(env, PATH=os.environ["PATH"], TGWITNESS_NO_SETUP="1") if args.public else env
+        command = ([bash, "-o", "pipefail", "-c",
+                    "curl -fsSL " + shlex.quote(manifest["base_url"] + "/install.sh") + " | bash"]
+                   if args.public else [bash, script, "--no-start"])
+        subprocess.run(command, env=install_env, check=True, timeout=900)
         launcher = app / "bin" / "tgwitness"
         original = launcher.read_bytes()
         (app / "data").mkdir(exist_ok=True)
         sentinel = app / "data" / "keep-this-record"
         sentinel.write_text("unchanged\n")
         reads = (scratch / "downloads").read_bytes()
-        subprocess.run([bash, script, "--no-start"], env=install_env, check=True, timeout=120)
+        subprocess.run(command, env=install_env, check=True, timeout=120)
         assert launcher.read_bytes() == original and sentinel.read_text() == "unchanged\n"
         assert (scratch / "downloads").read_bytes() == reads, "Repeated setup downloaded files again"
         assert not (app / "data" / "live").exists(), "Installer initialized live user data"

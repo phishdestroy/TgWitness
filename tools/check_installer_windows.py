@@ -109,7 +109,9 @@ function Invoke-WebRequest {
 '''
         wrapper.write_text(shim + "\n& " + quoted(script) + " -NoStart\n", encoding="utf-8")
         env.update(TGW_CHECK_ORIGIN=manifest["base_url"], TGW_CHECK_SITE=str(site))
-        command = [powershell, "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(wrapper)]
+        command = [powershell, "-NoProfile", "-ExecutionPolicy", "Bypass"]
+        command += (["-Command", "irm " + quoted(manifest["base_url"] + "/install.ps1") + " | iex"]
+                    if args.public else ["-File", str(wrapper)])
         subprocess.run(command, env=env, check=True, timeout=900)
         launcher = app / "bin/tgwitness.cmd"
         original = launcher.read_bytes()

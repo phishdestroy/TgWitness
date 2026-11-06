@@ -178,7 +178,8 @@ gh workflow run installer-acceptance.yml --ref main -f published=true
 
 This authenticates the public manifest and immutable artifacts against the checked
 repository key and requires the selected main commit. Installation then uses real
-HTTPS package downloads, without the unpublished-artifact shim. A concurrent
+HTTPS package downloads through the published `curl | bash` and `irm | iex`
+commands, with `TGWITNESS_NO_SETUP=1` to keep setup controlled by the test. A concurrent
 publication or a main commit not published yet is reported as a mismatch, never
 silently tested as if it were the requested build. Test installations contain no
 Telegram accounts. The same Windows check can be run locally after downloading:
