@@ -9,6 +9,7 @@ import secrets
 import signal
 import time
 import zipfile
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -18,6 +19,8 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey,
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 from . import __version__
+from . import continuity
+from .anchoring import DEFAULT_OTS, ots_stamp, upgrade_pending_ots
 from .evidence import producer
 from .netclient import HTTPError, RouteError, request
 from .network import NetworkConfig
@@ -26,11 +29,16 @@ from .store import Store, canonical, utcnow
 from .verify import fingerprint, is_format, post_statement, post_token, verify_events, verify_capture
 from .verify import verify_continuity
 from .verify import DRAND_CHAIN, DRAND_RELAYS, DRAND_GENESIS, DRAND_PERIOD, drand_beacon, witness_challenge
+from .verify import daily_payload
 
 DEFAULT_INTERVAL = 10
 TIMEOUT = 30
 TITLE = "TgWitness witness"
 POST_POLICIES = ("all", "changes", "problems")
+
+
+def utc_date():
+    return datetime.now(timezone.utc).date()
 
 TEXTS = {"ok": "journal head", "key_changed": "COLLECTOR KEY CHANGED", "rollback": "JOURNAL GOT SHORTER",
          "fork": "SAME LENGTH, DIFFERENT HEAD", "invalid": "ANSWER FAILED VERIFICATION",
@@ -334,7 +342,12 @@ class Witness:
         statement = post_statement(event, self.fingerprint)
         token = post_token(statement, self.key.sign(canonical(statement)))
         payload, words, title = event["payload"], self.texts, self.title + " #" + str(event["seq"])
-        if event["kind"] == "witness.no_response":
+        if event["kind"] == "witness.daily":
+            lines = [title + " · daily seal " + payload["date"],
+                     "Witness records " + str(payload["from_seq"]) + ".." + str(payload["to_seq"]),
+                     "Merkle root " + payload["root"], "Checks " + json.dumps(payload["checks"], sort_keys=True),
+                     "External timestamp verification is separate."]
+        elif event["kind"] == "witness.no_response":
             lines = [title + ": " + words["no_response"], event["observed_at"] + " · " + str(payload.get("error"))]
         elif payload.get("status") == "invalid":
             lines = [title + ": " + words["invalid"], event["observed_at"] + " · " + str(payload.get("error"))]
@@ -390,6 +403,35 @@ class Witness:
                                                           "error": describe(exc)})
         return event
 
+    async def daily(self):
+        date = (utc_date() - timedelta(days=1)).isoformat()
+        # The journal, rather than a mutable setting, is authoritative after a crash.
+        with self.store.snapshot() as snapshot:
+            events = list(snapshot.events())
+        existing = [e for e in events if e["kind"] == "witness.daily" and e["payload"].get("date") == date]
+        if existing:
+            event = existing[-1]
+            if any(e["kind"] == "witness.anchored" and e["payload"].get("record") == event["seq"] for e in events):
+                self.store.set_setting("last_daily_date", date)
+                return event
+        else:
+            payload = daily_payload(events, date)
+            payload["root"] = continuity.Tree(self.store.db).root(0, payload["to_seq"]).hex()
+            event = self.store.append("witness.daily", payload)
+        folder, name = self.store.root / "anchors", "daily-" + date
+        folder.mkdir(exist_ok=True, mode=0o700)
+        private_write(folder / (name + ".json"), canonical(event))
+        results = await ots_stamp(hashlib.sha256(canonical(event)).digest(), DEFAULT_OTS, folder, name, self.network)
+        self.store.append("witness.anchored", {"record": event["seq"], "results": results})
+        self.store.set_setting("last_daily_date", date)
+        if self.send:
+            try:
+                message_id = await asyncio.wait_for(self.send(self.post_text(event)), self.timeout + 5)
+                self.store.append("witness.posted", {"record": event["seq"], "channel": self.channel, "message_id": message_id})
+            except Exception as exc:
+                self.store.append("witness.post_failed", {"record": event["seq"], "error": describe(exc)})
+        return event
+
     async def run(self, ticks=None):
         self.store.append("witness.started", {
             "collector": self.host, "channel": self.channel, "interval_minutes": self.interval,
@@ -402,6 +444,13 @@ class Witness:
             while ticks is None or done < ticks:
                 started = time.monotonic()
                 await self.tick()
+                if self.store.get_setting("last_daily_date") != (utc_date() - timedelta(days=1)).isoformat():
+                    await self.daily()
+                last_upgrade = self.store.get_setting("witness_ots_upgrade_at", 0)
+                if time.time() - last_upgrade >= 3600:
+                    await upgrade_pending_ots(self.store, self.network, {"ots_calendars": DEFAULT_OTS},
+                                              folder=self.store.root / "anchors")
+                    self.store.set_setting("witness_ots_upgrade_at", time.time())
                 done += 1
                 if ticks is None or done < ticks:
                     await asyncio.sleep(max(1.0, self.interval * 60 - (time.monotonic() - started)))
@@ -433,6 +482,9 @@ def export(root, out):
               "independent clock. A witness shows what the collector reported at those times, not message truth.\n"
               "Produced by TgWitness (PhishDestroy, https://phishdestroy.io).\n").encode()
     files = {"events.jsonl": data, "verify.py": verifier, "README.txt": readme}
+    for path in sorted((root / "anchors").glob("daily-*")):
+        if path.is_file() and not path.is_symlink() and path.suffix in (".ots", ".json"):
+            files["anchors/" + path.name] = path.read_bytes()
     manifest = {"format": "tgwitness-witness-v1", "created_at": utcnow(), "public_key": key.public_key,
                 "fingerprint": result["fingerprint"], "event_count": result["events"], "head_hash": result["head_hash"],
                 "collector_fingerprint": collector, "channel": started[-1]["payload"].get("channel") if started else None,

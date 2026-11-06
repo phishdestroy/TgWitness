@@ -15,7 +15,7 @@ import sys
 import tempfile
 import unicodedata
 import zipfile
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from cryptography import x509
@@ -410,7 +410,7 @@ def timestamp_signature(reply, roots):
             "signer_sha256": signer.fingerprint(hashes.SHA256()).hex()}
 
 
-def ots_summary(proof, digest):
+def ots_summary(proof, digest, *, commitments=False):
     head = OTS_MAGIC + b"\x01\x08"
     if len(digest) != 32 or proof[:len(head)] != head or proof[len(head):len(head) + 32] != digest:
         raise ValueError("The OpenTimestamps proof is not for this checkpoint")
@@ -451,8 +451,9 @@ def ots_summary(proof, digest):
 
     reader = Reader(proof[len(head) + 32:])
     kinds, remaining = set(), 10000
+    bitcoin = []
 
-    def node(message_size, depth=0):
+    def node(message_size, depth=0, message=None):
         nonlocal remaining
         if depth >= 256:
             raise ValueError("OpenTimestamps tree exceeds the depth limit")
@@ -469,11 +470,13 @@ def ots_summary(proof, digest):
                 kind = reader.take(8)
                 payload = Reader(reader.blob(8192))
                 if kind == OTS_BITCOIN:
-                    payload.integer()
+                    height = payload.integer()
                     payload.finish()
                     if message_size != 32:
                         raise ValueError("OpenTimestamps Bitcoin commitment must be 32 bytes")
                     kinds.add("bitcoin-unverified")
+                    if message is not None:
+                        bitcoin.append({"height": height, "merkle_root": message.hex()})
                 elif kind == OTS_PENDING:
                     uri = payload.blob(1000)
                     payload.finish()
@@ -502,14 +505,95 @@ def ots_summary(proof, digest):
                 if operation in operations:
                     raise ValueError("Repeated OpenTimestamps operation")
                 operations.add(operation)
-                node(size, depth + 1)
+                calculated = None
+                if message is not None:
+                    if tag == 0xf0:
+                        calculated = message + argument
+                    elif tag == 0xf1:
+                        calculated = argument + message
+                    elif tag == 0xf2:
+                        calculated = message[::-1]
+                    elif tag == 0xf3:
+                        calculated = message.hex().encode("ascii")
+                    elif tag in (0x02, 0x03, 0x08):
+                        try:
+                            calculated = hashlib.new({0x02: "sha1", 0x03: "ripemd160", 0x08: "sha256"}[tag], message).digest()
+                        except ValueError:
+                            pass  # Unsupported hash never produces a verified commitment.
+                node(size, depth + 1, calculated)
             if not more:
                 return
 
-    node(32)
+    node(32, message=digest if commitments else None)
     reader.finish()
     status = next(kind for kind in ("bitcoin-unverified", "pending", "unknown") if kind in kinds)
-    return {"status": status, "verification": "structure only; run ots verify"}
+    return {"status": status, "verification": "structure only; run ots verify",
+            **({"commitments": bitcoin} if commitments else {})}
+
+
+BITCOIN_SOURCES = ("https://blockstream.info/api", "https://mempool.space/api")
+
+
+def bitcoin_fetcher():
+    """TLS explorer consensus, explicitly not independent Bitcoin chain validation."""
+    import urllib.request
+    cache = {}
+
+    def get(url):
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "TgWitness verify"}), timeout=15) as reply:
+            body = reply.read(1025)
+        if len(body) > 1024:
+            raise ValueError("Excessive Bitcoin header response")
+        return body.decode("ascii").strip()
+
+    def fetch(height):
+        if height in cache:
+            return cache[height]
+        found = []
+        for source in BITCOIN_SOURCES:
+            try:
+                tip = int(get(source + "/blocks/tip/height"))
+                if tip - height + 1 < 6:
+                    return None
+                block_hash = get(source + "/block-height/" + str(height))
+                hash_bytes(block_hash)
+                header = bytes.fromhex(get(source + "/block/" + block_hash + "/header"))
+                if len(header) != 80 or hashlib.sha256(hashlib.sha256(header).digest()).digest()[::-1].hex() != block_hash:
+                    raise ValueError("Bitcoin header hash mismatch")
+                bits = int.from_bytes(header[72:76], "little")
+                exponent, mantissa = bits >> 24, bits & 0x7fffff
+                if bits & 0x800000 or not 3 <= exponent <= 29 or not mantissa:
+                    raise ValueError("Invalid Bitcoin proof-of-work target")
+                target = mantissa << (8 * (exponent - 3))
+                if target > 0xffff << 208 or int(block_hash, 16) > target:
+                    raise ValueError("Invalid Bitcoin header proof of work")
+                found.append(header)
+            except (OSError, UnicodeError):
+                return None
+        if len(set(found)) != 1:
+            raise ValueError("Independent Bitcoin header sources disagree")
+        cache[height] = found[0]
+        return found[0]
+    return fetch
+
+
+def confirm_ots(proof, digest, fetch=None):
+    summary = ots_summary(proof, digest, commitments=True)
+    fetch = fetch or bitcoin_fetcher()
+    confirmed = []
+    for item in summary.pop("commitments"):
+        header = fetch(item["height"])
+        if header is None:
+            continue
+        if len(header) != 80 or header[36:68].hex() != item["merkle_root"]:
+            raise ValueError("OpenTimestamps commitment differs from the Bitcoin block Merkle root")
+        confirmed.append({"height": item["height"],
+                          "time": datetime.fromtimestamp(int.from_bytes(header[68:72], "little"), timezone.utc).isoformat()})
+    if confirmed:
+        summary.update(status="confirmed", time=min(c["time"] for c in confirmed), blocks=confirmed,
+                       verification="proof evaluated; headers with 6 confirmations agreed by two HTTPS explorers; not full chain validation",
+                       sources=list(BITCOIN_SOURCES))
+    return summary
 
 
 def find_openssl():
@@ -1244,7 +1328,7 @@ def confirm_drand(rounds, relays=DRAND_RELAYS, limit=DRAND_CHECK_LIMIT, fetch=No
             except (OSError, ValueError):
                 continue
             for item, answer in answers:
-                if answer["randomness"] != item["randomness"]:
+                if answer["round"] != item["round"] or answer["randomness"] != item["randomness"]:
                     raise ValueError("drand round " + str(item["round"]) + " at record " + str(item["seq"])
                                      + " differs from " + relay + ": the recorded value is not drand's")
             used.append(relay)
@@ -3223,6 +3307,58 @@ def unb64url(text):
     return base64.urlsafe_b64decode(text + "=" * (-len(text) % 4))
 
 
+class DailyJournal:
+    """One prefix boundary per UTC date; no full journal retained in memory."""
+    def __init__(self):
+        self.tree, self.dates = MerkleFrontier(), {}
+        self.previous, self.last_date = None, None
+
+    def payload(self, date):
+        if not isinstance(date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+            raise ValueError("Invalid daily seal date")
+        datetime.strptime(date, "%Y-%m-%d")
+        if self.last_date is not None and date <= self.last_date:
+            raise ValueError("Repeated or reversed daily seal")
+        before = max((v for k, v in self.dates.items() if k <= date), key=lambda v: v["to_seq"], default=None)
+        boundary = before or {"to_seq": 0, "head_hash": "0" * 64, "root": MERKLE_EMPTY.hex()}
+        day = self.dates.get(date, {})
+        return {"date": date, "from_seq": day.get("from_seq", boundary["to_seq"] + 1),
+                **{k: boundary[k] for k in ("to_seq", "head_hash", "root")},
+                "checks": dict(day.get("checks", {"no_response": 0})),
+                "previous_daily_sha256": self.previous, "drand_round": day.get("drand_round")}
+
+    def add(self, event):
+        moment = parse_time(event["observed_at"])
+        if moment.tzinfo is None:
+            raise ValueError("Witness date has no time zone")
+        date = moment.astimezone(timezone.utc).date().isoformat()
+        if self.last_date is not None and date <= self.last_date:
+            raise ValueError("Witness appended records into an already sealed day")
+        self.tree.append(event["hash"])
+        day = self.dates.setdefault(date, {"from_seq": event["seq"], "checks": {"no_response": 0}})
+        day.update(to_seq=event["seq"], head_hash=event["hash"], root=self.tree.root().hex())
+        kind, payload = event["kind"], event["payload"]
+        if kind in ("witness.anchor", "witness.no_response"):
+            status = payload.get("status", "invalid") if kind == "witness.anchor" else "no_response"
+            if status not in ("ok", "invalid", "key_changed", "rollback", "fork", "no_response"):
+                raise ValueError("Unknown witness check status")
+            day["checks"][status] = day["checks"].get(status, 0) + 1
+            if payload.get("freshness"):
+                day["drand_round"] = payload["freshness"]["drand_round"]
+        elif kind == "witness.daily":
+            if payload["date"] >= date:
+                raise ValueError("Witness sealed an unfinished UTC day")
+            self.previous = hashlib.sha256(canonical(event)).hexdigest()
+            self.last_date = payload["date"]
+
+
+def daily_payload(events, date):
+    journal = DailyJournal()
+    for event in events:
+        journal.add(event)
+    return journal.payload(date)
+
+
 def witness_challenge(freshness):
     if not isinstance(freshness, dict):
         raise ValueError("Invalid witness freshness")
@@ -3247,6 +3383,9 @@ def post_statement(event, witness_fingerprint):
                          counts=payload["capture"]["statement"]["counts"], delta=payload.get("capture_delta"))
     if payload.get("freshness") is not None:
         statement["drand_round"] = payload["freshness"]["drand_round"]
+    if event["kind"] == "witness.daily":
+        statement.update(kind="witness.daily", date=payload["date"], root=payload["root"],
+                         drand_round=payload.get("drand_round"), previous_daily_sha256=payload["previous_daily_sha256"])
     return statement
 
 
@@ -3254,7 +3393,7 @@ def post_token(statement, signature_b64):
     return "TGW1." + b64url(canonical(statement)) + "." + b64url(base64.b64decode(signature_b64))
 
 
-def verify_witness(path, expected_fingerprint=None, check_drand=False):
+def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bitcoin=False):
     with open_archive(path) as archive:
         names = archive.namelist()
         manifest = read_manifest(archive)
@@ -3273,6 +3412,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False):
                 raise ValueError("File hash mismatch: " + name)
         anchors, silent, posted, failures, statements, interval = [], [], {}, [], {}, None
         retained = {}
+        journal, days, seals = DailyJournal(), [], {}
 
         def observed(stream):
             nonlocal interval
@@ -3282,6 +3422,21 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False):
                 event = json.loads(line)
                 yield event
                 payload, kind = event["payload"], event["kind"]
+                if kind == "witness.daily":
+                    expected = journal.payload(payload.get("date"))
+                    if canonical(payload) != canonical(expected):
+                        raise ValueError("Witness daily root, counts, range or previous seal differs from the journal")
+                    checks = payload["checks"]
+                    status = "fail" if any(v for k, v in checks.items() if k not in ("ok", "no_response")) else \
+                        "ok" if checks.get("ok") else "no_response_only"
+                    day = {**payload, "seq": event["seq"], "status": status, "bitcoin": "none", "proofs": []}
+                    seals[event["seq"]] = event
+                    days.append(day)
+                    statements[event["seq"]] = post_statement(event, fp)
+                elif kind == "witness.anchored":
+                    if payload.get("record") not in seals or not isinstance(payload.get("results"), list):
+                        raise ValueError("Witness timestamp record has no preceding daily seal")
+                journal.add(event)
                 if kind == "witness.started":
                     interval = payload.get("interval_minutes")
                 elif kind == "witness.anchor":
@@ -3325,6 +3480,37 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False):
                     failures.append({"record": payload.get("record"), "error": payload.get("error")})
         with archive.open("events.jsonl") as stream:
             result = verify_events(observed(stream), public)
+        proof_files = set()
+        for day in days:
+            event = seals[day["seq"]]
+            digest = hashlib.sha256(canonical(event)).digest()
+            stem = "anchors/daily-" + day["date"]
+            if stem + ".json" in names:
+                proof_files.add(stem + ".json")
+                if read_member(archive, stem + ".json") != canonical(event):
+                    raise ValueError("Retained witness daily seal differs from its journal record")
+            for name in sorted(n for n in names if n.startswith(stem + ".") and n.endswith(".ots")):
+                proof_files.add(name)
+                proof = read_member(archive, name)
+                summary = ots_summary(proof, digest)
+                if check_bitcoin:
+                    summary = confirm_ots(proof, digest)
+                day["proofs"].append({"file": name, **summary})
+            if any(p["status"] == "confirmed" for p in day["proofs"]):
+                day["bitcoin"] = "confirmed"
+                day["not_after"] = min(p["time"] for p in day["proofs"] if p["status"] == "confirmed")
+            elif day["proofs"]:
+                day["bitcoin"] = "pending"
+        if any(n.startswith("anchors/") and n not in proof_files for n in names):
+            raise ValueError("Witness timestamp file has no matching daily seal")
+        missing_days = []
+        if days:
+            first, last = (datetime.strptime(d["date"], "%Y-%m-%d").date() for d in (days[0], days[-1]))
+            if (last - first).days > 36600:
+                raise ValueError("Witness daily range exceeds 100 years")
+            dates = {d["date"] for d in days}
+            missing_days = [(first + timedelta(days=i)).isoformat() for i in range((last - first).days + 1)
+                            if (first + timedelta(days=i)).isoformat() not in dates]
     if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
         raise ValueError("Witness manifest does not match its journal")
     bound = [a for a in anchors if a.get("freshness")]
@@ -3346,7 +3532,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False):
             "head_hash": result["head_hash"], "interval_minutes": interval, "channel": manifest.get("channel"),
             "producer": manifest.get("producer"), "anchors": anchors, "no_response": silent, "posted": posted,
             "post_failures": failures, "statements": statements, "key_pinned": bool(expected_fingerprint),
-            "freshness": freshness}
+            "freshness": freshness, "days": days, "missing_days": missing_days}
 
 
 def witnessed_periods(witness, key=None):
@@ -4070,6 +4256,8 @@ def main():
                         help="With a profile/proof/history JSON, sealed report or disclosure: verify the referenced original archive")
     parser.add_argument("--check-drand", action="store_true",
                         help="Compare the drand rounds in the journal with drand relays (needs internet)")
+    parser.add_argument("--check-bitcoin", action="store_true",
+                        help="Evaluate OTS proofs against block headers agreed by two HTTPS explorers (needs internet)")
     parser.add_argument("--board", action="store_true", help="Print Case Board collections, dangling references and slice changes")
     parser.add_argument("--compare", type=Path, metavar="SECOND_ZIP",
                         help="Compare two chat exports: messages present in only one of them and changed messages")
@@ -4092,7 +4280,7 @@ def main():
     if args.compare:
         unsupported = ["--" + name.replace("_", "-") for name in
                        ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
-                        "evidence", "check_drand", "board") if getattr(args, name)]
+                        "evidence", "check_drand", "check_bitcoin", "board") if getattr(args, name)]
         if unsupported:
             parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
         try:
@@ -4193,7 +4381,7 @@ def main():
                          "confirm their content against the complete journal by that hash.")
         elif is_format(archive_format, "witness-v1"):
             shown = "witness"
-            result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint, args.check_drand)
+            result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint, args.check_drand, args.check_bitcoin)
             if args.channel:
                 result["channel_check"] = check_channel(result, args.channel)
             result.pop("statements")
@@ -4211,7 +4399,7 @@ def main():
             if args.witness and not args.witness_fingerprint:
                 notes.append("The witness key is not pinned: the witness journal is checked only against itself.")
             if args.witness:
-                witness = verify_witness(args.witness, args.witness_fingerprint, args.check_drand)
+                witness = verify_witness(args.witness, args.witness_fingerprint, args.check_drand, args.check_bitcoin)
                 result["witness"] = cross_check_witness(witness, args.bundle, result)
                 if args.channel:
                     result["witness"]["channel_check"] = check_channel(witness, args.channel)
