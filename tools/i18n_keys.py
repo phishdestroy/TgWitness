@@ -29,7 +29,7 @@ DYNAMIC_SCRIPT_KEYS = (
     "Recent activity", "Most deletions", "Most edits", "Name", "Sort", "Filters", "Type", "State",
     "Channels", "Groups", "Bots", "Private chats", "Auto-discovered", "Access unconfirmed", "Excluded",
     "Paused", "Priority", "Mark regular", "Mark priority", "No chats match these filters.",
-    "Recheck", "Media", "People", "Notifications", "Exports", "Telegram", "MTProxy",
+    "Recheck", "Media", "People", "Notifications", "Exports", "Chat state", "Telegram", "MTProxy",
     "Photos", "Videos", "GIFs & animations", "Round video messages", "Voice messages", "Music & audio", "Stickers", "Files & documents",
     "Show affected sources", "Exclude from scope", "Ignore until visible", "Enable downloads",
     "Clear waiting queue", "Skip download-disabled notices",
