@@ -63,6 +63,9 @@ def test_cli_requires_actual_daily_proof_for_witness_anchored(tmp_path, capsys, 
     result = json.loads(capsys.readouterr().out)
     if expected == 0:
         assert result['requirements_met'] and result['result']['assurance']['tier'] == 'witness_anchored'
+        assert result['result']['witness']['head_bitcoin_block_time']
+        assert 'not_after' not in result['result']['witness']['days'][0]
+        assert 'head_not_after' not in result['result']['witness']
     elif expected == 1:
         assert not result['verified']
     else:

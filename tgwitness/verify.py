@@ -3560,7 +3560,7 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
                 day["proofs"].append({"file": name, **summary})
             if any(p["status"] == "confirmed" for p in day["proofs"]):
                 day["bitcoin"] = "confirmed"
-                day["not_after"] = min(p["time"] for p in day["proofs"] if p["status"] == "confirmed")
+                day["bitcoin_block_time"] = min(p["time"] for p in day["proofs"] if p["status"] == "confirmed")
             elif day["proofs"]:
                 day["bitcoin"] = "pending"
         if any(n.startswith("anchors/") and n not in proof_files for n in names):
@@ -3682,7 +3682,7 @@ def cross_check_witness(witness, bundle_path, bundle_result):
             "collector_keys": witness.get("collector_keys", {}).get(key),
             "days": witness.get("days", []), "missing_days": witness.get("missing_days", []),
             "head_not_before": min((a["freshness"]["not_before"] for a in fresh), default=None),
-            "head_not_after": min((d["not_after"] for d in sealed_days), default=None),
+            "head_bitcoin_block_time": min((d["bitcoin_block_time"] for d in sealed_days), default=None),
             "head_witnessed_at": min((a["at"] for a in exact), default=None),
             "head_witness_record": min((a["seq"] for a in exact), default=None)}
 
@@ -3698,15 +3698,15 @@ def assurance(result):
         a.get("kind") == "rfc3161" and a.get("signature", "").startswith("checked against") or
         a.get("kind") == "opentimestamps" and a.get("status") == "confirmed")]
     times = [a["time"] for a in stamps]
-    if witness.get("head_not_after"):
-        times.append(witness["head_not_after"])
+    if witness.get("head_bitcoin_block_time"):
+        times.append(witness["head_bitcoin_block_time"])
     independent = bool(witness.get("witness_key_pinned") and witness.get("export_head_witnessed")
                        and witness.get("witness_fingerprint") != result.get("fingerprint"))
     days = witness.get("days", result.get("days", []))
     missing = witness.get("missing_days", result.get("missing_days", []))
     bad_witness = bool(witness.get("conflicts") or witness.get("anomalies") or any(d["status"] == "fail" for d in days))
     complete_days = bool(days and not missing and all(d["bitcoin"] == "confirmed" for d in days)
-                         and witness.get("head_not_after"))
+                         and witness.get("head_bitcoin_block_time"))
     runtime = result.get("runtime_attestation") or {}
     ladder = [
         {"tier": "self_attested", "status": "pass", "detail": "signature, hashes and applicable chain/manifest checks"},

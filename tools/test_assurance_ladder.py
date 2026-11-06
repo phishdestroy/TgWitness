@@ -16,7 +16,7 @@ from tgwitness.verify import assurance, verify_bundle
 def complete():
     return {'events': 10, 'fingerprint': 'collector', 'anchors': [], 'witness': {
         'witness_fingerprint': 'witness', 'witness_key_pinned': True, 'export_head_witnessed': True,
-        'head_not_before': '2026-10-01T00:00:00+00:00', 'head_not_after': '2026-10-02T00:00:00+00:00',
+        'head_not_before': '2026-10-01T00:00:00+00:00', 'head_bitcoin_block_time': '2026-10-02T00:00:00+00:00',
         'head_witnessed_at': '2026-10-01T00:00:01+00:00', 'days': [{'status': 'ok', 'bitcoin': 'confirmed'}],
         'missing_days': [], 'conflicts': [], 'anomalies': []}}
 
@@ -27,7 +27,7 @@ def test_all_lower_steps_must_pass_and_seal_cannot_be_inferred():
     assert assurance(value)['ladder'][-1]['status'] == 'absent'
     value['witness']['head_not_before'] = None
     assert assurance(value)['tier'] == 'witnessed'
-    value['witness']['head_not_after'] = None
+    value['witness']['head_bitcoin_block_time'] = None
     assert assurance(value)['tier'] == 'self_attested'
 
 
