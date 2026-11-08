@@ -517,6 +517,9 @@ class Console:
             return self.t("Witness") + ": " + note.removeprefix("Witnessed from ").replace(" to ", " → ")
         if match := re.fullmatch(r"Witness checkpoints match through record (\d+) of (\d+)\.", note):
             return self.t("checkpoints match through record {a} of {b}", a=match[1], b=match[2])
+        if match := re.fullmatch(r"The witness saw record (\d+) at (.+), beyond this export's last record (\d+)\.", note):
+            return self.t("The witness saw record {n} at {time}, beyond this export's last record {count}.",
+                          n=match[1], time=match[2], count=match[3])
         if match := re.fullmatch(r"(\d+) trailing record\(s\) have no matching witness checkpoint\.", note):
             return self.t("Witness") + ": " + self.t("Not supplied") + " · " + self.t("Records") + ": " + match[1]
         if note.startswith("The witness has no answer signed by this export's key:"):

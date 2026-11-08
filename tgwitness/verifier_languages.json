@@ -180,7 +180,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "in the evidence journal ZIP: --tsa-ca or --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "in the evidence journal ZIP: --sealed-attestation with --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "in the evidence journal ZIP: --sealed-attestation with --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "The witness saw record {n} at {time}, beyond this export's last record {count}."
     },
     "reader": {
       "launch": "Extract the whole ZIP. Double-click VERIFY.cmd, or drag the original ZIP onto it. On macOS/Linux run sh VERIFY.sh.",
@@ -408,7 +409,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: минимум выполнен до записи {through} из {total} · последующим записям нужна привязка",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "в ZIP журнала доказательств: --checkpoint или --witness с --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "в ZIP журнала доказательств: --tsa-ca или --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "в ZIP журнала доказательств: --sealed-attestation с --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "в ZIP журнала доказательств: --sealed-attestation с --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Свидетель видел запись {n} в {time} — после последней записи этого экспорта ({count})."
     },
     "reader": {
       "launch": "Распакуйте весь ZIP. Дважды нажмите VERIFY.cmd или перетащите на него исходный ZIP. В macOS/Linux выполните sh VERIFY.sh.",
@@ -636,7 +638,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: мінімум виконано до запису {through} з {total} · пізніші записи потребують прив’язки",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "у ZIP-файлі журналу доказів: --checkpoint або --witness з --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "у ZIP-файлі журналу доказів: --tsa-ca або --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "у ZIP-файлі журналу доказів: --sealed-attestation з --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "у ZIP-файлі журналу доказів: --sealed-attestation з --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Свідок бачив запис {n} о {time} — після останнього запису цього експорту ({count})."
     },
     "reader": {
       "launch": "Розпакуйте весь ZIP. Двічі натисніть VERIFY.cmd або перетягніть на нього вихідний ZIP. У macOS/Linux виконайте sh VERIFY.sh.",
@@ -864,7 +867,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: se ha cumplido el mínimo hasta el registro {through} de {total}; los registros posteriores requieren una vinculación",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "En el archivo ZIP del diario de pruebas: --checkpoint o --witness con --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "En el archivo ZIP del diario de pruebas: --tsa-ca o --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "En el archivo ZIP del diario de pruebas: --sealed-attestation con --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "En el archivo ZIP del diario de pruebas: --sealed-attestation con --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "El testigo vio el registro {n} a las {time}, posterior al último registro de esta exportación ({count})."
     },
     "reader": {
       "launch": "Extraiga todo el ZIP. Haga doble clic en VERIFY.cmd o arrastre el ZIP original sobre él. En macOS/Linux ejecute sh VERIFY.sh.",
@@ -1092,7 +1096,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: mínimo atingido até o registro {through} de {total} · registros posteriores precisam de uma vinculação",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "no arquivo ZIP do diário de evidências: --checkpoint ou --witness com --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "no arquivo ZIP do diário de evidências: --tsa-ca ou --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "no ZIP do diário de evidências: --sealed-attestation com --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "no ZIP do diário de evidências: --sealed-attestation com --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "A testemunha viu o registro {n} em {time}, posterior ao último registro desta exportação ({count})."
     },
     "reader": {
       "launch": "Extraia todo o ZIP. Dê um duplo clique em VERIFY.cmd ou arraste o ZIP original sobre ele. No macOS/Linux, execute sh VERIFY.sh.",
@@ -1320,7 +1325,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: asgari şart {total} kaydın {through}. kaydına kadar karşılandı · sonraki kayıtlar için bağlama gerekli",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "kanıt günlüğü ZIP dosyasında: --checkpoint veya --witness ile --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "kanıt günlüğü ZIP dosyasında: --tsa-ca veya --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "kanıt günlüğü ZIP dosyasında: --sealed-attestation ile --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "kanıt günlüğü ZIP dosyasında: --sealed-attestation ile --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Tanık {time} zamanında {n} numaralı kaydı gördü; bu kayıt, bu dışa aktarımın son kaydından ({count}) sonradır."
     },
     "reader": {
       "launch": "ZIP dosyasının tamamını çıkarın. VERIFY.cmd dosyasına çift tıklayın veya özgün ZIP dosyasını üzerine sürükleyin. macOS/Linux üzerinde sh VERIFY.sh çalıştırın.",
@@ -1548,7 +1554,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: تم استيفاء الحد الأدنى حتى السجل {through} من {total} · السجلات اللاحقة تحتاج إلى ربط",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "في ملف ZIP الخاص بسجل الأدلة: --checkpoint، أو --witness مع --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "في ملف ZIP الخاص بسجل الأدلة: --tsa-ca أو --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "في ملف ZIP الخاص بسجل الأدلة: --sealed-attestation مع --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "في ملف ZIP الخاص بسجل الأدلة: --sealed-attestation مع --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "رأى الشاهد السجل {n} في {time}، وهو بعد آخر سجل في هذا التصدير ({count})."
     },
     "reader": {
       "launch": "استخرج محتويات ZIP بالكامل. انقر مرتين على VERIFY.cmd أو اسحب ملف ZIP الأصلي إليه. على macOS/Linux شغّل sh VERIFY.sh.",
@@ -1776,7 +1783,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: حداقل تا رکورد {through} از {total} · رکوردهای بعدی به یک بستن (binding) نیاز دارند",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "در فایل زیپ دفترچه شواهد: --checkpoint، یا --witness با --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "در فایل ZIP دفترچه شواهد: --tsa-ca یا --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "در فایل زیپ دفترچه شواهد: --sealed-attestation با --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "در فایل زیپ دفترچه شواهد: --sealed-attestation با --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "شاهد رکورد {n} را در {time} دید که پس از آخرین رکورد این خروجی ({count}) است."
     },
     "reader": {
       "launch": "تمام محتوای ZIP را استخراج کنید. روی VERIFY.cmd دوبار کلیک کنید یا ZIP اصلی را روی آن بکشید. در macOS/Linux دستور sh VERIFY.sh را اجرا کنید.",
@@ -2004,7 +2012,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: کم از کم حد تک پورا ہوا ریکارڈ {through} تک {total} · بعد کے ریکارڈز کو بائنڈنگ درکار ہے",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "ثبوت جرنل کے ZIP میں: --checkpoint، یا --witness کے ساتھ --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "ثبوت جرنل کے ZIP میں: --tsa-ca یا --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "ثبوت جرنل کے ZIP میں: --sealed-attestation کے ساتھ --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "ثبوت جرنل کے ZIP میں: --sealed-attestation کے ساتھ --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "گواہ نے {time} پر ریکارڈ {n} دیکھا، جو اس ایکسپورٹ کے آخری ریکارڈ ({count}) کے بعد ہے۔"
     },
     "reader": {
       "launch": "پورا ZIP نکالیں۔ VERIFY.cmd پر دو بار کلک کریں یا اصل ZIP کو اس پر کھینچ کر چھوڑیں۔ macOS/Linux پر sh VERIFY.sh چلائیں۔",
@@ -2232,7 +2241,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: न्यूनतम पूरा हुआ रिकॉर्ड {through} तक {total} · बाद के रिकॉर्ड्स को बाइंडिंग की आवश्यकता है",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "सबूत जर्नल ZIP में: --checkpoint, या --witness के साथ --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "सबूत जर्नल ZIP में: --tsa-ca या --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "सबूत जर्नल ZIP में: --sealed-attestation, --sealed-policy के साथ"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "सबूत जर्नल ZIP में: --sealed-attestation, --sealed-policy के साथ",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "गवाह ने {time} पर रिकॉर्ड {n} देखा, जो इस निर्यात के अंतिम रिकॉर्ड ({count}) के बाद का है।"
     },
     "reader": {
       "launch": "पूरा ZIP निकालें। VERIFY.cmd पर डबल-क्लिक करें या मूल ZIP को उस पर खींचकर छोड़ें। macOS/Linux पर sh VERIFY.sh चलाएँ।",
@@ -2460,7 +2470,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: persyaratan minimum terpenuhi hingga catatan ke-{through}dari {total} · catatan selanjutnya memerlukan pengikatan",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "dalam arsip ZIP jurnal bukti: --checkpoint, atau --witness dengan --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "dalam arsip ZIP jurnal bukti: --tsa-ca atau --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "dalam arsip ZIP jurnal bukti: --sealed-attestation dengan --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "dalam arsip ZIP jurnal bukti: --sealed-attestation dengan --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Saksi melihat catatan {n} pada {time}, setelah catatan terakhir ekspor ini ({count})."
     },
     "reader": {
       "launch": "Ekstrak seluruh ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asli ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -2688,7 +2699,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: đã đáp ứng mức tối thiểu cho đến bản ghi {through} trong số {total} · các bản ghi sau đó cần có liên kết",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "trong tệp ZIP nhật ký bằng chứng: --checkpoint hoặc --witness với --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "trong tệp ZIP nhật ký bằng chứng: --tsa-ca hoặc --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "trong tệp ZIP nhật ký bằng chứng: --sealed-attestation với --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "trong tệp ZIP nhật ký bằng chứng: --sealed-attestation với --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Nhân chứng đã thấy bản ghi {n} lúc {time}, sau bản ghi cuối cùng của bản xuất này ({count})."
     },
     "reader": {
       "launch": "Giải nén toàn bộ ZIP. Nhấp đúp VERIFY.cmd hoặc kéo ZIP gốc vào đó. Trên macOS/Linux, chạy sh VERIFY.sh.",
@@ -2916,7 +2928,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: 最低要求已满足至第 {through} 条记录（共 {total} 条）· 后续记录需要绑定",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "在证据日志 ZIP 文件中：--checkpoint，或 --witness 配合 --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "在证据日志 ZIP 文件中：--tsa-ca 或 --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "在证据日志 ZIP 文件中：--sealed-attestation 配合 --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "在证据日志 ZIP 文件中：--sealed-attestation 配合 --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "见证人于 {time} 看到了第 {n} 条记录，晚于本导出的最后一条记录（{count}）。"
     },
     "reader": {
       "launch": "请完整解压 ZIP。双击 VERIFY.cmd，或将原始 ZIP 拖到它上面。在 macOS/Linux 中运行 sh VERIFY.sh。",
@@ -3144,7 +3157,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: minimum atteint jusqu’à l’enregistrement {through} sur {total} · les enregistrements ultérieurs nécessitent une liaison",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "Dans le fichier ZIP du journal des preuves : --checkpoint ou --witness avec --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "Dans le fichier ZIP du journal des preuves : --tsa-ca ou --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "Dans le fichier ZIP du journal des preuves : --sealed-attestation avec --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "Dans le fichier ZIP du journal des preuves : --sealed-attestation avec --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Le témoin a vu l’enregistrement {n} à {time}, au-delà du dernier enregistrement de cet export ({count})."
     },
     "reader": {
       "launch": "Extrayez tout le ZIP. Double-cliquez sur VERIFY.cmd ou déposez le ZIP original dessus. Sous macOS/Linux, exécutez sh VERIFY.sh.",
@@ -3372,7 +3386,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: Mindestanforderung erfüllt bis zum Datensatz {through} von {total} · spätere Datensätze erfordern eine Bindung",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "im ZIP-Datei des Beweismitteljournals: --checkpoint oder --witness mit --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "im ZIP-Archiv des Beweismitteljournals: --tsa-ca oder --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "im ZIP-Datei des Beweismitteljournals: --sealed-attestation mit --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "im ZIP-Datei des Beweismitteljournals: --sealed-attestation mit --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Der Zeuge sah Eintrag {n} um {time}, nach dem letzten Eintrag dieses Exports ({count})."
     },
     "reader": {
       "launch": "Entpacken Sie die gesamte ZIP-Datei. Doppelklicken Sie auf VERIFY.cmd oder ziehen Sie die ursprüngliche ZIP-Datei darauf. Unter macOS/Linux führen Sie sh VERIFY.sh aus.",
@@ -3600,7 +3615,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: requisito minimo soddisfatto fino al record {through} di {total} · i record successivi richiedono un binding",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "nel file ZIP del registro delle prove: --checkpoint o --witness con --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "nel file ZIP del registro delle prove: --tsa-ca o --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "nel file ZIP del registro delle prove: --sealed-attestation con --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "nel file ZIP del registro delle prove: --sealed-attestation con --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Il testimone ha visto il record {n} alle {time}, oltre l'ultimo record di questa esportazione ({count})."
     },
     "reader": {
       "launch": "Estrai l'intero ZIP. Fai doppio clic su VERIFY.cmd oppure trascinaci sopra lo ZIP originale. Su macOS/Linux esegui sh VERIFY.sh.",
@@ -3828,7 +3844,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: minimum {total} ta yozuvdan {through}-yozuvgacha bajarildi · keyingi yozuvlarga bog'lash kerak",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "dalillar jurnali ZIP-ida: --checkpoint yoki --witness bilan --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "dalillar jurnali ZIP-ida: --tsa-ca yoki --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "dalillar jurnali ZIP-ida: --sealed-attestation, --sealed-policy bilan"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "dalillar jurnali ZIP-ida: --sealed-attestation, --sealed-policy bilan",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Guvoh {time} da {n}-yozuvni ko‘rdi; u ushbu eksportning oxirgi yozuvidan ({count}) keyin keladi."
     },
     "reader": {
       "launch": "ZIP arxivini to‘liq oching. VERIFY.cmd faylini ikki marta bosing yoki asl ZIP faylini uning ustiga olib boring. macOS/Linux tizimida sh VERIFY.sh buyrug‘ini bajaring.",
@@ -4056,7 +4073,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: 최소 요건 충족, {total}개 중 {through}까지 기록됨 · 이후 기록에는 바인딩이 필요합니다",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "증거 저널 ZIP 파일 내: --checkpoint 또는 --witness와 함께 --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "증거 저널 ZIP 파일 내: --tsa-ca 또는 --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "증거 저널 ZIP 파일 내: --sealed-attestation 및 --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "증거 저널 ZIP 파일 내: --sealed-attestation 및 --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "증인은 {time}에 기록 {n}을(를) 확인했습니다. 이는 이 내보내기의 마지막 기록({count}) 이후입니다."
     },
     "reader": {
       "launch": "ZIP 전체를 압축 해제하세요. VERIFY.cmd를 두 번 클릭하거나 원본 ZIP을 그 위로 끌어 놓으세요. macOS/Linux에서는 sh VERIFY.sh를 실행하세요.",
@@ -4284,7 +4302,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: 已滿足最低要求，記錄數達 {through} 筆（共 {total} 筆）· 後續記錄需要綁定",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "在證據日誌 ZIP 檔案中：--checkpoint，或搭配 --witness 與 --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "在證據日誌 ZIP 檔案中：--tsa-ca 或 --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "在證據日誌 ZIP 檔案中：--sealed-attestation 搭配 --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "在證據日誌 ZIP 檔案中：--sealed-attestation 搭配 --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "見證人於 {time} 看到了第 {n} 筆紀錄，晚於本匯出的最後一筆紀錄（{count}）。"
     },
     "reader": {
       "launch": "請完整解壓縮 ZIP。按兩下 VERIFY.cmd，或將原始 ZIP 拖曳到它上面。在 macOS/Linux 中執行 sh VERIFY.sh。",
@@ -4512,7 +4531,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: minimum telah dipenuhi sehingga rekod {through} daripada {total} · rekod kemudian memerlukan pengikatan",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "dalam ZIP jurnal bukti: --checkpoint, atau --witness dengan --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "dalam jurnal bukti ZIP: --tsa-ca atau --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "dalam jurnal bukti ZIP: --sealed-attestation dengan --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "dalam jurnal bukti ZIP: --sealed-attestation dengan --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Saksi melihat rekod {n} pada {time}, selepas rekod terakhir eksport ini ({count})."
     },
     "reader": {
       "launch": "Ekstrak keseluruhan ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asal ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -4740,7 +4760,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: spełniono minimum do rekordu {through} z {total} · późniejsze rekordy wymagają powiązania",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "w pliku ZIP dziennika dowodów: --checkpoint lub --witness z opcją --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "w pliku ZIP dziennika dowodów: --tsa-ca lub --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "w pliku ZIP dziennika dowodów: --sealed-attestation z --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "w pliku ZIP dziennika dowodów: --sealed-attestation z --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "Świadek widział rekord {n} o {time}, po ostatnim rekordzie tego eksportu ({count})."
     },
     "reader": {
       "launch": "Rozpakuj cały ZIP. Kliknij dwukrotnie VERIFY.cmd lub przeciągnij na niego oryginalny ZIP. W macOS/Linux uruchom sh VERIFY.sh.",
@@ -4968,7 +4989,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: {total}件中{through}件までのレコードについて要件を満たしています · それ以降のレコードにはバインディングが必要です",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "証拠ジャーナルのZIPファイル内：--checkpoint、または--witnessと--witness-fingerprintを併用",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "証拠ジャーナルのZIPファイル内：--tsa-caまたは--check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "証拠ジャーナルの ZIP ファイル内：--sealed-attestation および --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "証拠ジャーナルの ZIP ファイル内：--sealed-attestation および --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "証人は {time} に記録 {n} を確認しました。これはこのエクスポートの最後の記録（{count}）より後です。"
     },
     "reader": {
       "launch": "ZIP全体を展開してください。VERIFY.cmdをダブルクリックするか、元のZIPをその上にドラッグしてください。macOS/Linuxでは sh VERIFY.sh を実行します。",
@@ -5196,7 +5218,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: ข้อกำหนดขั้นต่ำที่ผ่านจนถึงบันทึก{through} จาก{total} · บันทึกถัดไปจำเป็นต้องมีการผูกมัด",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "ในไฟล์ ZIP ของบันทึกหลักฐาน: --checkpoint หรือ --witness พร้อมด้วย --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "ในไฟล์ ZIP ของบันทึกหลักฐาน: --tsa-ca หรือ --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "ในไฟล์ ZIP ของบันทึกหลักฐาน: --sealed-attestation พร้อมด้วย --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "ในไฟล์ ZIP ของบันทึกหลักฐาน: --sealed-attestation พร้อมด้วย --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "พยานเห็นบันทึก {n} เมื่อ {time} ซึ่งอยู่หลังบันทึกสุดท้ายของการส่งออกนี้ ({count})"
     },
     "reader": {
       "launch": "แตกไฟล์ ZIP ทั้งหมด ดับเบิลคลิก VERIFY.cmd หรือลาก ZIP ต้นฉบับไปวางบนไฟล์นั้น สำหรับ macOS/Linux ให้เรียกใช้ sh VERIFY.sh",
@@ -5424,7 +5447,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: הדרישה המינימלית התקיימה עד לרישום {through} מתוך {total} · רישומים מאוחרים יותר דורשים קישור",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "בקובץ ה-ZIP של יומן הראיות: --checkpoint או --witness עם --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "בקובץ ה-ZIP של יומן הראיות: --tsa-ca או --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "בקובץ ה-ZIP של יומן הראיות: --sealed-attestation עם --sealed-policy"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "בקובץ ה-ZIP של יומן הראיות: --sealed-attestation עם --sealed-policy",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "העד ראה את רשומה {n} ב-{time}, אחרי הרשומה האחרונה בייצוא זה ({count})."
     },
     "reader": {
       "launch": "חלצו את כל תוכן ה-ZIP. לחצו פעמיים על VERIFY.cmd או גררו אליו את קובץ ה-ZIP המקורי. ב-macOS/Linux הריצו sh VERIFY.sh.",
@@ -5652,7 +5676,8 @@
       "EVIDENCE: minimum met up to record {through} of {total} · later records need a binding": "EVIDENCE: ন্যূনতম পূরণ হয়েছে রেকর্ড {through} পর্যন্ত ({total} এর মধ্যে) · পরবর্তী রেকর্ডগুলির জন্য একটি বাইন্ডিং প্রয়োজন",
       "in the evidence journal ZIP: --checkpoint, or --witness with --witness-fingerprint": "প্রমাণ জার্নাল ZIP-এ: --checkpoint অথবা --witness সহ --witness-fingerprint",
       "in the evidence journal ZIP: --tsa-ca or --check-bitcoin": "প্রমাণ জার্নাল ZIP-এ: --tsa-ca অথবা --check-bitcoin",
-      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "প্রমাণ জার্নাল ZIP-এ: --sealed-attestation, --sealed-policy সহ"
+      "in the evidence journal ZIP: --sealed-attestation with --sealed-policy": "প্রমাণ জার্নাল ZIP-এ: --sealed-attestation, --sealed-policy সহ",
+      "The witness saw record {n} at {time}, beyond this export's last record {count}.": "সাক্ষী {time}-এ রেকর্ড {n} দেখেছে, যা এই রপ্তানির শেষ রেকর্ডের ({count}) পরে।"
     },
     "reader": {
       "launch": "পুরো ZIP খুলে নিন। VERIFY.cmd-তে দুবার ক্লিক করুন অথবা মূল ZIP-টি তার ওপর টেনে ছেড়ে দিন। macOS/Linux-এ sh VERIFY.sh চালান।",

@@ -6,6 +6,7 @@ from .common import (
     VerifierTooOld,
     authenticate_statement,
     base64,
+    bisect,
     bounded_lines,
     datetime,
     hashlib,
@@ -35,7 +36,7 @@ class DailyJournal:
     def __init__(self):
         from .chain import MerkleFrontier
         self.tree, self.dates = MerkleFrontier(), {}
-        self.previous, self.last_date = None, None
+        self.previous, self.last_date, self.latest = None, None, None
 
     def payload(self, date):
         from .chain import MERKLE_EMPTY
@@ -58,9 +59,10 @@ class DailyJournal:
         moment = parse_time(event["observed_at"])
         if moment.tzinfo is None:
             raise ValueError("Witness date has no time zone")
+        self.latest = moment if self.latest is None else max(moment, self.latest)
         date = moment.astimezone(timezone.utc).date().isoformat()
         if self.last_date is not None and date <= self.last_date:
-            raise ValueError("Witness appended records into an already sealed day")
+            date = self.latest.astimezone(timezone.utc).date().isoformat()
         self.tree.append(event["hash"])
         day = self.dates.setdefault(date, {"from_seq": event["seq"], "checks": {"no_response": 0}})
         day.update(to_seq=event["seq"], head_hash=event["hash"], root=self.tree.root().hex())
@@ -199,10 +201,17 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
                             raise ValueError("Witness freshness challenge differs from the signed capture")
                         anchors[-1]["freshness"] = {**fresh, "verified": False, "not_before": None}
                     collector_key = payload.get("collector_fingerprint")
-                    if payload.get("status") == "ok":
+                    changed = payload.get("status") == "key_changed" and "previous_keys" in payload
+                    if payload.get("status") == "ok" or changed:
                         prior = retained.get(collector_key)
-                        if prior and prior.get("keys") is not None and prior["keys"] != anchors[-1].get("keys"):
+                        if changed and (not prior or prior.get("keys") is None or prior["keys"] != payload["previous_keys"]
+                                        or anchors[-1].get("keys") in (None, prior["keys"])
+                                        or payload.get("pinned_fingerprint") != collector_key):
+                            raise ValueError("Witness recorded a collector key change that differs from its key history")
+                        if not changed and prior and prior.get("keys") is not None and prior["keys"] != anchors[-1].get("keys"):
                             raise ValueError("Witness accepted a changed or removed collector key history")
+                        if changed:
+                            anchors[-1]["previous_keys"] = payload["previous_keys"]
                         if payload.get("continuity") is not None:
                             if not payload.get("capture"):
                                 raise ValueError("Continuity proof has no matching capture proof")
@@ -276,7 +285,8 @@ def verify_witness(path, expected_fingerprint=None, check_drand=False, check_bit
             "head_hash": result["head_hash"], "interval_minutes": interval, "channel": manifest.get("channel"),
             "producer": manifest.get("producer"), "anchors": anchors, "no_response": silent, "posted": posted,
             "post_failures": failures, "statements": statements, "key_pinned": bool(expected_fingerprint),
-            "freshness": freshness, "days": days, "missing_days": missing_days, "collector_keys": collector_keys}
+            "freshness": freshness, "days": days, "missing_days": missing_days, "collector_keys": collector_keys,
+            **({"chronology": result["chronology"]} if "chronology" in result else {})}
 
 
 def key_history_summary(keys):
@@ -309,20 +319,37 @@ def witnessed_periods(witness, key=None):
     return periods, gaps
 
 
+def witness_moment(value):
+    from .coverage import parse_time
+    parsed = parse_time(value)
+    return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+
+
 def cross_check_witness(witness, bundle_path, bundle_result):
     from .capture import bundle_capture_prefixes, bundle_hashes
     count, key = bundle_result["events"], bundle_result["fingerprint"]
     mine = [a for a in witness["anchors"] if a["collector_fingerprint"] == key]
+    explained = {a["seq"] for a in witness["anchors"] if a["status"] == "key_changed" and a.get("previous_keys")}
+    comparable = {a["seq"] for a in mine if a["status"] == "ok" or a["seq"] in explained}
     hashes = bundle_hashes(bundle_path, {a["event_count"] for a in mine
-                                         if a["status"] == "ok" and 0 < (a["event_count"] or 0) <= count})
+                                         if a["seq"] in comparable and 0 < (a["event_count"] or 0) <= count})
     prefixes = bundle_capture_prefixes(bundle_path, {a["event_count"] for a in mine
-                                                    if a.get("capture") and a["status"] == "ok" and a["event_count"] <= count})
-    consistent, conflicts, later, anomalies, matched = 0, [], 0, [], []
+                                                    if a.get("capture") and a["seq"] in comparable
+                                                    and a["event_count"] <= count})
+    with open_archive(bundle_path) as archive:
+        manifest = read_manifest(archive)
+    created = manifest.get("snapshot_at") if isinstance(manifest.get("snapshot_at"), str) else manifest.get("created_at")
+    created_at = witness_moment(created) if isinstance(created, str) else None
+    consistent, conflicts, later, anomalies, matched, beyond = 0, [], 0, [], [], []
     for anchor in mine:
-        if anchor["status"] != "ok":
+        if (anchor["event_count"] or 0) > count:
+            beyond.append(anchor)
+            if created_at and witness_moment(anchor["at"]) < created_at:
+                conflicts.append(anchor)
+            else:
+                later += 1
+        elif anchor["status"] != "ok" and anchor["seq"] not in explained:
             anomalies.append(anchor)
-        elif anchor["event_count"] > count:
-            later += 1
         elif ("0" * 64 if anchor["event_count"] == 0 else hashes.get(anchor["event_count"])) == anchor["head_hash"]:
             capture = anchor.get("capture", {}).get("statement")
             prefix = prefixes.get(anchor["event_count"])
@@ -354,10 +381,22 @@ def cross_check_witness(witness, bundle_path, bundle_result):
     fresh = [a for a in exact if a.get("freshness", {}).get("verified")]
     sealed_days = [d for d in witness.get("days", []) if d["bitcoin"] == "confirmed"
                    and any(a["seq"] <= d["to_seq"] for a in exact)]
+    late = {a["seq"] for a in beyond if a["status"] != "ok"}
+    problems = sorted(a["seq"] for a in witness["anchors"]
+                      if a["status"] != "ok" and a["seq"] not in late and a["seq"] not in explained)
+    days = []
+    for day in witness.get("days", []):
+        index = bisect.bisect_left(problems, day["from_seq"])
+        if (late or explained) and day["status"] == "fail" and (index == len(problems) or problems[index] > day["to_seq"]):
+            day = {**day, "status": "ok" if day["checks"].get("ok") else "no_response_only"}
+        days.append(day)
+    highest = max((a["event_count"] for a in beyond), default=None)
     return {"witness_fingerprint": witness["fingerprint"], "anchors_for_this_key": len(mine),
             "other_keys": len(witness["anchors"]) - len(mine) - invalid, "invalid_answers": invalid,
-            "consistent": consistent, "conflicts": conflicts,
+            "consistent": consistent, "conflicts": conflicts, "export_created_at": created,
             "after_export": later, "anomalies": anomalies, "no_response": len(witness["no_response"]),
+            "seen_after_export": {"event_count": highest, "at": next(a["at"] for a in beyond if a["event_count"] == highest)}
+            if beyond else None,
             "witnessed": periods, "witness_gaps": gaps,
             "verified_through_event": verified_through, "unwitnessed_events": count - verified_through,
             "continuity_verified_through_event": continuity_through,
@@ -365,7 +404,7 @@ def cross_check_witness(witness, bundle_path, bundle_result):
             "export_head_witness_records": [a["seq"] for a in matched if a["event_count"] == count],
             "witness_key_pinned": bool(witness.get("key_pinned")),
             "collector_keys": witness.get("collector_keys", {}).get(key),
-            "days": witness.get("days", []), "missing_days": witness.get("missing_days", []),
+            "days": days, "missing_days": witness.get("missing_days", []),
             "head_not_before": min((a["freshness"]["not_before"] for a in fresh), default=None),
             "head_bitcoin_block_time": min((d["bitcoin_block_time"] for d in sealed_days), default=None),
             "head_witnessed_at": min((a["at"] for a in exact), default=None),

@@ -180,6 +180,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
     try:
         retained = store.retained_checkpoint()
         with store.snapshot() as snapshot:
+            snapshot_at = utcnow()
             from . import board
             board_export = board.export_state(snapshot.connection, vault) if include_board and board.head(snapshot.connection)["seq"] else None
             from .gap_analysis import settings as gap_settings
@@ -372,6 +373,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 write_member("README.txt", [verification_kit.quickstart(options.get("language", "en")), b"\n", readme])
                 write_member("SHA256SUMS", [report.sha256sums(hashes)])
                 manifest = {"format": "tgwitness-evidence-v1", "created_at": context["created_at"],
+                            "snapshot_at": snapshot_at,
                             "public_key": vault.public_key, "fingerprint": result["fingerprint"],
                             "event_count": result["events"], "head_hash": result["head_hash"],
                             "scope": "Complete stable journal prefix from sequence 1, including operational events",

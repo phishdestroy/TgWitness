@@ -418,10 +418,18 @@ def verification_evidence(args):
         result["witness"] = cross_check_witness(witness, args.bundle, result)
         if args.channel:
             result["witness"]["channel_check"] = check_channel(witness, args.channel)
-        if result["witness"]["conflicts"]:
-            raise ValueError("The journal differs from what the witness saw at "
-                             + result["witness"]["conflicts"][0]["at"] + " (record "
-                             + str(result["witness"]["conflicts"][0]["event_count"]) + ")")
+        conflict = (result["witness"]["conflicts"] or [None])[0]
+        if conflict and conflict["event_count"] > result["events"]:
+            raise ValueError("The witness saw record " + str(conflict["event_count"]) + " at " + conflict["at"]
+                             + ", before this export was created at " + str(result["witness"]["export_created_at"])
+                             + ", but the export ends at record " + str(result["events"]))
+        if conflict:
+            raise ValueError("The journal differs from what the witness saw at " + conflict["at"] + " (record "
+                             + str(conflict["event_count"]) + ")")
+        if result["witness"]["seen_after_export"]:
+            notes.append("The witness saw record " + str(result["witness"]["seen_after_export"]["event_count"]) + " at "
+                         + result["witness"]["seen_after_export"]["at"] + ", beyond this export's last record "
+                         + str(result["events"]) + ".")
         notes += ["Witnessed from " + p["from"] + " to " + p["to"] for p in result["witness"]["witnessed"]]
         if not result["witness"]["consistent"]:
             notes.append("The witness has no answer signed by this export's key: nothing here is witnessed.")
@@ -463,6 +471,10 @@ def refuse_inapplicable(args, kind):
 def verification_requirements(args, checked):
     result, notes, shown = checked.details, checked.notes, checked.kind
     refuse_inapplicable(args, shown)
+    chronology = result.get("chronology")
+    if chronology:
+        notes.append("Observation time anomalies: " + str(chronology["regressions"]) + " backward step(s), "
+                     + str(chronology["unparseable"]) + " unparseable timestamp(s). " + chronology["meaning"])
     if args.board and result.get("board"):
         notes.append("Case Board annotations: " + str(result["board"]["annotations_head"]["seq"]))
         notes.extend("Collection: " + item["title"] for item in result["board"]["collections"])
