@@ -454,7 +454,8 @@ class AccessControl:
         self.grants = saved.get("grants", [])
         self.names = {**saved.get("names", {}), **{g["id"]: g["label"] for g in self.grants}}
         now = time.time()
-        saved_sessions = saved.get("sessions", []) if saved.get("panel_key") == digest(vault.token) else []
+        saved_sessions = (saved.get("sessions", [])
+                          if secrets.compare_digest(str(saved.get("panel_key") or ""), digest(vault.token)) else [])
         self.sessions = {s["sha256"]: {**s, "agent": "", "requests": 0}
                          for s in saved_sessions if s["expires"] > now}
         self.lock = threading.RLock()

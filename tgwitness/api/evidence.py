@@ -430,7 +430,11 @@ async def assurance_statement(challenge: str = "", *, ctx=Depends(current_contex
         raise HTTPException(
             422, "challenge must be 32 lowercase hexadecimal characters"
         )
-    return await asyncio.to_thread(
+    if not challenge:
+        cached = getattr(ctx.app.state, "assurance_cache", None)
+        if cached is not None and time.monotonic() - cached[0] < 10:
+            return cached[1]
+    statement = await asyncio.to_thread(
         assurance.statement,
         ctx.app.state.vault,
         ctx.app.state.run_receipt,
@@ -439,6 +443,9 @@ async def assurance_statement(challenge: str = "", *, ctx=Depends(current_contex
         ctx.app.state.assurance["provider"],
         challenge or None,
     )
+    if not challenge:
+        ctx.app.state.assurance_cache = (time.monotonic(), statement)
+    return statement
 
 
 async def anchor_request(*, ctx=Depends(current_context)):
