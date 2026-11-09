@@ -8473,5 +8473,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "第三方會為最後匯出的記錄進行時間戳記：經驗證的 RFC 3161 或 OpenTimestamps 收據、從 t.me 讀取的見證者貼文、見證者 Bitcoin 印章，或經核對的 GitHub 證明。",
 "Supporting · Witness with its own key": "支援 · 使用專屬金鑰的「Witness」",
 "Supporting · Retained checkpoint": "支援 · 保留檢查點",
-"Supporting · Attested collection run": "支援 · 已驗證的資料蒐集執行"
+"Supporting · Attested collection run": "支援 · 已驗證的資料蒐集執行",
+"How strong is this record": "這則記錄的可靠性有多高",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness 不偏袒任何一方：無論是操作者、PhishDestroy 還是任何其他人，都須接受相同的驗證。唯有經第三方或數學驗證所確認的結果才具效力。",
+"1. Signed journal": "1. 簽名日誌",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "記錄一旦儲存，便無法在不被察覺的情況下進行修改。這對您個人使用已綽綽有餘。",
+"2. Independent time": "2. 獨立時間",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "第三方確認該記錄在指定時間點前確實存在。此為他人接受該記錄所必需的條件。",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "啟用：時間戳記，或一個會發文至公開頻道的見證機器人（Telegram 會設定發文日期）。",
+"3. Attested collection": "3. 經認證的收藏集",
+"An attested server confirms the published code collected the records. For courts and disputes.": "經認證的伺服器會確認已發布的程式碼確實已收集相關紀錄。供法院及爭議解決之用。",
+"Turn on: Phala server or GitHub Actions capture.": "啟用：Phala 伺服器或 GitHub Actions 擷取功能。",
+"For the recipient: the archive and your key fingerprint, sent separately.": "致收件人：檔案及您的金鑰指紋，將分開寄送。",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "步驟 1 和 2 是取得證據的最低要求。步驟 3 則說明了記錄的收集方式。"
 }

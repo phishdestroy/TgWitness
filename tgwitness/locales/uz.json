@@ -8512,5 +8512,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "Uchinchi tomon oxirgi eksport qilingan yozuvni sanalashadi: tasdiqlangan RFC 3161 yoki OpenTimestamps kvitasi, t.me dan o'qilgan guvoh xabari, guvoh Bitcoin muhri yoki tekshirilgan GitHub tasdig'i.",
 "Supporting · Witness with its own key": "Qo'llab-quvvatlash · o'z kaliti bilan guvoh",
 "Supporting · Retained checkpoint": "Qo'llab-quvvatlash · Saqlangan tekshiruv nuqtasi",
-"Supporting · Attested collection run": "Qo'llab-quvvatlash · Tasdiqlangan yig'imni bajarish"
+"Supporting · Attested collection run": "Qo'llab-quvvatlash · Tasdiqlangan yig'imni bajarish",
+"How strong is this record": "Bu yozuv qanchalik mustahkam?",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness hech kimning tomonini olmaydi: xuddi shu tekshiruvlar operatorga, PhishDestroyga va boshqa barcha foydalanuvchilarga ham tatbiq etiladi. Faqat uchinchi tomon yoki matematika tasdiqlagan narsa hisobga olinadi.",
+"1. Signed journal": "1. Imzolangan jurnal",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "Yozuvlar saqlanganidan keyin ularni sezilmas tarzda o'zgartirish mumkin emas. O'zingiz foydalanish uchun yetarli.",
+"2. Independent time": "2. Mustaqil vaqt",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "Uchinchi tomon ma'lum vaqtga qadar yozuvlar mavjud bo'lganini tasdiqlaydi. Boshqalar yozuvni qabul qilishi uchun zarur.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "Yoqish: vaqt tamg'alari yoki ommaviy kanalga post joylaydigan guvoh bot (Telegram post sanasini belgilaydi).",
+"3. Attested collection": "3. Tasdiqlangan to'plam",
+"An attested server confirms the published code collected the records. For courts and disputes.": "Tasdiqlangan server e'lon qilingan kod yozuvlarni to'plaganini tasdiqlaydi. Sudlar va nizolar uchun.",
+"Turn on: Phala server or GitHub Actions capture.": "Yoqish: Phala serveri yoki GitHub Actions yozib olish.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "Qabul qiluvchi uchun: arxiv va kaliting barmoq izi alohida yuboriladi.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "1 va 2-qadamlar dalillar uchun minimal talabdir. 3-qadam esa yozuvlar qanday to'planganini ham ko'rsatadi."
 }

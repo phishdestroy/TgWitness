@@ -8512,5 +8512,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "Una terza parte data l'ultimo record esportato: una ricevuta verificata secondo lo standard RFC 3161 o OpenTimestamps, un post di testimone letto da t.me, un sigillo Bitcoin di testimone o un'attestazione GitHub verificata.",
 "Supporting · Witness with its own key": "Supporto · Witness con chiave propria",
 "Supporting · Retained checkpoint": "Supporto · Punto di controllo conservato",
-"Supporting · Attested collection run": "Supporto · Esecuzione della raccolta attestata"
+"Supporting · Attested collection run": "Supporto · Esecuzione della raccolta attestata",
+"How strong is this record": "Quanto è attendibile questa registrazione?",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness non prende posizione: gli stessi controlli si applicano all’operatore, a PhishDestroy e a chiunque altro. Conta solo ciò che viene confermato da una terza parte o dai calcoli matematici.",
+"1. Signed journal": "1. Diario firmato",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "Una volta salvati, i dati non possono essere modificati senza che ciò venga notato. È sufficiente per uso personale.",
+"2. Independent time": "2. Tempo indipendente",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "Una terza parte conferma che i dati esistevano già in un determinato momento. Necessario affinché gli altri accettino il dato.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "Attiva: i timestamp oppure un bot testimone che pubblica su un canale pubblico (è Telegram a impostare la data di pubblicazione).",
+"3. Attested collection": "3. Raccolta attestata",
+"An attested server confirms the published code collected the records. For courts and disputes.": "Un server certificato conferma che il codice pubblicato ha raccolto i dati. Per tribunali e controversie.",
+"Turn on: Phala server or GitHub Actions capture.": "Attiva: acquisizione tramite server Phala o GitHub Actions.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "Per il destinatario: l'archivio e l'impronta digitale della tua chiave, inviati separatamente.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "I passaggi 1 e 2 rappresentano il minimo indispensabile per la raccolta delle prove. Il passaggio 3 mostra inoltre come sono stati raccolti i dati."
 }

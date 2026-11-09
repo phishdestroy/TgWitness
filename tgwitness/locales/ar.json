@@ -8668,5 +8668,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "يقوم طرف ثالث بتحديد تاريخ آخر سجل تم تصديره: إيصال مُثبت وفقًا لمعيار RFC 3161 أو OpenTimestamps، أو منشور شاهد تمت قراءته من t.me، أو ختم Bitcoin شاهد، أو شهادة GitHub تم التحقق منها.",
 "Supporting · Witness with its own key": "دعم · Witness بمفتاح خاص به",
 "Supporting · Retained checkpoint": "الدعم · نقطة التحقق المحتفظ بها",
-"Supporting · Attested collection run": "الدعم · عملية جمع الأدلة المُثبتة"
+"Supporting · Attested collection run": "الدعم · عملية جمع الأدلة المُثبتة",
+"How strong is this record": "ما مدى قوة هذا السجل؟",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "لا تنحاز TgWitness إلى أي طرف: تنطبق نفس الفحوصات على المشغل، وعلى PhishDestroy، وعلى أي شخص آخر. لا يُعتد إلا بما يؤكده طرف ثالث أو الحسابات الرياضية.",
+"1. Signed journal": "1. دفتر يوميات موقّع",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "لا يمكن تعديل السجلات دون أن يُلاحظ ذلك بعد حفظها. يكفي للاستخدام الشخصي.",
+"2. Independent time": "2. الوقت المستقل",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "تأكيد من طرف ثالث بوجود السجلات في وقت معين. وهو أمر ضروري لكي يقبل الآخرون السجل.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "قم بتفعيل: الطوابع الزمنية، أو روبوت الشاهد الذي ينشر في قناة عامة (يقوم Telegram بتحديد تاريخ النشر).",
+"3. Attested collection": "3. مجموعة موثقة",
+"An attested server confirms the published code collected the records. For courts and disputes.": "يؤكد خادم معتمد أن الكود المنشور قد جمع السجلات. للاستخدام في المحاكم والنزاعات.",
+"Turn on: Phala server or GitHub Actions capture.": "قم بتشغيل: خادم Phala أو التقاط إجراءات GitHub.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "بالنسبة للمستلم: الأرشيف وبصمة مفتاحك، يتم إرسالهما بشكل منفصل.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "الخطوتان 1 و2 هما الحد الأدنى المطلوب لتقديم الأدلة. وتوضح الخطوة 3 أيضًا كيفية جمع السجلات."
 }

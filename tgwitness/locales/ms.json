@@ -8473,5 +8473,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "Pihak ketiga menetapkan tarikh rekod terakhir dieksport: resit RFC 3161 atau OpenTimestamps yang disahkan, kiriman saksi yang dibaca daripada t.me, meterai Bitcoin saksi atau pengesahan GitHub yang diperiksa.",
 "Supporting · Witness with its own key": "Menyokong · Saksi dengan kunci tersendiri",
 "Supporting · Retained checkpoint": "Menyokong · Titik pemeriksaan yang disimpan",
-"Supporting · Attested collection run": "Menyokong · Jaringan pengumpulan yang disahkan"
+"Supporting · Attested collection run": "Menyokong · Jaringan pengumpulan yang disahkan",
+"How strong is this record": "Sejauh mana rekod ini kukuh",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness tidak memihak: pemeriksaan yang sama terpakai kepada pengendali, kepada PhishDestroy dan kepada sesiapa sahaja. Hanya apa yang disahkan oleh pihak ketiga atau oleh matematik dikira.",
+"1. Signed journal": "1. Jurnal bertandatangan",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "Rekod tidak dapat diubah tanpa disedari selepas disimpan. Cukup untuk kegunaan anda sendiri.",
+"2. Independent time": "2. Masa bebas",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "Pihak ketiga mengesahkan rekod-rekod tersebut wujud pada masa tertentu. Diperlukan supaya orang lain menerima rekod tersebut.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "Aktifkan: Cap masa, atau bot saksi yang menyiarkan ke saluran awam (Telegram menetapkan tarikh siaran).",
+"3. Attested collection": "3. Pengumpulan disahkan",
+"An attested server confirms the published code collected the records. For courts and disputes.": "Pelayan yang disahkan mengesahkan bahawa kod yang diterbitkan telah mengumpul rekod. Untuk mahkamah dan pertikaian.",
+"Turn on: Phala server or GitHub Actions capture.": "Dayakan: pelayan Phala atau tangkapan GitHub Actions.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "Untuk penerima: arkib dan cap jari kunci anda dihantar secara berasingan.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "Langkah 1 dan 2 adalah minimum untuk bukti. Langkah 3 juga menunjukkan bagaimana rekod-rekod itu dikumpul."
 }

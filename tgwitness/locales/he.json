@@ -8551,5 +8551,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "גורם צד שלישי מתארך את הרשומה האחרונה שיוצאה: קבלה מאומתת לפי תקן RFC 3161 או OpenTimestamps, פוסט עדות שנקרא מ-t.me, חותם Bitcoin של עד או אישור GitHub שנבדק.",
 "Supporting · Witness with its own key": "תמיכה · Witness עם מפתח משלו",
 "Supporting · Retained checkpoint": "תמיכה · נקודת ביקורת נשמרת",
-"Supporting · Attested collection run": "תמיכה · ריצת איסוף מאומתת"
+"Supporting · Attested collection run": "תמיכה · ריצת איסוף מאומתת",
+"How strong is this record": "עד כמה תיעוד זה אמין?",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness אינו נוקט עמדה: אותן בדיקות חלות על המפעיל, על PhishDestroy ועל כל גורם אחר. רק מה שצד שלישי או החישובים המתמטיים מאשרים נחשב.",
+"1. Signed journal": "1. יומן חתום",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "לא ניתן לשנות את הרשומות מבלי שיבחינו בכך לאחר שמירתן. מספיק לשימוש אישי.",
+"2. Independent time": "2. זמן עצמאי",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "צד שלישי מאשר שהרשומות היו קיימות במועד נתון. נדרש כדי שאחרים יקבלו את הרשומה.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "הפעל: חותמות זמן, או בוט עדות שמפרסם בערוץ ציבורי (Telegram קובע את תאריך הפרסום).",
+"3. Attested collection": "3. אוסף מאומת",
+"An attested server confirms the published code collected the records. For courts and disputes.": "שרת מאומת מאשר שהקוד שפורסם אסף את הרשומות. לשימוש בבתי משפט ובסכסוכים.",
+"Turn on: Phala server or GitHub Actions capture.": "הפעל: שרת Phala או לכידת פעולות ב-GitHub.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "לנמען: הארכיון וטביעת האצבע של המפתח שלך, הנשלחים בנפרד.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "שלבים 1 ו-2 הם המינימום הנדרש לצורך איסוף ראיות. שלב 3 מראה גם כיצד נאספו הרישומים."
 }

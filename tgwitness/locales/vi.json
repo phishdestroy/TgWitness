@@ -8473,5 +8473,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "Một bên thứ ba xác định thời gian của bản ghi được xuất ra gần nhất: biên nhận RFC 3161 hoặc OpenTimestamps đã được xác minh, bài đăng của nhân chứng được đọc từ t.me, con dấu Bitcoin của nhân chứng hoặc chứng nhận GitHub đã được kiểm tra.",
 "Supporting · Witness with its own key": "Hỗ trợ · Nhân chứng có khóa riêng",
 "Supporting · Retained checkpoint": "Hỗ trợ · Điểm kiểm tra được lưu giữ",
-"Supporting · Attested collection run": "Hỗ trợ · Vòng thu thập bằng chứng đã được xác nhận"
+"Supporting · Attested collection run": "Hỗ trợ · Vòng thu thập bằng chứng đã được xác nhận",
+"How strong is this record": "Mức độ tin cậy của bản ghi này là bao nhiêu?",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness không đứng về phía nào: các quy trình kiểm tra giống nhau được áp dụng cho người vận hành, cho PhishDestroy và cho bất kỳ ai khác. Chỉ những gì được xác nhận bởi bên thứ ba hoặc bằng toán học mới được tính.",
+"1. Signed journal": "1. Nhật ký đã ký",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "Các bản ghi không thể bị thay đổi mà không bị phát hiện sau khi đã được lưu. Đủ để bạn tự sử dụng.",
+"2. Independent time": "2. Thời gian độc lập",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "Một bên thứ ba xác nhận rằng các bản ghi đã tồn tại vào một thời điểm nhất định. Điều này là cần thiết để những người khác chấp nhận bản ghi đó.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "Bật: Dấu thời gian, hoặc bot chứng kiến đăng lên kênh công khai (Telegram sẽ thiết lập ngày đăng).",
+"3. Attested collection": "3. Bộ sưu tập đã được xác thực",
+"An attested server confirms the published code collected the records. For courts and disputes.": "Một máy chủ được chứng thực xác nhận rằng mã nguồn đã được công bố đã thu thập các bản ghi. Dành cho tòa án và các tranh chấp.",
+"Turn on: Phala server or GitHub Actions capture.": "Bật: Máy chủ Phala hoặc tính năng ghi lại của GitHub.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "Dành cho người nhận: tệp lưu trữ và dấu vân tay khóa của bạn, được gửi riêng biệt.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "Bước 1 và 2 là những bước tối thiểu để thu thập bằng chứng. Bước 3 cũng cho thấy cách các bản ghi được thu thập."
 }

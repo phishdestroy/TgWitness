@@ -8512,5 +8512,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "تیسری پارٹی آخری برآمد شدہ ریکارڈ کی تاریخ متعین کرتی ہے: ایک تصدیق شدہ RFC 3161 یا OpenTimestamps رسید، t.me سے پڑھی گئی گواہ کی پوسٹ، گواہ کی Bitcoin مہر یا ایک چیک شدہ GitHub تصدیق۔",
 "Supporting · Witness with its own key": "مددگار · اپنی مخصوص کلید کے ساتھ گواہ",
 "Supporting · Retained checkpoint": "مددگار · محفوظ شدہ چیک پوائنٹ",
-"Supporting · Attested collection run": "مددگار · تصدیق شدہ کلیکشن رن"
+"Supporting · Attested collection run": "مددگار · تصدیق شدہ کلیکشن رن",
+"How strong is this record": "یہ ریکارڈ کتنا مضبوط ہے",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness کسی بھی جانبدار نہیں ہے: یہی چیکس آپریٹر، PhishDestroy اور کسی اور پر لاگو ہوتے ہیں۔ صرف وہی چیزیں شمار ہوتی ہیں جو تیسری پارٹی یا ریاضی کی تصدیق کرتی ہوں۔",
+"1. Signed journal": "1. دستخط شدہ جرنل",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "محفوظ ہونے کے بعد ریکارڈز کو بغیر نوٹس کے تبدیل نہیں کیا جا سکتا۔ آپ کی ذاتی استعمال کے لیے کافی ہے۔",
+"2. Independent time": "2. آزاد وقت",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "ایک تیسری پارٹی اس بات کی تصدیق کرتی ہے کہ ریکارڈز ایک مخصوص وقت تک موجود تھے۔ دوسروں کے لیے ریکارڈ کو قبول کرنے کے لیے ضروری ہے۔",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "آن کریں: ٹائم اسٹیمپس، یا ایک گواہ بوٹ جو ایک عوامی چینل پر پوسٹ کرتا ہے (Telegram پوسٹ کی تاریخ مقرر کرتا ہے).",
+"3. Attested collection": "3. تصدیق شدہ مجموعہ",
+"An attested server confirms the published code collected the records. For courts and disputes.": "ایک تصدیق شدہ سرور اس بات کی تصدیق کرتا ہے کہ شائع کردہ کوڈ نے ریکارڈز جمع کیے ہیں۔ عدالتوں اور تنازعات کے لیے۔",
+"Turn on: Phala server or GitHub Actions capture.": "آن کریں: Phala سرور یا GitHubActions کیپچر۔",
+"For the recipient: the archive and your key fingerprint, sent separately.": "وصول کنندہ کے لیے: آرکائیو اور آپ کی کلید کا فنگر پرنٹ، الگ الگ بھیجے گئے۔",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "شواہد کے لیے اقدامات 1 اور 2 کم از کم ہیں۔ اقدام 3 یہ بھی دکھاتا ہے کہ ریکارڈز کیسے جمع کیے گئے۔"
 }

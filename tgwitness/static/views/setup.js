@@ -57,23 +57,27 @@ function renderEvidence(box, scale, before, {tr, node, compact}) {
   if (before && now.level !== next.level) head.append(node("span", "level-was", tr("now: {level}", {level: stateName(tr, now)})));
   wrap.append(head);
   const groups = [
-    [tr("Required conditions"), [
-      ["on", tr("Integrity"), itemName(tr, "journal")],
-      ["step", tr("Signer key"), tr("Send the collector fingerprint to the recipient separately")],
-      [next.on("timestamps") ? "on" : "off", tr("External time"), itemName(tr, "timestamps")]]],
+    [tr("How strong is this record"), [
+      ["on", tr("1. Signed journal"), tr("Records cannot be changed unnoticed after they are saved. Enough for your own use.")],
+      [next.on("timestamps") ? "on" : "off", tr("2. Independent time"),
+        next.on("timestamps") ? itemName(tr, "timestamps")
+          : tr("Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).")],
+      [next.on("server") ? "on" : "off", tr("3. Attested collection"),
+        next.on("server") ? itemName(tr, "server") : tr("Turn on: Phala server or GitHub Actions capture.")],
+      ["step", tr("For the recipient: the archive and your key fingerprint, sent separately."), ""]]],
     [tr("Supporting records, not part of the minimum"), [
       [next.on("witness") ? "on" : "off", tr("Witness with its own key"), itemName(tr, "witness")],
       ["step", tr("Retained checkpoint"), tr("Checkpoint retained by another party")],
-      [next.on("server") ? "on" : "off", tr("Attested collection run"), itemName(tr, "server")],
       ...["drand", "devices", "code", "gateway_log"].map(id => [next.on(id) ? "on" : "off", itemName(tr, id), ""])]],
   ];
   if (compact) {
-    wrap.append(node("p", "hint", [...groups[0][1], groups[1][1][0], groups[1][1][2]].filter(([state]) => state !== "step")
+    wrap.append(node("p", "hint", groups[0][1].filter(([state]) => state !== "step")
       .map(([state, name]) => (state === "on" ? "✓ " : "○ ") + name).join(" · ")));
     box.append(wrap);
     return;
   }
-  wrap.append(node("p", "hint", tr("Minimum for evidence: all three required conditions. The rest strengthens the record.")));
+  wrap.append(node("p", "hint", tr("TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.")
+    + " " + tr("Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.")));
   const list = node("ul", "level-items");
   for (const [title, rows] of groups) {
     list.append(node("li", "level-group", title));

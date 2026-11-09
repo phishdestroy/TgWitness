@@ -8473,5 +8473,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "第三方会对最后导出的记录进行时间戳标注：经过验证的 RFC 3161 或 OpenTimestamps 收据、从 t.me 读取的见证帖、Bitcoin 见证印章，或经过验证的 GitHub 证明。",
 "Supporting · Witness with its own key": "支持 · 带独立密钥的Witness",
 "Supporting · Retained checkpoint": "支持 · 保留检查点",
-"Supporting · Attested collection run": "支持 · 已验证的收集运行"
+"Supporting · Attested collection run": "支持 · 已验证的收集运行",
+"How strong is this record": "该记录的可靠性如何",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness 不偏袒任何一方：无论对操作员、PhishDestroy 还是任何其他人，都适用相同的验证规则。只有经第三方或数学验证确认的内容才有效。",
+"1. Signed journal": "1. 已签名的日志",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "记录一旦保存，就无法在不被察觉的情况下进行修改。仅供您个人使用。",
+"2. Independent time": "2. 独立时间",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "第三方确认该记录在指定时间点确实存在。这是他人接受该记录所必需的。",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "开启：时间戳，或一个在公共频道发布消息的见证机器人（Telegram会设置发布日期）。",
+"3. Attested collection": "3. 经核实的集合",
+"An attested server confirms the published code collected the records. For courts and disputes.": "经认证的服务器确认，已发布的代码已收集相关记录。供法院及争议解决使用。",
+"Turn on: Phala server or GitHub Actions capture.": "开启：Phala 服务器或 GitHub Actions 捕获功能。",
+"For the recipient: the archive and your key fingerprint, sent separately.": "致收件人：存档文件和您的密钥指纹将分别发送。",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "步骤 1 和 2 是获取证据的最低要求。步骤 3 还展示了记录的收集过程。"
 }

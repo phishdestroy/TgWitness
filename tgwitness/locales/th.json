@@ -8473,5 +8473,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "ฝ่ายที่สามจะกำหนดวันที่ของบันทึกที่ส่งออกล่าสุด: ใบรับยืนยันตามมาตรฐาน RFC 3161 หรือ OpenTimestamps ที่ได้รับการตรวจสอบแล้ว, โพสต์ของพยานที่อ่านจาก t.me, ตราประทับ Bitcoin ของพยาน หรือใบรับรอง GitHub ที่ได้รับการตรวจสอบแล้ว",
 "Supporting · Witness with its own key": "สนับสนุน · ผู้เป็นพยานด้วยกุญแจส่วนตัว",
 "Supporting · Retained checkpoint": "สนับสนุน · จุดตรวจสอบที่เก็บไว้",
-"Supporting · Attested collection run": "สนับสนุน · การรวบรวมข้อมูลที่ได้รับการยืนยัน"
+"Supporting · Attested collection run": "สนับสนุน · การรวบรวมข้อมูลที่ได้รับการยืนยัน",
+"How strong is this record": "ความน่าเชื่อถือของบันทึกนี้อยู่ที่ระดับใด",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness ไม่เข้าข้างฝ่ายใด: การตรวจสอบเดียวกันนี้ใช้กับผู้ดำเนินการ PhishDestroy และทุกคนอื่น ๆ ด้วย สิ่งที่นับได้คือเพียงสิ่งที่ฝ่ายที่สามหรือการคำนวณทางคณิตศาสตร์ยืนยันเท่านั้น",
+"1. Signed journal": "1. บันทึกที่ลงนาม",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "ข้อมูลที่บันทึกไว้ไม่สามารถถูกแก้ไขได้โดยไม่ให้รู้ตัวหลังจากที่บันทึกแล้ว เพียงพอสำหรับการใช้ส่วนตัวของคุณ",
+"2. Independent time": "2. เวลาอิสระ",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "ฝ่ายที่สามยืนยันว่าบันทึกดังกล่าวมีอยู่ภายในช่วงเวลาที่กำหนด ซึ่งจำเป็นเพื่อให้ฝ่ายอื่นยอมรับบันทึกดังกล่าว",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "เปิดใช้งาน: ตราเวลา หรือบอทผู้เป็นพยานที่โพสต์ไปยังช่องสาธารณะ (Telegram จะกำหนดวันที่โพสต์)",
+"3. Attested collection": "3. ชุดข้อมูลที่ได้รับการยืนยัน",
+"An attested server confirms the published code collected the records. For courts and disputes.": "เซิร์ฟเวอร์ที่ได้รับการรับรองจะยืนยันว่าโค้ดที่เผยแพร่ได้รวบรวมข้อมูลบันทึกไว้แล้ว สำหรับศาลและกรณีพิพาท",
+"Turn on: Phala server or GitHub Actions capture.": "เปิดใช้งาน: การจับข้อมูลจาก Phala server หรือ GitHub Actions",
+"For the recipient: the archive and your key fingerprint, sent separately.": "สำหรับผู้รับ: ไฟล์เก็บถาวรและลายนิ้วมือกุญแจของคุณ จะถูกส่งแยกกัน",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "ขั้นตอนที่ 1 และ 2 เป็นขั้นตอนขั้นต่ำสำหรับการเก็บหลักฐาน ส่วนขั้นตอนที่ 3 ยังแสดงวิธีการเก็บรวบรวมข้อมูลด้วย"
 }

@@ -13,7 +13,7 @@
 
 <p align="center"><strong>Self-hosted workspace for Telegram investigations.</strong><br>Save chats, keep edits and deletions, see who's connected to whom<br>and hand over signed exports anyone can check.</p>
 
-<p align="center"><strong>ZERO TRUST.</strong> You don't have to trust the operator, PhishDestroy, a title or a signature:<br>verify the archive, the build and the limits yourself. <a href="docs/LIMITS-AND-OBJECTIONS.md">Limits and objections</a></p>
+<p align="center"><strong>ZERO TRUST.</strong> TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else.<br>Only what a third party or the math confirms counts. <a href="docs/LIMITS-AND-OBJECTIONS.md">Limits and objections</a></p>
 
 <p align="center">
   <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.9.1 · pre-release"></a>

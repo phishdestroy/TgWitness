@@ -8560,5 +8560,17 @@
 "A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.": "Сторонняя организация устанавливает дату последней экспортированной записи: подтверждённая квитанция по стандарту RFC 3161 или OpenTimestamps, сообщение свидетеля, прочитанное с t.me, печать Bitcoin от свидетеля или проверенное подтверждение GitHub.",
 "Supporting · Witness with its own key": "Поддержка · Witness с собственным ключом",
 "Supporting · Retained checkpoint": "Поддержка · Сохраненная контрольная точка",
-"Supporting · Attested collection run": "Поддержка · Проверка коллекции"
+"Supporting · Attested collection run": "Поддержка · Проверка коллекции",
+"How strong is this record": "Насколько достоверна эта запись?",
+"TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.": "TgWitness не принимает ничью сторону: одни и те же проверки применяются как к оператору, так и к PhishDestroy, и ко всем остальным. Учитывается только то, что подтверждается третьей стороной или математически.",
+"1. Signed journal": "1. Журнал с подписью",
+"Records cannot be changed unnoticed after they are saved. Enough for your own use.": "Записи нельзя незаметно изменить после их сохранения. Достаточно для личного использования.",
+"2. Independent time": "2. Независимое время",
+"A third party confirms the records existed by a given time. Needed for others to accept the record.": "Третья сторона подтверждает, что записи существовали к указанному моменту времени. Необходимо для того, чтобы другие признали эту запись.",
+"Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).": "Включить: временные метки или бот-свидетель, который публикует сообщения в общедоступном канале (Telegram устанавливает дату публикации).",
+"3. Attested collection": "3. Проверенная коллекция",
+"An attested server confirms the published code collected the records. For courts and disputes.": "Заверенный сервер подтверждает, что опубликованный код собрал записи. Для судов и разрешения споров.",
+"Turn on: Phala server or GitHub Actions capture.": "Включить: сбор данных с сервера Phala или с помощью GitHubActions.",
+"For the recipient: the archive and your key fingerprint, sent separately.": "Для получателя: архив и отпечаток вашего ключа, отправленные отдельно.",
+"Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "Шаги 1 и 2 представляют собой минимальный набор действий для сбора доказательств. В шаге 3 также показано, как были собраны записи."
 }
