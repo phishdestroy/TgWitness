@@ -54,13 +54,13 @@ The verifier prints an `EVIDENCE:` line for the minimum described at the end of 
 
 The minimum for evidence is integrity, a confirmed signer key (`--fingerprint`) and third-party time covering the last record: RFC 3161 with `--tsa-ca`, OpenTimestamps with `--check-bitcoin`, a witness post read from t.me with `--channel`, a witness Bitcoin seal or a checked GitHub attestation (`evidence_conditions` in `tgwitness/verifier/witness.py`). For `--channel`, only an `https://t.me/s/…` or `https://telegram.me/s/…` page read live supplies Telegram-set dates. Edited posts are ignored, and a Telegram Desktop export or a saved page counts only as supplied metadata. A retained checkpoint and a witness with its own key are supporting checks only, because the collector could create both alone. Evidence mode timestamps signed checkpoints with RFC 3161 and OpenTimestamps on a schedule. It is turned on in settings, or by the **Follow chats** and **Evidence for a case** setup goals (`PRESETS` in `tgwitness/settings_hub.py`).
 
-## What a record does not prove
+## What each check covers
 
-- Telegram does not sign individual messages. They arrive over the account's authenticated MTProto session, and the signature on each record is the collector's ([where the messages come from](https://github.com/phishdestroy/TgWitness/blob/main/docs/EVIDENCE.md#where-the-messages-come-from)).
-- In the base local mode, the collector signs its own observations with a key on the operator's machine. Verification shows that records were not changed after signing, or after the external time; it does not show that they match what Telegram delivered.
+- Messages arrive over the account's authenticated MTProto session. Telegram signs no individual messages, so each record carries the collector's signature ([where the messages come from](https://github.com/phishdestroy/TgWitness/blob/main/docs/EVIDENCE.md#where-the-messages-come-from)).
+- In the base local mode, the collector signs its own observations with a key on the operator's machine. Verification covers changes after signing and after the external time; the acquisition itself is covered by the attested modes below.
 - Without third-party time, record times come from the collector's clock. The verifier says so: "Observation times are collector-supplied" (`tgwitness/verifier/journal.py`).
-- A witness holds a record count and a head hash, not message content. It shows continuity and the time of the journal head, not where the messages came from ([witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/WITNESS.md#what-the-witness-gets-and-what-it-does-not)).
-- The acquisition itself is addressed by [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) ("Preview available from `main`"; its automated tests use a synthetic Telegram client) and [Phala Intel TDX](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md). The TDX qualification ran with no Telegram account on the CVM ([validation record](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION.md#live-phala-cloud-deployment--4-november-2026)), so TDX collection from a live account is not yet covered.
+- A witness holds a record count and a head hash, not message content. It covers continuity and the time of the journal head ([witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/WITNESS.md#what-the-witness-gets-and-what-it-does-not)).
+- The acquisition itself is addressed by [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) ("Preview available from `main`"; its automated tests use a synthetic Telegram client) and [Phala Intel TDX](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md). The TDX qualification ran with no Telegram account on the CVM ([validation record](https://github.com/phishdestroy/TgWitness/blob/main/docs/VERIFICATION.md#live-phala-cloud-deployment--4-november-2026)), so TDX collection from a live account is pending qualification.
 
 ## Supply chain
 
@@ -123,7 +123,7 @@ The README's Ethical Notice, [ETHICAL-NOTICE.md](https://github.com/phishdestroy
 
 - [Evidence format](https://github.com/phishdestroy/TgWitness/blob/main/docs/EVIDENCE.md): Signed journal, archive formats, verification paths and where the messages come from.
 - [What the record establishes](https://github.com/phishdestroy/TgWitness/blob/main/docs/FOR-THE-RECORD.md): Assurance steps and how to check them in five minutes.
-- [Limits and objections](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIMITS-AND-OBJECTIONS.md): What each check does not establish, with the command or file for every answer.
+- [Limits and objections](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIMITS-AND-OBJECTIONS.md): What each check covers and where its limits are, with the command or file for every answer.
 - [Independent verification](https://github.com/phishdestroy/TgWitness/blob/main/docs/TRUST.md): Trusted inputs for recipients.
 - [Witness](https://github.com/phishdestroy/TgWitness/blob/main/docs/WITNESS.md) and [timestamps](https://github.com/phishdestroy/TgWitness/blob/main/docs/TIMESTAMP.md): External checkpoints and time.
 - [GitHub Actions capture](https://github.com/phishdestroy/TgWitness/blob/main/docs/SEALED-ACTIONS.md) and [Intel TDX](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md): Attested collection.
