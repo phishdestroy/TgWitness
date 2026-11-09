@@ -250,15 +250,16 @@ the files; no special tool is needed.
   sealed by the Belgian government's qualified TSA, whose root is pinned in
   `tgwitness/tsa_roots.py` ([attestation certificate](HIGH-ASSURANCE.md#attestation-certificate)).
 
-**Limit.** Partly. A qualified stamp carries the presumption of Regulation (EU)
-No 910/2014, article 41, for the bytes it covers, whoever produced them.
-`verify.py` reads timestamp receipts only from the archive, where evidence mode stores
-them, and does not report qualified status. Evidence mode accepts only `https://` TSA
-addresses and defaults to freetsa.org and Sectigo, while the Belgian endpoint in
-`tgwitness/tsa_roots.py` is an `http://` address. A manually obtained qualified stamp
-is therefore checked with `tgwitness.anchor verify`; `--require evidence` does not
-count it. In local mode, records can also be invented before the first stamp (see
-above). The difference is when signing happens: TgWitness signs on receipt, while a
+- Evidence mode sends each checkpoint to the Belgian government's qualified TSA
+  together with freetsa.org and Sectigo (`DEFAULT_TSA` in `tgwitness/anchoring.py`).
+  With `--tsa-ca` set to that provider's root, `verify.py` reports the stamp as a
+  qualified eIDAS time stamp and names the time stamping unit from the EU trusted list
+  (`qualified_timestamp` in `tgwitness/verifier/timestamps.py`). Under Regulation (EU)
+  No 910/2014, article 41(2), such a stamp carries the presumption that its time is
+  accurate and that the bound data is intact, in every EU member state.
+
+**Limit.** A qualified stamp covers the bytes it binds, whoever produced them. In local
+mode, records can still be invented before the first stamp (see above). The difference is when signing happens: TgWitness signs on receipt, while a
 Desktop export is protected only from the moment it is stamped.
 
 ## Rule 902 is US law

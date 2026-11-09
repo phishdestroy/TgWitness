@@ -109,8 +109,11 @@ Long-term preservation needs a separate certificate/revocation evidence policy.
 
 The TSA response anchors the submitted checkpoint bytes to its stated time.
 Review that result with the acquisition records and environment verification for
-the selected mode. Where a qualified timestamp is required, check the provider
-and certificate policy against that requirement.
+the selected mode. Evidence mode includes the Belgian government's qualified TSA
+(`http://tsa.belgium.be/connect`; RFC 3161 replies are signed, so plain HTTP does not
+weaken them). With that provider's root passed to `--tsa-ca`, `verify.py` reports a
+qualified eIDAS time stamp and its time stamping unit; Regulation (EU) No 910/2014,
+article 41(2), presumes the accuracy of its time and the integrity of the bound data.
 
 ## Handoff record
 

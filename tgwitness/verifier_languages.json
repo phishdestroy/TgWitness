@@ -187,7 +187,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "records 1–{through} of {total} match the checkpoint you supplied",
       "no checkpoint supplied": "no checkpoint supplied",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Channel post dates were read from Telegram at verification time; edited posts are not counted."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Channel post dates were read from Telegram at verification time; edited posts are not counted.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "last exported record existed by {time}; qualified eIDAS time stamp from {service}"
     },
     "reader": {
       "launch": "Extract the whole ZIP. Double-click VERIFY.cmd, or drag the original ZIP onto it. On macOS/Linux run sh VERIFY.sh.",
@@ -422,7 +423,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "записи с 1 по {through} из {total} соответствуют указанной вами контрольной точке",
       "no checkpoint supplied": "контрольная точка не указана",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Этот тип архива не содержит контрольных точек или временных меток: последняя запись привязана к журналу доказательств того же рабочего пространства. Проверьте этот ZIP-архив с помощью опций --fingerprint и --tsa-ca, --check-bitcoin или --witness с опцией --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Даты публикаций в каналах были получены из Telegram во время проверки; отредактированные публикации не учитываются."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Даты публикаций в каналах были получены из Telegram во время проверки; отредактированные публикации не учитываются.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "последняя экспортированная запись существовала {time}; квалифицированная временная метка eIDAS от {service}"
     },
     "reader": {
       "launch": "Распакуйте весь ZIP. Дважды нажмите VERIFY.cmd или перетащите на него исходный ZIP. В macOS/Linux выполните sh VERIFY.sh.",
@@ -657,7 +659,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "записи 1–{through} із {total} відповідають наданій вами контрольній точці",
       "no checkpoint supplied": "контрольна точка не вказана",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Цей тип архіву не містить контрольних точок та міток часу: останній запис прив’язано до журналу доказів того самого робочого простору. Перевірте цей ZIP-архів за допомогою опцій --fingerprint та --tsa-ca, --check-bitcoin або --witness з опцією --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Дати публікацій у каналах були зчитані з Telegram під час перевірки; відредаговані публікації не враховуються."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Дати публікацій у каналах були зчитані з Telegram під час перевірки; відредаговані публікації не враховуються.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Останній експортований запис існував {time}; сертифікована мітка часу eIDAS від {service}"
     },
     "reader": {
       "launch": "Розпакуйте весь ZIP. Двічі натисніть VERIFY.cmd або перетягніть на нього вихідний ZIP. У macOS/Linux виконайте sh VERIFY.sh.",
@@ -892,7 +895,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "Los registros del 1 al {through}, de un {total}, coinciden con el punto de control que has proporcionado.",
       "no checkpoint supplied": "No se ha proporcionado ningún punto de control",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Este tipo de archivo no contiene puntos de control ni marcas de tiempo: el último registro está incluido en el registro de pruebas del mismo espacio de trabajo. Verifica ese archivo ZIP con las opciones --fingerprint y --tsa-ca, --check-bitcoin o --witness con la opción --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Las fechas de las publicaciones en los canales se obtuvieron de Telegram en el momento de la verificación; no se tienen en cuenta las publicaciones editadas."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Las fechas de las publicaciones en los canales se obtuvieron de Telegram en el momento de la verificación; no se tienen en cuenta las publicaciones editadas.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "El último registro exportado existía hace {time}; marca de tiempo eIDAS certificada de {service}"
     },
     "reader": {
       "launch": "Extraiga todo el ZIP. Haga doble clic en VERIFY.cmd o arrastre el ZIP original sobre él. En macOS/Linux ejecute sh VERIFY.sh.",
@@ -1127,7 +1131,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "Os registros 1 a {through}, de {total}, correspondem ao ponto de verificação que você forneceu",
       "no checkpoint supplied": "nenhum ponto de verificação fornecido",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Esse tipo de arquivo não contém pontos de verificação nem carimbos de data/hora: o último registro está vinculado ao diário de evidências do mesmo espaço de trabalho. Verifique esse ZIP com as opções --fingerprint e --tsa-ca, --check-bitcoin ou --witness com a opção --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "As datas das publicações nos canais foram obtidas do Telegram no momento da verificação; as publicações editadas não são contabilizadas."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "As datas das publicações nos canais foram obtidas do Telegram no momento da verificação; as publicações editadas não são contabilizadas.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "O último registro exportado existia há {time}; carimbo de data e hora qualificado pelo eIDAS do {service}"
     },
     "reader": {
       "launch": "Extraia todo o ZIP. Dê um duplo clique em VERIFY.cmd ou arraste o ZIP original sobre ele. No macOS/Linux, execute sh VERIFY.sh.",
@@ -1362,7 +1367,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "{total}'den 1'e kadar olan kayıtlar, sağladığınız kontrol noktasıyla eşleşiyor {through}",
       "no checkpoint supplied": "kontrol noktası sağlanmadı",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Bu arşiv türü herhangi bir kontrol noktası veya zaman damgası içermez: son kayıt, aynı çalışma alanının delil günlüğüne bağlanmıştır. ZIP dosyasını --fingerprint ve --tsa-ca, --check-bitcoin veya --witness ile --channel seçeneğini kullanarak doğrulayın.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Kanal gönderilerinin tarihleri, doğrulama sırasında Telegram'dan okunmuştur; düzenlenmiş gönderiler sayılmamıştır."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Kanal gönderilerinin tarihleri, doğrulama sırasında Telegram'dan okunmuştur; düzenlenmiş gönderiler sayılmamıştır.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "{time} tarihinde son dışa aktarılan kayıt mevcuttu; {service} kaynaklı eIDAS onaylı zaman damgası"
     },
     "reader": {
       "launch": "ZIP dosyasının tamamını çıkarın. VERIFY.cmd dosyasına çift tıklayın veya özgün ZIP dosyasını üzerine sürükleyin. macOS/Linux üzerinde sh VERIFY.sh çalıştırın.",
@@ -1597,7 +1603,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "السجلات من 1 إلى {through}، من أصل {total}، تتطابق مع نقطة التحقق التي قدمتها",
       "no checkpoint supplied": "لم يتم توفير نقطة تفتيش",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "لا يحتوي هذا النوع من الأرشيف على نقاط فحص أو طوابع زمنية: السجل الأخير مرفق في سجل الأدلة الخاص بنفس مساحة العمل. تحقق من ملف ZIP هذا باستخدام الخيارات --fingerprint و--tsa-ca و--check-bitcoin أو --witness مع الخيار --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "تم قراءة تواريخ منشورات القنوات من تطبيق Telegram وقت التحقق؛ ولا يتم احتساب المنشورات التي تم تعديلها."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "تم قراءة تواريخ منشورات القنوات من تطبيق Telegram وقت التحقق؛ ولا يتم احتساب المنشورات التي تم تعديلها.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "آخر سجل تم تصديره كان موجودًا في {time}؛ طابع زمني معتمد وفقًا لمعيار eIDAS من {service}"
     },
     "reader": {
       "launch": "استخرج محتويات ZIP بالكامل. انقر مرتين على VERIFY.cmd أو اسحب ملف ZIP الأصلي إليه. على macOS/Linux شغّل sh VERIFY.sh.",
@@ -1832,7 +1839,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "رکوردهای ۱ تا {through} از {total} با نقطهٔ کنترل ارائه‌شده توسط شما مطابقت دارند",
       "no checkpoint supplied": "هیچ نقطهٔ کنترل ارائه‌شده نیست",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "این نوع آرشیو هیچ نقطهٔ کنترلی یا مهر زمانی ندارد: آخرین رکورد در دفترچهٔ شواهد همان فضای کاری ثبت می‌شود. تأیید کنید که ZIP با --fingerprint و --tsa-ca، --check-bitcoin یا --witness با --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "تاریخ پست‌های کانال در زمان تأیید از Telegram خوانده شد؛ پست‌های ویرایش‌شده شمرده نمی‌شوند."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "تاریخ پست‌های کانال در زمان تأیید از Telegram خوانده شد؛ پست‌های ویرایش‌شده شمرده نمی‌شوند.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "آخرین رکورد صادرشده تا زمان {time}؛ مهر زمانی معتبر eIDAS از {service}"
     },
     "reader": {
       "launch": "تمام محتوای ZIP را استخراج کنید. روی VERIFY.cmd دوبار کلیک کنید یا ZIP اصلی را روی آن بکشید. در macOS/Linux دستور sh VERIFY.sh را اجرا کنید.",
@@ -2067,7 +2075,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "ریکارڈز 1–{through}، {total} میں سے آپ کے فراہم کردہ چیک پوائنٹ سے مطابقت رکھتے ہیں۔",
       "no checkpoint supplied": "کوئی چیک پوائنٹ فراہم نہیں کیا گیا",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "اس آرکائیو قسم میں کوئی چیک پوائنٹس یا ٹائم اسٹیمپس شامل نہیں ہیں: آخری ریکارڈ اسی ورک اسپیس کے ثبوت جریدے میں منسلک ہوتا ہے۔ اس بات کی تصدیق کریں کہ ZIP کو --fingerprint اور --tsa-ca کے ساتھ، یا --check-bitcoin یا --witness کو --channel کے ساتھ۔",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "چینل پوسٹ کی تاریخیں تصدیق کے وقت Telegram سے پڑھی گئیں؛ ترمیم شدہ پوسٹس شمار نہیں کی جاتیں۔"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "چینل پوسٹ کی تاریخیں تصدیق کے وقت Telegram سے پڑھی گئیں؛ ترمیم شدہ پوسٹس شمار نہیں کی جاتیں۔",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "آخری برآمد شدہ ریکارڈ {time} تک موجود تھا؛ {service} کی جانب سے مستند eIDAS ٹائم اسٹیمپ۔"
     },
     "reader": {
       "launch": "پورا ZIP نکالیں۔ VERIFY.cmd پر دو بار کلک کریں یا اصل ZIP کو اس پر کھینچ کر چھوڑیں۔ macOS/Linux پر sh VERIFY.sh چلائیں۔",
@@ -2302,7 +2311,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "रिकॉर्ड 1–{through}, {total} में से आपके द्वारा प्रदान किए गए चेकपॉइंट से मेल खाते हैं",
       "no checkpoint supplied": "कोई चेकपॉइंट प्रदान नहीं किया गया",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "इस आर्काइव प्रकार में कोई चेकपॉइंट या टाइमस्टैम्प नहीं होते: अंतिम रिकॉर्ड उसी वर्कस्पेस के एविडेंस जर्नल में बंधा होता है। सत्यापित करें कि ZIP को --fingerprint और --tsa-ca के साथ, या --check-bitcoin या --witness को --channel के साथ।",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Telegram से सत्यापन के समय चैनल पोस्ट की तिथियाँ पढ़ी गईं; संपादित पोस्टों को नहीं गिना जाता।"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Telegram से सत्यापन के समय चैनल पोस्ट की तिथियाँ पढ़ी गईं; संपादित पोस्टों को नहीं गिना जाता।",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "अंतिम निर्यातित रिकॉर्ड {time} तक मौजूद था; {service} से योग्य eIDAS टाइमस्टैम्प"
     },
     "reader": {
       "launch": "पूरा ZIP निकालें। VERIFY.cmd पर डबल-क्लिक करें या मूल ZIP को उस पर खींचकर छोड़ें। macOS/Linux पर sh VERIFY.sh चलाएँ।",
@@ -2537,7 +2547,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "rekaman 1–{through} dari {total} cocok dengan titik pemeriksaan yang Anda berikan",
       "no checkpoint supplied": "tidak ada titik pemeriksaan yang disediakan",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Jenis arsip ini tidak memiliki titik pemeriksaan atau cap waktu: catatan terakhir terikat dalam jurnal bukti di ruang kerja yang sama. Verifikasi berkas ZIP tersebut dengan opsi --fingerprint dan --tsa-ca, --check-bitcoin, atau --witness dengan opsi --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Tanggal posting saluran dibaca dari Telegram pada saat verifikasi; posting yang telah diedit tidak dihitung."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Tanggal posting saluran dibaca dari Telegram pada saat verifikasi; posting yang telah diedit tidak dihitung.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Catatan terakhir yang diekspor dibuat pada pukul {time}; cap waktu eIDAS yang memenuhi syarat dari {service}"
     },
     "reader": {
       "launch": "Ekstrak seluruh ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asli ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -2772,7 +2783,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "Các bản ghi từ 1 đến {through}/{total} khớp với điểm kiểm tra mà bạn đã cung cấp",
       "no checkpoint supplied": "không có điểm kiểm tra nào được cung cấp",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Loại tệp lưu trữ này không chứa điểm kiểm tra hoặc dấu thời gian: bản ghi cuối cùng được gắn vào sổ nhật ký bằng chứng của cùng không gian làm việc đó. Hãy xác minh tệp ZIP đó bằng các tùy chọn --fingerprint và --tsa-ca, --check-bitcoin hoặc --witness cùng với --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Ngày đăng bài trên kênh được lấy từ Telegram tại thời điểm xác minh; các bài đăng đã chỉnh sửa không được tính."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Ngày đăng bài trên kênh được lấy từ Telegram tại thời điểm xác minh; các bài đăng đã chỉnh sửa không được tính.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Bản ghi xuất cuối cùng tồn tại vào lúc {time}; dấu thời gian eIDAS được chứng nhận từ {service}"
     },
     "reader": {
       "launch": "Giải nén toàn bộ ZIP. Nhấp đúp VERIFY.cmd hoặc kéo ZIP gốc vào đó. Trên macOS/Linux, chạy sh VERIFY.sh.",
@@ -3007,7 +3019,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "第 1 至 {through} 条记录（共 {total} 条）与您提供的检查点匹配",
       "no checkpoint supplied": "未提供检查点",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "此存档类型不包含检查点或时间戳：最后一条记录已绑定到同一工作区的证据日志中。请使用 --fingerprint、--tsa-ca、--check-bitcoin 或 --witness 配合 --channel 选项验证该 ZIP 文件。",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "频道帖子的发布日期是在验证时从Telegram读取的；已编辑的帖子不计入统计。"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "频道帖子的发布日期是在验证时从Telegram读取的；已编辑的帖子不计入统计。",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "最后导出的记录创建于{time}；来自{service}的符合eIDAS标准的时间戳"
     },
     "reader": {
       "launch": "请完整解压 ZIP。双击 VERIFY.cmd，或将原始 ZIP 拖到它上面。在 macOS/Linux 中运行 sh VERIFY.sh。",
@@ -3242,7 +3255,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "Les enregistrements 1 à {through}, sur {total}, correspondent au point de contrôle que vous avez fourni.",
       "no checkpoint supplied": "Aucun point de contrôle fourni",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Ce type d'archive ne contient ni point de contrôle ni horodatage : le dernier enregistrement est intégré au journal des preuves du même espace de travail. Vérifiez ce fichier ZIP à l'aide des options --fingerprint et --tsa-ca, --check-bitcoin ou --witness avec l'option --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Les dates de publication des messages sur les chaînes ont été extraites d'Telegram au moment de la vérification ; les messages modifiés ne sont pas pris en compte."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Les dates de publication des messages sur les chaînes ont été extraites d'Telegram au moment de la vérification ; les messages modifiés ne sont pas pris en compte.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Dernier enregistrement exporté datant de {time} ; horodatage eIDAS certifié par {service}"
     },
     "reader": {
       "launch": "Extrayez tout le ZIP. Double-cliquez sur VERIFY.cmd ou déposez le ZIP original dessus. Sous macOS/Linux, exécutez sh VERIFY.sh.",
@@ -3477,7 +3491,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "Die Einträge 1–{through} von {total} stimmen mit dem von Ihnen angegebenen Prüfpunkt überein.",
       "no checkpoint supplied": "Es wurde kein Checkpoint angegeben.",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Dieser Archivtyp enthält keine Checkpoints oder Zeitstempel: Der letzte Datensatz ist im Beweismittelprotokoll desselben Arbeitsbereichs verzeichnet. Überprüfen Sie diese ZIP-Datei mit den Optionen --fingerprint und --tsa-ca, --check-bitcoin oder --witness sowie --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Die Veröffentlichungsdaten der Kanalbeiträge wurden zum Zeitpunkt der Überprüfung aus Telegram ausgelesen; bearbeitete Beiträge werden nicht berücksichtigt."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Die Veröffentlichungsdaten der Kanalbeiträge wurden zum Zeitpunkt der Überprüfung aus Telegram ausgelesen; bearbeitete Beiträge werden nicht berücksichtigt.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Der zuletzt exportierte Datensatz existierte vor {time}; qualifizierter eIDAS-Zeitstempel von {service}"
     },
     "reader": {
       "launch": "Entpacken Sie die gesamte ZIP-Datei. Doppelklicken Sie auf VERIFY.cmd oder ziehen Sie die ursprüngliche ZIP-Datei darauf. Unter macOS/Linux führen Sie sh VERIFY.sh aus.",
@@ -3712,7 +3727,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "I record da 1 a {through}, su {total}, corrispondono al checkpoint da te fornito",
       "no checkpoint supplied": "nessun punto di controllo fornito",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Questo tipo di archivio non contiene checkpoint né timestamp: l'ultimo record è associato al registro delle prove dello stesso spazio di lavoro. Verificare l'ZIP utilizzando --fingerprint e --tsa-ca, --check-bitcoin o --witness con --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Le date dei post nei canali sono state ricavate da Telegram al momento della verifica; i post modificati non vengono conteggiati."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Le date dei post nei canali sono state ricavate da Telegram al momento della verifica; i post modificati non vengono conteggiati.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "L'ultimo record esportato risale a {time}; timestamp eIDAS certificato da {service}"
     },
     "reader": {
       "launch": "Estrai l'intero ZIP. Fai doppio clic su VERIFY.cmd oppure trascinaci sopra lo ZIP originale. Su macOS/Linux esegui sh VERIFY.sh.",
@@ -3947,7 +3963,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "{total}dan {through}i siz taqdim etgan tekshiruv nuqtasiga mos keladi",
       "no checkpoint supplied": "hech qanday tekshiruv nuqtasi taqdim etilmagan",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Ushbu arxiv turi hech qanday tekshiruv nuqtasi yoki vaqt tamg'alarini o'z ichiga olmaydi: oxirgi yozuv shu ish maydonining dalillar jurnaliga bog'langan. ZIPni --fingerprint va --tsa-ca, --check-bitcoin yoki --witness bilan --channel parametrlari yordamida tekshiring.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Kanal postlari sanalari tasdiqlash vaqtida Telegram'dan o'qildi; tahrirlangan postlar hisobga olinmaydi."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Kanal postlari sanalari tasdiqlash vaqtida Telegram'dan o'qildi; tahrirlangan postlar hisobga olinmaydi.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Oxirgi eksport qilingan yozuv {time} da mavjud edi; {service} dan malakali eIDAS vaqti muhri"
     },
     "reader": {
       "launch": "ZIP arxivini to‘liq oching. VERIFY.cmd faylini ikki marta bosing yoki asl ZIP faylini uning ustiga olib boring. macOS/Linux tizimida sh VERIFY.sh buyrug‘ini bajaring.",
@@ -4182,7 +4199,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "{total}개 중 1~{through}번째 기록이 귀하가 제공한 체크포인트와 일치합니다.",
       "no checkpoint supplied": "체크포인트가 제공되지 않았습니다.",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "이 아카이브 유형에는 체크포인트나 타임스탬프가 포함되어 있지 않습니다. 마지막 기록은 동일한 작업 공간의 증거 저널에 연결되어 있습니다. --fingerprint 및 --tsa-ca, --check-bitcoin 또는 --witness 옵션을 사용하여 --channel와 함께 해당 ZIP 파일을 검증하십시오.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "채널 게시물 날짜는 검증 시점에 Telegram에서 읽어온 것이며, 수정된 게시물은 집계 대상에서 제외됩니다."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "채널 게시물 날짜는 검증 시점에 Telegram에서 읽어온 것이며, 수정된 게시물은 집계 대상에서 제외됩니다.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "{time} 시점에 마지막으로 내보낸 기록이 존재했습니다; {service}에서 발급한 eIDAS 인증 타임스탬프"
     },
     "reader": {
       "launch": "ZIP 전체를 압축 해제하세요. VERIFY.cmd를 두 번 클릭하거나 원본 ZIP을 그 위로 끌어 놓으세요. macOS/Linux에서는 sh VERIFY.sh를 실행하세요.",
@@ -4417,7 +4435,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "第 1 至 {through} 筆記錄（共 {total} 筆）與您提供的檢查點相符",
       "no checkpoint supplied": "未提供檢查點",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "此壓縮檔類型不包含檢查點或時間戳記：最後一筆記錄已綁定至同一工作區的證據日誌中。請使用 --fingerprint 及 --tsa-ca、--check-bitcoin 或 --witness 搭配 --channel 來驗證該 ZIP 檔案。",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "頻道貼文的日期是在驗證時從 Telegram 讀取的；經編輯的貼文不計入其中。"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "頻道貼文的日期是在驗證時從 Telegram 讀取的；經編輯的貼文不計入其中。",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "最後匯出的記錄於 {time} 時存在；來自 {service} 的符合 eIDAS 標準的時間戳記"
     },
     "reader": {
       "launch": "請完整解壓縮 ZIP。按兩下 VERIFY.cmd，或將原始 ZIP 拖曳到它上面。在 macOS/Linux 中執行 sh VERIFY.sh。",
@@ -4652,7 +4671,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "rekod 1–{through} daripada {total} sepadan dengan checkpoint yang anda berikan",
       "no checkpoint supplied": "tiada checkpoint disediakan",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Jenis arkib ini tidak mempunyai titik pemeriksaan atau cap masa: rekod terakhir diikat dalam jurnal bukti ruang kerja yang sama. Semak ZIP dengan --fingerprint dan --tsa-ca, --check-bitcoin atau --witness dengan --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Tarikh pos saluran dibaca daripada Telegram semasa pengesahan; pos yang disunting tidak dikira."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Tarikh pos saluran dibaca daripada Telegram semasa pengesahan; pos yang disunting tidak dikira.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "rekod eksport terakhir wujud pada {time}; cop masa eIDAS bertauliah daripada {service}"
     },
     "reader": {
       "launch": "Ekstrak keseluruhan ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asal ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -4887,7 +4907,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "rekordy od 1 do {through}, spośród {total}, pasują do podanego przez Ciebie punktu kontrolnego",
       "no checkpoint supplied": "brak podanego punktu kontrolnego",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "Ten typ archiwum nie zawiera punktów kontrolnych ani znaczników czasu: ostatni rekord jest przypisany do dziennika dowodowego tego samego obszaru roboczego. Zweryfikuj ten plik ZIP, używając opcji --fingerprint oraz --tsa-ca, --check-bitcoin lub --witness z opcją --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Daty publikacji w kanałach zostały odczytane z aplikacji Telegram w momencie weryfikacji; edytowane posty nie są brane pod uwagę."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "Daty publikacji w kanałach zostały odczytane z aplikacji Telegram w momencie weryfikacji; edytowane posty nie są brane pod uwagę.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "Ostatni wyeksportowany rekord istniał o godz. {time}; kwalifikowany znacznik czasu eIDAS z {service}"
     },
     "reader": {
       "launch": "Rozpakuj cały ZIP. Kliknij dwukrotnie VERIFY.cmd lub przeciągnij na niego oryginalny ZIP. W macOS/Linux uruchom sh VERIFY.sh.",
@@ -5122,7 +5143,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "{total}件のうち、1～{through}件が、ご指定いただいたチェックポイントと一致しました",
       "no checkpoint supplied": "チェックポイントが指定されていません",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "このアーカイブ形式にはチェックポイントやタイムスタンプは含まれていません。最後のレコードは、同じワークスペースの証拠ジャーナルに紐付けられています。--fingerprintおよび--tsa-ca、--check-bitcoin、または--witnessオプションを指定して、--channelオプションと組み合わせてZIPファイルの検証を行ってください。",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "チャンネルの投稿日は、検証時にTelegramから読み取られました。編集された投稿はカウントされていません。"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "チャンネルの投稿日は、検証時にTelegramから読み取られました。編集された投稿はカウントされていません。",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "最後にエクスポートされたレコードは{time}に存在していました；{service}からのeIDAS認定タイムスタンプ"
     },
     "reader": {
       "launch": "ZIP全体を展開してください。VERIFY.cmdをダブルクリックするか、元のZIPをその上にドラッグしてください。macOS/Linuxでは sh VERIFY.sh を実行します。",
@@ -5357,7 +5379,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "บันทึก 1–{through} จาก {total} ตรงกับจุดตรวจสอบที่คุณระบุ",
       "no checkpoint supplied": "ไม่มีจุดตรวจสอบ",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "ประเภทไฟล์เก็บถาวรนี้ไม่มีจุดตรวจสอบหรือเวลาประทับ: บันทึกสุดท้ายถูกผูกไว้ในหนังสือบันทึกหลักฐานของพื้นที่ทำงานเดียวกัน โปรดตรวจสอบไฟล์ZIPดังกล่าวด้วยคำสั่ง --fingerprint และ --tsa-ca, --check-bitcoin หรือ --witness พร้อมด้วย --channel",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "วันที่โพสต์ในช่องถูกอ่านจากTelegram ณ เวลาตรวจสอบ; โพสต์ที่ได้รับการแก้ไขไม่นับรวม"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "วันที่โพสต์ในช่องถูกอ่านจากTelegram ณ เวลาตรวจสอบ; โพสต์ที่ได้รับการแก้ไขไม่นับรวม",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "บันทึกที่ส่งออกครั้งสุดท้ายมีอยู่เมื่อ{time}; ตราเวลา eIDAS ที่ได้รับการรับรองจาก{service}"
     },
     "reader": {
       "launch": "แตกไฟล์ ZIP ทั้งหมด ดับเบิลคลิก VERIFY.cmd หรือลาก ZIP ต้นฉบับไปวางบนไฟล์นั้น สำหรับ macOS/Linux ให้เรียกใช้ sh VERIFY.sh",
@@ -5592,7 +5615,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "הרשומות 1–{through} מתוך {total} תואמות את נקודת הבדיקה שסיפקת",
       "no checkpoint supplied": "לא סופק נקודת ביקורת",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "סוג ארכיון זה אינו מכיל נקודות ביקורת או חותמות זמן: הרשומה האחרונה קשורה ביומן הראיות של אותו מרחב עבודה. אמת את קובץ ה-ZIP באמצעות האפשרויות --fingerprint ו---tsa-ca, --check-bitcoin או --witness עם --channel.",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "תאריכי הפרסומים בערוץ נקראו מ-Telegram בזמן האימות; פרסומים שעברו עריכה אינם נכללים בספירה."
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "תאריכי הפרסומים בערוץ נקראו מ-Telegram בזמן האימות; פרסומים שעברו עריכה אינם נכללים בספירה.",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "הרשומה האחרונה שיוצאה הייתה קיימת ב-{time}; חותמת זמן מוסמכת לפי eIDAS מ-{service}"
     },
     "reader": {
       "launch": "חלצו את כל תוכן ה-ZIP. לחצו פעמיים על VERIFY.cmd או גררו אליו את קובץ ה-ZIP המקורי. ב-macOS/Linux הריצו sh VERIFY.sh.",
@@ -5827,7 +5851,8 @@
       "records 1–{through} of {total} match the checkpoint you supplied": "রেকর্ড 1–{through}, {total}-এর মধ্যে, আপনি যে চেকপয়েন্টটি সরবরাহ করেছেন তার সাথে মেলে",
       "no checkpoint supplied": "কোনও চেকপয়েন্ট সরবরাহ করা হয়নি",
       "This archive type carries no checkpoints or timestamps: the last record is bound in the evidence journal of the same workspace. Verify that ZIP with --fingerprint and --tsa-ca, --check-bitcoin or --witness with --channel.": "এই আর্কাইভ টাইপে কোনো চেকপয়েন্ট বা টাইমস্ট্যাম্প নেই: শেষ রেকর্ডটি একই ওয়ার্কস্পেসের প্রমাণ জার্নালে আবদ্ধ। নিশ্চিত করুন যে ZIP ফাইলটি --fingerprint এবং --tsa-ca দিয়ে, অথবা --check-bitcoin বা --witness ফাইলটি --channel দিয়ে যাচাই করা হয়েছে।",
-      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "চ্যানেলের পোস্টের তারিখ যাচাই করার সময় Telegram থেকে পড়া হয়েছিল; সম্পাদিত পোস্টগুলো গণনা করা হয়নি।"
+      "Channel post dates were read from Telegram at verification time; edited posts are not counted.": "চ্যানেলের পোস্টের তারিখ যাচাই করার সময় Telegram থেকে পড়া হয়েছিল; সম্পাদিত পোস্টগুলো গণনা করা হয়নি।",
+      "last exported record existed by {time}; qualified eIDAS time stamp from {service}": "শেষ রপ্তানি করা রেকর্ডটি {time}-এ বিদ্যমান ছিল; {service} থেকে যোগ্য eIDAS টাইমস্ট্যাম্প"
     },
     "reader": {
       "launch": "পুরো ZIP খুলে নিন। VERIFY.cmd-তে দুবার ক্লিক করুন অথবা মূল ZIP-টি তার ওপর টেনে ছেড়ে দিন। macOS/Linux-এ sh VERIFY.sh চালান।",
