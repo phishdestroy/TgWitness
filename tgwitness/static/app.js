@@ -3972,22 +3972,23 @@ function renderVerification(){
       ["ok",tr("Integrity"),tr("Verified {n} event signatures and chain links through event #{n}.",{n:v.events})+
         (newer?" "+tr("The journal has changed since this check; verify again to check newer records."):"")+" "+
         tr("Attachments are checked when exporting a signed ZIP.")],
-      ["step",tr("Signer key"),tr("Send the collector fingerprint to the recipient separately")]]],
-    [tr("At least one of these"),[
-      [c.witness_at?"ok":"off",tr("Independent binding of the last record"),c.witness_at?tr("A witness fetched the signed journal head at {time}.",{time:fmtFull(c.witness_at)})
-        :tr("Save a checkpoint and hand it to another party, or connect a witness bot.")],
+      ["step",tr("Signer key"),tr("Send the collector fingerprint to the recipient separately")],
       [stamped,tr("External time"),stamped==="ok"?tr("The latest timestamp receipt covers records 1–{n}.",{n:c.stamped_through})
         :stamped==="part"?tr("The latest timestamp receipt covers records 1–{n} of {total}; the next timestamped checkpoint covers the later ones.",{n:c.stamped_through,total:last})
         :c.timestamps?tr("Evidence mode is on; the next checkpoint will be timestamped."):tr("Turn on Evidence mode to timestamp checkpoints.")]]],
+    [tr("Supporting records, not part of the minimum"),[
+      [c.witness_at?"ok":"off",tr("Witness with its own key"),c.witness_at?tr("A witness fetched the signed journal head at {time}.",{time:fmtFull(c.witness_at)})
+        :tr("Connect a witness bot that posts to a public channel: Telegram dates each post.")],
+      ["step",tr("Retained checkpoint"),tr("Save a checkpoint and hand it to another party through another channel.")]]],
   ];
   const rows=groups.flatMap(([title,lines])=>[node("div","verification-group",title),...lines.map(([state,name,text])=>{
     const row=node("div","verification-line "+state);
     row.append(node("strong","",({ok:"✓ ",off:"○ ",step:"→ ",part:"◐ "})[state]+name+": "),node("span","",text));return row;})]);
   box.replaceChildren(...rows,node("div","hint",stamped==="ok"
     ?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), a recipient can meet the minimum for evidence.")
-    :c.witness_at?tr("With the collector fingerprint, the witness journal export and the witness fingerprint, a recipient can meet the minimum for the records the witness has fetched.")
-    :stamped==="part"?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), the minimum covers records 1–{n}; later records need the next timestamp or a checkpoint handed to another party.",{n:c.stamped_through})
-    :tr("Integrity only: connect a witness bot, turn on Evidence mode or hand a checkpoint to another party.")));
+    :stamped==="part"?tr("With the collector fingerprint and the timestamp authority's root certificate (--tsa-ca), the minimum covers records 1–{n}; later records need the next timestamp.",{n:c.stamped_through})
+    :c.witness_at?tr("With the collector fingerprint, the witness journal export and its public channel (--channel https://t.me/s/…), a recipient can meet the minimum when Telegram dated a witness post at the export head.")
+    :tr("Integrity only: turn on Evidence mode or connect a witness bot that posts to a public channel.")));
 }
 $("verify-journal").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const profile=state.profile,revision=state.workspaceRevision;clearVerification();

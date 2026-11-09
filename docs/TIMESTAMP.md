@@ -34,8 +34,9 @@ The journal verifier reports backward steps and unparseable `observed_at` values
 in `chronology` when present, and includes a warning in its command output. It
 preserves the signed timestamps and still checks their signatures. A backward step
 can come from a clock correction, so review it with the host's clock records.
-Independent time comes from verified external timestamps and drand rounds;
-`--strict` governs signer pinning and supported formats.
+Independent time comes from verified external timestamps, witness posts read from
+their public t.me page and drand rounds; `--strict` governs signer pinning and
+supported formats.
 
 Recorded drand values receive structural and hash self-consistency checks offline.
 `--check-drand` compares selected recorded rounds with HTTPS relay responses; the
@@ -71,6 +72,10 @@ installation. OpenSSL 3.5.9 was tested locally with a synthetic CA/TSA.
 ```sh
 python tgwitness/verify.py evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
 ```
+
+   This shows that the export contains the timestamped prefix. `verify.py` reads
+   timestamp receipts only from the ZIP, where evidence mode stores them; the manual
+   reply is checked in step 5 and covers the records up to this checkpoint.
 
 7. Preserve the ZIP, checkpoint, request, reply, certificate chain, verification
    results and handoff record outside the collector. Repeat verification at receipt.
