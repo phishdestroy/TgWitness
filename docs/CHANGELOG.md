@@ -7,7 +7,7 @@
 <details>
 <summary>On this page</summary>
 
-- [Unreleased](#unreleased)
+- [0.9.2 preview · 9 November 2026](#092-preview--9-november-2026)
 - [0.9.1 preview · 5 November 2026](#091-preview--5-november-2026)
 - [0.9.0 preview · 4 November 2026](#090-preview--4-november-2026)
 - [0.8.1 preview · 2 November 2026](#081-preview--2-november-2026)
@@ -21,7 +21,7 @@
 
 </details>
 
-## Unreleased
+## 0.9.2 preview · 9 November 2026
 
 - The minimum for evidence is now integrity, the confirmed signer key and external time from a third party covering the last exported record: a validated RFC 3161 timestamp, a confirmed OpenTimestamps proof, a witness post read live from t.me, a witness Bitcoin seal or a checked GitHub attestation. A retained checkpoint and a witness with its own key are supporting checks, because the collector could create both alone. `verify.py --channel https://t.me/s/…` reads post dates from Telegram and skips the dates of edited posts; dates from a supplied `result.json` or any other source remain supplied metadata.
 
