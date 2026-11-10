@@ -3,6 +3,7 @@ import base64
 import hashlib
 import json
 import logging
+import re
 import shutil
 import time
 import secrets
@@ -2031,16 +2032,16 @@ class Collector:
         await asyncio.sleep(0)
         try:
             result = await asyncio.wait_for(client(functions.account.GetAuthorizationsRequest()), 30)
-        except asyncio.CancelledError:
-            raise
-        except Exception:
-            try:
-                await asyncio.wait_for(client(functions.account.GetAuthorizationsRequest()), 30)
-            except Exception:
+        except AUTHORIZATION_ERRORS:
+            previous = self.store.get_setting("sessions_seen", None)
+            if previous and previous.get("current") is not None:
+                self.store.set_setting("sessions_seen", {**previous, "current": None})
                 self.store.append("coverage.gap", {
                     "reason": "session_revoked_externally",
                     "meaning": SESSION_REVOKED_EXTERNALLY_MEANING,
                     "completeness": "records after this point were captured on a ghost session"})
+            return None
+        except Exception:
             return None
         snapshot = sessions_snapshot(result.authorizations)
         previous = self.store.get_setting("sessions_seen", None)
@@ -2083,6 +2084,8 @@ class Collector:
                     "2fa_changed" if "Two-Step Verification" in text else
                     "oauth_login" if "via @" in text or "logged in on" in text.lower() else
                     "security_notice")
+            if kind == "login_code":
+                text = re.sub(r"\b\d{5,6}\b", "•••••", text)
             self.store.append("account.security_event", {
                 "source": "telegram_777000", "event_kind": kind,
                 "message_id": m.id, "sent_at": date_string(m.date), "text": text,
@@ -2410,6 +2413,8 @@ class Collector:
         if not shutdown:
             self.store.set_setting("resume", False)
         if active:
+            with suppress(Exception):
+                await self._snapshot_session_state("observation_stop")
             self.store.append("observation.stopped", {"reason": "shutdown" if shutdown else "operator",
                                                     "media_jobs_preserved": self.store.media_stats()})
             retain_checkpoint(self.store, self.vault)
@@ -2474,6 +2479,9 @@ class Collector:
                 retain_checkpoint(self.store, self.vault)
             if self.running and self.client.is_connected():
                 await self.watch_updates()
+                if now - self.security_log_checked_at >= SECURITY_LOG_EVERY:
+                    self.security_log_checked_at = now
+                    await self.poll_security_log()
             await asyncio.sleep(min(10, interval))
 
     async def note_drop(self):
