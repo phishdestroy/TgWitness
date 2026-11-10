@@ -5254,7 +5254,7 @@
   "Save an account archive.": "ذخیره بایگانی حساب.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "پیام‌های جدید و تغییرات آن‌ها را همراه با نشانه‌های زمانی مستقل از یک شخص ثالث که دریافت‌کننده آن را بررسی می‌کند، حفظ کنید. نیازمند درخواست‌هایی خارج از Telegram است.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "به‌طور مداوم با زمان‌بندی‌های مستقل از یک شخص ثالث که دریافت‌کننده آن را بررسی می‌کند، ضبط کنید. نیازمند درخواست‌هایی خارج از Telegram است.",
-  "Try public proxies, then WARP.": "اول پراکسی‌های عمومی، سپس WARP.",
+  "Try WARP, then public proxies.": "اول WARP، سپس پراکسی‌های عمومی.",
   "Connect through a local tunnel.": "اتصال از راه یک تونل محلی.",
   "Paste one proxy address.": "نشانی یک پراکسی را بچسبانید.",
   "Telegram will see this server’s address.": "Telegram نشانی این سرور را می‌بیند.",

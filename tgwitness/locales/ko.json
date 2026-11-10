@@ -5227,7 +5227,7 @@
   "Save an account archive.": "계정 보관 파일을 저장합니다.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "수신자가 확인하는 제3자의 독립적인 타임스탬프와 함께 새 메시지와 그 변경 내역을 보관합니다. Telegram 외부에서 요청이 필요합니다.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "수신자가 확인하는 제3자의 독립적인 타임스탬프를 사용하여 지속적으로 기록합니다. Telegram 외부에서 요청이 필요합니다.",
-  "Try public proxies, then WARP.": "공용 프록시를 먼저 시도하고 다음에 WARP를 씁니다.",
+  "Try WARP, then public proxies.": "WARP를 먼저 시도하고 다음에 공용 프록시를 씁니다.",
   "Connect through a local tunnel.": "로컬 터널로 연결합니다.",
   "Paste one proxy address.": "프록시 주소를 하나 붙여 넣으세요.",
   "Telegram will see this server’s address.": "Telegram이 이 서버의 주소를 보게 됩니다.",

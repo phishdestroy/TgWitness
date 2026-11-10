@@ -5227,7 +5227,7 @@
   "Save an account archive.": "Lưu bản lưu trữ tài khoản.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Lưu trữ các tin nhắn mới và các thay đổi của chúng, kèm theo dấu thời gian độc lập từ một bên thứ ba mà người nhận có thể kiểm tra. Yêu cầu thực hiện các thao tác bên ngoài Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Ghi lại liên tục với các dấu thời gian độc lập từ một bên thứ ba mà người nhận có thể kiểm tra. Cần thực hiện yêu cầu bên ngoài Telegram.",
-  "Try public proxies, then WARP.": "Thử proxy công khai, rồi WARP.",
+  "Try WARP, then public proxies.": "Thử WARP, rồi proxy công khai.",
   "Connect through a local tunnel.": "Kết nối qua một đường hầm cục bộ.",
   "Paste one proxy address.": "Dán một địa chỉ proxy.",
   "Telegram will see this server’s address.": "Telegram sẽ thấy địa chỉ của máy chủ này.",

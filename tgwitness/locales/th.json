@@ -5227,7 +5227,7 @@
   "Save an account archive.": "บันทึกไฟล์เก็บถาวรของบัญชี",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "เก็บข้อความใหม่และเปลี่ยนแปลงของข้อความเหล่านั้น พร้อมด้วยเวลาประทับจากฝ่ายที่สาม ซึ่งผู้รับจะตรวจสอบได้ ต้องมีการส่งคำขอจากนอกTelegram",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "บันทึกข้อมูลอย่างต่อเนื่องพร้อมด้วยเวลาประทับจากฝ่ายที่สาม ซึ่งผู้รับจะตรวจสอบได้ ต้องส่งคำขอจากนอกTelegram",
-  "Try public proxies, then WARP.": "ลองพร็อกซีสาธารณะก่อน แล้วจึงใช้ WARP",
+  "Try WARP, then public proxies.": "ลอง WARP ก่อน แล้วจึงใช้พร็อกซีสาธารณะ",
   "Connect through a local tunnel.": "เชื่อมต่อผ่านอุโมงค์ภายในเครื่อง",
   "Paste one proxy address.": "วางที่อยู่พร็อกซีหนึ่งรายการ",
   "Telegram will see this server’s address.": "Telegram จะเห็นที่อยู่ของเซิร์ฟเวอร์นี้",

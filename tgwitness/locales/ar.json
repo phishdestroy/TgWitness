@@ -5362,7 +5362,7 @@
   "Save an account archive.": "حفظ أرشيف للحساب.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "يحتفظ بالرسائل الجديدة والتغييرات التي تطرأ عليها، مع طوابع زمنية مستقلة من طرف ثالث يتحقق منها المستلم. يتطلب طلبات خارج تطبيق Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "يتم التسجيل بشكل مستمر باستخدام طوابع زمنية مستقلة من جهة خارجية يتحقق منها المستلم. يتطلب إرسال طلبات خارج تطبيق Telegram.",
-  "Try public proxies, then WARP.": "تجربة الوكلاء العامين ثم WARP.",
+  "Try WARP, then public proxies.": "تجربة WARP ثم الوكلاء العامين.",
   "Connect through a local tunnel.": "الاتصال عبر نفق محلي.",
   "Paste one proxy address.": "الصق عنوان وكيل واحد.",
   "Telegram will see this server’s address.": "سيرى Telegram عنوان هذا الخادم.",

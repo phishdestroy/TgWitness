@@ -5254,7 +5254,7 @@
   "Save an account archive.": "Hesap arşivi kaydet.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Yeni mesajları ve bunlardaki değişiklikleri, alıcının doğruladığı üçüncü bir tarafa ait bağımsız zaman damgalarıyla birlikte saklar. Telegram dışından istekler gerektirir.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Alıcının doğruladığı, üçüncü bir taraftan gelen bağımsız zaman damgalarıyla sürekli kayıt yapar. Telegram dışından istekler gerektirir.",
-  "Try public proxies, then WARP.": "Önce genel proxy'leri, sonra WARP'ı dene.",
+  "Try WARP, then public proxies.": "Önce WARP'ı, sonra genel proxy'leri dene.",
   "Connect through a local tunnel.": "Yerel bir tünel üzerinden bağlan.",
   "Paste one proxy address.": "Tek bir proxy adresi yapıştırın.",
   "Telegram will see this server’s address.": "Telegram bu sunucunun adresini görecek.",

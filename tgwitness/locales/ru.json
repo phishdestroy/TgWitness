@@ -5425,7 +5425,7 @@
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Сохраняйте новые сообщения и их изменения с независимыми временными метками от третьей стороны, которые проверяет получатель. Требуются запросы за пределами Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Непрерывная запись с независимыми временными метками от третьей стороны, которые проверяет получатель. Требует запросов за пределами Telegram.",
   "Automatic": "Авто",
-  "Try public proxies, then WARP.": "Публичные прокси → WARP. Напрямую — только если разрешено.",
+  "Try WARP, then public proxies.": "WARP → публичные прокси. Напрямую — только если разрешено.",
   "Connect through a local tunnel.": "Подключиться через защищённый туннель.",
   "Paste one proxy address.": "Вставьте адрес прокси одной строкой.",
   "Telegram will see this server’s address.": "Telegram увидит адрес этого сервера.",

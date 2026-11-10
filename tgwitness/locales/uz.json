@@ -5254,7 +5254,7 @@
   "Save an account archive.": "Hisob arxivini saqlash.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Yangi xabarlar va ularning o'zgarishlarini, qabul qiluvchi tekshiradigan uchinchi tomonning mustaqil vaqt tamg'alari bilan saqlang. Telegramdan tashqaridagi so'rovlarni talab qiladi.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Qabul qiluvchi tekshiradigan uchinchi tomonning mustaqil vaqt tamg'alari bilan uzluksiz yozib borish. Telegramdan tashqaridagi so'rovlarni talab qiladi.",
-  "Try public proxies, then WARP.": "Avval ochiq proksilar, keyin WARP.",
+  "Try WARP, then public proxies.": "Avval WARP, keyin ochiq proksilar.",
   "Connect through a local tunnel.": "Mahalliy tunnel orqali ulanish.",
   "Paste one proxy address.": "Bitta proksi manzilini qo'ying.",
   "Telegram will see this server’s address.": "Telegram bu server manzilini ko'radi.",

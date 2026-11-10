@@ -5254,7 +5254,7 @@
   "Save an account archive.": "Salvare un archivio dell'account.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Conserva i nuovi messaggi e le relative modifiche, con timestamp indipendenti forniti da una terza parte e verificati dal destinatario. Richiede richieste al di fuori di Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Registra in modo continuo con timestamp indipendenti forniti da una terza parte e verificati dal destinatario. Richiede richieste al di fuori di Telegram.",
-  "Try public proxies, then WARP.": "Provare proxy pubblici, poi WARP.",
+  "Try WARP, then public proxies.": "Provare WARP, poi proxy pubblici.",
   "Connect through a local tunnel.": "Connettersi tramite un tunnel locale.",
   "Paste one proxy address.": "Incolla l'indirizzo di un proxy.",
   "Telegram will see this server’s address.": "Telegram vedrà l'indirizzo di questo server.",

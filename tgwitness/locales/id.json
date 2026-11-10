@@ -5227,7 +5227,7 @@
   "Save an account archive.": "Simpan arsip akun.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Menyimpan pesan baru dan perubahannya, dengan cap waktu independen dari pihak ketiga yang diverifikasi oleh penerima. Membutuhkan permintaan di luar Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Merekam secara terus-menerus dengan cap waktu independen dari pihak ketiga yang diverifikasi oleh penerima. Membutuhkan permintaan di luar Telegram.",
-  "Try public proxies, then WARP.": "Coba proxy publik, lalu WARP.",
+  "Try WARP, then public proxies.": "Coba WARP, lalu proxy publik.",
   "Connect through a local tunnel.": "Terhubung melalui terowongan lokal.",
   "Paste one proxy address.": "Tempel satu alamat proxy.",
   "Telegram will see this server’s address.": "Telegram akan melihat alamat server ini.",

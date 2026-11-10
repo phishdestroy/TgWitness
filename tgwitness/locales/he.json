@@ -5281,7 +5281,7 @@
   "Save an account archive.": "שמירת ארכיון של החשבון.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "שומר הודעות חדשות ואת השינויים בהן, עם חותמות זמן עצמאיות מצד שלישי שהנמען בודק. דורש בקשות מחוץ ל-Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "הקלטת רציפה עם חותמות זמן עצמאיות מצד שלישי, שהנמען בודק. דורש בקשות מחוץ ל-Telegram.",
-  "Try public proxies, then WARP.": "קודם פרוקסי ציבוריים, אחר כך WARP.",
+  "Try WARP, then public proxies.": "קודם WARP, אחר כך פרוקסי ציבוריים.",
   "Connect through a local tunnel.": "חיבור דרך מנהרה מקומית.",
   "Paste one proxy address.": "הדביקו כתובת פרוקסי אחת.",
   "Telegram will see this server’s address.": "Telegram יראה את הכתובת של השרת הזה.",

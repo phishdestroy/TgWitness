@@ -5308,7 +5308,7 @@
   "Save an account archive.": "Зберегти архів облікового запису.",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Зберігайте нові повідомлення та їхні зміни з незалежними часовими мітками від третьої сторони, які перевіряє одержувач. Потрібні запити поза межами Telegram.",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "Здійснюйте безперервний запис із незалежними мітками часу від стороннього джерела, які перевіряє одержувач. Потрібні запити поза межами Telegram.",
-  "Try public proxies, then WARP.": "Спершу публічні проксі, потім WARP.",
+  "Try WARP, then public proxies.": "Спершу WARP, потім публічні проксі.",
   "Connect through a local tunnel.": "Підключатися через локальний тунель.",
   "Paste one proxy address.": "Вставте адресу проксі одним рядком.",
   "Telegram will see this server’s address.": "Telegram бачитиме адресу цього сервера.",

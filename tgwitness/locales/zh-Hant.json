@@ -5227,7 +5227,7 @@
   "Save an account archive.": "儲存帳戶封存檔。",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "保留新訊息及其變更內容，並附有由第三方提供的獨立時間戳記，供收件者驗證。需透過 Telegram 以外的管道進行請求。",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "透過第三方持續記錄並附上獨立的時間戳記，且需由收件者進行驗證。此功能需在 Telegram 外部進行請求。",
-  "Try public proxies, then WARP.": "先嘗試公共代理，再用 WARP。",
+  "Try WARP, then public proxies.": "先嘗試 WARP，再用公共代理。",
   "Connect through a local tunnel.": "透過本機通道連線。",
   "Paste one proxy address.": "貼上一個代理位址。",
   "Telegram will see this server’s address.": "Telegram 會看到這台伺服器的位址。",

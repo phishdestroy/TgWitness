@@ -5227,7 +5227,7 @@
   "Save an account archive.": "アカウントのアーカイブを保存します。",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "新しいメッセージとその変更履歴を保存し、受信者が確認できる第三者による独立したタイムスタンプを付与する。Telegram外部からのリクエストが必要となる。",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "受信者が確認できる、サードパーティによる独立したタイムスタンプ付きで継続的に記録します。Telegram外からのリクエストが必要です。",
-  "Try public proxies, then WARP.": "公開プロキシを試し、次に WARP を使います。",
+  "Try WARP, then public proxies.": "WARP を試し、次に公開プロキシを使います。",
   "Connect through a local tunnel.": "ローカルトンネル経由で接続します。",
   "Paste one proxy address.": "プロキシのアドレスを 1 つ貼り付けてください。",
   "Telegram will see this server’s address.": "Telegram にこのサーバーのアドレスが見えます。",

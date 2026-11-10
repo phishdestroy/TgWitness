@@ -5254,7 +5254,7 @@
   "Save an account archive.": "खाते का आर्काइव सहेजें।",
   "Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "नए संदेशों और उनके परिवर्तनों को बनाए रखें, साथ ही प्राप्तकर्ता द्वारा सत्यापित किए जाने वाले तीसरे पक्ष के स्वतंत्र टाइमस्टैम्प। इसके लिए Telegram के बाहर अनुरोधों की आवश्यकता है।",
   "Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.": "प्राप्तकर्ता द्वारा सत्यापित किसी तीसरे पक्ष से स्वतंत्र टाइमस्टैम्प के साथ निरंतर रिकॉर्डिंग। इसके लिए Telegram के बाहर अनुरोधों की आवश्यकता होती है।",
-  "Try public proxies, then WARP.": "पहले सार्वजनिक प्रॉक्सी, फिर WARP आज़माएँ।",
+  "Try WARP, then public proxies.": "पहले WARP, फिर सार्वजनिक प्रॉक्सी आज़माएँ।",
   "Connect through a local tunnel.": "लोकल टनल से जुड़ें।",
   "Paste one proxy address.": "एक प्रॉक्सी पता चिपकाएँ।",
   "Telegram will see this server’s address.": "Telegram इस सर्वर का पता देखेगा।",
