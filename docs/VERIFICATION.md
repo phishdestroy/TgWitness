@@ -73,8 +73,8 @@ password-protected ZIP archive; `tgwitness verify` confirmed its integrity.
 | Intel collateral issued | 2026-11-09T20:40:09Z |
 | TCB level | 2025-08-13T00:00:00Z · status UpToDate |
 | dstack OS image | `dstack-0.5.12` · hash `8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd` |
-| Account | `6345298099` · key_origin `imported` |
-| Targets | Quark Drainer · Impala Drainer v2.0 · BotNews |
+| Account | dedicated test account · key_origin `imported` |
+| Targets | three channels |
 | Journal events | 389 |
 | Export | Password-protected ZIP · 2.9 MB |
 | Report formats | HTML + JSON + PDF (certificate `TgWitness workspace fcdbda2d3d69b439`) |
@@ -101,9 +101,9 @@ JSON report seal verified: report.json.
 PDF signature and Ed25519 seal verified: report.pdf
   certificate: TgWitness workspace fcdbda2d3d69b439
 SHA256SUMS matches the signed manifest.
-Chat Impala Drainer v2.0: IDs 1-32, 8 not observed in 7 ranges
-Chat Quark Drainer: IDs 1-210, 69 not observed in 35 ranges
-Chat BotNews: IDs 1-122, 2 not observed in 2 ranges
+Chat channel-A: IDs 1-32, 8 not observed in 7 ranges
+Chat channel-B: IDs 1-210, 69 not observed in 35 ranges
+Chat channel-C: IDs 1-122, 2 not observed in 2 ranges
 ```
 
 Assurance tier is `self_attested` because the session was imported (not created inside
@@ -116,9 +116,9 @@ with `--checkpoint` adds the drand not-before time and raises the tier to `times
 
 | Chat | ID range | Observed | Missing | Ranges |
 | --- | --- | --- | --- | --- |
-| Quark Drainer | 1–210 | 141 | 69 | 35 |
-| Impala Drainer v2.0 | 1–32 | 24 | 8 | 7 |
-| BotNews | 1–122 | 120 | 2 | 2 |
+| channel-B | 1–210 | 141 | 69 | 35 |
+| channel-A | 1–32 | 24 | 8 | 7 |
+| channel-C | 1–122 | 120 | 2 | 2 |
 
 Gaps indicate message IDs Telegram assigned that were never visible to this account.
 They are not evidence of deletion and do not identify who, if anyone, removed a message.
@@ -134,12 +134,12 @@ confirmed the drand round against the network and raised the assurance tier to
 
 | Item | Value |
 | --- | --- |
-| Collector | RunPod `ccj438m78kxpe9` · session imported · key_origin `imported` |
+| Collector | RunPod CPU instance · session imported · key_origin `imported` |
 | Journal events | 387 |
 | drand chain | `52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971` |
 | drand round in checkpoint | 33818717 · relay `https://drand.cloudflare.com` |
 | drand not-before | 2026-11-09T21:22:51Z |
-| session.fingerprint logged | `auth_key_id: 223c924486f90e3e` · seq 18 |
+| session.fingerprint logged | `auth_key_id` logged at seq 18 |
 | coverage.gap logged | seq 28 · reason `updates delivered while observation was paused` |
 | Verify result | `ASSURANCE: timestamped` · drand not-before in `timestamped.detail` |
 
