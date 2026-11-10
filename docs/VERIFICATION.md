@@ -120,8 +120,8 @@ with `--checkpoint` adds the drand not-before time and raises the tier to `times
 | channel-A | 1–32 | 24 | 8 | 7 |
 | channel-C | 1–122 | 120 | 2 | 2 |
 
-Gaps indicate message IDs Telegram assigned that were never visible to this account.
-They are not evidence of deletion and do not identify who, if anyone, removed a message.
+Gaps are message IDs Telegram assigned that were never visible to this account.
+A gap records what the collector could not observe; attribution and cause are outside what the collector can determine.
 
 
 ## drand checkpoint anchoring and verify · 9 November 2026
