@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 76209b4cd5d9252782a9f316e787247253d8837ef2654b9fd98d3b9baaeb8762
+# TgWitness verifier sources SHA-256: 513f85bad5b6f34b458ddf0a1d8f7860ebfb219a1f0f80b4087707baabdd46b0
 """Standalone verifier"""
 import argparse
 import base64
@@ -1048,6 +1048,11 @@ MESSAGE_KINDS = ("message.new", "message.snapshot", "message.edited", "message.r
 INTERRUPTIONS = {"transport_disconnected": "connection to Telegram lost",
                  "authorization_required": "Telegram signed the account out",
                  "resume_failed": "observation could not resume after a restart"}
+SESSION_NOTES = {"updates_diverted": "Telegram's update counter grew while no update reached this session",
+                 "session_revoked_externally": "this session left Telegram's session list while its connection kept working",
+                 "concurrent_sessions_at_start": "other sessions were signed in when observation started"}
+KEY_ORIGINS = {"created": "created by signing in from this workspace", "imported": "imported from an existing session"}
+LOGIN_METHODS = {"qr": "QR code", "phone_code": "phone code", "session_import": "session import"}
 ACCOUNT_LOSS = {"account_banned": "account banned", "account_deleted": "account deleted",
                 "account_frozen": "account frozen", "session_duplicated": "session used in two places",
                 "session_revoked": "session revoked", "session_expired": "session expired",
@@ -1076,6 +1081,7 @@ class Coverage:
         self.ids, self.titles = {}, {}
         self.first = self.last = None
         self.allowed = LIVENESS_GAP_SECONDS
+        self.session = {}
 
     def open(self, at):
         if self.closed_at is not None:
@@ -1152,7 +1158,26 @@ class Coverage:
                 self.titles[added.get("chat_id")] = added.get("title")
         if kind in MESSAGE_KINDS and numbered_per_chat(chat_id) and isinstance(event["message_id"], int):
             self.ids.setdefault(chat_id, set()).add(event["message_id"])
+        self.session_event(at, kind, payload)
         self.sequences.add(event, MESSAGE_KINDS)
+
+    def session_event(self, at, kind, payload):
+        s = self.session
+        if kind == "account.authorized":
+            s["key_origin"], s["login_method"], s["authorized_at"] = (payload.get("key_origin"),
+                                                                       payload.get("login_method"), at)
+        elif kind == "session.import_warning":
+            s.setdefault("import_warning_at", at)
+        elif kind == "account.security_event":
+            counts = s.setdefault("security_events", {})
+            name = str(payload.get("event_kind") or "security_notice")
+            counts[name] = counts.get(name, 0) + 1
+        elif kind == "account.all_other_sessions_terminated":
+            s.setdefault("other_sessions_ended", []).append({"at": at, "ended": payload.get("sessions_before")})
+        elif kind == "account.password_changed":
+            s.setdefault("password_changes", []).append({"at": at, "operation": payload.get("operation")})
+        elif kind == "account.phone_call":
+            s["phone_calls"] = s.get("phone_calls", 0) + 1
 
     def result(self, ranges_per_chat=50):
         periods = [dict(p) for p in self.periods]
@@ -1177,7 +1202,8 @@ class Coverage:
                 "unobserved_ids": unobserved, "gap_summary": self.sequences.result(self.titles), "first_record": self.first, "last_record": self.last,
                 "meaning": "Observation intervals follow connected capture heartbeats from the same run, within three "
                            "heartbeat intervals (at least three minutes). Each interval ends at its last capture "
-                           "confirmation or recorded stop. Message-number gaps describe the observed numbering range."}
+                           "confirmation or recorded stop. Message-number gaps describe the observed numbering range.",
+                **({"session": self.session} if self.session else {})}
 
 
 GAP_DEFAULTS = {"gap_analysis": True, "gap_account_sequence": True, "gap_cluster_min": 1, "gap_clusters_listed": 20,
@@ -1359,6 +1385,29 @@ class Sequences:
         return result
 
 
+def session_lines(coverage):
+    s, lines = coverage.get("session") or {}, []
+    if s.get("key_origin"):
+        lines.append("Telegram session key: " + KEY_ORIGINS.get(s["key_origin"], str(s["key_origin"]))
+                     + (" by " + LOGIN_METHODS.get(s["login_method"], str(s["login_method"])) if s.get("login_method") else "")
+                     + " at " + str(s.get("authorized_at")))
+    for reason, label in SESSION_NOTES.items():
+        found = [n["at"] for n in coverage.get("notes") or [] if n.get("reason") == reason and n.get("chat_id") is None]
+        if found:
+            lines.append("Session: " + label + " (" + str(len(found)) + "x, first " + found[0] + ")")
+    if s.get("security_events"):
+        lines.append("Telegram security notices (777000): " + ", ".join(
+            name + " " + str(count) for name, count in sorted(s["security_events"].items())))
+    for item in s.get("other_sessions_ended") or []:
+        lines.append("All other sessions ended from this workspace at " + item["at"]
+                     + (" (" + str(item["ended"]) + " signed in before)" if isinstance(item.get("ended"), int) else ""))
+    for item in s.get("password_changes") or []:
+        lines.append("Two-step password " + str(item.get("operation") or "set or changed") + " from this workspace at " + item["at"])
+    if s.get("phone_calls"):
+        lines.append("Phone call updates delivered to this session: " + str(s["phone_calls"]))
+    return lines
+
+
 def coverage_lines(coverage):
     def span(seconds):
         hours, rest = divmod(int(seconds), 3600)
@@ -1367,6 +1416,7 @@ def coverage_lines(coverage):
              + (", observing at the last capture confirmation" if p.get("still_observing") else "")
              for p in coverage["continuous"]]
     lines += ["Gap from " + g["from"] + " to " + g["to"] + ": " + str(g["reason"]) for g in coverage["gaps"]]
+    lines += session_lines(coverage)
     for chat in coverage["unobserved_ids"]:
         if chat["not_observed"]:
             lines.append("Chat " + (chat["title"] or str(chat["chat_id"])) + ": IDs " + str(chat["observed_from"])
@@ -1641,7 +1691,7 @@ def media_reference(event):
     return digest, size
 
 
-def verify_checkpoint(checkpoint, public_key, event_count, hash_at):
+def verify_checkpoint(checkpoint, public_key, event_count, hash_at, check_drand=False):
     statement = checkpoint["statement"]
     if not is_format(statement["format"], "checkpoint-v1") or statement["public_key"] != public_key:
         raise ValueError("Checkpoint format or signing key mismatch")
@@ -1653,6 +1703,17 @@ def verify_checkpoint(checkpoint, public_key, event_count, hash_at):
         raise ValueError("Journal is shorter than the retained checkpoint")
     if hash_at(statement["event_count"]) != statement["head_hash"]:
         raise ValueError("Journal disagrees with the retained checkpoint")
+    anchor = statement.get("drand_anchor")
+    if check_drand and anchor and isinstance(anchor.get("round"), int) and isinstance(anchor.get("randomness"), str):
+        try:
+            confirmed = confirm_drand([{"round": anchor["round"], "randomness": anchor["randomness"],
+                                        "seq": statement["event_count"]}])
+        except ValueError as exc:
+            raise ValueError("Checkpoint drand anchor: " + str(exc)) from exc
+        if confirmed["confirmed"] == 0:
+            raise ValueError("Checkpoint drand anchor round " + str(anchor["round"])
+                             + " could not be confirmed against any drand relay")
+    return anchor if anchor else None
 
 
 def read_sealed(stream):
@@ -2411,8 +2472,11 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
                         return event["hash"]
             return None
         if checkpoint:
-            verify_checkpoint(checkpoint, public, result["events"], hash_at)
+            checkpoint_anchor = verify_checkpoint(checkpoint, public, result["events"], hash_at,
+                                                  check_drand=check_drand)
             result["checkpoint_event_count"] = checkpoint["statement"]["event_count"]
+            if checkpoint_anchor:
+                result["checkpoint_drand_anchor"] = {**checkpoint_anchor, "confirmed_by_relays": bool(check_drand)}
         result["anchors"] = verify_anchors(archive, names, public, result["events"], hash_at, tsa_ca, check_bitcoin)
         result["board"] = verify_board(archive, manifest, checkpoint)
         result["key_pinned"] = bool(expected_fingerprint)
@@ -4055,6 +4119,38 @@ def assurance_line(result):
     limits = [text for tier, text in (("fresh", "not fresh"), ("witness_anchored", "witness not anchored"),
                                     ("sealed", "not sealed")) if tier in absent]
     return "ASSURANCE: " + value["tier"] + detail + (" · " + " · ".join(limits) if limits else "")
+
+
+def forgery_lines(result):
+    lines, anchors = [], result.get("anchors") or []
+    tsa = [a for a in anchors if a.get("kind") == "rfc3161" and a.get("time")
+           and str(a.get("signature", "")).startswith("checked against")]
+    if tsa:
+        top = max(a["event_count"] for a in tsa)
+        names = sorted({(a.get("qualified") or {}).get("service") or str(a.get("service")) for a in tsa if a["event_count"] == top})
+        lines.append("Records 1-" + str(top) + " existed by " + min(a["time"] for a in tsa if a["event_count"] == top)
+                     + ": changing them needs a new time stamp signed by " + ", ".join(names) + ".")
+    ots = [a for a in anchors if a.get("kind") == "opentimestamps" and a.get("status") == "confirmed" and a.get("blocks")]
+    if ots:
+        top = max(a["event_count"] for a in ots)
+        block = min((b for a in ots if a["event_count"] == top for b in a["blocks"]), key=lambda b: b["height"])
+        lines.append("Records 1-" + str(top) + " are committed in Bitcoin block " + str(block["height"]) + " ("
+                     + str(block["time"]) + "): changing them means rewriting Bitcoin from that block.")
+    ladder = {row["tier"]: row for row in (result.get("assurance") or {}).get("ladder", [])}
+    if ladder.get("witnessed", {}).get("status") == "pass":
+        lines.append("A separate witness key retained the head (" + ladder["witnessed"]["detail"]
+                     + "): changing those records also needs that key.")
+    if ladder.get("sealed", {}).get("status") == "pass":
+        lines.append("The collector key was created inside an attested Intel TDX VM: signing elsewhere needs a break of Intel TDX.")
+    if not lines:
+        lines.append("Only the collector key binds this journal: its holder could produce a different journal from the start. "
+                     "External time or a witness ties it to a moment.")
+    cp = result.get("checkpoint_drand_anchor") or {}
+    if isinstance(cp.get("round"), int):
+        lines.append("The checkpoint at record " + str(result.get("checkpoint_event_count")) + " was signed no earlier than "
+                     + drand_time(cp["round"]) + " (drand round " + str(cp["round"]) + ", "
+                     + ("confirmed by relays" if cp.get("confirmed_by_relays") else "run with --check-drand to confirm") + ").")
+    return ["Any change to a record breaks the hash chain and the Ed25519 signatures."] + lines
 
 
 def english(text, **values):
@@ -7052,6 +7148,10 @@ def verification_output(args, checked, console, mode):
                            + "): " + row["detail"] + ("" if row["status"] == "met" else " · " + row["how"]))
     for line in next_lines(evidence):
         verification_print(line)
+    if shown == "evidence":
+        verification_print("What changing this archive would take:")
+        for line in forgery_lines(result):
+            verification_print("  - " + line)
     verification_print(json.dumps(result, indent=2))
     verification_print(producer_line(result.get("producer")))
     seal = result.get("report_seal")
