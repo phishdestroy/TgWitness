@@ -3971,7 +3971,6 @@
   "Pause all": "Pausar todo",
   "Capture and monitoring": "Captura y supervisión",
   "Recheck schedule": "Revisar el calendario",
-  "IP protection mode": "Modo de protección de IP",
   "{n} workspaces started.": {
     "one": "Se ha iniciado {n} espacio de trabajo.",
     "other": "Se han iniciado {n} espacios de trabajo."
@@ -5146,7 +5145,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Condiciones de uso de la aplicación Cloudflare </a>. La configuración revela la dirección IP de este equipo a dichos servicios. Los ayudantes se comparan con los hash SHA-256 incluidos en TgWitness. Se reutilizan los ayudantes existentes y el registro de WARP.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>La IP de este equipo</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Mi proxy</strong><span>URL del servidor o del proxy</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> MTProto público </strong> <span> Grupo automático </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> MTProxy público </strong> <span> Grupo automático </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> Importar WireGuard </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Túnel local gestionado </span>",
   "Account group": "Grupo de cuentas",
@@ -8526,5 +8525,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "Los pasos 1 y 2 son los mínimos necesarios para obtener pruebas. El paso 3 también muestra cómo se recopilaron los registros.",
   "End all other sessions": "Finalizar todas las demás sesiones",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "¿Finalizar todas las demás sesiones en Telegram? Se cerrará la sesión en todos los demás dispositivos conectados a esta cuenta.",
-  "Other sessions ended: {n}": "Otras sesiones finalizadas: {n}"
+  "Other sessions ended: {n}": "Otras sesiones finalizadas: {n}",
+  "WARP · own tunnel per account": "WARP · túnel propio por cuenta",
+  "Public MTProxy · automatic pool": "MTProxy público · grupo automático",
+  "Direct · this machine's IP": "Directo · IP de este dispositivo",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "Permitir que la configuración descargue los ayudantes WARP fijados desde GitHub y registre un dispositivo WARP con Cloudflare para cada cuenta, según sus condiciones.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Cada cuenta dispone de su propio túnel WARP antes de iniciar sesión por primera vez. Muchos usuarios de Cloudflare comparten direcciones de salida de WARP.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Las sesiones llegan a Telegram a través de servidores MTProxy públicos de listas abiertas. La descarga de archivos es más lenta.",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram detecta la dirección IP pública de este dispositivo para cada cuenta importada.",
+  "Allow the WARP setup or choose another connection route.": "Permite la configuración de WARP o elige otra ruta de conexión."
 }

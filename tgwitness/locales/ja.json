@@ -3947,7 +3947,6 @@
   "Pause all": "すべてを一時停止",
   "Capture and monitoring": "キャプチャとモニタリング",
   "Recheck schedule": "再確認のスケジュール",
-  "IP protection mode": "IP保護モード",
   "{n} workspaces started.": {
     "other": "{n}つのワークスペースが開始されました。"
   },
@@ -5119,7 +5118,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare アプリケーション利用規約 </a>。セットアップにより、このマシンの IP アドレスが当該サービスに開示されます。ヘルパーは、SHA-256 のハッシュと TgWitness に同梱されているハッシュと照合されます。既存のヘルパーおよび WARP 登録は再利用されます。",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>このマシンのIP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong> 私のプロキシ </strong> <span> サーバーまたはプロキシのURL </span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> パブリック MTProto </strong> <span> 自動プール </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> パブリック MTProxy </strong> <span> 自動プール </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>WireGuardのインポート</span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> 管理対象のローカルトンネル </span>",
   "Account group": "アカウントグループ",
@@ -8487,5 +8486,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "手順1と2は、証拠として必要な最低限の手順です。手順3では、記録がどのように収集されたかも示されています。",
   "End all other sessions": "他のすべてのセッションを終了する",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "Telegram の他のすべてのセッションを終了しますか？このアカウントにログインしている他のすべての端末がログアウトされます。",
-  "Other sessions ended: {n}": "終了した他のセッション: {n}"
+  "Other sessions ended: {n}": "終了した他のセッション: {n}",
+  "WARP · own tunnel per account": "WARP · アカウントごとに独自のトンネル",
+  "Public MTProxy · automatic pool": "公開MTProxy · 自動プール",
+  "Direct · this machine's IP": "直接 · このマシンのIPアドレス",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "GitHubからピン留めされたWARPヘルパーをダウンロードし、各アカウントごとにCloudflareの利用規約に基づき、WARPデバイスをCloudflareに登録できるように設定します。",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "各アカウントは、初回ログイン前に独自のWARPトンネルが割り当てられます。多くのCloudflareユーザーは、WARPのエグジットアドレスを共有しています。",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "セッションは、公開リストにあるパブリックなMTProxyサーバーを経由してTelegramに接続されます。ファイルのダウンロード速度は遅くなります。",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegramは、インポートされた各アカウントについて、このマシンのパブリックIPアドレスを認識します。",
+  "Allow the WARP setup or choose another connection route.": "WARPの設定を許可するか、別の接続経路を選択してください。"
 }

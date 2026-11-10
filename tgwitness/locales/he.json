@@ -3995,7 +3995,6 @@
   "Pause all": "השהה הכל",
   "Capture and monitoring": "לכידה וניטור",
   "Recheck schedule": "לבדוק שוב את לוח הזמנים",
-  "IP protection mode": "מצב הגנת IP",
   "{n} workspaces started.": {
     "one": "סביבת עבודה אחת {n} החלה.",
     "other": "{n} סביבות עבודה החלו.",
@@ -5173,7 +5172,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> תנאי השימוש ביישום Cloudflare </a>. ההתקנה חושפת את כתובת ה-IP של מחשב זה לשירותים אלה. עוזרים נבדקים מול חתימות ה-SHA-256 המצורפות ל-TgWitness. עוזרים קיימים ורישום WARP משמשים שוב.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>כתובת ה-IP של מחשב זה</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>הפרוקסי שלי</strong><span>כתובת ה-URL של השרת או הפרוקסי</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> Public MTProto </strong> <span> Automatic pool </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> Public MTProxy </strong> <span> Automatic pool </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> ייבוא WireGuard </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> מנהרה מקומית מנוהלת </span>",
   "Account group": "קבוצת חשבונות",
@@ -8565,5 +8564,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "שלבים 1 ו-2 הם המינימום הנדרש לצורך איסוף ראיות. שלב 3 מראה גם כיצד נאספו הרישומים.",
   "End all other sessions": "סיום כל ההפעלות האחרות",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "לסיים את כל ההפעלות האחרות ב-Telegram? כל מכשיר אחר שמחובר לחשבון הזה ינותק.",
-  "Other sessions ended: {n}": "הפעלות אחרות שהסתיימו: {n}"
+  "Other sessions ended: {n}": "הפעלות אחרות שהסתיימו: {n}",
+  "WARP · own tunnel per account": "WARP · מנהרה נפרדת לכל חשבון",
+  "Public MTProxy · automatic pool": "MTProxy ציבורי · מאגר אוטומטי",
+  "Direct · this machine's IP": "ישיר · כתובת ה-IP של מחשב זה",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "אפשר לתצורה להוריד את עוזרי ה-WARP המוצמדים מ-GitHub ולרשום מכשיר WARP ב-Cloudflare עבור כל חשבון, בהתאם לתנאיו.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "כל חשבון מקבל מנהרת WARP משלו לפני הכניסה הראשונה. משתמשים רבים של Cloudflare חולקים כתובות יציאה של WARP.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "הפעלות מגיעות ל-Telegram דרך שרתים ציבוריים של MTProxy מרשימות פתוחות. קצב הורדת הקבצים איטי יותר.",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram רואה את כתובת ה-IP הציבורית של המחשב הזה עבור כל חשבון שיובא.",
+  "Allow the WARP setup or choose another connection route.": "אפשר את הגדרת WARP או בחר מסלול חיבור אחר."
 }

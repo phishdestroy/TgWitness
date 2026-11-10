@@ -3947,7 +3947,6 @@
   "Pause all": "暂停全部",
   "Capture and monitoring": "捕获与监控",
   "Recheck schedule": "重新检查计划",
-  "IP protection mode": "IP保护模式",
   "{n} workspaces started.": {
     "other": "已启动 {n} 个工作区。"
   },
@@ -5119,7 +5118,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare 应用条款 </a>。设置过程会向这些服务披露本机的 IP 地址。辅助程序会与 SHA-256 哈希值进行比对，该哈希值与 TgWitness 捆绑在一起。现有辅助程序和 WARP 注册信息将被复用。",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>本机的 IP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>我的代理</strong><span>服务器或代理 URL</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> 公共 MTProto </strong> <span> 自动池 </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> 公共 MTProxy </strong> <span> 自动池 </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> 导入 WireGuard </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> 受管本地隧道 </span>",
   "Account group": "账户组",
@@ -8487,5 +8486,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "步骤 1 和 2 是获取证据的最低要求。步骤 3 还展示了记录的收集过程。",
   "End all other sessions": "结束所有其他会话",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "要结束 Telegram 中的所有其他会话吗？登录此账号的所有其他设备都会被退出。",
-  "Other sessions ended: {n}": "已结束的其他会话：{n}"
+  "Other sessions ended: {n}": "已结束的其他会话：{n}",
+  "WARP · own tunnel per account": "WARP · 每个账户专属隧道",
+  "Public MTProxy · automatic pool": "公开的 MTProxy · 自动池",
+  "Direct · this machine's IP": "直接 · 该设备的 IP 地址",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "允许用户设置从 GitHub 下载已置顶的 WARP 辅助程序，并根据其条款为每个账户在 Cloudflare 上注册一台 WARP 设备。",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "每个账户在首次登录前都会获得专属的 WARP 隧道。许多 Cloudflare 用户共享 WARP 出口地址。",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "会话通过公开列表中的公共 MTProxy 服务器连接到 Telegram。文件下载速度较慢。",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram 会为每个导入的账户查看该设备的公共 IP 地址。",
+  "Allow the WARP setup or choose another connection route.": "允许进行 WARP 设置，或选择其他连接路径。"
 }

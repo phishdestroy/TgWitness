@@ -3971,7 +3971,6 @@
   "Pause all": "Hepsini duraklat",
   "Capture and monitoring": "Yakalama ve izleme",
   "Recheck schedule": "Programı yeniden kontrol et",
-  "IP protection mode": "IP koruma modu",
   "{n} workspaces started.": {
     "one": "{n} çalışma alanı başlatıldı.",
     "other": "{n} çalışma alanı başlatıldı."
@@ -5146,7 +5145,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare uygulama şartları </a>. Kurulum, bu makinenin IP adresini söz konusu hizmetlere açıklar. Yardımcılar, SHA-256 hash'leriyle karşılaştırılarak TgWitness ile birlikte paketlenir. Mevcut yardımcılar ve WARP kaydı yeniden kullanılır.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>Bu makinenin IP adresi</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Proxy'm</strong><span>Sunucu veya proxy URL'si</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> Genel MTProto </strong> <span> Otomatik havuz </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> Genel MTProxy </strong> <span> Otomatik havuz </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> WireGuard'ı içe aktar </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Yönetilen yerel tünel </span>",
   "Account group": "Hesap grubu",
@@ -8526,5 +8525,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "1. ve 2. adımlar, kanıt için gerekli asgari şartlardır. 3. adımda ise kayıtların nasıl toplandığı da gösterilmektedir.",
   "End all other sessions": "Diğer tüm oturumları sonlandır",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "Telegram'daki diğer tüm oturumlar sonlandırılsın mı? Bu hesapta oturum açmış diğer tüm cihazların oturumu kapatılır.",
-  "Other sessions ended: {n}": "Sonlandırılan diğer oturumlar: {n}"
+  "Other sessions ended: {n}": "Sonlandırılan diğer oturumlar: {n}",
+  "WARP · own tunnel per account": "WARP · hesap başına ayrı tünel",
+  "Public MTProxy · automatic pool": "Public MTProxy · otomatik havuz",
+  "Direct · this machine's IP": "Doğrudan · bu makinenin IP adresi",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "Kurulumun, GitHub'dan sabitlenmiş WARP yardımcılarını indirmesine ve her hesap için Cloudflare'in şartları uyarınca bir WARP cihazını Cloudflare'e kaydettirmesine izin verin.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Her hesap, ilk oturum açışından önce kendine ait bir WARP tüneli alır. Birçok Cloudflare kullanıcısı, WARP çıkış adreslerini paylaşır.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Oturumlar, açık listelerdeki genel MTProxy sunucuları aracılığıyla Telegram'a ulaşır. Dosyaların indirilme hızı daha düşüktür.",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram, içe aktarılan her hesap için bu cihazın genel IP adresini görür.",
+  "Allow the WARP setup or choose another connection route.": "WARP kurulumuna izin verin veya başka bir bağlantı yolu seçin."
 }

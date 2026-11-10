@@ -3947,7 +3947,6 @@
   "Pause all": "หยุดทั้งหมด",
   "Capture and monitoring": "การจับภาพและติดตาม",
   "Recheck schedule": "ตรวจสอบตารางเวลาอีกครั้ง",
-  "IP protection mode": "โหมดการป้องกัน IP",
   "{n} workspaces started.": {
     "other": "พื้นที่ทำงาน {n} แห่งได้เริ่มแล้ว"
   },
@@ -5119,7 +5118,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> เงื่อนไขการใช้งาน Cloudflare</a>. การตั้งค่าจะเปิดเผยที่อยู่ IP ของเครื่องนี้ให้กับบริการดังกล่าว ผู้ช่วยจะถูกตรวจสอบกับแฮช SHA-256 ที่รวมอยู่ใน TgWitness ผู้ช่วยที่มีอยู่และการลงทะเบียน WARP จะถูกนำกลับมาใช้ใหม่",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>IP ของเครื่องนี้</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>My proxy</strong><span>Server หรือ proxy URL</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong>Public MTProto</strong><span>Automatic pool</span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>Public MTProxy</strong><span>Automatic pool</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>นำเข้า WireGuard</span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>อุโมงค์ท้องถิ่นที่จัดการ</span>",
   "Account group": "กลุ่มบัญชี",
@@ -8487,5 +8486,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "ขั้นตอนที่ 1 และ 2 เป็นขั้นตอนขั้นต่ำสำหรับการเก็บหลักฐาน ส่วนขั้นตอนที่ 3 ยังแสดงวิธีการเก็บรวบรวมข้อมูลด้วย",
   "End all other sessions": "ปิดเซสชันอื่นทั้งหมด",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "ปิดเซสชันอื่นทั้งหมดใน Telegram หรือไม่ อุปกรณ์อื่นทุกเครื่องที่ลงชื่อเข้าใช้บัญชีนี้จะถูกออกจากระบบ",
-  "Other sessions ended: {n}": "เซสชันอื่นที่ปิดแล้ว: {n}"
+  "Other sessions ended: {n}": "เซสชันอื่นที่ปิดแล้ว: {n}",
+  "WARP · own tunnel per account": "WARP · ทันเนลส่วนตัวสำหรับแต่ละบัญชี",
+  "Public MTProxy · automatic pool": "Public MTProxy · กลุ่มอัตโนมัติ",
+  "Direct · this machine's IP": "Direct · IP ของเครื่องนี้",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "อนุญาตให้ระบบตั้งค่าดาวน์โหลด WARP helpers ที่ถูกปักหมุดจาก GitHub และลงทะเบียนอุปกรณ์ WARP กับ Cloudflare สำหรับแต่ละบัญชี ตามเงื่อนไขของ Cloudflare",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "แต่ละบัญชีจะได้รับอุโมงค์ WARP ของตัวเองก่อนการเข้าสู่ระบบครั้งแรก ผู้ใช้ Cloudflare หลายคนใช้ที่อยู่ทางออก WARP ร่วมกัน",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "เซสชันจะเข้าถึง Telegram ผ่านเซิร์ฟเวอร์ MTProxy สาธารณะจากรายชื่อที่เปิดให้ใช้งานทั่วไป การดาวน์โหลดไฟล์จะช้าลง",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram จะเห็นที่อยู่ IP สาธารณะของเครื่องนี้สำหรับทุกบัญชีที่นำเข้า",
+  "Allow the WARP setup or choose another connection route.": "อนุญาตให้ตั้งค่า WARP หรือเลือกเส้นทางเชื่อมต่ออื่น"
 }

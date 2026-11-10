@@ -3947,7 +3947,6 @@
   "Pause all": "Tạm dừng tất cả",
   "Capture and monitoring": "Ghi lại và giám sát",
   "Recheck schedule": "Lịch trình kiểm tra lại",
-  "IP protection mode": "Chế độ bảo vệ IP",
   "{n} workspaces started.": {
     "other": "{n} không gian làm việc đã bắt đầu."
   },
@@ -5119,7 +5118,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Điều khoản ứng dụng Cloudflare </a>. Quá trình thiết lập sẽ tiết lộ địa chỉ IP của máy này cho các dịch vụ đó. Các trình trợ giúp được kiểm tra dựa trên các giá trị băm SHA-256 được gói cùng với TgWitness. Các trình trợ giúp hiện có và đăng ký WARP sẽ được tái sử dụng.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>Địa chỉ IP của máy này</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Proxy của tôi</strong><span>URL máy chủ hoặc proxy</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> Công khai MTProto </strong> <span> Bể tự động </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> Công khai MTProxy </strong> <span> Bể tự động </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> Nhập WireGuard </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Đường hầm cục bộ được quản lý </span>",
   "Account group": "Nhóm tài khoản",
@@ -8487,5 +8486,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "Bước 1 và 2 là những bước tối thiểu để thu thập bằng chứng. Bước 3 cũng cho thấy cách các bản ghi được thu thập.",
   "End all other sessions": "Kết thúc mọi phiên khác",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "Kết thúc mọi phiên khác trong Telegram? Mọi thiết bị khác đang đăng nhập vào tài khoản này sẽ bị đăng xuất.",
-  "Other sessions ended: {n}": "Số phiên khác đã kết thúc: {n}"
+  "Other sessions ended: {n}": "Số phiên khác đã kết thúc: {n}",
+  "WARP · own tunnel per account": "WARP · mỗi tài khoản có một đường hầm riêng",
+  "Public MTProxy · automatic pool": "MTProxy công khai · nhóm tự động",
+  "Direct · this machine's IP": "Trực tiếp · địa chỉ IP của máy này",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "Cho phép thiết lập để tải xuống các trình trợ giúp WARP đã được ghim từ GitHub và đăng ký thiết bị WARP với Cloudflare cho mỗi tài khoản, theo các điều khoản của họ.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Mỗi tài khoản sẽ có một đường hầm WARP riêng trước lần đăng nhập đầu tiên. Nhiều người dùng Cloudflare chia sẻ địa chỉ thoát WARP.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Các phiên làm việc truy cập Telegram thông qua các máy chủ MTProxy công khai từ các danh sách mở. Tốc độ tải xuống tệp chậm hơn.",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram sẽ hiển thị địa chỉ IP công khai của máy này cho mỗi tài khoản được nhập vào.",
+  "Allow the WARP setup or choose another connection route.": "Cho phép thiết lập WARP hoặc chọn một đường kết nối khác."
 }

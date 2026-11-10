@@ -3971,7 +3971,6 @@
   "Pause all": "سب کو معطل کریں",
   "Capture and monitoring": "کیپچر اور مانیٹرنگ",
   "Recheck schedule": "دوبارہ چیک کرنے کا شیڈول",
-  "IP protection mode": "آئی پی تحفظ کا موڈ",
   "{n} workspaces started.": {
     "one": "{n} ورک اسپیس نے مشاہدہ شروع کیا۔",
     "other": "{n} ورک اسپیسز نے مشاہدہ شروع کیا۔"
@@ -5146,7 +5145,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare ایپلیکیشن کی شرائط</a>۔ سیٹ اپ ان سروسز کو اس مشین کا IP ظاہر کرتا ہے۔ مددگاروں کی تصدیق SHA-256 کے ہیشز کے خلاف کی جاتی ہے جو TgWitness کے ساتھ بندھے ہوئے ہیں۔ موجودہ مددگار اور WARP رجسٹریشن دوبارہ استعمال کیے جاتے ہیں۔",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>براہِ راست</strong><span>اس مشین کا IP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>میرا پروکسی</strong><span>سرور یا پروکسی یو آر ایل</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong>پبلک MTProto</strong><span>آٹومیٹک پول</span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>پبلک MTProxy</strong><span>آٹومیٹک پول</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>Import WireGuard</span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>مینجڈ لوکل ٹنل</span>",
   "Account group": "اکاؤنٹ گروپ",
@@ -8526,5 +8525,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "شواہد کے لیے اقدامات 1 اور 2 کم از کم ہیں۔ اقدام 3 یہ بھی دکھاتا ہے کہ ریکارڈز کیسے جمع کیے گئے۔",
   "End all other sessions": "باقی تمام سیشن ختم کریں",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "Telegram میں باقی تمام سیشن ختم کریں؟ اس اکاؤنٹ میں سائن اِن ہر دوسرا آلہ لاگ آؤٹ ہو جائے گا۔",
-  "Other sessions ended: {n}": "ختم کیے گئے دیگر سیشن: {n}"
+  "Other sessions ended: {n}": "ختم کیے گئے دیگر سیشن: {n}",
+  "WARP · own tunnel per account": "WARP · ہر اکاؤنٹ کے لیے الگ سرنگ",
+  "Public MTProxy · automatic pool": "پبلک MTProxy · خودکار پول",
+  "Direct · this machine's IP": "براہ راست · اس مشین کا آئی پی",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "سیٹ اپ کو اجازت دیں کہ وہ GitHub سے پن کیے گئے WARP ہیلپرز کو ڈاؤن لوڈ کرے اور ہر اکاؤنٹ کے لیے Cloudflare کے تحت ایک WARP ڈیوائس رجسٹر کرے۔",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "ہر اکاؤنٹ کو اپنی پہلی سائن ان سے پہلے اپنا WARP ٹنل فراہم کیا جاتا ہے۔ بہت سے Cloudflare صارفین WARP ایگزٹ پتے شیئر کرتے ہیں۔",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "سیشنز اوپن لسٹس کے عوامی MTProxy سرورز کے ذریعے ٹیلیگرام تک پہنچتے ہیں۔ فائلیں سست رفتاری سے ڈاؤن لوڈ ہوتی ہیں۔",
+  "Telegram sees this machine's public IP address for every imported account.": "ٹیلیگرام ہر درآمد شدہ اکاؤنٹ کے لیے اس مشین کا عوامی آئی پی پتہ دیکھتا ہے۔",
+  "Allow the WARP setup or choose another connection route.": "WARP سیٹ اپ کی اجازت دیں یا کوئی دوسرا کنکشن راستہ منتخب کریں۔"
 }

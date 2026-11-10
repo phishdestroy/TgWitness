@@ -3971,7 +3971,6 @@
   "Pause all": "تعلیق همه",
   "Capture and monitoring": "ثبت و نظارت",
   "Recheck schedule": "بررسی مجدد برنامه",
-  "IP protection mode": "حالت محافظت از IP",
   "{n} workspaces started.": {
     "one": "{n} فضای کاری شروع شد.",
     "other": "{n} فضای کاری شروع شدند."
@@ -5146,7 +5145,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "شرایط استفاده از Cloudflare برای <a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> و </a>. راه‌اندازی، آدرس IP این دستگاه را برای آن سرویس‌ها آشکار می‌کند. کمک‌کننده‌ها با هش‌های SHA-256 که همراه با TgWitness بسته‌بندی شده‌اند، بررسی می‌شوند. کمک‌کننده‌های موجود و ثبت‌نام WARP مجدداً استفاده می‌شوند.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>راست‌</strong><span>IP این دستگاه </span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>پراکسی من</strong><span>URL سرور یا پراکسی</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong>MTProto عمومی </strong><span>استخر خودکار </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>MTProxy عمومی </strong><span>استخر خودکار </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "VPN <strong>، </strong>، <span>، واردات WireGuard </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP </strong><span> تونل محلی مدیریت‌شده </span>",
   "Account group": "گروه حساب‌ها",
@@ -8526,5 +8525,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "مراحل ۱ و ۲ حداقل موارد لازم برای ارائه مدرک هستند. مرحلهٔ ۳ همچنین نشان می‌دهد که سوابق چگونه جمع‌آوری شده‌اند.",
   "End all other sessions": "پایان همه جلسه‌های دیگر",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "همه جلسه‌های دیگر در Telegram پایان یابد؟ هر دستگاه دیگری که وارد این حساب شده است خارج می‌شود.",
-  "Other sessions ended: {n}": "جلسه‌های دیگرِ پایان‌یافته: {n}"
+  "Other sessions ended: {n}": "جلسه‌های دیگرِ پایان‌یافته: {n}",
+  "WARP · own tunnel per account": "WARP · تونل اختصاصی برای هر حساب",
+  "Public MTProxy · automatic pool": "پابلیک MTProxy · استخر خودکار",
+  "Direct · this machine's IP": "مستقیم · آی‌پی این دستگاه",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "اجازه دهید تنظیمات، کمک‌کننده‌های WARP را از گیت‌هاب دانلود کرده و طبق شرایط آن، برای هر حساب یک دستگاه WARP را در کلودفلر ثبت کند.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "هر حساب کاربری قبل از اولین ورودش تونل WARP اختصاصی خود را دریافت می‌کند. بسیاری از کاربران Cloudflare آدرس‌های خروج WARP را با یکدیگر به اشتراک می‌گذارند.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "جلسات از طریق سرورهای عمومی MTProxy در فهرست‌های باز به تلگرام متصل می‌شوند. دانلود فایل‌ها کندتر است.",
+  "Telegram sees this machine's public IP address for every imported account.": "تلگرام برای هر حساب واردشده، آدرس آی‌پی عمومی این دستگاه را می‌بیند.",
+  "Allow the WARP setup or choose another connection route.": "تنظیمات WARP را مجاز کنید یا مسیر اتصال دیگری را انتخاب کنید."
 }

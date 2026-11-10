@@ -4067,7 +4067,6 @@
   "Pause all": "إيقاف كل شيء مؤقتًا",
   "Capture and monitoring": "التسجيل والمراقبة",
   "Recheck schedule": "جدول إعادة الفحص",
-  "IP protection mode": "وضع حماية IP",
   "{n} workspaces started.": {
     "one": "بدأت مساحة عمل {n}.",
     "few": "بدأت {n} مساحات عمل.",
@@ -5254,7 +5253,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> شروط استخدام تطبيق Cloudflare </a>. يكشف الإعداد عن عنوان IP لهذا الجهاز لتلك الخدمات. يتم التحقق من المساعدين مقابل التجزئات SHA-256 المجمعة مع TgWitness. يتم إعادة استخدام المساعدين الحاليين وتسجيل WARP.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>عنوان IP لهذا الجهاز</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong> الوكيل الخاص بي </strong> <span> عنوان URL للخادم أو الوكيل </span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong> عام MTProto </strong> <span> تجمع تلقائي </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> عام MTProxy </strong> <span> تجمع تلقائي </span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> استيراد WireGuard </span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> نفق محلي مُدار </span>",
   "Account group": "مجموعة الحسابات",
@@ -8682,5 +8681,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "الخطوتان 1 و2 هما الحد الأدنى المطلوب لتقديم الأدلة. وتوضح الخطوة 3 أيضًا كيفية جمع السجلات.",
   "End all other sessions": "إنهاء كل الجلسات الأخرى",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "إنهاء كل الجلسات الأخرى في Telegram؟ سيُسجَّل خروج كل جهاز آخر مسجّل الدخول إلى هذا الحساب.",
-  "Other sessions ended: {n}": "الجلسات الأخرى التي أُنهيت: {n}"
+  "Other sessions ended: {n}": "الجلسات الأخرى التي أُنهيت: {n}",
+  "WARP · own tunnel per account": "WARP · نفق خاص لكل حساب",
+  "Public MTProxy · automatic pool": "MTProxy العام · المجموعة التلقائية",
+  "Direct · this machine's IP": "مباشر · عنوان IP لهذا الجهاز",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "السماح للإعداد بتنزيل أدوات WARP المثبتة من GitHub وتسجيل جهاز WARP مع Cloudflare لكل حساب، وفقًا لشروطها.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "يحصل كل حساب على نفق WARP خاص به قبل تسجيل الدخول لأول مرة. ويشترك العديد من مستخدمي Cloudflare في عناوين خروج WARP.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "تصل الجلسات إلى Telegram عبر خوادم MTProxy العامة من قوائم مفتوحة. ويتم تنزيل الملفات ببطء أكبر.",
+  "Telegram sees this machine's public IP address for every imported account.": "يرى Telegram عنوان IP العام لهذا الجهاز لكل حساب يتم استيراده.",
+  "Allow the WARP setup or choose another connection route.": "السماح بإعداد WARP أو اختيار مسار اتصال آخر."
 }

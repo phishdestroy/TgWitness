@@ -3947,7 +3947,6 @@
   "Pause all": "Hentikan semua",
   "Capture and monitoring": "Rakaman dan pemantauan",
   "Recheck schedule": "Semak semula jadual",
-  "IP protection mode": "Mod perlindungan IP",
   "{n} workspaces started.": {
     "other": "{n} ruang kerja telah bermula."
   },
@@ -5119,7 +5118,7 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> terma aplikasi Cloudflare</a>. Penyediaan mendedahkan IP mesin ini kepada perkhidmatan tersebut. Pembantu disemak menentang hash SHA-256 yang disertakan dengan TgWitness. Pembantu sedia ada dan pendaftaran WARP digunakan semula.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direk</strong><span>IP mesin ini</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Proksi saya</strong><span>URL pelayan atau proksi</span>",
-  "<strong>Public MTProto</strong><span>Automatic pool</span>": "<strong>MTProto Awam</strong><span>Kolam automatik</span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>MTProxy Awam</strong><span>Kolam automatik</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>Import WireGuard</span>",
   "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>Teras tempatan yang diuruskan</span>",
   "Account group": "Kumpulan akaun",
@@ -8487,5 +8486,13 @@
 "Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.": "Langkah 1 dan 2 adalah minimum untuk bukti. Langkah 3 juga menunjukkan bagaimana rekod-rekod itu dikumpul.",
   "End all other sessions": "Tamatkan semua sesi lain",
   "End all other sessions in Telegram? Every other device signed in to this account is logged out.": "Tamatkan semua sesi lain dalam Telegram? Setiap peranti lain yang log masuk ke akaun ini akan dilog keluar.",
-  "Other sessions ended: {n}": "Sesi lain yang ditamatkan: {n}"
+  "Other sessions ended: {n}": "Sesi lain yang ditamatkan: {n}",
+  "WARP · own tunnel per account": "WARP · terowong sendiri bagi setiap akaun",
+  "Public MTProxy · automatic pool": "MTProxy Awam · kolam automatik",
+  "Direct · this machine's IP": "Langsung · IP mesin ini",
+  "Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.": "Benarkan tetapan memuat turun pembantu WARP yang disemat dari GitHub dan mendaftarkan peranti WARP dengan Cloudflare untuk setiap akaun, di bawah terma mereka.",
+  "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Setiap akaun mendapat terowong WARP tersendiri sebelum log masuk pertamanya. Ramai pengguna Cloudflare berkongsi alamat keluar WARP.",
+  "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Sesi mengakses Telegram melalui pelayan MTProxy awam daripada senarai terbuka. Fail dimuat turun dengan lebih perlahan.",
+  "Telegram sees this machine's public IP address for every imported account.": "Telegram melihat alamat IP awam mesin ini untuk setiap akaun yang diimport.",
+  "Allow the WARP setup or choose another connection route.": "Benarkan tetapan WARP atau pilih laluan sambungan lain."
 }

@@ -4360,12 +4360,17 @@ $("policy-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   toast(tr("IP protection saved."));
 });});
 $("network-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  if(!(await confirmRouteChange()))return;
-  const kind=$("network-kind").value,body={kind};
+  const kind=$("network-kind").value,body={kind},previous=state.policy;
+  const exposing=kind==="direct"&&!!previous&&previous.exposure!=="tunnel";
+  if(!(await (exposing?askConfirm(tr("Connect directly? Telegram will see this machine's public IP address. IP protection for this account switches to “Server behind a tunnel or VPN”. Any pending sign-in will be cancelled.")):confirmRouteChange())))return;
   if(kind!=="direct"&&kind!=="mtproxy_auto")Object.assign(body,{host:$("network-host").value.trim(),port:Number($("network-port").value)});
   if(kind==="socks5"||kind==="http")Object.assign(body,{username:$("network-username").value,password:$("network-password").value});
   if(kind==="mtproxy")body.secret=$("network-secret").value.trim();
-  await json("network",body);
+  if(exposing){
+    await json("network/policy",{exposure:"tunnel",outside_enabled:previous.outside_enabled});
+    try{await json("network",body);}
+    catch(error){await json("network/policy",{exposure:previous.exposure,outside_enabled:previous.outside_enabled}).catch(()=>{});throw error;}
+  }else await json("network",body);
   await routeSaved();
 });});
 $("network-test").addEventListener("click",e=>busy(e.currentTarget,async()=>{
