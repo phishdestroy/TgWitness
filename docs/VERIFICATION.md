@@ -401,6 +401,31 @@ Private compatibility tests also verify a frozen signed archive made before full
 search with the current verifier, and a current archive with the frozen archive's
 own `verify.py`.
 
+## Parallel session and session integrity tests · 9 November 2026
+
+Live tests on a RunPod Linux pod using real Telegram accounts established the
+following facts about how Telegram routes updates when multiple clients share one
+account.
+
+| Test | Setup | Result |
+| --- | --- | --- |
+| T2.1: push delivery with active parallel client | Two clients on one session; sender writes to Saved Messages | PUSH_A: 0/10, PUSH_B: 0/10, POLL: 10/10 |
+| T2.2: three sessions, B active then idle | Same account, three connected clients | PUSH: 0/15 in both phases, POLL: 15/15 |
+| T4: auth.resetAuthorizations timing | Observer active; second client calls resetAuth | Server revokes in 0.23 s; TCP connection continued for 60+ s with zero errors; 36 GetHistory requests completed after revocation |
+| 2FA change | Enable, change, disable 2FA while observer connected | Existing TCP session unaffected; security events logged in Telegram 777000 |
+| Canary via Saved Messages | Send probe to own account, check push delivery | No push delivered in any configuration (0/22); removed from implementation |
+
+**Findings:**
+
+- GetDifference (live push) is silently stolen by any parallel client using the same auth_key. No error is raised; the collector receives zero updates.
+- GetHistory (polling) is unaffected by parallel clients. Each client reads history independently.
+- auth.resetAuthorizations removes the session from Telegram's server list in under a second, but the TCP connection remains operational until the next reconnect.
+- Telegram 777000 logs login codes, new sessions and 2FA changes. auth.resetAuthorizations is not reported there.
+- `FreshResetAuthorisationForbiddenError`: Telegram rejects resetAuth calls from sessions younger than 24 hours.
+
+These findings informed the collector changes in [PR #181](https://github.com/phishdestroy/TgWitness/pull/181):
+`coverage.gap` with `updates_diverted`, `session_revoked_externally` and `concurrent_sessions_at_start`; `account.security_event` from 777000; `session.import_warning` for imported sessions; `terminate_all_other_sessions()`.
+
 <a name="remaining-qualification"></a>
 
 ## Qualification status
