@@ -157,7 +157,8 @@ async def profiles_import(
     body: ProfileImport, request: Request, *, ctx=Depends(current_context)
 ):
     ctx.require_live()
-    refuse_imported_session()
+    if not body.new_session:
+        refuse_imported_session()
     if (body.api_id is None) != (body.api_hash is None):
         raise HTTPException(
             422, "Provide both API ID and API hash, or leave both empty."
@@ -532,7 +533,8 @@ async def independent_session(
 
 async def import_account(body: AccountImport, *, ctx=Depends(current_context)):
     ctx.require_live()
-    refuse_imported_session()
+    if not body.new_session:
+        refuse_imported_session()
     try:
         result = await asyncio.to_thread(
             import_accounts,
