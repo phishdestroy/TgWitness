@@ -1,8 +1,12 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
+
+![Evidence & verification](assets/presentation/chapter-evidence.svg)
+
 # Follow the message. Understand the evidence.
 
 TgWitness preserves what a collecting account observed, links those observations
 into a signed journal and lets another person verify an export against a trusted
-key and an earlier retained checkpoint.
+key, external time from a third party and an earlier retained checkpoint.
 
 The [local documentation website](internal/PUBLISHING.md#preview-the-website-locally) adds
 interactive examples at `/docs/concepts/`, a checkpoint decision explorer at
@@ -11,6 +15,18 @@ interactive examples at `/docs/concepts/`, a checkpoint decision explorer at
 All example messages,
 counts and delays are fictional. Hashes in the chain sandbox are calculated with
 SHA-256 in the browser. Nothing is sent to Telegram.
+
+<details>
+<summary>On this page</summary>
+
+- [A message changes; observations accumulate](#a-message-changes-observations-accumulate)
+- [What a hash covers](#what-a-hash-covers)
+- [What an earlier checkpoint adds](#what-an-earlier-checkpoint-adds)
+- [Where a witness belongs](#where-a-witness-belongs)
+- [Test delivery against known actions](#test-delivery-against-known-actions)
+- [Pick a workflow](#pick-a-workflow)
+
+</details>
 
 ## A message changes; observations accumulate
 
@@ -87,8 +103,9 @@ An observed Telegram edit, by contrast, becomes a new journal record.
 [Static change diagram](assets/presentation/evidence-tamper-static.svg)
 
 Hash links alone do not prevent someone from recalculating a replacement chain.
-Trust comes from checking signatures under an independently trusted key and
-comparing with references retained outside the collector.
+Trust comes from checking signatures under an independently trusted key, external
+time from a third party that fixes the journal head, and references retained
+outside the collector.
 
 ## What an earlier checkpoint adds
 
@@ -109,6 +126,9 @@ h_{\mathrm{export}}[N_{\mathrm{checkpoint}}] = H_{\mathrm{checkpoint}}
 $$
 
 An export may extend beyond a checkpoint. It must agree at the retained boundary.
+The collector key signs the checkpoint, so the collector could sign another one.
+It binds the records only if the recipient obtained it before the archive, through
+another channel; the minimum for evidence also needs external time from a third party.
 The real verifier also checks every event's sequence, previous link, hash and
 signature. Comparing only the final stored head would miss an altered interior
 record whose saved hash was not updated.
@@ -133,10 +153,11 @@ flowchart LR
 ```
 
 The witness records rollback, a different head at the same count, changed keys,
-invalid answers and missing responses. A larger count alone does not establish
-that every earlier record remains unchanged; compare the export with retained
-checkpoints. A witness on another host avoids sharing the collector's host outage;
-a separate operator gives additional independence.
+invalid answers and missing responses. To confirm that every earlier record is
+unchanged, compare the export with retained checkpoints. A witness on another host avoids sharing the collector's host outage;
+a separate operator gives additional independence. The verifier sees only a second key;
+who controls it is a custody fact it cannot check. Telegram dates each post in a public
+channel, and `verify.py --channel https://t.me/s/…` reads those dates as external time.
 
 The witness attests to the collector's reported journal state. Use a controlled
 delivery test to measure which Telegram actions reached a collecting account.

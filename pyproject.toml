@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tgwitness"
-version = "0.9.0"
+version = "0.9.2"
 description = "Telegram observation journal with version history and signed evidence exports"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -39,12 +39,20 @@ dependencies = [
   "fpdf2>=2.9,<3",
   "uharfbuzz>=0.45,<1",
   "lingua-language-detector>=2.1,<3",
+  "pymorphy3>=2.0.6,<3",
+  "pymorphy3-dicts-ru>=2.4.417150.4580142,<3",
+  "snowballstemmer>=3.0.1,<4",
+  "jieba>=0.42.1,<0.43",
 ]
 
 [project.optional-dependencies]
 dev = ["httpx>=0.27,<1", "playwright>=1.48,<2", "ruff>=0.15,<1", "pytest>=9.1.1,<10"]
 research = ["requests>=2.33.0,<3", "beautifulsoup4>=4.12,<5"]
 mcp = ["mcp>=2.3,<3", "httpx>=0.28,<1"]
+uk-dictionary = ["pymorphy3-dicts-uk>=2.4.1.1.1663094765,<3"]
+secret-chats = ["kiaro-telethon-secret-chat @ git+https://github.com/KiaroSama/Telethon-Secret-Chat.git@d87bf037b90060383c7b704d8a06ebb98c621c6f"]
+forensics = ["scapy>=2.5,<3", "aiohttp>=3.9,<4"]
+qr = ["opencv-python-headless>=4.14.0.94,<6,!=5.0.0.93", "numpy>=1.26,<3"]
 
 [project.urls]
 Homepage = "https://phishdestroy.github.io/TgWitness/"
@@ -80,9 +88,10 @@ tgwitness = [
   "locales/tr.json", "locales/ar.json", "locales/fa.json", "locales/ur.json",
   "locales/hi.json", "locales/id.json", "locales/vi.json", "locales/zh.json",
   "guide_locales/*.json",
-  "english_fallbacks.json", "public_proxies.json", "sealed_policy.json",
+  "narrative/texts/*.json", "narrative/jurisdictions/*.json", "narrative/review-policy.json",
+  "english_fallbacks.json", "public_proxies.json", "sealed_policy.json", "jurisdictions.json", "verifier_languages.json", "analysis_words.json",
   "schemas/board-*.json",
-  "client_profiles.json", "client_profiles.LICENSE",
+  "client_profiles.json", "client_profiles.LICENSE", "dstack_measurement.LICENSE",
   "fonts/*.ttf", "fonts/OFL.txt", "fonts/NotoSerif-OFL.txt",
 ]
 

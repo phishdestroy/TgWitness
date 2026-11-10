@@ -1,10 +1,36 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Collection](COLLECTION-MODES.md)
+
+![Collection](assets/presentation/chapter-collect.svg)
+
 # How collection works
 
-TgWitness records what a connected Telegram account observes. The journal preserves
-those observations, their sequence, and the context supplied with them. It does
-not infer unseen actions from a missing message or from an account being connected.
+TgWitness records what a connected Telegram account observes. Live monitoring
+preserves messages, captured edits, deletion notifications and attachments with
+their observation times and source context. History reads, rechecks and available
+admin-log records add separately identified observations to that record.
+
+<details>
+<summary>On this page</summary>
+
+- [From login to a journal](#from-login-to-a-journal)
+- [Observation scope: chosen chats, a folder or the whole account](#observation-scope-chosen-chats-a-folder-or-the-whole-account)
+- [Scope and event selection](#scope-and-event-selection)
+- [Own actions](#own-actions)
+- [Investigation mode: joining teams and talking to bots](#investigation-mode-joining-teams-and-talking-to-bots)
+- [Recheck tiers](#recheck-tiers)
+- [Message history and attribution](#message-history-and-attribution)
+- [History snapshots](#history-snapshots)
+- [Attachment handling](#attachment-handling)
+- [Pause, lock, disconnect, and restart](#pause-lock-disconnect-and-restart)
+- [Account isolation and verification](#account-isolation-and-verification)
+
+</details>
 
 ## From login to a journal
+
+For self-destructing photos and files, see [Self-destructing media](EPHEMERAL-MEDIA.md).
+It explains the priority worker, saved and unavailable outcomes, and the limits of
+read-receipt blocking in the API collector.
 
 ```mermaid
 flowchart TD
@@ -21,11 +47,12 @@ flowchart TD
 
 Authorization, access to a source, a running collector, and complete delivery are
 different questions. A successful login does not grant access to every group.
-A connected transport does not establish that every relevant update arrived.
+Delivery is tracked separately: coverage records, update-gap recovery and rechecks
+show what arrived.
 
 ## Observation scope: chosen chats, a folder or the whole account
 
-Sources → **Observation scope** decides which chats a workspace records.
+**More tools → Sources → Scope** decides which chats a workspace records.
 
 | Mode | Records | New chats |
 | --- | --- | --- |
@@ -48,14 +75,15 @@ Sources → **Observation scope** decides which chats a workspace records.
   (at start and hourly) or `source.discovered` (a new chat while observing). Switching back
   to chosen chats pauses every automatically added source.
 
-What these modes cannot do:
+Scope of these modes:
 
-- **Secret chats** are end-to-end encrypted between two devices and never reach
-  TgWitness, in any mode.
-- **Nothing is recorded while TgWitness is not running.** After a restart it asks Telegram
-  for missed updates and rechecks chats, but Telegram does not return everything after long
-  outages. Reports and `verify.py` show such periods as gaps (see [coverage](EVIDENCE.md#coverage-continuity-gaps-and-unobserved-ids)).
-- Only the first 1,000 dialogs are listed at start (the limit is under **Parameters**); older
+- **Secret Chats** use the included [Pseudo-secret integration](PSEUDO-SECRET.md),
+  with its optional protocol dependency and per-account enable switch. Cloud history
+  and Takeout use a separate acquisition path.
+- **Offline periods.** After a restart TgWitness resumes the saved update position, asks
+  Telegram for missed updates and rechecks chats. Telegram keeps a bounded backlog, so after
+  a long outage reports and `verify.py` list the remaining interval as a gap (see [coverage](EVIDENCE.md#coverage-continuity-gaps-and-unobserved-ids)).
+- Only the first 1,000 dialogs are listed at start (the limit is under **More tools → Parameters**); older
   chats are added when they next become active. The earlier history of an added chat is not fetched — take a history
   snapshot or a full chat export when you need it.
 - Folder conditions that change all the time (muted, read) are not applied: such chats
@@ -72,7 +100,7 @@ Each workspace has its own sources. TgWitness does not join groups, accept
 invitations, or enumerate every member automatically. Sources must already be
 accessible to the account. At startup, the collector checks selected sources
 against the account's visible dialogs; the first 1,000 dialogs are inspected unless
-**Parameters → Chats read from the account's list** says otherwise.
+**More tools → Parameters → Chats read from the account's list** says otherwise.
 An absent source is marked **access unconfirmed**, not assumed to have removed you.
 
 | Setting | Collects | Effect when disabled |
@@ -96,9 +124,11 @@ objects retain embedded metadata; a switch is not a redaction rule.
 These chats share one account-wide message ID sequence, so when a message with that ID was
 saved earlier, its chat is known: the deletion is recorded in that chat with
 `chat_resolution` explaining how. IDs never saved stay an **unscoped deletion** with an
-explicit unknown source; the collector does not guess. Telegram never says who deleted a
-message; when the deleted message was sent by this account, the record says so
-(`deleted_message_was_outgoing`) without naming a deleter.
+explicit unresolved chat. These are Telegram deletion notifications, preserved even
+when their chat cannot yet be correlated. The notification's schema contains IDs;
+the journal adds reception time and any saved message context, including
+`deleted_message_was_outgoing`. Available admin-log entries provide a separate
+source of the action, actor and source time.
 
 ## Own actions
 
@@ -114,7 +144,7 @@ messages. Explicit panel actions and manually requested history snapshots remain
 
 ## Investigation mode: joining teams and talking to bots
 
-**Sources → Observation scope → Investigation mode** prepares the scope for a dedicated
+**More tools → Sources → Scope → Investigation mode** prepares the scope for a dedicated
 account that joins team chats, starts bots and writes to them: the whole account, every
 source type, own actions, and for every chat or bot that appears its profile and its latest
 200 visible messages. Review the form and press **Save scope**; the switch to the whole
@@ -136,9 +166,34 @@ account asks for the usual confirmation.
 
   Chats already in the list when the mode is switched on are added without snapshots.
   A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
-  recording of the chat continues.
+  recording of the chat continues. This includes waits while resolving the new chat's
+  identity: the pending profile/history task is retained for retry, and an existing
+  longer account-wide wait is not shortened.
 - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile
   of any source; the newest one is shown above the messages.
+- **Chat state snapshots (preview).** State outside the message stream changes without a
+  message: unpinning every message leaves no message-level trace, an administrator loses
+  rights, a gift is hidden, converted, upgraded or refunded. While observing, every enabled
+  source is read periodically and saved as a signed `chat.state` record: title, usernames,
+  description, member and administrator counts, linked chat, slow mode, pinned message IDs
+  (up to 100), administrators with their rights and titles, and gifts shown on channels and
+  user profiles (up to 100). Each record lists the differences from the previous snapshot:
+  changed fields with before and after, pinned messages added or removed, administrators and
+  gifts added, changed or no longer listed. Telegram does not say who changed anything or
+  when between snapshots.
+  - A part Telegram refuses (for example the administrator list of a channel for a member
+    who is not an administrator) is named in `errors`; its earlier value is kept and listed
+    in `carried_forward`, never reported as removed.
+  - A record whose only changes are counts, and a check that found no change, refer to the
+    last full state with `state_seq` and cumulative `state_overrides`. A full state is written at
+    least every seven days and whenever anything other than a count changes.
+  - `parts_complete` marks capped lists. Additions require a complete earlier list,
+    removals require a complete current list, and explicit empty values record clearing.
+  - **More tools → Parameters → Chat state** sets the interval (12 hours by default, 0 turns snapshots
+    off), the pause between sources, which parts are read, and whether checks that found no
+    change are recorded. `FLOOD_WAIT` and `FLOOD_PREMIUM_WAIT` stop the remaining
+    snapshot requests, preserve any longer account-wide deadline, and leave the
+    interrupted chat eligible for another attempt after that wait.
 - **Not visible.** Inline (callback) buttons pressed in another Telegram app, the popup or
   link a bot answers such a press with, and invite links used in another app do not reach
   TgWitness. What the bot sends or edits afterwards is recorded.
@@ -161,9 +216,10 @@ account asks for the usual confirmation.
   A join request awaiting administrator approval is recorded as pending, not as membership.
 
 Turn on **Start observation** to capture incoming replies live. Panel actions work while
-observation is paused, but only their direct responses are then guaranteed to be saved.
+observation is paused; the panel then saves their direct responses, and live
+observation captures the rest of the conversation.
 Newly added sources use the configured profile/history intake when observation is running.
-When a source is paused, enable it in **Sources** before sending or pressing its buttons.
+When a source is paused, enable it in **More tools → Sources** before sending or pressing its buttons.
 
 `interaction.preview`, `interaction.requested` and `interaction.result` are ordinary signed
 journal events included in evidence exports. Requests identify the account, message/button
@@ -188,11 +244,11 @@ Sources marked with a star are **priority** sources, rechecked every 15 minutes 
 all other sources every 6 hours. Chosen chats start as priority sources, chats added by a
 folder or the whole account as regular ones. At most 30 sources are rechecked per pass and
 the rest wait for the next minute; after a reconnect, priority sources go first. Both
-intervals are set under Sources → Recording settings → Recheck (0 turns a tier off) and are
+intervals are set under **More tools → Sources → Recording → Recheck** (0 turns a tier off) and are
 recorded as `recheck.changed`.
 
 Missed messages are fetched upward from where the previous pass stopped, at most
-**Parameters → Missed messages recovered per chat and pass** (1,000 by default). After a long stop the
+**More tools → Parameters → Missed messages recovered per chat and pass** (1,000 by default). After a long stop the
 recheck therefore fills the whole gap, even when live messages newer than the gap were saved
 first. A chat that is still catching up is rechecked again on the next minute instead of
 waiting for its tier interval; `recheck.completed` shows `continues_after` until it is done.
@@ -213,14 +269,21 @@ If collection began after the first version disappeared, that text is unavailabl
 If several edits occurred while the process was offline, only subsequently observed
 versions can be saved. A deletion notice cannot recover content never captured.
 
-The message sender is not automatically the editor. Telegram usually does not
-supply the person who deleted a message or the exact deletion time. Unknown actors
-stay unknown. Reaction snapshots and participant updates contain only the counts
-and identities Telegram makes visible to the account.
+The record combines several sources:
 
-Sequence numbers express observation order. The collector's UTC timestamp is its
-local clock; a Telegram source timestamp is stored separately when supplied.
-Neither is an independent trusted timestamp.
+| Source | Preserved information |
+| --- | --- |
+| Live message or edit update | Message ID, sender metadata, captured version, reception time and supplied Telegram message/edit date. |
+| Live deletion notification | Reported message IDs, reception time, raw notification and links to previously saved content. |
+| Available admin log | Action, actor, source date and supplied message content, read by an account with the required rights. |
+| Panel interaction | The requested action and its recorded outcome under the selected account. |
+| Recheck | Telegram's current response compared with the previously saved message. |
+
+`observed_at` records reception on the collector clock; `source_at` retains a
+source date where that event supplies one. Telegram clock-offset observations,
+clock-discontinuity records and [external time checks](TIMESTAMP.md) provide the
+associated timing context. An ordinary message notification's fields describe
+that notification; admin-log and interaction records retain their own attribution.
 
 ## History snapshots
 
@@ -247,7 +310,7 @@ descriptor and size policy, so a later edited attachment is not silently substit
 
 Downloads run after message capture. A completed download creates a `media.saved`
 record with its SHA-256 and byte count. Skipped, failed, retried, and interrupted
-work has separate outcomes. A queued job is not proof that the file was preserved.
+work has separate outcomes; a file counts as preserved when its `media.saved` record exists.
 The completed file must also match the byte count in the original observed attachment
 descriptor. A short or unexpectedly long response is not recorded as preserved media.
 
@@ -281,8 +344,8 @@ a `media.skipped` record; turning downloads off pauses the queue until they are 
 The collector records detected disconnects, retries, errors, starts/stops, and
 heartbeats. Short interruptions can be missed by periodic connectivity checks.
 After a restart, missed updates are requested from the saved update position and
-observed chats are rechecked periodically; see [evidence format](EVIDENCE.md#durable-collection-and-process-receipts-02). A snapshot provides context;
-it does not prove that a gap was repaired.
+observed chats are rechecked periodically; see [evidence format](EVIDENCE.md#durable-collection-and-process-receipts-02). A snapshot adds the current state
+as context, and the gap stays recorded.
 
 ## Account isolation and verification
 
@@ -299,7 +362,6 @@ the export; collection may continue beyond its boundary while it is being prepar
 boundary. Its result is cleared when the workspace changes, and the panel identifies
 new records added after the check. ZIP export also verifies collected media.
 
-A valid signature establishes integrity relative to the trusted key, not Telegram
-origin or truthful content. Retain fingerprints and checkpoints independently. See
-the [evidence model](EVIDENCE.md), [daily operations](OPERATIONS.md), and
-[live acceptance procedure](internal/LIVE_ACCEPTANCE.md) for trust and delivery requirements.
+Retain fingerprints and checkpoints independently. See the
+[verification scope](EVIDENCE.md#verification-scope) for acquisition checks in each mode,
+and [daily operations](OPERATIONS.md) for routine collection.

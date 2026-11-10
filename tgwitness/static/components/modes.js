@@ -15,14 +15,12 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
   const percent = () => data ? Math.round(100 * data.active / data.total) : 0;
   const button = (cls, text) => { const b = node('button', cls, text); b.type = 'button'; return b; };
 
-  // Switcher next to the version number.
   const switcher = button('mode-switch');
   switcher.id = 'mode-switch'; switcher.hidden = true;
   const switchDot = node('span', 'mode-switch-dot'), switchName = node('span', 'mode-switch-name'), switchLevel = node('span', 'mode-switch-level');
   switchDot.setAttribute('aria-hidden', 'true'); switcher.append(switchDot, switchName, switchLevel);
   document.getElementById('app-version').before(switcher);
 
-  // First choice of a new workspace, above the setup steps.
   const onboarding = node('section', 'mode-onboarding card padded');
   onboarding.id = 'mode-onboarding'; onboarding.hidden = true; onboarding.setAttribute('aria-labelledby', 'mode-onboarding-title');
   document.getElementById('setup-card').before(onboarding);
@@ -196,6 +194,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     change.addEventListener('click', () => show());
     head.append(title, change);
     card.append(head);
+    card.append(node('p', 'hint', tr('A mode changes the panel view. It does not activate services or certify evidence. Check the status of each layer below.')));
     level(card);
     const details = node('details', 'protection-details'), summary = node('summary', '', tr('The {total} protection layers', {total: data.total}));
     details.append(summary); layerList(details);
@@ -270,8 +269,14 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     render();
   }
 
+  function reset() {
+    wizardRun++; request++; selected = null;
+    if (dialog.open) dialog.close();
+    if (wizard.open) wizard.close();
+  }
+
   function sync(sessionKey) {
-    if (sessionKey !== key) { key = sessionKey; data = null; selected = null; render(); void load(); return; }
+    if (sessionKey !== key) { reset(); key = sessionKey; data = null; render(); void load(); return; }
     if (Date.now() - loadedAt > 60000) void load();
   }
 
@@ -392,6 +397,6 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
   switcher.addEventListener('click', () => show());
   dialog.addEventListener('close', () => { selected = null; });
 
-  return {sync, refresh: () => load(), show, open, openWizard, mode: () => data?.mode ?? null, locked: isLocked,
+  return {sync, reset, refresh: () => load(), show, open, openWizard, mode: () => data?.mode ?? null, locked: isLocked,
     lockedExtra: name => !!EXTRA_FEATURES[name] && isLocked(EXTRA_FEATURES[name])};
 }

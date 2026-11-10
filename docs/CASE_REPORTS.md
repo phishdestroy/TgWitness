@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
+
+![Investigation](assets/presentation/chapter-investigate.svg)
+
 # Case reports: contents, design and verification
 
 Turn selected observations into a readable account of the case: its question,
@@ -34,6 +38,14 @@ shown. A later export takes a fresh stable snapshot, so ongoing collection may
 increase the figures. Scope, counts and source identity are included in the
 signed report. Opening or previewing the form does not save it.
 
+**Jurisdiction guidance.** Under Document details, open **Jurisdiction guidance · optional**
+to choose a jurisdiction and civil/commercial or criminal procedure. The appendix carries
+the legal basis, source links, preparation notes and research status. Local-language
+summaries and explanations of collection safeguards are optional. No jurisdiction is
+selected by default. These choices belong to the workspace, and are excluded from
+saved layout configurations and implicit sharing-copy defaults. See
+[defaults, supported reports and research limits](JURISDICTION_GUIDANCE.md).
+
 **Choose the recipient's copy.** Charts and the transcript use the selected records.
 Integrity, custody and coverage describe the full source journal. The evidence ZIP
 contains its original records and attachments. Use [a minimized handover](EVIDENCE.md#handover-extract)
@@ -51,8 +63,8 @@ the filters. Unrelated messages are not added to these histories.
 date-derived ID span. Every known source record is checked before declaring a
 number unobserved: filtering out another author, an event type or a date cannot
 create a false gap. Neighboring saved messages are labelled as context. A missing
-number does not establish that a message existed or was deleted; deletion notices
-and unsuccessful rechecks remain separate event types.
+number marks an unobserved position; deletion notices and unsuccessful rechecks are
+reported as their own event types.
 
 ### Choose a design
 
@@ -165,6 +177,24 @@ detects changed bytes. To check the figures, recompute journal aggregates with
 `report_analytics.Analytics` and `selected`, or
 snapshot aggregates with `snapshot_analytics.collect` and `project`.
 
+### Anomaly indicators
+
+**Preview.** Evidence reports add an **Anomaly indicators** section computed by
+registered processors (`tgwitness/metrics/`, one file per metric). The report names every
+processor that ran with its version, and prints its method under its table, so the
+computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
+
+| Processor | What it shows |
+| --- | --- |
+| `first_time_posters_over_time` v1 | First-time posters and messages per UTC day. A flag requires at least five first-time posters and three times their median, with message volume at most 1.5 times its median. The baseline uses at least seven observed days within the previous 14 calendar days, after seven days of warm-up. |
+| `service_vs_message_ratio` v1 | Distinct saved message numbers per chat and the share used by service messages. It describes a numbering; it does not explain a particular missing number. |
+| `join_leave_per_month` v1 | Joins, departures and removals or bans per month, one per person, chat, change and day. |
+| `pinned_per_month` v1 | Pin service messages, unpin notices, and pinned messages added or removed between chat-state snapshots, per month. |
+
+**More tools → Parameters → Report metrics** selects processors and the number of displayed rows,
+including in filtered reports. Daily and monthly tables show recent rows, service-share
+tables rank chats by saved message count. Totals cover every row.
+
 From a source checkout, build all eight designs listed above from the same fictional journal:
 
 ```sh
@@ -209,9 +239,9 @@ account, external timestamp service or network connection is used to create it.
 ## Reading a concrete case
 
 For a journal of 1,200 entries with a validated timestamp at entry 1,000, the
-report identifies 200 later entries outside that timestamp's bound. This is an
-upper bound on the existence of a checkpoint, not proof of each message's send
-time. If three other timestamp files fail validation or cannot be validated,
+report identifies 200 later entries outside that timestamp's bound. The timestamp
+fixes an upper bound on when the checkpoint existed; each message keeps its own
+send time from Telegram. If three other timestamp files fail validation or cannot be validated,
 they are counted separately and cannot supply a positive conclusion.
 
 A usable timestamp must satisfy all of these checks: its imprint matches the
@@ -247,8 +277,8 @@ Review each check separately, alongside the recorded collection coverage.
    Intel certificate chain, measurements, exact source and key-handling conditions.
    Keep the attestation verification result with the reviewed artifacts.
 
-See [verification scope](EVIDENCE.md#verification-scope) for the trust assumptions
-and the separate assessment of source claims, identity, time and collection coverage.
+See [verification scope](EVIDENCE.md#verification-scope) for the checks of acquisition,
+archive integrity, time and collection coverage in each mode.
 
 ## Recipient review
 
@@ -257,10 +287,12 @@ Use a trusted installation of TgWitness and an independently obtained fingerprin
 ```sh
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca tsa-root.pem
-python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --witness witness.zip --witness-fingerprint WITNESS_SHA256 --require-witness
+python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel https://t.me/s/WITNESS_CHANNEL --require-witness
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --check-drand
 ```
 
+The second and third commands can meet the minimum for evidence: a checked timestamp,
+or the dates Telegram set on the witness posts, gives external time for the last record.
 The witness ZIP must come from an independently trusted source; preserve its key
 and provenance too. Retain the commands, tool version, outputs, reviewed input
 hashes and unresolved questions. Beacon verification is a separate online check;

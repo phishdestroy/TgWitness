@@ -62,7 +62,7 @@ has no login secrets and isn't a backup.
 | `manifest.json` + `manifest.sig` | Signed list of every file |
 | `README.txt` | How to verify, in the report language and English |
 
-Report language, case title/ID, examiner and notes go under **Exports → Report settings**
+Report language, case title/ID, examiner and notes go under **Exports → Build report**
 and get signed in. Every report ends with an Ed25519 seal. Check it by dropping the file
 onto the report in a browser, or with
 `python -m tgwitness.verify report.html --fingerprint TRUSTED_SHA256 --evidence evidence.zip`.
@@ -89,11 +89,16 @@ From a trusted copy of the project:
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256
 ~~~
 
-With a checkpoint you kept:
+For the minimum for evidence, add time from a third party for the last record. With
+evidence mode on, the ZIP carries RFC 3161 timestamps; check them with the timestamp
+authority's root certificate:
 
 ~~~sh
-python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
+python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TSA-ROOT.pem --require evidence
 ~~~
+
+A checkpoint you kept (`--checkpoint checkpoint.json`) is checked too, but it is signed with
+the collector key, so on its own it does not meet the minimum.
 
 A pass means nothing covered by signatures, chain and manifest changed. Read the coverage
 and gaps too. In a terminal you get a coloured summary (`--lang en|ru|uk`), `--json` for scripts.

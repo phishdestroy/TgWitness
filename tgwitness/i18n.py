@@ -2,6 +2,8 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
+from .failures import TEXTS
+
 LANGUAGES = ("en", "ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
              "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
 GUIDE_LANGUAGES = (*LANGUAGES, "am")
@@ -55,7 +57,7 @@ def words(lang):
 @lru_cache(maxsize=None)
 def script(lang, guide=False):
     dictionary = guide_words(lang) if guide else words(lang)
-    scope = 'window.TGW_SCOPE="guide";' if guide else ''
+    scope = 'window.TGW_SCOPE="guide";' if guide else 'window.TGW_ERRORS=' + json.dumps(TEXTS, separators=(",", ":")) + ';'
     return (scope + "window.TGW_LANG=" + json.dumps(lang) + ";window.TGW_DICT="
             + json.dumps(dictionary, ensure_ascii=False, separators=(",", ":")) + ";\n").encode("utf-8")
 
@@ -66,4 +68,5 @@ def guide_words(lang):
     path = GUIDE_FILES.get(lang)
     if path is None:
         raise ValueError("Unsupported guide language")
-    return json.loads(path.read_text(encoding="utf-8"))
+    fallback = {text: text for text in json.loads(ENGLISH_FALLBACKS.read_text(encoding="utf-8"))}
+    return {**fallback, **json.loads(path.read_text(encoding="utf-8"))}

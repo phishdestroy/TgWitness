@@ -3,6 +3,7 @@ import hashlib
 import re
 import socket
 import threading
+import time
 from contextlib import contextmanager, suppress
 from contextvars import ContextVar
 from datetime import datetime, timedelta, timezone
@@ -23,7 +24,8 @@ EXCERPT_CHARS = 120
 CHANGES = {"message.deleted": "deleted", "message.edited": "edited", "message.missing_on_recheck": "missing"}
 PROBLEM_KINDS = ("storage.low", "storage.ok", "coverage.gap", "collector.error", "connection.retry_failed",
                  "source.access_unconfirmed", "export.failed", "chat_export.interrupted", "replica.completed",
-                 "anchor.completed", "profile.unavailable", "host.state", "storage.completed")
+                 "anchor.completed", "profile.unavailable", "host.state", "storage.completed", "account.security_event",
+                 "session.exclusive_ended", "account.sessions")
 COMPLETION_KINDS = ("account_export.completed", "chat_export.completed", "snapshot.completed", "storage.completed")
 
 CHANGE_SCAN = 5000
@@ -39,6 +41,8 @@ OWN_SOCKET = DIRECT_SOCKET - {"mailto", "mailtos"}
 def own_socket(url):
     return url.split("://", 1)[0].lower() in OWN_SOCKET
 _send_lock = threading.Lock()
+RESPONSE_BYTES = 1024 * 1024
+DELIVERY_SECONDS = 60
 
 
 class AlertSettings(BaseModel):
@@ -46,6 +50,7 @@ class AlertSettings(BaseModel):
     problems: bool = True
     changes: bool = False
     completions: bool = False
+    watchlists: bool = True
     daily: bool = True
     daily_hour: int = Field(default=9, ge=0, le=23)
     language: Literal[i18n.LANGUAGES] = "en"
@@ -246,8 +251,9 @@ def _install_guard():
 @contextmanager
 def _routed(proxy):
     import requests
-    original = requests.Session.merge_environment_settings
-    token = _guard.set({"on": False, "allowed": set(), "refused": None, "pinned": {}})
+    original, original_send = requests.Session.merge_environment_settings, requests.Session.send
+    token = _guard.set({"on": False, "allowed": set(), "refused": None, "pinned": {},
+                        "deadline": time.monotonic() + DELIVERY_SECONDS})
 
     def merge(self, url, proxies, stream, verify, cert):
         guard = _guard.get()
@@ -263,11 +269,32 @@ def _routed(proxy):
         settings = original(self, url, {}, stream, verify, cert)
         settings["proxies"] = {"http": proxy, "https": proxy} if proxy else {}
         return settings
-    requests.Session.merge_environment_settings = merge
+
+    def send(self, request, **kwargs):
+        guard = _guard.get()
+        if guard is None:
+            return original_send(self, request, **kwargs)
+        left = guard["deadline"] - time.monotonic()
+        if left <= 0:
+            raise requests.exceptions.ConnectionError("The notification service did not answer in time.")
+        response = original_send(self, request, **{**kwargs, "stream": True,
+                                                   "timeout": (min(10, left), min(30, left))})
+        try:
+            body = bytearray()
+            for chunk in response.iter_content(65536):
+                body += chunk
+                if len(body) > RESPONSE_BYTES or time.monotonic() > guard["deadline"]:
+                    raise requests.exceptions.ConnectionError(
+                        "The notification service answered with too much data or too slowly.")
+            response._content, response._content_consumed = bytes(body), True
+        finally:
+            response.close()
+        return response
+    requests.Session.merge_environment_settings, requests.Session.send = merge, send
     try:
         yield
     finally:
-        requests.Session.merge_environment_settings = original
+        requests.Session.merge_environment_settings, requests.Session.send = original, original_send
         _guard.reset(token)
 
 
@@ -334,6 +361,14 @@ def account_loss_line(cause, words):
     return tr(words, "Telegram signed this account out. Sign in again to resume observation.")
 
 
+def added_sessions(payload, words):
+    added = set(payload.get("added") or [])
+    found = [s for s in payload.get("others") or [] if isinstance(s, dict) and s.get("hash") in added]
+    names = [" · ".join(str(s[key]) for key in ("device_model", "app_name", "country") if s.get(key))
+             or tr(words, "a device Telegram did not name") for s in found]
+    return "; ".join(names)
+
+
 def problem_line(event, titles, words):
     p, kind = event["payload"], event["kind"]
     where = titles.get(event["chat_id"], str(event["chat_id"])) if event["chat_id"] is not None else ""
@@ -344,6 +379,12 @@ def problem_line(event, titles, words):
         return tr(words, "Disk space available again; photo and file downloads resumed.")
     if kind == "coverage.gap" and p.get("reason") == "authorization_required":
         return account_loss_line(p.get("cause"), words)
+    if kind == "coverage.gap" and p.get("reason") == "updates_diverted":
+        return tr(words, "Updates are going to another session: Telegram's update counter grows, but nothing "
+                         "reaches this one. Another client probably uses the same session key.")
+    if kind == "coverage.gap" and p.get("reason") == "probe_ack_missed_live":
+        return tr(words, "A probe answer reached the probe chat but not this session live. Another client probably "
+                         "uses the same session key.")
     if kind == "coverage.gap":
         return tr(words, "Coverage gap{where}: {reason}", where=" (" + where + ")" if where else "",
                   reason=p.get("reason") or "")
@@ -370,6 +411,15 @@ def problem_line(event, titles, words):
                   error=p.get("error_type") or "?")
     if kind == "host.state":
         return host_line(p, words)
+    if kind == "session.exclusive_ended":
+        return tr(words, "Another session signed in after this session was made the only one.")
+    if kind == "account.sessions" and p.get("added"):
+        return tr(words, "A new session signed in to this account: {device}", device=added_sessions(p, words))
+    if kind == "account.security_event" and p.get("during_observation") is True:
+        if p.get("event_kind") == "login_code":
+            return tr(words, "Telegram sent a sign-in code for this account during observation.")
+        if p.get("event_kind") == "new_login":
+            return tr(words, "Telegram reported a new sign-in to this account during observation.")
     return None
 
 
@@ -389,7 +439,6 @@ def host_line(state, words):
         return None
     if login:
         return tr(words, "Server access detected: {details}", details="; ".join(found))
-    # An open port or a started SSH process alone is not a recorded login.
     return tr(words, "SSH change on the server, no new login recorded: {details}", details="; ".join(found))
 
 
@@ -519,6 +568,8 @@ def notice_destination(event, level):
         "export.failed": ("exports", "exports"), "chat_export.interrupted": ("exports", "exports"),
         "replica.completed": ("replica", "replica"), "anchor.completed": ("timestamps", "timestamps"),
         "profile.unavailable": ("accounts", "accounts"), "host.state": ("server", "server"),
+        "account.security_event": ("connection", "connection"), "session.exclusive_ended": ("connection", "connection"),
+        "account.sessions": ("connection", "connection"),
     }.get(kind, ("collection", None))
     if kind == "coverage.gap" and p.get("reason") == "authorization_required":
         category, part = "connection", "connection"
@@ -543,13 +594,15 @@ def notice_entry(event, level, text, read_key, *, group_id=None, count_exact=Tru
             "last_at": event["observed_at"], "category": category, "severity": severity, "action": action}
 
 
-def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="default"):
+def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="default", hide_admin=False):
     if limit <= 0 or allowed_chats is not None and not allowed_chats:
         return []
     titles = {t["chat_id"]: t["title"] for t in store.targets()
               if allowed_chats is None or t["chat_id"] in allowed_chats}
 
     def scan(kinds, bound):
+        if hide_admin:
+            kinds = tuple(kind for kind in kinds if not kind.startswith(("access.", "profile.")))
         records = store.events_of(kinds, limit=bound + 1, chat_ids=allowed_chats)
         return records[:bound], len(records) > bound
 
@@ -714,6 +767,11 @@ async def _destination_pass(store, vault, network, now=None, urls=None):
                  for chat, counts in changes.items()]
         messages.append((tr(words, "TgWitness · {name}: changes in observed chats", name=name),
                          capped(discovered + lines + excerpts, words, limit)))
+    if settings["watchlists"]:
+        from .watchlists import alert_lines
+        found = alert_lines(store, start, cursor, words, tr, limit)
+        if found:
+            messages.append((tr(words, "TgWitness · {name}: watchlist hits", name=name), capped(found, words, limit)))
     if settings["completions"]:
         completed = [line for event in reversed(store.events_of(COMPLETION_KINDS, limit=limit + 1, after=start, before=cursor + 1))
                      if (line := completion_line(event, titles, words))]

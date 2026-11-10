@@ -8,6 +8,10 @@ import uuid
 from contextlib import suppress
 from urllib.parse import urlsplit
 
+from cryptography import x509
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.x509 import ocsp
+from cryptography.x509.oid import AuthorityInformationAccessOID
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from .anchor import timestamp_request
@@ -16,12 +20,13 @@ from .evidence import retain_checkpoint
 from .health import next_at
 from .security import private_write
 from .store import canonical, utcnow
-from .tsa_roots import trusted_roots
+from .tsa_roots import QUALIFIED_TSA, trusted_roots
 from .verify import (DRAND_CHAIN, DRAND_GENESIS, DRAND_PERIOD, DRAND_RELAYS, OTS_BITCOIN, OTS_MAGIC, OTS_PENDING,
-                     drand_beacon, drand_time, ots_summary, timestamp_reply_summary, timestamp_signature)
+                     drand_beacon, drand_time, ots_summary, revocation_status, revocation_subject,
+                     timestamp_reply_summary, timestamp_signature)
 
 
-DEFAULT_TSA = ["https://freetsa.org/tsr", "https://timestamp.sectigo.com"]
+DEFAULT_TSA = [QUALIFIED_TSA, "https://freetsa.org/tsr", "https://timestamp.sectigo.com"]
 
 REPLACED_TSA = {"http://timestamp.digicert.com": "https://timestamp.sectigo.com"}
 
@@ -31,6 +36,7 @@ LOOP_SECONDS = 30
 OTS_UPGRADE_AGE = 3600
 OTS_UPGRADE_FILES = 8
 OTS_TREE_LIMIT = 1024 * 1024
+REVOCATION_LIMITS = {"ocsp": 64 * 1024, "crl": 4 * 1024 * 1024}
 
 
 class OTSReader:
@@ -107,7 +113,6 @@ class OTSReader:
                 elif tag in (0x02, 0x03, 0x08):
                     result = hashlib.new({0x02: "sha1", 0x03: "ripemd160", 0x08: "sha256"}[tag], message).digest()
                 else:
-                    # Keccak-256 is not SHA3-256. Preserve an unsupported proof unchanged.
                     raise ValueError("Unsupported OpenTimestamps upgrade operation")
                 node["ops"][operation] = self.tree(result, depth + 1)
             if not more:
@@ -160,14 +165,13 @@ def approved_calendar(uri, settings):
     configured = {url.rstrip("/") for url in settings["ots_calendars"]}
     if uri.rstrip("/") in configured:
         return True
-    # The upstream OTS client whitelist; pools return these calendar hosts.
     return parts.port in (None, 443) and not parts.path.strip("/") and any(parts.hostname.endswith("." + suffix) for suffix in (
         "calendar.opentimestamps.org", "calendar.eternitywall.com", "calendar.catallaxy.com"))
 
 
-def old_ots_files(folder, cursor):
+def old_ots_files(folder, cursor, pattern="checkpoint-*.ots"):
     after, before, now = [], [], time.time()
-    for path in folder.glob("checkpoint-*.ots"):
+    for path in folder.glob(pattern):
         try:
             if path.is_symlink() or now - path.stat().st_mtime < OTS_UPGRADE_AGE:
                 continue
@@ -181,13 +185,14 @@ def old_ots_files(folder, cursor):
     return (after + before)[:OTS_UPGRADE_FILES]
 
 
-async def upgrade_pending_ots(store, network, settings):
-    folder = store.root / "checkpoints" / "anchors"
+async def upgrade_pending_ots(store, network, settings, folder=None):
+    daily = folder is not None
+    folder = folder if daily else store.root / "checkpoints" / "anchors"
     if not folder.is_dir() or folder.is_symlink() or not settings["ots_calendars"]:
         return []
     previous = store.get_setting("evidence_ots_upgrade", {}) or {}
     cursor = previous.get("cursor", "")
-    ordered = await asyncio.to_thread(old_ots_files, folder, cursor)
+    ordered = await asyncio.to_thread(old_ots_files, folder, cursor, "daily-*.ots" if daily else "checkpoint-*.ots")
     outcomes, examined, calls = [], 0, 0
     deadline = time.monotonic() + 60
     for path in ordered:
@@ -202,9 +207,9 @@ async def upgrade_pending_ots(store, network, settings):
                 raise ValueError("OpenTimestamps size limit exceeded")
             original = path.read_bytes()
             stem = path.name.split(".", 1)[0]
-            if not re.fullmatch(r"checkpoint-\d{12,}", stem):
+            if not re.fullmatch(r"daily-\d{4}-\d{2}-\d{2}" if daily else r"checkpoint-\d{12,}", stem):
                 continue
-            source = folder.parent / (stem + ".json")
+            source = (folder if daily else folder.parent) / (stem + ".json")
             if source.is_symlink() or source.stat().st_size > 64 * 1024:
                 raise ValueError("Invalid retained checkpoint")
             digest = hashlib.sha256(source.read_bytes()).digest()
@@ -268,8 +273,8 @@ class EvidenceMode(BaseModel):
         for value in values:
             value = value.strip().rstrip("/")
             parts = urlsplit(value)
-            if (parts.scheme != "https" or not parts.hostname or parts.username
-                    or parts.password or parts.fragment or len(value) > 300):
+            if value != QUALIFIED_TSA and (parts.scheme != "https" or not parts.hostname or parts.username
+                                           or parts.password or parts.fragment or len(value) > 300):
                 raise ValueError("Use https:// addresses without credentials.")
             if value not in clean:
                 clean.append(value)
@@ -282,7 +287,8 @@ def evidence_settings(store):
     for key in ("tsa_urls", "ots_calendars"):
         if isinstance(saved.get(key), list):
             saved[key] = [REPLACED_TSA.get(url.strip().rstrip("/"), "https://" + url.strip()[7:])
-                          if isinstance(url, str) and url.strip().startswith("http://") else url for url in saved[key]]
+                          if isinstance(url, str) and url.strip().startswith("http://")
+                          and url.strip().rstrip("/") != QUALIFIED_TSA else url for url in saved[key]]
     return EvidenceMode.model_validate(saved).model_dump()
 
 
@@ -314,6 +320,72 @@ def latest_checkpoint(store):
     return (name, source, statement) if source.is_file() else None
 
 
+async def ots_stamp(digest: bytes, calendars, folder, name: str, network) -> list[dict]:
+    folder.mkdir(parents=True, exist_ok=True, mode=0o700)
+    results = []
+    for url in calendars:
+        target = folder / (name + "." + service_name(url) + ".ots")
+        if target.exists():
+            ots_summary(target.read_bytes(), digest)
+            results.append({"service": url, "kind": "opentimestamps", "covered": True})
+            continue
+        received = False
+        try:
+            answer = await post(url + "/digest", digest, {"Accept": "application/vnd.opentimestamps.v1"},
+                                network, limit=10000)
+            received = True
+            proof = OTS_MAGIC + b"\x01\x08" + digest + answer
+            summary = ots_summary(proof, digest)
+            private_write(target, proof)
+            results.append({"service": url, "kind": "opentimestamps", "ok": True, "status": summary["status"]})
+        except Exception as exc:
+            results.append({"service": url, "kind": "opentimestamps", "ok": False, "received": received,
+                            "error": problem(exc)})
+    return results
+
+
+def revocation_sources(certificate):
+    found = {}
+    for kind, extension in (("ocsp", x509.AuthorityInformationAccess), ("crl", x509.CRLDistributionPoints)):
+        try:
+            value = certificate.extensions.get_extension_for_class(extension).value
+        except x509.ExtensionNotFound:
+            continue
+        names = ([item.access_location for item in value if item.access_method == AuthorityInformationAccessOID.OCSP]
+                 if kind == "ocsp" else [name for point in value for name in point.full_name or []])
+        found[kind] = next((name.value for name in names if isinstance(name, x509.UniformResourceIdentifier)
+                            and urlsplit(name.value).scheme in ("http", "https")), None)
+    return [(kind, url) for kind, url in found.items() if url]
+
+
+async def revocation_evidence(reply, target, network):
+    try:
+        subject = revocation_subject(reply, trusted_roots())
+        sources = revocation_sources(subject["signer"])
+    except Exception as exc:
+        return {"status": "unavailable", "error": problem(exc)}
+    errors = []
+    for kind, url in sources:
+        try:
+            async with asyncio.timeout(20 if kind == "ocsp" else 30):
+                if kind == "ocsp":
+                    query = ocsp.OCSPRequestBuilder().add_certificate(
+                        subject["signer"], subject["issuer"], hashes.SHA1()).build().public_bytes(serialization.Encoding.DER)
+                    answer = await post(url, query, {"Content-Type": "application/ocsp-request",
+                                                     "Accept": "application/ocsp-response"}, network,
+                                        timeout=15, limit=REVOCATION_LIMITS[kind])
+                else:
+                    answer = (await request("GET", url, network, {"Accept": "application/pkix-crl"},
+                                            timeout=20, limit=REVOCATION_LIMITS[kind]))[2]
+            state = revocation_status(kind, answer, subject)
+            private_write(target.with_suffix("." + kind), answer)
+            return {"url": url, "file": target.with_suffix("." + kind).name, **state, **({"errors": errors} if errors else {})}
+        except Exception as exc:
+            errors.append(kind.upper() + " " + url + ": " + problem(exc))
+    return {"status": "unavailable",
+            "error": "; ".join(errors)[:600] if errors else "The signing certificate names no OCSP or CRL address"}
+
+
 async def anchor_latest(store, network, settings):
     found = latest_checkpoint(store)
     if not found:
@@ -339,26 +411,16 @@ async def anchor_latest(store, network, settings):
             signed = timestamp_signature(reply, trusted_roots())
             private_write(folder / (name + "." + service_name(url) + ".tsq"), query)
             private_write(target, reply)
-            results.append({"service": url, "kind": "rfc3161", "ok": True, "time": summary["time"], **signed})
+            revocation = await revocation_evidence(reply, target, network)
+            results.append({"service": url, "kind": "rfc3161", "ok": True, "time": summary["time"], **signed,
+                            "revocation": revocation})
         except Exception as exc:
             results.append({"service": url, "kind": "rfc3161", "ok": False, "received": received, "error": problem(exc)})
-    for url in settings["ots_calendars"]:
-        target = folder / (name + "." + service_name(url) + ".ots")
-        if target.exists():
-            covered.append({"service": url, "kind": "opentimestamps"})
-            continue
-        received = False
-        try:
-            answer = await post(url + "/digest", digest, {"Accept": "application/vnd.opentimestamps.v1"},
-                                network, limit=10000)
-            received = True
-            proof = OTS_MAGIC + b"\x01\x08" + digest + answer
-            summary = ots_summary(proof, digest)
-            private_write(target, proof)
-            results.append({"service": url, "kind": "opentimestamps", "ok": True, "status": summary["status"]})
-        except Exception as exc:
-            results.append({"service": url, "kind": "opentimestamps", "ok": False, "received": received,
-                            "error": problem(exc)})
+    for outcome in await ots_stamp(digest, settings["ots_calendars"], folder, name, network):
+        if outcome.pop("covered", False):
+            covered.append(outcome)
+        else:
+            results.append(outcome)
     if not results:
         return None
     record = {"checkpoint": {"file": source.name, "event_count": statement["event_count"],
@@ -395,6 +457,8 @@ async def record_drand(store, network):
         if ahead > 60:
             errors.append(urlsplit(relay).hostname + ": the round is " + str(round(ahead)) + " s ahead of this clock")
             continue
+        store.set_setting("drand_latest", {"round": beacon["round"], "randomness": beacon["randomness"],
+                                           "chain": DRAND_CHAIN})
         event = store.append("beacon.drand", {
             "chain": DRAND_CHAIN, **beacon, "round_time": drand_time(beacon["round"]), "relay": relay,
             "meaning": "Public randomness from drand (League of Entropy). Nobody knew it before round_time, so the "

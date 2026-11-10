@@ -1,12 +1,25 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
+
+![Evidence & verification](assets/presentation/chapter-evidence.svg)
+
 # Independent witness
 
 [Export and verify](EVIDENCE.md) · [High assurance](HIGH-ASSURANCE.md) · [Panel guide](PANEL.md#extras)
 
-A collector signs its own journal, so whoever controls the collector and its key could in
-principle rewrite or truncate the journal and sign it again. A witness makes that
-detectable. It is a separate process — another container, or better a server someone else
-runs — that every few minutes fetches the collector's signed journal head, signs what it
-saw with its own key, keeps it in its own journal and posts it to a Telegram channel.
+A witness retains signed checkpoints separately from the collector. It checks the
+collector's signature and journal continuity, signs the result with its own key, and
+publishes it to a Telegram channel. Run it on a separate server with read-only access to
+the collector's witness endpoint.
+
+The technical result includes retained journal prefixes, challenge responses,
+signature checks, Merkle inclusion/consistency checks and signed continuity outcomes.
+For a witness operated by another custodian, retain the custodian and key-control
+record with its fingerprint. Separate keys and separate custody describe different
+parts of the setup. The verifier reports that a second key retained the journal head
+and up to which record; who controls that key is a custody fact it cannot check, so the
+witness journal is a supporting check, not part of the minimum for evidence. The
+channel posts add external time: Telegram dates each public post, and the verifier
+reads those dates itself.
 
 ```mermaid
 flowchart LR
@@ -15,8 +28,19 @@ flowchart LR
     W -- signed post via its own bot --> T[Telegram channel]
     E[Evidence ZIP] --> V[verify.py]
     J --> V
-    T -- Telegram Desktop export or t.me/s page --> V
+    T -- t.me/s page read live, or Desktop export --> V
 ```
+
+<details>
+<summary>On this page</summary>
+
+- [What the witness gets, and what it does not](#what-the-witness-gets-and-what-it-does-not)
+- [What it checks and records](#what-it-checks-and-records)
+- [Run a witness](#run-a-witness)
+- [Public proof page for several workspaces](#public-proof-page-for-several-workspaces)
+- [Verify](#verify)
+
+</details>
 
 ## What the witness gets, and what it does not
 
@@ -26,7 +50,7 @@ flowchart LR
 | Its own Ed25519 key and journal | The collector's vault, signing key or panel token |
 | Its own Telegram bot token | Message content: the head is a record count and a hash |
 
-The token is created in **Extras → Independent witness**, shown once and stored only as a
+The token is created in **More tools → Extras → Independent witness**, shown once and stored only as a
 SHA-256. It opens exactly one endpoint, `GET /api/witness/head`, which returns a freshly
 signed checkpoint plus signed content-free collection counters and operational health.
 It cannot open the panel, read message content or change settings, and the
@@ -45,7 +69,9 @@ Every interval (10 minutes by default) the witness:
 
 1. fetches the head itself (the collector cannot push or skip it);
 2. verifies the collector's signature, the pinned collector key (`--collector-fingerprint`,
-   or the first key seen), a nondecreasing count and an unchanged head at an unchanged count;
+   or the first key seen), a nondecreasing count and an unchanged head at an unchanged count.
+   Merkle inclusion and consistency proofs verify that a growing journal extends the
+   retained checkpoint. Once continuity proofs have been used, removing them is rejected;
 3. appends a signed record to its own journal: `witness.anchor` with status `ok`,
    `key_changed`, `rollback` (fewer records than before), `fork` (same length, different
    head) or `invalid` (the answer failed verification), or `witness.no_response` when the
@@ -70,7 +96,7 @@ You need a Telegram bot (create one with @BotFather), a channel where that bot i
 administrator, and the collector's address reachable from the witness — over HTTPS outside
 a private network (see the HTTPS profile in [deployment](DEPLOYMENT.md)).
 
-Open **Extras → Independent witness → Configure** in the panel. Three steps cover
+Open **More tools → Extras → Independent witness → Configure** in the panel. Three steps cover
 read-only access, your channel and interval, then launching the witness. Publication
 policy, optional HTTP/SOCKS5 proxy and custom Bot API address are under **Advanced settings**. The form
 downloads `witness.json` with this workspace's collector key pinned. Download the newly
@@ -117,7 +143,7 @@ docker compose logs witness     # prints the witness key fingerprint
 
 With a published image use `docker compose --project-directory . -f deploy/compose/compose.image.yaml --profile witness up -d`.
 
-**On someone else's server** (a real independent witness): copy the repository there, set
+**On someone else's server** (separate custody): copy the repository there, set
 `TGWITNESS_WITNESS_COLLECTOR=https://your-collector.example.org` plus the three values above
 in `.env`, then
 
@@ -149,8 +175,8 @@ A witness has one publisher: a Telegram channel or a Discord webhook, not both. 
 carry the same signed statement and cannot ping anyone. A post longer than Discord's
 2,000 characters is replaced by a short line with the full check attached as
 `witness-check.txt`. Each post ID is recorded as `witness.posted`. `verify.py --channel`
-reads Telegram channel exports only, so for Discord keep the witness journal: it holds
-every check.
+reads Telegram channels only, so for Discord keep the witness journal: it holds every
+check. Discord posts give the verifier no external time.
 
 ### Options
 
@@ -187,8 +213,8 @@ Unknown options or text keys stop the witness with a message instead of being ig
 Wording never affects verification: verify.py checks the signed token at the end of every
 post. With `--post changes` or `problems`, checks that were not posted are still in the
 witness journal and `verify.py` lists them as never posted; the start record names the
-policy. Every check still appears in the journal, so fewer posts mean fewer independent
-Telegram times, not fewer checks.
+policy. Every check still appears in the journal, so fewer posts mean fewer times dated
+by Telegram, not fewer checks.
 
 Without a channel the witness still keeps its journal. Keep the witness key fingerprint
 (`python -m tgwitness.witness fingerprint`) somewhere else.
@@ -245,14 +271,16 @@ docker compose exec witness python -m tgwitness.witness export --out /witness/wi
 docker compose cp witness:/witness/witness.zip .
 ```
 
-Then, anywhere, with the collector's signed ZIP and the channel exported from Telegram
-Desktop (*Export chat history* → JSON gives `result.json`) or its public `https://t.me/s/…`
-page:
+Then, anywhere, with the collector's signed ZIP and the address of the public channel:
 
 ```sh
 python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
-    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel result.json
+    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel https://t.me/s/your_witness_channel
 ```
+
+`--channel` also accepts a Telegram Desktop export (*Export chat history* → JSON gives
+`result.json`) or a saved copy of the page; these check the post content but give no
+external time.
 
 `verify.py` checks the witness journal (chain and signatures), then that **every head the
 witness saw is part of the exported journal**: the record at that count must have exactly
@@ -264,10 +292,16 @@ The result includes the last matched record number and the number of trailing re
 without a matching checkpoint. Only answers signed by the export's own key count: an export signed
 by a key the witness never saw is reported as not witnessed, and without `--fingerprint` its
 signer stays unpinned. With `--channel` every signed post must match the witness journal
-record by record: changed posts fail verification, missing posts are listed. A date in a
-supplied Telegram JSON export is editable metadata, outside the signed witness token.
-Matching the token does not authenticate the publication date; the result explicitly
-reports that publication-time verification was not performed.
+record by record: changed posts fail verification, missing posts are listed. Matching the
+token authenticates the content; the date is outside the signed token.
+
+With a live `https://t.me/s/…` or `https://telegram.me/s/…` address the verifier reads
+each post's date from the page at verification time. Telegram sets that date; dates of
+edited posts are not used. The earliest such date of a post at the export head is external
+time for the last record, which meets that condition of the minimum for evidence. Dates
+from any other source, such as a supplied `result.json`, a saved page or another web
+address, are supplied metadata, not independent time; the result names where its post
+dates came from (`post_date_verification`).
 
 ### Require a witnessed export boundary
 
@@ -278,26 +312,35 @@ python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
     --witness witness.zip --witness-fingerprint WITNESS_SHA256 --require-witness
 ```
 
-This requires the independently retained witness fingerprint and a matching checkpoint
-at the exact end of this export. A checkpoint covering only an earlier prefix is
-insufficient. Pause collection, let the witness observe the final state, and export
-before further journal writes; if the journal changes, retain another checkpoint and
+This requires the independently retained witness fingerprint, a key other than the
+collector key, and a matching checkpoint at the exact end of this export. A checkpoint
+covering only an earlier prefix is insufficient. Pause collection, let the witness
+observe the final state, and export before further journal writes; if the journal changes, retain another checkpoint and
 export that state. A later checkpoint alone cannot verify a shorter export's final hash.
 When `--channel` is also supplied, missing claimed posts or an empty match set fail this
 strict check. Without the flag, ordinary integrity checks still report unwitnessed
 records without rejecting an otherwise intact archive.
 
-The flag enforces consistency with the supplied, pinned witness records. The operator
-must still establish the witness's independence and preserve its records separately.
-It does not establish message truth, complete collection or an independently measured runtime.
+Keep the witness journal and its pinned key separately. Online checks verify continuity
+between checkpoints; offline verification compares every retained checkpoint with the
+export. Legacy heads without continuity proofs retain the offline comparison and are
+reported without online continuity verification. The report lists witness downtime and
+failed publications by interval.
 
-A witness shows what the collector reported at those times and that later exports agree
-with it. It does not show that the collector recorded everything Telegram delivered, or
-that message content is true. A witness run by the same operator on the same machine is
-weaker than one run by someone else.
+### Daily seals and unavailable timestamp calendars
 
-An increased count alone cannot establish append-only continuity online: the offline
-comparison must match each retained prefix hash against the full collector export.
-Witness downtime and failed publication leave intervals without external anchors. Missing
-posts can be reported against a retained witness journal; neither a channel nor a server
-controlled by the same operator is an immutable third-party archive.
+The witness seals the previous UTC day's journal boundary and submits the hash of
+that signed seal to OpenTimestamps. A calendar submission is pending evidence;
+only independently checked Bitcoin commitments receive confirmation in the verifier.
+
+If all calendars fail, the signed seal and unsuccessful attempt remain in the
+journal. The hourly maintenance pass retries that original record, including
+after a restart or a change of date. It scans at most 32 seals, submits at most
+two missing submissions and spends at most 60 seconds on retries per pass. A
+persistent cursor rotates through older seals. Retained submissions follow the
+existing proof-upgrade path.
+
+A retry does not rewrite the seal, change its original date or claim that the
+calendar received it earlier. A later Bitcoin commitment remains a later external
+confirmation. Missing proofs remain `none`; pending proofs remain `pending` until
+the verifier checks them independently.

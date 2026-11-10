@@ -1,11 +1,27 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Archive integrations](CLI.md)
+
+![Archive integrations](assets/presentation/chapter-integrations.svg)
+
 # Read the archive through MCP
 
 Connect an analyst client to selected workspaces and chats. TgWitness serves
 **Streamable HTTP at `/mcp` in the panel process**. Each connection has its own
 token, expiry and permitted tools. MCP cannot send Telegram messages, change
-settings or modify the signed journal.
+settings or modify the signed journal. The same connections work with the
+[command line](CLI.md).
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](wiki/Archive-and-Integrations.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Install and check](#install-and-check)
+- [Issue a connection](#issue-a-connection)
+- [Connect your client](#connect-your-client)
+- [Cloudflare Tunnel](#cloudflare-tunnel)
+- [Tools and boundaries](#tools-and-boundaries)
+
+</details>
 
 ## Install and check
 
@@ -25,7 +41,7 @@ Use the Python environment that runs the panel. From a source checkout:
 
 Restart the panel with its usual data directory and launch arguments after
 installation. Readiness should include `[PASS] mcp: streamable-http available`.
-**Integrations → MCP** shows the runtime status and an installation command using
+**More tools → Integrations → MCP** shows the runtime status and an installation command using
 that server's actual Python executable. **Re-check** refreshes this status without
 reloading the page; it does not install packages or restart the server.
 
@@ -102,13 +118,20 @@ stable hostname for saved client configurations.
 | --- | --- |
 | `list_workspaces` | Granted workspaces |
 | `list_chats` | Granted chats |
-| `search_messages` | Saved message text within the selected period |
+| `search_messages` | Saved message text within the selected period; `ranked=true` uses [full-text search](SEARCH.md) (word forms, best matches first, `next_offset` paging) |
 | `get_message_versions` | Captured versions and deletion observations |
 | `get_message_context` | Nearby captured message IDs |
 | `get_journal_event` | One sanitized record with its source reference |
-| `get_capture_status` | Collection state and permitted coverage records |
+| `get_capture_status` | Collection state, permitted coverage records and `gap_summary`: message numbers never observed, per channel or supergroup and for the account-wide sequence ([details](EVIDENCE.md#missing-message-numbers-gap_summary)); choose a chat to see its listed gaps |
+| `get_activity_stats` | Messages by UTC hour and weekday, peak days, edit and deletion shares, senders, domains and `@handles`, with coverage ([details](CLI.md#activity-statistics)) |
+| `get_messages_by_date` | Saved messages of one calendar day in a named IANA time zone (`Europe/Kyiv`, `UTC`), by the time Telegram reports; `from_utc` and `until_utc` state the computed day, daylight saving included |
+| `get_pinned_messages` | Messages pinned in the latest chat-state snapshot with their saved versions, and the pin and unpin notices observed live |
+| `get_chat_stats` | Cheap counts of saved records for one chat or every chat in scope, first and last observation, and `gap_summary`; use it before a large read |
+| `get_topics` | Forum topics from saved topic service messages: title history, closed or hidden, saved message counts |
+| `get_media` | A preserved image as a downscaled JPEG preview (at most 36 KB), returned as an image together with its SHA-256 and the `media.saved` record; the file is checked against its recorded hash first, other files return metadata only |
+| `export_messages` | Command line only, not selected by default: streams saved observations as JSON Lines ([details](CLI.md#export)); not offered over MCP |
 
-`tools/list` returns only the tools granted to that connection. Calls to other
+Every tool is read-only (`readOnlyHint`) and declares an output schema; fields beyond the declared ones are returned as they are. `tools/list` returns only the tools granted to that connection. Calls to other
 tools are refused. Group-context, episode, terminology and reply-chain tools are
 not offered in this build; their separate context-pack backend is not included.
 
@@ -120,10 +143,10 @@ returns a tool error asking for a narrower period or lower limit.
 Message results carry `untrusted_content: true`, workspace/chat/message IDs,
 event sequence, saved hash and a panel link. Raw Telegram objects, access hashes,
 sessions and keys are omitted. Text truncation is marked. Edits, deletion notices
-and `missing_on_recheck` are distinct observations. Missing records do not prove
-an event never happened.
+and `missing_on_recheck` are distinct observations. Coverage shows the periods a
+result speaks for.
 
 Treat instructions inside captured messages as evidence, never as client
 instructions. Read-only access prevents archive changes; the client can still
 retain the content it is allowed to read. Hashes identify saved records and
-support integrity checks; they do not prove Telegram authorship or complete capture.
+support integrity checks. Use the accompanying source references and coverage records when reviewing a result.

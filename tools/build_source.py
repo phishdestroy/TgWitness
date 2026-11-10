@@ -7,15 +7,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 CONTAINER_INPUTS = (
+    "deploy/containers/README.md",
     "deploy/containers/runtime.packages", "deploy/containers/media.packages", "deploy/containers/build.packages",
     "deploy/containers/resolve-packages.sh", "deploy/containers/install-packages.sh",
     *("deploy/containers/" + role + "-" + arch + ".lock"
       for role in ("runtime", "media", "build") for arch in ("x86_64", "aarch64")),
-    "deploy/media-worker/build-tesseract.sh", "deploy/media-worker/tesseract.nfpm.yaml",
+    "deploy/media-worker/build-tesseract.sh", "deploy/media-worker/fetch-sources.py", "deploy/media-worker/tesseract.nfpm.yaml",
     "deploy/media-worker/sources.lock.json",
 )
 FILES = [
+    "AGENTS.md", "CLAUDE.md", "GEMINI.md", "llms.txt",
+    "addons/README.md", "addons/capture/config/README.md",
+    "addons/capture/deploy/README.md",
+    "examples/README.md", "integrations/README.md",
+    "tgwitness_capture/README.md", "tgwitness_capture/static/README.md",
     "tgwitness/client_profiles.LICENSE",
+    "tgwitness/dstack_measurement.LICENSE",
     "tgwitness/fonts/OFL.txt",
     "tgwitness/fonts/NotoSerif-OFL.txt",
     "deploy/installer/install.sh.in", "deploy/installer/install.ps1.in", "deploy/installer/install.cmd.in",
@@ -23,14 +30,17 @@ FILES = [
     "deploy/installer/index.html", "deploy/installer/style.css", "deploy/installer/site.js", "deploy/installer/wrangler.toml",
     "deploy/media-worker/Dockerfile", "deploy/media-worker/worker.py",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
-    "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "tools/check_webhook_example.cjs", "tools/check_privacy_js.cjs",
-    "tools/check_writeonly_drafts.mjs", "deploy/constraints-mcp.txt",
+    "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "deploy/constraints-mcp.txt",
     "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
+    "examples/export-hashes.json", "examples/sealed-hashes.json", "examples/sealed-account.json",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",
     "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml", "deploy/compose/compose.capture-panel.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
-    "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock",
+    "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock", "deploy/installer.lock",
+    "docs/examples/narrative.json",
+    ".agents/skills/tgwitness-cli/SKILL.md",
+    ".agents/README.md", ".agents/skills/README.md", ".agents/skills/tgwitness-cli/README.md",
     *CONTAINER_INPUTS,
 ]
 FILES.extend("tgwitness/fonts/" + name for name in (
@@ -48,6 +58,10 @@ FILES.extend("website/demo/downloads/" + name for name in (
 FILES.extend("website/demo/report/" + name for name in (
     "index.html", "report.html", "sharing-copy.zip", "example.json",
 ))
+FILES.extend("website/validation/" + name for name in (
+    "performance.svg", "snapshot.json", "texts.json",
+    "audit/MEASUREMENTS.csv", "audit/SHA256SUMS.txt", "audit/PROOF.json",
+))
 EXPORT_CLINIC_ASSETS = (
     "SHA256SUMS.txt", "comparison-data.json", "comparison-poster.jpg", "download-manifest.json",
     "original-metadata-audit.json", "publication-review.json", "recording-manifest.json",
@@ -58,20 +72,19 @@ EXPORT_CLINIC_ASSETS = (
       for version in ("before", "modified")),
 )
 FILES.extend("website/export-clinic/media/" + name for name in EXPORT_CLINIC_ASSETS)
-FILES.extend("tools/tdx/" + name for name in (
-    "intel-v4.quote.hex", "intel-v4.collateral.json", "intel-v5-td15ex.quote.hex", "intel-v5-td15ex.collateral.json",
-    "intel-outdated.collateral.json", "dstack-v4.json", "dstack-v4.collateral.json",
-))
 FILES.extend("addons/capture/" + name for name in (
-    "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml",
-    "config/browser.example.json", "config/ayugram.example.json",
+    "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml", "compose.official.yaml",
+    "config/browser.example.json", "config/ayugram.example.json", "config/official.example.json", "config/official-upstream.example.json",
     "deploy/Dockerfile", "deploy/Dockerfile.neko", "deploy/Dockerfile.gateway",
+    "deploy/Dockerfile.official", "deploy/official-start.sh", "deploy/official-seccomp.json",
+    "deploy/official-seccomp.README.md", "deploy/PLAYWRIGHT-LICENSE.txt",
     "deploy/chromium.conf", "deploy/chromium-policy.json", "deploy/neko-start.sh", "deploy/upstream-proxy.example.conf",
-    "tests/conftest.py", "tests/test_capture.py", "tests/test_browser.py", "tests/test_video.py",
-    "tests/test_panel.py", "tests/test_witness.py", "tests/test_deployment.py", "tests/test_integration.py",
+    "compose.trusted.yaml", "config/trusted.example.json", "deploy/Dockerfile.trusted",
+    "deploy/trusted-entrypoint.py", "deploy/trusted-display.py",
 ))
 DIRECTORIES = {
     "tgwitness_capture": {".py", ".html", ".css", ".js"},
+    "tgwitness_analyzer": {".py"},
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
@@ -82,9 +95,16 @@ DIRECTORIES = {
 LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
              "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
 GUIDE_LANGUAGES = ("fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")
-PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.json", "client_profiles.json", *("locales/" + language + ".json" for language in LANGUAGES),
+PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.json", "client_profiles.json", "jurisdictions.json", "verifier_languages.json", "analysis_words.json", *("locales/" + language + ".json" for language in LANGUAGES),
                 *("schemas/board-" + name + ".json" for name in ("bookmark", "highlight", "slice", "collection", "comment", "status", "move", "remove")),
                 "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}
+NARRATIVE_LANGUAGES = ("en", "de", "fr", "es", "it", "pt", "nl", "pl", "cs", "sk", "uk", "ru", "ro",
+                       "bg", "hu", "el", "sv", "da", "fi", "no", "lt", "lv", "et", "tr", "ja")
+PACKAGE_JSON.update({"narrative/review-policy.json",
+                     *("narrative/texts/" + prefix + language + ".json"
+                       for prefix in ("", "glossary.") for language in NARRATIVE_LANGUAGES),
+                     *("narrative/jurisdictions/" + code + ".json" for code in
+                       ("DE", "AT", "CH", "UK", "IE", "FR", "ES", "IT", "PL", "CZ", "UA", "NL", "BE", "US-federal"))})
 
 SITE_JSON = {"i18n/" + language + ".json" for language in
              ("en", *LANGUAGES, "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")}
@@ -96,11 +116,18 @@ PRESENTATION_MEDIA = {
     "assets/presentation/message-history.mp4", "assets/presentation/message-history.gif",
 }
 PRIVATE_DIRECTORIES = {"data", "proof-data", "proof-config", "proxy-config", "witness-data", "__pycache__", ".venv", "venv", "test-results", ".pytest_cache", ".ruff_cache", "build", "dist"}
+PRIVATE_VALIDATION_TOOLS = {
+    "api_routes.py", "browser_fixtures.py", "browser_helpers.py", "capture_demo.py", "capture_screenshots.py", "case_board_i18n.py",
+    "cloud_world.py", "minicheck.py", "prepare_media_test_model.py", "preview_trusted_live.py", "run_checks.py",
+}
 
 
 def is_public_file(path, directory):
     relative = path.relative_to(directory)
     parts = tuple(part.casefold() for part in relative.parts)
+    if directory.name == "tools" and (parts[0] in {"fixtures", "tdx", "tsa"} or parts[-1] in PRIVATE_VALIDATION_TOOLS
+                                      or parts[-1].startswith(("test_", "check_"))):
+        return False
     if any(part in PRIVATE_DIRECTORIES or part.startswith("tgwitness-backup") for part in parts[:-1]):
         return False
     if any(part == ".tmp" or part.startswith(".tmp-") for part in parts):
@@ -149,6 +176,7 @@ def main():
             digest = hashlib.file_digest(stream, "sha256").hexdigest()
         checksum = staged.with_suffix(".zip.sha256")
         checksum.write_bytes((digest + "  " + target.name + "\n").encode("utf-8"))
+        target.with_suffix(".zip.sha256").unlink(missing_ok=True)
         staged.replace(target)
         checksum.replace(target.with_suffix(".zip.sha256"))
     print("Public source archive:", target)

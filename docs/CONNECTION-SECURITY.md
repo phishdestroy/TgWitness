@@ -1,6 +1,10 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
+
+![Deployment & recovery](assets/presentation/chapter-operate.svg)
+
 # Connection, proxies and data protection
 
-This document describes TgWitness 0.8.0 behavior and its limits. Authentication,
+This document describes TgWitness 0.9.2 behavior and its limits. Authentication,
 source access, network connectivity and capture completeness are separate states.
 For sign-in steps, file formats, and multiple accounts, start with
 [accounts and session formats](ACCOUNTS.md). For event policies and restart
@@ -8,7 +12,7 @@ behavior, see [how collection works](COLLECTION.md).
 
 ## Guided connection setup
 
-In **Connection**, the administrator can choose **This account**, **An account
+In **More tools → Account → Connection route**, the administrator can choose **This account**, **An account
 group** or **All accounts**, then select a route. **Review selection** lists the
 affected accounts. **Prepare and check** tests the proposed route without changing
 the saved one. **Apply checked connection** checks again, pauses observation if
@@ -36,8 +40,9 @@ account's session. For HTTP-capable routes it also requests Cloudflare's HTTPS
 trace through that route and displays its reported exit IP, country, WARP state
 and check time. The measured latency is the Telegram connection setup time,
 not an ICMP ping. WARP preparation fails unless the trace reports WARP active.
-These checks establish connectivity, not the authenticity or completeness of
-captured messages. A running local process alone is not a successful exit check.
+These preflight checks report route connectivity and the observed exit. Review
+captured records through the archive's acquisition and verification results. A
+running local process alone is not a successful exit check.
 
 ### Portable WARP and WireGuard
 
@@ -96,13 +101,13 @@ can be used with all of your accounts; each account still has its own authorizat
 | TDLib / Pyrogram StringSession | Other library-specific formats | Unsupported |
 | Bot token | A bot with its own access/update model | Not used by this collector |
 
-Telegram chooses code delivery; SMS is not guaranteed. An API hash cannot repair
+Telegram chooses code delivery, including whether to send SMS. An API hash cannot repair
 a revoked session or replace a forgotten 2FA password. TgWitness does not persist
 login codes or the Telegram 2FA password to disk.
 
 For a private source, the account must already have access. A group username is
 unnecessary. A proxy or session import grants neither membership nor administrator
-rights. Current membership does not guarantee access to pre-join history.
+rights. The chat's settings decide whether members see history from before they joined.
 
 ## Import a Telethon session file
 
@@ -142,7 +147,7 @@ MTProto is Telegram's protocol. Telethon is the Python client library TgWitness 
 MTProxy is a Telegram transport proxy; SOCKS5 and HTTP CONNECT provide general
 tunnels. None replaces account authentication.
 
-Save the route for each workspace in **Account → Settings → Connection settings → Change connection route** before
+Save the route for each workspace in **More tools → Account → Settings → Connection settings → Change connection route** before
 signing in. New workspaces default to **Automatic MTProxy · public lists** with **Hide the address**.
 Existing workspaces that explicitly used Direct retain a mode permitting it.
 
@@ -186,11 +191,11 @@ The built-in list combines four sources:
 [kort0881/telegram-proxy-collector](https://github.com/kort0881/telegram-proxy-collector)
 and [3yed-61/MTP-Collector](https://github.com/3yed-61/MTP-Collector).
 The bundled snapshot contains endpoint facts, source attribution and download dates.
-A provider's listing is not proof that the proxy works or delivers every Telegram update.
+Listings are inputs; the connectivity checks below decide which proxies are used.
 
 **Automatic MTProxy** checks Telegram transport connectivity, keeps a working proxy
 and switches to another when it fails. Workspaces prefer different proxies when enough
-working entries are available; a unique exit address is not guaranteed. Failed proxies
+working entries are available; proxies can share an exit address. Failed proxies
 rest before another attempt. If none works, the IP mode determines whether collection
 must wait or may use a direct connection. Changing proxies does not change the account
 or erase its journal. Route choices and changes are recorded in the signed journal.
@@ -224,7 +229,7 @@ Cloudflare documents the [JSON DNS endpoint](https://developers.cloudflare.com/1
 <details>
 <summary><strong>Automatic pool parameters</strong></summary>
 
-Under **Parameters → Automatic MTProxy**, configure the failure threshold, cooldown,
+Under **More tools → Parameters → Automatic MTProxy**, configure the failure threshold, cooldown,
 planned rotation, proxy sharing and permitted fallback delay.
 
 | Control | Default |
@@ -237,8 +242,7 @@ planned rotation, proxy sharing and permitted fallback delay.
 | Delay before permitted Direct fallback | 10 minutes; Hide the address still refuses Direct |
 | Feed refresh / transport checks | 60 / 10 minutes; main workspace values apply to the shared pool |
 
-Different proxies do not guarantee different exit addresses. These settings do not
-override Telegram limits or prove anonymity.
+Different proxies can share an exit address. Telegram's limits apply on every route.
 
 </details>
 
@@ -294,7 +298,8 @@ Telegram often supplies numeric DC IPs.
 SOCKS5 and plain HTTP CONNECT do not themselves encrypt proxy credentials or the
 client-to-proxy tunnel. MTProto separately protects Telegram traffic. Use an
 appropriate secure channel to the proxy on an untrusted network. Private groups
-are cloud chats; MTProto does not turn them into end-to-end encrypted Secret Chats.
+are cloud chats protected by MTProto in transit; end-to-end Secret Chats are a separate chat
+type, recorded by the [Secret Chat module](PSEUDO-SECRET.md).
 
 ## Encryption and signatures
 

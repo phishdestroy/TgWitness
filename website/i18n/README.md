@@ -1,8 +1,13 @@
-![Website languages](../../docs/assets/presentation/folder-website-i18n.svg)
+[TgWitness](../../README.md) / [website](../README.md)
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../../docs/assets/presentation/section-languages-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../../docs/assets/presentation/section-languages-static.svg">
+  <source media="(max-width: 640px)" srcset="../../docs/assets/presentation/section-languages-mobile.svg">
+  <img src="../../docs/assets/presentation/section-languages.svg" width="1200" alt="TgWitness / Languages">
+</picture>
 
 # Website languages
-
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 Language catalogues for the public website, separate from the application's
 [`tgwitness/locales/`](../../tgwitness/locales/README.md) dictionaries.
@@ -20,7 +25,7 @@ fictional protocol fixtures remain language-neutral.
 The homepage, documentation, cases, reference pages and application panel share
 25 languages. [`site_modes.py`](../../tools/site_modes.py) additionally retains
 Amharic for the capability guide and both project notices.
-Translations were prepared with DeepL, with a separate Amharic translation because
+Initial translations were prepared with DeepL, with a separate Amharic translation because
 the configured DeepL API does not offer Amharic. Russian terminology and limitations
 were additionally reviewed. These are not certified or native-speaker-reviewed
 translations; review technical limitations when editing a catalogue.
@@ -37,8 +42,20 @@ the website catalogues. Amharic keeps translated notice navigation and search;
 its other documentation links open English. All 25 full-site languages keep
 documentation links, navigation and search in the selected language.
 
-The build rejects missing labels or text blocks in a full-site language. When an
-English source changes, update its translations before publishing the site.
+English is the only required language. A missing label or text block in another
+full-site language is shown in English, the page shows its translation notice, and the
+build lists the pending translations instead of failing. When an English source
+changes, add translations for the new blocks and review them before publishing the site.
+
+Homepage prose uses fullwidth punctuation, applied by
+[`site_typography.py`](../../tools/site_typography.py) after translation and HTML
+rendering, including accessible labels and the homepage's JavaScript dictionary.
+Keep catalogue punctuation editable as usual. Commands, code, URLs, filenames,
+versions and interpolation keys retain their literal syntax. For additional literal
+HTML content, use `data-typography="literal"`. Documentation and the application
+panel keep their existing typography. When an English passage is rephrased without
+changing its meaning, retain the translation under the new block digest as well as
+any old digest still used elsewhere.
 
 ## Review a catalogue change
 

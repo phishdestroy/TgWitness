@@ -55,7 +55,7 @@ def markdown(source, url):
                 or attrs.get("aria-hidden") == "true"
                 or "data-workflow-controls" in attrs or "data-workflow-choices" in attrs
                 or "data-hub-controls" in attrs or "data-hub-status" in attrs
-                or classes & {"eyebrow", "card-number", "search", "lab-controls", "copy-button", "language-notice", "anchor"}):
+                or classes & {"eyebrow", "card-number", "search", "lab-controls", "copy-button", "language-notice", "anchor", "project-context"}):
             return ""
         if tag == "svg":
             labels = [raw(n).strip() for n in nodes(node) if n.tag in {"title", "desc", "text"}]
@@ -125,7 +125,18 @@ def markdown(source, url):
         content = first + "\n\n" + leading.strip() + "\n\n" + rest.strip()
     heading, _, body = content.partition("\n")
     canonical = next((n.attrs["href"] for n in all_nodes if n.tag == "link" and n.attrs.get("rel") == "canonical"), url)
-    return heading + f"\n\nCanonical page: {canonical}\n\n" + body.strip() + "\n"
+    context = [f"Canonical page: {canonical}"]
+    description = next((n.attrs.get("content") for n in all_nodes
+                        if n.tag == "meta" and n.attrs.get("name") == "description"), None)
+    if description:
+        context.append(description)
+    for rel, label in (("help", "Project context and measured scale"), ("describedby", "Documentation index")):
+        target = next((n.attrs.get("href") for n in all_nodes if n.tag == "link" and n.attrs.get("rel") == rel), None)
+        if target:
+            context.append(f"[{label}]({address(target)})")
+    if any("language-notice" in n.attrs.get("class", "").split() for n in all_nodes):
+        context.append("Translation coverage: this edition includes material from the English original.")
+    return heading + "\n\n" + "\n\n".join(context) + "\n\n" + body.strip() + "\n"
 
 
 def index(base_url, repo_url, branch, version, guides, references):
@@ -134,27 +145,30 @@ def index(base_url, repo_url, branch, version, guides, references):
 
     sections = [
         "# TgWitness",
-        "> Open-source Telegram investigation software. Export chat history, preserve observed edits and deletion notices, "
-        "follow people across chats, and hand over a signed archive that a recipient can verify.",
-        "TgWitness runs on your own computer or server. PhishDestroy maintains the project under the MIT License. "
-        "The website is documentation; the browser demo contains synthetic records and does not connect to Telegram.",
-        "Signed exports let recipients verify file integrity and the signing key offline. A hash-linked journal preserves "
-        "the sequence of saved observations; independently retained checkpoints provide an earlier comparison point. "
-        "Reports combine readable history, source references and verification results in the same package.",
-        "The panel brings together isolated account workspaces, supported session imports, parallel chat export, "
-        "cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and "
-        "offline HTML/JSON evidence. Case Board keeps team annotations linked to saved records. The report studio "
-        "offers eight designs, content choices and a data preview; minimized sharing copies control what recipients receive. "
-        "Optional witnesses, timestamps and encrypted off-site copies add records outside the local journal. "
-        "Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work "
-        "with the records you have collected.",
-        f"These guides track the `{branch}` source branch. The project version is `{version}`; check the changelog and "
-        "release notes before assuming a source feature is included in a downloaded package.",
-        "Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; "
-        "its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose "
-        "Markdown through `rel=alternate` links.",
+        "> Open-source Telegram investigation workspace. Export chats and whole accounts, keep every observed edit "
+        "and deletion notice, follow people across chats, and hand over signed archives that recipients verify on "
+        "their own computers.",
+        "TgWitness runs on your own computer or server and is maintained by PhishDestroy under the MIT License. "
+        f"These pages track the `{branch}` source branch, version `{version}`; the browser demo uses fictional records.",
+        "## Key facts",
+        "- Live observation saves each version of a message and keeps its text after a deletion notice; history export "
+        "reads the accessible history of selected chats or the whole account.",
+        "- Every record is signed and hash-chained. Recipients verify an archive offline with the bundled verifier, "
+        "a separately received key fingerprint and retained checkpoints; independent witnesses add checkpoints, and "
+        "RFC 3161 and OpenTimestamps add external time.",
+        "- Messages arrive over the account's authenticated MTProto session and are signed on receipt. GitHub Actions "
+        "capture and Phala Intel TDX deployments add attestation of the collector that received them.",
+        "- Published measurements: 56,329 messages in two fresh exports on 6 November 2026, a 1,000,000-message search "
+        "benchmark and a 1 November inventory of 1,610,818 journal events.",
+        "- Investigation tools: people profiles across chats, watchlists over text, QR codes and OCR, Case Board, a "
+        "report studio with eight designs and a BagIt court package.",
+        "- Self-hosted with no telemetry: sessions and credentials live in an encrypted vault, and the panel listens "
+        "on localhost. Basic collection runs without Docker, a GPU or an LLM.",
         "## Start here",
+        link("docs/reference/overview/", *references["overview"][:2]),
+        link("docs/reference/installation/", *references["installation"][:2]),
         link("docs/start/", *guides["start"][:2]),
+        link("docs/capture/", *guides["capture"][:2]),
         link("docs/dedicated-account/", *guides["dedicated-account"][:2]),
         link("docs/accounts/", *guides["accounts"][:2]),
         link("guides/modes.html", "Collection modes and evidence levels", "Compare one-off export, observation, investigation and independent verification."),
@@ -174,7 +188,9 @@ def index(base_url, repo_url, branch, version, guides, references):
         "## Search the archive and connect AI tools",
         link("docs/archive/", *guides["archive"][:2]),
         link("docs/reference/analysis/", *references["analysis"][:2]),
+        link("docs/reference/search/", *references["search"][:2]),
         link("docs/reference/mcp/", *references["mcp"][:2]),
+        link("docs/reference/cli/", *references["cli"][:2]),
         link("docs/reference/media-analysis/", *references["media-analysis"][:2]),
         link("docs/reference/webhooks/", *references["webhooks"][:2]),
         "## Deploy, share and verify",
@@ -186,20 +202,12 @@ def index(base_url, repo_url, branch, version, guides, references):
         link("docs/witness/", *guides["witness"][:2]),
         link("docs/reference/timestamp/", *references["timestamp"][:2]),
         link("docs/reference/security/", *references["security"][:2]),
-        "## Verification and scope",
-        "The journal records what the authorized account observed, subject to its access and Telegram rate limits. "
-        "Saved content remains after a later deletion; content deleted before capture is unavailable. Deletion notices "
-        "and unsuccessful rechecks remain distinct observations. Integrity verification establishes the relationship "
-        "between supplied files, the signing key and retained checkpoints. The archive includes source identifiers, "
-        "captured versions and coverage information for review. GitHub Actions capture adds an attestation binding "
-        "the archive to an approved hosted workflow and collector version.",
-        "The connection reference explains IP modes, fallback and external-request routing. MCP provides read-only "
-        "access to selected saved records through a separate scoped token; Telegram actions and configuration changes "
-        "are outside that interface. Archived messages remain untrusted source material for an AI client.",
+        "## Reference",
         link("docs/reference/features/", *references["features"][:2]),
         link("docs/reference/verification/", *references["verification"][:2]),
         link("docs/reference/changelog/", *references["changelog"][:2]),
         "## Optional",
+        f"- [Complete English handbook as text]({base_url}/llms-full.txt): The same guide and reference content in a single text download.",
         f"- [Complete English handbook]({base_url}/llms-full.md): Public guide and reference articles in one Markdown file, including source URLs.",
         f"- [Documentation hub]({base_url}/docs/): Browse the illustrated handbook and its language editions.",
         f"- [Source code]({repo_url}): Implementation, documentation and issue templates.",
@@ -212,3 +220,32 @@ def index(base_url, repo_url, branch, version, guides, references):
 
 def full(index_text, documents):
     return (index_text + "\n---\n\n" + "\n\n---\n\n".join(documents)).rstrip("\n") + "\n"
+
+
+def directory(base_url, guides, references, base=""):
+    sections = ["\n## Complete documentation map\n"]
+    for heading, folder, entries in (("Guides", "docs/", guides), ("Reference", "docs/reference/", references)):
+        sections.append("### " + heading + "\n")
+        sections.extend(f"- [{title}]({base_url}/{base}{folder}{slug}/index.md): {description}"
+                        for slug, (title, description, *_) in entries.items())
+        sections.append("")
+    return "\n".join(sections)
+
+
+def localized_index(base_url, base, language, repo_url, branch, version, guides, references):
+    context = ("ru/" if base == "ru/" else "") + "docs/reference/overview/index.md"
+    sections = [
+        "# TgWitness · " + language,
+        f"> Documentation edition: {language}. Project version: `{version}`. Source branch: `{branch}`.",
+        "This index links the Markdown editions of the public pages. The complete handbook is built from the same "
+        "page content, including source URLs. Sections without a translation appear in English.",
+        f"- [Project context, installation, measured scale and verification]({base_url}/{context})",
+        f"- [English project summary]({base_url}/llms.txt)",
+        f"- [Complete handbook · {language}]({base_url}/{base}llms-full.txt)",
+        f"- [Complete handbook as Markdown · {language}]({base_url}/{base}llms-full.md)",
+        f"- [Source code and release history]({repo_url})",
+        f"- [Collection modes and evidence levels]({base_url}/{base}guides/modes.md)",
+        f"- [Published checks and measurements]({base_url}/{'ru/' if base == 'ru/' else ''}docs/validation/index.md)",
+        directory(base_url, guides, references, base),
+    ]
+    return "\n\n".join(sections).rstrip() + "\n"

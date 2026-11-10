@@ -39,13 +39,51 @@ GROUPS = (
     ("people", "People profiles", "What profiles look for in saved messages."),
     ("notifications", "Notifications", "Size and pace of notifications and of the panel's notification list."),
     ("exports", "Exports & history", "Size limits of history snapshots, signed archives and browser downloads."),
+    ("gaps", "Gap analysis", "Missing message numbers in coverage, reports and the archive's capture status. Telegram "
+                             "assigns the numbers; a gap names no actor and no reason."),
+    ("chatstate", "Chat state", "Periodic snapshots of title, description, member counts, pinned messages, administrators "
+                                "and gifts of every enabled source, with differences from the previous snapshot."),
+    ("metrics", "Report metrics", "Anomaly indicators in evidence reports. Each processor is listed in the report with "
+                                  "its version and method."),
     ("connection", "Telegram connection", "Timeouts and retries. Request timeouts and retries apply the next "
                                           "time the account connects."),
+    ("actions", "Telegram actions", "Pace of joins, messages and bot buttons from this account. An action beyond "
+                                    "the pace waits in a queue and runs when its turn comes."),
     ("proxies", "Automatic MTProxy", "When this account's listed proxy is replaced. List downloads and checks are "
                                      "shared by all accounts and follow the main workspace's values."),
 )
 
 PARAMETERS = (
+    Parameter("gap_analysis", "gaps", True, label="Report missing message numbers",
+              help="Coverage, reports and the capture status list message numbers between observed messages that this "
+                   "collector never saw."),
+    Parameter("gap_account_sequence", "gaps", True, label="Measure the account-wide message numbering",
+              help="Private chats, bots and ordinary groups share one numbering. It is measured only for periods of "
+                   "whole-account collection that kept every such chat and the account's own messages."),
+    Parameter("gap_cluster_min", "gaps", 1, 1, 100000, "message numbers", "Smallest listed gap",
+              "Smaller gaps are still counted."),
+    Parameter("gap_clusters_listed", "gaps", 20, 1, 200, "gaps", "Largest gaps listed for each numbering"),
+    Parameter("gap_service_estimate", "gaps", False, label="Add a service-message estimate",
+              help="How many missing numbers would be service messages at their observed share. An estimate "
+                   "only; it is never subtracted from the missing count."),
+    Parameter("chat_state_minutes", "chatstate", 720, 0, 10080, "minutes", "Snapshot each source every",
+              "0 turns chat-state snapshots off. Each snapshot reads what an ordinary client shows and takes a few "
+              "requests per source."),
+    Parameter("chat_state_pause_seconds", "chatstate", 3, 1, 300, "seconds", "Pause between sources"),
+    Parameter("chat_state_pinned", "chatstate", True, label="Read pinned messages",
+              help="Unpinning leaves no message-level record; snapshots show which messages stopped being pinned."),
+    Parameter("chat_state_admins", "chatstate", True, label="Read administrators and their rights",
+              help="Channels may refuse this list to members who are not administrators; the snapshot then says so."),
+    Parameter("chat_state_gifts", "chatstate", True, label="Read gifts shown on channels and profiles",
+              help="Gifts can be hidden, converted, upgraded or refunded without a service message."),
+    Parameter("chat_state_unchanged", "chatstate", True, label="Record checks that found no change",
+              help="A short record keeps the time of each check; turn off to record changes only."),
+    Parameter("metric_first_time_posters", "metrics", True, label="First-time posters per day"),
+    Parameter("metric_service_ratio", "metrics", True, label="Service messages among message numbers"),
+    Parameter("metric_join_leave", "metrics", True, label="Joins and departures per month"),
+    Parameter("metric_pinned", "metrics", True, label="Pins and unpins per month"),
+    Parameter("metric_rows_listed", "metrics", 60, 10, 400, "rows", "Rows listed per metric",
+              "The most recent rows are listed; totals cover every row."),
     Parameter("board_max_cards", "exports", 10000, 100, 100000, "cards", "Case Board card soft limit",
               "Warn after this many cards. Existing annotations remain available."),
     Parameter("board_max_comments", "exports", 50000, 100, 500000, "comments", "Case Board comment soft limit"),
@@ -68,8 +106,8 @@ PARAMETERS = (
               "To recognise this account's reply-keyboard button presses, the latest keyboard the bot sent is "
               "looked up among this many recent records of the chat."),
     Parameter("recheck_first_delay_seconds", "recheck", 30, 0, 3600, "seconds", "First recheck after a start",
-              "After observation starts or reconnects, priority chats are rechecked after this delay; catch-up "
-              "goes first."),
+              "After observation starts, priority chats are rechecked after this delay; after a reconnect, every "
+              "observed chat is rechecked without waiting for its schedule. Catch-up goes first."),
     Parameter("recheck_tick_seconds", "recheck", 60, 10, 3600, "seconds", "Look for due rechecks every"),
     Parameter("recheck_max_chats", "recheck", 30, 1, 1000, "chats", "Chats per recheck pass",
               "The rest wait for the next pass. Lower values spread requests out and keep the account clear "
@@ -114,6 +152,14 @@ PARAMETERS = (
     Parameter("telegram_request_retries", "connection", 2, 0, 20, "times", "Request retries"),
     Parameter("telegram_connection_retries", "connection", 5, 0, 100, "times", "Connection retries"),
     Parameter("reconnect_max_seconds", "connection", 300, 10, 3600, "seconds", "Longest wait between reconnect attempts"),
+    Parameter("action_join_seconds", "actions", 180, 0, 86400, "seconds", "Pause between joins",
+              "Groups, channels and invite links. Telegram answers quick joins with FloodWait."),
+    Parameter("action_joins_per_hour", "actions", 10, 1, 100, "joins", "Joins per hour at most"),
+    Parameter("action_message_seconds", "actions", 10, 0, 3600, "seconds", "Pause between messages",
+              "Messages sent from the panel, including /start when a bot is opened."),
+    Parameter("action_messages_per_hour", "actions", 30, 1, 1000, "messages", "Messages per hour at most"),
+    Parameter("action_button_seconds", "actions", 5, 0, 3600, "seconds", "Pause between bot buttons"),
+    Parameter("action_buttons_per_hour", "actions", 60, 1, 1000, "presses", "Bot button presses per hour at most"),
     Parameter("proxy_drop_limit", "proxies", 3, 1, 50, "disconnects", "Disconnects before the proxy is replaced",
               "Counted within the window below."),
     Parameter("proxy_drop_window_minutes", "proxies", 10, 1, 1440, "minutes", "Window for counting disconnects"),

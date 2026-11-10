@@ -1,3 +1,7 @@
+[TgWitness](../../README.md) / [Documentation](../README.md) / [Folder](README.md) · [Getting started](../QUICKSTART.md)
+
+![Getting started](../assets/presentation/chapter-start.svg)
+
 # Документация TgWitness
 
 [English](../README.md) · [О проекте](README.md)
@@ -29,11 +33,11 @@
 - [Формат доказательств и границы доверия](../EVIDENCE.md)
 - [Архитектура](../ARCHITECTURE.md)
 - [Подключение и хранение секретов](../CONNECTION-SECURITY.md)
-- [Готовность и известные ограничения](../internal/READINESS.md)
+- [Проверки перед выпуском](../internal/READINESS.md)
 - [Процедура живой приёмки](../internal/LIVE_ACCEPTANCE.md)
 - [GitHub и проверка сборки: планы](TRUST-ROADMAP.md)
 
 </details>
 
-В проекте есть сайт инструкций на русском и английском с локальным поиском.
+В проекте есть многоязычный сайт инструкций, в том числе на русском, с локальным поиском.
 [Как открыть его у себя или опубликовать на GitHub Pages](../internal/PUBLISHING.md#preview-the-website-locally).

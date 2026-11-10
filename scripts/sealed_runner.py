@@ -1,5 +1,6 @@
 import argparse
 import json
+import math
 import os
 import re
 import secrets
@@ -7,7 +8,9 @@ import shutil
 import subprocess
 import sys
 import time
+import ipaddress
 from pathlib import Path
+from urllib.parse import urlsplit
 
 TUNNEL_IMAGE = "cloudflare/cloudflared@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba"
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,6 +56,84 @@ def helper(directory, name, arguments, extra_mounts=()):
         name, "python", "-m", "tgwitness.sealed_package", *arguments], timeout=600)
 
 
+def start_official(directory, name, config):
+    if Path("/proc/sys/kernel/apparmor_restrict_unprivileged_userns").exists():
+        command(["sudo", "sysctl", "-w", "kernel.apparmor_restrict_unprivileged_userns=0"])
+    egress = os.environ.get("OFFICIAL_EGRESS", "proxy")
+    if egress not in {"proxy", "direct"}:
+        raise ValueError("Official egress must be proxy or explicitly selected direct")
+    direct = egress == "direct"
+    upstream = os.environ.get("OFFICIAL_PROXY_SERVER", "")
+    parsed = urlsplit(upstream)
+    if direct and upstream:
+        raise ValueError("Direct mode cannot include a proxy endpoint")
+    if not direct and (parsed.scheme not in {"http", "socks5"} or not parsed.hostname or not parsed.port
+            or parsed.username is not None or parsed.password is not None or parsed.path not in {"", "/"}
+            or parsed.query or parsed.fragment or len(upstream) > 2048
+            or any(ord(c) < 33 or c == "\\" for c in upstream)):
+        raise ValueError("Official client requires an explicit upstream proxy; credentials belong in secrets")
+    expected = os.environ.get("OFFICIAL_EXPECTED_IP", "")
+    if expected:
+        expected = str(ipaddress.ip_address(expected))
+    gateway = {"server": upstream, "username": os.environ.get("OFFICIAL_PROXY_USERNAME", ""),
+               "password": os.environ.get("OFFICIAL_PROXY_PASSWORD", "")}
+    if not direct and any(len(gateway[key].encode()) > 255 for key in ("username", "password")):
+        raise ValueError("Upstream credentials exceed their supported length")
+    if not direct:
+        write(directory / "config" / "gateway.json", gateway)
+    config.update({"client": "official_web", "egress": egress, "expected_ip": expected,
+                   "upstream_public": {"server": upstream,
+                                       "has_credentials": not direct and bool(gateway["username"] or gateway["password"])}})
+    command(["docker", "build", "--file", str(ROOT / "addons/capture/deploy/Dockerfile.official"),
+             "--tag", name, str(ROOT)], timeout=1500)
+    command(["docker", "network", "create", name])
+    command(["docker", "network", "create", "--internal", name + "-private"])
+    if not direct:
+        command(["docker", "run", "--detach", "--name", name + "-gateway", "--network", name,
+                 *restrictions(), "--mount", f"type=bind,src={directory / 'config/gateway.json'},dst=/gateway.json,readonly",
+                 "--entrypoint", "python", name, "-m", "tgwitness_capture.gateway", "--config", "/gateway.json"])
+        command(["docker", "network", "connect", "--alias", "official-gateway", name + "-private", name + "-gateway"])
+    command(["docker", "run", "--detach", "--name", name + "-tunnel", "--network", name,
+             "--read-only", "--cap-drop=ALL", "--security-opt=no-new-privileges", "--pids-limit=128", "--memory=256m",
+             TUNNEL_IMAGE, "tunnel", "--no-autoupdate", "--url", "http://collector:8787"], timeout=180)
+    command(["docker", "network", "connect", name + "-private", name + "-tunnel"])
+    deadline = time.monotonic() + 90
+    while True:
+        logs = subprocess.run(["docker", "logs", name + "-tunnel"], capture_output=True, text=True, timeout=10)
+        match = re.search(r"https://[a-z0-9-]+\.trycloudflare\.com", logs.stdout + logs.stderr)
+        if match:
+            break
+        if time.monotonic() > deadline:
+            raise RuntimeError("Panel tunnel failed to start")
+        time.sleep(1)
+    config["public_origin"] = match.group()
+    config["supervisor_deadline"] = time.monotonic() + config["seconds"] + 600
+    write(directory / "config/session.json", config)
+    command(["docker", "run", "--detach", "--name", name, "--network", name if direct else name + "-private", "--network-alias", "collector",
+             "--user", str(os.getuid()) + ":" + str(os.getgid()), "--read-only", "--cap-drop=ALL",
+             "--security-opt=no-new-privileges", "--security-opt", "seccomp=" + str(ROOT / "addons/capture/deploy/official-seccomp.json"),
+             "--pids-limit=512", "--memory=4g", "--cpus=2", "--shm-size=1g", "--init",
+             "--tmpfs", "/tmp:rw,nosuid,nodev,size=1g",
+             "--mount", f"type=bind,src={directory / 'config/session.json'},dst=/config/session.json,readonly",
+             "--mount", f"type=bind,src={directory / 'data'},dst=/data",
+             "--mount", f"type=bind,src={directory / 'out'},dst=/output", name,
+             "python", "-m", "tgwitness_capture.sealed", "--config", "/config/session.json"])
+    deadline = time.monotonic() + 90
+    while True:
+        try:
+            command(["docker", "exec", name, "python", "-c",
+                     "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8787/', timeout=2)"], timeout=5)
+            break
+        except RuntimeError:
+            if time.monotonic() > deadline:
+                raise RuntimeError("Official recorder failed to start") from None
+            time.sleep(1)
+    helper(directory, name, ["connection", "--config", "/config/session.json", "--url", match.group(),
+                            "--out", "/output/connection.tgwsealed"])
+    shutil.move(str(directory / "out/connection.tgwsealed"), directory / "public/connection.tgwsealed")
+    print("Encrypted official-client connection is ready. Open it in the local setup helper.")
+
+
 def start():
     directory, name = location()
     minutes = os.environ.get("SESSION_MINUTES", "30")
@@ -70,9 +151,15 @@ def start():
     config = {"token": secrets.token_urlsafe(32), "recipient": recipient, "seconds": int(minutes) * 60,
         "context": {"collector_sha": commit, "repository": os.environ["GITHUB_REPOSITORY"],
                     "run_id": os.environ["GITHUB_RUN_ID"], "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"]}}
-    write(directory / "config" / "session.json", config)
+    client = os.environ.get("CAPTURE_CLIENT", "api")
+    if client == "official_web":
+        return start_official(directory, name, config)
+    if client != "api":
+        raise ValueError("Unknown capture client")
     command(["docker", "build", "--no-cache", "--file", str(ROOT / "deploy" / "Dockerfile.sealed"),
              "--tag", name, str(ROOT)], timeout=900)
+    config["supervisor_deadline"] = time.monotonic() + config["seconds"] + 600
+    write(directory / "config" / "session.json", config)
     command(["docker", "network", "create", name])
     command(["docker", "run", "--detach", "--name", name, "--network", name, "--network-alias", "collector",
         *restrictions(), "--mount", f"type=bind,src={directory / 'config'},dst=/config,readonly",
@@ -111,7 +198,9 @@ def start():
 def wait():
     directory, name = location()
     config = json.loads((directory / "config" / "session.json").read_bytes())
-    deadline = time.monotonic() + config["seconds"] + 600
+    deadline = config.get("supervisor_deadline", time.monotonic() + config["seconds"] + 600)
+    if type(deadline) not in (int, float) or not math.isfinite(deadline) or deadline <= 0:
+        raise ValueError("Invalid capture deadline")
     result = directory / "out" / "result.json"
     while not result.exists():
         if time.monotonic() > deadline:
@@ -120,13 +209,20 @@ def wait():
             raise RuntimeError("Capture stopped before producing a result")
         time.sleep(2)
 
-    command(["docker", "rm", "--force", name + "-tunnel"], check=False)
-    command(["docker", "stop", "--time", "40", name], timeout=60, check=False)
-    if json.loads(result.read_bytes()) != {"phase": "sealed"}:
+    command(["docker", "rm", "--force", name + "-tunnel"])
+    command(["docker", "stop", "--time", "40", name], timeout=60)
+    if command(["docker", "inspect", "--format", "{{.State.Running}}", name]) != "false":
+        raise RuntimeError("Collector shutdown was not confirmed; evidence cannot be attested")
+    state = json.loads(result.read_bytes())
+    multipart = state == {"phase": "sealed", "delivery": "parts", "subject": "evidence.parts.json"}
+    if not multipart and state != {"phase": "sealed"}:
         raise RuntimeError("Capture was cancelled or failed; no result will be uploaded")
-    evidence = directory / "out" / "evidence.zip"
+    evidence = directory / "out" / ("evidence.parts.json" if multipart else "evidence.zip")
     if evidence.is_symlink() or not evidence.is_file():
         raise RuntimeError("No regular evidence file")
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+            output.write("subject=" + str(evidence) + "\n")
     print("Collector stopped. The fixed evidence file is ready for attestation.")
 
 
@@ -141,13 +237,18 @@ def pack():
     helper(directory, name, ["package", "--config", "/config/session.json", "--out", "/output",
                             "--attestation", "/output/attestation.jsonl"])
     shutil.move(str(directory / "out" / "delivery.tgwsealed"), directory / "public" / "delivery.tgwsealed")
+    for part in sorted((directory / "out").glob("delivery-*.tgwsealed")):
+        if part.is_symlink() or not re.fullmatch(r"delivery-[0-9]{6}\.tgwsealed", part.name):
+            raise ValueError("Unexpected encrypted part")
+        shutil.move(str(part), directory / "public" / part.name)
     print("Encrypted result is ready. No plaintext archive is uploaded.")
 
 
 def cleanup():
     directory, name = location()
     command(["docker", "stop", "--time", "40", name], timeout=60, check=False)
-    command(["docker", "rm", "--force", name, name + "-tunnel"], check=False)
+    command(["docker", "rm", "--force", name, name + "-tunnel", name + "-gateway"], check=False)
+    command(["docker", "network", "rm", name + "-private"], check=False)
     command(["docker", "network", "rm", name], check=False)
 
     for part in ("data", "config", "out"):

@@ -1,4 +1,4 @@
-FROM cgr.dev/chainguard/wolfi-base@sha256:fd50bd0cdeb808cf4f45c9c9189e0cc7f7fcc27195d69abd6622c80527e7e021
+FROM cgr.dev/chainguard/wolfi-base@sha256:24f549a7fcace88e69b9557941168c74645688ecc4acf7fb6d734a6b74e9019d
 LABEL org.opencontainers.image.title="TgWitness" \
       org.opencontainers.image.description="Self-hosted Telegram observation journal with signed exports" \
       org.opencontainers.image.licenses="MIT"
@@ -12,7 +12,7 @@ COPY pyproject.toml README.md LICENSE NOTICE ./
 COPY deploy/build.lock deploy/requirements.lock ./
 COPY tgwitness ./tgwitness
 COPY tgwitness_capture ./tgwitness_capture
-# Every package must match a SHA-256 in the locks; builds use the hashed setuptools only.
+COPY tgwitness_analyzer ./tgwitness_analyzer
 RUN pip install --no-cache-dir --require-hashes -r build.lock \
     && pip install --no-cache-dir --require-hashes --no-build-isolation -r requirements.lock \
     && pip install --no-cache-dir --no-deps --no-build-isolation . \

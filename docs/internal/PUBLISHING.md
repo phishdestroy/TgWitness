@@ -1,6 +1,10 @@
+[TgWitness](../../README.md) / [Documentation](../README.md) / [Folder](README.md) · [Development](../ARCHITECTURE.md)
+
+![Development](../assets/presentation/chapter-develop.svg)
+
 # Publish the project and website
 
-Publish TgWitness **0.9.0** with the project website and release packages. See
+Publish TgWitness **0.9.2** with the project website and release packages. See
 [readiness](READINESS.md) for tested environments and known limitations.
 
 The [investigation presentation kit](../assets/presentation/README.md) contains the
@@ -11,6 +15,17 @@ The [project wiki](../wiki/Home.md) has its own GitHub repository and a separate
 [build and publishing procedure](WIKI.md). Run `python tools/build_wiki.py` to prepare
 its pages, navigation, ZIP and checksums. The Wiki bundle workflow produces artifacts;
 publishing Pages or the main repository does not publish the wiki.
+
+<details>
+<summary>On this page</summary>
+
+- [Preview the website locally](#preview-the-website-locally)
+- [Publish to GitHub](#publish-to-github)
+- [What gets published to Pages](#what-gets-published-to-pages)
+- [Check before publication](#check-before-publication)
+- [Releases](#releases)
+
+</details>
 
 ## Preview the website locally
 
@@ -91,7 +106,7 @@ Suggested topics: `telegram`, `telethon`, `self-hosted`, `python`, `fastapi`,
 
 Pull requests build and test the site, but cannot deploy it. Only the deploy job has
 `pages: write` and `id-token: write`; no personal token is needed for Pages.
-A workflow definition is not evidence of a successful hosted run.
+Confirm a hosted run from its Actions result.
 
 ## What gets published to Pages
 
@@ -120,15 +135,8 @@ From the project environment:
 
 ```sh
 python tools/sync_notice.py --check
-python tools/check_publication.py --git-index
+python tools/publication_guard.py --git-index
 python tools/build_site.py
-python tools/check_site.py
-python tools/check_docs_site.py
-python tools/check_browser.py
-python tools/check_account_browser.py
-python tools/check_interactions_browser.py
-python tools/check_workspace_browser.py
-python tools/check_quick_browser.py
 python tools/build_source.py
 ```
 
@@ -138,7 +146,8 @@ Run `python tools/sync_notice.py` after editing either source to update
 its full-text copies in README, SECURITY, documentation and Wiki. Rebuild both the
 site and Wiki bundles before publishing; the check rejects inconsistent copies.
 
-Browser checks require Playwright Chromium (`python -m playwright install chromium`).
+Run the relevant private browser regressions on the authorized validation host
+before publication; keep their raw logs and fixtures outside Git.
 The publication check scans the public source allowlist for recognizable secret formats
 and checks that local Markdown link targets are included. With `--git-index`, it also
 scans the staged text, rejects non-public paths and unresolved merges, and requires every

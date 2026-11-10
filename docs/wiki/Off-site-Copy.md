@@ -25,7 +25,8 @@ storage. Everything is encrypted with AES-256-GCM before it leaves your machine.
 
 ## Configure the destination
 
-**Exports → Off-site copy** in the workspace you want. Bring your own bucket and keys,
+**Settings → Notifications and off-site copy → Off-site copy** in the workspace you want
+(also under **More tools → Extras → Evidence & backups → Configure**). Bring your own bucket and keys,
 TgWitness doesn't create buckets.
 
 | Field | Enter |
@@ -46,8 +47,13 @@ TgWitness doesn't create buckets.
 
 ## Keep the recovery key
 
-The key JSON has the decryption key, destination, prefix and key fingerprint. Storage
-credentials are separate. You need both to recover.
+The key JSON has the root key, derivation version, destination, prefix and workspace
+fingerprint. Symmetric copies derive a separate key for that workspace with HKDF-SHA256.
+Storage credentials are separate. You need both to recover.
+
+After upgrading, download a new key file for the separate `hkdf-v2` copy prefix.
+Keep earlier key files for earlier copies; existing objects are not overwritten.
+Recipient-encrypted copies keep their existing prefix and recipient-key requirement.
 
 Changed endpoint, bucket or prefix? Download a new key file. Exports that already left the
 local queue stay at the old destination.

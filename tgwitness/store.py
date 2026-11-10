@@ -1,5 +1,6 @@
 import hashlib
 import json
+import logging
 import sqlite3
 import threading
 import time
@@ -10,18 +11,23 @@ from pathlib import Path
 from . import keyboard
 from . import message_content
 from . import continuity
-from .journal_index import CHAT_KINDS, MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
+from .fulltext import FullText
+from .journal_index import CHAT_KINDS, MEDIA_KINDS, STORED_MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
 from .journal_index import GONE_KINDS as GONE_KINDS
 from .journal_index import NUL_PAYLOAD
+from .people import observed_names
+
+LOG = logging.getLogger("tgwitness.store")
 
 ZERO = "0" * 64
+ADMIN_RECORDS = "kind NOT GLOB 'access.*' AND kind NOT GLOB 'profile.*'"
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
                 "actor_id", "payload", "previous_hash")
 JOURNAL_KIND_GROUPS = {"membership": ("membership.",), "media": ("media.",), "actions": ("interaction.",),
     "messages": ("message.new", "message.snapshot", "message.recovered"),
     "coverage": ("coverage.", "connection.", "collector.", "process.", "observation.", "snapshot.", "target.",
                  "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed",
-                 "media.retry", "media.recovered", "deletion.unscoped")}
+                 "media.retry", "media.recovered", "deletion.unscoped", "session.",)}
 
 def utcnow():
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
@@ -88,15 +94,17 @@ class Store:
         initialize_board(self.db)
         self.targets_revision = 0
         self.listeners = []
+        self.committed = []
         with self.transaction():
             continuity.initialize(self.db)
             migrate_media(self.db)
             self.read_index = JournalIndex(self.db)
+        self.fulltext = FullText(self)
 
     @contextmanager
     def transaction(self):
         with self.lock:
-            outer = not self.db.in_transaction
+            outer, mark = not self.db.in_transaction, len(self.committed)
             if outer:
                 self.db.execute("BEGIN IMMEDIATE")
             try:
@@ -106,7 +114,17 @@ class Store:
             except BaseException:
                 if outer:
                     self.db.rollback()
+                    del self.committed[mark:]
                 raise
+            if outer:
+                events, self.committed = self.committed, []
+                for event in events:
+                    for listen in self.listeners:
+                        try:
+                            listen(event)
+                        except Exception:
+                            LOG.exception("Journal listener %s failed for event #%d",
+                                          getattr(listen, "__qualname__", type(listen).__qualname__), event["seq"])
 
     def bind(self, vault):
         identity = self.get_setting("public_key", None)
@@ -136,11 +154,7 @@ class Store:
                     (event["seq"], media_job["account_id"], chat_id, message_id,
                      media_job["descriptor"], hashlib.sha256(media_job["descriptor"]).hexdigest(),
                      media_job["max_bytes"], media_job.get("priority", 10), media_job.get("estimated_bytes")))
-            for listen in self.listeners:
-                try:
-                    listen(event)
-                except Exception:
-                    pass
+            self.committed.append(event)
             return event
 
     @staticmethod
@@ -225,16 +239,26 @@ class Store:
                     "AND message_id IN (" + ",".join("?" * len(part)) + ")", (chat_id, *part)))
         return found
 
+    def watchlist_hits(self, lowest, highest):
+        with self.lock:
+            rows = self.db.execute(
+                "SELECT json_extract(payload,'$.entry_id') AS entry_id,"
+                "json_extract(payload,'$.record') AS record FROM events INDEXED BY event_kind "
+                "WHERE kind='watchlist.hit' AND json_extract(payload,'$.record') BETWEEN ? AND ?",
+                (lowest, highest)).fetchall()
+        return {(row["entry_id"], row["record"]) for row in rows if isinstance(row["entry_id"], str)}
+
     def message_state(self, chat_id, message_id):
         with self.lock:
             row = self.db.execute(
                 "SELECT e.seq,e.hash,json_extract(e.payload,'$.text') AS text,"
                 "json_extract(e.payload,'$.edited_at') AS edited_at,"
-                "json_extract(e.payload,'$.outgoing') AS outgoing,e.payload,m.deleted,m.missing "
+                "json_extract(e.payload,'$.outgoing') AS outgoing,json_extract(e.payload,'$.sent_at') AS sent_at,"
+                "json_extract(e.payload,'$.raw.ttl_period') AS ttl_period,e.payload,m.deleted,m.missing "
                 "FROM message_state_index m LEFT JOIN events e ON e.seq=m.text_seq "
                 "WHERE m.chat_id=? AND m.message_id=?", (chat_id, message_id)).fetchone()
-        content = {key: row[key] for key in ("seq", "hash", "text", "edited_at", "outgoing", "payload")} \
-            if row and row["seq"] is not None else None
+        content = {key: row[key] for key in ("seq", "hash", "text", "edited_at", "outgoing", "sent_at", "ttl_period",
+                                             "payload")} if row and row["seq"] is not None else None
         if content:
             content["observable"] = message_content.of_payload(json.loads(content.pop("payload")))
             content["buttons"] = content["observable"]["buttons"]
@@ -290,11 +314,13 @@ class Store:
                 "reference": {"event_hash": row["hash"], "seq": row["seq"], "kind": row["kind"]}, "sender": None, "sent_at": None,
                 "reply_to": None, "has_media": False, "service_action": None, "grouped_id": None,
                 "versions": [], "media": [], "deleted": False, "deleted_observed_at": None,
-                "missing": False, "missing_observed_at": None,
+                "missing": False, "missing_observed_at": None, "auto_deleted": False,
                 "telegram_edited_at": None, "origins": []})
             kind = row["kind"]
+            if kind in GONE_KINDS and isinstance(payload.get("auto_delete"), dict) and payload["auto_delete"].get("expected"):
+                item["auto_deleted"] = True
             if kind in TEXT_KINDS:
-                item["missing"], item["missing_observed_at"] = False, None
+                item["missing"], item["missing_observed_at"], item["auto_deleted"] = False, None, False
                 observed = payload.get("sender_observation") or {}
                 if item["sender"] is None and (payload.get("sender_id") is not None or observed):
                     item["sender"] = {"id": payload.get("sender_id", observed.get("id")),
@@ -327,6 +353,16 @@ class Store:
             elif payload.get("media_sha256"):
                 item["media"].append({"sha256": payload["media_sha256"], "mime_type": payload.get("mime_type"),
                                       "name": payload.get("original_name"), "size": payload.get("size")})
+        unnamed = {m["sender"]["id"] for m in messages.values()
+                   if m["sender"] and not m["sender"]["name"] and type(m["sender"]["id"]) is int}
+        if unnamed:
+            with self.lock:
+                known = observed_names(self.db, chat_id, unnamed)
+            for item in messages.values():
+                names = known.get(item["sender"]["id"]) if item["sender"] and not item["sender"]["name"] else None
+                if names:
+                    found = next((n for n in reversed(names) if n["seq"] <= item["first_seq"]), names[0])
+                    item["sender"].update(name=found["name"], username=item["sender"]["username"] or found["username"])
         result = []
         for item in sorted(messages.values(), key=lambda m: m["message_id"]):
             item["captured"] = bool(item["versions"])
@@ -351,8 +387,9 @@ class Store:
     def media_saved_after(self, seq):
         with self.lock:
             return [(r[0], r[1]) for r in self.db.execute(
-                "SELECT seq, json_extract(payload,'$.media_sha256') FROM events WHERE kind IN (?,?) AND seq>?"
-                " ORDER BY seq", (*MEDIA_KINDS, seq)) if r[1]]
+                "SELECT seq, json_extract(payload,'$.media_sha256') FROM events WHERE kind IN ("
+                + ",".join("?" * len(STORED_MEDIA_KINDS)) + ") AND seq>? ORDER BY seq",
+                (*STORED_MEDIA_KINDS, seq)) if r[1]]
 
     def media_in_chats(self, sha256, chat_ids):
         marks = ",".join("?" * len(chat_ids))
@@ -361,6 +398,27 @@ class Store:
                 "SELECT 1 FROM events WHERE kind IN (?,?) AND chat_id IN (" + marks + ")"
                 " AND json_extract(payload,'$.media_sha256')=? LIMIT 1",
                 (*MEDIA_KINDS, *sorted(chat_ids), sha256)).fetchone() is not None
+
+    def stored_media(self, identity):
+        if not identity:
+            return None
+        with self.lock:
+            row = self.db.execute("SELECT sha256,bytes,seq FROM media_identity_index WHERE identity=?",
+                                  (identity,)).fetchone()
+        return dict(row) if row else None
+
+    def account_loss_statement(self, since=None):
+        with self.lock:
+            row = self.db.execute(
+                "SELECT seq,hash,observed_at,payload FROM events WHERE kind='coverage.gap' AND observed_at>=? "
+                "AND json_extract(payload,'$.reason')='authorization_required' ORDER BY seq DESC LIMIT 1",
+                (since or "",)).fetchone()
+        if row is None:
+            return None
+        payload = json.loads(row["payload"])
+        return {"cause": payload.get("cause"), "telegram_error": payload.get("telegram_error"),
+                "operation": payload.get("operation"), "observed_at": row["observed_at"],
+                "meaning": payload.get("meaning"), "journal_record": {"seq": row["seq"], "hash": row["hash"]}}
 
     def sender_in_chats(self, sender_id, chat_ids):
         marks = ",".join("?" * len(chat_ids))
@@ -371,11 +429,11 @@ class Store:
 
     def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None,
                *, since=None, until=None, message_min=None, message_max=None, timeout_s=None,
-               text_only=False, message_only=False, hide_system=False, after=None):
+               text_only=False, message_only=False, hide_system=False, after=None, hide_admin=False):
         source, order, where, params = self._event_selection(
             chat_id, message_id, kind, before, search, chat_ids, since=since, until=until,
             message_min=message_min, message_max=message_max, text_only=text_only,
-            message_only=message_only, hide_system=hide_system, after=after)
+            message_only=message_only, hide_system=hide_system, after=after, hide_admin=hide_admin)
         sql = "SELECT events.* FROM " + source + where + " ORDER BY " + order
         sql += " ASC LIMIT ?" if after is not None else " DESC LIMIT ?"
         records = [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
@@ -387,9 +445,11 @@ class Store:
 
     def _event_selection(self, chat_id=None, message_id=None, kind=None, before=None, search=None, chat_ids=None,
                          *, since=None, until=None, message_min=None, message_max=None,
-                         text_only=False, message_only=False, hide_system=False, after=None):
+                         text_only=False, message_only=False, hide_system=False, after=None, hide_admin=False):
         filters, params = [], []
         source, order = "events", "seq"
+        if hide_admin:
+            filters.append(ADMIN_RECORDS)
         if chat_ids is not None:
             filters.append("chat_id IN (" + ",".join("?" * len(chat_ids)) + ")")
             params.extend(sorted(chat_ids))
@@ -523,11 +583,19 @@ class Store:
                 "WHERE j.state IN ('queued','retry','running')" + clause, sorted(chat_ids or [])).fetchone()
         return row[0]
 
-    def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None, history_run=None):
+    def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None, history_run=None,
+                    allow_takeout=False, exclude_history_run=None):
         filters, params = [], [account_id, time.time() if now is None else now]
+        if not allow_takeout:
+            filters.append("NOT EXISTS (SELECT 1 FROM events e WHERE e.seq=j.message_event "
+                           "AND json_extract(e.payload,'$.acquisition.source_mode')='takeout')")
         if history_run is not None:
             filters.append("EXISTS (SELECT 1 FROM history_items h WHERE h.message_event=j.message_event AND h.run_id=?)")
             params.append(history_run)
+        if exclude_history_run is not None:
+            filters.append("NOT EXISTS (SELECT 1 FROM history_items h WHERE h.message_event=j.message_event "
+                           "AND h.run_id=?)")
+            params.append(exclude_history_run)
         for operator, value in ((">=", min_priority), ("<=", max_priority)):
             if value is not None:
                 filters.append("j.priority" + operator + "?")
@@ -546,12 +614,17 @@ class Store:
             job["attempts"] += 1
             return job
 
-    def next_history_media_attempt(self, account_id, run_id):
+    def next_history_media_attempt(self, account_id, run_id, *, min_priority=None, max_priority=None):
+        filters, params = [], [run_id, account_id]
+        for operator, value in ((">=", min_priority), ("<=", max_priority)):
+            if value is not None:
+                filters.append("j.priority" + operator + "?")
+                params.append(value)
         with self.lock:
             return self.db.execute("SELECT min(j.next_attempt) FROM media_jobs j "
                 "JOIN history_items h ON h.message_event=j.message_event JOIN targets t USING(chat_id) "
-                "WHERE h.run_id=? AND j.account_id=? AND t.enabled=1 AND j.state IN ('queued','retry')",
-                (run_id, account_id)).fetchone()[0]
+                "WHERE h.run_id=? AND j.account_id=? AND t.enabled=1 AND j.state IN ('queued','retry')"
+                + (" AND " + " AND ".join(filters) if filters else ""), params).fetchone()[0]
 
     def clear_media_queue(self, through_seq):
         if type(through_seq) is not int or not 0 <= through_seq < 2**53:
@@ -563,7 +636,8 @@ class Store:
                 (through_seq,)).fetchall()
             for row in rows:
                 self.append("media.skipped", {"message_event": row["message_event"],
-                                              "reason": "waiting download cancelled by operator"},
+                                              "reason": "waiting download cancelled by operator",
+                                              **self.ephemeral_outcome(row["message_event"], "not_saved")},
                             row["chat_id"], row["message_id"])
             self.db.execute("UPDATE media_jobs SET state='cancelled',next_attempt=0,last_error='operator_cancelled' "
                             "WHERE state IN ('queued','retry') AND message_event<=?", (through_seq,))
@@ -579,11 +653,21 @@ class Store:
                                                "content_recoverability": "not guaranteed"})
             return count
 
+    def ephemeral_outcome(self, message_event, status):
+        from . import ephemeral
+        with self.lock:
+            row = self.db.execute("SELECT payload FROM events WHERE seq=?", (message_event,)).fetchone()
+        original = json.loads(row[0]) if row else {}
+        facts = original.get("ephemeral_media") or ephemeral.describe((original.get("raw") or {}).get("media"))
+        return ephemeral.outcome(facts, status) if facts else {}
+
     def finish_media(self, job, state, payload, delay=0):
-        if state not in ("done", "retry", "failed", "skipped"):
+        if state not in ("done", "hashed", "retry", "failed", "skipped"):
             raise ValueError("Invalid media outcome")
+        payload = {**payload, **self.ephemeral_outcome(job["message_event"], {
+            "done": "saved", "hashed": "hashed", "retry": "retry"}.get(state, "not_saved"))}
         with self.transaction():
-            self.append({"done": "media.saved", "retry": "media.retry", "failed": "media.failed",
+            self.append({"done": "media.saved", "hashed": "media.hashed", "retry": "media.retry", "failed": "media.failed",
                          "skipped": "media.skipped"}[state],
                         {"message_event": job["message_event"], "attempt": job["attempts"], **payload},
                         job["chat_id"], job["message_id"])
@@ -710,6 +794,7 @@ class Store:
         return result
 
     def close(self):
+        self.fulltext.close()
         self.db.close()
 
 

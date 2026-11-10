@@ -7,7 +7,7 @@ from .format import utcnow
 
 
 class VideoCapture:
-    def __init__(self, journal, input_args, executable="ffmpeg"):
+    def __init__(self, journal, input_args, executable="ffmpeg", overlay=False, *, timestamp_overlay=False):
         self.journal = journal
         self.input_args = input_args
         self.executable = executable
@@ -17,6 +17,7 @@ class VideoCapture:
         self.last_segment_at = None
         self.log = None
         self.error = None
+        self.timestamp_overlay = timestamp_overlay or overlay
 
     @property
     def available(self):
@@ -31,7 +32,8 @@ class VideoCapture:
         self.directory = self.journal.pending / ("video-" + self.capture_id)
         self.directory.mkdir(mode=0o700)
         self.log = (self.directory / "ffmpeg.log").open("wb")
-        command = [self.executable, "-hide_banner", "-loglevel", "error", "-y", *self.input_args,
+        overlay = ["-vf", "drawtext=text='%{gmtime} UTC':x=8:y=8:fontcolor=white:box=1:boxcolor=black@0.7:fontsize=16"] if self.timestamp_overlay else []
+        command = [self.executable, "-hide_banner", "-loglevel", "error", "-y", *self.input_args, *overlay,
                    "-map", "0:v:0", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
                    "-pix_fmt", "yuv420p", "-force_key_frames", "expr:gte(t,n_forced*10)",
                    "-f", "segment", "-segment_time", "10", "-reset_timestamps", "1",
@@ -49,29 +51,58 @@ class VideoCapture:
         try:
             self.journal.append("video.started", {"capture_id": self.capture_id, "codec": "h264",
                                 "audio": False, "segment_target_seconds": 10, "crf": 23,
-                                "scope": "configured screen input, silent recording", "frames_verified": False})
+                                "overlay": "local UTC clock; not an independent timestamp" if self.timestamp_overlay else None,
+                                "scope": "configured screen input, silent recording", "frames_verified": False,
+                                "timestamp_overlay": "UTC local clock, not trusted time" if self.timestamp_overlay else None})
         except BaseException:
             self.abort()
             raise
 
-    def abort(self):
+    def abort(self, reason=None):
         if self.process is not None:
             if self.process.poll() is None:
                 self.error = "VideoAborted"
                 self.process.kill()
                 self.process.wait(timeout=3)
+            if reason is not None:
+                try:
+                    self.poll(reason=reason)
+                except Exception:
+                    pass
+        if self.process is not None:
             self.process.stdin.close()
             self.process = None
         if self.log is not None:
             self.log.close()
             self.log = None
 
-    def poll(self, final=False):
+    def recover(self):
+        events = self.journal.events()
+        started = {e["payload"].get("capture_id") for e in events if e["kind"] == "video.started"}
+        ended = {e["payload"].get("capture_id") for e in events if e["kind"] in {"video.stopped", "video.interrupted"}}
+        for directory in sorted(self.journal.pending.glob("video-*")):
+            if not directory.is_dir():
+                continue
+            capture_id = directory.name[len("video-"):]
+            files = sorted(directory.glob("*.mkv"))
+            if capture_id in started and capture_id not in ended:
+                self.journal.append("video.interrupted", {"capture_id": capture_id, "exit_code": None,
+                                    "unsealed_segments": [path.name for path in files], "requested_stop": False,
+                                    "clean_exit": False, "reason": "RecorderRestarted"})
+            for path in files:
+                with path.open("rb") as stream:
+                    artifact = self.journal.artifact_stream(stream, "unsealed_video_segment", "video/x-matroska")
+                self.journal.append("video.recovered", {"capture_id": capture_id, "file": path.name,
+                                    "session_started": capture_id in started, "recovered_at": utcnow(),
+                                    "scope": "file left in pending storage after the recorder stopped; segment closure was not observed"},
+                                    [artifact])
+                path.unlink()
+
+    def poll(self, final=False, reason=None):
         if self.process is None:
             return
         result = self.process.poll()
         files = sorted(self.directory.glob("*.mkv"))
-        # A segment is sealed only after FFmpeg opens its successor, or exits cleanly.
         complete = files if result == 0 else files[:-1]
         for path in complete:
             if path.name in self.sealed:
@@ -85,11 +116,11 @@ class VideoCapture:
             self.last_segment_at = utcnow()
             path.unlink()
         if result is not None:
-            self.error = None if result == 0 and final else "VideoExitedUnexpectedly"
+            self.error = None if result == 0 and final else reason or "VideoExitedUnexpectedly"
             incomplete = [path.name for path in files if path.name not in self.sealed]
             self.journal.append("video.stopped" if result == 0 and final else "video.interrupted",
                                 {"capture_id": self.capture_id, "exit_code": result, "unsealed_segments": incomplete,
-                                 "requested_stop": final, "clean_exit": result == 0})
+                                 "requested_stop": final, "clean_exit": result == 0, "reason": self.error})
             self.process.stdin.close()
             self.log.close()
             self.process = self.log = None

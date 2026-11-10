@@ -1,10 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
-# Summaries show the first of these that any part has.
 ORDER = ("failed", "degraded", "unknown", "running", "configured", "working", "off")
-# Slack on top of a part's own schedule before its data counts as stale.
 SLACK_SECONDS = 180
-# Attachments still waiting after this long while observation runs.
 MEDIA_WAIT_SECONDS = 3600
 
 
@@ -183,7 +180,8 @@ SIGN_IN_PHASES = ("code_required", "password_required", "qr_pending")
 def connection(c, now):
     detail = {"phase": c.get("phase"), "attempts": c.get("reconnect_attempts") or 0,
               "next_reconnect_at": iso(parse(c.get("next_reconnect_at"))), "error": c.get("last_error"),
-              "telegram_pause_until": iso(parse(c.get("rpc_backoff_until")))}
+              "telegram_pause_until": iso(parse(c.get("rpc_backoff_until"))),
+              "telegram_pause_method": c.get("rpc_backoff_method")}
     if c.get("authorization_required"):
         return part("failed", "signed_out", **detail)
     if c.get("phase") in FAILED_PHASES:
@@ -192,6 +190,8 @@ def connection(c, now):
         return part("failed", FAILED_PHASES[c["phase"]], **detail)
     if not c.get("has_session"):
         return part("configured" if c.get("phase") in SIGN_IN_PHASES else "off", "no_account", **detail)
+    if c.get("account_loss") and not c.get("running"):
+        return part("failed", "signed_out", cause=c["account_loss"].get("cause"), **detail)
     if not c.get("running"):
         return part("off", "paused", **detail)
     if not c.get("connected"):
@@ -205,6 +205,11 @@ def connection(c, now):
 def intake(c, heartbeat_seconds, now):
     detail = {"last_heartbeat": c.get("last_heartbeat"), "last_event_at": c.get("last_update_at"),
               "heartbeat_seconds": heartbeat_seconds}
+    failures = c.get("journal_write_failures", 0)
+    if failures > 0:
+        return part("failed", "journal_write_failures", journal_write_failures=failures,
+                    error=f"{failures} journal records could not be written; check disk space and the data directory",
+                    **detail)
     if not c.get("running"):
         return part("off", "paused", **detail)
     beat = age(c.get("last_heartbeat"), now)
@@ -214,6 +219,12 @@ def intake(c, heartbeat_seconds, now):
         return part("unknown", "stale", **detail)
     if not c.get("connected"):
         return part("degraded", "disconnected", **detail)
+    if c.get("session_revoked"):
+        return part("failed", "session_revoked", revoked_since=c["session_revoked"].get("since"), **detail)
+    if c.get("updates_diverted"):
+        return part("failed", "updates_diverted", diverted_since=c["updates_diverted"].get("since"), **detail)
+    if c.get("probe_missed"):
+        return part("failed", "probe_ack_missed_live", missed_since=c["probe_missed"].get("since"), **detail)
     return part("working", "live", **detail)
 
 
@@ -225,12 +236,19 @@ def sources(c, enabled_sources):
               "added": sum(s.get("state") == "discovered" for s in statuses),
               "unconfirmed_total": sum(s.get("state") == "access_unconfirmed" for s in statuses),
               "ignored": sum(s.get("state") == "access_unconfirmed" and bool(s.get("ignored")) for s in statuses),
-              "unconfirmed": sum(s.get("state") == "access_unconfirmed" and not s.get("ignored") for s in statuses)}
+              "unconfirmed": sum(s.get("state") == "access_unconfirmed" and not s.get("ignored") for s in statuses),
+              "lost": sum(s.get("state") == "access_lost" for s in statuses)}
     scope = (c.get("scope") or {}).get("mode", "selected")
     if not enabled_sources and scope == "selected":
         return part("off", "no_sources", counts=counts)
+    if not c.get("running") and not counts["lost"]:
+        return part("off", "paused", counts=counts)
     if not statuses:
         return part("unknown", "not_checked", counts=counts)
+    if counts["lost"] and not (counts["visible"] or counts["added"]):
+        return part("failed", "access_lost", counts=counts)
+    if counts["lost"]:
+        return part("degraded", "some_access_lost", counts=counts)
     if counts["unconfirmed"] and not (counts["visible"] or counts["added"]):
         return part("failed", "none_visible", counts=counts)
     if counts["unconfirmed"]:
@@ -265,7 +283,7 @@ def media(c, capture, now):
 def collector(c, capture, heartbeat_seconds, enabled_sources, now):
     parts = {"connection": connection(c, now), "intake": intake(c, heartbeat_seconds, now),
              "sources": sources(c, enabled_sources), "media": media(c, capture, now)}
-    return {**parts, "state": worst(p["state"] for p in parts.values())}
+    return {**parts, "state": worst((parts["connection"]["state"], parts["intake"]["state"]))}
 
 
 def collector_of(app_state, status=None, now=None, *, enabled_sources=None):

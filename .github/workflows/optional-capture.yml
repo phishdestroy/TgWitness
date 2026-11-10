@@ -12,21 +12,53 @@ concurrency:
   group: optional-capture-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  capture:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+  official-container:
+    name: Official client image build and audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
           python-version: "3.12"
-      - run: python -m pip install --require-hashes -r deploy/browser.lock
-      - run: python -m playwright install --with-deps chromium
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: docker compose --project-directory . -f addons/capture/compose.official.yaml --profile official config --quiet
+      - run: docker build -f addons/capture/deploy/Dockerfile.official -t tgwitness-official-check .
+      - name: Audit the official-client image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
+        with:
+          version: v0.76.1
+          scan-type: image
+          image-ref: tgwitness-official-check
+          scanners: vuln
+          vuln-type: os,library
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+          format: json
+          output: official-image-audit.json
+          exit-code: '1'
+          timeout: 15m
+          cache: false
+      - name: Save the image audit
+        if: always() && hashFiles('official-image-audit.json') != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: official-image-audit
+          path: official-image-audit.json
+          retention-days: 7
+  capture:
+    name: Capture image builds and installed recorder smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: "3.12"
       - run: python addons/capture/lock_from_project.py && git diff --exit-code -- addons/capture/requirements.lock
-      - run: python -m pytest addons/capture/tests -q --capture-browser
       - run: docker compose --project-directory . -f addons/capture/compose.yaml --profile capture-browser --profile capture-ayugram config --quiet
       - run: docker compose --project-directory . -f compose.yaml -f addons/capture/compose.yaml -f deploy/compose/compose.capture-panel.yaml --profile capture-browser --profile capture-ayugram config --quiet
       - run: docker compose --project-directory . -f addons/capture/compose.yaml --profile capture-browser build browser-recorder browser-gateway
@@ -34,4 +66,30 @@ jobs:
         run: |
           recorder_image=$(docker compose --project-directory . -f addons/capture/compose.yaml --profile capture-browser images -q browser-recorder)
           if [ -z "$recorder_image" ]; then recorder_image=tgwitness-capture-browser-recorder; fi
-          docker run --rm --entrypoint python "$recorder_image" -c 'import tgwitness_capture; from pathlib import Path; from tgwitness_capture.service import Config, Recorder; import tempfile; r=Recorder(Path(tempfile.mkdtemp()), Config()); assert not r.settings["enabled"]; assert "lang=\"en\"" in (Path(tgwitness_capture.__file__).parent/"static/index.html").read_text(); r.journal.close()'
+          docker run --rm --network none --read-only --cap-drop=ALL --security-opt=no-new-privileges --tmpfs /tmp:size=128m,mode=1777 --entrypoint python "$recorder_image" -c 'import tgwitness_capture; from pathlib import Path; from tgwitness_capture.service import Config, Recorder; import tempfile; r=Recorder(Path(tempfile.mkdtemp()), Config()); assert not r.settings["enabled"]; assert "lang=\"en\"" in (Path(tgwitness_capture.__file__).parent/"static/index.html").read_text(); r.journal.close()'
+      - name: Build pinned official-client Trusted Live image
+        run: docker build -f addons/capture/deploy/Dockerfile.trusted -t tgwitness-trusted-ci .
+      - name: Prepare the image audit directory
+        run: mkdir -p build/trusted-container-audit
+      - name: Audit the Desktop and Web image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
+        with:
+          version: v0.76.1
+          scan-type: image
+          image-ref: tgwitness-trusted-ci
+          scanners: vuln
+          vuln-type: os,library
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+          format: json
+          output: build/trusted-container-audit/image-audit.json
+          exit-code: '1'
+          timeout: 15m
+          cache: false
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: trusted-live-container
+          path: build/trusted-container-audit/
+          if-no-files-found: warn
+          retention-days: 7

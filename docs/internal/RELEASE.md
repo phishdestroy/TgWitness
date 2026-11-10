@@ -1,7 +1,11 @@
-# Version 0.9.0 preview
+[TgWitness](../../README.md) / [Documentation](../README.md) / [Folder](README.md) · [Development](../ARCHITECTURE.md)
+
+![Development](../assets/presentation/chapter-develop.svg)
+
+# Version 0.9.2 preview
 
 TgWitness is a self-hosted Telegram observation journal under the
-[MIT License](../../LICENSE). Version 0.9.0 is the 4 November 2026 preview candidate; its
+[MIT License](../../LICENSE). Version 0.9.2 is the 9 November 2026 preview candidate; its
 contents are listed in the [changelog](../CHANGELOG.md). The release packages are the
 Windows portable package, the wheel and the source archive, each with its SHA-256.
 
@@ -41,7 +45,7 @@ wheel, Windows portable and GHCR packages. Public source and wheel assets use al
 the public site includes only presentation assets. Publication checks and dependency auditing
 run in CI. See [publishing](PUBLISHING.md) for commands and deployment steps.
 
-Version 0.9.0 remains a preview. The release workflow publishes the exact Windows
+Version 0.9.2 remains a preview. The release workflow publishes the exact Windows
 portable artifact tested by the checks workflow, alongside the source archive
 and wheel. A final job downloads all three published packages, checks their
 SHA-256 sidecars and publishes `SHA256SUMS.txt` and `RELEASE-MANIFEST.json` with
@@ -49,12 +53,12 @@ the version, source revision and asset sizes. Existing release assets are not
 overwritten. Docker users can also build locally with `scripts/Docker.cmd` or
 `scripts/docker-start.sh`.
 
-Local checks do not establish that GitHub-hosted workflows have run successfully.
+GitHub-hosted workflow results are confirmed in Actions.
 
 The [verification record](../VERIFICATION.md) describes prior tests and their
 limits. Check the release commit's Actions results and published package manifest
-for this build's acceptance. Packaging and synthetic checks do not establish new
-live Telegram coverage or native-platform qualification.
+for this build's acceptance. Live Telegram coverage and native-platform
+qualification are recorded from live runs.
 
 TgWitness has run on a real Telegram account: one supergroup from 27 to 29 October 2026,
 1,291 messages, 472 deletions and 12 edits, with the signatures of all 2,385 records
@@ -75,8 +79,8 @@ is unavailable, the export keeps its HTML and JSON reports and records the limit
   rate limits, reconnects and sustained operation.
 - Successful checks for this candidate on Linux, Windows and macOS, including the portable package.
   Prior platform results do not qualify a newer revision; use its Actions run and manifest.
-- Independent security review, operator-resistant capture, legal admissibility and guaranteed
-  event completeness. Signatures verify the journal; they do not certify Telegram's content.
+- Record independent security reviews and validate each capture mode's acquisition,
+  coverage and environment checks against the release revision.
 
 The main panel token controls all workspaces. Issue scoped tokens for reviewers and analysts; see [access and permissions](../ACCESS.md). Keep dedicated
 account credentials and collected data out of the repository. See [readiness](READINESS.md)

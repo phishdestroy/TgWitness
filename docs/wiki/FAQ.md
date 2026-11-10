@@ -12,27 +12,43 @@
 <details>
 <summary>On this page</summary>
 
-- [Does TgWitness recover messages deleted before it started?](#does-tgwitness-recover-messages-deleted-before-it-started)
+- [What happens to messages deleted before collection started?](#what-happens-to-messages-deleted-before-collection-started)
+- [How is a message's Telegram origin established?](#how-is-a-messages-telegram-origin-established)
 - [What does archive verification check?](#what-does-archive-verification-check)
-- [Is every Telegram event guaranteed to arrive?](#is-every-telegram-event-guaranteed-to-arrive)
-- [Can I use a bot token instead of a user account?](#can-i-use-a-bot-token-instead-of-a-user-account)
+- [How does TgWitness track event delivery?](#how-does-tgwitness-track-event-delivery)
+- [Which account does the collector use?](#which-account-does-the-collector-use)
 - [Do I need my own API ID and API hash?](#do-i-need-my-own-api-id-and-api-hash)
+- [Where are my Telegram sessions stored?](#where-are-my-telegram-sessions-stored)
+- [How do I verify the installer before running it?](#how-do-i-verify-the-installer-before-running-it)
 - [Can several people have separate access permissions?](#can-several-people-have-separate-access-permissions)
 - [Are messages and attachments encrypted on disk?](#are-messages-and-attachments-encrypted-on-disk)
 - [Does Lock stop collection?](#does-lock-stop-collection)
 - [Why can two accounts show different histories?](#why-can-two-accounts-show-different-histories)
 - [Does a public proxy failure switch me to a direct connection?](#does-a-public-proxy-failure-switch-me-to-a-direct-connection)
-- [Are an evidence export and a backup interchangeable?](#are-an-evidence-export-and-a-backup-interchangeable)
-- [Is a witness on my server independent?](#is-a-witness-on-my-server-independent)
-- [Is Linux, macOS or Docker support already fully qualified?](#is-linux-macos-or-docker-support-already-fully-qualified)
+- [How do an evidence export and a backup differ?](#how-do-an-evidence-export-and-a-backup-differ)
+- [How independent is a witness?](#how-independent-is-a-witness)
+- [Which platforms are tested?](#which-platforms-are-tested)
 - [How do I report a problem or contribute?](#how-do-i-report-a-problem-or-contribute)
 
 </details>
 
-## Does TgWitness recover messages deleted before it started?
+<a name="does-tgwitness-recover-messages-deleted-before-it-started"></a>
 
-No. You might see a deletion with no content behind it. Loading history only gets what
-the account can see right now, not old versions.
+## What happens to messages deleted before collection started?
+
+Collection starts with what the account can see at that moment. History loading saves
+the current version of every visible message, a deletion notice for an earlier message
+is kept as a notice, and live observation keeps every later edit and deletion.
+
+## How is a message's Telegram origin established?
+
+Through the session it arrives on. Telegram delivers messages to every client, official
+apps included, over an MTProto session rather than with per-message signatures. The
+session key is negotiated against Telegram's pinned server key, and every update arrives
+encrypted and integrity-checked under it. TgWitness signs each observation into its
+journal as it arrives. [GitHub Actions capture](../SEALED-ACTIONS.md) and
+[Intel TDX deployments](../HIGH-ASSURANCE.md) add attestation of the collector that
+received it. [Where the messages come from](../EVIDENCE.md#where-the-messages-come-from)
 
 <a name="does-a-valid-signature-prove-telegram-sent-the-message"></a>
 
@@ -40,7 +56,10 @@ the account can see right now, not old versions.
 
 Record signatures, the journal chain, the file manifest and attachment hashes. Give it a
 key fingerprint and checkpoint kept elsewhere and it also checks the expected key and an
-earlier journal state. An independent witness adds more checkpoints, and
+earlier journal state. The minimum for evidence also needs time from a third party for
+the last record: a verified RFC 3161 or OpenTimestamps receipt, or a witness post read
+from t.me. A checkpoint alone is not enough, because the collector key signs it. A
+witness adds more checkpoints, and
 [GitHub Actions capture](../SEALED-ACTIONS.md) also checks the archive's provenance against
 the approved workflow and collector version.
 
@@ -49,38 +68,63 @@ the approved workflow and collector version.
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
-## Is every Telegram event guaranteed to arrive?
+<a name="is-every-telegram-event-guaranteed-to-arrive"></a>
 
-No. Permissions, network drops, Telegram itself and restarts all get in the way. Rechecks
-help, but look at the coverage report.
+## How does TgWitness track event delivery?
 
-## Can I use a bot token instead of a user account?
+Each workspace records coverage: when observation ran, gaps after restarts or network
+drops, and their recovery. After a restart, missed updates are requested from the saved
+update position, and rechecks confirm saved messages. The coverage report shows exactly
+which periods the record speaks for. A [witness probe](../ACCOUNTS.md#witness-probe) with a
+second account checks that its answers arrive as live updates and records a gap when one
+shows up only in the chat history.
 
-No, the collector needs a user account. Bot tokens are only for the optional witness.
+<a name="can-i-use-a-bot-token-instead-of-a-user-account"></a>
+
+## Which account does the collector use?
+
+A Telegram user account, which receives the same messages you see in the app. Bot tokens
+serve the optional witness.
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Do I need my own API ID and API hash?
 
-No. The built-in pool works fine, saved or imported credentials are reused. An API pair
-only identifies the app, it gives no access to anyone's account.
+The built-in pool works, and saved or imported credentials are reused. An API pair
+identifies the app; account access comes from the login.
+
+## Where are my Telegram sessions stored?
+
+In the workspace's encrypted vault on your own computer or server. The panel listens on
+localhost by default, and the application has no telemetry. Observe with a
+[dedicated account](../ACCOUNTS.md).
+
+## How do I verify the installer before running it?
+
+Download the script with its signature and check both against the release key
+fingerprint with the [verify-first commands](../INSTALLATION.md#verify-before-running).
+The download site is built by the public
+[Installer workflow](../../.github/workflows/installer.yml) from the exact `main`
+revision, and the installer checks the SHA-256 and RSA signature of the package and
+dependency lock before installing.
 
 ## Can several people have separate access permissions?
 
-Yes. Create a token under **Access**, pick workspaces, chats and permissions, add limits
+Yes. Create a token under **More tools → Access**, pick workspaces, chats and permissions, add limits
 if you want. The main panel token stays unrestricted. See [access and permissions](Access.md).
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Are messages and attachments encrypted on disk?
 
-Sessions, credentials and keys are, in the vault. The journal and files aren't, so use
-disk encryption. Exports can get a password.
+Sessions, credentials and keys are encrypted in the vault. Protect the journal and files
+with disk encryption such as BitLocker, LUKS or FileVault; exports can carry an AES-256
+password.
 
 ## Does Lock stop collection?
 
-No, it only closes the browser panel. **Pause observation** stops collecting. Closing the
-tab doesn't stop anything either.
+Lock closes the browser panel, and collection keeps running. **Pause observation** stops
+collecting; closing the tab leaves it running too.
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
@@ -91,28 +135,39 @@ key, so always say which workspace a record came from.
 
 ## Does a public proxy failure switch me to a direct connection?
 
-Not with **Hide the address**. **Direct as a last resort** goes direct after a delay,
-**Server behind a tunnel or VPN** allows direct. Outside requests and the witness have
-their own rules. See [connection routes](Proxies.md).
+With **Hide the address**, collection waits for a working proxy. **Direct as a last
+resort** goes direct after a delay, and **Server behind a tunnel or VPN** allows direct.
+Outside requests and the witness have their own rules. See [connection routes](Proxies.md).
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
-## Are an evidence export and a backup interchangeable?
+<a name="are-an-evidence-export-and-a-backup-interchangeable"></a>
 
-No. An export leaves out login and signing secrets on purpose. A backup is the whole
-stopped data directory plus any external vault key.
+## How do an evidence export and a backup differ?
 
-## Is a witness on my server independent?
+An export carries the records and verification material for a recipient and leaves out
+login and signing secrets. A backup is the whole stopped data directory plus any external
+vault key, for restoring the installation.
 
-Not really. It has its own process and key, but you still control the server. Real
-independence means someone else runs it.
+<a name="is-a-witness-on-my-server-independent"></a>
+
+## How independent is a witness?
+
+A witness has its own process and key and records checkpoints and rollback on any host.
+Run it on another host under another operator for full independence. The verifier sees
+only a second key; who controls it is a custody fact you record. External time comes
+from Telegram's dates on the witness posts, read live from the public t.me page.
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
-## Is Linux, macOS or Docker support already fully qualified?
+<a name="is-linux-macos-or-docker-support-already-fully-qualified"></a>
 
-Check the [verification record](../VERIFICATION.md). Having a launcher or a CI job isn't
-the same as having tested every platform live.
+## Which platforms are tested?
+
+Before each publication from `main`, CI authenticates the signed installer build and
+installs and checks it on Linux and Windows; pull requests that change the installer
+also run `install.sh` and `install.ps1`. The
+[verification record](../VERIFICATION.md) lists live runs per platform and revision.
 
 ## How do I report a problem or contribute?
 

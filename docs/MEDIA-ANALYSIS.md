@@ -1,17 +1,24 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
+
+![Investigation](assets/presentation/chapter-investigate.svg)
+
 # Local OCR and transcription
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](wiki/Archive-and-Integrations.md)
 
 Open a `media.saved` journal record, choose **Recognize attachment**, then select
-OCR or transcription under **Ask the archive**. Processing is manual and local.
+OCR or transcription under **More tools → Ask the archive** (named **Machine recognition**
+while archive AI is off). Processing is manual and local.
 There is no cloud media mode or automatic upload. Original attachment bytes and
 `media_sha256` remain unchanged; recognized text is explicitly marked as machine
 recognition and stored separately with the source hash, engine/model version,
 language, parameters and completion time. Transcripts retain returned timestamps.
 
 Search these results using **Search recognized text** and the OCR/transcript
-filter. This is a separate derived-data search; it does not silently turn machine
-recognition into original Telegram text or add it to signed events.
+filter, or choose recognized text as the source of a **Journal** best-match search.
+Both match word forms through an [in-memory index](SEARCH.md#recognized-text). This
+is a separate derived-data search; it does not silently turn machine recognition
+into original Telegram text or add it to signed events.
 
 ## Set up the optional worker
 

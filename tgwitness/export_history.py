@@ -1,4 +1,5 @@
 import hashlib
+import json
 import os
 import secrets
 import shutil
@@ -11,9 +12,32 @@ LIMIT = 20
 MAX_CACHE_BYTES = 2 * 1024**3
 KEY = "prepared_exports"
 CLEANUP_KEY = "prepared_exports_cleanup"
+EVIDENCE_KEY = "evidence_exported"
+SETUP_KINDS = ("process.*", "network.*", "connection.*", "account.authorized", "account.connection_checked",
+               "export.failed", "settings.changed",
+               "parameters.changed", "capture.changed", "monitoring.changed", "scope.changed", "recheck.changed",
+               "alerts.changed", "workspace.mode_changed", "setup.applied", "group.settings_applied",
+               "group.settings_inherited")
 
 
-def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, required_permissions=None, chat_ids=None):
+def evidence_exported(store, seq):
+    with store.transaction():
+        previous = (store.get_setting(EVIDENCE_KEY, None) or {}).get("seq", 0)
+        store.set_setting(EVIDENCE_KEY, {"seq": max(seq, previous),
+                                         "at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+
+
+def unexported(db):
+    row = db.execute("SELECT value FROM settings WHERE key=?", (EVIDENCE_KEY,)).fetchone()
+    exported = json.loads(row[0])["seq"] if row else 0
+    return db.execute("SELECT 1 FROM events WHERE seq>? AND " + " AND ".join("kind NOT GLOB ?" for _ in SETUP_KINDS)
+                      + " LIMIT 1", (exported, *SETUP_KINDS)).fetchone() is not None
+
+
+def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, required_permissions=None, chat_ids=None,
+             encryption="zip"):
+    if encryption not in ("zip", "tgwpw"):
+        raise ValueError("Unknown password-encryption format")
     with path.open("rb") as source:
         digest = hashlib.file_digest(source, "sha256").hexdigest()
         size = os.fstat(source.fileno()).st_size
@@ -25,51 +49,72 @@ def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, require
     cached = folder / ident
     entry = {"id": ident, "format": fmt, "encrypted": bool(encrypted), "bytes": size, "sha256": digest,
              "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    if encrypted and encryption == "tgwpw":
+        entry["encryption"] = encryption
     if owner is not None and workspace is not None and required_permissions:
         entry.update(owner=owner, workspace=workspace, required_permissions=sorted(set(required_permissions)),
                      chat_ids=sorted(set(chat_ids)) if chat_ids is not None else None)
+    oversized = size > MAX_CACHE_BYTES
     with store.transaction():
-        previous = store.get_setting(KEY, [])
-        remove = {item for item in store.get_setting(CLEANUP_KEY, []) if valid_id(item)}
-        oversized = size > MAX_CACHE_BYTES
-        keep, used = [entry], 0 if oversized else size
-        for old in previous:
-            old_size = 0 if old.get("cache_warning") else old["bytes"]
-            if len(keep) < LIMIT and used + old_size <= MAX_CACHE_BYTES:
-                keep.append(old)
-                used += old_size
-            elif valid_id(old.get("id", "")):
-                remove.add(old["id"])
-        retry = []
-        for old_id in remove:
-            stale = folder / old_id
-            if stale.parent.resolve() == folder.resolve() and not filesystem_link(stale):
-                try:
-                    stale.unlink(missing_ok=True)
-                except OSError:
-                    retry.append(old_id)
-        if oversized:
-            entry["cache_warning"] = "This export exceeds the saved-copy cache limit. Download it now; prepare it again later."
-        elif not retry:
-            try:
-                if os.name == "nt":
-                    shutil.copy2(path, cached)
-                else:
-                    try:
-                        os.link(path, cached)
-                    except OSError:
-                        shutil.copy2(path, cached)
-            except OSError:
-                try:
-                    cached.unlink(missing_ok=True)
-                except OSError:
-                    retry.append(ident)
-                entry["cache_warning"] = "A saved copy is unavailable. Download this export now; prepare it again later to retry."
-        else:
-            entry["cache_warning"] = "Saved-copy cleanup is pending. Download this export now; prepare it again later to retry."
-        store.set_setting(CLEANUP_KEY, retry)
+        keep, remove = retain(store, 0 if oversized else size)
+        store.set_setting(CLEANUP_KEY, sorted(remove))
         store.set_setting(KEY, keep)
+    retry = sweep(store, folder, remove)
+    if oversized:
+        entry["cache_warning"] = "This export exceeds the saved-copy cache limit. Download it now; prepare it again later."
+    elif not retry:
+        try:
+            if os.name == "nt":
+                shutil.copy2(path, cached)
+            else:
+                try:
+                    os.link(path, cached)
+                except OSError:
+                    shutil.copy2(path, cached)
+        except OSError:
+            try:
+                cached.unlink(missing_ok=True)
+            except OSError:
+                retry.append(ident)
+            entry["cache_warning"] = "A saved copy is unavailable. Download this export now; prepare it again later to retry."
+    else:
+        entry["cache_warning"] = "Saved-copy cleanup is pending. Download this export now; prepare it again later to retry."
+    with store.transaction():
+        keep, remove = retain(store, 0 if entry.get("cache_warning") else size, entry)
+        remove.update(retry)
+        store.set_setting(CLEANUP_KEY, sorted(remove))
+        store.set_setting(KEY, keep)
+    sweep(store, folder, remove.difference(retry))
     return entry
+
+
+def retain(store, reserved, entry=None):
+    remove = {item for item in store.get_setting(CLEANUP_KEY, []) if valid_id(item)}
+    keep, count, used = [entry] if entry else [], 1, reserved
+    for old in store.get_setting(KEY, []):
+        old_size = 0 if old.get("cache_warning") else old["bytes"]
+        if count < LIMIT and used + old_size <= MAX_CACHE_BYTES:
+            keep.append(old)
+            count, used = count + 1, used + old_size
+        elif valid_id(old.get("id", "")):
+            remove.add(old["id"])
+    return keep, remove
+
+
+def sweep(store, folder, ids):
+    done, failed = set(), []
+    for old_id in ids:
+        stale = folder / old_id
+        try:
+            if stale.parent.resolve() == folder.resolve() and not filesystem_link(stale):
+                stale.unlink(missing_ok=True)
+            done.add(old_id)
+        except OSError:
+            failed.append(old_id)
+    if done:
+        with store.transaction():
+            store.set_setting(CLEANUP_KEY, [i for i in store.get_setting(CLEANUP_KEY, []) if i not in done])
+    return failed
 
 
 def permitted(entry, principal, profile_id):

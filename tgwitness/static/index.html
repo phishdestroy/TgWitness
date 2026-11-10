@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.8.0-report-studio3">
+<link rel="stylesheet" href="/style.css?v=0.8.0-evidence1">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
@@ -17,18 +17,21 @@
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=30">
 <link rel="stylesheet" href="/views/group.css?v=1">
-<link rel="stylesheet" href="/views/setup.css?v=3">
-<link rel="stylesheet" href="/views/settings-hub.css?v=3">
+<link rel="stylesheet" href="/views/setup.css?v=4">
+<link rel="stylesheet" href="/views/settings-hub.css?v=4">
 <link rel="stylesheet" href="/views/connection.css?v=1">
+<link rel="stylesheet" href="/views/system-map.css?v=2">
 <link rel="stylesheet" href="/services.css?v=1">
 <link rel="stylesheet" href="/independent-capture.css?v=1">
+<link rel="stylesheet" href="/investigate.css?v=8">
 <link rel="stylesheet" href="/workspace-safety.css?v=1">
 <link rel="stylesheet" href="/account-import.css?v=1">
 <link rel="stylesheet" href="/views/access.css?v=30">
-<link rel="stylesheet" href="/components/journal.css?v=5">
+<link rel="stylesheet" href="/components/journal.css?v=6">
 <link rel="stylesheet" href="/views/chats.css?v=11">
 <link rel="stylesheet" href="/views/chat-list.css?v=12">
 <link rel="stylesheet" href="/views/board.css?v=1">
+<link rel="stylesheet" href="/views/topology.css?v=2">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
@@ -36,24 +39,26 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.8.0-case-board1"></script>
+<script defer src="/app.js?v=0.9.1-evidence1-topology2-layout1"></script>
 <script defer src="/services.js?v=1"></script>
-<script defer src="/independent-capture.js?v=1"></script>
-<script defer src="/account-import.js?v=1"></script>
-<script defer src="/integrations.js?v=2"></script>
-<script defer src="/analysis.js?v=3"></script>
+<script defer src="/independent-capture.js?v=2"></script>
+<script defer src="/investigate.js?v=9"></script>
+<script defer src="/account-import.js?v=2"></script>
+<script defer src="/integrations.js?v=5"></script>
+<script defer src="/analysis.js?v=5"></script>
 <script defer src="/media-analysis.js?v=2"></script>
 <script defer src="/webhooks.js?v=2"></script>
 <script defer src="/proxies.js?v=3"></script>
-<script defer src="/fleet.js?v=6"></script>
+<script defer src="/fleet.js?v=7"></script>
 <script defer src="/review.js?v=1"></script>
-<script defer src="/live.js?v=2"></script>
+<script defer src="/live.js?v=3"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
 <link href="/views/exports.css?v=32" rel="stylesheet">
 <link href="/views/workflows.css?v=2" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="/components/forms.css?v=35" rel="stylesheet">
 <link href="/components/feedback.css?v=36" rel="stylesheet">
+<link href="/components/layout.css?v=1" rel="stylesheet">
 </head>
 <body>
 <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -147,16 +152,18 @@
   <button class="quick-open" id="quick-open" data-quick-open type="button" aria-haspopup="dialog" aria-controls="quick-dialog" aria-keyshortcuts="Control+k Meta+k"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg><span>Go to…</span><kbd data-no-translate id="quick-shortcut">Ctrl K</kbd></button>
   <nav aria-label="Main navigation">
     <button class="nav" data-view="start"><svg aria-hidden="true" class="nav-icon"><use href="#i-home"/></svg> Start here</button>
-    <div class="nav-section">Investigation</div>
-    <button class="nav" data-view="board"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> Case Board <b id="board-unread" hidden>0</b></button>
     <button class="nav" data-view="chats"><svg aria-hidden="true" class="nav-icon"><use href="#i-message"/></svg> Chats</button>
     <button class="nav active" data-view="observations"><svg aria-hidden="true" class="nav-icon"><use href="#i-journal"/></svg> Journal <b id="nav-count">0</b></button>
-    <button class="nav" data-view="sources"><svg aria-hidden="true" class="nav-icon"><use href="#i-sources"/></svg> Sources</button>
     <button class="nav" data-view="evidence"><svg aria-hidden="true" class="nav-icon"><use href="#i-export"/></svg> Exports</button>
-    <button class="nav" data-view="settings" data-level="simple"><svg aria-hidden="true" class="nav-icon"><use href="#i-settings"/></svg> Settings</button>
     <div class="nav-section">Workspace</div>
+    <button class="nav" data-view="topology" data-level="simple"><svg aria-hidden="true" class="nav-icon"><use href="#i-activity"/></svg> Network topology</button>
     <button class="nav" data-view="accounts"><svg aria-hidden="true" class="nav-icon"><use href="#i-users"/></svg> Accounts <b id="nav-accounts">1</b></button>
-    <details class="nav-more" id="nav-more"><summary>More tools &amp; settings</summary>
+    <button class="nav" data-view="settings" data-level="simple"><svg aria-hidden="true" class="nav-icon"><use href="#i-settings"/></svg> Settings</button>
+    <details class="nav-more" id="nav-more"><summary>More tools</summary>
+    <button class="nav" data-view="board"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> Case Board <b id="board-unread" hidden>0</b></button>
+    <button class="nav" data-view="sources"><svg aria-hidden="true" class="nav-icon"><use href="#i-sources"/></svg> Sources</button>
+    <button class="nav" data-view="system-map"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> System map</button>
+    <button class="nav" data-view="topology"><svg aria-hidden="true" class="nav-icon"><use href="#i-activity"/></svg> Network topology</button>
     <button class="nav" data-view="witness"><svg aria-hidden="true" class="nav-icon"><use href="#i-sparkle"/></svg> Extras</button>
     <button class="nav" data-view="analysis"><svg aria-hidden="true" class="nav-icon"><use href="#i-search"/></svg> Ask the archive</button>
     <button class="nav" data-view="parameters"><svg aria-hidden="true" class="nav-icon"><use href="#i-settings"/></svg> Parameters</button>
@@ -167,15 +174,20 @@
     </details>
   </nav>
   <div class="sidebar-bottom">
+    <details class="sidebar-help-menu"><summary><svg aria-hidden="true" class="nav-icon"><use href="#i-help"/></svg> Help</summary>
     <a class="sidebar-help" href="/guide.html" target="_blank" rel="noopener"><svg aria-hidden="true" class="nav-icon"><use href="#i-help"/></svg> Help &amp; documentation</a>
     <a class="sidebar-help" href="/dedicated-account.html" target="_blank" rel="noopener"><svg aria-hidden="true" class="nav-icon"><use href="#i-shield"/></svg> Dedicated account guide</a>
+    </details>
     <button class="quiet" id="lock-panel"><svg aria-hidden="true" class="nav-icon"><use href="#i-lock"/></svg> Lock workspace</button>
+    <details class="sidebar-appearance"><summary><svg aria-hidden="true" class="nav-icon"><use href="#i-monitor"/></svg> Appearance</summary>
     <div class="preferences">
       <label class="language-pick"><span>Language</span><select class="language-select" data-no-translate></select></label>
       <div aria-label="Theme" class="theme-pick" role="group"><button aria-label="Light theme" data-theme-choice="light" title="Light theme" type="button"><svg aria-hidden="true" class="icon"><use href="#i-sun"/></svg></button><button aria-label="Dark theme" data-theme-choice="dark" title="Dark theme" type="button"><svg aria-hidden="true" class="icon"><use href="#i-moon"/></svg></button><button aria-label="System theme" data-theme-choice="system" title="System theme" type="button"><svg aria-hidden="true" class="icon"><use href="#i-monitor"/></svg></button></div>
       <button aria-label="Animations always on" aria-pressed="false" class="motion-pick" data-motion-toggle title="Animations always on" type="button"><svg aria-hidden="true" class="icon"><use href="#i-sparkle"/></svg></button>
+      <label class="language-pick"><span>Interface level</span><select class="level-pick" data-ui-level aria-label="Interface level"><option value="simple">Simple</option><option value="standard">Standard</option><option value="expert">Expert</option></select></label>
     </div>
     <span class="sidebar-version" id="app-version"></span>
+    </details>
   </div>
 </aside>
 
@@ -188,8 +200,15 @@
     <span class="slash" aria-hidden="true">/</span><span id="view-label">Observations</span>
   </div>
   <div class="top-actions">
-    <button class="route-status" id="hub-route-status" type="button">Checking connection…</button>
-    <select class="level-pick" data-ui-level aria-label="Interface level"><option value="simple">Simple</option><option value="standard">Standard</option><option value="expert">Expert</option></select>
+    <details class="action-menu workspace-status" id="workspace-status">
+      <summary title="Collection status"><svg aria-hidden="true" class="icon"><use href="#i-activity"/></svg><span class="status-chip" id="status-chip">Offline</span><svg aria-hidden="true" class="icon menu-chevron"><use href="#i-chevron"/></svg></summary>
+      <div class="action-menu-panel workspace-status-body">
+        <strong>Collection status</strong>
+        <button class="route-status" id="hub-route-status" type="button">Checking connection…</button>
+        <div id="workspace-health"></div>
+        <button class="secondary" id="collector-toggle">Start observation</button>
+      </div>
+    </details>
     <button class="quiet quick-mobile" data-quick-open type="button" aria-label="Go to a section" aria-haspopup="dialog" aria-controls="quick-dialog"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg></button>
     <div class="notify-wrap">
       <button aria-controls="notify-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Notifications" class="quiet notify-button" disabled id="notify-toggle" title="Notifications" type="button"><svg aria-hidden="true" class="icon"><use href="#i-bell"/></svg><b hidden id="notify-count">0</b></button>
@@ -204,9 +223,7 @@
         <div class="notice-footer"><div class="notice-footer-actions"><button id="notify-read" type="button">Mark all as read</button><button id="notify-rules" type="button">Notification rules</button></div><p id="notify-status" role="status"></p></div>
       </dialog>
     </div>
-    <span class="status-chip" id="status-chip">Offline</span>
-    <button class="secondary" id="collector-toggle">Start observation</button>
-    <button aria-label="Lock workspace" class="quiet" id="top-lock"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg><span>Lock</span></button>
+    <button aria-label="Lock workspace" title="Lock workspace" class="quiet" id="top-lock"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></button>
   </div>
 </header>
 
@@ -233,13 +250,15 @@
   <ol aria-label="Setup progress" class="setup-progress"><li id="setup-account"><span>1</span> Connect account</li><li id="setup-sources"><span>2</span> Choose sources</li><li id="setup-observe"><span>3</span> Start observation</li></ol>
 </div>
 
+<section class="view" hidden id="view-system-map" aria-label="System map"></section>
 <section class="view" hidden id="view-start">
   <div class="workflow-intro"><span class="eyebrow">YOUR WORKSPACE</span><h1>What would you like to do?</h1><p>Save a copy of your Telegram account, or keep a record of conversations as they change.</p></div>
-  <div class="workflow-choices">
-    <article class="card workflow-card" id="workflow-account-card"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><h2>Export my account</h2><p>Download the chats and history your account can read now. Choose dates, messages and files before starting.</p><ol><li>Connect your account</li><li>Choose what to include</li><li>Download a signed archive</li></ol><button class="primary" data-workflow="account" type="button">Export my account</button><p class="hint">No continuous observation needed. Earlier deletions and edits cannot be recovered.</p></article>
-    <article class="card workflow-card" id="workflow-investigation-card"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg><h2>Follow an investigation</h2><p>Keep new messages, observed edits and deletion notices from the chats you choose.</p><ol><li>Choose sources</li><li>Start observation explicitly</li><li>Review and export saved records</li></ol><button class="secondary" data-workflow="investigation" type="button">Set up observation</button><p class="hint">Previously saved records stay available when observation is paused.</p></article>
-  </div>
   <section class="card workflow-status" aria-label="Current workspace"><div><strong id="workflow-status-title"></strong><p id="workflow-status-copy"></p></div><button class="secondary" data-open="chats" type="button">Open saved chats</button><button class="quiet" data-open="accounts" type="button">Manage accounts</button></section>
+  <div class="workflow-choices">
+    <article class="card workflow-card workflow-link" hidden id="workflow-link-card"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><h2>Export a chat by link</h2><p>Choose a Telegram chat and review the export plan before starting.</p><form class="link-export-form" id="link-export-form"><label for="link-export-input">Chat link or @username</label><input autocomplete="off" id="link-export-input" maxlength="300" placeholder="@channel or https://t.me/…" spellcheck="false"><button class="primary" type="submit">Plan the export</button></form><div class="link-export-plan" hidden id="link-export-plan" role="status"></div><p class="hint">Checking briefly uses one permitted account. Starting an export requires a separate click.</p></article>
+    <article class="card workflow-card" id="workflow-account-card"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><h2>Export my account</h2><p>Download the chats and history your account can read now. Choose dates, messages and files before starting.</p><button class="primary" data-workflow="account" type="button">Export my account</button><p class="hint">No continuous observation needed. Earlier deletions and edits cannot be recovered.</p></article>
+    <article class="card workflow-card" id="workflow-investigation-card"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg><h2>Follow an investigation</h2><p>Keep new messages, observed edits and deletion notices from the chats you choose.</p><button class="secondary" data-workflow="investigation" type="button">Set up observation</button><p class="hint">Previously saved records stay available when observation is paused.</p></article>
+  </div>
   <section class="setup-start" hidden id="setup-start" aria-labelledby="setup-start-title">
     <span class="eyebrow">BEFORE YOU START</span><h2 id="setup-start-title">What will you use TgWitness for?</h2>
     <p class="hint">Pick a goal and we suggest the settings. It takes a minute, and everything can be changed later under Extras.</p>
@@ -250,7 +269,7 @@
     </div>
     <button class="text-link" id="setup-start-skip" type="button">Skip, I will set it up myself</button>
   </section>
-  <p class="hint">TgWitness signs the saved files. Telegram does not certify them. Export details explain what was collected and what is missing.</p>
+  <p class="hint">TgWitness signs the saved files. Export details explain what was collected and what is missing.</p>
 </section>
 
 <section class="view" id="view-observations">
@@ -305,6 +324,7 @@
     <button type="button" id="sources-tab-scope" role="tab" aria-controls="sources-panel-scope" aria-selected="true" data-source-tab="scope">Scope</button>
     <button type="button" id="sources-tab-chats" role="tab" aria-controls="sources-panel-chats" aria-selected="false" tabindex="-1" data-source-tab="chats">Chats in scope <span id="sources-tab-count" class="tab-count">0</span></button>
     <button type="button" id="sources-tab-recording" role="tab" aria-controls="sources-panel-recording" aria-selected="false" tabindex="-1" data-source-tab="recording">Recording <span id="recording-tab-dirty" class="tab-count" hidden></span></button>
+    <button type="button" id="sources-tab-secret" role="tab" aria-controls="sources-panel-secret" aria-selected="false" tabindex="-1" data-source-tab="secret">Pseudo-secret</button>
   </div>
   <div id="sources-panel-scope" role="tabpanel" aria-labelledby="sources-tab-scope">
   <form class="card padded scope-card" id="scope-form"><div class="eyebrow">Observation scope</div><h2>What this account records</h2>
@@ -330,7 +350,7 @@
     <div class="scope-exclude" id="scope-exclude"></div>
     <p class="notice warning" hidden id="scope-warning"></p>
     <div class="scope-actions"><button class="primary" type="submit">Save scope</button><span id="scope-unsaved" role="status"></span></div>
-    <details class="scope-limits"><summary>Limits of folder and whole-account modes</summary><p class="hint">Secret chats are end-to-end encrypted between two devices and never reach TgWitness. Nothing is recorded while TgWitness is not running: after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active, and the earlier history of an added chat is not fetched. Muted or read state of a folder is not applied: such chats stay observed. Inline bot buttons pressed in another app are invisible to TgWitness; the bot's reply or edit is recorded.</p></details>
+    <details class="scope-limits"><summary>Scope of folder and whole-account modes</summary><p class="hint">Secret chats are recorded in Sources → Pseudo-secret, where TgWitness itself opens or accepts the chat. After a restart TgWitness resumes the saved update position and catches up what Telegram returns; any remaining interval appears as a gap in the report. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active, and the earlier history of an added chat is not fetched. Muted or read state of a folder is not applied: such chats stay observed. Inline bot buttons pressed in another app are invisible to TgWitness; the bot's reply or edit is recorded.</p></details>
   </form>
   </div>
   <div id="sources-panel-chats" role="tabpanel" aria-labelledby="sources-tab-chats" hidden>
@@ -365,8 +385,19 @@
   </section>
   <section class="card padded" id="history-card" aria-labelledby="history-heading">
     <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>
-    <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Deleted messages and unseen past edits cannot be recovered.</p>
-    <p class="hint">For an account archive, choose Whole account above, load and review the source list, then start observation. This run uses the enabled sources listed at its start; new sources are not added to a running job.</p>
+    <p class="notice">Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.</p>
+    <details id="history-details"><summary>Details</summary>
+      <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Past deletions and edits are only available when Telegram returns them in Recent Actions.</p>
+      <p class="hint">For a separate archive of the account's current history, use Exports → Telegram account. This run only loads the enabled sources listed at its start.</p>
+    </details>
+    <fieldset id="history-options">
+      <legend>History acquisition</legend>
+      <label>Telegram transport <select id="history-transport"><option value="standard">Standard API</option><option value="takeout">Takeout export</option></select></label>
+      <label>Attachment workers <select id="history-workers"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></label>
+      <label class="check-label"><input id="history-admin" type="checkbox" checked> Preserve available edits and deletions from Recent Actions</label>
+      <label class="check-label"><input id="history-compare" type="checkbox" checked> Compare with previously saved message versions</label>
+      <p class="hint">Takeout may require approval in Telegram and a server-specified wait. Recent Actions requires administrator access. These choices stay fixed when you resume.</p>
+    </fieldset>
     <div class="chat-export-actions">
       <button class="primary" id="history-start" type="button">Load full history</button>
       <button class="secondary" id="history-pause" type="button" hidden>Pause history</button>
@@ -375,7 +406,9 @@
       <button class="quiet" id="history-report" type="button" hidden>Save signed progress report</button>
     </div>
     <p id="history-progress" role="status" aria-live="polite"></p>
+    <p id="history-availability" class="hint" role="status" hidden></p>
     <p class="hint" id="history-media"></p>
+    <p class="hint" id="history-wait"></p>
     <ul id="history-sources"></ul>
     <p class="hint">Use Export evidence to hand over the journal and saved attachments. Finishing history reads does not mean every attachment was downloaded.</p>
   </section>
@@ -401,7 +434,7 @@
     <details class="monitoring-details"><summary>What these settings affect</summary><p class="hint">Changes apply to future live updates. Turning a category back on does not recover missed events. Operational records, other group service events and explicitly requested history snapshots remain separate. These switches do not remove metadata embedded in captured messages.</p></details>
     <span id="monitoring-unsaved" class="hint" hidden></span>
   </section>
-    <section class="card padded" id="capture-form"><div class="eyebrow">Attachments</div><h2>Preserve media when available</h2><p class="muted">Downloads happen after message capture. Deleted or unavailable files may be missed; every attempt gets a recorded outcome.</p><label class="check-label"><input id="download-media" type="checkbox"> Download visible attachments</label><label for="max-media">Maximum file size, MiB</label><input id="max-media" max="2000" min="1" required step="1" type="number"><details class="media-rules-details"><summary>Limits by type</summary><p class="hint">Changing the maximum size above sets every type; adjust single types here, 1 to 2,000 MiB.</p><div class="media-rules" id="media-rules"></div></details><p id="capture-unsaved" hidden></p></section>
+    <section class="card padded" id="capture-form"><div class="eyebrow">Attachments</div><h2>Preserve media when available</h2><p class="muted">Available files are saved after their messages, with the result recorded in the journal.</p><label class="check-label"><input id="download-media" type="checkbox"> Download visible attachments</label><label for="max-media">Maximum file size, MiB</label><input id="max-media" max="2000" min="1" required step="1" type="number"><details class="media-rules-details"><summary>Limits by type</summary><p class="hint">Changing the maximum size above sets every type; adjust single types here, 1 to 2,000 MiB.</p><details id="ephemeral-media-settings"><summary>Self-destructing media</summary><label class="check-label"><input id="preserve-ephemeral-media" type="checkbox"> Include self-destructing media from excluded types</label><p class="hint">Self-destructing media bypasses type and duration exclusions. Size limits still apply; a later download may be impossible. Metadata-only and hash-only modes remain unchanged.</p></details><div class="media-rules" id="media-rules"></div></details><p id="capture-unsaved" hidden></p></section>
   <section class="card padded" id="recheck-form"><div class="eyebrow">Recheck</div><h2>Ask Telegram again for missed changes</h2>
     <p class="muted">Rechecks recover missed messages and edits and mark messages Telegram no longer returns. Priority chats are rechecked often, the rest rarely, so the account stays clear of Telegram's rate limits (FloodWait). Mark priority chats with the star in the list above.</p>
     <div class="recheck-fields"><div><label for="recheck-priority">Priority chats, every … minutes</label><input id="recheck-priority" max="1440" min="0" required step="1" type="number"></div>
@@ -414,6 +447,19 @@
       <div class="recording-actions"><button class="quiet" type="button" id="recording-discard" disabled>Discard changes</button><button class="primary" type="submit" id="recording-save" disabled>Save recording settings</button></div>
     </div>
   </form>
+  </div>
+  <div id="sources-panel-secret" role="tabpanel" aria-labelledby="sources-tab-secret" hidden>
+  <section class="card padded secret-chats" id="secret-chats"><div class="eyebrow">Pseudo-secret</div><h2>Telegram end-to-end chats of this account, kept in the journal</h2>
+    <p class="hint">Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
+    <p class="notice warning" id="secret-unavailable" hidden></p>
+    <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox"> Turn on pseudo-secret for this account</label>
+    <label class="check-label"><input id="secret-accept" type="checkbox"> Accept incoming requests automatically</label>
+    <p class="hint">An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></div>
+    <p class="hint" id="secret-status" role="status"></p>
+    <form class="secret-start" id="secret-start"><label for="secret-user">Start a chat with</label><input autocomplete="off" id="secret-user" maxlength="64" placeholder="@username or user ID" spellcheck="false"><button class="primary" type="submit">Start chat</button></form>
+    <p class="hint">The other side sees the request and must accept it on their device. Starting a chat and sending are actions of this account and are recorded.</p>
+    <div class="secret-layout"><div class="secret-list" id="secret-list"></div><div class="secret-thread" id="secret-thread"></div></div>
+  </section>
   </div>
 </section>
 
@@ -433,12 +479,23 @@
     <button id="export-task-account" type="button" data-export-task="account" aria-pressed="false" aria-controls="export-account-panel"><strong>Telegram account</strong><span>Read the history available now. Choose chats, dates and files.</span></button>
     <button id="export-task-journal" type="button" data-export-task="journal" aria-pressed="true" aria-controls="export-journal-panel"><strong>Saved observations</strong><span>Export the messages and changes already recorded by TgWitness.</span></button>
   </div>
+  <details class="collection-methods" id="collection-methods">
+    <summary>Compare collection methods</summary>
+    <dl class="collection-methods-grid">
+      <div><dt>Saved observations</dt><dd>Export saved records without reading Telegram. Observation can keep running.</dd></div>
+      <div><dt>Full history</dt><dd>Read past messages into this workspace. Pause observation first; new live changes are not recorded during history loading.</dd></div>
+      <div><dt>Telegram account</dt><dd>Download selected chats into a separate archive. Pause observation on this account first.</dd></div>
+      <div><dt>Live observation</dt><dd>Keep new messages and changes delivered while observation is running. Start it from Sources.</dd></div>
+      <div><dt data-no-translate>Trusted Live</dt><dd>Use an official Desktop or Web session with video or native JSON. Setup and hybrid comparison require manual steps. Preview.</dd></div>
+    </dl>
+    <p class="hint">Collection uses the connection configured for the selected account or recorder.</p>
+  </details>
   <div class="exports-job-link" id="exports-job-link" hidden><span id="exports-job-summary"></span><button type="button" class="quiet" data-export-task="account">Open account exports</button></div>
   <div id="export-account-panel" hidden>
   <section class="card account-export-card" id="account-export-card" hidden aria-labelledby="account-export-title">
     <div class="account-export-head">
       <div><span class="eyebrow">TELEGRAM ACCOUNT SNAPSHOT</span><h2 id="account-export-title">Export this account</h2>
-        <p>Save the chats this account can read, including Saved Messages and archived chats, with optional media and account data. TgWitness signs this archive; Telegram does not. This reads Telegram now and cannot reconstruct deleted messages or past edits.</p></div>
+        <p>Save the chats this account can read, including Saved Messages and archived chats, with optional media and account data. TgWitness signs this archive with the collector key. It reads the history Telegram returns now; live recording keeps earlier versions and deletion notices.</p></div>
       <button class="primary" id="account-export-configure" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> Configure account export</button>
     </div>
     <div class="account-export-toolbar"><div><strong>Account export jobs</strong><span class="hint">Jobs remain available after a restart. A finished archive can be downloaded again until you delete it.</span></div><button class="quiet" id="account-export-refresh" type="button">Refresh jobs</button></div>
@@ -450,7 +507,9 @@
       <div class="account-export-dialog-head"><div><span class="eyebrow">NEW ACCOUNT EXPORT</span><h2 id="account-export-dialog-title" tabindex="-1">Choose what to save</h2></div><button class="quiet" id="account-export-close" type="button" aria-label="Close export settings">×</button></div>
       <p class="muted">Every accessible chat and its full visible history are selected by default. Observation sources are separate from this export.</p>
       <p class="hint">For a personal backup, describe that purpose. You can prepare a separate sharing copy after the export finishes.</p>
+      <p class="hint" hidden id="account-export-imported-key"></p>
       <div class="export-language"><label for="account-export-language">Report language</label><select id="account-export-language" data-no-translate></select><p class="hint">Report labels use this language. Original messages stay unchanged.</p></div>
+      <div class="export-language"><label for="account-export-format">Export format</label><select id="account-export-format"><option value="tgwitness">TgWitness signed archive</option><option value="telegram_json">Telegram Desktop compatible JSON</option><option value="telegram_html">Telegram Desktop compatible HTML</option><option value="telegram_both">Telegram Desktop compatible JSON and HTML</option></select><p class="hint">Compatible views include the signed source records and file hash references. TgWitness generates these views; Telegram Desktop does not.</p></div>
       <div class="account-export-purpose"><label for="account-export-purpose">Collection purpose</label><textarea id="account-export-purpose" rows="2" maxlength="1000" required placeholder="Why this account snapshot is being collected"></textarea><p class="hint">The purpose is included in the signed export. Describe the specific investigation or request.</p><button class="secondary account-export-preset" id="account-export-minimize" type="button">Minimize collection</button><p class="hint">Turns off media and optional account data. Chat and sender filters remain yours to set.</p></div>
       <fieldset class="account-export-fieldset"><legend>Chats</legend>
         <div class="account-export-choices" id="account-export-kinds" tabindex="-1">
@@ -463,7 +522,12 @@
         <details class="account-export-message-filters"><summary>Filter by sender or message text</summary><div class="account-export-fields account-export-content-filters"><div><label for="account-export-senders">Sender IDs</label><textarea id="account-export-senders" rows="2" placeholder="Leave blank for all senders"></textarea><p class="hint">Numeric IDs separated by commas or spaces.</p></div><div><label for="account-export-phrases">Text contains</label><textarea id="account-export-phrases" rows="2" placeholder="One literal phrase per line"></textarea><p class="hint">A message matches any phrase. This is literal text, not a regular expression.</p></div></div></details>
       </fieldset>
       <fieldset class="account-export-fieldset"><legend>History dates</legend><div class="account-export-fields"><div><label for="account-export-from">From date (UTC)</label><input id="account-export-from" type="date"></div><div><label for="account-export-through">Through date (UTC)</label><input id="account-export-through" type="date"></div></div><p class="hint">Leave both blank for full visible history. Dates include the whole selected day in UTC.</p></fieldset>
-      <fieldset class="account-export-fieldset"><legend>Media</legend><div class="account-export-choices" id="account-export-media">
+      <fieldset class="account-export-fieldset"><legend>Media</legend>
+      <div class="account-export-fields"><div><label for="account-export-media-action">For selected media</label><select id="account-export-media-action"><option value="download">Download files</option><option value="hashes_only">Save server hashes only</option><option value="exclude">Keep message metadata only</option></select></div><div><label for="account-export-oversized">Files above the size limit</label><select id="account-export-oversized"><option value="exclude">Skip file bytes</option><option value="hashes_only">Save server hashes only</option></select></div></div>
+      <div class="account-export-fields"><div><label for="account-export-budget-action">When the media budget is exhausted</label><select id="account-export-budget-action"><option value="hashes_only">Save server hashes only</option><option value="stop_files">Stop file downloads and record missing files</option></select></div></div>
+      <p class="hint">Server hashes describe byte ranges of a specific file or photo size. Hash-only mode does not download the file. Unavailable or incomplete hashes are recorded explicitly.</p>
+      <details><summary>Different action for each media type</summary><div class="account-export-fields" id="account-export-media-actions"></div></details>
+      <div class="account-export-choices" id="account-export-media">
         <label><input type="checkbox" value="photo" checked> Photos</label><label><input type="checkbox" value="video" checked> Videos</label>
         <label><input type="checkbox" value="video_message" checked> Video messages</label><label><input type="checkbox" value="voice" checked> Voice messages</label>
         <label><input type="checkbox" value="audio" checked> Audio</label><label><input type="checkbox" value="document" checked> Documents</label>
@@ -478,6 +542,8 @@
       <fieldset class="account-export-fieldset"><legend>Telegram transport</legend><div class="account-export-fields"><div><label for="account-export-transport">Acquisition method</label><select id="account-export-transport"><option value="takeout">Telegram Takeout session</option><option value="regular">Regular session</option></select></div></div><p class="hint">Takeout may have a delay or be unavailable for this account. Choose regular explicitly if you want to use the ordinary session.</p></fieldset>
       </details>
       <p class="account-export-preview" id="account-export-preview" role="status"></p>
+      <button class="secondary" id="account-export-preflight" type="button">Check settings and size</button>
+      <p class="account-export-preview" id="account-export-preflight-result" role="status">The check reads a small message sample without downloading files. Final size and time may remain unknown.</p>
       <div class="account-export-dialog-actions"><button class="quiet" id="account-export-dismiss" type="button">Keep settings for later</button><button class="primary" id="account-export-start" type="submit">Start account export</button></div>
     </form>
   </dialog>
@@ -493,6 +559,7 @@
       </fieldset>
       <fieldset class="account-export-fieldset"><legend>Remove or hide personal information</legend>
         <div class="account-export-fields"><div><label for="account-disclosure-identities">Names and user IDs</label><select id="account-disclosure-identities"><option value="pseudonymize_all" selected>Pseudonymize everyone</option><option value="pseudonymize_third_parties">Pseudonymize third parties</option><option value="keep">Keep identities</option></select></div><div><label for="account-disclosure-text-mode">Message text</label><select id="account-disclosure-text-mode"><option value="keep" selected>Keep matching text</option><option value="omit">Omit message text</option></select></div></div>
+        <div class="account-export-fields"><div><label for="account-disclosure-withheld">Messages left out by the selection</label><select id="account-disclosure-withheld"><option value="collapsed" selected>One marker for each run</option><option value="each">One marker for each message</option></select><p class="hint">Markers show where the selection left messages out, without their content. A message that a disclosed reply answers always gets its own marker.</p></div></div>
         <label for="account-disclosure-disclose-ids">User IDs allowed to remain identifiable</label><textarea id="account-disclosure-disclose-ids" rows="2" placeholder="Leave blank to identify no one"></textarea><p class="hint">Only applies to the third-party mode. Names, quotes, and attachments can still identify people; review the preview.</p>
         <label for="account-disclosure-redact-terms">Additional terms to hide</label><textarea id="account-disclosure-redact-terms" rows="2" placeholder="One literal word or phrase per line"></textarea><p class="hint">Each listed term is replaced in disclosed message text. This is literal matching, not a regular expression. Review the preview for context that still identifies people.</p>
         <div class="account-export-choices account-disclosure-inclusions"><label><input id="account-disclosure-media" type="checkbox"> Include media files</label></div><p class="hint">Account profile, contacts, photos, stories, session metadata and other account data are excluded from this derivative.</p>
@@ -504,16 +571,12 @@
   </dialog>
   <div id="export-journal-panel">
   <div id="exports-progress" class="card padded" hidden role="status" aria-live="polite"><strong id="exports-progress-label"></strong><progress id="exports-progress-bar" aria-label="Download progress"></progress><span id="exports-progress-bytes" class="hint"></span><div id="exports-next" class="exports-next" hidden><strong>Review before handoff</strong><p id="exports-next-copy"></p><p id="exports-next-encrypted" hidden>Open the outer ZIP with your password first. Send the password through a separate channel.</p></div></div>
+  <details class="export-preferences"><summary>Report language and settings</summary>
   <div class="export-language">
     <label for="export-language">Report language</label><select data-no-translate id="export-language"></select>
     <span class="hint">For the signed ZIP, the readable report, the handover extract and chat exports below. Case details and contents: <a data-go-reports="settings" href="#">Report settings</a>.</span>
   </div>
-  <section class="card padded report-card report-download-card" id="export-readable-report">
-    <div class="card-heading"><div><h2>Readable report</h2><p>Choose chats, authors and dates. Review activity, saved changes and missing message IDs before downloading.</p></div><button class="primary" type="button" data-go-reports="data"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg> Configure and preview</button></div>
-    <p>The sealed report on its own: HTML to read, PDF to print and file, JSON for case systems and scripts. Each file carries its own signature.</p>
-    <div class="report-formats"><button class="secondary" data-export="html" data-no-translate type="button">HTML</button><button class="secondary" data-export="pdf" data-no-translate type="button">PDF</button><button class="secondary" data-export="json" data-no-translate type="button">JSON</button></div>
-    <p class="hint">Downloads use your saved report choices. Save changes in Build report before downloading.</p>
-  </section>
+  </details>
   <div class="evidence-hero card" data-mode-anchor data-mode-feature="signed_exports">
     <div class="evidence-symbol"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg></div>
     <div class="evidence-body">
@@ -524,6 +587,12 @@
       <small>Includes all sources through a fixed journal boundary, regardless of filters. Streaming export · ZIP limit: 4 GiB uncompressed unless changed in Parameters.</small>
     </div>
   </div>
+  <section class="card padded report-card report-download-card" id="export-readable-report">
+    <div class="card-heading"><div><h2>Readable report</h2><p>Choose chats, authors and dates. Review activity, saved changes and missing message IDs before downloading.</p></div><button class="primary" type="button" data-go-reports="data"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg> Configure and preview</button></div>
+    <p>The sealed report on its own: HTML to read, PDF to print and file, JSON for case systems and scripts. Each file carries its own signature.</p>
+    <div class="report-formats"><button class="secondary" data-export="html" data-no-translate type="button">HTML</button><button class="secondary" data-export="pdf" data-no-translate type="button">PDF</button><button class="secondary" data-export="json" data-no-translate type="button">JSON</button></div>
+    <p class="hint">Downloads use your saved report choices. Save changes in Build report before downloading.</p>
+  </section>
   <details class="export-options" id="export-more-formats"><summary>Other formats &amp; capture tools</summary>
   <div class="export-grid">
     <button class="card export-card" data-export="jsonl"><span class="file-icon"><svg aria-hidden="true" class="icon"><use href="#i-braces"/></svg></span><h3>JSONL journal</h3><p>Original event records and individual signatures. One event per line.</p><span>Download .jsonl</span></button>
@@ -531,13 +600,13 @@
   </div>
   <section class="card padded" data-mode-anchor data-mode-feature="github_capture" id="sealed-capture-option">
     <h2>GitHub Actions capture (preview)</h2>
-    <p>A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.</p>
+    <p>A fresh Telegram login, selected chats or account data, an encrypted archive and GitHub provenance.</p>
     <button class="primary" id="export-sealed" data-open="sealed" type="button">Open capture helper</button>
   </section>
   </details>
-  <section aria-labelledby="handover-title" class="card padded handover-card" data-mode-anchor data-mode-feature="handover" id="handover-card">
-    <div class="eyebrow">Data minimisation</div>
-    <h2 id="handover-title">Handover extract for a court, lawyer or abuse desk</h2>
+  <details aria-labelledby="handover-title" class="card padded handover-card" data-mode-anchor data-mode-feature="handover" id="handover-card">
+    <summary id="handover-title">Handover extract for a court, lawyer or abuse desk</summary>
+    <div class="handover-body">
     <p class="muted">Only the chats, period and people the recipient needs. Everyone else can be shown, pseudonymised or left out; text, files and profile photos have their own switches. The purpose and the rules are signed into the extract and recorded in the journal.</p>
     <form id="handover-form" novalidate>
       <label for="handover-purpose">Purpose of the handover</label>
@@ -567,18 +636,19 @@
       <div class="chat-export-actions"><button class="primary" type="submit"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download handover extract</button></div>
       <p class="hint">Records shown unchanged are verified in full by verify.py; minimised records by the signature over the original record. The password option below applies to this download too.</p>
     </form>
-  </section>
+    </div>
+  </details>
   <div class="card padded" id="export-encrypt">
     <label class="check-label"><input id="export-encrypt-on" type="checkbox"> Encrypt the downloads above with a password</label>
     <div hidden id="export-password-field"><label for="export-password">Password, at least 12 characters</label><input autocomplete="new-password" id="export-password" maxlength="256" spellcheck="false" type="password"></div>
-    <p class="hint">The file is saved as an AES-256 ZIP that 7-Zip or WinRAR opens with this password. Inside is the unchanged signed file, so <code>verify.py</code> works as before. The password is not stored; without it the file cannot be opened.</p>
+    <p class="hint">Encryption wraps the unchanged signed file. The password is not stored; without it the file cannot be opened.</p>
   </div>
   <details class="source-options" id="export-chat-tools"><summary>Capture or export one chat</summary>
-    <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button></div><p id="chat-export-progress" role="status"></p><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p><p class="hint">Attachments follow Sources → Recording: with downloads on, files within those limits are saved into the export by their SHA-256; for any other file the export names the reason.</p></form>
+    <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><label for="chat-export-files">Files</label><select id="chat-export-files"><option value="">As in Sources → Recording</option><option value="download">Download files</option><option value="hashes">Only file fingerprints (fast)</option><option value="skip">Messages only, no files</option></select><p class="hint">Messages are read first; files follow in a second stage with their own progress.</p><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button><button class="primary" hidden id="chat-export-partial-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download partial export</button></div><p id="chat-export-progress" role="status"></p><div hidden id="chat-export-partial"><p class="hint" id="chat-export-partial-info"></p><div class="chat-export-actions"><button class="secondary" id="chat-export-resume" type="button">Resume export</button><button class="quiet" id="chat-export-restart" type="button">Start over</button></div></div><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p><p class="hint">Attachments follow Sources → Recording: with downloads on, files within those limits are saved into the export by their SHA-256; for any other file the export names the reason.</p></form>
   </details>
   <section class="card padded exports-history" aria-labelledby="exports-history-title">
     <div class="card-heading compact"><div><h2 id="exports-history-title">Prepared exports</h2><p id="exports-last" class="hint"></p></div><button class="quiet" type="button" id="exports-history-refresh">Refresh</button></div>
-    <p class="hint">Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, plus the latest file. SHA-256 identifies the exact file. Preparation does not prove delivery.</p>
+    <p class="hint">Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, plus the latest file. SHA-256 identifies the exact file.</p>
     <div id="exports-history-list"></div><p id="exports-history-status" class="hint" role="status"></p>
   </section>
   </div>
@@ -624,7 +694,7 @@
         </div></fieldset>
       </fieldset>
       <label class="check-label"><input id="report-selection-gaps" type="checkbox" checked> Include missing message IDs and neighboring records</label>
-      <p class="hint">Missing numbers are gaps in the observed IDs, not proof of deletion.</p>
+      <p class="hint">Missing numbers are gaps in the observed IDs; deletions are recorded as separate notices.</p>
       <p class="report-scope-notice">Scope applies to the report. The evidence ZIP keeps the complete original journal; use a minimized handover to share only selected data.</p>
     </section>
     <div class="report-section-heading" id="report-content"><span aria-hidden="true">02</span><div><h3 tabindex="-1">Design and contents</h3><p class="hint">Choose how the report looks and what it includes.</p></div></div>
@@ -783,6 +853,19 @@
     </div>
     <label for="report-notes">Notes for the report</label><textarea id="report-notes" maxlength="4000" rows="3"></textarea>
     </fieldset>
+    <details class="report-guidance" id="report-guidance"><summary>Jurisdiction guidance · optional</summary>
+      <p class="hint">Choose the intended court's jurisdiction and procedure. Guidance helps prepare the material.</p>
+      <div class="report-grid">
+        <div><label for="report-guidance-country">Jurisdiction</label><select id="report-guidance-country" data-no-translate></select></div>
+        <div><label for="report-guidance-procedure">Procedure</label><select id="report-guidance-procedure"><option value="civil">Civil / commercial</option><option value="criminal">Criminal</option></select></div>
+      </div>
+      <label class="check-label"><input id="report-guidance-include" type="checkbox" checked> Include guidance in the report</label>
+      <label class="check-label"><input id="report-guidance-local" type="checkbox"> Add the local-language summary</label>
+      <label class="check-label"><input id="report-guidance-methods" type="checkbox"> Explain collection safeguards</label>
+      <p class="hint">Legal guidance is supplied in English. Local summaries are not certified translations. Sources and research dates travel with the report.</p>
+      <p class="hint">These choices belong to this workspace, not to saved layout configurations. Sharing copies do not inherit this selection.</p>
+      <div id="report-guidance-detail" data-no-translate lang="en" dir="ltr" aria-live="polite"></div>
+    </details>
     <details class="report-examination"><summary>Examination notes</summary>
       <p class="hint">Write the questions, method and findings in your own words. These signed notes are attributed to the report author.</p>
       <label for="report-review-question">Questions to examine</label><textarea id="report-review-question" maxlength="2000" rows="2" placeholder="What does this material need to establish?"></textarea>
@@ -801,7 +884,7 @@
       <div class="report-part-size"><label for="report-part-size">Maximum records or messages per data file</label><input id="report-part-size" required max="100000" min="500" step="1" type="number"><p class="hint">Also sets the PDF transcript limit. Larger transcripts remain in the HTML viewer and signed source files. Large data files may be split earlier.</p></div>
     </fieldset>
     <p class="studio-fixed">Trust assessment, coverage limitations and verification instructions stay in every report. Display choices do not remove signed source records.</p>
-    </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
+    </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button><button type="button" data-preview-section="guidance" aria-pressed="false" hidden>Guidance</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
     <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title">
       <div class="report-section-heading"><span aria-hidden="true">03</span><div><h3 id="report-preview-title" tabindex="-1">Inspect the actual data</h3><p class="hint">This preview uses your current choices. It does not save them or create a signed export.</p></div></div>
       <div class="report-preview-toolbar"><button class="primary" type="button" id="report-preview-run">Build preview</button><button class="secondary" type="button" id="report-preview-retry" hidden>Retry preview</button><span id="report-preview-stale" class="report-preview-stale" hidden>Choices changed. Rebuild the preview.</span></div>
@@ -814,7 +897,7 @@
     <p class="hint" id="report-status" role="status"></p>
     <p class="hint">Every report is sealed: a signature inside the file covers each of its bytes. Readers check it in the browser by dropping the file onto the report, or with <code>python verify.py report.html --fingerprint …</code>. The archive also carries <code>custody.json</code> and <code>SHA256SUMS</code>.</p>
   </form>
-  <details class="verification-details" data-mode-anchor data-mode-feature="verification" id="verification-details"><summary>Verification &amp; limitations</summary>
+  <details class="verification-details" data-mode-anchor data-mode-feature="verification" id="verification-details"><summary>Verification and evidence</summary>
     <p class="hint">Automatic timestamps and an encrypted off-site copy: <a data-go-extra="evidence" href="#">Extras → Evidence that holds up</a>.</p>
     <p class="hint">Workspace ID: <code id="export-profile-id">default</code> · <a href="/guide.html#export" rel="noopener" target="_blank">Large downloads &amp; verification</a></p>
     <div class="card padded">
@@ -823,16 +906,44 @@
       <p class="hint">Retain this fingerprint and signed checkpoints outside the collector. A self-contained archive can verify its internal consistency; independently retained records help detect replacement or truncation.</p>
     </div>
     <div class="two-columns">
-      <div class="card padded"><h2>Acquisition process receipt</h2><p class="muted">The signed journal records program hashes, dependency versions, starting scope, account, settings, run identifier, and periodic heartbeats. Local checkpoints are saved at startup, every five minutes while observing (changeable in Parameters), and on orderly stop.</p><button class="secondary" id="save-run-receipt"><svg aria-hidden="true" class="icon"><use href="#i-receipt"/></svg> Download signed run receipt</button><p class="hint">This is a collector-signed process record. It is not independent attestation or a trusted timestamp. Copy checkpoints to a separately controlled location for a stronger chain of custody.</p></div>
+      <div class="card padded"><h2>Acquisition process receipt</h2><p class="muted">The signed journal records program hashes, dependency versions, starting scope, account, settings, run identifier, and periodic heartbeats. Local checkpoints are saved at startup, every five minutes while observing (changeable in Parameters), and on orderly stop.</p><button class="secondary" id="save-run-receipt"><svg aria-hidden="true" class="icon"><use href="#i-receipt"/></svg> Download signed run receipt</button><p class="hint">This is a collector-signed process record. Copy checkpoints to a separately controlled location: a checkpoint retained there binds the journal independently.</p></div>
       <div class="card padded" data-mode-feature="timestamps_backup"><h2>External time anchoring</h2><p class="muted">Prepare an RFC 3161 request for a signed checkpoint. Submit it to a timestamp authority you trust, then verify its response against independently obtained CA certificates.</p><button class="secondary" id="save-anchor-request"><svg aria-hidden="true" class="icon"><use href="#i-clock"/></svg> Prepare timestamp request</button><p class="hint">No external service is contacted by this button. A prepared request is not a timestamp proof. The package includes instructions for checking a TSA response with OpenSSL.</p></div>
     </div>
-    <div class="card padded"><h2>Clear boundaries make stronger evidence</h2><div class="limits-table">
-      <div><strong>Message edits</strong><p>Versions are preserved when received. Intermediate changes during downtime may be missing. The sender is not necessarily the editor.</p></div>
-      <div><strong>Deletions</strong><p>Earlier captured content remains. Telegram usually does not supply the deleter or exact deletion time. Unscoped notices remain account-level observations.</p></div>
-      <div><strong>Reactions &amp; membership</strong><p>Counts, recent reactors, service messages, and participant updates are recorded when delivered. These are not guaranteed complete lists.</p></div>
-      <div><strong>Coverage &amp; time</strong><p>Collector starts, stops, detected disconnects, and heartbeats are recorded. Brief outages can escape detection. Times depend on the collector's clock.</p></div>
-      <div><strong>Integrity &amp; authenticity</strong><p>Signatures bind saved bytes to this collector's key. They do not establish Telegram origin, truthfulness, trusted time, or protection from an operator controlling the signing key.</p></div>
-    </div></div>
+    <div class="card padded" id="evidence-boundaries"><h2>What counts as evidence</h2>
+      <p class="muted">Evidence is what a recipient verifies with verify.py and the collector fingerprint. Everything else supports it and cites the records it rests on.</p>
+      <div class="two-columns">
+        <div><h3>Evidence: signed and verifiable</h3><div class="limits-table">
+          <div><strong>Journal records</strong><p>Messages, edit versions, deletion notices, reactions and membership events, each signed at capture and chained to the previous record.</p></div>
+          <div><strong>Media</strong><p>Saved files, bound by their SHA-256 to the signed record that names them.</p></div>
+          <div><strong>Signed exports</strong><p>Evidence ZIP, chat export, account export and handover extract: the manifest signature covers the hash of every file.</p></div>
+          <div><strong>Independent confirmations</strong><p>Checkpoints retained by another party, witness records, RFC 3161 and OpenTimestamps receipts, and attested collection runs.</p></div>
+        </div></div>
+        <div><h3>Supporting material</h3><div class="limits-table">
+          <div><strong>Analysis</strong><p>AI summaries, dossiers, charts, indicators and device hints are derived from records. Cite the record each statement rests on.</p></div>
+          <div><strong>Operator statements</strong><p>Case details, notes, Case Board comments and handover notes are the operator's statements; a signed report preserves them as written.</p></div>
+          <div><strong>Missing messages</strong><p>Message numbers not observed and messages missing on recheck are gaps in observation, not deletion notices.</p></div>
+          <div><strong>Reading copies</strong><p>HTML and PDF views and website demos are for reading. Verify the signed ZIP.</p></div>
+        </div></div>
+      </div>
+      <h3>Minimum for evidence</h3>
+      <p class="muted">All three required conditions, covering the last exported record. verify.py prints the same groups.</p>
+      <div class="limits-table">
+        <div><strong>Required · Integrity</strong><p>verify.py checks every signature, the record chain and all file hashes.</p></div>
+        <div><strong>Required · Signer key</strong><p>The recipient compares the collector fingerprint with a copy received separately.</p></div>
+        <div><strong>Required · External time</strong><p>A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.</p></div>
+        <div><strong>Supporting · Witness with its own key</strong><p>A second key retained the journal head. Who controls that key is a custody fact the verifier cannot check.</p></div>
+        <div><strong>Supporting · Retained checkpoint</strong><p>A checkpoint the recipient received earlier, through another channel, shows that the records up to it were not changed afterwards.</p></div>
+        <div><strong>Supporting · Attested collection run</strong><p>A GitHub Actions run or an Intel TDX deployment shows that the signing key was created inside the attested collection run.</p></div>
+      </div>
+      <p class="hint" data-no-translate><code>python verify.py evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TSA-ROOT.pem --require evidence</code></p>
+      <h3>Reading the records</h3>
+      <div class="limits-table">
+        <div><strong>Message edits</strong><p>Each edit Telegram delivers is a new signed version next to the earlier ones.</p></div>
+        <div><strong>Deletions</strong><p>A deletion is a separate notice next to the saved content. The chat's admin log, read by an admin account, names the deleting administrator.</p></div>
+        <div><strong>Reactions &amp; membership</strong><p>Counts, recent reactors, service messages and participant updates are recorded as Telegram shows them to this account.</p></div>
+        <div><strong>Coverage &amp; time</strong><p>Starts, stops, disconnects and heartbeats are recorded, and every report lists the gaps. Observed times come from the collector clock; timestamps and witness records bind the journal to outside time.</p></div>
+      </div>
+    </div>
   </details>
 </section>
 
@@ -892,6 +1003,9 @@
       <label for="replica-interval">How often, every … minutes (1 to 1,440)</label><input id="replica-interval" max="1440" min="1" required step="1" type="number">
       <label for="replica-retention">Object Lock retention in days (0 uses the bucket's default)</label><input id="replica-retention" type="number" min="0" max="36500">
       <label for="replica-mode">Object Lock mode</label><select id="replica-mode"><option value="GOVERNANCE">Governance</option><option value="COMPLIANCE">Compliance: nobody can delete or shorten it, including the bucket owner</option></select>
+      <label class="check-label"><input id="replica-evidence" type="checkbox"> Require Compliance retention for every copied object</label>
+      <label for="replica-recipient">Recipient public key (X25519, base64; optional)</label><input id="replica-recipient" maxlength="44" spellcheck="false" autocomplete="off">
+      <p class="hint">With a recipient key, recovery also requires the recipient's private key. Keep it separately. Changing the recipient starts a separate copy.</p>
     </details>
     <button class="secondary" type="submit">Save off-site copy</button> <button class="quiet" id="replica-test" type="button">Test connection</button> <button class="quiet" id="replica-sync" type="button">Copy now</button> <button class="quiet" id="replica-key" type="button">Download encryption key</button>
     <div class="hint health-detail" id="replica-status" role="status"></div>
@@ -922,6 +1036,7 @@
     <p class="hint" hidden id="alerts-host">This collector runs on a sealed server: an opened SSH port or a login there is sent as a problem.</p>
     <label class="check-label"><input id="alerts-changes" type="checkbox"> Changes: deleted, edited and missing messages in observed chats, grouped into one notification per check (every minute unless changed in Parameters)</label>
     <label class="check-label"><input id="alerts-completions" type="checkbox"> Completed tasks: history, exports and storage copies</label>
+    <label class="check-label"><input id="alerts-watchlists" type="checkbox"> Watchlist hits from lists set to send an alert</label>
     <label class="check-label"><input id="alerts-text" type="checkbox"> Include short excerpts of deleted and edited messages. Off by default: with it on, message text leaves this machine.</label>
     <div class="alerts-daily"><label class="check-label"><input id="alerts-daily" type="checkbox"> Daily summary of observed chats at</label><select aria-label="Hour of the daily summary, server time" id="alerts-hour"></select><span class="hint">server time</span></div>
     <button class="secondary" type="submit">Save notifications</button> <button class="quiet" id="alerts-test" type="button">Send test</button> <button class="quiet" id="alerts-clear" type="button">Remove destinations</button>
@@ -940,7 +1055,7 @@
 
   <div class="extra-panel" id="extras-cloud" hidden role="region" aria-labelledby="extras-cloud-title">
     <div class="extra-panel-heading"><div><span class="eyebrow">24/7 SERVER</span><h2 id="extras-cloud-title" tabindex="-1">Keep collecting when your computer is off.</h2><p>Choose where the workspace runs. You own the cloud account and pay the provider directly. The panel opens through an HTTPS tunnel.</p><div class="brand-strip" data-service-icons="hetzner,digitalocean,vultr,cloudflare"></div></div><button class="quiet" data-extra-close="cloud" type="button">Back to extras</button></div>
-    <div class="provider-highlight"><span class="eyebrow">CONFIDENTIAL COMPUTING · PHALA CLOUD</span><h3>Check the environment that collected the record</h3><p>Intel TDX isolates the virtual machine's memory from the host. Hardware attestation lets the verifier compare its measured environment with the expected configuration and code.</p><div class="provider-benefits"><span>Hardware attestation</span><span>Measured configuration</span><span>Encrypted storage</span><span>No SSH in production</span></div><p class="hint">This adds a check on the collector's environment. It does not certify the truth of a message. Live deployment acceptance on Phala is still pending.</p><button class="secondary" type="button" id="cloud-choose-phala">Choose Phala Cloud</button></div>
+    <div class="provider-highlight"><span class="eyebrow">CONFIDENTIAL COMPUTING · PHALA CLOUD</span><h3>Check the environment that collected the record</h3><p>Intel TDX isolates the virtual machine's memory from the host. Hardware attestation lets the verifier compare its measured environment with the expected configuration and code.</p><div class="provider-benefits"><span>Hardware attestation</span><span>Measured configuration</span><span>Encrypted storage</span><span>No SSH in production</span></div><p class="hint">This adds a check on the collector's environment. Deployment, verification and the sealed attestation certificate have run on Phala Cloud itself.</p><button class="secondary" type="button" id="cloud-choose-phala">Choose Phala Cloud</button></div>
     <p class="notice" hidden id="cloud-active"></p>
     <div class="health-detail" hidden id="cloud-health" role="status"></div>
     <p class="notice warning" hidden id="cloud-remote">This panel is reached over a network, so it does not take cloud tokens. Create servers from TgWitness on your own computer, or run the commands below.</p>
@@ -1101,7 +1216,7 @@
     <p class="hint">Both connections start disabled. Closing this panel does not stop a recorder. Each recorder starts paused after a restart.</p>
     <div id="capture-connections" class="capture-connections"></div>
     <p class="hint" id="capture-load-message" role="status" aria-live="polite"></p>
-    <details class="card padded capture-explanation"><summary>Set up recorders and understand the evidence</summary><p>Deploy the optional containers first, then copy each recorder's control token and key fingerprint into its connection settings. These control requests use the address you supply directly; the recorder's collection proxy is configured separately.</p><p>Browser capture saves screenshots, MHTML and extracted text on detected changes and at intervals. It can miss changes between observations. AyuGram capture preserves a local SQLite database; it does not yet interpret message edits or deletions. Video is optional and starts only with capture enabled.</p><p>The panel verifies signed checkpoints and original ZIP exports against the pinned recorder key. This detects changed exported bytes; it does not authenticate a website's claims or provide an independent timestamp. Keep checkpoints or witness receipts on a separate host.</p><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md" target="_blank" rel="noopener noreferrer">Deployment and verification guide ↗</a></p></details>
+    <details class="card padded capture-explanation"><summary>Set up recorders and understand the evidence</summary><p>Deploy the optional containers first, then copy each recorder's control token and key fingerprint into its connection settings. These control requests use the address you supply directly; the recorder's collection proxy is configured separately.</p><p>Browser capture saves screenshots, MHTML and extracted text on detected changes and at intervals. It can miss changes between observations. AyuGram capture preserves a local SQLite database; it does not yet interpret message edits or deletions. Video is optional and starts only with capture enabled.</p><p>The panel verifies signed checkpoints and original ZIP exports against the pinned recorder key. Keep checkpoints or witness receipts on a separate host.</p><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md" target="_blank" rel="noopener noreferrer">Deployment and verification guide ↗</a></p></details>
   </div>
 
   <div class="extra-panel service-section" id="extras-storage" hidden role="region" aria-labelledby="extras-storage-title">
@@ -1223,7 +1338,7 @@
     <h3>Docker, next to this collector</h3><pre id="witness-docker"></pre>
     <h3>On another server</h3><pre id="witness-remote"></pre>
     <h3>Check it later</h3><pre id="witness-verify"></pre>
-    <p class="hint">A running witness records missing or invalid collector answers. Verification compares retained checkpoints with the full export and detects missing or invalid signed posts in a channel export. Witness downtime and posting failures leave intervals without external anchors; signatures do not prove complete Telegram delivery.</p>
+    <p class="hint">A running witness records missing or invalid collector answers. Verification compares retained checkpoints with the full export and detects missing or invalid signed posts in a channel export. Witness downtime and posting failures leave intervals without external anchors; the posts that were made anchor the journal head at the moment each one was published.</p>
     <h3>Witness options</h3><pre id="witness-options"></pre>
     <p class="hint">How often it checks, how long it waits, which checks it posts (all, only a new head or a problem, only problems) and the words of its posts are options of the witness itself: on its command line, in its environment or in a JSON file given with <code>--config</code>. Wording never affects verification: verify.py checks the signed token at the end of every post.</p>
   </details>
@@ -1235,7 +1350,7 @@
     <form class="github-form" id="github-form">
       <div class="replica-fields">
         <div><label for="github-repository">Repository</label><input data-no-translate id="github-repository" maxlength="200" placeholder="github.com/phishdestroy/TgWitness" required spellcheck="false" autocomplete="off"></div>
-        <div><label for="github-ref">Tag, branch or commit</label><input data-no-translate id="github-ref" maxlength="200" placeholder="v0.8.1" required spellcheck="false" autocomplete="off"></div>
+        <div><label for="github-ref">Tag, branch or commit</label><input data-no-translate id="github-ref" maxlength="200" placeholder="v0.9.1" required spellcheck="false" autocomplete="off"></div>
       </div>
       <button class="primary" type="submit">Check now</button>
     </form>
@@ -1274,16 +1389,16 @@
 <section class="view" hidden id="view-connection">
   <section class="card padded connect-guide" id="connect-guide" aria-labelledby="connect-title" hidden>
     <details id="connect-details"><summary id="connect-toggle">Connection route</summary><div class="connect-body">
-    <div class="connect-heading"><div><div class="eyebrow">Before you connect</div><h2 id="connect-title">Choose how this account connects</h2><p class="hint">Choose a route, check it, then apply. Your saved connection keeps working while you prepare.</p></div><span class="eyebrow" id="connect-step">1. Choose a route</span></div>
+    <div class="connect-heading"><div><div class="eyebrow">Connection route</div><h2 id="connect-title">How this account reaches Telegram</h2><p class="hint">Choose a route, check it, then apply. Your saved connection keeps working while you prepare.</p></div><span class="eyebrow" id="connect-step">1. Choose a route</span></div>
     <div class="connect-current"><strong id="connect-current">Current connection</strong><p class="hint" id="connect-check-result" role="status">Not checked yet</p><div class="route-actions"><button type="button" class="secondary" id="connect-check">Check now</button><button type="button" class="secondary" id="connect-start" hidden>Start tunnel</button><button type="button" class="quiet" id="connect-stop" hidden>Stop tunnel</button></div></div>
     <fieldset id="connect-fields"><legend class="sr-only">Connection settings</legend>
-      <div class="connect-scope"><label>Apply to<select id="connect-scope"><option value="account">This account</option><option value="group">An account group</option><option value="all">All accounts</option></select></label><label id="connect-group-wrap" hidden>Account group<select id="connect-group"></select></label></div>
+      <div class="connect-scope"><label>Use this route for<select id="connect-scope"><option value="account">This account</option><option value="group">An account group</option><option value="all">All accounts</option></select></label><label id="connect-group-wrap" hidden>Account group<select id="connect-group"></select></label></div>
       <label class="check-label" id="connect-keep-wrap" hidden><input type="checkbox" id="connect-keep" checked>Keep accounts that already have their own route</label>
       <div class="connect-routes" role="group" aria-label="Connection route">
         <button type="button" class="connect-route" data-connect-mode="direct" aria-pressed="false"><strong>Direct</strong><span>This machine's IP</span></button>
         <button type="button" class="connect-route" data-connect-mode="vpn" aria-pressed="false"><strong>VPN</strong><span>Import WireGuard</span></button>
         <button type="button" class="connect-route" data-connect-mode="proxy" aria-pressed="false"><strong>My proxy</strong><span>Server or proxy URL</span></button>
-        <button type="button" class="connect-route" data-connect-mode="mtproxy" aria-pressed="false"><strong>Public MTProto</strong><span>Automatic pool</span></button>
+        <button type="button" class="connect-route" data-connect-mode="mtproxy" aria-pressed="false"><strong>Public MTProxy</strong><span>Automatic pool</span></button>
         <button type="button" class="connect-route" data-connect-mode="warp" aria-pressed="true"><strong>WARP</strong><span>Managed local tunnel</span></button>
       </div>
       <p id="connect-note" class="hint"></p>
@@ -1295,7 +1410,7 @@
       </div>
       <div id="connect-vpn-fields" hidden><label>WireGuard profile<textarea id="connect-wireguard" maxlength="16384" spellcheck="false" autocomplete="off" placeholder="[Interface]&#10;PrivateKey = …&#10;Address = …&#10;&#10;[Peer]&#10;PublicKey = …&#10;Endpoint = …&#10;AllowedIPs = 0.0.0.0/0, ::/0"></textarea></label><p class="hint">One profile per account. OpenVPN and IPsec can run outside TgWitness; use Direct through that host VPN or enter its SOCKS5 gateway. Host VPN status is not verified here.</p></div>
       <div id="connect-setup-fields"><label class="check-label"><input type="checkbox" id="connect-consent">Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.</label><p class="hint"><a href="https://www.cloudflare.com/application/terms/" target="_blank" rel="noopener noreferrer">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.</p></div>
-      <p id="connect-warp-note" class="hint">Each selected account gets its own local tunnel. Cloudflare chooses the exit address and country; separate tunnels may share an exit IP. WARP does not authenticate message content.</p>
+      <p id="connect-warp-note" class="hint">Each selected account gets its own local tunnel. Cloudflare chooses the exit address and country; separate tunnels may share an exit IP.</p>
       <details><summary>External requests</summary><label class="check-label"><input type="checkbox" id="connect-outside" checked>Use this route for timestamps, notifications and other requests outside Telegram</label><p class="hint">Applying replaces a separately configured external proxy. MTProxy carries only Telegram, so external requests stay off until you configure their own proxy under Advanced. Proxied routes never fall back to Direct.</p></details>
     </fieldset>
     <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" id="connect-prepare" hidden>Prepare and check</button><button type="button" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button><button type="button" id="connect-continue" hidden>Continue</button></div>
@@ -1310,7 +1425,7 @@
   <div class="workflow-handoff" hidden id="workflow-handoff"><p id="workflow-handoff-copy"></p><button class="primary" id="workflow-continue" type="button" hidden>Continue to export</button><button class="quiet" data-open="start" type="button">Change task</button></div>
   <div class="notice" hidden id="account-summary"></div>
   <div class="auth-card">
-    <div hidden id="demo-account-state"><span class="eyebrow">Sample workspace</span><h2>Try TgWitness with your account</h2><p>Stop the demo with Ctrl+C, then run from your project folder:</p><code class="start-command">python start.py</code><p class="hint">On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.</p><a class="format-help" href="/guide.html#trouble" rel="noopener" target="_blank">Installation help ↗</a><button class="primary full" data-open="observations" type="button">Back to sample journal</button></div>
+    <div hidden id="demo-account-state"><span class="eyebrow">Sample workspace</span><h2>Try TgWitness with your account</h2><p>Stop the demo with Ctrl+C, then start your own panel:</p><code class="start-command" data-no-translate>tgwitness</code><p class="hint">Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.</p><a class="format-help" href="/guide.html#trouble" rel="noopener" target="_blank">Installation help ↗</a><button class="primary full" data-open="observations" type="button">Back to sample journal</button></div>
     <form id="credentials-form" novalidate>
       <div aria-label="Sign-in method" class="login-methods" role="group">
         <button aria-pressed="true" class="login-method active" data-auth-method="phone" type="button">Phone</button>
@@ -1320,6 +1435,19 @@
       </div>
       <p class="method-description" id="method-description">Receive a login code in Telegram. Enter your 2FA password if asked.</p>
       <p class="hint" id="login-note" role="status"></p>
+      <div id="independent-session-option" hidden>
+        <label class="check-label"><input type="checkbox" id="import-new-session">Create an independent authorization</label>
+        <p class="hint" id="independent-session-pending" hidden>An independent login is pending. Select the same donor files and this option to resume it. No existing Telegram sessions are terminated.</p>
+      </div>
+      <details class="session-import-warning" id="session-import-warning" hidden aria-labelledby="session-import-warning-title">
+        <summary id="session-import-warning-title">Parallel session warning</summary>
+        <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+        <p>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</p>
+        <p>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
+        <p>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
+        <p>With “Create an independent authorization”, the donor still connects briefly. Close its original client for this step. Reopen it after TgWitness confirms that the new authorization is connected.</p>
+        <p>Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.</p>
+      </details>
       <div id="phone-fields"><label for="phone">Phone number</label><input autocomplete="tel" id="phone" pattern="\+[0-9]{7,16}" placeholder="+1 234 567 8900" required type="tel"></div>
       <div hidden id="qr-intro"><div class="qr-instructions"><span>1</span><p>Open Telegram on your phone.</p><span>2</span><p>Settings → Devices → Link Desktop Device.</p><span>3</span><p>Scan the code shown here.</p></div></div>
       <div hidden id="auth-key-fields">
@@ -1337,7 +1465,6 @@
           <button class="quiet" id="import-account" type="button">Read files without signing in</button>
         </details>
         <p class="hint" id="import-result" role="status"></p>
-        <a class="format-help" href="/guide.html#formats" rel="noopener" target="_blank">Format details &amp; examples ↗</a>
       </div>
       <details id="api-details"><summary>API ID + Hash <span id="api-state">Built-in</span></summary>
         <p class="hint" id="api-required">Optional. Leave empty: TgWitness picks a working pair from its built-in pool, or uses the pair from your account file. To use your own app, <a href="https://my.telegram.org" rel="noopener noreferrer" target="_blank">get it at my.telegram.org ↗</a>
@@ -1347,6 +1474,7 @@
       </details>
       <div class="auth-actions"><button class="primary" id="auth-continue" type="submit">Continue</button><button class="primary" hidden id="start-qr" type="button">Show QR code</button></div>
       <p class="auth-progress hint" hidden id="auth-progress" role="status"></p>
+      <a class="format-help" href="/guide.html#formats" rel="noopener" target="_blank">Format details &amp; examples ↗</a>
         <dl class="import-formats" aria-label="Supported account files">
           <div><dt><code>.session</code></dt><dd><strong>Telethon or Pyrogram</strong></dd></div>
           <div><dt><code>.zip</code></dt><dd><strong>Telegram Desktop · TData</strong></dd></div>
@@ -1358,8 +1486,8 @@
     <form hidden id="code-form"><h2>Enter your login code</h2><label for="code">Code from Telegram</label><input autocomplete="one-time-code" id="code" inputmode="numeric" pattern="[0-9 \-]{3,12}" required><button class="primary" type="submit">Confirm code</button></form>
     <form hidden id="password-form"><h2>Two-step verification</h2><label for="password">Telegram password</label><input autocomplete="off" id="password" required type="password"><button class="primary" type="submit">Sign in</button></form>
     <button class="quiet auth-back" hidden id="auth-back" type="button">← Change sign-in method</button>
-    <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button></div>
-    <div class="route-line" hidden id="route-line"><svg aria-hidden="true" class="icon"><use href="#i-link"/></svg><span id="route-line-text"></span><button class="text-link" id="route-open" type="button">Proxy settings</button></div>
+    <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="account-restriction" hidden id="account-restriction" role="status"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><div class="account-tools" role="group" aria-labelledby="account-tools-title"><h3 id="account-tools-title">Account security</h3><div class="account-tools-row"><button class="secondary" id="account-sessions-show" type="button">Sessions of this account</button><button class="secondary" id="account-password" type="button">Two-step password</button><button class="secondary" id="account-probe-show" type="button">Witness probe</button></div><div class="account-sessions" hidden id="account-sessions"></div><div class="account-sessions" hidden id="account-probe"></div></div><div class="account-actions" role="group" aria-labelledby="account-actions-title"><h3 id="account-actions-title">Telegram actions</h3><label class="check-label"><input id="account-read-only" type="checkbox"> Read-only: no sending, joining or bot buttons from this account</label><p class="hint">On by default for imported sessions. Turning it on cancels queued actions. Their pace is set in Parameters.</p><p class="hint" hidden id="account-action-queue" role="status"></p></div><div class="account-manage" id="account-manage" role="group" aria-labelledby="account-manage-title"><h3 id="account-manage-title">Sign-in and removal</h3><div class="account-manage-row"><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button><button class="quiet" hidden id="forget-session" type="button">Forget on this computer</button></div><p class="hint" hidden id="sign-out-locked">This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.</p></div></div>
+    <div class="route-line" hidden id="route-line"><svg aria-hidden="true" class="icon"><use href="#i-link"/></svg><span id="route-line-text"></span><button class="text-link" id="route-open" type="button">Change route</button></div>
     <section aria-labelledby="seen-by-title" class="seen-by" hidden id="seen-by"><h3 id="seen-by-title">What Telegram sees</h3><dl id="seen-by-list"></dl></section>
   </div>
   <aside aria-label="How TgWitness works" class="account-guide">
@@ -1469,6 +1597,7 @@
 
 <section class="view" hidden id="view-settings"></section>
 <section class="view" hidden id="view-board"></section>
+<section class="view" hidden id="view-topology" aria-label="Network topology"></section>
 <section class="view" hidden id="view-first-run"></section>
 <section class="view" hidden id="view-chats">
   <div class="chats-shell" data-panel="chat">
@@ -1488,17 +1617,25 @@
           <button class="quiet chat-back" id="chat-back" type="button"><svg aria-hidden="true" class="icon"><use href="#i-chevron"/></svg> Chats</button>
           <div class="chat-title"><span class="avatar lg" id="chat-avatar"></span><div><h2 id="chat-name"></h2><p id="chat-sub"></p></div></div>
           <div class="chat-actions">
-            <button class="quiet" id="chat-pattern" type="button" aria-pressed="false" aria-label="Dotted background" title="Dotted background"><svg aria-hidden="true" class="icon"><use href="#i-settings"/></svg></button>
-            <button class="primary" id="chat-export-start" aria-label="Export chat" title="Download the whole chat as a signed archive (chat.json + chat.html)" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> <span class="label" id="chat-export-label">Export chat</span></button>
+            <button class="secondary" id="chat-export-start" aria-label="Export chat" title="Download the whole chat as a signed archive (chat.json + chat.html)" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> <span class="label" id="chat-export-label">Export chat</span></button>
             <button class="primary" hidden id="chat-export-get" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Save export</button>
+            <details class="action-menu chat-tools-menu" id="chat-tools-menu">
+              <summary aria-label="Chat actions" title="Chat actions"><svg aria-hidden="true" class="icon"><use href="#i-menu"/></svg></summary>
+              <div class="action-menu-panel" id="chat-tools-panel">
+                <strong>Chat actions</strong>
+                <div class="chat-toolbar" aria-label="Chat tools">
+                  <div class="chat-history-tools"><select aria-label="How many recent messages to load" id="chat-history-limit"><option value="100">Last 100</option><option value="250">Last 250</option><option value="500">Last 500</option></select><button class="quiet" id="chat-load-history" title="Download recent messages from Telegram into this view" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Load history</button></div>
+                </div>
+                <div id="chat-recording-options"></div>
+                <button class="quiet" id="chat-pattern" type="button" aria-pressed="false"><svg aria-hidden="true" class="icon"><use href="#i-settings"/></svg> Dotted background</button>
+              </div>
+            </details>
           </div>
         </header>
-        <div class="chat-toolbar" aria-label="Chat tools">
-          <div class="chat-history-tools"><select aria-label="How many recent messages to load" id="chat-history-limit"><option value="100">Last 100</option><option value="250">Last 250</option><option value="500">Last 500</option></select><button class="quiet" id="chat-load-history" title="Download recent messages from Telegram into this view" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Load history</button></div>
-        </div>
         <div class="chat-status" id="chat-status"></div>
         <div class="export-box" hidden id="export-box" role="status"></div>
         <div class="chat-feed" id="chat-feed"></div>
+        <div class="chat-live" id="chat-live"></div>
         <div class="chat-compose-toggle" hidden id="chat-compose-toggle"><button class="secondary small" id="chat-compose-open" type="button"></button></div>
         <form class="chat-compose" id="chat-compose">
           <p class="notice warning chat-compose-warning" id="chat-compose-warning"></p>
@@ -1518,7 +1655,10 @@
   <form method="dialog" id="export-dialog-form">
     <h2 id="export-dialog-title">Export chat messages</h2>
     <div id="export-dialog-facts"></div>
+    <p class="hint" hidden id="export-imported-key"></p>
     <div id="export-saved-jobs"></div>
+    <label>History acquisition <select id="export-transport"><option value="regular">Regular session</option><option value="takeout">Telegram Takeout session</option></select></label>
+    <p class="hint">Takeout can accelerate public channel and supergroup history. Telegram may require export approval. Server-requested waits still apply.</p>
     <fieldset class="export-accounts"><legend>Period and message selection</legend>
       <label>Period <select id="export-period"><option value="all">All available history</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="month">Previous calendar month</option><option value="custom">Custom dates</option></select></label>
       <div class="field-row"><label>From date <input id="export-from" type="datetime-local"></label><label>Until (excluded) <input id="export-to" type="datetime-local"></label></div>
@@ -1543,19 +1683,31 @@
 
 <section class="view" hidden id="view-accounts">
   <div class="page-heading">
-    <div><h1>Accounts</h1><p class="page-description">Isolated workspaces — add as many as you need. Each has its own session, sources, journal and signing key, and runs its own collector. Several accounts can export one chat together.</p></div>
-    <div class="fleet-actions"><button class="primary" id="fleet-import-open" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Import accounts</button><button class="secondary" id="fleet-group-new" type="button">New group</button><button class="secondary" id="accounts-refresh"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Refresh</button></div>
+    <div><h1>Accounts</h1><p class="page-description">Manage Telegram accounts, connections and collection in one place.</p></div>
+    <div class="fleet-actions"><button class="primary" id="account-add-open" type="button">Add account</button><button class="secondary" id="fleet-import-open" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Import accounts</button><button class="secondary" id="fleet-group-new" type="button">New group</button><button class="secondary" id="accounts-refresh"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Refresh</button></div>
   </div>
   <section class="card padded fleet-import" hidden id="fleet-import">
     <div class="fleet-import-head"><div><div class="eyebrow">Bulk import</div><h2>Import many accounts at once</h2><p class="muted">Each account gets its own workspace, signing key and proxy. Files with the same name form one account, for example <code>name.session</code> with <code>name.json</code>. A session that does not sign in is not kept.</p></div><button class="quiet" id="fleet-import-close" type="button">Close</button></div>
-    <label class="pool-drop fleet-drop" id="fleet-drop"><input accept=".session,.json,.zip,.txt" id="fleet-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop account files here or choose them: .session, .json, TData .zip, StringSession .txt</span></label>
+    <label class="pool-drop fleet-drop" id="fleet-drop"><input accept=".session,.json,.zip,.txt" id="fleet-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop account files, a folder or a ZIP of accounts here, or choose files: .session, .json, TData .zip, StringSession .txt</span></label>
+    <input hidden id="fleet-folder" multiple type="file" webkitdirectory>
+    <aside class="session-import-warning" id="fleet-session-warning" aria-labelledby="fleet-session-warning-title">
+      <h3 id="fleet-session-warning-title">Parallel session warning</h3>
+      <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+      <p>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</p>
+      <p>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
+      <p>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
+    </aside>
     <div class="fleet-import-grid">
       <div><label for="fleet-group">Add to group</label><select id="fleet-group"></select></div>
       <div><label for="fleet-group-name">New group name</label><input id="fleet-group-name" maxlength="80" placeholder="e.g. Scam monitors"></div>
       <div><label for="fleet-passcode">TData passcode · optional</label><input autocomplete="off" id="fleet-passcode" maxlength="512" type="password"></div>
       <div><label for="fleet-api">API ID:Hash · optional</label><input autocomplete="off" id="fleet-api" placeholder="Built-in pool when empty" spellcheck="false"></div>
+      <div><label for="fleet-route">Connection route</label><select id="fleet-route"><option value="warp">WARP · own tunnel per account</option><option value="mtproxy">Public MTProxy · automatic pool</option><option value="direct">Direct · this machine's IP</option></select></div>
     </div>
-    <div class="fleet-import-run"><button class="primary" disabled id="fleet-import-start" type="button">Import accounts</button><button class="secondary" hidden id="fleet-import-stop" type="button">Stop after this account</button><span class="hint" id="fleet-import-summary" role="status"></span></div>
+    <p class="hint" id="fleet-route-hint" role="status"></p>
+    <label class="check-label" id="fleet-route-consent-wrap"><input type="checkbox" id="fleet-route-consent">Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.</label>
+    <p class="hint">Check sessions only reads each account's profile and settings: it signs nothing out, resets nothing and joins nothing. Only live sessions are imported. Spam blocks are not checked, because that needs a message to @SpamBot.</p>
+    <div class="fleet-import-run"><button class="secondary" id="fleet-folder-open" type="button">Choose a folder</button><button class="secondary" disabled id="fleet-import-check" type="button">Check sessions</button><button class="primary" disabled id="fleet-import-start" type="button">Import active accounts</button><button class="secondary" hidden id="fleet-import-stop" type="button">Stop after this account</button><span class="hint" id="fleet-import-summary" role="status"></span></div>
     <ol class="fleet-results" id="fleet-results"></ol>
   </section>
   <div class="accounts-overview" id="accounts-overview" aria-label="Workspace totals"></div>
@@ -1566,12 +1718,14 @@
   </div>
   <div class="accounts-bulk" id="accounts-bulk"><label class="check-label"><input id="accounts-select-page" type="checkbox"> Select this page</label><span id="accounts-selected" role="status"></span><button id="accounts-pause" class="secondary" type="button">Pause selected</button><button id="accounts-resume" class="secondary" type="button">Resume selected</button><button id="accounts-clear" class="quiet" type="button">Clear selection</button></div>
   <p id="accounts-result" class="notice" role="status" hidden></p>
-  <div class="accounts-columns" aria-hidden="true"><span></span><span>Workspace</span><span>State</span><span>Sources</span><span>Events</span><span>Queue</span><span>Actions</span></div>
+  <div class="accounts-columns" aria-hidden="true"><span></span><span>Workspace</span><span>Status</span><span>Route and exit address</span><span>Sources</span><span>Events</span><span>Queue</span><span>Actions</span></div>
   <div id="accounts-list" class="accounts-grid accounts-overview-list"></div>
   <p id="accounts-empty" class="hint" hidden>No matching workspaces.</p>
   <div class="accounts-pagination"><button id="accounts-prev" class="quiet" type="button">Previous</button><span id="accounts-page" role="status"></span><button id="accounts-next" class="quiet" type="button">Next</button></div>
   <details class="accounts-groups" id="accounts-groups"><summary>Groups and shared settings</summary><div id="fleet-groups"></div></details>
+  <details class="account-create-details" id="account-create-details"><summary>Add account</summary>
   <form class="card padded profile-create" id="account-add-form"><div class="eyebrow">Add account</div><h2>New workspace</h2><p class="muted">Create an isolated workspace, then connect a distinct Telegram account inside it. Importing the same session into two workspaces can disrupt update delivery.</p><label for="account-add-label">Workspace name</label><input id="account-add-label" maxlength="80" placeholder="e.g. Research account 2" required><label for="account-add-group">Group · optional</label><select id="account-add-group"></select><button class="secondary" type="submit">Add workspace</button><p class="hint" id="accounts-limit"></p></form>
+  </details>
 </section>
 <section class="view" hidden id="view-group"></section>
 
@@ -1590,11 +1744,11 @@
     <button type="submit" class="primary">Find sources locally</button>
   </form>
   <section class="card padded" id="ask-preview" hidden>
-    <h2>Review selected sources</h2><p class="hint">Edits and deletion notices are separate records. Missing on recheck does not establish that Telegram sent a deletion notice.</p>
-    <div class="storage-actions"><button type="button" class="secondary" id="ask-context-export">Download selected sources · Markdown + RAG JSONL</button></div><p class="hint">A local context pack with citations and a signed manifest. No AI service is contacted. The selection may be partial.</p><div id="ask-sources"></div><div id="ask-coverage"></div>
+    <h2>Review selected sources</h2><p class="hint">Edits and deletion notices are separate records. Missing on recheck is a separate observation, not a deletion notice.</p>
+    <div class="storage-actions"><button type="button" class="secondary" id="ask-context-export" disabled>Download selected sources · Markdown + RAG JSONL</button></div><p class="hint">A local context pack with citations and a signed manifest. No AI service is contacted. The selection may be partial.</p><div id="ask-sources"></div><div id="ask-coverage"></div>
     <details><summary>Data sent to the model</summary><pre id="ask-transmission" class="analysis-data"></pre></details>
     <label class="check-label"><input id="ask-consent" type="checkbox"> Process the checked sources and my question at the endpoint shown above</label>
-    <button id="ask-generate" type="button" class="primary">Generate an answer</button>
+    <button id="ask-generate" type="button" class="primary" disabled>Generate an answer</button>
   </section>
   <section class="card padded" id="ask-answer" hidden><h2>Answer with sources</h2><div id="ask-claims"></div><p id="ask-usage" class="hint"></p><button class="secondary" type="button" id="ask-save-report">Save as an analytical report</button></section>
   <section class="card padded"><div class="card-heading compact"><h2>Analytical reports</h2><button class="quiet" id="ask-refresh-reports" type="button">Refresh</button></div><div id="ask-reports"></div></section>
@@ -1623,7 +1777,7 @@
       <label class="check-label"><input id="ai-clear-key" type="checkbox"> Remove the stored API key</label>
       <div class="two-columns"><div><label for="ai-context">Maximum context characters</label><input id="ai-context" type="number" min="2000" max="64000" required></div><div><label for="ai-output">Maximum output tokens</label><input id="ai-output" type="number" min="128" max="4096" required></div><div><label for="ai-timeout">Request timeout, seconds</label><input id="ai-timeout" type="number" min="5" max="180" required></div><div><label for="ai-budget">Maximum requests per day</label><input id="ai-budget" type="number" min="1" max="1000" required></div></div>
       <details><summary>Optional cost estimate</summary><div class="two-columns"><div><label for="ai-input-price">Price per million input tokens</label><input id="ai-input-price" type="number" min="0" max="10000" step="any"></div><div><label for="ai-output-price">Price per million output tokens</label><input id="ai-output-price" type="number" min="0" max="10000" step="any"></div></div><label for="ai-currency">Currency code</label><input id="ai-currency" maxlength="3" pattern="[A-Z]{3}" value="USD"></details>
-      <p class="hint">External providers may retain submitted data according to their own policies. TgWitness does not make a retention guarantee for them.</p>
+      <p class="hint">External providers may retain submitted data according to their own policies.</p>
       <div class="route-actions"><button type="submit" class="primary">Save provider settings</button><button id="ai-test" type="button" class="secondary">Test with synthetic text</button></div>
       <p id="ai-test-result" role="status"></p>
     </form>
@@ -1636,7 +1790,7 @@
     <fieldset class="mcp-fields" id="mcp-fields" disabled>
     <div class="two-columns"><div><label for="mcp-name">Connection name</label><input id="mcp-name" required maxlength="80" autocomplete="off"></div><div><label for="mcp-duration">Access duration</label><select id="mcp-duration"><option value="24">24 hours</option><option value="168">7 days</option><option value="720">30 days</option><option value="2160">90 days</option></select></div></div>
     <fieldset class="access-group"><legend>Workspaces and chats</legend><div id="mcp-scope"></div></fieldset>
-    <fieldset class="access-group"><legend>Allowed tools</legend><label for="mcp-preset">Tool preset</label><select id="mcp-preset"><option value="all">Messages and evidence</option><option value="overview">Archive overview only</option><option value="custom">Custom</option></select><div class="mcp-tools" id="mcp-tools"></div><p class="hint">Only saved records. No Telegram actions or bulk exports.</p></fieldset>
+    <fieldset class="access-group"><legend>Allowed tools</legend><label for="mcp-preset">Tool preset</label><select id="mcp-preset"><option value="all">Messages and evidence</option><option value="overview">Archive overview only</option><option value="custom">Custom</option></select><div class="mcp-tools" id="mcp-tools"></div><p class="hint">Only saved records, read-only, no Telegram actions. The same token works with the tgwitness command line; only the command line can export messages.</p></fieldset>
     <button class="primary" type="submit">Create connection</button>
     </fieldset><p class="hint" id="mcp-form-status" role="status"></p>
   </form>

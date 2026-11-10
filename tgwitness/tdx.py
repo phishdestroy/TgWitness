@@ -35,7 +35,7 @@ SGX_EXTENSION, TCB, PCEID, FMSPC = ("1.2.840.113741.1.13.1", "1.2.840.113741.1.1
 DSTACK_EVENT = 0x08000001
 STATUSES = ("UpToDate", "SWHardeningNeeded", "ConfigurationNeeded", "ConfigurationAndSWHardeningNeeded",
             "OutOfDate", "OutOfDateConfigurationNeeded", "Revoked")
-QE_STATUSES = ("UpToDate", "OutOfDate", "ConfigurationNeeded", "OutOfDateConfigurationNeeded", "Revoked")
+QE_STATUSES = ("UpToDate", "OutOfDate", "Revoked")
 MODULE_STATUSES = ("UpToDate", "OutOfDate", "Revoked")
 RESERVED_ATTRIBUTES = sum(1 << bit for bit in (*range(1, 4), *range(7, 16), *range(23, 27), *range(32, 62)))
 MEASUREMENTS = ("mrtd", "rtmr0", "rtmr1", "rtmr2")
@@ -137,6 +137,16 @@ def pem_chain(text):
         raise QuoteError("Unreadable certificate chain") from None
 
 
+def chain_summary(raw):
+    return [{"subject": certificate.subject.rfc4514_string(), "issuer": certificate.issuer.rfc4514_string(),
+             "serial": format(certificate.serial_number, "x"),
+             "not_before": certificate.not_valid_before_utc.isoformat(),
+             "not_after": certificate.not_valid_after_utc.isoformat(),
+             "sha256": certificate.fingerprint(hashes.SHA256()).hex(),
+             "pinned_root": certificate.fingerprint(hashes.SHA256()).hex() == INTEL_ROOT_SHA256}
+            for certificate in pem_chain(parse_quote(raw)["pck_chain"])]
+
+
 def in_window(start, end, now):
     return (start is None or start <= now) and (end is None or now <= end)
 
@@ -236,6 +246,8 @@ def signed_document(collateral, name, root, crls, now, what):
 
 
 def converge(platform, component):
+    if platform not in STATUSES or component not in MODULE_STATUSES:
+        raise QuoteError("Unsupported TCB status convergence: " + str(platform) + ", " + str(component))
     if component == "Revoked":
         return "Revoked"
     if component == "OutOfDate" and platform in ("UpToDate", "SWHardeningNeeded"):
@@ -535,8 +547,8 @@ def measured(raw, event_log):
 
 def compare_measurements(report, expected):
     if not expected:
-        return "unavailable", ("pass --tdx-measurements with MRTD and RTMR0-2 computed from the dstack OS image "
-                               "(dstack-mr measure); without them the firmware, kernel and command line are not compared")
+        return "unavailable", ("the published dstack OS image was not compared (--tdx-image none); without it the "
+                               "firmware, kernel and command line are not checked")
     differ = [name for name in MEASUREMENTS if str(expected.get(name, "")).lower().removeprefix("0x") != report[name]]
     if differ:
         return "fail", "differ from the expected image: " + ", ".join(differ)

@@ -1,6 +1,10 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
+
+![Deployment & recovery](assets/presentation/chapter-operate.svg)
+
 # A live showcase of selected public channels
 
-**Access → Public showcase** creates a separate, read-only page using the existing
+**More tools → Access → Public showcase** creates a separate, read-only page using the existing
 access-token system. It reads the installation's saved observations. It does not
 start a collector, sign in to Telegram or acquire a channel for a visitor.
 
@@ -9,7 +13,7 @@ start a collector, sign in to Telegram or acquire a channel for a visitor.
 1. Save a source profile for each public channel you want to show. A channel must
    have a public username in its latest saved profile; groups and private chats
    are not eligible.
-2. Open **Access → Public showcase** (or `/showcase-manage.html`) as the administrator.
+2. Open **More tools → Access → Public showcase** (or `/showcase-manage.html`) as the administrator.
 3. Select channels across up to 16 workspaces, enter the public page title, and
    choose a link lifetime of 1, 7 or 30 days. Internal workspace labels are not
    published. Up to 64 channels can be included.
@@ -48,9 +52,9 @@ exclude the channel. Refresh source profiles when public visibility changes.
 Readers may already have saved material they previously received.
 
 The original signed records stay unchanged. The displayed projection is signed
-separately and carries hashes referencing its original records. A projection
-signature authenticates the displayed statement; it is not the original event's
-signature over redacted bytes.
+separately and carries hashes referencing its original records. The projection
+signature authenticates the displayed statement, and the referenced original records
+keep their own signatures.
 
 ## Check signatures and continuity
 
@@ -79,9 +83,9 @@ These are event counts, not unique-message counts. The settings describe the
 current configuration, not every earlier recording interval.
 
 Signature and consistency verification can detect changes relative to a retained
-boundary. It does not independently recount the signed counters, certify Telegram
-origin, demonstrate uninterrupted capture, or replace an independent witness.
-For that review, use the [evidence verifier](TRUST.md),
+boundary. Recount the reported events from the corresponding archive and review
+the acquisition intervals and retained witness checkpoints together.
+Use the [evidence verifier](TRUST.md),
 [independent witness](WITNESS.md) and [tested-scale record](VERIFICATION.md).
 Synthetic installations are visibly labelled as synthetic.
 

@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Project reference](README.md)
+
+![Project reference](assets/presentation/chapter-project.svg)
+
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="assets/presentation/tgwitness-investigation-mobile-static.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/tgwitness-investigation-static.svg">
@@ -41,7 +45,8 @@ How a case comes together, in pictures. The records are made up, for the real in
 
 [Independent witness](wiki/Independent-Witness.md)
 
-A signature shows the record wasn't changed. It doesn't prove the message came from
-Telegram, that nothing was missed or that the content is true.
+A signature shows the record wasn't changed after it was signed. Where the message
+came from and whether anything was missed are separate checks: origin from the
+account's authenticated Telegram session, completeness from the coverage and gap records.
 
 [Back to the project](../README.md) · [Documentation](README.md)

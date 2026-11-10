@@ -1,6 +1,13 @@
 import re
+import unicodedata
 
 from . import keyboard
+from . import ephemeral
+
+PROXY_LINK = re.compile(r"(?i)^(?:(?:https?://)?(?:www\.)?(?:t\.me|telegram\.me|telegram\.dog)/(?:proxy|socks)(?:[/?#]|$)"
+                        r"|tg://(?:proxy|socks)(?:[/?#]|$))")
+STORY_LINK = re.compile(r"(?i)^(?:(?:https?://)?(?:www\.)?(?:t\.me|telegram\.me|telegram\.dog)/[A-Za-z][A-Za-z0-9_]{3,31}/s/\d+"
+                        r"|tg://resolve\?\S*\bstory=)")
 
 ENTITY_TYPES = {"MessageEntityTextUrl": "text_link", "MessageEntityUrl": "link", "MessageEntityMention": "mention",
                 "MessageEntityMentionName": "mention_name", "MessageEntityEmail": "email",
@@ -49,6 +56,10 @@ def entities(text, raw_entities):
                 item[key] = entity[field]
         if item["type"] == "text_link" and deceptive(item["text"], item.get("href")):
             item["deceptive"] = True
+        if item["type"] in ("text_link", "link"):
+            risk = link_risk(item.get("href")) or link_risk(item["text"])
+            if risk:
+                item["risk"] = risk
         result.append(item)
     return result
 
@@ -59,8 +70,36 @@ def host(value):
     return name[4:] if name.startswith("www.") else name
 
 
+def comparable(value):
+    value = (value or "").strip().lower()
+    value = re.sub(r"^[a-z][a-z0-9+.-]*://", "", value)
+    return value[4:].rstrip("/") if value.startswith("www.") else value.rstrip("/")
+
+
+def mixed_script(name):
+    if "xn--" in name:
+        try:
+            name = name.encode("ascii").decode("idna")
+        except UnicodeError:
+            return True
+    return any(len({unicodedata.name(char, "UNKNOWN").split(" ")[0] for char in label if char.isalpha()}) > 1
+               for label in name.split("."))
+
+
+def link_risk(value):
+    value = (value or "").strip()
+    if PROXY_LINK.match(value):
+        return "telegram_proxy"
+    if STORY_LINK.match(value):
+        return "telegram_story"
+    found = host(value)
+    return "mixed_script" if found and mixed_script(found) else None
+
+
 def deceptive(text, href):
     shown, target = host(text), host(href)
+    if link_risk(href) in ("telegram_proxy", "telegram_story") and comparable(text) != comparable(href):
+        return True
     return bool(shown and target and shown != target and not target.endswith("." + shown))
 
 
@@ -87,7 +126,7 @@ def forward(header):
     return {k: v for k, v in found.items() if v not in (None, "")} or None
 
 
-def media_info(media):
+def media_info(media, unread=None):
     if not isinstance(media, dict) or media.get("_") in (None, "", "MessageMediaEmpty"):
         return None
     info = {"kind": media["_"]}
@@ -114,9 +153,18 @@ def media_info(media):
     webpage = media.get("webpage") if isinstance(media.get("webpage"), dict) else None
     if webpage and webpage.get("url"):
         info.update(url=webpage.get("url"), site_name=webpage.get("site_name"), title=webpage.get("title"))
-    if media.get("ttl_seconds"):
+    if media.get("ttl_seconds") and media["ttl_seconds"] != ephemeral.VIEW_ONCE:
         info["self_destruct_seconds"] = media["ttl_seconds"]
+    if facts := ephemeral.describe(media, unread):
+        info["ephemeral_media"] = facts
     return {k: v for k, v in info.items() if v not in (None, "")}
+
+
+COUNTERS = ("views", "forwards", "replies", "reactions")
+
+
+def stable(record):
+    return {key: value for key, value in record.items() if key not in COUNTERS}
 
 
 def details(raw):
@@ -129,5 +177,6 @@ def details(raw):
              "replies": (raw.get("replies") or {}).get("replies") if isinstance(raw.get("replies"), dict) else None,
              "reactions": reactions(raw.get("reactions")),
              "auto_delete_seconds": raw.get("ttl_period"), "protected": raw.get("noforwards") or None,
-             "album_id": raw.get("grouped_id"), "media_info": media_info(raw.get("media"))}
+             "album_id": raw.get("grouped_id"),
+             "media_info": media_info(raw.get("media"), None if raw.get("out") else raw.get("media_unread"))}
     return {k: v for k, v in found.items() if v not in (None, "", [], {})}

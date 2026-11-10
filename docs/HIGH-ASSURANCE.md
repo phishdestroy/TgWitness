@@ -1,10 +1,13 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
+
+![Deployment & recovery](assets/presentation/chapter-operate.svg)
+
 # High-assurance deployment
 
-A signed journal proves that records were not changed **after** signing. For serious cases
-the next question is whether anyone could have shaped the data **before** it was signed:
-who ran the collector, on which machine, and whether someone logged in to it. This optional
-mode deploys the collector so that a third party can check that, using records kept by the
-cloud provider and Cloudflare rather than the operator's word.
+High-assurance deployment adds independent checks of the collection environment to
+archive verification. The reviewer queries deployment and access records held by the
+cloud provider and Cloudflare, and an Intel TDX deployment adds hardware attestation
+of the collector's environment.
 
 Ordinary local and Docker use is unchanged. Nothing here runs unless you deploy with
 `python -m tgwitness.cloud`, and the collector reads its host only when the deployment sets
@@ -22,6 +25,26 @@ flowchart LR
     V --> J[Evidence ZIP]
 ```
 
+<details>
+<summary>On this page</summary>
+
+- [What a verifier can check](#what-a-verifier-can-check)
+- [Providers](#providers)
+- [Confidential VM on Phala Cloud (Intel TDX)](#confidential-vm-on-phala-cloud-intel-tdx)
+- [Before you start](#before-you-start)
+- [From the panel](#from-the-panel)
+- [Quick tunnel without a domain](#quick-tunnel-without-a-domain)
+- [Deploy](#deploy)
+- [Debug deployment and lock](#debug-deployment-and-lock)
+- [Remove a deployment](#remove-a-deployment)
+- [Any server (self-attested)](#any-server-self-attested)
+- [Verify](#verify)
+- [Report for evidence handover](#report-for-evidence-handover)
+- [Cloudflare as an outside witness](#cloudflare-as-an-outside-witness)
+- [Reading the deployment result](#reading-the-deployment-result)
+
+</details>
+
 ## What a verifier can check
 
 | Claim | How it is checked | Kept by |
@@ -33,11 +56,18 @@ flowchart LR
 | This exact software runs | The collector's signed source-tree hash equals a checkout of the deployed commit | Collector, checked against Git |
 | The signing key was created on that server | The key signs a statement naming the provider's server ID and the hash of the cloud-init it received | Collector, checked against the provider |
 | The journal belongs to that key and server | Every process start in the evidence ZIP carries the host measurement for that server | Evidence ZIP |
+| The Telegram key was created in the attested run | `account.authorized` records `key_origin: "created"` | Evidence ZIP |
 
-Host measurements (SSH listeners and processes, current sessions, logins in `wtmp`, the boot)
-are reported by the collector itself and are signed into every process start and into
-`host.state` records whenever they change. Root on the server could falsify them; they
-support the provider and Cloudflare records rather than replace them.
+The collector records SSH state, sessions, login history and boot information in signed
+process-start and <code>host.state</code> records. On an ordinary VM these are local inventory
+records, which the reviewer compares with the provider's independent records. The
+Intel TDX deployment below additionally verifies hardware-backed measurements.
+
+An attested deployment does not collect on an imported session key. Sign in by phone or
+QR, or use the session file for an independent login: either way the Telegram
+authorization key is created inside the attested run, the journal records
+<code>key_origin: "created"</code>, and <code>python -m tgwitness.cloud verify</code> passes
+<code>account_key</code>. A journal with an imported key fails that check.
 
 ## Providers
 
@@ -48,7 +78,7 @@ support the provider and Cloudflare records rather than replace them.
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` read-only scopes | Account events, firewall rule versions | 90 days |
 | `vultr` | `VULTR_API_KEY` | User with read access and the `activity_logs` permission | Account activity log (method, path, actor) | 30 days, longer with an audit-log subscription |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail event history | 90 days |
-| `phala` | `PHALA_CLOUD_API_KEY` | An API key of the same workspace | Application revisions: compose and environment changes, restarts, OS upgrades | While the application exists |
+| `phala` | `PHALA_CLOUD_API_KEY` | An API key of the same workspace | Application revisions and CVM operations: compose and environment changes, restarts, OS upgrades | While the application exists |
 | `generic` | none | none | none: **self-attested** | – |
 
 Use a dedicated project, team, account or sub-account for each case: the verifier's
@@ -56,7 +86,7 @@ read-only access then shows only this deployment. Credentials are read from
 `--provider-token-file` or the variable above, never from the command line. For AWS the file
 holds `ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]`; the region is `--location`.
 
-What each provider's records cannot show is printed in every report. In short: Hetzner
+Every report states the scope of each provider's records. In short: Hetzner
 logs console requests; DigitalOcean's Recovery Console, Linode's Lish/Glish and Vultr's web
 console are not logged as such, so root is locked at the first boot and a console login
 would need a password reset or a boot change, which are logged. Vultr returns the console
@@ -78,13 +108,22 @@ machines that can be debugged or migrated.
 | `tdx_compose_hash` | RTMR3, replayed from the dstack event log, measures the app-compose the collector reports |
 | `tdx_compose` | That compose is byte for byte the one the code of the deployed commit builds: source files pinned by hash, both images by digest, no other code |
 | `tdx_identity` | The attestation comes from the deployed application and instance, with keys from Phala's KMS and an encrypted disk |
-| `tdx_os` | With `--tdx-measurements`, MRTD and RTMR0-2 equal the values computed from the dstack OS image (`dstack-mr measure --json`) |
+| `tdx_os` | MRTD and RTMR0-2 equal the values the verifier computes from the dstack OS image Dstack-TEE publishes, found by the OS image hash the CVM reports, and from the ACPI tables QEMU builds for the VM's shape: firmware, kernel, initrd, command line with the root file system hash, memory, vCPUs and devices. A development image fails |
+
+The OS image (about 180 MB, of which 21 MB are kept) is downloaded once from
+[Dstack-TEE/meta-dstack](https://github.com/Dstack-TEE/meta-dstack/releases) into
+`dstack-images` beside the record; `--tdx-image FOLDER` uses another folder or an unpacked image,
+`--tdx-image none` skips the comparison. The measurement follows `dstack-mr` and the `qemu-acpi`
+crate of Dstack-TEE/dstack. Private measurement regressions compare QEMU's own ACPI
+output and a retained Phala Cloud quote; live qualification also needs the published image.
+`--tdx-measurements` still compares MRTD and RTMR0-2 given as JSON instead.
 
 Every start of the collector recorded in the journal carries such an attestation, so
-`verify --evidence` checks each start. Phala's list of application revisions serves as the
-provider log: if the compose changed after the deployment, the report fails.
+`verify --evidence` checks each start and the OS image it booted. Phala's application revisions
+and the CVM's operations serve as the provider log: a compose changed after the deployment fails
+the report, and restarts are listed for review.
 
-In the panel choose **Confidential virtual machine · Phala Cloud** under **Extras** → **Server 24/7**
+In the panel choose **Confidential virtual machine · Phala Cloud** under **More tools → Extras → Server 24/7**
 and paste a Phala Cloud API key; the quick tunnel works as on Hetzner. From the command line:
 
 ```sh
@@ -93,17 +132,73 @@ python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type td
     --provider-token-file phala-key.txt
 python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
     --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
-    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+    --source CHECKOUT_OF_COMMIT --fingerprint COLLECTOR_FINGERPRINT --report certificate.md
+python -m tgwitness.cloud check-report --report certificate.pdf --verifier-fingerprint VERIFIER_KEY
 ```
 
 `--tdx-collateral` reads Intel's certificates and revocation lists from a file instead of
 downloading them from Intel. Gateway DNS is not available here: Phala has no provider firewall
 for outgoing traffic.
 
-An attestation cannot rule out a flaw in Intel's TDX module or microcode, or physical access to
+### Offline check with verify.py
+
+A recipient without a Phala account checks the quotes with the standalone verifier, offline:
+
+```sh
+python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_FINGERPRINT
+python verify.py phala-tdx-attestation.json
+```
+
+For the quote of every `process.started` record in an evidence archive, and for the quote of a
+signed collector statement (also inside a deployment record or a published attestation record),
+`verify.py` checks the quote's ECDSA P-256 signature with its attestation key, the quoting
+enclave report's signature with the PCK certificate, that this report names the attestation key
+(SHA-256 of the key and the QE authentication data), that it comes from Intel's TDX quoting
+enclave in production mode, and the chain PCK certificate → Intel SGX PCK Platform or Processor
+CA → Intel SGX Root CA, whose SHA-256 is pinned in `verify.py`. It refuses debuggable or
+migratable TDs, checks that REPORTDATA is SHA-512 of the start record (journal key, run, source
+tree, host) or of the signed statement, and prints MRTD, RTMR0-3 and REPORTDATA.
+
+The collector also stores Intel's collateral (TCB Info, QE Identity, revocation lists and their
+issuer chains) with each quote when Intel's service answers. With it, `verify.py` checks Intel's
+signatures and revocation lists and computes the TCB status as of the recorded time, or as of
+the collateral's issue date when that is later. Without it the result reads "TCB status not
+checked (no collateral in the archive)". Which code the VM ran (the compose RTMR3 measures, the
+OS image behind MRTD and RTMR0-2), the provider log and Intel's current rating remain checks of
+`python -m tgwitness.cloud verify`; the offline check therefore marks the attested collection run
+as partial and does not by itself reach the `sealed` tier or the `attested` profile.
+
+### Attestation certificate
+
+For a Phala deployment `verify --report certificate.md` also writes the certificate: a
+self-contained `certificate.html` and an A4 `certificate.pdf` with the verdict, the chain of trust
+from Intel's root to the collector key, a comparison with ordinary and high-assurance servers,
+the measurements next to the values computed from the published image, who vouches for each
+part, the Intel certificate chain, every check, the provider log, and how to repeat the
+verification. The JSON report stays the authoritative record; the pages render it.
+
+The report is sealed, in `certificate.seal.json` and the `.tsq`/`.tsr` files beside it:
+
+| Seal | What it adds |
+| --- | --- |
+| Qualified electronic time stamp, `http://tsa.belgium.be/connect` | RFC 3161 time stamp over the exact bytes of `certificate.json` from the Belgian federal government's qualified trust service provider (FPS Policy and Support, BOSA). Its unit is listed as a qualified time-stamping service, status granted, on Belgium's EU trusted list; the root (Belgium Root CA6) and the list's entries, as of the list issued on 20 October 2026, are pinned in `tgwitness/tsa_roots.py`. Under Regulation (EU) No 910/2014, article 41, such a time stamp is presumed accurate as to date and time and as to the integrity of the data in every EU member state |
+| RFC 3161 time stamp, FreeTSA | A second, independent time stamp |
+| Verifier signature | Ed25519 over a statement naming the report's SHA-256 and every time stamp, with the verifier's own key (`--sign-with FOLDER`, default `~/.tgwitness/verifier`); the PDF carries a signature by the same key |
+
+`--timestamp URL` (repeatable) chooses other authorities, `--timestamp none` none, `--sign-with
+none` leaves the seal unsigned. `check-report` checks the report's hash, the verifier signature,
+each time stamp to a trusted root and its qualified status, and the PDF's signature. The legal
+weight of a qualified time stamp outside the EU, and of the report as a whole, is for the court
+or authority that receives it; the seal shows when the report existed and that it has not changed.
+
+The attestation relies on Intel's TDX module and microcode and on the physical integrity of
 the memory bus. Whoever controls the application in Phala's account can deploy another compose;
 it appears as a new revision with a new compose hash. The host controls the machine's time
 source and network.
+
+Deploy, verify with `--evidence`, restarts, the OS image comparison, the sealed certificate and
+destroy have run on Phala Cloud itself; see
+[the 4 November 2026 run](VERIFICATION.md#live-phala-cloud-deployment--4-november-2026).
 
 ## Before you start
 
@@ -126,7 +221,7 @@ source and network.
 
 ## From the panel
 
-On your own computer, **Extras → Server 24/7** runs the same `deploy` for Hetzner in three
+On your own computer, **More tools → Extras → Server 24/7** runs the same `deploy` for Hetzner in three
 steps: choose Europe or the United States, paste a Hetzner token (Read & Write), then review
 the server type, monthly price, address and version the panel found with that token. Nothing
 is created before you confirm. The panel shows each step as `deploy` reports it, then the
@@ -166,12 +261,20 @@ send you, and your panel token, to someone else's address. The topic is in the r
 published cloud-init: whoever has them can read the current address, which still asks for the
 panel token. The server keeps no inbound port either way.
 
+A verifier has no address key, and anyone who reads the topic can post to it. So the collector
+also posts the address itself, signed with its own Ed25519 key, and `verify` takes the newest
+post signed by the collector key in the deployment record; posts are ordered by the time ntfy.sh
+received them, not the time they claim. A collector from before this change signs nothing, and
+`verify` then takes the newest post and says so in the `statement` check; a forged post can
+only make that check fail, since the address must still answer with the collector's key.
+
 What it costs: no Cloudflare account keeps records of a quick tunnel, so `verify` reports the
-tunnel, connector and DNS check as unavailable and the result is at best `incomplete`; the
+tunnel, connector and DNS check as unavailable and the result is at best `incomplete` (on Phala
+Cloud the check passes instead: the connector runs inside the measured compose); the
 provider records, firewall, signed statement, host measurements and installer comparison are
 checked as usual. The byte comparison with the reference installer needs a deployed commit
 that already knows `--quick-tunnel`; a 0.7.0 checkout builds the domain installer and reports
-the difference. Cloudflare gives quick tunnels no uptime guarantee, allows 200 requests in
+the difference. Cloudflare offers quick tunnels for trials, allows 200 requests in
 flight and does not carry Server-Sent Events, so the panel's live updates (versions after 0.7.0)
 may not arrive through one and a view needs reloading; that part has not been tried. For a case
 that has to stand, use your own domain.
@@ -340,7 +443,7 @@ are marked for review. An unknown action never passes silently.
 3. the provider log with each action's assessment and, where the provider records it, the actor;
 4. the Cloudflare endpoints holding the tunnel's connections, configuration and audit log;
 5. the signed collector statement;
-6. what the report establishes and what it does not;
+6. what the report covers and what lies outside its scope;
 7. commands to reproduce it, and the SHA-256 of every file it was given.
 
 Hand over the report, `report.json`, `deployment.json`, the published installer and the
@@ -378,14 +481,14 @@ its log.
 Cloudflare cannot see inside Telegram's encryption, other devices on the Telegram account
 (evidence mode's device list records them from Telegram's side) or the provider's hypervisor.
 
-## What this does not establish
+## Reading the deployment result
 
-- The provider and its staff control the hypervisor, disks and network.
-- Host measurements are self-reported by the collector.
-- Earlier firewall rule contents are not in every provider log; only Linode keeps rule versions.
-- It says nothing new about message authenticity; see [Evidence](EVIDENCE.md).
+For an ordinary VM, the provider controls the host infrastructure, and local inventory
+is checked alongside provider records. For Intel TDX, the verifier additionally checks
+the hardware quote, collector binding, compose and OS measurements. Read the individual
+results to see which checks passed or were unavailable.
 
-Not yet run against real accounts: a deployment under your own domain (Cloudflare tunnel and
-DNS), the other providers, a debug deployment and `lock`, a Telegram account on such a server,
-and the live updates of later versions through a quick tunnel. Check the first deployment on
-each provider with `plan`, a debug deployment and `verify` before relying on it in a case.
+Historical firewall detail depends on the provider; Linode retains rule versions.
+The [validation record](VERIFICATION.md) lists tested deployments and remaining live
+checks, and [verification scope](EVIDENCE.md#verification-scope) connects these environment
+checks to archive acquisition and integrity.

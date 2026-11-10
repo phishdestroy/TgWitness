@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Evidence and verification](EVIDENCE.md)
+
+![Evidence & verification](assets/presentation/chapter-evidence.svg)
+
 # Independent timestamps and evidence handoff
 
 TgWitness prepares RFC 3161 requests and verifies timestamp authority (TSA) responses.
@@ -21,13 +25,26 @@ flowchart LR
 
 The collector signature binds records to its key. A trusted TSA response can
 establish that a particular checkpoint existed by the TSA's stated time. The
-checkpoint can then bind the journal prefix. This does not establish the time of
-each Telegram action or the truth of the captured content.
+checkpoint can then bind the journal prefix. This upper time bound applies to
+that committed prefix; individual Telegram actions retain their recorded event times.
 
 ## Procedure
 
-1. Retain the collector key fingerprint through a separate trusted channel. A key
-   supplied only by the examined ZIP is insufficient to identify the collector.
+The journal verifier reports backward steps and unparseable `observed_at` values
+in `chronology` when present, and includes a warning in its command output. It
+preserves the signed timestamps and still checks their signatures. A backward step
+can come from a clock correction, so review it with the host's clock records.
+Independent time comes from verified external timestamps, witness posts read from
+their public t.me page and drand rounds; `--strict` governs signer pinning and
+supported formats.
+
+Recorded drand values receive structural and hash self-consistency checks offline.
+`--check-drand` compares selected recorded rounds with HTTPS relay responses; the
+result states how many rounds were compared and which relays answered, and the
+compared rounds supply the authenticated lower time bound.
+
+1. Retain the collector key fingerprint through a separate trusted channel; it
+   identifies the collector independently of the examined ZIP.
 2. In **Exports → Prepare timestamp request**, download the selected workspace's
    request ZIP. Extract `checkpoint.json`, `timestamp.tsq`, `SHA256SUMS` and
    `README.txt`. Do not change the checkpoint bytes.
@@ -47,7 +64,8 @@ python -m tgwitness.anchor verify --checkpoint checkpoint.json --request timesta
 
 Add `--intermediates tsa-intermediates.pem` or `--openssl /path/to/openssl` if needed.
 OpenSSL must support `ts`. On Windows the verifier also searches the standard Git
-installation. OpenSSL 3.5.9 was tested locally with a synthetic CA/TSA.
+installation. OpenSSL 3.5.9 was used for the synthetic CA/TSA tests and for the live
+service check below.
 
 6. Export a signed journal ZIP after the checkpoint so it includes that prefix.
    Verify using the independently known fingerprint:
@@ -55,6 +73,10 @@ installation. OpenSSL 3.5.9 was tested locally with a synthetic CA/TSA.
 ```sh
 python tgwitness/verify.py evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
 ```
+
+   This shows that the export contains the timestamped prefix. `verify.py` reads
+   timestamp receipts only from the ZIP, where evidence mode stores them; the manual
+   reply is checked in step 5 and covers the records up to this checkpoint.
 
 7. Preserve the ZIP, checkpoint, request, reply, certificate chain, verification
    results and handoff record outside the collector. Repeat verification at receipt.
@@ -77,7 +99,7 @@ input file had different whitespace.
 | Request | With `--request`, the original query and nonce are verified |
 | TSA signature | OpenSSL verifies the signature and chain to the explicit CA |
 | Collector signature | Separately verified by the journal verifier with a pinned key |
-| Revocation | No automatic OCSP/CRL retrieval |
+| Revocation | Manual procedure: not checked. Evidence mode stores OCSP/CRL evidence that `verify.py` checks |
 | Long-term validity | No archival validation after certificate expiry |
 | Scheduled submission | Evidence mode, off by default |
 
@@ -86,9 +108,29 @@ original nonce. For this full procedure, the result's `request_checked` must be 
 Certificate verification follows the installed OpenSSL's rules and verification time.
 Long-term preservation needs a separate certificate/revocation evidence policy.
 
-A valid cryptographic signature is not automatically a qualified timestamp or a
-legal admissibility determination. If an operator fabricated observations before
-timestamping, the TSA anchors those bytes; it does not establish their truth.
+The TSA response anchors the submitted checkpoint bytes to its stated time.
+Review that result with the acquisition records and environment verification for
+the selected mode. Evidence mode includes the Belgian government's qualified TSA
+(`http://tsa.belgium.be/connect`; RFC 3161 replies are signed, so plain HTTP does not
+weaken them). With that provider's root passed to `--tsa-ca`, `verify.py` reports a
+qualified eIDAS time stamp and its time stamping unit; Regulation (EU) No 910/2014,
+article 41(2), presumes the accuracy of its time and the integrity of the bound data.
+
+### Signing certificate revocation
+
+Right after each reply, evidence mode fetches revocation evidence for the TSA signing
+certificate: an OCSP response from the certificate's AIA OCSP address, otherwise the CRL
+from its distribution point (at most 4 MiB). It is stored next to the reply as
+`checkpoint-N.<service>.ocsp` or `.crl` and exported with it. A failed fetch never holds
+back the time stamp; the `anchor.completed` record lists it as `unavailable` with the reason.
+
+`verify.py` checks the OCSP response signature (by the issuer, or by a responder certificate
+the issuer gave the OCSP signing purpose), the certificate ID and the status, and that the
+answer was issued at or after genTime or was still current then (nextUpdate). For a CRL it
+checks the issuer's signature, the same time window and that the serial number is not listed.
+It then reports `signing certificate not revoked as of <time> (OCSP|CRL)`, the failed check,
+or `revocation not checked (no OCSP/CRL in the archive)`. A signing certificate revoked at or
+before genTime fails verification; a later revocation is shown as a warning.
 
 ## Handoff record
 
@@ -98,5 +140,19 @@ gaps, verifier version and verification outcome. Sign and independently retain t
 record through your organization's process. A multi-user custody-record system is
 not implemented in TgWitness.
 
-No independent live TSA was contacted during development. Local tests create a
-synthetic CA/TSA to check compatibility and rejection of changed data, nonce or CA.
+## Live service check, 9 November 2026
+
+One RFC 3161 request was sent to each default service. Both granted it.
+
+| Service | Reply | Signing unit | Verifier result |
+| --- | --- | --- | --- |
+| `http://tsa.belgium.be/connect` | Granted, policy 2.16.56.13.6.3.1.1000 | Timestamp Unit 202301 | Qualified eIDAS time stamp |
+| `https://freetsa.org/tsr` | Granted | FreeTSA | RFC 3161 time stamp |
+
+The Belgian signing certificate carries the qcStatements compliance statement and
+matches the unit recorded in the verifier. Local tests also use a synthetic CA/TSA to
+check rejection of changed data, a changed nonce and a wrong CA.
+
+On 10 November 2026 the Belgian OCSP responder, a delegated responder certificate, answered
+"good" for Timestamp Unit 202301. FreeTSA's OCSP address (port 2560) did not answer within
+40 seconds from the test host; its CRL (PEM, 1 KB) was used instead.

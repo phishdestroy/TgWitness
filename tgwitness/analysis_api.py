@@ -27,6 +27,13 @@ def register(app, authenticate):
     def workspace(request, key):
         return reader(request).workspace(ArchiveQuery(tool="list_chats", workspace=key))
 
+    def route_view(request, key, value):
+        from .operator_privacy import connection_details, hide_addresses
+        principal = request.state.principal
+        if connection_details(principal, principal.chats(key)):
+            return value
+        return {**value, "route_host": "", "route_port": None, "route_error": hide_addresses(value.get("route_error") or "")}
+
     async def reauthorize(request):
         token = request.headers.get("authorization", "").partition(" ")[2]
         who = app.state.access.resolve(token, request.client.host if request.client else "unknown")
@@ -52,7 +59,7 @@ def register(app, authenticate):
     @app.get("/api/analysis/provider", dependencies=[Depends(authenticate)])
     async def provider(request: Request, workspace_id: str = "default"):
         try:
-            return ai.public(workspace(request, workspace_id))
+            return route_view(request, workspace_id, ai.public(workspace(request, workspace_id)))
         except Refused as exc:
             raise HTTPException(403, str(exc)) from None
 
@@ -83,7 +90,8 @@ def register(app, authenticate):
             route = state.collector.outside_route()
             async with asyncio.timeout(10):
                 result = await limited_in_thread(reads, retrieve, scoped, body, config["context_chars"])
-            return service.remember(request.state.principal, body, result, config, route)
+            answer = service.remember(request.state.principal, body, result, config, route)
+            return {**answer, "provider": route_view(request, body.workspace, answer["provider"])}
         return await execute(search)
 
     @app.post("/api/analysis/context", dependencies=[Depends(authenticate)])
@@ -201,14 +209,23 @@ def register(app, authenticate):
     async def edit(request: Request, report_id: str, body: ReportEdit, workspace_id: str = "default"):
         async def revise():
             state = workspace(request, workspace_id)
-            report = await asyncio.to_thread(get_report, request, state, report_id)
-            if len(report["analyst_revisions"]) >= 100:
-                raise ValueError("The report revision limit has been reached.")
-            report["title"] = body.title
-            report["analyst_revisions"].append({**body.model_dump(), "at": utcnow(),
-                                               "author": request.state.principal.label, "category": "analyst_note"})
-            state.vault.save("analysis-report-" + report_id, report)
-            return report
+            if not hasattr(state, "analysis_report_lock"):
+                state.analysis_report_lock = asyncio.Lock()
+            async with state.analysis_report_lock:
+                await reauthorize(request)
+                if workspace(request, workspace_id) is not state:
+                    raise Refused("This workspace is no longer available.")
+                report = await asyncio.to_thread(get_report, request, state, report_id)
+                revision = len(report["analyst_revisions"])
+                if body.expected_revision is not None and body.expected_revision != revision:
+                    raise HTTPException(409, "This report changed. Reopen it before saving your note.")
+                if revision >= 100:
+                    raise ValueError("The report revision limit has been reached.")
+                report["title"] = body.title
+                report["analyst_revisions"].append({**body.model_dump(exclude={"expected_revision"}), "at": utcnow(),
+                                                   "author": request.state.principal.label, "category": "analyst_note"})
+                state.vault.save("analysis-report-" + report_id, report)
+                return report
         return await execute(revise)
 
     @app.get("/api/analysis/reports/{report_id}/download", dependencies=[Depends(authenticate)])

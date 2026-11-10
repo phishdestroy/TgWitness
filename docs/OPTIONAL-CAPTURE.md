@@ -1,11 +1,20 @@
+[TgWitness](../README.md) / [Documentation](README.md)
+
+![Independent capture](assets/presentation/chapter-capture.svg)
+
 # Optional independent browser and AyuGram capture
 
 [Project](../README.md) · [Installation and controls](../addons/capture/README.md)
 
+**Trusted Live (preview)** adds an isolated official Telegram Desktop/Web session,
+native JSON import, guarded visual recording and an annotated continuity report.
+See [setup, verification and qualification limits](TRUSTED-LIVE.md). It uses its own
+Linux runtime and Compose project; it is not enabled by the browser/AyuGram profiles below.
+
 `tgwitness-capture` is an optional package with separate recorders. It doesn't touch
 the main collector or its signed formats.
 
-- **Extras → Independent capture** in the main panel, plus standalone English panels.
+- **More tools → Extras → Independent capture** in the main panel, plus standalone English panels.
 - Own processes, volumes, Ed25519 keys, sessions and exports.
 - Capture is off at every start; video is a separate switch, also off.
 - Chromium: PNG, MHTML and text snapshots of the selected tab, polling for changes.
@@ -35,7 +44,7 @@ main Connection settings.
 
 Get `control-token.txt` and the SHA-256 key fingerprint from the recorder panel or
 `python -m tgwitness_capture identity --data /data` over a trusted local connection. In
-**Extras → Independent capture** enter both plus the API origin, enable control, save and
+**More tools → Extras → Independent capture** enter both plus the API origin, enable control, save and
 **Check recorder**. The optional client-screen link opens Neko or your own remote desktop;
 type Telegram codes there yourself while capture is paused.
 

@@ -1,12 +1,39 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Getting started](QUICKSTART.md)
+
+![Getting started](assets/presentation/chapter-start.svg)
+
 # Install, verify and update
 
 [Project](../README.md) · [Quick start](QUICKSTART.md) · [Deployment](DEPLOYMENT.md)
 
+<details>
+<summary>On this page</summary>
+
+- [Install with one command](#install-with-one-command)
+- [Where everything runs](#where-everything-runs)
+- [Full-text search settings](#full-text-search-settings)
+- [Command-line access](#command-line-access)
+- [Verify before running](#verify-before-running)
+- [Update an existing installation](#update-an-existing-installation)
+- [Everyday commands on Ubuntu](#everyday-commands-on-ubuntu)
+- [Remove TgWitness](#remove-tgwitness)
+
+</details>
+
 ## Install with one command
 
-The guided installer includes a private Python runtime. Use the same address for
-future installations: each publication updates the installer, hashes, signatures
-and build information together.
+The project's official download service, `get.destroy.tools`, provides the guided
+installer and its signed release files. It includes a private Python runtime and
+checks package hashes and release signatures before installation. Each publication
+updates the entry scripts, hashes, signatures and build information together;
+each build also has an immutable release URL.
+
+Choose the guided installer for a short setup, or use
+[GitHub releases, source or Docker](QUICKSTART.md). These are supported installation
+paths for the same open-source project. For a deployment that requires approval of
+an exact build before execution, use [Verify before running](#verify-before-running)
+with an independently retained release-key fingerprint and the build's immutable
+URL. Updating the download service does not update an installed panel automatically.
 
 **Linux / macOS (Bash):**
 
@@ -53,15 +80,48 @@ are separate. The installer does not upload your accounts, messages or keys to
 the download site. Choosing a Cloudflare tunnel sends panel traffic through
 Cloudflare; using your own domain points to your own server.
 
+With `TGWITNESS_TRUSTED_PROXIES`, the panel accepts a single `X-Forwarded-Proto: https` from a trusted proxy to set Secure download cookies.
+
 Every installation includes **START-HERE.html** and **START-HERE.txt**, with local
 paths, commands and links to the repository. Run `tgwitness guide` to open the guide.
 On Windows, use `& "$env:LOCALAPPDATA\TgWitness\bin\tgwitness.cmd" guide` in PowerShell.
 
+## Full-text search settings
+
+[Full-text search](SEARCH.md) (preview) needs no setup. Its index is built in the
+background after an update.
+
+| Variable or command | Effect |
+| --- | --- |
+| `TGWITNESS_FULLTEXT=disk` | Default: the index is kept in `search/fulltext.sqlite3` of each workspace |
+| `TGWITNESS_FULLTEXT=memory` | No index file; the index is rebuilt at every start |
+| `TGWITNESS_FULLTEXT=off` | No index; only exact-text search |
+| `tgwitness index status` | Index state of every workspace |
+| `tgwitness stop`, `tgwitness index rebuild`, `tgwitness start` | Rebuild every index from the signed journal |
+
+The administrator's choice in **Journal → Filters → Search index** overrides the
+variable for that workspace. Commands find the data directory of the installation
+that runs them; elsewhere, add `--data-dir` with the path from `tgwitness paths`.
+For a full Ukrainian dictionary (GPL-3.0 data), install `pymorphy3-dicts-uk` in the
+installation's Python environment.
+
+## Command-line access
+
+The [command line](CLI.md) (preview) reads the archive for scripts and agents.
+
+| Variable | Effect |
+| --- | --- |
+| `TGWITNESS_URL` | Panel address for `tgwitness search`, `context`, `messages`, `stats` and `export`; default `http://127.0.0.1:8787` when a token is set |
+| `TGWITNESS_MCP_TOKEN` | Archive connection token from **More tools → Integrations → MCP**, shared with MCP clients; `--token-file` reads it from a file instead |
+| `TGWITNESS_DATA` | Data directory read directly when no `--data-dir`, URL or token is given |
+
 ## Verify before running
 
-The one-line command trusts HTTPS for its initial script. That script checks
-SHA-256 and the project's RSA signature on the application and constraints before
-installation. You can also download and verify the initial script first.
+The installer embeds the project's release public key and checks SHA-256 and RSA
+signatures on the application package and dependency lock before installing them.
+Both Bash and PowerShell stop when a required check fails. The initial script is
+delivered over HTTPS and has its own detached signature; the commands below also
+let you verify that script before executing it.
 
 The public release key is [release-signing.pub](../deploy/installer/release-signing.pub).
 Its SHA-256 is:
@@ -129,6 +189,14 @@ published, checked builds from `main`, whose commit can be newer than the last
 numbered GitHub release. The page's version comes from `pyproject.toml`; its commit
 and build ID distinguish updates within the same preview version.
 
+Publication is automatic after that exact commit passes the application and
+security checks and the signed package is authenticated, installed and checked on
+Ubuntu and Windows. Pull requests that change the installer also run `install.sh`
+and `install.ps1` twice against a local copy of the site. While checks are running,
+or if they fail, the same commands continue to install the previous checked build.
+The build manifest shows which commit is currently available; the version number
+alone may stay the same between preview updates.
+
 Use the same installation folder and OS user as before. Back up the complete data
 directory with collection stopped; `tgwitness paths` identifies it. A signed export
 is not a complete installation backup.
@@ -184,7 +252,7 @@ Before that:
 1. Export what you need (**Exports → Download signed ZIP**) and keep the signing key
    fingerprint and checkpoints outside this machine. To keep the workspace itself, copy
    the whole data folder with collection stopped.
-2. Delete servers created under **Extras → Server 24/7** from **Your servers** or with
+2. Delete servers created under **More tools → Extras → Server 24/7** from **Your servers** or with
    `python -m tgwitness.cloud destroy`; the provider bills them until they are deleted.
 3. End each account's session in Telegram under **Settings → Devices**. Deleting the
    files does not sign the session out on Telegram's side.

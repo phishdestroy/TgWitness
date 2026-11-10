@@ -8,13 +8,14 @@ PACKAGE = Path(__file__).resolve().parents[1] / "tgwitness"
 STATIC = PACKAGE / "static"
 LITERAL = re.compile(r'''(["'])((?:\\[\s\S]|(?!\1)[^\\\r\n])*)\1''')
 
-PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "tdata.py", "sessions.py", "network.py",
-                 "profiles.py", "multi_export.py", "distributed_export.py", "message_selection.py",
+PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "session_import.py", "tdata.py", "sessions.py", "network.py",
+                 "profiles.py", "distributed_export.py", "message_selection.py",
                  "alerts.py", "witness_api.py", "tuning.py", "interactions.py",
-                 "access.py", "history.py", "archive.py", "archive_api.py", "ai.py", "analysis.py", "analysis_api.py",
+                 "access.py", "history.py", "history_cursor.py", "history_transport.py", "history_admin.py",
+                 "archive.py", "archive_api.py", "ai.py", "analysis.py", "analysis_api.py",
                  "media_analysis.py", "media_analysis_api.py", "webhooks.py", "webhook_api.py", "proxy_catalog.py",
                  "proxy_sources.py", "account_export.py", "account_export_transport.py", "account_report.py", "disclosure.py",
-                 "cloud_wizard.py", "levels.py", "capture_api.py", "capture_connections.py")
+                 "cloud_wizard.py", "levels.py", "capture_api.py", "capture_connections.py", "fulltext.py", "search_api.py", "gap_analysis.py")
 
 DYNAMIC_SCRIPT_KEYS = (
     "Inline diff", "Side by side", "Raw", "Previously observed", "Newly observed version",
@@ -28,7 +29,8 @@ DYNAMIC_SCRIPT_KEYS = (
     "Recent activity", "Most deletions", "Most edits", "Name", "Sort", "Filters", "Type", "State",
     "Channels", "Groups", "Bots", "Private chats", "Auto-discovered", "Access unconfirmed", "Excluded",
     "Paused", "Priority", "Mark regular", "Mark priority", "No chats match these filters.",
-    "Recheck", "Media", "People", "Notifications", "Exports", "Telegram", "MTProxy",
+    "Recheck", "Media", "People", "Notifications", "Exports", "Gaps", "Chat state", "Telegram", "MTProxy",
+        "Metrics",
     "Photos", "Videos", "GIFs & animations", "Round video messages", "Voice messages", "Music & audio", "Stickers", "Files & documents",
     "Show affected sources", "Exclude from scope", "Ignore until visible", "Enable downloads",
     "Clear waiting queue", "Skip download-disabled notices",
@@ -45,6 +47,9 @@ DYNAMIC_SCRIPT_KEYS = (
     "Phala Cloud confidential virtual machine", "Usually a few minutes", "TgWitness installs itself in the confidential virtual machine",
     "Usually several minutes; the panel waits up to 40", "The server answers with its signing key and Intel's attestation",
     "Save the measured docker-compose file",
+    "Newest first · exact text", "Best match · word forms", "Recognized images (OCR)", "Transcripts",
+    "Messages and recognition", "Search index on disk", "Search index in memory only", "Search index off",
+    "Rebuild index",
 )
 
 
@@ -80,29 +85,66 @@ def calls(source):
             elif ch == ")":
                 depth -= 1
             i += 1
-        yield source[match.end():i - 1]
+        yield match.group().endswith("trn("), source[match.end():i - 1]
+
+
+def text_arguments(body, count):
+    depth, quote, start, i = 0, None, 0, 0
+    while i < len(body):
+        ch = body[i]
+        if quote:
+            if ch == "\\":
+                i += 1
+            elif ch == quote:
+                quote = None
+        elif ch in "\"'`":
+            quote = ch
+        elif ch in "([{":
+            depth += 1
+        elif ch in ")]}":
+            depth -= 1
+        elif ch == "," and depth == 0:
+            yield body[start:i]
+            count -= 1
+            if not count:
+                return
+            start = i + 1
+        i += 1
+    if count:
+        yield body[start:]
 
 
 def script_keys(source):
     keys = []
-    for body in calls(source):
-
-        for match in LITERAL.finditer(body):
-            if re.search(r"[=!]==?\s*$", body[:match.start()]):
-                continue
-            text = js_literal(match.group(2))
-            if re.search(r"[A-Za-z]{2}", text):
-                keys.append(text)
+    for plural, body in calls(source):
+        for argument in text_arguments(body, 2 if plural else 1):
+            for match in LITERAL.finditer(argument):
+                if re.search(r"[=!]==?\s*$", argument[:match.start()]):
+                    continue
+                text = js_literal(match.group(2))
+                if re.search(r"[A-Za-z]{2}", text):
+                    keys.append(text)
     return list(dict.fromkeys(keys))
 
 
-def all_script_keys():
+def all_script_keys(package=PACKAGE):
     keys = list(DYNAMIC_SCRIPT_KEYS)
-    paths = list(STATIC.glob("*.js"))
+    static = package / "static"
+    paths = list(static.glob("*.js"))
     for folder in ("core", "components", "views"):
-        paths.extend((STATIC / folder).glob("*.js"))
+        paths.extend((static / folder).glob("*.js"))
     for path in sorted(paths):
-        keys += script_keys(path.read_text(encoding="utf-8"))
+        if path.name == "sealed.js":
+            continue
+        source = path.read_text(encoding="utf-8")
+        keys += script_keys(source)
+        if path.name in {"system-map.js", "system-map-scene.js"}:
+            keys += [js_literal(match.group(2)) for match in LITERAL.finditer(source)
+                     if re.match(r"^[A-Z][A-Za-z]", match.group(2))
+                     and not re.search(r"[<>{}\n]", match.group(2))]
+    observer = ast.parse((package / "network_observer.py").read_text(encoding="utf-8"))
+    keys += [item.value for item in ast.walk(observer) if isinstance(item, ast.Constant)
+             and isinstance(item.value, str) and re.match(r"^[A-Z][a-z]+ ", item.value)]
 
     return list(dict.fromkeys(keys))
 

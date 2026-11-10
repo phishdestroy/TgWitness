@@ -1,3 +1,4 @@
+from . import render_data
 import base64
 import difflib
 import hashlib
@@ -11,7 +12,7 @@ from typing import Literal
 
 from pydantic import ConfigDict, Field, field_validator
 
-from . import __version__, case_assessment, i18n, message_details, report_analytics, report_charts, snapshot_analytics
+from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
 from . import report_design, report_history, report_layouts, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
@@ -100,7 +101,7 @@ class Words:
         self.table = i18n.words(self.language)
         self.direction = "rtl" if self.language in RTL else "ltr"
 
-    def __call__(self, text, **values):
+    def __call__(self, text, /, **values):
         text = self.table.get(text, text)
         if isinstance(text, dict):
             text = text.get("other") or next(iter(text.values()))
@@ -112,14 +113,14 @@ class Words:
 def text_keys():
     import ast
     from pathlib import Path
-    from .chat_export import EXPORT_LIMITS
+    from .chat_export import EXPORT_LIMITS, JOURNAL_LIMIT
     from .evidence import LIMITS
     from . import report_composition_pdf
     sources = (Path(__file__), Path(__file__).with_name("pdf_report.py"))
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -185,10 +186,10 @@ def size_text(value):
         value /= 1024
 
 
-CATEGORY_ORDER = ("message", "edited", "deleted", "media", "reaction", "member", "system")
+CATEGORY_ORDER = ("message", "edited", "deleted", "missing", "media", "reaction", "member", "system")
 CATEGORIES = {"message.new": "message", "message.snapshot": "message", "message.recovered": "message",
-              "message.edited": "edited", "message.deleted": "deleted", "message.missing_on_recheck": "deleted",
-              "media.saved": "media"}
+              "message.edited": "edited", "message.deleted": "deleted", "message.missing_on_recheck": "missing",
+              "media.saved": "media", "media.hashed": "media"}
 TITLE_KINDS = ("target.changed", "source.discovered", "target.removed")
 VERSION_KINDS = ("message.new", "message.snapshot", "message.recovered", "message.edited")
 CHANGE_KINDS = ("message.edited", "message.deleted", "message.missing_on_recheck")
@@ -205,6 +206,7 @@ def category(kind):
 
 def category_label(say, name):
     return {"message": say("Messages"), "edited": say("Edits"), "deleted": say("Deletions"), "media": say("Files"),
+            "missing": say("Missing on recheck"),
             "reaction": say("Reactions"), "member": say("Membership"), "system": say("System")}[name]
 
 
@@ -212,11 +214,11 @@ def kind_label(say, kind):
     return {"message.new": say("New message"), "message.snapshot": say("History snapshot"),
             "message.recovered": say("Recovered message"), "message.edited": say("Edited message"),
             "message.deleted": say("Deletion notice"), "message.missing_on_recheck": say("Missing on recheck"),
-            "media.saved": say("Saved file")}.get(kind, kind)
+            "media.saved": say("Saved file"), "media.hashed": say("File hashes; content not downloaded")}.get(kind, kind)
 
 
 class Digest:
-    def __init__(self):
+    def __init__(self, processors=None, rows_listed=60):
         self.categories = dict.fromkeys(CATEGORY_ORDER, 0)
         self.chats, self.titles, self.media, self.senders = {}, {}, {}, set()
         self.first = self.last = self.first_hash = None
@@ -228,6 +230,7 @@ class Digest:
         self.own_messages, self.own_total, self.own_scope = [], 0, set()
         self.trust_signals = {"drand": 0, "starts": 0, "tdx": 0}
         self.analytics = report_analytics.Analytics()
+        self.metrics = metrics.Pipeline(processors, rows_listed)
 
     @staticmethod
     def seen(table, value, at):
@@ -237,6 +240,7 @@ class Digest:
 
     def add(self, event):
         self.analytics.add(event)
+        self.metrics.add(event)
         kind, payload, chat = event["kind"], event["payload"], event["chat_id"]
         if kind == "beacon.drand":
             self.trust_signals["drand"] += 1
@@ -272,6 +276,11 @@ class Digest:
             self.indicators.message(payload.get("text"), shown_details(payload),
                                     {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
                                     event["observed_at"])
+        if kind == "webapp.inspected" and isinstance(payload.get("addresses"), list):
+            from .webapp import note_indicators
+            note_indicators(self.indicators, payload["addresses"], "mini app",
+                            {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
+                            event["observed_at"])
         digest = payload.get("media_sha256") if kind == "media.saved" else None
         if isinstance(digest, str):
             self.media[digest] = {"mime_type": payload.get("mime_type"), "size": payload.get("size"),
@@ -320,7 +329,7 @@ class Digest:
                 "direct_fallbacks": self.direct, "changed": self.changed,
                 "actions": list(self.actions.values()), "action_count": self.action_count,
                 "own_messages": self.own_messages, "own_total": self.own_total, "own_scope": sorted(self.own_scope),
-                "analytics": self.analytics.result()}
+                "analytics": self.analytics.result(), "processors": self.metrics.result()}
 
 
 def describe_anchor(checkpoint_name, checkpoint, proof_name, proof, query=None, *, public_key=None,
@@ -338,7 +347,7 @@ def describe_anchor(checkpoint_name, checkpoint, proof_name, proof, query=None, 
             entry.update(kind="rfc3161", time=timestamp_reply_summary(proof, digest, query)["time"])
             try:
                 from .tsa_roots import trusted_roots
-                entry["signed"] = timestamp_signature(proof, trusted_roots())
+                entry["signed"] = timestamp_signature(proof, trusted_roots(), include_reference=True)
             except Exception as exc:
                 entry["signed"] = None
                 entry["signature_error"] = type(exc).__name__
@@ -386,7 +395,7 @@ def standards(say, kind="evidence", stamps=0):
         rows += [("RFC 3161", say("Time-Stamp Protocol"),
                   say("Journal checkpoints in this export are stamped by independent timestamp authorities; see Timestamps.")),
                  ("eIDAS, Art. 41", say("Qualified electronic time stamps (EU)"),
-                  say("Not assessed by this report: a valid RFC 3161 token alone does not establish qualified status or legal effect."))]
+                  say("Checked here: the token's signature and the recorded bytes it covers."))]
     else:
         rows.append(("RFC 3161", say("Time-Stamp Protocol"),
                      say("Not used: a chat export is not timestamped.") if kind == "chat" else
@@ -428,6 +437,9 @@ def file_purpose(say, name):
         "custody.json": say("Chain of custody and acquisition details"),
         "SHA256SUMS": say("SHA-256 checksums of the listed payload files, for sha256sum -c"),
         "verify.py": say("Standalone verifier (Python 3.11+, cryptography)"),
+        "VERIFY.cmd": "Windows verification launcher",
+        "VERIFY.sh": "macOS/Linux verification launcher (sh VERIFY.sh)",
+        "START_HERE.txt": "Verification quick start",
         "README.txt": say("Instructions in the report language and in English"),
         "manifest.json": say("Signed list of every file with its SHA-256"),
         "manifest.sig": say("Ed25519 signature of manifest.json"),
@@ -471,8 +483,8 @@ def custody(context):
                       for ref, title, how in standards(say, kind, rfc3161_count(context.get("anchors", []), validated=True))],
         "custody_log": [{"at": context["created_at"], "action": "exported and sealed",
                          "by": options.get("examiner") or None, "tool": "TgWitness " + __version__}],
-        "statement": "Alignment with the listed practices, not certification. Integrity is verifiable; "
-                     "source authenticity and clock accuracy are not established by signatures.",
+        "statement": "Alignment with the listed practices. Integrity is verifiable with verify.py; "
+                     "retained checkpoints, witness records and timestamps bind the records to outside parties and time.",
     }
     if kind == "handover":
         handover = context["handover"]
@@ -580,13 +592,13 @@ def readme(context, files, english):
     lines += ["", say("Checksum scope"), "-" * 64,
               say("SHA256SUMS covers the payload files listed inside it. It excludes itself, manifest.json and manifest.sig."),
               say("The signed manifest also covers SHA256SUMS. manifest.sig authenticates the exact bytes of manifest.json."),
-              say("Matching hashes establish file integrity; they do not establish the identity of the signer or the truth of the messages."),
+              say("Matching hashes show that the files are unchanged; --fingerprint confirms the signer."),
               "", say("Working with the data"), "-" * 64,
               say("JSON and JSONL are UTF-8. Times are ISO 8601 in UTC; numeric Telegram IDs identify accounts and chats, not people."),
               say("Import CSV as UTF-8 and keep ID, wallet and hash columns as text. Formula-like values are escaped for spreadsheets."),
               say("Indicators are observations, not verdicts. Review their source references before importing STIX or MISP."),
               say("The PDF is a signed reading copy. Use the HTML viewer for search and the JSON or JSONL for structured analysis.")]
-    lines += ["", say("Limitations"), "-" * 64] + ["- " + say(item) for item in context["limits"]]
+    lines += ["", say("Reading this record"), "-" * 64] + ["- " + say(item) for item in context["limits"]]
     text = "\n".join(lines) + "\n"
     prefix = "\n".join(context["limits"])
     supplement = english[len(prefix):].lstrip() if english.startswith(prefix) else english.strip()
@@ -636,7 +648,6 @@ def icon(name, cls="i"):
     return '<svg class="' + cls + '" aria-hidden="true"><use href="#i-' + name + '"/></svg>'
 
 
-# Each section's icon and colour on screen (print stays plain).
 SECTION_ICONS = {"case": ("files", "blue"), "minimisation": ("eye", "violet"), "changes": ("edit", "orange"),
                  "actions": ("route", "violet"), "integrity": ("fingerprint", "blue"), "timestamps": ("seal", "teal"),
                  "coverage": ("layers", "teal"), "custody": ("route", "green"), "verify": ("check", "green"),
@@ -650,7 +661,6 @@ CSS = (
     "*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:62px}"
     "body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.55 " + SANS + "}"
     "a{color:var(--accent)}code,.mono,pre{font-family:" + MONO + "}code{font-size:.9em;overflow-wrap:anywhere}"
-    # The viewer's toolbar: not part of the document and never printed.
     ".bar{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:12px;min-height:46px;padding:6px 20px;"
     "background:var(--card);border-bottom:1px solid var(--line)}"
     ".brand{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:650;white-space:nowrap}"
@@ -686,7 +696,6 @@ CSS = (
     ".stamp-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}"
     ".stamp-state{font-size:13.5px;font-weight:650;line-height:1.3}.stamp.ok .stamp-state{color:var(--ok)}"
     ".stamp.bad .stamp-state{color:var(--bad)}.stamp-key{font:11.5px " + MONO + ";color:var(--muted);overflow-wrap:anywhere}"
-    # Summary figures: one ruled row of cells, the label above the figure.
     ".tiles{display:flex;flex-wrap:wrap;margin:22px 0 0;border-top:1px solid var(--line);"
     "border-inline-start:1px solid var(--line)}"
     ".tile{display:flex;flex-direction:column-reverse;justify-content:flex-end;flex:1 1 96px;min-width:0;"
@@ -780,7 +789,7 @@ CSS = (
     "border:1px solid var(--line);border-radius:3px;padding:4px 10px;background:var(--bg2)}.key code{font-size:11.5px;color:var(--muted)}"
     ".rec img{display:block;max-width:min(100%,420px);max-height:340px;border-radius:2px;margin:8px 0;border:1px solid var(--line)}"
     ".rec footer{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--muted);margin-top:4px}"
-    ".cat-message{--c:var(--accent)}.cat-edited{--c:var(--warn)}.cat-deleted{--c:var(--bad)}.cat-media{--c:var(--violet)}"
+    ".cat-message{--c:var(--accent)}.cat-edited,.cat-missing{--c:var(--warn)}.cat-deleted{--c:var(--bad)}.cat-media{--c:var(--violet)}"
     ".cat-reaction{--c:var(--pink)}.cat-member{--c:var(--ok)}.cat-system{--c:var(--muted)}"
     "details.raw summary{cursor:pointer;color:var(--muted);font-size:12px;margin-top:4px}"
     "details.raw pre{background:var(--code);border:1px solid var(--line);border-radius:2px;padding:10px 12px;font-size:12px;"
@@ -800,7 +809,6 @@ CSS = (
     ".meter i{display:block;height:100%;background:var(--soft)}"
     "footer.end{color:var(--muted);font-size:12px;text-align:center;margin:0 16px 28px;line-height:1.7}"
     "footer.end b{color:var(--soft)}"
-    # Chat view.
     ".chatwall{background:var(--chatbg);border-radius:6px;padding:14px clamp(8px,2vw,22px) 18px;"
     "-webkit-print-color-adjust:exact;print-color-adjust:exact}"
     ".day{text-align:center;margin:14px 0 8px}.day time{display:inline-block;background:rgba(0,0,0,.28);color:#fff;"
@@ -888,7 +896,8 @@ const mark=(kind,text)=>{stamp.classList.remove("ok","bad","partial","unknown");
     say(kind==="ok"?"Signed":kind==="bad"?"Changed":kind==="partial"?"Not yet checked":"Signed · check with verify.py");}};
 if(stamp&&node)opened(node.textContent).then(r=>{const good=r.ok&&r.fp===stamp.dataset.fp;
   mark(good?"partial":"bad",say(good?"Signature valid · this file not yet checked":"Signature does not match"));})
-  .catch(()=>mark("unknown",say("Signed · check with verify.py")));
+  .catch(e=>e instanceof SyntaxError?mark("bad",say("This file was changed after it was sealed."))
+    :mark("unknown",say("Signed · check with verify.py")));
 const zone=$("#drop");if(zone){const input=$("#drop-file"),out=$("#drop-result"),marker=new TextEncoder().encode(zone.dataset.open);
   const show=(kind,text)=>{out.className="callout "+kind;out.textContent=text;out.hidden=false;};
   const check=async file=>{show("info",say("Checking…"));const data=new Uint8Array(await file.arrayBuffer());let at=-1;
@@ -896,6 +905,8 @@ const zone=$("#drop");if(zone){const input=$("#drop-file"),out=$("#drop-result")
     if(at<0)return show("bad",say("No seal found in this file."));
     const tail=new TextDecoder().decode(data.subarray(at+marker.length)),close=zone.dataset.close;
     if(!tail.endsWith(close))return show("bad",say("The seal is not at the end of the file."));
+    // The seal is written with "<" escaped; a raw one closes the seal element and adds unsigned page content.
+    if(tail.slice(0,-close.length).includes("<"))return show("bad",say("This file was changed after it was sealed."));
     try{const r=await opened(tail.slice(0,-close.length)),content=hex(await crypto.subtle.digest("SHA-256",data.subarray(0,at)));
       if(!r.ok)return show("bad",say("The seal signature is not valid."));
       // The stamp speaks only for a file that carries this page's own seal.
@@ -1062,6 +1073,8 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
+    if cats.get("missing"):
+        summary += " " + say("Missing on recheck") + ": " + str(cats["missing"]) + "."
     if handover:
         summary = say("An extract for a stated purpose: {a} records shown unchanged and {b} minimised; {c} records of the "
                       "journal were left out.", a=handover["counts"]["unchanged"], b=handover["counts"]["minimised"],
@@ -1075,10 +1088,10 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
     gaps = len((coverage or {}).get("gaps") or [])
     hidden = [say("Who is behind an account or a chat: Telegram shows names and IDs, not identities."),
               say("That Telegram delivered everything: gaps in observation ({n}) are listed under Coverage.", n=gaps)
-              if gaps else say("That Telegram delivered everything: Telegram gives no completeness guarantee."),
-              say("Messages deleted before observation began, or who deleted a message: Telegram does not say."),
+              if gaps else say("Activity outside the observed periods: the Coverage section lists those periods."),
+              say("Messages deleted before observation began, and the deleting person where no admin log names one."),
               say("Exact times after record #{n}: they come from the collector's clock.", n=latest.get("event_count"))
-              if latest else say("Exact times: they come from the collector's clock, not from an independent timestamp.")]
+              if latest else say("Independently fixed times: observed times come from the collector clock until a timestamp or witness covers them.")]
     return summary, shows, hidden
 
 
@@ -1091,7 +1104,7 @@ def chat_brief(say, meta, stats, ids, account_text):
     shows = [say("The messages are as exported, provided the key fingerprint matches one kept apart from the collector "
                  "(verify.py checks this).")]
     if ids.get("selection_applied"):
-        shows.append(say("Absent numbers in this selection are not evidence of deletion."))
+        shows.append(say("Absent numbers in this selection were not observed; deletions are recorded as separate notices."))
     elif ids.get("numbered_per_chat") and ids.get("missing"):
         shows.append(say("{n} message numbers in this range are absent: deleted before the export, or never visible to "
                          "this account.", n=ids["missing"]))
@@ -1214,12 +1227,12 @@ def standards_section(say, number, kind="evidence", stamps=0):
     rows = [["<b>" + e(ref) + "</b><br><small>" + e(title) + "</small>", e(how)]
             for ref, title, how in standards(say, kind, stamps)]
     return (section(number, "standards", say("Standards and methodology"),
-                    say("This export follows these practices. Alignment, not certification."))
+                    say("This export follows these practices."))
             + table([say("Reference"), say("How it is applied")], rows) + "</section>")
 
 
 def limits_section(say, number, limits):
-    return (section(number, "limits", say("Limitations"), say("Read these before relying on the material."))
+    return (section(number, "limits", say("Reading this record"), say("What the records state and what binds them."))
             + "<ul>" + "".join("<li>" + e(say(item)) + "</li>" for item in limits) + "</ul></section>")
 
 
@@ -1268,7 +1281,7 @@ def viewer_meta(say, kind, context, **extra):
         cats = {c: category_label(say, c) for c in CATEGORY_ORDER}
         hidden = ["system"]
     kinds = {k: kind_label(say, k) for k in ("message.new", "message.snapshot", "message.recovered", "message.edited",
-                                              "message.deleted", "message.missing_on_recheck", "media.saved")}
+                                              "message.deleted", "message.missing_on_recheck", "media.saved", "media.hashed")}
     return {"kind": kind, "cats": cats, "hidden": hidden, "kinds": kinds, "report_id": context.get("report_id"),
             "fingerprint": context.get("fingerprint"), "iocKinds": {k: say(v) for k, v in IOC_KINDS.items()},
             "iocLead": ioc_lead(say),
@@ -1442,6 +1455,16 @@ def details_html(say, d):
     return "".join(parts)
 
 
+def timer_expected(payload):
+    return isinstance(payload.get("auto_delete"), dict) and payload["auto_delete"].get("expected") is True
+
+
+def timer_text(say, kind):
+    if kind == "message.deleted":
+        return say("The deletion was seen when the message's auto-delete timer expired: an expected removal by the timer.")
+    return say("Telegram no longer returned this message at a later check; its auto-delete timer had expired by then.")
+
+
 def reactions_text(found):
     return " ".join(str(x["reaction"]) + " " + str(x["count"]) for x in found[:20])
 
@@ -1468,7 +1491,7 @@ def ioc_rows(say, found):
 
 def ioc_lead(say):
     return say("Links, domains, wallets, Telegram accounts, phone numbers and e-mail addresses found in the recorded "
-               "messages, written so that they do not open by accident. Being listed does not make them malicious. "
+               "messages, written so that they do not open by accident. Each entry cites the record it was found in. "
                "indicators.csv, indicators.stix.json (STIX 2.1) and indicators.misp.json (MISP) carry them for abuse "
                "desks and threat-intelligence platforms.")
 
@@ -1507,13 +1530,14 @@ def ref_link(parts, folder, key, anchor, prefix=""):
 
 
 def media_text(say, info):
+    from . import ephemeral
     if not info:
         return ""
     size = " × ".join(str(info[k]) for k in ("width", "height") if info.get(k))
     return " · ".join(x for x in (info.get("file_name"), info.get("mime_type"),
                                   size_text(info["size"]) if type(info.get("size")) is int else "", size,
                                   say("{n} s", n=info["duration_seconds"]) if info.get("duration_seconds") else "",
-                                  info.get("url")) if x)
+                                  info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
 
 
 def record_html(event, say, titles, options, archive, base=""):
@@ -1547,16 +1571,30 @@ def record_html(event, say, titles, options, archive, base=""):
         if found.get("media_info"):
             parts.append('<div class="file">' + e(say(MEDIA_NAMES.get(found["media_info"]["kind"], "Media"))) + " · "
                          + e(media_text(say, found["media_info"])) + "</div>")
-    if kind == "message.deleted":
+    if kind in ("message.deleted", "message.missing_on_recheck") and timer_expected(payload):
+        parts.append('<div class="gone">' + e(timer_text(say, kind)) + "</div>")
+    elif kind == "message.deleted":
         parts.append('<div class="gone">' + e(say("Telegram reported this message as deleted.")) + "</div>")
     elif kind == "message.missing_on_recheck":
         parts.append('<div class="gone">' + e(say("Telegram no longer returned this message at a later check.")) + "</div>")
+    if kind.startswith("media.") and payload.get("ephemeral_media"):
+        from . import ephemeral
+        parts.append('<div class="file ephemeral-media">' + e(ephemeral.label(say, payload["ephemeral_media"])) + "</div>")
     if kind == "media.saved" and isinstance(payload.get("media_sha256"), str):
         digest, mime = payload["media_sha256"], payload.get("mime_type")
         parts.append('<div class="file">' + e(payload.get("original_name") or say("Saved file")) + " · " + e(mime or "—")
                      + " · " + e(size_text(payload.get("size"))) + "<br><code>" + e(digest) + "</code></div>")
         if archive and options.get("media_previews") and mime in IMAGES and re.fullmatch("[0-9a-f]{64}", digest):
             parts.append('<img loading="lazy" alt="" src="' + base + "media/" + digest + '">')
+    if kind == "media.hashed" and isinstance(payload.get("server_hashes"), dict):
+        hashes = payload["server_hashes"]
+        digest = hashlib.sha256(canonical(hashes)).hexdigest()
+        parts.append('<div class="file">' + e(payload.get("original_name") or "Attachment")
+                     + " · " + e(size_text(hashes.get("covered_bytes"))) + " · "
+                     + e(str(len(hashes.get("ranges", [])))) + " SHA-256 ranges. File content not downloaded.")
+        if archive:
+            parts.append('<br><a download href="' + base + 'hashes/' + digest + '.json">Download hash manifest</a>')
+        parts.append('</div>')
     footer = ['<span title="' + e(event["hash"]) + '">SHA-256 ' + e(short(event["hash"], 16, 6)) + "</span>"]
     times = message_times(payload)
     if times["sent_at"]:
@@ -1637,6 +1675,7 @@ def sealed_json(data, context):
 
 
 def report_data(events_again, coverage, context):
+    events_again, coverage, context = render_data.factory(events_again), render_data.detached(coverage), render_data.context(context)
     options = {**ReportOptions().model_dump(), "language": "en", **(context.get("options") or {})}
     say = Words(options["language"])
     digest, handover = context.get("report_digest") or context.get("digest") or Digest().result(), context.get("handover")
@@ -1677,7 +1716,9 @@ def report_material(context):
         return {}
     options = {**ReportOptions().model_dump(), **(context.get("options") or {})}
     examination = {key: options["review_"+key] for key in report_charts.REVIEW_FIELDS if options.get("review_"+key)}
-    raw = (context.get("report_digest") or context.get("digest") or {}).get("analytics")
+    digest = context.get("report_digest") or context.get("digest") or {}
+    raw = digest.get("analytics")
+    processors = digest.get("processors") if (digest.get("processors") or {}).get("processors") else None
     analytics = report_analytics.selected(raw, options) if raw and any(options[k] for k in
                  ("activity_chart", "hourly_chart", "participant_chart", "chat_chart", "composition_chart")) else None
     if analytics:
@@ -1687,6 +1728,7 @@ def report_material(context):
     return {**({"selection": context["selection"]} if context.get("selection") else {}),
             "presentation": {k: options[k] for k in ("template", *report_analytics.Presentation.model_fields)},
             **({"analytics": analytics} if analytics else {}),
+            **({"processors": processors} if processors else {}),
             **({"examination": {"author": "operator", **examination}} if examination else {})}
 
 
@@ -1724,7 +1766,8 @@ def message_histories(events, changed, limit=HISTORY_LIMIT):
                 continue
             item["versions"].append(version)
         elif kind in ("message.deleted", "message.missing_on_recheck"):
-            item["gone"].append({"seq": event["seq"], "kind": kind, "observed_at": event["observed_at"]})
+            item["gone"].append({"seq": event["seq"], "kind": kind, "observed_at": event["observed_at"],
+                                 **({"auto_delete": True} if timer_expected(payload) else {})})
     return found
 
 
@@ -1825,8 +1868,10 @@ def history_card(say, key, item, titles, linked=True):
                      + " · " + record_link(gone["seq"], linked and not gone.get("context_only"))
                      + (' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
                         if gone.get("context_only") else '') + '</div><p class="gone">'
-                     + e(say("Telegram does not say who deleted a message or exactly when; this is when the notice "
-                             "was observed.") if deleted else say("Telegram no longer returned this message at a later check."))
+                     + e(timer_text(say, gone["kind"]) if gone.get("auto_delete") else
+                         say("This is when the deletion notice was observed; the chat's admin log names the acting "
+                             "administrator where the account can read it.") if deleted
+                         else say("Telegram no longer returned this message at a later check."))
                      + "</p>" + kept + "</li>")
     return ('<article class="hist" id="m' + e(chat) + "-" + e(message_id) + '"><header><b>'
             + e(titles.get(chat) or say("Chat {id}", id=chat)) + " · " + e(say("message {id}", id=message_id)) + "</b>"
@@ -1841,7 +1886,6 @@ def last_saved_before(versions, seq):
 WITHHELD = {"raw": "the saved Telegram object", "text": "message text", "sender": "sender identity",
             "actor_id": "sender ID", "other chats": "other chats", "mentions or contact details":
             "mentions or contact details", "file name": "file name", "preview details": "preview details"}
-# How a handover extract treats people and content (handover.Options).
 OTHERS = {"show": "shown as recorded", "pseudonymize": "replaced by pseudonyms (P01, P02…)", "omit": "left out"}
 TEXTS = {"all": "all message text", "subjects": "text of the chosen people and the observing account only",
          "none": "no message text"}
@@ -1982,22 +2026,78 @@ def coverage_figure(say, coverage):
             out += f'<rect x="{x*1000:.3f}" y="3" width="{width*1000:.3f}" height="18" class="coverage-span coverage-span-{index}"/>'
         out += '</svg></div>'
     return (out + '<div class="coverage-axis"><span>' + when(plot["from"]) + '</span><span>' + when(plot["to"])
-            + '</span></div><p>' + e(say("Recorded intervals only. Blank space is not proof of uninterrupted collection.")) + '</p></figure>')
+            + '</span></div><p>' + e(say("Recorded intervals only. Blank space is time outside the recorded intervals.")) + '</p></figure>')
+
+
+def gap_overview(say, summary):
+    if not summary or summary.get("status") != "on":
+        return None
+    sequences = [(c.get("title") or str(c["chat_id"]), c) for c in summary.get("chats") or []]
+    if summary.get("account"):
+        sequences.append((say("Account-wide message numbering"), summary["account"]))
+    settings = summary["parameters"]
+    measured, skipped, listed = [], [], []
+    for name, item in sequences:
+        if item.get("status") != "applicable":
+            skipped.append([name, item.get("reason") or "—"])
+            continue
+        row = [name, str(item["observed_from"]) + " – " + str(item["observed_to"]), item["observed"], item["missing"],
+               format(item["density"] * 100, ".2f") + "%", item["largest_gap"]]
+        if settings["gap_service_estimate"]:
+            row.append((item.get("service_estimate") or {}).get("expected_service_in_missing", "—"))
+        measured.append(row)
+        for gap in item.get("clusters") or []:
+            listed.append([name, str(gap["low"]) + " – " + str(gap["high"]), gap["missing"],
+                           gap["after"]["message_id"], gap["after"]["observed_at"],
+                           gap["before"]["message_id"], gap["before"]["observed_at"]])
+    note = " ".join((
+        say("Parameters: gaps of {smallest} or more message numbers are listed, at most {listed} for each numbering.",
+            smallest=settings["gap_cluster_min"], listed=settings["gap_clusters_listed"]),
+        say("The account-wide numbering is measured where it applies.") if settings["gap_account_sequence"]
+        else say("The account-wide numbering is not measured."),
+        say("A service-message estimate is shown.") if settings["gap_service_estimate"]
+        else say("No service-message estimate is shown.")))
+    headers = [say("Message numbering"), say("Observed range"), say("Observed"), say("Numbers missing"), say("Density"),
+               say("Largest gap")]
+    if settings["gap_service_estimate"]:
+        headers.append(say("Estimated service messages"))
+    return {"headers": headers, "measured": measured, "skipped": skipped, "listed": listed, "note": note,
+            "lead": say("Telegram numbers messages once per channel or supergroup, and once per account across private "
+                        "chats, bots and ordinary groups. A missing number is a message that existed and was never "
+                        "observed by this collector. A gap names no actor and no reason."),
+            "listed_headers": [say("Message numbering"), say("Missing range"), say("Count"),
+                               say("Last observed number before"), say("Observed at"),
+                               say("First observed number after"), say("Observed at")],
+            "skipped_headers": [say("Message numbering"), say("Not measured because")]}
+
+
+def gap_html(say, summary):
+    view = gap_overview(say, summary)
+    if view is None:
+        return ""
+    out = "<h3>" + e(say("Missing message numbers")) + '</h3><p class="lead">' + e(view["lead"]) + "</p>"
+    if view["measured"]:
+        out += table(view["headers"], [[e(row[0])] + [num(value) for value in row[1:]] for row in view["measured"]])
+    if view["listed"]:
+        out += "<h4>" + e(say("Listed gaps")) + "</h4>" + table(view["listed_headers"], [
+            [e(name), e(numbers), num(count), num(after), when(after_at), num(before), when(before_at)]
+            for name, numbers, count, after, after_at, before, before_at in view["listed"]])
+    if view["skipped"]:
+        out += table(view["skipped_headers"], [[e(name), e(reason)] for name, reason in view["skipped"]])
+    return out + '<p class="hint">' + e(view["note"]) + "</p>"
 
 
 def coverage_section(say, number, coverage):
     if not coverage:
         return ""
-    periods = [[when(p["from"]), when(p["to"]), e(span_text(say, p["from"], p["to"]))
-                + (' <span class="pill ok">' + e(say("still observing")) + "</span>" if p.get("still_observing") else "")]
+    periods = [[when(p["from"]), when(p["to"]), e(span_text(say, p["from"], p["to"]))]
                for p in coverage["continuous"]]
     gaps = [[when(g["from"]), when(g["to"]), e(g.get("reason"))] for g in coverage["gaps"]]
     ids = [[e(c.get("title") or c["chat_id"]), num(c["observed_from"]) + " – " + num(c["observed_to"]), num(c["observed"]),
             num(c["not_observed"]), ranges_text(c.get("ranges") or [], c.get("ranges_total", 0))]
            for c in coverage["unobserved_ids"]]
     out = section(number, "coverage", say("Coverage"),
-                  say("Continuous means observation was on, connected and writing records at least every three minutes. "
-                      "IDs not observed were never seen by this collector; that is not evidence that they were deleted."))
+                  coverage.get("meaning") or say("Recorded observation intervals."))
     out += coverage_figure(say, coverage)
     out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
                                                                     if periods else "<p>—</p>")
@@ -2009,6 +2109,7 @@ def coverage_section(say, number, coverage):
             "observed one that was never seen is listed here; coverage.json lists every one."))
             + "</p>" + table([say("Chat"), say("Observed range"), say("Observed"), say("Not observed"),
                               say("Numbers not observed")], ids))
+    out += gap_html(say, coverage.get("gap_summary"))
     out += ("<h3>" + e(say("Verifier summary")) + '</h3><p class="lead">' + e(say("As verify.py prints it, in English."))
             + '</p><ul class="mono" style="font-size:13px">' + "".join("<li>" + e(line) + "</li>" for line in coverage_lines(coverage))
             + "</ul>")
@@ -2034,7 +2135,7 @@ def timestamps_section(say, number, anchors, archive_name, fp):
             signer = (anchor.get("signed") or {}).get("signer")
             status = ('<span class="pill ok">' + e(say("Token valid")) + "</span> <small>" + e(signer) + "</small>"
                       if case_assessment.verified_stamp(anchor, 2**63 - 1)
-                      else '<span class="pill warn">' + e(say("Checkpoint or timestamp trust not established")) + "</span>")
+                      else '<span class="pill warn">' + e(say("Checkpoint or timestamp awaiting verification")) + "</span>")
             rows.append([num(anchor.get("event_count")), e(anchor["service"]), "RFC 3161", when(anchor.get("time")), status])
         elif anchor.get("kind") == "opentimestamps":
             pending = anchor.get("status") == "pending"
@@ -2080,253 +2181,271 @@ def verify_section(say, number, archive_name, fp, report_name, archive, data_nam
             + '<ol class="steps">' + "".join(steps) + "</ol></section>")
 
 
-def evidence_chunks(events, coverage=None, context=None):
-    context = context or {}
-    options = {**ReportOptions().model_dump(), "language": "en", **(context.get("options") or {})}
-    say = Words(options["language"])
-    producer = context.get("producer") or {"software": "TgWitness", "version": __version__, "project": "PhishDestroy",
-                                           "homepage": "https://phishdestroy.io",
-                                           "source": "https://github.com/phishdestroy/TgWitness"}
-    source_digest = context.get("digest") or Digest().result()
-    digest = context.get("report_digest") or source_digest
-    anchors, files, archive = context.get("anchors", []), context.get("files", {}), context.get("archive", False)
-    fp, report_id = context.get("fingerprint") or "", context.get("report_id") or "unsealed"
-    created, count, head_hash = context.get("created_at") or utcnow(), context.get("event_count"), context.get("head_hash")
-    case, archive_name = case_of(options), "tgwitness-evidence.zip"
-    title = options.get("case_title") or say("Telegram observation journal")
-    description = say("Signed record of Telegram observations made by TgWitness, with integrity and custody details.")
-    sign = context.get("sign")
-    handover = context.get("handover")
-    material = report_material(context)
-    filtered = context.get("report_digest") is not None
-    label, shown_count = say("Evidence report"), count
-    if context.get("selection"):
-        shown_count = context["selection"]["counts"]["selected_records"]
-    if handover:
-        archive_name, label = "tgwitness-handover.zip", say("Handover extract")
-        title = options.get("case_title") or say("Handover extract")
-        description = say("Part of a signed TgWitness journal prepared for handover, with other people's data minimised.")
-        shown_count = handover["counts"]["unchanged"] + handover["counts"]["minimised"]
+class EvidenceHTML:
+    def __init__(self, events, coverage, context):
+        self.events = events
+        self.coverage = coverage
+        self.context = context
+        self.context = self.context or {}
+        self.options = {**ReportOptions().model_dump(), "language": "en", **(self.context.get("options") or {})}
+        self.say = Words(self.options["language"])
+        say = self.say
+        self.producer = self.context.get("producer") or {"software": "TgWitness", "version": __version__, "project": "PhishDestroy",
+                                               "homepage": "https://phishdestroy.io",
+                                               "source": "https://github.com/phishdestroy/TgWitness"}
+        self.source_digest = self.context.get("digest") or Digest().result()
+        self.digest = self.context.get("report_digest") or self.source_digest
+        self.anchors, self.files, self.archive = self.context.get("anchors", []), self.context.get("files", {}), self.context.get("archive", False)
+        self.fp, self.report_id = self.context.get("fingerprint") or "", self.context.get("report_id") or "unsealed"
+        self.created, self.count, self.head_hash = self.context.get("created_at") or utcnow(), self.context.get("event_count"), self.context.get("head_hash")
+        self.case, self.archive_name = case_of(self.options), "tgwitness-evidence.zip"
+        self.title = self.options.get("case_title") or say("Telegram observation journal")
+        self.description = say("Signed record of Telegram observations made by TgWitness, with integrity and custody details.")
+        self.sign = self.context.get("sign")
+        self.handover = self.context.get("handover")
+        self.material = report_material(self.context)
+        self.filtered = self.context.get("report_digest") is not None
+        self.label, self.shown_count = say("Evidence report"), self.count
+        if self.context.get("selection"):
+            self.shown_count = self.context["selection"]["counts"]["selected_records"]
+        if self.handover:
+            self.archive_name, self.label = "tgwitness-handover.zip", say("Handover extract")
+            self.title = self.options.get("case_title") or say("Handover extract")
+            self.description = say("Part of a signed TgWitness journal prepared for handover, with other people's data minimised.")
+            self.shown_count = self.handover["counts"]["unchanged"] + self.handover["counts"]["minimised"]
 
-    def chunks():
-        meta = metadata(say, title=title, description=description, created_at=created, report_id=report_id, fp=fp,
-                        case=case, extra=[("tgwitness:format", "tgwitness-handover-v1" if handover
+    def render(self):
+        say = self.say
+        self.data_kind = "journal" if self.options.get("timeline") and (self.context.get("viewer") or self.context.get("events_again")) else None
+        self.inline = viewer.Inline("journal", self.options["part_size"]) if self.data_kind and not self.context.get("viewer") else None
+        self.statement = {"format": SEAL_FORMAT, "report_id": self.report_id, "created_at": self.created, "language": say.language,
+                     "public_key": self.context.get("public_key"), "producer": self.producer, "case": self.case,
+                     "subject": {**report_subject(self.context), **({"viewer": self.context.get("viewer") or {}} if self.data_kind else {})}}
+        rendered = self.chunks()
+        if self.options.get("design") in report_layouts.DESIGNS:
+            event_factory = self.context.get("events_again") or (lambda: iter(self.events))
+            replacements = report_layouts.journal_replacements(event_factory, self.context, say, self.options,
+                                                               self.shown_count, bool(self.data_kind))
+            rendered = report_layouts.compose(rendered, self.options["design"], say, "journal", replacements)
+        yield from sealed(rendered, self.statement, self.sign)
+
+    def chunks(self):
+        yield from self.render_header()
+        yield from self.render_summary()
+        yield from self.render_integrity()
+        yield from self.render_custody()
+        yield from self.render_records()
+
+    def render_header(self):
+        say = self.say
+        meta = metadata(say, title=self.title, description=self.description, created_at=self.created, report_id=self.report_id, fp=self.fp,
+                        case=self.case, extra=[("tgwitness:format", "tgwitness-handover-v1" if self.handover
                                            else "tgwitness-evidence-v1"),
-                                          ("tgwitness:event-count", count), ("tgwitness:head-hash", head_hash),
-                                          ("tgwitness:events-sha256", context.get("events_sha256"))])
-        linked = linked_data(kind="Handover extract" if handover else "Evidence report", title=title,
-                             description=description, created_at=created,
-                             report_id=report_id, language=say.language, producer=producer, case=case, fp=fp,
+                                          ("tgwitness:event-count", self.count), ("tgwitness:head-hash", self.head_hash),
+                                          ("tgwitness:events-sha256", self.context.get("events_sha256"))])
+        linked = linked_data(kind="Handover extract" if self.handover else "Evidence report", title=self.title,
+                             description=self.description, created_at=self.created,
+                             report_id=self.report_id, language=say.language, producer=self.producer, case=self.case, fp=self.fp,
                              about={"@type": "Dataset", "name": "TgWitness observation journal",
-                                    "identifier": head_hash, "size": count},
+                                    "identifier": self.head_hash, "size": self.count},
                              based_on={"@type": "MediaObject", "name": "events.jsonl",
                                        "encodingFormat": "application/x-ndjson",
                                        "identifier": {"@type": "PropertyValue", "propertyID": "sha256",
-                                                      "value": context.get("events_sha256")}})
-        changed, events_again = digest.get("changed") or set(), context.get("events_again")
-        links = [("summary", say("Summary"))] + ([("minimisation", say("Minimisation"))] if handover else []) \
-            + ([("changes", say("Changes"))] if changed and events_again and options.get("show_changes", True) else []) \
+                                                      "value": self.context.get("events_sha256")}})
+        self.changed, self.events_again = self.digest.get("changed") or set(), self.context.get("events_again")
+        links = [("summary", say("Summary"))] + ([("minimisation", say("Minimisation"))] if self.handover else []) \
+            + ([("changes", say("Changes"))] if self.changed and self.events_again and self.options.get("show_changes", True) else []) \
             + [("case-assessment", say(case_assessment.TITLE)), ("actions", say("Actions")), ("integrity", say("Integrity"))] \
-            + ([] if handover else [("timestamps", say("Timestamps"))]) + [("custody", say("Custody")),
+            + ([] if self.handover else [("timestamps", say("Timestamps"))]) + [("custody", say("Custody")),
                                                                          ("verify", say("Verify"))]
-        if material.get("analytics"):
+        if self.material.get("analytics"):
             links.insert(1, ("report-analytics", say(report_charts.TITLE)))
-        if (context.get("case_board") or {}).get("cards"):
+        if self.material.get("processors"):
+            links.insert(2, ("report-metrics", say(report_charts.METRICS_TITLE)))
+        if (self.context.get("case_board") or {}).get("cards"):
             links.insert(2, ("case-board", say("Case Board")))
-        if material.get("examination"):
+        if self.material.get("examination"):
             links.insert(1, ("examination", say(report_charts.REVIEW_TITLE)))
-        if material.get("selection"):
+        if self.material.get("selection"):
             links.insert(1, ("report-selection", say("Selected data")))
-        if filtered:
+        if self.filtered:
             links = [link for link in links if link[0] != "actions"]
-        if options.get("timeline"):
+        if self.options.get("timeline"):
             links.append(("records", say("Records")))
-        yield (head(say, title=title + " · TgWitness", description=description, meta=meta, linked=linked,
-                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"), design=options.get("design"))
-               + bar(say, label, links, "journal" if data_kind else None)).encode("utf-8")
-        facts = [(say("Case ID"), e(options.get("case_id"))), (say("Examiner"), e(options.get("examiner"))),
-                 (say("Organization"), e(options.get("organization"))), (say("Created"), when(created)),
-                 (say("Report ID"), '<span class="mono">' + e(report_id[:8]) + "</span>")]
-        categories = digest["categories"]
-        yield (hero(say, label + " · " + say("Signed"), title, facts, fp, sign is not None)
-               + tiles([(say("Records"), num(shown_count), "accent", "layers"),
-                        (say("Chats"), num(len(digest["chats"])), "accent", "telegram"),
+        yield (head(say, title=self.title + " · TgWitness", description=self.description, meta=meta, linked=linked,
+                    theme=self.options.get("theme", "auto"), template=self.options.get("template", "dossier"), design=self.options.get("design"))
+               + bar(say, self.label, links, "journal" if self.data_kind else None)).encode("utf-8")
+        facts = [(say("Case ID"), e(self.options.get("case_id"))), (say("Examiner"), e(self.options.get("examiner"))),
+                 (say("Organization"), e(self.options.get("organization"))), (say("Created"), when(self.created)),
+                 (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
+        categories = self.digest["categories"]
+        yield (hero(say, self.label + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None)
+               + tiles([(say("Records"), num(self.shown_count), "accent", "layers"),
+                        (say("Chats"), num(len(self.digest["chats"])), "accent", "telegram"),
                         (say("Messages"), num(categories["message"]), "accent", "message"),
                         (say("Edits"), num(categories["edited"]), "warn", "edit"),
                         (say("Deletions"), num(categories["deleted"]), "bad", "trash"),
-                        (say("Files"), num(len(digest["media"])), "violet", "file"),
-                        (say("Timestamps"), num(len([a for a in anchors if a.get("kind") != "unreadable"])), "ok", "seal"),
-                        (say("Observation period"), e(span_text(say, digest["first"], digest["last"])), "pink", "eye")])
-               + (toc(links) if data_kind else "")).encode("utf-8")
-        account = context.get("account") or {}
-        account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
+                        *([(say("Missing on recheck"), num(categories["missing"]), "warn", "eye")]
+                          if categories.get("missing") else []),
+                        (say("Files"), num(len(self.digest["media"])), "violet", "file"),
+                        (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"])), "ok", "seal"),
+                        (say("Observation period"), e(span_text(say, self.digest["first"], self.digest["last"])), "pink", "eye")])
+               + (toc(links) if self.data_kind else "")).encode("utf-8")
+
+    def render_summary(self):
+        say = self.say
+        account = self.context.get("account") or {}
+        self.account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
-        numbers = iter(range(1, 100))
-        yield report_selection_view.html(material.get("selection"), say).encode("utf-8")
-        yield brief_section(say, *evidence_brief(say, digest, shown_count, anchors, coverage, account_text,
-                                                 handover, filtered)).encode("utf-8")
-        analysis_sections = [report_charts.examination_html(material.get("examination"), say),
-                             report_charts.html(material.get("analytics"), say)]
-        if options.get("template") == "activity":
+        self.numbers = iter(range(1, 100))
+        yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
+        yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
+                                                 self.handover, self.filtered)).encode("utf-8")
+        analysis_sections = [report_charts.examination_html(self.material.get("examination"), say),
+                             report_charts.html(self.material.get("analytics"), say)
+                             + report_charts.metrics_html(self.material.get("processors"), say)]
+        if self.options.get("template") == "activity":
             analysis_sections.reverse()
         yield ''.join(analysis_sections).encode("utf-8")
-        yield case_assessment.html(case_assessment.journal(context, coverage), say).encode("utf-8")
-        yield case_section(say, next(numbers), options, [
-            (say("Observing account"), e(account_text)),
+        yield case_assessment.html(case_assessment.journal(self.context, self.coverage), say).encode("utf-8")
+        yield case_section(say, next(self.numbers), self.options, [
+            (say("Observing account"), e(self.account_text)),
             (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span>"),
-            (say("Report ID"), "<code>" + e(report_id) + "</code>"), (say("Created"), when(created)),
-            (say("Produced by"), e(producer.get("software")) + " " + e(producer.get("version")) + " · "
-             + e(producer.get("project")))]).encode("utf-8")
-        if handover:
-            yield minimisation_section(say, next(numbers), handover, count).encode("utf-8")
-        if context.get("case_board"):
+            (say("Report ID"), "<code>" + e(self.report_id) + "</code>"), (say("Created"), when(self.created)),
+            (say("Produced by"), e(self.producer.get("software")) + " " + e(self.producer.get("version")) + " · "
+             + e(self.producer.get("project")))]).encode("utf-8")
+        if self.handover:
+            yield minimisation_section(say, next(self.numbers), self.handover, self.count).encode("utf-8")
+        if self.context.get("case_board"):
             from . import board_report
-            yield board_report.html(context["case_board"], say).encode("utf-8")
-        if changed and events_again and options.get("show_changes", True):
-            yield changes_section(say, next(numbers), history_context(context, events_again, changed), len(changed),
-                                  digest["titles"], bool(options.get("timeline")), filtered).encode("utf-8")
-        if options.get("show_indicators", True) and (digest.get("indicators") or {}).get("items"):
-            yield indicators_section(say, next(numbers), digest["indicators"],
-                                     ref_link(context.get("parts"), "records", "seq", "r")).encode("utf-8")
-        if not filtered:
-            yield actions_section(say, next(numbers), digest, digest["titles"], bool(options.get("timeline"))).encode("utf-8")
+            yield board_report.html(self.context["case_board"], say).encode("utf-8")
+        if self.changed and self.events_again and self.options.get("show_changes", True):
+            yield changes_section(say, next(self.numbers), history_context(self.context, self.events_again, self.changed), len(self.changed),
+                                  self.digest["titles"], bool(self.options.get("timeline")), self.filtered).encode("utf-8")
+        if self.options.get("show_indicators", True) and (self.digest.get("indicators") or {}).get("items"):
+            yield indicators_section(say, next(self.numbers), self.digest["indicators"],
+                                     ref_link(self.context.get("parts"), "records", "seq", "r")).encode("utf-8")
+        if not self.filtered:
+            yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], bool(self.options.get("timeline"))).encode("utf-8")
+
+    def render_integrity(self):
+        say = self.say
         chain = ('<div class="chain"><div class="link"><b>' + e(say("Chain start")) + "</b><code>0000…0000</code></div>"
                  '<span class="arrow"></span>')
-        if count and count > 1:
-            chain += ('<div class="link"><b>#1</b><code>' + e(short(source_digest["first_hash"], 8, 4)) + "</code></div>"
+        if self.count and self.count > 1:
+            chain += ('<div class="link"><b>#1</b><code>' + e(short(self.source_digest["first_hash"], 8, 4)) + "</code></div>"
                       '<span class="arrow"></span>')
-        if count and count > 2:
-            chain += ('<div class="link more"><b>' + e(say("Records in between: {n}", n=count - 2)) + "</b><code>SHA-256 · Ed25519"
+        if self.count and self.count > 2:
+            chain += ('<div class="link more"><b>' + e(say("Records in between: {n}", n=self.count - 2)) + "</b><code>SHA-256 · Ed25519"
                       '</code></div><span class="arrow"></span>')
-        chain += ('<div class="link head"><b>#' + e(count) + " · " + e(say("Head")) + "</b><code>" + e(short(head_hash, 8, 4))
+        chain += ('<div class="link head"><b>#' + e(self.count) + " · " + e(say("Head")) + "</b><code>" + e(short(self.head_hash, 8, 4))
                   + "</code></div></div>")
-        if handover:
-            counts = handover["counts"]
-            yield (section(next(numbers), "integrity", say("Integrity"),
+        if self.handover:
+            counts = self.handover["counts"]
+            yield (section(next(self.numbers), "integrity", say("Integrity"),
                            say("This extract comes from the journal below. Its records keep their signatures; the "
                                "manifest lists the SHA-256 of every file and is signed with the same key."))
-                   + (keycard(say, fp) if fp else "")
-                   + kv([(say("Records in the complete journal"), num(count)),
-                         (say("Head hash of the complete journal"), "<code>" + e(head_hash) + "</code>"),
+                   + (keycard(say, self.fp) if self.fp else "")
+                   + kv([(say("Records in the complete journal"), num(self.count)),
+                         (say("Head hash of the complete journal"), "<code>" + e(self.head_hash) + "</code>"),
                          (say("Shown unchanged, verified in full"), num(counts["unchanged"])),
                          (say("Minimised, signature verified"), num(counts["minimised"])),
                          (say("Left out"), num(counts["left_out"])),
                          (say("Hash algorithm"), "SHA-256 (FIPS 180-4)"), (say("Signature algorithm"), "Ed25519 (RFC 8032)"),
-                         (say("Public key"), "<code>" + e(context.get("public_key")) + "</code>"),
-                         ("records.jsonl SHA-256", "<code>" + e(context.get("records_sha256")) + "</code>"
-                          if context.get("records_sha256") else "")])
+                         (say("Public key"), "<code>" + e(self.context.get("public_key")) + "</code>"),
+                         ("records.jsonl SHA-256", "<code>" + e(self.context.get("records_sha256")) + "</code>"
+                          if self.context.get("records_sha256") else "")])
                    + "</section>").encode("utf-8")
         else:
-            yield (section(next(numbers), "integrity", say("Integrity"),
+            yield (section(next(self.numbers), "integrity", say("Integrity"),
                        say("Every record is linked to the previous one by SHA-256 and signed with Ed25519 when it is "
                            "captured. The manifest lists the SHA-256 of every file and is signed with the same key."))
-               + (keycard(say, fp) if fp else "")
+               + (keycard(say, self.fp) if self.fp else "")
                + '<p class="lead">' + e(say("Compare this fingerprint with a copy kept apart from the collector, for "
                                             "example one published or given to the recipient beforehand.")) + "</p>"
                + chain
-               + kv([(say("Records"), num(count)), (say("Head hash"), "<code>" + e(head_hash) + "</code>"),
-                     (say("Independent timestamps"), e(stamps_text(say, anchors))),
+               + kv([(say("Records"), num(self.count)), (say("Head hash"), "<code>" + e(self.head_hash) + "</code>"),
+                     (say("Independent timestamps"), e(stamps_text(say, self.anchors))),
                      (say("Independent witness"), e(say("Not part of this archive. A witness that kept the journal head "
                                                         "is checked with verify.py --witness."))),
                      (say("Hash algorithm"), "SHA-256 (FIPS 180-4)"), (say("Signature algorithm"), "Ed25519 (RFC 8032)"),
-                     (say("Public key"), "<code>" + e(context.get("public_key")) + "</code>"),
-                     ("events.jsonl SHA-256", "<code>" + e(context.get("events_sha256")) + "</code>"
-                      if context.get("events_sha256") else "")])
+                     (say("Public key"), "<code>" + e(self.context.get("public_key")) + "</code>"),
+                     ("events.jsonl SHA-256", "<code>" + e(self.context.get("events_sha256")) + "</code>"
+                      if self.context.get("events_sha256") else "")])
                + "</section>").encode("utf-8")
-        if not handover:
-            yield timestamps_section(say, next(numbers), anchors, archive_name, fp).encode("utf-8")
-        if coverage:
-            if material.get("selection"):
+        if not self.handover:
+            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name, self.fp).encode("utf-8")
+
+    def render_custody(self):
+        say = self.say
+        if self.coverage:
+            if self.material.get("selection"):
                 yield ('<h2>' + e(say("Source journal coverage")) + '</h2>').encode("utf-8")
-            yield coverage_section(say, next(numbers), coverage).encode("utf-8")
-        latest = latest_stamp(anchors)
-        steps = [(say("Observed and recorded"), when(source_digest["first"]) + " — " + when(source_digest["last"])),
-                 (say("Each record hashed and signed at capture"), e(say("Records: {n}", n=count)))]
-        if handover:
-            steps.append((say("Extract prepared and minimised"), when(created) + " · " + e(say(
-                "{a} shown unchanged, {b} minimised, {c} left out", a=handover["counts"]["unchanged"],
-                b=handover["counts"]["minimised"], c=handover["counts"]["left_out"]))))
+            yield coverage_section(say, next(self.numbers), self.coverage).encode("utf-8")
+        latest = latest_stamp(self.anchors)
+        steps = [(say("Observed and recorded"), when(self.source_digest["first"]) + " — " + when(self.source_digest["last"])),
+                 (say("Each record hashed and signed at capture"), e(say("Records: {n}", n=self.count)))]
+        if self.handover:
+            steps.append((say("Extract prepared and minimised"), when(self.created) + " · " + e(say(
+                "{a} shown unchanged, {b} minimised, {c} left out", a=self.handover["counts"]["unchanged"],
+                b=self.handover["counts"]["minimised"], c=self.handover["counts"]["left_out"]))))
         else:
             steps.append((say("Checkpoints timestamped"), (when(latest.get("time")) + " · " + e(latest["service"]))
                           if latest else e(say("none in this export"))))
-        steps += [(say("Journal verified and exported"), when(created)),
-                  (say("Report sealed"), when(created) + " · " + e(options.get("examiner") or ""))]
-        yield custody_section(say, next(numbers), steps, [
-            (say("Acquisition tool"), e(producer.get("software")) + " " + e(producer.get("version"))),
-            (say("Program build"), build_html(say, producer)),
+        steps += [(say("Journal verified and exported"), when(self.created)),
+                  (say("Report sealed"), when(self.created) + " · " + e(self.options.get("examiner") or ""))]
+        yield custody_section(say, next(self.numbers), steps, [
+            (say("Acquisition tool"), e(self.producer.get("software")) + " " + e(self.producer.get("version"))),
+            (say("Program build"), build_html(say, self.producer)),
             (say("Acquisition method"), e(say("Telegram client observing the account; records chained by SHA-256 and "
                                               "signed with Ed25519 as they are written."))),
-            (say("Observing account"), e(account_text)),
-            (say("Telegram client"), seen_list(say, source_digest.get("clients"), client_text)),
-            (say("Connection route"), seen_list(say, source_digest.get("routes"), route_text)
-             + direct_text(say, source_digest.get("direct_fallbacks"))),
-            (say("Collector clock against Telegram"), clocks_html(say, source_digest.get("clocks"))),
+            (say("Observing account"), e(self.account_text)),
+            (say("Telegram client"), seen_list(say, self.source_digest.get("clients"), client_text)),
+            (say("Connection route"), seen_list(say, self.source_digest.get("routes"), route_text)
+             + direct_text(say, self.source_digest.get("direct_fallbacks"))),
+            (say("Collector clock against Telegram"), clocks_html(say, self.source_digest.get("clocks"))),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        yield verify_section(say, next(numbers), archive_name, fp, "report.html", archive,
-                             "records.jsonl" if handover else "events.jsonl").encode("utf-8")
-        if archive and files:
-            yield files_section(say, next(numbers), files, ("report.html", "README.txt", "SHA256SUMS", "manifest.json",
+        yield verify_section(say, next(self.numbers), self.archive_name, self.fp, "report.html", self.archive,
+                             "records.jsonl" if self.handover else "events.jsonl").encode("utf-8")
+        if self.archive and self.files:
+            yield files_section(say, next(self.numbers), self.files, ("report.html", "README.txt", "SHA256SUMS", "manifest.json",
                                                             "manifest.sig")).encode("utf-8")
-        yield standards_section(say, next(numbers), "handover" if handover else "evidence",
-                                rfc3161_count(anchors, validated=True)).encode("utf-8")
-        yield limits_section(say, next(numbers), context.get("limits") or []).encode("utf-8")
+        yield standards_section(say, next(self.numbers), "handover" if self.handover else "evidence",
+                                rfc3161_count(self.anchors, validated=True)).encode("utf-8")
+        yield limits_section(say, next(self.numbers), self.context.get("limits") or []).encode("utf-8")
+
+    def render_records(self):
+        say = self.say
         data = ""
-        if data_kind:
-            if inline is not None:
-                for event in events_again():
-                    inline.add(viewer.journal_item(event, options.get("raw_records", True)))
-                data = inline.html(None, digest.get("indicators"))
-                statement["subject"]["viewer"] = inline.descriptor()
-            if statement["subject"]["viewer"].get("files"):
-                yield records_pointer(say, next(numbers), "records", say("Records"), shown_count, say(
-                    "{n} records", n=shown_count)).encode("utf-8")
-            elif not shown_count:
-                yield (section(next(numbers), "records", say("Records")) + '<p>'
+        if self.data_kind:
+            if self.inline is not None:
+                for event in self.events_again():
+                    self.inline.add(viewer.journal_item(event, self.options.get("raw_records", True)))
+                data = self.inline.html(None, self.digest.get("indicators"))
+                self.statement["subject"]["viewer"] = self.inline.descriptor()
+            if self.statement["subject"]["viewer"].get("files"):
+                yield records_pointer(say, next(self.numbers), "records", say("Records"), self.shown_count, say(
+                    "{n} records", n=self.shown_count)).encode("utf-8")
+            elif not self.shown_count:
+                yield (section(next(self.numbers), "records", say("Records")) + '<p>'
                        + e(say("No records match this selection.")) + '</p></section>').encode("utf-8")
             else:
-                yield (section(next(numbers), "records", say("Records")) + '<div class="callout info">' + e(say(
+                yield (section(next(self.numbers), "records", say("Records")) + '<div class="callout info">' + e(say(
                     "This journal has {n} records, more than a report saved on its own carries. Open report.html "
-                    "inside the signed archive for all of them; the journal files carry every record.", n=shown_count))
+                    "inside the signed archive for all of them; the journal files carry every record.", n=self.shown_count))
                     + "</div></section>").encode("utf-8")
-        elif False:
-            titles = digest["titles"]
-            chips = "".join('<button class="chip" type="button" aria-pressed="false" data-cat="' + c + '">'
-                            + e(category_label(say, c)) + "<b>" + num(n) + "</b></button>"
-                            for c, n in digest["categories"].items() if n)
-            chats = digest["chats"]
-            select = ('<select id="chat" aria-label="' + e(say("Chat")) + '"><option value="">' + e(say("All chats"))
-                      + "</option>" + "".join('<option value="' + e(c) + '">' + e(titles.get(c) or c) + " (" + str(n) + ")</option>"
-                                             for c, n in sorted(chats.items(), key=lambda i: -i[1])) + "</select>"
-                      if len(chats) > 1 else "")
-            lead = say("Every record in this extract, in journal order. Minimised records name what was withheld.") \
-                if handover else say("Every record of the journal in order. Filters only change what is shown.")
-            yield (section(next(numbers), "records", say("Records"), lead, long=True)
-                   + '<div class="tools"><input type="search" id="q" placeholder="' + e(say("Search text, names, IDs…"))
-                   + '">' + select + chips + '<span class="shown">' + e(say("Shown")) + ': <b id="shown-n">' + num(shown_count)
-                   + "</b></span></div>").encode("utf-8")
-            for item in record_items(events, say, titles, options, archive):
-                yield item.encode("utf-8")
-            yield b"</section>"
-        if sign is not None:
-            yield seal_section(say, next(numbers), report_id, created).encode("utf-8")
-        yield ending(say, producer, viewer_meta(
-            say, "journal", context, titles={str(k): v for k, v in digest["titles"].items()}, title=title,
-            archive="tgwitness-handover.zip" if handover else "tgwitness-evidence.zip", head_hash=head_hash,
-            event_count=count) if data_kind else None, data).encode("utf-8")
+        if self.sign is not None:
+            yield seal_section(say, next(self.numbers), self.report_id, self.created).encode("utf-8")
+        yield ending(say, self.producer, viewer_meta(
+            say, "journal", self.context, titles={str(k): v for k, v in self.digest["titles"].items()}, title=self.title,
+            archive="tgwitness-handover.zip" if self.handover else "tgwitness-evidence.zip", head_hash=self.head_hash,
+            event_count=self.count) if self.data_kind else None, data).encode("utf-8")
 
-    data_kind = "journal" if options.get("timeline") and (context.get("viewer") or context.get("events_again")) else None
-    inline = viewer.Inline("journal", options["part_size"]) if data_kind and not context.get("viewer") else None
-    statement = {"format": SEAL_FORMAT, "report_id": report_id, "created_at": created, "language": say.language,
-                 "public_key": context.get("public_key"), "producer": producer, "case": case,
-                 "subject": {**report_subject(context), **({"viewer": context.get("viewer") or {}} if data_kind else {})}}
-    rendered = chunks()
-    if options.get("design") in report_layouts.DESIGNS:
-        event_factory = context.get("events_again") or (lambda: iter(events))
-        replacements = report_layouts.journal_replacements(event_factory, context, say, options,
-                                                           shown_count, bool(data_kind))
-        rendered = report_layouts.compose(rendered, options["design"], say, "journal", replacements)
-    yield from sealed(rendered, statement, sign)
+
+def evidence_chunks(events, coverage=None, context=None):
+    yield from EvidenceHTML(render_data.records(events), render_data.detached(coverage),
+                             render_data.context(context)).render()
 
 
 MEDIA_NAMES = {"MessageMediaPhoto": "Photo", "MessageMediaDocument": "File", "MessageMediaWebPage": "Link preview",
@@ -2353,6 +2472,10 @@ def action_text(action):
 
 
 FILE_STATUS = {"type_not_collected": "type not collected by the attachment settings",
+               "hashes_only": "server hashes saved; file content not downloaded",
+               "incomplete_hashes": "incomplete server hashes; file content not downloaded",
+               "hashes_unavailable": "server hashes unavailable; file content not downloaded",
+               "excluded_by_policy": "excluded by the attachment settings",
                "above_limit": "larger than the attachment limit", "unknown_size": "size unknown; not downloaded",
                "unavailable": "Telegram did not provide the file", "rate_limited": "not downloaded: Telegram rate limit"}
 
@@ -2360,6 +2483,12 @@ FILE_STATUS = {"type_not_collected": "type not collected by the attachment setti
 def absent_text(say, low, high):
     return say("Message number {n} absent", n=low) if low == high else \
         say("Message numbers {a}–{b} absent ({n})", a=low, b=high, n=high - low + 1)
+
+
+def unparsed_text(say, record):
+    return say("Message number {n} exists in Telegram but uses a data type this TgWitness version cannot decode "
+               "(constructor {c}); its content is not in this export.",
+               n=record.get("id"), c=(record.get("unparsed") or {}).get("constructor") or "?")
 
 
 def absent_before(record, previous):
@@ -2407,6 +2536,15 @@ def build_html(say, producer):
     return shown
 
 
+def name_note(say, record):
+    notes = [say("name at export")] if record.get("from_basis") == "export_time" else []
+    if record.get("from_source") == "contact":
+        notes.append(say("from the account's contacts"))
+    elif notes and record.get("from_source") == "profile":
+        notes.append(say("from the Telegram profile"))
+    return " · ".join(notes)
+
+
 def chat_rows(records, say, preview=False, base="", numbered=False, after=None, metadata=False):
     quotes, previous_day, previous_sender, previous_id = {}, None, object(), after
     for record in records:
@@ -2425,14 +2563,19 @@ def chat_rows(records, say, preview=False, base="", numbered=False, after=None, 
             yield '<div class="day"><time datetime="' + e(day) + '" data-day>' + e(day) + "</time></div>"
             previous_day, previous_sender = day, object()
         name = record.get("from") or (str(sender) if sender is not None else say("Unknown"))
+        if record.get("type") == "unparsed":
+            yield ('<div class="gap-row" id="m' + e(record.get("id")) + '" data-cat="service"><span>'
+                   + e(unparsed_text(say, record)) + "</span></div>")
+            previous_sender = object()
+            continue
         if record.get("type") == "service":
             yield ('<div class="svc-row" id="m' + e(record.get("id")) + '" data-cat="service"><span>' + e(name) + " · "
                    + e(action_text(record.get("action")) or say("Service message")) + "</span>"
                    + (report_layouts.chat_metadata_html(record, say) if metadata else "") + "</div>")
             previous_sender = object()
             continue
-        start = sender != previous_sender
-        previous_sender = sender
+        start = (sender, name) != previous_sender
+        previous_sender = (sender, name)
         cat = "media" if record.get("media_type") else "edited" if record.get("edited") else "text"
         body = []
         if record.get("selection"):
@@ -2442,8 +2585,10 @@ def chat_rows(records, say, preview=False, base="", numbered=False, after=None, 
             body.append('<div class="media-chip">' + e(label) + (" · " + e(language.get("language") or
                         language.get("status")) if language else "") + "</div>")
         if start:
+            note = name_note(say, record)
             body.append('<div class="name">' + e(name) + (' <span class="uname">@' + e(record["from_username"]) + "</span>"
-                                                          if record.get("from_username") else "") + "</div>")
+                                                          if record.get("from_username") else "")
+                        + (' <span class="uname">' + e(note) + "</span>" if note else "") + "</div>")
         reply = record.get("reply_to_message_id")
         if reply:
             quoted = quotes.get(reply)
@@ -2479,174 +2624,187 @@ def chat_rows(records, say, preview=False, base="", numbered=False, after=None, 
             quotes.pop(next(iter(quotes)))
 
 
-def chat_chunks(meta, records, context):
-    options = {**ReportOptions().model_dump(), "language": "en", **(context.get("options") or {})}
-    say = Words(options["language"])
-    producer, chat, stats = context["producer"], meta.get("chat") or {}, context["stats"]
-    people, files, fp = context["people"], context.get("files", {}), context["fingerprint"]
-    report_id, created, case = context["report_id"], context["created_at"], case_of(options)
-    chat_title = chat.get("title") or say("Chat {id}", id=chat.get("id"))
-    title = options.get("case_title") or chat_title
-    description = say("Signed export of a Telegram chat's visible history, made by TgWitness.")
-    sign = context.get("sign")
+class ChatHTML:
+    def __init__(self, meta, records, context):
+        self.meta = meta
+        self.records = records
+        self.context = context
+        self.options = {**ReportOptions().model_dump(), "language": "en", **(self.context.get("options") or {})}
+        self.say = Words(self.options["language"])
+        say = self.say
+        self.producer, self.chat, self.stats = self.context["producer"], self.meta.get("chat") or {}, self.context["stats"]
+        self.people, self.files, self.fp = self.context["people"], self.context.get("files", {}), self.context["fingerprint"]
+        self.report_id, self.created, self.case = self.context["report_id"], self.context["created_at"], case_of(self.options)
+        self.chat_title = self.chat.get("title") or say("Chat {id}", id=self.chat.get("id"))
+        self.title = self.options.get("case_title") or self.chat_title
+        self.description = say("Signed export of a Telegram chat's visible history, made by TgWitness.")
+        self.sign = self.context.get("sign")
 
-    def chunks():
-        tags = metadata(say, title=title, description=description, created_at=created, report_id=report_id, fp=fp,
-                        case=case, extra=[("tgwitness:format", "tgwitness-chat-export-v1"),
-                                          ("tgwitness:chat-id", chat.get("id")),
-                                          ("tgwitness:message-count", meta.get("message_count")),
-                                          ("tgwitness:chat-json-sha256", context.get("chat_json_sha256"))])
-        linked = linked_data(kind="Chat export", title=title, description=description, created_at=created,
-                             report_id=report_id, language=say.language, producer=producer, case=case, fp=fp,
-                             about={"@type": "Conversation", "name": chat_title, "identifier": str(chat.get("id"))},
+    def render(self):
+        say = self.say
+        self.inline = None if self.context.get("viewer") else viewer.Inline("chat", self.options["part_size"])
+        self.statement = {"format": SEAL_FORMAT, "report_id": self.report_id, "created_at": self.created, "language": say.language,
+                     "public_key": self.context["public_key"], "producer": self.producer, "case": self.case,
+                     "subject": {**chat_subject(self.meta, self.context), "viewer": self.context.get("viewer") or {}}}
+        rendered = self.chunks()
+        if self.options.get("design") in report_layouts.DESIGNS:
+            rendered = report_layouts.compose(rendered, self.options["design"], say, "chat",
+                                              report_layouts.chat_replacements(self.records, self.context, self.meta, say, self.options))
+        yield from sealed(rendered, self.statement, self.sign)
+
+    def chunks(self):
+        yield from self.render_header()
+        yield from self.render_summary()
+        yield from self.render_messages()
+        yield from self.render_custody()
+
+    def render_header(self):
+        say = self.say
+        tags = metadata(say, title=self.title, description=self.description, created_at=self.created, report_id=self.report_id, fp=self.fp,
+                        case=self.case, extra=[("tgwitness:format", "tgwitness-chat-export-v1"),
+                                          ("tgwitness:chat-id", self.chat.get("id")),
+                                          ("tgwitness:message-count", self.meta.get("message_count")),
+                                          ("tgwitness:chat-json-sha256", self.context.get("chat_json_sha256"))])
+        linked = linked_data(kind="Chat export", title=self.title, description=self.description, created_at=self.created,
+                             report_id=self.report_id, language=say.language, producer=self.producer, case=self.case, fp=self.fp,
+                             about={"@type": "Conversation", "name": self.chat_title, "identifier": str(self.chat.get("id"))},
                              based_on={"@type": "MediaObject", "name": "chat.json", "encodingFormat": "application/json",
                                        "identifier": {"@type": "PropertyValue", "propertyID": "sha256",
-                                                      "value": context.get("chat_json_sha256")}})
-        yield (head(say, title=title + " · TgWitness", description=description, meta=tags, linked=linked,
-                    theme=options.get("theme", "auto"), design=options.get("design"))
+                                                      "value": self.context.get("chat_json_sha256")}})
+        yield (head(say, title=self.title + " · TgWitness", description=self.description, meta=tags, linked=linked,
+                    theme=self.options.get("theme", "auto"), design=self.options.get("design"))
                + bar(say, say("Chat export"), [("summary", say("Summary")), ("people", say("Participants")),
                                                ("messages", say("Messages")), ("integrity", say("Integrity")),
                                                ("verify", say("Verify"))], "chat")).encode("utf-8")
-        facts = [(say("Chat"), e(chat_title)), (say("Case ID"), e(options.get("case_id"))),
-                 (say("Examiner"), e(options.get("examiner"))), (say("Organization"), e(options.get("organization"))),
-                 (say("Created"), when(created)), (say("Report ID"), '<span class="mono">' + e(report_id[:8]) + "</span>")]
-        ids = context.get("message_ids") or {}
-        absent = [(say("Numbers absent"), num(ids["missing"]), "bad")] if ids.get("numbered_per_chat") else []
-        yield (hero(say, say("Chat export") + " · " + say("Signed"), title, facts, fp, sign is not None)
-               + tiles([(say("Messages"), num(meta.get("message_count")), "accent", "message"),
-                        (say("Participants"), num(len(people)), "violet", "users"),
-                        (say("With media"), num(stats["media"]), "violet", "file"),
-                        (say("Edited"), num(stats["edited"]), "warn", "edit"),
-                        (say("Service"), num(stats["service"]), "ok", "settings")]
+        facts = [(say("Chat"), e(self.chat_title)), (say("Case ID"), e(self.options.get("case_id"))),
+                 (say("Examiner"), e(self.options.get("examiner"))), (say("Organization"), e(self.options.get("organization"))),
+                 (say("Created"), when(self.created)), (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
+        self.ids = self.context.get("message_ids") or {}
+        absent = [(say("Numbers absent"), num(self.ids["missing"]), "bad")] if self.ids.get("numbered_per_chat") else []
+        yield (hero(say, say("Chat export") + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None)
+               + tiles([(say("Messages"), num(self.meta.get("message_count")), "accent", "message"),
+                        (say("Participants"), num(len(self.people)), "violet", "users"),
+                        (say("With media"), num(self.stats["media"]), "violet", "file"),
+                        (say("Edited"), num(self.stats["edited"]), "warn", "edit"),
+                        (say("Service"), num(self.stats["service"]), "ok", "settings")]
                        + [item + ("tag",) for item in absent]
-                       + [(say("Period"), e(span_text(say, stats["first_at"], stats["last_at"])), "pink", "eye")])
+                       + [(say("Period"), e(span_text(say, self.stats["first_at"], self.stats["last_at"])), "pink", "eye")])
                + toc([("summary", say("Summary")), ("people", say("Participants")), ("messages", say("Messages")),
                       ("integrity", say("Integrity")), ("verify", say("Verify"))])).encode("utf-8")
-        account = meta.get("account") or {}
-        account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
+
+    def render_summary(self):
+        say = self.say
+        account = self.meta.get("account") or {}
+        self.account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
-        numbers = iter(range(1, 100))
-        yield brief_section(say, *chat_brief(say, meta, stats, ids, account_text)).encode("utf-8")
-        yield snapshot_analytics.html_section(context.get("analytics"), options, say).encode("utf-8")
-        yield case_assessment.html(case_assessment.snapshot(context, "chat", meta), say).encode("utf-8")
-        yield case_section(say, next(numbers), options, [
-            (say("Chat"), '<span class="chathead"><span class="ava ' + colour(chat.get("id")) + '">' + e(initials(chat_title))
-             + "</span><span><b>" + e(chat_title) + "</b><br><small>" + e(chat.get("kind")) + " · " + e(chat.get("visibility"))
-             + " · id " + e(chat.get("id")) + "</small></span></span>"),
-            (say("First message"), when(stats["first_at"])), (say("Last message"), when(stats["last_at"])),
-            (say("Exporting account"), e(account_text)),
+        self.numbers = iter(range(1, 100))
+        yield brief_section(say, *chat_brief(say, self.meta, self.stats, self.ids, self.account_text)).encode("utf-8")
+        yield snapshot_analytics.html_section(self.context.get("analytics"), self.options, say).encode("utf-8")
+        yield case_assessment.html(case_assessment.snapshot(self.context, "chat", self.meta), say).encode("utf-8")
+        yield case_section(say, next(self.numbers), self.options, [
+            (say("Chat"), '<span class="chathead"><span class="ava ' + colour(self.chat.get("id")) + '">' + e(initials(self.chat_title))
+             + "</span><span><b>" + e(self.chat_title) + "</b><br><small>" + e(self.chat.get("kind")) + " · " + e(self.chat.get("visibility"))
+             + " · id " + e(self.chat.get("id")) + "</small></span></span>"),
+            (say("First message"), when(self.stats["first_at"])), (say("Last message"), when(self.stats["last_at"])),
+            (say("Exporting account"), e(self.account_text)),
             (say("Report language"), '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span>"),
-            (say("Report ID"), "<code>" + e(report_id) + "</code>")]).encode("utf-8")
-        if source_rows(say, meta, stats):
-            yield source_section(say, next(numbers), meta, stats).encode("utf-8")
-        top = max([p["messages"] for p in people] or [1])
+            (say("Report ID"), "<code>" + e(self.report_id) + "</code>")]).encode("utf-8")
+        if source_rows(say, self.meta, self.stats):
+            yield source_section(say, next(self.numbers), self.meta, self.stats).encode("utf-8")
+        top = max([p["messages"] for p in self.people] or [1])
         rows = [['<span class="ava ' + colour(p["user_id"]) + '" style="width:30px;height:30px;font-size:12px;display:inline-grid">'
                  + e(initials(p["name"] or p["user_id"])) + "</span> <b>" + e(p["name"] or say("Unknown")) + "</b>"
                  + (' <span class="uname">@' + e(p["username"]) + "</span>" if p.get("username") else "")
-                 + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, chat)),
+                 + "".join("<br><small>" + e(line) + "</small>" for line in poster_notes(say, p, self.chat)),
                  "<code>" + e(p["user_id"]) + "</code>", num(p["messages"]),
                  '<div class="meter"><i style="width:' + str(max(2, round(100 * p["messages"] / top))) + '%"></i></div>',
-                 when(p["first_message_at"]), when(p["last_message_at"])] for p in people[:100]]
-        more = ('<p class="lead">' + e(say("… and {n} more, listed in authors.csv and authors.json.", n=len(people) - 100))
-                + "</p>" if len(people) > 100 else "")
-        yield (section(next(numbers), "people", say("Participants"), say("Everyone who posted in the exported history, "
+                 when(p["first_message_at"]), when(p["last_message_at"])] for p in self.people[:100]]
+        more = ('<p class="lead">' + e(say("… and {n} more, listed in authors.csv and authors.json.", n=len(self.people) - 100))
+                + "</p>" if len(self.people) > 100 else "")
+        yield (section(next(self.numbers), "people", say("Participants"), say("Everyone who posted in the exported history, "
                                                                           "most active first. Names are the profile at export time."))
                + '<div class="bars">' + table([say("Participant"), "ID", say("Messages"), "", say("First message"),
                                                 say("Last message")], rows) + "</div>" + more + "</section>").encode("utf-8")
-        if ids:
-            yield message_ids_section(say, next(numbers), ids).encode("utf-8")
-        if context.get("admin_events") is not None:
-            yield admin_log_section(say, next(numbers), meta, context["admin_events"]).encode("utf-8")
-        if options.get("show_indicators", True) and (context.get("indicators") or {}).get("items"):
-            yield indicators_section(say, next(numbers), context["indicators"],
-                                     ref_link(context.get("parts"), "messages", "message", "m")).encode("utf-8")
-        if inline is not None:
-            for record in records():
-                inline.add(record)
-            data = inline.html(people, context.get("indicators"))
-            statement["subject"]["viewer"] = inline.descriptor()
+        if self.ids:
+            yield message_ids_section(say, next(self.numbers), self.ids).encode("utf-8")
+        if self.context.get("admin_events") is not None:
+            yield admin_log_section(say, next(self.numbers), self.meta, self.context["admin_events"]).encode("utf-8")
+        if self.options.get("show_indicators", True) and (self.context.get("indicators") or {}).get("items"):
+            yield indicators_section(say, next(self.numbers), self.context["indicators"],
+                                     ref_link(self.context.get("parts"), "messages", "message", "m")).encode("utf-8")
+
+    def render_messages(self):
+        say = self.say
+        if self.inline is not None:
+            for record in self.records():
+                self.inline.add(record)
+            self.data = self.inline.html(self.people, self.context.get("indicators"))
+            self.statement["subject"]["viewer"] = self.inline.descriptor()
         else:
-            data = ""
-        if statement["subject"]["viewer"].get("files"):
-            yield (records_pointer(say, next(numbers), "messages", say("Messages"), meta.get("message_count"), say(
-                "{n} messages", n=meta.get("message_count")), say("The visible history at export time, oldest first."))
-                   .replace('<div class="records-pointer">', edited_note(say, stats) + '<div class="records-pointer">', 1)
+            self.data = ""
+        if self.statement["subject"]["viewer"].get("files"):
+            yield (records_pointer(say, next(self.numbers), "messages", say("Messages"), self.meta.get("message_count"), say(
+                "{n} messages", n=self.meta.get("message_count")), say("The visible history at export time, oldest first."))
+                   .replace('<div class="records-pointer">', edited_note(say, self.stats) + '<div class="records-pointer">', 1)
                    ).encode("utf-8")
-        elif False:
-            chips = "".join('<button class="chip" type="button" aria-pressed="false" data-cat="' + c + '">' + e(label)
-                            + "<b>" + num(n) + "</b></button>" for c, label, n in (
-                                ("text", say("Text"), stats["text"]), ("media", say("With media"), stats["media"]),
-                                ("edited", say("Edited"), stats["edited"]), ("service", say("Service"), stats["service"])) if n)
-            yield (section(next(numbers), "messages", say("Messages"), say("The visible history at export time, oldest first."),
-                           long=True)
-                   + edited_note(say, stats)
-                   + '<div class="tools"><input type="search" id="q" placeholder="' + e(say("Search text, names, IDs…")) + '">'
-                   + chips + '<span class="shown">' + e(say("Shown")) + ': <b id="shown-n">' + num(meta.get("message_count"))
-                   + '</b></span></div><div class="chatwall">').encode("utf-8")
-            for row in chat_rows(records(), say, bool(options.get("media_previews")),
-                                 numbered=bool(ids.get("numbered_per_chat") and not ids.get("selection_applied"))):
-                yield row.encode("utf-8")
-            yield b"</div></section>"
-        parts = meta.get("parts") or []
+        parts = self.meta.get("parts") or []
         accounts = [["<code>" + e(p["statement"].get("account_id")) + "</code>", "<code>"
                      + e(short(fingerprint(p["statement"]["fetched_by_public_key"]), 16, 8)) + "</code>",
                      num(len(p["statement"].get("ranges") or [])), num(sum(r.get("count", 0) for r in p["statement"].get("ranges") or []))]
                     for p in parts]
-        yield (section(next(numbers), "integrity", say("Integrity"),
+        yield (section(next(self.numbers), "integrity", say("Integrity"),
                        say("chat.json is authoritative. The manifest lists the SHA-256 of every file and is signed with "
                            "Ed25519; this page carries its own signed seal."))
-               + keycard(say, fp)
-               + kv([("chat.json SHA-256", "<code>" + e(context.get("chat_json_sha256")) + "</code>"),
-                     (say("Messages"), num(meta.get("message_count"))),
+               + keycard(say, self.fp)
+               + kv([("chat.json SHA-256", "<code>" + e(self.context.get("chat_json_sha256")) + "</code>"),
+                     (say("Messages"), num(self.meta.get("message_count"))),
                      (say("Independent timestamps"), e(say("None: a chat export is not timestamped."))),
                      (say("Independent witness"), e(say("None: a chat export is not witnessed."))),
                      (say("Hash algorithm"), "SHA-256 (FIPS 180-4)"),
                      (say("Signature algorithm"), "Ed25519 (RFC 8032)"),
-                     (say("Public key"), "<code>" + e(context.get("public_key")) + "</code>")])
+                     (say("Public key"), "<code>" + e(self.context.get("public_key")) + "</code>")])
                + (("<h3>" + e(say("Accounts that fetched the history")) + "</h3>"
                    + table([say("Account"), say("Key fingerprint"), say("Ranges"), say("Messages")], accounts)) if accounts else "")
                + "</section>").encode("utf-8")
-        read = reading(meta)
+
+    def render_custody(self):
+        say = self.say
+        read = reading(self.meta)
         steps = [(say("History read through the Telegram API"),
                   when(read["read_started_at"]) + " — " + when(read["read_finished_at"]) if read["read_started_at"]
                   else e(say("Time of reading not recorded in this export"))),
-                 (say("Period of the messages"), when(stats["first_at"]) + " — " + when(stats["last_at"])),
-                 (say("Messages written to chat.json and hashed"), e(say("Messages: {n}", n=meta.get("message_count")))),
-                 (say("Archive signed and report sealed"), when(created) + " · " + e(options.get("examiner") or ""))]
-        yield custody_section(say, next(numbers), steps, [
-            (say("Acquisition tool"), e(producer.get("software")) + " " + e(producer.get("version"))),
-            (say("Program build"), build_html(say, producer)),
+                 (say("Period of the messages"), when(self.stats["first_at"]) + " — " + when(self.stats["last_at"])),
+                 (say("Messages written to chat.json and hashed"), e(say("Messages: {n}", n=self.meta.get("message_count")))),
+                 (say("Archive signed and report sealed"), when(self.created) + " · " + e(self.options.get("examiner") or ""))]
+        yield custody_section(say, next(self.numbers), steps, [
+            (say("Acquisition tool"), e(self.producer.get("software")) + " " + e(self.producer.get("version"))),
+            (say("Program build"), build_html(say, self.producer)),
             (say("Acquisition method"), e(say("Full visible history read through the Telegram API; a current snapshot, "
                                               "not a reconstruction of deleted or earlier edited messages."))),
-            (say("Exporting account"), e(account_text)),
-            (say("Telegram client"), e(client_text(say, meta["client"])) if isinstance(meta.get("client"), dict)
+            (say("Exporting account"), e(self.account_text)),
+            (say("Telegram client"), e(client_text(say, self.meta["client"])) if isinstance(self.meta.get("client"), dict)
              else e(say("Not recorded in this export"))),
-            (say("Connection route"), e(route_text(say, meta["route"])) if isinstance(meta.get("route"), dict)
+            (say("Connection route"), e(route_text(say, self.meta["route"])) if isinstance(self.meta.get("route"), dict)
              else e(say("Not recorded in this export"))),
             (say("Collector clock against Telegram"), clocks_html(say, read["clock_checks"], "Not recorded in this export")),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        yield verify_section(say, next(numbers), "tgwitness-chat-export.zip", fp, "chat.html", True).encode("utf-8")
-        yield files_section(say, next(numbers), files, ("chat.html", "README.txt", "SHA256SUMS", "manifest.json",
+        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", self.fp, "chat.html", True).encode("utf-8")
+        yield files_section(say, next(self.numbers), self.files, ("chat.html", "README.txt", "SHA256SUMS", "manifest.json",
                                                         "manifest.sig")).encode("utf-8")
-        yield standards_section(say, next(numbers), "chat").encode("utf-8")
-        yield limits_section(say, next(numbers), context.get("limits") or []).encode("utf-8")
-        if sign is not None:
-            yield seal_section(say, next(numbers), report_id, created).encode("utf-8")
-        yield ending(say, producer, viewer_meta(
-            say, "chat", context, title=title, archive="tgwitness-chat-export.zip", chat_id=chat.get("id"),
-            chat_title=chat_title, numbered=bool(ids.get("numbered_per_chat") and not ids.get("selection_applied")),
-            data_sha256=context.get("chat_json_sha256")), data).encode("utf-8")
+        yield standards_section(say, next(self.numbers), "chat").encode("utf-8")
+        yield limits_section(say, next(self.numbers), self.context.get("limits") or []).encode("utf-8")
+        if self.sign is not None:
+            yield seal_section(say, next(self.numbers), self.report_id, self.created).encode("utf-8")
+        yield ending(say, self.producer, viewer_meta(
+            say, "chat", self.context, title=self.title, archive="tgwitness-chat-export.zip", chat_id=self.chat.get("id"),
+            chat_title=self.chat_title, numbered=bool(self.ids.get("numbered_per_chat") and not self.ids.get("selection_applied")),
+            data_sha256=self.context.get("chat_json_sha256")), self.data).encode("utf-8")
 
-    inline = None if context.get("viewer") else viewer.Inline("chat", options["part_size"])
-    statement = {"format": SEAL_FORMAT, "report_id": report_id, "created_at": created, "language": say.language,
-                 "public_key": context["public_key"], "producer": producer, "case": case,
-                 "subject": {**chat_subject(meta, context), "viewer": context.get("viewer") or {}}}
-    rendered = chunks()
-    if options.get("design") in report_layouts.DESIGNS:
-        rendered = report_layouts.compose(rendered, options["design"], say, "chat",
-                                          report_layouts.chat_replacements(records, context, meta, say, options))
-    yield from sealed(rendered, statement, sign)
+
+def chat_chunks(meta, records, context):
+    yield from ChatHTML(render_data.detached(meta), render_data.factory(records),
+                         render_data.context(context)).render()
 
 
 LABELS = (("scam", "Telegram marks this chat as a scam", "bad"),
@@ -2737,7 +2895,14 @@ def recheck_text(say, recheck):
     if recheck.get("returned"):
         text += " " + say("Returned then and included in this export, marked found on recheck: {n}.",
                           n=len(recheck["returned"]))
-    if recheck.get("limit_reached"):
+    if recheck.get("edge"):
+        low, high = recheck["edge"]
+        text += " " + say("Numbers {a}–{b}, just below the oldest message the history listing returned, were also "
+                          "requested; messages found there: {n}.", a=low, b=high, n=recheck.get("edge_found", 0))
+    if recheck.get("unchecked"):
+        text += " " + say("{n} absent numbers were not requested; they cannot be told apart from deleted ones.",
+                          n=recheck["unchecked"])
+    elif recheck.get("limit_reached"):
         text += " " + say("Only the first {n} absent numbers were requested.", n=recheck.get("asked"))
     return text
 
@@ -2780,8 +2945,7 @@ def chat_subject(meta, context):
 
 def message_ids_section(say, number, ids):
     out = section(number, "ids", say("Message numbers"), say(
-        "This export contains a selection. Absent message numbers may have been excluded by the filters. "
-        "They are not evidence that a message was deleted or inaccessible."
+        "This export contains a selection. Absent message numbers may have been excluded by the filters."
         if ids.get("selection_applied") else
         "Telegram numbers the messages of a channel or supergroup 1, 2, 3… in order, service messages included. A "
         "number between the first and the last exported message that is absent belongs to a message Telegram did "

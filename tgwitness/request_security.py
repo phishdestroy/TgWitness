@@ -12,6 +12,34 @@ def networks(value):
                  for item in value.split(",") if item.strip())
 
 
+NAT64 = ipaddress.ip_network("64:ff9b::/96")
+
+
+def unmapped(ip):
+    return ip.ipv4_mapped or ip if ip.version == 6 else ip
+
+
+def bucket(address):
+    try:
+        ip = unmapped(ipaddress.ip_address(address))
+    except ValueError:
+        return address
+    if ip.version == 4:
+        return str(ip)
+    if ip in NAT64:
+        return str(ipaddress.IPv4Address(int(ip) & 0xFFFFFFFF))
+    return str(ipaddress.ip_network((ip, 64), strict=False))
+
+
+def family(path):
+    path = path.rstrip("/")
+    if "/api/archive/" in path or (path.endswith("/mcp") and "/api/" not in path):
+        return "archive"
+    if path.endswith("/api/witness/head"):
+        return "witness"
+    return "panel"
+
+
 class RequestSecurity:
     def __init__(self, app, trusted=None, header=None, allowed=None, clock=time.monotonic):
         self.app, self.clock = app, clock
@@ -25,7 +53,7 @@ class RequestSecurity:
     def client(self, scope):
         peer = (scope.get("client") or ("unknown", 0))[0]
         try:
-            address = ipaddress.ip_address(peer)
+            address = unmapped(ipaddress.ip_address(peer))
         except ValueError:
             return peer
         if not any(address in net for net in self.trusted):
@@ -36,7 +64,7 @@ class RequestSecurity:
         if len(values) != 1 or len(values[0]) > 2048:
             raise ValueError('Invalid forwarded client address.')
         try:
-            chain = [ipaddress.ip_address(item.strip()) for item in values[0].split(",")]
+            chain = [unmapped(ipaddress.ip_address(item.strip())) for item in values[0].split(",")]
         except ValueError:
             raise ValueError('Invalid forwarded client address.') from None
         if self.header == b"cf-connecting-ip":
@@ -49,6 +77,17 @@ class RequestSecurity:
             address = candidate
         return str(address)
 
+    def forwarded_https(self, scope):
+        peer = (scope.get("client") or ("unknown", 0))[0]
+        try:
+            address = unmapped(ipaddress.ip_address(peer))
+        except ValueError:
+            return False
+        if not any(address in net for net in self.trusted):
+            return False
+        values = [value for name, value in scope.get("headers", []) if name.lower() == b"x-forwarded-proto"]
+        return values == [b"https"]
+
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http" or scope.get("tgwitness.request_checked"):
             return await self.app(scope, receive, send)
@@ -58,6 +97,8 @@ class RequestSecurity:
         except ValueError:
             return await JSONResponse({"detail": "Invalid forwarded client address."}, status_code=400,
                                       headers={"Cache-Control": "no-store"})(scope, receive, send)
+        if self.forwarded_https(scope):
+            scope["scheme"] = "https"
         scope["client"] = (address, (scope.get("client") or (None, 0))[1])
         if self.allowed and scope.get("path") != "/_tgwitness/ready":
             try:
@@ -67,16 +108,19 @@ class RequestSecurity:
             if not permitted:
                 return await JSONResponse({"detail": "This address is not allowed."}, status_code=403,
                                           headers={"Cache-Control": "no-store"})(scope, receive, send)
-        if "/api/" not in scope.get("path", ""):
+        path = scope.get("path", "")
+        token_family = family(path)
+        if "/api/" not in path and token_family != "archive":
             return await self.app(scope, receive, send)
         now = self.clock()
-        row = self.clients.get(address)
+        key = (bucket(address), token_family)
+        row = self.clients.get(key)
         if row is None:
             if len(self.clients) >= 4096:
                 self.clients.popitem(last=False)
-            row = self.clients[address] = {"requests": deque(), "failures": deque(), "until": 0,
-                                           "strikes": 0, "last_failure": 0}
-        self.clients.move_to_end(address)
+            row = self.clients[key] = {"requests": deque(), "failures": deque(), "until": 0,
+                                       "strikes": 0, "last_failure": 0}
+        self.clients.move_to_end(key)
         for name in ("requests", "failures"):
             while row[name] and row[name][0] <= now - 60:
                 row[name].popleft()
@@ -87,9 +131,14 @@ class RequestSecurity:
             return await JSONResponse({"detail": "Too many requests. Wait before trying again."}, status_code=429,
                                       headers={"Retry-After": str(max(1, math.ceil(wait))), "Cache-Control": "no-store"})(scope, receive, send)
         row["requests"].append(now)
+        headers = scope.get("headers") or []
+        kinds = [value.split(b";")[0].strip().lower() for name, value in headers if name.lower() == b"content-type"]
+        presented = any(name.lower() == b"authorization" for name, _ in headers) or (
+            scope.get("method") not in ("GET", "HEAD")
+            and (not kinds or any(kind == b"application/json" or kind.endswith(b"+json") for kind in kinds)))
 
         async def checked_send(message):
-            if message["type"] == "http.response.start" and message["status"] == 401:
+            if presented and message["type"] == "http.response.start" and message["status"] == 401:
                 failed_at = self.clock()
                 if failed_at - row["last_failure"] >= 600:
                     row["strikes"] = 0

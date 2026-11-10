@@ -1,7 +1,21 @@
+[TgWitness](../../README.md) / [addons](../README.md)
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../../docs/assets/presentation/section-capture-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../../docs/assets/presentation/section-capture-static.svg">
+  <source media="(max-width: 640px)" srcset="../../docs/assets/presentation/section-capture-mobile.svg">
+  <img src="../../docs/assets/presentation/section-capture.svg" width="1200" alt="TgWitness / Independent capture">
+</picture>
+
 # Optional independent capture
 
+[Configuration examples](config/README.md) · [Container files](deploy/README.md) ·
+[Package source](../../tgwitness_capture/README.md)
+
+For the owned official Telegram Web browser, required video, guarded actions and the GitHub-hosted procedure, see [Official client witness](../../docs/OFFICIAL-WITNESS.md). That mode uses `compose.official.yaml` and a fresh temporary profile. The generic recorders described below retain their existing behavior.
+
 This preview adds two independently operated recorders. It is a separate Python
-package and optional Compose deployment, controlled from **Extras → Independent capture**
+package and optional Compose deployment, controlled from **More tools → Extras → Independent capture**
 or each recorder's standalone English panel. The ordinary application does not start
 recorders or receive their signing keys or client sessions. Both recorders start with
 capture **disabled**, including after a restart. Video is separately selectable and
@@ -53,7 +67,8 @@ python -m tgwitness_capture serve --data data/ayugram-recorder --config /private
 Use distinct data directories, profiles, sessions, keys and routes. Two containers
 on the same host still share the kernel and administrator; separate VMs or hosts
 provide stronger separation. Two sessions of one Telegram account still depend on
-the same account. Neither record is a third-party attestation of Telegram origin.
+the same account. Compare the records with their acquisition routes, retained
+checkpoints and the environment checks available for each recorder.
 
 For a local browser adapter, launch a **separate profile** with
 `--remote-debugging-port=9222 --user-data-dir=/private/capture-browser-profile` and
@@ -89,6 +104,23 @@ heartbeats; a heartbeat alone does not mean a new page was successfully preserve
 There is no operator keystroke logger or automatic secret redaction. An enabled
 capture can include visible secrets, so input credentials only during a pause.
 
+### Open an address in isolation
+
+`POST /api/open` with `{"url": "https://…", "wait_seconds": 5, "purpose": "…"}` opens the
+address in a new tab of the recorder's own browser, waits, and saves a viewport PNG,
+rendered MHTML and text. The signed `capture.opened` event also records the final URL,
+HTTP status, server address and TLS issuer as the browser reported them. A preceding
+`capture.open_requested` event and, on failure, `capture.failed` keep the attempt visible.
+Only `http` and `https` addresses without credentials are accepted. This does not need
+capture to be enabled and does not change the selected tab. `GET /api/object/SHA256`
+returns a stored artifact by its hash.
+
+Pages opened this way see the recorder's network route and browser profile, never the
+observing Telegram account. A Telegram Web address shows what that browser profile is
+logged in to; prepare it during a pause like any other login. In the main panel the
+documentation drawer offers this as **Open in isolation**; the panel accepts the result
+only if the pinned recorder signed it after the latest verified checkpoint.
+
 Behind HTTPS set `public_origin` to the exact external origin, e.g.
 `https://browser-capture.example.org`. Keep the backend private. Cross-origin control
 requests are refused; the server does not trust arbitrary forwarded headers.
@@ -123,7 +155,7 @@ deployed isolation before treating it as a security boundary.
 
 The GUI's WebRTC transport is distinct from the browser's target-site proxy. Local
 bindings are the default. Remote access needs HTTPS and a deliberately configured
-WebRTC/NAT or fallback transport; an HTTP tunnel alone does not establish UDP media.
+WebRTC/NAT or fallback transport; UDP media needs that transport in addition to an HTTP tunnel.
 The X11 recording adapter assumes display `:99.0` and 1280×720; adjust `video_input_args`
 if the pinned Neko image differs. No X11 socket is mounted from the host desktop.
 Video is silent; this version does not promise audio or a complete frame-by-frame
@@ -141,8 +173,8 @@ docker compose --project-directory . -f addons/capture/compose.yaml exec ayugram
 
 That recorder listens on local port 8792 and has its own volume and internal network.
 Its source client's proxy/WARP route is separate from the browser gateway and must be
-configured and tested on that client. The observer records the supplied route label;
-it does not attest that the client actually used it. Stop profiles independently with
+configured and tested on that client. The observer records the supplied route label
+as the operator's configuration; the client's own route test confirms its use. Stop profiles independently with
 the same Compose command and `stop`; retain the named volumes.
 
 ## Independent verification and witness
@@ -171,9 +203,9 @@ python -m tgwitness_capture verify capture-browser.zip --fingerprint TRUSTED_REC
 Remote witness connections require HTTPS and never follow redirects with credentials.
 `--once` performs one observation. Keep witness keys and receipts independently;
 running the witness on the same host/operator does not create organizational
-independence. The witness checks fresh heads, rollback and equal-length conflicts;
-without intermediate records it cannot prove that every longer head extends the last
-one. The ZIP verifier checks an included receipt against the actual journal prefix.
+independence. The witness checks fresh heads, rollback and equal-length conflicts.
+The ZIP verifier checks each included receipt against the actual journal prefix,
+which confirms that the exported journal extends the receipted head.
 Witness times are local clock assertions, not RFC 3161 tokens. A dedicated RFC 3161
 integration is not included in this preview.
 
@@ -205,9 +237,7 @@ periodic backups can miss transient states and do not reconstruct unobserved his
 
 ## Validation
 
-```sh
-python -m pytest addons/capture/tests -q --capture-browser
-```
+Capture regressions are maintained in the private validation workspace.
 
 Real Chromium tests use only a localhost synthetic page. Video tests use FFmpeg's
 synthetic source; set `CAPTURE_TEST_FFMPEG` to an installed executable if needed.

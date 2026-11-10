@@ -1,4 +1,3 @@
-"""English research page and its explicitly selected, data-only review materials."""
 import json
 
 PATH = "docs/export-clinic/"
@@ -13,7 +12,7 @@ DOWNLOADS = (
 FILES = (
     "comparison-poster.jpg", "article-en.md", "comparison-data.json",
     "review-file-manifest.json", "publication-review.json", "REVIEW_README.md",
-    "next-experiments-en.md", "original-metadata-notes.md", "original-metadata-audit.json",
+    "original-metadata-notes.md", "original-metadata-audit.json",
     "recording-manifest.json", "download-manifest.json", "SHA256SUMS.txt",
     *(f"assets/comparisons/{case}-{version}.jpg"
       for case in ("personal", "private-channel", "private-group", "private-supergroup", "public-channel", "public-supergroup")

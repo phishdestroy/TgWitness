@@ -57,7 +57,7 @@ def seed(store):
             continue
         if minute == 23:
             append(minute, 'connection.restored', {})
-        append(minute, 'collector.heartbeat', {'interval_seconds':60})
+        append(minute, 'collector.heartbeat', {'connected':True, 'interval_seconds':60})
         if minute <= 15 or minute >= 24:
             append(minute, 'message.new', {
                 'text': ('DEMO · Agreed delivery: 20 November. Total: 48,000.' if minute == 8 else
@@ -111,7 +111,7 @@ def build(output, languages=('en', 'de', 'ru'), templates=False):
                         options.update(review_question='Did the recorded delivery terms change?',
                             review_method='Compare the saved versions of message 408 in chat -100100001 in events.jsonl. Review coverage before drawing conclusions about the missing period.',
                             review_findings='The first saved version names 20 November and 48,000. A later edit names 27 November and 64,000. A deletion notice is also recorded for message 409 in another chat; it does not identify who deleted it.',
-                            review_conclusion='The saved versions differ. The example does not establish who made the change. All participants, messages and times here are fictional.')
+                            review_conclusion='The saved versions differ, and both are kept with their observation times. All participants, messages and times here are fictional.')
                     bundle = evidence.export_file(store, vault, 'zip', options)
                     verified = verify_bundle(bundle, pin)
                     assert verified['key_pinned'] and verified['report_pdf']

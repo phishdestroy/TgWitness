@@ -1,6 +1,6 @@
-"""Durable, exclusive multi-account acquisition and local message selection."""
 import asyncio
 import base64
+import errno
 import hashlib
 import json
 import os
@@ -9,23 +9,52 @@ import secrets
 import shutil
 import sqlite3
 import time
-from datetime import datetime
+from contextlib import suppress
+from datetime import datetime, timedelta
+from collections import deque
+from itertools import chain, islice
 
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-from telethon import utils
+from telethon import errors as telegram_errors, utils
+from telethon.errors import TypeNotFoundError
 from telethon.tl import types
 
-from . import chat_export, replica, report, tuning
+from . import chat_export, message_details, replica, report, tuning
 from .account_export import durable_write, linked, read_json
-from .collector import message_record
+from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
+from .export_timing import ExportTiming
+from .distributed_takeout import HistoryTakeout
+from .distributed_pages import FORMAT as PAGE_FORMAT, RangePages
 from .message_selection import Selection, SelectionIndex, utc
+from .message_numbers import MissingNumbers
+from .monitoring import capture_settings
+from .scope import kind_of, public_username
 from .store import canonical, utcnow
 from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
 CHUNK = 2000
+PAGE_TIMEOUT = 60
+OUTAGE_RETRIES = 4
+OUTAGE_PAUSE = 30
+POISON_ACCOUNTS = 2
+ACCOUNT_ERRORS = 3
+RECHECK_EDGE = 1000
+RECHECK_PER_ACCOUNT = 1000
+RECORD_BYTES = 1024
+WORKING_COPIES = 5
+ACTIVE = ("preparing", "running", "selecting", "packaging")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
+
+
+def verified(path, public):
+    envelope = read_json(path)
+    if envelope["public_key"] != public:
+        raise ValueError("Export signing identity changed.")
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
+        base64.b64decode(envelope["signature"], validate=True), canonical(envelope["statement"]))
+    return envelope["statement"]
 
 
 class DistributedExport:
@@ -35,13 +64,8 @@ class DistributedExport:
         if linked(self.root):
             raise ValueError("Distributed-export storage must not be a link.")
         self.root.mkdir(mode=0o700, exist_ok=True)
-        self.state = self.job = self.task = self.db = None
-        self.preparing = set()
+        self.runs = {}
         self.reserved = {}
-        self.entities = {}
-        latest = self.list_jobs()
-        if latest:
-            self.state = latest[0]
 
     def app_for(self, profile):
         entry = self.profiles.entries.get(profile)
@@ -55,43 +79,28 @@ class DistributedExport:
         path = self.root / job_id
         if linked(path) or path.resolve().parent != self.root.resolve():
             raise ValueError("Export directory must remain inside its workspace.")
-        if any(linked(path / name) for name in ("chunks", "receipts", "media")):
+        if any(linked(path / name) for name in ("chunks", "receipts", "media", "pages")):
             raise ValueError("Export working directories must not be links.")
         return path
 
-    def busy(self):
-        return bool(self.preparing or self.task and not self.task.done())
-
     def uses(self, profile):
-        return profile in self.reserved or profile in self.preparing
+        return profile in self.reserved
 
-    def signed(self, value, vault=None):
-        vault = vault or self.app_for(self.state["lead"]).state.vault
-        return {"statement": value, "public_key": vault.public_key, "signature": vault.sign(canonical(value))}
-
-    def verified(self, path, public):
-        envelope = read_json(path)
-        if envelope["public_key"] != public:
-            raise ValueError("Export signing identity changed.")
-        Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
-            base64.b64decode(envelope["signature"], validate=True), canonical(envelope["statement"]))
-        return envelope["statement"]
-
-    def persist(self):
-        self.state["updated_at"] = utcnow()
-        durable_write(self.directory(self.state["id"]) / "status.json", canonical(self.signed(self.state)))
-
-    def public(self, job_id=None):
-        if job_id is None or self.state and job_id == self.state["id"]:
-            return json.loads(json.dumps(self.state)) if self.state else {"phase": "none"}
+    def public(self, job_id=None, chat_id=None):
+        if job_id is None:
+            jobs = [state for state in self.list_jobs() if chat_id in (None, state["chat_id"])]
+            return next((state for state in jobs if state["phase"] in ACTIVE), jobs[0] if jobs else {"phase": "none"})
+        if job_id in self.runs:
+            self.runs[job_id].update_timing()
+            return json.loads(json.dumps(self.runs[job_id].state))
         path = self.directory(job_id) / "status.json"
         if not path.is_file():
             return {"phase": "unknown"}
         envelope = read_json(path)
         state = envelope["statement"]
         public = self.app_for(state["lead"]).state.vault.public_key
-        state = self.verified(path, public)
-        if state["phase"] in ("preparing", "running", "selecting", "packaging"):
+        state = verified(path, public)
+        if state["phase"] in ACTIVE:
             state.update(phase="paused", error="The process stopped. Resume verifies saved chunks first.")
         return state
 
@@ -108,49 +117,50 @@ class DistributedExport:
         return sorted(items, key=lambda s: s["started_at"], reverse=True)
 
     def reserve(self, profiles, owner):
-        reserved = {}
         try:
             for profile in profiles:
                 app = self.app_for(profile)
                 collector = app.state.collector
                 if not app.state.vault.read("credentials").get("session"):
                     raise ValueError("Connect every selected Telegram account before exporting.")
+                if collector.store.get_setting("rpc_backoff_until", 0) > time.time():
+                    label = self.profiles.entries[profile].get("label", profile)
+                    raise ValueError(label + ": Telegram requests are paused. Check the saved rate-limit deadline in connection details.")
                 if not collector.reserve_export(owner):
                     label = self.profiles.entries[profile].get("label", profile)
                     raise ValueError(label + ": account is busy. Pause its current task explicitly or deselect it.")
-                reserved[profile] = collector
-            self.reserved = reserved
+                self.reserved[profile] = (owner, collector)
         except BaseException:
-            for collector in reserved.values():
-                collector.release_export(owner)
+            self.release(owner)
             raise
 
     def release(self, owner):
-        for profile, collector in list(self.reserved.items()):
-            if collector.export_claim == owner:
+        for profile, (claim, collector) in list(self.reserved.items()):
+            if claim == owner:
                 collector.release_export(owner)
-                self.reserved.pop(profile, None)
+                del self.reserved[profile]
 
-    async def start(self, chat_id, profile_ids, lead_id, language="en", selection=None):
+    async def start(self, chat_id, profile_ids, lead_id, language="en", selection=None, transport="regular", username=None):
+        if transport not in ("regular", "takeout"):
+            raise ValueError("Unknown export transport.")
         options = Selection.model_validate(selection or {})
-        if self.busy():
-            raise ValueError("Pause the current distributed export before starting another.")
         chosen = list(dict.fromkeys([lead_id, *profile_ids]))
         export_id = secrets.token_hex(16)
-        self.reserve(chosen, export_id)  # Atomic before the first await, including monitoring accounts.
-        self.preparing = set(chosen)
+        self.reserve(chosen, export_id)
+        timing = ExportTiming()
         try:
             lead_app = self.app_for(lead_id)
             lead = lead_app.state.collector
-            entity = await lead.resolve_for_export(chat_id)
+            entity = await lead.resolve_for_export(chat_id, username)
+            if transport == "takeout" and (not isinstance(entity, types.Channel) or not public_username(entity)):
+                raise ValueError("Distributed Takeout currently supports public channels and supergroups only.")
             if len(chosen) > 1 and not isinstance(entity, types.Channel):
                 raise ValueError("Only one account can export an ordinary group or private chat.")
             now = utc(utcnow())
             scan_end = options.to_utc if options.reply_scope == "period" else None
             scan_end = min(scan_end, now) if scan_end else now
-            username = getattr(entity, "username", None)
-            workers, bounds = [], []
-            self.entities = {}
+            username = public_username(entity)
+            workers, bounds, densities, entities = [], [], [], {}
             for profile in chosen:
                 app = self.app_for(profile)
                 collector = app.state.collector
@@ -160,70 +170,98 @@ class DistributedExport:
                           "ranges": 0, "wait_until": None, "error": None}
                 try:
                     peer = entity if profile == lead_id else await collector.resolve_for_export(chat_id, username)
-                    latest = await collector.client.get_messages(peer, limit=1,
-                        offset_date=datetime.fromisoformat(scan_end))
-                    upper = latest[0].id if latest else 0
+                    try:
+                        latest = await collector.client.get_messages(peer, limit=1,
+                            offset_date=datetime.fromisoformat(scan_end))
+                        upper = latest[0].id if latest else 0
+                        count = getattr(latest, "total", None)
+                    except TypeNotFoundError:
+                        upper = await collector.number_before(peer, datetime.fromisoformat(scan_end))
+                        count = None
+                    if type(count) is int and count > 0:
+                        densities.append(max(1, upper // count))
+                        worker.update(planning_count=count, planning_count_scope="visible history estimate; precision unknown")
                     lower = 1
                     if upper and options.from_utc:
-                        before = await collector.client.get_messages(peer, limit=1,
-                            offset_date=datetime.fromisoformat(options.from_utc))
-                        lower = before[0].id + 1 if before else 1
+                        lower = await collector.number_before(peer,
+                            datetime.fromisoformat(options.from_utc) - timedelta(seconds=1)) + 1
                     if upper >= lower:
                         bounds.append((lower, upper, profile))
                     worker.update(low=lower, high=upper)
-                    self.entities[profile] = peer
+                    entities[profile] = peer
                 except asyncio.CancelledError:
                     raise
                 except Exception as exc:
-                    worker.update(state="skipped", error=type(exc).__name__)
+                    worker.update(state="skipped", error=type(exc).__name__,
+                                  reason=str(exc) if isinstance(exc, ValueError) else None)
                 workers.append(worker)
-            if lead_id not in self.entities:
-                raise ValueError("The starting account cannot read this chat.")
+            if lead_id not in entities:
+                lead_worker = next(w for w in workers if w["profile_id"] == lead_id)
+                raise ValueError("The starting account cannot read this chat: "
+                                 + (lead_worker.get("reason") or lead_worker.get("error") or "unknown reason") + ".")
             cuts = sorted({edge for low, high, _ in bounds for edge in (low, high + 1)})
             segments = []
             for low, end in zip(cuts, cuts[1:]):
                 eligible = [p for left, right, p in bounds if left <= low and end - 1 <= right]
                 if eligible:
                     segments.append({"low": low, "high": end - 1, "profiles": eligible})
-            info = lead.dialog_cache.get(chat_id, {})
-            self.state = {"id": export_id, "chat_id": chat_id, "title": info.get("title"), "lead": lead_id,
+            total = next((worker.get("planning_count") for worker in workers
+                          if worker["profile_id"] == lead_id), None)
+            if total is None and segments:
+                try:
+                    total = (await lead.client.get_messages(entity, limit=0)).total
+                except Exception:
+                    total = None
+            if type(total) is not int or total < 0:
+                total = None
+            messages = sum(s["high"] - s["low"] + 1 for s in segments)
+            messages = min(messages, total) if total is not None else messages
+            needed = messages * RECORD_BYTES * WORKING_COPIES + lead.param("media_min_free_mb") * 1024**2
+            free = shutil.disk_usage(self.root).free
+            if free < needed:
+                raise ValueError("Not enough free disk space for this export. Free up space or choose a shorter period.")
+            info = lead.dialog_cache.get(chat_id) or {"title": utils.get_display_name(entity), "kind": kind_of(entity)}
+            chunk_size = CHUNK * min(50, min(densities, default=1))
+            state = {"id": export_id, "chat_id": chat_id, "title": info.get("title"), "lead": lead_id,
                           "phase": "preparing", "started_at": now, "workers": workers,
                           "captured": 0, "ranges_done": 0, "ranges_total": sum(
-                              (s["high"] - s["low"]) // CHUNK + 1 for s in segments),
+                              (s["high"] - s["low"]) // chunk_size + 1 for s in segments),
                           "total": None, "eta_seconds": None, "ready": False, "error": None,
-                          "selection": options.model_dump(), "counts": {}}
-            self.job = {"format": "tgwitness-distributed-job-v1", "id": export_id, "chat_id": chat_id,
+                          "selection": options.model_dump(), "counts": {}, "transport": transport}
+            job = {"format": "tgwitness-distributed-job-v1", "id": export_id, "chat_id": chat_id,
                         "lead": lead_id, "started_at": now, "scan_end": scan_end, "username": username,
-                        "chunk_size": CHUNK, "segments": segments, "workers": [dict(w) for w in workers],
+                        "chunk_size": chunk_size, "segments": segments, "workers": [dict(w) for w in workers],
+                        "transport": transport, "megagroup": bool(getattr(entity, "megagroup", False)),
+                        "checkpoint_format": PAGE_FORMAT,
                         "selection": options.model_dump(), "report": report.resolved(lead.store, language),
                         "chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind")}}
+            state["disk"] = {"estimated_messages": messages, "needed_bytes": needed, "free_bytes": free}
+            run = Run(self, state, job, timing=timing)
+            run.entities = entities
             directory = self.directory(export_id)
             directory.mkdir(mode=0o700)
-            for folder in ("chunks", "receipts", "media"):
+            for folder in ("chunks", "receipts", "media", "pages"):
                 (directory / folder).mkdir(mode=0o700)
-            durable_write(directory / "job.json", canonical(self.signed(self.job)))
-            self.persist()
-            self.launch()
-            return self.public()
+            durable_write(directory / "job.json", canonical(run.signed(job)))
+            run.persist()
+            self.launch(run)
+            return self.public(export_id)
         except BaseException:
             self.release(export_id)
             raise
-        finally:
-            self.preparing.clear()
 
-    def launch(self):
-        self.task = asyncio.create_task(self.run())
-        owner = self.state["id"]
-        self.task.add_done_callback(lambda _: self.release(owner))
+    def launch(self, run):
+        owner = run.state["id"]
+        self.runs[owner] = run
+        run.task = asyncio.create_task(run.run())
+        run.task.add_done_callback(lambda _: self.release(owner))
 
     async def resume(self, job_id):
-        if self.busy():
-            raise ValueError("Pause the current distributed export first.")
         state = self.public(job_id)
         if state.get("phase") not in ("paused", "failed", "cancelled"):
             raise ValueError("This export is not available to resume.")
         public = self.app_for(state["lead"]).state.vault.public_key
-        job = self.verified(self.directory(job_id) / "job.json", public)
+        job = verified(self.directory(job_id) / "job.json", public)
         active = [w for w in job["workers"] if w["state"] != "skipped"]
         for worker in active:
             app = self.app_for(worker["profile_id"])
@@ -231,27 +269,94 @@ class DistributedExport:
                     (app.state.store.get_setting("account", {}) or {}).get("id") != worker["account_id"]):
                 raise ValueError("A participating account or signing identity has changed.")
         self.reserve([w["profile_id"] for w in active], job_id)
-        self.preparing = {w["profile_id"] for w in active}
         try:
-            self.state, self.job = state, job
-            self.entities = {}
-            self.state.update(phase="preparing", ready=False, error=None)
-            self.state["workers"] = [{**w, "state": "pending" if w["state"] != "skipped" else "skipped",
-                                      "wait_until": None} for w in job["workers"]]
-            self.persist()
-            self.launch()
-            return self.public()
+            state.update(phase="preparing", ready=False, error=None, wait_until=None, approval_profile=None)
+            state["workers"] = [{**w, "state": "pending" if w["state"] != "skipped" else "skipped",
+                                 "wait_until": None} for w in job["workers"]]
+            run = Run(self, state, job)
+            run.persist()
+            self.launch(run)
+            return self.public(job_id)
         except BaseException:
             self.release(job_id)
             raise
-        finally:
-            self.preparing.clear()
+
+    def poll(self, job_id):
+        return self.public(job_id)
+
+    async def pause(self, job_id):
+        run = self.runs.get(job_id)
+        if run and run.active():
+            run.task.cancel()
+            await asyncio.gather(run.task, return_exceptions=True)
+            if run.state["phase"] not in ("done", "failed", "paused"):
+                run.state.update(phase="paused", ready=False, error="Paused; committed chunks are retained.")
+                run.set_phase("paused")
+                run.persist()
+        return self.public(job_id)
+
+    async def cancel(self, job_id):
+        state = await self.pause(job_id)
+        if state.get("phase") not in ("done", "unknown", *ACTIVE):
+            run = Run(self, {**state, "phase": "cancelled"})
+            run.persist()
+            self.runs[job_id] = run
+        return self.public(job_id)
+
+    def result_path(self, job_id):
+        state = self.public(job_id)
+        path = self.directory(job_id) / "export.zip"
+        return path if state.get("ready") and path.is_file() and not path.is_symlink() else None
+
+    async def close(self):
+        for job_id in list(self.runs):
+            await self.pause(job_id)
+
+
+class Run:
+
+    def __init__(self, exports, state, job=None, *, timing=None):
+        self.app_for, self.directory = exports.app_for, exports.directory
+        self.state, self.job = state, job
+        self.task = self.db = self.recheck = None
+        self.chunk_failures, self.entities = {}, {}
+        self.history_transports, self.page_states = {}, {}
+        self.timing = (timing or ExportTiming()) if job is not None else None
+
+    def update_timing(self):
+        if self.timing is not None and self.state is not None:
+            self.state["performance"] = self.timing.snapshot(self.state["captured"])
+
+    def set_phase(self, phase):
+        self.state["phase"] = phase
+        if self.timing is not None:
+            self.timing.move(phase)
+        self.update_timing()
+
+    def active(self):
+        return bool(self.task and not self.task.done())
+
+    def signed(self, value, vault=None):
+        vault = vault or self.app_for(self.state["lead"]).state.vault
+        return {"statement": value, "public_key": vault.public_key, "signature": vault.sign(canonical(value))}
+
+    def persist(self):
+        self.update_timing()
+        self.state["updated_at"] = utcnow()
+        durable_write(self.directory(self.state["id"]) / "status.json", canonical(self.signed(self.state)))
 
     def prepare_chunks(self):
         directory = self.directory(self.state["id"])
+        retained_count = self.state["captured"]
+        if self.job.get("checkpoint_format") not in (None, PAGE_FORMAT):
+            raise ValueError("Unsupported distributed checkpoint format.")
+        self.page_states = {}
         path = directory / "work.sqlite3"
         if linked(path):
             raise ValueError("Export index must not be a link.")
+        for stale in (directory / "chunks").glob("*.part"):
+            if re.fullmatch(r"\d+(?:\.[0-9a-f]{16})?\.part", stale.name):
+                stale.unlink(missing_ok=True)
         self.db = sqlite3.connect(path, check_same_thread=False)
         self.db.row_factory = sqlite3.Row
         self.db.executescript("DROP TABLE IF EXISTS tasks; DROP TABLE IF EXISTS eligible; "
@@ -262,25 +367,49 @@ class DistributedExport:
                 high = min(segment["high"], low + self.job["chunk_size"] - 1)
                 self.db.execute("INSERT INTO tasks VALUES(?,?,'pending',NULL,0,NULL)", (low, high))
                 self.db.executemany("INSERT INTO eligible VALUES(?,?)", [(low, p) for p in segment["profiles"]])
+        if self.job.get("checkpoint_format") == PAGE_FORMAT:
+            for folder in (directory / "pages").iterdir():
+                if not folder.name.isdigit() or linked(folder) or not folder.is_dir():
+                    raise ValueError("Invalid checkpoint directory.")
+                task = self.db.execute("SELECT * FROM tasks WHERE low=?", (int(folder.name),)).fetchone()
+                if not task or folder.name != str(task["low"]):
+                    raise ValueError("Checkpoint range is outside the signed plan.")
+                pages = RangePages(directory, self.job, task)
+                self.page_states[task["low"]] = pages
+                if pages.state["profile_id"] is not None:
+                    self.record_page(task["low"], pages.state)
         by_profile = {w["profile_id"]: w for w in self.job["workers"]}
         for receipt in (directory / "receipts").glob("*.json"):
             if not receipt.stem.isdigit() or linked(receipt):
                 raise ValueError("Invalid chunk receipt path.")
             envelope = read_json(receipt)
             profile = envelope["statement"]["profile_id"]
-            value = self.verified(receipt, by_profile[profile]["public_key"])
+            value = verified(receipt, by_profile[profile]["public_key"])
             if receipt.stem != str(value["low"]):
                 raise ValueError("Chunk receipt filename differs from its signed range.")
             task = self.db.execute("SELECT * FROM tasks WHERE low=? AND high=?", (value["low"], value["high"])).fetchone()
             if not task or value["job_id"] != self.job["id"] or not self.db.execute(
                     "SELECT 1 FROM eligible WHERE low=? AND profile=?", (value["low"], profile)).fetchone():
                 raise ValueError("Chunk receipt does not belong to the signed acquisition plan.")
+            if self.job.get("transport", "regular") == "takeout" and (value.get("transport") != "takeout"
+                    or type(value.get("transport_generation")) is not int or value["transport_generation"] < 1):
+                raise ValueError("Chunk receipt does not identify its Takeout generation.")
+            if self.job.get("checkpoint_format") == PAGE_FORMAT:
+                pages = self.page_states.get(value["low"])
+                if (not pages or not pages.state["terminal"] or pages.state["profile_id"] != profile
+                        or value.get("checkpoint") != self.page_summary(pages.state)
+                        or value.get("transport", "regular") != self.job.get("transport", "regular")
+                        or value.get("transport_generation") != pages.state["transport_generation"]):
+                    raise ValueError("Chunk receipt differs from its signed checkpoints.")
             count, digest = self.check_chunk(directory / "chunks" / (str(value["low"]) + ".jsonl"), task)
             if (count, digest) != (value["count"], value["sha256"]):
                 raise ValueError("Saved chunk differs from its signed receipt.")
             self.db.execute("UPDATE tasks SET phase='done',profile=?,count=?,sha256=? WHERE low=?",
                             (profile, count, digest, value["low"]))
         self.db.commit()
+        verified_count = self.db.execute("SELECT coalesce(sum(count),0) FROM tasks").fetchone()[0]
+        if self.job.get("checkpoint_format") == PAGE_FORMAT and verified_count < retained_count:
+            raise ValueError("Saved checkpoint progress is missing; preserve this job for inspection.")
         self.update_counts()
 
     @staticmethod
@@ -299,18 +428,32 @@ class DistributedExport:
         return count, digest.hexdigest()
 
     def update_counts(self):
-        count, captured = self.db.execute("SELECT count(*),coalesce(sum(count),0) FROM tasks WHERE phase='done'").fetchone()
+        count, captured = self.db.execute("SELECT coalesce(sum(phase='done'),0),coalesce(sum(count),0) FROM tasks").fetchone()
         self.state.update(ranges_done=count, captured=captured)
         for worker in self.state["workers"]:
-            ranges, messages = self.db.execute("SELECT count(*),coalesce(sum(count),0) FROM tasks "
-                "WHERE phase='done' AND profile=?", (worker["profile_id"],)).fetchone()
+            ranges, messages = self.db.execute("SELECT coalesce(sum(phase='done'),0),coalesce(sum(count),0) FROM tasks "
+                "WHERE profile=?", (worker["profile_id"],)).fetchone()
             worker.update(ranges=ranges, captured=messages)
 
+    @staticmethod
+    def page_summary(state):
+        return {"format": PAGE_FORMAT, "pages": state["pages"], "head_sha256": state["head_sha256"],
+                "count": state["count"], "byte_end": state["byte_end"]}
+
+    def record_page(self, low, state):
+        self.db.execute("UPDATE tasks SET profile=?,count=? WHERE low=?", (state["profile_id"], state["count"], low))
+        self.db.execute("DELETE FROM eligible WHERE low=? AND profile!=?", (low, state["profile_id"]))
+        self.db.commit()
+
     async def work(self, worker):
+        await self.read_ranges(worker)
+
+    async def read_ranges(self, worker):
         profile = worker["profile_id"]
         collector = self.app_for(profile).state.collector
         directory = self.directory(self.state["id"])
         worker["state"] = "running"
+        outages = errors = 0
         while True:
             task = self.db.execute("SELECT t.* FROM tasks t JOIN eligible e USING(low) WHERE e.profile=? "
                                    "AND t.phase='pending' ORDER BY low DESC LIMIT 1", (profile,)).fetchone()
@@ -323,23 +466,46 @@ class DistributedExport:
             self.db.execute("UPDATE tasks SET phase='running' WHERE low=?", (task["low"],))
             self.db.commit()
             path = directory / "chunks" / (str(task["low"]) + ".jsonl")
-            temporary = path.with_suffix(".part")
+            temporary = path.with_name(str(task["low"]) + "." + secrets.token_hex(8) + ".part")
             worker["current_range"] = [task["low"], task["high"]]
             def waiting(seconds):
                 worker.update(state="waiting", wait_until=time.time() + seconds)
+            transport = self.history_transports.get(profile)
             try:
                 if shutil.disk_usage(directory).free < collector.param("media_min_free_mb") * 1024**2:
                     raise ValueError("Insufficient free disk space for another chunk.")
                 if linked(temporary) or linked(path):
                     raise ValueError("Chunk paths must not be links.")
-                await collector.fetch_range(self.entities[profile], task["low"], task["high"], temporary,
-                                            lambda: None, waiting)
-                count, digest = self.check_chunk(temporary, task)
-                with temporary.open("r+b") as stream:
-                    os.fsync(stream.fileno())
-                temporary.replace(path)
+                pages = None
+                if self.job.get("checkpoint_format") == PAGE_FORMAT:
+                    pages = self.page_states.get(task["low"])
+                    if pages is None:
+                        pages = self.page_states[task["low"]] = RangePages(directory, self.job, task)
+                    def committed(state):
+                        self.record_page(task["low"], state)
+                        worker.update(state="running", wait_until=None)
+                        self.update_counts()
+                        self.persist()
+                    await pages.fetch(collector, self.entities[profile], profile, committed, waiting, transport,
+                                      page_timeout=PAGE_TIMEOUT, attempts=1)
+                    if await complete_in_thread(pages.verify) != pages.state:
+                        raise ValueError("Checkpoint data changed during acquisition.")
+                    count, digest = await complete_in_thread(self.check_chunk, path, task)
+                else:
+                    await collector.fetch_range(self.entities[profile], task["low"], task["high"], temporary,
+                                                lambda: None, waiting, page_timeout=PAGE_TIMEOUT, attempts=1,
+                                                **({"history_client": transport.client} if transport else {}))
+                    count, digest = self.check_chunk(temporary, task)
+                    with temporary.open("r+b") as stream:
+                        os.fsync(stream.fileno())
+                    temporary.replace(path)
                 receipt = {"job_id": self.job["id"], "low": task["low"], "high": task["high"],
                            "profile_id": profile, "count": count, "sha256": digest, "observed_at": utcnow()}
+                if transport:
+                    receipt.update(transport="takeout", transport_generation=pages.state["transport_generation"] if pages
+                                   else transport.secret["generations"][-1]["generation"])
+                if pages:
+                    receipt["checkpoint"] = self.page_summary(pages.state)
                 durable_write(directory / "receipts" / (str(task["low"]) + ".json"),
                               canonical(self.signed(receipt, collector.vault)))
                 self.db.execute("UPDATE tasks SET phase='done',profile=?,count=?,sha256=? WHERE low=?",
@@ -350,14 +516,43 @@ class DistributedExport:
                 self.persist()
             except asyncio.CancelledError:
                 raise
+            except telegram_errors.TakeoutInvalidError:
+                if transport:
+                    transport.invalidate()
+                raise
             except Exception as exc:
+                with suppress(OSError):
+                    temporary.unlink(missing_ok=True)
                 self.db.execute("UPDATE tasks SET phase='pending' WHERE low=?", (task["low"],))
-                self.db.execute("DELETE FROM eligible WHERE profile=?", (profile,))
                 self.db.commit()
-                worker.update(state="failed", error=type(exc).__name__)
-                return
+                if isinstance(exc, OSError) and (exc.filename is not None or exc.errno in {
+                        errno.ENOSPC, errno.EDQUOT, errno.EROFS, errno.EACCES, errno.EPERM, errno.EIO}):
+                    raise
+                if isinstance(exc, (OSError, ConnectionError, TimeoutError)) and outages < OUTAGE_RETRIES:
+                    outages += 1
+                    pause = min(300, OUTAGE_PAUSE * 2 ** (outages - 1))
+                    worker.update(state="waiting", wait_until=time.time() + pause, error="no_connection")
+                    self.persist()
+                    await asyncio.sleep(pause)
+                    worker.update(state="running", wait_until=None, error=None)
+                    continue
+                reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+                failed = self.chunk_failures.setdefault(task["low"], {})
+                failed[profile] = reason
+                self.db.execute("DELETE FROM eligible WHERE low=? AND profile=?", (task["low"], profile))
+                if len(failed) >= POISON_ACCOUNTS:
+                    self.db.execute("UPDATE tasks SET phase='failed' WHERE low=?", (task["low"],))
+                errors += 1
+                if isinstance(exc, AUTHORIZATION_ERRORS + (OSError, ConnectionError, TimeoutError)) or errors > ACCOUNT_ERRORS:
+                    self.db.execute("DELETE FROM eligible WHERE profile=?", (profile,))
+                    self.db.commit()
+                    worker.update(state="failed", error=type(exc).__name__, reason=reason)
+                    return
+                self.db.commit()
+                continue
             finally:
                 temporary.unlink(missing_ok=True)
+            outages = errors = 0
             await asyncio.sleep(0)
 
     async def context(self, index, options):
@@ -400,6 +595,7 @@ class DistributedExport:
                         index.add(json.loads(line), task["profile"])
                 index.db.commit()
                 await asyncio.sleep(0)
+            self.recheck = await self.recheck_absent(index, options)
             batches = index.classify_batches(options)
             uncertain = 0
             while (result := await complete_in_thread(next, batches, None)) is not None:
@@ -415,8 +611,10 @@ class DistributedExport:
                     if options.download_media and record.get("media_type"):
                         collector = self.app_for(profile).state.collector
                         message = await collector.client.get_messages(self.entities[profile], ids=record["id"])
-                        if message and message_record(message) == json.loads(index.db.execute(
-                                "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0]):
+                        stored = json.loads(index.db.execute(
+                            "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0])
+                        stored.pop("found_on_recheck", None)
+                        if message and message_details.stable(message_record(message)) == message_details.stable(stored):
                             record.update(await collector.export_attachment(message, directory / "media"))
                         else:
                             record["file_status"] = "message_changed_or_unavailable_at_media_read"
@@ -436,6 +634,62 @@ class DistributedExport:
         finally:
             index.close()
 
+    async def recheck_absent(self, index, options):
+        if options.excludes_messages() or self.job["chat_id"] >= -1000000000000:
+            return None
+        present = [row[0] for row in index.db.execute("SELECT id FROM messages ORDER BY id")]
+        if not present:
+            return None
+        edge = list(range(max(1, present[0] - RECHECK_EDGE), present[0]))
+        gaps = MissingNumbers(present)
+        if not edge and not gaps:
+            return None
+        readers = [w["profile_id"] for w in self.state["workers"]
+                   if w["state"] not in ("skipped", "failed") and w["profile_id"] in self.entities]
+        wanted = len(edge) + len(gaps)
+        budget = len(gaps) if options.recheck_all else max(0, RECHECK_PER_ACCOUNT * len(readers) - len(edge))
+        step = max(1, -(-len(gaps) // budget)) if budget else len(gaps) + 1
+        planned = len(edge) + min(budget, -(-len(gaps) // step))
+        numbers = chain(edge, islice(gaps.sample(step), budget))
+        queue = deque()
+        found, errors, started = {}, {}, utcnow()
+        progress = self.state["recheck"] = {"asked": 0, "total": planned}
+
+        async def read(profile):
+            collector = self.app_for(profile).state.collector
+            while True:
+                batch = queue.popleft() if queue else list(islice(numbers, 100))
+                if not batch:
+                    return
+                try:
+                    answer = await collector.read_numbers(self.entities[profile], batch)
+                except asyncio.CancelledError:
+                    raise
+                except Exception as exc:
+                    errors[profile] = type(exc).__name__
+                    queue.append(batch)
+                    return
+                for number, value in answer.items():
+                    found[number] = (value, profile)
+                progress["asked"] += len(batch)
+        await asyncio.gather(*(read(profile) for profile in readers))
+        for number, (value, profile) in sorted(found.items()):
+            record = unparsed_record(number, value) if isinstance(value, TypeNotFoundError) else message_record(value)
+            index.add({**record, "found_on_recheck": True}, profile)
+        index.db.commit()
+        checked = progress["asked"]
+        returned = sorted(found)
+        return {"asked_at": started, "asked": checked, "absent_total": len(gaps), "empty": checked - len(returned),
+                "returned": returned, "unchecked": wanted - checked, "limit_reached": wanted > planned,
+                "sampling": "every number" if planned == wanted else "every " + str(step) + "th absent number",
+                "edge": [edge[0], edge[-1]] if edge else None,
+                "edge_found": sum(1 for number in returned if number < present[0]),
+                "accounts": len(readers), **({"errors": errors} if errors else {}),
+                "method": "channels.getMessages by number, shared by the accounts of this export",
+                "meaning": "An empty answer means Telegram has no message under that number for these accounts: "
+                           "it was deleted, or was never visible to them. Unchecked numbers are reported "
+                           "separately from checked ones."}
+
     def sign_parts(self, ranges):
         parts = []
         for profile in dict.fromkeys(p["profile_id"] for p in ranges):
@@ -451,27 +705,46 @@ class DistributedExport:
                           "fingerprint": fingerprint(vault.public_key)})
         return parts
 
+    def clean(self):
+        directory = self.directory(self.state["id"])
+        for name in ("chunks", "receipts", "media", "pages"):
+            shutil.rmtree(directory / name, ignore_errors=True)
+        for path in [*directory.glob("*.sqlite3*"), directory / "selected.jsonl"]:
+            with suppress(OSError):
+                path.unlink(missing_ok=True)
+
     async def run(self):
         directory = self.directory(self.state["id"])
         lead = self.app_for(self.job["lead"]).state.collector
+        self.history_transports = {}
         try:
             await complete_in_thread(self.prepare_chunks)
+            self.chunk_failures = {}
+            self.timing.baseline = self.state["captured"]
             for worker in self.job["workers"]:
                 profile_id = worker["profile_id"]
                 if worker["state"] != "skipped" and profile_id not in self.entities:
                     self.entities[profile_id] = await self.app_for(profile_id).state.collector.resolve_for_export(
                         self.job["chat_id"], self.job["username"])
-            self.state["phase"] = "running"
-            self.persist()
+                if worker["state"] != "skipped" and self.job.get("transport") == "takeout":
+                    network = HistoryTakeout(self.app_for(profile_id).state.collector, self.job["id"],
+                                             worker["account_id"], self.job["megagroup"])
+                    self.history_transports[profile_id] = network
+                    if self.db.execute("SELECT 1 FROM tasks t JOIN eligible e USING(low) "
+                                       "WHERE e.profile=? AND t.phase!='done' LIMIT 1", (profile_id,)).fetchone():
+                        await network.open()
             clock = await lead.telegram_clock()
-            profile, observer, problems = await lead.chat_profile(self.entities[self.job["lead"]])
+            capture = capture_settings(lead.store)
+            profile, observer, problems = await lead.chat_profile(self.entities[self.job["lead"]],
+                include_photo=bool(self.job["selection"].get("download_media")
+                                   and capture["download_media"] and capture["include_avatars"]))
             log = await lead.admin_log(self.entities[self.job["lead"]]) if observer.get("role") in ("admin", "creator") else None
+            self.set_phase("running")
+            self.persist()
             workers = [asyncio.create_task(self.work(w)) for w in self.state["workers"] if w["state"] != "skipped"]
             try:
                 await asyncio.gather(*workers)
             finally:
-                # gather propagates a worker error without stopping its siblings.
-                # Keep the index and every account reservation until they finish.
                 for task in workers:
                     if not task.done() and not task.cancelling():
                         task.cancel()
@@ -484,76 +757,91 @@ class DistributedExport:
                         interrupted = True
                 if interrupted:
                     raise asyncio.CancelledError
+            stuck = self.db.execute("SELECT low, high FROM tasks WHERE phase='failed' ORDER BY low DESC").fetchall()
+            if stuck:
+                low, high = stuck[0]["low"], stuck[0]["high"]
+                reasons = sorted(set(self.chunk_failures.get(low, {}).values()))
+                raise ValueError("Message numbers " + str(low) + "–" + str(high) + (" and " + str(len(stuck) - 1)
+                                 + " more ranges" if len(stuck) > 1 else "") + " failed on " + str(POISON_ACCOUNTS)
+                                 + " different accounts (" + "; ".join(reasons) + "). The accounts were kept; "
+                                 "saved chunks are retained.")
             if self.db.execute("SELECT 1 FROM tasks WHERE phase!='done' LIMIT 1").fetchone():
                 raise ValueError("Some ranges could not be read. Saved chunks are retained; resume when accounts are available.")
-            self.state["phase"] = "selecting"
+            self.set_phase("selecting")
             self.persist()
             scratch, ranges = await self.finish_selection(directory, Selection.model_validate(self.job["selection"]))
             meta = {"chat": {**self.job["chat"], "profile": profile, "profile_errors": problems},
-                    "observer": observer, "admin_log": log, "account": lead.store.get_setting("account", {}),
+                    "observer": observer, "admin_log": log, "recheck": self.recheck,
+                    "journal": chat_export.journal_changes(lead.store, self.job["chat_id"]),
+                    "account": lead.store.get_setting("account", {}),
                     "client": lead.client_identity(), "route": lead.route_receipt(),
                     "message_count": self.state["counts"]["selected"], "parts": self.sign_parts(ranges),
                     "collection": {"mode": "distributed_selection", "selection": self.job["selection"],
+                        "history_transport": self.job.get("transport", "regular"),
                         "counts": self.state["counts"], "scan_end": self.job["scan_end"],
                         "scope": "Selected messages and explicitly labelled context in the observed accessible ranges; "
                                  "reply absence is limited to the scanned scope; not an atomic snapshot."},
                     "acquisition": {"started_at": self.job["started_at"], "finished_at": utcnow(),
-                                    "segments": self.job["segments"], "clock_at_start": clock,
+                                    "segments": self.job["segments"], "chunk_size": self.job["chunk_size"], "clock_at_start": clock,
                                     "clock_at_end": await lead.telegram_clock(),
                                     "clock_scope": "Current run; saved chunks retain their original local commit times."}}
-            self.state["phase"] = "packaging"
+            if self.job.get("checkpoint_format") == PAGE_FORMAT:
+                meta["acquisition"]["checkpoints"] = {"format": PAGE_FORMAT, "max_messages": 100,
+                    "pages": sum(p.state["pages"] for p in self.page_states.values()),
+                    "scope": "Local decoded-message checkpoints, not RPC responses. Excluded records and page receipts "
+                             "are not included in this archive. Working files are removed after successful archive "
+                             "verification; selected messages have the archive's account signatures."}
+            for profile_id, network in self.history_transports.items():
+                try:
+                    await network.finish()
+                    self.state.get("transport_close_errors", {}).pop(profile_id, None)
+                except (telegram_errors.RPCError, OSError, ConnectionError, TimeoutError) as exc:
+                    self.state.setdefault("transport_close_errors", {})[profile_id] = type(exc).__name__
+            if self.history_transports:
+                meta["acquisition"]["history_transports"] = {p: n.public() for p, n in self.history_transports.items()}
+                meta["acquisition"]["transport_close_errors"] = self.state.get("transport_close_errors", {})
+            self.set_phase("packaging")
             self.persist()
             out = directory / "export.zip"
             max_gib = tuning.value(lead.store, "export_max_gib")
+            names = await complete_in_thread(chat_export.journal_names, lead.store, self.job["chat_id"], scratch)
             await complete_in_thread(chat_export.build_bundle, scratch, meta, lead.vault, out,
-                                     max_gib * 1024**3, self.job["report"], directory / "media")
+                                     max_gib * 1024**3, self.job["report"], directory / "media", names)
             await complete_in_thread(verify_chat_export, out, fingerprint(lead.vault.public_key), max_gib)
             replica.outbox(lead.store, out)
-            self.state.update(phase="done", ready=True, error=None)
+            self.state.update(phase="done", ready=True, error=None, filename=chat_export.archive_name(
+                lead.store, self.job["chat_id"], self.job["chat"]["title"]))
+            self.set_phase("done")
             lead.store.append("chat_export.completed", {"export_id": self.job["id"], "mode": "distributed_selection",
-                              "counts": self.state["counts"]}, self.job["chat_id"])
+                              "counts": self.state["counts"], "performance": self.state["performance"]}, self.job["chat_id"])
         except asyncio.CancelledError:
             self.state.update(phase="paused", ready=False, error="Paused; committed chunks are retained.")
             for worker in self.state["workers"]:
                 if worker["state"] in ("pending", "running", "waiting"):
                     worker["state"] = "paused"
             raise
+        except telegram_errors.TakeoutInitDelayError as exc:
+            self.state.update(phase="paused", ready=False, wait_until=time.time() + exc.seconds,
+                approval_profile=profile_id,
+                error="Telegram Takeout approval is pending. Approve the export in Telegram or wait, then resume. "
+                      "No regular-speed fallback was started.")
+            waiting = next(w for w in self.state["workers"] if w["profile_id"] == profile_id)
+            waiting.update(state="waiting", wait_until=self.state["wait_until"], error="Takeout approval required")
+        except telegram_errors.TakeoutInvalidError:
+            self.state.update(phase="paused", ready=False,
+                error="Telegram ended the Takeout session. Resume validates a new session against the saved range.")
         except Exception as exc:
             self.state.update(phase="failed", ready=False,
                               error=str(exc) if isinstance(exc, ValueError) else type(exc).__name__)
         finally:
+            if self.state["phase"] == "paused":
+                for worker in self.state["workers"]:
+                    if worker["state"] in ("pending", "running", "waiting"):
+                        worker["state"] = "paused"
+            self.set_phase(self.state["phase"])
             if self.db:
                 self.db.close()
                 self.db = None
             self.persist()
-
-    def poll(self, job_id):
-        return self.public(job_id)
-
-    async def pause(self, job_id):
-        if self.state and self.state["id"] == job_id and self.task and not self.task.done():
-            self.task.cancel()
-            await asyncio.gather(self.task, return_exceptions=True)
-            if self.state["phase"] not in ("done", "failed", "paused"):
-                self.state.update(phase="paused", ready=False, error="Paused; committed chunks are retained.")
-                self.persist()
-        return self.public(job_id)
-
-    async def cancel(self, job_id):
-        if self.busy() and (not self.state or self.state["id"] != job_id):
-            raise ValueError("Pause the current distributed export before changing another job.")
-        state = await self.pause(job_id)
-        if state.get("phase") not in ("done", "unknown"):
-            self.state = state
-            self.state["phase"] = "cancelled"
-            self.persist()
-        return self.public(job_id)
-
-    def result_path(self, job_id):
-        state = self.public(job_id)
-        path = self.directory(job_id) / "export.zip"
-        return path if state.get("ready") and path.is_file() and not path.is_symlink() else None
-
-    async def close(self):
-        if self.state:
-            await self.pause(self.state["id"])
+            if self.state["phase"] == "done":
+                self.clean()

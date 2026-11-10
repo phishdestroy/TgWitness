@@ -240,6 +240,12 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             destination = replica.replica_settings(s)
             if not destination["endpoint"] or not destination["bucket"]:
                 raise HTTPException(409, "Configure the off-site copy destination in Settings first.")
+            if destination["evidence"]:
+                try:
+                    await replica.require_evidence_lock(replica.client(destination, app.state.vault.read("replica"),
+                                                                       c.outside_route()), destination)
+                except ValueError as exc:
+                    raise HTTPException(409, str(exc)) from None
         if desired["continuous"] != before["continuous"] or desired["ip"] != before["ip"]:
             from .guided_connection import busy_account
             try:
@@ -255,7 +261,6 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
         policy = c.route_policy()
         exposure = "hide" if desired["ip"] == "hide" else policy["exposure"]
         wanted = {"exposure": exposure, "outside_enabled": desired["outside"]}
-        # "Auto" preserves the user's answer about direct fallback.
         with s.transaction():
             s.set_setting("route_policy", wanted)
             if wanted != policy:
@@ -348,12 +353,14 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             recording.save(s, recording.RecordingUpdate(scope=ScopeUpdate(mode=body.scope,
                 folder_id=body.folder_id, acknowledged=True)))
             if body.scope == "selected":
+                enabled = {chat["chat_id"] for chat in s.targets(True)}
                 for chat in s.targets():
                     s.set_target(chat["chat_id"], chat["title"], chat["kind"], chat["chat_id"] in selected)
                 for cid in selected:
                     d = c.dialog_cache[cid]
                     s.set_target(cid, d["title"], d["kind"], True)
                 s.append("sources.selected", {"chat_ids": sorted(selected)})
+                c.request_baseline(sorted(selected - enabled))
         return selected
 
     @app.post("/api/settings/scope", dependencies=deps)

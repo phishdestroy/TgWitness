@@ -107,6 +107,15 @@ FPDF_RESOURCES = {
     "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc",
     "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc.LICENSE",
 }
+MORPHOLOGY_RESOURCES = {
+    "python/Lib/site-packages/pymorphy3_dicts_ru/data/" + name
+    for name in (
+        "grammemes.json", "gramtab-opencorpora-ext.json", "gramtab-opencorpora-int.json", "meta.json",
+        "p_t_given_w.intdawg", "paradigms.array", "prediction-suffixes-0.dawg",
+        "prediction-suffixes-1.dawg", "prediction-suffixes-2.dawg", "suffixes.json", "words.dawg",
+    )
+}
+DEPENDENCY_DATA_RESOURCES = FPDF_RESOURCES | MORPHOLOGY_RESOURCES
 
 
 def release_problem(relative):
@@ -115,7 +124,7 @@ def release_problem(relative):
         return "unexpected entry outside the package layout"
     name = parts[-1].lower()
     folders = {part.lower() for part in parts[:-1]}
-    if ("__pycache__" in folders or "data" in folders and relative not in FPDF_RESOURCES
+    if ("__pycache__" in folders or "data" in folders and relative not in DEPENDENCY_DATA_RESOURCES
             or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES)):
         return "private or generated file"
     return None
@@ -147,7 +156,11 @@ def write_release(stage, target):
     if len(shipped) != len(names) or len(names) != len(files) or any(release_problem(name) for name in shipped):
         partial.unlink()
         raise SystemExit("Portable ZIP failed its content check: " + str(target.name))
+    checksum = target.with_name(target.name + ".sha256.part")
+    checksum.write_text(sha256(partial) + "  " + target.name + "\n", encoding="ascii")
+    target.with_suffix(".zip.sha256").unlink(missing_ok=True)
     partial.replace(target)
+    checksum.replace(target.with_suffix(".zip.sha256"))
 
 
 def embedded_runtime(arch, cache, supplied=None):
@@ -210,9 +223,13 @@ def main():
 
     print("Installing TgWitness and pinned dependencies", flush=True)
     site_packages = stage / "python/Lib/site-packages"
-    subprocess.run([sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "--no-warn-script-location",
-                    "--no-compile", "--target", str(site_packages), "-c", str(ROOT / "deploy/constraints.txt"), str(ROOT)],
-                   check=True, cwd=ROOT)
+    build_tools = build / "build-tools"
+    build_environment = dict(os.environ, PYTHONPATH=str(build_tools))
+    for target, packages in ((build_tools, ["--require-hashes", "-r", str(ROOT / "deploy/build.lock")]),
+                             (site_packages, ["--require-hashes", "-r", str(ROOT / "deploy/requirements.lock")]),
+                             (site_packages, ["--no-deps", "--no-build-isolation", str(ROOT)])):
+        subprocess.run([sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "--no-warn-script-location",
+                        "--no-compile", "--target", str(target), *packages], check=True, cwd=ROOT, env=build_environment)
     shutil.rmtree(site_packages / "bin", ignore_errors=True)
     clean_app_install_metadata(site_packages)
 
@@ -249,7 +266,6 @@ def main():
     write_release(stage, target)
     shutil.rmtree(build, ignore_errors=True)
     digest = sha256(target)
-    target.with_suffix(".zip.sha256").write_text(digest + "  " + target.name + "\n", encoding="ascii")
     print("Portable package:", target)
     print("Size:", round(target.stat().st_size / 1024**2, 1), "MiB | SHA-256:", digest)
 

@@ -1,4 +1,3 @@
-"""Reproducible selection over a disk-backed acquisition, before media retrieval."""
 import json
 import re
 import sqlite3
@@ -34,6 +33,7 @@ class Selection(BaseModel):
     sender_ids: list[int] = Field(default_factory=list, max_length=10000)
     text_contains: list[str] = Field(default_factory=list, max_length=100)
     download_media: bool = False
+    recheck_all: bool = False
 
     @field_validator("from_utc", "to_utc", mode="before")
     @classmethod
@@ -78,6 +78,10 @@ class Selection(BaseModel):
         return not ((self.from_utc and (not date or date < self.from_utc))
                     or (self.to_utc and (not date or date >= self.to_utc)))
 
+    def excludes_messages(self):
+        return bool(self.from_utc or self.to_utc or self.languages or self.reply_mode != "all"
+                    or self.sender_ids or self.text_contains)
+
 
 @lru_cache(maxsize=1)
 def detector():
@@ -86,7 +90,6 @@ def detector():
 
 
 def detect_language(text):
-    # The original remains untouched. URLs and code are not language evidence.
     sample = re.sub(r"```[\s\S]*?```|`[^`]*`|https?://\S+|www\.\S+", " ", text or "")[:20000]
     result = {"detector": "lingua", "version": version("lingua-language-detector"),
               "policy": "letters>=12; score>=0.70; margin>=0.10; mixed spans>=2 words", "language": None,
@@ -120,7 +123,7 @@ def reply_link(row, chat_id):
     topic = header.get("reply_to_top_id")
     direct = type(parent) is int and parent > 0
     if header.get("forum_topic") and (not topic or parent == topic):
-        direct = False  # Merely posting into a forum topic is not a direct reply.
+        direct = False
     return parent, peer_id, topic, direct
 
 
@@ -154,7 +157,6 @@ class SelectionIndex:
         return list(self.classify_batches(options, language_detector))[-1]
 
     def classify_batches(self, options, language_detector=detect_language):
-        # Each bounded batch can run off the event loop, then yield to pause/UI requests.
         uncertain = 0
         self.db.execute("UPDATE messages SET matched=0,selected=0,depth=NULL,in_period=0,language=NULL")
         for number, row in enumerate(self.db.execute("SELECT id,record FROM messages")):
@@ -196,7 +198,6 @@ class SelectionIndex:
             "SELECT count(*) FROM messages WHERE selected=1 AND matched=0").fetchone()[0]
         if remaining <= 0:
             return []
-        # Breadth-first, so a huge branch cannot consume the entire context cap first.
         rows = self.db.execute("SELECT p.id FROM messages s JOIN messages p ON p.id=s.parent "
             "WHERE s.selected=1 AND s.depth=? AND s.direct=1 AND s.parent_chat=? AND p.selected=0 "
             "UNION SELECT c.id FROM messages s JOIN messages c ON c.parent=s.id AND c.parent_chat=? AND c.direct=1 "

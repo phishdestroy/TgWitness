@@ -1,7 +1,9 @@
 import hashlib
 import hmac
+import ipaddress
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from urllib.parse import parse_qsl, quote, urlsplit
 
 from .netclient import HTTPError, request
@@ -12,6 +14,22 @@ EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
 def canonical_query(query):
     pairs = sorted((quote(k, safe="-_.~"), quote(v, safe="-_.~")) for k, v in parse_qsl(query, keep_blank_values=True))
     return "&".join(k + "=" + v for k, v in pairs)
+
+
+def endpoint_allowed(endpoint):
+    parts = urlsplit(endpoint)
+    if parts.scheme == "https":
+        return True
+    host = (parts.hostname or "").lower().rstrip(".")
+    if parts.scheme != "http" or not host:
+        return False
+    if host == "localhost" or host.endswith(".localhost"):
+        return True
+    try:
+        address = ipaddress.ip_address(host)
+        return address.is_loopback or address.is_private
+    except ValueError:
+        return False
 
 
 def sign(method, url, headers, payload_hash, access_key, secret_key, region, now=None, service="s3"):
@@ -52,12 +70,32 @@ class S3:
         return base + "/" + path + ("?" + query if query else "")
 
     async def call(self, method, url, headers=None, body=b"", length=None, payload_hash=EMPTY_SHA256, sink=None):
+        if not endpoint_allowed(self.endpoint):
+            raise ValueError("Enter the storage endpoint as https://host (no path or credentials).")
         signed = sign(method, url, headers or {}, payload_hash, self.access_key, self.secret_key, self.region)
         return await request(method, url, self.network, signed, body, length, sink, timeout=120)
 
     async def put(self, key, body, length, sha256_hex, md5_b64, extra=None):
         headers = {"content-md5": md5_b64, "content-type": "application/octet-stream", **(extra or {})}
-        await self.call("PUT", self.url(key), headers, body, length, sha256_hex)
+        _, response, _ = await self.call("PUT", self.url(key), headers, body, length, sha256_hex)
+        return self.metadata(response)
+
+    @staticmethod
+    def metadata(headers):
+        headers = {k.lower(): v for k, v in headers.items()}
+        modified = headers.get("last-modified")
+        if modified:
+            moment = parsedate_to_datetime(modified)
+            if moment.tzinfo is None:
+                raise ValueError("S3 Last-Modified lacks a time zone")
+            modified = moment.astimezone(timezone.utc).isoformat()
+        return {"etag": headers.get("etag"), "version_id": headers.get("x-amz-version-id"),
+                "last_modified": modified}
+
+    async def head(self, key, version_id=None):
+        query = "versionId=" + quote(version_id, safe="") if version_id else ""
+        _, headers, _ = await self.call("HEAD", self.url(key, query))
+        return self.metadata(headers)
 
     async def get(self, key, sink):
         await self.call("GET", self.url(key), sink=sink)
@@ -82,9 +120,10 @@ class S3:
                 "default_mode": root.findtext(".//" + ns + "Mode"),
                 "default_days": int(days) if days else int(years) * 365 if years else None}
 
-    async def retention(self, key):
+    async def retention(self, key, version_id=None):
         try:
-            _, _, data = await self.call("GET", self.url(key, "retention"))
+            query = "retention" + ("&versionId=" + quote(version_id, safe="") if version_id else "")
+            _, _, data = await self.call("GET", self.url(key, query))
         except HTTPError as exc:
             if exc.status in (400, 404) or b"NoSuchObjectLockConfiguration" in exc.body:
                 return None

@@ -1,19 +1,37 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
+
+![Deployment & recovery](assets/presentation/chapter-operate.svg)
+
 # Security and data handling
 
-TgWitness runs on your own computer or server. Account connections, public proxy-list upkeep and optional external services have
-explicit routing policies. Notifications, timestamps, off-site copies and a witness
-are separately configured. This page lists what is protected, how, and what is left
-to the operator.
+This page describes access, storage and network protection in a local or server workspace.
+For collection on a GitHub runner or in an Intel TDX confidential VM, see the
+[verification modes](EVIDENCE.md#verification-scope), which add checks of the collection environment.
+Account connections, notifications, timestamps, off-site copies and witnesses have their own routing settings.
 
 | Area | In short |
 | --- | --- |
 | Access | Administrator key plus scoped access to accounts/chats, seven permissions and revocable sessions; localhost by default |
 | Secrets at rest | Session, API pair, signing key and proxy settings are encrypted with Fernet |
-| Messages and media | Stored unencrypted: use disk encryption and strict permissions |
+| Messages and media | Files in the workspace, protected by disk or volume encryption and file permissions of the host |
 | Integrity | SHA-256 hash chain and an Ed25519 signature on every record |
-| Not covered | A machine administrator, a leaked panel token, completeness of capture |
+| External time | RFC 3161 and OpenTimestamps receipts, witness posts dated by Telegram and GitHub attestation; retained checkpoints, witness records and Intel TDX measurements are supporting checks. The verifier reports which evidence conditions they meet |
 
 For vulnerability reports, see the [security policy](../.github/SECURITY.md).
+
+<details>
+<summary>On this page</summary>
+
+- [Access model](#access-model)
+- [Panel content and exports](#panel-content-and-exports)
+- [Secrets at rest](#secrets-at-rest)
+- [Proxies and network routes](#proxies-and-network-routes)
+- [Sign-in and session imports](#sign-in-and-session-imports)
+- [Logs and transport](#logs-and-transport)
+- [Integrity and external time](#integrity-and-external-time)
+- [If you suspect a problem](#if-you-suspect-a-problem)
+
+</details>
 
 ## Access model
 
@@ -21,7 +39,8 @@ The main panel token grants full control. Other people can receive their own
 [scoped access](ACCESS.md): chosen workspaces and chats, permissions, expiry,
 IP restrictions, sign-in limits and revocable sessions. A chat-limited access
 cannot perform whole-workspace operations even if their permission is ticked.
-Workspaces share a process and do not isolate data from the host administrator.
+Each workspace has its own journal, vault and signing key inside one process;
+separation between people on the host comes from operating-system accounts.
 
 The panel listens on localhost by default. Browser sign-in exchanges an access
 token for a session credential; the browser sends it as a bearer token. It is kept
@@ -60,14 +79,15 @@ Telegram access hashes and file references can occur in raw source metadata.
 
 ## Secrets at rest
 
-Telegram API credentials, StringSession, and the Ed25519 private key are encrypted
-using Fernet. By default its key is stored in the same protected data directory.
-This reduces accidental plaintext exposure; it is not protection against an attacker
-who can read the whole directory. Message content and media are **not encrypted**
-by TgWitness. Use disk encryption and restrictive OS permissions. Unix private key
-files are created with mode 0600; newly created data directories use mode 0700.
-Existing directory permissions are not changed. Windows inherits directory ACLs: restrict them
-to the service account and authorized administrators.
+Telegram API credentials, the session and signing key are encrypted with Fernet.
+For local messages and media, encryption is provided by the host's disk or volume;
+the workspace stores ordinary files. Exports can use a password-protected AES-256 ZIP,
+and off-site copies use AES-256-GCM.
+
+The vault key defaults to the protected data directory. Use an external master-key file
+below to store it separately. On Unix, new private-key files use mode 0600 and new data
+directories use 0700; on Windows, set the directory ACL for the service account and
+authorized administrators. Existing directory permissions are retained.
 
 ### External master key
 
@@ -75,10 +95,9 @@ For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
 master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
 for each workspace. vault.external.json must be retained for recovery. Missing or
 wrong master keys fail closed. Existing local vaults are not silently migrated.
-The running process can access the key; this is not HSM isolation. The panel reports
-the selected mode and explicitly states that message/media storage is not encrypted
-by the application. See [connection, proxies and data protection](CONNECTION-SECURITY.md)
-for the full threat model.
+The panel displays the selected key-storage mode. Disk encryption protects the local
+message and media files in either mode; see
+[connection and data protection](CONNECTION-SECURITY.md) for setup details.
 
 ## Proxies and network routes
 
@@ -111,7 +130,7 @@ Protect originals and converted files, and avoid concurrent clients cloning an a
 
 TData processing verifies container checksums, local decryption hashes, and structure
 lengths. A supplied Desktop local passcode is used transiently and is not stored.
-This bounded parser does not establish that every Desktop version is compatible.
+The bounded parser supports the Desktop formats it validates and rejects others.
 QR images are generated locally, contain short-lived Telegram login tokens, and
 are never sent to an external rendering service. Lock, workspace switch, new login,
 and route changes cancel pending QR attempts. Reload/closing a tab may leave an
@@ -127,21 +146,53 @@ upload a data directory, session, token, vault key, or private signing key to Gi
 
 The default API validation response is replaced so it does not echo credential
 values. Application access logging is disabled. Do not configure a reverse proxy
-to log Authorization headers or request bodies. HTTP carries tokens and login
-secrets in plaintext: use HTTPS or an SSH tunnel whenever leaving localhost.
+to log Authorization headers or request bodies. The panel listens on localhost;
+remote access goes through the supplied SSH tunnel, Cloudflare Tunnel or Caddy HTTPS,
+so tokens and login secrets travel inside SSH or TLS.
 
-## Integrity limits
+## Integrity and external time
 
-The hash chain, database triggers, and signatures detect certain modifications;
-they do not prevent a local administrator from rewriting and resigning the journal.
-Retain signed checkpoints and the public-key fingerprint on a separate system.
-Evidence mode and the off-site copy (both off by default) send checkpoint hashes to
-timestamp services and encrypted copies to S3-compatible storage; see the
-[evidence format](EVIDENCE.md). Transparency logs, HSM-backed signing and formal
-chain-of-custody certification are not implemented.
+Verification checks record signatures, the hash chain, attachments and the export manifest
+against the collector key. Each workspace creates its signing key at first start and
+shows its fingerprint in the panel and in every export; the fingerprint retained by
+the recipient pins that key. SQLite triggers enforce append-only behavior for normal
+application writes, and separate master-key storage protects a data-directory copy
+through `TGWITNESS_VAULT_KEY_FILE`.
+RFC 3161 and OpenTimestamps receipts, and witness posts whose dates the verifier reads
+from Telegram, bind the journal prefix they cover to a time set by a third party.
+A checked GitHub attestation also carries the verified time of its signature, which
+binds the whole archive to an external time.
+A checkpoint is signed with the collector key and binds the records up to it only if
+the recipient obtained it before the archive, through another channel. A witness shows
+that a second key retained the journal head; who controls that key is a custody fact
+the verifier cannot check. The collector could create both alone, so they are
+supporting checks.
+[GitHub Actions capture](SEALED-ACTIONS.md) or an
+[Intel TDX deployment](HIGH-ASSURANCE.md#confidential-vm-on-phala-cloud-intel-tdx)
+add workflow provenance or hardware measurements of the collection environment.
+
+Every verification answer lists the evidence conditions with how each was checked,
+grouped by their role in the minimum:
+
+| Role | Condition |
+| --- | --- |
+| Required | Integrity; signer key pinned with `--fingerprint`; external time covering the last record (RFC 3161 receipt checked with `--tsa-ca`, OpenTimestamps receipt confirmed with `--check-bitcoin`, witness post read from t.me with `--channel`, witness Bitcoin seal or checked GitHub attestation) |
+| Supporting, not part of the minimum | Witness with its own key; retained checkpoint; attested collection run |
+
+The **minimum for evidence** is all three required conditions covering the last exported
+record; a verified attested collection run adds the `attested` profile.
+The final line states the result, and the answer names the options that would meet the
+missing conditions.
+When verified timestamps cover only earlier records, the answer states the record up to
+which the minimum holds. `--require evidence` or `--require attested` exits with code 2 when
+the profile is not reached for the whole export, and a check requested on the command
+line that cannot run is reported as not performed with the same code. Every report
+carries the same conditions with their state in that copy and the command that checks
+them. The assurance tiers and `--strict` remain available; the
+[evidence format](EVIDENCE.md#verification-scope) lists the checks for each collection mode.
 
 ## If you suspect a problem
 
-Preserve the original data directory and use a separate copy for analysis. Do not
-include private Telegram data or credentials in a public issue. No independent
-security certification is claimed.
+Preserve the original data directory and use a separate copy for analysis.
+Report the affected version, operation and reproducible steps through the
+[security policy](../.github/SECURITY.md), keeping account data and credentials private.

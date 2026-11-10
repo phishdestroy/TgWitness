@@ -95,11 +95,20 @@
     if (!found) return realFetch(input, init);
     const method = (init.method || (typeof input === "string" ? "GET" : input.method) || "GET").toUpperCase();
     const path = "/" + found[1];
+    if (method === "GET" && path === "/api/system-map") {
+      const {systemMapExample} = await import(new URL('system-map-data.js', base));
+      return json(200, systemMapExample());
+    }
+    if (method === "GET" && path === "/api/topology") {
+      const {topologyExample} = await import(new URL('topology-data.js', base));
+      return json(200, topologyExample());
+    }
     if (method === "POST" && path === "/api/verify") {
       const all = await answers;
       if (all[path]) return recorded(all[path]);
     }
     if (method !== "GET") return json(403, {detail: READ_ONLY});
+    if (path.endsWith('/api/report-guidance')) return realFetch(new URL('jurisdictions.json', base));
     if (path.endsWith('/api/capture')) return json(200, {connections: {browser: {enabled: false, configured: false}, ayugram: {enabled: false, configured: false}}, max_export_bytes: 536870912});
     const all = await answers;
     if (path.endsWith("/api/exports/history")) return json(200, {exports: [], limit: 20});

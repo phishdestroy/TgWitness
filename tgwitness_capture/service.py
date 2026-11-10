@@ -9,13 +9,14 @@ from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator
 
 from . import __version__
 from .adapters import BrowserCapture, sqlite_snapshot
 from .export import export_zip
-from .format import canonical, decode, digest
+from .format import HEX, canonical, decode, digest
 from .journal import Journal, durable_write
+from .official import OfficialBrowser, OfficialOptions
 from .video import VideoCapture
 
 
@@ -34,6 +35,8 @@ class Config:
     heartbeat_seconds: float = 10
     video_input_args: list | None = None
     ffmpeg_executable: str = "ffmpeg"
+    official: dict | None = None
+    trusted: dict | None = None
 
     @classmethod
     def load(cls, path):
@@ -41,8 +44,17 @@ class Config:
         if not isinstance(raw, dict) or set(raw) - {field.name for field in fields(cls)}:
             raise ValueError("Unknown capture configuration field")
         config = cls(**raw)
-        if config.kind not in {"browser", "ayugram"}:
-            raise ValueError("kind must be browser or ayugram")
+        if config.official is not None:
+            if config.kind != "browser":
+                raise ValueError("Official client requires the browser recorder")
+            OfficialOptions.model_validate(config.official)
+        if config.kind not in {"browser", "ayugram", "trusted"}:
+            raise ValueError("kind must be browser, ayugram or trusted")
+        if config.kind == "trusted":
+            from .trusted_runtime import connector_config
+            if not isinstance(config.trusted, dict):
+                raise ValueError("Configure Trusted Live runtime settings")
+            connector_config(config.trusted.get("connectors"))
         for name in ("poll_seconds", "snapshot_seconds", "heartbeat_seconds"):
             value = getattr(config, name)
             if type(value) not in (int, float) or not 0.25 <= value <= 86400:
@@ -78,6 +90,23 @@ class TargetChoice(BaseModel):
     target_id: str
 
 
+class OpenRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    url: str = Field(min_length=8, max_length=2048)
+    wait_seconds: float = Field(default=5, ge=0, le=30)
+    keep_open: StrictBool = False
+    purpose: str = Field(default="", max_length=500)
+
+    @field_validator("url")
+    @classmethod
+    def web_address(cls, value):
+        parts = urlsplit(value)
+        if (parts.scheme not in {"http", "https"} or not parts.hostname or parts.username is not None
+                or parts.password is not None or any(c.isspace() or ord(c) < 32 for c in value)):
+            raise ValueError("Use an http(s) address without credentials or spaces")
+        return value
+
+
 class Recorder:
     def __init__(self, root, config):
         self.config = config
@@ -86,7 +115,12 @@ class Recorder:
         self.settings = {"enabled": False, "screenshots": config.kind == "browser",
                          "pages": config.kind == "browser", "database": config.kind == "ayugram", "video": False}
         self.browser = BrowserCapture(config.browser_cdp_url, config.browser_url_prefix)
-        self.video = VideoCapture(self.journal, config.video_input_args, config.ffmpeg_executable)
+        self.official = None
+        if config.official is not None:
+            self.official = OfficialBrowser(OfficialOptions.model_validate(config.official), self.journal)
+            self.browser = self.official
+        self.video = VideoCapture(self.journal, config.video_input_args, config.ffmpeg_executable,
+                                  timestamp_overlay=self.official is not None)
         self.last_attempt = 0
         self.last_heartbeat = 0
         self.last_success = None
@@ -119,6 +153,7 @@ class Recorder:
                                 "settings": self.settings.copy(), "startup_capture": "disabled",
                                 "poll_seconds": config.poll_seconds, "snapshot_seconds": config.snapshot_seconds,
                                 "pending_files_present": any(self.journal.pending.iterdir())})
+            self.video.recover()
         except BaseException:
             self.journal.close()
             raise
@@ -130,7 +165,8 @@ class Recorder:
                 "last_error": self.last_error or self.video.error, "video_available": self.video.available,
                 "video_running": self.video.process is not None, "last_video_segment": self.video.last_segment_at,
                 "selected_target": self.browser.target_id, "route_label": self.config.route_label,
-                "external_anchor": "not established by this service; retain checkpoints or use a separate witness"}
+                "external_anchor": "retain checkpoints or use a separate witness for an external anchor",
+                "official": self.official.status() if self.official else None}
 
     async def configure(self, patch):
         async with self.lock:
@@ -141,6 +177,11 @@ class Recorder:
             if self.config.kind == "ayugram" and (new["pages"] or new["screenshots"]):
                 raise ValueError("Browser capture belongs to the independent browser recorder")
             if new["enabled"]:
+                if self.official:
+                    if not new["screenshots"] or not new["pages"]:
+                        raise ValueError("Official observation requires screenshots and rendered pages")
+                    if self.official.options.require_video and not new["video"]:
+                        raise ValueError("This official-client profile requires procedure video")
                 if not any(new[key] for key in ("pages", "screenshots", "database", "video")):
                     raise ValueError("Select at least one capture function")
                 if new["video"] and not self.video.available:
@@ -155,8 +196,19 @@ class Recorder:
                 self.settings["enabled"] = False
             if self.video.process is not None and not (new["enabled"] and new["video"]):
                 await asyncio.to_thread(self.video.stop)
-            if new["enabled"] and new["video"] and self.video.process is None:
-                self.video.start()
+            if self.official and not new["enabled"]:
+                await self.official.pause()
+            try:
+                if self.official and new["enabled"] and not old["enabled"]:
+                    await self.official.arm()
+                if new["enabled"] and new["video"] and self.video.process is None:
+                    self.video.start()
+            except Exception:
+                self.settings["enabled"] = False
+                if self.official:
+                    await self.official.pause("StartFailed")
+                await asyncio.to_thread(self.video.stop)
+                raise
             self.settings = new
             if not old["enabled"] and new["enabled"]:
                 self.last_attempt = 0
@@ -195,45 +247,88 @@ class Recorder:
                                 "coverage": "attempt did not produce a complete capture"})
             raise
 
+    async def open(self, request):
+        if self.config.kind != "browser" or self.official:
+            raise ValueError("Only the browser recorder opens addresses")
+        attempt = uuid.uuid4().hex
+        self.journal.append("capture.open_requested", {"capture_id": attempt, "url": request.url[:8192],
+                            "purpose": request.purpose, "operator_label": self.config.operator})
+        try:
+            metadata, artifacts, observed = await asyncio.wait_for(
+                self.browser.open(self.journal, request.url, request.wait_seconds, request.keep_open), timeout=90)
+        except Exception as exc:
+            self.last_error = type(exc).__name__
+            self.journal.append("capture.failed", {"capture_id": attempt, "error": self.last_error,
+                                "coverage": "the requested address was not captured"})
+            raise
+        event = self.journal.append("capture.opened", {**metadata, "capture_id": attempt, "purpose": request.purpose},
+                                    artifacts, observed)
+        self.last_success, self.last_error = event["recorded_at"], None
+        return event
+
     async def tick(self):
         async with self.lock:
             now = time.monotonic()
             self.video.poll()
             if not self.settings["enabled"]:
                 return
+            if self.official:
+                try:
+                    if self.settings["video"] and self.video.process is None:
+                        raise ValueError("VideoUnavailable")
+                    await self.official.tick()
+                except Exception as exc:
+                    await self.stop_official(str(exc) if isinstance(exc, ValueError) else type(exc).__name__)
+                    return
             interval = self.config.snapshot_seconds if self.config.kind == "ayugram" else self.config.poll_seconds
             if now - self.last_attempt >= interval:
                 self.last_attempt = now
                 try:
                     await self.capture()
-                except Exception:
-                    pass  # The failed attempt is a signed event, not a successful observation.
+                except Exception as exc:
+                    if self.official:
+                        await self.stop_official(type(exc).__name__)
+                        return
             if now - self.last_heartbeat >= self.config.heartbeat_seconds:
                 self.journal.append("capture.heartbeat", {"last_success": self.last_success,
                                     "last_error": self.last_error or self.video.error, "video_running": self.video.process is not None,
                                     "last_video_segment": self.video.last_segment_at})
                 self.last_heartbeat = now
 
+    async def stop_official(self, reason):
+        self.settings["enabled"] = False
+        self.last_error = reason
+        await asyncio.to_thread(self.video.stop)
+        await self.official.pause(reason)
+
     async def run(self):
         while not self.closing:
             try:
                 await self.tick()
             except Exception as exc:
-                # A full disk / failed journal must stop collection, not report healthy coverage.
                 self.settings["enabled"] = False
                 self.last_error = "RecorderStopped:" + type(exc).__name__
-                await asyncio.to_thread(self.video.abort)
+                await asyncio.to_thread(self.video.abort, self.last_error)
+                if self.official:
+                    try:
+                        await self.official.pause(self.last_error)
+                    except Exception:
+                        pass
+                    self.official.stop_requested = True
+                    self.official.phase = "stopped"
             await asyncio.sleep(min(self.config.poll_seconds, 1))
 
     async def close(self):
         self.closing = True
         try:
             if self.task:
-                # Let an in-flight SQLite backup / export finish before closing its journal.
                 await self.task
             async with self.lock:
                 await asyncio.to_thread(self.video.stop)
-                await self.browser.close()
+                if self.official and self.official.phase != "finished" and self.official.page is not None:
+                    await self.official.finish()
+                else:
+                    await self.browser.close()
                 self.journal.append("service.stopped", {"capture_was_enabled": self.settings["enabled"]})
         finally:
             self.video.abort()
@@ -242,6 +337,9 @@ class Recorder:
 
 def create_app(root, config=None):
     config = config or Config()
+    if config.kind == "trusted":
+        from .trusted_service import create_app as trusted_app
+        return trusted_app(root, config)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -254,6 +352,9 @@ def create_app(root, config=None):
             await recorder.close()
 
     app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
+    if config.official is not None:
+        from .official_api import routes
+        routes(app)
     static = Path(__file__).parent / "static"
 
     @app.middleware("http")
@@ -276,12 +377,12 @@ def create_app(root, config=None):
 
     @app.get("/")
     async def index():
-        return FileResponse(static / "index.html", headers={"Content-Security-Policy":
+        return FileResponse(static / ("official.html" if config.official is not None else "index.html"), headers={"Content-Security-Policy":
                             "default-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"})
 
     @app.get("/static/{name}")
     async def asset(name: str):
-        if name not in {"app.js", "style.css"}:
+        if name not in {"app.js", "style.css", "official.js", "official-locales.js", "official.css"}:
             raise HTTPException(404)
         return FileResponse(static / name)
 
@@ -336,6 +437,27 @@ def create_app(root, config=None):
             except Exception:
                 raise HTTPException(503, "Capture failed; the journal records the failed attempt") from None
             return {"event": event, "status": recorder.status()}
+
+    @app.post("/api/open")
+    async def open_address(request: OpenRequest):
+        recorder = app.state.recorder
+        async with recorder.lock:
+            try:
+                event = await recorder.open(request)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+            except Exception:
+                raise HTTPException(503, "The address could not be captured; the journal records the attempt") from None
+            return {"event": event, "status": recorder.status()}
+
+    @app.get("/api/object/{sha256}")
+    async def stored_object(sha256: str):
+        if not HEX.fullmatch(sha256):
+            raise HTTPException(400, "Use a SHA-256 object name")
+        path = app.state.recorder.journal.objects / sha256
+        if not path.is_file():
+            raise HTTPException(404, "Object not found")
+        return FileResponse(path, media_type="application/octet-stream")
 
     @app.get("/api/events")
     async def events():

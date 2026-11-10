@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
+
+![Deployment & recovery](assets/presentation/chapter-operate.svg)
+
 # Workflows and operations
 
 For your first connection, use [accounts and session formats](ACCOUNTS.md).
@@ -15,6 +19,22 @@ access while the local panel and collection keep running. `tgwitness tunnel on`
 enables it; `tgwitness tunnel restart` creates a new tunnel connection. Use
 `tgwitness open` to see its current address. An explicit off setting survives
 service restarts. `tgwitness stop` stops both the panel and collection.
+
+<details>
+<summary>On this page</summary>
+
+- [Operator workflow](#operator-workflow)
+- [Share work without sharing the main key](#share-work-without-sharing-the-main-key)
+- [Runtime modes](#runtime-modes)
+- [Monitoring categories](#monitoring-categories)
+- [Notifications](#notifications)
+- [Panel layout](#panel-layout)
+- [Deployment environments](#deployment-environments)
+- [Startup checks and exports](#startup-checks-and-exports)
+- [Backup, restore and interruptions](#backup-restore-and-interruptions)
+- [Capacity and retention](#capacity-and-retention)
+
+</details>
 
 ## Operator workflow
 
@@ -37,7 +57,7 @@ events have been captured.
 
 ## Share work without sharing the main key
 
-Open **Access** to give a reviewer or analyst their own token. Choose the accounts
+Open **More tools → Access** to give a reviewer or analyst their own token. Choose the accounts
 and chats they can open, then allow viewing, export or operational actions.
 An operator who starts/stops collection needs whole-workspace access; a reviewer
 can be limited to a single chat. Session limits, expiry and IP rules are separate
@@ -53,7 +73,7 @@ workspaces. Session closure leaves collection running.
 | --- | --- | --- |
 | Demo | scripts\Demo.cmd or `--demo` | Synthetic data; real account connections disabled |
 | Observation | Start observation | Record delivered updates for selected sources |
-| History snapshot | Sources → history snapshot | Up to 500 current messages; no reconstruction of all past changes |
+| History snapshot | Chats → Chat actions → Load history | Up to 500 current messages; no reconstruction of all past changes |
 | Pause | Pause observation | Stop collection while retaining data and queued jobs |
 | Review/handoff | Exports | ZIP, JSONL/CSV/HTML, checkpoint, process receipt and timestamp request |
 | Multiple accounts | Workspaces or the top **+** button | Any number of separate workspaces in one process |
@@ -67,7 +87,7 @@ or proxied demo access retain token authentication. Demo entry grants no Telegra
 
 ![Per-account monitoring settings with synthetic source data](assets/sources.png)
 
-In **Sources → Recording → Choose which changes to preserve**, select new messages, edits,
+In **More tools → Sources → Recording → Choose which changes to preserve**, select new messages, edits,
 deletion notices, reaction updates and membership events independently. The default
 retains all categories. **Messages, edits & deletions** keeps the original context
 while disabling separate reaction/member updates. **All visible activity** restores
@@ -103,7 +123,8 @@ under their own retention policy.
 
 ## Notifications
 
-Open **Extras → Notifications → Configure**. TgWitness uses
+Open **Settings → Notifications and off-site copy → Notification destinations**, or
+**More tools → Extras → Notifications → Configure**. TgWitness uses
 Apprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other
 supported services. You can add several destinations to one workspace.
 
@@ -145,7 +166,7 @@ the download button keeps the preserved original available.
 or use the new-events button when ready; collection keeps running. **Ctrl/Cmd+K**
 finds panel actions and searches the journal.
 
-**Sources** contains the observation scope (chosen chats, a Telegram folder or the whole
+**More tools → Sources** contains the observation scope (chosen chats, a Telegram folder or the whole
 account), accessible chats of every type, selected sources with priority stars, attachment
 and recheck settings and history snapshots. Private sources are selected by dialog/ID
 without a public link. Access status describes the most recent check, not permanent permissions.
@@ -157,10 +178,10 @@ together. In the available-chat list, **Add selected** uses your selection;
 **Chats → People** lists everyone with saved messages; with people profiles switched on
 for the chat, a click opens that person's profile with links to the journal records.
 
-**Witness** creates read-only witness tokens, shows when each witness last checked and
+**More tools → Extras → Independent witness** creates read-only witness tokens, shows when each witness last checked and
 gives the commands and options to run one ([independent witness](WITNESS.md)).
 
-**Parameters** holds every limit and pace of the workspace that is not on another page:
+**More tools → Parameters** holds every limit and pace of the workspace that is not on another page:
 how many dialogs are read, how often the chat list is re-read, heartbeat and checkpoint
 intervals, the startup buffer, how rechecks spread their requests (first delay, chats per
 pass, pause between chats, messages recovered and re-requested), disk reserve, timeouts and
@@ -178,19 +199,19 @@ are counted until marked as read. Changes are grouped per chat and hour ("12 del
 1 edited, 0 not found"), and problems such as a sign-out or a full disk stay in the list
 however busy the chats are.
 
-**Account** starts on the phone-number field. **Continue** leads directly to
+**More tools → Account** starts on the phone-number field. **Continue** leads directly to
 code entry, asking for API credentials only when missing. QR and file import are
 alternative tabs. Saved API credentials are reused only within their own workspace.
 The entry screen has no sidebar, statistics, or setup paragraphs. The **Settings**
-icon opens API, proxy, storage, and additional-account controls. New installations
-start here; connected accounts with no selected sources start on **Choose chats**.
+icon opens API, proxy, storage, and additional-account controls. A new workspace opens
+[first setup](SETTINGS.md); after sign-in, a workspace with saved sources and records opens **Chats**.
 Changing the route requires paused observation and cancels unfinished login. An existing
 journal cannot be silently rebound to a different Telegram account.
 
 **Exports** checks journal integrity and produces portable files. Its workspace ID
 can be passed to the download CLI. Every export pins a full journal prefix; later
 events enter a subsequent export. Search filters do not change the package scope.
-Detailed signing and coverage information is under **Verification & limitations**.
+Detailed signing and coverage information is under **Verification and evidence**.
 
 The panel reports collector state, queued/failed media, oldest pending media, free
 disk, request pauses and sources whose access is unconfirmed under **Collector
@@ -226,8 +247,8 @@ panel across separate instances. Never point several workers at one database.
 Run `python start.py --check` before starting a prepared environment. Add `--json`
 for machine-readable checks or pass the intended `--data-dir`, `--host` and `--port`.
 The command checks prerequisites without Telegram login or creating a journal.
-It does not verify a journal or prove capture readiness; journal verification runs
-during application startup. An occupied port may simply be an existing instance.
+Journal verification runs during application startup, and capture readiness shows
+in the panel. An occupied port may simply be an existing instance.
 
 Browsers supporting the File System Access API save exports through a writable
 stream. Other browsers buffer at most 128 MiB. Use the streaming CLI for larger
@@ -254,8 +275,8 @@ ZIP separately with a trusted fingerprint/checkpoint.
    `vault.external.json`. Generating a new key cannot recover the old secrets.
 4. Restore while the destination is stopped; configure the original key, restrict
    access, and verify integrity before resuming.
-5. Record downtime and verification results. A history snapshot cannot prove that
-   no deletions happened during the interruption.
+5. Record downtime and verification results. The downtime stays a recorded gap;
+   a history snapshot adds the state after it.
 
 Evidence ZIPs exclude sessions/private keys and are not full service backups.
 Four things are protected differently:
@@ -272,21 +293,21 @@ Use protected storage and a deliberate transfer mechanism for both. Temporary se
 `temporary-exports/`; completed responses are cleaned up, and interrupted export
 files are removed on the next startup while that workspace's instance lock is held.
 
-A connection-restored event does not guarantee recovery of intermediate changes.
-Persistent media jobs and the Telegram update position survive restart; see
+After a connection-restored event, the collector requests missed updates from the
+saved update position. Persistent media jobs and the Telegram update position survive restart; see
 [evidence format](EVIDENCE.md#durable-collection-and-process-receipts-02).
 
 ## Capacity and retention
 
-Default limits, all changeable under **Parameters**: the first 1,000 dialogs, 500 messages
+Default limits, all changeable under **More tools → Parameters**: the first 1,000 dialogs, 500 messages
 per snapshot, 4 GiB uncompressed signed ZIP content (larger archives need
 `verify.py --max-gib N`) and a 128 MiB browser fallback. Attachments take 1–2,000 MiB per
-type under **Sources → Attachments**. The download CLI defaults to 5 GiB transferred. Available disk can be a
+type under **More tools → Sources → Recording → Attachments**. The download CLI defaults to 5 GiB transferred. Available disk can be a
 lower limit. Reserve space for journals, media, WAL, temporary exports and backups.
 Exports use the data volume rather than Compose's 512 MiB `/tmp`.
 
 Measure events/second, queue age, media bytes and disk latency rather than counting
-groups alone. Synthetic local benchmarks do not guarantee Telegram delivery.
+groups alone. Live delivery is measured on the running collector.
 There is no automatic retention deletion. Removing a journal tail invalidates its
 relationship to retained checkpoints.
 

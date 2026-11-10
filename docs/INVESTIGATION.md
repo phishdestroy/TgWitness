@@ -1,8 +1,27 @@
+[TgWitness](../README.md) / [Documentation](README.md)
+
+![Investigation](assets/presentation/chapter-investigate.svg)
+
 # An investigation across all account-visible chats
 
 Follow a case across channels, groups, private chats and bots, from initial
 acquisition to a cited timeline and verifiable handoff. The interactive website
 version is at `/docs/cases/`; [preview instructions](internal/PUBLISHING.md#preview-the-website-locally).
+
+<details>
+<summary>On this page</summary>
+
+- [Worked case: a destination changes across four conversations](#worked-case-a-destination-changes-across-four-conversations)
+- [1. Define the case and collect the whole account](#1-define-the-case-and-collect-the-whole-account)
+- [2. Inventory every source and acquire historical context](#2-inventory-every-source-and-acquire-historical-context)
+- [3. Preserve the evolving case and deliberate interactions](#3-preserve-the-evolving-case-and-deliberate-interactions)
+- [4. Connect observations across chats](#4-connect-observations-across-chats)
+- [5. Build the cross-chat timeline](#5-build-the-cross-chat-timeline)
+- [6. Add account perspectives without losing their origin](#6-add-account-perspectives-without-losing-their-origin)
+- [7. Assemble and verify the case handoff](#7-assemble-and-verify-the-case-handoff)
+- [Adapt the investigation](#adapt-the-investigation)
+
+</details>
 
 ## Worked case: a destination changes across four conversations
 
@@ -40,24 +59,24 @@ flowchart TD
 1. Connect the collecting account in its own workspace. In [Case Board](CASE-BOARD.md)
    or your case register, record the case reference, account ID, workspace and
    observation start. Retain the trusted signing-key fingerprint independently.
-2. For a dedicated collecting account, open **Sources → Observation scope → Investigation mode**. The preset selects
+2. For a dedicated collecting account, open **More tools → Sources → Scope → Investigation mode**. The preset selects
    **Whole account**, channels/groups/private chats/bots, own actions, source
    profiles and the latest 200 visible messages for newly discovered sources.
    Review it, press **Save scope**, and complete the scope confirmation.
    Main accounts use selected chats or a folder; whole-account collection is
    available to accounts marked for investigation.
 3. **Load chats** and compare the sources with the account's dialog list. Check
-   exclusions. **Parameters → Chats read from the account's list** defaults to
+   exclusions. **More tools → Parameters → Chats read from the account's list** defaults to
    1,000 and allows up to 20,000. Sources beyond the list limit are added when
    they become active. Record what was actually enumerated.
-4. In **Recording settings**, select **All visible activity** and save the
+4. In **More tools → Sources → Recording**, select **All visible activity** and save the
    monitoring settings. Review attachment types/limits and free disk space.
 5. Start observation. Validate a controlled new message, edit and deletion, then
    retain the test references and any failures.
 
-Whole-account scope records account-visible activity within the saved settings.
-It does not access secret chats or automatically join every linked group. It also
-does not backfill every existing conversation. See [collection scope](COLLECTION.md#observation-scope-chosen-chats-a-folder-or-the-whole-account).
+Whole-account scope records account-visible activity within the saved settings, in the
+chats the account has joined. Secret Chats are recorded by the [Secret Chat module](PSEUDO-SECRET.md),
+and existing conversations are backfilled through [History](HISTORY.md). See [collection scope](COLLECTION.md#observation-scope-chosen-chats-a-folder-or-the-whole-account).
 
 ## 2. Inventory every source and acquire historical context
 
@@ -75,13 +94,13 @@ Keep a source register with one row per chat:
 
 Use the right acquisition for each source:
 
-- **Load full history** in **Sources** loads available past
+- **Load full history** in **More tools → Sources → Chats in scope** loads available past
   messages from enabled sources into the workspace journal. It supports pause/resume
   and a signed progress report. See [history acquisition](HISTORY.md).
 - **History snapshot** saves recent visible messages into the observation journal.
-  Its default maximum is 500; **Parameters → Largest history snapshot** can raise
+  Its default maximum is 500; **More tools → Parameters → Largest history snapshot** can raise
   that to 10,000. These are current history observations, not reconstructed edits.
-- **Full chat export → Export full chat**, or **Chats → Export chat**, fetches the
+- **Exports → Capture or export one chat → Export full chat**, or **Chats → Export chat**, fetches the
   currently visible history of one chat into a separate signed `chat.json` /
   `chat.html` bundle. Repeat for the case's sources and retain each result.
 - **When a new chat or bot appears** can save its profile and up to 1,000 recent
@@ -133,22 +152,21 @@ In a relevant chat, open **People → Turn on profiles** and inspect a person:
 - Saved avatar metadata and similar cached avatars, with their separate origin.
 
 Open the cited records before using a derived profile in a finding. Profiles cover
-people with saved messages, not every member of the group. **Parameters → Records
+people with saved messages, not every member of the group. **More tools → Parameters → Records
 cited per fact** limits the reference list, not the underlying activity count.
-Mentions and avatar similarity are leads; they do not establish ownership or identity.
+Mentions and avatar similarity are leads; ownership and identity rest on numeric IDs and attributed senders.
 
 In the worked example:
 
 | Link | Records | Supported observation |
 | --- | --- | --- |
 | Same sender account | Group #146 and private follow-up #205 | Both supply Telegram sender ID 71001 |
-| Same destination | #146, bot keyboard #173, channel edit #188, private message #205 | All contain `pay.example.invalid/new`; ownership/control is not established |
+| Same destination | #146, bot keyboard #173, channel edit #188, private message #205 | All contain `pay.example.invalid/new`; a repeated destination links the material |
 | Same saved file | Completed media receipts #151 and #209 | The full SHA-256 values agree for the preserved bytes |
 | Channel attribution | #101 and #188 | Do not attribute a channel post to user 71001 without an attributed sender |
 
-Compare attachment hashes and their associated message references. Identical
-files do not establish a creator, forwarder or common operator. Equal names and
-similar avatars alone do not join two Telegram IDs into one person.
+Compare attachment hashes and their associated message references, and keep account
+timelines grouped by the Telegram IDs supplied in those records.
 
 Keep the team's working notes on [Case Board](CASE-BOARD.md): bookmark the records
 you rely on, such as #146, #188 and #205, highlight the exact destination string, and
@@ -206,18 +224,21 @@ Keep these together in an analyst-assembled case directory:
 | Signed evidence ZIP per workspace | Complete recorded journal, manifest and included preserved media; panel filters do not narrow the journal export |
 | Separately signed people-profile files | Derived references checked against the matching workspace evidence |
 | Signed full chat exports | Current visible-history acquisition, separate from the observation journal |
-| Trusted fingerprints and earlier checkpoints | Key identity and retained journal boundaries |
+| Trusted fingerprints, TSA root certificates and earlier checkpoints | Key identity, external time of the last record and retained journal boundaries |
 | Witness artifacts, if configured | Separate journal, signed posts and witness fingerprint |
 | Verification results and delivered-file hashes | What was checked, which bytes were transferred and to whom |
 
 From a trusted installation, with filenames and each workspace's actual fingerprint:
 
 ```sh
-python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --tsa-ca TSA-ROOT.pem --checkpoint retained-checkpoint.json --require evidence
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
+
+`--require evidence` exits with code 2 unless the fingerprint matches and external time
+from a third party covers the last record; the checkpoint is a supporting check.
 
 Retain the actual verification results and original artifacts. Export workspace
 notes from Case Board alongside the cited source material. Assemble cross-workspace
@@ -228,9 +249,9 @@ signature and verification procedure.
 
 | Case | Trace | Deliver |
 | --- | --- | --- |
-| Bot-driven order/payment dispute | Entry announcement → saved link preview → bot start parameter → message and keyboard versions → panel callback receipts → private/group follow-up | Observed offer/response timeline and verified sources; a payment link alone does not prove a payment |
+| Bot-driven order/payment dispute | Entry announcement → saved link preview → bot start parameter → message and keyboard versions → panel callback receipts → private/group follow-up | Observed offer/response timeline and verified sources; payment confirmation comes from the payment record |
 | Removed messages after an incident | All affected chats → saved originals/edits → deletion or missing-on-recheck outcomes → preserved media → coverage and other account perspectives | Preserved versions and explicit unknown intervals; no invented deletion actor |
-| A participant changes names across chats | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | A cited Telegram-account activity timeline, with real-world identity and relationship hypotheses kept separate |
+| A participant changes names across chats | Numeric sender ID → name/username history → replies → other observed chats → cited destinations/files | A Telegram-account activity timeline with links to its source records |
 
 [Collection reference](COLLECTION.md) · [People-profile verification](EVIDENCE.md#people-profiles) ·
 [Evidence handoff](EVIDENCE.md#investigation-handoff) · [Completed validation](VERIFICATION.md)

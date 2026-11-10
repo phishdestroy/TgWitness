@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Investigation](INVESTIGATION.md)
+
+![Investigation](assets/presentation/chapter-investigate.svg)
+
 # Case Board
 
 Case Board gives an investigation team a shared working view of saved material. Bookmark an
@@ -9,9 +13,20 @@ workspace, separately identifiable from the original Telegram observations.
 
 ![Synthetic investigation feed](assets/case-board.png)
 
+<details>
+<summary>On this page</summary>
+
+- [Work with a case](#work-with-a-case)
+- [Permissions](#permissions)
+- [Stored contracts](#stored-contracts)
+- [API and exports](#api-and-exports)
+- [Operating limits](#operating-limits)
+
+</details>
+
 ## Work with a case
 
-Open **Investigation → Case Board** in Standard or Expert mode. The language follows the panel.
+Open **More tools → Case Board** in Standard or Expert mode. The language follows the panel.
 Use **To board** beside a journal record or saved chat message, or focus it and press **B**.
 The bookmark is added to Inbox in one click. Edit its title, labels and note, or move it to a
 collection. A changed card appends a signed revision; removing it preserves the history.
@@ -187,8 +202,8 @@ investigator labels with R01, R02… in metadata and known occurrences in notes.
 `annotations.jsonl` is disclosed. The signed `tgwitness-case-board-handover-v1` sidecar and report
 contain the same minimized material. Slice counts describe disclosed records only, with original
 snapshot/query actor details withheld. Free-text names not known to the minimizer still require
-review, as they do in ordinary handovers. This derivative does not claim to preserve original
-annotation signatures after redaction.
+review, as they do in ordinary handovers. The derivative carries its own signature;
+the original annotations keep theirs in the full archive.
 
 ## Operating limits
 

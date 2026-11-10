@@ -11,6 +11,15 @@ from .journal import sync_directory
 
 
 def report(events, observer_id, key_fingerprint):
+    from .official_proof import official_report
+    official = official_report(events)
+    summary = ""
+    if official:
+        summary = ('<section><h2>Official client observation</h2><p>'
+                   + html.escape(official["procedure_status"] + " · " + ", ".join(official["reasons"]))
+                   + '</p><p>' + html.escape(official["scope"]) + '</p><p>'
+                   + html.escape(official["trust"]) + '</p><p>Recording intervals: '
+                   + str(official["intervals"]) + ' · Video segments: ' + str(official["video_segments"]) + '</p></section>')
     rows = []
     for event in events:
         links = []
@@ -19,7 +28,8 @@ def report(events, observer_id, key_fingerprint):
             label = html.escape(artifact["role"])
             if artifact["media_type"] == "image/png":
                 links.append(f'<a href="{path}" download="{event["seq"]}.png"><img loading="lazy" src="{path}" alt="{label}"></a>')
-            links.append(f'<a href="{path}" download>{label} · {artifact["size"]} bytes · {artifact["sha256"]}</a>')
+            extension = {"text/html": ".html", "application/json": ".json", "video/x-matroska": ".mkv", "image/png": ".png"}.get(artifact["media_type"], ".bin")
+            links.append(f'<a href="{path}" download="{event["seq"]}-{label}{extension}">{label} · {artifact["size"]} bytes · {artifact["sha256"]}</a>')
         details = html.escape(canonical(event).decode())
         rows.append(f'<article><h2>#{event["seq"]} {html.escape(event["kind"])}</h2>'
                     f'<time>{html.escape(event["observed_at"])}</time>'
@@ -38,7 +48,7 @@ def report(events, observer_id, key_fingerprint):
             '<p>This is a view of recorded observations, not a continuous reconstruction. Check the ZIP with a trusted verifier and independently retained key fingerprint/checkpoint. '
             'Signatures establish integrity, not the truth of the source. Clock values are local unless independently anchored.</p>'
             '<label>Find events <input type="search" placeholder="URL, event, time"></label>'
-            + "".join(rows) + f'<script>{script}</script></html>').encode()
+            + summary + "".join(rows) + f'<script>{script}</script></html>').encode()
 
 
 def export_zip(journal, destination):
@@ -83,7 +93,6 @@ def export_zip(journal, destination):
                     archive.writestr("manifest.sig", seal(journal.key, "manifest", manifest))
                 output.flush()
                 os.fsync(output.fileno())
-            # Verification reads the bytes just written, not the source objects.
             from .verify import verify_zip
             verify_zip(temporary, journal.fingerprint)
             os.replace(temporary, destination)

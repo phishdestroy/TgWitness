@@ -9,6 +9,8 @@ from .store import ZERO, canonical, utcnow
 from .verify import (ANNOTATION_FIELDS, annotation_hash, board_prepare, board_replay, board_scope,
                      board_slice_summary, board_where, fingerprint)
 
+MAX_THREAD_DEPTH = 50
+
 
 def initialize(db):
     db.executescript("""
@@ -42,6 +44,16 @@ def event_by_hash(connection, value):
         value["payload"] = json.loads(value["payload"])
         return value
     return None
+
+
+def admin_record(target):
+    return target is not None and target["kind"].startswith(("access.", "profile."))
+
+
+def visible_target(target, principal):
+    if principal.admin or not admin_record(target):
+        return target
+    return {**target, "payload": {}}
 
 
 def require_scope(principal, workspace, scope):
@@ -127,6 +139,8 @@ class Board:
                 target = event_by_hash(db, model.target.event_hash)
                 if target is None:
                     raise ValueError("The referenced observation was not found.")
+                if admin_record(target) and not principal.admin:
+                    raise Refused("Panel access and workspace records are open only to the main administrator.")
                 require_scope(principal, self.workspace, {target["chat_id"]} if target["chat_id"] is not None else None)
                 for key in ("seq", "chat_id", "message_id", "kind"):
                     hint = getattr(model.target, key)
@@ -168,9 +182,14 @@ class Board:
                     if not principal.may("board.manage"):
                         raise Refused("This action requires board.manage.")
                 if action == "comment":
-                    # No cross-case identity lookup or outbound mention notification.
                     if old and old["parent_id"] != model.parent_id:
                         raise ValueError("A comment revision cannot change its parent.")
+                    depth, above = 0, parent
+                    while above and above["kind"] == "board.comment":
+                        depth += 1
+                        if depth >= MAX_THREAD_DEPTH:
+                            raise ValueError("Replies can be nested at most " + str(MAX_THREAD_DEPTH) + " levels deep.")
+                        above = lookup.get(above.get("parent_id"))
                 if action == "move" and model.collection_id:
                     collection = lookup.get(model.collection_id)
                     if not collection or collection["kind"] != "board.collection" or collection.get("removed"):
@@ -204,6 +223,7 @@ class Board:
         if card is None:
             raise KeyError(identifier)
         target = event_by_hash(connection, card["target"]["event_hash"]) if card.get("target") else None
+        target = visible_target(target, principal)
         thread_ids, thread = {identifier}, []
         for item in state["items"]:
             if item["kind"] == "board.comment" and item["parent_id"] in thread_ids:

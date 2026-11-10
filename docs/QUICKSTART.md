@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md)
+
+![Getting started](assets/presentation/chapter-start.svg)
+
 **English** · [Русский](ru/QUICKSTART.md) · [Українська](uk/QUICKSTART.md) · [Español](es/QUICKSTART.md) · [Português (Brasil)](pt/QUICKSTART.md) · [Türkçe](tr/QUICKSTART.md) · [العربية](ar/QUICKSTART.md) · [فارسی](fa/QUICKSTART.md) · [اردو](ur/QUICKSTART.md) · [हिन्दी](hi/QUICKSTART.md) · [Bahasa Indonesia](id/QUICKSTART.md) · [Tiếng Việt](vi/QUICKSTART.md) · [简体中文](zh/QUICKSTART.md)
 
 # TgWitness quick start
@@ -7,12 +11,36 @@ that your accounts can access. It runs locally with its own data directory.
 
 **First visit?** [Explore the demo](#explore-the-interface) before connecting an account.
 [Choose a guide](README.md) for proxies, witnesses, exports or server setup.
+[GitHub Actions capture](SEALED-ACTIONS.md) (preview) runs a capture in your own
+GitHub fork instead of a local installation.
 
 ## Install and start
 
-[GitHub Actions capture (preview)](SEALED-ACTIONS.md)
+The guided installer includes its own Python and checks package hashes and release
+signatures before installing. Running it again updates an existing installation.
 
-Choose one method. Portable downloads become available after a release build is published:
+**Linux / macOS:**
+
+```sh
+curl -fsSL https://get.destroy.tools/install.sh | bash
+```
+
+**Windows (PowerShell or Command Prompt):**
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 | iex"
+```
+
+On an Ubuntu server, run as root to install a background service; on a desktop, run
+as your normal user. On Ubuntu the installer prints the panel address and access key;
+on macOS and Windows the local panel opens in your browser. Continue at **Connect Telegram**
+below. [Install, verify and update](INSTALLATION.md) covers the server access choices,
+checking the script before running it, updates and removal.
+
+### Other methods
+
+GitHub releases, the source and Docker are alternatives to the installer. Portable
+downloads become available after a release build is published:
 
 | Host | Nothing installed | From source: Python 3.11+ | Docker: Engine/Desktop with Compose 2.20+ |
 | --- | --- | --- | --- |
@@ -62,28 +90,33 @@ Demo messages are fictional. Demo mode cannot connect a real Telegram account.
 ## Connect Telegram
 
 > [!WARNING]
-> **Do not use anything you cannot afford to lose.** We strongly advise against connecting
-> personal or valuable accounts and against creating an API ID / hash on an account you value.
-> Telegram bans accounts unpredictably and often permanently, regardless of the client.
-> A smooth test run depends on Telegram, not on TgWitness, and guarantees nothing for later.
+> **Use dedicated accounts.** Telegram can restrict or permanently ban accounts for request
+> volumes it considers excessive, whatever the client. Connect accounts prepared for
+> observation rather than personal or valuable ones, and create an API ID / hash on a
+> dedicated account.
 
 1. If the native demo is running, stop it and run **Start.cmd** or `sh start.sh`.
    Otherwise, keep the live installation started above running.
-2. Use the panel token for your installation method to open the panel.
-3. If you need a proxy, save it under **Account → Settings → Connection settings → Change connection route**.
-4. In **Account**, enter your phone number and press **Continue**, choose
-   **QR code → Show QR code**, or select files and press **Connect account**.
-   **API ID + Hash** is optional: the workspace uses its saved or imported pair,
-   or a working pair from the built-in pool. To use your own app, paste one
-   `API ID:API Hash` pair into API ID.
-   For a complete authorization key, choose **Auth key**, paste all 512 hexadecimal
-   characters, and select the supplied DC ID. User ID is optional and checked if entered.
-5. Complete your selected sign-in method: phone/code/2FA, confirmation from a
-   signed-in Telegram app for QR, or a supported authorized session import.
-6. Check the displayed account ID. Open **Sources**: your chats load automatically; add your groups.
-7. Under **Choose which changes to preserve**, select event categories or the
-   **Messages, edits & deletions** preset, then save monitoring settings.
-8. Choose attachment settings separately, then press **Start observation**.
+2. Use the panel token to sign in. A new workspace opens [first setup](SETTINGS.md).
+   Choose **Just download**, **Follow chats** or **Evidence for a case**.
+3. Review the connection check. Configure your own proxy if needed; connection
+   settings remain available after setup.
+4. At **Connect Telegram**, scan the QR code or enter your phone number. File import
+   and a complete authorization key are under **Other sign-in methods**.
+   Complete the Telegram confirmation, code and two-step password when requested.
+5. Check the displayed account, choose the chats and review your settings. Finish
+   from the final screen. For **Just download**, **Start export** starts a one-time
+   export and opens Exports to show its progress; it does not enable continuous observation.
+
+After setup, **Chats → Choose** changes the selected chats. **Settings** controls
+collection and files; **More tools → Sources** provides the detailed source list
+at Standard or Expert level. The [panel guide](PANEL.md) describes the six main
+sections and their contextual controls.
+
+**API ID + Hash** is optional: the workspace uses its saved or imported pair,
+or a working pair from the built-in pool. To use your own app, paste one
+`API ID:API Hash` pair into API ID. For **Auth key**, paste all 512 hexadecimal
+characters and select the supplied DC ID. User ID is optional and checked if entered.
 
 API credentials identify your application; they do not authorize an account by
 themselves. Private groups need no public username, but your account must have access.
@@ -99,8 +132,8 @@ For several accounts, use **Accounts → Import accounts** and select their supp
 session files. Companion JSON files are paired by basename; each imported account
 gets its own workspace. See [bulk import and account groups](ACCOUNTS.md#bulk-import-and-account-groups).
 
-To add another account, press **+** beside the account selector or open
-**Account → Settings → Connection settings → Workspaces**, or use **Accounts**. Workspaces have separate sessions,
+To add another account, press **+** beside the account selector or use
+**Accounts → Add account**. Workspaces have separate sessions,
 journals, keys, sources and queues. Switching views leaves other collectors running.
 The same Telegram account cannot be assigned to two workspaces in this installation.
 There is no fixed number of workspaces; they share one process, so capacity depends on the machine.
@@ -117,7 +150,8 @@ directly accessed local demo gets automatic entry. A remote/proxied demo still u
 - Edit details show the available before/after content. Deletion details show the
   last captured content, if any; an unknown actor remains unknown.
 - **Exports:** signed ZIP, JSONL, CSV and offline HTML.
-- **Full chat export** (Sources → Full chat export): download one chat's entire visible
+- **Full chat export** (**Chats → Export chat**, or **Exports → Capture or export one
+  chat**): download one chat's entire visible
   history as a signed bundle with `chat.json` (Telegram-export style) and a readable
   `chat.html`. Private chats work when the account is a member. It is a current
   snapshot, not a reconstruction of deleted or previously edited messages. Verify a
@@ -139,9 +173,10 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 For another workspace, add `--profile ID` using **Exports → Workspace ID**.
 For a remote server, add `--url https://your-server`. The default transfer limit is
 5 GiB; `--max-mib` changes it. Signed ZIP content has a separate 4 GiB uncompressed
-verification limit by default (**Parameters** raises it; verify such archives with
-`verify.py --max-gib N`). Verify the archive using a trusted copy of the verifier and
-an independently retained key fingerprint/checkpoint.
+verification limit by default (**More tools → Parameters** raises it; verify such archives with
+`verify.py --max-gib N`). Verify the archive using a trusted copy of the verifier, an
+independently retained key fingerprint and, for the minimum for evidence, the timestamp
+authority's root certificate (`--tsa-ca`).
 
 ## Check the installation
 
@@ -163,7 +198,7 @@ unless that environment is already activated.
 
 A closed, consistent Telethon SQLite `.session` can be converted locally with
 `python -m tgwitness.sessions account.session --out account.tgwitness-session`, then
-loaded in Account. Direct file import and QR login are also available. See
+loaded in **More tools → Account → Files**. Direct file import and QR login are also available. See
 [CONNECTION-SECURITY.md](CONNECTION-SECURITY.md) for login formats, SOCKS5,
 HTTP CONNECT, MTProxy and external master keys.
 
@@ -174,9 +209,9 @@ See [how collection works](COLLECTION.md) for event policies, attachment queues,
 account isolation, and restart behavior.
 
 Sessions and secrets are encrypted. Message content, media and exports require an
-encrypted disk or volume. Signatures establish integrity relative to a trusted key;
-they do not establish Telegram origin or prevent fabrication by an operator who
-controls the collector and its key.
+encrypted disk or volume. Verify journal signatures against a trusted key and retain checkpoints separately.
+Review capture records, external time receipts and environment attestations for the
+selected collection mode.
 
 Read [OPERATIONS.md](OPERATIONS.md) for backup/restore, [DEPLOYMENT.md](DEPLOYMENT.md)
 for hosting, and [deploy/](../deploy/README.md) for service examples. The installed

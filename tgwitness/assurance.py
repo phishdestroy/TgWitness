@@ -16,6 +16,11 @@ from .tdx import report_data
 from .verify import fingerprint
 
 MODES = NAMES
+BEACON_SERVER = "https://ntfy.sh/"
+BEACON = re.compile(re.escape(BEACON_SERVER) + r"tgw-[0-9a-f]{32}")
+QUICK_HOST = re.compile(r"[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.trycloudflare\.com")
+ADDRESS_SIGNED = "tgwitness-address-v2"
+TUNNEL_METRICS = "http://127.0.0.1:20241/quicktunnel"
 DEPLOYMENT_FILE = "etc/tgwitness/assurance.json"
 PREINSTALL_FILE = "etc/tgwitness/preinstall.txt"
 SECRET_LINE = re.compile(r"^([ \t]*)(TGWITNESS_TOKEN|TGWITNESS_TUNNEL_TOKEN)=.*$", re.M)
@@ -50,6 +55,33 @@ def metadata_request(url, method="GET", headers=None, timeout=2):
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     with opener.open(urllib.request.Request(url, method=method, headers=headers or {}), timeout=timeout) as response:
         return response.read(256 * 1024).decode()
+
+
+PROVIDER_RECORD = Path("/run/tgwitness-metadata/provider.json")
+
+
+def current_provider_record(selected, path=PROVIDER_RECORD):
+    try:
+        saved = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return provider_record(selected)
+    return saved if isinstance(saved, dict) and saved.get("provider") == selected else provider_record(selected)
+
+
+def write_provider_record(selected, out):
+    record = provider_record(selected)
+    try:
+        out.parent.mkdir(mode=0o755, parents=True)
+    except FileExistsError:
+        if not out.parent.is_dir():
+            raise
+    else:
+        out.parent.chmod(0o755)
+    temporary = out.with_name(out.name + ".tmp")
+    temporary.write_text(json.dumps(record, sort_keys=True) + "\n")
+    temporary.chmod(0o644)
+    os.replace(temporary, out)
+    return record
 
 
 def provider_record(selected, request=metadata_request, root=Path("/")):
@@ -164,6 +196,37 @@ async def assurance_loop(store, selected, provider, interval=60, root=Path("/"),
         await asyncio.sleep(interval)
 
 
+def address_post(vault, host, now):
+    text = ADDRESS_SIGNED + " " + host + " " + str(now)
+    return text + " " + vault.sign(text.encode())
+
+
+def quick_tunnel_host(url=TUNNEL_METRICS):
+    answer = json.loads(metadata_request(url, timeout=5))
+    host = answer.get("hostname") if isinstance(answer, dict) else None
+    return host if isinstance(host, str) and QUICK_HOST.fullmatch(host) else None
+
+
+def post_address(topic, body):
+    urllib.request.urlopen(urllib.request.Request(topic, body.encode(), method="POST"), timeout=20).close()
+
+
+async def address_loop(vault, topic, interval=30, every=10800, host=quick_tunnel_host, post=post_address):
+    if not BEACON.fullmatch(topic or ""):
+        return
+    last, sent = None, 0
+    while True:
+        try:
+            found = await asyncio.to_thread(host)
+            now = int(time.time())
+            if found and (found != last or now - sent >= every):
+                await asyncio.to_thread(post, topic, address_post(vault, found, now))
+                last, sent = found, now
+        except (OSError, ValueError):
+            pass
+        await asyncio.sleep(interval)
+
+
 PRIVATE_HOST = ("recent_logins",)
 PRIVATE_PROVIDER = ("public_ipv4",)
 
@@ -177,6 +240,11 @@ def attestation(selected, value):
             return attest(report_data(value))
     except (OSError, ValueError, KeyError, TypeError) as exc:
         return {"error": type(exc).__name__ + ": " + str(exc)[:200]}
+
+
+def attested_deployment():
+    from .providers.phala import SOCKET
+    return os.path.exists(SOCKET)
 
 
 def start_attestation(selected, receipt):
@@ -223,12 +291,20 @@ def install_record(script, preinstall, out):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m tgwitness.assurance",
-                                     description="Record a hand-installed server's installer for self-attested mode")
-    parser.add_argument("command", choices=["install-record"])
-    parser.add_argument("script", type=Path)
-    parser.add_argument("preinstall", type=Path)
-    parser.add_argument("out", type=Path)
+                                     description="Record installer and provider facts for self-attested mode")
+    commands = parser.add_subparsers(dest="command", required=True)
+    install = commands.add_parser("install-record", help="Record a hand-installed server's installer")
+    install.add_argument("script", type=Path)
+    install.add_argument("preinstall", type=Path)
+    install.add_argument("out", type=Path)
+    record = commands.add_parser("provider-record", help="Read the provider's metadata for the collector")
+    record.add_argument("provider", choices=MODES)
+    record.add_argument("out", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "provider-record":
+        found = write_provider_record(args.provider, args.out)
+        print(json.dumps({k: v for k, v in found.items() if k != "user_data_redacted"}))
+        return
     print(json.dumps({k: v for k, v in install_record(args.script, args.preinstall, args.out).items() if k != "redacted"}))
 
 

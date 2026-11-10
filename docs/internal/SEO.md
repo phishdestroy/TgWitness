@@ -1,3 +1,7 @@
+[TgWitness](../../README.md) / [Documentation](../README.md) / [Folder](README.md) · [Development](../ARCHITECTURE.md)
+
+![Development](../assets/presentation/chapter-develop.svg)
+
 # Website structure and search metadata
 
 The homepage, documentation, case guides and panel share **25 languages**: English
@@ -6,6 +10,18 @@ builder publishes each full-site language's homepage, guide index, practical gui
 reference index and reference pages. Amharic retains its existing capability guide
 and project notices. The site can be built locally without importing the collector
 or opening account data.
+
+<details>
+<summary>On this page</summary>
+
+- [Languages](#languages)
+- [Pages people can use](#pages-people-can-use)
+- [Implemented metadata](#implemented-metadata)
+- [Text editions and LLM discovery](#text-editions-and-llm-discovery)
+- [Maintain the site](#maintain-the-site)
+- [After deployment](#after-deployment)
+
+</details>
 
 ## Languages
 
@@ -55,6 +71,20 @@ The [Markdown companion](../HOW-IT-WORKS.md) uses native Mermaid and math for Gi
 
 ## Implemented metadata
 
+The [page keyword map](SEO-KEYWORDS.md) assigns a separate search intent to every
+canonical page family. It is an editorial map based on the actual content, not a
+claim about measured search volume. `tools/site_seo.py` owns the English titles,
+descriptions and primary queries, with explicit Russian titles and the existing
+translated labels and descriptions for other languages. Telegram, Phala, Intel TDX,
+MCP and RFC 3161 appear where the corresponding subject is covered.
+
+The builder applies that map after presentation typography. Each page's title,
+description, Open Graph, Twitter card and WebPage JSON-LD therefore agree.
+Ordinary guide and reference H1 headings use the same topic; the custom homepage,
+account, experiment and measurement layouts retain their visible headings.
+Latin and Cyrillic metadata use ordinary punctuation. Native CJK punctuation,
+canonical URLs, language alternates, examples and executable snippets are preserved.
+
 Each canonical page has a distinct title and description, an HTTPS canonical,
 Open Graph metadata and a 1200 × 630 social image. Language alternates come from
 the page's actual language inventory. English-only copies use English metadata.
@@ -71,6 +101,11 @@ crawlers read `https://phishdestroy.github.io/robots.txt`. Submit the project si
 directly in Search Console; don't mistake a subdirectory file for a host-wide rule.
 
 ## Text editions and LLM discovery
+
+The repository also contains a root `llms.txt`, linked from its README. It points
+to canonical public documentation and the generated handbook. Every indexed website
+page exposes visible footer links to `llms.txt`, `llms-full.txt` and the sitemap,
+in addition to the discovery links in its HTML head.
 
 `llms.txt` is a task index, built from the public guide inventory. `llms-full.txt`
 combines the English handbook into one file. Every indexed HTML route also has
@@ -92,8 +127,8 @@ These choices follow Google's documentation on [page titles](https://developers.
 [descriptions](https://developers.google.com/search/docs/appearance/snippet),
 [canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 and [breadcrumbs](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb).
-Metadata helps describe and discover pages; it does not guarantee indexing, a
-particular snippet, a rich result or a ranking.
+Metadata helps describe and discover pages; search engines decide indexing,
+snippets, rich results and ranking.
 
 ## Maintain the site
 
@@ -107,6 +142,17 @@ particular snippet, a rich result or a ranking.
 | Homepage | `website/index.html` |
 | Metadata, relative URLs, sitemap and publication allowlist | `tools/build_site.py` |
 | LLM task index and Markdown extraction | `tools/site_llms.py` |
+| Page search intent, titles and consistent metadata | `tools/site_seo.py` |
+| Sitemap pages and text-edition links | Private validation workspace |
+
+Private website validation covers metadata transformations and every URL
+in the built sitemap. It checks missing or duplicate titles/descriptions, mismatched
+social/schema metadata, missing H1s, broken language alternates and broken local
+links in the generated LLM files. Retain the canonical URL, language, title,
+description and primary query in the private validation record.
+These are build checks; verify the deployed pages separately before claiming that
+new metadata is live. On a workstation restricted to editing, use the authorized
+validation environment for builds and runtime checks.
 
 Add a guide to the explicit guide inventory and its navigation group. Do not copy
 private files into these presentation directories. The builder rejects linked
@@ -114,8 +160,6 @@ inputs and unexpected output files; it does not recursively copy the repository.
 
 ```sh
 python tools/build_site.py
-python tools/check_site.py
-python tools/check_docs_site.py
 ```
 
 ## After deployment

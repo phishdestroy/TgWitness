@@ -6,7 +6,7 @@ import time
 from collections import OrderedDict, deque
 
 from telethon import types, utils
-from telethon.errors import FloodWaitError
+from .telegram_client import FLOOD_ERRORS
 
 from .security import private_write
 from .store import utcnow
@@ -118,7 +118,7 @@ class AvatarHistory:
                     await self.capture(key, entity, observed)
             except asyncio.CancelledError:
                 raise
-            except FloodWaitError as exc:
+            except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)
                 self.failed[key] = until
@@ -173,6 +173,7 @@ class AvatarHistory:
             private_write(destination, data)
         extension = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}[metadata["mime_type"]]
         self.store.append("actor.avatar_saved", {"peer_id": key[1], "photo_id": key[2],
+                          **({"previous_photo_id": self.current[key[:2]]} if key[:2] in self.current else {}),
                           "first_observed_at": observed, "name": "avatar-" + str(key[1]) + "-" + str(key[2]) + extension, **metadata},
                           chat_id=key[0], actor_id=key[1])
         self.seen[key] = metadata

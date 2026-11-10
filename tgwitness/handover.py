@@ -10,7 +10,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from . import message_details, pdf_report, report, tuning
+from . import message_details, pdf_report, report, tuning, verification_kit
 from .dossier import PHONE
 from . import viewer
 from .evidence import producer, report_entry, write_indicators, write_pdf, write_viewer
@@ -30,7 +30,6 @@ GLOBAL_KEEP = frozenset((
     "network.route_fallback", "network.policy_changed", "account.authorized", "account.signed_out",
     "monitoring.changed", "capture.changed", "parameters.changed", "recheck.changed", "evidence.changed",
     "anchor.completed", "storage.low", "storage.ok"))
-# Records about a chosen chat that carry nobody's personal data.
 CHAT_KEEP = frozenset((
     "target.changed", "target.priority", "target.removed", "source.added", "source.discovered", "coverage.gap",
     "snapshot.started", "snapshot.completed", "snapshot.interrupted", "chat_export.started", "chat_export.completed",
@@ -43,7 +42,7 @@ LIMITS = [
     "Pseudonyms (P01, P02…) are stable within this extract only; the mapping to real people is not included.",
     "Names written inside message texts are not detected; mentions of known participants are replaced.",
     "Coverage is computed from the complete journal for the chosen chats.",
-    "This journal records observations made by a Telegram client, not Telegram-signed evidence.",
+    "Each record is an observation by this workspace's Telegram client, signed with the collector key in the manifest.",
 ]
 
 
@@ -115,8 +114,9 @@ def moment(value):
 
 
 class Survey:
-    def __init__(self, chats):
-        self.chats, self.people, self.coverage = set(chats), {}, Coverage()
+    def __init__(self, chats, gap_settings=None):
+        self.chats, self.people = set(chats), {}
+        self.coverage = Coverage(gap_settings, chats_selected=True)
         self.requests, self.result_chats, self.head = {}, {}, None
 
     def add(self, event):
@@ -253,8 +253,9 @@ class Minimiser:
             role = self.roles.get(request.get("keyboard_event"), "other") if request.get("action") == "press" else "observer"
             allowed = visible_text(role)
             self.action_text[event["seq"]] = allowed
-            shown = fields(payload, {"account_id", "observation_running", "own_actions", "preview_event"})
-            shown["request"] = fields(request, {"request_id", "action", "preview_id", "chat_id", "reply_to",
+            shown = fields(payload, {"account_id", "observation_running", "own_actions", "preview_event",
+                                     "queued_until"})
+            shown["request"] = fields(request, {"request_id", "action", "preview_id", "observe", "chat_id", "reply_to",
                                                  "message_id", "keyboard_event", "row", "column"})
             if request.get("action") == "send" and allowed and isinstance(request.get("text"), str):
                 shown["request"]["text"] = self.clean(request["text"])
@@ -343,7 +344,7 @@ class Minimiser:
         entities = []
         for item in (found.get("text_entities") or []) if show_text else []:
             item = {k: self.clean(v) if isinstance(v, str) else v for k, v in item.items()
-                    if k in ("type", "text", "href", "user_id", "language", "document_id", "deceptive")}
+                    if k in ("type", "text", "href", "user_id", "language", "document_id", "deceptive", "risk")}
             if isinstance(item.get("user_id"), dict):
                 item["user_id"] = item["user_id"].get("user_id")
             hidden = item.get("user_id") is not None and not self.shown(item["user_id"])
@@ -392,7 +393,7 @@ class Minimiser:
             found["buttons"] = {"inline": bool(found["buttons"].get("inline")), "rows": rows}
         if found.get("media_info"):
             technical = {"kind", "mime_type", "size", "document_id", "photo_id", "dc_id", "width", "height",
-                         "duration_seconds", "self_destruct_seconds"}
+                         "duration_seconds", "self_destruct_seconds", "ephemeral_media"}
             textual = {"url", "site_name", "title", "file_name"} if show_text else set()
             if role == "other" and self.o.others != "show":
                 textual.discard("file_name")
@@ -440,7 +441,8 @@ def export(store, vault, options, report_options=None):
     try:
         account = store.get_setting("account", None) or {}
         with store.snapshot() as snapshot:
-            survey = Survey(options.chats)
+            from .gap_analysis import settings as gap_settings
+            survey = Survey(options.chats, gap_settings(store))
 
             def surveyed(events):
                 for event in events:
@@ -508,6 +510,7 @@ def export(store, vault, options, report_options=None):
             if board_export:
                 write_member("case-board.json", [canonical(board_export)])
             write_member("verify.py", [Path(__file__).with_name("verify.py").read_bytes()])
+            verification_kit.write(write_member, report_options.get("language", "en"))
             write_indicators(write_member, summary.get("indicators"), context)
             for name in sorted(x for x in minimiser.files if isinstance(x, str) and re.fullmatch("[0-9a-f]{64}", x)):
                 source = store.root / "media" / name
@@ -541,7 +544,8 @@ def export(store, vault, options, report_options=None):
             context["files"] = dict(hashes)
             write_member("report.html", report.evidence_chunks(records(), coverage, context))
             listed = {**hashes, **dict.fromkeys(("README.txt", "SHA256SUMS", "manifest.json", "manifest.sig"), "")}
-            write_member("README.txt", [report.readme(context, listed, "\n".join(LIMITS) + "\n")])
+            write_member("README.txt", [verification_kit.quickstart(report_options.get("language", "en")), b"\n",
+                                       report.readme(context, listed, "\n".join(LIMITS) + "\n")])
             write_member("SHA256SUMS", [report.sha256sums(hashes)])
             manifest = {"format": FORMAT, "created_at": created, "public_key": vault.public_key,
                         "fingerprint": fingerprint(vault.public_key), "producer": producer(),

@@ -7,6 +7,7 @@ services:
     environment:
       TGWITNESS_PROXY_FEED_PROXY: ${TGWITNESS_PROXY_FEED_PROXY:-}
       TGWITNESS_ALLOW_PRIVATE_DESTINATIONS: ${TGWITNESS_ALLOW_PRIVATE_DESTINATIONS:-}
+      TGWITNESS_FULLTEXT: ${TGWITNESS_FULLTEXT:-}
     restart: unless-stopped
     ports:
       - "127.0.0.1:${TGWITNESS_PORT:-8787}:8787"
@@ -21,8 +22,6 @@ services:
     read_only: true
     tmpfs:
       - /tmp:size=512m,mode=1777
-  # Optional independent witness: docker compose --profile witness up -d
-  # Its own key and journal in its own volume; only a read-only witness token for the collector.
   witness:
     build:
       context: .

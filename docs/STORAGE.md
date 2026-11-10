@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Deployment and recovery](DEPLOYMENT.md)
+
+![Deployment & recovery](assets/presentation/chapter-operate.svg)
+
 # Storage and recovery
 
 The panel separates three tasks:
@@ -19,10 +23,21 @@ then checks the local bytes again immediately before removal. An upload failure,
 different readback or cancelled transfer leaves the local file in place. If an
 enabled evidence backup has not yet copied that file, removal also waits for it.
 
+<details>
+<summary>On this page</summary>
+
+- [When the disk is filling up](#when-the-disk-is-filling-up)
+- [Connect a destination](#connect-a-destination)
+- [Keep the recovery file](#keep-the-recovery-file)
+- [Recover after losing the installation](#recover-after-losing-the-installation)
+- [Operator bot and completion notices](#operator-bot-and-completion-notices)
+
+</details>
+
 ## When the disk is filling up
 
-Attachment downloads already pause below **Parameters → Attachments → free disk
-space** (1 GiB by default), keeping their queue. Text observations continue. This
+Attachment downloads already pause below **More tools → Parameters → Photos & files →
+Pause downloads below this free disk space** (1 GiB by default), keeping their queue. Text observations continue. This
 does not depend on notification settings. Disabling notifications does not disable
 the download reserve or storage safeguards.
 
@@ -59,7 +74,7 @@ rewritten by storage management. It still needs space for new text observations.
 
 ## Connect a destination
 
-In **Extras → Storage & disk space → Manage storage**, choose the task and destination,
+In **More tools → Extras → Storage & disk space → Manage storage**, choose the task and destination,
 save it, then select **Test upload & download**. The test uploads a small random probe and reads it
 back. It does not use Telegram content.
 
@@ -91,9 +106,8 @@ receipts, so treat it as a private key backup. Keep the original remote configur
 and destination credentials separately as well. A recovery file taken before a
 later copy does not contain that later file's receipt.
 
-The signing-key fingerprint should already be recorded independently. A signature
-checked only against the key supplied inside the same file does not establish whose
-recovery file it is.
+Record the signing-key fingerprint independently: checking the signature against
+that fingerprint identifies whose recovery file it is.
 
 To repair missing storage receipts in an existing workspace, open **Recover files
 from a saved recovery file** and select the file. The panel checks the signature and requires the same workspace
@@ -123,7 +137,9 @@ python -m tgwitness.storage recover \
 For S3, `--credentials` points to a private JSON file with `access_key` and
 `secret_key`; the signed recovery file supplies the destination settings.
 The command uses a direct external connection and downloads the pinned helper
-when an rclone remote needs it. It refuses an existing output directory.
+when an rclone remote needs it. It refuses an existing output directory unless
+that directory holds an interrupted recovery from the same signed recovery file;
+running the command again keeps the verified files and continues with the rest.
 
 Recovered original bytes are written to `recovered-attachments/media/`, named by
 their SHA-256. `recovery-log.jsonl` is an unsigned record of recovery operations.

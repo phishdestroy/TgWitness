@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Project reference](README.md)
+
+![Project reference](assets/presentation/chapter-project.svg)
+
 # Complete project guide
 
 [Project home](../README.md) · [GitHub Wiki](https://github.com/phishdestroy/TgWitness/wiki)
@@ -14,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md">v0.8.1</a> &nbsp; · &nbsp;
+  <a href="CHANGELOG.md">v0.9.2</a> &nbsp; · &nbsp;
   <a href="QUICKSTART.md">Python 3.11+</a> &nbsp; · &nbsp;
   <a href="../LICENSE">MIT license</a>
 </p>
@@ -57,7 +61,7 @@
 - **Scope.** Chosen chats, a Telegram folder or the whole account, by type (channels, groups, private, bots). New chats get picked up as they appear ([collection](COLLECTION.md#observation-scope-chosen-chats-a-folder-or-the-whole-account)).
 - **Investigation mode.** For a dedicated account that joins groups and talks to bots: everything it sees and sends is recorded, bot buttons are kept, every new chat gets its profile and visible history saved ([details](COLLECTION.md#investigation-mode-joining-teams-and-talking-to-bots)). The panel's **Dedicated account guide** explains why never to use your main account.
 - **Act from Chats.** Send messages, press bot buttons, preview and join invites. All of it lands in the signed journal ([mini-client](COLLECTION.md#act-from-the-panel)).
-- **Honest coverage.** Reports say "observed from X to Y", list gaps and message IDs never seen, and never call those deleted.
+- **Recorded coverage and changes.** Reports retain observation intervals, captured versions, deletion notifications, recheck results and recovery gaps, each linked to its source records.
 - **People profiles** (opt-in per chat). Name/username history, avatars, activity, who replies to whom, mentioned wallets, phones and links. Every fact points to its record ([evidence model](EVIDENCE.md#people-profiles)).
 - **Independent witness.** Separate process with its own key and bot, posts journal heads to a channel ([witness](WITNESS.md)).
 - **Parameters page.** All limits and timings with ranges and defaults, every change goes into the journal ([below](#settings-and-parameters)).
@@ -82,7 +86,7 @@ Needs Python 3.11+ from a source checkout, the launcher installs the rest. Open 
 
 When you're ready, stop the demo and run **`Start.cmd`** (Windows) or **`sh start.sh`**.
 Paste the token from `data/live/panel-token.txt` and [connect a dedicated account](#connect-a-telegram-account).
-Portable builds and Docker: [installation guide](QUICKSTART.md#install-and-start).
+The one-line installer, portable builds and Docker: [installation guide](QUICKSTART.md#install-and-start).
 
 ![Section divider](assets/presentation/divider.svg)
 
@@ -107,8 +111,9 @@ Every observed change becomes a record linked to the previous one by its hash an
 3. **Verify** an export with a key fingerprint you kept somewhere else.
 
 The signed journal keeps what the account received, source IDs and every captured
-version. A recipient checks signatures and file hashes, then compares the journal
-with checkpoints kept elsewhere. [More on the evidence model →](HOW-IT-WORKS.md)
+version. A recipient checks signatures and file hashes, external time from a third
+party for the last record, and compares the journal with checkpoints kept elsewhere.
+[More on the evidence model →](HOW-IT-WORKS.md)
 
 <details>
 <summary>What each observation keeps</summary>
@@ -143,11 +148,10 @@ Sign in by phone, QR or a session file, pick sources, save the policy and press
 <details>
 <summary>Sign-in formats and the built-in API pool</summary>
 
-You don't need your own API ID. Creating one on [my.telegram.org](https://my.telegram.org) is
-known to get accounts restricted, and Telegram's own
-[docs](https://core.telegram.org/api/obtaining_api_id) say unofficial clients are watched.
-So TgWitness ships 50 public API pairs already used by other open-source clients and tries
-the next one if Telegram refuses. Have your own? Enter it under **API ID + Hash**.
+You don't need your own API ID. TgWitness ships 50 public API pairs already used by
+other open-source clients and tries the next one if Telegram refuses. Have your own?
+Enter it under **API ID + Hash**; Telegram's
+[API terms](https://core.telegram.org/api/obtaining_api_id) apply to every client.
 
 | What you have | Where |
 | --- | --- |
@@ -188,10 +192,10 @@ Exports always contain the full journal up to a fixed point, filters only affect
 
 ```sh
 python -m pip install cryptography
-python tgwitness/verify.py tgwitness-evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint tgwitness-checkpoint.json
-# with a witness and its channel (Telegram Desktop export)
+python tgwitness/verify.py tgwitness-evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --tsa-ca TSA-ROOT.pem --require evidence
+# with a witness and its public channel (post dates read from Telegram)
 python tgwitness/verify.py tgwitness-evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 \
-    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel result.json
+    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel https://t.me/s/WITNESS_CHANNEL
 ```
 
 The verifier prints who signed, observed periods, gaps and never-seen message IDs, and
@@ -201,8 +205,11 @@ Keep the key fingerprint and checkpoints outside the collector, so the recipient
 independent reference. [GitHub Actions capture](SEALED-ACTIONS.md) also checks the archive
 against the approved hosted workflow and collector version.
 
-For trusted time, evidence mode stamps checkpoints with RFC 3161 and OpenTimestamps, or the
-panel prepares an offline RFC 3161 request. See [timestamps](TIMESTAMP.md), the
+The minimum for evidence is the confirmed fingerprint plus time from a third party
+covering the last record; a checkpoint is signed with the collector key and does not
+meet it alone. Evidence mode stamps checkpoints with RFC 3161 and OpenTimestamps, and
+witness posts read from t.me also count. The panel can also prepare
+an offline RFC 3161 request. See [timestamps](TIMESTAMP.md), the
 [verification record](VERIFICATION.md) and the [handoff checklist](EVIDENCE.md#investigation-handoff).
 
 </details>
@@ -276,10 +283,11 @@ with before/after values.
 
 | Where | What |
 | --- | --- |
-| **Sources** | Scope, source types, exclusions, own actions, which changes to keep, attachment types and sizes, recheck intervals, history snapshots, notifications |
-| **Exports** | Password, evidence mode, off-site S3 copy |
-| **Witness** | Read-only witness tokens and ready-made commands |
-| **Parameters** | Everything else: list sizes, intervals, rechecks, disk reserve, download limits, people-profile patterns, notification pace, ZIP limits, Telegram timeouts |
+| **More tools → Sources** | Scope, source types, exclusions, own actions, which changes to keep, attachment types and sizes, recheck intervals |
+| **Exports** | Password for downloads |
+| **Settings** or **More tools → Extras** | Evidence mode, off-site S3 copy, notifications |
+| **More tools → Extras → Independent witness** | Read-only witness tokens and ready-made commands |
+| **More tools → Parameters** | Everything else: list sizes, intervals, rechecks, disk reserve, download limits, people-profile patterns, notification pace, ZIP limits, Telegram timeouts |
 
 Values show their range and default, changed ones are marked and can be reset.
 A ZIP limit over 4 GiB needs `verify.py --max-gib N` ([operations](OPERATIONS.md#panel-layout)).
@@ -312,22 +320,40 @@ Still a pre-release. What's been tested and what hasn't: [verification record](V
 
 ## Responsibility and data protection (GDPR)
 
-TgWitness is a tool. Whoever runs it decides what gets collected and why, and is responsible
-for it (under GDPR usually as the *controller*). Telegram chats are full of other people's
-personal data. Not legal advice, check your own law and Telegram's terms.
+TgWitness is a tool. Whoever runs it decides what is collected, why and for how long, and is
+responsible for it — under the EU/UK GDPR usually as the *controller* of that personal data.
+Telegram messages contain personal data of people who never agreed to be recorded: names,
+usernames, IDs, photos, phone numbers, opinions. Apply the law that governs your work and
+Telegram's terms; the points below summarize common practice.
 
-- **Have a purpose and a legal basis.** Fraud prevention, security and legal claims are the
-  usual legitimate interests (Art. 6(1)(f), Recitals 47 and 49, Art. 9(2)(f)). Write the purpose down per case.
-- **Collect only what you need.** Start with chosen chats. Folder and whole-account modes pull in
-  private chats, so only use them on dedicated accounts. Turn off what you don't need.
-- **People profiles are profiling.** Off by default, on per chat. No automated decisions about
-  people (Art. 22). Turn them off when done, that deletes them. Monitoring many people usually needs a DPIA (Art. 35).
-- **Keep it secure.** Encrypted disk, export passwords, HTTPS, read-only token for the witness.
-- **Retention.** The journal is append-only, single records can't be removed without breaking
-  the chain. Delete the workspace when the purpose ends. S3 Object Lock copies can't be deleted
-  before their retention date. Erasure has exceptions for legal claims (Art. 17(3)(e)).
-- **Access requests.** Exports and profile files help find what's held about a person (Art. 15).
-- **Nothing goes to us.** No telemetry, no hosted service.
+- **Have a lawful basis and a purpose.** Fraud prevention, network and information security
+  and the defence of legal claims are commonly relied on as legitimate interests
+  (GDPR Art. 6(1)(f), Recitals 47 and 49; Art. 9(2)(f) for legal claims). Write the purpose
+  down per case. Public authorities work under their own legal bases.
+- **Collect as little as the purpose needs.** Start with chosen chats. Folder and whole-account
+  modes record private chats and third parties' messages: use them only on dedicated
+  accounts; the panel asks for confirmation and the signed journal records it. Turn off event
+  types, attachment types and own actions you do not need, and exclude chats.
+- **People profiles are profiling.** They are off by default and switched on per chat. Use
+  them for a specific investigation, do not base automated decisions about people on them
+  (Art. 22), and switch them off or remove the chat when done — that deletes them. Systematic
+  monitoring of many people usually calls for a data protection impact assessment (Art. 35).
+- **Keep it secure.** Sessions, credentials and keys are in an encrypted vault; put the data
+  directory on an encrypted disk, give exports a password (AES-256 ZIP), keep the panel behind
+  HTTPS, and give a witness only its read-only token. Notifications carry no message text
+  unless you turn on excerpts, which sends text to the notification service.
+- **Retention and erasure.** The journal is append-only so that its integrity can be proven;
+  single records cannot be removed without breaking the signature chain. Plan retention per
+  workspace and delete an added workspace (Accounts → Delete) when the purpose ends. The main
+  workspace cannot be deleted from the panel: sign out of Telegram on the **More tools → Account** page, stop
+  TgWitness and remove its data directory. Off-site copies under S3 Object Lock cannot be deleted before their
+  retention date — choose the period accordingly. The right to erasure has exceptions, for
+  example for the establishment or defence of legal claims (Art. 17(3)(e)).
+- **Requests from the people recorded.** Chat exports and profile files make it possible to
+  find what is held about a person (Art. 15).
+- **Nothing is sent to the authors.** TgWitness has no telemetry and no hosted service; data
+  leaves your machine only through the routes you configure (Telegram, timestamp services,
+  S3 copy, notifications, witness).
 
 </details>
 
@@ -345,13 +371,9 @@ python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\A
 python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m ruff check .
 python -m playwright install chromium
-python tools/check_browser.py                          # end-to-end UI
-python tools/check_account_browser.py                  # sign-in flows
-python tools/capture_screenshots.py --docs             # refresh README images
 python tools/build_portable.py                         # Windows portable ZIP
 python tools/build_source.py                           # source ZIP + SHA-256 manifest
 python tools/build_site.py                             # site in dist/site
-python tools/check_site.py                             # site browser checks
 ```
 
 Browser checks use synthetic Telegram data.

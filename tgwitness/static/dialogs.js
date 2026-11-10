@@ -1,7 +1,8 @@
 (() => {
   const t = (text, vars) => (typeof tr === "function" ? tr(text, vars) : text);
+  const active = new Set();
 
-  function open({title, message, danger, confirmText, field, expected, choices, choicesLabel}) {
+  function open({title, message, danger, confirmText, field, expected, choices, choicesLabel, alternative}) {
     return new Promise(resolve => {
       const dialog = document.createElement("dialog");
       dialog.className = "export-dialog panel-dialog";
@@ -12,7 +13,7 @@
       heading.id = "panel-dialog-title";
       heading.textContent = title || t(danger ? "Please confirm" : "Confirm");
       form.append(heading);
-      for (const part of String(message || "").split("\n\n")) {
+      for (const part of String(message || "").split("\n\n").filter(Boolean)) {
         const paragraph = document.createElement("p");
         paragraph.className = "panel-dialog-text";
         paragraph.textContent = part;
@@ -24,9 +25,10 @@
         label.className = "panel-dialog-field";
         label.textContent = field.label || "";
         input = document.createElement("input");
+        input.type = field.type === "password" ? "password" : "text";
         input.value = field.value || "";
         input.maxLength = field.maxLength || 200;
-        input.autocomplete = "off";
+        input.autocomplete = field.autocomplete || "off";
         if (field.placeholder) input.placeholder = field.placeholder;
         label.append(input);
         form.append(label);
@@ -58,16 +60,27 @@
       accept.type = "submit";
       accept.className = danger ? "danger" : "primary";
       accept.textContent = confirmText || t("OK");
-      actions.append(cancel, accept);
+      actions.append(cancel);
+      if (alternative) {
+        const other = document.createElement("button");
+        other.type = "button";
+        other.className = "secondary";
+        other.textContent = alternative;
+        other.addEventListener("click", () => { result = "alternative"; dialog.close(); });
+        actions.append(other);
+      }
+      actions.append(accept);
       form.append(actions);
       dialog.append(form);
 
-      const value = () => (input ? input.value.trim() : "");
+      const value = () => (input ? (input.type === "password" ? input.value : input.value.trim()) : "");
       const ready = () => {
         if (expected !== undefined) accept.disabled = value() !== expected;
         else if (field?.required) accept.disabled = !value();
       };
       let result = null;
+      const dismiss = () => { result = null; if (dialog.open) dialog.close(); };
+      active.add(dismiss);
       input?.addEventListener("input", ready);
       cancel.addEventListener("click", () => dialog.close());
       form.addEventListener("submit", event => {
@@ -75,8 +88,11 @@
         result = input ? value() : choices ? (boxes || []).filter(box => box.checked).map(box => box.value) : true;
       });
       dialog.addEventListener("close", () => {
+        active.delete(dismiss);
+        if (input) input.value = "";
         dialog.remove();
-        if (expected !== undefined) resolve(result === expected);
+        if (result === "alternative") resolve("alternative");
+        else if (expected !== undefined) resolve(result === expected);
         else if (choices) resolve(Array.isArray(result) ? result : null);
         else resolve(input ? result : result === true);
       });
@@ -90,9 +106,11 @@
   window.TgWitnessDialogs = {
     confirm: (message, options = {}) => open({...options, message}),
     prompt: (message, options = {}) => open({...options, message, field: {label: options.label, value: options.value,
-      placeholder: options.placeholder, maxLength: options.maxLength, required: options.required !== false}}),
+      placeholder: options.placeholder, maxLength: options.maxLength, required: options.required !== false,
+      type: options.type, autocomplete: options.autocomplete}}),
     typed: (message, expected, options = {}) => open({...options, message, danger: true, expected,
       field: {label: options.label || t("Type the name to confirm"), placeholder: expected, maxLength: 300}}),
     choose: (message, options = {}) => open({...options, message, choices: options.choices || []}),
+    closeAll: () => { for (const dismiss of [...active]) dismiss(); },
   };
 })();

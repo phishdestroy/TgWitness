@@ -1,11 +1,20 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Getting started](QUICKSTART.md)
+
+![Getting started](assets/presentation/chapter-start.svg)
+
 # First setup and settings
 
 [Accounts](ACCOUNTS.md) · [Connection](CONNECTION-SECURITY.md) · [Access](ACCESS.md)
 
-A new workspace opens `/first-run`: language and time, interface level, goal,
-connection, Telegram and chats. Each answer is saved on the server as soon as it
-changes, so a reload continues the same step. The last screen lists the answers and
-lets you go back to any of them.
+A new workspace opens `/first-run`. The first screen asks what you want to do:
+**Just download**, **Follow chats** or **Evidence for a case**. The choice sets the
+goal and the interface level: Simple for Just download, Standard for the other two.
+**More options** on the same screen sets the level, theme and time zone explicitly;
+the language list is in the wizard header. The next screens cover the connection,
+Telegram and chats. Connection routes stay folded while the automatic check works
+and open when it fails. A five-stage progress bar returns to completed stages.
+Each answer is saved on the server as soon as it changes, so a reload continues the
+same step. The last screen lists the answers and lets you go back to any of them.
 
 Language, IANA time zone, theme and level are stored per operator and per workspace.
 The defaults are the browser language, the device time zone, the system theme and the
@@ -19,19 +28,20 @@ Collection settings and the first connection belong to the workspace administrat
 
 | Level | Fields | Sidebar |
 | --- | --- | --- |
-| Simple | Only the essentials | Home, Chats, Changes, Archives, Settings |
-| Standard | Common settings with explanations | Adds Case Board, Accounts and Access |
-| Expert | All fields, limits and technical details | Adds Sources, Extras, Ask the archive, Parameters, Account, System log and Integrations |
+| Simple | Only the essentials | Home, Chats, Journal, Exports, Accounts and Settings |
+| Standard | Common settings with explanations | Adds Case Board, Sources, Access and Documentation under More tools |
+| Expert | All fields, limits and technical details | Also adds System map, Network topology, Extras, Ask the archive, Parameters, Account, System log and Integrations under More tools |
 
-The [panel guide](PANEL.md) describes each section.
+Section names stay the same at every level. Open Appearance at the bottom of the
+sidebar to change the level. The [panel guide](PANEL.md) describes each section.
 
 ## Goals
 
 | Goal | Collection | Files | Outside services | Server address |
 | --- | --- | --- | --- | --- |
-| Archive copy | Off; **Start** runs an export | Photos up to 20 MB | Off | Automatic |
+| Just download | One-time export starts from the final setup screen; continuous collection stays off | Photos up to 20 MB | Off | Automatic |
 | Follow chats | Continuous | Photos and videos up to 60 seconds / 20 MB | Timestamps and problem notifications | Automatic |
-| Evidence | Continuous | All files up to 1 GB | Timestamps, drand, notifications | No, hide it |
+| Evidence for a case | Continuous | All files up to 1 GB | Timestamps, drand, notifications | No, hide it |
 
 Off-site copy, the witness bot and the code check are recommended for evidence.
 Storage and notification addresses need a destination first. A feature that talks
@@ -45,11 +55,15 @@ in another tab.
 
 ## Connection
 
-**Automatic** tries public MTProxy servers, then WARP, then a direct connection, the
+**Automatic** tries WARP, then public MTProxy servers, then a direct connection, the
 last only when the server's address may be shown. Automatic and WARP can install
-hash-checked components and register the server with Cloudflare. WARP uses the
-existing wgcf/wireproxy manager and a local SOCKS5 port; the system routing table is
-not changed. When outside services are needed, Automatic prefers WARP to MTProxy.
+hash-checked components and register the server with Cloudflare; without that consent
+Automatic skips WARP. WARP uses the existing wgcf/wireproxy manager and a local SOCKS5
+port; the system routing table is not changed.
+
+**Bulk import** asks for the route before any session reaches Telegram: WARP (default),
+public MTProxy or direct. The session check uses the same kind of route, and every
+imported account gets its own WARP tunnel before its first sign-in.
 
 Your own proxy accepts `tg://proxy`, `socks5://`, `http://` and `https://`. An HTTPS
 proxy's certificate is checked before credentials are sent to it.

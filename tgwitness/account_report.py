@@ -1,32 +1,34 @@
-"""Streaming, offline account/sharing reports. Signed JSONL remains authoritative.
-
-Labels use the existing panel dictionaries, with explicit English fallbacks. Message
-text is escaped, never translated. Sharing reports apply an additional display
-allowlist and never serialize source records or private selection criteria.
-"""
 import html
+import hashlib
 import json
+from itertools import islice
 import re
 from datetime import datetime
 
 from . import case_assessment, i18n, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
 from .report import DOSSIER_CSS, Words
+from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
 COUNT_LABELS = {'messages': 'Messages', 'chats': 'Chats', 'media': 'Media files included',
                 'media_saved': 'Media files included', 'media_skipped': 'Files skipped or unavailable',
-                'records': 'Records', 'chats_selected': 'Selected chats'}
+                'media_hashed': 'Files with server hashes',
+                'records': 'Records', 'chats_selected': 'Selected chats', 'withheld': 'Withheld by selection'}
 SCOPE_LABELS = {'from_utc': 'From date (UTC)', 'to_utc': 'Until (UTC, exclusive)',
                 'report_language': 'Report language', 'identity_mode': 'Names and user IDs',
                 'text_mode': 'Message text', 'include_media': 'Include media files',
+                'media_action': 'Selected media action', 'oversized_media': 'Oversized media',
                 'own_messages_only': 'Only messages sent by this account',
                 'sender_filter_count': 'Sender filters', 'text_filter_count': 'Text filters',
                 'manual_redaction_count': 'Additional terms hidden',
-                'disclosed_identity_count': 'Identities allowed to remain identifiable'}
+                'disclosed_identity_count': 'Identities allowed to remain identifiable',
+                'withheld_markers': 'Messages left out by the selection'}
 VALUES = {'keep': 'Keep matching text', 'omit': 'Omit message text',
           'pseudonymize_all': 'Pseudonymize everyone', 'pseudonymize_third_parties': 'Pseudonymize third parties',
           'regular': 'Regular Telegram API', 'takeout': 'Telegram Takeout'}
+VALUES.update(download='Download files', hashes_only='Save server hashes only', exclude='Exclude file bytes',
+              collapsed='One marker for each run', each='One marker for each message')
 CONTEXT_LABELS = {'archive_reference': 'Archive reference', 'created_at': 'Copy created',
                   'requested_at': 'Collection requested', 'captured_from': 'First recorded capture',
                   'captured_until': 'Last recorded capture'}
@@ -44,7 +46,7 @@ h2{font-size:20px;line-height:1.4;margin:28px 0 12px}h3{font-size:16px;margin:0}
 .facts{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,3fr);gap:8px 18px;margin:0}.facts dt{color:var(--muted)}.facts dd{margin:0;min-width:0}
 .chat-list{list-style:none;padding:0}.chat-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
 .message-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 20px;flex-wrap:wrap}.record-link{font-size:12px;white-space:nowrap}.message-meta,.record-citation{font-size:12px;color:var(--muted);margin:8px 0}.message-meta span{display:inline-block;margin-inline-end:16px}.record-citation{border-top:1px solid var(--line);padding-top:8px}.record-citation code{color:var(--ink)}.message:target{outline:2px solid var(--accent);outline-offset:3px}
-.message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:16px 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
+.message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:16px 0}.message.withheld{border-style:dashed;background:transparent}.reply-state{font-size:13px;color:var(--muted,#666);margin:8px 0 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
 a{color:var(--accent);text-underline-offset:3px}a,code,pre,dd{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:12px/1.6 ui-monospace,monospace;margin:12px 0 0}
 nav{display:flex;gap:8px 18px;flex-wrap:wrap;margin:18px 0;font-size:13px}nav a{padding:4px 0}
 code{font:12px/1.6 ui-monospace,monospace}.command{display:block;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;white-space:pre-wrap;direction:ltr;unicode-bidi:plaintext}
@@ -85,7 +87,6 @@ def technical(value, say):
 
 
 def timestamp(value, say):
-    """Keep the recorded offset; never silently assume the reader's timezone."""
     raw = text(value)
     if not raw:
         return e(say('Not recorded'))
@@ -118,7 +119,6 @@ def recipient_guide(say, sharing=False):
 
 def copy_context(context, say, sharing=False):
     parts = ['<section class="panel" id="context"><h2>' + e(say('About this copy')) + '</h2><dl class="facts">']
-    # Sharing has its own reference and creation time; source metadata stays private.
     for key, label in CONTEXT_LABELS.items():
         if sharing and key not in ('archive_reference', 'created_at'):
             continue
@@ -143,7 +143,6 @@ def opening(context, title, sharing=False):
     lead = (say('A minimized, signed copy for review and sharing. The original account export is unchanged.') if sharing else
             say('A snapshot of history visible to this Telegram account during acquisition.'))
     design = Presentation.model_validate(context.get('presentation') or {}).design
-    # Keep older frozen jobs readable while new layouts share the report palette.
     template = {'quire': 'editorial', 'atlas': 'analytical'}.get(design, 'dossier')
     layout_attribute = ' data-report-design="' + design + '"' if design in report_layouts.DESIGNS else ''
     yield encoded('<!doctype html><html data-template="' + template + '"' + layout_attribute + ' lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
@@ -159,7 +158,7 @@ def stats(counts, say):
     parts = ['<dl class="stats">']
     for key, label in COUNT_LABELS.items():
         value = counts.get(key)
-        if key == 'media_skipped' and value == 0 or key == 'records' and value == counts.get('messages'):
+        if key in ('media_skipped', 'media_hashed') and value == 0 or key == 'records' and value == counts.get('messages'):
             continue
         if type(value) is int and value >= 0:
             parts.append('<div class="stat"><dt>' + e(say(label)) + '</dt><dd>' + str(value) + '</dd></div>')
@@ -204,7 +203,7 @@ def scope(policy, say, sharing=False):
 
 def verification(context, say, sharing=False):
     parts = ['<section id="verification"><h2>' + e(say('Verification')) + '</h2><p>' +
-             e(say('TgWitness signs this archive; Telegram does not. A valid signature does not establish completeness or truth.')) + '</p>',
+             e(say('TgWitness signs this archive with the collector key; a change to any file breaks the signature.')) + '</p>',
              '<p>' + e(say('This HTML is protected by the archive manifest. Verify the ZIP; this page alone has no standalone signature.')) + '</p>',
              '<p>' + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + '</p>',
              '<h3>' + e(say('Signing key fingerprint (SHA-256)')) + '</h3><p><code dir="ltr">' + e(context.get('fingerprint')) + '</code></p>',
@@ -215,7 +214,7 @@ def verification(context, say, sharing=False):
         parts += ['<p>' + e(say('Optional source comparison checks the archive reference, not the correctness of filtering or redaction.')) + '</p>',
                   '<code class="command">python verify.py disclosure.zip --fingerprint TRUSTED_SHA256 --evidence original.zip</code>',
                   '<p>' + e(say('Source archive SHA-256')) + ': <code dir="ltr">' + e(context.get('source_archive_sha256')) + '</code></p>']
-    parts.append('</section><section><h2>' + e(say('Limitations')) + '</h2><ul>')
+    parts.append('</section><section><h2>' + e(say('Reading this record')) + '</h2><ul>')
     for limitation in context.get('limitations', ()):
         if isinstance(limitation, str):
             parts.append('<li>' + e(say(limitation)) + '</li>')
@@ -295,8 +294,24 @@ def omissions_section(context, say):
     yield encoded('</ul><p>' + e(say('Signed JSONL pages and capture receipts are authoritative. Other account data is retained in those pages.')) + '</p></section>')
 
 
+WITHHELD_RULE_LABELS = {'sender': 'sender not selected', 'text': 'text filter not matched',
+                        'period': 'outside the selected period'}
+REPLY_STATE_LABELS = {'disclosed': 'This reply answers a message included in this copy.',
+                      'withheld': 'This reply answers a message withheld by the selection.',
+                      'not_in_source': 'This reply answers a message that is not in the source export.'}
+
+
+def withheld_card(message, say, reference, marker, page_path):
+    rules = ', '.join(say(WITHHELD_RULE_LABELS[rule]) for rule in message.get('rules') or [])
+    return ('<article class="message withheld" id="' + reference + '"' + marker + '><p class="message-text"><strong>'
+            + e(say('Withheld by selection')) + '</strong> \u2014 ' + e(say('Rule: {rules}', rules=rules)) + '</p><p class="muted">'
+            + e(say('Messages left out here: {count}. A withheld message is not a deletion and not a gap in collection.',
+                    count=message.get('count', 1)))
+            + '</p><p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#'
+            + reference + '</code></p></article>')
+
+
 def shared_row(row):
-    """Only the transformed schema can enter readable sharing output, including raw details."""
     chat = row.get('chat') if isinstance(row.get('chat'), dict) else {}
     message = row.get('message') if isinstance(row.get('message'), dict) else {}
     safe_chat = {key: chat[key] for key in ('id', 'title', 'kind') if type(chat.get(key)) in (str, int)}
@@ -304,6 +319,14 @@ def shared_row(row):
                     if key in message and (type(message[key]) in (str, int) or message[key] is None)}
     if type(message.get('outgoing')) is bool:
         safe_message['outgoing'] = message['outgoing']
+    if message.get('state') in ('disclosed', 'withheld'):
+        safe_message['state'] = message['state']
+    if message.get('state') == 'withheld':
+        safe_message['rules'] = [rule for rule in WITHHELD_RULE_LABELS if rule in (message.get('rules') or [])]
+        safe_message['count'] = message['count'] if type(message.get('count')) is int else 1
+    reply = message.get('reply_to')
+    if isinstance(reply, dict) and reply.get('state') in REPLY_STATE_LABELS and type(reply.get('id')) in (str, int):
+        safe_message['reply_to'] = {'id': reply['id'], 'state': reply['state']}
     safe_message['attachments'] = []
     for attachment in message.get('attachments', ()):
         if isinstance(attachment, dict) and attachment.get('outcome') == 'saved' and MEDIA_PATH.fullmatch(text(attachment.get('file'))):
@@ -331,6 +354,8 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
     identifier = message.get('id')
     marker = ' data-message-id="' + e(identifier) + '"' if type(identifier) in (str, int) else ''
     reference = f'record-{number:06d}'
+    if sharing and message.get('state') == 'withheld':
+        return withheld_card(message, say, reference, marker, page_path)
     parts = ['<article class="message" id="' + reference + '"' + marker + '><div class="message-head"><h3 class="user" dir="auto">' + e(sender) +
              '</h3><a class="record-link" href="#' + reference + '">' + e(say('Record')) + ' <bdi>' + f'{number:06d}' + '</bdi></a></div>',
              '<p class="message-meta"><span>' + e(say('Message date')) + ': ' + timestamp(message.get('date'), say) + '</span>']
@@ -343,17 +368,78 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
     if text(message.get('username')):
         parts.append('<p class="muted user" dir="auto">@' + e(message['username']) + '</p>')
     parts.append('<p class="message-text" dir="auto">' + e(body or say('No message text in this record.')) + '</p>')
+    if sharing and isinstance(message.get('reply_to'), dict):
+        parts.append('<p class="reply-state">' + e(say(REPLY_STATE_LABELS[message['reply_to']['state']])) + '</p>')
     for attachment in message.get('attachments', ()):
         if not isinstance(attachment, dict):
             continue
         if attachment.get('outcome') == 'saved' and MEDIA_PATH.fullmatch(text(attachment.get('file'))):
             parts.append('<p><a download href="' + prefix + attachment['file'] + '">' + e(say('Included original attachment')) + '</a></p>')
+        elif not sharing and attachment.get('outcome') == 'hashed':
+            hashes = attachment.get('server_hashes') or {}
+            manifest = 'hashes/' + hashlib.sha256(canonical(hashes)).hexdigest() + '.json'
+            parts.append('<p class="muted">' + e(say('File hashes saved; file bytes were not downloaded.'))
+                         + ' ' + e(str(hashes.get('covered_bytes', 0))) + ' bytes · '
+                         + e(str(len(hashes.get('ranges', [])))) + ' SHA-256 ranges · <a download href="'
+                         + prefix + manifest + '">' + e(say('Download file hashes')) + '</a></p>')
         elif not sharing:
             parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(text(attachment.get('reason'))) + '</span></p>')
     parts.append('<p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#' + reference + '</code></p>')
     parts.append(technical(row, say))
     parts.append('</article>')
     return ''.join(parts)
+
+
+CHAT_PAGE_RECORDS = 250
+CHAT_PAGE_DATA_BYTES = 512 * 1024
+
+
+def account_chat_pages(context, chat, rows):
+    counts, count, size = [], 0, 0
+    for row in rows():
+        length = len(canonical(row))
+        if count and (count >= CHAT_PAGE_RECORDS or size + length > CHAT_PAGE_DATA_BYTES):
+            counts.append(count)
+            count, size = 0, 0
+        count, size = count + 1, size + length
+    if count or not counts:
+        counts.append(count)
+    stem = str(chat['id'])
+    def filename(page):
+        return stem + ('' if page == 1 else '-' + str(page)) + '.html'
+    incoming, first = iter(rows()), 1
+    for page, count in enumerate(counts, 1):
+        name = 'chats/' + filename(page)
+        pagination = {'page': page, 'pages': len(counts), 'first_record': first,
+            'last_record': first + count - 1, 'file': name,
+            'previous': filename(page - 1) if page > 1 else None,
+            'next': filename(page + 1) if page < len(counts) else None}
+        consumed = 0
+        def page_rows():
+            nonlocal consumed
+            for row in islice(incoming, count):
+                consumed += 1
+                yield row
+        yield name, account_chat({**context, 'pagination': pagination}, chat, page_rows())
+        if consumed != count:
+            raise ValueError('Message count changed while rendering chat pages')
+        first += count
+    if next(incoming, None) is not None:
+        raise ValueError('Message count changed while rendering chat pages')
+
+
+def page_navigation(context, say):
+    page = context.get('pagination') or {}
+    if page.get('pages', 1) <= 1:
+        return ''
+    parts = ['<nav class="transcript-pages" aria-label="' + e(say('Transcript pages')) + '">']
+    if page.get('previous'):
+        parts.append('<a rel="prev" href="' + e(page['previous']) + '">← ' + e(say('Previous page')) + '</a>')
+    parts.append('<span>' + e(say('Page')) + ' ' + str(page['page']) + ' / ' + str(page['pages'])
+                 + ' · ' + e(say('Records')) + ' ' + str(page['first_record']) + '–' + str(page['last_record']) + '</span>')
+    if page.get('next'):
+        parts.append('<a rel="next" href="' + e(page['next']) + '">' + e(say('Next page')) + ' →</a>')
+    return ''.join(parts) + '</nav>'
 
 
 def account_chat(context, chat, rows):
@@ -370,14 +456,16 @@ def account_chat(context, chat, rows):
     yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>')
     yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a><a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a><a href="#verification">' +
                   e(say('Verification')) + '</a></nav><section id="messages">')
-    page_path = 'chats/' + str(chat['id']) + '.html' if type(chat.get('id')) is int else 'chat.html'
+    pagination = context.get('pagination') or {}
+    yield encoded(page_navigation(context, say))
+    page_path = pagination.get('file') or ('chats/' + str(chat['id']) + '.html' if type(chat.get('id')) is int else 'chat.html')
     seen = False
-    for number, row in enumerate(rows, 1):
+    for number, row in enumerate(rows, pagination.get('first_record', 1)):
         seen = True
         yield encoded(message_card(row, say, prefix='../', number=number, page_path=page_path))
     if not seen:
         yield encoded('<p>' + e(say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>')
-    yield encoded('</section>')
+    yield encoded(page_navigation(context, say) + '</section>')
     yield encoded(case_assessment.html(case_assessment.snapshot(context, 'account_chat',
         {'message_count': chat.get('message_count')}), say))
     yield encoded(verification(context, say))
@@ -396,7 +484,6 @@ def sharing_report(context, rows):
     yield encoded(recipient_guide(say, sharing=True))
     yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
     yield encoded(case_assessment.html(case_assessment.snapshot(context, "sharing"), say))
-    # Only explicitly public policy fields are rendered. No private criteria, map or source rows.
     public = {key: context.get('policy', {}).get(key) for key in (*SCOPE_LABELS, 'purpose')}
     yield encoded(stats(context.get('counts', {}), say) + copy_context(context, say, sharing=True) + scope(public, say, sharing=True))
     yield encoded('<p class="notice">' + e(say('This sharing copy is a separate derivative, not the complete original account export.')) + '</p>')
@@ -414,7 +501,6 @@ def sharing_report(context, rows):
 
 
 def text_keys():
-    """English labels for explicit dictionary fallback maintenance; message text is excluded."""
     import ast
     from pathlib import Path
     tree = ast.parse(Path(__file__).read_text(encoding='utf-8'))
@@ -422,4 +508,5 @@ def text_keys():
             and isinstance(node.func, ast.Name) and node.func.id == 'say' and node.args
             and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
     return list(dict.fromkeys(keys + case_assessment.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
-                              list(VALUES.values()) + list(CONTEXT_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps']))
+                              list(VALUES.values()) + list(CONTEXT_LABELS.values()) + list(WITHHELD_RULE_LABELS.values())
+                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps']))

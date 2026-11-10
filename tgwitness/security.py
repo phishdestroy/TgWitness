@@ -5,6 +5,8 @@ import logging
 import os
 import secrets
 import subprocess
+import sys
+import time
 from pathlib import Path
 
 from cryptography.fernet import Fernet
@@ -57,7 +59,14 @@ def private_write(path: Path, data: bytes):
         stream.write(data)
         stream.flush()
         os.fsync(stream.fileno())
-    os.replace(temp, path)
+    for attempt in range(6):
+        try:
+            os.replace(temp, path)
+            break
+        except PermissionError as exc:
+            if getattr(exc, "winerror", None) not in (5, 32, 33) or attempt == 5:
+                raise
+            time.sleep(.01 * 2**attempt)
 
 
 class Vault:
@@ -65,7 +74,7 @@ class Vault:
         self.root = root
         root.mkdir(parents=True, exist_ok=True, mode=0o700)
         key_path = root / "vault.key"
-        protected = [root / "credentials.enc", root / "signing.enc"]
+        protected = [root / "credentials.enc", root / "signing.enc", root / "independent_login.enc"]
         external = os.environ.get("TGWITNESS_VAULT_KEY_FILE")
         marker = root / "vault.external.json"
         self.key_mode = "external" if external or marker.exists() else "local"
@@ -150,6 +159,67 @@ class InstanceLock:
 
     def close(self):
         self.stream.close()
+
+
+class KeyInUse(ValueError):
+    pass
+
+
+class KeyLock:
+    IN_USE = ("This Telegram session is already connected by another TgWitness process or workspace on this computer. "
+              "Close it there first: one session key, one connection.")
+
+    def __init__(self, key: bytes, directory: Path | None = None):
+        import hashlib
+        name = "tgwitness-key-" + hashlib.sha256(b"tgwitness-session-key:" + key).hexdigest()
+        self.stream = self.socket = self.mutex = None
+        if directory is None and sys.platform == "linux":
+            import socket
+            self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            try:
+                self.socket.bind(chr(0) + name)
+            except OSError:
+                self.socket.close()
+                raise KeyInUse(self.IN_USE) from None
+            return
+        if directory is None and os.name == "nt":
+            import ctypes
+            kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+            kernel.CreateMutexW.argtypes = (ctypes.c_void_p, ctypes.c_bool, ctypes.c_wchar_p)
+            kernel.CreateMutexW.restype = ctypes.c_void_p
+            kernel.CloseHandle.argtypes = (ctypes.c_void_p,)
+            handle = kernel.CreateMutexW(None, False, "Global\\" + name)
+            if not handle or ctypes.get_last_error() == 183:
+                if handle:
+                    kernel.CloseHandle(handle)
+                raise KeyInUse(self.IN_USE)
+            self.mutex = kernel, handle
+            return
+        import tempfile
+        directory = directory or Path(tempfile.gettempdir()) / "tgwitness-keys"
+        directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+        self.stream = (directory / (name.removeprefix("tgwitness-key-") + ".lock")).open("a+b")
+        self.stream.seek(0)
+        try:
+            if os.name == "nt":
+                import msvcrt
+                msvcrt.locking(self.stream.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(self.stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            self.stream.close()
+            raise KeyInUse(self.IN_USE) from None
+
+    def close(self):
+        if self.socket is not None:
+            self.socket.close()
+        elif self.mutex is not None:
+            kernel, handle = self.mutex
+            self.mutex = None
+            kernel.CloseHandle(handle)
+        elif self.stream is not None:
+            self.stream.close()
 
 
 def main():

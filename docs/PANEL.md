@@ -1,52 +1,93 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Getting started](QUICKSTART.md)
+
+![Getting started](assets/presentation/chapter-start.svg)
+
 # Panel guide
 
 [First setup and settings](SETTINGS.md) · [Accounts](ACCOUNTS.md) · [Export and verify](EVIDENCE.md) · [Case reports](CASE_REPORTS.md)
 
 What each screen does, what it writes to the signed journal and where the detailed
 guide is. The panel shows one workspace at a time: one Telegram account with its own
-sources, journal and signing key. The selector at the top of the sidebar switches
+sources, journal and signing key. The account selector in the top bar switches
 workspaces. The address carries the workspace (`?ws=…`); while the address, the
 selector and the loaded account disagree, actions stay blocked.
 
+Use [Compare collection methods](COLLECTION-MODES.md) to choose between live
+observation, full history, fresh account/chat exports and saved-record handover.
+The Exports page includes the same comparison above its download controls.
+
+<details>
+<summary>On this page</summary>
+
+- [Find your way](#find-your-way)
+- [Start here](#start-here)
+- [Chats](#chats)
+- [Journal](#journal)
+- [Sources](#sources)
+- [Exports](#exports)
+- [Settings, accounts and connection](#settings-accounts-and-connection)
+- [Extras](#extras)
+- [Protection modes](#protection-modes)
+- [More tools](#more-tools)
+
+</details>
+
 ## Find your way
 
-Daily sections are at the top of the sidebar, **Accounts** is under **Workspace**,
-and everything else is under **More tools & settings**. The **Interface level**
-switch in the top bar decides how many sections appear:
+The sidebar keeps six daily sections together: **Home**, **Chats**, **Journal**,
+**Exports**, **Accounts** and **Settings**. Sections that your access does not permit
+are omitted. **More tools** contains investigation and administration tools.
+Open **Appearance** at the bottom of the sidebar to change the language, theme,
+time zone or interface level:
 
 | Level | Sections in the sidebar |
 | --- | --- |
-| Simple | Home, Chats, Changes, Archives and Settings |
-| Standard | Also Case Board, Accounts and Access |
-| Expert | Also Sources, Extras, Ask the archive, Parameters, Account, System log and Integrations |
+| Simple | The daily sections |
+| Standard | Also Case Board, Sources, Access and Documentation under More tools |
+| Expert | Also System map, Network topology, Extras, Ask the archive, Parameters, Account, System log and Integrations under More tools |
 
-Simple calls Start here, Journal and Exports **Home**, **Changes** and **Archives**.
-A level only hides sections. A hidden feature keeps working, and the server checks
+Section names stay the same at every level. A level only hides sections. A hidden feature keeps working, and the server checks
 every permission on its own. Level, language, theme and time zone are saved per
 operator and workspace; see [settings](SETTINGS.md).
 
-The top bar also has:
+Use **Go to a section** at the top of the sidebar (Ctrl+K, or ⌘K on a Mac) to find
+a chat, a parameter or a journal record by `#number`. Arrow keys move, Enter opens,
+Esc closes.
 
-- **Go to a section** (Ctrl+K, or ⌘K on a Mac): find a chat, a parameter or a journal
-  record by `#number`. Arrow keys move, Enter opens, Esc closes.
+The top bar has:
+
 - **Notifications**: problems and chat changes worked out from the journal.
   **Mark all as read** clears the counter and **Notification rules** opens the rules.
   Delivery to Telegram, Discord or email is set up in
   [Extras → Notifications](#notifications).
-- The connection indicator for this workspace. **Collector health** under the top bar
-  splits it into the Telegram connection, event intake, sources and the attachment queue.
+- A collection-status menu with the start/pause control, connection settings and
+  health diagnostics for Telegram, event intake, sources and the attachment queue.
+  On a narrow screen, open it with the activity icon.
 - **Lock**: closes the panel in this browser. Collection keeps running on the server.
-- The protection mode next to the version number; see [protection modes](#protection-modes).
+
+The version and protection mode are under **Appearance**; see [protection modes](#protection-modes).
+An installation with saved sources and journal records opens **Chats** after sign-in.
+An explicit link still opens its requested screen.
 
 The demo workspace contains fictional messages and never connects to Telegram.
 Actions that would change a real workspace are refused there.
+
+[System map](SYSTEM-MAP.md) shows this installation's account routes, proxy state,
+socket endpoints, encrypted vaults, evidence services and observed network requests.
+Select an account to inspect its path. Available but disabled services stay visible.
 
 ## Start here
 
 Choose a task. **Export my account** downloads what the account can read now.
 **Follow an investigation** records new messages, observed edits and deletion notices
-from the chats you choose. The setup card shows the three steps: connect the account,
-choose sources, start observation. The goal question stays on this page until you
+from the chats you choose. While observation is paused, Chats, Journal and Sources
+show the setup card: connect the account, choose sources, start observation.
+With the goal **Evidence for a case**, or in the Witnessed, Case preparation,
+GitHub-verified or Mossad [protection mode](#protection-modes), starting observation
+first reads Telegram's session list. If other sessions are signed in, the panel names
+their number and offers **Start anyway** or **Open Sessions of this account**. Other
+goals and modes start without that question.
+The goal question stays on this page until you
 answer or skip it. A new workspace opens the [first setup](SETTINGS.md) instead.
 
 ## Chats
@@ -63,7 +104,9 @@ Saved conversations, read-only by default.
   keeps every saved version. Each deletion says what is known: when it was seen, that
   Telegram does not report who deleted it, or that only the notice arrived.
 - **Load history** brings the last 100, 250 or 500 messages into this view and the
-  journal. To load every enabled source, use [Sources → Full history](#sources).
+  journal. Find it in **Chat actions**, alongside recording settings, read-only and
+  secret-masking controls. The menu closes with Escape or a click outside it.
+  To load every enabled source, use [Sources → Full history](#sources).
 - **Export chat** downloads the whole visible history as a signed `chat.json` and
   `chat.html`. Several connected accounts can share the work: each downloads its own
   range of message numbers and signs its part, and the account that starts the
@@ -131,7 +174,9 @@ apply to future activity; saved records stay.
 - **When a new chat or bot appears**: save its profile and up to the chosen number of
   its latest visible messages.
 
-Limits: secret chats never reach TgWitness. Nothing is recorded while TgWitness is
+[Pseudo-secret](PSEUDO-SECRET.md) is the included Secret Chat interface, enabled
+per account after installing the optional protocol dependency. Cloud observation
+and history use their own settings. Nothing is recorded while TgWitness is
 not running; after a restart it catches up only what Telegram still returns, and the
 report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in
 Parameters) are added when they next become active. Inline bot buttons pressed in
@@ -187,8 +232,16 @@ Progress survives a restart; attachments follow your media settings. See
 - **Encrypt the downloads above with a password** (12 characters or more) saves an
   AES-256 ZIP that 7-Zip or WinRAR opens. The signed file inside is unchanged. The
   password is not stored.
+- When the session key of this workspace was imported, the account export and chat
+  export dialogs say so in one line: copies of that key can exist outside Telegram's
+  session list. The same line offers **Create an independent authorization**, which
+  opens the sign-in page with that option selected. See
+  [accounts](ACCOUNTS.md#create-an-independent-authorization).
+- A chat export that fails or is cancelled keeps the range it saved. **Capture or export
+  one chat** then offers **Resume export** and **Start over**; see
+  [export one chat](wiki/Chat-Export.md).
 - **Prepared exports** keeps up to 20 files within 2 GiB, plus the latest one, for
-  repeat downloads, each with its SHA-256. Preparing a file does not prove delivery.
+  repeat downloads, each with its SHA-256 for the recipient to compare.
 - When the browser refuses its save dialog, the panel falls back to an ordinary download.
 - **Your signing identity** shows the key fingerprint. **Save checkpoint** and
   **Download signed run receipt** give you records to keep outside the collector.
@@ -206,6 +259,13 @@ Progress survives a restart; attachments follow your media settings. See
   profile, your own proxy, the public MTProto pool or WARP; prepare and check a route,
   then apply it to this account, a group or all accounts. See
   [connection and proxies](CONNECTION-SECURITY.md) and [proxies](wiki/Proxies.md).
+  **Account security → Sessions of this account** lists Telegram's sessions, ends one
+  or all of them, and — for a key created in this workspace — offers **Make this the
+  only session when Telegram allows it**, which repeats that action after the 24 hours
+  Telegram requires and shows the two-step password it sets once. See
+  [account security](ACCOUNTS.md#create-an-independent-authorization).
+  **Account security → Witness probe** uses a second workspace to check that this
+  session receives updates live; see [witness probe](ACCOUNTS.md#witness-probe).
 
 ## Extras
 
@@ -261,10 +321,14 @@ Notifications go through Apprise to Telegram, Discord, Slack, ntfy, email, Matri
 paste Apprise addresses directly.
 
 - **Problems**: disk almost full, account signed out, collection, copy or timestamp
-  errors. On a sealed server, an opened SSH port or a login is a problem too.
+  errors, a new session signed in to the account with the device, application and
+  country Telegram lists, a login code or new sign-in that Telegram reports during
+  observation, and another session after **Make this the only session**. On a sealed
+  server, an opened SSH port or a login is a problem too.
 - **Changes**: deleted, edited and missing messages in observed chats, grouped into
   one notification per check (every minute unless changed in Parameters).
 - **Completed tasks**: history, exports and storage copies.
+- **Watchlist hits**: matches from watchlists set to send an alert.
 - **Daily summary** at the chosen hour, server time.
 
 Notifications carry chat names and counts. Message excerpts are off by default; with
@@ -279,7 +343,8 @@ bot if another application already receives its commands. See
 ### Evidence and backups
 
 - **Independent timestamps** send only the SHA-256 of each signed checkpoint to RFC 3161
-  authorities and OpenTimestamps calendars, every 5 to 1,440 minutes. **Anchor now**
+  authorities and OpenTimestamps calendars, every 5 to 1,440 minutes. A recipient needs
+  such third-party time for the minimum for evidence. **Anchor now**
   runs a pass. See [timestamps](TIMESTAMP.md).
 - **More witnesses**, each off until chosen: the newest drand round, Telegram's list of
   signed-in devices without IP addresses, and Cloudflare Gateway's log of the server's
@@ -355,5 +420,7 @@ See the English <a href="OPTIONAL-CAPTURE.md">Independent capture guide</a>.</p>
   [signed webhooks](WEBHOOKS.md).
 - **Case Board**: private team notes, bookmarks and slices next to the evidence. See
   [Case Board](CASE-BOARD.md).
+- **Documentation**: the [investigation mode](INVESTIGATION-MODE.md) drawer. While a
+  documented session is recording, it moves to the main sidebar.
 - **GitHub Actions capture** in Exports: one chat captured from your fork. See
   [sealed capture](SEALED-ACTIONS.md).

@@ -1,3 +1,7 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Getting started](QUICKSTART.md)
+
+![Getting started](assets/presentation/chapter-start.svg)
+
 # Panel safeguards
 
 [Documentation](README.md) · [Accounts](ACCOUNTS.md) · [Storage](STORAGE.md)
@@ -5,6 +9,18 @@
 The panel double-checks which account you're acting as, inspects imported files before
 signing in and keeps chat actions off until you turn them on. It's about avoiding
 mistakes; the server still checks permissions on its own.
+
+<details>
+<summary>On this page</summary>
+
+- [File check](#file-check)
+- [Account context](#account-context)
+- [Read-only chat](#read-only-chat)
+- [Downloads](#downloads)
+- [Code map](#code-map)
+- [Checks](#checks)
+
+</details>
 
 ## File check
 
@@ -103,23 +119,7 @@ sent to a model after you approve it.
 
 ## Checks
 
-```sh
-python tools/check_import_preflight.py
-python tools/check_chat_safety_browser.py
-python tools/check_workspace_downloads_browser.py
-python tools/check_prepared_export_access.py
-python tools/check_services_browser.py
-python tools/check_storage_services.py
-python tools/test_settings_hub.py
-node tools/check_privacy_js.cjs
-```
-
-Other engines:
-
-```sh
-python tools/check_workspace_downloads_browser.py --browser firefox
-python tools/check_workspace_downloads_browser.py --browser webkit
-```
-
-WebKit via Playwright isn't the same as a real iPhone. Screenshots land in
-`test-results/` and `build/ux-review/`. Telegram and storage are fake in these checks.
+The private validation workspace covers import preflight, chat safety, workspace
+downloads, prepared-export access, services, settings and privacy controls using
+synthetic Telegram and storage clients. Browser coverage includes Chromium,
+Firefox and WebKit; Playwright WebKit does not qualify a real iPhone.

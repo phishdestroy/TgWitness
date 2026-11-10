@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import errno
 import hashlib
 import io
 import json
@@ -8,6 +9,7 @@ import secrets
 import shutil
 import time
 from contextlib import asynccontextmanager
+from functools import partial
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -17,10 +19,17 @@ from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from .collector import Collector, WitnessClient
-from .evidence import export_file
+from .account_export import AccountExport, file_sha
+from .evidence import BundleSizeLimit, export_file
 from .middleware import KEEP_ALIVE_SECONDS, RequestLimit
+from .monitoring import capture_settings, normalize_capture
+from .export_preflight import preview_capture
+from .failures import describe
+from . import export_budget
 from .provenance import run_receipt
 from .sealed_crypto import recipient_id
+from .sealed_selection import Selection, selection_hash
+from .sealed_parts import EncryptedParts, PART_BYTES, SEALED_RESULT
 from .security import InstanceLock, Vault, private_write
 from .store import Store, canonical
 from .workers import complete_in_thread
@@ -61,10 +70,6 @@ class Password(StrictBody):
     password: str = Field(min_length=1, max_length=512)
 
 
-class Selection(StrictBody):
-    chat_id: int
-
-
 class Session:
     def __init__(self, root, output, config, client_factory):
         self.root, self.output, self.config = Path(root), Path(output), config
@@ -84,40 +89,143 @@ class Session:
         self.store.set_setting("route_policy", {"exposure": "tunnel", "outside_enabled": False})
         self.store.set_setting("parameters", {"dialog_limit": 20000, "export_max_gib": 4})
         self.collector = Collector(self.store, self.vault, client_factory)
+        self.account_export = AccountExport(self.collector, self.store, self.vault)
+        self.account_export.packaging_copies = 2
+        self.account_job = None
+        self.selection = None
         receipt = run_receipt(self.store, self.vault)
         self.collector.run_id = receipt["run_id"]
         self.store.append("collector.started", receipt)
         self.store.append("sealed.started", {"format": "tgwitness-sealed-run-v1",
             "recipient_sha256": self.recipient, "context": config["context"],
             "deadline_seconds": config["seconds"], "session_import_allowed": False,
-            "meaning": "Fresh Telegram login; one selected chat. Runtime trust depends on the external attestation."})
+            "meaning": "Fresh Telegram login; selected chat or account data. Runtime trust depends on the external attestation."})
         self.lock = asyncio.Lock()
         self.phase, self.reason = "login", None
         self.revocation = None
         self.started, self.closed = time.monotonic(), False
         self.monitor_task = None
         self.finish_task = None
+        self.assessment = None
+        self.collection_started = None
+        self.media_bytes_at, self.media_bytes = 0, 0
+
+    def time_budget(self, account=None):
+        remaining = max(0, int(self.config["seconds"] - (time.monotonic() - self.started)))
+        account = account if account is not None else self.account_export.public(self.account_job) if self.account_job else {}
+        if not self.account_job and self.phase == "collecting":
+            history = self.collector.history.status()
+            if time.monotonic() - self.media_bytes_at >= 5:
+                with self.store.lock:
+                    self.media_bytes = self.store.db.execute(
+                        "SELECT coalesce(sum(estimated_bytes),0) FROM media_jobs WHERE state='done'").fetchone()[0]
+                self.media_bytes_at = time.monotonic()
+            account = {"counts": {"messages_seen": history.get("captured", 0), "unique_media_bytes": self.media_bytes},
+                       "acquisition": {"history_complete": history.get("phase") in {"complete", "incomplete"},
+                                       "bytes_preserved": history.get("captured", 0) * 2048}}
+        waiting = max(0, int((account.get("wait_until") or 0) - time.time()))
+        elapsed = max(0, time.monotonic() - self.collection_started) if self.collection_started is not None else 0
+        return export_budget.progress(self.assessment.get("time_plan") if self.assessment else None,
+                                      account, remaining, self.config["seconds"], elapsed, waiting)
 
     def status(self):
+        account = self.account_export.public(self.account_job) if self.account_job else None
         return {"phase": self.phase, "login": self.collector.phase, "reason": self.reason,
                 "authorized": bool(self.store.get_setting("account", None)),
                 "remaining_seconds": max(0, int(self.config["seconds"] - (time.monotonic() - self.started))),
                 "history": self.collector.history.status(), "media": self.store.media_stats(),
+                "capture": capture_settings(self.store),
+                "selection": self.selection,
+                "selection_sha256": selection_hash(self.selection) if self.selection else None,
+                "account_export": account, "time_budget": self.time_budget(account),
                 "recipient_sha256": self.recipient, "context": self.config["context"], "revocation": self.revocation}
 
     def require_login(self):
         if self.phase != "login" or self.store.get_setting("account", None):
             raise ValueError("This capsule already has an account or has finished")
 
-    async def begin(self, chat_id):
+    def require_selection(self, chat_id):
         if self.phase != "login" or not self.store.get_setting("account", None):
             raise ValueError("Authorize a fresh Telegram session first")
-        if chat_id not in self.collector.dialog_cache:
+        if chat_id is not None and chat_id not in self.collector.dialog_cache:
             raise ValueError("Select a chat from this account's dialog list")
+
+    async def preview(self, selection):
+        self.require_selection(selection.chat_id)
+        if selection.mode == "account":
+            from .export_preflight import preview
+            result = await preview(self.account_export, selection.account_options.model_dump())
+        else:
+            result = await preview_capture(self.collector, selection.chat_id,
+                                       normalize_capture(selection.capture.model_dump()),
+                                       self.status()["remaining_seconds"])
+        result["remaining_seconds"] = self.status()["remaining_seconds"]
+        result["can_start"] = result["can_start"] and result["remaining_seconds"] > 0
+        result["selection"] = selection.settings()
+        result["selection_sha256"] = selection_hash(result["selection"])
+        options = selection.account_options.model_dump() if selection.mode == "account" else selection.capture.model_dump()
+        result["time_plan"] = export_budget.plan(result["sample"], options, result["remaining_seconds"], self.config["seconds"])
+        if not result["time_plan"]["unknown"]:
+            result["estimated_seconds"] = result["time_plan"]["estimated_total_seconds"]
+            result["total_output_bytes"] = result["time_plan"]["output_bytes"]
+        result["can_start"] = result["can_start"] and result["time_plan"]["fit"] != "no_collection_time"
+        self.assessment = result
+        return result
+
+    async def begin_selection(self, selection):
+        if self.assessment and self.assessment["selection_sha256"] != selection_hash(selection.settings()):
+            self.assessment = None
+        if self.assessment is None:
+            await self.preview(selection)
+        options = selection.account_options.model_dump() if selection.mode == "account" else selection.capture.model_dump()
+        self.assessment["time_plan"] = export_budget.plan(self.assessment["sample"], options,
+            self.status()["remaining_seconds"], self.config["seconds"])
+        if not self.assessment["can_start"]:
+            raise ValueError("Not enough disk or time remains for the selected capture and packaging.")
+        if self.assessment["time_plan"]["fit"] == "no_collection_time":
+            raise ValueError("Not enough time remains for collection and archive packaging.")
+        if selection.mode == "chat":
+            return await self.begin(selection.chat_id, selection.capture)
+        self.require_selection(None)
+        if self.status()["remaining_seconds"] <= 0:
+            raise ValueError("No capture time remains.")
+        options = selection.account_options.model_dump()
+        job = await self.account_export.start(options)
+        self.account_job = job["id"]
+        self.selection = selection.settings()
+        self.store.append("sealed.selection", {"mode": "account", "options": options,
+            "selection": self.selection, "selection_sha256": selection_hash(self.selection),
+            "free_disk_bytes": shutil.disk_usage(self.root).free, "remaining_seconds": self.status()["remaining_seconds"],
+            "transport": options["transport"], "total_size_and_duration": "estimated",
+            "time_plan": self.assessment["time_plan"] if self.assessment else None})
+        self.phase = "collecting"
+        self.collection_started = time.monotonic()
+
+    async def resume(self):
+        if self.phase != "collecting":
+            raise ValueError("No capture to resume.")
+        if self.account_job:
+            return await self.account_export.resume(self.account_job)
+        return await self.collector.history.resume()
+
+    async def begin(self, chat_id, capture=None):
+        self.require_selection(chat_id)
+        settings = normalize_capture((capture or Selection(chat_id=chat_id).capture).model_dump())
+        free = shutil.disk_usage(self.root).free
+        if free < self.collector.param("media_min_free_mb") * 1024**2 or self.status()["remaining_seconds"] <= 0:
+            raise ValueError("Not enough free disk or capture time")
+        self.store.set_setting("capture", settings)
+        self.selection = Selection(chat_id=chat_id, capture=settings).settings()
+        self.store.append("sealed.selection", {"chat_id": chat_id, "capture": settings,
+            "selection": self.selection, "selection_sha256": selection_hash(self.selection),
+            "free_disk_bytes": free, "remaining_seconds": self.status()["remaining_seconds"],
+            "transport": "regular", "total_size_and_duration": "estimated",
+            "time_plan": self.assessment["time_plan"] if self.assessment else None})
         chat = self.collector.dialog_cache[chat_id]
         self.store.set_target(chat_id, chat["title"], chat["kind"], True)
         await self.collector.history.start()
         self.phase = "collecting"
+        self.collection_started = time.monotonic()
 
     async def revoke(self):
         results = []
@@ -134,16 +242,41 @@ class Session:
         self.vault.save("credentials", {})
         return "not_confirmed" if "not_confirmed" in results else "revoked" if results else "no_session"
 
+    def write_parts(self, source=None):
+        with EncryptedParts(self.output, self.vault, self.config) as outgoing:
+            if source is not None:
+                with source.open("rb") as incoming:
+                    for block in iter(lambda: incoming.read(1024**2), b""):
+                        outgoing.write(block)
+            else:
+                export_file(self.store, self.vault, "zip", compact=True, output_stream=outgoing,
+                            max_uncompressed_bytes=1024 * 1024**3)
+
     async def finish(self, reason, cancel=False):
         if self.phase in TERMINAL:
             return
         had_capture = self.phase == "collecting"
         self.phase, self.reason = "sealing", reason
         try:
-
+            acquisition_error = None
+            if self.account_job:
+                try:
+                    await self.account_export.pause(self.account_job)
+                    if not cancel:
+                        job = await self.account_export.finalize_partial(self.account_job, "Capture ended: " + reason)
+                        path = self.account_export.result_path(self.account_job)
+                        self.store.append("sealed.account_export", {"job_id": self.account_job, "file": "account-export.zip",
+                            "sha256": file_sha(path), "bytes": path.stat().st_size, "complete_within_scope": job["phase"] == "done",
+                            "coverage": job["coverage"], "counts": job["counts"]})
+                except Exception as exc:
+                    acquisition_error = exc
             pending = self.collector.login_client
             before_stop = await self.revoke() if pending is not None else "no_session"
-            await self.collector.stop(shutdown=True)
+            stop_error = None
+            try:
+                await self.collector.stop(shutdown=True)
+            except Exception as exc:
+                stop_error = exc
             after_stop = await self.revoke()
             outcomes = (before_stop, after_stop)
             revoked = ("not_confirmed" if "not_confirmed" in outcomes else
@@ -151,16 +284,43 @@ class Session:
             self.revocation = revoked
             self.store.append("sealed.finished", {"reason": reason, "revocation": revoked,
                 "history": self.collector.history.status(), "media": self.store.media_stats(),
+                "account_export": self.account_export.public(self.account_job) if self.account_job else None,
                 "meaning": "Partial reads, skipped attachments and failed downloads remain visible in this journal."})
+            if acquisition_error:
+                raise acquisition_error
+            if stop_error:
+                raise stop_error
             if cancel or not had_capture:
                 self.phase = "cancelled"
                 private_write(self.output / "result.json", canonical({"phase": self.phase}))
                 return
-            archive = await complete_in_thread(export_file, self.store, self.vault, "zip")
+            try:
+                archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", compact=bool(self.account_job)))
+            except (BundleSizeLimit, OSError) as exc:
+                disk_full = isinstance(exc, OSError) and (exc.errno in (errno.ENOSPC, errno.EDQUOT)
+                                                         or getattr(exc, "winerror", None) == 112)
+                if not isinstance(exc, BundleSizeLimit) and not disk_full:
+                    raise
+                self.store.append("sealed.packaging", {"mode": "compact",
+                    "reason": "disk_full" if disk_full else "archive_size_limit",
+                    "full_journal": True, "preserved_media_omitted": False})
+                try:
+                    archive = await complete_in_thread(partial(export_file, self.store, self.vault, "zip", compact=True))
+                except (BundleSizeLimit, OSError) as compact_error:
+                    if isinstance(compact_error, OSError) and not (compact_error.errno in (errno.ENOSPC, errno.EDQUOT)
+                            or getattr(compact_error, "winerror", None) == 112):
+                        raise
+                    await complete_in_thread(self.write_parts)
+                    archive = None
 
-            shutil.move(str(archive), self.output / "evidence.zip")
+            if archive is not None and archive.stat().st_size > PART_BYTES:
+                await complete_in_thread(self.write_parts, archive)
+                archive.unlink()
+                archive = None
+            if archive is not None:
+                shutil.move(str(archive), self.output / "evidence.zip")
             self.phase = "sealed"
-            private_write(self.output / "result.json", canonical({"phase": "sealed"}))
+            private_write(self.output / "result.json", canonical({"phase": "sealed"} if archive is not None else SEALED_RESULT))
         except Exception as exc:
             self.phase, self.reason = "failed", type(exc).__name__
             (self.output / "evidence.zip").unlink(missing_ok=True)
@@ -175,6 +335,15 @@ class Session:
                 if time.monotonic() - self.started >= self.config["seconds"]:
                     await self.finish("deadline")
                 elif self.phase == "collecting":
+                    if self.time_budget()["collection_seconds"] <= 0:
+                        await self.finish("packaging_reserve")
+                        continue
+                    if self.account_job:
+                        if self.account_export.public(self.account_job).get("ready"):
+                            await self.finish("account_export_finished")
+                        elif self.account_export.storage_pressure():
+                            await self.finish("storage_limit")
+                        continue
                     state = self.collector.history.status()
                     pending = sum(n for k, n in self.store.media_stats().items() if k in ("queued", "retry", "running"))
                     if state["phase"] in ("complete", "incomplete") and not pending:
@@ -195,6 +364,7 @@ class Session:
             if self.phase not in TERMINAL:
                 await self.finish("server_shutdown", cancel=True)
             await self.collector.stop(shutdown=True)
+            await self.account_export.close()
             self.store.close()
             self.instance_lock.close()
             self.closed = True
@@ -251,8 +421,7 @@ def create_app(root, output, config, client_factory=WitnessClient):
                     raise ValueError("Finish the existing login attempt or cancel this capsule")
                 return await asyncio.wait_for(call(*args), 120)
             except Exception as exc:
-
-                raise HTTPException(400, "Operation failed: " + type(exc).__name__) from None
+                raise HTTPException(400, describe(exc)) from None
 
     @app.get("/")
     async def index():
@@ -261,6 +430,10 @@ def create_app(root, output, config, client_factory=WitnessClient):
     @app.get("/sealed.js")
     async def script():
         return FileResponse(STATIC / "sealed.js", media_type="text/javascript")
+
+    @app.get("/sealed-locales.js")
+    async def locales():
+        return FileResponse(STATIC / "sealed-locales.js", media_type="text/javascript")
 
     @app.get("/sealed.css")
     async def styles():
@@ -323,12 +496,16 @@ def create_app(root, output, config, client_factory=WitnessClient):
 
     @app.post("/api/collect")
     async def collect(body: Selection):
-        await operation(app.state.session.begin, body.chat_id)
+        await operation(app.state.session.begin_selection, body)
         return app.state.session.status()
+
+    @app.post("/api/preflight")
+    async def preflight(body: Selection):
+        return await operation(app.state.session.preview, body)
 
     @app.post("/api/resume")
     async def resume():
-        return await operation(app.state.session.collector.history.resume)
+        return await operation(app.state.session.resume)
 
     @app.post("/api/finish")
     async def finish():

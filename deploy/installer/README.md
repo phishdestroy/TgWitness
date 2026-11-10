@@ -1,3 +1,12 @@
+[TgWitness](../../README.md) / [deploy](../README.md)
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../../docs/assets/presentation/section-deploy-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../../docs/assets/presentation/section-deploy-static.svg">
+  <source media="(max-width: 640px)" srcset="../../docs/assets/presentation/section-deploy-mobile.svg">
+  <img src="../../docs/assets/presentation/section-deploy.svg" width="1200" alt="TgWitness / Deployment">
+</picture>
+
 # One-command installation
 
 This directory contains the installer templates and the static download page.
@@ -23,7 +32,8 @@ if exist install.cmd (echo install.cmd already exists. Choose another folder.) e
 ```
 
 The installer verifies pinned SHA-256 checksums and RSA release signatures before
-installing the application and dependency constraints. It brings Python 3.12 through
+installing the application. Dependencies come only from a signed lock with a SHA-256 for every file
+(`--require-hashes`), so a file added to a pinned version on PyPI is refused. It brings Python 3.12 through
 a pinned uv build, then asks how to open the panel. Questions are read from the
 terminal, so they work when the installer is piped into Bash.
 
@@ -31,8 +41,8 @@ terminal, so they work when the installer is piped into Bash.
   panel in the foreground; keep its terminal open.
 - **Temporary HTTPS link (Ubuntu):** a checked cloudflared binary provides a
   trycloudflare.com address. No domain or Cloudflare account is needed. The panel
-  still requires its own access key. Cloudflare carries the panel traffic; this is
-  a temporary service without an uptime guarantee. After a tunnel restart,
+  still requires its own access key. Cloudflare carries the panel traffic through
+  a temporary tunnel intended for trials. After a tunnel restart,
   `tgwitness open` shows its current address.
 - **Own domain (Ubuntu, root):** point DNS at the server and allow inbound TCP 80
   and 443. A checked Caddy binary configures HTTPS and renews certificates.
@@ -70,13 +80,15 @@ The release private key must stay outside the checkout and match
 
 ```sh
 python tools/build_installer.py --base-url https://get.destroy.tools --signing-key /private/release-key.pem
-python tools/check_installer.py
-# Linux/macOS: actual runtime and dependency downloads, private temporary install.
-python tools/check_installer.py --install
 ```
 
+The [installer acceptance workflow](../../.github/workflows/installer-acceptance.yml) checks
+that build: it verifies the artifact signatures and source revision, installs the wheel with
+its hash-locked dependencies on Ubuntu and Windows and, for pull requests that change the
+installer, runs `install.sh` and `install.ps1` twice against a local HTTPS origin.
+
 The output is `dist/installer-site/`. Each release path contains a wheel,
-dependency constraints, installer copies, SHA-256 sidecars and a manifest linking
+the hash-locked `requirements.lock`, installer copies, SHA-256 sidecars and a manifest linking
 the build to its source commit. `install.cmd` pins the PowerShell child's hash.
 The wheel inventory and RECORD are checked against the checkout before release.
 
@@ -117,10 +129,20 @@ application itself is installed on each user's own machine.
 
 ## Automatic publication from GitHub
 
-The [Installer workflow](../../.github/workflows/installer.yml) rebuilds when the
-application, dependency constraints, package metadata or installer changes on
-`main`. It derives the software version from `pyproject.toml`, records the commit,
-signs the files and verifies an isolated Linux installation before publication.
+The [Installer workflow](../../.github/workflows/installer.yml) rebuilds for
+every commit on `main`, including documentation changes. It derives the software
+version from `pyproject.toml`, records the commit, and signs the files. Before
+publication, [installer-acceptance.yml](../../.github/workflows/installer-acceptance.yml)
+authenticates the exact signed candidate, installs its wheel with the hash-locked
+dependencies on clean Ubuntu and Windows runners and runs the readiness check.
+Pull requests that change the installer also run `install.sh` and `install.ps1` twice
+against a local HTTPS copy of the site built with a throwaway test key. Service
+setup, tunnels and bootstrap regressions run outside the public workflows.
+The application **Checks** and **Security audit** workflows must also succeed for
+that same main commit; a triggered **Sealed capture validation** must finish
+successfully too. Missing, queued, skipped or failed required checks do not qualify.
+The publication wait is bounded to 45 minutes. A failure or timeout keeps the
+previous installer on the site; after resolving it, rerun the failed workflow.
 The permanent `/install.sh`, `/install.ps1` and `/install.cmd` addresses receive
 the new build together with its checksums, signatures and download page.
 
@@ -162,6 +184,25 @@ never overwritten with new bytes. Manual dispatch on `main` uses the same checks
 and publishing path. Installed copies update only when their operator reruns the
 installer; this workflow does not install an unattended updater on their machines.
 
+To exercise the actual public download URLs on disposable Ubuntu and Windows
+hosts, run **Installer artifact and wheel smoke** on `main` with **published** enabled:
+
+```sh
+gh workflow run installer-acceptance.yml --ref main -f published=true
+```
+
+This authenticates the public manifest and immutable artifacts against the checked
+repository key and requires the selected main commit. It then installs the published
+wheel with its hash-locked dependencies and runs the readiness check; it does not run
+the `curl | bash` or `irm | iex` commands. A concurrent
+publication or a main commit not published yet is reported as a mismatch, never
+silently tested as if it were the requested build. Test installations contain no
+Telegram accounts. To inspect the current publication locally, download it first:
+
+```sh
+python tools/installer_publication.py download-current --site build/public-installer --revision FULL_COMMIT
+```
+
 ## Everyday commands
 
 | Command | Result |
@@ -188,8 +229,8 @@ after building. The builder refuses an unsigned release or a key that does not
 match the reviewed public key. Test builds use an ephemeral key and are restricted
 to `.invalid` origins.
 
-The wheel, constraints, manifest, checksum list and all three installer scripts have detached RSA-3072
-PKCS#1 v1.5 / SHA-256 signatures. Bash verifies application and constraint signatures
+The wheel, `requirements.lock`, manifest, checksum list and all three installer scripts have detached RSA-3072
+PKCS#1 v1.5 / SHA-256 signatures. Bash verifies application and lock signatures
 with OpenSSL; Windows uses the operating system's RSA implementation. A signature
 failure stops before the application is installed or run. Native uv/Python and
 optional bridge downloads retain their separate toolchain trust boundaries; these

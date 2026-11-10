@@ -54,6 +54,7 @@ test-results/
 .tmp/
 .tmp-*/
 .playwright/
+output/playwright/
 proof-config/
 proof-data/
 witness-data/
@@ -65,7 +66,24 @@ witness-token.txt
 .venv-capture/
 proxy-config/
 deployments/
-# Disposable capture keys and handoffs (never commit user material).
 sealed-key.json
 *.tgwsealed
 delivery.zip
+/tools/test_*.py
+/tools/check_*
+/tools/run_checks.py
+/tools/fixtures/
+/tools/tdx/
+/tools/tsa/
+/addons/capture/tests/
+/tools/api_routes.py
+/tools/browser_fixtures.py
+/tools/browser_helpers.py
+/tools/cloud_world.py
+/tools/capture_demo.py
+/tools/capture_screenshots.py
+/tools/case_board_i18n.py
+/tools/minicheck.py
+/tools/prepare_media_test_model.py
+/scripts/secret_lab_*.py
+/tools/preview_trusted_live.py

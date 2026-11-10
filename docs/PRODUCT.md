@@ -1,8 +1,30 @@
+[TgWitness](../README.md) / [Documentation](README.md) · [Project reference](README.md)
+
+![Project reference](assets/presentation/chapter-project.svg)
+
 # TgWitness product and collection model
 
 TgWitness preserves Telegram conversations accessible to connected accounts,
 records observed changes and prepares verifiable exports. This reference describes
 the collection model, current workflows and their boundaries.
+
+<details>
+<summary>On this page</summary>
+
+- [Standalone application](#standalone-application)
+- [Shared investigations](#shared-investigations)
+- [Archive tools](#archive-tools)
+- [Optional extras](#optional-extras)
+- [Protocol and private sources](#protocol-and-private-sources)
+- [Multiple accounts](#multiple-accounts)
+- [Capture and attribution](#capture-and-attribution)
+- [Capacity and Telegram limits](#capacity-and-telegram-limits)
+- [Reliability and recovery](#reliability-and-recovery)
+- [Evidence model](#evidence-model)
+- [Export, deployment and handoff](#export-deployment-and-handoff)
+- [Stable release criteria](#stable-release-criteria)
+
+</details>
 
 ## Standalone application
 
@@ -34,7 +56,7 @@ External HTTP requests have a separate route and off switch.
 
 [History acquisition](HISTORY.md), [archive search and analysis](ANALYSIS.md),
 [read-only MCP](MCP.md), [local OCR/transcription](MEDIA-ANALYSIS.md) and
-[outgoing webhooks](WEBHOOKS.md) are included in 0.7.1. Analytical reports and recognized text stay separate
+[outgoing webhooks](WEBHOOKS.md) have been included since 0.7.1. Analytical reports and recognized text stay separate
 from captured events.
 
 [Case Board](CASE-BOARD.md) adds source-linked bookmarks, quotes, notes and
@@ -43,16 +65,18 @@ material, sections and one of eight designs for supported HTML/PDF exports.
 
 ## Optional extras
 
-Everyday setup is account → sources → observation. **Extras** is a separate destination
-with a Telegram witness bot and a GitHub capture preview. Each states its availability and requirements before showing
-settings. Choosing a card opens instructions; it does not enroll or start a service.
+Everyday setup is account → sources → observation. **More tools → Extras** is a separate
+destination for independent capture, storage, goal and protection level, notifications,
+evidence and backups, an always-on server, a Telegram witness bot and a code check. Each
+states its availability and requirements before showing settings. Choosing a card opens
+instructions; it does not enroll or start a service.
 
 Bot setup has three steps: create read-only access, choose publication settings, and
 launch on the witness host. Network and publication options, existing connections and
 verification commands are disclosed on demand. Downloaded configuration is distinct
 from a running witness. Switching extras retains the draft; account changes and locking
 clear the temporary token and form. The built-in guide includes launch instructions.
-[GitHub Actions capture](SEALED-ACTIONS.md) launches a pinned collector from your
+[GitHub Actions capture](SEALED-ACTIONS.md), opened from Exports, launches a pinned collector from your
 fork, captures one chat and produces an encrypted handoff with workflow provenance.
 
 ## Protocol and private sources
@@ -121,31 +145,29 @@ separate-update switches. There are no per-group category overrides yet.
 | Material | Captured now | Boundary |
 | --- | --- | --- |
 | Message | Text, peer/message IDs, sender metadata, replies and original update envelope | Preserved as an account-visible observation signed by the collector |
-| Edit | New observed version and any previously saved versions | Intermediate edits during downtime can be lost; sender is not necessarily editor |
-| Deletion | Notification and prior captured content, if any | Usually no deleter or precise action time |
+| Edit | New observed version, earlier captured versions, reception time and supplied edit date | Message updates and available admin-log entries retain their respective attribution fields |
+| Deletion | Telegram notification, reception time and previously captured content | Actor and source action time are retained when supplied by a separate admin-log record |
 | Account-level deletion notice | Original notice; resolved records include the saved chat and correlation method | Requires exactly one previously saved private-chat or ordinary-group match in scope; other IDs stay `deletion.unscoped`. Channel and supergroup IDs are excluded from this correlation |
 | Reaction | Delivered counters and visible recent identities | A complete available reactor list requires separate queries; channels may hide identities |
-| Membership | Service messages and delivered participant updates | Visibility depends on role and chat type; missing events do not establish absence |
+| Membership | Service messages and delivered participant updates | Visibility depends on role and chat type; membership is reported from delivered events |
 | Admin actions | Relevant delivered updates and an admin-log snapshot in channel/supergroup chat exports | The export reads the log when available to the exporting admin account; continuous admin-log polling is outside this path |
 | Attachment | Original version descriptor, downloaded bytes/SHA-256 and attempt outcomes | A vanished file may be unrecoverable; the latest version is not substituted |
 | History | Explicit snapshot of current visible messages | Does not reconstruct all edits or deleted content |
-| Collector process | Start/stop, heartbeat, errors, settings, scope and program receipt | Self-report, not independent process attestation |
+| Collector process | Start/stop, heartbeat, errors, settings, scope and signed run receipt | Local inventory; GitHub and TDX add [independent environment checks](EVIDENCE.md#verification-scope) |
 
-An action is attributed to a person only if the source actually supplies that actor.
-Otherwise the interface reports the missing attribution. Usernames and names are
-observed attributes, not proof of real-world identity.
+The interface names the account supplied in the source event and retains observed
+names and usernames. When the event omits its actor, the report leaves that field unspecified.
 
 ## Capacity and Telegram limits
 
-There is no universal number of chats that can be monitored with guaranteed quality.
-Capacity depends on peak events per second, attachment volume and sizes, additional
+Capacity is sized per deployment. It depends on peak events per second, attachment volume and sizes, additional
 RPCs, active accounts, disk latency/free space, network conditions, Telegram limits,
 acceptable lag and queue depth.
 
 Telegram distinguishes passive delivery from active short polling. Its update
 documentation describes additional `updates.getChannelDifference` calls for open
 channels/supergroups and recommends at most **ten simultaneously short-polled
-sources**. This is not a limit of ten selected groups or a completeness guarantee.
+sources**. This applies to short polling; the number of selected groups is set separately.
 
 | Mode | Purpose | Status |
 | --- | --- | --- |
@@ -159,7 +181,8 @@ Arbitrary high-frequency polling, ignoring FloodWait or assuming linear capacity
 from extra accounts is not a valid sizing model. Default limits are the
 first 1,000 listed dialogs, up to 500 messages per history snapshot,
 1–2,000 MiB per collected file by type, and 4 GiB uncompressed signed ZIP content; each
-is changed per workspace under **Parameters**. Exports have no fixed event-count cap.
+is changed per workspace, file sizes under **More tools → Sources → Recording** and the others under
+**More tools → Parameters**. Exports have no fixed event-count cap.
 Browser fallback is bounded to 128 MiB by default; the streaming CLI has a configurable
 transfer limit, 5 GiB by default.
 
@@ -251,7 +274,7 @@ Before a stable release, qualify:
 6. Clean installation on the intended OS/container matrix and verified backup restore.
 7. Independent review of security, signatures and attribution/evidence claims.
 
-Scoped panel access is described in [access and permissions](ACCESS.md). Version 0.6 supports
+Scoped panel access is described in [access and permissions](ACCESS.md). Since version 0.6, TgWitness supports
 the bounded single-account TData and account-file import described in [ACCOUNTS.md](ACCOUNTS.md).
 Review Telegram API terms before publication. Research references and platform
 findings are in [RESEARCH.md](internal/RESEARCH.md).

@@ -9,9 +9,9 @@ function goalName(tr, goal) {
 
 function goalNote(tr, goal) {
   return {
-    personal: () => tr("For yourself the signed journal is usually enough. Timestamps are free and help if someone else ever needs the record."),
-    investigation: () => tr("Timestamps date what you collected and the device list shows whether anyone else used the account. Notifications and an off-site copy keep collection going and the record safe."),
-    evidence: () => tr("Everything an outsider can check is on. For the strongest record, collect on a sealed server around the clock and keep a locked off-site copy."),
+    personal: () => tr("For yourself the signed journal is usually enough. Without independent timestamps it shows integrity only and does not meet the minimum for evidence for other people. Turning them on later fixes that for new exports. They are free, and only checkpoint hashes are sent to timestamp services."),
+    investigation: () => tr("Independent timestamps from a third party date what you collected, and the recipient checks them. This needs requests outside Telegram. The device list shows whether anyone else used the account. Notifications and an off-site copy keep collection going and the record safe."),
+    evidence: () => tr("Everything an outsider can check is on, including independent timestamps from a third party that the recipient checks. This needs requests outside Telegram. For the strongest record, collect on a sealed server around the clock and keep a locked off-site copy."),
   }[goal]?.() || "";
 }
 
@@ -40,13 +40,64 @@ function score(scale, levels) {
   return {percent, level: levelOf(levels, percent)};
 }
 
+function evidenceState(scale) {
+  const on = id => scale.items.some(item => item.id === id && item.on);
+  const bound = on("timestamps");
+  return {on, bound, level: bound ? (on("server") ? "maximum" : "high") : "basic"};
+}
+
+function stateName(tr, state) {
+  return state.bound ? tr("Ready for evidence: the recipient confirms the fingerprint") : tr("Integrity only");
+}
+
+function renderEvidence(box, scale, before, {tr, node, compact}) {
+  const next = evidenceState(scale), now = before ? evidenceState(before) : next;
+  const wrap = node("div", "level-scale level-" + next.level), head = node("div", "level-head");
+  head.append(node("strong", "", tr("Conditions for evidence")), node("span", "level-name", stateName(tr, next)));
+  if (before && now.level !== next.level) head.append(node("span", "level-was", tr("now: {level}", {level: stateName(tr, now)})));
+  wrap.append(head);
+  const groups = [
+    [tr("How strong is this record"), [
+      ["on", tr("1. Signed journal"), tr("Records cannot be changed unnoticed after they are saved. Enough for your own use.")],
+      [next.on("timestamps") ? "on" : "off", tr("2. Independent time"),
+        next.on("timestamps") ? itemName(tr, "timestamps")
+          : tr("Turn on: Timestamps, or a witness bot that posts to a public channel (Telegram sets the post date).")],
+      [next.on("server") ? "on" : "off", tr("3. Attested collection"),
+        next.on("server") ? itemName(tr, "server") : tr("Turn on: Phala server or GitHub Actions capture.")],
+      ["step", tr("For the recipient: the archive and your key fingerprint, sent separately."), ""]]],
+    [tr("Supporting records, not part of the minimum"), [
+      [next.on("witness") ? "on" : "off", tr("Witness with its own key"), itemName(tr, "witness")],
+      ["step", tr("Retained checkpoint"), tr("Checkpoint retained by another party")],
+      ...["drand", "devices", "code", "gateway_log"].map(id => [next.on(id) ? "on" : "off", itemName(tr, id), ""])]],
+  ];
+  if (compact) {
+    wrap.append(node("p", "hint", groups[0][1].filter(([state]) => state !== "step")
+      .map(([state, name]) => (state === "on" ? "✓ " : "○ ") + name).join(" · ")));
+    box.append(wrap);
+    return;
+  }
+  wrap.append(node("p", "hint", tr("TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else. Only what a third party or the math confirms counts.")
+    + " " + tr("Steps 1 and 2 are the minimum for evidence. Step 3 also shows how the records were collected.")));
+  const list = node("ul", "level-items");
+  for (const [title, rows] of groups) {
+    list.append(node("li", "level-group", title));
+    for (const [state, name, detail] of rows) {
+      const row = node("li", state === "off" ? "off" : "on");
+      row.append(node("span", "level-mark", {on: "✓", off: "○", step: "→"}[state]), node("span", "", detail ? name + " · " + detail : name));
+      list.append(row);
+    }
+  }
+  wrap.append(list);
+  box.append(wrap);
+}
+
 export function renderScales(box, data, {tr, node, after = null, compact = false}) {
   box.replaceChildren();
+  renderEvidence(box, (after || data.assessment).credibility, after ? data.assessment.credibility : null, {tr, node, compact});
   const describe = {
-    credibility: [tr("Credibility"), tr("What someone else can check: when the record existed, that it was written live and which program wrote it.")],
     reliability: [tr("Reliability"), tr("How likely collection keeps running and the record survives a lost or seized machine.")],
   };
-  for (const key of ["credibility", "reliability"]) {
+  for (const key of ["reliability"]) {
     const now = score(data.assessment[key], data.levels), next = after ? score(after[key], data.levels) : now;
     const wrap = node("div", "level-scale level-" + next.level);
     const head = node("div", "level-head");
