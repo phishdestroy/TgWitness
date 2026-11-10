@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 76209b4cd5d9252782a9f316e787247253d8837ef2654b9fd98d3b9baaeb8762
+# TgWitness verifier sources SHA-256: 400256a9d85271787588462c33e5e2a8020370c9d3b53c82ee6a017fdfa3f465
 """Standalone verifier"""
 import argparse
 import base64
