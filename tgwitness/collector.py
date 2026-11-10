@@ -1770,6 +1770,17 @@ class Collector:
                                                          "client": self.client_identity(candidate),
                                                          **({"session_origin": credentials["session_origin"]}
                                                             if credentials.get("session_origin") else {})})
+                try:
+                    raw_key = getattr(getattr(getattr(candidate, "session", None), "auth_key", None), "key", None)
+                    if raw_key:
+                        key_id = hashlib.sha1(raw_key).digest()[-8:].hex()
+                        self.store.append("session.fingerprint", {
+                            "auth_key_id": key_id,
+                            "meaning": ("Fingerprint of the MTProto auth_key (last 8 bytes of SHA-1). "
+                                        "After session revocation, verify sha1(auth_key)[-8:] == " + key_id),
+                        })
+                except Exception:
+                    pass
             pending = self.vault.read("independent_login")
             if pending and session_key(pending.get("session")) == session_key(credentials["session"]):
                 self.vault.save("independent_login", {})
