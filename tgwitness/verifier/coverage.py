@@ -7,7 +7,10 @@ MESSAGE_KINDS = ("message.new", "message.snapshot", "message.edited", "message.r
                  "message.deleted", "message.missing_on_recheck")
 INTERRUPTIONS = {"transport_disconnected": "connection to Telegram lost",
                  "authorization_required": "Telegram signed the account out",
-                 "resume_failed": "observation could not resume after a restart"}
+                 "resume_failed": "observation could not resume after a restart",
+                 "session_revoked_externally": "session removed from Telegram's list while TCP connection was active",
+                 "concurrent_sessions_at_start": "other sessions were active on this account when observation began",
+                 "updates_diverted": "Telegram delivered updates to another session using the same auth_key"}
 ACCOUNT_LOSS = {"account_banned": "account banned", "account_deleted": "account deleted",
                 "account_frozen": "account frozen", "session_duplicated": "session used in two places",
                 "session_revoked": "session revoked", "session_expired": "session expired",

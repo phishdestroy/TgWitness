@@ -2177,6 +2177,22 @@ class Collector:
         await self.check_sessions()
         return {"ended": True}
 
+    async def terminate_all_other_sessions(self):
+        await self.restore()
+        snapshot_before = await self.check_sessions()
+        others_before = len((snapshot_before or {}).get("others", []))
+        try:
+            await asyncio.wait_for(self.client(functions.auth.ResetAuthorizationsRequest()), 30)
+        except FreshResetAuthorisationForbiddenError:
+            raise ValueError("Telegram lets a session terminate all others only after it has been signed in for "
+                             "24 hours.") from None
+        snapshot_after = await self.check_sessions()
+        others_after = len((snapshot_after or {}).get("others", []))
+        self.store.append("account.all_other_sessions_terminated", {
+            "sessions_before": others_before, "sessions_after": others_after,
+            "initiated_by": "this workspace"})
+        return {"terminated": others_before, "remaining_others": others_after}
+
     async def change_password(self, current_password, new_password, hint=""):
         await self.restore()
         try:
@@ -2184,10 +2200,12 @@ class Collector:
                                        hint=hint or "")
         except PasswordHashInvalidError:
             raise ValueError("The current two-step password is wrong.") from None
+        had = bool(current_password)
+        operation = "enabled" if not had and new_password else "disabled" if had and not new_password else "changed"
         self.store.append("account.password_changed", {
-            "had_password": bool(current_password), "hint_set": bool(hint),
-            "meaning": "The two-step password was set or changed from this workspace; it is not stored here."})
-        return {"changed": True}
+            "operation": operation, "had_password": had, "hint_set": bool(hint),
+            "initiated_by": "this workspace"})
+        return {"changed": True, "operation": operation}
 
     async def signed_in_devices(self):
         if not (self.running and self.client and self.client.is_connected()):

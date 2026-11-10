@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 400256a9d85271787588462c33e5e2a8020370c9d3b53c82ee6a017fdfa3f465
+# TgWitness verifier sources SHA-256: 8b7a14c250d3b0c9cdcde2f2cee8fc964ef73a583d106fe8a46a2d39424c8c1d
 """Standalone verifier"""
 import argparse
 import base64
@@ -1047,7 +1047,10 @@ MESSAGE_KINDS = ("message.new", "message.snapshot", "message.edited", "message.r
                  "message.deleted", "message.missing_on_recheck")
 INTERRUPTIONS = {"transport_disconnected": "connection to Telegram lost",
                  "authorization_required": "Telegram signed the account out",
-                 "resume_failed": "observation could not resume after a restart"}
+                 "resume_failed": "observation could not resume after a restart",
+                 "session_revoked_externally": "session removed from Telegram's list while TCP connection was active",
+                 "concurrent_sessions_at_start": "other sessions were active on this account when observation began",
+                 "updates_diverted": "Telegram delivered updates to another session using the same auth_key"}
 ACCOUNT_LOSS = {"account_banned": "account banned", "account_deleted": "account deleted",
                 "account_frozen": "account frozen", "session_duplicated": "session used in two places",
                 "session_revoked": "session revoked", "session_expired": "session expired",
