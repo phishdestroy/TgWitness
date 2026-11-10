@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: b0d5e32379c221edcb956db728e12afd137f284e64deda3c1cdcecd706f08ae3
+# TgWitness verifier sources SHA-256: 17f4cb43f39403d7b8bc98b4cd7c516123a797bc8ac2eb4eb6f63e2da486eab8
 """Standalone verifier"""
 import argparse
 import base64
@@ -890,13 +890,15 @@ def revocation_subject(reply, extra=()):
     if len(items) < 6 or items[3][0] != 0xA0:
         raise ValueError("The timestamp signer has no signed attributes")
     algorithm, named, _ = signing_certificate_hash(reply, signed_attributes(reply, items[3][2], items[3][3]))
-    certificates, signer = [], None
+    loaded, signer = {}, None
     for data in token["certificates"]:
-        certificates.append(x509.load_der_x509_certificate(data))
+        loaded[data] = x509.load_der_x509_certificate(data)
+    for data in loaded:
         hasher = hashes.Hash(algorithm())
         hasher.update(data)
         if hasher.finalize() == named:
-            signer = certificates[-1]
+            signer = loaded[data]
+    certificates = list(loaded.values())
     if signer is None:
         raise ValueError("The reply does not carry the certificate the signature names")
     for candidate in certificates + list(extra):

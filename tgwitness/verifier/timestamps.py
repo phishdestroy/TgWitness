@@ -558,13 +558,15 @@ def revocation_subject(reply, extra=()):
     if len(items) < 6 or items[3][0] != 0xA0:
         raise ValueError("The timestamp signer has no signed attributes")
     algorithm, named, _ = signing_certificate_hash(reply, signed_attributes(reply, items[3][2], items[3][3]))
-    certificates, signer = [], None
+    loaded, signer = {}, None
     for data in token["certificates"]:
-        certificates.append(x509.load_der_x509_certificate(data))
+        loaded[data] = x509.load_der_x509_certificate(data)
+    for data in loaded:
         hasher = hashes.Hash(algorithm())
         hasher.update(data)
         if hasher.finalize() == named:
-            signer = certificates[-1]
+            signer = loaded[data]
+    certificates = list(loaded.values())
     if signer is None:
         raise ValueError("The reply does not carry the certificate the signature names")
     for candidate in certificates + list(extra):
