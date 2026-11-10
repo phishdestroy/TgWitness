@@ -212,9 +212,7 @@
   "Account settings": "Pengaturan akun",
   "Sample workspace": "Contoh ruang kerja",
   "Try TgWitness with your account": "Coba TgWitness dengan akun Anda",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "Hentikan demo dengan menekan Ctrl+C, lalu jalankan dari folder proyek Anda:",
   "python start.py": "python start.py",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "Di Windows, Anda dapat mengklik dua kali <strong>Start.cmd</strong> sebagai gantinya. Buka alamat panel yang ditampilkan di terminal.",
   "Installation help ↗": "Bantuan pemasangan ↗",
   "Back to sample journal": "Kembali ke contoh jurnal",
   "Sign-in method": "Metode masuk",
@@ -907,7 +905,6 @@
   "Signed chat export saved.": "Ekspor obrolan yang ditandatangani telah disimpan.",
   "Panel connection unavailable": "Koneksi panel tidak tersedia",
   "Explore fictional messages, saved edits, deletion notices and verifiable exports. No Telegram account is connected.": "Jelajahi pesan fiktif, suntingan yang disimpan, pemberitahuan penghapusan, dan ekspor yang dapat diverifikasi. Tidak ada akun Telegram yang terhubung.",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "Untuk grup Anda sendiri, jalankan Start.cmd atau python start.py menggunakan direktori data terpisah. Data demo tidak dapat dikonversi menjadi penyelidikan yang sebenarnya.",
   "Provide both API ID and API hash, or use this workspace's saved credentials.": "Berikan ID API dan hash API, atau gunakan kredensial yang tersimpan di ruang kerja ini.",
   "Too many failed access attempts. Wait one minute.": "Terlalu banyak upaya akses yang gagal. Tunggu satu menit.",
   "Enter the panel access token from panel-token.txt in your data directory.": "Masukkan token akses panel dari berkas panel-token.txt yang terdapat di direktori data Anda.",
@@ -8494,5 +8491,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Setiap akun mendapatkan terowongan WARP tersendiri sebelum melakukan login pertama kali. Banyak pengguna Cloudflare berbagi alamat keluar WARP.",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Sesi terhubung ke Telegram melalui server MTProxy publik dari daftar terbuka. Pengunduhan berkas menjadi lebih lambat.",
   "Telegram sees this machine's public IP address for every imported account.": "Telegram melihat alamat IP publik perangkat ini untuk setiap akun yang diimpor.",
-  "Allow the WARP setup or choose another connection route.": "Izinkan pengaturan WARP atau pilih rute koneksi lain."
+  "Allow the WARP setup or choose another connection route.": "Izinkan pengaturan WARP atau pilih rute koneksi lain.",
+  "Stop the demo with Ctrl+C, then start your own panel:": "Hentikan demo dengan menekan Ctrl+C, lalu buka panel Anda sendiri:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "Ingin menjalankannya dari folder sumber? Gunakan perintah `python start.py`, atau `Start.cmd` di Windows. Buka alamat panel yang ditampilkan di terminal.",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "Untuk grup Anda sendiri, buat panel Anda sendiri dengan tgwitness dan direktori data terpisah. Data demo tidak dapat dikonversi menjadi penyelidikan yang sebenarnya.",
+  "Open official client and observation settings ↗": "Buka klien resmi dan pengaturan pemantauan ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "Perekam ini terintegrasi dengan klien web Telegram resmi. Buka panelnya untuk masuk, pilih obrolan, atur kecepatan, dan akhiri sesi, menggunakan token kontrol perekam."
 }

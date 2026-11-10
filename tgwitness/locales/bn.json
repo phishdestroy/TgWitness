@@ -639,7 +639,6 @@
   "For another workspace, add <code>--profile PROFILE_ID</code>. The ID appears at the top of <strong>Exports → Workspace ID</strong>. See all command options with:": "অন্য একটি ওয়ার্কস্পেসের জন্য যোগ করুন <code>--profile PROFILE_ID</code>. আইডিটি <strong>Exports → Workspace ID</strong>-এর শীর্ষে প্রদর্শিত হয়। সমস্ত কমান্ড বিকল্প দেখতে:",
   "For backup, stop the process cleanly and preserve the whole data directory, all workspaces and required keys. Temporary exports use each workspace's <code>temporary-exports/</code>; interrupted export files are cleaned on the next startup.": "ব্যাকআপের জন্য, প্রক্রিয়াটি সঠিকভাবে বন্ধ করুন এবং পুরো ডেটা ডিরেক্টরি, সমস্ত ওয়ার্কস্পেস এবং প্রয়োজনীয় কী সংরক্ষণ করুন। অস্থায়ী রপ্তানি প্রতিটি ওয়ার্কস্পেসের ব্যবহার করে <code>temporary-exports/</code>; বিঘ্নিত এক্সপোর্ট ফাইলগুলো পরবর্তী স্টার্টআপে মুছে ফেলা হয়।",
   "For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.": "সমান্তরাল ব্যবহারের জন্য, পৃথক অনুমোদন তৈরি করতে ফোন বা QR-এর মাধ্যমে TgWitness-এ সাইন ইন করুন। অন্যান্য পৃথকভাবে অনুমোদিত টেলিগ্রাম ক্লায়েন্টগুলো সাইন ইন অবস্থায় থাকতে পারে।",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "আপনার নিজস্ব গ্রুপের জন্য, একটি পৃথক ডেটা ডিরেক্টরি ব্যবহার করে Start.cmd বা python start.py চালান। ডেমো ডেটা বাস্তব তদন্তে রূপান্তর করা যায় না।",
   "Fork the repository on GitHub and review the code, or use the official one.": "GitHub-এ রিপোজিটরিটি ফর্ক করুন এবং কোড পর্যালোচনা করুন, অথবা অফিসিয়ালটি ব্যবহার করুন।",
   "Format details & examples ↗": "ফরম্যাট বিবরণ ও উদাহরণ ↗",
   "Forum list of official app pairs, published for registering accounts": "অফিসিয়াল অ্যাপ পেয়ারগুলির ফোরাম তালিকা, অ্যাকাউন্ট নিবন্ধনের জন্য প্রকাশিত",
@@ -1020,7 +1019,6 @@
   "Older messages are not loaded yet — use “Show older messages”.": "পুরনো বার্তাগুলো এখনও লোড হয়নি — \"পুরনো বার্তা দেখুন\" ব্যবহার করুন।",
   "Oldest pending attachment": "সবচেয়ে পুরনো ঝুলন্ত সংযুক্তি",
   "On": "অনে",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "Windows-এ, আপনি <strong>Start.cmd</strong>-এ ডাবল-ক্লিক করতে পারেন। টার্মিনালে মুদ্রিত প্যানেলের ঠিকানা খুলুন।",
   "On another server": "অন্য একটি সার্ভারে",
   "On the witness host, save the read-only token in witness-token.txt and the BotFather token in bot-token.txt next to witness.json. The bot token is never entered into this collector panel.": "উইটনেস হোস্টে, read-only টোকেনটি witness-token.txt-এ এবং BotFather টোকেনটি bot-token.txt-এ witness.json-এর পাশে সংরক্ষণ করুন। বট টোকেনটি কখনই এই কালেক্টর প্যানেলে প্রবেশ করানো হয় না।",
   "On · every {n} min · {services} services": "প্রতি · প্রতিটি {n}টি মিনিটে · {services}সেবাগুলি",
@@ -1494,7 +1492,6 @@
   "Started collection for {name}.": "{name}-এর জন্য সংগ্রহ শুরু করা হয়েছে।",
   "Stickers": "স্টিকার",
   "Stop the Python process": "Python প্রক্রিয়াটি বন্ধ করুন",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "Ctrl+C দিয়ে ডেমো বন্ধ করুন, তারপর আপনার প্রকল্প ফোল্ডার থেকে চালান:",
   "Stopped: {error}": "বন্ধ: {error}",
   "Stopped: {error} — retried on the next pass.": "বন্ধ: {error} — পরবর্তী পাসে পুনরায় চেষ্টা করা হয়েছে।",
   "Storage": "স্টোরেজ",
@@ -8533,5 +8530,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "প্রতিটি অ্যাকাউন্ট প্রথম সাইন-ইন করার আগে নিজস্ব WARP টানেল পায়। অনেক Cloudflare ব্যবহারকারী WARP এক্সিট ঠিকানা শেয়ার করেন।",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "সেশনগুলো পাবলিক MTProxy সার্ভারগুলোর মাধ্যমে টেলিগ্রামে পৌঁছায়, যা ওপেন লিস্ট থেকে আসে। ফাইলগুলো ধীরে ডাউনলোড হয়।",
   "Telegram sees this machine's public IP address for every imported account.": "টেলিগ্রাম প্রতিটি আমদানি করা অ্যাকাউন্টের জন্য এই মেশিনের পাবলিক আইপি ঠিকানা দেখে।",
-  "Allow the WARP setup or choose another connection route.": "WARP সেটআপ অনুমতি দিন অথবা অন্য কোনো সংযোগ পথ নির্বাচন করুন।"
+  "Allow the WARP setup or choose another connection route.": "WARP সেটআপ অনুমতি দিন অথবা অন্য কোনো সংযোগ পথ নির্বাচন করুন।",
+  "Stop the demo with Ctrl+C, then start your own panel:": "Ctrl+C দিয়ে ডেমো বন্ধ করুন, তারপর আপনার নিজস্ব প্যানেল শুরু করুন:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "উৎস ফোল্ডার থেকে চালানোর পরিবর্তে? Windows-এ python start.py অথবা Start.cmd ব্যবহার করুন। টার্মিনালে মুদ্রিত প্যানেল ঠিকানা খুলুন।",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "আপনার নিজস্ব গ্রুপগুলির জন্য tgwitness এবং একটি পৃথক ডেটা ডিরেক্টরি সহ আপনার নিজস্ব প্যানেল শুরু করুন। ডেমো ডেটা বাস্তব তদন্তে রূপান্তর করা যায় না।",
+  "Open official client and observation settings ↗": "অফিসিয়াল ক্লায়েন্ট এবং পর্যবেক্ষণ সেটিংস খুলুন ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "এই রেকর্ডারটি অফিসিয়াল টেলিগ্রাম ওয়েব ক্লায়েন্টের মালিক। এর প্যানেল খুলে লগইন করুন, একটি চ্যাট নির্বাচন করুন, রেকর্ডার কন্ট্রোল টোকেন ব্যবহার করে গতি নির্ধারণ করুন এবং সেশন শেষ করুন।"
 }

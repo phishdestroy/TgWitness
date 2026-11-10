@@ -212,9 +212,7 @@
   "Account settings": "Cài đặt tài khoản",
   "Sample workspace": "Ví dụ về không gian làm việc",
   "Try TgWitness with your account": "Hãy dùng thử TgWitness với tài khoản của quý vị",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "Hãy dừng bản demo bằng phím tắt Ctrl+C, sau đó chạy từ thư mục dự án của quý vị:",
   "python start.py": "python start.py",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "Trên hệ điều hành Windows, quý vị có thể nhấp đúp vào tệp “<strong>Start.cmd</strong>” thay thế. Mở địa chỉ bảng điều khiển được hiển thị trong cửa sổ terminal.",
   "Installation help ↗": "Hướng dẫn cài đặt ↗",
   "Back to sample journal": "Quay lại sổ nhật ký mẫu",
   "Sign-in method": "Phương thức đăng nhập",
@@ -907,7 +905,6 @@
   "Signed chat export saved.": "Đã lưu bản xuất cuộc trò chuyện có chữ ký.",
   "Panel connection unavailable": "Không thể kết nối với bảng điều khiển",
   "Explore fictional messages, saved edits, deletion notices and verifiable exports. No Telegram account is connected.": "Khám phá các tin nhắn giả định, các bản chỉnh sửa đã lưu, thông báo xóa và các tệp xuất có thể xác minh. Không có tài khoản Telegram nào được kết nối.",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "Đối với các nhóm của riêng quý vị, vui lòng chạy Start.cmd hoặc python start.py bằng cách sử dụng một thư mục dữ liệu riêng biệt. Dữ liệu demo không thể được chuyển đổi thành một cuộc điều tra thực tế.",
   "Provide both API ID and API hash, or use this workspace's saved credentials.": "Vui lòng cung cấp cả ID API và mã băm API, hoặc sử dụng thông tin đăng nhập đã lưu trong không gian làm việc này.",
   "Too many failed access attempts. Wait one minute.": "Đã có quá nhiều lần truy cập không thành công. Vui lòng đợi một phút.",
   "Enter the panel access token from panel-token.txt in your data directory.": "Vui lòng nhập mã thông báo truy cập bảng điều khiển từ tệp panel-token.txt trong thư mục dữ liệu của quý vị.",
@@ -8494,5 +8491,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Mỗi tài khoản sẽ có một đường hầm WARP riêng trước lần đăng nhập đầu tiên. Nhiều người dùng Cloudflare chia sẻ địa chỉ thoát WARP.",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Các phiên làm việc truy cập Telegram thông qua các máy chủ MTProxy công khai từ các danh sách mở. Tốc độ tải xuống tệp chậm hơn.",
   "Telegram sees this machine's public IP address for every imported account.": "Telegram sẽ hiển thị địa chỉ IP công khai của máy này cho mỗi tài khoản được nhập vào.",
-  "Allow the WARP setup or choose another connection route.": "Cho phép thiết lập WARP hoặc chọn một đường kết nối khác."
+  "Allow the WARP setup or choose another connection route.": "Cho phép thiết lập WARP hoặc chọn một đường kết nối khác.",
+  "Stop the demo with Ctrl+C, then start your own panel:": "Dừng bản demo bằng phím tắt Ctrl+C, sau đó khởi chạy bảng điều khiển của riêng bạn:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "Muốn chạy từ thư mục nguồn? Sử dụng lệnh `python start.py` hoặc `Start.cmd` trên Windows. Mở địa chỉ bảng điều khiển được hiển thị trong cửa sổ terminal.",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "Đối với các nhóm của riêng bạn, hãy tạo bảng điều khiển riêng bằng tgwitness và một thư mục dữ liệu riêng biệt. Dữ liệu demo không thể được chuyển đổi thành một cuộc điều tra thực tế.",
+  "Open official client and observation settings ↗": "Mở ứng dụng chính thức và cài đặt quan sát ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "Trình ghi này sử dụng ứng dụng Telegram Web chính thức. Mở bảng điều khiển của ứng dụng để đăng nhập, chọn một cuộc trò chuyện, thiết lập tốc độ và kết thúc phiên làm việc bằng cách sử dụng mã điều khiển của trình ghi."
 }

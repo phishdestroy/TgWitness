@@ -641,7 +641,6 @@
   "For another workspace, add <code>--profile PROFILE_ID</code>. The ID appears at the top of <strong>Exports → Workspace ID</strong>. See all command options with:": "עבור סביבת עבודה אחרת, הוסיפו <code>--profile PROFILE_ID</code>. המזהה מופיע בראש הדף <strong>&#x27;ייצוא&#x27; → &#x27;מזהה סביבת עבודה</strong>&#x27;. צפו בכל אפשרויות הפקודה באמצעות:",
   "For backup, stop the process cleanly and preserve the whole data directory, all workspaces and required keys. Temporary exports use each workspace's <code>temporary-exports/</code>; interrupted export files are cleaned on the next startup.": "לצורך גיבוי, עצרו את התהליך בצורה מסודרת ושמרו את ספריית הנתונים כולה, את כל סביבות העבודה ואת המפתחות הנדרשים. ייצוא זמני משתמש ב- <code>temporary-exports/</code>; קבצי ייצוא שהופסקו נמחקים בהפעלה הבאה.",
   "For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.": "לשימוש מקביל, התחברו ל-TgWitness באמצעות טלפון או QR כדי ליצור אישור נפרד. לקוחות Telegram אחרים בעלי אישור נפרד יכולים להישאר מחוברים.",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "עבור הקבוצות שלכם, הפעל את Start.cmd או python start.py תוך שימוש בספריית נתונים נפרדת. לא ניתן להמיר נתוני הדגמה לחקירה אמיתית.",
   "Fork the repository on GitHub and review the code, or use the official one.": "צרו פורק למאגר ב-GitHub ובדקו את הקוד, או השתמשו בגרסה הרשמית.",
   "Format details & examples ↗": "פרטי פורמט ודוגמאות ↗",
   "Forum list of official app pairs, published for registering accounts": "רשימת זוגות האפליקציות הרשמיות בפורום, שפורסמה לצורך רישום חשבונות",
@@ -1022,7 +1021,6 @@
   "Older messages are not loaded yet — use “Show older messages”.": "הודעות ישנות יותר עדיין לא נטענו — השתמש ב\"הצג הודעות ישנות יותר\".",
   "Oldest pending attachment": "הקובץ המצורף הוותיק ביותר הממתין לאישור",
   "On": "ב-",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "ב-Windows, ניתן במקום זאת ללחוץ פעמיים על <strong>Start.cmd</strong>. פתחו את כתובת הפאנל המופיעה במסוף.",
   "On another server": "בשרת אחר",
   "On the witness host, save the read-only token in witness-token.txt and the BotFather token in bot-token.txt next to witness.json. The bot token is never entered into this collector panel.": "בשרת ה-witness, שמור את האסימון לקריאה בלבד בקובץ witness-token.txt ואת האסימון של BotFather בקובץ bot-token.txt לצד הקובץ witness.json. אין להזין את אסימון הבוט בלוח האיסוף הזה בשום פנים ואופן.",
   "On · every {n} min · {services} services": "פעיל · כל {n} דקות · {services} שירותים",
@@ -1496,7 +1494,6 @@
   "Started collection for {name}.": "התחיל איסוף עבור {name}.",
   "Stickers": "מדבקות",
   "Stop the Python process": "עצרו את תהליך Python",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "עצור את ההדגמה באמצעות Ctrl+C, ולאחר מכן הפעל מתוך תיקיית הפרויקט שלך:",
   "Stopped: {error}": "נעצר: {error}",
   "Stopped: {error} — retried on the next pass.": "נעצר: {error} — ניסיון חוזר בסיבוב הבא.",
   "Storage": "אחסון",
@@ -8572,5 +8569,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "כל חשבון מקבל מנהרת WARP משלו לפני הכניסה הראשונה. משתמשים רבים של Cloudflare חולקים כתובות יציאה של WARP.",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "הפעלות מגיעות ל-Telegram דרך שרתים ציבוריים של MTProxy מרשימות פתוחות. קצב הורדת הקבצים איטי יותר.",
   "Telegram sees this machine's public IP address for every imported account.": "Telegram רואה את כתובת ה-IP הציבורית של המחשב הזה עבור כל חשבון שיובא.",
-  "Allow the WARP setup or choose another connection route.": "אפשר את הגדרת WARP או בחר מסלול חיבור אחר."
+  "Allow the WARP setup or choose another connection route.": "אפשר את הגדרת WARP או בחר מסלול חיבור אחר.",
+  "Stop the demo with Ctrl+C, then start your own panel:": "עצור את ההדגמה באמצעות Ctrl+C, ואז הפעל את הפאנל שלך:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "מעדיפים להריץ מתוך תיקיית המקור? השתמשו ב-python start.py, או ב-Start.cmd ב-Windows. פתחו את כתובת הפאנל המוצגת במסוף.",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "עבור הקבוצות שלכם, צרו לוח משלך באמצעות tgwitness ותיקיית נתונים נפרדת. לא ניתן להמיר נתוני הדגמה לחקירה אמיתית.",
+  "Open official client and observation settings ↗": "פתח את הלקוח הרשמי והגדר את הגדרות המעקב ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "מקליט זה פועל בלקוח האינטרנט הרשמי של טלגרם. פתח את הלוח שלו כדי להתחבר, בחר צ'אט, קבע את הקצב וסיים את ההקלטה באמצעות אסימון השליטה במקליט."
 }

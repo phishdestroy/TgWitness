@@ -270,9 +270,7 @@
   "Account settings": "Настройки аккаунта",
   "Sample workspace": "Пример рабочей области",
   "Try TgWitness with your account": "Попробуйте TgWitness со своим аккаунтом",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "Остановите демонстрацию с помощью Ctrl+C, а затем запустите программу из папки вашего проекта:",
   "python start.py": "python start.py",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "В Windows вместо этого можно дважды щелкнуть файл <strong>Start.cmd</strong>. Откройте адрес панели, указанный в терминале.",
   "Installation help ↗": "Справка по установке ↗",
   "Back to sample journal": "Вернуться к примеру журнала",
   "Sign-in method": "Метод входа в систему",
@@ -1001,7 +999,6 @@
   "Signed chat export saved.": "Подписанный экспорт чата сохранен.",
   "Panel connection unavailable": "Подключение к панели недоступно",
   "Explore fictional messages, saved edits, deletion notices and verifiable exports. No Telegram account is connected.": "Изучите вымышленные сообщения, сохраненные правки, уведомления об удалении и поддающиеся проверке экспорты. Ни одна учётная запись Telegram не подключена.",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "Для ваших собственных групп запустите Start.cmd или python start.py с использованием отдельного каталога данных. Демонстрационные данные не могут быть преобразованы в данные реального расследования.",
   "Provide both API ID and API hash, or use this workspace's saved credentials.": "Укажите как идентификатор API, так и хеш API, либо воспользуйтесь сохраненными учетными данными данной рабочей области.",
   "Too many failed access attempts. Wait one minute.": "Слишком много неудачных попыток доступа. Подождите одну минуту.",
   "Enter the panel access token from panel-token.txt in your data directory.": "Введите токен доступа к панели из файла panel-token.txt, расположенного в вашем каталоге данных.",
@@ -8581,5 +8578,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Каждый аккаунт получает свой туннель WARP до первого входа. Адреса выхода WARP общие для многих пользователей Cloudflare.",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Сессии подключаются к Telegram через публичные серверы MTProxy из открытых списков. Файлы скачиваются медленнее.",
   "Telegram sees this machine's public IP address for every imported account.": "Telegram видит публичный IP этой машины у каждого импортированного аккаунта.",
-  "Allow the WARP setup or choose another connection route.": "Разрешите настройку WARP или выберите другой маршрут подключения."
+  "Allow the WARP setup or choose another connection route.": "Разрешите настройку WARP или выберите другой маршрут подключения.",
+  "Stop the demo with Ctrl+C, then start your own panel:": "Остановите демонстрацию с помощью Ctrl+C, а затем запустите собственную панель:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "Хотите запустить программу из исходной папки? Используйте команду python start.py или Start.cmd в Windows. Откройте панель по адресу, выведенному в терминале.",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "Для ваших собственных групп создайте собственную панель с помощью tgwitness и отдельного каталога данных. Демонстрационные данные не могут быть использованы в реальном расследовании.",
+  "Open official client and observation settings ↗": "Открыть официальный клиент и настройки наблюдения ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "Этот рекордер управляет официальным Telegram Web. Откройте его панель для входа, выбора чата, темпа и завершения сессии, используйте токен управления рекордером."
 }

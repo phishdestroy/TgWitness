@@ -212,9 +212,7 @@
   "Account settings": "Configuración de la cuenta",
   "Sample workspace": "Ejemplo de espacio de trabajo",
   "Try TgWitness with your account": "Pruebe TgWitness con su cuenta",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "Detenga la demostración con Ctrl+C y, a continuación, ejecútela desde la carpeta de su proyecto:",
   "python start.py": "python start.py",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "En Windows, también puede hacer doble clic en <strong>Start.cmd</strong>. Abra la dirección del panel que aparece en el terminal.",
   "Installation help ↗": "Ayuda para la instalación ↗",
   "Back to sample journal": "Volver al diario de muestra",
   "Sign-in method": "Método de inicio de sesión",
@@ -915,7 +913,6 @@
   "Signed chat export saved.": "Se ha guardado la exportación firmada del chat.",
   "Panel connection unavailable": "Conexión al panel no disponible",
   "Explore fictional messages, saved edits, deletion notices and verifiable exports. No Telegram account is connected.": "Explore mensajes ficticios, ediciones guardadas, avisos de eliminación y exportaciones verificables. No hay ninguna cuenta de Telegram conectada.",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "Para sus propios grupos, ejecute Start.cmd o python start.py utilizando un directorio de datos independiente. Los datos de demostración no pueden utilizarse en una investigación real.",
   "Provide both API ID and API hash, or use this workspace's saved credentials.": "Facilite tanto el ID de la API como el hash de la API, o utilice las credenciales guardadas en este espacio de trabajo.",
   "Too many failed access attempts. Wait one minute.": "Demasiados intentos fallidos de acceso. Espere un minuto.",
   "Enter the panel access token from panel-token.txt in your data directory.": "Introduzca el token de acceso al panel que se encuentra en el archivo panel-token.txt de su directorio de datos.",
@@ -8533,5 +8530,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Cada cuenta dispone de su propio túnel WARP antes de iniciar sesión por primera vez. Muchos usuarios de Cloudflare comparten direcciones de salida de WARP.",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Las sesiones llegan a Telegram a través de servidores MTProxy públicos de listas abiertas. La descarga de archivos es más lenta.",
   "Telegram sees this machine's public IP address for every imported account.": "Telegram detecta la dirección IP pública de este dispositivo para cada cuenta importada.",
-  "Allow the WARP setup or choose another connection route.": "Permite la configuración de WARP o elige otra ruta de conexión."
+  "Allow the WARP setup or choose another connection route.": "Permite la configuración de WARP o elige otra ruta de conexión.",
+  "Stop the demo with Ctrl+C, then start your own panel:": "Detén la demostración con Ctrl+C y, a continuación, inicia tu propio panel:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "¿Prefieres ejecutarla desde una carpeta de origen? Utiliza «python start.py» o «Start.cmd» en Windows. Abre la dirección del panel que aparece en la terminal.",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "Para tus propios grupos, crea tu propio panel con tgwitness y un directorio de datos independiente. Los datos de demostración no se pueden convertir en una investigación real.",
+  "Open official client and observation settings ↗": "Abrir el cliente oficial y acceder a la configuración de observación ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "Este grabador es compatible con el cliente web oficial de Telegram. Abre su panel para iniciar sesión, selecciona un chat, ajusta la velocidad y finaliza la sesión utilizando el token de control del grabador."
 }

@@ -639,7 +639,6 @@
   "For another workspace, add <code>--profile PROFILE_ID</code>. The ID appears at the top of <strong>Exports → Workspace ID</strong>. See all command options with:": "Per un altro spazio di lavoro, aggiungere <code>--profile PROFILE_ID</code>. L’ID compare nella parte superiore di <strong>Esportazioni → ID area di lavoro</strong>. Visualizzi tutte le opzioni di comando con:",
   "For backup, stop the process cleanly and preserve the whole data directory, all workspaces and required keys. Temporary exports use each workspace's <code>temporary-exports/</code>; interrupted export files are cleaned on the next startup.": "Per il backup, arrestare il processo in modo corretto e conservare l’intera directory dei dati, tutti gli spazi di lavoro e le chiavi necessarie. Le esportazioni temporanee utilizzano <code>temporary-exports/</code>; i file di esportazione interrotti vengono eliminati al successivo avvio.",
   "For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.": "Per un utilizzo in parallelo, effettui l’accesso a TgWitness tramite telefono o codice QR per creare un’autorizzazione separata. Altri client Telegram autorizzati separatamente possono rimanere connessi.",
-  "For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.": "Per i propri gruppi, si esegua Start.cmd oppure python start.py utilizzando una directory dati separata. I dati di dimostrazione non possono essere convertiti in un’indagine reale.",
   "Fork the repository on GitHub and review the code, or use the official one.": "Effettate un fork del repository su GitHub ed esaminate il codice, oppure utilizzate la versione ufficiale.",
   "Format details & examples ↗": "Dettagli sul formato ed esempi ↗",
   "Forum list of official app pairs, published for registering accounts": "Elenco sul forum delle coppie di app ufficiali, pubblicato per la registrazione degli account",
@@ -1020,7 +1019,6 @@
   "Older messages are not loaded yet — use “Show older messages”.": "I messaggi più vecchi non sono ancora stati caricati: utilizzi la funzione “Mostra messaggi più vecchi”.",
   "Oldest pending attachment": "Allegato in sospeso più vecchio",
   "On": "Su",
-  "On Windows, you can double-click <strong>Start.cmd</strong> instead. Open the panel address printed in the terminal.": "Su Windows, è possibile invece fare doppio clic su <strong>Start.cmd</strong>. Aprire l’indirizzo del pannello visualizzato nel terminale.",
   "On another server": "Su un altro server",
   "On the witness host, save the read-only token in witness-token.txt and the BotFather token in bot-token.txt next to witness.json. The bot token is never entered into this collector panel.": "Sull’host di TgWitness, salvi il token di sola lettura nel file witness-token.txt e il token di BotFather nel file bot-token.txt accanto al file witness.json. Il token del bot non va mai inserito in questo pannello di raccolta dati.",
   "On · every {n} min · {services} services": "Attivo · ogni {n} minuti · {services} servizi",
@@ -1494,7 +1492,6 @@
   "Started collection for {name}.": "Avviata la raccolta per {name}.",
   "Stickers": "Adesivi",
   "Stop the Python process": "Arrestare il processo Python",
-  "Stop the demo with Ctrl+C, then run from your project folder:": "Interrompa la demo con Ctrl+C, quindi esegua il programma dalla cartella del progetto:",
   "Stopped: {error}": "Interrotto: {error}",
   "Stopped: {error} — retried on the next pass.": "Interrotto: {error} — si riproverà al ciclo successivo.",
   "Storage": "Archiviazione",
@@ -8533,5 +8530,10 @@
   "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.": "Ogni account ottiene il proprio tunnel WARP prima del primo accesso. Molti utenti di Cloudflare condividono gli indirizzi di uscita WARP.",
   "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.": "Le sessioni raggiungono Telegram tramite server MTProxy pubblici presenti in elenchi aperti. Il download dei file è più lento.",
   "Telegram sees this machine's public IP address for every imported account.": "Telegram rileva l'indirizzo IP pubblico di questo dispositivo per ogni account importato.",
-  "Allow the WARP setup or choose another connection route.": "Consenti la configurazione WARP oppure scegli un altro percorso di connessione."
+  "Allow the WARP setup or choose another connection route.": "Consenti la configurazione WARP oppure scegli un altro percorso di connessione.",
+  "Stop the demo with Ctrl+C, then start your own panel:": "Interrompi la demo con Ctrl+C, quindi avvia il tuo pannello:",
+  "Running from a source folder instead? Use python start.py, or Start.cmd on Windows. Open the panel address printed in the terminal.": "Preferisci eseguirlo da una cartella sorgente? Usa python start.py oppure Start.cmd su Windows. Apri l'indirizzo del pannello visualizzato nel terminale.",
+  "For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.": "Per i propri gruppi, creare un pannello personalizzato con tgwitness e una directory dati separata. I dati di dimostrazione non possono essere convertiti in un'indagine reale.",
+  "Open official client and observation settings ↗": "Apri il client ufficiale e le impostazioni di monitoraggio ↗",
+  "This recorder owns the official Telegram Web client. Open its panel to log in, select a chat, set the pace and finish the session, using the recorder control token.": "Questo registratore è integrato nel client Web ufficiale di Telegram. Apri il pannello per effettuare l'accesso, seleziona una chat, imposta la velocità e termina la sessione utilizzando il token di controllo del registratore."
 }

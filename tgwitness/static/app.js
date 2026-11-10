@@ -5987,7 +5987,7 @@ async function bootstrap(){
       state.demoToken=entry.token;state.token=entry.token;state.profile="default";
       show("unlock-form",false);show("open-demo",true);
       $("gate-description").textContent=tr("Explore fictional messages, saved edits, deletion notices and verifiable exports. No Telegram account is connected.");
-      $("gate-help").textContent=tr("For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.");
+      $("gate-help").textContent=tr("For your own groups, start your own panel with tgwitness and a separate data directory. Demo data cannot be converted into a real investigation.");
     }
   }catch(error){                                                                     }
   if(!accessStarted&&revision===state.workspaceRevision&&state.token)
