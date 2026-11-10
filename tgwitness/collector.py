@@ -118,8 +118,8 @@ def sessions_snapshot(authorizations):
                 "app_version": a.app_version, "api_id": a.api_id, "official_app": bool(a.official_app),
                 "country": a.country, "region": a.region, "created_at": date_string(a.date_created)}
     current = next((a for a in authorizations if a.current), None)
-    return {"current": {**entry(current), "ip_sha256": hashlib.sha256((current.ip or "").encode()).hexdigest()}
-            if current else None,
+    return {"current": {**entry(current), **({"ip_sha256": hashlib.sha256(current.ip.encode()).hexdigest()}
+                                              if current.ip else {})} if current else None,
             "others": sorted((entry(a) for a in authorizations if not a.current), key=lambda e: e["hash"])}
 
 
