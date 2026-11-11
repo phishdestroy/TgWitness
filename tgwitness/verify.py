@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 2048584a3253170ddc8ca903b4c618150b28b1a1b65b3e787400b5f8ec91c8b3
+# TgWitness verifier sources SHA-256: 37a749020792a7aa1f30f5d8d2cb6100c9579363b3ddcbb447bf6a79fa04519d
 """Standalone verifier"""
 import argparse
 import base64
@@ -4386,8 +4386,8 @@ class AccountDisclosureCheck:
                 "source_reference_checked": source_checked, "derivation_correctness_established": False,
                 "html_index_signed_by_manifest": True, "producer": self.manifest.get("producer"),
                 "meaning": "The signature protects this disclosure's bytes and policy statement. "
-                           "Source linkage names the original archive and collector key. It does not show that filtering and "
-                           "redaction followed that policy."}
+                           "Source linkage names the original archive and collector key; review filtering and redaction "
+                           "against that archive."}
 
 
 
