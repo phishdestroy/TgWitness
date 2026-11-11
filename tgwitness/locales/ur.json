@@ -8572,5 +8572,7 @@
   "Saved text": "محفوظ شدہ متن",
   "Edits: {n}": "ترمیمات: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… اور journal-changes.jsonl میں مزید {n} پیغامات۔",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "یہ اسنیپ شاٹ صرف وہی معلومات رکھتا ہے جو ٹیلیگرام نے ایکسپورٹ کے دوران واپس کیں۔ اس چیٹ میں حذف شدہ مواد اور پہلے کے ورژنز journal-changes.jsonl میں موجود ہیں، ہر ریکارڈ پر دستخط شدہ ہے؛ ثبوت جرنل ایکسپورٹ مکمل ہیش چین رکھتا ہے۔"
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "یہ اسنیپ شاٹ صرف وہی معلومات رکھتا ہے جو ٹیلیگرام نے ایکسپورٹ کے دوران واپس کیں۔ اس چیٹ میں حذف شدہ مواد اور پہلے کے ورژنز journal-changes.jsonl میں موجود ہیں، ہر ریکارڈ پر دستخط شدہ ہے؛ ثبوت جرنل ایکسپورٹ مکمل ہیش چین رکھتا ہے۔",
+  "rechecking absent message numbers": "غائب پیغام نمبروں کی دوبارہ جانچ",
+  "packaging and signing the archive": "آرکائیو کی پیکیجنگ اور دستخط"
 }

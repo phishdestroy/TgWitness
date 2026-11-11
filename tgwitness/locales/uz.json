@@ -8572,5 +8572,7 @@
   "Saved text": "Saqlangan matn",
   "Edits: {n}": "Tahrirlar: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… va {n} qo'shimcha xabarlar journal-changes.jsonl faylida.",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Ushbu snapshot faqat Telegram eksport qilganda qaytargan ma'lumotlarni o'z ichiga oladi. Ushbu suhbatda kuzatilgan o'chirishlar va avvalgi versiyalar journal-changes.jsonl faylida saqlangan, har bir yozuv imzolangan; dalillar jurnalining eksporti to'liq xesh zanjirini o'z ichiga oladi."
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Ushbu snapshot faqat Telegram eksport qilganda qaytargan ma'lumotlarni o'z ichiga oladi. Ushbu suhbatda kuzatilgan o'chirishlar va avvalgi versiyalar journal-changes.jsonl faylida saqlangan, har bir yozuv imzolangan; dalillar jurnalining eksporti to'liq xesh zanjirini o'z ichiga oladi.",
+  "rechecking absent message numbers": "yo'q bo'lgan xabar raqamlarini qayta tekshirish",
+  "packaging and signing the archive": "arxivni qadoqlash va imzolash"
 }

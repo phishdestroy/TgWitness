@@ -8533,5 +8533,7 @@
   "Saved text": "Teks yang disimpan",
   "Edits: {n}": "Suntingan: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… dan {n} mesej lagi dalam journal-changes.jsonl.",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Snepadang ini hanya mengandungi apa yang dikembalikan oleh Telegram semasa eksport. Pemadaman dan versi terdahulu yang diperhatikan dalam sembang ini terdapat dalam jurnal-perubahan.jsonl, setiap rekod ditandatangani; eksport jurnal bukti mengandungi rantaian hash lengkap."
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Snepadang ini hanya mengandungi apa yang dikembalikan oleh Telegram semasa eksport. Pemadaman dan versi terdahulu yang diperhatikan dalam sembang ini terdapat dalam jurnal-perubahan.jsonl, setiap rekod ditandatangani; eksport jurnal bukti mengandungi rantaian hash lengkap.",
+  "rechecking absent message numbers": "meneliti semula nombor mesej yang tiada",
+  "packaging and signing the archive": "pembungkusan dan penandatanganan arkib"
 }

@@ -8533,5 +8533,7 @@
   "Saved text": "ข้อความที่บันทึกไว้",
   "Edits: {n}": "การแก้ไข: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… และข้อความอีก{n} ข้อความในไฟล์journal-changes.jsonl",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "ภาพถ่ายนี้เก็บไว้เฉพาะข้อมูลที่ Telegram ส่งกลับมาตอนส่งออกเท่านั้น การลบข้อความและเวอร์ชันก่อนหน้าในแชทนี้ถูกบันทึกไว้ในไฟล์journal-changes.jsonl โดยแต่ละบันทึกได้รับการลงนามแล้ว ส่วนไฟล์ส่งออกของบันทึกหลักฐานเก็บไว้ทั้งสายแฮชที่สมบูรณ์"
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "ภาพถ่ายนี้เก็บไว้เฉพาะข้อมูลที่ Telegram ส่งกลับมาตอนส่งออกเท่านั้น การลบข้อความและเวอร์ชันก่อนหน้าในแชทนี้ถูกบันทึกไว้ในไฟล์journal-changes.jsonl โดยแต่ละบันทึกได้รับการลงนามแล้ว ส่วนไฟล์ส่งออกของบันทึกหลักฐานเก็บไว้ทั้งสายแฮชที่สมบูรณ์",
+  "rechecking absent message numbers": "ตรวจสอบใหม่จำนวนข้อความที่ยังไม่ได้ส่ง",
+  "packaging and signing the archive": "การแพ็กเกจและลงนามไฟล์อาร์ไคฟ์"
 }

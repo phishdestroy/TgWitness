@@ -8611,5 +8611,7 @@
   "Saved text": "טקסט שנשמר",
   "Edits: {n}": "עריכות: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… ועוד {n} הודעות בקובץ journal-changes.jsonl.",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "תמונת מצב זו מכילה רק את מה ש-Telegram החזיר בעת הייצוא. מחיקות וגרסאות קודמות שנצפו בצ'אט זה נמצאות בקובץ journal-changes.jsonl, כאשר כל רשומה חתומה; ייצוא יומן הראיות מכיל את שרשרת ההאש המלאה."
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "תמונת מצב זו מכילה רק את מה ש-Telegram החזיר בעת הייצוא. מחיקות וגרסאות קודמות שנצפו בצ'אט זה נמצאות בקובץ journal-changes.jsonl, כאשר כל רשומה חתומה; ייצוא יומן הראיות מכיל את שרשרת ההאש המלאה.",
+  "rechecking absent message numbers": "בדיקה חוזרת של מספרי הודעות חסרות",
+  "packaging and signing the archive": "אריזה וחתימה על הארכיון"
 }

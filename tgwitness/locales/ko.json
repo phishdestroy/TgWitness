@@ -8533,5 +8533,7 @@
   "Saved text": "저장된 텍스트",
   "Edits: {n}": "수정 사항: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… 그리고 journal-changes.jsonl 파일에 {n}개의 메시지가 더 있습니다.",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "이 스냅샷에는 텔레그램이 내보내기 시 반환한 내용만 포함되어 있습니다. 이 채팅에서 확인된 삭제 내역 및 이전 버전은 journal-changes.jsonl 파일에 있으며, 각 레코드는 서명되어 있습니다. 증거 일지 내보내기 파일에는 전체 해시 체인이 포함되어 있습니다."
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "이 스냅샷에는 텔레그램이 내보내기 시 반환한 내용만 포함되어 있습니다. 이 채팅에서 확인된 삭제 내역 및 이전 버전은 journal-changes.jsonl 파일에 있으며, 각 레코드는 서명되어 있습니다. 증거 일지 내보내기 파일에는 전체 해시 체인이 포함되어 있습니다.",
+  "rechecking absent message numbers": "누락된 메시지 번호 재확인",
+  "packaging and signing the archive": "아카이브 패키징 및 서명"
 }

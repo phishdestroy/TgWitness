@@ -8533,5 +8533,7 @@
   "Saved text": "保存されたテキスト",
   "Edits: {n}": "編集箇所：{n}",
   "… and {n} more messages in journal-changes.jsonl.": "… さらに、journal-changes.jsonl には {n} 件のメッセージが含まれています。",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "このスナップショットには、エクスポート時にTelegramから返された内容のみが含まれています。このチャットで確認された削除履歴や以前のバージョンは、journal-changes.jsonl に記録されており、各レコードには署名が付いています。証拠ジャーナルのエクスポートには、完全なハッシュチェーンが含まれています。"
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "このスナップショットには、エクスポート時にTelegramから返された内容のみが含まれています。このチャットで確認された削除履歴や以前のバージョンは、journal-changes.jsonl に記録されており、各レコードには署名が付いています。証拠ジャーナルのエクスポートには、完全なハッシュチェーンが含まれています。",
+  "rechecking absent message numbers": "欠落しているメッセージ番号の再確認",
+  "packaging and signing the archive": "アーカイブのパッケージ化と署名"
 }

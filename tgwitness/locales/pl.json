@@ -8650,5 +8650,7 @@
   "Saved text": "Zapisany tekst",
   "Edits: {n}": "Zmiany: {n}",
   "… and {n} more messages in journal-changes.jsonl.": "… oraz {n} kolejnych wiadomości w pliku journal-changes.jsonl.",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Niniejsza migawka zawiera wyłącznie dane zwrócone przez aplikację Telegram podczas eksportu. Usunięte wiadomości oraz wcześniejsze wersje zaobserwowane w tej rozmowie znajdują się w pliku journal-changes.jsonl, przy czym każdy rekord jest podpisany; eksport dziennika dowodowego zawiera kompletny łańcuch skrótów."
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Niniejsza migawka zawiera wyłącznie dane zwrócone przez aplikację Telegram podczas eksportu. Usunięte wiadomości oraz wcześniejsze wersje zaobserwowane w tej rozmowie znajdują się w pliku journal-changes.jsonl, przy czym każdy rekord jest podpisany; eksport dziennika dowodowego zawiera kompletny łańcuch skrótów.",
+  "rechecking absent message numbers": "ponowna weryfikacja brakujących numerów wiadomości",
+  "packaging and signing the archive": "pakowanie i podpisywanie archiwum"
 }

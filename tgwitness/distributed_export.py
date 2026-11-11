@@ -34,6 +34,7 @@ from .store import canonical, utcnow
 from .verify import fingerprint, verify_chat_export
 from .workers import complete_in_thread
 
+MEDIA_BATCH = 100
 CHUNK = 2000
 PAGE_TIMEOUT = 60
 OUTAGE_RETRIES = 4
@@ -225,7 +226,7 @@ class DistributedExport:
                           "phase": "preparing", "started_at": now, "workers": workers,
                           "captured": 0, "ranges_done": 0, "ranges_total": sum(
                               (s["high"] - s["low"]) // chunk_size + 1 for s in segments),
-                          "total": None, "eta_seconds": None, "ready": False, "error": None,
+                          "total": messages, "eta_seconds": None, "ready": False, "error": None,
                           "selection": options.model_dump(), "counts": {}, "transport": transport}
             job = {"format": "tgwitness-distributed-job-v1", "id": export_id, "chat_id": chat_id,
                         "lead": lead_id, "started_at": now, "scan_end": scan_end, "username": username,
@@ -324,7 +325,11 @@ class Run:
 
     def update_timing(self):
         if self.timing is not None and self.state is not None:
-            self.state["performance"] = self.timing.snapshot(self.state["captured"])
+            performance = self.timing.snapshot(self.state["captured"])
+            self.state["performance"] = performance
+            total, rate = self.state.get("total"), performance["messages_per_second"]
+            self.state["eta_seconds"] = (round(max(0, total - self.state["captured"]) / rate)
+                                         if self.state.get("phase") == "running" and total and rate else None)
 
     def set_phase(self, phase):
         self.state["phase"] = phase
@@ -608,28 +613,49 @@ class Run:
             media_policy = {**capture_settings(self.app_for(self.job["lead"]).state.collector.store),
                             "download_media": True}
             with scratch.open("w", encoding="utf-8") as output:
-                for record, profile in index.output():
-                    if options.download_media and record.get("media_type"):
-                        collector = self.app_for(profile).state.collector
-                        message = await collector.client.get_messages(self.entities[profile], ids=record["id"])
-                        stored = json.loads(index.db.execute(
-                            "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0])
-                        stored.pop("found_on_recheck", None)
-                        if message and message_details.stable(message_record(message)) == message_details.stable(stored):
-                            record.update(await collector.export_attachment(message, directory / "media",
-                                                                            settings=media_policy))
-                        else:
-                            record["file_status"] = "message_changed_or_unavailable_at_media_read"
-                    encoded = canonical(record) + b"\n"
-                    output.write(encoded.decode())
-                    if current is None or current["profile_id"] != profile:
-                        current = {"profile_id": profile, "low": record["id"], "high": record["id"],
-                                   "count": 0, "digest": hashlib.sha256()}
-                        ranges.append(current)
-                    current["low"] = record["id"]
-                    current["count"] += 1
-                    current["digest"].update(encoded)
-                    await asyncio.sleep(0)
+                async def emit(batch):
+                    nonlocal current
+                    fetched = {}
+                    if options.download_media:
+                        wanted = {}
+                        for record, profile in batch:
+                            if record.get("media_type"):
+                                wanted.setdefault(profile, []).append(record["id"])
+                        for profile, ids in wanted.items():
+                            answer = await self.app_for(profile).state.collector.client.get_messages(
+                                self.entities[profile], ids=ids)
+                            fetched.update(((profile, number), message) for number, message in zip(ids, answer or []))
+                    for record, profile in batch:
+                        if options.download_media and record.get("media_type"):
+                            collector = self.app_for(profile).state.collector
+                            message = fetched.get((profile, record["id"]))
+                            stored = json.loads(index.db.execute(
+                                "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0])
+                            stored.pop("found_on_recheck", None)
+                            if message and message_details.stable(message_record(message)) == message_details.stable(stored):
+                                record.update(await collector.export_attachment(message, directory / "media",
+                                                                                settings=media_policy))
+                            else:
+                                record["file_status"] = "message_changed_or_unavailable_at_media_read"
+                        encoded = canonical(record) + b"\n"
+                        output.write(encoded.decode())
+                        if current is None or current["profile_id"] != profile:
+                            current = {"profile_id": profile, "low": record["id"], "high": record["id"],
+                                       "count": 0, "digest": hashlib.sha256()}
+                            ranges.append(current)
+                        current["low"] = record["id"]
+                        current["count"] += 1
+                        current["digest"].update(encoded)
+                        await asyncio.sleep(0)
+
+                batch = []
+                for item in index.output():
+                    batch.append(item)
+                    if len(batch) == MEDIA_BATCH:
+                        await emit(batch)
+                        batch = []
+                if batch:
+                    await emit(batch)
             for part in ranges:
                 part["sha256"] = part.pop("digest").hexdigest()
             return scratch, ranges

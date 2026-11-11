@@ -3819,6 +3819,7 @@ class Collector:
             if chat_id < -1000000000000:
                 absent, first = absent_numbers(scratch)
                 if absent or first and first > 1:
+                    record.update(stage="recheck", eta_seconds=None)
                     try:
                         recheck, missed = await self.recheck_absent(entity, absent, first)
                     except asyncio.CancelledError:
@@ -3830,6 +3831,7 @@ class Collector:
                         merge_history(scratch, [{**message_record(m), "found_on_recheck": True,
                                                  **(await self.export_attachment(m, media_dir, files))} for m in missed])
                     count += len(missed)
+            record.update(stage="packaging", eta_seconds=None)
             log = await self.admin_log(entity) if observer.get("role") in ("creator", "admin") else None
             meta = {"chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind"),
                              "visibility": info.get("visibility"), "profile": profile,

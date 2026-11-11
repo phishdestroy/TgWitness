@@ -8533,5 +8533,7 @@
   "Saved text": "儲存的文字",
   "Edits: {n}": "編輯：{n}",
   "… and {n} more messages in journal-changes.jsonl.": "… 以及 {n} 則更多訊息，詳見 journal-changes.jsonl 檔案。",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "此快照僅包含 Telegram 在匯出時所回傳的內容。此聊天紀錄中觀察到的刪除內容及較早版本皆收錄於 `journal-changes.jsonl` 檔案中，每筆記錄均經簽署；證據日誌匯出檔則包含完整的雜湊鏈。"
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "此快照僅包含 Telegram 在匯出時所回傳的內容。此聊天紀錄中觀察到的刪除內容及較早版本皆收錄於 `journal-changes.jsonl` 檔案中，每筆記錄均經簽署；證據日誌匯出檔則包含完整的雜湊鏈。",
+  "rechecking absent message numbers": "重新檢查缺失的訊息編號",
+  "packaging and signing the archive": "封裝及簽署壓縮檔"
 }
