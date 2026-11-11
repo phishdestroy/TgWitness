@@ -470,7 +470,7 @@ class AccountExportCheck:
                 "complete_within_scope": complete, "source_completeness_established": False,
                 "html_index_signed_by_manifest": "index.html" in self.files,
                 "meaning": "Integrity is checked relative to the signing key. Completion covers the frozen selected "
-                           "tasks and observed outcomes, not all Telegram data, a simultaneous snapshot or trusted time."}
+                           "tasks and their observed outcomes."}
 
 
 
