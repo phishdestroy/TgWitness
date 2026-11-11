@@ -105,8 +105,7 @@ EXAMINATION_CODES = ("AE", "AT", "AU", "BD", "BE", "BG", "BR", "CA", "CH", "CN",
                      "FR", "GR", "HK", "HU", "ID", "IE", "IL", "IN", "IR", "IT", "JP", "KR", "LT", "LV", "MX", "MY", "NL",
                      "NO", "PH", "PK", "PL", "PT", "RO", "RU", "SA", "SE", "SG", "SK", "TH", "TR", "TW", "UA", "UK",
                      "US-federal", "UZ", "VN")
-PACKAGE_JSON.update({"narrative/review-policy.json",
-                     *("narrative/texts/" + prefix + language + ".json"
+PACKAGE_JSON.update({                     *("narrative/texts/" + prefix + language + ".json"
                        for prefix in ("", "glossary.") for language in NARRATIVE_LANGUAGES),
                      *("narrative/jurisdictions/" + code + ".json" for code in
                        ("DE", "AT", "CH", "UK", "IE", "FR", "ES", "IT", "PL", "CZ", "UA", "NL", "BE", "US-federal")),

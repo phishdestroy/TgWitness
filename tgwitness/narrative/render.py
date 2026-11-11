@@ -37,7 +37,7 @@ def jurisdiction(code, procedure='criminal'):
             value = old.get(key)
             if value:
                 rows.append((value['term'], value.get('basis', value.get('qes_name', '')), value['source']))
-        return {'name': old['scope'], 'procedure': None, 'checked': old['checked_at'] + ' · ' + old['review'], 'rows': rows}
+        return {'name': old['scope'], 'procedure': None, 'checked': old['checked_at'], 'rows': rows}
     part = route(record, procedure)
     appointed = next((part[key] for key in ('appointment',) if part.get(key)), {})
     esignature, timestamp = record.get('esignature') or {}, record.get('timestamp') or {}
@@ -53,7 +53,7 @@ def jurisdiction(code, procedure='criminal'):
     if old and old.get('data_access_basis'):
         rows.append((old['data_access_basis']['term'], '', old['data_access_basis']['source']))
     return {'name': record['name_local'] + ' · ' + record['name_en'] + ' (' + record['code'] + ')', 'procedure': procedure,
-            'checked': record['checked_at'] + ' · ' + record['review'], 'rows': rows}
+            'checked': record['checked_at'], 'rows': rows}
 
 
 def commands(model):
@@ -79,7 +79,7 @@ def plain_refs(fact):
 
 
 def footer(text):
-    return text('limit.review')
+    return text('title')
 
 
 def meta(model, text, local):
@@ -97,7 +97,7 @@ def meta(model, text, local):
 
 
 def notes(text):
-    return [text('intro'), text('limit.review')]
+    return [text('intro')]
 
 
 def limits(model, text):

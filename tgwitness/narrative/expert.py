@@ -102,7 +102,7 @@ def build(result, model, settings, receipt_sha256):
         'format': 'tgwitness-expert-protocol-v1',
         'procedure': procedure,
         'jurisdiction': record and {**{key: record.get(key) for key in (
-            'code', 'name_en', 'name_local', 'court_languages', 'local_language', 'checked_at', 'review', 'expert_term', 'statute',
+            'code', 'name_en', 'name_local', 'court_languages', 'local_language', 'checked_at', 'expert_term', 'statute',
             'standards', 'esignature', 'timestamp', 'open_questions')},
             'declaration': declaration(record, procedure),
             'route': route(record, procedure), 'liability': liability(record, procedure)},
@@ -123,7 +123,6 @@ def build(result, model, settings, receipt_sha256):
                      'outside': list(OUTSIDE)},
         'questions': {'answerable': list(ANSWERABLE), 'outside': list(UNANSWERABLE)},
         'run': {'receipt': 'narrative-run.json', 'receipt_sha256': receipt_sha256},
-        'translation_review': 'machine-assisted, not reviewed',
     }
 
 
@@ -137,7 +136,7 @@ def meta(protocol, text):
         rows.append((t('meta.court_language'), ', '.join(language_name(code) for code in local['court_languages'])))
     rows.append((t('meta.language'), language_name(text.lang)))
     if local:
-        rows.append((t('meta.checked'), local['checked_at'] + ' · ' + local['review']))
+        rows.append((t('meta.checked'), local['checked_at']))
     rows.append((t('meta.package'), protocol['material']['package_sha256']))
     return rows
 
@@ -246,12 +245,12 @@ def sections(protocol, text):
                       [(t('expert.q.' + name), t('expert.q.' + name + '.reason')) for name in protocol['questions']['outside']])])]))
     out.append(('section', t('expert.annex.run'), [
         ('text', [t('expert.run.receipt', sha=protocol['run']['receipt_sha256'])]),
-        ('muted', [t('expert.run.repeat'), t('limit.review')])]))
+        ('muted', [t('expert.run.repeat')])]))
     return out
 
 
 def footer(text):
-    return text('limit.review')
+    return text('expert.title')
 
 
 def source_link(url, text):

@@ -99,12 +99,11 @@ Not yet run against a live account:
 - Export at the `sealed` tier, the witness tier with a separate witness process, a
   Bitcoin-confirmed OpenTimestamps seal and Takeout throughput.
 
-Platforms and reviews:
+Platforms:
 
 - Successful checks for this candidate on Linux, Windows and macOS, including the portable
   package. Prior platform results do not qualify a newer revision; use its Actions run
   and manifest.
-- Independent security review and forensic certification are external steps.
 
 The main panel token controls all workspaces. Issue scoped tokens for reviewers and analysts; see [access and permissions](../ACCESS.md). Keep dedicated
 account credentials and collected data out of the repository. See [readiness](READINESS.md)

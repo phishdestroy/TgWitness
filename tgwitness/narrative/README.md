@@ -23,7 +23,6 @@ archive and selected trust requirements before rendering into an empty directory
 | [`text.py`](text.py), [texts/](texts/README.md) | Report catalogs and bounded plural-template rendering |
 | [jurisdictions/](jurisdictions/README.md) | Optional terminology and source references |
 | [`expert.py`](expert.py), [examination/](examination/README.md) | Expert examination protocol draft and per-jurisdiction rules for expert reports |
-| [`review-policy.json`](review-policy.json) | Translation review status and release requirements |
 
 Run `python -m tgwitness.narrative --help` from the repository root.
 The [narrative guide](../../docs/NARRATIVE.md) covers output files, trust inputs
