@@ -158,5 +158,6 @@
   "meta.records": "Žurnalo įrašai",
   "meta.period": "Įrašų laikotarpis",
   "procedure.criminal": "Baudžiamasis procesas",
-  "procedure.civil": "Civilinė byla"
+  "procedure.civil": "Civilinė byla",
+  "advice.translation": "Rekomendacija: teismui pateikite anglų kalba parengtą originalą kartu su patvirtintu arba prisiekusio vertėjo atliktu vertimu į teismo darbo kalbą. Prisiekęs vertėjas išmano vietinę terminologiją ir teismo dokumentams keliamus formalius reikalavimus. Šios ataskaitos versijos kitomis kalbomis, išskyrus anglų, yra kompiuteriniai vertimai, skirti tik orientacijai."
 }

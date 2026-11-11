@@ -158,5 +158,6 @@
   "meta.records": "Journaloppføringer",
   "meta.period": "Registrert periode",
   "procedure.criminal": "Straffesaker",
-  "procedure.civil": "Sivile rettssaker"
+  "procedure.civil": "Sivile rettssaker",
+  "advice.translation": "Anbefaling: Ved rettssaker bør den engelske originalen arkiveres sammen med en sertifisert eller edsvoren oversettelse til rettens språk. En edsvoren oversetter kjenner den lokale terminologien og de formelle kravene til rettsdokumenter. Versjoner av denne rapporten på andre språk enn engelsk er maskinoversettelser som kun er ment som veiledning."
 }

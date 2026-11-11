@@ -158,5 +158,6 @@
   "meta.records": "Päevikukanded",
   "meta.period": "Registreerimisperiood",
   "procedure.criminal": "Kriminaalmenetlus",
-  "procedure.civil": "Tsiviilmenetlus"
+  "procedure.civil": "Tsiviilmenetlus",
+  "advice.translation": "Soovitus: kohtule tuleb esitada ingliskeelne originaal koos kinnitatud või vandetõlkija poolt koostatud tõlkega kohtu keelde. Vandetõlkija tunneb kohalikku terminoloogiat ja kohtudokumentidele esitatavaid vormilisi nõudeid. Käesoleva aruande versioonid muudes keeltes peale inglise keele on masintõlked, mis on mõeldud vaid üldise ülevaate saamiseks."
 }

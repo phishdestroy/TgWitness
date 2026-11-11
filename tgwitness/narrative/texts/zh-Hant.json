@@ -158,5 +158,6 @@
   "meta.records": "法庭紀錄",
   "meta.period": "記錄期間",
   "procedure.criminal": "刑事訴訟",
-  "procedure.civil": "民事訴訟"
+  "procedure.civil": "民事訴訟",
+  "advice.translation": "建議：若需提交至法院，請將英文正本連同經認證或宣誓的譯本（譯為法院指定語言）一併提交。宣誓譯者熟悉當地術語及法院文件的正式要求。本報告的非英文版本均為供參考之機器翻譯。"
 }

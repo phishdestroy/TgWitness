@@ -97,7 +97,7 @@ def meta(model, text, local):
 
 
 def notes(text):
-    return [text('intro')]
+    return [text('intro'), text('advice.translation')]
 
 
 def limits(model, text):

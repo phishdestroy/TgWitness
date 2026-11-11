@@ -158,5 +158,6 @@
   "meta.records": "Protokoll-Einträge",
   "meta.period": "Aufzeichnungszeitraum",
   "procedure.criminal": "Strafverfahren",
-  "procedure.civil": "Zivilverfahren"
+  "procedure.civil": "Zivilverfahren",
+  "advice.translation": "Empfehlung: Reichen Sie für Gerichtszwecke das englische Original zusammen mit einer beglaubigten oder vereidigten Übersetzung in die Gerichtssprache ein. Ein vereidigter Übersetzer kennt die lokale Terminologie und die formalen Anforderungen an Gerichtsdokumente. Versionen dieses Gutachtens in anderen Sprachen als Englisch sind maschinelle Übersetzungen, die lediglich zur Orientierung dienen."
 }

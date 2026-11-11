@@ -158,5 +158,6 @@
   "meta.records": "Catatan jurnal",
   "meta.period": "Periode pencatatan",
   "procedure.criminal": "Proses pidana",
-  "procedure.civil": "Proses perdata"
+  "procedure.civil": "Proses perdata",
+  "advice.translation": "Rekomendasi: untuk keperluan pengadilan, lampirkan salinan asli dalam bahasa Inggris beserta terjemahan tersertifikasi atau tersumpah ke dalam bahasa pengadilan. Penerjemah tersumpah memahami terminologi lokal dan persyaratan formal untuk dokumen pengadilan. Versi laporan ini dalam bahasa selain bahasa Inggris merupakan terjemahan mesin yang disediakan sebagai panduan."
 }

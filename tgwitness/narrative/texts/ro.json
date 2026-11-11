@@ -158,5 +158,6 @@
   "meta.records": "Înregistrări din jurnal",
   "meta.period": "Perioada înregistrată",
   "procedure.criminal": "Proceduri penale",
-  "procedure.civil": "Proceduri civile"
+  "procedure.civil": "Proceduri civile",
+  "advice.translation": "Recomandare: în cazul instanței, depuneți originalul în limba engleză împreună cu o traducere certificată sau jurată în limba de procedură a instanței. Un traducător jurat cunoaște terminologia locală și cerințele formale aplicabile documentelor judiciare. Versiunile acestui raport în alte limbi decât engleza sunt traduceri automate, destinate doar orientării."
 }

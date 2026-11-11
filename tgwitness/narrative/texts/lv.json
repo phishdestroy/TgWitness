@@ -158,5 +158,6 @@
   "meta.records": "Žurnāla ieraksti",
   "meta.period": "Reģistrētais periods",
   "procedure.criminal": "Kriminālprocess",
-  "procedure.civil": "Civillieta"
+  "procedure.civil": "Civillieta",
+  "advice.translation": "Ieteikums: tiesai iesniedziet angļu valodas oriģinālu kopā ar apliecinātu vai zvērinātu tulkojumu tiesas valodā. Zvērināts tulkotājs pārzina vietējo terminoloģiju un formālās prasības attiecībā uz tiesas dokumentiem. Šī ziņojuma versijas valodās, kas nav angļu valoda, ir mašīntulkojumi, kas paredzēti tikai orientācijai."
 }

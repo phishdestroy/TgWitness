@@ -158,5 +158,6 @@
   "meta.records": "Journalposter",
   "meta.period": "Registrerad period",
   "procedure.criminal": "Straffrättsliga förfaranden",
-  "procedure.civil": "Civilrättsliga förfaranden"
+  "procedure.civil": "Civilrättsliga förfaranden",
+  "advice.translation": "Rekommendation: Vid domstolsförfaranden ska det engelska originalet lämnas in tillsammans med en auktoriserad eller edsvuren översättning till domstolens språk. En edsvuren översättare känner till den lokala terminologin och de formella kraven för domstolsdokument. Versioner av denna rapport på andra språk än engelska är maskinöversättningar som endast är avsedda som vägledning."
 }

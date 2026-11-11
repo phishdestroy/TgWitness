@@ -158,5 +158,6 @@
   "meta.records": "Günlük kayıtları",
   "meta.period": "Kayıt dönemi",
   "procedure.criminal": "Ceza davaları",
-  "procedure.civil": "Hukuk davaları"
+  "procedure.civil": "Hukuk davaları",
+  "advice.translation": "Öneri: Mahkemeye başvururken, İngilizce orijinal belgeyi mahkeme diline yapılmış onaylı veya yeminli bir çeviri ile birlikte sununuz. Yeminli çevirmen, yerel terminolojiyi ve mahkeme belgelerine ilişkin resmi gereklilikleri bilir. Bu raporun İngilizce dışındaki dillerde hazırlanan versiyonları, yalnızca bilgilendirme amaçlı makine çevirileridir."
 }

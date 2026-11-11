@@ -158,5 +158,6 @@
   "meta.records": "Naplóbejegyzések",
   "meta.period": "Rögzített időszak",
   "procedure.criminal": "Büntetőeljárások",
-  "procedure.civil": "Polgári eljárások"
+  "procedure.civil": "Polgári eljárások",
+  "advice.translation": "Ajánlás: bírósági eljárás esetén az angol nyelvű eredeti dokumentumot a bírósági nyelvre készült hiteles vagy esküdt fordítással együtt nyújtsa be a bírósághoz. Az esküdt fordító ismeri a helyi szakszókincset és a bírósági dokumentumokra vonatkozó formai követelményeket. A jelentés angol nyelven kívüli változatai tájékoztató jellegű gépi fordítások."
 }

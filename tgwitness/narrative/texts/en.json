@@ -158,5 +158,6 @@
   "meta.records": "Journal records",
   "meta.period": "Recorded period",
   "procedure.criminal": "Criminal proceedings",
-  "procedure.civil": "Civil proceedings"
+  "procedure.civil": "Civil proceedings",
+  "advice.translation": "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation."
 }

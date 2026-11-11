@@ -84,6 +84,8 @@ The run writes `expert-protocol.html`, `expert-protocol.pdf` and `expert-protoco
 
 The header shows the jurisdiction, the procedure, the court languages by name, the language of the document, the date the legal references were checked and the package SHA-256. A declaration that the catalog marks for civil proceedings is left out of a criminal protocol.
 
+For court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. The protocol and the narrative print this recommendation; their versions in other languages are machine translations for orientation.
+
 The HTML and JSON files contain no generation time. The same TgWitness version, package and inputs produce byte-identical HTML and JSON, so a second expert can repeat the examination and compare files. The PDF carries its creation date in its metadata.
 
 ### Examination catalog

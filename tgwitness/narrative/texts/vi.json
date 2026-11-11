@@ -158,5 +158,6 @@
   "meta.records": "Bản ghi nhật ký",
   "meta.period": "Thời gian ghi chép",
   "procedure.criminal": "Thủ tục hình sự",
-  "procedure.civil": "Thủ tục dân sự"
+  "procedure.civil": "Thủ tục dân sự",
+  "advice.translation": "Khuyến nghị: đối với tòa án, hãy nộp bản gốc tiếng Anh kèm theo bản dịch được chứng nhận hoặc bản dịch có tuyên thệ sang ngôn ngữ của tòa án. Một dịch giả có tuyên thệ am hiểu thuật ngữ địa phương và các yêu cầu chính thức đối với tài liệu tòa án. Các phiên bản của báo cáo này bằng các ngôn ngữ khác ngoài tiếng Anh là bản dịch máy nhằm mục đích tham khảo."
 }

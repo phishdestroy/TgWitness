@@ -158,5 +158,6 @@
   "meta.records": "Registros del diario",
   "meta.period": "Período registrado",
   "procedure.criminal": "Procedimientos penales",
-  "procedure.civil": "Procedimientos civiles"
+  "procedure.civil": "Procedimientos civiles",
+  "advice.translation": "Recomendación: para los tribunales, presente el original en inglés junto con una traducción certificada o jurada al idioma del tribunal. Un traductor jurado conoce la terminología local y los requisitos formales de los documentos judiciales. Las versiones de este informe en idiomas distintos del inglés son traducciones automáticas que sirven únicamente a título orientativo."
 }

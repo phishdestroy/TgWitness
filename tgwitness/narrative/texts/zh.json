@@ -158,5 +158,6 @@
   "meta.records": "庭审记录",
   "meta.period": "记录期间",
   "procedure.criminal": "刑事诉讼",
-  "procedure.civil": "民事诉讼"
+  "procedure.civil": "民事诉讼",
+  "advice.translation": "建议：提交至法院时，应将英文原件与经认证或宣誓翻译的、译为法院指定语言的译文一并提交。宣誓翻译员熟悉当地术语及法院文件的形式要求。本报告的英文以外语言版本均为供参考的机器翻译。"
 }

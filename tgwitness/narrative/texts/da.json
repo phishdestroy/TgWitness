@@ -158,5 +158,6 @@
   "meta.records": "Journalposter",
   "meta.period": "Registreringsperiode",
   "procedure.criminal": "Straffesager",
-  "procedure.civil": "Civilretlige sager"
+  "procedure.civil": "Civilretlige sager",
+  "advice.translation": "Anbefaling: Ved retssager skal den engelske original indgives sammen med en bekræftet eller edsvoren oversættelse til retssproget. En edsvoren oversætter kender den lokale terminologi og de formelle krav til retsdokumenter. Versioner af denne rapport på andre sprog end engelsk er maskinoversættelser, der udelukkende tjener til orientering."
 }

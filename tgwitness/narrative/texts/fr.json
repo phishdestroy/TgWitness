@@ -158,5 +158,6 @@
   "meta.records": "Enregistrements du journal",
   "meta.period": "Période d’enregistrement",
   "procedure.criminal": "Procédures pénales",
-  "procedure.civil": "Procédures civiles"
+  "procedure.civil": "Procédures civiles",
+  "advice.translation": "Recommandation : pour les procédures judiciaires, veuillez déposer l’original en anglais accompagné d’une traduction certifiée ou assermentée dans la langue de la juridiction. Un traducteur assermenté connaît la terminologie locale et les exigences formelles applicables aux documents judiciaires. Les versions de ce rapport dans des langues autres que l’anglais sont des traductions automatiques fournies à titre indicatif."
 }

@@ -158,5 +158,6 @@
   "meta.records": "Rekod jurnal",
   "meta.period": "Tempoh rakaman",
   "procedure.criminal": "Proses jenayah",
-  "procedure.civil": "Prosedur Sivil"
+  "procedure.civil": "Prosedur Sivil",
+  "advice.translation": "Cadangan: untuk mahkamah, serahkan asal Bahasa Inggeris bersama terjemahan yang disahkan atau disumpah ke dalam bahasa mahkamah. Penerjemah bersumpah mengetahui terminologi tempatan dan keperluan formal bagi dokumen mahkamah. Versi laporan ini dalam bahasa selain Bahasa Inggeris adalah terjemahan mesin untuk panduan."
 }

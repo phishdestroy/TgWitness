@@ -158,5 +158,6 @@
   "meta.records": "Jurnal yozuvlari",
   "meta.period": "Yozib olingan davr",
   "procedure.criminal": "Jinoyat ishlari",
-  "procedure.civil": "Fuqarolik ishlari"
+  "procedure.civil": "Fuqarolik ishlari",
+  "advice.translation": "Tavsiya: sud uchun ingliz tilidagi asl nusxani sud tiliga qilingan tasdiqlangan yoki qasamli tarjima bilan birga topshiring. Qasamli tarjimon mahalliy atamalar va sud hujjatlariga qo'yiladigan rasmiy talablarni biladi. Ingliz tilidan boshqa tillarda taqdim etilgan ushbu hisobot versiyalari yo'riqnoma maqsadida avtomatlashtirilgan tarjimalar hisoblanadi."
 }

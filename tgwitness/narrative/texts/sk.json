@@ -158,5 +158,6 @@
   "meta.records": "Záznamy v denníku",
   "meta.period": "Zaznamenané obdobie",
   "procedure.criminal": "Trestné konanie",
-  "procedure.civil": "Občianske konanie"
+  "procedure.civil": "Občianske konanie",
+  "advice.translation": "Odporúčanie: v prípade súdneho konania predložte anglický originál spolu s overeným alebo súdnym prekladom do jazyka súdu. Súdny prekladateľ ovláda miestnu terminológiu a formálne požiadavky na súdne dokumenty. Verzie tohto posudku v iných jazykoch ako v angličtine sú strojové preklady slúžiace len na orientáciu."
 }

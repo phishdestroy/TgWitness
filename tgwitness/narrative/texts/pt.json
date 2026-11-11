@@ -158,5 +158,6 @@
   "meta.records": "Registos do diário",
   "meta.period": "Período registado",
   "procedure.criminal": "Processos penais",
-  "procedure.civil": "Processos cíveis"
+  "procedure.civil": "Processos cíveis",
+  "advice.translation": "Recomendação: para o tribunal, apresente o original em inglês juntamente com uma tradução certificada ou juramentada para a língua do tribunal. Um tradutor juramentado conhece a terminologia local e os requisitos formais aplicáveis aos documentos judiciais. As versões deste relatório em línguas que não o inglês são traduções automáticas, destinadas apenas a fins orientativos."
 }

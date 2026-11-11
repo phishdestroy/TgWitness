@@ -158,5 +158,6 @@
   "meta.records": "Zápisy v deníku",
   "meta.period": "Zaznamenané období",
   "procedure.criminal": "Trestní řízení",
-  "procedure.civil": "Občanskoprávní řízení"
+  "procedure.civil": "Občanskoprávní řízení",
+  "advice.translation": "Doporučení: v případě soudního řízení přiložte k anglickému originálu ověřený nebo soudně ověřený překlad do jazyka, v němž se vede řízení. Soudně ověřený překladatel zná místní terminologii a formální požadavky kladené na soudní dokumenty. Verze této zprávy v jiných jazycích než v angličtině jsou strojové překlady sloužící pouze pro orientaci."
 }

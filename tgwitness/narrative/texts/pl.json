@@ -158,5 +158,6 @@
   "meta.records": "Wpisy do dziennika",
   "meta.period": "Okres rejestracji",
   "procedure.criminal": "Postępowanie karne",
-  "procedure.civil": "Postępowanie cywilne"
+  "procedure.civil": "Postępowanie cywilne",
+  "advice.translation": "Zalecenie: w przypadku postępowania sądowego należy złożyć oryginał w języku angielskim wraz z tłumaczeniem poświadczonym lub przysięgłym na język sądowy. Tłumacz przysięgły zna lokalną terminologię oraz wymogi formalne dotyczące dokumentów sądowych. Wersje niniejszego raportu w językach innych niż angielski są tłumaczeniami maszynowymi i służą wyłącznie w celach orientacyjnych."
 }

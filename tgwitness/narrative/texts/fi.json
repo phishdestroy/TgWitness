@@ -158,5 +158,6 @@
   "meta.records": "Päiväkirjamerkinnät",
   "meta.period": "Tallennusajanjakso",
   "procedure.criminal": "Rikosoikeudenkäynnit",
-  "procedure.civil": "Siviilioikeudenkäynnit"
+  "procedure.civil": "Siviilioikeudenkäynnit",
+  "advice.translation": "Suositus: tuomioistuimelle toimitettaessa liitä englanninkielinen alkuperäiskappale mukaan sekä virallisesti vahvistettu tai valan vannonut käännös tuomioistuimen kielelle. Valan vannonut kääntäjä tuntee paikallisen terminologian ja tuomioistuimen asiakirjoja koskevat muodolliset vaatimukset. Tämän raportin muut kuin englanninkieliset versiot ovat koneellisia käännöksiä, jotka on tarkoitettu vain suuntaa-antaviksi."
 }

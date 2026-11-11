@@ -158,5 +158,6 @@
   "meta.records": "Registrazioni del registro",
   "meta.period": "Periodo di registrazione",
   "procedure.criminal": "Procedimenti penali",
-  "procedure.civil": "Procedimenti civili"
+  "procedure.civil": "Procedimenti civili",
+  "advice.translation": "Raccomandazione: in sede giudiziaria, si prega di depositare l’originale in inglese insieme a una traduzione certificata o giurata nella lingua del tribunale. Un traduttore giurato conosce la terminologia locale e i requisiti formali previsti per i documenti giudiziari. Le versioni della presente perizia in lingue diverse dall’inglese sono traduzioni automatiche fornite a titolo orientativo."
 }

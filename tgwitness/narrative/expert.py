@@ -144,7 +144,8 @@ def meta(protocol, text):
 def sections(protocol, text):
     t, out = text, []
     local = protocol['jurisdiction']
-    notes = [t('expert.draft'), t('expert.jurisdiction.research') if local else t('expert.jurisdiction.none')]
+    notes = [t('expert.draft'), t('expert.jurisdiction.research') if local else t('expert.jurisdiction.none'),
+             t('advice.translation')]
     out.append(('title', t('expert.title'), {'kind': t('procedure.' + protocol['procedure']), 'badge': t('expert.badge'),
                                              'meta': meta(protocol, text), 'notes': notes}))
     native = bool(local) and text.lang == local.get('local_language')
