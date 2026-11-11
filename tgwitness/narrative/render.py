@@ -38,12 +38,13 @@ def jurisdiction(code, procedure='criminal'):
             if value:
                 rows.append((value['term'], value.get('basis', value.get('qes_name', '')), value['source']))
         return {'name': old['scope'], 'procedure': None, 'checked': old['checked_at'] + ' · ' + old['review'], 'rows': rows}
-    appointment = route(record, procedure).get('appointment') or {}
+    part = route(record, procedure)
+    appointed = next((part[key] for key in ('appointment',) if part.get(key)), {})
     esignature, timestamp = record.get('esignature') or {}, record.get('timestamp') or {}
     rows = []
     if (record.get('expert_term') or {}).get('local'):
-        rows.append((record['expert_term']['local'], appointment.get('basis') or record['expert_term'].get('en', ''),
-                     appointment.get('source')))
+        rows.append((record['expert_term']['local'], appointed.get('basis') or record['expert_term'].get('en', ''),
+                     appointed.get('source')))
     if esignature.get('law_local'):
         rows.append((esignature.get('qualified_term_local') or esignature['law_local'], esignature['law_local'],
                      esignature.get('source')))
