@@ -8574,5 +8574,8 @@
   "… and {n} more messages in journal-changes.jsonl.": "… e mais {n} mensagens no arquivo journal-changes.jsonl.",
   "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Este instantâneo contém apenas o que o Telegram retornou na exportação. As exclusões e versões anteriores observadas neste chat estão no arquivo `journal-changes.jsonl`, com cada registro assinado; a exportação do diário de evidências contém a cadeia de hash completa.",
   "rechecking absent message numbers": "verificação dos números de mensagens ausentes",
-  "packaging and signing the archive": "compilação e assinatura do arquivo"
+  "packaging and signing the archive": "compilação e assinatura do arquivo",
+  "Download the account loss report": "Faça o download do relatório de perda de conta",
+  "Signed account loss report downloaded. Check it with verify.py.": "Relatório de perda de conta assinado baixado. Verifique-o com o verify.py.",
+  "Another client lost its authorization": "Outro cliente perdeu sua autorização"
 }

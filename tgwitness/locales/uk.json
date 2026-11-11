@@ -8652,5 +8652,8 @@
   "… and {n} more messages in journal-changes.jsonl.": "… та ще {n} повідомлень у файлі journal-changes.jsonl.",
   "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Цей знімок містить лише те, що Telegram повернув під час експорту. Видалені повідомлення та попередні версії, зафіксовані в цьому чаті, містяться у файлі `journal-changes.jsonl`, кожен запис якого підписано; експорт журналу доказів містить повний ланцюжок хеш-кодів.",
   "rechecking absent message numbers": "повторна перевірка номерів відсутніх повідомлень",
-  "packaging and signing the archive": "пакування та підписання архіву"
+  "packaging and signing the archive": "пакування та підписання архіву",
+  "Download the account loss report": "Завантажити звіт про втрату облікового запису",
+  "Signed account loss report downloaded. Check it with verify.py.": "Завантажено підписаний звіт про втрату облікового запису. Перевірте його за допомогою verify.py.",
+  "Another client lost its authorization": "Ще один клієнт втратив авторизацію"
 }

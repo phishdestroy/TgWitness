@@ -313,6 +313,7 @@ const labels = {
   "session.exclusive_postponed": [tr("Only-session attempt postponed"), "clock", "system"],
   "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
+  "account.authorization_error": [tr("Another client lost its authorization"), "alert", "system"],
   "account.restriction_expired": [tr("Account restriction ended"), "refresh", "system"],
   "account.read_only": [tr("Read-only for Telegram actions changed"), "lock", "system"],
   "connection.opened": [tr("Connected to Telegram"), "link", "system"],
@@ -1149,7 +1150,7 @@ function collectorLines(name,p){
 let healthUI=null;
 const healthReady=import("./components/health.js?v=layout1").then(({createHealthBar})=>{
   healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,
-    actionContext:{getState:()=>state,getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,toast,getSources:()=>sourcesReady,navigate},
+    actionContext:{getState:()=>state,getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,toast,getSources:()=>sourcesReady,navigate,saveBlob},
     diagnose:openDiagnostics,canDiagnose:name=>viewAllowed(healthDiagnostics[name]?.view),workspace:$("workspace")});
   if(state.status)renderCollectorHealth(state.status.health);
   return healthUI;

@@ -8730,5 +8730,8 @@
   "… and {n} more messages in journal-changes.jsonl.": "… و{n} رسالة أخرى في ملف journal-changes.jsonl.",
   "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "تحتوي هذه اللقطة فقط على ما أعاده Telegram عند التصدير. توجد عمليات الحذف والإصدارات السابقة التي لوحظت في هذه المحادثة في ملف journal-changes.jsonl، وكل سجل موقّع؛ ويحتوي تصدير سجل الأدلة على سلسلة التجزئة الكاملة.",
   "rechecking absent message numbers": "إعادة التحقق من أرقام الرسائل المفقودة",
-  "packaging and signing the archive": "تعبئة الأرشيف وتوقيعه"
+  "packaging and signing the archive": "تعبئة الأرشيف وتوقيعه",
+  "Download the account loss report": "تنزيل تقرير فقدان الحساب",
+  "Signed account loss report downloaded. Check it with verify.py.": "تم تنزيل تقرير فقدان الحساب الموقع. تحقق منه باستخدام verify.py.",
+  "Another client lost its authorization": "فقد عميل آخر صلاحية الدخول"
 }

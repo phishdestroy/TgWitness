@@ -8535,5 +8535,8 @@
   "… and {n} more messages in journal-changes.jsonl.": "……以及{n}条更多消息，详见journal-changes.jsonl文件。",
   "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "此快照仅包含Telegram在导出时返回的内容。该聊天记录中观察到的删除内容及早期版本均记录在journal-changes.jsonl文件中，每条记录均经过签名；证据日志导出文件包含完整的哈希链。",
   "rechecking absent message numbers": "重新核对缺失的消息编号",
-  "packaging and signing the archive": "对归档文件进行打包和签名"
+  "packaging and signing the archive": "对归档文件进行打包和签名",
+  "Download the account loss report": "下载账户丢失报告",
+  "Signed account loss report downloaded. Check it with verify.py.": "已下载经签名的账户丢失报告。请使用 verify.py 进行验证。",
+  "Another client lost its authorization": "又一名用户失去了授权"
 }

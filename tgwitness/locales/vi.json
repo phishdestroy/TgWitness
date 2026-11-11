@@ -8535,5 +8535,8 @@
   "… and {n} more messages in journal-changes.jsonl.": "… và {n} tin nhắn khác trong tệp journal-changes.jsonl.",
   "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Bản chụp nhanh này chỉ chứa những gì Telegram trả về tại thời điểm xuất. Các nội dung đã bị xóa và các phiên bản trước đó được ghi nhận trong cuộc trò chuyện này nằm trong tệp `journal-changes.jsonl`, mỗi bản ghi đều được ký; tệp xuất nhật ký bằng chứng chứa chuỗi băm hoàn chỉnh.",
   "rechecking absent message numbers": "kiểm tra lại số tin nhắn bị thiếu",
-  "packaging and signing the archive": "đóng gói và ký tệp lưu trữ"
+  "packaging and signing the archive": "đóng gói và ký tệp lưu trữ",
+  "Download the account loss report": "Tải xuống báo cáo mất tài khoản",
+  "Signed account loss report downloaded. Check it with verify.py.": "Đã tải xuống báo cáo mất tài khoản đã ký. Kiểm tra báo cáo này bằng verify.py.",
+  "Another client lost its authorization": "Một khách hàng khác đã mất quyền truy cập"
 }

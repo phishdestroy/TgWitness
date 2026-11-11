@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 70519c5dc7f6f99d00d6bdca8c5217ab94238c8765845d0e7055dd3dd58f3cc0
+# TgWitness verifier sources SHA-256: 100af18e2c75dffd37630b5e8ba9a1a3928917612f1d1fa98e1da0c8b2e548ab
 """Standalone verifier"""
 import argparse
 import base64
@@ -4246,6 +4246,46 @@ class AccountExportCheck:
 
 
 
+LOSS_PREFIXES = ("connection.", "network.", "account.", "session.", "coverage.gap", "process.", "telegram.", "clock.",
+                 "collector.")
+LOSS_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id", "actor_id", "payload",
+               "previous_hash")
+
+
+def verify_account_loss(data, expected_fingerprint=None):
+    statement = data["statement"]
+    public = statement["public_key"]
+    fp = fingerprint(public)
+    if expected_fingerprint and fp != expected_fingerprint:
+        raise ValueError("Public key differs from the independently trusted fingerprint")
+    key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True))
+    records = statement.get("records")
+    if not isinstance(records, list) or not isinstance(statement.get("loss"), dict):
+        raise ValueError("Malformed account loss report")
+    previous = 0
+    for event in records:
+        if not isinstance(event, dict) or set(event) != set(LOSS_FIELDS) | {"hash", "signature"}:
+            raise ValueError("Unexpected record in the account loss report")
+        if type(event["seq"]) is not int or event["seq"] <= previous:
+            raise ValueError("Account loss report records are not in journal order")
+        if not isinstance(event["kind"], str) or not event["kind"].startswith(LOSS_PREFIXES):
+            raise ValueError("Account loss report holds a record of another kind")
+        calculated = hashlib.sha256(canonical({k: event[k] for k in LOSS_FIELDS})).hexdigest()
+        if event["hash"] != calculated:
+            raise ValueError("Changed journal record " + str(event["seq"]) + " in the account loss report")
+        if not isinstance(event["signature"], str):
+            raise ValueError("Unsigned journal record " + str(event["seq"]) + " in the account loss report")
+        key.verify(base64.b64decode(event["signature"], validate=True), bytes.fromhex(calculated))
+        previous = event["seq"]
+    loss = statement["loss"]
+    return {"format": statement["format"], "fingerprint": fp, "key_pinned": bool(expected_fingerprint),
+            "records": len(records), "truncated": bool(statement.get("truncated")), "window": statement.get("window"),
+            "generated_at": statement.get("generated_at"), "account": statement.get("account"),
+            "loss": {key: loss.get(key) for key in ("cause", "at", "telegram_error", "dc_id")},
+            "route": (loss.get("route") or {}).get("kind") if isinstance(loss.get("route"), dict) else None,
+            "journal_head": statement.get("journal_head"), "meaning": statement.get("meaning")}
+
+
 def verify_account_export(path, expected_fingerprint=None, max_gib=None):
     with open_archive(path, max_gib=max_gib) as archive, tempfile.TemporaryDirectory() as temporary:
         checked = AccountExportCheck(archive, expected_fingerprint)
@@ -8047,11 +8087,18 @@ def verification_json(args):
     if "statement" in data and "signature" in data:
         authenticate_statement(data, "public_key" if "public_key" in data["statement"] else "witness_public_key")
         known = {"tgwitness-board-selection-v1", "tgwitness-case-board-v1", "tgwitness-case-board-disclosure-v1",
-                 "tgwitness-case-board-handover-v1"}
+                 "tgwitness-case-board-handover-v1", "tgwitness-account-loss-v1"}
         if kind not in known and not any(is_format(kind, name) for name in (
                 "public-proof-v1", "history-report-v1", "dossier-v1")):
             raise VerifierTooOld("Unsupported signed JSON format")
-    if kind == "tgwitness-board-selection-v1":
+    if kind == "tgwitness-account-loss-v1":
+        shown, result = "account_loss", verify_account_loss(data, args.fingerprint)
+        pinned = bool(args.fingerprint)
+        notes.append("Account loss report: " + str(result["records"]) + " signed journal record(s) from "
+                     + str((result["window"] or {}).get("from")) + "; Telegram ended the session at "
+                     + str(result["loss"]["at"]) + " (" + str(result["loss"]["cause"]) + ")."
+                     + (" The report reached its record limit." if result["truncated"] else ""))
+    elif kind == "tgwitness-board-selection-v1":
         shown, result = "selection", verify_selection(args.bundle, args.fingerprint, args.evidence)
         pinned = bool(args.fingerprint)
         notes.append("Signed Case Board selection; exact records matched against the signed journal archive.")
