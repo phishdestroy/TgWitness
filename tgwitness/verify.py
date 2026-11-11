@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: b110bed278ebcee8cc634316f75bea408872e267c908b6cf6e307767187a7e92
+# TgWitness verifier sources SHA-256: dc5a0c0fe6c207e5942e40f5299566fec27db0c6af6896a507e4e10589241c8b
 """Standalone verifier"""
 import argparse
 import base64
@@ -203,6 +203,8 @@ def strict_json(data):
 
 def read_manifest(archive):
     manifest = strict_json(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+    if not isinstance(manifest, dict) or not isinstance(manifest.get("public_key"), str):
+        raise ValueError("manifest.json is not a signed bundle manifest")
     Ed25519PublicKey.from_public_bytes(base64.b64decode(manifest["public_key"], validate=True)).verify(
         base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
     return manifest

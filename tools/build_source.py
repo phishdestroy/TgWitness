@@ -29,6 +29,7 @@ FILES = [
     "deploy/installer/release-signing.pub",
     "deploy/installer/index.html", "deploy/installer/style.css", "deploy/installer/site.js", "deploy/installer/wrangler.toml",
     "deploy/media-worker/Dockerfile", "deploy/media-worker/worker.py",
+    ".clusterfuzzlite/project.yaml", ".clusterfuzzlite/Dockerfile", ".clusterfuzzlite/build.sh",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
     "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "deploy/constraints-mcp.txt",
     "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
@@ -89,6 +90,7 @@ DIRECTORIES = {
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
     "scripts": {".md", ".cmd", ".sh"},
+    "fuzz": {".py", ".md"},
     ".github": {".md", ".yml", ".yaml"},
     "website": {".md", ".html", ".css", ".js", ".py", ".json"},
 }
