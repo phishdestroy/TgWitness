@@ -1182,8 +1182,6 @@ class Collector:
         return saved_route(self.vault.read("network"))
 
     async def refresh_drand(self):
-        # Checkpoints carry the latest drand round as a lower time bound; fetch it through the outside route
-        # so Hide IP, proxies and a turned-off outside route apply.
         from .verify import DRAND_CHAIN
         from .witness import drand_latest
         with suppress(Exception):
@@ -1681,7 +1679,7 @@ class Collector:
             client = self.make_client(api_id, api_hash)
             await self.connect_client(client)
             self.store.append("network.probe", {**self.route_receipt(), "connected": True,
-                              "meaning": "Telegram transport connected; capture completeness is not tested"})
+                              "meaning": "Telegram transport connected through this route"})
             return {"connected": True, "route": self.route_status()}
         except Exception as exc:
             self.store.append("network.probe", {**self.route_receipt(), "connected": False,
