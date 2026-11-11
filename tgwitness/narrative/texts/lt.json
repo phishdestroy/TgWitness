@@ -159,7 +159,7 @@
   "meta.checked": "Patikrintos teisinės nuorodos",
   "meta.package": "Įrodymų rinkinys, SHA-256",
   "meta.records": "Žurnalo įrašai",
-  "meta.period": "Užregistruotas laikotarpis",
+  "meta.period": "Įrašų laikotarpis",
   "procedure.criminal": "Baudžiamasis procesas",
-  "procedure.civil": "Civilinis procesas"
+  "procedure.civil": "Civilinė byla"
 }

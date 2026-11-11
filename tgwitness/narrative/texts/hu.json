@@ -153,13 +153,13 @@
   "expert.open": "A katalógus által hivatalos szöveg alapján nem igazolható pontok, angol nyelven; használat előtt ellenőrizze őket:",
   "expert.badge": "Tervezet",
   "meta.jurisdiction": "Joghatóság",
-  "meta.procedure": "Eljárás típusa",
-  "meta.court_language": "A bírósági nyelv",
+  "meta.procedure": "Az eljárás típusa",
+  "meta.court_language": "A bíróság nyelve",
   "meta.language": "A dokumentum nyelve",
   "meta.checked": "Ellenőrzött jogi hivatkozások",
   "meta.package": "Bizonyítékcsomag, SHA-256",
   "meta.records": "Naplóbejegyzések",
   "meta.period": "Rögzített időszak",
-  "procedure.criminal": "Büntetőeljárás",
-  "procedure.civil": "Polgári eljárás"
+  "procedure.criminal": "Büntetőeljárások",
+  "procedure.civil": "Polgári eljárások"
 }

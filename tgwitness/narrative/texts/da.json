@@ -153,13 +153,13 @@
   "expert.open": "Punkter, som kataloget ikke har kunnet bekræfte ud fra en officiel tekst på engelsk; tjek dem inden brug:",
   "expert.badge": "Udkast",
   "meta.jurisdiction": "Jurisdiktion",
-  "meta.procedure": "Sagstype",
-  "meta.court_language": "Retssprog",
-  "meta.language": "Dette dokuments sprog",
-  "meta.checked": "Juridiske referencer kontrolleret",
+  "meta.procedure": "Type af retssag",
+  "meta.court_language": "Retsprog",
+  "meta.language": "Sproget i dette dokument",
+  "meta.checked": "Kontrollerede juridiske henvisninger",
   "meta.package": "Bevismateriale, SHA-256",
   "meta.records": "Journalposter",
-  "meta.period": "Registreret periode",
+  "meta.period": "Registreringsperiode",
   "procedure.criminal": "Straffesager",
   "procedure.civil": "Civilretlige sager"
 }

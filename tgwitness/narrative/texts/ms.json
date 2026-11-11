@@ -156,10 +156,10 @@
   "meta.procedure": "Jenis prosiding",
   "meta.court_language": "Bahasa mahkamah",
   "meta.language": "Bahasa dokumen ini",
-  "meta.checked": "Rujukan undang-undang disemak",
-  "meta.package": "Pakej bukti, SHA-256",
+  "meta.checked": "Rujukan undang-undang yang diperiksa",
+  "meta.package": "Bungkusan bukti, SHA-256",
   "meta.records": "Rekod jurnal",
-  "meta.period": "Tempoh yang direkodkan",
-  "procedure.criminal": "Prosiding jenayah",
-  "procedure.civil": "Prosiding sivil"
+  "meta.period": "Tempoh rakaman",
+  "procedure.criminal": "Proses jenayah",
+  "procedure.civil": "Prosedur Sivil"
 }

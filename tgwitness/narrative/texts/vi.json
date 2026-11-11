@@ -151,15 +151,15 @@
   "expert.q.lawful.reason": "Đây là một vấn đề pháp lý dành cho tòa án.",
   "expert.pdf.script": "Đoạn văn này sử dụng một tập lệnh mà không có phông chữ PDF được cài đặt; phiên bản HTML sẽ hiển thị nội dung này.",
   "expert.open": "Các điểm mà danh mục không thể xác nhận từ văn bản chính thức bằng tiếng Anh; xin vui lòng kiểm tra trước khi sử dụng:",
-  "expert.badge": "Bản dự thảo",
+  "expert.badge": "Bản nháp",
   "meta.jurisdiction": "Thẩm quyền",
-  "meta.procedure": "Loại tố tụng",
+  "meta.procedure": "Loại thủ tục",
   "meta.court_language": "Ngôn ngữ của tòa án",
   "meta.language": "Ngôn ngữ của tài liệu này",
   "meta.checked": "Các tham chiếu pháp lý đã được kiểm tra",
   "meta.package": "Gói chứng cứ, SHA-256",
-  "meta.records": "Bản ghi sổ nhật ký",
-  "meta.period": "Thời gian ghi nhận",
-  "procedure.criminal": "Tố tụng hình sự",
-  "procedure.civil": "Tố tụng dân sự"
+  "meta.records": "Bản ghi nhật ký",
+  "meta.period": "Thời gian ghi chép",
+  "procedure.criminal": "Thủ tục hình sự",
+  "procedure.civil": "Thủ tục dân sự"
 }

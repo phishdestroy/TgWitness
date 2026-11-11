@@ -152,14 +152,14 @@
   "expert.pdf.script": "En este fragmento se utiliza un script sin una fuente PDF instalada; la versión HTML lo muestra.",
   "expert.open": "Puntos que el catálogo no ha podido confirmar a partir de un texto oficial en inglés; compruébelos antes de su uso:",
   "expert.badge": "Borrador",
-  "meta.jurisdiction": "Jurisdicción",
+  "meta.jurisdiction": "Competencia",
   "meta.procedure": "Tipo de procedimiento",
   "meta.court_language": "Idioma del tribunal",
   "meta.language": "Idioma de este documento",
-  "meta.checked": "Referencias jurídicas verificadas",
-  "meta.package": "Conjunto de pruebas, SHA-256",
+  "meta.checked": "Referencias jurídicas comprobadas",
+  "meta.package": "Paquete de pruebas, SHA-256",
   "meta.records": "Registros del diario",
   "meta.period": "Período registrado",
-  "procedure.criminal": "Proceso penal",
-  "procedure.civil": "Proceso civil"
+  "procedure.criminal": "Procedimientos penales",
+  "procedure.civil": "Procedimientos civiles"
 }

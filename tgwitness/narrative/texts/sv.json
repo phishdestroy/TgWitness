@@ -154,12 +154,12 @@
   "expert.badge": "Utkast",
   "meta.jurisdiction": "Jurisdiktion",
   "meta.procedure": "Typ av förfarande",
-  "meta.court_language": "Domstolsspråk",
-  "meta.language": "Språk i detta dokument",
-  "meta.checked": "Juridiska referenser kontrollerade",
-  "meta.package": "Bevismaterial, SHA-256",
+  "meta.court_language": "Domstolens språk",
+  "meta.language": "Språket i detta dokument",
+  "meta.checked": "Kontrollerade rättsliga hänvisningar",
+  "meta.package": "Bevispaket, SHA-256",
   "meta.records": "Journalposter",
-  "meta.period": "Registrerad tidsperiod",
+  "meta.period": "Registrerad period",
   "procedure.criminal": "Straffrättsliga förfaranden",
   "procedure.civil": "Civilrättsliga förfaranden"
 }

@@ -154,12 +154,12 @@
   "expert.badge": "Bozza",
   "meta.jurisdiction": "Giurisdizione",
   "meta.procedure": "Tipo di procedimento",
-  "meta.court_language": "Lingua processuale",
+  "meta.court_language": "Lingua del tribunale",
   "meta.language": "Lingua del presente documento",
   "meta.checked": "Riferimenti giuridici verificati",
-  "meta.package": "Pacchetto probatorio, SHA-256",
-  "meta.records": "Voci di registro",
-  "meta.period": "Periodo registrato",
-  "procedure.criminal": "Procedimento penale",
-  "procedure.civil": "Procedimento civile"
+  "meta.package": "Pacchetto di prove, SHA-256",
+  "meta.records": "Registrazioni del registro",
+  "meta.period": "Periodo di registrazione",
+  "procedure.criminal": "Procedimenti penali",
+  "procedure.civil": "Procedimenti civili"
 }

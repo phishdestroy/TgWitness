@@ -153,13 +153,13 @@
   "expert.open": "จุดที่แคตตาล็อกไม่สามารถยืนยันได้จากข้อความอย่างเป็นทางการในภาษาอังกฤษ; โปรดตรวจสอบก่อนใช้งาน:",
   "expert.badge": "ฉบับร่าง",
   "meta.jurisdiction": "เขตอำนาจศาล",
-  "meta.procedure": "ประเภทคดี",
+  "meta.procedure": "ประเภทการพิจารณาคดี",
   "meta.court_language": "ภาษาของศาล",
   "meta.language": "ภาษาของเอกสารนี้",
-  "meta.checked": "อ้างอิงทางกฎหมายได้รับการตรวจสอบแล้ว",
+  "meta.checked": "การตรวจสอบอ้างอิงทางกฎหมาย",
   "meta.package": "ชุดหลักฐาน, SHA-256",
   "meta.records": "บันทึกในสมุดบันทึก",
   "meta.period": "ช่วงเวลาที่บันทึก",
-  "procedure.criminal": "กระบวนการทางอาญา",
-  "procedure.civil": "การดำเนินคดีทางแพ่ง"
+  "procedure.criminal": "การพิจารณาคดีอาญา",
+  "procedure.civil": "การพิจารณาคดีแพ่ง"
 }

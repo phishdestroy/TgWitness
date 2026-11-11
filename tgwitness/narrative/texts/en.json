@@ -153,7 +153,7 @@
   "expert.open": "Points the catalog could not confirm from an official text, in English; check them before use:",
   "expert.badge": "Draft",
   "meta.jurisdiction": "Jurisdiction",
-  "meta.procedure": "Procedure",
+  "meta.procedure": "Type of proceedings",
   "meta.court_language": "Court language",
   "meta.language": "Language of this document",
   "meta.checked": "Legal references checked",

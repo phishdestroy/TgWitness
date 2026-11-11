@@ -152,14 +152,14 @@
   "expert.pdf.script": "Selles lõigus kasutatakse skripti, mille jaoks pole PDF-font paigaldatud; HTML-versioonis on see näha.",
   "expert.open": "Punktid, mida kataloog ei suutnud ametlikust tekstist kinnitada, on esitatud inglise keeles; kontrollige neid enne kasutamist:",
   "expert.badge": "Eelnõu",
-  "meta.jurisdiction": "Jurisdiktsioon",
+  "meta.jurisdiction": "Kohtualluvus",
   "meta.procedure": "Menetluse liik",
-  "meta.court_language": "Kohtukeel",
+  "meta.court_language": "Kohtu keel",
   "meta.language": "Käesoleva dokumendi keel",
-  "meta.checked": "Õiguslikud viited on kontrollitud",
+  "meta.checked": "Kontrollitud õiguslikud viited",
   "meta.package": "Tõendite kogum, SHA-256",
   "meta.records": "Päevikukanded",
-  "meta.period": "Registreeritud ajavahemik",
+  "meta.period": "Registreerimisperiood",
   "procedure.criminal": "Kriminaalmenetlus",
-  "procedure.civil": "Tsiviilkohtumenetlus"
+  "procedure.civil": "Tsiviilmenetlus"
 }
