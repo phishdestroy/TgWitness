@@ -1385,7 +1385,8 @@ class Collector:
                 {k: v for k, v in observer.items() if v not in (None, "", [])}, errors)
 
     async def recheck_absent(self, entity, absent):
-        asked, returned, started = list(islice(absent, RECHECK_LIMIT)), [], utcnow()
+        step = max(1, -(-len(absent) // RECHECK_LIMIT))
+        asked, returned, started = list(islice(absent.sample(step), RECHECK_LIMIT)), [], utcnow()
         for low in range(0, len(asked), 100):
             batch = asked[low:low + 100]
             for attempt in range(3):
@@ -1400,7 +1401,9 @@ class Collector:
                          and type(m).__name__ != "MessageEmpty"]
         return {"asked_at": started, "asked": len(asked), "absent_total": len(absent),
                 "empty": len(asked) - len(returned), "returned": sorted(m.id for m in returned),
-                "limit_reached": len(absent) > len(asked), "method": "channels.getMessages by number",
+                "limit_reached": len(absent) > len(asked),
+                "sampling": "every number" if step == 1 else "every " + str(step) + "th absent number",
+                "method": "channels.getMessages by number",
                 "meaning": "An empty answer means Telegram has no message under that number for this account: it "
                            "was deleted, or was never visible to it. Telegram reports only the absence."}, returned
 
@@ -4344,7 +4347,8 @@ class Collector:
             finally:
                 slots.release()
         try:
-            while (self.running or owner and self.export_claim == owner) and not stopped.is_set():
+            while (not self.authorization_required and (self.running or owner and self.export_claim == owner)
+                   and not stopped.is_set()):
                 for task in [task for task in active if task.done()]:
                     active.discard(task)
                     task.result()
@@ -4425,6 +4429,9 @@ class Collector:
         client = self.client
         attempt = MediaAttempt(self.store, job)
         try:
+            if self.authorization_required:
+                attempt.finish(MediaOutcome("retry", {"reason": "Telegram authorization expired; durable job retained"}))
+                return True
             original = self.store.events(before=job["message_event"] + 1, limit=1)[0]
             if client_for_job is not None:
                 client = client_for_job(original)
