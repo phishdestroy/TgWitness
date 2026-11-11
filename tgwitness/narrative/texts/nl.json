@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Handtekeningen en hashwaarden beschrijven de vastgelegde gegevens, niet de waarheidsgetrouwheid van de inhoud ervan.",
   "expert.q.lawful.reason": "Dit is een juridische vraag voor de rechtbank.",
   "expert.pdf.script": "In deze passage wordt een script gebruikt waarvoor geen PDF-lettertype is geïnstalleerd; de HTML-versie geeft dit weer.",
-  "expert.open": "Punten die de catalogus niet kon bevestigen aan de hand van een officiële tekst in het Engels; controleer deze alvorens ze te gebruiken:"
+  "expert.open": "Punten die de catalogus niet kon bevestigen aan de hand van een officiële tekst in het Engels; controleer deze alvorens ze te gebruiken:",
+  "expert.badge": "Concept",
+  "meta.jurisdiction": "Rechtsgebied",
+  "meta.procedure": "Soort procedure",
+  "meta.court_language": "Rechtbanktaal",
+  "meta.language": "Taal van dit document",
+  "meta.checked": "Juridische verwijzingen gecontroleerd",
+  "meta.package": "Bewijsmateriaalpakket, SHA-256",
+  "meta.records": "Dagboekvermeldingen",
+  "meta.period": "Geregistreerde periode",
+  "procedure.criminal": "Strafprocedure",
+  "procedure.civil": "Civiele procedure"
 }

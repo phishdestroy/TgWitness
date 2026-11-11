@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Le firme e gli hash descrivono i dati registrati, non la veridicità del loro contenuto.",
   "expert.q.lawful.reason": "Si tratta di una questione giuridica di competenza del tribunale.",
   "expert.pdf.script": "Questo passaggio utilizza uno script senza un font PDF installato; la versione HTML lo mostra.",
-  "expert.open": "Punti che il catalogo non ha potuto confermare sulla base di un testo ufficiale in lingua inglese; si prega di verificarli prima dell’uso:"
+  "expert.open": "Punti che il catalogo non ha potuto confermare sulla base di un testo ufficiale in lingua inglese; si prega di verificarli prima dell’uso:",
+  "expert.badge": "Bozza",
+  "meta.jurisdiction": "Giurisdizione",
+  "meta.procedure": "Tipo di procedimento",
+  "meta.court_language": "Lingua processuale",
+  "meta.language": "Lingua del presente documento",
+  "meta.checked": "Riferimenti giuridici verificati",
+  "meta.package": "Pacchetto probatorio, SHA-256",
+  "meta.records": "Voci di registro",
+  "meta.period": "Periodo registrato",
+  "procedure.criminal": "Procedimento penale",
+  "procedure.civil": "Procedimento civile"
 }

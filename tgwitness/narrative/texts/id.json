@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Tanda tangan dan hash menggambarkan data yang tercatat, bukan kebenaran isinya.",
   "expert.q.lawful.reason": "Ini adalah pertanyaan hukum yang diajukan ke pengadilan.",
   "expert.pdf.script": "Bagian ini menggunakan skrip tanpa font PDF yang terinstal; versi HTML menampilkannya.",
-  "expert.open": "Hal-hal yang tidak dapat dikonfirmasi oleh katalog dari teks resmi dalam bahasa Inggris; periksa sebelum digunakan:"
+  "expert.open": "Hal-hal yang tidak dapat dikonfirmasi oleh katalog dari teks resmi dalam bahasa Inggris; periksa sebelum digunakan:",
+  "expert.badge": "Draf",
+  "meta.jurisdiction": "Yurisdiksi",
+  "meta.procedure": "Jenis perkara",
+  "meta.court_language": "Bahasa pengadilan",
+  "meta.language": "Bahasa dokumen ini",
+  "meta.checked": "Referensi hukum telah diperiksa",
+  "meta.package": "Paket bukti, SHA-256",
+  "meta.records": "Catatan jurnal",
+  "meta.period": "Periode yang dicatat",
+  "procedure.criminal": "Proses pidana",
+  "procedure.civil": "Proses perdata"
 }

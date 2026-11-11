@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Paraksti un hash-vērtības raksturo reģistrētos datus, nevis to satura patiesumu.",
   "expert.q.lawful.reason": "Šis ir juridisks jautājums, kas jāizskata tiesā.",
   "expert.pdf.script": "Šajā fragmentā izmantots skripts bez instalēta PDF fontu; HTML versijā tas ir redzams.",
-  "expert.open": "Punkti, kurus katalogs nevarēja apstiprināt, balstoties uz oficiālo tekstu angļu valodā; pārbaudiet tos pirms lietošanas:"
+  "expert.open": "Punkti, kurus katalogs nevarēja apstiprināt, balstoties uz oficiālo tekstu angļu valodā; pārbaudiet tos pirms lietošanas:",
+  "expert.badge": "Projekts",
+  "meta.jurisdiction": "Jurisdikcija",
+  "meta.procedure": "Procesa veids",
+  "meta.court_language": "Tiesas valoda",
+  "meta.language": "Šī dokumenta valoda",
+  "meta.checked": "Pārbaudītas juridiskās atsauces",
+  "meta.package": "Pierādījumu kopums, SHA-256",
+  "meta.records": "Žurnāla ieraksti",
+  "meta.period": "Reģistrētais periods",
+  "procedure.criminal": "Kriminālprocess",
+  "procedure.civil": "Civilprocess"
 }

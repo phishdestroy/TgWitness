@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Signaturen und Hashwerte beschreiben die aufgezeichneten Daten, nicht die Richtigkeit ihres Inhalts.",
   "expert.q.lawful.reason": "Dies ist eine rechtliche Frage an das Gericht.",
   "expert.pdf.script": "In diesem Abschnitt wird ein Skript ohne installierte PDF-Schriftart verwendet; die HTML-Version zeigt dies an.",
-  "expert.open": "Punkte, die der Katalog anhand eines offiziellen Textes in englischer Sprache nicht bestätigen konnte; bitte überprüfen Sie diese vor der Verwendung:"
+  "expert.open": "Punkte, die der Katalog anhand eines offiziellen Textes in englischer Sprache nicht bestätigen konnte; bitte überprüfen Sie diese vor der Verwendung:",
+  "expert.badge": "Entwurf",
+  "meta.jurisdiction": "Rechtsordnung",
+  "meta.procedure": "Verfahrensart",
+  "meta.court_language": "Gerichtssprache",
+  "meta.language": "Sprache dieses Dokuments",
+  "meta.checked": "Rechtliche Verweise geprüft",
+  "meta.package": "Beweismittelpaket, SHA-256",
+  "meta.records": "Journal-Einträge",
+  "meta.period": "Erfassungszeitraum",
+  "procedure.criminal": "Strafverfahren",
+  "procedure.civil": "Zivilverfahren"
 }

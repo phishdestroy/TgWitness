@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Imzolar va xeshlar yozib olingan ma'lumotlarni tasvirlaydi, uning mazmunining rostligini emas.",
   "expert.q.lawful.reason": "Bu sud uchun huquqiy savol.",
   "expert.pdf.script": "Ushbu matn o'rnatilmagan PDF shriftisiz skriptdan foydalanadi; HTML-versiyada u ko'rinadi.",
-  "expert.open": "Katalog rasmiy matndan tasdiqlay olmagan punktlarni ingliz tilida ko'rsatadi; ulardan foydalanishdan oldin tekshiring:"
+  "expert.open": "Katalog rasmiy matndan tasdiqlay olmagan punktlarni ingliz tilida ko'rsatadi; ulardan foydalanishdan oldin tekshiring:",
+  "expert.badge": "Loyiha",
+  "meta.jurisdiction": "Yurisdiktsiya",
+  "meta.procedure": "Ish yuritish turi",
+  "meta.court_language": "Sud tili",
+  "meta.language": "Ushbu hujjat tili",
+  "meta.checked": "Huquqiy manbalar tekshirildi",
+  "meta.package": "Dalillar paketi, SHA-256",
+  "meta.records": "Jurnal yozuvlari",
+  "meta.period": "Qayd etilgan davr",
+  "procedure.criminal": "Jinoyat ishlari",
+  "procedure.civil": "Fuqarolik ishlari"
 }

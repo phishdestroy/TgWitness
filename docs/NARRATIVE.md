@@ -59,6 +59,8 @@ Counts describe event kinds. New messages, edits, deletion notices and absence o
 
 The HTML timeline has keyboard-focusable and hoverable event references. Every SVG has a title and description. The PDF uses selectable text and the same drawing geometry; it does not depend on a browser or an SVG conversion service. Japanese PDF generation uses the project's existing CJK font discovery; a suitable installed font is required. No new package dependency was added.
 
+HTML and PDF show the assurance checks as a status table with a text label for each state; the ladder drawing is written only as `diagrams/ladder.svg`. Notes that apply to every scene appear once, at the start of the chronology. Scene times read `YYYY-MM-DD HH:MM:SS.mmm UTC`, and consecutive record references are shortened to ranges such as `collector #2–9`; the appendix still lists every record with its SHA-256.
+
 ## Expert examination protocol
 
 `--expert` adds a draft of the expert's report to the narrative. The examiner runs it on their own computer, with their own copy of the package and their own installation: the verifier checks the package first, and the protocol records only what this run established. A protocol written by the collector would be the collecting side describing its own material; the examiner's run is the one that counts.
@@ -80,6 +82,8 @@ The run writes `expert-protocol.html`, `expert-protocol.pdf` and `expert-protoco
 | Annex A | Questions for the order appointing the examination: the questions the package answers, each with the check that answers it, and the questions it cannot answer, each with the reason |
 | Annex B | The SHA-256 of `narrative-run.json` for this run |
 
+The header shows the jurisdiction, the procedure, the court languages by name, the language of the document, the date the legal references were checked and the package SHA-256. A declaration that the catalog marks for civil proceedings is left out of a criminal protocol.
+
 The HTML and JSON files contain no generation time. The same TgWitness version, package and inputs produce byte-identical HTML and JSON, so a second expert can repeat the examination and compare files. The PDF carries its creation date in its metadata.
 
 ### Examination catalog
@@ -88,7 +92,7 @@ The HTML and JSON files contain no generation time. The same TgWitness version, 
 
 The catalog covers 53 jurisdictions: AE, AT, AU, BD, BE, BG, BR, CA, CH, CN, CZ, DE, DK, EE, ES, ET, FI, FR, GR, HK, HU, ID, IE, IL, IN, IR, IT, JP, KR, LT, LV, MX, MY, NL, NO, PH, PK, PL, PT, RO, RU, SA, SE, SG, SK, TH, TR, TW, UA, UK, US-federal, UZ, VN. `UK` is England and Wales; `US-federal` covers the federal courts. Where official portals could not be read, the entries for AE, BG, GR, IT, SG, TH and VN consist mostly of open questions, and the protocol prints those questions for the expert to check.
 
-`--jurisdiction` accepts the codes of both catalogs. The terminology section of the narrative appears for the 14 terminology catalogs listed below; the expert protocol uses the examination catalog. Without `--jurisdiction`, the protocol leaves the legal basis, warning and local standards for the expert to add.
+`--jurisdiction` accepts the codes of both catalogs. The narrative's terms section and the expert protocol both use the examination catalog entry for the selected `--procedure`. For the 14 jurisdictions listed below, the narrative adds the GDPR access reference from the older terminology catalog. Without `--jurisdiction`, the protocol leaves the legal basis, warning and local standards for the expert to add.
 
 ## Templates and jurisdictions
 
@@ -96,9 +100,9 @@ There are 39 complete phrase catalogs and matching glossaries. Supported languag
 
 The checker compares keys and placeholders, renders plural cases, checks phrase lengths and applies any supplied forbidden-word lists. Every language, including English and German, is visibly marked **machine-assisted, not reviewed**. Passing mechanical tests is not legal or native-language review.
 
-Jurisdiction catalogs contain terminology and official source references checked on 2026-11-06. They cover DE, AT, CH, UK, IE, FR, ES, IT, PL, CZ, UA, NL, BE and US-federal. `UK` is explicitly scoped to **England and Wales civil proceedings**; it does not represent Scotland or Northern Ireland. CH currently supplies electronic-signature terminology, not a complete Swiss procedure guide. Missing local terms remain null. A regional data-protection authority is not guessed. GDPR access periods are not encoded as a universal 30-day deadline; [EDPB guidance](https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf) distinguishes the applicable one-month rule. An OTS proof is not automatically classified as a qualified timestamp under eIDAS.
+The older terminology catalogs contain terminology and official source references checked on 2026-11-06. They cover DE, AT, CH, UK, IE, FR, ES, IT, PL, CZ, UA, NL, BE and US-federal. `UK` is explicitly scoped to **England and Wales civil proceedings**; it does not represent Scotland or Northern Ireland. CH currently supplies electronic-signature terminology, not a complete Swiss procedure guide. Missing local terms remain null. A regional data-protection authority is not guessed. GDPR access periods are not encoded as a universal 30-day deadline; [EDPB guidance](https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf) distinguishes the applicable one-month rule. An OTS proof is not automatically classified as a qualified timestamp under eIDAS.
 
-Changing jurisdiction affects only the jurisdiction section and its source references. Changing language does not change the machine scene model. The section is a reference table, not a legal opinion or a procedural checklist.
+Changing jurisdiction or procedure affects only the report header and the jurisdiction section with its source references. Changing language does not change the machine scene model. The section is a reference table, not a legal opinion or a procedural checklist.
 
 ## Release requirements still outstanding
 

@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Signaturer og hashværdier beskriver de registrerede data, ikke sandheden i deres indhold.",
   "expert.q.lawful.reason": "Dette er et juridisk spørgsmål, der skal afgøres af retten.",
   "expert.pdf.script": "Dette afsnit bruger et script uden en installeret PDF-skrifttype; HTML-versionen viser det.",
-  "expert.open": "Punkter, som kataloget ikke har kunnet bekræfte ud fra en officiel tekst på engelsk; tjek dem inden brug:"
+  "expert.open": "Punkter, som kataloget ikke har kunnet bekræfte ud fra en officiel tekst på engelsk; tjek dem inden brug:",
+  "expert.badge": "Udkast",
+  "meta.jurisdiction": "Jurisdiktion",
+  "meta.procedure": "Sagstype",
+  "meta.court_language": "Retssprog",
+  "meta.language": "Dette dokuments sprog",
+  "meta.checked": "Juridiske referencer kontrolleret",
+  "meta.package": "Bevismateriale, SHA-256",
+  "meta.records": "Journalposter",
+  "meta.period": "Registreret periode",
+  "procedure.criminal": "Straffesager",
+  "procedure.civil": "Civilretlige sager"
 }

@@ -18,7 +18,7 @@
   "limit.gap": "The journal records an interruption; its cause and the events during it come from other records.",
   "limit.unknown": "This event type has no dedicated narrative interpretation; its original record remains the source.",
   "limit.truth": "Messages are recorded as Telegram delivered them to this account.",
-  "limit.review": "Machine-assisted translation; not reviewed by a lawyer or a native-language legal reviewer.",
+  "limit.review": "Machine-assisted text; not reviewed by a lawyer or a native-language legal reviewer.",
   "assurance.state": "Verification step {tier}: {status}.",
   "jurisdiction.notice": "Terminology and source references for the selected jurisdiction.",
   "timeline.title": "Timeline of recorded observations and gaps",
@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Signatures and hashes describe the recorded data, not the truth of its content.",
   "expert.q.lawful.reason": "This is a legal question for the court.",
   "expert.pdf.script": "This passage uses a script without an installed PDF font; the HTML version shows it.",
-  "expert.open": "Points the catalog could not confirm from an official text, in English; check them before use:"
+  "expert.open": "Points the catalog could not confirm from an official text, in English; check them before use:",
+  "expert.badge": "Draft",
+  "meta.jurisdiction": "Jurisdiction",
+  "meta.procedure": "Procedure",
+  "meta.court_language": "Court language",
+  "meta.language": "Language of this document",
+  "meta.checked": "Legal references checked",
+  "meta.package": "Evidence package, SHA-256",
+  "meta.records": "Journal records",
+  "meta.period": "Recorded period",
+  "procedure.criminal": "Criminal proceedings",
+  "procedure.civil": "Civil proceedings"
 }

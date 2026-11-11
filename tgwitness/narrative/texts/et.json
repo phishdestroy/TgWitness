@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Allkirjad ja räsid kirjeldavad salvestatud andmeid, mitte nende sisu õigsust.",
   "expert.q.lawful.reason": "Tegemist on kohtule esitatava õigusliku küsimusega.",
   "expert.pdf.script": "Selles lõigus kasutatakse skripti, mille jaoks pole PDF-font paigaldatud; HTML-versioonis on see näha.",
-  "expert.open": "Punktid, mida kataloog ei suutnud ametlikust tekstist kinnitada, on esitatud inglise keeles; kontrollige neid enne kasutamist:"
+  "expert.open": "Punktid, mida kataloog ei suutnud ametlikust tekstist kinnitada, on esitatud inglise keeles; kontrollige neid enne kasutamist:",
+  "expert.badge": "Eelnõu",
+  "meta.jurisdiction": "Jurisdiktsioon",
+  "meta.procedure": "Menetluse liik",
+  "meta.court_language": "Kohtukeel",
+  "meta.language": "Käesoleva dokumendi keel",
+  "meta.checked": "Õiguslikud viited on kontrollitud",
+  "meta.package": "Tõendite kogum, SHA-256",
+  "meta.records": "Päevikukanded",
+  "meta.period": "Registreeritud ajavahemik",
+  "procedure.criminal": "Kriminaalmenetlus",
+  "procedure.civil": "Tsiviilkohtumenetlus"
 }

@@ -150,5 +150,16 @@
   "expert.q.true.reason": "As assinaturas e os hash descrevem os dados registados, não a veracidade do seu conteúdo.",
   "expert.q.lawful.reason": "Trata-se de uma questão jurídica a submeter ao tribunal.",
   "expert.pdf.script": "Esta passagem utiliza um script sem uma fonte PDF instalada; a versão HTML apresenta-o.",
-  "expert.open": "Pontos que o catálogo não conseguiu confirmar a partir de um texto oficial, em inglês; verifique-os antes de utilizar:"
+  "expert.open": "Pontos que o catálogo não conseguiu confirmar a partir de um texto oficial, em inglês; verifique-os antes de utilizar:",
+  "expert.badge": "Rascunho",
+  "meta.jurisdiction": "Jurisdição",
+  "meta.procedure": "Tipo de processo",
+  "meta.court_language": "Língua do tribunal",
+  "meta.language": "Língua deste documento",
+  "meta.checked": "Referências jurídicas verificadas",
+  "meta.package": "Conjunto de provas, SHA-256",
+  "meta.records": "Registos do diário",
+  "meta.period": "Período registado",
+  "procedure.criminal": "Processo penal",
+  "procedure.civil": "Processo civil"
 }

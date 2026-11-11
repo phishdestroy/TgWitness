@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Signaturer og hashverdier beskriver de registrerte dataene, ikke innholdets sannhet.",
   "expert.q.lawful.reason": "Dette er et rettslig spørsmål for retten.",
   "expert.pdf.script": "Denne teksten bruker et skript uten en installert PDF-font; HTML-versjonen viser dette.",
-  "expert.open": "Punkter som katalogen ikke har kunnet bekrefte ut fra en offisiell tekst på engelsk; sjekk disse før bruk:"
+  "expert.open": "Punkter som katalogen ikke har kunnet bekrefte ut fra en offisiell tekst på engelsk; sjekk disse før bruk:",
+  "expert.badge": "Utkast",
+  "meta.jurisdiction": "Jurisdiksjon",
+  "meta.procedure": "Sakstype",
+  "meta.court_language": "Rettsspråk",
+  "meta.language": "Språk i dette dokumentet",
+  "meta.checked": "Juridiske referanser kontrollert",
+  "meta.package": "Bevispakke, SHA-256",
+  "meta.records": "Journaloppføringer",
+  "meta.period": "Registrert periode",
+  "procedure.criminal": "Straffesaker",
+  "procedure.civil": "Sivile rettssaker"
 }

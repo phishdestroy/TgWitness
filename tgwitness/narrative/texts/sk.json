@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Podpisy a hashové hodnoty opisujú zaznamenané údaje, nie pravdivosť ich obsahu.",
   "expert.q.lawful.reason": "Ide o právnu otázku pre súd.",
   "expert.pdf.script": "V tomto úryvku sa používa skript bez nainštalovaného PDF fontu; v HTML verzii je to viditeľné.",
-  "expert.open": "Body, ktoré katalóg nedokázal potvrdiť z oficiálneho textu v angličtine; skontrolujte ich pred použitím:"
+  "expert.open": "Body, ktoré katalóg nedokázal potvrdiť z oficiálneho textu v angličtine; skontrolujte ich pred použitím:",
+  "expert.badge": "Návrh",
+  "meta.jurisdiction": "Jurisdikcia",
+  "meta.procedure": "Druh konania",
+  "meta.court_language": "Jazyk konania",
+  "meta.language": "Jazyk tohto dokumentu",
+  "meta.checked": "Overené právne odkazy",
+  "meta.package": "Súbor dôkazov, SHA-256",
+  "meta.records": "Záznamy v denníku",
+  "meta.period": "Zaznamenané obdobie",
+  "procedure.criminal": "Trestné konanie",
+  "procedure.civil": "Občianske konanie"
 }

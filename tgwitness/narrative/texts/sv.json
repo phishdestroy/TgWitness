@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Signaturer och hashvärden beskriver de registrerade uppgifterna, inte sanningshalten i innehållet.",
   "expert.q.lawful.reason": "Detta är en rättslig fråga för domstolen.",
   "expert.pdf.script": "I detta avsnitt används ett skript utan ett installerat PDF-teckensnitt; HTML-versionen visar detta.",
-  "expert.open": "Punkter som katalogen inte kunde bekräfta utifrån en officiell text, på engelska; kontrollera dem före användning:"
+  "expert.open": "Punkter som katalogen inte kunde bekräfta utifrån en officiell text, på engelska; kontrollera dem före användning:",
+  "expert.badge": "Utkast",
+  "meta.jurisdiction": "Jurisdiktion",
+  "meta.procedure": "Typ av förfarande",
+  "meta.court_language": "Domstolsspråk",
+  "meta.language": "Språk i detta dokument",
+  "meta.checked": "Juridiska referenser kontrollerade",
+  "meta.package": "Bevismaterial, SHA-256",
+  "meta.records": "Journalposter",
+  "meta.period": "Registrerad tidsperiod",
+  "procedure.criminal": "Straffrättsliga förfaranden",
+  "procedure.civil": "Civilrättsliga förfaranden"
 }

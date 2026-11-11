@@ -150,5 +150,16 @@
   "expert.q.true.reason": "簽名與雜湊值僅用於描述所記錄的資料，而非其內容的真實性。",
   "expert.q.lawful.reason": "此為提交給法院的法律問題。",
   "expert.pdf.script": "此段落使用的腳本未安裝 PDF 字型；HTML 版本會顯示此情況。",
-  "expert.open": "目錄無法從英文官方文本中確認的項目；使用前請先核對："
+  "expert.open": "目錄無法從英文官方文本中確認的項目；使用前請先核對：",
+  "expert.badge": "草稿",
+  "meta.jurisdiction": "管轄權",
+  "meta.procedure": "訴訟類型",
+  "meta.court_language": "法院語言",
+  "meta.language": "本文件的語言",
+  "meta.checked": "已核對法律參考資料",
+  "meta.package": "證據包，SHA-256",
+  "meta.records": "日誌記錄",
+  "meta.period": "記錄期間",
+  "procedure.criminal": "刑事訴訟",
+  "procedure.civil": "民事訴訟"
 }

@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Podpisy i skróty opisują zarejestrowane dane, a nie prawdziwość ich treści.",
   "expert.q.lawful.reason": "Jest to kwestia prawna, którą rozstrzyga sąd.",
   "expert.pdf.script": "W tym fragmencie wykorzystano skrypt bez zainstalowanej czcionki PDF; wersja HTML to pokazuje.",
-  "expert.open": "Punkty, których katalog nie mógł potwierdzić na podstawie oficjalnego tekstu w języku angielskim; proszę je sprawdzić przed użyciem:"
+  "expert.open": "Punkty, których katalog nie mógł potwierdzić na podstawie oficjalnego tekstu w języku angielskim; proszę je sprawdzić przed użyciem:",
+  "expert.badge": "Projekt",
+  "meta.jurisdiction": "Jurysdykcja",
+  "meta.procedure": "Rodzaj postępowania",
+  "meta.court_language": "Język postępowania sądowego",
+  "meta.language": "Język niniejszego dokumentu",
+  "meta.checked": "Odniesienia prawne sprawdzono",
+  "meta.package": "Pakiet dowodów, SHA-256",
+  "meta.records": "Wpisy dziennika",
+  "meta.period": "Okres zapisów",
+  "procedure.criminal": "Postępowanie karne",
+  "procedure.civil": "Postępowanie cywilne"
 }

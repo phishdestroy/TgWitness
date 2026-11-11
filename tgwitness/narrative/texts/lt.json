@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Parašai ir šifravimo kodai apibūdina užregistruotus duomenis, o ne jų turinio teisingumą.",
   "expert.q.lawful.reason": "Tai yra teisinis klausimas, skirtas teismui.",
   "expert.pdf.script": "Šiame fragmente naudojamas skriptas, kuriam nėra įdiegtas PDF šriftas; HTML versijoje jis rodomas.",
-  "expert.open": "Punktai, kurių katalogas negalėjo patvirtinti remdamasis oficialiu tekstu anglų kalba; prieš naudojimą juos patikrinkite:"
+  "expert.open": "Punktai, kurių katalogas negalėjo patvirtinti remdamasis oficialiu tekstu anglų kalba; prieš naudojimą juos patikrinkite:",
+  "expert.badge": "Projektas",
+  "meta.jurisdiction": "Jurisdikcija",
+  "meta.procedure": "Proceso rūšis",
+  "meta.court_language": "Teismo kalba",
+  "meta.language": "Šio dokumento kalba",
+  "meta.checked": "Patikrintos teisinės nuorodos",
+  "meta.package": "Įrodymų rinkinys, SHA-256",
+  "meta.records": "Žurnalo įrašai",
+  "meta.period": "Užregistruotas laikotarpis",
+  "procedure.criminal": "Baudžiamasis procesas",
+  "procedure.civil": "Civilinis procesas"
 }

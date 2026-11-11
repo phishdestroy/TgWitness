@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Tandatangan dan hash menerangkan data yang direkodkan, bukan kebenaran kandungannya.",
   "expert.q.lawful.reason": "Ini adalah persoalan undang-undang untuk mahkamah.",
   "expert.pdf.script": "Petikan ini menggunakan skrip tanpa fon PDF yang dipasang; versi HTML memaparkannya.",
-  "expert.open": "Perkara yang katalog tidak dapat disahkan daripada teks rasmi, dalam bahasa Inggeris; semak sebelum digunakan:"
+  "expert.open": "Perkara yang katalog tidak dapat disahkan daripada teks rasmi, dalam bahasa Inggeris; semak sebelum digunakan:",
+  "expert.badge": "Draf",
+  "meta.jurisdiction": "Jurisdiksi",
+  "meta.procedure": "Jenis prosiding",
+  "meta.court_language": "Bahasa mahkamah",
+  "meta.language": "Bahasa dokumen ini",
+  "meta.checked": "Rujukan undang-undang disemak",
+  "meta.package": "Pakej bukti, SHA-256",
+  "meta.records": "Rekod jurnal",
+  "meta.period": "Tempoh yang direkodkan",
+  "procedure.criminal": "Prosiding jenayah",
+  "procedure.civil": "Prosiding sivil"
 }

@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Les signatures et les hachages décrivent les données enregistrées, et non la véracité de leur contenu.",
   "expert.q.lawful.reason": "Il s'agit d'une question juridique destinée au tribunal.",
   "expert.pdf.script": "Ce passage utilise un script sans police PDF installée ; la version HTML le montre.",
-  "expert.open": "Points que le catalogue n’a pas pu confirmer à partir d’un texte officiel, en anglais ; veuillez les vérifier avant utilisation :"
+  "expert.open": "Points que le catalogue n’a pas pu confirmer à partir d’un texte officiel, en anglais ; veuillez les vérifier avant utilisation :",
+  "expert.badge": "Projet",
+  "meta.jurisdiction": "Juridiction",
+  "meta.procedure": "Type de procédure",
+  "meta.court_language": "Langue de la procédure",
+  "meta.language": "Langue du présent document",
+  "meta.checked": "Références juridiques vérifiées",
+  "meta.package": "Ensemble de preuves, SHA-256",
+  "meta.records": "Enregistrements du journal",
+  "meta.period": "Période couverte",
+  "procedure.criminal": "Procédure pénale",
+  "procedure.civil": "Procédure civile"
 }

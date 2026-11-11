@@ -784,6 +784,7 @@ CSS = (
     ".versions>li{padding:4px 0 8px 14px}.vhead{font-size:12.5px;color:var(--muted)}"
     ".versions .text{white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0}.gone-step .gone{color:var(--bad);margin:4px 0;font-size:13.5px}"
     "del{background:var(--badtint);color:var(--bad)}ins{background:var(--oktint);color:var(--ok)}"
+    "del+ins,ins+del{margin-inline-start:.25em}"
     "del,ins{-webkit-print-color-adjust:exact;print-color-adjust:exact}"
     ".kbd-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.key{display:inline-flex;flex-direction:column;gap:2px;"
     "border:1px solid var(--line);border-radius:3px;padding:4px 10px;background:var(--bg2)}.key code{font-size:11.5px;color:var(--muted)}"

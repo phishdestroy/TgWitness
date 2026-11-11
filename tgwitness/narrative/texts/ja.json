@@ -150,5 +150,16 @@
   "expert.q.true.reason": "署名およびハッシュ値は、記録されたデータを記述するものであり、その内容の真実性を保証するものではありません。",
   "expert.q.lawful.reason": "これは裁判所に対する法的質問です。",
   "expert.pdf.script": "この箇所では、PDFフォントがインストールされていないスクリプトが使用されています。HTML版ではそれが表示されます。",
-  "expert.open": "カタログが公式の英文テキストから確認できなかった点です。ご使用前にご確認ください："
+  "expert.open": "カタログが公式の英文テキストから確認できなかった点です。ご使用前にご確認ください：",
+  "expert.badge": "草案",
+  "meta.jurisdiction": "管轄",
+  "meta.procedure": "手続の種類",
+  "meta.court_language": "裁判所の言語",
+  "meta.language": "本文書の言語",
+  "meta.checked": "法令参照の確認",
+  "meta.package": "証拠パッケージ、SHA-256",
+  "meta.records": "ジャーナル記録",
+  "meta.period": "記録期間",
+  "procedure.criminal": "刑事手続",
+  "procedure.civil": "民事手続"
 }

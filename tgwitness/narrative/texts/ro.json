@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Semnăturile și valorile hash descriu datele înregistrate, nu veridicitatea conținutului acestora.",
   "expert.q.lawful.reason": "Aceasta este o chestiune juridică care ține de competența instanței.",
   "expert.pdf.script": "Acest fragment utilizează un script fără un font PDF instalat; versiunea HTML îl afișează.",
-  "expert.open": "Puncte pe care catalogul nu le-a putut confirma pe baza unui text oficial, în limba engleză; verificați-le înainte de utilizare:"
+  "expert.open": "Puncte pe care catalogul nu le-a putut confirma pe baza unui text oficial, în limba engleză; verificați-le înainte de utilizare:",
+  "expert.badge": "Proiect",
+  "meta.jurisdiction": "Jurisdicție",
+  "meta.procedure": "Tipul procedurii",
+  "meta.court_language": "Limba de procedură",
+  "meta.language": "Limba prezentului document",
+  "meta.checked": "Referințe juridice verificate",
+  "meta.package": "Pachet de probe, SHA-256",
+  "meta.records": "Înregistrări din jurnal",
+  "meta.period": "Perioada înregistrată",
+  "procedure.criminal": "Proceduri penale",
+  "procedure.civil": "Proceduri civile"
 }

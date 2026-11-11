@@ -150,5 +150,16 @@
   "expert.q.true.reason": "签名和哈希值仅描述所记录的数据，而非其内容的真实性。",
   "expert.q.lawful.reason": "这是一项提交给法院的法律问题。",
   "expert.pdf.script": "此段落使用了未安装PDF字体的脚本；HTML版本中可显示该内容。",
-  "expert.open": "目录无法从英文官方文本中确认的要点；使用前请核对："
+  "expert.open": "目录无法从英文官方文本中确认的要点；使用前请核对：",
+  "expert.badge": "草案",
+  "meta.jurisdiction": "管辖权",
+  "meta.procedure": "诉讼类型",
+  "meta.court_language": "法院语言",
+  "meta.language": "本文件的语言",
+  "meta.checked": "已核对法律引用",
+  "meta.package": "证据包，SHA-256",
+  "meta.records": "日志记录",
+  "meta.period": "记录期间",
+  "procedure.criminal": "刑事诉讼",
+  "procedure.civil": "民事诉讼"
 }

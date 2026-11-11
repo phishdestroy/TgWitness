@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Az aláírások és a hash-értékek a rögzített adatokat írják le, nem pedig azok tartalmának valódiságát.",
   "expert.q.lawful.reason": "Ez jogi kérdés, amelyet a bíróságnak kell eldöntenie.",
   "expert.pdf.script": "Ez a szakasz olyan szkriptet használ, amelyhez nincs telepítve a szükséges PDF-betűtípus; a HTML-verzióban ez látható.",
-  "expert.open": "A katalógus által hivatalos szöveg alapján nem igazolható pontok, angol nyelven; használat előtt ellenőrizze őket:"
+  "expert.open": "A katalógus által hivatalos szöveg alapján nem igazolható pontok, angol nyelven; használat előtt ellenőrizze őket:",
+  "expert.badge": "Tervezet",
+  "meta.jurisdiction": "Joghatóság",
+  "meta.procedure": "Eljárás típusa",
+  "meta.court_language": "A bírósági nyelv",
+  "meta.language": "A dokumentum nyelve",
+  "meta.checked": "Ellenőrzött jogi hivatkozások",
+  "meta.package": "Bizonyítékcsomag, SHA-256",
+  "meta.records": "Naplóbejegyzések",
+  "meta.period": "Rögzített időszak",
+  "procedure.criminal": "Büntetőeljárás",
+  "procedure.civil": "Polgári eljárás"
 }

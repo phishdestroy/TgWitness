@@ -150,5 +150,16 @@
   "expert.q.true.reason": "Podpisy a hashové hodnoty popisují zaznamenaná data, nikoli pravdivost jejich obsahu.",
   "expert.q.lawful.reason": "Jedná se o právní otázku pro soud.",
   "expert.pdf.script": "V této pasáži je použit skript bez nainstalovaného fontu pro PDF; HTML verze jej zobrazuje.",
-  "expert.open": "Body, které katalog nemohl ověřit z oficiálního textu v angličtině; před použitím je zkontrolujte:"
+  "expert.open": "Body, které katalog nemohl ověřit z oficiálního textu v angličtině; před použitím je zkontrolujte:",
+  "expert.badge": "Návrh",
+  "meta.jurisdiction": "Jurisdikce",
+  "meta.procedure": "Druh řízení",
+  "meta.court_language": "Jazyk řízení",
+  "meta.language": "Jazyk tohoto dokumentu",
+  "meta.checked": "Ověřené právní odkazy",
+  "meta.package": "Balíček důkazů, SHA-256",
+  "meta.records": "Údaje v deníku",
+  "meta.period": "Zaznamenané období",
+  "procedure.criminal": "Trestní řízení",
+  "procedure.civil": "Občanskoprávní řízení"
 }

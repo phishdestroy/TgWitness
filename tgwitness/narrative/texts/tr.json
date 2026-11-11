@@ -150,5 +150,16 @@
   "expert.q.true.reason": "İmzalar ve hash değerleri, kaydedilen verileri tanımlar; içeriğinin doğruluğunu değil.",
   "expert.q.lawful.reason": "Bu, mahkemeye yönelik hukuki bir sorudur.",
   "expert.pdf.script": "Bu bölümde, yüklü bir PDF yazı tipi bulunmayan bir komut dosyası kullanılmaktadır; HTML sürümünde bu durum gösterilmektedir.",
-  "expert.open": "Katalogun resmi bir metinden doğrulayamadığı noktalar, İngilizce olarak; kullanmadan önce bunları kontrol edin:"
+  "expert.open": "Katalogun resmi bir metinden doğrulayamadığı noktalar, İngilizce olarak; kullanmadan önce bunları kontrol edin:",
+  "expert.badge": "Taslak",
+  "meta.jurisdiction": "Yargı yetkisi",
+  "meta.procedure": "Yargılama türü",
+  "meta.court_language": "Mahkeme dili",
+  "meta.language": "Bu belgenin dili",
+  "meta.checked": "Hukuki referanslar kontrol edildi",
+  "meta.package": "Delil paketi, SHA-256",
+  "meta.records": "Günlük kayıtları",
+  "meta.period": "Kayıt dönemi",
+  "procedure.criminal": "Ceza davaları",
+  "procedure.civil": "Hukuk davaları"
 }
