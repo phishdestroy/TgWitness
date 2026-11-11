@@ -626,6 +626,10 @@ def verification_output(args, checked, console, mode):
         verification_print("Message IDs " + str(ids["first_id"]) + "-" + str(ids["last_id"]) + ": " + str(ids["present"])
               + " present, " + str(ids["missing"]) + " absent in " + str(ids["missing_ranges"])
               + " range(s); message-ids.json matches chat.json.")
+    changes = result.get("journal_changes")
+    if changes:
+        verification_print("Journal records of deletions and earlier versions: " + str(changes["records"]) + " for "
+                           + str(changes["messages"]) + " message(s); each hash and signature checked.")
     if result.get("sha256sums"):
         verification_print("SHA256SUMS matches the signed manifest.")
     for line in notes:

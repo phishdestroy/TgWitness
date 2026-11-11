@@ -774,7 +774,8 @@ class Run:
             scratch, ranges = await self.finish_selection(directory, Selection.model_validate(self.job["selection"]))
             meta = {"chat": {**self.job["chat"], "profile": profile, "profile_errors": problems},
                     "observer": observer, "admin_log": log, "recheck": self.recheck,
-                    "journal": chat_export.journal_changes(lead.store, self.job["chat_id"]),
+                    "journal": await complete_in_thread(chat_export.journal_changes, lead.store, self.job["chat_id"],
+                                                        directory),
                     "account": lead.store.get_setting("account", {}),
                     "client": lead.client_identity(), "route": lead.route_receipt(),
                     "message_count": self.state["counts"]["selected"], "parts": self.sign_parts(ranges),

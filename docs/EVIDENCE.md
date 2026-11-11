@@ -240,6 +240,13 @@ An empty answer records that the number is unavailable to this account at rechec
 it leaves the cause unspecified. A message returned on recheck is added to the export
 and marked `found_on_recheck`.
 
+When the observing workspace saw messages of the chat deleted, missing on recheck or edited, the
+chat export adds `journal-changes.jsonl`: those journal records, every saved version and the notice,
+each with the hash and Ed25519 signature it received in the journal. `verify.py` recomputes each
+record's hash, checks its signature against the export key and compares the count with the signed
+manifest; the evidence export holds the complete hash chain. The report lists these messages under
+**Deletions and earlier versions**.
+
 Every report opens with **In brief**: one paragraph, then what the material shows and what it does
 not (who is behind an account, completeness of delivery, deletions before observation, clock time
 without a timestamp). The page's own seal stamp turns amber when the browser has checked the seal's

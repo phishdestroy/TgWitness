@@ -3835,7 +3835,8 @@ class Collector:
                              "visibility": info.get("visibility"), "profile": profile,
                              **({"profile_errors": problems} if problems else {})},
                     "observer": observer, "recheck": recheck, "admin_log": log,
-                    "journal": chat_export.journal_changes(self.store, chat_id),
+                    "journal": await complete_in_thread(chat_export.journal_changes, self.store, chat_id,
+                                                        Path(scratch).parent),
                     "account": self.store.get_setting("account", None), "message_count": count,
                     "client": self.client_identity(), "route": self.route_receipt(),
                     "acquisition": {"started_at": record.get("started_at"), "finished_at": utcnow(),
@@ -3879,11 +3880,13 @@ class Collector:
                 out_path.unlink(missing_ok=True)
             if loss and (record.get("partial") or {}).get("retained"):
                 try:
+                    journal = await complete_in_thread(chat_export.journal_changes, self.store, chat_id,
+                                                       partial.directory)
                     await complete_in_thread(partial.bundle, out_path, {
                         "chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind"),
                                  "visibility": info.get("visibility"), "profile": profile,
                                  **({"profile_errors": problems} if problems else {})},
-                        "observer": observer, "journal": chat_export.journal_changes(self.store, chat_id),
+                        "observer": observer, "journal": journal,
                         "account": self.store.get_setting("account", None), "client": self.client_identity(),
                         "route": self.route_receipt(),
                         "acquisition": {"started_at": record.get("started_at"), "finished_at": utcnow(),
