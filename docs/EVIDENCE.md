@@ -235,7 +235,7 @@ did not return (deleted before the export, or not visible to the account); in pr
 basic groups numbers are shared by all of the account's chats and gaps are not counted.
 
 After reading the history, the export asks Telegram for every absent number again, by number
-(`channels.getMessages`, up to 10,000 numbers, spread evenly over all gaps when there are more). The result is in `message-ids.json` and the report.
+(`channels.getMessages`, up to 10,000 numbers including the 1,000 below the first message, spread evenly over all gaps when there are more). The result is in `message-ids.json` and the report.
 An empty answer records that the number is unavailable to this account at recheck time;
 it leaves the cause unspecified. A message returned on recheck is added to the export
 and marked `found_on_recheck`.

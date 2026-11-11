@@ -27,7 +27,7 @@ from .export_timing import ExportTiming
 from .distributed_takeout import HistoryTakeout
 from .distributed_pages import FORMAT as PAGE_FORMAT, RangePages
 from .message_selection import Selection, SelectionIndex, utc
-from .message_numbers import MissingNumbers
+from .message_numbers import RECHECK_EDGE, MissingNumbers
 from .monitoring import capture_settings
 from .scope import kind_of, public_username
 from .store import canonical, utcnow
@@ -40,7 +40,6 @@ OUTAGE_RETRIES = 4
 OUTAGE_PAUSE = 30
 POISON_ACCOUNTS = 2
 ACCOUNT_ERRORS = 3
-RECHECK_EDGE = 1000
 RECHECK_PER_ACCOUNT = 1000
 RECORD_BYTES = 1024
 WORKING_COPIES = 5
@@ -606,6 +605,8 @@ class Run:
                 self.state["counts"]["context"] >= options.max_context_messages)
             scratch = directory / "selected.jsonl"
             ranges, current = [], None
+            media_policy = {**capture_settings(self.app_for(self.job["lead"]).state.collector.store),
+                            "download_media": True}
             with scratch.open("w", encoding="utf-8") as output:
                 for record, profile in index.output():
                     if options.download_media and record.get("media_type"):
@@ -615,7 +616,8 @@ class Run:
                             "SELECT record FROM messages WHERE id=?", (record["id"],)).fetchone()[0])
                         stored.pop("found_on_recheck", None)
                         if message and message_details.stable(message_record(message)) == message_details.stable(stored):
-                            record.update(await collector.export_attachment(message, directory / "media"))
+                            record.update(await collector.export_attachment(message, directory / "media",
+                                                                            settings=media_policy))
                         else:
                             record["file_status"] = "message_changed_or_unavailable_at_media_read"
                     encoded = canonical(record) + b"\n"
