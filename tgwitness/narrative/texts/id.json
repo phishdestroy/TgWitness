@@ -153,13 +153,13 @@
   "expert.open": "Hal-hal yang tidak dapat dikonfirmasi oleh katalog dari teks resmi dalam bahasa Inggris; periksa sebelum digunakan:",
   "expert.badge": "Draf",
   "meta.jurisdiction": "Yurisdiksi",
-  "meta.procedure": "Jenis perkara",
+  "meta.procedure": "Jenis persidangan",
   "meta.court_language": "Bahasa pengadilan",
   "meta.language": "Bahasa dokumen ini",
-  "meta.checked": "Referensi hukum telah diperiksa",
+  "meta.checked": "Referensi hukum yang telah diverifikasi",
   "meta.package": "Paket bukti, SHA-256",
   "meta.records": "Catatan jurnal",
-  "meta.period": "Periode yang dicatat",
+  "meta.period": "Periode pencatatan",
   "procedure.criminal": "Proses pidana",
   "procedure.civil": "Proses perdata"
 }

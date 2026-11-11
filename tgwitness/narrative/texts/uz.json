@@ -153,13 +153,13 @@
   "expert.open": "Katalog rasmiy matndan tasdiqlay olmagan punktlarni ingliz tilida ko'rsatadi; ulardan foydalanishdan oldin tekshiring:",
   "expert.badge": "Loyiha",
   "meta.jurisdiction": "Yurisdiktsiya",
-  "meta.procedure": "Ish yuritish turi",
+  "meta.procedure": "Sud ish yuritish turi",
   "meta.court_language": "Sud tili",
   "meta.language": "Ushbu hujjat tili",
-  "meta.checked": "Huquqiy manbalar tekshirildi",
+  "meta.checked": "Tekshirilgan huquqiy manbalar",
   "meta.package": "Dalillar paketi, SHA-256",
   "meta.records": "Jurnal yozuvlari",
-  "meta.period": "Qayd etilgan davr",
+  "meta.period": "Yozib olingan davr",
   "procedure.criminal": "Jinoyat ishlari",
   "procedure.civil": "Fuqarolik ishlari"
 }

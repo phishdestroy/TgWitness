@@ -160,6 +160,6 @@
   "meta.package": "Conjunto de provas, SHA-256",
   "meta.records": "Registos do diário",
   "meta.period": "Período registado",
-  "procedure.criminal": "Processo penal",
-  "procedure.civil": "Processo civil"
+  "procedure.criminal": "Processos penais",
+  "procedure.civil": "Processos cíveis"
 }

@@ -152,14 +152,14 @@
   "expert.pdf.script": "Ce passage utilise un script sans police PDF installée ; la version HTML le montre.",
   "expert.open": "Points que le catalogue n’a pas pu confirmer à partir d’un texte officiel, en anglais ; veuillez les vérifier avant utilisation :",
   "expert.badge": "Projet",
-  "meta.jurisdiction": "Juridiction",
+  "meta.jurisdiction": "Compétence",
   "meta.procedure": "Type de procédure",
-  "meta.court_language": "Langue de la procédure",
+  "meta.court_language": "Langue de la juridiction",
   "meta.language": "Langue du présent document",
   "meta.checked": "Références juridiques vérifiées",
-  "meta.package": "Ensemble de preuves, SHA-256",
+  "meta.package": "Dossier de preuves, SHA-256",
   "meta.records": "Enregistrements du journal",
-  "meta.period": "Période couverte",
-  "procedure.criminal": "Procédure pénale",
-  "procedure.civil": "Procédure civile"
+  "meta.period": "Période d’enregistrement",
+  "procedure.criminal": "Procédures pénales",
+  "procedure.civil": "Procédures civiles"
 }

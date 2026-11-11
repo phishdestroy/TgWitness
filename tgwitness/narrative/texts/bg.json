@@ -155,11 +155,11 @@
   "meta.jurisdiction": "Юрисдикция",
   "meta.procedure": "Вид производство",
   "meta.court_language": "Език на съда",
-  "meta.language": "Език на настоящия документ",
+  "meta.language": "Език на този документ",
   "meta.checked": "Проверени правни препратки",
   "meta.package": "Пакет с доказателства, SHA-256",
-  "meta.records": "Регистрирани записи",
-  "meta.period": "Записан период",
-  "procedure.criminal": "Наказателно производство",
-  "procedure.civil": "Гражданско производство"
+  "meta.records": "Записи в дневника",
+  "meta.period": "Период на записване",
+  "procedure.criminal": "Наказателни производства",
+  "procedure.civil": "Граждански производства"
 }

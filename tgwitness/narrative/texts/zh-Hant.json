@@ -155,10 +155,10 @@
   "meta.jurisdiction": "管轄權",
   "meta.procedure": "訴訟類型",
   "meta.court_language": "法院語言",
-  "meta.language": "本文件的語言",
-  "meta.checked": "已核對法律參考資料",
+  "meta.language": "本文件之語言",
+  "meta.checked": "已核對的法律參考資料",
   "meta.package": "證據包，SHA-256",
-  "meta.records": "日誌記錄",
+  "meta.records": "法庭紀錄",
   "meta.period": "記錄期間",
   "procedure.criminal": "刑事訴訟",
   "procedure.civil": "民事訴訟"

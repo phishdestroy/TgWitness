@@ -156,7 +156,7 @@
   "meta.procedure": "Yargılama türü",
   "meta.court_language": "Mahkeme dili",
   "meta.language": "Bu belgenin dili",
-  "meta.checked": "Hukuki referanslar kontrol edildi",
+  "meta.checked": "Kontrol Edilen Yasal Referanslar",
   "meta.package": "Delil paketi, SHA-256",
   "meta.records": "Günlük kayıtları",
   "meta.period": "Kayıt dönemi",

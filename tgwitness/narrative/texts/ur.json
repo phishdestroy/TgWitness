@@ -152,14 +152,14 @@
   "expert.pdf.script": "یہ عبارت ایک اسکرپٹ استعمال کرتی ہے جس کے لیے انسٹال شدہ PDF فونٹ موجود نہیں ہے؛ HTML ورژن اسے دکھاتا ہے۔",
   "expert.open": "وہ نکات جنہیں کیٹلاگ نے سرکاری متن سے تصدیق نہیں کیا، انگریزی میں؛ استعمال سے پہلے انہیں چیک کریں:",
   "expert.badge": "مسودہ",
-  "meta.jurisdiction": "اختیارِ عدالت",
-  "meta.procedure": "کارروائی کی قسم",
+  "meta.jurisdiction": "عدالتی دائرہ اختیار",
+  "meta.procedure": "کاروائی کی قسم",
   "meta.court_language": "عدالتی زبان",
   "meta.language": "اس دستاویز کی زبان",
-  "meta.checked": "قانونی حوالہ جات کی تصدیق",
-  "meta.package": "شواہد کا پیکیج، SHA-256",
+  "meta.checked": "چیک کیے گئے قانونی حوالہ جات",
+  "meta.package": "ثبوت کا پیکیج، SHA-256",
   "meta.records": "جرنل ریکارڈز",
   "meta.period": "ریکارڈ شدہ مدت",
   "procedure.criminal": "فوجداری کارروائیاں",
-  "procedure.civil": "دیوانی کارروائیاں"
+  "procedure.civil": "دیوانی کاروائی"
 }

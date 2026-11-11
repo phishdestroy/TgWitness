@@ -153,13 +153,13 @@
   "expert.open": "Punkti, kurus katalogs nevarēja apstiprināt, balstoties uz oficiālo tekstu angļu valodā; pārbaudiet tos pirms lietošanas:",
   "expert.badge": "Projekts",
   "meta.jurisdiction": "Jurisdikcija",
-  "meta.procedure": "Procesa veids",
+  "meta.procedure": "Lietas veids",
   "meta.court_language": "Tiesas valoda",
   "meta.language": "Šī dokumenta valoda",
-  "meta.checked": "Pārbaudītas juridiskās atsauces",
+  "meta.checked": "Pārbaudītās juridiskās atsauces",
   "meta.package": "Pierādījumu kopums, SHA-256",
   "meta.records": "Žurnāla ieraksti",
   "meta.period": "Reģistrētais periods",
   "procedure.criminal": "Kriminālprocess",
-  "procedure.civil": "Civilprocess"
+  "procedure.civil": "Civillieta"
 }
