@@ -17,7 +17,8 @@ export function createSettingsHub(ctx) {
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null, methodShown=false;
   let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false;
   let groupScope=null, scopeDirty=false, history=null, historyLoading=null, undo=null, undoTimer=null;
-  let sheet=null, sheetFor=null, pressed=false, focusHint=null;
+  let sheet=null, sheetFor=null, pressed=false, focusHint=null, shownForm=null;
+  const formSection=id=>id==='evidence-form'?'protection':'notifications';
   const tools=[['sources','sources:green','Recording rules'],['parameters','settings:slate','Parameters'],['access','users:blue','Access'],
     ['integrations','link:violet','Integrations / MCP'],['system-log','table:slate','System log'],['sealed','braces:indigo','GitHub Actions']];
   const hints={continuous:'Keep recording new messages and their changes after setup.',
@@ -298,11 +299,11 @@ export function createSettingsHub(ctx) {
   }
   function sharedName(key){return key.startsWith('parameter:')?data.parameters.find(p=>p.key===key)?.label||key:sharedNames[key]||key;}
   async function openGroup(id){await groupView.load(id);groupScope=id;section=null;query='';render();}
-  function openSection(name){section=name;query='';scopeDirty=false;render();ctx.record?.();}
+  function openSection(name){section=name;query='';scopeDirty=false;shownForm=null;render();ctx.record?.();}
   async function closeSection(){
     if(!section)return;
     if(section==='chats'&&scopeDirty&&!await confirm(owner(),tr('Leave without saving the chat selection?')))return;
-    const who=owner(),from=section;draft={...data.wizard};editing=false;scopeDirty=false;section=null;render();ctx.record?.();
+    const who=owner(),from=section;draft={...data.wizard};editing=false;scopeDirty=false;section=null;shownForm=null;render();ctx.record?.();
     (root.querySelector('.hub-summary[data-section="'+from+'"]')||root.querySelector('.hub-summary[data-section]'))?.focus({preventScroll:true});
     const before=JSON.stringify(data);data=await request(who,'settings');
     if(!section){draft={...data.wizard};if(state.view==='settings'&&JSON.stringify(data)!==before)render();}
@@ -311,7 +312,7 @@ export function createSettingsHub(ctx) {
     if(!sheet){
       sheet=node('dialog','hub-sheet');sheet.setAttribute('aria-labelledby','hub-sheet-title');
       sheet.addEventListener('cancel',event=>{event.preventDefault();void run(closeSection);});
-      sheet.addEventListener('close',()=>{if(section&&!sheet.open&&state.view==='settings'){section=null;editing=false;scopeDirty=false;render();ctx.record?.();}});
+      sheet.addEventListener('close',()=>{if(section&&!sheet.open&&state.view==='settings'){section=null;shownForm=null;editing=false;scopeDirty=false;render();ctx.record?.();}});
       sheet.addEventListener('pointerdown',event=>{pressed=event.target===sheet;});
       sheet.addEventListener('click',event=>{if(pressed&&event.target===sheet)void run(closeSection);pressed=false;});
     }
@@ -421,45 +422,44 @@ export function createSettingsHub(ctx) {
     const heading=node('h2','',tr(summaries.find(s=>s[0]===section)?.[1]||'Settings'));heading.id='hub-sheet-title';heading.tabIndex=-1;
     bar.append(back,heading,close);
     const body=node('div','hub-sheet-body'),detail=node('section','hub-detail');body.append(detail);box.append(bar,body);
-    {
-      if(section==='appearance')preferencesForm(detail);
-      if(section==='appearance'||section==='level'){
-        if(section==='appearance')detail.append(node('h3','hub-subtitle',tr('Interface level')));
-        cards(detail,levels,prefs.level,async level=>{const before=prefs.level;await savePreferences({level});render();
-          showUndo(tr('Saved')+' · '+label(level),async()=>{await savePreferences({level:before});render();});});
-      }
-      if(section==='group'&&inheritance){
-        const keys=Object.keys(inheritance.keys).filter(k=>k!=='goal'&&!data.fields.some(f=>f.key===k));
-        detail.append(message(keys.length?'Settings the group shares besides those in the other sections:':'The group shares only settings shown in the other sections.'));
-        for(const key of keys){
-          const row=node('div','hub-field');row.dataset.setting=key;const heading=node('div');
-          heading.append(node('strong','',tr(sharedName(key))),inheritMark(key));row.append(heading);detail.append(row);
-        }
-        detail.append(button('Group settings',()=>openGroup(inheritance.group.id)));
-      }
-      if(section==='goal'){
-        const goalMark=inheritMark('goal');if(goalMark)detail.append(goalMark);
-        detail.append(message('A goal sets files, timestamps and notifications at once. You can undo it right after.'));
-        cards(detail,goals,data.goal,async goal=>{if(goal===data.goal)return;await applyGoal(goal,{quiet:true});render();});
-      }
-      if(section==='connection')connectionForm(detail,false);
-      if(section==='telegram'&&signedIn()&&window.TgWitnessDocumentation)detail.append(button('Profile',async()=>{await closeSection();await window.TgWitnessDocumentation.openAccount();}));
-      if(section==='telegram')move(ctx.authCard(),detail);
-      if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
-        const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});detail.append(button('Pseudo-secret',()=>navigate('secret-chats')));}
-      const fields=section==='connection'?[]:data.fields.filter(f=>f.section===section);
-      const above=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section)),hidden=above.length<fields.length?above:[];
-      for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
-      if(hidden.length){const more=node('details','hub-more-options');more.append(node('summary','',tr('Show {n} more settings',{n:hidden.length})));
-        for(const f of hidden)more.append(fieldRow(f));detail.append(more);}
-      if(section==='notifications'){
-        if(data.needs_notification_destination)detail.append(message('Notifications are enabled. Add a destination to receive them.','notice warning'));
-        const actions=node('div','hub-actions');actions.append(button('Notification destinations',()=>openForm('alerts-form')),button('Off-site copy',()=>openForm('replica-form')));detail.append(actions);
-      }
-      if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);}
-      if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
-      if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
+    if(section==='appearance')preferencesForm(detail);
+    if(section==='appearance'||section==='level'){
+      if(section==='appearance')detail.append(node('h3','hub-subtitle',tr('Interface level')));
+      cards(detail,levels,prefs.level,async level=>{const before=prefs.level;await savePreferences({level});render();
+        showUndo(tr('Saved')+' · '+label(level),async()=>{await savePreferences({level:before});render();});});
     }
+    if(section==='group'&&inheritance){
+      const keys=Object.keys(inheritance.keys).filter(k=>k!=='goal'&&!data.fields.some(f=>f.key===k));
+      detail.append(message(keys.length?'Settings the group shares besides those in the other sections:':'The group shares only settings shown in the other sections.'));
+      for(const key of keys){
+        const row=node('div','hub-field');row.dataset.setting=key;const heading=node('div');
+        heading.append(node('strong','',tr(sharedName(key))),inheritMark(key));row.append(heading);detail.append(row);
+      }
+      detail.append(button('Group settings',()=>openGroup(inheritance.group.id)));
+    }
+    if(section==='goal'){
+      const goalMark=inheritMark('goal');if(goalMark)detail.append(goalMark);
+      detail.append(message('A goal sets files, timestamps and notifications at once. You can undo it right after.'));
+      cards(detail,goals,data.goal,async goal=>{if(goal===data.goal)return;await applyGoal(goal,{quiet:true});render();});
+    }
+    if(section==='connection')connectionForm(detail,false);
+    if(section==='telegram'&&signedIn()&&window.TgWitnessDocumentation)detail.append(button('Profile',async()=>{await closeSection();await window.TgWitnessDocumentation.openAccount();}));
+    if(section==='telegram')move(ctx.authCard(),detail);
+    if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
+      const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});detail.append(button('Pseudo-secret',()=>navigate('secret-chats')));}
+    const fields=section==='connection'?[]:data.fields.filter(f=>f.section===section);
+    const above=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section)),hidden=above.length<fields.length?above:[];
+    for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
+    if(hidden.length){const more=node('details','hub-more-options');more.append(node('summary','',tr('Show {n} more settings',{n:hidden.length})));
+      for(const f of hidden)more.append(fieldRow(f));detail.append(more);}
+    if(section==='notifications'){
+      if(data.needs_notification_destination)detail.append(message('Notifications are enabled. Add a destination to receive them.','notice warning'));
+      const actions=node('div','hub-actions');actions.append(button('Notification destinations',()=>openForm('alerts-form')),button('Off-site copy',()=>openForm('replica-form')));detail.append(actions);
+    }
+    if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);}
+    if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
+    if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
+    if(shownForm&&formSection(shownForm)===section)move($(shownForm),detail);
     if(!box.open)box.showModal();
     if(!same)heading.focus({preventScroll:true});
     body.scrollTop=top;
@@ -484,9 +484,9 @@ export function createSettingsHub(ctx) {
   }
   async function openForm(id, focus){
     const who=owner();
-    section=id==='evidence-form'?'protection':'notifications';query='';render();
-    const detail=sheet.querySelector('.hub-detail');
-    const form=$(id);move(form,detail);await ctx.loadSettingsForm(id);
+    section=formSection(id);shownForm=id;query='';render();
+    const detail=sheet.querySelector('.hub-detail'),form=$(id);
+    await ctx.loadSettingsForm(id);
     requireOwner(who);
     const control=focus?$(focus):form;
     for(let p=control.parentElement;p&&p!==detail;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;
@@ -814,14 +814,14 @@ export function createSettingsHub(ctx) {
     async openGroup(id){if(!data)data=await request(owner(),'settings');await openGroup(id);},
     get step(){return draft&&!live?draft.step:null;},
     get section(){return state.view==='settings'&&!groupScope?section:null;},
-    leave(){section=null;closeSheet();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
+    leave(){section=null;shownForm=null;closeSheet();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
     status(){
       updateNext();if(data)updateIndicator(data.connection);
       const session=signedIn();
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;
     },
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);section=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue=draftQueue=Promise.resolve();},
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue=draftQueue=Promise.resolve();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }
