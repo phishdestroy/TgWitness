@@ -6990,7 +6990,7 @@
   "Earlier configuration": "Konfigurasi sebelumnya",
   "Earlier records are available. Load older records to see more history.": "Catatan sebelumnya tersedia. Muat catatan yang lebih lama untuk melihat riwayat lebih lanjut.",
   "Ed25519 key signs the journal": "Kunci Ed25519 menandatangani jurnal",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · penandatanganan terenkripsi.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · berkas terenkripsi signing.enc",
   "Editorial review": "Tinjauan editorial",
   "Emoji": "Emoji",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "Aktifkan Object Lock di bucket terlebih dahulu. Mode kepatuhan tidak dapat dipersingkat oleh pemilik bucket; tata kelola dapat dilewati oleh administrator yang berwenang. Pilih 30 hari atau periode yang Anda butuhkan di bawah ini. Aturan penagihan penyimpanan terpisah dari perlindungan ini.",

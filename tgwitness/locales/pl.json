@@ -7107,7 +7107,7 @@
   "Earlier configuration": "Wcześniejsza konfiguracja",
   "Earlier records are available. Load older records to see more history.": "Dostępne są wcześniejsze zapisy. Załaduj starsze zapisy, aby zobaczyć więcej historii.",
   "Ed25519 key signs the journal": "Dziennik jest podpisany kluczem Ed25519",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · szyfrowane podpisywanie.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · zaszyfrowany plik signing.enc",
   "Editorial review": "Recenzja redakcyjna",
   "Emoji": "Emoji",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "Najpierw włącz opcję Object Lock w zasobniku. Tryb zgodności nie może zostać skrócony przez właściciela zasobnika; zasady zarządzania mogą zostać pominięte przez upoważnionego administratora. Wybierz poniżej 30 dni lub wymagany okres. Zasady rozliczania przestrzeni dyskowej są niezależne od tej ochrony.",
