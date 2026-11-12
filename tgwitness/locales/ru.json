@@ -8831,7 +8831,7 @@
   "Runs attributed with high confidence": "Запросы, признанные достоверными с высокой степенью уверенности",
   "Runs with high confidence": "Работает с высокой степенью надёжности",
   "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Сохраняйте чаты и файлы один раз. Ничто не работает в фоновом режиме. Архив подписан, а скрипт `verify.py` проверяет каждый файл в нём.",
-  "Saved by day": "Сохраняется по дням",
+  "Saved by day": "Сохранено по дням",
   "Saved records in this account": "Сохраненные записи в этой учетной записи",
   "Sender not recorded": "Отправитель не записывается",
   "Sep": "Сентябрь",
