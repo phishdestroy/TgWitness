@@ -8937,5 +8937,6 @@
   "Search all selected records": "Поиск по всем выбранным записям",
   "Search this page": "Поиск по этой странице",
   "Showing {shown} of {total} rows on this page": "Показано {shown} из {total} строк на этой странице",
-  "Source and counts": "Источник и подсчёты"
+  "Source and counts": "Источник и подсчёты",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не ответила. Проверьте, что TgWitness запущен и доступен с этого устройства."
 }

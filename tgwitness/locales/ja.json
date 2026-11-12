@@ -8829,5 +8829,6 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "パネルから応答がありません。TgWitness が実行中で、この端末から接続できることを確認してください。"
 }

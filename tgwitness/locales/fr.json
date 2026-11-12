@@ -8882,5 +8882,6 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Le panneau n’a pas répondu. Vérifiez que TgWitness est en cours d’exécution et que cet appareil peut le joindre."
 }
