@@ -8811,5 +8811,6 @@
   "Always included": "รวมอยู่เสมอ",
   "Select messages": "เลือกข้อความ",
   "Selected messages": "ข้อความที่เลือก",
-  "Select no more than {n} messages.": "เลือกข้อความได้ไม่เกิน {n} รายการ"
+  "Select no more than {n} messages.": "เลือกข้อความได้ไม่เกิน {n} รายการ",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "พาเนลไม่ตอบสนอง ตรวจสอบว่า TgWitness กำลังทำงานอยู่และอุปกรณ์นี้เข้าถึงได้"
 }

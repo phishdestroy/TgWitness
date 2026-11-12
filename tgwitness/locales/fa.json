@@ -8857,5 +8857,6 @@
   "Always included": "همیشه گنجانده می‌شود",
   "Select messages": "انتخاب پیام‌ها",
   "Selected messages": "پیام‌های انتخاب‌شده",
-  "Select no more than {n} messages.": "حداکثر {n} پیام انتخاب کنید."
+  "Select no more than {n} messages.": "حداکثر {n} پیام انتخاب کنید.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "پنل پاسخ نداد. بررسی کنید که TgWitness در حال اجرا باشد و این دستگاه به آن دسترسی داشته باشد."
 }

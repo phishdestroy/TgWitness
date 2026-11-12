@@ -8811,5 +8811,6 @@
   "Always included": "Luôn được đưa vào",
   "Select messages": "Chọn tin nhắn",
   "Selected messages": "Tin nhắn đã chọn",
-  "Select no more than {n} messages.": "Chọn tối đa {n} tin nhắn."
+  "Select no more than {n} messages.": "Chọn tối đa {n} tin nhắn.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Bảng điều khiển không phản hồi. Hãy kiểm tra TgWitness đang chạy và thiết bị này truy cập được."
 }

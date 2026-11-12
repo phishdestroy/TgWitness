@@ -8864,5 +8864,6 @@
   "Always included": "Sempre incluído",
   "Select messages": "Selecionar mensagens",
   "Selected messages": "Mensagens selecionadas",
-  "Select no more than {n} messages.": "Selecione no máximo {n} mensagens."
+  "Select no more than {n} messages.": "Selecione no máximo {n} mensagens.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "O painel não respondeu. Verifique se o TgWitness está em execução e se este dispositivo consegue acessá-lo."
 }

@@ -8949,5 +8949,6 @@
   "Always included": "Zawsze w raporcie",
   "Select messages": "Zaznacz wiadomości",
   "Selected messages": "Zaznaczone wiadomości",
-  "Select no more than {n} messages.": "Zaznacz najwyżej {n} wiadomości."
+  "Select no more than {n} messages.": "Zaznacz najwyżej {n} wiadomości.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel nie odpowiedział. Sprawdź, czy TgWitness działa i czy to urządzenie może się z nim połączyć."
 }

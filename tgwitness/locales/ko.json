@@ -8811,5 +8811,6 @@
   "Always included": "항상 포함",
   "Select messages": "메시지 선택",
   "Selected messages": "선택한 메시지",
-  "Select no more than {n} messages.": "메시지는 최대 {n}개까지 선택할 수 있습니다."
+  "Select no more than {n} messages.": "메시지는 최대 {n}개까지 선택할 수 있습니다.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "패널이 응답하지 않았습니다. TgWitness가 실행 중인지, 이 기기에서 접속할 수 있는지 확인하세요."
 }

@@ -8857,5 +8857,6 @@
   "Always included": "Doim kiritiladi",
   "Select messages": "Xabarlarni tanlash",
   "Selected messages": "Tanlangan xabarlar",
-  "Select no more than {n} messages.": "{n} tadan ortiq xabar tanlamang."
+  "Select no more than {n} messages.": "{n} tadan ortiq xabar tanlamang.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel javob bermadi. TgWitness ishlayotganini va bu qurilma unga ulana olishini tekshiring."
 }

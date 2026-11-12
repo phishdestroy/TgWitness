@@ -8811,5 +8811,6 @@
   "Always included": "常に含まれる項目",
   "Select messages": "メッセージを選択",
   "Selected messages": "選択したメッセージ",
-  "Select no more than {n} messages.": "選択できるメッセージは {n} 件までです。"
+  "Select no more than {n} messages.": "選択できるメッセージは {n} 件までです。",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "パネルから応答がありません。TgWitness が実行中で、この端末から接続できることを確認してください。"
 }

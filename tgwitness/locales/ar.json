@@ -9041,5 +9041,6 @@
   "Always included": "مُضمَّن دائمًا",
   "Select messages": "تحديد الرسائل",
   "Selected messages": "الرسائل المحددة",
-  "Select no more than {n} messages.": "حدّد {n} رسالة على الأكثر."
+  "Select no more than {n} messages.": "حدّد {n} رسالة على الأكثر.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "لم تستجب اللوحة. تحقق من أن TgWitness يعمل وأن هذا الجهاز يستطيع الوصول إليه."
 }

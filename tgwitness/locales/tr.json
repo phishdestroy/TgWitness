@@ -8857,5 +8857,6 @@
   "Always included": "Her zaman dahil",
   "Select messages": "Mesajları seç",
   "Selected messages": "Seçilen mesajlar",
-  "Select no more than {n} messages.": "En fazla {n} mesaj seçin."
+  "Select no more than {n} messages.": "En fazla {n} mesaj seçin.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel yanıt vermedi. TgWitness'in çalıştığını ve bu cihazın ona erişebildiğini kontrol edin."
 }

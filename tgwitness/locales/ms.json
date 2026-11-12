@@ -8811,5 +8811,6 @@
   "Always included": "Sentiasa disertakan",
   "Select messages": "Pilih mesej",
   "Selected messages": "Mesej dipilih",
-  "Select no more than {n} messages.": "Pilih tidak lebih daripada {n} mesej."
+  "Select no more than {n} messages.": "Pilih tidak lebih daripada {n} mesej.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel tidak memberi respons. Pastikan TgWitness sedang berjalan dan peranti ini boleh mencapainya."
 }

@@ -8903,5 +8903,6 @@
   "Always included": "נכלל תמיד",
   "Select messages": "בחירת הודעות",
   "Selected messages": "הודעות שנבחרו",
-  "Select no more than {n} messages.": "ניתן לבחור עד {n} הודעות."
+  "Select no more than {n} messages.": "ניתן לבחור עד {n} הודעות.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "הפאנל לא הגיב. ודאו ש-TgWitness פועל ושהמכשיר הזה יכול להגיע אליו."
 }

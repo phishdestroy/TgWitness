@@ -8857,5 +8857,6 @@
   "Always included": "সবসময় অন্তর্ভুক্ত",
   "Select messages": "বার্তা নির্বাচন করুন",
   "Selected messages": "নির্বাচিত বার্তা",
-  "Select no more than {n} messages.": "{n}টির বেশি বার্তা নির্বাচন করবেন না।"
+  "Select no more than {n} messages.": "{n}টির বেশি বার্তা নির্বাচন করবেন না।",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "প্যানেল সাড়া দেয়নি। TgWitness চালু আছে কি না এবং এই ডিভাইস থেকে সেটিতে পৌঁছানো যায় কি না যাচাই করুন।"
 }

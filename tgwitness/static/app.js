@@ -610,14 +610,16 @@ async function api(path, body, options={}) {
     ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions,...(requestSignal?{signal:requestSignal}:{})});
   }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();
     if(revision===state.workspaceRevision&&token===state.token)connectionNotice?.fail();
-    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));throw error;}
+    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));
+    throw new Error(tr("The panel did not answer. Check that TgWitness is running and that this device can reach it."),{cause:error});}
   if(fetchOptions.signal?.aborted){await response.body?.cancel();throw new StaleView();}
   if(!allowStale&&revision!==state.workspaceRevision){await response.body?.cancel();throw new StaleView();}
   if(revision===state.workspaceRevision&&token===state.token){
     if(path==='status'){if(response.ok)connectionNotice?.clear();else if(response.status>=500)connectionNotice?.fail();}
   }
   if (!response.ok) {
-    const result = await response.json().catch(() => ({detail: tr("Request failed")}));
+    const result = await response.json().catch(() => ({detail: [502,503,504].includes(response.status)||response.status>=520&&response.status<=530
+      ? tr("The panel did not answer. Check that TgWitness is running and that this device can reach it.") : tr("Request failed")+" · HTTP "+response.status}));
     let detail = result.detail || tr("Request failed");const parameter=detail?.parameter;
     if (Array.isArray(detail)) detail = detail.map(x => x.field + ": " + x.message).join("; ");
     if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
@@ -5924,7 +5926,7 @@ function profileNode(standalone=false){
   const s=state.status,saved=state.chatProfile?.chat===state.chat?state.chatProfile:null,data=saved?.profile;
   const box=node(standalone?'section':'details',"chat-profile"+(standalone?' chat-profile-view':'')),summary=node(standalone?'header':'summary');
   if(!standalone){box.open=!!state.chatProfileOpen;box.addEventListener("toggle",()=>{state.chatProfileOpen=box.open;});}
-  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error?tr("not saved yet"):''));
+  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error&&!standalone?tr("not saved yet"):''));
   box.append(summary);
   if(data){
     const facts=node("dl","dossier-facts"),add=(label,value)=>{if(value===null||value===undefined||value==="")return;facts.append(node("dt","",label),node("dd","",String(value)));};

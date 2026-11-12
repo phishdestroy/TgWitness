@@ -8919,5 +8919,6 @@
   "Always included": "Всегда включено",
   "Select messages": "Выбрать сообщения",
   "Selected messages": "Выбранные сообщения",
-  "Select no more than {n} messages.": "Выберите не более {n} сообщений."
+  "Select no more than {n} messages.": "Выберите не более {n} сообщений.",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не ответила. Проверьте, что TgWitness запущен и доступен с этого устройства."
 }

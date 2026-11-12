@@ -8811,5 +8811,6 @@
   "Always included": "始终包含",
   "Select messages": "选择消息",
   "Selected messages": "已选消息",
-  "Select no more than {n} messages.": "最多可选择 {n} 条消息。"
+  "Select no more than {n} messages.": "最多可选择 {n} 条消息。",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "面板没有响应。请确认 TgWitness 正在运行，且此设备可以连接到它。"
 }
