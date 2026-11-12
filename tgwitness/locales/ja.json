@@ -5117,11 +5117,11 @@
   "2. Prepare and check": "2. 準備と確認",
   "3. Review and apply": "3. 確認と適用",
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare アプリケーション利用規約 </a>。セットアップにより、このマシンの IP アドレスが当該サービスに開示されます。ヘルパーは、SHA-256 のハッシュと TgWitness に同梱されているハッシュと照合されます。既存のヘルパーおよび WARP 登録は再利用されます。",
-  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>このマシンのIP</span>",
+  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>直接</strong><span>このマシンのIP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong> 私のプロキシ </strong> <span> サーバーまたはプロキシのURL </span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> パブリック MTProxy </strong> <span> 自動プール </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>パブリック MTProxy</strong><span>自動プール</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>WireGuardのインポート</span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> 管理対象のローカルトンネル </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>管理対象のローカルトンネル</span>",
   "Account group": "アカウントグループ",
   "All accounts": "すべてのアカウント",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "GitHubからピン留めされたヘルパーをダウンロードするための接続を直接設定できるようにし、WARPについては、Cloudflareの利用規約に基づきデバイスを登録できるようにしてください。",
@@ -8775,5 +8775,11 @@
   "Export everything": "すべてをエクスポート",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "このアカウントが読み取れるすべてのデータ（すべてのチャットとファイル、プロフィール写真、ストーリー、連絡先、その他のアカウントデータ）を、あらゆる形式でエクスポートします。自動エクスポートでは Takeout を使用しますが、Takeout が待機状態になる場合は通常のセッションが使用されます。",
   "Observation pauses while the export runs.": "エクスポートの実行中は、監視が一時停止します。",
-  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.jsonにはすべての実行がリストされており、ここに表示されているものより{n}多くあります。"
+  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.jsonにはすべての実行がリストされており、ここに表示されているものより{n}多くあります。",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} 件のアカウントが公開 MTProxy サーバーを使っています。アドレスが変わり接続が切れるため、メッセージを取りこぼすことがあります。",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "other": "{n} 件のアカウントが公開 MTProxy サーバーを使っています。アドレスが変わり接続が切れるため、メッセージを取りこぼすことがあります。"
+  },
+  "Move all accounts to WARP": "すべてのアカウントを WARP に切り替える",
+  "Move to WARP": "WARP に切り替える"
 }

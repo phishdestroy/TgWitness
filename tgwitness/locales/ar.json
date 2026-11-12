@@ -5252,11 +5252,11 @@
   "2. Prepare and check": "2. التحضير والتحقق",
   "3. Review and apply": "3. المراجعة والتطبيق",
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> شروط استخدام تطبيق Cloudflare </a>. يكشف الإعداد عن عنوان IP لهذا الجهاز لتلك الخدمات. يتم التحقق من المساعدين مقابل التجزئات SHA-256 المجمعة مع TgWitness. يتم إعادة استخدام المساعدين الحاليين وتسجيل WARP.",
-  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>عنوان IP لهذا الجهاز</span>",
+  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>مباشر</strong><span>عنوان IP لهذا الجهاز</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong> الوكيل الخاص بي </strong> <span> عنوان URL للخادم أو الوكيل </span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> عام MTProxy </strong> <span> تجمع تلقائي </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>عام MTProxy</strong><span>تجمع تلقائي</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> استيراد WireGuard </span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> نفق محلي مُدار </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>نفق محلي مُدار</span>",
   "Account group": "مجموعة الحسابات",
   "All accounts": "جميع الحسابات",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "السماح بإجراء اتصالات إعداد مباشرة لتنزيل المساعدات المثبتة من GitHub، وبالنسبة لـ WARP، تسجيل جهاز لدى Cloudflare وفقًا لشروطها.",
@@ -9000,5 +9000,16 @@
   "Export everything": "تصدير كل شيء",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "تصدير كل ما يمكن لهذا الحساب قراءته: جميع المحادثات والملفات، وصور الملف الشخصي، والقصص، وجهات الاتصال، وبيانات الحساب الأخرى، بجميع التنسيقات. تستخدم الطريقة التلقائية أداة Takeout، أو الجلسة العادية إذا كان لا بد من انتظار Takeout.",
   "Observation pauses while the export runs.": "تتوقف عملية المراقبة مؤقتًا أثناء إجراء التصدير.",
-  "message-gaps.json lists all runs, {n} more than shown here.": "يُدرج ملف message-gaps.json جميع عمليات التشغيل، {n} أكثر مما هو موضح هنا."
+  "message-gaps.json lists all runs, {n} more than shown here.": "يُدرج ملف message-gaps.json جميع عمليات التشغيل، {n} أكثر مما هو موضح هنا.",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} حساب يستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل.",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "zero": "{n} حسابات تستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل.",
+    "one": "{n} حساب يستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل.",
+    "two": "{n} حسابات تستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل.",
+    "few": "{n} حسابات تستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل.",
+    "many": "{n} حسابات تستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل.",
+    "other": "{n} حسابات تستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل."
+  },
+  "Move all accounts to WARP": "نقل كل الحسابات إلى WARP",
+  "Move to WARP": "النقل إلى WARP"
 }

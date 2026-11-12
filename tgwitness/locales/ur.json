@@ -8820,5 +8820,12 @@
   "Export everything": "سب کچھ برآمد کریں",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "اس اکاؤنٹ کی پڑھنے کی صلاحیت رکھنے والی ہر چیز کو برآمد کریں: تمام چیٹس اور فائلیں، پروفائل تصاویر، سٹوریز، رابطے اور دیگر اکاؤنٹ ڈیٹا، ہر فارمیٹ میں۔ خودکار طریقہ Takeout استعمال کرتا ہے، یا اگر Takeout کو انتظار کرنا پڑے تو معمول کے سیشن کا استعمال کرتا ہے۔",
   "Observation pauses while the export runs.": "جب ایکسپورٹ چل رہا ہوتا ہے تو مشاہدہ معطل رہتا ہے۔",
-  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.json تمام رنز کی فہرست دیتا ہے، {n} یہاں دکھائے گئے سے زیادہ۔"
+  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.json تمام رنز کی فہرست دیتا ہے، {n} یہاں دکھائے گئے سے زیادہ۔",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} اکاؤنٹ عوامی MTProxy سرور استعمال کر رہا ہے: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n} اکاؤنٹ عوامی MTProxy سرور استعمال کر رہا ہے: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔",
+    "other": "{n} اکاؤنٹس عوامی MTProxy سرور استعمال کر رہے ہیں: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔"
+  },
+  "Move all accounts to WARP": "تمام اکاؤنٹس WARP پر منتقل کریں",
+  "Move to WARP": "WARP پر منتقل کریں"
 }

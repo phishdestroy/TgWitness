@@ -5146,9 +5146,9 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Conditions d'utilisation de l'application Cloudflare </a>. La configuration révèle l'adresse IP de cette machine à ces services. Les assistants sont vérifiés par rapport aux hachages SHA-256 fournis avec TgWitness. Les assistants existants et l'enregistrement WARP sont réutilisés.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>Adresse IP de cette machine</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Mon proxy</strong><span>URL du serveur ou du proxy</span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> MTProxy public </strong> <span> Pool automatique </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>MTProxy public</strong><span>Pool automatique</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> Importer WireGuard </span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Tunnel local géré </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>Tunnel local géré</span>",
   "Account group": "Groupe de comptes",
   "All accounts": "Tous les comptes",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "Autoriser la configuration directe des connexions pour télécharger les utilitaires épinglés depuis GitHub et, pour WARP, enregistrer un appareil auprès de Cloudflare conformément à ses conditions d'utilisation.",
@@ -8826,5 +8826,13 @@
   "Export everything": "Tout exporter",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "Exporter tout ce que ce compte peut lire : toutes les discussions et tous les fichiers, les photos de profil, les stories, les contacts et autres données du compte, dans tous les formats. La méthode automatique utilise Takeout, ou la session standard si Takeout doit patienter.",
   "Observation pauses while the export runs.": "L'observation est mise en pause pendant l'exportation.",
-  "message-gaps.json lists all runs, {n} more than shown here.": "Le fichier message-gaps.json répertorie toutes les exécutions, {n} de plus que celles affichées ici."
+  "message-gaps.json lists all runs, {n} more than shown here.": "Le fichier message-gaps.json répertorie toutes les exécutions, {n} de plus que celles affichées ici.",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} compte utilise des serveurs MTProxy publics : son adresse change et la connexion se coupe, des messages peuvent manquer.",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n} compte utilise des serveurs MTProxy publics : son adresse change et la connexion se coupe, des messages peuvent manquer.",
+    "many": "{n} comptes utilisent des serveurs MTProxy publics : leur adresse change et la connexion se coupe, des messages peuvent manquer.",
+    "other": "{n} comptes utilisent des serveurs MTProxy publics : leur adresse change et la connexion se coupe, des messages peuvent manquer."
+  },
+  "Move all accounts to WARP": "Passer tous les comptes sur WARP",
+  "Move to WARP": "Passer sur WARP"
 }

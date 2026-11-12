@@ -5146,9 +5146,9 @@
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Termos de uso do aplicativo Cloudflare</a>. A configuração revela o IP desta máquina a esses serviços. Os auxiliares são verificados em relação aos hashes SHA-256 incluídos no TgWitness. Os auxiliares existentes e o registro no WARP são reutilizados.",
   "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direto</strong><span>IP desta máquina</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Meu proxy</strong><span>URL do servidor ou proxy</span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> MTProxy Público </strong> <span> Pool automático </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>MTProxy Público</strong><span>Pool automático</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> Importar WireGuard </span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Túnel local gerenciado </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>Túnel local gerenciado</span>",
   "Account group": "Grupo de contas",
   "All accounts": "Todas as contas",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "Permitir conexões diretas de configuração para baixar os auxiliares fixados do GitHub e, para o WARP, registrar um dispositivo no Cloudflare de acordo com os termos de serviço do serviço.",
@@ -8826,5 +8826,13 @@
   "Export everything": "Exportar tudo",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "Exporte tudo o que esta conta pode acessar: todos os chats e arquivos, fotos de perfil, stories, contatos e outros dados da conta, em todos os formatos. O método automático usa o Takeout ou a sessão normal, caso o Takeout precise aguardar.",
   "Observation pauses while the export runs.": "A observação é pausada enquanto a exportação está em andamento.",
-  "message-gaps.json lists all runs, {n} more than shown here.": "O arquivo message-gaps.json lista todas as execuções, {n} a mais do que as mostradas aqui."
+  "message-gaps.json lists all runs, {n} more than shown here.": "O arquivo message-gaps.json lista todas as execuções, {n} a mais do que as mostradas aqui.",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} conta usa servidores MTProxy públicos: o endereço muda e a conexão cai, então mensagens podem se perder.",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n} conta usa servidores MTProxy públicos: o endereço muda e a conexão cai, então mensagens podem se perder.",
+    "many": "{n} contas usam servidores MTProxy públicos: o endereço muda e a conexão cai, então mensagens podem se perder.",
+    "other": "{n} contas usam servidores MTProxy públicos: o endereço muda e a conexão cai, então mensagens podem se perder."
+  },
+  "Move all accounts to WARP": "Mover todas as contas para o WARP",
+  "Move to WARP": "Mover para o WARP"
 }

@@ -5144,11 +5144,11 @@
   "2. Prepare and check": "2. Preparare e verificare",
   "3. Review and apply": "3. Rivedere e applicare",
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Termini dell'applicazione Cloudflare </a>. La configurazione rivela l'IP di questa macchina a tali servizi. Gli helper vengono verificati rispetto agli hash SHA-256 inclusi in TgWitness. Gli helper esistenti e la registrazione WARP vengono riutilizzati.",
-  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>IP di questo dispositivo</span>",
+  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Diretto</strong><span>IP di questo dispositivo</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong> Il mio proxy </strong> <span> URL del server o del proxy </span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> MTProxy pubblico </strong> <span> Pool automatico </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>MTProxy pubblico</strong><span>Pool automatico</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> Importa WireGuard </span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Tunnel locale gestito </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>Tunnel locale gestito</span>",
   "Account group": "Gruppo di account",
   "All accounts": "Tutti gli account",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "Consentire la configurazione diretta delle connessioni per scaricare gli helper aggiunti ai preferiti da GitHub e, per WARP, registrare un dispositivo su Cloudflare secondo i termini di servizio.",
@@ -8826,5 +8826,13 @@
   "Export everything": "Esporta tutto",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "Esporta tutto ciò che questo account può leggere: tutte le chat e i file, le foto del profilo, le storie, i contatti e altri dati dell’account, in ogni formato. Il metodo automatico utilizza Takeout, oppure la sessione normale se Takeout deve attendere.",
   "Observation pauses while the export runs.": "L’osservazione viene messa in pausa durante l’esecuzione dell’esportazione.",
-  "message-gaps.json lists all runs, {n} more than shown here.": "Il file message-gaps.json elenca tutte le esecuzioni, {n} in più rispetto a quelle mostrate qui."
+  "message-gaps.json lists all runs, {n} more than shown here.": "Il file message-gaps.json elenca tutte le esecuzioni, {n} in più rispetto a quelle mostrate qui.",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} account usa server MTProxy pubblici: l’indirizzo cambia e la connessione cade, quindi alcuni messaggi possono andare persi.",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n} account usa server MTProxy pubblici: l’indirizzo cambia e la connessione cade, quindi alcuni messaggi possono andare persi.",
+    "many": "{n} account usano server MTProxy pubblici: l’indirizzo cambia e la connessione cade, quindi alcuni messaggi possono andare persi.",
+    "other": "{n} account usano server MTProxy pubblici: l’indirizzo cambia e la connessione cade, quindi alcuni messaggi possono andare persi."
+  },
+  "Move all accounts to WARP": "Passa tutti gli account a WARP",
+  "Move to WARP": "Passa a WARP"
 }

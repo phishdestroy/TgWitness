@@ -5144,7 +5144,7 @@
   "2. Prepare and check": "২. প্রস্তুত করুন এবং যাচাই করুন",
   "3. Review and apply": "৩. পর্যালোচনা করুন এবং প্রয়োগ করুন",
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare অ্যাপ্লিকেশন শর্তাবলী</a>। সেটআপ এই মেশিনের IP ঠিকানা উন্মোচন করে ঐ পরিষেবাগুলোর কাছে। হেল্পারগুলো SHA-256 হ্যাশগুলোর বিরুদ্ধে যাচাই করা হয়, যা TgWitness-এর সাথে বান্ডিল করা হয়েছে। বিদ্যমান হেল্পার এবং WARP রেজিস্ট্রেশন পুনর্ব্যবহৃত হয়।",
-  "<strong>Direct</strong><span>This machine's IP</span>": "<strong></strong><span>এই মেশিনের IP</span>",
+  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>সরাসরি</strong><span>এই মেশিনের IP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>আমার প্রক্সি</strong><span>সার্ভার বা প্রক্সি URL</span>",
   "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>পাবলিক MTProxy</strong><span>স্বয়ংক্রিয় পুল</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong>VPN</strong><span>WireGuard আমদানি</span>",
@@ -8820,5 +8820,12 @@
   "Export everything": "সবকিছু রপ্তানি করুন",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "এই অ্যাকাউন্ট যা কিছু পড়তে পারে সবকিছু রপ্তানি করুন: সব চ্যাট এবং ফাইল, প্রোফাইল ছবি, স্টোরি, যোগাযোগ এবং অন্যান্য অ্যাকাউন্ট ডেটা, প্রতিটি ফরম্যাটে। স্বয়ংক্রিয় পদ্ধতি Takeout ব্যবহার করে, অথবা যদি Takeout-কে অপেক্ষা করতে হয় তবে নিয়মিত সেশন ব্যবহার করে।",
   "Observation pauses while the export runs.": "এক্সপোর্ট চলার সময় পর্যবেক্ষণ বিরতিতে থাকে।",
-  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.json সব রান তালিকাভুক্ত করে, {n} এখানে দেখানো সংখ্যার চেয়ে বেশি।"
+  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.json সব রান তালিকাভুক্ত করে, {n} এখানে দেখানো সংখ্যার চেয়ে বেশি।",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n}টি অ্যাকাউন্ট সর্বজনীন MTProxy সার্ভার ব্যবহার করে: ঠিকানা বদলায় ও সংযোগ বিচ্ছিন্ন হয়, বার্তা হারাতে পারে।",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n}টি অ্যাকাউন্ট সর্বজনীন MTProxy সার্ভার ব্যবহার করে: ঠিকানা বদলায় ও সংযোগ বিচ্ছিন্ন হয়, বার্তা হারাতে পারে।",
+    "other": "{n}টি অ্যাকাউন্ট সর্বজনীন MTProxy সার্ভার ব্যবহার করে: ঠিকানা বদলায় ও সংযোগ বিচ্ছিন্ন হয়, বার্তা হারাতে পারে।"
+  },
+  "Move all accounts to WARP": "সব অ্যাকাউন্ট WARP-এ সরান",
+  "Move to WARP": "WARP-এ সরান"
 }

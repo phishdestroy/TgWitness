@@ -5144,11 +5144,11 @@
   "2. Prepare and check": "2. Preparar y comprobar",
   "3. Review and apply": "3. Revisar y aplicar",
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Condiciones de uso de la aplicación Cloudflare </a>. La configuración revela la dirección IP de este equipo a dichos servicios. Los ayudantes se comparan con los hash SHA-256 incluidos en TgWitness. Se reutilizan los ayudantes existentes y el registro de WARP.",
-  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>La IP de este equipo</span>",
+  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Directo</strong><span>La IP de este equipo</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>Mi proxy</strong><span>URL del servidor o del proxy</span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> MTProxy público </strong> <span> Grupo automático </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>MTProxy público</strong><span>Grupo automático</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> Importar WireGuard </span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> Túnel local gestionado </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>Túnel local gestionado</span>",
   "Account group": "Grupo de cuentas",
   "All accounts": "Todas las cuentas",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "Permitir la configuración directa de conexiones para descargar los ayudantes fijados desde GitHub y, en el caso de WARP, registrar un dispositivo en Cloudflare según sus condiciones.",
@@ -8826,5 +8826,13 @@
   "Export everything": "Exportar todo",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "Exporta todo lo que esta cuenta pueda leer: todos los chats y archivos, fotos de perfil, historias, contactos y otros datos de la cuenta, en cualquier formato. El método automático utiliza Takeout, o la sesión habitual si Takeout tiene que esperar.",
   "Observation pauses while the export runs.": "La observación se pausa mientras se lleva a cabo la exportación.",
-  "message-gaps.json lists all runs, {n} more than shown here.": "El archivo message-gaps.json enumera todas las ejecuciones, {n} más de las que se muestran aquí."
+  "message-gaps.json lists all runs, {n} more than shown here.": "El archivo message-gaps.json enumera todas las ejecuciones, {n} más de las que se muestran aquí.",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} cuenta usa servidores MTProxy públicos: su dirección cambia y la conexión se corta, así que pueden perderse mensajes.",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n} cuenta usa servidores MTProxy públicos: su dirección cambia y la conexión se corta, así que pueden perderse mensajes.",
+    "many": "{n} cuentas usan servidores MTProxy públicos: su dirección cambia y la conexión se corta, así que pueden perderse mensajes.",
+    "other": "{n} cuentas usan servidores MTProxy públicos: su dirección cambia y la conexión se corta, así que pueden perderse mensajes."
+  },
+  "Move all accounts to WARP": "Pasar todas las cuentas a WARP",
+  "Move to WARP": "Pasar a WARP"
 }

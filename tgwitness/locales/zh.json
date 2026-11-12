@@ -5117,11 +5117,11 @@
   "2. Prepare and check": "2. 准备与检查",
   "3. Review and apply": "3. 审核并应用",
   "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.": "<a href=\"https://www.cloudflare.com/application/terms/\" target=\"_blank\" rel=\"noopener noreferrer\"> Cloudflare 应用条款 </a>。设置过程会向这些服务披露本机的 IP 地址。辅助程序会与 SHA-256 哈希值进行比对，该哈希值与 TgWitness 捆绑在一起。现有辅助程序和 WARP 注册信息将被复用。",
-  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>Direct</strong><span>本机的 IP</span>",
+  "<strong>Direct</strong><span>This machine's IP</span>": "<strong>直接</strong><span>本机的 IP</span>",
   "<strong>My proxy</strong><span>Server or proxy URL</span>": "<strong>我的代理</strong><span>服务器或代理 URL</span>",
-  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong> 公共 MTProxy </strong> <span> 自动池 </span>",
+  "<strong>Public MTProxy</strong><span>Automatic pool</span>": "<strong>公共 MTProxy</strong><span>自动池</span>",
   "<strong>VPN</strong><span>Import WireGuard</span>": "<strong> VPN </strong> <span> 导入 WireGuard </span>",
-  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong> WARP </strong> <span> 受管本地隧道 </span>",
+  "<strong>WARP</strong><span>Managed local tunnel</span>": "<strong>WARP</strong><span>受管本地隧道</span>",
   "Account group": "账户组",
   "All accounts": "所有账户",
   "Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.": "允许直接配置连接以从 GitHub 下载已置顶的辅助程序，并针对 WARP，根据其条款在 Cloudflare 上注册设备。",
@@ -8775,5 +8775,11 @@
   "Export everything": "导出全部内容",
   "Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.": "导出该账户可读取的所有内容：所有聊天记录和文件、个人头像、动态、联系人及其他账户数据，支持各种格式。自动导出方式使用 Takeout；若 Takeout 需等待，则采用常规会话方式。",
   "Observation pauses while the export runs.": "导出运行期间，观察操作将暂停。",
-  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.json 列出了所有运行记录，{n} 比此处显示的更多。"
+  "message-gaps.json lists all runs, {n} more than shown here.": "message-gaps.json 列出了所有运行记录，{n} 比此处显示的更多。",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} 个账户使用公共 MTProxy 服务器：地址会变化，连接会中断，可能漏掉消息。",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "other": "{n} 个账户使用公共 MTProxy 服务器：地址会变化，连接会中断，可能漏掉消息。"
+  },
+  "Move all accounts to WARP": "将所有账户切换到 WARP",
+  "Move to WARP": "切换到 WARP"
 }
