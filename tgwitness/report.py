@@ -2118,6 +2118,12 @@ def gap_html(say, summary):
     return out + '<p class="hint">' + e(view["note"]) + "</p>"
 
 
+def coverage_notes(coverage):
+    return [[note.get("at"), "—" if note.get("chat_id") is None else str(note["chat_id"]),
+             " · ".join(str(note[key]) for key in ("reason", "operation", "error_type") if note.get(key)) or "—"]
+            for note in coverage.get("notes") or []]
+
+
 def coverage_section(say, number, coverage):
     if not coverage:
         return ""
@@ -2141,11 +2147,16 @@ def coverage_section(say, number, coverage):
             + "</p>" + table([say("Chat"), say("Observed range"), say("Observed"), say("Not observed"),
                               say("Numbers not observed")], ids))
     out += gap_html(say, coverage.get("gap_summary"))
+    notes = coverage_notes(coverage)
+    if notes:
+        out += "<h3>" + e(say("Coverage notes")) + "</h3>" + table([say("Observed at"), say("Chat"), say("Reason")], [
+            [when(at), e(chat), e(reason)] for at, chat, reason in notes])
+        if coverage["notes_total"] > len(notes):
+            out += "<p>" + e(say("Showing {shown} of {total} coverage notes.", shown=len(notes),
+                                 total=coverage["notes_total"])) + "</p>"
     out += ("<h3>" + e(say("Verifier summary")) + '</h3><p class="lead">' + e(say("As verify.py prints it, in English."))
             + '</p><ul class="mono" style="font-size:13px">' + "".join("<li>" + e(line) + "</li>" for line in coverage_lines(coverage))
             + "</ul>")
-    if coverage["notes_total"]:
-        out += "<p>" + e(coverage["notes_total"]) + " chat-level coverage note(s), listed as coverage events below.</p>"
     return out + "</section>"
 
 

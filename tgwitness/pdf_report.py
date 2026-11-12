@@ -1106,6 +1106,14 @@ class EvidencePDF:
                 if view["skipped"]:
                     self.lay.grid(view["skipped_headers"], view["skipped"], (30, 70))
                 self.lay.text(view["note"], size=7.5, color=MUTED)
+            notes = report.coverage_notes(self.coverage)
+            if notes:
+                self.lay.heading(say("Coverage notes"))
+                self.lay.grid([say("Observed at"), say("Chat"), say("Reason")],
+                         [[report.utc_text(at), chat, reason] for at, chat, reason in notes], (26, 26, 48))
+                if self.coverage.get("notes_total", 0) > len(notes):
+                    self.lay.text(say("Showing {shown} of {total} coverage notes.", shown=len(notes),
+                                      total=self.coverage["notes_total"]), size=8, color=MUTED)
             self.lay.heading(say("Verifier summary"))
             for line in coverage_lines(self.coverage):
                 self.lay.text(line, size=7.2, family="Mono")

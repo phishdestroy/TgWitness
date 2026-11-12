@@ -7,6 +7,7 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 
 from . import report_analytics
+from .verifier.coverage import numbered_per_chat
 
 
 FORMAT = "tgwitness-report-selection-v1"
@@ -18,9 +19,10 @@ PREVIEW_CHARS = 240
 TITLE_CHARS = 160
 ID_GAP_BASIS = (
     "Message numbers absent from all records in this snapshot, between the lowest and highest known "
-    "message numbers observed in each selected chat during the selected UTC dates. Sender and event-kind "
-    "filters do not create gaps. Neighboring records are context and may fall outside those filters or dates. "
-    "An absent message number is a number that was not observed in this snapshot."
+    "message numbers observed in each selected channel or supergroup during the selected UTC dates. "
+    "Private chats, bots and ordinary groups share one account-wide numbering and are not compared per chat. "
+    "Sender and event-kind filters do not create gaps. Neighboring records are context and may fall outside "
+    "those filters or dates. An absent message number is a number that was not observed in this snapshot."
 )
 Identifier = Annotated[int, Field(strict=True, gt=-(2**63), lt=2**63)]
 EventKind = Literal["message.new", "message.snapshot", "message.recovered", "message.edited",
@@ -169,6 +171,7 @@ def _prepare(connection):
         CREATE TABLE selected_senders (id INTEGER PRIMARY KEY);
         CREATE TABLE selected_changed (chat INTEGER, message INTEGER, PRIMARY KEY(chat,message));
         CREATE TABLE bounds (chat INTEGER PRIMARY KEY, low INTEGER NOT NULL, high INTEGER NOT NULL);
+        CREATE TABLE shared_numbering (chat INTEGER PRIMARY KEY);
         CREATE TABLE known (
             chat INTEGER NOT NULL, message INTEGER NOT NULL, seq INTEGER,
             kind TEXT NOT NULL, observed_at TEXT NOT NULL, sender INTEGER, text TEXT NOT NULL,
@@ -218,6 +221,10 @@ def _known(connection, event, predicate):
     message = _message_id(event.get("message_id"))
     if chat is None or message is None:
         return
+    if not numbered_per_chat(chat):
+        if predicate.whole_chat(event) and predicate.time(event):
+            connection.execute("INSERT OR IGNORE INTO shared_numbering VALUES (?)", (chat,))
+        return
     row = _preview(event)
     kind = row["kind"]
     priority = 0 if kind in ("message.new", "message.snapshot", "message.recovered", "message.edited") else \
@@ -242,10 +249,14 @@ def _neighbor(row, predicate):
 
 
 def _gaps(connection, predicate, enabled):
-    result = {"enabled": enabled, "status": "available" if enabled else "disabled", "basis": ID_GAP_BASIS,
-              "rows": [], "ranges_total": 0, "ids_total": 0, "truncated": False}
+    result = {"enabled": enabled, "status": "disabled", "basis": ID_GAP_BASIS,
+              "rows": [], "ranges_total": 0, "ids_total": 0, "truncated": False,
+              "chats_compared": 0, "chats_shared_numbering": 0}
     if not enabled:
         return result
+    result["chats_compared"] = connection.execute("SELECT count(*) FROM bounds").fetchone()[0]
+    result["chats_shared_numbering"] = connection.execute("SELECT count(*) FROM shared_numbering").fetchone()[0]
+    result["status"] = "available" if result["chats_compared"] else "not_compared"
     previous = None
     rows = connection.execute("SELECT k.* FROM known k JOIN bounds b ON b.chat=k.chat "
                               "WHERE k.message BETWEEN b.low AND b.high ORDER BY k.chat,k.message")

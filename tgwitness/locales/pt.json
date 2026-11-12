@@ -5574,7 +5574,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "Registre quem adquiriu, manteve e transferiu o arquivo ZIP original. Preserve separadamente seu hash, a impressão digital da chave confiável e as cópias independentes dos pontos de verificação.",
   "Recorded drand rounds": "Rodadas de “drand” registradas",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Rodadas de drand registradas: {drand}; começa a transportar TDX: {tdx}. Não é fornecida validação independente.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Lacunas registradas: {gaps}. Números de mensagens não observados: {missing}.",
   "Recorded process starts": "Inícios de processos registrados",
   "Recorded; review required": "Registrado; revisão necessária",
   "Records after that checkpoint": "Registros posteriores a esse ponto de verificação",
@@ -8887,5 +8886,10 @@
     "one": "Mostrar mais {n} configuração",
     "many": "Mostrar mais {n} configurações",
     "other": "Mostrar mais {n} configurações"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "Os números das mensagens não foram comparados: esta seleção não contém nenhum canal ou supergrupo inteiro com mensagens salvas nas datas escolhidas.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Chats privados, bots e grupos comuns compartilham uma única numeração para toda a conta; por isso, um número ausente em um deles pode pertencer a outro chat. Chats não comparados por esse motivo: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Lacunas registradas: {gaps}. Notas de cobertura: {notes}. Números de mensagens não observados: {missing}.",
+  "Coverage notes": "Notas de cobertura",
+  "Showing {shown} of {total} coverage notes.": "Exibindo {shown} de {total} notas de cobertura."
 }

@@ -5547,7 +5547,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "Rekodkan siapa yang memperoleh, memegang dan memindahkan ZIP asal. Pelihara hashnya, cap jari kunci yang dipercayai dan salinan checkpoint bebas secara berasingan.",
   "Recorded drand rounds": "Pusingan drand yang direkodkan",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Pusingan drand yang direkodkan: {drand}; mula membawa TDX: {tdx}. Pengesahan bebas tidak disediakan.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Jurang yang direkodkan: {gaps}. Nombor mesej yang tidak diperhatikan: {missing}.",
   "Recorded process starts": "Permulaan proses yang direkodkan",
   "Recorded; review required": "Direkod; semakan diperlukan",
   "Records after that checkpoint": "Rekod selepas penanda aras itu",
@@ -8832,5 +8831,10 @@
   "Show {n} more setting": "Tunjukkan {n} lagi tetapan",
   "Show {n} more settings": {
     "other": "Tunjukkan {n} lagi tetapan"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "Nombor mesej tidak dibandingkan: pilihan ini tidak mengandungi saluran atau superkumpulan penuh dengan mesej tersimpan pada tarikh yang dipilih.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Sembang peribadi, bot dan kumpulan biasa berkongsi satu penomboran bagi seluruh akaun, maka nombor yang tiada dalam salah satunya mungkin milik sembang lain. Sembang yang tidak dibandingkan atas sebab ini: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Jurang yang direkodkan: {gaps}. Nota liputan: {notes}. Nombor mesej yang tidak diperhatikan: {missing}.",
+  "Coverage notes": "Nota liputan",
+  "Showing {shown} of {total} coverage notes.": "Menunjukkan {shown} daripada {total} nota liputan."
 }

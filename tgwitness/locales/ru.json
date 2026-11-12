@@ -5580,7 +5580,6 @@
   "Independent verification of this copy is still required.": "Независимая проверка этой копии ещё требуется.",
   "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Проверенная граница времени охватывает записи по № {n}; последующих записей вне этой границы: {tail}.",
   "No independently validated time bound is included in this copy.": "В этой копии нет независимо проверенной границы времени.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Записанных перерывов: {gaps}. Ненаблюдавшихся номеров сообщений: {missing}.",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Записанных раундов drand: {drand}; запусков с TDX: {tdx}. Результат независимой проверки не предоставлен.",
   "Operator declarations supplied: {n}.": "Заявленных оператором реквизитов: {n}.",
   "Review the source identifiers and recorded acquisition context.": "Рассматривайте каждое наблюдение вместе с идентификаторами источника и записью о сборе.",
@@ -8943,5 +8942,10 @@
     "few": "Показать ещё {n} настройки",
     "many": "Показать ещё {n} настроек",
     "other": "Показать ещё {n} настройки"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "Номера сообщений не сравнивались: в выборке нет целого канала или супергруппы с сохранёнными сообщениями за выбранные даты.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Личные чаты, боты и обычные группы делят одну нумерацию на весь аккаунт, поэтому номер, которого нет в одном из них, может принадлежать другому чату. Чатов, не сравнивавшихся по этой причине: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Записанных перерывов: {gaps}. Заметок об охвате: {notes}. Ненаблюдавшихся номеров сообщений: {missing}.",
+  "Coverage notes": "Заметки об охвате",
+  "Showing {shown} of {total} coverage notes.": "Показано заметок об охвате: {shown} из {total}."
 }

@@ -5574,7 +5574,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "Registrare chi ha acquisito, detenuto e trasferito il file ZIP originale. Conservare separatamente il suo hash, l’impronta digitale della chiave attendibile e le copie indipendenti dei checkpoint.",
   "Recorded drand rounds": "Round «drand» registrati",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Round drand registrati: {drand}; inizia a trasportare TDX: {tdx}. Non viene fornita alcuna convalida indipendente.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Lacune registrate: {gaps}. Numeri di messaggio non rilevati: {missing}.",
   "Recorded process starts": "Avvio dei processi registrati",
   "Recorded; review required": "Registrato; revisione richiesta",
   "Records after that checkpoint": "Record successivi a tale checkpoint",
@@ -8887,5 +8886,10 @@
     "one": "Mostra {n} altra impostazione",
     "many": "Mostra altre {n} impostazioni",
     "other": "Mostra altre {n} impostazioni"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "I numeri dei messaggi non sono stati confrontati: questa selezione non contiene alcun canale o supergruppo intero con messaggi salvati nelle date scelte.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Chat private, bot e gruppi ordinari condividono un’unica numerazione per tutto l’account, quindi un numero mancante in uno di essi può appartenere a un’altra chat. Chat non confrontate per questo motivo: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Lacune registrate: {gaps}. Note di copertura: {notes}. Numeri di messaggio non rilevati: {missing}.",
+  "Coverage notes": "Note di copertura",
+  "Showing {shown} of {total} coverage notes.": "Visualizzazione di {shown} su {total} note di copertura."
 }

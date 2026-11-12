@@ -5547,7 +5547,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "บันทึกว่าใครเป็นผู้ได้รับ ถือครอง และโอนไฟล์ZIPต้นฉบับ เก็บรักษาค่าแฮช ลายนิ้วมือของกุญแจที่เชื่อถือได้ และสำเนาจุดตรวจสอบอิสระไว้แยกกัน",
   "Recorded drand rounds": "รอบdrandที่บันทึกไว้",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "รอบ drand ที่บันทึกไว้: {drand}; เริ่มส่ง TDX: {tdx}. ไม่มีการตรวจสอบความถูกต้องอย่างอิสระ",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "ช่องว่างที่บันทึกไว้: {gaps}. หมายเลขข้อความที่ไม่ได้สังเกต: {missing}.",
   "Recorded process starts": "การเริ่มต้นกระบวนการที่บันทึกไว้",
   "Recorded; review required": "บันทึกแล้ว; ต้องตรวจสอบ",
   "Records after that checkpoint": "บันทึกหลังจากจุดตรวจสอบนั้น",
@@ -8832,5 +8831,10 @@
   "Show {n} more setting": "แสดงการตั้งค่าอีก {n} รายการ",
   "Show {n} more settings": {
     "other": "แสดงการตั้งค่าอีก {n} รายการ"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "ไม่ได้เปรียบเทียบหมายเลขข้อความ: การเลือกนี้ไม่มีช่องหรือกลุ่มซูเปอร์ทั้งกลุ่มที่มีข้อความที่บันทึกไว้ในวันที่เลือก",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "แชทส่วนตัว บอท และกลุ่มทั่วไปใช้ลำดับหมายเลขเดียวกันทั้งบัญชี หมายเลขที่ขาดหายในแชทหนึ่งจึงอาจเป็นของแชทอื่น แชทที่ไม่ได้เปรียบเทียบด้วยเหตุผลนี้: {n}",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "ช่องว่างที่บันทึกไว้: {gaps}. หมายเหตุการครอบคลุม: {notes}. หมายเลขข้อความที่ไม่ได้สังเกต: {missing}.",
+  "Coverage notes": "หมายเหตุการครอบคลุม",
+  "Showing {shown} of {total} coverage notes.": "แสดง {shown} จาก {total} หมายเหตุการครอบคลุม"
 }

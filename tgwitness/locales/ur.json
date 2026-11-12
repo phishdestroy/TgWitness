@@ -5574,7 +5574,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "ریکارڈ کریں کہ اصل ZIP کون حاصل کیا، رکھا اور منتقل کیا۔ اس کا ہیش، قابلِ اعتماد کلید کا فنگر پرنٹ اور آزاد چیک پوائنٹ نقول علیحدہ محفوظ کریں۔",
   "Recorded drand rounds": "drand کے ریکارڈ شدہ راؤنڈز",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "ریکارڈ شدہ drand راؤنڈز: {drand}؛ TDX شروع کرنا: {tdx}۔ آزادانہ تصدیق فراہم نہیں کی گئی۔",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "ریکارڈ شدہ خلا: {gaps}۔ مشاہدہ نہ کیے گئے پیغام نمبر: {missing}۔",
   "Recorded process starts": "ریکارڈ شدہ عمل کے آغاز",
   "Recorded; review required": "ریکارڈ کیا گیا؛ جائزہ ضروری ہے۔",
   "Records after that checkpoint": "اس چیک پوائنٹ کے بعد کے ریکارڈز",
@@ -8879,5 +8878,10 @@
   "Show {n} more settings": {
     "one": "مزید {n} سیٹنگ دکھائیں",
     "other": "مزید {n} سیٹنگز دکھائیں"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "پیغام نمبروں کا موازنہ نہیں کیا گیا: اس انتخاب میں منتخب تاریخوں میں محفوظ شدہ پیغامات والا کوئی مکمل چینل یا سپر گروپ نہیں ہے۔",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "نجی چیٹس، بوٹس اور عام گروپس پورے اکاؤنٹ کی ایک ہی نمبرنگ استعمال کرتے ہیں، اس لیے ان میں سے کسی ایک میں غائب نمبر کسی دوسری چیٹ کا ہو سکتا ہے۔ اس وجہ سے جن چیٹس کا موازنہ نہیں کیا گیا: {n}۔",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "ریکارڈ شدہ خلا: {gaps}۔ کوریج نوٹس: {notes}۔ مشاہدہ نہ کیے گئے پیغام نمبر: {missing}۔",
+  "Coverage notes": "کوریج نوٹس",
+  "Showing {shown} of {total} coverage notes.": "{total} کوریج نوٹس میں سے {shown} دکھائے جا رہے ہیں۔"
 }
