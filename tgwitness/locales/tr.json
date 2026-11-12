@@ -8832,5 +8832,7 @@
     "other": "{n} hesap herkese açık MTProxy sunucuları kullanıyor: adres değişiyor ve bağlantı kopuyor, mesajlar kaçabilir."
   },
   "Move all accounts to WARP": "Tüm hesapları WARP'a geçir",
-  "Move to WARP": "WARP'a geçir"
+  "Move to WARP": "WARP'a geçir",
+  "Data": "Veri",
+  "Always included": "Her zaman dahil"
 }

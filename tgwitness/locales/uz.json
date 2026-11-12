@@ -8832,5 +8832,7 @@
     "other": "{n} ta akkaunt ochiq MTProxy serverlaridan foydalanmoqda: manzil o‘zgaradi va aloqa uziladi, xabarlar tushib qolishi mumkin."
   },
   "Move all accounts to WARP": "Barcha akkauntlarni WARPga o‘tkazish",
-  "Move to WARP": "WARPga o‘tkazish"
+  "Move to WARP": "WARPga o‘tkazish",
+  "Data": "Maʼlumotlar",
+  "Always included": "Doim kiritiladi"
 }

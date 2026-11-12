@@ -8786,5 +8786,7 @@
     "other": "{n} akun memakai server MTProxy publik: alamatnya berganti dan koneksi terputus, jadi pesan bisa terlewat."
   },
   "Move all accounts to WARP": "Pindahkan semua akun ke WARP",
-  "Move to WARP": "Pindahkan ke WARP"
+  "Move to WARP": "Pindahkan ke WARP",
+  "Data": "Data",
+  "Always included": "Selalu disertakan"
 }

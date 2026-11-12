@@ -2,7 +2,14 @@ import {createGroupSettings} from './group-settings.js?v=1';
 import {accountState} from '../components/account-state.js';
 
 export function createSettingsHub(ctx) {
-  const {root, wizardRoot, state, json, tr, node, toast, navigate, askConfirm, $, refreshStatus} = ctx;
+  const {root, wizardRoot, state, json, tr, node, icon, toast, navigate, askConfirm, $, refreshStatus} = ctx;
+  const sectionMarks = {telegram:['account','blue'],connection:['activity','green'],chats:['message','teal'],group:['users','slate'],goal:['star','orange'],collection:['download','violet'],protection:['shield','green'],notifications:['bell','red'],appearance:['sun','pink'],level:['layers','indigo']};
+  const sectionGroups = [['telegram','connection','chats','group'],['goal','collection','protection','notifications'],['appearance','level']];
+  const advancedMarks = {sources:'sources',parameters:'settings',access:'lock',integrations:'braces','system-log':'receipt',sealed:'fingerprint'};
+  const answerMarks = {copy:'download',watch:'eye',evidence:'shield',auto:'sparkle',warp:'shield',proxy:'link',direct:'external',simple:'check',standard:'settings',expert:'braces'};
+  let shownSection=null,lastSetting=null;
+  function tile(name,tone){const mark=node('span','tile');mark.dataset.tone=tone;mark.append(icon(name));return mark;}
+  function arrow(){const mark=node('span','hub-arrow');mark.append(icon('chevron'));return mark;}
   const rank = {simple:0, standard:1, expert:2};
   const goals = [['copy','📥','Just download','Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.'],['watch','👁','Follow chats','Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.'],['evidence','⚖','Evidence for a case','Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.']];
   const goalLevels = {copy:'simple',watch:'standard',evidence:'standard'};
@@ -56,7 +63,8 @@ export function createSettingsHub(ctx) {
     const group=node('div','answer-cards');group.setAttribute('role','group');
     for(const [key,emoji,name,note] of entries){
       const b=button('',()=>fn(key),'answer-card');b.dataset.answer=key;b.setAttribute('aria-pressed',String(key===value));
-      b.append(node('span','answer-icon',emoji),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
+      const mark=node('span','answer-icon');mark.append(answerMarks[key]?icon(answerMarks[key]):document.createTextNode(emoji));
+      b.append(mark,node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
     }box.append(group);
   }
   function restoreMoved(){for(const [el,marker] of moved){marker.replaceWith(el);}moved=[];}
@@ -170,10 +178,10 @@ export function createSettingsHub(ctx) {
     row.append(heading);
     if(f.type==='bool'){
       const control=node('input');control.type='checkbox';control.checked=f.value;control.setAttribute('aria-label',tr(f.label));
-      control.onchange=()=>run(()=>edit(f.key,control.checked),control);row.append(control);
+      control.onchange=()=>{lastSetting=f.key;run(()=>edit(f.key,control.checked),control);};row.append(control);
     }else{
       const values=f.key==='files'?[...(f.value==='custom'?['custom']:[]),'photos','short_media','all']:['hide','auto'];
-      const field=select(f.label,values.map(v=>[v,label(v)]),f.value,v=>edit(f.key,v));
+      const field=select(f.label,values.map(v=>[v,label(v)]),f.value,v=>{lastSetting=f.key;return edit(f.key,v);});
       if(f.value==='custom')field.querySelector('option').disabled=true;row.append(field);
     }
     if(f.modified&&!mark)row.append(button('Restore goal value',async()=>{
@@ -205,14 +213,17 @@ export function createSettingsHub(ctx) {
   function openSection(name){section=name;query='';scopeDirty=false;render();ctx.record?.();root.querySelector('.hub-detail h2')?.focus();}
   async function closeSection(){
     if(section==='chats'&&scopeDirty&&!await confirm(owner(),tr('Leave without saving the chat selection?')))return;
-    const who=owner();data=await request(who,'settings');draft={...data.wizard};editing=false;scopeDirty=false;section=null;render();ctx.record?.();
-    root.querySelector('.hub-summary[data-section]')?.focus({preventScroll:true});
+    const who=owner(),closed=section;editing=false;scopeDirty=false;section=null;render();ctx.record?.();
+    const back=()=>root.querySelector('.hub-summary[data-section="'+closed+'"]')?.focus({preventScroll:true});
+    back();data=await request(who,'settings');draft={...data.wizard};if(section===null){render();back();}
   }
   function render(){
     restoreMoved();if(!data||!prefs)return;
     if(groupScope&&groupView.data){groupView.render(root);return;}
+    const keptScroll=root.querySelector('.hub-detail')?.scrollTop||0;
+    const keptFocus=(root.contains(document.activeElement)?document.activeElement.closest('[data-setting]')?.dataset.setting:null)||lastSetting;
     root.replaceChildren();
-    const header=node('div','hub-heading');header.append(node('div','eyebrow',tr('One place for every answer')),node('h1','',tr('Settings')));root.append(header);
+    const header=node('div','hub-heading');header.append(node('h1','',tr('Settings')));root.append(header);
     const inheritance=data.inheritance;
     if(inheritance){
       const note=node('div','notice hub-group-note');
@@ -224,25 +235,36 @@ export function createSettingsHub(ctx) {
     const search=node('input','hub-search');search.type='search';search.placeholder=tr('Search all settings, including hidden ones');search.setAttribute('aria-label',search.placeholder);search.value=query;
     search.oninput=()=>{query=search.value;renderResults(results);};root.append(search);
     const results=node('div','hub-results');root.append(results);renderResults(results);
-    const overview=node('div','hub-grid');overview.hidden=!!query||!!section;root.append(overview);
+    const overview=node('div','hub-grid');overview.hidden=!!query;root.append(overview);
     const summaries=[['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone],['level','Interface level',label(prefs.level)],
       ['goal','Goal',data.goal?label(data.goal):tr('Choose a goal')],['connection','Connection',label(data.connection.mode)],
-      ['telegram','Telegram account',signedIn()?tr('Connected'):tr('Not connected')],
+      ['telegram','Telegram account',signedIn()?tr('Connected'):tr('Not connected'),signedIn()?'on':'warn'],
       ['chats','Which chats?',label(data.wizard.scope||'account')],['collection','Collection and files',label(data.values.files)],
-      ['protection','Record protection',tr(data.values.timestamps?'On':'Off')],['notifications','Notifications and off-site copy',tr(data.values.notifications?'On':'Off')]];
+      ['protection','Record protection',tr(data.values.timestamps?'On':'Off'),data.values.timestamps?'on':'off'],['notifications','Notifications and off-site copy',tr(data.values.notifications?'On':'Off'),data.values.notifications?'on':'off']];
     if(inheritance){
       const keys=Object.values(inheritance.keys),own=keys.filter(k=>k.source==='own').length;
       summaries.push(['group','Shared with the group',inheritance.group.label+' · '+(own?ctx.trn('{n} own value','{n} own values',own):tr('follows the group'))]);
     }
-    for(const [id,name,summary] of summaries){const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;
-      b.append(node('strong','',tr(name)),node('span','hint',summary),node('span','hub-arrow','→'));overview.append(b);}
-    const detail=node('section','hub-detail');detail.hidden=!section;root.append(detail);
+    for(const ids of sectionGroups){
+      const list=node('div','hub-list');
+      for(const id of ids){
+        const item=summaries.find(s=>s[0]===id);if(!item)continue;
+        const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;
+        const value=node('span','hint',item[2]);if(item[3])value.dataset.state=item[3];
+        b.append(tile(...sectionMarks[id]),node('strong','',tr(item[1])),value,arrow());list.append(b);
+      }
+      if(list.childElementCount)overview.append(list);
+    }
+    const sheet=node('dialog','hub-sheet'),detail=node('section','hub-detail');sheet.hidden=!section;sheet.append(detail);root.append(sheet);
     if(section){
-      const bar=node('div','hub-detail-bar'), close=button('✕',closeSection,'icon-btn hub-close');
-      close.setAttribute('aria-label',tr('Close'));close.title=tr('Close');
-      const back=button('Back to settings',closeSection,'secondary hub-back');back.textContent='← '+tr('Back to settings');
-      bar.append(back,close);detail.append(bar);
-      title(detail,summaries.find(s=>s[0]===section)?.[1]||'Settings');
+      const bar=node('div','hub-sheet-bar'),heading=node('h2','',tr(summaries.find(s=>s[0]===section)?.[1]||'Settings'));heading.tabIndex=-1;
+      const close=button('',closeSection,'icon-button hub-sheet-close hub-close');
+      close.title=tr('Back to settings');close.setAttribute('aria-label',close.title);close.append(icon('x'));
+      bar.append(tile(...(sectionMarks[section]||['settings','slate'])),heading,close);detail.append(bar);
+      sheet.addEventListener('cancel',event=>{event.preventDefault();close.click();});
+      let pressed=null;
+      sheet.addEventListener('pointerdown',event=>{pressed=event.target;});
+      sheet.addEventListener('click',event=>{if(event.target===sheet&&pressed===sheet)close.click();});
       if(section==='appearance')preferencesForm(detail);
       if(section==='level')cards(detail,levels,prefs.level,async level=>{await savePreferences({level});render();});
       if(section==='group'&&inheritance){
@@ -260,11 +282,15 @@ export function createSettingsHub(ctx) {
         cards(detail,goals,data.goal,async goal=>{await applyGoal(goal,{keep:keep.checked});render();});
       }
       if(section==='connection')connectionForm(detail,false);
+      if(section==='telegram'&&signedIn()&&window.TgWitnessDocumentation){
+        const list=node('div','hub-list'),open=button('',async()=>{section=null;render();await window.TgWitnessDocumentation.openAccount();},'hub-summary');
+        open.append(tile('edit','blue'),node('strong','',tr('Profile')),node('span','hint',tr('Privacy settings')),arrow());list.append(open);detail.append(list);
+      }
       if(section==='telegram')move(ctx.authCard(),detail);
       if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
         const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});}
       const fields=data.fields.filter(f=>f.section===section&&f.key!=='ip');
-      const hidden=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section));
+      let hidden=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section));if(hidden.length===fields.length)hidden=[];
       for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
       if(hidden.length)detail.append(button(tr('Show {n} more settings',{n:hidden.length}),()=>{reveal.add(section);render();},'text-link'));
       if(section==='notifications'){
@@ -275,14 +301,24 @@ export function createSettingsHub(ctx) {
       if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
       if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
     }
-    const more=node('details','hub-more');more.hidden=!!section;more.append(node('summary','',tr('More settings and expert tools')));
+    if(section&&sheet.isConnected){
+      sheet.classList.toggle('settled',shownSection===section);sheet.showModal();
+      if(shownSection===section)detail.scrollTop=keptScroll;
+      const again=keptFocus&&detail.querySelector('[data-setting="'+CSS.escape(keptFocus)+'"]');
+      (again?.querySelector('input,select,button')||detail.querySelector('.hub-sheet-bar h2'))?.focus({preventScroll:true});
+      if(again)lastSetting=null;
+    }
+    shownSection=section;
+    const more=node('details','hub-more');more.hidden=!!query;more.open=prefs.level!=='simple';more.append(node('summary','',tr('More settings and expert tools')));
+    const tools=node('div','hub-list');more.append(tools);
     for(const [view,text] of [['sources','Recording rules'],['parameters','Parameters'],['access','Access'],['integrations','Integrations / MCP'],['system-log','System log'],['sealed','GitHub Actions']]){
-      const b=button(text,()=>openAdvanced(view));b.dataset.level=navLevels[view];more.append(b);
+      const b=button('',()=>openAdvanced(view),'hub-summary');b.dataset.level=navLevels[view];
+      b.append(tile(advancedMarks[view],'slate'),node('strong','',tr(text)),arrow());tools.append(b);
     }root.append(more,button('Open first setup',async()=>{await saveDraft({step:1});await navigate('first-run');},'text-link'));
     if(data.recommendations.length)root.append(message('Recommended: an off-site copy, a witness bot and a code check.','notice'));
   }
   function renderResults(box){
-    box.replaceChildren();root.querySelector('.hub-grid')?.toggleAttribute('hidden',!!query||!!section);
+    box.replaceChildren();root.querySelector('.hub-grid')?.toggleAttribute('hidden',!!query);root.querySelector('.hub-more')?.toggleAttribute('hidden',!!query);
     if(!query.trim())return;
     const q=query.trim().toLocaleLowerCase();
     const all=[...data.fields,...data.parameters,...[...ctx.catalog()].map(f=>({...f,label:tr(f.label)}))];
@@ -621,7 +657,7 @@ export function createSettingsHub(ctx) {
     async openGroup(id){if(!data)data=await request(owner(),'settings');await openGroup(id);},
     get step(){return draft&&!live?draft.step:null;},
     get section(){return state.view==='settings'&&!groupScope?section:null;},
-    leave(){restoreMoved();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
+    leave(){root.querySelector('dialog.hub-sheet')?.remove();restoreMoved();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
     status(){
       updateNext();if(data)updateIndicator(data.connection);
       const session=signedIn();

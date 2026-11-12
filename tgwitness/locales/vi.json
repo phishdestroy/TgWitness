@@ -8786,5 +8786,7 @@
     "other": "{n} tài khoản dùng máy chủ MTProxy công cộng: địa chỉ thay đổi và kết nối bị ngắt, có thể bỏ lỡ tin nhắn."
   },
   "Move all accounts to WARP": "Chuyển tất cả tài khoản sang WARP",
-  "Move to WARP": "Chuyển sang WARP"
+  "Move to WARP": "Chuyển sang WARP",
+  "Data": "Dữ liệu",
+  "Always included": "Luôn được đưa vào"
 }

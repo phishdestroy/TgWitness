@@ -8786,5 +8786,7 @@
     "other": "บัญชี {n} บัญชีใช้เซิร์ฟเวอร์ MTProxy สาธารณะ ที่อยู่จะเปลี่ยนและการเชื่อมต่อขาด อาจพลาดข้อความได้"
   },
   "Move all accounts to WARP": "ย้ายทุกบัญชีไปใช้ WARP",
-  "Move to WARP": "ย้ายไปใช้ WARP"
+  "Move to WARP": "ย้ายไปใช้ WARP",
+  "Data": "ข้อมูล",
+  "Always included": "รวมอยู่เสมอ"
 }

@@ -8832,5 +8832,7 @@
     "other": "{n} खाते सार्वजनिक MTProxy सर्वर इस्तेमाल करते हैं: पता बदलता है और कनेक्शन टूटता है, संदेश छूट सकते हैं।"
   },
   "Move all accounts to WARP": "सभी खाते WARP पर ले जाएँ",
-  "Move to WARP": "WARP पर ले जाएँ"
+  "Move to WARP": "WARP पर ले जाएँ",
+  "Data": "डेटा",
+  "Always included": "हमेशा शामिल"
 }

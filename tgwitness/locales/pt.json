@@ -8839,5 +8839,7 @@
     "other": "{n} contas usam servidores MTProxy públicos: o endereço muda e a conexão cai, então mensagens podem se perder."
   },
   "Move all accounts to WARP": "Mover todas as contas para o WARP",
-  "Move to WARP": "Mover para o WARP"
+  "Move to WARP": "Mover para o WARP",
+  "Data": "Dados",
+  "Always included": "Sempre incluído"
 }

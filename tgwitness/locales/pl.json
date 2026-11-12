@@ -8924,5 +8924,7 @@
     "other": "{n} konta korzystają z publicznych serwerów MTProxy: adres się zmienia, połączenie się zrywa i wiadomości mogą przepaść."
   },
   "Move all accounts to WARP": "Przenieś wszystkie konta na WARP",
-  "Move to WARP": "Przenieś na WARP"
+  "Move to WARP": "Przenieś na WARP",
+  "Data": "Dane",
+  "Always included": "Zawsze w raporcie"
 }

@@ -8832,5 +8832,7 @@
     "other": "{n} اکاؤنٹس عوامی MTProxy سرور استعمال کر رہے ہیں: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔"
   },
   "Move all accounts to WARP": "تمام اکاؤنٹس WARP پر منتقل کریں",
-  "Move to WARP": "WARP پر منتقل کریں"
+  "Move to WARP": "WARP پر منتقل کریں",
+  "Data": "ڈیٹا",
+  "Always included": "ہمیشہ شامل"
 }

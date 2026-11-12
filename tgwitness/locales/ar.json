@@ -9016,5 +9016,7 @@
     "other": "{n} حسابات تستخدم خوادم MTProxy عامة: يتغير العنوان وينقطع الاتصال، وقد تفوت رسائل."
   },
   "Move all accounts to WARP": "نقل كل الحسابات إلى WARP",
-  "Move to WARP": "النقل إلى WARP"
+  "Move to WARP": "النقل إلى WARP",
+  "Data": "البيانات",
+  "Always included": "مُضمَّن دائمًا"
 }

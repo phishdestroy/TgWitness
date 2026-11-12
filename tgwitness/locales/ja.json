@@ -8786,5 +8786,7 @@
     "other": "{n} 件のアカウントが公開 MTProxy サーバーを使っています。アドレスが変わり接続が切れるため、メッセージを取りこぼすことがあります。"
   },
   "Move all accounts to WARP": "すべてのアカウントを WARP に切り替える",
-  "Move to WARP": "WARP に切り替える"
+  "Move to WARP": "WARP に切り替える",
+  "Data": "データ",
+  "Always included": "常に含まれる項目"
 }

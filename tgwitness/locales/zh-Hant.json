@@ -8786,5 +8786,7 @@
     "other": "{n} 個帳戶使用公共 MTProxy 伺服器：位址會變動，連線會中斷，可能漏掉訊息。"
   },
   "Move all accounts to WARP": "將所有帳戶切換到 WARP",
-  "Move to WARP": "切換到 WARP"
+  "Move to WARP": "切換到 WARP",
+  "Data": "資料",
+  "Always included": "一律包含"
 }

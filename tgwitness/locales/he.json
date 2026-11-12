@@ -8878,5 +8878,7 @@
     "other": "{n} חשבונות משתמשים בשרתי MTProxy ציבוריים: הכתובת משתנה והחיבור נקטע, ולכן הודעות עלולות להיחסר."
   },
   "Move all accounts to WARP": "העברת כל החשבונות ל-WARP",
-  "Move to WARP": "העברה ל-WARP"
+  "Move to WARP": "העברה ל-WARP",
+  "Data": "נתונים",
+  "Always included": "נכלל תמיד"
 }

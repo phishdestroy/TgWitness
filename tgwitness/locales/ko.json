@@ -8786,5 +8786,7 @@
     "other": "계정 {n}개가 공개 MTProxy 서버를 사용합니다. 주소가 바뀌고 연결이 끊겨 메시지를 놓칠 수 있습니다."
   },
   "Move all accounts to WARP": "모든 계정을 WARP로 전환",
-  "Move to WARP": "WARP로 전환"
+  "Move to WARP": "WARP로 전환",
+  "Data": "데이터",
+  "Always included": "항상 포함"
 }
