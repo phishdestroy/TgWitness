@@ -1,4 +1,4 @@
-const TARGETS = ".pulse-kpi, .workflow-card, .home-account, .hub-list, .export-task-choices button, .report-design, .report-template, .answer-card, .accounts-total, .login-card";
+const TARGETS = ".pulse-kpi, .workflow-card, .home-account, .hub-summary, .export-task-choices button, .report-design, .report-template, .answer-card, .accounts-total, .login-card";
 
 export function createGlow({root = document} = {}) {
   const still = () => window.tgwReducedMotion?.() ?? matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -22,7 +22,6 @@ panel page; shared behavior belongs in [components](../components/README.md) or
 | Home overview and charts | [`pulse.js`](pulse.js), [`pulse.css`](pulse.css) |
 | Exports | [`exports.js`](exports.js), [`disclosure-preview.js`](disclosure-preview.js) |
 | Report studio steps and live preview | [`report-wizard.js`](report-wizard.js), [`report-wizard.css`](report-wizard.css), [`report-selection.js`](report-selection.js) |
-| Settings list and section dialogs | [`settings-hub.js`](settings-hub.js), [`settings-hub.css`](settings-hub.css) |
 | Shared access | [`access.js`](access.js) |
 | Account groups | [`group.js`](group.js), [`group-settings.js`](group-settings.js) |
 

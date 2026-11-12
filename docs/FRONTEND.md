@@ -86,7 +86,7 @@ drafts when navigating, and reset action menus when the workspace or route chang
 notification presentation. The page forbids inline styles, so charts set sizes through
 the CSS object model and SVG attributes. The counters and charts in `views/pulse.js` read
 the status counters and the chat list beside the overview from `views/home.js`.
-Settings sections open in a modal dialog over the settings list. The report studio in
+The report studio in
 `views/report-wizard.js` regroups the existing report form into steps beside the live
 preview and keeps every control id, so saving, drafts and previews work unchanged.
 
