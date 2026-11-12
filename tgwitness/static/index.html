@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.9.3-workflows2">
+<link rel="stylesheet" href="/style.css?v=0.9.3-workflows3">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=8">
+<link rel="stylesheet" href="/views/settings-hub.css?v=9">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/views/system-map.css?v=2">
 <link rel="stylesheet" href="/services.css?v=1">
@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/account-import.css?v=1">
 <link rel="stylesheet" href="/views/access.css?v=30">
 <link rel="stylesheet" href="/components/journal.css?v=6">
-<link rel="stylesheet" href="/views/chats.css?v=15">
+<link rel="stylesheet" href="/views/chats.css?v=16">
 <link rel="stylesheet" href="/views/chat-list.css?v=13">
 <link rel="stylesheet" href="/views/board.css?v=2">
 <link rel="stylesheet" href="/views/topology.css?v=2">
@@ -39,7 +39,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-profiles4"></script>
+<script defer src="/app.js?v=0.9.3-profiles5"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=11"></script>
@@ -53,8 +53,8 @@
 <script defer src="/review.js?v=1"></script>
 <script defer src="/live.js?v=3"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
-<link href="/views/exports.css?v=32" rel="stylesheet">
-<link href="/views/workflows.css?v=6" rel="stylesheet">
+<link href="/views/exports.css?v=33" rel="stylesheet">
+<link href="/views/workflows.css?v=7" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="/components/forms.css?v=35" rel="stylesheet">
 <link href="/components/feedback.css?v=36" rel="stylesheet">
@@ -689,6 +689,7 @@
         <label class="check-label"><input type="radio" name="report-selection-mode" id="report-selection-chosen" value="chosen"> Choose data</label>
       </div>
       <fieldset id="report-selection-options" class="report-selection-options" disabled>
+        <div class="report-picked" id="report-picked" hidden><div class="report-picked-head"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg><strong>Selected messages</strong><span id="report-picked-count" data-no-translate></span><button class="text-link" type="button" id="report-picked-clear">Clear selection</button></div><div class="report-picked-list" id="report-picked-list" data-no-translate></div></div>
         <div class="report-grid"><div><label for="report-selection-from">From date (UTC)</label><input type="date" id="report-selection-from"></div><div><label for="report-selection-to">Through date (UTC)</label><input type="date" id="report-selection-to"></div></div>
         <p class="hint">Both dates are included. Dates refer to when TgWitness observed a record, not when a message was sent.</p>
         <div class="report-catalog-toolbar"><button class="secondary" id="report-load-catalog" type="button">Load chats and authors</button><p class="hint">Read the recorded workspace once to populate these choices. Author counts follow the chosen chats and dates; build a new preview to refresh them.</p></div>
@@ -1644,7 +1645,6 @@
                   <div class="chat-history-tools"><select aria-label="How many recent messages to load" id="chat-history-limit"><option value="100">Last 100</option><option value="250">Last 250</option><option value="500">Last 500</option></select><button class="quiet" id="chat-load-history" title="Download recent messages from Telegram into this view" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Load history</button></div>
                 </div>
                 <div id="chat-recording-options"></div>
-                <button class="quiet" id="chat-build-report" type="button"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg> Build report</button>
                 <button class="quiet" id="chat-pattern" type="button" aria-pressed="false"><svg aria-hidden="true" class="icon"><use href="#i-settings"/></svg> Dotted background</button>
               </div>
             </details>

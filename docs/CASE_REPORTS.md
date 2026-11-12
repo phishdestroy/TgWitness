@@ -139,7 +139,11 @@ from the ZIP. Disabled chart series are omitted from the analytical JSON; use a
 minimized export to restrict disclosure of source records.
 
 Data-selection filters apply to journal reports; account and sharing exports retain
-their own acquisition and disclosure scope.
+their own acquisition and disclosure scope. A selection can name whole chats, authors,
+UTC dates, record types and individual messages. Messages picked in a chat with
+**Select** arrive as **Selected messages**; the report then covers every saved record
+of those messages and of any chat selected in full, and lists the chosen message
+numbers under **Selected data**.
 
 Shared design/chart preferences are frozen into new chat/account exports and account
 sharing previews. Account/sharing language and privacy settings remain independent;

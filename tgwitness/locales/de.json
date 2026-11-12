@@ -8854,5 +8854,8 @@
   "this device": "dieses Gerät",
   "Undo of an earlier change": "Rückgängigmachen einer früheren Änderung",
   "Data": "Daten",
-  "Always included": "Immer enthalten"
+  "Always included": "Immer enthalten",
+  "Select messages": "Nachrichten auswählen",
+  "Selected messages": "Ausgewählte Nachrichten",
+  "Select no more than {n} messages.": "Wählen Sie höchstens {n} Nachrichten aus."
 }

@@ -16,7 +16,7 @@ KINDS = {"message.new": "New message", "message.snapshot": "History snapshot",
 
 def text_keys():
     return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, "Selected records", "Source journal records",
-            "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types",
+            "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types", "Selected messages",
             "Unobserved message IDs", "Unobserved IDs: {ids} in {ranges} ranges.",
             "Showing {shown} of {total} ranges.", "Missing ID range", "Saved before", "Saved after",
             "No unobserved message IDs were found between the saved boundaries.",
@@ -26,11 +26,22 @@ def text_keys():
             *KINDS.values()]
 
 
+def picked_messages(selection):
+    chats = {}
+    for item in selection.get("messages") or []:
+        chats.setdefault(item["chat"], []).append(item["message"])
+    return "; ".join(str(chat) + ": " + ", ".join("#" + str(message) for message in sorted(messages))
+                     for chat, messages in sorted(chats.items()))
+
+
 def scope_rows(material, say):
     selection, counts, source = material["selection"], material["counts"], material["source"]
+    picked = picked_messages(selection)
     return [(say("Selected records"), str(counts["selected_records"])),
             (say("Source journal records"), str(source["records"])),
-            (say("Chats"), ", ".join([*map(str, selection["chats"]), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))]) or say("All chats")),
+            (say("Chats"), ", ".join([*map(str, selection["chats"]), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))])
+             or ("—" if picked else say("All chats"))),
+            *([(say("Selected messages"), picked)] if picked else []),
             (say("Selected authors"), ", ".join(map(str, selection["senders"])) or say("All authors")),
             (say("Observation dates (UTC)"), " — ".join((selection["date_from"] or "…", selection["date_to"] or "…"))
              if selection["date_from"] or selection["date_to"] else say("All dates")),

@@ -106,12 +106,13 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     return hit.length ? [periodMarker(hit)] : [];
   }
 
-  function load(chatKey, dataKey, chat, done) {
+  function load(chatKey, dataKey, chat, done, range = {}) {
     const key = chatKey + "|" + dataKey;
     if (key === loadedKey || key === pendingKey) return;
     if (!loadedKey.startsWith(chatKey + "|")) periods = [];
     pendingKey = key;
-    json("events?kind=" + KINDS + "&limit=500").then(result => {
+    const window = ["since", "until"].filter(name => range[name]).map(name => "&" + name + "=" + encodeURIComponent(range[name])).join("");
+    json("events?kind=" + KINDS + "&limit=500" + window).then(result => {
       if (pendingKey !== key) return;
       const next = intervals(result.events || [], chat), changed = JSON.stringify(next) !== JSON.stringify(periods);
       periods = next; loadedKey = key; pendingKey = "";

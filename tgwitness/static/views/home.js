@@ -45,7 +45,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
   function chart() {
     const box = node('section', 'home-card home-chart');
     const head = node('div', 'home-heading');
-    head.append(node('h2', '', tr('Saved by day')), node('span', 'home-sub', tr('last {n} days, this account', {n: activity?.days || 60})));
+    const sub = node('span', 'home-sub', tr('last {n} days, this account', {n: activity?.days || 60}));
+    head.append(node('h2', '', tr('Saved by day')), sub);
     box.append(head);
     const days = activity?.days || 60, start = activity ? new Date(activity.since + 'T00:00:00Z') : new Date(Date.now() - (days - 1) * 86400000);
     const byDay = new Map((activity?.series || []).map(item => [item.day, item]));
@@ -58,14 +59,30 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       box.append(node('p', 'home-empty', tr('Nothing saved in this period yet. Start observation, load history or run an export; saved messages, edits and deletions appear here by day.')));
       return box;
     }
-    const peak = Math.max(1, ...values.map(v => v.messages)), changes = Math.max(1, ...values.map(v => v.edits + v.deletions));
-    const width = 600, height = 140, step = width / days;
-    const svg = svgNode('svg', {viewBox: `0 0 ${width} ${height + 40}`, class: 'home-svg', role: 'img', 'aria-label': tr('Saved by day')});
+    const first = values.findIndex(v => v.messages + v.edits + v.deletions > 0);
+    const span = Math.min(days, Math.max(14, days - first + 1)), shown = values.slice(days - span);
+    sub.textContent = tr('last {n} days, this account', {n: span});
+    const peak = Math.max(1, ...shown.map(v => v.messages)), changes = Math.max(1, ...shown.map(v => v.edits + v.deletions));
+    const width = 600, height = 140, pad = 10, top = 16, step = (width - pad * 2) / span;
+    const svg = svgNode('svg', {viewBox: `0 0 ${width} ${height + 52}`, class: 'home-svg', role: 'img', 'aria-label': tr('Saved by day')});
     svg.append(svgNode('path', {d: `M0 ${height}H${width}`, class: 'home-axis'}));
-    values.forEach((v, index) => {
-      const x = index * step + 1, w = Math.max(1, step - 2);
-      const h = v.messages ? Math.max(2, v.messages / peak * (height - 10)) : 0;
-      const bar = svgNode('rect', {x, y: height - h, width: w, height: h, rx: 2, class: 'home-bar'});
+    const short = day => new Date(day + 'T00:00:00Z').toLocaleDateString(document.documentElement.lang || undefined, {day: 'numeric', month: 'short', timeZone: 'UTC'});
+    const tick = (x, anchor, text, cls = 'home-tick', y = height + 46) => {
+      const label = svgNode('text', {x, y, 'text-anchor': anchor, class: cls});
+      label.textContent = text;
+      svg.append(label);
+    };
+    tick(pad, 'start', short(shown[0].day));
+    tick(width - pad, 'end', short(shown[span - 1].day));
+    let labelled = false;
+    shown.forEach((v, index) => {
+      const w = Math.max(1, Math.min(26, step - 2)), x = pad + index * step + (step - w) / 2;
+      const h = v.messages ? Math.max(2, v.messages / peak * (height - top - 4)) : 0;
+      const bar = svgNode('rect', {x, y: height - h, width: w, height: h, rx: Math.min(4, w / 2), class: 'home-bar'});
+      if (v.messages === peak && h && !labelled) {
+        labelled = true;
+        tick(Math.max(pad + 8, Math.min(width - pad - 8, x + w / 2)), 'middle', v.messages.toLocaleString(), 'home-tick home-peak', height - h - 5);
+      }
       const title = svgNode('title');
       title.textContent = v.day + ': ' + tr('{n} messages', {n: v.messages}) + ' · ' + tr('{n} edits', {n: v.edits}) + ' · ' + tr('{n} deletions', {n: v.deletions});
       bar.append(title);
@@ -183,8 +200,11 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     box.append(node('h2', '', tr('System')));
     const facts = node('dl', 'home-facts');
     const health = status.health?.state;
+    const parts = {connection: 'Telegram connection', intake: 'Event intake', sources: 'Sources', media: 'Attachment queue'};
+    const troubled = Object.keys(parts).filter(name => ['failed', 'degraded', 'unknown'].includes(status.health?.[name]?.state));
+    const calm = {working: 'Working', off: 'Off', running: 'In progress', configured: 'Configured'}[health];
     const rows = [
-      [tr('Panel'), tr(health === 'ok' ? 'Working' : health ? 'Needs attention' : 'Checking…')],
+      [tr('Collection'), !health ? tr('Checking…') : calm ? tr(calm) : tr('Needs attention') + (troubled.length ? ': ' + troubled.map(name => tr(parts[name])).join(', ') : '')],
       [tr('Accounts'), String((state.profiles || []).length || 1)],
       [tr('Saved records in this account'), (status.stats?.total || 0).toLocaleString()],
       [tr('Files waiting to download'), String(collector.media_pending || 0)],

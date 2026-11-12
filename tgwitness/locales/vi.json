@@ -8808,5 +8808,8 @@
   "this device": "thiết bị này",
   "Undo of an earlier change": "Hoàn tác một thay đổi trước đó",
   "Data": "Dữ liệu",
-  "Always included": "Luôn được đưa vào"
+  "Always included": "Luôn được đưa vào",
+  "Select messages": "Chọn tin nhắn",
+  "Selected messages": "Tin nhắn đã chọn",
+  "Select no more than {n} messages.": "Chọn tối đa {n} tin nhắn."
 }

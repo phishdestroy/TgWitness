@@ -8808,5 +8808,8 @@
   "this device": "该设备",
   "Undo of an earlier change": "撤销先前更改",
   "Data": "数据",
-  "Always included": "始终包含"
+  "Always included": "始终包含",
+  "Select messages": "选择消息",
+  "Selected messages": "已选消息",
+  "Select no more than {n} messages.": "最多可选择 {n} 条消息。"
 }

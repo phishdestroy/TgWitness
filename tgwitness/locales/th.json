@@ -8808,5 +8808,8 @@
   "this device": "อุปกรณ์นี้",
   "Undo of an earlier change": "การยกเลิกการเปลี่ยนแปลงก่อนหน้านี้",
   "Data": "ข้อมูล",
-  "Always included": "รวมอยู่เสมอ"
+  "Always included": "รวมอยู่เสมอ",
+  "Select messages": "เลือกข้อความ",
+  "Selected messages": "ข้อความที่เลือก",
+  "Select no more than {n} messages.": "เลือกข้อความได้ไม่เกิน {n} รายการ"
 }

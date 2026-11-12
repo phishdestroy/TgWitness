@@ -8808,5 +8808,8 @@
   "this device": "此裝置",
   "Undo of an earlier change": "撤銷先前所做的變更",
   "Data": "資料",
-  "Always included": "一律包含"
+  "Always included": "一律包含",
+  "Select messages": "選取訊息",
+  "Selected messages": "已選取的訊息",
+  "Select no more than {n} messages.": "最多可選取 {n} 則訊息。"
 }

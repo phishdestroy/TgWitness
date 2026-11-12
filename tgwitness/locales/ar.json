@@ -9038,5 +9038,8 @@
   "this device": "هذا الجهاز",
   "Undo of an earlier change": "التراجع عن تغيير سابق",
   "Data": "البيانات",
-  "Always included": "مُضمَّن دائمًا"
+  "Always included": "مُضمَّن دائمًا",
+  "Select messages": "تحديد الرسائل",
+  "Selected messages": "الرسائل المحددة",
+  "Select no more than {n} messages.": "حدّد {n} رسالة على الأكثر."
 }

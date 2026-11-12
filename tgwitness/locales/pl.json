@@ -8946,5 +8946,8 @@
   "this device": "to urządzenie",
   "Undo of an earlier change": "Cofnięcie wcześniejszej zmiany",
   "Data": "Dane",
-  "Always included": "Zawsze w raporcie"
+  "Always included": "Zawsze w raporcie",
+  "Select messages": "Zaznacz wiadomości",
+  "Selected messages": "Zaznaczone wiadomości",
+  "Select no more than {n} messages.": "Zaznacz najwyżej {n} wiadomości."
 }

@@ -8808,5 +8808,8 @@
   "this device": "このデバイス",
   "Undo of an earlier change": "以前の変更を元に戻す",
   "Data": "データ",
-  "Always included": "常に含まれる項目"
+  "Always included": "常に含まれる項目",
+  "Select messages": "メッセージを選択",
+  "Selected messages": "選択したメッセージ",
+  "Select no more than {n} messages.": "選択できるメッセージは {n} 件までです。"
 }

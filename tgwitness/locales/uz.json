@@ -8854,5 +8854,8 @@
   "this device": "bu qurilma",
   "Undo of an earlier change": "Avvalgi o'zgartirishni bekor qilish",
   "Data": "Maʼlumotlar",
-  "Always included": "Doim kiritiladi"
+  "Always included": "Doim kiritiladi",
+  "Select messages": "Xabarlarni tanlash",
+  "Selected messages": "Tanlangan xabarlar",
+  "Select no more than {n} messages.": "{n} tadan ortiq xabar tanlamang."
 }

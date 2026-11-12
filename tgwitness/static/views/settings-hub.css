@@ -379,3 +379,15 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 @media(prefers-reduced-motion:reduce){.hub-undo{animation:none}.hub-summary,.hub-switch-track,.hub-switch-track:after{transition:none}}
 @media(max-width:700px){.hub-auto{flex-direction:column;padding:18px}.hub-history-row{grid-template-columns:1fr auto}.hub-history-row time{grid-row:2}.hub-undo{bottom:10px;width:auto}}
 .hub-subtitle{margin:28px 0 0;font-size:15px}
+.hub-summary-icon.tile,.answer-icon.tile,.hub-auto-icon.tile{background:var(--tile,var(--tile-blue));color:#fff}
+.answer-icon.tile{width:42px;height:42px;border-radius:13px}
+.answer-icon.tile .icon{width:21px;height:21px}
+.hub-auto-icon.tile .icon{width:23px;height:23px}
+.first-run-body .answer-icon.tile,.first-run-body .answer-card[aria-pressed=true] .answer-icon.tile{background:var(--tile,var(--tile-blue))}
+.first-run-body .answer-icon.tile .icon{width:24px;height:24px}
+.first-run-body .wizard-more .answer-icon.tile .icon,.first-run-body .wizard-options .answer-icon.tile .icon{width:18px;height:18px}
+.hub-arrow{display:grid;place-items:center;color:var(--muted);transition:transform .2s ease,color .2s ease}
+.hub-arrow .icon{width:16px;height:16px}
+.hub-summary:hover .hub-arrow{color:var(--accent);transform:translateX(3px)}
+[dir=rtl] .hub-summary:hover .hub-arrow{transform:scaleX(-1) translateX(3px)}
+@media (prefers-reduced-motion:reduce){.hub-arrow{transition:none}.hub-summary:hover .hub-arrow{transform:none}[dir=rtl] .hub-summary:hover .hub-arrow{transform:scaleX(-1)}}

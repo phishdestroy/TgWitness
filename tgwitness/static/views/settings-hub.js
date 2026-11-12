@@ -4,10 +4,10 @@ import {accountState} from '../components/account-state.js';
 export function createSettingsHub(ctx) {
   const {root, wizardRoot, state, json, tr, node, toast, navigate, askConfirm, $, refreshStatus} = ctx;
   const rank = {simple:0, standard:1, expert:2};
-  const goals = [['copy','📥','Just download','Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.'],['watch','👁','Follow chats','Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.'],['evidence','⚖','Evidence for a case','Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.']];
+  const goals = [['copy','download:blue','Just download','Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.'],['watch','eye:teal','Follow chats','Keep new messages and their changes, with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.'],['evidence','fingerprint:violet','Evidence for a case','Record continuously with independent timestamps from a third party that the recipient checks. Needs requests outside Telegram.']];
   const goalLevels = {copy:'simple',watch:'standard',evidence:'standard'};
-  const routes = [['auto','✨','Automatic','Try WARP, then public proxies.'],['warp','🛡','Cloudflare WARP','Connect through a local tunnel.'],['proxy','🔌','My proxy','Paste one proxy address.'],['direct','🌐','Direct','Telegram will see this server’s address.']];
-  const levels = [['simple','🙂','Simple','Only the essentials.'],['standard','⚙','Standard','Common settings and explanations.'],['expert','🛠','Expert','All fields, limits and technical details.']];
+  const routes = [['auto','sparkle:violet','Automatic','Try WARP, then public proxies.'],['warp','shield:teal','Cloudflare WARP','Connect through a local tunnel.'],['proxy','link:orange','My proxy','Paste one proxy address.'],['direct','external:slate','Direct','Telegram will see this server’s address.']];
+  const levels = [['simple','star:green','Simple','Only the essentials.'],['standard','settings:blue','Standard','Common settings and explanations.'],['expert','braces:slate','Expert','All fields, limits and technical details.']];
   const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'simple',observations:'simple',evidence:'simple',settings:'simple',
     board:'standard',accounts:'simple',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
@@ -61,11 +61,16 @@ export function createSettingsHub(ctx) {
     const wrap=node('label','hub-label',tr(text)), el=node('select');
     for(const [key,name] of choices)el.append(new Option(tr(name),key));el.value=value;el.onchange=()=>run(()=>fn(el.value));wrap.append(el);return wrap;
   }
+  function glyph(mark, cls) {
+    const [name, tone] = String(mark).split(':'), el = node('span', cls + (tone ? ' tile' : ''));
+    if (!tone) { el.textContent = mark; return el; }
+    el.dataset.tone = tone; el.append(ctx.icon(name)); return el;
+  }
   function cards(box, entries, value, fn) {
     const group=node('div','answer-cards');group.setAttribute('role','group');
     for(const [key,emoji,name,note] of entries){
       const b=button('',()=>fn(key),'answer-card');b.dataset.answer=key;b.setAttribute('aria-pressed',String(key===value));
-      b.append(node('span','answer-icon',emoji),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
+      b.append(glyph(emoji,'answer-icon'),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
     }box.append(group);
   }
   function restoreMoved(){for(const [el,marker] of moved){marker.replaceWith(el);}moved=[];}
@@ -281,26 +286,26 @@ export function createSettingsHub(ctx) {
   }
   function summaryRows(){
     const inheritance=data.inheritance,connected=fresh(data.connection);
-    const rows=[['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected'),state.status?.collector?.connected?'ok':'warn','👤'],
-      ['chats','Which chats?',label(data.wizard.scope||'account')+(data.wizard.scope==='selected'?' · '+(data.wizard.chat_ids?.length||0):''),'ok','💬'],
-      ['connection','Connection',label(data.connection.mode)+(connected?' · '+tr('Working · {n} ms',{n:data.connection.check.latency_ms}):''),connected?'ok':'warn','🛡'],
-      ['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone+' · '+label(prefs.level),'none','🌐'],
-      ['goal','Goal',data.goal?label(data.goal):tr('Not chosen'),'none','🎯'],
-      ['collection','Collection and files',label(data.values.files),'none','📁'],
-      ['protection','Record protection',tr(data.values.timestamps?'On':'Off'),data.values.timestamps?'ok':'off','🔏'],
-      ['notifications','Notifications and off-site copy',tr(data.values.notifications?'On':'Off'),data.values.notifications?'ok':'off','🔔'],
-      ['level','Interface level',label(prefs.level),'none','🎚']];
+    const rows=[['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected'),state.status?.collector?.connected?'ok':'warn','account:blue'],
+      ['chats','Which chats?',label(data.wizard.scope||'account')+(data.wizard.scope==='selected'?' · '+(data.wizard.chat_ids?.length||0):''),'ok','message:green'],
+      ['connection','Connection',label(data.connection.mode)+(connected?' · '+tr('Working · {n} ms',{n:data.connection.check.latency_ms}):''),connected?'ok':'warn','shield:teal'],
+      ['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone+' · '+label(prefs.level),'none','sun:orange'],
+      ['goal','Goal',data.goal?label(data.goal):tr('Not chosen'),'none','star:pink'],
+      ['collection','Collection and files',label(data.values.files),'none','archive:indigo'],
+      ['protection','Record protection',tr(data.values.timestamps?'On':'Off'),data.values.timestamps?'ok':'off','lock:violet'],
+      ['notifications','Notifications and off-site copy',tr(data.values.notifications?'On':'Off'),data.values.notifications?'ok':'off','bell:red'],
+      ['level','Interface level',label(prefs.level),'none','settings:slate']];
     if(inheritance){
       const keys=Object.values(inheritance.keys),own=keys.filter(k=>k.source==='own').length;
-      rows.push(['group','Shared with the group',inheritance.group.label+' · '+(own?ctx.trn('{n} own value','{n} own values',own):tr('follows the group')),'none','🔗']);
+      rows.push(['group','Shared with the group',inheritance.group.label+' · '+(own?ctx.trn('{n} own value','{n} own values',own):tr('follows the group')),'none','link:teal']);
     }
     return rows;
   }
   function summaryCard(box,[id,name,summary,tone,icon]){
     const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;b.dataset.tone=tone;
-    const top=node('span','hub-summary-top');top.append(node('span','hub-summary-icon',icon),node('strong','',tr(name)));
+    const top=node('span','hub-summary-top');top.append(glyph(icon,'hub-summary-icon'),node('strong','',tr(name)));
     const line=node('span','hub-summary-value');if(tone!=='none')line.append(node('span','hub-dot'));line.append(document.createTextNode(summary));
-    b.append(top,line,node('span','hub-arrow','→'));box.append(b);
+    const arrow=node('span','hub-arrow');arrow.append(ctx.icon('chevron'));b.append(top,line,arrow);box.append(b);
   }
   function autoCard(box){
     const modified=data.fields.filter(f=>f.modified);
@@ -317,7 +322,7 @@ export function createSettingsHub(ctx) {
     const actions=node('div','hub-actions');
     if(modified.length&&data.goal)actions.append(button('Return to recommended',()=>applyGoal(data.goal,{quiet:true}).then(()=>render()),'secondary'));
     actions.append(button('Undo last change',restoreLatest,'quiet hub-undo-last'));
-    body.append(actions);card.append(node('span','hub-auto-icon',modified.length?'✏️':'✨'),body);box.append(card);
+    body.append(actions);card.append(glyph(modified.length?'edit:orange':'sparkle:violet','hub-auto-icon'),body);box.append(card);
     loadHistory().then(rows=>{const last=card.querySelector('.hub-undo-last');if(last)last.hidden=!rows?.length;}).catch(()=>{});
     card.querySelector('.hub-undo-last').hidden=!history?.length;
   }
@@ -650,7 +655,7 @@ export function createSettingsHub(ctx) {
     if(main&&draft.scope!=='selected')draft.scope='selected';
     const changed=async()=>{if(inSettings){scopeDirty=true;updateScopeSave();}else{await saveDraft();updateNext();}};
     const rerender=async()=>{if(inSettings)render();else await renderWizard();};
-    cards(body,[['account','✦','All chats','Includes new chats in continuous collection.'],['selected','☑','Choose chats','Only the chats you select.'],['folder','▤','Telegram folder','Use a folder from Telegram.']],draft.scope,async scope=>{
+    cards(body,[['account','layers:blue','All chats','Includes new chats in continuous collection.'],['selected','check:green','Choose chats','Only the chats you select.'],['folder','inbox:orange','Telegram folder','Use a folder from Telegram.']],draft.scope,async scope=>{
       draft.scope=scope;await changed();await rerender();});
     if(main){
       for(const key of ['account','folder']){const card=body.querySelector('[data-answer="'+key+'"]');card.disabled=true;card.title=tr('Only on a separate account.');}
@@ -689,8 +694,8 @@ export function createSettingsHub(ctx) {
   }
   function accountQuestion(box){
     box.append(node('h2','',tr('Is this a separate account or your main one?')));
-    cards(box,[['dedicated','🧪','A separate account','Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.'],
-      ['main','👤','My main account','Not recommended: the account you use every day.']],draft.account_kind,async kind=>{
+    cards(box,[['dedicated','shield:green','A separate account','Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.'],
+      ['main','account:slate','My main account','Not recommended: the account you use every day.']],draft.account_kind,async kind=>{
       draft.account_kind=kind;if(kind==='main'&&draft.scope!=='selected')draft.scope='selected';
       await saveDraft();await renderWizard();
     });

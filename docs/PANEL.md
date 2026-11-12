@@ -110,9 +110,16 @@ Saved conversations, read-only by default.
   about the chat. **Coverage gap** marks a period between a recorded interruption and
   the next recorded resumption, with the reason when the journal has one. The markers
   appear with all messages shown and hide while a message filter is on.
-- **Build report** in **Chat actions** opens the report studio with this chat selected.
+- **Build report** above the messages opens the report studio with this chat selected.
   The same button under a message author's details selects the chat and that author.
   Both change only the draft; save it before exporting.
+- **Select** above the messages turns on message selection: press messages to mark
+  them, or use **Select shown**, then **Build report**. The report studio opens with
+  **Selected messages** filled in, and the report covers every saved record of those
+  messages: the first observation, edits and deletion notices. Up to 1,000 messages
+  can be selected; a chip in the studio removes one message, and whole chats can be
+  added next to them. Missing message numbers are left out of such a report unless
+  you switch them on again.
 - **Load history** brings the last 100, 250 or 500 messages into this view and the
   journal. Find it in **Chat actions**, alongside recording settings, read-only and
   secret-masking controls. The menu closes with Escape or a click outside it.

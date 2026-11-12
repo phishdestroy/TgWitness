@@ -46,6 +46,10 @@ export function createReportEditor({root,tr,onEdit}) {
   const designHelp=find('report-design-help');designs.append(fold('Details',[designHelp]));
   const presetHelp=templates.querySelector(':scope > p');if(presetHelp)templates.append(fold('Details',[presetHelp]));
   const fixed=root.querySelector('.studio-fixed');panels.get('contents').append(fold('Included in your report',[outline,fixed]));
+  const always=make('section','','editor-always'),alwaysList=make('ul');
+  always.append(make('strong',tr('Always included')),alwaysList);
+  for(const name of ['In brief','Basis of trust','Coverage','Anomaly indicators','Timestamps','Chain of custody','Verification','Digital signature'])alwaysList.append(make('li',tr(name)));
+  panels.get('contents').prepend(always);
   controls.remove();
   const chartShapes={
     'report-activity-chart':'<path d="M12 69H180" class="chart-example-axis"/><path d="M20 68V45h18v23m12 0V32h18v36m12 0V42h18v26m12 0V18h18v50m12 0V30h18v38" class="chart-example-fill"/><path d="M20 45h18v-9H20zm30-13h18v-8H50zm30 10h18V29H80zm30-24h18V9h-18zm30 12h18V18h-18z" class="chart-example-secondary"/>',

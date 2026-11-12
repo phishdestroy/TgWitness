@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- Reports can cover hand-picked messages: **Select** in a chat marks messages, **Build report** opens the report studio with them, and the report lists the chosen message numbers under **Selected data**. The selection format gained an optional `messages` list of chat and message numbers.
+- The report studio shows which parts are in every report under **Always included**. Settings use the same icon set as the rest of the panel instead of emoji. **Saved by day** on the overview zooms to the days that hold records and labels its dates and peak.
+- Fixed: the overview's **System** card reported **Needs attention** in every state; its first row is now **Collection** and shows the real collector state; the quick navigation window could extend below the screen; on a phone **Chats** opened a conversation instead of the list; disclosure arrows pointed the wrong way in right-to-left languages; coverage gap markers in a chat only used the latest 500 journal notices instead of the period of the messages shown.
 - Report studio: the chat and author lists show names and can be searched by them, and Enter in a field no longer saves the settings. Coverage gap markers in chats keep single notices as points and show an unexpected interruption that has not ended yet.
 - Chat header counts for saved, deleted, not found and edited messages filter the chat when pressed, and the **Deleted** and **Not found at recheck** marks open a note with the observed time.
 - **Build report** in a chat's actions and under an author's details opens the report studio with that chat, or that chat and author, already selected.
