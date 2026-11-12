@@ -97,7 +97,6 @@ class _Matcher:
         self.secret_chats = frozenset(selection.secret_chats)
         self.senders = frozenset(selection.senders)
         self.messages = frozenset((item.chat, item.message) for item in selection.messages)
-        self.message_chats = frozenset(item.chat for item in selection.messages)
         self.kinds = frozenset(selection.kinds)
         self.start = date.fromisoformat(selection.date_from) if selection.date_from else None
         self.end = date.fromisoformat(selection.date_to) if selection.date_to else None
@@ -108,12 +107,14 @@ class _Matcher:
         secret = report_analytics.secret_chat_id(event)
         if secret is not None:
             return secret in self.secret_chats
-        return event.get("chat_id") in self.chats or event.get("chat_id") in self.message_chats
+        chat = report_analytics._identifier(event.get("chat_id"))
+        return chat in self.chats or (chat, _message_id(event.get("message_id"))) in self.messages
 
-    def message(self, event):
-        chat = event.get("chat_id")
-        return not self.messages or chat in self.chats or report_analytics.secret_chat_id(event) is not None \
-            or (chat, event.get("message_id")) in self.messages
+    def whole_chat(self, event):
+        if not self.enabled or not self.chats and not self.secret_chats and not self.messages:
+            return True
+        return report_analytics.secret_chat_id(event) is None \
+            and report_analytics._identifier(event.get("chat_id")) in self.chats
 
     def time(self, event):
         if not self.enabled or not (self.start or self.end):
@@ -126,7 +127,7 @@ class _Matcher:
         if not self.enabled:
             return True
         kind = event.get("kind")
-        return isinstance(kind, str) and kind in self.kinds and self.chat(event) and self.message(event) and self.time(event) \
+        return isinstance(kind, str) and kind in self.kinds and self.chat(event) and self.time(event) \
             and (not self.senders or sender_id(event) in self.senders)
 
 
@@ -228,7 +229,7 @@ def _known(connection, event, predicate):
         WHERE excluded.priority < known.priority OR
               (excluded.priority = known.priority AND excluded.seq < known.seq)
     """, (chat, message, row["seq"], kind, row["observed_at"], row["sender_id"], row["text"], priority))
-    if predicate.chat(event) and predicate.time(event):
+    if predicate.whole_chat(event) and predicate.time(event):
         connection.execute("INSERT INTO bounds VALUES (?,?,?) ON CONFLICT(chat) "
                            "DO UPDATE SET low=min(low,excluded.low), high=max(high,excluded.high)", (chat, message, message))
 

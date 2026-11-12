@@ -201,10 +201,11 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const facts = node('dl', 'home-facts');
     const health = status.health?.state;
     const parts = {connection: 'Telegram connection', intake: 'Event intake', sources: 'Sources', media: 'Attachment queue'};
-    const troubled = Object.keys(parts).filter(name => ['failed', 'degraded', 'unknown'].includes(status.health?.[name]?.state));
+    const inState = states => Object.keys(parts).filter(name => states.includes(status.health?.[name]?.state)).map(name => tr(parts[name])).join(', ');
+    const failing = inState(['failed', 'degraded']), unsure = inState(['unknown']);
     const calm = {working: 'Working', off: 'Off', running: 'In progress', configured: 'Configured'}[health];
     const rows = [
-      [tr('Collection'), !health ? tr('Checking…') : calm ? tr(calm) : tr('Needs attention') + (troubled.length ? ': ' + troubled.map(name => tr(parts[name])).join(', ') : '')],
+      [tr('Collection'), !health ? tr('Checking…') : failing ? tr('Needs attention') + ': ' + failing : calm ? tr(calm) : tr('Needs attention') + (unsure ? ': ' + unsure : '')],
       [tr('Accounts'), String((state.profiles || []).length || 1)],
       [tr('Saved records in this account'), (status.stats?.total || 0).toLocaleString()],
       [tr('Files waiting to download'), String(collector.media_pending || 0)],

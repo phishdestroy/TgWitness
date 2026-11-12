@@ -108,7 +108,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=3'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=4'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
@@ -3095,7 +3095,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=6').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=7').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
@@ -5156,7 +5156,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
 function beginChat(id){
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
-  chatGeneration++;chatReady=false;chatPick=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
+  chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
   renderComposer();renderChat();renderChatsList();
@@ -5267,7 +5267,7 @@ function renderChatStatus(){
   for(const chip of $("chat-sub").querySelectorAll("button[data-chat-filter]"))chip.setAttribute("aria-pressed",String(chip.dataset.chatFilter!=="all"&&state.chatView==="messages"&&chip.dataset.chatFilter===state.chatFilter));
   const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
     current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
-    modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning(),chatPick?chatPick.size:-1,chatShown.length]);
+    modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning(),chatPick?chatPick.size:-1,chatPick?chatShown.filter(id=>!chatPick.has(id)).length:0]);
   if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const focusedView=box.contains(document.activeElement)?document.activeElement.dataset.chatView:null;
@@ -5334,20 +5334,22 @@ function renderChatStatus(){
     if(state.chatView==='messages'){
       const pick=node('button','quiet small chat-pick-toggle',tr('Select'));pick.type='button';pick.title=tr('Select messages');
       pick.setAttribute('aria-pressed',String(!!chatPick));pick.prepend(icon('check'));
-      pick.addEventListener('click',()=>{chatPick=chatPick?null:new Set();renderChatStatus();renderChatFeed();});viewBar.append(pick);
+      pick.addEventListener('click',()=>{chatPick=chatPick?null:new Set();chatPickAnchor=null;renderPick('.chat-pick-toggle');});viewBar.append(pick);
     }
   }
   if(chatPick&&state.chatView==='messages'){
     const bar=node('div','chat-pick-bar');bar.setAttribute('role','group');bar.setAttribute('aria-label',tr('Selected messages'));
     const count=node('strong','',tr('{n} selected',{n:chatPick.size.toLocaleString()}));count.setAttribute('role','status');
     const all=node('button','text-link',tr('Select shown'));all.type='button';all.disabled=!chatShown.some(id=>!chatPick.has(id));
-    all.addEventListener('click',()=>{for(const id of chatShown){if(chatPick.size>=CHAT_PICK_LIMIT)break;chatPick.add(id);}renderChatStatus();renderChatFeed();});
+    all.dataset.pick='all';
+    all.addEventListener('click',()=>{let full=false;for(const id of chatShown){if(chatPick.has(id))continue;if(chatPick.size>=CHAT_PICK_LIMIT){full=true;break;}chatPick.add(id);}
+      if(full)pickLimit();renderPick(full?'[data-pick=all]':'[data-pick-report]');});
     const clear=node('button','text-link',tr('Clear selection'));clear.type='button';clear.disabled=!chatPick.size;
-    clear.addEventListener('click',()=>{chatPick.clear();renderChatStatus();renderChatFeed();});
+    clear.addEventListener('click',()=>{chatPick.clear();chatPickAnchor=null;renderPick('[data-pick=all]');});
     const build=node('button','primary small',tr('Build report'));build.type='button';build.disabled=!chatPick.size;build.dataset.pickReport='';
     build.addEventListener('click',()=>busy(build,()=>reportFor(state.chat,null,[...chatPick].sort((a,b)=>a-b))));
     const cancel=node('button','quiet small',tr('Cancel'));cancel.type='button';
-    cancel.addEventListener('click',()=>{chatPick=null;renderChatStatus();renderChatFeed();});
+    cancel.addEventListener('click',()=>{chatPick=null;chatPickAnchor=null;renderPick('.chat-pick-toggle');});
     bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),build,cancel);box.append(bar);
   }
   if(state.chatAuthor!==null&&state.chatView==='messages'){
@@ -5432,8 +5434,8 @@ function renderChatFeed(){
   let lastDay=null,lastShown=null;
   const marking=chatGaps&&state.chatFilter==="all"&&state.chatAuthor===null,marksBefore=new Map();
   if(marking){
-    const edge=(m,shift)=>{const time=new Date(sentAt(m)||NaN).getTime();return Number.isFinite(time)?new Date(time+shift).toISOString().replace('Z','+00:00'):null;};
-    const range={since:edge(shown[0],-86400000),until:state.chatNextAfter===null?null:edge(shown.at(-1),86400000)};
+    const times=shown.map(m=>new Date(m.sent_at||m.versions[0]?.observed_at||NaN).getTime()).filter(Number.isFinite),edge=time=>new Date(time).toISOString().replace('Z','+00:00');
+    const range=times.length?{since:edge(times.reduce((a,b)=>Math.min(a,b))-86400000),until:state.chatNextAfter===null?null:edge(times.reduce((a,b)=>Math.max(a,b))+86400000)}:{since:null,until:null};
     chatGaps.load(state.workspaceRevision+':'+state.profile+':'+chatGeneration,
       ['coverage.gap','connection.restored','observation.started','observation.stopped','process.started','process.stopped'].map(kind=>s.stats.counts?.[kind]||0).join('.')+'|'+range.since+'|'+range.until,state.chat,()=>{
         if(state.view!=='chats'||state.chatView!=='messages')return;
@@ -5516,7 +5518,9 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     const chosen=chatPick.has(m.message_id),box=node("button","msg-pick");box.type="button";box.setAttribute("role","checkbox");box.setAttribute("aria-checked",String(chosen));
     box.setAttribute("aria-label",tr(chosen?"Unselect":"Select")+": "+name+" · "+fmtFull(m.sent_at||m.versions[0]?.observed_at));box.append(icon("check"));
     row.classList.add("pickable");row.classList.toggle("picked",chosen);row.prepend(box);
-    row.addEventListener("click",event=>{if(chatPick&&!event.target.closest("a,button:not(.msg-pick),summary,input,select,textarea,video,audio"))togglePick(m.message_id);});
+    row.addEventListener("click",event=>{
+      if(!chatPick||event.target.closest("a,button:not(.msg-pick),summary,input,select,textarea,video,audio,.versions,.sender-facts,.change-note"))return;
+      event.stopImmediatePropagation();if(event.shiftKey)event.preventDefault();togglePick(m.message_id,event.shiftKey);},{capture:true});
   }
   const version=m.versions.at(-1);
   const ref=version||m.reference;
@@ -5739,12 +5743,24 @@ function buttonsNode(keyboard,message=null){
 let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
 let chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
 const CHAT_PICK_LIMIT=1000;
-function togglePick(id){
-  if(!chatPick)return;
-  if(chatPick.has(id))chatPick.delete(id);
-  else if(chatPick.size>=CHAT_PICK_LIMIT){toast(tr('Select no more than {n} messages.',{n:CHAT_PICK_LIMIT.toLocaleString()}),true);return;}
-  else chatPick.add(id);
+let chatPickAnchor=null;
+function renderPick(focus){
   renderChatStatus();renderChatFeed();
+  if(focus)(document.querySelector(focus)||document.querySelector('.chat-pick-toggle'))?.focus({preventScroll:true});
+}
+function pickLimit(){toast(tr('Select no more than {n} messages.',{n:CHAT_PICK_LIMIT.toLocaleString()}),true);}
+function togglePick(id,range=false){
+  if(!chatPick)return;
+  const from=chatShown.indexOf(chatPickAnchor),to=chatShown.indexOf(id);
+  if(range&&from>=0&&to>=0){
+    let full=false;
+    for(const item of chatShown.slice(Math.min(from,to),Math.max(from,to)+1)){if(chatPick.has(item))continue;if(chatPick.size>=CHAT_PICK_LIMIT){full=true;break;}chatPick.add(item);}
+    if(full)pickLimit();
+  }
+  else if(chatPick.has(id))chatPick.delete(id);
+  else if(chatPick.size>=CHAT_PICK_LIMIT){pickLimit();return;}
+  else chatPick.add(id);
+  chatPickAnchor=id;renderPick('#msg-'+id+' .msg-pick');
 }
 const chatSafety=window.TgWitnessChatSafety?.create({
   context:()=>({profile:state.profile,revision:state.workspaceRevision,chat:state.chat,account:state.status?.collector.account,

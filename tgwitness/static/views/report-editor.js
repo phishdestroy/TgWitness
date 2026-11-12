@@ -48,7 +48,7 @@ export function createReportEditor({root,tr,onEdit}) {
   const fixed=root.querySelector('.studio-fixed');panels.get('contents').append(fold('Included in your report',[outline,fixed]));
   const always=make('section','','editor-always'),alwaysList=make('ul');
   always.append(make('strong',tr('Always included')),alwaysList);
-  for(const name of ['In brief','Basis of trust','Coverage','Anomaly indicators','Timestamps','Chain of custody','Verification','Digital signature'])alwaysList.append(make('li',tr(name)));
+  for(const name of ['In brief','Basis of trust','Coverage','Timestamps','Chain of custody','Reading this record','How to verify','Digital signature'])alwaysList.append(make('li',tr(name)));
   panels.get('contents').prepend(always);
   controls.remove();
   const chartShapes={

@@ -1,4 +1,4 @@
-import {createReportEditor} from './report-editor.js?v=2';
+import {createReportEditor} from './report-editor.js?v=3';
 
 export function createReportSelection({root,tr,json,getOwner,ready,options,active,titles=()=>new Map()}) {
   const people=new Map();
@@ -99,8 +99,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     list.replaceChildren(...nodes);
   }
   function dropPicked(next){
-    picked=next;if(!picked.length&&!ids(fields.chats).length&&!ids(secretField).length)allChats.checked=true;
-    renderPicked();fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
+    picked=next;renderPicked();fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
   }
   find('report-picked-clear').addEventListener('click',()=>dropPicked([]));
   function renderCatalog(key){
@@ -341,8 +340,11 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       selectStep(0,false);secretField.dispatchEvent(new Event('input',{bubbles:true}));
     },
     selectMessages(chat,messageIds){
-      this.load({enabled:true,messages:messageIds.map(message=>({chat,message})),id_gaps:false,
-        kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
+      const draft=read(),fresh=messageIds.map(message=>({chat,message}));
+      const kept=draft.enabled?picked.filter(item=>item.chat!==chat).slice(0,Math.max(0,1000-fresh.length)):[];
+      const whole=draft.enabled?ids(fields.chats).filter(id=>id!==chat):[];
+      this.load(draft.enabled?{...draft,chats:whole,secret_chats:ids(secretField),messages:[...kept,...fresh],id_gaps:false}
+        :{enabled:true,messages:fresh,id_gaps:false,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
       selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
     },
     selectChats(chatIds){

@@ -36,7 +36,7 @@ def picked_messages(selection):
 
 def scope_rows(material, say):
     selection, counts, source = material["selection"], material["counts"], material["source"]
-    picked = picked_messages(selection)
+    picked = picked_messages(selection) if selection["enabled"] else ""
     return [(say("Selected records"), str(counts["selected_records"])),
             (say("Source journal records"), str(source["records"])),
             (say("Chats"), ", ".join([*map(str, selection["chats"]), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))])
