@@ -11,7 +11,7 @@ available workflows; this page records what has actually been checked.
 These are selected validation results from the
 [development history](OVERVIEW.md#testing-history-and-duration). Engineering tests,
 live acquisition, fault injection, recovery checks and artifact verification each
-have their stated scope; external certification is a separate status.
+have their stated scope.
 
 On 8 November, the published installer at `b35f8e18f3d1` was inspected without
 executing or installing it: wheel and dependency-lock SHA-256 and RSA signatures
@@ -594,8 +594,7 @@ The following items remain unqualified:
 Further controlled runs for role visibility, reaction actors, prolonged FloodWait,
 account bans, network and process interruption recovery, mobile QR confirmation,
 sustained high load and long-term archival follow the
-[live acceptance](internal/LIVE_ACCEPTANCE.md) matrix. Independent security review and
-forensic certification are external steps.
+[live acceptance](internal/LIVE_ACCEPTANCE.md) matrix.
 
 The [public audit directory](../website/validation/audit/README.md) contains only
 the signed report and aggregate measurements. Detailed operational receipts,

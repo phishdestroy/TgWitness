@@ -13,10 +13,8 @@ FORMAT = 'tgwitness-examination-v1'
 PROCEDURES = ('criminal', 'civil')
 COMPUTED = ('integrity', 'external_time')
 CONDITIONAL = ('signer', 'checkpoint', 'head_binding', 'environment')
-OUTSIDE = ('authorship', 'completeness', 'truth', 'lawfulness', 'identity')
 FIELDS = ('case', 'authority', 'name', 'education', 'specialty', 'experience', 'organisation', 'period', 'place')
 ANSWERABLE = ('changed', 'time', 'manifest', 'key', 'coverage', 'witness')
-UNANSWERABLE = ('author', 'complete', 'true', 'lawful')
 STANDARDS = ('sha256', 'ed25519', 'tsp', 'ots')
 RTL = ('ar', 'fa', 'he', 'ur')
 BLANK = '_' * 34
@@ -116,9 +114,8 @@ def build(result, model, settings, receipt_sha256):
         'coverage': {'periods': len(coverage.get('continuous') or []), 'gaps': len(coverage.get('gaps') or []),
                      'unobserved': len(coverage.get('unobserved_ids') or [])},
         'findings': {'computed': [finding(cid) for cid in COMPUTED if cid in rows],
-                     'conditional': [finding(cid) for cid in CONDITIONAL if cid in rows],
-                     'outside': list(OUTSIDE)},
-        'questions': {'answerable': list(ANSWERABLE), 'outside': list(UNANSWERABLE)},
+                     'conditional': [finding(cid) for cid in CONDITIONAL if cid in rows]},
+        'questions': {'answerable': list(ANSWERABLE)},
         'run': {'receipt': 'narrative-run.json', 'receipt_sha256': receipt_sha256},
         'translation_review': 'machine-assisted, not reviewed',
     }
@@ -175,7 +172,6 @@ def sections(protocol, text):
             intro.append(('sourced', [(declaration.get('basis') or '', declaration.get('source'))]))
     intro.append(('heading', t('expert.questions')))
     intro.append(('numbered', 3))
-    intro.append(('text', [t('expert.questions.see_annex')]))
     material = protocol['material']
     lines = [t('expert.material.package', sha=material['package_sha256'])]
     if material['witness_package_sha256']:
@@ -220,20 +216,16 @@ def sections(protocol, text):
         ('heading', '4.1 ' + t('expert.bucket.computed')), ('text', [t('expert.bucket.computed.note')]),
         *[('finding', described(item, False)) for item in findings['computed']],
         ('heading', '4.2 ' + t('expert.bucket.conditional')), ('text', [t('expert.bucket.conditional.note')]),
-        *[('finding', described(item, True)) for item in findings['conditional']],
-        ('heading', '4.3 ' + t('expert.bucket.outside')), ('text', [t('expert.bucket.outside.note')]),
-        ('list', [t('expert.outside.' + name) for name in findings['outside']])]))
+        *[('finding', described(item, True)) for item in findings['conditional']]]))
     out.append(('section', t('expert.section.signature'), [
         ('fields', [t('expert.field.name'), t('expert.field.date'), t('expert.field.signature')]),
         ('text', [t('expert.signature.cert', law=local['esignature']['law_local'])
                   if local and (local.get('esignature') or {}).get('law_local') else t('expert.signature.cert_generic'),
                   t('expert.signature.collector')])]))
     answers = [t('expert.q.' + name) + ' ' + t('expert.q.' + name + '.check') for name in protocol['questions']['answerable']]
-    refused = [t('expert.q.' + name) + ' ' + t('expert.q.' + name + '.reason') for name in protocol['questions']['outside']]
     out.append(('section', t('expert.annex.questions'), [
         ('text', [t('expert.annex.questions.note')]),
-        ('heading', t('expert.questions.answerable')), ('list', answers),
-        ('heading', t('expert.questions.outside')), ('list', refused)]))
+        ('heading', t('expert.questions.answerable')), ('list', answers)]))
     out.append(('section', t('expert.annex.run'), [
         ('code', [t('expert.run.receipt', sha=protocol['run']['receipt_sha256'])]),
         ('text', [t('expert.run.repeat'), t('limit.review')])]))
