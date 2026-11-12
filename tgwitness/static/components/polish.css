@@ -1,5 +1,5 @@
 :root {
-  --grad: linear-gradient(135deg, #3b82f6 0%, #6366f1 55%, #8b5cf6 100%);
+  --grad: linear-gradient(135deg, #2563eb 0%, #4f46e5 55%, #7c3aed 100%);
   --grad-soft: linear-gradient(135deg, rgb(59 130 246 / .10), rgb(139 92 246 / .10));
   --shadow-xs: 0 1px 2px rgb(16 24 40 / .05);
   --shadow-sm: 0 1px 2px rgb(16 24 40 / .04), 0 4px 14px -6px rgb(16 24 40 / .08);
@@ -128,7 +128,8 @@ dialog[open]::backdrop { background: rgb(10 16 30 / .42); backdrop-filter: blur(
 
 .events-table tbody tr:has(.event-icon.delete) > td:first-child { box-shadow: inset 3px 0 0 var(--danger); }
 .events-table tbody tr:has(.event-icon.edit) > td:first-child { box-shadow: inset 3px 0 0 var(--warning); }
-.events-table tbody tr:has(.event-icon.coverage) > td:first-child { box-shadow: inset 3px 0 0 var(--orange); background: color-mix(in srgb, var(--orange-soft) 55%, transparent); }
+.events-table tbody tr:has(.event-icon.coverage) > td { background: color-mix(in srgb, var(--orange-soft) 55%, transparent); }
+.events-table tbody tr:has(.event-icon.coverage) > td:first-child { box-shadow: inset 3px 0 0 var(--orange); }
 
 :is(.pulse-kpi, .workflow-card, .home-account:not(.current), .hub-summary, .report-design, .report-template, .accounts-total, .login-card, .export-task-choices button:not([aria-pressed=true]), .answer-card:not([aria-pressed=true])).glow-on { background-image: radial-gradient(260px circle at var(--glow-x) var(--glow-y), rgb(99 102 241 / .09), transparent 72%); }
 [data-theme="dark"] :is(.pulse-kpi, .workflow-card, .home-account:not(.current), .hub-summary, .report-design, .report-template, .accounts-total, .login-card, .export-task-choices button:not([aria-pressed=true]), .answer-card:not([aria-pressed=true])).glow-on { background-image: radial-gradient(280px circle at var(--glow-x) var(--glow-y), rgb(129 140 248 / .16), transparent 72%); }

@@ -641,9 +641,13 @@ class AccountExport:
         self.current["counts"] = {**self.counts, "chats_discovered": discovered, "chats_selected": len(selected),
             "chats_done": sum(total == done for total, done in chat_tasks.values())}
         options = self.current.get("options") or {}
-        omitted = sum(1 for chat in selected if not any(task.get("chat_id") == chat["id"] for task in tasks)) + sum(
+        task_chats, task_categories = set(), set()
+        for task in tasks:
+            task_chats.add(task.get("chat_id"))
+            task_categories.add(task.get("category"))
+        omitted = sum(1 for chat in selected if chat["id"] not in task_chats) + sum(
             1 for category, option in CATEGORY_OPTIONS.items()
-            if options.get(option) is True and not any(task["category"] == category for task in tasks))
+            if options.get(option) is True and category not in task_categories)
         self.current["coverage"] = {"inventory_complete": self.inventory["discovery_complete"],
             "tasks_total": len(tasks), "tasks_done": sum(bool(p["terminal"]) and p["outcome"] == "ok"
                                                           for p in self.progress.values()),
