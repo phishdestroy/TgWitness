@@ -8769,6 +8769,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "Lectura de mensajes guardados, búsquedas, informes y exportaciones firmadas de las observaciones guardadas",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "Recomendado. Diseñado para grabar: solo se incluyen los chats que quieras conservar, y perderlo no supone ningún coste.",
   "Running a panel action": "Ejecutar una acción del panel",
+  "Collecting people profiles": "Recopilando perfiles de usuarios",
+  "Nothing; exports and full history pause it": "Nada; las exportaciones y el historial completo la pausan",
   "Running an account or multi-account export": "Realizar una exportación de una cuenta o de varias cuentas",
   "Running now": "En ejecución",
   "Runs": "Ejecuta",

@@ -8763,6 +8763,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "Kaydedilmiş mesajları okuma, arama, raporlar ve kaydedilmiş gözlemlerin imzalı dışa aktarımları",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "Önerilir. Kayıt amacıyla tasarlanmıştır: yalnızca saklamak istediğiniz sohbetlere katılır ve kaybedilse bile hiçbir zararı yoktur.",
   "Running a panel action": "Bir panel eylemini çalıştırma",
+  "Collecting people profiles": "Kullanıcı profilleri toplanıyor",
+  "Nothing; exports and full history pause it": "Hiçbiri; dışa aktarmalar ve tüm geçmiş onu duraklatır",
   "Running an account or multi-account export": "Hesap veya çoklu hesap dışa aktarma işlemi",
   "Running now": "Şu anda çalışıyor",
   "Runs": "Çalışır",

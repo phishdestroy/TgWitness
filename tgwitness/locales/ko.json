@@ -8718,6 +8718,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "저장된 메시지 읽기, 검색, 보고서 및 저장된 관찰 기록의 서명된 내보내기",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "추천합니다. 기록을 위해 제작된 도구로, 보관하고 싶은 채팅에만 참여하며, 분실하더라도 아무런 손실이 없습니다.",
   "Running a panel action": "패널 작업 실행",
+  "Collecting people profiles": "사용자 프로필 수집 중",
+  "Nothing; exports and full history pause it": "없음. 내보내기와 전체 기록 불러오기 중에는 일시 중지됩니다",
   "Running an account or multi-account export": "계정 또는 다중 계정 내보내기 실행",
   "Running now": "현재 실행 중",
   "Runs": "실행",

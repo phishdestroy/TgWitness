@@ -8718,6 +8718,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "Đọc tin nhắn đã lưu, tìm kiếm, báo cáo và xuất các quan sát đã lưu dưới dạng tệp có chữ ký",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "Được khuyến nghị. Được thiết kế để ghi lại: công cụ này chỉ tham gia vào các cuộc trò chuyện mà bạn muốn lưu giữ, và việc mất nó không gây ra bất kỳ tổn thất nào.",
   "Running a panel action": "Thực hiện một hành động trên bảng điều khiển",
+  "Collecting people profiles": "Đang thu thập hồ sơ cá nhân",
+  "Nothing; exports and full history pause it": "Không có; xuất dữ liệu và tải toàn bộ lịch sử sẽ tạm dừng việc này",
   "Running an account or multi-account export": "Xuất dữ liệu từ một tài khoản hoặc nhiều tài khoản",
   "Running now": "Đang chạy",
   "Runs": "Chạy",

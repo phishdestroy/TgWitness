@@ -8718,6 +8718,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "保存されたメッセージの閲覧、検索、レポート、および保存された監視記録の署名付きエクスポート",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "おすすめ。記録用に設計されています：保存したいチャットにのみ参加し、万が一失っても何の損失もありません。",
   "Running a panel action": "パネルアクションの実行",
+  "Collecting people profiles": "ユーザープロフィールを収集中",
+  "Nothing; exports and full history pause it": "なし。エクスポートと履歴の読み込み中は一時停止します",
   "Running an account or multi-account export": "アカウントまたは複数アカウントのエクスポートを実行する",
   "Running now": "現在実行中",
   "Runs": "実行",

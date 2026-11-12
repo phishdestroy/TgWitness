@@ -8718,6 +8718,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "การอ่านข้อความที่บันทึกไว้ การค้นหา รายงาน และการส่งออกข้อมูลการสังเกตการณ์ที่บันทึกไว้พร้อมลายเซ็น",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "แนะนำให้ใช้. ออกแบบมาเพื่อบันทึก: มันจะรวมเฉพาะการสนทนาที่คุณต้องการเก็บไว้เท่านั้น และการสูญเสียมันไปไม่ก่อให้เกิดความเสียหายใดๆ",
   "Running a panel action": "การดำเนินการคำสั่งบนแผงควบคุม",
+  "Collecting people profiles": "กำลังรวบรวมโปรไฟล์ผู้ใช้",
+  "Nothing; exports and full history pause it": "ไม่มี การส่งออกและการโหลดประวัติทั้งหมดจะหยุดงานนี้ชั่วคราว",
   "Running an account or multi-account export": "การส่งออกบัญชีเดียวหรือหลายบัญชี",
   "Running now": "กำลังทำงานอยู่",
   "Runs": "ทำงาน",

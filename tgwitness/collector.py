@@ -3727,6 +3727,8 @@ class Collector:
                                                                   "eta_seconds", "stage")} if self.export_state else None
         elif claim:
             task = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), "export")
+        elif self.profiling.busy:
+            task = "profiling"
         else:
             task = None
         until = self.store.get_setting("rpc_backoff_until", 0)

@@ -8823,6 +8823,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "Просмотр сохраненных сообщений, поиск, отчеты и подписанный экспорт сохраненных наблюдений",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "Рекомендуется. Создан для записи: он присоединяется только к тем чатам, которые вы хотите сохранить, и его потеря ничего не стоит.",
   "Running a panel action": "Выполнение действия панели",
+  "Collecting people profiles": "Сбор профилей пользователей",
+  "Nothing; exports and full history pause it": "Ничего; экспорт и загрузка полной истории приостанавливают его",
   "Running an account or multi-account export": "Экспорт данных одной учетной записи или нескольких учетных записей",
   "Running now": "Работает сейчас",
   "Runs": "Работает",

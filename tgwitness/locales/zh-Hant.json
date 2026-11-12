@@ -8718,6 +8718,8 @@
   "Reading saved messages, search, reports and signed exports of saved observations": "閱讀已儲存的訊息、搜尋、報告以及已儲存觀察紀錄的簽名匯出檔",
   "Recommended. Made for recording: it joins only the chats you want to keep, and losing it costs nothing.": "推薦使用。專為記錄而設計：它僅加入您想保留的聊天室，且即使遺失也不會造成任何損失。",
   "Running a panel action": "執行面板操作",
+  "Collecting people profiles": "正在收集使用者個人資料",
+  "Nothing; exports and full history pause it": "無；匯出和載入完整聊天紀錄時會暫停",
   "Running an account or multi-account export": "執行單一帳戶或多帳戶匯出",
   "Running now": "目前正在執行中",
   "Runs": "執行",

@@ -10,6 +10,7 @@ const TASKS = {
   checking_export: ['Checking export settings', 'Other Telegram tasks for a moment', 'Everything else', null, null],
   profile_photo: ['Loading a profile photo', 'Other Telegram tasks for a moment', 'Everything else', null, null],
   panel_action: ['Running a panel action', 'Other Telegram tasks for a moment', 'Everything else', null, null],
+  profiling: ['Collecting people profiles', 'Nothing; exports and full history pause it', 'Everything else', 'Pause', 'profiling/pause'],
   connection_change: ['Changing the connection', 'All Telegram tasks until the new connection is checked', 'Reading saved messages and reports', null, null],
   sign_in_required: ['Telegram signed this account out', 'All Telegram tasks until you sign in again', 'Reading saved messages, reports and exports of saved observations', 'Sign in', null],
 };
