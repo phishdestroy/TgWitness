@@ -3329,7 +3329,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "MCP 支持已安装。重启 TgWitness 以激活该端点。",
   "0 workspaces": "0 个工作区",
   "1 hour": "1 小时",
-  "1 line": "1 行",
   "1 minute to 90 days. Starts when the server creates the connection.": "1 分钟至 90 天。自服务器建立连接时开始计时。",
   "1 unsaved change": "1 项未保存更改",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">操作</span>",
@@ -5209,7 +5208,6 @@
   "Search all settings, including hidden ones": "搜索所有设置，包括隐藏的设置",
   "Connected": "已连接",
   "Keep my manual changes": "保留我的手动更改",
-  "Show {n} more settings": "再显示 {n} 项设置",
   "Show hidden setting": "显示隐藏的设置",
   "Proxy address": "代理地址",
   "Continue without checking": "不检查继续",
@@ -8830,5 +8828,9 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "面板没有响应。请确认 TgWitness 正在运行，且此设备可以连接到它。",
   "Add message numbers": "添加消息编号",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "聊天 ID、冒号和消息编号，或 t.me/c 链接。每行一个聊天。",
-  "Could not read: {text}": "无法读取：{text}"
+  "Could not read: {text}": "无法读取：{text}",
+  "Show {n} more setting": "再显示 {n} 项设置",
+  "Show {n} more settings": {
+    "other": "再显示 {n} 项设置"
+  }
 }

@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout6').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout7').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -111,7 +111,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=7'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=8'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
@@ -3739,7 +3739,7 @@ function parameterValue(value){
   return typeof value==="boolean"?tr(value?"On":"Off"):Number(value).toLocaleString();
 }
 let parametersView=null;
-const parametersReady=import("./views/parameters.js?v=2").then(({createParameters})=>{
+const parametersReady=import("./views/parameters.js?v=3").then(({createParameters})=>{
   parametersView=createParameters({root:$("view-parameters"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,
     headerOffset:()=>{const header=document.querySelector(".topbar");return header&&["sticky","fixed"].includes(getComputedStyle(header).position)?header.getBoundingClientRect().height:0;},
@@ -5378,7 +5378,7 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=2').then(({createPeopleTimeline})=>{
+const peopleTimelineReady=import('./views/people-timeline.js?v=3').then(({createPeopleTimeline})=>{
   peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
@@ -6457,7 +6457,7 @@ const topologyReady=import('./views/topology.js?v=2').then(({createTopology})=>{
 topologyReady.catch(error=>toast(error.message,true));
 let accessView=null,systemLogView=null;
 let systemMapView=null;
-const systemMapReady=import('./views/system-map.js?v=3').then(({createSystemMap})=>{
+const systemMapReady=import('./views/system-map.js?v=4').then(({createSystemMap})=>{
   systemMapView=createSystemMap({root:$('view-system-map'),tr,json,getState:()=>state,
     options:()=>viewOptions('system-map'),
     openSettings:async (profile,card)=>{

@@ -3329,7 +3329,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "ติดตั้งการรองรับ MCP แล้ว รีสตาร์ท TgWitness เพื่อเปิดใช้งานเอนด์พอยต์",
   "0 workspaces": "0 เวิร์กสเปซ",
   "1 hour": "1 ชั่วโมง",
-  "1 line": "1 บรรทัด",
   "1 minute to 90 days. Starts when the server creates the connection.": "1 นาที ถึง 90 วัน เริ่มนับเมื่อเซิร์ฟเวอร์สร้างการเชื่อมต่อ",
   "1 unsaved change": "การเปลี่ยนแปลงที่ยังไม่บันทึก 1 รายการ",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">การดำเนินการ</span>",
@@ -5209,7 +5208,6 @@
   "Search all settings, including hidden ones": "ค้นหาการตั้งค่าทั้งหมด รวมถึงที่ซ่อนอยู่",
   "Connected": "เชื่อมต่อแล้ว",
   "Keep my manual changes": "เก็บการเปลี่ยนแปลงที่ฉันทำเอง",
-  "Show {n} more settings": "แสดงการตั้งค่าอีก {n} รายการ",
   "Show hidden setting": "แสดงการตั้งค่าที่ซ่อนอยู่",
   "Proxy address": "ที่อยู่พร็อกซี",
   "Continue without checking": "ดำเนินการต่อโดยไม่ตรวจสอบ",
@@ -8830,5 +8828,9 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "พาเนลไม่ตอบสนอง ตรวจสอบว่า TgWitness กำลังทำงานอยู่และอุปกรณ์นี้เข้าถึงได้",
   "Add message numbers": "เพิ่มหมายเลขข้อความ",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID การสนทนา ตามด้วยโคลอนและหมายเลขข้อความ หรือลิงก์ t.me/c หนึ่งการสนทนาต่อบรรทัด",
-  "Could not read: {text}": "อ่านไม่ได้: {text}"
+  "Could not read: {text}": "อ่านไม่ได้: {text}",
+  "Show {n} more setting": "แสดงการตั้งค่าอีก {n} รายการ",
+  "Show {n} more settings": {
+    "other": "แสดงการตั้งค่าอีก {n} รายการ"
+  }
 }

@@ -95,6 +95,9 @@ def case_of(options):
             if options.get(name)}
 
 
+SINGULAR = {"{n} messages": "{n} message", "{n} records": "{n} record"}
+
+
 class Words:
     def __init__(self, language):
         self.language = language if language in i18n.LANGUAGES else "en"
@@ -102,9 +105,13 @@ class Words:
         self.direction = "rtl" if self.language in RTL else "ltr"
 
     def __call__(self, text, /, **values):
-        text = self.table.get(text, text)
-        if isinstance(text, dict):
-            text = text.get("other") or next(iter(text.values()))
+        entry = self.table.get(text, text)
+        if isinstance(entry, dict):
+            text = entry.get(i18n.plural(self.language, values.get("n"))) or entry.get("other") or next(iter(entry.values()))
+        elif values.get("n") == 1 and text in SINGULAR:
+            text = self.table.get(SINGULAR[text], SINGULAR[text])
+        else:
+            text = entry
         for name, value in values.items():
             text = text.replace("{" + name + "}", str(value))
         return text
@@ -120,7 +127,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())

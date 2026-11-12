@@ -1,4 +1,4 @@
-import {createProfileCollection} from './profile-collection.js?v=1';
+import {createProfileCollection} from './profile-collection.js?v=2';
 
 export function createPeopleTimeline({root, json, tr, owner, active, record, formatTime,canCollect,attachment}) {
   const node=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=text;el.className=cls;return el;};

@@ -3352,7 +3352,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "MCP desteği yüklendi. Uç noktayı etkinleştirmek için TgWitness'ı yeniden başlatın.",
   "0 workspaces": "0 çalışma alanı",
   "1 hour": "1 saat",
-  "1 line": "1 satır",
   "1 minute to 90 days. Starts when the server creates the connection.": "1 dakika ile 90 gün arası. Sunucu bağlantıyı oluşturduğunda başlar.",
   "1 unsaved change": "1 kaydedilmemiş değişiklik",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">İşlemler</span>",
@@ -5236,7 +5235,6 @@
   "Search all settings, including hidden ones": "Gizliler dahil tüm ayarlarda ara",
   "Connected": "Bağlı",
   "Keep my manual changes": "Elle yaptığım değişiklikleri koru",
-  "Show {n} more settings": "{n} ayar daha göster",
   "Show hidden setting": "Gizli ayarı göster",
   "Proxy address": "Proxy adresi",
   "Continue without checking": "Kontrol etmeden devam et",
@@ -8876,5 +8874,10 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel yanıt vermedi. TgWitness'in çalıştığını ve bu cihazın ona erişebildiğini kontrol edin.",
   "Add message numbers": "Mesaj numaraları ekle",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Sohbet kimliği, iki nokta ve mesaj numaraları ya da t.me/c bağlantıları. Her satıra bir sohbet.",
-  "Could not read: {text}": "Okunamadı: {text}"
+  "Could not read: {text}": "Okunamadı: {text}",
+  "Show {n} more setting": "{n} ayar daha göster",
+  "Show {n} more settings": {
+    "one": "{n} ayar daha göster",
+    "other": "{n} ayar daha göster"
+  }
 }

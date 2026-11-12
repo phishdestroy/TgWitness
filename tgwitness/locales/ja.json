@@ -3329,7 +3329,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "MCPサポートがインストールされています。TgWitnessを再起動してエンドポイントを有効化してください。",
   "0 workspaces": "ワークスペースなし (0)",
   "1 hour": "1時間",
-  "1 line": "1行",
   "1 minute to 90 days. Starts when the server creates the connection.": "1分〜90日。サーバーが接続を作成した時点で開始されます。",
   "1 unsaved change": "1件の未保存の変更",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">操作</span>",
@@ -5209,7 +5208,6 @@
   "Search all settings, including hidden ones": "非表示を含むすべての設定を検索",
   "Connected": "接続済み",
   "Keep my manual changes": "手動の変更を残す",
-  "Show {n} more settings": "さらに {n} 件の設定を表示",
   "Show hidden setting": "非表示の設定を表示",
   "Proxy address": "プロキシのアドレス",
   "Continue without checking": "確認せずに続ける",
@@ -8830,5 +8828,9 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "パネルから応答がありません。TgWitness が実行中で、この端末から接続できることを確認してください。",
   "Add message numbers": "メッセージ番号を追加",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "チャットID、コロン、メッセージ番号、または t.me/c リンク。1行につき1チャット。",
-  "Could not read: {text}": "読み取れません: {text}"
+  "Could not read: {text}": "読み取れません: {text}",
+  "Show {n} more setting": "さらに {n} 件の設定を表示",
+  "Show {n} more settings": {
+    "other": "さらに {n} 件の設定を表示"
+  }
 }

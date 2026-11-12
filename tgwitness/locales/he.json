@@ -3375,7 +3375,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "התמיכה ב-MCP מותקנת. הפעל מחדש את TgWitness כדי להפעיל את נקודת הקצה.",
   "0 workspaces": "0 סביבות עבודה",
   "1 hour": "שעה אחת",
-  "1 line": "שורה אחת",
   "1 minute to 90 days. Starts when the server creates the connection.": "דקה אחת עד 90 ימים. מתחיל כשהשרת יוצר את החיבור.",
   "1 unsaved change": "שינוי אחד שלא נשמר",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">פעולות</span>",
@@ -5263,7 +5262,6 @@
   "Search all settings, including hidden ones": "חיפוש בכל ההגדרות, כולל המוסתרות",
   "Connected": "מחובר",
   "Keep my manual changes": "לשמור את השינויים הידניים שלי",
-  "Show {n} more settings": "הצגת עוד {n} הגדרות",
   "Show hidden setting": "הצגת הגדרה מוסתרת",
   "Proxy address": "כתובת הפרוקסי",
   "Continue without checking": "להמשיך בלי לבדוק",
@@ -8922,5 +8920,11 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "הפאנל לא הגיב. ודאו ש-TgWitness פועל ושהמכשיר הזה יכול להגיע אליו.",
   "Add message numbers": "הוספת מספרי הודעות",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "מזהה צ'אט, נקודתיים ומספרי הודעות, או קישורי t.me/c. צ'אט אחד בכל שורה.",
-  "Could not read: {text}": "לא ניתן לקרוא: {text}"
+  "Could not read: {text}": "לא ניתן לקרוא: {text}",
+  "Show {n} more setting": "הצגת עוד הגדרה {n}",
+  "Show {n} more settings": {
+    "one": "הצגת עוד הגדרה {n}",
+    "two": "הצגת עוד {n} הגדרות",
+    "other": "הצגת עוד {n} הגדרות"
+  }
 }

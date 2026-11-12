@@ -3329,7 +3329,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "已安裝 MCP 支援。請重新啟動 TgWitness 以啟用端點。",
   "0 workspaces": "0 個工作區",
   "1 hour": "1 小時",
-  "1 line": "1 行",
   "1 minute to 90 days. Starts when the server creates the connection.": "1 分鐘至 90 天。自伺服器建立連線時起算。",
   "1 unsaved change": "1 項未儲存的變更",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">操作</span>",
@@ -5209,7 +5208,6 @@
   "Search all settings, including hidden ones": "搜尋所有設定，包括隱藏的設定",
   "Connected": "已連線",
   "Keep my manual changes": "保留我的手動變更",
-  "Show {n} more settings": "再顯示 {n} 項設定",
   "Show hidden setting": "顯示隱藏的設定",
   "Proxy address": "代理位址",
   "Continue without checking": "不檢查繼續",
@@ -8830,5 +8828,9 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "面板沒有回應。請確認 TgWitness 正在執行，且此裝置可以連線到它。",
   "Add message numbers": "新增訊息編號",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "聊天 ID、冒號與訊息編號，或 t.me/c 連結。每行一個聊天。",
-  "Could not read: {text}": "無法讀取：{text}"
+  "Could not read: {text}": "無法讀取：{text}",
+  "Show {n} more setting": "再顯示 {n} 項設定",
+  "Show {n} more settings": {
+    "other": "再顯示 {n} 項設定"
+  }
 }

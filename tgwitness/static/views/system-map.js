@@ -1,4 +1,4 @@
-import {createTopologyScene,mapIcon,mapServices} from './system-map-scene.js?v=2';
+import {createTopologyScene,mapIcon,mapServices} from './system-map-scene.js?v=3';
 const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 export function createSystemMap({root,json,tr,openSettings,getState,options,toast}){

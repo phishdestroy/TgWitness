@@ -3398,7 +3398,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "Підтримку MCP встановлено. Перезапустіть TgWitness, щоб активувати кінцеву точку.",
   "0 workspaces": "0 робочих просторів",
   "1 hour": "1 година",
-  "1 line": "1 рядок",
   "1 minute to 90 days. Starts when the server creates the connection.": "Від 1 хвилини до 90 днів. Відлік починається, коли сервер створює підключення.",
   "1 unsaved change": "1 незбережена зміна",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">Дії</span>",
@@ -5290,7 +5289,6 @@
   "Search all settings, including hidden ones": "Пошук у всіх налаштуваннях, зокрема прихованих",
   "Connected": "Підключено",
   "Keep my manual changes": "Зберегти мої зміни",
-  "Show {n} more settings": "Показати ще {n} налаштувань",
   "Show hidden setting": "Показати приховане налаштування",
   "Proxy address": "Адреса проксі",
   "Continue without checking": "Продовжити без перевірки",
@@ -8968,5 +8966,12 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не відповіла. Перевірте, що TgWitness запущено і він доступний із цього пристрою.",
   "Add message numbers": "Додати номери повідомлень",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Ідентифікатор чату, двокрапка і номери повідомлень або посилання t.me/c. Один чат у рядку.",
-  "Could not read: {text}": "Не вдалося розібрати: {text}"
+  "Could not read: {text}": "Не вдалося розібрати: {text}",
+  "Show {n} more setting": "Показати ще {n} налаштування",
+  "Show {n} more settings": {
+    "one": "Показати ще {n} налаштування",
+    "few": "Показати ще {n} налаштування",
+    "many": "Показати ще {n} налаштувань",
+    "other": "Показати ще {n} налаштування"
+  }
 }
