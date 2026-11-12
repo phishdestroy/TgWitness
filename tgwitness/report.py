@@ -718,6 +718,7 @@ CSS = (
     ".kv td{padding:7px 12px;overflow-wrap:anywhere}"
     ".grid{font-size:13.5px}.grid th{text-align:start;font-size:12px;font-weight:650;color:var(--soft);padding:7px 10px;"
     "background:var(--th)}.grid td{padding:7px 10px;overflow-wrap:break-word}.grid td small{overflow-wrap:anywhere}"
+    "@media (max-width:600px){.grid th,.grid td{overflow-wrap:anywhere;hyphens:auto}}"
     ".scroll{overflow-x:auto}"
     ".pill{display:inline-flex;align-items:center;gap:6px;padding:1px 7px;border-radius:3px;font-size:11.5px;"
     "font-weight:650;border:1px solid color-mix(in srgb,currentColor 30%,transparent);background:var(--tint);"
