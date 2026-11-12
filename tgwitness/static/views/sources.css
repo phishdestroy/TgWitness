@@ -134,7 +134,7 @@
 #view-secret-chats .secret-status[data-state=warn]::before { background: var(--warning); }
 #view-secret-chats .secret-explanation { color: var(--text-2); font-size: 13px; }
 #view-secret-chats .secret-explanation summary { color: var(--muted); }
-#view-secret-chats .secret-explanation p { max-width: 80ch; margin-top: 8px; }
+#view-secret-chats .secret-explanation p { max-width: 80ch; margin-top: 8px; line-height: 1.6; }
 #view-secret-chats .secret-settings { display: grid; gap: 8px; }
 #view-secret-chats .secret-settings .check-label { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: 14px; margin: 0; font-size: 13.5px; }
 #view-secret-chats .secret-chats > .notice, #view-secret-chats .secret-install, #view-secret-chats #secret-recovery { margin: 0 22px 16px; }

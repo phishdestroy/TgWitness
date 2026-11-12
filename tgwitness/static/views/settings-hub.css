@@ -303,7 +303,7 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .hub-overview{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);gap:24px;align-items:start}
 .hub-lists,.hub-side,.hub-groups,.hub-group{display:flex;flex-direction:column;min-width:0}
 .hub-lists{gap:14px}
-.hub-side{gap:16px;position:sticky;top:16px}
+.hub-side{gap:16px}
 .hub-groups{gap:18px}
 .hub-groups[hidden]{display:none}
 .hub-group{gap:8px}
@@ -410,7 +410,7 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .hub-undo-close{min-height:32px;width:32px;padding:0;border:0;border-radius:9px;background:transparent;color:inherit;opacity:.7}
 @keyframes hub-undo-in{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
 @media(prefers-reduced-motion:reduce){.hub-undo{animation:none}.hub-summary,.hub-switch-track,.hub-switch-track:after{transition:none}}
-@media(max-width:1180px){.hub-overview{grid-template-columns:minmax(0,1fr)}.hub-side{position:static}}
+@media(max-width:1180px){.hub-overview{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:700px){
   .hub-undo{bottom:10px;width:auto}
   .hub-summary{grid-template-columns:34px minmax(0,1fr) 16px;gap:2px 12px}

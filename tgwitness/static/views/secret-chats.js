@@ -86,7 +86,7 @@ export function createSecretChats(context) {
   }
 
   function renderList(items) {
-    const list = find("secret-list");
+    const list = find("secret-list"), held = list.contains(document.activeElement) ? document.activeElement.dataset.secretChat : null;
     list.replaceChildren();
     const query = find('secret-search').value.trim().toLocaleLowerCase();
     const visible = items.filter(item => !query || String(item.peer ?? '').includes(query) || String(item.id).includes(query)
@@ -104,6 +104,7 @@ export function createSecretChats(context) {
         trn("{n} record", "{n} records", item.items.length) + ' · #' + item.id));
       button.addEventListener("click", () => {selected = item.id; render();});
       list.append(button);
+      if (held === button.dataset.secretChat) button.focus({preventScroll: true});
     }
     if (view.pending_files) list.append(node("p", "hint", tr("Attachments waiting to be saved: {n}", {n: view.pending_files})));
     if (view.next_before) {

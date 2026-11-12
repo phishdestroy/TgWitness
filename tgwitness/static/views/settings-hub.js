@@ -17,7 +17,7 @@ export function createSettingsHub(ctx) {
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null, methodShown=false;
   let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false;
   let groupScope=null, scopeDirty=false, history=null, historyLoading=null, undo=null, undoTimer=null;
-  let sheet=null, sheetFor=null, pressed=false, focusHint=null, shownForm=null;
+  let sheet=null, sheetFor=null, pressed=false, focusHint=null, shownForm=null, historyFocus=false;
   const formSection=id=>id==='evidence-form'?'protection':'notifications';
   const tools=[['sources','sources:green','Recording rules'],['parameters','settings:slate','Parameters'],['access','users:blue','Access'],
     ['integrations','link:violet','Integrations / MCP'],['system-log','table:slate','System log'],['sealed','braces:indigo','GitHub Actions']];
@@ -56,11 +56,15 @@ export function createSettingsHub(ctx) {
   const groupView=createGroupSettings({json,tr,trn:ctx.trn,node,toast,askConfirm,button,message,cards,label,describe,goals,run,root,
     fields:()=>data?.fields||[],openConnection:ctx.openConnection,back:async()=>{groupScope=null;data=await request(owner(),'settings');render();}});
   function button(text, fn, style='secondary') { const el=node('button',style,tr(text));el.type='button';el.onclick=()=>run(fn,el);return el; }
-  const within=()=>section&&sheet?.open?sheet:root;
+  const within=()=>section&&sheet?.firstChild?sheet:root;
   function focusMark(){
     const el=document.activeElement;if(!el?.closest?.('.hub-sheet,#view-settings'))return null;
+    if(el.closest('.hub-undo'))return {find:section?'#hub-sheet-title':'.hub-heading h1',index:-1};
     const row=el.closest('[data-setting]');
-    if(row)return {find:'[data-setting="'+CSS.escape(row.dataset.setting)+'"]',index:[...row.querySelectorAll('input,select,button')].indexOf(el)};
+    if(row){
+      const pool=el.matches('.hub-choice')?'.hub-choice':el.matches('input,select')?'input,select':'button';
+      return {find:'[data-setting="'+CSS.escape(row.dataset.setting)+'"]',pool,index:[...row.querySelectorAll(pool)].indexOf(el)};
+    }
     const answer=el.closest('[data-answer]');
     if(answer)return {find:'[data-answer="'+CSS.escape(answer.dataset.answer)+'"]',index:-1};
     const entry=el.closest('.hub-summary[data-section]');
@@ -68,11 +72,16 @@ export function createSettingsHub(ctx) {
   }
   function refocus(mark){
     const row=mark&&within().querySelector(mark.find);
-    (mark?.index>=0?row?.querySelectorAll('input,select,button')[mark.index]:row)?.focus({preventScroll:true});
+    (mark?.index>=0?row?.querySelectorAll(mark.pool)[mark.index]:row)?.focus({preventScroll:true});
   }
   async function run(fn, control) {
     const mark=focusMark();if(mark)focusHint=mark;if(control)control.disabled=true;
-    try{return await fn();}catch(e){if(e.name!=='StaleView')toast(e.message,true);}
+    try{return await fn();}catch(e){
+      if(e.name==='StaleView')return;
+      toast(e.message,true);
+      const said=section&&sheet?.querySelector('.hub-sheet-said');
+      if(said)said.textContent=e.message;
+    }
     finally{if(control?.isConnected)control.disabled=false;if(focusHint===mark)focusHint=null;}
   }
   function message(text, cls='hint') { return node('p',cls,tr(text)); }
@@ -92,7 +101,7 @@ export function createSettingsHub(ctx) {
       b.append(glyph(emoji,'answer-icon'),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
     }box.append(group);
   }
-  function heading(){const box=node('div','hub-heading');box.append(node('h1','',tr('Settings')));return box;}
+  function heading(){const box=node('div','hub-heading'),title=node('h1','',tr('Settings'));title.tabIndex=-1;box.append(title);return box;}
   function closed(text){
     const box=node('div','hub-closed'),mark=glyph('settings:slate','hub-closed-mark');
     box.append(mark,message(text));section=null;closeSheet();root.replaceChildren(heading(),box);
@@ -227,10 +236,13 @@ export function createSettingsHub(ctx) {
       for(const row of rows.slice(0,5)){
         const item=node('li','hub-history-row'),time=node('time','hint',new Date(row.at).toLocaleString(prefs.language,{timeZone:prefs.timezone,dateStyle:'medium',timeStyle:'short'}));
         time.dateTime=row.at;
-        item.append(node('span','hub-history-text',(row.restored?tr('Undo of an earlier change')+' · ':'')+changeText(row)),time,button('Undo',()=>restoreChange(row.seq),'text-link'));
+        item.append(node('span','hub-history-text',(row.restored?tr('Undo of an earlier change')+' · ':'')+changeText(row)),time,
+          button('Undo',()=>{historyFocus=true;return restoreChange(row.seq);},'text-link'));
         list.append(item);
       }
       card.append(list);
+      if(historyFocus&&[document.body,null].includes(document.activeElement))list.querySelector('.text-link')?.focus({preventScroll:true});
+      historyFocus=false;
     }).catch(()=>{});
   }
   async function edit(key,value,who=owner()){
@@ -316,8 +328,12 @@ export function createSettingsHub(ctx) {
   function ensureSheet(){
     if(!sheet){
       sheet=node('dialog','hub-sheet');sheet.setAttribute('aria-labelledby','hub-sheet-title');
-      sheet.addEventListener('cancel',event=>{event.preventDefault();void run(closeSection);});
-      sheet.addEventListener('close',()=>{if(section&&!sheet.open&&state.view==='settings'){section=null;shownForm=null;editing=false;scopeDirty=false;render();ctx.record?.();}});
+      sheet.addEventListener('cancel',event=>{if(event.target!==sheet)return;event.preventDefault();void run(closeSection);});
+      sheet.addEventListener('close',event=>{
+        if(event.target!==sheet||!section||sheet.open||state.view!=='settings')return;
+        section=null;shownForm=null;editing=false;scopeDirty=false;if(data)draft={...data.wizard};
+        window.TgWitnessDialogs?.closeAll();render();ctx.record?.();
+      });
       sheet.addEventListener('pointerdown',event=>{pressed=event.target===sheet;});
       sheet.addEventListener('click',event=>{if(pressed&&event.target===sheet)void run(closeSection);pressed=false;});
     }
@@ -426,7 +442,8 @@ export function createSettingsHub(ctx) {
     close.append(ctx.icon('x'));close.setAttribute('aria-label',tr('Close'));close.title=tr('Close');
     const heading=node('h2','',tr(summaries.find(s=>s[0]===section)?.[1]||'Settings'));heading.id='hub-sheet-title';heading.tabIndex=-1;
     bar.append(back,heading,close);
-    const body=node('div','hub-sheet-body'),detail=node('section','hub-detail');body.append(detail);box.append(bar,body);
+    const body=node('div','hub-sheet-body'),detail=node('section','hub-detail'),said=node('p','visually-hidden hub-sheet-said');
+    said.setAttribute('role','alert');body.append(detail);box.append(bar,body,said);
     if(section==='appearance')preferencesForm(detail);
     if(section==='appearance'||section==='level'){
       if(section==='appearance')detail.append(node('h3','hub-subtitle',tr('Interface level')));

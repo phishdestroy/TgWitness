@@ -13,12 +13,12 @@
 <link rel="stylesheet" href="/components/collection.css?v=1">
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/components/modes.css?v=1">
-<link rel="stylesheet" href="/views/sources.css?v=20">
+<link rel="stylesheet" href="/views/sources.css?v=21">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=11">
+<link rel="stylesheet" href="/views/settings-hub.css?v=12">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/views/system-map.css?v=2">
 <link rel="stylesheet" href="/services.css?v=1">
@@ -39,7 +39,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-profiles7"></script>
+<script defer src="/app.js?v=0.9.3-profiles8"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=11"></script>
@@ -54,7 +54,7 @@
 <script defer src="/live.js?v=3"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
 <link href="/views/exports.css?v=33" rel="stylesheet">
-<link href="/views/workflows.css?v=9" rel="stylesheet">
+<link href="/views/workflows.css?v=10" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="/components/forms.css?v=35" rel="stylesheet">
 <link href="/components/feedback.css?v=36" rel="stylesheet">
@@ -460,8 +460,8 @@
   <section class="card secret-chats" id="secret-chats">
     <div class="secret-top"><span class="tile secret-mark" data-tone="violet"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></span>
     <div class="secret-top-text"><p class="secret-status" id="secret-status" role="status"></p>
-    <details class="secret-explanation"><summary>Details</summary><p class="hint">Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
-    <p class="hint">An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></details></div>
+    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
+    <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></details></div>
     <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
     <label class="check-label"><input id="secret-accept" type="checkbox" role="switch" disabled> Accept incoming requests automatically</label></div></div>
     <p class="notice warning" id="secret-unavailable" hidden></p>

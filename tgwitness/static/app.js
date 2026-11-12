@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout5').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout6').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -111,7 +111,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=6'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=7'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
@@ -587,6 +587,13 @@ function toast(message, error=false) {
   const life=error?9000:5000,arm=()=>{clearTimeout(toastTimer);toastTimer=setTimeout(()=>leave("toast"),life);};
   n.onpointerenter=()=>clearTimeout(toastTimer);n.onpointerleave=arm;arm();
 }
+document.addEventListener("click",event=>{
+  const n=$("toast"),inside=box=>event.clientX>=box.left&&event.clientX<=box.right&&event.clientY>=box.top&&event.clientY<=box.bottom;
+  if(!n||n.hidden||!document.querySelector("dialog:modal")||n.closest("dialog")||!inside(n.getBoundingClientRect()))return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const close=n.querySelector(".toast-close");
+  if(close&&inside(close.getBoundingClientRect())){clearTimeout(toastTimer);leave("toast");}
+},true);
 async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
   if(state.me&&!$("workspace").hidden&&!cancellingLogin&&!['access/me','profiles','access/logout'].includes(path))workspaceSafety?.assert();
@@ -2168,7 +2175,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=4").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=5").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
@@ -3436,7 +3443,7 @@ $("gateway-remove").addEventListener("click",ev=>busy(ev.currentTarget,async()=>
   toast(tr("Gateway log settings and token removed."));
 }));
 function renderEvidence(e){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('evidence-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('evidence-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("evidence-form"),status=$("evidence-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!e);
   state.timestampsHealth=e?.health||null;renderEvidenceBadge();
@@ -3501,7 +3508,7 @@ function lockText(lock){
   return lock.bucket_enabled?tr("Object Lock is enabled on the bucket; no retention was requested."):tr("Object Lock is not enabled on this bucket.");
 }
 function renderReplica(r){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('replica-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('replica-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("replica-form"),status=$("replica-status");
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=!r);
   state.replicaHealth=r?.health||null;renderEvidenceBadge();
@@ -3556,7 +3563,7 @@ function alertsText(a){
   return tr("Last notification {time}.",{time:fmtFull(l.at)})+(l.error?" "+tr("Not delivered: {error} — retried within a minute.",{error:l.error}):"");
 }
 function renderAlerts(a){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('alerts-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('alerts-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("alerts-form"),status=$("alerts-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!a);
   extraBadge("alerts",!!a?.settings.enabled,"On","Off");

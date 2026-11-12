@@ -132,7 +132,7 @@
 .home-process { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: 13px; }
 .home-process span { color: var(--text-2); }
 .home-empty { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-.home-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto); gap: 6px 14px; margin: 0 0 12px; font-size: 13px; }
+.home-facts { display: grid; grid-template-columns: minmax(0, 1fr) fit-content(58%); gap: 6px 14px; margin: 0 0 12px; font-size: 13px; }
 .home-facts dt { color: var(--muted); }
 .home-facts dd { margin: 0; text-align: end; font-variant-numeric: tabular-nums; }
 @media (max-width: 900px) { .home-layout { grid-template-columns: 1fr; } }
