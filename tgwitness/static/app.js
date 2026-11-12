@@ -3095,7 +3095,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=7').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=8').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
@@ -3159,7 +3159,7 @@ async function reportFor(chat,sender,messages=null){
   await loadReportSettings();
   if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence'||!reportReady)return;
   if(messages?.length)reportSelection.selectMessages(chat,messages);
-  else reportSelection.load({...reportSelection.read(),enabled:true,chats:[chat],messages:[],senders:sender===null||sender===undefined?[]:[sender]});
+  else reportSelection.selectChats([chat],sender===null||sender===undefined?[]:[sender]);
   $("exports-tab-settings").click();
   $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
 }
@@ -3171,16 +3171,17 @@ function reportControls(){
 async function loadReportSettings(){
   if(!state.status)return;
   await Promise.all([reportSelectionReady,reportConfigurationsReady,reportGuidanceReady]);
-  const owner=reportKey();
+  const owner=reportKey(),context=viewContexts.get('evidence');
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
   if(reportSaving)return;
   if(reportReady&&reportDirty){if(!$("report-form").hidden)scheduleReportPreview();return;}
-  if(reportLoading)return reportLoading;
-  const request=++reportRequest,current=()=>reportOwner===owner&&reportKey()===owner&&request===reportRequest;
+  if(reportLoading&&reportLoading.context===context)return reportLoading.promise;
+  const request=++reportRequest,current=()=>reportOwner===owner&&reportKey()===owner&&request===reportRequest
+    &&viewContexts.get('evidence')===context&&!context?.signal.aborted;
   reportReady=false;reportControls();$("report-status").textContent=tr("Loading…");
   const pending=(async()=>{
     try{
-      const [options,guidance]=await Promise.all([json("report-options",undefined,viewOptions('evidence')),json("report-guidance",undefined,viewOptions('evidence'))]);if(!current()||state.view!=='evidence')return;
+      const [options,guidance]=await Promise.all([json("report-options",undefined,{signal:context?.signal}),json("report-guidance",undefined,{signal:context?.signal})]);if(!current()||state.view!=='evidence')return;
       const select=$("report-language");
       if(!select.options.length){
         select.append(new Option(tr("Same as the panel"),"auto"));
@@ -3205,8 +3206,8 @@ async function loadReportSettings(){
       $("report-status").replaceChildren(node("span","",tr("Could not load data")+": "+error.message+" "),retry);
     }finally{if(current())reportControls();}
   })();
-  reportLoading=pending;
-  try{await pending;}finally{if(reportLoading===pending)reportLoading=null;}
+  const loading={context,promise:pending};reportLoading=loading;
+  try{await pending;}finally{if(reportLoading===loading)reportLoading=null;}
 }
 function syncReportParts(){
   $("report-raw").disabled=$("report-heartbeats").disabled=!$("report-timeline").checked;

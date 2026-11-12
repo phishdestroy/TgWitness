@@ -24,6 +24,8 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   const count=value=>Number(value||0).toLocaleString();
   const fields={chats:find('report-selection-chats'),senders:find('report-selection-senders')};
   const secretField=make('input');secretField.type='hidden';secretField.id='report-selection-secret-chats';fields.chats.after(secretField);
+  const messagesField=make('input');messagesField.type='hidden';messagesField.id='report-selection-messages';messagesField.value='[]';secretField.after(messagesField);
+  messagesField.addEventListener('change',()=>{picked=JSON.parse(messagesField.value||'[]');renderPicked();renderCatalog('chats');});
   const containers={chats:find('report-chat-catalog'),senders:find('report-sender-catalog')};
   const searches={chats:root.querySelector('[data-report-search=chats]'),senders:root.querySelector('[data-report-search=senders]')};
   const allChats=make('input'),allLabel=make('label','','check-label');
@@ -79,6 +81,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     if(step===2&&ready())void preview(false);
   }
   function renderPicked(){
+    messagesField.value=JSON.stringify(picked);
     const box=find('report-picked'),list=find('report-picked-list'),known=titles(),groups=new Map();
     box.hidden=!picked.length;
     find('report-picked-count').textContent=picked.length?tr('{n} selected',{n:count(picked.length)}):'';
@@ -347,8 +350,8 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
         :{enabled:true,messages:fresh,id_gaps:false,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
       selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
     },
-    selectChats(chatIds){
-      this.load({enabled:true,chats:chatIds,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
+    selectChats(chatIds,senders=[]){
+      this.load({enabled:true,chats:chatIds,senders,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
       selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
     },
     load(selection={}){
