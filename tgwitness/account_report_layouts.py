@@ -1,4 +1,4 @@
-from . import account_report as view, case_assessment, report_layouts, snapshot_analytics
+from . import account_report as view, case_assessment, report_layouts, report_profile, snapshot_analytics
 
 
 def document(context, title, blocks, *, sharing=False):
@@ -7,6 +7,19 @@ def document(context, title, blocks, *, sharing=False):
     chapters = [chapter for chapter in report_layouts.chapter_plan(design, 'chat')
                 if any(key in blocks for key in chapter.section_ids)]
     yield from view.opening(context, title, sharing=sharing)
+    if design == 'profile_overview':
+        yield view.encoded(report_profile.opening(say))
+        yield view.encoded(report_profile.navigation(chapters, say) + report_profile.filters(say))
+        for chapter in chapters:
+            yield view.encoded(report_profile.chapter_open(chapter, say))
+            for key in chapter.section_ids:
+                if key in blocks:
+                    for chunk in blocks[key]():
+                        yield chunk if isinstance(chunk, bytes) else view.encoded(chunk)
+            yield view.encoded('</div></details>')
+        yield view.encoded('</div><script>' + report_profile.SCRIPT + '</script>')
+        yield view.ending(say)
+        return
     if design == 'reading_series':
         yield view.encoded('<div class="reading-series-shell"><aside class="reading-series-rail"><b>TgWitness</b>'
                            + report_layouts.navigation(chapters, say) + '</aside><div class="reading-series-paper">')

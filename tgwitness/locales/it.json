@@ -8867,5 +8867,20 @@
   "Always included": "Sempre incluso",
   "Select messages": "Seleziona messaggi",
   "Selected messages": "Messaggi selezionati",
-  "Select no more than {n} messages.": "Selezionare al massimo {n} messaggi."
+  "Select no more than {n} messages.": "Selezionare al massimo {n} messaggi.",
+  "Copy table": "Copy table",
+  "Copy unavailable. Select the table to copy it.": "Copy unavailable. Select the table to copy it.",
+  "First observed": "First observed",
+  "Key figures, observed profiles and searchable sections with links to chat records.": "Key figures, observed profiles and searchable sections with links to chat records.",
+  "Last observed": "Last observed",
+  "Messages from {chat}": "Messages from {chat}",
+  "Names and usernames as observed in the selected records. Dates show observations, not registration or change dates.": "Names and usernames as observed in the selected records. Dates show observations, not registration or change dates.",
+  "No matching rows on this page.": "No matching rows on this page.",
+  "No sender profile observations in this reading copy.": "No sender profile observations in this reading copy.",
+  "Observed profiles": "Observed profiles",
+  "Profile overview": "Profile overview",
+  "Search all selected records": "Search all selected records",
+  "Search this page": "Search this page",
+  "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
+  "Source and counts": "Source and counts"
 }

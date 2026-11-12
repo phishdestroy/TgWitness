@@ -145,9 +145,10 @@ def opening(context, title, sharing=False):
     design = Presentation.model_validate(context.get('presentation') or {}).design
     template = {'quire': 'editorial', 'atlas': 'analytical'}.get(design, 'dossier')
     layout_attribute = ' data-report-design="' + design + '"' if design in report_layouts.DESIGNS else ''
+    script_policy = (' script-src ' + report_layouts.report_profile.SCRIPT_HASH + ';') if design == 'profile_overview' else ''
     yield encoded('<!doctype html><html data-template="' + template + '"' + layout_attribute + ' lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
-                  '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">'
+                  '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;;' + e(script_policy) + '">'
                   '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + activity_maps.CSS + '</style></head><body class="dossier account-dossier"><main>'
                   '<header class="account-cover"><div class="cover-register"><span dir="ltr">TG / WITNESS</span><span>'
                   + e(say('Evidence dossier')) + '</span></div><p class="badge">' + e(kind) + '</p>'

@@ -114,7 +114,21 @@ async function startViewer(meta){
     else setStatus("warn",say("The seal signature could not be checked in this browser"));
     for(const b of status.querySelectorAll("[data-view]"))b.addEventListener("click",()=>show("check"));
     for(const t of tabs)if(t.dataset.view==="data")t.querySelector("b").textContent=num(V.items.length);
-    if(!V.bound){bindControls();V.bound=true;}buildFilters();apply();buildPeople();buildIocs();buildCheck();}
+    if(!V.bound){bindControls();V.bound=true;}buildFilters();apply();buildPeople();buildIocs();buildCheck();
+    if(document.documentElement.dataset.reportDesign==="profile_overview"&&!V.profileBound){
+      V.profileBound=true;
+      document.addEventListener("tgwitness-profile-records",event=>{
+        V.filter.q=String(event.detail?.query||"");V.filter.chats=new Set(event.detail?.chat?[String(event.detail.chat)]:[]);
+        V.filter.cats=new Set(Object.keys(meta.cats));V.filter.people.clear();V.filter.keys=null;V.filter.keysLabel="";
+        V.filter.from="";V.filter.to="";V.filter.only.clear();
+        $("#v-q").value=V.filter.q;$("#v-from").value="";$("#v-to").value="";$("#v-people-q").value="";
+        show("data");buildFilters();
+        for(const input of $$("#v-chats input"))input.checked=V.filter.chats.has(input.value);
+        for(const input of $$("#v-only input"))input.checked=false;
+        apply();
+      });
+      document.dispatchEvent(new Event("tgwitness-viewer-ready"));
+    }}
 
   function chatItem(r){const d=r||{};const file=d.file?{path:d.file,sha:d.file_sha256,size:d.file_size,kind:d.file_kind,mime:(d.media_info||{}).mime_type}:null;
     const notes=d.from_basis==="export_time"?[say("name at export")]:[];

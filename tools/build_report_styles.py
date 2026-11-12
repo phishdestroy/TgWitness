@@ -26,6 +26,7 @@ LABELS = {
     'horizon': ('Overview', 'A visual overview with an asymmetric cover and a clear reading path.'),
     'reading_series': ('Reading series', 'A section rail, clear findings and a focused history of changes.'),
     'ledger_margin': ('Ledger & margin', 'Numbered sections, a generous margin and figures with exact tables.'),
+    'profile_overview': ('Profile overview', 'Key figures, observed profiles and searchable sections with links to chat records.'),
 }
 
 
