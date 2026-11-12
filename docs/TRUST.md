@@ -68,12 +68,12 @@ After decrypting the handoff from [SEALED-ACTIONS](SEALED-ACTIONS.md), verify
 gh attestation verify evidence.zip --bundle attestation.jsonl \
   --repo OWNER/TgWitness \
   --signer-workflow phishdestroy/TgWitness/.github/workflows/sealed-collector.yml \
-  --signer-digest c4f734553f8de71350546aa73cc756714ee1d8a4 \
+  --signer-digest 615e96c927841399a4720bddfa8d08f76c9173ce \
   --deny-self-hosted-runners
 ```
 
-Review the [pinned collector workflow](https://github.com/phishdestroy/TgWitness/blob/c4f734553f8de71350546aa73cc756714ee1d8a4/.github/workflows/sealed-collector.yml),
-which checks out collector commit `abce365085bf28667d07bdf5955f05e92edd5f62`. The reviewed workflow and
+Review the [pinned collector workflow](https://github.com/phishdestroy/TgWitness/blob/615e96c927841399a4720bddfa8d08f76c9173ce/.github/workflows/sealed-collector.yml),
+which checks out collector commit `4d6270b89ba9071bbf8f19c563b297c929814d25`. The reviewed workflow and
 collector pairs are listed in [`tgwitness/sealed_policy.json`](../tgwitness/sealed_policy.json); use the
 pair that your fork's caller workflow pins.
 For journal, attachment, policy and coverage checks also run the verifier from an
@@ -90,8 +90,8 @@ python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo
   [Sigstore search](https://search.sigstore.dev/). A log entry timestamps a commitment,
   not Telegram messages ([Rekor](https://docs.sigstore.dev/logging/overview/)).
 - **Scorecard.** [OpenSSF Scorecard report](https://securityscorecards.dev/viewer/?uri=github.com/phishdestroy/TgWitness),
-  runs every Monday and on pushes to `main`. Look at the date, commit and findings, not just
-  the score. It's automated, not a human audit.
+  runs every Monday and on pushes to `main`. Look at the date, commit and findings along
+  with the score.
 - **Workflow audit.** [workflow-audit.yml](../.github/workflows/workflow-audit.yml) runs zizmor
   on workflow changes and every Monday, results in the `workflow-audit-sarif` artifact.
 - **Dependencies.** `sbom.spdx.json` combines what Syft finds with the exact Python versions

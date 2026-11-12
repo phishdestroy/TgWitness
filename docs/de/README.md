@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Selbst gehostete Arbeitsumgebung für Telegram-Ermittlungen.</strong><br>Chats sichern, Bearbeitungen und Löschungen festhalten, sehen, wer mit wem verbunden ist,<br>und signierte Exporte übergeben, die jeder prüfen kann.</p>
 
-<p align="center"><strong>ZERO TRUST.</strong> TgWitness ergreift keine Partei: Für den Betreiber, für PhishDestroy und für alle anderen gelten dieselben Prüfungen.<br>Es zählt nur, was ein Dritter oder die Mathematik bestätigt. <a href="../LIMITS-AND-OBJECTIONS.md">Grenzen und Einwände</a></p>
+<p align="center"><strong>ZERO TRUST.</strong> TgWitness ergreift keine Partei: Für den Betreiber, für PhishDestroy und für alle anderen gelten dieselben Prüfungen.<br>Es zählt nur, was ein Dritter oder die Mathematik bestätigt. <a href="../QUESTIONS-AND-CHECKS.md">Fragen und Prüfungen</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · Vorabversion"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · Vorabversion"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Getestete Umgebungen</a> · 25 Oberflächensprachen · 26 Sprachen für Anleitungen</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Unter Ihrer Kontrolle</a></b><br><sub>Selbst gehostet, ohne Telemetrie. Sitzungen liegen in einem verschlüsselten Tresor; das Panel lauscht auf localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Entwicklung und Tests dauerten etwa sechs Monate: zunächst der Collector, das signierte Protokoll und der Verifier, anschließend das Panel und die Zusatzmodule. Dieses Repository wurde am 29. Oktober 2026 zur Veröffentlichung angelegt, sein Alter entspricht also nicht dem Alter des Projekts.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ in das Journal.
 | [Beobachtungslisten](../INVESTIGATION-MODE.md#watchlists) | Wörter, Muster, Wallets, @Benutzernamen, IDs, Domains, Telefonnummern und Links, abgeglichen in Text, Bearbeitungen, versteckten Linkzielen, Bot-Schaltflächen, QR-Codes und OCR |
 | [Online-Überwachung](../INVESTIGATION-MODE.md#online-watch) | Prüfungen alle 1–60 Minuten, bis zu 100 Konten pro Anfrage, mit einem Muster nach Stunde und Wochentag |
 | [Codes und Wallets](../INVESTIGATION-MODE.md#codes-in-images) | Zahlungs-QR-Codes; EVM-Adressen gegen EIP-55 geprüft, TON in Rohform, Prüfsummen für XRP Ledger, Zahlungslinks mit Chain, Betrag und Token |
-| [Client-Spuren](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Encoder-Spuren von runden Videos und Sprachnachrichten; der Vergleich von Upload- und Sendezeit entlarvt vorab aufgezeichnete „Live“-Beweise |
+| [Client-Spuren](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Encoder-Spuren von runden Videos und Sprachnachrichten; der Vergleich von Upload- und Sendezeit entlarvt vorab aufgezeichnete „Live“-Beweise |
 | [Legende und Befugnis](../INVESTIGATION-MODE.md#cover-and-authority) | Personas, Genehmigungen und ein Nachweis verdeckter Tätigkeit, der Nachrichten außerhalb der genehmigten Chats oder des genehmigten Zeitraums markiert |
 | [Kontosteuerung](../INVESTIGATION-MODE.md#account-control) | Bearbeitung von Profil und Privatsphäre mit Vorher-/Nachher-Einträgen, eine Expositionsprüfung und Offline-Schalten direkt nach jeder Aktion |
 | [Dokumente für Gerichte](../INVESTIGATION-MODE.md#documents-for-court) | BagIt-Fallpaket mit Vorlage für eine Zertifizierung nach Rule 902(13)/(14), Beweismittelverzeichnis, Anfrageanhang und WebVTT/SRT-Untertiteln für Bildschirmaufnahmen |
@@ -457,7 +459,7 @@ Verifizierungsschritten für ein signiertes TgWitness-Archiv.
 
 Die Position der Autoren und der Betreiberhinweis auf Deutsch:
 
-[Hinweis zur Lizenz und zur architektonischen Inkompatibilität](TAYLOR-WESSING-EXCLUSION.md) · [Betreiberhinweis](OPERATOR-INCOMPATIBILITY.md) · [MIT-Lizenz](../../LICENSE) · [Original-NOTICE](../../NOTICE)
+[Betreiberhinweis](OPERATOR-INCOMPATIBILITY.md) · [MIT-Lizenz](../../LICENSE) · [Original-NOTICE](../../NOTICE)
 
 </details>
 

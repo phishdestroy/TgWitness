@@ -17,10 +17,10 @@
 
 <p align="center"><strong>自行架設的 Telegram 調查工作區。</strong><br>儲存聊天，保留編輯與刪除，看清誰和誰有關聯，<br>並交付任何人都能查驗的簽名匯出檔。</p>
 
-<p align="center"><strong>零信任。</strong>TgWitness 不偏袒任何一方：同樣的檢查適用於營運者、PhishDestroy 以及其他任何人。<br>只有第三方或數學能夠證實的內容才算數。<a href="../LIMITS-AND-OBJECTIONS.md">限制與異議</a></p>
+<p align="center"><strong>零信任。</strong>TgWitness 不偏袒任何一方：同樣的檢查適用於營運者、PhishDestroy 以及其他任何人。<br>只有第三方或數學能夠證實的內容才算數。<a href="../QUESTIONS-AND-CHECKS.md">問題與查核</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · 預發行版"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · 預發行版"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">已測試的環境</a> · 25 種介面語言 · 26 種指南語言</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">由您自行運作</a></b><br><sub>自行架設，沒有遙測。會話保存在加密金庫中；面板監聽 localhost。</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>開發與測試歷時約六個月：首先是收集器、簽名日誌和驗證器，接著是控制面板與附加模組。此儲存庫於 2026 年 10 月 29 日建立以供發布，因此其建立時間不代表專案的開發時間。</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -236,7 +238,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [觀察清單](../INVESTIGATION-MODE.md#watchlists) | 字詞、模式、錢包、@使用者名稱、ID、網域、電話號碼和連結，可在文字、編輯、隱藏的連結目標、機器人按鈕、QR Code 和 OCR 中比對 |
 | [上線狀態監測](../INVESTIGATION-MODE.md#online-watch) | 每 1–60 分鐘檢查一次，每次請求最多 100 個帳戶，並依小時和星期整理出規律 |
 | [條碼與錢包](../INVESTIGATION-MODE.md#codes-in-images) | 付款 QR Code；依 EIP-55 檢查的 EVM 位址、原始格式的 TON 位址、XRP Ledger 檢查碼，以及含鏈、金額和代幣的付款連結 |
-| [用戶端痕跡](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | 圓形影片和語音訊息的編碼器痕跡；比對上傳時間與傳送時間，可揭穿預先錄製的「即時」證明 |
+| [用戶端痕跡](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | 圓形影片和語音訊息的編碼器痕跡；比對上傳時間與傳送時間，可揭穿預先錄製的「即時」證明 |
 | [掩護身分與授權](../INVESTIGATION-MODE.md#cover-and-authority) | 人設、授權，以及臥底活動記錄，後者會標記授權聊天範圍或授權期間以外的訊息 |
 | [帳戶控制](../INVESTIGATION-MODE.md#account-control) | 編輯個人檔案和隱私設定並留下變更前後的記錄、曝光檢查，每次操作後立即離線 |
 | [法庭文件](../INVESTIGATION-MODE.md#documents-for-court) | BagIt 案件包，附 Rule 902(13)/(14) 認證範本、證物索引、請求附件，以及螢幕錄影的 WebVTT/SRT 字幕 |
@@ -381,7 +383,7 @@ TgWitness 會記錄傳送到所連接 Telegram 帳戶的內容，包括聊天、
 
 作者立場聲明與營運者聲明的繁體中文版本：
 
-[授權說明及架構不相容聲明](TAYLOR-WESSING-EXCLUSION.md) · [營運者聲明](OPERATOR-INCOMPATIBILITY.md) · [MIT 授權條款](../../LICENSE) · [原始 NOTICE](../../NOTICE)
+[營運者聲明](OPERATOR-INCOMPATIBILITY.md) · [MIT 授權條款](../../LICENSE) · [原始 NOTICE](../../NOTICE)
 
 </details>
 

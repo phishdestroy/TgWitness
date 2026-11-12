@@ -21,7 +21,8 @@ from .common import (
     zipfile,
 )
 
-from .account import DISCLOSURE_FORMATS, account_export_lines, verify_account_disclosure, verify_account_export
+from .account import (DISCLOSURE_FORMATS, account_export_lines, verify_account_disclosure, verify_account_export,
+                      verify_account_loss)
 from .board import verify_board_document
 from .bundles import verify_bundle
 from .capture import bundle_format
@@ -36,7 +37,7 @@ from .languages import VERIFIER_LANGUAGES
 from .outside import outside_lines
 from .presentation import producer_line
 from .reports import REPORT_JSON, verify_report, verify_selection
-from .timestamps import ATTESTATION_RECORDS, tdx_lines, verify_collector_attestation
+from .timestamps import ATTESTATION_RECORDS, tdx_lines, use_bitcoin_sources, verify_collector_attestation
 from .witness import ASSURANCE_TIERS, assurance, assurance_line, channel_head_time, check_channel, cross_check_witness, verify_dossier, verify_history_report, verify_public_proof, verify_witness
 from .witness import (
     CONDITION_LABELS,
@@ -158,6 +159,8 @@ def interactive_verify(args):
     for name in ("require_witness", "check_drand", "check_bitcoin", "strict", "board", "no_color"):
         if getattr(args, name):
             command.append("--" + name.replace("_", "-"))
+    for url in args.bitcoin_source or ():
+        command += ["--bitcoin-source", url]
     transcript, code = Transcript(sys.stdout), 0
     with redirect_stdout(transcript):
         print(say("unsigned"))
@@ -222,6 +225,9 @@ def verification_parser():
                         help="Compare the drand rounds in the journal with drand relays (needs internet)")
     parser.add_argument("--check-bitcoin", action="store_true",
                         help="Evaluate OTS proofs against block headers agreed by two HTTPS explorers (needs internet)")
+    parser.add_argument("--bitcoin-source", action="append", metavar="URL",
+                        help="Esplora API of your own Bitcoin node or explorer, used instead of the two public explorers; "
+                             "repeat to require agreement. Implies --check-bitcoin")
     parser.add_argument("--require", choices=EVIDENCE_PROFILES[1:],
                         help="Exit 2 unless the minimum evidence conditions (evidence), or the minimum and an "
                              "attested collection run (attested), are met")
@@ -245,7 +251,7 @@ def verification_parser():
                         choices=("auto", *VERIFIER_LANGUAGES), help="Language of the readable answer")
     parser.add_argument("--choose-language", action="store_true", help="Show all languages before interactive verification")
     parser.add_argument("--pause", action="store_true", help="Wait for Enter after an interactive check (for launchers)")
-    parser.add_argument("--explain", action="store_true", help="Explain what the readable checks mean and do not mean")
+    parser.add_argument("--explain", action="store_true", help="Explain what each readable check establishes")
     parser.add_argument("--interactive", action="store_true", help="Ask for the original ZIP and trusted key; save a readable transcript")
     return parser
 
@@ -255,6 +261,12 @@ def verification_arguments(parser, argv):
     if bool(args.sealed_attestation) != bool(args.sealed_policy):
         parser.error("--sealed-attestation and --sealed-policy must be supplied together")
     args.implied_checks = set()
+    if args.bitcoin_source:
+        try:
+            use_bitcoin_sources(args.bitcoin_source)
+        except ValueError as exc:
+            parser.error(str(exc))
+        args.check_bitcoin = True
     if args.require_tier and ASSURANCE_TIERS.index(args.require_tier) >= ASSURANCE_TIERS.index("fresh") and not args.check_drand:
         args.check_drand = True
         args.implied_checks.add("check_drand")
@@ -289,7 +301,8 @@ def verification_interactive(args, parser):
 def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
-                    "evidence", "check_drand", "check_bitcoin", "require_tier", "sealed_attestation", "board") if getattr(args, name)]
+                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require_tier", "sealed_attestation", "board")
+                   if getattr(args, name)]
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
     try:
@@ -326,11 +339,18 @@ def verification_json(args):
     if "statement" in data and "signature" in data:
         authenticate_statement(data, "public_key" if "public_key" in data["statement"] else "witness_public_key")
         known = {"tgwitness-board-selection-v1", "tgwitness-case-board-v1", "tgwitness-case-board-disclosure-v1",
-                 "tgwitness-case-board-handover-v1"}
+                 "tgwitness-case-board-handover-v1", "tgwitness-account-loss-v1"}
         if kind not in known and not any(is_format(kind, name) for name in (
                 "public-proof-v1", "history-report-v1", "dossier-v1")):
             raise VerifierTooOld("Unsupported signed JSON format")
-    if kind == "tgwitness-board-selection-v1":
+    if kind == "tgwitness-account-loss-v1":
+        shown, result = "account_loss", verify_account_loss(data, args.fingerprint)
+        pinned = bool(args.fingerprint)
+        notes.append("Account loss report: " + str(result["records"]) + " signed journal record(s) from "
+                     + str((result["window"] or {}).get("from")) + "; Telegram ended the session at "
+                     + str(result["loss"]["at"]) + " (" + str(result["loss"]["cause"]) + ")."
+                     + (" The report reached its record limit." if result["truncated"] else ""))
+    elif kind == "tgwitness-board-selection-v1":
         shown, result = "selection", verify_selection(args.bundle, args.fingerprint, args.evidence)
         pinned = bool(args.fingerprint)
         notes.append("Signed Case Board selection; exact records matched against the signed journal archive.")
@@ -614,6 +634,10 @@ def verification_output(args, checked, console, mode):
         verification_print("Message IDs " + str(ids["first_id"]) + "-" + str(ids["last_id"]) + ": " + str(ids["present"])
               + " present, " + str(ids["missing"]) + " absent in " + str(ids["missing_ranges"])
               + " range(s); message-ids.json matches chat.json.")
+    changes = result.get("journal_changes")
+    if changes:
+        verification_print("Journal records of deletions and earlier versions: " + str(changes["records"]) + " for "
+                           + str(changes["messages"]) + " message(s); each hash and signature checked.")
     if result.get("sha256sums"):
         verification_print("SHA256SUMS matches the signed manifest.")
     for line in notes:

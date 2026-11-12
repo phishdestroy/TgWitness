@@ -41,19 +41,18 @@ def quoted_html(text):
     return '<blockquote>\n' + '\n'.join(blocks) + '\n</blockquote>'
 
 
-def ethical_excerpt(ethical):
-    heading, body = ethical.split('\n', 1)
-    title = html.escape(heading.removeprefix('## '))
-    return f'''<details>
-<summary><strong>{title}</strong></summary>
+def readme_excerpt():
+    art = 'docs/assets/presentation/readme-gdpr-impunity'
+    return f'''<a href="docs/OPERATOR-INCOMPATIBILITY.md">
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="{art}-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="{art}-static.svg">
+  <source media="(max-width: 640px)" srcset="{art}-mobile.svg">
+  <img src="{art}.svg" width="1200" alt="GDPR, violated. Doctors, unpunished. Read the operator notice.">
+</picture>
+</a>
 
-{body.strip()}
-
-[Source record]({SOURCE})
-
-[MIT License](LICENSE) · [Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
-
-</details>'''
+[Read the operator notice →](docs/OPERATOR-INCOMPATIBILITY.md) · [Source record]({SOURCE})'''
 
 
 def excerpt(notice, licence, raw):
@@ -63,15 +62,21 @@ def excerpt(notice, licence, raw):
 def document(ethical, *, wiki=False):
     prefix = '../' if wiki else ''
     root = '../../' if wiki else '../'
-    return f'''# NOTICE — Operator Incompatibility
+    return f'''[TgWitness]({root}README.md) / [Documentation]({prefix}README.md)
+
+![Operator notice]({prefix}assets/presentation/chapter-notice.svg)
+
+# NOTICE — Operator Incompatibility
 
 **PhishDestroy · TgWitness project notice**
 
-[Source record]({SOURCE}) · [Original NOTICE]({root}NOTICE)
+[Source record]({SOURCE}) · [Original NOTICE]({root}NOTICE) · [The 106-day GDPR file]({prefix}TAYLOR-WESSING-GDPR-FILE.md)
 
 {ethical}
 
-[MIT License]({root}LICENSE) · [Our position on Taylor Wessing]({prefix}TAYLOR-WESSING-EXCLUSION.md) · [Evidence model]({prefix}HOW-IT-WORKS.md)
+[![The 106-day GDPR file]({prefix}assets/presentation/chapter-case.svg)]({prefix}TAYLOR-WESSING-GDPR-FILE.md)
+
+[MIT License]({root}LICENSE) · [The 106-day GDPR file]({prefix}TAYLOR-WESSING-GDPR-FILE.md) · [Evidence model]({prefix}HOW-IT-WORKS.md)
 
 [Project]({root}README.md) · [Documentation]({prefix}README.md) · [Wiki]({'Home.md' if wiki else 'wiki/Home.md'})
 '''
@@ -84,9 +89,9 @@ TgWitness is distributed under the [MIT License](../LICENSE). Our position adds 
 
 {full}
 
-[Source record]({SOURCE}) · [Ethical Notice & Historical Continuity](OPERATOR-INCOMPATIBILITY.md)
+[Source record]({SOURCE}) · [Ethical Notice & Historical Continuity](../docs/OPERATOR-INCOMPATIBILITY.md)
 
-[Full MIT Licence](../LICENSE) · [Project](../README.md) · [Documentation](README.md) · [Wiki](wiki/Home.md)
+[Full MIT Licence](../LICENSE) · [Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md)
 '''
 
 
@@ -97,14 +102,14 @@ def outputs(root):
         raise ValueError('The ethical statement must start with its named heading')
     result = {
         'docs/OPERATOR-INCOMPATIBILITY.md': document(ethical),
-        'docs/TAYLOR-WESSING-EXCLUSION.md': licence_document(full),
+        'website/licence-notice.md': licence_document(full),
         'docs/wiki/Operator-Incompatibility.md': ethical + f'''
 
 [Source record]({SOURCE})
 
 ---
 
-[MIT License](../../LICENSE) · [Technical notice](../OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](../../NOTICE)
+[MIT License](../../LICENSE) · [Technical notice](../OPERATOR-INCOMPATIBILITY.md) · [The 106-day GDPR file](../TAYLOR-WESSING-GDPR-FILE.md) · [Original NOTICE](../../NOTICE)
 
 [Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md)
 ''',
@@ -118,7 +123,7 @@ def outputs(root):
             raise ValueError('Exactly one notice slot is required in ' + name)
         before, tail = source.split(START, 1)
         _, after = tail.split(END, 1)
-        content = ethical_excerpt(ethical) if name == 'README.md' else excerpt(notice, licence, raw)
+        content = readme_excerpt() if name == 'README.md' else excerpt(notice, licence, raw)
         result[name] = before + START + '\n\n' + content + '\n\n' + END + after
     return result
 

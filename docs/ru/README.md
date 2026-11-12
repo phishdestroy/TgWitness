@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Рабочее место для расследований в Telegram, развёрнутое у вас.</strong><br>Сохраняйте чаты, правки и удалённые сообщения, смотрите, кто с кем связан,<br>и передавайте подписанные экспорты, которые может проверить любой.</p>
 
-<p align="center"><strong>НУЛЕВОЕ ДОВЕРИЕ.</strong> TgWitness ни на чьей стороне: одни и те же проверки применяются к оператору, к PhishDestroy и к кому угодно ещё.<br>Значение имеет только то, что подтверждает третья сторона или математика. <a href="../LIMITS-AND-OBJECTIONS.md">Ограничения и возражения</a></p>
+<p align="center"><strong>НУЛЕВОЕ ДОВЕРИЕ.</strong> TgWitness ни на чьей стороне: одни и те же проверки применяются к оператору, к PhishDestroy и к кому угодно ещё.<br>Значение имеет только то, что подтверждает третья сторона или математика. <a href="../QUESTIONS-AND-CHECKS.md">Вопросы и проверки</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · предварительный выпуск"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · предварительный выпуск"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Проверенные среды</a> · 25 языков интерфейса · 26 языков руководств</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Под вашим контролем</a></b><br><sub>Размещается у вас, без телеметрии. Сеансы лежат в зашифрованном хранилище; панель слушает localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Разрабатывается и тестируется около полугода: сначала сборщик, подписанный журнал и верификатор, затем панель и дополнительные модули. Этот репозиторий создан 29 октября 2026 года для публикации, поэтому его возраст — не возраст проекта.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [Списки наблюдения](../INVESTIGATION-MODE.md#watchlists) | Слова, шаблоны, кошельки, @имена пользователей, ID, домены, телефоны и ссылки — совпадения ищутся в тексте, правках, скрытых адресах ссылок, кнопках ботов, QR-кодах и OCR |
 | [Отслеживание онлайна](../INVESTIGATION-MODE.md#online-watch) | Проверка каждые 1–60 минут, до 100 аккаунтов за запрос, с картиной по часам и дням недели |
 | [Коды и кошельки](../INVESTIGATION-MODE.md#codes-in-images) | Платёжные QR-коды; проверка EVM-адресов по EIP-55, адреса TON в raw-формате, контрольные суммы XRP Ledger, платёжные ссылки с сетью, суммой и токеном |
-| [Следы клиента](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Следы кодировщика в видеокружках и голосовых сообщениях; сравнение времени загрузки со временем отправки выявляет заранее записанные «живые» доказательства |
+| [Следы клиента](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Следы кодировщика в видеокружках и голосовых сообщениях; сравнение времени загрузки со временем отправки выявляет заранее записанные «живые» доказательства |
 | [Легенда и полномочия](../INVESTIGATION-MODE.md#cover-and-authority) | Персоны, разрешения и учёт работы под прикрытием, который отмечает сообщения вне разрешённых чатов или периода |
 | [Управление аккаунтом](../INVESTIGATION-MODE.md#account-control) | Изменение профиля и приватности с записями «до» и «после», проверка раскрытия и уход в офлайн сразу после каждого действия |
 | [Документы для суда](../INVESTIGATION-MODE.md#documents-for-court) | Пакет дела BagIt с шаблоном сертификации по Rule 902(13)/(14), описью доказательств, приложением к запросу и субтитрами WebVTT/SRT для записей экрана |
@@ -457,7 +459,7 @@ TgWitness записывает содержимое, доставленное в
 
 Позиция авторов и уведомление для операторов на русском языке:
 
-[Уведомление о несовместимости лицензий и архитектур](TAYLOR-WESSING-EXCLUSION.md) · [Уведомление для операторов](OPERATOR-INCOMPATIBILITY.md) · [Лицензия MIT](../../LICENSE) · [Оригинальный NOTICE](../../NOTICE)
+[Уведомление для операторов](OPERATOR-INCOMPATIBILITY.md) · [Лицензия MIT](../../LICENSE) · [Оригинальный NOTICE](../../NOTICE)
 
 </details>
 

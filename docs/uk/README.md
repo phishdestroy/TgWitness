@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Робоче місце для розслідувань у Telegram, розгорнуте у вас.</strong><br>Зберігайте чати, редагування й видалені повідомлення, дивіться, хто з ким пов’язаний,<br>і передавайте підписані експорти, які може перевірити будь-хто.</p>
 
-<p align="center"><strong>НУЛЬОВА ДОВІРА.</strong> TgWitness не стає на жоден бік: ті самі перевірки застосовуються до оператора, до PhishDestroy і до будь-кого іншого.<br>Важить лише те, що підтверджує третя сторона або математика. <a href="../LIMITS-AND-OBJECTIONS.md">Обмеження й заперечення</a></p>
+<p align="center"><strong>НУЛЬОВА ДОВІРА.</strong> TgWitness не стає на жоден бік: ті самі перевірки застосовуються до оператора, до PhishDestroy і до будь-кого іншого.<br>Важить лише те, що підтверджує третя сторона або математика. <a href="../QUESTIONS-AND-CHECKS.md">Питання й перевірки</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · попередній випуск"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · попередній випуск"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Перевірені середовища</a> · 25 мов інтерфейсу · 26 мов посібників</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Під вашим контролем</a></b><br><sub>Розміщується у вас, без телеметрії. Сесії лежать у зашифрованому сховищі; панель слухає localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Розробка та тестування тривали близько шести місяців: спочатку колектор, підписаний журнал і верифікатор, потім панель та додаткові модулі. Цей репозиторій було створено 29 жовтня 2026 року для публікації, тому його вік не збігається з віком проєкту.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [Списки спостереження](../INVESTIGATION-MODE.md#watchlists) | Слова, шаблони, гаманці, @імена користувачів, ID, домени, телефони й посилання — збіги шукаються в тексті, редагуваннях, прихованих адресах посилань, кнопках ботів, QR-кодах і OCR |
 | [Відстеження онлайну](../INVESTIGATION-MODE.md#online-watch) | Перевірка кожні 1–60 хвилин, до 100 облікових записів за запит, із картиною за годинами та днями тижня |
 | [Коди й гаманці](../INVESTIGATION-MODE.md#codes-in-images) | Платіжні QR-коди; перевірка EVM-адрес за EIP-55, адреси TON у raw-форматі, контрольні суми XRP Ledger, платіжні посилання з мережею, сумою й токеном |
-| [Сліди клієнта](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Сліди кодувальника у відеоповідомленнях-кружечках і голосових повідомленнях; порівняння часу завантаження з часом надсилання викриває заздалегідь записані «живі» докази |
+| [Сліди клієнта](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Сліди кодувальника у відеоповідомленнях-кружечках і голосових повідомленнях; порівняння часу завантаження з часом надсилання викриває заздалегідь записані «живі» докази |
 | [Легенда й повноваження](../INVESTIGATION-MODE.md#cover-and-authority) | Персони, дозволи та облік роботи під прикриттям, який позначає повідомлення поза дозволеними чатами чи періодом |
 | [Керування обліковим записом](../INVESTIGATION-MODE.md#account-control) | Редагування профілю й приватності із записами «до» і «після», перевірка розкриття та вихід в офлайн одразу після кожної дії |
 | [Документи для суду](../INVESTIGATION-MODE.md#documents-for-court) | Пакет справи BagIt із шаблоном сертифікації за Rule 902(13)/(14), описом доказів, додатком до запиту та субтитрами WebVTT/SRT для записів екрана |
@@ -457,7 +459,7 @@ TgWitness записує вміст, доставлений до підключ�
 
 Позиція авторів і повідомлення для операторів українською:
 
-[Повідомлення про несумісність ліцензії та архітектури](TAYLOR-WESSING-EXCLUSION.md) · [Повідомлення для операторів](OPERATOR-INCOMPATIBILITY.md) · [Ліцензія MIT](../../LICENSE) · [Оригінальний NOTICE](../../NOTICE)
+[Повідомлення для операторів](OPERATOR-INCOMPATIBILITY.md) · [Ліцензія MIT](../../LICENSE) · [Оригінальний NOTICE](../../NOTICE)
 
 </details>
 

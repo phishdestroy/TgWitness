@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Telegram 調査のためのセルフホスト型ワークスペース。</strong><br>チャットを保存し、編集と削除を残し、誰が誰とつながっているかを把握して、<br>誰でも検証できる署名付きエクスポートを引き渡せます。</p>
 
-<p align="center"><strong>ゼロトラスト。</strong>TgWitness はどの側にも立ちません。オペレーターにも、PhishDestroy にも、それ以外の誰にも同じ検証を適用します。<br>認められるのは、第三者または数学が裏付けるものだけです。<a href="../LIMITS-AND-OBJECTIONS.md">限界と反論</a></p>
+<p align="center"><strong>ゼロトラスト。</strong>TgWitness はどの側にも立ちません。オペレーターにも、PhishDestroy にも、それ以外の誰にも同じ検証を適用します。<br>認められるのは、第三者または数学が裏付けるものだけです。<a href="../QUESTIONS-AND-CHECKS.md">質問と検証</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · プレリリース"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · プレリリース"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">テスト済みの環境</a> · インターフェース 25 言語 · ガイド 26 言語</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">自分の手で運用</a></b><br><sub>テレメトリなしのセルフホスト。セッションは暗号化された保管庫に保存され、パネルは localhost で待ち受けます。</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>約6か月間にわたり開発およびテストが行われました。まずコレクター、署名付きジャーナル、検証ツールが、次にパネルおよびアドオンモジュールが開発・テストされました。このリポジトリは公開のために2026年10月29日に作成されたため、その作成日はプロジェクトの開始時期とは異なります。</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -236,7 +238,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [ウォッチリスト](../INVESTIGATION-MODE.md#watchlists) | 単語、パターン、ウォレット、@ユーザー名、ID、ドメイン、電話番号、リンクを、テキスト、編集、隠しリンク先、ボットのボタン、QR コード、OCR から照合 |
 | [オンライン監視](../INVESTIGATION-MODE.md#online-watch) | 1–60 分ごとにチェック、1 回のリクエストで最大 100 アカウント、時間帯と曜日ごとのパターン付き |
 | [コードとウォレット](../INVESTIGATION-MODE.md#codes-in-images) | 支払い QR コード。EIP-55 で確認する EVM アドレス、raw 形式の TON、XRP Ledger のチェックサム、チェーン・金額・トークンを含む支払いリンク |
-| [クライアントの痕跡](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | 丸型動画とボイスメッセージに残るエンコーダーの痕跡。アップロード時刻と送信時刻を比べると、事前に録画された「ライブ」の証拠が明らかになります |
+| [クライアントの痕跡](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | 丸型動画とボイスメッセージに残るエンコーダーの痕跡。アップロード時刻と送信時刻を比べると、事前に録画された「ライブ」の証拠が明らかになります |
 | [偽装身分と権限](../INVESTIGATION-MODE.md#cover-and-authority) | ペルソナ、承認、そして承認されたチャットや期間の外にあるメッセージにフラグを付ける潜入活動記録 |
 | [アカウント管理](../INVESTIGATION-MODE.md#account-control) | 変更前後の記録を残すプロフィールとプライバシーの編集、露出チェック、各操作直後のオフライン化 |
 | [裁判用書類](../INVESTIGATION-MODE.md#documents-for-court) | Rule 902(13)/(14) 証明書テンプレート、証拠物一覧、要請書の別紙、画面録画用の WebVTT/SRT 字幕を含む BagIt 事件パッケージ |
@@ -381,7 +383,7 @@ TgWitness は、接続した Telegram アカウントに届いたコンテンツ
 
 作者の立場とオペレーターに関する通知の日本語版：
 
-[ライセンスに関する説明とアーキテクチャ上の非互換性の通知](TAYLOR-WESSING-EXCLUSION.md) · [オペレーターに関する通知](OPERATOR-INCOMPATIBILITY.md) · [MIT ライセンス](../../LICENSE) · [元の NOTICE](../../NOTICE)
+[オペレーターに関する通知](OPERATOR-INCOMPATIBILITY.md) · [MIT ライセンス](../../LICENSE) · [元の NOTICE](../../NOTICE)
 
 </details>
 

@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Telegram araştırmaları için kendi sunucunuzda barındırdığınız çalışma alanı.</strong><br>Sohbetleri kaydedin, düzenlemeleri ve silmeleri saklayın, kimin kiminle bağlantılı olduğunu görün<br>ve herkesin kontrol edebileceği imzalı dışa aktarımlar teslim edin.</p>
 
-<p align="center"><strong>SIFIR GÜVEN.</strong> TgWitness taraf tutmaz: aynı kontroller operatöre, PhishDestroy'a ve diğer herkese uygulanır.<br>Yalnızca üçüncü bir tarafın veya matematiğin doğruladığı şey geçerlidir. <a href="../LIMITS-AND-OBJECTIONS.md">Sınırlar ve itirazlar</a></p>
+<p align="center"><strong>SIFIR GÜVEN.</strong> TgWitness taraf tutmaz: aynı kontroller operatöre, PhishDestroy'a ve diğer herkese uygulanır.<br>Yalnızca üçüncü bir tarafın veya matematiğin doğruladığı şey geçerlidir. <a href="../QUESTIONS-AND-CHECKS.md">Sorular ve kontroller</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · ön sürüm"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · ön sürüm"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Test edilen ortamlar</a> · 25 arayüz dili · 26 kılavuz dili</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Kontrol sizde</a></b><br><sub>Kendi sunucunuzda, telemetri olmadan. Oturumlar şifreli bir kasada saklanır; panel localhost'u dinler.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Yaklaşık altı ay boyunca geliştirildi ve test edildi: önce toplayıcı, imzalanmış günlük ve doğrulayıcı, ardından panel ve eklenti modülleri. Bu depo, yayınlanmak üzere 29 Ekim 2026 tarihinde oluşturuldu; dolayısıyla yaşı, projenin yaşı değildir.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ günlüğe yazılır.
 | [İzleme listeleri](../INVESTIGATION-MODE.md#watchlists) | Kelimeler, kalıplar, cüzdanlar, @kullanıcı adları, ID'ler, alan adları, telefonlar ve bağlantılar; metinde, düzenlemelerde, gizli bağlantı hedeflerinde, bot düğmelerinde, QR kodlarında ve OCR'da eşleştirilir |
 | [Çevrimiçi takip](../INVESTIGATION-MODE.md#online-watch) | 1–60 dakikada bir kontrol, istek başına en fazla 100 hesap, saate ve haftanın gününe göre örüntü |
 | [Kodlar ve cüzdanlar](../INVESTIGATION-MODE.md#codes-in-images) | Ödeme QR kodları; EIP-55'e göre kontrol edilen EVM adresleri, ham biçimde TON, XRP Ledger sağlama toplamları, zincir, tutar ve token içeren ödeme bağlantıları |
-| [İstemci izleri](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Yuvarlak videolarda ve sesli mesajlarda kodlayıcı izleri; yükleme zamanının gönderme zamanıyla karşılaştırılması önceden kaydedilmiş “canlı” kanıtları ortaya çıkarır |
+| [İstemci izleri](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Yuvarlak videolarda ve sesli mesajlarda kodlayıcı izleri; yükleme zamanının gönderme zamanıyla karşılaştırılması önceden kaydedilmiş “canlı” kanıtları ortaya çıkarır |
 | [Gizli kimlik ve yetki](../INVESTIGATION-MODE.md#cover-and-authority) | Kurgusal kimlikler, yetkilendirmeler ve yetkili sohbetlerin veya dönemin dışındaki mesajları işaretleyen bir gizli faaliyet kaydı |
 | [Hesap denetimi](../INVESTIGATION-MODE.md#account-control) | Önce/sonra kayıtlarıyla profil ve gizlilik düzenleme, ifşa kontrolü ve her işlemden hemen sonra çevrimdışına geçme |
 | [Mahkeme belgeleri](../INVESTIGATION-MODE.md#documents-for-court) | Rule 902(13)/(14) sertifikasyon şablonu, delil dizini, talep eki ve ekran kayıtları için WebVTT/SRT altyazıları içeren BagIt dava paketi |
@@ -457,7 +459,7 @@ toplama ve doğrulama adımlarını izleyin.
 
 Yazarların tutumu ve operatör bildirimi, bu dilde:
 
-[Lisans ve Mimari Uyumsuzluk Bildirimi](TAYLOR-WESSING-EXCLUSION.md) · [Operatör bildirimi](OPERATOR-INCOMPATIBILITY.md) · [MIT Lisansı](../../LICENSE) · [Orijinal NOTICE](../../NOTICE)
+[Operatör bildirimi](OPERATOR-INCOMPATIBILITY.md) · [MIT Lisansı](../../LICENSE) · [Orijinal NOTICE](../../NOTICE)
 
 </details>
 

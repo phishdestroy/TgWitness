@@ -2,25 +2,43 @@
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-mobile-static.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-static.svg">
   <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-hero-mobile.svg">
-  <img src="docs/assets/presentation/casework-hero.svg" width="1440" alt="TgWitness — Follow the trail. Preserve the evidence. A hash-linked, signed journal, a separately retained checkpoint and a verifiable evidence archive.">
+  <img src="docs/assets/presentation/casework-hero.svg" width="1200" alt="TgWitness — Messages change. Keep the evidence. Capture conversations, preserve observed edits and deletions, and share a record others can verify.">
 </picture>
 
 <p align="center">
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-demo-mobile.svg"><img src="docs/assets/presentation/readme-nav-demo.svg" width="32%" alt="Explore the interactive demo"></picture></a>
+  <a href="https://tgwitness-demo.destroy.tools/"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-live-mobile.svg"><img src="docs/assets/presentation/readme-nav-live.svg" width="32%" alt="Watch the live capture demo"></picture></a>
   <a href="#quick-start"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-download-mobile.svg"><img src="docs/assets/presentation/readme-nav-download.svg" width="32%" alt="Download and start TgWitness"></picture></a>
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-handbook-mobile.svg"><img src="docs/assets/presentation/readme-nav-handbook.svg" width="32%" alt="Read the investigation handbook"></picture></a>
 </p>
 
-<p align="center"><strong>Self-hosted workspace for Telegram investigations.</strong><br>Save chats, keep edits and deletions, see who's connected to whom<br>and hand over signed exports anyone can check.</p>
-
-<p align="center"><strong>ZERO TRUST.</strong> TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else.<br>Only what a third party or the math confirms counts. <a href="docs/LIMITS-AND-OBJECTIONS.md">Limits and objections</a></p>
+<p align="center"><strong>Your Telegram investigation, from the first capture to a verified handoff.</strong><br>Save conversations, connect the findings and keep a record others can check.</p>
 
 <p align="center">
-  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · pre-release"></a>
+  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · pre-release"></a>
   <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
 </p>
+
+<a name="what-tgwitness-does"></a>
+
+## Why TgWitness
+
+- **[Keep the history as it changes](docs/COLLECTION.md).** Capture messages, observed edits and deletion notices. Earlier captured versions stay in your journal.
+- **[Share an archive others can verify](docs/wiki/Exports-and-Verification.md).** Signed, hash-linked records, preserved files and an offline verifier travel together.
+- **[Turn conversations into a case](docs/INVESTIGATION-MODE.md).** Search saved chats, follow subjects and watchlist matches, and connect findings on a Case Board with journal references.
+- **[Choose what to collect](docs/COLLECTION-MODES.md).** Export accessible history or follow selected chats. Each account has its own workspace, journal and signing key.
+- **[Add independent checks](docs/EVIDENCE.md).** Retained checkpoints, external timestamps and optional GitHub Actions or Intel TDX capture provide additional checks on the recorded evidence.
+- **[Run it on your infrastructure](docs/SECURITY-MODEL.md).** Self-hosted, with encrypted session storage, a localhost panel by default and no telemetry.
+
+> **3,598,381 records · 48 verified archives.** A documented public-history run on 6 November 2026. [Read the measurements, setup and verification results →](docs/EXPORT-BENCHMARK-2026-11-06.md)
+
+<p align="center"><strong>ZERO TRUST.</strong> TgWitness takes no side: the same checks apply to the operator, to PhishDestroy and to anyone else.<br>Only what a third party or the math confirms counts. <a href="docs/QUESTIONS-AND-CHECKS.md">Questions and checks</a></p>
+
+## See it in action
+
+- **[Watch live capture ↗](https://tgwitness-demo.destroy.tools/)** — a public, read-only view of incoming messages, masked edits and deletion notices.
+- **[Explore the interactive workspace ↗](https://phishdestroy.github.io/TgWitness/demo/)** — open a fictional case, compare captured versions and explore exports. No Telegram login needed.
 
 <a name="screenshots"></a>
 
@@ -34,21 +52,6 @@
 </a>
 
 <p align="center"><sub>Explore the actual interface with fictional records. Click the workspace to try it.</sub></p>
-
-## What TgWitness does
-
-<table>
-<tr>
-<td width="33%" valign="top"><b><a href="docs/COLLECTION.md">Every edit and deletion kept</a></b><br><sub>Each version of a message is saved, and its text stays after a deletion notice.</sub></td>
-<td width="33%" valign="top"><b><a href="docs/wiki/Exports-and-Verification.md">Proof anyone can check</a></b><br><sub>Signed, hash-chained records. The recipient verifies the archive offline with one command.</sub></td>
-<td width="33%" valign="top"><b><a href="docs/EVIDENCE.md#where-the-messages-come-from">Origin you can show</a></b><br><sub>Received over the account's authenticated MTProto session and signed on arrival; GitHub Actions and Intel TDX add attestation.</sub></td>
-</tr>
-<tr>
-<td width="33%" valign="top"><b><a href="docs/EXPORT-BENCHMARK-2026-11-06.md">Measured at scale</a></b><br><sub>48 verified archives with 3,598,381 records; eight accounts acquired 768,007 history records at 687.5 records/s.</sub></td>
-<td width="33%" valign="top"><b><a href="docs/INVESTIGATION-MODE.md">Built for investigations</a></b><br><sub>Watchlists over text, QR codes and OCR, wallet checks, subject cards, Case Board and a court package.</sub></td>
-<td width="33%" valign="top"><b><a href="docs/SECURITY-MODEL.md">Yours to run</a></b><br><sub>Self-hosted with no telemetry. Sessions live in an encrypted vault; the panel listens on localhost.</sub></td>
-</tr>
-</table>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -276,7 +279,7 @@ the journal.
 | [Watchlists](docs/INVESTIGATION-MODE.md#watchlists) | Words, patterns, wallets, @usernames, IDs, domains, phones and links, matched in text, edits, hidden link targets, bot buttons, QR codes and OCR |
 | [Online watch](docs/INVESTIGATION-MODE.md#online-watch) | Checks every 1–60 minutes, up to 100 accounts per request, with a pattern by hour and weekday |
 | [Codes and wallets](docs/INVESTIGATION-MODE.md#codes-in-images) | Payment QR codes; EVM addresses checked against EIP-55, TON in raw form, XRP Ledger checksums, payment links with chain, amount and token |
-| [Client traces](docs/INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Encoder traces of round videos and voice messages; upload time against send time exposes pre-recorded "live" proof |
+| [Client traces](docs/INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Encoder traces of round videos and voice messages; upload time against send time exposes pre-recorded "live" proof |
 | [Cover and authority](docs/INVESTIGATION-MODE.md#cover-and-authority) | Personas, authorisations and an undercover activity record that flags messages outside the authorised chats or period |
 | [Account control](docs/INVESTIGATION-MODE.md#account-control) | Profile and privacy editing with before/after records, an exposure check and offline right after each action |
 | [Documents for court](docs/INVESTIGATION-MODE.md#documents-for-court) | BagIt case package with a Rule 902(13)/(14) certification template, exhibit index, request annex and WebVTT/SRT captions for screen recordings |
@@ -450,33 +453,16 @@ verification steps for a signed TgWitness archive.
 
 <!-- operator-notice:start -->
 
-<details>
-<summary><strong>⚖️ Ethical Notice &amp; Historical Continuity</strong></summary>
+<a href="docs/OPERATOR-INCOMPATIBILITY.md">
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-gdpr-impunity-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-gdpr-impunity-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-gdpr-impunity-mobile.svg">
+  <img src="docs/assets/presentation/readme-gdpr-impunity.svg" width="1200" alt="GDPR, violated. Doctors, unpunished. Read the operator notice.">
+</picture>
+</a>
 
-We have recently learned that for certain law firms—and specifically Dr. Tobias Schelinski and Dr. Patrick Vincent Zurheide—mathematics and objective facts are irrelevant.
-
-Selling GDPR non-compliance to corporations as a commercial service while failing at basic data handling yourselves is not legal expertise.
-
-Operating under the delusion that you are the law, or that an elite signature on a falsified claim magically turns a lie into truth, does not mask technical incompetence.
-
-This tool is incompatible with jurisdictions where the following prevail:
-
-- Corporatocracy
-- Privatized or commercial justice
-- Plutocracy
-- Kleptocracy and institutional corruption
-
-A special mention to Dr. Patrick Zurheide, Dr. Tobias Schelinski, and those attempting to weaponize the "Right to be Forgotten" to bury their own data-processing failures, sanitize their institutional lineage, and erase the historical record:
-
-> Taylor Wessing (Dr. Tobias Schelinski & Dr. Patrick Vincent Zurheide) → Wessing & Berenberg-Gossler → Stonewall Top 100 → Dr. Graf von der Goltz Dr. Wessing & Partner (since 1957) → Rüdiger Graf von der Goltz → Paragraph 175 in its 1935 revision
-
-To strictly comply with the MIT License, we do not restrict the use of this software. However, let it be clear: corporate retainers, legal intimidation, and demands for digital erasure cannot override history, rewrite lineage, or conceal the truth.
-
-[Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
-
-[MIT License](LICENSE) · [Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
-
-</details>
+[Read the operator notice →](docs/OPERATOR-INCOMPATIBILITY.md) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 <!-- operator-notice:end -->
 

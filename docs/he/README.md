@@ -17,10 +17,10 @@
 
 <p align="center"><strong>סביבת עבודה באירוח עצמי לחקירות ב-Telegram.</strong><br>שמרו צ'אטים ואת העריכות והמחיקות שבהם, ראו מי קשור למי<br>ומסרו ייצואים חתומים שכל אחד יכול לבדוק.</p>
 
-<p align="center"><strong>אפס אמון.</strong> TgWitness אינו נוקט צד: אותן בדיקות חלות על המפעיל, על PhishDestroy ועל כל אחד אחר.<br>נחשב רק מה שצד שלישי או המתמטיקה מאשרים. <a href="../LIMITS-AND-OBJECTIONS.md">מגבלות והשגות</a></p>
+<p align="center"><strong>אפס אמון.</strong> TgWitness אינו נוקט צד: אותן בדיקות חלות על המפעיל, על PhishDestroy ועל כל אחד אחר.<br>נחשב רק מה שצד שלישי או המתמטיקה מאשרים. <a href="../QUESTIONS-AND-CHECKS.md">שאלות ובדיקות</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · גרסה מקדימה"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · גרסה מקדימה"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">סביבות שנבדקו</a> · 25 שפות ממשק · 26 שפות מדריך</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">בשליטתכם</a></b><br><sub>אירוח עצמי ללא טלמטריה. הסשנים נשמרים בכספת מוצפנת; הפאנל מאזין ב-localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>הפיתוח והבדיקות נמשכו כשישה חודשים: תחילה האספן, היומן החתום והמאמת, ולאחר מכן הפאנל ומודולי ההרחבה. מאגר זה נוצר ב-29 באוקטובר 2026 לצורך פרסום, ולכן גילו אינו תואם את גיל הפרויקט.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [רשימות מעקב](../INVESTIGATION-MODE.md#watchlists) | מילים, תבניות, ארנקים, שמות משתמש (@), מזהים, דומיינים, טלפונים וקישורים, עם התאמה בטקסט, בעריכות, ביעדי קישורים מוסתרים, בכפתורי בוטים, בקודי QR וב-OCR |
 | [מעקב מצב מקוון](../INVESTIGATION-MODE.md#online-watch) | בדיקה כל 1–60 דקות, עד 100 חשבונות לבקשה, עם דפוס לפי שעה ויום בשבוע |
 | [קודים וארנקים](../INVESTIGATION-MODE.md#codes-in-images) | קודי QR לתשלום; כתובות EVM שנבדקות מול EIP-55, כתובות TON בצורה גולמית, סכומי ביקורת של XRP Ledger, קישורי תשלום עם רשת, סכום וטוקן |
-| [עקבות הלקוח](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | עקבות מקודד בסרטוני עיגול ובהודעות קוליות; השוואת זמן ההעלאה לזמן השליחה חושפת הוכחה “חיה” שהוקלטה מראש |
+| [עקבות הלקוח](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | עקבות מקודד בסרטוני עיגול ובהודעות קוליות; השוואת זמן ההעלאה לזמן השליחה חושפת הוכחה “חיה” שהוקלטה מראש |
 | [כיסוי והרשאה](../INVESTIGATION-MODE.md#cover-and-authority) | זהויות בדויות, הרשאות ותיעוד פעילות סמויה שמסמן הודעות מחוץ לצ'אטים או לתקופה המורשים |
 | [שליטה בחשבון](../INVESTIGATION-MODE.md#account-control) | עריכת פרופיל ופרטיות עם רשומות לפני ואחרי, בדיקת חשיפה ומעבר למצב לא מקוון מיד אחרי כל פעולה |
 | [מסמכים לבית המשפט](../INVESTIGATION-MODE.md#documents-for-court) | חבילת תיק BagIt עם תבנית אישור לפי Rule 902(13)/(14), אינדקס מוצגים, נספח בקשה וכתוביות WebVTT/SRT להקלטות מסך |
@@ -457,7 +459,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 
 עמדת המחברים והודעת המפעיל, בשפה זו:
 
-[הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית](TAYLOR-WESSING-EXCLUSION.md) · [הודעת המפעיל](OPERATOR-INCOMPATIBILITY.md) · [רישיון MIT](../../LICENSE) · [קובץ NOTICE המקורי](../../NOTICE)
+[הודעת המפעיל](OPERATOR-INCOMPATIBILITY.md) · [רישיון MIT](../../LICENSE) · [קובץ NOTICE המקורי](../../NOTICE)
 
 </details>
 

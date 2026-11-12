@@ -70,12 +70,12 @@ gh attestation verify "TgWitness-${VERSION}.zip" \
 gh attestation verify evidence.zip --bundle attestation.jsonl \
   --repo OWNER/TgWitness \
   --signer-workflow phishdestroy/TgWitness/.github/workflows/sealed-collector.yml \
-  --signer-digest c4f734553f8de71350546aa73cc756714ee1d8a4 \
+  --signer-digest 615e96c927841399a4720bddfa8d08f76c9173ce \
   --deny-self-hosted-runners
 ```
 
-Просмотрите [закреплённый рабочий процесс коллектора](https://github.com/phishdestroy/TgWitness/blob/c4f734553f8de71350546aa73cc756714ee1d8a4/.github/workflows/sealed-collector.yml):
-он загружает коммит коллектора `abce365085bf28667d07bdf5955f05e92edd5f62`. Проверенные пары
+Просмотрите [закреплённый рабочий процесс коллектора](https://github.com/phishdestroy/TgWitness/blob/615e96c927841399a4720bddfa8d08f76c9173ce/.github/workflows/sealed-collector.yml):
+он загружает коммит коллектора `4d6270b89ba9071bbf8f19c563b297c929814d25`. Проверенные пары
 рабочего процесса и коллектора перечислены в [`tgwitness/sealed_policy.json`](../../tgwitness/sealed_policy.json);
 используйте пару, закреплённую вызывающим рабочим процессом вашего форка.
 Для проверки журнала, вложений, политики и охвата также запустите верификатор из установки,
@@ -92,8 +92,8 @@ python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo
   включения. Просмотреть её можно в [поиске Sigstore](https://search.sigstore.dev/). Запись журнала
   фиксирует время обязательства, а не сообщений Telegram ([Rekor](https://docs.sigstore.dev/logging/overview/)).
 - **Scorecard.** [Отчёт OpenSSF Scorecard](https://securityscorecards.dev/viewer/?uri=github.com/phishdestroy/TgWitness)
-  формируется каждый понедельник и при push в `main`. Смотрите на дату, коммит и замечания,
-  а не только на оценку. Это автоматический анализ, а не аудит, выполненный человеком.
+  формируется каждый понедельник и при push в `main`. Смотрите на дату, коммит и замечания
+  вместе с оценкой.
 - **Аудит рабочих процессов.** [workflow-audit.yml](../../.github/workflows/workflow-audit.yml) запускает zizmor
   при изменениях рабочих процессов и каждый понедельник; результаты сохраняются в артефакте
   `workflow-audit-sarif`.

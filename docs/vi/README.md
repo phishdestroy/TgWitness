@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Không gian làm việc tự lưu trữ cho các cuộc điều tra trên Telegram.</strong><br>Lưu cuộc trò chuyện, giữ lại các lần sửa và xóa, xem ai liên hệ với ai<br>và bàn giao bản xuất có chữ ký mà ai cũng kiểm tra được.</p>
 
-<p align="center"><strong>ZERO TRUST.</strong> TgWitness không đứng về phía nào: các bước kiểm tra như nhau áp dụng cho nhà vận hành, cho PhishDestroy và cho bất kỳ ai khác.<br>Chỉ những gì bên thứ ba hoặc toán học xác nhận mới được tính. <a href="../LIMITS-AND-OBJECTIONS.md">Giới hạn và phản biện</a></p>
+<p align="center"><strong>ZERO TRUST.</strong> TgWitness không đứng về phía nào: các bước kiểm tra như nhau áp dụng cho nhà vận hành, cho PhishDestroy và cho bất kỳ ai khác.<br>Chỉ những gì bên thứ ba hoặc toán học xác nhận mới được tính. <a href="../QUESTIONS-AND-CHECKS.md">Câu hỏi và kiểm tra</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · bản tiền phát hành"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · bản tiền phát hành"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Môi trường đã kiểm thử</a> · 25 ngôn ngữ giao diện · 26 ngôn ngữ hướng dẫn</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Do bạn tự vận hành</a></b><br><sub>Tự lưu trữ, không có telemetry. Phiên được giữ trong kho dữ liệu được mã hóa; bảng điều khiển lắng nghe trên localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Đã được phát triển và thử nghiệm trong khoảng sáu tháng: trước tiên là bộ thu thập, sổ nhật ký đã được ký và bộ xác minh, sau đó là bảng điều khiển và các mô-đun bổ sung. Kho lưu trữ này được tạo vào ngày 29 tháng 10 năm 2026 để xuất bản, do đó tuổi của nó không phải là tuổi của dự án.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ sổ nhật ký.
 | [Danh sách theo dõi](../INVESTIGATION-MODE.md#watchlists) | Từ khóa, mẫu, ví, @tên người dùng, ID, tên miền, số điện thoại và liên kết, được đối chiếu trong văn bản, các lần sửa, đích liên kết ẩn, nút bot, mã QR và OCR |
 | [Theo dõi trạng thái trực tuyến](../INVESTIGATION-MODE.md#online-watch) | Kiểm tra mỗi 1–60 phút, tối đa 100 tài khoản mỗi yêu cầu, kèm quy luật theo giờ và ngày trong tuần |
 | [Mã và ví](../INVESTIGATION-MODE.md#codes-in-images) | Mã QR thanh toán; địa chỉ EVM được kiểm tra theo EIP-55, TON ở dạng thô, checksum XRP Ledger, liên kết thanh toán kèm chuỗi, số tiền và token |
-| [Dấu vết ứng dụng khách](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Dấu vết bộ mã hóa trong video tròn và tin nhắn thoại; so sánh thời gian tải lên với thời gian gửi sẽ lật tẩy bằng chứng “trực tiếp” được quay sẵn |
+| [Dấu vết ứng dụng khách](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Dấu vết bộ mã hóa trong video tròn và tin nhắn thoại; so sánh thời gian tải lên với thời gian gửi sẽ lật tẩy bằng chứng “trực tiếp” được quay sẵn |
 | [Danh tính ngụy trang và thẩm quyền](../INVESTIGATION-MODE.md#cover-and-authority) | Nhân dạng giả, giấy ủy quyền và bản ghi hoạt động bí mật, gắn cờ các tin nhắn nằm ngoài các cuộc trò chuyện hoặc khoảng thời gian được phép |
 | [Kiểm soát tài khoản](../INVESTIGATION-MODE.md#account-control) | Chỉnh sửa hồ sơ và quyền riêng tư kèm bản ghi trước/sau, kiểm tra mức độ lộ diện và chuyển ngoại tuyến ngay sau mỗi thao tác |
 | [Tài liệu cho tòa án](../INVESTIGATION-MODE.md#documents-for-court) | Gói vụ án BagIt kèm mẫu chứng nhận Rule 902(13)/(14), danh mục vật chứng, phụ lục yêu cầu và phụ đề WebVTT/SRT cho video quay màn hình |
@@ -457,7 +459,7 @@ xác minh cho một tệp lưu trữ TgWitness có chữ ký.
 
 Quan điểm của các tác giả và thông báo cho nhà vận hành, bằng tiếng Việt:
 
-[Thông báo về sự không tương thích giữa giấy phép và kiến trúc](TAYLOR-WESSING-EXCLUSION.md) · [Thông báo cho nhà vận hành](OPERATOR-INCOMPATIBILITY.md) · [Giấy phép MIT](../../LICENSE) · [NOTICE gốc](../../NOTICE)
+[Thông báo cho nhà vận hành](OPERATOR-INCOMPATIBILITY.md) · [Giấy phép MIT](../../LICENSE) · [NOTICE gốc](../../NOTICE)
 
 </details>
 

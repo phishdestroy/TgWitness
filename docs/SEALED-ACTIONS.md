@@ -28,7 +28,7 @@ can inspect that code and verify the delivered archive against its recorded run.
 - [Local decryption and verification](#local-decryption-and-verification)
 - [How the fork is kept outside the capture process](#how-the-fork-is-kept-outside-the-capture-process)
 - [Cryptographic handoff](#cryptographic-handoff)
-- [Limits and validation](#limits-and-validation)
+- [Scope and validation](#scope-and-validation)
 - [Maintainer release sequence](#maintainer-release-sequence)
 
 </details>
@@ -207,7 +207,7 @@ Before relying on this preview, try a small chat you control: create a message
 and attachment, collect them, decrypt the result, run the verifier, check the
 coverage/media outcomes and confirm Telegram session revocation. Automated
 checks use a synthetic Telegram client plus a separate real GitHub certificate
-test; live account acceptance is recorded separately.
+test; no live-account run on the current revision has been recorded.
 
 ## Local decryption and verification
 
@@ -281,8 +281,8 @@ The supervisor stops the network-facing containers before the attest action
 reads the final fixed `evidence.zip` or `evidence.parts.json`. The packaging container has no network.
 The upload steps name only `connection.tgwsealed` and `delivery*.tgwsealed`;
 neither plaintext evidence nor Telegram credentials are uploaded as artifacts.
-Cleanup removes the private directories and containers, with no claim of
-physical disk erasure. Artifact retention is one day; download before expiry.
+Cleanup removes the private directories and containers, and GitHub discards the
+hosted runner VM after the job. Artifact retention is one day; download before expiry.
 
 A fork owner can replace the caller or create a different signed file. The
 strict verifier must reject the resulting **different signer workflow/digest**.
@@ -303,8 +303,9 @@ header, ciphertext, and a 16-byte GCM tag. The header has exactly `algorithm`,
 through the header is GCM additional authenticated data. Header size is bounded
 at 8192 bytes. The CLI streams payloads up to 8 GiB and authenticates before
 installing the requested output; it refuses overwriting an existing destination.
-This is a project-specific envelope around standard cryptographic primitives,
-not an independently audited encryption format.
+This is a project-specific envelope around standard cryptographic primitives:
+RSA-OAEP with SHA-256 and AES-256-GCM, available in OpenSSL and every major
+cryptography library.
 
 The original evidence bytes are attested **before** placing the evidence and
 attestation in the encrypted outer package. This avoids a circular dependency
@@ -312,7 +313,7 @@ between the archive's hash and a certificate included inside that same archive.
 For public repositories, attestation metadata (repository, workflow, commit,
 artifact name and digest) is public. Never put chat names in public metadata.
 
-## Limits and validation
+## Scope and validation
 
 This mode uses the signed journal and account-export engine. Secret Chats,
 deleted history from before collection and data inaccessible to the account are

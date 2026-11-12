@@ -21,7 +21,7 @@ Official Web observation does not replace a complete Desktop account export. Cho
 - [Run through GitHub Actions](#run-through-github-actions)
 - [Local Linux deployment](#local-linux-deployment)
 - [Network and account behavior](#network-and-account-behavior)
-- [Evidence and limits](#evidence-and-limits)
+- [Evidence](#evidence)
 - [Validation](#validation)
 
 </details>
@@ -65,7 +65,7 @@ An ordinary Cloudflare Tunnel or Quick Tunnel is panel ingress, not a WARP exit.
 
 Official Web still opens a new Telegram session and may emit read receipts or online status. Variable pauses and sequential actions pace the session; Telegram decides account restrictions. The guard blocks composer input, reactions, bot buttons, context menus and arbitrary control requests, and stops on unexpected dialogs, origin changes or loss of authorization. The client itself and the host remain within the stated trust boundary.
 
-## Evidence and limits
+## Evidence
 
 Recording starts after login and source selection. Screenshots, MHTML, derived visible text and rendered message metadata are hashed into the signed journal. FFmpeg closes roughly ten-second silent H. 264 segments, which are signed as they become available. The verifier rejects missing or reordered segments and marks interrupted or unclean endings as incomplete. No account password, login code or QR screenshot is deliberately exported. If authorization reappears, a guard cover stops observation.
 
@@ -81,4 +81,4 @@ The report lists procedure completion, environment attestation and Cloudflare ve
 
 ## Validation
 
-Automated acceptance exercises a real sandboxed Chromium, the guarded panel at desktop and mobile sizes, proxy failures, source/settings mismatch, signed archive verification and interrupted video. Linux CI additionally runs the actual isolated Docker image with Xvfb and FFmpeg, checks denied direct IPv4 and IPv6 connections, and verifies the recorded segments. The Telegram public QR page and the official Web A source were inspected for selector compatibility. These tests use synthetic authenticated chat fixtures; live-account runs are recorded separately.
+Automated acceptance exercises a real sandboxed Chromium, the guarded panel at desktop and mobile sizes, proxy failures, source/settings mismatch, signed archive verification and interrupted video. Linux CI additionally runs the actual isolated Docker image with Xvfb and FFmpeg, checks denied direct IPv4 and IPv6 connections, and verifies the recorded segments. The Telegram public QR page and the official Web A source were inspected for selector compatibility. These tests use synthetic authenticated chat fixtures; a dated live-account run of this mode has not been recorded yet.

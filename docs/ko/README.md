@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Telegram 조사를 위한 자체 호스팅 작업 공간.</strong><br>채팅을 저장하고, 수정과 삭제를 보존하고, 누가 누구와 연결되어 있는지 파악하고,<br>누구나 확인할 수 있는 서명된 내보내기 파일을 넘겨줄 수 있습니다.</p>
 
-<p align="center"><strong>제로 트러스트.</strong> TgWitness는 어느 편도 들지 않습니다. 운영자에게도, PhishDestroy에도, 그 밖의 누구에게도 같은 검사를 적용합니다.<br>제3자나 수학이 확인해 주는 것만 인정됩니다. <a href="../LIMITS-AND-OBJECTIONS.md">한계와 반론</a></p>
+<p align="center"><strong>제로 트러스트.</strong> TgWitness는 어느 편도 들지 않습니다. 운영자에게도, PhishDestroy에도, 그 밖의 누구에게도 같은 검사를 적용합니다.<br>제3자나 수학이 확인해 주는 것만 인정됩니다. <a href="../QUESTIONS-AND-CHECKS.md">질문과 검증</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · 사전 릴리스"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · 사전 릴리스"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">테스트된 환경</a> · 인터페이스 25개 언어 · 가이드 26개 언어</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">직접 운영</a></b><br><sub>텔레메트리 없는 자체 호스팅. 세션은 암호화된 볼트에 저장되고, 패널은 localhost에서 수신 대기합니다.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>약 6개월 동안 개발 및 테스트를 진행했습니다: 먼저 수집기, 서명된 저널, 검증기를 개발하고 테스트한 뒤, 패널과 추가 모듈을 개발 및 테스트했습니다. 이 저장소는 2026년 10월 29일 공개를 위해 생성되었으므로, 저장소의 생성일은 프로젝트의 개발 기간과 일치하지 않습니다.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -282,7 +284,7 @@ Linux 및 Windows 설치 프로그램 테스트와 독립 실행형 검증 도�
 | [감시 목록](../INVESTIGATION-MODE.md#watchlists) | 단어, 패턴, 지갑, @사용자 이름, ID, 도메인, 전화번호, 링크를 텍스트, 수정 내역, 숨겨진 링크 대상, 봇 버튼, QR 코드, OCR에서 찾아냄 |
 | [온라인 감시](../INVESTIGATION-MODE.md#online-watch) | 1–60분마다 확인, 요청당 최대 100개 계정, 시간대와 요일별 패턴 제공 |
 | [코드와 지갑](../INVESTIGATION-MODE.md#codes-in-images) | 결제 QR 코드. EIP-55로 확인하는 EVM 주소, 원시 형식의 TON, XRP Ledger 체크섬, 체인·금액·토큰이 담긴 결제 링크 |
-| [클라이언트 흔적](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | 원형 동영상과 음성 메시지의 인코더 흔적. 업로드 시각과 전송 시각을 비교하면 미리 녹화한 ‘라이브’ 증거가 드러납니다 |
+| [클라이언트 흔적](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | 원형 동영상과 음성 메시지의 인코더 흔적. 업로드 시각과 전송 시각을 비교하면 미리 녹화한 ‘라이브’ 증거가 드러납니다 |
 | [위장 신분과 권한](../INVESTIGATION-MODE.md#cover-and-authority) | 페르소나, 승인 문서, 그리고 승인된 채팅이나 기간을 벗어난 메시지를 표시하는 잠입 활동 기록 |
 | [계정 관리](../INVESTIGATION-MODE.md#account-control) | 변경 전후 기록이 남는 프로필 및 개인정보 설정 편집, 노출 점검, 각 작업 직후 오프라인 전환 |
 | [법원 제출 문서](../INVESTIGATION-MODE.md#documents-for-court) | Rule 902(13)/(14) 인증서 템플릿, 증거물 색인, 요청서 부속서, 화면 녹화용 WebVTT/SRT 자막이 포함된 BagIt 사건 패키지 |
@@ -455,7 +457,7 @@ Telegram 대화와 의도적으로 변조한 Desktop 내보내기 파일을 나�
 
 저자들의 입장과 운영자 공지의 한국어판:
 
-[라이선스 안내 및 아키텍처 비호환성 공지](TAYLOR-WESSING-EXCLUSION.md) · [운영자 공지](OPERATOR-INCOMPATIBILITY.md) · [MIT 라이선스](../../LICENSE) · [원본 NOTICE](../../NOTICE)
+[운영자 공지](OPERATOR-INCOMPATIBILITY.md) · [MIT 라이선스](../../LICENSE) · [원본 NOTICE](../../NOTICE)
 
 </details>
 

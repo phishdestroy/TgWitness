@@ -111,11 +111,15 @@ smaller fresh-export examples above.
 
 ### Testing history and duration
 
-The maintainers report more than six months of active development and testing
-before the public repository opened in November 2026, with cumulative exercised
-workload on the order of 100 million, including earlier runs, failures, fixes and
-repeated validation. The dated public measurements document selected runs with
-their own revisions, methods and results.
+TgWitness has been developed and tested for about six months. The collector, the
+signed journal and the verifier came first; the web panel and the add-on modules
+were built on them later. This repository was created new on 29 October 2026 for
+publication and began with the existing code, so its age is not the project's age
+([development history](QUESTIONS-AND-CHECKS.md#development-history)).
+The cumulative exercised workload is on the order of 100 million, including earlier
+runs, failures, fixes and repeated validation. Selected runs, each with its own revision,
+method and result, are documented in the
+[dated public measurements](QUESTIONS-AND-CHECKS.md#dates-of-the-published-measurements).
 
 ## Read capability status precisely
 

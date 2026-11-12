@@ -410,7 +410,7 @@
     <p class="hint" id="history-media"></p>
     <p class="hint" id="history-wait"></p>
     <ul id="history-sources"></ul>
-    <p class="hint">Use Export evidence to hand over the journal and saved attachments. Finishing history reads does not mean every attachment was downloaded.</p>
+    <p class="hint">Use Export evidence to hand over the journal and saved attachments. Attachments waiting to be saved are counted separately from history reads.</p>
   </section>
   </div>
   <div id="sources-panel-recording" role="tabpanel" aria-labelledby="sources-tab-recording" hidden>
@@ -862,7 +862,7 @@
       <label class="check-label"><input id="report-guidance-include" type="checkbox" checked> Include guidance in the report</label>
       <label class="check-label"><input id="report-guidance-local" type="checkbox"> Add the local-language summary</label>
       <label class="check-label"><input id="report-guidance-methods" type="checkbox"> Explain collection safeguards</label>
-      <p class="hint">Legal guidance is supplied in English. Local summaries are not certified translations. Sources and research dates travel with the report.</p>
+      <p class="hint">Legal guidance is supplied in English with local summaries. Sources and research dates travel with the report.</p>
       <p class="hint">These choices belong to this workspace, not to saved layout configurations. Sharing copies do not inherit this selection.</p>
       <div id="report-guidance-detail" data-no-translate lang="en" dir="ltr" aria-live="polite"></div>
     </details>
@@ -883,7 +883,7 @@
       <label class="check-label"><input id="report-heartbeats" type="checkbox"> Group consecutive collector heartbeats</label>
       <div class="report-part-size"><label for="report-part-size">Maximum records or messages per data file</label><input id="report-part-size" required max="100000" min="500" step="1" type="number"><p class="hint">Also sets the PDF transcript limit. Larger transcripts remain in the HTML viewer and signed source files. Large data files may be split earlier.</p></div>
     </fieldset>
-    <p class="studio-fixed">Trust assessment, coverage limitations and verification instructions stay in every report. Display choices do not remove signed source records.</p>
+    <p class="studio-fixed">Trust assessment, coverage and verification instructions stay in every report. Display choices do not remove signed source records.</p>
     </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button><button type="button" data-preview-section="guidance" aria-pressed="false" hidden>Guidance</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
     <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title">
       <div class="report-section-heading"><span aria-hidden="true">03</span><div><h3 id="report-preview-title" tabindex="-1">Inspect the actual data</h3><p class="hint">This preview uses your current choices. It does not save them or create a signed export.</p></div></div>
@@ -931,7 +931,7 @@
         <div><strong>Required · Integrity</strong><p>verify.py checks every signature, the record chain and all file hashes.</p></div>
         <div><strong>Required · Signer key</strong><p>The recipient compares the collector fingerprint with a copy received separately.</p></div>
         <div><strong>Required · External time</strong><p>A third party dates the last exported record: a verified RFC 3161 or OpenTimestamps receipt, a witness post read from t.me, a witness Bitcoin seal or a checked GitHub attestation.</p></div>
-        <div><strong>Supporting · Witness with its own key</strong><p>A second key retained the journal head. Who controls that key is a custody fact the verifier cannot check.</p></div>
+        <div><strong>Supporting · Witness with its own key</strong><p>A second key retained the journal head. Who holds that key is shown by the custodian's key-control record, kept with its fingerprint.</p></div>
         <div><strong>Supporting · Retained checkpoint</strong><p>A checkpoint the recipient received earlier, through another channel, shows that the records up to it were not changed afterwards.</p></div>
         <div><strong>Supporting · Attested collection run</strong><p>A GitHub Actions run or an Intel TDX deployment shows that the signing key was created inside the attested collection run.</p></div>
       </div>
@@ -1327,7 +1327,7 @@
     <p>The saved configuration is a setup file. Run it on the witness host to begin checks and publication.</p>
     <p class="hint">On the witness host, save the read-only token in witness-token.txt. For Telegram, save the BotFather token in bot-token.txt; for Discord, the webhook URL in discord-webhook.txt. Keep these files next to witness.json. Publishing credentials stay on the witness host.</p>
     <pre id="witness-start-command"></pre>
-    <p class="hint">Keep the witness key fingerprint separately. Confirm the first signed post in your channel; a downloaded file does not mean the bot is running.</p>
+    <p class="hint">Keep the witness key fingerprint separately. The first signed post in your channel confirms that the bot is running.</p>
   </details>
   <details class="card padded witness-explainer extra-detail"><summary>What does the bot actually prove?</summary>
     <div class="witness-flow" aria-label="How the witness works"><span id="witness-step-collector">Collector signs a checkpoint</span><b aria-hidden="true">→</b><span id="witness-step-verify">Witness verifies and signs</span><b aria-hidden="true">→</b><span id="witness-step-post">Bot publishes to your channel</span></div>
@@ -1408,7 +1408,7 @@
         <div id="connect-login-fields" class="connect-fields"><label>Username (optional)<input id="connect-user" maxlength="255" autocomplete="off"></label><label>Password (optional)<input type="password" id="connect-password" maxlength="255" autocomplete="off"></label></div>
         <label id="connect-secret-wrap" hidden>MTProxy secret<input id="connect-secret" type="password" maxlength="512" autocomplete="off"></label>
       </div>
-      <div id="connect-vpn-fields" hidden><label>WireGuard profile<textarea id="connect-wireguard" maxlength="16384" spellcheck="false" autocomplete="off" placeholder="[Interface]&#10;PrivateKey = …&#10;Address = …&#10;&#10;[Peer]&#10;PublicKey = …&#10;Endpoint = …&#10;AllowedIPs = 0.0.0.0/0, ::/0"></textarea></label><p class="hint">One profile per account. OpenVPN and IPsec can run outside TgWitness; use Direct through that host VPN or enter its SOCKS5 gateway. Host VPN status is not verified here.</p></div>
+      <div id="connect-vpn-fields" hidden><label>WireGuard profile<textarea id="connect-wireguard" maxlength="16384" spellcheck="false" autocomplete="off" placeholder="[Interface]&#10;PrivateKey = …&#10;Address = …&#10;&#10;[Peer]&#10;PublicKey = …&#10;Endpoint = …&#10;AllowedIPs = 0.0.0.0/0, ::/0"></textarea></label><p class="hint">One profile per account. OpenVPN and IPsec can run outside TgWitness; use Direct through that host VPN or enter its SOCKS5 gateway, and check the VPN status on that host.</p></div>
       <div id="connect-setup-fields"><label class="check-label"><input type="checkbox" id="connect-consent">Allow direct setup connections to download the pinned helpers from GitHub and, for WARP, register a device with Cloudflare under its terms.</label><p class="hint"><a href="https://www.cloudflare.com/application/terms/" target="_blank" rel="noopener noreferrer">Cloudflare application terms</a>. Setup reveals this machine's IP to those services. Helpers are checked against SHA-256 hashes bundled with TgWitness. Existing helpers and WARP registration are reused.</p></div>
       <p id="connect-warp-note" class="hint">Each selected account gets its own local tunnel. Cloudflare chooses the exit address and country; separate tunnels may share an exit IP.</p>
       <details><summary>External requests</summary><label class="check-label"><input type="checkbox" id="connect-outside" checked>Use this route for timestamps, notifications and other requests outside Telegram</label><p class="hint">Applying replaces a separately configured external proxy. MTProxy carries only Telegram, so external requests stay off until you configure their own proxy under Advanced. Proxied routes never fall back to Direct.</p></details>

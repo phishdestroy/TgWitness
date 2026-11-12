@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md">v0.9.2</a> &nbsp; · &nbsp;
+  <a href="CHANGELOG.md">v0.9.3</a> &nbsp; · &nbsp;
   <a href="QUICKSTART.md">Python 3.11+</a> &nbsp; · &nbsp;
   <a href="../LICENSE">MIT license</a>
 </p>
@@ -403,7 +403,7 @@ Browser checks use synthetic Telegram data.
 ## License
 
 [MIT License](../LICENSE). Our
-[position on Taylor Wessing](TAYLOR-WESSING-EXCLUSION.md) is a statement, not a licence condition.
+[position on Taylor Wessing](OPERATOR-INCOMPATIBILITY.md) is a statement, not a licence condition.
 
 ## Repository map
 

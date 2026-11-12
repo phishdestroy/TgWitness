@@ -17,10 +17,10 @@
 
 <p align="center"><strong>اپنے سرور پر چلنے والی ورک اسپیس، Telegram پر تفتیش کے لیے۔</strong><br>چیٹس محفوظ کریں، ترامیم اور حذف شدہ پیغامات سنبھال کر رکھیں، دیکھیں کون کس سے جڑا ہے<br>اور دستخط شدہ ایکسپورٹس حوالے کریں جنہیں کوئی بھی جانچ سکتا ہے۔</p>
 
-<p align="center"><strong>زیرو ٹرسٹ۔</strong> TgWitness کسی کا فریق نہیں بنتا: یہی جانچ آپریٹر، PhishDestroy اور ہر دوسرے فرد پر یکساں لاگو ہوتی ہے۔<br>صرف وہی معتبر ہے جس کی تصدیق کوئی تیسرا فریق یا ریاضی کرے۔ <a href="../LIMITS-AND-OBJECTIONS.md">حدود اور اعتراضات</a></p>
+<p align="center"><strong>زیرو ٹرسٹ۔</strong> TgWitness کسی کا فریق نہیں بنتا: یہی جانچ آپریٹر، PhishDestroy اور ہر دوسرے فرد پر یکساں لاگو ہوتی ہے۔<br>صرف وہی معتبر ہے جس کی تصدیق کوئی تیسرا فریق یا ریاضی کرے۔ <a href="../QUESTIONS-AND-CHECKS.md">سوالات اور جانچ</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · پری ریلیز"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · پری ریلیز"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">آزمائے گئے ماحول</a> · انٹرفیس کی 25 زبانیں · رہنما کی 26 زبانیں</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">آپ کے اپنے کنٹرول میں</a></b><br><sub>آپ کے اپنے سرور پر، بغیر ٹیلی میٹری کے۔ سیشنز ایک خفیہ کردہ والٹ میں رہتے ہیں؛ پینل localhost پر سنتا ہے۔</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>تقریباً چھ ماہ تک تیار اور آزمایا گیا: پہلے کلیکٹر، دستخط شدہ جرنل اور ویریفائر، پھر پینل اور اضافی ماڈیولز۔ یہ ریپوزیٹری اشاعت کے لیے 29 اکتوبر 2026 کو بنائی گئی تھی، لہٰذا اس کی عمر منصوبے کی عمر نہیں ہے۔</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [واچ لسٹس](../INVESTIGATION-MODE.md#watchlists) | الفاظ، پیٹرنز، والیٹس، یوزر نیمز (@)، آئی ڈیز، ڈومینز، فون نمبرز اور لنکس، جو متن، ترامیم، چھپے ہوئے لنک اہداف، بوٹ بٹنوں، QR کوڈز اور OCR میں ملائے جاتے ہیں |
 | [آن لائن نگرانی](../INVESTIGATION-MODE.md#online-watch) | ہر 1–60 منٹ پر جانچ، فی درخواست 100 اکاؤنٹس تک، گھنٹے اور ہفتے کے دن کے لحاظ سے پیٹرن کے ساتھ |
 | [کوڈز اور والیٹس](../INVESTIGATION-MODE.md#codes-in-images) | ادائیگی کے QR کوڈز؛ EIP-55 کے مطابق جانچے گئے EVM ایڈریسز، خام شکل میں TON، XRP Ledger چیک سمز، اور چین، رقم اور ٹوکن کے ساتھ ادائیگی کے لنکس |
-| [کلائنٹ کے نشانات](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | گول ویڈیوز اور وائس میسجز میں انکوڈر کے نشانات؛ اپ لوڈ کے وقت کا بھیجنے کے وقت سے موازنہ پہلے سے ریکارڈ شدہ “لائیو” ثبوت کو بے نقاب کرتا ہے |
+| [کلائنٹ کے نشانات](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | گول ویڈیوز اور وائس میسجز میں انکوڈر کے نشانات؛ اپ لوڈ کے وقت کا بھیجنے کے وقت سے موازنہ پہلے سے ریکارڈ شدہ “لائیو” ثبوت کو بے نقاب کرتا ہے |
 | [کور اور اختیار](../INVESTIGATION-MODE.md#cover-and-authority) | فرضی شناختیں، اجازت نامے اور خفیہ سرگرمی کا ریکارڈ جو مجاز چیٹس یا مدت سے باہر کے پیغامات کی نشاندہی کرتا ہے |
 | [اکاؤنٹ کنٹرول](../INVESTIGATION-MODE.md#account-control) | پروفائل اور پرائیویسی میں ترمیم، پہلے اور بعد کے ریکارڈز کے ساتھ، ایکسپوژر کی جانچ، اور ہر کارروائی کے فوراً بعد آف لائن ہو جانا |
 | [عدالت کے لیے دستاویزات](../INVESTIGATION-MODE.md#documents-for-court) | کیس کا BagIt پیکیج، ساتھ میں Rule 902(13)/(14) سرٹیفکیشن ٹیمپلیٹ، شواہد کی فہرست، درخواست کا ضمیمہ اور اسکرین ریکارڈنگز کے لیے WebVTT/SRT کیپشنز |
@@ -457,7 +459,7 @@ Telegram Desktop سے مطابقت رکھنے والے JSON/HTML ویوز شام
 
 مصنفین کا موقف اور آپریٹر نوٹس، اسی زبان میں:
 
-[لائسنس اور فنِ تعمیر کی عدم مطابقت کا نوٹس](TAYLOR-WESSING-EXCLUSION.md) · [آپریٹر نوٹس](OPERATOR-INCOMPATIBILITY.md) · [MIT لائسنس](../../LICENSE) · [اصل NOTICE فائل](../../NOTICE)
+[آپریٹر نوٹس](OPERATOR-INCOMPATIBILITY.md) · [MIT لائسنس](../../LICENSE) · [اصل NOTICE فائل](../../NOTICE)
 
 </details>
 

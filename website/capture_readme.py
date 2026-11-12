@@ -32,7 +32,6 @@ def capture(page, mobile):
 
 
 def choose_filter(page, name):
-    # The message filters sit in a collapsed "Filters" menu; choose one without opening it.
     page.locator(f'#chat-status [data-chat-filter="{name}"]').evaluate("button => button.click()")
     page.wait_for_timeout(600)
 
@@ -67,7 +66,7 @@ def main():
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch()
             for mobile in (False, True):
-                for theme in ("dark", "light"):
+                for theme in ("dark",):
                     page = browser.new_page(
                         viewport={"width": 390 if mobile else 1440, "height": 900},
                         device_scale_factor=2 if mobile else 1,

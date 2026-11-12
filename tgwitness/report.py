@@ -385,7 +385,7 @@ def standards(say, kind="evidence", stamps=0):
         ("ISO/IEC 27037:2012", say("Identification, collection, acquisition and preservation of digital evidence"),
          say("Capture time, tool, method and account are recorded; every record is hashed and signed when it is captured.")),
         ("ISO/IEC 27042:2015", say("Analysis and interpretation of digital evidence"),
-         say("Authoritative files and readable derivatives are kept apart; limitations are stated with the results.")),
+         say("Authoritative files and readable derivatives are kept apart; each result states its scope.")),
         ("NIST SP 800-86", say("Integrating forensic techniques into incident response"),
          say("Collection, examination, analysis and reporting are separate, documented steps.")),
         ("Berkeley Protocol (OHCHR, 2022)", say("Digital open source investigations"),
@@ -651,7 +651,7 @@ def icon(name, cls="i"):
 SECTION_ICONS = {"case": ("files", "blue"), "minimisation": ("eye", "violet"), "changes": ("edit", "orange"),
                  "actions": ("route", "violet"), "integrity": ("fingerprint", "blue"), "timestamps": ("seal", "teal"),
                  "coverage": ("layers", "teal"), "custody": ("route", "green"), "verify": ("check", "green"),
-                 "files": ("zip", "slate"), "standards": ("journal", "slate"), "limits": ("alert", "orange"),
+                 "files": ("zip", "slate"), "standards": ("journal", "slate"), "limits": ("info", "blue"),
                  "records": ("journal", "blue"), "messages": ("message", "blue"), "people": ("users", "violet"),
                  "ids": ("tag", "red"), "indicators": ("tag", "red"), "source": ("telegram", "blue"),
                  "admin-log": ("trash", "red"), "seal": ("lock", "green")}
@@ -784,6 +784,7 @@ CSS = (
     ".versions>li{padding:4px 0 8px 14px}.vhead{font-size:12.5px;color:var(--muted)}"
     ".versions .text{white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0}.gone-step .gone{color:var(--bad);margin:4px 0;font-size:13.5px}"
     "del{background:var(--badtint);color:var(--bad)}ins{background:var(--oktint);color:var(--ok)}"
+    "del+ins,ins+del{margin-inline-start:.25em}"
     "del,ins{-webkit-print-color-adjust:exact;print-color-adjust:exact}"
     ".kbd-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.key{display:inline-flex;flex-direction:column;gap:2px;"
     "border:1px solid var(--line);border-radius:3px;padding:4px 10px;background:var(--bg2)}.key code{font-size:11.5px;color:var(--muted)}"
@@ -1086,13 +1087,12 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
         shows.append(say("That the journal up to record #{n} existed by {time}: an independent timestamp by {service}.",
                          n=latest.get("event_count"), time=utc_text(latest.get("time")), service=latest.get("service")))
     gaps = len((coverage or {}).get("gaps") or [])
-    hidden = [say("Who is behind an account or a chat: Telegram shows names and IDs, not identities."),
-              say("That Telegram delivered everything: gaps in observation ({n}) are listed under Coverage.", n=gaps)
-              if gaps else say("Activity outside the observed periods: the Coverage section lists those periods."),
-              say("Messages deleted before observation began, and the deleting person where no admin log names one."),
-              say("Exact times after record #{n}: they come from the collector's clock.", n=latest.get("event_count"))
-              if latest else say("Independently fixed times: observed times come from the collector clock until a timestamp or witness covers them.")]
-    return summary, shows, hidden
+    includes = [say("Each sender by the Telegram ID and name delivered with the message."),
+                say("Observed periods and gaps in observation ({n}), listed under Coverage.", n=gaps)
+                if gaps else say("Observed periods, listed under Coverage.")]
+    if not handover:
+        includes.append(say("Each saved version of an edited message, and the text kept after a deletion notice."))
+    return summary, shows, includes
 
 
 def chat_brief(say, meta, stats, ids, account_text):
@@ -1111,19 +1111,18 @@ def chat_brief(say, meta, stats, ids, account_text):
     labels = [say(text) for flag, text, _ in LABELS if profile.get(flag)]
     if labels:
         shows.append(say("Telegram's own label at export time: {labels}.", labels="; ".join(labels)))
-    hidden = [say("Who is behind an account or a chat: Telegram shows names and IDs, not identities."),
-              say("Earlier versions of edited messages, or who deleted a message (only an admin log says that).")
-              if not meta.get("admin_log") else say("Earlier versions of edited messages older than the admin log."),
-              say("Messages hidden from this account: the export holds what Telegram returned to it.")]
-    return summary, shows, hidden
+    includes = [say("Each sender by the Telegram ID and name delivered with the message.")]
+    if meta.get("admin_log"):
+        includes.append(say("Edits and deletions from the chat's admin log, with the account that made them and the content."))
+    return summary, shows, includes
 
 
-def brief_section(say, summary, shows, hidden):
+def brief_section(say, summary, shows, includes):
     items = lambda values: "<ul>" + "".join("<li>" + e(v) + "</li>" for v in values) + "</ul>"
     return ('<section class="card brief" id="brief"><h2><span class="sec-icon tone-blue">' + icon("info") + "</span>"
             + e(say("In brief")) + '</h2><p class="lead">' + e(summary)
             + '</p><div class="brief-cols"><div><h3>' + e(say("What this shows")) + "</h3>" + items(shows)
-            + "</div><div><h3>" + e(say("What this does not show")) + "</h3>" + items(hidden) + "</div></div></section>")
+            + "</div><div><h3>" + e(say("What the record includes")) + "</h3>" + items(includes) + "</div></div></section>")
 
 
 def case_section(say, number, options, extra_rows):
@@ -2727,6 +2726,9 @@ class ChatHTML:
                                                 say("Last message")], rows) + "</div>" + more + "</section>").encode("utf-8")
         if self.ids:
             yield message_ids_section(say, next(self.numbers), self.ids).encode("utf-8")
+        if self.context.get("journal_changes") is not None:
+            yield journal_changes_section(say, next(self.numbers), self.meta.get("journal") or {},
+                                          self.context["journal_changes"]).encode("utf-8")
         if self.context.get("admin_events") is not None:
             yield admin_log_section(say, next(self.numbers), self.meta, self.context["admin_events"]).encode("utf-8")
         if self.options.get("show_indicators", True) and (self.context.get("indicators") or {}).get("items"):
@@ -2920,6 +2922,37 @@ def admin_rows(say, events, limit=500):
             content = str(event.get("prev_value", "")) + "  →  " + str(event.get("new_value", ""))
         yield (utc_text(event.get("date")), "ID " + str(event.get("user_id")),
                say(ADMIN_ACTIONS.get(event.get("action"), str(event.get("action")))), message, content)
+
+
+JOURNAL_NOTICES = {"message.deleted": "Deleted", "message.missing_on_recheck": "Missing on recheck"}
+JOURNAL_LEAD = ("Messages of this chat that the observing account saw deleted, missing on recheck or edited. Every saved "
+                "version comes from the workspace journal with its own hash and signature; Telegram's current history no "
+                "longer shows these versions.")
+
+
+def journal_change_rows(say, items):
+    for item in items:
+        versions = [v for v in item["events"] if v["kind"] not in JOURNAL_NOTICES]
+        notices = [say(JOURNAL_NOTICES[v["kind"]]) + " · " + utc_text(v["observed_at"])
+                   for v in item["events"] if v["kind"] in JOURNAL_NOTICES]
+        edits = sum(1 for v in versions if v["kind"] == "message.edited")
+        if edits:
+            notices.append(say("Edits: {n}", n=edits))
+        texts = "  →  ".join((v["text"] or "—")[:300] for v in versions)
+        yield ("#" + str(item["message_id"]), "; ".join(notices), texts,
+               ", ".join("#" + str(v["seq"]) for v in item["events"]))
+
+
+def journal_changes_section(say, number, summary, items):
+    rows = [[e(ref), e(what), e(text), '<span class="mono">' + e(records) + "</span>"]
+            for ref, what, text, records in journal_change_rows(say, items)]
+    more = (summary.get("messages") or 0) - len(items)
+    return (section(number, "journal-changes", say("Deletions and earlier versions"), say(JOURNAL_LEAD))
+            + kv([(say("Messages"), num(summary.get("messages"))), (say("Journal records"), num(summary.get("records"))),
+                  (say("File"), "<code>journal-changes.jsonl</code>")])
+            + table([say("Message"), say("Observed"), say("Saved text"), say("Journal records")], rows)
+            + ('<p class="lead">' + e(say("… and {n} more messages in journal-changes.jsonl.", n=more)) + "</p>"
+               if more > 0 else "") + "</section>")
 
 
 def admin_log_section(say, number, meta, events):

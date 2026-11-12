@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Samodzielnie hostowane środowisko do dochodzeń w Telegramie.</strong><br>Zapisuj czaty, zachowuj edycje i usunięcia, sprawdzaj, kto jest z kim powiązany,<br>i przekazuj podpisane eksporty, które każdy może zweryfikować.</p>
 
-<p align="center"><strong>ZERO ZAUFANIA.</strong> TgWitness nie staje po żadnej stronie: te same kontrole obowiązują operatora, PhishDestroy i każdego innego.<br>Liczy się tylko to, co potwierdza strona trzecia albo matematyka. <a href="../LIMITS-AND-OBJECTIONS.md">Ograniczenia i zastrzeżenia</a></p>
+<p align="center"><strong>ZERO ZAUFANIA.</strong> TgWitness nie staje po żadnej stronie: te same kontrole obowiązują operatora, PhishDestroy i każdego innego.<br>Liczy się tylko to, co potwierdza strona trzecia albo matematyka. <a href="../QUESTIONS-AND-CHECKS.md">Pytania i weryfikacja</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · wersja przedpremierowa"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · wersja przedpremierowa"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Przetestowane środowiska</a> · 25 języków interfejsu · 26 języków przewodników</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Pod Twoją kontrolą</a></b><br><sub>Hostowane samodzielnie, bez telemetrii. Sesje są w zaszyfrowanym sejfie; panel nasłuchuje na localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Opracowywano i testowano przez około sześć miesięcy: najpierw moduł zbierający, podpisany dziennik i moduł weryfikujący, a następnie panel oraz moduły dodatkowe. Niniejsze repozytorium zostało utworzone 29 października 2026 r. w celu publikacji, więc jego wiek nie odpowiada wiekowi projektu.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ w dzienniku.
 | [Listy obserwacyjne](../INVESTIGATION-MODE.md#watchlists) | Słowa, wzorce, portfele, @nazwy użytkowników, ID, domeny, telefony i linki, dopasowywane w tekście, edycjach, ukrytych celach linków, przyciskach botów, kodach QR i OCR |
 | [Obserwacja aktywności online](../INVESTIGATION-MODE.md#online-watch) | Sprawdzanie co 1–60 minut, do 100 kont na zapytanie, z rozkładem według godzin i dni tygodnia |
 | [Kody i portfele](../INVESTIGATION-MODE.md#codes-in-images) | Płatnicze kody QR; adresy EVM sprawdzane według EIP-55, TON w postaci surowej, sumy kontrolne XRP Ledger, linki płatnicze z siecią, kwotą i tokenem |
-| [Ślady klienta](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Ślady kodera w okrągłych wideo i wiadomościach głosowych; porównanie czasu przesłania z czasem wysłania ujawnia wcześniej nagrane dowody „na żywo” |
+| [Ślady klienta](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Ślady kodera w okrągłych wideo i wiadomościach głosowych; porównanie czasu przesłania z czasem wysłania ujawnia wcześniej nagrane dowody „na żywo” |
 | [Przykrywka i upoważnienia](../INVESTIGATION-MODE.md#cover-and-authority) | Persony, upoważnienia i rejestr działań pod przykryciem, który oznacza wiadomości spoza upoważnionych czatów lub okresu |
 | [Kontrola konta](../INVESTIGATION-MODE.md#account-control) | Edycja profilu i prywatności z zapisami przed/po, kontrolą ekspozycji i przejściem offline zaraz po każdej czynności |
 | [Dokumenty dla sądu](../INVESTIGATION-MODE.md#documents-for-court) | Pakiet sprawy BagIt z szablonem certyfikacji Rule 902(13)/(14), wykazem dowodów, załącznikiem do wniosku i napisami WebVTT/SRT do nagrań ekranu |
@@ -457,7 +459,7 @@ weryfikacji podpisanego archiwum TgWitness.
 
 Stanowisko autorów i informacja dla operatorów po polsku:
 
-[Informacja o licencji i niezgodności architektonicznej](TAYLOR-WESSING-EXCLUSION.md) · [Informacja dla operatorów](OPERATOR-INCOMPATIBILITY.md) · [Licencja MIT](../../LICENSE) · [Oryginalny NOTICE](../../NOTICE)
+[Informacja dla operatorów](OPERATOR-INCOMPATIBILITY.md) · [Licencja MIT](../../LICENSE) · [Oryginalny NOTICE](../../NOTICE)
 
 </details>
 

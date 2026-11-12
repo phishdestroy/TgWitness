@@ -16,8 +16,8 @@ signature checks, Merkle inclusion/consistency checks and signed continuity outc
 For a witness operated by another custodian, retain the custodian and key-control
 record with its fingerprint. Separate keys and separate custody describe different
 parts of the setup. The verifier reports that a second key retained the journal head
-and up to which record; who controls that key is a custody fact it cannot check, so the
-witness journal is a supporting check, not part of the minimum for evidence. The
+and up to which record; the custodian's key-control record shows who holds that key. The
+witness journal is a supporting check; the minimum for evidence is third-party time. The
 channel posts add external time: Telegram dates each public post, and the verifier
 reads those dates itself.
 
@@ -34,7 +34,7 @@ flowchart LR
 <details>
 <summary>On this page</summary>
 
-- [What the witness gets, and what it does not](#what-the-witness-gets-and-what-it-does-not)
+- [What the witness holds](#what-the-witness-holds)
 - [What it checks and records](#what-it-checks-and-records)
 - [Run a witness](#run-a-witness)
 - [Public proof page for several workspaces](#public-proof-page-for-several-workspaces)
@@ -42,7 +42,7 @@ flowchart LR
 
 </details>
 
-## What the witness gets, and what it does not
+## What the witness holds
 
 | The witness has | The witness never has |
 | --- | --- |

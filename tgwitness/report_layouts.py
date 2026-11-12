@@ -25,12 +25,12 @@ def chapter_plan(design, kind="journal"):
             Chapter("case", "Case & examination question", ("case", "brief")),
             Chapter("assessment", "Findings & assessment", ("examination", "assessment", "case_board")),
             Chapter("scope", "Scope & coverage", ("selection", "minimisation", "source", "coverage", "message_numbers")),
-            Chapter("histories", "Change dossiers", ("histories",)),
+            Chapter("histories", "Change dossiers", ("histories", "journal_changes")),
             Chapter("activity", "Activity & observed accounts", ("analytics", "directory", "participants")),
             Chapter("journal", "Observation journal" if kind != "chat" else "Message transcript", ("journal",)),
             Chapter("artifacts", "Files, relationships & indicators", ("relations", "files", "indicators", "admin_log", "actions")),
             Chapter("assurance", "Custody, integrity & verification", ("integrity", "timestamps", "custody", "verify", "standards", "seal")),
-            Chapter("limitations", "Limits & reading notes", ("limitations",)),
+            Chapter("limitations", "Reading this record", ("limitations",)),
         )
     if design == "ledger_margin":
         return (
@@ -38,7 +38,7 @@ def chapter_plan(design, kind="journal"):
             Chapter("scope", "Scope & acquisition conditions", ("selection", "minimisation", "source")),
             Chapter("activity", "Counts, activity & basis", ("analytics",)),
             Chapter("directory", "Chats & observed accounts", ("directory", "participants")),
-            Chapter("histories", "Message histories", ("histories",)),
+            Chapter("histories", "Message histories", ("histories", "journal_changes")),
             Chapter("relations", "Replies, threads & forwards", ("relations",)),
             Chapter("files", "Attachments & archive files", ("files",)),
             Chapter("coverage", "Coverage & absent identifiers", ("coverage", "message_numbers")),
@@ -46,7 +46,7 @@ def chapter_plan(design, kind="journal"):
             Chapter("indicators", "Extracted indicators", ("indicators",)),
             Chapter("assurance", "Provenance, custody & integrity", ("integrity", "timestamps", "custody", "verify", "standards", "seal")),
             Chapter("journal", "Observation journal" if kind != "chat" else "Message transcript", ("journal",)),
-            Chapter("limitations", "Limitations & uncertainties", ("limitations",)),
+            Chapter("limitations", "Reading this record", ("limitations",)),
         )
     return ()
 
@@ -194,7 +194,7 @@ def journal_replacements(event_factory, context, say, options, total=None, viewe
         titles = digest.get("titles") or {}
         yield report.section(1, "observed-directory", say("Observed accounts and chats"))
         yield basis()
-        yield '<p>' + escape(say("These are observed account references, not verified identities or a complete member list.")) + '</p>'
+        yield '<p>' + escape(say("These are the account references observed in the saved records.")) + '</p>'
         if index["chats"]:
             yield report.table([say("Chat"), say("Records")], [[escape(str(titles.get(item["chat_id"]) or item["chat_id"])),
                 report.num(item["records"])] for item in index["chats"]])
@@ -252,6 +252,7 @@ SECTION_KEYS = {
     "standards": "standards", "limits": "limitations", "limitations": "limitations",
     "records": "journal", "messages": "journal", "source": "source", "people": "participants",
     "message-ids": "message_numbers", "ids": "message_numbers", "admin-log": "admin_log", "seal": "seal",
+    "journal-changes": "journal_changes",
 }
 
 

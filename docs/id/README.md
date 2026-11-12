@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Ruang kerja self-hosted untuk investigasi Telegram.</strong><br>Simpan chat, pertahankan suntingan dan penghapusan, lihat siapa terhubung dengan siapa,<br>dan serahkan ekspor bertanda tangan yang dapat diperiksa siapa pun.</p>
 
-<p align="center"><strong>ZERO TRUST.</strong> TgWitness tidak memihak: pemeriksaan yang sama berlaku bagi operator, PhishDestroy, dan siapa pun.<br>Yang dihitung hanyalah apa yang dikonfirmasi pihak ketiga atau matematika. <a href="../LIMITS-AND-OBJECTIONS.md">Batasan dan keberatan</a></p>
+<p align="center"><strong>ZERO TRUST.</strong> TgWitness tidak memihak: pemeriksaan yang sama berlaku bagi operator, PhishDestroy, dan siapa pun.<br>Yang dihitung hanyalah apa yang dikonfirmasi pihak ketiga atau matematika. <a href="../QUESTIONS-AND-CHECKS.md">Pertanyaan dan pemeriksaan</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · pra-rilis"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · pra-rilis"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Lingkungan yang diuji</a> · 25 bahasa antarmuka · 26 bahasa panduan</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Di bawah kendali Anda</a></b><br><sub>Self-hosted tanpa telemetri. Sesi tersimpan di brankas terenkripsi; panel mendengarkan di localhost.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Dikembangkan dan diuji selama sekitar enam bulan: pertama-tama pengumpul, jurnal yang telah ditandatangani, dan verifikator, kemudian panel serta modul tambahan. Repositori ini dibuat pada 29 Oktober 2026 untuk dipublikasikan, sehingga usianya tidak sama dengan usia proyek.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ jurnal.
 | [Daftar pantauan](../INVESTIGATION-MODE.md#watchlists) | Kata, pola, dompet, @username, ID, domain, nomor telepon, dan tautan, dicocokkan dalam teks, suntingan, tujuan tautan tersembunyi, tombol bot, kode QR, dan OCR |
 | [Pemantauan online](../INVESTIGATION-MODE.md#online-watch) | Pemeriksaan setiap 1–60 menit, hingga 100 akun per permintaan, dengan pola per jam dan hari dalam seminggu |
 | [Kode dan dompet](../INVESTIGATION-MODE.md#codes-in-images) | Kode QR pembayaran; alamat EVM yang diperiksa terhadap EIP-55, TON dalam bentuk raw, checksum XRP Ledger, tautan pembayaran dengan chain, jumlah, dan token |
-| [Jejak klien](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Jejak encoder pada video bulat dan pesan suara; membandingkan waktu unggah dengan waktu kirim mengungkap bukti “langsung” yang sebenarnya direkam sebelumnya |
+| [Jejak klien](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Jejak encoder pada video bulat dan pesan suara; membandingkan waktu unggah dengan waktu kirim mengungkap bukti “langsung” yang sebenarnya direkam sebelumnya |
 | [Penyamaran dan kewenangan](../INVESTIGATION-MODE.md#cover-and-authority) | Persona, otorisasi, dan catatan aktivitas penyamaran yang menandai pesan di luar chat atau periode yang diotorisasi |
 | [Kontrol akun](../INVESTIGATION-MODE.md#account-control) | Penyuntingan profil dan privasi dengan catatan sebelum/sesudah, pemeriksaan keterpaparan, dan status offline segera setelah setiap tindakan |
 | [Dokumen untuk pengadilan](../INVESTIGATION-MODE.md#documents-for-court) | Paket perkara BagIt dengan templat sertifikasi Rule 902(13)/(14), indeks barang bukti, lampiran permintaan, dan teks WebVTT/SRT untuk rekaman layar |
@@ -457,7 +459,7 @@ verifikasi untuk arsip TgWitness bertanda tangan.
 
 Posisi para penulis dan pemberitahuan untuk operator, dalam bahasa ini:
 
-[Pemberitahuan Ketidakcocokan Lisensi dan Arsitektur](TAYLOR-WESSING-EXCLUSION.md) · [Pemberitahuan operator](OPERATOR-INCOMPATIBILITY.md) · [Lisensi MIT](../../LICENSE) · [NOTICE asli](../../NOTICE)
+[Pemberitahuan operator](OPERATOR-INCOMPATIBILITY.md) · [Lisensi MIT](../../LICENSE) · [NOTICE asli](../../NOTICE)
 
 </details>
 

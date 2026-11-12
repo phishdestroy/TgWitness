@@ -29,6 +29,7 @@ FILES = [
     "deploy/installer/release-signing.pub",
     "deploy/installer/index.html", "deploy/installer/style.css", "deploy/installer/site.js", "deploy/installer/wrangler.toml",
     "deploy/media-worker/Dockerfile", "deploy/media-worker/worker.py",
+    ".clusterfuzzlite/project.yaml", ".clusterfuzzlite/Dockerfile", ".clusterfuzzlite/build.sh",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
     "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "deploy/constraints-mcp.txt",
     "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
@@ -89,6 +90,7 @@ DIRECTORIES = {
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
     "scripts": {".md", ".cmd", ".sh"},
+    "fuzz": {".py", ".md"},
     ".github": {".md", ".yml", ".yaml"},
     "website": {".md", ".html", ".css", ".js", ".py", ".json"},
 }
@@ -99,12 +101,17 @@ PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.
                 *("schemas/board-" + name + ".json" for name in ("bookmark", "highlight", "slice", "collection", "comment", "status", "move", "remove")),
                 "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}
 NARRATIVE_LANGUAGES = ("en", "de", "fr", "es", "it", "pt", "nl", "pl", "cs", "sk", "uk", "ru", "ro",
-                       "bg", "hu", "el", "sv", "da", "fi", "no", "lt", "lv", "et", "tr", "ja")
-PACKAGE_JSON.update({"narrative/review-policy.json",
-                     *("narrative/texts/" + prefix + language + ".json"
+                       "bg", "hu", "el", "sv", "da", "fi", "no", "lt", "lv", "et", "tr", "ja", "zh", "zh-Hant",
+                       "ko", "ar", "he", "fa", "hi", "ur", "bn", "id", "ms", "vi", "th", "uz")
+EXAMINATION_CODES = ("AE", "AT", "AU", "BD", "BE", "BG", "BR", "CA", "CH", "CN", "CZ", "DE", "DK", "EE", "ES", "ET", "FI",
+                     "FR", "GR", "HK", "HU", "ID", "IE", "IL", "IN", "IR", "IT", "JP", "KR", "LT", "LV", "MX", "MY", "NL",
+                     "NO", "PH", "PK", "PL", "PT", "RO", "RU", "SA", "SE", "SG", "SK", "TH", "TR", "TW", "UA", "UK",
+                     "US-federal", "UZ", "VN")
+PACKAGE_JSON.update({                     *("narrative/texts/" + prefix + language + ".json"
                        for prefix in ("", "glossary.") for language in NARRATIVE_LANGUAGES),
                      *("narrative/jurisdictions/" + code + ".json" for code in
-                       ("DE", "AT", "CH", "UK", "IE", "FR", "ES", "IT", "PL", "CZ", "UA", "NL", "BE", "US-federal"))})
+                       ("DE", "AT", "CH", "UK", "IE", "FR", "ES", "IT", "PL", "CZ", "UA", "NL", "BE", "US-federal")),
+                     *("narrative/examination/" + code + ".json" for code in EXAMINATION_CODES)})
 
 SITE_JSON = {"i18n/" + language + ".json" for language in
              ("en", *LANGUAGES, "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")}

@@ -17,10 +17,10 @@
 
 <p align="center"><strong>Telegram tergovlari uchun o‘z serveringizda ishlaydigan ish maydoni.</strong><br>Chatlarni saqlang, tahrir va o‘chirilgan xabarlarni yo‘qotmang, kim kim bilan bog‘liqligini ko‘ring<br>va har kim tekshira oladigan imzolangan eksportlarni topshiring.</p>
 
-<p align="center"><strong>NOL ISHONCH.</strong> TgWitness hech kimning tarafini olmaydi: operator, PhishDestroy va boshqa har kim bir xil tekshiruvlardan o‘tadi.<br>Faqat uchinchi tomon yoki matematika tasdiqlagan narsa hisobga olinadi. <a href="../LIMITS-AND-OBJECTIONS.md">Cheklovlar va e’tirozlar</a></p>
+<p align="center"><strong>NOL ISHONCH.</strong> TgWitness hech kimning tarafini olmaydi: operator, PhishDestroy va boshqa har kim bir xil tekshiruvlardan o‘tadi.<br>Faqat uchinchi tomon yoki matematika tasdiqlagan narsa hisobga olinadi. <a href="../QUESTIONS-AND-CHECKS.md">Savollar va tekshiruvlar</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · dastlabki reliz"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · dastlabki reliz"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">Sinovdan o‘tgan muhitlar</a> · 25 ta interfeys tili · 26 ta qo‘llanma tili</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">Boshqaruv sizda</a></b><br><sub>O‘z serveringizda, telemetriyasiz. Sessiyalar shifrlangan omborda saqlanadi; panel localhost’da tinglaydi.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>Taxminan olti oy davomida ishlab chiqilib sinovdan o'tkazildi: avvalo yig'uvchi, imzolangan jurnal va tekshiruvchi, keyin esa panel va qo'shimcha modullar. Ushbu ombor 2026-yil 29-oktabrda nashr etish uchun yaratilgan, shuning uchun uning yoshi loyihaning yoshi emas.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ jurnalga yoziladi.
 | [Kuzatuv ro‘yxatlari](../INVESTIGATION-MODE.md#watchlists) | So‘zlar, andozalar, hamyonlar, @foydalanuvchi nomlari, ID’lar, domenlar, telefonlar va havolalar; matn, tahrirlar, yashirin havola manzillari, bot tugmalari, QR kodlar va OCR’da topiladi |
 | [Onlayn holatni kuzatish](../INVESTIGATION-MODE.md#online-watch) | Har 1–60 daqiqada tekshirish, bir so‘rovda 100 tagacha hisob, soat va hafta kuni bo‘yicha naqsh |
 | [Kodlar va hamyonlar](../INVESTIGATION-MODE.md#codes-in-images) | To‘lov QR kodlari; EIP-55 bo‘yicha tekshirilgan EVM manzillari, xom shakldagi TON, XRP Ledger nazorat summalari, tarmoq, miqdor va token ko‘rsatilgan to‘lov havolalari |
-| [Mijoz izlari](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | Dumaloq videolar va ovozli xabarlardagi enkoder izlari; yuklash vaqtini yuborish vaqti bilan solishtirish oldindan yozib olingan «jonli» isbotni fosh qiladi |
+| [Mijoz izlari](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | Dumaloq videolar va ovozli xabarlardagi enkoder izlari; yuklash vaqtini yuborish vaqti bilan solishtirish oldindan yozib olingan «jonli» isbotni fosh qiladi |
 | [Maxfiy qiyofa va vakolat](../INVESTIGATION-MODE.md#cover-and-authority) | O‘ylab topilgan shaxslar, ruxsatnomalar va ruxsat etilgan chatlar yoki davrdan tashqaridagi xabarlarni belgilaydigan yashirin faoliyat qaydnomasi |
 | [Hisobni boshqarish](../INVESTIGATION-MODE.md#account-control) | Profil va maxfiylikni oldin/keyin yozuvlari bilan tahrirlash, oshkorlik tekshiruvi va har bir amaldan so‘ng darhol oflayn rejimga o‘tish |
 | [Sud uchun hujjatlar](../INVESTIGATION-MODE.md#documents-for-court) | Rule 902(13)/(14) sertifikatlash shabloni, ashyoviy dalillar ko‘rsatkichi, so‘rovga ilova va ekran yozuvlari uchun WebVTT/SRT subtitrlari bilan BagIt ish paketi |
@@ -457,7 +459,7 @@ yig‘ish hamda tekshirish bosqichlarini kuzating.
 
 Mualliflarning pozitsiyasi va operator haqidagi bildirishnoma, shu tilda:
 
-[Litsenziya va arxitektura nomuvofiqligi to'g'risidagi bildirishnoma](TAYLOR-WESSING-EXCLUSION.md) · [Operator haqida bildirishnoma](OPERATOR-INCOMPATIBILITY.md) · [MIT litsenziyasi](../../LICENSE) · [Asl NOTICE](../../NOTICE)
+[Operator haqida bildirishnoma](OPERATOR-INCOMPATIBILITY.md) · [MIT litsenziyasi](../../LICENSE) · [Asl NOTICE](../../NOTICE)
 
 </details>
 

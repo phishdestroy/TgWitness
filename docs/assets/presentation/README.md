@@ -13,8 +13,8 @@ README, Wiki and documentation artwork. Screenshots use demo records.
 
 | Files | Use |
 | --- | --- |
-| `casework-hero*`, `casework-handbook*` | Project and Wiki covers |
-| `readme-nav-*` | README buttons, with shorter phone labels |
+| `casework-hero*`, `casework-handbook*` | Project message-history cover and Wiki cover |
+| `readme-nav-*` | README buttons, including live capture, with shorter phone labels |
 | `readme-features*`, `readme-feature-*` | Export, investigation and saved-version animations |
 | `readme-start-map*`, `readme-documentation*`, `readme-mode-*` | First start, system map, subject card, conversation plan and wallet-code animations |
 | `readme-capabilities*` | People, bot, archive, sealed cloud, investigation mode and case package cards |
@@ -22,6 +22,7 @@ README, Wiki and documentation artwork. Screenshots use demo records.
 | `casework-chain*`, `casework-checkpoint*`, `evidence-*` | Evidence diagrams |
 | `casework-assurance*` | Local, audited VM and Phala / Intel TDX deployment checks |
 | `readme-services*`, `readme-card-*` | Alerts and encrypted S3 copies |
+| `readme-gdpr-impunity*`, `chapter-case.svg` | Operator notice banner in the README; case file banner on the notice and the case review |
 | `readme-handbook*`, `wiki-*` | Handbook routes and chapter covers |
 | `identity-meta-*` | Version, languages, test and licence badges |
 | `folder-*`, `readme-button-*`, `*divider*` | Folder headers, links and separators |
@@ -38,6 +39,7 @@ Grotesk font files. Font licences: [Manrope](OFL-Manrope.txt), [Space Grotesk](O
 python website/render_casework.py --display-font /path/to/SpaceGrotesk.ttf --text-font /path/to/Manrope.ttf
 python website/render_readme_navigation.py --font /path/to/Manrope.ttf
 python website/render_readme_panels.py --font /path/to/Manrope.ttf
+python website/render_notice_banner.py --font /path/to/Manrope.ttf
 python website/render_wiki_headers.py --font /path/to/Manrope.ttf
 python website/render_identity.py --font /path/to/Manrope.ttf
 python website/render_directory_headers.py --font /path/to/Manrope.ttf
@@ -48,8 +50,9 @@ After a version change, use `--metadata-only` to refresh its badges, update the
 README alt text and `docs/STATUS.md`, then run `python tools/publication_guard.py`.
 
 Directory covers use layered illustrations: reference pages, capture frames,
-linked components, server racks and project artwork. The main cover connects
-signed journal entries to a separately retained checkpoint and an evidence archive.
+linked components, server racks and project artwork. The main cover follows a
+fictional message through an edit and a deletion notice, keeping all three
+observations readable as the active stage changes.
 The assurance diagram compares deployment choices and follows the TDX checks from
 Intel's root to the journal. Headings stay fixed; motion belongs to the illustrations.
 All lettering is outlined and every SVG is self-contained.

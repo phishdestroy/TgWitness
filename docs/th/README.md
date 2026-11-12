@@ -17,10 +17,10 @@
 
 <p align="center"><strong>พื้นที่ทำงานแบบโฮสต์เองสำหรับการสืบสวนบน Telegram</strong><br>บันทึกแชท เก็บการแก้ไขและการลบไว้ ดูว่าใครเชื่อมโยงกับใคร<br>และส่งมอบไฟล์ส่งออกที่ลงนามแล้วซึ่งใครก็ตรวจสอบได้</p>
 
-<p align="center"><strong>ZERO TRUST</strong> TgWitness ไม่เข้าข้างฝ่ายใด การตรวจสอบแบบเดียวกันใช้กับผู้ดำเนินการ กับ PhishDestroy และกับทุกคน<br>นับเฉพาะสิ่งที่บุคคลที่สามหรือคณิตศาสตร์ยืนยันได้ <a href="../LIMITS-AND-OBJECTIONS.md">ข้อจำกัดและข้อโต้แย้ง</a></p>
+<p align="center"><strong>ZERO TRUST</strong> TgWitness ไม่เข้าข้างฝ่ายใด การตรวจสอบแบบเดียวกันใช้กับผู้ดำเนินการ กับ PhishDestroy และกับทุกคน<br>นับเฉพาะสิ่งที่บุคคลที่สามหรือคณิตศาสตร์ยืนยันได้ <a href="../QUESTIONS-AND-CHECKS.md">คำถามและการตรวจสอบ</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · รุ่นก่อนเผยแพร่"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · รุ่นก่อนเผยแพร่"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">สภาพแวดล้อมที่ทดสอบแล้ว</a> · อินเทอร์เฟซ 25 ภาษา · คู่มือ 26 ภาษา</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">ควบคุมได้เอง</a></b><br><sub>โฮสต์เองและไม่มีเทเลเมทรี เซสชันอยู่ในห้องนิรภัยที่เข้ารหัส แผงควบคุมรับการเชื่อมต่อบน localhost</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>พัฒนาและทดสอบมาประมาณหกเดือน: เริ่มจากตัวเก็บข้อมูล (collector), บันทึกที่ลงนาม (signed journal) และตัวตรวจสอบ (verifier) ก่อน แล้วตามด้วยแผงควบคุม (panel) และโมดูลเสริม (add-on modules) ที่เก็บนี้ถูกสร้างขึ้นเมื่อวันที่ 29 ตุลาคม 2026 เพื่อเผยแพร่ ดังนั้นอายุของที่เก็บนี้จึงไม่เท่ากับอายุของโครงการ</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -281,7 +283,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [รายการเฝ้าระวัง](../INVESTIGATION-MODE.md#watchlists) | คำ รูปแบบ วอลเล็ต @ชื่อผู้ใช้ ID โดเมน หมายเลขโทรศัพท์ และลิงก์ ที่ตรวจจับในข้อความ การแก้ไข ปลายทางลิงก์ที่ซ่อนอยู่ ปุ่มบอต คิวอาร์โค้ด และ OCR |
 | [การเฝ้าดูสถานะออนไลน์](../INVESTIGATION-MODE.md#online-watch) | ตรวจทุก 1–60 นาที สูงสุด 100 บัญชีต่อคำขอ พร้อมรูปแบบตามชั่วโมงและวันในสัปดาห์ |
 | [โค้ดและวอลเล็ต](../INVESTIGATION-MODE.md#codes-in-images) | คิวอาร์โค้ดชำระเงิน ที่อยู่ EVM ที่ตรวจตาม EIP-55 ที่อยู่ TON แบบ raw checksum ของ XRP Ledger และลิงก์ชำระเงินพร้อมเชน จำนวน และโทเค็น |
-| [ร่องรอยของไคลเอนต์](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | ร่องรอยของตัวเข้ารหัสในวิดีโอวงกลมและข้อความเสียง การเทียบเวลาอัปโหลดกับเวลาส่งจะเผยหลักฐาน “สด” ที่อัดไว้ล่วงหน้า |
+| [ร่องรอยของไคลเอนต์](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | ร่องรอยของตัวเข้ารหัสในวิดีโอวงกลมและข้อความเสียง การเทียบเวลาอัปโหลดกับเวลาส่งจะเผยหลักฐาน “สด” ที่อัดไว้ล่วงหน้า |
 | [การแฝงตัวและอำนาจดำเนินการ](../INVESTIGATION-MODE.md#cover-and-authority) | ตัวตนสมมติ การอนุญาต และรายการบันทึกกิจกรรมแฝงตัวที่ทำเครื่องหมายข้อความนอกแชทหรือช่วงเวลาที่ได้รับอนุญาต |
 | [การควบคุมบัญชี](../INVESTIGATION-MODE.md#account-control) | แก้ไขโปรไฟล์และความเป็นส่วนตัวพร้อมรายการบันทึกก่อน/หลัง การตรวจการเปิดเผยข้อมูล และออฟไลน์ทันทีหลังแต่ละการกระทำ |
 | [เอกสารสำหรับศาล](../INVESTIGATION-MODE.md#documents-for-court) | ชุดคดี BagIt พร้อมแม่แบบหนังสือรับรองตาม Rule 902(13)/(14) ดัชนีพยานเอกสาร ภาคผนวกคำขอ และคำบรรยาย WebVTT/SRT สำหรับการบันทึกหน้าจอ |
@@ -451,7 +453,7 @@ TgWitness บันทึกเนื้อหาที่ส่งถึงบ�
 
 จุดยืนของผู้เขียนและประกาศถึงผู้ดำเนินการ ในภาษานี้:
 
-[ประกาศเรื่องใบอนุญาตและความไม่เข้ากันทางสถาปัตยกรรม](TAYLOR-WESSING-EXCLUSION.md) · [ประกาศถึงผู้ดำเนินการ](OPERATOR-INCOMPATIBILITY.md) · [สัญญาอนุญาต MIT](../../LICENSE) · [NOTICE ฉบับดั้งเดิม](../../NOTICE)
+[ประกาศถึงผู้ดำเนินการ](OPERATOR-INCOMPATIBILITY.md) · [สัญญาอนุญาต MIT](../../LICENSE) · [NOTICE ฉบับดั้งเดิม](../../NOTICE)
 
 </details>
 

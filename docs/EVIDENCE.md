@@ -235,10 +235,17 @@ did not return (deleted before the export, or not visible to the account); in pr
 basic groups numbers are shared by all of the account's chats and gaps are not counted.
 
 After reading the history, the export asks Telegram for every absent number again, by number
-(`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report.
+(`channels.getMessages`, up to 10,000 numbers including the 1,000 below the first message, spread evenly over all gaps when there are more). The result is in `message-ids.json` and the report.
 An empty answer records that the number is unavailable to this account at recheck time;
 it leaves the cause unspecified. A message returned on recheck is added to the export
 and marked `found_on_recheck`.
+
+When the observing workspace saw messages of the chat deleted, missing on recheck or edited, the
+chat export adds `journal-changes.jsonl`: those journal records, every saved version and the notice,
+each with the hash and Ed25519 signature it received in the journal. `verify.py` recomputes each
+record's hash, checks its signature against the export key and compares the count with the signed
+manifest; the evidence export holds the complete hash chain. The report lists these messages under
+**Deletions and earlier versions**.
 
 Every report opens with **In brief**: one paragraph, then what the material shows and what it does
 not (who is behind an account, completeness of delivery, deletions before observation, clock time
@@ -515,7 +522,7 @@ python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evid
 
 checks the signature, verifies the evidence export itself (signature, hash chain and files)
 and that every referenced record exists unchanged in that export of the same workspace. Avatar hashes are labeled as coming from the local cache
-(not journal records). Mentions are pattern matches — leads to check, not verified facts.
+(not journal records). Mentions are pattern matches and leads to check.
 Profiles are switched on per chat, can be exported as an AES-256 ZIP with a password, and
 are deleted when switched off or when the chat is removed from sources.
 
@@ -588,7 +595,7 @@ mode whose trust boundary matches the case, then retain its verification inputs.
 | Collection mode | What the verifier checks | Verification inputs and trust boundary |
 | --- | --- | --- |
 | Local workspace | Record signatures, hash chain, manifest and attachment bytes | Collector fingerprint retained by the recipient and external time from a third party: verified RFC 3161 or OpenTimestamps receipts, or witness posts read from t.me. Retained checkpoints and witness records are supporting checks |
-| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Witness fingerprint and records; who controls the witness key is a custody fact recorded outside the verifier. With `--channel https://t.me/s/…`, the dates Telegram set on the posts give external time |
+| Local workspace with an independent witness | The archive checks plus agreement with an earlier journal prefix retained by the witness | Witness fingerprint and records; the custodian's key-control record shows who holds the witness key. With `--channel https://t.me/s/…`, the dates Telegram set on the posts give external time |
 | [GitHub Actions capture](SEALED-ACTIONS.md) | GitHub attestation of the archive digest, approved workflow and collector commits, hosted runner, fresh session/key origin and internal archive integrity | Trusted verifier policy, caller repository and GitHub attestation bundle; collection runs under the pinned workflow |
 | [Cloud deployment](HIGH-ASSURANCE.md) | Provider lifecycle and access records, firewall and Cloudflare state, plus the collector's signed run record | Read-only queries to the provider and Cloudflare; availability of individual checks depends on the provider |
 | [Intel TDX confidential VM](HIGH-ASSURANCE.md#confidential-vm-on-phala-cloud-intel-tdx) | Quote signature and platform status, binding to the collector statement, compose and OS measurements | Intel trust chain and expected deployment measurements; retain the results of every required TDX check |

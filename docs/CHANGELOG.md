@@ -7,6 +7,7 @@
 <details>
 <summary>On this page</summary>
 
+- [0.9.3 preview · 11 November 2026](#093-preview--11-november-2026)
 - [0.9.2 preview · 10 November 2026](#092-preview--10-november-2026)
 - [0.9.1 preview · 5 November 2026](#091-preview--5-november-2026)
 - [0.9.0 preview · 4 November 2026](#090-preview--4-november-2026)
@@ -20,6 +21,22 @@
 - [0.5.0 · 26 October 2026](#050--26-october-2026)
 
 </details>
+
+## 0.9.3 preview · 11 November 2026
+
+- Chat exports add `journal-changes.jsonl` when the observing workspace saw messages of the chat deleted, missing on recheck or edited: those journal records, every saved version and the notice, each with its journal hash and Ed25519 signature. `verify.py` checks every record against the export key, and the HTML and PDF reports list them under **Deletions and earlier versions**. See [evidence](EVIDENCE.md).
+- Add the signed [account loss report](ACCOUNTS.md#when-telegram-ends-the-session). When Telegram bans, freezes or signs out the account, or the session is ended from another device, the journal records the cause, the Telegram error, the route and the data centre, and the account's health offers a JSON file with the journal records of the 24 hours before the loss. `verify.py` checks the report's signature and every record in it.
+- Export progress: multi-account exports read attachments in batches of 100 messages and show the stage and the estimated time left; a single chat export shows the recheck and packaging stages. Attachments in a multi-account export follow the lead account's capture policy.
+- Collector: attachment downloads stop while the account must sign in again and are retried afterwards; the absent-number recheck includes the 1,000 numbers below the first message and spreads up to 10,000 numbers evenly over all gaps; an authorization error of another client is recorded as `account.authorization_error`; a frozen account is detected through `help.getAppConfig`.
+- The verifier's archive and JSON parsing are fuzzed in CI with ClusterFuzzLite, and `verify.py` rejects a malformed manifest with a clear message. The installer signing job runs in a dedicated `installer-signing` environment.
+- Add the [expert examination protocol](NARRATIVE.md#expert-examination-protocol): `python -m tgwitness.narrative evidence.zip --jurisdiction PL --expert --procedure criminal` writes a draft of the expert's report as HTML, PDF and JSON from the examiner's own verification run. It holds blank fields for the case and the expert, the legal basis, the liability warning and any required declaration, the repeatable checks, findings in three groups and the questions the package can and cannot answer. The [examination catalog](../tgwitness/narrative/examination/README.md) covers 53 jurisdictions; each entry names its official sources and lists the points it could not confirm. The protocol and the narrative recommend filing the English original with a certified or sworn translation into the court language. Narrative reports are available in 39 languages.
+- The narrative and the expert protocol use the dossier layout: a header with the jurisdiction, the procedure, the court languages and the package SHA-256, status labels with text, times as `YYYY-MM-DD HH:MM:SS.mmm UTC` and record references shortened to ranges. The terms section and the declaration follow `--procedure`; a declaration that applies to civil proceedings is left out of a criminal protocol.
+- Reports: the activity chart axis shows whole numbers, words in the conditions table are no longer split inside a word, and removed and inserted words in an edit comparison are separated.
+- The operator notice links the [106-day GDPR file](TAYLOR-WESSING-GDPR-FILE.md), which is available in every documentation language. [Questions and checks](QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account) answers the built-in API pair, public MTProxy and deleted-message objections with the facts first.
+- Add `verify.py --bitcoin-source URL`: OpenTimestamps proofs are checked against block headers from your own node's Esplora API instead of the two public explorers.
+- Verifier, panel and documentation state what each check establishes: the line for an archive without checked external time names the options that add it, and the witness condition refers to the custodian's key-control record.
+- The website's reference pages, guides and homepage are translated in all 24 site languages; about 450 text blocks per language were still shown in English after the 0.9.2 documentation update. Translated with DeepL; markup, links and code are checked unchanged.
+- Interface translations: short panel labels were translated again with DeepL using interface context, and the Russian labels were reviewed one by one. Fixes include "Observe" and "Observing" read as "comply" or "note" in several languages, "Off-site copy" read as "off-site text", "Follow new lines" read as "insert new lines", and Russian button labels in the imperative.
 
 ## 0.9.2 preview · 10 November 2026
 

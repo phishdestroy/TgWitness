@@ -55,7 +55,7 @@ ASSETS = {
 
 WIKI_ASSETS = {
     **{f"assets/chapter-{name}.svg": f"docs/assets/presentation/chapter-{name}.svg"
-       for name in ("start", "collect", "investigate", "evidence", "operate", "develop", "project", "capture", "integrations")},
+       for name in ("start", "collect", "investigate", "evidence", "operate", "develop", "project", "capture", "integrations", "notice", "case")},
     "assets/performance.svg": "website/validation/performance.svg",
     "assets/case-board.png": "docs/assets/case-board.png",
     "assets/dossier-en.png": "docs/assets/reports/dossier-en.png",
@@ -559,6 +559,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             write(base + "index.html", site_typography.homepage(links(render(home, {
                 **guide_values(base), "ROOT": "" if not base else relative(base, ""), "TITLE": html.escape(t(HOME_TITLE), quote=True),
                 "SITE_DICT": json_script(home_dictionary),
+                "VALIDATION_URL": relative(base, prefix(lang if lang in site_validation.LANGUAGES else "en") + site_validation.PATH),
                 "DESCRIPTION": html.escape(t(HOME_DESCRIPTION), quote=True), "CANONICAL": html.escape(base_url + "/" + base, quote=True),
                 "OG_LOCALE": site_i18n.LANGUAGES[lang][3], "OG_DESCRIPTION": html.escape(t(HOME_OG), quote=True),
                 "OG_IMAGE_ALT": html.escape(t(HOME_IMAGE_ALT), quote=True),

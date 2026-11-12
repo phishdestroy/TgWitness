@@ -17,10 +17,10 @@
 
 <p align="center"><strong>فضای کاری خودمیزبان برای تحقیقات در Telegram.</strong><br>گفت‌وگوها را ذخیره کنید، ویرایش‌ها و حذف‌ها را نگه دارید، ببینید چه کسی با چه کسی در ارتباط است<br>و خروجی‌های امضاشده‌ای تحویل دهید که هر کسی می‌تواند بررسی‌شان کند.</p>
 
-<p align="center"><strong>اعتماد صفر.</strong> TgWitness طرف هیچ‌کس را نمی‌گیرد: همان بررسی‌ها برای اپراتور، برای PhishDestroy و برای هر کس دیگری اعمال می‌شود.<br>فقط چیزی معتبر است که شخص ثالث یا ریاضیات تأییدش کند. <a href="../LIMITS-AND-OBJECTIONS.md">محدودیت‌ها و اعتراض‌ها</a></p>
+<p align="center"><strong>اعتماد صفر.</strong> TgWitness طرف هیچ‌کس را نمی‌گیرد: همان بررسی‌ها برای اپراتور، برای PhishDestroy و برای هر کس دیگری اعمال می‌شود.<br>فقط چیزی معتبر است که شخص ثالث یا ریاضیات تأییدش کند. <a href="../QUESTIONS-AND-CHECKS.md">پرسش‌ها و بررسی‌ها</a></p>
 
 <p align="center">
-  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.2 · پیش‌انتشار"></a>
+  <a href="../CHANGELOG.md"><img src="../assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · پیش‌انتشار"></a>
   <a href="../../LICENSE"><img src="../assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a><br>
   <sub><a href="../VERIFICATION.md">محیط‌های آزموده‌شده</a> · 25 زبان رابط کاربری · 26 زبان راهنما</sub>
 </p>
@@ -52,6 +52,8 @@
 <td width="33%" valign="top"><b><a href="../SECURITY-MODEL.md">در اختیار خودتان</a></b><br><sub>خودمیزبان و بدون تله‌متری. نشست‌ها در گاوصندوقی رمزگذاری‌شده نگهداری می‌شوند؛ پنل روی localhost گوش می‌دهد.</sub></td>
 </tr>
 </table>
+
+<p align="center"><sub>برای حدود شش ماه توسعه و آزمایش شد: ابتدا گردآورنده، دفترچهٔ امضا شده و اعتبارسنج، سپس پنل و ماژول‌های افزایشی. این مخزن در تاریخ ۲۹ اکتبر ۲۰۲۶ برای انتشار ایجاد شد، بنابراین سن آن سن پروژه نیست.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
@@ -283,7 +285,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 | [فهرست‌های پایش](../INVESTIGATION-MODE.md#watchlists) | واژه‌ها، الگوها، کیف پول‌ها، نام‌های کاربری (@)، شناسه‌ها، دامنه‌ها، شماره تلفن‌ها و پیوندها؛ تطبیق در متن، ویرایش‌ها، مقصد پیوندهای پنهان، دکمه‌های ربات، کدهای QR و OCR |
 | [پایش وضعیت آنلاین](../INVESTIGATION-MODE.md#online-watch) | بررسی هر 1–60 دقیقه، تا 100 حساب در هر درخواست، با الگوی فعالیت بر حسب ساعت و روز هفته |
 | [کدها و کیف پول‌ها](../INVESTIGATION-MODE.md#codes-in-images) | کدهای QR پرداخت؛ نشانی‌های EVM بررسی‌شده با EIP-55، TON به شکل خام، چک‌سام‌های XRP Ledger، پیوندهای پرداخت با زنجیره، مبلغ و توکن |
-| [ردپای کلاینت](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-can-and-cannot-show) | ردپای رمزگذار در ویدیوهای دایره‌ای و پیام‌های صوتی؛ مقایسه زمان بارگذاری با زمان ارسال، مدرک «زنده»ای را که از پیش ضبط شده افشا می‌کند |
+| [ردپای کلاینت](../INVESTIGATION-MODE.md#what-a-client-and-an-upload-time-show) | ردپای رمزگذار در ویدیوهای دایره‌ای و پیام‌های صوتی؛ مقایسه زمان بارگذاری با زمان ارسال، مدرک «زنده»ای را که از پیش ضبط شده افشا می‌کند |
 | [پوشش و مجوز](../INVESTIGATION-MODE.md#cover-and-authority) | هویت‌های پوششی، مجوزها و ثبتی از فعالیت مخفی که پیام‌های خارج از گفت‌وگوها یا بازه زمانی مجاز را علامت‌گذاری می‌کند |
 | [کنترل حساب](../INVESTIGATION-MODE.md#account-control) | ویرایش نمایه و حریم خصوصی همراه با رکوردهای پیش و پس از تغییر، بررسی میزان افشا، و آفلاین شدن بلافاصله پس از هر اقدام |
 | [اسناد دادگاهی](../INVESTIGATION-MODE.md#documents-for-court) | بسته پرونده BagIt با قالب گواهی Rule 902(13)/(14)، فهرست مدارک ارائه‌شده، پیوست درخواست و زیرنویس‌های WebVTT/SRT برای ضبط‌های صفحه |
@@ -457,7 +459,7 @@ Telegram Desktop را پوشش می‌دهد. [خروجی توزیع‌شده گ
 
 موضع نویسندگان و اطلاعیه اپراتور، به همین زبان:
 
-[اعلامیه عدم سازگاری مجوز و معماری](TAYLOR-WESSING-EXCLUSION.md) · [اطلاعیه اپراتور](OPERATOR-INCOMPATIBILITY.md) · [مجوز MIT](../../LICENSE) · [فایل NOTICE اصلی](../../NOTICE)
+[اطلاعیه اپراتور](OPERATOR-INCOMPATIBILITY.md) · [مجوز MIT](../../LICENSE) · [فایل NOTICE اصلی](../../NOTICE)
 
 </details>
 
