@@ -81,11 +81,11 @@ export function createExports({root, tr, json, getSession, fmtTime, toast,downlo
     select('downloads');find('exports-progress').hidden=false;
     find('exports-next').hidden=true;
     find('exports-progress-bar').hidden=false;
-    find('exports-progress-label').textContent=tr('Checking journal integrity and preparing the export…');
+    find('exports-progress-label').textContent=tr('Confirm');
     find('exports-progress-bar').removeAttribute('value');find('exports-progress-bytes').textContent='';
     return update=>{
       if(owner!==getSession()||mine!==transfer)return;
-      const labels={saving:tr('Saving export…'),done:tr('Export saved.'),browser:tr('Download started. Check your browser’s downloads.'),cancelled:tr('Download cancelled.'),failed:tr('Download failed. Retry the export.')};
+      const labels={preparing:tr('Checking journal integrity and preparing the export…'),saving:tr('Saving export…'),done:tr('Export saved.'),browser:tr('Download started. Check your browser’s downloads.'),cancelled:tr('Download cancelled.'),failed:tr('Download failed. Retry the export.')};
       if(labels[update.phase])find('exports-progress-label').textContent=labels[update.phase];
       if(update.total!==undefined)find('exports-progress-bytes').textContent=update.expected
         ? tr('{saved} of {total}',{saved:bytes(update.total),total:bytes(update.expected)}):bytes(update.total);

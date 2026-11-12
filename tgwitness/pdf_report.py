@@ -916,7 +916,7 @@ class EvidencePDF:
                 "directory": self.render_directory,
                 "relations": self.render_relations,
             }
-            default_order = ['brief', 'selection', 'examination', 'analytics', 'assessment', 'case', 'minimisation', 'case_board', 'histories', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations', 'journal']
+            default_order = ['brief', 'selection', 'examination', 'analytics', 'histories', 'journal', 'assessment', 'case', 'minimisation', 'case_board', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations']
             if self.options.get("template") == "activity":
                 default_order[2:4] = ["analytics", "examination"]
             visible = {

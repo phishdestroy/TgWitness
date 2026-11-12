@@ -555,7 +555,7 @@ export function createSettingsHub(ctx) {
   }
   function liveParts(){const h=state.status?.health||{};return ['connection','intake','sources','media'].map(name=>({name,...(h[name]||{state:'unknown'})}));}
   function renderLive(page){
-    const heading=node('h1','',tr(live.done?'Setup is applied.':'Checking that recording works…'));heading.tabIndex=-1;page.append(heading);
+    const heading=node('h1','',tr(live.done?'Setup is applied.':live.timedOut?'Check connection':'Checking that recording works…'));heading.tabIndex=-1;page.append(heading);
     const list=node('div','first-run-live'+(live.shown?'':' wizard-appear'));list.setAttribute('aria-live','polite');
     liveParts().forEach((part,i)=>{
       const row=node('div','first-run-check');row.dataset.state=part.state;row.style.setProperty('--i',String(i));
@@ -563,6 +563,9 @@ export function createSettingsHub(ctx) {
       list.append(row);
     });
     live.shown=true;page.append(list);
+    if(live.timedOut)page.append(button('Check again',async()=>{
+      live.started=Date.now();live.timedOut=false;await renderWizard();watchLive();
+    },'primary'));
     if(live.done){
       page.append(node('h2','wizard-done'+(live.celebrated?'':' wizard-appear'),tr('Done! What next:')));live.celebrated=true;
       const actions=node('div','first-run-next-actions');
@@ -577,12 +580,14 @@ export function createSettingsHub(ctx) {
     const active=()=>current(who)&&session&&live===session&&state.view==='first-run';
     const tick=async()=>{
       if(!active())return;
-      try{await refresh(who);}catch{}
+      let refreshed=false;
+      try{await refresh(who);refreshed=true;}catch{}
       if(!active())return;
-      const ready=liveParts().every(part=>['working','off'].includes(part.state));
-      if(ready&&Date.now()-live.started>4000||Date.now()-live.started>120000)live.done=true;
+      const ready=refreshed&&liveParts().every(part=>['working','off'].includes(part.state));
+      if(ready&&Date.now()-live.started>4000)live.done=true;
+      else if(Date.now()-live.started>120000)live.timedOut=true;
       await renderWizard(who);
-      if(active()&&!live.done)liveTimer=setTimeout(tick,2000);
+      if(active()&&!live.done&&!live.timedOut)liveTimer=setTimeout(tick,2000);
     };
     liveTimer=setTimeout(tick,1500);
   }

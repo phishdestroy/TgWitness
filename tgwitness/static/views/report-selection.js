@@ -3,10 +3,20 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   const make=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=String(text??'');if(cls)el.className=cls;return el;};
   const mask=text=>window.TgWitnessPrivacy?.preview(String(text??''))??tr('Message preview unavailable');
   let catalog={chats:[],senders:[]}, response=null, request=0, revision=0, pending=false, controller=null, stamp=null;
+  let step=0,previewTimer=null;
+  const steps=['report-data','report-content','report-preview'];
+  const pages=[find('report-data'),find('report-content-step'),find('report-preview')];
   const count=value=>Number(value||0).toLocaleString();
   const fields={chats:find('report-selection-chats'),senders:find('report-selection-senders')};
   const containers={chats:find('report-chat-catalog'),senders:find('report-sender-catalog')};
   const searches={chats:root.querySelector('[data-report-search=chats]'),senders:root.querySelector('[data-report-search=senders]')};
+  const allChats=make('input'),allLabel=make('label','','check-label');
+  allChats.type='checkbox';allChats.id='report-selection-all-chats';allChats.checked=true;
+  allLabel.append(allChats,document.createTextNode(' '+tr('All chats')));containers.chats.before(allLabel);
+  allChats.addEventListener('change',()=>{
+    if(allChats.checked)fields.chats.value='';
+    fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
+  });
   function ids(field){
     const chunks=field.value.split(/[\s,;]+/).filter(Boolean);
     const valid=chunks.every(value=>/^-?[1-9]\d*$/.test(value)&&Number.isSafeInteger(Number(value)));
@@ -16,13 +26,15 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   function read(){
     const enabled=find('report-selection-chosen').checked,from=find('report-selection-from').value,to=find('report-selection-to').value;
     if(!enabled){
-      for(const field of [fields.chats,fields.senders,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
+      for(const field of [fields.chats,fields.senders,allChats,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
       return {enabled:false,chats:[],senders:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked};
     }
     find('report-selection-to').setCustomValidity(from&&to&&from>to?tr('The end date must not be earlier than the start date.'): '');
     const selected=kinds.filter(input=>input.checked).map(input=>input.dataset.reportKind);
     kinds[0].setCustomValidity(selected.length?'':tr('Choose at least one record type.'));
-    return {enabled,chats:ids(fields.chats),senders:ids(fields.senders),
+    const chats=ids(fields.chats);
+    allChats.setCustomValidity(!allChats.checked&&!chats.length?tr('Choose at least one chat.'):'');
+    return {enabled,chats:allChats.checked?[]:chats,senders:ids(fields.senders),
       date_from:from,date_to:to,kinds:selected,id_gaps:find('report-selection-gaps').checked};
   }
   function controls(){
@@ -30,6 +42,22 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     find('report-selection-options').hidden=!find('report-selection-chosen').checked;
     find('report-preview-run').disabled=pending;
     find('report-load-catalog').disabled=pending;
+    const valid=response&&stamp===JSON.stringify(options())&&response.counts?.selected_records>0;
+    root.querySelectorAll('[data-report-download]').forEach(button=>button.disabled=pending||!valid);
+  }
+  function selectStep(index,focus=true){
+    step=Math.max(0,Math.min(index,pages.length-1));
+    pages.forEach((page,i)=>page.hidden=i!==step);
+    root.querySelectorAll('[data-report-step]').forEach((button,i)=>{
+      button.setAttribute('aria-current',i===step?'step':'false');
+      button.setAttribute('aria-controls',pages[i].id);
+    });
+    find('report-step-back').hidden=step===0;
+    find('report-step-next').hidden=step===2;
+    find('report-draft-downloads').hidden=step!==2;
+    find('report-step-position').textContent=(step+1)+' / '+pages.length;
+    if(focus){pages[step].scrollIntoView({block:'start',behavior:'instant'});pages[step].querySelector('[tabindex="-1"]')?.focus({preventScroll:true});}
+    if(step===2&&ready())void preview(false);
   }
   function renderCatalog(key){
     const selected=new Set(ids(fields[key])), query=searches[key].value.trim().toLowerCase();
@@ -43,6 +71,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       const info=make('span','','report-catalog-label');info.append(make('strong',title),make('small',String(row.id)));
       label.append(input,info,make('span',row.count===null?'—':count(row.count),'report-catalog-number'));
       input.addEventListener('change',()=>{
+        if(key==='chats')allChats.checked=false;
         const current=new Set(ids(fields[key]));if(input.checked)current.add(Number(row.id));else current.delete(Number(row.id));
         fields[key].value=[...current].join(', ');fields[key].dispatchEvent(new Event('input',{bubbles:true}));
       });return label;
@@ -52,15 +81,20 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     containers[key].replaceChildren(...(nodes.length?nodes:[make('p',empty,'hint')]));
     if(nodes.length&&catalog[key+'_status']==='too_many_groups')containers[key].prepend(make('p',empty,'hint'));
     find(key==='chats'?'report-chat-count':'report-sender-count').textContent=selected.size
-      ?tr('{n} selected',{n:count(selected.size)}):tr(key==='chats'?'All chats included':'All authors included');
+      ?tr('{n} selected',{n:count(selected.size)}):tr(key==='chats'?(allChats.checked?'All chats included':'Choose at least one chat.'):'All authors included');
   }
   function changed(event){
     if(event?.target?.matches('[data-report-search]'))return;
+    updateAppearance();
+    if(event?.target===fields.chats&&fields.chats.value.trim())allChats.checked=false;
     revision++;controls();read();
     if(event?.target===fields.chats||event?.target===fields.senders||event?.target?.name==='report-selection-mode'){
       renderCatalog('chats');renderCatalog('senders');
     }
     if(response||pending){find('report-preview-stale').hidden=false;find('report-preview-result').dataset.stale='true';}
+    controls();clearTimeout(previewTimer);
+    if(step===2||event?.target?.id==='report-selection-chosen'&&!catalog.chats.length)
+      previewTimer=setTimeout(()=>preview(false),300);
   }
   function table(headings,rows,cls=''){
     const scroll=make('div','','report-preview-scroll'),el=make('table','',cls),head=make('thead'),trHead=make('tr');
@@ -155,7 +189,10 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
         days[day],...row.map(value=>{const cell=make('span',count(value),'report-heat-cell');cell.style.backgroundColor='rgb(36 126 140 / '+(.05+.45*Number(value)/maximum)+')';return cell;})
       ]),'report-heat-table'));grid.append(block);
     }
-    if(grid.children.length){target.append(make('p',tr('Activity uses observation times in UTC. Counts are recorded observations, not unique messages.'),'hint'),grid);}
+    if(grid.children.length){
+      const charts=make('details','','report-advanced');charts.append(make('summary',tr('Charts')),
+        make('p',tr('Activity uses observation times in UTC. Counts are recorded observations, not unique messages.'),'hint'),grid);target.append(charts);
+    }
     for(const key of ['activity','participants','chats'])if(analytics[key]?.status&&analytics[key].status!=='available')
       target.append(make('p',tr('A chart could not be grouped within the report limits. No approximate counts are shown.'),'hint'));
     if(data.changes)target.append(renderChanges(data.changes));
@@ -190,20 +227,46 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       response=data;stamp=JSON.stringify(body);catalog=data.catalog||{chats:[],senders:[]};
       renderCatalog('chats');renderCatalog('senders');render(data);
       find('report-preview-stale').hidden=true;delete find('report-preview-result').dataset.stale;
-      find('report-preview-status').textContent=tr('Preview ready. Save your choices before downloading the report.');
+      find('report-preview-status').textContent=tr('Selected records')+': '+count(data.counts?.selected_records);
       if(reveal){find('report-preview').scrollIntoView({block:'start',behavior:'instant'});find('report-preview-title').focus({preventScroll:true});}
     }catch(error){
       if(!current()||['AbortError','StaleView'].includes(error.name))return;
       find('report-preview-status').textContent=tr('Could not build the preview.')+' '+error.message;find('report-preview-retry').hidden=false;
-    }finally{if(mine===request&&owner===getOwner()){pending=false;controls();}}
+    }finally{if(mine===request&&owner===getOwner()){
+      pending=false;controls();
+      if(step===2&&version!==revision){clearTimeout(previewTimer);previewTimer=setTimeout(()=>preview(false),300);}
+    }}
   }
   for(const key of ['chats','senders'])searches[key].addEventListener('input',()=>renderCatalog(key));
   root.querySelectorAll('[data-report-step]').forEach(button=>button.addEventListener('click',()=>{
-    const section=find(button.dataset.reportStep);section.scrollIntoView({block:'start',behavior:'instant'});section.querySelector('[tabindex="-1"]')?.focus({preventScroll:true});
+    selectStep(steps.indexOf(button.dataset.reportStep));
   }));
+  find('report-step-back').addEventListener('click',()=>selectStep(step-1));
+  find('report-step-next').addEventListener('click',()=>{read();if(root.reportValidity())selectStep(step+1);});
+  root.addEventListener('invalid',event=>{
+    const index=pages.findIndex(page=>page.contains(event.target));
+    if(index>=0&&index!==step)selectStep(index,false);
+    let ancestor=event.target.parentElement;
+    while(ancestor&&ancestor!==root){if(ancestor.tagName==='DETAILS')ancestor.open=true;ancestor=ancestor.parentElement;}
+  },true);
+  root.querySelectorAll('.studio-controls > fieldset.studio-section').forEach(fieldset=>{
+    const detail=make('details','','report-advanced'),summary=make('summary',fieldset.querySelector('legend')?.textContent||'');
+    fieldset.before(detail);detail.append(summary,fieldset);
+  });
+  const templates=root.querySelector('.report-templates'),designs=root.querySelector('.report-designs');
+  designs.before(templates);
+  const appearance=make('details','','report-advanced report-appearance'),appearanceTitle=make('summary');
+  designs.before(appearance);appearance.append(appearanceTitle,designs);
+  const updateAppearance=()=>{appearanceTitle.textContent=tr('Report design')+' · '+
+    (designs.querySelector('input:checked')?.closest('label')?.querySelector('strong')?.textContent||'');};
+  designs.addEventListener('change',updateAppearance);
+  const stage=root.querySelector('.studio-stage'),stageDetail=make('details','','report-stage-detail');
+  stageDetail.open=matchMedia('(min-width:1100px)').matches;
+  stageDetail.append(make('summary',tr('Preview')),...stage.childNodes);stage.append(stageDetail);
+  selectStep(0,false);
   find('report-preview-run').addEventListener('click',()=>preview());find('report-preview-retry').addEventListener('click',()=>preview());
   find('report-load-catalog').addEventListener('click',()=>preview(false));
-  function leave(){request++;controller?.abort();controller=null;pending=false;controls();}
+  function leave(){request++;clearTimeout(previewTimer);controller?.abort();controller=null;pending=false;controls();}
   function reset(){
     leave();revision++;response=null;stamp=null;catalog={chats:[],senders:[]};
     for(const field of Object.values(searches))field.value='';
@@ -211,15 +274,23 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     find('report-preview-result').replaceChildren();delete find('report-preview-result').dataset.stale;
     find('report-preview-status').textContent='';find('report-preview-stale').hidden=find('report-preview-retry').hidden=true;
     for(const box of Object.values(containers))box.replaceChildren();find('report-chat-count').textContent=find('report-sender-count').textContent='';
+    selectStep(0,false);controls();
   }
-  return {read,changed,preview,leave,reset,
+  return {read,changed,preview,leave,reset,reveal(field){
+    const index=pages.findIndex(page=>page.contains(field));if(index>=0)selectStep(index,false);
+    let parent=field.parentElement;while(parent&&parent!==root){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement;}
+    field.scrollIntoView({block:'center'});field.focus({preventScroll:true});
+  },
     load(selection={}){
       selection=selection||{};find('report-selection-all').checked=!selection.enabled;find('report-selection-chosen').checked=!!selection.enabled;
       fields.chats.value=(selection.chats||[]).join(', ');fields.senders.value=(selection.senders||[]).join(', ');
+      allChats.checked=!(selection.chats||[]).length;
       for(const [id,key] of [['report-selection-from','date_from'],['report-selection-to','date_to']])find(id).value=selection[key]||'';
       const set=new Set(selection.kinds||kinds.map(input=>input.dataset.reportKind));for(const input of kinds)input.checked=set.has(input.dataset.reportKind);
       find('report-selection-gaps').checked=selection.id_gaps!==false;controls();renderCatalog('chats');renderCatalog('senders');
       if(stamp&&stamp!==JSON.stringify(options())){find('report-preview-stale').hidden=false;find('report-preview-result').dataset.stale='true';}
+      if(selection.enabled&&!catalog.chats.length){clearTimeout(previewTimer);previewTimer=setTimeout(()=>preview(false),100);}
+      updateAppearance();
     }
   };
 }

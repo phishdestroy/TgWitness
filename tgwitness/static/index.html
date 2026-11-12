@@ -658,7 +658,7 @@
     <div class="studio-heading"><div><div class="eyebrow">FROM RECORDS TO A READABLE STORY</div><h2>Report studio</h2><p class="muted">Choose a design. Select the information. Review the result.</p></div><span class="studio-badge">HTML · PDF · JSON</span></div>
     <p class="hint">Design and charts apply to new journal, chat, account and sharing exports. Case details apply to journal and single-chat reports; record and change-history switches apply to the journal. Account and sharing exports keep their own language and privacy settings.</p>
     <fieldset class="report-fields" id="report-fields" disabled>
-    <details id="report-profiles" class="report-manual" data-form-ignore>
+    <details id="report-profiles" class="report-manual" data-form-ignore data-form-draft-container>
       <summary>Reusable report configurations</summary>
       <p class="hint">Save language, design, sections and chart settings. Case details, findings and data filters stay in the current report and are never included in a configuration.</p>
       <div class="report-grid"><label>Saved configuration<select id="report-profile-list"></select></label><label>Configuration name<input id="report-profile-name" maxlength="80" autocomplete="off"></label></div>
@@ -698,6 +698,7 @@
       <p class="hint">Missing numbers are gaps in the observed IDs; deletions are recorded as separate notices.</p>
       <p class="report-scope-notice">Scope applies to the report. The evidence ZIP keeps the complete original journal; use a minimized handover to share only selected data.</p>
     </section>
+    <section id="report-content-step" hidden>
     <div class="report-section-heading" id="report-content"><span aria-hidden="true">02</span><div><h3 tabindex="-1">Design and contents</h3><p class="hint">Choose how the report looks and what it includes.</p></div></div>
     <fieldset class="report-designs" aria-describedby="report-design-help"><legend>Report design</legend>
       <p class="hint" id="report-design-help">Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.</p>
@@ -886,13 +887,15 @@
     </fieldset>
     <p class="studio-fixed">Trust assessment, coverage and verification instructions stay in every report. Display choices do not remove signed source records.</p>
     </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button><button type="button" data-preview-section="guidance" aria-pressed="false" hidden>Guidance</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
-    <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title">
+    </section>
+    <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title" hidden>
       <div class="report-section-heading"><span aria-hidden="true">03</span><div><h3 id="report-preview-title" tabindex="-1">Inspect the actual data</h3><p class="hint">This preview uses your current choices. It does not save them or create a signed export.</p></div></div>
       <div class="report-preview-toolbar"><button class="primary" type="button" id="report-preview-run">Build preview</button><button class="secondary" type="button" id="report-preview-retry" hidden>Retry preview</button><span id="report-preview-stale" class="report-preview-stale" hidden>Choices changed. Rebuild the preview.</span></div>
       <p id="report-preview-status" class="hint" role="status" data-no-translate></p>
       <div id="report-preview-result" data-no-translate></div>
     </section>
-    <div class="report-actions studio-save"><div><strong>Ready for the next export</strong><p class="hint">Saved settings apply to newly prepared files.</p></div><button class="primary" type="submit">Save report settings</button><button class="secondary" type="button" id="report-open-downloads">Go to downloads</button></div>
+    <div class="report-flow-actions"><button class="secondary" type="button" id="report-step-back" hidden>Back</button><span id="report-step-position" aria-live="polite"></span><button class="primary" type="button" id="report-step-next">Next</button><div class="report-formats" id="report-draft-downloads" hidden><button class="primary" data-export="pdf" data-report-download data-no-translate type="button">PDF</button><button class="secondary" data-export="html" data-report-download data-no-translate type="button">HTML</button><button class="secondary" data-export="json" data-report-download data-no-translate type="button">JSON</button></div></div>
+    <div class="report-actions studio-save"><div><strong>Ready for the next export</strong><p class="hint">Saved settings apply to newly prepared files.</p></div><button class="secondary" type="submit">Save report settings</button><button class="secondary" type="button" id="report-open-downloads">Go to downloads</button></div>
     <p class="hint">Save your choices, then download HTML, PDF or the signed ZIP. A preview can become outdated as new records arrive.</p>
     </fieldset>
     <p class="hint" id="report-status" role="status"></p>

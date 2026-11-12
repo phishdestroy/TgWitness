@@ -720,6 +720,20 @@ form > .health-detail { margin-top: 14px; }
 .report-steps { display:flex;flex-wrap:wrap;gap:8px;margin:20px 0; }
 .report-steps button { display:flex;align-items:center;gap:8px;border:1px solid var(--border); }
 .report-steps b { display:inline-grid;place-items:center;width:23px;height:23px;border-radius:50%;background:var(--accent-soft);color:var(--accent-text);font-size:11px; }
+.report-steps button[aria-current="step"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-text)}
+.report-flow-actions{position:sticky;bottom:0;z-index:4;display:flex;align-items:center;gap:12px;padding:14px 0;background:var(--bg);border-top:1px solid var(--border);margin-top:20px}
+#report-step-position{margin-inline-end:auto;color:var(--muted);font-variant-numeric:tabular-nums}
+.report-advanced{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.report-advanced>summary{padding:14px;cursor:pointer;font-weight:600}
+.report-advanced>fieldset.studio-section{border:0;margin:0;border-radius:0}
+.report-advanced>fieldset>legend{display:none}
+#report-form:has(.report-flow-actions)>.hint:not([id]),#report-fields>.hint{display:none}
+#report-form .studio-save,#report-selection-chats~.hint{display:none}
+.report-download-card>.hint{display:none}
+.report-appearance .report-designs{margin:0;padding:0 14px 14px}.report-appearance .report-designs>legend{display:none}
+.report-stage-detail>summary{cursor:pointer;font-weight:600;padding:4px 0}.report-stage-detail[open]>summary{margin-bottom:12px}
+#report-preview-result>.report-advanced>.hint,#report-preview-result>.report-advanced>.report-preview-charts{margin:12px}
+@media(max-width:600px){.report-flow-actions{gap:8px;padding:10px 0}.report-flow-actions button{min-height:44px}.report-flow-actions .report-formats{gap:6px}}
 .report-section-heading { display:flex;align-items:flex-start;gap:14px;margin:28px 0 12px;scroll-margin-top:90px; }
 .report-section-heading>span { padding-top:3px;color:var(--accent-text);font:13px var(--mono); }
 .report-section-heading h3 { margin:0;font-size:17px; }.report-section-heading .hint { margin:6px 0; }

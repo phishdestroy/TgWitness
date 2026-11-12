@@ -545,6 +545,7 @@ let networkLoadedFor=null;
 let qrPending=null,importExpectedId=null,importClientProfile=null,importFormats=[],importTwoFactor="",accountImportRevision=0,authMethod="phone";
 let accessStarted=false;
 class StaleView extends Error {constructor(){super("");this.name="StaleView";}}
+class Cancelled extends Error {constructor(){super("");this.name="Cancelled";}}
 function toast(message, error=false) { if(!message)return;const n = $("toast"); n.textContent = message; n.classList.toggle("error", error); show("toast", true); clearTimeout(toastTimer); toastTimer = setTimeout(() => leave("toast"), error ? 9000 : 5000); }
 async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
@@ -554,7 +555,7 @@ async function api(path, body, options={}) {
   if(body?.enabled&&['evidence','replica','alerts'].includes(path)&&state.me?.admin){
     const current=await json('settings',undefined,{profile,token});
     if(!current.values.outside){
-      if(!await askConfirm(tr('This feature needs external requests. Allow them?')))throw new Error(tr('Cancelled'));
+      if(!await askConfirm(tr('This feature needs external requests. Allow them?')))throw new Cancelled();
       if(revision!==state.workspaceRevision||token!==state.token)throw new StaleView();
       await json('settings/edit',{key:'outside',value:true,revision:current.revision},{profile,token});
     }
@@ -601,7 +602,7 @@ async function busy(button, work) {
   if (button) {button.disabled = true;button.setAttribute("aria-busy","true");}
   const form=button?.closest("form");form?.querySelector(".form-error")?.remove();
   try { return await work(); } catch (e) {
-    if(e instanceof StaleView)return;
+    if(e instanceof StaleView||e instanceof Cancelled)return;
     toast(e.message, true);
     if(form){const message=node("p","form-error",e.message);message.setAttribute("role","alert");form.append(message);}
     if(e.field&&form?.contains($(e.field))){showFieldError($(e.field),e.message);$(e.field).focus();}
@@ -2833,6 +2834,7 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   }
   current();
   if(handle){try{writer=await handle.createWritable();}catch{handle=null;}}
+  progress({phase:'preparing'});
   let response;
   try{current();response=await api(path,body,root?{root:true,token}:{profile,token});}
   catch(error){await writer?.abort().catch(()=>{});throw error;}
@@ -2871,16 +2873,18 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
       progress({phase:"saving",total,expected});
       if(stream){const size=(total/1024**2).toFixed(1)+" MiB"+(expected?" / "+(expected/1024**2).toFixed(1)+" MiB":"");toast(tr("Saving export: {size}",{size}));}
     }
-    if(expected&&total!==expected)throw new Error(tr("Download was interrupted. Retry the export."));
+    if(!total||expected&&total!==expected){
+      const error=new Error(tr("Download was interrupted. Retry the export."));error.downloadHint=true;throw error;
+    }
     current();if(writer){await writer.close();writer=null;}
     else saveBlob(new Blob(chunks,{type:response.headers.get("Content-Type")||"application/octet-stream"}),filename);
-    progress({phase:"done",total,expected});
+    progress({phase:handle?'done':'browser',total,expected});
     if(stream)toast(tr(handle?'File saved.':'Download started. Check your browser’s downloads.'));
     return true;
   }catch(error){
-    if(reader)await reader.cancel().catch(()=>{});else await response.body.cancel().catch(()=>{});
+    if(reader)await reader.cancel().catch(()=>{});else await response.body?.cancel().catch(()=>{});
     if(writer)await writer.abort().catch(()=>{});
-    if(!(error instanceof StaleView)&&ticketPath&&!nativeAttempted){current();return await nativeDownload();}
+    if(!(error instanceof StaleView)&&!error.downloadHint&&ticketPath&&!nativeAttempted){current();return await nativeDownload();}
     if(error instanceof StaleView)throw error;
     if(nativeAttempted)throw error;
     if(error.downloadHint)throw error;
@@ -2892,13 +2896,25 @@ function saveBlob(blob,filename){
 }
 panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
   const fmt=b.dataset.export,password=$("export-password").value;
+  const owner=reportKey();
+  let options;
+  if(['html','pdf','json','zip'].includes(fmt)&&state.view==='evidence'){
+    await loadReportSettings();
+    if(owner!==reportKey())throw new StaleView();
+    if(!reportReady||reportOwner!==owner)return;
+    options=reportDraft();
+    if(!$("report-form").checkValidity()){
+      (await exportsReady).select('settings');$("report-form").reportValidity();return;
+    }
+  }
   const encrypt=!!b.closest("#view-evidence")&&$("export-encrypt-on").checked;
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
   const encryption=$("export-encryption").value;
   const progress=(await exportsReady).begin({format:fmt,encrypted:encrypt,encryption,retry:()=>b.click()}),language=exportLanguage();
   const query=language?"?language="+encodeURIComponent(language):"",name=fmt==="json"||fmt==="pdf"?"tgwitness-report."+fmt:"tgwitness-evidence."+fmt;
   try{
-    const saved=await download("export/"+fmt+query,encrypt?"tgwitness-evidence-"+fmt+"-encrypted."+encryption:name,true,false,encrypt?{password,encryption}:undefined,progress);
+    const body=encrypt||options?{...(encrypt?{password,encryption}:{}),...(options?{options}:{})}:undefined;
+    const saved=await download("export/"+fmt+query,encrypt?"tgwitness-evidence-"+fmt+"-encrypted."+encryption:name,true,false,body,progress);
     if(saved)toast(tr(encrypt?"Encrypted export sent to your browser. Keep its password separately.":"Export sent to your browser. Check Downloads for the saved file."));
   }catch(error){progress({phase:"failed",error:error.message});throw error;}
 })));
@@ -3107,7 +3123,7 @@ $("report-form").addEventListener("input",event=>{if(reportReady&&!event.target.
   reportSelection?.changed(event);
   if(event.target.name==="report-template")applyReportPreset();
   else if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit"].includes(event.target.id))setReportTemplate("custom");
-  syncReportParts();reportDirty=true;$("report-status").textContent=tr("Draft changed. Save before exporting.");
+  syncReportParts();reportDirty=true;$("report-status").textContent="";
   if(event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')reportPreviewSection='analytics';
   if(event.target.name==='report-design')reportPreviewSection='cover';
   $("report-design-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();
@@ -3125,13 +3141,12 @@ $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
 $("report-open-downloads").addEventListener("click",async()=>{
-  if(reportDirty){$("report-status").textContent=tr("Save your changes before downloading a report with these choices.");$("report-status").scrollIntoView({block:"center"});return;}
   (await exportsReady).select('downloads');$("exports-downloads").scrollIntoView({block:"start"});
 });
 panelQueries("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
   event.preventDefault();
   Promise.resolve(navigate("evidence")).then(()=>exportsReady).then(view=>{view.select("settings");
-    const field=$(link.dataset.goReports==='data'?"report-data-title":"report-language");field.scrollIntoView({block:"center"});field.focus({preventScroll:true});});
+    const field=$(link.dataset.goReports==='data'?"report-data-title":"report-language");reportSelection?.reveal(field);});
 }));
 $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";
