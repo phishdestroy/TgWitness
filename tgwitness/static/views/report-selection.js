@@ -1,6 +1,18 @@
 import {createReportEditor} from './report-editor.js?v=1';
 
-export function createReportSelection({root,tr,json,getOwner,ready,options,active}) {
+export function createReportSelection({root,tr,json,getOwner,ready,options,active,titles=()=>new Map()}) {
+  const people=new Map();
+  let peopleKey='';
+  function loadPeople(){
+    const chosen=ids(fields.chats),chats=(chosen.length?chosen:(catalog.chats||[]).map(row=>Number(row.id))).slice(0,5),key=getOwner()+':'+chats.join(',');
+    if(!chats.length||key===peopleKey)return;
+    peopleKey=key;
+    Promise.allSettled(chats.map(chat=>json('chats/'+encodeURIComponent(chat)+'/authors'))).then(results=>{
+      if(peopleKey!==key)return;
+      for(const result of results)for(const author of result.value?.authors||[])if(author.name||author.username)people.set(Number(author.id),author.name||'@'+author.username);
+      renderCatalog('senders');
+    });
+  }
   const find=id=>root.querySelector('#'+id), kinds=[...root.querySelectorAll('[data-report-kind]')];
   const make=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=String(text??'');if(cls)el.className=cls;return el;};
   const mask=text=>window.TgWitnessPrivacy?.preview(String(text??''))??tr('Message preview unavailable');
@@ -74,11 +86,13 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     }
     const all=new Map(rowsWithKeys.map(row=>[row.key,row]));
     for(const id of selected)if(!all.has(id))all.set(id,{id:id.replace('secret:',''),key:id,secret:id.startsWith('secret:'),count:null});
+    const known=key==='chats'?titles():people;
+    for(const row of all.values())if(!row.secret&&!row.title&&known.get(Number(row.id)))row.title=known.get(Number(row.id));
     const rows=[...all.values()].filter(row=>String(row.id).includes(query)||String(row.title||'').toLowerCase().includes(query));
     const nodes=rows.map(row=>{
       const label=make('label','','report-catalog-row'),input=make('input');input.type='checkbox';input.checked=selected.has(row.key);
       input.dataset.reportChoice=key;input.dataset.id=row.key;
-      const title=row.secret?'Secret Chat '+row.id:key==='chats'&&row.title?mask(row.title):tr(key==='chats'?'Chat {id}':'Account {id}',{id:row.id});
+      const title=row.secret?'Secret Chat '+row.id:row.title?mask(row.title):tr(key==='chats'?'Chat {id}':'Account {id}',{id:row.id});
       const info=make('span','','report-catalog-label');info.append(make('strong',title),make('small',row.secret?tr('Pseudo-secret'):String(row.id)));
       label.append(input,info,make('span',row.count===null?'—':count(row.count),'report-catalog-number'));
       input.addEventListener('change',()=>{
@@ -242,7 +256,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       const data=await json('report-preview',body,{signal:controller.signal});
       if(!current())return;
       if(version!==revision){find('report-preview-status').textContent=tr('Choices changed while the preview was running. Build it again.');find('report-preview-stale').hidden=false;return;}
-      response=data;stamp=JSON.stringify(body);catalog=data.catalog||{chats:[],senders:[]};
+      response=data;stamp=JSON.stringify(body);catalog=data.catalog||{chats:[],senders:[]};loadPeople();
       renderCatalog('chats');renderCatalog('senders');render(data);
       find('report-preview-stale').hidden=true;delete find('report-preview-result').dataset.stale;
       find('report-preview-status').textContent=tr('Selected records')+': '+count(data.counts?.selected_records);
@@ -276,7 +290,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   find('report-load-catalog').addEventListener('click',()=>preview(false));
   function leave(){request++;clearTimeout(previewTimer);controller?.abort();controller=null;pending=false;controls();}
   function reset(){
-    leave();revision++;response=null;stamp=null;catalog={chats:[],senders:[]};
+    leave();revision++;response=null;stamp=null;catalog={chats:[],senders:[]};people.clear();peopleKey='';
     for(const field of Object.values(searches))field.value='';
     for(const field of [fields.chats,fields.senders,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
     find('report-preview-result').replaceChildren();delete find('report-preview-result').dataset.stale;
