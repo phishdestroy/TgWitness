@@ -5224,7 +5224,7 @@ function renderChatStatus(){
     f.addEventListener("click",()=>{state.chatFilter=key;renderChatStatus();renderChatFeed();});filters.append(f);
   }
   const tabs=node('div','chat-view-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label',tr('Chat views'));
-  const views=[['messages',tr('Messages')],['people',tr('People')],['activity',tr('Activity timeline')],['profile',tr('Profile')]];
+  const views=[['messages',tr('Messages')],['activity',tr('People')],['people',tr('Authors')],['profile',tr('Profile')]];
   if(s.analysis?.enabled&&!s.demo&&viewAllowed('analysis'))views.push(['ai',tr('AI context')]);
   for(const [name,label] of views){const tab=node('button','filter'+(state.chatView===name?' active':''),label);tab.type='button';tab.dataset.chatView=name;
     tab.setAttribute('aria-pressed',String(state.chatView===name));tab.addEventListener('click',()=>{
@@ -5274,11 +5274,11 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=1').then(({createPeopleTimeline})=>{
+const peopleTimelineReady=import('./views/people-timeline.js?v=2').then(({createPeopleTimeline})=>{
   peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
-    record:openRecord,formatTime:fmtFull});return peopleTimeline;
+    record:openRecord,formatTime:fmtFull,canCollect:()=>!!state.me?.admin&&!state.status?.demo,attachment:mediaNode});return peopleTimeline;
 });
 window.addEventListener('tgwitness:lock',()=>peopleTimeline?.reset());
 function renderChatFeed(){
