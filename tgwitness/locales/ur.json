@@ -8826,6 +8826,13 @@
   "No chats selected": "کوئی چیٹس منتخب نہیں",
   "Select chats in Sources. Insights show reply times, activity hours, deleted messages and presence for one chat.": "ماخذوں میں چیٹس منتخب کریں۔ انسایتس ایک چیٹ کے لیے جواب کے اوقات، سرگرمی کے اوقات، حذف شدہ پیغامات اور موجودگی دکھاتا ہے۔",
   "Leave without saving the chat selection?": "چاٹ کے انتخاب کو محفوظ کیے بغیر چھوڑنا؟",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} اکاؤنٹ عوامی MTProxy سرور استعمال کر رہا ہے: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "one": "{n} اکاؤنٹ عوامی MTProxy سرور استعمال کر رہا ہے: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔",
+    "other": "{n} اکاؤنٹس عوامی MTProxy سرور استعمال کر رہے ہیں: پتہ بدلتا ہے اور رابطہ ٹوٹتا ہے، پیغامات چھوٹ سکتے ہیں۔"
+  },
+  "Move all accounts to WARP": "تمام اکاؤنٹس WARP پر منتقل کریں",
+  "Move to WARP": "WARP پر منتقل کریں",
   "Keep recording new messages and their changes after setup.": "سیٹ اپ کے بعد نئے پیغامات اور ان میں ہونے والی تبدیلیوں کی ریکارڈنگ جاری رکھیں۔",
   "Larger files are recorded without downloading their contents.": "بڑی فائلیں ان کے مواد کو ڈاؤن لوڈ کیے بغیر ریکارڈ کی جاتی ہیں۔",
   "Sends a message when recording stops or needs attention.": "جب ریکارڈنگ رکتی ہے یا توجہ درکار ہوتی ہے تو ایک پیغام بھیجتا ہے۔",

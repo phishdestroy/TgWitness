@@ -8781,6 +8781,12 @@
   "No chats selected": "Tiada sembang dipilih",
   "Select chats in Sources. Insights show reply times, activity hours, deleted messages and presence for one chat.": "Pilih sembang dalam Sumber. Wawasan memaparkan masa balasan, jam aktiviti, mesej yang dipadam dan kehadiran untuk satu sembang.",
   "Leave without saving the chat selection?": "Meninggalkan tanpa menyimpan pilihan sembang?",
+  "{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.": "{n} akaun menggunakan pelayan MTProxy awam: alamatnya berubah dan sambungan terputus, jadi mesej boleh terlepas.",
+  "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.": {
+    "other": "{n} akaun menggunakan pelayan MTProxy awam: alamatnya berubah dan sambungan terputus, jadi mesej boleh terlepas."
+  },
+  "Move all accounts to WARP": "Pindahkan semua akaun ke WARP",
+  "Move to WARP": "Pindahkan ke WARP",
   "Keep recording new messages and their changes after setup.": "Teruskan merakam mesej baru dan perubahan mereka selepas penyediaan.",
   "Larger files are recorded without downloading their contents.": "Fail yang lebih besar direkodkan tanpa memuat turun kandungannya.",
   "Sends a message when recording stops or needs attention.": "Menghantar mesej apabila rakaman berhenti atau memerlukan perhatian.",
