@@ -6993,7 +6993,7 @@
   "Earlier configuration": "早期配置",
   "Earlier records are available. Load older records to see more history.": "可查阅早期记录。加载更早的记录以查看更多历史信息。",
   "Ed25519 key signs the journal": "日志由 Ed25519 密钥进行签名",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · 加密签名.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · 加密文件 signing.enc",
   "Editorial review": "编辑审阅",
   "Emoji": "表情符号",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "请先在存储桶中启用对象锁定功能。存储桶所有者无法缩短合规模式的时长；授权管理员可绕过治理设置。请在下文选择30天或您所需的时长。存储计费规则与本保护机制相互独立。",

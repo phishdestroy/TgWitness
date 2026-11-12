@@ -7185,7 +7185,7 @@
   "Earlier configuration": "التكوين السابق",
   "Earlier records are available. Load older records to see more history.": "تتوفر السجلات السابقة. قم بتحميل السجلات الأقدم للاطلاع على المزيد من السجل التاريخي.",
   "Ed25519 key signs the journal": "يوقع مفتاح Ed25519 على السجل",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · التوقيع المشفر.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · ملف signing.enc مشفّر",
   "Editorial review": "المراجعة التحريرية",
   "Emoji": "الرموز التعبيرية",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "قم أولاً بتمكين قفل الكائنات (Object Lock) في الحاوية. لا يمكن لمالك الحاوية تقصير مدة وضع الامتثال؛ ويمكن للمسؤول المصرح له تجاوز الحوكمة. اختر 30 يومًا أو الفترة المطلوبة أدناه. قواعد فوترة التخزين منفصلة عن هذه الحماية.",

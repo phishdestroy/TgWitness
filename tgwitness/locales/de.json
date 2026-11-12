@@ -7045,7 +7045,7 @@
   "Earlier configuration": "Frühere Konfiguration",
   "Earlier records are available. Load older records to see more history.": "Frühere Datensätze sind verfügbar. Laden Sie ältere Datensätze, um weitere historische Informationen anzuzeigen.",
   "Ed25519 key signs the journal": "Ein Ed25519-Schlüssel signiert das Journal",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · verschlüsselte Signatur.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · verschlüsselte Datei signing.enc",
   "Emoji": "Emoji",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "Aktivieren Sie zunächst Object Lock im Bucket. Der Compliance-Modus kann vom Bucket-Eigentümer nicht verkürzt werden; die Governance kann von einem autorisierten Administrator umgangen werden. Wählen Sie unten 30 Tage oder den von Ihnen gewünschten Zeitraum aus. Die Abrechnungsregeln für den Speicherplatz gelten unabhängig von diesem Schutz.",
   "Enable WARP": "WARP aktivieren",

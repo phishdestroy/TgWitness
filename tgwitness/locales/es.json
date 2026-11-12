@@ -7032,7 +7032,7 @@
   "Earlier configuration": "Configuración anterior",
   "Earlier records are available. Load older records to see more history.": "Hay registros anteriores disponibles. Carga registros más antiguos para ver más historial.",
   "Ed25519 key signs the journal": "La clave Ed25519 firma el diario.",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · firma cifrada.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · archivo cifrado signing.enc",
   "Editorial review": "Revisión editorial",
   "Emoji": "Emoji",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "Activa primero el bloqueo de objetos en el bucket. El propietario del bucket no puede acortar el modo de cumplimiento; un administrador autorizado puede eludir la gobernanza. Elige a continuación 30 días o el periodo que necesites. Las reglas de facturación del almacenamiento son independientes de esta protección.",

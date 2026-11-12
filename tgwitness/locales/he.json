@@ -7071,7 +7071,7 @@
   "Earlier configuration": "תצורה קודמת",
   "Earlier records are available. Load older records to see more history.": "רשומות קודמות זמינות. טען רשומות ישנות יותר כדי לראות היסטוריה נוספת.",
   "Ed25519 key signs the journal": "מפתח Ed25519 חותם על היומן",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · חתימה מוצפנת.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · קובץ מוצפן signing.enc",
   "Editorial review": "ביקורת עריכה",
   "Emoji": "אמוג'י",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "יש להפעיל תחילה את נעילת האובייקטים (Object Lock) בדלי. בעל הדלי אינו יכול לקצר את מצב התאימות; מנהל מורשה יכול לעקוף את הממשל. בחרו 30 ימים או את התקופה הנדרשת לכם להלן. כללי החיוב על אחסון נפרדים מההגנה הזו.",

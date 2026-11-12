@@ -6993,7 +6993,7 @@
   "Earlier configuration": "Cấu hình trước đó",
   "Earlier records are available. Load older records to see more history.": "Các bản ghi trước đó vẫn có sẵn. Tải các bản ghi cũ hơn để xem thêm lịch sử.",
   "Ed25519 key signs the journal": "Khóa Ed25519 ký tên vào nhật ký",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · ký số được mã hóa.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · tệp signing.enc đã mã hóa",
   "Editorial review": "Kiểm duyệt nội dung",
   "Emoji": "Biểu tượng cảm xúc",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "Trước tiên, hãy bật tính năng Khóa đối tượng (Object Lock) trong bucket. Chế độ tuân thủ không thể bị rút ngắn bởi chủ sở hữu bucket; quy trình quản trị có thể bị bỏ qua bởi một quản trị viên được ủy quyền. Chọn 30 ngày hoặc khoảng thời gian bạn yêu cầu bên dưới. Các quy tắc tính phí lưu trữ là riêng biệt so với tính năng bảo vệ này.",

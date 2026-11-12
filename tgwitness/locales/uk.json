@@ -7120,7 +7120,7 @@
   "Earlier configuration": "Попередня конфігурація",
   "Earlier records are available. Load older records to see more history.": "Доступні попередні записи. Завантажте старіші записи, щоб переглянути більше історії.",
   "Ed25519 key signs the journal": "Журнал підписується ключем Ed25519",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · зашифроване підписання.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · зашифрований файл signing.enc",
   "Editorial review": "Редакційна перевірка",
   "Emoji": "Емодзі",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "Спочатку увімкніть Об’єктну блокування у контейнері. Режим відповідності не може бути скорочений власником контейнера; управління можна обійти за допомогою уповноваженого адміністратора. Оберіть нижче 30-денний термін або необхідний вам період. Правила розрахунків за зберігання даних не пов’язані з цим захистом.",
