@@ -246,7 +246,7 @@ export function createSettingsHub(ctx) {
     }).catch(()=>{});
   }
   async function edit(key,value,who=owner()){
-    requireOwner(who);const revision=data.revision,values={...data.values},goalBefore=data.goal;
+    requireOwner(who);let values={...data.values},goalBefore=data.goal;
     try{
       let allow_outside=false,disable_dependents=false;
       if(['timestamps','drand','notifications','replica'].includes(key)&&value&&!values.outside){
@@ -255,7 +255,13 @@ export function createSettingsHub(ctx) {
       if(key==='outside'&&!value&&(values.timestamps||values.drand||values.notifications||values.replica)){
         disable_dependents=await confirm(who,tr('Turn off the dependent features too?'));if(!disable_dependents)return;
       }
-      data=await request(who,'settings/edit',{key,value,allow_outside,disable_dependents,revision});saved(values,goalBefore);await refresh(who);
+      const send=()=>request(who,'settings/edit',{key,value,allow_outside,disable_dependents,revision:data.revision});
+      let next;
+      try{next=await send();}catch(error){
+        if(error.status!==409)throw error;
+        data=await request(who,'settings');values={...data.values};goalBefore=data.goal;next=await send();
+      }
+      data=next;saved(values,goalBefore);await refresh(who);
     }finally{if(current(who)&&state.view==='settings')render();}
   }
   function preferencesForm(box,{language=true}={}){
@@ -335,7 +341,7 @@ export function createSettingsHub(ctx) {
         window.TgWitnessDialogs?.closeAll();render();ctx.record?.();
       });
       sheet.addEventListener('pointerdown',event=>{pressed=event.target===sheet;});
-      sheet.addEventListener('click',event=>{if(pressed&&event.target===sheet)void run(closeSection);pressed=false;});
+      sheet.addEventListener('click',event=>{if(pressed&&event.target===sheet&&event.detail<2)void run(closeSection);pressed=false;});
     }
     if(!sheet.isConnected)(root.parentElement||document.body).append(sheet);
     return sheet;
@@ -506,7 +512,7 @@ export function createSettingsHub(ctx) {
   }
   async function openForm(id, focus){
     const who=owner();
-    section=formSection(id);shownForm=id;query='';render();
+    section=formSection(id);shownForm=id;query='';render();ctx.record?.();
     const detail=sheet.querySelector('.hub-detail'),form=$(id);
     await ctx.loadSettingsForm(id);
     requireOwner(who);
@@ -622,7 +628,7 @@ export function createSettingsHub(ctx) {
     const warning=$('hub-proxy-warning');
     warning.hidden=ok||!connection?.pool?.listed||connection.pool.healthy!==0||!connection.pool.probed_at;
     if(!warning.hidden){warning.replaceChildren(message('No public proxy answers. Try WARP or your own proxy.'));
-      warning.append(button('Switch to WARP',async()=>{const who=owner();await navigate('settings');requireOwner(who);section='connection';draft.route='warp';editing=true;render();}),
+      warning.append(button('Switch to WARP',async()=>{const who=owner();await navigate('settings');requireOwner(who);section='connection';draft.route='warp';editing=true;render();ctx.record?.();}),
         button('Check again',async()=>{const who=owner();await navigate('settings');requireOwner(who);openSection('connection');await checkConnection(false,who);}));}
   }
   function scheduleStatus(who=owner()){clearTimeout(statusTimer);statusTimer=setTimeout(async()=>{
