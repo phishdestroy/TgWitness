@@ -6622,6 +6622,7 @@
   "Enter a @username or a user ID.": "أدخل @اسم المستخدم أو معرّف المستخدم.",
   "Connect this account to Telegram first.": "يرجى ربط هذا الحساب بـ Telegram أولاً.",
   "Pseudo-secret": "سر زائف",
+  "Pseudo-secret ↗": "سر زائف ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "محادثات Telegram من طرف إلى طرف لهذا الحساب، المحفوظة في السجل",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "يحتفظ Telegram بهذه المحادثات على جهاز واحد فقط. تعمل TgWitness بموجب تفويض من الحساب نفسه وتسجل كل رسالة ومؤقت وملف وإشعار حذف في السجل الموقّع، حتى بعد أن يقوم الطرف الآخر بحذفها. ولا ترسل أبدًا إشعارات القراءة أو الكتابة أو لقطات الشاشة.",
   "Turn on pseudo-secret for this account": "تشغيل الوضع شبه السري لهذا الحساب",

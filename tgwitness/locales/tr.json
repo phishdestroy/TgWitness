@@ -6469,6 +6469,7 @@
   "Enter a @username or a user ID.": "Bir @kullanıcı adı veya kullanıcı kimliği girin.",
   "Connect this account to Telegram first.": "Öncelikle bu hesabı Telegram'a bağlayın.",
   "Pseudo-secret": "Sözde gizli",
+  "Pseudo-secret ↗": "Sözde gizli ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "Bu hesabın Telegram uçtan uca sohbetleri, günlükte saklanmaktadır.",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram bu sohbetleri yalnızca tek bir cihazda saklar. TgWitness, bu hesabın kendi yetkilendirmesiyle devreye girer ve karşı taraf bunları sildikten sonra bile her mesajı, zamanlayıcıyı, dosyayı ve silme bildirimini imzalı günlüğe kaydeder. Asla okundu bilgisi, yazma veya ekran görüntüsü bildirimleri göndermez.",
   "Turn on pseudo-secret for this account": "Bu hesap için sözde gizlilik özelliğini etkinleştir",

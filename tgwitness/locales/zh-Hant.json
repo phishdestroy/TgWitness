@@ -6430,6 +6430,7 @@
   "Enter a @username or a user ID.": "請輸入 @使用者名稱 或 使用者 ID。",
   "Connect this account to Telegram first.": "請先將此帳號與 Telegram 連結。",
   "Pseudo-secret": "偽密鑰",
+  "Pseudo-secret ↗": "偽密鑰 ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "此帳號的 Telegram 端對端聊天紀錄，已存檔於日誌中",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram 僅將這些聊天記錄儲存於單一裝置上。TgWitness 透過該帳號自身的授權參與其中，並將每則訊息、計時器、檔案及刪除通知記錄於簽署過的日誌中，即使對方已將其刪除亦然。它絕不會發送已讀回執、輸入中或截圖通知。",
   "Turn on pseudo-secret for this account": "為此帳號啟用「偽秘密」功能",

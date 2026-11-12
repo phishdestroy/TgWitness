@@ -6547,6 +6547,7 @@
   "Enter a @username or a user ID.": "Wprowadź @nazwę użytkownika lub identyfikator użytkownika.",
   "Connect this account to Telegram first.": "Najpierw połącz to konto z Telegramem.",
   "Pseudo-secret": "Pseudotajemnica",
+  "Pseudo-secret ↗": "Pseudotajemnica ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "Czat z szyfrowaniem typu end-to-end w serwisie Telegram dla tego konta, przechowywany w dzienniku",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram przechowuje te czaty wyłącznie na jednym urządzeniu. Aplikacja TgWitness działa przy użyciu autoryzacji tego konta i rejestruje każdą wiadomość, czas, plik oraz powiadomienie o usunięciu w podpisanym dzienniku, nawet po ich usunięciu przez drugą stronę. Nigdy nie wysyła potwierdzeń odczytu, powiadomień o pisaniu ani zrzutów ekranu.",
   "Turn on pseudo-secret for this account": "Włącz funkcję „pseudo-secret” dla tego konta",

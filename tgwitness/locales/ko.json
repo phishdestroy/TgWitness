@@ -6430,6 +6430,7 @@
   "Enter a @username or a user ID.": "@사용자명 또는 사용자 ID를 입력하세요.",
   "Connect this account to Telegram first.": "먼저 이 계정을 텔레그램에 연결하세요.",
   "Pseudo-secret": "의미상 비밀",
+  "Pseudo-secret ↗": "의미상 비밀 ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "이 계정의 텔레그램 종단 간 채팅 기록, 일지에 보관됨",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "텔레그램은 이러한 채팅 기록을 단일 기기에서만 보관합니다. TgWitness는 해당 계정의 인증을 통해 작동하며, 상대방이 메시지를 삭제한 후에도 모든 메시지, 타이머, 파일 및 삭제 알림을 서명된 일지에 기록합니다. 이 도구는 읽음 확인, 입력 중 알림 또는 스크린샷 알림을 절대 전송하지 않습니다.",
   "Turn on pseudo-secret for this account": "이 계정에 대해 '가상 비밀번호' 기능을 켜기",

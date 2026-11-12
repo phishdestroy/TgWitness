@@ -6430,6 +6430,7 @@
   "Enter a @username or a user ID.": "@ユーザー名またはユーザーIDを入力してください。",
   "Connect this account to Telegram first.": "まず、このアカウントをTelegramに連携してください。",
   "Pseudo-secret": "疑似秘密",
+  "Pseudo-secret ↗": "疑似秘密 ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "このアカウントのTelegramエンドツーエンドチャットは、ジャーナルに保存されています。",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegramはこれらのチャットを1台のデバイスにのみ保存します。TgWitnessは、このアカウント自身の認証に基づいて動作し、相手が削除した後であっても、すべてのメッセージ、タイムスタンプ、ファイル、および削除通知を署名付きログに記録します。既読通知、入力中通知、スクリーンショット通知は一切送信しません。",
   "Turn on pseudo-secret for this account": "このアカウントで「疑似秘密モード」を有効にする",

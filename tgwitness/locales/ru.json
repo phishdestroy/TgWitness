@@ -7050,6 +7050,7 @@
   "Enter a @username or a user ID.": "Введите @имя или ID пользователя.",
   "Connect this account to Telegram first.": "Сначала подключите этот аккаунт к Telegram.",
   "Pseudo-secret": "Псевдосекрет",
+  "Pseudo-secret ↗": "Псевдосекрет ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "Чаты аккаунта со сквозным шифрованием Telegram, с копией в журнале",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram хранит такие чаты только на одном устройстве. TgWitness участвует в них через авторизацию этого аккаунта и записывает в подписанный журнал каждое сообщение, таймер, файл и уведомление об удалении — даже после того, как собеседник их удалил. TgWitness не отправляет отметки о прочтении, «печатает» и уведомления о скриншоте.",
   "Turn on pseudo-secret for this account": "Включить псевдосекрет для этого аккаунта",

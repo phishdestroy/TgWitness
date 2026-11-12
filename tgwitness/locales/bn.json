@@ -6469,6 +6469,7 @@
   "Enter a @username or a user ID.": "@username বা ব্যবহারকারীর আইডি লিখুন।",
   "Connect this account to Telegram first.": "প্রথমে এই অ্যাকাউন্টটি টেলিগ্রামের সাথে সংযুক্ত করুন।",
   "Pseudo-secret": "ছদ্ম-গোপন",
+  "Pseudo-secret ↗": "ছদ্ম-গোপন ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "এই অ্যাকাউন্টের টেলিগ্রাম এন্ড-টু-এন্ড চ্যাটসমূহ জার্নালে সংরক্ষিত",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "টেলিগ্রাম এই চ্যাটগুলো শুধুমাত্র একটি ডিভাইসেই সংরক্ষণ করে। TgWitness এই অ্যাকাউন্টের নিজস্ব অনুমোদনে অংশগ্রহণ করে এবং স্বাক্ষরিত জার্নালে প্রতিটি বার্তা, টাইমার, ফাইল এবং মুছে ফেলার বিজ্ঞপ্তি রেকর্ড করে, অন্য পক্ষ সেগুলো মুছে ফেললেও। এটি কখনই পড়ার রসিদ, টাইপিং বা স্ক্রিনশট বিজ্ঞপ্তি পাঠায় না।",
   "Turn on pseudo-secret for this account": "এই অ্যাকাউন্টের জন্য ছদ্ম-গোপনীয়তা চালু করুন",

@@ -6430,6 +6430,7 @@
   "Enter a @username or a user ID.": "Nhập @tên người dùng hoặc ID người dùng.",
   "Connect this account to Telegram first.": "Trước tiên, hãy kết nối tài khoản này với Telegram.",
   "Pseudo-secret": "Mật khẩu ảo",
+  "Pseudo-secret ↗": "Mật khẩu ảo ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "Các cuộc trò chuyện đầu cuối trên Telegram của tài khoản này, được lưu trữ trong nhật ký",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram chỉ lưu trữ các cuộc trò chuyện này trên một thiết bị duy nhất. TgWitness hoạt động dựa trên quyền truy cập của chính tài khoản đó và ghi lại mọi tin nhắn, thời gian, tệp tin và thông báo xóa trong nhật ký đã được ký số, ngay cả khi bên kia đã xóa chúng. Công cụ này không bao giờ gửi thông báo đã đọc, đang gõ hoặc chụp màn hình.",
   "Turn on pseudo-secret for this account": "Bật chế độ \"pseudo-secret\" cho tài khoản này",

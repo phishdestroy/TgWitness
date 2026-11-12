@@ -6430,6 +6430,7 @@
   "Enter a @username or a user ID.": "ป้อน @username หรือ ID ผู้ใช้",
   "Connect this account to Telegram first.": "โปรดเชื่อมต่อบัญชีนี้กับ Telegram ก่อน",
   "Pseudo-secret": "ข้อมูลลับเทียม",
+  "Pseudo-secret ↗": "ข้อมูลลับเทียม ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "การสนทนาแบบ end-to-end ของบัญชีนี้บน Telegram ที่เก็บไว้ในบันทึก",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram เก็บการสนทนาเหล่านี้ไว้บนอุปกรณ์เดียวเท่านั้น TgWitness ทำงานโดยใช้การอนุญาตของบัญชีนี้เอง และบันทึกทุกข้อความ ตัวจับเวลา ไฟล์ และแจ้งเตือนการลบลงในบันทึกที่ลงนามไว้ แม้หลังจากฝ่ายตรงข้ามได้ลบข้อมูลเหล่านั้นไปแล้วก็ตาม มันจะไม่ส่งการยืนยันการอ่าน การแจ้งเตือนว่ากำลังพิมพ์ หรือการแจ้งเตือนการจับภาพหน้าจอเลย",
   "Turn on pseudo-secret for this account": "เปิดโหมด pseudo-secret สำหรับบัญชีนี้",

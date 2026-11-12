@@ -6508,6 +6508,7 @@
   "Enter a @username or a user ID.": "הזן @שם משתמש או מזהה משתמש.",
   "Connect this account to Telegram first.": "יש לחבר תחילה את החשבון הזה ל-Telegram.",
   "Pseudo-secret": "\"סוד מדומה\"",
+  "Pseudo-secret ↗": "\"סוד מדומה\" ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "צ'אטים מקצה לקצה של חשבון זה ב-Telegram, הנשמרים ביומן",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "Telegram שומר את הצ'אטים הללו במכשיר אחד בלבד. TgWitness פועל באישור החשבון עצמו ומתעד כל הודעה, טיימר, קובץ והודעת מחיקה ביומן החתום, גם לאחר שהצד השני מוחק אותם. הוא לעולם אינו שולח אישורי קריאה, התראות על הקלדה או צילומי מסך.",
   "Turn on pseudo-secret for this account": "הפעל את מצב \"סודי לכאורה\" עבור חשבון זה",

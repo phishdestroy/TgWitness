@@ -6469,6 +6469,7 @@
   "Enter a @username or a user ID.": "یک @username یا شناسهٔ کاربر را وارد کنید.",
   "Connect this account to Telegram first.": "ابتدا این حساب را به تلگرام متصل کنید.",
   "Pseudo-secret": "نیمه‌مخفی",
+  "Pseudo-secret ↗": "نیمه‌مخفی ↗",
   "Telegram end-to-end chats of this account, kept in the journal": "چت‌های سر به سر تلگرام این حساب، نگهداری‌شده در ژورنال",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.": "تلگرام این گفتگوها را تنها روی یک دستگاه نگه می‌دارد. TgWitness با مجوز خودِ این حساب وارد عمل می‌شود و هر پیام، تایمر، فایل و اطلاعیهٔ حذف را در دفترچهٔ امضا‌شده ثبت می‌کند، حتی پس از اینکه طرف مقابل آن‌ها را حذف کند. این ابزار هرگز رسیدهای خوانده‌شدن، اعلان‌های تایپ یا اسکرین‌شات را ارسال نمی‌کند.",
   "Turn on pseudo-secret for this account": "برای این حساب حالت نیمه‌مخفی را فعال کنید",
