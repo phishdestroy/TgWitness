@@ -327,9 +327,10 @@
 .event-row[data-category="system"] .event-excerpt { color: var(--muted); font-size: 12px; }
 .event-row[data-category="system"] .event-icon { opacity: .6; }
 .journal .card-heading #journal-to-slice { font-size: 12px; border-color: var(--border); color: var(--text-2); }
-.workflow-status .workflow-gap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 8px; padding: 6px 10px; border-radius: 6px; background: var(--warning-soft); color: var(--text); font-size: 13px; }
-.workflow-status .workflow-gap[hidden] { display: none; }
-.workflow-status .workflow-gap .text-link { font-size: 13px; }
+#view-start .workflow-gap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 16px; padding: 10px 14px; border: 1px solid var(--warning-border); border-radius: 10px; background: var(--warning-soft); color: var(--text); font-size: 13px; }
+#view-start .workflow-gap::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--status-warn); flex: none; }
+#view-start .workflow-gap[hidden] { display: none; }
+#view-start .workflow-gap .text-link { font-size: 13px; font-weight: 600; }
 #view-accounts .route-exit { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 400; }
 @media (max-width: 1199px) {
   #view-accounts .account-meta { grid-template-columns: minmax(0, 1fr); gap: 0; margin: 10px 0 12px; }
