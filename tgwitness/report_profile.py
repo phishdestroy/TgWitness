@@ -67,7 +67,7 @@ def compact_analytics(markup, say):
 
 def body(front, sections, chapters, replacements, say, preview=False):
     yield opening(say, preview)
-    yield ''.join(front)
+    yield ''.join(compact_cover(markup, say) for markup in front)
     yield navigation(chapters, say)
     if not preview:
         yield filters(say)
@@ -82,6 +82,22 @@ def body(front, sections, chapters, replacements, say, preview=False):
                     yield compact_analytics(markup, say) if key == 'analytics' else markup
         yield '</div></details>'
     yield '</div>'
+
+
+def compact_cover(markup, say):
+    from .report_layouts import _children
+    for _, attrs, child in _children(markup):
+        if 'hero-main' not in attrs.get('class', '').split():
+            continue
+        parts = []
+        for _, nested_attrs, nested in _children(child):
+            if 'facts' in nested_attrs.get('class', '').split():
+                nested = ('<details class="profile-cover-details"><summary>' + escape(say('Case details'))
+                          + '</summary>' + nested + '</details>')
+            parts.append(nested)
+        compact = child.split('>', 1)[0] + '>' + ''.join(parts) + child[child.rfind('</'):]
+        return markup.replace(child, compact, 1)
+    return markup
 
 
 def directories(events, titles, say, basis):
