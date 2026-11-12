@@ -5601,7 +5601,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "יש לתעד מי רכש, החזיק והעביר את קובץ ה-ZIP המקורי. יש לשמור בנפרד את ה-hash שלו, את טביעת האצבע של המפתח המהימן ואת העותקים העצמאיים של נקודות הבדיקה.",
   "Recorded drand rounds": "סבבי ה-drands שהוקלטו",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "סבבי drand שהוקלטו: {drand}; מתחיל לשאת TDX: {tdx}. אימות עצמאי אינו מסופק.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "פערים שנרשמו: {gaps}. מספרי הודעות שלא נצפו: {missing}.",
   "Recorded process starts": "תהליכים מוקלטים מתחילים",
   "Recorded; review required": "נרשם; נדרשת בדיקה",
   "Records after that checkpoint": "רשומות לאחר נקודת הבדיקה הזו",
@@ -8926,5 +8925,10 @@
     "one": "הצגת עוד הגדרה {n}",
     "two": "הצגת עוד {n} הגדרות",
     "other": "הצגת עוד {n} הגדרות"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "מספרי ההודעות לא הושוו: בבחירה זו אין ערוץ שלם או סופר-קבוצה שלמה עם הודעות שמורות בתאריכים שנבחרו.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "צ'אטים פרטיים, בוטים וקבוצות רגילות חולקים מספור אחד לכל החשבון, ולכן מספר שחסר באחד מהם עשוי להשתייך לצ'אט אחר. צ'אטים שלא הושוו מסיבה זו: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "פערים שנרשמו: {gaps}. הערות כיסוי: {notes}. מספרי הודעות שלא נצפו: {missing}.",
+  "Coverage notes": "הערות כיסוי",
+  "Showing {shown} of {total} coverage notes.": "הצגת {shown} מתוך {total} הערות כיסוי."
 }

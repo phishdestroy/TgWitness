@@ -1994,7 +1994,7 @@
   "Recorded configuration",
   "Recorded drand rounds",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.",
   "Recorded in deployment configuration",
   "Recorded intervals only. Blank space is time outside the recorded intervals.",
   "Recorded process starts",

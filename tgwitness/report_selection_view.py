@@ -8,6 +8,10 @@ GAP_NOTE = ("These message numbers were not observed in the source journal. Know
             "messages missing on recheck are separate observations.")
 CONTEXT_NOTE = ("Gaps use the chosen chats and the message-number span observed during the chosen dates. "
                 "Author and event filters do not create gaps. Neighboring saved messages are context and may be outside the selection.")
+NOT_COMPARED = ("Message numbers were not compared: this selection has no whole channel or supergroup with saved "
+                "messages in the chosen dates.")
+SHARED_NUMBERING = ("Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in "
+                    "one of them may belong to another chat. Chats not compared for this reason: {n}.")
 KINDS = {"message.new": "New message", "message.snapshot": "History snapshot",
          "message.recovered": "Recovered message", "message.edited": "Edits",
          "message.deleted": "Deletions", "message.missing_on_recheck": "Missing on recheck",
@@ -15,7 +19,7 @@ KINDS = {"message.new": "New message", "message.snapshot": "History snapshot",
 
 
 def text_keys():
-    return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, "Selected records", "Source journal records",
+    return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, NOT_COMPARED, SHARED_NUMBERING, "Selected records", "Source journal records",
             "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types", "Selected messages",
             "Unobserved message IDs", "Unobserved IDs: {ids} in {ranges} ranges.",
             "Showing {shown} of {total} ranges.", "Missing ID range", "Saved before", "Saved after",
@@ -64,9 +68,16 @@ def html(material, say):
     if not material["counts"]["selected_records"]:
         out += '<p class="lead">' + e(say("No records match this selection.")) + '</p>'
     gaps = material.get("id_gaps") or {}
-    if gaps.get("enabled"):
+    shared = gaps.get("chats_shared_numbering")
+    if gaps.get("enabled") and gaps.get("status") == "not_compared":
+        out += '<h3>' + e(say("Unobserved message IDs")) + '</h3><p class="lead">' + e(say(NOT_COMPARED)) + '</p>'
+        if shared:
+            out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
+    elif gaps.get("enabled"):
         out += '<h3>' + e(say("Unobserved message IDs")) + '</h3><p>' + e(say(GAP_NOTE)) + '</p>'
         out += '<p>' + e(say(CONTEXT_NOTE)) + '</p>'
+        if shared:
+            out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
         out += '<p class="lead">' + e(say("Unobserved IDs: {ids} in {ranges} ranges.",
                                         ids=gaps["ids_total"], ranges=gaps["ranges_total"])) + '</p>'
         rows = gaps.get("rows") or []
@@ -95,8 +106,16 @@ def pdf(lay, material):
     if not gaps.get("enabled"):
         return
     lay.heading(say("Unobserved message IDs"))
+    shared = gaps.get("chats_shared_numbering")
+    if gaps.get("status") == "not_compared":
+        lay.text(say(NOT_COMPARED))
+        if shared:
+            lay.text(say(SHARED_NUMBERING, n=shared), size=9)
+        return
     lay.text(say(GAP_NOTE), size=9)
     lay.text(say(CONTEXT_NOTE), size=9)
+    if shared:
+        lay.text(say(SHARED_NUMBERING, n=shared), size=9)
     lay.text(say("Unobserved IDs: {ids} in {ranges} ranges.", ids=gaps["ids_total"], ranges=gaps["ranges_total"]))
     rows = gaps.get("rows") or []
     if rows:

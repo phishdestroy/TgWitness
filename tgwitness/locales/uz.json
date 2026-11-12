@@ -5574,7 +5574,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "Asl ZIPni kim qo'lga kiritgani, saqlagani va uzatganini qayd eting. Uning xeshini, ishonchli kalit barmoq izini va mustaqil tekshiruv nuqtasi nusxalarini alohida saqlang.",
   "Recorded drand rounds": "drand-aylanishlari yozib olindi",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Yozib olingan drand aylanmalari: {drand}; TDXni olishni boshlaydi: {tdx}. Mustaqil tasdiqlash taqdim etilmagan.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Yozib olingan bo'shliqlar: {gaps}. Kuzatilmagan xabar raqamlari: {missing}.",
   "Recorded process starts": "Yozib olingan jarayon boshlanishlari",
   "Recorded; review required": "Yozib olindi; ko'rib chiqish talab etiladi",
   "Records after that checkpoint": "Ushbu tekshiruv nuqtasidan keyingi yozuvlar",
@@ -8879,5 +8878,10 @@
   "Show {n} more settings": {
     "one": "Yana {n} ta sozlamani ko'rsatish",
     "other": "Yana {n} ta sozlamani ko'rsatish"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "Xabar raqamlari taqqoslanmadi: bu tanlovda tanlangan sanalarda saqlangan xabarlari bor butun kanal yoki superguruh yo'q.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Shaxsiy suhbatlar, botlar va oddiy guruhlar butun akkaunt uchun bitta umumiy raqamlashdan foydalanadi, shu sababli ulardan birida yo'q raqam boshqa suhbatga tegishli bo'lishi mumkin. Shu sababli taqqoslanmagan suhbatlar: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Yozib olingan bo'shliqlar: {gaps}. Qamrov qaydlari: {notes}. Kuzatilmagan xabar raqamlari: {missing}.",
+  "Coverage notes": "Qamrov qaydlari",
+  "Showing {shown} of {total} coverage notes.": "{total} ta qamrov qaydidan {shown} tasi ko'rsatilmoqda."
 }

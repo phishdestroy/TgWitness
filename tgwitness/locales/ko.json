@@ -5547,7 +5547,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "원본 ZIP 파일을 누가 취득, 보유 및 전송했는지 기록하십시오. 해당 파일의 해시, 신뢰할 수 있는 키 지문 및 독립적인 체크포인트 사본을 별도로 보존하십시오.",
   "Recorded drand rounds": "기록된 드랜드(drand) 라운드",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "기록된 drand 라운드: {drand}; TDX 전송 시작: {tdx}. 독립적인 검증은 제공되지 않습니다.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "기록된 누락: {gaps}. 관측되지 않은 메시지 번호: {missing}.",
   "Recorded process starts": "기록된 프로세스 시작",
   "Recorded; review required": "기록됨; 검토 필요",
   "Records after that checkpoint": "해당 체크포인트 이후의 기록",
@@ -8832,5 +8831,10 @@
   "Show {n} more setting": "설정 {n}개 더 보기",
   "Show {n} more settings": {
     "other": "설정 {n}개 더 보기"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "메시지 번호를 비교하지 않았습니다. 이 선택에는 선택한 날짜에 저장된 메시지가 있는 전체 채널이나 슈퍼그룹이 없습니다.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "비공개 채팅, 봇, 일반 그룹은 계정 전체에서 하나의 번호 체계를 함께 쓰므로, 그중 한 곳에서 빠진 번호는 다른 채팅의 것일 수 있습니다. 이 이유로 비교하지 않은 채팅: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "기록된 누락: {gaps}. 커버리지 메모: {notes}. 관측되지 않은 메시지 번호: {missing}.",
+  "Coverage notes": "커버리지 메모",
+  "Showing {shown} of {total} coverage notes.": "커버리지 메모 {total}개 중 {shown}개를 표시 중입니다."
 }

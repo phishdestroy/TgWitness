@@ -5547,7 +5547,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "Ghi lại thông tin về người đã thu thập, lưu giữ và chuyển giao tệp ZIP gốc. Bảo toàn riêng biệt giá trị băm (hash) của tệp, dấu vân tay khóa đáng tin cậy và các bản sao điểm kiểm tra độc lập.",
   "Recorded drand rounds": "Các vòng drand được ghi lại",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Các vòng drand được ghi lại: {drand}; bắt đầu truyền TDX: {tdx}. Không cung cấp xác thực độc lập.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Các khoảng trống được ghi lại: {gaps}. Các số tin nhắn không được ghi nhận: {missing}.",
   "Recorded process starts": "Các quá trình được ghi lại bắt đầu",
   "Recorded; review required": "Đã ghi lại; cần xem xét",
   "Records after that checkpoint": "Các bản ghi sau điểm kiểm tra đó",
@@ -8832,5 +8831,10 @@
   "Show {n} more setting": "Hiện thêm {n} cài đặt",
   "Show {n} more settings": {
     "other": "Hiện thêm {n} cài đặt"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "Chưa so sánh số tin nhắn: lựa chọn này không có kênh hoặc siêu nhóm trọn vẹn nào có tin nhắn đã lưu trong các ngày đã chọn.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Trò chuyện riêng tư, bot và nhóm thông thường dùng chung một dãy số cho toàn tài khoản, nên một số bị thiếu ở một trong số đó có thể thuộc về cuộc trò chuyện khác. Số cuộc trò chuyện không được so sánh vì lý do này: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Các khoảng trống được ghi lại: {gaps}. Ghi chú về phạm vi: {notes}. Các số tin nhắn không được ghi nhận: {missing}.",
+  "Coverage notes": "Ghi chú về phạm vi",
+  "Showing {shown} of {total} coverage notes.": "Đang hiển thị {shown} trong tổng số {total} ghi chú về phạm vi."
 }

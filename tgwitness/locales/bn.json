@@ -5574,7 +5574,6 @@
   "Record who acquired, held and transferred the original ZIP. Preserve its hash, the trusted key fingerprint and independent checkpoint copies separately.": "রেকর্ড করুন কে মূল ZIP ফাইলটি অর্জন, ধারণ ও স্থানান্তর করেছে। এর হ্যাশ, বিশ্বাসযোগ্য কী ফিঙ্গারপ্রিন্ট এবং স্বাধীন চেকপয়েন্ট কপিগুলো পৃথকভাবে সংরক্ষণ করুন।",
   "Recorded drand rounds": "drandরাউন্ড রেকর্ড করা হয়েছে",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "রেকর্ডকৃত drand রাউন্ড: {drand}; TDX শুরু করে: {tdx}। স্বাধীন যাচাইকরণ সরবরাহ করা হয়নি।",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "রেকর্ডকৃত ফাঁক: {gaps}। পর্যবেক্ষণ করা হয়নি এমন বার্তা নম্বর: {missing}।",
   "Recorded process starts": "রেকর্ডকৃত প্রক্রিয়া শুরু",
   "Recorded; review required": "রেকর্ড করা হয়েছে; পর্যালোচনা প্রয়োজন",
   "Records after that checkpoint": "সেই চেকপয়েন্টের পর রেকর্ডসমূহ",
@@ -8879,5 +8878,10 @@
   "Show {n} more settings": {
     "one": "আরও {n}টি সেটিং দেখান",
     "other": "আরও {n}টি সেটিং দেখান"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "বার্তা নম্বর তুলনা করা হয়নি: এই নির্বাচনে নির্বাচিত তারিখে সংরক্ষিত বার্তাসহ কোনো সম্পূর্ণ চ্যানেল বা সুপারগ্রুপ নেই।",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "ব্যক্তিগত চ্যাট, বট ও সাধারণ গ্রুপ পুরো অ্যাকাউন্টের একটিই নম্বরক্রম ভাগ করে, তাই এগুলোর একটিতে অনুপস্থিত নম্বর অন্য চ্যাটের হতে পারে। এই কারণে তুলনা করা হয়নি এমন চ্যাট: {n}।",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "রেকর্ডকৃত ফাঁক: {gaps}। কভারেজ নোট: {notes}। পর্যবেক্ষণ করা হয়নি এমন বার্তা নম্বর: {missing}।",
+  "Coverage notes": "কভারেজ নোট",
+  "Showing {shown} of {total} coverage notes.": "{total}টি কভারেজ নোটের মধ্যে {shown}টি দেখানো হচ্ছে।"
 }

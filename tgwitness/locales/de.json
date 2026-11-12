@@ -5273,7 +5273,6 @@
   "Independent verification of this copy is still required.": "Eine unabhängige Prüfung dieser Kopie ist noch erforderlich.",
   "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Validierte zeitliche Grenze bis Eintrag #{n}; {tail} spätere Einträge liegen außerhalb dieser Grenze.",
   "No independently validated time bound is included in this copy.": "Diese Kopie enthält keine unabhängig validierte zeitliche Grenze.",
-  "Recorded gaps: {gaps}. Message numbers not observed: {missing}.": "Aufgezeichnete Lücken: {gaps}. Nicht beobachtete Nachrichtennummern: {missing}.",
   "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.": "Aufgezeichnete drand-Runden: {drand}; Starts mit TDX: {tdx}. Eine unabhängige Validierung liegt nicht bei.",
   "Operator declarations supplied: {n}.": "Vom Betreiber gemachte Fallangaben: {n}.",
   "Review the source identifiers and recorded acquisition context.": "Prüfen Sie jede Beobachtung zusammen mit ihren Quellenkennungen und dem Erfassungsprotokoll.",
@@ -8879,5 +8878,10 @@
   "Show {n} more settings": {
     "one": "{n} weitere Einstellung anzeigen",
     "other": "{n} weitere Einstellungen anzeigen"
-  }
+  },
+  "Message numbers were not compared: this selection has no whole channel or supergroup with saved messages in the chosen dates.": "Nachrichtennummern wurden nicht verglichen: Diese Auswahl enthält keinen ganzen Kanal und keine ganze Supergruppe mit gespeicherten Nachrichten im gewählten Zeitraum.",
+  "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Private Chats, Bots und normale Gruppen teilen sich eine kontoweite Nummerierung; eine dort fehlende Nummer kann daher zu einem anderen Chat gehören. Aus diesem Grund nicht verglichene Chats: {n}.",
+  "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Aufgezeichnete Lücken: {gaps}. Hinweise zum Umfang: {notes}. Nicht beobachtete Nachrichtennummern: {missing}.",
+  "Coverage notes": "Hinweise zum Umfang",
+  "Showing {shown} of {total} coverage notes.": "{shown} von {total} Hinweisen zum Umfang werden angezeigt."
 }

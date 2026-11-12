@@ -31,7 +31,7 @@ MINIMUM = ("Minimum for evidence: integrity, the signer key, and external time f
 ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip", "chat": "tgwitness-chat-export.zip",
             "account": "account-export.zip", "account_chat": "account-export.zip", "sharing": "disclosure.zip"}
 LABELS = {"records": "Records", "first": "First record", "last": "Last record", "fingerprint": "Signing key fingerprint (SHA-256)",
-          "gaps": "Gaps", "periods": "Continuous observation periods", "unobserved": "Message numbers not observed",
+          "gaps": "Gaps", "notes": "Coverage notes", "periods": "Continuous observation periods", "unobserved": "Message numbers not observed",
           "verified_stamps": "Validated timestamp receipts", "other_stamps": "Other timestamp receipts",
           "anchored_through": "Timestamp covers through record", "unanchored_tail": "Records after that checkpoint",
           "timestamp": "Timestamp", "messages": "Messages", "tasks_done": "Tasks completed", "tasks_total": "Tasks planned",
@@ -43,7 +43,7 @@ RESULTS = {
     "integrity_unknown": "Independent verification of this copy is still required.",
     "time": "Validated time bound through record #{n}; {tail} later records are outside that bound.",
     "time_unknown": "No independently validated time bound is included in this copy.",
-    "coverage": "Recorded gaps: {gaps}. Message numbers not observed: {missing}.",
+    "coverage": "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.",
     "witness": "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.",
     "custody": "Operator declarations supplied: {n}. The custody record of who acquired, held and transferred the original ZIP completes them.",
     "meaning": "Each statement cites the archive, file and record it rests on.",
@@ -198,7 +198,8 @@ def journal(context, coverage):
         "Observation periods and interruptions are derived from recorded collector activity. A minimized extract lists how many records were kept, changed or omitted.",
         "Coverage lists the observed periods and the recorded gaps. Message numbers not observed are gaps in observation; deletions are recorded as deletion notices.",
         "Compare coverage.json and the selection in manifest.json with the period and chats relevant to the case. Explain each material gap before drawing conclusions from absence.",
-        {"gaps": len(coverage.get("gaps") or []), "periods": len(coverage.get("continuous") or []),
+        {"gaps": len(coverage.get("gaps") or []), "notes": coverage.get("notes_total") or 0,
+         "periods": len(coverage.get("continuous") or []),
          "unobserved": sum(c.get("not_observed", 0) for c in coverage.get("unobserved_ids") or []),
          **{k: counts[k] for k in ("unchanged", "minimised", "left_out") if k in counts}}, ("coverage.json", "manifest.json")))
     signals = digest.get("trust_signals") or {}
@@ -210,7 +211,8 @@ def journal(context, coverage):
     result(rows[0], "integrity" if context.get("journal_verified") is True else "integrity_unknown", n=count)
     result(rows[1], "time" if latest else "time_unknown", n=latest["event_count"] if latest else 0,
            tail=count-latest["event_count"] if latest else 0)
-    result(rows[2], "coverage", gaps=rows[2]["facts"]["gaps"], missing=rows[2]["facts"]["unobserved"])
+    result(rows[2], "coverage", gaps=rows[2]["facts"]["gaps"], notes=rows[2]["facts"]["notes"],
+           missing=rows[2]["facts"]["unobserved"])
     result(rows[3], "witness", drand=signals.get("drand", 0), tdx=signals.get("tdx", 0))
     options = context.get("options") or {}
     return jurisdiction_guidance.attach(common("handover" if handover else "evidence", context.get("report_id"), context.get("fingerprint"), rows,
