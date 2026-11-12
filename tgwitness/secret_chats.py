@@ -458,7 +458,10 @@ class SecretChats:
                                             "reason": refused,
                                             "meaning": "The encrypted file stays queued; nothing was downloaded."})
                 return
-            await self.manager.save_file(reference, temporary)
+            size = getattr(reference, "size", 0)
+            size = max(0, size) if isinstance(size, int) else 0
+            timeout = self.collector.param("media_timeout_seconds") + size // (self.collector.param("media_min_speed_kbps") * 1024)
+            await asyncio.wait_for(self.manager.save_file(reference, temporary), timeout)
             digest, size, repaired = await complete_in_thread(retain_file, temporary, media_root)
             self.note("file", {"secret_chat_id": item["secret_chat_id"], "random_id": item["random_id"],
                                **({"message_event": message} if message else {}),
