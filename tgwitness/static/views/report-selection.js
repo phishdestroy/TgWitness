@@ -1,3 +1,5 @@
+import {createReportEditor} from './report-editor.js?v=1';
+
 export function createReportSelection({root,tr,json,getOwner,ready,options,active}) {
   const find=id=>root.querySelector('#'+id), kinds=[...root.querySelectorAll('[data-report-kind]')];
   const make=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=String(text??'');if(cls)el.className=cls;return el;};
@@ -6,6 +8,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   let step=0,previewTimer=null;
   const steps=['report-data','report-content','report-preview'];
   const pages=[find('report-data'),find('report-content-step'),find('report-preview')];
+  const editor=createReportEditor({root,tr,onEdit:()=>{if(step!==1)selectStep(1);}});
   const count=value=>Number(value||0).toLocaleString();
   const fields={chats:find('report-selection-chats'),senders:find('report-selection-senders')};
   const containers={chats:find('report-chat-catalog'),senders:find('report-sender-catalog')};
@@ -48,6 +51,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   function selectStep(index,focus=true){
     step=Math.max(0,Math.min(index,pages.length-1));
     pages.forEach((page,i)=>page.hidden=i!==step);
+    editor.step(step);
     root.querySelectorAll('[data-report-step]').forEach((button,i)=>{
       button.setAttribute('aria-current',i===step?'step':'false');
       button.setAttribute('aria-controls',pages[i].id);
@@ -56,7 +60,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     find('report-step-next').hidden=step===2;
     find('report-draft-downloads').hidden=step!==2;
     find('report-step-position').textContent=(step+1)+' / '+pages.length;
-    if(focus){pages[step].scrollIntoView({block:'start',behavior:'instant'});pages[step].querySelector('[tabindex="-1"]')?.focus({preventScroll:true});}
+    if(focus){root.scrollIntoView({block:'start',behavior:'instant'});pages[step].querySelector('[tabindex="-1"]')?.focus({preventScroll:true});}
     if(step===2&&ready())void preview(false);
   }
   function renderCatalog(key){
@@ -85,7 +89,6 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   }
   function changed(event){
     if(event?.target?.matches('[data-report-search]'))return;
-    updateAppearance();
     if(event?.target===fields.chats&&fields.chats.value.trim())allChats.checked=false;
     revision++;controls();read();
     if(event?.target===fields.chats||event?.target===fields.senders||event?.target?.name==='report-selection-mode'){
@@ -93,8 +96,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     }
     if(response||pending){find('report-preview-stale').hidden=false;find('report-preview-result').dataset.stale='true';}
     controls();clearTimeout(previewTimer);
-    if(step===2||event?.target?.id==='report-selection-chosen'&&!catalog.chats.length)
-      previewTimer=setTimeout(()=>preview(false),300);
+    if(step!==1)previewTimer=setTimeout(()=>preview(false),500);
   }
   function table(headings,rows,cls=''){
     const scroll=make('div','','report-preview-scroll'),el=make('table','',cls),head=make('thead'),trHead=make('tr');
@@ -165,6 +167,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     return section;
   }
   function render(data){
+    editor.summary(data);
     const target=find('report-preview-result'),source=data.source||{},counts=data.counts||{},stats=make('dl','','report-preview-counts');
     for(const [name,value] of [[tr('Selected records'),counts.selected_records],[tr('Message observations'),counts.message_observations],
       [tr('Observed message senders'),counts.participants],[tr('Chats'),counts.chats]]){const entry=make('div');entry.append(make('dt',name),make('dd',count(value)));stats.append(entry);}
@@ -181,6 +184,10 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     if(analytics.participants){const block=chart('Participant activity',(analytics.participants.rows||[]).map(row=>({label:rowLabel(row),value:row.total})));
       block.append(make('p',tr('Sender counts use new messages, history observations and recovered messages.'),'hint'));grid.append(block);}
     if(analytics.chats)grid.append(chart('Activity by chat',(analytics.chats.rows||[]).map(row=>({label:rowLabel(row),value:row.total}))));
+    if(analytics.composition)grid.append(chart('Record composition',[
+      ['new','New messages'],['snapshot','History observations'],['recovered','Recovered messages'],
+      ['edited','Edits'],['deleted','Deletion notices'],['missing','Missing on recheck']
+    ].map(([key,label])=>({label:tr(label),value:analytics.composition[key]||0}))));
     if(analytics.hourly){
       const block=make('section','','report-preview-chart report-preview-hours');block.append(make('h4',tr('Activity by weekday and hour')));
       const days=[tr('Monday'),tr('Tuesday'),tr('Wednesday'),tr('Thursday'),tr('Friday'),tr('Saturday'),tr('Sunday')],rows=analytics.hourly.rows||[];
@@ -195,29 +202,32 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     }
     for(const key of ['activity','participants','chats'])if(analytics[key]?.status&&analytics[key].status!=='available')
       target.append(make('p',tr('A chart could not be grouped within the report limits. No approximate counts are shown.'),'hint'));
-    if(data.changes)target.append(renderChanges(data.changes));
-    target.append(make('h4',tr('Selected message samples')));
+    if(data.changes){const detail=make('details','','editor-details');detail.append(make('summary',tr('Changes and deleted messages')),renderChanges(data.changes));target.append(detail);}
+    const samples=make('details','','editor-details');samples.append(make('summary',tr('Selected message samples')));target.append(samples);
     const messages=data.messages||{},rows=messages.rows||[];
-    target.append(table([tr('Record'),tr('Chat'),tr('Type'),tr('Observed at (UTC)'),tr('Message preview')],rows.map(row=>[
+    samples.append(table([tr('Record'),tr('Chat'),tr('Type'),tr('Observed at (UTC)'),tr('Message preview')],rows.map(row=>[
       '#'+row.seq,String(row.chat_id??'—'),kindLabel(row.kind),String(row.observed_at||'—'),message(row)
     ]),'report-message-table'));
-    target.append(make('p',tr('Showing {shown} of {total} selected records. Possible secrets are masked in this preview.',{shown:count(rows.length),total:count(messages.total)}),'hint'));
+    samples.append(make('p',tr('Showing {shown} of {total} selected records. Possible secrets are masked in this preview.',{shown:count(rows.length),total:count(messages.total)}),'hint'));
     const gaps=data.id_gaps||{};
     if(gaps.enabled){
-      target.append(make('h4',tr('Missing message IDs')),make('p',tr('{ranges} ranges, {ids} message IDs not observed.',{ranges:count(gaps.ranges_total),ids:count(gaps.ids_total)}),'hint'));
-      target.append(table([tr('Chat'),tr('Missing IDs'),tr('Before the gap'),tr('After the gap')],(gaps.rows||[]).map(row=>[
+      const detail=make('details','','editor-details');detail.append(make('summary',tr('Missing message IDs')));target.append(detail);
+      detail.append(make('p',tr('{ranges} ranges, {ids} message IDs not observed.',{ranges:count(gaps.ranges_total),ids:count(gaps.ids_total)}),'hint'));
+      detail.append(table([tr('Chat'),tr('Missing IDs'),tr('Before the gap'),tr('After the gap')],(gaps.rows||[]).map(row=>[
         String(row.chat_id),String(row.start)+' – '+String(row.end)+' ('+count(row.count)+')',message(row.before),message(row.after)
       ]),'report-gap-table'));
-      if(gaps.truncated)target.append(make('p',tr('Preview shortened. The saved report lists the available gap details.'),'hint'));
-      target.append(make('p',tr('Missing numbers are gaps in the observed IDs; deletions are recorded as separate notices. Neighboring records are context and may be outside the chosen authors, event types or dates.'),'hint'));
+      if(gaps.truncated)detail.append(make('p',tr('Preview shortened. The saved report lists the available gap details.'),'hint'));
+      detail.append(make('p',tr('Missing numbers are gaps in the observed IDs; deletions are recorded as separate notices. Neighboring records are context and may be outside the chosen authors, event types or dates.'),'hint'));
     }
   }
   async function preview(reveal=true){
     if(!ready()||pending)return;
-    const body=options();if(!root.reportValidity())return;
+    const body=options();if(!(reveal?root.reportValidity():root.checkValidity()))return;
     const mine=++request,owner=getOwner(),version=revision;
     controller?.abort();controller=new AbortController();pending=true;controls();
     find('report-preview-status').textContent=tr('Reading the selected journal records…');
+    find('report-data-status').textContent=tr('Reading the selected journal records…');
+    find('report-data-overview').setAttribute('aria-busy','true');
     find('report-preview-retry').hidden=true;
     const current=()=>mine===request&&owner===getOwner()&&active();
     try{
@@ -228,13 +238,16 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       renderCatalog('chats');renderCatalog('senders');render(data);
       find('report-preview-stale').hidden=true;delete find('report-preview-result').dataset.stale;
       find('report-preview-status').textContent=tr('Selected records')+': '+count(data.counts?.selected_records);
+      find('report-data-status').textContent='';
       if(reveal){find('report-preview').scrollIntoView({block:'start',behavior:'instant'});find('report-preview-title').focus({preventScroll:true});}
     }catch(error){
       if(!current()||['AbortError','StaleView'].includes(error.name))return;
       find('report-preview-status').textContent=tr('Could not build the preview.')+' '+error.message;find('report-preview-retry').hidden=false;
+      find('report-data-status').textContent=find('report-preview-status').textContent;
     }finally{if(mine===request&&owner===getOwner()){
       pending=false;controls();
-      if(step===2&&version!==revision){clearTimeout(previewTimer);previewTimer=setTimeout(()=>preview(false),300);}
+      find('report-data-overview').setAttribute('aria-busy','false');
+      if(step!==1&&version!==revision){clearTimeout(previewTimer);previewTimer=setTimeout(()=>preview(false),500);}
     }}
   }
   for(const key of ['chats','senders'])searches[key].addEventListener('input',()=>renderCatalog(key));
@@ -246,23 +259,10 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   root.addEventListener('invalid',event=>{
     const index=pages.findIndex(page=>page.contains(event.target));
     if(index>=0&&index!==step)selectStep(index,false);
+    editor.reveal(event.target);
     let ancestor=event.target.parentElement;
     while(ancestor&&ancestor!==root){if(ancestor.tagName==='DETAILS')ancestor.open=true;ancestor=ancestor.parentElement;}
   },true);
-  root.querySelectorAll('.studio-controls > fieldset.studio-section').forEach(fieldset=>{
-    const detail=make('details','','report-advanced'),summary=make('summary',fieldset.querySelector('legend')?.textContent||'');
-    fieldset.before(detail);detail.append(summary,fieldset);
-  });
-  const templates=root.querySelector('.report-templates'),designs=root.querySelector('.report-designs');
-  designs.before(templates);
-  const appearance=make('details','','report-advanced report-appearance'),appearanceTitle=make('summary');
-  designs.before(appearance);appearance.append(appearanceTitle,designs);
-  const updateAppearance=()=>{appearanceTitle.textContent=tr('Report design')+' · '+
-    (designs.querySelector('input:checked')?.closest('label')?.querySelector('strong')?.textContent||'');};
-  designs.addEventListener('change',updateAppearance);
-  const stage=root.querySelector('.studio-stage'),stageDetail=make('details','','report-stage-detail');
-  stageDetail.open=matchMedia('(min-width:1100px)').matches;
-  stageDetail.append(make('summary',tr('Preview')),...stage.childNodes);stage.append(stageDetail);
   selectStep(0,false);
   find('report-preview-run').addEventListener('click',()=>preview());find('report-preview-retry').addEventListener('click',()=>preview());
   find('report-load-catalog').addEventListener('click',()=>preview(false));
@@ -274,10 +274,11 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     find('report-preview-result').replaceChildren();delete find('report-preview-result').dataset.stale;
     find('report-preview-status').textContent='';find('report-preview-stale').hidden=find('report-preview-retry').hidden=true;
     for(const box of Object.values(containers))box.replaceChildren();find('report-chat-count').textContent=find('report-sender-count').textContent='';
-    selectStep(0,false);controls();
+    editor.reset();selectStep(0,false);controls();
   }
   return {read,changed,preview,leave,reset,reveal(field){
     const index=pages.findIndex(page=>page.contains(field));if(index>=0)selectStep(index,false);
+    editor.reveal(field);
     let parent=field.parentElement;while(parent&&parent!==root){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement;}
     field.scrollIntoView({block:'center'});field.focus({preventScroll:true});
   },
@@ -289,8 +290,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       const set=new Set(selection.kinds||kinds.map(input=>input.dataset.reportKind));for(const input of kinds)input.checked=set.has(input.dataset.reportKind);
       find('report-selection-gaps').checked=selection.id_gaps!==false;controls();renderCatalog('chats');renderCatalog('senders');
       if(stamp&&stamp!==JSON.stringify(options())){find('report-preview-stale').hidden=false;find('report-preview-result').dataset.stale='true';}
-      if(selection.enabled&&!catalog.chats.length){clearTimeout(previewTimer);previewTimer=setTimeout(()=>preview(false),100);}
-      updateAppearance();
+      clearTimeout(previewTimer);previewTimer=setTimeout(()=>preview(false),100);
     }
   };
 }

@@ -2941,7 +2941,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=1').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=2').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
@@ -2975,10 +2975,16 @@ function setReportTemplate(value){
 let reportOwner=null,reportReady=false,reportDirty=false,reportRequest=0,reportLoading=null,reportSaving=false;
 let reportPreviewRequest=0,reportPreviewTimer=null,reportPreviewBusy=false;
 let reportPreviewSection="cover";
+let reportPreviewTarget=null;
+function reportPreviewState(value){
+  const stage=$("report-form").querySelector('.studio-stage');stage.dataset.previewState=value;
+  stage.setAttribute('aria-busy',String(value==='loading'||value==='waiting'));
+}
 const reportKey=()=>state.workspaceRevision+":"+state.profile;
 function resetReportSettings(){
   clearTimeout(reportPreviewTimer);reportPreviewRequest++;reportPreviewBusy=false;
   reportPreviewSection="cover";
+  reportPreviewTarget=null;reportPreviewState('empty');
   $("report-preview-frame").removeAttribute("srcdoc");show("report-preview-frame",false);show("report-preview-empty",true);
   delete $("report-preview-frame").dataset.reportDesign;
   $("report-design-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
@@ -3000,7 +3006,8 @@ async function loadReportSettings(){
   await Promise.all([reportSelectionReady,reportConfigurationsReady,reportGuidanceReady]);
   const owner=reportKey();
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
-  if(reportSaving||reportReady&&reportDirty)return;
+  if(reportSaving)return;
+  if(reportReady&&reportDirty){if(!$("report-form").hidden)scheduleReportPreview();return;}
   if(reportLoading)return reportLoading;
   const request=++reportRequest,current=()=>reportOwner===owner&&reportKey()===owner&&request===reportRequest;
   reportReady=false;reportControls();$("report-status").textContent=tr("Loading…");
@@ -3044,6 +3051,9 @@ function syncReportParts(){
   const guidanceTab=$("report-form").querySelector('[data-preview-section="guidance"]');
   guidanceTab.hidden=!guidanceActive;
   if(!guidanceActive&&reportPreviewSection==='guidance')showReportPreviewSection('cover');
+  const hasCharts=["activity","hourly","participant","chat","composition"].some(key=>$("report-"+key+"-chart").checked);
+  $("report-form").querySelector('[data-preview-section="analytics"]').disabled=!hasCharts;
+  if(!hasCharts&&reportPreviewSection==='analytics'){reportPreviewTarget=null;showReportPreviewSection('cover');}
   if(["question","method","findings","conclusion"].some(key=>$("report-review-"+key).value.trim()))parts.push(tr("Examination notes"));
   if($("report-activity-chart").checked)parts.push(tr("Activity over time"));
   if($("report-hourly-chart").checked)parts.push(tr("Activity by weekday and hour"));
@@ -3074,6 +3084,7 @@ function reportDraft(){
 }
 function scheduleReportPreview(){
   clearTimeout(reportPreviewTimer);
+  reportPreviewState('waiting');
   reportPreviewTimer=setTimeout(()=>refreshReportPreview(),900);
 }
 function discardReportDraft(){
@@ -3087,45 +3098,53 @@ function showReportPreviewSection(section){
   $("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewSection===section)));
   const frame=$("report-preview-frame");
   if(frame.hidden)return;
-  if(section==='analytics')frame.contentDocument?.getElementById('report-analytics')?.scrollIntoView({block:'start'});
+  if(section==='analytics'){
+    const target=reportPreviewTarget&&frame.contentDocument?.querySelector(reportPreviewTarget);
+    (target||frame.contentDocument?.getElementById('report-analytics'))?.scrollIntoView({block:'start'});
+  }
   else if(section==='guidance')frame.contentDocument?.getElementById('jurisdiction-guidance')?.scrollIntoView({block:'start'});
   else frame.contentWindow?.scrollTo(0,0);
 }
 $("report-preview-frame").addEventListener('load',()=>showReportPreviewSection(reportPreviewSection));
-$("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.addEventListener('click',()=>showReportPreviewSection(button.dataset.previewSection)));
+$("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.addEventListener('click',()=>{reportPreviewTarget=null;showReportPreviewSection(button.dataset.previewSection);}));
+$("report-form").addEventListener('report:chart',event=>{
+  const classes={'report-activity-chart':'activity','report-hourly-chart':'heatmap','report-participant-chart':'participants','report-chat-chart':'chats','report-composition-chart':'composition'};
+  reportPreviewTarget=event.detail.enabled?'.chart-'+classes[event.detail.id]:null;
+});
 async function refreshReportPreview(){
   clearTimeout(reportPreviewTimer);
   if(!reportReady||reportOwner!==reportKey()||$("report-form").hidden||window.TGW_ONLINE_DEMO)return;
   if(!$("report-form").checkValidity()){
-    $("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+    reportPreviewState('invalid');$("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
   }
   const body=reportDraft();
   if(!$("report-form").checkValidity()){
-    $("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+    reportPreviewState('invalid');$("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
   }
   const owner=reportOwner,snapshot=JSON.stringify(body),request=++reportPreviewRequest;
   const current=()=>owner===reportOwner&&owner===reportKey()&&request===reportPreviewRequest;
-  reportPreviewBusy=true;reportControls();$("report-design-preview-status").textContent=tr("Preparing preview…");
+  reportPreviewBusy=true;reportControls();reportPreviewState('loading');$("report-design-preview-status").textContent=tr("Preparing preview…");
   try{
     const result=await json("report-design-preview",body,viewOptions('evidence'));
     if(!current()||snapshot!==JSON.stringify(reportDraft())||state.view!=='evidence')return;
     $("report-preview-frame").dataset.reportDesign=body.design;
     $("report-preview-frame").srcdoc=result.html;show("report-preview-frame",true);show("report-preview-empty",false);
+    reportPreviewState('ready');
     $("report-design-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
   }catch(error){
     if(!current()||error instanceof StaleView||error.name==='AbortError')return;
-    $("report-design-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
+    reportPreviewState('error');$("report-design-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
   }finally{if(current()){reportPreviewBusy=false;reportControls();}}
 }
 $("report-preview-refresh").addEventListener("click",refreshReportPreview);
-$("exports-tab-settings").addEventListener("click",()=>{if(reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();});
+$("exports-tab-settings").addEventListener("click",()=>{if(reportReady)scheduleReportPreview();});
 $("report-form").addEventListener("input",event=>{if(reportReady&&!event.target.closest('#report-profiles')&&!event.target.matches("[data-report-search]")){
   reportSelection?.changed(event);
   if(event.target.name==="report-template")applyReportPreset();
   else if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit"].includes(event.target.id))setReportTemplate("custom");
   syncReportParts();reportDirty=true;$("report-status").textContent="";
-  if(event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')reportPreviewSection='analytics';
-  if(event.target.name==='report-design')reportPreviewSection='cover';
+  if((event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')&&!$("report-form").querySelector('[data-preview-section="analytics"]').disabled)reportPreviewSection='analytics';
+  if(event.target.name==='report-design'||event.target.id==='report-case-title'){reportPreviewSection='cover';reportPreviewTarget=null;}
   $("report-design-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();
 }});
 $("report-form").addEventListener("change",event=>{syncReportParts();reportSelection?.changed(event);});
