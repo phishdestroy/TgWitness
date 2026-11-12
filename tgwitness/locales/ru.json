@@ -8922,5 +8922,20 @@
   "Always included": "Всегда включено",
   "Select messages": "Выбрать сообщения",
   "Selected messages": "Выбранные сообщения",
-  "Select no more than {n} messages.": "Выберите не более {n} сообщений."
+  "Select no more than {n} messages.": "Выберите не более {n} сообщений.",
+  "Copy table": "Копировать таблицу",
+  "Copy unavailable. Select the table to copy it.": "Копирование недоступно. Выделите таблицу и скопируйте её.",
+  "First observed": "Впервые замечено",
+  "Key figures, observed profiles and searchable sections with links to chat records.": "Сводка, история профилей, поиск по разделам и переход к записям чата.",
+  "Last observed": "Последнее наблюдение",
+  "Messages from {chat}": "Сообщения из чата «{chat}»",
+  "Names and usernames as observed in the selected records. Dates show observations, not registration or change dates.": "Имена и юзернеймы из выбранных записей. Указаны даты наблюдений; даты регистрации и изменения имени по ним не определяются.",
+  "No matching rows on this page.": "На этой странице совпадений нет.",
+  "No sender profile observations in this reading copy.": "В этой части отчёта нет сохранённых наблюдений профилей отправителей.",
+  "Observed profiles": "История профилей",
+  "Profile overview": "Обзор профиля",
+  "Search all selected records": "Поиск по всем выбранным записям",
+  "Search this page": "Поиск по этой странице",
+  "Showing {shown} of {total} rows on this page": "Показано {shown} из {total} строк на этой странице",
+  "Source and counts": "Источник и подсчёты"
 }

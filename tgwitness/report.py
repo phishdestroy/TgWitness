@@ -941,7 +941,7 @@ CSS += DOSSIER_CSS
 CSS += report_charts.CSS
 CSS += report_design.CSS
 CSS += report_layouts.CSS
-SCRIPT += "\n" + CONSOLE_JS
+SCRIPT += "\n" + CONSOLE_JS + "\n" + report_layouts.report_profile.SCRIPT
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
 CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; script-src " + SCRIPT_HASH
        + "; frame-src 'self' file:; base-uri 'none'; form-action 'none'")

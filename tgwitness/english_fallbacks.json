@@ -3671,5 +3671,21 @@
   "Saved text",
   "Edits: {n}",
   "… and {n} more messages in journal-changes.jsonl.",
-  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain."
+  "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.",
+  "Contents",
+  "Copy table",
+  "Copy unavailable. Select the table to copy it.",
+  "First observed",
+  "Key figures, observed profiles and searchable sections with links to chat records.",
+  "Last observed",
+  "Messages from {chat}",
+  "Names and usernames as observed in the selected records. Dates show observations, not registration or change dates.",
+  "No matching rows on this page.",
+  "No sender profile observations in this reading copy.",
+  "Observed profiles",
+  "Profile overview",
+  "Search all selected records",
+  "Search this page",
+  "Showing {shown} of {total} rows on this page",
+  "Source and counts"
 ]
