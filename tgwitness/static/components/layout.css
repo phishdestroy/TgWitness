@@ -300,9 +300,10 @@
 .journal-more-filters[open] > summary { justify-self: end; }
 #view-start > .hint:last-child { margin-top: 18px; }
 @media (max-width: 767px) {
-  .notice.demo { padding: 8px 10px; gap: 6px; }
+  .notice.demo { min-width: 0; padding: 8px 10px; gap: 6px; }
   .demo-intro > span { display: none; }
-  .demo-actions { width: 100%; display: flex; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .demo-actions { width: 100%; display: flex; align-items: center; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .demo-actions > :is(button,a) { flex: none; white-space: nowrap; }
   .demo-actions > button { flex: none; min-height: 32px; padding: 4px 10px; }
   .demo-actions > button .icon, #demo-banner [data-export] { display: none; }
   .workspace .profile-switch { grid-template-columns: minmax(0, 1fr); }

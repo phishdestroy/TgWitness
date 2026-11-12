@@ -88,6 +88,10 @@ in [SECURITY.md](SECURITY.md), rather than a public issue with exploit details.
 
 ## Pull requests
 
+Keep completed changes in `main`. Use a short-lived branch for review, squash-merge
+each pull request into one commit, and let GitHub delete the merged branch.
+Published commit IDs stay stable so release manifests and verification links keep working.
+
 Keep each change focused and explain its effect on existing journals and collectors.
 Add a private regression when fixing data integrity, authentication, collection or an
 asynchronous UI error. Run the relevant checks and state exactly what was tested.
