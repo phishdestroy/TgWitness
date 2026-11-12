@@ -1,5 +1,5 @@
 :root {
-  --grad: linear-gradient(135deg, #3b82f6 0%, #6366f1 55%, #8b5cf6 100%);
+  --grad: linear-gradient(135deg, #2563eb 0%, #4f46e5 55%, #7c3aed 100%);
   --grad-soft: linear-gradient(135deg, rgb(59 130 246 / .10), rgb(139 92 246 / .10));
   --shadow-xs: 0 1px 2px rgb(16 24 40 / .05);
   --shadow-sm: 0 1px 2px rgb(16 24 40 / .04), 0 4px 14px -6px rgb(16 24 40 / .08);
