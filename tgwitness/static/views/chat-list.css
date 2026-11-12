@@ -33,7 +33,7 @@
 .chats-sidebar .chat-item:hover .chat-priority, .chats-sidebar .chat-priority:focus-visible { opacity: 1; }
 .workspace .chats-sidebar .chat-item.active, .workspace .chats-sidebar .chat-item.active:hover { background: var(--accent); border-color: var(--accent); }
 .chats-sidebar .chat-item.active :is(.chat-item-title, .chat-item-preview, .chat-item-time, .chat-item-badges .pill, .chat-item-priority) { color: #fff; }
-.chats-sidebar .chat-item.active :is(.chat-item-preview, .chat-item-time) { opacity: .85; }
+.chats-sidebar .chat-item.active :is(.chat-item-preview, .chat-item-time) { opacity: .92; }
 .chats-sidebar .chat-item.active .chat-item-badges .pill.pill-state { border-color: rgba(255, 255, 255, .6); }
 @media (hover: none) {
   .chats-sidebar .chat-priority { position: static; height: auto; min-height: 36px; background: none; box-shadow: none; opacity: 1; margin-inline-end: 4px; }

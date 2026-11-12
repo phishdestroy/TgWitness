@@ -24,7 +24,7 @@ export function createParameters(context) {
     if (entry.item.kind === "bool") entry.field.checked = next;
     else entry.field.value = entry.item.kind === "lines" ? next.join("\n") : String(next);
   };
-  const formatted = value => Array.isArray(value) ? tr(value.length === 1 ? "1 line" : "{n} lines", {n: value.length})
+  const formatted = value => Array.isArray(value) ? trn("{n} line", "{n} lines", value.length)
     : typeof value === "boolean" ? tr(value ? "On" : "Off") : Number(value).toLocaleString();
   const draft = () => Object.fromEntries([...fields].filter(([, entry]) => !equal(value(entry), entry.item.value))
     .map(([key, entry]) => [key, value(entry)]));

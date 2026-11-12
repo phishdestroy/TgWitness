@@ -85,7 +85,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
         tick(Math.max(pad + 8, Math.min(width - pad - 8, x + w / 2)), 'middle', v.messages.toLocaleString(), 'home-tick home-peak', height - h - 5);
       }
       const title = svgNode('title');
-      title.textContent = v.day + ': ' + tr('{n} messages', {n: v.messages}) + ' · ' + tr('{n} edits', {n: v.edits}) + ' · ' + tr('{n} deletions', {n: v.deletions});
+      title.textContent = v.day + ': ' + trn('{n} message', '{n} messages', v.messages) + ' · ' + tr('{n} edits', {n: v.edits}) + ' · ' + tr('{n} deletions', {n: v.deletions});
       bar.append(title);
       svg.append(bar);
       const lost = v.edits + v.deletions;

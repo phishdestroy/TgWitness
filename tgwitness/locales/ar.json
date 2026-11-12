@@ -3444,7 +3444,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "تم تثبيت دعم MCP. أعد تشغيل TgWitness لتفعيل نقطة النهاية.",
   "0 workspaces": "0 مساحة عمل",
   "1 hour": "ساعة واحدة",
-  "1 line": "سطر واحد",
   "1 minute to 90 days. Starts when the server creates the connection.": "من دقيقة واحدة إلى 90 يوماً. يبدأ عند إنشاء الخادم للاتصال.",
   "1 unsaved change": "تغيير واحد غير محفوظ",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">الإجراءات</span>",
@@ -5344,7 +5343,6 @@
   "Search all settings, including hidden ones": "البحث في كل الإعدادات، بما فيها المخفية",
   "Connected": "متصل",
   "Keep my manual changes": "الاحتفاظ بتغييراتي اليدوية",
-  "Show {n} more settings": "إظهار {n} إعدادات أخرى",
   "Show hidden setting": "إظهار الإعداد المخفي",
   "Proxy address": "عنوان الوكيل",
   "Continue without checking": "المتابعة دون تحقق",
@@ -9060,5 +9058,14 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "لم تستجب اللوحة. تحقق من أن TgWitness يعمل وأن هذا الجهاز يستطيع الوصول إليه.",
   "Add message numbers": "أضف أرقام الرسائل",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "معرّف الدردشة ثم نقطتان ثم أرقام الرسائل، أو روابط t.me/c. دردشة واحدة في كل سطر.",
-  "Could not read: {text}": "تعذّرت قراءة: {text}"
+  "Could not read: {text}": "تعذّرت قراءة: {text}",
+  "Show {n} more setting": "إظهار {n} إعداد آخر",
+  "Show {n} more settings": {
+    "zero": "إظهار {n} إعداد آخر",
+    "one": "إظهار {n} إعداد آخر",
+    "two": "إظهار {n} إعدادين آخرين",
+    "few": "إظهار {n} إعدادات أخرى",
+    "many": "إظهار {n} إعدادًا آخر",
+    "other": "إظهار {n} إعداد آخر"
+  }
 }

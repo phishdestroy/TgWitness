@@ -269,9 +269,25 @@
   .accounts-total strong { font-size: 20px; }
   .accounts-total span { font-size: 11px; text-align: start; }
 }
+@media (max-width: 520px) {
+  .chat-view-bar { flex-wrap: wrap; justify-content: flex-end; row-gap: 0; }
+  .chat-view-tabs { flex: 1 0 100%; border-bottom: 1px solid var(--border-soft); }
+  .chat-view-bar > .chat-filter-row { margin-inline-end: auto; }
+  .chat-view-bar > :not(.chat-view-tabs) { margin-block: 6px; }
+}
 @media (max-width: 359px) {
   .chat-view-tabs { gap: 10px; }
   .chat-view-tabs .filter { font-size: 11px; }
+}
+#profile-select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (pointer: coarse) {
+  .tip-toggle { position: relative; }
+  .tip-toggle::after { content: ""; position: absolute; inset: -8px; }
+  summary { min-height: 32px; }
+  .check-label { padding-block: 6px; }
+  .board-save { display: inline-grid; place-items: center; min-width: 32px; min-height: 32px; }
+  .account-select, .source-select-cell, th.source-select-cell { position: relative; }
+  .account-select > input::after, input.source-select::after, #target-select-page::after { content: ""; position: absolute; inset: -10px; }
 }
 .notice.demo { padding: 10px 12px 10px 18px; gap: 8px 20px; }
 .demo-intro { display: flex; align-items: baseline; gap: 10px; flex: 1 1 280px; min-width: 0; }

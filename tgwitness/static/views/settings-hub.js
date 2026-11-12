@@ -472,7 +472,7 @@ export function createSettingsHub(ctx) {
     const fields=section==='connection'?[]:data.fields.filter(f=>f.section===section);
     const above=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section)),hidden=above.length<fields.length?above:[];
     for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
-    if(hidden.length){const more=node('details','hub-more-options');more.append(node('summary','',tr('Show {n} more settings',{n:hidden.length})));
+    if(hidden.length){const more=node('details','hub-more-options');more.append(node('summary','',trn('Show {n} more setting','Show {n} more settings',hidden.length)));
       for(const f of hidden)more.append(fieldRow(f));detail.append(more);}
     if(section==='notifications'){
       if(data.needs_notification_destination)detail.append(message('Notifications are enabled. Add a destination to receive them.','notice warning'));

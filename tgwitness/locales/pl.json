@@ -3398,7 +3398,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "Obsługa MCP jest zainstalowana. Uruchom ponownie TgWitness, aby aktywować punkt końcowy.",
   "0 workspaces": "0 obszarów roboczych",
   "1 hour": "1 godzina",
-  "1 line": "1 wiersz",
   "1 minute to 90 days. Starts when the server creates the connection.": "Od 1 minuty do 90 dni. Rozpoczyna się w momencie utworzenia połączenia przez serwer.",
   "1 unsaved change": "1 niezapisana zmiana",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">Działania</span>",
@@ -5290,7 +5289,6 @@
   "Search all settings, including hidden ones": "Szukaj we wszystkich ustawieniach, także ukrytych",
   "Connected": "Połączono",
   "Keep my manual changes": "Zachowaj moje ręczne zmiany",
-  "Show {n} more settings": "Pokaż jeszcze {n} ustawień",
   "Show hidden setting": "Pokaż ukryte ustawienie",
   "Proxy address": "Adres proxy",
   "Continue without checking": "Kontynuuj bez sprawdzania",
@@ -8968,5 +8966,12 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel nie odpowiedział. Sprawdź, czy TgWitness działa i czy to urządzenie może się z nim połączyć.",
   "Add message numbers": "Dodaj numery wiadomości",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Identyfikator czatu, dwukropek i numery wiadomości albo linki t.me/c. Jeden czat w wierszu.",
-  "Could not read: {text}": "Nie można odczytać: {text}"
+  "Could not read: {text}": "Nie można odczytać: {text}",
+  "Show {n} more setting": "Pokaż jeszcze {n} ustawienie",
+  "Show {n} more settings": {
+    "one": "Pokaż jeszcze {n} ustawienie",
+    "few": "Pokaż jeszcze {n} ustawienia",
+    "many": "Pokaż jeszcze {n} ustawień",
+    "other": "Pokaż jeszcze {n} ustawienia"
+  }
 }

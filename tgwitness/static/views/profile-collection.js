@@ -104,7 +104,7 @@ export function createProfileCollection({json,tr,owner,active,canCollect,formatT
       async function fetchPage(){
         if(pending)return;pending=true;more.disabled=true;
         try{const query=new URLSearchParams({category,offset:String(offset),limit:'48'});if(before)query.set('before',before);const data=await json(`chats/${encodeURIComponent(chat())}/people/${person.user_id}/assets?${query}`);
-          if(!valid()||ticket!==load||!content.isConnected)return;notice.textContent=data.total?tr('{n} saved records').replace('{n}',data.total):tr('No data');
+          if(!valid()||ticket!==load||!content.isConnected)return;notice.textContent=data.total?trn('{n} saved record','{n} saved records',data.total):tr('No data');
           for(const item of data.items)grid.append(card(item,category));before=data.before;offset=data.next_offset;more.hidden=offset===null;
         }catch(problem){if(valid()&&ticket===load){notice.textContent=problem.message;more.textContent=tr('Retry');more.hidden=false;}}
         finally{pending=false;if(valid()&&ticket===load)more.disabled=false;}

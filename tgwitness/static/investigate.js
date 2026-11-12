@@ -1782,7 +1782,7 @@
       meter.firstChild.style.width = progress + '%';
       const card = el('button', 'doc-session', el('span', 'doc-session-main', node('strong', '', item.title),
         node('span', 'doc-sub', item.chat_title + ' · ' + tr('{n} of {total} goals', {n: item.obtained, total: item.goals})
-          + ' · ' + tr('{n} messages', {n: item.steps})), meter), icon('next'));
+          + ' · ' + trn('{n} message', '{n} messages', item.steps)), meter), icon('next'));
       card.type = 'button'; card.classList.add('doc-plan-card');
       card.addEventListener('click', () => busy(card, () => openPlan(item.id)));
       list.append(el('li', '', card));

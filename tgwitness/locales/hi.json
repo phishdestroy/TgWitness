@@ -2406,7 +2406,7 @@
   "Open Actions in my fork": "मेरे फोर्क में एक्शंस खोलें",
   "No GitHub token is needed here. GitHub account limits and usage rules apply.": "यहाँ GitHub टोकन की आवश्यकता नहीं है। GitHub खाते की सीमाएँ और उपयोग नियम लागू होते हैं।",
   "Run started — continue": "रन शुरू हो गया — जारी रखें",
-  "Keep the GitHub run active. Download sealed-connection from its Artifacts, unzip it, and select the file below.": " GitHub रन को सक्रिय रखें। इसके आर्टिफैक्ट्स से sealed-connection डाउनलोड करें, इसे अनज़िप करें, और नीचे दी गई फ़ाइल चुनें।",
+  "Keep the GitHub run active. Download sealed-connection from its Artifacts, unzip it, and select the file below.": "GitHub रन को सक्रिय रखें। इसके आर्टिफैक्ट्स से sealed-connection डाउनलोड करें, इसे अनज़िप करें, और नीचे दी गई फ़ाइल चुनें।",
   "Open connection.tgwsealed": "खोलें connection.tgwsealed",
   "The connection is decrypted on this device.": "इस डिवाइस पर कनेक्शन डिक्रिप्ट किया गया है।",
   "Your temporary panel is ready": "आपका अस्थायी पैनल तैयार है",
@@ -3352,7 +3352,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "MCP सपोर्ट इंस्टॉल हो गया है। एंडपॉइंट को सक्रिय करने के लिए TgWitness को रीस्टार्ट करें।",
   "0 workspaces": "0 वर्कस्पेस",
   "1 hour": "1 घंटा",
-  "1 line": "1 लाइन",
   "1 minute to 90 days. Starts when the server creates the connection.": "1 मिनट से 90 दिन तक। सर्वर द्वारा कनेक्शन बनाने पर शुरू होता है।",
   "1 unsaved change": "1 सहेजा न गया बदलाव",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">कार्रवाइयाँ</span>",
@@ -5236,7 +5235,6 @@
   "Search all settings, including hidden ones": "छिपी सेटिंग्स समेत सभी सेटिंग्स में खोजें",
   "Connected": "जुड़ा हुआ",
   "Keep my manual changes": "मेरे हाथ से किए बदलाव रखें",
-  "Show {n} more settings": "{n} और सेटिंग्स दिखाएँ",
   "Show hidden setting": "छिपी सेटिंग दिखाएँ",
   "Proxy address": "प्रॉक्सी पता",
   "Continue without checking": "जाँचे बिना जारी रखें",
@@ -6420,7 +6418,7 @@
   "The Telegram account was deleted.": "टेलीग्राम खाता हटा दिया गया था।",
   "Join / open": "जॉइन / खोलें",
   "Not imported": "आयात नहीं किया गया",
-  "The preview is saved. Opening a bot sends /start.": " पूर्वावलोकन सहेजा गया है। बॉट खोलने पर /start भेजा जाता है।",
+  "The preview is saved. Opening a bot sends /start.": "पूर्वावलोकन सहेजा गया है। बॉट खोलने पर /start भेजा जाता है।",
   "Two-step password required": "दो-चरणीय पासवर्ड आवश्यक",
   "Frozen": "जमा हुआ",
   "Telegram actions": "Telegram क्रियाएँ",
@@ -8876,5 +8874,10 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "पैनल ने जवाब नहीं दिया। जाँचें कि TgWitness चल रहा है और यह डिवाइस उस तक पहुँच सकता है।",
   "Add message numbers": "संदेश संख्याएँ जोड़ें",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "चैट आईडी, कोलन और संदेश संख्याएँ, या t.me/c लिंक। प्रति पंक्ति एक चैट।",
-  "Could not read: {text}": "पढ़ा नहीं जा सका: {text}"
+  "Could not read: {text}": "पढ़ा नहीं जा सका: {text}",
+  "Show {n} more setting": "{n} और सेटिंग दिखाएँ",
+  "Show {n} more settings": {
+    "one": "{n} और सेटिंग दिखाएँ",
+    "other": "{n} और सेटिंग्स दिखाएँ"
+  }
 }

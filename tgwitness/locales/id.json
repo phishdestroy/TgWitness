@@ -3329,7 +3329,6 @@
   "MCP support is installed. Restart TgWitness to activate the endpoint.": "Dukungan MCP telah terinstal. Mulai ulang TgWitness untuk mengaktifkan endpoint.",
   "0 workspaces": "0 ruang kerja",
   "1 hour": "1 jam",
-  "1 line": "1 baris",
   "1 minute to 90 days. Starts when the server creates the connection.": "1 menit hingga 90 hari. Dimulai saat server membuat koneksi.",
   "1 unsaved change": "1 perubahan belum disimpan",
   "<span class=\"sr-only\">Actions</span>": "<span class=\"sr-only\">Tindakan</span>",
@@ -5209,7 +5208,6 @@
   "Search all settings, including hidden ones": "Cari di semua pengaturan, termasuk yang tersembunyi",
   "Connected": "Terhubung",
   "Keep my manual changes": "Pertahankan perubahan manual saya",
-  "Show {n} more settings": "Tampilkan {n} pengaturan lagi",
   "Show hidden setting": "Tampilkan pengaturan tersembunyi",
   "Proxy address": "Alamat proxy",
   "Continue without checking": "Lanjutkan tanpa memeriksa",
@@ -8830,5 +8828,9 @@
   "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel tidak merespons. Pastikan TgWitness sedang berjalan dan perangkat ini dapat menjangkaunya.",
   "Add message numbers": "Tambahkan nomor pesan",
   "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID obrolan, titik dua, dan nomor pesan, atau tautan t.me/c. Satu obrolan per baris.",
-  "Could not read: {text}": "Tidak dapat dibaca: {text}"
+  "Could not read: {text}": "Tidak dapat dibaca: {text}",
+  "Show {n} more setting": "Tampilkan {n} pengaturan lagi",
+  "Show {n} more settings": {
+    "other": "Tampilkan {n} pengaturan lagi"
+  }
 }
