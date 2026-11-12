@@ -235,10 +235,17 @@ did not return (deleted before the export, or not visible to the account); in pr
 basic groups numbers are shared by all of the account's chats and gaps are not counted.
 
 After reading the history, the export asks Telegram for every absent number again, by number
-(`channels.getMessages`, up to 10,000 numbers). The result is in `message-ids.json` and the report.
+(`channels.getMessages`, up to 10,000 numbers including the 1,000 below the first message, spread evenly over all gaps when there are more). The result is in `message-ids.json` and the report.
 An empty answer records that the number is unavailable to this account at recheck time;
 it leaves the cause unspecified. A message returned on recheck is added to the export
 and marked `found_on_recheck`.
+
+When the observing workspace saw messages of the chat deleted, missing on recheck or edited, the
+chat export adds `journal-changes.jsonl`: those journal records, every saved version and the notice,
+each with the hash and Ed25519 signature it received in the journal. `verify.py` recomputes each
+record's hash, checks its signature against the export key and compares the count with the signed
+manifest; the evidence export holds the complete hash chain. The report lists these messages under
+**Deletions and earlier versions**.
 
 Every report opens with **In brief**: one paragraph, then what the material shows and what it does
 not (who is behind an account, completeness of delivery, deletions before observation, clock time
@@ -676,7 +683,9 @@ when the checkpoint survives. Independent retention keeps that reference availab
 the workspace; a verified external timestamp additionally anchors it in time.
 
 After a restart the saved Telegram update position is resumed (`catch_up_from` in
-`observation.started`) and missed updates are requested. A periodic recheck records
+`observation.started`) and missed updates are requested. The saved position covers only
+updates whose handling has finished, so updates still waiting when the connection closed or
+the process stopped are requested again. A periodic recheck records
 `message.recovered` for missed messages and `message.missing_on_recheck` when Telegram no
 longer returns a saved message; the latter is not a deletion notice and names no deleter or time.
 
