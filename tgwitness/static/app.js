@@ -73,17 +73,20 @@ const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout2-undo3').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout3').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
-  const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run')).map(el=>{
+  const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
     const view=root?.[0]||'connection';
-    const text=el.labels?.[0]?.textContent?.trim()||el.getAttribute('aria-label')||el.id;
+    const own=el.labels?.[0]||el.closest('label')||root?.[1].querySelector('label[for="'+CSS.escape(el.id)+'"]');
+    const named=own?.querySelector('strong')?.textContent||[...own?.childNodes||[]].filter(n=>n.nodeType===3||n.nodeType===1&&!n.matches('input,select,textarea,button,small')).map(n=>n.textContent).join(' ');
+    const text=named?.replace(/\s+/g,' ').trim()||el.getAttribute('aria-label')||el.placeholder||el.id;
     el.dataset.level=el.dataset.level||(['parameters','integrations','system-log'].includes(view)?'expert':'standard');
     const form=el.closest('form')?.id, extra=el.closest('.extra-panel')?.id.replace('extras-','');
     return {key:el.id,id:el.id,label:text,view,level:el.dataset.level,extra,form};
   });
   settingsHub=createSettingsHub({root:$('view-settings'),wizardRoot:$('view-first-run'),state,json,tr,node,icon,toast,navigate,askConfirm,$,refreshStatus,
+    avatar:avatarNode,profile:()=>profileEntry(),
     staleView:()=>new StaleView(),
     language:LANG,languages:LANGUAGES,authCard:()=>authCard,authMethod:setAuthMethod,catalog,
     loadSettingsForm:id=>({'alerts-form':loadAlerts,'replica-form':loadReplica,'evidence-form':loadEvidence}[id])(),
@@ -930,7 +933,7 @@ function renderWorkflowControls(){
     info.needsSignIn?'Sign in again':'Connect account →':'Configure account export');
   }
 }
-import("./components/glow.js?v=2").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
+import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
 import("./views/chat-gaps.js?v=3").then(({createChatGaps})=>{
   chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations')});
@@ -2163,8 +2166,8 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=3").then(({createSecretChats})=>secretChatsView=createSecretChats({
-    root:$("view-secret-chats"),tr,trn,json,toast,busy,node,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
+  secretChatsLoading??=import("./views/secret-chats.js?v=4").then(({createSecretChats})=>secretChatsView=createSecretChats({
+    root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
       (await exportsReady).select('settings');reportSelection?.selectSecrets(id===null?[]:[id]);}}));

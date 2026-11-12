@@ -1,5 +1,5 @@
 export function createSecretChats(context) {
-  const {root, tr, trn, json, toast, busy, node, formatTime, download, confirm, getSession, may, humanSize, actionText} = context;
+  const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, humanSize, actionText} = context;
   const find = id => root.querySelector("#" + id);
   let view = null, selected = null, timer = null, active = false, session = getSession(), request = 0;
   let renderedChat = null, threadStamp = null, activation = 0;
@@ -36,12 +36,27 @@ export function createSecretChats(context) {
     return [...map.values()].sort((a, b) => String(b.last).localeCompare(String(a.last)));
   }
 
-  function stateText(item) {
+  function stateOf(item) {
     const state = item.snapshot?.state || (item.items.some(r => r.kind === "secret_chat.closed") ? "closed" : "unknown");
-    if(state!=='closed'&&!view.settings.enabled)return tr('Paused');
-    if(state!=='closed'&&!view.connected)return tr('Not connected');
-    return {requested: tr("Waiting for the other side"), pending: tr("Request received"), ready: tr("Active"),
-      rekeying: tr("Active"), closed: tr("Ended"), unknown: tr("Not loaded")}[state] || state;
+    return state === 'closed' ? state : !view.settings.enabled ? 'paused' : !view.connected ? 'offline' : state;
+  }
+
+  function stateText(item) {
+    const state = stateOf(item);
+    return {paused: tr('Paused'), offline: tr('Not connected'), requested: tr("Waiting for the other side"), pending: tr("Request received"),
+      ready: tr("Active"), rekeying: tr("Active"), closed: tr("Ended"), unknown: tr("Not loaded")}[state] || state;
+  }
+
+  function face(item) {
+    const mark = avatar(item.peer, '');
+    mark.replaceChildren(icon('lock'));
+    return mark;
+  }
+
+  function pill(item) {
+    const mark = node('span', 'secret-pill', stateText(item));
+    mark.dataset.state = stateOf(item);
+    return mark;
   }
 
   function renderSettings() {
@@ -60,8 +75,9 @@ export function createSecretChats(context) {
     find('secret-connect').hidden = view.has_session || !may('account');
     find('secret-reconnect').hidden = !view.has_session || !editable;
     find('secret-report').hidden = !may('export');
-    find('secret-interaction').hidden = !view.interaction_problem || !may('interact');
+    find('secret-interaction').hidden = !view.interaction_problem || !may('interact') || !view.available || !settings.enabled;
     find('secret-interaction').textContent = tr(view.interaction_problem || '');
+    find("secret-status").dataset.state = settingsBusy || !settings.enabled ? 'off' : view.connected ? 'ok' : 'warn';
     find("secret-status").textContent = settingsBusy ? tr('Saving…') : !settings.enabled ? tr("Pseudo-secret is off for this account.") :
       view.connected ? tr("Connected: new messages are recorded as they arrive.") :
       tr("Not connected yet: Telegram keeps new messages until this account connects.") + (view.error ? " " + tr("Last error: {error}", {error: view.error}) : "");
@@ -76,14 +92,16 @@ export function createSecretChats(context) {
     const visible = items.filter(item => !query || String(item.peer ?? '').includes(query) || String(item.id).includes(query)
       || item.items.some(record => String(record.payload?.text || '').toLocaleLowerCase().includes(query)));
     find('secret-count').textContent = tr('{n} chats', {n: items.length});
-    if (!visible.length) list.append(node("p", "hint", tr(items.length ? 'No matches.' : "No pseudo-secret chats yet.")));
+    find('secret-count').hidden = !items.length;
+    if (!visible.length && items.length) list.append(node("p", "hint", tr('No matches.')));
     for (const item of visible) {
       const button = node("button", "secret-chat-row" + (item.id === selected ? " selected" : ""));
       button.type = "button";
       button.dataset.secretChat = String(item.id);
+      button.dataset.state = stateOf(item);
       button.setAttribute('aria-pressed', String(item.id === selected));
-      button.append(node("b", "", tr("User ID {id}", {id: item.peer ?? "?"})), node("small", "", stateText(item) + " · " +
-        trn("{n} record", "{n} records", item.items.length)), node('small', '', '#' + item.id));
+      button.append(face(item), node("b", "", tr("User ID {id}", {id: item.peer ?? "?"})), node("small", "", stateText(item) + " · " +
+        trn("{n} record", "{n} records", item.items.length) + ' · #' + item.id));
       button.addEventListener("click", () => {selected = item.id; render();});
       list.append(button);
     }
@@ -100,9 +118,7 @@ export function createSecretChats(context) {
   function message(record, item) {
     const p = record.payload, out = p.direction === "out";
     const row = node("div", "secret-message " + (out ? "out" : "in") + (item.deleted.has(p.random_id) ? " deleted" : ""));
-    const head = node("small", "", (out ? tr("Sent") : tr("Received")) + " · " + formatTime(record.observed_at));
-    row.append(head);
-    if (p.text) row.append(node("p", "", p.text));
+    if (p.text) row.append(node("p", "secret-text", p.text));
     if (p.media) row.append(node("p", "hint", tr("Attachment") + " · " + String(p.media._ || "").replace("DecryptedMessageMedia", "")));
     const file = item.files.get("e" + record.seq) || item.files.get("r" + p.random_id);
     if (file) {
@@ -115,13 +131,14 @@ export function createSecretChats(context) {
     if (p.ttl) notes.push(tr("timer {n} s", {n: p.ttl}));
     if (item.deleted.has(p.random_id)) notes.push(tr("deleted by the other side; kept here"));
     if (notes.length) row.append(node("small", "secret-note", notes.join(" · ")));
+    row.append(node("small", "secret-meta", (out ? tr("Sent") : tr("Received")) + " · " + formatTime(record.observed_at)));
     return row;
   }
 
   function renderThread(items) {
     const box = find("secret-thread");
     const item = items.find(entry => entry.id === selected);
-    const stamp = JSON.stringify([item, may("interact"), sending.has(selected), view.connected, view.settings.enabled, view.interaction_problem, settingsBusy],
+    const stamp = JSON.stringify([item, items.length, formatTime("2026-01-01T00:00:00+00:00"), may("interact"), sending.has(selected), view.connected, view.settings.enabled, view.interaction_problem, settingsBusy],
       (_, value) => value instanceof Map || value instanceof Set ? [...value] : value);
     if (stamp === threadStamp) return;
     const previous = box.querySelector("textarea"), oldFeed = box.querySelector(".secret-feed");
@@ -132,12 +149,22 @@ export function createSecretChats(context) {
       ? oldFeed.scrollTop : null;
     threadStamp = stamp; renderedChat = selected;
     box.replaceChildren();
-    if (!item) {box.append(node("p", "hint", tr("Choose a chat to read it."))); return;}
-    const head = node("div", "secret-thread-head");
-    head.append(node("b", "", tr("User ID {id}", {id: item.peer ?? "?"})), node("span", "hint", stateText(item)));
+    if (!item) {
+      const empty = node("div", "secret-empty"), mark = node('span', 'secret-empty-mark');
+      mark.append(icon('lock'));
+      empty.append(mark, node("p", "hint", tr(items.length ? "Choose a chat to read it." : "No pseudo-secret chats yet.")));
+      box.append(empty); return;
+    }
+    const head = node("div", "secret-thread-head"), who = node('div', 'secret-thread-who');
+    who.append(node("b", "", tr("User ID {id}", {id: item.peer ?? "?"})), pill(item));
+    head.append(face(item), who);
     const key = item.snapshot?.key_visualization || item.items.find(r => r.kind === "secret_chat.ready")?.payload.key_visualization;
-    if (key) head.append(node("code", "secret-key", key.match(/.{1,8}/g).join(" ")),
-      node("small", "hint", tr("Compare with the key picture under Encryption key on the other device.")));
+    if (key) {
+      const keyBox = node('div', 'secret-key-box');
+      keyBox.append(node("code", "secret-key", key.match(/.{1,8}/g).join(" ")),
+        node("small", "hint", tr("Compare with the key picture under Encryption key on the other device.")));
+      head.append(keyBox);
+    }
     const actions = node("div", "route-actions");
     const state = item.snapshot?.state;
     if (state === "pending" && may("interact")) {

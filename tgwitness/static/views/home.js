@@ -145,11 +145,13 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const pause = collector.activity?.telegram_pause_until;
     if (pause) card.append(node('p', 'home-warning', tr('Telegram asked to pause requests until {time}.', {time: formatTime(new Date(pause * 1000).toISOString())})));
     const actions = node('div', 'home-actions');
-    const open = node('button', 'secondary', tr(profile.id === state.profile ? 'Open chats' : 'Open account'));
+    const connect = !state.status?.demo && (info.needsSignIn || !info.hasSession);
+    const open = node('button', connect ? 'primary' : 'secondary',
+      connect ? info.needsSignIn ? tr('Sign in again') : tr('Connect account') : profile.id === state.profile ? tr('Open chats') : tr('Open account'));
     open.type = 'button';
     open.addEventListener('click', () => busy(open, async () => {
       if (profile.id !== state.profile) await switchProfile(profile.id);
-      navigate(info.needsSignIn || !info.hasSession ? 'connection' : 'chats');
+      navigate(connect ? 'connection' : 'chats');
     }));
     actions.append(open);
     const task = taskInfo(collector.activity);
