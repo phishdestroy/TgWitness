@@ -741,7 +741,8 @@ export function createSettingsHub(ctx) {
       for(const key of ['account','folder']){const card=body.querySelector('[data-answer="'+key+'"]');card.disabled=true;card.title=tr('Only on a separate account.');}
       body.append(message('Only chosen chats can be recorded on a main account.','notice warning'));
     }
-    if(!dialogs){const loading=message('Loading chats…');body.append(loading);try{dialogs=await request(who,'dialogs');loading.remove();}catch(e){loading.remove();if(e.name==='StaleView')throw e;body.append(message(e.message,'notice warning'));}}
+    if(!dialogs&&!signedIn())body.append(message('Connect a Telegram account first.','notice warning'));
+    else if(!dialogs){const loading=message('Loading chats…');body.append(loading);try{dialogs=await request(who,'dialogs');loading.remove();}catch(e){loading.remove();if(e.name==='StaleView')throw e;body.append(message(e.message,'notice warning'));}}
     requireOwner(who);
     if(!body.isConnected)return;
     if(dialogs){
