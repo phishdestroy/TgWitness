@@ -8830,5 +8830,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "พาเนลไม่ตอบสนอง ตรวจสอบว่า TgWitness กำลังทำงานอยู่และอุปกรณ์นี้เข้าถึงได้"
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "พาเนลไม่ตอบสนอง ตรวจสอบว่า TgWitness กำลังทำงานอยู่และอุปกรณ์นี้เข้าถึงได้",
+  "Add message numbers": "เพิ่มหมายเลขข้อความ",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID การสนทนา ตามด้วยโคลอนและหมายเลขข้อความ หรือลิงก์ t.me/c หนึ่งการสนทนาต่อบรรทัด",
+  "Could not read: {text}": "อ่านไม่ได้: {text}"
 }

@@ -8938,5 +8938,8 @@
   "Search this page": "Поиск по этой странице",
   "Showing {shown} of {total} rows on this page": "Показано {shown} из {total} строк на этой странице",
   "Source and counts": "Источник и подсчёты",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не ответила. Проверьте, что TgWitness запущен и доступен с этого устройства."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не ответила. Проверьте, что TgWitness запущен и доступен с этого устройства.",
+  "Add message numbers": "Добавить номера сообщений",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID чата, двоеточие и номера сообщений либо ссылки t.me/c. Один чат в строке.",
+  "Could not read: {text}": "Не удалось разобрать: {text}"
 }

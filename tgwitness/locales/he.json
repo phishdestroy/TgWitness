@@ -8922,5 +8922,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "הפאנל לא הגיב. ודאו ש-TgWitness פועל ושהמכשיר הזה יכול להגיע אליו."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "הפאנל לא הגיב. ודאו ש-TgWitness פועל ושהמכשיר הזה יכול להגיע אליו.",
+  "Add message numbers": "הוספת מספרי הודעות",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "מזהה צ'אט, נקודתיים ומספרי הודעות, או קישורי t.me/c. צ'אט אחד בכל שורה.",
+  "Could not read: {text}": "לא ניתן לקרוא: {text}"
 }

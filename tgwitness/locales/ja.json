@@ -8830,5 +8830,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "パネルから応答がありません。TgWitness が実行中で、この端末から接続できることを確認してください。"
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "パネルから応答がありません。TgWitness が実行中で、この端末から接続できることを確認してください。",
+  "Add message numbers": "メッセージ番号を追加",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "チャットID、コロン、メッセージ番号、または t.me/c リンク。1行につき1チャット。",
+  "Could not read: {text}": "読み取れません: {text}"
 }

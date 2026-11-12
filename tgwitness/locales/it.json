@@ -8883,5 +8883,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Il pannello non ha risposto. Verifica che TgWitness sia in esecuzione e che questo dispositivo possa raggiungerlo."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Il pannello non ha risposto. Verifica che TgWitness sia in esecuzione e che questo dispositivo possa raggiungerlo.",
+  "Add message numbers": "Aggiungi numeri dei messaggi",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID della chat, due punti e numeri dei messaggi, oppure link t.me/c. Una chat per riga.",
+  "Could not read: {text}": "Impossibile leggere: {text}"
 }

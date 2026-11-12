@@ -9060,5 +9060,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "لم تستجب اللوحة. تحقق من أن TgWitness يعمل وأن هذا الجهاز يستطيع الوصول إليه."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "لم تستجب اللوحة. تحقق من أن TgWitness يعمل وأن هذا الجهاز يستطيع الوصول إليه.",
+  "Add message numbers": "أضف أرقام الرسائل",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "معرّف الدردشة ثم نقطتان ثم أرقام الرسائل، أو روابط t.me/c. دردشة واحدة في كل سطر.",
+  "Could not read: {text}": "تعذّرت قراءة: {text}"
 }

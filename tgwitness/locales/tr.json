@@ -8876,5 +8876,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel yanıt vermedi. TgWitness'in çalıştığını ve bu cihazın ona erişebildiğini kontrol edin."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel yanıt vermedi. TgWitness'in çalıştığını ve bu cihazın ona erişebildiğini kontrol edin.",
+  "Add message numbers": "Mesaj numaraları ekle",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Sohbet kimliği, iki nokta ve mesaj numaraları ya da t.me/c bağlantıları. Her satıra bir sohbet.",
+  "Could not read: {text}": "Okunamadı: {text}"
 }

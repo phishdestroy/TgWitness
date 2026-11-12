@@ -8830,5 +8830,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "패널이 응답하지 않았습니다. TgWitness가 실행 중인지, 이 기기에서 접속할 수 있는지 확인하세요."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "패널이 응답하지 않았습니다. TgWitness가 실행 중인지, 이 기기에서 접속할 수 있는지 확인하세요.",
+  "Add message numbers": "메시지 번호 추가",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "채팅 ID, 콜론, 메시지 번호 또는 t.me/c 링크. 한 줄에 채팅 하나.",
+  "Could not read: {text}": "읽을 수 없습니다: {text}"
 }

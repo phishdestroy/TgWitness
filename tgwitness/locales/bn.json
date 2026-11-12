@@ -8876,5 +8876,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "প্যানেল সাড়া দেয়নি। TgWitness চালু আছে কি না এবং এই ডিভাইস থেকে সেটিতে পৌঁছানো যায় কি না যাচাই করুন।"
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "প্যানেল সাড়া দেয়নি। TgWitness চালু আছে কি না এবং এই ডিভাইস থেকে সেটিতে পৌঁছানো যায় কি না যাচাই করুন।",
+  "Add message numbers": "বার্তার সংখ্যা যোগ করুন",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "চ্যাট আইডি, কোলন ও বার্তার সংখ্যা, অথবা t.me/c লিংক। প্রতি লাইনে একটি চ্যাট।",
+  "Could not read: {text}": "পড়া যায়নি: {text}"
 }

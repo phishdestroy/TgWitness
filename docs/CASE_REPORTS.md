@@ -144,7 +144,9 @@ UTC dates, record types and individual messages. Messages picked in a chat with
 **Select** arrive as **Selected messages**; the report then covers the message records
 of those messages and of any chat selected in full, and lists the chosen message
 numbers under **Selected data**. Missing message numbers and their neighbouring
-records are reported only for chats selected in full.
+records are reported only for chats selected in full. **Add message numbers** under
+the chat list adds messages without opening the chat: one line per chat with the chat
+ID, a colon and the message numbers, or `t.me/c/…` links to single messages.
 
 Shared design/chart preferences are frozen into new chat/account exports and account
 sharing previews. Account/sharing language and privacy settings remain independent;

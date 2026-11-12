@@ -8968,5 +8968,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не відповіла. Перевірте, що TgWitness запущено і він доступний із цього пристрою."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не відповіла. Перевірте, що TgWitness запущено і він доступний із цього пристрою.",
+  "Add message numbers": "Додати номери повідомлень",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Ідентифікатор чату, двокрапка і номери повідомлень або посилання t.me/c. Один чат у рядку.",
+  "Could not read: {text}": "Не вдалося розібрати: {text}"
 }

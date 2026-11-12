@@ -751,7 +751,7 @@ form > .health-detail { margin-top: 14px; }
 .report-catalog-label { min-width:0;flex:1; }.report-catalog-label strong { display:block;font-weight:500;font-size:12px;overflow-wrap:anywhere; }
 .report-catalog-label small { display:block;color:var(--muted);font-size:10px;overflow-wrap:anywhere; }
 .report-catalog-number { color:var(--muted);font:11px var(--mono); }.report-manual summary { cursor:pointer;font-size:12px; }
-.report-manual input { margin-top:6px; }.report-scope-notice { padding:12px 14px;border-inline-start:3px solid var(--accent);background:var(--accent-soft);font-size:12px;line-height:1.7; }
+.report-manual input, .report-manual textarea { margin-top:6px; }.report-manual textarea { width:100%;min-height:74px;resize:vertical;font:12px var(--mono); }.report-manual .hint:empty { display:none; }.report-manual [role=alert] { color:var(--danger); }.report-manual button { margin-top:8px; }.report-scope-notice { padding:12px 14px;border-inline-start:3px solid var(--accent);background:var(--accent-soft);font-size:12px;line-height:1.7; }
 .report-preview { border-top:1px solid var(--border);margin-top:28px; }
 .report-preview-toolbar { display:flex;gap:8px;align-items:center;flex-wrap:wrap; }
 .report-preview-stale { padding:6px 10px;border-radius:6px;background:var(--warning-soft);color:var(--warning);font-size:12px; }

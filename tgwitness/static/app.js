@@ -3100,7 +3100,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=8').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=9').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',

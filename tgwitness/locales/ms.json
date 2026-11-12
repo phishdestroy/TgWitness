@@ -8830,5 +8830,8 @@
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
   "Source and counts": "Source and counts",
-  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel tidak memberi respons. Pastikan TgWitness sedang berjalan dan peranti ini boleh mencapainya."
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel tidak memberi respons. Pastikan TgWitness sedang berjalan dan peranti ini boleh mencapainya.",
+  "Add message numbers": "Tambah nombor mesej",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID sembang, titik bertindih dan nombor mesej, atau pautan t.me/c. Satu sembang setiap baris.",
+  "Could not read: {text}": "Tidak dapat dibaca: {text}"
 }
