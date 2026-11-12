@@ -5399,7 +5399,6 @@
   "Wait for the current storage operation to finish.": "Дождитесь завершения текущей операции с хранилищем.",
   "Finish active downloads before deleting this workspace.": "Дождитесь завершения скачиваний перед удалением этого пространства.",
   "First setup": "Первоначальная настройка",
-  "One place for every answer": "Все ответы — в одном месте",
   "Watch": "Наблюдение",
   "Evidence": "Доказательства",
   "Simple": "Простой",
@@ -5472,7 +5471,6 @@
   "Add a notification destination later in Settings.": "Укажите получателя уведомлений позже в Настройках.",
   "External services need a working SOCKS5 or WARP route.": "Для внешних сервисов нужно рабочее подключение через WARP или свой прокси.",
   "Advanced protection settings": "Дополнительные настройки защиты",
-  "More settings and expert tools": "Ещё настройки и инструменты для экспертов",
   "Open first setup": "Открыть первую настройку",
   "Recording rules": "Правила сбора",
   "Integrations / MCP": "Интеграции / MCP",
@@ -5974,7 +5972,6 @@
   "Own value": "Собственное значение",
   "Return to the group value": "Вернуться к значению группы",
   "This account is in the group {name}.": "Этот аккаунт входит в группу {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 обозначает значение из группы; ✏️ обозначает собственное значение данного аккаунта.",
   "Group settings": "Настройки группы",
   "Shared with the group": "Общее для группы",
   "Settings the group shares besides those in the other sections:": "Настройки, общие для группы, помимо тех, что указаны в других разделах:",
@@ -8937,5 +8934,9 @@
   "Search all selected records": "Поиск по всем выбранным записям",
   "Search this page": "Поиск по этой странице",
   "Showing {shown} of {total} rows on this page": "Показано {shown} из {total} строк на этой странице",
-  "Source and counts": "Источник и подсчёты"
+  "Source and counts": "Источник и подсчёты",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Панель не ответила. Проверьте, что TgWitness запущен и доступен с этого устройства.",
+  "Add message numbers": "Добавить номера сообщений",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID чата, двоеточие и номера сообщений либо ссылки t.me/c. Один чат в строке.",
+  "Could not read: {text}": "Не удалось разобрать: {text}"
 }

@@ -5287,12 +5287,10 @@
   "Turn off the dependent features too?": "Wyłączyć też funkcje zależne?",
   "Explain this setting": "Wyjaśnij to ustawienie",
   "Changed by you": "Zmienione przez Ciebie",
-  "One place for every answer": "Jedno miejsce na wszystkie odpowiedzi",
   "Search all settings, including hidden ones": "Szukaj we wszystkich ustawieniach, także ukrytych",
   "Connected": "Połączono",
   "Keep my manual changes": "Zachowaj moje ręczne zmiany",
   "Show {n} more settings": "Pokaż jeszcze {n} ustawień",
-  "More settings and expert tools": "Więcej ustawień i narzędzi eksperckich",
   "Show hidden setting": "Pokaż ukryte ustawienie",
   "Proxy address": "Adres proxy",
   "Continue without checking": "Kontynuuj bez sprawdzania",
@@ -5729,7 +5727,6 @@
   "Own value": "Własna wartość",
   "Return to the group value": "Przywróć wartość grupy",
   "This account is in the group {name}.": "Do konta należy do grupy {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 oznacza wartość z grupy; ✏️ oznacza wartość własną tego konta.",
   "Group settings": "Ustawienia grupy",
   "Shared with the group": "Udostępnione grupie",
   "Settings the group shares besides those in the other sections:": "Ustawienia wspólne dla grupy, oprócz tych wymienionych w innych sekcjach:",
@@ -8967,5 +8964,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel nie odpowiedział. Sprawdź, czy TgWitness działa i czy to urządzenie może się z nim połączyć.",
+  "Add message numbers": "Dodaj numery wiadomości",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Identyfikator czatu, dwukropek i numery wiadomości albo linki t.me/c. Jeden czat w wierszu.",
+  "Could not read: {text}": "Nie można odczytać: {text}"
 }

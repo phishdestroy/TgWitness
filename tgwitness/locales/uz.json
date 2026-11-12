@@ -5233,12 +5233,10 @@
   "Turn off the dependent features too?": "Bog'liq funksiyalar ham o'chirilsinmi?",
   "Explain this setting": "Bu sozlamani tushuntirish",
   "Changed by you": "Siz o'zgartirgansiz",
-  "One place for every answer": "Barcha javoblar uchun bitta joy",
   "Search all settings, including hidden ones": "Barcha sozlamalarda, yashirinlari bilan qidirish",
   "Connected": "Ulangan",
   "Keep my manual changes": "Qo'lda kiritgan o'zgarishlarimni saqlash",
   "Show {n} more settings": "Yana {n} ta sozlamani ko'rsatish",
-  "More settings and expert tools": "Ko'proq sozlamalar va ekspert vositalari",
   "Show hidden setting": "Yashirin sozlamani ko'rsatish",
   "Proxy address": "Proksi manzili",
   "Continue without checking": "Tekshirmasdan davom etish",
@@ -5665,7 +5663,6 @@
   "Own value": "O'z qiymati",
   "Return to the group value": "Guruh qiymatiga qaytish",
   "This account is in the group {name}.": "Ushbu hisob {name} guruhiga tegishli.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 guruh qiymatini belgilaydi; ✏️ ushbu hisobning o'z qiymatini belgilaydi.",
   "Group settings": "Guruh sozlamalari",
   "Shared with the group": "Guruh bilan baham ko'rilgan",
   "Settings the group shares besides those in the other sections:": "Guruhning boshqa bo'limlardagi sozlamalardan tashqari baham ko'radigan sozlamalari:",
@@ -8875,5 +8872,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel javob bermadi. TgWitness ishlayotganini va bu qurilma unga ulana olishini tekshiring.",
+  "Add message numbers": "Xabar raqamlarini qo'shish",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Chat ID, ikki nuqta va xabar raqamlari yoki t.me/c havolalari. Har bir qatorda bitta chat.",
+  "Could not read: {text}": "O'qib bo'lmadi: {text}"
 }

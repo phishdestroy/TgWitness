@@ -5206,12 +5206,10 @@
   "Turn off the dependent features too?": "同時關閉相關功能？",
   "Explain this setting": "說明此設定",
   "Changed by you": "由你變更",
-  "One place for every answer": "所有答案集中在一處",
   "Search all settings, including hidden ones": "搜尋所有設定，包括隱藏的設定",
   "Connected": "已連線",
   "Keep my manual changes": "保留我的手動變更",
   "Show {n} more settings": "再顯示 {n} 項設定",
-  "More settings and expert tools": "更多設定和專家工具",
   "Show hidden setting": "顯示隱藏的設定",
   "Proxy address": "代理位址",
   "Continue without checking": "不檢查繼續",
@@ -5633,7 +5631,6 @@
   "Own value": "自有值",
   "Return to the group value": "還原為群組值",
   "This account is in the group {name}.": "此帳戶屬於 {name} 群組。",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 標示來自群組的值；✏️ 標示此帳戶的自有值。",
   "Group settings": "群組設定",
   "Shared with the group": "與群組共享",
   "Settings the group shares besides those in the other sections:": "除其他章節所述設定外，群組共享的設定如下：",
@@ -8829,5 +8826,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "面板沒有回應。請確認 TgWitness 正在執行，且此裝置可以連線到它。",
+  "Add message numbers": "新增訊息編號",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "聊天 ID、冒號與訊息編號，或 t.me/c 連結。每行一個聊天。",
+  "Could not read: {text}": "無法讀取：{text}"
 }

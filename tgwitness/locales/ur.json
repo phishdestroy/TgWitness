@@ -5233,12 +5233,10 @@
   "Turn off the dependent features too?": "منحصر فیچرز بھی بند کریں؟",
   "Explain this setting": "اس سیٹنگ کی وضاحت کریں",
   "Changed by you": "آپ نے بدلا",
-  "One place for every answer": "تمام جوابات کے لیے ایک جگہ",
   "Search all settings, including hidden ones": "چھپی ہوئی سمیت تمام سیٹنگز میں تلاش کریں",
   "Connected": "جڑا ہوا",
   "Keep my manual changes": "میری دستی تبدیلیاں رکھیں",
   "Show {n} more settings": "مزید {n} سیٹنگز دکھائیں",
-  "More settings and expert tools": "مزید سیٹنگز اور ماہر ٹولز",
   "Show hidden setting": "چھپی سیٹنگ دکھائیں",
   "Proxy address": "پراکسی کا پتہ",
   "Continue without checking": "جانچے بغیر جاری رکھیں",
@@ -5665,7 +5663,6 @@
   "Own value": "اپنی قدر",
   "Return to the group value": "گروپ کی قدر پر واپس جائیں",
   "This account is in the group {name}.": "یہ اکاؤنٹ گروپ {name} میں ہے۔",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 گروپ کی قدر کو نشان زد کرتا ہے؛ ✏️ اس اکاؤنٹ کی اپنی قدر کو نشان زد کرتا ہے۔",
   "Group settings": "گروپ کی ترتیبات",
   "Shared with the group": "گروپ کے ساتھ شیئر کیا گیا",
   "Settings the group shares besides those in the other sections:": "وہ ترتیبات جو گروپ دوسرے حصوں میں دی گئی ترتیبات کے علاوہ شیئر کرتا ہے:",
@@ -8875,5 +8872,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "پینل نے جواب نہیں دیا۔ دیکھیں کہ TgWitness چل رہا ہے اور یہ آلہ اس تک پہنچ سکتا ہے۔",
+  "Add message numbers": "پیغام نمبر شامل کریں",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "چٹ آئی ڈی، کولن اور پیغام نمبر، یا t.me/c لنکس۔ ہر سطر میں ایک چٹ۔",
+  "Could not read: {text}": "پڑھا نہیں جا سکا: {text}"
 }

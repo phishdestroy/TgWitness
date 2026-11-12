@@ -5206,12 +5206,10 @@
   "Turn off the dependent features too?": "ปิดฟีเจอร์ที่เกี่ยวข้องด้วยหรือไม่?",
   "Explain this setting": "อธิบายการตั้งค่านี้",
   "Changed by you": "คุณเปลี่ยนเอง",
-  "One place for every answer": "ที่เดียวสำหรับทุกคำตอบ",
   "Search all settings, including hidden ones": "ค้นหาการตั้งค่าทั้งหมด รวมถึงที่ซ่อนอยู่",
   "Connected": "เชื่อมต่อแล้ว",
   "Keep my manual changes": "เก็บการเปลี่ยนแปลงที่ฉันทำเอง",
   "Show {n} more settings": "แสดงการตั้งค่าอีก {n} รายการ",
-  "More settings and expert tools": "การตั้งค่าเพิ่มเติมและเครื่องมือผู้เชี่ยวชาญ",
   "Show hidden setting": "แสดงการตั้งค่าที่ซ่อนอยู่",
   "Proxy address": "ที่อยู่พร็อกซี",
   "Continue without checking": "ดำเนินการต่อโดยไม่ตรวจสอบ",
@@ -5633,7 +5631,6 @@
   "Own value": "ค่าเฉพาะ",
   "Return to the group value": "กลับสู่ค่าของกลุ่ม",
   "This account is in the group {name}.": "บัญชีนี้อยู่ในกลุ่ม{name}",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 ระบุค่าจากกลุ่ม; ✏️ ระบุค่าเฉพาะของบัญชีนี้",
   "Group settings": "การตั้งค่ากลุ่ม",
   "Shared with the group": "ใช้ร่วมกันกับกลุ่ม",
   "Settings the group shares besides those in the other sections:": "การตั้งค่าที่กลุ่มใช้ร่วมกันนอกเหนือจากที่ระบุในส่วนอื่น ๆ:",
@@ -8829,5 +8826,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "พาเนลไม่ตอบสนอง ตรวจสอบว่า TgWitness กำลังทำงานอยู่และอุปกรณ์นี้เข้าถึงได้",
+  "Add message numbers": "เพิ่มหมายเลขข้อความ",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID การสนทนา ตามด้วยโคลอนและหมายเลขข้อความ หรือลิงก์ t.me/c หนึ่งการสนทนาต่อบรรทัด",
+  "Could not read: {text}": "อ่านไม่ได้: {text}"
 }

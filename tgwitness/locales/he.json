@@ -5260,12 +5260,10 @@
   "Turn off the dependent features too?": "לכבות גם את התכונות התלויות?",
   "Explain this setting": "הסבר על ההגדרה",
   "Changed by you": "שונה על ידך",
-  "One place for every answer": "מקום אחד לכל התשובות",
   "Search all settings, including hidden ones": "חיפוש בכל ההגדרות, כולל המוסתרות",
   "Connected": "מחובר",
   "Keep my manual changes": "לשמור את השינויים הידניים שלי",
   "Show {n} more settings": "הצגת עוד {n} הגדרות",
-  "More settings and expert tools": "עוד הגדרות וכלי מומחה",
   "Show hidden setting": "הצגת הגדרה מוסתרת",
   "Proxy address": "כתובת הפרוקסי",
   "Continue without checking": "להמשיך בלי לבדוק",
@@ -5697,7 +5695,6 @@
   "Own value": "ערך משלו",
   "Return to the group value": "חזור לערך הקבוצתי",
   "This account is in the group {name}.": "חשבון זה נמצא בקבוצה {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 מסמן ערך מהקבוצה; ✏️ מסמן את הערך של החשבון עצמו.",
   "Group settings": "הגדרות הקבוצה",
   "Shared with the group": "משותף לקבוצה",
   "Settings the group shares besides those in the other sections:": "הגדרות שהקבוצה חולקת, בנוסף לאלה המופיעות בסעיפים האחרים:",
@@ -8921,5 +8918,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "הפאנל לא הגיב. ודאו ש-TgWitness פועל ושהמכשיר הזה יכול להגיע אליו.",
+  "Add message numbers": "הוספת מספרי הודעות",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "מזהה צ'אט, נקודתיים ומספרי הודעות, או קישורי t.me/c. צ'אט אחד בכל שורה.",
+  "Could not read: {text}": "לא ניתן לקרוא: {text}"
 }

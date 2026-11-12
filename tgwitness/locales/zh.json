@@ -5206,12 +5206,10 @@
   "Turn off the dependent features too?": "同时关闭相关功能？",
   "Explain this setting": "解释此设置",
   "Changed by you": "由你更改",
-  "One place for every answer": "所有答案集中在一处",
   "Search all settings, including hidden ones": "搜索所有设置，包括隐藏的设置",
   "Connected": "已连接",
   "Keep my manual changes": "保留我的手动更改",
   "Show {n} more settings": "再显示 {n} 项设置",
-  "More settings and expert tools": "更多设置和专家工具",
   "Show hidden setting": "显示隐藏的设置",
   "Proxy address": "代理地址",
   "Continue without checking": "不检查继续",
@@ -5633,7 +5631,6 @@
   "Own value": "自有值",
   "Return to the group value": "恢复为组设置值",
   "This account is in the group {name}.": "该账户属于{name}组。",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 表示来自组的值；✏️ 表示该账户的自有值。",
   "Group settings": "组设置",
   "Shared with the group": "与组共享",
   "Settings the group shares besides those in the other sections:": "除其他部分所述设置外，该组还共享以下设置：",
@@ -8829,5 +8826,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "面板没有响应。请确认 TgWitness 正在运行，且此设备可以连接到它。",
+  "Add message numbers": "添加消息编号",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "聊天 ID、冒号和消息编号，或 t.me/c 链接。每行一个聊天。",
+  "Could not read: {text}": "无法读取：{text}"
 }

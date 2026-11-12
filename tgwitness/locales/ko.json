@@ -5206,12 +5206,10 @@
   "Turn off the dependent features too?": "관련 기능도 끌까요?",
   "Explain this setting": "이 설정 설명",
   "Changed by you": "직접 변경함",
-  "One place for every answer": "모든 답을 한곳에",
   "Search all settings, including hidden ones": "숨겨진 설정을 포함해 모든 설정 검색",
   "Connected": "연결됨",
   "Keep my manual changes": "직접 변경한 내용 유지",
   "Show {n} more settings": "설정 {n}개 더 보기",
-  "More settings and expert tools": "더 많은 설정과 전문가 도구",
   "Show hidden setting": "숨겨진 설정 보기",
   "Proxy address": "프록시 주소",
   "Continue without checking": "확인하지 않고 계속",
@@ -5633,7 +5631,6 @@
   "Own value": "자체 값",
   "Return to the group value": "그룹 값으로 되돌리기",
   "This account is in the group {name}.": "이 계정은 {name} 그룹에 속해 있습니다.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗는 그룹의 값을, ✏️는 해당 계정의 자체 값을 나타냅니다.",
   "Group settings": "그룹 설정",
   "Shared with the group": "그룹과 공유됨",
   "Settings the group shares besides those in the other sections:": "다른 섹션에 있는 설정 외에도 그룹이 공유하는 설정은 다음과 같습니다:",
@@ -8829,5 +8826,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "패널이 응답하지 않았습니다. TgWitness가 실행 중인지, 이 기기에서 접속할 수 있는지 확인하세요.",
+  "Add message numbers": "메시지 번호 추가",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "채팅 ID, 콜론, 메시지 번호 또는 t.me/c 링크. 한 줄에 채팅 하나.",
+  "Could not read: {text}": "읽을 수 없습니다: {text}"
 }

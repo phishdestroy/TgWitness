@@ -15,10 +15,12 @@ export function createSettingsHub(ctx) {
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
   let autoTried=false, routeDirty=false, checkFailure=null;
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null, methodShown=false;
-  let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false, advancedOpen=false;
+  let shownStep=null, shownStage=null, levelChosen=false, moreOpen=false, moreConnection=false;
   let groupScope=null, scopeDirty=false, history=null, historyLoading=null, undo=null, undoTimer=null;
-  const mainSections=['telegram','chats','connection','appearance'];
-  const advancedSections=['goal','collection','protection','notifications','level'];
+  let sheet=null, sheetFor=null, pressed=false, focusHint=null, shownForm=null, historyFocus=false;
+  const formSection=id=>id==='evidence-form'?'protection':'notifications';
+  const tools=[['sources','sources:green','Recording rules'],['parameters','settings:slate','Parameters'],['access','users:blue','Access'],
+    ['integrations','link:violet','Integrations / MCP'],['system-log','table:slate','System log'],['sealed','braces:indigo','GitHub Actions']];
   const hints={continuous:'Keep recording new messages and their changes after setup.',
     files:'Larger files are recorded without downloading their contents.',
     timestamps:'Independent services confirm when records existed.',
@@ -54,9 +56,35 @@ export function createSettingsHub(ctx) {
   const groupView=createGroupSettings({json,tr,trn:ctx.trn,node,toast,askConfirm,button,message,cards,label,describe,goals,run,root,
     fields:()=>data?.fields||[],openConnection:ctx.openConnection,back:async()=>{groupScope=null;data=await request(owner(),'settings');render();}});
   function button(text, fn, style='secondary') { const el=node('button',style,tr(text));el.type='button';el.onclick=()=>run(fn,el);return el; }
-  async function run(fn, control) { if(control)control.disabled=true;try{return await fn();}catch(e){if(e.name!=='StaleView')toast(e.message,true);}finally{if(control?.isConnected)control.disabled=false;} }
+  const within=()=>section&&sheet?.firstChild?sheet:root;
+  function focusMark(){
+    const el=document.activeElement;if(!el?.closest?.('.hub-sheet,#view-settings'))return null;
+    if(el.closest('.hub-undo'))return {find:section?'#hub-sheet-title':'.hub-heading h1',index:-1};
+    const row=el.closest('[data-setting]');
+    if(row){
+      const pool=el.matches('.hub-choice')?'.hub-choice':el.matches('input,select')?'input,select':'button';
+      return {find:'[data-setting="'+CSS.escape(row.dataset.setting)+'"]',pool,index:[...row.querySelectorAll(pool)].indexOf(el)};
+    }
+    const answer=el.closest('[data-answer]');
+    if(answer)return {find:'[data-answer="'+CSS.escape(answer.dataset.answer)+'"]',index:-1};
+    const entry=el.closest('.hub-summary[data-section]');
+    return entry?{find:'.hub-summary[data-section="'+CSS.escape(entry.dataset.section)+'"]',index:-1}:null;
+  }
+  function refocus(mark){
+    const row=mark&&within().querySelector(mark.find);
+    (mark?.index>=0?row?.querySelectorAll(mark.pool)[mark.index]:row)?.focus({preventScroll:true});
+  }
+  async function run(fn, control) {
+    const mark=focusMark();if(mark)focusHint=mark;if(control)control.disabled=true;
+    try{return await fn();}catch(e){
+      if(e.name==='StaleView')return;
+      toast(e.message,true);
+      const said=section&&sheet?.querySelector('.hub-sheet-said');
+      if(said)said.textContent=e.message;
+    }
+    finally{if(control?.isConnected)control.disabled=false;if(focusHint===mark)focusHint=null;}
+  }
   function message(text, cls='hint') { return node('p',cls,tr(text)); }
-  function title(box,text){box.append(node('h2','',tr(text)));}
   function select(text, choices, value, fn) {
     const wrap=node('label','hub-label',tr(text)), el=node('select');
     for(const [key,name] of choices)el.append(new Option(tr(name),key));el.value=value;el.onchange=()=>run(()=>fn(el.value));wrap.append(el);return wrap;
@@ -72,6 +100,11 @@ export function createSettingsHub(ctx) {
       const b=button('',()=>fn(key),'answer-card');b.dataset.answer=key;b.setAttribute('aria-pressed',String(key===value));
       b.append(glyph(emoji,'answer-icon'),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
     }box.append(group);
+  }
+  function heading(){const box=node('div','hub-heading'),title=node('h1','',tr('Settings'));title.tabIndex=-1;box.append(title);return box;}
+  function closed(text){
+    const box=node('div','hub-closed'),mark=glyph('settings:slate','hub-closed-mark');
+    box.append(mark,message(text));section=null;closeSheet();root.replaceChildren(heading(),box);
   }
   function restoreMoved(){for(const [el,marker] of moved){marker.replaceWith(el);}moved=[];}
   function move(el, host){if(!el)return;const marker=document.createComment('settings-form');el.before(marker);host.append(el);moved.push([el,marker]);}
@@ -120,8 +153,8 @@ export function createSettingsHub(ctx) {
   async function load(wanted=null,hub){
     const who=owner();
     if(hub!==undefined&&state.view==='settings'){section=sections.includes(hub)?hub:null;query='';}
-    if(state.status?.demo){root.replaceChildren(message('Demo workspace. Connect accounts in your live installation.'));return;}
-    if(!state.me?.admin){root.replaceChildren(message('Only the workspace administrator can change collection settings.'));return;}
+    if(state.status?.demo){closed('Demo workspace. Connect accounts in your live installation.');return;}
+    if(!state.me?.admin){closed('Only the workspace administrator can change collection settings.');return;}
     if(!prefs){const result=await request(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
     data=await request(who,'settings');draft={...data.wizard};
     visited=Math.max(visited,draft.step);
@@ -167,11 +200,13 @@ export function createSettingsHub(ctx) {
     undoTimer=setTimeout(()=>{undo=null;paintUndo();},20000);
   }
   function paintUndo(){
-    let bar=root.querySelector('.hub-undo');
-    if(!undo||state.view!=='settings'){bar?.remove();return;}
-    if(!bar){bar=node('div','hub-undo');bar.setAttribute('role','status');root.append(bar);}
+    const shown=undo&&state.view==='settings',host=section&&sheet?.open?sheet.querySelector('.hub-sheet-body'):root;
+    for(const old of [...root.querySelectorAll('.hub-undo'),...(sheet?.querySelectorAll('.hub-undo')||[])])if(!shown||old.parentElement!==host)old.remove();
+    if(!shown||!host)return;
+    let bar=host.querySelector(':scope>.hub-undo');
+    if(!bar){bar=node('div','hub-undo');bar.setAttribute('role','status');host.append(bar);}
     const act=button('Undo',async()=>{const action=undo?.action;undo=null;paintUndo();if(action)await action();},'hub-undo-action');
-    const close=button('✕',()=>{undo=null;paintUndo();},'hub-undo-close');close.setAttribute('aria-label',tr('Close'));
+    const close=button('',()=>{undo=null;paintUndo();},'hub-undo-close');close.append(ctx.icon('x'));close.setAttribute('aria-label',tr('Close'));
     bar.replaceChildren(node('span','hub-undo-text',undo.text),act,close);
   }
   async function loadHistory(who=owner()){
@@ -201,10 +236,13 @@ export function createSettingsHub(ctx) {
       for(const row of rows.slice(0,5)){
         const item=node('li','hub-history-row'),time=node('time','hint',new Date(row.at).toLocaleString(prefs.language,{timeZone:prefs.timezone,dateStyle:'medium',timeStyle:'short'}));
         time.dateTime=row.at;
-        item.append(node('span','hub-history-text',(row.restored?tr('Undo of an earlier change')+' · ':'')+changeText(row)),time,button('Undo',()=>restoreChange(row.seq),'text-link'));
+        item.append(node('span','hub-history-text',(row.restored?tr('Undo of an earlier change')+' · ':'')+changeText(row)),time,
+          button('Undo',()=>{historyFocus=true;return restoreChange(row.seq);},'text-link'));
         list.append(item);
       }
       card.append(list);
+      if(historyFocus&&[document.body,null].includes(document.activeElement))list.querySelector('.text-link')?.focus({preventScroll:true});
+      historyFocus=false;
     }).catch(()=>{});
   }
   async function edit(key,value,who=owner()){
@@ -227,7 +265,7 @@ export function createSettingsHub(ctx) {
     const themes=[['system','System theme'],['light','Light theme'],['dark','Dark theme']];
     const theme=node('div','hub-choices');theme.setAttribute('role','group');theme.setAttribute('aria-label',tr('Theme'));
     for(const [value,name] of themes){const b=button(name,async()=>{await remember({theme:value},tr(name));render();},'hub-choice');b.setAttribute('aria-pressed',String(prefs.theme===value));theme.append(b);}
-    const themeLabel=node('div','hub-label');themeLabel.append(node('span','',tr('Theme')),theme);box.append(themeLabel);
+    const themeLabel=node('div','hub-label');themeLabel.dataset.setting='theme';themeLabel.append(node('span','',tr('Theme')),theme);box.append(themeLabel);
     const device=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
     const zones=[...new Set([prefs.timezone,device,'UTC',...(Intl.supportedValuesOf?.('timeZone')||[])])];
     box.append(select('Time zone',zones.map(x=>[x,x===device?x+' · '+tr('this device'):x]),prefs.timezone,value=>remember({timezone:value},value)));
@@ -272,17 +310,40 @@ export function createSettingsHub(ctx) {
   function inheritMark(key){
     const item=inherited(key);if(!item)return null;
     const box=node('span','inherit-mark '+item.source);box.dataset.inherit=item.source;
-    box.append(node('span','inherit-source',item.source==='group'?'🔗 '+tr('From the group'):'✏️ '+tr('Own value')));
+    const source=node('span','inherit-source');source.append(ctx.icon(item.source==='group'?'link':'edit'),document.createTextNode(tr(item.source==='group'?'From the group':'Own value')));box.append(source);
     if(item.source==='own')box.append(button('Return to the group value',()=>revertKey(key),'text-link'));
     return box;
   }
   function sharedName(key){return key.startsWith('parameter:')?data.parameters.find(p=>p.key===key)?.label||key:sharedNames[key]||key;}
   async function openGroup(id){await groupView.load(id);groupScope=id;section=null;query='';render();}
-  function openSection(name){section=name;query='';scopeDirty=false;render();ctx.record?.();root.querySelector('.hub-detail h2')?.focus();}
+  function openSection(name){section=name;query='';scopeDirty=false;shownForm=null;render();ctx.record?.();}
   async function closeSection(){
+    if(!section)return;
     if(section==='chats'&&scopeDirty&&!await confirm(owner(),tr('Leave without saving the chat selection?')))return;
-    const who=owner();data=await request(who,'settings');draft={...data.wizard};editing=false;scopeDirty=false;section=null;render();ctx.record?.();
-    root.querySelector('.hub-summary[data-section]')?.focus({preventScroll:true});
+    const who=owner(),from=section;draft={...data.wizard};editing=false;scopeDirty=false;section=null;shownForm=null;render();ctx.record?.();
+    (root.querySelector('.hub-summary[data-section="'+from+'"]')||root.querySelector('.hub-summary[data-section]'))?.focus({preventScroll:true});
+    const before=JSON.stringify(data);data=await request(who,'settings');
+    if(!section){draft={...data.wizard};if(state.view==='settings'&&JSON.stringify(data)!==before)render();}
+  }
+  function ensureSheet(){
+    if(!sheet){
+      sheet=node('dialog','hub-sheet');sheet.setAttribute('aria-labelledby','hub-sheet-title');
+      sheet.addEventListener('cancel',event=>{if(event.target!==sheet)return;event.preventDefault();void run(closeSection);});
+      sheet.addEventListener('close',event=>{
+        if(event.target!==sheet||!section||sheet.open||state.view!=='settings')return;
+        section=null;shownForm=null;editing=false;scopeDirty=false;if(data)draft={...data.wizard};
+        window.TgWitnessDialogs?.closeAll();render();ctx.record?.();
+      });
+      sheet.addEventListener('pointerdown',event=>{pressed=event.target===sheet;});
+      sheet.addEventListener('click',event=>{if(pressed&&event.target===sheet)void run(closeSection);pressed=false;});
+    }
+    if(!sheet.isConnected)(root.parentElement||document.body).append(sheet);
+    return sheet;
+  }
+  function closeSheet(){
+    restoreMoved();sheetFor=null;if(!sheet)return;
+    if(sheet.open)sheet.close();
+    sheet.replaceChildren();
   }
   function summaryRows(){
     const inheritance=data.inheritance,connected=fresh(data.connection);
@@ -301,135 +362,153 @@ export function createSettingsHub(ctx) {
     }
     return rows;
   }
-  function summaryCard(box,[id,name,summary,tone,icon]){
+  function arrow(){const el=node('span','hub-arrow');el.append(ctx.icon('chevron'));return el;}
+  function listGroup(box,caption){
+    const group=node('section','hub-group'),list=node('div','hub-list');
+    group.append(node('h2','hub-caption',caption));
+    group.append(list);box.append(group);return list;
+  }
+  function summaryRow(box,[id,name,summary,tone,icon]){
     const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;b.dataset.tone=tone;
-    const top=node('span','hub-summary-top');top.append(glyph(icon,'hub-summary-icon'),node('strong','',tr(name)));
     const line=node('span','hub-summary-value');if(tone!=='none')line.append(node('span','hub-dot'));line.append(document.createTextNode(summary));
-    const arrow=node('span','hub-arrow');arrow.append(ctx.icon('chevron'));b.append(top,line,arrow);box.append(b);
+    b.append(glyph(icon,'hub-summary-icon'),node('strong','',tr(name)),line,arrow());box.append(b);
+  }
+  function toolRow(box,icon,text,fn,level){
+    const b=button('',fn,'hub-summary hub-tool');if(level)b.dataset.level=level;
+    b.append(glyph(icon,'hub-summary-icon'),node('strong','',tr(text)),arrow());box.append(b);
+  }
+  function profileCard(box,[id,,summary,tone]){
+    const account=state.status?.collector?.account,name=ctx.profile()?.label||tr('Telegram account');
+    const b=button('',()=>openSection(id),'hub-summary hub-profile');b.dataset.section=id;b.dataset.tone=tone;
+    const who=node('span','hub-profile-who');
+    who.append(node('strong','',name),node('span','hub-profile-id',account?(account.username?'@'+account.username+' · ':'')+'ID '+account.id:tr('No Telegram account yet')));
+    const line=node('span','hub-summary-value');line.append(node('span','hub-dot'),document.createTextNode(summary));
+    b.append(ctx.avatar(account?.id??null,account?.username||name,'xl'),who,line,arrow());box.append(b);
   }
   function autoCard(box){
     const modified=data.fields.filter(f=>f.modified);
-    const card=node('section','hub-auto'+(modified.length?' changed':''));
-    const body=node('div','hub-auto-body');
-    body.append(node('strong','',tr(modified.length?'Some settings differ from the recommended ones':'Recommended settings are on')),
-      message(data.goal?tr('Chosen for “{goal}”. Change only what you need: every change can be undone.',{goal:label(data.goal)})
-        :tr('Safe defaults are in use. Change only what you need: every change can be undone.')));
-    const chips=node('div','hub-chips');
+    const card=node('section','hub-auto'+(modified.length?' changed':'')),head=node('div','hub-auto-head');
+    head.append(glyph(modified.length?'edit:orange':'sparkle:violet','hub-auto-icon'),node('strong','',tr(modified.length?'Some settings differ from the recommended ones':'Recommended settings are on')));
+    const chips=node('dl','hub-chips');
     for(const [key,value] of [['files',label(data.values.files)],['timestamps',tr(data.values.timestamps?'On':'Off')],
-      ['notifications',tr(data.values.notifications?'On':'Off')],['outside',tr(data.values.outside?'On':'Off')]])
-      chips.append(node('span','hub-chip',fieldLabel(key)+': '+value));
-    body.append(chips);
+      ['notifications',tr(data.values.notifications?'On':'Off')],['outside',tr(data.values.outside?'On':'Off')]]){
+      const chip=node('div','hub-chip');chip.append(node('dt','',fieldLabel(key)),node('dd','',value));chips.append(chip);
+    }
     const actions=node('div','hub-actions');
     if(modified.length&&data.goal)actions.append(button('Return to recommended',()=>applyGoal(data.goal,{quiet:true}).then(()=>render()),'secondary'));
     actions.append(button('Undo last change',restoreLatest,'quiet hub-undo-last'));
-    body.append(actions);card.append(glyph(modified.length?'edit:orange':'sparkle:violet','hub-auto-icon'),body);box.append(card);
+    card.append(head,message(data.goal?tr('Chosen for “{goal}”. Change only what you need: every change can be undone.',{goal:label(data.goal)})
+      :tr('Safe defaults are in use. Change only what you need: every change can be undone.')),chips,actions);box.append(card);
     loadHistory().then(rows=>{const last=card.querySelector('.hub-undo-last');if(last)last.hidden=!rows?.length;}).catch(()=>{});
     card.querySelector('.hub-undo-last').hidden=!history?.length;
   }
   function render(){
     restoreMoved();if(!data||!prefs)return;
-    if(groupScope&&groupView.data){groupView.render(root);return;}
+    if(groupScope&&groupView.data){closeSheet();groupView.render(root);return;}
+    const mark=focusMark()||([document.body,sheet,null].includes(document.activeElement)?focusHint:null);
     root.replaceChildren();
-    const header=node('div','hub-heading');header.append(node('div','eyebrow',tr('One place for every answer')),node('h1','',tr('Settings')));root.append(header);
+    root.append(heading());
     const inheritance=data.inheritance;
     if(inheritance){
       const note=node('div','notice hub-group-note');
-      note.append(node('span','',tr('This account is in the group {name}.',{name:inheritance.group.label})+' '+
-        tr('🔗 marks a value from the group; ✏️ marks this account’s own value.')),
+      note.append(node('span','',tr('This account is in the group {name}.',{name:inheritance.group.label})),
         button('Group settings',()=>openGroup(inheritance.group.id),'text-link'));
       root.append(note);
     }
+    const summaries=summaryRows(),entry=id=>summaries.find(row=>row[0]===id);
+    const overview=node('div','hub-overview'),lists=node('div','hub-lists'),side=node('div','hub-side');overview.append(lists,side);root.append(overview);
+    profileCard(lists,entry('telegram'));
     const search=node('input','hub-search');search.type='search';search.placeholder=tr('Search all settings, including hidden ones');search.setAttribute('aria-label',search.placeholder);search.value=query;
-    search.oninput=()=>{query=search.value;renderResults(results);};root.append(search);
-    const results=node('div','hub-results');root.append(results);renderResults(results);
-    const summaries=summaryRows();
-    const overview=node('div','hub-overview');overview.hidden=!!query||!!section;root.append(overview);
-    if(!section){
-      autoCard(overview);
-      const main=node('div','hub-grid hub-main');overview.append(main);
-      for(const row of summaries.filter(r=>mainSections.includes(r[0])))summaryCard(main,row);
-      historyCard(overview);
-      const advanced=node('details','hub-advanced');advanced.open=advancedOpen;advanced.ontoggle=()=>{advancedOpen=advanced.open;};
-      advanced.append(node('summary','',tr('Advanced settings')));
-      const grid=node('div','hub-grid hub-secondary');advanced.append(grid);
-      for(const row of summaries.filter(r=>!mainSections.includes(r[0])&&r[0]!=='level'))summaryCard(grid,row);
-      const tools=node('div','hub-tools');tools.append(node('h3','',tr('More settings and expert tools')));
-      for(const [view,text] of [['sources','Recording rules'],['parameters','Parameters'],['access','Access'],['integrations','Integrations / MCP'],['system-log','System log'],['sealed','GitHub Actions']]){
-        const b=button(text,()=>openAdvanced(view),'quiet');b.dataset.level=navLevels[view];tools.append(b);
-      }
-      tools.append(button('Open first setup',async()=>{await saveDraft({step:1});await navigate('first-run');},'text-link'));
-      advanced.append(tools);overview.append(advanced);
-      if(data.recommendations.length)overview.append(message('Recommended: an off-site copy, a witness bot and a code check.','notice'));
+    const results=node('div','hub-results hub-list'),groups=node('div','hub-groups');
+    search.oninput=()=>{query=search.value;renderResults(results);};lists.append(search,results,groups);
+    for(const [caption,ids] of [[tr('Account'),['chats','connection']],[tr('Recording'),['goal','collection','protection','notifications','group']],[tr('Panel'),['appearance']]]){
+      const list=listGroup(groups,caption);
+      for(const id of ids)if(entry(id))summaryRow(list,entry(id));
     }
-    const detail=node('section','hub-detail');detail.hidden=!section;root.append(detail);
-    if(section){
-      const bar=node('div','hub-detail-bar'), close=button('✕',closeSection,'icon-btn hub-close');
-      close.setAttribute('aria-label',tr('Close'));close.title=tr('Close');
-      const back=button('Back to settings',closeSection,'secondary hub-back');back.textContent='← '+tr('Back to settings');
-      bar.append(back,close);detail.append(bar);
-      title(detail,summaries.find(s=>s[0]===section)?.[1]||'Settings');
-      if(section==='appearance')preferencesForm(detail);
-      if(section==='appearance'||section==='level'){
-        if(section==='appearance')detail.append(node('h3','hub-subtitle',tr('Interface level')));
-        cards(detail,levels,prefs.level,async level=>{const before=prefs.level;await savePreferences({level});render();
-          showUndo(tr('Saved')+' · '+label(level),async()=>{await savePreferences({level:before});render();});});
-      }
-      if(section==='group'&&inheritance){
-        const keys=Object.keys(inheritance.keys).filter(k=>k!=='goal'&&!data.fields.some(f=>f.key===k));
-        detail.append(message(keys.length?'Settings the group shares besides those in the other sections:':'The group shares only settings shown in the other sections.'));
-        for(const key of keys){
-          const row=node('div','hub-field');row.dataset.setting=key;const heading=node('div');
-          heading.append(node('strong','',tr(sharedName(key))),inheritMark(key));row.append(heading);detail.append(row);
-        }
-        detail.append(button('Group settings',()=>openGroup(inheritance.group.id)));
-      }
-      if(section==='goal'){
-        const goalMark=inheritMark('goal');if(goalMark)detail.append(goalMark);
-        detail.append(message('A goal sets files, timestamps and notifications at once. You can undo it right after.'));
-        cards(detail,goals,data.goal,async goal=>{if(goal===data.goal)return;await applyGoal(goal,{quiet:true});render();});
-      }
-      if(section==='connection')connectionForm(detail,false);
-      if(section==='telegram'&&signedIn()&&window.TgWitnessDocumentation)detail.append(button('Profile',async()=>{await closeSection();await window.TgWitnessDocumentation.openAccount();}));
-      if(section==='telegram')move(ctx.authCard(),detail);
-      if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
-        const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});detail.append(button('Pseudo-secret',()=>navigate('secret-chats')));}
-      const fields=section==='connection'?[]:data.fields.filter(f=>f.section===section);
-      const hidden=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section));
-      for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
-      if(hidden.length){const more=node('details','hub-more-options');more.append(node('summary','',tr('Show {n} more settings',{n:hidden.length})));
-        for(const f of hidden)more.append(fieldRow(f));detail.append(more);}
-      if(section==='notifications'){
-        if(data.needs_notification_destination)detail.append(message('Notifications are enabled. Add a destination to receive them.','notice warning'));
-        const actions=node('div','hub-actions');actions.append(button('Notification destinations',()=>openForm('alerts-form')),button('Off-site copy',()=>openForm('replica-form')));detail.append(actions);
-      }
-      if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);}
-      if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
-      if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
+    const more=listGroup(groups,tr('More tools'));
+    for(const [view,icon,text] of tools)toolRow(more,icon,text,()=>openAdvanced(view),navLevels[view]);
+    toolRow(more,'sparkle:orange','Open first setup',async()=>{await saveDraft({step:1});await navigate('first-run');});
+    autoCard(side);historyCard(side);
+    if(data.recommendations.length)side.append(message('Recommended: an off-site copy, a witness bot and a code check.','notice'));
+    renderResults(results);
+    if(section&&state.view==='settings')renderSheet(summaries,inheritance);else closeSheet();
+    paintUndo();refocus(mark);
+  }
+  function renderSheet(summaries,inheritance){
+    const box=ensureSheet(),same=box.open&&sheetFor===section,top=same?box.querySelector('.hub-sheet-body')?.scrollTop||0:0;
+    sheetFor=section;box.replaceChildren();
+    const bar=node('div','hub-detail-bar'),back=button('',closeSection,'icon-btn hub-back'),close=button('',closeSection,'icon-btn hub-close');
+    back.append(ctx.icon('chevron'));back.setAttribute('aria-label',tr('Back to settings'));back.title=tr('Back to settings');
+    close.append(ctx.icon('x'));close.setAttribute('aria-label',tr('Close'));close.title=tr('Close');
+    const heading=node('h2','',tr(summaries.find(s=>s[0]===section)?.[1]||'Settings'));heading.id='hub-sheet-title';heading.tabIndex=-1;
+    bar.append(back,heading,close);
+    const body=node('div','hub-sheet-body'),detail=node('section','hub-detail'),said=node('p','visually-hidden hub-sheet-said');
+    said.setAttribute('role','alert');body.append(detail);box.append(bar,body,said);
+    if(section==='appearance')preferencesForm(detail);
+    if(section==='appearance'||section==='level'){
+      if(section==='appearance')detail.append(node('h3','hub-subtitle',tr('Interface level')));
+      cards(detail,levels,prefs.level,async level=>{const before=prefs.level;await savePreferences({level});render();
+        showUndo(tr('Saved')+' · '+label(level),async()=>{await savePreferences({level:before});render();});});
     }
-    paintUndo();
+    if(section==='group'&&inheritance){
+      const keys=Object.keys(inheritance.keys).filter(k=>k!=='goal'&&!data.fields.some(f=>f.key===k));
+      detail.append(message(keys.length?'Settings the group shares besides those in the other sections:':'The group shares only settings shown in the other sections.'));
+      for(const key of keys){
+        const row=node('div','hub-field');row.dataset.setting=key;const heading=node('div');
+        heading.append(node('strong','',tr(sharedName(key))),inheritMark(key));row.append(heading);detail.append(row);
+      }
+      detail.append(button('Group settings',()=>openGroup(inheritance.group.id)));
+    }
+    if(section==='goal'){
+      const goalMark=inheritMark('goal');if(goalMark)detail.append(goalMark);
+      detail.append(message('A goal sets files, timestamps and notifications at once. You can undo it right after.'));
+      cards(detail,goals,data.goal,async goal=>{if(goal===data.goal)return;await applyGoal(goal,{quiet:true});render();});
+    }
+    if(section==='connection')connectionForm(detail,false);
+    if(section==='telegram'&&signedIn()&&window.TgWitnessDocumentation)detail.append(button('Profile',async()=>{await closeSection();await window.TgWitnessDocumentation.openAccount();}));
+    if(section==='telegram')move(ctx.authCard(),detail);
+    if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
+      const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});detail.append(button('Pseudo-secret',()=>navigate('secret-chats')));}
+    const fields=section==='connection'?[]:data.fields.filter(f=>f.section===section);
+    const above=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section)),hidden=above.length<fields.length?above:[];
+    for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
+    if(hidden.length){const more=node('details','hub-more-options');more.append(node('summary','',tr('Show {n} more settings',{n:hidden.length})));
+      for(const f of hidden)more.append(fieldRow(f));detail.append(more);}
+    if(section==='notifications'){
+      if(data.needs_notification_destination)detail.append(message('Notifications are enabled. Add a destination to receive them.','notice warning'));
+      const actions=node('div','hub-actions');actions.append(button('Notification destinations',()=>openForm('alerts-form')),button('Off-site copy',()=>openForm('replica-form')));detail.append(actions);
+    }
+    if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);}
+    if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
+    if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
+    if(shownForm&&formSection(shownForm)===section)move($(shownForm),detail);
+    if(!box.open)box.showModal();
+    if(!same)heading.focus({preventScroll:true});
+    body.scrollTop=top;
   }
   function renderResults(box){
-    box.replaceChildren();root.querySelector('.hub-overview')?.toggleAttribute('hidden',!!query||!!section);
+    box.replaceChildren();root.querySelector('.hub-groups')?.toggleAttribute('hidden',!!query.trim());
     if(!query.trim())return;
     const q=query.trim().toLocaleLowerCase();
     const all=[...data.fields,...data.parameters,...[...ctx.catalog()].map(f=>({...f,label:tr(f.label)}))];
     const matches=all.filter(f=>(tr(f.label)+' '+f.key).toLocaleLowerCase().includes(q));
-    if(!matches.length)box.append(message('No settings found.'));
+    if(!matches.length)box.append(message('No settings found.','hint hub-empty'));
     for(const f of matches.slice(0,80)){
       const hidden=rank[f.level]>rank[prefs.level];
-      const b=button(tr(f.label)+(hidden?' · '+tr('Show hidden setting'):''),async()=>{
+      const b=button('',async()=>{
         if(['alerts-form','replica-form','evidence-form'].includes(f.form))await openForm(f.form,f.id);
         else if(f.view)await openAdvanced(f.view,f.extra,f.id);
         else if(f.key.startsWith('parameter:'))await openAdvanced('parameters',null,'parameter-'+f.key.slice(10));
-        else{reveal.add(f.section);openSection(f.section);root.querySelector('[data-setting="'+f.key+'"]')?.scrollIntoView({block:'center'});}
-      });b.dataset.level=f.level;box.append(b);
+        else{reveal.add(f.section);openSection(f.section);within().querySelector('[data-setting="'+f.key+'"]')?.scrollIntoView({block:'center'});}
+      },'hub-summary hub-result');b.dataset.level=f.level;
+      b.append(node('strong','',tr(f.label)),node('span','hub-summary-value',hidden?label(f.level):''),arrow());box.append(b);
     }
   }
   async function openForm(id, focus){
     const who=owner();
-    section=id==='evidence-form'?'protection':'notifications';query='';render();
-    const detail=root.querySelector('.hub-detail');
-    const form=$(id);move(form,detail);await ctx.loadSettingsForm(id);
+    section=formSection(id);shownForm=id;query='';render();
+    const detail=sheet.querySelector('.hub-detail'),form=$(id);
+    await ctx.loadSettingsForm(id);
     requireOwner(who);
     const control=focus?$(focus):form;
     for(let p=control.parentElement;p&&p!==detail;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;
@@ -448,7 +527,7 @@ export function createSettingsHub(ctx) {
   function connectionForm(box, first){
     const routeDraft=first?draft:(editing?draft:{...data.wizard,route:data.connection.strategy?.mode|| (data.connection.managed?'warp':data.connection.mode==='direct'?'direct':data.connection.mode==='mtproxy_auto'?'auto':'proxy'),allow_direct:data.connection.strategy?.allow_direct??data.connection.policy.exposure!=='hide'});
     if(!first){draft=routeDraft;editing=true;}
-    const options=first?node('details','wizard-options'):null, routeBox=node('div');
+    const options=first?node('details','wizard-options'):null, routeBox=node('div'), extraBox=first?null:node('div');
     if(options){options.append(node('summary','',tr('Connection settings')),routeBox);options.open=prefs.level==='expert'||draft.route!=='auto'||!!draft.unchecked||!!checkFailure;}
     else box.append(routeBox);
     function updateRoutes(){routeBox.replaceChildren();cards(routeBox,routes,draft.route,async mode=>{
@@ -477,10 +556,11 @@ export function createSettingsHub(ctx) {
       }
       if(['auto','warp'].includes(draft.route))routeBox.append(message('Auto and WARP can download verified helpers and register this server with Cloudflare.'));
       routeBox.append(button(draft.route==='warp'?'Enable WARP':'Check connection',()=>checkConnection(draft.route==='warp')));
-      if(!first)routeBox.append(extra);
+      if(!first)extraBox.replaceChildren(extra);
     }
     updateRoutes();
     const status=node('div','connection-result');status.id='hub-connection-result';status.setAttribute('role','status');box.append(status);
+    if(extraBox)box.append(extraBox);
     if(options)box.append(options);
     if(connectionBusy){status.className='connection-result checking';status.textContent=tr('Checking connection…');}
     else if(checkFailure&&!fresh(data.connection))connectionFailed(checkFailure);
@@ -538,12 +618,12 @@ export function createSettingsHub(ctx) {
     const el=$('hub-route-status');if(!el)return;
     const ok=fresh(connection)&&(!state.status.collector.running||state.status.collector.connected!==false);
     el.classList.toggle('route-offline',!ok);el.textContent=ok?label(connection.mode)+' · '+connection.check.latency_ms+' '+tr('ms'):tr('No connection');
-    el.onclick=()=>run(async()=>{section='connection';await navigate('settings');});
+    el.onclick=()=>run(async()=>{await navigate('settings');if(state.view==='settings'&&data)openSection('connection');});
     const warning=$('hub-proxy-warning');
     warning.hidden=ok||!connection?.pool?.listed||connection.pool.healthy!==0||!connection.pool.probed_at;
     if(!warning.hidden){warning.replaceChildren(message('No public proxy answers. Try WARP or your own proxy.'));
-      warning.append(button('Switch to WARP',async()=>{const who=owner();section='connection';await navigate('settings');requireOwner(who);draft.route='warp';editing=true;render();}),
-        button('Check again',async()=>{const who=owner();section='connection';await navigate('settings');requireOwner(who);await checkConnection(false,who);}));}
+      warning.append(button('Switch to WARP',async()=>{const who=owner();await navigate('settings');requireOwner(who);section='connection';draft.route='warp';editing=true;render();}),
+        button('Check again',async()=>{const who=owner();await navigate('settings');requireOwner(who);openSection('connection');await checkConnection(false,who);}));}
   }
   function scheduleStatus(who=owner()){clearTimeout(statusTimer);statusTimer=setTimeout(async()=>{
     if(!current(who)||!state.token||!state.me?.admin||state.status?.demo)return;
@@ -689,7 +769,7 @@ export function createSettingsHub(ctx) {
     }
   }
   function updateScopeSave(){
-    const save=root.querySelector('[data-scope-save]');if(!save||!draft)return;
+    const save=within().querySelector('[data-scope-save]');if(!save||!draft)return;
     save.disabled=!scopeDirty||draft.scope==='selected'&&!draft.chat_ids.length||draft.scope==='folder'&&draft.folder_id===null;
   }
   function accountQuestion(box){
@@ -751,20 +831,19 @@ export function createSettingsHub(ctx) {
       draft.step===5&&(!signedIn()||draft.goal!=='copy'&&!draft.account_kind)||
       draft.step===6&&(draft.scope==='selected'&&!draft.chat_ids.length||draft.scope==='folder'&&draft.folder_id===null);
   }
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&section&&state.view==='settings'&&!groupScope&&!event.defaultPrevented&&!event.target.closest?.('dialog,input,textarea,select')&&!document.querySelector('dialog[open]')){event.preventDefault();void run(closeSection);}});
   for(const select of document.querySelectorAll('[data-ui-level]'))select.onchange=()=>run(async()=>{await savePreferences({level:select.value});if(state.view==='settings')render();});
   return {bootstrap,load,render,savePreferences,
     async openGroup(id){if(!data)data=await request(owner(),'settings');await openGroup(id);},
     get step(){return draft&&!live?draft.step:null;},
     get section(){return state.view==='settings'&&!groupScope?section:null;},
-    leave(){restoreMoved();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
+    leave(){section=null;shownForm=null;closeSheet();clearTimeout(liveTimer);live=null;recordedStep=null;groupScope=null;shownStep=shownStage=null;},
     status(){
       updateNext();if(data)updateIndicator(data.connection);
       const session=signedIn();
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;
     },
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);restoreMoved();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue=draftQueue=Promise.resolve();},
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue=draftQueue=Promise.resolve();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }

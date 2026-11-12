@@ -5341,12 +5341,10 @@
   "Turn off the dependent features too?": "إيقاف الميزات المعتمدة عليها أيضًا؟",
   "Explain this setting": "شرح هذا الإعداد",
   "Changed by you": "غيّرته أنت",
-  "One place for every answer": "مكان واحد لكل الإجابات",
   "Search all settings, including hidden ones": "البحث في كل الإعدادات، بما فيها المخفية",
   "Connected": "متصل",
   "Keep my manual changes": "الاحتفاظ بتغييراتي اليدوية",
   "Show {n} more settings": "إظهار {n} إعدادات أخرى",
-  "More settings and expert tools": "مزيد من الإعدادات وأدوات الخبراء",
   "Show hidden setting": "إظهار الإعداد المخفي",
   "Proxy address": "عنوان الوكيل",
   "Continue without checking": "المتابعة دون تحقق",
@@ -5793,7 +5791,6 @@
   "Own value": "القيمة الخاصة",
   "Return to the group value": "العودة إلى قيمة المجموعة",
   "This account is in the group {name}.": "هذا الحساب موجود في المجموعة {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "تشير علامة 🔗 إلى قيمة من المجموعة؛ بينما تشير علامة ✏️ إلى القيمة الخاصة بهذا الحساب.",
   "Group settings": "إعدادات المجموعة",
   "Shared with the group": "مشتركة مع المجموعة",
   "Settings the group shares besides those in the other sections:": "الإعدادات التي تشترك فيها المجموعة إلى جانب تلك الموجودة في الأقسام الأخرى:",
@@ -9059,5 +9056,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "لم تستجب اللوحة. تحقق من أن TgWitness يعمل وأن هذا الجهاز يستطيع الوصول إليه.",
+  "Add message numbers": "أضف أرقام الرسائل",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "معرّف الدردشة ثم نقطتان ثم أرقام الرسائل، أو روابط t.me/c. دردشة واحدة في كل سطر.",
+  "Could not read: {text}": "تعذّرت قراءة: {text}"
 }

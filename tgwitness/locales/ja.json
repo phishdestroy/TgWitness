@@ -5206,12 +5206,10 @@
   "Turn off the dependent features too?": "関連する機能もオフにしますか？",
   "Explain this setting": "この設定を説明",
   "Changed by you": "あなたが変更",
-  "One place for every answer": "すべての答えを一か所に",
   "Search all settings, including hidden ones": "非表示を含むすべての設定を検索",
   "Connected": "接続済み",
   "Keep my manual changes": "手動の変更を残す",
   "Show {n} more settings": "さらに {n} 件の設定を表示",
-  "More settings and expert tools": "その他の設定とエキスパート向けツール",
   "Show hidden setting": "非表示の設定を表示",
   "Proxy address": "プロキシのアドレス",
   "Continue without checking": "確認せずに続ける",
@@ -5633,7 +5631,6 @@
   "Own value": "独自の値",
   "Return to the group value": "グループの値に戻す",
   "This account is in the group {name}.": "このアカウントは、{name}というグループに所属しています。",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗はグループからの値を示し、✏️はこのアカウント独自の値を示します。",
   "Group settings": "グループ設定",
   "Shared with the group": "グループと共有されています",
   "Settings the group shares besides those in the other sections:": "他のセクションの設定に加え、グループで共有される設定は以下の通りです：",
@@ -8829,5 +8826,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "パネルから応答がありません。TgWitness が実行中で、この端末から接続できることを確認してください。",
+  "Add message numbers": "メッセージ番号を追加",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "チャットID、コロン、メッセージ番号、または t.me/c リンク。1行につき1チャット。",
+  "Could not read: {text}": "読み取れません: {text}"
 }

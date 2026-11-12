@@ -5309,12 +5309,10 @@
   "Turn off the dependent features too?": "Abhängige Funktionen ebenfalls ausschalten?",
   "Explain this setting": "Diese Einstellung erklären",
   "Changed by you": "Von Ihnen geändert",
-  "One place for every answer": "Ein Ort für alle Antworten",
   "Search all settings, including hidden ones": "Alle Einstellungen durchsuchen, auch versteckte",
   "Connected": "Verbunden",
   "Keep my manual changes": "Meine manuellen Änderungen behalten",
   "Show {n} more settings": "{n} weitere Einstellungen anzeigen",
-  "More settings and expert tools": "Weitere Einstellungen und Expertenwerkzeuge",
   "Show hidden setting": "Versteckte Einstellung anzeigen",
   "Proxy address": "Proxy-Adresse",
   "Continue without checking": "Ohne Prüfung fortfahren",
@@ -5755,7 +5753,6 @@
   "Own value": "Eigener Wert",
   "Return to the group value": "Auf den Wert der Gruppe zurücksetzen",
   "This account is in the group {name}.": "Dieses Konto gehört zur Gruppe {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 kennzeichnet einen Wert aus der Gruppe; ✏️ kennzeichnet den eigenen Wert dieses Kontos.",
   "Group settings": "Gruppeneinstellungen",
   "Shared with the group": "Mit der Gruppe geteilt",
   "Settings the group shares besides those in the other sections:": "Einstellungen, die die Gruppe zusätzlich zu denen in den anderen Abschnitten gemeinsam nutzt:",
@@ -8875,5 +8872,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Das Panel hat nicht geantwortet. Prüfen Sie, ob TgWitness läuft und von diesem Gerät aus erreichbar ist.",
+  "Add message numbers": "Nachrichtennummern hinzufügen",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "Chat-ID, Doppelpunkt und Nachrichtennummern oder t.me/c-Links. Ein Chat pro Zeile.",
+  "Could not read: {text}": "Nicht lesbar: {text}"
 }

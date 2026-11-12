@@ -5206,12 +5206,10 @@
   "Turn off the dependent features too?": "Matikan juga ciri yang bergantung?",
   "Explain this setting": "Terangkan tetapan ini",
   "Changed by you": "Diubah oleh anda",
-  "One place for every answer": "Satu tempat untuk semua jawapan",
   "Search all settings, including hidden ones": "Cari semua tetapan, termasuk yang tersembunyi",
   "Connected": "Disambungkan",
   "Keep my manual changes": "Kekalkan perubahan manual saya",
   "Show {n} more settings": "Tunjukkan {n} lagi tetapan",
-  "More settings and expert tools": "Lebih banyak tetapan dan alat pakar",
   "Show hidden setting": "Tunjukkan tetapan tersembunyi",
   "Proxy address": "Alamat proksi",
   "Continue without checking": "Teruskan tanpa menyemak",
@@ -5633,7 +5631,6 @@
   "Own value": "Nilai sendiri",
   "Return to the group value": "Pulihkan kepada nilai kumpulan",
   "This account is in the group {name}.": "Akaun ini berada dalam kumpulan {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 menandakan nilai daripada kumpulan; ✏️ menandakan nilai tersendiri akaun ini.",
   "Group settings": "Tetapan kumpulan",
   "Shared with the group": "Dikongsi dengan kumpulan",
   "Settings the group shares besides those in the other sections:": "Penyetelan yang dikongsi oleh kumpulan selain daripada yang terdapat dalam bahagian lain:",
@@ -8829,5 +8826,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "Panel tidak memberi respons. Pastikan TgWitness sedang berjalan dan peranti ini boleh mencapainya.",
+  "Add message numbers": "Tambah nombor mesej",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID sembang, titik bertindih dan nombor mesej, atau pautan t.me/c. Satu sembang setiap baris.",
+  "Could not read: {text}": "Tidak dapat dibaca: {text}"
 }

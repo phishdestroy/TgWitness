@@ -105,6 +105,27 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     picked=next;renderPicked();fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
   }
   find('report-picked-clear').addEventListener('click',()=>dropPicked([]));
+  const numbers=find('report-selection-numbers'),numbersNote=find('report-selection-numbers-note');
+  function typed(text){
+    const found=[];
+    for(const line of text.split('\n').map(value=>value.trim()).filter(Boolean)){
+      const link=line.match(/^(?:https?:\/\/)?t\.me\/c\/(\d{1,13})\/(?:\d+\/)?(\d{1,10})(?:[?#]\S*)?$/i);
+      const pair=link?null:line.match(/^(-?[1-9]\d{0,18})\s*:\s*(\d[\d\s,;]*)$/);
+      const chat=link?-(1e12+Number(link[1])):pair?Number(pair[1]):NaN;
+      const list=link?[Number(link[2])]:pair?pair[2].split(/[\s,;]+/).filter(Boolean).map(Number):[];
+      if(!Number.isSafeInteger(chat)||!list.length||list.some(value=>value<1||value>=2**31))return {failed:line};
+      for(const message of list)found.push({chat,message});
+    }
+    return {found};
+  }
+  numbers.addEventListener('input',event=>{event.stopPropagation();numbersNote.textContent='';});
+  find('report-selection-numbers-add').addEventListener('click',()=>{
+    const {found=[],failed}=typed(numbers.value),known=new Set(picked.map(item=>item.chat+':'+item.message));
+    const fresh=found.filter(item=>!known.has(item.chat+':'+item.message)&&known.add(item.chat+':'+item.message));
+    numbersNote.textContent=failed?tr('Could not read: {text}',{text:failed}):picked.length+fresh.length>1000?tr('Select no more than {n} messages.',{n:count(1000)}):'';
+    if(numbersNote.textContent||!found.length)return;
+    numbers.value='';allChats.checked=false;dropPicked([...picked,...fresh]);
+  });
   function renderCatalog(key){
     const selected=new Set(ids(fields[key]).map(String)), query=searches[key].value.trim().toLowerCase();
     const rowsWithKeys=(catalog[key]||[]).map(row=>({...row,key:String(row.id)}));

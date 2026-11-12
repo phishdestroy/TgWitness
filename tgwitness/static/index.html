@@ -7,18 +7,18 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.9.3-workflows3">
+<link rel="stylesheet" href="/style.css?v=0.9.3-workflows4">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/components/modes.css?v=1">
-<link rel="stylesheet" href="/views/sources.css?v=19">
+<link rel="stylesheet" href="/views/sources.css?v=21">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=9">
+<link rel="stylesheet" href="/views/settings-hub.css?v=12">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/views/system-map.css?v=2">
 <link rel="stylesheet" href="/services.css?v=1">
@@ -39,7 +39,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-profiles6"></script>
+<script defer src="/app.js?v=0.9.3-profiles8"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=11"></script>
@@ -54,12 +54,12 @@
 <script defer src="/live.js?v=3"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
 <link href="/views/exports.css?v=33" rel="stylesheet">
-<link href="/views/workflows.css?v=8" rel="stylesheet">
+<link href="/views/workflows.css?v=10" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="/components/forms.css?v=35" rel="stylesheet">
 <link href="/components/feedback.css?v=36" rel="stylesheet">
 <link href="/components/layout.css?v=10" rel="stylesheet">
-<link href="/components/polish.css?v=6" rel="stylesheet">
+<link href="/components/polish.css?v=7" rel="stylesheet">
 <link href="/views/pulse.css?v=2" rel="stylesheet">
 </head>
 <body>
@@ -457,20 +457,22 @@
 
 <section class="view" hidden id="view-secret-chats">
   <div class="page-heading"><div><h1>Pseudo-secret</h1><p class="page-description">Telegram end-to-end chats of this account, kept in the journal</p></div><div class="route-actions"><button type="button" class="quiet" data-open="observations">Journal</button><button type="button" class="secondary" id="secret-report">Build report</button><button type="button" class="quiet" id="secret-refresh">Refresh</button></div></div>
-  <section class="card padded secret-chats" id="secret-chats">
-    <details class="secret-explanation"><summary>Details</summary><p class="hint">Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
-    <p class="hint">An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></details>
+  <section class="card secret-chats" id="secret-chats">
+    <div class="secret-top"><span class="tile secret-mark" data-tone="violet"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></span>
+    <div class="secret-top-text"><p class="secret-status" id="secret-status" role="status"></p>
+    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
+    <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></details></div>
+    <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
+    <label class="check-label"><input id="secret-accept" type="checkbox" role="switch" disabled> Accept incoming requests automatically</label></div></div>
     <p class="notice warning" id="secret-unavailable" hidden></p>
     <div id="secret-install" class="secret-install" hidden><code id="secret-install-command"></code><button class="secondary small" type="button" id="secret-install-copy">Copy install command</button></div>
-    <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
-    <label class="check-label"><input id="secret-accept" type="checkbox" role="switch" disabled> Accept incoming requests automatically</label></div>
-    <p class="hint" id="secret-status" role="status"></p>
     <div class="route-actions" id="secret-recovery" hidden><button class="secondary" id="secret-connect" type="button" data-open="connection">Connect account</button><button class="secondary" id="secret-reconnect" type="button">Retry</button></div>
     <p class="notice warning" id="secret-sync" hidden role="status"></p>
     <p class="notice" id="secret-interaction" hidden></p>
-    <form class="secret-start" id="secret-start"><label for="secret-user">Start a chat with</label><input autocomplete="off" id="secret-user" maxlength="64" placeholder="@username or user ID" spellcheck="false"><button class="primary" type="submit">Start chat</button></form>
+    <div class="secret-layout"><div class="secret-side">
     <div class="secret-list-tools"><input id="secret-search" type="search" placeholder="Search chats" aria-label="Search chats"><span id="secret-count" class="hint"></span></div>
-    <div class="secret-layout"><div class="secret-list" id="secret-list"></div><div class="secret-thread" id="secret-thread"></div></div>
+    <form class="secret-start" id="secret-start"><label for="secret-user">Start a chat with</label><input autocomplete="off" id="secret-user" maxlength="64" placeholder="@username or user ID" spellcheck="false"><button class="primary" type="submit">Start chat</button></form>
+    <div class="secret-list" id="secret-list"></div></div><div class="secret-thread" id="secret-thread"></div></div>
   </section>
 </section>
 
@@ -694,7 +696,7 @@
         <p class="hint">Both dates are included. Dates refer to when TgWitness observed a record, not when a message was sent.</p>
         <div class="report-catalog-toolbar"><button class="secondary" id="report-load-catalog" type="button">Load chats and authors</button><p class="hint">Read the recorded workspace once to populate these choices. Author counts follow the chosen chats and dates; build a new preview to refresh them.</p></div>
         <div class="report-grid report-catalog-grid">
-          <div><h4>Chats</h4><input type="search" data-report-search="chats" aria-label="Find a recorded chat" placeholder="Find a recorded chat"><div class="report-catalog" id="report-chat-catalog" data-no-translate></div><p class="hint" id="report-chat-count" data-no-translate></p><details class="report-manual"><summary>Add chat IDs</summary><label for="report-selection-chats">Chat IDs, separated by commas</label><input id="report-selection-chats" type="text" inputmode="text" autocomplete="off" placeholder="-1001234567890, -1009876543210"><p class="hint">An empty list includes all chats. Selected IDs stay selected even if absent from the list above.</p></details></div>
+          <div><h4>Chats</h4><input type="search" data-report-search="chats" aria-label="Find a recorded chat" placeholder="Find a recorded chat"><div class="report-catalog" id="report-chat-catalog" data-no-translate></div><p class="hint" id="report-chat-count" data-no-translate></p><details class="report-manual"><summary>Add chat IDs</summary><label for="report-selection-chats">Chat IDs, separated by commas</label><input id="report-selection-chats" type="text" inputmode="text" autocomplete="off" placeholder="-1001234567890, -1009876543210"><p class="hint">An empty list includes all chats. Selected IDs stay selected even if absent from the list above.</p></details><details class="report-manual" data-form-ignore><summary>Add message numbers</summary><label for="report-selection-numbers">Chat ID, a colon and message numbers, or t.me/c links. One chat per line.</label><textarea id="report-selection-numbers" rows="3" autocomplete="off" spellcheck="false" placeholder="-1001234567890: 402, 405&#10;https://t.me/c/1234567890/402"></textarea><p class="hint" id="report-selection-numbers-note" role="alert" data-no-translate></p><button class="secondary small" type="button" id="report-selection-numbers-add">Add</button></details></div>
           <div><h4>Authors</h4><input type="search" data-report-search="senders" aria-label="Find an account ID" placeholder="Find an account ID"><div class="report-catalog" id="report-sender-catalog" data-no-translate></div><p class="hint" id="report-sender-count" data-no-translate></p><p class="hint">Author filters match recorded sender IDs. Deletion notices without a sender are excluded.</p><details class="report-manual"><summary>Add author IDs</summary><label for="report-selection-senders">Account IDs, separated by commas</label><input id="report-selection-senders" type="text" inputmode="text" autocomplete="off"><p class="hint">An empty list includes all authors. A sender filter excludes records whose sender is unknown.</p></details></div>
         </div>
         <fieldset class="report-kind-options"><legend>Record types</legend><div class="report-chart-choices">

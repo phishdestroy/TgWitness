@@ -5233,12 +5233,10 @@
   "Turn off the dependent features too?": "Desativar também os recursos dependentes?",
   "Explain this setting": "Explicar esta configuração",
   "Changed by you": "Alterado por você",
-  "One place for every answer": "Um só lugar para todas as respostas",
   "Search all settings, including hidden ones": "Pesquisar em todas as configurações, inclusive as ocultas",
   "Connected": "Conectado",
   "Keep my manual changes": "Manter minhas alterações manuais",
   "Show {n} more settings": "Mostrar mais {n} configurações",
-  "More settings and expert tools": "Mais configurações e ferramentas avançadas",
   "Show hidden setting": "Mostrar configuração oculta",
   "Proxy address": "Endereço do proxy",
   "Continue without checking": "Continuar sem verificar",
@@ -5665,7 +5663,6 @@
   "Own value": "Valor próprio",
   "Return to the group value": "Reverter para o valor do grupo",
   "This account is in the group {name}.": "Esta conta está no grupo {name}.",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 indica um valor do grupo; ✏️ indica o valor próprio desta conta.",
   "Group settings": "Configurações do grupo",
   "Shared with the group": "Compartilhado com o grupo",
   "Settings the group shares besides those in the other sections:": "Configurações que o grupo compartilha, além das apresentadas nas outras seções:",
@@ -8882,5 +8879,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "O painel não respondeu. Verifique se o TgWitness está em execução e se este dispositivo consegue acessá-lo.",
+  "Add message numbers": "Adicionar números de mensagens",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "ID do bate-papo, dois-pontos e números de mensagens, ou links t.me/c. Um bate-papo por linha.",
+  "Could not read: {text}": "Não foi possível ler: {text}"
 }

@@ -73,17 +73,20 @@ const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout2-undo3').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout6').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
-  const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run')).map(el=>{
+  const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
     const view=root?.[0]||'connection';
-    const text=el.labels?.[0]?.textContent?.trim()||el.getAttribute('aria-label')||el.id;
+    const own=el.labels?.[0]||el.closest('label')||root?.[1].querySelector('label[for="'+CSS.escape(el.id)+'"]');
+    const named=own?.querySelector('strong')?.textContent||[...own?.childNodes||[]].filter(n=>n.nodeType===3||n.nodeType===1&&!n.matches('input,select,textarea,button,small')).map(n=>n.textContent).join(' ');
+    const text=named?.replace(/\s+/g,' ').trim()||el.getAttribute('aria-label')||el.placeholder||el.id;
     el.dataset.level=el.dataset.level||(['parameters','integrations','system-log'].includes(view)?'expert':'standard');
     const form=el.closest('form')?.id, extra=el.closest('.extra-panel')?.id.replace('extras-','');
     return {key:el.id,id:el.id,label:text,view,level:el.dataset.level,extra,form};
   });
   settingsHub=createSettingsHub({root:$('view-settings'),wizardRoot:$('view-first-run'),state,json,tr,node,icon,toast,navigate,askConfirm,$,refreshStatus,
+    avatar:avatarNode,profile:()=>profileEntry(),
     staleView:()=>new StaleView(),
     language:LANG,languages:LANGUAGES,authCard:()=>authCard,authMethod:setAuthMethod,catalog,
     loadSettingsForm:id=>({'alerts-form':loadAlerts,'replica-form':loadReplica,'evidence-form':loadEvidence}[id])(),
@@ -108,7 +111,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=5'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=7'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
@@ -584,6 +587,13 @@ function toast(message, error=false) {
   const life=error?9000:5000,arm=()=>{clearTimeout(toastTimer);toastTimer=setTimeout(()=>leave("toast"),life);};
   n.onpointerenter=()=>clearTimeout(toastTimer);n.onpointerleave=arm;arm();
 }
+document.addEventListener("click",event=>{
+  const n=$("toast"),inside=box=>event.clientX>=box.left&&event.clientX<=box.right&&event.clientY>=box.top&&event.clientY<=box.bottom;
+  if(!n||n.hidden||!document.querySelector("dialog:modal")||n.closest("dialog")||!inside(n.getBoundingClientRect()))return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const close=n.querySelector(".toast-close");
+  if(close&&inside(close.getBoundingClientRect())){clearTimeout(toastTimer);leave("toast");}
+},true);
 async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
   if(state.me&&!$("workspace").hidden&&!cancellingLogin&&!['access/me','profiles','access/logout'].includes(path))workspaceSafety?.assert();
@@ -607,14 +617,16 @@ async function api(path, body, options={}) {
     ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions,...(requestSignal?{signal:requestSignal}:{})});
   }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();
     if(revision===state.workspaceRevision&&token===state.token)connectionNotice?.fail();
-    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));throw error;}
+    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));
+    throw new Error(tr("The panel did not answer. Check that TgWitness is running and that this device can reach it."),{cause:error});}
   if(fetchOptions.signal?.aborted){await response.body?.cancel();throw new StaleView();}
   if(!allowStale&&revision!==state.workspaceRevision){await response.body?.cancel();throw new StaleView();}
   if(revision===state.workspaceRevision&&token===state.token){
     if(path==='status'){if(response.ok)connectionNotice?.clear();else if(response.status>=500)connectionNotice?.fail();}
   }
   if (!response.ok) {
-    const result = await response.json().catch(() => ({detail: tr("Request failed")}));
+    const result = await response.json().catch(() => ({detail: [502,503,504].includes(response.status)||response.status>=520&&response.status<=530
+      ? tr("The panel did not answer. Check that TgWitness is running and that this device can reach it.") : tr("Request failed")+" · HTTP "+response.status}));
     let detail = result.detail || tr("Request failed");const parameter=detail?.parameter;
     if (Array.isArray(detail)) detail = detail.map(x => x.field + ": " + x.message).join("; ");
     if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
@@ -930,7 +942,7 @@ function renderWorkflowControls(){
     info.needsSignIn?'Sign in again':'Connect account →':'Configure account export');
   }
 }
-import("./components/glow.js?v=2").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
+import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
 import("./views/chat-gaps.js?v=3").then(({createChatGaps})=>{
   chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations')});
@@ -2163,8 +2175,8 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=3").then(({createSecretChats})=>secretChatsView=createSecretChats({
-    root:$("view-secret-chats"),tr,trn,json,toast,busy,node,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
+  secretChatsLoading??=import("./views/secret-chats.js?v=5").then(({createSecretChats})=>secretChatsView=createSecretChats({
+    root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
       (await exportsReady).select('settings');reportSelection?.selectSecrets(id===null?[]:[id]);}}));
@@ -3095,7 +3107,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=8').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=9').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
@@ -3431,7 +3443,7 @@ $("gateway-remove").addEventListener("click",ev=>busy(ev.currentTarget,async()=>
   toast(tr("Gateway log settings and token removed."));
 }));
 function renderEvidence(e){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('evidence-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('evidence-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("evidence-form"),status=$("evidence-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!e);
   state.timestampsHealth=e?.health||null;renderEvidenceBadge();
@@ -3496,7 +3508,7 @@ function lockText(lock){
   return lock.bucket_enabled?tr("Object Lock is enabled on the bucket; no retention was requested."):tr("Object Lock is not enabled on this bucket.");
 }
 function renderReplica(r){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('replica-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('replica-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("replica-form"),status=$("replica-status");
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=!r);
   state.replicaHealth=r?.health||null;renderEvidenceBadge();
@@ -3551,7 +3563,7 @@ function alertsText(a){
   return tr("Last notification {time}.",{time:fmtFull(l.at)})+(l.error?" "+tr("Not delivered: {error} — retried within a minute.",{error:l.error}):"");
 }
 function renderAlerts(a){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('alerts-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('alerts-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("alerts-form"),status=$("alerts-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!a);
   extraBadge("alerts",!!a?.settings.enabled,"On","Off");
@@ -5922,7 +5934,7 @@ function profileNode(standalone=false){
   const s=state.status,saved=state.chatProfile?.chat===state.chat?state.chatProfile:null,data=saved?.profile;
   const box=node(standalone?'section':'details',"chat-profile"+(standalone?' chat-profile-view':'')),summary=node(standalone?'header':'summary');
   if(!standalone){box.open=!!state.chatProfileOpen;box.addEventListener("toggle",()=>{state.chatProfileOpen=box.open;});}
-  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error?tr("not saved yet"):''));
+  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error&&!standalone?tr("not saved yet"):''));
   box.append(summary);
   if(data){
     const facts=node("dl","dossier-facts"),add=(label,value)=>{if(value===null||value===undefined||value==="")return;facts.append(node("dt","",label),node("dd","",String(value)));};

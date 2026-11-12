@@ -5233,12 +5233,10 @@
   "Turn off the dependent features too?": "নির্ভরশীল বৈশিষ্ট্যগুলোও বন্ধ করবেন?",
   "Explain this setting": "এই সেটিং ব্যাখ্যা করুন",
   "Changed by you": "আপনি বদলেছেন",
-  "One place for every answer": "সব উত্তরের জন্য এক জায়গা",
   "Search all settings, including hidden ones": "লুকানোগুলোসহ সব সেটিংসে খুঁজুন",
   "Connected": "সংযুক্ত",
   "Keep my manual changes": "আমার নিজের করা বদল রাখুন",
   "Show {n} more settings": "আরও {n}টি সেটিং দেখান",
-  "More settings and expert tools": "আরও সেটিংস ও বিশেষজ্ঞ সরঞ্জাম",
   "Show hidden setting": "লুকানো সেটিং দেখান",
   "Proxy address": "প্রক্সির ঠিকানা",
   "Continue without checking": "যাচাই না করে চালিয়ে যান",
@@ -5665,7 +5663,6 @@
   "Own value": "নিজের মান",
   "Return to the group value": "গ্রুপ মানের কাছে ফিরে যাও",
   "This account is in the group {name}.": "এই অ্যাকাউন্টটি '{name}' গ্রুপে রয়েছে।",
-  "🔗 marks a value from the group; ✏️ marks this account’s own value.": "🔗 গ্রুপের মান নির্দেশ করে; ✏️ এই অ্যাকাউন্টের নিজস্ব মান নির্দেশ করে।",
   "Group settings": "গ্রুপ সেটিংস",
   "Shared with the group": "গ্রুপের সাথে ভাগ করা",
   "Settings the group shares besides those in the other sections:": "অন্যান্য বিভাগে থাকা সেটিংস ছাড়া গ্রুপ যে সেটিংসগুলো শেয়ার করে:",
@@ -8875,5 +8872,9 @@
   "Search all selected records": "Search all selected records",
   "Search this page": "Search this page",
   "Showing {shown} of {total} rows on this page": "Showing {shown} of {total} rows on this page",
-  "Source and counts": "Source and counts"
+  "Source and counts": "Source and counts",
+  "The panel did not answer. Check that TgWitness is running and that this device can reach it.": "প্যানেল সাড়া দেয়নি। TgWitness চালু আছে কি না এবং এই ডিভাইস থেকে সেটিতে পৌঁছানো যায় কি না যাচাই করুন।",
+  "Add message numbers": "বার্তার সংখ্যা যোগ করুন",
+  "Chat ID, a colon and message numbers, or t.me/c links. One chat per line.": "চ্যাট আইডি, কোলন ও বার্তার সংখ্যা, অথবা t.me/c লিংক। প্রতি লাইনে একটি চ্যাট।",
+  "Could not read: {text}": "পড়া যায়নি: {text}"
 }
