@@ -298,6 +298,11 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     for(const box of Object.values(containers))box.replaceChildren();find('report-chat-count').textContent=find('report-sender-count').textContent='';
     editor.reset();selectStep(0,false);controls();
   }
+  root.addEventListener('keydown',event=>{
+    if(event.key!=='Enter'||event.isComposing||!event.target.matches('input:not([type=file]), select'))return;
+    event.preventDefault();
+    if(event.target.id==='report-profile-name')find('report-profile-save')?.click();
+  });
   return {read,changed,preview,leave,reset,reveal(field){
     const index=pages.findIndex(page=>page.contains(field));if(index>=0)selectStep(index,false);
     editor.reveal(field);
