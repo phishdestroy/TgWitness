@@ -37,7 +37,7 @@ const workspaceSafetyReady=import('./core/workspace-safety.js?v=3').then(({creat
 });
 let accountState,accountActivity;
 let boardView;
-const boardReady=import('./views/board.js?v=4').then(({createCaseBoard})=>{
+const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
   boardView=createCaseBoard({root:$('view-board'),state,json,tr,trn,node,toast,may,download,media:mediaNode,
     openEvidence:async(event,range)=>{
       const revision=state.workspaceRevision;
