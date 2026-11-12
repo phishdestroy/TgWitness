@@ -34,6 +34,8 @@ from .telegram_client import FLOOD_ERRORS
 KINDS = ("private", "bot", "group", "supergroup", "channel")
 MEDIA = ("photo", "video", "video_message", "voice", "audio", "document", "sticker", "animation")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
+CATEGORY_OPTIONS = {"profile": "include_profile", "contacts": "include_contacts", "sessions": "include_session_metadata",
+                    "profile_photos": "include_profile_photos", "stories": "include_stories", "other_data": "include_other_data"}
 LIMITATIONS = [
     "A snapshot of the data Telegram returned to this account during the recorded acquisition intervals, signed with the collector key in the manifest.",
     "Messages appear in the version Telegram returned at acquisition; live recording keeps earlier versions and deletion notices, and Sources → Pseudo-secret keeps Secret Chats.",
@@ -414,7 +416,7 @@ class AccountExport:
 
     def complete(self):
         coverage = self.current.get("coverage", {})
-        return bool(coverage.get("inventory_complete") and not coverage.get("failures")
+        return bool(coverage.get("inventory_complete") and not coverage.get("failures") and not coverage.get("omitted")
                     and coverage.get("tasks_done") == coverage.get("tasks_total"))
 
     def packaging_reserve(self, extra_records=0, extra_media=0):
@@ -638,10 +640,14 @@ class AccountExport:
                 status[1] += bool(page and page["terminal"] and page["outcome"] == "ok")
         self.current["counts"] = {**self.counts, "chats_discovered": discovered, "chats_selected": len(selected),
             "chats_done": sum(total == done for total, done in chat_tasks.values())}
+        options = self.current.get("options") or {}
+        omitted = sum(1 for chat in selected if not any(task.get("chat_id") == chat["id"] for task in tasks)) + sum(
+            1 for category, option in CATEGORY_OPTIONS.items()
+            if options.get(option) is True and not any(task["category"] == category for task in tasks))
         self.current["coverage"] = {"inventory_complete": self.inventory["discovery_complete"],
             "tasks_total": len(tasks), "tasks_done": sum(bool(p["terminal"]) and p["outcome"] == "ok"
                                                           for p in self.progress.values()),
-            "failures": self.failures + len(self.inventory["gaps"]),
+            "failures": self.failures + len(self.inventory["gaps"]), "omitted": omitted,
             "scope": "visible to this account during the recorded acquisition intervals"}
         self.current["omissions"] = self.inventory["gaps"][:100]
 
