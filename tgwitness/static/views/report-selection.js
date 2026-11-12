@@ -11,13 +11,14 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   const editor=createReportEditor({root,tr,onEdit:()=>{if(step!==1)selectStep(1);}});
   const count=value=>Number(value||0).toLocaleString();
   const fields={chats:find('report-selection-chats'),senders:find('report-selection-senders')};
+  const secretField=make('input');secretField.type='hidden';secretField.id='report-selection-secret-chats';fields.chats.after(secretField);
   const containers={chats:find('report-chat-catalog'),senders:find('report-sender-catalog')};
   const searches={chats:root.querySelector('[data-report-search=chats]'),senders:root.querySelector('[data-report-search=senders]')};
   const allChats=make('input'),allLabel=make('label','','check-label');
   allChats.type='checkbox';allChats.id='report-selection-all-chats';allChats.checked=true;
   allLabel.append(allChats,document.createTextNode(' '+tr('All chats')));containers.chats.before(allLabel);
   allChats.addEventListener('change',()=>{
-    if(allChats.checked)fields.chats.value='';
+    if(allChats.checked)fields.chats.value=secretField.value='';
     fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
   });
   function ids(field){
@@ -30,14 +31,15 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     const enabled=find('report-selection-chosen').checked,from=find('report-selection-from').value,to=find('report-selection-to').value;
     if(!enabled){
       for(const field of [fields.chats,fields.senders,allChats,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
-      return {enabled:false,chats:[],senders:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked};
+      return {enabled:false,chats:[],secret_chats:[],senders:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked};
     }
     find('report-selection-to').setCustomValidity(from&&to&&from>to?tr('The end date must not be earlier than the start date.'): '');
     const selected=kinds.filter(input=>input.checked).map(input=>input.dataset.reportKind);
     kinds[0].setCustomValidity(selected.length?'':tr('Choose at least one record type.'));
     const chats=ids(fields.chats);
-    allChats.setCustomValidity(!allChats.checked&&!chats.length?tr('Choose at least one chat.'):'');
-    return {enabled,chats:allChats.checked?[]:chats,senders:ids(fields.senders),
+    const secrets=ids(secretField);
+    allChats.setCustomValidity(!allChats.checked&&!chats.length&&!secrets.length?tr('Choose at least one chat.'):'');
+    return {enabled,chats:allChats.checked?[]:chats,secret_chats:allChats.checked?[]:secrets,senders:ids(fields.senders),
       date_from:from,date_to:to,kinds:selected,id_gaps:find('report-selection-gaps').checked};
   }
   function controls(){
@@ -64,20 +66,25 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     if(step===2&&ready())void preview(false);
   }
   function renderCatalog(key){
-    const selected=new Set(ids(fields[key])), query=searches[key].value.trim().toLowerCase();
-    const all=new Map((catalog[key]||[]).map(row=>[Number(row.id),row]));
-    for(const id of selected)if(!all.has(id))all.set(id,{id,count:null});
+    const selected=new Set(ids(fields[key]).map(String)), query=searches[key].value.trim().toLowerCase();
+    const rowsWithKeys=(catalog[key]||[]).map(row=>({...row,key:String(row.id)}));
+    if(key==='chats'){
+      for(const id of ids(secretField))selected.add('secret:'+id);
+      for(const row of catalog.secret_chats||[])rowsWithKeys.push({...row,key:'secret:'+row.id,secret:true});
+    }
+    const all=new Map(rowsWithKeys.map(row=>[row.key,row]));
+    for(const id of selected)if(!all.has(id))all.set(id,{id:id.replace('secret:',''),key:id,secret:id.startsWith('secret:'),count:null});
     const rows=[...all.values()].filter(row=>String(row.id).includes(query)||String(row.title||'').toLowerCase().includes(query));
     const nodes=rows.map(row=>{
-      const label=make('label','','report-catalog-row'),input=make('input');input.type='checkbox';input.checked=selected.has(Number(row.id));
-      input.dataset.reportChoice=key;input.dataset.id=String(row.id);
-      const title=key==='chats'&&row.title?mask(row.title):tr(key==='chats'?'Chat {id}':'Account {id}',{id:row.id});
-      const info=make('span','','report-catalog-label');info.append(make('strong',title),make('small',String(row.id)));
+      const label=make('label','','report-catalog-row'),input=make('input');input.type='checkbox';input.checked=selected.has(row.key);
+      input.dataset.reportChoice=key;input.dataset.id=row.key;
+      const title=row.secret?'Secret Chat '+row.id:key==='chats'&&row.title?mask(row.title):tr(key==='chats'?'Chat {id}':'Account {id}',{id:row.id});
+      const info=make('span','','report-catalog-label');info.append(make('strong',title),make('small',row.secret?tr('Pseudo-secret'):String(row.id)));
       label.append(input,info,make('span',row.count===null?'—':count(row.count),'report-catalog-number'));
       input.addEventListener('change',()=>{
         if(key==='chats')allChats.checked=false;
-        const current=new Set(ids(fields[key]));if(input.checked)current.add(Number(row.id));else current.delete(Number(row.id));
-        fields[key].value=[...current].join(', ');fields[key].dispatchEvent(new Event('input',{bubbles:true}));
+        const field=row.secret?secretField:fields[key],current=new Set(ids(field));if(input.checked)current.add(Number(row.id));else current.delete(Number(row.id));
+        field.value=[...current].join(', ');fields[key].dispatchEvent(new Event('input',{bubbles:true}));
       });return label;
     });
     const empty=catalog[key+'_status']==='too_many_groups'?tr('Too many choices to list. Enter the Telegram IDs below.')
@@ -118,7 +125,8 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   function rowLabel(row){return tr(row.label||'Unknown',row.label_values||{});}
   const kindLabel=kind=>({
     'message.new':tr('New message'),'message.snapshot':tr('History observation'),'message.recovered':tr('Recovered message'),
-    'message.edited':tr('Edit'),'message.deleted':tr('Deletion notice'),'message.missing_on_recheck':tr('Missing on recheck')
+    'message.edited':tr('Edit'),'message.deleted':tr('Deletion notice'),'message.missing_on_recheck':tr('Missing on recheck'),
+    'secret_chat.message':tr('Pseudo-secret message'),'secret_chat.action':tr('Pseudo-secret notice'),'secret_chat.file':tr('Pseudo-secret file preserved')
   }[kind]||String(kind||''));
   function message(row){
     if(!row)return make('span',tr('Not available'));
@@ -206,7 +214,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     const samples=make('details','','editor-details');samples.append(make('summary',tr('Selected message samples')));target.append(samples);
     const messages=data.messages||{},rows=messages.rows||[];
     samples.append(table([tr('Record'),tr('Chat'),tr('Type'),tr('Observed at (UTC)'),tr('Message preview')],rows.map(row=>[
-      '#'+row.seq,String(row.chat_id??'—'),kindLabel(row.kind),String(row.observed_at||'—'),message(row)
+      '#'+row.seq,row.secret_chat_id!=null?'Secret Chat '+row.secret_chat_id:String(row.chat_id??'—'),kindLabel(row.kind),String(row.observed_at||'—'),message(row)
     ]),'report-message-table'));
     samples.append(make('p',tr('Showing {shown} of {total} selected records. Possible secrets are masked in this preview.',{shown:count(rows.length),total:count(messages.total)}),'hint'));
     const gaps=data.id_gaps||{};
@@ -282,10 +290,19 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     let parent=field.parentElement;while(parent&&parent!==root){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement;}
     field.scrollIntoView({block:'center'});field.focus({preventScroll:true});
   },
+    selectSecrets(chatIds=[]){
+      this.load({enabled:true,secret_chats:chatIds,kinds:['secret_chat.message','secret_chat.action','secret_chat.file'],id_gaps:false});
+      selectStep(0,false);secretField.dispatchEvent(new Event('input',{bubbles:true}));
+    },
+    selectChats(chatIds){
+      this.load({enabled:true,chats:chatIds,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
+      selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
+    },
     load(selection={}){
       selection=selection||{};find('report-selection-all').checked=!selection.enabled;find('report-selection-chosen').checked=!!selection.enabled;
       fields.chats.value=(selection.chats||[]).join(', ');fields.senders.value=(selection.senders||[]).join(', ');
-      allChats.checked=!(selection.chats||[]).length;
+      secretField.value=(selection.secret_chats||[]).join(', ');
+      allChats.checked=!(selection.chats||[]).length&&!(selection.secret_chats||[]).length;
       for(const [id,key] of [['report-selection-from','date_from'],['report-selection-to','date_to']])find(id).value=selection[key]||'';
       const set=new Set(selection.kinds||kinds.map(input=>input.dataset.reportKind));for(const input of kinds)input.checked=set.has(input.dataset.reportKind);
       find('report-selection-gaps').checked=selection.id_gaps!==false;controls();renderCatalog('chats');renderCatalog('senders');

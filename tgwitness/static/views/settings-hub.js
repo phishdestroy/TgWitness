@@ -8,7 +8,7 @@ export function createSettingsHub(ctx) {
   const goalLevels = {copy:'simple',watch:'standard',evidence:'standard'};
   const routes = [['auto','✨','Automatic','Try WARP, then public proxies.'],['warp','🛡','Cloudflare WARP','Connect through a local tunnel.'],['proxy','🔌','My proxy','Paste one proxy address.'],['direct','🌐','Direct','Telegram will see this server’s address.']];
   const levels = [['simple','🙂','Simple','Only the essentials.'],['standard','⚙','Standard','Common settings and explanations.'],['expert','🛠','Expert','All fields, limits and technical details.']];
-  const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple',observations:'simple',evidence:'simple',settings:'simple',
+  const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'simple',observations:'simple',evidence:'simple',settings:'simple',
     board:'standard',accounts:'simple',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
   let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null;
@@ -174,7 +174,7 @@ export function createSettingsHub(ctx) {
     if(mark)heading.append(mark);else if(f.modified)heading.append(node('span','modified-tag',tr('Changed by you')));
     row.append(heading);
     if(f.type==='bool'){
-      const control=node('input');control.type='checkbox';control.checked=f.value;control.setAttribute('aria-label',tr(f.label));
+      const control=node('input');control.type='checkbox';control.setAttribute('role','switch');control.checked=f.value;control.setAttribute('aria-label',tr(f.label));
       control.onchange=()=>run(()=>edit(f.key,control.checked),control);row.append(control);
     }else{
       const values=f.key==='files'?[...(f.value==='custom'?['custom']:[]),'photos','short_media','all']:['hide','auto'];
@@ -227,15 +227,17 @@ export function createSettingsHub(ctx) {
     const overview=node('div','hub-grid');overview.hidden=!!query||!!section;root.append(overview);
     const summaries=[['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone],['level','Interface level',label(prefs.level)],
       ['goal','Goal',data.goal?label(data.goal):tr('Choose a goal')],['connection','Connection',label(data.connection.mode)],
-      ['telegram','Telegram account',signedIn()?tr('Connected'):tr('Not connected')],
-      ['chats','Which chats?',label(data.wizard.scope||'account')],['collection','Collection and files',label(data.values.files)],
+      ['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected')],
+      ['chats','Which chats?',label(state.status?.scope?.mode||'selected')],['collection','Collection and files',label(data.values.files)],
       ['protection','Record protection',tr(data.values.timestamps?'On':'Off')],['notifications','Notifications and off-site copy',tr(data.values.notifications?'On':'Off')]];
     if(inheritance){
       const keys=Object.values(inheritance.keys),own=keys.filter(k=>k.source==='own').length;
       summaries.push(['group','Shared with the group',inheritance.group.label+' · '+(own?ctx.trn('{n} own value','{n} own values',own):tr('follows the group'))]);
     }
     for(const [id,name,summary] of summaries){const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;
-      b.append(node('strong','',tr(name)),node('span','hint',summary),node('span','hub-arrow','→'));overview.append(b);}
+      const symbol={appearance:'sparkle',level:'layers',goal:'check',connection:'link',telegram:'account',chats:'message',collection:'download',protection:'shield',notifications:'activity',group:'users'}[id];
+      const mark=node('span','hub-summary-mark');mark.setAttribute('aria-hidden','true');mark.innerHTML='<svg class="icon"><use href="#i-'+symbol+'"/></svg>';
+      b.append(mark,node('strong','',tr(name)),node('span','hint',summary),node('span','hub-arrow','→'));overview.append(b);}
     const detail=node('section','hub-detail');detail.hidden=!section;root.append(detail);
     if(section){
       detail.append(button('Back to settings',async()=>{data=await request(owner(),'settings');section=null;render();},'text-link'));
@@ -259,7 +261,7 @@ export function createSettingsHub(ctx) {
       if(section==='connection')connectionForm(detail,false);
       if(section==='telegram'){move(ctx.authCard(),detail);ctx.authMethod('qr');}
       if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
-        detail.append(button('Choose chats',async()=>{await saveDraft({step:6,unchecked:true});await navigate('first-run');}));}
+        detail.append(button('Choose chats',()=>navigate('sources')),button('Pseudo-secret',()=>navigate('secret-chats')));}
       const fields=data.fields.filter(f=>f.section===section&&f.key!=='ip');
       const hidden=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section));
       for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));

@@ -2140,6 +2140,29 @@ button.primary[aria-busy=true]::after { color: #fff; }
 @media (max-width: 1100px) { .parameters-grid { grid-template-columns: 1fr; } }
 @media (max-width: 860px) { .parameters-layout { grid-template-columns: 1fr; } .parameters-nav { position: static; display: flex; flex-wrap: wrap; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.view-load-state { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; margin-bottom: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text-2); }
+.view-load-state span { min-width: 0; overflow-wrap: anywhere; }
+.view-load-state:not(.failed)::before { content: ''; width: 16px; height: 16px; flex: 0 0 auto; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+.view-load-state:not(.failed) span { flex: 1; }
+.view-load-state.failed { border-color: var(--warning-border); }
+.parameters-nav a[aria-current=location] { color: var(--accent-text); background: var(--accent-soft); box-shadow: inset 3px 0 var(--accent); }
+.chat-record-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); border-radius: 20px; font-size: 12px; }
+.chat-record-toggle::before { content: ''; width: 22px; height: 12px; border-radius: 12px; background: radial-gradient(circle at 6px 6px, white 4px, transparent 4.5px),var(--toggle-off); }
+.chat-record-toggle[aria-checked=true]::before { background: radial-gradient(circle at 16px 6px, white 4px, transparent 4.5px),var(--accent); }
+.chat-record-toggle span { font-weight: 700; }
+.chat-view-bar { flex-wrap: wrap; }
+:is(.hub-field,.secret-settings) input[role=switch] { appearance: none; position: relative; flex: 0 0 auto; width: 36px; height: 22px; min-height: 0; border: 0; border-radius: 22px; background: var(--toggle-off); cursor: pointer; transition: background .16s; }
+:is(.hub-field,.secret-settings) input[role=switch]::before { content: ''; position: absolute; width: 16px; height: 16px; top: 3px; left: 3px; border-radius: 50%; background: white; transition: transform .16s; box-shadow: 0 1px 3px #0002; }
+:is(.hub-field,.secret-settings) input[role=switch]:checked { background: var(--accent); }
+:is(.hub-field,.secret-settings) input[role=switch]:checked::before { transform: translateX(14px); }
+:is(.hub-field,.secret-settings) input[role=switch]:disabled { opacity: .5; cursor: default; }
+.hub-summary-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: var(--accent-soft); color: var(--accent-text); }
+@media (prefers-reduced-motion: no-preference) {
+  .view:not([hidden]) { animation: workspace-enter .16s ease-out; }
+  @keyframes workspace-enter { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) { .view-load-state::before { animation: none !important; } :is(.hub-field,.secret-settings) input[role=switch]::before { transition: none; } }
+@media (forced-colors: active) { :is(.hub-field,.secret-settings) input[role=switch] { appearance: auto; } :is(.hub-field,.secret-settings) input[role=switch]::before { display: none; } }
 
 @media (max-width: 560px) {
   .fleet-group { padding: 14px 12px; }

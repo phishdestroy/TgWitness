@@ -2700,7 +2700,8 @@ class Collector:
 
         if shutdown:
             await secret_chats.of(self).detach()
-        if self.client and (shutdown or not (self.export_busy() or self.export_claim)):
+        if self.client and (shutdown or not (self.export_busy() or self.export_claim
+                                             or secret_chats.of(self).manager is not None)):
             await self.client.disconnect()
         if shutdown and self.proxy_pool:
             self.proxy_pool.release(self.route_owner)
