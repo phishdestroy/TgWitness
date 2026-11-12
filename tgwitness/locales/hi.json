@@ -8854,5 +8854,8 @@
   "this device": "यह डिवाइस",
   "Undo of an earlier change": "पहले किए गए परिवर्तन को वापस लेना",
   "Data": "डेटा",
-  "Always included": "हमेशा शामिल"
+  "Always included": "हमेशा शामिल",
+  "Select messages": "संदेश चुनें",
+  "Selected messages": "चुने गए संदेश",
+  "Select no more than {n} messages.": "{n} से अधिक संदेश न चुनें।"
 }

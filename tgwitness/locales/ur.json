@@ -8854,5 +8854,8 @@
   "this device": "یہ آلہ",
   "Undo of an earlier change": "پچھلی تبدیلی کو واپس کرنا",
   "Data": "ڈیٹا",
-  "Always included": "ہمیشہ شامل"
+  "Always included": "ہمیشہ شامل",
+  "Select messages": "پیغامات منتخب کریں",
+  "Selected messages": "منتخب پیغامات",
+  "Select no more than {n} messages.": "{n} سے زیادہ پیغامات منتخب نہ کریں۔"
 }

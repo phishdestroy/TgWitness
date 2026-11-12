@@ -250,6 +250,7 @@ summary::before {
   transform: rotate(-45deg); transition: transform .15s; opacity: .75;
 }
 details[open] > summary::before { transform: rotate(45deg) translate(-1px, -1px); }
+[dir="rtl"] summary::before { transform: rotate(135deg); }
 .brand {
   display: inline-flex; align-items: center; gap: 10px;
   color: var(--text); font-size: 19px; font-weight: 700; letter-spacing: -.02em; text-decoration: none;
@@ -266,7 +267,7 @@ kbd { font: 11px/1.4 var(--mono); }
 .quick-open:hover { background: var(--rail-active); border-color: var(--rail-muted); }
 .quick-open kbd { margin-inline-start: auto; color: var(--rail-muted); white-space: nowrap; }
 .quick-dialog {
-  width: min(560px, calc(100vw - 28px)); max-height: calc(100dvh - 48px); margin: min(12vh, 88px) auto 24px;
+  width: min(560px, calc(100vw - 28px)); max-height: calc(100dvh - min(12vh, 88px) - 24px); margin: min(12vh, 88px) auto 24px;
   padding: 0; overflow: hidden; color: var(--text); background: var(--surface);
   border: 1px solid var(--border-strong); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
 }
@@ -1540,7 +1541,7 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   .chat-status, .chat-toolbar { padding-inline: 14px; }
   .quick-open { display: none; }
   .quick-mobile { display: inline-flex; }
-  .quick-dialog { margin-top: 24px; }
+  .quick-dialog { margin-top: 24px; max-height: calc(100dvh - 48px); }
   .workspace { display: block; }
   .sidebar {
     position: static; width: 100%; height: auto; padding: 12px 14px 10px; overflow: visible;

@@ -8854,5 +8854,8 @@
   "this device": "এই ডিভাইস",
   "Undo of an earlier change": "আগে করা পরিবর্তনের আনডু",
   "Data": "ডেটা",
-  "Always included": "সবসময় অন্তর্ভুক্ত"
+  "Always included": "সবসময় অন্তর্ভুক্ত",
+  "Select messages": "বার্তা নির্বাচন করুন",
+  "Selected messages": "নির্বাচিত বার্তা",
+  "Select no more than {n} messages.": "{n}টির বেশি বার্তা নির্বাচন করবেন না।"
 }

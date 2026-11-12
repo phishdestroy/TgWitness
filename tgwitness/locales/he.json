@@ -8900,5 +8900,8 @@
   "this device": "מכשיר זה",
   "Undo of an earlier change": "ביטול שינוי קודם",
   "Data": "נתונים",
-  "Always included": "נכלל תמיד"
+  "Always included": "נכלל תמיד",
+  "Select messages": "בחירת הודעות",
+  "Selected messages": "הודעות שנבחרו",
+  "Select no more than {n} messages.": "ניתן לבחור עד {n} הודעות."
 }

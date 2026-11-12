@@ -8854,5 +8854,8 @@
   "this device": "bu cihaz",
   "Undo of an earlier change": "Önceki bir değişikliği geri alma",
   "Data": "Veri",
-  "Always included": "Her zaman dahil"
+  "Always included": "Her zaman dahil",
+  "Select messages": "Mesajları seç",
+  "Selected messages": "Seçilen mesajlar",
+  "Select no more than {n} messages.": "En fazla {n} mesaj seçin."
 }

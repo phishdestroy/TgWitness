@@ -8808,5 +8808,8 @@
   "this device": "peranti ini",
   "Undo of an earlier change": "Membatalkan perubahan sebelumnya",
   "Data": "Data",
-  "Always included": "Sentiasa disertakan"
+  "Always included": "Sentiasa disertakan",
+  "Select messages": "Pilih mesej",
+  "Selected messages": "Mesej dipilih",
+  "Select no more than {n} messages.": "Pilih tidak lebih daripada {n} mesej."
 }

@@ -8946,5 +8946,8 @@
   "this device": "цей пристрій",
   "Undo of an earlier change": "Скасування попередньої зміни",
   "Data": "Дані",
-  "Always included": "Завжди включено"
+  "Always included": "Завжди включено",
+  "Select messages": "Вибрати повідомлення",
+  "Selected messages": "Вибрані повідомлення",
+  "Select no more than {n} messages.": "Виберіть не більше ніж {n} повідомлень."
 }

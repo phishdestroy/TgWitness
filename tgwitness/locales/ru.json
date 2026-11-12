@@ -8916,5 +8916,8 @@
   "this device": "это устройство",
   "Undo of an earlier change": "Отмена предыдущего изменения",
   "Data": "Данные",
-  "Always included": "Всегда включено"
+  "Always included": "Всегда включено",
+  "Select messages": "Выбрать сообщения",
+  "Selected messages": "Выбранные сообщения",
+  "Select no more than {n} messages.": "Выберите не более {n} сообщений."
 }

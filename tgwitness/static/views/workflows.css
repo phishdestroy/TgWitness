@@ -142,6 +142,8 @@
 .home-axis { stroke: var(--border); stroke-width: 1; fill: none; }
 .home-bar { fill: var(--accent-text); opacity: .85; }
 .home-bar:hover { opacity: 1; }
+.home-tick { fill: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+.home-peak { fill: var(--text-2, var(--text)); font-weight: 650; }
 .home-dot-loss { fill: var(--warning); }
 .home-dot-edit { fill: var(--violet, #7c3aed); }
 .home-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--muted); margin-top: 8px; }

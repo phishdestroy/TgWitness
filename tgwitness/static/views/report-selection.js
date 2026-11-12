@@ -1,4 +1,4 @@
-import {createReportEditor} from './report-editor.js?v=1';
+import {createReportEditor} from './report-editor.js?v=3';
 
 export function createReportSelection({root,tr,json,getOwner,ready,options,active,titles=()=>new Map()}) {
   const people=new Map();
@@ -17,7 +17,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   const make=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=String(text??'');if(cls)el.className=cls;return el;};
   const mask=text=>window.TgWitnessPrivacy?.preview(String(text??''))??tr('Message preview unavailable');
   let catalog={chats:[],senders:[]}, response=null, request=0, revision=0, pending=false, controller=null, stamp=null;
-  let step=0,previewTimer=null;
+  let step=0,previewTimer=null,picked=[];
   const steps=['report-data','report-content','report-preview'];
   const pages=[find('report-data'),find('report-content-step'),find('report-preview')];
   const editor=createReportEditor({root,tr,onEdit:()=>{if(step!==1)selectStep(1);}});
@@ -30,7 +30,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   allChats.type='checkbox';allChats.id='report-selection-all-chats';allChats.checked=true;
   allLabel.append(allChats,document.createTextNode(' '+tr('All chats')));containers.chats.before(allLabel);
   allChats.addEventListener('change',()=>{
-    if(allChats.checked)fields.chats.value=secretField.value='';
+    if(allChats.checked){fields.chats.value=secretField.value='';picked=[];renderPicked();}
     fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
   });
   function ids(field){
@@ -43,15 +43,16 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     const enabled=find('report-selection-chosen').checked,from=find('report-selection-from').value,to=find('report-selection-to').value;
     if(!enabled){
       for(const field of [fields.chats,fields.senders,allChats,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
-      return {enabled:false,chats:[],secret_chats:[],senders:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked};
+      return {enabled:false,chats:[],secret_chats:[],senders:[],messages:[],date_from:'',date_to:'',kinds:kinds.map(input=>input.dataset.reportKind),id_gaps:find('report-selection-gaps').checked};
     }
     find('report-selection-to').setCustomValidity(from&&to&&from>to?tr('The end date must not be earlier than the start date.'): '');
     const selected=kinds.filter(input=>input.checked).map(input=>input.dataset.reportKind);
     kinds[0].setCustomValidity(selected.length?'':tr('Choose at least one record type.'));
     const chats=ids(fields.chats);
     const secrets=ids(secretField);
-    allChats.setCustomValidity(!allChats.checked&&!chats.length&&!secrets.length?tr('Choose at least one chat.'):'');
+    allChats.setCustomValidity(!allChats.checked&&!chats.length&&!secrets.length&&!picked.length?tr('Choose at least one chat.'):'');
     return {enabled,chats:allChats.checked?[]:chats,secret_chats:allChats.checked?[]:secrets,senders:ids(fields.senders),
+      messages:allChats.checked?[]:picked.map(item=>({chat:item.chat,message:item.message})),
       date_from:from,date_to:to,kinds:selected,id_gaps:find('report-selection-gaps').checked};
   }
   function controls(){
@@ -77,6 +78,30 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     if(focus){root.scrollIntoView({block:'start',behavior:'instant'});pages[step].querySelector('[tabindex="-1"]')?.focus({preventScroll:true});}
     if(step===2&&ready())void preview(false);
   }
+  function renderPicked(){
+    const box=find('report-picked'),list=find('report-picked-list'),known=titles(),groups=new Map();
+    box.hidden=!picked.length;
+    find('report-picked-count').textContent=picked.length?tr('{n} selected',{n:count(picked.length)}):'';
+    for(const item of picked){if(!groups.has(item.chat))groups.set(item.chat,[]);groups.get(item.chat).push(item);}
+    const nodes=[];let left=60;
+    for(const [chat,items] of groups){
+      const group=make('div','','report-picked-group');
+      group.append(make('span',known.get(chat)?mask(known.get(chat)):tr('Chat {id}',{id:chat}),'report-picked-chat'));
+      for(const item of items.slice(0,left)){
+        const chip=make('button','#'+item.message,'report-picked-chip');chip.type='button';chip.title=tr('Remove');
+        chip.setAttribute('aria-label',tr('Remove')+': '+tr('Message {id}',{id:item.message}));
+        chip.addEventListener('click',()=>dropPicked(picked.filter(other=>other!==item)));
+        group.append(chip);
+      }
+      if(items.length>left)group.append(make('span',tr('+{n} more',{n:count(items.length-Math.max(0,left))}),'report-picked-more'));
+      left=Math.max(0,left-items.length);nodes.push(group);
+    }
+    list.replaceChildren(...nodes);
+  }
+  function dropPicked(next){
+    picked=next;renderPicked();fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+  find('report-picked-clear').addEventListener('click',()=>dropPicked([]));
   function renderCatalog(key){
     const selected=new Set(ids(fields[key]).map(String)), query=searches[key].value.trim().toLowerCase();
     const rowsWithKeys=(catalog[key]||[]).map(row=>({...row,key:String(row.id)}));
@@ -106,7 +131,8 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     containers[key].replaceChildren(...(nodes.length?nodes:[make('p',empty,'hint')]));
     if(nodes.length&&catalog[key+'_status']==='too_many_groups')containers[key].prepend(make('p',empty,'hint'));
     find(key==='chats'?'report-chat-count':'report-sender-count').textContent=selected.size
-      ?tr('{n} selected',{n:count(selected.size)}):tr(key==='chats'?(allChats.checked?'All chats included':'Choose at least one chat.'):'All authors included');
+      ?tr('{n} selected',{n:count(selected.size)}):key==='chats'&&picked.length&&!allChats.checked?''
+      :tr(key==='chats'?(allChats.checked?'All chats included':'Choose at least one chat.'):'All authors included');
   }
   function changed(event){
     if(event?.target?.matches('[data-report-search]'))return;
@@ -290,7 +316,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   find('report-load-catalog').addEventListener('click',()=>preview(false));
   function leave(){request++;clearTimeout(previewTimer);controller?.abort();controller=null;pending=false;controls();}
   function reset(){
-    leave();revision++;response=null;stamp=null;catalog={chats:[],senders:[]};people.clear();peopleKey='';
+    leave();revision++;response=null;stamp=null;catalog={chats:[],senders:[]};people.clear();peopleKey='';picked=[];renderPicked();
     for(const field of Object.values(searches))field.value='';
     for(const field of [fields.chats,fields.senders,find('report-selection-to'),kinds[0]])field.setCustomValidity('');
     find('report-preview-result').replaceChildren();delete find('report-preview-result').dataset.stale;
@@ -313,6 +339,14 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       this.load({enabled:true,secret_chats:chatIds,kinds:['secret_chat.message','secret_chat.action','secret_chat.file'],id_gaps:false});
       selectStep(0,false);secretField.dispatchEvent(new Event('input',{bubbles:true}));
     },
+    selectMessages(chat,messageIds){
+      const draft=read(),fresh=messageIds.map(message=>({chat,message}));
+      const kept=draft.enabled?picked.filter(item=>item.chat!==chat).slice(0,Math.max(0,1000-fresh.length)):[];
+      const whole=draft.enabled?ids(fields.chats).filter(id=>id!==chat):[];
+      this.load(draft.enabled?{...draft,chats:whole,secret_chats:ids(secretField),messages:[...kept,...fresh],id_gaps:false}
+        :{enabled:true,messages:fresh,id_gaps:false,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
+      selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
+    },
     selectChats(chatIds){
       this.load({enabled:true,chats:chatIds,kinds:kinds.filter(input=>input.dataset.reportKind.startsWith('message.')).map(input=>input.dataset.reportKind)});
       selectStep(0,false);fields.chats.dispatchEvent(new Event('input',{bubbles:true}));
@@ -321,7 +355,8 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
       selection=selection||{};find('report-selection-all').checked=!selection.enabled;find('report-selection-chosen').checked=!!selection.enabled;
       fields.chats.value=(selection.chats||[]).join(', ');fields.senders.value=(selection.senders||[]).join(', ');
       secretField.value=(selection.secret_chats||[]).join(', ');
-      allChats.checked=!(selection.chats||[]).length&&!(selection.secret_chats||[]).length;
+      picked=(selection.messages||[]).map(item=>({chat:Number(item.chat),message:Number(item.message)}));renderPicked();
+      allChats.checked=!(selection.chats||[]).length&&!(selection.secret_chats||[]).length&&!picked.length;
       for(const [id,key] of [['report-selection-from','date_from'],['report-selection-to','date_to']])find(id).value=selection[key]||'';
       const set=new Set(selection.kinds||kinds.map(input=>input.dataset.reportKind));for(const input of kinds)input.checked=set.has(input.dataset.reportKind);
       find('report-selection-gaps').checked=selection.id_gaps!==false;controls();renderCatalog('chats');renderCatalog('senders');

@@ -28,12 +28,19 @@ EventKind = Literal["message.new", "message.snapshot", "message.recovered", "mes
 SECRET_KINDS = ("secret_chat.message", "secret_chat.action", "secret_chat.file")
 
 
+class MessageRef(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    chat: Identifier
+    message: Annotated[int, Field(strict=True, gt=0, lt=2**31)]
+
+
 class Selection(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     enabled: StrictBool = False
     chats: list[Identifier] = Field(default_factory=list, max_length=MAX_SELECTION_IDS)
     secret_chats: list[Identifier] = Field(default_factory=list, max_length=MAX_SELECTION_IDS)
     senders: list[Identifier] = Field(default_factory=list, max_length=MAX_SELECTION_IDS)
+    messages: list[MessageRef] = Field(default_factory=list, max_length=MAX_SELECTION_IDS)
     date_from: str = Field(default="", strict=True, max_length=10, pattern=r"^(?:\d{4}-\d{2}-\d{2})?$")
     date_to: str = Field(default="", strict=True, max_length=10, pattern=r"^(?:\d{4}-\d{2}-\d{2})?$")
     kinds: list[EventKind] = Field(default_factory=lambda: [*report_analytics.KINDS, *SECRET_KINDS], max_length=9)
@@ -45,6 +52,15 @@ class Selection(BaseModel):
         if len(set(value)) != len(value):
             raise ValueError("Choose each item only once")
         if 0 in value:
+            raise ValueError("Telegram identifiers must not be zero")
+        return value
+
+    @field_validator("messages")
+    @classmethod
+    def distinct_messages(cls, value):
+        if len(set(value)) != len(value):
+            raise ValueError("Choose each item only once")
+        if any(item.chat == 0 for item in value):
             raise ValueError("Telegram identifiers must not be zero")
         return value
 
@@ -80,15 +96,25 @@ class _Matcher:
         self.chats = frozenset(selection.chats)
         self.secret_chats = frozenset(selection.secret_chats)
         self.senders = frozenset(selection.senders)
+        self.messages = frozenset((item.chat, item.message) for item in selection.messages)
         self.kinds = frozenset(selection.kinds)
         self.start = date.fromisoformat(selection.date_from) if selection.date_from else None
         self.end = date.fromisoformat(selection.date_to) if selection.date_to else None
 
     def chat(self, event):
-        if not self.enabled or not self.chats and not self.secret_chats:
+        if not self.enabled or not self.chats and not self.secret_chats and not self.messages:
             return True
         secret = report_analytics.secret_chat_id(event)
-        return secret in self.secret_chats if secret is not None else event.get("chat_id") in self.chats
+        if secret is not None:
+            return secret in self.secret_chats
+        chat = report_analytics._identifier(event.get("chat_id"))
+        return chat in self.chats or (chat, _message_id(event.get("message_id"))) in self.messages
+
+    def whole_chat(self, event):
+        if not self.enabled or not self.chats and not self.secret_chats and not self.messages:
+            return True
+        return report_analytics.secret_chat_id(event) is None \
+            and report_analytics._identifier(event.get("chat_id")) in self.chats
 
     def time(self, event):
         if not self.enabled or not (self.start or self.end):
@@ -203,7 +229,7 @@ def _known(connection, event, predicate):
         WHERE excluded.priority < known.priority OR
               (excluded.priority = known.priority AND excluded.seq < known.seq)
     """, (chat, message, row["seq"], kind, row["observed_at"], row["sender_id"], row["text"], priority))
-    if predicate.chat(event) and predicate.time(event):
+    if predicate.whole_chat(event) and predicate.time(event):
         connection.execute("INSERT INTO bounds VALUES (?,?,?) ON CONFLICT(chat) "
                            "DO UPDATE SET low=min(low,excluded.low), high=max(high,excluded.high)", (chat, message, message))
 

@@ -82,7 +82,9 @@ export function createCaseBoard(ctx){
     feed.replaceChildren();let day='';
     const cards=order.value==='bottom'?[...data.cards].reverse():data.cards;
     for(const card of cards){const next=card.at.slice(0,10);if(next!==day){feed.append(n('div','board-day',next+' · UTC'));day=next;}feed.append(cardNode(card));}
-    if(!cards.length){const empty=n('div','board-empty');empty.append(n('div','board-empty-symbol','⌑'),n('h2','',t('Build a trail of reasoning')),
+    if(!cards.length){const empty=n('div','board-empty'),symbol=n('div','board-empty-symbol tile'),glyph=document.createElementNS('http://www.w3.org/2000/svg','svg'),use=document.createElementNS('http://www.w3.org/2000/svg','use');
+      glyph.classList.add('icon');glyph.setAttribute('aria-hidden','true');use.setAttribute('href','#i-layers');glyph.append(use);symbol.dataset.tone='teal';symbol.append(glyph);
+      empty.append(symbol,n('h2','',t('Build a trail of reasoning')),
       n('p','',t('Bookmark a record, highlight a passage or save every action in a time range. Your team can discuss each card here.')));feed.append(empty);}
     more.hidden=offset===null;
   }

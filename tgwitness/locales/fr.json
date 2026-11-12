@@ -8861,5 +8861,8 @@
   "this device": "cet appareil",
   "Undo of an earlier change": "Annulation d’une modification antérieure",
   "Data": "Données",
-  "Always included": "Toujours inclus"
+  "Always included": "Toujours inclus",
+  "Select messages": "Sélectionner des messages",
+  "Selected messages": "Messages sélectionnés",
+  "Select no more than {n} messages.": "Sélectionnez au maximum {n} messages."
 }
