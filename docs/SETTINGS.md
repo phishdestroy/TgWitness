@@ -8,7 +8,7 @@
 
 A new workspace opens `/first-run`. The first screen asks what you want to do:
 **Just download**, **Follow chats** or **Evidence for a case**. The choice sets the
-goal and the interface level: Simple for Just download, Standard for the other two.
+goal and the interface level: Simple for Just download, Standard for the other two. The level sets how many fields each form shows; every page stays in the menu.
 **More options** on the same screen sets the level, theme and time zone explicitly;
 the language list is in the wizard header. The next screens cover the connection,
 Telegram and chats. Connection routes stay folded while the automatic check works
@@ -25,6 +25,11 @@ journal never change.
 parameters and the extended forms; a hidden field can be opened without changing the
 level. Levels only change what is shown: the server checks permissions on its own.
 Collection settings and the first connection belong to the workspace administrator.
+
+Each section has its own address, such as `/settings/connection`. **Back to
+settings**, the close button, Escape and the browser's Back button return to the list
+of sections. **Which chats?** is edited in place and kept with **Save chat
+selection**; leaving with unsaved changes asks first.
 
 | Level | Fields | Sidebar |
 | --- | --- | --- |

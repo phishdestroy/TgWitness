@@ -18,6 +18,11 @@
 .hub-search{width:100%;max-width:720px}
 .hub-detail{padding:28px;border:1px solid var(--border);border-radius:18px;background:var(--surface);margin:24px 0}
 .hub-detail h2{margin:22px 0}
+.hub-detail-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-28px -28px 0;padding:14px 28px;border-bottom:1px solid var(--border);border-radius:18px 18px 0 0;background:var(--surface)}
+.hub-detail-bar .hub-back{min-height:36px}
+.hub-close,.wizard-close{width:36px;height:36px;border-radius:10px;font-size:16px;line-height:1}
+.hub-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.hub-chats .wizard-chats{max-height:420px;overflow:auto}
 .hub-label{display:flex;flex-direction:column;gap:8px;margin:16px 0;max-width:560px}
 .hub-label select{max-width:100%;width:100%}
 .hub-field{display:flex;align-items:center;gap:18px;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -60,8 +65,6 @@
 .first-run-body .auth-card .import-formats{display:none}
 .level-pick{max-width:110px;font-size:12px}
 .hub-back-link{display:none}
-html[data-ui-level=simple] .sidebar .nav[data-level=standard],html[data-ui-level=simple] .sidebar .nav[data-level=expert],html[data-ui-level=standard] .sidebar .nav[data-level=expert]{display:none!important}
-html[data-ui-level=simple] #nav-more,html[data-ui-level=simple] .nav-section{display:none!important}
 html[data-ui-level=simple] #setup-start,html[data-ui-level=simple] #mode-onboarding{display:none!important}
 [data-current-view=first-run] #setup-card,[data-current-view=settings] #setup-card{display:none!important}
 .hub-back-link{display:inline-flex}
@@ -80,6 +83,7 @@ html[data-ui-level=simple] #setup-start,html[data-ui-level=simple] #mode-onboard
 .answer-card[aria-pressed=true]{padding:17px}
 .answer-icon{font-size:21px}
 .hub-detail{padding:18px 14px}
+.hub-detail-bar{margin:-18px -14px 0;padding:10px 14px}
 .setup-summary{grid-template-columns:1fr;gap:8px}
 .setup-summary dd{margin-bottom:12px}
 .top-actions .level-pick{max-width:80px}
@@ -91,14 +95,6 @@ html[data-ui-level=simple] #setup-start,html[data-ui-level=simple] #mode-onboard
 #mode-onboarding{display:none!important}
 [data-current-view=first-run] .health-toolbar,[data-current-view=first-run] #mode-switch{display:none!important}
 html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switch{display:none!important}
-.other-sign-in{margin:16px 0;padding:12px;border:1px solid var(--border);border-radius:10px}
-.other-sign-in summary{cursor:pointer;color:var(--muted);font-size:13px}
-.other-sign-in .login-methods{margin-top:12px}
-#credentials-form:has(>.other-sign-in)>.login-methods,.other-sign-in .login-methods{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:600px) {
-  .other-sign-in { margin:10px 0; padding:8px; }
-  .other-sign-in .login-methods { margin:8px 0; }
-}
 
 
 .setting-help { display:inline-block; margin-inline-start:8px; position:relative; }

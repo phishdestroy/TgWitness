@@ -1,5 +1,6 @@
 "use strict";
 const panelRoots=new Map([...document.querySelectorAll('.view')].map(root=>[root.id.slice(5),root]));
+for(const text of document.querySelectorAll('#workspace p, #workspace small, dialog p, dialog small'))text.dataset.static='1';
 const $ = id => {
   const attached=document.getElementById(id);if(attached)return attached;
   for(const root of panelRoots.values()){
@@ -106,6 +107,22 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 });
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
+let homeView,homeTask;
+const homeReady=Promise.all([import('./views/home.js?v=2'),accountStateReady]).then(([module])=>{
+  homeTask=module.taskInfo;
+  homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
+    refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
+});
+function busyExplanation(detail,profile){
+  if(typeof detail!=='string'||!detail.startsWith('This account is busy'))return null;
+  const collector=(state.profiles||[]).find(p=>p.id===profile)?.collector||(profile===state.profile?state.status?.collector:null);
+  const info=homeTask?.(collector?.activity);
+  if(!info)return null;
+  const d=collector.activity.detail;
+  const now=collector.activity.task==='chat_export'&&d?tr('Exporting {chat}',{chat:d.title||('#'+d.chat_id)}):tr(info.label);
+  return tr('This account is busy: {task}.',{task:now})+' '+tr('Not available now: {list}',{list:tr(info.blocks)})+'. '
+    +tr('Still available: {list}',{list:tr(info.allows)})+'.'+(info.action?' '+tr('To free it: {action} on the Overview page.',{action:tr(info.action)}):'');
+}
 let disclosurePreview;
 const disclosurePreviewReady=import('./views/disclosure-preview.js?v=2').then(({createDisclosurePreview})=>{
   disclosurePreview=createDisclosurePreview({root:$('view-evidence'),tr,formatTime:accountExportTime});
@@ -180,7 +197,7 @@ async function loadPanelView(view){
   if(view==='system-map'){await systemMapReady;await systemMapView.enter();return;}
   if(view==='board'){await boardReady;await boardView.load();return;}
   if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load();}
-  else if(view==='start')renderWorkflowControls();
+  else if(view==='start'){await homeReady;await loadProfiles().catch(()=>{});renderWorkflowControls();}
   else if(view==='sources'){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
   else if(view==='witness')await loadExtras();
   else if(view==='parameters')await loadParameters();
@@ -205,7 +222,8 @@ function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":stat
   slice:state.boardSlice||null,added:!!state.boardAdded,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
   since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null,
-  step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null};}
+  step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null,
+  hub:state.view==="settings"?settingsHub?.section||null:null};}
 function ensureRouter(){
   if(!routerTask)routerTask=import("./router.js?v=10").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
@@ -234,7 +252,7 @@ async function applyRouteToPanel(route,current){
   if(view==='topology'){await topologyReady;if(current())await topologyView.enter();return;}
   if(view==='system-map'){await systemMapReady;if(current())await systemMapView.enter();return;}
   if(view==='board'){await boardReady;await boardView.load();return;}
-  if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step);}
+  if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step,view==='settings'?route.hub:undefined);}
   else if(view==="chats"){
     await refreshChats(false,route.chatId);
     if(current()&&route.chatId!==null){
@@ -260,6 +278,7 @@ async function applyRouteToPanel(route,current){
     if(current())exportsView.select(route.tab||'downloads',false,{history:false});
   }
   else if(view==="witness"){await loadExtras();if(current())selectExtra(route.extra,{history:false});}
+  else await loadPanelView(view);
   }});
 }
 
@@ -593,7 +612,7 @@ async function api(path, body, options={}) {
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
     if(fetchOptions.signal?.aborted)throw new StaleView();
-    const error=new Error(tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;throw error;
+    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;throw error;
   }
   return response;
 }
@@ -864,17 +883,19 @@ function renderWorkflowControls(){
   show('workflow-link-card',!state.status.demo&&may('export'));
   show('workflow-account-card',canExport);
   show('workflow-investigation-card',viewAllowed('sources')&&viewAllowed('connection')&&may('collect'));
+  homeView?.render();
   const sources=state.status.targets.filter(target=>target.enabled).length,current=profileEntry()||{};
   const activity=accountActivityText({...current,collector:state.status.collector,sources_enabled:sources}),demo=state.status.demo;
   $('workflow-status-title').textContent=demo?tr('Demo workspace'):activity.title;
   $('workflow-status-title').closest('.workflow-status').dataset.state=demo?'demo':activity.kind;
   $('workflow-status-copy').textContent=[demo?'':current.label,trn('{n} saved record','{n} saved records',state.status.stats.total),
     trn('{n} selected chat','{n} selected chats',sources)].filter(Boolean).join(' · ');
-  const exporter=viewQuery('start','[data-workflow="account"]');
-  exporter.textContent=tr(!demo&&activity.observing?'Pause observation and export':'Export my account');
+  renderWorkflowGaps(state.status.stats.counts?.['coverage.gap']||0);
+  const exporter=viewQuery('start','[data-workflow="account-all"]');
+  exporter.textContent=tr(!demo&&activity.observing?'Pause observation and export':'Export everything');
   $('workflow-account-hint').textContent=!demo&&activity.observing?
     tr('Observation pauses for the export. Start it again in Accounts when the export finishes.'):
-    !demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):tr('No continuous observation needed.');
+    !demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):'';
   renderWorkflowAccounts();
   const investigate=viewQuery('start','[data-workflow="investigation"]');
   investigate.textContent=tr(state.status.collector.running?'Open investigation':'Set up observation');
@@ -897,6 +918,24 @@ function renderWorkflowControls(){
   $('account-export-configure').textContent=tr(!state.status.demo&&!accountSignedIn()?
     info.needsSignIn?'Sign in again':'Connect account →':'Configure account export');
   }
+}
+let workflowGapKey='';
+function renderWorkflowGaps(gaps){
+  const box=$('workflow-gap'),key=state.workspaceRevision+':'+state.profile+':'+gaps;
+  box.hidden=!gaps||!viewAllowed('observations');
+  if(box.hidden||key===workflowGapKey)return;
+  workflowGapKey=key;
+  const copy=node('span','',tr('Coverage gaps in the journal: {n}.',{n:gaps.toLocaleString()}));
+  const open=node('button','text-link',tr('Show in the journal'));open.type='button';
+  open.addEventListener('click',()=>{
+    state.boardSlice=null;state.filter='coverage.gap';state.source='';state.search='';state.eventSince='';state.eventUntil='';
+    state.eventBefore=state.eventAfter=state.cursor=null;navigate('observations');
+  });
+  box.replaceChildren(copy,open);
+  json('events?kind=coverage.gap&limit=1').then(result=>{
+    const last=result.events?.[0];
+    if(last&&workflowGapKey===key)copy.textContent=tr('Coverage gaps in the journal: {n}. Latest: {time}.',{n:gaps.toLocaleString(),time:fmtTime(last.observed_at)});
+  }).catch(()=>{});
 }
 function renderWorkflowAccounts(){
   const box=$('workflow-accounts'),list=(state.profiles||[]).filter(p=>!p.error_type&&p.collector);
@@ -951,6 +990,19 @@ function importedKeyNotice(id){
   open.addEventListener('click',()=>{void openIndependentSignIn();});
   box.append(node('span','',tr("This workspace's Telegram session key was imported. Copies of it can exist outside Telegram's session list."))," ",open);
 }
+async function exportEverything(){
+  if(!state.me?.admin||!viewAllowed('evidence'))return;
+  if(!state.status.demo&&!accountSignedIn()){state.workflow={profile:state.profile,kind:'account'};await openWorkflowSignIn();return;}
+  const observing=state.status.collector?.activity?.task==='observation';
+  const message=tr("Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.")
+    +(observing?' '+tr("Observation pauses while the export runs."):'');
+  if(!(await askConfirm(message,{confirmText:tr("Export everything")})))return;
+  if(observing)await json("collector/stop",{});
+  const language=Object.keys(PANEL_LANGUAGES).includes(LANG)?LANG:'en';
+  await json("account-export/start",{...accountExportFallback,report_language:language});
+  selectExportTask('account');await navigate('evidence');exportsView?.select('downloads');await loadAccountExport();
+  toast(tr("Account export started. Progress and omissions appear here; you can leave this page and return."));
+}
 async function openAccountWorkflow(){
   if(!state.me?.admin||!viewAllowed('evidence'))return;
   if(!state.status.demo&&state.status.collector?.running&&!(await pauseForExport(state.profile)))return;
@@ -964,6 +1016,7 @@ async function openAccountWorkflow(){
 }
 panelQueries('[data-workflow]').forEach(button=>button.addEventListener('click',()=>busy(button,async()=>{
   if(button.dataset.workflow==='account'){await openAccountWorkflow();return;}
+  if(button.dataset.workflow==='account-all'){await exportEverything();return;}
   state.workflow=null;
   if(!viewAllowed('sources')||!viewAllowed('connection')||!may('collect'))return;
   if(!accountSignedIn()&&!state.status.demo){await openWorkflowSignIn();return;}
@@ -999,6 +1052,23 @@ async function loadQuickCatalog(){
 quickDialog.addEventListener('close',()=>{if(!quickDialog.open)cancelQuickCatalog();});
 window.addEventListener('tgwitness:lock',()=>{quickCatalog=[];quickCatalogKey='';cancelQuickCatalog();quickResults.replaceChildren();});
 $("quick-shortcut").textContent=/Mac|iPhone|iPad/.test(navigator.platform)?"⌘ K":"Ctrl K";
+for(const box of document.querySelectorAll(".sidebar-bottom > details")){
+  const key="tgwitness-sidebar-"+box.className;
+  try{box.open=localStorage.getItem(key)==="1";}catch{}
+  box.addEventListener("toggle",()=>{try{localStorage.setItem(key,box.open?"1":"0");}catch{}});
+}
+function syncHiddenNav(){
+  const level=document.documentElement.dataset.uiLevel,rank={simple:0,standard:1,expert:2},hint=$("nav-hidden-hint");
+  const hidden=level?[...document.querySelectorAll(".sidebar nav .nav[data-view]")].filter(nav=>!nav.hidden&&rank[nav.dataset.level]>rank[level]).length:0;
+  hint.hidden=!hidden;
+  if(hidden)hint.textContent=trn("Show {n} hidden section","Show {n} hidden sections",hidden);
+}
+new MutationObserver(syncHiddenNav).observe(document.documentElement,{attributes:true,attributeFilter:["data-ui-level"]});
+import("./components/tips.js?v=3").then(({createTips})=>createTips({tr,icon,roots:[...panelRoots.values()]})).catch(error=>toast(error.message,true));
+$("nav-hidden-hint").addEventListener("click",()=>{
+  const select=document.querySelector(".sidebar [data-ui-level]");if(!select)return;
+  select.value="expert";select.dispatchEvent(new Event("change"));
+});
 function selectQuick(index){
   const options=[...quickResults.children];
   if(!options.length){quickSearch.removeAttribute("aria-activedescendant");return;}
@@ -1237,11 +1307,14 @@ function renderStatus() {
     c.has_session ? "Observation off" : ({code_required:"Waiting for code",password_required:"Waiting for 2FA",qr_pending:"Waiting for QR"}[c.phase]||"Account not connected"));
   $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected);
   $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected));
+  $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected?"live":c.running||accountState(s).needsSignIn?"warn":"off";
   $("collector-toggle").textContent=tr(c.running ? "Pause observation" : "Start observation");
   $("collector-toggle").disabled=s.demo||(!c.running&&!accountState(s).canStart);
   $("collector-toggle").title=tr(s.demo?"Demo uses fictional observations":accountState(s).needsSignIn?'Sign in again':!c.has_session?"Connect an account first":
     !hasSources(s)?"Select at least one source first":"");
-  $("nav-count").textContent=s.stats.total.toLocaleString();
+  const navCount=$("nav-count"),total=s.stats.total.toLocaleString();
+  if(navCount.textContent!==total){if(navCount.dataset.profile===state.profile&&/\d/.test(navCount.textContent))replay(navCount,"count-bump",700);navCount.textContent=total;}
+  navCount.dataset.profile=state.profile;
   renderCollectorHealth(s.health);collectionUI?.update();
   const signIn=accountState(s).needsSignIn;
   show("collector-error",!!c.last_error||signIn);
@@ -1509,7 +1582,9 @@ function renderAccounts(){
       const attention=!s.demo&&p.health?Object.keys(healthPartNames).filter(name=>needsLook(p.health[name]?.state)):[];
       if(attention.length)pair(tr("Needs attention"),attention.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(p.health[name].state)][0]).join(" · "),"attention");
       const restricted=c.account_restriction&&(!c.account_restriction.until||c.account_restriction.until*1000>Date.now())?c.account_restriction:null;
-      pair(tr("Route"),[routeText(c.network),exitText(c.network?.check)].filter(Boolean).join(" · ")||"—","route");
+      const route=routeText(c.network),exit=exitText(c.network?.check);
+      pair(tr("Route"),route||exit||"—","route");
+      if(route&&exit)meta.lastElementChild.lastElementChild.append(node("span","route-exit",exit));
       const sharing=exits.get(c.network?.check?.exit_ip)||0;
       if(sharing>1)meta.lastElementChild.lastElementChild.append(node("span","route-shared",tr("Same exit address as other accounts: {n}",{n:sharing-1})));
       if(restricted)pair(tr("Telegram restriction"),restrictionText(restricted.kind),"restriction");
@@ -1775,7 +1850,13 @@ function excerpt(e) {
     case "access.session_ended": return accessName(p)+" · "+(sessionEndReasons[p.reason]||p.reason||"");
     case "witness.seen": return (p.label||"")+" · "+String(p.witness_fingerprint||"").slice(0,16);
   }
-  if (p.reason) return p.reason;
+  if (p.reason) return ({transport_disconnected:tr("Connection to Telegram lost"),transport_connected:tr("Telegram connected"),
+    transport_interrupted:tr("The connection dropped during a check"),session_revoked_externally:tr("The session was ended from another device or by Telegram."),
+    updates_diverted:tr("Updates are going to another session"),updates_resumed:tr("Updates reach this session again"),
+    source_access_lost:tr("The account lost access to a source"),shutdown:tr("TgWitness was shut down"),operator:tr("Stopped from the panel"),
+    collector_error:tr("Stopped after an error"),history_unavailable:tr("Chat history could not be read"),
+    recheck_visibility_uncertain:tr("Some messages could not be confirmed on recheck"),recheck_unparsed:tr("Some message numbers could not be read on recheck"),
+    probe_ack_missed_live:tr("A probe answer did not arrive live"),probe_ack_live:tr("Probe answers arrive live again")})[p.reason]||p.reason;
   if (p.service_action) return p.service_action;
   if (p.action) return p.action._ || tr("Telegram service action");
   if (p.coverage) return tr(p.coverage);
@@ -1806,7 +1887,7 @@ function eventRow(e) {
     row.append(cell,source,time,open);
     row.addEventListener("click",()=>openDetail(e));
     row.addEventListener("keydown",event=>{ if(event.target===row&&(event.key==="Enter"||event.key===" ")){event.preventDefault();openDetail(e);} });
-    row.dataset.seq=String(e.seq);
+    row.dataset.seq=String(e.seq);row.dataset.category=label[2];
     boardView?.attach(row,e);
     return row;
 }
@@ -2070,16 +2151,20 @@ function renderHistory(){
     $("history-workers").value=String(h.options.media_workers);
     $("history-admin").checked=h.options.admin_log;
     $("history-compare").checked=h.options.compare_saved;
+    $("history-observe").checked=!!h.options.observe_after;
   }
   show("history-card",may("sources")&&!s?.chats_limited);
   show("history-start",!active&&!paused);show("history-pause",active);
   show("history-resume",paused);show("history-cancel",active||paused);
   show("history-report",exists&&may("export"));
-  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export||!s?.targets.some(x=>x.enabled);
-  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export;
+  const observing=s?.collector?.activity?.task==="observation";
+  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!(s?.collector.available_for_export||observing)||!s?.targets.some(x=>x.enabled);
+  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!(s?.collector.available_for_export||observing);
   const busyAccount=!s?.demo&&!!s?.collector.has_session&&!s?.collector.available_for_export&&!active;
   show("history-availability",busyAccount);
-  $("history-availability").textContent=busyAccount?tr("This account is busy. Pause observation or its current task before loading history."):"";
+  $("history-availability").textContent=!busyAccount?"":observing?
+    tr("Observation is running. Loading history pauses it; with the option above it starts again when the history is loaded."):
+    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Pause observation or its current task before loading history.");
   const labels={running:tr("Loading history"),paused:tr("History paused"),complete:tr("History reading finished"),
     incomplete:tr("History finished with gaps"),cancelled:tr("History run ended")};
   const counts=h.sources_by_phase||{},finished=(counts.complete||0)+(counts.failed||0)+(counts.skipped||0);
@@ -2111,7 +2196,11 @@ for(const action of ["start","pause","resume","cancel"]){
   $("history-"+action).addEventListener("click",e=>busy(e.currentTarget,async()=>{
     const options=action==="start"?{transport:$("history-transport").value,
       media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
-      compare_saved:$("history-compare").checked}:{};
+      compare_saved:$("history-compare").checked,observe_after:$("history-observe").checked}:{};
+    if(["start","resume"].includes(action)&&state.status?.collector?.activity?.task==="observation"){
+      if(!(await askConfirm(tr("Observation is running on this account. Loading history pauses it. Updates that arrive meanwhile are requested again from the saved position when observation starts. Continue?"),{confirmText:tr("Pause and load history")})))return;
+      await json("collector/stop",{});
+    }
     await json("history/"+action,options);await refreshStatus();await refreshEvents();
   }));
 }
@@ -2287,11 +2376,11 @@ $("chat-export-partial-download").addEventListener("click",e=>saveExport(e.curre
 const accountExportKinds=["private","bot","group","supergroup","channel"];
 const accountExportMedia=["photo","video","video_message","voice","audio","document","sticker","animation"];
 const accountExportFallback={purpose:"",chat_kinds:accountExportKinds,from_utc:null,to_utc:null,chat_ids:[],
-  report_language:'en',export_format:'tgwitness',budget_exhausted:'hashes_only',
+  report_language:'en',export_format:'telegram_both',budget_exhausted:'hashes_only',
   sender_ids:[],text_contains:[],own_messages_only:false,
   include_archived:true,media_types:accountExportMedia,max_media_file_mib:512,max_total_gib:16,
-  include_profile:true,include_contacts:true,include_profile_photos:false,include_stories:false,
-  include_session_metadata:false,include_other_data:false,transport:"takeout"};
+  include_profile:true,include_contacts:true,include_profile_photos:true,include_stories:true,
+  include_session_metadata:true,include_other_data:true,transport:"auto"};
 let accountExportRead=null,accountExportRequest=0,accountExportJobStamp=null;
 for(const id of ['account-export-language','account-disclosure-language']){
   for(const [code,name] of Object.entries(PANEL_LANGUAGES)){
@@ -2318,7 +2407,7 @@ function accountExportDefaults(options){
   const saved={...accountExportFallback,...options};
   $("account-export-purpose").value=saved.purpose||"";
   $('account-export-language').value=saved.report_language||'en';
-  $('account-export-format').value=saved.export_format||'tgwitness';
+  $('account-export-format').value=saved.export_format||'telegram_both';
   for(const input of $("account-export-kinds").querySelectorAll('input[type="checkbox"]'))
     input.checked=saved.chat_kinds.includes(input.value);
   for(const input of $("account-export-media").querySelectorAll('input[type="checkbox"]'))
@@ -2406,7 +2495,7 @@ function renderAccountExportPreview(){
       ['include_profile_photos',tr('Profile photos')],['include_stories',tr('Stories')],
       ['include_session_metadata',tr('Session metadata')],['include_other_data',tr('Other available data')]];
     const other=extras.filter(([key])=>x[key]).map(([,label])=>label).join(', ')||tr('none');
-    const transport=tr(x.transport==='regular'?'Regular session':'Telegram Takeout session');
+    const transport=tr(x.transport==='regular'?'Regular session':x.transport==='auto'?'Automatic':'Telegram Takeout session');
     $('account-export-advanced-summary').textContent=other+' · '+transport;
     box.textContent=tr(all?"All accessible chats of {n} selected types, including Saved Messages when private chats are selected.":
       "{n} selected chat IDs of the chosen types.",{n:all?x.chat_kinds.length:x.chat_ids.length})+" "+
@@ -4179,7 +4268,7 @@ async function noticeAction(item,kind){
   }
   if(revision===state.workspaceRevision)return openRecord(item.seq);
 }
-const noticesReady=import("./components/notifications.js?v=1").then(({createNotifications})=>{
+const noticesReady=import("./components/notifications.js?v=2").then(({createNotifications})=>{
   noticeUI=createNotifications({workspace:$("workspace"),panel:$("notify-panel"),toggle:$("notify-toggle"),badge:$("notify-count"),list:$("notify-list"),
     readAll:$("notify-read"),rules:$("notify-rules"),closeButton:$("notify-close"),
     filters:[...document.querySelectorAll("[data-notice-filter]")],summary:$("notify-summary"),status:$("notify-status"),
@@ -4272,8 +4361,6 @@ function setAuthMethod(method){
     $("import-result").textContent="";
   }
   authMethod=method;
-  const otherMethods=$("credentials-form").querySelector(".other-sign-in");
-  if(otherMethods&&["files","key"].includes(method))otherMethods.open=true;
   panelQueries("[data-auth-method]").forEach(button=>{
     const selected=button.dataset.authMethod===method;
     button.classList.toggle("active",selected);button.setAttribute("aria-pressed",String(selected));
@@ -5728,12 +5815,19 @@ async function loadHistory(button,limit){
   const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration;
   const current=()=>profile===state.profile&&revision===state.workspaceRevision&&chat===state.chat&&generation===chatGeneration;
   const work=async()=>{
+    let pause=false;
+    if(state.status?.collector?.activity?.task==="observation"){
+      if(!(await askConfirm(tr("Observation is running on this account. Loading messages pauses it for a moment and starts it again right after. Updates from that moment are requested again from the saved position. Continue?"),{confirmText:tr("Load messages")})))return;
+      pause=true;
+    }
     toast(tr("Loading the last {n} messages from Telegram…",{n:limit}));
     try{
-      const r=await json("snapshot",{chat_id:chat,limit},{profile});
+      const r=await json("snapshot",{chat_id:chat,limit,pause_observation:pause},{profile});
       if(!current())return;
       $("chat-history-feedback")?.remove();
-      toast(tr("Loaded {n} messages.",{n:r.captured}));await refreshStatus();await refreshChats();
+      if(r.observation_resumed===false)toast(tr("Messages loaded, but observation did not start again. Start it from the account page."),true);
+      else toast(tr("Loaded {n} messages.",{n:r.captured}));
+      await refreshStatus();await refreshChats();
     }catch(error){
       if(!current()||error instanceof StaleView)return;
       $("chat-history-feedback")?.remove();
@@ -6305,7 +6399,8 @@ async function pollWorkspace(){
     if(!window.TgWitnessLive?.active()&&state.view==="observations" && state.drawerSeq===null && state.eventBefore===null && state.events.length<=200&&window.TgWitnessJournal?.canRefresh()!==false
         && state.status.stats.head?.seq!==head) await refreshEvents();
     if(!window.TgWitnessLive?.active()&&state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
-    if(state.view==="accounts"||state.view==="group"||state.view==="start") await loadProfiles();
+    if(state.view==="accounts"||state.view==="group") await loadProfiles();
+    if(state.view==="start") await loadProfiles().catch(()=>{});
     if(state.view==="witness") await loadExtras();
     if(state.view==="access") await loadAccess(true);
     if(state.view==="system-log") await loadConsole();
