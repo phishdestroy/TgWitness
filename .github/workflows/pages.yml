@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
     paths:
+      - README.md
       - NOTICE
       - LICENSE
       - tools/sync_notice.py

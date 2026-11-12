@@ -384,8 +384,9 @@ async def snapshot(request: Request, body: Snapshot, *, ctx=Depends(current_cont
             422,
             "The snapshot is larger than this workspace allows. Raise the limit in Parameters.",
         )
+    collector = ctx.app.state.collector
     return await ctx.operation(
-        ctx.app.state.collector.snapshot, body.chat_id, body.limit
+        collector.snapshot_paused if body.pause_observation else collector.snapshot, body.chat_id, body.limit
     )
 
 
@@ -516,9 +517,18 @@ async def chat_messages(
         raise HTTPException(422, "Limit must be 1–200.")
     if before_id is not None and after_id is not None:
         raise HTTPException(422, "Choose one message cursor.")
-    return ctx.app.state.store.chat_messages(
-        chat_id, before_id, limit, after_id=after_id
+    from ..gap_analysis import page_gaps
+
+    store = ctx.app.state.store
+    result = store.chat_messages(chat_id, before_id, limit, after_id=after_id)
+    result["gaps"] = page_gaps(
+        store,
+        chat_id,
+        [message["message_id"] for message in result["messages"]],
+        before_id=before_id,
+        after_id=after_id,
     )
+    return result
 
 
 async def chat_authors(chat_id: int, *, ctx=Depends(current_context)):

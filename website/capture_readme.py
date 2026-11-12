@@ -85,8 +85,10 @@ def main():
                     page.route("**/*", local_only)
                     page.goto(f"http://127.0.0.1:{server.server_port}/demo/?lang=en", wait_until="networkidle")
                     page.locator('[data-view="chats"]').evaluate("item => item.click()")
+                    if mobile:
+                        page.locator('.chat-choice[aria-pressed="true"]').click()
                     page.locator("button.pill-edited").first.wait_for()
-                    assert "Fictional messages" in page.locator("body").inner_text()
+                    assert "Fictional messages" in page.locator("body").text_content()
                     states = [capture(page, mobile)]
                     choose_filter(page, "edited")
                     page.locator("button.pill-edited").first.click()

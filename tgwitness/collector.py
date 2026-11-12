@@ -147,9 +147,7 @@ def update_chat(update):
 
 
 DELETION_BATCH_MEANING = (
-    "Telegram reported several message IDs as deleted in one update. "
-    "This does not identify who deleted them, whether deletion applied to all participants, "
-    "or whether the entire chat history was cleared.")
+    "Telegram reported several message IDs as deleted in one update.")
 ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
                        "stopped at that moment; records saved before it remain in the journal.")
 UPDATES_CHECK_SECONDS = 120
@@ -310,6 +308,10 @@ def connection_change(call):
         finally:
             self.connection_change_task = previous
     return guarded
+
+
+ACTIVITY_CLAIMS = (("snapshot:", "loading_messages"), ("scale:", "measuring_chat"), ("avatar:", "profile_photo"),
+                   ("manual:", "panel_action"), ("plan:", "planning_export"), ("export-preflight-", "checking_export"))
 
 
 def recovered_source(update):
@@ -531,7 +533,7 @@ class Collector:
         self.sessions_checked_at = -SESSIONS_EVERY
         self.sessions_checking = 0
         self.session_revoked = None
-        self.only_session_password = None
+        self.only_session_password = vault.read("only_session_password").get("password")
         self.auto_only_checked_at = -AUTO_ONLY_SESSION_EVERY
         self.auto_only_retry_at = 0
         self.auto_only_failures = 0
@@ -609,6 +611,8 @@ class Collector:
         self.export_files_lock = asyncio.Lock()
         self._forensics_clients = weakref.WeakSet()
         self.history = History(self)
+        from .profiling import Profiling
+        self.profiling = Profiling(self)
 
     def status(self):
         credentials = self.vault.read("credentials")
@@ -657,6 +661,7 @@ class Collector:
             "reconnect_attempts": self.reconnect_attempts,
             "next_reconnect_at": self.next_reconnect_at,
             "chat_export": dict(self.export_state) if self.export_state else None,
+            "activity": self.activity(),
             "recheck": self.recheck_state,
             "storage_low": self.storage_low,
             "media_min_free_bytes": self.param("media_min_free_mb") * 1024**2,
@@ -678,6 +683,7 @@ class Collector:
         self.authorization_generation += 1
         first = not self.authorization_required
         self.authorization_required, self.running, self.buffering = True, False, False
+        self.paused_drops += len(self.buffered)
         self.buffered = []
         self.phase, self.last_error = "authorization_required", type(exc).__name__
         cause = exc.cause if isinstance(exc, AccountLost) else account_loss_cause(exc) or "not_authorized"
@@ -1056,7 +1062,7 @@ class Collector:
     def save_update_state(self):
         session = getattr(self.client, "session", None)
         account = (self.store.get_setting("account", {}) or {}).get("id")
-        if account is None or not hasattr(session, "get_update_states"):
+        if account is None or self.paused_drops or not hasattr(session, "get_update_states"):
             return
         record = {"account_id": account, "saved_at": utcnow(), "account": None, "channels": []}
         for entity_id, state in list(session.get_update_states()):
@@ -2297,14 +2303,12 @@ class Collector:
             if snapshot and trigger == "observation_start":
                 others = snapshot.get("others", [])
                 if others:
-                    self.store.append("coverage.gap", {
-                        "reason": "concurrent_sessions_at_start",
+                    self.store.append("session.concurrent_at_start", {
                         "concurrent_sessions": len(others),
                         "sessions": others,
-                        "meaning": ("%d other session(s) were active in this account when observation began. "
-                                    "These sessions had access to the same account and may have received "
-                                    "push updates (GetDifference) instead of this TgWitness session." % len(others)),
-                        "completeness": "unknown; other sessions may have received updates not visible here"})
+                        "meaning": ("%d other session(s) were signed in to this account when observation began. "
+                                    "Telegram delivers updates to each signed-in session separately; these sessions "
+                                    "could also send, edit or delete this account's messages." % len(others))})
         except asyncio.CancelledError:
             raise
         except Exception:
@@ -2386,7 +2390,7 @@ class Collector:
             "initiated_by": "this workspace"})
         return {"terminated": others_before, "remaining_others": others_after}
 
-    async def make_only_session(self):
+    async def make_only_session(self, take=True):
         await self.restore()
         if (self.store.get_setting("account", None) or {}).get("key_origin") != "created":
             raise ValueError("This session key was imported, so copies of it can exist outside Telegram's session "
@@ -2398,13 +2402,24 @@ class Collector:
         state = await asyncio.wait_for(self.client(functions.account.GetPasswordRequest()), 30)
         password = None if state.has_password else secrets.token_urlsafe(18)
         if password:
-            await self.change_password(None, password)
+            self.keep_only_session_password(password)
+            try:
+                await self.change_password(None, password)
+            except (RPCError, ValueError):
+                self.keep_only_session_password(None)
+                raise
         record = {"other_sessions_ended": ended["terminated"],
                   "two_step": "set_now" if password else "already_on", "meaning": ONLY_SESSION_MEANING}
         with self.store.transaction():
             self.store.set_setting("only_session", {"since": utcnow()})
             self.store.append("session.exclusive_from", record)
+        if password and take:
+            self.keep_only_session_password(None)
         return {"other_sessions_ended": ended["terminated"], "two_step": record["two_step"], "password": password}
+
+    def keep_only_session_password(self, password):
+        self.vault.save("only_session_password", {"password": password} if password else {})
+        self.only_session_password = password
 
     def set_auto_only_session(self, enabled):
         enabled = bool(enabled)
@@ -2420,7 +2435,9 @@ class Collector:
         return {"auto_only_session": enabled}
 
     def take_only_session_password(self):
-        password, self.only_session_password = self.only_session_password, None
+        password = self.only_session_password
+        if password:
+            self.keep_only_session_password(None)
         return {"password": password}
 
     def authorized_age(self):
@@ -2441,7 +2458,7 @@ class Collector:
         if waited is None or waited < AUTO_ONLY_SESSION_AFTER:
             return
         try:
-            result = await self.make_only_session()
+            await self.make_only_session(take=False)
         except asyncio.CancelledError:
             raise
         except Exception as exc:
@@ -2456,8 +2473,6 @@ class Collector:
                     "meaning": AUTO_ONLY_SESSION_POSTPONED_MEANING})
             return
         self.auto_only_failures, self.auto_only_reason, self.auto_only_retry_at = 0, None, 0
-        if result.get("password"):
-            self.only_session_password = result["password"]
 
     async def change_password(self, current_password, new_password, hint=""):
         await self.restore()
@@ -2526,6 +2541,7 @@ class Collector:
         try:
             await self.start_observation()
         except BaseException as exc:
+            self.paused_drops += len(self.buffered)
             self.buffered, self.buffering = [], False
             if self.running:
                 with suppress(Exception):
@@ -2664,6 +2680,8 @@ class Collector:
 
     async def stop(self, shutdown=False):
         await self.wait_authorization_cleanup()
+        if shutdown:
+            await self.profiling.suspend()
         await self.history.pause("process_shutdown" if shutdown else "observation_stopped")
         if shutdown and self.export_task:
             self.export_task.cancel()
@@ -2691,7 +2709,9 @@ class Collector:
 
         if shutdown:
             await secret_chats.of(self).detach()
-        if self.client and (shutdown or not (self.export_busy() or self.export_claim)):
+        if self.client and (shutdown or not (self.export_busy() or self.export_claim
+                                             or self.profiling.busy
+                                             or secret_chats.of(self).manager is not None)):
             await self.client.disconnect()
         if shutdown and self.proxy_pool:
             self.proxy_pool.release(self.route_owner)
@@ -3013,14 +3033,13 @@ class Collector:
         content = state["content"]
         payload = {"deleted_by": None, "deletion_time": None,
                    "deleted_content": {"seq": content["seq"], "hash": content["hash"]} if content else None,
-                   "meaning": "Telegram deletion notification; observation time is not deletion time"
-                              + ("" if content else "; this message was never observed, so no content is held"),
+                   "meaning": "Telegram deletion notification, recorded when it arrived"
+                              + ("" if content else "; the message ID is recorded"),
                    **({"batch": batch} if batch else {"raw": raw})}
         if resolution:
             payload["chat_resolution"] = resolution
         if state["content"] and state["content"].get("outgoing"):
             payload["deleted_message_was_outgoing"] = True
-            payload["deleter_visibility"] = "the message was sent by this account; who deleted it is not supplied"
         if timer := auto_delete(state["content"], utcnow()):
             payload["auto_delete"] = timer
         self.store.append("message.deleted", payload, chat_id, message_id)
@@ -3632,6 +3651,21 @@ class Collector:
                 result["missing"] += 1
         return result
 
+    async def snapshot_paused(self, chat_id, limit):
+        resume, resumed = self.running, None
+        if resume:
+            await self.stop()
+        try:
+            result = await self.snapshot(chat_id, limit)
+        finally:
+            if resume:
+                try:
+                    await self.start()
+                    resumed = True
+                except Exception:
+                    resumed = False
+        return {**result, "observation_resumed": resumed}
+
     async def snapshot(self, chat_id, limit, entity=None, origin=None):
         owner = None
         if origin is None:
@@ -3675,6 +3709,31 @@ class Collector:
     def export_busy(self):
         return bool(self.export_task and not self.export_task.done())
 
+    def activity(self):
+        claim, detail = self.export_claim or "", None
+        if self.authorization_required:
+            task = "sign_in_required"
+        elif self.connection_change_task is not None:
+            task = "connection_change"
+        elif self.observation_starting:
+            task = "starting_observation"
+        elif self.running:
+            task = "observation"
+        elif self.history.busy or claim.startswith("history:"):
+            task = "history"
+        elif self.export_busy() or self.export_state and claim == self.export_state.get("id"):
+            task = "chat_export"
+            detail = {key: self.export_state.get(key) for key in ("id", "chat_id", "title", "phase", "captured", "total",
+                                                                  "eta_seconds", "stage")} if self.export_state else None
+        elif claim:
+            task = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), "export")
+        elif self.profiling.busy:
+            task = "profiling"
+        else:
+            task = None
+        until = self.store.get_setting("rpc_backoff_until", 0)
+        return {"task": task, "detail": detail, "telegram_pause_until": until if until > time.time() else None}
+
     def reserve_export(self, owner):
         if (self.running or self.observation_starting or self.history.busy or self.export_busy()
                 or self.export_claim or self.connection_change_task is not None):
@@ -3689,6 +3748,7 @@ class Collector:
 
     def idle(self):
         return not (self.running or self.observation_starting or self.history.busy or self.export_busy()
+                    or self.profiling.busy
                     or self.export_claim or self.connection_change_task is not None or self.foreground
                     or self.login_client is not None or self.qr_task is not None)
 
@@ -4304,6 +4364,9 @@ class Collector:
         cached = self.store.root / "avatars" / (str(peer_id) + ".jpg")
         if cached.is_file():
             return cached
+        if (self.client and self.client.is_connected() and not self.authorization_required
+                and (self.running or self.export_claim or self.export_busy() or self.history.busy)):
+            return await self._avatar(peer_id)
         owner = "avatar:" + secrets.token_hex(8)
         if not self.reserve_export(owner):
             return None
