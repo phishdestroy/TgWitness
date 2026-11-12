@@ -99,6 +99,7 @@ class Profiling(ProfileCapture):
         source.update(values)
 
     def emit(self, run, job, kind, payload):
+        self.require_account(run)
         digest = hashlib.sha256(canonical(payload)).hexdigest()
         identity = str(payload.get("key", payload.get("photo_id", ""))) + ":" + digest
         with self.store.transaction():
