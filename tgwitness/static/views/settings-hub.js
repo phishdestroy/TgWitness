@@ -92,6 +92,11 @@ export function createSettingsHub(ctx) {
       b.append(glyph(emoji,'answer-icon'),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
     }box.append(group);
   }
+  function heading(){const box=node('div','hub-heading');box.append(node('h1','',tr('Settings')));return box;}
+  function closed(text){
+    const box=node('div','hub-closed'),mark=glyph('settings:slate','hub-closed-mark');
+    box.append(mark,message(text));section=null;closeSheet();root.replaceChildren(heading(),box);
+  }
   function restoreMoved(){for(const [el,marker] of moved){marker.replaceWith(el);}moved=[];}
   function move(el, host){if(!el)return;const marker=document.createComment('settings-form');el.before(marker);host.append(el);moved.push([el,marker]);}
   function lastLevel(){try{const value=localStorage.getItem('tgwitness-ui-level');return ['simple','standard','expert'].includes(value)?value:'simple';}catch{return 'simple';}}
@@ -139,8 +144,8 @@ export function createSettingsHub(ctx) {
   async function load(wanted=null,hub){
     const who=owner();
     if(hub!==undefined&&state.view==='settings'){section=sections.includes(hub)?hub:null;query='';}
-    if(state.status?.demo){root.replaceChildren(message('Demo workspace. Connect accounts in your live installation.'));return;}
-    if(!state.me?.admin){root.replaceChildren(message('Only the workspace administrator can change collection settings.'));return;}
+    if(state.status?.demo){closed('Demo workspace. Connect accounts in your live installation.');return;}
+    if(!state.me?.admin){closed('Only the workspace administrator can change collection settings.');return;}
     if(!prefs){const result=await request(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
     data=await request(who,'settings');draft={...data.wizard};
     visited=Math.max(visited,draft.step);
@@ -386,7 +391,7 @@ export function createSettingsHub(ctx) {
     if(groupScope&&groupView.data){closeSheet();groupView.render(root);return;}
     const mark=focusMark()||([document.body,sheet,null].includes(document.activeElement)?focusHint:null);
     root.replaceChildren();
-    const header=node('div','hub-heading');header.append(node('h1','',tr('Settings')));root.append(header);
+    root.append(heading());
     const inheritance=data.inheritance;
     if(inheritance){
       const note=node('div','notice hub-group-note');

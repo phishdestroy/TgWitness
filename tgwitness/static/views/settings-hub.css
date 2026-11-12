@@ -12,6 +12,10 @@
 .hub-field .hub-label{margin:0}
 .hub-field input[type=checkbox]{width:22px;height:22px}
 .modified-tag{display:block;color:var(--accent);font-size:12px;margin-top:5px}
+.hub-closed{display:grid;justify-items:center;gap:14px;padding:56px 24px;border:1px dashed var(--border-strong,var(--border));border-radius:18px;text-align:center}
+.hub-closed-mark.tile{width:48px;height:48px;border-radius:14px}
+.hub-closed-mark.tile .icon{width:24px;height:24px}
+.hub-closed p{margin:0;max-width:52ch;font-size:14px}
 .hub-results:empty{display:none}
 .hub-empty{margin:0;padding:16px 18px}
 .hub-more{margin:28px 0;padding:20px;border:1px solid var(--border);border-radius:14px}
