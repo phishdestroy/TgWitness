@@ -130,8 +130,8 @@ dialog[open]::backdrop { background: rgb(10 16 30 / .42); backdrop-filter: blur(
 .events-table tbody tr:has(.event-icon.edit) > td:first-child { box-shadow: inset 3px 0 0 var(--warning); }
 .events-table tbody tr:has(.event-icon.coverage) > td:first-child { box-shadow: inset 3px 0 0 var(--orange); background: color-mix(in srgb, var(--orange-soft) 55%, transparent); }
 
-:is(.pulse-kpi, .workflow-card, .home-account:not(.current), .hub-summary, .report-design, .report-template, .accounts-total, .login-card, .export-task-choices button:not([aria-pressed=true]), .answer-card:not([aria-pressed=true])).glow-on { background-image: radial-gradient(260px circle at var(--glow-x) var(--glow-y), rgb(99 102 241 / .09), transparent 72%); }
-[data-theme="dark"] :is(.pulse-kpi, .workflow-card, .home-account:not(.current), .hub-summary, .report-design, .report-template, .accounts-total, .login-card, .export-task-choices button:not([aria-pressed=true]), .answer-card:not([aria-pressed=true])).glow-on { background-image: radial-gradient(280px circle at var(--glow-x) var(--glow-y), rgb(129 140 248 / .16), transparent 72%); }
+:is(.pulse-kpi, .workflow-card, .home-account:not(.current), .report-design, .report-template, .accounts-total, .login-card, .export-task-choices button:not([aria-pressed=true]), .answer-card:not([aria-pressed=true])).glow-on { background-image: radial-gradient(260px circle at var(--glow-x) var(--glow-y), rgb(99 102 241 / .09), transparent 72%); }
+[data-theme="dark"] :is(.pulse-kpi, .workflow-card, .home-account:not(.current), .report-design, .report-template, .accounts-total, .login-card, .export-task-choices button:not([aria-pressed=true]), .answer-card:not([aria-pressed=true])).glow-on { background-image: radial-gradient(280px circle at var(--glow-x) var(--glow-y), rgb(129 140 248 / .16), transparent 72%); }
 
 .ui-state > .icon { box-sizing: border-box; width: 60px; height: 60px; padding: 17px; border-radius: 50%; background: var(--grad-soft); color: var(--accent-text); animation: float-soft 4s ease-in-out infinite; }
 .ui-state[data-state=error] > .icon { background: var(--danger-soft); animation: none; }

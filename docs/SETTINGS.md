@@ -24,21 +24,24 @@ journal never change.
 `/settings` edits the same records as the wizard. Search covers the main fields,
 parameters and the extended forms; a hidden field can be opened without changing the
 level. Levels only change what is shown: the server checks permissions on its own.
+A section whose settings are all above the chosen level shows them anyway.
 Collection settings and the first connection belong to the workspace administrator.
 
-Each section has its own address, such as `/settings/connection`. **Back to
-settings**, the close button, Escape and the browser's Back button return to the list
-of sections. **Which chats?** is edited in place and kept with **Save chat
-selection**; leaving with unsaved changes asks first.
+The settings page is a list. The account card on top opens **Telegram account**.
+Below it each row names a section and the value in use: **Which chats?** and
+**Connection** under **Account**; **Goal**, **Collection and files**, **Record
+protection** and **Notifications and off-site copy** under **Recording**; **Language,
+time and appearance** under **Panel**; and the expert pages under **More tools**.
+Beside the list a card says whether the recommended values are on, with the main
+values and **Undo last change**, and **Recent changes** lists the latest edits.
 
-The settings page opens with what is in use now: a card that says whether the
-recommended values are on, with the main values and **Undo last change**; the everyday
-sections **Telegram account**, **Which chats?**, **Connection** and **Language, time
-and appearance**; and **Recent changes**. The expert tools and the sections **Goal**,
-**Collection and files**, **Record protection** and **Notifications and off-site
-copy** are under **Advanced settings**. Every change shows **Undo** for 20 seconds,
-and each entry in **Recent changes** can be undone later. An undo is a new
-`settings.changed` record in the journal, and it also brings back custom file limits.
+A section opens in a window over the list and has its own address, such as
+`/settings/connection`. The back arrow, the close button, Escape, a click outside the
+window and the browser's Back button return to the list. **Which chats?** is kept with
+**Save chat selection**; closing with unsaved changes asks first. Every change shows
+**Undo** for 20 seconds, and each entry in **Recent changes** can be undone later. An
+undo is a new `settings.changed` record in the journal, and it also brings back custom
+file limits.
 
 | Level | Fields | Sidebar |
 | --- | --- | --- |
