@@ -243,13 +243,13 @@ export function createJournal(context){
   document.addEventListener("pointerdown",event=>{if(picker.open&&!picker.contains(event.target)&&!source.contains(event.target))closeSource();});
   window.addEventListener("resize",()=>closeSource());
   search.addEventListener("input",()=>{
-    state.search=search.value;context.invalidate();clearTimeout(searchTimer);
-    searchTimer=setTimeout(()=>change(),300);
+    state.search=search.value;change(300);
   });
   nativeSource.addEventListener("change",()=>{state.source=nativeSource.value;change();});
-  function change(){
-    clearTimeout(searchTimer);error.hidden=true;pageTicket++;pageBusy=false;windowStatus.textContent="";context.invalidate();sync();
-    context.changed().catch(error=>{if(error.name!=="AbortError"&&error.name!=="StaleView")context.error(error.message);});
+  function change(delay=0){
+    clearTimeout(searchTimer);error.hidden=true;pageTicket++;pageBusy=false;windowStatus.textContent="";context.invalidate();context.prepare();sync();syncPage();
+    const reload=()=>context.changed().catch(error=>{if(error.name!=="AbortError"&&error.name!=="StaleView")context.error(error.message);});
+    if(delay)searchTimer=setTimeout(reload,delay);else void reload();
   }
   function chip(text,remove){const b=button("","journal-filter-chip");b.append(node("span","",text),icon("x"));b.title=tr("Remove filter");b.addEventListener("click",()=>{remove();change();});chips.append(b);}
   function sync(){
