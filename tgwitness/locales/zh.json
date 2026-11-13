@@ -1479,7 +1479,7 @@
   "At most 30 lines of 400 characters.": "最多 30 行，每行 400 个字符。",
   "Unknown parameter.": "未知参数。",
   "A pattern is not a valid regular expression.": "该模式不是有效的正则表达式。",
-  "Collection": "集合",
+  "Collection": "采集",
   "Chat list, liveness records and the start of observation.": "聊天列表、在线状态记录以及观察的开始。",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "重新检查如何分发请求。每个聊天室的重新检查频率可在“来源”→“重新检查”下进行设置。",
   "Photos & files": "照片与文件",

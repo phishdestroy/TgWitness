@@ -334,7 +334,7 @@
   "Code from Telegram": "Kod z serwisu Telegram",
   "Collect around the clock on a cloud server without SSH, with a provider log anyone can check.": "Gromadzenie danych odbywa się przez całą dobę na serwerze w chmurze bez korzystania z SSH, a każdy może sprawdzić logi dostawcy.",
   "Collecting": "Gromadzenie",
-  "Collection": "Zbiór",
+  "Collection": "Zbieranie danych",
   "Collection continues": "Gromadzenie danych trwa",
   "Collection error": "Błąd gromadzenia danych",
   "Collection error during {operation}: {error}": "Błąd gromadzenia danych podczas operacji {operation}: {error}",

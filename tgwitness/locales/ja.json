@@ -334,7 +334,7 @@
   "Code from Telegram": "Telegramからのコード",
   "Collect around the clock on a cloud server without SSH, with a provider log anyone can check.": "SSHを必要としないクラウドサーバー上で24時間体制でデータを収集し、誰でも確認できるプロバイダーのログが提供されます。",
   "Collecting": "収集",
-  "Collection": "コレクション",
+  "Collection": "収集",
   "Collection continues": "収集は続きます",
   "Collection error": "収集エラー",
   "Collection error during {operation}: {error}": "{operation} の実行中に収集エラーが発生しました：{error}",

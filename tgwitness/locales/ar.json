@@ -1533,7 +1533,7 @@
   "At most 30 lines of 400 characters.": "بحد أقصى 30 سطرًا، كل سطر 400 حرف.",
   "Unknown parameter.": "معلمة غير معروفة.",
   "A pattern is not a valid regular expression.": "النمط ليس تعبيرًا عاديًّا صالحًا.",
-  "Collection": "المجموعة",
+  "Collection": "جمع البيانات",
   "Chat list, liveness records and the start of observation.": "قائمة الدردشات، وسجلات التحقق من الحيوية، وبدء المراقبة.",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "كيفية توزيع طلبات إعادة الفحص. يتم تحديد عدد مرات إعادة فحص كل محادثة من خلال الإعدادات الموجودة في «المصادر» → «إعادة الفحص».",
   "Photos & files": "الصور والملفات",

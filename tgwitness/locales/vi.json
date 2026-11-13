@@ -1479,7 +1479,7 @@
   "At most 30 lines of 400 characters.": "Tối đa 30 dòng, mỗi dòng 400 ký tự.",
   "Unknown parameter.": "Tham số không xác định.",
   "A pattern is not a valid regular expression.": "Một mẫu không phải là biểu thức chính quy hợp lệ.",
-  "Collection": "Bộ sưu tập",
+  "Collection": "Thu thập",
   "Chat list, liveness records and the start of observation.": "Danh sách trò chuyện, bản ghi hoạt động và thời điểm bắt đầu quan sát.",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "Cách thức các lần kiểm tra lại phân phối các yêu cầu của mình. Tần suất kiểm tra lại từng cuộc trò chuyện được thiết lập tại mục Nguồn → Kiểm tra lại.",
   "Photos & files": "Hình ảnh và tệp tin",

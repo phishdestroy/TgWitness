@@ -334,7 +334,7 @@
   "Code from Telegram": "來自 Telegram 的程式碼",
   "Collect around the clock on a cloud server without SSH, with a provider log anyone can check.": "無需 SSH 即可在雲端伺服器上全天候進行資料收集，且提供任何人都能查閱的服務商日誌。",
   "Collecting": "收集",
-  "Collection": "彙編",
+  "Collection": "蒐集",
   "Collection continues": "內容持續收錄中",
   "Collection error": "資料擷取錯誤",
   "Collection error during {operation}: {error}": "{operation} 操作期間發生資料擷取錯誤：{error}",
