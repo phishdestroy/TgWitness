@@ -8520,7 +8520,7 @@
   "Messages of this chat that the observing account saw deleted, missing on recheck or edited. Every saved version comes from the workspace journal with its own hash and signature; Telegram's current history no longer shows these versions.": "Pesan-pesan dalam obrolan ini yang terlihat telah dihapus oleh akun pengamat, hilang saat diperiksa ulang, atau telah diedit. Setiap versi yang disimpan berasal dari jurnal ruang kerja dengan hash dan tanda tangan tersendiri; riwayat Telegram saat ini tidak lagi menampilkan versi-versi tersebut.",
   "Saved text": "Teks yang disimpan",
   "Edits: {n}": "Pengeditan: {n}",
-  "… and {n} more messages in journal-changes.jsonl.": "… dan {n} pesan lainnya di berkas journal-changes.jsonll.",
+  "… and {n} more messages in journal-changes.jsonl.": "… dan {n} pesan lainnya di berkas journal-changes.jsonl.",
   "This snapshot holds only what Telegram returned at export. Deletions and earlier versions observed in this chat are in journal-changes.jsonl, each record signed; the evidence journal export holds the complete hash chain.": "Cuplikan ini hanya berisi apa yang dikembalikan oleh Telegram saat ekspor. Penghapusan dan versi sebelumnya yang teramati dalam obrolan ini terdapat dalam berkas `journal-changes.jsonl`, di mana setiap catatan telah ditandatangani; ekspor jurnal bukti berisi rantai hash yang lengkap.",
   "rechecking absent message numbers": "memverifikasi ulang nomor pesan yang hilang",
   "packaging and signing the archive": "pengemasan dan penandatanganan arsip",

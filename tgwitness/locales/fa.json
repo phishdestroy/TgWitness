@@ -2386,7 +2386,7 @@
   "Save this key to open the connection and archive.": "این کلید را برای باز کردن اتصال و بایگانی ذخیره کنید.",
   "Your key is ready": "کلید شما آماده است",
   "Save again": "بار دیگر ذخیره کنید",
-  "I saved sealed-key.json. A lost key cannot be recovered.": "من ذخیره کردم sealed-key.jsonیک کلید گمشده قابل بازیابی نیست.",
+  "I saved sealed-key.json. A lost key cannot be recovered.": "sealed-key.json را ذخیره کردم. کلید گم‌شده قابل بازیابی نیست.",
   "A key just for this capture": "کلیدی فقط برای این ضبط",
   "Created on your device. Never sent to GitHub.": "ایجادشده روی دستگاه شما. هرگز به گیت‌هاب ارسال نشده است.",
   "Create and save key": "کلید را ایجاد و ذخیره کنید",
