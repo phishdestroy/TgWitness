@@ -9081,5 +9081,8 @@
   },
   "{n} chat": "{n} دردشة",
   "Selected messages without a journal record": "الرسائل المحددة غير الموجودة في السجل",
-  "Leave without saving the changes in this form?": "هل تريد الخروج دون حفظ التغييرات في هذا النموذج؟"
+  "Leave without saving the changes in this form?": "هل تريد الخروج دون حفظ التغييرات في هذا النموذج؟",
+  "Alerts": "التنبيهات",
+  "Geo lookup": "الموقع الجغرافي",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "تتبع فترات الرصد نبضات الالتقاط أثناء الاتصال ضمن التشغيل نفسه، في حدود ثلاث فترات نبض (ثلاث دقائق على الأقل). تنتهي كل فترة عند آخر تأكيد التقاط أو عند توقف مسجّل. نوافذ الجلسة التي زاد فيها عدّاد تحديثات Telegram دون أن تصل التحديثات إلى هذه الجلسة، أو التي لم يعد Telegram يدرج فيها الجلسة، تُعدّ فجوات. فجوات أرقام الرسائل تصف نطاق الترقيم المرصود."
 }

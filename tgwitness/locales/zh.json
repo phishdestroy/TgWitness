@@ -8841,5 +8841,8 @@
   },
   "{n} chat": "{n} 个聊天室",
   "Selected messages without a journal record": "日志中没有记录的已选消息",
-  "Leave without saving the changes in this form?": "不保存此表单中的更改就退出吗？"
+  "Leave without saving the changes in this form?": "不保存此表单中的更改就退出吗？",
+  "Alerts": "警报",
+  "Geo lookup": "地理位置查询",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "观测区间依据同一次运行中连接状态下的采集心跳确定，容许三个心跳间隔（至少三分钟）。每个区间在最后一次采集确认或记录的停止处结束。Telegram 的更新计数器增长但更新未到达本会话，或 Telegram 不再列出本会话的会话窗口，视为缺口。消息编号缺口描述的是已观测到的编号范围。"
 }

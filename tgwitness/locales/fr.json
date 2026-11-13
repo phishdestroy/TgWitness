@@ -8897,5 +8897,8 @@
   },
   "{n} chat": "{n} discussion",
   "Selected messages without a journal record": "Messages sélectionnés sans enregistrement dans le journal",
-  "Leave without saving the changes in this form?": "Quitter sans enregistrer les modifications de ce formulaire ?"
+  "Leave without saving the changes in this form?": "Quitter sans enregistrer les modifications de ce formulaire ?",
+  "Alerts": "Alertes",
+  "Geo lookup": "Géolocalisation",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Les intervalles d’observation suivent les signaux de capture émis avec une connexion active au cours d’une même exécution, dans la limite de trois intervalles de signal (au moins trois minutes). Chaque intervalle se termine à sa dernière confirmation de capture ou à un arrêt enregistré. Les fenêtres de session pendant lesquelles le compteur de mises à jour de Telegram a augmenté sans que les mises à jour atteignent cette session, ou pendant lesquelles Telegram ne la listait plus, sont des lacunes. Les lacunes de numéros de messages décrivent la plage de numérotation observée."
 }

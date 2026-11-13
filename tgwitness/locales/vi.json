@@ -8841,5 +8841,8 @@
   },
   "{n} chat": "{n} cuộc trò chuyện",
   "Selected messages without a journal record": "Tin nhắn đã chọn không có bản ghi trong nhật ký",
-  "Leave without saving the changes in this form?": "Bạn có muốn thoát mà không lưu các thay đổi trong biểu mẫu này không?"
+  "Leave without saving the changes in this form?": "Bạn có muốn thoát mà không lưu các thay đổi trong biểu mẫu này không?",
+  "Alerts": "Cảnh báo",
+  "Geo lookup": "Tra cứu vị trí",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Các khoảng quan sát dựa trên tín hiệu thu thập khi đang kết nối trong cùng một lần chạy, trong phạm vi ba khoảng tín hiệu (ít nhất ba phút). Mỗi khoảng kết thúc ở lần xác nhận thu thập cuối cùng hoặc lần dừng được ghi lại. Các cửa sổ phiên khi bộ đếm cập nhật của Telegram tăng mà cập nhật không đến được phiên này, hoặc khi Telegram không còn liệt kê phiên, là các khoảng trống. Khoảng trống số tin nhắn mô tả dải đánh số đã quan sát."
 }

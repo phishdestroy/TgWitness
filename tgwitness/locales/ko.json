@@ -8841,5 +8841,8 @@
   },
   "{n} chat": "채팅 {n}개",
   "Selected messages without a journal record": "저널에 기록이 없는 선택한 메시지",
-  "Leave without saving the changes in this form?": "이 양식의 변경 내용을 저장하지 않고 나가시겠습니까?"
+  "Leave without saving the changes in this form?": "이 양식의 변경 내용을 저장하지 않고 나가시겠습니까?",
+  "Alerts": "알림",
+  "Geo lookup": "지역 조회",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "관측 구간은 같은 실행에서 연결된 상태의 수집 하트비트를 따르며, 하트비트 간격 세 번(최소 3분) 이내로 정해집니다. 각 구간은 마지막 수집 확인 또는 기록된 중지에서 끝납니다. Telegram의 업데이트 카운터가 증가했지만 업데이트가 이 세션에 도달하지 않았거나 Telegram이 더 이상 이 세션을 목록에 표시하지 않은 세션 구간은 누락으로 봅니다. 메시지 번호 누락은 관측된 번호 범위를 기준으로 합니다."
 }

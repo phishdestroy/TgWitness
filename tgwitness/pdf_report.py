@@ -1071,8 +1071,7 @@ class EvidencePDF:
 
     def render_coverage(self):
         say = self.say
-        self.lay.section(say("Coverage"), (self.coverage or {}).get("meaning") or
-                    say("Recorded observation intervals."))
+        self.lay.section(say("Coverage"), say((self.coverage or {}).get("meaning") or "Recorded observation intervals."))
         if self.coverage:
             self.lay.coverage_figure(self.coverage)
             self.lay.grid([say("Interval start"), say("Interval end"), say("Duration")],
@@ -1163,7 +1162,7 @@ class EvidencePDF:
         say = self.say
         self.lay.section(say("Standards and methodology"), say("This export follows these practices."))
         self.lay.grid([say("Reference"), say("How it is applied")],
-                 [[s["reference"] + " — " + s["title"], s["how"]] for s in self.data["custody"].get("standards") or []], (34, 66))
+                 [[s["reference"] + " — " + say(s["title"]), say(s["how"])] for s in self.data["custody"].get("standards") or []], (34, 66))
 
     def render_limitations(self):
         say = self.say

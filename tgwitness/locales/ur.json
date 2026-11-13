@@ -8889,5 +8889,8 @@
   },
   "{n} chat": "{n} چیٹ",
   "Selected messages without a journal record": "جرنل میں ریکارڈ کے بغیر منتخب پیغامات",
-  "Leave without saving the changes in this form?": "اس فارم کی تبدیلیاں محفوظ کیے بغیر چھوڑنا؟"
+  "Leave without saving the changes in this form?": "اس فارم کی تبدیلیاں محفوظ کیے بغیر چھوڑنا؟",
+  "Alerts": "الرٹس",
+  "Geo lookup": "جغرافیائی تلاش",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "مشاہدے کے وقفے اسی رَن کے متصل کیپچر ہارٹ بیٹس کی پیروی کرتے ہیں، تین ہارٹ بیٹ وقفوں (کم از کم تین منٹ) کے اندر۔ ہر وقفہ اپنی آخری کیپچر تصدیق یا ریکارڈ شدہ توقف پر ختم ہوتا ہے۔ وہ سیشن ونڈوز جن میں Telegram کا اپڈیٹ کاؤنٹر بڑھا مگر اپڈیٹس اس سیشن تک نہیں پہنچیں، یا جن میں Telegram نے سیشن کو فہرست میں دکھانا بند کر دیا، خلا شمار ہوتی ہیں۔ پیغام نمبروں کے خلا مشاہدہ شدہ نمبرنگ کی حد کو بیان کرتے ہیں۔"
 }

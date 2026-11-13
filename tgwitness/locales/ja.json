@@ -8841,5 +8841,8 @@
   },
   "{n} chat": "チャット {n}件",
   "Selected messages without a journal record": "ジャーナルに記録のない選択メッセージ",
-  "Leave without saving the changes in this form?": "このフォームの変更を保存せずに終了しますか？"
+  "Leave without saving the changes in this form?": "このフォームの変更を保存せずに終了しますか？",
+  "Alerts": "アラート",
+  "Geo lookup": "位置情報の照会",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "観測区間は、同一の実行における接続中の取得ハートビートに基づき、ハートビート間隔3回分（最低3分）以内で決まります。各区間は、最後の取得確認または記録された停止で終了します。Telegramの更新カウンターが増えたのに更新がこのセッションに届かなかった期間、またはTelegramがこのセッションを一覧に表示しなくなった期間のセッションウィンドウは、欠落として扱います。メッセージ番号の欠落は、観測された番号範囲について示します。"
 }

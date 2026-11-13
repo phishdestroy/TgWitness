@@ -211,7 +211,7 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
     const a=data.accounts,on=a.filter(x=>x.outside?.enabled).length,unlisted=[...events.values()].some(e=>e._node==='other'),priv=!!data.policy?.private_destinations;
     return `<div class="tp-out-head" data-tp-node="out" data-tp-anchor="outbus" role="button" tabindex="0" aria-label="${t('HTTPS out')}"><span class="tp-colhead">${t('HTTPS out')}</span><span class="tp-out-sub">${t('A separate channel, not through the Telegram route')}</span>
       <span class="tp-chip ${on?'tp-chip-out':'tp-chip-off'}">${esc(tr('Allowed for {n} of {total} accounts',{n:on,total:a.length}))}</span><span class="tp-chip ${priv?'tp-chip-warn':'tp-chip-ok'}">${t(priv?'Private networks allowed':'Private networks refused')}</span></div>
-      <div class="tp-svcs">${SERVICES.map(([id,g,label,why])=>`<button type="button" class="tp-svc ${svcOn(id)?'tp-on':'tp-off'}" data-tp-node="svc:${id}" data-tp-anchor="svc:${id}">${icon(g)}<b>${esc(label)}</b><small>${t(why)}</small></button>`).join('')}${unlisted?`<button type="button" class="tp-svc tp-alarm" data-tp-node="svc:other" data-tp-anchor="svc:other">${icon('alert')}<b>${t('Unlisted host')}</b><small>${t('review')}</small></button>`:''}</div>`;
+      <div class="tp-svcs">${SERVICES.map(([id,g,label,why])=>`<button type="button" class="tp-svc ${svcOn(id)?'tp-on':'tp-off'}" data-tp-node="svc:${id}" data-tp-anchor="svc:${id}">${icon(g)}<b>${t(label)}</b><small>${t(why)}</small></button>`).join('')}${unlisted?`<button type="button" class="tp-svc tp-alarm" data-tp-node="svc:other" data-tp-anchor="svc:other">${icon('alert')}<b>${t('Unlisted host')}</b><small>${t('review')}</small></button>`:''}</div>`;
   }
   function legendHTML(){
     return `<span class="tp-k tp-k-tx">${t('to Telegram')}</span><span class="tp-k tp-k-rx">${t('from Telegram')}</span><span class="tp-k tp-k-out">${t('HTTPS out')}</span><span class="tp-k tp-k-in">${t('panel access')}</span><span class="tp-k tp-k-off">${t('not connected')}</span><span class="tp-note">${t(data?.demo?'Demo data. Motion shows direction only.':'Dots are counted calls, updates and requests. Moving dashes mark an open connection.')}</span>`;
@@ -471,7 +471,7 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
       if(a.route.check?.exit_ip)kv('Exit',addr({host:a.route.check.exit_ip},true)+' '+(a.route.check.country||''));
       const pool=a.route.pool||data.pool?.state;if(pool)kv('Pool',tr('{healthy} of {listed} healthy',{healthy:pool.healthy,listed:pool.listed}));
       note(routeOf(a)==='warp'||routeOf(a)==='vpn'?'A local WireGuard helper carries this account.':'MTProxy carries Telegram traffic only. Its operator sees the server address and timing, not message content.');}
-    else if(k==='svc'){const s=SERVICES.find(x=>x[0]===id);title=s?.[2]||tr('Unlisted host');sub=s?tr(s[3]):'';
+    else if(k==='svc'){const s=SERVICES.find(x=>x[0]===id);title=s?tr(s[2]):tr('Unlisted host');sub=s?tr(s[3]):'';
       kv('Status',tr(id==='other'?'review':svcOn(id)?'in use':'off'));
       [...events.values()].filter(e=>e._node===id).slice(-5).reverse().forEach(e=>kv(clock12(e.at),addr(e.destination)+' · '+(e.status||e.error||e.kind)));}
     else if(k==='gate'){const up=data.accounts.filter(a=>a.state==='connected');title=tr('Telegram only');sub=tr('account connections');
@@ -523,6 +523,7 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
       const result=await json('topology?after='+lastEvent,undefined,{root:true,signal:controller.signal});
       if(serial!==generation||!visible||controller.signal.aborted)return;
       if(result.schema!=='tgwitness-topology-v1'||!Array.isArray(result.accounts))throw new Error(tr('Topology data is unavailable.'));
+      for(const account of result.accounts)if(account.id==='default'&&account.label==='Main account')account.label=tr('Main account');
       const wasDemo=!!data?.demo;data=result;received=Date.now();failed=false;find('error').hidden=true;
       const fresh=merge(result.traffic?.events);renderAll();
       requestAnimationFrame(()=>{if(serial===generation)animate(fresh);prev=new Map(result.accounts.map(a=>[a.id,a]));polled=performance.now();first=false;});

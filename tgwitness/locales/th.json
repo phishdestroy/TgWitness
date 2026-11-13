@@ -8841,5 +8841,8 @@
   },
   "{n} chat": "{n} การสนทนา",
   "Selected messages without a journal record": "ข้อความที่เลือกซึ่งไม่มีบันทึกในสมุดบันทึก",
-  "Leave without saving the changes in this form?": "จะออกจากหน้าโดยไม่บันทึกการเปลี่ยนแปลงในแบบฟอร์มนี้หรือไม่?"
+  "Leave without saving the changes in this form?": "จะออกจากหน้าโดยไม่บันทึกการเปลี่ยนแปลงในแบบฟอร์มนี้หรือไม่?",
+  "Alerts": "การแจ้งเตือน",
+  "Geo lookup": "ค้นหาตำแหน่ง",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "ช่วงการสังเกตอิงตามสัญญาณการเก็บข้อมูลขณะเชื่อมต่อจากการทำงานรอบเดียวกัน ภายในสามช่วงสัญญาณ (อย่างน้อยสามนาที) แต่ละช่วงสิ้นสุดที่การยืนยันการเก็บข้อมูลครั้งสุดท้ายหรือการหยุดที่บันทึกไว้ หน้าต่างเซสชันที่ตัวนับการอัปเดตของ Telegram เพิ่มขึ้นโดยการอัปเดตไม่ถึงเซสชันนี้ หรือที่ Telegram ไม่แสดงเซสชันในรายการอีกต่อไป ถือเป็นช่องว่าง ช่องว่างของหมายเลขข้อความอธิบายช่วงหมายเลขที่สังเกตได้"
 }

@@ -8841,5 +8841,8 @@
   },
   "{n} chat": "{n} obrolan",
   "Selected messages without a journal record": "Pesan terpilih tanpa catatan di jurnal",
-  "Leave without saving the changes in this form?": "Apakah ingin keluar tanpa menyimpan perubahan di formulir ini?"
+  "Leave without saving the changes in this form?": "Apakah ingin keluar tanpa menyimpan perubahan di formulir ini?",
+  "Alerts": "Peringatan",
+  "Geo lookup": "Pencarian geolokasi",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Interval pengamatan mengikuti sinyal perekaman saat terhubung dari proses yang sama, dalam batas tiga interval sinyal (sedikitnya tiga menit). Setiap interval berakhir pada konfirmasi perekaman terakhirnya atau penghentian yang tercatat. Jendela sesi ketika penghitung pembaruan Telegram bertambah tanpa pembaruan mencapai sesi ini, atau ketika Telegram tidak lagi mencantumkannya, adalah kesenjangan. Kesenjangan nomor pesan menggambarkan rentang penomoran yang teramati."
 }

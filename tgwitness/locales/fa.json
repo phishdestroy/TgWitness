@@ -8889,5 +8889,8 @@
   },
   "{n} chat": "{n} چت",
   "Selected messages without a journal record": "پیام‌های انتخاب‌شده بدون سابقه در دفترچه",
-  "Leave without saving the changes in this form?": "خروج بدون ذخیرهٔ تغییرات این فرم؟"
+  "Leave without saving the changes in this form?": "خروج بدون ذخیرهٔ تغییرات این فرم؟",
+  "Alerts": "هشدارها",
+  "Geo lookup": "موقعیت جغرافیایی",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "بازه‌های مشاهده بر پایهٔ ضربان‌های ضبط در حالت متصل از همان اجرا و در محدودهٔ سه بازهٔ ضربان (دست‌کم سه دقیقه) تعیین می‌شوند. هر بازه با آخرین تأیید ضبط یا توقف ثبت‌شده پایان می‌یابد. پنجره‌های نشست که در آن‌ها شمارندهٔ به‌روزرسانی Telegram افزایش یافته اما به‌روزرسانی‌ها به این نشست نرسیده‌اند، یا Telegram دیگر نشست را فهرست نکرده است، فاصله به شمار می‌آیند. فاصله‌های شمارهٔ پیام به محدودهٔ شماره‌گذاری مشاهده‌شده مربوط‌اند."
 }

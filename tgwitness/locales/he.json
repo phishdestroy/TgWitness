@@ -8937,5 +8937,8 @@
   },
   "{n} chat": "{n} צ'אט",
   "Selected messages without a journal record": "הודעות שנבחרו ללא רשומה ביומן",
-  "Leave without saving the changes in this form?": "לעזוב מבלי לשמור את השינויים בטופס זה?"
+  "Leave without saving the changes in this form?": "לעזוב מבלי לשמור את השינויים בטופס זה?",
+  "Alerts": "התראות",
+  "Geo lookup": "איתור גאוגרפי",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "מרווחי התצפית נקבעים לפי אותות הלכידה בזמן חיבור מאותה הרצה, בטווח של שלושה מרווחי אות (שלוש דקות לפחות). כל מרווח מסתיים באישור הלכידה האחרון שלו או בעצירה שנרשמה. חלונות הפעלה שבהם מונה העדכונים של Telegram גדל בלי שעדכונים הגיעו להפעלה זו, או שבהם Telegram הפסיק להציג אותה ברשימה, נחשבים לפערים. פערים במספרי ההודעות מתארים את טווח המספור שנצפה."
 }
