@@ -28,6 +28,8 @@
 - [How do an evidence export and a backup differ?](#how-do-an-evidence-export-and-a-backup-differ)
 - [How independent is a witness?](#how-independent-is-a-witness)
 - [Which platforms are tested?](#which-platforms-are-tested)
+- [Where are the tests?](#where-are-the-tests)
+- [How old is TgWitness?](#how-old-is-tgwitness)
 - [How do I report a problem or contribute?](#how-do-i-report-a-problem-or-contribute)
 
 </details>
@@ -91,13 +93,17 @@ serve the optional witness.
 ## Do I need my own API ID and API hash?
 
 The built-in pool works, and saved or imported credentials are reused. An API pair
-identifies the app; account access comes from the login.
+identifies the app; account access comes from the login. Each observation records whether
+a built-in public pair or your own pair was used.
+[API pairs](../QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
 
 ## Where are my Telegram sessions stored?
 
-In the workspace's encrypted vault on your own computer or server. The panel listens on
-localhost by default, and the application has no telemetry. Observe with a
-[dedicated account](../ACCOUNTS.md).
+In the workspace's encrypted vault on your own computer or server. The vault key is a
+file in the data directory unless a new installation uses an
+[external master key](../CONNECTION-SECURITY.md#external-master-key), so protect that
+directory or the disk. The panel listens on localhost by default, and the application has
+no telemetry. Observe with a [dedicated account](../ACCOUNTS.md).
 
 ## How do I verify the installer before running it?
 
@@ -169,6 +175,19 @@ Before each publication from `main`, CI authenticates the signed installer build
 installs and checks it on Linux and Windows; pull requests that change the installer
 also run `install.sh` and `install.ps1`. The
 [verification record](../VERIFICATION.md) lists live runs per platform and revision.
+
+## Where are the tests?
+
+The regression suite of 126 test modules runs in a private validation environment with
+synthetic accounts and a fake Telegram transport, so test files are not in Git. Public CI
+runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and
+verifier fuzzing. [Tests and CI](../QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)
+
+## How old is TgWitness?
+
+About six months of development and testing. The public repository was created on
+29 October 2026 from the existing code, so its first commit already holds 658 files.
+[Development history](../QUESTIONS-AND-CHECKS.md#development-history)
 
 ## How do I report a problem or contribute?
 
