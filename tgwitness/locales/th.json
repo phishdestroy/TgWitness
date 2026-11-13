@@ -6990,7 +6990,7 @@
   "Earlier configuration": "การตั้งค่าก่อนหน้านี้",
   "Earlier records are available. Load older records to see more history.": "มีบันทึกเก่ากว่าให้ใช้งานได้ โหลดบันทึกเก่าเพื่อดูประวัติเพิ่มเติม",
   "Ed25519 key signs the journal": "กุญแจ Ed25519 ใช้ลงนามในบันทึก",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · การลงนามที่เข้ารหัส.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · ไฟล์ signing.enc ที่เข้ารหัส",
   "Editorial review": "การตรวจสอบทางบรรณาธิการ",
   "Emoji": "อีโมจิ",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "เปิดใช้งาน Object Lock ใน bucket ก่อน โหมดการปฏิบัติตามข้อกำหนดไม่สามารถถูกย่อระยะเวลาโดยเจ้าของ bucket ได้ ส่วน Governance สามารถถูกข้ามผ่านได้โดยผู้ดูแลระบบที่ได้รับอนุญาต เลือก30 วันหรือระยะเวลาที่คุณต้องการด้านล่าง กฎการคิดค่าบริการพื้นที่จัดเก็บข้อมูลเป็นสิ่งที่แยกต่างหากจากการป้องกันนี้",

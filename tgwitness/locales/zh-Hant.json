@@ -6990,7 +6990,7 @@
   "Earlier configuration": "較早的配置",
   "Earlier records are available. Load older records to see more history.": "較早的記錄亦可取得。載入較舊的記錄以查看更多歷史紀錄。",
   "Ed25519 key signs the journal": "日誌由 Ed25519 金鑰簽署",
-  "Ed25519 · encrypted signing.enc": "Ed25519 · 加密簽名.enc",
+  "Ed25519 · encrypted signing.enc": "Ed25519 · 加密檔案 signing.enc",
   "Editorial review": "編輯審核",
   "Emoji": "表情符號",
   "Enable Object Lock in the bucket first. Compliance mode cannot be shortened by the bucket owner; Governance can be bypassed by an authorized administrator. Choose 30 days or your required period below. Storage billing rules are separate from this protection.": "請先在儲存桶中啟用「物件鎖定」功能。儲存桶擁有者無法縮短合規模式的期限；經授權的管理員可繞過治理機制。請在下方的選項中選擇30天或您所需的期限。儲存計費規則與此保護機制分開處理。",
