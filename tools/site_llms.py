@@ -163,7 +163,11 @@ def index(base_url, repo_url, branch, version, guides, references):
         "- Investigation tools: people profiles across chats, watchlists over text, QR codes and OCR, Case Board, a "
         "report studio with eight designs and a BagIt court package.",
         "- Self-hosted with no telemetry: sessions and credentials live in an encrypted vault, and the panel listens "
-        "on localhost. Basic collection runs without Docker, a GPU or an LLM.",
+        "on localhost. The vault key stays in the data directory unless a new installation uses an external master "
+        "key. Basic collection runs without Docker, a GPU or an LLM.",
+        "- Developed and tested for about six months before the public repository was created. The private regression "
+        "suite has 126 test modules; public CI runs lint, dependency audits, wheel installs, installer signature "
+        "checks, CodeQL, Trivy and verifier fuzzing.",
         "## Start here",
         link("docs/reference/overview/", *references["overview"][:2]),
         link("docs/reference/installation/", *references["installation"][:2]),
