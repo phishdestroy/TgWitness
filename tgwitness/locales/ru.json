@@ -3016,8 +3016,8 @@
   "Exporting account": "Экспорт аккаунта",
   "Fill in by hand when the printed report or the archive changes hands.": "Заполняйте от руки, когда печатный отчёт или архив переходит из рук в руки.",
   "Date and time": "Дата и время",
-  "Released by": "Опубликовано",
-  "Received by": "Получатель",
+  "Released by": "Передал",
+  "Received by": "Принял",
   "Signature": "Подпись",
   "Latest independently timestamped record: #{n}": "Последняя запись с независимой временной меткой: #{n}",
   "Token valid": "Токен действителен",
@@ -8955,5 +8955,8 @@
   },
   "{n} chat": "{n} чат",
   "Selected messages without a journal record": "Выбранные сообщения без записи в журнале",
-  "Leave without saving the changes in this form?": "Уйти, не сохранив изменения в этой форме?"
+  "Leave without saving the changes in this form?": "Уйти, не сохранив изменения в этой форме?",
+  "Alerts": "Оповещения",
+  "Geo lookup": "Геопоиск",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Интервалы наблюдения строятся по сигналам сбора при активном соединении в пределах одного запуска, с допуском в три интервала сигнала (не менее трёх минут). Каждый интервал заканчивается последним подтверждением сбора или записанной остановкой. Окна сеанса, когда счётчик обновлений Telegram рос, а обновления до этого сеанса не доходили, или когда Telegram перестал показывать сеанс в списке, считаются перерывами. Пропуски номеров сообщений относятся к наблюдавшемуся диапазону нумерации."
 }

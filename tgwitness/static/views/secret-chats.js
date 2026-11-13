@@ -87,6 +87,7 @@ export function createSecretChats(context) {
 
   function renderList(items) {
     const list = find("secret-list"), held = list.contains(document.activeElement) ? document.activeElement.dataset.secretChat : null;
+    const heldKey = list.contains(document.activeElement) ? document.activeElement.dataset.focusKey : null;
     list.replaceChildren();
     const query = find('secret-search').value.trim().toLocaleLowerCase();
     const visible = items.filter(item => !query || String(item.peer ?? '').includes(query) || String(item.id).includes(query)
@@ -110,9 +111,10 @@ export function createSecretChats(context) {
     if (view.next_before) {
       list.append(node("p", "hint", tr("Earlier records are available. Load older records to see more history.")));
       const older = node("button", "quiet", tr("Load older records"));
-      older.type = "button"; older.disabled = loadingOlder;
+      older.type = "button"; older.disabled = loadingOlder; older.dataset.focusKey = "older";
       older.addEventListener("click", () => busy(older, loadOlder));
       list.append(older);
+      if (heldKey === "older") older.focus({preventScroll: true});
     }
   }
 
@@ -124,7 +126,7 @@ export function createSecretChats(context) {
     const file = item.files.get("e" + record.seq) || item.files.get("r" + p.random_id);
     if (file) {
       const save = node("button", "text-link", tr("Save file") + " · " + humanSize(file.size));
-      save.type = "button";
+      save.type = "button"; save.dataset.focusKey = "file:" + record.seq;
       save.addEventListener("click", () => busy(save, () => download("media/" + file.media_sha256, file.media_sha256)));
       row.append(save);
     }
@@ -146,6 +148,7 @@ export function createSecretChats(context) {
     const sameChat = renderedChat === selected;
     const focus = sameChat && previous === document.activeElement;
     const selection = focus ? [previous.selectionStart, previous.selectionEnd] : null;
+    const heldKey = sameChat && box.contains(document.activeElement) ? document.activeElement.dataset.focusKey : null;
     const scroll = sameChat && oldFeed && oldFeed.scrollHeight - oldFeed.scrollTop - oldFeed.clientHeight > 24
       ? oldFeed.scrollTop : null;
     threadStamp = stamp; renderedChat = selected;
@@ -170,7 +173,7 @@ export function createSecretChats(context) {
     const state = item.snapshot?.state;
     if (state === "pending" && may("interact")) {
       const accept = node("button", "primary", tr("Accept here"));
-      accept.type = "button"; accept.disabled = settingsBusy || !view.connected || !view.settings.enabled || !!view.interaction_problem;
+      accept.type = "button"; accept.dataset.focusKey = "accept"; accept.disabled = settingsBusy || !view.connected || !view.settings.enabled || !!view.interaction_problem;
       accept.addEventListener("click", () => busy(accept, async () => {
         const current = actionOwner();
         if (!(await confirm(tr("Accept this chat in TgWitness? This account's other devices will not get it."))) || !current()) return;
@@ -180,7 +183,7 @@ export function createSecretChats(context) {
     }
     if (state && state !== "closed" && may("interact")) {
       const close = node("button", "quiet", tr("End chat"));
-      close.type = "button"; close.disabled = settingsBusy || !view.connected || !view.settings.enabled || !!view.interaction_problem;
+      close.type = "button"; close.dataset.focusKey = "close"; close.disabled = settingsBusy || !view.connected || !view.settings.enabled || !!view.interaction_problem;
       close.addEventListener("click", () => busy(close, async () => {
         const current = actionOwner();
         if (!(await confirm(tr("End this chat? The journal keeps every record."))) || !current()) return;
@@ -221,6 +224,7 @@ export function createSecretChats(context) {
       if (focus) {input.focus({preventScroll: true}); input.setSelectionRange(...selection);}
     }
     feed.scrollTop = scroll ?? feed.scrollHeight;
+    if (heldKey) box.querySelector('[data-focus-key="' + CSS.escape(heldKey) + '"]')?.focus({preventScroll: true});
   }
 
   function eventText(record) {

@@ -111,7 +111,7 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=8'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=9'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
@@ -278,7 +278,10 @@ async function applyRouteToPanel(route,current){
   else if(view==="evidence"){
     renderChatExportTools();
     await Promise.all([loadReportSettings(),loadExports(),loadAccountExport().catch(accountExportError)]);
-    if(current())exportsView.select(route.tab||'downloads',false,{history:false});
+    if(current()){
+      exportsView.select(route.tab||'downloads',false,{history:false});
+      if(route.tab==='settings'&&reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
+    }
   }
   else if(view==="witness"){await loadExtras();if(current())selectExtra(route.extra,{history:false});}
   else await loadPanelView(view);
@@ -2181,7 +2184,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=6").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=7").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
@@ -6452,7 +6455,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=2').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=3').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;

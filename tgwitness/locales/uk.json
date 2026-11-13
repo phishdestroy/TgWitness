@@ -8985,5 +8985,8 @@
   },
   "{n} chat": "{n} чат",
   "Selected messages without a journal record": "Вибрані повідомлення без запису в журналі",
-  "Leave without saving the changes in this form?": "Вийти, не збереживши зміни в цій формі?"
+  "Leave without saving the changes in this form?": "Вийти, не збереживши зміни в цій формі?",
+  "Alerts": "Сповіщення",
+  "Geo lookup": "Геопошук",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Інтервали спостереження будуються за сигналами збору під час активного з’єднання в межах одного запуску, з допуском у три інтервали сигналу (щонайменше три хвилини). Кожен інтервал закінчується останнім підтвердженням збору або записаною зупинкою. Вікна сеансу, коли лічильник оновлень Telegram зростав, а оновлення до цього сеансу не надходили, або коли Telegram перестав показувати сеанс у списку, вважаються пропусками. Пропуски номерів повідомлень стосуються спостереженого діапазону нумерації."
 }

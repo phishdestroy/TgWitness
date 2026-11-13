@@ -8985,5 +8985,8 @@
   },
   "{n} chat": "{n} czat",
   "Selected messages without a journal record": "Zaznaczone wiadomości bez zapisu w dzienniku",
-  "Leave without saving the changes in this form?": "Czy chcesz wyjść bez zapisania zmian w tym formularzu?"
+  "Leave without saving the changes in this form?": "Czy chcesz wyjść bez zapisania zmian w tym formularzu?",
+  "Alerts": "Alerty",
+  "Geo lookup": "Geolokalizacja",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Przedziały obserwacji wynikają z sygnałów przechwytywania przy aktywnym połączeniu z tego samego uruchomienia, w granicach trzech odstępów sygnału (co najmniej trzech minut). Każdy przedział kończy się ostatnim potwierdzeniem przechwytywania lub zarejestrowanym zatrzymaniem. Okna sesji, w których licznik aktualizacji Telegrama rósł, a aktualizacje nie docierały do tej sesji, albo w których Telegram przestał ją wyświetlać na liście, są lukami. Luki w numerach wiadomości dotyczą zaobserwowanego zakresu numeracji."
 }

@@ -8889,5 +8889,8 @@
   },
   "{n} chat": "{n} sohbet",
   "Selected messages without a journal record": "Günlükte kaydı olmayan seçilen mesajlar",
-  "Leave without saving the changes in this form?": "Bu formdaki değişiklikleri kaydetmeden çıkmak mı istiyorsunuz?"
+  "Leave without saving the changes in this form?": "Bu formdaki değişiklikleri kaydetmeden çıkmak mı istiyorsunuz?",
+  "Alerts": "Uyarılar",
+  "Geo lookup": "Coğrafi sorgu",
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "Gözlem aralıkları, aynı çalıştırmadaki bağlantılı yakalama sinyallerini üç sinyal aralığı (en az üç dakika) içinde izler. Her aralık, son yakalama onayında veya kaydedilen durdurmada sona erer. Telegram’ın güncelleme sayacı büyürken güncellemelerin bu oturuma ulaşmadığı ya da Telegram’ın oturumu artık listelemediği oturum pencereleri boşluk sayılır. Mesaj numarası boşlukları, gözlemlenen numara aralığını tanımlar."
 }

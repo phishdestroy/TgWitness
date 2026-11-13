@@ -151,7 +151,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     open.type = 'button';
     open.addEventListener('click', () => busy(open, async () => {
       if (profile.id !== state.profile) await switchProfile(profile.id);
-      navigate(signIn ? 'connection' : 'chats');
+      navigate(connect ? 'connection' : 'chats');
     }));
     actions.append(open);
     const task = taskInfo(collector.activity);
