@@ -95,7 +95,7 @@ def case_of(options):
             if options.get(name)}
 
 
-SINGULAR = {"{n} messages": "{n} message", "{n} records": "{n} record"}
+SINGULAR = {"{n} messages": "{n} message", "{n} records": "{n} record", "{n} chats": "{n} chat"}
 
 
 class Words:
@@ -1825,6 +1825,8 @@ def diff_html(old, new):
 
 
 def record_link(seq, linked):
+    if linked == "viewer":
+        return '<a href="#data" data-goto="r' + str(seq) + '">#' + str(seq) + "</a>"
     return ('<a href="#r' + str(seq) + '">#' + str(seq) + "</a>") if linked else "#" + str(seq)
 
 
@@ -1863,7 +1865,7 @@ def history_card(say, key, item, titles, linked=True):
             head += " · " + e(say("Edited")) + " " + when(times["edited_at"])
         if "sent_at" not in version and "edited_at" not in version and version.get("telegram_at"):
             head += " · " + e(say("Telegram time")) + " " + when(version["telegram_at"])
-        head += " · " + record_link(version["seq"], linked and not version.get("context_only"))
+        head += " · " + record_link(version["seq"], False if version.get("context_only") else linked)
         if version.get("context_only"):
             head += ' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
         if version.get("withheld"):
@@ -1896,7 +1898,7 @@ def history_card(say, key, item, titles, linked=True):
                 + '</div></div>')
         steps.append('<li class="gone-step"><div class="vhead"><span class="pill bad">'
                      + e(kind_label(say, gone["kind"])) + "</span> " + e(say("observed")) + " " + when(gone["observed_at"])
-                     + " · " + record_link(gone["seq"], linked and not gone.get("context_only"))
+                     + " · " + record_link(gone["seq"], False if gone.get("context_only") else linked)
                      + (' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
                         if gone.get("context_only") else '') + '</div><p class="gone">'
                      + e(timer_text(say, gone["kind"]) if gone.get("auto_delete") else
@@ -2340,6 +2342,7 @@ class EvidenceHTML:
         self.account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         self.numbers = iter(range(1, 100))
+        links = False if not self.options.get("timeline") else True if self.options.get("design") in report_layouts.DESIGNS             else "viewer" if self.data_kind else False
         yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
         yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
                                                  self.handover, self.filtered)).encode("utf-8")
@@ -2363,12 +2366,12 @@ class EvidenceHTML:
             yield board_report.html(self.context["case_board"], say).encode("utf-8")
         if self.changed and self.events_again and self.options.get("show_changes", True):
             yield changes_section(say, next(self.numbers), history_context(self.context, self.events_again, self.changed), len(self.changed),
-                                  self.digest["titles"], bool(self.options.get("timeline")), self.filtered).encode("utf-8")
+                                  self.digest["titles"], links, self.filtered).encode("utf-8")
         if self.options.get("show_indicators", True) and (self.digest.get("indicators") or {}).get("items"):
             yield indicators_section(say, next(self.numbers), self.digest["indicators"],
                                      ref_link(self.context.get("parts"), "records", "seq", "r")).encode("utf-8")
         if not self.filtered:
-            yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], bool(self.options.get("timeline"))).encode("utf-8")
+            yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], links).encode("utf-8")
 
     def render_integrity(self):
         say = self.say

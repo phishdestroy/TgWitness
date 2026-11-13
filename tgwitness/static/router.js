@@ -88,7 +88,7 @@ export function createRouter(context){
     if(!context.ready())return;
     const expected=++generation,route=parse(),valid=()=>expected===generation&&context.ready();
     lastReplay=location.href;
-    if(route.error){context.error(route.error);return;}
+    if(route.error){context.error(route.error);if(reason==="initial")record({}, {replace:true});return;}
     if(!route.view){record({}, {replace:true});return;}
     try{
       await context.apply(route,valid);

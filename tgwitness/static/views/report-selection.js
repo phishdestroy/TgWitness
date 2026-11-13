@@ -109,7 +109,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   function typed(text){
     const found=[];
     for(const line of text.split('\n').map(value=>value.trim()).filter(Boolean)){
-      const link=line.match(/^(?:https?:\/\/)?t\.me\/c\/(\d{1,13})\/(?:\d+\/)?(\d{1,10})(?:[?#]\S*)?$/i);
+      const link=line.match(/^(?:https?:\/\/)?t\.me\/c\/([1-9]\d{0,12})\/(?:\d+\/)?(\d{1,10})\/?(?:[?#]\S*)?$/i);
       const pair=link?null:line.match(/^(-?[1-9]\d{0,18})\s*:\s*(\d[\d\s,;]*)$/);
       const chat=link?-(1e12+Number(link[1])):pair?Number(pair[1]):NaN;
       const list=link?[Number(link[2])]:pair?pair[2].split(/[\s,;]+/).filter(Boolean).map(Number):[];
@@ -119,6 +119,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     return {found};
   }
   numbers.addEventListener('input',event=>{event.stopPropagation();numbersNote.textContent='';});
+  numbers.addEventListener('change',event=>event.stopPropagation());
   find('report-selection-numbers-add').addEventListener('click',()=>{
     const {found=[],failed}=typed(numbers.value),known=new Set(picked.map(item=>item.chat+':'+item.message));
     const fresh=found.filter(item=>!known.has(item.chat+':'+item.message)&&known.add(item.chat+':'+item.message));
@@ -247,6 +248,8 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
     target.replaceChildren(stats,provenance);
     const anchor=make('details'),summary=make('summary',tr('Journal head'));anchor.append(summary,make('code',source.journal_head||'—'));target.append(anchor);
     if(!counts.selected_records)target.append(make('p',tr('No records match these choices. Change the filters and build the preview again.'),'report-preview-empty'));
+    if(data.messages_not_found?.length)target.append(make('p',tr('Selected messages without a journal record')+': '
+      +data.messages_not_found.map(item=>item.chat+': #'+item.message).join(', '),'notice warning'));
     const analytics=data.analytics||{},grid=make('div','','report-preview-charts');
     if(analytics.activity){
       const rows=analytics.activity.rows||[];

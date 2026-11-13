@@ -8270,7 +8270,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} ditambahkan, {k} dilewati, {e} ditolak.",
   "{n} changes recorded.": "{n} perubahan tercatat.",
-  "{n} chats": "{n} obrolan",
   "{n} checks": "{n} pemeriksaan",
   "{n} codes read from {k} images.": "{n} kode yang dibaca dari {k} gambar.",
   "{n} deletion notices.": "{n} pemberitahuan penghapusan.",
@@ -8836,5 +8835,11 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Obrolan pribadi, bot, dan grup biasa memakai satu penomoran bersama untuk seluruh akun, sehingga nomor yang tidak ada di salah satunya bisa jadi milik obrolan lain. Obrolan yang tidak dibandingkan karena alasan ini: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Kesenjangan yang tercatat: {gaps}. Catatan cakupan: {notes}. Nomor pesan yang tidak teramati: {missing}.",
   "Coverage notes": "Catatan cakupan",
-  "Showing {shown} of {total} coverage notes.": "Menampilkan {shown} dari {total} catatan cakupan."
+  "Showing {shown} of {total} coverage notes.": "Menampilkan {shown} dari {total} catatan cakupan.",
+  "{n} chats": {
+    "other": "{n} obrolan"
+  },
+  "{n} chat": "{n} obrolan",
+  "Selected messages without a journal record": "Pesan terpilih tanpa catatan di jurnal",
+  "Leave without saving the changes in this form?": "Apakah ingin keluar tanpa menyimpan perubahan di formulir ini?"
 }

@@ -8387,7 +8387,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} додано, {k} пропущено, {e} відхилено.",
   "{n} changes recorded.": "Зафіксовано {n} змін.",
-  "{n} chats": "{n} чатів",
   "{n} checks": "{n} перевірок",
   "{n} codes read from {k} images.": "{n} кодів, зчитаних із {k} зображень.",
   "{n} deletion notices.": "{n} повідомлень про видалення.",
@@ -8977,5 +8976,14 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Особисті чати, боти та звичайні групи мають одну спільну нумерацію на весь акаунт, тому номер, якого немає в одному з них, може належати іншому чату. Чатів, які не порівнювалися з цієї причини: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Зафіксовані пропуски: {gaps}. Нотатки щодо обсягу: {notes}. Номери повідомлень, які не було зафіксовано: {missing}.",
   "Coverage notes": "Нотатки щодо обсягу",
-  "Showing {shown} of {total} coverage notes.": "Показано {shown} із {total} нотаток щодо обсягу."
+  "Showing {shown} of {total} coverage notes.": "Показано {shown} із {total} нотаток щодо обсягу.",
+  "{n} chats": {
+    "one": "{n} чат",
+    "many": "{n} чатів",
+    "few": "{n} чати",
+    "other": "{n} чати"
+  },
+  "{n} chat": "{n} чат",
+  "Selected messages without a journal record": "Вибрані повідомлення без запису в журналі",
+  "Leave without saving the changes in this form?": "Вийти, не збереживши зміни в цій формі?"
 }

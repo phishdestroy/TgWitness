@@ -172,6 +172,7 @@ def _prepare(connection):
         CREATE TABLE selected_changed (chat INTEGER, message INTEGER, PRIMARY KEY(chat,message));
         CREATE TABLE bounds (chat INTEGER PRIMARY KEY, low INTEGER NOT NULL, high INTEGER NOT NULL);
         CREATE TABLE shared_numbering (chat INTEGER PRIMARY KEY);
+        CREATE TABLE picked_found (chat INTEGER NOT NULL, message INTEGER NOT NULL, PRIMARY KEY (chat, message)) WITHOUT ROWID;
         CREATE TABLE known (
             chat INTEGER NOT NULL, message INTEGER NOT NULL, seq INTEGER,
             kind TEXT NOT NULL, observed_at TEXT NOT NULL, sender INTEGER, text TEXT NOT NULL,
@@ -303,6 +304,9 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                 message_kind = isinstance(kind, str) and (kind in report_analytics.KINDS or kind == "secret_chat.message")
                 chat = report_analytics._identifier(event.get("chat_id"))
                 sender = sender_id(event)
+                picked = (chat, _message_id(event.get("message_id")))
+                if selection.enabled and secret is None and picked in predicate.messages:
+                    connection.execute("INSERT OR IGNORE INTO picked_found VALUES (?,?)", picked)
                 if message_kind:
                     if secret is not None:
                         peer = event.get("payload", {}).get("peer_user_id")
@@ -346,6 +350,9 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                       "chats": connection.execute("SELECT (SELECT count(*) FROM selected_chats) + (SELECT count(*) FROM selected_secret_chats)").fetchone()[0],
                       "invalid_time_excluded": invalid_time_excluded}
             gaps = _gaps(connection, predicate, selection.id_gaps)
+            found = {tuple(row) for row in connection.execute("SELECT chat,message FROM picked_found")}
+            missing = [{"chat": chat, "message": message} for chat, message in sorted(predicate.messages - found)] \
+                if selection.enabled else []
             changed_total = connection.execute("SELECT count(*) FROM selected_changed").fetchone()[0]
             changed_keys = [tuple(row) for row in connection.execute("SELECT chat,message FROM selected_changed ORDER BY chat,message LIMIT 20")]
         finally:
@@ -363,5 +370,5 @@ def analyze(snapshot, selection=None, preview_limit=40, *, scratch_root=None):
                         "senders": senders, "senders_total": senders_total, "senders_status": senders_status,
                         "unknown_sender_records": unknown_catalog_senders,
                         "sender_basis": "Message records in selected chats and UTC dates, before sender and event-kind filters"},
-            "messages": messages, "id_gaps": gaps,
+            "messages": messages, "messages_not_found": missing, "id_gaps": gaps,
             "changed_keys": changed_keys, "changed_total": changed_total}

@@ -8387,7 +8387,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "Dodano {n}, pominięto {k}, odrzucono {e}.",
   "{n} changes recorded.": "Zarejestrowano {n} zmian.",
-  "{n} chats": "{n} czatów",
   "{n} checks": "{n} sprawdzeń",
   "{n} codes read from {k} images.": "{n} kodów odczytanych z {k} obrazów.",
   "{n} deletion notices.": "{n} powiadomień o usunięciu.",
@@ -8977,5 +8976,14 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Czaty prywatne, boty i zwykłe grupy mają jedną wspólną numerację dla całego konta, więc numer brakujący w jednym z nich może należeć do innego czatu. Czaty nieporównane z tego powodu: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Zarejestrowane luki: {gaps}. Uwagi dotyczące zakresu: {notes}. Numery wiadomości, których nie zaobserwowano: {missing}.",
   "Coverage notes": "Uwagi dotyczące zakresu",
-  "Showing {shown} of {total} coverage notes.": "Wyświetlono {shown} z {total} uwag dotyczących zakresu."
+  "Showing {shown} of {total} coverage notes.": "Wyświetlono {shown} z {total} uwag dotyczących zakresu.",
+  "{n} chats": {
+    "one": "{n} czat",
+    "many": "{n} czatów",
+    "few": "{n} czaty",
+    "other": "{n} czatu"
+  },
+  "{n} chat": "{n} czat",
+  "Selected messages without a journal record": "Zaznaczone wiadomości bez zapisu w dzienniku",
+  "Leave without saving the changes in this form?": "Czy chcesz wyjść bez zapisania zmian w tym formularzu?"
 }

@@ -8465,7 +8465,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "تمت إضافة {n}، وتخطي {k}، ورفض {e}.",
   "{n} changes recorded.": "تم تسجيل {n} تغييرًا.",
-  "{n} chats": "{n} محادثة",
   "{n} checks": "{n} فحوصات",
   "{n} codes read from {k} images.": "{n} رمزًا تمت قراءتها من {k} صورة.",
   "{n} deletion notices.": "{n} إشعارات الحذف.",
@@ -9071,5 +9070,16 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "تتشارك الدردشات الخاصة والروبوتات والمجموعات العادية ترقيمًا واحدًا على مستوى الحساب، لذا قد يعود الرقم المفقود في إحداها إلى دردشة أخرى. الدردشات التي لم تُقارَن لهذا السبب: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "الفجوات المسجلة: {gaps}. ملاحظات التغطية: {notes}. أرقام الرسائل التي لم يتم رصدها: {missing}.",
   "Coverage notes": "ملاحظات التغطية",
-  "Showing {shown} of {total} coverage notes.": "يتم عرض {shown} من {total} من ملاحظات التغطية."
+  "Showing {shown} of {total} coverage notes.": "يتم عرض {shown} من {total} من ملاحظات التغطية.",
+  "{n} chats": {
+    "one": "{n} دردشة",
+    "few": "{n} محادثات",
+    "two": "{n} محادثة",
+    "many": "{n} محادثة",
+    "other": "{n} محادثة",
+    "zero": "{n} محادثة"
+  },
+  "{n} chat": "{n} دردشة",
+  "Selected messages without a journal record": "الرسائل المحددة غير الموجودة في السجل",
+  "Leave without saving the changes in this form?": "هل تريد الخروج دون حفظ التغييرات في هذا النموذج؟"
 }

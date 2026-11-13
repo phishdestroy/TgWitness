@@ -8309,7 +8309,6 @@
   "{n} B": "{n}B",
   "{n} added, {k} skipped, {e} rejected.": "{n} যোগ করা হয়েছে, {k} বাদ দেওয়া হয়েছে, {e} প্রত্যাখ্যাত হয়েছে।",
   "{n} changes recorded.": "{n}টি পরিবর্তন রেকর্ড করা হয়েছে।",
-  "{n} chats": "{n} চ্যাটসমূহ",
   "{n} checks": "{n} চেক করে",
   "{n} codes read from {k} images.": "{n} কোডগুলি {k} ইমেজ থেকে পড়া হয়।",
   "{n} deletion notices.": "{n} মুছে ফেলার বিজ্ঞপ্তি।",
@@ -8883,5 +8882,12 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "ব্যক্তিগত চ্যাট, বট ও সাধারণ গ্রুপ পুরো অ্যাকাউন্টের একটিই নম্বরক্রম ভাগ করে, তাই এগুলোর একটিতে অনুপস্থিত নম্বর অন্য চ্যাটের হতে পারে। এই কারণে তুলনা করা হয়নি এমন চ্যাট: {n}।",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "রেকর্ডকৃত ফাঁক: {gaps}। কভারেজ নোট: {notes}। পর্যবেক্ষণ করা হয়নি এমন বার্তা নম্বর: {missing}।",
   "Coverage notes": "কভারেজ নোট",
-  "Showing {shown} of {total} coverage notes.": "{total}টি কভারেজ নোটের মধ্যে {shown}টি দেখানো হচ্ছে।"
+  "Showing {shown} of {total} coverage notes.": "{total}টি কভারেজ নোটের মধ্যে {shown}টি দেখানো হচ্ছে।",
+  "{n} chats": {
+    "one": "{n} চ্যাট",
+    "other": "{n}টি চ্যাট"
+  },
+  "{n} chat": "{n} চ্যাট",
+  "Selected messages without a journal record": "জার্নালে রেকর্ড নেই এমন নির্বাচিত বার্তা",
+  "Leave without saving the changes in this form?": "এই ফর্মের পরিবর্তন সংরক্ষণ না করেই ছেড়ে যাব?"
 }

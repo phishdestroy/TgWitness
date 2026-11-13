@@ -8270,7 +8270,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n}が追加され、{k}がスキップされ、{e}が拒否されました。",
   "{n} changes recorded.": "{n}件の変更が記録されました。",
-  "{n} chats": "{n}件のチャット",
   "{n} checks": "{n}件のチェック",
   "{n} codes read from {k} images.": "{n}個のコードが{k}枚の画像から読み取られました。",
   "{n} deletion notices.": "{n}件の削除通知。",
@@ -8836,5 +8835,11 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "プライベートチャット、ボット、通常のグループはアカウント全体で一つの番号体系を共有するため、そのいずれかで欠けている番号は別のチャットのものである可能性があります。この理由で比較されなかったチャット：{n}。",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "記録上の欠落：{gaps}。対応範囲に関する注記：{notes}。確認されなかったメッセージ番号：{missing}。",
   "Coverage notes": "対応範囲に関する注記",
-  "Showing {shown} of {total} coverage notes.": "対応範囲に関する注記 {total} 件のうち {shown} 件を表示しています。"
+  "Showing {shown} of {total} coverage notes.": "対応範囲に関する注記 {total} 件のうち {shown} 件を表示しています。",
+  "{n} chats": {
+    "other": "チャット {n}件"
+  },
+  "{n} chat": "チャット {n}件",
+  "Selected messages without a journal record": "ジャーナルに記録のない選択メッセージ",
+  "Leave without saving the changes in this form?": "このフォームの変更を保存せずに終了しますか？"
 }

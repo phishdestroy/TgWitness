@@ -8270,7 +8270,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "添加了 {n} 个，跳过了 {k} 个，拒绝了 {e} 个。",
   "{n} changes recorded.": "已记录{n}项变更。",
-  "{n} chats": "{n}个聊天室",
   "{n} checks": "{n}项检查",
   "{n} codes read from {k} images.": "从 {k} 张图像中读取 {n} 个代码。",
   "{n} deletion notices.": "{n}条删除通知。",
@@ -8836,5 +8835,11 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "私聊、机器人和普通群组共用整个账户的同一套编号，因此其中一个聊天缺少的编号可能属于另一个聊天。因此未比对的聊天：{n}。",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "记录的缺失部分：{gaps}。覆盖范围备注：{notes}。未观察到的消息编号：{missing}。",
   "Coverage notes": "覆盖范围备注",
-  "Showing {shown} of {total} coverage notes.": "显示{shown}条覆盖范围备注，总计{total}条。"
+  "Showing {shown} of {total} coverage notes.": "显示{shown}条覆盖范围备注，总计{total}条。",
+  "{n} chats": {
+    "other": "{n} 个聊天室"
+  },
+  "{n} chat": "{n} 个聊天室",
+  "Selected messages without a journal record": "日志中没有记录的已选消息",
+  "Leave without saving the changes in this form?": "不保存此表单中的更改就退出吗？"
 }

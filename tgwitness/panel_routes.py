@@ -1,5 +1,6 @@
 import re
 
+from fastapi.exception_handlers import http_exception_handler
 from starlette.exceptions import HTTPException
 
 
@@ -28,6 +29,16 @@ def register(app, static):
             raise HTTPException(404)
         return await static.get_response("index.html", request.scope)
 
+    async def missing(request, error):
+        if (error.status_code == 404 and request.method in ("GET", "HEAD")
+                and "text/html" in request.headers.get("accept", "")
+                and not request.url.path.startswith(("/api/", "/profiles/"))):
+            response = await static.get_response("index.html", request.scope)
+            response.status_code = 404
+            return response
+        return await http_exception_handler(request, error)
+
+    app.add_exception_handler(HTTPException, missing)
     for path in (*DOCUMENTS, "/chats/{chat_id}", "/journal/event/{seq}"):
         app.add_route(path, document, methods=["GET", "HEAD"], name="panel-document")
     app.add_route("/groups/{group_id}", group_document, methods=["GET", "HEAD"], name="panel-group-document")

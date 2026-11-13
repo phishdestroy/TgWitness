@@ -8270,7 +8270,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "新增 {n} 項、跳過 {k} 項、拒絕 {e} 項。",
   "{n} changes recorded.": "已記錄 {n} 項變更。",
-  "{n} chats": "{n} 個聊天室",
   "{n} checks": "{n} 項檢查",
   "{n} codes read from {k} images.": "從 {k} 張圖像中讀取 {n} 段程式碼。",
   "{n} deletion notices.": "{n} 則刪除通知。",
@@ -8836,5 +8835,11 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "私人聊天、機器人與一般群組共用整個帳號的同一套編號，因此其中一個聊天缺少的編號可能屬於另一個聊天。因此未比對的聊天：{n}。",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "記錄的缺口：{gaps}。涵蓋範圍備註：{notes}。未觀察到的訊息編號：{missing}。",
   "Coverage notes": "涵蓋範圍備註",
-  "Showing {shown} of {total} coverage notes.": "顯示 {shown} 則涵蓋範圍備註，共 {total} 則。"
+  "Showing {shown} of {total} coverage notes.": "顯示 {shown} 則涵蓋範圍備註，共 {total} 則。",
+  "{n} chats": {
+    "other": "{n} 個聊天室"
+  },
+  "{n} chat": "{n} 個聊天室",
+  "Selected messages without a journal record": "日誌中沒有記錄的已選取訊息",
+  "Leave without saving the changes in this form?": "要離開而不儲存此表單中的變更嗎？"
 }

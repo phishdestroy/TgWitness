@@ -8309,7 +8309,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} eklendi, {k} atlandı, {e} reddedildi.",
   "{n} changes recorded.": "{n} adet değişiklik kaydedildi.",
-  "{n} chats": "{n} sohbet",
   "{n} checks": "{n} denetimi",
   "{n} codes read from {k} images.": "{n} kod, {k} görüntüden okunur.",
   "{n} deletion notices.": "{n} silme bildirimi.",
@@ -8883,5 +8882,12 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Özel sohbetler, botlar ve normal gruplar hesap genelinde tek bir numaralandırmayı paylaşır; bu yüzden birinde eksik olan numara başka bir sohbete ait olabilir. Bu nedenle karşılaştırılmayan sohbetler: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Kaydedilen boşluklar: {gaps}. Kapsam notları: {notes}. Gözlemlenmeyen mesaj numaraları: {missing}.",
   "Coverage notes": "Kapsam notları",
-  "Showing {shown} of {total} coverage notes.": "{total} kapsam notundan {shown} tanesi gösteriliyor."
+  "Showing {shown} of {total} coverage notes.": "{total} kapsam notundan {shown} tanesi gösteriliyor.",
+  "{n} chats": {
+    "one": "{n} sohbet",
+    "other": "{n} sohbet"
+  },
+  "{n} chat": "{n} sohbet",
+  "Selected messages without a journal record": "Günlükte kaydı olmayan seçilen mesajlar",
+  "Leave without saving the changes in this form?": "Bu formdaki değişiklikleri kaydetmeden çıkmak mı istiyorsunuz?"
 }

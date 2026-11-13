@@ -8309,7 +8309,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} qo'shildi, {k} o'tkazib yuborildi, {e} rad etildi.",
   "{n} changes recorded.": "{n} o'zgarishlari qayd etildi.",
-  "{n} chats": "{n} suhbatlari",
   "{n} checks": "{n} tekshiruvlari",
   "{n} codes read from {k} images.": "{n} kodlari {k} tasvirlardan o'qiladi.",
   "{n} deletion notices.": "{n} o'chirish bildirishnomalari.",
@@ -8883,5 +8882,12 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Shaxsiy suhbatlar, botlar va oddiy guruhlar butun akkaunt uchun bitta umumiy raqamlashdan foydalanadi, shu sababli ulardan birida yo'q raqam boshqa suhbatga tegishli bo'lishi mumkin. Shu sababli taqqoslanmagan suhbatlar: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Yozib olingan bo'shliqlar: {gaps}. Qamrov qaydlari: {notes}. Kuzatilmagan xabar raqamlari: {missing}.",
   "Coverage notes": "Qamrov qaydlari",
-  "Showing {shown} of {total} coverage notes.": "{total} ta qamrov qaydidan {shown} tasi ko'rsatilmoqda."
+  "Showing {shown} of {total} coverage notes.": "{total} ta qamrov qaydidan {shown} tasi ko'rsatilmoqda.",
+  "{n} chats": {
+    "one": "{n} suhbat",
+    "other": "{n} ta suhbat"
+  },
+  "{n} chat": "{n} suhbat",
+  "Selected messages without a journal record": "Jurnalda yozuvi yo'q tanlangan xabarlar",
+  "Leave without saving the changes in this form?": "Ushbu formadagi o'zgarishlarni saqlamasdan chiqib ketish?"
 }

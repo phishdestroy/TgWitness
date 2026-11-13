@@ -8270,7 +8270,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} เพิ่ม, {k} ข้าม, {e} ปฏิเสธ.",
   "{n} changes recorded.": "บันทึกการเปลี่ยนแปลง {n} ครั้ง",
-  "{n} chats": "{n} การสนทนา",
   "{n} checks": "{n} การตรวจสอบ",
   "{n} codes read from {k} images.": "{n} รหัสที่อ่านจาก {k} ภาพ",
   "{n} deletion notices.": "{n} ประกาศการลบ",
@@ -8836,5 +8835,11 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "แชทส่วนตัว บอท และกลุ่มทั่วไปใช้ลำดับหมายเลขเดียวกันทั้งบัญชี หมายเลขที่ขาดหายในแชทหนึ่งจึงอาจเป็นของแชทอื่น แชทที่ไม่ได้เปรียบเทียบด้วยเหตุผลนี้: {n}",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "ช่องว่างที่บันทึกไว้: {gaps}. หมายเหตุการครอบคลุม: {notes}. หมายเลขข้อความที่ไม่ได้สังเกต: {missing}.",
   "Coverage notes": "หมายเหตุการครอบคลุม",
-  "Showing {shown} of {total} coverage notes.": "แสดง {shown} จาก {total} หมายเหตุการครอบคลุม"
+  "Showing {shown} of {total} coverage notes.": "แสดง {shown} จาก {total} หมายเหตุการครอบคลุม",
+  "{n} chats": {
+    "other": "{n} การสนทนา"
+  },
+  "{n} chat": "{n} การสนทนา",
+  "Selected messages without a journal record": "ข้อความที่เลือกซึ่งไม่มีบันทึกในสมุดบันทึก",
+  "Leave without saving the changes in this form?": "จะออกจากหน้าโดยไม่บันทึกการเปลี่ยนแปลงในแบบฟอร์มนี้หรือไม่?"
 }
