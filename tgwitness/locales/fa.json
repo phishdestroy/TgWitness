@@ -1490,7 +1490,7 @@
   "At most 30 lines of 400 characters.": "حداکثر ۳۰ خط با ۴۰۰ کاراکتر.",
   "Unknown parameter.": "پارامتر نامشخص.",
   "A pattern is not a valid regular expression.": "یک الگو یک عبارت منظم معتبر نیست.",
-  "Collection": "مجموعه",
+  "Collection": "گردآوری",
   "Chat list, liveness records and the start of observation.": "فهرست چت‌ها، سوابق زنده بودن و آغاز مشاهده.",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "نحوه پخش درخواست‌های بازبینی مجدد.   فاصله زمانی بازبینی مجدد هر چت در بخش Sources → Recheck تنظیم می‌شود.",
   "Photos & files": "عکس‌ها و فایل‌ها",

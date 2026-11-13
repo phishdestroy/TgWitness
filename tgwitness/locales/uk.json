@@ -1512,7 +1512,7 @@
   "At most 30 lines of 400 characters.": "Не більше 30 рядків по 400 символів.",
   "Unknown parameter.": "Невідомий параметр.",
   "A pattern is not a valid regular expression.": "Шаблон не є дійсним регулярним виразом.",
-  "Collection": "Колекція",
+  "Collection": "Збір",
   "Chat list, liveness records and the start of observation.": "Список чатів, записи про активність користувачів та початок спостереження.",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "Як функція повторної перевірки розподіляє свої запити. Частоту повторної перевірки кожного чату можна налаштувати в розділі «Джерела» → «Повторна перевірка».",
   "Photos & files": "Фотографії та файли",

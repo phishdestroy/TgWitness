@@ -334,7 +334,7 @@
   "Code from Telegram": "รหัสจาก Telegram",
   "Collect around the clock on a cloud server without SSH, with a provider log anyone can check.": "เก็บข้อมูลได้ตลอด 24 ชั่วโมงบนเซิร์ฟเวอร์คลาวด์โดยไม่ต้องใช้ SSH พร้อมด้วยบันทึกของผู้ให้บริการที่ใครก็สามารถตรวจสอบได้",
   "Collecting": "การเก็บรวบรวม",
-  "Collection": "คอลเลกชัน",
+  "Collection": "การเก็บรวบรวม",
   "Collection continues": "การรวบรวมข้อมูลยังคงดำเนินต่อไป",
   "Collection error": "ข้อผิดพลาดในการเก็บข้อมูล",
   "Collection error during {operation}: {error}": "เกิดข้อผิดพลาดในการเก็บข้อมูลระหว่าง{operation}: {error}",

@@ -1490,7 +1490,7 @@
   "At most 30 lines of 400 characters.": "No máximo 30 linhas de 400 caracteres.",
   "Unknown parameter.": "Parâmetro desconhecido.",
   "A pattern is not a valid regular expression.": "Um padrão não é uma expressão regular válida.",
-  "Collection": "Coleção",
+  "Collection": "Coleta",
   "Chat list, liveness records and the start of observation.": "Lista de bate-papos, registros de atividade e início da observação.",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "Como as novas verificações distribuem suas solicitações. A frequência com que cada conversa é verificada novamente é definida em Fontes → Nova verificação.",
   "Photos & files": "Fotos e arquivos",

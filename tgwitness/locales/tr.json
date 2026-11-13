@@ -1490,7 +1490,7 @@
   "At most 30 lines of 400 characters.": "En fazla 30 satır, her satır 400 karakter.",
   "Unknown parameter.": "Bilinmeyen parametre.",
   "A pattern is not a valid regular expression.": "Bir kalıp, geçerli bir düzenli ifade değildir.",
-  "Collection": "Koleksiyon",
+  "Collection": "Toplama",
   "Chat list, liveness records and the start of observation.": "Sohbet listesi, canlılık kayıtları ve gözlemin başlangıcı.",
   "How rechecks spread their requests. How often each chat is rechecked is set under Sources → Recheck.": "Yeniden kontrol işlemlerinin isteklerini nasıl dağıttığı. Her bir sohbetin ne sıklıkla yeniden kontrol edileceği, Kaynaklar → Yeniden Kontrol altında ayarlanır.",
   "Photos & files": "Fotoğraflar ve dosyalar",
