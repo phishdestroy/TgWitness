@@ -91,7 +91,7 @@ export function createSecretChats(context) {
     const query = find('secret-search').value.trim().toLocaleLowerCase();
     const visible = items.filter(item => !query || String(item.peer ?? '').includes(query) || String(item.id).includes(query)
       || item.items.some(record => String(record.payload?.text || '').toLocaleLowerCase().includes(query)));
-    find('secret-count').textContent = tr('{n} chats', {n: items.length});
+    find('secret-count').textContent = trn('{n} chat', '{n} chats', items.length);
     find('secret-count').hidden = !items.length;
     if (!visible.length && items.length) list.append(node("p", "hint", tr('No matches.')));
     for (const item of visible) {

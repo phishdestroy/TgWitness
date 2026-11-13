@@ -8309,7 +8309,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} اضافه شد، {k} رد شد، {e} پذیرفته نشد.",
   "{n} changes recorded.": "تغییرات ثبت‌شده {n}.",
-  "{n} chats": "چت‌های {n}",
   "{n} checks": "تأییدهای {n}",
   "{n} codes read from {k} images.": "کدهای {n} که از تصاویر {k} خوانده می‌شوند.",
   "{n} deletion notices.": "اخطاریه‌های حذف {n}.",
@@ -8883,5 +8882,12 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "چت‌های خصوصی، ربات‌ها و گروه‌های عادی از یک شماره‌گذاری مشترک در سطح حساب استفاده می‌کنند؛ بنابراین شماره‌ای که در یکی از آن‌ها نیست ممکن است متعلق به چت دیگری باشد. چت‌هایی که به این دلیل مقایسه نشدند: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "فاصله‌های ثبت‌شده: {gaps}. یادداشت‌های پوشش: {notes}. شماره‌های پیام مشاهده‌نشده: {missing}.",
   "Coverage notes": "یادداشت‌های پوشش",
-  "Showing {shown} of {total} coverage notes.": "نمایش {shown} از {total} یادداشت پوشش."
+  "Showing {shown} of {total} coverage notes.": "نمایش {shown} از {total} یادداشت پوشش.",
+  "{n} chats": {
+    "one": "{n} چت",
+    "other": "{n} چت"
+  },
+  "{n} chat": "{n} چت",
+  "Selected messages without a journal record": "پیام‌های انتخاب‌شده بدون سابقه در دفترچه",
+  "Leave without saving the changes in this form?": "خروج بدون ذخیرهٔ تغییرات این فرم؟"
 }

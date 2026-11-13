@@ -57,7 +57,8 @@ export function createCaseBoard(ctx){
     const params=new URLSearchParams({limit:'50',offset:String(append?offset:0),order:'newest'});
     for(const [key,value] of Object.entries({collection,author:author.value,chat:chat.value,label:label.value,state:status.value,kind:kind.value,q:search.value,
       from:since.value?since.value+':00Z':'',to:until.value?until.value+':00Z':'',comments:onlyComments.checked?'true':''}))if(value)params.set(key,value);
-    live.textContent=t('Loading…');const result=await json('board?'+params);
+    live.textContent=t('Loading…');let result;
+    try{result=await json('board?'+params);}catch(error){if(valid(stamp,rev)&&ticket===request)live.textContent=t('Could not load data');throw error;}
     if(!valid(stamp,rev)||ticket!==request)return;
     if(append&&data)result.cards=[...data.cards,...result.cards];data=result;offset=result.next_offset;
     liveCursor=Math.max(liveCursor,result.cursor);unread=0;badge();render();

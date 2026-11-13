@@ -8309,7 +8309,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} hinzugefügt, {k} übersprungen, {e} abgelehnt.",
   "{n} changes recorded.": "{n} Änderungen aufgezeichnet.",
-  "{n} chats": "{n}-Chats",
   "{n} checks": "{n}-Prüfungen",
   "{n} codes read from {k} images.": "{n}-Codes, die aus {k}-Bildern gelesen wurden.",
   "{n} deletion notices.": "{n} Löschhinweise.",
@@ -8883,5 +8882,12 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Private Chats, Bots und normale Gruppen teilen sich eine kontoweite Nummerierung; eine dort fehlende Nummer kann daher zu einem anderen Chat gehören. Aus diesem Grund nicht verglichene Chats: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Aufgezeichnete Lücken: {gaps}. Hinweise zum Umfang: {notes}. Nicht beobachtete Nachrichtennummern: {missing}.",
   "Coverage notes": "Hinweise zum Umfang",
-  "Showing {shown} of {total} coverage notes.": "{shown} von {total} Hinweisen zum Umfang werden angezeigt."
+  "Showing {shown} of {total} coverage notes.": "{shown} von {total} Hinweisen zum Umfang werden angezeigt.",
+  "{n} chats": {
+    "one": "{n} Chat",
+    "other": "{n} Chats"
+  },
+  "{n} chat": "{n} Chat",
+  "Selected messages without a journal record": "Ausgewählte Nachrichten ohne Eintrag im Protokoll",
+  "Leave without saving the changes in this form?": "Möchten Sie das Formular verlassen, ohne die Änderungen zu speichern?"
 }

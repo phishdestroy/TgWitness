@@ -8348,7 +8348,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n} נוספו, {k} הושמטו, {e} נדחו.",
   "{n} changes recorded.": "נרשמו {n} שינויים.",
-  "{n} chats": "{n} צ'אטים",
   "{n} checks": "{n} בדיקות",
   "{n} codes read from {k} images.": "{n} קודים שנקראו מ-{k} תמונות.",
   "{n} deletion notices.": "{n} הודעות מחיקה.",
@@ -8930,5 +8929,13 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "צ'אטים פרטיים, בוטים וקבוצות רגילות חולקים מספור אחד לכל החשבון, ולכן מספר שחסר באחד מהם עשוי להשתייך לצ'אט אחר. צ'אטים שלא הושוו מסיבה זו: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "פערים שנרשמו: {gaps}. הערות כיסוי: {notes}. מספרי הודעות שלא נצפו: {missing}.",
   "Coverage notes": "הערות כיסוי",
-  "Showing {shown} of {total} coverage notes.": "הצגת {shown} מתוך {total} הערות כיסוי."
+  "Showing {shown} of {total} coverage notes.": "הצגת {shown} מתוך {total} הערות כיסוי.",
+  "{n} chats": {
+    "one": "{n} צ'אט",
+    "other": "{n} צ'אטים",
+    "two": "{n} צ'אטים"
+  },
+  "{n} chat": "{n} צ'אט",
+  "Selected messages without a journal record": "הודעות שנבחרו ללא רשומה ביומן",
+  "Leave without saving the changes in this form?": "לעזוב מבלי לשמור את השינויים בטופס זה?"
 }

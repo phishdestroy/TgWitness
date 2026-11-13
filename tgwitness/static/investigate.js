@@ -1006,7 +1006,7 @@
     paste.rows = 3; paste.maxLength = 100000;
     paste.placeholder = tr('One per line. Prefix with a kind to mix them, for example wallet:bc1…');
     return section('flag', item.name,
-      node('p', 'hint', [item.note, item.chat_ids?.length ? tr('{n} chats', {n: item.chat_ids.length}) : tr('all chats'),
+      node('p', 'hint', [item.note, item.chat_ids?.length ? trn('{n} chat', '{n} chats', item.chat_ids.length) : tr('all chats'),
         item.alert ? tr('alerts on') : tr('alerts off'), item.excerpts ? tr('excerpts on') : tr('excerpts off')]
         .filter(Boolean).join(' · ')),
       item.entries.length ? entries : node('p', 'hint', tr('No entries yet.')), form,
@@ -1157,7 +1157,7 @@
         el('div', 'doc-goal-main', node('span', 'doc-goal-text', item.reference + ' · ' + tr(names[item.kind] || item.kind)),
           node('span', 'doc-sub', [item.authority, (item.valid_from || '').slice(0, 16).replace('T', ' ') + ' – '
             + (item.valid_to ? item.valid_to.slice(0, 16).replace('T', ' ') : tr('open')),
-            item.chat_ids?.length ? tr('{n} chats', {n: item.chat_ids.length}) : tr('all chats'),
+            item.chat_ids?.length ? trn('{n} chat', '{n} chats', item.chat_ids.length) : tr('all chats'),
             item.withdrawn_at ? tr('withdrawn {at}', {at: item.withdrawn_at.slice(0, 16).replace('T', ' ')}) : ''].filter(Boolean).join(' · ')),
           item.notes ? node('p', 'doc-text', item.notes) : '',
           item.document_sha256 ? node('span', 'doc-sub', 'SHA-256 ' + item.document_sha256.slice(0, 16) + '…') : ''),

@@ -37,7 +37,7 @@ const workspaceSafetyReady=import('./core/workspace-safety.js?v=3').then(({creat
 });
 let accountState,accountActivity;
 let boardView;
-const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
+const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   boardView=createCaseBoard({root:$('view-board'),state,json,tr,trn,node,toast,may,download,media:mediaNode,
     openEvidence:async(event,range)=>{
       const revision=state.workspaceRevision;
@@ -73,13 +73,13 @@ const boardReady=import('./views/board.js?v=5').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout7').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout8').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
     const view=root?.[0]||'connection';
     const own=el.labels?.[0]||el.closest('label')||root?.[1].querySelector('label[for="'+CSS.escape(el.id)+'"]');
-    const named=own?.querySelector('strong')?.textContent||[...own?.childNodes||[]].filter(n=>n.nodeType===3||n.nodeType===1&&!n.matches('input,select,textarea,button,small')).map(n=>n.textContent).join(' ');
+    const named=own?.querySelector('strong')?.textContent||[...own?.childNodes||[]].filter(n=>n.nodeType===3||n.nodeType===1&&!n.hidden&&!n.matches('input,select,textarea,button,small')).map(n=>n.textContent).join(' ');
     const text=named?.replace(/\s+/g,' ').trim()||el.getAttribute('aria-label')||el.placeholder||el.id;
     el.dataset.level=el.dataset.level||(['parameters','integrations','system-log'].includes(view)?'expert':'standard');
     const form=el.closest('form')?.id, extra=el.closest('.extra-panel')?.id.replace('extras-','');
@@ -228,7 +228,7 @@ function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":stat
   step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null,
   hub:state.view==="settings"?settingsHub?.section||null:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=10").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=11").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -594,6 +594,11 @@ document.addEventListener("click",event=>{
   const close=n.querySelector(".toast-close");
   if(close&&inside(close.getBoundingClientRect())){clearTimeout(toastTimer);leave("toast");}
 },true);
+new MutationObserver(records=>{
+  const n=$("toast");
+  if(!n||n.hidden||!n.showPopover||n.closest("dialog")||!records.some(record=>record.target.matches?.("dialog:modal")))return;
+  try{n.hidePopover();n.showPopover();}catch{}
+}).observe(document.documentElement,{attributes:true,attributeFilter:["open"],subtree:true});
 async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
   if(state.me&&!$("workspace").hidden&&!cancellingLogin&&!['access/me','profiles','access/logout'].includes(path))workspaceSafety?.assert();
@@ -627,9 +632,10 @@ async function api(path, body, options={}) {
   if (!response.ok) {
     const result = await response.json().catch(() => ({detail: [502,503,504].includes(response.status)||response.status>=520&&response.status<=530
       ? tr("The panel did not answer. Check that TgWitness is running and that this device can reach it.") : tr("Request failed")+" · HTTP "+response.status}));
-    let detail = result.detail || tr("Request failed");const parameter=detail?.parameter;
-    if (Array.isArray(detail)) detail = detail.map(x => x.field + ": " + x.message).join("; ");
-    if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
+    let detail = result?.detail || tr("Request failed")+" · HTTP "+response.status;const parameter=detail?.parameter;
+    if (Array.isArray(detail)) detail = detail.map(x => [x?.field ?? (Array.isArray(x?.loc) ? x.loc.filter(part => part !== "body").join(".") : ""),
+      x?.message ?? x?.msg ?? (typeof x === "string" ? x : "")].filter(Boolean).join(": ")).filter(Boolean).join("; ") || tr("Request failed")+" · HTTP "+response.status;
+    if (typeof detail === "object") detail = tr(typeof detail.message === "string" && detail.message ? detail.message : "Request failed") + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
     if(fetchOptions.signal?.aborted)throw new StaleView();
@@ -715,7 +721,7 @@ async function unlock() {
   if(state.profiles.some(profile=>profile.id===requested.workspace&&!profile.error_type))state.profile=requested.workspace;
   if(!state.profiles.some(p=>p.id===state.profile && !p.error_type))
     state.profile=state.profiles.find(p=>!p.error_type)?.id||"default";
-  if(requested.error||requested.explicit&&requested.workspace!==state.profile)throw new Error(tr('Unknown workspace.'));
+  if(requested.error==='Unknown workspace.'||requested.explicit&&requested.workspace!==state.profile)throw new Error(tr('Unknown workspace.'));
   $('profile-select').value=state.profile;
   if(!new URL(location.href).searchParams.has('ws')){
     const initialURL=new URL(location.href);initialURL.searchParams.set('ws',state.profile);history.replaceState(history.state,'',initialURL);
@@ -723,7 +729,7 @@ async function unlock() {
   state.status = await json("status");
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
-  if(!state.opened&&!requested.explicit){
+  if(!state.opened&&(!requested.explicit||requested.error)){
     state.view=state.status.demo||state.status.targets?.length&&state.status.stats.total?'chats':viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view))state.view="chats";
@@ -2175,7 +2181,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=5").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=6").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
@@ -3064,7 +3070,7 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
   const fmt=b.dataset.export,password=$("export-password").value;
   const owner=reportKey();
   let options;
-  if(['html','pdf','json','zip'].includes(fmt)&&state.view==='evidence'){
+  if(b.hasAttribute('data-report-download')&&state.view==='evidence'){
     await loadReportSettings();
     if(owner!==reportKey())throw new StaleView();
     if(!reportReady||reportOwner!==owner)return;
@@ -3107,7 +3113,7 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=10').then(({createReportSelection})=>{
+const reportSelectionReady=import('./views/report-selection.js?v=11').then(({createReportSelection})=>{
   reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',

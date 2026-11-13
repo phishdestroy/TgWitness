@@ -8371,7 +8371,6 @@
   "{m} min {s} s": "{m} мин {s} с",
   "{n} added, {k} skipped, {e} rejected.": "Добавлено: {n}, пропущено: {k}, отклонено: {e}.",
   "{n} changes recorded.": "Записано изменений: {n}.",
-  "{n} chats": "Чатов: {n}",
   "{n} checks": "Проверок: {n}",
   "{n} codes read from {k} images.": "Распознано кодов: {n}, изображений: {k}.",
   "{n} files saved": "Сохранено файлов: {n}",
@@ -8947,5 +8946,14 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "Личные чаты, боты и обычные группы делят одну нумерацию на весь аккаунт, поэтому номер, которого нет в одном из них, может принадлежать другому чату. Чатов, не сравнивавшихся по этой причине: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "Записанных перерывов: {gaps}. Заметок об охвате: {notes}. Ненаблюдавшихся номеров сообщений: {missing}.",
   "Coverage notes": "Заметки об охвате",
-  "Showing {shown} of {total} coverage notes.": "Показано заметок об охвате: {shown} из {total}."
+  "Showing {shown} of {total} coverage notes.": "Показано заметок об охвате: {shown} из {total}.",
+  "{n} chats": {
+    "one": "{n} чат",
+    "many": "{n} чатов",
+    "few": "{n} чата",
+    "other": "{n} чата"
+  },
+  "{n} chat": "{n} чат",
+  "Selected messages without a journal record": "Выбранные сообщения без записи в журнале",
+  "Leave without saving the changes in this form?": "Уйти, не сохранив изменения в этой форме?"
 }

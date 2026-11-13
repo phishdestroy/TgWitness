@@ -248,7 +248,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 context["source_events"] = snapshot.events
             if not compact and (selection.enabled or selection.id_gaps) and fmt in ("html", "json", "pdf", "zip"):
                 selected = report.report_selection.analyze(snapshot, selection, preview_limit=0, scratch_root=directory)
-                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps")}
+                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps", "messages_not_found")}
 
             if require_records and fmt in ("html", "json", "pdf"):
                 count = context["selection"]["counts"]["selected_records"] if "selection" in context else result["events"]

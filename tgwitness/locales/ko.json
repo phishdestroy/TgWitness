@@ -8270,7 +8270,6 @@
   "{n} B": "{n} B",
   "{n} added, {k} skipped, {e} rejected.": "{n}개 추가, {k}개 건너뛰기, {e}개 거부.",
   "{n} changes recorded.": "{n}건의 변경 사항이 기록되었습니다.",
-  "{n} chats": "{n}개의 채팅",
   "{n} checks": "{n}개 검사",
   "{n} codes read from {k} images.": "{n}개의 코드가 {k}개의 이미지에서 읽힙니다.",
   "{n} deletion notices.": "{n}건의 삭제 공지.",
@@ -8836,5 +8835,11 @@
   "Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in one of them may belong to another chat. Chats not compared for this reason: {n}.": "비공개 채팅, 봇, 일반 그룹은 계정 전체에서 하나의 번호 체계를 함께 쓰므로, 그중 한 곳에서 빠진 번호는 다른 채팅의 것일 수 있습니다. 이 이유로 비교하지 않은 채팅: {n}.",
   "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.": "기록된 누락: {gaps}. 커버리지 메모: {notes}. 관측되지 않은 메시지 번호: {missing}.",
   "Coverage notes": "커버리지 메모",
-  "Showing {shown} of {total} coverage notes.": "커버리지 메모 {total}개 중 {shown}개를 표시 중입니다."
+  "Showing {shown} of {total} coverage notes.": "커버리지 메모 {total}개 중 {shown}개를 표시 중입니다.",
+  "{n} chats": {
+    "other": "채팅 {n}개"
+  },
+  "{n} chat": "채팅 {n}개",
+  "Selected messages without a journal record": "저널에 기록이 없는 선택한 메시지",
+  "Leave without saving the changes in this form?": "이 양식의 변경 내용을 저장하지 않고 나가시겠습니까?"
 }

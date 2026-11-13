@@ -152,7 +152,12 @@ export function createSettingsHub(ctx) {
   }
   async function load(wanted=null,hub){
     const who=owner();
-    if(hub!==undefined&&state.view==='settings'){section=sections.includes(hub)?hub:null;query='';}
+    if(hub!==undefined&&state.view==='settings'){
+      const next=sections.includes(hub)?hub:null;
+      if(section==='chats'&&scopeDirty&&next!=='chats'&&!await confirm(who,tr('Leave without saving the chat selection?'))){ctx.record?.();return;}
+      if(next!==section)scopeDirty=false;
+      section=next;query='';
+    }
     if(state.status?.demo){closed('Demo workspace. Connect accounts in your live installation.');return;}
     if(!state.me?.admin){closed('Only the workspace administrator can change collection settings.');return;}
     if(!prefs){const result=await request(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
@@ -265,7 +270,8 @@ export function createSettingsHub(ctx) {
     }finally{if(current(who)&&state.view==='settings')render();}
   }
   function preferencesForm(box,{language=true}={}){
-    if(language)box.append(select('Language',Object.entries(ctx.languages),prefs.language,async value=>{const who=owner();await savePreferences({language:value},who);requireOwner(who);await ctx.changeLanguage(value);}));
+    if(language){const row=select('Language',Object.entries(ctx.languages),prefs.language,async value=>{const who=owner();await savePreferences({language:value},who);requireOwner(who);await ctx.changeLanguage(value);});
+      row.dataset.setting='language';box.append(row);}
     const remember=(patch,text)=>{const before=Object.fromEntries(Object.keys(patch).map(k=>[k,prefs[k]]));
       return savePreferences(patch).then(()=>{if(state.view==='settings')showUndo(tr('Saved')+' · '+text,async()=>{await savePreferences(before);if(state.view==='settings')render();});});};
     const themes=[['system','System theme'],['light','Light theme'],['dark','Dark theme']];
@@ -274,7 +280,8 @@ export function createSettingsHub(ctx) {
     const themeLabel=node('div','hub-label');themeLabel.dataset.setting='theme';themeLabel.append(node('span','',tr('Theme')),theme);box.append(themeLabel);
     const device=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
     const zones=[...new Set([prefs.timezone,device,'UTC',...(Intl.supportedValuesOf?.('timeZone')||[])])];
-    box.append(select('Time zone',zones.map(x=>[x,x===device?x+' · '+tr('this device'):x]),prefs.timezone,value=>remember({timezone:value},value)));
+    const zone=select('Time zone',zones.map(x=>[x,x===device?x+' · '+tr('this device'):x]),prefs.timezone,value=>remember({timezone:value},value));
+    zone.dataset.setting='timezone';box.append(zone);
   }
   function fieldRow(f){
     const row=node('div','hub-field');row.dataset.level=f.level;row.dataset.setting=f.key;
@@ -326,6 +333,7 @@ export function createSettingsHub(ctx) {
   async function closeSection(){
     if(!section)return;
     if(section==='chats'&&scopeDirty&&!await confirm(owner(),tr('Leave without saving the chat selection?')))return;
+    if(shownForm&&$(shownForm)?.dataset.dirty==='true'&&!await confirm(owner(),tr('Leave without saving the changes in this form?')))return;
     const who=owner(),from=section;draft={...data.wizard};editing=false;scopeDirty=false;section=null;shownForm=null;render();ctx.record?.();
     (root.querySelector('.hub-summary[data-section="'+from+'"]')||root.querySelector('.hub-summary[data-section]'))?.focus({preventScroll:true});
     const before=JSON.stringify(data);data=await request(who,'settings');
@@ -415,6 +423,7 @@ export function createSettingsHub(ctx) {
     root.replaceChildren();
     root.append(heading());
     const inheritance=data.inheritance;
+    if(section==='group'&&!inheritance)section=null;
     if(inheritance){
       const note=node('div','notice hub-group-note');
       note.append(node('span','',tr('This account is in the group {name}.',{name:inheritance.group.label})),
@@ -474,7 +483,7 @@ export function createSettingsHub(ctx) {
     if(section==='telegram'&&signedIn()&&window.TgWitnessDocumentation)detail.append(button('Profile',async()=>{await closeSection();await window.TgWitnessDocumentation.openAccount();}));
     if(section==='telegram')move(ctx.authCard(),detail);
     if(section==='chats'){detail.append(message('Choose all chats, individual chats or a Telegram folder.'));
-      const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});detail.append(button('Pseudo-secret',()=>navigate('secret-chats')));}
+      const box=node('div','hub-chats');detail.append(box);void chatsForm(box,owner(),true).catch(e=>{if(e.name!=='StaleView')box.append(message(e.message,'notice warning'));});detail.append(button('Pseudo-secret',async()=>{if(scopeDirty&&!await confirm(owner(),tr('Leave without saving the chat selection?')))return;scopeDirty=false;await navigate('secret-chats');}));}
     const fields=section==='connection'?[]:data.fields.filter(f=>f.section===section);
     const above=fields.filter(f=>rank[f.level]>rank[prefs.level]&&!reveal.has(section)),hidden=above.length<fields.length?above:[];
     for(const f of fields.filter(f=>!hidden.includes(f)))detail.append(fieldRow(f));
@@ -496,7 +505,9 @@ export function createSettingsHub(ctx) {
     box.replaceChildren();root.querySelector('.hub-groups')?.toggleAttribute('hidden',!!query.trim());
     if(!query.trim())return;
     const q=query.trim().toLocaleLowerCase();
-    const all=[...data.fields,...data.parameters,...[...ctx.catalog()].map(f=>({...f,label:tr(f.label)}))];
+    const own=[['language','Language','[data-setting="language"]'],['theme','Theme','[data-setting="theme"]'],['timezone','Time zone','[data-setting="timezone"]'],
+      ['level','Interface level','[data-answer]']].map(([key,label,find])=>({key,label,find,section:'appearance',level:'simple'}));
+    const all=[...own,...data.fields,...data.parameters,...[...ctx.catalog()].map(f=>({...f,label:tr(f.label)}))];
     const matches=all.filter(f=>(tr(f.label)+' '+f.key).toLocaleLowerCase().includes(q));
     if(!matches.length)box.append(message('No settings found.','hint hub-empty'));
     for(const f of matches.slice(0,80)){
@@ -505,7 +516,9 @@ export function createSettingsHub(ctx) {
         if(['alerts-form','replica-form','evidence-form'].includes(f.form))await openForm(f.form,f.id);
         else if(f.view)await openAdvanced(f.view,f.extra,f.id);
         else if(f.key.startsWith('parameter:'))await openAdvanced('parameters',null,'parameter-'+f.key.slice(10));
-        else{reveal.add(f.section);openSection(f.section);within().querySelector('[data-setting="'+f.key+'"]')?.scrollIntoView({block:'center'});}
+        else{reveal.add(f.section);openSection(f.section);
+          const row=within().querySelector(f.find||'[data-setting="'+CSS.escape(f.key)+'"]');
+          row?.scrollIntoView({block:'center'});(row?.matches('button,input,select,textarea')?row:row?.querySelector('input,select,textarea,button'))?.focus({preventScroll:true});}
       },'hub-summary hub-result');b.dataset.level=f.level;
       b.append(node('strong','',tr(f.label)),node('span','hub-summary-value',hidden?label(f.level):''),arrow());box.append(b);
     }
@@ -525,7 +538,11 @@ export function createSettingsHub(ctx) {
     restoreMoved();await navigate(view);
     requireOwner(who);
     const page=$('view-'+view);
-    if(page&&!page.querySelector('.hub-back-link'))page.prepend(button('Back to settings',()=>navigate('settings'),'text-link hub-back-link'));
+    if(page&&!page.querySelector('.hub-back-link')){
+      const link=button('Back to settings',()=>navigate('settings'),'text-link hub-back-link');page.prepend(link);
+      const drop=event=>{if(event.detail?.view===view)return;link.remove();window.removeEventListener('tgwitness:route',drop);};
+      window.addEventListener('tgwitness:route',drop);
+    }
     if(extra)await ctx.openExtra(extra);
     requireOwner(who);
     if(id){const el=$(id);if(el){for(let p=el.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;el.scrollIntoView({block:'center'});el.focus();}}
