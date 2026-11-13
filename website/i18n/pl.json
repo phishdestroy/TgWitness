@@ -478,7 +478,10 @@
 "Development": "Rozwój",
 "Acquisition and complete export rates for two fresh workloads": "Wskaźniki pozyskiwania i pełnego eksportu dla dwóch nowych obciążeń roboczych",
 "t.me/s page read live, or Desktop export": "t.me/s – strona do przeglądania na żywo lub eksport na komputer stacjonarny",
-"The 106-day GDPR file": "Akta RODO: 106 dni"
+"The 106-day GDPR file": "Akta RODO: 106 dni",
+"Translating reports for court": "Tłumaczenie raportów dla sądu",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Który plik jest oryginałem, co złożyć z tłumaczeniem poświadczonym i jakie terminy zachowują tłumacze.",
+"translation certified sworn translator court english original terms glossary": "tłumaczenie poświadczone przysięgłe tłumacz sąd oryginał angielski terminy słowniczek"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Chce Pan/Pani tylko zapoznać się z serwisem? Proszę dwukrotnie kliknąć <code>scripts\\Demo.cmd</code>, aby uruchomić izolowaną wersję demonstracyjną. Nie jest wymagane logowanie do serwisu Telegram.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Strona ustawień to lista. Karta konta na górze otwiera <strong>Konto Telegram</strong>. Pod nią każdy wiersz podaje sekcję i używaną wartość: <strong>Które czaty?</strong> i <strong>Połączenie</strong> w grupie <strong>Konto</strong>; <strong>Cel</strong>, <strong>Zapis i pliki</strong>, <strong>Ochrona zapisu</strong> i <strong>Powiadomienia i kopia zewnętrzna</strong> w grupie <strong>Zapisywanie</strong>; <strong>Język, czas i wygląd</strong> w grupie <strong>Panel</strong>; a strony eksperckie w grupie <strong>Więcej narzędzi</strong>. Obok listy karta pokazuje, czy zalecane wartości są włączone, z najważniejszymi wartościami i przyciskiem <strong>Cofnij ostatnią zmianę</strong>, a <strong>Ostatnie zmiany</strong> wymienia ostatnie zmiany.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Sekcja otwiera się w oknie nad listą i ma własny adres, na przykład <code>/settings/connection</code>. Strzałka wstecz, przycisk zamknięcia, Escape, kliknięcie poza oknem i przycisk Wstecz przeglądarki wracają do listy. <strong>Które czaty?</strong> zapisuje się przyciskiem <strong>Zapisz wybór czatów</strong>; zamknięcie z niezapisanymi zmianami najpierw prosi o potwierdzenie. Każda zmiana przez 20 sekund pokazuje <strong>Cofnij</strong>, a każdy wpis w <strong>Ostatnie zmiany</strong> można cofnąć później. Cofnięcie to nowy zapis <code>settings.changed</code> w dzienniku; przywraca też niestandardowe limity plików.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Przegląd profilu",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Kluczowe dane, zaobserwowane profile i przeszukiwalne sekcje z odnośnikami do zapisów czatów."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Kluczowe dane, zaobserwowane profile i przeszukiwalne sekcje z odnośnikami do zapisów czatów.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: angielski oryginał tego samego raportu, gdy język raportu nie jest angielski, opieczętowany i podpisany w ten sam sposób i wskazany w podpisanym manifeście pod <code>report.original</code>. Raport w wybranym języku zaczyna się od zalecenia, aby złożyć angielski oryginał wraz z tłumaczeniem poświadczonym lub przysięgłym; zob. <a href=\"TRANSLATION.md\">Tłumaczenie raportów dla sądu</a>."
 },
 "modes": {
 "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",

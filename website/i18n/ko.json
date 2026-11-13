@@ -478,7 +478,10 @@
 "Development": "개발",
 "Acquisition and complete export rates for two fresh workloads": "두 가지 새로운 워크로드에 대한 수집 및 전체 내보내기 비율",
 "t.me/s page read live, or Desktop export": "t.me/s 페이지에서 실시간으로 읽거나, 데스크톱으로 내보내기",
-"The 106-day GDPR file": "106일간의 GDPR 파일"
+"The 106-day GDPR file": "106일간의 GDPR 파일",
+"Translating reports for court": "법원 제출용 보고서 번역",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "어떤 파일이 원본인지, 인증 번역과 함께 무엇을 제출하는지, 번역가가 유지하는 용어.",
+"translation certified sworn translator court english original terms glossary": "번역 인증 선서 번역가 법원 영어 원본 용어 용어집"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "그냥 둘러보고 계신가요? <code>scripts\\Demo.cmd</code>를 더블 클릭하면 독립형 데모를 체험할 수 있습니다. 텔레그램 로그인은 필요하지 않습니다.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "설정 페이지는 목록입니다. 맨 위의 계정 카드는 <strong>텔레그램 계정</strong>를 엽니다. 그 아래 각 행은 섹션과 사용 중인 값을 보여 줍니다. <strong>계정</strong> 아래에 <strong>어떤 채팅인가요?</strong>와 <strong>연결</strong>, <strong>기록 중</strong> 아래에 <strong>목표</strong>, <strong>기록과 파일</strong>, <strong>기록 보호</strong>, <strong>알림과 외부 사본</strong>, <strong>패널</strong> 아래에 <strong>언어, 시간, 모양</strong>, 그리고 <strong>기타 도구</strong> 아래에 전문가용 페이지가 있습니다. 목록 옆의 카드는 권장 값이 켜져 있는지를 주요 값 및 <strong>마지막 변경 사항 취소</strong>와 함께 보여 주고, <strong>최근 변경 사항</strong>는 최근 편집을 나열합니다.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "섹션은 목록 위의 창에서 열리며 <code>/settings/connection</code>처럼 고유한 주소가 있습니다. 뒤로 화살표, 닫기 버튼, Escape, 창 바깥 클릭, 브라우저의 뒤로 버튼으로 목록에 돌아갑니다. <strong>어떤 채팅인가요?</strong>는 <strong>채팅 선택 저장</strong>으로 저장합니다. 저장하지 않은 변경 사항이 있으면 닫기 전에 먼저 묻습니다. 모든 변경은 20초 동안 <strong>실행 취소</strong>를 표시하며, <strong>최근 변경 사항</strong>의 각 항목은 나중에 취소할 수 있습니다. 취소는 저널에 새 <code>settings.changed</code> 기록으로 남고, 사용자 지정 파일 한도도 되돌립니다.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "프로필 개요",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "주요 수치, 관찰된 프로필, 채팅 기록 링크가 있는 검색 가능한 섹션."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "주요 수치, 관찰된 프로필, 채팅 기록 링크가 있는 검색 가능한 섹션.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: 보고서 언어가 영어가 아닐 때 같은 보고서의 영어 원본으로, 같은 방식으로 봉인·서명되며 서명된 매니페스트의 <code>report.original</code> 아래에 기재됩니다. 선택한 언어의 보고서는 영어 원본을 인증 또는 선서 번역과 함께 제출하라는 권고로 시작합니다. <a href=\"TRANSLATION.md\">법원 제출용 보고서 번역</a>을 참조하십시오."
 },
 "modes": {
 "modes.actions.body": "미리보기, 요청 및 결과 수신 확인은 서명됩니다. 버튼을 누르기 전에 서버는 메시지를 다시 가져오고, 변경된 키보드는 거부합니다. 반환된 콜백 텍스트와 URL은 기록된 컨텍스트로 유지됩니다.",

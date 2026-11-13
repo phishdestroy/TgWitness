@@ -530,7 +530,10 @@
 "Development": "Desenvolvimento",
 "Acquisition and complete export rates for two fresh workloads": "Taxas de aquisição e exportação completa para duas novas cargas de trabalho",
 "t.me/s page read live, or Desktop export": "t.me/s: leitura ao vivo na página ou exportação para desktop",
-"The 106-day GDPR file": "O processo GDPR de 106 dias"
+"The 106-day GDPR file": "O processo GDPR de 106 dias",
+"Translating reports for court": "Traduzir relatórios para o tribunal",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Qual arquivo é o original, o que apresentar com uma tradução juramentada e quais termos os tradutores mantêm.",
+"translation certified sworn translator court english original terms glossary": "tradução certificada juramentada tradutor tribunal original inglês termos glossário"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Está apenas explorando? Clique duas vezes em <code>scripts\\Demo.cmd</code> para acessar uma demonstração isolada. Não é necessário fazer login no Telegram.",
@@ -4898,7 +4901,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "A página de configurações é uma lista. O cartão da conta, no topo, abre <strong>Conta do Telegram</strong>. Abaixo, cada linha nomeia uma seção e o valor em uso: <strong>Quais chats?</strong> e <strong>Conexão</strong> em <strong>Conta</strong>; <strong>Objetivo</strong>, <strong>Gravação e arquivos</strong>, <strong>Proteção do registro</strong> e <strong>Notificações e cópia externa</strong> em <strong>Gravação</strong>; <strong>Idioma, horário e aparência</strong> em <strong>Painel</strong>; e as páginas avançadas em <strong>Mais ferramentas</strong>. Ao lado da lista, um cartão informa se os valores recomendados estão ativos, com os valores principais e <strong>Desfazer a última alteração</strong>, e <strong>Alterações recentes</strong> lista as últimas edições.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Uma seção abre em uma janela sobre a lista e tem seu próprio endereço, como <code>/settings/connection</code>. A seta voltar, o botão fechar, Esc, um clique fora da janela e o botão Voltar do navegador retornam à lista. <strong>Quais chats?</strong> é salvo com <strong>Salvar a seleção de chats</strong>; fechar com alterações não salvas pede confirmação antes. Cada alteração mostra <strong>Desfazer</strong> por 20 segundos, e cada item em <strong>Alterações recentes</strong> pode ser desfeito depois. Desfazer cria um novo registro <code>settings.changed</code> no diário e também restaura limites de arquivo personalizados.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Visão geral do perfil",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Números-chave, perfis observados e seções pesquisáveis com links para os registros do chat."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Números-chave, perfis observados e seções pesquisáveis com links para os registros do chat.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: o original em inglês do mesmo relatório quando o idioma do relatório não é o inglês, selado e assinado da mesma forma e indicado no manifesto assinado em <code>report.original</code>. O relatório no idioma escolhido começa com a recomendação de apresentar o original em inglês com uma tradução certificada ou juramentada; veja <a href=\"TRANSLATION.md\">Traduzir relatórios para o tribunal</a>."
 },
 "modes": {
 "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",

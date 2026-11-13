@@ -530,7 +530,10 @@
 "Development": "Phát triển",
 "Acquisition and complete export rates for two fresh workloads": "Tỷ lệ thu thập và xuất hoàn chỉnh cho hai khối lượng công việc mới",
 "t.me/s page read live, or Desktop export": "Trang t.me/s: xem trực tiếp hoặc xuất sang máy tính để bàn",
-"The 106-day GDPR file": "Hồ sơ GDPR 106 ngày"
+"The 106-day GDPR file": "Hồ sơ GDPR 106 ngày",
+"Translating reports for court": "Dịch báo cáo để nộp tòa án",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Tệp nào là bản gốc, cần nộp gì kèm bản dịch có chứng thực và những thuật ngữ người dịch giữ nguyên.",
+"translation certified sworn translator court english original terms glossary": "bản dịch chứng thực tuyên thệ người dịch tòa án bản gốc tiếng Anh thuật ngữ bảng thuật ngữ"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Chỉ đang tìm hiểu sơ qua? Vui lòng nhấp đúp vào <code>scripts\\Demo.cmd</code> để trải nghiệm bản demo độc lập. Không cần đăng nhập Telegram.",
@@ -4898,7 +4901,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Trang cài đặt là một danh sách. Thẻ tài khoản ở trên cùng mở <strong>Tài khoản Telegram</strong>. Bên dưới, mỗi dòng nêu một phần và giá trị đang dùng: <strong>Những cuộc trò chuyện nào?</strong> và <strong>Kết nối</strong> trong <strong>Tài khoản</strong>; <strong>Mục tiêu</strong>, <strong>Ghi và tệp</strong>, <strong>Bảo vệ bản ghi</strong> và <strong>Thông báo và bản sao bên ngoài</strong> trong <strong>Đang ghi</strong>; <strong>Ngôn ngữ, thời gian và giao diện</strong> trong <strong>Bảng điều khiển</strong>; và các trang chuyên sâu trong <strong>Các công cụ khác</strong>. Bên cạnh danh sách, một thẻ cho biết các giá trị khuyến nghị có đang bật không, kèm các giá trị chính và <strong>Hoàn tác thay đổi cuối cùng</strong>, còn <strong>Các thay đổi gần đây</strong> liệt kê các chỉnh sửa gần nhất.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Một phần mở trong cửa sổ phía trên danh sách và có địa chỉ riêng, chẳng hạn <code>/settings/connection</code>. Mũi tên quay lại, nút đóng, Escape, nhấp ra ngoài cửa sổ và nút Quay lại của trình duyệt đều đưa về danh sách. <strong>Những cuộc trò chuyện nào?</strong> được lưu bằng <strong>Lưu lựa chọn cuộc trò chuyện</strong>; đóng khi còn thay đổi chưa lưu sẽ hỏi trước. Mỗi thay đổi hiển thị <strong>Hoàn tác</strong> trong 20 giây, và mỗi mục trong <strong>Các thay đổi gần đây</strong> có thể hoàn tác sau. Một lần hoàn tác là bản ghi <code>settings.changed</code> mới trong nhật ký và cũng khôi phục giới hạn tệp tùy chỉnh.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Tổng quan hồ sơ",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Số liệu chính, hồ sơ được quan sát và các mục có thể tìm kiếm với liên kết đến bản ghi trò chuyện."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Số liệu chính, hồ sơ được quan sát và các mục có thể tìm kiếm với liên kết đến bản ghi trò chuyện.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: bản gốc tiếng Anh của cùng báo cáo khi ngôn ngữ báo cáo không phải tiếng Anh, được niêm phong và ký theo cùng cách và được nêu trong manifest đã ký dưới <code>report.original</code>. Báo cáo bằng ngôn ngữ đã chọn mở đầu bằng khuyến nghị nộp bản gốc tiếng Anh kèm bản dịch có chứng thực hoặc tuyên thệ; xem <a href=\"TRANSLATION.md\">Dịch báo cáo để nộp tòa án</a>."
 },
 "modes": {
 "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",

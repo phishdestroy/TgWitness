@@ -478,7 +478,10 @@
 "Development": "Entwicklung",
 "Acquisition and complete export rates for two fresh workloads": "Erfassungs- und vollständige Exportraten für zwei neue Workloads",
 "t.me/s page read live, or Desktop export": "t.me/s-Seite live lesen oder als Desktop-Export",
-"The 106-day GDPR file": "Die DSGVO-Akte: 106 Tage"
+"The 106-day GDPR file": "Die DSGVO-Akte: 106 Tage",
+"Translating reports for court": "Berichte für Gerichte übersetzen",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Welche Datei das Original ist, was mit einer beglaubigten Übersetzung einzureichen ist und welche Begriffe Übersetzer beibehalten.",
+"translation certified sworn translator court english original terms glossary": "Übersetzung beglaubigt vereidigt Übersetzer Gericht englisches Original Begriffe Glossar"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Sie möchten sich nur umsehen? Doppelklicken Sie auf „<code>scripts\\Demo.cmd</code>“, um eine isolierte Demo aufzurufen. Eine Telegram-Anmeldung ist nicht erforderlich.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Die Einstellungsseite ist eine Liste. Die Kontokarte oben öffnet <strong>Telegram-Konto</strong>. Darunter nennt jede Zeile einen Abschnitt und den aktuellen Wert: <strong>Welche Chats?</strong> und <strong>Verbindung</strong> unter <strong>Konto</strong>; <strong>Ziel</strong>, <strong>Aufzeichnung und Dateien</strong>, <strong>Schutz der Aufzeichnung</strong> und <strong>Benachrichtigungen und externe Kopie</strong> unter <strong>Aufzeichnung</strong>; <strong>Sprache, Zeit und Darstellung</strong> unter <strong>Panel</strong>; die Expertenseiten unter <strong>Weitere Tools</strong>. Neben der Liste zeigt eine Karte, ob die empfohlenen Werte aktiv sind, mit den wichtigsten Werten und <strong>Letzte Änderung rückgängig machen</strong>, und <strong>Letzte Änderungen</strong> listet die letzten Änderungen auf.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Ein Abschnitt öffnet sich in einem Fenster über der Liste und hat eine eigene Adresse, etwa <code>/settings/connection</code>. Der Zurück-Pfeil, die Schließen-Schaltfläche, Escape, ein Klick außerhalb des Fensters und die Zurück-Schaltfläche des Browsers führen zur Liste zurück. <strong>Welche Chats?</strong> wird mit <strong>Chatauswahl speichern</strong> gespeichert; beim Schließen mit ungespeicherten Änderungen erscheint zuerst eine Rückfrage. Jede Änderung zeigt 20 Sekunden lang <strong>Rückgängig</strong>, und jeder Eintrag unter <strong>Letzte Änderungen</strong> lässt sich später rückgängig machen. Ein Rückgängigmachen ist ein neuer <code>settings.changed</code>-Eintrag im Journal und stellt auch benutzerdefinierte Dateilimits wieder her.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Profilübersicht",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Kennzahlen, beobachtete Profile und durchsuchbare Abschnitte mit Links zu Chat-Einträgen."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Kennzahlen, beobachtete Profile und durchsuchbare Abschnitte mit Links zu Chat-Einträgen.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: das englische Original desselben Berichts, wenn die Berichtssprache nicht Englisch ist, auf dieselbe Weise versiegelt und signiert und im signierten Manifest unter <code>report.original</code> genannt. Der Bericht in der gewählten Sprache beginnt mit der Empfehlung, das englische Original mit einer beglaubigten oder vereidigten Übersetzung einzureichen; siehe <a href=\"TRANSLATION.md\">Berichte für Gerichte übersetzen</a>."
 },
 "modes": {
 "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",

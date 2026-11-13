@@ -478,7 +478,10 @@
 "Development": "Sviluppo",
 "Acquisition and complete export rates for two fresh workloads": "Tassi di acquisizione ed esportazione completa per due nuovi carichi di lavoro",
 "t.me/s page read live, or Desktop export": "t.me/s: lettura in tempo reale della pagina o esportazione su desktop",
-"The 106-day GDPR file": "Il fascicolo GDPR di 106 giorni"
+"The 106-day GDPR file": "Il fascicolo GDPR di 106 giorni",
+"Translating reports for court": "Tradurre i report per il tribunale",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Quale file è l’originale, cosa depositare con una traduzione certificata e quali termini mantengono i traduttori.",
+"translation certified sworn translator court english original terms glossary": "traduzione certificata giurata traduttore tribunale originale inglese termini glossario"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Sta solo dando un’occhiata? Faccia doppio clic su <code>scripts\\Demo.cmd</code> per una demo isolata. Non è necessario effettuare l’accesso a Telegram.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "La pagina delle impostazioni è un elenco. La scheda dell’account in alto apre <strong>Account Telegram</strong>. Sotto, ogni riga indica una sezione e il valore in uso: <strong>Quali chat?</strong> e <strong>Connessione</strong> in <strong>Account</strong>; <strong>Obiettivo</strong>, <strong>Registrazione e file</strong>, <strong>Protezione della registrazione</strong> e <strong>Notifiche e copia esterna</strong> in <strong>Registrazione</strong>; <strong>Lingua, ora e aspetto</strong> in <strong>Pannello</strong>; e le pagine per esperti in <strong>Altri strumenti</strong>. Accanto all’elenco una scheda indica se i valori consigliati sono attivi, con i valori principali e <strong>Annulla l’ultima modifica</strong>, e <strong>Modifiche recenti</strong> elenca le ultime modifiche.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Una sezione si apre in una finestra sopra l’elenco e ha un proprio indirizzo, come <code>/settings/connection</code>. La freccia indietro, il pulsante di chiusura, Esc, un clic fuori dalla finestra e il pulsante Indietro del browser riportano all’elenco. <strong>Quali chat?</strong> si salva con <strong>Salva la selezione delle chat</strong>; chiudendo con modifiche non salvate viene chiesta prima una conferma. Ogni modifica mostra <strong>Annulla</strong> per 20 secondi, e ogni voce di <strong>Modifiche recenti</strong> può essere annullata in seguito. Un annullamento è un nuovo record <code>settings.changed</code> nel registro e ripristina anche i limiti dei file personalizzati.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Panoramica del profilo",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Dati principali, profili osservati e sezioni consultabili con link ai record delle chat."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Dati principali, profili osservati e sezioni consultabili con link ai record delle chat.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: l’originale inglese dello stesso report quando la lingua del report non è l’inglese, sigillato e firmato allo stesso modo e indicato nel manifesto firmato sotto <code>report.original</code>. Il report nella lingua scelta si apre con la raccomandazione di depositare l’originale inglese con una traduzione certificata o giurata; vedere <a href=\"TRANSLATION.md\">Tradurre i report per il tribunale</a>."
 },
 "modes": {
 "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",

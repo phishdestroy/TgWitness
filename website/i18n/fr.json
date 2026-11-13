@@ -478,7 +478,10 @@
 "Development": "Développement",
 "Acquisition and complete export rates for two fresh workloads": "Taux d’acquisition et d’exportation complets pour deux nouvelles charges de travail",
 "t.me/s page read live, or Desktop export": "t.me/s : lecture en direct de la page ou exportation vers le bureau",
-"The 106-day GDPR file": "Le dossier RGPD de 106 jours"
+"The 106-day GDPR file": "Le dossier RGPD de 106 jours",
+"Translating reports for court": "Traduire les rapports pour la justice",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Quel fichier est l’original, quoi déposer avec une traduction certifiée et quels termes les traducteurs conservent.",
+"translation certified sworn translator court english original terms glossary": "traduction certifiée assermentée traducteur tribunal original anglais termes glossaire"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Vous souhaitez simplement découvrir l&#x27;outil ? Double-cliquez sur <code>scripts\\Demo.cmd</code> pour accéder à une démo isolée. Aucune connexion à Telegram n&#x27;est nécessaire.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "La page des paramètres est une liste. La carte du compte, en haut, ouvre <strong>Compte Telegram</strong>. En dessous, chaque ligne nomme une section et la valeur utilisée : <strong>Quelles discussions ?</strong> et <strong>Connexion</strong> sous <strong>Compte</strong> ; <strong>Objectif</strong>, <strong>Enregistrement et fichiers</strong>, <strong>Protection de l'enregistrement</strong> et <strong>Notifications et copie externe</strong> sous <strong>Enregistrement</strong> ; <strong>Langue, heure et apparence</strong> sous <strong>Panneau</strong> ; et les pages expertes sous <strong>Autres outils</strong>. À côté de la liste, une carte indique si les valeurs recommandées sont actives, avec les principales valeurs et <strong>Annuler la dernière modification</strong>, et <strong>Modifications récentes</strong> liste les dernières modifications.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Une section s’ouvre dans une fenêtre au-dessus de la liste et possède sa propre adresse, comme <code>/settings/connection</code>. La flèche retour, le bouton de fermeture, Échap, un clic hors de la fenêtre et le bouton Retour du navigateur ramènent à la liste. <strong>Quelles discussions ?</strong> s’enregistre avec <strong>Enregistrer la sélection de discussions</strong> ; fermer avec des modifications non enregistrées demande d’abord confirmation. Chaque modification affiche <strong>Annuler</strong> pendant 20 secondes, et chaque entrée de <strong>Modifications récentes</strong> peut être annulée plus tard. Une annulation est un nouvel enregistrement <code>settings.changed</code> dans le journal et rétablit aussi les limites de fichiers personnalisées.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Aperçu du profil",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Chiffres clés, profils observés et sections consultables avec liens vers les enregistrements des discussions."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Chiffres clés, profils observés et sections consultables avec liens vers les enregistrements des discussions.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code> : l’original anglais du même rapport lorsque la langue du rapport n’est pas l’anglais, scellé et signé de la même manière et désigné sous <code>report.original</code> dans le manifeste signé. Le rapport dans la langue choisie commence par la recommandation de déposer l’original anglais avec une traduction certifiée ou assermentée ; voir <a href=\"TRANSLATION.md\">Traduire les rapports pour la justice</a>."
 },
 "modes": {
 "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",

@@ -478,7 +478,10 @@
 "Development": "開発",
 "Acquisition and complete export rates for two fresh workloads": "2つの新しいワークロードにおける取得率および完全エクスポート率",
 "t.me/s page read live, or Desktop export": "t.me/s ページをリアルタイムで閲覧、またはデスクトップへエクスポート",
-"The 106-day GDPR file": "106日間のGDPRファイル"
+"The 106-day GDPR file": "106日間のGDPRファイル",
+"Translating reports for court": "裁判所向けレポートの翻訳",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "どのファイルが原本か、認証翻訳とともに何を提出するか、翻訳者が保持する用語。",
+"translation certified sworn translator court english original terms glossary": "翻訳 認証 宣誓 翻訳者 裁判所 英語 原本 用語 用語集"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "まずは試してみたいですか？「<code>scripts\\Demo.cmd</code>」をダブルクリックすると、独立したデモ環境をご利用いただけます。Telegramへのログインは不要です。",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "設定ページはリストです。上部のアカウントカードは<strong>Telegramアカウント</strong>を開きます。その下の各行は、セクション名と使用中の値を示します。<strong>アカウント</strong>には<strong>どのチャット？</strong>と<strong>接続</strong>、<strong>記録</strong>には<strong>目的</strong>、<strong>記録とファイル</strong>、<strong>記録の保護</strong>、<strong>通知と外部コピー</strong>、<strong>パネル</strong>には<strong>言語、時刻、外観</strong>、そして<strong>その他のツール</strong>にはエキスパート向けページがあります。リストの横のカードは、推奨値が有効かどうかを主な値と<strong>直前の変更を元に戻す</strong>とともに示し、<strong>最近の変更点</strong>は最近の編集を一覧表示します。",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "セクションはリストの上のウィンドウで開き、<code>/settings/connection</code> のような独自のアドレスを持ちます。戻る矢印、閉じるボタン、Escape、ウィンドウ外のクリック、ブラウザーの戻るボタンでリストに戻ります。<strong>どのチャット？</strong>は<strong>チャットの選択を保存</strong>で保存します。未保存の変更があるまま閉じると、先に確認が表示されます。変更のたびに<strong>元に戻す</strong>が 20 秒間表示され、<strong>最近の変更点</strong>の各項目は後から取り消せます。取り消しはジャーナル内の新しい <code>settings.changed</code> 記録であり、カスタムのファイル上限も元に戻します。",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "プロファイル概要",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "主要な数値、観測されたプロファイル、チャット記録へのリンク付きの検索可能なセクション。"
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "主要な数値、観測されたプロファイル、チャット記録へのリンク付きの検索可能なセクション。",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：レポートの言語が英語でない場合の、同じレポートの英語の原本です。同じ方法で封印・署名され、署名付きマニフェストの <code>report.original</code> に記載されます。選択した言語のレポートは、英語の原本を認証翻訳または宣誓翻訳とともに提出するよう勧める注記で始まります。<a href=\"TRANSLATION.md\">裁判所向けレポートの翻訳</a>を参照してください。"
 },
 "modes": {
 "modes.actions.body": "プレビュー、リクエスト、および結果の受信確認には署名が付与されます。ボタンが押される前に、サーバーはメッセージを再度取得し、変更されたキーボードを拒否します。返されたコールバックのテキストおよびURLは、記録されたコンテキストとして残ります。",
