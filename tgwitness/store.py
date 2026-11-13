@@ -152,6 +152,7 @@ class Store:
 
     def append(self, kind, payload, chat_id=None, message_id=None, actor_id=None, source_at=None,
                media_job=None):
+        payload = json.loads(json.dumps(payload, ensure_ascii=False, allow_nan=False))
         with self.transaction():
             tail = self.db.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
             event = dict(seq=tail["seq"] + 1 if tail else 1, observed_at=utcnow(),
