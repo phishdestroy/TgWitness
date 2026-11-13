@@ -333,6 +333,7 @@
   .journal-filter-row { flex-wrap: nowrap; }
   .journal-filter-row > .journal-type-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
   .journal-filter-row:has(> .journal-more-filters[open]) { flex-wrap: wrap; }
+  .journal-filter-row:has(> .journal-more-filters[open]) > .journal-type-filters { flex-basis: 100%; flex-wrap: wrap; overflow: visible; }
   .workspace[data-current-view="chats"] .chat-title p { white-space: normal; overflow: visible; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 }
 .notify-button b { background: var(--accent); }
