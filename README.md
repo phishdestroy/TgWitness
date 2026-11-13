@@ -152,6 +152,16 @@ TgWitness takes no side: the same checks apply to the operator and the project.
 
 <!-- authors-manifesto:end -->
 
+<a name="review-notes"></a>
+
+## Review notes
+
+- **History.** TgWitness was developed and tested for about six months before publication. This repository starts with a squashed import (`8fb40fe0e`, 658 files). [Development history](docs/QUESTIONS-AND-CHECKS.md#development-history)
+- **Tests.** The regression suite of 126 test modules (about 950 test functions) runs in a private validation environment with synthetic accounts and a fake Telegram transport; test files are excluded from Git and source archives. Public CI runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and verifier fuzzing. [Tests and CI](docs/QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)
+- **Verifier.** `tgwitness/verify.py` is assembled from 21 modules in `tgwitness/verifier/`. The journal and signature checks (`common`, `chain`, `journal`) total 22 KB; a third of the file is compressed translation data. [Verifier sources](tgwitness/verifier/README.md)
+- **Telegram client.** Sign-in uses built-in public API pairs unless you enter your own, and each observation records which pair was used. [API pairs](docs/QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
+- **Defaults.** New workspaces connect through public MTProxy lists. The vault key stays in the data directory unless a new installation uses an external master key. [Connection security](docs/CONNECTION-SECURITY.md#external-master-key)
+
 ## Explore more
 
 <details>

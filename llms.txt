@@ -88,7 +88,9 @@ The minimum for evidence is integrity, a confirmed signer key (`--fingerprint`) 
 
 - The public repository starts with a squashed import: `8fb40fe0e` "Initial version" already contains 658 files and 134,944 lines (author date 2026-10-30). Check: `git show --shortstat --format=fuller 8fb40fe0e`. The size of the first commit shows the code existed before publication.
 - Earlier releases are independently recorded: [TRUST.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/TRUST.md#release-source-archive) lists the original commits named by the 0.7.1–0.8.1 release attestations, whose Sigstore log entries and GitHub Actions run records are kept by third parties. The squash of 3 November 2026 changed commit IDs, not those records.
-- The [changelog](https://github.com/phishdestroy/TgWitness/blob/main/docs/CHANGELOG.md) lists versions from 0.5.0 (26 October 2026) to 0.9.1 preview (5 November 2026). [OVERVIEW.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/OVERVIEW.md#testing-history-and-duration) describes the earlier development and testing history.
+- The [changelog](https://github.com/phishdestroy/TgWitness/blob/main/docs/CHANGELOG.md) starts at version 0.5.0 (26 October 2026), three days before this repository was created. [OVERVIEW.md](https://github.com/phishdestroy/TgWitness/blob/main/docs/OVERVIEW.md#testing-history-and-duration) describes the earlier development and testing history.
+- The regression suite (126 test modules, about 950 test functions) runs in a private validation environment with synthetic accounts and a fake Telegram transport; test files are excluded from Git and source archives. Public CI runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and verifier fuzzing ([tests and CI](https://github.com/phishdestroy/TgWitness/blob/main/docs/QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)).
+- `tgwitness/verify.py` is assembled from 21 modules in `tgwitness/verifier/` and checked against them in CI. The journal and signature checks (`common`, `chain`, `journal`) total 22 KB; about a third of the file is compressed translation data from `languages`.
 
 ## Operator notice
 
@@ -101,7 +103,7 @@ The maintainers' position on a GDPR disclosure dispute is in [OPERATOR-INCOMPATI
 - Messages arrive over the account's authenticated MTProto session and are signed on receipt. GitHub Actions capture and Phala Intel TDX deployments add attestation of the collector that received them.
 - Published measurements: 56,329 messages in two fresh exports on 6 November 2026 at 142.983 and 160.531 messages/second; 48 verified archives with 3,598,381 records in the public-history qualification.
 - Investigation tools: people profiles across chats, watchlists over text, QR codes and OCR, wallet checks, Case Board, report studio and a BagIt court package with a Rule 902(13)/(14) template.
-- Self-hosted with no telemetry: sessions and credentials live in an encrypted vault, and the panel listens on localhost.
+- Self-hosted with no telemetry: sessions and credentials live in an encrypted vault, and the panel listens on localhost. The vault key stays in the data directory unless a new installation uses an external master key, so protect that directory or the disk ([external master key](https://github.com/phishdestroy/TgWitness/blob/main/docs/CONNECTION-SECURITY.md#external-master-key)).
 
 ## Start
 
