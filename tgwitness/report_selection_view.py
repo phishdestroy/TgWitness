@@ -1,5 +1,7 @@
 from html import escape
 
+from .case_assessment import number_text, result_text
+
 
 TITLE = "Selected data"
 SCOPE_NOTE = ("The charts, message histories and transcript use this selection. Integrity, custody and coverage "
@@ -47,8 +49,8 @@ def scope_rows(material, say):
     selection, counts, source = material["selection"], material["counts"], material["source"]
     picked = picked_messages(selection) if selection["enabled"] else ""
     absent = listed(material.get("messages_not_found") or []) if picked else ""
-    return [(say("Selected records"), str(counts["selected_records"])),
-            (say("Source journal records"), str(source["records"])),
+    return [(say("Selected records"), number_text(counts["selected_records"], say)),
+            (say("Source journal records"), number_text(source["records"], say)),
             (say("Chats"), ", ".join([*map(str, selection["chats"]), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))])
              or ("—" if picked else say("All chats"))),
             *([(say("Selected messages"), picked)] if picked else []),
@@ -86,8 +88,8 @@ def html(material, say):
         if shared:
             out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
         if gaps["ids_total"]:
-            out += '<p class="lead">' + e(say("Unobserved IDs: {ids} in {ranges} ranges.",
-                                            ids=gaps["ids_total"], ranges=gaps["ranges_total"])) + '</p>'
+            out += '<p class="lead">' + e(result_text({"text": "Unobserved IDs: {ids} in {ranges} ranges.", "values": {
+                "ids": gaps["ids_total"], "ranges": gaps["ranges_total"]}}, say)) + '</p>'
         rows = gaps.get("rows") or []
         if rows:
             out += table([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],
@@ -98,7 +100,7 @@ def html(material, say):
         else:
             out += '<p>' + e(say("No unobserved message IDs were found between the saved boundaries.")) + '</p>'
         if gaps.get("truncated"):
-            out += '<p>' + e(say("Showing {shown} of {total} ranges.", shown=len(rows), total=gaps["ranges_total"])) + '</p>'
+            out += '<p>' + e(result_text({"text": "Showing {shown} of {total} ranges.", "values": {"shown": len(rows), "total": gaps["ranges_total"]}}, say)) + '</p>'
     return out + '</section>'
 
 
@@ -125,7 +127,8 @@ def pdf(lay, material):
     if shared:
         lay.text(say(SHARED_NUMBERING, n=shared), size=9)
     if gaps["ids_total"]:
-        lay.text(say("Unobserved IDs: {ids} in {ranges} ranges.", ids=gaps["ids_total"], ranges=gaps["ranges_total"]))
+        lay.text(result_text({"text": "Unobserved IDs: {ids} in {ranges} ranges.", "values": {
+            "ids": gaps["ids_total"], "ranges": gaps["ranges_total"]}}, say))
     rows = gaps.get("rows") or []
     if rows:
         lay.grid([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],
@@ -135,4 +138,4 @@ def pdf(lay, material):
     else:
         lay.text(say("No unobserved message IDs were found between the saved boundaries."))
     if gaps.get("truncated"):
-        lay.text(say("Showing {shown} of {total} ranges.", shown=len(rows), total=gaps["ranges_total"]))
+        lay.text(result_text({"text": "Showing {shown} of {total} ranges.", "values": {"shown": len(rows), "total": gaps["ranges_total"]}}, say))
