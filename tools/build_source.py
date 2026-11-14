@@ -117,15 +117,15 @@ DIRECTORIES = {
     ".github": {".md", ".yml", ".yaml"},
     "website": {".md", ".html", ".css", ".js", ".json"},
 }
-LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
-             "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
+LANGUAGES = ("uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
+             "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn", "ru")
 GUIDE_LANGUAGES = ("fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")
 PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.json", "client_profiles.json", "jurisdictions.json", "verifier_languages.json", "analysis_words.json", *("locales/" + language + ".json" for language in LANGUAGES),
                 *("schemas/board-" + name + ".json" for name in ("bookmark", "highlight", "slice", "collection", "comment", "status", "move", "remove")),
                 "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}
-NARRATIVE_LANGUAGES = ("en", "de", "fr", "es", "it", "pt", "nl", "pl", "cs", "sk", "uk", "ru", "ro",
+NARRATIVE_LANGUAGES = ("en", "de", "fr", "es", "it", "pt", "nl", "pl", "cs", "sk", "uk", "ro",
                        "bg", "hu", "el", "sv", "da", "fi", "no", "lt", "lv", "et", "tr", "ja", "zh", "zh-Hant",
-                       "ko", "ar", "he", "fa", "hi", "ur", "bn", "id", "ms", "vi", "th", "uz")
+                       "ko", "ar", "he", "fa", "hi", "ur", "bn", "id", "ms", "vi", "th", "uz", "ru")
 EXAMINATION_CODES = ("AE", "AT", "AU", "BD", "BE", "BG", "BR", "CA", "CH", "CN", "CZ", "DE", "DK", "EE", "ES", "ET", "FI",
                      "FR", "GR", "HK", "HU", "ID", "IE", "IL", "IN", "IR", "IT", "JP", "KR", "LT", "LV", "MX", "MY", "NL",
                      "NO", "PH", "PK", "PL", "PT", "RO", "RU", "SA", "SE", "SG", "SK", "TH", "TR", "TW", "UA", "UK",

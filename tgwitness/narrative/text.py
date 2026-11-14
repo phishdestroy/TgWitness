@@ -3,9 +3,9 @@ import json
 from pathlib import Path
 import re
 
-LANGUAGES = ('en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'pl', 'cs', 'sk', 'uk', 'ru', 'ro', 'bg',
+LANGUAGES = ('en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'pl', 'cs', 'sk', 'uk', 'ro', 'bg',
              'hu', 'el', 'sv', 'da', 'fi', 'no', 'lt', 'lv', 'et', 'tr', 'ja', 'zh', 'zh-Hant', 'ko',
-             'ar', 'he', 'fa', 'hi', 'ur', 'bn', 'id', 'ms', 'vi', 'th', 'uz')
+             'ar', 'he', 'fa', 'hi', 'ur', 'bn', 'id', 'ms', 'vi', 'th', 'uz', 'ru')
 ROOT = Path(__file__).parent
 
 

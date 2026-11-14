@@ -4,9 +4,9 @@ from pathlib import Path
 
 from .failures import TEXTS
 
-LANGUAGES = ("en", "ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
-             "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
-GUIDE_LANGUAGES = (*LANGUAGES, "am")
+LANGUAGES = ("en", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
+             "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn", "ru")
+GUIDE_LANGUAGES = tuple(sorted((*LANGUAGES, "am"), key=lambda code: code == "ru"))
 COOKIE = "tgwitness-lang"
 LOCALES = Path(__file__).parent / "locales"
 GUIDE_LOCALES = Path(__file__).parent / "guide_locales"
