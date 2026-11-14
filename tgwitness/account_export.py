@@ -32,6 +32,7 @@ from .workers import complete_in_thread
 from .telegram_client import FLOOD_ERRORS
 
 KINDS = ("private", "bot", "group", "supergroup", "channel")
+FINAL_LOSS = ("account_banned", "account_deleted", "account_frozen", "session_duplicated")
 MEDIA = ("photo", "video", "video_message", "voice", "audio", "document", "sticker", "animation")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 CATEGORY_OPTIONS = {"profile": "include_profile", "contacts": "include_contacts", "sessions": "include_session_metadata",
@@ -860,7 +861,7 @@ class AccountExport:
         return "regular" if self.vault.read("account-export-" + job["job_id"]).get("takeout_declined") else "takeout"
 
     async def run(self, job):
-        from .collector import AUTHORIZATION_ERRORS
+        from .collector import AUTHORIZATION_ERRORS, loss_cause, loss_text
 
         directory, network = self.directory(job["job_id"]), None
         try:
@@ -980,9 +981,10 @@ class AccountExport:
             self.persist()
             self.store.append("account_export.completed", {"job_id": job["job_id"], "receipt_head_sha256": self.head,
                 "counts": self.counts, "complete_within_scope": self.current["phase"] == "done"})
-        except AUTHORIZATION_ERRORS:
+        except AUTHORIZATION_ERRORS as exc:
             self.current.update(phase="paused", current_chat=None, wait_until=None, delay_seconds=None,
-                wait_reason=None, error="Telegram authorization ended. Reconnect the same account, then resume from saved data.")
+                wait_reason=None, error=loss_text(exc) if loss_cause(exc) in FINAL_LOSS else
+                "Telegram authorization ended. Reconnect the same account, then resume from saved data.")
             self.persist()
         except errors.TakeoutInvalidError:
             if network is not None and hasattr(network, "invalidate"):
