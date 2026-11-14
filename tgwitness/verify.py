@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 6600795d8082a548698533d64fde080135ac179baa93776516b1c102bc9f761a
+# TgWitness verifier sources SHA-256: f71e0627ffc3990b0c35f03e4b70705e7e751655eb5d8ad75ec9067fed8db228
 """Standalone verifier"""
 import argparse
 import base64
@@ -61,6 +61,13 @@ class VerifierTooOld(ValueError):
 
 class CheckUnavailable(Exception):
     pass
+
+
+def utc_time(item, name):
+    if hasattr(item, name + "_utc"):
+        return getattr(item, name + "_utc")
+    value = getattr(item, name)
+    return value.replace(tzinfo=timezone.utc) if value is not None else None
 
 
 def safe_text(value):
@@ -1464,7 +1471,7 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
         chain.append(issuer)
         current = issuer
     for certificate in chain:
-        if not certificate.not_valid_before_utc <= when <= certificate.not_valid_after_utc:
+        if not utc_time(certificate, "not_valid_before") <= when <= utc_time(certificate, "not_valid_after"):
             raise ValueError("A certificate in the timestamp chain was not valid at the stamped time")
         for extension in certificate.extensions:
             if extension.critical and not isinstance(extension.value, (
@@ -1767,7 +1774,7 @@ def ocsp_responder(response, issuer):
             except (ValueError, TypeError, InvalidSignature, x509.ExtensionNotFound):
                 continue
             if (x509.oid.ExtendedKeyUsageOID.OCSP_SIGNING not in usage
-                    or not candidate.not_valid_before_utc <= response.produced_at_utc <= candidate.not_valid_after_utc):
+                    or not utc_time(candidate, "not_valid_before") <= utc_time(response, "produced_at") <= utc_time(candidate, "not_valid_after")):
                 continue
         key = candidate.public_key()
         try:
@@ -1801,8 +1808,8 @@ def revocation_status(kind, data, subject):
         ocsp_responder(response, issuer)
         if found.certificate_status == ocsp.OCSPCertStatus.UNKNOWN:
             raise ValueError("The OCSP responder does not know this signing certificate")
-        revoked = found.revocation_time_utc if found.certificate_status == ocsp.OCSPCertStatus.REVOKED else None
-        reason, issued, until = found.revocation_reason, found.this_update_utc, found.next_update_utc
+        revoked = utc_time(found, "revocation_time") if found.certificate_status == ocsp.OCSPCertStatus.REVOKED else None
+        reason, issued, until = found.revocation_reason, utc_time(found, "this_update"), utc_time(found, "next_update")
     elif kind == "crl":
         try:
             crl = x509.load_der_x509_crl(data)
@@ -1811,9 +1818,9 @@ def revocation_status(kind, data, subject):
         if crl.issuer != issuer.subject or not crl.is_signature_valid(issuer.public_key()):
             raise ValueError("The CRL is not signed by the issuer of the signing certificate")
         entry = crl.get_revoked_certificate_by_serial_number(signer.serial_number)
-        revoked = entry.revocation_date_utc if entry else None
+        revoked = utc_time(entry, "revocation_date") if entry else None
         reason = next((e.value.reason for e in entry.extensions if isinstance(e.value, x509.CRLReason)), None) if entry else None
-        issued, until = crl.last_update_utc, crl.next_update_utc
+        issued, until = utc_time(crl, "last_update"), utc_time(crl, "next_update")
     else:
         raise ValueError("Unknown revocation evidence: " + kind)
     if revoked is not None:
@@ -1826,7 +1833,7 @@ def revocation_status(kind, data, subject):
                           + (", for key compromise" if compromised else "") + " (" + source + ")"}
     if issued < when and (until is None or until < when):
         raise ValueError("The " + source + " answer of " + stamp_time(issued) + " expired before the stamped time")
-    if issued > signer.not_valid_after_utc:
+    if issued > utc_time(signer, "not_valid_after"):
         raise ValueError("The " + source + " answer was issued after the signing certificate expired")
     return {"status": "good", "source": source, "as_of": stamp_time(issued),
             "detail": "signing certificate not revoked as of " + stamp_time(issued) + " (" + source + ")"}
@@ -2009,7 +2016,7 @@ def tdx_crl(data, issuer, at, what):
         raise QuoteInvalid(what + " is unreadable") from None
     if crl.issuer != issuer.subject or not crl.is_signature_valid(issuer.public_key()):
         raise QuoteInvalid(what + " is not signed by " + issuer.subject.rfc4514_string())
-    if crl.last_update_utc > at or crl.next_update_utc is not None and at > crl.next_update_utc:
+    if utc_time(crl, "last_update") > at or utc_time(crl, "next_update") is not None and at > utc_time(crl, "next_update"):
         raise QuoteInvalid(what + " is not current at " + at.isoformat())
     return crl
 
@@ -2034,7 +2041,7 @@ def tdx_chain(chain, root, at, what, crls=None):
         if not constraints or not constraints.ca:
             raise QuoteInvalid(what + ": " + issuer.subject.rfc4514_string() + " is not a certificate authority")
         for checked in (certificate, issuer):
-            if not checked.not_valid_before_utc <= at <= checked.not_valid_after_utc:
+            if not utc_time(checked, "not_valid_before") <= at <= utc_time(checked, "not_valid_after"):
                 raise QuoteInvalid(what + ": " + checked.subject.rfc4514_string() + " is not valid at " + at.isoformat())
         if crls is not None:
             crl = crls.get(issuer.subject.public_bytes())
@@ -2209,7 +2216,7 @@ def tdx_problems(report):
 def tdx_tcb(quote, chain, collateral, root, at):
     crl_data = [bytes.fromhex(collateral[name]) for name in ("root_ca_crl", "pck_crl")]
     moments = [tdx_time(json.loads(collateral[name])["issueDate"]) for name in ("tcb_info", "qe_identity")]
-    at = max([at] + moments + [x509.load_der_x509_crl(data).last_update_utc for data in crl_data])
+    at = max([at] + moments + [utc_time(x509.load_der_x509_crl(data), "last_update") for data in crl_data])
     crls = {root.subject.public_bytes(): tdx_crl(crl_data[0], root, at, "Intel's root revocation list")}
     pck_ca = tdx_chain(tdx_certificates(collateral["pck_crl_issuer_chain"]), root, at,
                        "The PCK revocation list issuer", crls)[0]
@@ -2527,12 +2534,12 @@ def ers_check(data, measure, roots=None, now=None):
     late, proven = [], 0
     for position in range(1, len(stamps)):
         signer = stamps[position - 1]["signer"]
-        if signer is not None and stamps[position]["time"] > signer.not_valid_after_utc:
+        if signer is not None and stamps[position]["time"] > utc_time(signer, "not_valid_after"):
             late.append({"time": stamp_time(stamps[position]["time"]),
-                         "previous_expired": stamp_time(signer.not_valid_after_utc)})
+                         "previous_expired": stamp_time(utc_time(signer, "not_valid_after"))})
             proven = position
     newest, now = stamps[-1], now or datetime.now(timezone.utc)
-    expires = newest["signer"].not_valid_after_utc if newest["signer"] is not None else None
+    expires = utc_time(newest["signer"], "not_valid_after") if newest["signer"] is not None else None
     protection = {"time": stamp_time(newest["time"]), "algorithm": ers_algorithm_name(newest["algorithm"]),
                   "signer": newest["signer"].subject.rfc4514_string() if newest["signer"] is not None else None,
                   "expires": stamp_time(expires) if expires else None,

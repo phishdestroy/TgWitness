@@ -62,6 +62,13 @@ class CheckUnavailable(Exception):
     pass
 
 
+def utc_time(item, name):
+    if hasattr(item, name + "_utc"):
+        return getattr(item, name + "_utc")
+    value = getattr(item, name)
+    return value.replace(tzinfo=timezone.utc) if value is not None else None
+
+
 def safe_text(value):
     text = str(value)
     text = re.sub(r"\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07\x1b]*(?:\x07|\x1b\\))", "", text)

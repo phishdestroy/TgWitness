@@ -6,6 +6,7 @@ from .common import (
     read_member,
     strict_json,
     timezone,
+    utc_time,
     x509,
 )
 from .national import DIGEST_NAMES
@@ -172,12 +173,12 @@ def ers_check(data, measure, roots=None, now=None):
     late, proven = [], 0
     for position in range(1, len(stamps)):
         signer = stamps[position - 1]["signer"]
-        if signer is not None and stamps[position]["time"] > signer.not_valid_after_utc:
+        if signer is not None and stamps[position]["time"] > utc_time(signer, "not_valid_after"):
             late.append({"time": stamp_time(stamps[position]["time"]),
-                         "previous_expired": stamp_time(signer.not_valid_after_utc)})
+                         "previous_expired": stamp_time(utc_time(signer, "not_valid_after"))})
             proven = position
     newest, now = stamps[-1], now or datetime.now(timezone.utc)
-    expires = newest["signer"].not_valid_after_utc if newest["signer"] is not None else None
+    expires = utc_time(newest["signer"], "not_valid_after") if newest["signer"] is not None else None
     protection = {"time": stamp_time(newest["time"]), "algorithm": ers_algorithm_name(newest["algorithm"]),
                   "signer": newest["signer"].subject.rfc4514_string() if newest["signer"] is not None else None,
                   "expires": stamp_time(expires) if expires else None,
