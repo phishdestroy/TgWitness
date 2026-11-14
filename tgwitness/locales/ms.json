@@ -9114,7 +9114,7 @@
 "Mark stories as viewed": "Tandakan cerita sebagai sudah dilihat",
 "Marked as read. The request and its result are in the journal.": "Ditandakan sebagai telah dibaca. Permintaan dan hasilnya terdapat dalam jurnal.",
 "Messages marked as opened from the panel": "Mesej yang ditandakan sebagai dibuka dari panel",
-"No saved message waits to be marked as opened.": "Tiada mesej yang disimpan menunggu untuk ditandakan sebagai dibuka.",
+  "No saved message waits to be marked as opened.": "Tiada media atau mesej suara sekali pakai yang disimpan untuk ditandakan sebagai dibuka.",
 "No usable answer: {error}": "Tiada jawapan yang boleh digunakan: {error}",
 "Not answered: {error}": "Tidak dijawab: {error}",
 "Not checked: {error}": "Tidak diperiksa: {error}",
@@ -9376,5 +9376,9 @@
   "Only with the Mark as opened button": "Hanya dengan butang \"Tandakan media sebagai dibuka\"",
   "Only with the Mark stories as viewed button": "Hanya dengan butang \"Tandakan cerita sebagai sudah dilihat\"",
   "Mark as opened": "Tandakan media sebagai dibuka",
-  "Workspace settings": "Tetapan ruang kerja"
+  "Workspace settings": "Tetapan ruang kerja",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Kontener ini mengandungi {n} fail. EU DSS dengan tetapan lalai menolak kontener yang mempunyai lebih daripada 1000 fail.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram memutuskan bila pihak lain menerima resit dibaca: serta-merta, atau hanya bersama mesej seterusnya akaun ini dalam sembang.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram mengekalkan sembang ini pada satu peranti sahaja. TgWitness mengambil bahagian dengan kebenaran akaun ini sendiri dan merekod setiap mesej, pemasa, fail dan notis pemadaman dalam jurnal yang disahkan, juga selepas pihak lain memadamnya. Ia menghantar resit dibaca dan status menaip hanya seperti yang dipilih di bawah \"Apa yang dilihat pihak lain\", dan tidak pernah menghantar notis tangkapan skrin.",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "Resit cap masa bukan sebahagian daripada fail laporan ini. Arkib yang disahkan bagi jurnal ini (ZIP atau ASiC-E) mengandungi resit yang dibuat dalam Mod Bukti."
 }

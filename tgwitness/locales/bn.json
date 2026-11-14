@@ -9162,7 +9162,7 @@
 "Mark stories as viewed": "কাহিনীগুলো দেখা হয়েছে হিসেবে চিহ্নিত করুন",
 "Marked as read. The request and its result are in the journal.": "পড়া হিসেবে চিহ্নিত। অনুরোধ এবং এর ফলাফল জার্নালে রয়েছে।",
 "Messages marked as opened from the panel": "প্যানেল থেকে খোলা হিসেবে চিহ্নিত বার্তাগুলি",
-"No saved message waits to be marked as opened.": "কোনও সংরক্ষিত বার্তা খোলা হিসেবে চিহ্নিত করার অপেক্ষায় নেই।",
+  "No saved message waits to be marked as opened.": "কোনও সংরক্ষিত এককালীন মিডিয়া বা ভয়েস মেসেজ নেই যা খোলা হিসেবে চিহ্নিত করা যায়।",
 "No usable answer: {error}": "কোনও ব্যবহারযোগ্য উত্তর নেই: {error}",
 "Not answered: {error}": "উত্তর দেওয়া হয়নি: {error}",
 "Not checked: {error}": "চেক করা হয়নি: {error}",
@@ -9424,5 +9424,9 @@
   "Only with the Mark as opened button": "শুধুমাত্র \"মিডিয়া খোলা হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
   "Only with the Mark stories as viewed button": "শুধুমাত্র \"কাহিনীগুলো দেখা হয়েছে হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
   "Mark as opened": "মিডিয়া খোলা হিসেবে চিহ্নিত করুন",
-  "Workspace settings": "ওয়ার্কস্পেসের সেটিংস"
+  "Workspace settings": "ওয়ার্কস্পেসের সেটিংস",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "এই কন্টেইনারে {n}টি ফাইল রয়েছে। ডিফল্ট সেটিংস সহ EU DSS ১০০০টির বেশি ফাইলের কন্টেইনার প্রত্যাখ্যান করে।",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram নির্ধারণ করে 'অন্য পক্ষ' কখন রিড রসিট পাবে: সঙ্গে সঙ্গে, নাকি চ্যাটে এই অ্যাকাউন্টের পরবর্তী বার্তার সঙ্গেই।",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram এই চ্যাটগুলো শুধুমাত্র একটি ডিভাইসেই রাখে। TgWitness এই অ্যাকাউন্টের নিজস্ব অনুমোদনে অংশগ্রহণ করে এবং স্বাক্ষরিত জার্নালে প্রতিটি বার্তা, টাইমার, ফাইল এবং মুছে ফেলার বিজ্ঞপ্তি রেকর্ড করে, অন্য পক্ষ সেগুলো মুছে ফেললেও। এটি শুধুমাত্র \"অন্য পক্ষ যা দেখে\"-এর অধীনে নির্বাচিত হলে রিড রসিদ এবং টাইপিং স্ট্যাটাস পাঠায়, এবং কখনই স্ক্রিনশট বিজ্ঞপ্তি পাঠায় না।",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "টাইমস্ট্যাম্প রসিদগুলি এই রিপোর্ট ফাইলের অংশ নয়। এই জার্নালের স্বাক্ষরিত আর্কাইভ (ZIPবা ASiC-E) এভিডেন্স মোডে তৈরি রসিদগুলি ধারণ করে।"
 }

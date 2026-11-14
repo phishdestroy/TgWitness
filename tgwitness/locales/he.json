@@ -9210,7 +9210,7 @@
 "Mark stories as viewed": "סימון סיפורים כ\"נצפו\"",
 "Marked as read. The request and its result are in the journal.": "מסומן כנקרא. הבקשה ותוצאתה מופיעות ביומן.",
 "Messages marked as opened from the panel": "הודעות המסומנות כ\"נפתחו\" מהלוח",
-"No saved message waits to be marked as opened.": "אין הודעות שמורות הממתינות לסימון כ\"נפתחו\".",
+  "No saved message waits to be marked as opened.": "לא נותרו מדיה חד-פעמית או הודעות קוליות שמורות שניתן לסמן כפתוחות.",
 "No usable answer: {error}": "אין תשובה שמישה: {error}",
 "Not answered: {error}": "לא נענה: {error}",
 "Not checked: {error}": "לא נבדק: {error}",
@@ -9472,5 +9472,9 @@
   "Only with the Mark as opened button": "רק באמצעות הכפתור \"סמן מדיה כפתוחה\"",
   "Only with the Mark stories as viewed button": "רק באמצעות הכפתור \"סימון סיפורים כ\"נצפו\"\"",
   "Mark as opened": "סמן מדיה כפתוחה",
-  "Workspace settings": "הגדרות סביבת העבודה"
+  "Workspace settings": "הגדרות סביבת העבודה",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "מכל זה מכיל {n} קבצים. EU DSS בהגדרות ברירת המחדל מסרב לקבל מכלים המכילים יותר מ-1,000 קבצים.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram מחליט מתי הצד השני מקבל אישור קריאה: מיד, או רק יחד עם ההודעה הבאה שהחשבון הזה ישלח בצ'אט.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram שומר את הצ'אטים הללו במכשיר אחד בלבד. TgWitness פועל באישור החשבון עצמו ומתעד כל הודעה, טיימר, קובץ והודעת מחיקה ביומן החתום, גם לאחר שהצד השני מוחק אותם. הוא שולח אישורי קריאה ומצב ההקלדה רק כפי שנבחר תחת \"מה שהצד השני רואה\", ולעולם אינו שולח התראות על צילומי מסך.",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "קבלות חותמות הזמן אינן חלק מקובץ הדוח הזה. הארכיון החתום של יומן זה (בפורמט ZIP או ASiC-E) מכיל את הקבלות שנוצרו במצב ראיות."
 }

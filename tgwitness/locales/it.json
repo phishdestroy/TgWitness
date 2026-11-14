@@ -9170,7 +9170,7 @@
 "Mark stories as viewed": "Contrassegna le storie come lette",
 "Marked as read. The request and its result are in the journal.": "Contrassegnato come letto. La richiesta e il relativo risultato sono riportati nel registro.",
 "Messages marked as opened from the panel": "Messaggi contrassegnati come letti dal pannello",
-"No saved message waits to be marked as opened.": "Non ci sono messaggi salvati in attesa di essere contrassegnati come letti.",
+  "No saved message waits to be marked as opened.": "Non sono rimasti file multimediali o messaggi vocali monouso salvati da contrassegnare come aperti.",
 "No usable answer: {error}": "Nessuna risposta valida: {error}",
 "Not answered: {error}": "Nessuna risposta: {error}",
 "Not checked: {error}": "Non verificato: {error}",
@@ -9432,5 +9432,9 @@
   "Only with the Mark as opened button": "Solo con il pulsante \"Contrassegna i file multimediali come aperti\"",
   "Only with the Mark stories as viewed button": "Solo con il pulsante \"Contrassegna le storie come lette\"",
   "Mark as opened": "Contrassegna i file multimediali come aperti",
-  "Workspace settings": "Impostazioni dell’area di lavoro"
+  "Workspace settings": "Impostazioni dell’area di lavoro",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Questo contenitore contiene {n} file. EU DSS, con le impostazioni predefinite, rifiuta i contenitori con più di 1000 file.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram decide quando l’altra parte riceve una conferma di lettura: immediatamente o solo con il messaggio successivo inviato da questo account nella chat.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram conserva queste chat su un solo dispositivo. TgWitness, con l’autorizzazione dell’account stesso, registra ogni messaggio, timer, file e notifica di cancellazione nel registro firmato, anche dopo che l’altra parte li ha eliminati. Invia le conferme di lettura e lo stato di digitazione solo secondo quanto selezionato in «Cosa vede l'altra parte», e non invia mai notifiche di screenshot.",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "Le ricevute dei timestamp non fanno parte di questo file di rapporto. L’archivio firmato di questo registro (in formato ZIP o ASiC-E) contiene le ricevute generate in modalità \"Evidence\"."
 }

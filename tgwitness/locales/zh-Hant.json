@@ -9114,7 +9114,7 @@
 "Mark stories as viewed": "將動態標記為已讀",
 "Marked as read. The request and its result are in the journal.": "已標記為已讀。該請求及其結果皆記錄於日誌中。",
 "Messages marked as opened from the panel": "從面板中標記為已讀的訊息",
-"No saved message waits to be marked as opened.": "沒有任何已儲存的訊息等待被標記為已讀。",
+  "No saved message waits to be marked as opened.": "沒有任何已儲存的一次性媒體或語音訊息可供標記為已開啟。",
 "No usable answer: {error}": "無可用答案：{error}",
 "Not answered: {error}": "未獲回覆：{error}",
 "Not checked: {error}": "未檢查：{error}",
@@ -9376,5 +9376,9 @@
   "Only with the Mark as opened button": "僅限透過「將媒體標記為已開啟」按鈕",
   "Only with the Mark stories as viewed button": "僅限透過「將動態標記為已讀」按鈕",
   "Mark as opened": "將媒體標記為已開啟",
-  "Workspace settings": "工作區的設定"
+  "Workspace settings": "工作區的設定",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "此容器內含 {n} 個檔案。EU DSS 在預設設定下會拒絕處理包含超過 1000 個檔案的容器。",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram 會決定對方何時收到已讀回執：是立即收到，還是僅在該帳號於該聊天室發送下一則訊息時一併收到。",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram 僅將這些聊天記錄保留在單一裝置上。TgWitness 透過該帳號自身的授權參與其中，並將每則訊息、計時器、檔案及刪除通知記錄在簽署過的日誌中，即使對方已刪除這些內容亦然。它僅會根據「對方所見的內容」下的設定選擇性地傳送已讀回執和輸入狀態，且絕不會傳送螢幕截圖通知。",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "時間戳收據並非本報告檔案的一部分。此日誌的簽名存檔（ZIP 或 ASiC-E）包含在「證據模式」下產生的收據。"
 }

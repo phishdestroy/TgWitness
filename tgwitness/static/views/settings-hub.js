@@ -496,7 +496,7 @@ export function createSettingsHub(ctx) {
     }
     if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);
       const seen=node('div','hub-visibility');detail.append(seen);
-      import('./visibility.js?v=1').then(({createVisibility})=>createVisibility({json,tr,node,icon:ctx.icon,toast,may:ctx.may||(()=>true)}).workspace(seen)).catch(error=>toast(error.message,true));}
+      import('./visibility.js?v=2').then(({createVisibility})=>createVisibility({json,tr,node,icon:ctx.icon,toast,may:ctx.may||(()=>true)}).workspace(seen)).catch(error=>toast(error.message,true));}
     if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
     if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
     if(shownForm&&formSection(shownForm)===section)move($(shownForm),detail);

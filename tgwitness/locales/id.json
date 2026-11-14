@@ -9114,7 +9114,7 @@
 "Mark stories as viewed": "Tandai cerita sebagai sudah dibaca",
 "Marked as read. The request and its result are in the journal.": "Ditandai sebagai sudah dibaca. Permintaan dan hasilnya tercatat di jurnal.",
 "Messages marked as opened from the panel": "Pesan yang ditandai sebagai telah dibuka dari panel",
-"No saved message waits to be marked as opened.": "Tidak ada pesan yang tersimpan yang menunggu untuk ditandai sebagai telah dibuka.",
+  "No saved message waits to be marked as opened.": "Tidak ada media sekali pakai atau pesan suara yang tersimpan yang dapat ditandai sebagai telah dibuka.",
 "No usable answer: {error}": "Tidak ada jawaban yang valid: {error}",
 "Not answered: {error}": "Belum dijawab: {error}",
 "Not checked: {error}": "Belum diperiksa: {error}",
@@ -9376,5 +9376,9 @@
   "Only with the Mark as opened button": "Hanya dengan tombol \"Tandai media sebagai telah dibuka\"",
   "Only with the Mark stories as viewed button": "Hanya dengan tombol \"Tandai cerita sebagai sudah dibaca\"",
   "Mark as opened": "Tandai media sebagai telah dibuka",
-  "Workspace settings": "Pengaturan ruang kerja"
+  "Workspace settings": "Pengaturan ruang kerja",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Kontainer ini berisi {n} berkas. EU DSS dengan pengaturan default menolak kontainer yang berisi lebih dari 1.000 berkas.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram-lah yang menentukan kapan pihak lain menerima tanda telah dibaca: seketika, atau hanya bersamaan dengan pesan berikutnya yang dikirim akun ini dalam obrolan tersebut.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram menyimpan obrolan ini hanya di satu perangkat. TgWitness berpartisipasi dengan otorisasi akun ini sendiri dan mencatat setiap pesan, timer, file, dan pemberitahuan penghapusan dalam jurnal yang ditandatangani, bahkan setelah pihak lain menghapusnya. Aplikasi ini mengirimkan tanda terima telah dibaca dan status sedang mengetik hanya sesuai pilihan di bawah \"Apa yang dilihat oleh pihak lain\", dan tidak pernah mengirimkan pemberitahuan tangkapan layar.",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "Tanda terima cap waktu bukan bagian dari berkas laporan ini. Arsip yang ditandatangani dari jurnal ini (berformat ZIP atau ASiC-E) memuat tanda terima yang dibuat dalam Mode Bukti."
 }

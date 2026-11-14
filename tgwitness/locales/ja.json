@@ -9114,7 +9114,7 @@
 "Mark stories as viewed": "ストーリーを「既読」にする",
 "Marked as read. The request and its result are in the journal.": "既読としてマークされました。リクエストとその結果はジャーナルに記録されています。",
 "Messages marked as opened from the panel": "パネルから「開封済み」としてマークされたメッセージ",
-"No saved message waits to be marked as opened.": "「既読」としてマークされるのを待っている保存済みメッセージはありません。",
+  "No saved message waits to be marked as opened.": "「開封済み」としてマークできる保存済みの1回限りのメディアや音声メッセージが残っていません。",
 "No usable answer: {error}": "有効な回答がありません：{error}",
 "Not answered: {error}": "回答なし：{error}",
 "Not checked: {error}": "未確認：{error}",
@@ -9376,5 +9376,9 @@
   "Only with the Mark as opened button": "「メディアを「開封済み」としてマークする」ボタンを使用する場合のみ",
   "Only with the Mark stories as viewed button": "「ストーリーを「既読」にする」ボタンを使用する場合のみ",
   "Mark as opened": "メディアを「開封済み」としてマークする",
-  "Workspace settings": "ワークスペースの設定"
+  "Workspace settings": "ワークスペースの設定",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "このコンテナには{n}個のファイルが含まれています。EU DSSはデフォルト設定では、1000個を超えるファイルを含むコンテナを拒否します。",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegramは、相手が既読通知を受け取るタイミングを決定します。それは、即座に、あるいはこのアカウントがチャットで次に送信するメッセージと一緒にのみ、という形です。",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegramはこれらのチャットを1台のデバイスにのみ保存します。TgWitnessはこのアカウント自身の認証に基づいて動作し、相手側が削除した後であっても、すべてのメッセージ、タイマー、ファイル、削除通知を署名付きジャーナルに記録します。既読通知や入力中のステータスは「相手側に表示される内容」で選択された設定に従ってのみ送信され、スクリーンショットの通知は一切送信しません。",
+  "Timestamp receipts are not part of this report file. The signed archive of this journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.": "タイムスタンプのレシートは、このレポートファイルの一部ではありません。このジャーナルの署名付きアーカイブ（ZIPまたはASiC-E）には、「エビデンスモード」で作成されたレシートが含まれています。"
 }
