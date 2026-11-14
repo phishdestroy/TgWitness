@@ -9601,5 +9601,12 @@
   "Select at least one available account.": "利用可能なアカウントを少なくとも1つ選択してください。",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "利用可能な{n}個のアカウントが選択されました。各アカウントは独自の接続およびリクエスト制限を維持します。",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "各アカウントは、観測と並行して1つの履歴またはエクスポートタスクを実行します。一時停止の制御は独立しており、コミット済みのチャンクは一時停止後も利用可能です。",
-  "Select all available accounts": "利用可能なすべてのアカウントを選択"
+  "Select all available accounts": "利用可能なすべてのアカウントを選択",
+  "Clear search": "検索をクリア",
+  "Displayed version": "表示されているバージョン",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "検索およびフィルタ機能は、以前のバージョンを含め、このチャット内のすべての保存済みメッセージを対象とします。",
+  "Search match": "検索の一致",
+  "Search matched an earlier saved version.": "検索の結果、以前に保存されたバージョンと一致しました。",
+  "Search saved messages": "保存されたメッセージの検索",
+  "{n} saved versions": "{n}件の保存バージョン"
 }

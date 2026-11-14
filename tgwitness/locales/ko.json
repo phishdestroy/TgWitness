@@ -9601,5 +9601,12 @@
   "Select at least one available account.": "사용 가능한 계정을 하나 이상 선택하십시오.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "사용 가능한 계정 {n}개 선택됨. 각 계정은 자체 연결 및 요청 제한을 유지합니다.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "각 계정은 관측과 함께 하나의 기록 또는 내보내기 작업을 실행합니다. 일시 중지 제어 기능은 독립적이며, 일시 중지 후에도 커밋된 청크는 계속 사용할 수 있습니다.",
-  "Select all available accounts": "사용 가능한 모든 계정 선택"
+  "Select all available accounts": "사용 가능한 모든 계정 선택",
+  "Clear search": "검색 지우기",
+  "Displayed version": "표시된 버전",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "검색 및 필터 기능은 이전 버전을 포함하여 이 채팅에 저장된 모든 메시지를 대상으로 합니다.",
+  "Search match": "검색 일치",
+  "Search matched an earlier saved version.": "검색 결과 이전에 저장된 버전과 일치했습니다.",
+  "Search saved messages": "저장된 메시지 검색",
+  "{n} saved versions": "{n}개의 저장된 버전"
 }

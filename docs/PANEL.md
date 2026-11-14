@@ -104,6 +104,13 @@ Saved conversations, read-only by default.
   a note with the time and what was observed. The chat list and notifications use the same
   definitions. A deleted message is red and keeps its saved text; an edited message
   keeps every saved version.
+- **Search saved messages** searches the complete retained chat, including earlier
+  text versions. Deleted, edited, media and author filters also cover the complete
+  retained chat. **Not found at recheck** is separate from received deletion notices.
+  Search does not request messages from Telegram; use **Load history** to acquire more.
+  A match in an earlier version opens the saved versions with their journal links.
+  **Displayed version** identifies the record used for the message and its bookmark;
+  a late history response cannot replace a newer live edit on screen.
 - Between messages the chat shows two kinds of gap markers. **Message numbers not
   observed** lists numbers the journal has no record for, in channels and supergroups
   only: other chats share one account-wide numbering, so a jump there says nothing

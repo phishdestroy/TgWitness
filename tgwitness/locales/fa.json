@@ -9649,5 +9649,12 @@
   "Select at least one available account.": "حداقل یک حساب موجود را انتخاب کنید.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "حساب‌های موجود {n} انتخاب شده‌اند. هر حساب اتصال و محدودیت‌های درخواست خود را حفظ می‌کند.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "هر حساب یک وظیفه تاریخچه یا خروجی را به موازات مشاهده اجرا می‌کند. کنترل‌های مکث مستقل هستند؛ بلوک‌های ارسال‌شده پس از مکث نیز در دسترس باقی می‌مانند.",
-  "Select all available accounts": "انتخاب همه حساب‌های موجود"
+  "Select all available accounts": "انتخاب همه حساب‌های موجود",
+  "Clear search": "پاک کردن جستجو",
+  "Displayed version": "نسخه نمایش‌داده‌شده",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "جستجو و فیلترها تمام پیام‌های ذخیره‌شده در این چت، از جمله نسخه‌های قبلی را در بر می‌گیرند. نسخه نمایش‌داده‌شده، رکورد ژورنال امضا شده‌ای است که در حال حاضر نشان داده می‌شود. یک بازبینی مجدد برای یافتن پیامی که وجود ندارد با یک اعلان حذف تفاوت دارد. جای‌گرین‌ها را دقیقاً حفظ کنید.",
+  "Search match": "مطابقت جستجو",
+  "Search matched an earlier saved version.": "جستجو نسخهٔ ذخیره شدهٔ قبلی را یافت.",
+  "Search saved messages": "جستجوی پیام‌های ذخیره‌شده",
+  "{n} saved versions": "{n} نسخهٔ ذخیره شده"
 }

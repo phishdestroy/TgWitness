@@ -9715,5 +9715,12 @@
   "Select at least one available account.": "Выберите хотя бы один доступный аккаунт.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "Доступных аккаунтов выбрано: {n}. Каждый аккаунт использует собственное подключение и лимиты запросов.",
   "Select all available accounts": "Выбрать все доступные аккаунты",
-  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "На каждом аккаунте загрузка истории или выгрузка работает одновременно с наблюдением. У задач отдельные кнопки паузы; сохранённые части остаются доступны после приостановки."
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "На каждом аккаунте загрузка истории или выгрузка работает одновременно с наблюдением. У задач отдельные кнопки паузы; сохранённые части остаются доступны после приостановки.",
+  "Search saved messages": "Поиск по сохранённым сообщениям",
+  "Clear search": "Сбросить поиск",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "Поиск и фильтры охватывают все сохранённые сообщения этого чата, включая прежние версии.",
+  "{n} saved versions": "Сохранённых версий: {n}",
+  "Displayed version": "Показанная версия",
+  "Search match": "Совпадение с запросом",
+  "Search matched an earlier saved version.": "Совпадение найдено в прежней сохранённой версии."
 }

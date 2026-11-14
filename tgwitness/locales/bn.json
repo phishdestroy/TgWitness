@@ -9649,5 +9649,12 @@
   "Select at least one available account.": "কমপক্ষে একটি উপলব্ধ অ্যাকাউন্ট নির্বাচন করুন।",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n}টি উপলব্ধ অ্যাকাউন্ট নির্বাচন করা হয়েছে। প্রতিটি অ্যাকাউন্ট তার নিজস্ব সংযোগ এবং অনুরোধের সীমা বজায় রাখে।",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "প্রতিটি অ্যাকাউন্ট পর্যবেক্ষণের পাশাপাশি একটি ইতিহাস বা রপ্তানি টাস্ক চালায়। বিরতি নিয়ন্ত্রণগুলি স্বতন্ত্র; বিরতির পরও কমিট করা অংশগুলি উপলব্ধ থাকে।",
-  "Select all available accounts": "সব উপলব্ধ অ্যাকাউন্ট নির্বাচন করুন"
+  "Select all available accounts": "সব উপলব্ধ অ্যাকাউন্ট নির্বাচন করুন",
+  "Clear search": "খালি অনুসন্ধান",
+  "Displayed version": "প্রদর্শিত সংস্করণ",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "সার্চ এবং ফিল্টার এই চ্যাটের সমস্ত সংরক্ষিত বার্তা, পূর্ববর্তী সংস্করণসহ, অন্তর্ভুক্ত করে।",
+  "Search match": "অনুসন্ধান মিল",
+  "Search matched an earlier saved version.": "অনুসন্ধান একটি পূর্বের সংরক্ষিত সংস্করণ খুঁজে পেয়েছে।",
+  "Search saved messages": "সংরক্ষিত বার্তা অনুসন্ধান",
+  "{n} saved versions": "{n}টি সংরক্ষিত সংস্করণ"
 }

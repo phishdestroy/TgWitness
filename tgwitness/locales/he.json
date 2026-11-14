@@ -9697,5 +9697,12 @@
   "Select at least one available account.": "בחר לפחות חשבון אחד זמין.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "נבחרו {n} חשבונות זמינים. לכל חשבון יש מגבלות חיבור ובקשות משלו.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "כל חשבון מריץ משימת היסטוריה או ייצוא אחת במקביל לתצפית. פקדי ההשהיה הם עצמאיים; קטעים שנשמרו נשארים זמינים לאחר ההשהיה.",
-  "Select all available accounts": "בחר את כל החשבונות הזמינים"
+  "Select all available accounts": "בחר את כל החשבונות הזמינים",
+  "Clear search": "נקה חיפוש",
+  "Displayed version": "הגרסה המוצגת",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "החיפוש והמסננים מכסים את כל ההודעות השמורות בצ'אט זה, כולל הגרסאות הקודמות.",
+  "Search match": "התאמת חיפוש",
+  "Search matched an earlier saved version.": "החיפוש מצא התאמה לגרסה מוקדמת שנשמרה.",
+  "Search saved messages": "חיפוש הודעות שמורות",
+  "{n} saved versions": "{n} גרסאות שמורות"
 }

@@ -9841,5 +9841,12 @@
   "Select at least one available account.": "حدد حسابًا متاحًا واحدًا على الأقل.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "تم تحديد {n} حسابًا متاحًا. يحتفظ كل حساب بحدود الاتصال والطلبات الخاصة به.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "يُشغّل كل حساب مهمة واحدة للسجل أو التصدير جنبًا إلى جنب مع المراقبة. عناصر التحكم في الإيقاف مؤقت مستقلة؛ وتظل الأجزاء التي تم التزام بها متاحة بعد الإيقاف المؤقت.",
-  "Select all available accounts": "تحديد جميع الحسابات المتاحة"
+  "Select all available accounts": "تحديد جميع الحسابات المتاحة",
+  "Clear search": "مسح البحث",
+  "Displayed version": "الإصدار المعروض",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "يشمل البحث والمرشحات جميع الرسائل المحفوظة في هذه المحادثة، بما في ذلك الإصدارات السابقة.",
+  "Search match": "مطابقة البحث",
+  "Search matched an earlier saved version.": "أدى البحث إلى مطابقة إصدار سابق محفوظ.",
+  "Search saved messages": "البحث في الرسائل المحفوظة",
+  "{n} saved versions": "{n} نسخة محفوظة"
 }
