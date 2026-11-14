@@ -243,6 +243,7 @@ class AccountExport:
         self.root.mkdir(mode=0o700, exist_ok=True)
         self.task, self.current, self.index = None, None, None
         self.transfer = None
+        self.discovery_saved = 0.0
         self.packaging_copies, self.record_bytes = 1, 0
         self.transport_factory = transport.Transport
 
@@ -668,6 +669,14 @@ class AccountExport:
             "scope": "visible to this account during the recorded acquisition intervals"}
         self.current["omissions"] = self.inventory["gaps"][:100]
 
+    def discovering(self, stage, done, total=None, chat=None):
+        self.current["discovery"] = {"stage": stage, "done": done, "total": total}
+        self.current["current_chat"] = chat
+        now = time.monotonic()
+        if now - self.discovery_saved >= 1:
+            self.discovery_saved = now
+            self.persist()
+
     async def retry(self, call):
         for attempt in range(6):
             try:
@@ -869,7 +878,13 @@ class AccountExport:
             if network.account_id != job["account_id"]:
                 raise ValueError("The connected account differs from this export's signed account.")
             if self.inventory is None:
-                chats, tasks, gaps = await self.retry(network.discover)
+                network.progress = self.discovering
+                try:
+                    chats, tasks, gaps = await self.retry(network.discover)
+                finally:
+                    network.progress = None
+                    self.current.pop("discovery", None)
+                    self.current["current_chat"] = None
                 if job["options"]["transport"] == "auto" and options["transport"] == "regular":
                     gaps = ["Telegram asked to wait before a Takeout export; this export used the regular session."] + gaps
                 inventory = {"format": "tgwitness-account-export-inventory-v1", "public_key": self.vault.public_key,

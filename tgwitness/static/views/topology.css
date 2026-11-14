@@ -169,6 +169,7 @@
 #view-topology .tp-cidrs { display: grid; gap: 3px; justify-items: center; }
 #view-topology .tp-cidrs span { color: rgba(110, 231, 183, .82); font: 500 9.5px/12px var(--mono); white-space: nowrap; }
 #view-topology .tp-gate-more { color: var(--tp-mute); font: 600 9.5px/12px var(--mono); }
+#view-topology .tp-cidrs span.tp-cidr-on, #view-topology .tp-gate-more.tp-cidr-on { color: #ecfdf5; background: rgba(16, 185, 129, .24); box-shadow: 0 0 0 1px rgba(110, 231, 183, .55); border-radius: 4px; padding: 1px 5px; }
 
 #view-topology .tp-tgbox { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 #view-topology .tp-tg-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }

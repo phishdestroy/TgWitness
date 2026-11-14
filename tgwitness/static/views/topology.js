@@ -198,7 +198,8 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
   }
   function gateHTML(){
     const nets=data.telegram.networks||[],v4=nets.filter(n=>!n.includes(':')),v6=nets.length-v4.length;
-    return `<div class="tp-gate" data-tp-node="gate" data-tp-anchor="gate" role="button" tabindex="0" aria-label="${t('Telegram only')}"><span class="tp-gate-title">${t('Telegram only')}</span><span class="tp-cidrs">${v4.map(n=>`<span>${esc(n)}</span>`).join('')}</span>${v6?`<span class="tp-gate-more">${esc(tr('+{n} IPv6',{n:v6}))}</span>`:''}</div>`;
+    const used=new Set(data.accounts.filter(a=>a.state==='connected').map(a=>target(a)?.telegram_network).filter(Boolean));
+    return `<div class="tp-gate" data-tp-node="gate" data-tp-anchor="gate" role="button" tabindex="0" aria-label="${t('Telegram only')}"><span class="tp-gate-title">${t('Telegram only')}</span><span class="tp-cidrs">${v4.map(n=>`<span data-tp-anchor="net:${esc(n)}"${used.has(n)?' class="tp-cidr-on"':''}>${esc(n)}</span>`).join('')}</span>${v6?`<span class="tp-gate-more${[...used].some(n=>n.includes(':'))?' tp-cidr-on':''}" data-tp-anchor="net6">${esc(tr('+{n} IPv6',{n:v6}))}</span>`:''}</div>`;
   }
   function tgHTML(){
     const up=dcUp();
@@ -288,16 +289,17 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
       for(const a of shown()){
         const r=box('acc:'+a.id);if(!r)continue;
         const up=a.state==='connected',k=lay==='wide'?hopKey(a):null,hb=k?box('hop:'+k):null,d=dimOf('acc:'+a.id),y=r.cy,x0=r.x+r.w;
+        const net=up?target(a)?.telegram_network:null,nb=net?box('net:'+net)||(net.includes(':')?box('net6'):null):null,gy=nb?nb.cy:y;
         const line=(off,to)=>{let p=M([x0,y+off]);
-          if(hb){const hy=hb.cy+off;p+=hc([x0,y+off],[hb.x,hy])+L([hb.x+hb.w,hy])+hc([hb.x+hb.w,hy],[g.x,y+off]);}else p+=L([g.x,y+off]);
-          p+=L([g.x+g.w,y+off]);if(to)p+=hc([g.x+g.w,y+off],[to.x,to.cy+off*1.6]);return p;};
+          if(hb){const hy=hb.cy+off;p+=hc([x0,y+off],[hb.x,hy])+L([hb.x+hb.w,hy])+hc([hb.x+hb.w,hy],[g.x,gy+off]);}else p+=nb?hc([x0,y+off],[g.x,gy+off]):L([g.x,y+off]);
+          p+=L([g.x+g.w,gy+off]);if(to)p+=hc([g.x+g.w,gy+off],[to.x,to.cy+off*1.6]);return p;};
         const dc=box('dc:'+a.telegram?.dc),tx=line(-2.4,dc),rx=line(2.4,dc);
         if(up&&dc)aura.push(`<path d="${tx}" class="tp-aura${d}"/>`);
         const pick=selected==='acc:'+a.id?' tp-pick':'';
         base.push(`<path d="${tx}" class="tp-pipe tp-tx ${up?'tp-on':'tp-off'}${d}${pick}" data-pipe="tx:${esc(a.id)}"/><path d="${rx}" class="tp-pipe tp-rx ${up?'tp-on':'tp-off'}${d}${pick}" data-pipe="rx:${esc(a.id)}"/>`);
         if(up&&dc&&flowing)flows.push(`<path d="${tx}" class="tp-flow tp-flow-tx${d}"/><path d="${rx}" class="tp-flow tp-flow-rx${d}"/>`);
         for(const m of a.media||[]){const to=box('dc:'+m.dc);if(to&&m.connected&&m.dc!==a.telegram?.dc)base.push(`<path d="${line(6,to)}" class="tp-pipe tp-media${d}"/>`);}
-        const st=check(a);if(st)marks.push(mark(g.cx,y,st,d));
+        const st=check(a);if(st)marks.push(mark(nb?g.x+g.w:g.cx,gy,st,d));
       }
     }
     if(lay==='narrow'&&g&&proc){
@@ -379,9 +381,10 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
       if((s.analysis?.endpoints||[]).some(p=>p.host===host))return 'ai';
       if([...(s.timestamps?.endpoints||[]),...(s.calendars?.endpoints||[])].some(p=>p.host===host))return 'time';}
     const hitService=SERVICES.find(item=>item[4].test(host));if(hitService)return hitService[0];
+    if(comp==='anchoring')return 'time';if(comp==='dns')return 'dns';if(comp==='operator_bot')return 'bot';
     if(['proxy_catalog','guided_connection'].includes(comp)&&literal(host))return 'probe';
     if(['alerts','webhooks'].includes(comp))return 'notify';if(['replica','storage'].includes(comp))return 'storage';if(comp==='ai')return 'ai';
-    if(['cloud','cloud_wizard','cloud_attestation','tdx','assurance','verify','capture_connections','mcp_server','witness','source_check'].includes(comp))return 'known';
+    if(['cloud','cloud_wizard','cloud_attestation','tdx','assurance','verify','capture_connections','mcp_server','witness','source_check','portable_routes','proxy_sources','proxy_catalog','guided_connection'].includes(comp))return 'known';
     return 'other';
   }
   function merge(list){

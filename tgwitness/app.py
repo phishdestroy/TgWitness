@@ -224,6 +224,8 @@ class Snapshot(BaseModel):
     chat_id: int
     limit: int = Field(default=100, ge=1, le=10000)
     pause_observation: bool = False
+    fill: bool = False
+    before_id: int | None = Field(default=None, ge=1)
 
 
 class ParametersUpdate(BaseModel):
