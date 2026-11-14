@@ -604,7 +604,9 @@ class Collector:
         self.chat_state_worker = None
         self.presence_worker = None
         self.recheck_wakeup = asyncio.Event()
+        self.recheck_everything = False
         self.recheck_resume_at = 0
+        self.recheck_continuing = set()
         self.intake_resume_at = 0
         self.recheck_state = None
         self.resumed_state_at = None
@@ -1063,7 +1065,7 @@ class Collector:
             self.store.append("connection.restored", {
                 "reason": "updates_resumed", "diverted_since": diverted["since"],
                 "completeness": "updates Telegram sent to the other session in between may be missing"})
-            self.recheck_wakeup.set()
+            self.request_recheck()
         elif (probe and probe["suspect_at"] is not None and not diverted and self.updates_seen == probe["seen"]
               and now - probe["suspect_at"] >= UPDATES_GRACE_SECONDS):
             self.updates_diverted = {"since": utcnow(), "seen": probe["seen"]}
@@ -1071,7 +1073,7 @@ class Collector:
                 "reason": "updates_diverted", "telegram_pts_before": probe["pts"], "telegram_pts": probe["server_pts"],
                 "silent_since": probe["since"], "meaning": UPDATES_DIVERTED_MEANING,
                 "completeness": "updates in this period may be missing"})
-            self.recheck_wakeup.set()
+            self.request_recheck()
         client = self.client
         if probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS or self.flood_paused("watch"):
             return
@@ -2206,7 +2208,7 @@ class Collector:
             "meaning": "Edits, deletions and other updates in this interval were not delivered and are absent from "
                        "this journal. New messages can still be recovered by reading history."}, chat_id)
         if self.running:
-            self.recheck_wakeup.set()
+            self.request_recheck(None if chat_id is None else [chat_id])
 
     def connection_changed(self, client, state):
         if client is self.client:
@@ -2221,7 +2223,7 @@ class Collector:
                     self.note("connection.restored", {
                         "reason": "transport_connected", "detected": "on automatic reconnect"})
                 if self.running:
-                    self.recheck_wakeup.set()
+                    self.request_recheck()
             return
         role = "current" if client is self.client else "candidate" if client is self.login_client else "other"
         if state == "opened":
@@ -2796,7 +2798,7 @@ class Collector:
                     "reason": "transport_connected" if connected else "transport_disconnected",
                     "completeness": "unknown; intermediate events may be missing"})
                 if connected:
-                    self.recheck_wakeup.set()
+                    self.request_recheck()
                 else:
                     await self.note_drop()
                 self.updates_probe = None
@@ -2879,7 +2881,7 @@ class Collector:
             catch_up = getattr(self.client, "catch_up", None)
             if catch_up:
                 await catch_up()
-            self.recheck_wakeup.set()
+            self.request_recheck()
 
     async def failure(self, exc, context, *, client=None, fatal=False):
         if self.handle_authorization_error(exc, context, client=client):
@@ -2908,17 +2910,22 @@ class Collector:
         await self.failure(exc, context, client=client)
         if not self.running or client is not self.client:
             return
-        if chat_ids is None:
-            self.recheck_wakeup.set()
-            return
         try:
-            chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
-            if chat_ids:
-                last = self.store.get_setting("recheck_last", {})
-                last.update((str(chat_id), 0) for chat_id in chat_ids)
-                self.store.set_setting("recheck_last", last)
+            self.request_recheck(chat_ids)
         except Exception:
-            self.recheck_wakeup.set()
+            self.request_recheck()
+
+    def request_recheck(self, chat_ids=None):
+        if chat_ids is None:
+            self.recheck_everything = True
+        else:
+            chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
+            if not chat_ids:
+                return
+            last = self.store.get_setting("recheck_last", {})
+            last.update((str(chat_id), 0) for chat_id in chat_ids)
+            self.store.set_setting("recheck_last", last)
+        self.recheck_wakeup.set()
 
     async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
                               acquisition=None, sender=None):
@@ -3428,7 +3435,7 @@ class Collector:
             "completeness": "updates in this period may be missing"})
         with suppress(Exception):
             self.store.set_setting("probe_last", {"at": utcnow(), "result": "missed", "n": pending["n"]})
-        self.recheck_wakeup.set()
+        self.request_recheck()
 
     def probe_update(self, update):
         message = update.message
@@ -3501,12 +3508,11 @@ class Collector:
     async def recheck_loop(self):
         delay, forced, reconnected = self.param("recheck_first_delay_seconds"), True, 0
         while self.running:
-            try:
+            with suppress(TimeoutError):
                 await asyncio.wait_for(self.recheck_wakeup.wait(), delay)
-                forced, reconnected = True, time.time()
-            except TimeoutError:
-                pass
             self.recheck_wakeup.clear()
+            if self.recheck_everything:
+                self.recheck_everything, forced, reconnected = False, True, time.time()
             if not self.running:
                 return
             delay = self.param("recheck_tick_seconds")
@@ -3545,12 +3551,15 @@ class Collector:
 
     def due_targets(self, forced=False, reconnected=0):
         settings, last, now = recheck_settings(self.store), self.store.get_setting("recheck_last", {}), time.time()
+        control = settings["recheck_other_minutes"] or settings["recheck_minutes"]
         due = []
         for target in self.store.targets(True):
             minutes = settings["recheck_minutes"] if target["priority"] else settings["recheck_other_minutes"]
             if not minutes:
                 continue
             seen = last.get(str(target["chat_id"]), 0)
+            if seen and target["chat_id"] < -1000000000000 and target["chat_id"] not in self.recheck_continuing:
+                minutes = max(minutes, control)
             if (forced and target["priority"]) or seen < reconnected or now - seen >= minutes * 60:
                 due.append((0 if target["priority"] else 1, seen, target))
         due.sort(key=lambda item: item[:2])
@@ -3566,8 +3575,10 @@ class Collector:
             try:
                 result = await self.recheck_chat(target["chat_id"], settings)
                 results.append(result)
-                if "continues_after" not in result:
-
+                if "continues_after" in result:
+                    self.recheck_continuing.add(target["chat_id"])
+                else:
+                    self.recheck_continuing.discard(target["chat_id"])
                     last = self.store.get_setting("recheck_last", {})
                     last[str(target["chat_id"])] = time.time()
                     self.store.set_setting("recheck_last", last)
