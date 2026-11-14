@@ -3,7 +3,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from . import report_design, jurisdiction_guidance as guidance
+from . import report_chat_timeline, report_design, jurisdiction_guidance as guidance
 
 
 class Presentation(BaseModel):
@@ -156,6 +156,7 @@ class Analytics:
         self.period_overflow = False
         self.participants = _Groups()
         self.chats = _Groups()
+        self.chat_days = report_chat_timeline.ChatDays()
 
     def _period(self, moment, kind, seq):
         if self.period_overflow:
@@ -195,6 +196,8 @@ class Analytics:
         self.first = moment if self.first is None else min(self.first, moment)
         self.last = moment if self.last is None else max(self.last, moment)
         self.hourly[moment.weekday()][moment.hour] += 1
+        if kind in MESSAGE_KINDS:
+            self.chat_days.add(chat_key(event), moment.date())
         self._period(moment, kind, seq)
 
     def result(self):
@@ -212,7 +215,8 @@ class Analytics:
                              "rows": [{"period": period, **_copy(row)} for period, row in sorted(self.periods.items())]},
                 "hourly": {"status": "available", "weekday_order": "monday_first",
                            "counted_events": valid_times, "rows": [list(row) for row in self.hourly]},
-                "participants": self.participants.result(), "chats": self.chats.result()}
+                "participants": self.participants.result(), "chats": self.chats.result(),
+                "chat_days": self.chat_days.result()}
 
 
 def _ranking(data, limit, *, participants=False, labels="aliases"):
@@ -273,4 +277,6 @@ def selected(data, options):
         output["composition"] = dict(data["totals"])
     if options.get("chat_chart", True):
         output["chats"] = _ranking(data["chats"], limit)
+        if timeline := report_chat_timeline.timeline(data.get("chat_days"), limit):
+            output["chat_timeline"] = timeline
     return output

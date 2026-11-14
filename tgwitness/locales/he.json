@@ -4922,6 +4922,7 @@
   "The chat at export time": "הצ'אט בזמן הייצוא",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "מה שאמר Telegram על הצ'אט כאשר הייצוא החל, ומקומה של החשבון המייצא בתוכו. תוויות כגון \"הונאה\" ו\"זיוף\" הן של Telegram עצמו.",
   "Indicators": "אינדיקטורים",
+  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "כל שורה מייצגת צ'אט וכל עמודה מייצגת פרק זמן (UTC); תאים כהים יותר מכילים יותר הודעות שנצפו. בעמודות המקווקוות לא הייתה כל אישור לכידה: לא ידוע מה פורסם באותו זמן. תא בהיר בעמודה שנצפתה פירושו שלא נרשמה שם שום הודעה.",
   "Texts repeated across chats": "טקסטים החוזרים על עצמם בצ'אטים שונים",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "אותו טקסט הודעה שנצפה ביותר מצ'אט אחד, לאחר שנורמלו רישיות האותיות והרווחים. טקסטים הקצרים מ-{n} תווים אינם מושווים. טקסט תואם מהווה קצה חוט: הוא אינו מגלה מי כתב את ההודעות או שיש ביניהן קשר.",
   "Texts found in more than one chat: {n}.": "טקסטים שנמצאו ביותר מצ'אט אחד: {n}.",

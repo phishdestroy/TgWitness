@@ -4868,6 +4868,7 @@
   "The chat at export time": "エクスポート時のチャット内容",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "エクスポートが開始された際のチャットについてTelegramが述べた内容、およびエクスポート元アカウントがその中で占める位置付け。「詐欺」や「偽物」といったラベルはTelegram自身のものです。",
   "Indicators": "指標",
+  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "各行はチャットを表し、各列は期間（UTC）を表します。色が濃いセルほど、観測されたメッセージの数が多くなります。ハッチングが施された列には、キャプチャの確認がまったくありませんでした。つまり、その期間に何が投稿されたかは不明です。観測された列の色が薄いセルは、そこにメッセージが記録されなかったことを意味します。",
   "Texts repeated across chats": "複数のチャットで繰り返されるテキスト",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "複数のチャットで観測された同一のメッセージテキストを、大文字小文字とスペースを正規化した上で比較したものです。{n}文字未満のテキストは比較対象外です。一致するテキストは手がかりとなりますが、誰がそれらのメッセージを書いたのか、あるいはそれらが関連しているかどうかは示されません。",
   "Texts found in more than one chat: {n}.": "複数のチャットで確認されたテキスト：{n}。",

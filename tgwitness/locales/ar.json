@@ -5003,6 +5003,7 @@
   "The chat at export time": "الدردشة في وقت التصدير",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "ما قاله Telegram عن الدردشة عند بدء التصدير، ومكان الحساب المُصدِّر فيها. التسميات مثل «احتيال» و«مزيف» هي تخص Telegram.",
   "Indicators": "المؤشرات",
+  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "كل صف يمثل محادثة وكل عمود يمثل فترة زمنية (UTC)؛ وتحتوي الخلايا الداكنة على عدد أكبر من الرسائل التي تمت ملاحظتها. أما الأعمدة المظللة فلم يتم تأكيد التقاط أي رسائل فيها على الإطلاق: لذا فإن ما تم نشره حينها غير معروف. وتشير الخلية الفاتحة في عمود الملاحظة إلى عدم تسجيل أي رسالة فيه.",
   "Texts repeated across chats": "نصوص متكررة عبر الدردشات",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "نفس نص الرسالة الذي لوحظ في أكثر من محادثة واحدة، بعد مقارنة الأحرف الكبيرة والصغيرة والمسافات بعد توحيدها. لا تتم مقارنة النصوص التي يقل طولها عن {n} حرفًا. النص المطابق هو دليل: فهو لا يوضح من كتب النسخ أو ما إذا كانت مرتبطة ببعضها.",
   "Texts found in more than one chat: {n}.": "النصوص الموجودة في أكثر من محادثة واحدة: {n}.",

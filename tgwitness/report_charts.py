@@ -2,6 +2,8 @@ from datetime import date, datetime, timezone
 from html import escape
 import math
 
+from . import report_chat_timeline
+
 TITLE = "Activity and participants"
 INTRO = "Counts describe observations in this journal, not unique messages or all activity on Telegram. Repeated history reads can record the same message again."
 TIME_NOTE = "Times use the collector's observation clock in UTC, not message sending times. An empty interval means no observations were counted; consult coverage for interruptions."
@@ -48,7 +50,7 @@ def text_keys():
             "Activity by chat", "Exact figures", "Period (UTC)", "Observations", "First record", "Last record", "Source file",
             "No observations in this selection.", "This chart exceeds the grouping limit. Exact overall counts remain available.",
             "Observations with an unusable time: {n}", "Participant {n}", "Sender {id}", "Chat {id}", "Unknown", "Other",
-            "All bars start at zero. Values are counts, not percentages.", "Hour (UTC)", "Counts by category", "Report sections", "Record composition", "THE RECORD IN NUMBERS", *metric_texts()]
+            "All bars start at zero. Values are counts, not percentages.", "Hour (UTC)", "Counts by category", "Report sections", "Record composition", "THE RECORD IN NUMBERS", *metric_texts(), *report_chat_timeline.text_keys()]
 
 
 def _e(value):
@@ -208,6 +210,7 @@ def html(data, say):
                     parts.append('<p>'+_e(say(PRIVACY_NOTE))+'</p>')
             parts.append('<p>'+_e(say("Observations"))+': '+str(chart["total"])+'</p>'+bars_html(chart, say)+'</figure>')
     parts.append('</div>')
+    parts.append(report_chat_timeline.html(data.get("chat_timeline"), say, _table))
     if composition := data.get("composition"):
         rows = [{"label": KINDS[k], "total": value} for k, value in composition.items()]
         parts.append('<figure class="analytics-figure chart-card chart-composition"><figcaption>'+_e(say("Record composition"))+'</figcaption>'
@@ -341,6 +344,7 @@ def pdf(lay, data):
             pdf.set_y(y+5)
         if not rows:
             lay.text(say("No observations in this selection."),size=9)
+    report_chat_timeline.pdf(lay, data.get("chat_timeline"))
     if composition := data.get("composition"):
         lay.need(90)
         lay.heading(say("Record composition"))
