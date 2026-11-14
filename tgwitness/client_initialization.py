@@ -6,10 +6,10 @@ from telethon.tl import functions
 from .telegram_client import FLOOD_ERRORS
 
 
-async def post_login(client):
+async def post_login(client, offline=False):
     lang_pack = client.tgwitness_client_profile.get("lang_pack", "")
     requests = [functions.help.GetConfigRequest(), functions.help.GetNearestDcRequest(),
-                functions.account.UpdateStatusRequest(offline=False)]
+                functions.account.UpdateStatusRequest(offline=offline)]
     if lang_pack:
         requests.append(functions.langpack.GetLanguagesRequest(lang_pack=lang_pack))
     requests.extend([functions.help.GetAppUpdateRequest(source=""), functions.help.GetTermsOfServiceUpdateRequest()])

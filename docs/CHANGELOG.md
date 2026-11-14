@@ -122,6 +122,7 @@
 - Proxy lists: an unreadable or invalid `proxy-sources.json` no longer falls back to the defaults, which turn on every bundled list and country lookups for proxy addresses. Proxy lists stay unused and the panel asks to restore the file; saving the list settings again replaces it.
 - **Record the other side’s typing in the journal**: `visibility.peer_typing` and `secret_chat.peer_typing` records list the reported actions in order with the times they were received (`timeline`), with the forum topic (`top_msg_id`), the upload progress at the first and last notice of a step and the plain fields of the action, such as the emoji of an emoji interaction. A burst keeps its first 100 steps and counts the notices after them.
 - History snapshots record `returned`, `captured`, `already_recorded` and `skipped_own` separately. `telegram_returned_none` includes the observed restriction flags when Telegram returns no messages. `all_already_recorded` is used only when every returned message already has saved content; policy exclusions are not described as preservation.
+- When **Hide online after actions** is on, the first sign-in of a newly created session sends an offline status request in place of the online request. This records the requested behavior; Telegram controls the status delivered to other clients.
 
 ## 0.9.3 preview · 11 November 2026
 
