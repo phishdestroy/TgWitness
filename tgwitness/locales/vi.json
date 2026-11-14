@@ -8871,5 +8871,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Mô-đun Bí mật giả khác với phiên bản được cố định trong bản phát hành TgWitness này nên không được nạp. Hãy cài đặt lại.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Mô-đun Bí mật giả đã qua kiểm tra nhưng không khởi động được. Hãy cập nhật TgWitness rồi cài đặt lại mô-đun.",
   "Only the main administrator can install the pseudo-secret module.": "Chỉ quản trị viên chính mới có thể cài đặt mô-đun Bí mật giả.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Không thể tải mô-đun Bí mật giả từ GitHub qua tuyến kết nối của không gian làm việc này. Hãy kiểm tra kết nối rồi thử lại."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Không thể tải mô-đun Bí mật giả từ GitHub qua tuyến kết nối của không gian làm việc này. Hãy kiểm tra kết nối rồi thử lại.",
+  "This chat has ended. Nothing more can be sent to it.": "Cuộc trò chuyện này đã kết thúc. Không thể gửi thêm gì nữa.",
+  "The other side has not accepted this chat yet.": "Bên kia chưa chấp nhận cuộc trò chuyện này.",
+  "Stopped before acquisition completed.": "Đã dừng trước khi thu thập xong."
 }

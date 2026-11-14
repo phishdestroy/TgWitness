@@ -9111,5 +9111,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "وحدة الوضع شبه السري تختلف عن الإصدار المثبت في إصدار TgWitness هذا، لذلك لم تُحمَّل. ثبّتها من جديد.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "اجتازت وحدة الوضع شبه السري التحقق لكنها لم تتمكن من البدء. حدّث TgWitness ثم ثبّت الوحدة من جديد.",
   "Only the main administrator can install the pseudo-secret module.": "لا يمكن إلا للمسؤول الرئيسي تثبيت وحدة الوضع شبه السري.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "تعذر تنزيل وحدة الوضع شبه السري من GitHub عبر مسار الاتصال الخاص بمساحة العمل هذه. تحقق من الاتصال ثم حاول مرة أخرى."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "تعذر تنزيل وحدة الوضع شبه السري من GitHub عبر مسار الاتصال الخاص بمساحة العمل هذه. تحقق من الاتصال ثم حاول مرة أخرى.",
+  "This chat has ended. Nothing more can be sent to it.": "انتهت هذه المحادثة. لا يمكن إرسال أي شيء إليها بعد الآن.",
+  "The other side has not accepted this chat yet.": "لم يقبل الطرف الآخر هذه المحادثة بعد.",
+  "Stopped before acquisition completed.": "أُوقف قبل اكتمال الجمع."
 }

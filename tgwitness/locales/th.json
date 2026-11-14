@@ -8871,5 +8871,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "โมดูล Pseudo-secret ไม่ตรงกับเวอร์ชันที่กำหนดไว้ใน TgWitness รุ่นนี้ จึงไม่ได้โหลด โปรดติดตั้งอีกครั้ง",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "โมดูล Pseudo-secret ผ่านการตรวจสอบแล้วแต่เริ่มทำงานไม่ได้ โปรดอัปเดต TgWitness แล้วติดตั้งโมดูลอีกครั้ง",
   "Only the main administrator can install the pseudo-secret module.": "มีเพียงผู้ดูแลระบบหลักเท่านั้นที่ติดตั้งโมดูล Pseudo-secret ได้",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "ไม่สามารถดาวน์โหลดโมดูล Pseudo-secret จาก GitHub ผ่านเส้นทางเชื่อมต่อของพื้นที่ทำงานนี้ได้ โปรดตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง"
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "ไม่สามารถดาวน์โหลดโมดูล Pseudo-secret จาก GitHub ผ่านเส้นทางเชื่อมต่อของพื้นที่ทำงานนี้ได้ โปรดตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง",
+  "This chat has ended. Nothing more can be sent to it.": "แชตนี้สิ้นสุดแล้ว ไม่สามารถส่งอะไรได้อีก",
+  "The other side has not accepted this chat yet.": "อีกฝ่ายยังไม่ได้ยอมรับแชตนี้",
+  "Stopped before acquisition completed.": "หยุดก่อนที่การรวบรวมจะเสร็จสิ้น"
 }

@@ -8919,5 +8919,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Pseudo-maxfiy moduli ushbu TgWitness nashrida belgilangan versiyadan farq qiladi, shuning uchun u yuklanmadi. Uni qayta o'rnating.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Pseudo-maxfiy moduli tekshiruvdan o'tdi, lekin ishga tushmadi. TgWitness'ni yangilang va modulni qayta o'rnating.",
   "Only the main administrator can install the pseudo-secret module.": "Pseudo-maxfiy modulini faqat asosiy administrator o'rnata oladi.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Pseudo-maxfiy modulini ushbu ish maydonining ulanish yo'li orqali GitHub'dan yuklab bo'lmadi. Ulanishni tekshirib, qayta urinib ko'ring."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Pseudo-maxfiy modulini ushbu ish maydonining ulanish yo'li orqali GitHub'dan yuklab bo'lmadi. Ulanishni tekshirib, qayta urinib ko'ring.",
+  "This chat has ended. Nothing more can be sent to it.": "Bu chat yakunlangan. Unga boshqa hech narsa yuborib bo'lmaydi.",
+  "The other side has not accepted this chat yet.": "Suhbatdosh bu chatni hali qabul qilmagan.",
+  "Stopped before acquisition completed.": "Yig'ish tugashidan oldin to'xtatildi."
 }

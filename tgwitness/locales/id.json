@@ -8871,5 +8871,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Modul pseudo-rahasia berbeda dari versi yang ditetapkan rilis TgWitness ini, sehingga tidak dimuat. Pasang lagi.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Modul pseudo-rahasia lolos pemeriksaan tetapi tidak dapat dijalankan. Perbarui TgWitness lalu pasang lagi modulnya.",
   "Only the main administrator can install the pseudo-secret module.": "Hanya administrator utama yang dapat memasang modul pseudo-rahasia.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Modul pseudo-rahasia tidak dapat diunduh dari GitHub melalui rute koneksi ruang kerja ini. Periksa koneksi lalu coba lagi."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Modul pseudo-rahasia tidak dapat diunduh dari GitHub melalui rute koneksi ruang kerja ini. Periksa koneksi lalu coba lagi.",
+  "This chat has ended. Nothing more can be sent to it.": "Obrolan ini telah berakhir. Tidak ada lagi yang dapat dikirim.",
+  "The other side has not accepted this chat yet.": "Pihak lain belum menerima obrolan ini.",
+  "Stopped before acquisition completed.": "Dihentikan sebelum pengambilan selesai."
 }

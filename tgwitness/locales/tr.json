@@ -8919,5 +8919,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Sözde gizli modülü, bu TgWitness sürümünde sabitlenen sürümden farklı olduğu için yüklenmedi. Yeniden kurun.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Sözde gizli modülü denetimden geçti ancak başlatılamadı. TgWitness'i güncelleyin ve modülü yeniden kurun.",
   "Only the main administrator can install the pseudo-secret module.": "Sözde gizli modülünü yalnızca ana yönetici kurabilir.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Sözde gizli modülü, bu çalışma alanının bağlantı yolu üzerinden GitHub'dan indirilemedi. Bağlantıyı denetleyip yeniden deneyin."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Sözde gizli modülü, bu çalışma alanının bağlantı yolu üzerinden GitHub'dan indirilemedi. Bağlantıyı denetleyip yeniden deneyin.",
+  "This chat has ended. Nothing more can be sent to it.": "Bu sohbet sona erdi. Artık hiçbir şey gönderilemez.",
+  "The other side has not accepted this chat yet.": "Karşı taraf bu sohbeti henüz kabul etmedi.",
+  "Stopped before acquisition completed.": "Toplama tamamlanmadan durduruldu."
 }

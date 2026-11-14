@@ -8919,5 +8919,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "نیم خفیہ ماڈیول اس TgWitness ریلیز میں مقرر ورژن سے مختلف ہے، اس لیے اسے لوڈ نہیں کیا گیا۔ اسے دوبارہ انسٹال کریں۔",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "نیم خفیہ ماڈیول جانچ میں کامیاب رہا مگر شروع نہ ہو سکا۔ TgWitness کو اپ ڈیٹ کریں اور ماڈیول دوبارہ انسٹال کریں۔",
   "Only the main administrator can install the pseudo-secret module.": "صرف مرکزی منتظم ہی نیم خفیہ ماڈیول انسٹال کر سکتا ہے۔",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "نیم خفیہ ماڈیول کو اس ورک اسپیس کے کنکشن راستے کے ذریعے GitHub سے ڈاؤن لوڈ نہیں کیا جا سکا۔ کنکشن جانچیں اور دوبارہ کوشش کریں۔"
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "نیم خفیہ ماڈیول کو اس ورک اسپیس کے کنکشن راستے کے ذریعے GitHub سے ڈاؤن لوڈ نہیں کیا جا سکا۔ کنکشن جانچیں اور دوبارہ کوشش کریں۔",
+  "This chat has ended. Nothing more can be sent to it.": "یہ چیٹ ختم ہو چکی ہے۔ اس میں مزید کچھ نہیں بھیجا جا سکتا۔",
+  "The other side has not accepted this chat yet.": "دوسرے فریق نے ابھی تک یہ چیٹ قبول نہیں کی۔",
+  "Stopped before acquisition completed.": "جمع آوری مکمل ہونے سے پہلے روک دی گئی۔"
 }

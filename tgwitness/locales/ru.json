@@ -8985,5 +8985,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Модуль псевдосекрета отличается от версии, зафиксированной в этом выпуске TgWitness, поэтому он не загружен. Установите его заново.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Модуль псевдосекрета прошёл проверку, но не запустился. Обновите TgWitness и установите модуль заново.",
   "Only the main administrator can install the pseudo-secret module.": "Установить модуль псевдосекрета может только главный администратор.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Не удалось скачать модуль псевдосекрета с GitHub через маршрут подключения этой рабочей области. Проверьте подключение и повторите попытку."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Не удалось скачать модуль псевдосекрета с GitHub через маршрут подключения этой рабочей области. Проверьте подключение и повторите попытку.",
+  "This chat has ended. Nothing more can be sent to it.": "Этот чат завершён. Отправить в него больше ничего нельзя.",
+  "The other side has not accepted this chat yet.": "Собеседник ещё не принял этот чат.",
+  "Stopped before acquisition completed.": "Сбор остановлен до завершения."
 }

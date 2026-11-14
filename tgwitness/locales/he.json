@@ -8967,5 +8967,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "מודול הפסאודו-סודי שונה מהגרסה שנקבעה במהדורת TgWitness זו, ולכן לא נטען. התקן אותו שוב.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "מודול הפסאודו-סודי עבר את הבדיקה אך לא הצליח לפעול. עדכן את TgWitness והתקן את המודול שוב.",
   "Only the main administrator can install the pseudo-secret module.": "רק המנהל הראשי יכול להתקין את מודול הפסאודו-סודי.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "לא ניתן היה להוריד את מודול הפסאודו-סודי מ-GitHub דרך נתיב החיבור של סביבת העבודה הזו. בדוק את החיבור ונסה שוב."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "לא ניתן היה להוריד את מודול הפסאודו-סודי מ-GitHub דרך נתיב החיבור של סביבת העבודה הזו. בדוק את החיבור ונסה שוב.",
+  "This chat has ended. Nothing more can be sent to it.": "הצ'אט הזה הסתיים. לא ניתן לשלוח אליו דבר נוסף.",
+  "The other side has not accepted this chat yet.": "הצד השני עדיין לא אישר את הצ'אט הזה.",
+  "Stopped before acquisition completed.": "נעצר לפני השלמת האיסוף."
 }

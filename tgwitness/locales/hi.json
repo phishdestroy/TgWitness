@@ -8919,5 +8919,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "छद्म-गोपनीय मॉड्यूल इस TgWitness रिलीज़ में तय संस्करण से अलग है, इसलिए उसे लोड नहीं किया गया। इसे फिर से इंस्टॉल करें।",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "छद्म-गोपनीय मॉड्यूल जाँच में पास हुआ, पर शुरू नहीं हो सका। TgWitness अपडेट करें और मॉड्यूल फिर से इंस्टॉल करें।",
   "Only the main administrator can install the pseudo-secret module.": "केवल मुख्य प्रशासक ही छद्म-गोपनीय मॉड्यूल इंस्टॉल कर सकता है।",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "छद्म-गोपनीय मॉड्यूल को इस कार्यक्षेत्र के कनेक्शन मार्ग के माध्यम से GitHub से डाउनलोड नहीं किया जा सका। कनेक्शन जाँचें और फिर प्रयास करें।"
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "छद्म-गोपनीय मॉड्यूल को इस कार्यक्षेत्र के कनेक्शन मार्ग के माध्यम से GitHub से डाउनलोड नहीं किया जा सका। कनेक्शन जाँचें और फिर प्रयास करें।",
+  "This chat has ended. Nothing more can be sent to it.": "यह चैट समाप्त हो चुकी है। इसमें अब कुछ नहीं भेजा जा सकता।",
+  "The other side has not accepted this chat yet.": "दूसरे पक्ष ने अभी तक यह चैट स्वीकार नहीं की है।",
+  "Stopped before acquisition completed.": "संग्रह पूरा होने से पहले रोका गया।"
 }

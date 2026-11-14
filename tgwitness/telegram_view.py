@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from .account_report import reason_text
 from .report import Words
 from .telegram_export import MEDIA_PATH, dates, entity_spans, message, name
 
@@ -106,7 +107,7 @@ class View:
             count = self.export.index.execute('SELECT COUNT(*) FROM messages WHERE chat=?', (chat['id'],)).fetchone()[0]
             yield ('<li><a class="chat-row" href="chats/chat_' + f'{number:03d}' + '/messages.html">'
                    + avatar(title) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count">'
-                   + str(count) + ' ' + e(say('Messages')) + '</span><span aria-hidden="true">›</span></a></li>').encode()
+                   + e(say('Messages')) + ': ' + str(count) + '</span><span aria-hidden="true">›</span></a></li>').encode()
         yield ('</ul>' + ('<p class="empty">' + e(say('No messages')) + '</p>' if not selected else '')
                + '<footer>TgWitness · ' + e(say('A snapshot of history visible to this Telegram account during acquisition.'))
                + '</footer></main></body></html>').encode()
@@ -158,7 +159,7 @@ class View:
             if not isinstance(path, str) or not MEDIA_PATH.fullmatch(path):
                 parts.append('<div class="attachment unavailable"><strong>' + e(label) + '</strong><span>'
                              + e(say('Attachment file not saved')) + '</span><small dir="auto">'
-                             + e(attachment.get('reason') or attachment.get('outcome') or '') + '</small></div>')
+                             + e(reason_text(attachment.get('reason'), say) or attachment.get('outcome') or '') + '</small></div>')
                 continue
             src = '../../' + path
             original = str(value.get('file_name') or '').replace('\\', '/').rsplit('/', 1)[-1]

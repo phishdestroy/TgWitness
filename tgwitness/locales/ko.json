@@ -8871,5 +8871,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "유사 비밀 모듈이 이 TgWitness 릴리스에 고정된 버전과 달라 불러오지 않았습니다. 다시 설치하십시오.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "유사 비밀 모듈이 확인을 통과했지만 시작하지 못했습니다. TgWitness를 업데이트한 뒤 모듈을 다시 설치하십시오.",
   "Only the main administrator can install the pseudo-secret module.": "주 관리자만 유사 비밀 모듈을 설치할 수 있습니다.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "이 작업 공간의 연결 경로를 통해 GitHub에서 유사 비밀 모듈을 내려받을 수 없습니다. 연결을 확인한 뒤 다시 시도하십시오."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "이 작업 공간의 연결 경로를 통해 GitHub에서 유사 비밀 모듈을 내려받을 수 없습니다. 연결을 확인한 뒤 다시 시도하십시오.",
+  "This chat has ended. Nothing more can be sent to it.": "이 채팅은 종료되었습니다. 더 이상 보낼 수 없습니다.",
+  "The other side has not accepted this chat yet.": "상대방이 아직 이 채팅을 수락하지 않았습니다.",
+  "Stopped before acquisition completed.": "수집이 완료되기 전에 중지되었습니다."
 }

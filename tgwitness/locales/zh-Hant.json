@@ -8871,5 +8871,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "偽私密模組與本 TgWitness 版本固定的版本不一致，因此未載入。請重新安裝。",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "偽私密模組已通過檢查，但無法啟動。請更新 TgWitness 並重新安裝該模組。",
   "Only the main administrator can install the pseudo-secret module.": "僅有主要管理員可以安裝偽私密模組。",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "無法透過此工作區的連線路徑從 GitHub 下載偽私密模組。請檢查連線後再試一次。"
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "無法透過此工作區的連線路徑從 GitHub 下載偽私密模組。請檢查連線後再試一次。",
+  "This chat has ended. Nothing more can be sent to it.": "此聊天已結束，無法再傳送任何內容。",
+  "The other side has not accepted this chat yet.": "對方尚未接受此聊天。",
+  "Stopped before acquisition completed.": "在擷取完成前已停止。"
 }

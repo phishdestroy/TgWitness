@@ -8919,5 +8919,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "ماژول نیمه‌مخفی با نسخهٔ ثبت‌شده در این انتشار TgWitness تفاوت دارد و به همین دلیل بارگذاری نشد. آن را دوباره نصب کنید.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "ماژول نیمه‌مخفی بررسی را گذراند اما راه‌اندازی نشد. TgWitness را به‌روزرسانی کنید و ماژول را دوباره نصب کنید.",
   "Only the main administrator can install the pseudo-secret module.": "تنها مدیر اصلی می‌تواند ماژول نیمه‌مخفی را نصب کند.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "دریافت ماژول نیمه‌مخفی از گیت‌هاب از طریق مسیر اتصال این فضای کاری ممکن نشد. اتصال را بررسی کنید و دوباره تلاش کنید."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "دریافت ماژول نیمه‌مخفی از گیت‌هاب از طریق مسیر اتصال این فضای کاری ممکن نشد. اتصال را بررسی کنید و دوباره تلاش کنید.",
+  "This chat has ended. Nothing more can be sent to it.": "این گفتگو پایان یافته است. دیگر نمی‌توان چیزی در آن فرستاد.",
+  "The other side has not accepted this chat yet.": "طرف مقابل هنوز این گفتگو را نپذیرفته است.",
+  "Stopped before acquisition completed.": "پیش از تکمیل گردآوری متوقف شد."
 }

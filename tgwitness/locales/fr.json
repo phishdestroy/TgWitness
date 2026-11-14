@@ -8927,5 +8927,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Le module pseudo-secret diffère de la version fixée par cette version de TgWitness ; il n’a donc pas été chargé. Installez-le de nouveau.",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Le module pseudo-secret a passé la vérification, mais n’a pas pu démarrer. Mettez TgWitness à jour et installez-le de nouveau.",
   "Only the main administrator can install the pseudo-secret module.": "Seul l’administrateur principal peut installer le module pseudo-secret.",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Le module pseudo-secret n’a pas pu être téléchargé depuis GitHub via le chemin de connexion de cet espace de travail. Vérifiez la connexion et réessayez."
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Le module pseudo-secret n’a pas pu être téléchargé depuis GitHub via le chemin de connexion de cet espace de travail. Vérifiez la connexion et réessayez.",
+  "This chat has ended. Nothing more can be sent to it.": "Cette conversation est terminée. Plus rien ne peut y être envoyé.",
+  "The other side has not accepted this chat yet.": "L’autre partie n’a pas encore accepté cette conversation.",
+  "Stopped before acquisition completed.": "Arrêté avant la fin de la collecte."
 }

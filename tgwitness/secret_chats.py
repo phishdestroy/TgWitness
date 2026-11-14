@@ -536,8 +536,6 @@ class SecretChats:
     async def close(self, chat_id):
         manager = self.require()
         await self.acting(manager.close, chat_id, reason="ended from TgWitness")
-        self.note("closed", {"secret_chat_id": chat_id, "reason": "ended from TgWitness", "history_deleted_by_peer": False,
-                             "journal_copy": "kept; the journal is append-only"})
 
     @staticmethod
     def snapshot(chat):

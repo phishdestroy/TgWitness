@@ -8871,5 +8871,8 @@
   "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "疑似秘密モジュールが、この TgWitness リリースで固定されたバージョンと異なるため、読み込まれませんでした。もう一度インストールしてください。",
   "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "疑似秘密モジュールは確認を通過しましたが、起動できませんでした。TgWitness を更新して、もう一度インストールしてください。",
   "Only the main administrator can install the pseudo-secret module.": "疑似秘密モジュールをインストールできるのは、メイン管理者のみです。",
-  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "このワークスペースの接続経路からは、GitHub から疑似秘密モジュールをダウンロードできませんでした。接続を確認して、もう一度お試しください。"
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "このワークスペースの接続経路からは、GitHub から疑似秘密モジュールをダウンロードできませんでした。接続を確認して、もう一度お試しください。",
+  "This chat has ended. Nothing more can be sent to it.": "このチャットは終了しました。これ以上送信できません。",
+  "The other side has not accepted this chat yet.": "相手はまだこのチャットを承諾していません。",
+  "Stopped before acquisition completed.": "取得が完了する前に停止されました。"
 }
