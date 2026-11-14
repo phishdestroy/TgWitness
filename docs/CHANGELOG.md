@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Stopping the panel keeps the main workspace's route up until its Telegram connection has closed, so shutdown no longer spends a minute on reconnection attempts through a tunnel that is already gone.
 - **Pseudo-secret** notices within half a minute when the other side ends a chat: while a chat is open the account asks Telegram for missed updates every 30 seconds, because Telegram does not always push the ending to a connected session.
 - `verify.py` given an unpacked folder says to pass the original ZIP instead of failing with a key error. The journal names the session records written when observation starts and shows their values instead of raw English notes.
 - The goal choice says what differs: **Follow chats** keeps panel actions, **Evidence for a case** saves every file, confirms each record and turns sending, joining and accepting off. **Pseudo-secret** explains that notice as a warning and points to the goal. The route check shows its time and latency in the panel language, and its buttons match the rest of the panel.

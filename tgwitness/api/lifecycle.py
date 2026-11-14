@@ -299,7 +299,7 @@ class LifecycleOperations:
                 if getattr(app.state, "multi_export", None):
                     await app.state.multi_export.close()
                 if profiles:
-                    await app.state.connection.close()
+                    await app.state.connection.halt()
                     await profiles.close()
                 if getattr(app.state, "disclosures", None):
                     await app.state.disclosures.close()
