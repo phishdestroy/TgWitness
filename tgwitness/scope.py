@@ -84,6 +84,14 @@ def visibility(entity):
     return "public_username" if public_username(entity) else "private_or_unlisted"
 
 
+def restriction(entity):
+    if not getattr(entity, "restricted", False):
+        return None
+    reasons = [{"platform": getattr(item, "platform", None), "reason": getattr(item, "reason", None),
+                "text": getattr(item, "text", None)} for item in getattr(entity, "restriction_reason", None) or []]
+    return reasons or [{"platform": None, "reason": None, "text": None}]
+
+
 def allowed(scope, kind):
     return bool(kind) and scope["types"][TYPE_OF[kind]]
 

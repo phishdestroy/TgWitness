@@ -1,4 +1,6 @@
+import asyncio
 import contextvars
+import socket
 import sys
 import threading
 import time
@@ -88,8 +90,31 @@ def attach(access, collector, workspace):
                                      weakref.ref(observer), workspace)
         if not _installed:
             sys.addaudithook(audit)
+            carry_lookup_context()
             _installed = True
         return observer
+
+
+def carry_lookup_context():
+    loop_class = asyncio.base_events.BaseEventLoop
+    if getattr(loop_class.getaddrinfo, "carries_context", False):
+        return
+    original = loop_class.getaddrinfo
+
+    async def getaddrinfo(self, host, port, *, family=0, type=0, proto=0, flags=0):
+        if not _bindings:
+            return await original(self, host, port, family=family, type=type, proto=proto, flags=flags)
+        try:
+            observer, workspace, component, purpose = context()
+        except Exception:
+            return await original(self, host, port, family=family, type=type, proto=proto, flags=flags)
+        inherited = _scope.get()
+        carried = contextvars.copy_context()
+        carried.run(_scope.set, (observer, workspace, inherited[2] if inherited else None, component, purpose))
+        return await self.run_in_executor(None, carried.run, socket.getaddrinfo, host, port, family, type, proto, flags)
+
+    getaddrinfo.carries_context = True
+    loop_class.getaddrinfo = getaddrinfo
 
 
 def unbind(identifier, reference):
@@ -142,6 +167,8 @@ def context():
             frame = frame.f_back
     finally:
         del frame
+    if component == "unattributed" and inherited and len(inherited) > 4 and inherited[3]:
+        component, purpose = inherited[3], inherited[4]
     if observer is None:
         with _guard:
             available = {binding[1]() for binding in list(_bindings.values()) if binding[0]() is not None}

@@ -1,3 +1,4 @@
+import functools
 import hashlib
 import importlib.metadata
 import platform
@@ -34,12 +35,17 @@ def source_files(root=Path(__file__).parent, policy=SOURCE_POLICY):
     return files
 
 
+@functools.lru_cache(maxsize=1)
+def process_source_files():
+    return source_files()
+
+
 def source_tree_sha256(files):
     return hashlib.sha256(canonical(files)).hexdigest()
 
 
 def run_receipt(store, vault):
-    files = source_files()
+    files = dict(process_source_files())
     dependencies = {}
     for name in ("telethon", "cryptography", "fastapi", "uvicorn", "qrcode"):
         try:

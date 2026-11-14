@@ -8,11 +8,16 @@ from contextlib import AsyncExitStack, suppress
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-from telethon.sessions import StringSession
 
-from . import api_pool, netclient
+from . import netclient
 from .network import NetworkConfig, RoutePolicy
-from .portable_routes import PortableRoutes, target_platform, HASHES, wireguard_profile
+from .portable_routes import PortableRoutes, target_platform, HASHES, WARP_ENDPOINTS, wireguard_profile
+from .transport.route_health import SLOW_MS, RouteHealth, handshake, home_dc
+
+GOOD_MS = 1500
+REROLL_MEANING = ("The local WARP tunnel was restarted with another Cloudflare endpoint or device registration. "
+                  "The Telegram account, its session and the local proxy address stayed the same; Telegram "
+                  "connections reconnected through the tunnel.")
 
 
 class ConnectionDraft(BaseModel):
@@ -53,6 +58,11 @@ class ConnectionDraft(BaseModel):
 class ApplyDraft(BaseModel):
     model_config = ConfigDict(extra="forbid")
     plan: str = Field(min_length=32, max_length=64)
+
+
+class RerollDraft(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    kind: Literal["endpoint", "identity"] = "endpoint"
 
 
 def revision(collector):
@@ -149,9 +159,7 @@ def busy_account(app):
 
 
 async def probe(collector, route, mode, *, outside=True):
-    started = time.monotonic()
     concrete, owner = route, None
-    client = None
     try:
         if route.kind == "mtproxy_auto":
             owner = "connection-probe-" + secrets.token_hex(16)
@@ -159,12 +167,11 @@ async def probe(collector, route, mode, *, outside=True):
         if concrete.kind in ("socks5", "http", "mtproxy"):
             address = await netclient.proxy_address(concrete)
             concrete = concrete.model_copy(update={"host": address})
-        api_id, api_hash = api_pool.login_order()[0]
-        client = collector.client_factory(StringSession(), api_id, api_hash, receive_updates=False,
-            connection_retries=0, request_retries=0, timeout=15, **concrete.client_options())
-        await asyncio.wait_for(client.connect(), 20)
-        latency = round((time.monotonic() - started) * 1000)
-        result = {"telegram_connected": True, "latency_ms": latency, "checked_at": int(time.time()),
+        measure = getattr(collector, "route_probe", None) or handshake
+        measured = await asyncio.wait_for(measure(concrete, home_dc(getattr(collector, "client", None))), 25)
+        result = {"telegram_connected": True, "latency_ms": measured["latency_ms"],
+                  "connect_ms": measured.get("connect_ms"), "rtt_ms": measured.get("rtt_ms"),
+                  "method": measured.get("method"), "checked_at": int(time.time()),
                   "exit_ip": None, "country": None, "warp": None}
         if not concrete.telegram_only and (outside or mode == "warp"):
             try:
@@ -182,21 +189,18 @@ async def probe(collector, route, mode, *, outside=True):
                 raise ValueError("WARP could not be confirmed through this route. Nothing was applied.")
         return result
     finally:
-        try:
-            if client:
-                await asyncio.wait_for(client.disconnect(), 5)
-        finally:
-            if owner:
-                collector.pool().release(owner)
-                collector.pool().waiting.discard(owner)
+        if owner:
+            collector.pool().release(owner)
+            collector.pool().waiting.discard(owner)
 
 
 class GuidedConnection:
     def __init__(self, app, profile_id):
         self.app, self.profile_id = app, profile_id
         self.portable = PortableRoutes(app.state.collector)
-        self.task = self.maintenance = None
-        self.plan, self.job = None, {"state": "idle"}
+        self.health = RouteHealth(app.state.collector.store)
+        self.task = self.maintenance = self.reroll_task = None
+        self.plan, self.job, self.reroll_job = None, {"state": "idle"}, None
         self.retry_at, self.failures = 0, 0
 
     def entries(self):
@@ -252,12 +256,18 @@ class GuidedConnection:
             for row in self.job.get("rows", []):
                 if row["id"] in entries and entries[row["id"]].get("app") is not None:
                     row.update(activity(entries[row["id"]]["app"].state.collector))
-        return {"job": self.job, "current": {"mode": selected["mode"] if selected else c.network_config().kind,
+        mode = selected["mode"] if selected else c.network_config().kind
+        running = process is not None and process.returncode is None
+        return {"job": self.job, "current": {"mode": mode,
                     "route": c.network_config().public(), "policy": c.policy_state(),
-                    "managed": bool(selected), "process_running": process is not None and process.returncode is None,
+                    "managed": bool(selected), "process_running": running,
                     "strategy": {k: v for k, v in c.store.get_setting("connection_strategy", {}).items() if k in ("mode", "allow_direct")},
                     "pool": c.pool().describe(c.route_owner)["pool"] if c.network_config().kind == "mtproxy_auto" else None,
-                    "check": check},
+                    "check": check, "health": self.health.public(mode),
+                    "endpoint": selected.get("endpoint") if selected and mode == "warp" else None,
+                    "reroll": self.reroll_job,
+                    "actions": {"reroll": mode == "warp" and running, "direct": c.route_policy()["exposure"] == "tunnel",
+                                "mtproxy": mode != "mtproxy_auto", "warp": mode != "warp"}},
                 "supported": target_platform() in HASHES["wireproxy"],
                 "accounts": [{"id": i, "label": e["label"]} for i, e in self.entries().items()],
                 "groups": [{"id": g["id"], "label": g["label"]} for g in registry.groups()] if registry else []}
@@ -485,6 +495,7 @@ class GuidedConnection:
                 if always or any(previous.get(key) != failed[key]
                                  for key in ("telegram_connected", "revision", "error_type")):
                     c.store.append("network.connection_checked", failed)
+                self.note_health(failed, selected["mode"] if selected else c.network_config().kind)
             raise
         result["revision"] = revision(c)
         changed = any(previous.get(key) != result.get(key)
@@ -493,7 +504,117 @@ class GuidedConnection:
             c.store.set_setting("connection_check", result)
             if always or changed:
                 c.store.append("network.connection_checked", result)
+            self.note_health(result, selected["mode"] if selected else c.network_config().kind)
         return result
+
+    def note_health(self, result, mode):
+        before, status, state = self.health.record(result, result["revision"])
+        event = self.health.transition(mode, before, status, state)
+        if event:
+            self.app.state.collector.store.append(*event)
+
+    def start_reroll(self, kind):
+        if self.reroll_task and not self.reroll_task.done():
+            raise ValueError("A WARP re-roll is already running.")
+        if self.task and not self.task.done() or self.plan:
+            raise ValueError("Finish the connection change before re-rolling WARP.")
+        busy_account(self.app)
+        selected = self.portable.selected()
+        if not selected or selected.get("mode") != "warp" or selected.get("paused"):
+            raise ValueError("This account does not use a running WARP tunnel.")
+        self.reroll_job = {"state": "running", "kind": kind, "trigger": "operator", "tried": [], "trying": None,
+                           "started_at": time.time()}
+        self.reroll_task = asyncio.create_task(self.reroll(kind, "operator"))
+        return self.public()
+
+    def automatic_reroll(self):
+        selected = self.portable.selected()
+        if (not selected or selected.get("mode") != "warp" or selected.get("paused")
+                or self.reroll_task and not self.reroll_task.done() or self.task and not self.task.done()
+                or self.plan or not self.health.reroll_due("warp")):
+            return
+        try:
+            busy_account(self.app)
+        except ValueError:
+            return
+        self.reroll_job = {"state": "running", "kind": "automatic", "trigger": "automatic", "tried": [],
+                           "trying": None, "started_at": time.time()}
+        self.reroll_task = asyncio.create_task(self.reroll("automatic", "automatic"))
+
+    async def reroll(self, kind, trigger):
+        c = self.app.state.collector
+        job = self.reroll_job
+        saved = fallback = self.portable.selected()
+        settled = False
+        try:
+            if not saved or saved.get("mode") != "warp" or saved.get("paused"):
+                raise ValueError("This account does not use a running WARP tunnel.")
+            route = NetworkConfig.model_validate(saved["network"])
+            dc = home_dc(getattr(c, "client", None))
+            measure_route = getattr(c, "route_probe", None) or handshake
+
+            async def measure(label):
+                job["trying"] = label
+                try:
+                    value = (await asyncio.wait_for(measure_route(route, dc), 25))["latency_ms"]
+                    job["tried"].append({"endpoint": label, "ms": value})
+                except Exception as exc:
+                    value = None
+                    job["tried"].append({"endpoint": label, "error": type(exc).__name__})
+                return value
+
+            original = saved.get("endpoint")
+            before = after = await measure(original or "default")
+            chosen, identity_changed = original, False
+            if kind in ("endpoint", "automatic"):
+                best = before
+                for candidate in WARP_ENDPOINTS:
+                    if candidate == original:
+                        continue
+                    if best is not None and best < GOOD_MS:
+                        break
+                    try:
+                        await self.portable.restart({**saved, "endpoint": candidate})
+                    except Exception as exc:
+                        job["tried"].append({"endpoint": candidate, "error": type(exc).__name__})
+                        continue
+                    latency = await measure(candidate)
+                    if latency is not None and (best is None or latency < best):
+                        best, chosen = latency, candidate
+                current = {**saved, "endpoint": chosen} if chosen else {k: v for k, v in saved.items() if k != "endpoint"}
+                await self.portable.keep(current)
+                fallback, settled = current, True
+                after = await measure(chosen or "default")
+            else:
+                current = saved
+            if kind == "identity" or kind == "automatic" and (after is None or after > SLOW_MS):
+                job["trying"] = "identity"
+                reference, settled = after, False
+                updated, previous = await self.portable.new_identity(current)
+                settled = True
+                fresh = await measure("new identity")
+                if fresh is None or reference is not None and fresh > reference * 1.2 + 200:
+                    await self.portable.keep(current, previous)
+                    after = await measure(chosen or "default")
+                else:
+                    current, after, identity_changed, chosen = updated, fresh, True, None
+            self.health.rerolled(trigger)
+            c.store.append("network.warp_rerolled", {
+                "kind": kind, "trigger": trigger, "before_ms": before, "after_ms": after,
+                "endpoint_before": original or "default", "endpoint_after": current.get("endpoint") or "default",
+                "identity_changed": identity_changed, "attempts": len(job["tried"]), "meaning": REROLL_MEANING})
+            job.update(state="done", trying=None, before_ms=before, after_ms=after,
+                       endpoint=current.get("endpoint"), identity_changed=identity_changed, finished_at=time.time())
+            with suppress(Exception):
+                await self.check_current(always=True)
+        except Exception as exc:
+            if fallback and not settled:
+                with suppress(Exception):
+                    await self.portable.keep(fallback)
+            job.update(state="failed", trying=None, finished_at=time.time(),
+                       error=str(exc) if isinstance(exc, ValueError) else "WARP re-roll failed: " + type(exc).__name__)
+            c.store.append("network.warp_reroll_failed", {"kind": kind, "trigger": trigger,
+                                                          "error_type": type(exc).__name__})
 
     async def control(self, action):
         c = self.app.state.collector
@@ -547,8 +668,10 @@ class GuidedConnection:
             health_at = time.monotonic() + 60
             try:
                 await self.check_current(always=False)
+                self.automatic_reroll()
             except Exception:
                 if strategy.get("mode") != "auto":
+                    self.automatic_reroll()
                     continue
                 try:
                     busy_account(self.app)
@@ -567,7 +690,7 @@ class GuidedConnection:
             self.job = {"state": "failed", "stage": "No connection", "error": "Automatic recovery failed. Check the connection in Settings."}
 
     async def halt(self):
-        for task in (self.task, self.maintenance):
+        for task in (self.task, self.maintenance, self.reroll_task):
             if task:
                 task.cancel()
                 await asyncio.gather(task, return_exceptions=True)

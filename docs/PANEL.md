@@ -282,6 +282,8 @@ Progress survives a restart; attachments follow your media settings. See
 - A chat export that fails or is cancelled keeps the range it saved. **Capture or export
   one chat** then offers **Resume export** and **Start over**; see
   [export one chat](wiki/Chat-Export.md).
+- While a chat export reads, **Download messages read so far** saves a ZIP whose pages are
+  signed as they are written; the line under it counts the signed messages.
 - **Prepared exports** keeps up to 20 files within 2 GiB, plus the latest one, for
   repeat downloads, each with its SHA-256 for the recipient to compare.
 - When the browser refuses its save dialog, the panel falls back to an ordinary download.

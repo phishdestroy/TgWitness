@@ -10,6 +10,7 @@ from . import secret_chats as routes_secret_chats
 from . import profiling as routes_profiling
 from . import system as routes_system
 from .topology import topology
+from . import swarm as routes_swarm
 from .system_map import system_map
 from . import witness as routes_witness
 from .. import cloud_wizard
@@ -71,13 +72,46 @@ def register(app, ctx):
     router.get("/api/overview/activity", dependencies=[Depends(authenticate)])(
         routes_system.overview_activity
     )
+    router.get("/api/overview/live", dependencies=[Depends(authenticate)])(
+        routes_system.overview_live
+    )
     router.get("/api/topology", dependencies=[Depends(authenticate)])(topology)
+    router.get("/api/swarm", dependencies=[Depends(authenticate)])(routes_swarm.swarm)
+    router.get("/api/metrics", dependencies=[Depends(authenticate)])(routes_swarm.metrics)
+    router.get("/api/flight", dependencies=[Depends(authenticate)])(routes_swarm.flight_record)
     router.get("/api/system-map", dependencies=[Depends(authenticate)])(system_map)
     app.include_router(router)
     router = APIRouter()
     if ctx.allow_profiles:
         router.get("/api/profiles", dependencies=[Depends(authenticate)])(
             routes_accounts.profiles_list
+        )
+        router.get("/api/bootstrap", dependencies=[Depends(authenticate)])(
+            routes_system.bootstrap
+        )
+        router.get("/api/swarm/exports", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_exports
+        )
+        router.post("/api/swarm/exports", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_export_start
+        )
+        router.post("/api/swarm/exports/{job_id}/forget", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_export_forget
+        )
+        router.get(
+            "/api/swarm/exports/{job_id}/tasks/{task_id}/download", dependencies=[Depends(authenticate)]
+        )(routes_swarm.swarm_export_download)
+        router.post("/api/swarm/tasks/{task_id}", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_task
+        )
+        router.post("/api/swarm/bulk", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_bulk_start
+        )
+        router.get("/api/swarm/bulk/{job_id}", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_bulk_status
+        )
+        router.get("/api/swarm/bulk-export", dependencies=[Depends(authenticate)])(
+            routes_swarm.swarm_bulk_export
         )
         ctx.cloud_jobs = app.state.cloud_jobs = cloud_wizard.Jobs(ctx.root)
         router.get("/api/cloud", dependencies=[Depends(authenticate)])(
@@ -223,6 +257,9 @@ def register(app, ctx):
     )
     router.post("/api/connection/cancel", dependencies=[Depends(authenticate)])(
         routes_network.connection_cancel
+    )
+    router.post("/api/connection/reroll", dependencies=[Depends(authenticate)])(
+        routes_network.connection_reroll
     )
     router.post("/api/connection/stop", dependencies=[Depends(authenticate)])(
         routes_network.connection_stop
@@ -554,6 +591,9 @@ def register(app, ctx):
     router.get("/api/chats/{chat_id}/authors", dependencies=[Depends(authenticate)])(
         routes_chats.chat_authors
     )
+    router.get("/api/chats/{chat_id}/coverage", dependencies=[Depends(authenticate)])(
+        routes_chats.chat_coverage
+    )
     router.get("/api/chats/{chat_id}/profile", dependencies=[Depends(authenticate)])(
         routes_chats.chat_profile
     )
@@ -599,6 +639,9 @@ def register(app, ctx):
     )
     router.get("/api/avatar/{peer_id}", dependencies=[Depends(authenticate)])(
         routes_chats.avatar
+    )
+    router.get("/api/avatars", dependencies=[Depends(authenticate)])(
+        routes_chats.avatars
     )
     router.get("/api/account-export", dependencies=[Depends(authenticate)])(
         routes_export.account_export_jobs
@@ -688,6 +731,9 @@ def register(app, ctx):
     router.get(
         "/api/chat-export/{export_id}/download", dependencies=[Depends(authenticate)]
     )(routes_export.chat_export_download)
+    router.get(
+        "/api/chat-export/{export_id}/live", dependencies=[Depends(authenticate)]
+    )(routes_export.chat_export_live)
     router.get("/api/checkpoint", dependencies=[Depends(authenticate)])(
         routes_evidence.get_checkpoint
     )

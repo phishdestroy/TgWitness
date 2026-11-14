@@ -7,6 +7,7 @@ from ..app import ProxyListUpload
 from ..app import RoutePolicyUpdate
 from ..guided_connection import ApplyDraft
 from ..guided_connection import ConnectionDraft
+from ..guided_connection import RerollDraft
 from ..network import NetworkConfig
 from ..network import RoutePolicy
 from ..network import parse_mtproxy_link
@@ -63,6 +64,14 @@ async def connection_check(*, ctx=Depends(current_context)):
 
 async def connection_cancel(*, ctx=Depends(current_context)):
     return await ctx.operation(ctx.app.state.connection.cancel)
+
+
+async def connection_reroll(body: RerollDraft, *, ctx=Depends(current_context)):
+    ctx.require_live()
+    try:
+        return ctx.app.state.connection.start_reroll(body.kind)
+    except ValueError as exc:
+        raise HTTPException(409, str(exc)) from None
 
 
 async def connection_stop(*, ctx=Depends(current_context)):

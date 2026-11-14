@@ -5,7 +5,7 @@ from .common import (
     base64,
     bounded_lines,
     hashlib,
-    member_digest,
+    io,
     open_archive,
     read_manifest,
     read_member,
@@ -30,8 +30,9 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
     from .chain import canonical, fingerprint, is_format
     from .completeness import COMPLETENESS_KINDS, completeness_certificate
     from .coverage import Coverage
-    from .journal import media_reference, verify_checkpoint, verify_events
+    from .journal import media_reference, verify_checkpoint, verify_event_lines
     from .outside import OutsideRecords, confirm_drand
+    from .parallel import MemberHashes
     from .reports import archive_seal, check_sums, report_companions
     from .timestamps import verify_anchors, verify_tdx_starts
     from .witness import assurance
@@ -49,32 +50,37 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
         container = container_members(archive, names, manifest["files"])
         if set(names) - set(container) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing bundle members")
-        for name, digest in manifest["files"].items():
-            if member_digest(archive, name) != digest:
-                raise ValueError("File hash mismatch: " + name)
-        sums = check_sums(archive, manifest)
+        hashing = MemberHashes(archive, path, manifest["files"])
 
-        def describes(subject):
-            return (subject.get("event_count") == manifest["event_count"]
-                    and subject.get("head_hash") == manifest["head_hash"]
-                    and subject.get("events_sha256") == manifest["files"].get("events.jsonl"))
-        seal = archive_seal(archive, "report.html", public) if "report.html" in manifest["files"] else None
-        if seal and not describes(seal["subject"]):
-            raise ValueError("The report seal describes a different journal")
-        companions = report_companions(archive, manifest, public, describes)
-        gap_settings = None
-        if "coverage.json" in manifest["files"]:
-            saved_coverage = strict_json(read_member(archive, "coverage.json", MAX_JSON_BYTES))
-            saved_gaps = saved_coverage.get("gap_summary") if isinstance(saved_coverage, dict) else None
-            if isinstance(saved_gaps, dict):
-                gap_settings = saved_gaps.get("parameters")
-        observed, outside = Coverage(gap_settings), OutsideRecords()
-        sequence_events = []
-        hash_files, account_exports, starts = set(), [], []
+        def hashes_match():
+            found = hashing.result()
+            for name, digest in manifest["files"].items():
+                if found[name] != digest:
+                    raise ValueError("File hash mismatch: " + name)
+        if not hashing.futures:
+            hashes_match()
+        try:
+            sums = check_sums(archive, manifest)
 
-        def measured(lines):
-            for line in lines:
-                event = strict_json(line)
+            def describes(subject):
+                return (subject.get("event_count") == manifest["event_count"]
+                        and subject.get("head_hash") == manifest["head_hash"]
+                        and subject.get("events_sha256") == manifest["files"].get("events.jsonl"))
+            seal = archive_seal(archive, "report.html", public) if "report.html" in manifest["files"] else None
+            if seal and not describes(seal["subject"]):
+                raise ValueError("The report seal describes a different journal")
+            companions = report_companions(archive, manifest, public, describes)
+            gap_settings = None
+            if "coverage.json" in manifest["files"]:
+                saved_coverage = strict_json(read_member(archive, "coverage.json", MAX_JSON_BYTES))
+                saved_gaps = saved_coverage.get("gap_summary") if isinstance(saved_coverage, dict) else None
+                if isinstance(saved_gaps, dict):
+                    gap_settings = saved_gaps.get("parameters")
+            observed, outside = Coverage(gap_settings), OutsideRecords()
+            sequence_events = []
+            hash_files, account_exports, starts = set(), [], []
+
+            def take(event):
                 if event["kind"] == "process.started":
                     starts.append(event)
                 if event["kind"] == "sealed.account_export":
@@ -102,22 +108,31 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
                 outside.add(event)
                 if event["kind"] in COMPLETENESS_KINDS:
                     sequence_events.append(event)
-                yield event
-        with archive.open("events.jsonl") as stream:
-            result = verify_events(measured(bounded_lines(stream)), public)
-        if {name for name in manifest["files"] if name.startswith("hashes/")} != hash_files:
-            raise ValueError("Unreferenced journal file-hash manifest")
-        if ("account-export.zip" in manifest["files"]) != bool(account_exports):
-            raise ValueError("Unbound sealed account export")
-        if account_exports:
-            with archive.open("account-export.zip") as incoming:
-                account = verify_account_export(incoming, fp, max_gib=max_gib)
-            binding = account_exports[0]
-            if account["job_id"] != binding["job_id"] or account["complete_within_scope"] != binding["complete_within_scope"]:
-                raise ValueError("Account export coverage differs from its journal binding")
-            result["account_export"] = account
-        if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
-            raise ValueError("Manifest does not match journal")
+            known = anchored_counts(archive, checkpoint)
+            with archive.open("events.jsonl") as stream:
+                result = verify_event_lines(bounded_lines(io.BufferedReader(stream, 1024 * 1024)), public, take, known)
+            if {name for name in manifest["files"] if name.startswith("hashes/")} != hash_files:
+                raise ValueError("Unreferenced journal file-hash manifest")
+            if ("account-export.zip" in manifest["files"]) != bool(account_exports):
+                raise ValueError("Unbound sealed account export")
+            if account_exports:
+                with archive.open("account-export.zip") as incoming:
+                    account = verify_account_export(incoming, fp, max_gib=max_gib)
+                binding = account_exports[0]
+                if account["job_id"] != binding["job_id"] or account["complete_within_scope"] != binding["complete_within_scope"]:
+                    raise ValueError("Account export coverage differs from its journal binding")
+                result["account_export"] = account
+            if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
+                raise ValueError("Manifest does not match journal")
+        except Exception:
+            if hashing.futures:
+                hashes_match()
+            raise
+        except BaseException:
+            hashing.cancel()
+            raise
+        if hashing.futures:
+            hashes_match()
         result["coverage"] = observed.result()
         result["outside"] = outside.result()
         result["sequence_continuity"] = completeness_certificate(sequence_events)
@@ -133,6 +148,8 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
         def hash_at(seq):
             if seq == 0:
                 return "0" * 64
+            if known.get(seq):
+                return known[seq]
             with archive.open("events.jsonl") as stream:
                 for line in bounded_lines(stream):
                     event = strict_json(line)
@@ -160,3 +177,17 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
         return result
 
 
+def anchored_counts(archive, checkpoint):
+    statements, wanted = [checkpoint] if isinstance(checkpoint, dict) else [], {}
+    for name in archive.namelist():
+        if name.startswith("anchors/") and name.endswith(".json"):
+            try:
+                statements.append(strict_json(read_member(archive, name)))
+            except ValueError:
+                continue
+    for value in statements:
+        statement = value.get("statement") if isinstance(value, dict) else None
+        count = statement.get("event_count") if isinstance(statement, dict) else None
+        if type(count) is int and count > 0:
+            wanted[count] = None
+    return wanted

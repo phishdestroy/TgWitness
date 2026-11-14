@@ -43,13 +43,28 @@ client; the collector connects using its own authorized session.
 | WARP | A separate local tunnel for each selected account, with WARP registration and a WireGuard profile kept in that account's vault. |
 
 The current-route check uses a fresh unauthenticated Telegram transport, not the
-account's session. For HTTP-capable routes it also requests Cloudflare's HTTPS
-trace through that route and displays its reported exit IP, country, WARP state
-and check time. The measured latency is the Telegram connection setup time,
-not an ICMP ping. WARP preparation fails unless the trace reports WARP active.
-These preflight checks report route connectivity and the observed exit. Review
-captured records through the archive's acquisition and verification results. A
-running local process alone is not a successful exit check.
+account's session. It opens a transport connection through the route to the
+account's data center and makes one unauthenticated MTProto round trip
+(`req_pq_multi`); it creates no authorization key and uses no account. The
+reported latency is that connection time plus the round trip, and the check
+records both parts separately. For HTTP-capable routes it also requests
+Cloudflare's HTTPS trace through that route and displays its reported exit IP,
+country, WARP state and check time. WARP preparation fails unless the trace
+reports WARP active. These preflight checks report route connectivity and the
+observed exit. Review captured records through the archive's acquisition and
+verification results. A running local process alone is not a successful exit check.
+
+The panel keeps a moving average of the last five checks. A route is **slow** when
+the average exceeds 5 seconds or three checks in a row exceed it, and
+**unavailable** after two failed checks in a row; `network.slow_route` and
+`network.route_recovered` record the changes. For a slow WARP route, **Re-roll WARP**
+restarts the account's tunnel against other Cloudflare WARP endpoints, keeps the
+fastest and records `network.warp_rerolled` with the times before and after;
+**New WARP identity** registers a new WARP device and keeps it only when it is
+faster. The local proxy address, the Telegram account and its session stay the
+same; Telegram connections reconnect through the restarted tunnel. A slow WARP
+route is re-rolled automatically at most once every 30 minutes; when that does
+not help, further re-rolls wait for the operator.
 
 ### Portable WARP and WireGuard
 
@@ -157,6 +172,15 @@ tunnels. None replaces account authentication.
 Save the route for each workspace in **More tools → Account → Settings → Connection settings → Change connection route** before
 signing in. New workspaces default to **Automatic MTProxy · public lists** with **Hide the address**.
 Existing workspaces that explicitly used Direct retain a mode permitting it.
+
+Files are read over separate connections from the one that reads messages, as the official
+apps do. In the account's own data center they reuse the account's authorization key with
+a new MTProto session; for another data center one key is created and authorized while the
+account is connected and is kept only in memory. Every file connection uses the same route
+as the account. Their number per data center is limited by **Parameters → Performance →
+File connections per Telegram data center**; 0 reads files over the account's main
+connection only. At most five Telegram connections are set up at once across all accounts
+of an installation.
 
 ## IP modes
 

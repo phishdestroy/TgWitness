@@ -7,7 +7,6 @@ from .common import (
     bounded_lines,
     datetime,
     hashlib,
-    member_digest,
     open_archive,
     read_manifest,
     read_member,
@@ -50,6 +49,7 @@ def check_journal_changes(archive, manifest, public):
 def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
     from .account import check_attachments, verify_parts
     from .chain import canonical, fingerprint, is_format
+    from .parallel import MemberHashes
     from .reports import archive_seal, check_sums, report_companions
     with open_archive(path, max_gib=max_gib) as archive:
         names = archive.namelist()
@@ -64,23 +64,41 @@ def verify_chat_export(path, expected_fingerprint=None, max_gib=None):
             base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
         if set(names) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing bundle members")
-        for name, digest in manifest["files"].items():
-            if member_digest(archive, name) != digest:
-                raise ValueError("File hash mismatch: " + name)
-        parts = verify_parts(archive, manifest) if manifest.get("parts") else None
-        attachments = check_attachments(archive, manifest)
-        sums = check_sums(archive, manifest)
+        hashing = MemberHashes(archive, path, manifest["files"])
 
-        def describes(subject):
-            return (subject.get("chat_id") == (manifest.get("chat") or {}).get("id")
-                    and subject.get("message_count") == manifest.get("message_count")
-                    and subject.get("chat_json_sha256") == manifest["files"].get("chat.json"))
-        seal = archive_seal(archive, "chat.html", public) if "chat.html" in manifest["files"] else None
-        if seal and not describes(seal["subject"]):
-            raise ValueError("The report seal describes a different chat export")
-        companions = report_companions(archive, manifest, public, describes)
-        ids = check_message_ids(archive, manifest) if "message-ids.json" in manifest["files"] else None
-        journal = check_journal_changes(archive, manifest, public) if "journal-changes.jsonl" in manifest["files"] else None
+        def hashes_match():
+            found = hashing.result()
+            for name, digest in manifest["files"].items():
+                if found[name] != digest:
+                    raise ValueError("File hash mismatch: " + name)
+        if not hashing.futures:
+            hashes_match()
+        try:
+            parts = verify_parts(archive, manifest) if manifest.get("parts") else None
+            numbers = set()
+            attachments = check_attachments(archive, manifest, numbers)
+            sums = check_sums(archive, manifest)
+
+            def describes(subject):
+                return (subject.get("chat_id") == (manifest.get("chat") or {}).get("id")
+                        and subject.get("message_count") == manifest.get("message_count")
+                        and subject.get("chat_json_sha256") == manifest["files"].get("chat.json"))
+            seal = archive_seal(archive, "chat.html", public) if "chat.html" in manifest["files"] else None
+            if seal and not describes(seal["subject"]):
+                raise ValueError("The report seal describes a different chat export")
+            companions = report_companions(archive, manifest, public, describes)
+            ids = check_message_ids(archive, manifest, numbers) if "message-ids.json" in manifest["files"] else None
+            journal = (check_journal_changes(archive, manifest, public) if "journal-changes.jsonl" in manifest["files"]
+                       else None)
+        except Exception:
+            if hashing.futures:
+                hashes_match()
+            raise
+        except BaseException:
+            hashing.cancel()
+            raise
+        if hashing.futures:
+            hashes_match()
         return {"format": manifest["format"], "fingerprint": fp,
                 "message_count": manifest.get("message_count"), "producer": manifest.get("producer"),
                 "chat": manifest.get("chat"), "key_pinned": bool(expected_fingerprint), "parts": parts,
@@ -247,10 +265,10 @@ def message_id_summary(chat_id, ids):
             "missing_ranges": [[low, high] for low, high in holes] if numbered_per_chat(chat_id) else []}
 
 
-def check_message_ids(archive, manifest):
+def check_message_ids(archive, manifest, numbers=None):
     from .account import chat_messages
     claimed = strict_json(read_member(archive, "message-ids.json", MAX_JSON_BYTES))
-    ids = sorted({m["id"] for m in chat_messages(archive) if type(m.get("id")) is int})
+    ids = sorted(numbers if numbers is not None else {m["id"] for m in chat_messages(archive) if type(m.get("id")) is int})
     counted = message_id_summary((manifest.get("chat") or {}).get("id"), ids)
     if {k: claimed.get(k) for k in counted} != counted:
         raise ValueError("message-ids.json disagrees with the messages in chat.json")

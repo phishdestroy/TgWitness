@@ -37,6 +37,14 @@ chat again from the newest message. When Telegram ended the account's authorizat
 the export, **Download partial export** saves a signed archive of the saved range, marked
 partial. Details in [export hashes](../EXPORT_HASHES.md).
 
+While the export reads the chat, **Download messages read so far** saves a signed snapshot
+at any moment. It is a ZIP of pages of up to 2,000 messages, each signed with the workspace
+key as soon as it is written, at the latest about ten seconds after reading. Every page is a
+`.jsonl` file for tools and an `.html` file to read in a browser, newest messages first, and
+the `verify.py` inside checks the chain of page seals. Attachments and the full report come
+with the finished export. If TgWitness stops in the middle of a write, the snapshot stays
+valid up to its last seal; `verify.py` checks that part and reports the bytes after it.
+
 The account needs access to the chat; private chats work too. Each archive covers one
 chat. Exports can run concurrently on separate accounts; for a whole account use
 [account export](../ACCOUNT-EXPORT.md).

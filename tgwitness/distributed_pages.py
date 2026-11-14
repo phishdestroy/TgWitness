@@ -10,7 +10,8 @@ from .store import canonical, utcnow
 from .verify import verify_distributed_pages
 from .workers import complete_in_thread
 
-FORMAT = "tgwitness-distributed-pages-v1"
+FORMAT = "tgwitness-distributed-pages-v2"
+FORMATS = ("tgwitness-distributed-pages-v1", FORMAT)
 PAGE_MESSAGES = 100
 PAGE_BYTES = 4 * 1024**2
 
@@ -37,6 +38,13 @@ class RangePages:
         with self.path.open("rb") if self.path.exists() else open(os.devnull, "rb") as stream:
             return verify_distributed_pages(stream, self.envelopes(), self.job, self.task)
 
+    def handovers_allowed(self):
+        return self.job.get("checkpoint_format") == FORMAT
+
+    def observers(self):
+        return [(envelope["statement"]["byte_start"], envelope["statement"]["byte_end"],
+                 envelope["statement"]["profile_id"]) for envelope in self.envelopes()]
+
     def commit(self, data, count, cursor, terminal, profile, vault, generation, captured_from):
         if linked(self.root) or linked(self.root.parent) or linked(self.path):
             raise ValueError("Checkpoint paths must not be links.")
@@ -55,7 +63,8 @@ class RangePages:
             os.fsync(stream.fileno())
         sync_directory(self.path.parent)
         worker = next(w for w in self.job["workers"] if w["profile_id"] == profile)
-        value = {"format": FORMAT, "job_id": self.job["id"], "plan_sha256": hashlib.sha256(canonical(self.job)).hexdigest(),
+        value = {"format": self.job["checkpoint_format"], "job_id": self.job["id"],
+                 "plan_sha256": hashlib.sha256(canonical(self.job)).hexdigest(),
                  "chat_id": self.job["chat_id"], "low": self.task["low"], "high": self.task["high"],
                  "profile_id": profile, "account_id": worker["account_id"], "seq": seq,
                  "previous_receipt_sha256": before["head_sha256"], "cursor_before": before["cursor"],
@@ -63,6 +72,10 @@ class RangePages:
                  "count": count, "sha256": hashlib.sha256(data).hexdigest(), "terminal": terminal,
                  "captured_from": captured_from, "captured_until": utcnow(),
                  "transport": self.job.get("transport", "regular"), "transport_generation": generation}
+        if before["profile_id"] not in (None, profile):
+            if not self.handovers_allowed():
+                raise ValueError("An interrupted range must resume with its original observer.")
+            value["handover_from"] = before["profile_id"]
         envelope = {"statement": value, "public_key": vault.public_key, "signature": vault.sign(canonical(value))}
         encoded = canonical(envelope)
         durable_write(receipt_path, encoded)
@@ -72,7 +85,7 @@ class RangePages:
 
     async def fetch(self, collector, entity, profile, on_commit, on_wait, transport=None,
                     page_timeout=None, attempts=8):
-        if self.state["profile_id"] not in (None, profile):
+        if self.state["profile_id"] not in (None, profile) and not self.handovers_allowed():
             raise ValueError("An interrupted range must resume with its original observer.")
         if self.state["terminal"]:
             if self.path.stat().st_size != self.state["byte_end"]:

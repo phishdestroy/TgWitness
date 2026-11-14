@@ -12,7 +12,45 @@ from .common import (
     read_member,
     strict_json,
 )
-def verify_handover(path, expected_fingerprint=None):
+def handover_proofs(archive, journal, hashes, count, head):
+    from .chain import hash_bytes, verify_inclusion
+    root, proven, head_proven = hash_bytes(journal.get("merkle_root")), set(), False
+    with archive.open("proofs.jsonl") as stream:
+        for line in bounded_lines(stream):
+            proof = strict_json(line)
+            seq = proof.get("seq") if isinstance(proof, dict) else None
+            if type(seq) is not int or not 1 <= seq <= count or seq in proven and not proof.get("head"):
+                raise ValueError("Malformed Merkle proof in proofs.jsonl")
+            if proof.get("head") is True:
+                if seq != count:
+                    raise ValueError("The journal head proof names another record")
+                verify_inclusion(head, count - 1, count, root, proof.get("path"))
+                head_proven = True
+                continue
+            if seq not in hashes:
+                raise ValueError("A Merkle proof names a record that is not in this extract: " + str(seq))
+            verify_inclusion(hashes[seq], seq - 1, count, root, proof.get("path"))
+            proven.add(seq)
+    if proven != set(hashes) or not head_proven:
+        raise ValueError("Every record and the journal head need a Merkle proof")
+    return len(proven)
+
+
+def handover_range(records, chosen):
+    if not chosen:
+        return None
+    chat, low, high = chosen
+    numbers = sorted({r["message_id"] for r in records if r["chat_id"] == chat and type(r["message_id"]) is int
+                      and low <= r["message_id"] <= high})
+    if not numbers:
+        raise ValueError("No record of chat " + str(chat) + " with message numbers " + str(low) + "-" + str(high)
+                         + " is in this extract")
+    return {"chat_id": chat, "from": low, "to": high, "messages": len(numbers), "message_ids": numbers[:1000],
+            "records": sum(1 for r in records if r["chat_id"] == chat and type(r["message_id"]) is int
+                           and low <= r["message_id"] <= high)}
+
+
+def verify_handover(path, expected_fingerprint=None, chosen=None):
     from .board import verify_board_disclosure
     from .chain import canonical, fingerprint, is_format
     from .reports import archive_seal, check_sums, report_companions
@@ -41,7 +79,7 @@ def verify_handover(path, expected_fingerprint=None):
         if type(count) is not int or count < 1 or not re.fullmatch(r"[0-9a-f]{64}", str(head)):
             raise ValueError("Malformed journal boundary")
         key.verify(base64.b64decode(journal["head_signature"], validate=True), bytes.fromhex(head))
-        counts, previous, referenced = {"unchanged": 0, "minimised": 0}, None, set()
+        counts, previous, referenced, hashes, located = {"unchanged": 0, "minimised": 0}, None, set(), {}, []
         with archive.open("records.jsonl") as stream:
             for line in bounded_lines(stream):
                 record = strict_json(line)
@@ -70,11 +108,20 @@ def verify_handover(path, expected_fingerprint=None):
                     digest = (record["payload"] or {}).get("media_sha256")
                     if "media/" + str(digest) in files:
                         referenced.add("media/" + digest)
+                hashes[seq] = record["hash"]
+                located.append({"chat_id": record["chat_id"], "message_id": record["message_id"]})
                 previous = record
         if counts != {k: manifest["counts"].get(k) for k in counts}:
             raise ValueError("Record counts differ from the signed manifest")
         if {name for name in files if name.startswith("media/")} - referenced:
             raise ValueError("The extract carries an attachment no record refers to")
+        if "proofs.jsonl" in files:
+            proven = handover_proofs(archive, journal, hashes, count, head)
+        elif "merkle_root" in journal:
+            raise ValueError("The extract names a Merkle root but carries no proofs")
+        else:
+            proven = None
+        selected = handover_range(located, chosen)
         def describes(subject):
             return subject.get("records_sha256") == files.get("records.jsonl") and subject.get("head_hash") == head
         seal = archive_seal(archive, "report.html", public) if "report.html" in files else None
@@ -87,6 +134,8 @@ def verify_handover(path, expected_fingerprint=None):
             "purpose": manifest.get("purpose"), "records_unchanged": counts["unchanged"],
             "records_minimised": counts["minimised"], "records_left_out": manifest["counts"].get("left_out"),
             "journal_events": count, "head_hash": head, "attachments": len(referenced),
+            "records_proven": proven, "merkle_root": journal.get("merkle_root") if proven is not None else None,
+            "range": selected,
             "files_checked": len(files), "sha256sums": sums, "report_seal": seal,
             "report_json": companions["json"], "report_parts": companions["parts"], "report_pdf": companions["pdf"],
             "case": manifest.get("case") or {}, "producer": manifest.get("producer")}

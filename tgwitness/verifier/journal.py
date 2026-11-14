@@ -4,25 +4,35 @@ from .common import (
     base64,
     hashlib,
     re,
+    strict_json,
     validate_server_hashes,
 )
-def verify_events(events, public_key):
-    from .chain import canonical, fingerprint
-    from .coverage import parse_time
-    key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key, validate=True))
-    previous, count = "0" * 64, 0
-    previous_time, previous_at = None, None
-    chronology = {"regressions": 0, "unparseable": 0, "samples": []}
-    for count, event in enumerate(events, 1):
+class EventChain:
+    def __init__(self, public_key, remember=None):
+        self.public_key, self.remember, self.checks = public_key, remember, None
+        self.key = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key, validate=True))
+        self.previous, self.count = "0" * 64, 0
+        self.previous_time = self.previous_at = None
+        self.chronology = {"regressions": 0, "unparseable": 0, "samples": []}
+
+    def structure(self, event):
+        count = self.count + 1
         if set(event) != set(FIELDS) | {"hash", "signature"}:
             raise ValueError("Unexpected or missing fields at event " + str(count))
-        if event["seq"] != count or event["previous_hash"] != previous:
+        if event["seq"] != count or event["previous_hash"] != self.previous:
             raise ValueError("Broken sequence or hash chain at event " + str(count))
+
+    def content(self, event):
+        from .chain import canonical
         calculated = hashlib.sha256(canonical({k: event[k] for k in FIELDS})).hexdigest()
         if event["hash"] != calculated:
-            raise ValueError("Changed content at event " + str(count))
-        key.verify(base64.b64decode(event["signature"], validate=True), bytes.fromhex(calculated))
-        anomaly = None
+            raise ValueError("Changed content at event " + str(self.count + 1))
+        self.key.verify(base64.b64decode(event["signature"], validate=True), bytes.fromhex(calculated))
+        return calculated
+
+    def settle(self, event, digest):
+        from .coverage import parse_time
+        count, chronology, anomaly = self.count + 1, self.chronology, None
         try:
             observed = parse_time(event["observed_at"])
             if observed.utcoffset() is None:
@@ -31,28 +41,71 @@ def verify_events(events, public_key):
             observed = None
             chronology["unparseable"] += 1
             anomaly = {"seq": count, "observed_at": event["observed_at"], "reason": "unparseable"}
-        if observed is not None and previous_time is not None and observed < previous_time:
+        if observed is not None and self.previous_time is not None and observed < self.previous_time:
             chronology["regressions"] += 1
-            anomaly = {"seq": count, "observed_at": event["observed_at"], "previous_at": previous_at,
-                       "backwards_seconds": (previous_time - observed).total_seconds(), "reason": "regression"}
+            anomaly = {"seq": count, "observed_at": event["observed_at"], "previous_at": self.previous_at,
+                       "backwards_seconds": (self.previous_time - observed).total_seconds(), "reason": "regression"}
         if anomaly is not None and len(chronology["samples"]) < 100:
             chronology["samples"].append(anomaly)
         if observed is not None:
-            previous_time, previous_at = observed, event["observed_at"]
+            self.previous_time, self.previous_at = observed, event["observed_at"]
         if event["kind"] == "media.hashed":
             payload = event["payload"]
             validate_server_hashes(payload.get("server_hashes"))
             if (payload["server_hashes"]["status"] != "complete" or payload.get("downloaded_bytes") != 0
                     or payload.get("media_sha256") is not None):
                 raise ValueError("A hash-only record incorrectly claims downloaded file content")
-        previous = calculated
-    result = {"events": count, "head_hash": previous, "fingerprint": fingerprint(public_key)}
-    if chronology["regressions"] or chronology["unparseable"]:
-        chronology["meaning"] = ("Observation times come from the collector's clock; the hash chain fixes the order of "
-                                 "the records, and timestamps, drand rounds and witness records fix them in time. "
-                                 "These entries do not affect the signatures.")
-        result["chronology"] = chronology
-    return result
+        self.previous, self.count = digest, count
+        if self.remember is not None and count in self.remember:
+            self.remember[count] = digest
+
+    def run(self, events):
+        for event in events:
+            self.structure(event)
+            self.settle(event, self.content(event))
+        return self.result()
+
+    def run_lines(self, lines, take=None):
+        from .parallel import PARALLEL_EVENTS_AFTER, JournalChecks, parallel_pool
+        for line in lines:
+            event = strict_json(line)
+            try:
+                if take is not None:
+                    take(event)
+                if self.checks is None and self.count >= PARALLEL_EVENTS_AFTER and parallel_pool() is not None:
+                    self.checks = JournalChecks(self.public_key)
+                self.structure(event)
+                if self.checks is None:
+                    digest = self.content(event)
+                else:
+                    self.checks.add(self.count + 1, line)
+                    digest = event["hash"]
+                self.settle(event, digest)
+            except Exception:
+                if self.checks is not None:
+                    self.checks.settle()
+                raise
+        if self.checks is not None:
+            self.checks.settle()
+        return self.result()
+
+    def result(self):
+        from .chain import fingerprint
+        result = {"events": self.count, "head_hash": self.previous, "fingerprint": fingerprint(self.public_key)}
+        if self.chronology["regressions"] or self.chronology["unparseable"]:
+            self.chronology["meaning"] = ("Observation times come from the collector's clock; the hash chain fixes the "
+                                          "order of the records, and timestamps, drand rounds and witness records fix "
+                                          "them in time. These entries do not affect the signatures.")
+            result["chronology"] = self.chronology
+        return result
+
+
+def verify_events(events, public_key, remember=None):
+    return EventChain(public_key, remember).run(events)
+
+
+def verify_event_lines(lines, public_key, take=None, remember=None):
+    return EventChain(public_key, remember).run_lines(lines, take)
 
 
 def media_reference(event):

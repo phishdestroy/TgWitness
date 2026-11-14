@@ -220,7 +220,13 @@ content against its hash, its Ed25519 signature and its link to an included pred
 minimised record keeps the original hash and signature, so the signature still verifies, but the
 withheld fields cannot be recomputed from it; the record names what was withheld and the report
 marks it. The manifest names the journal length and head with the collector's signature over that
-head, and counts the records left out; `coverage.json` describes the chosen chats. Names inside file
+head, and counts the records left out; `coverage.json` describes the chosen chats. New extracts also
+carry `proofs.jsonl`: for every included record and for the journal head, the Merkle path from the
+record's original hash to the journal root named in the signed manifest. `verify.py` checks each
+path, so every record is shown to belong to the same journal of that length and head, without the
+full journal; an extract of 100 messages checks in about a second whatever the journal size.
+`--range=CHAT:FROM-TO` additionally confirms that messages FROM to TO of a chat are in the extract
+and reports how many records it checked for them. Names inside file
 names are not detected. Review the final files before sharing: free text, file names and selected
 attachments can still identify people. Keep the full signed ZIP: the extract is a disclosure, not a replacement.
 
@@ -602,6 +608,17 @@ The verifier rejects unexpected/missing members, duplicate names, corrupt files,
 broken sequence/chain, invalid signatures, and mismatch with a provided checkpoint.
 It never extracts archive paths. It limits total declared uncompressed size to 4 GiB;
 `--max-gib N` allows larger archives made with a raised **More tools → Parameters** limit.
+
+A large archive is checked by several processes at once: members are hashed in parallel,
+and after the first 5,000 records the content hash and signature of each record are checked
+by worker processes while the main process follows the chain, the coverage and the bindings
+in order. `--jobs N` sets the number of processes; the default `auto` uses one per CPU, at
+most 16, and `--jobs 1` keeps everything in one process. The answer is the same either way,
+and a change is refused with the same message. Hashes at the positions named by retained
+checkpoints and timestamp anchors are kept during that single pass, so each anchor is
+compared without reading the journal again. On a 32-thread computer a 10.8 GB archive with
+400,000 records took 58.9 s in one process, 15.2 s with 4 and 8.4 s with 16; one pass over the
+records in order then sets the limit.
 
 Run verification from your installed TgWitness version or a reviewed checkout.
 The copy included in an archive supports portable use; check that copy against your

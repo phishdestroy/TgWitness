@@ -2,6 +2,12 @@
   "en": {
     "name": "English",
     "words": {
+      "Live chat export": "Live chat export",
+      "Page seals": "Page seals",
+      "{n} pages signed in order": "{n} pages signed in order",
+      "Unsealed tail": "Unsealed tail",
+      "{n} bytes after the last seal were not checked": "{n} bytes after the last seal were not checked",
+      "not used: the archive was not closed": "not used: the archive was not closed",
       "Signer": "Signer",
       "Checks": "Checks",
       "Live recording and devices": "Live recording and devices",
@@ -299,6 +305,12 @@
   "uk": {
     "name": "Українська",
     "words": {
+      "Live chat export": "Живий експорт чату",
+      "Page seals": "Печатки сторінок",
+      "{n} pages signed in order": "Підписано по черзі сторінок: {n}",
+      "Unsealed tail": "Незапечатаний кінець",
+      "{n} bytes after the last seal were not checked": "Не перевірено байтів після останньої печатки: {n}",
+      "not used: the archive was not closed": "не використано: архів не було закрито",
       "Signer": "Підписувач",
       "Checks": "Перевірки",
       "Live recording and devices": "Запис у реальному часі та пристрої",
@@ -596,6 +608,12 @@
   "es": {
     "name": "Español",
     "words": {
+      "Live chat export": "Exportación de chat en curso",
+      "Page seals": "Sellos de página",
+      "{n} pages signed in order": "{n} páginas firmadas en orden",
+      "Unsealed tail": "Final sin sellar",
+      "{n} bytes after the last seal were not checked": "No se comprobaron {n} bytes posteriores al último sello",
+      "not used: the archive was not closed": "no se usa: el archivo no se cerró",
       "Signer": "Firmante",
       "Checks": "Comprobaciones",
       "Live recording and devices": "Grabación en directo y dispositivos",
@@ -893,6 +911,12 @@
   "pt": {
     "name": "Português",
     "words": {
+      "Live chat export": "Exportação de chat em andamento",
+      "Page seals": "Selos das páginas",
+      "{n} pages signed in order": "{n} páginas assinadas em ordem",
+      "Unsealed tail": "Final sem selo",
+      "{n} bytes after the last seal were not checked": "{n} bytes após o último selo não foram verificados",
+      "not used: the archive was not closed": "não usada: o arquivo não foi fechado",
       "Signer": "Signatário",
       "Checks": "Verificações",
       "Live recording and devices": "Gravação ao vivo e dispositivos",
@@ -1190,6 +1214,12 @@
   "tr": {
     "name": "Türkçe",
     "words": {
+      "Live chat export": "Süren sohbet dışa aktarımı",
+      "Page seals": "Sayfa mühürleri",
+      "{n} pages signed in order": "{n} sayfa sırayla imzalandı",
+      "Unsealed tail": "Mühürsüz son kısım",
+      "{n} bytes after the last seal were not checked": "Son mühürden sonraki {n} bayt denetlenmedi",
+      "not used: the archive was not closed": "kullanılmadı: arşiv kapatılmamıştı",
       "Signer": "İmzalayan",
       "Checks": "Kontroller",
       "Live recording and devices": "Canlı kayıt ve cihazlar",
@@ -1487,6 +1517,12 @@
   "ar": {
     "name": "العربية",
     "words": {
+      "Live chat export": "تصدير الدردشة الجاري",
+      "Page seals": "أختام الصفحات",
+      "{n} pages signed in order": "{n} صفحة موقّعة بالترتيب",
+      "Unsealed tail": "ذيل غير مختوم",
+      "{n} bytes after the last seal were not checked": "لم يُتحقق من {n} بايت بعد آخر ختم",
+      "not used: the archive was not closed": "غير مستخدم: لم يُغلق الأرشيف",
       "Signer": "الموقّع",
       "Checks": "عمليات التحقق",
       "Live recording and devices": "التسجيل المباشر والأجهزة",
@@ -1784,6 +1820,12 @@
   "fa": {
     "name": "فارسی",
     "words": {
+      "Live chat export": "صادرات در حال اجرای گفت‌وگو",
+      "Page seals": "مهرهای صفحه",
+      "{n} pages signed in order": "{n} صفحه به ترتیب امضا شده",
+      "Unsealed tail": "انتهای مهرنشده",
+      "{n} bytes after the last seal were not checked": "{n} بایت پس از آخرین مهر بررسی نشد",
+      "not used: the archive was not closed": "استفاده نشد: بایگانی بسته نشده بود",
       "Signer": "امضاکننده",
       "Checks": "بررسی‌ها",
       "Live recording and devices": "ضبط زنده و دستگاه‌ها",
@@ -2081,6 +2123,12 @@
   "ur": {
     "name": "اردو",
     "words": {
+      "Live chat export": "جاری چیٹ ایکسپورٹ",
+      "Page seals": "صفحات کی مہریں",
+      "{n} pages signed in order": "{n} صفحات ترتیب سے دستخط شدہ",
+      "Unsealed tail": "بغیر مہر کا آخری حصہ",
+      "{n} bytes after the last seal were not checked": "آخری مہر کے بعد کے {n} بائٹس نہیں جانچے گئے",
+      "not used: the archive was not closed": "استعمال نہیں ہوا: آرکائیو بند نہیں کیا گیا تھا",
       "Signer": "دستخط کنندہ",
       "Checks": "چیکس",
       "Live recording and devices": "لائو ریکارڈنگ اور آلات",
@@ -2378,6 +2426,12 @@
   "hi": {
     "name": "हिन्दी",
     "words": {
+      "Live chat export": "चल रहा चैट निर्यात",
+      "Page seals": "पृष्ठ सील",
+      "{n} pages signed in order": "{n} पृष्ठ क्रम से हस्ताक्षरित",
+      "Unsealed tail": "बिना सील का अंतिम हिस्सा",
+      "{n} bytes after the last seal were not checked": "अंतिम सील के बाद के {n} बाइट नहीं जाँचे गए",
+      "not used: the archive was not closed": "उपयोग नहीं हुआ: आर्काइव बंद नहीं किया गया था",
       "Signer": "हस्ताक्षरकर्ता",
       "Checks": "चेक",
       "Live recording and devices": "लाइव रिकॉर्डिंग और डिवाइस",
@@ -2675,6 +2729,12 @@
   "id": {
     "name": "Bahasa Indonesia",
     "words": {
+      "Live chat export": "Ekspor obrolan berjalan",
+      "Page seals": "Segel halaman",
+      "{n} pages signed in order": "{n} halaman ditandatangani berurutan",
+      "Unsealed tail": "Bagian akhir tanpa segel",
+      "{n} bytes after the last seal were not checked": "{n} byte setelah segel terakhir tidak diperiksa",
+      "not used: the archive was not closed": "tidak dipakai: arsip belum ditutup",
       "Signer": "Penandatangan",
       "Checks": "Pemeriksaan",
       "Live recording and devices": "Perekaman langsung dan perangkat",
@@ -2972,6 +3032,12 @@
   "vi": {
     "name": "Tiếng Việt",
     "words": {
+      "Live chat export": "Bản xuất trò chuyện đang chạy",
+      "Page seals": "Niêm phong trang",
+      "{n} pages signed in order": "{n} trang được ký theo thứ tự",
+      "Unsealed tail": "Phần cuối chưa niêm phong",
+      "{n} bytes after the last seal were not checked": "{n} byte sau niêm phong cuối chưa được kiểm tra",
+      "not used: the archive was not closed": "không dùng: kho lưu trữ chưa được đóng",
       "Signer": "Người ký",
       "Checks": "Kiểm tra",
       "Live recording and devices": "Ghi âm trực tiếp và thiết bị",
@@ -3269,6 +3335,12 @@
   "zh": {
     "name": "简体中文",
     "words": {
+      "Live chat export": "进行中的聊天导出",
+      "Page seals": "页面封存",
+      "{n} pages signed in order": "{n} 页按顺序签名",
+      "Unsealed tail": "未封存的尾部",
+      "{n} bytes after the last seal were not checked": "最后一个封存之后的 {n} 字节未检查",
+      "not used: the archive was not closed": "未使用：归档未关闭",
       "Signer": "签名者",
       "Checks": "检查项",
       "Live recording and devices": "实时录制与设备",
@@ -3566,6 +3638,12 @@
   "fr": {
     "name": "Français",
     "words": {
+      "Live chat export": "Export de chat en cours",
+      "Page seals": "Sceaux des pages",
+      "{n} pages signed in order": "{n} pages signées dans l’ordre",
+      "Unsealed tail": "Fin non scellée",
+      "{n} bytes after the last seal were not checked": "{n} octets après le dernier sceau n’ont pas été vérifiés",
+      "not used: the archive was not closed": "non utilisée : l’archive n’a pas été fermée",
       "Signer": "Signataire",
       "Checks": "Vérifications",
       "Live recording and devices": "Enregistrement en direct et appareils",
@@ -3863,6 +3941,12 @@
   "de": {
     "name": "Deutsch",
     "words": {
+      "Live chat export": "Laufender Chat-Export",
+      "Page seals": "Seitensiegel",
+      "{n} pages signed in order": "{n} Seiten der Reihe nach signiert",
+      "Unsealed tail": "Unversiegeltes Ende",
+      "{n} bytes after the last seal were not checked": "{n} Bytes nach dem letzten Siegel wurden nicht geprüft",
+      "not used: the archive was not closed": "nicht verwendet: das Archiv wurde nicht abgeschlossen",
       "Signer": "Unterzeichner",
       "Checks": "Prüfungen",
       "Live recording and devices": "Live-Aufzeichnung und Geräte",
@@ -4160,6 +4244,12 @@
   "it": {
     "name": "Italiano",
     "words": {
+      "Live chat export": "Esportazione della chat in corso",
+      "Page seals": "Sigilli delle pagine",
+      "{n} pages signed in order": "{n} pagine firmate in ordine",
+      "Unsealed tail": "Coda non sigillata",
+      "{n} bytes after the last seal were not checked": "{n} byte dopo l’ultimo sigillo non sono stati verificati",
+      "not used: the archive was not closed": "non usata: l’archivio non è stato chiuso",
       "Signer": "Firmante",
       "Checks": "Verifiche",
       "Live recording and devices": "Registrazione in tempo reale e dispositivi",
@@ -4457,6 +4547,12 @@
   "uz": {
     "name": "Oʻzbekcha",
     "words": {
+      "Live chat export": "Davom etayotgan chat eksporti",
+      "Page seals": "Sahifa muhrlari",
+      "{n} pages signed in order": "{n} sahifa ketma-ket imzolangan",
+      "Unsealed tail": "Muhrlanmagan oxirgi qism",
+      "{n} bytes after the last seal were not checked": "Oxirgi muhrdan keyingi {n} bayt tekshirilmadi",
+      "not used: the archive was not closed": "ishlatilmadi: arxiv yopilmagan",
       "Signer": "Imzochi",
       "Checks": "Tekshiruvlar",
       "Live recording and devices": "Jonli yozuv va qurilmalar",
@@ -4754,6 +4850,12 @@
   "ko": {
     "name": "한국어",
     "words": {
+      "Live chat export": "진행 중인 채팅 내보내기",
+      "Page seals": "페이지 봉인",
+      "{n} pages signed in order": "{n}개 페이지가 순서대로 서명됨",
+      "Unsealed tail": "봉인되지 않은 끝부분",
+      "{n} bytes after the last seal were not checked": "마지막 봉인 이후 {n}바이트는 확인하지 않음",
+      "not used: the archive was not closed": "사용 안 함: 아카이브가 닫히지 않았음",
       "Signer": "서명자",
       "Checks": "검증 항목",
       "Live recording and devices": "실시간 녹화 및 기기",
@@ -5051,6 +5153,12 @@
   "zh-Hant": {
     "name": "繁體中文",
     "words": {
+      "Live chat export": "進行中的聊天匯出",
+      "Page seals": "頁面封存",
+      "{n} pages signed in order": "{n} 頁依序簽署",
+      "Unsealed tail": "未封存的尾端",
+      "{n} bytes after the last seal were not checked": "最後一個封存之後的 {n} 位元組未檢查",
+      "not used: the archive was not closed": "未使用：封存檔未關閉",
       "Signer": "簽署者",
       "Checks": "檢查項目",
       "Live recording and devices": "即時錄製與裝置",
@@ -5348,6 +5456,12 @@
   "ms": {
     "name": "Bahasa Melayu",
     "words": {
+      "Live chat export": "Eksport sembang sedang berjalan",
+      "Page seals": "Meterai halaman",
+      "{n} pages signed in order": "{n} halaman ditandatangani mengikut urutan",
+      "Unsealed tail": "Bahagian hujung tanpa meterai",
+      "{n} bytes after the last seal were not checked": "{n} bait selepas meterai terakhir tidak disemak",
+      "not used: the archive was not closed": "tidak digunakan: arkib tidak ditutup",
       "Signer": "Penandatangan",
       "Checks": "Semakan",
       "Live recording and devices": "Rakaman langsung dan peranti",
@@ -5645,6 +5759,12 @@
   "pl": {
     "name": "Polski",
     "words": {
+      "Live chat export": "Eksport czatu w toku",
+      "Page seals": "Pieczęcie stron",
+      "{n} pages signed in order": "Stron podpisanych po kolei: {n}",
+      "Unsealed tail": "Niezapieczętowana końcówka",
+      "{n} bytes after the last seal were not checked": "Nie sprawdzono {n} bajtów po ostatniej pieczęci",
+      "not used: the archive was not closed": "nieużyta: archiwum nie zostało zamknięte",
       "Signer": "Podpisujący",
       "Checks": "Sprawdzenia",
       "Live recording and devices": "Nagrywanie na żywo i urządzenia",
@@ -5942,6 +6062,12 @@
   "ja": {
     "name": "日本語",
     "words": {
+      "Live chat export": "進行中のチャットエクスポート",
+      "Page seals": "ページの封印",
+      "{n} pages signed in order": "{n} ページを順に署名",
+      "Unsealed tail": "封印されていない末尾",
+      "{n} bytes after the last seal were not checked": "最後の封印以降の {n} バイトは未検証",
+      "not used: the archive was not closed": "未使用: アーカイブが閉じられていません",
       "Signer": "署名者",
       "Checks": "検証項目",
       "Live recording and devices": "ライブ録画とデバイス",
@@ -6239,6 +6365,12 @@
   "th": {
     "name": "ไทย",
     "words": {
+      "Live chat export": "การส่งออกแชตที่กำลังดำเนินอยู่",
+      "Page seals": "ตราผนึกหน้า",
+      "{n} pages signed in order": "{n} หน้าลงนามตามลำดับ",
+      "Unsealed tail": "ส่วนท้ายที่ยังไม่ปิดผนึก",
+      "{n} bytes after the last seal were not checked": "ไม่ได้ตรวจ {n} ไบต์หลังตราผนึกสุดท้าย",
+      "not used: the archive was not closed": "ไม่ได้ใช้: ไฟล์เก็บถาวรยังไม่ถูกปิด",
       "Signer": "ผู้ลงนาม",
       "Checks": "การตรวจสอบ",
       "Live recording and devices": "การบันทึกแบบเรียลไทม์และอุปกรณ์",
@@ -6536,6 +6668,12 @@
   "he": {
     "name": "עברית",
     "words": {
+      "Live chat export": "ייצוא צ׳אט בתהליך",
+      "Page seals": "חותמות העמודים",
+      "{n} pages signed in order": "{n} עמודים חתומים לפי הסדר",
+      "Unsealed tail": "סוף לא חתום",
+      "{n} bytes after the last seal were not checked": "{n} בייטים אחרי החותמת האחרונה לא נבדקו",
+      "not used: the archive was not closed": "לא בשימוש: הארכיון לא נסגר",
       "Signer": "החותם",
       "Checks": "בדיקות",
       "Live recording and devices": "הקלטה חיה ומכשירים",
@@ -6833,6 +6971,12 @@
   "bn": {
     "name": "বাংলা",
     "words": {
+      "Live chat export": "চলমান চ্যাট এক্সপোর্ট",
+      "Page seals": "পৃষ্ঠার সিল",
+      "{n} pages signed in order": "{n}টি পৃষ্ঠা ক্রমানুসারে স্বাক্ষরিত",
+      "Unsealed tail": "সিলবিহীন শেষাংশ",
+      "{n} bytes after the last seal were not checked": "শেষ সিলের পরের {n} বাইট যাচাই করা হয়নি",
+      "not used: the archive was not closed": "ব্যবহৃত হয়নি: আর্কাইভটি বন্ধ করা হয়নি",
       "Signer": "স্বাক্ষরকারী",
       "Checks": "চেকসমূহ",
       "Live recording and devices": "লাইভ রেকর্ডিং এবং ডিভাইসসমূহ",
@@ -7130,6 +7274,12 @@
   "ru": {
     "name": "Русский",
     "words": {
+      "Live chat export": "Живой экспорт чата",
+      "Page seals": "Печати страниц",
+      "{n} pages signed in order": "Подписано по порядку страниц: {n}",
+      "Unsealed tail": "Незапечатанный хвост",
+      "{n} bytes after the last seal were not checked": "Не проверено байт после последней печати: {n}",
+      "not used: the archive was not closed": "не используется: архив не был закрыт",
       "Signer": "Подписант",
       "Checks": "Проверки",
       "Live recording and devices": "Живая запись и устройства",

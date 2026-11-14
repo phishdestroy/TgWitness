@@ -46,8 +46,11 @@ def bundle(directory, group, parts, vault):
         raise
 
 
+SELECTION = {"id": "selection", "label": "Selected accounts"}
+
+
 async def export(app, request, group_id, language=None):
-    registry, store = app.state.profiles, app.state.store
+    registry = app.state.profiles
     try:
         group = registry._group(group_id)
     except ValueError as exc:
@@ -55,6 +58,11 @@ async def export(app, request, group_id, language=None):
     members = registry.members(group_id)
     if not members:
         raise HTTPException(409, "This group has no accounts to export.")
+    return await export_members(app, request, members, group, language)
+
+
+async def export_members(app, request, members, group, language=None):
+    registry, store = app.state.profiles, app.state.store
     if any(registry.entries[p].get("app") is None for p in members):
         raise HTTPException(409, "Every account of the group must be available to export it.")
     parts = []

@@ -18,7 +18,9 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   }
   const kind = selectField('chat-list-kind', 'Type', [['', 'All'], ['channel', 'Channels'], ['group', 'Groups'], ['bot', 'Bots'], ['private', 'Private chats']]);
   const status = selectField('chat-list-state', 'State', [['', 'All'], ['active', 'Collecting'], ['loading', 'Loading history'], ['retry', 'Retry'], ['pending', 'Pending media'], ['failed', 'Failed media'], ['restricted', 'Restricted'], ['lost', 'Access to the chat lost'], ['auto', 'Auto-discovered'], ['unconfirmed', 'Access unconfirmed'], ['excluded', 'Excluded'], ['paused', 'Paused'], ['priority', 'Priority']]);
+  const wait = node('p', 'chat-list-wait'); wait.hidden = true; wait.setAttribute('role', 'status');
   fields.prepend(sortLabel); filters.append(fields); controls.append(filters); root.querySelector('.chat-search').after(controls);
+  controls.after(wait);
   root.querySelector('.chats-sidebar').append(root.querySelector('.chat-open'));
   const pending = new Set();
   let session = getSession();
@@ -28,21 +30,24 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const state = getState(), targets = new Map((state.status?.targets || []).map(target => [target.chat_id, target]));
     return state.chats.map(chat => ({...chat, ...targets.get(chat.chat_id), known: targets.has(chat.chat_id)}));
   }
+  const sourceOf = chat => getState().status?.collector.source_status?.[String(chat.chat_id)];
   function sourceState(chat) {
-    const current = getState().status;
+    const current = getState().status, source = sourceOf(chat)?.state;
     if (current?.scope?.exclude?.includes(chat.chat_id)) return 'excluded';
     if (!chat.enabled || !current?.collector.running) return 'paused';
-    if (current?.collector.source_status?.[String(chat.chat_id)]?.state === 'access_lost') return 'lost';
-    if (current?.collector.source_status?.[String(chat.chat_id)]?.state === 'access_unconfirmed') return 'unconfirmed';
+    if (source === 'access_lost') return 'lost';
+    if (source === 'access_unconfirmed') return 'unconfirmed';
     return 'active';
   }
   const queued = chat => (chat.media_queue?.pending || 0) + (chat.media_queue?.running || 0);
+  const restrictions = chat => chat.telegram_restrictions?.length ? chat.telegram_restrictions
+    : sourceOf(chat)?.state === 'restricted_by_telegram' ? sourceOf(chat).restriction || [{}] : [];
   function stateMatches(chat, mode) {
     if (mode === 'auto') return chat.origin === 'scope';
     if (mode === 'priority') return chat.priority;
     if (mode === 'pending') return queued(chat) > 0;
     if (mode === 'failed') return chat.media_queue?.failed > 0;
-    if (mode === 'restricted') return chat.telegram_restrictions?.length > 0;
+    if (mode === 'restricted') return restrictions(chat).length > 0;
     if (mode === 'loading') return !!chat.intake_state;
     if (mode === 'retry') return chat.intake_state === 'retry';
     return sourceState(chat) === mode;
@@ -52,6 +57,15 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     return (!query || `${chat.title || ''} ${chat.chat_id}`.toLocaleLowerCase().includes(query))
       && (!kind.value || types[chat.kind] === kind.value)
       && (!mode || stateMatches(chat, mode));
+  }
+  function lostHint(chat) {
+    return tr({no_access: 'The account can no longer read this chat', not_a_member: 'The account left or was removed'}[sourceOf(chat)?.reason] || 'Access to the chat lost');
+  }
+  function renderWait() {
+    const until = getState().status?.collector?.activity?.telegram_pause_until;
+    wait.hidden = !until;
+    if (until) wait.textContent = tr('Telegram asked this account to wait until {time}. Saved chats stay readable.',
+      {time: new Date(until * 1000).toLocaleTimeString(document.documentElement.lang || undefined)});
   }
   function compare(a, b) {
     const latest = value => Date.parse(value.last_message_at || value.last_observed_at || '') || 0;
@@ -84,10 +98,14 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     if (chat.edited) badges.append(badge('pill-edited', tr('{n} edited', {n: chat.edited}), chat.edited, 'edit'));
     const progress = node('span', 'chat-item-status'), state = sourceState(chat);
     const label = {excluded: 'Excluded', unconfirmed: 'Access unconfirmed', lost: 'Access to the chat lost', paused: 'Paused', active: 'Collecting'}[state];
-    if (label) progress.append(node('span', 'pill pill-state', tr(label)));
-    if (chat.telegram_restrictions?.length) {
-      const restricted = node('span', 'pill pill-state', tr('Restricted'));
-      restricted.title = chat.telegram_restrictions.map(item => [item.platform, item.text || item.reason].filter(Boolean).join(': ')).join('\n');
+    if (label) {
+      const pill = node('span', 'pill pill-state' + (state === 'lost' ? ' pill-blocked' : ''), tr(label));
+      if (state === 'lost') pill.title = lostHint(chat);
+      progress.append(pill);
+    }
+    if (restrictions(chat).length) {
+      const restricted = node('span', 'pill pill-state pill-blocked', tr('Restricted'));
+      restricted.title = restrictions(chat).map(item => [item.platform, item.text || item.reason].filter(Boolean).join(': ')).filter(Boolean).join('\n') || tr('Blocked by Telegram');
       progress.append(restricted);
     }
     if (chat.intake_state) {
@@ -128,7 +146,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const chats = currentChats().filter(matches).sort(compare), existing = new Map([...list.children].map(row => [row.dataset.chat, row]));
     const rows = chats.map(chat => {
       const row = existing.get(String(chat.chat_id)) || makeRow(chat), open = row.querySelector('.chat-choice'), star = row.querySelector('.chat-priority');
-      const signature = JSON.stringify([chat, sourceState(chat)]);
+      const signature = JSON.stringify([chat, sourceState(chat), sourceOf(chat)?.restriction, !!state.status?.collector?.running]);
       if (row.renderKey !== signature) {open.replaceChildren(...presentation(chat)); row.renderKey = signature;}
       row.classList.toggle('active', chat.chat_id === state.chat); open.setAttribute('aria-pressed', String(chat.chat_id === state.chat));
       open.title = [chat.title || tr('Chat {id}', {id: chat.chat_id}), chat.origin === 'scope' ? tr('Auto-discovered') : ''].filter(Boolean).join(' · ');
@@ -150,7 +168,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       if (state.chats.length) {const clear = node('button', 'text-link', tr('Clear filters')); clear.type = 'button'; clear.addEventListener('click', () => {resetSession(); changed(); search.focus();}); empty.append(clear);}
       rows.push(empty);
     }
-    place(list, rows); const selected = Number(!!kind.value) + Number(!!status.value);
+    place(list, rows); renderWait(); const selected = Number(!!kind.value) + Number(!!status.value);
     count.hidden = !selected; count.textContent = String(selected); summary.classList.toggle('filtered', !!selected);
   }
   function resetSession() {session = getSession(); pending.clear(); search.value = ''; sort.value = 'activity'; kind.value = status.value = ''; filters.open = false; list.replaceChildren(); list.removeAttribute('aria-busy');}

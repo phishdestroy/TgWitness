@@ -20,7 +20,8 @@ KINDS = {"evidence": "Evidence archive", "chat": "Chat export", "account": "Acco
          "account_disclosure": "Account disclosure", "witness": "Witness journal",
          "dossier": "People profiles", "proof": "Public proof", "report": "Sealed report",
          "history": "History report", "handover": "Handover extract", "selection": "Viewer selection",
-         "distributed": "Distributed acquisition", "board": "Case Board", "attestation": "Collector attestation"}
+         "distributed": "Distributed acquisition", "board": "Case Board", "attestation": "Collector attestation",
+         "live": "Live chat export"}
 CONSOLE_LIST_LIMIT = 10
 
 
@@ -535,6 +536,17 @@ class Console:
             if result.get("parts"):
                 self.check("ok", "Accounts", self.t("{n} account(s) signed their message ranges", n=len(result["parts"])))
             self.seal(result, "chat.html")
+        elif shown == "live":
+            salvaged = result.get("salvaged")
+            self.check("warn" if salvaged else "ok", "Manifest signature",
+                       self.t("not used: the archive was not closed") if salvaged else self.t("Ed25519 · valid"))
+            self.check("ok", "File hashes", self.t("{n} files · SHA-256 match", n=self.number(result["files_checked"])))
+            self.check("ok", "Messages", self.t("{n} messages · {title}", n=self.number(result.get("message_count")),
+                                                title=(result.get("chat") or {}).get("title") or "?"))
+            self.check("ok", "Page seals", self.t("{n} pages signed in order", n=self.number(result["pages"])))
+            if salvaged:
+                self.check("warn", "Unsealed tail", self.t("{n} bytes after the last seal were not checked",
+                                                          n=self.number(salvaged["unsealed_bytes"])))
         elif shown == "handover":
             self.check("ok", "Manifest signature", self.t("Ed25519 · valid"))
             self.check("ok", "File hashes", self.t("{n} files · SHA-256 match", n=self.number(result["files_checked"])))
@@ -546,6 +558,10 @@ class Console:
             self.check("none", "Left out", self.t("{n} records of {total} in the journal",
                                                   n=self.number(result["records_left_out"]),
                                                   total=self.number(result["journal_events"])))
+            if result.get("records_proven") is not None:
+                root = str(result.get("merkle_root") or "")
+                self.check("ok", "Record chain", self.t("{n} records · head {hash}", n=self.number(result["records_proven"]),
+                                                        hash=root[:8] + "…" + root[-8:]))
             self.seal(result, "report.html")
         elif shown == "selection":
             self.check("ok", "Described archive", self.t("verified and matches the seal"))

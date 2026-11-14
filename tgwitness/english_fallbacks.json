@@ -3692,5 +3692,13 @@
   "Open your export",
   "Original message is not included in this chat.",
   "Personal backup, project archive or another reason",
-  "Read your chats offline. Open the report for charts, collection details and signature checks."
+  "Read your chats offline. Open the report for charts, collection details and signature checks.",
+  "No signed snapshot is ready yet. The first page is sealed a few seconds after reading starts.",
+  "Live chat export",
+  "Messages read so far by an export that is still running. Each page is signed with the workspace key as soon as it is written. The finished export adds attachments, the full report and its own signature.",
+  "Check this archive with verify.py: python verify.py ARCHIVE.zip --fingerprint {fp}. START_HERE.txt explains each step.",
+  "Page {n}",
+  "Newer messages",
+  "Older messages",
+  "Sealed {time}"
 ]

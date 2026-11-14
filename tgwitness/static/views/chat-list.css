@@ -30,6 +30,8 @@
 .chat-item-badges .pill-edited { color: var(--accent-text); }
 .chat-item-badges .pill-missing { color: var(--warning); }
 .chat-item-badges .pill.pill-state { padding: 0 6px; border: 1px solid var(--border-strong); font-size: 11px; }
+.chat-item-status .pill.pill-blocked { border-color: var(--danger-border); background: var(--danger-soft); color: var(--danger); }
+.chat-list-wait { margin: 0; padding: 8px 12px; border-bottom: 1px solid var(--warning-border); background: var(--warning-soft); color: var(--warning); font-size: 12px; }
 .chat-item-status { display: flex; flex-wrap: wrap; gap: 3px 6px; margin-top: 4px; font-size: 11px; color: var(--text-2); }
 .chat-item-status .pill { white-space: normal; overflow-wrap: anywhere; gap: 3px; }
 .chat-item-status .icon { width: 12px; height: 12px; }

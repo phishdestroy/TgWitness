@@ -279,6 +279,9 @@ class History:
         if not self.collector.selected(job["chat_id"]):
             self.finish_source(job, "skipped", "source_disabled")
             return
+        if (self.collector.source_status.get(str(job["chat_id"])) or {}).get("state") == "restricted_by_telegram":
+            self.finish_source(job, "skipped", "restricted_by_telegram")
+            return
         client = self.collector.client
         try:
             await self.read_page(job)
@@ -297,6 +300,11 @@ class History:
             if self.collector.handle_authorization_error(exc, "history", client=client):
                 raise
             self.finish_source(job, "failed", type(exc).__name__)
+        except ValueError as exc:
+            from .collector import AuthorizationRequired
+            if isinstance(exc, AuthorizationRequired) or self.collector.authorization_required:
+                raise
+            self.finish_source(job, "failed", str(exc)[:200] or type(exc).__name__)
         retain_checkpoint(self.store, self.collector.vault)
 
     def finish_source(self, job, phase, error=None):

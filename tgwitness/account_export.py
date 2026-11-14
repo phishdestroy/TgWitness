@@ -509,6 +509,7 @@ class AccountExport:
         if index_path.is_symlink():
             raise ValueError("Invalid account-export index path.")
         self.index = sqlite3.connect(index_path, check_same_thread=False)
+        self.index.execute("PRAGMA synchronous=NORMAL")
         self.index.execute("DROP TABLE IF EXISTS seen")
         self.index.execute("CREATE TABLE seen (chat INTEGER, message INTEGER, PRIMARY KEY(chat,message))")
         self.index.execute("DROP TABLE IF EXISTS stored_media")

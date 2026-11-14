@@ -120,7 +120,8 @@ Use `python/python.exe` in place of `python` for the embedded Windows runtime.
 RFC 3161 verification needs the authority's trusted root (`--tsa-ca`); it does not
 need OpenSSL. OpenTimestamps Bitcoin authentication remains a separate check.
 The default maximum expanded ZIP size is 4 GiB; `--max-gib` explicitly changes
-it. `--json` keeps its machine-readable format, including when `--explain` is
+it. `--jobs N` sets how many processes check a large archive together; `auto`, the
+default, uses one per CPU up to 16, and `--jobs 1` checks in one process. `--json` keeps its machine-readable format, including when `--explain` is
 supplied. `--plain --explain` gives readable explanations without colour.
 
 Interactive mode also preserves `--strict`, `--require-tier`, `--check-bitcoin`,

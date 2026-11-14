@@ -373,6 +373,47 @@ async def chat_export_cancel(
     return await ctx.operation(ctx.app.state.collector.cancel_export, export_id)
 
 
+async def chat_export_live(
+    request: Request, export_id: str, *, ctx=Depends(current_context)
+):
+    from .. import chat_export
+    from .. import export_history
+    from ..export.live_export import NOT_READY
+
+    collector, store = ctx.app.state.collector, ctx.app.state.store
+    if not ctx.export_visible(request, export_id):
+        raise HTTPException(404, NOT_READY)
+    try:
+        path = await build_file(lambda: collector.live_snapshot(export_id))
+    except (ValueError, OSError):
+        raise HTTPException(404, NOT_READY) from None
+    try:
+        state = collector.export_state or {}
+        filename = chat_export.archive_name(
+            store, state.get("chat_id"), state.get("title")
+        ).removesuffix(".zip") + "_live.zip"
+        entry = await asyncio.to_thread(
+            export_history.prepared,
+            store,
+            path,
+            "zip",
+            False,
+            owner=request.state.principal.owner,
+            workspace=ctx.profile_id,
+            required_permissions=["view", "export"],
+            chat_ids=[state.get("chat_id")],
+        )
+    except BaseException:
+        path.unlink(missing_ok=True)
+        raise
+    return TemporaryDownload(
+        path,
+        filename=filename,
+        media_type="application/zip",
+        headers=export_history.headers(entry),
+    )
+
+
 async def chat_export_download(
     request: Request, export_id: str, *, ctx=Depends(current_context)
 ):

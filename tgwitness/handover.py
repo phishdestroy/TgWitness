@@ -10,7 +10,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from . import message_details, pdf_report, report, tuning, verification_kit
+from . import continuity, message_details, pdf_report, report, tuning, verification_kit
 from .dossier import PHONE
 from . import viewer
 from .evidence import english_original, producer, report_entry, write_indicators, write_pdf, write_viewer
@@ -437,7 +437,7 @@ def export(store, vault, options, report_options=None):
     temp = tempfile.NamedTemporaryFile(prefix="tgwitness-handover-", suffix=".zip", dir=directory, delete=False)
     path = Path(temp.name)
     temp.close()
-    records_path = path.with_suffix(".jsonl")
+    records_path, proofs_path = path.with_suffix(".jsonl"), path.with_suffix(".proofs")
     try:
         account = store.get_setting("account", None) or {}
         with store.snapshot() as snapshot:
@@ -456,6 +456,13 @@ def export(store, vault, options, report_options=None):
                     shown = minimiser.present(event)
                     if shown is not None:
                         out.write(canonical(shown) + b"\n")
+            tree, count = continuity.Tree(snapshot.connection), checked["events"]
+            merkle_root = tree.root(0, count).hex()
+            with records_path.open("rb") as handle, proofs_path.open("wb") as out:
+                for line in handle:
+                    seq = json.loads(line)["seq"]
+                    out.write(canonical({"seq": seq, "path": tree.inclusion(seq - 1, count)}) + b"\n")
+                out.write(canonical({"seq": count, "head": True, "path": tree.inclusion(count - 1, count)}) + b"\n")
             titles = {t["chat_id"]: t["title"] for t in store.targets()
                       if t["chat_id"] in minimiser.chats and t.get("title")}
             from .board_handover import prepare as prepare_board
@@ -464,7 +471,7 @@ def export(store, vault, options, report_options=None):
             raise EmptySelection("No message in the journal matches these chats, period and people.")
         head = survey.head or {}
         journal = {"event_count": checked["events"], "head_hash": checked["head_hash"],
-                   "head_signature": head.get("signature")}
+                   "head_signature": head.get("signature"), "merkle_root": merkle_root}
         coverage = survey.coverage.result()
 
         def records():
@@ -506,6 +513,8 @@ def export(store, vault, options, report_options=None):
 
             with records_path.open("rb") as handle:
                 write_member("records.jsonl", iter(lambda: handle.read(1024 * 1024), b""))
+            with proofs_path.open("rb") as handle:
+                write_member("proofs.jsonl", iter(lambda: handle.read(1024 * 1024), b""))
             write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
             if board_export:
                 write_member("case-board.json", [canonical(board_export)])
@@ -569,3 +578,4 @@ def export(store, vault, options, report_options=None):
         raise
     finally:
         records_path.unlink(missing_ok=True)
+        proofs_path.unlink(missing_ok=True)

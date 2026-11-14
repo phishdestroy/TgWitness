@@ -72,6 +72,16 @@ If nothing eligible can be moved, or no destination is configured, TgWitness
 cannot reclaim space automatically. The signed journal is never pruned or
 rewritten by storage management. It still needs space for new text observations.
 
+Workspaces on one server share identical attachments. A saved file is named by its
+SHA-256; when another workspace of the server already holds the same file in
+`cas/` of the data directory, the new copy is replaced by a hard link to it after
+both files are hashed again, so three workspaces that save the same channel use the
+disk space of one copy. Every workspace still has its own file under
+`media/` and reads, exports and offloads it as before. A file that cannot be linked,
+for example on a filesystem without hard links, stays a separate copy. At each start
+TgWitness removes from `cas/` only files that no workspace links any more; a workspace
+file is never removed by this step.
+
 ## Connect a destination
 
 In **More tools → Extras → Storage & disk space → Manage storage**, choose the task and destination,

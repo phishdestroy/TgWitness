@@ -93,6 +93,12 @@ def borrowed(client):
             continue
         pair_socket = socket_pair(getattr(sender, "_connection", None))
         rows.append({"dc": dc, "connected": pair_socket is not None, "socket": pair_socket})
+    pool = getattr(client, "_media_pool", None)
+    for dc in list(getattr(pool, "dcs", {}).values()):
+        for session in dc.live():
+            pair_socket = socket_pair(getattr(session.sender, "_connection", None))
+            rows.append({"dc": dc.dc_id, "connected": pair_socket is not None, "socket": pair_socket,
+                         "pool": True, "busy": session.busy})
     return rows
 
 
