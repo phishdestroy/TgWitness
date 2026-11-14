@@ -9608,5 +9608,6 @@
   "Search match": "Kết quả tìm kiếm khớp",
   "Search matched an earlier saved version.": "Kết quả tìm kiếm khớp với một phiên bản đã lưu trước đó.",
   "Search saved messages": "Tìm kiếm tin nhắn đã lưu",
-  "{n} saved versions": "{n} phiên bản đã lưu"
+  "{n} saved versions": "{n} phiên bản đã lưu",
+  "Chat loading: {running} active · {pending} pending": "Tải cuộc trò chuyện: {running} đang tải · {pending} đang chờ"
 }

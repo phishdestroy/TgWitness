@@ -9704,5 +9704,6 @@
   "Search match": "התאמת חיפוש",
   "Search matched an earlier saved version.": "החיפוש מצא התאמה לגרסה מוקדמת שנשמרה.",
   "Search saved messages": "חיפוש הודעות שמורות",
-  "{n} saved versions": "{n} גרסאות שמורות"
+  "{n} saved versions": "{n} גרסאות שמורות",
+  "Chat loading: {running} active · {pending} pending": "טעינת שיחות: {running} פעילות · {pending} ממתינות"
 }

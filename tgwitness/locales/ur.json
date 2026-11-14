@@ -9656,5 +9656,6 @@
   "Search match": "سرچ میچ",
   "Search matched an earlier saved version.": "سرچ نے ایک پہلے محفوظ شدہ ورژن سے میل کھایا۔",
   "Search saved messages": "محفوظ شدہ پیغامات تلاش کریں",
-  "{n} saved versions": "{n} محفوظ شدہ ورژنز"
+  "{n} saved versions": "{n} محفوظ شدہ ورژنز",
+  "Chat loading: {running} active · {pending} pending": "چیٹس لوڈ ہو رہی ہیں: {running} فعال · {pending} منتظر"
 }

@@ -30,6 +30,10 @@
 .chat-item-badges .pill-edited { color: var(--accent-text); }
 .chat-item-badges .pill-missing { color: var(--warning); }
 .chat-item-badges .pill.pill-state { padding: 0 6px; border: 1px solid var(--border-strong); font-size: 11px; }
+.chat-item-status { display: flex; flex-wrap: wrap; gap: 3px 6px; margin-top: 4px; font-size: 11px; color: var(--text-2); }
+.chat-item-status .pill { white-space: normal; overflow-wrap: anywhere; gap: 3px; }
+.chat-item-status .icon { width: 12px; height: 12px; }
+.chats-sidebar .chat-item.active .chat-item-status { color: #fff; }
 .chat-item-priority { flex: none; width: 12px; height: 12px; margin-inline-end: auto; color: var(--accent-text); fill: currentColor; align-self: center; }
 .chats-sidebar .chat-priority { position: absolute; inset-inline-end: 6px; top: 6px; min-height: 28px; height: 28px; margin: 0; border-radius: 8px; background: var(--surface-2); box-shadow: var(--shadow-sm); opacity: 0; transition: opacity .15s; }
 .chats-sidebar .chat-item:hover .chat-priority, .chats-sidebar .chat-priority:focus-visible { opacity: 1; }

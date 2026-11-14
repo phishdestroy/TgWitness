@@ -66,8 +66,10 @@ The top bar has:
 - **Lock**: closes the panel in this browser. Collection keeps running on the server.
 
 The version and protection mode are under **Appearance**; see [protection modes](#protection-modes).
-An installation with saved sources and journal records opens **Chats** after sign-in.
-An explicit link still opens its requested screen.
+An installation opens **Home** after sign-in; an explicit link opens its requested
+screen. A chat-scoped reviewer opens **Chats**. The addresses `/home`, `/case-board`,
+`/pseudo-secret` and `/network-topology` also open their corresponding screens.
+Unknown page addresses return HTTP 404 with nearby page suggestions.
 
 The demo workspace contains fictional messages and never connects to Telegram.
 Actions that would change a real workspace are refused there.
@@ -93,6 +95,15 @@ answer or skip it. A new workspace opens the [first setup](SETTINGS.md) instead.
 ## Chats
 
 Saved conversations, read-only by default.
+
+Chat rows show collection state, pending and failed file downloads, initial history
+loading and restrictions returned in Telegram's dialog metadata. A lost or unconfirmed
+access state does not identify a content ban. Open **Filters** to select these states
+or sort by the file queue; the selection stays in the URL when the page is reloaded.
+
+Preserved-attachment journal entries show the observed type, name and byte size.
+New download outcomes also retain the media kind and duration when Telegram provides
+them. Older signed records stay unchanged; absent metadata is not reconstructed.
 
 - Search the list by name or ID. **Choose** adds or removes watched chats.
   **Open Telegram link** takes a username or invite link and saves a preview to the
@@ -131,6 +142,9 @@ Saved conversations, read-only by default.
 - **Load history** brings the last 100, 250 or 500 messages into this view and the
   journal. Find it in **Chat actions**, alongside recording settings, read-only and
   secret-masking controls. The menu closes with Escape or a click outside it.
+  Loading earlier messages keeps the current reading position. If the query or page
+  changes while Telegram responds, the completed load updates the saved journal without
+  replacing the newer view. A failed automatic load offers **Retry**.
   To load every enabled source, use [Sources → Full history](#sources).
 - **Export chat** downloads the whole visible history as a signed `chat.json` and
   `chat.html`. Several connected accounts can share the work: each downloads its own

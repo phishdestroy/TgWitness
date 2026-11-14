@@ -444,6 +444,21 @@ async def set_parameters(body: ParametersUpdate, *, ctx=Depends(current_context)
 
 async def chats(request: Request, *, ctx=Depends(current_context)):
     store = ctx.app.state.store
+    listed = await complete_in_thread(chat_listing, store, ctx.visible_chats(request))
+    collector = ctx.app.state.collector
+    pending = set(store.get_setting("new_chat_intake_pending", [])) | set(store.get_setting("baseline_pending", []))
+    for chat in listed:
+        chat_id = chat["chat_id"]
+        chat["intake_state"] = "running" if chat_id in collector.intake_active else "queued" if chat_id in pending else None
+        entity = collector.dialog_cache.get(chat_id, {}).get("entity")
+        chat["telegram_restrictions"] = [
+            {"platform": item.platform, "reason": item.reason, "text": item.text}
+            for item in getattr(entity, "restriction_reason", None) or []
+        ]
+    return {"chats": listed}
+
+
+def chat_listing(store, allowed):
     overview = store.chat_overview()
     with store.lock:
         for chat_id, sent in store.read_index.latest_message_times().items():
@@ -457,8 +472,17 @@ async def chats(request: Request, *, ctx=Depends(current_context)):
         {"chat_id": chat_id, "title": None, "kind": None, "enabled": False, **extra}
         for chat_id, extra in overview.items()
     ]
-    allowed = ctx.visible_chats(request)
-    return {"chats": [c for c in listed if allowed is None or c["chat_id"] in allowed]}
+    listed = [c for c in listed if allowed is None or c["chat_id"] in allowed]
+    with store.reading() as db:
+        counts = {}
+        for row in db.execute("SELECT chat_id,state,count(*) FROM media_jobs WHERE state IN "
+                              "('queued','retry','running','failed') GROUP BY chat_id,state"):
+            counts.setdefault(row[0], {})[row[1]] = row[2]
+    for chat in listed:
+        media = counts.get(chat["chat_id"], {})
+        chat["media_queue"] = {"pending": sum(media.get(key, 0) for key in ("queued", "retry")),
+                               "running": media.get("running", 0), "failed": media.get("failed", 0)}
+    return listed
 
 
 async def interaction_preview(

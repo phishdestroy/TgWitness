@@ -258,6 +258,7 @@ class AccessOperations:
                 if int(chat) in allowed
             }
             current["media_jobs"] = store.media_stats(allowed)
+            current["chat_loading"] = workspace.state.collector.intake_status(allowed)
             current["media_pending"] = sum(
                 (
                     n

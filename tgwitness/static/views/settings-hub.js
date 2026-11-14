@@ -634,7 +634,9 @@ export function createSettingsHub(ctx) {
   function draftChecked(){return !routeDirty&&fresh(data.connection)&&data.connection.strategy?.mode===draft.route&&!!data.connection.strategy?.allow_direct===draft.allow_direct;}
   function paintConnection(connection){const box=$('hub-connection-result');if(!box)return;box.replaceChildren();
     const ok=fresh(connection);box.className='connection-result '+(ok?'working':'unchecked');
-    box.append(message(ok?tr('Working · {n} ms',{n:number(connection.check.latency_ms)}):'Connection has not been verified.'));
+    box.append(message(ok?tr('Telegram connection')+' · '+tr('Working · {n} ms',{n:number(connection.check.latency_ms)}):'Connection has not been verified.'));
+    if(ok&&connection.check.http_latency_ms!=null)box.append(message('HTTP · '+tr('{n} ms',{n:number(connection.check.http_latency_ms)})));
+    if(connection?.check?.checked_at)box.append(message(when(connection.check.checked_at*1000)));
     if(!ok){
       if(connection?.pool?.listed&&connection.pool.healthy===0&&connection.pool.probed_at){openOptions();box.className='connection-result failed';box.prepend(message('No public proxy answers. Try WARP or your own proxy.'));}
       if(state.view==='first-run')box.append(button('Try WARP',async()=>{draft.route='warp';await renderWizard();}),button('Check again',checkConnection));
@@ -762,6 +764,9 @@ export function createSettingsHub(ctx) {
     const changed=async()=>{if(inSettings){scopeDirty=true;updateScopeSave();}else{await saveDraft();updateNext();}};
     const rerender=async()=>{if(inSettings)render();else await renderWizard();};
     cards(body,[['account','layers:blue','All chats','Includes new chats in continuous collection.'],['selected','check:green','Choose chats','Only the chats you select.'],['folder','inbox:orange','Telegram folder','Use a folder from Telegram.']],draft.scope,async scope=>{
+      if(scope==='account'&&!dialogs&&signedIn())dialogs=await request(who,'dialogs');
+      if(scope==='account'&&draft.scope!=='account'&&(dialogs?.dialogs.length||0)>50
+        &&!await confirm(who,tr('All chats')+' · '+tr('{n} chats',{n:dialogs.dialogs.length})+'\n\n'+tr('Recording sees everything the account sees, including private chats of other people. A separate account keeps your own chats out of the journal and does not risk your main account.')))return;
       draft.scope=scope;await changed();await rerender();});
     if(main){
       for(const key of ['account','folder']){const card=body.querySelector('[data-answer="'+key+'"]');card.disabled=true;card.title=tr('Only on a separate account.');}
