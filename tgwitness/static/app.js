@@ -1353,7 +1353,7 @@ const collectionReady=import("./components/collection.js?v=2").then(({createColl
 collectionReady.catch(error=>toast(error.message,true));
 let modesUI=null;
 const modeSession=()=>state.workspaceRevision+":"+state.profile;
-const modesReady=import("./components/modes.js?v=2").then(({createModes})=>{
+const modesReady=import("./components/modes.js?v=3").then(({createModes})=>{
   modesUI=createModes({node,tr,json,may,status:()=>state.status,query:panelQueries,go:goPlace,toast});
   if(state.status&&!$("workspace").hidden)modesUI.sync(modeSession());
   return modesUI;
@@ -1869,7 +1869,7 @@ function excerpt(e) {
   if (e.kind==="source.checked") return (p.matches?tr("Matches"):tr("Differs"))+" · "+p.repository.replace("https://github.com/","")+" @ "+p.commit.slice(0,12);
   if (e.kind==="evidence.changed") return p.enabled?tr("On · every {n} min · {services} services",{n:p.interval_minutes,services:p.tsa_urls.length+p.ots_calendars.length}):tr("Off");
   if (e.kind==="workspace.mode_changed"){
-    const name=id=>tr({easy:"Easy",signed:"Signed",witnessed:"Witnessed",court:"Case preparation",github:"GitHub-verified",mossad:"Mossad"}[id]||String(id));
+    const name=id=>tr({easy:"Easy",signed:"Signed",witnessed:"Witnessed",court:"Case preparation",github:"GitHub-verified",maximum:"Maximum",mossad:"Maximum"}[id]||String(id));
     return (p.from?name(p.from)+" → ":"")+name(p.to)+({"existing installation":" · "+tr("set for an existing installation"),later:" · "+tr("kept until a choice is made")}[p.reason]||"");
   }
   if (e.kind==="handover.exported") return p.purpose||"";
@@ -2092,7 +2092,7 @@ const journalReady=import('./components/journal.js?v=layout4').then(({createJour
   return window.TgWitnessJournal;
 });
 $("refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await refreshStatus();await refreshEvents();}));
-const EVIDENCE_MODES=["witnessed","court","github","mossad"];
+const EVIDENCE_MODES=["witnessed","court","github","maximum"];
 function evidenceWorkspace(){
   return state.status?.setup_goal==='evidence'||EVIDENCE_MODES.includes(modesUI?.mode());
 }
