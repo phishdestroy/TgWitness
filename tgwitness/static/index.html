@@ -355,7 +355,7 @@
     <div class="scope-exclude" id="scope-exclude"></div>
     <p class="notice warning" hidden id="scope-warning"></p>
     <div class="scope-actions"><button class="primary" type="submit">Save scope</button><span id="scope-unsaved" role="status"></span></div>
-    <details class="scope-limits"><summary>Scope of folder and whole-account modes</summary><p class="hint">Secret chats are recorded in Sources → Pseudo-secret, where TgWitness itself opens or accepts the chat. After a restart TgWitness resumes the saved update position and catches up what Telegram returns; any remaining interval appears as a gap in the report. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active, and the earlier history of an added chat is not fetched. Muted or read state of a folder is not applied: such chats stay observed. Inline bot buttons pressed in another app are invisible to TgWitness; the bot's reply or edit is recorded.</p></details>
+    <details class="scope-limits"><summary>Scope of folder and whole-account modes</summary><p class="hint">Secret chats are recorded in Sources → Pseudo-secret, where TgWitness itself opens or accepts the chat. After a restart TgWitness resumes the saved update position and catches up what Telegram returns; any remaining interval appears as a gap in the report. Folder and whole-account modes inspect all accessible dialogs, including archived chats. New matching chats are added as they appear; the initial history snapshot follows the setting above. Full history keeps its own signed source plan and progress. Muted or read state of a folder is not applied: such chats stay observed. Inline bot buttons pressed in another app are invisible to TgWitness; the bot's reply or edit is recorded.</p></details>
   </form>
   </div>
   <div id="sources-panel-chats" role="tabpanel" aria-labelledby="sources-tab-chats" hidden>
@@ -390,18 +390,19 @@
   </section>
   <section class="card padded" id="history-card" aria-labelledby="history-heading">
     <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>
-    <p class="notice">Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.</p>
+    <p class="notice">History loads in the background. Keep observation on to preserve new messages, edits and deletion notices as they arrive.</p>
     <details id="history-details"><summary>Details</summary>
       <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Past deletions and edits are only available when Telegram returns them in Recent Actions.</p>
-      <p class="hint">For a separate archive of the account's current history, use Exports → Telegram account. This run only loads the enabled sources listed at its start.</p>
+      <p class="hint">For a separate archive of the account's current history, use Exports → Telegram account. Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.</p>
     </details>
     <fieldset id="history-options">
       <legend>History acquisition</legend>
       <label>Telegram transport <select id="history-transport"><option value="standard">Standard API</option><option value="takeout">Takeout export</option></select></label>
+      <label>Chats loading at once <select id="history-chat-workers"><option>1</option><option>2</option><option selected>3</option></select></label>
       <label>Attachment workers <select id="history-workers"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></label>
       <label class="check-label"><input id="history-admin" type="checkbox" checked> Preserve available edits and deletions from Recent Actions</label>
       <label class="check-label"><input id="history-compare" type="checkbox" checked> Compare with previously saved message versions</label>
-      <label class="check-label"><input id="history-observe" type="checkbox" checked> Start observation when the history is loaded</label>
+      <label class="check-label"><input id="history-observe" type="checkbox" checked> Keep observation on during and after history loading</label>
       <p class="hint">Takeout may require approval in Telegram and a server-specified wait. Recent Actions requires administrator access. These choices stay fixed when you resume.</p>
     </fieldset>
     <div class="chat-export-actions">

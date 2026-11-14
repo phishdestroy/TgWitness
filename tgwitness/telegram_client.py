@@ -432,11 +432,17 @@ class WitnessClient(TelegramClient):
             self._rpc_owner = None
             self._flood_until = getattr(self, "_flood_until", {})
             self._file_slots = asyncio.Semaphore(FILE_REQUESTS)
+            self._history_slots = asyncio.Semaphore(3)
         items = request if utils.is_list_like(request) else (request,)
         await self._flood_turn(sender, items)
         if self._rpc_owner is asyncio.current_task():
             await self._paced_turn(items)
             return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
+        if not ordered and not utils.is_list_like(request) and request_method(request)["method"] == "messages.getHistory":
+            async with self._history_slots:
+                async with self._bulk_lock:
+                    await self._paced_turn(items)
+                return await self._serial_call(sender, items[0], ordered, flood_sleep_threshold)
         if getattr(self, "bulk_pacer", None) is not None and any(bulk_request(item) for item in items):
             async with self._bulk_lock:
                 await self._paced_turn(items)
@@ -459,6 +465,7 @@ class WitnessClient(TelegramClient):
     async def _serial_call(self, sender, request, ordered, flood_sleep_threshold):
         if utils.is_list_like(request):
             return [await self._serial_call(sender, item, ordered, flood_sleep_threshold) for item in request]
+        await self._flood_turn(sender, (request,))
         single = isinstance(request, _ACTIONS)
         pacer = getattr(self, "bulk_pacer", None)
         paced = pacer is not None and bulk_request(request)

@@ -37,7 +37,7 @@ in the export. Photo retrieval requires both the export's media option and the
 workspace's media/avatar settings. Message-ID rechecks share account pacing with
 history reads; any server-requested wait still applies to every caller.
 
-**Regular session** preserves the existing acquisition path. **Telegram Takeout session** is an opt-in path for public channels and supergroups. It opens an export session for each participating account, uses the last Telegram split range for this public-only scope, and reads history without Telethon's additional iterator delay. Telegram's own FloodWait remains fully enforced. The current implementation still has one outgoing RPC per account; choosing Takeout does not increase same-account concurrency.
+**Regular session** preserves the existing acquisition path. **Telegram Takeout session** is an opt-in path for public channels and supergroups. It opens an export session for each participating account, uses the last Telegram split range for this public-only scope, and reads history without Telethon's additional iterator delay. Telegram's own FloodWait remains fully enforced. Takeout uses the same bounded history-request lane as regular reads; switching transport does not create extra slots or bypass shared request spacing.
 
 The initial source/date boundaries are measured with regular requests and frozen in the signed plan. Takeout reads those planned ranges. Profiles, admin logs, optional context and attachment retrieval continue to use regular requests; the archive identifies that scope. The Takeout flags request the selected chat type without contacts or file export. Private chats and private groups remain available through the regular path or [account export](ACCOUNT-EXPORT.md).
 
@@ -47,7 +47,7 @@ Takeout handles stay in the encrypted vault. Chunk receipts identify transport a
 
 ## Exclusive account ownership
 
-One account runs one history run or export at a time. An account export or a chat export runs while observation keeps recording, and starting one never pauses it. Full history still needs observation paused. Deselect an account that is busy with another of these tasks, or wait for that task. Reservations are acquired before Telegram requests and released on completion, failure or pause. Separate accounts may work concurrently; RPCs within one account are serialized. Full server-requested FloodWait deadlines are persisted and respected before subsequent requests, including after restart, so every new request honors Telegram's latest rate limit.
+One account runs one history run or export at a time, alongside live observation. Pause controls are independent. Reservations are acquired before Telegram requests and released on completion, failure or pause. History reads up to three chats at a time with a cursor per chat. History requests and file requests have separate limits of three in flight each; request spacing remains shared per account. Other RPCs keep their existing ordering. Separate accounts work concurrently. Saved FloodWait deadlines are checked again before queued requests are sent, including after restart.
 
 ## Selection
 

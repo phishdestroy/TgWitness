@@ -14,7 +14,8 @@ export function accountState(profile = {}) {
     collecting: "Collecting", reconnecting: "Reconnecting", failed: "Needs attention", paused: "Paused"}[kind];
   return {kind, label, hasSession, needsSignIn, sourcesReady,
     canStart: !unavailable && hasSession && !needsSignIn && !collector.running &&
-      collector.phase !== "storage_error" && sourcesReady && collector.account_task !== "history"};
+      collector.phase !== "storage_error" && sourcesReady && (collector.available_for_observation ??
+        !["export", "profile_image"].includes(collector.account_task))};
 }
 
 export function accountActivity(profile = {}) {
@@ -25,5 +26,5 @@ export function accountActivity(profile = {}) {
     : task || (account.kind === "failed" ? "failed" : "free");
   const observing = kind === "monitoring" || kind === "reconnecting";
   return {kind, observing, running, busy: ["history", "export", "profile_image"].includes(kind),
-    canExport: kind === "free" || observing};
+    canExport: collector.available_for_account_export ?? (kind === "free" || observing)};
 }

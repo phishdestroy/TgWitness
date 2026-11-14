@@ -35,7 +35,7 @@
   }
   async function connect(rev){
     if(!context||rev!==generation||document.hidden||controller)return;
-    const current=context,ctrl=new AbortController();controller=ctrl;
+    const current=context,ctrl=new AbortController();controller=ctrl;let retryDelay=3000;
     try{
       const response=await current.api("stream?after="+cursor+"&board_after="+boardCursor,undefined,{signal:ctrl.signal});
       if(rev!==generation||controller!==ctrl){await response.body?.cancel();return;}
@@ -57,8 +57,9 @@
           if(events.length){cursor=events.at(-1).seq;changed(events);}
         }
       }}finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
-    }catch(error){if(error.status===401||error.status===403){if(rev===generation&&controller===ctrl){stop();current.accessEnded();}return;}}
-    finally{if(rev===generation&&context&&controller===ctrl){controller=null;connected=false;render();if(!document.hidden)retry=setTimeout(()=>connect(rev),3000);}}
+    }catch(error){if(error.status===401||error.status===403){if(rev===generation&&controller===ctrl){stop();current.accessEnded();}return;}
+      retryDelay=Number.isFinite(error.retryAfterMs)?Math.max(3000,error.retryAfterMs):error.status===429?10000:3000;}
+    finally{if(rev===generation&&context&&controller===ctrl){controller=null;connected=false;render();if(!document.hidden)retry=setTimeout(()=>connect(rev),retryDelay);}}
   }
   function stop(){generation++;controller?.abort();controller=null;clearTimeout(retry);clearTimeout(flushTimer);context=null;pending=0;connected=false;flushing=false;for(const b of bars)b.bar.hidden=true;}
   function start(ctx){

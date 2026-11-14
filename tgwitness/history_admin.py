@@ -56,37 +56,47 @@ async def page(history, job, entity, stage):
         if not lower < event.id < previous:
             raise ValueError("Admin log did not advance the requested cursor.")
         previous = event.id
-    with history.store.transaction():
-        for event in result.events:
-            duplicate = history.store.db.execute("SELECT 1 FROM history_admin_items "
-                "WHERE run_id=? AND chat_id=? AND provider_id=?", (job["run_id"], job["chat_id"], event.id)).fetchone()
-            if duplicate:
-                continue
-            observation = history.store.append("history.admin_log.observed", {
-                "history_run_id": job["run_id"], "source": "admin_log", "source_mode": "standard",
-                "stage": stage, "provider_event_id": event.id, "event": admin_event(event),
-                "meaning": "Server-reported historical action from Telegram's recent-actions window."},
-                job["chat_id"])
-            history.store.db.execute("INSERT INTO history_admin_items VALUES (?,?,?,?)",
-                (job["run_id"], job["chat_id"], event.id, observation["seq"]))
-            for field in ("message", "prev_message", "new_message"):
-                message = getattr(event.action, field, None)
-                if message is not None and getattr(message, "media", None):
-                    captured = await history.collector.capture_message(message, "message.admin_log", job["chat_id"],
-                        source="admin_log", history_run_id=job["run_id"], acquisition={"source_mode": "standard",
-                            "admin_event": observation["seq"], "version": field})
-                    history.store.db.execute("INSERT INTO history_items VALUES (?,?)", (job["run_id"], captured["seq"]))
-            progress["observed"] += 1
-        if result.events:
-            progress["newest"] = max(progress["newest"], result.events[0].id)
-            progress["offset"] = result.events[-1].id
-            progress["oldest_event_at"] = result.events[-1].date.isoformat()
-            progress.setdefault("newest_event_at", result.events[0].date.isoformat())
-        else:
-            progress.update(status="complete", ended_at=utcnow())
-            history.store.append("history.admin_log.finished", {"history_run_id": job["run_id"],
-                "source": "admin_log", "stage": stage, **progress}, job["chat_id"])
-        history.save_metadata(job, meta)
+    def commit():
+        committed = []
+        with history.store.transaction():
+            for event in result.events:
+                duplicate = history.store.db.execute("SELECT 1 FROM history_admin_items "
+                    "WHERE run_id=? AND chat_id=? AND provider_id=?", (job["run_id"], job["chat_id"], event.id)).fetchone()
+                if duplicate:
+                    continue
+                observation = history.store.append("history.admin_log.observed", {
+                    "history_run_id": job["run_id"], "source": "admin_log", "source_mode": "standard",
+                    "stage": stage, "provider_event_id": event.id, "event": admin_event(event),
+                    "meaning": "Server-reported historical action from Telegram's recent-actions window."},
+                    job["chat_id"])
+                history.store.db.execute("INSERT INTO history_admin_items VALUES (?,?,?,?)",
+                    (job["run_id"], job["chat_id"], event.id, observation["seq"]))
+                for field in ("message", "prev_message", "new_message"):
+                    message = getattr(event.action, field, None)
+                    if message is not None and getattr(message, "media", None):
+                        captured = history.collector.commit_message(message, "message.admin_log", job["chat_id"],
+                            source="admin_log", history_run_id=job["run_id"], acquisition={"source_mode": "standard",
+                                "admin_event": observation["seq"], "version": field})
+                        history.store.db.execute("INSERT INTO history_items VALUES (?,?)", (job["run_id"], captured["seq"]))
+                        committed.append((message, captured))
+                progress["observed"] += 1
+            if result.events:
+                progress["newest"] = max(progress["newest"], result.events[0].id)
+                progress["offset"] = result.events[-1].id
+                progress["oldest_event_at"] = result.events[-1].date.isoformat()
+                progress.setdefault("newest_event_at", result.events[0].date.isoformat())
+            else:
+                progress.update(status="complete", ended_at=utcnow())
+                history.store.append("history.admin_log.finished", {"history_run_id": job["run_id"],
+                    "source": "admin_log", "stage": stage, **progress}, job["chat_id"])
+            history.save_metadata(job, meta)
+        return committed
+
+    from .workers import complete_in_thread
+    async with history.collector.capture_lock:
+        committed = await complete_in_thread(commit)
+    for message, event in committed:
+        history.collector.message_committed(message, job["chat_id"], event)
     return True
 
 

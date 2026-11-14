@@ -470,7 +470,7 @@ class DocumentationOperations:
             }
 
         try:
-            async with capture.lock:
+            async with capture.locks["browser"]:
                 return await asyncio.wait_for(asyncio.to_thread(read), 15)
         except Exception:
             return None

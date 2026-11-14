@@ -1,9 +1,9 @@
 const TASKS = {
-  observation: ['Observing live updates', 'Full history, connection changes and signing out', 'Everything else: loading messages and exports run at the same time', 'Pause observation', 'collector/stop'],
+  observation: ['Observing live updates', 'Connection changes and signing out', 'Background history, account archives, reading saved messages, search and reports', 'Pause observation', 'collector/stop'],
   starting_observation: ['Starting observation', 'Other Telegram tasks until observation has started', 'Reading saved messages and reports', null, null],
-  history: ['Loading full history', 'Observation, exports, loading older messages and connection changes', 'Reading saved messages and reports', 'Pause history', 'history/pause'],
+  history: ['Loading full history', 'Other acquisitions and connection changes', 'Live observation, reading saved messages and reports', 'Pause history', 'history/pause'],
   chat_export: ['Exporting a chat', 'Other exports, full history and connection changes', 'Observation, reading saved messages and reports', 'Cancel export', null],
-  export: ['Running an account or multi-account export', 'Other exports, full history and connection changes', 'Observation, reading saved messages and reports', 'Open exports', null],
+  export: ['Running an account or multi-account export', 'Other acquisitions and connection changes', 'Live observation for account archives, reading saved messages and reports', 'Open exports', null],
   loading_messages: ['Loading messages of a chat', 'Other Telegram tasks for a moment', 'Everything else', null, null],
   measuring_chat: ['Measuring a chat for export', 'Other Telegram tasks for a moment', 'Everything else', null, null],
   planning_export: ['Planning an export', 'Other Telegram tasks for a moment', 'Everything else', null, null],
@@ -115,7 +115,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       wrap.append(node('span', 'home-idle' + (profile.collector?.has_session ? '' : ' none'), tr(profile.collector?.has_session ? 'Idle: ready for any task' : 'No Telegram account connected')));
       return wrap;
     }
-    const title = node('strong', '', tr(info.label));
+    const tasks = activity.tasks || [activity.task];
+    const title = node('strong', '', tasks.map(task => tr(taskInfo({task})?.label || task)).join(' · '));
     wrap.append(title);
     const d = activity.detail;
     if (activity.task === 'chat_export' && d) {
@@ -154,7 +155,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       navigate(connect ? 'connection' : 'chats');
     }));
     actions.append(open);
-    const task = taskInfo(collector.activity);
+    for (const kind of collector.activity?.tasks || [collector.activity?.task]) {
+    const task = taskInfo({task: kind});
     if (task?.action && !(connect && collector.activity.task === 'sign_in_required')) {
       const act = node('button', 'quiet', tr(task.action));
       act.type = 'button';
@@ -170,6 +172,32 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       }));
       actions.append(act);
     }
+    }
+    const jobs = collector.media_jobs || {};
+    if (collector.has_session) card.append(node('p', 'home-note', tr('Files: {running} downloading · {pending} queued · {failed} failed', {running: jobs.running || 0, pending: (jobs.queued || 0) + (jobs.retry || 0), failed: jobs.failed || 0})));
+    const history = profile.id === state.profile ? state.status?.history : null;
+    if (history && history.phase !== 'none') {
+      const phases = {running: 'Loading history', paused: 'History paused', complete: 'History reading finished', incomplete: 'History finished with gaps', cancelled: 'History run ended'};
+      card.append(node('p', 'home-note', tr(phases[history.phase] || history.phase) + ' · ' +
+        tr('{messages} messages · {done} of {total} sources', {messages: history.captured || 0,
+          done: ['complete', 'failed', 'skipped'].reduce((sum, key) => sum + (history.sources_by_phase?.[key] || 0), 0), total: history.sources_total || 0})));
+      const manage = node('button', 'quiet', tr('History progress and signed report'));
+      manage.type = 'button';
+      manage.addEventListener('click', async () => {
+        await navigate('sources');
+        root.ownerDocument.getElementById('sources-tab-chats')?.click();
+      });
+      actions.append(manage);
+      if (history.phase === 'paused' && collector.available_for_history) {
+        const resume = node('button', 'secondary', tr('Continue history'));
+        resume.type = 'button';
+        resume.addEventListener('click', () => busy(resume, async () => {
+          await json('history/resume', {}, {profile: profile.id});
+          await refresh();
+        }));
+        actions.append(resume);
+      }
+    }
     card.append(actions);
     return card;
   }
@@ -184,7 +212,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     }
     const list = node('ul', 'home-process');
     for (const profile of items) {
-      const activity = profile.collector.activity, info = taskInfo(activity), item = node('li');
+      for (const kind of profile.collector.activity.tasks || [profile.collector.activity.task]) {
+      const activity = {...profile.collector.activity, task: kind}, info = taskInfo(activity), item = node('li');
       const percent = progressOf(activity);
       item.append(node('strong', '', profile.label), node('span', '', ' · ' + (activity.task === 'chat_export' && activity.detail
         ? tr('Exporting {chat}', {chat: activity.detail.title || ('#' + activity.detail.chat_id)}) : tr(info.label))));
@@ -193,6 +222,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
         fill.style.width = percent + '%'; bar.append(fill); item.append(bar);
       }
       list.append(item);
+      }
     }
     box.append(list);
     return box;
@@ -229,7 +259,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       const state = getState();
       if (!root || !state.status) return;
       loadActivity(state.profile);
-      const profiles = (state.profiles && state.profiles.length) ? state.profiles
+      const profiles = (state.profiles && state.profiles.length) ? state.profiles.map(profile => profile.id === state.profile ? {...profile, collector: state.status.collector} : profile)
         : [{id: state.profile, label: tr('Main workspace'), collector: state.status.collector, health: state.status.health}];
       const accounts = node('section', 'home-card home-accounts');
       const heading = node('div', 'home-heading');

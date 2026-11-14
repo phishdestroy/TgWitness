@@ -4,19 +4,27 @@
 
 # Resumable API backfill
 
-Use **Full history** under **More tools → Sources → Chats in scope** on an idle account. Choose Standard API or Takeout,
-one to five attachment workers, Recent Actions collection and saved-version comparison.
+Use **Full history** under **More tools → Sources → Chats in scope**. Live observation can stay on while history loads. Choose Standard API or Takeout,
+one to three concurrent chats, one to five attachment workers, Recent Actions collection
+and saved-version comparison. The panel enables observation during and after the run
+by default; API callers choose `observe_during` explicitly.
 Start, pause, resume and end controls remain in the existing history card. API callers
 can POST these options to `/api/history/start`:
 
 ```json
-{"transport":"standard","media_workers":2,"admin_log":true,"compare_saved":true}
+{"transport":"standard","history_workers":3,"media_workers":2,"admin_log":true,"compare_saved":true,"observe_during":true}
 ```
 
 The source list, account and options are signed at creation. Options cannot be changed
 on resume. Media continues to follow the workspace's attachment policy; a subsequent
 policy change may exclude queued files and produces separate receipts. The existing
 **Messages first** preference defers downloads until text acquisition ends.
+
+Starting or resuming history keeps live observation running. Pause history to stop
+the historical read; pause observation to stop live monitoring. Either can continue
+while the other is paused. Process shutdown drains writes and pauses both. A separate
+account or chat export waits for the history acquisition slot. History owns its attachment
+jobs, so live media workers neither reset nor claim an active history run's files.
 
 This mode uses the authenticated MTProto client. It is separate from official-client
 [Trusted Live](TRUSTED-LIVE.md), and is not an assurance that Telegram will never limit
@@ -39,7 +47,16 @@ History reads use descending exclusive cursors with pages of at most 100 returne
 messages, retaining `MessageEmpty` as an unavailable observation. The last committed ID is the next offset, without subtraction. An empty
 successful read ends a range; an error never means end of history. Every range fixes
 its upper ID on its first successful read. SDK methods may make additional RPCs,
-all subject to the same serialized account request lane.
+all subject to account request spacing and persisted waits. Up to three history
+requests can be in flight. Different chats have separate cursors; the scheduler
+rotates between them after pages, so a large or stalled chat does not block every
+other source. File requests have a separate three-request limit. Neither lane
+holds the ordinary RPC lock while waiting for network replies.
+
+Folder and whole-account scopes enumerate all accessible dialogs, including archived
+ones, before signing the source plan. The selected-chat picker retains its configured
+list limit. Newly discovered chats continue to be observed and receive the configured
+initial snapshot; they do not silently change the already signed history plan.
 
 Bulk history, dialog and admin-log requests start with one-second spacing.
 Twenty consecutive successes reduce it by 20%, with a 0.5-second floor. FloodWait
@@ -94,8 +111,21 @@ advance the workspace head without invalidating a source cursor. Older runs reco
 their unsigned cursor from signed observations before continuing. Disposable routing
 and admin-log deduplication indexes are rebuilt from the journal.
 
-Media workers run concurrently with text acquisition. Network calls of one account
-are serialized except file reads, of which up to three run in parallel; each worker
+Message capture, history batches and Recent Actions batches perform their journal
+work in worker threads. A bounded history batch holds at most 32 returned messages;
+the account's capture lock prevents overlapping capture writes. The journal retains
+one ordered hash chain per workspace while other accounts and network tasks run.
+Pause waits for an in-flight transaction before releasing its account reservation.
+The live event's original reception time follows it into the worker thread.
+
+A history request records the journal sequence at which it started. If a live
+message or edit arrives while that request is in flight, its current text stays
+visible when the older response is committed. The history response is still signed
+and retained as a separate observation. This ordering rule changes the derived
+display index; it does not rewrite either signed version.
+
+Media workers run concurrently with text acquisition. History reads and file reads
+use separate bounded request lanes; up to three requests in each lane run in parallel. Each media worker
 downloads up to three files at once. Files stream to temporary paths, are hashed incrementally and
 atomically moved to content-addressed storage. Completed, skipped, retrying and failed
 attachments append new events. Signed message records are never rewritten to add a

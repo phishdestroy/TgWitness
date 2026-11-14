@@ -4,19 +4,21 @@
 
 # Load available history into the workspace
 
-In **More tools → Sources → Chats in scope**, review the enabled chats, pause observation, choose Standard API or
+In **More tools → Sources → Chats in scope**, review the enabled chats, choose Standard API or
 Takeout export, then choose **Load full history**. The run fixes that list of sources and reads their available past messages
 into Chats and the signed observation journal. Media uses the existing attachment
 settings and durable download queue. This is separate from the per-chat signed
 JSON/HTML export.
 
-For account-wide collection, select **Whole account**, start observation to load its
-source list, and review that list before starting history. The dialog-list limit still
-applies (1,000 by default, adjustable in **More tools → Parameters**); the source list shows which
-dialogs the run covered. Chats discovered or enabled later need another run.
-Pause observation before starting history; one history run or export uses an account at a time.
+For account-wide collection, select **Whole account** and save the scope. History
+refreshes all accessible dialogs, including archived chats, before signing its source
+list. This discovery does not use the selected-chat picker's list limit. Chats discovered
+later are observed and receive their configured initial snapshot; another full run can
+load their earlier history. Keep **Keep observation on during and after history loading**
+enabled to record new messages, edits and deletion notices while history loads.
+One history run or export uses the acquisition slot; live observation runs alongside it.
 
-Choose one to five attachment workers and whether to preserve available Recent Actions
+Choose one to three concurrent chats, one to five attachment workers and whether to preserve available Recent Actions
 and compare previously saved versions. Takeout may require approval in Telegram and a
 server-specified wait. These options remain fixed on resume. See [Backfill behavior and
 evidence contract](BACKFILL.md) for transport, retry and trust details.
