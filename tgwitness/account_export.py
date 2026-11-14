@@ -364,6 +364,10 @@ class AccountExport:
             self.collector.release_export(job_id)
         return self.public(job_id)
 
+    def chat_label(self, chat_id):
+        title = next((chat.get("title") for chat in (self.inventory or {}).get("chats", ()) if chat.get("id") == chat_id), None)
+        return {"id": chat_id, "title": title} if title else chat_id
+
     async def finish(self, job_id, reason="Stopped before acquisition completed."):
         from .account_finalization import finalize
         await self.pause(job_id)
@@ -879,7 +883,7 @@ class AccountExport:
                 if previous and previous["terminal"]:
                     continue
                 cursor = previous["cursor_after"] if previous else task["cursor_start"]
-                self.current["current_chat"] = task["chat_id"]
+                self.current["current_chat"] = self.chat_label(task["chat_id"])
                 if task.get("discovery_error"):
                     self.seal(job, task, cursor, cursor, True, [], 0, utcnow(), "failed", task["discovery_error"])
                     continue
