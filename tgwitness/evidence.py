@@ -348,17 +348,22 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 for proof in sorted(anchors.iterdir()) if anchors.is_dir() else []:
                     stem = proof.name.split(".", 1)[0]
                     source = store.root / "checkpoints" / (stem + ".json")
-                    if not (stem.startswith("checkpoint-") and stem[11:].isdigit() and source.is_file()):
+                    if proof.name.endswith(".tmp") or not (stem.startswith("checkpoint-") and stem[11:].isdigit()
+                                                           and source.is_file()):
                         continue
                     if int(stem[11:]) > result["events"]:
                         continue
+                    try:
+                        proof_bytes = proof.read_bytes()
+                    except FileNotFoundError:
+                        continue
                     if "anchors/" + source.name not in hashes:
                         write_member("anchors/" + source.name, [source.read_bytes()])
-                    write_member("anchors/" + proof.name, [proof.read_bytes()])
+                    write_member("anchors/" + proof.name, [proof_bytes])
                     if proof.suffix in (".tsr", ".ots"):
                         query = proof.with_suffix(".tsq")
                         context["anchors"].append(report.describe_anchor(
-                            source.name, source.read_bytes(), proof.name, proof.read_bytes(),
+                            source.name, source.read_bytes(), proof.name, proof_bytes,
                             query.read_bytes() if proof.suffix == ".tsr" and query.is_file() else None,
                             public_key=vault.public_key, event_count=result["events"], hash_at=snapshot.hash_at))
                 context["events_sha256"] = hashes["events.jsonl"]

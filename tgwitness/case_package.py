@@ -241,7 +241,7 @@ def timestamps(checkpoints, after_seq):
             count = int(source.stem.rsplit("-", 1)[1])
         except ValueError:
             continue
-        proofs = sorted(anchors.glob(source.stem + ".*")) if anchors.is_dir() else []
+        proofs = sorted(p for p in anchors.glob(source.stem + ".*") if not p.name.endswith(".tmp")) if anchors.is_dir() else []
         if count >= after_seq and any(p.suffix in (".tsr", ".ots") for p in proofs):
             return {"timestamps/" + path.name: path.read_bytes() for path in [source, *proofs]
                     if path.is_file() and not path.is_symlink() and path.stat().st_size <= MAX_FILE}
