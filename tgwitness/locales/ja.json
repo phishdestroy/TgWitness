@@ -8956,5 +8956,8 @@
   "Transport route checked for this connection.": "この接続について、転送経路が確認されました。",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "チャットと写真は一度だけ保存され、その他のファイルは 記録とファイル で選択されます。バックグラウンドで実行され続けるプロセスはありません。アーカイブには署名が付与されており、verify.py はその中のすべてのファイルをチェックします。",
   "running": "実行中",
-  "cancelled": "キャンセルされました"
+  "cancelled": "キャンセルされました",
+  "Updates arrived while observation was paused": "観察が一時停止されている間に更新が届きました",
+  "Too many updates arrived during startup": "起動中に更新が大量に届きました",
+  "Telegram could not deliver older updates": "Telegramは古い更新情報を配信できませんでした"
 }

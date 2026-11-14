@@ -963,7 +963,7 @@ function renderWorkflowControls(){
 }
 import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
-import("./views/chat-gaps.js?v=3").then(({createChatGaps})=>{
+import("./views/chat-gaps.js?v=4").then(({createChatGaps})=>{
   chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations')});
   if(state.view==='chats'&&state.chat!==null&&chatReady)renderChatFeed();
 }).catch(error=>toast(error.message,true));
@@ -1931,7 +1931,10 @@ function excerpt(e) {
     source_access_lost:tr("The account lost access to a source"),shutdown:tr("TgWitness was shut down"),operator:tr("Stopped from the panel"),
     collector_error:tr("Stopped after an error"),history_unavailable:tr("Chat history could not be read"),
     recheck_visibility_uncertain:tr("Some messages could not be confirmed on recheck"),recheck_unparsed:tr("Some message numbers could not be read on recheck"),
-    probe_ack_missed_live:tr("A probe answer did not arrive live"),probe_ack_live:tr("Probe answers arrive live again")})[p.reason]||p.reason;
+    probe_ack_missed_live:tr("A probe answer did not arrive live"),probe_ack_live:tr("Probe answers arrive live again"),
+    "updates delivered while observation was paused":tr("Updates arrived while observation was paused"),
+    "startup buffer full":tr("Too many updates arrived during startup"),
+    "Telegram reported that updates for this interval are too old to deliver":tr("Telegram could not deliver older updates")})[p.reason]||p.reason;
   const serviceLine=action=>{const text=serviceText(action);return text.charAt(0).toLocaleUpperCase(LANG)+text.slice(1);};
   if (p.service_action) return serviceLine(p.service_action);
   if (p.action) return p.action._ ? serviceLine(p.action._) : tr("Telegram service action");

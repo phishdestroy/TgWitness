@@ -9100,5 +9100,8 @@
   "Transport route checked for this connection.": "Перевірено маршрут передачі даних для цього з’єднання.",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Чати та фотографії зберігаються один раз; інші файли обираються у розділі Запис і файли. У фоновому режимі нічого не працює. Архів підписано, а verify.py перевіряє кожен файл у ньому.",
   "running": "виконується",
-  "cancelled": "скасовано"
+  "cancelled": "скасовано",
+  "Updates arrived while observation was paused": "Оновлення надійшли під час призупинення спостереження",
+  "Too many updates arrived during startup": "Під час запуску надійшло занадто багато оновлень",
+  "Telegram could not deliver older updates": "Telegram не зміг доставити старіші оновлення"
 }

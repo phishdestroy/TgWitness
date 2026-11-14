@@ -1,11 +1,18 @@
 const KINDS = "coverage.gap,connection.restored,process.started,process.stopped,observation.started,observation.stopped";
 const INTERRUPTIONS = {transport_disconnected: "Connection to Telegram lost", authorization_required: "Telegram signed this account out", resume_failed: ""};
 const STOPS = {shutdown: "TgWitness was shut down", operator: "Observation paused"};
+const MOMENTS = {"updates delivered while observation was paused": "Updates arrived while observation was paused",
+  "startup buffer full": "Too many updates arrived during startup", source_access_lost: "The account lost access to a source",
+  updates_diverted: "Updates are going to another session",
+  session_revoked_externally: "The session was ended from another device or by Telegram.",
+  "Telegram reported that updates for this interval are too old to deliver": "Telegram could not deliver older updates"};
 const LISTED = 3;
 
 export function intervals(events, chat) {
   const found = [];
-  let open = null;
+  // A stop before observation ever ran interrupts nothing: a new workspace starts the program several times
+  // during setup. The first start of a journal has no earlier record; without it, assume observation had run.
+  let open = null, observed = true;
   const start = (at, reason, unexpected) => {
     if (!open) open = {from: at, reasons: new Set(), unexpected};
     if (reason) open.reasons.add(reason);
@@ -17,15 +24,22 @@ export function intervals(events, chat) {
     if (!Number.isFinite(at)) continue;
     if (event.kind === "coverage.gap") {
       if (account && Object.hasOwn(INTERRUPTIONS, payload.reason)) start(at, INTERRUPTIONS[payload.reason], true);
-      else found.push({from: at, to: at, reasons: []});
-    } else if (event.kind === "observation.stopped") start(at, STOPS[payload.reason] || STOPS.operator, !Object.hasOwn(STOPS, payload.reason));
-    else if (event.kind === "process.stopped") start(at, STOPS.shutdown, false);
-    else if (event.kind === "process.started") {
+      else found.push({from: at, to: at, reasons: MOMENTS[payload.reason] ? [MOMENTS[payload.reason]] : []});
+    } else if (event.kind === "observation.stopped") {
+      observed = true;
+      start(at, STOPS[payload.reason] || STOPS.operator, !Object.hasOwn(STOPS, payload.reason));
+    } else if (event.kind === "process.stopped") {
+      if (observed) start(at, STOPS.shutdown, false);
+    } else if (event.kind === "process.started") {
       const before = Date.parse(payload.previous_observation?.observed_at);
-      start(Number.isFinite(before) ? Math.min(before, at) : at, STOPS.shutdown, false);
-    } else if (open) {
-      found.push({from: open.from, to: at, reasons: [...open.reasons]});
-      open = null;
+      if (!payload.previous_observation) observed = false;
+      else if (observed) start(Number.isFinite(before) ? Math.min(before, at) : at, STOPS.shutdown, false);
+    } else {
+      observed = true;
+      if (open) {
+        found.push({from: open.from, to: at, reasons: [...open.reasons]});
+        open = null;
+      }
     }
   }
   if (open?.unexpected) found.push({from: open.from, to: null, reasons: [...open.reasons]});

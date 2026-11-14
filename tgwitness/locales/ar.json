@@ -9196,5 +9196,8 @@
   "Transport route checked for this connection.": "تم التحقق من مسار النقل لهذا الاتصال.",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "يتم حفظ المحادثات والصور مرة واحدة؛ ويتم اختيار الملفات الأخرى ضمن التسجيل والملفات. لا يظل أي شيء قيد التشغيل في الخلفية. الأرشيف موقّع، ويقوم verify.py بالتحقق من كل ملف فيه.",
   "running": "قيد التشغيل",
-  "cancelled": "ملغى"
+  "cancelled": "ملغى",
+  "Updates arrived while observation was paused": "وصلت التحديثات أثناء توقف المراقبة مؤقتًا",
+  "Too many updates arrived during startup": "وصلت تحديثات كثيرة جدًا أثناء بدء التشغيل",
+  "Telegram could not deliver older updates": "لم يتمكن Telegram من تسليم التحديثات الأقدم"
 }

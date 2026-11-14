@@ -8956,5 +8956,8 @@
   "Transport route checked for this connection.": "Tuyến truyền tải đã được kiểm tra cho kết nối này.",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Lưu các cuộc trò chuyện và ảnh một lần; các tệp khác được chọn trong Ghi và tệp. Không có gì tiếp tục chạy ở chế độ nền. Kho lưu trữ được ký tên, và verify.py kiểm tra mọi tệp trong đó.",
   "running": "đang chạy",
-  "cancelled": "đã hủy"
+  "cancelled": "đã hủy",
+  "Updates arrived while observation was paused": "Các bản cập nhật đã đến trong khi quá trình quan sát bị tạm dừng",
+  "Too many updates arrived during startup": "Quá nhiều bản cập nhật đã đến trong quá trình khởi động",
+  "Telegram could not deliver older updates": "Telegram không thể gửi các bản cập nhật cũ hơn"
 }
