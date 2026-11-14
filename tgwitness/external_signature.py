@@ -385,7 +385,7 @@ def certificate_reference(attributes, der):
     expected = digest(chosen, der) if chosen else hashlib.sha1(der).digest()
     if not first or first[0][0] != 0x04 or value(data, first[0]) != expected:
         raise ValueError("The signing-certificate attribute names a different certificate")
-    return "matches"
+    return "matches" if chosen else "matches_sha1"
 
 
 def attribute_time(data):
