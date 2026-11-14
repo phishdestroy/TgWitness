@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime, timezone
 from html import escape
 import math
 
@@ -53,6 +53,20 @@ def text_keys():
 
 def _e(value):
     return escape(str(value), quote=True)
+
+
+def _moment(value):
+    text = str(value or "—")
+    try:
+        moment = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return text
+    moment = moment.astimezone(timezone.utc) if moment.tzinfo else moment.replace(tzinfo=timezone.utc)
+    return moment.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _count(value):
+    return '<span data-n="' + _e(value) + '">' + _e(value) + '</span>' if type(value) is int else _e(value)
 
 
 def label(row, say):
@@ -165,9 +179,9 @@ def html(data, say):
     parts = ['<section class="card report-analytics" id="report-analytics"><div class="analytics-heading"><div><p class="eyebrow">'+_e(say("THE RECORD IN NUMBERS"))+'</p><h2>'+_e(say(TITLE))+'</h2></div><span class="analytics-basis">UTC</span></div><p>'+_e(say(INTRO))+'</p>']
     source = data.get("source") or {}
     parts.append('<p class="analytics-meta">'+_e(say("Source file"))+': '+_e(source.get("file", "events.jsonl"))+'<br>SHA-256 · '+_e(source.get("sha256") or '—')+'</p>')
-    parts.append('<p class="analytics-meta">'+_e(str(data.get("first_observed_at") or '—')+' → '+str(data.get("last_observed_at") or '—'))
-                 +' · UTC<br>'+_e(say("Observations"))+': '+str(data["activity_events"])+'</p>')
-    parts.append('<div class="analytics-totals">'+''.join('<div><b>'+str(data["totals"].get(kind, 0))+'</b><span>'+_e(say(title))+'</span></div>' for kind, title in KINDS.items())+'</div>')
+    parts.append('<p class="analytics-meta">'+_e(_moment(data.get("first_observed_at"))+' → '+_moment(data.get("last_observed_at")))
+                 +' · UTC<br>'+_e(say("Observations"))+': '+_count(data["activity_events"])+'</p>')
+    parts.append('<div class="analytics-totals">'+''.join('<div><b>'+_count(data["totals"].get(kind, 0))+'</b><span>'+_e(say(title))+'</span></div>' for kind, title in KINDS.items())+'</div>')
     if chart := data.get("activity"):
         parts.append('<figure class="analytics-figure chart-card chart-activity"><figcaption>'+_e(say("Recorded activity over time"))+'</figcaption><p>'+_e(say(TIME_NOTE))+'</p>')
         if error := _unavailable(chart, say):

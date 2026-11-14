@@ -95,7 +95,8 @@ def case_of(options):
             if options.get(name)}
 
 
-SINGULAR = {"{n} messages": "{n} message", "{n} records": "{n} record", "{n} chats": "{n} chat"}
+SINGULAR = {"{n} messages": "{n} message", "{n} records": "{n} record", "{n} chats": "{n} chat",
+            "{n} edits": "{n} edit", "{n} deletions": "{n} deletion", "{n} saved files": "{n} saved file"}
 
 
 class Words:
@@ -108,7 +109,7 @@ class Words:
         entry = self.table.get(text, text)
         if isinstance(entry, dict):
             text = entry.get(i18n.plural(self.language, values.get("n"))) or entry.get("other") or next(iter(entry.values()))
-        elif values.get("n") == 1 and text in SINGULAR:
+        elif values.get("n") == 1 and text in SINGULAR and (self.language == "en" or SINGULAR[text] in self.table):
             text = self.table.get(SINGULAR[text], SINGULAR[text])
         else:
             text = entry
@@ -1145,12 +1146,22 @@ def keycard(say, fp):
             + e(say("Visual fingerprint: copies signed by another key show other colours")) + '">' + swatch + "</div></div>")
 
 
+def counted(say, key, n):
+    text = say(key, n=n)
+    if type(n) is not int or abs(n) < 1000:
+        return text
+    return text.replace(str(n), format(n, ",").replace(",", "," if getattr(say, "language", "en") == "en" else "\u202f"), 1)
+
+
 def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False):
     cats, latest = digest["categories"], latest_stamp(anchors)
-    summary = say("{account} observed {chats} chats from {first} to {last}. The journal holds {n} records: {m} messages, "
-                  "{e} edits, {d} deletions and {f} saved files.", account=account_text or say("The observing account"),
-                  chats=len(digest["chats"]), first=utc_text(digest["first"]), last=utc_text(digest["last"]),
-                  n=count, m=cats["message"], e=cats["edited"], d=cats["deleted"], f=len(digest["media"]))
+    summary = (say("{account} observed {chats} from {first} to {last}.", account=account_text or say("The observing account"),
+                   chats=counted(say, "{n} chats", len(digest["chats"])), first=utc_text(digest["first"]),
+                   last=utc_text(digest["last"]))
+               + " " + say("The journal holds {records}: {messages}, {edits}, {deletions} and {files}.",
+                           records=counted(say, "{n} records", count), messages=counted(say, "{n} messages", cats["message"]),
+                           edits=counted(say, "{n} edits", cats["edited"]), deletions=counted(say, "{n} deletions", cats["deleted"]),
+                           files=counted(say, "{n} saved files", len(digest["media"]))))
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
@@ -2229,6 +2240,41 @@ def coverage_section(say, number, coverage):
     return out + "</section>"
 
 
+TIMESTAMP_ROWS_SHOWN = 12
+
+
+def timestamp_row(say, anchor):
+    if anchor.get("kind") == "rfc3161":
+        signer = (anchor.get("signed") or {}).get("signer")
+        status = ('<span class="pill ok">' + e(say("Token valid")) + "</span> <small>" + e(signer) + "</small>"
+                  if case_assessment.verified_stamp(anchor, 2**63 - 1)
+                  else '<span class="pill warn">' + e(say("Checkpoint or timestamp awaiting verification")) + "</span>")
+        return [num(anchor.get("event_count")), e(anchor["service"]), "RFC 3161", when(anchor.get("time")), status]
+    if anchor.get("kind") == "opentimestamps":
+        pending = anchor.get("status") == "pending"
+        return [num(anchor.get("event_count")), e(anchor["service"]), "OpenTimestamps · Bitcoin", "—",
+                '<span class="pill ' + ("warn" if pending else "violet") + '">'
+                + e(say("Waiting for Bitcoin confirmation") if pending else say("In Bitcoin; confirm with ots verify"))
+                + "</span>"]
+    return [num(anchor.get("event_count")), e(anchor["service"]), "—", "—",
+            '<span class="pill bad">' + e(say("Unreadable")) + "</span>"]
+
+
+def timestamp_summary(anchors, rows):
+    groups = {}
+    for anchor, row in zip(anchors, rows):
+        groups.setdefault((row[1], row[2]), []).append((anchor, row))
+    summary = []
+    for (service, kind), items in groups.items():
+        latest = max(items, key=lambda item: (item[0].get("event_count") or 0, item[0].get("time") or ""))[1]
+        statuses = {}
+        for _, row in items:
+            statuses[row[4]] = statuses.get(row[4], 0) + 1
+        status = "<br>".join(label + " <small>× " + num(count) + "</small>" for label, count in statuses.items())
+        summary.append([service, kind, num(len(items)), latest[0], latest[3], status])
+    return summary
+
+
 def timestamps_section(say, number, anchors, archive_name, fp):
     out = section(number, "timestamps", say("Timestamps"),
                   say("A timestamp shows that a checkpoint, and every record before it, existed no later than the stamped "
@@ -2240,27 +2286,23 @@ def timestamps_section(say, number, anchors, archive_name, fp):
     else:
         out += ('<div class="callout">' + e(say("No independent timestamps in this export: times come from the collector's "
                                                 "clock. Turn on Evidence mode to stamp checkpoints automatically.")) + "</div>")
-    rows = []
-    for anchor in anchors:
-        if anchor.get("kind") == "rfc3161":
-            signer = (anchor.get("signed") or {}).get("signer")
-            status = ('<span class="pill ok">' + e(say("Token valid")) + "</span> <small>" + e(signer) + "</small>"
-                      if case_assessment.verified_stamp(anchor, 2**63 - 1)
-                      else '<span class="pill warn">' + e(say("Checkpoint or timestamp awaiting verification")) + "</span>")
-            rows.append([num(anchor.get("event_count")), e(anchor["service"]), "RFC 3161", when(anchor.get("time")), status])
-        elif anchor.get("kind") == "opentimestamps":
-            pending = anchor.get("status") == "pending"
-            rows.append([num(anchor.get("event_count")), e(anchor["service"]), "OpenTimestamps · Bitcoin", "—",
-                         '<span class="pill ' + ("warn" if pending else "violet") + '">'
-                         + e(say("Waiting for Bitcoin confirmation") if pending else say("In Bitcoin; confirm with ots verify"))
-                         + "</span>"])
-        else:
-            rows.append([num(anchor.get("event_count")), e(anchor["service"]), "—", "—",
-                         '<span class="pill bad">' + e(say("Unreadable")) + "</span>"])
+    rows = [timestamp_row(say, anchor) for anchor in anchors]
+    columns = [say("Records covered"), say("Service"), say("Type"), say("Stamped at"), say("Status")]
+    shown = anchors
+    if len(rows) > TIMESTAMP_ROWS_SHOWN:
+        newest = max(anchor.get("event_count") or 0 for anchor in anchors)
+        shown = [anchor for anchor in anchors if (anchor.get("event_count") or 0) == newest]
+        out += table([say("Service"), say("Type"), say("Receipts"), say("Records covered"), say("Stamped at"), say("Status")],
+                     timestamp_summary(anchors, rows))
+        out += "<h3>" + e(say("Receipts for the latest checkpoint")) + "</h3>"
+        out += table(columns, [row for anchor, row in zip(anchors, rows) if anchor in shown])
+        out += ('<details class="layout-case-details"><summary>' + e(say("All receipts ({n})", n=len(rows)))
+                + "</summary>" + table(columns, rows) + "</details>")
+    elif rows:
+        out += table(columns, rows)
     if rows:
-        out += table([say("Records covered"), say("Service"), say("Type"), say("Stamped at"), say("Status")], rows)
-        tsr = next((a for a in anchors if a.get("kind") == "rfc3161"), None)
-        ots = next((a for a in anchors if a.get("kind") == "opentimestamps"), None)
+        tsr = next((a for a in reversed(shown) if a.get("kind") == "rfc3161"), None)
+        ots = next((a for a in reversed(shown) if a.get("kind") == "opentimestamps"), None)
         out += "<h3>" + e(say("How to check the timestamps")) + "</h3>"
         out += command("python verify.py " + archive_name + " --fingerprint " + fp + " --tsa-ca tsa-root.pem")
         if tsr:
@@ -2414,9 +2456,9 @@ class EvidenceHTML:
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         self.numbers = iter(range(1, 100))
         links = False if not self.options.get("timeline") else True if self.options.get("design") in report_layouts.DESIGNS             else "viewer" if self.data_kind else False
-        yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
         yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
                                                  self.handover, self.filtered)).encode("utf-8")
+        yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
         analysis_sections = [report_charts.examination_html(self.material.get("examination"), say),
                              report_charts.html(self.material.get("analytics"), say)
                              + report_charts.metrics_html(self.material.get("processors"), say)]
