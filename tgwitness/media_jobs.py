@@ -20,7 +20,7 @@ known_files = {}
 
 LANES = {
     "ephemeral": {"max_priority": 0},
-    "urgent": {"min_priority": 1, "max_priority": 1},
+    "urgent": {"min_priority": 1, "max_priority": 1, "expedited": True},
     "bulk": {"min_priority": 2},
 }
 TRANSITIONS = {

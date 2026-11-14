@@ -295,7 +295,8 @@ async def refresh_one(collector):
     policy = monitoring_settings(store)
     if not collector.running or not policy["profiles"] or not client or not client.is_connected():
         return
-    if store.get_setting("rpc_backoff_until", 0) > now or getattr(client, "_rpc_lock", None) and client._rpc_lock.locked():
+    if (store.get_setting("rpc_backoff_until", 0) > now or collector.flood_paused("people")
+            or getattr(client, "_rpc_lock", None) and client._rpc_lock.locked()):
         return
     with store.transaction():
         job = store.db.execute("SELECT * FROM people_refresh_jobs WHERE next_attempt<=? ORDER BY requested_seq LIMIT 1", (now,)).fetchone()

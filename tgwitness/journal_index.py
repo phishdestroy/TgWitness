@@ -293,6 +293,8 @@ def migrate_media(db):
         db.execute("ALTER TABLE media_jobs ADD COLUMN priority INTEGER NOT NULL DEFAULT 10")
     if "estimated_bytes" not in columns:
         db.execute("ALTER TABLE media_jobs ADD COLUMN estimated_bytes INTEGER")
+    if "expedite" not in columns:
+        db.execute("ALTER TABLE media_jobs ADD COLUMN expedite INTEGER NOT NULL DEFAULT 0")
     if added:
         for row in db.execute("SELECT j.message_event,e.payload FROM media_jobs j "
                               "JOIN events e ON e.seq=j.message_event"):
@@ -301,3 +303,5 @@ def migrate_media(db):
                        (priority, size, row["message_event"]))
     db.execute("CREATE INDEX IF NOT EXISTS media_lane ON "
                "media_jobs(account_id,priority,message_event,next_attempt) WHERE state IN ('queued','retry')")
+    db.execute("CREATE INDEX IF NOT EXISTS media_expedited ON "
+               "media_jobs(account_id,expedite DESC,priority,message_event) WHERE state IN ('queued','retry')")
