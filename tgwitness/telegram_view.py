@@ -114,7 +114,7 @@ class View:
     def pager(self, page, pages):
         say = self.say
         return ('<nav class="pager" aria-label="' + e(say('Messages')) + '"><a href="../../export_results.html">← '
-                + e(say('All chats')) + '</a><span class="page-number">' + str(page) + ' / ' + str(pages) + '</span>'
+                + e(say('All chats')) + '</a><span class="page-number" dir="ltr">' + str(page) + ' / ' + str(pages) + '</span>'
                 + ('<a rel="prev" href="' + filename(page - 1) + '">← ' + e(say('Previous')) + '</a>' if page > 1 else '')
                 + ('<a rel="next" href="' + filename(page + 1) + '">' + e(say('Next')) + ' →</a>' if page < pages else '') + '</nav>')
 
