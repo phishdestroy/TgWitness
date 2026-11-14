@@ -991,6 +991,15 @@ class Collector:
         def rpc_error(exc):
             self.handle_authorization_error(exc, "Telegram RPC", client=client)
         client.rpc_error_handler = rpc_error
+
+        def exported_error(exc, dc_id):
+            self.note("account.authorization_error", {
+                "operation": "file data center", "error_type": type(exc).__name__, "telegram_error": telegram_error(exc),
+                "client": type(client).__name__, "dc_id": dc_id,
+                "meaning": "Telegram ended the authorization this session imported for data center " + str(dc_id)
+                           + " to read files. Observation with the current session continues; the next file "
+                           "request imports a new authorization."})
+        client.exported_error_handler = exported_error
         client.connection_listener = lambda state: self.connection_changed(client, state)
         client.difference_gap_listener = self.difference_gap
         for handler, builder in ((self.on_new, events.NewMessage()),

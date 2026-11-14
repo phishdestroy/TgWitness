@@ -5,7 +5,8 @@ import time
 from contextvars import ContextVar
 
 from telethon import TelegramClient, utils
-from telethon.errors import FloodWaitError, FloodPremiumWaitError
+from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
+                             FloodPremiumWaitError, FloodWaitError, SessionExpiredError, SessionRevokedError)
 from telethon.network.connection import ConnectionTcpObfuscated
 from telethon.network.connection.tcpmtproxy import TcpMTProxy
 from telethon.tl import functions, types
@@ -64,6 +65,8 @@ if MessageBox is not None:
 else:
     GapAwareMessageBox = None
 FLOOD_ERRORS = (FloodWaitError, FloodPremiumWaitError)
+EXPORTED_AUTHORIZATION_ERRORS = (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
+                                 SessionExpiredError, SessionRevokedError)
 _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
             functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest,
             functions.auth.AcceptLoginTokenRequest)
@@ -283,8 +286,34 @@ class WitnessClient(TelegramClient):
                              "error_type": type(exc).__name__, "retry_after_seconds": exc.seconds,
                              "wait_until": self._rpc_wait_until, "observed_at": time.time(),
                              "activity": self.rpc_activity()})
-            if handler := getattr(self, "rpc_error_handler", None):
+            if sender is not None and sender is not self._sender and isinstance(exc, EXPORTED_AUTHORIZATION_ERRORS):
+                self.exported_authorization_failed(sender, exc)
+            elif handler := getattr(self, "rpc_error_handler", None):
                 handler(exc)
             raise
         finally:
             _single_attempt.reset(token)
+
+    def exported_authorization_failed(self, sender, exc):
+        dc_id = getattr(sender, "dc_id", None)
+        if not hasattr(self, "_stale_exports"):
+            self._stale_exports = set()
+        self._stale_exports.add(dc_id)
+        if listener := getattr(self, "exported_error_handler", None):
+            try:
+                listener(exc, dc_id)
+            except Exception:
+                LOG.exception("Recording an ended file data-center authorization failed")
+
+    async def _return_exported_sender(self, sender):
+        await super()._return_exported_sender(sender)
+        dc_id = getattr(sender, "dc_id", None)
+        if dc_id not in getattr(self, "_stale_exports", ()):
+            return
+        async with self._borrow_sender_lock:
+            state, current = self._borrowed_senders.get(dc_id, (None, None))
+            if current is not sender or state is None or state._n:
+                return
+            del self._borrowed_senders[dc_id]
+            self._stale_exports.discard(dc_id)
+        await sender.disconnect()
