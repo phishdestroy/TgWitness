@@ -9610,5 +9610,6 @@
   "Search saved messages": "搜索已保存的消息",
   "{n} saved versions": "{n}个保存版本",
   "Chat loading: {running} active · {pending} pending": "聊天加载：{running} 个进行中 · {pending} 个等待中",
-  "The Telegram connection changed. Retry the operation.": "Telegram 连接已更改。请重试此操作。"
+  "The Telegram connection changed. Retry the operation.": "Telegram 连接已更改。请重试此操作。",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "无法读取代理来源设置。请先恢复 proxy-sources.json，再使用代理列表。"
 }

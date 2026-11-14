@@ -9754,5 +9754,6 @@
   "Search saved messages": "Пошук збережених повідомлень",
   "{n} saved versions": "{n} збережених версій",
   "Chat loading: {running} active · {pending} pending": "Завантаження чатів: {running} завантажуються · {pending} у черзі",
-  "The Telegram connection changed. Retry the operation.": "З’єднання з Telegram змінилося. Повторіть дію."
+  "The Telegram connection changed. Retry the operation.": "З’єднання з Telegram змінилося. Повторіть дію.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Не вдається прочитати налаштування джерел проксі. Відновіть файл proxy-sources.json, перш ніж користуватися списками проксі."
 }

@@ -9706,5 +9706,6 @@
   "Search saved messages": "חיפוש הודעות שמורות",
   "{n} saved versions": "{n} גרסאות שמורות",
   "Chat loading: {running} active · {pending} pending": "טעינת שיחות: {running} פעילות · {pending} ממתינות",
-  "The Telegram connection changed. Retry the operation.": "החיבור ל-Telegram השתנה. נסו לבצע את הפעולה שוב."
+  "The Telegram connection changed. Retry the operation.": "החיבור ל-Telegram השתנה. נסו לבצע את הפעולה שוב.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "לא ניתן לקרוא את הגדרות מקורות הפרוקסי. שחזרו את proxy-sources.json לפני השימוש ברשימות פרוקסי."
 }

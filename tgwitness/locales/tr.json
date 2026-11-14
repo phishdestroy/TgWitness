@@ -9658,5 +9658,6 @@
   "Search saved messages": "Kaydedilmiş mesajları arama",
   "{n} saved versions": "{n} kaydedilmiş sürüm",
   "Chat loading: {running} active · {pending} pending": "Sohbet yükleme: {running} etkin · {pending} beklemede",
-  "The Telegram connection changed. Retry the operation.": "Telegram bağlantısı değişti. İşlemi yeniden deneyin."
+  "The Telegram connection changed. Retry the operation.": "Telegram bağlantısı değişti. İşlemi yeniden deneyin.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Proxy kaynağı ayarları okunamıyor. Proxy listelerini kullanmadan önce proxy-sources.json dosyasını geri yükleyin."
 }

@@ -9658,5 +9658,6 @@
   "Search saved messages": "সংরক্ষিত বার্তা অনুসন্ধান",
   "{n} saved versions": "{n}টি সংরক্ষিত সংস্করণ",
   "Chat loading: {running} active · {pending} pending": "চ্যাট লোড হচ্ছে: {running} সক্রিয় · {pending} অপেক্ষমাণ",
-  "The Telegram connection changed. Retry the operation.": "Telegram সংযোগ বদলে গেছে। কাজটি আবার চেষ্টা করুন।"
+  "The Telegram connection changed. Retry the operation.": "Telegram সংযোগ বদলে গেছে। কাজটি আবার চেষ্টা করুন।",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "প্রক্সি উৎসের সেটিংস পড়া যাচ্ছে না। প্রক্সি তালিকা ব্যবহারের আগে proxy-sources.json পুনরুদ্ধার করুন।"
 }

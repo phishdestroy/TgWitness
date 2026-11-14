@@ -9610,5 +9610,6 @@
   "Search saved messages": "Tìm kiếm tin nhắn đã lưu",
   "{n} saved versions": "{n} phiên bản đã lưu",
   "Chat loading: {running} active · {pending} pending": "Tải cuộc trò chuyện: {running} đang tải · {pending} đang chờ",
-  "The Telegram connection changed. Retry the operation.": "Kết nối Telegram đã thay đổi. Hãy thử lại thao tác."
+  "The Telegram connection changed. Retry the operation.": "Kết nối Telegram đã thay đổi. Hãy thử lại thao tác.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Không thể đọc cài đặt nguồn proxy. Hãy khôi phục proxy-sources.json trước khi dùng danh sách proxy."
 }

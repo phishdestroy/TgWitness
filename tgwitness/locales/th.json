@@ -9610,5 +9610,6 @@
   "Search saved messages": "ค้นหาข้อความที่บันทึกไว้",
   "{n} saved versions": "{n} เวอร์ชันที่บันทึกไว้",
   "Chat loading: {running} active · {pending} pending": "การโหลดแชท: {running} กำลังทำงาน · {pending} รอดำเนินการ",
-  "The Telegram connection changed. Retry the operation.": "การเชื่อมต่อ Telegram เปลี่ยนไป โปรดลองดำเนินการอีกครั้ง"
+  "The Telegram connection changed. Retry the operation.": "การเชื่อมต่อ Telegram เปลี่ยนไป โปรดลองดำเนินการอีกครั้ง",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "อ่านการตั้งค่าแหล่งพร็อกซีไม่ได้ กู้คืน proxy-sources.json ก่อนใช้รายการพร็อกซี"
 }
