@@ -1,6 +1,7 @@
 import asyncio
 import copy
 import logging
+import math
 import time
 from contextvars import ContextVar
 
@@ -77,17 +78,32 @@ _READ_RECEIPTS = (functions.messages.ReadHistoryRequest, functions.messages.Read
                   functions.stories.ReadStoriesRequest)
 _OWN_UPDATES = (types.messages.AffectedMessages, types.messages.AffectedHistory, types.messages.AffectedFoundMessages)
 _FILE_READS = (functions.upload.GetFileRequest, functions.upload.GetCdnFileRequest)
+_UPDATE_READS = (functions.updates.GetDifferenceRequest, functions.updates.GetChannelDifferenceRequest,
+                 functions.updates.GetStateRequest)
 FILE_REQUESTS = 3
 
 
-def file_request(request):
+def _wraps(request, kinds):
     for _ in range(8):
-        if isinstance(request, _FILE_READS):
+        if isinstance(request, kinds):
             return True
         request = getattr(request, "query", None)
         if not isinstance(request, TLRequest):
             return False
     return False
+
+
+def file_request(request):
+    return _wraps(request, _FILE_READS)
+
+
+def update_request(request):
+    return _wraps(request, _UPDATE_READS)
+
+
+def flood_key(request, dc_id=None):
+    name = request_method(request)["method"]
+    return name + "@dc" + str(dc_id or 0) if file_request(request) else name
 
 
 def method_name(request):
@@ -137,6 +153,7 @@ class WitnessClient(TelegramClient):
 
     def __init__(self, *args, **kwargs):
         self.accepted_state, self.undispatched = None, 0
+        self._flood_until = {}
         super().__init__(*args, **kwargs)
         if GapAwareMessageBox is not None:
             box = GapAwareMessageBox(self._log["messagebox"])
@@ -214,23 +231,59 @@ class WitnessClient(TelegramClient):
         self._init_request.proxy = (types.InputClientProxy(*self._connection.address_info(self._proxy))
                                     if issubclass(self._connection, TcpMTProxy) else None)
 
+    def _flood_key(self, request, sender=None):
+        return flood_key(request, getattr(sender, "dc_id", None) or getattr(self.session, "dc_id", None))
+
+    def flood_until(self, key):
+        getter = getattr(self, "flood_getter", None)
+        saved = getter() if getter else None
+        saved = saved.get(key, 0) if isinstance(saved, dict) else 0
+        return max(getattr(self, "_flood_until", {}).get(key, 0), saved if isinstance(saved, (int, float)) else 0)
+
+    async def _flood_turn(self, sender, items):
+        for item in items:
+            if update_request(item):
+                continue
+            remaining = self.flood_until(self._flood_key(item, sender)) - time.time()
+            if remaining > 3:
+                raise FloodWaitError(request=item, capture=math.ceil(remaining))
+            if remaining > 0:
+                await asyncio.sleep(remaining)
+
+    async def _paced_turn(self, items):
+        pacer = getattr(self, "bulk_pacer", None)
+        for item in items:
+            if pacer is not None and bulk_request(item):
+                await pacer.before()
+
     async def _call(self, sender, request, ordered=False, flood_sleep_threshold=None):
         if utils.is_list_like(request):
             request = tuple(request)
         reject_read_receipts(request)
         if not hasattr(self, "_rpc_lock"):
             self._rpc_lock = asyncio.Lock()
+            self._bulk_lock = asyncio.Lock()
             self._rpc_owner = None
-            self._rpc_wait_until = 0
             self._file_slots = asyncio.Semaphore(FILE_REQUESTS)
-        current = asyncio.current_task()
-        if self._rpc_owner is current:
+        items = request if utils.is_list_like(request) else (request,)
+        await self._flood_turn(sender, items)
+        if self._rpc_owner is asyncio.current_task():
+            await self._paced_turn(items)
+            return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
+        if getattr(self, "bulk_pacer", None) is not None and any(bulk_request(item) for item in items):
+            async with self._bulk_lock:
+                await self._paced_turn(items)
+                return await self._turn_call(sender, request, ordered, flood_sleep_threshold)
+        return await self._turn_call(sender, request, ordered, flood_sleep_threshold)
+
+    async def _turn_call(self, sender, request, ordered, flood_sleep_threshold):
+        if not utils.is_list_like(request) and update_request(request):
             return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
         if not utils.is_list_like(request) and file_request(request):
             async with self._file_slots:
                 return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
         async with self._rpc_lock:
-            self._rpc_owner = current
+            self._rpc_owner = asyncio.current_task()
             try:
                 return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
             finally:
@@ -239,17 +292,9 @@ class WitnessClient(TelegramClient):
     async def _serial_call(self, sender, request, ordered, flood_sleep_threshold):
         if utils.is_list_like(request):
             return [await self._serial_call(sender, item, ordered, flood_sleep_threshold) for item in request]
-        while True:
-            stored = getattr(self, "rpc_backoff_getter", lambda: 0)()
-            remaining = max(self._rpc_wait_until, stored) - time.time()
-            if remaining <= 0:
-                break
-            await asyncio.sleep(min(remaining, 1))
         single = isinstance(request, _ACTIONS)
         pacer = getattr(self, "bulk_pacer", None)
         paced = pacer is not None and bulk_request(request)
-        if paced:
-            await pacer.before()
         token = _single_attempt.set(single)
         info = request_method(request)
         if not hasattr(self, "_rpc_activity"):
@@ -276,15 +321,15 @@ class WitnessClient(TelegramClient):
                 if pacer is not None:
                     pacer.flooded(exc.seconds)
                 counts["flood_waits"] += 1
-                self._rpc_wait_until = max(self._rpc_wait_until,
-                    getattr(self, "rpc_backoff_getter", lambda: 0)(), time.time() + exc.seconds + 1)
+                flood = self._flood_key(request, sender)
+                until = self._flood_until[flood] = max(self.flood_until(flood), time.time() + exc.seconds + 1)
                 if save := getattr(self, "rpc_backoff_setter", None):
-                    save(self._rpc_wait_until, method_name(request))
+                    save(until, method_name(request), flood)
                 if observe := getattr(self, "rpc_backoff_observer", None):
                     failed = getattr(exc, "request", None)
                     observe({**info, "failed_method": request_method(failed)["method"] if failed is not None else info["method"],
-                             "error_type": type(exc).__name__, "retry_after_seconds": exc.seconds,
-                             "wait_until": self._rpc_wait_until, "observed_at": time.time(),
+                             "flood_key": flood, "error_type": type(exc).__name__, "retry_after_seconds": exc.seconds,
+                             "wait_until": until, "observed_at": time.time(),
                              "activity": self.rpc_activity()})
             if sender is not None and sender is not self._sender and isinstance(exc, EXPORTED_AUTHORIZATION_ERRORS):
                 self.exported_authorization_failed(sender, exc)

@@ -42,7 +42,7 @@ from . import tuning
 from .history import History
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
-from .telegram_client import WitnessClient, FLOOD_ERRORS
+from .telegram_client import WitnessClient, FLOOD_ERRORS, request_method
 from .security import KeyLock
 from .workers import complete_in_thread
 from .store import canonical, utcnow
@@ -203,6 +203,8 @@ AUTO_DELETE_MEANING = {
 
 
 BUFFER_DRAIN_ROUNDS = 5
+FLOOD_GUARDED = {"recheck": ("messages.getHistory", "messages.getMessages", "channels.getMessages"),
+                 "watch": ("updates.getState",), "people": ("users.getUsers",)}
 RECONNECT_MEANING = ("Telegram's client library reconnected on its own. The connection was lost for an unknown "
                      "interval ending here; updates delivered during it were not received.")
 SALVAGE_WINDOW = 100
@@ -316,6 +318,11 @@ ACTIVITY_CLAIMS = (("snapshot:", "loading_messages"), ("scale:", "measuring_chat
 
 def recovered_source(update):
     return "update_recovery" if getattr(update, "pts", None) == 0 else None
+
+
+def method_of(exc):
+    request = getattr(exc, "request", None)
+    return request_method(request)["method"] if request is not None else None
 
 
 def probe_settings(store):
@@ -598,6 +605,8 @@ class Collector:
         self.chat_state_worker = None
         self.presence_worker = None
         self.recheck_wakeup = asyncio.Event()
+        self.recheck_resume_at = 0
+        self.intake_resume_at = 0
         self.recheck_state = None
         self.resumed_state_at = None
         self.paused_drops = 0
@@ -656,6 +665,7 @@ class Collector:
             "rpc_backoff": self.store.get_setting("rpc_backoff", None),
             "rpc_activity": self.client.rpc_activity() if isinstance(self.client, WitnessClient) else None,
             "rpc_backoff_method": paused_by["method"] if paused_by and paused_by["until"] >= backoff - 2 else None,
+            "rpc_flood_until": self.flood_waits(),
             "disk_free_bytes": shutil.disk_usage(self.store.root).free,
             "run_id": self.run_id,
             "reconnect_attempts": self.reconnect_attempts,
@@ -828,7 +838,7 @@ class Collector:
             chat_id, entity, baseline = await self.intake.get()
             client = self.client
             options = scope_settings(self.store)["new_chats"]
-            while self.running and time.time() < self.store.get_setting("rpc_backoff_until", 0):
+            while self.running and time.time() < max(self.store.get_setting("rpc_backoff_until", 0), self.intake_resume_at):
                 await asyncio.sleep(1)
             try:
                 if baseline:
@@ -844,9 +854,9 @@ class Collector:
             except asyncio.CancelledError:
                 raise
             except FLOOD_ERRORS as exc:
-                until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-                self.store.set_setting("rpc_backoff_until", until)
-                self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds})
+                self.intake_resume_at = time.time() + exc.seconds
+                self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds,
+                                                       "method": method_of(exc)})
                 self.intake.put_nowait((chat_id, entity, baseline))
             except Exception as exc:
                 if self.handle_authorization_error(exc, "new chat intake", client=client):
@@ -976,6 +986,7 @@ class Collector:
                                      **options, **self.route_options())
         client.tgwitness_client_profile = device
         client.rpc_backoff_getter = lambda: self.store.get_setting("rpc_backoff_until", 0)
+        client.flood_getter = lambda: self.store.get_setting("rpc_flood_until", {})
         client.rpc_backoff_setter = self.telegram_paused
         client.updates_listener = lambda: client is self.client and not PROBE_CALL.get() and self.updates_arrived()
         from .rpc_pacing import AccountPacer
@@ -1024,10 +1035,24 @@ class Collector:
         client.route_id = self.current_route_id() if self.automatic() else None
         return client
 
-    def telegram_paused(self, until, method=None):
-        if until > self.store.get_setting("rpc_backoff_until", 0):
-            self.store.set_setting("rpc_backoff_until", until)
-            self.store.set_setting("rpc_backoff_method", {"until": until, "method": method})
+    def telegram_paused(self, until, method=None, key=None):
+        waits = self.flood_waits()
+        key = key or method or "unknown"
+        if until > waits.get(key, 0):
+            waits[key] = until
+            self.store.set_setting("rpc_flood_until", waits)
+            self.store.set_setting("rpc_backoff_method", {"until": until, "method": method, "key": key})
+
+    def flood_waits(self):
+        saved, now = self.store.get_setting("rpc_flood_until", {}), time.time()
+        return {key: until for key, until in saved.items()
+                if isinstance(until, (int, float)) and until > now} if isinstance(saved, dict) else {}
+
+    def flood_paused(self, guard):
+        client = self.client
+        if not isinstance(client, WitnessClient):
+            return False
+        return any(client.flood_until(key) > time.time() for key in FLOOD_GUARDED[guard])
 
     def updates_arrived(self):
         self.updates_seen += 1
@@ -1049,9 +1074,7 @@ class Collector:
                 "completeness": "updates in this period may be missing"})
             self.recheck_wakeup.set()
         client = self.client
-        if (probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS
-                or time.time() < self.store.get_setting("rpc_backoff_until", 0)
-                or getattr(client, "_rpc_lock", None) and client._rpc_lock.locked()):
+        if probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS or self.flood_paused("watch"):
             return
         seen = self.updates_seen
         try:
@@ -2805,7 +2828,7 @@ class Collector:
 
     async def reconnect(self):
         now = time.time()
-        if now < max(self.next_reconnect_at, self.store.get_setting("rpc_backoff_until", 0)):
+        if now < self.next_reconnect_at:
             return
         self.reconnect_attempts += 1
         self.store.append("connection.retry", {"attempt": self.reconnect_attempts})
@@ -2815,10 +2838,9 @@ class Collector:
         except AUTHORIZATION_ERRORS as exc:
             self.handle_authorization_error(exc, "reconnect", client=client)
         except FLOOD_ERRORS as exc:
-            self.next_reconnect_at = max(time.time() + exc.seconds,
-                                         self.store.get_setting("rpc_backoff_until", 0))
-            self.store.set_setting("rpc_backoff_until", self.next_reconnect_at)
-            self.store.append("telegram.backoff", {"operation": "reconnect", "retry_after_seconds": exc.seconds})
+            self.next_reconnect_at = time.time() + exc.seconds
+            self.store.append("telegram.backoff", {"operation": "reconnect", "retry_after_seconds": exc.seconds,
+                                                   "method": method_of(exc)})
         except Exception as exc:
             self.next_reconnect_at = now + min(self.param("reconnect_max_seconds"),
                                                5 * 2 ** min(self.reconnect_attempts, 10))
@@ -3460,7 +3482,8 @@ class Collector:
             if not self.running:
                 return
             delay = self.param("recheck_tick_seconds")
-            if not self.client.is_connected() or time.time() < self.store.get_setting("rpc_backoff_until", 0):
+            if (not self.client.is_connected() or time.time() < self.recheck_resume_at
+                    or self.flood_paused("recheck")):
                 continue
             if (scope_settings(self.store)["mode"] != "selected"
                     and time.time() - self.scope_refreshed_at > self.param("scope_refresh_minutes") * 60):
@@ -3468,10 +3491,10 @@ class Collector:
                 try:
                     await self.apply_scope()
                 except FLOOD_ERRORS as exc:
-                    self.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
-                        self.store.get_setting("rpc_backoff_until", 0)))
+                    self.scope_refreshed_at = time.time() - self.param("scope_refresh_minutes") * 60 + exc.seconds
                     self.store.append("telegram.backoff", {"operation": "scope refresh",
-                                                           "retry_after_seconds": exc.seconds})
+                                                           "retry_after_seconds": exc.seconds,
+                                                           "method": method_of(exc)})
                     continue
                 except Exception as exc:
                     if self.handle_authorization_error(exc, "scope refresh", client=client):
@@ -3521,9 +3544,9 @@ class Collector:
                     last[str(target["chat_id"])] = time.time()
                     self.store.set_setting("recheck_last", last)
             except FLOOD_ERRORS as exc:
-                until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-                self.store.set_setting("rpc_backoff_until", until)
-                self.store.append("telegram.backoff", {"operation": "recheck", "retry_after_seconds": exc.seconds})
+                self.recheck_resume_at = time.time() + exc.seconds
+                self.store.append("telegram.backoff", {"operation": "recheck", "retry_after_seconds": exc.seconds,
+                                                       "method": method_of(exc)})
                 results.append({"chat_id": target["chat_id"], "error": type(exc).__name__})
                 break
             except Exception as exc:
@@ -4487,9 +4510,6 @@ class Collector:
                     except TimeoutError:
                         pass
                     continue
-                if time.time() < self.store.get_setting("rpc_backoff_until", 0):
-                    await asyncio.sleep(1)
-                    continue
                 free, threshold = shutil.disk_usage(media_root).free, self.param("media_min_free_mb") * 1024**2
                 if free < threshold:
 
@@ -4578,9 +4598,7 @@ class Collector:
                 "reason": "Telegram authorization expired; durable job retained"}))
             return True
         except FLOOD_ERRORS as exc:
-            until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-            self.store.set_setting("rpc_backoff_until", until)
-            attempt.finish(MediaOutcome("retry", {"error_type": type(exc).__name__,
+            attempt.finish(MediaOutcome("retry", {"error_type": type(exc).__name__, "method": method_of(exc),
                                                    "retry_after_seconds": exc.seconds}, exc.seconds))
         except TakeoutInvalidError:
             attempt.finish(MediaOutcome("retry", {"reason": "Takeout expired; durable job retained"}))
