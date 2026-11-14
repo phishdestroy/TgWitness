@@ -7,7 +7,9 @@ from pathlib import Path
 from typing import Literal
 import unicodedata
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator, model_validator
+
+from .narrative import catalog as examination
 
 CATALOG = Path(__file__).with_name("jurisdictions.json")
 TITLE = "Jurisdiction guidance"
@@ -47,7 +49,47 @@ def _catalog():
     raw = CATALOG.read_bytes()
     value = json.loads(raw)
     value["sha256"] = sha256(raw).hexdigest()
+    original_hash = value["sha256"]
+    by_code = {examination.ALIASES.get(p["code"], p["code"]): p for p in value["profiles"]}
+    hashes = {}
+    for code in sorted(examination.codes()):
+        record = examination.load(code)
+        hashes[code] = record["catalog_sha256"]
+        profile = by_code.get(code)
+        if profile is None:
+            profile = examination_profile(record)
+            value["profiles"].append(profile)
+        profile["examination_code"] = code
+        profile["examination_routes"] = [{key: part[key] for key in ("route", "id", "scope") if key in part}
+                                          for part in examination.available_routes(record)
+                                          if part.get("route") in PROCEDURES]
+        profile["scope_profiles"] = {part["id"]: examination_profile({**record, "procedures": [part]})
+                                     for part in examination.available_routes(record)
+                                     if part.get("id") in profile.get("examination_only_scopes", [])}
+    value["profiles"].sort(key=lambda p: (p["code"] == "RU", p["name"].casefold()))
+    value["component_hashes"] = {"guidance": original_hash, "examination": hashes}
+    value["sha256"] = sha256(json.dumps(value["component_hashes"], sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     return value
+
+
+def examination_profile(record):
+    profile = {"code": record["code"], "name": record["name_en"], "language": "en",
+               "scope": record["name_en"] + ". Expert examination guidance. " + (record.get("review_scope") or ""),
+               "reviewed_on": record["checked_at"], "criminal_status": "needs_local_review",
+               "examination_only": True, "has_local_summary": False,
+               "human": "Confirm the selected court, appointment and filing requirements before completing the expert report.",
+               "tasks": [], "local": "", "local_criminal": ""}
+    for procedure, prefix in (("civil", ""), ("criminal", "criminal_")):
+        parts = [part for part in record.get("procedures", []) if part.get("route") == procedure]
+        entries = [part[key] for part in parts for key in ("appointment", "questions", "report_contents", "rights_duties")
+                   if part.get(key)]
+        sources = {entry["source"]: entry.get("basis") or record["name_en"] for entry in entries if entry.get("source")}
+        profile[prefix + "sources"] = [{"title": title, "url": url} for url, title in sources.items()]
+        profile[prefix + "law"] = "; ".join(dict.fromkeys(entry["basis"] for entry in entries if entry.get("basis")))
+        basis = " ".join(dict.fromkeys(entry["summary_en"] for entry in entries if entry.get("summary_en")))
+        profile["criminal" if procedure == "criminal" else "basis"] = basis or profile[prefix + "law"]
+    profile["prepare"] = profile["basis"]
+    return profile
 
 
 def catalog():
@@ -58,6 +100,7 @@ class Options(BaseModel):
     model_config = ConfigDict(extra="forbid")
     jurisdiction: str = ""
     procedure: Literal["civil", "criminal"] = "civil"
+    procedure_scope: str | None = None
     include_in_report: bool = True
     local_note: bool = False
     include_methods: bool = False
@@ -65,9 +108,25 @@ class Options(BaseModel):
     @field_validator("jurisdiction")
     @classmethod
     def known_jurisdiction(cls, value):
-        if value and value not in {p["code"] for p in _catalog()["profiles"]}:
+        if not value:
+            return value
+        profile = next((p for p in _catalog()["profiles"] if value in (p["code"], p.get("examination_code"))), None)
+        if profile is None:
             raise ValueError("Choose a jurisdiction from the supplied catalog.")
-        return value
+        return profile["code"]
+
+    @model_validator(mode="after")
+    def known_scope(self, info: ValidationInfo):
+        if info.context and info.context.get("editing_report_settings"):
+            return self
+        if not self.jurisdiction or not self.include_in_report:
+            return self
+        profile = next(p for p in _catalog()["profiles"] if p["code"] == self.jurisdiction)
+        record = examination.load(profile.get("examination_code"))
+        part = examination.route(record, self.procedure, self.procedure_scope) if record else {}
+        if not part and profile.get("examination_only"):
+            raise ValueError("No " + self.procedure + " examination route is available for " + self.jurisdiction)
+        return self
 
 
 def package_review(assessment):
@@ -119,6 +178,13 @@ def build(options=None, *, assessment=None):
         return None
     data = _catalog()
     profile = next(p for p in data["profiles"] if p["code"] == choice.jurisdiction)
+    record = examination.load(profile.get("examination_code"))
+    part = examination.route(record, choice.procedure, choice.procedure_scope) if record else {}
+    profile = profile.get("scope_profiles", {}).get(choice.procedure_scope, profile)
+    if not part and profile.get("examination_only"):
+        raise ValueError("No " + choice.procedure + " examination route is available for " + choice.jurisdiction)
+    if profile.get("examination_only"):
+        profile = examination_profile({**record, "procedures": [part]})
     criminal = choice.procedure == "criminal"
     return {
         "format": "tgwitness-jurisdiction-guidance-v1", "language": "en",
@@ -126,7 +192,11 @@ def build(options=None, *, assessment=None):
         "research_date": profile["reviewed_on"],
         "status": profile["criminal_status"] if criminal else "research_draft",
         "jurisdiction": profile["code"], "name": profile["name"], "scope": profile["scope"],
-        "procedure": choice.procedure, "notice": NOTICE,
+        "procedure": choice.procedure, "procedure_scope": choice.procedure_scope, "notice": NOTICE,
+        "examination": {"code": record["code"], "catalog_sha256": record["catalog_sha256"],
+                        "route": deepcopy(part), "open_questions": record.get("open_questions", []),
+                        "review_scope": record.get("review_scope"), "review_updates": record.get("review_updates", [])}
+                       if record else None,
         "package_review": package_review(assessment),
         "law": profile["criminal_law"] if criminal else profile["law"],
         "basis": profile["criminal"] if criminal else profile["basis"],
@@ -136,7 +206,8 @@ def build(options=None, *, assessment=None):
                   "Civil filing routes must not be assumed to apply.") if criminal else profile["human"],
         "sources": deepcopy(profile["criminal_sources"] if criminal else profile["sources"]),
         "local_summary": {"language": profile["language"], "notice": LOCAL_NOTICE,
-                          "text": profile["local_criminal"] if criminal else profile["local"]} if choice.local_note else None,
+                          "text": profile["local_criminal"] if criminal else profile["local"]}
+                         if choice.local_note and profile.get("has_local_summary", True) else None,
         "safeguards": deepcopy(METHODS) if choice.include_methods else [],
     }
 
@@ -177,6 +248,20 @@ def html(data):
     for source in data["sources"]:
         parts.append('<li><a rel="noopener noreferrer" href="' + e(source["url"]) + '">' + e(source["title"]) + '</a></li>')
     parts.append('</ul>')
+    if local := data.get("examination"):
+        part = local["route"]
+        parts.append('<h3>Expert examination</h3>')
+        if part.get("scope"):
+            parts.append('<p>' + e(part["scope"]) + '</p>')
+        contents = part.get("report_contents") or {}
+        if contents.get("items_en"):
+            parts.append('<ul>' + ''.join('<li>' + e(item) + '</li>' for item in contents["items_en"]) + '</ul>')
+        if contents.get("source"):
+            parts.append('<p><a rel="noopener noreferrer" href="' + e(contents["source"]) + '">'
+                         + e(contents.get("basis") or "Report requirements") + '</a></p>')
+        if local.get("open_questions"):
+            parts.append('<details><summary>Points to confirm for this case</summary><ul>'
+                         + ''.join('<li>' + e(item) + '</li>' for item in local["open_questions"]) + '</ul></details>')
     if local := data.get("local_summary"):
         direction = "rtl" if local["language"] in ("ar", "fa", "ur") else "ltr"
         parts.append('<h3>Local-language summary</h3><p>' + e(local["notice"]) + '</p><p lang="'
@@ -217,6 +302,19 @@ def pdf(lay, data):
     for source in data["sources"]:
         lay.text(source["title"])
         lay.text(source["url"], size=7.5)
+    if local := data.get("examination"):
+        part = local["route"]
+        lay.heading("Expert examination")
+        if part.get("scope"):
+            lay.text(part["scope"])
+        contents = part.get("report_contents") or {}
+        lay.bullets(contents.get("items_en") or [])
+        if contents.get("source"):
+            lay.text(contents.get("basis") or "Report requirements")
+            lay.text(contents["source"], size=7.5)
+        if local.get("open_questions"):
+            lay.heading("Points to confirm for this case")
+            lay.bullets(local["open_questions"])
     if local := data.get("local_summary"):
         lay.heading("Local-language summary")
         lay.text(local["notice"])

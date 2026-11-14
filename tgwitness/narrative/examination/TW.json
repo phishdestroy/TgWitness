@@ -110,7 +110,10 @@
     "text_local": "必為公正、誠實之鑑定，如有虛偽鑑定，願受偽證之處罰",
     "text_en": "I will make an impartial and honest expertise; if I make a false expertise I am willing to accept the penalty for perjury",
     "wording": "official",
-    "source": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0010001&flno=334"
+    "source": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0010001&flno=334",
+    "route": "civil",
+    "scope": "Civil Procedure Code article 334 undertaking. Criminal article 202 uses a different statutory requirement and does not justify transferring this complete civil formula.",
+    "context": "authority_undertaking"
   },
   "standards": [
     {
@@ -134,7 +137,7 @@
     "source": null
   },
   "open_questions": [
-    "The text of the official 鑑定人結文 form could not be extracted (judicial.gov.tw PDF not machine-readable). The declaration and warning use the statutory formula of 民事訴訟法 第334條; 刑事訴訟法 第202條 only requires 「必為公正誠實之鑑定等語」 without the perjury clause.",
+    "The court-issued expert undertaking form remains unverified. Civil Procedure Code article 334 and Criminal Procedure Code article 202 prescribe different undertaking requirements; the civil perjury clause must not be assumed mandatory for the criminal route.",
     "No CNS national adoption of ISO/IEC 27037, 27041, 27042 or 27043 was found; not confirmed either way.",
     "The 2015 Executive Yuan digital-evidence SOP was issued for a one-year trial; its current status was not verified, and the source is a Taipei City government reproduction, not a central-government portal.",
     "Whether TAF ISO/IEC 17025 accreditation of a digital forensics laboratory counts as accreditation by the competent authority under 刑事訴訟法 第208條第3項第3款 is unresolved; the Judicial Yuan Q&A on the new expert rules (2024) does not settle it for digital forensics.",

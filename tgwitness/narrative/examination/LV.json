@@ -103,15 +103,15 @@
     "law_local": "Eiropas Parlamenta un Padomes Regula (ES) Nr. 910/2014 (eIDAS), kas grozīta ar Regulu (ES) 2024/1183",
     "law_en": "Regulation (EU) No 910/2014 (eIDAS) as amended by Regulation (EU) 2024/1183; national implementing act not verified",
     "qualified_term_local": "kvalificēts elektroniskais paraksts",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (Latvian version: 'kvalificēts elektroniskais laika zīmogs'), as amended by Regulation (EU) 2024/1183",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of accuracy of the date and time it indicates and of the integrity of the data bound to them.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "likumi.lv refused connections from this environment (TCP connection refused); no Latvian statute was read on the official portal. Content above comes from the European e-Justice Portal page maintained by Latvia (Find an expert, last updated 19/08/2024) and must be verified on likumi.lv.",
+    "Current Latvian statutory wording remains unverified. Existing national content relies on Latvia's e-Justice expert summary dated 19 August 2024 and requires confirmation against likumi.lv.",
     "Kriminālprocesa likums: section numbers and text on ordering an examination, content of the decision and questions, content of the expert opinion, rights and duties of the expert, and the warning procedure - not verified.",
     "Civilprocesa likums: section numbers for ordering an examination, choice of expert, content of the opinion (including the right to point out circumstances not asked about) - not verified.",
     "Krimināllikums 300. pants: wording (false testimony, opinion, translation) and maximum penalty - not verified; the same applies to any separate section on unjustified refusal by an expert.",

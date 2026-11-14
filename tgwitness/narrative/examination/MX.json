@@ -86,16 +86,18 @@
       "route": "commercial",
       "appointment": {
         "basis": "Código de Comercio arts. 1252, 1253, 1255, 1257",
-        "summary_en": "In commercial trials each party proposes its expert within the evidence period, stating the field, the points and questions, and the expert's licence and details; once admitted, the expert must within three days file a written acceptance and protest of the appointment, attaching proof of qualification, and declare under protest to tell the truth that he or she knows the points in question and is competent to give the opinion; the opinion is due within ten days (five in executive or special proceedings). The judge designates a third expert if the opinions are substantially contradictory.",
-        "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+        "summary_en": "Parties propose qualified experts and the technical issues under arts. 1252–1253. An admitted expert generally accepts within three days and provides the opinion within ten days of acceptance; special/executive proceedings use five days, subject to the stated exceptions. A third expert may resolve substantially conflicting opinions under art. 1255.",
+        "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+        "checked_at": "2026-11-14"
       },
       "questions": {
         "basis": "Código de Comercio arts. 1252, 1253-I",
         "summary_en": "The offering party states precisely the points and questions to be resolved and their relation to the disputed facts; expert evidence on general knowledge, matters already proven or simple arithmetic is rejected ex officio.",
-        "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+        "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+        "checked_at": "2026-11-14"
       },
       "report_contents": {
-        "basis": "Código de Comercio art. 1253-III",
+        "basis": "Código de Comercio art. 1253-III–IV: acceptance and qualification documents plus the opinion; this is not a statutory technical-report template",
         "items_en": [
           "Written acceptance of the appointment and protest of faithful and lawful performance",
           "Original or certified copy of the professional licence or documents proving the expert's qualification",
@@ -108,12 +110,14 @@
           "\"manifestando, bajo protesta de decir verdad, que conocen los puntos cuestionados y pormenores relativos a la pericial, así como que tienen la capacidad suficiente para emitir dictamen sobre el particular\"",
           "\"quedando obligados a rendir su dictamen dentro de los diez días siguientes a la fecha en que hayan presentado los escritos de aceptación y protesta del cargo de peritos\""
         ],
-        "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+        "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+        "checked_at": "2026-11-14"
       },
       "rights_duties": {
         "basis": "Código de Comercio art. 1253-VI; art. 1298-A",
         "summary_en": "Experts who fail to file the opinion are fined (amount updated annually by the Secretaría de Economía). Data messages are recognised as evidence; their probative force is assessed primarily by the reliability of the method by which they were generated, archived, communicated or preserved (art. 1298-A).",
-        "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+        "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+        "checked_at": "2026-11-14"
       }
     }
   ],
@@ -143,11 +147,15 @@
     }
   ],
   "declaration": {
-    "basis": "CNPP arts. 49 and 371 (protest to tell the truth taken orally by the court after warning of the penalties); CNPCF art. 303 and Código de Comercio art. 1253-III (written acceptance and protest of faithful and lawful performance; in commercial trials a statement 'bajo protesta de decir verdad'). No statutory written formula for the end of the report was found; the text below is composed from the statutory phrases.",
-    "text_local": "Bajo protesta de decir verdad, manifiesto que el presente dictamen es producto de mi análisis personal e independiente, que conozco los puntos sometidos a peritaje y que tengo la capacidad suficiente para emitirlo, y que he sido informado de las penas que se imponen a quien se conduce con falsedad.",
-    "text_en": "Under protest to tell the truth, I declare that this opinion is the product of my own independent analysis, that I know the points submitted for expert examination and have sufficient capacity to give it, and that I have been informed of the penalties imposed on anyone who makes false statements.",
+    "basis": "Código de Comercio art. 1253-III: written acceptance and undertaking by the commercial expert; composed text, not a criminal oral oath",
+    "text_local": "Acepto el cargo conferido y protesto su fiel y legal desempeño. Bajo protesta de decir verdad, manifiesto que conozco los puntos cuestionados y que tengo la capacidad suficiente para emitir el dictamen.",
+    "text_en": "I accept the appointment and undertake its faithful and lawful performance. Under protest to tell the truth, I state that I know the referred issues and am qualified to give the opinion.",
     "wording": "composed",
-    "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+    "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+    "route": "commercial",
+    "context": "authority_undertaking",
+    "checked_at": "2026-11-14",
+    "scope": "Commercial expert acceptance under article 1253. Civil and criminal undertaking procedures require their own applicable forms."
   },
   "standards": [
     {
@@ -163,18 +171,20 @@
     "law_local": "Código de Comercio, Título Segundo 'Del Comercio Electrónico' (arts. 89-114), en particular arts. 89, 89 bis, 97",
     "law_en": "Commercial Code, Title Two on electronic commerce: legal effect of data messages (art. 89 bis); definitions of electronic signature, advanced or reliable electronic signature, certificate and digital timestamp (art. 89); requirements for an advanced or reliable electronic signature (art. 97: creation data exclusively the signer's and under the signer's sole control; any alteration of the signature or of the data after signing is detectable).",
     "qualified_term_local": "Firma Electrónica Avanzada o Fiable",
-    "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+    "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+    "checked_at": "2026-11-14"
   },
   "timestamp": {
-    "basis": "Código de Comercio art. 89 (definition of 'Sello Digital de Tiempo'), arts. 100 and 102 (accredited certification service providers for conservation of data messages and digital timestamping), art. 49 (conservation of data messages under the NOM issued by the Secretaría de Economía)",
-    "qualified_recognition": "A digital timestamp is defined as 'the record that proves that a datum existed before the date and time of issue of the timestamp, in the terms established in the official Mexican standard on digitisation and conservation of data messages'. Timestamping is provided by certification service providers accredited by the Secretaría de Economía; accreditation does not by itself confer notarial public faith (art. 100). No separate statutory presumption beyond the definition was located.",
-    "source": "https://docs.mexico.justia.com/federales/codigo-de-comercio.pdf"
+    "basis": "Código de Comercio arts. 89 (definition), 100–102 (accreditation and commercial timestamp services), 49 (record conservation)",
+    "qualified_recognition": "The Code defines a digital timestamp as a record establishing that data existed before its issue time, subject to the applicable Mexican standard. Article 101(IV) concerns commercial timestamp services; provider accreditation under articles 100–102 is not notarial public faith. EU qualification and recognition of foreign services require separate applicable legal grounds.",
+    "source": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+    "checked_at": "2026-11-14"
   },
   "open_questions": [
-    "diputados.gob.mx, dof.gob.mx and ordenjuridico.gob.mx were unreachable from this network. CNPP text was checked against a government-hosted reproduction of the Chamber of Deputies consolidation with last reform DOF 28-11-2025 (imuvii.gob.mx) and an earlier 2021 consolidation (congresojal.gob.mx); CNPCF against isstech.gob.mx (last reform DOF 15-01-2026); Código Penal Federal against transparencia.septlaxcala.gob.mx (last reform DOF 28-11-2025). The source URLs point to the official Chamber of Deputies files, which should be rechecked.",
+    "Current CNPP, CNPCF and Federal Penal Code provisions require comparison with the official consolidations; the earlier review used government-hosted reproductions.",
     "A search snippet reported a later Código Penal Federal reform (DOF 13-03-2026); whether it touched arts. 247-248 was not verified.",
-    "Código de Comercio text was taken from a reproduction of the Chamber of Deputies PDF (docs.mexico.justia.com, used as source URL because no official copy was reachable) whose page header shows 'Última Reforma DOF 28-03-2018' but which contains later notes up to 2023; the current consolidated text was not verified.",
-    "Whether the federal Declaratoria bringing the CNPCF into force in federal civil matters has been issued (deadline 1 April 2027), and therefore whether federal civil proceedings are still governed by the Código Federal de Procedimientos Civiles (arts. 143-160 on expert evidence, art. 210-A on electronic information), was not verified; the CFPC text could not be retrieved.",
+    "The Commercial Code source has been checked against the Chamber of Deputies consolidation (last reform 14 November 2025, amounts updated 18 February 2026); later amendments and the operative NOM-151/provider accreditation require review for the proposed service.",
+    "CNPCF commencement must be determined for the particular federal or local forum and case date. If the former CFPC still governs, its expert-evidence and electronic-information provisions require separate review.",
     "Exact title and DOF publication date of NOM-151-SCFI-2016 could not be verified on dof.gob.mx.",
     "Ley de Firma Electrónica Avanzada (federal public sector) and the Poder Judicial de la Federación electronic signature (FIREL) were not researched.",
     "No Mexican national adoption of ISO/IEC 27037/27041/27042/27043 (NMX) and no official digital forensics guide (e.g. FGR or CNPJ chain-of-custody guides) could be verified.",

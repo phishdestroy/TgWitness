@@ -113,15 +113,15 @@
     "law_local": "Az Európai Parlament és a Tanács 910/2014/EU rendelete (eIDAS), a 2024/1183/EU rendelettel módosítva; az elektronikus ügyintézés és a bizalmi szolgáltatások általános szabályairól szóló törvény (Szaktv. 47. § (3) hivatkozása szerint)",
     "law_en": "Regulation (EU) No 910/2014 (eIDAS) as amended by Regulation (EU) 2024/1183; national act on the general rules of electronic administration and trust services (referred to in Szaktv. 47. § (3))",
     "qualified_term_local": "minősített elektronikus aláírás",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (Hungarian version: 'minősített elektronikus időbélyegző'), as amended by Regulation (EU) 2024/1183",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of accuracy of the date and time it indicates and of the integrity of the data bound to them.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "njt.hu could not be fetched from this environment (connection reset); all Be., Pp., Szaktv., IRM rendelet and Btk. content above was taken from search-engine extracts of njt.hu pages and must be checked against the current consolidated text (hatályos állapot) on njt.hu before use. Paragraph numbering inside Pp. 303. § and 308. § was not confirmed.",
+    "The current consolidated text of Be., Pp., Szaktv., the IRM regulation and Btk. requires confirmation. Paragraph numbering within Pp. sections 303 and 308 remains unverified.",
     "Btk. 272. § penalties not verified on njt.hu. Secondary sources (law-firm summaries, not official) state: criminal case 1-5 years (2-8 years if the case concerns an offence punishable by life imprisonment); civil case up to 3 years (1-5 years for particularly high value or interest); negligent commission by an expert (272. § (6)) up to 1 year; 273. § up to 1 year in misdemeanour, other authority or disciplinary proceedings. The task brief cited Btk. 275. §, which per these sources is the exemption/mitigation provision, not the offence.",
     "Be. section numbers for: content of the appointing decision and formulation of questions; the warning on the consequences of a false expert opinion before oral presentation; the expert's rights and duties; multiple experts (search extract suggested 196. §) - not verified.",
     "Whether the appointing decision must contain a warning that a false expert opinion is a criminal offence (search extract attributed such a rule to the Forensic Experts Act framework) - provision not identified.",

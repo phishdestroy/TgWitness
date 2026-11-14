@@ -127,7 +127,10 @@
     "text_local": "Declaro, sob as penas da lei, que desempenhei bem e fielmente o encargo, que o presente laudo expõe com fidelidade os exames realizados, o método utilizado e as conclusões a que cheguei, e que não ultrapassei os limites da minha designação.",
     "text_en": "I declare, under the penalties of law, that I have performed the task well and faithfully, that this report faithfully sets out the examinations carried out, the method used and the conclusions I reached, and that I have not exceeded the limits of my appointment.",
     "wording": "composed",
-    "source": "https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-3689-3-outubro-1941-322206-normaatualizada-pe.html"
+    "source": "https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-3689-3-outubro-1941-322206-normaatualizada-pe.html",
+    "route": "criminal",
+    "scope": "Non-official experts appointed under CPP article 159(2). The civil CPC does not require this criminal undertaking.",
+    "context": "authority_undertaking"
   },
   "standards": [
     {
@@ -154,7 +157,7 @@
     "planalto.gov.br returned 'Acesso Negado' to this network; all statutory texts were taken from the Chamber of Deputies 'norma atualizada' consolidations (www2.camara.leg.br/legin), which carry the notice that they do not replace the DOU original and show no consolidation date. Recheck against Planalto compiled texts.",
     "ABNT NBR ISO/IEC 27037:2013 (Brazilian adoption of ISO/IEC 27037) could not be verified on the ABNT catalogue.",
     "ICP-Brasil rules on timestamping (carimbo do tempo, ITI/ICP-Brasil DOC-ICP documents) and any legal effect of timestamps were not verified.",
-    "CNJ Resolution on the court roster of experts (CPTEC, implementing CPC art. 156) could not be fetched (atos.cnj.jus.br returned 403).",
+    "The current CNJ rules for the court expert roster (CPTEC), implementing CPC article 156, remain unverified.",
     "No official Brazilian digital-forensics guide (e.g. Ministry of Justice/SENASP chain-of-custody procedures or Polícia Federal guidance) was verified.",
     "No statutory formula for a statement of truth in a forensic report exists in the CPP or CPC; the declaration and warning texts are composed."
   ]

@@ -231,7 +231,10 @@
     "text_local": "Права и обязанности эксперта, предусмотренные статьей 57 УПК РФ, мне разъяснены. Об уголовной ответственности за дачу заведомо ложного заключения по статье 307 УК РФ предупрежден.",
     "text_en": "The rights and duties of an expert under Article 57 of the Code of Criminal Procedure have been explained to me. I have been warned of criminal liability under Article 307 of the Criminal Code for giving a knowingly false opinion.",
     "wording": "customary",
-    "source": "https://base.garant.ru/12123142/888134b28b1397ffae87a0ab1e117954/"
+    "source": "https://base.garant.ru/12123142/888134b28b1397ffae87a0ab1e117954/",
+    "route": "criminal",
+    "scope": "The supplied customary text invokes criminal-procedure Article 57 and requires actual explanation and warning by the authorised person. It is not a civil, commercial or administrative declaration.",
+    "context": "authority_undertaking"
   },
   "standards": [
     {

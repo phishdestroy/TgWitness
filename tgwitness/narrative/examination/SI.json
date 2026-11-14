@@ -1,0 +1,76 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "SI",
+  "name_en": "Slovenia",
+  "name_local": "Slovenija",
+  "court_languages": [
+    "sl",
+    "it",
+    "hu"
+  ],
+  "local_language": "sl",
+  "legal_family": "civil law",
+  "checked_at": "2026-11-14",
+  "review_scope": "Civil expert evidence under ZPP Articles 243–254, using official PISRS text and its NPB29 working consolidation. Criminal procedure and current professional reporting guidelines are outside this subset.",
+  "expert_term": {
+    "local": "sodni izvedenec",
+    "en": "court expert"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Zakon o pravdnem postopku (ZPP), 243.–244. člen",
+        "summary_en": "The court appoints an expert when deciding relevant facts requires specialist knowledge it does not possess.",
+        "source": "https://pisrs.si/Pis.web/pregledPredpisa?id=ZAKO1212"
+      },
+      "questions": {
+        "basis": "ZPP, 252. člen",
+        "summary_en": "The court identifies the object, puts questions and can require explanations of the findings and opinion.",
+        "source": "https://pisrs.si/Pis.web/pregledPredpisa?id=ZAKO1212"
+      },
+      "report_contents": {
+        "basis": "ZPP, 251.–254. člen",
+        "items_en": [
+          "Findings (izvid), observations and a reasoned opinion (mnenje).",
+          "Written or oral presentation as directed by the court; clarify incomplete or inconsistent findings."
+        ],
+        "items_local": [],
+        "source": "https://pisrs.si/Pis.web/pregledPredpisa?id=ZAKO1212"
+      },
+      "rights_duties": {
+        "basis": "ZPP, 251. člen",
+        "summary_en": "The expert must examine carefully and give a conscientious opinion consistent with science and professional practice.",
+        "source": "https://pisrs.si/Pis.web/pregledPredpisa?id=ZAKO1212"
+      }
+    }
+  ],
+  "statute": {
+    "title_local": "Zakon o pravdnem postopku (ZPP)",
+    "title_en": "Civil Procedure Act; official PISRS working consolidation",
+    "source": "https://pisrs.si/Pis.web/pregledPredpisa?id=ZAKO1212"
+  },
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Regulation (EU) No 910/2014 (eIDAS), as amended",
+    "law_en": "eIDAS, Article 25",
+    "qualified_term_local": "kvalificirani elektronski podpis",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "timestamp": {
+    "basis": "eIDAS Articles 41–42",
+    "qualified_recognition": "Qualified timestamps carry date/time accuracy and data-integrity presumptions; qualification requires the statutory conditions.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "open_questions": [
+    "Provider qualification, certificate status, national filing rules and supported signature formats must be checked separately; this profile does not qualify a TgWitness signature or timestamp.",
+    "PISRS labels its consolidated text an informative working aid; verify the applicable amendments and the court order for the case.",
+    "No criminal route or standard first-person declaration has been verified here.",
+    "The 2020 e-Justice expert factsheet anticipated later reporting guidelines; it is not proof that no current mandatory report structure exists.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Slovenian generally; Italian or Hungarian also have official court use in the respective minority areas. The three languages are not interchangeable in every court.",
+  "court_language_source": "https://e-justice.europa.eu/topics/taking-legal-action/where-and-how/how-bring-case-court/si_en?SLOVENIA=&member=1"
+}

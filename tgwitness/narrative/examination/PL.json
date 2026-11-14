@@ -177,12 +177,12 @@
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (art. 41(3) deleted by Regulation (EU) 2024/1183; cross-border recognition now in art. 24a); no separate national presumption found in the Polish trust services act (its art. 133 only maps time stamps under the repealed 2001 e-signature act)",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound; non-qualified time stamps may not be denied legal effect or admissibility solely for being electronic or non-qualified.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
     "Customary formula of the warning under KPK art. 190 / KK art. 233 § 4 used in prosecutors' and courts' appointment decisions was not found in an official template; warning_local in the first liability entry is composed.",
     "Whether a listed court expert, when filing a written opinion, should also attach the art. 282 § 1^1 promise text or only refer to the appointment oath (art. 282 § 1^2) - statute says the promise is not taken from listed experts; practice not verified.",
-    "PKN catalogue pages could not be fetched directly (TLS/403 from this environment); adoption numbers and current status of PN-EN ISO/IEC 27037/27041/27042/27043 were taken from search-engine extracts of sklep.pkn.pl and should be rechecked in the PKN catalogue.",
+    "Current PKN catalogue status and adoption numbers for PN-EN ISO/IEC 27037, 27041, 27042 and 27043 require confirmation.",
     "Whether Polish courts or the police forensic laboratories require ISO/IEC 17025 accreditation for digital-forensics opinions remains unconfirmed; not listed.",
     "Whether any 2025-2026 amendment to the trust services act (e.g. adapting to Regulation (EU) 2024/1183) was enacted after the 2024 consolidated text (Dz. U. 2024 poz. 1725) was not checked."
   ]

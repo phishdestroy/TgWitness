@@ -118,11 +118,12 @@
     }
   ],
   "declaration": {
-    "basis": "CPP art. 91.2 (criminal compromisso formula) and CPC art. 479.1 and 479.3 (civil compromisso of conscientious performance, which may be given as a written signed declaration included in the report). Experts who are public servants acting in their functions are exempt (CPP art. 91.6; CPC art. 479.1).",
+    "basis": "CPC article 479(1)-(3): an appointed expert undertakes conscientious performance; if the judge does not attend the examination, a signed written undertaking may be included in the report. Public servants acting in their functions are exempt. The wording below is an adaptation, not a prescribed civil formula.",
     "text_local": "Comprometo-me, por minha honra, a desempenhar fielmente as funções que me são confiadas.",
     "text_en": "I undertake, on my honour, to perform faithfully the functions entrusted to me.",
-    "wording": "official",
-    "source": "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=199A0091&nid=199&tabela=leis&pagina=1&ficha=1"
+    "wording": "composed",
+    "source": "https://pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=1959A0480&ficha=1&nid=1959&nversao=&pagina=1&so_miolo=S&tabela=leis",
+    "route": "civil"
   },
   "standards": [],
   "esignature": {
@@ -137,11 +138,20 @@
     "source": "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3404&tabela=leis&ficha=1&pagina=1&so_miolo=S"
   },
   "open_questions": [
-    "diariodarepublica.pt consolidated pages could not be rendered by the fetch tool; all verbatim text was read on the consolidated texts of the Procuradoria-Geral Regional de Lisboa (pgdlisboa.pt, CPP 52nd version by Lei n.º 37/2026; CPC version updated by Lei n.º 56/2025) and should be cross-checked on diariodarepublica.pt.",
+    "Statutory wording relies on the Procuradoria-Geral Regional de Lisboa consolidations (CPP through Lei n.º 37/2026; CPC through Lei n.º 56/2025); amendments and commencement should be cross-checked against Diário da República.",
     "No general statute on court or forensic expert activity was identified; the EU e-Justice portal states there is no general register of experts for civil or commercial cases. The legal basis and keeper of the district (comarca) expert lists referred to in CPP art. 152 were not verified.",
     "The exact wording of the warning of criminal sanctions given to experts under CPP art. 91.3 is not prescribed in the text checked; no official form was found.",
     "No IPQ national designation for EN ISO/IEC 27037/27041/27042/27043 was verified; a university thesis cites an adoption term (Termo de Adoção n.º 1252/2016) for EN ISO/IEC 27037 that was not confirmed on an IPQ source.",
     "Whether DL n.º 12/2021 has been amended to reflect Regulation (EU) 2024/1183 was not verified.",
     "Whether the expert may decline questions outside his expertise (other than excuse under CPP art. 153 / CPC art. 470) or report facts outside the object is not expressly regulated in the articles checked."
-  ]
+  ],
+  "declaration_criminal": {
+    "basis": "CPP article 91(2)-(3): prescribed undertaking before the competent judicial or criminal-police authority. This is not a statutory declaration for signing a written report. Public servants acting in their functions are exempt under article 91(6)(b).",
+    "text_local": "Comprometo-me, por minha honra, a desempenhar fielmente as funções que me são confiadas.",
+    "text_en": "I undertake, on my honour, to perform faithfully the functions entrusted to me.",
+    "wording": "official",
+    "source": "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=199A0091&nid=199&tabela=leis&pagina=1&ficha=1",
+    "route": "criminal",
+    "context": "authority_undertaking"
+  }
 }

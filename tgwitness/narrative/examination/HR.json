@@ -1,0 +1,73 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "HR",
+  "name_en": "Croatia",
+  "name_local": "Hrvatska",
+  "court_languages": [
+    "hr"
+  ],
+  "local_language": "hr",
+  "legal_family": "civil law",
+  "checked_at": "2026-11-14",
+  "review_scope": "Civil expert-evidence subset: ZPP Articles 250–260 in the official 2011 consolidated publication. Later amendments were not fully traced; no criminal route or oath formula has been validated.",
+  "expert_term": {
+    "local": "sudski vještak",
+    "en": "court expert"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Zakon o parničnom postupku, čl. 250–251",
+        "summary_en": "The court uses expert evidence for factual issues requiring specialist knowledge and determines the expert.",
+        "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+      },
+      "questions": {
+        "basis": "ZPP čl. 259",
+        "summary_en": "The court directs the examination, identifies the object and questions, and may seek clarification.",
+        "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+      },
+      "report_contents": {
+        "basis": "ZPP čl. 260",
+        "items_en": [
+          "Findings (nalaz) and a reasoned opinion (mišljenje).",
+          "Oral evidence or a written report as directed by the court."
+        ],
+        "items_local": [],
+        "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+      },
+      "rights_duties": {
+        "basis": "ZPP čl. 258",
+        "summary_en": "Examine carefully, record observations accurately and explain the opinion in accordance with scientific and professional rules.",
+        "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+      }
+    }
+  ],
+  "statute": {
+    "title_local": "Zakon o parničnom postupku",
+    "title_en": "Civil Procedure Act; official consolidated publication NN 148/2011",
+    "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+  },
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Regulation (EU) No 910/2014 (eIDAS), as amended",
+    "law_en": "eIDAS, Article 25",
+    "qualified_term_local": "kvalificirani elektronički potpis",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "timestamp": {
+    "basis": "eIDAS Articles 41–42",
+    "qualified_recognition": "Qualified timestamps carry date/time accuracy and data-integrity presumptions; qualification requires the statutory conditions.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "open_questions": [
+    "Provider qualification, certificate status, national filing rules and supported signature formats must be checked separately; this profile does not qualify a TgWitness signature or timestamp.",
+    "Trace all amendments affecting the cited civil provisions before case-specific use; the 2011 consolidation is not represented as the current complete statute.",
+    "Criminal expert appointment, report requirements and any applicable warning must be checked against the current Zakon o kaznenom postupku. The civil route must not be substituted.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Croatian is the general court language; minority-language rights depend on the court territory and applicable legislation. This list is not an exhaustive statement of those rights.",
+  "court_language_source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+}

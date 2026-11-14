@@ -104,7 +104,10 @@
     "text_local": "宣誓　良心に従って誠実に鑑定することを誓います。",
     "text_en": "Oath: I swear to give the expert opinion sincerely in accordance with my conscience.",
     "wording": "composed",
-    "source": "https://www.japaneselawtranslation.go.jp/ja/laws/view/3893/ja"
+    "source": "https://www.japaneselawtranslation.go.jp/ja/laws/view/3893/ja",
+    "route": "all",
+    "scope": "Oath before the expert examination under the respective civil/criminal procedure rules; not an automatic closing statement in every report.",
+    "context": "authority_undertaking"
   },
   "standards": [
     {

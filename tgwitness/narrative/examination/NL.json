@@ -96,7 +96,8 @@
     "text_local": "Ondergetekende verklaart dit verslag naar waarheid, volledig en naar beste inzicht te hebben opgesteld. Het verslag is gebaseerd op wat zijn wetenschap en kennis hem leren omtrent datgene wat aan zijn oordeel onderworpen is.",
     "text_en": "The undersigned declares that this report was drawn up truthfully, completely and to the best of his or her insight. The report is based on what the expert's science and knowledge teach about the matter submitted for judgment.",
     "wording": "composed",
-    "source": "https://wetten.overheid.nl/BWBR0001903/2026-07-01/0"
+    "source": "https://wetten.overheid.nl/BWBR0001903/2026-07-01/0",
+    "route": "criminal"
   },
   "standards": [
     {
@@ -123,21 +124,20 @@
     "source": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "timestamp": {
-    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a)",
-    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified (Art. 41(1)). Qualified time stamps from other Member States are recognised (Art. 24a).",
+    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a(6))",
+    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified (Art. 41(1)). Qualified time stamps from other Member States are recognised (Art. 24a(6)).",
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "wetten.overheid.nl and rechtspraak.nl refused automated access (HTTP 403). The current text of Sv art. 51l was checked through search-index excerpts of wetten.overheid.nl; Sv arts. 51i, 51j, 51k, 51m, 227 and 228 were checked only in their original 2009 wording (Stb. 2009, 33) and later amendments, renumbering of leden and the cross-reference in art. 51j(3) were not verified.",
-    "Civil route not verified: the expert provisions of the Wetboek van Burgerlijke Rechtsvordering (believed to be Rv arts. 194-200: appointment, duty to act impartially and to the best of knowledge, parties' comments recorded in the report) and the Leidraad deskundigen in civiele zaken could not be read from an official source.",
+    "Later amendments to Sv articles 51i, 51j, 51k, 51m, 227 and 228, including paragraph numbering and the cross-reference in article 51j(3), remain unverified; their existing summaries rely on the 2009 enactment.",
+    "Civil appointment, impartiality, party-comment and reporting provisions under the current Rv, and the Leidraad deskundigen in civiele zaken, remain unverified.",
     "Maximum penalties under Sr art. 207 (meineed), including any aggravation for perjury in a criminal case to the detriment of the suspect, were not verified.",
     "Whether a knowingly false written report bearing the art. 51l(3) declaration, without an oath at trial, is punishable under Sr art. 207 or another provision was not verified.",
     "Appointment of experts by the public prosecutor (e.g. Sv art. 150 and following) and by the trial court was not verified.",
     "Disciplinary consequences under the Besluit register deskundige in strafzaken (removal from the NRGD register) were not verified; civil liability of court experts is not codified in the provisions reviewed.",
     "The new Wetboek van Strafvordering (modernisation project) and its entry-into-force date, and whether it changes the expert provisions, were not verified.",
     "Dutch national adoptions (NEN-EN-ISO/IEC 27037, 27041, 27042, 27043) were not confirmed, and the NRGD assessment framework was not checked for references to ISO/IEC standards or ISO/IEC 17025 accreditation requirements.",
-    "National implementing provisions for eIDAS (e.g. Burgerlijk Wetboek art. 3:15a, Telecommunicatiewet) were not verified; the Dutch term for qualified electronic signature is taken from the Dutch eIDAS text, which could not be loaded directly from EUR-Lex.",
-    "EUR-Lex could not be loaded directly; eIDAS Art. 25, 41 and 24a wording after Regulation (EU) 2024/1183 was checked only through search-index excerpts.",
+    "Dutch implementing provisions for eIDAS, including Burgerlijk Wetboek article 3:15a and the Telecommunicatiewet, and local-language qualified-signature terminology remain unverified.",
     "Use of Frisian before courts in Friesland was not verified; only Dutch is listed.",
     "No court-documented model wording for the art. 51l(3) declaration was found; the first-person declaration text is composed from the statutory sentence."
   ]

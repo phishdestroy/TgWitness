@@ -8959,5 +8959,7 @@
   "cancelled": "ยกเลิก",
   "Updates arrived while observation was paused": "มีการอัปเดตเข้ามาในขณะที่การสังเกตถูกหยุดชั่วคราว",
   "Too many updates arrived during startup": "มีข้อมูลอัปเดตเข้ามาจำนวนมากเกินไประหว่างการเริ่มต้นระบบ",
-  "Telegram could not deliver older updates": "Telegram ไม่สามารถส่งการอัปเดตที่เก่ากว่าได้"
+  "Telegram could not deliver older updates": "Telegram ไม่สามารถส่งการอัปเดตที่เก่ากว่าได้",
+  "Choose a scope for this procedure.": "เลือกขอบเขตการใช้กระบวนการนี้",
+  "This procedure is not covered by the selected profile.": "โปรไฟล์ที่เลือกไม่ครอบคลุมกระบวนการนี้"
 }

@@ -8959,5 +8959,7 @@
   "cancelled": "đã hủy",
   "Updates arrived while observation was paused": "Các bản cập nhật đã đến trong khi quá trình quan sát bị tạm dừng",
   "Too many updates arrived during startup": "Quá nhiều bản cập nhật đã đến trong quá trình khởi động",
-  "Telegram could not deliver older updates": "Telegram không thể gửi các bản cập nhật cũ hơn"
+  "Telegram could not deliver older updates": "Telegram không thể gửi các bản cập nhật cũ hơn",
+  "Choose a scope for this procedure.": "Chọn phạm vi áp dụng cho thủ tục này.",
+  "This procedure is not covered by the selected profile.": "Hồ sơ đã chọn không bao gồm thủ tục này."
 }

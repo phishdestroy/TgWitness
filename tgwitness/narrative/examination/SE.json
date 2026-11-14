@@ -125,7 +125,9 @@
     "text_local": "Jag N.N. lovar och försäkrar på heder och samvete, att jag efter bästa förstånd skall fullgöra det sakkunniguppdrag, som lämnats mig.",
     "text_en": "I, N.N., promise and affirm on my honour and conscience that I will to the best of my understanding perform the expert assignment entrusted to me.",
     "wording": "official",
-    "source": "https://data.riksdagen.se/dokument/sfs-1942-740.text"
+    "source": "https://data.riksdagen.se/dokument/sfs-1942-740.text",
+    "route": "all",
+    "context": "oral_hearing"
   },
   "standards": [
     {

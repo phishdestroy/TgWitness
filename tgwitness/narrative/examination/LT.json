@@ -110,20 +110,20 @@
     "law_local": "Europos Parlamento ir Tarybos reglamentas (ES) Nr. 910/2014 (eIDAS), iš dalies pakeistas reglamentu (ES) 2024/1183",
     "law_en": "Regulation (EU) No 910/2014 (eIDAS) as amended by Regulation (EU) 2024/1183; national implementing act not verified",
     "qualified_term_local": "kvalifikuotas elektroninis parašas",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (Lithuanian version: 'kvalifikuota elektroninė laiko žyma'), as amended by Regulation (EU) 2024/1183",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of accuracy of the date and time it indicates and of the integrity of the data bound to them.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "e-tar.lt and e-seimas.lrs.lt returned HTTP 403 from this environment; no Lithuanian statute was read on the official portal. BPK content above comes from search-engine extracts of the official portal; CPK content comes from the European e-Justice Portal page maintained by the Lithuanian EJN contact point (last updated 01/08/2025). All article numbers and quotations must be verified on e-tar.lt.",
+    "Current Lithuanian statutory wording remains unverified. The civil oath relies on the Lithuanian EJN summary dated 1 August 2025; BPK and CPK article numbers and quotations require confirmation on the official legislative portals.",
     "BK 235 straipsnis: wording of the offence (false testimony, report, conclusion or translation) and maximum penalty not verified.",
     "BPK article on ordering an examination in pre-trial investigation, the content of the ruling, the expert warning formula and whether experts sign a warning on criminal liability - not verified.",
     "CPK article numbers for appointment of experts, the expert oath and the content of the expert report - not verified; oath text is reproduced from e-Justice (customary), not from the statute.",
     "Lietuvos Respublikos teismo ekspertizės įstatymas: TAR identifier, current version, articles on the List of Court Experts, the oath on entry, independence and disciplinary liability - not verified.",
-    "Whether the BPK document identifier TAR.EC588C321777 (taken from a search result titled as the BPK approval law and Code) points to the current consolidated BPK was not confirmed.",
+    "Whether TAR.EC588C321777 identifies the current consolidated BPK remains unverified.",
     "National implementing act for eIDAS (believed to be the Law on Electronic Identification and Trust Services for Electronic Transactions) and any national rule on expert-report e-signatures were not verified.",
     "Lithuanian adoptions of ISO/IEC 27037/27041/27042/27043 (LST EN ISO/IEC ...) were not verified in the LST catalogue."
   ]

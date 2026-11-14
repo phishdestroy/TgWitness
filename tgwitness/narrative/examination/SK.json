@@ -123,7 +123,8 @@
     "text_local": "Znalecký posudok/znalecký úkon som vypracoval/a ako znalec/znalkyňa zapísaný/á v zozname znalcov, tlmočníkov a prekladateľov, ktorý vedie Ministerstvo spravodlivosti Slovenskej republiky, v odbore ______________, odvetví/odvetviach _____________, pod evidenčným číslom ________.\nZnalecký posudok/znalecký úkon je zapísaný v denníku pod číslom ______.\nZároveň vyhlasujem, že som si vedomý/á následkov vedome nepravdivého znaleckého posudku/znaleckého úkonu.",
     "text_en": "I prepared this expert report/expert act as an expert entered in the list of experts, interpreters and translators kept by the Ministry of Justice of the Slovak Republic, in the field ______, branch(es) ______, under registration number ______.\nThe expert report/expert act is recorded in the journal under number ______.\nI also declare that I am aware of the consequences of a knowingly false expert report/expert act.",
     "wording": "official",
-    "source": "https://static.slov-lex.sk/pdf/prilohy/SK/ZZ/2018/228/20260501_5529567-2.pdf"
+    "source": "https://static.slov-lex.sk/pdf/prilohy/SK/ZZ/2018/228/20260501_5529567-2.pdf",
+    "route": "all"
   },
   "standards": [
     {
@@ -144,7 +145,7 @@
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (as amended by Regulation (EU) 2024/1183); zákon č. 382/2004 Z. z. § 17(3) and (10) (qualified electronic time stamp mandatory for electronic reports; retention 10 years)",
     "qualified_recognition": "Qualified electronic time stamp (kvalifikovaná elektronická časová pečiatka): presumption of accuracy of date and time and integrity of the bound data (eIDAS art. 41(2)); formal requirement for electronic expert reports.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
     "Slov-Lex static portal returned version 20220701 of Act No. 382/2004 as the version in force on 2026-11-11; whether a later amendment exists that the static index did not show was not cross-checked on the dynamic portal.",

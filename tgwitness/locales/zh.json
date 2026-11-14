@@ -8959,5 +8959,7 @@
   "cancelled": "已取消",
   "Updates arrived while observation was paused": "在观察暂停期间收到了更新",
   "Too many updates arrived during startup": "启动期间接收到的更新过多",
-  "Telegram could not deliver older updates": "Telegram 无法传递较早的更新"
+  "Telegram could not deliver older updates": "Telegram 无法传递较早的更新",
+  "Choose a scope for this procedure.": "请选择此程序的适用范围。",
+  "This procedure is not covered by the selected profile.": "所选配置未涵盖此程序。"
 }

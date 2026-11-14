@@ -102,7 +102,10 @@
     "text_local": null,
     "text_en": null,
     "wording": null,
-    "source": "https://www.law.go.kr/법령/민사소송법"
+    "source": "https://www.law.go.kr/법령/민사소송법",
+    "route": "all",
+    "scope": "Expert oath under the respective civil/criminal procedure provisions; no verified wording is supplied.",
+    "context": "authority_undertaking"
   },
   "standards": [],
   "esignature": {
@@ -122,10 +125,10 @@
     "Expert oath formula, civil (민사소송법 제338조), in the 2017 text: 「양심에 따라 성실히 감정하고, 만일 거짓이 있으면 거짓감정의 벌을 받기로 맹세합니다.」. Current wording not verified.",
     "형법 제152조–제154조 wording and penalties were checked only on Wikisource (Act No. 17571); the penalty (up to 5 years or KRW 10 million; 10 years for the aggravated form) should be confirmed on law.go.kr.",
     "전자서명법 was fully revised in 2020 (Act No. 17354, in force 2020-12-10, as understood), abolishing the former 공인전자서명 regime; the current effect provision (제3조) and any term for a recognised signature were not verified, so qualified_term_local is null. Wikisource only has the 2014 text.",
-    "대검찰청 예규 「디지털 증거의 수집·분석 및 관리 규정」 (Supreme Prosecutors' Office) could not be retrieved; its current number, version and content are unverified, so it is not listed in standards.",
+    "The current Supreme Prosecutors' Office regulation governing collection, analysis and management of digital evidence remains unverified.",
     "Whether ISO/IEC 27037 has been adopted as KS X ISO/IEC 27037 (and its year) could not be verified; the same applies to KS adoptions of ISO/IEC 27041, 27042 and 27043.",
     "No provision on electronic timestamps or their legal effect was verified (for example under 전자문서 및 전자거래 기본법).",
-    "민사소송규칙 and 형사소송규칙 (Supreme Court rules) on 감정서 contents, 감정인 선서서 forms and the Supreme Court established rules on expert selection were not retrieved.",
+    "Supreme Court civil/criminal rules governing report contents, oath forms and expert selection remain unverified.",
     "Not verified whether an expert may report facts not asked about in either route, or who drafts the questions in the criminal route.",
     "No statute specific to forensic expert activity was identified; statute is null."
   ]

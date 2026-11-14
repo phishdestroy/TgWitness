@@ -128,7 +128,8 @@
     "text_local": "Subsemnatul/Subsemnata [nume], expert [tehnic judiciar], declar că am analizat obiectul expertizei, am indicat cu exactitate orice observație sau constatare și am expus o opinie imparțială cu privire la faptele sau împrejurările evaluate, în conformitate cu regulile științei și expertizei profesionale.",
     "text_en": "I, the undersigned [name], [judicial technical] expert, declare that I have analysed the object of the examination, stated every observation or finding exactly and given an impartial opinion on the facts or circumstances assessed, in accordance with the rules of science and professional expertise.",
     "wording": "composed",
-    "source": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/284050"
+    "source": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/284050",
+    "route": "criminal"
   },
   "standards": [],
   "esignature": {
@@ -143,14 +144,14 @@
     "source": "https://legislatie.just.ro/Public/DetaliiDocument/285178"
   },
   "open_questions": [
-    "The consolidated codes on legislatie.just.ro (CPP doc 120611, CPC doc 140271, Codul penal doc 109855) are truncated by the fetch tool. CPP art. 173(4), 177 and 178 were read verbatim in Constitutional Court Decision no. 711/2023 published on legislatie.just.ro; CPP art. 172, 175, 179, CPC art. 330-336 and 187 and Codul penal art. 273(2) were checked only against secondary consolidations (lege5.ro, legeaz.net, coduri.juridice.ro) and must be re-read on the official consolidated text.",
+    "CPP articles 173(4), 177 and 178 are reproduced in Constitutional Court Decision 711/2023. Current consolidated wording of CPP articles 172, 175 and 179, CPC articles 330-336 and 187, and Criminal Code article 273(2) remains unverified.",
     "Codul penal art. 273(1) was confirmed verbatim in CCR Decision no. 480/2018 on legislatie.just.ro; the wording of art. 273(2)(c) was not read on an official page.",
     "Whether CPP art. 177 or another provision requires the criminal expert to be warned of liability under Codul penal art. 273, and with what wording, was not verified.",
     "No oath for experts in the written report was found in CPP, CPC or OG 2/2000; when heard, experts follow the witness hearing rules (CPP art. 179(3)), whose oath formula (CPP art. 121) was not verified on an official page.",
     "The amount of the judicial fine under CPC art. 187(1)(2) and CPP art. 175(8) was not verified.",
-    "OG 2/2000 art. 21(a) reads 'data la care s-a dispus depunerea acesteia' on the printable form fetched; confirm on the current consolidated text.",
-    "ASRO national adoptions of EN ISO/IEC 27037/27041/27042/27043 (expected designation SR EN ISO/IEC ...) were not verified; the web search budget was exhausted.",
+    "Current wording of OG 2/2000 article 21(a), including the report-submission date, requires confirmation.",
+    "ASRO adoption numbers and current status of EN ISO/IEC 27037, 27041, 27042 and 27043 remain unverified.",
     "Specific rules for forensic IT expertise in criminal cases (for example by police or prosecutorial forensic laboratories, or OG 75/2000 on forensic expertise) were not checked.",
-    "Legea nr. 214/2024 art. 4 and art. 7 wording was read through a summarising fetch and is not quoted verbatim."
+    "The current wording and application of Law 214/2024 articles 4 and 7 require confirmation; no verbatim quotation is provided."
   ]
 }

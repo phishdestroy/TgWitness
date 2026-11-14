@@ -5,7 +5,8 @@
   "expert_role": {
     "term": "consulente tecnico",
     "basis": "Codice di procedura civile, art. 61",
-    "source": "https://ca-salerno.giustizia.it/cmsresources/cms/documents/PTEL-MU-RA-028-NS-Manuale_SICID.pdf"
+    "source": "https://www.gazzettaufficiale.it/dettaglio/codici/proceduraCivile/61_1_1",
+    "route": "civil"
   },
   "esig_regulation": {
     "term": "eIDAS",
@@ -18,16 +19,16 @@
     "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
   },
   "timestamp_recognition": {
-    "term": "eIDAS Art. 41",
+    "term": "eIDAS Articles 41 and 24a(6)",
     "automatic_ots_qualification": false,
-    "source": "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/880312429/eSignature+FAQ"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "evidence_rules": [],
   "dpa": null,
   "sources": [
     {
       "term": "Codice di procedura civile, art. 61",
-      "url": "https://ca-salerno.giustizia.it/cmsresources/cms/documents/PTEL-MU-RA-028-NS-Manuale_SICID.pdf"
+      "url": "https://www.gazzettaufficiale.it/dettaglio/codici/proceduraCivile/61_1_1"
     },
     {
       "term": "eIDAS",
@@ -38,8 +39,8 @@
       "url": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
     },
     {
-      "term": "eIDAS Art. 41",
-      "url": "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/880312429/eSignature+FAQ"
+      "term": "eIDAS Articles 41 and 24a(6)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
     }
   ]
 }

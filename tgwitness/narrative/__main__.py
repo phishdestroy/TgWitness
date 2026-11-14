@@ -39,13 +39,13 @@ def digest_file(path):
 def generate(package, out, lang='en', jurisdiction=None, fingerprint=None, witness=None,
              witness_fingerprint=None, check_drand=False, check_bitcoin=False, tsa_ca=None,
              outputs=OUTPUTS, diagrams=DIAGRAMS, max_records=100000, scene_max_records=2000,
-             require_tier='self_attested', require_pinned_signer=False, expert=False, procedure='criminal'):
+             require_tier='self_attested', require_pinned_signer=False, expert=False, procedure='criminal', procedure_scope=None):
     settings = validate(dict(lang=lang, jurisdiction=jurisdiction, fingerprint=fingerprint,
                             witness=witness, witness_fingerprint=witness_fingerprint, tsa_ca=tsa_ca,
                             check_drand=check_drand, check_bitcoin=check_bitcoin, outputs=outputs,
                             diagrams=diagrams, max_records=max_records, scene_max_records=scene_max_records,
                             require_tier=require_tier, require_pinned_signer=require_pinned_signer,
-                            expert=expert, procedure=procedure))
+                            expert=expert, procedure=procedure, procedure_scope=procedure_scope))
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     if out.is_symlink() or any(out.iterdir()):
@@ -87,7 +87,7 @@ def generate(package, out, lang='en', jurisdiction=None, fingerprint=None, witne
         model['package_sha256'] = digest_file(source)
         rendered = scratch / 'rendered'
         write(model, rendered, lang, jurisdiction, outputs=settings['outputs'], diagram_names=settings['diagrams'],
-              procedure=settings['procedure'])
+              procedure=settings['procedure'], procedure_scope=settings['procedure_scope'])
         public_settings = {key: value for key, value in settings.items() if key not in ('witness', 'tsa_ca')}
         receipt = {'format': 'tgwitness-narrative-run-v1', 'settings': public_settings,
                    'settings_sha256': hashlib.sha256(canonical(public_settings)).hexdigest(),
@@ -131,6 +131,7 @@ def main():
     parser.add_argument('--expert', action=argparse.BooleanOptionalAction, default=None,
                         help='Also write an expert examination protocol draft for the selected jurisdiction')
     parser.add_argument('--procedure', choices=examination.PROCEDURES, help='Procedure for the expert protocol')
+    parser.add_argument('--procedure-scope', help='Catalog route identifier when court or transitional rules differ')
     args = parser.parse_args()
     overrides = {key: value for key, value in vars(args).items() if value is not None and key not in
                  ('package', 'out', 'config', 'profile', 'write_config', 'print_config')}

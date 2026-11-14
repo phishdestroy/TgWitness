@@ -20,12 +20,12 @@
       "appointment": {
         "basis": "Evidence Act 1872 (Act No. I of 1872) ss. 45, 45A (substituted/inserted by the Evidence (Amendment) Act 2022, Act No. XX of 2022); Code of Criminal Procedure 1898 s. 510; Cyber Protection Act 2026 (Act No. 81 of 2026) ss. 10, 11, 43, 44",
         "summary_en": "Opinions of persons specially skilled, including in 'physical or forensic evidence or digital record', are relevant facts (Evidence Act s. 45). A report under the hand of a Government-appointed Chemical Examiner or Assistant Chemical Examiner, serologist, handwriting expert, finger-print expert or fire-arm expert, on matter duly submitted for examination or analysis in a CrPC proceeding, may be used as evidence without calling the expert (CrPC s. 510). For offences under the Cyber Protection Act 2026, the national agency operates or recognises one or more Digital Forensic Labs (s. 10). Forensic evidence obtained under the Act counts as evidence notwithstanding the Evidence Act, and preserving digital forensic evidence prepared in a Digital Forensic Lab is mandatory (s. 43). The Tribunal or Appellate Tribunal may take the opinion of a person experienced in computer science, digital forensics, electronic communication or data protection (s. 44(1)).",
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-24.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-24.html"
       },
       "questions": {
         "basis": "CrPC 1898 s. 510",
         "summary_en": "The report concerns 'any matter or thing duly submitted to him for examination or analysis and report'. No provision was found on who formulates the questions, on declining questions outside the expertise, or on reporting facts not asked about.",
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-75.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-75.html"
       },
       "report_contents": {
         "basis": "Evidence Act 1872 s. 45A; CrPC 1898 s. 510",
@@ -39,12 +39,12 @@
           "An expert's report shall be addressed to the Court and not to the party on whose behalf he is examined",
           "a witness shall not testify as an expert on physical or forensic unless a copy of his report has, pursuant to sub-section (2), been given to all the parties"
         ],
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-24.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-24.html"
       },
       "rights_duties": {
         "basis": "Evidence Act 1872 s. 45A(2); Cyber Protection Act 2026 s. 11",
         "summary_en": "The expert 'shall owe a duty to help the Court' (s. 45A(2)). Digital Forensic Labs must meet quality standards set by rules: qualified, certified, experienced and trained staff; physical infrastructure; security and confidentiality of stored information; quality equipment and internationally recognised software or tools; and scientific processes in the manner prescribed by rules (Cyber Protection Act 2026 s. 11).",
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-1710.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-1710.html"
       }
     },
     {
@@ -52,7 +52,7 @@
       "appointment": {
         "basis": "Code of Civil Procedure 1908 s. 75; Evidence Act 1872 ss. 45, 45A",
         "summary_en": "Subject to prescribed conditions, the court may issue a commission to examine any person, make a local investigation, examine or adjust accounts, or make a partition (CPC s. 75). The detailed rules are in the First Schedule (Order XXVI), which is not published on bdlaws (see open questions). Experts are also called as witnesses under Evidence Act s. 45. Under s. 45A, a witness may not testify as an expert on physical or forensic evidence, except by leave of the Court, unless a copy of the report has been given to all parties.",
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-86.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-86.html"
       },
       "questions": {
         "basis": null,
@@ -69,19 +69,19 @@
           "An expert's report shall be addressed to the Court and not to the party on whose behalf he is examined",
           "a copy of his report has ... been given to all the parties"
         ],
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-24.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-24.html"
       },
       "rights_duties": {
         "basis": "Evidence Act 1872 s. 45A(2)",
         "summary_en": "The expert owes a duty to help the Court.",
-        "source": "http://bdlaws.minlaw.gov.bd/act-details-24.html"
+        "source": "https://bdlaws.minlaw.gov.bd/act-details-24.html"
       }
     }
   ],
   "statute": {
     "title_local": "সাইবার সুরক্ষা আইন, ২০২৬ (২০২৬ সনের ৮১ নং আইন), ধারা ১০-১১ (ডিজিটাল ফরেনসিক ল্যাব; ডিজিটাল ফরেনসিক ল্যাবের মান নিয়ন্ত্রণ)",
     "title_en": "Cyber Protection Act 2026 (Act No. 81 of 2026), ss. 10-11 (Digital Forensic Lab; quality control of Digital Forensic Labs). No general statute on forensic expert activity found.",
-    "source": "http://bdlaws.minlaw.gov.bd/act-details-1710.html"
+    "source": "https://bdlaws.minlaw.gov.bd/act-details-1710.html"
   },
   "liability": [
     {
@@ -91,7 +91,7 @@
       "warning_local": null,
       "warning_en": null,
       "wording": null,
-      "source": "http://bdlaws.minlaw.gov.bd/act-details-11.html"
+      "source": "https://bdlaws.minlaw.gov.bd/act-details-11.html"
     },
     {
       "route": "all",
@@ -100,7 +100,7 @@
       "warning_local": null,
       "warning_en": null,
       "wording": null,
-      "source": "http://bdlaws.minlaw.gov.bd/act-details-11.html"
+      "source": "https://bdlaws.minlaw.gov.bd/act-details-11.html"
     }
   ],
   "declaration": {
@@ -108,14 +108,16 @@
     "text_local": "I confirm that this report is addressed to the Court and not to the party on whose behalf I am examined, and that I understand that I owe a duty to help the Court.",
     "text_en": "I confirm that this report is addressed to the Court and not to the party on whose behalf I am examined, and that I understand that I owe a duty to help the Court.",
     "wording": "composed",
-    "source": "http://bdlaws.minlaw.gov.bd/act-details-24.html"
+    "source": "https://bdlaws.minlaw.gov.bd/act-details-24.html",
+    "route": "all",
+    "scope": "Composed report acknowledgment for physical or forensic expert evidence governed by Evidence Act section 45A; not a prescribed oath."
   },
   "standards": [],
   "esignature": {
     "law_local": "তথ্য ও যোগাযোগ প্রযুক্তি আইন, ২০০৬ (২০০৬ সনের ৩৯ নং আইন), ধারা ২(১), ৭, ১৭; Evidence Act 1872 ss. 47A, 67A, 73A, 85A-85C",
     "law_en": "Information and Communication Technology Act 2006 (Act No. 39 of 2006): definition of electronic signature (s. 2(1)); legal recognition of electronic signatures (s. 7); secure electronic signature (s. 17). Evidence Act: the opinion of the issuing Certifying Authority on a digital signature is relevant (s. 47A). A digital signature must be proved unless it is a secure digital signature (s. 67A). The court may direct verification of a digital signature using the public key in the Digital Signature Certificate (s. 73A). Presumptions for secure digital records and secure digital signatures (s. 85B) and for information in an accepted Digital Signature Certificate (s. 85C).",
     "qualified_term_local": "নিরাপদ ইলেক্ট্রনিক স্বাক্ষর (secure electronic signature); Evidence Act: 'secure digital signature'",
-    "source": "http://bdlaws.minlaw.gov.bd/act-details-950.html"
+    "source": "https://bdlaws.minlaw.gov.bd/act-details-950.html"
   },
   "timestamp": {
     "basis": "No statutory provision specific to electronic time-stamps found in the ICT Act 2006. Office of the Controller of Certifying Authorities (ICT Division), Time Stamping Services Guidelines for Certifying Authorities, Version 2.0 (reviewed September 2020), issued under the ICT Act 2006 and the Information Technology (Certifying Authorities) Rules 2009; 'Time stamp tokens shall be in compliance with RFC 3161'",

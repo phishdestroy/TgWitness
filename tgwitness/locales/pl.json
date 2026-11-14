@@ -9103,5 +9103,7 @@
   "cancelled": "anulowano",
   "Updates arrived while observation was paused": "Aktualizacje dotarły w czasie, gdy obserwacja była wstrzymana",
   "Too many updates arrived during startup": "Podczas uruchamiania napłynęło zbyt wiele aktualizacji",
-  "Telegram could not deliver older updates": "Telegram nie mógł dostarczyć starszych aktualizacji"
+  "Telegram could not deliver older updates": "Telegram nie mógł dostarczyć starszych aktualizacji",
+  "Choose a scope for this procedure.": "Wybierz zakres zastosowania dla tego postępowania.",
+  "This procedure is not covered by the selected profile.": "Wybrany profil nie obejmuje tego postępowania."
 }

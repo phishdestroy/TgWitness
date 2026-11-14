@@ -98,11 +98,12 @@
     }
   ],
   "declaration": {
-    "basis": "No federal rule requires a declaration or statement of truth in the report. The warning under Art. 307 StGB is part of the mandate (StPO Art. 184(2)(f)) or is given by the court (ZPO Art. 184(2)).",
+    "basis": "The cited federal provisions require a warning about false opinions: StPO article 184(2)(f) in the criminal mandate, or ZPO article 184(2) by the civil court. No written statement-of-truth formula was verified. Use this composed acknowledgement only if that warning was actually given.",
     "text_local": "Ich bestätige, dass ich auf die Straffolgen eines falschen Gutachtens nach Artikel 307 StGB hingewiesen worden bin, und erstatte dieses Gutachten wahrheitsgemäss.",
     "text_en": "I confirm that I have been informed of the penal consequences of a false expert opinion under Article 307 of the Criminal Code, and I give this opinion truthfully.",
     "wording": "composed",
-    "source": "https://www.fedlex.admin.ch/eli/cc/2010/262/de#art_184"
+    "source": "https://www.fedlex.admin.ch/eli/cc/2010/262/de#art_184",
+    "route": "all"
   },
   "standards": [
     {
@@ -126,7 +127,7 @@
     "source": "https://www.fedlex.admin.ch/eli/cc/2016/752/de"
   },
   "open_questions": [
-    "Fedlex is a JavaScript application and its full-text files are too large for the research tool; StPO, ZPO, StGB, ZertES and OR wording was checked through search-index excerpts of the official Fedlex PDFs, Federal Supreme Court decision BGE 144 IV 176 and secondary reproductions, not by direct reading of the current consolidated text.",
+    "The current consolidated wording of StPO, ZPO, StGB, ZertES and OR requires confirmation. Existing statements rely in part on Federal Supreme Court decisions and secondary reproductions.",
     "The full current wording of StPO Art. 184(2) letters (a)-(f) and Art. 187(2) was confirmed only through secondary sources and BGE 144 IV 176; StPO Art. 182, 183, 186, 188-191 were not verified.",
     "The repeal of StGB Art. 307(2) with effect from 1 July 2023 (AS 2023 259) was confirmed only from secondary reproductions of the Fedlex footnote, not from AS 2023 259 itself.",
     "French and Italian verbatim wording of StGB Art. 307, StPO Art. 184/187 and ZPO Art. 184-187 was not verified against the current Fedlex texts; only German is quoted.",

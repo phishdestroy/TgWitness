@@ -9007,5 +9007,7 @@
   "cancelled": "iptal edildi",
   "Updates arrived while observation was paused": "Gözlem duraklatılmışken güncellemeler geldi",
   "Too many updates arrived during startup": "Başlatma sırasında çok fazla güncelleme geldi",
-  "Telegram could not deliver older updates": "Telegram, eski güncellemeleri iletemedi"
+  "Telegram could not deliver older updates": "Telegram, eski güncellemeleri iletemedi",
+  "Choose a scope for this procedure.": "Bu usulün uygulama kapsamını seçin.",
+  "This procedure is not covered by the selected profile.": "Seçilen profil bu usulü kapsamıyor."
 }

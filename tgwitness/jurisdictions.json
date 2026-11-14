@@ -104,7 +104,10 @@
         }
       ],
       "reviewed_on": "2026-11-06",
-      "criminal_status": "research_draft"
+      "criminal_status": "research_draft",
+      "examination_only_scopes": [
+        "civil-ontario"
+      ]
     },
     {
       "code": "CN",
@@ -287,13 +290,13 @@
     {
       "code": "ID",
       "name": "Indonesia",
-      "scope": "ITE legislation; KUHAP 20/2025 effective in 2026",
+      "scope": "ITE legislation; KUHAP 20/2025, subject to the Article 361 transitional rules",
       "language": "id",
       "law": "ITE Law 11/2008 as amended by Law 1/2024, articles 5–6",
       "criminal_law": "KUHAP, Law 20/2025, article 235",
       "basis": "Electronic information, documents and printouts are recognized subject to statutory conditions and exceptions. Accessibility and integrity matter, not the provider brand.",
-      "prepare": "Preserve accessible originals, metadata, video and method. For criminal proceedings, use the current KUHAP and applicable transitional provisions.",
-      "criminal": "KUHAP 20/2025 took effect on 2 January 2026. Article 235 includes electronic evidence and addresses authenticity and lawful acquisition.",
+      "prepare": "Preserve accessible originals, metadata, video and method. For criminal proceedings, record the procedural stage and commencement date before selecting the KUHAP regime under Article 361.",
+      "criminal": "KUHAP 20/2025 took effect on 2 January 2026. Article 235 includes electronic evidence and addresses authenticity and lawful acquisition. Under Article 361, investigations or prosecutions already in progress continue under Law 8/1981 for that stage; trials already begun use the former regime except judicial review. Cases transferred to a court but not yet tried use the new regime.",
       "human": "A person explaining acquisition; technical or procedural specialist as required by the selected route.",
       "tasks": [
         "Keep accessible originals and metadata",
@@ -313,10 +316,26 @@
         {
           "title": "KUHAP, Law 20/2025, article 235",
           "url": "https://www.peraturan.go.id/files/uu-no-20-tahun-2025.pdf"
+        },
+        {
+          "title": "KUHAP 20/2025, Article 361 transitional provisions",
+          "url": "https://jdih.bpkp.go.id/dokumen/data_dokumen/Salinan%20UU%20Nomor%2020%20Tahun%202025_compressed%20%281%29.pdf"
         }
       ],
       "reviewed_on": "2026-11-06",
-      "criminal_status": "research_draft"
+      "criminal_status": "research_draft",
+      "review_updates": [
+        {
+          "checked_at": "2026-11-14",
+          "scope": "Article 361 transition only; other guidance retains its existing review date.",
+          "sources": [
+            "https://jdih.bpkp.go.id/dokumen/data_dokumen/Salinan%20UU%20Nomor%2020%20Tahun%202025_compressed%20%281%29.pdf"
+          ]
+        }
+      ],
+      "examination_only_scopes": [
+        "criminal-kuhap-1981-transitional"
+      ]
     },
     {
       "code": "IR",
@@ -875,5 +894,5 @@
       "criminal_status": "research_draft"
     }
   ],
-  "version": "2026-11-06.1"
+  "version": "2026-11-14.1"
 }

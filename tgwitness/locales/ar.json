@@ -9199,5 +9199,7 @@
   "cancelled": "ملغى",
   "Updates arrived while observation was paused": "وصلت التحديثات أثناء توقف المراقبة مؤقتًا",
   "Too many updates arrived during startup": "وصلت تحديثات كثيرة جدًا أثناء بدء التشغيل",
-  "Telegram could not deliver older updates": "لم يتمكن Telegram من تسليم التحديثات الأقدم"
+  "Telegram could not deliver older updates": "لم يتمكن Telegram من تسليم التحديثات الأقدم",
+  "Choose a scope for this procedure.": "اختر نطاق هذه الإجراءات.",
+  "This procedure is not covered by the selected profile.": "هذه الإجراءات غير مشمولة في الملف المختار."
 }

@@ -113,7 +113,10 @@
     "text_local": "أقر بأنه لا توجد لي أي علاقة بأطراف الدعوى ولا أي مصلحة فيها، وألتزم بأداء المهمة بدقة وأمانة وإخلاص وحياد وموضوعية.",
     "text_en": "I declare that I have no relationship with the parties to the case and no interest in it, and I undertake to perform the mission with accuracy, honesty, sincerity, impartiality and objectivity.",
     "wording": "composed",
-    "source": "https://www.uqn.gov.sa/details?p=20767"
+    "source": "https://www.uqn.gov.sa/details?p=20767",
+    "route": "civil",
+    "scope": "Pre-appointment disclosure of relationships or interests under the civil Evidence Law. The expert must disclose actual circumstances; absence of conflicts cannot be assumed by the software.",
+    "context": "authority_undertaking"
   },
   "standards": [],
   "esignature": {
@@ -128,7 +131,7 @@
     "source": "https://www.uqn.gov.sa/details?p=25092"
   },
   "open_questions": [
-    "Criminal route not verified: laws.boe.gov.sa and the Public Prosecution and Board of Grievances sites were unreachable from the research environment. The Law of Criminal Procedure (Royal Decree No. M/2 of 22/1/1435H, cited as in force in Royal Order A/303 of 30/7/1446H on uqn.gov.sa) and its Implementing Regulation were not available on uqn.gov.sa; their articles on experts (appointment by the investigator or court, oath, report) are unverified.",
+    "Criminal Procedure Law and implementing rules on appointment, expert oaths and report requirements remain unverified. The civil Evidence Law provisions must not be substituted for them.",
     "Criminal liability for a knowingly false expert report or false testimony was not verified. Saudi law has no general penal code; check the Law of Criminal Procedure, the Anti-Forgery Law (Royal Decree M/11 of 18/2/1435H, unverified) and ta'zir practice. The Law of Evidence Art. 80 (referral of a false witness to the Public Prosecution) applies to witnesses, not expressly to experts.",
     "Not found: any oath or fixed declaration formula for experts. The declaration text is composed from Law of Evidence Art. 113 and Rules Art. 19 and is not an official form. Check the Ministry of Justice expertise unit's forms (Rules Art. 5(8)) and the Najiz platform.",
     "Not found: any national adoption (Saudi Standards, Metrology and Quality Organization) or official guidance on ISO/IEC 27037/27041/27042/27043, or any ISO/IEC 17025 requirement for digital forensic reports.",

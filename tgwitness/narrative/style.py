@@ -8,7 +8,8 @@ AUTONYMS = {
     'am': 'አማርኛ', 'ar': 'العربية', 'bg': 'български', 'bn': 'বাংলা', 'ca': 'català', 'cs': 'čeština', 'da': 'dansk',
     'de': 'Deutsch', 'el': 'Ελληνικά', 'en': 'English', 'es': 'español', 'et': 'eesti', 'eu': 'euskara', 'fa': 'فارسی',
     'fi': 'suomi', 'fil': 'Filipino', 'fr': 'français', 'ga': 'Gaeilge', 'gl': 'galego', 'he': 'עברית', 'hi': 'हिन्दी',
-    'hu': 'magyar', 'id': 'Bahasa Indonesia', 'it': 'italiano', 'ja': '日本語', 'ko': '한국어', 'lt': 'lietuvių',
+    'hr': 'hrvatski', 'hu': 'magyar', 'id': 'Bahasa Indonesia', 'it': 'italiano', 'ja': '日本語', 'ka': 'ქართული',
+    'ko': '한국어', 'lb': 'Lëtzebuergesch', 'lt': 'lietuvių', 'mt': 'Malti', 'sl': 'slovenščina',
     'lv': 'latviešu', 'ms': 'Bahasa Melayu', 'nl': 'Nederlands', 'no': 'norsk', 'pl': 'polski', 'pt': 'português',
     'ro': 'română', 'ru': 'русский', 'sk': 'slovenčina', 'sv': 'svenska', 'th': 'ไทย', 'tr': 'Türkçe', 'uk': 'українська',
     'ur': 'اردو', 'uz': 'oʻzbekcha', 'vi': 'Tiếng Việt', 'zh': '简体中文', 'zh-Hant': '繁體中文'}

@@ -109,7 +109,9 @@
     "text_local": "Forsikrer De på ære og samvittighet at oppdraget som sakkyndig er utført og vil bli fullført samvittighetsfullt og etter beste overbevisning? – Det forsikrer jeg.",
     "text_en": "Do you affirm on your honour and conscience that the expert assignment has been carried out and will be completed conscientiously and to the best of your conviction? - I so affirm.",
     "wording": "composed",
-    "source": "https://lovdata.no/dokument/NL/lov/2005-06-17-90/KAPITTEL_5-5"
+    "source": "https://lovdata.no/dokument/NL/lov/2005-06-17-90/KAPITTEL_5-5",
+    "route": "civil",
+    "context": "oral_hearing"
   },
   "standards": [],
   "esignature": {
@@ -131,7 +133,7 @@
     "No regulation under straffeprosessloven § 142 a on the form of expert mandates was found among current central regulations; its existence and content were not verified.",
     "National adoption numbers for ISO/IEC 27037, 27041, 27042 and 27043 (expected NS-EN ISO/IEC ...:2016) could not be verified on Standard Norge; standards list left empty.",
     "Court language is Norwegian (bokmål and nynorsk); the extended right to use Sami (sameloven § 3-4, referenced in domstolloven § 136a) was not detailed.",
-    "The task brief lists straffeloven § 222 alongside § 221; in the current act § 222 is 'uriktig anklage' (false accusation). No aggravated or negligent false-statement offence was found in chapter 22.",
+    "Straffeloven section 222 concerns false accusation, rather than an aggravated form of section 221 false statement. No aggravated or negligent false-statement offence was found in chapter 22.",
     "Civil or disciplinary liability of experts is not codified in tvisteloven or straffeprosessloven; tort liability was not researched."
   ],
   "declaration_criminal": {
@@ -139,6 +141,8 @@
     "text_local": "Forsikrer De at De har utført og vil fullføre Deres verv samvittighetsfullt og etter beste overbevisning? – Det forsikrer jeg.",
     "text_en": "Do you affirm that you have carried out and will complete your assignment conscientiously and to the best of your conviction? - I so affirm.",
     "wording": "composed",
-    "source": "https://lovdata.no/dokument/NL/lov/1981-05-22-25/KAPITTEL_3-2"
+    "source": "https://lovdata.no/dokument/NL/lov/1981-05-22-25/KAPITTEL_3-2",
+    "route": "criminal",
+    "context": "oral_hearing"
   }
 }

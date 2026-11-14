@@ -1,0 +1,75 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "CY",
+  "name_en": "Cyprus",
+  "name_local": "Κύπρος",
+  "court_languages": [
+    "el",
+    "tr",
+    "en"
+  ],
+  "local_language": "el",
+  "legal_family": "mixed; common-law procedure",
+  "checked_at": "2026-11-14",
+  "review_scope": "Republic of Cyprus civil-procedure subset: published 2023 Rules, Part 34. Transitional rules, later amendments and criminal proceedings require separate verification.",
+  "expert_term": {
+    "local": "πραγματογνώμονας",
+    "en": "expert witness"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Κανονισμοί Πολιτικής Δικονομίας 2023, Μέρος 34",
+        "summary_en": "Expert evidence is controlled by the court; Rules 34.8–34.9 provide for a single joint expert and instructions.",
+        "source": "https://www.supremecourt.gov.cy/judicial/sc.nsf/All/03153D1EBBA4459CC22589E100228BB7/%24file/4156%203%207%202023%20PARARTIMA%202o%20MEROS%20I%20%281%29.pdf"
+      },
+      "questions": null,
+      "report_contents": {
+        "basis": "Rule 34.11",
+        "items_en": [
+          "Qualifications; literature or other material relied on.",
+          "Material facts and instructions, distinguishing personal knowledge.",
+          "Who performed examinations or tests, their qualifications and supervision.",
+          "Range of relevant opinions, reasons for the expert's view, conclusions and reservations.",
+          "Confirmation of compliance with the duty to the court and a statement of truth."
+        ],
+        "items_local": [],
+        "source": "https://www.supremecourt.gov.cy/judicial/sc.nsf/All/03153D1EBBA4459CC22589E100228BB7/%24file/4156%203%207%202023%20PARARTIMA%202o%20MEROS%20I%20%281%29.pdf"
+      },
+      "rights_duties": {
+        "basis": "Rules 34.3–34.4",
+        "summary_en": "Provide objective assistance within the expert's field; disclose material changes of opinion.",
+        "source": "https://www.supremecourt.gov.cy/judicial/sc.nsf/All/03153D1EBBA4459CC22589E100228BB7/%24file/4156%203%207%202023%20PARARTIMA%202o%20MEROS%20I%20%281%29.pdf"
+      }
+    }
+  ],
+  "statute": {
+    "title_local": "Κανονισμοί Πολιτικής Δικονομίας 2023, Μέρος 34",
+    "title_en": "Civil Procedure Rules 2023, Part 34; official Gazette publication of 3 July 2023",
+    "source": "https://www.supremecourt.gov.cy/judicial/sc.nsf/All/03153D1EBBA4459CC22589E100228BB7/%24file/4156%203%207%202023%20PARARTIMA%202o%20MEROS%20I%20%281%29.pdf"
+  },
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Regulation (EU) No 910/2014 (eIDAS), as amended",
+    "law_en": "eIDAS, Article 25",
+    "qualified_term_local": "εγκεκριμένη ηλεκτρονική υπογραφή",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "timestamp": {
+    "basis": "eIDAS Articles 41–42",
+    "qualified_recognition": "Qualified timestamps carry date/time accuracy and data-integrity presumptions; qualification requires the statutory conditions.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "open_questions": [
+    "Provider qualification, certificate status, national filing rules and supported signature formats must be checked separately; this profile does not qualify a TgWitness signature or timestamp.",
+    "Verify commencement, transitional application and amendments for the relevant case; the 2021 technical-assistance draft was not used as enacted law.",
+    "The exact current statement-of-truth form and signing instructions require local review; this profile records the requirement but supplies no invented declaration.",
+    "Criminal expert evidence is not covered. The Republic of Cyprus profile must not be treated as a separate legal profile for proceedings outside its effective administration.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Constitution Article 3 governs Greek/Turkish judicial use. The 2022 constitutional amendment permits English in specified Commercial Court and Admiralty Court proceedings under statutory conditions; English is not a general filing option.",
+  "court_language_source": "https://www.olc.gov.cy/olc/olc.nsf/79DF39A1C06EB483C2258BE800346FAE/%24file/User_galexandrou_0008.pdf"
+}

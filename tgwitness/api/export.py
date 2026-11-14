@@ -244,7 +244,7 @@ async def report_guidance_catalog(*, ctx=Depends(current_context)):
 
 
 async def get_report_options(*, ctx=Depends(current_context)):
-    return report.saved(ctx.app.state.store).model_dump()
+    return report.saved(ctx.app.state.store, for_editing=True).model_dump()
 
 
 async def set_report_options(
@@ -719,11 +719,12 @@ class ExportOperations:
         from .. import export_history
 
         receipt = {}
-        options = report_options(self.app.state.store, request, language)
         if draft is not None:
             options = draft.model_dump()
             if language or options["language"] == "auto":
                 options["language"] = language or panel_language(request)
+        else:
+            options = report_options(self.app.state.store, request, language)
         principal = request.state.principal
         include_board = principal.may("board.read")
         permissions = ["view", "export"] + (["board.read"] if include_board else [])

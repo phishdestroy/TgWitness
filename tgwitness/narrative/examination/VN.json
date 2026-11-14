@@ -10,8 +10,8 @@
   "legal_family": "socialist law",
   "checked_at": "2026-11-11",
   "expert_term": {
-    "local": null,
-    "en": null
+    "local": "người giám định tư pháp",
+    "en": "judicial expert under Law 105/2025/QH15"
   },
   "procedures": [
     {
@@ -27,16 +27,27 @@
         "source": null
       },
       "report_contents": {
-        "basis": null,
-        "items_en": [],
+        "basis": "Law 105/2025/QH15, article 35(1); signature and institutional endorsement requirements in article 35(2)–(4) must also be satisfied",
+        "items_en": [
+          "Expert name and examining organisation's name and address",
+          "Requesting authority/person and request reference",
+          "Identification of the examined object",
+          "Time the request was received",
+          "Requested issues and examination methods",
+          "Clear findings on the requested technical matters",
+          "Time and place of examination and completion"
+        ],
         "items_local": [],
-        "source": null
+        "source": "https://vbpl.moj.gov.vn/hatinh/Pages/vbpq-print.aspx?ItemID=187758",
+        "checked_at": "2026-11-14"
       },
       "rights_duties": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
-      }
+        "basis": "Law 105/2025/QH15, articles 24 and 38",
+        "summary_en": "Experts may request adequate materials, choose appropriate methods and reach independent conclusions. They must follow professional procedures, meet the request and deadline, preserve materials and maintain confidentiality. Statutory refusal and conflict grounds must be assessed.",
+        "source": "https://vbpl.moj.gov.vn/hatinh/Pages/vbpq-print.aspx?ItemID=187758",
+        "checked_at": "2026-11-14"
+      },
+      "scope": "Shared judicial-expertise requirements under Law 105/2025/QH15. Route-specific procedural-code rules remain unverified. Examinations accepted and performed before 1 May 2026 remain subject to the transition in article 45(4)."
     },
     {
       "route": "civil",
@@ -51,22 +62,34 @@
         "source": null
       },
       "report_contents": {
-        "basis": null,
-        "items_en": [],
+        "basis": "Law 105/2025/QH15, article 35(1); signature and institutional endorsement requirements in article 35(2)–(4) must also be satisfied",
+        "items_en": [
+          "Expert name and examining organisation's name and address",
+          "Requesting authority/person and request reference",
+          "Identification of the examined object",
+          "Time the request was received",
+          "Requested issues and examination methods",
+          "Clear findings on the requested technical matters",
+          "Time and place of examination and completion"
+        ],
         "items_local": [],
-        "source": null
+        "source": "https://vbpl.moj.gov.vn/hatinh/Pages/vbpq-print.aspx?ItemID=187758",
+        "checked_at": "2026-11-14"
       },
       "rights_duties": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
-      }
+        "basis": "Law 105/2025/QH15, articles 24 and 38",
+        "summary_en": "Experts may request adequate materials, choose appropriate methods and reach independent conclusions. They must follow professional procedures, meet the request and deadline, preserve materials and maintain confidentiality. Statutory refusal and conflict grounds must be assessed.",
+        "source": "https://vbpl.moj.gov.vn/hatinh/Pages/vbpq-print.aspx?ItemID=187758",
+        "checked_at": "2026-11-14"
+      },
+      "scope": "Shared judicial-expertise requirements under Law 105/2025/QH15. Route-specific procedural-code rules remain unverified. Examinations accepted and performed before 1 May 2026 remain subject to the transition in article 45(4)."
     }
   ],
   "statute": {
-    "title_local": null,
-    "title_en": null,
-    "source": null
+    "title_local": "Luật Giám định tư pháp số 105/2025/QH15, ngày 05/12/2025, hiệu lực từ 01/05/2026",
+    "title_en": "Law 105/2025/QH15 on Judicial Expertise, effective 1 May 2026; transitional cases remain subject to article 45",
+    "source": "https://vbpl.moj.gov.vn/hatinh/Pages/vbpq-print.aspx?ItemID=187758",
+    "checked_at": "2026-11-14"
   },
   "liability": [],
   "declaration": {
@@ -89,12 +112,12 @@
     "source": null
   },
   "open_questions": [
-    "No Vietnamese provision could be verified on an official portal in this session: vbpl.vn pages render dynamically (no text returned) or were refused by the fetch tool, vanban.chinhphu.vn and congbao.chinhphu.vn search pages return no results to the fetch tool, thuvienphapluat.vn returned HTTP 403, and the web-search budget for this session was exhausted before Vietnam could be researched.",
-    "Bộ luật Tố tụng hình sự 2015 (Luật số 101/2015/QH13) Điều 205-216 on requesting expert examination, rights and duties of the parties and of the expert, time limits, supplementary and repeat examination and the kết luận giám định were not verified. WIPO Lex lists the Code as adopted 27 November 2015, in force 1 July 2016 and amended by Law No. 34/2024/QH15; later amendments (including any 2025 amendments) were not checked.",
-    "Bộ luật Tố tụng dân sự 2015 (Luật số 92/2015/QH13, adopted 25 November 2015 per WIPO Lex) Điều 102 and related articles on expert examination were not verified.",
-    "Luật Giám định tư pháp 2012 as amended in 2020 (law numbers not verified), including the required contents of the kết luận giám định, the rights and obligations of judicial experts and refusal grounds, was not verified.",
-    "Bộ luật Hình sự 2015 Điều 382 (named in the task as the offence for false expert conclusions), its title, elements and penalties were not verified; the wording of any warning or undertaking the expert signs was not verified.",
-    "Luật Giao dịch điện tử 2023 provisions on electronic signatures, the qualified/secure signature category and time-stamp services, and its law number, were not verified; implementing decrees were not checked.",
-    "Vietnamese national standards (TCVN) adopting ISO/IEC 27037/27041/27042/27043 and any Ministry of Public Security digital-forensic regulations were not verified."
+    "Current Criminal Procedure Code provisions on appointment, questions, expert participation and supplementary/repeat examination remain to be verified, including amendments through 2026.",
+    "Current Civil Procedure Code article 102 and related appointment, question-setting and participation rules remain to be verified.",
+    "Article 35 signature, institutional endorsement and digital-signature formalities, and sector-specific forms under the 2026 implementing rules require further review.",
+    "Law 105/2025/QH15 replaced the 2012 expert law on 1 May 2026, subject to article 45. Determine the governing regime for examinations already accepted and performed before that date.",
+    "Criminal Code offence elements and penalties for false expert conclusions, and any prescribed warning or undertaking, remain unverified.",
+    "Electronic Transactions Law 2023, implementing decrees, trust-service and timestamp status, and the signature verification requirements remain unverified.",
+    "Vietnamese TCVN adoption of ISO/IEC 27037/27041/27042/27043 and Ministry of Public Security digital-forensic requirements remain unverified."
   ]
 }
