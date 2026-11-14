@@ -46,7 +46,7 @@ def index(context, chats):
         yield view.scope(context.get('options', {}), say)
 
     blocks = {
-        'case': lambda: (view.recipient_guide(say),),
+        'case': lambda: (view.archive_views(context, say), view.recipient_guide(say)),
         'assessment': lambda: (case_assessment.html(case_assessment.snapshot(context), say),),
         'selection': scope,
         'coverage': lambda: view.coverage_section(context, say),

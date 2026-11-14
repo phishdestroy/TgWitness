@@ -2735,6 +2735,15 @@ function renderAccountExportJobs(){
       const original=node('section','account-export-original');
       original.append(node('h3','',tr('Original account archive')),
         node('p','',tr('Download and keep this original. Extract the ZIP and open index.html to review what was saved and what is missing.')));
+      const contents=node('ul','archive-contents'),format=job.options?.export_format||'tgwitness';
+      for(const [path,label,included] of [
+        ['export_results.html','Chats',['telegram_html','telegram_both'].includes(format)],
+        ['result.json','JSON',['telegram_json','telegram_both'].includes(format)],
+        ['index.html','Report',true],['map.html','Activity map',true],
+        ['index.html#verification','Verification',true]]){
+        if(included){const item=node('li');item.append(node('strong','',tr(label)),document.createTextNode(' · '),node('code','',path));contents.append(item);}
+      }
+      original.append(contents);
       addAction(actions,job,tr('Download original archive'),'download',()=>accountExportDownload(job),'primary');
       addAction(actions,job,tr('Prepare a sharing copy'),'disclosure',()=>openAccountDisclosure(job));
       original.append(actions);card.append(original);
@@ -2877,7 +2886,6 @@ $("account-export-minimize").addEventListener("click",()=>{
 $("account-export-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
     const options=accountExportOptions(),profile=state.profile,revision=state.workspaceRevision;
-    if(!options.purpose){$("account-export-purpose").focus();throw new Error(tr("Enter a collection purpose."));}
     const job=await json("account-export/start",options);
     if(revision!==state.workspaceRevision||profile!==state.profile)return;
     state.accountExportDirty=false;$("account-export-dialog").close();

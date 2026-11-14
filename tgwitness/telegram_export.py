@@ -1,5 +1,4 @@
 from datetime import datetime, timezone
-from html import escape
 from itertools import islice
 import json
 import re
@@ -42,7 +41,7 @@ def dates(value, key="date"):
     return {key: at.strftime("%Y-%m-%dT%H:%M:%S"), key + "_unixtime": str(int(at.timestamp()))}
 
 
-def rich_text(text, entities):
+def entity_spans(text, entities):
     boundaries, units = {0: 0}, 0
     for index, char in enumerate(text, 1):
         units += 2 if ord(char) > 0xFFFF else 1
@@ -60,6 +59,11 @@ def rich_text(text, entities):
             if source in item:
                 value[target] = item[source]
         spans.append((boundaries[start], boundaries[start + length], value))
+    return spans
+
+
+def rich_text(text, entities):
+    spans = entity_spans(text, entities)
     pieces, cursor = [], 0
     for start, end, value in sorted(spans, key=lambda s: (s[0], -s[1])):
         if start < cursor:
@@ -146,7 +150,7 @@ class DesktopExport:
             raise
 
     def index_messages(self):
-        self.index.execute("CREATE TABLE messages (chat INTEGER, id INTEGER, path TEXT, offset INTEGER, bytes INTEGER, PRIMARY KEY(chat,id))")
+        self.index.execute("CREATE TABLE messages (chat INTEGER, id INTEGER, path TEXT, offset INTEGER, bytes INTEGER, page INTEGER NOT NULL DEFAULT 1, PRIMARY KEY(chat,id))")
         for envelope in self.receipts:
             receipt = envelope["statement"]
             if receipt["category"] != "messages":
@@ -157,7 +161,7 @@ class DesktopExport:
                     if not raw:
                         break
                     row = json.loads(raw)
-                    self.index.execute("INSERT INTO messages VALUES (?,?,?,?,?)", (row["chat_id"], row["id"], receipt["data_file"], offset, len(raw)))
+                    self.index.execute("INSERT INTO messages (chat,id,path,offset,bytes) VALUES (?,?,?,?,?)", (row["chat_id"], row["id"], receipt["data_file"], offset, len(raw)))
         self.index.commit()
 
     def close(self):
@@ -261,65 +265,31 @@ class DesktopExport:
         yield b',"tgwitness":' + canonical({"job_id": self.job["job_id"], "options": self.job["options"],
             "coverage": self.coverage, "source": "data/*.jsonl", "file_hashes": "hashes/index.jsonl"}) + b"}\n"
 
-    @staticmethod
-    def head(title):
-        return ('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">'
-            '<title>' + escape(title) + '</title><style>body{font:16px/1.6 system-ui;margin:2rem auto;padding:0 1rem;max-width:850px;'
-            'color:#17212b;background:#eef2f5}article{background:white;border-radius:12px;padding:1rem;margin:1rem 0}'
-            'pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}small{color:#526575}a{color:#1263a1}'
-            'li{margin:.5rem 0}nav{display:flex;gap:2rem}</style><main><h1>' + escape(title) + '</h1>').encode()
-
     def html(self):
-        selected = [c for c in self.inventory["chats"] if c["selected"]]
-
-        def index():
-            yield self.head("Exported Telegram data")
-            yield ("<p>" + escape(NOTE) + '</p><p><a href="index.html">Acquisition details and coverage</a></p><ul>').encode()
-            for number, chat in enumerate(selected, 1):
-                yield (f'<li><a href="chats/chat_{number:03d}/messages.html">' + escape(chat.get("title") or str(chat["id"])) + "</a></li>").encode()
-            yield b"</ul></main></html>"
-        yield "export_results.html", index()
+        from .telegram_view import View, filename
+        view = View(self)
+        selected = [chat for chat in self.inventory["chats"] if chat["selected"]]
+        yield "export_results.html", view.index(selected)
         for number, chat in enumerate(selected, 1):
-            plan, size, count = [], 0, 0
-            for (length,) in self.index.execute("SELECT bytes FROM messages WHERE chat=? ORDER BY id", (chat["id"],)):
+            plan, size, count, first, last = [], 0, 0, 0, 0
+            for identifier, length in self.index.execute("SELECT id,bytes FROM messages WHERE chat=? ORDER BY id", (chat["id"],)):
                 if count and (count >= 500 or size + length > 512 * 1024):
-                    plan.append(count)
+                    plan.append((count, first, last))
                     size, count = 0, 0
+                if not count:
+                    first = identifier
                 size += length
                 count += 1
+                last = identifier
             if count or not plan:
-                plan.append(count)
-            pages = len(plan)
+                plan.append((count, first, last))
+            for page, (_, first, last) in enumerate(plan, 1):
+                self.index.execute("UPDATE messages SET page=? WHERE chat=? AND id BETWEEN ? AND ?", (page, chat["id"], first, last))
+            self.index.commit()
             rows = iter(self.rows(chat["id"]))
             try:
-                for page, count in enumerate(plan, 1):
+                for page, (count, _, _) in enumerate(plan, 1):
                     batch = list(islice(rows, count))
-                    filename = lambda n: "messages" + (str(n) if n > 1 else "") + ".html"
-
-                    def content(batch=batch, chat=chat, page=page, pages=pages):
-                        yield self.head(chat.get("title") or str(chat["id"]))
-                        yield b'<nav><a href="../../export_results.html">All chats</a>'
-                        if page > 1:
-                            yield f'<a href="{filename(page - 1)}">Previous</a>'.encode()
-                        if page < pages:
-                            yield f'<a href="{filename(page + 1)}">Next</a>'.encode()
-                        yield b"</nav>"
-                        for row in batch:
-                            value = message(row)
-                            yield (f'<article id="message{row["id"]}"><strong>' + escape(name(row.get("sender")) or str(row.get("from_id") or ""))
-                                + "</strong> <small>" + escape(value.get("date", "")) + ' UTC</small><pre>'
-                                + escape(row.get("text") or "") + "</pre>").encode()
-                            for attachment in row.get("attachments", []):
-                                path = attachment.get("file")
-                                if isinstance(path, str) and MEDIA_PATH.fullmatch(path):
-                                    yield f'<p><a href="../../{path}">Saved {escape(attachment["kind"])}</a></p>'.encode()
-                                    if attachment["kind"] == "photo":
-                                        yield f'<img src="../../{path}" alt="Photo" loading="lazy" style="max-width:100%;height:auto">'.encode()
-                                else:
-                                    yield ("<p>" + escape(attachment.get("outcome", "unavailable")) + ": "
-                                        + escape(attachment.get("reason", "")) + "</p>").encode()
-                            yield b"</article>"
-                        yield b"</main></html>"
-                    yield f"chats/chat_{number:03d}/{filename(page)}", content()
+                    yield f"chats/chat_{number:03d}/{filename(page)}", view.page(chat, batch, page, len(plan))
             finally:
                 rows.close()
