@@ -8855,7 +8855,6 @@
   "Runs": "Працює",
   "Runs attributed with high confidence": "Результати, що вважаються достовірними з високим ступенем впевненості",
   "Runs with high confidence": "Працює з високим рівнем надійності",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Збережіть чати та файли один раз. У фоновому режимі нічого не працює. Архів підписано, а скрипт verify.py перевіряє кожен файл у ньому.",
   "Saved by day": "Збережено за датою",
   "Saved records in this account": "Збережені записи в цьому обліковому записі",
   "Sender not recorded": "Відправник не фіксується",
@@ -9097,5 +9096,6 @@
   "Ended from TgWitness.": "Завершено з TgWitness.",
   "Telegram reports that the chat no longer exists.": "Telegram повідомляє, що чат більше не існує.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Захист ZIP-файлів паролем використовує WinZip AES (слабке розтягування ключа). Використовуйте довгу випадкову парольну фразу довжиною 20 і більше символів або виберіть «сильніше шифрування» для експорту конфіденційних даних.",
-  "Transport route checked for this connection.": "Перевірено маршрут передачі даних для цього з’єднання."
+  "Transport route checked for this connection.": "Перевірено маршрут передачі даних для цього з’єднання.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Чати та фотографії зберігаються один раз; інші файли обираються у розділі Запис і файли. У фоновому режимі нічого не працює. Архів підписано, а verify.py перевіряє кожен файл у ньому."
 }

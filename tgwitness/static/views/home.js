@@ -82,7 +82,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       const bar = svgNode('rect', {x, y: height - h, width: w, height: h, rx: Math.min(4, w / 2), class: 'home-bar'});
       if (v.messages === peak && h && !labelled) {
         labelled = true;
-        tick(Math.max(pad + 8, Math.min(width - pad - 8, x + w / 2)), 'middle', v.messages.toLocaleString(), 'home-tick home-peak', height - h - 5);
+        tick(Math.max(pad + 8, Math.min(width - pad - 8, x + w / 2)), 'middle', v.messages.toLocaleString(document.documentElement.lang||undefined), 'home-tick home-peak', height - h - 5);
       }
       const title = svgNode('title');
       title.textContent = v.day + ': ' + trn('{n} message', '{n} messages', v.messages) + ' · ' + tr('{n} edits', {n: v.edits}) + ' · ' + tr('{n} deletions', {n: v.deletions});
@@ -125,7 +125,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       if (percent !== null) {
         const bar = node('div', 'home-progress'), fill = node('span');
         fill.style.width = percent + '%'; bar.append(fill);
-        wrap.append(bar, node('small', '', tr('{done} of {total} messages', {done: d.captured.toLocaleString(), total: d.total.toLocaleString()})
+        wrap.append(bar, node('small', '', tr('{done} of {total} messages', {done: d.captured.toLocaleString(document.documentElement.lang||undefined), total: d.total.toLocaleString(document.documentElement.lang||undefined)})
           + (d.eta_seconds ? ' · ' + tr('about {minutes} min left', {minutes: Math.max(1, Math.round(d.eta_seconds / 60))}) : '')));
       }
     }
@@ -210,7 +210,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     const rows = [
       [tr('Collection'), !health ? tr('Checking…') : failing ? tr('Needs attention') + ': ' + failing : calm ? tr(calm) : tr('Needs attention') + (unsure ? ': ' + unsure : '')],
       [tr('Accounts'), String((state.profiles || []).length || 1)],
-      [tr('Saved records in this account'), (status.stats?.total || 0).toLocaleString()],
+      [tr('Saved records in this account'), (status.stats?.total || 0).toLocaleString(document.documentElement.lang||undefined)],
       [tr('Files waiting to download'), String(collector.media_pending || 0)],
     ];
     if (collector.disk_free_bytes != null) rows.push([tr('Free disk space'), humanSize(collector.disk_free_bytes)]);

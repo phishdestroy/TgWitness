@@ -8720,7 +8720,6 @@
   "Runs": "執行",
   "Runs attributed with high confidence": "被視為高度可信的執行結果",
   "Runs with high confidence": "運行時具備高度可靠性",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "只需將聊天記錄和檔案儲存一次。背景中不會有任何程式持續運行。檔案庫經過簽名，而 verify.py 會檢查其中的每個檔案。",
   "Saved by day": "按日期儲存",
   "Saved records in this account": "此帳戶中儲存的紀錄",
   "Sender not recorded": "未記錄發送者",
@@ -8953,5 +8952,6 @@
   "Ended from TgWitness.": "根據 TgWitness 記錄的結束狀態。",
   "Telegram reports that the chat no longer exists.": "Telegram 報告指出該對話已不存在。",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP 密碼保護採用 WinZip AES（弱鍵值拉伸）。請使用 20 個以上字元的長隨機密語，或針對敏感資料的匯出選擇「更強的加密」選項。",
-  "Transport route checked for this connection.": "已針對此連線檢查傳輸路徑。"
+  "Transport route checked for this connection.": "已針對此連線檢查傳輸路徑。",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "僅保存一次聊天記錄與照片；其他檔案則在 記錄和檔案 下進行選擇。背景中不會有任何程式持續運行。檔案庫經過簽名，且 verify.py 會檢查其中的每個檔案。"
 }

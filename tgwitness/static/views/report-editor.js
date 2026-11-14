@@ -145,7 +145,7 @@ export function createReportEditor({root,tr,onEdit}) {
     reset(){select('cover');mode('edit');profiles.open=false;overview.replaceChildren();dataStatus.textContent='';},
     summary(data){
       overview.replaceChildren(...[['Selected records',data.counts?.selected_records],['Chats',data.counts?.chats],['Observed message senders',data.counts?.participants]].map(([label,value])=>{
-        const card=make('div');card.append(make('strong',Number(value||0).toLocaleString()),make('span',tr(label)));return card;
+        const card=make('div');card.append(make('strong',Number(value||0).toLocaleString(document.documentElement.lang||undefined)),make('span',tr(label)));return card;
       }));
     }
   };

@@ -21,7 +21,7 @@ export function createReportSelection({root,tr,json,getOwner,ready,options,activ
   const steps=['report-data','report-content','report-preview'];
   const pages=[find('report-data'),find('report-content-step'),find('report-preview')];
   const editor=createReportEditor({root,tr,onEdit:()=>{if(step!==1)selectStep(1);}});
-  const count=value=>Number(value||0).toLocaleString();
+  const count=value=>Number(value||0).toLocaleString(document.documentElement.lang||undefined);
   const fields={chats:find('report-selection-chats'),senders:find('report-selection-senders')};
   const secretField=make('input');secretField.type='hidden';secretField.id='report-selection-secret-chats';fields.chats.after(secretField);
   const messagesField=make('input');messagesField.type='hidden';messagesField.id='report-selection-messages';messagesField.value='[]';secretField.after(messagesField);

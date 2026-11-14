@@ -332,6 +332,7 @@ kbd { font: 11px/1.4 var(--mono); }
 .login-card form { margin-top: 22px; }
 .login-card form label { margin-top: 0; }
 .login-card .full { min-height: 44px; margin-top: 16px; }
+#gate-sealed { display: inline-block; margin-top: 16px; }
 .gate-token-help { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); }
 .gate-token-help > summary { color: var(--text-2); font-size: 13px; font-weight: 550; }
 .gate-token-help .hint { margin-top: 8px; }

@@ -8720,7 +8720,6 @@
   "Runs": "実行",
   "Runs attributed with high confidence": "高い信頼度で特定された実行",
   "Runs with high confidence": "高い信頼性で動作します",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "チャットやファイルは一度保存するだけで済みます。バックグラウンドで常時動作するプロセスはありません。アーカイブには署名が付与されており、verify.pyがその中のすべてのファイルをチェックします。",
   "Saved by day": "日別保存",
   "Saved records in this account": "このアカウントに保存された記録",
   "Sender not recorded": "送信者は記録されません",
@@ -8953,5 +8952,6 @@
   "Ended from TgWitness.": "TgWitness による終了。",
   "Telegram reports that the chat no longer exists.": "Telegramは、そのチャットはもはや存在しないと報告しています。",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIPのパスワード保護にはWinZip AES（弱いキーストレッチ）が使用されます。機密性の高いデータをエクスポートする際は、20文字以上の長いランダムなパスフレーズを使用するか、「より強力な暗号化」を選択してください。",
-  "Transport route checked for this connection.": "この接続について、転送経路が確認されました。"
+  "Transport route checked for this connection.": "この接続について、転送経路が確認されました。",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "チャットと写真は一度だけ保存され、その他のファイルは 記録とファイル で選択されます。バックグラウンドで実行され続けるプロセスはありません。アーカイブには署名が付与されており、verify.py はその中のすべてのファイルをチェックします。"
 }

@@ -25,7 +25,7 @@ export function createParameters(context) {
     else entry.field.value = entry.item.kind === "lines" ? next.join("\n") : String(next);
   };
   const formatted = value => Array.isArray(value) ? trn("{n} line", "{n} lines", value.length)
-    : typeof value === "boolean" ? tr(value ? "On" : "Off") : Number(value).toLocaleString();
+    : typeof value === "boolean" ? tr(value ? "On" : "Off") : Number(value).toLocaleString(document.documentElement.lang||undefined);
   const draft = () => Object.fromEntries([...fields].filter(([, entry]) => !equal(value(entry), entry.item.value))
     .map(([key, entry]) => [key, value(entry)]));
 
@@ -35,7 +35,7 @@ export function createParameters(context) {
     const number = Number(entry.field.value);
     return !entry.field.value.trim() || !Number.isInteger(number) || number < entry.item.low || number > entry.item.high
       ? tr("Enter a whole number from {low} to {high}.", {
-        low: entry.item.low.toLocaleString(), high: entry.item.high.toLocaleString()}) : "";
+        low: entry.item.low.toLocaleString(document.documentElement.lang||undefined), high: entry.item.high.toLocaleString(document.documentElement.lang||undefined)}) : "";
   }
 
   function impact(entry) {
@@ -151,7 +151,7 @@ export function createParameters(context) {
         const marker = make("span", "parameter-changed", tr("Changed")); label.append(marker);
         if (item.help) {const help = make("p", "hint", tr(item.help)); help.id = id + "-help"; row.append(help);}
         const meta = make("p", "hint parameter-meta", [item.kind === "int"
-          ? tr("Range: {low}–{high} {unit}", {low: item.low.toLocaleString(), high: item.high.toLocaleString(), unit: tr(item.unit)}) : "",
+          ? tr("Range: {low}–{high} {unit}", {low: item.low.toLocaleString(document.documentElement.lang||undefined), high: item.high.toLocaleString(document.documentElement.lang||undefined), unit: tr(item.unit)}) : "",
           tr("Default: {value}", {value: formatted(item.default) + (item.kind === "int" && item.unit ? " " + tr(item.unit) : "")})].filter(Boolean).join(" · "));
         meta.id = id + "-meta";
         const reset = make("button", "text-link", tr("Restore default")); reset.type = "button"; reset.dataset.parameterReset = item.key;

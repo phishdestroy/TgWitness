@@ -8765,7 +8765,6 @@
   "Runs": "Ishga tushadi",
   "Runs attributed with high confidence": "Yuqori ishonchlilik darajasiga ega deb baholangan jarayonlar",
   "Runs with high confidence": "Yuqori ishonchlilik bilan ishlaydi",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Suhbatlar va fayllarni faqat bir marta saqlang. Orqa fonda hech narsa doimiy ravishda ishlamaydi. Arxiv imzolangan va verify.py undagi har bir faylni tekshiradi.",
   "Saved by day": "Kun bo'yicha saqlangan",
   "Saved records in this account": "Ushbu hisobda saqlangan yozuvlar",
   "Sender not recorded": "Jo'natuvchi yozib olinmagan",
@@ -9001,5 +9000,6 @@
   "Ended from TgWitness.": "TgWitness tomonidan yakunlandi.",
   "Telegram reports that the chat no longer exists.": "Telegram suhbat endi mavjud emasligini xabar beradi.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP parol himoyasi WinZip AES (zaif kalitni cho'zish) usulidan foydalanadi. 20+ belgili uzun tasodifiy parol iborasidan foydalaning yoki sezgir eksportlar uchun kuchliroq shifrlashni tanlang.",
-  "Transport route checked for this connection.": "Ushbu ulanish uchun transport yo'li tekshirildi."
+  "Transport route checked for this connection.": "Ushbu ulanish uchun transport yo'li tekshirildi.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Suhbatlar va fotosuratlarni bir marta saqlang; boshqa fayllar Yozuv va fayllar ostida tanlanadi. Orqa fonda hech narsa ishlamaydi. Arxiv imzolangan va verify.py undagi har bir faylni tekshiradi."
 }

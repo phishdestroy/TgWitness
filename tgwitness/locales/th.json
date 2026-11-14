@@ -8720,7 +8720,6 @@
   "Runs": "ทำงาน",
   "Runs attributed with high confidence": "ผลลัพธ์ที่ได้รับการประเมินว่ามีความน่าเชื่อถือสูง",
   "Runs with high confidence": "ทำงานด้วยความน่าเชื่อถือสูง",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "บันทึกการสนทนาและไฟล์เพียงครั้งเดียว ไม่มีโปรแกรมใดทำงานต่อเนื่องในพื้นหลัง ไฟล์เก็บถาวรได้รับการลงนาม และโปรแกรม verify.py จะตรวจสอบไฟล์ทุกไฟล์ภายในนั้น",
   "Saved by day": "จัดเก็บตามวัน",
   "Saved records in this account": "บันทึกที่เก็บไว้ในบัญชีนี้",
   "Sender not recorded": "ผู้ส่งไม่ถูกบันทึก",
@@ -8953,5 +8952,6 @@
   "Ended from TgWitness.": "สิ้นสุดจากTgWitness",
   "Telegram reports that the chat no longer exists.": "Telegram รายงานว่าการสนทนานี้ไม่มีอยู่อีกต่อไป",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "การป้องกันด้วยรหัสผ่าน ZIP ใช้ WinZip AES (การขยายกุญแจที่อ่อนแอ) ให้ใช้คำผ่านแบบสุ่มที่ยาวอย่างน้อย 20 ตัวอักษร หรือเลือก \"การเข้ารหัสที่แข็งแกร่งกว่า\" สำหรับการส่งออกข้อมูลที่ละเอียดอ่อน",
-  "Transport route checked for this connection.": "ได้ตรวจสอบเส้นทางขนส่งสำหรับการเชื่อมต่อนี้แล้ว"
+  "Transport route checked for this connection.": "ได้ตรวจสอบเส้นทางขนส่งสำหรับการเชื่อมต่อนี้แล้ว",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "บันทึกการสนทนาและรูปภาพเพียงครั้งเดียว; ไฟล์อื่น ๆ จะถูกเลือกภายใต้ การบันทึกและไฟล์ ไม่มีกระบวนการใดที่ทำงานในพื้นหลังอย่างต่อเนื่อง ไฟล์เก็บถาวรได้รับการลงนาม และ verify.py จะตรวจสอบทุกไฟล์ภายในนั้น"
 }

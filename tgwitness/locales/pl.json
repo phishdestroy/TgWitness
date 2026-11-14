@@ -8855,7 +8855,6 @@
   "Runs": "Działa",
   "Runs attributed with high confidence": "Operacje uznane za wiarygodne z wysokim stopniem pewności",
   "Runs with high confidence": "Działa z wysokim poziomem pewności",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Wystarczy raz zapisać czaty i pliki. Żadna aplikacja nie działa w tle. Archiwum jest podpisane, a skrypt `verify.py` sprawdza każdy plik w nim zawarty.",
   "Saved by day": "Zapisane według dnia",
   "Saved records in this account": "Zapisane nagrania na tym koncie",
   "Sender not recorded": "Nadawca nie został zarejestrowany",
@@ -9097,5 +9096,6 @@
   "Ended from TgWitness.": "Zakończono z poziomu TgWitness.",
   "Telegram reports that the chat no longer exists.": "Telegram informuje, że czat już nie istnieje.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Ochrona hasłem plików ZIP wykorzystuje WinZip AES (słabe rozciąganie klucza). Należy używać długiego, losowego hasła składającego się z co najmniej 20 znaków lub wybrać silniejsze szyfrowanie w przypadku eksportu poufnych danych.",
-  "Transport route checked for this connection.": "Sprawdzono trasę transportową dla tego połączenia."
+  "Transport route checked for this connection.": "Sprawdzono trasę transportową dla tego połączenia.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Czat i zdjęcia zapisuje się jednorazowo; pozostałe pliki wybiera się w sekcji Zapis i pliki. Żadna operacja nie działa w tle. Archiwum jest podpisane, a verify.py sprawdza każdy plik w nim zawarty."
 }

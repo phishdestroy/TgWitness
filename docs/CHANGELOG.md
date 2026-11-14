@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Panel: counts on every page use the panel language's number format, not the browser's. The **Just download** goal says that it saves chats and photos and where other files are chosen. The capture link on the sign-in screen no longer touches the button above it.
 - Journal and **Pseudo-secret**: how a Secret Chat ended, its acceptance in TgWitness and the route check are shown in the panel language. The password hint for ZIP exports names the stronger encryption offered beside it. `verify.py unseal-password` says that the password is wrong or the file was changed instead of printing `InvalidTag`. The daily chart keeps its date labels in right-to-left languages. Russian text uses one word for the handover extract.
 - Verifier: the readable answer lists each timestamp service once, with the number of checkpoints and their time range, instead of one entry for every proof; a journal with 33 checkpoints went from about 1,100 lines to about 180. A Bitcoin timestamp confirmed with `--check-bitcoin` is shown as confirmed. Observation periods, gaps and session counts are shortened to the first ten with a count of the rest, and times read `2026-11-14 01:06:05 UTC`. Timestamp warnings are translated.
 - Evidence, chat and handover archives: `README.txt` opens with what the archive is and lists `analytics.json`; the verification steps are in `START_HERE.txt` only.

@@ -45,10 +45,10 @@ export function createProfileCollection({json,tr,owner,active,canCollect,formatT
     start.disabled=working||occupied;scope.disabled=working||occupied;for(const input of options.querySelectorAll('input'))input.disabled=working||occupied;
     status.replaceChildren();actions.replaceChildren();if(!data||state==='idle')return;
     const counts=data.counts,done=(counts.complete||0)+(counts.partial||0),summary=node('div','','profile-collection-summary');
-    summary.append(node('span',tr(phases[state]||state),'profile-phase '+state),node('strong',`${done.toLocaleString()} / ${(counts.total||0).toLocaleString()}`),node('span',tr('People'),'hint'));status.append(summary);
+    summary.append(node('span',tr(phases[state]||state),'profile-phase '+state),node('strong',`${done.toLocaleString(document.documentElement.lang||undefined)} / ${(counts.total||0).toLocaleString(document.documentElement.lang||undefined)}`),node('span',tr('People'),'hint'));status.append(summary);
     const progress=node('progress');progress.max=Math.max(1,counts.total||0);progress.setAttribute('aria-label',tr('People'));if(data.discovery_complete||state!=='running')progress.value=done;status.append(progress);
     const numbers=node('div','','profile-collection-counts');
-    for(const [title,value] of [['Completed',counts.complete||0],['Incomplete',counts.partial||0],['Profile photos',counts.avatars||0],['Gifts',counts.gifts||0]])numbers.append(node('span',`${tr(title)}: ${Number(value).toLocaleString()}`));status.append(numbers);
+    for(const [title,value] of [['Completed',counts.complete||0],['Incomplete',counts.partial||0],['Profile photos',counts.avatars||0],['Gifts',counts.gifts||0]])numbers.append(node('span',`${tr(title)}: ${Number(value).toLocaleString(document.documentElement.lang||undefined)}`));status.append(numbers);
     if(data.current_stage)status.append(node('p',tr(stages[data.current_stage]||data.current_stage)+(data.current_user?' · ID '+data.current_user:''),'hint'));
     if(data.reason){let text=tr(reasons[data.reason]||'Collection could not start. Check the connection and selected chats.');if(state==='running'&&data.wait_until>Date.now()/1000)text+=' '+formatTime(new Date(data.wait_until*1000).toISOString());status.append(node('p',text,'hint'));}
     const sources=node('details','','profile-collection-sources');sources.append(node('summary',tr('Sources')+' · '+data.sources.length));

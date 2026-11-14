@@ -8720,7 +8720,6 @@
   "Runs": "Chạy",
   "Runs attributed with high confidence": "Các kết quả được đánh giá có độ tin cậy cao",
   "Runs with high confidence": "Hoạt động với độ tin cậy cao",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Chỉ cần lưu các cuộc trò chuyện và tệp tin một lần. Không có quá trình nào chạy ngầm. Kho lưu trữ được ký số, và tệp `verify.py` sẽ kiểm tra từng tệp tin trong đó.",
   "Saved by day": "Lưu theo ngày",
   "Saved records in this account": "Các bản ghi đã lưu trong tài khoản này",
   "Sender not recorded": "Người gửi không được ghi lại",
@@ -8953,5 +8952,6 @@
   "Ended from TgWitness.": "Kết thúc từ TgWitness.",
   "Telegram reports that the chat no longer exists.": "Telegram thông báo rằng cuộc trò chuyện đó không còn tồn tại.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Tính năng bảo vệ bằng mật khẩu ZIP sử dụng WinZip AES (kỹ thuật kéo dài khóa yếu). Hãy sử dụng cụm mật khẩu ngẫu nhiên dài từ 20 ký tự trở lên, hoặc chọn phương thức mã hóa mạnh hơn cho các tệp xuất nhạy cảm.",
-  "Transport route checked for this connection.": "Tuyến truyền tải đã được kiểm tra cho kết nối này."
+  "Transport route checked for this connection.": "Tuyến truyền tải đã được kiểm tra cho kết nối này.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Lưu các cuộc trò chuyện và ảnh một lần; các tệp khác được chọn trong Ghi và tệp. Không có gì tiếp tục chạy ở chế độ nền. Kho lưu trữ được ký tên, và verify.py kiểm tra mọi tệp trong đó."
 }
