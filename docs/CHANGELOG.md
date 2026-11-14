@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- Live journal streams recheck access after reading and delivering Case Board
+  updates. Revoked sessions and reduced chat permissions cannot receive a prepared
+  journal batch from the previous access scope.
+- Case certificates state that copied timestamp receipts still need independent
+  verification of their signatures, trust chains and checkpoint binding.
 - Concurrent connection restores share one client and one connection attempt per
   workspace. Interrupted setup releases waiting callers; an attempt whose credentials,
   client or authorization state changed cannot report success for the replacement.
