@@ -9473,5 +9473,6 @@
   "Only with the Mark stories as viewed button": "רק באמצעות הכפתור \"סימון סיפורים כ\"נצפו\"\"",
   "Mark as opened": "סמן מדיה כפתוחה",
   "Workspace settings": "הגדרות סביבת העבודה",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "מכל זה מכיל {n} קבצים. EU DSS בהגדרות ברירת המחדל מסרב לקבל מכלים המכילים יותר מ-1,000 קבצים."
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "מכל זה מכיל {n} קבצים. EU DSS בהגדרות ברירת המחדל מסרב לקבל מכלים המכילים יותר מ-1,000 קבצים.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram מחליט מתי הצד השני מקבל אישור קריאה: מיד, או רק יחד עם ההודעה הבאה שהחשבון הזה ישלח בצ'אט."
 }

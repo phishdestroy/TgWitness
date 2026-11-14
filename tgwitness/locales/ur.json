@@ -9425,5 +9425,6 @@
   "Only with the Mark stories as viewed button": "صرف \"کہانیوں کو دیکھا ہوا نشان زد کریں\" بٹن کے ساتھ",
   "Mark as opened": "میڈیا کو کھلا ہوا نشان زد کریں",
   "Workspace settings": "ورک اسپیس کی ترتیبات",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "یہ کنٹینر {n} فائلیں رکھتا ہے۔ ڈیفالٹ ترتیبات کے ساتھ EU DSS 1000 سے زیادہ فائلوں والے کنٹینرز کو مسترد کر دیتا ہے۔"
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "یہ کنٹینر {n} فائلیں رکھتا ہے۔ ڈیفالٹ ترتیبات کے ساتھ EU DSS 1000 سے زیادہ فائلوں والے کنٹینرز کو مسترد کر دیتا ہے۔",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram فیصلہ کرتا ہے کہ دوسری جانب ریڈ ریسیٹ کب وصول کرے: فوری طور پر، یا صرف اس اکاؤنٹ کے اگلے پیغام کے ساتھ چیٹ میں۔"
 }

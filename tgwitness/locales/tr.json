@@ -9425,5 +9425,6 @@
   "Only with the Mark stories as viewed button": "Yalnızca \"Hikayeleri okundu olarak işaretle\" düğmesi ile",
   "Mark as opened": "Medya dosyasını açılmış olarak işaretle",
   "Workspace settings": "Çalışma alanının ayarları",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Bu konteyner {n} dosya içerir. Varsayılan ayarlarla çalışan EU DSS, 1000'den fazla dosya içeren konteynerleri kabul etmez."
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Bu konteyner {n} dosya içerir. Varsayılan ayarlarla çalışan EU DSS, 1000'den fazla dosya içeren konteynerleri kabul etmez.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram, karşı tarafın okundu bildirimini ne zaman alacağına karar verir: hemen mi, yoksa bu hesabın sohbetteki bir sonraki mesajıyla birlikte mi?"
 }

@@ -9377,5 +9377,6 @@
   "Only with the Mark stories as viewed button": "ใช้ได้เฉพาะกับปุ่ม \"ทำเครื่องหมายว่าได้อ่านแล้ว\" เท่านั้น",
   "Mark as opened": "ทำเครื่องหมายสื่อว่าเปิดแล้ว",
   "Workspace settings": "การตั้งค่าพื้นที่ทำงาน",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "คอนเทนเนอร์นี้เก็บไฟล์{n} ไฟล์ EU DSS ด้วยตั้งค่าเริ่มต้นจะปฏิเสธคอนเทนเนอร์ที่มีไฟล์มากกว่า 1000 ไฟล์"
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "คอนเทนเนอร์นี้เก็บไฟล์{n} ไฟล์ EU DSS ด้วยตั้งค่าเริ่มต้นจะปฏิเสธคอนเทนเนอร์ที่มีไฟล์มากกว่า 1000 ไฟล์",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram จะตัดสินใจว่าฝ่ายตรงข้ามจะได้รับใบยืนยันการอ่านเมื่อใด: ทันที หรือเพียงเมื่อส่งพร้อมกับข้อความถัดไปของบัญชีนี้ในแชท"
 }

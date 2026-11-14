@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout11').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout12').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -2248,14 +2248,14 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=11").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=12").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
       (await exportsReady).select('settings');reportSelection?.selectSecrets(id===null?[]:[id]);}}));
   await (await secretChatsLoading).enter();
 }
-import("./views/visibility.js?v=1").then(({createVisibility})=>createVisibility({json,tr,node,icon,toast,busy,may:permission=>may(permission)&&!state.status?.demo}).attachChat({
+import("./views/visibility.js?v=2").then(({createVisibility})=>createVisibility({json,tr,node,icon,toast,busy,may:permission=>may(permission)&&!state.status?.demo}).attachChat({
   chat:()=>state.view==="chats"&&!window.TGW_ONLINE_DEMO&&!state.status?.demo&&!$("chat-main").hidden&&state.chat!==null?state.chat:null,
   header:document.querySelector("#chat-main .chat-actions"),title:$("chat-sub"),composer:$("chat-message"),feed:$("chat-feed")})).catch(()=>{});
 function renderTargets() { sourcesView?.renderTargets(); }

@@ -19,6 +19,7 @@ export function createVisibility(deps) {
   const PRESET = [['invisible', 'Invisible'], ['visible', 'Visible like a regular app'], ['custom', 'Custom']];
   const SCHEDULED = 'Scheduled sending is not offered: such messages carry a from_scheduled mark that the other side can see through the Telegram API.';
   const SECRET_WARNING = 'Marking a Secret Chat as read or its messages as opened starts the self-destruct timers on the other side. TgWitness keeps its own copies.';
+  const DELIVERY = 'Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.';
   const SECRET_SILENT = 'Send without sound is not available in Secret Chats: the protocol module used here cannot set it.';
   const label = (list, value) => tr((list.find(([key]) => key === value) || [value, String(value)])[1]);
   const visible = fields => fields.read_receipts === 'on_open' || fields.read_receipts === 'on_reply' || fields.typing !== 'hidden'
@@ -64,6 +65,7 @@ export function createVisibility(deps) {
       const title = node('h3', 'vis-title');
       title.append(icon('eye'), node('span', '', tr('What the other side sees')));
       box.append(title, node('p', 'hint', tr('Chooses what this account lets the other side of a chat see. Everything is invisible unless you choose otherwise here; each read receipt, opened-media notice, story view and typing status sent from the panel is recorded in the journal.')));
+      box.append(node('p', 'hint', tr(DELIVERY)));
       const save = async (patch, input) => {
         const next = {...chosen, ...patch};
         await run(input, async () => {data = await json('visibility', {workspace: next}); draw(); toast(tr('Saved.'));});
@@ -133,6 +135,7 @@ export function createVisibility(deps) {
       const fields = data.effective, override = data.override || {}, editable = may('settings') && !data.workspace.invisible;
       const acting = may('interact') && !data.interaction_problem;
       panel.append(node('strong', '', tr('What the other side sees')), node('p', 'vis-opening', openingText(fields)));
+      if (!secret && fields.read_receipts !== 'never') panel.append(node('p', 'hint', tr(DELIVERY)));
       if (data.workspace.invisible) panel.append(node('p', 'notice', tr('Invisible is on for this workspace: nothing below is sent until it is turned off.')));
       const save = async (next, input) => run(input, async () => {
         data = await json('visibility', {chat_id: chatId, secret, override: next}); draw(); toast(tr('Saved.'));

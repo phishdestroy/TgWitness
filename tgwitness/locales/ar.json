@@ -9617,5 +9617,6 @@
   "Only with the Mark stories as viewed button": "فقط باستخدام الزر «وضع علامة \"تمت مشاهدته\" على القصص»",
   "Mark as opened": "وضع علامة «مفتوح» على الوسائط",
   "Workspace settings": "إعدادات مساحة العمل",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "يحتوي هذا الحاوية على {n} ملفًا. يرفض EU DSS، عند استخدام الإعدادات الافتراضية، الحاويات التي تحتوي على أكثر من 1000 ملف."
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "يحتوي هذا الحاوية على {n} ملفًا. يرفض EU DSS، عند استخدام الإعدادات الافتراضية، الحاويات التي تحتوي على أكثر من 1000 ملف.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "يقرر Telegram متى يتلقى الطرف الآخر إشعار القراءة: فورًا، أو فقط مع الرسالة التالية التي يرسلها هذا الحساب في المحادثة."
 }

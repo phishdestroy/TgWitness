@@ -9425,5 +9425,6 @@
   "Only with the Mark stories as viewed button": "केवल \"कहानियों को देखा हुआ चिह्नित करें\" बटन के साथ",
   "Mark as opened": "मीडिया को खुला हुआ चिह्नित करें",
   "Workspace settings": "कार्यक्षेत्र की सेटिंग्स",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "इस कंटेनर में {n} फ़ाइलें हैं। डिफ़ॉल्ट सेटिंग्स के साथ EU DSS 1000 से अधिक फ़ाइलों वाले कंटेनरों को अस्वीकार कर देता है।"
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "इस कंटेनर में {n} फ़ाइलें हैं। डिफ़ॉल्ट सेटिंग्स के साथ EU DSS 1000 से अधिक फ़ाइलों वाले कंटेनरों को अस्वीकार कर देता है।",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram यह तय करता है कि दूसरी तरफ़ को रीड रसीद कब मिलती है: तुरंत, या चैट में इस खाते के अगले संदेश के साथ ही।"
 }

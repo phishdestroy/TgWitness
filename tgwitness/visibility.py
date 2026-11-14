@@ -47,7 +47,8 @@ STATUS = {"succeeded": "Telegram accepted the request.",
           "unknown": "The outcome is unknown: Telegram may or may not have applied it."}
 SETTINGS_MEANING = ("What this account lets the other side of a chat see. Read receipts, opened-media notices, story "
                     "views and typing are sent only as chosen here, and each one sent is recorded.")
-READ_MEANING = "Sent from the panel: the other side sees these messages as read."
+READ_MEANING = ("Sent from the panel: asks Telegram to show these messages to the other side as read. Telegram decides "
+                "when the other side receives it: at once, or only with this account's next message in the chat.")
 CONTENT_MEANING = ("Sent from the panel: the other side sees that these one-time media were opened or these voice or "
                    "video messages were played.")
 STORY_MEANING = "Sent from the panel: the other side sees that this account viewed its stories up to this ID."

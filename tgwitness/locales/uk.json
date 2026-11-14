@@ -9521,5 +9521,6 @@
   "Only with the Mark stories as viewed button": "Тільки за допомогою кнопки «Позначити історії як переглянуті»",
   "Mark as opened": "Позначити медіа як відкриті",
   "Workspace settings": "Налаштування робочого простору",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Цей контейнер містить {n} файлів. EU DSS із налаштуваннями за замовчуванням відхиляє контейнери, що містять понад 1000 файлів."
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Цей контейнер містить {n} файлів. EU DSS із налаштуваннями за замовчуванням відхиляє контейнери, що містять понад 1000 файлів.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram вирішує, коли інша сторона отримає підтвердження прочитання: одразу чи лише разом із наступним повідомленням цього облікового запису в чаті."
 }

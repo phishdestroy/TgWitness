@@ -9425,5 +9425,6 @@
   "Only with the Mark stories as viewed button": "Faqat \"Hikoyalarni ko'rilgan deb belgilash\" tugmasi bilan",
   "Mark as opened": "Media ochilgan deb belgilash",
   "Workspace settings": "Ish maydoni sozlamalari",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Ushbu konteynerda {n} ta fayl mavjud. EU DSS standart sozlamalar bilan 1000 tadan ortiq faylli konteynerlarni rad etadi."
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Ushbu konteynerda {n} ta fayl mavjud. EU DSS standart sozlamalar bilan 1000 tadan ortiq faylli konteynerlarni rad etadi.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram qarshi tomon o'qilganlik haqidagi kvitansiyani qachon olishini belgilaydi: darhol yoki faqat ushbu hisobning chatdagi keyingi xabari bilan birga."
 }

@@ -9377,5 +9377,6 @@
   "Only with the Mark stories as viewed button": "「ストーリーを「既読」にする」ボタンを使用する場合のみ",
   "Mark as opened": "メディアを「開封済み」としてマークする",
   "Workspace settings": "ワークスペースの設定",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "このコンテナには{n}個のファイルが含まれています。EU DSSはデフォルト設定では、1000個を超えるファイルを含むコンテナを拒否します。"
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "このコンテナには{n}個のファイルが含まれています。EU DSSはデフォルト設定では、1000個を超えるファイルを含むコンテナを拒否します。",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegramは、相手が既読通知を受け取るタイミングを決定します。それは、即座に、あるいはこのアカウントがチャットで次に送信するメッセージと一緒にのみ、という形です。"
 }

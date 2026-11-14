@@ -9425,5 +9425,6 @@
   "Only with the Mark stories as viewed button": "Nur mit der Schaltfläche „Beiträge als gelesen markieren“",
   "Mark as opened": "Medien als geöffnet markieren",
   "Workspace settings": "Einstellungen des Arbeitsbereichs",
-  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Dieser Container enthält {n} Dateien. EU DSS lehnt bei Standardeinstellungen Container mit mehr als 1000 Dateien ab."
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Dieser Container enthält {n} Dateien. EU DSS lehnt bei Standardeinstellungen Container mit mehr als 1000 Dateien ab.",
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram entscheidet, wann die andere Seite eine Lesebestätigung erhält: sofort oder erst mit der nächsten Nachricht dieses Kontos in dem Chat."
 }
