@@ -4362,12 +4362,24 @@ class Collector:
                 finally:
                     self.release_export(owner)
 
+    def snapshot_restriction(self, entity):
+        facts = {}
+        for name in ("restricted", "left", "broadcast", "scam", "fake", "noforwards"):
+            if getattr(entity, name, None) is True:
+                facts[name] = True
+        reasons = [{"platform": getattr(reason, "platform", None), "reason": getattr(reason, "reason", None),
+                    "text": getattr(reason, "text", None)} for reason in getattr(entity, "restriction_reason", None) or []]
+        if reasons:
+            facts["restriction_reasons"] = reasons
+        return facts
+
     async def _snapshot(self, chat_id, limit, entity=None, origin=None, before_id=None):
         if not self.selected(chat_id):
             raise ValueError("Enable this target before taking a history snapshot.")
         await self.restore()
         entity = entity or await self.resolve_target(chat_id)
         count, seen, oldest = 0, 0, None
+        skipped_own, already_recorded = 0, 0
         with self.store.reading() as db:
             request_started_seq = db.execute("SELECT coalesce(max(seq),0) FROM events").fetchone()[0]
         self.store.append("snapshot.started", {"limit": limit, "meaning": "current visible history",
@@ -4385,19 +4397,29 @@ class Collector:
                 previous = message.id
                 seen, oldest = seen + 1, message.id
                 if origin and self.own_skipped(message):
+                    skipped_own += 1
                     continue
                 if origin and self.store.message_state(chat_id, message.id)["content"]:
+                    already_recorded += 1
                     continue
                 await self.capture_message(message, "message.snapshot", chat_id,
                                            source=origin + "_snapshot" if origin and origin != "panel" else None,
                                            acquisition={"request_started_seq": request_started_seq})
                 count += 1
         except BaseException as exc:
-            self.store.append("snapshot.interrupted", {"captured": count, "requested": limit,
+            self.store.append("snapshot.interrupted", {"captured": count, "requested": limit, "returned": seen,
+                                                      "skipped_own": skipped_own, "already_recorded": already_recorded,
                                                       "error_type": type(exc).__name__}, chat_id)
             raise
-        self.store.append("snapshot.completed", {"captured": count, "requested": limit,
-                                                 "reconstructed_missed_events": False}, chat_id)
+        empty = {}
+        if count == 0:
+            if seen == 0:
+                empty = {"telegram_returned_none": True, **self.snapshot_restriction(entity)}
+            elif already_recorded == seen:
+                empty = {"all_already_recorded": seen}
+        self.store.append("snapshot.completed", {"captured": count, "requested": limit, "returned": seen,
+                                                 "skipped_own": skipped_own, "already_recorded": already_recorded,
+                                                 "reconstructed_missed_events": False, **empty}, chat_id)
         return {"captured": count, "requested": limit, "returned": seen, "oldest_id": oldest}
 
     def export_busy(self):
