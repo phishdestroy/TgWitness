@@ -8875,5 +8875,11 @@
   "Stopped before acquisition completed.": "取得が完了する前に停止しました。",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "チャットの受諾、開始、返信はTelegramのアクションです。これらを使用するには、[設定] → [目標] で別の目標を選択してください。",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "新しいメッセージとその変更内容を、受信者が確認できる独立したタイムスタンプ付きで保持します。写真や短い動画も保存します。パネルからでも、チャットの作成、参加、招待の受諾が可能です。Telegram外からのリクエストが必要です。",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "裁判所や当局向け：1 GBまでのすべてのファイルを保存し、書き込み時に各記録を、受信者が確認する独立したタイムスタンプ付きで検証します。パネルからのチャットの送信、参加、受諾は無効になっています。Telegram外からのリクエストが必要です。"
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "裁判所や当局向け：1 GBまでのすべてのファイルを保存し、書き込み時に各記録を、受信者が確認する独立したタイムスタンプ付きで検証します。パネルからのチャットの送信、参加、受諾は無効になっています。Telegram外からのリクエストが必要です。",
+  "Telegram security notices read": "Telegramのセキュリティに関する注意事項には次のように記載されています",
+  "Session key fingerprint recorded": "セッションキーのフィンガープリントが記録されました",
+  "Other sessions at start": "開始時のその他のセッション",
+  "Telegram service notices before observation: {n}": "観察前のTelegramサービスからの通知：{n}",
+  "Key ID {id}": "キーID {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "その他のログイン済みセッション：{n}。各セッションは個別に更新情報を受け取り、このアカウントのメッセージを送信、編集、削除することもできます。"
 }

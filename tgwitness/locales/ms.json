@@ -8875,5 +8875,11 @@
   "Stopped before acquisition completed.": "Dihentikan sebelum pemerolehan selesai.",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "Menerima, memulakan dan menjawab sembang adalah tindakan Telegram. Untuk menggunakannya, pilih matlamat lain di bawah Tetapan → Matlamat.",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "Menyimpan mesej baru dan perubahan mereka dengan cap masa berasingan yang disemak oleh penerima. Menyimpan foto dan video pendek. Anda masih boleh menulis, menyertai dan menerima sembang daripada panel. Perlu permintaan di luar Telegram.",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "Untuk mahkamah atau pihak berkuasa: menyimpan setiap fail sehingga 1 GB dan mengesahkan setiap rekod semasa ia ditulis, dengan cap masa bebas yang disahkan oleh penerima. Penghantaran, penyertaan dan penerimaan sembang daripada panel dilumpuhkan. Memerlukan permintaan di luar Telegram."
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "Untuk mahkamah atau pihak berkuasa: menyimpan setiap fail sehingga 1 GB dan mengesahkan setiap rekod semasa ia ditulis, dengan cap masa bebas yang disahkan oleh penerima. Penghantaran, penyertaan dan penerimaan sembang daripada panel dilumpuhkan. Memerlukan permintaan di luar Telegram.",
+  "Telegram security notices read": "Notis keselamatan Telegram berbunyi",
+  "Session key fingerprint recorded": "Cap jejarian kunci sesi direkodkan",
+  "Other sessions at start": "Sesi lain di permulaan",
+  "Telegram service notices before observation: {n}": "Notis perkhidmatan Telegram sebelum pemerhatian: {n}",
+  "Key ID {id}": "ID Kunci {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Sesi log masuk lain: {n}. Setiap satu menerima kemas kini secara berasingan dan juga boleh menghantar, menyunting atau memadam mesej akaun ini."
 }

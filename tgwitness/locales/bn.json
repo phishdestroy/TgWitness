@@ -8923,5 +8923,11 @@
   "Stopped before acquisition completed.": "অধিগ্রহণ সম্পন্ন হওয়ার আগেই থামানো হয়েছে।",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "চ্যাট গ্রহণ, শুরু এবং উত্তর দেওয়া হল টেলিগ্রাম অ্যাকশন। এগুলো ব্যবহার করতে সেটিংস → গোল-এ গিয়ে অন্য একটি গোল নির্বাচন করুন।",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "প্রাপ্তকারী যাচাই করার জন্য স্বতন্ত্র টাইমস্ট্যাম্পসহ নতুন বার্তা এবং সেগুলোর পরিবর্তন সংরক্ষণ করে। ছবি এবং ছোট ভিডিও সংরক্ষণ করে। আপনি প্যানেল থেকে চ্যাট লিখতে, যোগ দিতে এবং গ্রহণ করতে পারবেন। Telegram-এর বাইরে অনুরোধের প্রয়োজন।",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "আদালত বা কর্তৃপক্ষের জন্য: ১ জিবি পর্যন্ত প্রতিটি ফাইল সংরক্ষণ করে এবং লেখার সময় প্রতিটি রেকর্ড স্বতন্ত্র টাইমস্ট্যাম্পের মাধ্যমে নিশ্চিত করে, যা প্রাপক যাচাই করে। প্যানেল থেকে চ্যাট পাঠানো, যুক্ত করা এবং গ্রহণ করা বন্ধ থাকে। Telegram-এর বাইরে অনুরোধের প্রয়োজন।"
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "আদালত বা কর্তৃপক্ষের জন্য: ১ জিবি পর্যন্ত প্রতিটি ফাইল সংরক্ষণ করে এবং লেখার সময় প্রতিটি রেকর্ড স্বতন্ত্র টাইমস্ট্যাম্পের মাধ্যমে নিশ্চিত করে, যা প্রাপক যাচাই করে। প্যানেল থেকে চ্যাট পাঠানো, যুক্ত করা এবং গ্রহণ করা বন্ধ থাকে। Telegram-এর বাইরে অনুরোধের প্রয়োজন।",
+  "Telegram security notices read": "Telegram নিরাপত্তা বিজ্ঞপ্তিগুলো পড়ে",
+  "Session key fingerprint recorded": "সেশন কী ফিঙ্গারপ্রিন্ট রেকর্ড করা হয়েছে",
+  "Other sessions at start": "অন্যান্য সেশন শুরুতে",
+  "Telegram service notices before observation: {n}": "Telegram সেবার পর্যবেক্ষণের আগে নোটিশ: {n}",
+  "Key ID {id}": "কী আইডি {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "অন্যান্য সাইন-ইন সেশন: {n}। প্রতিটি আলাদাভাবে আপডেট পায় এবং এই অ্যাকাউন্টের বার্তা পাঠাতে, সম্পাদনা করতে বা মুছতে পারে।"
 }

@@ -8971,5 +8971,11 @@
   "Stopped before acquisition completed.": "הופסק לפני השלמת הרכישה.",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "קבלת צ'אטים, פתיחתם ומענה עליהם הן פעולות ב-Telegram. כדי להשתמש בהן, בחרו מטרה אחרת תחת 'הגדרות' → 'מטרה'.",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "שומר הודעות חדשות והשינויים בהן עם חותמות זמן עצמאיות שהנמען בודק. שומר תמונות וסרטונים קצרים. עדיין ניתן לכתוב, להצטרף ולקבל צ'אטים מהלוח. דורש בקשות מחוץ ל-Telegram.",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "עבור בית משפט או רשות: שומר כל קובץ בגודל של עד 1 GB ומאשר כל רשומה בזמן כתיבתה, עם חותמות זמן עצמאיות שהנמען בודק. שליחת צ'אטים, הצטרפות אליהם וקבלתם מהלוח אינן אפשריות. נדרשות בקשות מחוץ ל-Telegram."
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "עבור בית משפט או רשות: שומר כל קובץ בגודל של עד 1 GB ומאשר כל רשומה בזמן כתיבתה, עם חותמות זמן עצמאיות שהנמען בודק. שליחת צ'אטים, הצטרפות אליהם וקבלתם מהלוח אינן אפשריות. נדרשות בקשות מחוץ ל-Telegram.",
+  "Telegram security notices read": "הודעות האבטחה של Telegram",
+  "Session key fingerprint recorded": "טביעת אצבע של מפתח ההפעלה הוקלטה",
+  "Other sessions at start": "הרצאות נוספות בתחילת הכנס",
+  "Telegram service notices before observation: {n}": "הודעות שירות של Telegram לפני התצפית: {n}",
+  "Key ID {id}": "מזהה מפתח {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "הפעלות מחוברות אחרות: {n}. כל אחת מהן מקבלת עדכונים בנפרד ויכולה גם לשלוח, לערוך או למחוק את ההודעות של חשבון זה."
 }

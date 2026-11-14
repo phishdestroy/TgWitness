@@ -8875,5 +8875,11 @@
   "Stopped before acquisition completed.": "หยุดลงก่อนที่การเก็บข้อมูลจะเสร็จสิ้น",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "การรับ เริ่มต้น และตอบการสนทนาเป็นกิจกรรมของTelegram เพื่อใช้งานกิจกรรมเหล่านี้ ให้เลือกเป้าหมายอื่นในเมนู ตั้งค่า → เป้าหมาย",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "เก็บข้อความใหม่และการเปลี่ยนแปลงของข้อความเหล่านั้นพร้อมด้วยเวลาประทับที่ผู้รับตรวจสอบได้ เก็บรูปภาพและวิดีโอสั้นไว้ คุณยังสามารถเขียนข้อความ เข้าร่วม และรับคำเชิญสนทนาจากแผงควบคุมได้ ต้องส่งคำขอไปยังระบบนอกTelegram",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "สำหรับศาลหรือหน่วยงาน: บันทึกทุกไฟล์ขนาดสูงสุด 1 GB และยืนยันแต่ละบันทึกขณะเขียน พร้อมด้วยเวลาประทับที่ผู้รับตรวจสอบอย่างอิสระ การส่ง เข้าร่วม และรับการสนทนาจากแผงถูกปิดไว้ ต้องใช้คำขอจากภายนอกTelegram"
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "สำหรับศาลหรือหน่วยงาน: บันทึกทุกไฟล์ขนาดสูงสุด 1 GB และยืนยันแต่ละบันทึกขณะเขียน พร้อมด้วยเวลาประทับที่ผู้รับตรวจสอบอย่างอิสระ การส่ง เข้าร่วม และรับการสนทนาจากแผงถูกปิดไว้ ต้องใช้คำขอจากภายนอกTelegram",
+  "Telegram security notices read": "ข้อความแจ้งเตือนด้านความปลอดภัยของ Telegram ระบุว่า",
+  "Session key fingerprint recorded": "บันทึกลายนิ้วมือของกุญแจเซสชัน",
+  "Other sessions at start": "เซสชันอื่น ๆ ที่เริ่มต้น",
+  "Telegram service notices before observation: {n}": "การแจ้งเตือนจากบริการ Telegram ก่อนการสังเกต: {n}",
+  "Key ID {id}": "ID กุญแจ {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "เซสชันอื่นที่ลงชื่อเข้าใช้: {n} แต่ละเซสชันจะรับการอัปเดตแยกกัน และสามารถส่ง แก้ไข หรือลบข้อความของบัญชีนี้ได้เช่นกัน"
 }

@@ -9115,5 +9115,11 @@
   "Stopped before acquisition completed.": "تم إيقاف العملية قبل اكتمال عملية الاستحواذ.",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "يُعد قبول المحادثات وبدءها والرد عليها من إجراءات Telegram. لاستخدامها، اختر هدفًا آخر من خلال الإعدادات → الهدف.",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "يحتفظ بالرسائل الجديدة وتغييراتها مع طوابع زمنية مستقلة يتحقق منها المستلم. يحفظ الصور ومقاطع الفيديو القصيرة. لا يزال بإمكانك الكتابة والانضمام إلى الدردشات وقبولها من خلال اللوحة. يتطلب طلبات خارج تطبيق Telegram.",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "بالنسبة للمحكمة أو السلطة: يحفظ كل ملف حتى 1 جيجابايت ويؤكد كل سجل فور كتابته، مع طوابع زمنية مستقلة يتحقق منها المستلم. يتم تعطيل إرسال الدردشات والانضمام إليها وقبولها من اللوحة. يتطلب طلبات خارج Telegram."
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "بالنسبة للمحكمة أو السلطة: يحفظ كل ملف حتى 1 جيجابايت ويؤكد كل سجل فور كتابته، مع طوابع زمنية مستقلة يتحقق منها المستلم. يتم تعطيل إرسال الدردشات والانضمام إليها وقبولها من اللوحة. يتطلب طلبات خارج Telegram.",
+  "Telegram security notices read": "اقرأ إشعارات أمان Telegram",
+  "Session key fingerprint recorded": "بصمة مفتاح الجلسة مسجلة",
+  "Other sessions at start": "جلسات أخرى في البداية",
+  "Telegram service notices before observation: {n}": "إشعارات خدمة Telegram قبل المراقبة: {n}",
+  "Key ID {id}": "معرف المفتاح {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "جلسات تسجيل الدخول الأخرى: {n}. تتلقى كل منها التحديثات بشكل منفصل ويمكنها أيضًا إرسال رسائل هذا الحساب أو تعديلها أو حذفها."
 }

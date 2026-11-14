@@ -8875,5 +8875,11 @@
   "Stopped before acquisition completed.": "在資料擷取完成前已停止。",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "接受、啟動及回覆聊天皆屬 Telegram 的操作。若要使用這些功能，請前往「設定」→「目標」選擇其他目標。",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "會保留新訊息及其變更，並附有獨立的時間戳記供收件者核對。可儲存照片和短影片。您仍可透過控制面板發送訊息、加入聊天室以及接受聊天邀請。需透過 Telegram 以外的管道發送請求。",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "針對法院或主管機關：儲存每個不超過 1 GB 的檔案，並在寫入時確認每筆記錄，附有由收件者核對的獨立時間戳記。控制面板上的發送、加入及接受聊天功能均已關閉。需透過 Telegram 以外的管道提出請求。"
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "針對法院或主管機關：儲存每個不超過 1 GB 的檔案，並在寫入時確認每筆記錄，附有由收件者核對的獨立時間戳記。控制面板上的發送、加入及接受聊天功能均已關閉。需透過 Telegram 以外的管道提出請求。",
+  "Telegram security notices read": "Telegram 安全公告內容如下：",
+  "Session key fingerprint recorded": "已記錄的會話金鑰指紋",
+  "Other sessions at start": "其他場次於開始時",
+  "Telegram service notices before observation: {n}": "觀察前的 Telegram 服務通知：{n}",
+  "Key ID {id}": "金鑰 ID {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "其他已登入的會話：{n}。每個會話皆會獨立接收更新，並可發送、編輯或刪除此帳戶的訊息。"
 }

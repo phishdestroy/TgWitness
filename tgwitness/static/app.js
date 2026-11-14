@@ -346,6 +346,9 @@ const labels = {
   "account.password_changed": [tr("Two-step password changed"), "lock", "system"],
   "session.exclusive_automatic": [tr("Automatic only-session changed"), "lock", "system"],
   "session.exclusive_postponed": [tr("Only-session attempt postponed"), "clock", "system"],
+  "session.security_baseline": [tr("Telegram security notices read"), "shield", "system"],
+  "session.fingerprint": [tr("Session key fingerprint recorded"), "fingerprint", "system"],
+  "session.concurrent_at_start": [tr("Other sessions at start"), "users", "system"],
   "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
   "account.authorization_error": [tr("Another client lost its authorization"), "alert", "system"],
@@ -1840,6 +1843,9 @@ function excerpt(e) {
       +[c.before,c.after].map(v=>v==null||v===""?"—":k==="username"?"@"+v:v).join(" → ")).join(" · ");
     case "actor.avatar_saved": return p.previous_photo_id===undefined?"":p.previous_photo_id===null?tr("Added a profile photo"):tr("Replaced the previous profile photo");
     case "interaction.preview": return [p.title,p.link].filter(Boolean).join(" · ");
+    case "session.security_baseline": return tr("Telegram service notices before observation: {n}",{n:(p.notices_before_observation||[]).length});
+    case "session.fingerprint": return tr("Key ID {id}",{id:p.auth_key_id||""});
+    case "session.concurrent_at_start": return tr("Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.",{n:p.concurrent_sessions});
     case "secret_chat.message": return (p.direction==="out"?tr("Sent"):tr("Received"))+" · "+(p.text||(p.media?tr("Attachment"):""))+(p.ttl?" · "+tr("timer {n} s",{n:p.ttl}):"");
     case "secret_chat.requested": return (p.direction==="out"?tr("Started by this account"):tr("Started by the other side"))+" · "+tr("user ID {id}",{id:p.peer_user_id});
     case "secret_chat.ready": return tr("Key picture {hex}",{hex:(p.key_visualization||"").slice(0,16)+"…"});

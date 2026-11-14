@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- `verify.py` given an unpacked folder says to pass the original ZIP instead of failing with a key error. The journal names the session records written when observation starts and shows their values instead of raw English notes.
 - The goal choice says what differs: **Follow chats** keeps panel actions, **Evidence for a case** saves every file, confirms each record and turns sending, joining and accepting off. **Pseudo-secret** explains that notice as a warning and points to the goal. The route check shows its time and latency in the panel language, and its buttons match the rest of the panel.
 - **Pseudo-secret**: sending to a chat that has ended, or that the other side has not accepted yet, says so instead of failing, and ending a chat writes one journal record instead of two. Account export pages show the reason an attachment was not saved in the report language, and the Telegram-style chat list labels message counts as `Messages: N`.
 - **Pseudo-secret** installs its protocol module with one button, **Install and turn on**. The panel downloads the pinned commit of [KiaroSama/Telethon-Secret-Chat](https://github.com/KiaroSama/Telethon-Secret-Chat) (GPL-3.0-or-later) from GitHub through the workspace's route for requests outside Telegram, checks every file against the SHA-256 fixed in the TgWitness release, loads it without a restart and checks it again at every start. The page names the module, its author and license. An environment that already has the `secret-chats` extra keeps using it ([Secret Chats](PSEUDO-SECRET.md)).

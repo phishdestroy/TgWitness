@@ -8923,5 +8923,11 @@
   "Stopped before acquisition completed.": "प्राप्ति पूरी होने से पहले रुक गया।",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "चैट स्वीकार करना, शुरू करना और उत्तर देना, ये सभ Telegram क्रियाएँ हैं। इन्हें उपयोग करने के लिए, सेटिंग्स → लक्ष्य के अंतर्गत कोई अन्य लक्ष्य चुनें।",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "प्राप्तकर्ता द्वारा जाँचे जाने वाले स्वतंत्र टाइमस्टैम्प के साथ नए संदेश और उनके बदलावों को रखता है। तस्वीरें और छोटे वीडियो सहेजता है। आप पैनल से चैट लिख सकते हैं, जुड़ सकते हैं और स्वीकार कर सकते हैं। इसके लिए Telegram के बाहर अनुरोधों की आवश्यकता होती है।",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "एक अदालत या प्राधिकरण के लिए: 1 GB तक की हर फ़ाइल को सहेजता है और प्रत्येक रिकॉर्ड को लिखे जाने पर पुष्टि करता है, साथ ही स्वतंत्र टाइमस्टैम्प होते हैं जिन्हें प्राप्तकर्ता सत्यापित करता है। पैनल से चैट भेजना, जोड़ना और स्वीकार करना बंद हैं। इसके लिए Telegram के बाहर अनुरोधों की आवश्यकता होती है।"
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "एक अदालत या प्राधिकरण के लिए: 1 GB तक की हर फ़ाइल को सहेजता है और प्रत्येक रिकॉर्ड को लिखे जाने पर पुष्टि करता है, साथ ही स्वतंत्र टाइमस्टैम्प होते हैं जिन्हें प्राप्तकर्ता सत्यापित करता है। पैनल से चैट भेजना, जोड़ना और स्वीकार करना बंद हैं। इसके लिए Telegram के बाहर अनुरोधों की आवश्यकता होती है।",
+  "Telegram security notices read": "Telegram सुरक्षा सूचनाएँ पढ़ें",
+  "Session key fingerprint recorded": "सत्र कुंजी फिंगरप्रिंट दर्ज",
+  "Other sessions at start": "अन्य सत्र प्रारंभ में",
+  "Telegram service notices before observation: {n}": "Telegram सेवा अवलोकन से पहले सूचनाएं: {n}",
+  "Key ID {id}": "की आईडी {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "अन्य साइन-इन सत्र: {n}। प्रत्येक को अलग से अपडेट मिलते हैं और वे इस खाते के संदेशों को भेजने, संपादित करने या हटाने में भी सक्षम हैं।"
 }

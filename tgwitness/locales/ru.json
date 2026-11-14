@@ -8989,5 +8989,11 @@
   "Stopped before acquisition completed.": "Сбор остановлен до завершения.",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "Принять чат, начать его и ответить в нём — это действия в Telegram. Чтобы пользоваться ими, выберите другую цель в разделе «Настройки» → «Цель».",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "Сохраняет новые сообщения и их изменения с независимыми метками времени, которые проверяет получатель. Сохраняет фото и короткие видео. Писать, вступать в чаты и принимать их из панели по-прежнему можно. Нужны запросы за пределы Telegram.",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "Для суда или государственного органа: сохраняет каждый файл до 1 ГБ и подтверждает каждую запись в момент её создания, с независимыми метками времени, которые проверяет получатель. Отправка, вступление в чаты и их принятие из панели отключены. Нужны запросы за пределы Telegram."
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "Для суда или государственного органа: сохраняет каждый файл до 1 ГБ и подтверждает каждую запись в момент её создания, с независимыми метками времени, которые проверяет получатель. Отправка, вступление в чаты и их принятие из панели отключены. Нужны запросы за пределы Telegram.",
+  "Telegram security notices read": "Прочитаны уведомления безопасности Telegram",
+  "Session key fingerprint recorded": "Записан отпечаток ключа сеанса",
+  "Other sessions at start": "Другие сеансы при запуске",
+  "Telegram service notices before observation: {n}": "Служебных уведомлений Telegram до начала наблюдения: {n}",
+  "Key ID {id}": "Идентификатор ключа {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Других активных сеансов: {n}. Каждый получает обновления отдельно и тоже может отправлять, изменять и удалять сообщения этого аккаунта."
 }

@@ -552,6 +552,9 @@ def verification_requirements(args, checked):
 def verify_input(path, policy):
     args = argparse.Namespace(**{**vars(policy), "bundle": Path(path)})
     if args.bundle.is_dir():
+        if (args.bundle / "manifest.sig").is_file() and (args.bundle / "verify.py").is_file():
+            raise ValueError("This folder is an unpacked archive, and an unpacked copy is not checked. "
+                             "Give the verifier the original ZIP file.")
         if args.checkpoint or args.witness or args.tsa_ca or args.channel or args.evidence:
             raise ValueError("Journal/report options do not apply to a distributed acquisition directory")
         result = verify_distributed_work(args.bundle, args.fingerprint, args.max_gib)

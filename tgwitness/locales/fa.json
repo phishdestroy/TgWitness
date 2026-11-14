@@ -8923,5 +8923,11 @@
   "Stopped before acquisition completed.": "پیش از تکمیل اکتساب متوقف شد.",
   "Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.": "قبول کردن، شروع کردن و پاسخ دادن به چت‌ها، اقدامی در تلگرام هستند. برای استفاده از آن‌ها، در بخش تنظیمات → هدف، هدف دیگری را انتخاب کنید.",
   "Keeps new messages and their changes with independent timestamps that the recipient checks. Saves photos and short videos. You can still write, join and accept chats from the panel. Needs requests outside Telegram.": "پیام‌های جدید و تغییرات آن‌ها را با زمان‌بندی‌های مستقل که دریافت‌کننده بررسی می‌کند، نگه می‌دارد. عکس‌ها و ویدیوهای کوتاه را ذخیره می‌کند. شما همچنان می‌توانید از طریق پنل چت‌ها را بنویسید، به آن‌ها بپیوندید و بپذیرید. برای درخواست‌های خارج از Telegram به آن نیاز است.",
-  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "برای دادگاه یا یک مرجع: هر فایل تا ۱ گیگابایت را ذخیره می‌کند و هر رکورد را هنگام نوشتن با مهرهای زمانی مستقل که گیرنده آن را تأیید می‌کند، تصدیق می‌نماید. ارسال، الحاق و پذیرش چت‌ها از طریق پنل غیرفعال است. نیازمند درخواست‌هایی خارج از Telegram است."
+  "For a court or an authority: saves every file up to 1 GB and confirms each record as it is written, with independent timestamps that the recipient checks. Sending, joining and accepting chats from the panel are off. Needs requests outside Telegram.": "برای دادگاه یا یک مرجع: هر فایل تا ۱ گیگابایت را ذخیره می‌کند و هر رکورد را هنگام نوشتن با مهرهای زمانی مستقل که گیرنده آن را تأیید می‌کند، تصدیق می‌نماید. ارسال، الحاق و پذیرش چت‌ها از طریق پنل غیرفعال است. نیازمند درخواست‌هایی خارج از Telegram است.",
+  "Telegram security notices read": "اعلان‌های امنیتی Telegram چنین می‌خوانند",
+  "Session key fingerprint recorded": "اثر انگشت کلید جلسه ضبط شد",
+  "Other sessions at start": "سایر جلسات در شروع",
+  "Telegram service notices before observation: {n}": "اخطاریه‌های سرویس Telegram قبل از مشاهده: {n}",
+  "Key ID {id}": "شناسه کلید {id}",
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "سایر جلسات ورود به سیستم: {n}. هر یک به‌طور جداگانه به‌روزرسانی‌ها را دریافت می‌کنند و همچنین می‌توانند پیام‌های این حساب را ارسال، ویرایش یا حذف کنند."
 }
