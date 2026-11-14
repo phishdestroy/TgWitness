@@ -8881,5 +8881,6 @@
   "Other sessions at start": "เซสชันอื่น ๆ ที่เริ่มต้น",
   "Telegram service notices before observation: {n}": "การแจ้งเตือนจากบริการ Telegram ก่อนการสังเกต: {n}",
   "Key ID {id}": "ID กุญแจ {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "เซสชันอื่นที่ลงชื่อเข้าใช้: {n} แต่ละเซสชันจะรับการอัปเดตแยกกัน และสามารถส่ง แก้ไข หรือลบข้อความของบัญชีนี้ได้เช่นกัน"
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "เซสชันอื่นที่ลงชื่อเข้าใช้: {n} แต่ละเซสชันจะรับการอัปเดตแยกกัน และสามารถส่ง แก้ไข หรือลบข้อความของบัญชีนี้ได้เช่นกัน",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "น้อยกว่า 1 MB · {min}–{max} นาที ตามตัวอย่าง; ผลลัพธ์จริงอาจแตกต่างไป"
 }

@@ -8881,5 +8881,6 @@
   "Other sessions at start": "Sesi lain di permulaan",
   "Telegram service notices before observation: {n}": "Notis perkhidmatan Telegram sebelum pemerhatian: {n}",
   "Key ID {id}": "ID Kunci {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Sesi log masuk lain: {n}. Setiap satu menerima kemas kini secara berasingan dan juga boleh menghantar, menyunting atau memadam mesej akaun ini."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Sesi log masuk lain: {n}. Setiap satu menerima kemas kini secara berasingan dan juga boleh menghantar, menyunting atau memadam mesej akaun ini.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "Kurang daripada 1 MB · {min}–{max} minit. Berdasarkan sampel; keputusan sebenar mungkin berbeza."
 }

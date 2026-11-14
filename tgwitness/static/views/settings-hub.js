@@ -787,7 +787,7 @@ export function createSettingsHub(ctx) {
         save.dataset.scopeSave='';actions.append(save);
       }
       actions.append(button('Estimate size and time',async()=>{const estimate=await request(owner(),'first-run/estimate',draftBody());
-        estimateBox.textContent=estimate.available?tr('About {size} MB · {min}–{max} minutes. Based on a sample; actual results may differ.',estimate):tr('An estimate is not available yet.');}));
+        estimateBox.textContent=estimate.available?tr(estimate.size<1?'Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.':'About {size} MB · {min}–{max} minutes. Based on a sample; actual results may differ.',estimate):tr('An estimate is not available yet.');}));
       const estimateBox=message('The estimate uses a small sample of the selected chats.');body.append(estimateBox);
       if(inSettings)updateScopeSave();
     }

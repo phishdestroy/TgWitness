@@ -8977,5 +8977,6 @@
   "Other sessions at start": "הרצאות נוספות בתחילת הכנס",
   "Telegram service notices before observation: {n}": "הודעות שירות של Telegram לפני התצפית: {n}",
   "Key ID {id}": "מזהה מפתח {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "הפעלות מחוברות אחרות: {n}. כל אחת מהן מקבלת עדכונים בנפרד ויכולה גם לשלוח, לערוך או למחוק את ההודעות של חשבון זה."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "הפעלות מחוברות אחרות: {n}. כל אחת מהן מקבלת עדכונים בנפרד ויכולה גם לשלוח, לערוך או למחוק את ההודעות של חשבון זה.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "פחות מ-1 MB · {min}–{max} דקות. בהתבסס על מדגם; התוצאות בפועל עשויות להשתנות."
 }

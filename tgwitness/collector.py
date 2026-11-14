@@ -2017,6 +2017,7 @@ class Collector:
                 await self.ensure_route()
                 client = self.client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
             if not client.is_connected():
+                secret_chats.of(self).listen(client)
                 await self.connect_client(client)
             if not await client.is_user_authorized():
                 cause, error = await self.refusal(client)

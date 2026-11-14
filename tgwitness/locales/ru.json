@@ -8995,5 +8995,6 @@
   "Other sessions at start": "Другие сеансы при запуске",
   "Telegram service notices before observation: {n}": "Служебных уведомлений Telegram до начала наблюдения: {n}",
   "Key ID {id}": "Идентификатор ключа {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Других активных сеансов: {n}. Каждый получает обновления отдельно и тоже может отправлять, изменять и удалять сообщения этого аккаунта."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Других активных сеансов: {n}. Каждый получает обновления отдельно и тоже может отправлять, изменять и удалять сообщения этого аккаунта.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "Меньше 1 МБ · {min}–{max} мин. Оценка по выборке; реальный результат может отличаться."
 }

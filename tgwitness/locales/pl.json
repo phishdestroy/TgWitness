@@ -9025,5 +9025,6 @@
   "Other sessions at start": "Inne sesje na początku",
   "Telegram service notices before observation: {n}": "Powiadomienia serwisu Telegram przed rozpoczęciem obserwacji: {n}",
   "Key ID {id}": "Identyfikator klucza {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Inne sesje zalogowane: {n}. Każda z nich otrzymuje aktualizacje osobno i może również wysyłać, edytować lub usuwać wiadomości tego konta."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Inne sesje zalogowane: {n}. Każda z nich otrzymuje aktualizacje osobno i może również wysyłać, edytować lub usuwać wiadomości tego konta.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "Mniej niż 1 MB · {min}–{max} minut. Na podstawie próby; rzeczywiste wyniki mogą się różnić."
 }

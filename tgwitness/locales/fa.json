@@ -8929,5 +8929,6 @@
   "Other sessions at start": "سایر جلسات در شروع",
   "Telegram service notices before observation: {n}": "اخطاریه‌های سرویس Telegram قبل از مشاهده: {n}",
   "Key ID {id}": "شناسه کلید {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "سایر جلسات ورود به سیستم: {n}. هر یک به‌طور جداگانه به‌روزرسانی‌ها را دریافت می‌کنند و همچنین می‌توانند پیام‌های این حساب را ارسال، ویرایش یا حذف کنند."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "سایر جلسات ورود به سیستم: {n}. هر یک به‌طور جداگانه به‌روزرسانی‌ها را دریافت می‌کنند و همچنین می‌توانند پیام‌های این حساب را ارسال، ویرایش یا حذف کنند.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "کمتر از ۱ مگابایت · {min} تا {max} دقیقه. بر اساس یک نمونه؛ نتایج واقعی ممکن است متفاوت باشد."
 }

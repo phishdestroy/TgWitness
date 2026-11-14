@@ -9121,5 +9121,6 @@
   "Other sessions at start": "جلسات أخرى في البداية",
   "Telegram service notices before observation: {n}": "إشعارات خدمة Telegram قبل المراقبة: {n}",
   "Key ID {id}": "معرف المفتاح {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "جلسات تسجيل الدخول الأخرى: {n}. تتلقى كل منها التحديثات بشكل منفصل ويمكنها أيضًا إرسال رسائل هذا الحساب أو تعديلها أو حذفها."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "جلسات تسجيل الدخول الأخرى: {n}. تتلقى كل منها التحديثات بشكل منفصل ويمكنها أيضًا إرسال رسائل هذا الحساب أو تعديلها أو حذفها.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "أقل من 1 ميغابايت · {min} – {max} دقيقة. استنادًا إلى عينة؛ قد تختلف النتائج الفعلية."
 }

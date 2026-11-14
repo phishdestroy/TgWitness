@@ -8881,5 +8881,6 @@
   "Other sessions at start": "시작 시의 다른 세션들",
   "Telegram service notices before observation: {n}": "관찰 전 Telegram 서비스 공지: {n}",
   "Key ID {id}": "키 ID {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "다른 로그인 세션: {n}. 각 세션은 업데이트를 별도로 수신하며, 이 계정의 메시지를 전송, 편집 또는 삭제할 수도 있습니다."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "다른 로그인 세션: {n}. 각 세션은 업데이트를 별도로 수신하며, 이 계정의 메시지를 전송, 편집 또는 삭제할 수도 있습니다.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "1MB 미만 · {min}–{max}분. 샘플을 기준으로 한 것으로, 실제 결과는 다를 수 있습니다."
 }

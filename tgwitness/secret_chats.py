@@ -176,6 +176,8 @@ class SecretChats:
         self.file_worker = None
         self.file_wakeup = asyncio.Event()
         self.error = None
+        self.asked = set()
+        self.early = {}
 
     @property
     def store(self):
@@ -212,6 +214,19 @@ class SecretChats:
         except Exception:
             return None
 
+    def listen(self, client):
+        if client in self.early or not available() or not settings(self.store)["enabled"]:
+            return
+        held = []
+
+        async def keep(update):
+            if self.client is not client and len(held) < 2000 and isinstance(
+                    update, (types.UpdateEncryption, types.UpdateNewEncryptedMessage)):
+                held.append(update)
+
+        client.add_event_handler(keep)
+        self.early[client] = keep, held
+
     async def attach(self, client):
         if not available() or not settings(self.store)["enabled"]:
             return False
@@ -225,11 +240,19 @@ class SecretChats:
                          "DecryptFailed", "SendFailed"):
                 manager.on(name, getattr(self, "on_" + name))
             self.manager, self.client = manager, client
+            keep, held = self.early.pop(client, (None, ()))
+            if keep:
+                client.remove_event_handler(keep)
             try:
                 await manager.start()
             except BaseException:
                 self.manager = self.client = None
                 raise
+            for update in held:
+                try:
+                    await manager._subscription(update)
+                except Exception:
+                    LOG.exception("An update received before secret chats started could not be applied")
             self.write_held()
             self.resume_files()
             self.spawn(self.refresh(manager, client))
@@ -556,6 +579,23 @@ class SecretChats:
                 "key_visualization": library.key_visualization(chat.key_hash).hex if chat.key_hash else None,
                 "created_at": chat.created_at, "closed_reason": chat.closed_reason}
 
+    def person(self, user_id):
+        collector = self.collector
+        entity = collector.people.get(user_id) or collector.dialog_cache.get(user_id, {}).get("entity")
+        if entity is not None:
+            return {"name": utils.get_display_name(entity) or None, "username": getattr(entity, "username", None)}
+        if user_id not in self.asked and self.client is not None and running():
+            self.asked.add(user_id)
+            self.spawn(self.learn(user_id))
+        return None
+
+    async def learn(self, user_id):
+        try:
+            entity = await self.client.get_entity(types.PeerUser(user_id))
+        except Exception:
+            return
+        self.collector.people[utils.get_peer_id(entity)] = entity
+
     def view(self, *, before=None, after=None):
         from . import interactions
         interaction_problem = None
@@ -580,6 +620,8 @@ class SecretChats:
                 "interaction_goal": interaction_problem == interactions.GOAL_OFF,
                 "module": secret_module.describe(),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
+                "people": {str(user_id): self.person(user_id) for user_id in
+                           {chat["peer_user_id"] for chat in chats if type(chat["peer_user_id"]) is int}},
                 "records": display(records),
                 "next_before": records[0]["seq"] if more and after is None else None,
                 "next_after": records[-1]["seq"] if more and after is not None else None,
