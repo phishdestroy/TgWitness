@@ -9608,5 +9608,6 @@
   "Search match": "搜尋結果",
   "Search matched an earlier saved version.": "搜尋結果與較早的儲存版本相符。",
   "Search saved messages": "搜尋已儲存的訊息",
-  "{n} saved versions": "{n} 個儲存版本"
+  "{n} saved versions": "{n} 個儲存版本",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "無法讀取代理來源設定。請先還原 proxy-sources.json，再使用代理清單。"
 }

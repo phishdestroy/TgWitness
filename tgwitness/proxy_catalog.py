@@ -691,8 +691,8 @@ class ProxyPool:
                     with suppress(Exception):
                         await self.catalog.refresh(route)
                     countries = getattr(self.catalog, "countries", None)
-                    if countries and self.catalog.settings().countries:
-                        with suppress(Exception):
+                    with suppress(Exception):
+                        if countries and self.catalog.settings().countries:
                             _, entries = self.entries()
                             await countries.locate([row["route"].host for row in entries.values()],
                                                    route or NetworkConfig(kind="direct"))

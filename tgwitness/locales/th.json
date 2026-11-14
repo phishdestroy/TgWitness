@@ -9608,5 +9608,6 @@
   "Search match": "ผลการค้นหาที่ตรงกัน",
   "Search matched an earlier saved version.": "การค้นหาพบเวอร์ชันที่บันทึกไว้ก่อนหน้านี้",
   "Search saved messages": "ค้นหาข้อความที่บันทึกไว้",
-  "{n} saved versions": "{n} เวอร์ชันที่บันทึกไว้"
+  "{n} saved versions": "{n} เวอร์ชันที่บันทึกไว้",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "อ่านการตั้งค่าแหล่งพร็อกซีไม่ได้ กู้คืน proxy-sources.json ก่อนใช้รายการพร็อกซี"
 }

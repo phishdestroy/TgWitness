@@ -9848,5 +9848,6 @@
   "Search match": "مطابقة البحث",
   "Search matched an earlier saved version.": "أدى البحث إلى مطابقة إصدار سابق محفوظ.",
   "Search saved messages": "البحث في الرسائل المحفوظة",
-  "{n} saved versions": "{n} نسخة محفوظة"
+  "{n} saved versions": "{n} نسخة محفوظة",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "تتعذّر قراءة إعدادات مصادر الوكلاء. استعِد الملف proxy-sources.json قبل استخدام قوائم الوكلاء."
 }

@@ -9704,5 +9704,6 @@
   "Search match": "התאמת חיפוש",
   "Search matched an earlier saved version.": "החיפוש מצא התאמה לגרסה מוקדמת שנשמרה.",
   "Search saved messages": "חיפוש הודעות שמורות",
-  "{n} saved versions": "{n} גרסאות שמורות"
+  "{n} saved versions": "{n} גרסאות שמורות",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "לא ניתן לקרוא את הגדרות מקורות הפרוקסי. שחזרו את proxy-sources.json לפני השימוש ברשימות פרוקסי."
 }

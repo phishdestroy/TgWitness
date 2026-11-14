@@ -9752,5 +9752,6 @@
   "Search match": "Wynik wyszukiwania",
   "Search matched an earlier saved version.": "Wyszukiwanie dopasowało wcześniejszą zapisaną wersję.",
   "Search saved messages": "Wyszukiwanie zapisanych wiadomości",
-  "{n} saved versions": "{n} zapisanych wersji"
+  "{n} saved versions": "{n} zapisanych wersji",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Nie można odczytać ustawień źródeł proxy. Przywróć plik proxy-sources.json, zanim użyjesz list proxy."
 }

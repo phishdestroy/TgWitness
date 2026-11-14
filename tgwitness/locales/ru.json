@@ -9722,5 +9722,6 @@
   "{n} saved versions": "Сохранённых версий: {n}",
   "Displayed version": "Показанная версия",
   "Search match": "Совпадение с запросом",
-  "Search matched an earlier saved version.": "Совпадение найдено в прежней сохранённой версии."
+  "Search matched an earlier saved version.": "Совпадение найдено в прежней сохранённой версии.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Не удаётся прочитать настройки источников прокси. Восстановите файл proxy-sources.json, прежде чем пользоваться списками прокси."
 }
