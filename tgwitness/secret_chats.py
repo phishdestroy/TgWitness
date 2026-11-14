@@ -13,7 +13,7 @@ from telethon.tl.tlobject import TLObject
 
 from . import secret_module
 from .monitoring import capture_settings
-from .store import canonical
+from .store import canonical, utcnow
 from .workers import complete_in_thread
 
 library = library_tl = VaultStorage = None
@@ -23,6 +23,9 @@ STATE = "secret_chats"
 PENDING = "secret_chat_files"
 HELD = "secret_chat_unwritten"
 REFRESH_SECONDS = 30
+LIVENESS_SECONDS = 120
+LIVENESS_CHATS = 20
+ENDED_BY_TELEGRAM = "Telegram reports the chat no longer exists"
 HIDDEN = {"key", "iv"}
 QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", "DecryptedMessageActionCommitKey",
          "DecryptedMessageActionAbortKey", "DecryptedMessageActionNoop", "DecryptedMessageActionNotifyLayer",
@@ -178,6 +181,7 @@ class SecretChats:
         self.error = None
         self.asked = set()
         self.early = {}
+        self.open_at = {}
 
     @property
     def store(self):
@@ -259,6 +263,7 @@ class SecretChats:
             return True
 
     async def refresh(self, manager, client):
+        checked = time.monotonic()
         while self.manager is manager:
             await asyncio.sleep(REFRESH_SECONDS)
             if self.manager is manager and client.is_connected() and any(
@@ -267,6 +272,23 @@ class SecretChats:
                     await client.catch_up()
                 except Exception:
                     LOG.exception("Secret chat updates could not be refreshed")
+                if time.monotonic() - checked >= LIVENESS_SECONDS:
+                    checked = time.monotonic()
+                    await self.check_open(manager)
+
+    async def check_open(self, manager):
+        accepted = [chat for chat in manager.list() if getattr(chat.state, "name", "") == "READY" and not chat.is_outbound]
+        for chat in accepted[:LIVENESS_CHATS]:
+            if self.manager is not manager:
+                return
+            try:
+                await manager._send_action(manager._entity(chat.id), library_tl.DecryptedMessageActionNoop())
+            except library.ChatClosed:
+                continue
+            except Exception as exc:
+                LOG.warning("Secret chat %s could not be checked: %s", chat.id, type(exc).__name__)
+                continue
+            self.open_at[chat.id] = utcnow()
 
     async def detach(self):
         async with self.lock:
@@ -340,9 +362,16 @@ class SecretChats:
         self.note("ready", payload)
 
     def on_ChatClosedEvent(self, event):
-        self.note("closed", {"secret_chat_id": event.chat_id, "reason": event.reason,
-                             "history_deleted_by_peer": bool(event.history_deleted),
-                             "journal_copy": "kept; the journal is append-only"})
+        payload = {"secret_chat_id": event.chat_id, "reason": event.reason,
+                   "history_deleted_by_peer": bool(event.history_deleted),
+                   "journal_copy": "kept; the journal is append-only"}
+        if event.reason == ENDED_BY_TELEGRAM:
+            payload["open_at_least_until"] = self.open_at.get(event.chat_id)
+            payload["meaning"] = ("Telegram does not tell the side that accepted a secret chat when the other side ends "
+                                  "it. TgWitness found the chat ended at this point; it ended after open_at_least_until, "
+                                  "or after the chat was accepted when that is empty.")
+        self.open_at.pop(event.chat_id, None)
+        self.note("closed", payload)
 
     def on_MessageReceived(self, event):
         payload = {"secret_chat_id": event.chat_id, "peer_user_id": self.peer(event.chat_id), "direction": "in",
