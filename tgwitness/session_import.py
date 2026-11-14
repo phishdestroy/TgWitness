@@ -2,12 +2,19 @@ import asyncio
 import hashlib
 import secrets
 
-from telethon.errors import PasswordHashInvalidError, SessionPasswordNeededError
+from telethon.errors import PasswordHashInvalidError, RPCError, SessionPasswordNeededError
 from telethon.tl import functions
 
 from . import api_pool, client_identity
-from .account_import import session_key, validate_string
+from .account_import import frozen_config, session_key, validate_string
 from .store import utcnow
+
+PENDING = "Another independent login is pending. Import its original donor again to finish it."
+
+
+def refused(exc):
+    from .collector import loss_cause
+    return isinstance(exc, ValueError) or loss_cause(exc) is not None
 
 
 async def create_session(collector, api_id, api_hash, session, expected_user_id=None,
@@ -21,12 +28,16 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
     key = session_key(session)
     donor_id = hashlib.sha256(key).hexdigest()
     pending = c.vault.read("independent_login")
-    if pending and pending.get("donor") != donor_id:
-        raise ValueError("Another independent login is pending. Import its original donor again to finish it.")
+    stale = bool(pending) and pending.get("donor") != donor_id
+    if stale and pending.get("password_required"):
+        raise ValueError(PENDING)
     release = c.account_guard(None, c, key=key) if c.account_guard else None
     release_account = donor = candidate = waiter = None
+    asking = dropped = False
 
     def retain(saved=None):
+        if dropped:
+            return
         if candidate is not None and not (c.client is candidate and c.login_client is None):
             if saved is None:
                 candidate.session.save()
@@ -62,8 +73,9 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
         async def healthy_account(client):
             me = await client.get_me()
             check_account(me)
+            config = await client(functions.help.GetAppConfigRequest(hash=0))
             full = await client(functions.users.GetFullUserRequest("me"))
-            if any(getattr(full.full_user, field, None) for field in (
+            if frozen_config(config) or any(getattr(full.full_user, field, None) for field in (
                     "frozen_since_date", "frozen_until_date", "frozen_appeal_url")):
                 raise ValueError("Telegram reports this account as frozen. Independent login stopped.")
             return me
@@ -88,6 +100,17 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
             await c.connect_client(candidate)
             retain()
 
+        if stale:
+            if pending.get("session"):
+                await prepare_candidate()
+                if await candidate.is_user_authorized():
+                    raise ValueError(PENDING)
+                unused, candidate = candidate, None
+                c.unlock_key(unused)
+                await c.cancel_login()
+            pending = {}
+            c.vault.save("independent_login", {})
+
         if pending:
             if expected_user_id is not None and pending["account_id"] != expected_user_id:
                 raise ValueError("The pending independent login belongs to a different Telegram account.")
@@ -110,6 +133,7 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
                 api_id, api_hash = saved["api_id"], saved["api_hash"]
             else:
                 api_id, api_hash = next(pair for pair in api_pool.POOL if pair[0] == api_pool.DESKTOP_ID)
+        asking = True
         donor = c.make_client(api_id, api_hash, session, supplied or None, languages)
         await c.connect_client(donor)
         if not await donor.is_user_authorized():
@@ -132,9 +156,15 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
         await asyncio.sleep(0)
         try:
             await asyncio.wait_for(donor(functions.auth.AcceptLoginTokenRequest(qr.token)), 30)
+        except RPCError:
+            raise
+        except BaseException:
+            asking = False
+            raise
         finally:
             await donor.disconnect()
             donor = None
+        asking = False
         try:
             await waiter
         except SessionPasswordNeededError:
@@ -148,11 +178,16 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
     except PasswordHashInvalidError:
         retain()
         return {"step": "password", "error": "The imported two-step verification password was rejected. Enter it again."}
-    except BaseException:
+    except BaseException as exc:
+        dropped = asking and refused(exc)
         try:
             retain()
         finally:
             await c.cancel_login()
+            if dropped:
+                if candidate is not None:
+                    c.unlock_key(candidate)
+                c.vault.save("independent_login", {})
             c.phase = c.resting_phase()
         raise
     finally:
