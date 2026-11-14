@@ -5,6 +5,7 @@ import sqlite3
 import threading
 import time
 from contextlib import contextmanager
+from contextvars import ContextVar
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -20,6 +21,7 @@ from .people import observed_names
 LOG = logging.getLogger("tgwitness.store")
 
 ZERO = "0" * 64
+RECEIVED_AT = ContextVar("received_at", default=None)
 ADMIN_RECORDS = "kind NOT GLOB 'access.*' AND kind NOT GLOB 'profile.*'"
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
                 "actor_id", "payload", "previous_hash")
@@ -153,6 +155,8 @@ class Store:
     def append(self, kind, payload, chat_id=None, message_id=None, actor_id=None, source_at=None,
                media_job=None):
         payload = json.loads(json.dumps(payload, ensure_ascii=False, allow_nan=False))
+        if isinstance(payload, dict) and (received := RECEIVED_AT.get()) is not None:
+            payload.setdefault("received_at", received)
         with self.transaction():
             tail = self.db.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
             event = dict(seq=tail["seq"] + 1 if tail else 1, observed_at=utcnow(),

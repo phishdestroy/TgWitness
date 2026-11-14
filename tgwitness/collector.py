@@ -10,7 +10,7 @@ import secrets
 import warnings
 import weakref
 from contextlib import asynccontextmanager, suppress
-from contextvars import ContextVar
+from contextvars import ContextVar, copy_context
 from datetime import datetime, timedelta, timezone
 from functools import wraps
 from itertools import islice
@@ -45,7 +45,7 @@ from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient, FLOOD_ERRORS, request_method
 from .security import KeyLock
 from .workers import complete_in_thread
-from .store import canonical, utcnow
+from .store import RECEIVED_AT, canonical, utcnow
 from .evidence import retain_checkpoint
 from .netclient import RouteError, proxy_address
 from .network import NetworkConfig, NoRoute, RoutePolicy, saved_route
@@ -202,7 +202,6 @@ AUTO_DELETE_MEANING = {
 }
 
 
-BUFFER_DRAIN_ROUNDS = 5
 FLOOD_GUARDED = {"recheck": ("messages.getHistory", "messages.getMessages", "channels.getMessages"),
                  "watch": ("updates.getState",), "people": ("users.getUsers",)}
 RECONNECT_MEANING = ("Telegram's client library reconnected on its own. The connection was lost for an unknown "
@@ -1024,7 +1023,7 @@ class Collector:
                     return
                 if self.buffering:
                     if len(self.buffered) < self.buffer_limit:
-                        self.buffered.append((handler, update))
+                        self.buffered.append((handler, update, utcnow()))
                     else:
                         self.buffer_overflow = True
                 elif self.running:
@@ -2644,19 +2643,19 @@ class Collector:
                            "New messages can still be recovered by reading history."})
         self.mark_recheck_start()
         try:
-            for _ in range(BUFFER_DRAIN_ROUNDS):
+            while self.buffered:
                 pending, self.buffered = self.buffered, []
-                if not pending:
-                    break
-                for handler, update in pending:
-                    await handler(update)
+                for handler, update, received in pending:
+                    token = RECEIVED_AT.set(received)
+                    try:
+                        await handler(update)
+                    finally:
+                        RECEIVED_AT.reset(token)
         finally:
-            pending, self.buffered, self.buffering = self.buffered, [], False
+            self.buffered, self.buffering = [], False
         if self.buffer_overflow:
             self.store.append("coverage.gap", {"reason": "startup buffer full",
                                                "completeness": "updates received while starting were dropped"})
-        for handler, update in pending:
-            await handler(update)
         self.watchdog = asyncio.create_task(self.supervise(self.monitor, "connection monitor"))
         self.media_worker = asyncio.create_task(self.supervise(lambda: self.download_worker("bulk"), "media worker"))
         self.urgent_media_worker = asyncio.create_task(
@@ -3441,7 +3440,10 @@ class Collector:
                                  **({"reason": reason} if reason else {}), "meaning": PROBE_SEEN_MEANING},
                   chat_id, message.id)
         if reason is None:
-            task = asyncio.get_running_loop().create_task(self.probe_ack(self.client, chat_id, message, n, token))
+            context = copy_context()
+            context.run(RECEIVED_AT.set, None)
+            task = asyncio.get_running_loop().create_task(self.probe_ack(self.client, chat_id, message, n, token),
+                                                          context=context)
             self.probe_tasks.add(task)
             task.add_done_callback(self.probe_tasks.discard)
 
