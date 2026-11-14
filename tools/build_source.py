@@ -32,7 +32,7 @@ FILES = [
     ".clusterfuzzlite/project.yaml", ".clusterfuzzlite/Dockerfile", ".clusterfuzzlite/build.sh",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
     "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "deploy/constraints-mcp.txt",
-    "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
+    "deploy/Dockerfile.sealed",
     "examples/export-hashes.json", "examples/sealed-hashes.json", "examples/sealed-account.json",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",
@@ -44,6 +44,30 @@ FILES = [
     ".agents/README.md", ".agents/skills/README.md", ".agents/skills/tgwitness-cli/README.md",
     *CONTAINER_INPUTS,
 ]
+BUILD_FILES = {
+    "tools": (
+        "README.md", "bench_fulltext.py", "build_board_schemas.py", "build_dossier_example.py",
+        "build_installer.py", "build_portable.py", "build_report_styles.py", "build_site.py",
+        "build_source.py", "build_standalone_verifier.py", "build_verifier.py", "build_wiki.py",
+        "container_publication.py", "i18n_keys.py", "installer_checks.py", "installer_publication.py",
+        "lock_media_requirements.py", "lock_requirements.py", "ocr_advisories.py", "publication_guard.py",
+        "release_source.py", "sbom_locks.py", "sealed_release.py", "site_account.py", "site_content.py",
+        "site_context.py", "site_diagrams.py", "site_export_clinic.py", "site_i18n.py", "site_llms.py",
+        "site_modes.py", "site_seo.py", "site_typography.py", "site_validation.py", "site_wiki.py",
+        "sync_notice.py", "sync_notice_translations.py", "sync_verifier_languages.py", "update_client_platforms.py",
+    ),
+    "scripts": (
+        "README.md", "Demo.cmd", "Docker.cmd", "Setup.cmd", "docker-start.sh", "install-ci-runner.sh",
+        "sealed_runner.py",
+    ),
+    "website": (
+        "capture_readme.py", "render_case_assets.py", "render_casework.py", "render_directory_headers.py",
+        "render_identity.py", "render_notice_banner.py", "render_presentation.py", "render_readme.py",
+        "render_readme_capabilities.py", "render_readme_manifesto.py", "render_readme_navigation.py",
+        "render_readme_panels.py", "render_repository_banner.py", "render_wiki_headers.py", "validation/audit/VERIFY.py",
+    ),
+}
+FILES.extend(directory + "/" + name for directory, names in BUILD_FILES.items() for name in names)
 FILES.extend("tgwitness/fonts/" + name for name in (
     "NotoSans-Regular.ttf", "NotoSans-Bold.ttf", "NotoSansMono-Regular.ttf",
     "NotoSerif-Regular.ttf", "NotoSerif-Bold.ttf",
@@ -87,12 +111,11 @@ DIRECTORIES = {
     "tgwitness_capture": {".py", ".html", ".css", ".js"},
     "tgwitness_analyzer": {".py"},
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
-    "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
+    "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
-    "scripts": {".md", ".cmd", ".sh"},
     "fuzz": {".py", ".md"},
     ".github": {".md", ".yml", ".yaml"},
-    "website": {".md", ".html", ".css", ".js", ".py", ".json"},
+    "website": {".md", ".html", ".css", ".js", ".json"},
 }
 LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
              "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
@@ -123,19 +146,12 @@ PRESENTATION_MEDIA = {
     "assets/presentation/message-history.mp4", "assets/presentation/message-history.gif",
 }
 PRIVATE_DIRECTORIES = {"data", "proof-data", "proof-config", "proxy-config", "witness-data", "__pycache__", ".venv", "venv", "test-results", ".pytest_cache", ".ruff_cache", "build", "dist"}
-PRIVATE_VALIDATION_TOOLS = {
-    "api_routes.py", "browser_fixtures.py", "browser_helpers.py", "capture_demo.py", "capture_screenshots.py", "case_board_i18n.py",
-    "cloud_world.py", "minicheck.py", "prepare_media_test_model.py", "preview_trusted_live.py", "run_checks.py",
-}
 
 
 def is_public_file(path, directory):
     relative = path.relative_to(directory)
     parts = tuple(part.casefold() for part in relative.parts)
     if directory.name == "docs" and relative.as_posix() == "AGENT-GUIDE.md":
-        return False
-    if directory.name == "tools" and (parts[0] in {"fixtures", "tdx", "tsa"} or parts[-1] in PRIVATE_VALIDATION_TOOLS
-                                      or parts[-1].startswith(("test_", "check_"))):
         return False
     if any(part in PRIVATE_DIRECTORIES or part.startswith("tgwitness-backup") for part in parts[:-1]):
         return False

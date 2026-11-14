@@ -87,6 +87,12 @@ delivery.zip
 /tools/prepare_media_test_model.py
 /scripts/secret_lab_*.py
 /tools/preview_trusted_live.py
+/tools/build_report_studio_example.py
+/tools/demo_account_export.py
+/tools/export_clinic_preview.py
+/tools/research_sources.py
+/tools/site_test_server.py
+/tools/verify_live_probe.py
 /docs/assets/presentation/readme-mode-*.svg
 /AGENTS.md
 /CLAUDE.md
