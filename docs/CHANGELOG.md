@@ -101,6 +101,7 @@
 - Settings: each section opens at its own address and closes with **Back to settings**, the close button, Escape or the browser's Back button. **Which chats?** is edited in place instead of reopening first setup. First setup opened after setup is complete has a close button. Analysis → Insights loads the selected chat at once and explains an empty journal instead of showing zeros.
 - Settings open with the recommended values in use and four everyday sections; goal, files, record protection, notifications and the expert tools move under **Advanced settings**. Every change can be undone at once or later from **Recent changes**, custom file limits included. Switches, choice buttons and a short explanation under each setting replace bare checkboxes and question marks; the interface level moves to **Language, time and appearance**.
 - `verify.py --tsa-ca` and `python -m tgwitness.anchor verify` check the RFC 3161 signature, the signing certificate and its chain in Python with the `cryptography` library. OpenSSL is no longer needed, also on Windows; `--openssl` is removed from `tgwitness.anchor verify`.
+- History snapshots record `returned`, the number of messages Telegram sent for the request, beside `captured`. When nothing is saved the record says why: `telegram_returned_none` with the channel's restriction state (`restricted`, `restriction_reasons` and flags such as `left` or `broadcast`) when Telegram sent no messages, or `all_already_recorded` when every returned message was already in the journal.
 
 ## 0.9.3 preview · 11 November 2026
 
