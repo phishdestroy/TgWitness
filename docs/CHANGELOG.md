@@ -32,6 +32,8 @@
   history. A completed history task cannot restart observation after Stop. New
   observation, history, export and connection changes are refused until connection
   cleanup has finished; existing jobs keep their account reservation.
+- Interrupted startup retains the count of buffered updates that were not recorded,
+  writes a coverage gap and keeps the previous update position for a later retry.
 - Live journal streams recheck access after reading and delivering Case Board
   updates. Revoked sessions and reduced chat permissions cannot receive a prepared
   journal batch from the previous access scope.

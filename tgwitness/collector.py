@@ -3119,9 +3119,20 @@ class Collector:
         try:
             await self.start_observation()
         except BaseException as exc:
-            self.paused_drops += len(self.buffered)
+            self.paused_drops += sum(handler == self.on_raw for handler, _, _ in self.buffered)
             self.buffered, self.buffering = [], False
-            if self.running:
+            if self.buffer_dropped:
+                self.paused_drops += sum(entry["updates"] for entry in self.buffer_dropped.values())
+                with suppress(Exception):
+                    self.record_buffer_overflow()
+            if self.paused_drops:
+                with suppress(Exception):
+                    self.store.append("coverage.gap", {
+                        "reason": "startup_interrupted", "updates_not_recorded": self.paused_drops,
+                        "completeness": "incomplete", "run_id": self.run_id,
+                        "meaning": "Startup ended with delivered updates not recorded. A later start requests "
+                                   "them again when a saved update position is available."})
+            if self.running and not self.observation_stopping:
                 with suppress(Exception):
                     await self.stop()
                 self.running = False
@@ -3155,7 +3166,6 @@ class Collector:
         try:
             await self.prepare_start()
         except BaseException:
-            self.buffered, self.buffering = [], False
             self.paused_drops += dropped
             raise
         if not self.history.busy:
@@ -3192,19 +3202,24 @@ class Collector:
                            "New messages can still be recovered by reading history."})
         self.mark_recheck_start()
         client = self.client
+        pending = deque()
         try:
             for _ in range(BUFFER_DRAIN_ROUNDS):
-                pending, self.buffered = self.buffered, []
+                pending.extend(self.buffered)
+                self.buffered = []
                 if not pending:
                     break
-                for item in pending:
-                    await self.enqueue_update(client, *item)
-        finally:
-            pending, self.buffered, self.buffering = self.buffered, [], False
+                while pending:
+                    await self.enqueue_update(client, *pending.popleft())
+            pending.extend(self.buffered)
+            self.buffered, self.buffering = [], False
+            while pending:
+                await self.enqueue_update(client, *pending.popleft())
+        except BaseException:
+            self.buffered = [*pending, *self.buffered]
+            raise
         if self.buffer_overflow:
             self.record_buffer_overflow()
-        for item in pending:
-            await self.enqueue_update(client, *item)
         self.watchdog = asyncio.create_task(self.supervise(self.monitor, "connection monitor"))
         self.media_worker = asyncio.create_task(self.supervise(lambda: self.download_worker("bulk"), "media worker"))
         self.urgent_media_worker = asyncio.create_task(
