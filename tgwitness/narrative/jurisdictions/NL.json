@@ -1,6 +1,6 @@
 {
   "code": "NL",
-  "scope": "Nederland",
+  "scope": "Nederland · civiele en strafzaken (afzonderlijk aangeduide verwijzingen)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "deskundige",
@@ -8,22 +8,43 @@
     "source": "https://e-justice.europa.eu/topics/find-legal-professional/find-expert/nl_en"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · BW 3:15a",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. BW art. 3:15a: like a qualified electronic signature, an advanced or other electronic signature has the same legal effect as a handwritten signature if the signing method used is sufficiently reliable, having regard to the purpose of the signature.",
+    "source": "https://wetten.overheid.nl/BWBR0005291"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. The Uitvoeringswet AVG supplements the GDPR; the Dutch implementation of Directive (EU) 2016/680 was not verified.",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Rv art. 152",
+      "basis": "Evidence may be given by any means unless the law provides otherwise; its evaluation is left to the court unless the law provides otherwise.",
+      "source": "https://wetten.overheid.nl/BWBR0001827"
+    },
+    {
+      "route": "criminal",
+      "term": "Sv art. 338; art. 339(1)",
+      "basis": "The court may find the charge proven only if convinced by the content of lawful means of evidence from the trial. The lawful means are the judge's own observation and statements of the accused, witnesses and experts, and written documents.",
+      "source": "https://wetten.overheid.nl/BWBR0001903"
+    }
+  ],
+  "dpa": {
+    "name": "Autoriteit Persoonsgegevens",
+    "name_en": "Dutch Data Protection Authority",
+    "basis": null,
+    "source": "https://autoriteitpersoonsgegevens.nl/"
+  },
   "sources": [
     {
       "term": "LRGD / NRGD",
@@ -40,6 +61,44 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Burgerlijk Wetboek Boek 3, art. 15a",
+      "url": "https://wetten.overheid.nl/BWBR0005291"
+    },
+    {
+      "term": "Wetboek van Burgerlijke Rechtsvordering, art. 152",
+      "url": "https://wetten.overheid.nl/BWBR0001827"
+    },
+    {
+      "term": "Wetboek van Strafvordering, arts. 338-339",
+      "url": "https://wetten.overheid.nl/BWBR0001903"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Uitvoeringswet Algemene verordening gegevensbescherming",
+      "url": "https://wetten.overheid.nl/BWBR0040940"
+    },
+    {
+      "term": "Autoriteit Persoonsgegevens",
+      "url": "https://autoriteitpersoonsgegevens.nl/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from wetten.overheid.nl (Rv and Sv as of 1 July 2026; BW Book 3 as of 1 July 2025; UAVG as of 1 September 2026) and EUR-Lex opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in the Netherlands.",
+      "sources": [
+        "https://wetten.overheid.nl/BWBR0005291",
+        "https://wetten.overheid.nl/BWBR0001827",
+        "https://wetten.overheid.nl/BWBR0001903",
+        "https://wetten.overheid.nl/BWBR0040940",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

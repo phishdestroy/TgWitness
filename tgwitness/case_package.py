@@ -212,7 +212,11 @@ def verification_html(result, fixed, say, stamps=None, documents=(), files=None)
             + "</footer></main></html>")
 
 
-def readme(say, title):
+def readme(say, title, jurisdiction=None):
+    court_line = (say("data/court/ — inspection protocol draft, technical annex, file inventory and media handover act for a "
+                      "Ukrainian criminal proceeding, exhibit index, annex for official requests.") if jurisdiction == "UA"
+                  else say("data/court/ — certification of authenticity to complete and sign, exhibit index, annex for "
+                           "official requests."))
     files = (
         say("data/report.html — the readable account of what the investigator did, with screenshots and times."),
         say("data/presentation.html — the same record as slides; print it to get a PDF with one slide per page."),
@@ -223,7 +227,7 @@ def readme(say, title):
         say("data/timestamps/ — collected checkpoint and receipt files, not cryptographically verified by the package builder."),
         say("data/video/ — subtitles with step captions and notes for the screen recording; open them in a video player "
             "next to the recorder's signed video export."),
-        say("data/court/ — certification of authenticity to complete and sign, exhibit index, annex for official requests."))
+        court_line)
     return "\n".join((
         title, "=" * min(len(title), 72), "",
         say("This folder is a BagIt bag (RFC 8493). Any BagIt tool can check that no file changed, for example: "
@@ -253,7 +257,7 @@ def passphrase():
     return "-".join(raw[i:i + 4] for i in range(0, len(raw), 4))
 
 
-def bag(name, payload, title, say, fixed, now):
+def bag(name, payload, title, say, fixed, now, jurisdiction=None):
     data = {"data/" + key: value for key, value in payload.items()}
     manifest = "".join(hashlib.sha256(value).hexdigest() + "  " + key + "\n" for key, value in sorted(data.items()))
     tags = {"bagit.txt": b"BagIt-Version: 1.0\nTag-File-Character-Encoding: UTF-8\n",
@@ -263,14 +267,17 @@ def bag(name, payload, title, say, fixed, now):
                              + "\nPayload-Oxum: " + str(sum(len(v) for v in data.values())) + "." + str(len(data))
                              + "\n").encode("utf-8"),
             "manifest-sha256.txt": manifest.encode("utf-8"),
-            "README.txt": readme(say, title).encode("utf-8")}
+            "README.txt": readme(say, title, jurisdiction).encode("utf-8")}
     tags["tagmanifest-sha256.txt"] = "".join(hashlib.sha256(value).hexdigest() + "  " + key + "\n"
                                              for key, value in sorted(tags.items())).encode("utf-8")
     return {name + "/" + key: value for key, value in {**tags, **data}.items()}
 
 
-def build(session, say, supplied, media_root, directory=None, checkpoints=None, password=None):
+def build(session, say, supplied, media_root, directory=None, checkpoints=None, password=None, jurisdiction=None,
+          account=None):
     from .documentation_verify import verify
+    if jurisdiction not in (None, "", "US", "UA"):
+        raise ValueError("Choose a supported package jurisdiction: UA or US.")
     fixed = session.get("fixed")
     if not fixed:
         raise ValueError("Fix the document before preparing a case package.")
@@ -317,18 +324,32 @@ def build(session, say, supplied, media_root, directory=None, checkpoints=None, 
     payload["court/request-annex.html"] = court.annex_html(request, session["title"], say).encode("utf-8")
     from . import undercover
     activity = undercover.record(model)
-    documents = COURT_FILES
+    ukrainian = jurisdiction == "UA"
+    documents = court.UA_FILES + COURT_FILES[1:] if ukrainian else COURT_FILES
     if activity["chats"] or activity["personas"] or activity["authorisations"]:
         payload["court/undercover-record.json"] = json.dumps(activity, ensure_ascii=False, indent=2).encode("utf-8")
         payload["court/undercover-record.html"] = undercover.render_html(activity, session["title"], say).encode("utf-8")
-        documents = COURT_FILES + (("court/undercover-record.html", "Undercover activity record"),)
+        documents = documents + (("court/undercover-record.html", "Undercover activity record"),)
     payload["verification.html"] = verification_html(result, fixed, say, stamps, documents,
                                                      (len(files), missing)).encode("utf-8")
     hashes = {"data/" + name: hashlib.sha256(value).hexdigest() for name, value in payload.items()}
     receipts = sorted(name.split("/", 1)[1] for name in stamps if name.endswith((".tsr", ".ots")))
-    payload["court/certification.html"] = court.certification_html(session, model, fixed, result["fingerprint"], hashes, say,
-                                                                   receipts).encode("utf-8")
-    entries = bag("tgwitness-case-" + session["id"][:8], payload, session["title"], say, fixed, fixed["at"])
+    name = "tgwitness-case-" + session["id"][:8]
+    if ukrainian:
+        from . import __version__
+        absent = [{**item, "description": OMISSIONS[item["reason"]]} for item in missing]
+        payload["court/inspection-protocol.html"] = court.protocol_html(
+            session, model, fixed, result["fingerprint"], listed, say, receipts, absent, account, __version__).encode("utf-8")
+        payload["court/technical-annex.html"] = court.technical_annex_html(
+            session, model, fixed, result["fingerprint"], say, COMMANDS, receipts, __version__).encode("utf-8")
+        payload["court/media-transfer-act.html"] = court.transfer_act_html(session, fixed, say, name).encode("utf-8")
+        payload["court/file-inventory.html"] = court.inventory_html(
+            [("data/" + path, len(value), hashlib.sha256(value).hexdigest()) for path, value in sorted(payload.items())],
+            listed, session["title"], say).encode("utf-8")
+    else:
+        payload["court/certification.html"] = court.certification_html(session, model, fixed, result["fingerprint"], hashes,
+                                                                       say, receipts).encode("utf-8")
+    entries = bag(name, payload, session["title"], say, fixed, fixed["at"], jurisdiction)
     handle = tempfile.NamedTemporaryFile(prefix="tgwitness-case-", suffix=".zip", delete=False, dir=directory)
     handle.close()
     path = Path(handle.name)

@@ -1,0 +1,84 @@
+{
+  "code": "MT",
+  "scope": "Malta · civil and criminal proceedings (separately scoped references)",
+  "checked_at": "2026-11-14",
+  "expert_role": null,
+  "esig_regulation": {
+    "term": "eIDAS · Electronic Commerce Act (Cap. 426)",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183 applies directly. Cap. 426, art. 9: an electronic contract is not denied legal effect, validity or enforceability solely because it is wholly or partly electronic. The national provisions supplementing eIDAS were not verified.",
+    "source": "https://legislation.mt/eli/cap/426/eng/pdf"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing by competent authorities for criminal offences is governed by S.L. 586.08, which transposes Directive (EU) 2016/680.",
+    "deadline_days": null,
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+  },
+  "timestamp_recognition": {
+    "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
+    "automatic_ots_qualification": false,
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+  },
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Cap. 12, arts. 559-560",
+      "basis": "The court requires the best evidence the party can produce and disallows evidence it considers irrelevant, superfluous or not the best available.",
+      "source": "https://legislation.mt/eli/cap/12/eng/pdf"
+    },
+    {
+      "route": "civil",
+      "term": "Cap. 12, art. 636",
+      "basis": "Authentic copies of the documents listed in arts. 627, 628 and 629(a)-(c) and (e), such as acts of the Government of Malta and of foreign governments and courts, are admissible and are evidence to the same extent as the originals.",
+      "source": "https://legislation.mt/eli/cap/12/eng/pdf"
+    },
+    {
+      "route": "criminal",
+      "term": "Criminal Code (Cap. 9), art. 638",
+      "basis": "The fullest and most satisfactory proof available must be produced, without omitting any important witness; the testimony of one witness, if believed, can be sufficient proof.",
+      "source": "https://legislation.mt/eli/cap/9/eng/pdf"
+    }
+  ],
+  "dpa": {
+    "name": "Information and Data Protection Commissioner (IDPC)",
+    "name_en": "Information and Data Protection Commissioner",
+    "basis": "Data Protection Act (Cap. 586), art. 11",
+    "source": "https://idpc.org.mt/"
+  },
+  "sources": [
+    {
+      "term": "Code of Organization and Civil Procedure (Cap. 12)",
+      "url": "https://legislation.mt/eli/cap/12/eng/pdf"
+    },
+    {
+      "term": "Criminal Code (Cap. 9)",
+      "url": "https://legislation.mt/eli/cap/9/eng/pdf"
+    },
+    {
+      "term": "Electronic Commerce Act (Cap. 426)",
+      "url": "https://legislation.mt/eli/cap/426/eng/pdf"
+    },
+    {
+      "term": "eIDAS (consolidated)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Data Protection Act (Cap. 586)",
+      "url": "https://legislation.mt/eli/cap/586/eng/pdf"
+    },
+    {
+      "term": "S.L. 586.08",
+      "url": "https://legislation.mt/eli/sl/586.8/eng/pdf"
+    },
+    {
+      "term": "IDPC",
+      "url": "https://idpc.org.mt/"
+    }
+  ]
+}

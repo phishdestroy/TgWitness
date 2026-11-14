@@ -1,6 +1,6 @@
 {
   "code": "CZ",
-  "scope": "Česko",
+  "scope": "Česko · civilní a trestní řízení (odděleně označené odkazy)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "znalec",
@@ -8,22 +8,55 @@
     "source": "https://e-justice.europa.eu/topics/find-legal-professional/find-expert/cz_en"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · zákon č. 297/2016 Sb.",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183; Act No. 297/2016 Coll. on trust services for electronic transactions (§ 1: regulates matters following the Regulation). § 6(1): acts towards public bodies may be signed only with a recognised electronic signature (uznávaný elektronický podpis).",
+    "source": "https://e-sbirka.gov.cz/sb/2016/297"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Act No. 110/2019 Coll. implements the related EU law and follows the GDPR (§ 1).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "OSŘ § 125; § 132",
+      "basis": "Any means that can establish the facts may serve as evidence; where no method is prescribed, the court decides how to take it. The court evaluates each item and all evidence together at its discretion.",
+      "source": "https://e-sbirka.gov.cz/sb/1963/99"
+    },
+    {
+      "route": "civil",
+      "term": "OSŘ § 129(1)",
+      "basis": "Documentary evidence is taken by reading the document or stating its content, or by showing it to the parties.",
+      "source": "https://e-sbirka.gov.cz/sb/1963/99"
+    },
+    {
+      "route": "criminal",
+      "term": "TŘ § 2(6); § 89(2)",
+      "basis": "Authorities evaluate evidence by inner conviction based on careful consideration of all circumstances. Anything that can clarify the case may be evidence; each party may obtain and present evidence, and evidence is not rejected only because an authority did not obtain it.",
+      "source": "https://e-sbirka.gov.cz/sb/1961/141"
+    },
+    {
+      "route": "criminal",
+      "term": "TŘ § 107(1)",
+      "basis": "The expert receives the necessary information from the file and defined tasks; the expert does not evaluate evidence or decide legal questions.",
+      "source": "https://e-sbirka.gov.cz/sb/1961/141"
+    }
+  ],
+  "dpa": {
+    "name": "Úřad pro ochranu osobních údajů (ÚOOÚ)",
+    "name_en": "Office for Personal Data Protection",
+    "basis": "Zákon č. 110/2019 Sb., § 54 an.",
+    "source": "https://uoou.gov.cz/"
+  },
   "sources": [
     {
       "term": "Zákon č. 254/2019 Sb.",
@@ -40,6 +73,44 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Zákon č. 297/2016 Sb.",
+      "url": "https://e-sbirka.gov.cz/sb/2016/297"
+    },
+    {
+      "term": "Občanský soudní řád (zákon č. 99/1963 Sb.)",
+      "url": "https://e-sbirka.gov.cz/sb/1963/99"
+    },
+    {
+      "term": "Trestní řád (zákon č. 141/1961 Sb.)",
+      "url": "https://e-sbirka.gov.cz/sb/1961/141"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Zákon č. 110/2019 Sb.",
+      "url": "https://e-sbirka.gov.cz/sb/2019/110"
+    },
+    {
+      "term": "Úřad pro ochranu osobních údajů",
+      "url": "https://uoou.gov.cz/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from e-Sbírka consolidated texts (OSŘ and TŘ as of 1 November 2026; Acts 110/2019 and 297/2016 as of 1 January 2026) opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in the Czech Republic.",
+      "sources": [
+        "https://e-sbirka.gov.cz/sb/2016/297",
+        "https://e-sbirka.gov.cz/sb/1963/99",
+        "https://e-sbirka.gov.cz/sb/1961/141",
+        "https://e-sbirka.gov.cz/sb/2019/110",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

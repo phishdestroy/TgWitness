@@ -14,6 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from . import __version__
+from . import asic
 from . import indicators
 from . import pdf_report
 from . import report
@@ -152,6 +153,7 @@ README = (
     "events.jsonl is authoritative. Export is a stable journal prefix.\n"
     "coverage.json lists continuous observation periods, gaps and message IDs that were\n"
     "not observed; deletions are separate notice records. verify.py recomputes it from events.jsonl.\n"
+    "Evidence records (RFC 4998), when present: anchors/*.ers for checkpoints, META-INF/evidencerecord.ers in ASiC-E.\n"
     "Produced by TgWitness (PhishDestroy, https://phishdestroy.io); the producer is part of\n"
     "the signed manifest.\n")
 
@@ -172,9 +174,11 @@ class EmptyReport(ValueError):
 
 
 def export_file(store, vault, fmt, options=None, *, include_board=True, compact=False, output_stream=None,
-                max_uncompressed_bytes=None, require_records=False):
+                max_uncompressed_bytes=None, require_records=False, container=None):
     if fmt not in ("jsonl", "csv", "html", "json", "pdf", "zip"):
         raise ValueError("Unsupported export format")
+    if container is not None and (fmt != "zip" or output_stream is not None):
+        raise ValueError("ASiC-E containers require a ZIP export written to a file")
     if compact and fmt != "zip":
         raise ValueError("Compact packaging requires ZIP")
     if output_stream is not None and fmt != "zip":
@@ -280,6 +284,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                     raise ValueError("Invalid uncompressed archive limit")
                 limit = max_uncompressed_bytes
             with zipfile.ZipFile(output_stream if output_stream is not None else path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+                if container is not None:
+                    asic.write_mimetype(archive)
                 def write_member(name, values):
                     nonlocal total
                     digest = hashlib.sha256()
@@ -419,7 +425,21 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 if total + len(manifest_bytes) + 88 > limit:
                     raise BundleSizeLimit("Manifest pushes bundle above the verification size limit")
                 archive.writestr("manifest.json", manifest_bytes)
-                archive.writestr("manifest.sig", vault.sign(manifest_bytes))
+                manifest_signature = vault.sign(manifest_bytes).encode()
+                archive.writestr("manifest.sig", manifest_signature)
+                if container is not None:
+                    container["result"] = asic.seal(archive, {
+                        **hashes, "manifest.json": hashlib.sha256(manifest_bytes).hexdigest(),
+                        "manifest.sig": hashlib.sha256(manifest_signature).hexdigest()},
+                        container["signer"], container.get("timestamp"))
+                    if container.get("timestamp"):
+                        from .evidence_record import seal_container
+                        try:
+                            container["evidence_record"] = seal_container(archive, {
+                                **hashes, "manifest.json": hashlib.sha256(manifest_bytes).hexdigest(),
+                                "manifest.sig": hashlib.sha256(manifest_signature).hexdigest()}, container["timestamp"])
+                        except Exception as exc:
+                            container["evidence_record"] = {"error": str(exc)[:500] or type(exc).__name__}
         return path
     except BaseException:
         if path is not None:

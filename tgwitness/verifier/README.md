@@ -10,7 +10,10 @@ and export declarations without rewriting function bodies or signed formats.
 signature checks. Other modules separate timestamps, coverage, reports, exports,
 witnesses and the console. `timestamps` also checks the OCSP or CRL evidence stored for
 RFC 3161 signing certificates, and Intel TDX quotes offline against the pinned Intel SGX
-Root CA. Deferred internal imports make dependencies explicit
+Root CA. `national` is pure-Python, verify-only code for DSTU 4145-2002 (polynomial basis,
+with GOST 34.311-95 or DSTU 7564 Kupyna), GOST R 34.10-2012 with Streebog and SM2 with SM3,
+used by `timestamps` for token signatures, message imprints and certificate chains. Unknown
+algorithms, curves and the optimal normal basis are reported as unsupported. Deferred internal imports make dependencies explicit
 without an import cycle. Run the CLI through the assembled artifact, which retains
 the original shared namespace and command-line limits.
 

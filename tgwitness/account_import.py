@@ -224,7 +224,7 @@ def import_accounts(files, passcode="", include_password=False):
     return merged
 
 
-def preview(files, passcode=""):
+def preview(files, passcode="", languages=None):
     try:
         result = import_accounts(files, passcode)
     except (ValueError, OSError) as exc:
@@ -233,7 +233,10 @@ def preview(files, passcode=""):
     if ready and bool(result.get("api_id")) != bool(result.get("api_hash")):
         return {"state": "incomplete", "can_connect": False, "formats": result["formats"],
                 "message": "Session found, but its application settings are incomplete. Supply both API ID and API hash in the JSON, or select the session file without this JSON to use the built-in app settings."}
+    seed = secrets.token_hex(32) if ready else None
     return {"state": "ready" if ready else "missing_session", "can_connect": ready,
+            **({"device_seed": seed,
+                "independent_profile": client_identity.resolve(api_pool.DESKTOP_ID, languages, seed)} if ready else {}),
             "formats": result["formats"], "client_profile": result.get("client_profile"), "api_id": result.get("api_id"),
             "key_id": hashlib.sha256(session_key(result["session"])).hexdigest()[:16] if ready else None,
             "expected_user_id": result.get("expected_user_id"),

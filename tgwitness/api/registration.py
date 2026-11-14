@@ -722,6 +722,24 @@ def register(app, ctx):
         "/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)]
     )(routes_export.export_ticket)
     router.get("/api/exports/{export_id}/download")(routes_export.export_again)
+    router.get("/api/exports/{export_id}/external-signatures", dependencies=[Depends(authenticate)])(
+        routes_export.external_signatures
+    )
+    router.post(
+        "/api/exports/{export_id}/external-signatures/request", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_request)
+    router.post(
+        "/api/exports/{export_id}/external-signatures/ticket", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_ticket)
+    router.get("/api/exports/{export_id}/external-signatures/download")(
+        routes_export.external_signature_download
+    )
+    router.post(
+        "/api/exports/{export_id}/external-signatures/{number}", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_attach)
+    router.post(
+        "/api/exports/{export_id}/external-signatures/{number}/check", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_check)
     router.post("/api/privacy/reveal", dependencies=[Depends(authenticate)])(
         routes_chats.reveal_secret
     )
@@ -741,8 +759,12 @@ def register(app, ctx):
     register_subject(app, authenticate, ctx.require_live, ctx.operation, ctx.root / "media")
     register_undercover(app, authenticate, ctx.require_live)
     register_presence(app, authenticate, ctx.require_live, ctx.operation)
+    from ..visibility import register as register_visibility
+    register_visibility(app, authenticate, ctx.require_live, ctx.operation)
     register_qr(app, authenticate, ctx.require_live, ctx.visible_chats, ctx.root / "media")
     register_watchlists(app, authenticate, ctx.require_live, ctx.visible_chats)
+    from .continuity import register as register_continuity
+    register_continuity(app, authenticate, ctx.visible_chats)
     register_channel_graph(app, authenticate, ctx.require_live)
     register_webapp(app, authenticate, ctx.require_live, ctx.visible_chats)
     app.state.extensions = extensions.load(

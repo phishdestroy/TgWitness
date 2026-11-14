@@ -65,8 +65,9 @@ part of that record with the checks below.
 | Output | Verification and use |
 | --- | --- |
 | Evidence ZIP | Canonical events, signed manifest, coverage, custody entries, attachments and available external receipts; check the archive and its selected acquisition mode. |
+| ASiC-E container | The evidence ZIP as an ETSI ASiC-E container (EN 319 162-1) with a `mimetype` entry and `META-INF/ASiCManifest.xml`, CAdES-signed with the workspace's own certificate at level B-B, or B-T when timestamping is on. Validators such as EU DSS check format and integrity and, as the certificate is self-issued, report no trust anchor. EU DSS 6.3 with default settings refuses a container of more than 1000 files ("Too many files detected"). `verify.py` checks the Ed25519 manifest and every listed file, and names the container entries it skips. |
 | HTML and JSON reports | Individually sealed views with source references, also listed in the ZIP manifest. Their recorded counts summarize journal event kinds. |
-| PDF reports | Ed25519 seal plus CMS PDF signature over the byte range. The TgWitness verifier uses the trusted Ed25519 key; a viewer's certificate-trust display is a separate check. |
+| PDF reports | Ed25519 seal plus a PAdES baseline PDF signature over the byte range: B-B, or B-T with a signature time stamp when timestamping is on. The TgWitness verifier uses the trusted Ed25519 key; a viewer's certificate-trust display is a separate check. |
 | CSV | A spreadsheet view covered by the ZIP manifest. Formula escaping protects spreadsheet use; original signed text remains in the journal. |
 | JSONL | Signed event records, including attachment references. The evidence ZIP additionally carries the preserved attachment bytes. |
 | Chat export and Desktop-compatible views | History acquisition and available admin-log records, with the requested rendering and signed archive. Live monitoring's saved versions are a separate acquisition path. |
@@ -80,6 +81,30 @@ A printout or screen capture is a presentation of the signed material. Its repor
 ID, key fingerprint and QR reference help locate the original file for verification.
 Custody declarations record the supplied examiner and transfer information;
 verifier results and acquisition receipts are retained as separate evidence.
+
+### External signatures
+
+A signature can also come from a key TgWitness never holds, such as an investigator's
+qualified electronic signature or an organisation's seal. On **Exports**, **External
+signature** on a prepared export without a password hands out the bytes to sign: a new
+`META-INF/ASiCManifestNNN.xml` listing every file with its SHA-256 for an ASiC-E
+container, or the export's `manifest.json` for a ZIP. The signer returns a CMS (CAdES)
+`.p7s`, detached or with the content embedded.
+
+TgWitness checks that the signature covers exactly those bytes and verifies with the
+signer's certificate (RSA PKCS#1 v1.5, RSASSA-PSS, ECDSA, Ed25519, Ed448). The chain
+is checked only against root certificates the operator supplies; revocation, trusted
+lists and qualified status are not checked. The panel shows one state per signature:
+waiting for a signature, attached and not checked, verified, algorithm not supported,
+signature invalid, signed bytes do not match, or certificate not chained to a supplied
+root. Changing the export
+after the bytes were handed out sets all its signatures to "signed bytes do not match".
+
+**Download with signatures** adds the signatures and their manifests under `META-INF`
+in an ASiC-E container. For a ZIP, it puts the unchanged ZIP, the `.p7s` files and
+`SIGNATURES.txt` into an outer ZIP. Invalid signatures and signatures over other bytes
+are left out. A signature with an algorithm TgWitness cannot check is included; the
+panel shows its state, as does `SIGNATURES.txt` for a ZIP.
 
 ## Comparing chat exports
 
@@ -122,8 +147,8 @@ earlier comparison results. Archive format and signature verification are unchan
    materials. Check the intended collection setup with the
    [live acceptance procedure](internal/LIVE_ACCEPTANCE.md).
 2. Retain the workspace's public-key fingerprint independently before relying on
-   its exports. Turn on evidence mode so checkpoints receive RFC 3161 and
-   OpenTimestamps receipts. Save signed checkpoints outside the collector during
+   its exports. Keep evidence mode on (the default) so checkpoints receive RFC 3161
+   and OpenTimestamps receipts. Save signed checkpoints outside the collector during
    collection. Record interruptions and the limits of the account's visibility.
 3. Export a **signed ZIP** and retain the signed run receipt. Use a checkpoint at
    or before the exported journal boundary. A later checkpoint can correctly reject
@@ -217,13 +242,17 @@ report is sealed with the workspace's Ed25519 key and can be verified separately
   and a selection for data protection can be made from them while the signed file stays whole.
 - `report.pdf` / `chat.pdf`: a formal document for printing and filing, signed twice over the same
   bytes, the whole file except the signature value (`/ByteRange`). The standard PDF signature
-  (`adbe.pkcs7.detached`, CMS with SHA-256 and ECDSA P-256) uses a self-issued document-signing
-  certificate kept in the workspace vault; its subject serial number is the Ed25519 key
-  fingerprint. The Ed25519 seal travels inside the CMS as the unsigned attribute
-  `2.25.240684792623320047764573196045913242332` and names the certificate's SHA-256 with
-  `"content": "pdf-byte-range"`, so the Ed25519 key vouches for the certificate. A PDF reader shows
-  whether the file changed after signing and calls the signer unknown until the certificate is
-  trusted; compare the Ed25519 fingerprint instead. Chinese, Japanese and Korean PDFs need a font
+  is PAdES baseline (ETSI EN 319 142-1, `/SubFilter /ETSI.CAdES.detached`: CMS with SHA-256 and
+  ECDSA P-256, signing-certificate-v2, no CMS signing time; the claimed time is `/M`) at level
+  B-B, or B-T with an RFC 3161 signature time stamp in the CMS when timestamping is on and a
+  timestamp authority answers over the route for requests outside Telegram. It uses a
+  self-issued document-signing certificate kept in the workspace vault; its subject serial
+  number is the Ed25519 key fingerprint. The Ed25519 seal travels inside the CMS as the
+  unsigned attribute `2.25.240684792623320047764573196045913242332` and names the
+  certificate's SHA-256 with `"content": "pdf-byte-range"`, so the Ed25519 key vouches for the
+  certificate. The certificate is not qualified: a PDF reader shows the signature as valid and
+  the signer as unknown or untrusted until the certificate is trusted; compare the Ed25519
+  fingerprint instead. Chinese, Japanese and Korean PDFs need a font
   on the server (or in `TGWITNESS_FONT_DIR`); without one the ZIP carries the HTML and JSON reports
   only.
 - `report.en.html`, `report.en.pdf` / `chat.en.html`, `chat.en.pdf`: the English original of the
@@ -574,10 +603,11 @@ another channel; on its own it does not meet the minimum for evidence.
 ## Reading a verification result
 
 The verifier reports archive integrity, signer pinning and assurance checks
-separately. Without independently supplied trust inputs, an internally consistent
-archive can pass its signature and format checks with `signer_pinned: false`.
-This is useful for checking the supplied bytes; signer and acquisition checks
-are separate results, selected below.
+separately. A valid signature shows that the bytes have not changed since they were
+signed. The operator gives the key fingerprint to the recipient through a separate
+channel. Without `--fingerprint`, an intact archive passes its signature and format
+checks with `signer_pinned: false`, and the final line starts with
+`EVIDENCE: minimum not met · missing: confirmed signer key`.
 
 For an automated local-archive policy that requires a pinned signer and the minimum
 for evidence:
@@ -622,15 +652,14 @@ provenance and TDX measurements provide the environment checks; the
 
 ### Where the messages come from
 
-Telegram delivers messages to every client, official apps included, through an
-MTProto session rather than with per-message signatures. The session's
-authorization key is negotiated against Telegram's pinned server key, and every
-update arrives encrypted and integrity-checked under that key. The collector
-receives messages through that authenticated session and signs each observation
-into the journal as it arrives, with the chat, message and sender identifiers and
-the server dates Telegram supplied. In GitHub Actions capture and Intel TDX
-deployments, attestation additionally binds that session and signing key to the
-approved collector execution.
+Telegram delivers messages to every client, official apps included, inside an
+MTProto session. The session's authorization key is negotiated against Telegram's
+pinned server key, and every update arrives encrypted and integrity-checked under
+that key. The collector receives messages through the account's authenticated
+session and signs each observation into the journal as it arrives, with the chat,
+message and sender identifiers and the date Telegram set on each message. In GitHub
+Actions capture and Intel TDX deployments, attestation also binds that session and
+signing key to the approved collector execution.
 
 The journal records where the authorization key came from. Signing in by phone or QR,
 or an independent login from a session file, writes `account.authorized` with
@@ -638,12 +667,13 @@ or an independent login from a session file, writes `account.authorized` with
 `imported`. An imported key also exists wherever it came from. Attested deployments
 refuse imported keys.
 
-Evaluate source attribution through the acquisition path in the table above:
-authenticated Telegram connection, recorded updates or captured frames, their binding
-to journal entries, and the verified execution environment where applicable. Archive
-signatures preserve that record for later checking. Retained checkpoints establish
-earlier journal boundaries; coverage records identify collection outcomes and verified
-external timestamps place the committed bytes in time.
+The Telegram origin of a record rests on the account's authenticated connection, the
+connection and capture records in the journal, captured MTProto frames matched to journal
+entries ([`tgwitness/forensics/`](../tgwitness/forensics/)), the Telegram date of each
+message and, for attested capture, the verified execution environment. Archive signatures
+preserve that record for later checking. Retained checkpoints fix earlier journal
+boundaries, coverage records show collection outcomes, and verified external timestamps
+place the committed bytes in time.
 
 For a local workspace, the recipient supplies trusted collector or witness inputs.
 For sealed acquisition, the trusted policy and attestation bind the archive digest to
@@ -732,10 +762,12 @@ at or before the exported prefix, not an arbitrary later checkpoint.
 
 ## RFC 3161 preparation and response verification (0.2)
 
-Evidence mode (off by default) sends only the SHA-256 of each signed checkpoint to the listed
-RFC 3161 authorities and OpenTimestamps calendars, over the workspace route and never over MTProxy.
-Answers are kept in `checkpoints/anchors/`, exported, and checked by `verify.py` (`--tsa-ca` checks
-the TSA signature; confirm OpenTimestamps proofs with `ots upgrade` and `ots verify`).
+Evidence mode sends only the SHA-256 of each signed checkpoint to the listed RFC 3161
+authorities and OpenTimestamps calendars, over the workspace route and never over MTProxy.
+Timestamps are on by default in every setup goal; **Evidence for a case** also records drand.
+Answers are kept in `checkpoints/anchors/`, exported as `.tsr` and `.ots` files under `anchors/`,
+and checked by `verify.py` (`--tsa-ca` checks the TSA signature; confirm OpenTimestamps proofs
+with `ots upgrade` and `ots verify`).
 
 An RFC 3161 authority that fails twice in a row waits before the next attempt: one interval, then
 two, four and so on up to six hours, or as long as its `Retry-After` asks, up to a day. A pass that
@@ -761,8 +793,9 @@ See the [procedure](TIMESTAMP.md) and [validation results](VERIFICATION.md).
 
 ## Optional records in evidence mode: drand and Telegram devices
 
-Two more records can run on the same passes as the timestamps. Both are off by default and
-take effect only while evidence mode is on: More tools → Extras → Evidence & backups → **More witnesses · optional**,
+Two more records can run on the same passes as the timestamps. Both take effect only while
+evidence mode is on. **Evidence for a case** turns drand on; otherwise both start off. Switch them
+under More tools → Extras → Evidence & backups → **More witnesses · optional**,
 or `"drand": true` and `"devices": true` in `POST /api/evidence`. One failing does not stop the
 other or the timestamps; the panel shows the latest result of each under the form.
 

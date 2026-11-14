@@ -118,6 +118,11 @@ PARAMETERS = (
     Parameter("recheck_batch", "recheck", 200, 10, 2000, "messages", "Saved messages asked for again per window",
               "The newest saved messages and a rolling window of older ones are requested again to find edits "
               "and messages Telegram no longer returns."),
+    Parameter("admin_log_minutes", "recheck", 60, 0, 1440, "minutes", "Read the admin log of administered chats every",
+              "Channels and supergroups where this account is an administrator: deletions and edits with the account "
+              "that made them, which Telegram keeps for about 48 hours. 0 turns it off. Reads share the recheck "
+              "pace: at most the chats-per-pass number of requests per pass, with the pause between them. While "
+              "this is on, this account's rights in each channel and supergroup are also read every 6 hours."),
     Parameter("media_min_free_mb", "attachments", 1024, 0, 1048576, "MiB", "Pause downloads below this free disk space",
               "Queued files stay queued and resume when space is freed. 0 never pauses."),
     Parameter("media_timeout_seconds", "attachments", 120, 10, 86400, "seconds", "Base download timeout"),

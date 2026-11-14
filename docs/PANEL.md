@@ -83,7 +83,7 @@ Choose a task. **Export my account** downloads what the account can read now.
 from the chats you choose. While observation is paused, Chats, Journal and Sources
 show the setup card: connect the account, choose sources, start observation.
 With the goal **Evidence for a case**, or in the Witnessed, Case preparation,
-GitHub-verified or Mossad [protection mode](#protection-modes), starting observation
+GitHub-verified or Maximum [protection mode](#protection-modes), starting observation
 first reads Telegram's session list. If other sessions are signed in, the panel names
 their number and offers **Start anyway** or **Open Sessions of this account**. Other
 goals and modes start without that question.
@@ -403,7 +403,7 @@ is still missing; recording, signing and saved settings are the same in every mo
 | 🟠 Witnessed | Cases where someone may claim the record was changed | An independent witness posting signed journal heads |
 | 🔴 Court-ready | Evidence for a lawyer, the police or a court | Timestamps, an encrypted off-site copy, case details in reports |
 | 🟣 GitHub-verified | Records whose software anyone must be able to check | Code check and GitHub Actions capture |
-| ⚫ Mossad | High-stakes cases against a well-funded adversary | A sealed 24/7 server, a hidden IP address, all 18 layers |
+| ⚫ Maximum | High-stakes cases against a well-funded adversary | A sealed 24/7 server, a hidden IP address, all 18 layers |
 
 The layers: every record signed and chained; a signed run receipt; attachments saved
 with SHA-256; signed checkpoints; rechecks; problem alerts; read-only witness access; a

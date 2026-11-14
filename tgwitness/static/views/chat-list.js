@@ -41,7 +41,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       && (!mode || (mode === 'auto' ? chat.origin === 'scope' : mode === 'priority' ? chat.priority : sourceState(chat) === mode));
   }
   function compare(a, b) {
-    const latest = value => Date.parse(value.last_observed_at || '') || 0;
+    const latest = value => Date.parse(value.last_message_at || value.last_observed_at || '') || 0;
     const difference = sort.value === 'activity' ? latest(b) - latest(a)
       : sort.value === 'deleted' ? (b.deleted || 0) - (a.deleted || 0)
         : sort.value === 'edited' ? (b.edited || 0) - (a.edited || 0) : 0;
@@ -60,7 +60,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom'), badges = node('span', 'chat-item-badges');
     top.append(node('span', 'chat-item-title', title));
     if (chat.priority) {const mark = icon('star'); mark.classList.add('chat-item-priority'); top.append(mark);}
-    top.append(timeNode(chat.last_observed_at, 'chat-item-time', 'list'));
+    top.append(timeNode(chat.last_message_at || chat.last_observed_at, 'chat-item-time', 'list'));
     bottom.append(node('span', 'chat-item-preview', chat.last_text ? (chat.last_sender ? chat.last_sender + ': ' : '') + window.TgWitnessPrivacy.preview(chat.last_text)
       : tr(chat.messages ? 'Media or service message' : 'No messages saved yet')), badges);
     const deleted = typeof chat.deleted_saved === 'number' ? [chat.deleted_saved ? tr('{n} deleted, text kept', {n: chat.deleted_saved}) : '',

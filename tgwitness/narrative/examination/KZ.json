@@ -1,0 +1,101 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "KZ",
+  "name_en": "Kazakhstan",
+  "name_local": "Қазақстан / Казахстан",
+  "court_languages": [
+    "kk",
+    "ru"
+  ],
+  "local_language": "kk",
+  "legal_family": "civil law",
+  "checked_at": "2026-11-14",
+  "review_scope": "Civil: Civil Procedure Code Articles 14, 82, 91 and 92. Criminal: Criminal Procedure Code Articles 30, 79, 270, 272 and 283. Russian texts on the official legal database (old.adilet.zan.kz), opened on 14 November 2026. The Law on Forensic Expert Activity, the criminal-liability article for a knowingly false opinion and announced amendments were not reviewed.",
+  "expert_term": {
+    "local": "сот сарапшысы / судебный эксперт",
+    "en": "forensic expert appointed by the court or the body conducting the criminal process"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Гражданский процессуальный кодекс РК, ст. 82",
+        "summary_en": "The court orders a forensic examination on a party's motion or on its own initiative where facts can be established by a study based on special scientific knowledge. Its ruling names the type, grounds, questions, objects and their origin, permission for destructive testing, and the expert body or person; the court explains the expert's rights and duties and warns of criminal liability for a knowingly false opinion.",
+        "source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+      },
+      "questions": {
+        "basis": "Гражданский процессуальный кодекс РК, ст. 82(7)",
+        "summary_en": "Each participant may submit questions for the expert; the court sets the final list and gives reasons in the appointment ruling for rejecting proposed questions.",
+        "source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+      },
+      "report_contents": {
+        "basis": "Гражданский процессуальный кодекс РК, ст. 92",
+        "items_en": [
+          "Written opinion drawn up in the expert's own name, signed and sealed with the personal seal; an expert body's seal certifies the signature.",
+          "Date, time limits and place of the examination, its grounds, the court, and the expert body or expert with education, speciality, experience and position.",
+          "Note signed by the expert that they were warned of criminal liability for a knowingly false opinion.",
+          "Questions put, participants present and their explanations, and the objects examined.",
+          "Content and results of the research with the methods used, evaluation of the results and reasoned conclusions on each question; reasons where a question cannot be answered.",
+          "Illustrative materials certified like the opinion are attached and form part of it; remaining objects and samples are attached."
+        ],
+        "items_local": [],
+        "source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+      },
+      "rights_duties": {
+        "basis": "Гражданский процессуальный кодекс РК, ст. 91",
+        "summary_en": "The expert may study the case materials on the object and ask for more. The expert may not negotiate with participants outside the court, collect materials independently, or destroy or alter objects without the court's permission, and must examine the objects fully and objectively, give a reasoned written opinion, keep the objects safe and keep case information confidential.",
+        "source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+      }
+    },
+    {
+      "route": "criminal",
+      "appointment": {
+        "basis": "Уголовно-процессуальный кодекс РК, ст. 270, 272",
+        "summary_en": "The body conducting the criminal process or an investigating judge orders an examination by resolution where facts can be obtained by a study based on special scientific knowledge. The resolution names the type, grounds, objects and their origin, permission for destructive testing, and the expert body or person. Participants protecting their rights may initiate an examination.",
+        "source": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+      },
+      "questions": {
+        "basis": "Уголовно-процессуальный кодекс РК, ст. 272(5), (10)",
+        "summary_en": "Participants submit questions in writing; the body conducting the process rejects only questions unrelated to the case or to the subject of the forensic examination.",
+        "source": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+      },
+      "report_contents": {
+        "basis": "Уголовно-процессуальный кодекс РК, ст. 283",
+        "items_en": [
+          "Opinion drawn up in the expert's own name, signed and sealed with the personal seal; an expert body's seal certifies the signature. The opinion may be issued as an electronic document.",
+          "Date, time limits and place of the examination, its grounds, the appointing body, and the expert body or expert with education, expert speciality, experience and position.",
+          "Note signed by the expert that they were warned of criminal liability for a knowingly false opinion.",
+          "Questions put, participants present and their explanations, and the objects examined with their condition, packaging and seals.",
+          "Content and results of the research with the methods used, evaluation of the results and reasoned conclusions on each question; reasons where a question cannot be answered.",
+          "Illustrative materials certified like the opinion are attached and form part of it; remaining objects and samples are attached."
+        ],
+        "items_local": [],
+        "source": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+      },
+      "rights_duties": {
+        "basis": "Уголовно-процессуальный кодекс РК, ст. 79",
+        "summary_en": "The expert may study the materials on the subject of the examination and ask for more. The expert may not negotiate with participants without the knowledge of the body conducting the process, collect materials independently, or destroy or alter objects without permission, and must examine the objects fully and objectively, give a reasoned written opinion, keep the objects safe and keep case information confidential.",
+        "source": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+      }
+    }
+  ],
+  "statute": null,
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Закон РК «Об электронном документе и электронной цифровой подписи»",
+    "law_en": "Law on Electronic Document and Electronic Digital Signature, Articles 7 and 10",
+    "source": "https://old.adilet.zan.kz/rus/docs/Z030000370_"
+  },
+  "timestamp": null,
+  "open_questions": [
+    "The Law of 14 July 2026 No. 350-VIII announces changes to Civil Procedure Code Articles 82(5) and 91(5); they take effect only after amendments to other codes. Check the text in force before filing.",
+    "The Law on Forensic Expert Activity sets time limits and who may act as an expert; it was not reviewed.",
+    "Criminal liability for a knowingly false opinion is referred to in both codes; the criminal-law article and its current wording were not verified.",
+    "Kazakh texts of the cited articles were not compared with the Russian texts used here.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Proceedings are conducted in Kazakh, and Russian is officially used alongside it (Civil Procedure Code art. 14; Criminal Procedure Code art. 30). The court or the body conducting the process sets the language of the case; documents in another language need a translation into it.",
+  "court_language_source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+}

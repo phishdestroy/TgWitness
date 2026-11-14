@@ -25,6 +25,7 @@ class PackageChoice(BaseModel):
     model_config = ConfigDict(extra="forbid")
     encryption: Literal["none", "generated", "own"] = "none"
     passphrase: str | None = Field(default=None, max_length=512)
+    jurisdiction: Literal["US", "UA"] | None = None
 
 
 async def opsec_view(*, ctx=Depends(current_context)):
@@ -290,7 +291,7 @@ async def documentation_package_choice(
     )
     if body.encryption == "own" and (not secret):
         raise HTTPException(422, "Enter the passphrase for the encrypted package.")
-    response = await ctx.case_download(request, session, secret)
+    response = await ctx.case_download(request, session, secret, body.jurisdiction)
     if body.encryption == "generated":
         response.headers["X-TgWitness-Passphrase"] = secret
     return response
@@ -494,7 +495,7 @@ class DocumentationOperations:
         except ValueError as exc:
             raise HTTPException(409, str(exc)) from None
 
-    async def case_download(self, request, session, secret):
+    async def case_download(self, request, session, secret, jurisdiction=None):
         steps = [
             block["step"]
             for block in session["fixed"]["model"]["blocks"]
@@ -512,6 +513,7 @@ class DocumentationOperations:
                     None,
                     self.app.state.store.root / "checkpoints",
                     secret,
+                    jurisdiction=jurisdiction,
                 )
             )
         except ValueError as exc:
@@ -522,6 +524,7 @@ class DocumentationOperations:
                 "session_id": session["id"],
                 "statement_sha256": session["fixed"]["statement_sha256"],
                 "encrypted": secret is not None,
+                **({"jurisdiction": jurisdiction} if jurisdiction else {}),
                 "access": request.state.principal.label,
             },
         )

@@ -11,7 +11,7 @@ from .store import utcnow
 
 
 async def create_session(collector, api_id, api_hash, session, expected_user_id=None,
-                         client_profile=None, languages=None, formats=(), password=""):
+                         client_profile=None, languages=None, formats=(), password="", seed=None):
     c = collector
     await c.wait_authorization_cleanup()
     if c.running:
@@ -123,7 +123,7 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
             new_id, new_hash = next(pair for pair in api_pool.POOL if pair[0] == api_pool.DESKTOP_ID)
             pending = {"donor": donor_id, "account_id": me.id, "credentials": {
                 "api_id": new_id, "api_hash": new_hash,
-                "client_profile": client_identity.resolve(new_id, languages, secrets.token_hex(32)),
+                "client_profile": client_identity.resolve(new_id, languages, seed or secrets.token_hex(32)),
                 "session_origin": {"method": "qr_from_import", "formats": list(formats),
                                    "donor_api_id": api_id, "created_at": utcnow()}}}
             await prepare_candidate()

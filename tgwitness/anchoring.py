@@ -635,6 +635,98 @@ async def record_extras(store, network, settings, devices, gateway=None):
     return saved
 
 
+async def evidence_record_stamp(store, network, settings, name, value):
+    from .evidence_record import accept, query
+    saved = store.get_setting("evidence_record_backoff", {}) or {}
+    backoff = {url: saved[url] for url in settings["tsa_urls"] if isinstance(saved.get(url), dict)}
+    errors = []
+    try:
+        for url in settings["tsa_urls"]:
+            if backoff.get(url, {}).get("until", 0) > time.time():
+                errors.append({"service": url, "deferred": True, "failures": backoff[url]["failures"],
+                               "retry_at": backoff[url]["retry_at"]})
+                continue
+            received = False
+            try:
+                asked = query(name, value)
+                reply = await post(url, asked, {"Content-Type": "application/timestamp-query",
+                                                "Accept": "application/timestamp-reply"}, network)
+                received = True
+                token, stamped = accept(reply, name, value, asked, trusted_roots())
+            except Exception as exc:
+                backoff[url] = backoff_entry(backoff.get(url), exc, settings["interval_minutes"] * 60)
+                errors.append({"service": url, "received": received, "error": problem(exc),
+                               "failures": backoff[url]["failures"], "retry_at": backoff[url]["retry_at"]})
+                continue
+            backoff.pop(url, None)
+            return token, {"service": url, **stamped}, errors
+        return None, None, errors
+    finally:
+        if backoff != saved:
+            store.set_setting("evidence_record_backoff", backoff)
+
+
+async def evidence_records(store, network, settings):
+    from . import evidence_record
+    try:
+        rules, folder = evidence_record.policy(store), store.root / "checkpoints" / "anchors"
+        outcome, jobs, failed = {"at": utcnow(), "created": 0, "renewed": 0, "errors": []}, [], False
+        fresh = await asyncio.to_thread(evidence_record.missing_checkpoints, store.root)
+        if fresh:
+            items = [(path.name[:-5], path.read_bytes()) for path in fresh]
+            jobs.append(("created", None, rules.algorithm, items, [evidence_record.digest(rules.algorithm, item)
+                                                                    for _, item in items], ["no evidence record yet"]))
+        checked = store.get_setting("evidence_record_check", {}) or {}
+        demand = (store.get_setting("evidence_record_demand", None) or {}).get("kind")
+        planned = demand or time.time() - checked.get("at", 0) >= evidence_record.DAY
+        if planned:
+            due, problems = await asyncio.to_thread(evidence_record.plan, store.root, rules, None, demand)
+            if problems:
+                outcome["errors"] += problems
+                store.append("evidence_record.check_failed", {"problems": problems[:20], "count": len(problems),
+                             "meaning": "These evidence records could not be read or checked and were not renewed."})
+            for (kind, name), entries in sorted(due.items()):
+                jobs.append(("renewed", kind, name, entries, [e["leaf"] for e in entries],
+                             sorted({e["reason"] for e in entries})[:8]))
+        for event, kind, name, entries, leaves, reasons in jobs:
+            root, paths = evidence_record.tree(name, leaves)
+            token, stamped, errors = await evidence_record_stamp(store, network, settings, name, root)
+            stems = [e[0] for e in entries] if event == "created" else [e["stem"] for e in entries]
+            if token is None and all(e.get("deferred") for e in errors):
+                failed = True
+                outcome["errors"].append({"renewal": kind, "error": "every timestamp authority is waiting for retry",
+                                          "deferred": errors})
+                continue
+            payload = {"renewal": kind, "algorithm": name, "root": root.hex(), "checkpoints": len(stems),
+                       "first": stems[0], "last": stems[-1], "reasons": reasons}
+            if token is not None:
+                written, problems = await asyncio.to_thread(
+                    *((evidence_record.create, folder, name, entries) if event == "created" else
+                      (evidence_record.renew, folder, kind, name, entries)), token, paths)
+                payload.update(ok=bool(written), files=len(written), **stamped,
+                               **({"problems": problems[:20]} if problems else {}))
+                outcome[event] += len(written)
+                failed = failed or bool(problems)
+            else:
+                payload["ok"], failed = False, True
+                outcome["errors"].append({"renewal": kind, "errors": errors})
+            if errors:
+                payload["errors"] = errors
+            payload["meaning"] = ("RFC 4998 evidence records in checkpoints/anchors: one RFC 3161 timestamp over a hash "
+                                  "tree of the listed checkpoints" + (" or of their previous records" if kind else "")
+                                  + "; earlier records are kept unchanged and a renewal is written as a new file.")
+            store.append("evidence_record." + event, payload)
+        if demand and not failed:
+            store.set_setting("evidence_record_demand", None)
+        if planned and not failed:
+            store.set_setting("evidence_record_check", {"at": time.time()})
+        store.set_setting("evidence_record_last", outcome)
+        return outcome
+    except Exception as exc:
+        store.append("collector.error", {"operation": "evidence records", "error_type": type(exc).__name__})
+        return None
+
+
 def request_anchor(store, vault, wakeup):
     retain_checkpoint(store, vault)
     wakeup.set()
@@ -659,6 +751,7 @@ async def anchor_loop(store, network_config, wakeup, status, devices=None, gatew
             record = await anchor_latest(store, network, settings)
             await upgrade_pending_ots(store, network, settings)
             await record_extras(store, network, settings, devices, gateway() if gateway else None)
+            await evidence_records(store, network, settings)
             status["outcome"] = "anchored" if record else "up_to_date" if latest_checkpoint(store) else "no_checkpoint"
         except Exception as exc:
             status.update(outcome="error", error=type(exc).__name__)

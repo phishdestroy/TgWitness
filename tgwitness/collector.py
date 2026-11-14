@@ -43,6 +43,8 @@ from .history import History
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient, FLOOD_ERRORS, TOO_LONG_RECOVERY, request_method
+from .update_sequence import (CLOSED_MEANING, SEGMENT_LIMIT, SEQUENCE_MEANING, SequenceLog, VERSION as SEQUENCE_VERSION,
+                              chat_of as sequence_chat)
 from .security import KeyLock
 from .workers import complete_in_thread
 from .store import RECEPTION, canonical, utcnow
@@ -54,6 +56,7 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
                          effective_media_rule)
 from . import file_hashes
 from . import ephemeral
+from . import deletions, history_admin
 from .media_jobs import (MediaAttempt, MediaOutcome, REUSE_MEANING, failure_outcome, lane_limits, plan_media,
                          remember_file, reuse_into, stored_copy, validate_observation)
 from . import secret_chats
@@ -357,8 +360,9 @@ ACTIVITY_CLAIMS = (("snapshot:", "loading_messages"), ("scale:", "measuring_chat
 
 
 def recovered_source(update):
-    return getattr(update, "tgwitness_recovery", None) or ("update_recovery" if getattr(update, "pts", None) == 0
-                                                           else None)
+    return getattr(update, "tgwitness_recovery", None) or (
+        "update_recovery" if getattr(update, "pts", None) == 0 or getattr(update, "tgwitness_recovered", False)
+        else None)
 
 
 def recovered_kind(source):
@@ -1102,6 +1106,7 @@ class Collector:
         client.exported_error_handler = exported_error
         client.connection_listener = lambda state: self.connection_changed(client, state)
         client.difference_gap_listener = self.difference_gap
+        client.sequence_listener = lambda *report: client is self.client and self.sequence_report(*report)
         client.channel_unavailable_listener = self.channel_unavailable
         for handler, builder in ((self.on_new, events.NewMessage()),
                                  (self.on_edit, events.MessageEdited()),
@@ -1239,6 +1244,7 @@ class Collector:
             self.vault.save("update_state", record)
 
     def persist_update_state(self):
+        self.flush_sequences("state_saved")
         try:
             self.save_update_state()
         except Exception as exc:
@@ -1930,9 +1936,10 @@ class Collector:
 
     @connection_change
     async def import_new_session(self, api_id, api_hash, session, expected_user_id=None, client_profile=None,
-                                 languages=None, formats=(), password=""):
+                                 languages=None, formats=(), password="", seed=None):
         from .session_import import create_session
-        return await create_session(self, api_id, api_hash, session, expected_user_id, client_profile, languages, formats, password)
+        return await create_session(self, api_id, api_hash, session, expected_user_id, client_profile, languages, formats, password,
+                                    seed)
 
     @connection_change
     async def connect_login(self, api_id, api_hash, session="", expected_user_id=None, client_profile=None, languages=None):
@@ -2330,7 +2337,7 @@ class Collector:
                 "reason": cause, "scope": "channel", "pts_before": before, "completeness": "unknown",
                 "run_id": self.run_id, "meaning": CHANNEL_STATE_DROPPED_MEANING}, chat_id)
         else:
-            self.store.append("coverage.gap", {
+            event = self.store.append("coverage.gap", {
                 "reason": "Telegram reported that updates for this interval are too old to deliver",
                 "scope": "account" if chat_id is None else "channel", "pts_before": before, "pts_after": after,
                 **({"telegram_top_message": top_message, "latest_messages_returned": recovered}
@@ -2340,6 +2347,9 @@ class Collector:
                            "this journal. New messages can still be recovered by reading history."
                            + (" The latest messages Telegram returned with this answer are recorded as recovered, "
                               "in their state at recovery." if recovered else "")}, chat_id)
+            if (log := getattr(self, "sequence_log", None)) is not None:
+                log.gap("account" if channel_id is None else channel_id, event["seq"], after, "difference_too_long")
+                self.flush_sequences("gap")
         if self.running:
             self.request_recheck(None if chat_id is None else [chat_id])
 
@@ -2347,6 +2357,55 @@ class Collector:
         chat_id = utils.get_peer_id(types.PeerChannel(channel_id))
         if self.selected(chat_id):
             self.access_lost(chat_id, "no_access")
+
+    def sequence_report(self, kind, entry, *values):
+        log = getattr(self, "sequence_log", None)
+        if log is None:
+            log = self.sequence_log = SequenceLog()
+        key, claimed = entry if isinstance(entry, int) else "account", self.running or self.buffering
+        if kind == "update":
+            pts, count, name, known, method = values
+            if claimed:
+                log.update(key, pts, count, name, known, method)
+            else:
+                log.unclaim(key, pts - count, pts, 1, "observation_paused")
+        elif kind == "difference":
+            before, after, method, result, final, counted = values
+            if claimed:
+                log.difference(key, before, after, method, result, final, counted)
+            else:
+                log.unclaim(key, before, after, sum(counted.values()), "observation_paused")
+        elif kind == "event":
+            name, pts, telegram_pts = values
+            log.event(key, name, pts=pts, telegram_pts=telegram_pts)
+        elif kind == "dropped":
+            reason, pts = values
+            log.event(key, "state_dropped", reason=reason, pts=pts)
+            log.gap(key, None, None, reason)
+            self.flush_sequences("state_dropped")
+        if log.held >= SEGMENT_LIMIT and not self.buffering:
+            self.flush_sequences("size")
+
+    def flush_sequences(self, trigger):
+        log = getattr(self, "sequence_log", None)
+        if log is None:
+            return
+        try:
+            if self.buffer_overflow and getattr(self, "sequence_overflow", None) != self.run_id:
+                self.sequence_overflow = self.run_id
+                log.discard("startup_buffer_full")
+            sequences, closed = log.flush(lambda key: key == "account" or self.selected(sequence_chat(key)))
+            if sequences:
+                event = self.store.append("coverage.sequence", {
+                    "version": SEQUENCE_VERSION, "run_id": self.run_id, "trigger": trigger,
+                    "meaning": SEQUENCE_MEANING, "sequences": sequences})
+                log.written(event["seq"])
+            for chat_id, item in closed:
+                self.store.append("coverage.gap_closed", {
+                    "version": SEQUENCE_VERSION, "scope": "account" if chat_id is None else "channel", **item,
+                    "run_id": self.run_id, "meaning": CLOSED_MEANING}, chat_id)
+        except Exception:
+            LOG.exception("Recording the update sequence failed")
 
     def connection_changed(self, client, state):
         if client is self.client:
@@ -2399,6 +2458,8 @@ class Collector:
         finally:
             self.sessions_checking -= 1
         snapshot = sessions_snapshot(result.authorizations)
+        self.store.set_setting("sessions_checked", {"at": utcnow(), "others": len(snapshot["others"]),
+                                                    "current": snapshot["current"] is not None})
         previous = self.store.get_setting("sessions_seen", None)
         had_current = previous is not None and previous.get("current") is not None
         lost_current = had_current and snapshot["current"] is None
@@ -3104,6 +3165,8 @@ class Collector:
             if payload["outgoing"]:
                 payload["editor_visibility"] = ("outgoing message: in private chats and groups only its author, "
                                                 "this account, can edit it; in channels other admins may edit posts")
+            if previous := self.store.message_state(chat_id, message.id)["content"]:
+                payload["previous_version"] = deletions.previous_version(self.store, previous, payload)
         if payload["outgoing"] and payload["text"] and kind == "message.new":
 
 
@@ -3242,12 +3305,12 @@ class Collector:
             if content and content["observable"] == message_content.of_payload(payload) \
                     and content["edited_at"] == payload.get("edited_at"):
                 return
-            await self.capture_message(event.message, "message.edited", event.chat_id,
-                                       getattr(event, "original_update", None))
+            update = getattr(event, "original_update", None)
+            await self.capture_message(event.message, "message.edited", event.chat_id, update, recovered_source(update))
         except Exception as exc:
             await self.live_failure(exc, "message.edited", client, [getattr(event, "chat_id", None)], event)
 
-    def record_deletion(self, chat_id, message_id, raw, resolution=None, batch=None):
+    def record_deletion(self, chat_id, message_id, raw, resolution=None, batch=None, source=None):
         state = self.store.message_state(chat_id, message_id)
         if state["deleted"]:
             return
@@ -3263,6 +3326,8 @@ class Collector:
             payload["deleted_message_was_outgoing"] = True
         if timer := auto_delete(state["content"], utcnow()):
             payload["auto_delete"] = timer
+        payload["source"] = source or "live_update"
+        payload.update(deletions.attribution(self.store, chat_id, content, batched=bool(batch), recovered=bool(source)))
         self.store.append("message.deleted", payload, chat_id, message_id)
         self.expedite_media(chat_id, message_id)
 
@@ -3270,7 +3335,7 @@ class Collector:
         if self.store.expedite_media(chat_id, message_id):
             self.media_wakeup.set()
 
-    def deletion_batch(self, chat_id, ids, raw):
+    def deletion_batch(self, chat_id, ids, raw, source=None):
         ids = [message_id for message_id in ids if not self.store.message_state(chat_id, message_id)["deleted"]]
         if len(ids) < 2:
             return None
@@ -3278,7 +3343,8 @@ class Collector:
                        if ((self.store.message_state(chat_id, message_id)["content"] or {}).get("outgoing")))
         event = self.store.append("deletion.batch", {
             "count": len(ids), "first_id": min(ids), "last_id": max(ids), "message_ids": sorted(ids),
-            "outgoing_saved": outgoing, "raw": raw,
+            "outgoing_saved": outgoing, "raw": raw, "source": source or "live_update",
+            "attribution_context": deletions.attribution_context(self.store, chat_id, recovered=bool(source)),
             "meaning": DELETION_BATCH_MEANING},
             chat_id)
         return {"seq": event["seq"], "hash": event["hash"], "count": len(ids)}
@@ -3288,7 +3354,7 @@ class Collector:
         if not self.running or not monitoring_settings(self.store)["deletions"]:
             return
         try:
-            raw = plain(event.original_update)
+            raw, source = plain(event.original_update), recovered_source(event.original_update)
             if event.chat_id is None:
                 unknown, unobserved, by_chat = [], [], {}
                 for message_id in event.deleted_ids:
@@ -3299,25 +3365,31 @@ class Collector:
                         by_chat.setdefault(chat_id, []).append(message_id)
                     else:
                         unobserved.append(message_id)
+                before = {chat_id: deletions.unobserved(self.store, chat_id) for chat_id in by_chat}
                 with self.store.transaction():
                     for chat_id, ids in by_chat.items():
-                        batch = self.deletion_batch(chat_id, ids, raw)
+                        batch = self.deletion_batch(chat_id, ids, raw, source)
                         for message_id in ids:
                             self.record_deletion(chat_id, message_id, raw, {
                                 "method": "chat of the previously saved message with this ID",
                                 "basis": "private chats and ordinary groups share one account-wide message ID sequence"},
-                                batch=batch)
+                                batch=batch, source=source)
+                        deletions.clear_suspected(self.store, chat_id, ids, event.deleted_ids, raw, batch, source)
                     for ids, scope in ((unknown, "account-level update; no saved message has these IDs"),
                                        (unobserved, "account-level update; these IDs belong to saved messages of chats "
                                                     "that are not observed now")):
                         if ids:
                             self.store.append("deletion.unscoped", {"message_ids": ids, "scope": scope,
                                                                     "deleted_by": None, "raw": raw})
+                for chat_id, count in before.items():
+                    deletions.unobserved_grew(self, chat_id, count)
             elif await self.covers(event.chat_id, message_ids=event.deleted_ids):
+                before = deletions.unobserved(self.store, event.chat_id)
                 with self.store.transaction():
-                    batch = self.deletion_batch(event.chat_id, list(event.deleted_ids), raw)
+                    batch = self.deletion_batch(event.chat_id, list(event.deleted_ids), raw, source)
                     for message_id in event.deleted_ids:
-                        self.record_deletion(event.chat_id, message_id, raw, batch=batch)
+                        self.record_deletion(event.chat_id, message_id, raw, batch=batch, source=source)
+                deletions.unobserved_grew(self, event.chat_id, before)
         except Exception as exc:
             chat_id = getattr(event, "chat_id", None)
             await self.live_failure(exc, "message.deleted", client, None if chat_id is None else [chat_id], event)
@@ -3390,6 +3462,11 @@ class Collector:
             except Exception as exc:
                 self.probe_skip("error", role="update", error_type=type(exc).__name__)
         try:
+            if isinstance(update, (types.UpdateUserTyping, types.UpdateChatUserTyping, types.UpdateChannelUserTyping,
+                                   types.UpdateEncryptedChatTyping, types.UpdateEncryptedMessagesRead)):
+                from .visibility import heard_update
+                heard_update(self, update)
+                return
             settings = monitoring_settings(self.store)
             if isinstance(update, (types.UpdateUserStatus, types.UpdateUserName, types.UpdateUser)):
                 from .people import observe_update
@@ -3730,6 +3807,7 @@ class Collector:
             forced = False
             if due:
                 await self.recheck_pass(due)
+            await history_admin.scheduled(self)
 
     def mark_recheck_start(self):
         walked, added = self.store.chat_settings("recheck_walked"), {}
@@ -3751,6 +3829,8 @@ class Collector:
             seen = last.get(target["chat_id"], 0)
             if seen and target["chat_id"] < -1000000000000 and target["chat_id"] not in self.recheck_continuing:
                 minutes = max(minutes, control)
+            if target["priority"]:
+                minutes = deletions.shortened_minutes(self.store, target["chat_id"], minutes)
             if (forced and target["priority"]) or seen < reconnected or now - seen >= minutes * 60:
                 due.append((0 if target["priority"] else 1, seen, target))
         due.sort(key=lambda item: item[:2])
@@ -3766,6 +3846,7 @@ class Collector:
             try:
                 result = await self.recheck_chat(target["chat_id"], settings)
                 results.append(result)
+                deletions.review_interval(self, target["chat_id"])
                 if "continues_after" in result:
                     self.recheck_continuing.add(target["chat_id"])
                 else:

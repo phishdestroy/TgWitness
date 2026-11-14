@@ -483,9 +483,12 @@ def excerpt_line(store, event, title, words, chars=EXCERPT_CHARS):
 def change_item(event, title, words, kept=None):
     values = {"chat": title, "id": event["message_id"]}
     if event["kind"] == "message.deleted":
+        from .deletions import attribution_text
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        who = attribution_text(lambda text, **found: tr(words, text, **found), payload)
         if kept is False:
-            return tr(words, "Message #{id} deleted in {chat} before its text was saved", **values)
-        return tr(words, "Message #{id} deleted in {chat}; its text was saved", **values)
+            return tr(words, "Message #{id} deleted in {chat} before its text was saved", **values) + ". " + who
+        return tr(words, "Message #{id} deleted in {chat}; its text was saved", **values) + ". " + who
     if event["kind"] == "message.edited":
         return tr(words, "Message #{id} edited in {chat}", **values)
     return tr(words, "Message #{id} not found at recheck in {chat}", **values)

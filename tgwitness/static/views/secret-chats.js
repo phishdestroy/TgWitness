@@ -1,6 +1,9 @@
+import {createVisibility} from "./visibility.js?v=1";
+
 export function createSecretChats(context) {
   const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, isAdmin, humanSize, actionText} = context;
   const find = id => root.querySelector("#" + id);
+  const sight = createVisibility({json, tr, node, icon, toast, may, busy}).control(true);
   let view = null, selected = null, timer = null, active = false, session = getSession(), request = 0;
   let renderedChat = null, threadStamp = null, activation = 0;
   let olderRequest = 0, loadingOlder = false, settingsBusy = false, installing = false;
@@ -30,7 +33,8 @@ export function createSecretChats(context) {
       else if (record.kind === "secret_chat.action" && p.action === "DeleteMessages")
         for (const randomId of p.details?.random_ids || []) item.deleted.add(randomId);
       if (["secret_chat.message", "secret_chat.action", "secret_chat.ready", "secret_chat.closed", "secret_chat.requested",
-           "secret_chat.accepted", "secret_chat.accept_failed", "secret_chat.decrypt_failed", "secret_chat.send_failed", "secret_chat.file_failed", "secret_chat.file_deferred"].includes(record.kind))
+           "secret_chat.accepted", "secret_chat.accept_failed", "secret_chat.decrypt_failed", "secret_chat.send_failed", "secret_chat.file_failed", "secret_chat.file_deferred",
+           "secret_chat.read_result", "secret_chat.contents_result", "secret_chat.typing_burst", "secret_chat.peer_typing", "secret_chat.peer_read"].includes(record.kind))
         item.items.push(record);
     }
     return [...map.values()].sort((a, b) => String(b.last).localeCompare(String(a.last)));
@@ -149,6 +153,7 @@ export function createSecretChats(context) {
     }
     const notes = [];
     if (p.ttl) notes.push(tr("timer {n} s", {n: p.ttl}));
+    if (p.typing_before_send) notes.push(tr("typing shown first for {n} s", {n: p.typing_before_send.seconds}));
     if (item.deleted.has(p.random_id)) notes.push(tr("deleted by the other side; kept here"));
     if (notes.length) row.append(node("small", "secret-note", notes.join(" · ")));
     row.append(node("small", "secret-meta", (out ? tr("Sent") : tr("Received")) + " · " + formatTime(record.observed_at)));
@@ -170,6 +175,7 @@ export function createSecretChats(context) {
       ? oldFeed.scrollTop : null;
     threadStamp = stamp; renderedChat = selected;
     box.replaceChildren();
+    sight.set(item ? item.id : null);
     if (!item) {
       const empty = node("div", "secret-empty"), mark = node('span', 'secret-empty-mark');
       mark.append(icon('lock'));
@@ -179,7 +185,8 @@ export function createSecretChats(context) {
     const head = node("div", "secret-thread-head"), who = node('div', 'secret-thread-who');
     who.append(node("b", "", named(item)), pill(item));
     if (view.people?.[item.peer]?.name) who.append(node("small", "hint", tr("User ID {id}", {id: item.peer})));
-    head.append(face(item), who);
+    who.append(sight.line);
+    head.append(face(item), who, sight.menu);
     const key = item.snapshot?.key_visualization || item.items.find(r => r.kind === "secret_chat.ready")?.payload.key_visualization;
     if (key) {
       const keyBox = node('div', 'secret-key-box');
@@ -222,7 +229,7 @@ export function createSecretChats(context) {
       input.maxLength = 4096; input.rows = 2; input.setAttribute("aria-label", tr("Message"));
       input.value = drafts.get(item.id) || "";
       const canSend = () => !settingsBusy && view.connected && view.settings.enabled && !view.interaction_problem && !sending.has(item.id) && !!input.value.trim();
-      input.addEventListener("input", () => {drafts.set(item.id, input.value); send.disabled = !canSend();});
+      input.addEventListener("input", () => {drafts.set(item.id, input.value); send.disabled = !canSend(); sight.typed();});
       send.type = "submit"; send.disabled = !canSend();
       form.append(input, send);
       form.addEventListener("submit", event => {event.preventDefault(); busy(send, async () => {
@@ -238,11 +245,12 @@ export function createSecretChats(context) {
           if (current(false)) {sending.delete(item.id); threadStamp = null; if (active) render();}
         }
       });});
-      box.append(form, node("p", "hint", tr("Sent messages are recorded. TgWitness does not mark received messages as read.")));
+      box.append(form, node("p", "hint", tr("Sent messages are recorded. Whether the other side sees its messages as read is set under the eye button above.")));
       if (focus) {input.focus({preventScroll: true}); input.setSelectionRange(...selection);}
     }
     feed.scrollTop = scroll ?? feed.scrollHeight;
     if (heldKey) box.querySelector('[data-focus-key="' + CSS.escape(heldKey) + '"]')?.focus({preventScroll: true});
+    if (active) sight.seen();
   }
 
   const endings = {"the peer discarded the chat": tr("The other side ended the chat."), "ended from TgWitness": tr("Ended from TgWitness."),
@@ -262,6 +270,11 @@ export function createSecretChats(context) {
       case "secret_chat.file_failed": return tr("A file could not be saved.");
       case "secret_chat.file_deferred": return tr('Attachments waiting to be saved: {n}', {n: view.pending_files}) + (p.reason ? ' · ' + p.reason : '');
       case "secret_chat.accept_failed": return tr('Pseudo-secret not accepted') + (p.reason ? ' · ' + p.reason : '');
+      case "secret_chat.read_result": return tr('Read receipt sent from the panel') + ' · ' + tr(p.status === 'succeeded' ? 'accepted by Telegram' : p.status === 'unknown' ? 'outcome unknown' : 'not sent');
+      case "secret_chat.contents_result": return tr('Messages marked as opened from the panel') + ' · ' + tr(p.status === 'succeeded' ? 'accepted by Telegram' : p.status === 'unknown' ? 'outcome unknown' : 'not sent');
+      case "secret_chat.typing_burst": return tr('Typing shown to the other side from the panel: {n} notices', {n: p.notices});
+      case "secret_chat.peer_typing": return tr('The other side was typing: {n} notices', {n: p.updates});
+      case "secret_chat.peer_read": return tr('The other side read messages sent up to {date}', {date: formatTime(p.max_date_at)});
       default: return record.kind;
     }
   }
@@ -317,7 +330,7 @@ export function createSecretChats(context) {
     clearTimeout(timer);
     if (active) timer = setTimeout(async () => {
       const current = actionOwner();
-      try {if (!settingsBusy && !document.hidden) await load();}
+      try {if (!settingsBusy && !document.hidden) {await load(); sight.refresh();}}
       catch (error) {if (current()) {find('secret-sync').textContent = tr('Could not load data') + ' · ' + error.message; find('secret-sync').hidden = false;}}
       finally {if (current()) schedule();}
     }, 4000);
@@ -392,8 +405,8 @@ export function createSecretChats(context) {
       active = true; activation++;
       try {await load();} finally {schedule();}
     },
-    leave() {active = false; activation++; request++; clearTimeout(timer);},
-    reset() {active = false; activation++; clearTimeout(timer); view = null; selected = null; request++;
+    leave() {active = false; activation++; request++; clearTimeout(timer); threadStamp = null; sight.set(null);},
+    reset() {active = false; activation++; clearTimeout(timer); view = null; selected = null; request++; sight.set(null);
       olderRequest++; loadingOlder = false; settingsBusy = installing = false;
       renderedChat = null; threadStamp = null; drafts.clear(); sending.clear(); find("secret-user").value = "";
       find('secret-search').value='';delete startDetails.dataset.ready;find('secret-sync').hidden=true;

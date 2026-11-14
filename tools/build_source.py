@@ -129,11 +129,12 @@ NARRATIVE_LANGUAGES = ("en", "de", "fr", "es", "it", "pt", "nl", "pl", "cs", "sk
 EXAMINATION_CODES = ("AE", "AT", "AU", "BD", "BE", "BG", "BR", "CA", "CH", "CN", "CZ", "DE", "DK", "EE", "ES", "ET", "FI",
                      "FR", "GR", "HK", "HU", "ID", "IE", "IL", "IN", "IR", "IT", "JP", "KR", "LT", "LV", "MX", "MY", "NL",
                      "NO", "PH", "PK", "PL", "PT", "RO", "RU", "SA", "SE", "SG", "SK", "TH", "TR", "TW", "UA", "UK",
-                     "US-federal", "UZ", "VN", "HR", "SI", "LU", "CY", "MT", "MD", "GE")
+                     "US-federal", "UZ", "VN", "HR", "SI", "LU", "CY", "MT", "MD", "GE", "KZ")
 PACKAGE_JSON.update({                     *("narrative/texts/" + prefix + language + ".json"
                        for prefix in ("", "glossary.") for language in NARRATIVE_LANGUAGES),
                      *("narrative/jurisdictions/" + code + ".json" for code in
-                       ("DE", "AT", "CH", "UK", "IE", "FR", "ES", "IT", "PL", "CZ", "UA", "NL", "BE", "US-federal")),
+                       ("DE", "AT", "CH", "UK", "IE", "FR", "ES", "IT", "PL", "CZ", "UA", "NL", "BE", "US-federal",
+                        "HR", "SI", "LU", "MT", "GE", "KZ")),
                      *("narrative/examination/" + code + ".json" for code in EXAMINATION_CODES)})
 
 SITE_JSON = {"i18n/" + language + ".json" for language in

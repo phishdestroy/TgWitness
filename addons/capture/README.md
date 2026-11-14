@@ -28,17 +28,109 @@ off by default. See the [main-panel connection guide](../../docs/OPTIONAL-CAPTUR
 | --- | --- |
 | Browser | Attach to an existing Chromium CDP endpoint, manually select one tab, preserve viewport PNG, rendered MHTML and derived text |
 | Changes | Poll the selected tab's rendered text and URL; capture changes and periodic states; no claim to observe every DOM, WebSocket or Telegram event |
-| AyuGram | Read one configured SQLite database using Online Backup, including visible WAL transactions; preserve complete consistent snapshots and schema fingerprints |
+| AyuGram | Read one configured SQLite database using Online Backup, including visible WAL transactions; preserve complete consistent snapshots and schema fingerprints; copy rotated `ayudata_<unixtime>.db` files found next to `ayudata.db` |
 | Video | Optional FFmpeg screen input, silent H.264 segments; sign closed segments while recording; preserve an unfinished tail separately on failure |
 | Integrity | SHA-256-linked events signed with Ed25519, content-addressed originals, independently pinned verification, separately retained checkpoints |
 | External witness | Separate process, data directory and key; challenge-bound polling with a read-only token; signed receipts, rollback/equal-length-fork checks |
 | Export | Signed ZIP, originals, JSONL journal and searchable HTML report; offline CLI verifier; no dependency on a running collector |
 
-Database snapshots do **not** yet interpret the AyuGram message schema or reconstruct
+Snapshots are read later by the `ayugram` command
+([AyuGram database interpretation](#ayugram-database-interpretation)). It does not reconstruct
 a complete account history. AyuGram itself must already be configured to retain
-edits/deletions. The actual installed client's version and schema need validation.
+edits/deletions.
 The recorder does not install or log in to AyuGram. The GUI and network route of that
 client remain operator managed; the supplied AyuGram profile starts only its recorder.
+
+## AyuGram database interpretation
+
+AyuGram keeps deleted messages and earlier versions of edited messages in
+`tdata/ayudata.db`. The parser follows AyuGram Desktop's storage definition at commit
+`0f2a31bb420de98f331990432265b131b8d836b5` (`ayu/data/ayu_database.cpp`, `entities.h`,
+`messages_storage.cpp`):
+
+| Table | Meaning |
+| --- | --- |
+| `DeletedMessage` | Message kept after a deletion notice, with its text as the client had it in memory |
+| `EditedMessage` | The version before an edit; `editDate` is the date of that version |
+| `DeletedDialog`, `SpyMessageRead`, `SpyMessageContentsRead` | Created but not written by AyuGram Desktop at that commit |
+
+`fakeId` is an `AUTOINCREMENT` key, never reused within one file. `date` is Telegram's
+message date. `editDate` is Telegram's edit date if the version had been edited before,
+otherwise the local clock of the AyuGram computer, which also sets `entityCreateDate`.
+`dialogId` is the user ID for private chats and `-ID` for basic groups and channels
+(not Telethon's `-100…` form), so a negative ID has two candidate TgWitness chat IDs:
+`-1000000000000 - ID` and `-ID`. `textEntities`, a serialized TL `Vector<MessageEntity>`,
+is decoded without Telethon; the raw bytes stay in the output and offsets are UTF-16 code units.
+
+AyuGram Desktop stores no media of deleted messages (`mediaPath` is `/`), skips messages
+without text and keeps no versions of the account's own messages. It records a deletion
+only for a message loaded in memory during that run. The user can remove one message or
+a whole chat. After a failed schema migration AyuGram renames the file to
+`ayudata_<unixtime>.db` and starts a new one.
+
+AyuGram for Android (`ayu-data`, Room schema 21 at AyuGram4A commit
+`7013145676d36d82ee13c02a89f72097b7490dcd`) has the same message columns except
+`replySerialized` and the same `-ID` form, so the parser reads it too. This follows the
+Room schema JSON and was not tried with an Android client.
+
+Stop the AyuGram recorder, then interpret its copies. Records are signed into its
+journal; copies already interpreted or unchanged are skipped:
+
+```sh
+python -m tgwitness_capture ayugram interpret --data data/ayugram-recorder
+```
+
+| Journal record | Content |
+| --- | --- |
+| `ayugram.interpreted` | Capture event, copy SHA-256, schema flavor/version/status and fingerprint, unknown or missing tables and columns, row counts and `AUTOINCREMENT` counters |
+| `ayugram.rows_removed` | `fakeId` ranges of the previous copy missing or changed in this one, removed in AyuGram or by another program |
+| `ayugram.rotation_detected` | Counters went down: the file was replaced. A single new `ayudata_<unixtime>.db` copied by the recorder is compared with the previous copy |
+
+Without a recorder, print one copy or compare it with an earlier one:
+
+```sh
+python -m tgwitness_capture ayugram interpret --db copy.db --previous earlier-copy.db [--rotated ayudata_1700000000-copy.db]
+```
+
+Only a copy is opened, read-only (`mode=ro&immutable=1`); a file with `-wal`, `-shm` or
+`-journal` next to it is refused. Unknown tables and columns are reported and kept in each
+row's raw values. A newer `SchemaVersion` is marked `newer_than_parser` and read by column name.
+
+Compare a copy with a TgWitness evidence ZIP:
+
+```sh
+python -m tgwitness_capture ayugram reconcile --capture-export ayugram-recorder.zip \
+  --capture-fingerprint RECORDER_KEY_SHA256 --journal evidence.zip \
+  --journal-fingerprint TGWITNESS_KEY_SHA256 --output comparison
+```
+
+`--db copy.db` can replace the recorder export. The command checks the evidence ZIP's
+manifest signature, the `events.jsonl` hash, the hash chain and every record signature;
+`python -m tgwitness.verify` checks attachments, seals, external time and coverage. It
+writes `report.json` and `report.html`. Only rows of the journal's account are compared,
+paired by candidate chat ID, message ID and SHA-256 of the text:
+
+| Outcome | Meaning |
+| --- | --- |
+| `matched` | Both agree on the deletion or on the text of that version |
+| `ayugram_only` | Missing from the journal; AyuGram signed nothing at the time |
+| `tgwitness_only` | Only in the journal; expected for media, own messages, edits that keep the text and messages AyuGram did not hold in memory |
+| `conflict` | Same message and version, different text; both values are shown |
+| `ambiguous` | A negative AyuGram ID resolves only when exactly one candidate chat has that message ID in the journal |
+
+The AyuGram database is a local file that can be changed, its dates come from a local
+clock and its rows had no hash or signature when written. An AyuGram row is a second,
+unsigned observation to compare with the journal.
+
+The parser was tested with databases written by AyuGram's own storage definition
+(`make_storage` and `entities.h` built with the `sqlite_orm` and SQLite versions AyuGram
+vendors), including a schema-version migration and a rotated `ayudata_<unixtime>.db`, but
+not with a running AyuGram client. To test with one, enable saving deleted and edited
+messages in the AyuGram Desktop release, receive, edit and delete text messages in a test
+account, snapshot its `tdata/ayudata.db` (`ayugram_db`), stop the recorder and run
+`ayugram interpret --data`. Expect `schema.status` `known` and `matches_reference_schema`
+set, check the rows against the client and run `ayugram reconcile` against a TgWitness
+export of the same account and period.
 
 ## Local installation
 
@@ -243,7 +335,8 @@ Real Chromium tests use only a localhost synthetic page. Video tests use FFmpeg'
 synthetic source; set `CAPTURE_TEST_FFMPEG` to an installed executable if needed.
 Tests cover signatures, changed/missing materials, truncated-prefix anchoring,
 WAL snapshots, controls, authentication, independent keys, restart defaults and
-closed video segments. They do not qualify a real Telegram account or AyuGram release.
+closed video segments and the AyuGram parser on databases written by AyuGram's
+storage definition. They do not qualify a real Telegram account or AyuGram release.
 The Docker/Neko/proxy stack requires a Linux acceptance run: verify manual login,
 capture after viewers disconnect, proxy failure with no direct target access,
 X11 permissions, restarts and disk-full behavior before production use.

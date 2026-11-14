@@ -83,6 +83,8 @@ Choose a task when you open the panel:
 | **Follow chats** | Collect accessible history and keep observing new messages, captured edits and deletion notices. |
 | **Evidence for a case** | Select records, add a cover and charts, then share PDF, HTML or JSON reports with verification data. |
 
+RFC 3161 and OpenTimestamps timestamps are on by default in every task; the `.tsr` and `.ots` files in `anchors/` let anyone check an archive. **Evidence for a case** also records drand rounds, saves all files, hides the server's IP address from Telegram and turns off Telegram actions from the panel.
+
 <details>
 <summary><strong>All capabilities · people, reports, accounts, Secret Chats and verification</strong></summary>
 
@@ -150,7 +152,7 @@ unzip -o tgwitness-demo.zip verify.py
 python verify.py tgwitness-demo.zip
 ```
 
-The verifier reports the records, journal head and signing-key fingerprint. To check an evidence package against a separately trusted key and timestamp authority:
+The verifier reports the records, journal head and signing-key fingerprint. A valid signature shows that the bytes have not changed since they were signed. The operator gives the key fingerprint to the recipient through a separate channel; without `--fingerprint` the final line starts with `EVIDENCE: minimum not met · missing: confirmed signer key`. To check an evidence package against a separately trusted key and timestamp authority:
 
 ```sh
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TSA-ROOT.pem --require evidence
@@ -190,7 +192,7 @@ TgWitness takes no side: the same checks apply to the operator and the project.
 - **History.** TgWitness was developed and tested for about six months before publication. This repository starts with a squashed import (`8fb40fe0e`, 658 files). [Development history](docs/QUESTIONS-AND-CHECKS.md#development-history)
 - **Tests.** The regression suite of 126 test modules (about 950 test functions) runs in a private validation environment with synthetic accounts and a fake Telegram transport; test files are excluded from Git and source archives. Public CI runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and verifier fuzzing. [Tests and CI](docs/QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)
 - **Verifier.** `tgwitness/verify.py` is assembled from 21 modules in `tgwitness/verifier/`. The journal and signature checks (`common`, `chain`, `journal`) total 22 KB; a third of the file is compressed translation data. [Verifier sources](tgwitness/verifier/README.md)
-- **Telegram client.** Sign-in uses built-in public API pairs unless you enter your own, and each observation records which pair was used. [API pairs](docs/QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
+- **Telegram client.** Sign-in uses built-in public API pairs unless you enter your own, and each observation records which pair was used. The built-in pairs are published in the open source code of Telegram clients and libraries; they name the application and give no access to account data. Sign-in uses the account's own authorization. You can enter your own pair from my.telegram.org instead; for material intended for court, do so before collection starts. Use a dedicated account for collection and for creating the pair, not a personal one. [API pairs](docs/QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
 - **Defaults.** New workspaces connect through public MTProxy lists. The vault key stays in the data directory unless a new installation uses an external master key. [Connection security](docs/CONNECTION-SECURITY.md#external-master-key)
 
 </details>

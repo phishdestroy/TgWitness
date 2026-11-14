@@ -71,6 +71,16 @@ The browser profile includes optional Neko/Chromium and upstream proxy forwardin
 AyuGram's GUI, login and proxy/WARP have to be set up already; the profile only runs the
 database recorder.
 
+`python -m tgwitness_capture ayugram` reads AyuGram database copies afterwards: deleted
+messages and earlier versions of edited ones. Rows removed between copies and a replaced
+(rotated) database are signed into the recorder's journal. Against a TgWitness evidence ZIP,
+each row is matched, AyuGram only, TgWitness only, conflict, or ambiguous (a negative chat ID
+the journal can't resolve). The AyuGram file can be edited locally, has local-clock dates and
+unsigned rows, and keeps no media of deleted messages and only messages loaded in memory, so a
+row is a second, unsigned observation. The parser was tested with databases written by AyuGram
+Desktop's storage definition, not with a running client. See
+[AyuGram database interpretation](../addons/capture/README.md#ayugram-database-interpretation).
+
 Preview. Isolation assumptions, video, key pinning, checkpoints, storage limits and the
-Linux acceptance steps are in the installation guide. Not implemented yet: database schema
-interpretation, WACZ/rrweb, signed PDF, automatic journal import.
+Linux acceptance steps are in the installation guide. Not implemented yet: WACZ/rrweb,
+signed PDF, automatic journal import.

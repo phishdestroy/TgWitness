@@ -94,6 +94,7 @@ DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})
 DEMO_STATIC["demo/system-map-data.js"] = "website/demo/system-map-data.js"
 DEMO_STATIC["demo/views/secret-chats.js"] = "tgwitness/static/views/secret-chats.js"
+DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name for name in ("visibility.js", "visibility.css")})
 DEMO_STATIC["demo/views/profile-collection.js"] = "tgwitness/static/views/profile-collection.js"
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
                     for name in ("system-map.js", "system-map-scene.js", "system-map.css")})

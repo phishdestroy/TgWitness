@@ -54,8 +54,15 @@ imported or already saved in the workspace, TgWitness picks a pair from its buil
 login and retaining a saved pair first; remaining candidates are shuffled. If Telegram refuses a pair
 (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried,
 up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is
-saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they
-do not authorize an account by themselves.
+saved with the account and reused for it.
+
+The built-in pairs are public: they are published in the open source code of Telegram
+clients and libraries. An **API ID** and **API hash** identify the application to Telegram
+and give no access to account data. Sign-in uses the account's own authorization: a login
+code and 2FA password, or a session that account already authorized. Each
+`observation.started` record names the pair used. You can enter your own pair from
+my.telegram.org instead; for material intended for court, do so before collection starts
+(steps below). Create the pair and collect with a dedicated account, not a personal one.
 
 Missing connection fields use a deterministic device/OS pair from the bundled
 [opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735):
@@ -133,8 +140,7 @@ own connection status shows whether it works. Telegram decides restrictions on i
 side, whichever client profile is used. Disconnected account status
 uses the saved profile instead of generating another device description.
 
-To use your own application instead (the account that registers it is the one at risk; see
-[Why a built-in API pool?](PROJECT-GUIDE.md#connect-a-telegram-account)):
+To use your own application instead:
 
 1. Open [my.telegram.org](https://my.telegram.org) and sign in with any phone number
    you own. The code arrives in the Telegram app, not by SMS.

@@ -128,6 +128,7 @@ class Recorder:
         self.task = None
         self.closing = False
         self.tokens = {}
+        self.rotated = {}
         try:
             for role in ("control", "witness"):
                 path = self.journal.root / (role + "-token.txt")
@@ -233,7 +234,8 @@ class Recorder:
                                                 self.config.snapshot_seconds, force), timeout=45)
             else:
                 result = await asyncio.to_thread(sqlite_snapshot, self.journal,
-                                                self.config.ayugram_db, self.config.client_version)
+                                                self.config.ayugram_db, self.config.client_version,
+                                                rotated=self.rotated)
             if result is not None:
                 metadata, artifacts, observed = result
                 event = self.journal.append("capture.partial" if metadata.get("errors") or metadata.get("navigation_changed_during_capture")

@@ -7,8 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / 'tgwitness' / 'verifier'
 OUTPUT = ROOT / 'tgwitness' / 'verify.py'
-PARTS = ('common', 'password', 'timestamps', 'chain', 'coverage', 'outside', 'journal', 'reports', 'board',
-         'bundles', 'distributed', 'chat', 'handover', 'gaps', 'account', 'capture', 'witness',
+PARTS = ('common', 'password', 'national', 'timestamps', 'evidence_records', 'chain', 'coverage', 'completeness',
+         'outside', 'journal', 'reports', 'board', 'bundles', 'distributed', 'chat', 'handover', 'gaps', 'account', 'capture', 'witness',
          'presentation', 'languages', 'console', 'cli')
 HEADER = '# TgWitness verifier sources SHA-256: '
 

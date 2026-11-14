@@ -135,6 +135,13 @@ class CheckTunnel:
                 await self.portable.stop(saved["id"])
 
 
+def activity(c):
+    return {"running": bool(c.running or c.observation_starting),
+            "has_session": bool(c.vault.read("credentials").get("session")),
+            "connected": bool(c.client and c.client.is_connected()),
+            "signing_in": c.login_client is not None}
+
+
 def busy_account(app):
     c = app.state.collector
     if c.export_busy() or c.export_claim or app.state.account_export.busy():
@@ -225,7 +232,7 @@ class GuidedConnection:
             custom = c.network_config().kind != "mtproxy_auto"
             skip = body.scope != "account" and body.keep_custom and custom
             rows.append({"id": identifier, "label": entry["label"], "before": managed["mode"] if managed else c.network_config().kind,
-                         "after": body.mode, "skipped": skip, "running": c.running})
+                         "after": body.mode, "skipped": skip, **activity(c)})
         telegram_only = body.mode == "mtproxy" or body.proxy and body.proxy.telegram_only
         return {"rows": rows, "outside_enabled": body.outside_enabled and not telegram_only,
                 "separate_instances": body.mode == "warp", "shared_proxy": body.mode == "proxy" and len(rows) > 1}
@@ -238,6 +245,11 @@ class GuidedConnection:
         check = c.store.get_setting("connection_check", None)
         if check:
             check = {**check, "current": check.get("revision") == revision(c)}
+        if self.job.get("state") == "ready":
+            entries = self.entries()
+            for row in self.job.get("rows", []):
+                if row["id"] in entries and entries[row["id"]].get("app") is not None:
+                    row.update(activity(entries[row["id"]]["app"].state.collector))
         return {"job": self.job, "current": {"mode": selected["mode"] if selected else c.network_config().kind,
                     "route": c.network_config().public(), "policy": c.policy_state(),
                     "managed": bool(selected), "process_running": process is not None and process.returncode is None,
