@@ -75,11 +75,11 @@
 .workspace-status .status-chip { padding: 0; background: transparent; color: var(--muted); font-size: 12px; font-weight: 500; min-height: 0; white-space: nowrap; }
 .workspace-status .status-chip.online { color: var(--success); }
 .workspace-status .menu-chevron { width: 12px; height: 12px; transform: rotate(90deg); color: var(--muted); }
-.workspace-status-body { display: grid; gap: 12px; }
+.workspace-status-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .workspace-status-body > strong { margin: 0; }
 .workspace-status-body .route-status { width: 100%; justify-content: flex-start; border-radius: 8px; }
-.workspace .workspace-status-body .health-toolbar { display: grid; grid-template-columns: 1fr 1fr; padding: 0; gap: 6px; border: 0; min-height: 0; }
-.workspace-status-body .health-chip { justify-content: flex-start; padding: 8px; border: 1px solid var(--border); border-radius: 7px; font-size: 12px; }
+.workspace .workspace-status-body .health-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 0; gap: 6px; border: 0; min-height: 0; }
+.workspace-status-body .health-chip { justify-content: flex-start; min-width: 0; flex-wrap: wrap; padding: 8px; border: 1px solid var(--border); border-radius: 7px; font-size: 12px; overflow-wrap: anywhere; }
 .workspace-status-body .health-chip-value { display: inline; }
 .workspace-status-body #collector-toggle { width: 100%; }
 .workspace[data-current-view="chats"] .content { padding: 20px; }
@@ -99,7 +99,7 @@
 .chat-list-filter-fields select { width: 100%; font-size: 12px; min-height: 36px; }
 .chats-sidebar .chat-open { margin: 0; border-top: 1px solid var(--border); border-bottom: 0; flex-shrink: 0; padding: 0 16px; background: var(--surface); }
 .chats-sidebar .chat-open > summary { padding: 14px 0; font-size: 12px; font-weight: 500; color: var(--muted); }
-.workspace .chat-item { margin: 3px 8px; padding: 0; border-radius: 8px; border-color: transparent; }
+.workspace .chat-item { width: auto; margin: 3px 8px; padding: 0; border-radius: 8px; border-color: transparent; }
 .workspace .chat-choice { padding: 12px 10px; }
 .workspace .chat-item-title { font-size: 13px; line-height: 18px; }
 .workspace .chat-item-preview { font-size: 12px; line-height: 18px; }

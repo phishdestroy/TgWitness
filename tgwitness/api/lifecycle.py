@@ -127,7 +127,7 @@ class LifecycleOperations:
                     if registry and pid in registry.opening:
                         return registry.opening[pid]
                     if pid == "default":
-                        return store.get_setting("profile_label", "Main account")
+                        return store.get_setting("profile_label", "Main workspace")
                     return next(
                         (
                             p["label"]

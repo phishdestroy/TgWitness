@@ -56,7 +56,7 @@ def labels(root):
             rows = dict(journal.execute("SELECT key,value FROM settings WHERE key IN ('profile_label','profiles')"))
         finally:
             journal.close()
-        result["default"] = json.loads(rows["profile_label"]) if "profile_label" in rows else "Main account"
+        result["default"] = json.loads(rows["profile_label"]) if "profile_label" in rows else "Main workspace"
         for entry in json.loads(rows.get("profiles", "[]")):
             result[entry["id"]] = entry["label"]
     except (sqlite3.Error, ValueError, KeyError, TypeError):

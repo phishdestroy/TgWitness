@@ -40,9 +40,10 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
       const number = node("strong", "pulse-num", "0"), text = node("span", "pulse-label", tr(label));
       box.append(mark, number, text);
       kpis.append(box);
-      item = {box, number};
+      item = {box, number, mark};
       tiles.set(id, item);
     }
+    item.mark.dataset.tone = tone;
     item.action = action;
     item.box.dataset.empty = String(!value);
     count(item.number, value);

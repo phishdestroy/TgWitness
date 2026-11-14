@@ -20,7 +20,7 @@ export function taskInfo(activity) {
   return row ? {label: row[0], blocks: row[1], allows: row[2], action: row[3], path: row[4]} : null;
 }
 
-export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast}) {
+export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize}) {
   let activity = null, loadedAt = 0, loading = false, loadedFor = null;
   const svgNS = 'http://www.w3.org/2000/svg';
   const svgNode = (tag, attributes) => {
@@ -213,7 +213,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       [tr('Saved records in this account'), (status.stats?.total || 0).toLocaleString()],
       [tr('Files waiting to download'), String(collector.media_pending || 0)],
     ];
-    if (collector.disk_free_bytes != null) rows.push([tr('Free disk space'), (collector.disk_free_bytes / 1024 ** 3).toFixed(1) + ' GB']);
+    if (collector.disk_free_bytes != null) rows.push([tr('Free disk space'), humanSize(collector.disk_free_bytes)]);
     for (const [label, value] of rows) facts.append(node('dt', '', label), node('dd', '', value));
     box.append(facts);
     if (state.me?.admin) {
@@ -230,7 +230,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       if (!root || !state.status) return;
       loadActivity(state.profile);
       const profiles = (state.profiles && state.profiles.length) ? state.profiles
-        : [{id: state.profile, label: tr('Main account'), collector: state.status.collector, health: state.status.health}];
+        : [{id: state.profile, label: tr('Main workspace'), collector: state.status.collector, health: state.status.health}];
       const accounts = node('section', 'home-card home-accounts');
       const heading = node('div', 'home-heading');
       heading.append(node('h2', '', tr('Accounts')), node('span', 'home-count', String(profiles.length)));

@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout9').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout10').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -111,10 +111,10 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=9'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=10'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
-    refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
+    refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize});
 });
 function busyExplanation(detail,profile){
   if(typeof detail!=='string'||!detail.startsWith('This account is busy'))return null;
@@ -972,7 +972,7 @@ function openJournalFilter(kind){
   state.boardSlice=null;state.filter=kind;state.source='';state.search='';state.eventSince='';state.eventUntil='';
   state.eventBefore=state.eventAfter=state.cursor=null;navigate('observations');
 }
-import("./views/pulse.js?v=2").then(({createPulse})=>{
+import("./views/pulse.js?v=3").then(({createPulse})=>{
   pulseUI=createPulse({anchor:viewQuery('start','.workflow-intro'),chartsAnchor:viewQuery('start','.workflow-choices'),node,tr,icon,json,session:()=>state.workspaceRevision+':'+state.profile,
     can:viewAllowed,openJournal:openJournalFilter,openChat:id=>id===null?navigate('chats'):navigate('chats').then(()=>openChat(id))});
   if(state.status&&state.view==='start')renderWorkflowControls();
@@ -1056,8 +1056,7 @@ async function exportEverything(){
     +(observing?' '+tr("Observation pauses while the export runs."):'');
   if(!(await askConfirm(message,{confirmText:tr("Export everything")})))return;
   if(observing)await json("collector/stop",{});
-  const language=Object.keys(PANEL_LANGUAGES).includes(LANG)?LANG:'en';
-  await json("account-export/start",{...accountExportFallback,report_language:language});
+  await json("account-export/start",accountExportFallback);
   selectExportTask('account');await navigate('evidence');exportsView?.select('downloads');await loadAccountExport();
   toast(tr("Account export started. Progress and omissions appear here; you can leave this page and return."));
 }
@@ -1501,7 +1500,7 @@ async function loadProfiles(){
   if(request!==profilesRequest)return;
   state.profiles=result.profiles;
 
-  for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main account")profile.label=tr("Main account");
+  for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main workspace")profile.label=tr("Main workspace");
   const select=$("profile-select");updateWorkspaceOptions(select,state.profiles,state.profile,tr);
   const list=$("profiles-list"),showList=state.view==='connection',oldRows=new Map([...list.children].map(row=>[row.dataset.profile,row])),rows=[];
   for(const profile of state.profiles){
@@ -2449,8 +2448,9 @@ $("chat-export-download").addEventListener("click",e=>saveExport(e.currentTarget
 $("chat-export-partial-download").addEventListener("click",e=>saveExport(e.currentTarget));
 const accountExportKinds=["private","bot","group","supergroup","channel"];
 const accountExportMedia=["photo","video","video_message","voice","audio","document","sticker","animation"];
+const panelReportLanguage=Object.keys(PANEL_LANGUAGES).includes(LANG)?LANG:'en';
 const accountExportFallback={purpose:"",chat_kinds:accountExportKinds,from_utc:null,to_utc:null,chat_ids:[],
-  report_language:'en',export_format:'telegram_both',budget_exhausted:'hashes_only',
+  report_language:panelReportLanguage,export_format:'telegram_both',budget_exhausted:'hashes_only',
   sender_ids:[],text_contains:[],own_messages_only:false,
   include_archived:true,media_types:accountExportMedia,max_media_file_mib:512,max_total_gib:16,
   include_profile:true,include_contacts:true,include_profile_photos:true,include_stories:true,
@@ -2458,7 +2458,7 @@ const accountExportFallback={purpose:"",chat_kinds:accountExportKinds,from_utc:n
 let accountExportRead=null,accountExportRequest=0,accountExportJobStamp=null;
 for(const id of ['account-export-language','account-disclosure-language']){
   for(const [code,name] of Object.entries(PANEL_LANGUAGES)){
-    const option=new Option(name,code);option.lang=code;option.defaultSelected=code==='en';$(id).append(option);
+    const option=new Option(name,code);option.lang=code;option.defaultSelected=code===panelReportLanguage;$(id).append(option);
   }
 }
 function resetAccountExport(){
@@ -2813,7 +2813,7 @@ async function loadAccountExport(silent=false){
     if(revision!==state.workspaceRevision||profile!==state.profile||request!==accountExportRequest)return;
     state.accountExportJobs=Array.isArray(result.jobs)?result.jobs:[];
     $('exports-account-error').textContent='';$('exports-account-error').hidden=true;
-    state.accountExportDefaults=result.defaults||accountExportFallback;
+    state.accountExportDefaults={...(result.defaults||accountExportFallback),report_language:panelReportLanguage};
     state.accountExportCapabilities=result.capabilities||{};
     if(state.accountExportDraftProfile!==profile&&!state.accountExportDirty)accountExportDefaults(state.accountExportDefaults);
     $("account-export-start").disabled=state.accountExportCapabilities.can_start===false||state.status?.collector.available_for_export===false||
@@ -4660,12 +4660,21 @@ function renderSeenBy(){
     rows.push([tr("Requests paused until"),formatTime(new Date(c.rpc_backoff_until*1000).toISOString())]);
   }
   if(checked){
-    rows.push([tr("Current authorization"),typeof checked.official_app==="boolean"?"official_app="+(checked.official_app?"True":"False"):tr("Official-app flag unavailable")]);
-    rows.push([tr("Checked"),checked.checked_at||""]);
+    rows.push([tr("Current authorization"),typeof checked.official_app==="boolean"?
+      tr(checked.official_app?"Telegram marks it as an official app":"Telegram marks it as an unofficial app"):tr("Official-app flag unavailable")]);
+    rows.push([tr("Checked"),checked.checked_at?formatTime(checked.checked_at):""]);
     rows.push(["",tr("The official-app flag does not report account restrictions or whether Telegram is observing the account.")]);
-    for(const check of checked.checks||[])if(check.status!=="ok")rows.push([check.name,check.error||check.detail||check.status]);
+    const names={get_config:tr("Telegram configuration"),nearest_dc:tr("Nearest data center"),current_session:tr("Current authorization"),
+      layer_match:tr("API layer"),lang_pack:tr("Language pack"),app_update:tr("App update"),terms_of_service:tr("Terms of service")};
+    const details={"Requests stopped after an error or while Telegram requires a wait.":tr("Requests stopped after an error or while Telegram requires a wait."),
+      "Telegram did not identify a current authorization.":tr("Telegram did not identify a current authorization."),
+      "Telegram's official-app flag is not an account-safety assessment.":tr("Telegram's official-app flag is not an account-safety assessment.")};
+    for(const check of checked.checks||[])if(check.status!=="ok")rows.push([names[check.name]||check.name,
+      check.name==="layer_match"&&check.actual!=null?tr("Layer {actual}; the reviewed baseline is {baseline}. The baseline is a reviewed snapshot, not Telegram's latest required layer.",{actual:check.actual,baseline:check.baseline}):
+      check.error?tr("The request failed: {error}",{error:check.error}):details[check.detail]||check.detail||check.status]);
   }
-  for(const warning of id.warnings||[])rows.push([tr("Profile warning"),warning]);
+  const layerShown=(checked?.checks||[]).some(check=>check.name==="layer_match"&&check.status!=="ok");
+  for(const warning of id.warnings||[])if(!(layerShown&&warning.startsWith("Telethon's schema layer")))rows.push([tr("Profile warning"),tr(warning)]);
   list.replaceChildren(...rows.flatMap(([term,value])=>[node("dt","",term),node("dd","",value)]));
 }
 $("network-details").addEventListener("toggle",()=>{if($("network-details").open&&$("network-kind").value==="mtproxy")loadProxyCatalog();});
@@ -5119,7 +5128,9 @@ function avatarNode(id,name,size="",profile=state.profile){
 }
 const fmtDay=value=>panelTime?.day(value)??tr("Unknown date");
 const fmtFull=value=>fmtTime(value);
-function humanSize(n){if(n===null||n===undefined)return "";const u=["B","KB","MB","GB"];let i=0;while(n>=1024&&i<3){n/=1024;i++;}return n.toFixed(i?1:0)+" "+u[i];}
+const sizeUnits=[n=>tr("{n} B",{n}),n=>tr("{n} KiB",{n}),n=>tr("{n} MiB",{n}),n=>tr("{n} GiB",{n})];
+function humanSize(n){if(n===null||n===undefined)return "";let i=0;while(n>=1024&&i<3){n/=1024;i++;}
+  return sizeUnits[i](n.toLocaleString(LANG,{minimumFractionDigits:i?1:0,maximumFractionDigits:i?1:0}));}
 const serviceLabels={MessageActionChatAddUser:tr("added a member"),MessageActionChatDeleteUser:tr("removed a member or left"),
   MessageActionChatJoinedByLink:tr("joined via invite link"),MessageActionChatJoinedByRequest:tr("joined after a join request"),
   MessageActionPinMessage:tr("pinned a message"),MessageActionChatEditTitle:tr("changed the chat name"),
@@ -6478,7 +6489,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=3').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=4').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;

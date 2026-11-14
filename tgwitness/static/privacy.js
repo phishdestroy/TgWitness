@@ -28,9 +28,11 @@
       /\b[A-Fa-f0-9]{256,4096}\b/g,
     ];
     for (const pattern of patterns) for (const match of text.matchAll(pattern)) add(match.index, match.index + match[0].length);
-    const labeled = /(?:\b(?:password|passwd|pwd|passphrase|secret|token|api[_ -]?key|api[_ -]?hash|app[_ -]?hash|auth[_ -]?key|authorization|bearer|string[_ -]?session|session[_ -]?string|twofa|2fa|login[_ -]?code|verification[_ -]?code)\b|пароль|токен|секрет|ключ\s+api|код\s+(?:входа|подтверждения))[\s"']{0,4}(?:[:=]|\bis\b|—|-)?\s{0,8}(?:Bearer\s+)?("[^"\r\n]{1,4096}"|'[^'\r\n]{1,4096}'|[^\s<>"'`,;]{3,4096})/gi;
+    const labeled = /(?:\b(?:password|passwd|pwd|passphrase|secret|token|api[_ -]?key|api[_ -]?hash|app[_ -]?hash|auth[_ -]?key|authorization|bearer|string[_ -]?session|session[_ -]?string|twofa|2fa|login[_ -]?code|verification[_ -]?code)\b|пароль|токен|секрет|ключ\s+api|код\s+(?:входа|подтверждения))[\s"']{0,4}([:=]|\bis\b|—|-)?\s{0,8}(?:Bearer\s+)?("[^"\r\n]{1,4096}"|'[^'\r\n]{1,4096}'|[^\s<>"'`,;]{3,4096})/gi;
     for (const match of text.matchAll(labeled)) {
-      const raw = match[1], quote = /^["']/.test(raw) ? 1 : 0, start = match.index + match[0].lastIndexOf(raw) + quote;
+      const raw = match[2], quote = /^["']/.test(raw) ? 1 : 0, start = match.index + match[0].lastIndexOf(raw) + quote;
+      // Without a separator, a plain word after the label is ordinary text: "token secure", "секретные чаты".
+      if (!match[1] && /^\p{L}+[.!?:)]*$/u.test(raw) && !/["']/.test(text[start - 1] || '')) continue;
       add(start, start + raw.length - quote * 2);
     }
     for (const match of text.matchAll(/(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)/g)) if (luhn(match[0])) add(match.index, match.index + match[0].length);

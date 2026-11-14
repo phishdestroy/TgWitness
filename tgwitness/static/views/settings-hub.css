@@ -47,6 +47,9 @@
 .setup-summary dd{margin:0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .wizard-chats{max-height:320px;overflow:auto;margin:20px 0}
 .wizard-chats label{padding:8px}
+.wizard-chat-name{flex:1;min-width:0;overflow-wrap:anywhere}
+.wizard-chat-kind{flex:none;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;text-align:end}
+.wizard-chosen{margin:10px 0 0}
 .first-run-body .auth-card,.hub-detail .auth-card{max-width:100%;margin:0;border:0;box-shadow:none;padding:0}
 .first-run-body .auth-card .import-formats{display:none}
 .level-pick{max-width:110px;font-size:12px}
