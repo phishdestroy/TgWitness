@@ -3107,6 +3107,11 @@ class Collector:
         if timer := auto_delete(state["content"], utcnow()):
             payload["auto_delete"] = timer
         self.store.append("message.deleted", payload, chat_id, message_id)
+        self.expedite_media(chat_id, message_id)
+
+    def expedite_media(self, chat_id, message_id):
+        if self.store.expedite_media(chat_id, message_id):
+            self.media_wakeup.set()
 
     def deletion_batch(self, chat_id, ids, raw):
         ids = [message_id for message_id in ids if not self.store.message_state(chat_id, message_id)["deleted"]]
@@ -3720,6 +3725,7 @@ class Collector:
                     "meaning": "Telegram returned no message with this ID at recheck and no deletion notice was "
                                "received: deleted while notices were missed, removed by an auto-delete timer, "
                                "or no longer visible to this account."}, chat_id, message_id)
+                self.expedite_media(chat_id, message_id)
                 result["missing"] += 1
         return result
 
