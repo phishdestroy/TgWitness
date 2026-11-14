@@ -7,7 +7,7 @@ import time
 from telethon import utils
 from telethon.errors import RPCError, ServerError, TakeoutInitDelayError, TakeoutInvalidError
 from telethon.tl import types
-from .telegram_client import FLOOD_ERRORS
+from .telegram_client import FLOOD_ERRORS, in_lane
 
 from .evidence import checkpoint, retain_checkpoint
 from .monitoring import capture_settings
@@ -88,6 +88,7 @@ class History:
                     "options": options_of(run).model_dump(),
                     "pacing": self.store.get_setting("rpc_bulk_pacing", {}),
                     "wait_until": max(self.store.get_setting("rpc_backoff_until", 0),
+                                      self.store.get_setting("history_wait_until", 0),
                                       self.store.get_setting("history_takeout_wait_until", 0)),
                     "scope": "enabled sources fixed at run creation; media follows capture settings"}
 
@@ -142,7 +143,7 @@ class History:
                            "live recording keeps earlier versions and deletion notices."})
             for target in targets:
                 history_cursor.seal(self.store, run_id, target["chat_id"])
-        self.task = asyncio.create_task(self.run(run_id))
+        self.task = asyncio.create_task(in_lane("bulk", lambda: self.run(run_id)))
         self.task.add_done_callback(lambda task: self.finished(run_id, task))
         return self.status()
 
@@ -186,7 +187,7 @@ class History:
             if not self.collector.running:
                 self.store.recover_media()
             self.transition(run["id"], "running", "operator_resume")
-            self.task = asyncio.create_task(self.run(run["id"]))
+            self.task = asyncio.create_task(in_lane("bulk", lambda: self.run(run["id"])))
             self.task.add_done_callback(lambda task, run_id=run["id"]: self.finished(run_id, task))
         except BaseException:
             self.collector.release_export(owner)
@@ -247,7 +248,7 @@ class History:
                 return await asyncio.wait_for(call(), self.collector.param("operation_timeout_seconds"))
             except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds + 1, self.store.get_setting("rpc_backoff_until", 0))
-                self.store.set_setting("rpc_backoff_until", until)
+                self.store.set_setting("history_wait_until", until)
                 self.store.append("history.waiting", {"history_run_id": run_id,
                     "retry_after_seconds": exc.seconds, "retry_at": until})
                 while time.time() < until:

@@ -8,6 +8,7 @@ from ..access import Refused
 from ..access import check as access_check
 from ..collector import AUTHORIZATION_ERRORS
 from ..collector import ProtectedSession
+from ..collector import loss_text
 from ..evidence import LIMITS
 from ..failures import describe, unexpected
 from ..middleware import request_limit
@@ -457,9 +458,7 @@ class SystemOperations:
                 or (args and args[0] is collector)
             ):
                 collector.handle_authorization_error(exc, name, client=client)
-            raise HTTPException(
-                400, "Telegram authorization expired. Sign in again."
-            ) from None
+            raise HTTPException(400, loss_text(exc)) from None
         except RPCError as exc:
             raise HTTPException(400, describe(exc)) from None
         except (ProtectedSession, KeyInUse, interactions.AccountRestricted) as exc:

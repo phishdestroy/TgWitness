@@ -9658,5 +9658,6 @@
   "Search saved messages": "محفوظ شدہ پیغامات تلاش کریں",
   "{n} saved versions": "{n} محفوظ شدہ ورژنز",
   "Chat loading: {running} active · {pending} pending": "چیٹس لوڈ ہو رہی ہیں: {running} فعال · {pending} منتظر",
+  "The Telegram connection changed. Retry the operation.": "Telegram کا کنکشن بدل گیا ہے۔ یہ عمل دوبارہ آزمائیں۔",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "پراکسی ذرائع کی ترتیبات پڑھی نہیں جا سکتیں۔ پراکسی فہرستیں استعمال کرنے سے پہلے proxy-sources.json بحال کریں۔"
 }

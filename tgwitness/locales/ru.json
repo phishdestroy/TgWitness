@@ -9724,5 +9724,6 @@
   "Search match": "Совпадение с запросом",
   "Search matched an earlier saved version.": "Совпадение найдено в прежней сохранённой версии.",
   "Chat loading: {running} active · {pending} pending": "Прогрузка чатов: {running} загружаются · {pending} в очереди",
+  "The Telegram connection changed. Retry the operation.": "Подключение к Telegram изменилось. Повторите действие.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Не удаётся прочитать настройки источников прокси. Восстановите файл proxy-sources.json, прежде чем пользоваться списками прокси."
 }

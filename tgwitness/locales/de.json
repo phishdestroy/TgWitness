@@ -9658,5 +9658,6 @@
   "Search saved messages": "Gespeicherte Nachrichten suchen",
   "{n} saved versions": "{n} gespeicherte Versionen",
   "Chat loading: {running} active · {pending} pending": "Chats laden: {running} aktiv · {pending} ausstehend",
+  "The Telegram connection changed. Retry the operation.": "Die Telegram-Verbindung hat sich geändert. Wiederholen Sie den Vorgang.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Die Einstellungen der Proxy-Quellen können nicht gelesen werden. Stellen Sie proxy-sources.json wieder her, bevor Sie Proxy-Listen verwenden."
 }

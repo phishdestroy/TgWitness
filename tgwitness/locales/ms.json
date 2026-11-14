@@ -9610,5 +9610,6 @@
   "Search saved messages": "Cari mesej yang disimpan",
   "{n} saved versions": "{n} versi yang disimpan",
   "Chat loading: {running} active · {pending} pending": "Memuatkan sembang: {running} aktif · {pending} menunggu",
+  "The Telegram connection changed. Retry the operation.": "Sambungan Telegram telah berubah. Cuba semula operasi ini.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Tetapan sumber proksi tidak dapat dibaca. Pulihkan proxy-sources.json sebelum menggunakan senarai proksi."
 }
