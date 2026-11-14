@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import ConfigDict, Field, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
-from . import report_design, report_history, report_layouts, report_selection, report_selection_view
+from . import report_design, report_history, report_layouts, report_repeats, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -129,7 +129,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -241,6 +241,7 @@ class Digest:
         self.own_messages, self.own_total, self.own_scope = [], 0, set()
         self.trust_signals = {"drand": 0, "starts": 0, "tdx": 0}
         self.analytics = report_analytics.Analytics()
+        self.repeats = report_repeats.Repeats()
         self.metrics = metrics.Pipeline(processors, rows_listed)
 
     @staticmethod
@@ -285,6 +286,8 @@ class Digest:
                     self.titles[added.get("chat_id")] = added["title"]
         if CATEGORIES.get(kind) == "message" and report_analytics.sender_id(event) is not None:
             self.senders.add(report_analytics.sender_id(event))
+        if CATEGORIES.get(kind) == "message":
+            self.repeats.add(payload.get("text"), chat, event["message_id"], event["seq"], event["observed_at"])
         if CATEGORIES.get(kind) in ("message", "edited"):
             self.indicators.message(payload.get("text"), shown_details(payload),
                                     {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
@@ -342,7 +345,8 @@ class Digest:
                 "direct_fallbacks": self.direct, "changed": self.changed,
                 "actions": list(self.actions.values()), "action_count": self.action_count,
                 "own_messages": self.own_messages, "own_total": self.own_total, "own_scope": sorted(self.own_scope),
-                "analytics": self.analytics.result(), "processors": self.metrics.result()}
+                "analytics": self.analytics.result(), "processors": self.metrics.result(),
+                "repeated": self.repeats.result()}
 
 
 def describe_anchor(checkpoint_name, checkpoint, proof_name, proof, query=None, *, public_key=None,
@@ -1841,6 +1845,7 @@ def report_data(events_again, coverage, context):
         "case_assessment": case_assessment.journal(context, coverage),
         "case_board": context.get("case_board"),
         "indicators": digest.get("indicators") or {"items": [], "total": 0, "not_listed": 0},
+        "repeated": digest.get("repeated"),
         "files": context.get("files") or {},
         "parts": [{k: p[k] for k in ("index", "file", "from", "to", "count", "first_at", "last_at", "sha256") if k in p}
                   for p in context.get("parts") or []],
@@ -2516,6 +2521,8 @@ class EvidenceHTML:
         if self.options.get("show_indicators", True) and (self.digest.get("indicators") or {}).get("items"):
             yield indicators_section(say, next(self.numbers), self.digest["indicators"],
                                      ref_link(self.context.get("parts"), "records", "seq", "r")).encode("utf-8")
+        if self.options.get("show_indicators", True) and (self.digest.get("repeated") or {}).get("rows"):
+            yield report_repeats.html(say, next(self.numbers), self.digest["repeated"], self.digest["titles"]).encode("utf-8")
         if not self.filtered:
             yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], links).encode("utf-8")
 
