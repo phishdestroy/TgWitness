@@ -1096,10 +1096,13 @@ class Collector:
         if account is None or self.paused_drops or not hasattr(session, "get_update_states"):
             return
         record = {"account_id": account, "saved_at": utcnow(), "account": None, "channels": []}
+        tracked = self.tracked_channels()
         for entity_id, state in list(session.get_update_states()):
             if entity_id == 0:
                 record["account"] = {"pts": state.pts, "qts": state.qts, "seq": state.seq,
                                      "date": int(state.date.timestamp())}
+                continue
+            if tracked is not None and entity_id not in tracked:
                 continue
             try:
                 peer = session.get_input_entity(utils.get_peer_id(types.PeerChannel(entity_id)))
@@ -1128,15 +1131,36 @@ class Collector:
                 session.set_update_state(0, types.updates.State(
                     pts=a["pts"], qts=a["qts"], date=datetime.fromtimestamp(a["date"], timezone.utc),
                     seq=a["seq"], unread_count=0))
-            now = datetime.now(timezone.utc)
-            for channel in saved.get("channels", []):
+            now, tracked = datetime.now(timezone.utc), self.tracked_channels()
+            channels = [c for c in saved.get("channels", []) if tracked is None or c["id"] in tracked]
+            for channel in channels:
                 session.set_update_state(channel["id"], types.updates.State(
                     pts=channel["pts"], qts=0, date=now, seq=0, unread_count=0))
-            session.process_entities([types.InputPeerChannel(c["id"], c["access_hash"])
-                                      for c in saved.get("channels", [])])
+            session.process_entities([types.InputPeerChannel(c["id"], c["access_hash"]) for c in channels])
         except (KeyError, TypeError, ValueError):
             return None
         return saved.get("saved_at")
+
+    def tracked_channels(self):
+        if scope_settings(self.store)["mode"] != "selected":
+            return None
+        self.refresh_targets()
+        probe = probe_settings(self.store)["chat_id"]
+        return {-chat_id - 1000000000000 for chat_id in (*self.target_ids, probe)
+                if type(chat_id) is int and chat_id < -1000000000000}
+
+    def prune_untracked(self):
+        box = getattr(self.client, "_message_box", None)
+        if not isinstance(getattr(box, "map", None), dict) or (tracked := self.tracked_channels()) is None:
+            return 0
+        dropped = [entry for entry in box.map if type(entry) is int and entry not in tracked
+                   and entry not in box.getting_diff_for]
+        for entry in dropped:
+            box.possible_gaps.pop(entry, None)
+            box.map.pop(entry, None)
+        if box.map and box.next_deadline not in box.map:
+            box.next_deadline = min(box.map, key=lambda entry: box.map[entry].deadline)
+        return len(dropped)
 
     async def rewind_paused_updates(self):
         dropped, self.paused_drops = self.paused_drops, 0
@@ -2158,6 +2182,7 @@ class Collector:
                 "role": "creator" if getattr(entity, "creator", False)
                         else "administrator" if getattr(entity, "admin_rights", None) else "member_or_unknown",
             }
+        self.prune_untracked()
         await self.load_folders()
         self.dialog_cache = dialogs
         self.dialogs_truncated = count >= limit
@@ -2786,6 +2811,7 @@ class Collector:
             now, interval = time.monotonic(), self.param("heartbeat_seconds")
             if heartbeat_at is None or now - heartbeat_at >= interval - 1:
                 heartbeat_at = now
+                self.prune_untracked()
                 self.persist_update_state()
                 self.last_heartbeat = utcnow()
                 self.store.append("collector.heartbeat", {
