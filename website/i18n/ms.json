@@ -478,7 +478,10 @@
 "Development": "Pembangunan",
 "Acquisition and complete export rates for two fresh workloads": "Perolehan dan kadar eksport lengkap untuk dua beban kerja baharu",
 "t.me/s page read live, or Desktop export": "t.me/s halaman dibaca secara langsung, atau eksport Desktop",
-"The 106-day GDPR file": "Fail GDPR 106 hari"
+"The 106-day GDPR file": "Fail GDPR 106 hari",
+"Translating reports for court": "Menterjemah laporan untuk mahkamah",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Fail mana yang asal, apa yang difailkan bersama terjemahan yang disahkan dan istilah yang dikekalkan oleh penterjemah.",
+"translation certified sworn translator court english original terms glossary": "terjemahan disahkan bersumpah penterjemah mahkamah asal Bahasa Inggeris istilah glosari"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Hanya ingin meneroka? Klik dua kali <code>scripts\\Demo.cmd</code> untuk demo terasing. Tidak perlu log masuk Telegram.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Halaman tetapan ialah senarai. Kad akaun di bahagian atas membuka <strong>Akaun Telegram</strong>. Di bawahnya setiap baris menamakan bahagian dan nilai yang digunakan: <strong>Sembang mana?</strong> dan <strong>Sambungan</strong> di bawah <strong>Akaun</strong>; <strong>Matlamat</strong>, <strong>Rakaman dan fail</strong>, <strong>Perlindungan rakaman</strong> dan <strong>Pemberitahuan dan salinan luar</strong> di bawah <strong>Merakam</strong>; <strong>Bahasa, masa dan rupa</strong> di bawah <strong>Panel</strong>; dan halaman pakar di bawah <strong>Alat lain</strong>. Di sebelah senarai, sebuah kad menunjukkan sama ada nilai yang disyorkan aktif, dengan nilai utama dan <strong>Batalkan perubahan terakhir</strong>, manakala <strong>Perubahan terkini</strong> menyenaraikan suntingan terkini.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Bahagian dibuka dalam tetingkap di atas senarai dan mempunyai alamat sendiri, contohnya <code>/settings/connection</code>. Anak panah kembali, butang tutup, Escape, klik di luar tetingkap dan butang Kembali pelayar membawa semula ke senarai. <strong>Sembang mana?</strong> disimpan dengan <strong>Simpan pilihan sembang</strong>; menutup dengan perubahan yang belum disimpan akan bertanya dahulu. Setiap perubahan memaparkan <strong>Batal</strong> selama 20 saat, dan setiap entri dalam <strong>Perubahan terkini</strong> boleh dibatalkan kemudian. Pembatalan ialah rekod <code>settings.changed</code> baharu dalam jurnal dan turut memulihkan had fail tersuai.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Gambaran keseluruhan profil",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Angka utama, profil yang diperhatikan dan bahagian boleh dicari dengan pautan ke rekod sembang."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Angka utama, profil yang diperhatikan dan bahagian boleh dicari dengan pautan ke rekod sembang.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: asal Bahasa Inggeris bagi laporan yang sama apabila bahasa laporan bukan Bahasa Inggeris, dimeterai dan ditandatangani dengan cara yang sama serta dinamakan di bawah <code>report.original</code> dalam manifes yang ditandatangani. Laporan dalam bahasa yang dipilih dibuka dengan cadangan untuk memfailkan asal Bahasa Inggeris bersama terjemahan yang disahkan atau bersumpah; lihat <a href=\"TRANSLATION.md\">Menterjemah laporan untuk mahkamah</a>."
 },
 "modes": {
 "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

@@ -869,6 +869,10 @@ class EvidencePDF:
                 (say("Report ID"), self.report_id)],
                 say("Signed PDF: a PDF signature that PDF readers show, and the Ed25519 seal of key {fp}. Check both with "
                     "verify.py; the last section explains how.", fp=report.grouped(self.fp)))
+            original = (self.context or {}).get("original") or {}
+            notice = report.translation_text(say, original.get("pdf") or original.get("html"))
+            if notice:
+                self.lay.callout(notice)
             self.records_total = (self.handover["counts"]["unchanged"] + self.handover["counts"]["minimised"]) if self.handover \
                 else self.data["subject"].get("event_count")
             if self.data.get("selection"):
@@ -1271,6 +1275,10 @@ class ChatPDF:
                 (say("Report ID"), self.report_id)],
                 say("Signed PDF: a PDF signature that PDF readers show, and the Ed25519 seal of key {fp}. Check both with "
                     "verify.py; the last section explains how.", fp=report.grouped(self.fp)))
+            original = (self.context or {}).get("original") or {}
+            notice = report.translation_text(say, original.get("pdf") or original.get("html"))
+            if notice:
+                self.lay.callout(notice)
             self.lay.figures([(say("Messages"), self.meta.get("message_count")), (say("Participants"), len(self.people)),
                          (say("With media"), self.stats["media"]), (say("Edited"), self.stats["edited"]), (say("Service"), self.stats["service"])]
                         + ([(say("Numbers absent"), self.ids["missing"])] if self.ids.get("numbered_per_chat") else [])

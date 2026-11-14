@@ -530,7 +530,10 @@
 "Development": "开发",
 "Acquisition and complete export rates for two fresh workloads": "两项新工作负载的采集率和完全导出率",
 "t.me/s page read live, or Desktop export": "t.me/s 页面实时阅读，或桌面版导出",
-"The 106-day GDPR file": "106 天的 GDPR 文件"
+"The 106-day GDPR file": "106 天的 GDPR 文件",
+"Translating reports for court": "为法院翻译报告",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "哪个文件是原件、应与认证译文一同提交什么，以及译者应保留的术语。",
+"translation certified sworn translator court english original terms glossary": "翻译 认证 宣誓 译者 法院 英文 原件 术语 词汇表"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "只是想了解一下？双击 <code>scripts\\Demo.cmd</code> 即可体验独立演示。无需登录 Telegram。",
@@ -4898,7 +4901,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "设置页面是一个列表。顶部的账户卡片打开<strong>Telegram 账号</strong>。下面每一行列出一个分区及其当前值：<strong>账户</strong>下有<strong>哪些聊天？</strong>和<strong>连接</strong>；<strong>记录</strong>下有<strong>目标</strong>、<strong>记录和文件</strong>、<strong>记录保护</strong>和<strong>通知和异地副本</strong>；<strong>面板</strong>下有<strong>语言、时间和外观</strong>；专家页面在<strong>更多工具</strong>下。列表旁的卡片显示推荐值是否已启用，并给出主要值和<strong>撤销上一次更改</strong>，<strong>最近的更改</strong>列出最近的编辑。",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "分区在列表上方的窗口中打开，并有自己的地址，例如 <code>/settings/connection</code>。返回箭头、关闭按钮、Escape、点击窗口外部以及浏览器的后退按钮都会回到列表。<strong>哪些聊天？</strong>通过<strong>保存聊天选择</strong>保存；有未保存的更改时关闭会先询问。每次更改都会显示<strong>撤销</strong> 20 秒，<strong>最近的更改</strong>中的每一项之后也都可以撤销。撤销会在日志中新增一条 <code>settings.changed</code> 记录，并恢复自定义文件限制。",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "资料概览",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "关键数据、观察到的资料，以及可搜索并链接到聊天记录的章节。"
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "关键数据、观察到的资料，以及可搜索并链接到聊天记录的章节。",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：当报告语言不是英文时，同一报告的英文原件，以相同方式封印和签名，并在已签名清单的 <code>report.original</code> 下列出。所选语言的报告开头建议将英文原件连同经认证或宣誓的译文一并提交；参见<a href=\"TRANSLATION.md\">为法院翻译报告</a>。"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

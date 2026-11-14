@@ -530,7 +530,10 @@
 "Development": "Desarrollo",
 "Acquisition and complete export rates for two fresh workloads": "Tasas de adquisición y exportación completa para dos cargas de trabajo recientes",
 "t.me/s page read live, or Desktop export": "t.me/s: lectura en directo de la página o exportación a escritorio",
-"The 106-day GDPR file": "El expediente RGPD de 106 días"
+"The 106-day GDPR file": "El expediente RGPD de 106 días",
+"Translating reports for court": "Traducir informes para tribunales",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Qué archivo es el original, qué presentar con una traducción certificada y qué términos conservan los traductores.",
+"translation certified sworn translator court english original terms glossary": "traducción certificada jurada traductor tribunal original inglés términos glosario"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "¿Solo está echando un vistazo? Haga doble clic en <code>scripts\\Demo.cmd</code> para acceder a una demostración aislada. No es necesario iniciar sesión en Telegram.",
@@ -4898,7 +4901,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "La página de configuración es una lista. La tarjeta de la cuenta, arriba, abre <strong>Cuenta de Telegram</strong>. Debajo, cada fila nombra una sección y el valor en uso: <strong>¿Qué chats?</strong> y <strong>Conexión</strong> en <strong>Cuenta</strong>; <strong>Objetivo</strong>, <strong>Grabación y archivos</strong>, <strong>Protección del registro</strong> y <strong>Notificaciones y copia externa</strong> en <strong>Grabación</strong>; <strong>Idioma, hora y aspecto</strong> en <strong>Panel</strong>; y las páginas para expertos en <strong>Más herramientas</strong>. Junto a la lista, una tarjeta indica si los valores recomendados están activos, con los valores principales y <strong>Deshacer el último cambio</strong>, y <strong>Cambios recientes</strong> enumera las últimas modificaciones.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Una sección se abre en una ventana sobre la lista y tiene su propia dirección, como <code>/settings/connection</code>. La flecha atrás, el botón de cerrar, Escape, un clic fuera de la ventana y el botón Atrás del navegador vuelven a la lista. <strong>¿Qué chats?</strong> se guarda con <strong>Guardar la selección de chats</strong>; al cerrar con cambios sin guardar, primero se pide confirmación. Cada cambio muestra <strong>Deshacer</strong> durante 20 segundos, y cada entrada de <strong>Cambios recientes</strong> puede deshacerse más tarde. Deshacer añade al registro una nueva entrada <code>settings.changed</code> y también restaura los límites de archivos personalizados.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Resumen del perfil",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Cifras clave, perfiles observados y secciones con búsqueda y enlaces a los registros del chat."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Cifras clave, perfiles observados y secciones con búsqueda y enlaces a los registros del chat.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: el original en inglés del mismo informe cuando el idioma del informe no es el inglés, sellado y firmado del mismo modo e indicado en el manifiesto firmado bajo <code>report.original</code>. El informe en el idioma elegido empieza con la recomendación de presentar el original en inglés con una traducción certificada o jurada; véase <a href=\"TRANSLATION.md\">Traducir informes para tribunales</a>."
 },
 "modes": {
 "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",

@@ -478,7 +478,10 @@
 "Development": "פיתוח",
 "Acquisition and complete export rates for two fresh workloads": "שיעורי הרכישה והייצוא המלאים עבור שני עומסי עבודה חדשים",
 "t.me/s page read live, or Desktop export": "t.me/s – קריאה ישירה של הדף, או ייצוא למחשב שולחני",
-"The 106-day GDPR file": "תיק ה-GDPR של 106 הימים"
+"The 106-day GDPR file": "תיק ה-GDPR של 106 הימים",
+"Translating reports for court": "תרגום דוחות לבית המשפט",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "איזה קובץ הוא המקור, מה להגיש עם תרגום מאושר ואילו מונחים המתרגמים שומרים.",
+"translation certified sworn translator court english original terms glossary": "תרגום מאושר מושבע מתרגם בית משפט מקור אנגלית מונחים מילון מונחים"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "רק סקרנים? לחצו פעמיים על <code>scripts\\Demo.cmd</code> כדי לצפות בהדגמה מבודדת. אין צורך להתחבר ל-Telegram.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "דף ההגדרות הוא רשימה. כרטיס החשבון שלמעלה פותח את <strong>חשבון Telegram</strong>. מתחתיו כל שורה מציינת מקטע ואת הערך שבשימוש: <strong>אילו צ'אטים?</strong> ו<strong>חיבור</strong> תחת <strong>חשבון</strong>; <strong>מטרה</strong>, <strong>תיעוד וקבצים</strong>, <strong>הגנת התיעוד</strong> ו<strong>התראות ועותק חיצוני</strong> תחת <strong>תיעוד</strong>; <strong>שפה, שעה ומראה</strong> תחת <strong>לוח בקרה</strong>; ודפי המומחים תחת <strong>כלים נוספים</strong>. לצד הרשימה כרטיס מראה אם הערכים המומלצים פעילים, עם הערכים העיקריים ועם <strong>בטל את השינוי האחרון</strong>, ו<strong>שינויים אחרונים</strong> מפרט את העריכות האחרונות.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "מקטע נפתח בחלון מעל הרשימה ויש לו כתובת משלו, למשל <code>/settings/connection</code>. חץ החזרה, לחצן הסגירה, Escape, לחיצה מחוץ לחלון ולחצן החזרה של הדפדפן מחזירים לרשימה. <strong>אילו צ'אטים?</strong> נשמר באמצעות <strong>שמירת בחירת הצ'אטים</strong>; סגירה עם שינויים שלא נשמרו מבקשת אישור קודם. כל שינוי מציג <strong>בטל</strong> במשך 20 שניות, ואפשר לבטל מאוחר יותר כל רשומה ב<strong>שינויים אחרונים</strong>. ביטול הוא רשומת <code>settings.changed</code> חדשה ביומן, והוא גם מחזיר מגבלות קבצים מותאמות אישית.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "סקירת פרופיל",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "נתונים עיקריים, פרופילים שנצפו ומקטעים הניתנים לחיפוש עם קישורים לרשומות הצ'אט."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "נתונים עיקריים, פרופילים שנצפו ומקטעים הניתנים לחיפוש עם קישורים לרשומות הצ'אט.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: המקור באנגלית של אותו דוח כששפת הדוח אינה אנגלית, חתום ונחתם באותו אופן ומצוין במניפסט החתום תחת <code>report.original</code>. הדוח בשפה שנבחרה נפתח בהמלצה להגיש את המקור באנגלית עם תרגום מאושר או מושבע; ראו <a href=\"TRANSLATION.md\">תרגום דוחות לבית המשפט</a>."
 },
 "modes": {
 "modes.actions.body": "אישורי תצוגה מקדימה, בקשה ותוצאה חתומים. לפני לחיצה על כפתור, השרת משיג את ההודעה שוב ודוחה מקלדת ששונתה. טקסט ה-callback וה-URLs שהוחזרו נשארים בהקשר המוקלט.",

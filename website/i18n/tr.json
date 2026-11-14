@@ -530,7 +530,10 @@
 "Development": "Geliştirme",
 "Acquisition and complete export rates for two fresh workloads": "İki yeni iş yükü için veri toplama ve tam dışa aktarma oranları",
 "t.me/s page read live, or Desktop export": "t.me/s sayfası canlı olarak okunabilir veya masaüstü sürümüne aktarılabilir",
-"The 106-day GDPR file": "106 günlük GDPR dosyası"
+"The 106-day GDPR file": "106 günlük GDPR dosyası",
+"Translating reports for court": "Raporları mahkeme için çevirmek",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Hangi dosyanın orijinal olduğu, onaylı çeviriyle neyin sunulacağı ve çevirmenlerin koruduğu terimler.",
+"translation certified sworn translator court english original terms glossary": "çeviri onaylı yeminli çevirmen mahkeme İngilizce orijinal terimler sözlük"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Sadece göz atıyor musunuz? <code>scripts\\Demo.cmd</code>&#x27;ye çift tıklayarak izole bir demoyu deneyin. Telegram ile giriş yapmanıza gerek yoktur.",
@@ -4898,7 +4901,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Ayarlar sayfası bir listedir. Üstteki hesap kartı <strong>Telegram hesabı</strong> bölümünü açar. Altında her satır bir bölümü ve kullanılan değeri gösterir: <strong>Hesap</strong> altında <strong>Hangi sohbetler?</strong> ve <strong>Bağlantı</strong>; <strong>Kayıt</strong> altında <strong>Amaç</strong>, <strong>Kayıt ve dosyalar</strong>, <strong>Kayıt koruması</strong> ve <strong>Bildirimler ve harici kopya</strong>; <strong>Panel</strong> altında <strong>Dil, saat ve görünüm</strong>; uzman sayfaları ise <strong>Diğer araçlar</strong> altında. Listenin yanındaki kart, önerilen değerlerin açık olup olmadığını ana değerler ve <strong>Son değişikliği geri al</strong> ile gösterir; <strong>Son değişiklikler</strong> son düzenlemeleri listeler.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Bir bölüm listenin üzerinde bir pencerede açılır ve <code>/settings/connection</code> gibi kendi adresi vardır. Geri oku, kapatma düğmesi, Escape, pencerenin dışına tıklama ve tarayıcının Geri düğmesi listeye döndürür. <strong>Hangi sohbetler?</strong>, <strong>Sohbet seçimini kaydet</strong> ile kaydedilir; kaydedilmemiş değişikliklerle kapatırken önce sorulur. Her değişiklik 20 saniye boyunca <strong>Geri al</strong> gösterir ve <strong>Son değişiklikler</strong> içindeki her kayıt daha sonra geri alınabilir. Geri alma, günlükte yeni bir <code>settings.changed</code> kaydıdır ve özel dosya sınırlarını da geri getirir.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Profil özeti",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Temel rakamlar, gözlemlenen profiller ve sohbet kayıtlarına bağlantılı aranabilir bölümler."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Temel rakamlar, gözlemlenen profiller ve sohbet kayıtlarına bağlantılı aranabilir bölümler.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: rapor dili İngilizce olmadığında aynı raporun İngilizce orijinali; aynı şekilde mühürlenir ve imzalanır ve imzalı manifestte <code>report.original</code> altında belirtilir. Seçilen dildeki rapor, İngilizce orijinalin onaylı veya yeminli bir çeviriyle birlikte sunulması önerisiyle başlar; bkz. <a href=\"TRANSLATION.md\">Raporları mahkeme için çevirmek</a>."
 },
 "modes": {
 "modes.actions.body": "Önizleme, istek ve sonuç makbuzları imzalanır. Bir düğmeye basılmadan önce, sunucu mesajı tekrar alır ve değiştirilmiş bir klavyeyi reddeder. Geri dönen geri arama metni ve URL'ler, kaydedilmiş bağlamda kalır.",

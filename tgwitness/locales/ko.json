@@ -4809,7 +4809,7 @@
   "Source files SHA-256": "소스 파일 SHA-256",
   "Journal checkpoints in this export are stamped by independent timestamp authorities; see Timestamps.": "이 내보내기 파일의 저널 체크포인트에는 독립적인 타임스탬프 기관의 타임스탬프가 찍혀 있습니다. ‘타임스탬프’ 항목을 참조하십시오.",
   "Only an authority on the EU Trusted List gives a legal presumption of accuracy; check the authorities named under Timestamps.": "EU 신뢰 목록(EU Trusted List)에 등재된 인증 기관만이 정확성에 대한 법적 추정력을 부여합니다. ‘타임스탬프(Timestamps)’ 항목에 명시된 인증 기관을 확인하십시오.",
-  "The report as a signed PDF, for printing and filing": "인서트된 PDF 형식의 보고서(인쇄 및 보관용)",
+  "The report as a signed PDF, for printing and filing": "인쇄 및 보관용 서명된 PDF 형식의 보고서",
   "An edited message shows when it was last edited. A history snapshot holds only the current text; earlier versions exist only where the observation journal recorded them.": "편집된 메시지에는 마지막 편집 시점이 표시됩니다. 기록 내역 스냅샷에는 현재 텍스트만 포함되며, 이전 버전은 관측 일지에 기록된 경우에만 존재합니다.",
   "Period of the messages": "메시지 기간",
   "To check every byte, drop this file into the check at the end of the page or run verify.py.": "모든 바이트를 확인하려면 이 파일을 페이지 하단의 검사 영역에 드롭하거나 verify.py를 실행하십시오.",
@@ -8844,5 +8844,9 @@
   "Leave without saving the changes in this form?": "이 양식의 변경 내용을 저장하지 않고 나가시겠습니까?",
   "Alerts": "알림",
   "Geo lookup": "지역 조회",
-  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "관측 구간은 같은 실행에서 연결된 상태의 수집 하트비트를 따르며, 하트비트 간격 세 번(최소 3분) 이내로 정해집니다. 각 구간은 마지막 수집 확인 또는 기록된 중지에서 끝납니다. Telegram의 업데이트 카운터가 증가했지만 업데이트가 이 세션에 도달하지 않았거나 Telegram이 더 이상 이 세션을 목록에 표시하지 않은 세션 구간은 누락으로 봅니다. 메시지 번호 누락은 관측된 번호 범위를 기준으로 합니다."
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "관측 구간은 같은 실행에서 연결된 상태의 수집 하트비트를 따르며, 하트비트 간격 세 번(최소 3분) 이내로 정해집니다. 각 구간은 마지막 수집 확인 또는 기록된 중지에서 끝납니다. Telegram의 업데이트 카운터가 증가했지만 업데이트가 이 세션에 도달하지 않았거나 Telegram이 더 이상 이 세션을 목록에 표시하지 않은 세션 구간은 누락으로 봅니다. 메시지 번호 누락은 관측된 번호 범위를 기준으로 합니다.",
+  "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "권장 사항: 법원에 제출할 경우, 영어 원본과 법원 사용 언어로 된 공증 또는 선서 번역본을 함께 제출하십시오. 선서 번역가는 해당 지역의 전문 용어와 법원 문서에 대한 형식적 요건을 잘 알고 있습니다. 영어 이외의 언어로 된 이 보고서의 버전은 참고용으로 제공되는 기계 번역본입니다.",
+  "English original in this archive: {file}": "이 아카이브의 영어 원본: {file}",
+  "English original of this report, sealed": "이 보고서의 영어 원본, 봉인됨",
+  "English original of the signed PDF": "서명된 PDF의 영어 원본"
 }

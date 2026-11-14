@@ -8844,5 +8844,9 @@
   "Leave without saving the changes in this form?": "不保存此表单中的更改就退出吗？",
   "Alerts": "警报",
   "Geo lookup": "地理位置查询",
-  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "观测区间依据同一次运行中连接状态下的采集心跳确定，容许三个心跳间隔（至少三分钟）。每个区间在最后一次采集确认或记录的停止处结束。Telegram 的更新计数器增长但更新未到达本会话，或 Telegram 不再列出本会话的会话窗口，视为缺口。消息编号缺口描述的是已观测到的编号范围。"
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "观测区间依据同一次运行中连接状态下的采集心跳确定，容许三个心跳间隔（至少三分钟）。每个区间在最后一次采集确认或记录的停止处结束。Telegram 的更新计数器增长但更新未到达本会话，或 Telegram 不再列出本会话的会话窗口，视为缺口。消息编号缺口描述的是已观测到的编号范围。",
+  "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "建议：提交至法院时，应将英文原件与经认证或宣誓翻译的、译为法院指定语言的译文一并提交。宣誓翻译员熟悉当地术语及法院文件的形式要求。本报告的英文以外语言版本均为供参考的机器翻译。",
+  "English original in this archive: {file}": "此归档中的英文原件：{file}",
+  "English original of this report, sealed": "本报告的英文原件，已封印",
+  "English original of the signed PDF": "签名版 PDF 的英文原件"
 }

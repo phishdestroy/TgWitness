@@ -226,6 +226,11 @@ report is sealed with the workspace's Ed25519 key and can be verified separately
   trusted; compare the Ed25519 fingerprint instead. Chinese, Japanese and Korean PDFs need a font
   on the server (or in `TGWITNESS_FONT_DIR`); without one the ZIP carries the HTML and JSON reports
   only.
+- `report.en.html`, `report.en.pdf` / `chat.en.html`, `chat.en.pdf`: the English original of the
+  same report when the report language is not English, sealed and signed in the same way and named
+  under `report.original` in the signed manifest. The report in the selected language opens with a
+  recommendation to file the English original with a certified or sworn translation; see
+  [Translating reports for court](TRANSLATION.md).
 
 In a channel or supergroup Telegram numbers messages 1, 2, 3… in order. A chat export lists the
 first and last number, how many are present and every run of absent numbers in

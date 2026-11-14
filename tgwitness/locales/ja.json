@@ -8844,5 +8844,9 @@
   "Leave without saving the changes in this form?": "このフォームの変更を保存せずに終了しますか？",
   "Alerts": "アラート",
   "Geo lookup": "位置情報の照会",
-  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "観測区間は、同一の実行における接続中の取得ハートビートに基づき、ハートビート間隔3回分（最低3分）以内で決まります。各区間は、最後の取得確認または記録された停止で終了します。Telegramの更新カウンターが増えたのに更新がこのセッションに届かなかった期間、またはTelegramがこのセッションを一覧に表示しなくなった期間のセッションウィンドウは、欠落として扱います。メッセージ番号の欠落は、観測された番号範囲について示します。"
+  "Observation intervals follow connected capture heartbeats from the same run, within three heartbeat intervals (at least three minutes). Each interval ends at its last capture confirmation or recorded stop. Session windows, while Telegram's update counter grew without updates reaching this session or while Telegram no longer listed it, are gaps. Message-number gaps describe the observed numbering range.": "観測区間は、同一の実行における接続中の取得ハートビートに基づき、ハートビート間隔3回分（最低3分）以内で決まります。各区間は、最後の取得確認または記録された停止で終了します。Telegramの更新カウンターが増えたのに更新がこのセッションに届かなかった期間、またはTelegramがこのセッションを一覧に表示しなくなった期間のセッションウィンドウは、欠落として扱います。メッセージ番号の欠落は、観測された番号範囲について示します。",
+  "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "推奨事項：裁判所に提出する際は、英語の原本と、裁判所の公用語への公認翻訳または宣誓翻訳を併せて提出してください。宣誓翻訳者は、現地の専門用語や裁判書類の形式上の要件を熟知しています。英語以外の言語で作成された本報告書の各バージョンは、参考用の機械翻訳です。",
+  "English original in this archive: {file}": "このアーカイブ内の英語の原本：{file}",
+  "English original of this report, sealed": "このレポートの英語の原本（封印済み）",
+  "English original of the signed PDF": "署名付き PDF の英語の原本"
 }

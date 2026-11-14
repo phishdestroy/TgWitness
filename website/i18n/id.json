@@ -530,7 +530,10 @@
 "Development": "Pengembangan",
 "Acquisition and complete export rates for two fresh workloads": "Tingkat akuisisi dan ekspor lengkap untuk dua beban kerja baru",
 "t.me/s page read live, or Desktop export": "t.me/s halaman dibaca secara langsung, atau ekspor ke Desktop",
-"The 106-day GDPR file": "Berkas GDPR 106 hari"
+"The 106-day GDPR file": "Berkas GDPR 106 hari",
+"Translating reports for court": "Menerjemahkan laporan untuk pengadilan",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Berkas mana yang asli, apa yang diajukan bersama terjemahan tersumpah, dan istilah yang dipertahankan penerjemah.",
+"translation certified sworn translator court english original terms glossary": "terjemahan tersertifikasi tersumpah penerjemah pengadilan asli bahasa Inggris istilah glosarium"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Hanya ingin menjelajah? Klik dua kali <code>scripts\\Demo.cmd</code> untuk demo terisolasi. Tidak perlu login ke Telegram.",
@@ -4898,7 +4901,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Halaman pengaturan berupa daftar. Kartu akun di atas membuka <strong>Akun Telegram</strong>. Di bawahnya setiap baris menyebut bagian dan nilai yang dipakai: <strong>Chat mana?</strong> dan <strong>Koneksi</strong> di bawah <strong>Akun</strong>; <strong>Tujuan</strong>, <strong>Perekaman dan file</strong>, <strong>Perlindungan rekaman</strong>, dan <strong>Notifikasi dan salinan eksternal</strong> di bawah <strong>Perekaman</strong>; <strong>Bahasa, waktu, dan tampilan</strong> di bawah <strong>Panel</strong>; dan halaman ahli di bawah <strong>Alat lainnya</strong>. Di samping daftar, sebuah kartu menunjukkan apakah nilai yang disarankan aktif, beserta nilai utama dan <strong>Batalkan perubahan terakhir</strong>, sedangkan <strong>Perubahan terbaru</strong> mencantumkan suntingan terbaru.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Bagian terbuka di jendela di atas daftar dan memiliki alamat sendiri, misalnya <code>/settings/connection</code>. Panah kembali, tombol tutup, Escape, klik di luar jendela, dan tombol Kembali di peramban mengembalikan ke daftar. <strong>Chat mana?</strong> disimpan dengan <strong>Simpan pilihan chat</strong>; menutup dengan perubahan yang belum disimpan akan meminta konfirmasi lebih dulu. Setiap perubahan menampilkan <strong>Batal</strong> selama 20 detik, dan setiap entri di <strong>Perubahan terbaru</strong> dapat dibatalkan nanti. Pembatalan adalah catatan <code>settings.changed</code> baru di jurnal dan juga mengembalikan batas berkas khusus.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Ringkasan profil",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Angka utama, profil yang diamati, dan bagian yang dapat dicari dengan tautan ke catatan chat."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Angka utama, profil yang diamati, dan bagian yang dapat dicari dengan tautan ke catatan chat.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: dokumen asli berbahasa Inggris dari laporan yang sama jika bahasa laporan bukan bahasa Inggris, disegel dan ditandatangani dengan cara yang sama serta disebut di bawah <code>report.original</code> dalam manifes bertanda tangan. Laporan dalam bahasa yang dipilih dibuka dengan rekomendasi untuk mengajukan dokumen asli berbahasa Inggris bersama terjemahan tersertifikasi atau tersumpah; lihat <a href=\"TRANSLATION.md\">Menerjemahkan laporan untuk pengadilan</a>."
 },
 "modes": {
 "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",

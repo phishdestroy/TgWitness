@@ -444,6 +444,10 @@ def file_purpose(say, name):
         "records.jsonl": say("The records of this extract, signed; minimised ones name what was withheld"),
         "events.csv": say("The same records for spreadsheets (formula-safe)"),
         "report.html": say("This readable report, sealed"),
+        "report.en.html": say("English original of this report, sealed"),
+        "report.en.pdf": say("English original of the signed PDF"),
+        "chat.en.html": say("English original of this report, sealed"),
+        "chat.en.pdf": say("English original of the signed PDF"),
         "coverage.json": say("Observation periods, gaps and message IDs never observed"),
         "custody.json": say("Chain of custody and acquisition details"),
         "SHA256SUMS": say("SHA-256 checksums of the listed payload files, for sha256sum -c"),
@@ -549,6 +553,64 @@ def reading(meta):
             or None}
 
 
+TRANSLATION_TERMS = (
+    ("journal", "the signed, hash-chained sequence of records kept by the collector; not a diary or a periodical"),
+    ("record", "one signed entry of the journal; use one word for it throughout"),
+    ("observation", "what the collector received at a recorded time; not a finding about the truth of the content"),
+    ("collector", "the TgWitness process that observed through the operator's own Telegram account"),
+    ("deletion notice", "Telegram's notice that a message was deleted; it does not show who deleted it"),
+    ("missing on recheck", "Telegram no longer returned the message when it was checked again: deleted, or no longer "
+                           "visible to this account"),
+    ("absent message number", "a number with no message in the export: deleted earlier or never visible to this account"),
+    ("gap", "a period without observation; not evidence that nothing happened"),
+    ("earlier version", "the text before an edit; both versions are kept"),
+    ("checkpoint", "a signed summary of the journal up to a record number"),
+    ("timestamp service (TSA)", "an independent RFC 3161 time-stamping service; not a government authority"),
+    ("timestamp receipt", "the answer of a timestamp service, or an OpenTimestamps receipt, showing that a checkpoint "
+                          "existed by a time"),
+    ("seal", "the Ed25519 signature embedded in a report file"),
+    ("signing key fingerprint", "the SHA-256 of the public key; obtain it through a separate trusted channel"),
+    ("witness", "an independent party that keeps or confirms checkpoints"),
+    ("handover extract", "part of a journal prepared for another party, with other people's data minimised"),
+    ("minimised record", "a record whose withheld fields are named and replaced by their hash"),
+    ("UTC", "times are UTC in ISO 8601; do not convert them to a local time zone"),
+)
+
+
+def translation_text(say, original=None):
+    if say.language == "en":
+        return ""
+    text = say("Recommendation: for court, file the English original with a certified or sworn translation into the "
+               "court language. A sworn translator knows the local terminology and the formal requirements for court "
+               "documents. Versions of this report in languages other than English are machine translations for "
+               "orientation.")
+    if original:
+        text += " " + say("English original in this archive: {file}", file=original)
+    return text
+
+
+def translation_notice(say, original=None):
+    text = translation_text(say, original)
+    return '<div class="callout translation-notice" role="note">' + e(text) + "</div>" if text else ""
+
+
+def translator_lines(context, files, archive):
+    original = context.get("original") or {}
+    defaults = ("chat.html", "chat.pdf") if context["kind"] == "chat" else ("report.html", "report.pdf")
+    names = [original[key] for key in ("html", "pdf") if original.get(key)] or [n for n in defaults if n in files]
+    names = names or [defaults[0]]
+    width = max(len(term) for term, _ in TRANSLATION_TERMS) + 3
+    return (["The English report is the original: " + ", ".join(names) + ".",
+             "Versions in other languages are machine translations for orientation. For court, translate from the",
+             "English original and have the translation certified or sworn in the court language.",
+             "Check the original first: python verify.py " + names[0] + " --fingerprint TRUSTED_SHA256 --evidence ../"
+             + archive,
+             "Keep literal: file names, commands, hashes, fingerprints, IDs, message numbers, URLs and times.",
+             "Quote captured messages in their original language and give the translation separately.",
+             "", "Terms:"]
+            + ["  " + term.ljust(width) + meaning for term, meaning in TRANSLATION_TERMS])
+
+
 def readme(context, files, english):
     say = Words(context["options"].get("language", "en"))
     options, fp = context["options"], fingerprint(context["public_key"])
@@ -567,8 +629,12 @@ def readme(context, files, english):
     lines += ["", say("Start here"), "-" * 64,
               say("Extract the complete archive before opening the HTML report. Keep viewer/ and media/ beside it."),
               "  " + report_name + " — " + say("Report, search, filters and archive verification"),
-              say("Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder."),
-              "", say("What is in this archive"), "-" * 64]
+              say("Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder.")]
+    original = context.get("original") or {}
+    if original.get("html") and say.language != "en":
+        lines += ["  " + original["html"] + " — " + say("English original of this report, sealed"),
+                  translation_text(say)]
+    lines += ["", say("What is in this archive"), "-" * 64]
     folders = ("media/", "anchors/", "records/", "messages/", "viewer/")
     shown = [n for n in sorted(files) if not n.startswith(folders)]
     width = max([len(n) for n in shown] + [len(n) for n in folders]) + 3
@@ -609,6 +675,8 @@ def readme(context, files, english):
               say("Import CSV as UTF-8 and keep ID, wallet and hash columns as text. Formula-like values are escaped for spreadsheets."),
               say("Indicators are observations, not verdicts. Review their source references before importing STIX or MISP."),
               say("The PDF is a signed reading copy. Use the HTML viewer for search and the JSON or JSONL for structured analysis.")]
+    if say.language == "en":
+        lines += ["", "For translators", "-" * 64] + translator_lines(context, files, archive)
     lines += ["", say("Reading this record"), "-" * 64] + ["- " + say(item) for item in context["limits"]]
     text = "\n".join(lines) + "\n"
     prefix = "\n".join(context["limits"])
@@ -1017,7 +1085,7 @@ def bar(say, label, links, viewer_kind=None):
             + ICON_PRINT + "</button></div></header>" + opening)
 
 
-def hero(say, eyebrow, title, facts, fp, sealed):
+def hero(say, eyebrow, title, facts, fp, sealed, notice=""):
     stamp = ('<aside class="stamp" id="stamp" data-fp="' + e(fp) + '"><div class="stamp-top">' + STAMP + "<div>"
              '<div class="stamp-label">' + e(say("Digital signature")) + '</div><div class="stamp-state" id="seal-state">'
              + e(say("Checking…")) + '</div></div></div><div class="stamp-key"><span>Ed25519</span>'
@@ -1028,7 +1096,7 @@ def hero(say, eyebrow, title, facts, fp, sealed):
             + e(say("Evidence dossier")) + '</span></div><div class="hero-main"><div class="eyebrow">' + e(eyebrow) + "</div><h1>"
             + e(title) + "</h1>"
             '<div class="facts">' + "".join("<div><span>" + e(k) + "</span><b>" + v + "</b></div>" for k, v in facts if v)
-            + "</div></div>" + stamp + "</section>")
+            + "</div>" + notice + "</div>" + stamp + "</section>")
 
 
 TILE_TONES = {"accent": "blue", "violet": "violet", "warn": "orange", "bad": "red", "ok": "green", "pink": "teal"}
@@ -2206,12 +2274,15 @@ def timestamps_section(say, number, anchors, archive_name, fp):
 
 
 def verify_section(say, number, archive_name, fp, report_name, archive, data_name=None):
-    data_name = data_name or ("events.jsonl" if report_name == "report.html" else "chat.json")
+    data_name = data_name or ("events.jsonl" if report_name.startswith("report.") else "chat.json")
     steps = ["<li>" + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + "</li>"]
     if archive:
-        steps.append("<li>" + e(say("Check the whole archive: signature, file hashes, message numbers and this report's seal.")
-                                if report_name == "chat.html" else
-                                say("Check the whole archive: signatures, hashes, record chain and this report's seal."))
+        whole = (("Check the whole archive: signatures, file hashes and the signed manifest that lists this file. "
+                  "Its own seal is checked in the last step.") if report_name.endswith(".en.html") else
+                 say("Check the whole archive: signature, file hashes, message numbers and this report's seal.")
+                 if report_name.startswith("chat.") else
+                 say("Check the whole archive: signatures, hashes, record chain and this report's seal."))
+        steps.append("<li>" + e(whole)
                      + command("python verify.py " + archive_name + " --fingerprint " + fp) + "</li>")
         steps.append("<li>" + e(say("Without Python, check the file hashes (not the signature):"))
                      + command("sha256sum -c SHA256SUMS") + command("shasum -a 256 -c SHA256SUMS")
@@ -2322,7 +2393,8 @@ class EvidenceHTML:
                  (say("Organization"), e(self.options.get("organization"))), (say("Created"), when(self.created)),
                  (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
         categories = self.digest["categories"]
-        yield (hero(say, self.label + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None)
+        yield (hero(say, self.label + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None,
+                    translation_notice(say, (self.context.get("original") or {}).get("html")))
                + tiles([(say("Records"), num(self.shown_count), "accent", "layers"),
                         (say("Chats"), num(len(self.digest["chats"])), "accent", "telegram"),
                         (say("Messages"), num(categories["message"]), "accent", "message"),
@@ -2450,10 +2522,11 @@ class EvidenceHTML:
             (say("Collector clock against Telegram"), clocks_html(say, self.source_digest.get("clocks"))),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        yield verify_section(say, next(self.numbers), self.archive_name, self.fp, "report.html", self.archive,
+        own = self.context.get("report_file") or "report.html"
+        yield verify_section(say, next(self.numbers), self.archive_name, self.fp, own, self.archive,
                              "records.jsonl" if self.handover else "events.jsonl").encode("utf-8")
         if self.archive and self.files:
-            yield files_section(say, next(self.numbers), self.files, ("report.html", "README.txt", "SHA256SUMS", "manifest.json",
+            yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
                                                             "manifest.sig")).encode("utf-8")
         yield standards_section(say, next(self.numbers), "handover" if self.handover else "evidence",
                                 rfc3161_count(self.anchors, validated=True)).encode("utf-8")
@@ -2725,7 +2798,8 @@ class ChatHTML:
                  (say("Created"), when(self.created)), (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
         self.ids = self.context.get("message_ids") or {}
         absent = [(say("Numbers absent"), num(self.ids["missing"]), "bad")] if self.ids.get("numbered_per_chat") else []
-        yield (hero(say, say("Chat export") + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None)
+        yield (hero(say, say("Chat export") + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None,
+                    translation_notice(say, (self.context.get("original") or {}).get("html")))
                + tiles([(say("Messages"), num(self.meta.get("message_count")), "accent", "message"),
                         (say("Participants"), num(len(self.people)), "violet", "users"),
                         (say("With media"), num(self.stats["media"]), "violet", "file"),
@@ -2836,8 +2910,9 @@ class ChatHTML:
             (say("Collector clock against Telegram"), clocks_html(say, read["clock_checks"], "Not recorded in this export")),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", self.fp, "chat.html", True).encode("utf-8")
-        yield files_section(say, next(self.numbers), self.files, ("chat.html", "README.txt", "SHA256SUMS", "manifest.json",
+        own = self.context.get("report_file") or "chat.html"
+        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", self.fp, own, True).encode("utf-8")
+        yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
                                                         "manifest.sig")).encode("utf-8")
         yield standards_section(say, next(self.numbers), "chat").encode("utf-8")
         yield limits_section(say, next(self.numbers), self.context.get("limits") or []).encode("utf-8")

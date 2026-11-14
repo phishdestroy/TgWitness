@@ -17,7 +17,7 @@ from pathlib import Path
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from . import indicators, pdf_report, people, report, verification_kit
-from .evidence import producer, report_entry, write_indicators, write_pdf, write_viewer
+from .evidence import english_original, producer, report_entry, write_indicators, write_pdf, write_viewer
 from .media_jobs import forget_files
 from .message_selection import Selection
 from .security import private_write
@@ -430,6 +430,9 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
             def ordered():
                 return (named(r, names, chat_id) for r in source())
             context["viewer"] = write_viewer(write_member, "chat", ordered(), people, found, options)
+            english_original(context, write_member, hashes, "chat",
+                             lambda english: pdf_report.chat_report_pdf(meta, english, vault, ordered()),
+                             lambda english: html_chunks(meta, scratch_path, {**english, "names": names}))
             context["files"] = dict(hashes)
             write_pdf(write_member, "chat.pdf", lambda: pdf_report.chat_report_pdf(meta, context, vault, ordered()))
             context["files"] = dict(hashes)

@@ -478,7 +478,10 @@
 "Development": "Rivojlantirish",
 "Acquisition and complete export rates for two fresh workloads": "Ikki yangi ish yuklamasi uchun olish va to'liq eksport stavkalari",
 "t.me/s page read live, or Desktop export": "t.me/s sahifasini jonli o'qish yoki ish stoli uchun eksport",
-"The 106-day GDPR file": "106 kunlik GDPR fayli"
+"The 106-day GDPR file": "106 kunlik GDPR fayli",
+"Translating reports for court": "Hisobotlarni sud uchun tarjima qilish",
+"Which file is the original, what to file with a certified translation and the terms translators keep.": "Qaysi fayl asl nusxa ekani, tasdiqlangan tarjima bilan nima topshirilishi va tarjimonlar saqlaydigan atamalar.",
+"translation certified sworn translator court english original terms glossary": "tarjima tasdiqlangan qasamli tarjimon sud inglizcha asl nusxa atamalar lug'at"
 },
 "blocks": {
 "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Faqatgina o&#x27;rganmoqchimisiz? Ajratilgan demo uchun <code>scripts\\Demo.cmd</code> ustiga ikki marta bosing. Telegramga kirish shart emas.",
@@ -4846,7 +4849,8 @@
 "c6c08ecd9db1c75640651ff23f3a979cc83922e99ff93830a56d74a06710f8dd": "Sozlamalar sahifasi — ro'yxat. Yuqoridagi akkaunt kartasi <strong>Telegram akkaunti</strong> ni ochadi. Uning ostida har bir qator bo'lim va ishlatilayotgan qiymatni ko'rsatadi: <strong>Hisob</strong> ostida <strong>Qaysi chatlar?</strong> va <strong>Ulanish</strong>; <strong>Yozib olish</strong> ostida <strong>Maqsad</strong>, <strong>Yozuv va fayllar</strong>, <strong>Yozuv himoyasi</strong> va <strong>Bildirishnomalar va tashqi nusxa</strong>; <strong>Panel</strong> ostida <strong>Til, vaqt va ko'rinish</strong>; ekspert sahifalari esa <strong>Qo'shimcha vositalar</strong> ostida. Ro'yxat yonidagi karta tavsiya etilgan qiymatlar yoqilgan-yoqilmaganini asosiy qiymatlar va <strong>Oxirgi o'zgartirishni bekor qilish</strong> bilan ko'rsatadi, <strong>So'nggi o'zgarishlar</strong> esa so'nggi tahrirlarni sanab beradi.",
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "Bo'lim ro'yxat ustidagi oynada ochiladi va <code>/settings/connection</code> kabi o'z manziliga ega. Orqaga strelkasi, yopish tugmasi, Escape, oynadan tashqariga bosish va brauzerning Orqaga tugmasi ro'yxatga qaytaradi. <strong>Qaysi chatlar?</strong> <strong>Chatlar tanlovini saqlash</strong> bilan saqlanadi; saqlanmagan o'zgarishlar bilan yopishda avval so'raladi. Har bir o'zgarish 20 soniya davomida <strong>Bekor qilish</strong> ni ko'rsatadi, <strong>So'nggi o'zgarishlar</strong> dagi har bir yozuvni esa keyinroq bekor qilish mumkin. Bekor qilish jurnalda yangi <code>settings.changed</code> yozuvi bo'ladi va maxsus fayl cheklovlarini ham qaytaradi.",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "Profil sharhi",
-"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Asosiy ko'rsatkichlar, kuzatilgan profillar va chat yozuvlariga havolali qidiriladigan bo'limlar."
+"f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "Asosiy ko'rsatkichlar, kuzatilgan profillar va chat yozuvlariga havolali qidiriladigan bo'limlar.",
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>, <code>report.en.pdf</code> / <code>chat.en.html</code>, <code>chat.en.pdf</code>: hisobot tili ingliz tili bo'lmaganda o'sha hisobotning inglizcha asl nusxasi; u xuddi shu tarzda muhrlanadi va imzolanadi hamda imzolangan manifestda <code>report.original</code> ostida ko'rsatiladi. Tanlangan tildagi hisobot inglizcha asl nusxani tasdiqlangan yoki qasamli tarjima bilan topshirish tavsiyasi bilan boshlanadi; qarang: <a href=\"TRANSLATION.md\">Hisobotlarni sud uchun tarjima qilish</a>."
 },
 "modes": {
 "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",
