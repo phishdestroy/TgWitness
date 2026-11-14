@@ -99,7 +99,11 @@
         "basis": "Ontario Rules of Civil Procedure r. 4.1.01; r. 53.03(3); r. 39.01(7); r. 76.09.1",
         "summary_en": "Every expert engaged by or on behalf of a party must provide opinion evidence that is fair, objective and non-partisan, related only to matters within the expert's area of expertise, and provide such additional assistance as the court may reasonably require; this duty prevails over any obligation owed to the engaging party (r. 4.1.01(1)-(2)). Opinion evidence on motions and applications must contain the r. 53.03(2.1) information (r. 39.01(7)). Under simplified procedure the report is appended to an affidavit of the expert adopting it (r. 76.09.1).",
         "source": "https://www.ontario.ca/laws/regulation/900194"
-      }
+      },
+      "id": "civil-ontario",
+      "scope": "Ontario civil proceedings governed by Rules of Civil Procedure, R.R.O. 1990, Reg. 194; not a nationwide civil rule.",
+      "scope_source": "https://www.ontario.ca/laws/regulation/900194",
+      "scope_checked_at": "2026-11-14"
     },
     {
       "route": "civil",
@@ -153,7 +157,11 @@
         "basis": "Code of Conduct for Expert Witnesses (Schedule to the Federal Courts Rules), ss. 1, 2, 4, 5; r. 52.2(2)",
         "summary_en": "Overriding duty to assist the Court impartially on matters relevant to the expert's area of expertise; this duty overrides any duty to a party, including the retaining party; the expert is to be independent and objective and is not an advocate (ss. 1-2). Material changes affecting qualifications, opinions or data must be reported without delay (s. 4). In court-ordered expert conferences the expert must exercise independent, impartial and objective judgment and clarify points of agreement and disagreement (s. 5). Non-compliance may lead to exclusion of some or all of the affidavit or statement (r. 52.2(2)).",
         "source": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-98-106/FullText.html"
-      }
+      },
+      "id": "civil-federal",
+      "scope": "Federal Court and Federal Court of Appeal proceedings governed by the Federal Courts Rules; not provincial civil procedure.",
+      "scope_source": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-98-106/FullText.html",
+      "scope_checked_at": "2026-11-14"
     }
   ],
   "statute": {
@@ -178,7 +186,10 @@
       "warning_local": "I, (name), having been named as an expert witness by the (party), certify that I have read the Code of Conduct for Expert Witnesses set out in the schedule to the Federal Courts Rules and agree to be bound by it. (Date) (Signature of expert witness) (Name, address, telephone and fax number of expert witness)",
       "warning_en": "I, (name), having been named as an expert witness by the (party), certify that I have read the Code of Conduct for Expert Witnesses set out in the schedule to the Federal Courts Rules and agree to be bound by it. (Date) (Signature of expert witness) (Name, address, telephone and fax number of expert witness)",
       "wording": "official",
-      "source": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-98-106/FullText.html"
+      "source": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-98-106/FullText.html",
+      "procedure_ids": [
+        "civil-federal"
+      ]
     },
     {
       "route": "civil",
@@ -187,7 +198,10 @@
       "warning_local": null,
       "warning_en": null,
       "wording": "official",
-      "source": "https://www.ontario.ca/laws/regulation/900194"
+      "source": "https://www.ontario.ca/laws/regulation/900194",
+      "procedure_ids": [
+        "civil-ontario"
+      ]
     }
   ],
   "declaration": {
@@ -196,7 +210,10 @@
     "text_local": "ACKNOWLEDGMENT OF EXPERT'S DUTY\n1. My name is (name). I live at (city), in the (province/state) of (name of province/state).\n2. I have been engaged by or on behalf of (name of party/parties) to provide evidence in relation to the above-noted court proceeding.\n3. I acknowledge that it is my duty to provide evidence in relation to this proceeding as follows:\n(a) to provide opinion evidence that is fair, objective and non-partisan;\n(b) to provide opinion evidence that is related only to matters that are within my area of expertise; and\n(c) to provide such additional assistance as the court may reasonably require, to determine a matter in issue.\n4. I acknowledge that the duty referred to above prevails over any obligation which I may owe to any party by whom or on whose behalf I am engaged.\n5. I certify that I am satisfied as to the authenticity of every authority or other document or record to which I have referred in the expert report accompanying this form, other than:\n(a) documents and records provided to me by or on behalf of the party intending to call me as a witness and consisting of evidence or potential evidence in the court proceeding that I have analysed or interpreted in my report;\n(b) authorities and other documents and records to which I have referred in my report only in order to address how another expert witness in the same court proceeding has used them in their report; and\n(c) the following authorities, documents and records, for which I have doubts as to their authenticity as detailed within my report: [List authorities, documents and records.]\n6. I certify that I am satisfied that every quotation in this report accurately reproduces the text of the authority or other document or record from which the quotation is stated to be drawn.\nDate / Signature",
     "text_en": "Same as text_local (English is a court language). Paragraph lettering (a)-(c) is as rendered from the official Word form; the form's paragraph 5 refers to item '5.c.'",
     "wording": "official",
-    "source": "https://ontariocourtforms.on.ca/en/rules-of-civil-procedure-forms/"
+    "source": "https://ontariocourtforms.on.ca/en/rules-of-civil-procedure-forms/",
+    "procedure_ids": [
+      "civil-ontario"
+    ]
   },
   "standards": [
     {
@@ -229,11 +246,11 @@
   },
   "open_questions": [
     "Civil procedure is provincial; only Ontario (as the requested example) and the Federal Courts Rules were researched. Other provinces (e.g. BC Supreme Court Civil Rules Part 11, Quebec Code of Civil Procedure arts. 231-241) differ and are not covered.",
-    "Ontario e-Laws HTML could not be fetched directly; the Ontario rule texts were taken from the official e-Laws Word consolidation (www.ontario.ca/laws/docs/900194_e.doc, consolidation period from 1 September 2026, last amendment O. Reg. 275/26). Form 53 text was taken from the official Word form RCP-E 53 (June 1, 2026).",
+    "The Ontario Form 53 requirements are specific to Ontario; applicable provincial forms outside Ontario remain unverified.",
     "Ontario Civil Rules Review (proposed replacement of the Rules, including a sworn expert attestation replacing Form 53) had no confirmed commencement date as of 2026-11-11; recheck before use.",
-    "The CSA Group and Standards Council of Canada pages for CAN/CSA-ISO/IEC 27037:18 (R2023) returned HTTP 403; the adoption is confirmed only by search results and reseller listings.",
+    "The current national adoption and edition of CAN/CSA-ISO/IEC 27037 require confirmation against the Standards Council of Canada or CSA catalogue.",
     "Whether a newer edition of CAN/CGSB-72.34 (a 2024 edition was mentioned in a secondary source) supersedes the 2017 (R2022) edition was not verified.",
-    "French-language versions of the federal provisions were not retrieved; items_local are given in English, which is an official court language.",
+    "French-language procedural wording remains unverified; the supplied local text is English.",
     "No federal statute on electronic timestamps was found; confirm none exists (provincial electronic commerce acts were not researched).",
     "Judicial limits on criminal expert evidence (R. v. Mohan; White Burgess Langille Inman v. Abbott and Haliburton, 2015 SCC 23) are case law and were not verified on an official portal."
   ]

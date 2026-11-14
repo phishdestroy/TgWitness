@@ -1,11 +1,12 @@
 {
   "code": "IE",
-  "scope": "Ireland · Superior Courts",
+  "scope": "Ireland · Superior Courts civil proceedings",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "expert witness",
     "basis": "Rules of the Superior Courts, Order 39",
-    "source": "https://www.courts.ie/court-rules/full-court-rule?url=Order-39-Superior-Evidence"
+    "source": "https://www.courts.ie/court-rules/full-court-rule?url=Order-39-Superior-Evidence",
+    "route": "civil"
   },
   "esig_regulation": {
     "term": "eIDAS",
@@ -18,9 +19,9 @@
     "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
   },
   "timestamp_recognition": {
-    "term": "eIDAS Art. 41",
+    "term": "eIDAS Articles 41 and 24a(6)",
     "automatic_ots_qualification": false,
-    "source": "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/880312429/eSignature+FAQ"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "evidence_rules": [],
   "dpa": null,
@@ -38,8 +39,8 @@
       "url": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
     },
     {
-      "term": "eIDAS Art. 41",
-      "url": "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/880312429/eSignature+FAQ"
+      "term": "eIDAS Articles 41 and 24a(6)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
     }
   ]
 }

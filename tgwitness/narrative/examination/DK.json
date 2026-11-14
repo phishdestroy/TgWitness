@@ -118,7 +118,8 @@
     "text_local": null,
     "text_en": null,
     "wording": null,
-    "source": "https://www.retsinformation.dk/eli/lta/2025/1298"
+    "source": "https://www.retsinformation.dk/eli/lta/2025/1298",
+    "route": "all"
   },
   "standards": [],
   "esignature": {
@@ -135,8 +136,8 @@
   "open_questions": [
     "Expert statements obtained by the police or prosecution during a criminal investigation (outside court-ordered syn og skøn under § 210) are not governed by kapitel 19; the provisions governing them were not researched.",
     "Whether straffeloven § 163 (or § 161) applies to a knowingly false written skønserklæring was not verified in case law or official commentary.",
-    "The current Domstolsstyrelsen syn og skøn form and guidance on domstol.dk could not be fetched (bot challenge); whether the form contains an independence or truth declaration for the expert is unknown.",
-    "National adoption numbers for ISO/IEC 27037, 27041, 27042 and 27043 (expected DS/EN ISO/IEC ...:2016) could not be verified on Dansk Standard's webshop (JavaScript-only); standards list left empty.",
+    "The current Domstolsstyrelsen syn og skøn form requires review for any independence or truth declaration.",
+    "Danish adoption numbers and current status of ISO/IEC 27037, 27041, 27042 and 27043 remain unverified; the standards list is empty.",
     "No Danish statute on forensic expert activity was identified (Retslægerådet and police forensic units not researched); statute fields left null.",
     "Amending acts after LBK nr. 1298/2025 (lov nr. 1765 af 29/12/2025, nr. 263 af 11/02/2026, nr. 764 af 08/09/2026) were screened only for references to §§ 196-210 and straffeloven §§ 158-163; none were found, but a full consolidation check was not performed.",
     "Civil or disciplinary liability of skønsmænd is not codified in kapitel 19 beyond fee consequences (§ 208(2)) and revocation (§ 202(2)); tort liability was not researched."

@@ -1,21 +1,74 @@
 {
   "code": "UA",
-  "scope": "Україна · цивільне судочинство",
+  "scope": "Ukraine · civil and criminal procedure (separately scoped references)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "експерт",
-    "basis": "ЦПК України, ст. 72",
-    "source": "https://zl.ck.court.gov.ua/sud2306/pres-centr/prava/cpk"
+    "basis": "Criminal: КПК ст. 69, 101–102, 242–244; civil: ЦПК ст. 72, 102–106. Appointment requirements depend on the proceeding.",
+    "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
   },
-  "esig_regulation": null,
+  "esig_regulation": {
+    "term": "КЕП · qualified electronic signature",
+    "basis": "Law 2155-VIII, Article 18(5)-(7); qualified status requires the applicable certificate, service and signature-validation conditions.",
+    "source": "https://zakon.rada.gov.ua/laws/show/2155-19"
+  },
   "data_access_basis": null,
-  "timestamp_recognition": null,
-  "evidence_rules": [],
+  "timestamp_recognition": {
+    "term": "кваліфікована електронна позначка часу",
+    "basis": "Law 2155-VIII, Article 26: qualified time/date and integrity presumptions.",
+    "automatic_ots_qualification": false,
+    "source": "https://zakon.rada.gov.ua/laws/show/2155-19"
+  },
+  "evidence_rules": [
+    {
+      "route": "criminal",
+      "term": "КПК ст. 84–99",
+      "basis": "Sources, relevance, admissibility and assessment of evidence; Articles 86–87 address lawful collection and serious rights violations.",
+      "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
+    },
+    {
+      "route": "criminal",
+      "term": "КПК ст. 99 · документи",
+      "basis": "Documents can include computer data and recorded sound or images. Original/copy requirements and the conditions in Article 99 still apply.",
+      "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
+    },
+    {
+      "route": "criminal",
+      "term": "КПК глава 21, ст. 246–275",
+      "basis": "Covert investigative actions have separate authorisation and procedural requirements; Article 252 addresses recording results and Article 256 their evidential use. A software archive does not supply those authorisations.",
+      "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
+    },
+    {
+      "route": "civil",
+      "term": "ЦПК ст. 102; ст. 106 ч. 5",
+      "basis": "Distinguish a court-appointed expert from a party-commissioned opinion; the latter states its court-submission purpose and the expert's awareness of false-opinion liability.",
+      "source": "https://zakon.rada.gov.ua/laws/show/1618-15"
+    }
+  ],
   "dpa": null,
   "sources": [
     {
-      "term": "ЦПК України, ст. 72",
-      "url": "https://zl.ck.court.gov.ua/sud2306/pres-centr/prava/cpk"
+      "term": "Criminal Procedure Code of Ukraine",
+      "url": "https://zakon.rada.gov.ua/laws/show/4651-17"
+    },
+    {
+      "term": "Civil Procedure Code of Ukraine",
+      "url": "https://zakon.rada.gov.ua/laws/show/1618-15"
+    },
+    {
+      "term": "Electronic Identification and Electronic Trust Services, Law 2155-VIII",
+      "url": "https://zakon.rada.gov.ua/laws/show/2155-19"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added criminal evidence references and trust-service provisions from official indexed Rada texts. This is a reference subset, not a complete review of authorisation, admissibility, wartime exceptions or local court practice.",
+      "sources": [
+        "https://zakon.rada.gov.ua/laws/show/4651-17",
+        "https://zakon.rada.gov.ua/laws/show/1618-15",
+        "https://zakon.rada.gov.ua/laws/show/2155-19"
+      ]
     }
   ]
 }

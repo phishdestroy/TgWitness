@@ -123,11 +123,12 @@
     }
   ],
   "declaration": {
-    "basis": "LEC art. 335.2 (civil, mandatory in every expert opinion; art. 342.1 for court experts). Criminal route: oath before the expert act under LECrim art. 474. The first-person text below transposes art. 335.2 without changing its content.",
+    "basis": "Civil route only: LEC article 335(2), with article 342(1) for court-appointed experts. The first-person text transposes article 335(2). Criminal expert oaths are governed separately by LECrim article 474; this civil formula is not prescribed for criminal reports.",
     "text_local": "Juro (o prometo) decir verdad, que he actuado y, en su caso, actuaré con la mayor objetividad posible, tomando en consideración tanto lo que pueda favorecer como lo que sea susceptible de causar perjuicio a cualquiera de las partes, y que conozco las sanciones penales en las que podría incurrir si incumpliere mi deber como perito.",
     "text_en": "I swear (or promise) to tell the truth, that I have acted and, where applicable, will act with the greatest possible objectivity, taking into account both what may favour and what may harm any of the parties, and that I know the criminal penalties I may incur if I fail in my duty as an expert.",
     "wording": "composed",
-    "source": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-323"
+    "source": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-323",
+    "route": "civil"
   },
   "standards": [
     {

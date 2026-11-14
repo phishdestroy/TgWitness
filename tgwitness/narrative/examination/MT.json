@@ -1,0 +1,95 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "MT",
+  "name_en": "Malta",
+  "name_local": "Malta",
+  "court_languages": [
+    "mt",
+    "en"
+  ],
+  "local_language": "mt",
+  "legal_family": "mixed",
+  "checked_at": "2026-11-14",
+  "review_scope": "Civil: selected Cap. 12 provisions in the official consolidation through 2023. Criminal: Cap. 9 Articles 650–656 in the statutory text hosted by UNODC through 2019, with report practice corroborated by the e-Justice factsheet updated 22 June 2026. This is not a complete current-code audit.",
+  "expert_term": {
+    "local": "espert tal-qorti",
+    "en": "court expert; referee in civil procedure"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Code of Organization and Civil Procedure (Cap. 12), arts. 644–646",
+        "summary_en": "The court orders a reference on a party's request or its own initiative and defines its object and directions.",
+        "source": "https://legislation.mt/getpdf/65a4f2bd8a3ed5149079b3bc"
+      },
+      "questions": {
+        "basis": "Cap. 12, art. 645",
+        "summary_en": "Follow the object and directions set in the court's appointment decree.",
+        "source": "https://legislation.mt/getpdf/65a4f2bd8a3ed5149079b3bc"
+      },
+      "report_contents": {
+        "basis": "Cap. 12, art. 665",
+        "items_en": [
+          "Inquiries undertaken, findings and reasons.",
+          "Annex the parties' documents and witness depositions.",
+          "Plans or models require the court's direction or the parties' consent."
+        ],
+        "items_local": [],
+        "source": "https://legislation.mt/getpdf/65a4f2bd8a3ed5149079b3bc"
+      },
+      "rights_duties": null
+    },
+    {
+      "route": "criminal",
+      "appointment": {
+        "basis": "Criminal Code (Cap. 9), art. 650",
+        "summary_en": "The court appoints experts and records and serves its appointment decision.",
+        "source": "https://www.unodc.org/cld/uploads/res/maltese-criminal-code-eng_html/Maltese_Criminal_Code_Eng.pdf"
+      },
+      "questions": {
+        "basis": "Cap. 9, art. 655",
+        "summary_en": "The parties and court, and jurors where applicable, may seek clarification.",
+        "source": "https://www.unodc.org/cld/uploads/res/maltese-criminal-code-eng_html/Maltese_Criminal_Code_Eng.pdf"
+      },
+      "report_contents": {
+        "basis": "Cap. 9, art. 653",
+        "items_en": [
+          "Facts and circumstances supporting the conclusions.",
+          "Oral or written report as directed; an oral report is reduced to writing.",
+          "Identify persons supplying factual information during the examination."
+        ],
+        "items_local": [],
+        "source": "https://www.unodc.org/cld/uploads/res/maltese-criminal-code-eng_html/Maltese_Criminal_Code_Eng.pdf"
+      },
+      "rights_duties": {
+        "basis": "Cap. 9, arts. 651–652",
+        "summary_en": "Expert challenges and the oath are procedural steps; a generated archive does not perform them.",
+        "source": "https://www.unodc.org/cld/uploads/res/maltese-criminal-code-eng_html/Maltese_Criminal_Code_Eng.pdf"
+      }
+    }
+  ],
+  "statute": null,
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Regulation (EU) No 910/2014 (eIDAS), as amended",
+    "law_en": "eIDAS, Article 25",
+    "qualified_term_local": "firma elettronika kwalifikata",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "timestamp": {
+    "basis": "eIDAS Articles 41–42",
+    "qualified_recognition": "Qualified timestamps carry date/time accuracy and data-integrity presumptions; qualification requires the statutory conditions.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "open_questions": [
+    "Trace amendments after the cited statutory editions before case-specific use. The current Criminal Code landing page lists a 31 July 2026 publication, but that full edition was not retrieved.",
+    "The e-Justice factsheet is official-hosted EEEI guidance, not the statute: https://e-justice.europa.eu/topics/find-legal-professional/find-expert/mt_en. The direct statutory texts are cited for the report fields.",
+    "The exact oath or declaration text, court-specific filing format and signer qualification require separate verification; none is invented here.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Maltese is the default court language. English use depends on the Judicial Proceedings (Use of English Language) Act and the court's directions; an English filing is not automatically accepted.",
+  "court_language_source": "https://ecourts.gov.mt/onlineservices/Judgements/PrintPdf?CaseJudgementId=145923&JudgementId=0"
+}

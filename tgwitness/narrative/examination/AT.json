@@ -116,11 +116,12 @@
     }
   ],
   "declaration": {
-    "basis": "ZPO § 358(2): a generally sworn expert relies on the oath already taken; StGB § 288(2) treats such reliance as an oath; SDG § 5(2): a listed expert need not be sworn again before the courts. No statute prescribes wording for a declaration in the report.",
+    "basis": "Civil route: ZPO section 358(2) permits reliance on a previously administered general expert oath; SDG section 5(2) addresses listed experts. The report declaration is composed, not a prescribed form. Administration of any criminal-procedure oath requires its own recorded basis.",
     "text_local": "Ich erstatte Befund und Gutachten unter Berufung auf den von mir als allgemein beeideter und gerichtlich zertifizierter Sachverständiger geleisteten Eid.",
     "text_en": "I give these findings and this opinion relying on the oath I took as a generally sworn and court-certified expert.",
     "wording": "composed",
-    "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=358"
+    "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=358",
+    "route": "civil"
   },
   "standards": [
     {
@@ -147,12 +148,11 @@
     "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20009585&Paragraf=4"
   },
   "timestamp": {
-    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a)",
-    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified (Art. 41(1)). Qualified time stamps from other Member States are recognised (Art. 24a). No separate Austrian statutory presumption for time stamps was identified.",
+    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a(6))",
+    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified (Art. 41(1)). Qualified time stamps from other Member States are recognised (Art. 24a(6)). No separate Austrian statutory presumption for time stamps was identified.",
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "EUR-Lex could not be loaded directly by the research tool; eIDAS Art. 25, 41 and 24a wording after Regulation (EU) 2024/1183 was checked only through search-index excerpts. The paragraph of Art. 24a covering time stamps was not confirmed.",
     "StPO texts reviewed (§§ 126, 127) do not state who formulates the expert's questions or whether parties may propose questions; other StPO provisions were not checked.",
     "Whether an expert may decline questions outside the expertise or report facts not asked about is not expressly regulated in the provisions reviewed; case law was not verified.",
     "The exact basis and scope of a court expert's civil liability towards the parties (direct liability under ABGB § 1299 versus state liability) is settled by case law that was not verified.",

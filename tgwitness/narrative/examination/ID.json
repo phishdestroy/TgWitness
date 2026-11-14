@@ -48,7 +48,11 @@
         "basis": "UU 20/2025 Pasal 38(2), Pasal 210(12), Pasal 211, Pasal 229, Pasal 238(2)-(3)",
         "summary_en": "Every person asked for an opinion as a forensic medicine expert, doctor or other expert must give expert testimony for the sake of justice; all provisions on witnesses apply to experts, the expert swearing or promising to give testimony truthfully and honestly according to knowledge in his field (Pasal 229). Before testifying during investigation the expert takes an oath or promise before the investigator (Pasal 38(2)); at trial the judge administers the oath or promise according to religion or belief (Pasal 210(12)). Testimony of an expert who without valid reason refuses the oath is not evidence but may strengthen the judge's conviction (Pasal 211). In court the expert need not present a letter of assignment or permission from his institution, except where he must first carry out an examination, research or observation for the case (Pasal 238(2)-(3)).",
         "source": "https://jdih.bp2mi.go.id/uploads//20260310//20260310124213_889000745_uu-nomor-20-tahun-2025_compressed.pdf"
-      }
+      },
+      "id": "criminal-kuhap-2025",
+      "scope": "UU 20/2025 applies from 2 January 2026, subject to article 361. Includes investigations/prosecutions not begun at that date and cases transferred to court where examination of the accused had not begun.",
+      "scope_source": "https://jdih.bpkp.go.id/dokumen/data_dokumen/Salinan%20UU%20Nomor%2020%20Tahun%202025_compressed%20%281%29.pdf",
+      "scope_checked_at": "2026-11-14"
     },
     {
       "route": "criminal",
@@ -80,7 +84,11 @@
         "basis": "UU 8/1981 Pasal 120(2), Pasal 179",
         "summary_en": "The expert swears or promises before the investigator to give testimony according to his knowledge as best he can (Pasal 120(2)); every person asked for an opinion as forensic medicine expert, doctor or other expert must give expert testimony for justice, and provisions for witnesses apply, with an oath to give the best and true testimony according to knowledge in his field (Pasal 179).",
         "source": "https://jdih.mahkamahagung.go.id/storage/uploads/produk_hukum/file/KUHAP.pdf"
-      }
+      },
+      "id": "criminal-kuhap-1981-transitional",
+      "scope": "UU 20/2025 article 361(a), (c): investigation/prosecution already pending on 2 January 2026 is completed under UU 8/1981; trials already begun continue under it, except judicial review. This is a transitional regime, not an alternative chosen freely.",
+      "scope_source": "https://jdih.bpkp.go.id/dokumen/data_dokumen/Salinan%20UU%20Nomor%2020%20Tahun%202025_compressed%20%281%29.pdf",
+      "scope_checked_at": "2026-11-14"
     },
     {
       "route": "civil",
@@ -123,9 +131,9 @@
       "route": "all",
       "norm": "UU 1/2023 tentang Kitab Undang-Undang Hukum Pidana (KUHP, in force 2 January 2026) Pasal 291 (false sworn statement in judicial proceedings) and Pasal 373 (false sworn statement generally)",
       "summary_en": "Any person required by law to give a statement under oath, or whose statement has legal consequences, who gives a false sworn statement, orally or in writing, personally or through a specially appointed representative, in the examination of a case in judicial proceedings: imprisonment up to 7 years, increased by one third if it harms the suspect, defendant or opposing party (Pasal 291). Outside judicial proceedings the same conduct is punishable by up to 7 years (Pasal 373(1)); a required promise or affirmation is equated with an oath (Pasal 373(2)); additional penalty of deprivation of rights (Pasal 373(3)); the falsity must be known to the maker (Penjelasan Pasal 373(1)).",
-      "warning_local": "Saya bersumpah/berjanji bahwa saya akan memberikan keterangan yang sebenar-benarnya dan sejujur-jujurnya menurut pengetahuan dalam bidang keahlian saya.",
-      "warning_en": "I swear/promise that I will give testimony truthfully and honestly according to my knowledge in my field of expertise.",
-      "wording": "composed",
+      "warning_local": null,
+      "warning_en": null,
+      "wording": null,
       "source": "https://jdih.bpip.go.id/common/dokumen/uu1-2023.pdf"
     },
     {
@@ -136,6 +144,18 @@
       "warning_en": null,
       "wording": null,
       "source": "https://jdih.bpip.go.id/common/dokumen/uu1-2023.pdf"
+    },
+    {
+      "route": "criminal",
+      "procedure_ids": [
+        "criminal-kuhap-2025"
+      ],
+      "norm": "UU 20/2025 Pasal 229(2): expert oath or promise (procedural duty, not a separate penalty)",
+      "summary_en": "The new KUHAP requires the expert to swear or promise to testify truthfully and honestly according to knowledge within the field of expertise.",
+      "warning_local": "Saya bersumpah/berjanji bahwa saya akan memberikan keterangan yang sebenar-benarnya dan sejujur-jujurnya menurut pengetahuan dalam bidang keahlian saya.",
+      "warning_en": "I swear/promise that I will give testimony truthfully and honestly according to my knowledge in my field of expertise.",
+      "wording": "composed",
+      "source": "https://jdih.bp2mi.go.id/uploads//20260310//20260310124213_889000745_uu-nomor-20-tahun-2025_compressed.pdf"
     }
   ],
   "declaration": {
@@ -143,7 +163,13 @@
     "text_local": "Keterangan Ahli ini saya berikan di bawah sumpah/janji bahwa saya memberikan keterangan yang sebenar-benarnya dan sejujur-jujurnya menurut pengetahuan dalam bidang keahlian saya.",
     "text_en": "I give this expert statement under oath/promise that I give testimony truthfully and honestly according to my knowledge in my field of expertise.",
     "wording": "composed",
-    "source": "https://jdih.bp2mi.go.id/uploads//20260310//20260310124213_889000745_uu-nomor-20-tahun-2025_compressed.pdf"
+    "source": "https://jdih.bp2mi.go.id/uploads//20260310//20260310124213_889000745_uu-nomor-20-tahun-2025_compressed.pdf",
+    "route": "criminal",
+    "procedure_ids": [
+      "criminal-kuhap-2025"
+    ],
+    "scope": "New KUHAP oath or confirmation under UU 20/2025, administered through the prescribed procedure; signing an export alone does not administer an oath.",
+    "context": "authority_undertaking"
   },
   "standards": [],
   "esignature": {
@@ -158,15 +184,16 @@
     "source": "https://jdih.komdigi.go.id/produk_hukum/view/id/884/t/undangundang+nomor+1+tahun+2024"
   },
   "open_questions": [
-    "UU 20/2025 (new KUHAP) text was read from an OCR text layer of the official salinan hosted by JDIH BP2MI; the word after 'menurut' in Pasal 38(2) was lost in OCR, so the exact oath wording before the investigator is not quoted. JDIH BPK and peraturan.go.id were not reachable (HTTP 403 / connection refused).",
+    "The precise investigator-administered oath wording under UU 20/2025 Pasal 38(2) remains unverified; the profile uses a composed declaration.",
     "Old KUHAP (UU 8/1981) was read from a compiled text on JDIH Mahkamah Agung that omits the official Penjelasan; the Penjelasan of old Pasal 186 (expert report made during investigation) was not verified.",
     "HIR Pasal 154 was read from an Indonesian translation with commentary hosted on JDIH PN Bengkalis; there is no official Indonesian text of HIR. RBg Pasal 181 was not verified on an official source.",
-    "Whether UU 1/2026 tentang Penyesuaian Pidana amended KUHP Pasal 285, 291 or 373 was checked only against a secondary source (pasal.id), which lists no such amendment; the official UU 1/2026 text was not reachable.",
+    "Whether UU 1/2026 amended KUHP Pasal 285, 291 or 373 remains unverified against the official text.",
     "Old KUHP (Wetboek van Strafrecht) Pasal 242 (sumpah palsu), relevant to conduct before 2 January 2026, was not verified on an official source.",
     "No prescribed oath formula for experts (including religious formulas) or written declaration wording was found in an official or court-issued document; the warning and declaration texts are composed from UU 20/2025 Pasal 229(2).",
     "No statute on forensic expert activity and no national adoption of ISO/IEC 27037/27041/27042/27043 (e.g., as SNI ISO/IEC 27037) could be verified; BSN catalogue and Polri/BSSN digital forensic regulations were not checked.",
     "The Peraturan Menteri implementing PP 71/2019 Pasal 67(4) on certified electronic time stamps was not identified.",
     "Evidentiary weight differences between certified and uncertified electronic signatures were not verified in the PP 71/2019 text.",
-    "Civil procedure reform (any new Hukum Acara Perdata law replacing HIR/RBg) was not checked."
+    "Civil procedure reform (any new Hukum Acara Perdata law replacing HIR/RBg) was not checked.",
+    "Applicability of substantive KUHP offences depends on the date of the alleged conduct and transitional criminal-law rules, separately from the KUHAP procedure selected for the case."
   ]
 }

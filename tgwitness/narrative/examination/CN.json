@@ -145,7 +145,9 @@
     "text_local": "本人保证客观、公正、诚实地进行鉴定，保证出庭作证，如作虚假鉴定，愿意承担法律责任。",
     "text_en": "I undertake to conduct the expertise objectively, impartially and honestly and to appear and testify in court; if I give a false expertise I will bear legal liability.",
     "wording": "composed",
-    "source": "https://www.court.gov.cn/fabu/xiangqing/212721.html"
+    "source": "https://www.court.gov.cn/fabu/xiangqing/212721.html",
+    "scope": "Court-required expert commitment under the civil evidence provisions; not a generic criminal expert declaration.",
+    "context": "authority_undertaking"
   },
   "standards": [
     {
@@ -229,8 +231,9 @@
   },
   "timestamp": {
     "basis": "最高人民法院关于互联网法院审理案件若干问题的规定（法释〔2018〕16号）第11条第2款；最高人民法院关于民事诉讼证据的若干规定 第93条、第94条",
-    "qualified_recognition": "No statute regulates qualified timestamps. Under the SPC Internet Courts Provisions art. 11(2), electronic data whose authenticity can be proven by electronic signatures, trusted timestamps, hash verification, blockchain or certification by an electronic evidence platform shall be confirmed by an Internet court; authenticity is still reviewed against the factors in art. 11(1). Evidence Provisions art. 94 lets courts confirm the authenticity of electronic data provided or confirmed by a neutral third-party platform, absent sufficient contrary evidence. Electronic signatures meeting Electronic Signature Law art. 13 have the same effect as handwritten signatures or seals (art. 14).",
-    "source": "https://www.court.gov.cn/fabu/xiangqing/116981.html"
+    "qualified_recognition": "The cited rules concern evidence authentication rather than an EU-style qualified timestamp status. Under the SPC Internet Courts Provisions art. 11(2), electronic data whose authenticity can be proven by electronic signatures, trusted timestamps, hash verification, blockchain or certification by an electronic evidence platform shall be confirmed by an Internet court; authenticity is still reviewed against the factors in art. 11(1). Evidence Provisions art. 94 lets courts confirm the authenticity of electronic data provided or confirmed by a neutral third-party platform, absent sufficient contrary evidence. Electronic signatures meeting Electronic Signature Law art. 13 have the same effect as handwritten signatures or seals (art. 14). The Internet Court provision concerns the civil and administrative jurisdiction specified in these rules; it is not a general criminal-evidence rule.",
+    "source": "https://www.court.gov.cn/fabu/xiangqing/116981.html",
+    "checked_at": "2026-11-14"
   },
   "open_questions": [
     "flk.npc.gov.cn and npc.gov.cn could not be machine-read (JavaScript / TLS failure). Statute texts were verified against government-hosted reprints: SPC Gazette and State Taxation Administration law database (Criminal Procedure Law 2018, Criminal Law), WIPO Lex copy of the 2023 Civil Procedure Law, gov.cn State Council Gazette (MOJ Order 132), court.gov.cn (SPC interpretations). Re-check against flk.npc.gov.cn before publication.",

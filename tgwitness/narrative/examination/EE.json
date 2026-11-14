@@ -138,15 +138,15 @@
     "law_local": "Euroopa Parlamendi ja nõukogu määrus (EL) nr 910/2014 (eIDAS), muudetud määrusega (EL) 2024/1183",
     "law_en": "Regulation (EU) No 910/2014 (eIDAS) as amended by Regulation (EU) 2024/1183; national implementing act not verified",
     "qualified_term_local": "kvalifitseeritud e-allkiri",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (Estonian version: 'kvalifitseeritud e-ajatempel'), as amended by Regulation (EU) 2024/1183",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of accuracy of the date and time it indicates and of the integrity of the data bound to them.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "riigiteataja.ee served a JavaScript challenge to this environment; no Estonian statute was read on the official portal. KrMS content comes from search-engine extracts of Riigi Teataja; TsMS and general content from the European e-Justice Portal (Estonian EJN pages, taking evidence last updated 18/04/2023, predating the 2023 KES reform); KES facts from the EKEI website. All must be verified on Riigi Teataja.",
+    "Current Estonian statutory wording remains unverified. Civil-procedure guidance partly relies on the EJN summary dated 18 April 2023, before the KES reform; KrMS and KES details require confirmation against Riigi Teataja.",
     "KrMS: section on ordering an expert assessment and the content of the order; § 107(1) points 1-8; § 98 rights and duties; any warning given to experts about KarS § 321 - not verified.",
     "TsMS: section numbers for ordering an expert assessment, choice of expert, questions, content of the opinion and duties of the expert - not verified; the e-Justice summary may predate amendments made with the 2023 KES.",
     "KarS § 321: exact title, elements and maximum penalty - not verified.",

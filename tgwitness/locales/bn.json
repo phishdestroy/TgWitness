@@ -9007,5 +9007,7 @@
   "cancelled": "বাতিল",
   "Updates arrived while observation was paused": "পর্যবেক্ষণ বিরতিতে থাকা অবস্থায় আপডেটগুলো এসেছিল",
   "Too many updates arrived during startup": "স্টার্টআপের সময় অনেকগুলো আপডেট এসেছিল",
-  "Telegram could not deliver older updates": "Telegram পুরনো আপডেটগুলো সরবরাহ করতে পারেনি"
+  "Telegram could not deliver older updates": "Telegram পুরনো আপডেটগুলো সরবরাহ করতে পারেনি",
+  "Choose a scope for this procedure.": "এই কার্যধারার পরিসর নির্বাচন করুন।",
+  "This procedure is not covered by the selected profile.": "নির্বাচিত প্রোফাইলে এই কার্যধারা অন্তর্ভুক্ত নেই।"
 }

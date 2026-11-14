@@ -1,0 +1,67 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "LU",
+  "name_en": "Luxembourg",
+  "name_local": "Luxembourg",
+  "court_languages": [
+    "fr",
+    "de",
+    "lb"
+  ],
+  "local_language": "fr",
+  "legal_family": "civil law",
+  "checked_at": "2026-11-14",
+  "review_scope": "Civil subset: NCPC Articles 432, 437 and 472 as reproduced in judiciary publications, with judicial-language legislation. The complete current code and criminal expert rules were not revalidated.",
+  "expert_term": {
+    "local": "expert judiciaire",
+    "en": "judicial expert"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Nouveau Code de procédure civile, art. 432",
+        "summary_en": "A judge may select a technical expert to clarify a factual issue requiring specialist knowledge.",
+        "source": "https://justice.public.lu/content/dam/justice/fr/jurisprudence/cour-cassation/social/2026/01/20260108-cas-2025-00105-08-p.pdf"
+      },
+      "questions": null,
+      "report_contents": {
+        "basis": "NCPC art. 472; judiciary case-law bulletin 2019–2021",
+        "items_en": [
+          "Address the parties' observations and objections within the assigned expert task.",
+          "Attach written observations if the parties request this."
+        ],
+        "items_local": [],
+        "source": "https://justice.public.lu/dam-assets/fr/jurisprudence/resumes-de-jurisprudences/arrets-de-la-chambre-de-l-application-des-peines/Bulletin-de-procedure-civile-et-commerciale-2019-2021-.pdf"
+      },
+      "rights_duties": {
+        "basis": "NCPC art. 437; judiciary case-law bulletin 2019–2021",
+        "summary_en": "Carry out the assignment conscientiously, objectively and impartially.",
+        "source": "https://justice.public.lu/dam-assets/fr/jurisprudence/resumes-de-jurisprudences/arrets-de-la-chambre-de-l-application-des-peines/Bulletin-de-procedure-civile-et-commerciale-2019-2021-.pdf"
+      }
+    }
+  ],
+  "statute": null,
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Regulation (EU) No 910/2014 (eIDAS), as amended",
+    "law_en": "eIDAS, Article 25",
+    "qualified_term_local": "signature électronique qualifiée",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "timestamp": {
+    "basis": "eIDAS Articles 41–42",
+    "qualified_recognition": "Qualified timestamps carry date/time accuracy and data-integrity presumptions; qualification requires the statutory conditions.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+  },
+  "open_questions": [
+    "Provider qualification, certificate status, national filing rules and supported signature formats must be checked separately; this profile does not qualify a TgWitness signature or timestamp.",
+    "This is a selected civil reference set, not an exhaustive statutory report checklist. Check the current NCPC and the appointment order.",
+    "A criminal route, expert oath and signing formula have not been verified; do not reuse this civil subset for criminal proceedings.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "French, German or Luxembourgish may be used in judicial matters under the 1984 language law, subject to special provisions. Confirm the language required for the particular filing.",
+  "court_language_source": "https://legilux.public.lu/eli/etat/leg/loi/1984/02/24/n1/jo/fr"
+}

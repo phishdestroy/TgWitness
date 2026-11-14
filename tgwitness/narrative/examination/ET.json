@@ -97,7 +97,10 @@
     "text_local": null,
     "text_en": null,
     "wording": null,
-    "source": "https://justice.gov.et/wp-content/uploads/2026/10/Criminal-procedure-and-evidence-law-New-published-2019-compressed.pdf"
+    "source": "https://justice.gov.et/wp-content/uploads/2026/10/Criminal-procedure-and-evidence-law-New-published-2019-compressed.pdf",
+    "route": "criminal",
+    "scope": "Oath or affirmation before oral testimony; no verified written formula is supplied.",
+    "context": "oral_hearing"
   },
   "standards": [],
   "esignature": {
@@ -117,7 +120,7 @@
     "Not verified for the 1410 Code: the repeal and transitional provisions, and whether they affect the evidentiary provisions of the Computer Crime Proclamation No. 958/2016 (Arts. 33-35).",
     "Not verified for the 1410 Code: the article numbers of the investigation provisions that let the investigator receive a special expert's opinion and summon a person able to give professional analysis (around Arts. 64-66).",
     "Who formulates the questions to the expert, whether the expert may decline questions or report facts not asked about: not found in the parts of Proclamation 1410 reviewed.",
-    "Civil route not verified: the Civil Procedure Code 1965 (Decree No. 52/1965) articles on experts and commissions were not found on an official portal (Ministry of Justice site search returned no Civil Procedure Code; fsc.gov.et returned HTTP 503).",
+    "Civil Procedure Code 1965 provisions governing experts and commissions remain unverified.",
     "Criminal liability not verified: the Criminal Code (Proclamation No. 414/2004) article(s) on false testimony and false expert reports, and their penalties. The only Criminal Code file on justice.gov.et is an Amharic PDF in a legacy non-Unicode font, which could not be read reliably.",
     "Not found: any oath or affirmation formula for experts. Art. 254 leaves the form to religion, belief or custom. The warning text in 'liability' is composed, not official.",
     "Not found: any Ethiopian Standards Agency adoption of ISO/IEC 27037/27041/27042/27043, or an official digital forensic standard or ISO/IEC 17025 requirement. Check INSA and Federal Police forensic directives.",

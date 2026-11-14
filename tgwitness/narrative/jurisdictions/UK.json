@@ -5,7 +5,8 @@
   "expert_role": {
     "term": "expert",
     "basis": "Civil Procedure Rules, Part 35",
-    "source": "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part35"
+    "source": "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part35",
+    "route": "civil"
   },
   "esig_regulation": null,
   "data_access_basis": null,

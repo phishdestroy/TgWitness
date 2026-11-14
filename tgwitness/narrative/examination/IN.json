@@ -120,7 +120,10 @@
     "text_local": "I, (Name), Son/daughter/spouse of ____ residing/employed at ____ do hereby solemnly affirm and sincerely state and submit as follows:—",
     "text_en": "Opening affirmation of the electronic-record certificate signed by the expert",
     "wording": "official",
-    "source": "https://egazette.gov.in/WriteReadData/2023/250882.pdf"
+    "source": "https://egazette.gov.in/WriteReadData/2023/250882.pdf",
+    "route": "all",
+    "scope": "Opening affirmation only of the expert's Part B certificate under BSA section 63 and its Schedule; it does not constitute the complete certificate or a general expert-report declaration.",
+    "context": "electronic_record_certificate"
   },
   "standards": [
     {
@@ -152,11 +155,11 @@
     "source": "https://cca.gov.in/sites/files/pdf/services/TIMESTAMPINGGUIDELINES.pdf"
   },
   "open_questions": [
-    "indiacode.nic.in returned HTTP 403 and egazette.gov.in failed TLS verification. BSA, BNSS and BNS texts were verified on the Internet Archive copies of the Gazette of India Extraordinary (items in.gazette.central.e.2023-12-25.250882, .250884, .250883: OCR text of the official Gazette). Recheck wording against the official PDF, especially OCR-affected tokens such as 'SHA1' and 'MD5' in the Schedule.",
+    "BSA, BNSS and BNS provisions require comparison with current consolidated official texts, including the BSA Schedule certificate and permitted hash identifiers.",
     "The BNS source URL points to the Internet Archive mirror of Gazette CG-DL-E-25122023-250883 because no egazette.gov.in URL for that Gazette was confirmed.",
     "The IT Act text was verified on the gac.gov.in (Grievance Appellate Committee, MeitY) copy because India Code returned 403. Recheck s. 79A, s. 3A and s. 15 against India Code.",
-    "Oaths Act 1969 Schedule Form No. 1 wording is taken from a search-engine extract of the India Code PDF and matching secondary copies; the India Code PDF itself could not be fetched (403).",
-    "MeitY 'Scheme for Notifying Examiner of Electronic Evidence' could not be fetched (403). The ISO/IEC 17025 compliance requirement and the ISO/IEC 27037/27041 references rest on search extracts of that PDF. Not confirmed: whether prior NABL accreditation is a precondition.",
+    "The exact prescribed oath wording under the Oaths Act 1969 Schedule, Form 1 remains unverified against the official text.",
+    "The current MeitY electronic-evidence examiner scheme and whether prior NABL accreditation is mandatory remain unverified.",
     "Not verified on an official source: whether an Examiner of Electronic Evidence under IT Act s. 79A must sign Part B of the BSA s. 63 certificate, or whether any other expert may sign it. Secondary sources report conflicting High Court and Supreme Court positions.",
     "No official text found prescribing the contents of a forensic laboratory report in criminal cases beyond BNSS s. 329 ('under the hand of'). No rule found on who formulates the questions to a forensic laboratory, or on declining or adding questions; check State FSL manuals and Directorate of Forensic Science Services (DFSS) guidance.",
     "The dates from which States notified the BNSS s. 176(3) forensic crime-scene visit requirement were not checked.",

@@ -5,7 +5,7 @@ from pathlib import Path
 from ..pdf_report import MUTED
 from .diagrams import diagrams, svg
 from .config import DIAGRAMS, OUTPUTS
-from .expert import load as examination, route
+from .catalog import load as examination, route
 from .sheet import Sheet
 from .style import display_time, heading, hero, language_name, marked, page, pill, ref_label, ref_runs, time_span
 from .text import Texts
@@ -25,7 +25,7 @@ def legacy(code):
     return json.loads(path.read_text(encoding='utf-8')) if code and path.is_file() else None
 
 
-def jurisdiction(code, procedure='criminal'):
+def jurisdiction(code, procedure='criminal', procedure_scope=None):
     if code is None:
         return None
     record, old = examination(code), legacy(code)
@@ -38,7 +38,9 @@ def jurisdiction(code, procedure='criminal'):
             if value:
                 rows.append((value['term'], value.get('basis', value.get('qes_name', '')), value['source']))
         return {'name': old['scope'], 'procedure': None, 'checked': old['checked_at'], 'rows': rows}
-    part = route(record, procedure)
+    part = route(record, procedure, procedure_scope)
+    if not part:
+        raise ValueError('No ' + procedure + ' examination route is available for ' + record['code'])
     appointed = next((part[key] for key in ('appointment',) if part.get(key)), {})
     esignature, timestamp = record.get('esignature') or {}, record.get('timestamp') or {}
     rows = []
@@ -50,7 +52,7 @@ def jurisdiction(code, procedure='criminal'):
                      esignature.get('source')))
     if timestamp.get('basis'):
         rows.append((timestamp['basis'], timestamp.get('qualified_recognition') or '', timestamp.get('source')))
-    if old and old.get('data_access_basis'):
+    if old and old.get('data_access_basis') and old['data_access_basis'].get('route') in (procedure, 'all'):
         rows.append((old['data_access_basis']['term'], '', old['data_access_basis']['source']))
     return {'name': record['name_local'] + ' · ' + record['name_en'] + ' (' + record['code'] + ')', 'procedure': procedure,
             'checked': record['checked_at'], 'rows': rows}
@@ -252,9 +254,10 @@ def pdf_report_bytes(model, text, pictures, local):
     return sheet.output()
 
 
-def write(model, out, lang='en', jurisdiction_code=None, outputs=OUTPUTS, diagram_names=DIAGRAMS, procedure='criminal'):
+def write(model, out, lang='en', jurisdiction_code=None, outputs=OUTPUTS, diagram_names=DIAGRAMS, procedure='criminal',
+          procedure_scope=None):
     text = Texts(lang)
-    local = jurisdiction(jurisdiction_code, procedure)
+    local = jurisdiction(jurisdiction_code, procedure, procedure_scope)
     pictures = {k: v for k, v in diagrams(model, text).items() if k in diagram_names} if (
         diagram_names and set(outputs) & {'pdf', 'html', 'svg'}) else {}
     out = Path(out)

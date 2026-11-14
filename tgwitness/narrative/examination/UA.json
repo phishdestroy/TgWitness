@@ -142,42 +142,73 @@
   },
   "liability": [
     {
-      "route": "all",
-      "norm": "Кримінальний кодекс України ст. 384 «Введення в оману суду або іншого уповноваженого органу»; КПК ст. 70",
-      "summary_en": "Knowingly false expert opinion prepared for or submitted to a pre-trial investigation body, enforcement body, court, High Council of Justice or a parliamentary inquiry commission: correctional labour up to 2 years, probation supervision up to 2 years or restriction of liberty up to 2 years (part 1); combined with accusation of a grave or especially grave crime, artificial creation of evidence, or committed for gain: up to 2 years correctional labour, restriction of liberty up to 5 years, or imprisonment of 2 to 5 years (part 2). Refusal to perform duties is referred to art. 385 in Instruction 53/5.",
-      "warning_local": "Про кримінальну відповідальність за надання завідомо неправдивого висновку за статтею 384 Кримінального кодексу України та за відмову без поважних причин від виконання покладених на мене обов'язків за статтею 385 Кримінального кодексу України попереджений (обізнаний).",
-      "warning_en": "I have been warned of (am aware of) criminal liability under Article 384 of the Criminal Code of Ukraine for giving a knowingly false opinion and under Article 385 for refusing without good reason to perform my duties.",
-      "wording": "customary",
-      "source": "https://zakon.rada.gov.ua/laws/show/z0705-98"
+      "route": "civil",
+      "norm": "ЦПК України ст. 102 ч. 7; ст. 106 ч. 5",
+      "summary_en": "A party-commissioned opinion records the expert's awareness of criminal liability for a knowingly false opinion. Article 102(7) additionally requires a refusal-of-duties warning for an examination appointed by the court. Select the wording for the actual appointment; a software export is not itself an expert opinion.",
+      "warning_local": "Обізнаний про кримінальну відповідальність за завідомо неправдивий висновок.",
+      "warning_en": "I am aware of criminal liability for a knowingly false opinion.",
+      "wording": "composed",
+      "source": "https://zakon.rada.gov.ua/laws/show/1618-15"
+    },
+    {
+      "route": "criminal",
+      "norm": "КПК України ст. 70; ст. 102 ч. 2",
+      "summary_en": "The criminal-procedure opinion must record that the expert was warned about liability for a knowingly false opinion and unjustified refusal to perform assigned duties. Complete this statement only after the required warning has actually occurred.",
+      "warning_local": "Попереджений про відповідальність за завідомо неправдивий висновок та відмову без поважних причин від виконання покладених на мене обов’язків.",
+      "warning_en": "I have been warned about liability for a knowingly false opinion and for refusing without good reason to perform my assigned duties.",
+      "wording": "composed",
+      "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
     }
   ],
   "declaration": {
-    "basis": "КПК ст. 102 ч. 2; ЦПК ст. 102 ч. 7 і ст. 106 ч. 5; ГПК ст. 98 і ст. 101; Інструкція № 53/5 п. 4.14 (introduction must state the warning or awareness under arts. 384, 385 КК)",
-    "text_local": "Висновок підготовлено для подання до суду. Про кримінальну відповідальність за надання завідомо неправдивого висновку за статтею 384 Кримінального кодексу України та за відмову без поважних причин від виконання покладених на мене обов'язків за статтею 385 Кримінального кодексу України попереджений (обізнаний).",
-    "text_en": "This opinion was prepared for submission to court. I have been warned of (am aware of) criminal liability under Article 384 of the Criminal Code of Ukraine for giving a knowingly false opinion and under Article 385 for refusing without good reason to perform my duties.",
+    "route": "civil",
+    "scope": "Party-commissioned opinion under Civil Procedure Code Article 106(5); not a substitute for the additional court-appointment warning under Article 102(7).",
+    "basis": "ЦПК України ст. 106 ч. 5",
+    "text_local": "Висновок підготовлено для подання до суду. Я обізнаний про кримінальну відповідальність за завідомо неправдивий висновок.",
+    "text_en": "This opinion was prepared for submission to court. I am aware of criminal liability for a knowingly false opinion.",
     "wording": "composed",
-    "source": "https://zakon.rada.gov.ua/laws/show/z0705-98"
+    "source": "https://zakon.rada.gov.ua/laws/show/1618-15"
   },
   "standards": [],
   "esignature": {
     "law_local": "Закон України «Про електронну ідентифікацію та електронні довірчі послуги» від 05.10.2017 № 2155-VIII",
-    "law_en": "Law of Ukraine on Electronic Identification and Electronic Trust Services No. 2155-VIII",
-    "qualified_term_local": "кваліфікований електронний підпис (удосконалений електронний підпис, що створюється з використанням засобу кваліфікованого електронного підпису і базується на кваліфікованому сертифікаті електронного підпису)",
+    "law_en": "Law of Ukraine on Electronic Identification and Electronic Trust Services No. 2155-VIII, Article 18(5)-(7): electronic form alone does not invalidate a signature; a qualified electronic signature has the legal effect of a handwritten signature.",
+    "qualified_term_local": "кваліфікований електронний підпис (КЕП)",
     "source": "https://zakon.rada.gov.ua/laws/show/2155-19"
   },
   "timestamp": {
-    "basis": "Закон № 2155-VIII ст. 1 (definitions 'електронна позначка часу' and 'кваліфікована електронна позначка часу')",
-    "qualified_recognition": null,
+    "basis": "Закон № 2155-VIII ст. 26",
+    "qualified_recognition": "A qualified electronic time stamp carries presumptions of accurate date/time and integrity of the associated data. Qualification depends on the provider and statutory requirements, not merely the use of RFC 3161.",
     "source": "https://zakon.rada.gov.ua/laws/show/2155-19"
   },
   "open_questions": [
-    "zakon.rada.gov.ua refused connections from the research environment. Texts were checked against consolidated mirrors (pravosvit.com.ua ed. 14.10.2026 for КПК, 05.08.2026 for ЦПК, 28.10.2026 for КК; urst.com.ua; zakon.cc) and zakon.rada.gov.ua search-index excerpts; source URLs point to the official portal but were not opened.",
+    "The original 2026-11-11 review used secondary consolidated mirrors and official search-index excerpts because direct Rada access failed. The 2026-11-14 subset review used official indexed texts and a Supreme Court publication; it does not replace full current-edition verification of all existing provisions.",
     "No DSTU national adoption of ISO/IEC 27037, 27041, 27042 or 27043 could be verified; the national standards catalogue was not reachable or searchable.",
-    "The article of Law 2155-VIII on the legal effect of electronic time stamps (expected presumption of accuracy of date/time and data integrity for a qualified time stamp) and the article on equivalence of a qualified electronic signature to a handwritten signature were not found in the fetched text; qualified_recognition left null.",
-    "The warning text is customary practice drawn from Instruction 53/5 p. 4.14 requirements; the exact sentence used by state forensic institutions (КНДІСЕ, ДНДЕКЦ МВС) was not verified from an official sample.",
-    "ЦПК ст. 106 ч. 5: exact statutory wording ('висновок підготовлено для подання до суду та що експерт обізнаний про кримінальну відповідальність за завідомо неправдивий висновок') is reconstructed from court decisions and commentary; verify against the official text.",
     "КК України ст. 385 (refusal of an expert to perform duties) text and penalties were not verified.",
     "ГПК (commercial) article part numbers for the requirements in arts. 69, 98 and 101 were not verified; ГПК ст. 98 may still use 'прізвище, ім'я, по батькові' where ЦПК/КПК now use 'ім'я'.",
-    "Instruction 53/5 consolidated text on zakon.rada.gov.ua (z0705-98) was not opened; p. 4.14 content is taken from commentary and Supreme Court practice summaries."
-  ]
+    "Instruction 53/5 consolidated text on zakon.rada.gov.ua (z0705-98) was not opened; p. 4.14 content is taken from commentary and Supreme Court practice summaries.",
+    "The civil declaration is composed for a party-commissioned opinion. For a court-appointed civil expert, add the Article 102(7) warning and document the actual appointment and warning. No first-person declaration establishes that those steps happened.",
+    "Qualified-signature and timestamp law is recorded here; DSTU cryptography, provider qualification, cross-border recognition, certificate status and signing or validation support require separate technical and legal checks."
+  ],
+  "review_scope": "The original profile includes criminal, civil and commercial proceedings. The dated updates below identify the fields reviewed subsequently; they do not certify the entire profile.",
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Separated civil party-commissioned and criminal declarations; removed unverified penalty amounts; checked Law 2155-VIII Articles 18(5)-(7) and 26 through official Rada search-index text. Civil Article 106(5) was also corroborated by a published Supreme Court presentation. Other existing procedural summaries and commercial provisions were not revalidated.",
+      "sources": [
+        "https://zakon.rada.gov.ua/laws/show/1618-15",
+        "https://zakon.rada.gov.ua/laws/show/4651-17",
+        "https://zakon.rada.gov.ua/laws/show/2155-19",
+        "https://supreme.court.gov.ua/userfiles/media/new_folder_for_uploads/supreme/2022_prezent/2022_11_18_Sakara_18_11_2022.pdf"
+      ]
+    }
+  ],
+  "declaration_criminal": {
+    "route": "criminal",
+    "basis": "КПК України ст. 102 ч. 2",
+    "text_local": "Мене попереджено про відповідальність за завідомо неправдивий висновок та відмову без поважних причин від виконання покладених на мене обов’язків.",
+    "text_en": "I have been warned about liability for a knowingly false opinion and for refusing without good reason to perform my assigned duties.",
+    "wording": "composed",
+    "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
+  }
 }

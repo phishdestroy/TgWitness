@@ -63,7 +63,7 @@
         "source": "https://www.legislation.gov.au/F2011L01551/latest/text"
       },
       "report_contents": {
-        "basis": "Federal Court Rules 2011 r 23.13(1) (party experts); r 23.02(2) (Court expert); Expert Evidence Practice Note (GPN-EXPT) and Harmonised Expert Witness Code of Conduct (content not verified, see open_questions)",
+        "basis": "Federal Court Rules 2011 r 23.13(1) (party experts), r 23.02(2) (Court expert); GPN-EXPT Annexure A, paragraph 3",
         "items_en": [
           "Signed by the expert who prepared the report",
           "Acknowledgement at the beginning of the report that the expert has read, understood and complied with the Practice Note",
@@ -73,7 +73,14 @@
           "Each opinion, set out separately from the findings or assumptions",
           "Reasons for each opinion",
           "Acknowledgement that the opinions are based wholly or substantially on the specialised knowledge",
-          "Compliance with the Practice Note"
+          "Compliance with the Practice Note",
+          "Expert name and address",
+          "Relied-on literature and materials; matters outside expertise",
+          "Tests and investigations, their authors and qualifications",
+          "Reliance on another person's opinion, identifying that person and opinion",
+          "Declaration that appropriate inquiries were made, with stated exceptions, and relevant significant matters were not knowingly withheld",
+          "Qualifications and limitations, including opinions not concluded because of inadequate data or research",
+          "Opening summary for a long or complex report"
         ],
         "items_local": [
           "(a) be signed by the expert who prepared the report; and",
@@ -84,15 +91,26 @@
           "(f) set out separately from the factual findings or assumptions each of the expert's opinions; and",
           "(g) set out the reasons for each of the expert's opinions; and",
           "(ga) contain an acknowledgement that the expert's opinions are based wholly or substantially on the specialised knowledge mentioned in paragraph (c); and",
-          "(h) comply with the Practice Note."
+          "(h) comply with the Practice Note.",
+          "Expert name and address",
+          "Relied-on literature and materials; matters outside expertise",
+          "Tests and investigations, their authors and qualifications",
+          "Reliance on another person's opinion, identifying that person and opinion",
+          "Declaration that appropriate inquiries were made, with stated exceptions, and relevant significant matters were not knowingly withheld",
+          "Qualifications and limitations, including opinions not concluded because of inadequate data or research",
+          "Opening summary for a long or complex report"
         ],
-        "source": "https://www.legislation.gov.au/F2011L01551/latest/text"
+        "source": "https://www.legislation.gov.au/F2011L01551/latest/text",
+        "additional_source": "https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes/gpn-expt",
+        "checked_at": "2026-11-14"
       },
       "rights_duties": {
-        "basis": "Federal Court Rules 2011 rr 23.03, 23.12, 23.15; Evidence Act 1995 (Cth) s 79; GPN-EXPT (not verified)",
-        "summary_en": "A Court expert's report complying with r 23.02 is admissible at trial and the expert may be cross-examined by order (r 23.03). Party experts must be given the Practice Note before engagement (r 23.12) and may be ordered to confer and identify agreement and disagreement (r 23.15). The expert's overriding duty to assist the Court impartially is set out in the Practice Note and Harmonised Code of Conduct, whose text could not be retrieved from fedcourt.gov.au.",
-        "source": "https://www.legislation.gov.au/F2011L01551/latest/text"
-      }
+        "basis": "Federal Court Rules 2011 rr 23.03, 23.12, 23.15; GPN-EXPT paragraphs 3.3–4.4 and Annexure A paragraph 2",
+        "summary_en": "The expert must assist the Court impartially within their expertise, with that duty prevailing over obligations to the retaining party. The expert is not an advocate and must receive relevant information, including material adverse to the instructing party. Experts must read and agree to the Code. Court-expert reports and cross-examination remain governed by the Rules.",
+        "source": "https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes/gpn-expt",
+        "checked_at": "2026-11-14"
+      },
+      "scope": "Federal Court civil procedure; State and Territory proceedings have their own rules."
     }
   ],
   "statute": {
@@ -122,11 +140,12 @@
   ],
   "declaration": {
     "route": "civil",
-    "basis": "Federal Court Rules 2011 r 23.13(1)(b) and (ga) require two acknowledgements; the exact wording prescribed by GPN-EXPT and the Harmonised Expert Witness Code of Conduct could not be verified, so the text below is composed from the rule.",
-    "text_local": "I acknowledge that I have read, understood and complied with the Expert Evidence Practice Note (GPN-EXPT), including the Harmonised Expert Witness Code of Conduct, and I agree to be bound by it. My opinions in this report are based wholly or substantially on the specialised knowledge arising from my training, study or experience set out in this report.",
-    "text_en": "I acknowledge that I have read, understood and complied with the Expert Evidence Practice Note (GPN-EXPT), including the Harmonised Expert Witness Code of Conduct, and I agree to be bound by it. My opinions in this report are based wholly or substantially on the specialised knowledge arising from my training, study or experience set out in this report.",
+    "basis": "Federal Court Rules 2011 r 23.13(1)(b), (ga); GPN-EXPT Annexure A paragraph 3(b), (i). Composed acknowledgment covering the stated duties, not a verbatim court form.",
+    "text_local": "I acknowledge that I have read, understood and complied with the Expert Evidence Practice Note (GPN-EXPT), including the Harmonised Expert Witness Code of Conduct, and I agree to be bound by it. My opinions in this report are based wholly or substantially on the specialised knowledge arising from my training, study or experience set out in this report. Except for matters expressly identified in this report, I have made the inquiries I consider appropriate and have not knowingly withheld significant relevant matters from the Court.",
+    "text_en": "I acknowledge that I have read, understood and complied with the Expert Evidence Practice Note (GPN-EXPT), including the Harmonised Expert Witness Code of Conduct, and I agree to be bound by it. My opinions in this report are based wholly or substantially on the specialised knowledge arising from my training, study or experience set out in this report. Except for matters expressly identified in this report, I have made the inquiries I consider appropriate and have not knowingly withheld significant relevant matters from the Court.",
     "wording": "composed",
-    "source": "https://www.legislation.gov.au/F2011L01551/latest/text"
+    "source": "https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes/gpn-expt",
+    "checked_at": "2026-11-14"
   },
   "standards": [
     {
@@ -150,11 +169,10 @@
     "source": "https://www.legislation.gov.au/C2004A04858/latest/text"
   },
   "open_questions": [
-    "The Federal Court Expert Evidence Practice Note (GPN-EXPT) and the Harmonised Expert Witness Code of Conduct could not be retrieved: fedcourt.gov.au returned HTTP 403. Their required report contents, the exact acknowledgement and the declaration on inquiries and matters withheld are therefore not quoted; the declaration text is composed from FCR r 23.13.",
     "Federal Court (Criminal Proceedings) Rules 2016 provisions on expert evidence in indictable proceedings in the Federal Court were not researched.",
     "Expert disclosure in Commonwealth prosecutions tried in State and Territory courts follows State or Territory law (Judiciary Act s 68) and was not researched.",
     "No Australian adoption of ISO/IEC 27037 (AS ISO/IEC 27037) could be found on the Standards Australia store; HB 171-2003 is listed as withdrawn and no successor was verified.",
-    "Statutory declaration form wording under the Statutory Declarations Regulations 2023 was not retrieved.",
+    "The current statutory declaration form under the Statutory Declarations Regulations 2023 remains unverified.",
     "Compilations used: Evidence Act 1995 Compilation No. 35 (10 June 2025); Federal Court Rules 2011 Compilation No. 11 (11 June 2026); Crimes Act 1914 Compilation No. 167 (27 August 2026); Electronic Transactions Act 1999 compilation of 5 December 2025; Judiciary Act 1903 compilation of 11 December 2024. Later amendments were not checked."
   ]
 }

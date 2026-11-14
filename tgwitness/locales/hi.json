@@ -9007,5 +9007,7 @@
   "cancelled": "रद्द",
   "Updates arrived while observation was paused": "अवलोकन रुका होने के दौरान अपडेट्स आए",
   "Too many updates arrived during startup": "स्टार्टअप के दौरान बहुत सारे अपडेट आ गए",
-  "Telegram could not deliver older updates": "Telegram पुराने अपडेट नहीं पहुँचा सका"
+  "Telegram could not deliver older updates": "Telegram पुराने अपडेट नहीं पहुँचा सका",
+  "Choose a scope for this procedure.": "इस कार्यवाही का दायरा चुनें।",
+  "This procedure is not covered by the selected profile.": "चुनी गई प्रोफ़ाइल में यह कार्यवाही शामिल नहीं है।"
 }

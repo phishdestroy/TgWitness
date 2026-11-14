@@ -1,0 +1,89 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "MD",
+  "name_en": "Moldova",
+  "name_local": "Republica Moldova",
+  "court_languages": [
+    "ro"
+  ],
+  "local_language": "ro",
+  "legal_family": "civil law",
+  "checked_at": "2026-11-14",
+  "review_scope": "Common judicial-examination report requirements under Law 68/2016, including the 2025 amendments, and trust-service effects under Law 124/2022. The civil/criminal entries repeat only requirements that the examination law expressly applies across proceedings; route-specific appointment powers and admissibility rules are not represented as verified.",
+  "expert_term": {
+    "local": "expert judiciar",
+    "en": "judicial expert"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Legea nr. 68/2016, art. 11",
+        "summary_en": "A judicial examination requires an ordering act under the applicable procedural legislation.",
+        "source": "https://www.legis.md/cautare/downloadpdf/150277"
+      },
+      "questions": null,
+      "report_contents": {
+        "basis": "Legea nr. 68/2016, art. 36–37",
+        "items_en": [
+          "Written Romanian report, on paper or electronically: introduction, descriptive part and conclusions.",
+          "Identify the ordering act, institution, expert, participants and examination.",
+          "Record the applicable rights, duties and liability information required by Article 37(2).",
+          "Attach supporting materials where applicable."
+        ],
+        "items_local": [],
+        "source": "https://www.legis.md/cautare/downloadpdf/150277"
+      },
+      "rights_duties": null
+    },
+    {
+      "route": "criminal",
+      "appointment": {
+        "basis": "Legea nr. 68/2016, art. 11",
+        "summary_en": "A judicial examination requires an ordering act under the applicable procedural legislation.",
+        "source": "https://www.legis.md/cautare/downloadpdf/150277"
+      },
+      "questions": null,
+      "report_contents": {
+        "basis": "Legea nr. 68/2016, art. 36–37",
+        "items_en": [
+          "Written Romanian report, on paper or electronically: introduction, descriptive part and conclusions.",
+          "Identify the ordering act, institution, expert, participants and examination.",
+          "Record the applicable rights, duties and liability information required by Article 37(2).",
+          "Attach supporting materials where applicable."
+        ],
+        "items_local": [],
+        "source": "https://www.legis.md/cautare/downloadpdf/150277"
+      },
+      "rights_duties": null
+    }
+  ],
+  "statute": {
+    "title_local": "Legea nr. 68 din 14.04.2016 cu privire la expertiza judiciară şi statutul expertului judiciar",
+    "title_en": "Law 68/2016 on judicial examination and the status of judicial experts",
+    "source": "https://www.legis.md/cautare/downloadpdf/150277"
+  },
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "Legea nr. 124 din 19.05.2022 privind identificarea electronică şi serviciile de încredere, art. 21",
+    "law_en": "Law 124/2022, Article 21: qualified electronic signatures have handwritten-signature equivalence.",
+    "qualified_term_local": "semnătură electronică calificată",
+    "source": "https://www.legis.md/cautare/downloadpdf/149049"
+  },
+  "timestamp": {
+    "basis": "Legea nr. 124/2022, art. 30–31",
+    "qualified_recognition": "Qualified electronic timestamps have presumptions of date/time accuracy and integrity of the linked data under Article 30(2).",
+    "source": "https://www.legis.md/cautare/downloadpdf/149049"
+  },
+  "open_questions": [
+    "Direct legis.md retrieval returned 403; the cited current-looking official PDF editions were checked through indexed statute excerpts, including amendments effective 31 August 2025. Confirm the complete applicable edition before use.",
+    "The report list is a selected subset of Article 37, not every required item. The case's appointment act, code-specific requirements and expert qualifications still need review.",
+    "Article 36 imposes requirements on the expert, methods and examination organisation. TgWitness does not itself confer expert status or establish compliance with those requirements.",
+    "Current recognition conditions for foreign certificates and timestamps, provider status and verification formats were not checked.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Law 68/2016 Article 37 requires the expert report in Romanian. This profile does not enumerate all court interpretation and language rights.",
+  "court_language_source": "https://www.legis.md/cautare/downloadpdf/150277"
+}

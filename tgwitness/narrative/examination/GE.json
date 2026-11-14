@@ -1,0 +1,85 @@
+{
+  "format": "tgwitness-examination-v1",
+  "code": "GE",
+  "name_en": "Georgia",
+  "name_local": "საქართველო",
+  "court_languages": [
+    "ka"
+  ],
+  "local_language": "ka",
+  "legal_family": "civil law",
+  "checked_at": "2026-11-14",
+  "review_scope": "Selected civil expert-report provisions (Articles 162 and 170–171), criminal expert-examination provisions (Articles 144–146), and trust-service provisions (Articles 3 and 7) from official Matsne publications. English code translations and the final Georgian trust-services text were consulted; this is not an audit of all amendments or procedural exceptions.",
+  "expert_term": {
+    "local": "ექსპერტი",
+    "en": "expert"
+  },
+  "procedures": [
+    {
+      "route": "civil",
+      "appointment": {
+        "basis": "Civil Procedure Code, art. 162",
+        "summary_en": "The court may order a necessary specialist examination by reasoned ruling; parties may also arrange an examination subject to submission rules.",
+        "source": "https://matsne.gov.ge/en/document/view/29962"
+      },
+      "questions": null,
+      "report_contents": {
+        "basis": "Civil Procedure Code, art. 170",
+        "items_en": [
+          "Written account of the examination, conclusions and reasoned answers."
+        ],
+        "items_local": [],
+        "source": "https://matsne.gov.ge/en/document/view/29962"
+      },
+      "rights_duties": {
+        "basis": "Civil Procedure Code, arts. 170–171",
+        "summary_en": "The court may require explanation; parties can review the report and ask questions.",
+        "source": "https://matsne.gov.ge/en/document/view/29962"
+      }
+    },
+    {
+      "route": "criminal",
+      "appointment": {
+        "basis": "Criminal Procedure Code, art. 144",
+        "summary_en": "Expert examination is initiated by a party when specialist study is required, subject to statutory safeguards.",
+        "source": "https://matsne.gov.ge/en/document/view/90034"
+      },
+      "questions": null,
+      "report_contents": {
+        "basis": "Criminal Procedure Code, art. 146",
+        "items_en": [
+          "Expert identity, qualifications and record of the false-opinion liability warning.",
+          "Examination grounds, attending persons, materials and objects examined.",
+          "Methods, reasoned answers and relevant circumstances established on the expert's initiative."
+        ],
+        "items_local": [],
+        "source": "https://matsne.gov.ge/en/document/view/90034"
+      },
+      "rights_duties": null
+    }
+  ],
+  "statute": null,
+  "liability": [],
+  "declaration": null,
+  "standards": [],
+  "esignature": {
+    "law_local": "ელექტრონული დოკუმენტისა და ელექტრონული სანდო მომსახურების შესახებ, მუხლი 3",
+    "law_en": "Law on Electronic Documents and Electronic Trust Services, Article 3",
+    "qualified_term_local": "კვალიფიციური ელექტრონული ხელმოწერა",
+    "source": "https://matsne.gov.ge/ka/document/view/3654557"
+  },
+  "timestamp": {
+    "basis": "Law on Electronic Documents and Electronic Trust Services, Article 7",
+    "qualified_recognition": "Qualified timestamps provide presumptions of date/time accuracy and integrity of associated data. Provider and service requirements still apply.",
+    "source": "https://matsne.gov.ge/ka/document/view/3654557"
+  },
+  "open_questions": [
+    "Matsne's default English trust-services page served the initial 2017 edition, so the final Georgian-language page is cited for Articles 3 and 7. Confirm the language and consolidation date of each code translation before filing.",
+    "Criminal Article 144 includes safeguards for examination objects and opposing-party access; their application to a specific collection or destructive test is outside this subset.",
+    "No statutory first-person declaration or current penalty formula was verified. Record the actual expert warning and appointment; do not infer them from the archive.",
+    "Foreign trust-service recognition and regional court-language arrangements have not been reviewed.",
+    "Report requirements are summarised in English. Native expert/law terms do not imply a complete reviewed translation of the report or interface."
+  ],
+  "court_language_notes": "Georgian is the language represented by this profile. Civil Procedure Article 9(4) provides for proceedings in the state language and interpretation; regional language rules and the actual forum must be checked separately.",
+  "court_language_source": "https://matsne.gov.ge/en/document/view/29962"
+}

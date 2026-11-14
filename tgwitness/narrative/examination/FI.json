@@ -122,7 +122,9 @@
     "text_local_sv": "Jag N.N. lovar och försäkrar på heder och samvete att jag enligt bästa förstånd ska fullgöra det sakkunniguppdrag som jag fått.",
     "text_en": "I, N.N., promise and affirm on my honour and conscience that I will perform the expert assignment given to me to the best of my understanding.",
     "wording": "official",
-    "source": "https://www.finlex.fi/sv/lagstiftning/1734/4"
+    "source": "https://www.finlex.fi/sv/lagstiftning/1734/4",
+    "route": "all",
+    "context": "oral_hearing"
   },
   "standards": [],
   "esignature": {

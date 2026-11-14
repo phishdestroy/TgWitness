@@ -9073,5 +9073,7 @@
   "cancelled": "отменено",
   "Updates arrived while observation was paused": "Обновления пришли, пока наблюдение было на паузе",
   "Too many updates arrived during startup": "При запуске пришло слишком много обновлений",
-  "Telegram could not deliver older updates": "Telegram не смог доставить более старые обновления"
+  "Telegram could not deliver older updates": "Telegram не смог доставить более старые обновления",
+  "Choose a scope for this procedure.": "Выберите область применения процедуры.",
+  "This procedure is not covered by the selected profile.": "Выбранный профиль не охватывает эту процедуру."
 }

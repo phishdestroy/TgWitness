@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
-from pydantic import ConfigDict, Field, field_validator
+from pydantic import ConfigDict, Field, ValidationError, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
 from . import report_chat_timeline, report_design, report_history, report_layouts, report_repeats, report_selection, report_selection_view
@@ -70,11 +70,20 @@ class ReportOptions(report_analytics.Presentation):
         return value
 
 
-def saved(store):
+class InvalidSavedReportOptions(ValueError):
+    def __init__(self):
+        super().__init__("Saved report settings need review. Open report settings and check the jurisdiction and other selections before exporting.")
+
+
+def saved(store, *, for_editing=False):
     try:
-        return ReportOptions.model_validate(store.get_setting("report_options", {}) or {})
-    except ValueError:
-        return ReportOptions()
+        value = store.get_setting("report_options", {})
+        return ReportOptions.model_validate(
+            {} if value is None else value,
+            context={"editing_report_settings": for_editing},
+        )
+    except (ValidationError, json.JSONDecodeError):
+        raise InvalidSavedReportOptions() from None
 
 
 def save(store, options):

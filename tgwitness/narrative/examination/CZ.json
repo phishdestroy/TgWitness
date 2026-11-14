@@ -132,7 +132,8 @@
     "text_local": "Jsem si vědom(a) následků vědomě nepravdivého znaleckého posudku.\nZNALECKÁ DOLOŽKA\nZnalecký posudek jsem podal(a) jako znalec zapsaný v seznamu znalců vedeném Ministerstvem spravedlnosti pro obor [obor], odvětví [odvětví], specializaci [specializace]. Znalecký úkon je zapsán v evidenci posudků pod pořadovým číslem [XX/YYYY].",
     "text_en": "I am aware of the consequences of a knowingly false expert report.\nEXPERT CLAUSE\nI have given this expert report as an expert entered in the list of experts kept by the Ministry of Justice for the field [field], branch [branch], specialisation [specialisation]. The expert act is recorded in the register of expert reports under serial number [XX/YYYY].",
     "wording": "customary",
-    "source": "https://znalci.justice.cz/wp-content/uploads/2023/03/Ilustrativni-znalecka-dolozka.docx"
+    "source": "https://znalci.justice.cz/wp-content/uploads/2023/03/Ilustrativni-znalecka-dolozka.docx",
+    "route": "all"
   },
   "standards": [
     {
@@ -153,10 +154,10 @@
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (as amended by Regulation (EU) 2024/1183); zákon č. 254/2019 Sb. § 27(2) (qualified electronic time stamp mandatory on electronic expert reports; certificate valid at least 3 years); vyhláška č. 503/2020 Sb. § 49(2) (re-time-stamping during the 10-year retention period); zákon č. 297/2016 Sb. § 11",
     "qualified_recognition": "Qualified electronic time stamp: presumption of accuracy of date and time and integrity of the bound data (eIDAS art. 41(2)); for expert reports filed electronically it is a formal validity requirement.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "No official verbatim wording of the clause on awareness of the consequences of a knowingly false expert report was found; the sentence used is composed from OSŘ § 127a / TŘ § 110a. The expert clause text is the Ministry of Justice illustrative template (customary), not a statutory form.",
+    "The awareness clause is composed from OSŘ section 127a and TŘ section 110a; Ministry of Justice illustrative reports show the clause in both routes. Its precise wording is not a statutory form.",
     "Whether courts treat the awareness clause as mandatory for court-appointed reports (vyhláška § 46(1)(f) says 'případně') was not verified in case law.",
     "Czech adoptions of ISO/IEC 27041, 27042 and 27043 (ČSN EN ISO/IEC) were not verified in the ČAS catalogue; only ČSN EN ISO/IEC 27037 (36 9846) is confirmed via a ČAS preview page listing related standards.",
     "TZ § 346 text taken from the version effective 2026-01-01 as returned by e-Sbírka; a later time version, if any, was not checked."

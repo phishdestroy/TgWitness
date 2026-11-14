@@ -97,7 +97,9 @@
     "text_local": "הוראות סעיף 25 לפקודת הראיות [נוסח חדש], התשל\"א-1971 ידועות לי, ואני יודע כי דין חוות דעתי זו, כשהיא חתומה על ידי ומוגשת כראיה לבית המשפט, כדין עדות בשבועה.",
     "text_en": "The provisions of section 25 of the Evidence Ordinance [New Version] 1971 are known to me, and I know that this opinion, when signed by me and submitted as evidence to the court, has the status of sworn testimony.",
     "wording": "composed",
-    "source": "https://www.nevo.co.il/law_html/law00/98569.htm"
+    "source": "https://www.nevo.co.il/law_html/law00/98569.htm",
+    "context": "court_opinion_form",
+    "scope": "Current official form and procedural applicability remain unverified; do not automatically insert as a report declaration."
   },
   "standards": [],
   "esignature": {
@@ -113,13 +115,14 @@
   },
   "open_questions": [
     "The official First Schedule form for an expert opinion (טופס חוות דעת) is linked from nevo.co.il as a .doc file that could not be parsed; its exact declaration text (believed to begin 'אני נותן חוות דעתי זו במקום עדות בבית משפט') was not verified. The declaration in this file is therefore composed from s. 25.",
-    "Penal Law 1977 provision on perjury that replaced s. 117 of the Criminal Code Ordinance 1936 (believed to be s. 237 'עדות שקר') and its maximum penalty were not verified; the nevo and Wikisource pages were truncated before that section.",
+    "The current Penal Law provision governing false expert testimony, including the relationship to Evidence Ordinance section 25 and the applicable penalty, remains unverified.",
     "Civil Procedure Regulations 2018 (תקנות סדר הדין האזרחי, התשע\"ט-2018) rules on party experts, court-appointed experts, questions to experts and filing deadlines were not verified.",
     "Criminal-procedure rules on expert opinions (Criminal Procedure Law [Consolidated Version] 1982 and related disclosure rules) were not verified.",
     "Electronic Signature Law 2001: the Hebrew terms for the higher signature tiers (secure / certified electronic signature), the evidential presumption, and the nevo or Knesset URL were not verified.",
     "No Israeli statute or regulation on electronic timestamps was identified.",
     "No Standards Institution of Israel (SII) adoption of ISO/IEC 27037/27041/27042/27043 was verified; whether Israel Police use ISO/IEC 17025 accreditation for digital forensics was not checked.",
-    "Arabic-language (ar) versions of the quoted provisions were not retrieved.",
-    "Whether any statute on forensic expert activity exists in Israel remains unconfirmed after a search; the statute field reflects only the Evidence Ordinance."
+    "Arabic-language procedural wording remains unverified.",
+    "Whether any statute on forensic expert activity exists in Israel remains unconfirmed after a search; the statute field reflects only the Evidence Ordinance.",
+    "Verify the current official Evidence Ordinance sections 24–25 and First Schedule form, including civil/criminal applicability, before using the composed opinion declaration."
   ]
 }

@@ -8959,5 +8959,7 @@
   "cancelled": "dibatalkan",
   "Updates arrived while observation was paused": "Pembaruan tiba saat pengamatan sedang dijeda",
   "Too many updates arrived during startup": "Terlalu banyak pembaruan yang masuk saat proses startup",
-  "Telegram could not deliver older updates": "Telegramt tidak dapat mengirimkan pembaruan yang lebih lama"
+  "Telegram could not deliver older updates": "Telegramt tidak dapat mengirimkan pembaruan yang lebih lama",
+  "Choose a scope for this procedure.": "Pilih cakupan untuk prosedur ini.",
+  "This procedure is not covered by the selected profile.": "Prosedur ini tidak tercakup dalam profil yang dipilih."
 }

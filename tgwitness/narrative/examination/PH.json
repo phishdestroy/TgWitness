@@ -123,7 +123,10 @@
     "text_local": "A statement that the witness is answering the questions asked of him, fully conscious that he does so under oath, and that he may face criminal liability for false testimony or perjury",
     "text_en": "A statement that the witness is answering the questions asked of him, fully conscious that he does so under oath, and that he may face criminal liability for false testimony or perjury",
     "wording": "official",
-    "source": "https://lawphil.net/courts/supreme/am/am_12-8-8-sc_2012.html"
+    "source": "https://lawphil.net/courts/supreme/am/am_12-8-8-sc_2012.html",
+    "route": "all",
+    "scope": "Required notice within a judicial affidavit where the Judicial Affidavit Rule applies. Criminal applicability is conditional under section 9 and must be confirmed; this is not an ordinary expert-report closing declaration.",
+    "context": "judicial_affidavit"
   },
   "standards": [],
   "esignature": {
@@ -138,9 +141,9 @@
     "source": "https://lawphil.net/statutes/repacts/ra2000/ra_8792_2000.html"
   },
   "open_questions": [
-    "Sources were read on lawphil.net (Arellano Law Foundation), named in the task as an accepted portal; the Supreme Court's own texts (sc.judiciary.gov.ph) and the Official Gazette (HTTP 403) were not checked.",
-    "Revised Penal Code Art. 183 (perjury) text and penalty were not verified: the lawphil page for Act No. 3815 was truncated before Book Two in the fetch tool.",
-    "Rules on Electronic Evidence Rule 1, Sec. 2 as displayed covers civil, quasi-judicial and administrative cases; a later Supreme Court resolution extending the Rules to criminal cases was not verified.",
+    "Most procedural entries remain sourced to the Lawphil reproduction; comparison with current Supreme Court and Official Gazette texts remains incomplete.",
+    "The current text and penalty for perjury under Revised Penal Code article 183, including amendments, remain unverified.",
+    "The Rules on Electronic Evidence were extended to criminal actions by the 24 September 2002 resolution, confirmed in People v. Enojas, G.R. 204894 (10 March 2014). Later amendments and the particular authentication requirements still require case-specific review: https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/56687 .",
     "No general rule on court-appointed experts (civil or criminal) was verified; Rule 32 (trial by commissioner) was not checked.",
     "No Filipino-language official text of the rules was found; items_local quote the official English text.",
     "Any amendment of the Judicial Affidavit Rule after 2012 (including by the 2019 civil procedure amendments) was not fully checked.",

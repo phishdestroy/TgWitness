@@ -6,40 +6,15 @@ from pathlib import Path
 from .. import __version__, verify
 from ..pdf_report import BAD, INK, MUTED, OK
 from ..verify import evidence_conditions
+from .catalog import PROCEDURES as PROCEDURES, codes as codes, declaration, liability, load, route
 from .sheet import Sheet
 from .style import heading, hero, language_name, marked, page, pill, tone
 
-ROOT = Path(__file__).parent / 'examination'
-FORMAT = 'tgwitness-examination-v1'
-PROCEDURES = ('criminal', 'civil')
 COMPUTED = ('integrity', 'external_time')
 CONDITIONAL = ('signer', 'checkpoint', 'head_binding', 'environment')
 FIELDS = ('case', 'authority', 'name', 'education', 'specialty', 'experience', 'organisation', 'period', 'place')
 ANSWERABLE = ('changed', 'time', 'manifest', 'key', 'coverage', 'witness')
 STANDARDS = ('sha256', 'ed25519', 'tsp', 'ots')
-
-
-def codes():
-    return {path.stem for path in ROOT.glob('*.json')}
-
-
-def load(code):
-    if code is None or code not in codes():
-        return None
-    record = json.loads((ROOT / (code + '.json')).read_text(encoding='utf-8'))
-    if record.get('format') != FORMAT or record.get('code') != code:
-        raise ValueError('Invalid examination catalog entry: ' + code)
-    return record
-
-
-def route(record, procedure):
-    routes = record.get('procedures') or []
-    return next((item for item in routes if item.get('route') == procedure), routes[0] if routes else {})
-
-
-def liability(record, procedure):
-    rows = record.get('liability') or []
-    return [row for row in rows if row.get('route') in (procedure, 'all')] or rows
 
 
 def detail(row):
@@ -72,11 +47,6 @@ def detail(row):
     return 'expert.detail.environment_missing', {}
 
 
-def declaration(record, procedure):
-    found = record.get('declaration_criminal') if procedure == 'criminal' and record.get('declaration_criminal')         else record.get('declaration')
-    return found if found and found.get('route') in (None, 'all', procedure) else None
-
-
 def commands(settings):
     collector = settings.get('fingerprint') or 'TRUSTED_COLLECTOR_FP'
     witness = settings.get('witness_fingerprint') or 'TRUSTED_WITNESS_FP'
@@ -89,6 +59,9 @@ def commands(settings):
 def build(result, model, settings, receipt_sha256):
     record = load(settings.get('jurisdiction'))
     procedure = settings.get('procedure') or PROCEDURES[0]
+    part = route(record, procedure, settings.get('procedure_scope')) if record else None
+    if record and not part:
+        raise ValueError('No ' + procedure + ' examination route is available for ' + record['code'])
     evidence = evidence_conditions(result)
     rows = {row['id']: row for row in evidence['conditions']}
     coverage = result.get('coverage') or {}
@@ -99,11 +72,14 @@ def build(result, model, settings, receipt_sha256):
     return {
         'format': 'tgwitness-expert-protocol-v1',
         'procedure': procedure,
+        'procedure_scope': settings.get('procedure_scope'),
         'jurisdiction': record and {**{key: record.get(key) for key in (
             'code', 'name_en', 'name_local', 'court_languages', 'local_language', 'checked_at', 'expert_term', 'statute',
-            'standards', 'esignature', 'timestamp', 'open_questions')},
-            'declaration': declaration(record, procedure),
-            'route': route(record, procedure), 'liability': liability(record, procedure)},
+            'standards', 'esignature', 'timestamp', 'open_questions', 'catalog_sha256', 'review_scope', 'review_updates',
+            'court_language_notes', 'court_language_source')},
+            'declaration': declaration(record, procedure, settings.get('procedure_scope')),
+            'route': part,
+            'liability': liability(record, procedure, settings.get('procedure_scope'))},
         'material': {'package_sha256': model['package_sha256'],
                      'witness_package_sha256': (model.get('witness_source') or {}).get('package_sha256'),
                      'fingerprint_supplied': settings.get('fingerprint'),
@@ -129,6 +105,8 @@ def meta(protocol, text):
     if local:
         rows.append((t('meta.jurisdiction'), local['name_local'] + ' · ' + local['name_en'] + ' (' + local['code'] + ')'))
     rows.append((t('meta.procedure'), t('procedure.' + protocol['procedure'])))
+    if local and local['route'].get('scope'):
+        rows.append((t('expert.basis'), local['route']['scope']))
     if local and local.get('court_languages'):
         rows.append((t('meta.court_language'), ', '.join(language_name(code) for code in local['court_languages'])))
     rows.append((t('meta.language'), language_name(text.lang)))
@@ -157,9 +135,14 @@ def sections(protocol, text):
             basis.append((t('expert.basis.statute', title=local['statute']['title_local']), local['statute'].get('source')))
         intro.append(('heading', t('expert.basis')))
         intro.append(('sourced', basis))
+        if local.get('review_scope'):
+            intro.append(('muted', [local['review_scope']]))
+        if local.get('court_language_notes'):
+            intro.append(('sourced', [(local['court_language_notes'], local.get('court_language_source'))]))
         if local.get('open_questions'):
             intro.append(('open', (t('expert.open'), local['open_questions'])))
-        contents = (part.get('report_contents') or {}).get('items_local' if native else 'items_en') or []
+        report_contents = part.get('report_contents') or {}
+        contents = (report_contents.get('items_local') if native else None) or report_contents.get('items_en') or []
         if contents:
             intro.append(('heading', t('expert.contents')))
             intro.append(('checklist', contents))
@@ -175,6 +158,9 @@ def sections(protocol, text):
                                         'signature': t('expert.field.signature')}))
         declaration = local.get('declaration') or {}
         text_value = declaration.get('text_local') if native or not declaration.get('text_en') else declaration.get('text_en')
+        if declaration.get('context') not in (None, 'report_declaration'):
+            intro.append(('sourced', [(declaration.get('basis') or '', declaration.get('source'))]))
+            text_value = None
         if text_value:
             intro.append(('heading', t('expert.declaration')))
             intro.append(('quote', [text_value]))

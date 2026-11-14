@@ -14,6 +14,7 @@ from .system_map import system_map
 from . import witness as routes_witness
 from .. import cloud_wizard
 from .. import extensions
+from ..report import InvalidSavedReportOptions
 from ..board_api import register as register_board
 from ..capture_api import register as register_capture
 from ..channel_graph import register as register_channel_graph
@@ -38,8 +39,13 @@ from ..webhook_api import register as register_webhooks
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from pathlib import Path
 import os
+
+
+async def invalid_saved_report_options(request, exc):
+    return JSONResponse({"detail": str(exc)}, status_code=409)
 
 
 def register(app, ctx):
@@ -56,6 +62,7 @@ def register(app, ctx):
     app.middleware("http")(ctx.headers)
     app.exception_handler(Exception)(ctx.unexpected_error)
     app.exception_handler(RequestValidationError)(ctx.validation_error)
+    app.exception_handler(InvalidSavedReportOptions)(invalid_saved_report_options)
     router.get("/locale.js")(routes_system.locale)
     router.get("/api/demo-access")(routes_system.demo_access)
     router.get("/api/status", dependencies=[Depends(authenticate)])(

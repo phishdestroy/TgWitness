@@ -123,7 +123,8 @@
     "text_local": "Je soussigné(e), [nom], expert [inscrit sur la liste de la cour d'appel de ... / ayant prêté serment le ...], atteste avoir accompli ma mission, fait mon rapport et donné mon avis en mon honneur et conscience.",
     "text_en": "I, the undersigned, [name], expert [registered on the list of the court of appeal of ... / having sworn the oath on ...], attest that I have performed my mission, made my report and given my opinion on my honour and conscience.",
     "wording": "composed",
-    "source": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000006492482"
+    "source": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000006492482",
+    "route": "all"
   },
   "standards": [
     {
@@ -168,13 +169,12 @@
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 and 42, as amended by Regulation (EU) 2024/1183",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound; it is recognised as qualified in all Member States. A non-qualified time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj/eng"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
     "No French national act specific to electronic time stamps was identified; confirm whether any French provision supplements eIDAS art. 41 for court evidence.",
     "The CPP expertise section does not state whether a criminal expert may report findings outside the questions asked; practice and case law not verified.",
     "Civil liability of court experts is not specifically codified in the texts checked; the general tort rules of the Code civil were not verified for this point.",
-    "EUR-Lex pages could not be rendered by the fetch tool; the eIDAS art. 41 wording was confirmed through search results citing EUR-Lex and should be re-read on the consolidated text (CELEX 02014R0910).",
     "Whether accreditation (ISO/IEC 17025) is required for any category of digital-forensic expert reports in France was not verified."
   ]
 }

@@ -4,7 +4,7 @@ import re
 
 from ..verify import ASSURANCE_TIERS
 from .text import LANGUAGES, ROOT
-from .expert import PROCEDURES, codes as examination_codes
+from .catalog import ALIASES, PROCEDURES, codes as examination_codes, load as examination, route
 
 FORMAT = 'tgwitness-narrative-config-v1'
 OUTPUTS = ('pdf', 'html', 'json', 'svg')
@@ -16,7 +16,7 @@ DEFAULTS = {
     'fingerprint': None, 'witness': None, 'witness_fingerprint': None, 'tsa_ca': None,
     'check_drand': False, 'check_bitcoin': False,
     'require_tier': 'self_attested', 'require_pinned_signer': False,
-    'expert': False, 'procedure': 'criminal',
+    'expert': False, 'procedure': 'criminal', 'procedure_scope': None,
 }
 PATHS = ('witness', 'tsa_ca')
 
@@ -38,7 +38,7 @@ def validate(values):
     result = {**DEFAULTS, **values}
     if result['lang'] not in LANGUAGES:
         raise ValueError('Unsupported narrative language')
-    jurisdictions = {p.stem for p in (ROOT / 'jurisdictions').glob('*.json')} | examination_codes()
+    jurisdictions = {p.stem for p in (ROOT / 'jurisdictions').glob('*.json')} | examination_codes() | ALIASES.keys()
     if result['jurisdiction'] is not None and (
             not isinstance(result['jurisdiction'], str) or result['jurisdiction'] not in jurisdictions):
         raise ValueError('Unsupported narrative jurisdiction')
@@ -57,6 +57,16 @@ def validate(values):
             raise ValueError(key + ' must be an integer from 1 to ' + str(ceiling))
     if result['procedure'] not in PROCEDURES:
         raise ValueError('procedure must be one of: ' + ', '.join(PROCEDURES))
+    scope = result['procedure_scope']
+    if scope is not None and (not isinstance(scope, str) or not re.fullmatch(r'[a-z0-9-]{1,80}', scope)):
+        raise ValueError('procedure_scope must be an identifier from the examination catalog')
+    record = examination(result['jurisdiction'])
+    if scope is not None and record is None:
+        raise ValueError('procedure_scope requires a jurisdiction')
+    if record is not None:
+        part = route(record, result['procedure'], scope)
+        if not part:
+            raise ValueError('No ' + result['procedure'] + ' examination route is available for ' + record['code'])
     for key in ('check_drand', 'check_bitcoin', 'require_pinned_signer', 'expert'):
         if type(result[key]) is not bool:
             raise ValueError(key + ' must be a boolean')

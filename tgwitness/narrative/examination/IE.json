@@ -123,12 +123,12 @@
     "source": "https://revisedacts.lawreform.ie/eli/2000/act/27/revised/en/html"
   },
   "timestamp": {
-    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a)",
-    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified (Art. 41(1)). Qualified time stamps from other Member States are recognised (Art. 24a).",
+    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a(6))",
+    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility solely because it is electronic or not qualified (Art. 41(1)). Qualified time stamps from other Member States are recognised (Art. 24a(6)).",
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "irishstatutebook.ie and oireachtas.ie refused automated access (HTTP 403); statutes were read from the Law Reform Commission revised Acts and court rules from courts.ie.",
+    "Irish statutory coverage relies on the Law Reform Commission revised Acts and court rules on courts.ie; later amendments and commencement provisions require confirmation for the applicable proceeding.",
     "The perjury statute (believed to be the Criminal Justice (Perjury and Related Offences) Act 2021), its section numbers, its application to expert witnesses and false statements in reports, and the maximum penalty were not verified.",
     "Contempt of court as a sanction for a knowingly false expert report, and any civil or disciplinary liability (including witness immunity) of experts, were not verified.",
     "Prosecution expert evidence in criminal trials (book of evidence under Criminal Procedure Act 1967 s. 4B, statements of evidence, certificates under the Criminal Evidence Act 1992) and the content requirements for prosecution expert reports were not verified.",
@@ -138,7 +138,6 @@
     "No practice direction or official model wording for the rule 57(2)(a) statement was found; the declaration text is composed from rule 57(1).",
     "The Irish statutory instrument giving effect to eIDAS and any national rules on electronic signatures in court filings were not verified; the Electronic Commerce Act 2000 (revised to 1 June 2025) still refers to Directive 1999/93/EC.",
     "No Irish national adoption (I.S. EN ISO/IEC 27037 etc. by NSAI) or official digital-forensics guidance used by An Garda Síochána or Forensic Science Ireland was verified.",
-    "EUR-Lex could not be loaded directly; eIDAS Art. 25, 41 and 24a wording after Regulation (EU) 2024/1183 was checked only through search-index excerpts.",
     "Local-language fields are given in English only; Irish-language versions of the rules were not checked."
   ]
 }

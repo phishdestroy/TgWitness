@@ -129,7 +129,8 @@
     "text_local": "Ich versichere unter Berufung auf meinen allgemein geleisteten Sachverständigeneid, dass ich dieses Gutachten unparteiisch und nach bestem Wissen und Gewissen erstattet habe.",
     "text_en": "Relying on my general expert's oath, I affirm that I have rendered this opinion impartially and to the best of my knowledge and conscience.",
     "wording": "composed",
-    "source": "https://www.gesetze-im-internet.de/zpo/__410.html"
+    "source": "https://www.gesetze-im-internet.de/zpo/__410.html",
+    "route": "all"
   },
   "standards": [
     {
@@ -188,12 +189,11 @@
     "source": "https://www.gesetze-im-internet.de/vdg/__1.html"
   },
   "timestamp": {
-    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a)",
-    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility as evidence solely because it is electronic or not qualified (Art. 41(1)). A qualified electronic time stamp provided in one Member State is recognised as qualified in all other Member States (Art. 24a). No separate German statutory presumption for time stamps was identified.",
+    "basis": "Regulation (EU) No 910/2014 Art. 41 as amended by Regulation (EU) 2024/1183 (Art. 41(3) deleted; cross-border recognition moved to Art. 24a(6))",
+    "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound (Art. 41(2)). An electronic time stamp may not be denied legal effect or admissibility as evidence solely because it is electronic or not qualified (Art. 41(1)). A qualified electronic time stamp provided in one Member State is recognised as qualified in all other Member States (Art. 24a(6)). No separate German statutory presumption for time stamps was identified.",
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "EUR-Lex could not be loaded directly by the research tool; the wording of eIDAS Art. 25, 41 and 24a after Regulation (EU) 2024/1183 was checked only through search-index excerpts of the EUR-Lex documents. The paragraph number of Art. 24a covering time stamps was not confirmed.",
     "Neither StPO nor ZPO lists mandatory sections of an expert report; any further structure (findings, method, answers to questions, limitations) comes from case law or professional rules (e.g. IHK expert regulations), which were not verified.",
     "Whether an expert may decline questions outside the expertise or report facts not asked about is not expressly regulated; relevant case law was not verified.",
     "StGB § 153 refers to giving false testimony (aussagt) before a court; whether a purely written opinion not presented orally falls under § 153 was not verified.",

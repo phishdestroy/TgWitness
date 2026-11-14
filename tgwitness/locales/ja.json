@@ -8959,5 +8959,7 @@
   "cancelled": "キャンセルされました",
   "Updates arrived while observation was paused": "観察が一時停止されている間に更新が届きました",
   "Too many updates arrived during startup": "起動中に更新が大量に届きました",
-  "Telegram could not deliver older updates": "Telegramは古い更新情報を配信できませんでした"
+  "Telegram could not deliver older updates": "Telegramは古い更新情報を配信できませんでした",
+  "Choose a scope for this procedure.": "この手続きの適用範囲を選択してください。",
+  "This procedure is not covered by the selected profile.": "選択したプロファイルはこの手続きに対応していません。"
 }

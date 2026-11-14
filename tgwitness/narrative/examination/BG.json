@@ -10,56 +10,63 @@
   "legal_family": "civil law",
   "checked_at": "2026-11-11",
   "expert_term": {
-    "local": null,
-    "en": null
+    "local": "вещо лице",
+    "en": "expert"
   },
   "procedures": [
     {
       "route": "criminal",
       "appointment": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
+        "basis": "Наказателно-процесуален кодекс, articles 144-145",
+        "summary_en": "The court or pre-trial authority orders an examination where specialised knowledge is needed. The order identifies grounds, task, materials and expert; a pre-trial order also sets a deadline.",
+        "source": "https://justice.government.bg/home/normdoc/2135512224"
       },
       "questions": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
+        "basis": "Наказателно-процесуален кодекс, articles 145, 149(2) and 152(3)",
+        "summary_en": "The order sets the task. The expert may decline an opinion outside their specialty or without sufficient material, and must report newly discovered relevant material beyond the assigned questions.",
+        "source": "https://justice.government.bg/home/normdoc/2135512224"
       },
       "report_contents": {
-        "basis": null,
-        "items_en": [],
+        "basis": "Наказателно-процесуален кодекс, article 152",
+        "items_en": [
+          "Expert identity, appointment basis and examination location",
+          "Assigned task, materials and examinations, including scientific and technical means",
+          "Results, conclusions and expert signature"
+        ],
         "items_local": [],
-        "source": null
+        "source": "https://justice.government.bg/home/normdoc/2135512224"
       },
       "rights_duties": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
+        "basis": "Наказателно-процесуален кодекс, articles 149-151 and 154",
+        "summary_en": "The expert must attend when summoned and answer within their expertise. The appointing authority explains duties and liability for a false opinion. The opinion does not bind the authority; disagreement requires reasons.",
+        "source": "https://justice.government.bg/home/normdoc/2135512224"
       }
     },
     {
       "route": "civil",
       "appointment": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
+        "basis": "Граждански процесуален кодекс, articles 195-197",
+        "summary_en": "The court appoints an expert on request or of its own motion for questions requiring specialised knowledge; multiple experts may be appointed.",
+        "source": "https://www.justice.government.bg/home/normdoc/2135558368"
       },
       "questions": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
+        "basis": "Граждански процесуален кодекс, articles 197 and 200",
+        "summary_en": "The appointment identifies the subject, task and materials. Parties may question the expert to clarify the opinion at the hearing.",
+        "source": "https://www.justice.government.bg/home/normdoc/2135558368"
       },
       "report_contents": {
-        "basis": null,
-        "items_en": [],
+        "basis": "Граждански процесуален кодекс, articles 199-200",
+        "items_en": [
+          "Submit the opinion at least one week before the hearing",
+          "Present the opinion orally at the hearing; the reviewed provisions do not specify a complete written-report structure"
+        ],
         "items_local": [],
-        "source": null
+        "source": "https://www.justice.government.bg/home/normdoc/2135558368"
       },
       "rights_duties": {
-        "basis": null,
-        "summary_en": null,
-        "source": null
+        "basis": "Граждански процесуален кодекс, articles 196, 198 and 200(1)",
+        "summary_en": "Disclose grounds for recusal. The court may release an expert lacking qualifications or unable to perform. At the hearing the court reminds the expert of liability for a false opinion.",
+        "source": "https://www.justice.government.bg/home/normdoc/2135558368"
       }
     }
   ],
@@ -81,20 +88,18 @@
     "law_local": "Регламент (ЕС) № 910/2014, изменен с Регламент (ЕС) 2024/1183",
     "law_en": "eIDAS Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183; national implementing act not verified",
     "qualified_term_local": null,
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj/eng"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "timestamp": {
     "basis": "Regulation (EU) No 910/2014, art. 41 (as amended by Regulation (EU) 2024/1183)",
     "qualified_recognition": "A qualified electronic time stamp enjoys the presumption of the accuracy of the date and time it indicates and of the integrity of the data to which they are bound; it is recognised as qualified in all Member States. National implementing rules not verified.",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910/oj/eng"
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
   "open_questions": [
-    "Research not completed for Bulgaria: lex.bg pages for НПК, НК and the e-signature law are single long documents that the fetch tool truncated (around art. 60-65), one fetch returned unreliable text, the EU e-Justice 'find an expert' page for Bulgaria is still untranslated, and the session's web-search budget (200 calls) was exhausted. Every national field below remains unverified.",
-    "Criminal route to verify: Наказателно-процесуален кодекс, чл. 144-154 (назначаване на експертиза, вещи лица, въпроси, съдържание на заключението, разпит на вещото лице, отвод).",
-    "Civil route to verify: Граждански процесуален кодекс, чл. 195-203 (съдебна експертиза, задачи, заключение, изслушване, отвод, повторна и допълнителна експертиза), including any statutory promise or warning given to the вещо лице at the hearing.",
     "Liability to verify: Наказателен кодекс, чл. 291 (false expert opinion) - exact wording and maximum penalty; any civil or disciplinary liability of listed experts.",
     "Statute on experts to verify: Закон за съдебната власт provisions on вещи лица and the ordinance on registration, qualification and remuneration of court experts (Наредба № 2 от 29.06.2015 г.), including any declaration form.",
     "Electronic signature: national act (expected: Закон за електронния документ и електронните удостоверителни услуги; terms квалифициран електронен подпис, квалифициран електронен времеви печат) not verified on an official source.",
-    "Standards: БИС national adoption of EN ISO/IEC 27037/27041/27042/27043 (expected designation БДС EN ISO/IEC ...) not verified."
+    "Standards: БИС national adoption of EN ISO/IEC 27037/27041/27042/27043 (expected designation БДС EN ISO/IEC ...) not verified.",
+    "A prescribed written expert declaration and the complete civil-report structure remain unverified; the hearing warning is not a signed statement of truth."
   ]
 }
