@@ -6453,7 +6453,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "Terima setiap permintaan masuk di TgWitness? Chat yang diterima tidak akan sampai ke peranti lain akaun ini.",
   "Pseudo-secret settings saved.": "Tetapan pseudo-rahsia disimpan.",
   "Request sent. The chat opens when the other side accepts.": "Permintaan dihantar. Perbualan dibuka apabila pihak lain menerima.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-rahsia memerlukan pakej pilihan kiaro-telethon-secret-chat. Pasang TgWitness dengan secret-chats extra dan mulakan semula panel.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Pseudo-rahsia memerlukan modul protokolnya, yang belum dipasang.",
   "Turn on pseudo-secret for this account first.": "Buka pseudo-rahsia untuk akaun ini terlebih dahulu.",
   "This needs a Telegram user, not a group or channel.": "Ini memerlukan pengguna Telegram, bukan kumpulan atau saluran.",
   "Telegram has no user with this username.": "Telegram tidak mempunyai pengguna dengan nama pengguna ini.",
@@ -8848,5 +8848,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Cadangan: untuk mahkamah, serahkan asal Bahasa Inggeris bersama terjemahan yang disahkan atau disumpah ke dalam bahasa mahkamah. Penerjemah bersumpah mengetahui terminologi tempatan dan keperluan formal bagi dokumen mahkamah. Versi laporan ini dalam bahasa selain Bahasa Inggeris adalah terjemahan mesin untuk panduan.",
   "English original in this archive: {file}": "Asal Bahasa Inggeris dalam arkib ini: {file}",
   "English original of this report, sealed": "Asal Bahasa Inggeris laporan ini, dimeterai",
-  "English original of the signed PDF": "Asal Bahasa Inggeris PDF yang ditandatangani"
+  "English original of the signed PDF": "Asal Bahasa Inggeris PDF yang ditandatangani",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Pseudo-rahsia memerlukan modul protokolnya. Minta pentadbir utama memasangnya di halaman ini.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Pseudo-rahsia berjalan dengan modul protokol berasingan: {name} {version} oleh {author}, di bawah lesen {license}. TgWitness memuat turun tepat versi ini daripada GitHub, menyemak setiap fail dengan SHA-256 yang ditetapkan dalam keluaran ini, lalu memuatkannya. Tidak perlu mula semula.",
+  "Install and turn on": "Pasang dan aktifkan",
+  "Source code and license": "Kod sumber dan lesen",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Modul protokol: {name} {version} oleh {author}, lesen {license}. Failnya disemak setiap kali bermula dengan SHA-256 yang ditetapkan dalam keluaran ini.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Modul protokol: {name} {version} oleh {author}, lesen {license}, dipasang dalam persekitaran Python.",
+  "Downloading and checking the module…": "Memuat turun dan menyemak modul…",
+  "Module installed. Pseudo-secret is on for this account.": "Modul dipasang. Pseudo-rahsia aktif untuk akaun ini.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Modul pseudo-rahsia berbeza daripada versi yang ditetapkan oleh keluaran TgWitness ini, jadi ia tidak dimuatkan. Pasang semula.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Modul pseudo-rahsia lulus semakan tetapi tidak dapat dimulakan. Kemas kini TgWitness dan pasang semula modul.",
+  "Only the main administrator can install the pseudo-secret module.": "Hanya pentadbir utama boleh memasang modul pseudo-rahsia.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Modul pseudo-rahsia tidak dapat dimuat turun daripada GitHub melalui laluan sambungan ruang kerja ini. Semak sambungan dan cuba lagi."
 }

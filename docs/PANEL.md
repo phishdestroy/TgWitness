@@ -193,7 +193,7 @@ apply to future activity; saved records stay.
   its latest visible messages.
 
 [Pseudo-secret](PSEUDO-SECRET.md) is the included Secret Chat interface, enabled
-per account after installing the optional protocol dependency. Cloud observation
+per account after installing its protocol module with one button. Cloud observation
 and history use their own settings. Nothing is recorded while TgWitness is
 not running; after a restart it catches up only what Telegram still returns, and the
 report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in

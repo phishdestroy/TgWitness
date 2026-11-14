@@ -6531,7 +6531,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "האם לקבל כל בקשה נכנסת ב-TgWitness? צ'אטים שהתקבלו אינם מגיעים למכשירים האחרים של חשבון זה.",
   "Pseudo-secret settings saved.": "הגדרות פסאודו-סודי נשמרו.",
   "Request sent. The chat opens when the other side accepts.": "הבקשה נשלחה. הצ'אט ייפתח כאשר הצד השני יאשר אותה.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret דורש את החבילה האופציונלית kiaro-telethon-secret-chat. התקן את TgWitness עם התוסף secret-chats והפעל מחדש את הפאנל.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "פסאודו-סודי זקוק למודול הפרוטוקול שלו, שעדיין לא הותקן.",
   "Turn on pseudo-secret for this account first.": "הפעל תחילה פסאודו-סודי עבור חשבון זה.",
   "This needs a Telegram user, not a group or channel.": "יש צורך במשתמש טלגרם, ולא בקבוצה או בערוץ.",
   "Telegram has no user with this username.": "ב-Telegram אין משתמש עם שם המשתמש הזה.",
@@ -8944,5 +8944,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "המלצה: לצורך הגשה לבית המשפט, יש להגיש את המקור באנגלית יחד עם תרגום מוסמך או מושבע לשפת בית המשפט. מתרגם מושבע מכיר את המינוח המקומי ואת הדרישות הפורמליות של מסמכים משפטיים. גרסאות של דוח זה בשפות אחרות מלבד אנגלית הן תרגומים אוטומטיים שנועדו לשמש כנקודת התייחסות בלבד.",
   "English original in this archive: {file}": "המקור באנגלית בארכיון זה: {file}",
   "English original of this report, sealed": "המקור באנגלית של דוח זה, חתום",
-  "English original of the signed PDF": "המקור באנגלית של קובץ ה-PDF החתום"
+  "English original of the signed PDF": "המקור באנגלית של קובץ ה-PDF החתום",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "פסאודו-סודי זקוק למודול הפרוטוקול שלו. בקש מהמנהל הראשי להתקין אותו בדף זה.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "פסאודו-סודי פועל על מודול פרוטוקול נפרד: {name} {version} מאת {author}, ברישיון {license}. TgWitness מוריד בדיוק את הגרסה הזו מ-GitHub, בודק כל קובץ מול ה-SHA-256 שנקבע במהדורה זו וטוען אותה. אין צורך בהפעלה מחדש.",
+  "Install and turn on": "התקן והפעל",
+  "Source code and license": "קוד מקור ורישיון",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "מודול הפרוטוקול: {name} {version} מאת {author}, רישיון {license}. קבציו נבדקים בכל הפעלה מול ה-SHA-256 שנקבע במהדורה זו.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "מודול הפרוטוקול: {name} {version} מאת {author}, רישיון {license}, מותקן בסביבת Python.",
+  "Downloading and checking the module…": "מוריד ובודק את המודול…",
+  "Module installed. Pseudo-secret is on for this account.": "המודול הותקן. פסאודו-סודי מופעל עבור חשבון זה.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "מודול הפסאודו-סודי שונה מהגרסה שנקבעה במהדורת TgWitness זו, ולכן לא נטען. התקן אותו שוב.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "מודול הפסאודו-סודי עבר את הבדיקה אך לא הצליח לפעול. עדכן את TgWitness והתקן את המודול שוב.",
+  "Only the main administrator can install the pseudo-secret module.": "רק המנהל הראשי יכול להתקין את מודול הפסאודו-סודי.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "לא ניתן היה להוריד את מודול הפסאודו-סודי מ-GitHub דרך נתיב החיבור של סביבת העבודה הזו. בדוק את החיבור ונסה שוב."
 }

@@ -6492,7 +6492,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "¿Aceptar todas las solicitudes entrantes en TgWitness? Los chats aceptados no llegan a los demás dispositivos de esta cuenta.",
   "Pseudo-secret settings saved.": "Configuración de «pseudo-secreto» guardada.",
   "Request sent. The chat opens when the other side accepts.": "Solicitud enviada. El chat se abre cuando la otra parte la acepta.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret requiere el paquete opcional kiaro-telethon-secret-chat. Instala TgWitness con el complemento secret-chats y reinicia el panel.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Pseudo-secreto necesita su módulo de protocolo, que aún no está instalado.",
   "Turn on pseudo-secret for this account first.": "Activa primero la función «pseudo-secreto» para esta cuenta.",
   "This needs a Telegram user, not a group or channel.": "Para ello se necesita un usuario de Telegram, no un grupo ni un canal.",
   "Telegram has no user with this username.": "No hay ningún usuario en Telegram con este nombre de usuario.",
@@ -8904,5 +8904,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Recomendación: para los tribunales, presente el original en inglés junto con una traducción certificada o jurada al idioma del tribunal. Un traductor jurado conoce la terminología local y los requisitos formales de los documentos judiciales. Las versiones de este informe en idiomas distintos del inglés son traducciones automáticas que sirven únicamente a título orientativo.",
   "English original in this archive: {file}": "Original en inglés en este archivo ZIP: {file}",
   "English original of this report, sealed": "Original en inglés de este informe, sellado",
-  "English original of the signed PDF": "Original en inglés del PDF firmado"
+  "English original of the signed PDF": "Original en inglés del PDF firmado",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Pseudo-secreto necesita su módulo de protocolo. Pida al administrador principal que lo instale en esta página.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Pseudo-secreto funciona con un módulo de protocolo independiente: {name} {version}, de {author}, con licencia {license}. TgWitness descarga exactamente esta versión desde GitHub, comprueba cada archivo con el SHA-256 fijado en esta versión y lo carga. No hace falta reiniciar.",
+  "Install and turn on": "Instalar y activar",
+  "Source code and license": "Código fuente y licencia",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Módulo de protocolo: {name} {version}, de {author}, licencia {license}. Sus archivos se comprueban en cada inicio con el SHA-256 fijado en esta versión.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Módulo de protocolo: {name} {version}, de {author}, licencia {license}, instalado en el entorno de Python.",
+  "Downloading and checking the module…": "Descargando y comprobando el módulo…",
+  "Module installed. Pseudo-secret is on for this account.": "Módulo instalado. Pseudo-secreto está activado para esta cuenta.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "El módulo de pseudo-secreto difiere de la versión fijada por esta versión de TgWitness, por lo que no se ha cargado. Instálelo de nuevo.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "El módulo de pseudo-secreto superó la comprobación, pero no pudo iniciarse. Actualice TgWitness e instálelo de nuevo.",
+  "Only the main administrator can install the pseudo-secret module.": "Solo el administrador principal puede instalar el módulo de pseudo-secreto.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "No se ha podido descargar el módulo de pseudo-secreto desde GitHub a través de la ruta de conexión de este espacio de trabajo. Compruebe la conexión e inténtelo de nuevo."
 }

@@ -6453,7 +6453,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "จะรับทุกคำขอที่เข้ามาใน TgWitness หรือไม่? การสนทนาที่ได้รับการยอมรับจะไม่ส่งต่อไปยังอุปกรณ์อื่น ๆ ของบัญชีนี้",
   "Pseudo-secret settings saved.": "การตั้งค่า \"Pseudo-secret\" ได้ถูกบันทึกแล้ว",
   "Request sent. The chat opens when the other side accepts.": "คำขอได้ส่งไปแล้ว การสนทนาจะเปิดขึ้นเมื่อฝ่ายตรงข้ามยอมรับ",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret จำเป็นต้องใช้แพ็กเกจ kiaro-telethon-secret-chat (เป็นตัวเลือก) ติดตั้ง TgWitness พร้อมตัวเลือก secret-chats และรีสตาร์ทแผงควบคุม",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Pseudo-secret ต้องใช้โมดูลโปรโตคอล ซึ่งยังไม่ได้ติดตั้ง",
   "Turn on pseudo-secret for this account first.": "เปิดโหมด pseudo-secret สำหรับบัญชีนี้ก่อน",
   "This needs a Telegram user, not a group or channel.": "ต้องเป็นผู้ใช้ Telegram ไม่ใช่กลุ่มหรือช่อง",
   "Telegram has no user with this username.": "Telegram ไม่มีผู้ใช้ที่มีชื่อผู้ใช้ดังกล่าว",
@@ -8848,5 +8848,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "คำแนะนำ: สำหรับการยื่นต่อศาล ให้ยื่นต้นฉบับภาษาอังกฤษพร้อมกับการแปลที่ได้รับการรับรองหรือแปลโดยผู้แปลที่ได้รับการสาบานในภาษาของศาล ผู้แปลที่ได้รับการสาบานจะเข้าใจศัพท์เฉพาะท้องถิ่นและข้อกำหนดทางการสำหรับเอกสารศาล เวอร์ชันของรายงานนี้ในภาษาอื่นนอกเหนือจากภาษาอังกฤษเป็นการแปลโดยเครื่องเพื่อใช้เป็นข้อมูลเบื้องต้นเท่านั้น",
   "English original in this archive: {file}": "ต้นฉบับภาษาอังกฤษในไฟล์เก็บถาวรนี้: {file}",
   "English original of this report, sealed": "ต้นฉบับภาษาอังกฤษของรายงานนี้ ผนึกแล้ว",
-  "English original of the signed PDF": "ต้นฉบับภาษาอังกฤษของ PDF ที่ลงนามแล้ว"
+  "English original of the signed PDF": "ต้นฉบับภาษาอังกฤษของ PDF ที่ลงนามแล้ว",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Pseudo-secret ต้องใช้โมดูลโปรโตคอล โปรดขอให้ผู้ดูแลระบบหลักติดตั้งในหน้านี้",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Pseudo-secret ทำงานบนโมดูลโปรโตคอลแยกต่างหาก: {name} {version} โดย {author} สัญญาอนุญาต {license} TgWitness จะดาวน์โหลดเวอร์ชันนี้โดยตรงจาก GitHub ตรวจสอบทุกไฟล์กับค่า SHA-256 ที่กำหนดไว้ในรุ่นนี้ แล้วจึงโหลด ไม่ต้องรีสตาร์ท",
+  "Install and turn on": "ติดตั้งและเปิดใช้",
+  "Source code and license": "ซอร์สโค้ดและสัญญาอนุญาต",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "โมดูลโปรโตคอล: {name} {version} โดย {author} สัญญาอนุญาต {license} ไฟล์ของโมดูลจะถูกตรวจสอบทุกครั้งที่เริ่มทำงานกับค่า SHA-256 ที่กำหนดไว้ในรุ่นนี้",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "โมดูลโปรโตคอล: {name} {version} โดย {author} สัญญาอนุญาต {license} ติดตั้งอยู่ในสภาพแวดล้อม Python",
+  "Downloading and checking the module…": "กำลังดาวน์โหลดและตรวจสอบโมดูล…",
+  "Module installed. Pseudo-secret is on for this account.": "ติดตั้งโมดูลแล้ว เปิด Pseudo-secret สำหรับบัญชีนี้แล้ว",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "โมดูล Pseudo-secret ไม่ตรงกับเวอร์ชันที่กำหนดไว้ใน TgWitness รุ่นนี้ จึงไม่ได้โหลด โปรดติดตั้งอีกครั้ง",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "โมดูล Pseudo-secret ผ่านการตรวจสอบแล้วแต่เริ่มทำงานไม่ได้ โปรดอัปเดต TgWitness แล้วติดตั้งโมดูลอีกครั้ง",
+  "Only the main administrator can install the pseudo-secret module.": "มีเพียงผู้ดูแลระบบหลักเท่านั้นที่ติดตั้งโมดูล Pseudo-secret ได้",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "ไม่สามารถดาวน์โหลดโมดูล Pseudo-secret จาก GitHub ผ่านเส้นทางเชื่อมต่อของพื้นที่ทำงานนี้ได้ โปรดตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง"
 }

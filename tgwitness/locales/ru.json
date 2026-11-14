@@ -7073,7 +7073,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "Принимать все входящие запросы в TgWitness? Принятые чаты не попадут на другие устройства аккаунта.",
   "Pseudo-secret settings saved.": "Настройки псевдосекрета сохранены.",
   "Request sent. The chat opens when the other side accepts.": "Запрос отправлен. Чат откроется, когда собеседник примет запрос.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Для псевдосекрета нужен дополнительный пакет kiaro-telethon-secret-chat. Установите TgWitness с дополнением secret-chats и перезапустите панель.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Для псевдосекрета нужен протокольный модуль, он ещё не установлен.",
   "Turn on pseudo-secret for this account first.": "Сначала включите псевдосекрет для этого аккаунта.",
   "This needs a Telegram user, not a group or channel.": "Для этого требуется пользователь Telegram, а не группа или канал.",
   "Telegram has no user with this username.": "В Telegram нет пользователя с таким именем.",
@@ -8962,5 +8962,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Рекомендация: для суда необходимо подать оригинал на английском языке вместе с заверенным или присяжным переводом на язык суда. Присяжный переводчик владеет местной терминологией и знает формальные требования к судебным документам. Версии этого отчёта на языках, отличных от английского, представляют собой машинные переводы, предназначенные исключительно для ознакомления.",
   "English original in this archive: {file}": "Английский оригинал в этом архиве: {file}",
   "English original of this report, sealed": "Английский оригинал этого отчёта, запечатанный",
-  "English original of the signed PDF": "Английский оригинал подписанного PDF"
+  "English original of the signed PDF": "Английский оригинал подписанного PDF",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Для псевдосекрета нужен протокольный модуль. Попросите главного администратора установить его на этой странице.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Псевдосекрет работает на отдельном протокольном модуле: {name} {version}, автор {author}, лицензия {license}. TgWitness скачивает именно эту версию с GitHub, сверяет каждый файл с SHA-256, зафиксированным в этом выпуске, и подключает её. Перезапуск не нужен.",
+  "Install and turn on": "Установить и включить",
+  "Source code and license": "Исходный код и лицензия",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Протокольный модуль: {name} {version}, автор {author}, лицензия {license}. Его файлы при каждом запуске сверяются с SHA-256, зафиксированным в этом выпуске.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Протокольный модуль: {name} {version}, автор {author}, лицензия {license}, установлен в окружение Python.",
+  "Downloading and checking the module…": "Скачиваем и проверяем модуль…",
+  "Module installed. Pseudo-secret is on for this account.": "Модуль установлен. Псевдосекрет включён для этого аккаунта.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Модуль псевдосекрета отличается от версии, зафиксированной в этом выпуске TgWitness, поэтому он не загружен. Установите его заново.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Модуль псевдосекрета прошёл проверку, но не запустился. Обновите TgWitness и установите модуль заново.",
+  "Only the main administrator can install the pseudo-secret module.": "Установить модуль псевдосекрета может только главный администратор.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Не удалось скачать модуль псевдосекрета с GitHub через маршрут подключения этой рабочей области. Проверьте подключение и повторите попытку."
 }

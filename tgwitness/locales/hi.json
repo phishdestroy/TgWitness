@@ -6492,7 +6492,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "क्या आप TgWitness में हर आने वाले अनुरोध को स्वीकार करते हैं? स्वीकृत चैट इस खाते के अन्य उपकरणों तक नहीं पहुँचते।",
   "Pseudo-secret settings saved.": "छद्म-गोपनीय सेटिंग्स सहेजी गईं।",
   "Request sent. The chat opens when the other side accepts.": "अनुरोध भेजा गया। जब दूसरी ओर स्वीकार कर लेगी तो चैट खुलेगी।",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "स्यूडो-सीक्रेट के लिए वैकल्पिक पैकेज kiaro-telethon-secret-chat आवश्यक है। secret-chats अतिरिक्त के साथ TgWitness इंस्टॉल करें और पैनल को पुनः आरंभ करें।",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "छद्म-गोपनीय के लिए उसका प्रोटोकॉल मॉड्यूल चाहिए, जो अभी इंस्टॉल नहीं है।",
   "Turn on pseudo-secret for this account first.": "सबसे पहले इस खाते के लिए स्यूडो-सीक्रेट चालू करें।",
   "This needs a Telegram user, not a group or channel.": "इसके लिए टेलीग्राम उपयोगकर्ता चाहिए, समूह या चैनल नहीं।",
   "Telegram has no user with this username.": "Telegram पर इस उपयोगकर्ता नाम वाला कोई उपयोगकर्ता नहीं है।",
@@ -8896,5 +8896,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "सिफारिश: अदालत के लिए, अंग्रेजी मूल के साथ अदालत की भाषा में प्रमाणित या शपथ-प्राप्त अनुवाद दाखिल करें। एक शपथ-प्राप्त अनुवादक स्थानीय शब्दावली और अदालत दस्तावेजों की औपचारिक आवश्यकताओं को जानता है। अंग्रेजी के अलावा अन्य भाषाओं में इस रिपोर्ट के संस्करण परिचय के लिए मशीन अनुवाद हैं।",
   "English original in this archive: {file}": "इस आर्काइव में अंग्रेज़ी मूल: {file}",
   "English original of this report, sealed": "इस रिपोर्ट का अंग्रेज़ी मूल, सीलबंद",
-  "English original of the signed PDF": "हस्ताक्षरित PDF का अंग्रेज़ी मूल"
+  "English original of the signed PDF": "हस्ताक्षरित PDF का अंग्रेज़ी मूल",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "छद्म-गोपनीय के लिए उसका प्रोटोकॉल मॉड्यूल चाहिए। मुख्य प्रशासक से इसे इस पृष्ठ पर इंस्टॉल करने को कहें।",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "छद्म-गोपनीय एक अलग प्रोटोकॉल मॉड्यूल पर चलता है: {name} {version}, लेखक {author}, लाइसेंस {license}। TgWitness ठीक यही संस्करण GitHub से डाउनलोड करता है, हर फ़ाइल को इस रिलीज़ में तय SHA-256 से जाँचता है और उसे लोड करता है। पुनः आरंभ की ज़रूरत नहीं है।",
+  "Install and turn on": "इंस्टॉल करें और चालू करें",
+  "Source code and license": "स्रोत कोड और लाइसेंस",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "प्रोटोकॉल मॉड्यूल: {name} {version}, लेखक {author}, लाइसेंस {license}। इसकी फ़ाइलें हर बार शुरू होने पर इस रिलीज़ में तय SHA-256 से जाँची जाती हैं।",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "प्रोटोकॉल मॉड्यूल: {name} {version}, लेखक {author}, लाइसेंस {license}, Python परिवेश में इंस्टॉल है।",
+  "Downloading and checking the module…": "मॉड्यूल डाउनलोड और जाँचा जा रहा है…",
+  "Module installed. Pseudo-secret is on for this account.": "मॉड्यूल इंस्टॉल हो गया। इस खाते के लिए छद्म-गोपनीय चालू है।",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "छद्म-गोपनीय मॉड्यूल इस TgWitness रिलीज़ में तय संस्करण से अलग है, इसलिए उसे लोड नहीं किया गया। इसे फिर से इंस्टॉल करें।",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "छद्म-गोपनीय मॉड्यूल जाँच में पास हुआ, पर शुरू नहीं हो सका। TgWitness अपडेट करें और मॉड्यूल फिर से इंस्टॉल करें।",
+  "Only the main administrator can install the pseudo-secret module.": "केवल मुख्य प्रशासक ही छद्म-गोपनीय मॉड्यूल इंस्टॉल कर सकता है।",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "छद्म-गोपनीय मॉड्यूल को इस कार्यक्षेत्र के कनेक्शन मार्ग के माध्यम से GitHub से डाउनलोड नहीं किया जा सका। कनेक्शन जाँचें और फिर प्रयास करें।"
 }

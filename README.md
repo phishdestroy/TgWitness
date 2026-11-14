@@ -73,7 +73,7 @@ The installer checks package hashes and release signatures against its embedded 
 | **Understand the people** | Available profiles, avatar and gift observations with dates, bio links and a history of changes. Collection can pause and resume. [Panel →](docs/PANEL.md) |
 | **Make a clear report** | Pick chats or individual messages, edit the cover, choose a design and charts, then preview and download PDF, HTML or JSON. [Reports →](docs/CASE_REPORTS.md) |
 | **Export once or keep watching** | Account exports, accessible history and continuous observation, with separate workspaces and keys for each account. [Collection modes →](docs/COLLECTION-MODES.md) |
-| **Work with Secret Chats** | An integrated conversation view and exports for chats created or accepted by TgWitness, using the optional protocol module. [Secret Chats →](docs/PSEUDO-SECRET.md) |
+| **Work with Secret Chats** | An integrated conversation view and exports for chats created or accepted by TgWitness, using a protocol module the panel installs with one button. [Secret Chats →](docs/PSEUDO-SECRET.md) |
 | **Let someone check the result** | Signed archives, a standalone verifier, retained checkpoints and optional timestamps, GitHub acquisition attestations or Intel TDX measurements. [Checks →](docs/EVIDENCE.md) |
 
 Self-hosted. Encrypted session storage. Localhost panel by default. No telemetry.

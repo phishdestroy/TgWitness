@@ -6453,7 +6453,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "在 TgWitness 中接受所有传入请求吗？被接受的聊天记录不会同步到该账户的其他设备上。",
   "Pseudo-secret settings saved.": "伪私密设置已保存。",
   "Request sent. The chat opens when the other side accepts.": "请求已发送。待对方接受后，聊天窗口将自动打开。",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret 需要可选的 kiaro-telethon-secret-chat 软件包。请安装带有 secret-chats 扩展功能的 TgWitness，并重启面板。",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "伪私密需要其协议模块，该模块尚未安装。",
   "Turn on pseudo-secret for this account first.": "请先为此账户开启伪私密。",
   "This needs a Telegram user, not a group or channel.": "此功能需要 Telegram 用户，而非群组或频道。",
   "Telegram has no user with this username.": "Telegram 上没有该用户名的用户。",
@@ -8848,5 +8848,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "建议：提交至法院时，应将英文原件与经认证或宣誓翻译的、译为法院指定语言的译文一并提交。宣誓翻译员熟悉当地术语及法院文件的形式要求。本报告的英文以外语言版本均为供参考的机器翻译。",
   "English original in this archive: {file}": "此归档中的英文原件：{file}",
   "English original of this report, sealed": "本报告的英文原件，已封印",
-  "English original of the signed PDF": "签名版 PDF 的英文原件"
+  "English original of the signed PDF": "签名版 PDF 的英文原件",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "伪私密需要其协议模块。请让主管理员在此页面安装。",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "伪私密运行在独立的协议模块上：{name} {version}，作者 {author}，许可证 {license}。TgWitness 会从 GitHub 下载这一确切版本，按本版本固定的 SHA-256 核对每个文件，然后加载。无需重启。",
+  "Install and turn on": "安装并开启",
+  "Source code and license": "源代码和许可证",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "协议模块：{name} {version}，作者 {author}，许可证 {license}。每次启动时都会按本版本固定的 SHA-256 核对其文件。",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "协议模块：{name} {version}，作者 {author}，许可证 {license}，已安装在 Python 环境中。",
+  "Downloading and checking the module…": "正在下载并检查模块…",
+  "Module installed. Pseudo-secret is on for this account.": "模块已安装。已为此账户开启伪私密。",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "伪私密模块与本 TgWitness 版本固定的版本不一致，因此未加载。请重新安装。",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "伪私密模块已通过检查，但无法启动。请更新 TgWitness 并重新安装该模块。",
+  "Only the main administrator can install the pseudo-secret module.": "只有主管理员可以安装伪私密模块。",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "无法通过此工作区的连接路径从 GitHub 下载伪私密模块。请检查连接后重试。"
 }

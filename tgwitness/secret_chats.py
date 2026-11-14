@@ -2,12 +2,8 @@ import asyncio
 import hashlib
 import json
 import logging
-import os
-from pathlib import Path
 import secrets
-import shlex
 import shutil
-import sys
 import time
 
 from telethon import utils
@@ -15,16 +11,12 @@ from telethon.errors import FloodWaitError
 from telethon.tl import types
 from telethon.tl.tlobject import TLObject
 
+from . import secret_module
 from .monitoring import capture_settings
 from .store import canonical
 from .workers import complete_in_thread
 
-try:
-    import telethon_secret_chat as library
-    from telethon_secret_chat.schema import secret_tl as library_tl
-except ImportError:
-    library = library_tl = None
-
+library = library_tl = VaultStorage = None
 LOG = logging.getLogger("tgwitness.secret_chats")
 SETTING = "secret_chats"
 STATE = "secret_chats"
@@ -34,8 +26,7 @@ HIDDEN = {"key", "iv"}
 QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", "DecryptedMessageActionCommitKey",
          "DecryptedMessageActionAbortKey", "DecryptedMessageActionNoop", "DecryptedMessageActionNotifyLayer",
          "DecryptedMessageActionResend"}
-UNAVAILABLE = ("Pseudo-secret needs the optional package kiaro-telethon-secret-chat. "
-               "Install TgWitness with the secret-chats extra and restart the panel.")
+UNAVAILABLE = "Pseudo-secret needs its protocol module, which is not installed yet."
 SAME = ("direction", "seq_no", "text", "ttl", "reply_to_random_id", "entities", "media")
 
 
@@ -43,11 +34,31 @@ def available():
     return library is not None
 
 
-def install_command():
-    root = Path(__file__).resolve().parent.parent
-    parts = [sys.executable, "-m", "pip", "install"]
-    parts += ["-e", str(root) + "[secret-chats]"] if (root / "pyproject.toml").is_file() else ["tgwitness[secret-chats]"]
-    return "& " + " ".join("'" + part.replace("'", "''") + "'" for part in parts) if os.name == "nt" else shlex.join(parts)
+def bind():
+    global library, library_tl, VaultStorage
+    try:
+        import telethon_secret_chat as module
+        from telethon_secret_chat.schema import secret_tl
+    except ImportError:
+        return False
+
+    class Storage(module.MemoryStorage):
+
+        def __init__(self, vault):
+            super().__init__()
+            self.vault = vault
+            saved = vault.read(STATE)
+            if saved:
+                state = decode(saved)
+                if not all(isinstance(state.get(group), dict) for group in ("chats", "out", "in")):
+                    raise ValueError("The saved secret-chat state is damaged.")
+                self._state = state
+
+        def _write(self):
+            self.vault.save(STATE, encode(self._state))
+
+    library, library_tl, VaultStorage = module, secret_tl, Storage
+    return True
 
 
 def of(collector):
@@ -150,21 +161,7 @@ def retain_file(temporary, media_root):
     return digest, size, repaired
 
 
-if library is not None:
-    class VaultStorage(library.MemoryStorage):
-
-        def __init__(self, vault):
-            super().__init__()
-            self.vault = vault
-            saved = vault.read(STATE)
-            if saved:
-                state = decode(saved)
-                if not all(isinstance(state.get(group), dict) for group in ("chats", "out", "in")):
-                    raise ValueError("The saved secret-chat state is damaged.")
-                self._state = state
-
-        def _write(self):
-            self.vault.save(STATE, encode(self._state))
+bind()
 
 
 class SecretChats:
@@ -570,7 +567,7 @@ class SecretChats:
         return {"available": available(), "settings": settings(self.store), "connected": connected, "error": self.error,
                 "has_session": bool((self.collector.vault.read("credentials") or {}).get("session")),
                 "interaction_problem": interaction_problem,
-                "install_command": None if available() else install_command(),
+                "module": secret_module.describe(),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
                 "records": display(records),
                 "next_before": records[0]["seq"] if more and after is None else None,

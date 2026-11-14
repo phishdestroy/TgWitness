@@ -78,7 +78,7 @@ show what arrived.
 Scope of these modes:
 
 - **Secret Chats** use the included [Pseudo-secret integration](PSEUDO-SECRET.md),
-  with its optional protocol dependency and per-account enable switch. Cloud history
+  with a protocol module installed from the panel and a per-account enable switch. Cloud history
   and Takeout use a separate acquisition path.
 - **Offline periods.** After a restart TgWitness resumes the saved update position, asks
   Telegram for missed updates and rechecks chats. Telegram keeps a bounded backlog, so after

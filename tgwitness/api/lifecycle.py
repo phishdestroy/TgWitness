@@ -5,6 +5,7 @@ from .. import interactions
 from .. import modes
 from .. import pdf_report
 from .. import replica
+from .. import secret_module
 from .. import tuning
 from ..access import AccessControl
 from ..account_export import AccountExport
@@ -79,6 +80,8 @@ class LifecycleOperations:
                         rule["enabled"] = True
                 store.set_setting("capture", policy)
             await complete_in_thread(modes.migrate, store)
+            if not self.access:
+                await complete_in_thread(secret_module.restore, self.root)
             collector = Collector(
                 store,
                 vault,

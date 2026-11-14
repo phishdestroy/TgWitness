@@ -6453,7 +6453,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "Có chấp nhận mọi yêu cầu đến trong TgWitness không? Các cuộc trò chuyện được chấp nhận sẽ không được chuyển đến các thiết bị khác của tài khoản này.",
   "Pseudo-secret settings saved.": "Đã lưu cài đặt Bí mật giả.",
   "Request sent. The chat opens when the other side accepts.": "Yêu cầu đã được gửi. Cuộc trò chuyện sẽ mở ra khi bên kia chấp nhận.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret yêu cầu gói tùy chọn kiaro-telethon-secret-chat. Cài đặt TgWitness cùng với tiện ích bổ sung secret-chats và khởi động lại bảng điều khiển.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Bí mật giả cần mô-đun giao thức, hiện chưa được cài đặt.",
   "Turn on pseudo-secret for this account first.": "Trước tiên, hãy bật Bí mật giả cho tài khoản này.",
   "This needs a Telegram user, not a group or channel.": "Tính năng này yêu cầu người dùng Telegram, không phải nhóm hay kênh.",
   "Telegram has no user with this username.": "Telegram không có người dùng nào có tên người dùng này.",
@@ -8848,5 +8848,17 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Khuyến nghị: đối với tòa án, hãy nộp bản gốc tiếng Anh kèm theo bản dịch được chứng nhận hoặc bản dịch có tuyên thệ sang ngôn ngữ của tòa án. Một dịch giả có tuyên thệ am hiểu thuật ngữ địa phương và các yêu cầu chính thức đối với tài liệu tòa án. Các phiên bản của báo cáo này bằng các ngôn ngữ khác ngoài tiếng Anh là bản dịch máy nhằm mục đích tham khảo.",
   "English original in this archive: {file}": "Bản gốc tiếng Anh trong kho lưu trữ này: {file}",
   "English original of this report, sealed": "Bản gốc tiếng Anh của báo cáo này, đã niêm phong",
-  "English original of the signed PDF": "Bản gốc tiếng Anh của tệp PDF có chữ ký"
+  "English original of the signed PDF": "Bản gốc tiếng Anh của tệp PDF có chữ ký",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Bí mật giả cần mô-đun giao thức. Hãy nhờ quản trị viên chính cài đặt nó trên trang này.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Bí mật giả chạy trên một mô-đun giao thức riêng: {name} {version} của {author}, giấy phép {license}. TgWitness tải đúng phiên bản này từ GitHub, đối chiếu từng tệp với SHA-256 được cố định trong bản phát hành này rồi nạp nó. Không cần khởi động lại.",
+  "Install and turn on": "Cài đặt và bật",
+  "Source code and license": "Mã nguồn và giấy phép",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Mô-đun giao thức: {name} {version} của {author}, giấy phép {license}. Các tệp của nó được đối chiếu mỗi lần khởi động với SHA-256 được cố định trong bản phát hành này.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Mô-đun giao thức: {name} {version} của {author}, giấy phép {license}, được cài trong môi trường Python.",
+  "Downloading and checking the module…": "Đang tải và kiểm tra mô-đun…",
+  "Module installed. Pseudo-secret is on for this account.": "Đã cài mô-đun. Bí mật giả đã bật cho tài khoản này.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Mô-đun Bí mật giả khác với phiên bản được cố định trong bản phát hành TgWitness này nên không được nạp. Hãy cài đặt lại.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Mô-đun Bí mật giả đã qua kiểm tra nhưng không khởi động được. Hãy cập nhật TgWitness rồi cài đặt lại mô-đun.",
+  "Only the main administrator can install the pseudo-secret module.": "Chỉ quản trị viên chính mới có thể cài đặt mô-đun Bí mật giả.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Không thể tải mô-đun Bí mật giả từ GitHub qua tuyến kết nối của không gian làm việc này. Hãy kiểm tra kết nối rồi thử lại."
 }
