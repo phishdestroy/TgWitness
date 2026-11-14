@@ -104,17 +104,17 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
   .topbar .top-actions { flex:1 1 100%; max-width:100%; }
 }
 
-.first-run-live{display:grid;grid-template-columns:max-content minmax(0,230px) minmax(0,1fr);margin:16px 0 20px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2);overflow:hidden}
+.first-run-live{display:grid;grid-template-columns:max-content minmax(0,270px) minmax(0,1fr);margin:16px 0 20px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2);overflow:hidden}
 .first-run-check{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center;column-gap:14px;row-gap:8px;padding:11px 16px;border-top:1px solid var(--border)}
 .first-run-check:first-child{border-top:0}
 .first-run-check .hint{margin:0}
 .first-run-check>strong{overflow-wrap:anywhere}
-.first-run-sub{border-top:0;padding-top:0}
+.first-run-sub{border-top:0;padding-top:0;padding-bottom:9px}
 .first-run-hosts{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:6px 8px}
 .first-run-host{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:2px 10px 2px 4px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text);font:500 12.5px/20px var(--mono);overflow-wrap:anywhere}
 .first-run-host .health-badge{padding:3px;border-radius:50%}
 .first-run-host .health-badge span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-@supports not (grid-template-columns:subgrid){.first-run-live{display:block}.first-run-check{grid-template-columns:minmax(96px,max-content) minmax(0,230px) minmax(0,1fr)}}
+@supports not (grid-template-columns:subgrid){.first-run-live{display:block}.first-run-check{grid-template-columns:minmax(96px,max-content) minmax(0,270px) minmax(0,1fr)}}
 .first-run-next-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
 .setting-help-block{margin:4px 0 12px}
 .setting-help-block summary{cursor:pointer;color:var(--muted);font-size:13px}
