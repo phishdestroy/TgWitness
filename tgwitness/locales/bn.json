@@ -8139,7 +8139,6 @@
   "Your server": "আপনার সার্ভার",
   "Your way in": "আপনার প্রবেশপথ",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP পাসওয়ার্ড সুরক্ষায় WinZip AES (দুর্বল কী স্ট্রেচিং) ব্যবহার করা হয়। সংবেদনশীল রপ্তানির জন্য 20টির দীর্ঘ এলোমেলো পাসফ্রেজ ব্যবহার করুন, অথবা সিল করা ডেলিভারি ব্যবহার করুন।",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "অ্যাকাউন্টের সংযোগ",
   "accounts allowed": "অনুমোদিত অ্যাকাউন্ট",
@@ -8996,5 +8995,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version Desktop API-এর জন্য একটি মোবাইল প্ল্যাটফর্ম বর্ণনা করে।",
   "The app_version does not match the reviewed official version formats.": "app_version পর্যালোচিত অফিসিয়াল সংস্করণ ফরম্যাটের সাথে মেলে না।",
   "The mobile system_lang_code has no region component.": "মোবাইলে system_lang_code-এর কোনো অঞ্চল উপাদান নেই।",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon-এর স্কিমা স্তর পর্যালোচিত প্রোফাইল বেসলাইন (230) থেকে পৃথক; পর্যালোচনা লাইব্রেরি সামঞ্জস্য।"
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon-এর স্কিমা স্তর পর্যালোচিত প্রোফাইল বেসলাইন (230) থেকে পৃথক; পর্যালোচনা লাইব্রেরি সামঞ্জস্য।",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "এই চ্যাট এখন TgWitness-এ সংরক্ষিত আছে; অ্যাকাউন্টের অন্যান্য ডিভাইসে এটি পাওয়া যায় না।",
+  "The other side ended the chat.": "অন্য পক্ষ চ্যাটটি শেষ করেছে।",
+  "Ended from TgWitness.": "TgWitness থেকে শেষ হয়েছে।",
+  "Telegram reports that the chat no longer exists.": "Telegram রিপোর্ট করে যে চ্যাটটি আর নেই।",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP পাসওয়ার্ড সুরক্ষায় WinZip AES (দুর্বল কী স্ট্রেচিং) ব্যবহার করা হয়। ২০টিরও বেশি অক্ষরের একটি দীর্ঘ এলোমেলো পাসফ্রেজ ব্যবহার করুন, অথবা সংবেদনশীল এক্সপোর্টের জন্য শক্তিশালী এনক্রিপশন নির্বাচন করুন।",
+  "Transport route checked for this connection.": "এই সংযোগের জন্য পরিবহন পথ যাচাই করা হয়েছে।"
 }

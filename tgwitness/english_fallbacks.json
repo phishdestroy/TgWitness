@@ -3068,7 +3068,7 @@
   "Your session key never leaves your server",
   "Your way in",
   "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.",
   "[mycloud] type = mega user = … pass = …",
   "a different key than this report",
   "a hidden sender",

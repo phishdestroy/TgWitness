@@ -6638,7 +6638,6 @@
   "Password encryption": "Шифрування паролем",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
   "Stronger encryption (scrypt + AES-GCM, requires verify.py to open)": "Посилене шифрування (scrypt + AES-GCM, для відкриття потрібен verify.py)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "Захист ZIP використовує WinZip AES зі слабким посиленням ключа. Використовуйте випадкову парольну фразу завдовжки від 20 символів або sealed delivery для конфіденційних експортів.",
   "Open with an independently obtained verify.py: python verify.py unseal-password export.tgwpw --out output-file. Then verify the decrypted evidence.": "Відкрийте за допомогою незалежно отриманого verify.py: python verify.py unseal-password export.tgwpw --out output-file. Потім перевірте розшифровані докази.",
   "Open the encrypted ZIP with 7-Zip or WinRAR and the password. Keep the password separate from the file.": "Відкрийте зашифрований ZIP у 7-Zip або WinRAR з паролем. Зберігайте пароль окремо від файлу.",
   "Encryption wraps the unchanged signed file. The password is not stored; without it the file cannot be opened.": "Шифрування зберігає підписаний файл без змін. Пароль не зберігається; без нього файл неможливо відкрити.",
@@ -9092,5 +9091,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version описує мобільну платформу для Desktop API.",
   "The app_version does not match the reviewed official version formats.": "app_version не відповідає перевіреним форматам офіційних версій.",
   "The mobile system_lang_code has no region component.": "Мобільний system_lang_code не має регіонального компонента.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Схема Telethon відрізняється від базового профілю, що розглядається (230); перевірте сумісність бібліотек."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Схема Telethon відрізняється від базового профілю, що розглядається (230); перевірте сумісність бібліотек.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Цей чат тепер зберігається в TgWitness; інші пристрої цього облікового запису не отримують його.",
+  "The other side ended the chat.": "Інша сторона завершила чат.",
+  "Ended from TgWitness.": "Завершено з TgWitness.",
+  "Telegram reports that the chat no longer exists.": "Telegram повідомляє, що чат більше не існує.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Захист ZIP-файлів паролем використовує WinZip AES (слабке розтягування ключа). Використовуйте довгу випадкову парольну фразу довжиною 20 і більше символів або виберіть «сильніше шифрування» для експорту конфіденційних даних.",
+  "Transport route checked for this connection.": "Перевірено маршрут передачі даних для цього з’єднання."
 }

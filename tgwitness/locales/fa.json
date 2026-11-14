@@ -8139,7 +8139,6 @@
   "Your server": "سرور شما",
   "Your way in": "راه دسترسی شما",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "حفاظت با رمز عبور ZIP از AES وین‌زیپ (کشش کلید ضعیف) استفاده می‌کند. از یک عبارت عبور تصادفی طولانی با بیش از 20نقطه استفاده کنید، یا برای صادرات حساس از تحویل مهر و موم‌شده استفاده کنید.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "اتصال‌های حساب‌ها",
   "accounts allowed": "حساب‌های مجاز",
@@ -8996,5 +8995,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version یک پلتفرم موبایل را برای Desktop API توصیف می‌کند.",
   "The app_version does not match the reviewed official version formats.": "app_version با فرمت‌های رسمی بازبینی‌شده مطابقت ندارد.",
   "The mobile system_lang_code has no region component.": "موبایل system_lang_code فاقد مؤلفهٔ منطقه است.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "لایهٔ اسکیمای Telethon با مبنای پروفایل بررسی‌شده (230) متفاوت است؛ سازگاری کتابخانهٔ بازبینی."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "لایهٔ اسکیمای Telethon با مبنای پروفایل بررسی‌شده (230) متفاوت است؛ سازگاری کتابخانهٔ بازبینی.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "این چت اکنون در TgWitness موجود است؛ سایر دستگاه‌های حساب به آن دسترسی ندارند.",
+  "The other side ended the chat.": "طرف دیگر چت را پایان داد.",
+  "Ended from TgWitness.": "پایان از TgWitness.",
+  "Telegram reports that the chat no longer exists.": "Telegram گزارش می‌دهد که این چت دیگر وجود ندارد.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "حفاظت از رمز عبور ZIP از WinZip AES (کشیدن کلید ضعیف) استفاده می‌کند. از یک عبارت عبور تصادفی و طولانی با بیش از ۲۰ کاراکتر استفاده کنید، یا برای صادرات حساس، رمزگذاری قوی‌تر را انتخاب کنید.",
+  "Transport route checked for this connection.": "مسیر انتقال برای این اتصال بررسی شد."
 }

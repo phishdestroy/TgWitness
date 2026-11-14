@@ -8100,7 +8100,6 @@
   "Your server": "Máy chủ của bạn",
   "Your way in": "Cách bắt đầu",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "Bảo vệ mật khẩu ZIP sử dụng WinZip AES (kỹ thuật kéo dài khóa yếu). Sử dụng cụm mật khẩu ngẫu nhiên dài từ 20 ký tự trở lên, hoặc phương thức giao hàng niêm phong cho các tệp xuất nhạy cảm.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "kết nối của tài khoản",
   "accounts allowed": "tài khoản được phép",
@@ -8948,5 +8947,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version mô tả một nền tảng di động dành cho Desktop API.",
   "The app_version does not match the reviewed official version formats.": "app_version không khớp với các định dạng phiên bản chính thức đã được xem xét.",
   "The mobile system_lang_code has no region component.": "Thiết bị di động system_lang_code không có thành phần vùng.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Lớp lược đồ của Telethon khác với cơ sở tham chiếu của hồ sơ đã được xem xét (230); xem xét khả năng tương thích của thư viện."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Lớp lược đồ của Telethon khác với cơ sở tham chiếu của hồ sơ đã được xem xét (230); xem xét khả năng tương thích của thư viện.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Cuộc trò chuyện này hiện được lưu trữ trong TgWitness; các thiết bị khác của tài khoản sẽ không nhận được nó.",
+  "The other side ended the chat.": "Bên kia đã kết thúc cuộc trò chuyện.",
+  "Ended from TgWitness.": "Kết thúc từ TgWitness.",
+  "Telegram reports that the chat no longer exists.": "Telegram thông báo rằng cuộc trò chuyện đó không còn tồn tại.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Tính năng bảo vệ bằng mật khẩu ZIP sử dụng WinZip AES (kỹ thuật kéo dài khóa yếu). Hãy sử dụng cụm mật khẩu ngẫu nhiên dài từ 20 ký tự trở lên, hoặc chọn phương thức mã hóa mạnh hơn cho các tệp xuất nhạy cảm.",
+  "Transport route checked for this connection.": "Tuyến truyền tải đã được kiểm tra cho kết nối này."
 }

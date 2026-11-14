@@ -8139,7 +8139,6 @@
   "Your server": "आपका सर्वर",
   "Your way in": "आपकी पहुँच",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP पासवर्ड सुरक्षा WinZip AES (कमजोर की स्ट्रेचिंग) का उपयोग करती है। संवेदनशील एक्सपोर्ट के लिए 20+ वर्णों का एक लंबा रैंडम पासफ़्रेज़, या सीलबंद डिलीवरी का उपयोग करें।",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "खातों के कनेक्शन",
   "accounts allowed": "अनुमत खाते",
@@ -8996,5 +8995,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version Desktop API के लिए एक मोबाइल प्लेटफ़ॉर्म का वर्णन करता है।",
   "The app_version does not match the reviewed official version formats.": "app_version समीक्षित आधिकारिक संस्करण प्रारूपों से मेल नहीं खाता है।",
   "The mobile system_lang_code has no region component.": "मोबाइल system_lang_code में कोई क्षेत्र घटक नहीं है।",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon की स्कीमा परत समीक्षित प्रोफ़ाइल आधाररेखा (230) से भिन्न है; समीक्षा पुस्तकालय संगतता।"
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon की स्कीमा परत समीक्षित प्रोफ़ाइल आधाररेखा (230) से भिन्न है; समीक्षा पुस्तकालय संगतता।",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "यह चैट अब TgWitness में मौजूद है; खाते के अन्य डिवाइस इसे प्राप्त नहीं करते हैं।",
+  "The other side ended the chat.": "दूसरी तरफ ने चैट समाप्त की।",
+  "Ended from TgWitness.": "TgWitness से समाप्त।",
+  "Telegram reports that the chat no longer exists.": "Telegram रिपोर्ट करता है कि चैट अब मौजूद नहीं है।",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP पासवर्ड सुरक्षा WinZip AES (कमजोर की स्ट्रेचिंग) का उपयोग करती है। 20+ वर्णों का एक लंबा यादृच्छिक पासफ़्रेज़ का उपयोग करें, या संवेदनशील एक्सपोर्ट के लिए मजबूत एन्क्रिप्शन चुनें।",
+  "Transport route checked for this connection.": "इस कनेक्शन के लिए परिवहन मार्ग की जाँच की गई।"
 }

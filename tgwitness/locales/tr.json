@@ -8139,7 +8139,6 @@
   "Your server": "Sunucunuz",
   "Your way in": "Başlangıç",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP şifre koruması, WinZip AES (zayıf anahtar uzatma) kullanır. Hassas dışa aktarımlar için 20 karakterden oluşan uzun ve rastgele bir parola kullanın veya mühürlü teslimat yöntemini tercih edin.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "hesap bağlantıları",
   "accounts allowed": "izin verilen hesaplar",
@@ -8996,5 +8995,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version, Desktop API için bir mobil platformu tanımlar.",
   "The app_version does not match the reviewed official version formats.": "app_version, incelenen resmi sürüm biçimleriyle eşleşmemektedir.",
   "The mobile system_lang_code has no region component.": "Mobil system_lang_code bölgesel bileşene sahip değildir.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon'nın şema katmanı, incelenen profil temel değerinden (230) farklıdır; kütüphane uyumluluğunu gözden geçirin."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon'nın şema katmanı, incelenen profil temel değerinden (230) farklıdır; kütüphane uyumluluğunu gözden geçirin.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Bu sohbet artık TgWitness'te saklanmaktadır; hesabın diğer cihazlarına aktarılmaz.",
+  "The other side ended the chat.": "Karşı taraf sohbeti sonlandırdı.",
+  "Ended from TgWitness.": "TgWitness'ten sonlandırıldı.",
+  "Telegram reports that the chat no longer exists.": "Telegram, sohbetin artık mevcut olmadığını bildirir.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP şifre koruması, WinZip AES’i (zayıf anahtar uzatma) kullanır. 20 karakterden uzun rastgele bir parolası kullanın veya hassas dışa aktarımlar için “daha güçlü şifreleme” seçeneğini tercih edin.",
+  "Transport route checked for this connection.": "Bu bağlantı için aktarım yolu kontrol edildi."
 }

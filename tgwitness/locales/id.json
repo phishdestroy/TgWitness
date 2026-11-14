@@ -8100,7 +8100,6 @@
   "Your server": "Server Anda",
   "Your way in": "Cara Anda memulai",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "Perlindungan kata sandi ZIP menggunakan WinZip AES (peregangan kunci lemah). Gunakan frasa sandi acak yang panjang (20 karakter atau lebih), atau pengiriman tertutup untuk ekspor data sensitif.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "koneksi akun",
   "accounts allowed": "akun yang diizinkan",
@@ -8948,5 +8947,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version menggambarkan platform seluler untuk Desktop API.",
   "The app_version does not match the reviewed official version formats.": "app_version tidak sesuai dengan format versi resmi yang telah ditinjau.",
   "The mobile system_lang_code has no region component.": "Ponsel system_lang_code tidak memiliki komponen wilayah.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Lapisan skema Telethon berbeda dari profil dasar yang ditinjau (230); tinjau kompatibilitas pustaka."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Lapisan skema Telethon berbeda dari profil dasar yang ditinjau (230); tinjau kompatibilitas pustaka.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Percakapan ini kini tersimpan di TgWitness; perangkat lain yang terhubung ke akun tersebut tidak mendapatkannya.",
+  "The other side ended the chat.": "Pihak lain mengakhiri obrolan tersebut.",
+  "Ended from TgWitness.": "Berakhir dari TgWitness.",
+  "Telegram reports that the chat no longer exists.": "Telegram melaporkan bahwa obrolan tersebut tidak ada lagi.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Perlindungan kata sandi ZIP menggunakan WinZip AES (peregangan kunci lemah). Gunakan frasa sandi acak yang panjang (20 karakter atau lebih), atau pilih enkripsi yang lebih kuat untuk ekspor data sensitif.",
+  "Transport route checked for this connection.": "Rute transportasi telah diperiksa untuk koneksi ini."
 }
