@@ -39,7 +39,7 @@ export function createSystemMap({root,json,tr,openSettings,getState,options,toas
   async function load(){
     if(!visible||document.hidden)return;clearTimeout(timer);request?.abort();const serial=++generation,controller=new AbortController();request=controller;
     const parent=options()?.signal,abort=()=>controller.abort();parent?.addEventListener('abort',abort,{once:true});if(parent?.aborted)controller.abort();const timeout=setTimeout(()=>controller.abort('timeout'),15000);
-    try{const result=await json('system-map',undefined,{root:true,signal:controller.signal});if(serial!==generation||!visible||controller.signal.aborted)return;if(result.schema!==1||!Array.isArray(result.accounts))throw new Error('Invalid snapshot');data=result;received=Date.now();failed=false;q('error').hidden=true;render(true);}
+    try{const result=await json('system-map',undefined,{root:true,signal:controller.signal});if(serial!==generation||!visible||controller.signal.aborted)return;if(result.schema!==1||!Array.isArray(result.accounts))throw new Error('Invalid snapshot');for(const account of result.accounts)if(account.id==='default'&&account.label==='Main workspace')account.label=tr('Main workspace');data=result;received=Date.now();failed=false;q('error').hidden=true;render(true);}
     catch(error){if(serial!==generation||!visible||controller.signal.aborted&&controller.signal.reason!=='timeout')return;failed=true;q('error').hidden=false;q('error').textContent=tr('The map could not refresh. The last successful snapshot remains visible.');freshness();}
     finally{clearTimeout(timeout);parent?.removeEventListener('abort',abort);if(serial===generation){request=null;if(visible&&!document.hidden)timer=setTimeout(load,5000);}}
   }

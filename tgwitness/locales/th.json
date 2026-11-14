@@ -8220,7 +8220,7 @@
   "route check": "ตรวจเส้นทาง",
   "route check · WARP": "ตรวจเส้นทาง · WARP",
   "routes": "เส้นทาง",
-  "selecting": "การเลือก",
+  "selecting": "กำลังเลือก",
   "service types": "ประเภทบริการ",
   "session · API keys · signing key": "เซสชัน · คีย์ API · คีย์ลงนาม",
   "some exceptions set in Telegram could not be kept; edit them here or in the Telegram app": "บางข้อยกเว้นที่กำหนดใน Telegram ไม่สามารถรักษาไว้ได้; แก้ไขได้ที่นี่หรือในแอป Telegram",
@@ -8954,5 +8954,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram รายงานว่าการสนทนานี้ไม่มีอยู่อีกต่อไป",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "การป้องกันด้วยรหัสผ่าน ZIP ใช้ WinZip AES (การขยายกุญแจที่อ่อนแอ) ให้ใช้คำผ่านแบบสุ่มที่ยาวอย่างน้อย 20 ตัวอักษร หรือเลือก \"การเข้ารหัสที่แข็งแกร่งกว่า\" สำหรับการส่งออกข้อมูลที่ละเอียดอ่อน",
   "Transport route checked for this connection.": "ได้ตรวจสอบเส้นทางขนส่งสำหรับการเชื่อมต่อนี้แล้ว",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "บันทึกการสนทนาและรูปภาพเพียงครั้งเดียว; ไฟล์อื่น ๆ จะถูกเลือกภายใต้ การบันทึกและไฟล์ ไม่มีกระบวนการใดที่ทำงานในพื้นหลังอย่างต่อเนื่อง ไฟล์เก็บถาวรได้รับการลงนาม และ verify.py จะตรวจสอบทุกไฟล์ภายในนั้น"
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "บันทึกการสนทนาและรูปภาพเพียงครั้งเดียว; ไฟล์อื่น ๆ จะถูกเลือกภายใต้ การบันทึกและไฟล์ ไม่มีกระบวนการใดที่ทำงานในพื้นหลังอย่างต่อเนื่อง ไฟล์เก็บถาวรได้รับการลงนาม และ verify.py จะตรวจสอบทุกไฟล์ภายในนั้น",
+  "running": "กำลังทำงาน",
+  "cancelled": "ยกเลิก"
 }

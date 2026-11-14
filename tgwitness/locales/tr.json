@@ -8259,7 +8259,7 @@
   "route check": "rota denetimi",
   "route check · WARP": "rota denetimi · WARP",
   "routes": "yollar",
-  "selecting": "seçme",
+  "selecting": "seçiliyor",
   "service types": "hizmet türleri",
   "session · API keys · signing key": "oturum · API anahtarları · imza anahtarı",
   "some exceptions set in Telegram could not be kept; edit them here or in the Telegram app": "Telegram’da ayarlanan bazı istisnalar korunamadı; bunları buradan veya Telegram uygulamasından düzenleyebilirsiniz",
@@ -9002,5 +9002,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram, sohbetin artık mevcut olmadığını bildirir.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP şifre koruması, WinZip AES’i (zayıf anahtar uzatma) kullanır. 20 karakterden uzun rastgele bir parolası kullanın veya hassas dışa aktarımlar için “daha güçlü şifreleme” seçeneğini tercih edin.",
   "Transport route checked for this connection.": "Bu bağlantı için aktarım yolu kontrol edildi.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Sohbetleri ve fotoğrafları bir kez kaydedin; diğer dosyalar Kayıt ve dosyalar altında seçilir. Arka planda çalışan hiçbir işlem yoktur. Arşiv imzalanmıştır ve verify.py içindeki her dosyayı kontrol eder."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Sohbetleri ve fotoğrafları bir kez kaydedin; diğer dosyalar Kayıt ve dosyalar altında seçilir. Arka planda çalışan hiçbir işlem yoktur. Arşiv imzalanmıştır ve verify.py içindeki her dosyayı kontrol eder.",
+  "running": "çalışıyor",
+  "cancelled": "iptal edildi"
 }

@@ -8220,7 +8220,7 @@
   "route check": "路由检查",
   "route check · WARP": "路由检查 · WARP",
   "routes": "路由",
-  "selecting": "选择",
+  "selecting": "选择中",
   "service types": "服务类型",
   "session · API keys · signing key": "会话 · API 密钥 · 签名密钥",
   "some exceptions set in Telegram could not be kept; edit them here or in the Telegram app": "Telegram 中设置的某些例外无法保留；请在此处或 Telegram 应用中进行编辑",
@@ -8954,5 +8954,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram报告称该聊天已不存在。",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP密码保护使用WinZip AES（弱密钥拉伸）。请使用20个字符以上的长随机密码短语，或针对敏感导出文件选择“更强的加密”选项。",
   "Transport route checked for this connection.": "已验证此连接的传输路径。",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "仅保存一次聊天记录和照片；其他文件在 记录和文件 下进行选择。后台不会有程序持续运行。存档文件经过签名，verify.py 会验证其中的每个文件。"
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "仅保存一次聊天记录和照片；其他文件在 记录和文件 下进行选择。后台不会有程序持续运行。存档文件经过签名，verify.py 会验证其中的每个文件。",
+  "running": "运行中",
+  "cancelled": "已取消"
 }

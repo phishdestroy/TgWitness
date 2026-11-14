@@ -987,8 +987,8 @@
   },
   "Exporting": "Экспорт",
   "{captured} messages": "Сообщения {captured}",
-  "Export ready: {captured} messages, signed.": "Готово к экспорту: подписанные сообщения {captured}.",
-  "Export saved: {captured} messages, signed.": "Экспорт сохранён: подписанные сообщения {captured}.",
+  "Export ready: {captured} messages, signed.": "Экспорт готов: сообщений — {captured}, подписан.",
+  "Export saved: {captured} messages, signed.": "Экспорт сохранён: сообщений — {captured}, подписан.",
   "Export failed: {error}": "Ошибка экспорта: {error}",
   "unknown error": "неизвестная ошибка",
   "Save signed export": "Сохранить подписанный экспорт",
@@ -7590,7 +7590,7 @@
   "Current process": "Текущий процесс",
   "Current process only": "Только текущий процесс",
   "Current profile photo": "Текущая фотография профиля",
-  "Current run: {messages} new messages · {time} elapsed.": "Текущий запуск: {messages} новых сообщений · {time} прошло времени.",
+  "Current run: {messages} new messages · {time} elapsed.": "Текущий запуск: новых сообщений — {messages} · прошло {time}.",
   "Current tunnel health": "Текущее состояние туннеля",
   "DC ": "DC",
   "DEMO · SYNTHETIC SNAPSHOT": "ДЕМО · СИНТЕТИЧЕСКИЙ СНИМОК",
@@ -9068,5 +9068,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram сообщает, что этого чата больше нет.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Защита ZIP паролем использует WinZip AES со слабым усилением ключа. Задайте длинную случайную парольную фразу от 20 символов, а для конфиденциальных экспортов выберите усиленное шифрование.",
   "Transport route checked for this connection.": "Маршрут для этого подключения проверен.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Сохраняет чаты и фото один раз; другие файлы выбираются в разделе «Сбор и файлы». В фоне ничего не работает. Архив подписан, и verify.py проверяет в нём каждый файл."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Сохраняет чаты и фото один раз; другие файлы выбираются в разделе «Сбор и файлы». В фоне ничего не работает. Архив подписан, и verify.py проверяет в нём каждый файл.",
+  "running": "выполняется",
+  "cancelled": "отменено"
 }

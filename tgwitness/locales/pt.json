@@ -9010,5 +9010,7 @@
   "Telegram reports that the chat no longer exists.": "O Telegram informa que o chat não existe mais.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "A proteção por senha do ZIP usa o WinZip AES (estiramento de chave fraco). Use uma senha aleatória longa com mais de 20 caracteres ou escolha a criptografia mais forte para exportações confidenciais.",
   "Transport route checked for this connection.": "Rota de transporte verificada para esta conexão.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Salve conversas e fotos uma única vez; outros arquivos são selecionados em Gravação e arquivos. Nada continua rodando em segundo plano. O arquivo é assinado, e verify.py verifica todos os arquivos nele contidos."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Salve conversas e fotos uma única vez; outros arquivos são selecionados em Gravação e arquivos. Nada continua rodando em segundo plano. O arquivo é assinado, e verify.py verifica todos os arquivos nele contidos.",
+  "running": "em execução",
+  "cancelled": "cancelado"
 }
