@@ -2,7 +2,7 @@
 .exports-tabs [role=tab]{border:0;background:transparent;color:var(--muted);padding:10px 16px;border-radius:8px;font:inherit;cursor:pointer}
 .exports-tabs [aria-selected=true]{background:var(--surface-2);color:var(--text);font-weight:650}
 #exports-progress{display:grid;gap:8px;margin-bottom:16px}#exports-progress progress{width:100%}
-.exports-history{margin-top:20px}.export-receipt{display:grid;grid-template-columns:70px 100px minmax(180px,1fr) 90px auto;gap:12px;align-items:start;padding:14px 0;border-top:1px solid var(--border);font-size:13px}
+.exports-history{margin-top:20px}.export-receipt{display:grid;grid-template-columns:84px 100px minmax(180px,1fr) 90px auto;gap:12px;align-items:start;padding:14px 0;border-top:1px solid var(--border);font-size:13px}
 .export-receipt time{color:var(--muted)}.export-receipt details{min-width:0}.export-receipt code{display:block;overflow-wrap:anywhere;font-size:12px;margin:8px 0}
 .export-receipt details[open]{grid-column:1/-1}.exports-history .card-heading{align-items:start}
 .export-receipt>p{grid-column:1/-1;margin:0}@media(min-width:768px){.export-receipt>button{grid-column:1/3;justify-self:start}.export-receipt>details.external-signature:not([open]){grid-column:3/-1}}

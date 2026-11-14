@@ -459,6 +459,26 @@ Every signed ZIP carries `coverage.json`, the HTML report opens with the same su
   (777000), other sessions ended from the workspace, only-session periods, witness probe
   counts and phone call updates. See [accounts](ACCOUNTS.md#witness-probe).
 
+### Update sequence (`pts`)
+
+Telegram numbers message-related updates with `pts`: one sequence for the account
+(private chats and basic groups together) and one for each channel or supergroup. The
+collector records each stretch it received without a hole as a `coverage.sequence`
+record: the first and last `pts`, the number of updates of each type, and whether they
+were pushed live or returned by `getDifference` or `getChannelDifference`. A break is a
+`coverage.gap` record, and `coverage.gap_closed` names the `pts` from which the sequence
+is whole again.
+
+An unbroken stretch shows that every update Telegram numbered in that sequence between
+its first and last `pts` reached this collector's Telegram client. It says nothing about
+content Telegram never sent to this account, about the time before the first recorded
+`pts`, or about stretches the collector did not write down. A `pts` advance that no
+recorded stretch or difference covers is shown as a break.
+
+`GET /api/continuity` answers for an interval (`since`, `until`, `chat_id`) whether each
+sequence is unbroken and lists the breaks with their reasons. `verify.py` prints the same
+from the records of an archive under **Sequence continuity**.
+
 ### Missing message numbers (`gap_summary`)
 
 **Preview.** `coverage.json` → `gap_summary` measures the numbers Telegram assigned and this
