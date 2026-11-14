@@ -469,7 +469,7 @@
     <div id="secret-install" class="secret-install" hidden><p id="secret-install-text"></p><div class="route-actions"><button class="primary" type="button" id="secret-install-run">Install and turn on</button><a id="secret-install-source" target="_blank" rel="noopener noreferrer">Source code and license</a></div></div>
     <div class="route-actions" id="secret-recovery" hidden><button class="secondary" id="secret-connect" type="button" data-open="connection">Connect account</button><button class="secondary" id="secret-reconnect" type="button">Retry</button></div>
     <p class="notice warning" id="secret-sync" hidden role="status"></p>
-    <p class="notice" id="secret-interaction" hidden></p>
+    <p class="notice warning" id="secret-interaction" hidden></p>
     <div class="secret-layout"><div class="secret-side">
     <div class="secret-list-tools"><input id="secret-search" type="search" placeholder="Search chats" aria-label="Search chats"><span id="secret-count" class="hint"></span></div>
     <form class="secret-start" id="secret-start"><label for="secret-user">Start a chat with</label><input autocomplete="off" id="secret-user" maxlength="64" placeholder="@username or user ID" spellcheck="false"><button class="primary" type="submit">Start chat</button></form>
@@ -1447,7 +1447,7 @@
       <p id="connect-warp-note" class="hint">Each selected account gets its own local tunnel. Cloudflare chooses the exit address and country; separate tunnels may share an exit IP.</p>
       <details><summary>External requests</summary><label class="check-label"><input type="checkbox" id="connect-outside" checked>Use this route for timestamps, notifications and other requests outside Telegram</label><p class="hint">Applying replaces a separately configured external proxy. MTProxy carries only Telegram, so external requests stay off until you configure their own proxy under Advanced. Proxied routes never fall back to Direct.</p></details>
     </fieldset>
-    <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" id="connect-prepare" hidden>Prepare and check</button><button type="button" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button><button type="button" id="connect-continue" hidden>Continue</button></div>
+    <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" class="primary" id="connect-prepare" hidden>Prepare and check</button><button type="button" class="primary" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button><button type="button" class="primary" id="connect-continue" hidden>Continue</button></div>
     <p id="connect-progress" class="hint" role="status" aria-live="polite"></p><div id="connect-review" class="connect-review"></div>
     </div></details>
   </section>

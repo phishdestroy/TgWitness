@@ -106,7 +106,7 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout9').then(({create
 });
 let connectionView;
 const connectionViewReady=import('./views/connection.js?v=2').then(({createConnectionView})=>{
-  connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm});
+  connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
@@ -1880,7 +1880,7 @@ function excerpt(e) {
     case "network.policy_changed": return exposureNames[p.exposure]||p.exposure;
     case "network.probe": return p.connected ? tr("Telegram transport connected") : tr("Connection failed")+failure;
     case "network.connection_checked": return p.telegram_connected?[tr("Telegram connected"),p.exit_ip,countryName(p.country),p.warp?"WARP: "+p.warp:"",
-      p.latency_ms!=null?p.latency_ms+" ms":""].filter(Boolean).join(" · "):tr("Not connected")+failure;
+      p.latency_ms!=null?tr("{n} ms",{n:p.latency_ms}):""].filter(Boolean).join(" · "):tr("Not connected")+failure;
     case "connection.opened": case "connection.closed": return [routeText(p.route),p.dc_id?"DC "+p.dc_id:"",
       p.role==="current"?"":tr({candidate:"sign-in connection",other:"helper connection"}[p.role]||p.role)].filter(Boolean).join(" · ");
     case "account.sessions": return tr("Other sessions: {n}",{n:(p.others||[]).length})+

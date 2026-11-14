@@ -536,8 +536,6 @@ class SecretChats:
     async def close(self, chat_id):
         manager = self.require()
         await self.acting(manager.close, chat_id, reason="ended from TgWitness")
-        self.note("closed", {"secret_chat_id": chat_id, "reason": "ended from TgWitness", "history_deleted_by_peer": False,
-                             "journal_copy": "kept; the journal is append-only"})
 
     @staticmethod
     def snapshot(chat):
@@ -567,6 +565,7 @@ class SecretChats:
         return {"available": available(), "settings": settings(self.store), "connected": connected, "error": self.error,
                 "has_session": bool((self.collector.vault.read("credentials") or {}).get("session")),
                 "interaction_problem": interaction_problem,
+                "interaction_goal": interaction_problem == interactions.GOAL_OFF,
                 "module": secret_module.describe(),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
                 "records": display(records),
