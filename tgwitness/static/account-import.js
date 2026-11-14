@@ -41,11 +41,11 @@
       }
       box.append(details);};
     if(independent&&result.independent_profile){
-      box.append(node("p","hint",tr("Independent authorization: Telegram sees a new Telegram Desktop session with this device. It is not taken from these files. If an independent login of this donor is already pending, its earlier device stays.")));
+      box.append(node("p","hint",tr("Independent authorization: the new session uses this device, not the one in these files. If an independent login of this account is already pending, its earlier device stays.")));
       device(result.independent_profile);
-    }else if(independent)box.append(node("p","hint",tr("Independent authorization: Telegram sees a new Telegram Desktop session on Windows. Its device model and Windows version are chosen when the authorization is created; they are not taken from these files.")));
+    }else if(independent)box.append(node("p","hint",tr("Independent authorization: the device of the new session is chosen when it is created, not taken from these files.")));
     if(profile){
-      box.append(node("p","hint",tr(independent?"Device of the donor session. TgWitness shows it to Telegram only while the donor approves the new authorization.":"Device shown to Telegram, taken from these files.")));
+      box.append(node("p","hint",tr(independent?"Device of the imported session.":"Device of this session, taken from these files.")));
       device(profile);
     }
     if(result.state==="missing_session"){

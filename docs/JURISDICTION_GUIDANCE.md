@@ -15,7 +15,7 @@ Canada, mainland China, Croatia, England and Wales, France, Georgia, Germany,
 India, Indonesia, Iran, Italy, Kazakhstan, Luxembourg, Malaysia, Malta, Mexico,
 Pakistan, the Philippines, Portugal, Russia, Saudi Arabia, Singapore, Slovenia,
 Spain, Turkey, Ukraine, the UAE, the United States and Vietnam. Other countries
-in the expert-examination catalog appear with examination guidance only. Scope notes
+in the expert-examination catalog have examination guidance only. Scope notes
 identify limits such as federal/state differences; a country is not a substitute
 for identifying the actual court. This is a coverage set, not a market ranking.
 
@@ -89,9 +89,9 @@ This task list guides package preparation and records the checks performed.
 
 Catalog version `2026-11-14.2` is a **research draft** with source links for every
 route; Iran's criminal route is marked `needs_local_review`. The Croatian, Georgian,
-Kazakh, Luxembourg, Maltese and Slovenian profiles were researched on 14 November 2026
-from official legislation portals; later amendments to the cited articles were not
-fully traced. For each filing, confirm
+Kazakh, Luxembourg, Maltese and Slovenian profiles cite official legislation portals as
+read on 14 November 2026; later amendments to the cited articles were traced only in
+part. For each filing, confirm
 current law and the actual court, acquisition authority, disclosure, authentication,
 hearsay where applicable, translation and formalities, and have the English guidance
 and native summary reviewed by a practitioner admitted there.
@@ -101,10 +101,10 @@ strengthen it. Journal verification uses the trusted collector key; retained wit
 allow comparison with an earlier independently observed journal boundary. A provider account
 owned by a separate party takes the host and hypervisor out of the operator's control.
 
-With safeguards selected, the appendix also lists practice references: the
+With safeguards selected, the appendix also cites the
 [ENFSI Best Practice Manual for the Forensic Examination of Digital Technology](https://enfsi.eu/wp-content/uploads/2016/09/1._forensic_examination_of_digital_technology_0.pdf)
-(ENFSI-BPM-FIT-01, version 01, November 2015). It is practice guidance for forensic
-laboratories, not law, and it does not decide admissibility in any court.
+(ENFSI-BPM-FIT-01, version 01, November 2015), practice guidance for forensic
+laboratories. It is not law and sets no admissibility rule for any court.
 
 Retention must be established for the actual object versions and permissions;
 encryption, an S3 endpoint or versioning alone is insufficient. See

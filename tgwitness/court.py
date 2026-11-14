@@ -343,8 +343,8 @@ UA_COVERT = ("Records of covert investigative (search) actions under chapter 21 
              "their own form. This draft is not such a record.")
 UA_UNVERIFIED = ("The timestamp receipts are included as collected. The package builder did not verify their signatures, "
                  "trust chains or binding to the checkpoint.")
-UA_LIMITS = ("A valid signature shows that these bytes were signed with the workspace key. It does not identify the author "
-             "of a message and does not show that the content of a message is true.",
+UA_LIMITS = ("A valid signature shows that these bytes are unchanged since they were signed with the workspace key. The "
+             "journal records the Telegram account and connection through which each message was received.",
              "Compare the signing key fingerprint with one obtained independently, not with the copy in this package.")
 
 

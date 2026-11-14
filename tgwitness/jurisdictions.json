@@ -1005,7 +1005,7 @@
       "law": "Code civil, articles 1322-1, 1322-2 and 1334; loi du 14 août 2000, article 18",
       "criminal_law": "Code de procédure pénale, articles 154 and 189",
       "basis": "A signature may be handwritten or electronic. An electronic private deed counts as an original when it gives reliable guarantees of integrity from its creation, and a judge may not reject an electronic signature solely because it is electronic.",
-      "prepare": "Preserve originals, video and the collection method, and explain how integrity was kept from first creation. The exporter's signature is not a qualified electronic signature and does not identify the Telegram sender.",
+      "prepare": "Preserve originals, video and the collection method, and explain how integrity was kept from first creation. The exporter's signature is not a qualified electronic signature.",
       "criminal": "Contraventions and délits are proved by official records or reports, or by witnesses (CPP articles 154 and 189). Other admissibility and procedure questions were not reviewed.",
       "human": "Collector or other competent witness; a technician appointed by the judge (NCPC article 432) where technical findings are needed.",
       "tasks": [
@@ -1052,7 +1052,7 @@
         "Record hashes and transfers",
         "Identify the witness who explains the collection"
       ],
-      "local": "Keep the original files, video and a description of the collection method. The court requires the best evidence a party can produce and may disallow evidence that is not the best available. The export software's signature is not a qualified electronic signature; it shows that the exported bytes are unchanged since signing, and who sent a message is shown by other evidence.",
+      "local": "Keep the original files, video and a description of the collection method. The court requires the best evidence a party can produce and may disallow evidence that is not the best available. The export software's signature is not a qualified electronic signature; it shows that the exported bytes are unchanged since signing.",
       "local_criminal": "In criminal proceedings the fullest and most satisfactory proof available must be produced. Keep originals, hash values and a record of every transfer, and identify a witness who can explain the collection. Confirm the procedure with counsel.",
       "sources": [
         {

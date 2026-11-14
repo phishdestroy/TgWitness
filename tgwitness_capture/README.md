@@ -26,7 +26,7 @@ The main application's collector is in [`tgwitness/`](../tgwitness/README.md).
 | Official Web | [`official.py`](official.py), [`official_api.py`](official_api.py), [`official_proof.py`](official_proof.py), [`gateway.py`](gateway.py) |
 | Trusted Live | [`trusted_runtime.py`](trusted_runtime.py), [`trusted_service.py`](trusted_service.py), [`trusted_anchor.py`](trusted_anchor.py), [`trusted_verify.py`](trusted_verify.py) |
 | Continuity | [`continuity.py`](continuity.py) |
-| AyuGram database interpretation and journal comparison | [`ayugram.py`](ayugram.py) |
+| AyuGram database reading and comparison | [`ayugram.py`](ayugram.py) |
 | Recorder interfaces | [static/](static/README.md) |
 
 ## Inspect the commands

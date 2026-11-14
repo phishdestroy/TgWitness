@@ -91,7 +91,6 @@ First time? Do it in this order:
 | Share something verifiable | [Export and verify](EVIDENCE.md#investigation-handoff) |
 | Publish checkpoints to a channel | [Witness bot](WITNESS.md#run-a-witness) |
 | Let others check the server itself | [High-assurance deployment](HIGH-ASSURANCE.md) |
-| Decide whether to rely on the tool as an examiner | [Tool validation package](VALIDATION.md) |
 
 ### Operate and connect
 
