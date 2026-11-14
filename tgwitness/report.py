@@ -1,5 +1,6 @@
 from . import render_data
 import base64
+import bisect
 import difflib
 import hashlib
 import html
@@ -2886,7 +2887,7 @@ class ChatHTML:
                + '<div class="bars">' + table([say("Participant"), "ID", say("Messages"), "", say("First message"),
                                                 say("Last message")], rows) + "</div>" + more + "</section>").encode("utf-8")
         if self.ids:
-            yield message_ids_section(say, next(self.numbers), self.ids).encode("utf-8")
+            yield message_ids_section(say, next(self.numbers), self.ids, self.context.get("journal_knowledge")).encode("utf-8")
         if self.context.get("journal_changes") is not None:
             yield journal_changes_section(say, next(self.numbers), self.meta.get("journal") or {},
                                           self.context["journal_changes"]).encode("utf-8")
@@ -3138,7 +3139,42 @@ def chat_subject(meta, context):
             "message_count": meta.get("message_count"), "chat_json_sha256": context.get("chat_json_sha256")}
 
 
-def message_ids_section(say, number, ids):
+def absent_known(say, entry):
+    return (say(JOURNAL_NOTICES.get(entry.get("kind"), "Deleted")) + " · " + utc_text(entry.get("at")) + " · "
+            + say("Observed versions, preserved" if entry.get("saved") else "No saved message"))
+
+
+def absent_rows(say, ids, knowledge):
+    if knowledge is None:
+        return [[low, high, None] for low, high in ids["missing_ranges"]]
+    keys = sorted(k for k, entry in knowledge.items() if type(k) is int and entry.get("at"))
+    first, last, segments = ids.get("first_id"), ids.get("last_id"), []
+
+    def add(low, high, text):
+        if segments and segments[-1][2] == text and segments[-1][1] == low - 1:
+            segments[-1][1] = high
+        else:
+            segments.append([low, high, text])
+
+    for key in keys:
+        if type(first) is int and key < first:
+            add(key, key, absent_known(say, knowledge[key]))
+    for low, high in ids["missing_ranges"]:
+        cursor = low
+        for key in keys[bisect.bisect_left(keys, low):bisect.bisect_right(keys, high)]:
+            if key > cursor:
+                add(cursor, key - 1, say("Not observed"))
+            add(key, key, absent_known(say, knowledge[key]))
+            cursor = key + 1
+        if cursor <= high:
+            add(cursor, high, say("Not observed"))
+    for key in keys:
+        if type(last) is int and key > last:
+            add(key, key, absent_known(say, knowledge[key]))
+    return segments
+
+
+def message_ids_section(say, number, ids, knowledge=None):
     out = section(number, "ids", say("Message numbers"), say(
         "This export contains a selection. Absent message numbers may have been excluded by the filters."
         if ids.get("selection_applied") else
@@ -3159,12 +3195,15 @@ def message_ids_section(say, number, ids):
                (say("Numbers in this range"), num(span)), (say("Messages present"), num(ids["present"])),
                (say("Numbers absent"), "<b>" + num(missing) + "</b>" + e(share)),
                (say("Runs of absent numbers"), num(len(ids["missing_ranges"])))])
-    shown = ids["missing_ranges"][:200]
+    segments = absent_rows(say, ids, knowledge)
+    shown = segments[:200]
     if shown:
-        rows = [[num(low) + ("" if low == high else " – " + num(high)), num(high - low + 1)] for low, high in shown]
-        out += "<h3>" + e(say("Absent numbers")) + "</h3>" + table([say("Message numbers"), say("Count")], rows)
-        out += '<p class="lead">' + e(say("… and {n} more runs.", n=len(ids["missing_ranges"]) - len(shown))
-                                      if len(ids["missing_ranges"]) > len(shown) else "") + " " + e(say(
+        columns = [say("Message numbers"), say("Count")] + ([say("Observed")] if knowledge is not None else [])
+        rows = [[num(low) + ("" if low == high else " – " + num(high)), num(high - low + 1)]
+                + ([e(text)] if knowledge is not None else []) for low, high, text in shown]
+        out += "<h3>" + e(say("Absent numbers")) + "</h3>" + table(columns, rows)
+        out += '<p class="lead">' + e(say("… and {n} more runs.", n=len(segments) - len(shown))
+                                      if len(segments) > len(shown) else "") + " " + e(say(
             "message-ids.json lists every absent number; verify.py recounts them from chat.json.")) + "</p>"
     return out + "</section>"
 

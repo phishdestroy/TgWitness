@@ -1388,11 +1388,17 @@ class ChatPDF:
                 self.lay.kv([(say("First message number"), self.ids["first_id"]), (say("Last message number"), self.ids["last_id"]),
                         (say("Numbers in this range"), span), (say("Messages present"), self.ids["present"]),
                         (say("Numbers absent"), self.ids["missing"]), (say("Runs of absent numbers"), len(self.ids["missing_ranges"]))])
-                if self.ids["missing_ranges"]:
-                    shown = self.ids["missing_ranges"][:200]
-                    self.lay.grid([say("Message numbers"), say("Count")],
-                             [[str(low) if low == high else str(low) + " – " + str(high), high - low + 1] for low, high in shown],
-                             (60, 40))
+                knowledge = self.context.get("journal_knowledge")
+                segments = report.absent_rows(say, self.ids, knowledge)
+                if segments:
+                    shown = segments[:200]
+                    label = lambda low, high: str(low) if low == high else str(low) + " – " + str(high)
+                    if knowledge is None:
+                        self.lay.grid([say("Message numbers"), say("Count")],
+                                 [[label(low, high), high - low + 1] for low, high, _ in shown], (60, 40))
+                    else:
+                        self.lay.grid([say("Message numbers"), say("Count"), say("Observed")],
+                                 [[label(low, high), high - low + 1, text] for low, high, text in shown], (22, 12, 66))
                     self.lay.text(say("message-ids.json lists every absent number; verify.py recounts them from chat.json."),
                              size=8.5, color=MUTED)
             else:
