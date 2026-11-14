@@ -25,7 +25,7 @@
 
 ## Unreleased
 
-- Account export: a chat split over several pages shows its charts and assessment on the first page only; later pages open at the messages.
+- Account export: a chat split over several pages shows its charts and assessment on the first page only; later pages open at the messages. The last step of first setup shows how many chats are chosen and which account is connected.
 - Coverage gaps in a chat: starts and stops of the program before observation first ran are no longer listed as a gap, so a new workspace does not open with a gap made by its own setup. A gap recorded at one moment shows its reason, and the journal words three more reasons in the panel language.
 - Reports count service messages under `Service messages`; the label `Service` stays for timestamp services. The chat list shows one priority star in each row instead of two, and the star stays visible in the selected row. On a phone the account counters no longer break a word in the middle.
 - Chat export by link: progress follows the number of messages read, so a chat read as one range no longer sits at 0% until the end. The states `running`, `selecting` and `cancelled` are translated, and the main workspace is named in the panel language in the list of accounts and on the system map.

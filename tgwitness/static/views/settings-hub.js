@@ -721,7 +721,7 @@ export function createSettingsHub(ctx) {
     }
     if(draft.step===6)await chatsForm(body,who,false);
     if(draft.step===7){
-      const summary=node('dl','setup-summary');for(const [key,value,go,more] of [['Goal',label(draft.goal),1,false],['Which chats?',label(draft.scope),6,false],['Telegram account',tr('Connected'),5,false],['Connection',label(draft.route),4,false],['Interface level',label(prefs.level),1,true],['Language',ctx.languages[prefs.language]||prefs.language,1,false],['Time zone',prefs.timezone,1,true]]){
+      const summary=node('dl','setup-summary');for(const [key,value,go,more] of [['Goal',label(draft.goal),1,false],['Which chats?',label(draft.scope)+(draft.scope==='selected'?' · '+draft.chat_ids.length.toLocaleString(document.documentElement.lang||undefined):''),6,false],['Telegram account',(account=>account?(account.username?'@'+account.username+' · ':'')+'ID '+account.id:tr('Connected'))(state.status?.collector?.account),5,false],['Connection',label(draft.route),4,false],['Interface level',label(prefs.level),1,true],['Language',ctx.languages[prefs.language]||prefs.language,1,false],['Time zone',prefs.timezone,1,true]]){
         summary.append(node('dt','',tr(key)));const dd=node('dd','',value);dd.append(button('Edit',async()=>{draft.step=go;if(more)moreOpen=true;await saveDraft();await renderWizard();},'text-link'));summary.append(dd);
       }body.append(summary);
       if(draft.unchecked)body.append(message('Connection was not checked. Starting can fail.','notice warning'));
