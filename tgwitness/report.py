@@ -814,7 +814,7 @@ CSS = (
     "background:var(--th)}.grid td{padding:7px 10px;overflow-wrap:break-word}.grid td small{overflow-wrap:anywhere}"
     "@media (max-width:600px){.scroll>.grid{width:max-content;min-width:100%}"
     ".grid th,.grid td{max-width:15em;overflow-wrap:anywhere}.grid th{overflow-wrap:normal}.grid .pill{white-space:normal}}"
-    ".scroll{overflow-x:auto}"
+    ".scroll{overflow-x:auto}.scroll>svg.chat-timeline{min-width:640px}"
     ".pill{display:inline-flex;align-items:center;gap:6px;padding:1px 7px;border-radius:3px;font-size:11.5px;"
     "font-weight:650;border:1px solid color-mix(in srgb,currentColor 30%,transparent);background:var(--tint);"
     "color:var(--accent);white-space:nowrap}"
