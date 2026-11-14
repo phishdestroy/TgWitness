@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Reports count service messages under `Service messages`; the label `Service` stays for timestamp services. The chat list shows one priority star in each row instead of two, and the star stays visible in the selected row. On a phone the account counters no longer break a word in the middle.
 - Chat export by link: progress follows the number of messages read, so a chat read as one range no longer sits at 0% until the end. The states `running`, `selecting` and `cancelled` are translated, and the main workspace is named in the panel language in the list of accounts and on the system map.
 - Panel: counts on every page use the panel language's number format, not the browser's. The **Just download** goal says that it saves chats and photos and where other files are chosen. The capture link on the sign-in screen no longer touches the button above it.
 - Journal and **Pseudo-secret**: how a Secret Chat ended, its acceptance in TgWitness and the route check are shown in the panel language. The password hint for ZIP exports names the stronger encryption offered beside it. `verify.py unseal-password` says that the password is wrong or the file was changed instead of printing `InvalidTag`. The daily chart keeps its date labels in right-to-left languages. Russian text uses one word for the handover extract.

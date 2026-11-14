@@ -1400,7 +1400,7 @@ def ending(say, producer, viewer_meta=None, data=""):
 def viewer_meta(say, kind, context, **extra):
     options = {**ReportOptions().model_dump(), **(context.get("options") or {})}
     if kind == "chat":
-        cats = {"text": say("Text"), "media": say("With media"), "edited": say("Edited"), "service": say("Service")}
+        cats = {"text": say("Text"), "media": say("With media"), "edited": say("Edited"), "service": say("Service messages")}
         hidden = []
     else:
         cats = {c: category_label(say, c) for c in CATEGORY_ORDER}
@@ -2894,7 +2894,7 @@ class ChatHTML:
                         (say("Participants"), num(len(self.people)), "violet", "users"),
                         (say("With media"), num(self.stats["media"]), "violet", "file"),
                         (say("Edited"), num(self.stats["edited"]), "warn", "edit"),
-                        (say("Service"), num(self.stats["service"]), "ok", "settings")]
+                        (say("Service messages"), num(self.stats["service"]), "ok", "settings")]
                        + [item + ("tag",) for item in absent]
                        + [(say("Period"), e(span_text(say, self.stats["first_at"], self.stats["last_at"])), "pink", "eye")])
                + toc([("summary", say("Summary")), ("people", say("Participants")), ("messages", say("Messages")),

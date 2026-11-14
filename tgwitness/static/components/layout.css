@@ -267,7 +267,7 @@
   .accounts-overview { flex-wrap: wrap; gap: 4px; }
   .accounts-overview .accounts-total { padding: 8px 10px; flex: 1 1 calc(33.333% - 4px); flex-wrap: wrap; gap: 2px 8px; white-space: normal; }
   .accounts-total strong { font-size: 20px; }
-  .accounts-total span { font-size: 11px; text-align: start; }
+  .accounts-total span { font-size: 11px; text-align: start; overflow-wrap: normal; word-break: normal; }
 }
 @media (max-width: 520px) {
   .chat-view-bar { flex-wrap: wrap; justify-content: flex-end; row-gap: 0; }

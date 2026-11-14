@@ -15,6 +15,8 @@
 .chat-priority .icon { width: 15px; height: 15px; }
 .chat-priority.on { color: var(--accent-text); }
 .chat-priority.on .icon { fill: currentColor; }
+.chat-item:has(.chat-priority) .chat-item-priority { display: none; }
+.chats-sidebar .chat-item.active .chat-priority { color: #fff; }
 .chat-auto { display: inline-flex; align-items: center; color: var(--muted); }
 .chat-auto .icon, .chat-item-badges .pill .icon { width: 12px; height: 12px; }
 .chat-item-badges .pill { gap: 4px; font-variant-numeric: tabular-nums; }
