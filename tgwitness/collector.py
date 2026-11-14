@@ -42,7 +42,7 @@ from . import tuning
 from .history import History
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
-from .telegram_client import WitnessClient, FLOOD_ERRORS
+from .telegram_client import WitnessClient, FLOOD_ERRORS, TOO_LONG_RECOVERY, request_method
 from .security import KeyLock
 from .workers import complete_in_thread
 from .store import RECEPTION, canonical, utcnow
@@ -239,6 +239,12 @@ SCOPE_RETRY_SECONDS = 300
 SCOPE_UNDETERMINED_MEANING = ("Telegram delivered updates from this chat, but the chat's details could not be read, "
                               "so it was not possible to check whether the chat belongs to the observation scope. "
                               "These updates were not recorded.")
+MIGRATED_MEANING = ("Telegram upgraded this group to a supergroup with a new chat ID. Observation continues in the new "
+                    "chat; the earlier messages stay in the original group.")
+CHANNEL_STATE_DROPPED_MEANING = ("The Telegram client could not request this channel's missed updates and discarded its "
+                                 "update position. Updates received in between may be missing.")
+FLOOD_GUARDED = {"recheck": ("messages.getHistory", "messages.getMessages", "channels.getMessages"),
+                 "watch": ("updates.getState",), "people": ("users.getUsers",)}
 RECONNECT_MEANING = ("Telegram's client library reconnected on its own. The connection was lost for an unknown "
                      "interval ending here; updates delivered during it were not received.")
 SALVAGE_WINDOW = 100
@@ -351,7 +357,17 @@ ACTIVITY_CLAIMS = (("snapshot:", "loading_messages"), ("scale:", "measuring_chat
 
 
 def recovered_source(update):
-    return "update_recovery" if getattr(update, "pts", None) == 0 else None
+    return getattr(update, "tgwitness_recovery", None) or ("update_recovery" if getattr(update, "pts", None) == 0
+                                                           else None)
+
+
+def recovered_kind(source):
+    return "message.recovered" if source == TOO_LONG_RECOVERY else "message.new"
+
+
+def method_of(exc):
+    request = getattr(exc, "request", None)
+    return request_method(request)["method"] if request is not None else None
 
 
 def probe_settings(store):
@@ -636,6 +652,9 @@ class Collector:
         self.chat_state_worker = None
         self.presence_worker = None
         self.recheck_wakeup = asyncio.Event()
+        self.recheck_resume_at = 0
+        self.recheck_continuing = set()
+        self.intake_resume_at = 0
         self.recheck_state = None
         self.resumed_state_at = None
         self.paused_drops = 0
@@ -656,7 +675,7 @@ class Collector:
 
     def status(self):
         credentials = self.vault.read("credentials")
-        backoff, paused_by = self.store.get_setting("rpc_backoff_until", 0), self.store.get_setting("rpc_backoff_method", None)
+        backoff, paused_by = self.pause_until(), self.store.get_setting("rpc_backoff_method", None)
         return {
             "network": self.route_status(),
             "phase": self.phase, "running": self.running,
@@ -692,7 +711,7 @@ class Collector:
             "probe_missed": self.probe_missed if self.running else None,
             "session_revoked": self.session_revoked if self.running else None,
             "max_handler_ms": round(self.max_handler_ms, 2),
-            "rpc_backoff_until": self.store.get_setting("rpc_backoff_until", 0),
+            "rpc_backoff_until": backoff,
             "rpc_backoff": self.store.get_setting("rpc_backoff", None),
             "rpc_activity": self.client.rpc_activity() if isinstance(self.client, WitnessClient) else None,
             "rpc_backoff_method": paused_by["method"] if paused_by and paused_by["until"] >= backoff - 2 else None,
@@ -908,7 +927,7 @@ class Collector:
             chat_id, entity, baseline = await self.intake.get()
             client = self.client
             options = scope_settings(self.store)["new_chats"]
-            while self.running and time.time() < self.store.get_setting("rpc_backoff_until", 0):
+            while self.running and time.time() < max(self.store.get_setting("rpc_backoff_until", 0), self.intake_resume_at):
                 await asyncio.sleep(1)
             try:
                 if baseline:
@@ -924,9 +943,9 @@ class Collector:
             except asyncio.CancelledError:
                 raise
             except FLOOD_ERRORS as exc:
-                until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-                self.store.set_setting("rpc_backoff_until", until)
-                self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds})
+                self.intake_resume_at = time.time() + exc.seconds
+                self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds,
+                                                       "method": method_of(exc)})
                 self.intake.put_nowait((chat_id, entity, baseline))
             except Exception as exc:
                 if self.handle_authorization_error(exc, "new chat intake", client=client):
@@ -1056,6 +1075,7 @@ class Collector:
                                      **options, **self.route_options())
         client.tgwitness_client_profile = device
         client.rpc_backoff_getter = lambda: self.store.get_setting("rpc_backoff_until", 0)
+        client.flood_getter = lambda: self.store.get_setting("rpc_flood_until", {})
         client.rpc_backoff_setter = self.telegram_paused
         client.updates_listener = lambda: client is self.client and not PROBE_CALL.get() and self.updates_arrived()
         from .rpc_pacing import AccountPacer
@@ -1082,6 +1102,7 @@ class Collector:
         client.exported_error_handler = exported_error
         client.connection_listener = lambda state: self.connection_changed(client, state)
         client.difference_gap_listener = self.difference_gap
+        client.channel_unavailable_listener = self.channel_unavailable
         for handler, builder in ((self.on_new, events.NewMessage()),
                                  (self.on_edit, events.MessageEdited()),
                                  (self.on_delete, events.MessageDeleted()),
@@ -1139,9 +1160,22 @@ class Collector:
         self.buffer_dropped = {}
 
     def telegram_paused(self, until, method=None):
-        if until > self.store.get_setting("rpc_backoff_until", 0):
-            self.store.set_setting("rpc_backoff_until", until)
-            self.store.set_setting("rpc_backoff_method", {"until": until, "method": method})
+        waits, key = self.flood_waits(), method or "unknown"
+        if until > waits.get(key, time.time()):
+            if until >= max(waits.values(), default=0):
+                self.store.set_setting("rpc_backoff_method", {"until": until, "method": key})
+            self.store.set_setting("rpc_flood_until", {**waits, key: until})
+
+    def flood_waits(self):
+        saved, now = self.store.get_setting("rpc_flood_until", {}), time.time()
+        return {key: until for key, until in saved.items()
+                if isinstance(until, (int, float)) and until > now} if isinstance(saved, dict) else {}
+
+    def flood_paused(self, guard):
+        return any(key in FLOOD_GUARDED[guard] for key in self.flood_waits())
+
+    def pause_until(self):
+        return max([self.store.get_setting("rpc_backoff_until", 0), *self.flood_waits().values()])
 
     def updates_arrived(self):
         self.updates_seen += 1
@@ -1163,8 +1197,7 @@ class Collector:
                 "completeness": "updates in this period may be missing"})
             self.recheck_wakeup.set()
         client = self.client
-        if (probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS
-                or time.time() < self.store.get_setting("rpc_backoff_until", 0)
+        if (probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS or self.flood_paused("watch")
                 or getattr(client, "_rpc_lock", None) and client._rpc_lock.locked()):
             return
         seen = self.updates_seen
@@ -1188,10 +1221,13 @@ class Collector:
         if account is None or self.paused_drops or not hasattr(session, "get_update_states"):
             return
         record = {"account_id": account, "saved_at": utcnow(), "account": None, "channels": []}
+        tracked = self.tracked_channels()
         for entity_id, state in list(session.get_update_states()):
             if entity_id == 0:
                 record["account"] = {"pts": state.pts, "qts": state.qts, "seq": state.seq,
                                      "date": int(state.date.timestamp())}
+                continue
+            if tracked is not None and entity_id not in tracked:
                 continue
             try:
                 peer = session.get_input_entity(utils.get_peer_id(types.PeerChannel(entity_id)))
@@ -1220,15 +1256,37 @@ class Collector:
                 session.set_update_state(0, types.updates.State(
                     pts=a["pts"], qts=a["qts"], date=datetime.fromtimestamp(a["date"], timezone.utc),
                     seq=a["seq"], unread_count=0))
-            now = datetime.now(timezone.utc)
-            for channel in saved.get("channels", []):
+            now, channels = datetime.now(timezone.utc), saved.get("channels", [])
+            tracked = self.tracked_channels() if channels else None
+            channels = [c for c in channels if tracked is None or c["id"] in tracked]
+            for channel in channels:
                 session.set_update_state(channel["id"], types.updates.State(
                     pts=channel["pts"], qts=0, date=now, seq=0, unread_count=0))
-            session.process_entities([types.InputPeerChannel(c["id"], c["access_hash"])
-                                      for c in saved.get("channels", [])])
+            session.process_entities([types.InputPeerChannel(c["id"], c["access_hash"]) for c in channels])
         except (KeyError, TypeError, ValueError):
             return None
         return saved.get("saved_at")
+
+    def tracked_channels(self):
+        if scope_settings(self.store)["mode"] != "selected":
+            return None
+        self.refresh_targets()
+        probe = probe_settings(self.store)["chat_id"]
+        return {-chat_id - 1000000000000 for chat_id in (*self.target_ids, probe)
+                if type(chat_id) is int and chat_id < -1000000000000}
+
+    def prune_untracked(self):
+        box = getattr(self.client, "_message_box", None)
+        if not isinstance(getattr(box, "map", None), dict) or (tracked := self.tracked_channels()) is None:
+            return 0
+        dropped = [entry for entry in box.map if type(entry) is int and entry not in tracked
+                   and entry not in box.getting_diff_for]
+        for entry in dropped:
+            box.possible_gaps.pop(entry, None)
+            box.map.pop(entry, None)
+        if box.map and box.next_deadline not in box.map:
+            box.next_deadline = min(box.map, key=lambda entry: box.map[entry].deadline)
+        return len(dropped)
 
     async def rewind_paused_updates(self):
         dropped, self.paused_drops = self.paused_drops, 0
@@ -2250,6 +2308,7 @@ class Collector:
                 "role": "creator" if getattr(entity, "creator", False)
                         else "administrator" if getattr(entity, "admin_rights", None) else "member_or_unknown",
             }
+        self.prune_untracked()
         await self.load_folders()
         self.dialog_cache = dialogs
         self.dialogs_truncated = count >= limit
@@ -2262,18 +2321,32 @@ class Collector:
                             for f in self.folders.values()],
                 "limit": limit, "may_be_truncated": count >= limit}
 
-    def difference_gap(self, channel_id, before, after):
+    def difference_gap(self, channel_id, before, after, top_message=None, recovered=None, cause=None):
         chat_id = utils.get_peer_id(types.PeerChannel(channel_id)) if channel_id is not None else None
         if chat_id is not None and not self.selected(chat_id):
             return
-        self.store.append("coverage.gap", {
-            "reason": "Telegram reported that updates for this interval are too old to deliver",
-            "scope": "account" if chat_id is None else "channel", "pts_before": before, "pts_after": after,
-            "completeness": "incomplete", "run_id": self.run_id,
-            "meaning": "Edits, deletions and other updates in this interval were not delivered and are absent from "
-                       "this journal. New messages can still be recovered by reading history."}, chat_id)
+        if cause == "channel_state_dropped":
+            self.store.append("coverage.gap", {
+                "reason": cause, "scope": "channel", "pts_before": before, "completeness": "unknown",
+                "run_id": self.run_id, "meaning": CHANNEL_STATE_DROPPED_MEANING}, chat_id)
+        else:
+            self.store.append("coverage.gap", {
+                "reason": "Telegram reported that updates for this interval are too old to deliver",
+                "scope": "account" if chat_id is None else "channel", "pts_before": before, "pts_after": after,
+                **({"telegram_top_message": top_message, "latest_messages_returned": recovered}
+                   if recovered is not None else {}),
+                "completeness": "incomplete", "run_id": self.run_id,
+                "meaning": "Edits, deletions and other updates in this interval were not delivered and are absent from "
+                           "this journal. New messages can still be recovered by reading history."
+                           + (" The latest messages Telegram returned with this answer are recorded as recovered, "
+                              "in their state at recovery." if recovered else "")}, chat_id)
         if self.running:
-            self.recheck_wakeup.set()
+            self.request_recheck(None if chat_id is None else [chat_id])
+
+    def channel_unavailable(self, channel_id):
+        chat_id = utils.get_peer_id(types.PeerChannel(channel_id))
+        if self.selected(chat_id):
+            self.access_lost(chat_id, "no_access")
 
     def connection_changed(self, client, state):
         if client is self.client:
@@ -2775,6 +2848,11 @@ class Collector:
         await self._snapshot_session_state("observation_start")
         await self.dialogs()
         await self.apply_scope(refresh=False)
+        for target in self.store.targets(True):
+            entity = (self.dialog_cache.get(target["chat_id"]) or {}).get("entity")
+            channel_id = getattr(getattr(entity, "migrated_to", None), "channel_id", None)
+            if isinstance(entity, types.Chat) and type(channel_id) is int:
+                self.follow_migration(target["chat_id"], channel_id, "observation_start")
         self.source_status, overview = {}, self.store.chat_overview()
         for target in self.store.targets(True):
             status = self.source_visibility(target["chat_id"], overview)
@@ -2886,6 +2964,7 @@ class Collector:
             now, interval = time.monotonic(), self.param("heartbeat_seconds")
             if heartbeat_at is None or now - heartbeat_at >= interval - 1:
                 heartbeat_at = now
+                self.prune_untracked()
                 self.persist_update_state()
                 self.last_heartbeat = utcnow()
                 self.store.append("collector.heartbeat", {
@@ -2927,7 +3006,7 @@ class Collector:
 
     async def reconnect(self):
         now = time.time()
-        if now < max(self.next_reconnect_at, self.store.get_setting("rpc_backoff_until", 0)):
+        if now < self.next_reconnect_at:
             return
         self.reconnect_attempts += 1
         self.store.append("connection.retry", {"attempt": self.reconnect_attempts})
@@ -2937,10 +3016,9 @@ class Collector:
         except AUTHORIZATION_ERRORS as exc:
             self.handle_authorization_error(exc, "reconnect", client=client)
         except FLOOD_ERRORS as exc:
-            self.next_reconnect_at = max(time.time() + exc.seconds,
-                                         self.store.get_setting("rpc_backoff_until", 0))
-            self.store.set_setting("rpc_backoff_until", self.next_reconnect_at)
-            self.store.append("telegram.backoff", {"operation": "reconnect", "retry_after_seconds": exc.seconds})
+            self.next_reconnect_at = time.time() + exc.seconds
+            self.store.append("telegram.backoff", {"operation": "reconnect", "retry_after_seconds": exc.seconds,
+                                                   "method": method_of(exc)})
         except Exception as exc:
             self.next_reconnect_at = now + min(self.param("reconnect_max_seconds"),
                                                5 * 2 ** min(self.reconnect_attempts, 10))
@@ -2984,15 +3062,18 @@ class Collector:
         await self.failure(exc, context, client=client, details=update_details(update, chat_ids))
         if not self.running or client is not self.client:
             return
+        try:
+            self.request_recheck(chat_ids)
+        except Exception:
+            self.request_recheck()
+
+    def request_recheck(self, chat_ids=None):
         if chat_ids is None:
             self.recheck_wakeup.set()
             return
-        try:
-            chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
-            if chat_ids:
-                self.store.set_chat_settings("recheck_last", dict.fromkeys(chat_ids, 0))
-        except Exception:
-            self.recheck_wakeup.set()
+        chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
+        if chat_ids:
+            self.store.set_chat_settings("recheck_last", dict.fromkeys(chat_ids, 0))
 
     async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
                               acquisition=None, sender=None):
@@ -3000,6 +3081,11 @@ class Collector:
         sender = sender or getattr(message, "sender", None)
         payload = describe_message(message, sender)
         payload["source"] = source or ("history_snapshot" if kind == "message.snapshot" else "live_update")
+        if source == TOO_LONG_RECOVERY:
+            payload["content_as_of"] = "recovery"
+            payload["recovery_meaning"] = ("Telegram returned this message among a channel's latest messages because "
+                                           "its missed updates were too old to deliver. The content is its state at "
+                                           "recovery; earlier versions were not delivered.")
         payload["collector_account_id"] = (self.store.get_setting("account", {}) or {}).get("id")
         payload["run_id"] = self.run_id
         if history_run_id is not None:
@@ -3140,7 +3226,7 @@ class Collector:
             source = recovered_source(update)
             if source and self.store.message_state(event.chat_id, event.message.id)["content"]:
                 return
-            await self.capture_message(event.message, "message.new", event.chat_id, update, source)
+            await self.capture_message(event.message, recovered_kind(source), event.chat_id, update, source)
         except Exception as exc:
             await self.live_failure(exc, "message.new", client, [getattr(event, "chat_id", None)], event)
 
@@ -3178,6 +3264,11 @@ class Collector:
         if timer := auto_delete(state["content"], utcnow()):
             payload["auto_delete"] = timer
         self.store.append("message.deleted", payload, chat_id, message_id)
+        self.expedite_media(chat_id, message_id)
+
+    def expedite_media(self, chat_id, message_id):
+        if self.store.expedite_media(chat_id, message_id):
+            self.media_wakeup.set()
 
     def deletion_batch(self, chat_id, ids, raw):
         ids = [message_id for message_id in ids if not self.store.message_state(chat_id, message_id)["deleted"]]
@@ -3260,6 +3351,33 @@ class Collector:
         self.source_status[str(chat_id)] = {"state": "access_lost", "checked_at": utcnow(), **lost[str(chat_id)],
                                             "meaning": ACCESS_LOST_MEANING}
 
+    def follow_migration(self, chat_id, channel_id, detected, update=None):
+        new_id = utils.get_peer_id(types.PeerChannel(channel_id))
+        targets = {target["chat_id"]: target for target in self.store.targets()}
+        target, followed = targets.get(chat_id), self.store.get_setting("migrated_sources", {})
+        if target is None or not target["enabled"] or str(chat_id) in followed:
+            return None
+        facts = {"from_chat_id": chat_id, "to_chat_id": new_id, "detected": detected, "meaning": MIGRATED_MEANING,
+                 **({} if detected == "service_message" else {
+                     "coverage": "messages posted in the new chat before this record are not recovered automatically; "
+                                 "load its history to add them"})}
+        with self.store.transaction():
+            if new_id not in targets:
+                self.store.set_target(new_id, target["title"], "supergroup", True, origin="migrated",
+                                      priority=target["priority"])
+            self.store.set_setting("migrated_sources", {**followed, str(chat_id): new_id})
+            self.store.append("source.migrated", {**facts, **({"raw": plain(update)} if update is not None else {})},
+                              chat_id)
+            self.store.append("source.migrated", facts, new_id)
+            if detected == "service_message":
+                self.store.set_chat_settings("recheck_floor", {new_id: 0})
+        if new_id not in targets:
+            self.source_status[str(new_id)] = {"state": "discovered", "checked_at": utcnow(),
+                                               "meaning": MIGRATED_MEANING, "visibility": "unknown", "role": "unknown"}
+        if self.running:
+            self.request_recheck([new_id])
+        return new_id
+
     async def on_raw(self, update):
         client = self.client
         self.updates_arrived()
@@ -3297,10 +3415,12 @@ class Collector:
                         removed or await self.covers(chat_id, message_ids=[update.message.id])):
                     source = recovered_source(update)
                     if not (source and self.store.message_state(chat_id, update.message.id)["content"]):
-                        await self.capture_message(update.message, "message.new", chat_id, update, source,
+                        await self.capture_message(update.message, recovered_kind(source), chat_id, update, source,
                                                    sender=(getattr(update, "_entities", None) or {}).get(update.message.sender_id))
                 if removed:
                     await self.check_access(chat_id, update)
+                if isinstance(action, types.MessageActionChatMigrateTo) and self.selected(chat_id):
+                    self.follow_migration(chat_id, action.channel_id, "service_message", update)
             elif isinstance(update, (types.UpdatePinnedChannelMessages, types.UpdatePinnedMessages)) and not update.pinned:
                 chat_id = (utils.get_peer_id(types.PeerChannel(update.channel_id))
                            if isinstance(update, types.UpdatePinnedChannelMessages) else utils.get_peer_id(update.peer))
@@ -3586,7 +3706,8 @@ class Collector:
             if not self.running:
                 return
             delay = self.param("recheck_tick_seconds")
-            if not self.client.is_connected() or time.time() < self.store.get_setting("rpc_backoff_until", 0):
+            if (not self.client.is_connected() or time.time() < self.recheck_resume_at
+                    or self.flood_paused("recheck")):
                 continue
             if (scope_settings(self.store)["mode"] != "selected"
                     and time.time() - self.scope_refreshed_at > self.param("scope_refresh_minutes") * 60):
@@ -3594,10 +3715,10 @@ class Collector:
                 try:
                     await self.apply_scope()
                 except FLOOD_ERRORS as exc:
-                    self.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
-                        self.store.get_setting("rpc_backoff_until", 0)))
+                    self.scope_refreshed_at = time.time() - self.param("scope_refresh_minutes") * 60 + exc.seconds
                     self.store.append("telegram.backoff", {"operation": "scope refresh",
-                                                           "retry_after_seconds": exc.seconds})
+                                                           "retry_after_seconds": exc.seconds,
+                                                           "method": method_of(exc)})
                     continue
                 except Exception as exc:
                     if self.handle_authorization_error(exc, "scope refresh", client=client):
@@ -3621,12 +3742,15 @@ class Collector:
 
     def due_targets(self, forced=False, reconnected=0):
         settings, last, now = recheck_settings(self.store), self.store.chat_settings("recheck_last"), time.time()
+        control = settings["recheck_other_minutes"] or settings["recheck_minutes"]
         due = []
         for target in self.store.targets(True):
             minutes = settings["recheck_minutes"] if target["priority"] else settings["recheck_other_minutes"]
             if not minutes:
                 continue
             seen = last.get(target["chat_id"], 0)
+            if seen and target["chat_id"] < -1000000000000 and target["chat_id"] not in self.recheck_continuing:
+                minutes = max(minutes, control)
             if (forced and target["priority"]) or seen < reconnected or now - seen >= minutes * 60:
                 due.append((0 if target["priority"] else 1, seen, target))
         due.sort(key=lambda item: item[:2])
@@ -3642,13 +3766,15 @@ class Collector:
             try:
                 result = await self.recheck_chat(target["chat_id"], settings)
                 results.append(result)
-                if "continues_after" not in result:
-
+                if "continues_after" in result:
+                    self.recheck_continuing.add(target["chat_id"])
+                else:
+                    self.recheck_continuing.discard(target["chat_id"])
                     self.store.set_chat_settings("recheck_last", {target["chat_id"]: time.time()})
             except FLOOD_ERRORS as exc:
-                until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-                self.store.set_setting("rpc_backoff_until", until)
-                self.store.append("telegram.backoff", {"operation": "recheck", "retry_after_seconds": exc.seconds})
+                self.recheck_resume_at = time.time() + exc.seconds
+                self.store.append("telegram.backoff", {"operation": "recheck", "retry_after_seconds": exc.seconds,
+                                                       "method": method_of(exc)})
                 results.append({"chat_id": target["chat_id"], "error": type(exc).__name__})
                 break
             except Exception as exc:
@@ -3780,6 +3906,7 @@ class Collector:
                     "meaning": "Telegram returned no message with this ID at recheck and no deletion notice was "
                                "received: deleted while notices were missed, removed by an auto-delete timer, "
                                "or no longer visible to this account."}, chat_id, message_id)
+                self.expedite_media(chat_id, message_id)
                 result["missing"] += 1
         return result
 
@@ -3863,7 +3990,7 @@ class Collector:
             task = "profiling"
         else:
             task = None
-        until = self.store.get_setting("rpc_backoff_until", 0)
+        until = self.pause_until()
         return {"task": task, "detail": detail, "telegram_pause_until": until if until > time.time() else None}
 
     def reserve_export(self, owner):
@@ -4609,9 +4736,6 @@ class Collector:
                     except TimeoutError:
                         pass
                     continue
-                if time.time() < self.store.get_setting("rpc_backoff_until", 0):
-                    await asyncio.sleep(1)
-                    continue
                 free, threshold = shutil.disk_usage(media_root).free, self.param("media_min_free_mb") * 1024**2
                 if free < threshold:
 
@@ -4700,9 +4824,7 @@ class Collector:
                 "reason": "Telegram authorization expired; durable job retained"}))
             return True
         except FLOOD_ERRORS as exc:
-            until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-            self.store.set_setting("rpc_backoff_until", until)
-            attempt.finish(MediaOutcome("retry", {"error_type": type(exc).__name__,
+            attempt.finish(MediaOutcome("retry", {"error_type": type(exc).__name__, "method": method_of(exc),
                                                    "retry_after_seconds": exc.seconds}, exc.seconds))
         except TakeoutInvalidError:
             attempt.finish(MediaOutcome("retry", {"reason": "Takeout expired; durable job retained"}))
