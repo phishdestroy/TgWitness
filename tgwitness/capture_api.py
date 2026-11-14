@@ -63,13 +63,13 @@ def register(app, authenticate, require_live):
         if not who.admin:
             raise HTTPException(403, "Only the main administrator can control independent recorders.")
 
-    async def action(function, *args, file=False):
+    async def action(function, kind, *args, file=False):
         require_live()
-        async with app.state.capture.lock:
+        async with app.state.capture.locks[kind]:
             try:
                 if file:
-                    return await build_file(lambda: function(*args))
-                return await complete_in_thread(function, *args)
+                    return await build_file(lambda: function(kind, *args))
+                return await complete_in_thread(function, kind, *args)
             except ValueError as exc:
                 raise HTTPException(422, str(exc)) from None
             except (OSError, requests.RequestException):

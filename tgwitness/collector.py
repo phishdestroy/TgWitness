@@ -668,6 +668,7 @@ class Collector:
         self.buffer_overflow = False
         self.buffer_dropped = {}
         self.dispatch_lock = asyncio.Lock()
+        self.capture_lock = asyncio.Lock()
         self.buffer_limit = tuning.BY_KEY["startup_buffer"].default
         self.storage_low = False
         self.download_reserved = 0
@@ -689,6 +690,13 @@ class Collector:
                              "monitoring" if self.running or self.observation_starting else None),
             "available_for_export": not (self.observation_starting or self.export_claim
                                          or self.export_busy() or self.history.busy or self.connection_change_task),
+            "available_for_history": not (self.observation_starting or self.export_claim or self.export_busy()
+                                           or self.history.busy or self.connection_change_task),
+            "available_for_account_export": not (self.observation_starting or self.export_claim or self.export_busy()
+                                                  or self.history.busy or self.connection_change_task),
+            "available_for_observation": not (self.observation_starting
+                or self.connection_change_task or self.export_claim and
+                self.export_claim != getattr(self, "observation_compatible_owner", None)),
             "connected": bool(self.client and self.client.is_connected()),
             "has_session": bool(credentials.get("session")),
             "authorization_required": self.authorization_required,
@@ -1057,8 +1065,8 @@ class Collector:
                               for c in added],
                     "paused": paused, "resumed": resumed, "excluded": sorted(excluded),
                     "dialogs_inspected": len(self.dialog_cache),
-                    "coverage": "chats beyond the first " + str(self.param("dialog_limit")) + " dialogs are added when they "
-                                "become active; " + (
+                    "coverage": ("all accessible dialogs inspected; " if scope["mode"] != "selected"
+                                 else "configured dialog list inspected; ") + "new matching chats are added as they appear; " + (
                                     "the latest " + str(scope["new_chats"]["history"]) + " messages of each added chat "
                                     "are read once, earlier history is not fetched" if scope["new_chats"]["history"]
                                     else "earlier history of added chats is not fetched")})
@@ -2311,7 +2319,7 @@ class Collector:
     async def dialogs(self):
         await self.restore()
         dialogs = {}
-        count, limit = 0, self.param("dialog_limit")
+        count, limit = 0, None if scope_settings(self.store)["mode"] != "selected" else self.param("dialog_limit")
 
         async for dialog in self.client.iter_dialogs(limit=limit):
             count += 1
@@ -2329,7 +2337,7 @@ class Collector:
         self.prune_untracked()
         await self.load_folders()
         self.dialog_cache = dialogs
-        self.dialogs_truncated = count >= limit
+        self.dialogs_truncated = limit is not None and count >= limit
         self.refresh_source_visibility()
         return {"dialogs": [{k: v for k, v in d.items() if k != "entity"}
                             for d in self.dialog_cache.values()],
@@ -2337,7 +2345,7 @@ class Collector:
                              "chats": sum(1 for c, d in self.dialog_cache.items()
                                           if in_folder(f, c, d["kind"], d["entity"], d["archived"]))}
                             for f in self.folders.values()],
-                "limit": limit, "may_be_truncated": count >= limit}
+                "limit": limit, "may_be_truncated": self.dialogs_truncated}
 
     def difference_gap(self, channel_id, before, after, top_message=None, recovered=None, cause=None):
         chat_id = utils.get_peer_id(types.PeerChannel(channel_id)) if channel_id is not None else None
@@ -2810,7 +2818,9 @@ class Collector:
         validate_collection_scope(self.store)
         if self.running:
             return
-        if self.history.busy or self.observation_starting:
+        compatible_owner = self.export_claim and self.export_claim == getattr(self, "observation_compatible_owner", None)
+        if (self.export_claim and not compatible_owner or self.export_busy() and not compatible_owner
+                or self.history.busy and not compatible_owner or self.observation_starting):
             raise ValueError("This account is busy. Pause its current task before starting observation.")
         self.observation_starting = True
         client = self.client
@@ -2855,7 +2865,8 @@ class Collector:
             self.buffered, self.buffering = [], False
             self.paused_drops += dropped
             raise
-        self.store.recover_media()
+        if not self.history.busy:
+            self.store.recover_media()
         clock = await self.telegram_clock()
         self.running, self.phase, self.last_error = True, "observing", None
         self.store.set_setting("resume", True)
@@ -2963,7 +2974,8 @@ class Collector:
         await self.wait_authorization_cleanup()
         if shutdown:
             await self.profiling.suspend()
-        await self.history.pause("process_shutdown" if shutdown else "observation_stopped")
+        if shutdown:
+            await self.history.pause("process_shutdown")
         if shutdown and self.export_task:
             self.export_task.cancel()
             await asyncio.gather(self.export_task, return_exceptions=True)
@@ -2973,12 +2985,16 @@ class Collector:
         self.running = False
         self.buffered, self.buffering = [], False
         await self.cancel_workers()
+        async with self.dispatch_lock:
+            async with self.capture_lock:
+                pass
         self.watchdog = self.media_worker = self.urgent_media_worker = self.reconciler = self.intake_worker = None
         self.chat_state_worker = None
         self.presence_worker = None
         self.ephemeral_media_worker = None
         self.probe_worker = self.probe_pending = None
-        await self.avatar_history.close()
+        if shutdown or not self.history.busy:
+            await self.avatar_history.close()
         if not shutdown:
             self.store.set_setting("resume", False)
         if active:
@@ -3150,6 +3166,18 @@ class Collector:
     async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
                               acquisition=None, sender=None):
         started = time.perf_counter()
+        if self.store.lock._is_owned():
+            event = self.commit_message(message, kind, chat_id, update, source, history_run_id, acquisition, sender)
+        else:
+            async with self.capture_lock:
+                event = await complete_in_thread(self.commit_message, message, kind, chat_id, update, source,
+                                                 history_run_id, acquisition, sender)
+        self.message_committed(message, chat_id, event, sender)
+        self.max_handler_ms = max(self.max_handler_ms, (time.perf_counter() - started) * 1000)
+        return event
+
+    def commit_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
+                       acquisition=None, sender=None):
         sender = sender or getattr(message, "sender", None)
         payload = describe_message(message, sender)
         payload["source"] = source or ("history_snapshot" if kind == "message.snapshot" else "live_update")
@@ -3258,12 +3286,13 @@ class Collector:
                 self.store.append("media.skipped", {"message_event": event["seq"], "reason": media_skip,
                     **(ephemeral.outcome(ephemeral_media, status) if ephemeral_media else {})},
                                   chat_id, message.id)
-        self.remember(sender, chat_id=chat_id)
-        if job:
+        return event
+
+    def message_committed(self, message, chat_id, event, sender=None):
+        self.remember(sender or getattr(message, "sender", None), chat_id=chat_id)
+        if event["payload"].get("media_capture"):
             self.media_wakeup.set()
         self.last_update_at = utcnow()
-        self.max_handler_ms = max(self.max_handler_ms, (time.perf_counter() - started) * 1000)
-        return event
 
     def own_skipped(self, message):
         return bool(getattr(message, "out", False)) and not scope_settings(self.store)["own_actions"]
@@ -4024,14 +4053,15 @@ class Collector:
         owner = None
         if origin in (None, "panel") and not self.running:
             owner = "snapshot:" + secrets.token_hex(16)
-            if not self.reserve_export(owner):
-                raise ValueError("This account is busy. Pause its current task before loading history.")
+            if not self.reserve_export(owner, alongside_observation=True):
+                raise ValueError("This account is busy. Pause its current acquisition task before loading history.")
         try:
             return await self._snapshot(chat_id, limit, entity, origin, before_id)
         finally:
             if owner:
                 try:
-                    await self.avatar_history.close()
+                    if not self.running:
+                        await self.avatar_history.close()
                 finally:
                     self.release_export(owner)
 
@@ -4041,6 +4071,8 @@ class Collector:
         await self.restore()
         entity = entity or await self.resolve_target(chat_id)
         count, seen, oldest = 0, 0, None
+        with self.store.reading() as db:
+            request_started_seq = db.execute("SELECT coalesce(max(seq),0) FROM events").fetchone()[0]
         self.store.append("snapshot.started", {"limit": limit, "meaning": "current visible history",
                                                **({"origin": origin} if origin else {}),
                                                **({"before_id": before_id} if before_id else {})}, chat_id)
@@ -4052,7 +4084,8 @@ class Collector:
                 if origin and self.store.message_state(chat_id, message.id)["content"]:
                     continue
                 await self.capture_message(message, "message.snapshot", chat_id,
-                                           source=origin + "_snapshot" if origin and origin != "panel" else None)
+                                           source=origin + "_snapshot" if origin and origin != "panel" else None,
+                                           acquisition={"request_started_seq": request_started_seq})
                 count += 1
         except BaseException as exc:
             self.store.append("snapshot.interrupted", {"captured": count, "requested": limit,
@@ -4091,19 +4124,30 @@ class Collector:
         else:
             task = None
         until = self.pause_until()
-        return {"task": task, "detail": detail, "observing": self.running,
+        tasks = [task] if task else []
+        if self.running and "observation" not in tasks:
+            tasks.append("observation")
+        if self.history.busy and "history" not in tasks:
+            tasks.append("history")
+        if claim and not claim.startswith("history:"):
+            claimed = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), "export")
+            if claimed not in tasks and task != "chat_export":
+                tasks.append(claimed)
+        return {"task": task, "tasks": tasks, "detail": detail, "observing": self.running,
                 "telegram_pause_until": until if until > time.time() else None}
 
-    def reserve_export(self, owner):
-        if (self.observation_starting or self.history.busy or self.export_busy()
+    def reserve_export(self, owner, *, alongside_observation=True):
+        if (self.running and not alongside_observation or self.observation_starting or self.history.busy or self.export_busy()
                 or self.export_claim or self.connection_change_task is not None):
             return False
         self.export_claim = owner
+        self.observation_compatible_owner = owner if alongside_observation else None
         return True
 
     def release_export(self, owner):
         if self.export_claim == owner:
             self.export_claim = None
+            self.observation_compatible_owner = None
             self.close_when_idle()
 
     def idle(self):
@@ -4824,9 +4868,10 @@ class Collector:
                     await asyncio.wait(active, return_when=asyncio.FIRST_COMPLETED)
                     continue
                 deferred = None
-                if lane != "ephemeral" and not owner and capture_settings(self.store)["messages_first"]:
+                if not owner:
                     state = self.history.status()
-                    if state["phase"] in ("running", "paused"):
+                    if state["phase"] == "running" or (state["phase"] == "paused" and lane != "ephemeral"
+                                                       and capture_settings(self.store)["messages_first"]):
                         deferred = state["id"]
                 if not capture_settings(self.store)["download_media"]:
                     if owner:

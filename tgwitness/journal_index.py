@@ -211,6 +211,7 @@ class JournalIndex:
     def state(self, event):
         db = self.db
         chat, message, kind = event["chat_id"], event["message_id"], event["kind"]
+        promotes_text = kind in TEXT_KINDS
         if chat is not None and message is not None:
             db.execute("INSERT OR IGNORE INTO known_chat_index VALUES (?)", (chat,))
         if chat is not None and kind in CHAT_KINDS:
@@ -218,13 +219,17 @@ class JournalIndex:
             if message is not None:
                 old = db.execute("SELECT * FROM message_state_index WHERE chat_id=? AND message_id=?",
                                  (chat, message)).fetchone()
+                started = (event["payload"].get("acquisition") or {}).get("request_started_seq")
+                if (kind == "message.snapshot" and type(started) is int and started >= 0
+                        and old and old["text_seq"] is not None and old["text_seq"] > started):
+                    promotes_text = False
                 values = (int(kind != "media.saved"), int(kind == "message.edited"),
                           int(kind == "message.deleted"), int(kind == "message.missing_on_recheck"))
                 previous = tuple(old[k] for k in ("has_message", "edited", "deleted", "missing")) if old else (0,)*4
                 updated = tuple(max(a, b) for a, b in zip(previous, values))
-                if kind in TEXT_KINDS:
+                if promotes_text:
                     updated = (*updated[:3], 0)
-                text_seq = event["seq"] if kind in TEXT_KINDS else old["text_seq"] if old else None
+                text_seq = event["seq"] if promotes_text else old["text_seq"] if old else None
                 had_text = bool(old and old["text_seq"] is not None)
                 saved_before = (int(had_text), int(had_text and bool(previous[2])))
                 saved_after = (int(text_seq is not None), int(text_seq is not None and bool(updated[2])))
@@ -238,7 +243,7 @@ class JournalIndex:
                            "last_observed_at=max(coalesce(last_observed_at,''),?) WHERE chat_id=?",
                            (*[b-a for a, b in zip(previous, updated)], *[b-a for a, b in zip(saved_before, saved_after)],
                             event["observed_at"], chat))
-            if kind in TEXT_KINDS:
+            if promotes_text:
                 db.execute("UPDATE chat_state_index SET text_id=?,text_seq=? WHERE chat_id=? "
                            "AND (text_seq IS NULL OR text_id IS NULL OR ?>=text_id)",
                            (message, event["seq"], chat, message))

@@ -332,7 +332,7 @@ class AccountExport:
             raise ValueError("Connect a Telegram account before exporting it.")
         job_id = secrets.token_hex(16)
         if not self.collector.reserve_export(job_id):
-            raise ValueError("This account is busy. Pause observation or its current task before exporting.")
+            raise ValueError("This account is busy. Pause its current acquisition task before exporting.")
         try:
             directory = self.directory(job_id)
             directory.mkdir(mode=0o700)
@@ -357,12 +357,17 @@ class AccountExport:
 
     async def pause(self, job_id):
         self.directory(job_id)
-        if self.task and self.current and self.current["id"] == job_id:
-            if not self.task.done():
-                self.task.cancel()
-            await asyncio.gather(self.task, return_exceptions=True)
-            self.task = None
-            self.collector.release_export(job_id)
+        task = self.task
+        if task and self.current and self.current["id"] == job_id:
+            if not task.done():
+                task.cancel()
+            await asyncio.gather(task, return_exceptions=True)
+            if self.task is task:
+                self.task = None
+                self.collector.release_export(job_id)
+                if not self.current.get("ready") and self.current["phase"] in ("preparing", "running", "waiting", "packaging"):
+                    self.current.update(phase="paused", error=None)
+                    self.persist()
         return self.public(job_id)
 
     def chat_label(self, chat_id):
@@ -449,7 +454,7 @@ class AccountExport:
         if sha(canonical(job["options"])) != job["options_sha256"]:
             raise ValueError("The saved export options have changed.")
         if not self.collector.reserve_export(job_id):
-            raise ValueError("This account is busy. Pause observation or its current task before resuming the export.")
+            raise ValueError("This account is busy. Pause its current acquisition task before resuming the export.")
         recovering = False
         try:
             self.current = self.public(job_id)
@@ -470,8 +475,7 @@ class AccountExport:
                 self.collector.release_export(job_id)
                 return self.public()
             recovering = True
-            self.current.update(phase="preparing", ready=False, error=None, wait_until=None, options=job["options"])
-            await complete_in_thread(self.recover, job)
+            self.current.update(phase="preparing", stage="verifying", ready=False, error=None, wait_until=None, options=job["options"])
             self.persist()
             self.task = asyncio.create_task(self.run(job))
             self.task.add_done_callback(lambda done: self.collector.release_export(job_id) if self.task is done else None)
@@ -695,6 +699,8 @@ class AccountExport:
         raise ConnectionError("Telegram remains rate limited; resume later.")
 
     async def attachment(self, media, task, network, directory, options):
+        from .collector import AUTHORIZATION_ERRORS
+
         info, action, limit = attachment_policy(media, task, options)
         representation = info.get("representation")
         if action == "exclude":
@@ -792,7 +798,7 @@ class AccountExport:
                 account_attachment_cache.save(self, result)
                 self.cache_attachment(result)
             return result
-        except errors.TakeoutInvalidError:
+        except (errors.TakeoutInvalidError, *AUTHORIZATION_ERRORS):
             raise
         except (errors.RPCError, ValueError) as exc:
             if isinstance(exc, errors.RPCError) and getattr(exc, "message", None) == "TAKEOUT_FILE_EMPTY":
@@ -854,9 +860,13 @@ class AccountExport:
         return "regular" if self.vault.read("account-export-" + job["job_id"]).get("takeout_declined") else "takeout"
 
     async def run(self, job):
+        from .collector import AUTHORIZATION_ERRORS
+
         directory, network = self.directory(job["job_id"]), None
         try:
             await complete_in_thread(self.recover, job)
+            self.current.pop("stage", None)
+            self.persist()
             mode = self.transport_mode(job)
             options = {**job["options"], "transport": mode}
             network = self.transport_factory(self.collector, self.vault, job["job_id"], options)
@@ -909,7 +919,7 @@ class AccountExport:
                 cursor = previous["cursor_after"] if previous else task["cursor_start"]
                 self.current["current_chat"] = self.chat_label(task["chat_id"])
                 if task.get("discovery_error"):
-                    self.seal(job, task, cursor, cursor, True, [], 0, utcnow(), "failed", task["discovery_error"])
+                    await complete_in_thread(self.seal, job, task, cursor, cursor, True, [], 0, utcnow(), "failed", task["discovery_error"])
                     continue
                 while True:
                     self.ensure_storage()
@@ -938,17 +948,17 @@ class AccountExport:
                                 row.setdefault("attachments", []).extend([await self.attachment(item, {**task, "message_id": row.get("id")},
                                     network, directory, options) for item in media])
                             rows.append(row)
-                        self.seal(job, task, cursor, after, terminal, rows, getattr(page, "seen_count", len(page)),
+                        await complete_in_thread(self.seal, job, task, cursor, after, terminal, rows, getattr(page, "seen_count", len(page)),
                                   getattr(page, "started", started))
-                    except errors.TakeoutInvalidError:
+                    except (errors.TakeoutInvalidError, *AUTHORIZATION_ERRORS):
                         raise
                     except errors.RPCError as exc:
-                        self.seal(job, task, cursor, cursor, True, [], 0, started, "failed",
+                        await complete_in_thread(self.seal, job, task, cursor, cursor, True, [], 0, started, "failed",
                                   getattr(exc, "message", None) or type(exc).__name__)
                         terminal = True
                     except ValueError as exc:
                         if task["category"] == "other_data" and options["transport"] == "regular":
-                            self.seal(job, task, cursor, cursor, True, [], 0, started, "failed", str(exc))
+                            await complete_in_thread(self.seal, job, task, cursor, cursor, True, [], 0, started, "failed", str(exc))
                             terminal = True
                         else:
                             raise
@@ -970,6 +980,10 @@ class AccountExport:
             self.persist()
             self.store.append("account_export.completed", {"job_id": job["job_id"], "receipt_head_sha256": self.head,
                 "counts": self.counts, "complete_within_scope": self.current["phase"] == "done"})
+        except AUTHORIZATION_ERRORS:
+            self.current.update(phase="paused", current_chat=None, wait_until=None, delay_seconds=None,
+                wait_reason=None, error="Telegram authorization ended. Reconnect the same account, then resume from saved data.")
+            self.persist()
         except errors.TakeoutInvalidError:
             if network is not None and hasattr(network, "invalidate"):
                 network.invalidate()

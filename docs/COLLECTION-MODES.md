@@ -11,7 +11,7 @@ choosing one does not silently start another or change the account's connection.
 | --- | --- | --- | --- |
 | Share material already saved | Exports → Saved observations | Signed journal archive, readable report or minimized handover | No Telegram reads; observation can continue |
 | Keep future changes | Chats → Choose, then Start observation | Delivered messages, versions and deletion notices in the workspace | Owns the account while running |
-| Add past history to the workspace | More tools → Sources → Chats in scope → Full history | Current visible messages, media outcomes and available Recent Actions in the signed journal | Pause observation first; choose Standard API or Takeout |
+| Add past history to the workspace | More tools → Sources → Chats in scope → Full history | Current visible messages, media outcomes and available Recent Actions in the signed journal | Keep observation on; choose Standard API or Takeout |
 | Create a separate account snapshot | Exports → Telegram account | Selected chats, files and optional account data in a separate signed archive | Runs alongside observation; observation sources do not define this selection |
 | Export one chat | Chats → Export chat | Signed selected history and context, optionally split across eligible accounts | Every selected account must be idle and already have access |
 | Protect a valuable account | [Trusted Live](TRUSTED-LIVE.md) locally, or [official Web](OFFICIAL-WITNESS.md) in GitHub Actions | Video and signed observations of what the official Telegram client shows | TgWitness makes no Telegram API calls of its own and imports no session; the official client does the requests; preview |
@@ -31,12 +31,13 @@ Changes and deletions that were never observed may be unavailable.
 
 ## One acquisition per account
 
-Live observation, full history and account/chat acquisition are mutually exclusive
-on one account. Starting a new task does not automatically pause another task.
+One full-history run or account/chat export uses the account's acquisition slot.
+Live observation continues alongside it. Pause controls are independent; starting
+an acquisition does not automatically pause observation.
 Separate account workspaces can operate concurrently, with separate identities
 and access rights.
 
-During full history loading, that account's live handlers are paused. A later
+During full history loading, live handlers preserve delivered changes. A later
 catch-up or history read returns the current state of each message. Comparing saved
 versions compares the observations each pass recorded.
 

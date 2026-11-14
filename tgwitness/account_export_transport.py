@@ -17,6 +17,19 @@ DIRECT_PEER_LIMIT = 20
 DISCOVERY_PROBES = 4
 
 
+def history_messages(result, task, cursor=0):
+    messages = result.messages
+    for message in messages:
+        mid = getattr(message, "id", None)
+        if (type(mid) is not int or mid <= 0 or cursor and mid >= cursor
+                or task.get("newest_message_id") is not None and mid > task["newest_message_id"]):
+            raise ValueError("Telegram returned a message outside the frozen page boundary.")
+        peer = getattr(message, "peer_id", None)
+        if peer is not None and utils.get_peer_id(peer) != task["chat_id"]:
+            raise ValueError("Telegram returned history for a different chat.")
+    return sorted(messages, key=lambda message: -message.id)
+
+
 def safe(value, depth=0):
     if depth > 24:
         return "[depth limit]"
@@ -157,6 +170,8 @@ class Transport:
         return chats
 
     async def discover(self):
+        from .collector import AUTHORIZATION_ERRORS
+
         ranges = [None] if self.options["chat_kinds"] else []
         gaps = []
         if self.options["transport"] == "takeout" and ranges:
@@ -226,7 +241,9 @@ class Transport:
                         notes[task["id"]] = ("Chat " + str(task["chat_id"])
                                              + ": full history unavailable; exporting own messages only.")
                         response = await self.history(task, 0, 1)
-                    messages = [m for m in response.messages if not isinstance(m, t.MessageEmpty)]
+                    messages = history_messages(response, task)
+                except AUTHORIZATION_ERRORS:
+                    raise
                 except (errors.TakeoutInvalidError, errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError):
                     raise
                 except errors.RPCError as exc:
@@ -311,8 +328,9 @@ class Transport:
         if category == "messages":
             result = await self.history(task, cursor)
             entities = {utils.get_peer_id(e): e for e in [*result.users, *result.chats]}
-            rows = sorted([m for m in result.messages if not isinstance(m, t.MessageEmpty)], key=lambda m: -m.id)
-            next_cursor = min((m.id for m in rows), default=cursor)
+            messages = history_messages(result, task, cursor)
+            rows = [message for message in messages if not isinstance(message, t.MessageEmpty)]
+            next_cursor = min((message.id for message in messages), default=cursor)
             output = []
             for message in rows:
                 record = safe(message)
@@ -325,7 +343,7 @@ class Transport:
                               text=getattr(message, "message", ""), outgoing=bool(getattr(message, "out", False)),
                               from_id=sender_id, sender=safe(entities.get(sender_id)))
                 output.append((record, attachments(getattr(message, "media", None))))
-            return output, next_cursor, not rows
+            return output, next_cursor, not messages
         if category == "profile":
             value = await self.client(f.users.GetFullUserRequest(t.InputUserSelf()))
             return [({"category": category, "data": safe(value)}, None)], cursor, True

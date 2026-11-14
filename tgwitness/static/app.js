@@ -657,7 +657,11 @@ async function api(path, body, options={}) {
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
     if(fetchOptions.signal?.aborted)throw new StaleView();
-    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;throw error;
+    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;
+    const retryAfter=response.headers.get('Retry-After');
+    if(retryAfter){const seconds=Number(retryAfter),delay=Number.isFinite(seconds)?seconds*1000:Date.parse(retryAfter)-Date.now();
+      if(Number.isFinite(delay))error.retryAfterMs=Math.max(0,delay);}
+    throw error;
   }
   return response;
 }
@@ -938,7 +942,9 @@ function renderWorkflowControls(){
   renderWorkflowGaps(state.status.stats.counts?.['coverage.gap']||0);
   const exporter=viewQuery('start','[data-workflow="account-all"]');
   exporter.textContent=tr('Export everything');
-  $('workflow-account-hint').textContent=!demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):'';
+  $('workflow-account-hint').textContent=!demo&&activity.observing?
+    tr('Observation continues while the account archive is prepared.'):
+    !demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):'';
   renderWorkflowAccounts();pulseUI?.update(state.status);
   const investigate=viewQuery('start','[data-workflow="investigation"]');
   investigate.textContent=tr(state.status.collector.running?'Open investigation':'Set up observation');
@@ -1054,7 +1060,9 @@ function importedKeyNotice(id){
 async function exportEverything(){
   if(!state.me?.admin||!viewAllowed('evidence'))return;
   if(!state.status.demo&&!accountSignedIn()){state.workflow={profile:state.profile,kind:'account'};await openWorkflowSignIn();return;}
-  const message=tr("Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.");
+  const observing=state.status.collector?.activity?.task==='observation';
+  const message=tr("Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.")
+    +(observing?' '+tr("Observation continues while the account archive is prepared."):'');
   if(!(await askConfirm(message,{confirmText:tr("Export everything")})))return;
   await json("account-export/start",accountExportFallback);
   selectExportTask('account');await navigate('evidence');exportsView?.select('downloads');await loadAccountExport();
@@ -1533,8 +1541,8 @@ function accountPhaseLabel(p){
 const activityTitles=()=>({reconnecting:tr("Reconnecting to Telegram"),history:tr("Downloading history"),
   export:tr("Export in progress"),profile_image:tr("Updating profile photos"),sign_in:tr("Sign-in required"),
   empty:tr("No Telegram account"),failed:tr("Needs attention"),unavailable:tr("Unavailable"),free:tr("Free")});
-const activityHints=()=>({monitoring:"",
-  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Exports and observation wait until it finishes."),
+const activityHints=()=>({monitoring:tr("History and account exports can run alongside observation."),
+  reconnecting:tr("Observation resumes when the connection returns."),history:tr("History loads in the background. Keep observation on to preserve new messages, edits and deletion notices as they arrive."),
   export:tr("Observation keeps running. Other exports and full history wait until it finishes."),profile_image:tr("Takes a moment."),
   sign_in:tr("Sign in again to observe or export."),empty:tr("Connect an account to observe or export."),
   failed:tr("Check the problems listed for this account."),free:tr("Ready to export or observe.")});
@@ -2269,26 +2277,29 @@ function renderHistory(){
     $("history-workers").value=String(h.options.media_workers);
     $("history-admin").checked=h.options.admin_log;
     $("history-compare").checked=h.options.compare_saved;
-    $("history-observe").checked=!!h.options.observe_after;
+    $("history-observe").checked=!!h.options.observe_during;
+    $("history-chat-workers").value=String(h.options.history_workers||1);
   }
   show("history-card",may("sources")&&!s?.chats_limited);
   show("history-start",!active&&!paused);show("history-pause",active);
   show("history-resume",paused);show("history-cancel",active||paused);
   show("history-report",exists&&may("export"));
   const observing=!!s?.collector?.running;
-  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export||!s?.targets.some(x=>x.enabled);
-  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export;
-  const busyAccount=!s?.demo&&!!s?.collector.has_session&&(!s?.collector.available_for_export||observing)&&!active;
+  const available=s?.collector?.available_for_history;
+  const sourcesReady=s?.collector?.scope?.mode!=="selected"||s?.targets.some(x=>x.enabled);
+  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!available||!sourcesReady;
+  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!available;
+  const busyAccount=!s?.demo&&!!s?.collector.has_session&&(!available||observing)&&(observing||!active);
   show("history-availability",busyAccount);
-  $("history-availability").textContent=!busyAccount?"":observing&&s?.collector.available_for_export?
-    tr("Observation is running. Loading history pauses it; with the option above it starts again when the history is loaded."):
-    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Pause observation or its current task before loading history.");
+  $("history-availability").textContent=!busyAccount?"":observing?
+    tr("Observation stays on while history loads. Live messages, edits and deletion notices continue to be recorded."):
+    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Pause its current acquisition task before loading history.");
   const labels={running:tr("Loading history"),paused:tr("History paused"),complete:tr("History reading finished"),
     incomplete:tr("History finished with gaps"),cancelled:tr("History run ended")};
   const counts=h.sources_by_phase||{},finished=(counts.complete||0)+(counts.failed||0)+(counts.skipped||0);
   $("history-progress").textContent=exists?(labels[phase]||phase)+" · "+tr("{messages} messages · {done} of {total} sources",{
     messages:h.captured,done:finished,total:h.sources_total})+(h.reason?" · "+(errorName(h.reason)||tr(h.reason)):""):
-    tr("{n} enabled sources. History requires an idle account; pause observation first.",{n:s?.targets.filter(x=>x.enabled).length||0});
+    tr("{n} enabled sources. History loads in the background while observation continues.",{n:s?.targets.filter(x=>x.enabled).length||0});
   $("history-media").textContent=exists?tr("Attachments: {done} saved, {pending} pending, {failed} failed. Unavailable messages: {missing}.",{
     done:h.media?.done||0,pending:h.media_pending||0,failed:h.media?.failed||0,missing:h.unavailable||0}):"";
   $("history-wait").textContent=h.wait_until>Date.now()/1000?
@@ -2313,12 +2324,8 @@ function renderHistory(){
 for(const action of ["start","pause","resume","cancel"]){
   $("history-"+action).addEventListener("click",e=>busy(e.currentTarget,async()=>{
     const options=action==="start"?{transport:$("history-transport").value,
-      media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
-      compare_saved:$("history-compare").checked,observe_after:$("history-observe").checked}:{};
-    if(["start","resume"].includes(action)&&state.status?.collector?.running){
-      if(!(await askConfirm(tr("Observation is running on this account. Loading history pauses it. Updates that arrive meanwhile are requested again from the saved position when observation starts. Continue?"),{confirmText:tr("Pause and load history")})))return;
-      await json("collector/stop",{});
-    }
+      history_workers:Number($("history-chat-workers").value),media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
+      compare_saved:$("history-compare").checked,observe_during:$("history-observe").checked}:{};
     await json("history/"+action,options);await refreshStatus();await refreshEvents();
   }));
 }
@@ -2337,7 +2344,7 @@ function renderChatExportTools(){
   fillSourceSelect("snapshot-source",$("snapshot-source").value);
   fillSourceSelect("chat-export-source",$("chat-export-source").value,true);
   $("chat-export-source").options[0].textContent=tr("Choose a chat");
-  $("snapshot-form").querySelector("button").disabled=s.demo||!may("sources")||!s.collector.has_session||!s.collector.available_for_export||!s.targets.some(t=>t.enabled);
+  $("snapshot-form").querySelector("button").disabled=s.demo||!may("sources")||!s.collector.has_session||(!s.collector.available_for_history&&!s.collector.running)||!s.targets.some(t=>t.enabled);
   renderRecheck();syncExport(s);renderHandoverChats();
 }
 const handoverChats=()=>[...$("handover-chats").querySelectorAll("input:checked")].map(input=>Number(input.value));
@@ -2634,7 +2641,7 @@ function renderAccountExportPreview(){
       (x.purpose?" "+tr("Purpose: {purpose}",{purpose:x.purpose}):"");
   }catch(error){box.textContent=error.message;$('account-export-advanced-summary').textContent=tr('Review export settings.');}
 }
-function accountExportPhase(phase){return tr({preparing:"Discovering chats",running:"Reading Telegram",waiting:"Waiting for Telegram",
+function accountExportPhase(phase,stage){if(phase==='preparing'&&stage==='verifying')return tr('Verifying saved export data…');return tr({preparing:"Discovering chats",running:"Reading Telegram",waiting:"Waiting for Telegram",
   paused:"Paused — can resume",packaging:"Signing archive",done:"Finished",partial:"Partial — review omissions",
   failed:"Stopped with an error"}[phase]||phase||"Unknown");}
 function accountExportTime(value){
@@ -2725,7 +2732,7 @@ function renderAccountExportJobs(){
     const phase=job.phase||"unknown",counts=job.counts||{},coverage=job.coverage||{};
     const card=node("article","account-export-job"),head=node("div","account-export-job-head");
     head.append(node("strong","",tr("Account export {id}",{id:String(job.id||"").slice(0,10)})),
-      node("span","account-export-state "+phase,accountExportPhase(phase)));
+      node("span","account-export-state "+phase,accountExportPhase(phase,job.stage)));
     card.append(head);
     const when=accountExportTime(job.created_at);
     if(when)card.append(node("p","account-export-job-sub",tr("Started {time}",{time:when})));
@@ -2867,8 +2874,8 @@ async function loadAccountExport(silent=false){
     state.accountExportDefaults={...(result.defaults||accountExportFallback),report_language:panelReportLanguage};
     state.accountExportCapabilities=result.capabilities||{};
     if(state.accountExportDraftProfile!==profile&&!state.accountExportDirty)accountExportDefaults(state.accountExportDefaults);
-    $("account-export-start").disabled=state.accountExportCapabilities.can_start===false||state.status?.collector.available_for_export===false||
-      state.accountExportJobs.some(job=>["preparing","running","waiting","packaging"].includes(job.phase));
+    $("account-export-start").disabled=state.accountExportCapabilities.can_start===false||state.status?.collector.available_for_account_export===false||
+      state.accountExportJobs.some(job=>job.active!==false&&["preparing","running","waiting","packaging"].includes(job.phase));
     $("account-export-status").textContent=state.status?.demo?
       tr("Demo account export uses fictional data only."):"";
     renderAccountExportBusy();
@@ -2878,11 +2885,11 @@ async function loadAccountExport(silent=false){
   try{await pending;}finally{if(accountExportRead?.promise===pending)accountExportRead=null;}
 }
 function renderAccountExportBusy(){
-  const collector=state.status?.collector,busy=!state.status?.demo&&!!collector?.has_session&&collector.available_for_export===false;
+  const collector=state.status?.collector,busy=!state.status?.demo&&!!collector?.has_session&&collector.available_for_account_export===false;
   show("account-export-busy",busy);if(!busy)return;
   const activity=accountActivityText({...(profileEntry()||{}),collector,
     sources_enabled:state.status.targets.filter(target=>target.enabled).length});
-  $("account-export-busy-copy").textContent=tr("{task}. The export can start when it finishes.",{task:activity.title});
+  $("account-export-busy-copy").textContent=tr("Another acquisition is using this account. Pause it or wait for it to finish; observation can stay on.");
 }
 async function accountExportAction(job,verb){
   await json("account-export/"+encodeURIComponent(job.id)+"/"+verb,{});
@@ -6122,7 +6129,7 @@ async function openExportDialog(){
   if(basic)facts.append(node("p","export-fact warn",tr("This is an ordinary group: message numbers differ between accounts, so only this account can download it.")));
   function estimate(){
     const n=list.querySelectorAll("input:checked").length;
-    $("export-dialog-estimate").textContent=tr("{n} idle accounts selected. Each account keeps its own connection and request limits.",{n});
+    $("export-dialog-estimate").textContent=tr("{n} available accounts selected. Each account keeps its own connection and request limits.",{n});
     $("export-dialog-start").disabled=!n;
   }
   for(const p of state.profiles){
@@ -6163,7 +6170,7 @@ async function openExportDialog(){
   const choice=await new Promise(resolve=>dialog.addEventListener("close",()=>resolve(dialog.returnValue),{once:true}));
   if(choice!=="start"||revision!==state.workspaceRevision||generation!==chatGeneration)return;
   const profiles=[...list.querySelectorAll("input:checked")].map(b=>b.value);
-  if(!profiles.length)throw new Error(tr("Select at least one idle account."));
+  if(!profiles.length)throw new Error(tr("Select at least one available account."));
   const dates=exportPeriod();
   const selection={...dates,languages:$("export-message-language").value?[$("export-message-language").value]:[],
     uncertain_language:$("export-uncertain-language").checked?"include":"exclude",reply_mode:$("export-reply-mode").value,
@@ -6348,7 +6355,7 @@ function renderLinkPlan(){
 }
 async function startLinkExport(){
   const p=linkPlan,profiles=[...$("link-export-plan").querySelectorAll("input[name=link-account]:checked")].map(b=>b.value);
-  if(!profiles.length)throw new Error(tr("Select at least one idle account."));
+  if(!profiles.length)throw new Error(tr("Select at least one available account."));
   const token=state.token,x=await json("multi-export/start",{chat_id:p.chat_id,lead:profiles.includes(p.reader)?p.reader:profiles[0],
     profiles,transport:$("link-export-transport").value,username:p.username||null},{root:true});
   if(state.token!==token)return;
