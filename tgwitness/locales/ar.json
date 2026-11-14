@@ -9849,5 +9849,6 @@
   "Search matched an earlier saved version.": "أدى البحث إلى مطابقة إصدار سابق محفوظ.",
   "Search saved messages": "البحث في الرسائل المحفوظة",
   "{n} saved versions": "{n} نسخة محفوظة",
-  "Chat loading: {running} active · {pending} pending": "تحميل المحادثات: {running} قيد التنفيذ · {pending} قيد الانتظار"
+  "Chat loading: {running} active · {pending} pending": "تحميل المحادثات: {running} قيد التنفيذ · {pending} قيد الانتظار",
+  "The Telegram connection changed. Retry the operation.": "تغيّر اتصال Telegram. أعد محاولة العملية."
 }

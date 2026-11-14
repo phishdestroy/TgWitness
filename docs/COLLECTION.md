@@ -343,6 +343,12 @@ its own signed outcome and reference to the earlier saved-file record. Cancellin
 waiting job does not cancel the active transfer; if that transfer fails or is cancelled,
 the next job can try again. Different attachments can download concurrently.
 
+Jobs with the same account, representation, expected size and capture action stay
+queued while one matching job is running. They do not occupy download slots, so
+other files can start even when the queue begins with many copies of one slow file.
+Completing an attempt wakes the queue. Priority lanes, saved retry delays and
+history ownership still apply; each observation receives its own outcome.
+
 Chat exports also share an active transfer for repeated file representations within
 the same export directory. Each message retains its attachment reference, and reuse
 requires a fresh size and SHA-256 check. Different files can be checked in parallel

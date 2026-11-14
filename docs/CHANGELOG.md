@@ -25,6 +25,14 @@
 
 ## Unreleased
 
+- Concurrent connection restores share one client and one connection attempt per
+  workspace. Interrupted setup releases waiting callers; an attempt whose credentials,
+  client or authorization state changed cannot report success for the replacement.
+- Repeated attachment jobs stay queued while a matching transfer runs, leaving
+  download slots available for other files. Priority, retry delays and history
+  ownership are retained. Existing queues gain the transfer index without rewriting
+  signed observations, and every completed job still records its own signed outcome.
+
 - Chat exports download repeated attachment representations once per export directory
   and verify unrelated retained files concurrently. Each message keeps its own file
   reference; size and SHA-256 checks still run before reuse. Unique temporary paths
@@ -34,6 +42,7 @@
 
 - Connection setup reuses a fresh preflight result for the same route instead of repeating its handshake immediately on Apply. Startup reads access and workspaces concurrently, chat export discovery waits for a selected chat, and rapid wizard/preference edits save only the latest queued state. Stale route results are checked again; workspace changes cancel unsent saves.
 - Initial chat loading retries failed stages with a persisted delay and bounds stalled requests by the operation timeout. History is saved before optional profile enrichment; completed stages survive restart and are not repeated during a retry. Chats and Home expose delayed work. Snapshot reads reject messages from another chat, invalid ID order or an older-page boundary violation, and stop when the source is disabled; saved records and signed interruption evidence are retained.
+- Live updates, operator requests, background checks and exports use separate request lanes. Slow responses do not hold another lane; pacing and Telegram waits for the same method remain shared. Updates stay ordered within each chat. Account-wide deletions also order later updates across chats. Shutdown joins pending handlers before recording observation stopped and records a gap if the drain deadline expires. Extra short polling covers up to 50 selected channels, with priority sources first, using Telegram’s interval (10 seconds by default, bounded to 2–120 seconds). Other enabled chats continue normal update delivery. Opening a chat bypasses history pacing and history slots while still respecting server waits.
 - Observation no longer has to be paused for exports on the same account. An account export, a chat export and loading messages into a chat run while observation keeps recording; one export uses an account at a time, and full history can also run alongside observation. The account page, the Home dashboard and the export dialogs say which tasks wait for each other.
 - Chats: opening an enabled chat that has no saved messages loads its latest 100 messages from Telegram, and **Load earlier messages from Telegram** at the top of a chat reads the next older page. Chats added by the folder and whole-account scopes get their latest messages once, as set under **When a new chat or bot appears** (100 by default for new workspaces). These reads are recorded as history snapshots.
 - Account export: while it discovers chats, the job card shows the stage, the number of chats found, the chat being checked and a progress bar. Chats are checked up to four at a time.

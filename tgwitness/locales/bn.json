@@ -9657,5 +9657,6 @@
   "Search matched an earlier saved version.": "অনুসন্ধান একটি পূর্বের সংরক্ষিত সংস্করণ খুঁজে পেয়েছে।",
   "Search saved messages": "সংরক্ষিত বার্তা অনুসন্ধান",
   "{n} saved versions": "{n}টি সংরক্ষিত সংস্করণ",
-  "Chat loading: {running} active · {pending} pending": "চ্যাট লোড হচ্ছে: {running} সক্রিয় · {pending} অপেক্ষমাণ"
+  "Chat loading: {running} active · {pending} pending": "চ্যাট লোড হচ্ছে: {running} সক্রিয় · {pending} অপেক্ষমাণ",
+  "The Telegram connection changed. Retry the operation.": "Telegram সংযোগ বদলে গেছে। কাজটি আবার চেষ্টা করুন।"
 }
