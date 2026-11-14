@@ -76,6 +76,8 @@ def transcript(context, rows, *, chat=None, sharing=False):
             yield view.recipient_guide(say, sharing=True)
         else:
             yield '<p><a href="../index.html">← ' + view.e(say('Account export')) + '</a></p>'
+            if view.state_note(chat, say):
+                yield '<p class="notice">' + view.e(view.state_note(chat, say)) + '</p>'
             yield '<p>' + view.e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.')) + '</p>'
             yield '<p>' + view.e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>'
             if (context.get('pagination') or {}).get('page', 1) == 1 and context.get('chat_map'):

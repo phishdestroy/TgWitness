@@ -140,8 +140,9 @@ def message(row):
 
 
 class DesktopExport:
-    def __init__(self, directory, inventory, receipts, job, coverage):
+    def __init__(self, directory, inventory, receipts, job, coverage, states=None):
         self.directory, self.inventory, self.receipts, self.job, self.coverage = directory, inventory, receipts, job, coverage
+        self.states = states or {}
         self.index = sqlite3.connect("")
         try:
             self.index_messages()
