@@ -1000,6 +1000,8 @@ class EvidencePDF:
         say = self.say
         if self.options.get("show_indicators", True) and (self.data.get("indicators") or {}).get("items"):
             indicators_section(self.lay, say, self.data["indicators"])
+        if self.options.get("show_indicators", True) and (self.data.get("repeated") or {}).get("rows"):
+            report.report_repeats.pdf(self.lay, say, self.data["repeated"], self.titles)
 
     def render_actions(self):
         say = self.say
