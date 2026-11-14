@@ -446,9 +446,11 @@ async def anchor_latest(store, network, settings):
                             "revocation": revocation})
             backoff.pop(url, None)
         except Exception as exc:
-            backoff[url] = backoff_entry(backoff.get(url), exc, settings["interval_minutes"] * 60)
-            results.append({"service": url, "kind": "rfc3161", "ok": False, "received": received, "error": problem(exc),
-                            "failures": backoff[url]["failures"], "retry_at": backoff[url]["retry_at"]})
+            result = {"service": url, "kind": "rfc3161", "ok": False, "received": received, "error": problem(exc)}
+            if getattr(network, "kind", None) != "none":
+                backoff[url] = backoff_entry(backoff.get(url), exc, settings["interval_minutes"] * 60)
+                result.update(failures=backoff[url]["failures"], retry_at=backoff[url]["retry_at"])
+            results.append(result)
     if backoff != saved:
         store.set_setting("evidence_backoff", backoff)
     for outcome in await ots_stamp(digest, settings["ots_calendars"], folder, name, network):
@@ -733,7 +735,7 @@ def request_anchor(store, vault, wakeup):
 
 
 async def anchor_loop(store, network_config, wakeup, status, devices=None, gateway=None):
-    last = 0.0
+    last, blocked = 0.0, False
     while True:
         with suppress(TimeoutError):
             await asyncio.wait_for(wakeup.wait(), LOOP_SECONDS)
@@ -741,13 +743,15 @@ async def anchor_loop(store, network_config, wakeup, status, devices=None, gatew
         if not settings["enabled"]:
             wakeup.clear()
             continue
-        if not wakeup.is_set() and time.time() - last < settings["interval_minutes"] * 60:
+        opened = blocked and getattr(network_config(), "kind", None) != "none"
+        if not wakeup.is_set() and not opened and time.time() - last < settings["interval_minutes"] * 60:
             continue
         wakeup.clear()
         last = time.time()
         status.update(busy=True, error=None)
         try:
             network = network_config()
+            blocked = getattr(network, "kind", None) == "none"
             record = await anchor_latest(store, network, settings)
             await upgrade_pending_ots(store, network, settings)
             await record_extras(store, network, settings, devices, gateway() if gateway else None)

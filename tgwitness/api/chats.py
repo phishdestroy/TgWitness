@@ -385,6 +385,8 @@ async def snapshot(request: Request, body: Snapshot, *, ctx=Depends(current_cont
             "The snapshot is larger than this workspace allows. Raise the limit in Parameters.",
         )
     collector = ctx.app.state.collector
+    if body.fill:
+        return await ctx.operation(collector.fill, body.chat_id, body.limit, body.before_id)
     return await ctx.operation(
         collector.snapshot_paused if body.pause_observation else collector.snapshot, body.chat_id, body.limit
     )

@@ -683,11 +683,11 @@ class Collector:
         return {
             "network": self.route_status(),
             "phase": self.phase, "running": self.running,
-            "account_task": ("monitoring" if self.running or self.observation_starting else
-                             "history" if self.history.busy else
+            "account_task": ("history" if self.history.busy else
                              "profile_image" if (self.export_claim or "").startswith("avatar:") else
-                             "export" if self.export_claim else None),
-            "available_for_export": not (self.running or self.observation_starting or self.export_claim
+                             "export" if self.export_claim else
+                             "monitoring" if self.running or self.observation_starting else None),
+            "available_for_export": not (self.observation_starting or self.export_claim
                                          or self.export_busy() or self.history.busy or self.connection_change_task),
             "connected": bool(self.client and self.client.is_connected()),
             "has_session": bool(credentials.get("session")),
@@ -892,7 +892,10 @@ class Collector:
             self.store.append("source.discovered", {
                 "title": title, "kind": kind, "mode": scope["mode"],
                 "folder": (self.folder_for(scope) or {}).get("title"),
-                "coverage": "recorded from this record on; earlier history of this chat is not fetched"}, chat_id)
+                "coverage": "recorded from this record on; " + (
+                    "its latest " + str(scope["new_chats"]["history"]) + " messages are read once, earlier history is "
+                    "not fetched" if scope["new_chats"]["history"] else "earlier history of this chat is not fetched")},
+                chat_id)
         self.source_status[str(chat_id)] = {"state": "discovered", "checked_at": utcnow(),
                                             "meaning": "Added automatically by the observation scope.",
                                             "visibility": "unknown", "role": "unknown"}
@@ -959,6 +962,8 @@ class Collector:
                     "operation": "new chat intake", "error_type": type(exc).__name__,
                     "coverage": "messages of this chat are still recorded live; its profile or earlier "
                                 "messages may be missing"}, chat_id)
+            if not self.intake.empty():
+                await asyncio.sleep(self.param("recheck_pause_seconds") / 2)
 
     async def capture_profile(self, chat_id, entity):
         info = {}
@@ -1053,7 +1058,13 @@ class Collector:
                     "paused": paused, "resumed": resumed, "excluded": sorted(excluded),
                     "dialogs_inspected": len(self.dialog_cache),
                     "coverage": "chats beyond the first " + str(self.param("dialog_limit")) + " dialogs are added when they "
-                                "become active; earlier history of added chats is not fetched"})
+                                "become active; " + (
+                                    "the latest " + str(scope["new_chats"]["history"]) + " messages of each added chat "
+                                    "are read once, earlier history is not fetched" if scope["new_chats"]["history"]
+                                    else "earlier history of added chats is not fetched")})
+        if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
+            for chat_id in added:
+                self.intake.put_nowait((chat_id, self.dialog_cache[chat_id]["entity"], False))
         return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
 
     def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):
@@ -1296,7 +1307,7 @@ class Collector:
 
     async def rewind_paused_updates(self):
         dropped, self.paused_drops = self.paused_drops, 0
-        if not dropped or not self.client:
+        if not dropped or not self.client or self.export_claim or self.export_busy() or self.history.busy:
             return dropped, False
         if self.client.is_connected():
             await self.client.disconnect()
@@ -2799,7 +2810,7 @@ class Collector:
         validate_collection_scope(self.store)
         if self.running:
             return
-        if self.export_claim or self.export_busy() or self.history.busy or self.observation_starting:
+        if self.history.busy or self.observation_starting:
             raise ValueError("This account is busy. Pause its current task before starting observation.")
         self.observation_starting = True
         client = self.client
@@ -4006,14 +4017,17 @@ class Collector:
                     resumed = False
         return {**result, "observation_resumed": resumed}
 
-    async def snapshot(self, chat_id, limit, entity=None, origin=None):
+    async def fill(self, chat_id, limit, before_id=None):
+        return await self.snapshot(chat_id, limit, origin="panel", before_id=before_id)
+
+    async def snapshot(self, chat_id, limit, entity=None, origin=None, before_id=None):
         owner = None
-        if origin is None:
+        if origin in (None, "panel") and not self.running:
             owner = "snapshot:" + secrets.token_hex(16)
             if not self.reserve_export(owner):
                 raise ValueError("This account is busy. Pause its current task before loading history.")
         try:
-            return await self._snapshot(chat_id, limit, entity, origin)
+            return await self._snapshot(chat_id, limit, entity, origin, before_id)
         finally:
             if owner:
                 try:
@@ -4021,22 +4035,24 @@ class Collector:
                 finally:
                     self.release_export(owner)
 
-    async def _snapshot(self, chat_id, limit, entity=None, origin=None):
+    async def _snapshot(self, chat_id, limit, entity=None, origin=None, before_id=None):
         if not self.selected(chat_id):
             raise ValueError("Enable this target before taking a history snapshot.")
         await self.restore()
         entity = entity or await self.resolve_target(chat_id)
-        count = 0
+        count, seen, oldest = 0, 0, None
         self.store.append("snapshot.started", {"limit": limit, "meaning": "current visible history",
-                                               **({"origin": origin} if origin else {})}, chat_id)
+                                               **({"origin": origin} if origin else {}),
+                                               **({"before_id": before_id} if before_id else {})}, chat_id)
         try:
-            async for message in self.client.iter_messages(entity, limit=limit):
+            async for message in self.client.iter_messages(entity, limit=limit, max_id=before_id or 0):
+                seen, oldest = seen + 1, message.id
                 if origin and self.own_skipped(message):
                     continue
                 if origin and self.store.message_state(chat_id, message.id)["content"]:
                     continue
                 await self.capture_message(message, "message.snapshot", chat_id,
-                                           source=origin + "_snapshot" if origin else None)
+                                           source=origin + "_snapshot" if origin and origin != "panel" else None)
                 count += 1
         except BaseException as exc:
             self.store.append("snapshot.interrupted", {"captured": count, "requested": limit,
@@ -4044,38 +4060,42 @@ class Collector:
             raise
         self.store.append("snapshot.completed", {"captured": count, "requested": limit,
                                                  "reconstructed_missed_events": False}, chat_id)
-        return {"captured": count, "requested": limit}
+        return {"captured": count, "requested": limit, "returned": seen, "oldest_id": oldest}
 
     def export_busy(self):
         return bool(self.export_task and not self.export_task.done())
 
     def activity(self):
         claim, detail = self.export_claim or "", None
+        brief = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), None)
         if self.authorization_required:
             task = "sign_in_required"
         elif self.connection_change_task is not None:
             task = "connection_change"
         elif self.observation_starting:
             task = "starting_observation"
-        elif self.running:
-            task = "observation"
         elif self.history.busy or claim.startswith("history:"):
             task = "history"
         elif self.export_busy() or self.export_state and claim == self.export_state.get("id"):
             task = "chat_export"
             detail = {key: self.export_state.get(key) for key in ("id", "chat_id", "title", "phase", "captured", "total",
                                                                   "eta_seconds", "stage")} if self.export_state else None
-        elif claim:
-            task = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), "export")
+        elif claim and not brief:
+            task = "export"
+        elif self.running:
+            task = "observation"
+        elif brief:
+            task = brief
         elif self.profiling.busy:
             task = "profiling"
         else:
             task = None
         until = self.pause_until()
-        return {"task": task, "detail": detail, "telegram_pause_until": until if until > time.time() else None}
+        return {"task": task, "detail": detail, "observing": self.running,
+                "telegram_pause_until": until if until > time.time() else None}
 
     def reserve_export(self, owner):
-        if (self.running or self.observation_starting or self.history.busy or self.export_busy()
+        if (self.observation_starting or self.history.busy or self.export_busy()
                 or self.export_claim or self.connection_change_task is not None):
             return False
         self.export_claim = owner

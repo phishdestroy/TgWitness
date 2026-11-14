@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=13">
+<link rel="stylesheet" href="/views/settings-hub.css?v=15">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/views/system-map.css?v=3">
 <link rel="stylesheet" href="/services.css?v=1">
@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="/views/chat-list.css?v=14">
 <link rel="stylesheet" href="/views/visibility.css?v=1">
 <link rel="stylesheet" href="/views/board.css?v=3">
-<link rel="stylesheet" href="/views/topology.css?v=2">
+<link rel="stylesheet" href="/views/topology.css?v=3">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
@@ -40,7 +40,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-profiles18"></script>
+<script defer src="/app.js?v=0.9.3-profiles20"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=14"></script>
@@ -349,7 +349,7 @@
     <label class="check-label"><input id="scope-own" type="checkbox"> Own actions: messages this account sends, its edits and reply-keyboard button presses</label>
     <fieldset class="scope-new" hidden id="scope-new"><legend>When a new chat or bot appears</legend>
       <label class="check-label"><input id="scope-new-profile" type="checkbox"> Save its profile: bot description and commands, group or channel description, members, invite link</label>
-      <div class="scope-new-history"><label for="scope-new-history">Save its latest visible messages, up to</label><input id="scope-new-history" max="1000" min="0" required step="1" type="number" value="0"><span class="unit">messages · 0 = none</span></div>
+      <div class="scope-new-history"><label for="scope-new-history">Save its latest visible messages, up to</label><input id="scope-new-history" max="1000" min="0" required step="1" type="number" value="100"><span class="unit">messages · 0 = none</span></div>
       <p class="hint">Saved right after the chat appears: earlier messages of a team chat you just joined, the greeting a bot sent before observation noticed it. Messages already saved live are not repeated.</p>
     </fieldset>
     <div class="scope-exclude" id="scope-exclude"></div>
@@ -499,7 +499,7 @@
     <dl class="collection-methods-grid">
       <div><dt>Saved observations</dt><dd>Export saved records without reading Telegram. Observation can keep running.</dd></div>
       <div><dt>Full history</dt><dd>Read past messages into this workspace. Pause observation first; new live changes are not recorded during history loading.</dd></div>
-      <div><dt>Telegram account</dt><dd>Download selected chats into a separate archive. Pause observation on this account first.</dd></div>
+      <div><dt>Telegram account</dt><dd>Download selected chats into a separate archive. Observation keeps running meanwhile.</dd></div>
       <div><dt>Live observation</dt><dd>Keep new messages and changes delivered while observation is running. Start it from Sources.</dd></div>
       <div><dt data-no-translate>Trusted Live</dt><dd>Use an official Desktop or Web session with video or native JSON. Setup and hybrid comparison require manual steps. Preview.</dd></div>
     </dl>
@@ -520,7 +520,7 @@
   <dialog class="account-export-dialog" id="account-export-dialog" aria-labelledby="account-export-dialog-title">
     <form id="account-export-form" method="dialog">
       <div class="account-export-dialog-head"><div><span class="eyebrow">NEW ACCOUNT EXPORT</span><h2 id="account-export-dialog-title" tabindex="-1">Choose what to save</h2></div><button class="quiet" id="account-export-close" type="button" aria-label="Close export settings">×</button></div>
-      <div class="account-export-busy" hidden id="account-export-busy" role="status"><p id="account-export-busy-copy"></p><button class="secondary" hidden id="account-export-pause" type="button">Pause observation</button></div>
+      <div class="account-export-busy" hidden id="account-export-busy" role="status"><p id="account-export-busy-copy"></p></div>
       <p class="muted">Every accessible chat and its full visible history are selected by default. Observation sources are separate from this export.</p>
       <p class="hint">For a personal backup, describe that purpose. You can prepare a separate sharing copy after the export finishes.</p>
       <p class="hint" hidden id="account-export-imported-key"></p>
@@ -1521,7 +1521,7 @@
     <form hidden id="code-form"><h2>Enter your login code</h2><label for="code">Code from Telegram</label><input autocomplete="one-time-code" id="code" inputmode="numeric" pattern="[0-9 \-]{3,12}" required><button class="primary" type="submit">Confirm code</button></form>
     <form hidden id="password-form"><h2>Two-step verification</h2><label for="password">Telegram password</label><input autocomplete="off" id="password" required type="password"><button class="primary" type="submit">Sign in</button></form>
     <button class="quiet auth-back" hidden id="auth-back" type="button">← Change sign-in method</button>
-    <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="account-restriction" hidden id="account-restriction" role="status"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><div class="account-tools" role="group" aria-labelledby="account-tools-title"><h3 id="account-tools-title">Account security</h3><div class="account-tools-row"><button class="secondary" id="account-sessions-show" type="button">Sessions of this account</button><button class="secondary" id="account-password" type="button">Two-step password</button><button class="secondary" id="account-probe-show" type="button">Witness probe</button></div><div class="account-sessions" hidden id="account-sessions"></div><div class="account-sessions" hidden id="account-probe"></div></div><div class="account-actions" role="group" aria-labelledby="account-actions-title"><h3 id="account-actions-title">Telegram actions</h3><label class="check-label"><input id="account-read-only" type="checkbox"> Read-only: no sending, joining or bot buttons from this account</label><p class="hint">On by default for imported sessions. Turning it on cancels queued actions. Their pace is set in Parameters.</p><p class="hint" hidden id="account-action-queue" role="status"></p></div><div class="account-manage" id="account-manage" role="group" aria-labelledby="account-manage-title"><h3 id="account-manage-title">Sign-in and removal</h3><div class="account-manage-row"><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button><button class="quiet" hidden id="forget-session" type="button">Forget on this computer</button></div><p class="hint" hidden id="sign-out-locked">This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.</p></div></div>
+    <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="account-restriction" hidden id="account-restriction" role="status"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><div class="account-tools" role="group" aria-labelledby="account-tools-title"><h3 id="account-tools-title">Account security</h3><div class="account-tools-row"><button class="secondary" id="account-profile-open" type="button">Profile and privacy</button><button class="secondary" id="account-sessions-show" type="button">Sessions of this account</button><button class="secondary" id="account-password" type="button">Two-step password</button><button class="secondary" id="account-probe-show" type="button">Witness probe</button></div><div class="account-sessions" hidden id="account-sessions"></div><div class="account-sessions" hidden id="account-probe"></div></div><div class="account-actions" role="group" aria-labelledby="account-actions-title"><h3 id="account-actions-title">Telegram actions</h3><label class="check-label"><input id="account-read-only" type="checkbox"> Read-only: no sending, joining or bot buttons from this account</label><p class="hint">On by default for imported sessions. Turning it on cancels queued actions. Their pace is set in Parameters.</p><p class="hint" hidden id="account-action-queue" role="status"></p></div><div class="account-manage" id="account-manage" role="group" aria-labelledby="account-manage-title"><h3 id="account-manage-title">Sign-in and removal</h3><div class="account-manage-row"><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button><button class="quiet" hidden id="forget-session" type="button">Forget on this computer</button></div><p class="hint" hidden id="sign-out-locked">This session was imported. Signing out would end it in Telegram for good, so it is disabled. Forget on this computer removes it here and leaves it active in Telegram.</p></div></div>
     <div class="route-line" hidden id="route-line"><svg aria-hidden="true" class="icon"><use href="#i-link"/></svg><span id="route-line-text"></span><button class="text-link" id="route-open" type="button">Change route</button></div>
     <section aria-labelledby="seen-by-title" class="seen-by" hidden id="seen-by"><h3 id="seen-by-title">What Telegram sees</h3><dl id="seen-by-list"></dl></section>
   </div>

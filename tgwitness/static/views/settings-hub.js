@@ -859,13 +859,31 @@ export function createSettingsHub(ctx) {
   function renderServices(page){
     page.append(node('h2','',tr('External services turned on by this goal')));
     const list=node('div','first-run-live');list.setAttribute('aria-live','polite');
-    const rows=live.services===null?[{state:'running',name:tr('Checking external services…'),line:''}]:
-      live.services.error?[{state:'unknown',name:tr('External services were not checked'),line:live.services.error}]:
-      live.services.map(row=>({state:row.state,name:tr(serviceNames[row.service]||row.service)+(row.address?' · '+(()=>{try{return new URL(row.address).hostname;}catch{return row.address;}})():''),line:serviceLine(row)}));
-    rows.forEach((row,i)=>{
-      const item=node('div','first-run-check');item.dataset.state=row.state;item.style.setProperty('--i',String(i));
-      item.append(ctx.stateBadge(row.state),node('strong','',row.name),node('span','hint',row.line));list.append(item);
-    });
+    const hostOf=address=>{try{return new URL(address).hostname;}catch{return address;}};
+    const groups=[];
+    if(live.services===null)groups.push({title:tr('Checking external services…'),rows:[{state:'running',host:'',line:''}]});
+    else if(live.services.error)groups.push({title:tr('External services were not checked'),rows:[{state:'unknown',host:'',line:live.services.error}]});
+    else for(const row of live.services){
+      let group=groups[groups.length-1];
+      if(!group||group.service!==row.service){group={service:row.service,title:tr(serviceNames[row.service]||row.service),rows:[]};groups.push(group);}
+      group.rows.push({state:row.state,host:row.address?hostOf(row.address):'',line:serviceLine(row)});
+    }
+    const worst=states=>['failed','degraded','unknown','running','configured','working','off'].find(value=>states.includes(value))||'unknown';
+    const chip=row=>{const item=node('span','first-run-host');item.dataset.state=row.state;item.append(ctx.stateBadge(row.state),node('span','',row.host));return item;};
+    let index=0;
+    const add=(state,cls)=>{const item=node('div','first-run-check'+(cls?' '+cls:''));item.dataset.state=state;item.style.setProperty('--i',String(index++));list.append(item);return item;};
+    for(const group of groups){
+      if(group.rows.length===1){
+        const row=group.rows[0];
+        add(row.state).append(ctx.stateBadge(row.state),node('strong','',group.title+(row.host?' · '+row.host:'')),node('span','hint',row.line));
+        continue;
+      }
+      const shared=group.rows.every(row=>row.line===group.rows[0].line&&row.state===group.rows[0].state);
+      const head=add(worst(group.rows.map(row=>row.state)));
+      head.append(ctx.stateBadge(head.dataset.state),node('strong','',group.title),node('span','hint',shared?group.rows[0].line:''));
+      if(shared){const hosts=node('span','first-run-hosts');hosts.append(...group.rows.map(chip));head.append(hosts);continue;}
+      for(const row of group.rows)add(row.state,'first-run-sub').append(node('span',''),chip(row),node('span','hint',row.line));
+    }
     page.append(list);
     if(live.services!==null)page.append(button('Check again',()=>checkServices()));
   }

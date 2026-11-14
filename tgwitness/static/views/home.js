@@ -1,9 +1,9 @@
 const TASKS = {
-  observation: ['Observing live updates', 'Loading older messages, chat and account exports, full history and connection changes', 'Reading saved messages, search, reports and signed exports of saved observations', 'Pause observation', 'collector/stop'],
+  observation: ['Observing live updates', 'Full history, connection changes and signing out', 'Everything else: loading messages and exports run at the same time', 'Pause observation', 'collector/stop'],
   starting_observation: ['Starting observation', 'Other Telegram tasks until observation has started', 'Reading saved messages and reports', null, null],
   history: ['Loading full history', 'Observation, exports, loading older messages and connection changes', 'Reading saved messages and reports', 'Pause history', 'history/pause'],
-  chat_export: ['Exporting a chat', 'Observation, other exports, full history and connection changes', 'Reading saved messages and reports', 'Cancel export', null],
-  export: ['Running an account or multi-account export', 'Observation, other exports, full history and connection changes', 'Reading saved messages and reports', 'Open exports', null],
+  chat_export: ['Exporting a chat', 'Other exports, full history and connection changes', 'Observation, reading saved messages and reports', 'Cancel export', null],
+  export: ['Running an account or multi-account export', 'Other exports, full history and connection changes', 'Observation, reading saved messages and reports', 'Open exports', null],
   loading_messages: ['Loading messages of a chat', 'Other Telegram tasks for a moment', 'Everything else', null, null],
   measuring_chat: ['Measuring a chat for export', 'Other Telegram tasks for a moment', 'Everything else', null, null],
   planning_export: ['Planning an export', 'Other Telegram tasks for a moment', 'Everything else', null, null],

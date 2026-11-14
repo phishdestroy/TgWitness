@@ -292,7 +292,7 @@ that notification; admin-log and interaction records retain their own attributio
 
 A snapshot requests the latest visible messages from an enabled source, up to
 500 per request. Results are labeled as history observations. Manual snapshots
-reserve an idle account; pause monitoring explicitly first. Repeated observations
+run alongside observation. Repeated observations
 are kept as separate records.
 
 Snapshots follow the attachment policy but remain separate from live-event switches.
