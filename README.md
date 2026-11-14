@@ -1,17 +1,17 @@
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-hero-mobile.svg">
-  <img src="docs/assets/presentation/casework-hero.svg" width="1200" alt="TgWitness — Messages change. Keep the evidence. Capture conversations, preserve observed edits and deletions, and share a record others can verify.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-cover-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-cover-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-workspace-cover-mobile.svg">
+  <img src="docs/assets/presentation/readme-workspace-cover.svg" width="1200" alt="TgWitness — Your chats. Your lasting copy. Download Telegram history as readable HTML, structured JSON and preserved media; follow saved versions and share reports with verification. Illustrated example.">
 </picture>
 
 <p align="center"><strong>Capture Telegram history. Follow the changes. Build a report others can verify.</strong></p>
 
 <p align="center">
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><strong>Try the workspace</strong></a> &nbsp; · &nbsp;
-  <a href="#quick-start"><strong>Install</strong></a> &nbsp; · &nbsp;
-  <a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a> &nbsp; · &nbsp;
-  <a href="https://github.com/phishdestroy/TgWitness/wiki">Handbook</a>
+  <a href="#quick-start"><img src="docs/assets/presentation/readme-nav-download-mobile.svg" width="138" height="59" alt="Install TgWitness"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/readme-nav-demo-mobile.svg" width="138" height="59" alt="Try the workspace"></a>
+  <a href="https://tgwitness-demo.destroy.tools/"><img src="docs/assets/presentation/readme-nav-live-mobile.svg" width="138" height="59" alt="Watch live capture"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/readme-nav-handbook-mobile.svg" width="138" height="59" alt="Handbook"></a>
 </p>
 
 <p align="center">
@@ -20,20 +20,6 @@
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
 </p>
-
-<a name="screenshots"></a>
-<a name="see-it-in-action"></a>
-
-<a href="https://phishdestroy.github.io/TgWitness/demo/">
-<picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-mobile-dark-still.webp">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-dark-still.webp">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-workspace-mobile-dark.webp">
-  <img src="docs/assets/presentation/readme-workspace-dark.webp" width="1440" alt="The TgWitness demo in motion: captured messages, saved versions and content retained after deletion. Fictional demonstration records.">
-</picture>
-</a>
-
-<p align="center"><sub>The actual workspace with fictional records. Click to explore — no Telegram login needed.</sub></p>
 
 <a name="quick-start"></a>
 <a name="run-it-on-your-machine"></a>
@@ -63,9 +49,35 @@ The installer checks package hashes and release signatures against its embedded 
 
 **First run:** choose **Just download**, **Follow chats** or **Evidence for a case** → connect an account → choose chats. The panel shows the controls for that task. [Setup guide →](docs/SETTINGS.md)
 
+## Inside the workspace
+
+<a name="screenshots"></a>
+<a name="see-it-in-action"></a>
+
+<a href="https://phishdestroy.github.io/TgWitness/demo/">
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-mobile-dark-still.webp">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-dark-still.webp">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-workspace-mobile-dark.webp">
+  <img src="docs/assets/presentation/readme-workspace-dark.webp" width="1440" alt="The TgWitness demo in motion: captured messages, saved versions and content retained after deletion. Fictional demonstration records.">
+</picture>
+</a>
+
+<p align="center"><sub>The actual workspace with fictional records. Click to explore — no Telegram login needed.</sub></p>
+
 <a name="what-tgwitness-does"></a>
 
 ## Why TgWitness
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-features-mobile.svg">
+  <img src="docs/assets/presentation/readme-features.svg" width="1200" alt="Three animated workflows: export a chat to HTML and JSON, find a shared link across recorded chats, and retain captured versions after a deletion notice.">
+</picture>
+
+<details>
+<summary><strong>Explore the workflows</strong> · collection, people, reports, exports, Secret Chats and verification</summary>
 
 | You want to… | What you get |
 | --- | --- |
@@ -76,17 +88,12 @@ The installer checks package hashes and release signatures against its embedded 
 | **Work with Secret Chats** | An integrated conversation view and exports for chats created or accepted by TgWitness, using a protocol module the panel installs with one button. [Secret Chats →](docs/PSEUDO-SECRET.md) |
 | **Let someone check the result** | Signed archives, a standalone verifier, retained checkpoints and optional timestamps, GitHub acquisition attestations or Intel TDX measurements. [Checks →](docs/EVIDENCE.md) |
 
+</details>
+
 Self-hosted. Encrypted session storage. Localhost panel by default. No telemetry.
 Source visibility, unavailable data and collection gaps remain visible in the saved record.
 
 ## From a conversation to a case
-
-<picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-features-mobile.svg">
-  <img src="docs/assets/presentation/readme-features.svg" width="1200" alt="Three animated workflows: export a chat to HTML and JSON, find a shared link across recorded chats, and retain captured versions after a deletion notice.">
-</picture>
 
 1. **Collect.** Choose chats, history and file limits. Progress, pauses and retries stay visible.
 2. **Investigate.** Search saved material, compare versions and connect findings on a Case Board.
@@ -100,12 +107,24 @@ Source visibility, unavailable data and collection gaps remain visible in the sa
 
 Captured observations form a signed, hash-linked journal. Exports include preserved files and a verifier; recipients can check them against a signing-key fingerprint received separately.
 
+<details>
+<summary><strong>See how the signed journal keeps each version</strong></summary>
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-hero-mobile.svg">
+  <img src="docs/assets/presentation/casework-hero.svg" width="1200" alt="TgWitness — Messages change. Keep the evidence. Capture conversations, preserve observed edits and deletions, and share a record others can verify.">
+</picture>
+
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-mobile-static.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-static.svg">
   <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-chain-mobile.svg">
   <img src="docs/assets/presentation/casework-chain.svg" width="1200" alt="New messages, saved edits and deletion observations form a linked, signed journal. Verify it against an independently trusted key.">
 </picture>
+
+</details>
 
 **3,598,381 records · 48 verified archives.** Documented public-history runs from 6 November 2026. [Measurements and verification →](docs/EXPORT-BENCHMARK-2026-11-06.md)
 
@@ -154,7 +173,8 @@ TgWitness takes no side: the same checks apply to the operator and the project.
 
 <a name="review-notes"></a>
 
-## Review notes
+<details>
+<summary><strong>Review notes</strong> · history, tests, verifier, Telegram client and defaults</summary>
 
 - **History.** TgWitness was developed and tested for about six months before publication. This repository starts with a squashed import (`8fb40fe0e`, 658 files). [Development history](docs/QUESTIONS-AND-CHECKS.md#development-history)
 - **Tests.** The regression suite of 126 test modules (about 950 test functions) runs in a private validation environment with synthetic accounts and a fake Telegram transport; test files are excluded from Git and source archives. Public CI runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and verifier fuzzing. [Tests and CI](docs/QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)
@@ -162,10 +182,19 @@ TgWitness takes no side: the same checks apply to the operator and the project.
 - **Telegram client.** Sign-in uses built-in public API pairs unless you enter your own, and each observation records which pair was used. [API pairs](docs/QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
 - **Defaults.** New workspaces connect through public MTProxy lists. The vault key stays in the data directory unless a new installation uses an external master key. [Connection security](docs/CONNECTION-SECURITY.md#external-master-key)
 
+</details>
+
 ## Explore more
 
 <details>
 <summary><strong>Investigation tools and integrations</strong></summary>
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-capabilities-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-capabilities-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-capabilities-mobile.svg">
+  <img src="docs/assets/presentation/readme-capabilities.svg" width="1200" alt="Illustrated workflows for people, bot interactions, archive analysis, sealed capture and case packages. Fictional examples.">
+</picture>
 
 | Area | Guides |
 | --- | --- |
@@ -185,6 +214,13 @@ The [capability record](docs/STATUS.md) lists each acquisition mode and its qual
 
 <details>
 <summary><strong>Deployment, updates and recovery</strong></summary>
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-start-map-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-start-map-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-start-map-mobile.svg">
+  <img src="docs/assets/presentation/readme-start-map.svg" width="1200" alt="Choose a task on first start and review the configured connections in the system map. Fictional values.">
+</picture>
 
 Run on your computer or server, in Docker, on a GitHub-hosted capture runner or in a Phala Intel TDX environment. Each account keeps its own workspace, session and signing key.
 
@@ -214,6 +250,9 @@ Sessions and credentials stay in the encrypted vault. The [System map](docs/SYST
 
 </details>
 
+<details>
+<summary><strong>Operator notice and source record</strong></summary>
+
 <!-- operator-notice:start -->
 
 <a href="docs/OPERATOR-INCOMPATIBILITY.md">
@@ -228,6 +267,8 @@ Sessions and credentials stay in the encrypted vault. The [System map](docs/SYST
 [Read the operator notice →](docs/OPERATOR-INCOMPATIBILITY.md) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 <!-- operator-notice:end -->
+
+</details>
 
 <details>
 <summary><strong>Read the project overview in your language</strong></summary>

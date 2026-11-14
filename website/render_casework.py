@@ -107,6 +107,55 @@ def main_cover(display, text, mobile, still):
     save(d, name, title + " A fictional message changes from 'Meet at 14:00' to 'Meet at 15:00'. After a deletion notice, its captured versions remain in the signed journal. Capture, investigate and verify.")
 
 
+def workspace_cover(display, text, mobile=False, still=False):
+    width, height = (640, 888) if mobile else (1200, 484)
+    title = "Your chats. Your lasting copy."
+    d = canvas(display, width, height, title, True, corners=False)
+    mark(d, 40, 30)
+    d.text("TgWitness", 89, 58, 29, INK, 700, -.8)
+    d.font = text
+    d.text("YOUR TELEGRAM WORKSPACE", 40, 100, 14, BLUE, 600, 1.5)
+    d.font = display
+    d.text("Your chats.", 37, 173, 70 if mobile else 72, INK, 700, -2)
+    d.text("Your lasting copy.", 37, 241, 60 if mobile else 61, BLUE, 700, -1.8)
+    d.font = text
+    d.text("Download history. Follow changes.", 40, 288, 25 if mobile else 23, MUTED)
+    d.text("Share a clear, verifiable report.", 40, 324, 25 if mobile else 23, MUTED)
+    for x, label, detail, color in (
+        (40, "DOWNLOAD", "Chats + files", BLUE),
+        (236 if mobile else 228, "FOLLOW", "Saved versions", GREEN),
+        (432 if mobile else 416, "REPORT", "Your findings", GOLD),
+    ):
+        d.add(f'<path d="M{x} 356h150" stroke="#36526b"/><path d="M{x} 356h32" stroke="{color}" stroke-width="2"/>')
+        d.text(label, x, 382, 14, color, 700, 1.2)
+        d.text(detail, x, 409, 18 if mobile else 17, INK, 500)
+    x, y, scale = (40, 444, 560 / 520) if mobile else (640, 45, 1)
+    d.add(f'<g transform="translate({x} {y}) scale({scale})">')
+    d.add('<path d="M18 0h158l22 24h304a18 18 0 0 1 18 18v336a18 18 0 0 1-18 18H18a18 18 0 0 1-18-18V18A18 18 0 0 1 18 0Z" fill="#10263b" stroke="#3b5c76" stroke-width="1.5"/>')
+    d.text("LOCAL COPY", 20, 17, 11, BLUE, 700, 1.1)
+    d.text("Saved conversation", 22, 72, 25, INK, 700, -.5)
+    d.add('<circle cx="485" cy="63" r="12" fill="#173e3c"/><path d="m479 63 4 4 8-9" fill="none" stroke="#98d8c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+    d.add('<rect x="22" y="91" width="326" height="40" rx="11" fill="#1c3650"/><rect x="127" y="143" width="371" height="40" rx="11" fill="#20443f"/>')
+    d.text("Photos from the trip.", 37, 117, 19, INK, 500)
+    d.text("Saved with the conversation.", 142, 169, 19, INK, 500)
+    d.add('<path d="M260 184v18H96v18m164-18v18m0-18h164v18" fill="none" stroke="#48667c" stroke-width="1.5"/>')
+    if not still:
+        d.add('<style>.archive-flow{stroke-dasharray:16 48;animation:archive-flow 5s linear infinite}@keyframes archive-flow{to{stroke-dashoffset:-128}}@media(prefers-reduced-motion:reduce){.archive-flow{animation:none}}</style>')
+        d.add('<path class="archive-flow" d="M260 184v18H96v18m164-18v18m0-18h164v18" fill="none" stroke="#8ccfff" stroke-width="2"/>')
+    for x, label, detail, color in ((22, "HTML", "Read chats", BLUE), (186, "JSON", "Structured data", GOLD), (350, "MEDIA", "Keep files", GREEN)):
+        d.add(f'<rect x="{x}" y="220" width="148" height="76" rx="10" fill="#0b1b2c" stroke="#3b566e"/>')
+        d.text(label, x + 15, 249, 20, color, 700, .6)
+        d.text(detail, x + 15, 277, 14, MUTED, 500)
+    d.add('<rect x="22" y="312" width="476" height="66" rx="10" fill="#0b1b2c" stroke="#3b566e"/>')
+    d.text("Report & activity", 38, 340, 20, INK, 600)
+    d.text("HTML / PDF + verification", 38, 362, 14, MUTED, 500)
+    for index, h in enumerate((13, 24, 18, 33, 28, 39)):
+        d.add(f'<rect x="{366 + index * 19}" y="{363 - h}" width="11" height="{h}" rx="2" fill="{GOLD if index == 5 else BLUE}" opacity="{.4 + index * .12}"/>')
+    d.add('</g>')
+    name = "readme-workspace-cover" + ("-mobile" if mobile else "") + ("-static" if still else "") + ".svg"
+    save(d, name, "Illustrated Telegram archive: a fictional conversation, readable HTML, structured JSON, preserved media and a report with activity graphics and verification. Download history, follow saved versions or prepare a report. The illustration contains no account data or measured results.")
+
+
 def hero(display, text, mobile=False, still=False, wiki=False):
     if not wiki:
         return main_cover(display, text, mobile, still)
@@ -309,14 +358,18 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--display-font',required=True)
     p.add_argument('--text-font',required=True)
+    p.add_argument('--workspace-cover-only',action='store_true',help='Render only the README workspace cover in desktop, mobile and reduced-motion variants.')
     args=p.parse_args()
     def fonts(path):return {w:instantiateVariableFont(TTFont(path),{'wght':w},inplace=False) for w in (500,600,700)}
     display,text=fonts(args.display_font),fonts(args.text_font)
     for mobile in (False,True):
         for still in (False,True):
+            workspace_cover(display,text,mobile,still)
+            if args.workspace_cover_only:
+                continue
             for wiki in (False,True):hero(display,text,mobile,still,wiki)
             for draw in (chain,checkpoint,assurance_modes):draw(text,mobile,still)
-    print('Rendered 20 casework covers and evidence diagrams.')
+    print('Rendered 4 workspace covers.' if args.workspace_cover_only else 'Rendered 24 workspace covers and evidence diagrams.')
 
 
 if __name__=='__main__':main()
