@@ -22,6 +22,7 @@ SETTING = "secret_chats"
 STATE = "secret_chats"
 PENDING = "secret_chat_files"
 HELD = "secret_chat_unwritten"
+REFRESH_SECONDS = 30
 HIDDEN = {"key", "iv"}
 QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", "DecryptedMessageActionCommitKey",
          "DecryptedMessageActionAbortKey", "DecryptedMessageActionNoop", "DecryptedMessageActionNotifyLayer",
@@ -231,7 +232,18 @@ class SecretChats:
                 raise
             self.write_held()
             self.resume_files()
+            self.spawn(self.refresh(manager, client))
             return True
+
+    async def refresh(self, manager, client):
+        while self.manager is manager:
+            await asyncio.sleep(REFRESH_SECONDS)
+            if self.manager is manager and client.is_connected() and any(
+                    getattr(chat.state, "name", "") != "CLOSED" for chat in manager.list()):
+                try:
+                    await client.catch_up()
+                except Exception:
+                    LOG.exception("Secret chat updates could not be refreshed")
 
     async def detach(self):
         async with self.lock:
@@ -536,8 +548,6 @@ class SecretChats:
     async def close(self, chat_id):
         manager = self.require()
         await self.acting(manager.close, chat_id, reason="ended from TgWitness")
-        self.note("closed", {"secret_chat_id": chat_id, "reason": "ended from TgWitness", "history_deleted_by_peer": False,
-                             "journal_copy": "kept; the journal is append-only"})
 
     @staticmethod
     def snapshot(chat):
@@ -567,6 +577,7 @@ class SecretChats:
         return {"available": available(), "settings": settings(self.store), "connected": connected, "error": self.error,
                 "has_session": bool((self.collector.vault.read("credentials") or {}).get("session")),
                 "interaction_problem": interaction_problem,
+                "interaction_goal": interaction_problem == interactions.GOAL_OFF,
                 "module": secret_module.describe(),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
                 "records": display(records),

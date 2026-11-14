@@ -87,7 +87,8 @@ export function createSecretChats(context) {
     find('secret-reconnect').hidden = !view.has_session || !editable;
     find('secret-report').hidden = !may('export');
     find('secret-interaction').hidden = !view.interaction_problem || !may('interact') || !view.available || !settings.enabled;
-    find('secret-interaction').textContent = tr(view.interaction_problem || '');
+    find('secret-interaction').textContent = tr(view.interaction_problem || '') + (view.interaction_goal ? ' ' +
+      tr('Accepting, starting and answering chats are Telegram actions. To use them, choose another goal under Settings → Goal.') : '');
     find("secret-status").dataset.state = settingsBusy || !settings.enabled ? 'off' : view.connected ? 'ok' : 'warn';
     find("secret-status").textContent = installing ? tr('Downloading and checking the module…') : settingsBusy ? tr('Saving…') : !settings.enabled ? tr("Pseudo-secret is off for this account.") :
       view.connected ? tr("Connected: new messages are recorded as they arrive.") :

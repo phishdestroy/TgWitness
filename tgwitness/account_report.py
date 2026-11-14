@@ -29,6 +29,7 @@ VALUES = {'keep': 'Keep matching text', 'omit': 'Omit message text',
           'regular': 'Regular Telegram API', 'takeout': 'Telegram Takeout'}
 VALUES.update(download='Download files', hashes_only='Save server hashes only', exclude='Exclude file bytes',
               collapsed='One marker for each run', each='One marker for each message')
+REASONS = ('Stopped before acquisition completed.',)
 CONTEXT_LABELS = {'archive_reference': 'Archive reference', 'created_at': 'Copy created',
                   'requested_at': 'Collection requested', 'captured_from': 'First recorded capture',
                   'captured_until': 'Last recorded capture'}
@@ -425,7 +426,7 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
                          + e(str(len(hashes.get('ranges', [])))) + ' SHA-256 ranges · <a download href="'
                          + prefix + manifest + '">' + e(say('Download file hashes')) + '</a></p>')
         elif not sharing:
-            parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(text(attachment.get('reason'))) + '</span></p>')
+            parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(reason_text(attachment.get('reason'), say)) + '</span></p>')
     parts.append('<p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#' + reference + '</code></p>')
     parts.append(technical(row, say))
     parts.append('</article>')
@@ -546,6 +547,10 @@ def sharing_report(context, rows):
     yield ending(say)
 
 
+def reason_text(value, say):
+    return say(value) if value in REASONS else text(value)
+
+
 def text_keys():
     import ast
     from pathlib import Path
@@ -555,4 +560,4 @@ def text_keys():
             and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
     return list(dict.fromkeys(keys + case_assessment.text_keys() + activity_maps.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
                               list(VALUES.values()) + list(CONTEXT_LABELS.values()) + list(WITHHELD_RULE_LABELS.values())
-                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps']))
+                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps', *REASONS]))

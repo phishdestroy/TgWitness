@@ -160,13 +160,16 @@ def pace_status(store):
     return {"read_only": read_only(store), "queued": len(times), "next_at": min(times, default=None)}
 
 
+GOAL_OFF = "Telegram actions from the panel are off for the Evidence for a case goal."
+
+
 def permitted(collector):
     store = collector.store
     check_pause(collector)
     check_restriction(store)
     goal = (store.get_setting("goal_preset", None) or store.get_setting("setup", None) or {}).get("goal")
     if goal == "evidence":
-        raise ValueError("Telegram actions from the panel are off for the Evidence for a case goal.")
+        raise ValueError(GOAL_OFF)
     if read_only(store):
         raise AccountRestricted(READ_ONLY)
 

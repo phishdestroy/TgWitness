@@ -35,7 +35,12 @@ async def connected(ctx, call, *args, **kwargs):
         raise HTTPException(400, secret.UNAVAILABLE)
     if chats_of(ctx).manager is None:
         await collector.restore()
-    return await call(*args, **kwargs)
+    try:
+        return await call(*args, **kwargs)
+    except secret.library.ChatClosed:
+        raise HTTPException(409, "This chat has ended. Nothing more can be sent to it.")
+    except secret.library.ChatNotReady:
+        raise HTTPException(409, "The other side has not accepted this chat yet.")
 
 
 async def view(*, before: int | None = Query(default=None, ge=1),
