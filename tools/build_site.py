@@ -101,6 +101,8 @@ DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
 DEMO_STATIC.update({"demo/views/topology.js": "tgwitness/static/views/topology.js",
                     "demo/views/topology.css": "tgwitness/static/views/topology.css",
                     "demo/topology-data.js": "website/demo/topology-data.js"})
+DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
+                    for name in ("swarm.js", "swarm.css", "swarm-export.js")})
 DEMO_STATIC.update({"demo/" + name: "website/demo/" + name for name in ("secret-chats.js", "secret-chats.css")})
 DEMO_STATIC.update({"demo/views/report-guidance.js": "tgwitness/static/views/report-guidance.js",
                     "demo/jurisdictions.json": "tgwitness/jurisdictions.json"})

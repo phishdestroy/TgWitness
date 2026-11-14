@@ -365,6 +365,8 @@ class AccountLost(AuthorizationRequired):
 def connection_change(call):
     @wraps(call)
     async def guarded(self, *args, **kwargs):
+        if self.observation_stopping:
+            raise ValueError("Observation is stopping. Wait for it to finish before changing its connection.")
         if self.export_busy() or self.export_claim:
             raise ValueError("An export is using this account. Wait for it or cancel it before changing its connection.")
         previous, current = self.connection_change_task, asyncio.current_task()
@@ -610,6 +612,8 @@ class Collector:
         self.media_slots = {}
         self.export_claim = None
         self.observation_starting = False
+        self.observation_task = None
+        self.observation_stopping = 0
         self.connection_change_task = None
         self.foreground = 0
         self.idle_release = None
@@ -723,13 +727,15 @@ class Collector:
                              "profile_image" if (self.export_claim or "").startswith("avatar:") else
                              "export" if self.export_claim else
                              "monitoring" if self.running or self.observation_starting else None),
-            "available_for_export": not (self.observation_starting or self.export_claim
+            "available_for_export": not (self.observation_starting or self.observation_stopping or self.export_claim
                                          or self.export_busy() or self.history.busy or self.connection_change_task),
-            "available_for_history": not (self.observation_starting or self.export_claim or self.export_busy()
+            "available_for_history": not (self.observation_starting or self.observation_stopping
+                                           or self.export_claim or self.export_busy()
                                            or self.history.busy or self.connection_change_task),
-            "available_for_account_export": not (self.observation_starting or self.export_claim or self.export_busy()
+            "available_for_account_export": not (self.observation_starting or self.observation_stopping
+                                                  or self.export_claim or self.export_busy()
                                                   or self.history.busy or self.connection_change_task),
-            "available_for_observation": not (self.observation_starting
+            "available_for_observation": not (self.observation_starting or self.observation_stopping
                 or self.connection_change_task or self.export_claim and
                 self.export_claim != getattr(self, "observation_compatible_owner", None)),
             "connected": bool(self.client and self.client.is_connected()),
@@ -3137,6 +3143,8 @@ class Collector:
     async def start(self):
         from .settings_hub import validate_collection_scope
         validate_collection_scope(self.store)
+        if self.observation_stopping:
+            raise ValueError("Observation is stopping. Wait for it to finish before starting again.")
         if self.running:
             return
         compatible_owner = self.export_claim and self.export_claim == getattr(self, "observation_compatible_owner", None)
@@ -3144,13 +3152,25 @@ class Collector:
                 or self.history.busy and not compatible_owner or self.observation_starting):
             raise ValueError("This account is busy. Pause its current task before starting observation.")
         self.observation_starting = True
+        self.observation_task = asyncio.current_task()
         client = self.client
         try:
             await self.start_observation()
         except BaseException as exc:
-            self.paused_drops += len(self.buffered)
+            self.paused_drops += sum(handler == self.on_raw for handler, _, _ in self.buffered)
             self.buffered, self.buffering = [], False
-            if self.running:
+            if self.buffer_dropped:
+                self.paused_drops += sum(entry["updates"] for entry in self.buffer_dropped.values())
+                with suppress(Exception):
+                    self.record_buffer_overflow()
+            if self.paused_drops:
+                with suppress(Exception):
+                    self.store.append("coverage.gap", {
+                        "reason": "startup_interrupted", "updates_not_recorded": self.paused_drops,
+                        "completeness": "incomplete", "run_id": self.run_id,
+                        "meaning": "Startup ended with delivered updates not recorded. A later start requests "
+                                   "them again when a saved update position is available."})
+            if self.running and not self.observation_stopping:
                 with suppress(Exception):
                     await self.stop()
                 self.running = False
@@ -3164,6 +3184,7 @@ class Collector:
             raise
         finally:
             self.observation_starting = False
+            self.observation_task = None
 
     async def start_observation(self):
         if (self.watchdog or self.media_worker or self.urgent_media_worker or self.ephemeral_media_worker
@@ -3183,7 +3204,6 @@ class Collector:
         try:
             await self.prepare_start()
         except BaseException:
-            self.buffered, self.buffering = [], False
             self.paused_drops += dropped
             raise
         if not self.history.busy:
@@ -3220,19 +3240,24 @@ class Collector:
                            "New messages can still be recovered by reading history."})
         self.mark_recheck_start()
         client = self.client
+        pending = deque()
         try:
             for _ in range(BUFFER_DRAIN_ROUNDS):
-                pending, self.buffered = self.buffered, []
+                pending.extend(self.buffered)
+                self.buffered = []
                 if not pending:
                     break
-                for item in pending:
-                    await self.enqueue_update(client, *item)
-        finally:
-            pending, self.buffered, self.buffering = self.buffered, [], False
+                while pending:
+                    await self.enqueue_update(client, *pending.popleft())
+            pending.extend(self.buffered)
+            self.buffered, self.buffering = [], False
+            while pending:
+                await self.enqueue_update(client, *pending.popleft())
+        except BaseException:
+            self.buffered = [*pending, *self.buffered]
+            raise
         if self.buffer_overflow:
             self.record_buffer_overflow()
-        for item in pending:
-            await self.enqueue_update(client, *item)
         self.watchdog = asyncio.create_task(self.supervise(self.monitor, "connection monitor"))
         self.media_worker = asyncio.create_task(self.supervise(lambda: self.download_worker("bulk"), "media worker"))
         self.urgent_media_worker = asyncio.create_task(
@@ -3293,6 +3318,21 @@ class Collector:
         await asyncio.gather(*tasks, return_exceptions=True)
 
     async def stop(self, shutdown=False):
+        self.observation_stopping += 1
+        self.history.observe_after_run = None
+        current = asyncio.current_task()
+        pending = {task for task in (self.observation_task, self.history.observe_task)
+                   if task is not None and task is not current and not task.done()}
+        try:
+            for task in pending:
+                task.cancel()
+            if pending:
+                await asyncio.gather(*pending, return_exceptions=True)
+            await self.stop_observation(shutdown)
+        finally:
+            self.observation_stopping -= 1
+
+    async def stop_observation(self, shutdown=False):
         await self.wait_authorization_cleanup()
         if shutdown:
             await self.profiling.suspend()
@@ -4504,7 +4544,8 @@ class Collector:
                 "telegram_pause_until": until if until > time.time() else None}
 
     def reserve_export(self, owner, *, alongside_observation=True):
-        if (self.running and not alongside_observation or self.observation_starting or self.history.busy or self.export_busy()
+        if (self.running and not alongside_observation or self.observation_starting or self.observation_stopping
+                or self.history.busy or self.export_busy()
                 or self.export_claim or self.connection_change_task is not None):
             return False
         self.export_claim = owner
@@ -4518,7 +4559,8 @@ class Collector:
             self.close_when_idle()
 
     def idle(self):
-        return not (self.running or self.observation_starting or self.history.busy or self.export_busy()
+        return not (self.running or self.observation_starting or self.observation_stopping
+                    or self.history.busy or self.export_busy()
                     or self.profiling.busy
                     or self.export_claim or self.connection_change_task is not None or self.foreground
                     or self.login_client is not None or self.qr_task is not None)

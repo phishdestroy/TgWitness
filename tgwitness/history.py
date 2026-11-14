@@ -26,6 +26,8 @@ class History:
     def __init__(self, collector):
         self.collector, self.store = collector, collector.store
         self.task = None
+        self.observe_task = None
+        self.observe_after_run = None
         self.transport = None
         with self.store.transaction():
             for statement in (
@@ -143,6 +145,7 @@ class History:
                            "live recording keeps earlier versions and deletion notices."})
             for target in targets:
                 history_cursor.seal(self.store, run_id, target["chat_id"])
+        self.observe_after_run = run_id
         self.task = asyncio.create_task(in_lane("bulk", lambda: self.run(run_id)))
         self.task.add_done_callback(lambda task: self.finished(run_id, task))
         return self.status()
@@ -150,7 +153,8 @@ class History:
     def finished(self, run_id, task):
         self.collector.release_export("history:" + run_id)
         run = self.current()
-        if (task.cancelled() or not run or run["id"] != run_id or run["phase"] not in ("complete", "incomplete")
+        if (task.cancelled() or self.observe_after_run != run_id or not run or run["id"] != run_id
+                or run["phase"] not in ("complete", "incomplete")
                 or not options_of(run).observe_after or self.collector.running):
             return
         self.observe_task = asyncio.create_task(self.observe_after(run_id))
@@ -187,6 +191,7 @@ class History:
             if not self.collector.running:
                 self.store.recover_media()
             self.transition(run["id"], "running", "operator_resume")
+            self.observe_after_run = run["id"]
             self.task = asyncio.create_task(in_lane("bulk", lambda: self.run(run["id"])))
             self.task.add_done_callback(lambda task, run_id=run["id"]: self.finished(run_id, task))
         except BaseException:
@@ -330,7 +335,8 @@ class History:
                 await self.transport.open()
                 self.store.set_setting("history_takeout_wait_until", 0)
             media_client = self.transport.for_media if self.transport else None
-            if not capture_settings(self.store)["messages_first"]:
+            messages_first = capture_settings(self.store)["messages_first"]
+            if not messages_first:
                 media_tasks = [asyncio.create_task(self.collector.download_worker(
                     owner="history:" + run_id, history_run=run_id, producer_done=producer_done,
                     client_for_job=media_client))
@@ -368,9 +374,11 @@ class History:
                     self.collector.media_wakeup.set()
                     if media_tasks:
                         await asyncio.gather(*media_tasks)
-                    if capture_settings(self.store)["messages_first"]:
-                        await self.collector.download_worker(owner="history:" + run_id, history_run=run_id,
-                                                             client_for_job=media_client)
+                    if messages_first:
+                        media_tasks = [asyncio.create_task(self.collector.download_worker(
+                            owner="history:" + run_id, history_run=run_id, client_for_job=media_client))
+                            for _ in range(options.media_workers)]
+                        await asyncio.gather(*media_tasks)
                     if self.collector.authorization_required:
                         self.transition(run_id, "paused", "authorization_required")
                         return

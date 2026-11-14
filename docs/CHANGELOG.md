@@ -49,6 +49,15 @@
 - **Swarm** selects accounts with a tick on each card or **Select all shown** and runs one action on all of them at once: **Start observation**, **Pause observation**, **Re-roll WARP**, **Check journals** (each signed record and the retained checkpoint) or **Export selected** (each account's signed export in one ZIP with a list signed by the main workspace). The action starts for every account at once, and a panel fills in each account's result as it arrives, with the reason when one is skipped. **Start all** and **Pause all** of a group run up to eight accounts at a time instead of one after another.
 - **Swarm** shows every account at work on the server, refreshed every second: its task and progress, journal records per second, files in the queue, file connections, Telegram waits, the route and the latest problem, with filters for busy, idle, waiting, blocked and disconnected accounts. Only the main administrator sees it.
 - Panel addresses `/home`, `/network-topology`, `/case-board`, `/map` and `/logs` lead to their pages. Keys: `g` then `h`, `c`, `j`, `e`, `a`, `w` or `s` open a page, `j` / `k` move between chats, `?` lists them. **Return to recommended** shows the changes before applying them; repeated lines in the system log are counted instead of repeated; the account export summary names why an export needs attention; DNS lookups on the system map are attributed to the component that made them.
+- History's messages-first mode uses the selected attachment worker count after
+  reading text. Changing the capture preference during a run no longer leaves its
+  deferred attachments without workers; pause and resume retain queued jobs.
+- Stopping observation cancels a pending start, including an automatic start after
+  history. A completed history task cannot restart observation after Stop. New
+  observation, history, export and connection changes are refused until connection
+  cleanup has finished; existing jobs keep their account reservation.
+- Interrupted startup retains the count of buffered updates that were not recorded,
+  writes a coverage gap and keeps the previous update position for a later retry.
 - Live journal streams recheck access after reading and delivering Case Board
   updates. Revoked sessions and reduced chat permissions cannot receive a prepared
   journal batch from the previous access scope.
