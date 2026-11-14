@@ -481,4 +481,4 @@ Die Position der Autoren und der Betreiberhinweis auf Deutsch:
   <a href="../../.github/SECURITY.md"><b>Sicherheitslücke melden</b></a>
 </p>
 
-[Maschinenlesbarer Projektindex](../../llms.txt) · [Vollständiges Handbuch als Text](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Repository-Regeln für Agenten](../../AGENTS.md)
+[Maschinenlesbarer Projektindex](../../llms.txt) · [Vollständiges Handbuch als Text](https://phishdestroy.github.io/TgWitness/llms-full.txt)

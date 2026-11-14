@@ -481,4 +481,4 @@ Telegram Desktop سے مطابقت رکھنے والے JSON/HTML ویوز شام
   <a href="../../.github/SECURITY.md"><b>کمزوری رپورٹ کریں</b></a>
 </p>
 
-[مشین کے پڑھنے کے قابل پروجیکٹ انڈیکس](../../llms.txt) · [مکمل متنی ہینڈ بک](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [ایجنٹس کے لیے ریپوزٹری کے قواعد](../../AGENTS.md)
+[مشین کے پڑھنے کے قابل پروجیکٹ انڈیکس](../../llms.txt) · [مکمل متنی ہینڈ بک](https://phishdestroy.github.io/TgWitness/llms-full.txt)

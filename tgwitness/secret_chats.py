@@ -7,35 +7,59 @@ import shutil
 import time
 
 from telethon import utils
+from telethon.errors import FloodWaitError
 from telethon.tl import types
 from telethon.tl.tlobject import TLObject
 
+from . import secret_module
 from .monitoring import capture_settings
 from .store import canonical
 from .workers import complete_in_thread
 
-try:
-    import telethon_secret_chat as library
-    from telethon_secret_chat.schema import secret_tl as library_tl
-except ImportError:
-    library = library_tl = None
-
+library = library_tl = VaultStorage = None
 LOG = logging.getLogger("tgwitness.secret_chats")
 SETTING = "secret_chats"
 STATE = "secret_chats"
 PENDING = "secret_chat_files"
 HELD = "secret_chat_unwritten"
+REFRESH_SECONDS = 30
 HIDDEN = {"key", "iv"}
 QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", "DecryptedMessageActionCommitKey",
          "DecryptedMessageActionAbortKey", "DecryptedMessageActionNoop", "DecryptedMessageActionNotifyLayer",
          "DecryptedMessageActionResend"}
-UNAVAILABLE = ("Pseudo-secret needs the optional package kiaro-telethon-secret-chat. "
-               "Install TgWitness with the secret-chats extra and restart the panel.")
+UNAVAILABLE = "Pseudo-secret needs its protocol module, which is not installed yet."
 SAME = ("direction", "seq_no", "text", "ttl", "reply_to_random_id", "entities", "media")
 
 
 def available():
     return library is not None
+
+
+def bind():
+    global library, library_tl, VaultStorage
+    try:
+        import telethon_secret_chat as module
+        from telethon_secret_chat.schema import secret_tl
+    except ImportError:
+        return False
+
+    class Storage(module.MemoryStorage):
+
+        def __init__(self, vault):
+            super().__init__()
+            self.vault = vault
+            saved = vault.read(STATE)
+            if saved:
+                state = decode(saved)
+                if not all(isinstance(state.get(group), dict) for group in ("chats", "out", "in")):
+                    raise ValueError("The saved secret-chat state is damaged.")
+                self._state = state
+
+        def _write(self):
+            self.vault.save(STATE, encode(self._state))
+
+    library, library_tl, VaultStorage = module, secret_tl, Storage
+    return True
 
 
 def of(collector):
@@ -138,21 +162,7 @@ def retain_file(temporary, media_root):
     return digest, size, repaired
 
 
-if library is not None:
-    class VaultStorage(library.MemoryStorage):
-
-        def __init__(self, vault):
-            super().__init__()
-            self.vault = vault
-            saved = vault.read(STATE)
-            if saved:
-                state = decode(saved)
-                if not all(isinstance(state.get(group), dict) for group in ("chats", "out", "in")):
-                    raise ValueError("The saved secret-chat state is damaged.")
-                self._state = state
-
-        def _write(self):
-            self.vault.save(STATE, encode(self._state))
+bind()
 
 
 class SecretChats:
@@ -166,6 +176,8 @@ class SecretChats:
         self.file_worker = None
         self.file_wakeup = asyncio.Event()
         self.error = None
+        self.asked = set()
+        self.early = {}
 
     @property
     def store(self):
@@ -202,6 +214,19 @@ class SecretChats:
         except Exception:
             return None
 
+    def listen(self, client):
+        if client in self.early or not available() or not settings(self.store)["enabled"]:
+            return
+        held = []
+
+        async def keep(update):
+            if self.client is not client and len(held) < 2000 and isinstance(
+                    update, (types.UpdateEncryption, types.UpdateNewEncryptedMessage)):
+                held.append(update)
+
+        client.add_event_handler(keep)
+        self.early[client] = keep, held
+
     async def attach(self, client):
         if not available() or not settings(self.store)["enabled"]:
             return False
@@ -215,14 +240,33 @@ class SecretChats:
                          "DecryptFailed", "SendFailed"):
                 manager.on(name, getattr(self, "on_" + name))
             self.manager, self.client = manager, client
+            keep, held = self.early.pop(client, (None, ()))
+            if keep:
+                client.remove_event_handler(keep)
             try:
                 await manager.start()
             except BaseException:
                 self.manager = self.client = None
                 raise
+            for update in held:
+                try:
+                    await manager._subscription(update)
+                except Exception:
+                    LOG.exception("An update received before secret chats started could not be applied")
             self.write_held()
             self.resume_files()
+            self.spawn(self.refresh(manager, client))
             return True
+
+    async def refresh(self, manager, client):
+        while self.manager is manager:
+            await asyncio.sleep(REFRESH_SECONDS)
+            if self.manager is manager and client.is_connected() and any(
+                    getattr(chat.state, "name", "") != "CLOSED" for chat in manager.list()):
+                try:
+                    await client.catch_up()
+                except Exception:
+                    LOG.exception("Secret chat updates could not be refreshed")
 
     async def detach(self):
         async with self.lock:
@@ -246,7 +290,7 @@ class SecretChats:
             raise ValueError(UNAVAILABLE)
         if not settings(self.store)["enabled"]:
             raise ValueError("Turn on pseudo-secret for this account first.")
-        if self.manager is None:
+        if self.manager is None or self.client is None or not self.client.is_connected():
             raise ValueError("Connect this account to Telegram first.")
         return self.manager
 
@@ -413,10 +457,13 @@ class SecretChats:
         return True
 
     def unaffordable(self, reference, media_root):
+        capture = capture_settings(self.store)
+        if not capture["download_media"]:
+            return "attachment downloads are off"
         size = getattr(reference, "size", None)
         if not isinstance(size, int):
             size = None
-        limit = capture_settings(self.store)["max_media_mb"] * 1024**2
+        limit = capture["max_media_mb"] * 1024**2
         if size is not None and size > limit:
             return "larger than the media size limit"
         free = shutil.disk_usage(media_root).free
@@ -443,7 +490,10 @@ class SecretChats:
                                             "reason": refused,
                                             "meaning": "The encrypted file stays queued; nothing was downloaded."})
                 return
-            await self.manager.save_file(reference, temporary)
+            size = getattr(reference, "size", 0)
+            size = max(0, size) if isinstance(size, int) else 0
+            timeout = self.collector.param("media_timeout_seconds") + size // (self.collector.param("media_min_speed_kbps") * 1024)
+            await asyncio.wait_for(self.manager.save_file(reference, temporary), timeout)
             digest, size, repaired = await complete_in_thread(retain_file, temporary, media_root)
             self.note("file", {"secret_chat_id": item["secret_chat_id"], "random_id": item["random_id"],
                                **({"message_event": message} if message else {}),
@@ -521,8 +571,6 @@ class SecretChats:
     async def close(self, chat_id):
         manager = self.require()
         await self.acting(manager.close, chat_id, reason="ended from TgWitness")
-        self.note("closed", {"secret_chat_id": chat_id, "reason": "ended from TgWitness", "history_deleted_by_peer": False,
-                             "journal_copy": "kept; the journal is append-only"})
 
     @staticmethod
     def snapshot(chat):
@@ -531,9 +579,32 @@ class SecretChats:
                 "key_visualization": library.key_visualization(chat.key_hash).hex if chat.key_hash else None,
                 "created_at": chat.created_at, "closed_reason": chat.closed_reason}
 
+    def person(self, user_id):
+        collector = self.collector
+        entity = collector.people.get(user_id) or collector.dialog_cache.get(user_id, {}).get("entity")
+        if entity is not None:
+            return {"name": utils.get_display_name(entity) or None, "username": getattr(entity, "username", None)}
+        if user_id not in self.asked and self.client is not None and running():
+            self.asked.add(user_id)
+            self.spawn(self.learn(user_id))
+        return None
+
+    async def learn(self, user_id):
+        try:
+            entity = await self.client.get_entity(types.PeerUser(user_id))
+        except Exception:
+            return
+        self.collector.people[utils.get_peer_id(entity)] = entity
+
     def view(self, *, before=None, after=None):
-        connected = self.manager is not None
-        chats = [self.snapshot(chat) for chat in self.manager.list()] if connected else []
+        from . import interactions
+        interaction_problem = None
+        try:
+            interactions.permitted(self.collector)
+        except (ValueError, FloodWaitError) as exc:
+            interaction_problem = str(exc)
+        connected = self.manager is not None and self.client is not None and self.client.is_connected()
+        chats = [self.snapshot(chat) for chat in self.manager.list()] if self.manager is not None else []
         if before is not None and after is not None:
             raise ValueError("Choose an older or newer history page, not both.")
         records = self.store.events(kind="secret_chat.", limit=2001, before=before, after=after)
@@ -544,7 +615,13 @@ class SecretChats:
         if after is None:
             records.reverse()
         return {"available": available(), "settings": settings(self.store), "connected": connected, "error": self.error,
+                "has_session": bool((self.collector.vault.read("credentials") or {}).get("session")),
+                "interaction_problem": interaction_problem,
+                "interaction_goal": interaction_problem == interactions.GOAL_OFF,
+                "module": secret_module.describe(),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
+                "people": {str(user_id): self.person(user_id) for user_id in
+                           {chat["peer_user_id"] for chat in chats if type(chat["peer_user_id"]) is int}},
                 "records": display(records),
                 "next_before": records[0]["seq"] if more and after is None else None,
                 "next_after": records[-1]["seq"] if more and after is not None else None,

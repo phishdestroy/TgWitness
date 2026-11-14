@@ -405,4 +405,4 @@ TgWitness 會記錄傳送到所連接 Telegram 帳戶的內容，包括聊天、
   <a href="../../.github/SECURITY.md"><b>回報安全漏洞</b></a>
 </p>
 
-[機器可讀的專案索引](../../llms.txt) · [完整純文字手冊](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [給 AI 代理程式的儲存庫規則](../../AGENTS.md)
+[機器可讀的專案索引](../../llms.txt) · [完整純文字手冊](https://phishdestroy.github.io/TgWitness/llms-full.txt)

@@ -481,4 +481,4 @@ A posição dos autores e o aviso sobre o operador, neste idioma:
   <a href="../../.github/SECURITY.md"><b>Relatar uma vulnerabilidade</b></a>
 </p>
 
-[Índice do projeto legível por máquina](../../llms.txt) · [Manual completo em texto](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Regras do repositório para agentes](../../AGENTS.md)
+[Índice do projeto legível por máquina](../../llms.txt) · [Manual completo em texto](https://phishdestroy.github.io/TgWitness/llms-full.txt)

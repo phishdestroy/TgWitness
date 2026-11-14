@@ -475,4 +475,4 @@ TgWitness บันทึกเนื้อหาที่ส่งถึงบ�
   <a href="../../.github/SECURITY.md"><b>รายงานช่องโหว่</b></a>
 </p>
 
-[ดัชนีโปรเจกต์ที่เครื่องอ่านได้](../../llms.txt) · [คู่มือฉบับข้อความเต็ม](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [กฎของรีโพซิทอรีสำหรับเอเจนต์](../../AGENTS.md)
+[ดัชนีโปรเจกต์ที่เครื่องอ่านได้](../../llms.txt) · [คู่มือฉบับข้อความเต็ม](https://phishdestroy.github.io/TgWitness/llms-full.txt)

@@ -481,4 +481,4 @@ TgWitness সংযুক্ত Telegram অ্যাকাউন্টে প�
   <a href="../../.github/SECURITY.md"><b>দুর্বলতা জানান</b></a>
 </p>
 
-[মেশিনে পাঠযোগ্য প্রকল্প সূচি](../../llms.txt) · [সম্পূর্ণ টেক্সট হ্যান্ডবুক](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [এজেন্টদের জন্য রিপোজিটরির নিয়ম](../../AGENTS.md)
+[মেশিনে পাঠযোগ্য প্রকল্প সূচি](../../llms.txt) · [সম্পূর্ণ টেক্সট হ্যান্ডবুক](https://phishdestroy.github.io/TgWitness/llms-full.txt)

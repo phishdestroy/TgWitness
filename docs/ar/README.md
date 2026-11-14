@@ -481,4 +481,4 @@ Telegram Desktop بصيغتي JSON/HTML. ويوفر [التصدير الموزّ
   <a href="../../.github/SECURITY.md"><b>أبلغ عن ثغرة</b></a>
 </p>
 
-[فهرس المشروع المقروء آليًا](../../llms.txt) · [الدليل النصي الكامل](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [قواعد المستودع للوكلاء](../../AGENTS.md)
+[فهرس المشروع المقروء آليًا](../../llms.txt) · [الدليل النصي الكامل](https://phishdestroy.github.io/TgWitness/llms-full.txt)

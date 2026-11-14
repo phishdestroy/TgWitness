@@ -481,4 +481,4 @@ Mualliflarning pozitsiyasi va operator haqidagi bildirishnoma, shu tilda:
   <a href="../../.github/SECURITY.md"><b>Zaiflik haqida xabar bering</b></a>
 </p>
 
-[Mashina o‘qiy oladigan loyiha indeksi](../../llms.txt) · [To‘liq matnli qo‘llanma](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Agentlar uchun repozitoriy qoidalari](../../AGENTS.md)
+[Mashina o‘qiy oladigan loyiha indeksi](../../llms.txt) · [To‘liq matnli qo‘llanma](https://phishdestroy.github.io/TgWitness/llms-full.txt)

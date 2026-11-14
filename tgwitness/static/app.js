@@ -1,5 +1,6 @@
 "use strict";
 const panelRoots=new Map([...document.querySelectorAll('.view')].map(root=>[root.id.slice(5),root]));
+for(const text of document.querySelectorAll('#workspace p, #workspace small, dialog p, dialog small'))text.dataset.static='1';
 const $ = id => {
   const attached=document.getElementById(id);if(attached)return attached;
   for(const root of panelRoots.values()){
@@ -29,13 +30,14 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   accountDisclosureJob: null, accountDisclosurePreview: null, accountDisclosureDirty: false,
   accountDisclosures: {}, exportTask: 'journal', workflow: null};
 let workspaceSafety;
-const workspaceSafetyReady=import('./core/workspace-safety.js?v=1').then(({createWorkspaceSafety})=>{
-  workspaceSafety=createWorkspaceSafety({state,find:$,tr,avatar:avatarNode,switchProfile,refreshStatus,confirm:askConfirm});
+const workspaceSafetyReady=import('./core/workspace-safety.js?v=3').then(({createWorkspaceSafety})=>{
+  workspaceSafety=createWorkspaceSafety({state,find:$,tr,avatar:avatarNode,switchProfile,refreshStatus,confirm:askConfirm,
+    describe:()=>!state.status||!accountActivity?'':state.status.demo?tr('Sample data'):accountActivityText(profileEntry()||{collector:state.status.collector}).title});
   window.TgWitnessWorkspace=workspaceSafety;
 });
-let accountState;
+let accountState,accountActivity;
 let boardView;
-const boardReady=import('./views/board.js?v=2').then(({createCaseBoard})=>{
+const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   boardView=createCaseBoard({root:$('view-board'),state,json,tr,trn,node,toast,may,download,media:mediaNode,
     openEvidence:async(event,range)=>{
       const revision=state.workspaceRevision;
@@ -71,17 +73,20 @@ const boardReady=import('./views/board.js?v=2').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout1-wizard1').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout9').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
-  const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run')).map(el=>{
+  const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
     const view=root?.[0]||'connection';
-    const text=el.labels?.[0]?.textContent?.trim()||el.getAttribute('aria-label')||el.id;
+    const own=el.labels?.[0]||el.closest('label')||root?.[1].querySelector('label[for="'+CSS.escape(el.id)+'"]');
+    const named=own?.querySelector('strong')?.textContent||[...own?.childNodes||[]].filter(n=>n.nodeType===3||n.nodeType===1&&!n.hidden&&!n.matches('input,select,textarea,button,small')).map(n=>n.textContent).join(' ');
+    const text=named?.replace(/\s+/g,' ').trim()||el.getAttribute('aria-label')||el.placeholder||el.id;
     el.dataset.level=el.dataset.level||(['parameters','integrations','system-log'].includes(view)?'expert':'standard');
     const form=el.closest('form')?.id, extra=el.closest('.extra-panel')?.id.replace('extras-','');
     return {key:el.id,id:el.id,label:text,view,level:el.dataset.level,extra,form};
   });
-  settingsHub=createSettingsHub({root:$('view-settings'),wizardRoot:$('view-first-run'),state,json,tr,node,toast,navigate,askConfirm,$,refreshStatus,
+  settingsHub=createSettingsHub({root:$('view-settings'),wizardRoot:$('view-first-run'),state,json,tr,node,icon,toast,navigate,askConfirm,$,refreshStatus,
+    avatar:avatarNode,profile:()=>profileEntry(),
     staleView:()=>new StaleView(),
     language:LANG,languages:LANGUAGES,authCard:()=>authCard,authMethod:setAuthMethod,catalog,
     loadSettingsForm:id=>({'alerts-form':loadAlerts,'replica-form':loadReplica,'evidence-form':loadEvidence}[id])(),
@@ -101,9 +106,26 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout1-wizard1').then(
 });
 let connectionView;
 const connectionViewReady=import('./views/connection.js?v=2').then(({createConnectionView})=>{
-  connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm});
+  connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
-const accountStateReady=import('./components/account-state.js?v=1').then(module=>{accountState=module.accountState;});
+const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
+  accountState=module.accountState;accountActivity=module.accountActivity;});
+let homeView,homeTask;
+const homeReady=Promise.all([import('./views/home.js?v=9'),accountStateReady]).then(([module])=>{
+  homeTask=module.taskInfo;
+  homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
+    refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast});
+});
+function busyExplanation(detail,profile){
+  if(typeof detail!=='string'||!detail.startsWith('This account is busy'))return null;
+  const collector=(state.profiles||[]).find(p=>p.id===profile)?.collector||(profile===state.profile?state.status?.collector:null);
+  const info=homeTask?.(collector?.activity);
+  if(!info)return null;
+  const d=collector.activity.detail;
+  const now=collector.activity.task==='chat_export'&&d?tr('Exporting {chat}',{chat:d.title||('#'+d.chat_id)}):tr(info.label);
+  return tr('This account is busy: {task}.',{task:now})+' '+tr('Not available now: {list}',{list:tr(info.blocks)})+'. '
+    +tr('Still available: {list}',{list:tr(info.allows)})+'.'+(info.action?' '+tr('To free it: {action} on the Overview page.',{action:tr(info.action)}):'');
+}
 let disclosurePreview;
 const disclosurePreviewReady=import('./views/disclosure-preview.js?v=2').then(({createDisclosurePreview})=>{
   disclosurePreview=createDisclosurePreview({root:$('view-evidence'),tr,formatTime:accountExportTime});
@@ -112,16 +134,17 @@ let viewHost=null;
 const viewContexts=new Map();
 const viewOptions=view=>({signal:viewContexts.get(view)?.signal});
 const viewReady=Promise.all([
-  import('./core/view-host.js?v=1'),
+  import('./core/view-host.js?v=2'),
   new Promise(resolve=>document.readyState==='complete'?resolve():document.addEventListener('DOMContentLoaded',resolve,{once:true})),
 ]).then(([{createViewHost}])=>{
-  viewHost=createViewHost({getSession:()=>({workspace:state.profile,revision:state.workspaceRevision}),onError:error=>toast(error.message,true)});
+  viewHost=createViewHost({tr,getSession:()=>({workspace:state.profile,revision:state.workspaceRevision}),onError:error=>toast(error.message,true)});
   for(const [name,root] of panelRoots){
     let top=0,scrolls=[];
     viewHost.register(name,root,{
       async enter(context){
         viewContexts.set(name,context);
-        if(context.params.load!==false)await loadPanelView(name);
+        if(typeof context.params.load==='function')await context.params.load();
+        else if(context.params.load!==false)await loadPanelView(name);
         if(!context.current())return;
         for(const [element,scroll] of scrolls)if(root.contains(element))element.scrollTop=scroll;
         if(context.params.restore!==false)window.scrollTo({top,behavior:'instant'});
@@ -134,6 +157,7 @@ const viewReady=Promise.all([
         if(name==='integrations'){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
         if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
         if(name==='parameters')parametersView?.leave();
+        if(name==='secret-chats')secretChatsView?.leave();
         if(name==='evidence'){exportsView?.leave();reportSelection?.leave();}
         if(name==='system-log')systemLogView?.leave();
         if(name==='system-map')systemMapView?.leave();
@@ -158,6 +182,7 @@ function resetViewContent(view){
   if(view==='group')groupView?.reset();
   if(view==='witness'){setupView?.resetSession();state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;state.githubDirty=false;}
   if(view==='chats')chatListView?.resetSession();
+  if(view==='secret-chats')secretChatsView?.reset();
   if(view==='sealed')window.TgWitnessCapture?.reset();
   if(view==='system-log')systemLogView?.resetSession();
   if(view==='system-map')systemMapView?.resetSession();
@@ -175,13 +200,14 @@ async function loadPanelView(view){
   if(view==='system-map'){await systemMapReady;await systemMapView.enter();return;}
   if(view==='board'){await boardReady;await boardView.load();return;}
   if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load();}
-  else if(view==='start')renderWorkflowControls();
+  else if(view==='start'){await homeReady;await loadProfiles().catch(()=>{});renderWorkflowControls();}
   else if(view==='sources'){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
   else if(view==='witness')await loadExtras();
   else if(view==='parameters')await loadParameters();
   else if(view==='accounts'){renderAccounts();await loadProfiles();}
   else if(view==='group'){await groupViewReady;await loadProfiles();await groupView.load(state.groupId);}
   else if(view==='chats')await refreshChats(true);
+  else if(view==='secret-chats')await showSecretChats(true);
   else if(view==='observations')await refreshEvents();
   else if(view==='access')await loadAccess();
   else if(view==='system-log')await loadConsole();
@@ -195,12 +221,14 @@ async function loadPanelView(view){
 }
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
+  tab:state.view==='sources'?sourcesView?.tab:state.view==='evidence'?exportsView?.tab:null,
   slice:state.boardSlice||null,added:!!state.boardAdded,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
   since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null,
-  step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null};}
+  step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null,
+  hub:state.view==="settings"?settingsHub?.section||null:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=9").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=11").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -222,12 +250,12 @@ async function applyRouteToPanel(route,current){
   viewQueries("observations","[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
   if(route.view==="chats"&&route.chatId!==null&&route.chatId!==state.chat)beginChat(route.chatId);
   if(route.view==="group")state.groupId=route.group;
-  navigate(route.view,{history:false,load:false});
+  await navigate(route.view,{history:false,load:async()=>{
   const view=state.view;
   if(view==='topology'){await topologyReady;if(current())await topologyView.enter();return;}
   if(view==='system-map'){await systemMapReady;if(current())await systemMapView.enter();return;}
   if(view==='board'){await boardReady;await boardView.load();return;}
-  if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step);}
+  if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step,view==='settings'?route.hub:undefined);}
   else if(view==="chats"){
     await refreshChats(false,route.chatId);
     if(current()&&route.chatId!==null){
@@ -236,7 +264,8 @@ async function applyRouteToPanel(route,current){
     }
   }
   else if(view==="observations"){await refreshEvents();if(current()&&route.seq)await openRecord(route.seq,{history:false});}
-  else if(view==="sources"){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
+  else if(view==="sources"){await sourcesReady;sourcesView.enter({params:{tab:route.tab||'scope'}});renderTargets();await loadScope();}
+  else if(view==='secret-chats')await showSecretChats(true);
   else if(view==="parameters"){
     await loadParameters();if(current()){state.parameterSection=route.section;if(route.section)parametersView?.selectSection(route.section,{record:false});}
   }else if(view==="accounts")await loadProfiles();
@@ -249,8 +278,14 @@ async function applyRouteToPanel(route,current){
   else if(view==="evidence"){
     renderChatExportTools();
     await Promise.all([loadReportSettings(),loadExports(),loadAccountExport().catch(accountExportError)]);
+    if(current()){
+      exportsView.select(route.tab||'downloads',false,{history:false});
+      if(route.tab==='settings'&&reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
+    }
   }
   else if(view==="witness"){await loadExtras();if(current())selectExtra(route.extra,{history:false});}
+  else await loadPanelView(view);
+  }});
 }
 
 const permissionLabels={
@@ -311,6 +346,9 @@ const labels = {
   "account.password_changed": [tr("Two-step password changed"), "lock", "system"],
   "session.exclusive_automatic": [tr("Automatic only-session changed"), "lock", "system"],
   "session.exclusive_postponed": [tr("Only-session attempt postponed"), "clock", "system"],
+  "session.security_baseline": [tr("Telegram security notices read"), "shield", "system"],
+  "session.fingerprint": [tr("Session key fingerprint recorded"), "fingerprint", "system"],
+  "session.concurrent_at_start": [tr("Other sessions at start"), "users", "system"],
   "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
   "account.authorization_error": [tr("Another client lost its authorization"), "alert", "system"],
@@ -491,7 +529,7 @@ const askTyped=(message,expected,options)=>ownedDialog('typed',message,expected,
 const MEDIA_TYPE_LABELS={photo:"Photos",video:"Videos",animation:"GIFs & animations",video_note:"Round video messages",
   voice:"Voice messages",audio:"Music & audio",sticker:"Stickers",document:"Files & documents"};
 let panelTime;
-const timeReady=import("./core/time.js?v=1").then(({createTimeFormatter})=>{
+const timeReady=import("./core/time.js?v=2").then(({createTimeFormatter})=>{
   let zone="UTC";try{zone=localStorage.getItem("tgwitness-time-zone")||"UTC";}catch{}
   panelTime=createTimeFormatter({locale:LANG,translate:tr,zone});
   const label=node("label","language-pick time-zone-pick"),select=node("select");
@@ -544,7 +582,29 @@ let networkLoadedFor=null;
 let qrPending=null,importExpectedId=null,importClientProfile=null,importFormats=[],importTwoFactor="",accountImportRevision=0,authMethod="phone";
 let accessStarted=false;
 class StaleView extends Error {constructor(){super("");this.name="StaleView";}}
-function toast(message, error=false) { if(!message)return;const n = $("toast"); n.textContent = message; n.classList.toggle("error", error); show("toast", true); clearTimeout(toastTimer); toastTimer = setTimeout(() => leave("toast"), error ? 9000 : 5000); }
+class Cancelled extends Error {constructor(){super("");this.name="Cancelled";}}
+function toast(message, error=false) {
+  if(!message)return;const n = $("toast"),mark=node("span","toast-mark"),close=node("button","toast-close");
+  mark.append(icon(error?"alert":"check"));close.type="button";close.setAttribute("aria-label",tr("Close"));close.append(icon("x"));
+  close.addEventListener("click",()=>{clearTimeout(toastTimer);leave("toast");});
+  n.replaceChildren(mark,node("strong","toast-title",tr("Error")),node("span","toast-text",message),close);
+  n.classList.toggle("error", error); show("toast", true);
+  if(n.showPopover){n.popover="manual";try{n.hidePopover();}catch{}n.showPopover();}
+  const life=error?9000:5000,arm=()=>{clearTimeout(toastTimer);toastTimer=setTimeout(()=>leave("toast"),life);};
+  n.onpointerenter=()=>clearTimeout(toastTimer);n.onpointerleave=arm;arm();
+}
+document.addEventListener("click",event=>{
+  const n=$("toast"),inside=box=>event.clientX>=box.left&&event.clientX<=box.right&&event.clientY>=box.top&&event.clientY<=box.bottom;
+  if(!n||n.hidden||!document.querySelector("dialog:modal")||n.closest("dialog")||!inside(n.getBoundingClientRect()))return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const close=n.querySelector(".toast-close");
+  if(close&&inside(close.getBoundingClientRect())){clearTimeout(toastTimer);leave("toast");}
+},true);
+new MutationObserver(records=>{
+  const n=$("toast");
+  if(!n||n.hidden||!n.showPopover||n.closest("dialog")||!records.some(record=>record.target.matches?.("dialog:modal")))return;
+  try{n.hidePopover();n.showPopover();}catch{}
+}).observe(document.documentElement,{attributes:true,attributeFilter:["open"],subtree:true});
 async function api(path, body, options={}) {
   const cancellingLogin=/^auth\/qr\/[A-Za-z0-9_-]+\/cancel$/.test(path);
   if(state.me&&!$("workspace").hidden&&!cancellingLogin&&!['access/me','profiles','access/logout'].includes(path))workspaceSafety?.assert();
@@ -553,7 +613,7 @@ async function api(path, body, options={}) {
   if(body?.enabled&&['evidence','replica','alerts'].includes(path)&&state.me?.admin){
     const current=await json('settings',undefined,{profile,token});
     if(!current.values.outside){
-      if(!await askConfirm(tr('This feature needs external requests. Allow them?')))throw new Error(tr('Cancelled'));
+      if(!await askConfirm(tr('This feature needs external requests. Allow them?')))throw new Cancelled();
       if(revision!==state.workspaceRevision||token!==state.token)throw new StaleView();
       await json('settings/edit',{key:'outside',value:true,revision:current.revision},{profile,token});
     }
@@ -568,21 +628,24 @@ async function api(path, body, options={}) {
     ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions,...(requestSignal?{signal:requestSignal}:{})});
   }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();
     if(revision===state.workspaceRevision&&token===state.token)connectionNotice?.fail();
-    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));throw error;}
+    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));
+    throw new Error(tr("The panel did not answer. Check that TgWitness is running and that this device can reach it."),{cause:error});}
   if(fetchOptions.signal?.aborted){await response.body?.cancel();throw new StaleView();}
   if(!allowStale&&revision!==state.workspaceRevision){await response.body?.cancel();throw new StaleView();}
   if(revision===state.workspaceRevision&&token===state.token){
-    if(response.ok&&path==='status')connectionNotice?.clear();else if(response.status>=500)connectionNotice?.fail();
+    if(path==='status'){if(response.ok)connectionNotice?.clear();else if(response.status>=500)connectionNotice?.fail();}
   }
   if (!response.ok) {
-    const result = await response.json().catch(() => ({detail: tr("Request failed")}));
-    let detail = result.detail || tr("Request failed");const parameter=detail?.parameter;
-    if (Array.isArray(detail)) detail = detail.map(x => x.field + ": " + x.message).join("; ");
-    if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
+    const result = await response.json().catch(() => ({detail: [502,503,504].includes(response.status)||response.status>=520&&response.status<=530
+      ? tr("The panel did not answer. Check that TgWitness is running and that this device can reach it.") : tr("Request failed")+" · HTTP "+response.status}));
+    let detail = result?.detail || tr("Request failed")+" · HTTP "+response.status;const parameter=detail?.parameter;
+    if (Array.isArray(detail)) detail = detail.map(x => [x?.field ?? (Array.isArray(x?.loc) ? x.loc.filter(part => part !== "body").join(".") : ""),
+      x?.message ?? x?.msg ?? (typeof x === "string" ? x : "")].filter(Boolean).join(": ")).filter(Boolean).join("; ") || tr("Request failed")+" · HTTP "+response.status;
+    if (typeof detail === "object") detail = tr(typeof detail.message === "string" && detail.message ? detail.message : "Request failed") + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "") + (detail.error_id ? " " + tr("Error ID for the panel log: {id}", {id: detail.error_id}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
     if(fetchOptions.signal?.aborted)throw new StaleView();
-    const error=new Error(tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;throw error;
+    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;throw error;
   }
   return response;
 }
@@ -600,7 +663,7 @@ async function busy(button, work) {
   if (button) {button.disabled = true;button.setAttribute("aria-busy","true");}
   const form=button?.closest("form");form?.querySelector(".form-error")?.remove();
   try { return await work(); } catch (e) {
-    if(e instanceof StaleView)return;
+    if(e instanceof StaleView||e instanceof Cancelled)return;
     toast(e.message, true);
     if(form){const message=node("p","form-error",e.message);message.setAttribute("role","alert");form.append(message);}
     if(e.field&&form?.contains($(e.field))){showFieldError($(e.field),e.message);$(e.field).focus();}
@@ -664,7 +727,7 @@ async function unlock() {
   if(state.profiles.some(profile=>profile.id===requested.workspace&&!profile.error_type))state.profile=requested.workspace;
   if(!state.profiles.some(p=>p.id===state.profile && !p.error_type))
     state.profile=state.profiles.find(p=>!p.error_type)?.id||"default";
-  if(requested.error||requested.explicit&&requested.workspace!==state.profile)throw new Error(tr('Unknown workspace.'));
+  if(requested.error==='Unknown workspace.'||requested.explicit&&requested.workspace!==state.profile)throw new Error(tr('Unknown workspace.'));
   $('profile-select').value=state.profile;
   if(!new URL(location.href).searchParams.has('ws')){
     const initialURL=new URL(location.href);initialURL.searchParams.set('ws',state.profile);history.replaceState(history.state,'',initialURL);
@@ -672,7 +735,7 @@ async function unlock() {
   state.status = await json("status");
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
-  if(!state.opened&&!requested.explicit){
+  if(!state.opened&&(!requested.explicit||requested.error)){
     state.view=state.status.demo||state.status.targets?.length&&state.status.stats.total?'chats':viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view))state.view="chats";
@@ -703,7 +766,7 @@ function viewAllowed(view){
   if(view==='system-map')return !!state.me?.admin;
   if(view==='board')return may('board.read');
   const limited=!!state.status?.chats_limited;
-  return {settings:!!state.me?.admin,'first-run':!!state.me?.admin,start:!!state.me&&!limited,sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
+  return {'secret-chats':may('view')&&!limited,settings:!!state.me?.admin,'first-run':!!state.me?.admin,start:!!state.me&&!limited,sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
     parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,group:!!state.me?.admin,
     access:!!state.me?.admin,"system-log":!!state.me?.admin,integrations:!!state.me?.admin,
     analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
@@ -802,7 +865,8 @@ function navigate(view,options={}) {
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  $("view-label").textContent=tr({'system-map':'System map',topology:'Network topology',settings:'Settings','first-run':'First setup',start:"Start here",chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",group:"Group",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
+  const viewLabel={'system-map':'System map',topology:'Network topology',settings:'Settings','first-run':'First setup',start:"Start here",chats:"Chats","secret-chats":"Pseudo-secret",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",group:"Group",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view];
+  $("view-label").textContent=tr(viewLabel);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
   if(state.status){renderSetup();renderWorkflowControls();}
@@ -852,10 +916,20 @@ function renderWorkflowControls(){
   show('workflow-link-card',!state.status.demo&&may('export'));
   show('workflow-account-card',canExport);
   show('workflow-investigation-card',viewAllowed('sources')&&viewAllowed('connection')&&may('collect'));
-  $('workflow-status-title').textContent=state.status.demo?tr('Demo workspace'):tr(info.label);
-  $('workflow-status-title').closest('.workflow-status').dataset.state=info.kind;
-  $('workflow-status-copy').textContent=tr('{records} saved records · {sources} selected sources',
-    {records:state.status.stats.total.toLocaleString(),sources:state.status.targets.filter(target=>target.enabled).length});
+  homeView?.render();
+  const sources=state.status.targets.filter(target=>target.enabled).length,current=profileEntry()||{};
+  const activity=accountActivityText({...current,collector:state.status.collector,sources_enabled:sources}),demo=state.status.demo;
+  $('workflow-status-title').textContent=demo?tr('Demo workspace'):activity.title;
+  $('workflow-status-title').closest('.workflow-status').dataset.state=demo?'demo':activity.kind;
+  $('workflow-status-copy').textContent=[demo?'':current.label,trn('{n} saved record','{n} saved records',state.status.stats.total),
+    trn('{n} selected chat','{n} selected chats',sources)].filter(Boolean).join(' · ');
+  renderWorkflowGaps(state.status.stats.counts?.['coverage.gap']||0);
+  const exporter=viewQuery('start','[data-workflow="account-all"]');
+  exporter.textContent=tr(!demo&&activity.observing?'Pause observation and export':'Export everything');
+  $('workflow-account-hint').textContent=!demo&&activity.observing?
+    tr('Observation pauses for the export. Start it again in Accounts when the export finishes.'):
+    !demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):'';
+  renderWorkflowAccounts();pulseUI?.update(state.status);
   const investigate=viewQuery('start','[data-workflow="investigation"]');
   investigate.textContent=tr(state.status.collector.running?'Open investigation':'Set up observation');
   }
@@ -866,10 +940,12 @@ function renderWorkflowControls(){
     'Your account is connected. Continue to choose what to export.':
     'Sign in to choose what to export. Continuous observation is not required.');
   show('workflow-continue',pending&&accountSignedIn());
-  const sourceAction=viewQuery('connection','#authorized-state [data-open="sources"]');
-  sourceAction.hidden=pending||!viewAllowed('sources');
+  const sourceAction=viewQuery('connection','#authorized-state [data-open]'),ready=hasSources(state.status),watching=ready&&state.status.collector.running;
+  sourceAction.dataset.open=watching?'chats':'sources';sourceAction.textContent=tr(watching?'Open chats':'Choose sources →');
+  sourceAction.hidden=pending||!viewAllowed(sourceAction.dataset.open);
   viewQuery('connection','#authorized-state .muted').textContent=tr(pending?
-    'Continue to export your account, then choose chats, dates and files.':'Choose the groups and channels to observe.');
+    'Continue to export your account, then choose chats, dates and files.':watching?'Observation is on. New activity will appear here when Telegram delivers it.':
+    ready?'Your sources are ready. Start observation to save new activity.':'Choose the groups and channels to observe.');
   }
   if(state.view==='evidence'){
   show('export-task-account',canExport);
@@ -877,6 +953,68 @@ function renderWorkflowControls(){
   $('account-export-configure').textContent=tr(!state.status.demo&&!accountSignedIn()?
     info.needsSignIn?'Sign in again':'Connect account →':'Configure account export');
   }
+}
+import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
+let chatGaps=null;
+import("./views/chat-gaps.js?v=3").then(({createChatGaps})=>{
+  chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations')});
+  if(state.view==='chats'&&state.chat!==null&&chatReady)renderChatFeed();
+}).catch(error=>toast(error.message,true));
+let pulseUI=null;
+function openJournalFilter(kind){
+  state.boardSlice=null;state.filter=kind;state.source='';state.search='';state.eventSince='';state.eventUntil='';
+  state.eventBefore=state.eventAfter=state.cursor=null;navigate('observations');
+}
+import("./views/pulse.js?v=2").then(({createPulse})=>{
+  pulseUI=createPulse({anchor:viewQuery('start','.workflow-intro'),chartsAnchor:viewQuery('start','.workflow-choices'),node,tr,icon,json,session:()=>state.workspaceRevision+':'+state.profile,
+    can:viewAllowed,openJournal:openJournalFilter,openChat:id=>id===null?navigate('chats'):navigate('chats').then(()=>openChat(id))});
+  if(state.status&&state.view==='start')renderWorkflowControls();
+}).catch(error=>toast(error.message,true));
+let workflowGapKey='';
+function renderWorkflowGaps(gaps){
+  const box=$('workflow-gap'),key=state.workspaceRevision+':'+state.profile+':'+gaps;
+  box.hidden=!gaps||!viewAllowed('observations');
+  if(box.hidden||key===workflowGapKey)return;
+  workflowGapKey=key;
+  const copy=node('span','',tr('Coverage gaps in the journal: {n}.',{n:gaps.toLocaleString()}));
+  const open=node('button','text-link',tr('Show in the journal'));open.type='button';
+  open.addEventListener('click',()=>{
+    state.boardSlice=null;state.filter='coverage.gap';state.source='';state.search='';state.eventSince='';state.eventUntil='';
+    state.eventBefore=state.eventAfter=state.cursor=null;navigate('observations');
+  });
+  box.replaceChildren(copy,open);
+  json('events?kind=coverage.gap&limit=1').then(result=>{
+    const last=result.events?.[0];
+    if(last&&workflowGapKey===key)copy.textContent=tr('Coverage gaps in the journal: {n}. Latest: {time}.',{n:gaps.toLocaleString(),time:fmtTime(last.observed_at)});
+  }).catch(()=>{});
+}
+function renderWorkflowAccounts(){
+  const box=$('workflow-accounts'),list=(state.profiles||[]).filter(p=>!p.error_type&&p.collector);
+  const exporting=!!state.me?.admin&&viewAllowed('evidence'),shown=list.slice(0,6);
+  const rows=shown.map(p=>({p,activity:accountActivityText(p.id===state.profile?{...p,collector:state.status.collector}:p)}));
+  const signature=JSON.stringify([state.profile,exporting,list.length,rows.map(({p,activity})=>[p.id,p.label,activity.kind,activity.title])]);
+  box.hidden=state.status.demo||list.length<2;
+  if(box.hidden||box.dataset.signature===signature)return;
+  box.dataset.signature=signature;
+  const items=rows.map(({p,activity})=>{
+    const item=node('div','workflow-account'+(p.id===state.profile?' current':''));item.dataset.task=activity.kind;
+    const text=node('span','workflow-account-text'),account=p.collector.account;
+    text.append(node('strong','',p.label),node('small','',activity.title));
+    item.append(avatarNode(account?account.id:null,account?.username||p.label,'',p.id),text);
+    if(exporting&&activity.kind==='free'){
+      const exporter=node('button','secondary',tr('Export account'));exporter.type='button';
+      exporter.addEventListener('click',()=>busy(exporter,()=>exportAccountFrom(p.id)));item.append(exporter);
+    }else if(p.id!==state.profile){
+      const open=node('button','quiet',tr('Open'));open.type='button';
+      open.addEventListener('click',()=>busy(open,()=>switchProfile(p.id)));item.append(open);
+    }
+    return item;
+  });
+  if(list.length>shown.length){
+    const more=node('button','text-link',tr('All accounts: {n}',{n:list.length}));more.type='button';
+    more.addEventListener('click',()=>navigate('accounts'));items.push(more);
+  }
+  box.replaceChildren(...items);
 }
 function openWorkflowSignIn(){
   const entered=navigate('connection');
@@ -903,8 +1041,22 @@ function importedKeyNotice(id){
   open.addEventListener('click',()=>{void openIndependentSignIn();});
   box.append(node('span','',tr("This workspace's Telegram session key was imported. Copies of it can exist outside Telegram's session list."))," ",open);
 }
+async function exportEverything(){
+  if(!state.me?.admin||!viewAllowed('evidence'))return;
+  if(!state.status.demo&&!accountSignedIn()){state.workflow={profile:state.profile,kind:'account'};await openWorkflowSignIn();return;}
+  const observing=state.status.collector?.activity?.task==='observation';
+  const message=tr("Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.")
+    +(observing?' '+tr("Observation pauses while the export runs."):'');
+  if(!(await askConfirm(message,{confirmText:tr("Export everything")})))return;
+  if(observing)await json("collector/stop",{});
+  const language=Object.keys(PANEL_LANGUAGES).includes(LANG)?LANG:'en';
+  await json("account-export/start",{...accountExportFallback,report_language:language});
+  selectExportTask('account');await navigate('evidence');exportsView?.select('downloads');await loadAccountExport();
+  toast(tr("Account export started. Progress and omissions appear here; you can leave this page and return."));
+}
 async function openAccountWorkflow(){
   if(!state.me?.admin||!viewAllowed('evidence'))return;
+  if(!state.status.demo&&state.status.collector?.running&&!(await pauseForExport(state.profile)))return;
   const workflow=state.workflow={profile:state.profile,kind:'account'},revision=state.workspaceRevision;
   const current=()=>state.workflow===workflow&&revision===state.workspaceRevision&&state.me?.admin&&viewAllowed('evidence');
   if(!state.status.demo&&!accountSignedIn()){
@@ -915,6 +1067,7 @@ async function openAccountWorkflow(){
 }
 panelQueries('[data-workflow]').forEach(button=>button.addEventListener('click',()=>busy(button,async()=>{
   if(button.dataset.workflow==='account'){await openAccountWorkflow();return;}
+  if(button.dataset.workflow==='account-all'){await exportEverything();return;}
   state.workflow=null;
   if(!viewAllowed('sources')||!viewAllowed('connection')||!may('collect'))return;
   if(!accountSignedIn()&&!state.status.demo){await openWorkflowSignIn();return;}
@@ -950,6 +1103,23 @@ async function loadQuickCatalog(){
 quickDialog.addEventListener('close',()=>{if(!quickDialog.open)cancelQuickCatalog();});
 window.addEventListener('tgwitness:lock',()=>{quickCatalog=[];quickCatalogKey='';cancelQuickCatalog();quickResults.replaceChildren();});
 $("quick-shortcut").textContent=/Mac|iPhone|iPad/.test(navigator.platform)?"⌘ K":"Ctrl K";
+for(const box of document.querySelectorAll(".sidebar-bottom > details")){
+  const key="tgwitness-sidebar-"+box.className;
+  try{box.open=localStorage.getItem(key)==="1";}catch{}
+  box.addEventListener("toggle",()=>{try{localStorage.setItem(key,box.open?"1":"0");}catch{}});
+}
+function syncHiddenNav(){
+  const level=document.documentElement.dataset.uiLevel,rank={simple:0,standard:1,expert:2},hint=$("nav-hidden-hint");
+  const hidden=level?[...document.querySelectorAll(".sidebar nav .nav[data-view]")].filter(nav=>!nav.hidden&&rank[nav.dataset.level]>rank[level]).length:0;
+  hint.hidden=!hidden;
+  if(hidden)hint.textContent=trn("Show {n} hidden section","Show {n} hidden sections",hidden);
+}
+new MutationObserver(syncHiddenNav).observe(document.documentElement,{attributes:true,attributeFilter:["data-ui-level"]});
+import("./components/tips.js?v=3").then(({createTips})=>createTips({tr,icon,roots:[...panelRoots.values()]})).catch(error=>toast(error.message,true));
+$("nav-hidden-hint").addEventListener("click",()=>{
+  const select=document.querySelector(".sidebar [data-ui-level]");if(!select)return;
+  select.value="expert";select.dispatchEvent(new Event("change"));
+});
 function selectQuick(index){
   const options=[...quickResults.children];
   if(!options.length){quickSearch.removeAttribute("aria-activedescendant");return;}
@@ -1172,7 +1342,7 @@ const collectionReady=import("./components/collection.js?v=2").then(({createColl
 collectionReady.catch(error=>toast(error.message,true));
 let modesUI=null;
 const modeSession=()=>state.workspaceRevision+":"+state.profile;
-const modesReady=import("./components/modes.js?v=1").then(({createModes})=>{
+const modesReady=import("./components/modes.js?v=2").then(({createModes})=>{
   modesUI=createModes({node,tr,json,may,status:()=>state.status,query:panelQueries,go:goPlace,toast});
   if(state.status&&!$("workspace").hidden)modesUI.sync(modeSession());
   return modesUI;
@@ -1188,11 +1358,14 @@ function renderStatus() {
     c.has_session ? "Observation off" : ({code_required:"Waiting for code",password_required:"Waiting for 2FA",qr_pending:"Waiting for QR"}[c.phase]||"Account not connected"));
   $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected);
   $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected));
+  $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected?"live":c.running||accountState(s).needsSignIn?"warn":"off";
   $("collector-toggle").textContent=tr(c.running ? "Pause observation" : "Start observation");
   $("collector-toggle").disabled=s.demo||(!c.running&&!accountState(s).canStart);
   $("collector-toggle").title=tr(s.demo?"Demo uses fictional observations":accountState(s).needsSignIn?'Sign in again':!c.has_session?"Connect an account first":
     !hasSources(s)?"Select at least one source first":"");
-  $("nav-count").textContent=s.stats.total.toLocaleString();
+  const navCount=$("nav-count"),total=s.stats.total.toLocaleString();
+  if(navCount.textContent!==total){if(navCount.dataset.profile===state.profile&&/\d/.test(navCount.textContent))replay(navCount,"count-bump",700);navCount.textContent=total;}
+  navCount.dataset.profile=state.profile;
   renderCollectorHealth(s.health);collectionUI?.update();
   const signIn=accountState(s).needsSignIn;
   show("collector-error",!!c.last_error||signIn);
@@ -1345,11 +1518,50 @@ async function loadProfiles(){
   if(request!==profilesRequest)return;
   renderAccounts();window.TgWitnessAccountImport?.renderAccount();
   if(state.view==='group')groupView?.status();
+  if(state.view==='start')renderWorkflowControls();
 }
 function accountPhaseLabel(p){
   if(p.error_type==="DeletionPending")return tr("Deletion incomplete");
   if(p.error_type)return tr("Unavailable")+" · "+(errorName(p.error_type)||p.error_type);
   return tr(accountState(p).label);
+}
+const activityTitles=()=>({reconnecting:tr("Reconnecting to Telegram"),history:tr("Downloading history"),
+  export:tr("Export in progress"),profile_image:tr("Updating profile photos"),sign_in:tr("Sign-in required"),
+  empty:tr("No Telegram account"),failed:tr("Needs attention"),unavailable:tr("Unavailable"),free:tr("Free")});
+const activityHints=()=>({monitoring:tr("To export this account, pause observation."),
+  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Exports and observation wait until it finishes."),
+  export:tr("Observation waits until the export finishes."),profile_image:tr("Takes a moment."),
+  sign_in:tr("Sign in again to observe or export."),empty:tr("Connect an account to observe or export."),
+  failed:tr("Check the problems listed for this account."),free:tr("Ready to export or observe.")});
+const activityOf=p=>accountActivity?accountActivity(p):{kind:"unavailable",observing:false,busy:false,canExport:false};
+function accountActivityText(p){
+  const activity=activityOf(p),chats=p.sources_enabled;
+  const title=activity.kind==="monitoring"?(chats>0?trn("Observing {n} chat","Observing {n} chats",chats):tr("Observing")):
+    activityTitles()[activity.kind];
+  return {...activity,title,hint:activityHints()[activity.kind]||""};
+}
+function busyAccountText(p){
+  const activity=accountActivityText(p);
+  return (activity.busy?activity.title:tr("Busy"))+" · "+
+    tr(activity.observing?"Pause observation to use this account.":"Available when it finishes.");
+}
+function profileEntry(id=state.profile){
+  const entry=(state.profiles||[]).find(p=>p.id===id);
+  return id===state.profile&&state.status?{...(entry||{}),collector:state.status.collector}:entry;
+}
+async function pauseForExport(id){
+  const p=profileEntry(id);
+  if(!p?.collector?.running)return true;
+  if(!(await (await collectionReady).confirmPause(p.label)))return false;
+  await json("collector/stop",{},{profile:id});
+  toast(tr("Paused collection for {name}.",{name:p.label}));
+  await loadProfiles();if(id===state.profile)await refreshStatus();
+  return true;
+}
+async function exportAccountFrom(id){
+  if(!(await pauseForExport(id)))return;
+  if(state.profile!==id)await switchProfile(id);
+  if(state.profile===id)await openAccountWorkflow();
 }
 function accountIdentity(p){
   const a=p.collector&&p.collector.account;
@@ -1375,6 +1587,10 @@ const groupViewReady=import("./views/group.js?v=2").then(({createGroupView})=>{
   return groupView;
 }).catch(error=>toast(error.message,true));
 function openGroup(id){state.groupId=id;return navigate('group');}
+$("accounts-route-advice-apply").addEventListener("click",event=>busy(event.currentTarget,async()=>{
+  await navigate('connection');await connectionViewReady;
+  connectionView.preset({scope:(state.profiles||[]).length>1?'all':'account',mode:'warp'});
+}));
 window.TgWitnessOpenGroup=openGroup;
 async function openChatIn(profileId,chatId){
   if(state.profile!==profileId&&await switchProfile(profileId)===false)return false;
@@ -1397,6 +1613,13 @@ function renderAccounts(){
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
   $("account-add-form").querySelector("button").disabled=s.demo;
+  const publicRoutes=list.filter(p=>!p.error_type&&p.collector?.network?.kind==="mtproxy_auto").length,advice=$("accounts-route-advice");
+  advice.hidden=!publicRoutes||s.demo||!state.me?.admin||!viewAllowed('connection');
+  if(!advice.hidden){
+    $("accounts-route-advice-copy").textContent=trn("{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.",
+      "{n} accounts use public MTProxy servers: their address changes and the connection drops, so messages can be missed.",publicRoutes);
+    $("accounts-route-advice-apply").textContent=tr(list.length>1?"Move all accounts to WARP":"Move to WARP");
+  }
   const exits=new Map();
   for(const value of list){const net=value.collector?.network,ip=net?.check?.exit_ip;if(ip&&net.managed!=="warp")exits.set(ip,(exits.get(ip)||0)+1);}
   for(const value of list){
@@ -1413,11 +1636,17 @@ function renderAccounts(){
     if(!down){
       const meta=node("dl","account-meta");
       const pair=(k,v,field)=>{const item=node("div","account-value");item.dataset.field=field;item.append(node("dt","",k),node("dd","",v));meta.append(item);};
-      pair(tr("Observation"),s.demo?tr("Sample data"):accountPhaseLabel(p),"observation");
+      const activity=accountActivityText(p),task=node("div","account-value account-task");
+      task.dataset.field="observation";task.dataset.task=s.demo?"demo":activity.kind;
+      task.append(node("dt","",s.demo?tr("Sample data"):activity.title));
+      if(!s.demo&&activity.hint)task.append(node("dd","",activity.hint));
+      meta.append(task);
       const attention=!s.demo&&p.health?Object.keys(healthPartNames).filter(name=>needsLook(p.health[name]?.state)):[];
       if(attention.length)pair(tr("Needs attention"),attention.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(p.health[name].state)][0]).join(" · "),"attention");
       const restricted=c.account_restriction&&(!c.account_restriction.until||c.account_restriction.until*1000>Date.now())?c.account_restriction:null;
-      pair(tr("Route"),[routeText(c.network),exitText(c.network?.check)].filter(Boolean).join(" · ")||"—","route");
+      const route=routeText(c.network),exit=exitText(c.network?.check);
+      pair(tr("Route"),route||exit||"—","route");
+      if(route&&exit)meta.lastElementChild.lastElementChild.append(node("span","route-exit",exit));
       const sharing=exits.get(c.network?.check?.exit_ip)||0;
       if(sharing>1)meta.lastElementChild.lastElementChild.append(node("span","route-shared",tr("Same exit address as other accounts: {n}",{n:sharing-1})));
       if(restricted)pair(tr("Telegram restriction"),restrictionText(restricted.kind),"restriction");
@@ -1451,6 +1680,13 @@ function renderAccounts(){
         await loadProfiles();if(p.id===state.profile)await refreshStatus();
       }));
       actions.append(toggle);
+      const activity=activityOf(p);
+      if(activity.canExport&&!s.demo&&state.me?.admin&&viewAllowed('evidence')){
+        const exporter=node("button","secondary",tr(activity.observing?"Pause and export":"Export account"));
+        exporter.type="button";exporter.dataset.action="export";
+        exporter.addEventListener("click",()=>busy(exporter,()=>exportAccountFrom(p.id)));
+        actions.prepend(exporter);
+      }
     }
     const rename=node("button","quiet",tr("Rename"));rename.dataset.action='rename';rename.disabled=state.status.demo;
     rename.addEventListener("click",()=>busy(rename,async()=>{
@@ -1607,6 +1843,9 @@ function excerpt(e) {
       +[c.before,c.after].map(v=>v==null||v===""?"—":k==="username"?"@"+v:v).join(" → ")).join(" · ");
     case "actor.avatar_saved": return p.previous_photo_id===undefined?"":p.previous_photo_id===null?tr("Added a profile photo"):tr("Replaced the previous profile photo");
     case "interaction.preview": return [p.title,p.link].filter(Boolean).join(" · ");
+    case "session.security_baseline": return tr("Telegram service notices before observation: {n}",{n:(p.notices_before_observation||[]).length});
+    case "session.fingerprint": return tr("Key ID {id}",{id:p.auth_key_id||""});
+    case "session.concurrent_at_start": return tr("Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.",{n:p.concurrent_sessions});
     case "secret_chat.message": return (p.direction==="out"?tr("Sent"):tr("Received"))+" · "+(p.text||(p.media?tr("Attachment"):""))+(p.ttl?" · "+tr("timer {n} s",{n:p.ttl}):"");
     case "secret_chat.requested": return (p.direction==="out"?tr("Started by this account"):tr("Started by the other side"))+" · "+tr("user ID {id}",{id:p.peer_user_id});
     case "secret_chat.ready": return tr("Key picture {hex}",{hex:(p.key_visualization||"").slice(0,16)+"…"});
@@ -1647,7 +1886,7 @@ function excerpt(e) {
     case "network.policy_changed": return exposureNames[p.exposure]||p.exposure;
     case "network.probe": return p.connected ? tr("Telegram transport connected") : tr("Connection failed")+failure;
     case "network.connection_checked": return p.telegram_connected?[tr("Telegram connected"),p.exit_ip,countryName(p.country),p.warp?"WARP: "+p.warp:"",
-      p.latency_ms!=null?p.latency_ms+" ms":""].filter(Boolean).join(" · "):tr("Not connected")+failure;
+      p.latency_ms!=null?tr("{n} ms",{n:p.latency_ms}):""].filter(Boolean).join(" · "):tr("Not connected")+failure;
     case "connection.opened": case "connection.closed": return [routeText(p.route),p.dc_id?"DC "+p.dc_id:"",
       p.role==="current"?"":tr({candidate:"sign-in connection",other:"helper connection"}[p.role]||p.role)].filter(Boolean).join(" · ");
     case "account.sessions": return tr("Other sessions: {n}",{n:(p.others||[]).length})+
@@ -1676,9 +1915,16 @@ function excerpt(e) {
     case "access.session_ended": return accessName(p)+" · "+(sessionEndReasons[p.reason]||p.reason||"");
     case "witness.seen": return (p.label||"")+" · "+String(p.witness_fingerprint||"").slice(0,16);
   }
-  if (p.reason) return p.reason;
-  if (p.service_action) return p.service_action;
-  if (p.action) return p.action._ || tr("Telegram service action");
+  if (p.reason) return ({transport_disconnected:tr("Connection to Telegram lost"),transport_connected:tr("Telegram connected"),
+    transport_interrupted:tr("The connection dropped during a check"),session_revoked_externally:tr("The session was ended from another device or by Telegram."),
+    updates_diverted:tr("Updates are going to another session"),updates_resumed:tr("Updates reach this session again"),
+    source_access_lost:tr("The account lost access to a source"),shutdown:tr("TgWitness was shut down"),operator:tr("Stopped from the panel"),
+    collector_error:tr("Stopped after an error"),history_unavailable:tr("Chat history could not be read"),
+    recheck_visibility_uncertain:tr("Some messages could not be confirmed on recheck"),recheck_unparsed:tr("Some message numbers could not be read on recheck"),
+    probe_ack_missed_live:tr("A probe answer did not arrive live"),probe_ack_live:tr("Probe answers arrive live again")})[p.reason]||p.reason;
+  const serviceLine=action=>{const text=serviceText(action);return text.charAt(0).toLocaleUpperCase(LANG)+text.slice(1);};
+  if (p.service_action) return serviceLine(p.service_action);
+  if (p.action) return p.action._ ? serviceLine(p.action._) : tr("Telegram service action");
   if (p.coverage) return tr(p.coverage);
   if (p.meaning) return p.meaning;
   return tr("Open the source record for observation details");
@@ -1707,7 +1953,7 @@ function eventRow(e) {
     row.append(cell,source,time,open);
     row.addEventListener("click",()=>openDetail(e));
     row.addEventListener("keydown",event=>{ if(event.target===row&&(event.key==="Enter"||event.key===" ")){event.preventDefault();openDetail(e);} });
-    row.dataset.seq=String(e.seq);
+    row.dataset.seq=String(e.seq);row.dataset.category=label[2];
     boardView?.attach(row,e);
     return row;
 }
@@ -1753,6 +1999,7 @@ async function refreshEvents(direction=false) {
 }
 async function refreshRanked(request) {
   const params=new URLSearchParams({q:state.search,limit:"200",source:state.searchSource||"messages"});
+  if(state.filter)params.set('kind',state.filter);
   if(state.source)params.set("chat_id",state.source);
   if(state.eventSince)params.set("since",state.eventSince);
   if(state.eventUntil)params.set("until",state.eventUntil);
@@ -1764,13 +2011,20 @@ async function refreshRanked(request) {
   state.searchIndex=result.index;
   renderEvents();
 }
-const journalReady=import('./components/journal.js?v=layout1').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=layout4').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     request:(path,body)=>json(path,body),admin:()=>!!state.me?.admin,
-    changed:async()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();},
+    prepare:()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false,restoreFocus:false});},
+    changed:async()=>{window.TgWitnessRouter?.record({seq:null});await refreshEvents();},
     page:direction=>{closeDetail({history:false});return refreshEvents(direction);},openDetail,showBackdrop:visible=>show("drawer-backdrop",visible),
     openChat:async event=>{
-      const revision=state.workspaceRevision;closeDetail({history:false});await navigate("chats",{load:false});
+      const revision=state.workspaceRevision;closeDetail({history:false});
+      if(event.kind.startsWith('secret_chat.')&&event.payload?.secret_chat_id!=null){
+        await navigate('secret-chats');
+        if(revision===state.workspaceRevision&&state.view==='secret-chats')await secretChatsView?.selectChat(event.payload.secret_chat_id);
+        return;
+      }
+      await navigate("chats",{load:false});
       if(revision!==state.workspaceRevision||state.view!=="chats")return;
       await refreshChats();if(revision!==state.workspaceRevision||state.view!=="chats")return;
       if(await openChat(event.chat_id)){
@@ -1893,7 +2147,7 @@ async function openDetail(e,options={}) {
     } catch(error) {if(state.drawerSeq===e.seq)lineage.append(node("p","hint",error.message));}
   }
 }
-function closeDetail(options={}){const opened=state.drawerSeq!==null;state.drawerSeq=null;window.TgWitnessJournal?.closeDetail();leave("detail-drawer");leave("drawer-backdrop");$("detail-content").replaceChildren();if(opened&&previouslyFocused?.isConnected)previouslyFocused.focus();previouslyFocused=null;if(opened&&options.history!==false)window.TgWitnessRouter?.record({seq:null},{replace:true});}
+function closeDetail(options={}){const opened=state.drawerSeq!==null;state.drawerSeq=null;window.TgWitnessJournal?.closeDetail();leave("detail-drawer");leave("drawer-backdrop");$("detail-content").replaceChildren();if(opened&&options.restoreFocus!==false&&previouslyFocused?.isConnected)previouslyFocused.focus();previouslyFocused=null;if(opened&&options.history!==false)window.TgWitnessRouter?.record({seq:null},{replace:true});}
 $("close-detail").addEventListener("click",closeDetail);$("drawer-backdrop").addEventListener("click",closeDetail);
 document.addEventListener("keydown",e=>{
   if($("detail-drawer").hidden)return;
@@ -1912,7 +2166,7 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=2").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=3").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
@@ -1922,7 +2176,7 @@ const sourcesReady=import("./views/sources.js?v=2").then(({createSources})=>{
       [...new Set([...state.scopeExclude,...ids])]:state.scopeExclude.filter(id=>!ids.includes(id));},
     setDirty:dirty=>{state.monitoringDirty=dirty.monitoring;state.captureDirty=dirty.capture;state.recheckDirty=dirty.recheck;},
     saved:result=>{for(const name of ["monitoring","capture","recheck"])state.status[name]=result[name];},
-    onTab:name=>{void showSecretChats(name==="secret");}});
+    onTab:(tab,options)=>{if(options.history&&state.view==='sources')window.TgWitnessRouter?.record({tab});}});
   if(state.view==="sources"&&!$("workspace").hidden)sourcesView.enter();
   return sourcesView;
 }).catch(error=>{toast(error.message,true);throw error;});
@@ -1930,11 +2184,19 @@ let secretChatsView=null,secretChatsLoading=null;
 window.addEventListener("tgwitness:lock",()=>secretChatsView?.reset());
 async function showSecretChats(visible){
   if(!visible){secretChatsView?.leave();return;}
-  if(state.status?.demo)return;
-  secretChatsLoading??=import("./views/secret-chats.js?v=2").then(({createSecretChats})=>secretChatsView=createSecretChats({
-    root:$("view-sources"),tr,trn,json,toast,busy,node,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
-    getSession:()=>state.workspaceRevision+":"+state.profile,may,humanSize,actionText:secretActionText}));
-  try{await (await secretChatsLoading).enter();}catch(error){if(!(error instanceof StaleView))toast(error.message,true);}
+  if(window.TGW_ONLINE_DEMO){
+    const source=document.querySelector('[data-secret-demo-open]');
+    for(const control of $('view-secret-chats').querySelectorAll('input,form button'))control.disabled=true;
+    $('secret-status').textContent=tr('Demo with fictional messages. Deleted messages are red; edited ones keep every saved version.');
+    if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
+    $('secret-refresh').hidden=$('secret-report').hidden=true;return;
+  }
+  secretChatsLoading??=import("./views/secret-chats.js?v=9").then(({createSecretChats})=>secretChatsView=createSecretChats({
+    root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
+    getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
+    openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
+      (await exportsReady).select('settings');reportSelection?.selectSecrets(id===null?[]:[id]);}}));
+  await (await secretChatsLoading).enter();
 }
 function renderTargets() { sourcesView?.renderTargets(); }
 const MEDIA_ORDER=["photo","video","document","voice","audio","video_note","animation","sticker"];
@@ -1956,16 +2218,20 @@ function renderHistory(){
     $("history-workers").value=String(h.options.media_workers);
     $("history-admin").checked=h.options.admin_log;
     $("history-compare").checked=h.options.compare_saved;
+    $("history-observe").checked=!!h.options.observe_after;
   }
   show("history-card",may("sources")&&!s?.chats_limited);
   show("history-start",!active&&!paused);show("history-pause",active);
   show("history-resume",paused);show("history-cancel",active||paused);
   show("history-report",exists&&may("export"));
-  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export||!s?.targets.some(x=>x.enabled);
-  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export;
+  const observing=s?.collector?.activity?.task==="observation";
+  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!(s?.collector.available_for_export||observing)||!s?.targets.some(x=>x.enabled);
+  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!(s?.collector.available_for_export||observing);
   const busyAccount=!s?.demo&&!!s?.collector.has_session&&!s?.collector.available_for_export&&!active;
   show("history-availability",busyAccount);
-  $("history-availability").textContent=busyAccount?tr("This account is busy. Pause observation or its current task before loading history."):"";
+  $("history-availability").textContent=!busyAccount?"":observing?
+    tr("Observation is running. Loading history pauses it; with the option above it starts again when the history is loaded."):
+    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Pause observation or its current task before loading history.");
   const labels={running:tr("Loading history"),paused:tr("History paused"),complete:tr("History reading finished"),
     incomplete:tr("History finished with gaps"),cancelled:tr("History run ended")};
   const counts=h.sources_by_phase||{},finished=(counts.complete||0)+(counts.failed||0)+(counts.skipped||0);
@@ -1997,7 +2263,11 @@ for(const action of ["start","pause","resume","cancel"]){
   $("history-"+action).addEventListener("click",e=>busy(e.currentTarget,async()=>{
     const options=action==="start"?{transport:$("history-transport").value,
       media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
-      compare_saved:$("history-compare").checked}:{};
+      compare_saved:$("history-compare").checked,observe_after:$("history-observe").checked}:{};
+    if(["start","resume"].includes(action)&&state.status?.collector?.activity?.task==="observation"){
+      if(!(await askConfirm(tr("Observation is running on this account. Loading history pauses it. Updates that arrive meanwhile are requested again from the saved position when observation starts. Continue?"),{confirmText:tr("Pause and load history")})))return;
+      await json("collector/stop",{});
+    }
     await json("history/"+action,options);await refreshStatus();await refreshEvents();
   }));
 }
@@ -2173,11 +2443,11 @@ $("chat-export-partial-download").addEventListener("click",e=>saveExport(e.curre
 const accountExportKinds=["private","bot","group","supergroup","channel"];
 const accountExportMedia=["photo","video","video_message","voice","audio","document","sticker","animation"];
 const accountExportFallback={purpose:"",chat_kinds:accountExportKinds,from_utc:null,to_utc:null,chat_ids:[],
-  report_language:'en',export_format:'tgwitness',budget_exhausted:'hashes_only',
+  report_language:'en',export_format:'telegram_both',budget_exhausted:'hashes_only',
   sender_ids:[],text_contains:[],own_messages_only:false,
   include_archived:true,media_types:accountExportMedia,max_media_file_mib:512,max_total_gib:16,
-  include_profile:true,include_contacts:true,include_profile_photos:false,include_stories:false,
-  include_session_metadata:false,include_other_data:false,transport:"takeout"};
+  include_profile:true,include_contacts:true,include_profile_photos:true,include_stories:true,
+  include_session_metadata:true,include_other_data:true,transport:"auto"};
 let accountExportRead=null,accountExportRequest=0,accountExportJobStamp=null;
 for(const id of ['account-export-language','account-disclosure-language']){
   for(const [code,name] of Object.entries(PANEL_LANGUAGES)){
@@ -2204,7 +2474,7 @@ function accountExportDefaults(options){
   const saved={...accountExportFallback,...options};
   $("account-export-purpose").value=saved.purpose||"";
   $('account-export-language').value=saved.report_language||'en';
-  $('account-export-format').value=saved.export_format||'tgwitness';
+  $('account-export-format').value=saved.export_format||'telegram_both';
   for(const input of $("account-export-kinds").querySelectorAll('input[type="checkbox"]'))
     input.checked=saved.chat_kinds.includes(input.value);
   for(const input of $("account-export-media").querySelectorAll('input[type="checkbox"]'))
@@ -2292,7 +2562,7 @@ function renderAccountExportPreview(){
       ['include_profile_photos',tr('Profile photos')],['include_stories',tr('Stories')],
       ['include_session_metadata',tr('Session metadata')],['include_other_data',tr('Other available data')]];
     const other=extras.filter(([key])=>x[key]).map(([,label])=>label).join(', ')||tr('none');
-    const transport=tr(x.transport==='regular'?'Regular session':'Telegram Takeout session');
+    const transport=tr(x.transport==='regular'?'Regular session':x.transport==='auto'?'Automatic':'Telegram Takeout session');
     $('account-export-advanced-summary').textContent=other+' · '+transport;
     box.textContent=tr(all?"All accessible chats of {n} selected types, including Saved Messages when private chats are selected.":
       "{n} selected chat IDs of the chosen types.",{n:all?x.chat_kinds.length:x.chat_ids.length})+" "+
@@ -2471,6 +2741,15 @@ function renderAccountExportJobs(){
       const original=node('section','account-export-original');
       original.append(node('h3','',tr('Original account archive')),
         node('p','',tr('Download and keep this original. Extract the ZIP and open index.html to review what was saved and what is missing.')));
+      const contents=node('ul','archive-contents'),format=job.options?.export_format||'tgwitness';
+      for(const [path,label,included] of [
+        ['export_results.html','Chats',['telegram_html','telegram_both'].includes(format)],
+        ['result.json','JSON',['telegram_json','telegram_both'].includes(format)],
+        ['index.html','Report',true],['map.html','Activity map',true],
+        ['index.html#verification','Verification',true]]){
+        if(included){const item=node('li');item.append(node('strong','',tr(label)),document.createTextNode(' · '),node('code','',path));contents.append(item);}
+      }
+      original.append(contents);
       addAction(actions,job,tr('Download original archive'),'download',()=>accountExportDownload(job),'primary');
       addAction(actions,job,tr('Prepare a sharing copy'),'disclosure',()=>openAccountDisclosure(job));
       original.append(actions);card.append(original);
@@ -2533,11 +2812,26 @@ async function loadAccountExport(silent=false){
       state.accountExportJobs.some(job=>["preparing","running","waiting","packaging"].includes(job.phase));
     $("account-export-status").textContent=state.status?.demo?
       tr("Demo account export uses fictional data only."):"";
+    renderAccountExportBusy();
     renderAccountExportJobs();
   })();
   accountExportRead={revision,profile,promise:pending};
   try{await pending;}finally{if(accountExportRead?.promise===pending)accountExportRead=null;}
 }
+function renderAccountExportBusy(){
+  const collector=state.status?.collector,busy=!state.status?.demo&&!!collector?.has_session&&collector.available_for_export===false;
+  show("account-export-busy",busy);if(!busy)return;
+  const activity=accountActivityText({...(profileEntry()||{}),collector,
+    sources_enabled:state.status.targets.filter(target=>target.enabled).length});
+  $("account-export-busy-copy").textContent=activity.observing?
+    tr("{task}. Pause observation to start the export; start it again in Accounts afterwards.",{task:activity.title}):
+    tr("{task}. The export can start when it finishes.",{task:activity.title});
+  show("account-export-pause",activity.observing);
+}
+$("account-export-pause").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  if(!(await pauseForExport(state.profile)))return;
+  await loadAccountExport();
+}));
 async function accountExportAction(job,verb){
   await json("account-export/"+encodeURIComponent(job.id)+"/"+verb,{});
   await loadAccountExport();
@@ -2598,7 +2892,6 @@ $("account-export-minimize").addEventListener("click",()=>{
 $("account-export-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,async()=>{
     const options=accountExportOptions(),profile=state.profile,revision=state.workspaceRevision;
-    if(!options.purpose){$("account-export-purpose").focus();throw new Error(tr("Enter a collection purpose."));}
     const job=await json("account-export/start",options);
     if(revision!==state.workspaceRevision||profile!==state.profile)return;
     state.accountExportDirty=false;$("account-export-dialog").close();
@@ -2706,8 +2999,9 @@ $("account-disclosure-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,createAccountDisclosure);
 });
 let exportsView=null;
-const exportsReady=import('./views/exports.js?v=2').then(({createExports})=>{
+const exportsReady=import('./views/exports.js?v=3').then(({createExports})=>{
   exportsView=createExports({root:$("view-evidence"),tr,json,getSession:()=>state.workspaceRevision+":"+state.profile,fmtTime,toast,
+    onTab:tab=>{if(state.view==='evidence')window.TgWitnessRouter?.record({tab});},
     downloadAgain:entry=>download('exports/'+entry.id+'/download','tgwitness-'+entry.id.slice(0,8)+'.'+(entry.encrypted?(entry.encryption||'zip'):entry.format),true)});
   return exportsView;
 });
@@ -2730,6 +3024,7 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   }
   current();
   if(handle){try{writer=await handle.createWritable();}catch{handle=null;}}
+  progress({phase:'preparing'});
   let response;
   try{current();response=await api(path,body,root?{root:true,token}:{profile,token});}
   catch(error){await writer?.abort().catch(()=>{});throw error;}
@@ -2768,16 +3063,18 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
       progress({phase:"saving",total,expected});
       if(stream){const size=(total/1024**2).toFixed(1)+" MiB"+(expected?" / "+(expected/1024**2).toFixed(1)+" MiB":"");toast(tr("Saving export: {size}",{size}));}
     }
-    if(expected&&total!==expected)throw new Error(tr("Download was interrupted. Retry the export."));
+    if(!total||expected&&total!==expected){
+      const error=new Error(tr("Download was interrupted. Retry the export."));error.downloadHint=true;throw error;
+    }
     current();if(writer){await writer.close();writer=null;}
     else saveBlob(new Blob(chunks,{type:response.headers.get("Content-Type")||"application/octet-stream"}),filename);
-    progress({phase:"done",total,expected});
+    progress({phase:handle?'done':'browser',total,expected});
     if(stream)toast(tr(handle?'File saved.':'Download started. Check your browser’s downloads.'));
     return true;
   }catch(error){
-    if(reader)await reader.cancel().catch(()=>{});else await response.body.cancel().catch(()=>{});
+    if(reader)await reader.cancel().catch(()=>{});else await response.body?.cancel().catch(()=>{});
     if(writer)await writer.abort().catch(()=>{});
-    if(!(error instanceof StaleView)&&ticketPath&&!nativeAttempted){current();return await nativeDownload();}
+    if(!(error instanceof StaleView)&&!error.downloadHint&&ticketPath&&!nativeAttempted){current();return await nativeDownload();}
     if(error instanceof StaleView)throw error;
     if(nativeAttempted)throw error;
     if(error.downloadHint)throw error;
@@ -2789,13 +3086,25 @@ function saveBlob(blob,filename){
 }
 panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
   const fmt=b.dataset.export,password=$("export-password").value;
+  const owner=reportKey();
+  let options;
+  if(b.hasAttribute('data-report-download')&&state.view==='evidence'){
+    await loadReportSettings();
+    if(owner!==reportKey())throw new StaleView();
+    if(!reportReady||reportOwner!==owner)return;
+    options=reportDraft();
+    if(!$("report-form").checkValidity()){
+      (await exportsReady).select('settings');$("report-form").reportValidity();return;
+    }
+  }
   const encrypt=!!b.closest("#view-evidence")&&$("export-encrypt-on").checked;
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
   const encryption=$("export-encryption").value;
   const progress=(await exportsReady).begin({format:fmt,encrypted:encrypt,encryption,retry:()=>b.click()}),language=exportLanguage();
   const query=language?"?language="+encodeURIComponent(language):"",name=fmt==="json"||fmt==="pdf"?"tgwitness-report."+fmt:"tgwitness-evidence."+fmt;
   try{
-    const saved=await download("export/"+fmt+query,encrypt?"tgwitness-evidence-"+fmt+"-encrypted."+encryption:name,true,false,encrypt?{password,encryption}:undefined,progress);
+    const body=encrypt||options?{...(encrypt?{password,encryption}:{}),...(options?{options}:{})}:undefined;
+    const saved=await download("export/"+fmt+query,encrypt?"tgwitness-evidence-"+fmt+"-encrypted."+encryption:name,true,false,body,progress);
     if(saved)toast(tr(encrypt?"Encrypted export sent to your browser. Keep its password separately.":"Export sent to your browser. Check Downloads for the saved file."));
   }catch(error){progress({phase:"failed",error:error.message});throw error;}
 })));
@@ -2822,8 +3131,8 @@ const reportGuidanceReady=import('./views/report-guidance.js?v=1').then(({create
   reportGuidance=createReportGuidance({root:$("report-guidance"),tr});
   return reportGuidance;
 });
-const reportSelectionReady=import('./views/report-selection.js?v=1').then(({createReportSelection})=>{
-  reportSelection=createReportSelection({root:$("report-form"),tr,json,
+const reportSelectionReady=import('./views/report-selection.js?v=11').then(({createReportSelection})=>{
+  reportSelection=createReportSelection({root:$("report-form"),tr,json,titles:()=>new Map([...(state.status?.targets||[]),...(state.chats||[])].map(chat=>[chat.chat_id,chat.title])),
     getOwner:()=>state.workspaceRevision+":"+state.profile,
     ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
     options:reportDraft,active:()=>state.view==='evidence'});
@@ -2856,10 +3165,16 @@ function setReportTemplate(value){
 let reportOwner=null,reportReady=false,reportDirty=false,reportRequest=0,reportLoading=null,reportSaving=false;
 let reportPreviewRequest=0,reportPreviewTimer=null,reportPreviewBusy=false;
 let reportPreviewSection="cover";
+let reportPreviewTarget=null;
+function reportPreviewState(value){
+  const stage=$("report-form").querySelector('.studio-stage');stage.dataset.previewState=value;
+  stage.setAttribute('aria-busy',String(value==='loading'||value==='waiting'));
+}
 const reportKey=()=>state.workspaceRevision+":"+state.profile;
 function resetReportSettings(){
   clearTimeout(reportPreviewTimer);reportPreviewRequest++;reportPreviewBusy=false;
   reportPreviewSection="cover";
+  reportPreviewTarget=null;reportPreviewState('empty');
   $("report-preview-frame").removeAttribute("srcdoc");show("report-preview-frame",false);show("report-preview-empty",true);
   delete $("report-preview-frame").dataset.reportDesign;
   $("report-design-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
@@ -2871,6 +3186,19 @@ function resetReportSettings(){
   reportConfigurations?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
+async function reportFor(chat,sender,messages=null){
+  if(chat===null||!viewAllowed('evidence'))return;
+  const revision=state.workspaceRevision,profile=state.profile;
+  await navigate('evidence');
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence')return;
+  selectExportTask('journal');
+  await loadReportSettings();
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence'||!reportReady)return;
+  if(messages?.length)reportSelection.selectMessages(chat,messages);
+  else reportSelection.selectChats([chat],sender===null||sender===undefined?[]:[sender]);
+  $("exports-tab-settings").click();
+  $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
+}
 function reportControls(){
   $("report-fields").disabled=!reportReady||reportOwner!==reportKey()||reportSaving||!!window.TGW_ONLINE_DEMO;
   $("report-preview-refresh").disabled=reportPreviewBusy;
@@ -2879,15 +3207,17 @@ function reportControls(){
 async function loadReportSettings(){
   if(!state.status)return;
   await Promise.all([reportSelectionReady,reportConfigurationsReady,reportGuidanceReady]);
-  const owner=reportKey();
+  const owner=reportKey(),context=viewContexts.get('evidence');
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
-  if(reportSaving||reportReady&&reportDirty)return;
-  if(reportLoading)return reportLoading;
-  const request=++reportRequest,current=()=>reportOwner===owner&&reportKey()===owner&&request===reportRequest;
+  if(reportSaving)return;
+  if(reportReady&&reportDirty){if(!$("report-form").hidden)scheduleReportPreview();return;}
+  if(reportLoading&&reportLoading.context===context)return reportLoading.promise;
+  const request=++reportRequest,current=()=>reportOwner===owner&&reportKey()===owner&&request===reportRequest
+    &&viewContexts.get('evidence')===context&&!context?.signal.aborted;
   reportReady=false;reportControls();$("report-status").textContent=tr("Loading…");
   const pending=(async()=>{
     try{
-      const [options,guidance]=await Promise.all([json("report-options",undefined,viewOptions('evidence')),json("report-guidance",undefined,viewOptions('evidence'))]);if(!current()||state.view!=='evidence')return;
+      const [options,guidance]=await Promise.all([json("report-options",undefined,{signal:context?.signal}),json("report-guidance",undefined,{signal:context?.signal})]);if(!current()||state.view!=='evidence')return;
       const select=$("report-language");
       if(!select.options.length){
         select.append(new Option(tr("Same as the panel"),"auto"));
@@ -2912,8 +3242,8 @@ async function loadReportSettings(){
       $("report-status").replaceChildren(node("span","",tr("Could not load data")+": "+error.message+" "),retry);
     }finally{if(current())reportControls();}
   })();
-  reportLoading=pending;
-  try{await pending;}finally{if(reportLoading===pending)reportLoading=null;}
+  const loading={context,promise:pending};reportLoading=loading;
+  try{await pending;}finally{if(reportLoading===loading)reportLoading=null;}
 }
 function syncReportParts(){
   $("report-raw").disabled=$("report-heartbeats").disabled=!$("report-timeline").checked;
@@ -2925,6 +3255,9 @@ function syncReportParts(){
   const guidanceTab=$("report-form").querySelector('[data-preview-section="guidance"]');
   guidanceTab.hidden=!guidanceActive;
   if(!guidanceActive&&reportPreviewSection==='guidance')showReportPreviewSection('cover');
+  const hasCharts=["activity","hourly","participant","chat","composition"].some(key=>$("report-"+key+"-chart").checked);
+  $("report-form").querySelector('[data-preview-section="analytics"]').disabled=!hasCharts;
+  if(!hasCharts&&reportPreviewSection==='analytics'){reportPreviewTarget=null;showReportPreviewSection('cover');}
   if(["question","method","findings","conclusion"].some(key=>$("report-review-"+key).value.trim()))parts.push(tr("Examination notes"));
   if($("report-activity-chart").checked)parts.push(tr("Activity over time"));
   if($("report-hourly-chart").checked)parts.push(tr("Activity by weekday and hour"));
@@ -2955,6 +3288,7 @@ function reportDraft(){
 }
 function scheduleReportPreview(){
   clearTimeout(reportPreviewTimer);
+  reportPreviewState('waiting');
   reportPreviewTimer=setTimeout(()=>refreshReportPreview(),900);
 }
 function discardReportDraft(){
@@ -2968,45 +3302,53 @@ function showReportPreviewSection(section){
   $("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewSection===section)));
   const frame=$("report-preview-frame");
   if(frame.hidden)return;
-  if(section==='analytics')frame.contentDocument?.getElementById('report-analytics')?.scrollIntoView({block:'start'});
+  if(section==='analytics'){
+    const target=reportPreviewTarget&&frame.contentDocument?.querySelector(reportPreviewTarget);
+    (target||frame.contentDocument?.getElementById('report-analytics'))?.scrollIntoView({block:'start'});
+  }
   else if(section==='guidance')frame.contentDocument?.getElementById('jurisdiction-guidance')?.scrollIntoView({block:'start'});
   else frame.contentWindow?.scrollTo(0,0);
 }
 $("report-preview-frame").addEventListener('load',()=>showReportPreviewSection(reportPreviewSection));
-$("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.addEventListener('click',()=>showReportPreviewSection(button.dataset.previewSection)));
+$("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.addEventListener('click',()=>{reportPreviewTarget=null;showReportPreviewSection(button.dataset.previewSection);}));
+$("report-form").addEventListener('report:chart',event=>{
+  const classes={'report-activity-chart':'activity','report-hourly-chart':'heatmap','report-participant-chart':'participants','report-chat-chart':'chats','report-composition-chart':'composition'};
+  reportPreviewTarget=event.detail.enabled?'.chart-'+classes[event.detail.id]:null;
+});
 async function refreshReportPreview(){
   clearTimeout(reportPreviewTimer);
   if(!reportReady||reportOwner!==reportKey()||$("report-form").hidden||window.TGW_ONLINE_DEMO)return;
   if(!$("report-form").checkValidity()){
-    $("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+    reportPreviewState('invalid');$("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
   }
   const body=reportDraft();
   if(!$("report-form").checkValidity()){
-    $("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
+    reportPreviewState('invalid');$("report-design-preview-status").textContent=tr("Complete the required fields to update the preview.");return;
   }
   const owner=reportOwner,snapshot=JSON.stringify(body),request=++reportPreviewRequest;
   const current=()=>owner===reportOwner&&owner===reportKey()&&request===reportPreviewRequest;
-  reportPreviewBusy=true;reportControls();$("report-design-preview-status").textContent=tr("Preparing preview…");
+  reportPreviewBusy=true;reportControls();reportPreviewState('loading');$("report-design-preview-status").textContent=tr("Preparing preview…");
   try{
     const result=await json("report-design-preview",body,viewOptions('evidence'));
     if(!current()||snapshot!==JSON.stringify(reportDraft())||state.view!=='evidence')return;
     $("report-preview-frame").dataset.reportDesign=body.design;
     $("report-preview-frame").srcdoc=result.html;show("report-preview-frame",true);show("report-preview-empty",false);
+    reportPreviewState('ready');
     $("report-design-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
   }catch(error){
     if(!current()||error instanceof StaleView||error.name==='AbortError')return;
-    $("report-design-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
+    reportPreviewState('error');$("report-design-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
   }finally{if(current()){reportPreviewBusy=false;reportControls();}}
 }
 $("report-preview-refresh").addEventListener("click",refreshReportPreview);
-$("exports-tab-settings").addEventListener("click",()=>{if(reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();});
+$("exports-tab-settings").addEventListener("click",()=>{if(reportReady)scheduleReportPreview();});
 $("report-form").addEventListener("input",event=>{if(reportReady&&!event.target.closest('#report-profiles')&&!event.target.matches("[data-report-search]")){
   reportSelection?.changed(event);
   if(event.target.name==="report-template")applyReportPreset();
   else if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit"].includes(event.target.id))setReportTemplate("custom");
-  syncReportParts();reportDirty=true;$("report-status").textContent=tr("Draft changed. Save before exporting.");
-  if(event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')reportPreviewSection='analytics';
-  if(event.target.name==='report-design')reportPreviewSection='cover';
+  syncReportParts();reportDirty=true;$("report-status").textContent="";
+  if((event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')&&!$("report-form").querySelector('[data-preview-section="analytics"]').disabled)reportPreviewSection='analytics';
+  if(event.target.name==='report-design'||event.target.id==='report-case-title'){reportPreviewSection='cover';reportPreviewTarget=null;}
   $("report-design-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();
 }});
 $("report-form").addEventListener("change",event=>{syncReportParts();reportSelection?.changed(event);});
@@ -3022,13 +3364,12 @@ $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
 $("report-open-downloads").addEventListener("click",async()=>{
-  if(reportDirty){$("report-status").textContent=tr("Save your changes before downloading a report with these choices.");$("report-status").scrollIntoView({block:"center"});return;}
   (await exportsReady).select('downloads');$("exports-downloads").scrollIntoView({block:"start"});
 });
 panelQueries("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
   event.preventDefault();
   Promise.resolve(navigate("evidence")).then(()=>exportsReady).then(view=>{view.select("settings");
-    const field=$(link.dataset.goReports==='data'?"report-data-title":"report-language");field.scrollIntoView({block:"center"});field.focus({preventScroll:true});});
+    const field=$(link.dataset.goReports==='data'?"report-data-title":"report-language");reportSelection?.reveal(field);});
 }));
 $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";
@@ -3126,7 +3467,7 @@ $("gateway-remove").addEventListener("click",ev=>busy(ev.currentTarget,async()=>
   toast(tr("Gateway log settings and token removed."));
 }));
 function renderEvidence(e){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('evidence-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('evidence-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("evidence-form"),status=$("evidence-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!e);
   state.timestampsHealth=e?.health||null;renderEvidenceBadge();
@@ -3191,7 +3532,7 @@ function lockText(lock){
   return lock.bucket_enabled?tr("Object Lock is enabled on the bucket; no retention was requested."):tr("Object Lock is not enabled on this bucket.");
 }
 function renderReplica(r){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('replica-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('replica-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("replica-form"),status=$("replica-status");
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=!r);
   state.replicaHealth=r?.health||null;renderEvidenceBadge();
@@ -3246,7 +3587,7 @@ function alertsText(a){
   return tr("Last notification {time}.",{time:fmtFull(l.at)})+(l.error?" "+tr("Not delivered: {error} — retried within a minute.",{error:l.error}):"");
 }
 function renderAlerts(a){
-  if(state.view!=='witness'&&!(state.view==='settings'&&$('alerts-form').closest('#view-settings')))return;
+  if(state.view!=='witness'&&!(state.view==='settings'&&$('alerts-form').closest('#view-settings,.hub-sheet')))return;
   const form=$("alerts-form"),status=$("alerts-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!a);
   extraBadge("alerts",!!a?.settings.enabled,"On","Off");
@@ -3422,7 +3763,7 @@ function parameterValue(value){
   return typeof value==="boolean"?tr(value?"On":"Off"):Number(value).toLocaleString();
 }
 let parametersView=null;
-const parametersReady=import("./views/parameters.js").then(({createParameters})=>{
+const parametersReady=import("./views/parameters.js?v=3").then(({createParameters})=>{
   parametersView=createParameters({root:$("view-parameters"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,
     headerOffset:()=>{const header=document.querySelector(".topbar");return header&&["sticky","fixed"].includes(getComputedStyle(header).position)?header.getBoundingClientRect().height:0;},
@@ -4016,7 +4357,7 @@ async function noticeAction(item,kind){
   }
   if(revision===state.workspaceRevision)return openRecord(item.seq);
 }
-const noticesReady=import("./components/notifications.js?v=1").then(({createNotifications})=>{
+const noticesReady=import("./components/notifications.js?v=2").then(({createNotifications})=>{
   noticeUI=createNotifications({workspace:$("workspace"),panel:$("notify-panel"),toggle:$("notify-toggle"),badge:$("notify-count"),list:$("notify-list"),
     readAll:$("notify-read"),rules:$("notify-rules"),closeButton:$("notify-close"),
     filters:[...document.querySelectorAll("[data-notice-filter]")],summary:$("notify-summary"),status:$("notify-status"),
@@ -4109,8 +4450,6 @@ function setAuthMethod(method){
     $("import-result").textContent="";
   }
   authMethod=method;
-  const otherMethods=$("credentials-form").querySelector(".other-sign-in");
-  if(otherMethods&&["files","key"].includes(method))otherMethods.open=true;
   panelQueries("[data-auth-method]").forEach(button=>{
     const selected=button.dataset.authMethod===method;
     button.classList.toggle("active",selected);button.setAttribute("aria-pressed",String(selected));
@@ -4255,7 +4594,7 @@ function renderConnection(){
   const summary=$("protection-summary");summary.replaceChildren();
   for(const [title,value] of [[tr("Account & proxy secrets"),tr("Encrypted in the vault")],
     [tr("Vault key"),tr(p.vault_key_mode==="external"?"External master key; separate workspace keys":"Stored in the data directory")],
-    [tr("Messages & attachments"),tr("Not encrypted by TgWitness")],[tr("Evidence signatures"),tr("Ed25519 · integrity verification")]]){
+    [tr("Messages & attachments"),tr("Stored in the data directory")],[tr("Evidence signatures"),tr("Ed25519 · integrity verification")]]){
     const row=node("div");row.append(node("strong","",title),node("span","muted",value));summary.append(row);
   }
 }
@@ -4753,8 +5092,8 @@ const avatarCache=new Map();
 function avatarClass(id){let h=0;for(const ch of String(id??"?"))h=(h*31+ch.charCodeAt(0))>>>0;return "av"+(h%8);}
 function initials(name){
 
-  const words=String(name||"").replace(/^@/,"").split(/\s+/).filter(w=>/^\p{L}/u.test(w));
-  return words.length?(words[0][0]+(words[1]?.[0]||"")).toUpperCase():"?";
+  const text=String(name||"").replace(/^@/,""),words=text.split(/\s+/).filter(w=>/^\p{L}/u.test(w)&&w!=="ID");
+  return words.length?(words[0][0]+(words[1]?.[0]||"")).toUpperCase():/\d/.test(text)?"#":"?";
 }
 function loadAvatar(id,profile=state.profile){
   if(id===null||id===undefined||typeof id!=="number"||state.status?.demo)return Promise.resolve(null);
@@ -4822,13 +5161,14 @@ async function refreshChats(refresh=false,wanted=null){
   state.chats=result.chats;state.chatsLoading=false;state.chatsError=false;
   if(wanted!==null&&state.chat!==wanted&&state.chats.some(c=>c.chat_id===wanted)){beginChat(wanted);refresh=false;}
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat))beginChat(null);
-  if(state.chat===null&&state.chats.length){beginChat((state.chats.find(c=>c.enabled)||state.chats[0]).chat_id);refresh=false;}
+  if(state.chat===null&&state.chats.length){beginChat((state.chats.find(c=>c.enabled)||state.chats[0]).chat_id);refresh=false;
+    if(matchMedia('(max-width: 767px)').matches)viewQuery("chats",".chats-shell").dataset.panel="list";}
   renderChatsList();
   if(state.chat===null){renderChatEmpty();return;}
   return await loadChatMessages(refresh?"refresh":"open");
 }
 let chatListView=null;
-const chatListReady=import('./views/chat-list.js?v=layout1').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=layout2').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats()});
   return chatListView;
@@ -4853,7 +5193,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
 function beginChat(id){
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
-  chatGeneration++;chatReady=false;state.chat=id;state.chatInfo=null;state.chatMessages=[];
+  chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
   renderComposer();renderChat();renderChatsList();
@@ -4895,6 +5235,7 @@ async function loadChatMessages(mode){
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
   const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&result.messages.length&&result.messages[0].message_id>known);
   const previousBefore=state.chatNextBefore,previousAfter=state.chatNextAfter;
+  if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);
   const merged=new Map((reset?[]:state.chatMessages).map(m=>[m.message_id,m]));
   result.messages.forEach(m=>merged.set(m.message_id,m));
   const ordered=[...merged.values()].sort((a,b)=>a.message_id-b.message_id);
@@ -4934,8 +5275,24 @@ function renderChat(){
   const title=info.title||tr("Chat {id}",{id:info.chat_id}),avatar=avatarNode(info.chat_id,title,"lg");avatar.id="chat-avatar";
   $("chat-avatar").replaceWith(avatar);$("chat-name").textContent=title;$("chat-name").title=title;
   const kind={supergroup:tr("Group"),megagroup:tr("Group"),group:tr("Group"),chat:tr("Group"),channel:tr("Channel"),broadcast:tr("Channel"),bot:tr("Bot"),user:tr("Private chat"),private:tr("Private chat")}[info.kind]||termText(info.kind);
-  const split=typeof info.deleted_saved==="number";
-  $("chat-sub").textContent=$("chat-sub").title=[kind,tr("{n} saved",{n:(split?info.saved:info.messages||0).toLocaleString()}),
+  const split=typeof info.deleted_saved==="number",saved=split?info.saved:info.messages||0;
+  const metrics=[[null,null,kind,""],["all","message",trn("{n} message","{n} messages",saved),""],
+    ["deleted","trash",info.deleted?tr("{n} deleted",{n:info.deleted}):"","deleted"],
+    ["deleted","question",info.missing?tr("{n} not found on recheck",{n:info.missing}):"","missing"],
+    ["edited","edit",info.edited?tr("{n} edited",{n:info.edited}):"","edited"]].filter(item=>item[2]);
+  const sub=$("chat-sub"),summaryKey=JSON.stringify([state.chat,metrics]);
+  if(sub.dataset.key!==summaryKey){
+    sub.dataset.key=summaryKey;sub.replaceChildren();
+    metrics.forEach(([filter,glyph,label,tone],index)=>{
+      if(index)sub.append(" · ");
+      if(!filter){sub.append(node("span","",label));return;}
+      const chip=node("button","chat-metric");chip.type="button";chip.dataset.chatFilter=filter;if(tone)chip.dataset.tone=tone;
+      chip.append(icon(glyph),node("span","",label));
+      chip.addEventListener("click",()=>{state.chatFilter=filter!=="all"&&state.chatFilter===filter?"all":filter;state.chatView="messages";renderChatStatus();renderChatFeed();renderComposer();});
+      sub.append(chip);
+    });
+  }
+  sub.title=[kind,tr("{n} saved",{n:saved.toLocaleString()}),
     split?(info.deleted_saved?tr("{n} deleted, text kept",{n:info.deleted_saved}):""):(info.deleted?tr("{n} deleted",{n:info.deleted}):""),
     split&&info.deleted_unsaved?tr("{n} deleted before saving",{n:info.deleted_unsaved}):"",
     info.missing?tr("{n} not found on recheck",{n:info.missing}):"",info.edited?tr("{n} edited",{n:info.edited}):""].filter(Boolean).join(" · ");
@@ -4944,9 +5301,10 @@ function renderChat(){
 function renderChatStatus(){
   if(state.view!=='chats')return;
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
+  for(const chip of $("chat-sub").querySelectorAll("button[data-chat-filter]"))chip.setAttribute("aria-pressed",String(chip.dataset.chatFilter!=="all"&&state.chatView==="messages"&&chip.dataset.chatFilter===state.chatFilter));
   const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
     current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
-    modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning()]);
+    modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning(),chatPick?chatPick.size:-1,chatPick?chatShown.filter(id=>!chatPick.has(id)).length:0]);
   if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const focusedView=box.contains(document.activeElement)?document.activeElement.dataset.chatView:null;
@@ -4974,7 +5332,7 @@ function renderChatStatus(){
     f.addEventListener("click",()=>{state.chatFilter=key;renderChatStatus();renderChatFeed();});filters.append(f);
   }
   const tabs=node('div','chat-view-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label',tr('Chat views'));
-  const views=[['messages',tr('Messages')],['people',tr('People')],['activity',tr('Activity timeline')],['profile',tr('Profile')]];
+  const views=[['messages',tr('Messages')],['activity',tr('People')],['people',tr('Authors')],['profile',tr('Profile')]];
   if(s.analysis?.enabled&&!s.demo&&viewAllowed('analysis'))views.push(['ai',tr('AI context')]);
   for(const [name,label] of views){const tab=node('button','filter'+(state.chatView===name?' active':''),label);tab.type='button';tab.dataset.chatView=name;
     tab.setAttribute('aria-pressed',String(state.chatView===name));tab.addEventListener('click',()=>{
@@ -4995,6 +5353,42 @@ function renderChatStatus(){
     box.append(hint);
   }
   const viewBar=node('div','chat-view-bar');viewBar.append(tabs,toolbar);box.append(viewBar);
+  if(!s.demo&&may('sources')&&!s.chats_limited&&s.targets.some(target=>target.chat_id===state.chat)){
+    const chat=state.chat,enabled=!!s.targets.find(target=>target.chat_id===chat)?.enabled&&!s.scope?.exclude?.includes(chat);
+    const toggle=node('button','chat-record-toggle',tr('Recording'));toggle.type='button';toggle.setAttribute('role','switch');
+    toggle.setAttribute('aria-checked',String(enabled));toggle.title=tr(enabled?'Pause':'Resume');
+    toggle.append(node('span','',tr(enabled?'On':'Off')));
+    toggle.addEventListener('click',()=>busy(toggle,async()=>{const owner=actionOwner();await sourcesReady;if(!owner.current())return;
+      await sourcesView.runSourceAction([chat],enabled?(s.scope?.mode==='selected'?'pause':'exclude'):'enable',{confirmed:true});
+      if(owner.current())await refreshChats(true);
+    }));viewBar.append(toggle);
+  }
+  if(viewAllowed('evidence')){
+    const report=node('button','quiet small',tr('Build report'));report.type='button';report.dataset.chatReport='';
+    report.addEventListener('click',()=>busy(report,async()=>{const owner=actionOwner(),chat=state.chat;await navigate('evidence');if(!owner.current())return;
+      (await exportsReady).select('settings');reportSelection?.selectChats([chat]);
+    }));viewBar.append(report);
+    if(state.chatView==='messages'){
+      const pick=node('button','quiet small chat-pick-toggle',tr('Select'));pick.type='button';pick.title=tr('Select messages');
+      pick.setAttribute('aria-pressed',String(!!chatPick));pick.prepend(icon('check'));
+      pick.addEventListener('click',()=>{chatPick=chatPick?null:new Set();chatPickAnchor=null;renderPick('.chat-pick-toggle');});viewBar.append(pick);
+    }
+  }
+  if(chatPick&&state.chatView==='messages'){
+    const bar=node('div','chat-pick-bar');bar.setAttribute('role','group');bar.setAttribute('aria-label',tr('Selected messages'));
+    const count=node('strong','',tr('{n} selected',{n:chatPick.size.toLocaleString()}));count.setAttribute('role','status');
+    const all=node('button','text-link',tr('Select shown'));all.type='button';all.disabled=!chatShown.some(id=>!chatPick.has(id));
+    all.dataset.pick='all';
+    all.addEventListener('click',()=>{let full=false;for(const id of chatShown){if(chatPick.has(id))continue;if(chatPick.size>=CHAT_PICK_LIMIT){full=true;break;}chatPick.add(id);}
+      if(full)pickLimit();renderPick(full?'[data-pick=all]':'[data-pick-report]');});
+    const clear=node('button','text-link',tr('Clear selection'));clear.type='button';clear.disabled=!chatPick.size;
+    clear.addEventListener('click',()=>{chatPick.clear();chatPickAnchor=null;renderPick('[data-pick=all]');});
+    const build=node('button','primary small',tr('Build report'));build.type='button';build.disabled=!chatPick.size;build.dataset.pickReport='';
+    build.addEventListener('click',()=>busy(build,()=>reportFor(state.chat,null,[...chatPick].sort((a,b)=>a-b))));
+    const cancel=node('button','quiet small',tr('Cancel'));cancel.type='button';
+    cancel.addEventListener('click',()=>{chatPick=null;chatPickAnchor=null;renderPick('.chat-pick-toggle');});
+    bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),build,cancel);box.append(bar);
+  }
   if(state.chatAuthor!==null&&state.chatView==='messages'){
     const who=state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),chip=node("div","chat-author-chip");
     const author=who?senderName(who):"ID "+state.chatAuthor;chip.append(node("span","",tr("Showing only messages from {name}",{name:author})));
@@ -5008,11 +5402,11 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=1').then(({createPeopleTimeline})=>{
+const peopleTimelineReady=import('./views/people-timeline.js?v=3').then(({createPeopleTimeline})=>{
   peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
-    record:openRecord,formatTime:fmtFull});return peopleTimeline;
+    record:openRecord,formatTime:fmtFull,canCollect:()=>!!state.me?.admin&&!state.status?.demo,attachment:mediaNode});return peopleTimeline;
 });
 window.addEventListener('tgwitness:lock',()=>peopleTimeline?.reset());
 function renderChatFeed(){
@@ -5044,6 +5438,8 @@ function renderChatFeed(){
   if(!chatReady){feed.replaceChildren(viewState("loading",tr("Loading…")));return;}
   const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:state.chatFilter==='media'?m.has_media||m.media.length:m.edited))
     &&(state.chatAuthor===null||m.sender?.id===state.chatAuthor));
+  const pickable=shown.filter(m=>!m.service_action).map(m=>m.message_id);
+  if(pickable.length!==chatShown.length||pickable.some((id,index)=>id!==chatShown[index])){chatShown=pickable;if(chatPick)renderChatStatus();}
   if(shown.some(m=>m.has_media&&!m.media.length)){
     const key=JSON.stringify([s.demo,may('sources'),s.capture?.download_media]);let notice=feed.querySelector('.chat-media-notice');
     if(!notice||notice.renderKey!==key){notice=node('aside','chat-media-notice');notice.setAttribute('role','note');notice.renderKey=key;
@@ -5068,19 +5464,33 @@ function renderChatFeed(){
     empty.classList.add("chat-feed-empty");
     next.push(empty);newer();placeChildren(feed,next);return;
   }
-  const byId=new Map(state.chatMessages.map(m=>[m.message_id,m]));
-  let lastDay=null,lastSender=null,lastTime=0;
-  for(const m of shown){
-    const when=m.sent_at||m.versions[0]?.observed_at||m.deleted_observed_at,day=panelTime.dayKey(when);
-    if(day!==lastDay){const chip=days.get(day)||node("div","chat-day"),label=fmtDay(when);chip.dataset.day=day;
-      if(chip.textContent!==label)chip.textContent=label;chip.title=label;next.push(chip);lastDay=day;lastSender=null;}
-    if(m.service_action){const service=node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when));
-      const ref=m.reference;if(ref)boardView?.attach(service,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id});next.push(service);lastSender=null;continue;}
-    const sid=m.sender?.id??null,t=when?new Date(when).getTime():0,grouped=sid!==null&&sid===lastSender&&t>=lastTime&&t-lastTime<300000;
-    lastSender=sid;lastTime=t;
-    const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,m.reply_to&&byId.get(m.reply_to),may('interact'),s.demo,s.collector.has_session,chatSafety?.key()]);
-    if(old?.renderKey===key)next.push(old);else{const row=messageRow(m,grouped,byId);row.renderKey=key;next.push(row);replaced.add(row.id);}
+  const byId=new Map(state.chatMessages.map(m=>[m.message_id,m])),channel=['channel','broadcast'].includes(info?.kind);
+  const sentAt=m=>m.sent_at||m.versions[0]?.observed_at||m.deleted_observed_at,instant=m=>{const value=sentAt(m);return value?new Date(value).getTime():0;};
+  const joins=(a,b)=>!!a&&!!b&&!a.service_action&&!b.service_action&&(a.sender?.id??null)!==null&&a.sender?.id===b.sender?.id&&
+    panelTime.dayKey(sentAt(a))===panelTime.dayKey(sentAt(b))&&instant(b)>=instant(a)&&instant(b)-instant(a)<300000;
+  let lastDay=null,lastShown=null;
+  const marking=chatGaps&&state.chatFilter==="all"&&state.chatAuthor===null,marksBefore=new Map();
+  if(marking){
+    const times=shown.map(m=>new Date(m.sent_at||m.versions[0]?.observed_at||NaN).getTime()).filter(Number.isFinite),edge=time=>new Date(time).toISOString().replace('Z','+00:00');
+    const range=times.length?{since:edge(times.reduce((a,b)=>Math.min(a,b))-86400000),until:state.chatNextAfter===null?null:edge(times.reduce((a,b)=>Math.max(a,b))+86400000)}:{since:null,until:null};
+    chatGaps.load(state.workspaceRevision+':'+state.profile+':'+chatGeneration,
+      ['coverage.gap','connection.restored','observation.started','observation.stopped','process.started','process.stopped'].map(kind=>s.stats.counts?.[kind]||0).join('.')+'|'+range.since+'|'+range.until,state.chat,()=>{
+        if(state.view!=='chats'||state.chatView!=='messages')return;
+        const stick=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;renderChatFeed();if(stick)feed.scrollTop=feed.scrollHeight;},range);
+    for(const m of shown){const when=sentAt(m),marks=chatGaps.between(lastShown,m,when);if(marks.length)marksBefore.set(m.message_id,marks);lastShown={id:m.message_id,when};}
   }
+  shown.forEach((m,index)=>{
+    const when=sentAt(m),day=panelTime.dayKey(when);
+    const marks=marksBefore.get(m.message_id);if(marks)next.push(...marks);
+    if(day!==lastDay){const chip=days.get(day)||node("div","chat-day"),label=fmtDay(when);chip.dataset.day=day;
+      if(chip.textContent!==label)chip.textContent=label;chip.title=panelTime.fullDay(when);next.push(chip);lastDay=day;}
+    if(m.service_action){const service=node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · ");service.id='msg-'+m.message_id;service.append(timeNode(when,"","clock"));
+      const ref=m.reference;if(ref)boardView?.attach(service,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id});next.push(service);return;}
+    const grouped=!marks&&joins(shown[index-1],m),continued=!marksBefore.has(shown[index+1]?.message_id)&&joins(m,shown[index+1]),post=channel&&(!m.sender||m.sender.id===state.chat);
+    const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,continued,post,m.reply_to&&byId.get(m.reply_to),may('interact'),s.demo,s.collector.has_session,chatSafety?.key(),chatPick?chatPick.has(m.message_id):null]);
+    if(old?.renderKey===key)next.push(old);else{const row=messageRow(m,grouped,byId,{continued,post});row.renderKey=key;next.push(row);replaced.add(row.id);}
+  });
+  if(marking&&state.chatNextAfter===null)next.push(...chatGaps.after(lastShown));
   newer();placeChildren(feed,next);
   for(const row of feed.querySelectorAll(".msg")){
     if(!replaced.has(row.id))continue;
@@ -5096,15 +5506,17 @@ function messageText(value,m,className="bubble-text"){
     current:()=>profile===state.profile&&revision===state.workspaceRevision&&chat===state.chat&&generation===chatGeneration,
     reveal:m?()=>json("privacy/reveal",{chat_id:chat,message_id:m.message_id},{profile}):null});
 }
-function messageRow(m,grouped,byId){
-  const row=node("div","msg"+(grouped?" grouped":"")+(m.deleted?" deleted":m.missing?" missing":""));row.id="msg-"+m.message_id;
+function messageRow(m,grouped,byId,{continued=false,post=false}={}){
+  const row=node("div","msg"+(grouped?" grouped":"")+(continued?" continued":"")+(post?" post":"")+(m.deleted?" deleted":m.missing?" missing":""));row.id="msg-"+m.message_id;
   const name=senderName(m),bubble=node("div","bubble");
-  row.append(grouped?node("span","avatar-spacer"):avatarNode(m.sender?.id,name));
-  if(!grouped){const head=node("div","bubble-head"),details=node("details","sender-details"),summary=node("summary"),facts=node("div","sender-facts");
+  if(!post)row.append(continued?node("span","avatar-spacer"):avatarNode(m.sender?.id,name));
+  if(!grouped&&!post){const head=node("div","bubble-head"),details=node("details","sender-details"),summary=node("summary",avatarClass(m.sender?.id??name)+"-text"),facts=node("div","sender-facts");
     summary.title=m.sender?.username?'@'+m.sender.username:tr("Author details");summary.setAttribute('aria-label',tr('Author details')+': '+name);summary.append(node("span","sender",name));
     if(m.sender?.username)facts.append(node("span","","@"+m.sender.username));
     if(m.sender?.id!==null&&m.sender?.id!==undefined)facts.append(node("span","","ID "+m.sender.id));
     if(!facts.children.length)facts.append(node("span","",tr("No saved author details")));
+    if(m.sender?.id!==null&&m.sender?.id!==undefined&&viewAllowed('evidence')){const report=node("button","text-link sender-report",tr("Build report"));report.type="button";
+      report.addEventListener("click",()=>busy(report,()=>reportFor(state.chat,m.sender.id)));facts.append(report);}
     details.append(summary,facts);head.append(details);bubble.append(head);}
   if(m.reply_to){
     const target=byId.get(m.reply_to),quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
@@ -5119,21 +5531,34 @@ function messageRow(m,grouped,byId){
   m.media.forEach(media=>bubble.append(mediaNode(media)));
   if(m.has_media&&!m.media.length){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
   const meta=node("div","bubble-meta");
-  if(m.deleted&&m.auto_deleted){const d=node("span","pill pill-deleted",tr("Deleted"));d.title=tr("Deletion seen {time}, when the message's auto-delete timer expired: an expected removal by the timer.",{time:fmtFull(m.deleted_observed_at)});meta.append(d);}
-  else if(m.deleted){const d=node("span","pill pill-deleted",tr("Deleted"));d.title=tr("Deletion notice received {time}; the saved content stays.",{time:fmtFull(m.deleted_observed_at)});meta.append(d);}
-  else if(m.missing&&m.auto_deleted){const d=node("span","pill pill-missing",tr("Not found at recheck"));d.title=tr("Telegram no longer returned this message at {time}; its auto-delete timer had expired before that check.",{time:fmtFull(m.missing_observed_at)});meta.append(d);}
-  else if(m.missing){const d=node("span","pill pill-missing",tr("Not found at recheck"));d.title=tr("Telegram no longer returned this message at {time} and no deletion notice was received: deleted while notices were missed, removed by an auto-delete timer, or no longer visible to this account.",{time:fmtFull(m.missing_observed_at)});meta.append(d);}
-  if(m.versions.length>1){const e=node("button","pill pill-edited",tr("Edited · {n} versions",{n:m.versions.length}));e.type="button";e.title=tr("Show every saved version");
+  const mark=(tag,cls,symbol,label,title)=>{const d=node(tag,"pill "+cls);d.append(icon(symbol),node("span","",label));d.title=title;meta.append(d);return d;};
+  if(m.deleted&&m.auto_deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion seen {time}, when the message's auto-delete timer expired: an expected removal by the timer.",{time:fmtFull(m.deleted_observed_at)}));
+  else if(m.deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion notice received {time}; the saved content stays.",{time:fmtFull(m.deleted_observed_at)}));
+  else if(m.missing&&m.auto_deleted)mark("button","pill-missing","question",tr("Not found at recheck"),tr("Telegram no longer returned this message at {time}; its auto-delete timer had expired before that check.",{time:fmtFull(m.missing_observed_at)}));
+  else if(m.missing)mark("button","pill-missing","question",tr("Not found at recheck"),tr("Telegram no longer returned this message at {time} and no deletion notice was received: deleted while notices were missed, removed by an auto-delete timer, or no longer visible to this account.",{time:fmtFull(m.missing_observed_at)}));
+  const changePill=meta.querySelector("button.pill-deleted,button.pill-missing");
+  if(changePill){changePill.type="button";changePill.setAttribute("aria-expanded","false");
+    changePill.addEventListener("click",()=>{const open=changePill.getAttribute("aria-expanded")!=="true";changePill.setAttribute("aria-expanded",String(open));
+      hideTooltip();let note=bubble.querySelector(".change-note");if(!note){note=node("p","change-note",changePill.title);bubble.append(note);}note.hidden=!open;});}
+  if(m.versions.length>1){const e=mark("button","pill-edited","edit",tr("Edited · {n} versions",{n:m.versions.length}),tr("Show every saved version"));e.type="button";
     e.setAttribute("aria-expanded","false");
-    e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");e.setAttribute("aria-expanded",String(!open));if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});meta.append(e);}
-  else if(m.edited){const e=node("span","pill pill-edited",tr("Edited"));e.title=tr("Telegram marks this message as edited; the earlier text was not saved.");meta.append(e);}
+    e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");e.setAttribute("aria-expanded",String(!open));if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});}
+  else if(m.edited)mark("span","pill-edited","edit",tr("Edited"),tr("Telegram marks this message as edited; the earlier text was not saved."));
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
-  meta.append(timeNode(m.sent_at||m.versions[0]?.observed_at,"time"));
+  meta.append(timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock"));
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
       composeReply=m.message_id;composeOpen=true;renderComposer();$("chat-message").focus();});meta.append(reply);}
   bubble.append(meta);row.append(bubble);
+  if(chatPick){
+    const chosen=chatPick.has(m.message_id),box=node("button","msg-pick");box.type="button";box.setAttribute("role","checkbox");box.setAttribute("aria-checked",String(chosen));
+    box.setAttribute("aria-label",tr(chosen?"Unselect":"Select")+": "+name+" · "+fmtFull(m.sent_at||m.versions[0]?.observed_at));box.append(icon("check"));
+    row.classList.add("pickable");row.classList.toggle("picked",chosen);row.prepend(box);
+    row.addEventListener("click",event=>{
+      if(!chatPick||event.target.closest("a,button:not(.msg-pick),summary,input,select,textarea,video,audio,.versions,.sender-facts,.change-note"))return;
+      event.stopImmediatePropagation();if(event.shiftKey)event.preventDefault();togglePick(m.message_id,event.shiftKey);},{capture:true});
+  }
   const version=m.versions.at(-1);
   const ref=version||m.reference;
   if(ref)boardView?.attach(row,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id,payload:{text:version?.text||''}},version?bubble.querySelector('.bubble-text'):null);
@@ -5353,7 +5778,27 @@ function buttonsNode(keyboard,message=null){
 
 
 let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
-let chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null;
+let chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
+const CHAT_PICK_LIMIT=1000;
+let chatPickAnchor=null;
+function renderPick(focus){
+  renderChatStatus();renderChatFeed();
+  if(focus)(document.querySelector(focus)||document.querySelector('.chat-pick-toggle'))?.focus({preventScroll:true});
+}
+function pickLimit(){toast(tr('Select no more than {n} messages.',{n:CHAT_PICK_LIMIT.toLocaleString()}),true);}
+function togglePick(id,range=false){
+  if(!chatPick)return;
+  const from=chatShown.indexOf(chatPickAnchor),to=chatShown.indexOf(id);
+  if(range&&from>=0&&to>=0){
+    let full=false;
+    for(const item of chatShown.slice(Math.min(from,to),Math.max(from,to)+1)){if(chatPick.has(item))continue;if(chatPick.size>=CHAT_PICK_LIMIT){full=true;break;}chatPick.add(item);}
+    if(full)pickLimit();
+  }
+  else if(chatPick.has(id))chatPick.delete(id);
+  else if(chatPick.size>=CHAT_PICK_LIMIT){pickLimit();return;}
+  else chatPick.add(id);
+  chatPickAnchor=id;renderPick('#msg-'+id+' .msg-pick');
+}
 const chatSafety=window.TgWitnessChatSafety?.create({
   context:()=>({profile:state.profile,revision:state.workspaceRevision,chat:state.chat,account:state.status?.collector.account,
     evidence:state.status?.setup_goal==='evidence',readOnly:!!state.status?.actions?.read_only,
@@ -5366,7 +5811,7 @@ function resetInteractions(){
   chatSafety?.reset();
   $("chat-history-feedback")?.remove();
   composeContext=null;composeReply=null;composeOpen=false;linkPreview=null;
-  chatGeneration++;chatReady=false;composeDestination=null;
+  chatGeneration++;chatReady=false;chatPick=null;chatShown=[];composeDestination=null;
   $("chat-message").value="";$("chat-link").value="";$("chat-link-preview").replaceChildren();
   $("chat-search").value="";
   viewQuery("chats",".chats-shell").dataset.panel="chat";
@@ -5513,7 +5958,7 @@ function profileNode(standalone=false){
   const s=state.status,saved=state.chatProfile?.chat===state.chat?state.chatProfile:null,data=saved?.profile;
   const box=node(standalone?'section':'details',"chat-profile"+(standalone?' chat-profile-view':'')),summary=node(standalone?'header':'summary');
   if(!standalone){box.open=!!state.chatProfileOpen;box.addEventListener("toggle",()=>{state.chatProfileOpen=box.open;});}
-  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error?tr("not saved yet"):''));
+  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error&&!standalone?tr("not saved yet"):''));
   box.append(summary);
   if(data){
     const facts=node("dl","dossier-facts"),add=(label,value)=>{if(value===null||value===undefined||value==="")return;facts.append(node("dt","",label),node("dd","",String(value)));};
@@ -5549,12 +5994,19 @@ async function loadHistory(button,limit){
   const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration;
   const current=()=>profile===state.profile&&revision===state.workspaceRevision&&chat===state.chat&&generation===chatGeneration;
   const work=async()=>{
+    let pause=false;
+    if(state.status?.collector?.activity?.task==="observation"){
+      if(!(await askConfirm(tr("Observation is running on this account. Loading messages pauses it for a moment and starts it again right after. Updates from that moment are requested again from the saved position. Continue?"),{confirmText:tr("Load messages")})))return;
+      pause=true;
+    }
     toast(tr("Loading the last {n} messages from Telegram…",{n:limit}));
     try{
-      const r=await json("snapshot",{chat_id:chat,limit},{profile});
+      const r=await json("snapshot",{chat_id:chat,limit,pause_observation:pause},{profile});
       if(!current())return;
       $("chat-history-feedback")?.remove();
-      toast(tr("Loaded {n} messages.",{n:r.captured}));await refreshStatus();await refreshChats();
+      if(r.observation_resumed===false)toast(tr("Messages loaded, but observation did not start again. Start it from the account page."),true);
+      else toast(tr("Loaded {n} messages.",{n:r.captured}));
+      await refreshStatus();await refreshChats();
     }catch(error){
       if(!current()||error instanceof StaleView)return;
       $("chat-history-feedback")?.remove();
@@ -5600,7 +6052,7 @@ async function openExportDialog(){
     box.type="checkbox";box.value=p.id;box.disabled=!connected||!!occupied||basic&&!lead;box.addEventListener("change",estimate);
     box.checked=!box.disabled&&(lead||!!exportPreselect?.has(p.id));
     text.append(node("b","",p.label),node("small","",limited?tr("Telegram rate limit: wait until {time}.",{
-      time:formatTime(new Date(c.rpc_backoff_until*1000).toISOString())}):occupied?tr("Busy: pause the current task explicitly"):!connected?tr("no Telegram account connected"):
+      time:formatTime(new Date(c.rpc_backoff_until*1000).toISOString())}):occupied?busyAccountText(p):!connected?tr("no Telegram account connected"):
       basic?tr("not possible for ordinary groups"):account?(account.username?"@"+account.username+" · ":"")+"ID "+account.id:""));
     who.append(avatarNode(account?account.id:null,account&&account.username?account.username:p.label,"",p.id),text);
     row.append(box,who);list.append(row);
@@ -6018,7 +6470,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=2').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=3').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;
@@ -6029,7 +6481,7 @@ const topologyReady=import('./views/topology.js?v=2').then(({createTopology})=>{
 topologyReady.catch(error=>toast(error.message,true));
 let accessView=null,systemLogView=null;
 let systemMapView=null;
-const systemMapReady=import('./views/system-map.js?v=2').then(({createSystemMap})=>{
+const systemMapReady=import('./views/system-map.js?v=4').then(({createSystemMap})=>{
   systemMapView=createSystemMap({root:$('view-system-map'),tr,json,getState:()=>state,
     options:()=>viewOptions('system-map'),
     openSettings:async (profile,card)=>{
@@ -6127,6 +6579,7 @@ async function pollWorkspace(){
         && state.status.stats.head?.seq!==head) await refreshEvents();
     if(!window.TgWitnessLive?.active()&&state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
     if(state.view==="accounts"||state.view==="group") await loadProfiles();
+    if(state.view==="start") await loadProfiles().catch(()=>{});
     if(state.view==="witness") await loadExtras();
     if(state.view==="access") await loadAccess(true);
     if(state.view==="system-log") await loadConsole();

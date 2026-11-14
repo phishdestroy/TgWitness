@@ -481,4 +481,4 @@ Pendirian pengarang dan notis operator, dalam bahasa ini:
   <a href="../../.github/SECURITY.md"><b>Laporkan kelemahan</b></a>
 </p>
 
-[Indeks projek boleh dibaca mesin](../../llms.txt) · [Buku panduan teks lengkap](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Peraturan repositori untuk ejen](../../AGENTS.md)
+[Indeks projek boleh dibaca mesin](../../llms.txt) · [Buku panduan teks lengkap](https://phishdestroy.github.io/TgWitness/llms-full.txt)

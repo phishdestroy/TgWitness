@@ -226,6 +226,11 @@ report is sealed with the workspace's Ed25519 key and can be verified separately
   trusted; compare the Ed25519 fingerprint instead. Chinese, Japanese and Korean PDFs need a font
   on the server (or in `TGWITNESS_FONT_DIR`); without one the ZIP carries the HTML and JSON reports
   only.
+- `report.en.html`, `report.en.pdf` / `chat.en.html`, `chat.en.pdf`: the English original of the
+  same report when the report language is not English, sealed and signed in the same way and named
+  under `report.original` in the signed manifest. The report in the selected language opens with a
+  recommendation to file the English original with a certified or sworn translation; see
+  [Translating reports for court](TRANSLATION.md).
 
 In a channel or supergroup Telegram numbers messages 1, 2, 3… in order. A chat export lists the
 first and last number, how many are present and every run of absent numbers in
@@ -247,9 +252,8 @@ record's hash, checks its signature against the export key and compares the coun
 manifest; the evidence export holds the complete hash chain. The report lists these messages under
 **Deletions and earlier versions**.
 
-Every report opens with **In brief**: one paragraph, then what the material shows and what it does
-not (who is behind an account, completeness of delivery, deletions before observation, clock time
-without a timestamp). The page's own seal stamp turns amber when the browser has checked the seal's
+Every report opens with **In brief**: one paragraph, then what the material shows and what the
+record includes. The page's own seal stamp turns amber when the browser has checked the seal's
 signature, not the page: a browser does not give a page its own bytes. It turns green only when
 the reader drops the file into the check at the end of the page and every byte matches, and only if
 the page shown is that file; otherwise it turns red.
@@ -683,7 +687,9 @@ when the checkpoint survives. Independent retention keeps that reference availab
 the workspace; a verified external timestamp additionally anchors it in time.
 
 After a restart the saved Telegram update position is resumed (`catch_up_from` in
-`observation.started`) and missed updates are requested. A periodic recheck records
+`observation.started`) and missed updates are requested. The saved position covers only
+updates whose handling has finished, so updates still waiting when the connection closed or
+the process stopped are requested again. A periodic recheck records
 `message.recovered` for missed messages and `message.missing_on_recheck` when Telegram no
 longer returns a saved message; the latter is not a deletion notice and names no deleter or time.
 
@@ -730,18 +736,17 @@ The panel prepares a request archive containing canonical checkpoint.json bytes,
 a SHA-256 message imprint and random nonce in timestamp.tsq, checksums, and instructions.
 No network request is made; the token the authority returns for this request is the timestamp.
 
-`python -m tgwitness.anchor verify` calls OpenSSL ts twice: once against checkpoint
-bytes and once against the original request. A trusted CA file is required explicitly;
+`python -m tgwitness.anchor verify` checks the reply against the checkpoint
+bytes and the original request without OpenSSL. A trusted CA file is required explicitly;
 included certificates are not automatically trusted. Request checking is optional at
 the CLI, so retain and supply --request to check the nonce. The result states whether
 it was checked. The collector checkpoint signature and journal must still be verified
 separately with the trusted collector fingerprint.
 
 Verification checks the response signature, checkpoint bytes and, when supplied,
-the original request under the specified CA trust. This manual procedure does not check
-revocation; for time stamps obtained in evidence mode, `verify.py` checks the stored OCSP or
-CRL evidence ([signing certificate revocation](TIMESTAMP.md#signing-certificate-revocation)).
-Long-term archival validation after certificate expiry is outside the current verifier.
+the original request under the specified CA trust. For time stamps obtained in evidence mode,
+`verify.py` also checks the stored OCSP or CRL evidence
+([signing certificate revocation](TIMESTAMP.md#signing-certificate-revocation)).
 See the [procedure](TIMESTAMP.md) and [validation results](VERIFICATION.md).
 
 ## Optional records in evidence mode: drand and Telegram devices
@@ -756,12 +761,12 @@ randomness of the League of Entropy (a round every 3 seconds), into the journal:
 `round`, `randomness`, `signature`, `round_time` and the `relay` that answered. A verified
 unpredictable round supplies a lower time reference for the subsequent hash-linked material.
 A verified timestamp on a later checkpoint supplies an upper time reference. These checks
-bound the linked material; collection coverage is assessed separately. The collector asks `drand.cloudflare.com`
+bound the linked material. The collector asks `drand.cloudflare.com`
 first, then the relays of Protocol Labs, through the workspace route, one request per pass.
 
 `verify.py` checks that each randomness is the SHA-256 of its signature and that the round
 time is right, and reports the rounds, the longest stretch without one and how far behind
-drand the collector's clock was. It does not check the BLS signature. `--check-drand`
+drand the collector's clock was. `--check-drand`
 compares the rounds with a Cloudflare relay and a Protocol Labs relay, all of them or a random
 sample of 100 in a long journal; a round that differs fails the verification.
 

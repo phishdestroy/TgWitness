@@ -60,10 +60,10 @@ navigation remain available without JavaScript. [Metadata and SEO](SEO.md).
    has an allowlist, but Git uses `.gitignore`; those are separate controls.
 4. Commit the reviewed source and push `main` to the new remote.
 5. Publish only the generated and checked `dist/site` directory. The maintained
-   deployment uses **Deploy from a branch → gh-pages → / (root)**, with `.nojekyll`.
+   deployment uses **GitHub Actions** from `main`; no generated branch is needed.
    Never select `main /docs`: that serves repository Markdown and maintainer notes
    instead of the generated website.
-6. For an Actions deployment instead, choose **GitHub Actions** in Pages settings
+6. Choose **GitHub Actions** in Pages settings
    and set the repository variable `TGWITNESS_PAGES_DEPLOYMENT` to `actions`.
    Run **Actions → Project website → Run workflow**. The workflow checks the site
    before uploading `dist/site`; deployment is disabled unless that variable is set.
@@ -75,6 +75,9 @@ as a successful build. The static branch procedure below remains available when
 GitHub's branch-based Pages build is operational.
 
 ### Publish the generated static branch
+
+This is an alternative for installations that use branch-based Pages publishing.
+Keep that branch until an Actions deployment and its public output have been verified.
 
 Run the notice, site and browser checks below first. In a separate checkout of
 `gh-pages`, copy only the contents of the verified `dist/site` directory, including

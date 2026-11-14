@@ -5,6 +5,7 @@ from .. import interactions
 from .. import modes
 from .. import pdf_report
 from .. import replica
+from .. import secret_module
 from .. import tuning
 from ..access import AccessControl
 from ..account_export import AccountExport
@@ -79,6 +80,8 @@ class LifecycleOperations:
                         rule["enabled"] = True
                 store.set_setting("capture", policy)
             await complete_in_thread(modes.migrate, store)
+            if not self.access:
+                await complete_in_thread(secret_module.restore, self.root)
             collector = Collector(
                 store,
                 vault,
@@ -259,6 +262,8 @@ class LifecycleOperations:
                 not store.get_setting("demo", False)
             ):
                 resume_task = asyncio.create_task(resume())
+            if not store.get_setting("demo", False):
+                collector.profiling.restore()
             if self.allow_profiles:
 
                 def child_factory(path, **options):
@@ -294,7 +299,7 @@ class LifecycleOperations:
                 if getattr(app.state, "multi_export", None):
                     await app.state.multi_export.close()
                 if profiles:
-                    await app.state.connection.close()
+                    await app.state.connection.halt()
                     await profiles.close()
                 if getattr(app.state, "disclosures", None):
                     await app.state.disclosures.close()

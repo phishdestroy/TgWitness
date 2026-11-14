@@ -13,7 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from . import message_details, pdf_report, report, tuning, verification_kit
 from .dossier import PHONE
 from . import viewer
-from .evidence import producer, report_entry, write_indicators, write_pdf, write_viewer
+from .evidence import english_original, producer, report_entry, write_indicators, write_pdf, write_viewer
 from .store import canonical, utcnow
 from .verify import Coverage, fingerprint, verify_events
 
@@ -537,6 +537,10 @@ def export(store, vault, options, report_options=None):
                 context["viewer"] = write_viewer(write_member, "journal",
                     (viewer.journal_item(event, report_options.get("raw_records", True)) for event in records()),
                     None, summary.get("indicators"), report_options)
+            english_original(context, write_member, hashes, "report",
+                             lambda english: pdf_report.report_pdf(report.report_data(records, coverage, english),
+                                                                   english, vault, records()),
+                             lambda english: report.evidence_chunks(records(), coverage, english))
             context["files"] = dict(hashes)
             data = report.report_data(records, coverage, context)
             write_member("report.json", [report.sealed_json(data, context)])

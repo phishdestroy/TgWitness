@@ -434,6 +434,8 @@ async def sync(store, vault, network):
 
         folder = store.root / "checkpoints"
         for path in sorted([*folder.glob("checkpoint-*.json"), *(folder / "anchors").glob("*")]) if folder.is_dir() else []:
+            if path.name.endswith(".tmp"):
+                continue
             covered = re.match(r"checkpoint-(\d+)(?:\.|$)", path.name)
             if covered and int(covered[1]) > sent.get("journal_seq"):
                 continue

@@ -7,20 +7,20 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.8.0-evidence1">
+<link rel="stylesheet" href="/style.css?v=0.9.3-workflows4">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/components/modes.css?v=1">
-<link rel="stylesheet" href="/views/sources.css?v=18">
+<link rel="stylesheet" href="/views/sources.css?v=22">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
-<link rel="stylesheet" href="/views/accounts.css?v=30">
+<link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=4">
+<link rel="stylesheet" href="/views/settings-hub.css?v=12">
 <link rel="stylesheet" href="/views/connection.css?v=1">
-<link rel="stylesheet" href="/views/system-map.css?v=2">
+<link rel="stylesheet" href="/views/system-map.css?v=3">
 <link rel="stylesheet" href="/services.css?v=1">
 <link rel="stylesheet" href="/independent-capture.css?v=1">
 <link rel="stylesheet" href="/investigate.css?v=8">
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="/account-import.css?v=1">
 <link rel="stylesheet" href="/views/access.css?v=30">
 <link rel="stylesheet" href="/components/journal.css?v=6">
-<link rel="stylesheet" href="/views/chats.css?v=11">
-<link rel="stylesheet" href="/views/chat-list.css?v=12">
-<link rel="stylesheet" href="/views/board.css?v=1">
+<link rel="stylesheet" href="/views/chats.css?v=16">
+<link rel="stylesheet" href="/views/chat-list.css?v=14">
+<link rel="stylesheet" href="/views/board.css?v=3">
 <link rel="stylesheet" href="/views/topology.css?v=2">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
@@ -39,10 +39,10 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.1-evidence1-topology2-layout1"></script>
+<script defer src="/app.js?v=0.9.3-profiles14"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
-<script defer src="/investigate.js?v=9"></script>
+<script defer src="/investigate.js?v=13"></script>
 <script defer src="/account-import.js?v=2"></script>
 <script defer src="/integrations.js?v=5"></script>
 <script defer src="/analysis.js?v=5"></script>
@@ -53,12 +53,14 @@
 <script defer src="/review.js?v=1"></script>
 <script defer src="/live.js?v=3"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
-<link href="/views/exports.css?v=32" rel="stylesheet">
-<link href="/views/workflows.css?v=2" rel="stylesheet">
+<link href="/views/exports.css?v=33" rel="stylesheet">
+<link href="/views/workflows.css?v=10" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="/components/forms.css?v=35" rel="stylesheet">
 <link href="/components/feedback.css?v=36" rel="stylesheet">
-<link href="/components/layout.css?v=1" rel="stylesheet">
+<link href="/components/layout.css?v=12" rel="stylesheet">
+<link href="/components/polish.css?v=7" rel="stylesheet">
+<link href="/views/pulse.css?v=2" rel="stylesheet">
 </head>
 <body>
 <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -153,6 +155,7 @@
   <nav aria-label="Main navigation">
     <button class="nav" data-view="start"><svg aria-hidden="true" class="nav-icon"><use href="#i-home"/></svg> Start here</button>
     <button class="nav" data-view="chats"><svg aria-hidden="true" class="nav-icon"><use href="#i-message"/></svg> Chats</button>
+    <button class="nav" data-view="secret-chats"><svg aria-hidden="true" class="nav-icon"><use href="#i-lock"/></svg> Pseudo-secret</button>
     <button class="nav active" data-view="observations"><svg aria-hidden="true" class="nav-icon"><use href="#i-journal"/></svg> Journal <b id="nav-count">0</b></button>
     <button class="nav" data-view="evidence"><svg aria-hidden="true" class="nav-icon"><use href="#i-export"/></svg> Exports</button>
     <div class="nav-section">Workspace</div>
@@ -163,7 +166,6 @@
     <button class="nav" data-view="board"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> Case Board <b id="board-unread" hidden>0</b></button>
     <button class="nav" data-view="sources"><svg aria-hidden="true" class="nav-icon"><use href="#i-sources"/></svg> Sources</button>
     <button class="nav" data-view="system-map"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> System map</button>
-    <button class="nav" data-view="topology"><svg aria-hidden="true" class="nav-icon"><use href="#i-activity"/></svg> Network topology</button>
     <button class="nav" data-view="witness"><svg aria-hidden="true" class="nav-icon"><use href="#i-sparkle"/></svg> Extras</button>
     <button class="nav" data-view="analysis"><svg aria-hidden="true" class="nav-icon"><use href="#i-search"/></svg> Ask the archive</button>
     <button class="nav" data-view="parameters"><svg aria-hidden="true" class="nav-icon"><use href="#i-settings"/></svg> Parameters</button>
@@ -172,6 +174,7 @@
     <button class="nav" data-view="system-log" hidden><svg aria-hidden="true" class="nav-icon"><use href="#i-activity"/></svg> System log</button>
     <button class="nav" data-view="integrations" hidden><svg aria-hidden="true" class="nav-icon"><use href="#i-link"/></svg> Integrations</button>
     </details>
+    <button class="nav-hidden-hint" hidden id="nav-hidden-hint" type="button"></button>
   </nav>
   <div class="sidebar-bottom">
     <details class="sidebar-help-menu"><summary><svg aria-hidden="true" class="nav-icon"><use href="#i-help"/></svg> Help</summary>
@@ -252,11 +255,13 @@
 
 <section class="view" hidden id="view-system-map" aria-label="System map"></section>
 <section class="view" hidden id="view-start">
-  <div class="workflow-intro"><span class="eyebrow">YOUR WORKSPACE</span><h1>What would you like to do?</h1><p>Save a copy of your Telegram account, or keep a record of conversations as they change.</p></div>
-  <section class="card workflow-status" aria-label="Current workspace"><div><strong id="workflow-status-title"></strong><p id="workflow-status-copy"></p></div><button class="secondary" data-open="chats" type="button">Open saved chats</button><button class="quiet" data-open="accounts" type="button">Manage accounts</button></section>
+  <div class="workflow-intro"><span class="eyebrow">YOUR WORKSPACE</span><h1>Overview</h1><p>Accounts, what each one is doing now and what you can start next.</p></div>
+  <div class="home-dashboard" id="home-dashboard"></div>
+  <p class="workflow-gap" hidden id="workflow-gap"></p>
+  <section class="card workflow-status" hidden aria-label="Current workspace"><div><strong id="workflow-status-title"></strong><p id="workflow-status-copy"></p></div><button class="secondary" data-open="chats" type="button">Open saved chats</button><button class="quiet" data-open="accounts" type="button">Manage accounts</button><div class="workflow-accounts" hidden id="workflow-accounts"></div></section>
   <div class="workflow-choices">
     <article class="card workflow-card workflow-link" hidden id="workflow-link-card"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><h2>Export a chat by link</h2><p>Choose a Telegram chat and review the export plan before starting.</p><form class="link-export-form" id="link-export-form"><label for="link-export-input">Chat link or @username</label><input autocomplete="off" id="link-export-input" maxlength="300" placeholder="@channel or https://t.me/…" spellcheck="false"><button class="primary" type="submit">Plan the export</button></form><div class="link-export-plan" hidden id="link-export-plan" role="status"></div><p class="hint">Checking briefly uses one permitted account. Starting an export requires a separate click.</p></article>
-    <article class="card workflow-card" id="workflow-account-card"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><h2>Export my account</h2><p>Download the chats and history your account can read now. Choose dates, messages and files before starting.</p><button class="primary" data-workflow="account" type="button">Export my account</button><p class="hint">No continuous observation needed. Earlier deletions and edits cannot be recovered.</p></article>
+    <article class="card workflow-card" id="workflow-account-card"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><h2>Export my account</h2><p>Download the chats and history your account can read now. Choose dates, messages and files before starting.</p><div class="workflow-buttons"><button class="primary" data-workflow="account-all" type="button">Export everything</button><button class="secondary" data-workflow="account" type="button">Choose what to export</button></div><p class="hint" id="workflow-account-hint"></p></article>
     <article class="card workflow-card" id="workflow-investigation-card"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg><h2>Follow an investigation</h2><p>Keep new messages, observed edits and deletion notices from the chats you choose.</p><button class="secondary" data-workflow="investigation" type="button">Set up observation</button><p class="hint">Previously saved records stay available when observation is paused.</p></article>
   </div>
   <section class="setup-start" hidden id="setup-start" aria-labelledby="setup-start-title">
@@ -269,7 +274,6 @@
     </div>
     <button class="text-link" id="setup-start-skip" type="button">Skip, I will set it up myself</button>
   </section>
-  <p class="hint">TgWitness signs the saved files. Export details explain what was collected and what is missing.</p>
 </section>
 
 <section class="view" id="view-observations">
@@ -324,7 +328,7 @@
     <button type="button" id="sources-tab-scope" role="tab" aria-controls="sources-panel-scope" aria-selected="true" data-source-tab="scope">Scope</button>
     <button type="button" id="sources-tab-chats" role="tab" aria-controls="sources-panel-chats" aria-selected="false" tabindex="-1" data-source-tab="chats">Chats in scope <span id="sources-tab-count" class="tab-count">0</span></button>
     <button type="button" id="sources-tab-recording" role="tab" aria-controls="sources-panel-recording" aria-selected="false" tabindex="-1" data-source-tab="recording">Recording <span id="recording-tab-dirty" class="tab-count" hidden></span></button>
-    <button type="button" id="sources-tab-secret" role="tab" aria-controls="sources-panel-secret" aria-selected="false" tabindex="-1" data-source-tab="secret">Pseudo-secret</button>
+    <button type="button" id="sources-tab-secret" data-open="secret-chats">Pseudo-secret ↗</button>
   </div>
   <div id="sources-panel-scope" role="tabpanel" aria-labelledby="sources-tab-scope">
   <form class="card padded scope-card" id="scope-form"><div class="eyebrow">Observation scope</div><h2>What this account records</h2>
@@ -396,6 +400,7 @@
       <label>Attachment workers <select id="history-workers"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></label>
       <label class="check-label"><input id="history-admin" type="checkbox" checked> Preserve available edits and deletions from Recent Actions</label>
       <label class="check-label"><input id="history-compare" type="checkbox" checked> Compare with previously saved message versions</label>
+      <label class="check-label"><input id="history-observe" type="checkbox" checked> Start observation when the history is loaded</label>
       <p class="hint">Takeout may require approval in Telegram and a server-specified wait. Recent Actions requires administrator access. These choices stay fixed when you resume.</p>
     </fieldset>
     <div class="chat-export-actions">
@@ -448,19 +453,28 @@
     </div>
   </form>
   </div>
-  <div id="sources-panel-secret" role="tabpanel" aria-labelledby="sources-tab-secret" hidden>
-  <section class="card padded secret-chats" id="secret-chats"><div class="eyebrow">Pseudo-secret</div><h2>Telegram end-to-end chats of this account, kept in the journal</h2>
-    <p class="hint">Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
+</section>
+
+<section class="view" hidden id="view-secret-chats">
+  <div class="page-heading"><div><h1>Pseudo-secret</h1><p class="page-description">Telegram end-to-end chats of this account, kept in the journal</p></div><div class="route-actions"><button type="button" class="quiet" data-open="observations">Journal</button><button type="button" class="secondary" id="secret-report">Build report</button><button type="button" class="quiet" id="secret-refresh">Refresh</button></div></div>
+  <section class="card secret-chats" id="secret-chats">
+    <div class="secret-top"><span class="tile secret-mark" data-tone="violet"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></span>
+    <div class="secret-top-text"><p class="secret-status" id="secret-status" role="status"></p>
+    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
+    <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p>
+    <p id="secret-module" hidden><span id="secret-module-text"></span> <a id="secret-module-source" target="_blank" rel="noopener noreferrer">Source code and license</a><code id="secret-module-digest"></code></p></details></div>
+    <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
+    <label class="check-label"><input id="secret-accept" type="checkbox" role="switch" disabled> Accept incoming requests automatically</label></div></div>
     <p class="notice warning" id="secret-unavailable" hidden></p>
-    <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox"> Turn on pseudo-secret for this account</label>
-    <label class="check-label"><input id="secret-accept" type="checkbox"> Accept incoming requests automatically</label>
-    <p class="hint">An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></div>
-    <p class="hint" id="secret-status" role="status"></p>
+    <div id="secret-install" class="secret-install" hidden><p id="secret-install-text"></p><div class="route-actions"><button class="primary" type="button" id="secret-install-run">Install and turn on</button><a id="secret-install-source" target="_blank" rel="noopener noreferrer">Source code and license</a></div></div>
+    <div class="route-actions" id="secret-recovery" hidden><button class="secondary" id="secret-connect" type="button" data-open="connection">Connect account</button><button class="secondary" id="secret-reconnect" type="button">Retry</button></div>
+    <p class="notice warning" id="secret-sync" hidden role="status"></p>
+    <p class="notice warning" id="secret-interaction" hidden></p>
+    <div class="secret-layout"><div class="secret-side">
+    <div class="secret-list-tools"><input id="secret-search" type="search" placeholder="Search chats" aria-label="Search chats"><span id="secret-count" class="hint"></span></div>
     <form class="secret-start" id="secret-start"><label for="secret-user">Start a chat with</label><input autocomplete="off" id="secret-user" maxlength="64" placeholder="@username or user ID" spellcheck="false"><button class="primary" type="submit">Start chat</button></form>
-    <p class="hint">The other side sees the request and must accept it on their device. Starting a chat and sending are actions of this account and are recorded.</p>
-    <div class="secret-layout"><div class="secret-list" id="secret-list"></div><div class="secret-thread" id="secret-thread"></div></div>
+    <div class="secret-list" id="secret-list"></div></div><div class="secret-thread" id="secret-thread"></div></div>
   </section>
-  </div>
 </section>
 
 <section class="view" hidden id="view-evidence">
@@ -505,12 +519,13 @@
   <dialog class="account-export-dialog" id="account-export-dialog" aria-labelledby="account-export-dialog-title">
     <form id="account-export-form" method="dialog">
       <div class="account-export-dialog-head"><div><span class="eyebrow">NEW ACCOUNT EXPORT</span><h2 id="account-export-dialog-title" tabindex="-1">Choose what to save</h2></div><button class="quiet" id="account-export-close" type="button" aria-label="Close export settings">×</button></div>
+      <div class="account-export-busy" hidden id="account-export-busy" role="status"><p id="account-export-busy-copy"></p><button class="secondary" hidden id="account-export-pause" type="button">Pause observation</button></div>
       <p class="muted">Every accessible chat and its full visible history are selected by default. Observation sources are separate from this export.</p>
       <p class="hint">For a personal backup, describe that purpose. You can prepare a separate sharing copy after the export finishes.</p>
       <p class="hint" hidden id="account-export-imported-key"></p>
       <div class="export-language"><label for="account-export-language">Report language</label><select id="account-export-language" data-no-translate></select><p class="hint">Report labels use this language. Original messages stay unchanged.</p></div>
-      <div class="export-language"><label for="account-export-format">Export format</label><select id="account-export-format"><option value="tgwitness">TgWitness signed archive</option><option value="telegram_json">Telegram Desktop compatible JSON</option><option value="telegram_html">Telegram Desktop compatible HTML</option><option value="telegram_both">Telegram Desktop compatible JSON and HTML</option></select><p class="hint">Compatible views include the signed source records and file hash references. TgWitness generates these views; Telegram Desktop does not.</p></div>
-      <div class="account-export-purpose"><label for="account-export-purpose">Collection purpose</label><textarea id="account-export-purpose" rows="2" maxlength="1000" required placeholder="Why this account snapshot is being collected"></textarea><p class="hint">The purpose is included in the signed export. Describe the specific investigation or request.</p><button class="secondary account-export-preset" id="account-export-minimize" type="button">Minimize collection</button><p class="hint">Turns off media and optional account data. Chat and sender filters remain yours to set.</p></div>
+      <div class="export-language"><label for="account-export-format">Export format</label><select id="account-export-format"><option value="telegram_both">All formats: TgWitness signed archive with Telegram Desktop JSON and HTML</option><option value="tgwitness">TgWitness signed archive only</option><option value="telegram_json">TgWitness archive with Telegram Desktop JSON</option><option value="telegram_html">TgWitness archive with Telegram Desktop HTML</option></select><p class="hint">Compatible views include the signed source records and file hash references. TgWitness generates these views; Telegram Desktop does not.</p></div>
+      <div class="account-export-purpose"><label for="account-export-purpose">Purpose (optional)</label><textarea id="account-export-purpose" rows="2" maxlength="1000" placeholder="Personal backup, project archive or another reason"></textarea><p class="hint">If supplied, this note is included in the signed export.</p><button class="secondary account-export-preset" id="account-export-minimize" type="button">Minimize collection</button><p class="hint">Turns off media and optional account data. Chat and sender filters remain yours to set.</p></div>
       <fieldset class="account-export-fieldset"><legend>Chats</legend>
         <div class="account-export-choices" id="account-export-kinds" tabindex="-1">
           <label><input type="checkbox" value="private" checked> Private chats &amp; Saved Messages</label><label><input type="checkbox" value="bot" checked> Bots</label>
@@ -539,7 +554,7 @@
         <label><input id="account-export-profile-photos" type="checkbox"> Profile photos</label><label><input id="account-export-stories" type="checkbox"> Stories</label>
         <label><input id="account-export-session-metadata" type="checkbox"> Session metadata</label><label><input id="account-export-other-data" type="checkbox"> Other available data</label>
       </div><p class="hint">The signed manifest lists unavailable or failed sections. Session keys and passwords are never included.</p></fieldset>
-      <fieldset class="account-export-fieldset"><legend>Telegram transport</legend><div class="account-export-fields"><div><label for="account-export-transport">Acquisition method</label><select id="account-export-transport"><option value="takeout">Telegram Takeout session</option><option value="regular">Regular session</option></select></div></div><p class="hint">Takeout may have a delay or be unavailable for this account. Choose regular explicitly if you want to use the ordinary session.</p></fieldset>
+      <fieldset class="account-export-fieldset"><legend>Telegram transport</legend><div class="account-export-fields"><div><label for="account-export-transport">Acquisition method</label><select id="account-export-transport"><option value="auto">Automatic: Takeout, or the regular session if Takeout must wait</option><option value="takeout">Telegram Takeout session only</option><option value="regular">Regular session only</option></select></div></div><p class="hint">Takeout also reads left channels, saved contacts and other account data. If Telegram asks to wait before a Takeout export, Automatic continues at once with the regular session and the archive records which method was used.</p></fieldset>
       </details>
       <p class="account-export-preview" id="account-export-preview" role="status"></p>
       <button class="secondary" id="account-export-preflight" type="button">Check settings and size</button>
@@ -677,11 +692,12 @@
         <label class="check-label"><input type="radio" name="report-selection-mode" id="report-selection-chosen" value="chosen"> Choose data</label>
       </div>
       <fieldset id="report-selection-options" class="report-selection-options" disabled>
+        <div class="report-picked" id="report-picked" hidden><div class="report-picked-head"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg><strong>Selected messages</strong><span id="report-picked-count" data-no-translate></span><button class="text-link" type="button" id="report-picked-clear">Clear selection</button></div><div class="report-picked-list" id="report-picked-list" data-no-translate></div></div>
         <div class="report-grid"><div><label for="report-selection-from">From date (UTC)</label><input type="date" id="report-selection-from"></div><div><label for="report-selection-to">Through date (UTC)</label><input type="date" id="report-selection-to"></div></div>
         <p class="hint">Both dates are included. Dates refer to when TgWitness observed a record, not when a message was sent.</p>
         <div class="report-catalog-toolbar"><button class="secondary" id="report-load-catalog" type="button">Load chats and authors</button><p class="hint">Read the recorded workspace once to populate these choices. Author counts follow the chosen chats and dates; build a new preview to refresh them.</p></div>
         <div class="report-grid report-catalog-grid">
-          <div><h4>Chats</h4><input type="search" data-report-search="chats" aria-label="Find a recorded chat" placeholder="Find a recorded chat"><div class="report-catalog" id="report-chat-catalog" data-no-translate></div><p class="hint" id="report-chat-count" data-no-translate></p><details class="report-manual"><summary>Add chat IDs</summary><label for="report-selection-chats">Chat IDs, separated by commas</label><input id="report-selection-chats" type="text" inputmode="text" autocomplete="off" placeholder="-1001234567890, -1009876543210"><p class="hint">An empty list includes all chats. Selected IDs stay selected even if absent from the list above.</p></details></div>
+          <div><h4>Chats</h4><input type="search" data-report-search="chats" aria-label="Find a recorded chat" placeholder="Find a recorded chat"><div class="report-catalog" id="report-chat-catalog" data-no-translate></div><p class="hint" id="report-chat-count" data-no-translate></p><details class="report-manual"><summary>Add chat IDs</summary><label for="report-selection-chats">Chat IDs, separated by commas</label><input id="report-selection-chats" type="text" inputmode="text" autocomplete="off" placeholder="-1001234567890, -1009876543210"><p class="hint">An empty list includes all chats. Selected IDs stay selected even if absent from the list above.</p></details><details class="report-manual" data-form-ignore><summary>Add message numbers</summary><label for="report-selection-numbers">Chat ID, a colon and message numbers, or t.me/c links. One chat per line.</label><textarea id="report-selection-numbers" rows="3" autocomplete="off" spellcheck="false" placeholder="-1001234567890: 402, 405&#10;https://t.me/c/1234567890/402"></textarea><p class="hint" id="report-selection-numbers-note" role="alert" data-no-translate></p><button class="secondary small" type="button" id="report-selection-numbers-add">Add</button></details></div>
           <div><h4>Authors</h4><input type="search" data-report-search="senders" aria-label="Find an account ID" placeholder="Find an account ID"><div class="report-catalog" id="report-sender-catalog" data-no-translate></div><p class="hint" id="report-sender-count" data-no-translate></p><p class="hint">Author filters match recorded sender IDs. Deletion notices without a sender are excluded.</p><details class="report-manual"><summary>Add author IDs</summary><label for="report-selection-senders">Account IDs, separated by commas</label><input id="report-selection-senders" type="text" inputmode="text" autocomplete="off"><p class="hint">An empty list includes all authors. A sender filter excludes records whose sender is unknown.</p></details></div>
         </div>
         <fieldset class="report-kind-options"><legend>Record types</legend><div class="report-chart-choices">
@@ -691,12 +707,16 @@
           <label class="check-label"><input id="report-kind-edited" data-report-kind="message.edited" type="checkbox" checked> Edits</label>
           <label class="check-label"><input id="report-kind-deleted" data-report-kind="message.deleted" type="checkbox" checked> Deletion notices</label>
           <label class="check-label"><input id="report-kind-missing" data-report-kind="message.missing_on_recheck" type="checkbox" checked> Missing on recheck</label>
+          <label class="check-label"><input id="report-kind-secret-message" data-report-kind="secret_chat.message" type="checkbox" checked> Pseudo-secret message</label>
+          <label class="check-label"><input id="report-kind-secret-action" data-report-kind="secret_chat.action" type="checkbox" checked> Pseudo-secret notice</label>
+          <label class="check-label"><input id="report-kind-secret-file" data-report-kind="secret_chat.file" type="checkbox" checked> Pseudo-secret file preserved</label>
         </div></fieldset>
       </fieldset>
       <label class="check-label"><input id="report-selection-gaps" type="checkbox" checked> Include missing message IDs and neighboring records</label>
       <p class="hint">Missing numbers are gaps in the observed IDs; deletions are recorded as separate notices.</p>
       <p class="report-scope-notice">Scope applies to the report. The evidence ZIP keeps the complete original journal; use a minimized handover to share only selected data.</p>
     </section>
+    <section id="report-content-step" hidden>
     <div class="report-section-heading" id="report-content"><span aria-hidden="true">02</span><div><h3 tabindex="-1">Design and contents</h3><p class="hint">Choose how the report looks and what it includes.</p></div></div>
     <fieldset class="report-designs" aria-describedby="report-design-help"><legend>Report design</legend>
       <p class="hint" id="report-design-help">Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.</p>
@@ -805,6 +825,19 @@
           </svg>
           <strong id="report-design-name-ledger_margin">Ledger &amp; margin</strong><small id="report-design-copy-ledger_margin">Numbered sections, a generous margin and figures with exact tables.</small>
         </label>
+        <label class="report-design" data-report-design="profile_overview">
+          <input type="radio" name="report-design" value="profile_overview" id="report-design-profile_overview" aria-labelledby="report-design-name-profile_overview" aria-describedby="report-design-copy-profile_overview">
+          <svg class="report-design-preview" viewBox="0 0 240 140" aria-hidden="true" data-no-translate>
+            <rect class="design-page" x="15" y="9" width="210" height="122" rx="2"/>
+            <rect class="design-accent-fill" x="28" y="23" width="19" height="19" rx="4"/>
+            <path class="design-title-line" d="M56 28h101m-101 9h65"/>
+            <text class="design-section-number" x="28" y="65">26</text><text class="design-section-number" x="87" y="65">558</text><text class="design-section-number" x="157" y="65">12</text>
+            <path class="design-rule" d="M28 73h38m20 0h48m24 0h44"/>
+            <path class="design-accent-fill" d="M28 92h8v6h-8zm12-7h8v13h-8zm12 3h8v10h-8zm12-9h8v19h-8zm12 7h8v12h-8zm12-3h8v15h-8zm12-7h8v22h-8zm12 6h8v16h-8zm12-4h8v20h-8zm12 10h8v10h-8zm12-5h8v15h-8zm12-10h8v25h-8zm12 5h8v20h-8zm12 11h8v9h-8zm12-5h8v14h-8z"/>
+            <path class="design-rule" d="M28 107h174m-174 9h174m-174 8h174"/>
+          </svg>
+          <strong id="report-design-name-profile_overview">Profile overview</strong><small id="report-design-copy-profile_overview">Key figures, observed profiles and searchable sections with links to chat records.</small>
+        </label>
       </div>
     </fieldset>
     <fieldset class="report-templates"><legend>Contents preset</legend>
@@ -885,13 +918,15 @@
     </fieldset>
     <p class="studio-fixed">Trust assessment, coverage and verification instructions stay in every report. Display choices do not remove signed source records.</p>
     </div><aside class="studio-stage" aria-label="Report preview"><div class="studio-stage-bar"><div><strong>Preview</strong><span>Cover & charts · current journal</span></div><button class="secondary" id="report-preview-refresh" type="button">Update preview</button></div><div class="studio-preview-tabs" role="group" aria-label="Preview section"><button type="button" data-preview-section="cover" aria-pressed="true">Cover</button><button type="button" data-preview-section="analytics" aria-pressed="false">Charts</button><button type="button" data-preview-section="guidance" aria-pressed="false" hidden>Guidance</button></div><p class="hint" id="report-design-preview-status" role="status">Preview uses your draft. Save settings before exporting.</p><iframe id="report-preview-frame" title="Draft report preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe><div id="report-preview-empty" class="studio-preview-empty"><span aria-hidden="true">Aa</span><strong>Your report, before you export</strong><p>Review the cover and real chart data here. The preview is unsigned and does not save your edits.</p></div><p class="hint">Design preview uses up to 50,000 source records. Build the data preview below for the complete selection. PDF has a separate print layout.</p></aside></div>
-    <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title">
+    </section>
+    <section class="report-preview" id="report-preview" aria-labelledby="report-preview-title" hidden>
       <div class="report-section-heading"><span aria-hidden="true">03</span><div><h3 id="report-preview-title" tabindex="-1">Inspect the actual data</h3><p class="hint">This preview uses your current choices. It does not save them or create a signed export.</p></div></div>
       <div class="report-preview-toolbar"><button class="primary" type="button" id="report-preview-run">Build preview</button><button class="secondary" type="button" id="report-preview-retry" hidden>Retry preview</button><span id="report-preview-stale" class="report-preview-stale" hidden>Choices changed. Rebuild the preview.</span></div>
       <p id="report-preview-status" class="hint" role="status" data-no-translate></p>
       <div id="report-preview-result" data-no-translate></div>
     </section>
-    <div class="report-actions studio-save"><div><strong>Ready for the next export</strong><p class="hint">Saved settings apply to newly prepared files.</p></div><button class="primary" type="submit">Save report settings</button><button class="secondary" type="button" id="report-open-downloads">Go to downloads</button></div>
+    <div class="report-flow-actions"><button class="secondary" type="button" id="report-step-back" hidden>Back</button><span id="report-step-position" aria-live="polite"></span><button class="primary" type="button" id="report-step-next">Next</button><div class="report-formats" id="report-draft-downloads" hidden><button class="primary" data-export="pdf" data-report-download data-no-translate type="button">PDF</button><button class="secondary" data-export="html" data-report-download data-no-translate type="button">HTML</button><button class="secondary" data-export="json" data-report-download data-no-translate type="button">JSON</button></div></div>
+    <div class="report-actions studio-save"><div><strong>Ready for the next export</strong><p class="hint">Saved settings apply to newly prepared files.</p></div><button class="secondary" type="submit">Save report settings</button><button class="secondary" type="button" id="report-open-downloads">Go to downloads</button></div>
     <p class="hint">Save your choices, then download HTML, PDF or the signed ZIP. A preview can become outdated as new records arrive.</p>
     </fieldset>
     <p class="hint" id="report-status" role="status"></p>
@@ -1177,38 +1212,37 @@
       <button class="secondary" id="extras-open-setup" data-extra="setup" aria-expanded="false" aria-controls="extras-setup" type="button">Choose a goal <span aria-hidden="true">→</span></button>
     </article>
     <article class="extra-card extra-alerts">
-      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span><span class="extra-badge" id="extra-alerts-badge">Off</span></div>
+      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span><span class="extra-badge" id="extra-alerts-badge">Off</span></div>
       <h2>Notifications</h2><p>Problems, deleted and edited messages and a daily summary in Telegram, Discord, email or another service.</p>
       <p class="extra-requires">A bot, a webhook or a mailbox</p>
       <button class="secondary" id="extras-open-alerts" data-extra="alerts" aria-expanded="false" aria-controls="extras-alerts" type="button">Configure <span aria-hidden="true">→</span></button>
     </article>
     <article class="extra-card extra-evidence" data-mode-anchor data-mode-feature="timestamps_backup">
-      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-archive"/></svg></span><span class="extra-badge" id="extra-evidence-badge">Off</span></div>
+      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-fingerprint"/></svg></span><span class="extra-badge" id="extra-evidence-badge">Off</span></div>
       <h2>Evidence &amp; backups</h2><p>Anchor checkpoints and keep an encrypted off-site copy of the journal and files.</p>
       <p class="extra-requires">Timestamps work at once · the copy needs S3 storage</p>
       <p class="extra-status" hidden id="extra-evidence-status"></p>
       <button class="secondary" id="extras-open-evidence" data-extra="evidence" aria-expanded="false" aria-controls="extras-evidence" type="button">Configure <span aria-hidden="true">→</span></button>
     </article>
     <article class="extra-card extra-cloud" data-mode-anchor data-mode-feature="cloud">
-      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg></span><span class="extra-badge" id="extra-cloud-badge">Off</span></div>
+      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg></span><span class="extra-badge" id="extra-cloud-badge">Off</span></div>
       <h2>Server 24/7</h2><p>Collect around the clock on a cloud server without SSH, with a provider log anyone can check.</p>
       <p class="extra-requires">Hetzner, DigitalOcean, Linode, Vultr, AWS or your own server + Cloudflare</p>
       <button class="secondary" id="extras-open-cloud" data-extra="cloud" aria-expanded="false" aria-controls="extras-cloud" type="button">Configure <span aria-hidden="true">→</span></button>
     </article>
     <article class="extra-card extra-bot" data-mode-anchor data-mode-feature="witness">
-      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-message"/></svg></span><span class="extra-badge" id="extra-bot-badge">Not checked</span></div>
+      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></span><span class="extra-badge" id="extra-bot-badge">Not checked</span></div>
       <h2>Independent witness</h2><p>Publish signed checks to your Telegram channel or Discord. A separate witness checks continuity without reading conversations.</p><div class="brand-strip" data-service-icons="telegram,discord"></div>
       <p class="extra-requires">Your bot + a channel + a witness host</p>
       <button class="secondary" id="extras-open-bot" data-extra="bot" aria-expanded="false" aria-controls="extras-bot" type="button">Configure <span id="extra-bot-arrow" aria-hidden="true">→</span></button>
     </article>
     <article class="extra-card extra-github" data-mode-anchor data-mode-feature="code_check">
-      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="extra-badge" id="extra-github-badge">Not checked</span></div>
+      <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-braces"/></svg></span><span class="extra-badge" id="extra-github-badge">Not checked</span></div>
       <h2>Code check</h2><p>Compare the running program with a public Git commit and retain the result.</p>
       <p class="extra-requires">A public GitHub repository · no token</p>
       <button class="secondary" id="extras-open-github" data-extra="github" aria-expanded="false" aria-controls="extras-github" type="button">Configure <span id="extra-github-arrow" aria-hidden="true">→</span></button>
     </article>
   </div>
-  <p class="extras-footnote">Only the option you choose opens its settings. Nothing is connected automatically.</p>
   </div>
 
   <div class="extra-panel" id="extras-capture" hidden role="region" aria-labelledby="extras-capture-title">
@@ -1350,7 +1384,7 @@
     <form class="github-form" id="github-form">
       <div class="replica-fields">
         <div><label for="github-repository">Repository</label><input data-no-translate id="github-repository" maxlength="200" placeholder="github.com/phishdestroy/TgWitness" required spellcheck="false" autocomplete="off"></div>
-        <div><label for="github-ref">Tag, branch or commit</label><input data-no-translate id="github-ref" maxlength="200" placeholder="v0.9.1" required spellcheck="false" autocomplete="off"></div>
+        <div><label for="github-ref">Tag, branch or commit</label><input data-no-translate id="github-ref" maxlength="200" placeholder="v0.9.3" required spellcheck="false" autocomplete="off"></div>
       </div>
       <button class="primary" type="submit">Check now</button>
     </form>
@@ -1413,7 +1447,7 @@
       <p id="connect-warp-note" class="hint">Each selected account gets its own local tunnel. Cloudflare chooses the exit address and country; separate tunnels may share an exit IP.</p>
       <details><summary>External requests</summary><label class="check-label"><input type="checkbox" id="connect-outside" checked>Use this route for timestamps, notifications and other requests outside Telegram</label><p class="hint">Applying replaces a separately configured external proxy. MTProxy carries only Telegram, so external requests stay off until you configure their own proxy under Advanced. Proxied routes never fall back to Direct.</p></details>
     </fieldset>
-    <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" id="connect-prepare" hidden>Prepare and check</button><button type="button" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button><button type="button" id="connect-continue" hidden>Continue</button></div>
+    <div class="route-actions"><button type="button" class="secondary" id="connect-preview">Review selection</button><button type="button" class="primary" id="connect-prepare" hidden>Prepare and check</button><button type="button" class="primary" id="connect-apply" hidden>Apply checked connection</button><button type="button" class="quiet" id="connect-cancel" hidden>Discard draft</button><button type="button" class="primary" id="connect-continue" hidden>Continue</button></div>
     <p id="connect-progress" class="hint" role="status" aria-live="polite"></p><div id="connect-review" class="connect-review"></div>
     </div></details>
   </section>
@@ -1711,6 +1745,7 @@
     <ol class="fleet-results" id="fleet-results"></ol>
   </section>
   <div class="accounts-overview" id="accounts-overview" aria-label="Workspace totals"></div>
+  <div class="route-advice" hidden id="accounts-route-advice" role="status"><span id="accounts-route-advice-copy"></span><button class="primary" id="accounts-route-advice-apply" type="button"></button></div>
   <div class="accounts-tools">
     <label>Find workspace<input id="accounts-search" type="search" placeholder="Name, username or account ID"></label>
     <label>Show<select id="accounts-filter"><option value="all">All workspaces</option><option value="attention">Needs attention</option><option value="collecting">Collecting</option><option value="offline">Offline or paused</option><option value="empty">Not connected</option></select></label>

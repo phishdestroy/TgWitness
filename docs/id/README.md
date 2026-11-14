@@ -481,4 +481,4 @@ Posisi para penulis dan pemberitahuan untuk operator, dalam bahasa ini:
   <a href="../../.github/SECURITY.md"><b>Laporkan kerentanan</b></a>
 </p>
 
-[Indeks proyek yang dapat dibaca mesin](../../llms.txt) · [Buku panduan teks lengkap](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Aturan repositori untuk agen](../../AGENTS.md)
+[Indeks proyek yang dapat dibaca mesin](../../llms.txt) · [Buku panduan teks lengkap](https://phishdestroy.github.io/TgWitness/llms-full.txt)

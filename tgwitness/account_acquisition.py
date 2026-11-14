@@ -164,7 +164,7 @@ class StagedTransport:
                 except errors.TakeoutInvalidError:
                     raise
                 except errors.RPCError as exc:
-                    self.save(task, cursor, cursor, True, [], started, error=type(exc).__name__)
+                    self.save(task, cursor, cursor, True, [], started, error=getattr(exc, "message", None) or type(exc).__name__)
                     break
                 except ValueError as exc:
                     if task["category"] != "other_data" or self.job["options"]["transport"] != "regular":

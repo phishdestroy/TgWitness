@@ -4,31 +4,8 @@ Contributions to TgWitness should preserve the distinction
 between an observed Telegram update, an inference, and an unknown fact. Read the
 [evidence model](../docs/EVIDENCE.md) before changing collection or export behavior.
 
-## Coding agents
-
-Start with the repository-wide [AGENTS.md](../AGENTS.md) and the
-[code, documentation and validation map](../docs/AGENT-GUIDE.md).
-Claude and Gemini entry files point to the same rules.
-
-Write original documentation, interface text, commit messages and pull requests
-in English. Keep any requested translations separate and identify the English
-source. Check the current branch, other development branches and recorded revisions
-before concluding that a feature was never implemented. Distinguish implemented,
-merged, released and demonstrated behavior.
-
-Respect the operator's execution limits. A source-editing workspace is not
-automatically a runtime or test host. When local execution is restricted, edit
-files and use static checks only; run applications, builds, browser tests,
-benchmarks, dependency installation and background services only when explicitly
-authorized for that host. Use the approved CI or test environment for execution.
-Do not resume stopped work automatically or connect Telegram accounts as part of
-an ordinary code or documentation task.
-
-Preserve other sessions' changes. Stop only processes started by the agent, using
-their recorded process IDs; never terminate every Python, Node or browser process.
-Report which checks actually ran and where. Mocks and demos qualify the synthetic
-path; live runs qualify Telegram support. Keep private workspace instructions, credentials and local
-machine details out of published files.
+The [code and validation map](../docs/CODE-MAP.md) links the main modules,
+technical references and checks for each kind of change.
 
 ## Development setup
 
@@ -87,6 +64,10 @@ private keys or real evidence exports. Report vulnerabilities through the proces
 in [SECURITY.md](SECURITY.md), rather than a public issue with exploit details.
 
 ## Pull requests
+
+Keep completed changes in `main`. Use a short-lived branch for review, squash-merge
+each pull request into one commit, and let GitHub delete the merged branch.
+Published commit IDs stay stable so release manifests and verification links keep working.
 
 Keep each change focused and explain its effect on existing journals and collectors.
 Add a private regression when fixing data integrity, authentication, collection or an

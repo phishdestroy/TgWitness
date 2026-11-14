@@ -5,7 +5,8 @@ import time
 from contextvars import ContextVar
 
 from telethon import TelegramClient, utils
-from telethon.errors import FloodWaitError, FloodPremiumWaitError
+from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
+                             FloodPremiumWaitError, FloodWaitError, SessionExpiredError, SessionRevokedError)
 from telethon.network.connection import ConnectionTcpObfuscated
 from telethon.network.connection.tcpmtproxy import TcpMTProxy
 from telethon.tl import functions, types
@@ -26,12 +27,32 @@ if MessageBox is not None:
     class GapAwareMessageBox(MessageBox):
         __slots__ = ("gap_owner",)
 
+        def session_state(self):
+            held = getattr(getattr(self, "gap_owner", None), "accepted_state", None)
+            return held or super().session_state()
+
+        def hold(self):
+            owner = getattr(self, "gap_owner", None)
+            if owner is not None and owner.accepted_state is None:
+                owner.accepted_state = MessageBox.session_state(self)
+
+        def load(self, session_state, channel_states):
+            super().load(session_state, channel_states)
+            if (owner := getattr(self, "gap_owner", None)) is not None:
+                owner.accepted_state, owner.undispatched = None, 0
+
+        def process_updates(self, updates, chat_hashes, result):
+            self.hold()
+            return super().process_updates(updates, chat_hashes, result)
+
         def apply_difference(self, diff, chat_hashes):
+            self.hold()
             if isinstance(diff, types.updates.DifferenceTooLong):
                 self.report_gap(None, ENTRY_ACCOUNT, diff.pts)
             return super().apply_difference(diff, chat_hashes)
 
         def apply_channel_difference(self, request, diff, chat_hashes):
+            self.hold()
             if isinstance(diff, types.updates.ChannelDifferenceTooLong):
                 entry = request.channel.channel_id
                 self.report_gap(entry, entry, getattr(diff.dialog, "pts", None))
@@ -44,6 +65,8 @@ if MessageBox is not None:
 else:
     GapAwareMessageBox = None
 FLOOD_ERRORS = (FloodWaitError, FloodPremiumWaitError)
+EXPORTED_AUTHORIZATION_ERRORS = (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
+                                 SessionExpiredError, SessionRevokedError)
 _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
             functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest,
             functions.auth.AcceptLoginTokenRequest)
@@ -113,11 +136,25 @@ def request_method(request):
 class WitnessClient(TelegramClient):
 
     def __init__(self, *args, **kwargs):
+        self.accepted_state, self.undispatched = None, 0
         super().__init__(*args, **kwargs)
         if GapAwareMessageBox is not None:
             box = GapAwareMessageBox(self._log["messagebox"])
             box.gap_owner = self
             self._message_box = box
+
+    async def _preprocess_updates(self, updates, users, chats):
+        result = await super()._preprocess_updates(updates, users, chats)
+        self.undispatched += len(result)
+        if not self.undispatched:
+            self.accepted_state = None
+        return result
+
+    async def _dispatch_update(self, update):
+        await super()._dispatch_update(update)
+        self.undispatched = max(0, self.undispatched - 1)
+        if not self.undispatched:
+            self.accepted_state = None
 
     def difference_gap(self, channel_id, before, after):
         if listener := getattr(self, "difference_gap_listener", None):
@@ -249,8 +286,34 @@ class WitnessClient(TelegramClient):
                              "error_type": type(exc).__name__, "retry_after_seconds": exc.seconds,
                              "wait_until": self._rpc_wait_until, "observed_at": time.time(),
                              "activity": self.rpc_activity()})
-            if handler := getattr(self, "rpc_error_handler", None):
+            if sender is not None and sender is not self._sender and isinstance(exc, EXPORTED_AUTHORIZATION_ERRORS):
+                self.exported_authorization_failed(sender, exc)
+            elif handler := getattr(self, "rpc_error_handler", None):
                 handler(exc)
             raise
         finally:
             _single_attempt.reset(token)
+
+    def exported_authorization_failed(self, sender, exc):
+        dc_id = getattr(sender, "dc_id", None)
+        if not hasattr(self, "_stale_exports"):
+            self._stale_exports = set()
+        self._stale_exports.add(dc_id)
+        if listener := getattr(self, "exported_error_handler", None):
+            try:
+                listener(exc, dc_id)
+            except Exception:
+                LOG.exception("Recording an ended file data-center authorization failed")
+
+    async def _return_exported_sender(self, sender):
+        await super()._return_exported_sender(sender)
+        dc_id = getattr(sender, "dc_id", None)
+        if dc_id not in getattr(self, "_stale_exports", ()):
+            return
+        async with self._borrow_sender_lock:
+            state, current = self._borrowed_senders.get(dc_id, (None, None))
+            if current is not sender or state is None or state._n:
+                return
+            del self._borrowed_senders[dc_id]
+            self._stale_exports.discard(dc_id)
+        await sender.disconnect()

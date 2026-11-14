@@ -481,4 +481,4 @@ Telegram Desktop را پوشش می‌دهد. [خروجی توزیع‌شده گ
   <a href="../../.github/SECURITY.md"><b>گزارش آسیب‌پذیری</b></a>
 </p>
 
-[فهرست ماشین‌خوان پروژه](../../llms.txt) · [راهنمای متنی کامل](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [قواعد مخزن برای عامل‌ها](../../AGENTS.md)
+[فهرست ماشین‌خوان پروژه](../../llms.txt) · [راهنمای متنی کامل](https://phishdestroy.github.io/TgWitness/llms-full.txt)

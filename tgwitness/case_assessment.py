@@ -31,7 +31,7 @@ MINIMUM = ("Minimum for evidence: integrity, the signer key, and external time f
 ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip", "chat": "tgwitness-chat-export.zip",
             "account": "account-export.zip", "account_chat": "account-export.zip", "sharing": "disclosure.zip"}
 LABELS = {"records": "Records", "first": "First record", "last": "Last record", "fingerprint": "Signing key fingerprint (SHA-256)",
-          "gaps": "Gaps", "periods": "Continuous observation periods", "unobserved": "Message numbers not observed",
+          "gaps": "Gaps", "notes": "Coverage notes", "periods": "Continuous observation periods", "unobserved": "Message numbers not observed",
           "verified_stamps": "Validated timestamp receipts", "other_stamps": "Other timestamp receipts",
           "anchored_through": "Timestamp covers through record", "unanchored_tail": "Records after that checkpoint",
           "timestamp": "Timestamp", "messages": "Messages", "tasks_done": "Tasks completed", "tasks_total": "Tasks planned",
@@ -43,7 +43,7 @@ RESULTS = {
     "integrity_unknown": "Independent verification of this copy is still required.",
     "time": "Validated time bound through record #{n}; {tail} later records are outside that bound.",
     "time_unknown": "No independently validated time bound is included in this copy.",
-    "coverage": "Recorded gaps: {gaps}. Message numbers not observed: {missing}.",
+    "coverage": "Recorded gaps: {gaps}. Coverage notes: {notes}. Message numbers not observed: {missing}.",
     "witness": "Recorded drand rounds: {drand}; starts carrying TDX: {tdx}. Independent validation is not supplied.",
     "custody": "Operator declarations supplied: {n}. The custody record of who acquired, held and transferred the original ZIP completes them.",
     "meaning": "Each statement cites the archive, file and record it rests on.",
@@ -60,20 +60,28 @@ CSS = """
 .assessment-item p{line-height:1.6;overflow-wrap:anywhere}.assessment-item dl{font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
 .assessment-item dt,.assessment-item dd{margin:0;overflow-wrap:anywhere}.assessment-item dd{font-family:monospace}
 .assessment-review{padding:12px;border-inline-start:3px solid #697d99;margin-top:14px}
-.evidence-conditions{margin:18px 0}.evidence-conditions h3{margin:0 0 6px;font-size:17px}
+.evidence-conditions{margin:18px 0;overflow-x:auto}.evidence-conditions h3{margin:0 0 6px;font-size:17px}
 .evidence-conditions table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
 .evidence-conditions th,.evidence-conditions td{border-top:1px solid #8894a455;padding:8px;text-align:start;vertical-align:top;overflow-wrap:break-word}
 .evidence-conditions tr.condition-role th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#697d99;padding-top:12px}
 .evidence-conditions tr[data-status="checked_locally"] strong{color:#2e9d5b}.evidence-conditions tr[data-status="not_included"] strong{color:#8894a4}
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
 @media(max-width:760px){.case-assessment .assessment-grid{grid-template-columns:1fr}}
-@media print{.case-assessment .assessment-grid{display:block}.assessment-item{margin-bottom:10px}}
+@media print{.case-assessment .assessment-grid{display:block}.assessment-item{margin-bottom:10px}.evidence-conditions{overflow:visible}}
 """
 
 
 def row(key, status, title, basis, limit, verify, facts=None, references=()):
     return dict(id=key, status=status, title=title, basis=basis, limitation=limit,
                 verification=verify, facts=facts or {}, references=list(references))
+
+
+REFERENCES_SHOWN = 12
+
+
+def reference_text(references):
+    shown = ", ".join(references[:REFERENCES_SHOWN])
+    return shown + (" … +" + str(len(references) - REFERENCES_SHOWN) if len(references) > REFERENCES_SHOWN else "")
 
 
 def result(item, key, **values):
@@ -198,7 +206,8 @@ def journal(context, coverage):
         "Observation periods and interruptions are derived from recorded collector activity. A minimized extract lists how many records were kept, changed or omitted.",
         "Coverage lists the observed periods and the recorded gaps. Message numbers not observed are gaps in observation; deletions are recorded as deletion notices.",
         "Compare coverage.json and the selection in manifest.json with the period and chats relevant to the case. Explain each material gap before drawing conclusions from absence.",
-        {"gaps": len(coverage.get("gaps") or []), "periods": len(coverage.get("continuous") or []),
+        {"gaps": len(coverage.get("gaps") or []), "notes": coverage.get("notes_total") or 0,
+         "periods": len(coverage.get("continuous") or []),
          "unobserved": sum(c.get("not_observed", 0) for c in coverage.get("unobserved_ids") or []),
          **{k: counts[k] for k in ("unchanged", "minimised", "left_out") if k in counts}}, ("coverage.json", "manifest.json")))
     signals = digest.get("trust_signals") or {}
@@ -210,7 +219,8 @@ def journal(context, coverage):
     result(rows[0], "integrity" if context.get("journal_verified") is True else "integrity_unknown", n=count)
     result(rows[1], "time" if latest else "time_unknown", n=latest["event_count"] if latest else 0,
            tail=count-latest["event_count"] if latest else 0)
-    result(rows[2], "coverage", gaps=rows[2]["facts"]["gaps"], missing=rows[2]["facts"]["unobserved"])
+    result(rows[2], "coverage", gaps=rows[2]["facts"]["gaps"], notes=rows[2]["facts"]["notes"],
+           missing=rows[2]["facts"]["unobserved"])
     result(rows[3], "witness", drand=signals.get("drand", 0), tdx=signals.get("tdx", 0))
     options = context.get("options") or {}
     return jurisdiction_guidance.attach(common("handover" if handover else "evidence", context.get("report_id"), context.get("fingerprint"), rows,
@@ -302,7 +312,7 @@ def html(data, say):
         parts.extend('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>' for k, v in item["facts"].items())
         parts.append('</dl><p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
         if item["references"]:
-            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(', '.join(item["references"])) + '</p>')
+            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(reference_text(item["references"])) + '</p>')
         parts.append('</article>')
     return ''.join(parts) + '</div></section>' + jurisdiction_guidance.html(data.get("jurisdiction_guidance"))
 

@@ -8,7 +8,7 @@
 
 A new workspace opens `/first-run`. The first screen asks what you want to do:
 **Just download**, **Follow chats** or **Evidence for a case**. The choice sets the
-goal and the interface level: Simple for Just download, Standard for the other two.
+goal and the interface level: Simple for Just download, Standard for the other two. The level sets how many fields each form shows; every page stays in the menu.
 **More options** on the same screen sets the level, theme and time zone explicitly;
 the language list is in the wizard header. The next screens cover the connection,
 Telegram and chats. Connection routes stay folded while the automatic check works
@@ -24,7 +24,24 @@ journal never change.
 `/settings` edits the same records as the wizard. Search covers the main fields,
 parameters and the extended forms; a hidden field can be opened without changing the
 level. Levels only change what is shown: the server checks permissions on its own.
+A section whose settings are all above the chosen level shows them anyway.
 Collection settings and the first connection belong to the workspace administrator.
+
+The settings page is a list. The account card on top opens **Telegram account**.
+Below it each row names a section and the value in use: **Which chats?** and
+**Connection** under **Account**; **Goal**, **Collection and files**, **Record
+protection** and **Notifications and off-site copy** under **Recording**; **Language,
+time and appearance** under **Panel**; and the expert pages under **More tools**.
+Beside the list a card says whether the recommended values are on, with the main
+values and **Undo last change**, and **Recent changes** lists the latest edits.
+
+A section opens in a window over the list and has its own address, such as
+`/settings/connection`. The back arrow, the close button, Escape, a click outside the
+window and the browser's Back button return to the list. **Which chats?** is kept with
+**Save chat selection**; closing with unsaved changes asks first. Every change shows
+**Undo** for 20 seconds, and each entry in **Recent changes** can be undone later. An
+undo is a new `settings.changed` record in the journal, and it also brings back custom
+file limits.
 
 | Level | Fields | Sidebar |
 | --- | --- | --- |

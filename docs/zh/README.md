@@ -405,4 +405,4 @@ TgWitness 记录投递到所连接 Telegram 账户的内容，包括聊天、消
   <a href="../../.github/SECURITY.md"><b>报告漏洞</b></a>
 </p>
 
-[机器可读的项目索引](../../llms.txt) · [完整文本手册](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [面向智能体的仓库规则](../../AGENTS.md)
+[机器可读的项目索引](../../llms.txt) · [完整文本手册](https://phishdestroy.github.io/TgWitness/llms-full.txt)

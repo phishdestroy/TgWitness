@@ -95,6 +95,7 @@ class Store:
         self.targets_revision = 0
         self.listeners = []
         self.committed = []
+        self.transaction_depth = 0
         with self.transaction():
             continuity.initialize(self.db)
             migrate_media(self.db)
@@ -104,18 +105,34 @@ class Store:
     @contextmanager
     def transaction(self):
         with self.lock:
+            if self.transaction_depth and not self.db.in_transaction:
+                raise sqlite3.OperationalError("Journal transaction ended before commit")
             outer, mark = not self.db.in_transaction, len(self.committed)
             if outer:
                 self.db.execute("BEGIN IMMEDIATE")
+            else:
+                self.db.execute("SAVEPOINT journal_nested")
+            self.transaction_depth += 1
             try:
                 yield
+                if not self.db.in_transaction:
+                    raise sqlite3.OperationalError("Journal transaction ended before commit")
                 if outer:
                     self.db.commit()
+                else:
+                    self.db.execute("RELEASE journal_nested")
             except BaseException:
-                if outer:
-                    self.db.rollback()
+                try:
+                    if outer:
+                        self.db.rollback()
+                    elif self.db.in_transaction:
+                        self.db.execute("ROLLBACK TO journal_nested")
+                        self.db.execute("RELEASE journal_nested")
+                finally:
                     del self.committed[mark:]
                 raise
+            finally:
+                self.transaction_depth -= 1
             if outer:
                 events, self.committed = self.committed, []
                 for event in events:
@@ -135,6 +152,7 @@ class Store:
 
     def append(self, kind, payload, chat_id=None, message_id=None, actor_id=None, source_at=None,
                media_job=None):
+        payload = json.loads(json.dumps(payload, ensure_ascii=False, allow_nan=False))
         with self.transaction():
             tail = self.db.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
             event = dict(seq=tail["seq"] + 1 if tail else 1, observed_at=utcnow(),

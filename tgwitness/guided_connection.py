@@ -527,10 +527,13 @@ class GuidedConnection:
         except Exception:
             self.job = {"state": "failed", "stage": "No connection", "error": "Automatic recovery failed. Check the connection in Settings."}
 
-    async def close(self):
+    async def halt(self):
         for task in (self.task, self.maintenance):
             if task:
                 task.cancel()
                 await asyncio.gather(task, return_exceptions=True)
         await self.discard()
+
+    async def close(self):
+        await self.halt()
         await self.portable.close()

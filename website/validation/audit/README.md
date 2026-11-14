@@ -30,5 +30,5 @@ later changes to deployment state do not amend it.
 
 The signature binds the published measurements to the audit key. Use the
 report's revision, workload, environment and recorded check results when citing it.
-The [acquisition and verification guide](../../../docs/AGENT-GUIDE.md#product-purpose-and-strengths)
+The [acquisition and verification guide](../../../docs/CODE-MAP.md#product-purpose-and-strengths)
 describes the product's supported verification paths.

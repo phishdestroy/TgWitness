@@ -481,4 +481,4 @@ Yazarların tutumu ve operatör bildirimi, bu dilde:
   <a href="../../.github/SECURITY.md"><b>Güvenlik açığı bildirin</b></a>
 </p>
 
-[Makine tarafından okunabilir proje dizini](../../llms.txt) · [Eksiksiz metin el kitabı](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Ajanlar için depo kuralları](../../AGENTS.md)
+[Makine tarafından okunabilir proje dizini](../../llms.txt) · [Eksiksiz metin el kitabı](https://phishdestroy.github.io/TgWitness/llms-full.txt)

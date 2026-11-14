@@ -405,4 +405,4 @@ TgWitness は、接続した Telegram アカウントに届いたコンテンツ
   <a href="../../.github/SECURITY.md"><b>脆弱性を報告</b></a>
 </p>
 
-[機械可読なプロジェクト索引](../../llms.txt) · [テキスト版ハンドブック全文](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [エージェント向けリポジトリルール](../../AGENTS.md)
+[機械可読なプロジェクト索引](../../llms.txt) · [テキスト版ハンドブック全文](https://phishdestroy.github.io/TgWitness/llms-full.txt)

@@ -1,4 +1,4 @@
-export function createConnectionView({root, tr, json, state, refreshStatus, askConfirm}) {
+export function createConnectionView({root, tr, json, state, refreshStatus, askConfirm, formatTime}) {
   const get = id => root.querySelector('#' + id);
   const el = (tag, text, cls) => { const n = document.createElement(tag); if(text)n.textContent=text; if(cls)n.className=cls; return n; };
   let generation=0, draftRevision=0, loads=0, timer=null, data=null, draft=null, plan=null, mode='warp', visible=false, pending=null, touched=false;
@@ -41,8 +41,8 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   function proof(check){
     if(!check)return tr('Not checked yet');
     return [check.telegram_connected?tr('Telegram connected'):tr('Not connected'),check.exit_ip||tr('Exit address unavailable'),
-      country(check.country),check.warp?('WARP: '+check.warp):'',check.latency_ms+' ms',
-      new Date(check.checked_at*1000).toLocaleString()].filter(Boolean).join(' · ');
+      country(check.country),check.warp?('WARP: '+check.warp):'',tr('{n} ms',{n:check.latency_ms}),
+      formatTime(new Date(check.checked_at*1000).toISOString())].filter(Boolean).join(' · ');
   }
   function rows(items){
     const table=el('table',null,'connect-table'),head=el('tr');

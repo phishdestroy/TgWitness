@@ -5,7 +5,7 @@ from itertools import islice
 import re
 from datetime import datetime
 
-from . import case_assessment, i18n, report_layouts, snapshot_analytics
+from . import activity_maps, case_assessment, i18n, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
 from .report import DOSSIER_CSS, Words
 from .store import canonical
@@ -29,6 +29,7 @@ VALUES = {'keep': 'Keep matching text', 'omit': 'Omit message text',
           'regular': 'Regular Telegram API', 'takeout': 'Telegram Takeout'}
 VALUES.update(download='Download files', hashes_only='Save server hashes only', exclude='Exclude file bytes',
               collapsed='One marker for each run', each='One marker for each message')
+REASONS = ('Stopped before acquisition completed.',)
 CONTEXT_LABELS = {'archive_reference': 'Archive reference', 'created_at': 'Copy created',
                   'requested_at': 'Collection requested', 'captured_from': 'First recorded capture',
                   'captured_until': 'Last recorded capture'}
@@ -100,7 +101,7 @@ def timestamp(value, say):
     else:
         offset = date.strftime('%z')
         zone = 'UTC' if not date.utcoffset() else 'UTC' + offset[:3] + ':' + offset[3:5] + (':' + offset[5:] if len(offset) > 5 else '')
-        shown = date.replace(tzinfo=None).isoformat(sep=' ')
+        shown = date.replace(tzinfo=None).isoformat(sep=' ', timespec='seconds')
     return '<time dir="ltr" datetime="' + e(raw) + '">' + e(shown) + '</time> · <bdi>' + e(zone) + '</bdi>'
 
 
@@ -145,10 +146,11 @@ def opening(context, title, sharing=False):
     design = Presentation.model_validate(context.get('presentation') or {}).design
     template = {'quire': 'editorial', 'atlas': 'analytical'}.get(design, 'dossier')
     layout_attribute = ' data-report-design="' + design + '"' if design in report_layouts.DESIGNS else ''
+    script_policy = (' script-src ' + report_layouts.report_profile.SCRIPT_HASH + ';') if design == 'profile_overview' else ''
     yield encoded('<!doctype html><html data-template="' + template + '"' + layout_attribute + ' lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
-                  '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">'
-                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + '</style></head><body class="dossier account-dossier"><main>'
+                  '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;;' + e(script_policy) + '">'
+                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + activity_maps.CSS + '</style></head><body class="dossier account-dossier"><main>'
                   '<header class="account-cover"><div class="cover-register"><span dir="ltr">TG / WITNESS</span><span>'
                   + e(say('Evidence dossier')) + '</span></div><p class="badge">' + e(kind) + '</p>'
                   '<h1 class="user" dir="auto">' + e(title) + '</h1><p class="lead">' + e(lead) + '</p></header>')
@@ -235,8 +237,9 @@ def account_index(context, chats):
         return
     say = Words(context.get('report_language', 'en'))
     yield from opening(context, say('Account export'))
-    yield encoded('<nav><a href="#start">' + e(say('Start here')) + '</a><a href="#chats">' + e(say('Chats')) + '</a><a href="#coverage">' + e(say('Coverage')) +
-                  '</a><a href="#verification">' + e(say('Verification')) + '</a></nav>')
+    yield encoded('<nav><a href="#start">' + e(say('Start here')) + '</a><a href="#chats">' + e(say('Chats')) + '</a>' + map_link(context, say)
+                  + '<a href="#coverage">' + e(say('Coverage')) + '</a><a href="#verification">' + e(say('Verification')) + '</a></nav>')
+    yield encoded(archive_views(context, say))
     yield encoded(recipient_guide(say))
     yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
     yield encoded(case_assessment.html(case_assessment.snapshot(context), say))
@@ -247,6 +250,46 @@ def account_index(context, chats):
     yield from omissions_section(context, say)
     yield encoded(verification(context, say))
     yield ending(say)
+
+
+def map_link(context, say):
+    return ('<a href="' + e(context['activity_map']) + '">' + e(say('Activity map')) + '</a>') if context.get('activity_map') else ''
+
+
+def archive_views(context, say):
+    mode = context.get('options', {}).get('export_format')
+    if mode not in ('telegram_html', 'telegram_json', 'telegram_both'):
+        return ''
+    links = []
+    if mode in ('telegram_html', 'telegram_both'):
+        links.append('<a href="export_results.html"><strong>' + e(say('Chats')) + '</strong> · HTML</a>')
+    if mode in ('telegram_json', 'telegram_both'):
+        links.append('<a href="result.json" download><strong>JSON</strong> · result.json</a>')
+    links.extend((map_link(context, say), '<a href="#verification">' + e(say('Verification')) + '</a>'))
+    return ('<section class="panel archive-views"><h2>' + e(say('Open your export')) + '</h2><p>'
+            + e(say('Read your chats offline. Open the report for charts, collection details and signature checks.'))
+            + '</p><nav>' + ''.join(links) + '</nav></section>')
+
+
+def account_map_page(context, activity, gaps, chats):
+    say = Words(context.get('report_language', 'en'))
+    yield from opening(context, say('Activity map'))
+    yield encoded('<p><a href="index.html">← ' + e(say('Account export')) + '</a></p>')
+    yield encoded(activity_maps.account_map(activity, gaps, chats, say))
+    yield encoded(verification(context, say))
+    yield ending(say)
+
+
+def chat_map(context, activity, gaps, chat):
+    return activity_maps.chat_map(activity, gaps, chat, Words(context.get('report_language', 'en')))
+
+
+def gap_marks(context, say, current=None, last=False):
+    placer = context.get('gap_markers')
+    if placer is None:
+        return ''
+    found = placer.rest() if last else placer.before(current)
+    return ''.join(activity_maps.marker_html(marker, say) for marker in found)
 
 
 def coverage_section(context, say):
@@ -383,7 +426,7 @@ def message_card(row, say, prefix='', sharing=False, number=1, page_path='index.
                          + e(str(len(hashes.get('ranges', [])))) + ' SHA-256 ranges · <a download href="'
                          + prefix + manifest + '">' + e(say('Download file hashes')) + '</a></p>')
         elif not sharing:
-            parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(text(attachment.get('reason'))) + '</span></p>')
+            parts.append('<p class="muted">' + e(say('Attachment not included')) + ': <span class="user" dir="auto">' + e(reason_text(attachment.get('reason'), say)) + '</span></p>')
     parts.append('<p class="record-citation">' + e(say('Record reference')) + ': <code dir="ltr">' + e(page_path) + '#' + reference + '</code></p>')
     parts.append(technical(row, say))
     parts.append('</article>')
@@ -453,6 +496,8 @@ def account_chat(context, chat, rows):
                   e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.')) + '</p>')
     yield encoded(copy_context(context, say))
     yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
+    if (context.get('pagination') or {}).get('page', 1) == 1 and context.get('chat_map'):
+        yield encoded(context['chat_map'])
     yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>')
     yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a><a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a><a href="#verification">' +
                   e(say('Verification')) + '</a></nav><section id="messages">')
@@ -462,9 +507,11 @@ def account_chat(context, chat, rows):
     seen = False
     for number, row in enumerate(rows, pagination.get('first_record', 1)):
         seen = True
-        yield encoded(message_card(row, say, prefix='../', number=number, page_path=page_path))
+        yield encoded(gap_marks(context, say, row.get('id')) + message_card(row, say, prefix='../', number=number, page_path=page_path))
     if not seen:
         yield encoded('<p>' + e(say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>')
+    if pagination.get('page', 1) == pagination.get('pages', 1):
+        yield encoded(gap_marks(context, say, last=True))
     yield encoded(page_navigation(context, say) + '</section>')
     yield encoded(case_assessment.html(case_assessment.snapshot(context, 'account_chat',
         {'message_count': chat.get('message_count')}), say))
@@ -500,6 +547,10 @@ def sharing_report(context, rows):
     yield ending(say)
 
 
+def reason_text(value, say):
+    return say(value) if value in REASONS else text(value)
+
+
 def text_keys():
     import ast
     from pathlib import Path
@@ -507,6 +558,6 @@ def text_keys():
     keys = [node.args[0].value for node in ast.walk(tree) if isinstance(node, ast.Call)
             and isinstance(node.func, ast.Name) and node.func.id == 'say' and node.args
             and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + activity_maps.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
                               list(VALUES.values()) + list(CONTEXT_LABELS.values()) + list(WITHHELD_RULE_LABELS.values())
-                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps']))
+                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps', *REASONS]))

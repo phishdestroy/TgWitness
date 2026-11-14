@@ -91,7 +91,7 @@ def package_review(assessment):
         elif key == "time" and facts.get("unanchored_tail", 0):
             action = ("Retain and independently verify the existing receipt. Timestamp a new checkpoint covering the later records; "
                       "until then, report those records separately from the timestamped prefix.")
-        elif key == "coverage" and (facts.get("gaps", 0) or facts.get("unobserved", 0)):
+        elif key == "coverage" and (facts.get("gaps", 0) or facts.get("notes", 0) or facts.get("unobserved", 0)):
             action = ("Identify which recorded gaps overlap the relevant events and explain them in the examination notes. "
                       "Label any later recovery as a separate acquisition. New settings apply from now on, and past gaps stay recorded.")
         elif key == "witness":

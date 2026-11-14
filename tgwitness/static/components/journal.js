@@ -1,5 +1,5 @@
 const TYPES=[["messages","Messages"],["message.edited","Edits"],["message.deleted","Deletions"],
-  ["reaction.snapshot","Reactions"],["membership","Membership"],["media","Attachments"],["actions","Actions"],["coverage","Collection"]];
+  ["reaction.snapshot","Reactions"],["membership","Membership"],["media","Attachments"],["actions","Actions"],["coverage","Collection"],["secret_chat.","Pseudo-secret"]];
 
 export function groupEvents(events){
   const groups=[];
@@ -69,7 +69,7 @@ export function createJournal(context){
       const b=button(label,"quiet small"),next=index>=0?state.events[index+offset]:null;b.id=id;b.disabled=!next;
       b.addEventListener("click",()=>context.openDetail(next));bar.append(b);
     }
-    if(event.chat_id!==null&&event.chat_id!==undefined){
+    if(event.chat_id!==null&&event.chat_id!==undefined||event.kind.startsWith('secret_chat.')&&event.payload?.secret_chat_id!=null){
       const open=button("Open in chat","secondary small");open.id="journal-open-chat";
       open.addEventListener("click",async()=>{
         if(open.disabled)return;open.disabled=true;
@@ -163,10 +163,12 @@ export function createJournal(context){
   systemLabel.append(system,node("span","",tr("Show system records")));
   systemLine.append(systemLabel,node("small","",tr("Routine records stay in the signed journal.")));
   system.addEventListener("change",()=>{state.eventSystem=system.checked;change();});
-  const more=node('details','journal-more-filters'),moreTitle=node('summary','',tr('Filters'));
+  const more=node('details','journal-more-filters'),moreTitle=node('summary'),moreCount=node('b');
+  moreTitle.append(icon("settings"),node('span','',tr('Filters')),moreCount);
   const searchOptions=node('details','journal-search-options');searchOptions.append(node('summary','',tr('Search options')),ranking,indexBox);
-  more.append(moreTitle,types,dates,custom,systemLine,searchOptions);
-  root.replaceChildren(controls,more,error,chips);
+  more.append(moreTitle,dates,custom,systemLine,searchOptions);
+  const filterRow=node('div','journal-filter-row');filterRow.append(types,more);
+  root.replaceChildren(controls,filterRow,error,chips);
   const older=$("load-more"),footer=older.closest(".table-footer"),shown=$("shown-count"),range=node("span","journal-window-range");
   const pager=node("div","journal-pager"),newer=button("Newer records","quiet"),latest=button("Latest","quiet");
   newer.id="journal-newer";latest.id="journal-latest";older.textContent=tr("Older records");older.hidden=false;
@@ -241,13 +243,13 @@ export function createJournal(context){
   document.addEventListener("pointerdown",event=>{if(picker.open&&!picker.contains(event.target)&&!source.contains(event.target))closeSource();});
   window.addEventListener("resize",()=>closeSource());
   search.addEventListener("input",()=>{
-    state.search=search.value;context.invalidate();clearTimeout(searchTimer);
-    searchTimer=setTimeout(()=>change(),300);
+    state.search=search.value;change(300);
   });
   nativeSource.addEventListener("change",()=>{state.source=nativeSource.value;change();});
-  function change(){
-    clearTimeout(searchTimer);error.hidden=true;pageTicket++;pageBusy=false;windowStatus.textContent="";context.invalidate();sync();
-    context.changed().catch(error=>{if(error.name!=="AbortError"&&error.name!=="StaleView")context.error(error.message);});
+  function change(delay=0){
+    clearTimeout(searchTimer);error.hidden=true;pageTicket++;pageBusy=false;windowStatus.textContent="";context.invalidate();context.prepare();sync();syncPage();
+    const reload=()=>context.changed().catch(error=>{if(error.name!=="AbortError"&&error.name!=="StaleView")context.error(error.message);});
+    if(delay)searchTimer=setTimeout(reload,delay);else void reload();
   }
   function chip(text,remove){const b=button("","journal-filter-chip");b.append(node("span","",text),icon("x"));b.title=tr("Remove filter");b.addEventListener("click",()=>{remove();change();});chips.append(b);}
   function sync(){
@@ -267,10 +269,11 @@ export function createJournal(context){
     const age=state.eventSince?Date.now()-Date.parse(state.eventSince):null;
     const range=!state.eventSince&&!state.eventUntil?"":!state.eventUntil&&ranges.find(([, ,duration])=>duration&&Math.abs(age-duration)<120000)?.[0]||"custom";
     for(const b of dates.children){b.classList.toggle("active",b.dataset.range===range);b.setAttribute("aria-pressed",String(b.dataset.range===range));}
+    const advanced=(range?1:0)+(state.eventSystem?1:0)+(state.searchMode?1:0);moreCount.textContent=advanced?String(advanced):"";
     if(document.activeElement!==from)from.value=state.eventSince?.slice(0,16)||"";
     if(document.activeElement!==until)until.value=state.eventUntil?.slice(0,16)||"";
     chips.replaceChildren();
-    for(const value of values)chip(tr(TYPES.find(([key])=>key===value)?.[1]||value),()=>{values.delete(value);state.filter=[...values].join(",");});
+    for(const value of values)chip(TYPES.find(([key])=>key===value)?tr(TYPES.find(([key])=>key===value)[1]):value==="coverage.gap"?tr("Coverage gap"):value,()=>{values.delete(value);state.filter=[...values].join(",");});
     if(state.source)chip(title,()=>{state.source="";nativeSource.value="";});
     if(state.search)chip(tr("Search: {query}",{query:state.search}),()=>{state.search="";search.value="";});
     if(state.eventSince||state.eventUntil)chip(range==="custom"?tr("Custom period"):tr(ranges.find(([key])=>key===range)?.[1]||"Custom period"),()=>{state.eventSince=state.eventUntil="";custom.hidden=true;});

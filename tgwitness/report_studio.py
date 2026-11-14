@@ -44,7 +44,7 @@ def preview(store, options):
                       [(say("Case ID"), report.e(options.get("case_id"))),
                        (say("Examiner"), report.e(options.get("examiner"))),
                        (say("Organization"), report.e(options.get("organization"))),
-                       (say("Created"), report.e(report.utc_text(utcnow())))], "", False)
+                       (say("Created"), report.e(report.utc_text(utcnow())))], "", False, report.translation_notice(say))
         + '<p class="analytics-method">' + report.e(say("Cover and charts from this workspace's journal. Export adds the selected records, trust assessment and verification material."))
         + '</p><p>' + report.e(say("Preview analysed {n} records. The full export uses its complete selected scope.", n=count))
         + (' ' + report.e(say("Preview limit reached; these charts cover only the first 50,000 records.")) if sampled else '') + '</p>'

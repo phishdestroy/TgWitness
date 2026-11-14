@@ -446,7 +446,7 @@ class Layout:
         self.text(say("Independent review").upper(), size=7, style="B", color=MUTED)
         self.callout(say(item["verification"]), GOLD)
         if item["references"]:
-            self.text(say("Evidence references") + ': ' + ', '.join(item["references"]), size=7.3, color=MUTED)
+            self.text(say("Evidence references") + ': ' + report.case_assessment.reference_text(item["references"]), size=7.3, color=MUTED)
         self.gap(5)
 
     def qr(self, lines, size=27):
@@ -685,7 +685,7 @@ def records(lay, say, events, titles, options):
         if run:
             flush()
             run = None
-        payload, chat = event["payload"], event["chat_id"]
+        payload, chat = event["payload"], report.report_analytics.chat_key(event)
         head = ("#" + str(event["seq"]) + "  " + report.kind_label(say, event["kind"]) + " · "
                 + say("Observed") + ": " + report.utc_text(event["observed_at"]))
         if chat is not None:
@@ -696,13 +696,16 @@ def records(lay, say, events, titles, options):
         if times:
             lay.text(times, size=7.8, color=MUTED)
         sender = payload.get("sender_observation") if isinstance(payload.get("sender_observation"), dict) else {}
-        sender_id = payload.get("sender_id", sender.get("id"))
+        sender_id = report.report_analytics.sender_id(event)
         if sender.get("display_name") or sender_id is not None:
             lay.text((sender.get("display_name") or say("User {id}", id=sender_id))
                      + (" @" + sender["username"] if sender.get("username") else "")
                      + (" · id " + str(sender_id) if sender_id is not None else ""), size=8)
         if isinstance(payload.get("text"), str) and payload["text"]:
             report_composition_pdf.message_text(lay, payload["text"])
+        if report.report_analytics.secret_chat_id(event) is not None:
+            for line in report.secret_record_lines(say, payload):
+                lay.text(line, size=8, color=MUTED)
         if payload.get("text_withheld"):
             lay.text(say("Text withheld in this extract"), size=8, color=MUTED)
         if report.CATEGORIES.get(event["kind"]) in ("message", "edited"):
@@ -711,7 +714,7 @@ def records(lay, say, events, titles, options):
         if event.get("minimised"):
             lay.text(say("Minimised") + ": " + ", ".join(say(report.WITHHELD.get(x, x)) for x in event["minimised"]),
                      size=8, color=WARN)
-        if event["kind"] == "media.saved" and isinstance(payload.get("media_sha256"), str):
+        if event["kind"] in ("media.saved", "secret_chat.file") and isinstance(payload.get("media_sha256"), str):
             lay.text((payload.get("original_name") or say("Saved file")) + " · " + str(payload.get("mime_type") or "—")
                      + " · " + report.size_text(payload.get("size")), size=8)
             lay.text(say("File SHA-256") + ": " + payload["media_sha256"], size=6.8, color=MUTED, family="Mono")
@@ -866,6 +869,10 @@ class EvidencePDF:
                 (say("Report ID"), self.report_id)],
                 say("Signed PDF: a PDF signature that PDF readers show, and the Ed25519 seal of key {fp}. Check both with "
                     "verify.py; the last section explains how.", fp=report.grouped(self.fp)))
+            original = (self.context or {}).get("original") or {}
+            notice = report.translation_text(say, original.get("pdf") or original.get("html"))
+            if notice:
+                self.lay.callout(notice)
             self.records_total = (self.handover["counts"]["unchanged"] + self.handover["counts"]["minimised"]) if self.handover \
                 else self.data["subject"].get("event_count")
             if self.data.get("selection"):
@@ -916,7 +923,7 @@ class EvidencePDF:
                 "directory": self.render_directory,
                 "relations": self.render_relations,
             }
-            default_order = ['brief', 'selection', 'examination', 'analytics', 'assessment', 'case', 'minimisation', 'case_board', 'histories', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations', 'journal']
+            default_order = ['brief', 'selection', 'examination', 'analytics', 'histories', 'journal', 'assessment', 'case', 'minimisation', 'case_board', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations']
             if self.options.get("template") == "activity":
                 default_order[2:4] = ["analytics", "examination"]
             visible = {
@@ -1068,8 +1075,7 @@ class EvidencePDF:
 
     def render_coverage(self):
         say = self.say
-        self.lay.section(say("Coverage"), (self.coverage or {}).get("meaning") or
-                    say("Recorded observation intervals."))
+        self.lay.section(say("Coverage"), say((self.coverage or {}).get("meaning") or "Recorded observation intervals."))
         if self.coverage:
             self.lay.coverage_figure(self.coverage)
             self.lay.grid([say("Interval start"), say("Interval end"), say("Duration")],
@@ -1103,6 +1109,14 @@ class EvidencePDF:
                 if view["skipped"]:
                     self.lay.grid(view["skipped_headers"], view["skipped"], (30, 70))
                 self.lay.text(view["note"], size=7.5, color=MUTED)
+            notes = report.coverage_notes(self.coverage)
+            if notes:
+                self.lay.heading(say("Coverage notes"))
+                self.lay.grid([say("Observed at"), say("Chat"), say("Reason")],
+                         [[report.utc_text(at), chat, reason] for at, chat, reason in notes], (26, 26, 48))
+                if self.coverage.get("notes_total", 0) > len(notes):
+                    self.lay.text(say("Showing {shown} of {total} coverage notes.", shown=len(notes),
+                                      total=self.coverage["notes_total"]), size=8, color=MUTED)
             self.lay.heading(say("Verifier summary"))
             for line in coverage_lines(self.coverage):
                 self.lay.text(line, size=7.2, family="Mono")
@@ -1152,7 +1166,7 @@ class EvidencePDF:
         say = self.say
         self.lay.section(say("Standards and methodology"), say("This export follows these practices."))
         self.lay.grid([say("Reference"), say("How it is applied")],
-                 [[s["reference"] + " — " + s["title"], s["how"]] for s in self.data["custody"].get("standards") or []], (34, 66))
+                 [[s["reference"] + " — " + say(s["title"]), say(s["how"])] for s in self.data["custody"].get("standards") or []], (34, 66))
 
     def render_limitations(self):
         say = self.say
@@ -1261,6 +1275,10 @@ class ChatPDF:
                 (say("Report ID"), self.report_id)],
                 say("Signed PDF: a PDF signature that PDF readers show, and the Ed25519 seal of key {fp}. Check both with "
                     "verify.py; the last section explains how.", fp=report.grouped(self.fp)))
+            original = (self.context or {}).get("original") or {}
+            notice = report.translation_text(say, original.get("pdf") or original.get("html"))
+            if notice:
+                self.lay.callout(notice)
             self.lay.figures([(say("Messages"), self.meta.get("message_count")), (say("Participants"), len(self.people)),
                          (say("With media"), self.stats["media"]), (say("Edited"), self.stats["edited"]), (say("Service"), self.stats["service"])]
                         + ([(say("Numbers absent"), self.ids["missing"])] if self.ids.get("numbered_per_chat") else [])
@@ -1370,11 +1388,17 @@ class ChatPDF:
                 self.lay.kv([(say("First message number"), self.ids["first_id"]), (say("Last message number"), self.ids["last_id"]),
                         (say("Numbers in this range"), span), (say("Messages present"), self.ids["present"]),
                         (say("Numbers absent"), self.ids["missing"]), (say("Runs of absent numbers"), len(self.ids["missing_ranges"]))])
-                if self.ids["missing_ranges"]:
-                    shown = self.ids["missing_ranges"][:200]
-                    self.lay.grid([say("Message numbers"), say("Count")],
-                             [[str(low) if low == high else str(low) + " – " + str(high), high - low + 1] for low, high in shown],
-                             (60, 40))
+                knowledge = self.context.get("journal_knowledge")
+                segments = report.absent_rows(say, self.ids, knowledge)
+                if segments:
+                    shown = segments[:200]
+                    label = lambda low, high: str(low) if low == high else str(low) + " – " + str(high)
+                    if knowledge is None:
+                        self.lay.grid([say("Message numbers"), say("Count")],
+                                 [[label(low, high), high - low + 1] for low, high, _ in shown], (60, 40))
+                    else:
+                        self.lay.grid([say("Message numbers"), say("Count"), say("Observed")],
+                                 [[label(low, high), high - low + 1, text] for low, high, text in shown], (22, 12, 66))
                     self.lay.text(say("message-ids.json lists every absent number; verify.py recounts them from chat.json."),
                              size=8.5, color=MUTED)
             else:

@@ -44,6 +44,30 @@ def pick(cookie, accept, languages=LANGUAGES):
     return next((lang for _, _, lang in sorted(choices) if lang in languages), "en")
 
 
+def plural(lang, count):
+    if isinstance(count, bool) or not isinstance(count, int):
+        return "other"
+    n = abs(count)
+    base = lang.split("-")[0]
+    if base in ("ru", "uk", "pl"):
+        if n == 1 or base != "pl" and n % 10 == 1 and n % 100 != 11:
+            return "one"
+        if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+            return "few"
+        return "many"
+    if base == "ar":
+        if n < 3:
+            return ("zero", "one", "two")[n]
+        return "few" if 3 <= n % 100 <= 10 else "many" if n % 100 >= 11 else "other"
+    if base == "he":
+        return "one" if n == 1 else "two" if n == 2 else "other"
+    if base in ("ja", "ko", "zh", "th", "vi", "id", "ms"):
+        return "other"
+    if base in ("fr", "pt", "hi", "bn", "fa"):
+        return "one" if n < 2 else "other"
+    return "one" if n == 1 else "other"
+
+
 def words(lang):
     if lang == "en":
         return {}

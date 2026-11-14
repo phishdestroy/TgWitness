@@ -8,14 +8,20 @@ GAP_NOTE = ("These message numbers were not observed in the source journal. Know
             "messages missing on recheck are separate observations.")
 CONTEXT_NOTE = ("Gaps use the chosen chats and the message-number span observed during the chosen dates. "
                 "Author and event filters do not create gaps. Neighboring saved messages are context and may be outside the selection.")
+NOT_COMPARED = ("Message numbers were not compared: this selection has no whole channel or supergroup with saved "
+                "messages in the chosen dates.")
+SHARED_NUMBERING = ("Private chats, bots and ordinary groups share one account-wide numbering, so a number missing in "
+                    "one of them may belong to another chat. Chats not compared for this reason: {n}.")
 KINDS = {"message.new": "New message", "message.snapshot": "History snapshot",
          "message.recovered": "Recovered message", "message.edited": "Edits",
-         "message.deleted": "Deletions", "message.missing_on_recheck": "Missing on recheck"}
+         "message.deleted": "Deletions", "message.missing_on_recheck": "Missing on recheck",
+         "secret_chat.message": "Pseudo-secret message", "secret_chat.action": "Pseudo-secret notice", "secret_chat.file": "Pseudo-secret file preserved"}
 
 
 def text_keys():
-    return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, "Selected records", "Source journal records",
-            "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types",
+    return [TITLE, SCOPE_NOTE, GAP_NOTE, CONTEXT_NOTE, NOT_COMPARED, SHARED_NUMBERING, "Selected records", "Source journal records",
+            "Observation dates (UTC)", "Selected authors", "All authors", "All dates", "Event types", "Selected messages",
+            "Selected messages without a journal record",
             "Unobserved message IDs", "Unobserved IDs: {ids} in {ranges} ranges.",
             "Showing {shown} of {total} ranges.", "Missing ID range", "Saved before", "Saved after",
             "No unobserved message IDs were found between the saved boundaries.",
@@ -25,11 +31,28 @@ def text_keys():
             *KINDS.values()]
 
 
+def picked_messages(selection):
+    return listed(selection.get("messages") or [])
+
+
+def listed(items):
+    chats = {}
+    for item in items:
+        chats.setdefault(item["chat"], []).append(item["message"])
+    return "; ".join(str(chat) + ": " + ", ".join("#" + str(message) for message in sorted(messages))
+                     for chat, messages in sorted(chats.items()))
+
+
 def scope_rows(material, say):
     selection, counts, source = material["selection"], material["counts"], material["source"]
+    picked = picked_messages(selection) if selection["enabled"] else ""
+    absent = listed(material.get("messages_not_found") or []) if picked else ""
     return [(say("Selected records"), str(counts["selected_records"])),
             (say("Source journal records"), str(source["records"])),
-            (say("Chats"), ", ".join(map(str, selection["chats"])) or say("All chats")),
+            (say("Chats"), ", ".join([*map(str, selection["chats"]), *("Secret Chat " + str(chat) for chat in selection.get("secret_chats", []))])
+             or ("—" if picked else say("All chats"))),
+            *([(say("Selected messages"), picked)] if picked else []),
+            *([(say("Selected messages without a journal record"), absent)] if absent else []),
             (say("Selected authors"), ", ".join(map(str, selection["senders"])) or say("All authors")),
             (say("Observation dates (UTC)"), " — ".join((selection["date_from"] or "…", selection["date_to"] or "…"))
              if selection["date_from"] or selection["date_to"] else say("All dates")),
@@ -52,11 +75,19 @@ def html(material, say):
     if not material["counts"]["selected_records"]:
         out += '<p class="lead">' + e(say("No records match this selection.")) + '</p>'
     gaps = material.get("id_gaps") or {}
-    if gaps.get("enabled"):
+    shared = gaps.get("chats_shared_numbering")
+    if gaps.get("enabled") and gaps.get("status") == "not_compared":
+        out += '<h3>' + e(say("Unobserved message IDs")) + '</h3><p class="lead">' + e(say(NOT_COMPARED)) + '</p>'
+        if shared:
+            out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
+    elif gaps.get("enabled"):
         out += '<h3>' + e(say("Unobserved message IDs")) + '</h3><p>' + e(say(GAP_NOTE)) + '</p>'
         out += '<p>' + e(say(CONTEXT_NOTE)) + '</p>'
-        out += '<p class="lead">' + e(say("Unobserved IDs: {ids} in {ranges} ranges.",
-                                        ids=gaps["ids_total"], ranges=gaps["ranges_total"])) + '</p>'
+        if shared:
+            out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
+        if gaps["ids_total"]:
+            out += '<p class="lead">' + e(say("Unobserved IDs: {ids} in {ranges} ranges.",
+                                            ids=gaps["ids_total"], ranges=gaps["ranges_total"])) + '</p>'
         rows = gaps.get("rows") or []
         if rows:
             out += table([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],
@@ -83,9 +114,18 @@ def pdf(lay, material):
     if not gaps.get("enabled"):
         return
     lay.heading(say("Unobserved message IDs"))
+    shared = gaps.get("chats_shared_numbering")
+    if gaps.get("status") == "not_compared":
+        lay.text(say(NOT_COMPARED))
+        if shared:
+            lay.text(say(SHARED_NUMBERING, n=shared), size=9)
+        return
     lay.text(say(GAP_NOTE), size=9)
     lay.text(say(CONTEXT_NOTE), size=9)
-    lay.text(say("Unobserved IDs: {ids} in {ranges} ranges.", ids=gaps["ids_total"], ranges=gaps["ranges_total"]))
+    if shared:
+        lay.text(say(SHARED_NUMBERING, n=shared), size=9)
+    if gaps["ids_total"]:
+        lay.text(say("Unobserved IDs: {ids} in {ranges} ranges.", ids=gaps["ids_total"], ranges=gaps["ranges_total"]))
     rows = gaps.get("rows") or []
     if rows:
         lay.grid([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],
