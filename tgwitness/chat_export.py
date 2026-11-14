@@ -454,7 +454,7 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
             context["files"] = dict(hashes)
             write_member("chat.html", html_chunks(meta, scratch_path, {**context, "names": names}))
             listed = {**hashes, **dict.fromkeys(("README.txt", "SHA256SUMS", "manifest.json", "manifest.sig"), "")}
-            write_member("README.txt", [verification_kit.quickstart(options.get("language", "en")), b"\n",
+            write_member("README.txt", [
                 report.readme(context, listed, "\n".join(meta["limitations"])
                 + "\n\nchat.json is authoritative; chat.html is a readable derivative sealed with the same key.\n"
                 "authors.csv / authors.json list everyone who posted in the exported history,\n"

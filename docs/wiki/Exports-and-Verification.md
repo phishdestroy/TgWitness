@@ -60,7 +60,8 @@ has no login secrets and isn't a backup.
 | `custody.json` | Acquisition, export, case details, standards |
 | `SHA256SUMS` | Hashes for `sha256sum -c`, no Python needed |
 | `manifest.json` + `manifest.sig` | Signed list of every file |
-| `README.txt` | How to verify, in the report language and English |
+| `README.txt` | What the archive holds and how to verify it, in the report language and English |
+| `START_HERE.txt` | Verification steps for `VERIFY.cmd` and `VERIFY.sh` |
 
 Report language, case title/ID, examiner and notes go under **Exports → Build report**
 and get signed in. Every report ends with an Ed25519 seal. Check it by dropping the file

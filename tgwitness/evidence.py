@@ -400,7 +400,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                            + "Open index.html. Verify evidence.zip using verify.py from an independently trusted checkout.\n"
                            + "\n".join(LIMITS) + README).encode() if compact else
                           report.readme(context, listed, "\n".join(LIMITS) + README))
-                write_member("README.txt", [verification_kit.quickstart(options.get("language", "en")), b"\n", readme])
+                write_member("README.txt", [verification_kit.quickstart(options.get("language", "en")), b"\n", readme]
+                             if compact else [readme])
                 write_member("SHA256SUMS", [report.sha256sums(hashes)])
                 manifest = {"format": "tgwitness-evidence-v1", "created_at": context["created_at"],
                             "snapshot_at": snapshot_at,
