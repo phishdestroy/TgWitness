@@ -443,7 +443,9 @@ function unitField(input,unit){
 }
 function clearFieldError(input){
   if(!input?.id)return;
-  const id=input.id+"-field-error";$(id)?.remove();
+  const id=input.id+"-field-error",error=$(id),formError=input.closest("form")?.querySelector(".form-error");
+  if(error&&formError?.textContent===error.textContent)formError.remove();
+  error?.remove();
   input.removeAttribute("aria-invalid");
   const ids=(input.getAttribute("aria-describedby")||"").split(/\s+/).filter(x=>x&&x!==id);
   if(ids.length)input.setAttribute("aria-describedby",ids.join(" "));else input.removeAttribute("aria-describedby");
@@ -460,7 +462,12 @@ document.addEventListener("invalid",event=>{
   const input=event.target;if(!input.id||!input.validationMessage)return;
   showFieldError(input,input.validationMessage);
 },true);
-document.addEventListener("input",event=>{if(event.target.hasAttribute("aria-invalid"))clearFieldError(event.target);});
+document.addEventListener("input",event=>{
+  const input=event.target.closest('[aria-invalid="true"]');if(!input)return;
+  const message=$(input.id+"-field-error")?.textContent;
+  if(message&&$("toast").querySelector(".toast-text")?.textContent===message){clearTimeout(toastTimer);leave("toast");}
+  clearFieldError(input);
+});
 for(const [id,unit] of [["max-media",tr("MiB")],["recheck-priority",tr("min")],["recheck-other",tr("min")]]){
   const input=$(id);if(input){const placeholder=node("span");input.replaceWith(placeholder);placeholder.replaceWith(unitField(input,unit));}
 }
@@ -2528,9 +2535,10 @@ function accountExportOptions(){
     throw invalidExportField('account-export-through',tr("The through date must be on or after the from date."));
   const max_media_file_mib=Number($("account-export-file-limit").value);
   const max_total_gib=Number($("account-export-total-limit").value);
-  if(!Number.isInteger(max_media_file_mib)||max_media_file_mib<1||max_media_file_mib>4096||
-      !Number.isInteger(max_total_gib)||max_total_gib<1||max_total_gib>1024)
-    throw new Error(tr("Enter a per-file limit of 1–4,096 MiB and a media budget of 1–1,024 GiB."));
+  if(!Number.isInteger(max_media_file_mib)||max_media_file_mib<1||max_media_file_mib>4096)
+    throw invalidExportField('account-export-file-limit',tr("Enter a per-file limit of 1–4,096 MiB and a media budget of 1–1,024 GiB."));
+  if(!Number.isInteger(max_total_gib)||max_total_gib<1||max_total_gib>1024)
+    throw invalidExportField('account-export-total-limit',tr("Enter a per-file limit of 1–4,096 MiB and a media budget of 1–1,024 GiB."));
   return {purpose,report_language:$('account-export-language').value,export_format:$('account-export-format').value,
     budget_exhausted:$('account-export-budget-action').value,chat_kinds:kinds,from_utc,to_utc,chat_ids,sender_ids,text_contains,
     own_messages_only:$("account-export-own").checked,
@@ -2578,7 +2586,7 @@ function renderAccountExportPreview(){
       ' '+tr(x.include_archived?'Archived chats included.':'Archived chats excluded.')+
       ' '+tr('Other account data: {data}. Connection method: {method}.',{data:other,method:transport})+
       ' '+tr('Report language: {language}.',{language:PANEL_LANGUAGES[x.report_language]||x.report_language})+
-      (x.purpose?" "+tr("Purpose: {purpose}",{purpose:x.purpose}):" "+tr("Enter a collection purpose before starting."));
+      (x.purpose?" "+tr("Purpose: {purpose}",{purpose:x.purpose}):"");
   }catch(error){box.textContent=error.message;$('account-export-advanced-summary').textContent=tr('Review export settings.');}
 }
 function accountExportPhase(phase){return tr({preparing:"Discovering chats",running:"Reading Telegram",waiting:"Waiting for Telegram",
