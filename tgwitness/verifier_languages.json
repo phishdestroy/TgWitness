@@ -219,7 +219,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose and OS image: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here",
       "Intel TDX check failed: {detail}": "Intel TDX check failed: {detail}",
-      "no Intel TDX quote": "no Intel TDX quote"
+      "no Intel TDX quote": "no Intel TDX quote",
+      "checkpoints: {n} (#{first}–#{last})": "checkpoints: {n} (#{first}–#{last})",
+      "Timestamp warning": "Timestamp warning",
+      "Signing certificate reference": "Signing certificate reference",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2"
     },
     "reader": {
       "launch": "Extract the whole ZIP. Double-click VERIFY.cmd, or drag the original ZIP onto it. On macOS/Linux run sh VERIFY.sh.",
@@ -486,7 +490,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose и образ ОС: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "Quote Intel TDX, проверенных офлайн и привязанных к ключу сборщика: {count}; код, выполнявшийся в ВМ, здесь не проверяется",
       "Intel TDX check failed: {detail}": "Проверка Intel TDX не пройдена: {detail}",
-      "no Intel TDX quote": "нет quote Intel TDX"
+      "no Intel TDX quote": "нет quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "контрольных точек: {n} (№{first}–№{last})",
+      "Timestamp warning": "Предупреждение о метке времени",
+      "Signing certificate reference": "Ссылка на сертификат подписи",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Метка времени указывает свой сертификат подписи через SHA-1 (RFC 2634 SigningCertificate); предпочтительны службы, которые возвращают SigningCertificateV2"
     },
     "reader": {
       "launch": "Распакуйте весь ZIP. Дважды нажмите VERIFY.cmd или перетащите на него исходный ZIP. В macOS/Linux выполните sh VERIFY.sh.",
@@ -753,7 +761,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose і образ ОС: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "Quote Intel TDX, перевірених офлайн і прив'язаних до ключа збирача: {count}; код, що виконувався у ВМ, тут не перевіряється",
       "Intel TDX check failed: {detail}": "Перевірку Intel TDX не пройдено: {detail}",
-      "no Intel TDX quote": "немає quote Intel TDX"
+      "no Intel TDX quote": "немає quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "контрольні точки: {n} (#{first}–#{last})",
+      "Timestamp warning": "Попередження щодо мітки часу",
+      "Signing certificate reference": "Посилання на сертифікат підпису",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Орган, що видає мітку часу, позначає свій сертифікат підпису як SHA-1 (RFC 2634 SigningCertificate); слід віддавати перевагу органам, які повертають SigningCertificateV2"
     },
     "reader": {
       "launch": "Розпакуйте весь ZIP. Двічі натисніть VERIFY.cmd або перетягніть на нього вихідний ZIP. У macOS/Linux виконайте sh VERIFY.sh.",
@@ -1020,7 +1032,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose e imagen del SO: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote(s) de Intel TDX verificados sin conexión y vinculados a la clave del recopilador; aquí no se comprueba el código que ejecutó la VM",
       "Intel TDX check failed: {detail}": "Falló la comprobación de Intel TDX: {detail}",
-      "no Intel TDX quote": "no hay quote de Intel TDX"
+      "no Intel TDX quote": "no hay quote de Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "puntos de control: {n} (#{first}–#{last})",
+      "Timestamp warning": "Advertencia sobre la marca de tiempo",
+      "Signing certificate reference": "Referencia al certificado de firma",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "La marca de tiempo denomina su certificado de firma como SHA-1 (RFC 2634 SigningCertificate); se prefieren las autoridades que devuelven SigningCertificateV2"
     },
     "reader": {
       "launch": "Extraiga todo el ZIP. Haga doble clic en VERIFY.cmd o arrastre el ZIP original sobre él. En macOS/Linux ejecute sh VERIFY.sh.",
@@ -1287,7 +1303,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose e imagem do SO: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote(s) do Intel TDX verificado(s) offline e vinculado(s) à chave do coletor; o código executado pela VM não é verificado aqui",
       "Intel TDX check failed: {detail}": "Falha na verificação do Intel TDX: {detail}",
-      "no Intel TDX quote": "nenhum quote do Intel TDX"
+      "no Intel TDX quote": "nenhum quote do Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "pontos de verificação: {n} (#{first}–#{last})",
+      "Timestamp warning": "Aviso sobre carimbo de data/hora",
+      "Signing certificate reference": "Referência ao certificado de assinatura",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "O carimbo de data e hora nomeia seu certificado de assinatura como SHA-1 (RFC 2634 SigningCertificate); prefira autoridades que retornem SigningCertificateV2"
     },
     "reader": {
       "launch": "Extraia todo o ZIP. Dê um duplo clique em VERIFY.cmd ou arraste o ZIP original sobre ele. No macOS/Linux, execute sh VERIFY.sh.",
@@ -1554,7 +1574,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose ve işletim sistemi imajı: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel TDX quote çevrimdışı doğrulandı ve toplayıcı anahtarına bağlı; sanal makinenin çalıştırdığı kod burada kontrol edilmez",
       "Intel TDX check failed: {detail}": "Intel TDX kontrolü başarısız: {detail}",
-      "no Intel TDX quote": "Intel TDX quote yok"
+      "no Intel TDX quote": "Intel TDX quote yok",
+      "checkpoints: {n} (#{first}–#{last})": "kontrol noktaları: {n} (#{first}–#{last})",
+      "Timestamp warning": "Zaman damgası uyarısı",
+      "Signing certificate reference": "İmza sertifikası referansı",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Zaman damgası, imza sertifikasını SHA-1 (RFC 2634 SigningCertificate) olarak adlandırır; SigningCertificateV2 değerini döndüren yetkilileri tercih eder"
     },
     "reader": {
       "launch": "ZIP dosyasının tamamını çıkarın. VERIFY.cmd dosyasına çift tıklayın veya özgün ZIP dosyasını üzerine sürükleyin. macOS/Linux üzerinde sh VERIFY.sh çalıştırın.",
@@ -1821,7 +1845,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose وصورة نظام التشغيل: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "تم التحقق دون اتصال من {count} من Intel TDX quote وهي مرتبطة بمفتاح المجمع؛ لا يتم هنا التحقق من الشيفرة التي شغّلها الجهاز الافتراضي",
       "Intel TDX check failed: {detail}": "فشل التحقق من Intel TDX: {detail}",
-      "no Intel TDX quote": "لا يوجد Intel TDX quote"
+      "no Intel TDX quote": "لا يوجد Intel TDX quote",
+      "checkpoints: {n} (#{first}–#{last})": "نقاط الفحص: {n} (#{first}–#{last})",
+      "Timestamp warning": "تحذير بشأن الطابع الزمني",
+      "Signing certificate reference": "مرجع شهادة التوقيع",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "يُسمي الطابع الزمني شهادة التوقيع الخاصة به بـ SHA-1 (RFC 2634 SigningCertificate)؛ ويفضل استخدام السلطات التي تُرجع SigningCertificateV2"
     },
     "reader": {
       "launch": "استخرج محتويات ZIP بالكامل. انقر مرتين على VERIFY.cmd أو اسحب ملف ZIP الأصلي إليه. على macOS/Linux شغّل sh VERIFY.sh.",
@@ -2088,7 +2116,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose و ایمیج سیستم‌عامل: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel TDX quote به‌صورت آفلاین تأیید و به کلید مجموعه‌کننده پیوند داده شد؛ کدی که ماشین مجازی اجرا کرد در اینجا بررسی نمی‌شود",
       "Intel TDX check failed: {detail}": "بررسی Intel TDX ناموفق بود: {detail}",
-      "no Intel TDX quote": "هیچ Intel TDX quote وجود ندارد"
+      "no Intel TDX quote": "هیچ Intel TDX quote وجود ندارد",
+      "checkpoints: {n} (#{first}–#{last})": "نقاط کنترل: {n} (#{first}–#{last})",
+      "Timestamp warning": "هشدار مهر زمانی",
+      "Signing certificate reference": "مرجع گواهی امضا",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "تایم‌استامپ نام گواهی امضای خود را با SHA-1 (RFC 2634 SigningCertificate) نام‌گذاری می‌کند؛ مراجعی را ترجیح دهید که SigningCertificateV2 را بازگردانند."
     },
     "reader": {
       "launch": "تمام محتوای ZIP را استخراج کنید. روی VERIFY.cmd دوبار کلیک کنید یا ZIP اصلی را روی آن بکشید. در macOS/Linux دستور sh VERIFY.sh را اجرا کنید.",
@@ -2355,7 +2387,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose اور OS امیج: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel TDX quote آف لائن تصدیق شدہ اور جمع کرنے والے کی کلید سے بندھے ہوئے؛ VM نے جو کوڈ چلایا وہ یہاں چیک نہیں ہوتا",
       "Intel TDX check failed: {detail}": "Intel TDX جانچ ناکام: {detail}",
-      "no Intel TDX quote": "کوئی Intel TDX quote نہیں"
+      "no Intel TDX quote": "کوئی Intel TDX quote نہیں",
+      "checkpoints: {n} (#{first}–#{last})": "چیک پوائنٹس: {n} (#{first}–#{last})",
+      "Timestamp warning": "ٹائم اسٹیمپ انتباہ",
+      "Signing certificate reference": "دستخطی سرٹیفکیٹ حوالہ",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "ٹائم اسٹیمپ اپنے دستخط کنندہ سرٹیفکیٹ کا نام SHA-1 (RFC 2634 SigningCertificate) کے ذریعے رکھتا ہے؛ SigningCertificateV2 واپس کرنے والی اتھارٹیز کو ترجیح دیں۔"
     },
     "reader": {
       "launch": "پورا ZIP نکالیں۔ VERIFY.cmd پر دو بار کلک کریں یا اصل ZIP کو اس پر کھینچ کر چھوڑیں۔ macOS/Linux پر sh VERIFY.sh چلائیں۔",
@@ -2622,7 +2658,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose और OS इमेज: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel TDX quote ऑफ़लाइन सत्यापित और कलेक्टर कुंजी से बंधे; VM द्वारा चलाया गया कोड यहाँ जांचा नहीं जाता",
       "Intel TDX check failed: {detail}": "Intel TDX जांच विफल: {detail}",
-      "no Intel TDX quote": "कोई Intel TDX quote नहीं"
+      "no Intel TDX quote": "कोई Intel TDX quote नहीं",
+      "checkpoints: {n} (#{first}–#{last})": "चेकपॉइंट्स: {n} (#{first}–#{last})",
+      "Timestamp warning": "टाइमस्टैम्प चेतावनी",
+      "Signing certificate reference": "हस्ताक्षर प्रमाणपत्र संदर्भ",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "टाइमस्टैम्प अपने हस्ताक्षर प्रमाणपत्र का नाम SHA-1 (RFC 2634 SigningCertificate); द्वारा रखता है; SigningCertificateV2 लौटाने वाले प्राधिकरणों को प्राथमिकता दें।"
     },
     "reader": {
       "launch": "पूरा ZIP निकालें। VERIFY.cmd पर डबल-क्लिक करें या मूल ZIP को उस पर खींचकर छोड़ें। macOS/Linux पर sh VERIFY.sh चलाएँ।",
@@ -2889,7 +2929,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose dan image OS: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote Intel TDX diverifikasi secara offline dan terikat pada kunci kolektor; kode yang dijalankan VM tidak diperiksa di sini",
       "Intel TDX check failed: {detail}": "Pemeriksaan Intel TDX gagal: {detail}",
-      "no Intel TDX quote": "tidak ada quote Intel TDX"
+      "no Intel TDX quote": "tidak ada quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "titik pemeriksaan: {n} (#{first}–#{last})",
+      "Timestamp warning": "Peringatan cap waktu",
+      "Signing certificate reference": "Referensi sertifikat penandatanganan",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Cap waktu menamai sertifikat penandatanganannya dengan SHA-1 (RFC 2634 SigningCertificate); utamakan otoritas yang mengembalikan SigningCertificateV2"
     },
     "reader": {
       "launch": "Ekstrak seluruh ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asli ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -3156,7 +3200,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose và ảnh hệ điều hành: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote Intel TDX đã được xác minh ngoại tuyến và gắn với khóa của bộ thu thập; mã mà VM chạy không được kiểm tra ở đây",
       "Intel TDX check failed: {detail}": "Kiểm tra Intel TDX thất bại: {detail}",
-      "no Intel TDX quote": "không có quote Intel TDX"
+      "no Intel TDX quote": "không có quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "các điểm kiểm tra: {n} (#{first}–#{last})",
+      "Timestamp warning": "Cảnh báo về dấu thời gian",
+      "Signing certificate reference": "Tham chiếu chứng chỉ ký",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Dấu thời gian đặt tên cho chứng chỉ ký của mình là SHA-1 (RFC 2634 SigningCertificate); ưu tiên các cơ quan trả về SigningCertificateV2"
     },
     "reader": {
       "launch": "Giải nén toàn bộ ZIP. Nhấp đúp VERIFY.cmd hoặc kéo ZIP gốc vào đó. Trên macOS/Linux, chạy sh VERIFY.sh.",
@@ -3423,7 +3471,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose 和操作系统镜像：python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} 个 Intel TDX quote 已离线验证并绑定到收集器密钥；此处不检查虚拟机运行的代码",
       "Intel TDX check failed: {detail}": "Intel TDX 检查失败：{detail}",
-      "no Intel TDX quote": "没有 Intel TDX quote"
+      "no Intel TDX quote": "没有 Intel TDX quote",
+      "checkpoints: {n} (#{first}–#{last})": "检查点：{n} (#{first}–#{last})",
+      "Timestamp warning": "时间戳警告",
+      "Signing certificate reference": "签名证书参考",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "时间戳使用 SHA-1 (RFC 2634 SigningCertificate) 来命名其签名证书；优先选择返回 SigningCertificateV2 的权威机构"
     },
     "reader": {
       "launch": "请完整解压 ZIP。双击 VERIFY.cmd，或将原始 ZIP 拖到它上面。在 macOS/Linux 中运行 sh VERIFY.sh。",
@@ -3690,7 +3742,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose et image du système : python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote(s) Intel TDX vérifié(s) hors ligne et lié(s) à la clé du collecteur ; le code exécuté par la VM n’est pas vérifié ici",
       "Intel TDX check failed: {detail}": "Échec de la vérification Intel TDX : {detail}",
-      "no Intel TDX quote": "aucun quote Intel TDX"
+      "no Intel TDX quote": "aucun quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "points de contrôle : {n} (#{first}–#{last})",
+      "Timestamp warning": "Avertissement concernant l’horodatage",
+      "Signing certificate reference": "Référence relative au certificat de signature",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "L’horodateur nomme son certificat de signature SHA-1 (RFC 2634 SigningCertificate) ; privilégiez les autorités qui renvoient SigningCertificateV2"
     },
     "reader": {
       "launch": "Extrayez tout le ZIP. Double-cliquez sur VERIFY.cmd ou déposez le ZIP original dessus. Sous macOS/Linux, exécutez sh VERIFY.sh.",
@@ -3957,7 +4013,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "Compose und Betriebssystem-Image: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel-TDX-Quote(s) offline geprüft und an den Collector-Schlüssel gebunden; der in der VM ausgeführte Code wird hier nicht geprüft",
       "Intel TDX check failed: {detail}": "Intel-TDX-Prüfung fehlgeschlagen: {detail}",
-      "no Intel TDX quote": "keine Intel-TDX-Quote"
+      "no Intel TDX quote": "keine Intel-TDX-Quote",
+      "checkpoints: {n} (#{first}–#{last})": "Checkpoints: {n} (#{first}–#{last})",
+      "Timestamp warning": "Warnung zum Zeitstempel",
+      "Signing certificate reference": "Verweis auf das Signaturzertifikat",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Der Zeitstempel benennt sein Signaturzertifikat mit SHA-1 (RFC 2634 SigningCertificate); es werden Behörden bevorzugt, die SigningCertificateV2 zurückgeben."
     },
     "reader": {
       "launch": "Entpacken Sie die gesamte ZIP-Datei. Doppelklicken Sie auf VERIFY.cmd oder ziehen Sie die ursprüngliche ZIP-Datei darauf. Unter macOS/Linux führen Sie sh VERIFY.sh aus.",
@@ -4224,7 +4284,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose e immagine del sistema operativo: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote Intel TDX verificati offline e legati alla chiave del collector; il codice eseguito dalla VM non è verificato qui",
       "Intel TDX check failed: {detail}": "Verifica Intel TDX non riuscita: {detail}",
-      "no Intel TDX quote": "nessun quote Intel TDX"
+      "no Intel TDX quote": "nessun quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "checkpoint: {n} (#{first}–#{last})",
+      "Timestamp warning": "Avviso relativo al timestamp",
+      "Signing certificate reference": "Riferimento al certificato di firma",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Il timestamp denomina il proprio certificato di firma con SHA-1 (RFC 2634 SigningCertificate); sono da preferire le autorità che restituiscono SigningCertificateV2"
     },
     "reader": {
       "launch": "Estrai l'intero ZIP. Fai doppio clic su VERIFY.cmd oppure trascinaci sopra lo ZIP originale. Su macOS/Linux esegui sh VERIFY.sh.",
@@ -4491,7 +4555,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose va OT obrazi: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} ta Intel TDX quote oflayn tekshirildi va yig'uvchi kalitiga bog'langan; VM ishlatgan kod bu yerda tekshirilmaydi",
       "Intel TDX check failed: {detail}": "Intel TDX tekshiruvi muvaffaqiyatsiz: {detail}",
-      "no Intel TDX quote": "Intel TDX quote yo'q"
+      "no Intel TDX quote": "Intel TDX quote yo'q",
+      "checkpoints: {n} (#{first}–#{last})": "checkpointlar: {n} (#{first}–#{last})",
+      "Timestamp warning": "Vaqt belgisi ogohlantirishi",
+      "Signing certificate reference": "Imzolash sertifikati bo'yicha ma'lumotnoma",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Vaqt belgisi o'z imzolash sertifikatini SHA-1 (RFC 2634 SigningCertificate) orqali nomlaydi; SigningCertificateV2 ni qaytaradigan vakolatli organlarni afzal ko'radi"
     },
     "reader": {
       "launch": "ZIP arxivini to‘liq oching. VERIFY.cmd faylini ikki marta bosing yoki asl ZIP faylini uning ustiga olib boring. macOS/Linux tizimida sh VERIFY.sh buyrug‘ini bajaring.",
@@ -4758,7 +4826,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose 및 OS 이미지: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "Intel TDX quote {count}개를 오프라인으로 검증했으며 수집기 키에 결합되어 있습니다. VM이 실행한 코드는 여기에서 확인하지 않습니다",
       "Intel TDX check failed: {detail}": "Intel TDX 검사 실패: {detail}",
-      "no Intel TDX quote": "Intel TDX quote 없음"
+      "no Intel TDX quote": "Intel TDX quote 없음",
+      "checkpoints: {n} (#{first}–#{last})": "체크포인트: {n} (#{first}–#{last})",
+      "Timestamp warning": "타임스탬프 경고",
+      "Signing certificate reference": "서명 인증서 참조",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "타임스탬프는 서명 인증서를 SHA-1 (RFC 2634 SigningCertificate)으로 명명하며, SigningCertificateV2을 반환하는 인증 기관을 우선적으로 사용합니다."
     },
     "reader": {
       "launch": "ZIP 전체를 압축 해제하세요. VERIFY.cmd를 두 번 클릭하거나 원본 ZIP을 그 위로 끌어 놓으세요. macOS/Linux에서는 sh VERIFY.sh를 실행하세요.",
@@ -5025,7 +5097,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose 與作業系統映像：python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} 個 Intel TDX quote 已離線驗證並綁定至收集器金鑰；此處不檢查虛擬機執行的程式碼",
       "Intel TDX check failed: {detail}": "Intel TDX 檢查失敗：{detail}",
-      "no Intel TDX quote": "沒有 Intel TDX quote"
+      "no Intel TDX quote": "沒有 Intel TDX quote",
+      "checkpoints: {n} (#{first}–#{last})": "檢查點：{n} (#{first}–#{last})",
+      "Timestamp warning": "時間戳記警告",
+      "Signing certificate reference": "簽名憑證參考",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "時間戳記以其簽名憑證命名為 SHA-1 (RFC 2634 SigningCertificate)；應優先選用會回傳 SigningCertificateV2 的授權機構"
     },
     "reader": {
       "launch": "請完整解壓縮 ZIP。按兩下 VERIFY.cmd，或將原始 ZIP 拖曳到它上面。在 macOS/Linux 中執行 sh VERIFY.sh。",
@@ -5292,7 +5368,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose dan imej OS: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} quote Intel TDX disahkan di luar talian dan terikat pada kunci pengumpul; kod yang dijalankan oleh VM tidak diperiksa di sini",
       "Intel TDX check failed: {detail}": "Semakan Intel TDX gagal: {detail}",
-      "no Intel TDX quote": "tiada quote Intel TDX"
+      "no Intel TDX quote": "tiada quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "titik pemeriksaan: {n} (#{first}–#{last})",
+      "Timestamp warning": "Amaran cap masa",
+      "Signing certificate reference": "Rujukan sijil penandatanganan",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Cap masa menamakan sijil tandatanganannya oleh SHA-1 (RFC 2634 SigningCertificate); utamakan pihak berkuasa yang mengembalikan SigningCertificateV2"
     },
     "reader": {
       "launch": "Ekstrak keseluruhan ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asal ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -5559,7 +5639,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose i obraz systemu: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "Quote Intel TDX sprawdzone offline i powiązane z kluczem kolektora: {count}; kod uruchomiony w maszynie wirtualnej nie jest tu sprawdzany",
       "Intel TDX check failed: {detail}": "Sprawdzenie Intel TDX nie powiodło się: {detail}",
-      "no Intel TDX quote": "brak quote Intel TDX"
+      "no Intel TDX quote": "brak quote Intel TDX",
+      "checkpoints: {n} (#{first}–#{last})": "punkty kontrolne: {n} (#{first}–#{last})",
+      "Timestamp warning": "Ostrzeżenie dotyczące znacznika czasu",
+      "Signing certificate reference": "Odniesienie do certyfikatu podpisu",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Sygnatura czasowa nazywa swój certyfikat podpisujący jako SHA-1 (RFC 2634 SigningCertificate); preferowane są urzędy, które zwracają SigningCertificateV2"
     },
     "reader": {
       "launch": "Rozpakuj cały ZIP. Kliknij dwukrotnie VERIFY.cmd lub przeciągnij na niego oryginalny ZIP. W macOS/Linux uruchom sh VERIFY.sh.",
@@ -5826,7 +5910,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose と OS イメージ：python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} 件の Intel TDX quote をオフラインで検証し、コレクター鍵に結び付けられています。VM が実行したコードはここでは確認しません",
       "Intel TDX check failed: {detail}": "Intel TDX の確認に失敗：{detail}",
-      "no Intel TDX quote": "Intel TDX quote なし"
+      "no Intel TDX quote": "Intel TDX quote なし",
+      "checkpoints: {n} (#{first}–#{last})": "チェックポイント: {n} (#{first}–#{last})",
+      "Timestamp warning": "タイムスタンプに関する警告",
+      "Signing certificate reference": "署名証明書の参照",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "タイムスタンプは、その署名証明書を SHA-1 (RFC 2634 SigningCertificate) と命名します。SigningCertificateV2 を返す認証機関を優先してください。"
     },
     "reader": {
       "launch": "ZIP全体を展開してください。VERIFY.cmdをダブルクリックするか、元のZIPをその上にドラッグしてください。macOS/Linuxでは sh VERIFY.sh を実行します。",
@@ -6093,7 +6181,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose และอิมเมจระบบปฏิบัติการ: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "ตรวจสอบ Intel TDX quote แบบออฟไลน์แล้ว {count} รายการ และผูกกับคีย์ของตัวรวบรวม; ไม่ได้ตรวจสอบโค้ดที่ VM รันที่นี่",
       "Intel TDX check failed: {detail}": "การตรวจสอบ Intel TDX ล้มเหลว: {detail}",
-      "no Intel TDX quote": "ไม่มี Intel TDX quote"
+      "no Intel TDX quote": "ไม่มี Intel TDX quote",
+      "checkpoints: {n} (#{first}–#{last})": "checkpoints: {n} (#{first}–#{last})",
+      "Timestamp warning": "คำเตือนเกี่ยวกับเวลาประทับ",
+      "Signing certificate reference": "การอ้างอิงใบรับรองการลงนาม",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "เครื่องหมายเวลาจะตั้งชื่อใบรับรองการลงนามด้วย SHA-1 (RFC 2634 SigningCertificate); ให้เลือกหน่วยงานที่ให้ SigningCertificateV2 เป็นอันดับแรก"
     },
     "reader": {
       "launch": "แตกไฟล์ ZIP ทั้งหมด ดับเบิลคลิก VERIFY.cmd หรือลาก ZIP ต้นฉบับไปวางบนไฟล์นั้น สำหรับ macOS/Linux ให้เรียกใช้ sh VERIFY.sh",
@@ -6360,7 +6452,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose ותמונת מערכת ההפעלה: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count} Intel TDX quote אומתו במצב לא מקוון וקשורים למפתח האספן; הקוד שהמכונה הווירטואלית הריצה אינו נבדק כאן",
       "Intel TDX check failed: {detail}": "בדיקת Intel TDX נכשלה: {detail}",
-      "no Intel TDX quote": "אין Intel TDX quote"
+      "no Intel TDX quote": "אין Intel TDX quote",
+      "checkpoints: {n} (#{first}–#{last})": "נקודות ביקורת: {n} (#{first}–#{last})",
+      "Timestamp warning": "אזהרה בנוגע לחותמת זמן",
+      "Signing certificate reference": "הפניה לתעודת חתימה",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "חותמת הזמן מכנה את תעודת החתימה שלה SHA-1 (RFC 2634 SigningCertificate); יש להעדיף רשויות המחזירות SigningCertificateV2"
     },
     "reader": {
       "launch": "חלצו את כל תוכן ה-ZIP. לחצו פעמיים על VERIFY.cmd או גררו אליו את קובץ ה-ZIP המקורי. ב-macOS/Linux הריצו sh VERIFY.sh.",
@@ -6627,7 +6723,11 @@
       "compose and OS image: python -m tgwitness.cloud verify": "compose এবং OS ইমেজ: python -m tgwitness.cloud verify",
       "{count} Intel TDX quote(s) verified offline and bound to the collector key; the code the VM ran is not checked here": "{count}টি Intel TDX quote অফলাইনে যাচাই করা হয়েছে এবং সংগ্রাহকের কী-এর সাথে আবদ্ধ; VM যে কোড চালিয়েছে তা এখানে যাচাই করা হয় না",
       "Intel TDX check failed: {detail}": "Intel TDX যাচাই ব্যর্থ: {detail}",
-      "no Intel TDX quote": "কোনো Intel TDX quote নেই"
+      "no Intel TDX quote": "কোনো Intel TDX quote নেই",
+      "checkpoints: {n} (#{first}–#{last})": "চেকপয়েন্টসমূহ: {n} (#{first}–#{last})",
+      "Timestamp warning": "টাইমস্ট্যাম্প সতর্কতা",
+      "Signing certificate reference": "স্বাক্ষর সার্টিফিকেট রেফারেন্স",
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "টাইমস্ট্যাম্পটি তার স্বাক্ষরকারী সার্টিফিকেটকে SHA-1 (RFC 2634 SigningCertificate) দ্বারা নামকরণ করে; SigningCertificateV2 ফেরত দেয় এমন কর্তৃপক্ষকে অগ্রাধিকার দিন।"
     },
     "reader": {
       "launch": "পুরো ZIP খুলে নিন। VERIFY.cmd-তে দুবার ক্লিক করুন অথবা মূল ZIP-টি তার ওপর টেনে ছেড়ে দিন। macOS/Linux-এ sh VERIFY.sh চালান।",
