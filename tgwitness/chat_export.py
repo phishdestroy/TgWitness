@@ -17,7 +17,7 @@ from pathlib import Path
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from . import indicators, pdf_report, people, report, verification_kit
-from .evidence import producer, report_entry, write_indicators, write_pdf, write_viewer
+from .evidence import english_original, producer, report_entry, write_indicators, write_pdf, write_viewer
 from .media_jobs import forget_files
 from .message_selection import Selection
 from .security import private_write
@@ -67,8 +67,7 @@ PARTIAL_MEANING = ("Messages read before this export stopped. They stay in the w
                    "the collector key; the next export of this chat by the same account checks them and continues.")
 SET_ASIDE_MEANING = ("Messages kept from an earlier stopped export could not be continued and were moved aside unchanged; "
                      "this export starts from the newest message.")
-PARTIAL_SCOPE = ("Only messages numbered {low}-{high} were read before the export stopped. Numbers outside that range "
-                 "were not read, so their absence says nothing about deletion.")
+PARTIAL_SCOPE = "Messages numbered {low}-{high} were read before the export stopped."
 SESSIONS_LIMIT = ("This export continued an earlier stopped export of the same chat by the same account; "
                   "acquisition.sessions lists each session. Messages kept from an earlier session show the version "
                   "Telegram returned during that session.")
@@ -431,6 +430,9 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
             def ordered():
                 return (named(r, names, chat_id) for r in source())
             context["viewer"] = write_viewer(write_member, "chat", ordered(), people, found, options)
+            english_original(context, write_member, hashes, "chat",
+                             lambda english: pdf_report.chat_report_pdf(meta, english, vault, ordered()),
+                             lambda english: html_chunks(meta, scratch_path, {**english, "names": names}))
             context["files"] = dict(hashes)
             write_pdf(write_member, "chat.pdf", lambda: pdf_report.chat_report_pdf(meta, context, vault, ordered()))
             context["files"] = dict(hashes)

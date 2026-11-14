@@ -95,6 +95,10 @@ def case_of(options):
             if options.get(name)}
 
 
+SINGULAR = {"{n} messages": "{n} message", "{n} records": "{n} record", "{n} chats": "{n} chat",
+            "{n} edits": "{n} edit", "{n} deletions": "{n} deletion", "{n} saved files": "{n} saved file"}
+
+
 class Words:
     def __init__(self, language):
         self.language = language if language in i18n.LANGUAGES else "en"
@@ -102,9 +106,13 @@ class Words:
         self.direction = "rtl" if self.language in RTL else "ltr"
 
     def __call__(self, text, /, **values):
-        text = self.table.get(text, text)
-        if isinstance(text, dict):
-            text = text.get("other") or next(iter(text.values()))
+        entry = self.table.get(text, text)
+        if isinstance(entry, dict):
+            text = entry.get(i18n.plural(self.language, values.get("n"))) or entry.get("other") or next(iter(entry.values()))
+        elif values.get("n") == 1 and text in SINGULAR and (self.language == "en" or SINGULAR[text] in self.table):
+            text = self.table.get(SINGULAR[text], SINGULAR[text])
+        else:
+            text = entry
         for name, value in values.items():
             text = text.replace("{" + name + "}", str(value))
         return text
@@ -120,7 +128,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -189,7 +197,7 @@ def size_text(value):
 CATEGORY_ORDER = ("message", "edited", "deleted", "missing", "media", "reaction", "member", "system")
 CATEGORIES = {"message.new": "message", "message.snapshot": "message", "message.recovered": "message",
               "message.edited": "edited", "message.deleted": "deleted", "message.missing_on_recheck": "missing",
-              "media.saved": "media", "media.hashed": "media"}
+              "media.saved": "media", "media.hashed": "media", "secret_chat.message": "message", "secret_chat.file": "media"}
 TITLE_KINDS = ("target.changed", "source.discovered", "target.removed")
 VERSION_KINDS = ("message.new", "message.snapshot", "message.recovered", "message.edited")
 CHANGE_KINDS = ("message.edited", "message.deleted", "message.missing_on_recheck")
@@ -214,7 +222,9 @@ def kind_label(say, kind):
     return {"message.new": say("New message"), "message.snapshot": say("History snapshot"),
             "message.recovered": say("Recovered message"), "message.edited": say("Edited message"),
             "message.deleted": say("Deletion notice"), "message.missing_on_recheck": say("Missing on recheck"),
-            "media.saved": say("Saved file"), "media.hashed": say("File hashes; content not downloaded")}.get(kind, kind)
+            "media.saved": say("Saved file"), "media.hashed": say("File hashes; content not downloaded"),
+            "secret_chat.message": say("Pseudo-secret message"), "secret_chat.file": say("Pseudo-secret file preserved"),
+            "secret_chat.action": say("Pseudo-secret notice")}.get(kind, kind)
 
 
 class Digest:
@@ -241,7 +251,7 @@ class Digest:
     def add(self, event):
         self.analytics.add(event)
         self.metrics.add(event)
-        kind, payload, chat = event["kind"], event["payload"], event["chat_id"]
+        kind, payload, chat = event["kind"], event["payload"], report_analytics.chat_key(event)
         if kind == "beacon.drand":
             self.trust_signals["drand"] += 1
         if kind == "process.started":
@@ -264,14 +274,16 @@ class Digest:
             self.changed.add((chat, event["message_id"]))
         if chat is not None:
             self.chats[chat] = self.chats.get(chat, 0) + 1
+            if report_analytics.secret_chat_id(event) is not None:
+                self.titles[chat] = "Secret Chat " + str(payload["secret_chat_id"])
             if kind in TITLE_KINDS and isinstance(payload.get("title"), str):
                 self.titles[chat] = payload["title"]
         if kind == "scope.applied":
             for added in payload.get("added") or []:
                 if isinstance(added, dict) and isinstance(added.get("title"), str):
                     self.titles[added.get("chat_id")] = added["title"]
-        if CATEGORIES.get(kind) == "message" and payload.get("sender_id") is not None:
-            self.senders.add(payload["sender_id"])
+        if CATEGORIES.get(kind) == "message" and report_analytics.sender_id(event) is not None:
+            self.senders.add(report_analytics.sender_id(event))
         if CATEGORIES.get(kind) in ("message", "edited"):
             self.indicators.message(payload.get("text"), shown_details(payload),
                                     {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
@@ -281,7 +293,7 @@ class Digest:
             note_indicators(self.indicators, payload["addresses"], "mini app",
                             {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
                             event["observed_at"])
-        digest = payload.get("media_sha256") if kind == "media.saved" else None
+        digest = payload.get("media_sha256") if kind in ("media.saved", "secret_chat.file") else None
         if isinstance(digest, str):
             self.media[digest] = {"mime_type": payload.get("mime_type"), "size": payload.get("size"),
                                   "ref": {"chat": chat, "message": event["message_id"], "seq": event["seq"]},
@@ -433,6 +445,10 @@ def file_purpose(say, name):
         "records.jsonl": say("The records of this extract, signed; minimised ones name what was withheld"),
         "events.csv": say("The same records for spreadsheets (formula-safe)"),
         "report.html": say("This readable report, sealed"),
+        "report.en.html": say("English original of this report, sealed"),
+        "report.en.pdf": say("English original of the signed PDF"),
+        "chat.en.html": say("English original of this report, sealed"),
+        "chat.en.pdf": say("English original of the signed PDF"),
         "coverage.json": say("Observation periods, gaps and message IDs never observed"),
         "custody.json": say("Chain of custody and acquisition details"),
         "SHA256SUMS": say("SHA-256 checksums of the listed payload files, for sha256sum -c"),
@@ -538,6 +554,64 @@ def reading(meta):
             or None}
 
 
+TRANSLATION_TERMS = (
+    ("journal", "the signed, hash-chained sequence of records kept by the collector; not a diary or a periodical"),
+    ("record", "one signed entry of the journal; use one word for it throughout"),
+    ("observation", "what the collector received at a recorded time; not a finding about the truth of the content"),
+    ("collector", "the TgWitness process that observed through the operator's own Telegram account"),
+    ("deletion notice", "Telegram's notice that a message was deleted; it does not show who deleted it"),
+    ("missing on recheck", "Telegram no longer returned the message when it was checked again: deleted, or no longer "
+                           "visible to this account"),
+    ("absent message number", "a number with no message in the export: deleted earlier or never visible to this account"),
+    ("gap", "a period without observation; not evidence that nothing happened"),
+    ("earlier version", "the text before an edit; both versions are kept"),
+    ("checkpoint", "a signed summary of the journal up to a record number"),
+    ("timestamp service (TSA)", "an independent RFC 3161 time-stamping service; not a government authority"),
+    ("timestamp receipt", "the answer of a timestamp service, or an OpenTimestamps receipt, showing that a checkpoint "
+                          "existed by a time"),
+    ("seal", "the Ed25519 signature embedded in a report file"),
+    ("signing key fingerprint", "the SHA-256 of the public key; obtain it through a separate trusted channel"),
+    ("witness", "an independent party that keeps or confirms checkpoints"),
+    ("handover extract", "part of a journal prepared for another party, with other people's data minimised"),
+    ("minimised record", "a record whose withheld fields are named and replaced by their hash"),
+    ("UTC", "times are UTC in ISO 8601; do not convert them to a local time zone"),
+)
+
+
+def translation_text(say, original=None):
+    if say.language == "en":
+        return ""
+    text = say("Recommendation: for court, file the English original with a certified or sworn translation into the "
+               "court language. A sworn translator knows the local terminology and the formal requirements for court "
+               "documents. Versions of this report in languages other than English are machine translations for "
+               "orientation.")
+    if original:
+        text += " " + say("English original in this archive: {file}", file=original)
+    return text
+
+
+def translation_notice(say, original=None):
+    text = translation_text(say, original)
+    return '<div class="callout translation-notice" role="note">' + e(text) + "</div>" if text else ""
+
+
+def translator_lines(context, files, archive):
+    original = context.get("original") or {}
+    defaults = ("chat.html", "chat.pdf") if context["kind"] == "chat" else ("report.html", "report.pdf")
+    names = [original[key] for key in ("html", "pdf") if original.get(key)] or [n for n in defaults if n in files]
+    names = names or [defaults[0]]
+    width = max(len(term) for term, _ in TRANSLATION_TERMS) + 3
+    return (["The English report is the original: " + ", ".join(names) + ".",
+             "Versions in other languages are machine translations for orientation. For court, translate from the",
+             "English original and have the translation certified or sworn in the court language.",
+             "Check the original first: python verify.py " + names[0] + " --fingerprint TRUSTED_SHA256 --evidence ../"
+             + archive,
+             "Keep literal: file names, commands, hashes, fingerprints, IDs, message numbers, URLs and times.",
+             "Quote captured messages in their original language and give the translation separately.",
+             "", "Terms:"]
+            + ["  " + term.ljust(width) + meaning for term, meaning in TRANSLATION_TERMS])
+
+
 def readme(context, files, english):
     say = Words(context["options"].get("language", "en"))
     options, fp = context["options"], fingerprint(context["public_key"])
@@ -556,8 +630,12 @@ def readme(context, files, english):
     lines += ["", say("Start here"), "-" * 64,
               say("Extract the complete archive before opening the HTML report. Keep viewer/ and media/ beside it."),
               "  " + report_name + " — " + say("Report, search, filters and archive verification"),
-              say("Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder."),
-              "", say("What is in this archive"), "-" * 64]
+              say("Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder.")]
+    original = context.get("original") or {}
+    if original.get("html") and say.language != "en":
+        lines += ["  " + original["html"] + " — " + say("English original of this report, sealed"),
+                  translation_text(say)]
+    lines += ["", say("What is in this archive"), "-" * 64]
     folders = ("media/", "anchors/", "records/", "messages/", "viewer/")
     shown = [n for n in sorted(files) if not n.startswith(folders)]
     width = max([len(n) for n in shown] + [len(n) for n in folders]) + 3
@@ -598,6 +676,8 @@ def readme(context, files, english):
               say("Import CSV as UTF-8 and keep ID, wallet and hash columns as text. Formula-like values are escaped for spreadsheets."),
               say("Indicators are observations, not verdicts. Review their source references before importing STIX or MISP."),
               say("The PDF is a signed reading copy. Use the HTML viewer for search and the JSON or JSONL for structured analysis.")]
+    if say.language == "en":
+        lines += ["", "For translators", "-" * 64] + translator_lines(context, files, archive)
     lines += ["", say("Reading this record"), "-" * 64] + ["- " + say(item) for item in context["limits"]]
     text = "\n".join(lines) + "\n"
     prefix = "\n".join(context["limits"])
@@ -714,6 +794,7 @@ CSS = (
     ".kv td{padding:7px 12px;overflow-wrap:anywhere}"
     ".grid{font-size:13.5px}.grid th{text-align:start;font-size:12px;font-weight:650;color:var(--soft);padding:7px 10px;"
     "background:var(--th)}.grid td{padding:7px 10px;overflow-wrap:break-word}.grid td small{overflow-wrap:anywhere}"
+    "@media (max-width:600px){.grid th,.grid td{overflow-wrap:anywhere;hyphens:auto}}"
     ".scroll{overflow-x:auto}"
     ".pill{display:inline-flex;align-items:center;gap:6px;padding:1px 7px;border-radius:3px;font-size:11.5px;"
     "font-weight:650;border:1px solid color-mix(in srgb,currentColor 30%,transparent);background:var(--tint);"
@@ -936,7 +1017,7 @@ CSS += DOSSIER_CSS
 CSS += report_charts.CSS
 CSS += report_design.CSS
 CSS += report_layouts.CSS
-SCRIPT += "\n" + CONSOLE_JS
+SCRIPT += "\n" + CONSOLE_JS + "\n" + report_layouts.report_profile.SCRIPT
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
 CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; script-src " + SCRIPT_HASH
        + "; frame-src 'self' file:; base-uri 'none'; form-action 'none'")
@@ -1005,7 +1086,7 @@ def bar(say, label, links, viewer_kind=None):
             + ICON_PRINT + "</button></div></header>" + opening)
 
 
-def hero(say, eyebrow, title, facts, fp, sealed):
+def hero(say, eyebrow, title, facts, fp, sealed, notice=""):
     stamp = ('<aside class="stamp" id="stamp" data-fp="' + e(fp) + '"><div class="stamp-top">' + STAMP + "<div>"
              '<div class="stamp-label">' + e(say("Digital signature")) + '</div><div class="stamp-state" id="seal-state">'
              + e(say("Checking…")) + '</div></div></div><div class="stamp-key"><span>Ed25519</span>'
@@ -1016,7 +1097,7 @@ def hero(say, eyebrow, title, facts, fp, sealed):
             + e(say("Evidence dossier")) + '</span></div><div class="hero-main"><div class="eyebrow">' + e(eyebrow) + "</div><h1>"
             + e(title) + "</h1>"
             '<div class="facts">' + "".join("<div><span>" + e(k) + "</span><b>" + v + "</b></div>" for k, v in facts if v)
-            + "</div></div>" + stamp + "</section>")
+            + "</div>" + notice + "</div>" + stamp + "</section>")
 
 
 TILE_TONES = {"accent": "blue", "violet": "violet", "warn": "orange", "bad": "red", "ok": "green", "pink": "teal"}
@@ -1065,12 +1146,22 @@ def keycard(say, fp):
             + e(say("Visual fingerprint: copies signed by another key show other colours")) + '">' + swatch + "</div></div>")
 
 
+def counted(say, key, n):
+    text = say(key, n=n)
+    if type(n) is not int or abs(n) < 1000:
+        return text
+    return text.replace(str(n), format(n, ",").replace(",", "," if getattr(say, "language", "en") == "en" else "\u202f"), 1)
+
+
 def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False):
     cats, latest = digest["categories"], latest_stamp(anchors)
-    summary = say("{account} observed {chats} chats from {first} to {last}. The journal holds {n} records: {m} messages, "
-                  "{e} edits, {d} deletions and {f} saved files.", account=account_text or say("The observing account"),
-                  chats=len(digest["chats"]), first=utc_text(digest["first"]), last=utc_text(digest["last"]),
-                  n=count, m=cats["message"], e=cats["edited"], d=cats["deleted"], f=len(digest["media"]))
+    summary = (say("{account} observed {chats} from {first} to {last}.", account=account_text or say("The observing account"),
+                   chats=counted(say, "{n} chats", len(digest["chats"])), first=utc_text(digest["first"]),
+                   last=utc_text(digest["last"]))
+               + " " + say("The journal holds {records}: {messages}, {edits}, {deletions} and {files}.",
+                           records=counted(say, "{n} records", count), messages=counted(say, "{n} messages", cats["message"]),
+                           edits=counted(say, "{n} edits", cats["edited"]), deletions=counted(say, "{n} deletions", cats["deleted"]),
+                           files=counted(say, "{n} saved files", len(digest["media"]))))
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
@@ -1539,8 +1630,25 @@ def media_text(say, info):
                                   info.get("url"), ephemeral.label(say, info.get("ephemeral_media"))) if x)
 
 
+def secret_record_lines(say, payload):
+    lines = []
+    if payload.get("direction") in ("in", "out"):
+        lines.append(say("Sent") if payload["direction"] == "out" else say("Received"))
+    if payload.get("ttl"):
+        lines.append(say("timer {n} s", n=payload["ttl"]))
+    action = payload.get("action")
+    if action == "DeleteMessages":
+        details = payload.get("details") or {}
+        lines.append(say("The other side deleted {n} messages; TgWitness keeps them.", n=len(details.get("random_ids") or [])))
+    elif action == "FlushHistory":
+        lines.append(say("The other side cleared the history; TgWitness keeps it."))
+    elif action:
+        lines.append(str(action))
+    return lines
+
+
 def record_html(event, say, titles, options, archive, base=""):
-    kind, payload, chat, seq = event["kind"], event["payload"], event["chat_id"], event["seq"]
+    kind, payload, chat, seq = event["kind"], event["payload"], report_analytics.chat_key(event), event["seq"]
     cat = category(kind)
     parts = ['<article class="rec cat-' + cat + '" id="r' + str(seq) + '" data-cat="' + cat + '" data-chat="'
              + e("" if chat is None else chat) + '"><header><a class="seq" href="#r' + str(seq) + '">#' + str(seq) + "</a>"
@@ -1551,13 +1659,16 @@ def record_html(event, say, titles, options, archive, base=""):
                      + "</span>")
     parts.append('<span class="at">' + e(say("Observed")) + " " + when(event["observed_at"]) + "</span></header>")
     sender = payload.get("sender_observation") if isinstance(payload.get("sender_observation"), dict) else {}
-    sender_id = payload.get("sender_id", sender.get("id"))
+    sender_id = report_analytics.sender_id(event)
     if sender.get("display_name") or sender_id is not None:
         parts.append('<div class="who">' + e(sender.get("display_name") or say("User {id}", id=sender_id))
                      + (' <span class="uname">@' + e(sender["username"]) + "</span>" if sender.get("username") else "")
                      + (' <span class="sub">· id ' + e(sender_id) + "</span>" if sender_id is not None else "") + "</div>")
     if isinstance(payload.get("text"), str) and payload["text"]:
         parts.append('<div class="text">' + e(payload["text"]) + "</div>")
+    if report_analytics.secret_chat_id(event) is not None:
+        for line in secret_record_lines(say, payload):
+            parts.append('<div class="file">' + e(line) + '</div>')
     if payload.get("text_withheld"):
         parts.append('<div class="withheld">' + e(say("Text withheld in this extract")) + "</div>")
     if event.get("minimised"):
@@ -1579,7 +1690,7 @@ def record_html(event, say, titles, options, archive, base=""):
     if kind.startswith("media.") and payload.get("ephemeral_media"):
         from . import ephemeral
         parts.append('<div class="file ephemeral-media">' + e(ephemeral.label(say, payload["ephemeral_media"])) + "</div>")
-    if kind == "media.saved" and isinstance(payload.get("media_sha256"), str):
+    if kind in ("media.saved", "secret_chat.file") and isinstance(payload.get("media_sha256"), str):
         digest, mime = payload["media_sha256"], payload.get("mime_type")
         parts.append('<div class="file">' + e(payload.get("original_name") or say("Saved file")) + " · " + e(mime or "—")
                      + " · " + e(size_text(payload.get("size"))) + "<br><code>" + e(digest) + "</code></div>")
@@ -1793,6 +1904,8 @@ def diff_html(old, new):
 
 
 def record_link(seq, linked):
+    if linked == "viewer":
+        return '<a href="#data" data-goto="r' + str(seq) + '">#' + str(seq) + "</a>"
     return ('<a href="#r' + str(seq) + '">#' + str(seq) + "</a>") if linked else "#" + str(seq)
 
 
@@ -1831,7 +1944,7 @@ def history_card(say, key, item, titles, linked=True):
             head += " · " + e(say("Edited")) + " " + when(times["edited_at"])
         if "sent_at" not in version and "edited_at" not in version and version.get("telegram_at"):
             head += " · " + e(say("Telegram time")) + " " + when(version["telegram_at"])
-        head += " · " + record_link(version["seq"], linked and not version.get("context_only"))
+        head += " · " + record_link(version["seq"], False if version.get("context_only") else linked)
         if version.get("context_only"):
             head += ' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
         if version.get("withheld"):
@@ -1864,7 +1977,7 @@ def history_card(say, key, item, titles, linked=True):
                 + '</div></div>')
         steps.append('<li class="gone-step"><div class="vhead"><span class="pill bad">'
                      + e(kind_label(say, gone["kind"])) + "</span> " + e(say("observed")) + " " + when(gone["observed_at"])
-                     + " · " + record_link(gone["seq"], linked and not gone.get("context_only"))
+                     + " · " + record_link(gone["seq"], False if gone.get("context_only") else linked)
                      + (' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
                         if gone.get("context_only") else '') + '</div><p class="gone">'
                      + e(timer_text(say, gone["kind"]) if gone.get("auto_delete") else
@@ -2086,6 +2199,12 @@ def gap_html(say, summary):
     return out + '<p class="hint">' + e(view["note"]) + "</p>"
 
 
+def coverage_notes(coverage):
+    return [[note.get("at"), "—" if note.get("chat_id") is None else str(note["chat_id"]),
+             " · ".join(str(note[key]) for key in ("reason", "operation", "error_type") if note.get(key)) or "—"]
+            for note in coverage.get("notes") or []]
+
+
 def coverage_section(say, number, coverage):
     if not coverage:
         return ""
@@ -2095,8 +2214,7 @@ def coverage_section(say, number, coverage):
     ids = [[e(c.get("title") or c["chat_id"]), num(c["observed_from"]) + " – " + num(c["observed_to"]), num(c["observed"]),
             num(c["not_observed"]), ranges_text(c.get("ranges") or [], c.get("ranges_total", 0))]
            for c in coverage["unobserved_ids"]]
-    out = section(number, "coverage", say("Coverage"),
-                  coverage.get("meaning") or say("Recorded observation intervals."))
+    out = section(number, "coverage", say("Coverage"), say(coverage.get("meaning") or "Recorded observation intervals."))
     out += coverage_figure(say, coverage)
     out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
                                                                     if periods else "<p>—</p>")
@@ -2109,12 +2227,52 @@ def coverage_section(say, number, coverage):
             + "</p>" + table([say("Chat"), say("Observed range"), say("Observed"), say("Not observed"),
                               say("Numbers not observed")], ids))
     out += gap_html(say, coverage.get("gap_summary"))
+    notes = coverage_notes(coverage)
+    if notes:
+        out += "<h3>" + e(say("Coverage notes")) + "</h3>" + table([say("Observed at"), say("Chat"), say("Reason")], [
+            [when(at), e(chat), e(reason)] for at, chat, reason in notes])
+        if coverage["notes_total"] > len(notes):
+            out += "<p>" + e(say("Showing {shown} of {total} coverage notes.", shown=len(notes),
+                                 total=coverage["notes_total"])) + "</p>"
     out += ("<h3>" + e(say("Verifier summary")) + '</h3><p class="lead">' + e(say("As verify.py prints it, in English."))
             + '</p><ul class="mono" style="font-size:13px">' + "".join("<li>" + e(line) + "</li>" for line in coverage_lines(coverage))
             + "</ul>")
-    if coverage["notes_total"]:
-        out += "<p>" + e(coverage["notes_total"]) + " chat-level coverage note(s), listed as coverage events below.</p>"
     return out + "</section>"
+
+
+TIMESTAMP_ROWS_SHOWN = 12
+
+
+def timestamp_row(say, anchor):
+    if anchor.get("kind") == "rfc3161":
+        signer = (anchor.get("signed") or {}).get("signer")
+        status = ('<span class="pill ok">' + e(say("Token valid")) + "</span> <small>" + e(signer) + "</small>"
+                  if case_assessment.verified_stamp(anchor, 2**63 - 1)
+                  else '<span class="pill warn">' + e(say("Checkpoint or timestamp awaiting verification")) + "</span>")
+        return [num(anchor.get("event_count")), e(anchor["service"]), "RFC 3161", when(anchor.get("time")), status]
+    if anchor.get("kind") == "opentimestamps":
+        pending = anchor.get("status") == "pending"
+        return [num(anchor.get("event_count")), e(anchor["service"]), "OpenTimestamps · Bitcoin", "—",
+                '<span class="pill ' + ("warn" if pending else "violet") + '">'
+                + e(say("Waiting for Bitcoin confirmation") if pending else say("In Bitcoin; confirm with ots verify"))
+                + "</span>"]
+    return [num(anchor.get("event_count")), e(anchor["service"]), "—", "—",
+            '<span class="pill bad">' + e(say("Unreadable")) + "</span>"]
+
+
+def timestamp_summary(anchors, rows):
+    groups = {}
+    for anchor, row in zip(anchors, rows):
+        groups.setdefault((row[1], row[2]), []).append((anchor, row))
+    summary = []
+    for (service, kind), items in groups.items():
+        latest = max(items, key=lambda item: (item[0].get("event_count") or 0, item[0].get("time") or ""))[1]
+        statuses = {}
+        for _, row in items:
+            statuses[row[4]] = statuses.get(row[4], 0) + 1
+        status = "<br>".join(label + " <small>× " + num(count) + "</small>" for label, count in statuses.items())
+        summary.append([service, kind, num(len(items)), latest[0], latest[3], status])
+    return summary
 
 
 def timestamps_section(say, number, anchors, archive_name, fp):
@@ -2128,27 +2286,23 @@ def timestamps_section(say, number, anchors, archive_name, fp):
     else:
         out += ('<div class="callout">' + e(say("No independent timestamps in this export: times come from the collector's "
                                                 "clock. Turn on Evidence mode to stamp checkpoints automatically.")) + "</div>")
-    rows = []
-    for anchor in anchors:
-        if anchor.get("kind") == "rfc3161":
-            signer = (anchor.get("signed") or {}).get("signer")
-            status = ('<span class="pill ok">' + e(say("Token valid")) + "</span> <small>" + e(signer) + "</small>"
-                      if case_assessment.verified_stamp(anchor, 2**63 - 1)
-                      else '<span class="pill warn">' + e(say("Checkpoint or timestamp awaiting verification")) + "</span>")
-            rows.append([num(anchor.get("event_count")), e(anchor["service"]), "RFC 3161", when(anchor.get("time")), status])
-        elif anchor.get("kind") == "opentimestamps":
-            pending = anchor.get("status") == "pending"
-            rows.append([num(anchor.get("event_count")), e(anchor["service"]), "OpenTimestamps · Bitcoin", "—",
-                         '<span class="pill ' + ("warn" if pending else "violet") + '">'
-                         + e(say("Waiting for Bitcoin confirmation") if pending else say("In Bitcoin; confirm with ots verify"))
-                         + "</span>"])
-        else:
-            rows.append([num(anchor.get("event_count")), e(anchor["service"]), "—", "—",
-                         '<span class="pill bad">' + e(say("Unreadable")) + "</span>"])
+    rows = [timestamp_row(say, anchor) for anchor in anchors]
+    columns = [say("Records covered"), say("Service"), say("Type"), say("Stamped at"), say("Status")]
+    shown = anchors
+    if len(rows) > TIMESTAMP_ROWS_SHOWN:
+        newest = max(anchor.get("event_count") or 0 for anchor in anchors)
+        shown = [anchor for anchor in anchors if (anchor.get("event_count") or 0) == newest]
+        out += table([say("Service"), say("Type"), say("Receipts"), say("Records covered"), say("Stamped at"), say("Status")],
+                     timestamp_summary(anchors, rows))
+        out += "<h3>" + e(say("Receipts for the latest checkpoint")) + "</h3>"
+        out += table(columns, [row for anchor, row in zip(anchors, rows) if anchor in shown])
+        out += ('<details class="layout-case-details"><summary>' + e(say("All receipts ({n})", n=len(rows)))
+                + "</summary>" + table(columns, rows) + "</details>")
+    elif rows:
+        out += table(columns, rows)
     if rows:
-        out += table([say("Records covered"), say("Service"), say("Type"), say("Stamped at"), say("Status")], rows)
-        tsr = next((a for a in anchors if a.get("kind") == "rfc3161"), None)
-        ots = next((a for a in anchors if a.get("kind") == "opentimestamps"), None)
+        tsr = next((a for a in reversed(shown) if a.get("kind") == "rfc3161"), None)
+        ots = next((a for a in reversed(shown) if a.get("kind") == "opentimestamps"), None)
         out += "<h3>" + e(say("How to check the timestamps")) + "</h3>"
         out += command("python verify.py " + archive_name + " --fingerprint " + fp + " --tsa-ca tsa-root.pem")
         if tsr:
@@ -2162,12 +2316,15 @@ def timestamps_section(say, number, anchors, archive_name, fp):
 
 
 def verify_section(say, number, archive_name, fp, report_name, archive, data_name=None):
-    data_name = data_name or ("events.jsonl" if report_name == "report.html" else "chat.json")
+    data_name = data_name or ("events.jsonl" if report_name.startswith("report.") else "chat.json")
     steps = ["<li>" + e(say("Get the signer's key fingerprint from a trusted channel, not from this archive.")) + "</li>"]
     if archive:
-        steps.append("<li>" + e(say("Check the whole archive: signature, file hashes, message numbers and this report's seal.")
-                                if report_name == "chat.html" else
-                                say("Check the whole archive: signatures, hashes, record chain and this report's seal."))
+        whole = (("Check the whole archive: signatures, file hashes and the signed manifest that lists this file. "
+                  "Its own seal is checked in the last step.") if report_name.endswith(".en.html") else
+                 say("Check the whole archive: signature, file hashes, message numbers and this report's seal.")
+                 if report_name.startswith("chat.") else
+                 say("Check the whole archive: signatures, hashes, record chain and this report's seal."))
+        steps.append("<li>" + e(whole)
                      + command("python verify.py " + archive_name + " --fingerprint " + fp) + "</li>")
         steps.append("<li>" + e(say("Without Python, check the file hashes (not the signature):"))
                      + command("sha256sum -c SHA256SUMS") + command("shasum -a 256 -c SHA256SUMS")
@@ -2278,7 +2435,8 @@ class EvidenceHTML:
                  (say("Organization"), e(self.options.get("organization"))), (say("Created"), when(self.created)),
                  (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
         categories = self.digest["categories"]
-        yield (hero(say, self.label + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None)
+        yield (hero(say, self.label + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None,
+                    translation_notice(say, (self.context.get("original") or {}).get("html")))
                + tiles([(say("Records"), num(self.shown_count), "accent", "layers"),
                         (say("Chats"), num(len(self.digest["chats"])), "accent", "telegram"),
                         (say("Messages"), num(categories["message"]), "accent", "message"),
@@ -2297,9 +2455,10 @@ class EvidenceHTML:
         self.account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         self.numbers = iter(range(1, 100))
-        yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
+        links = False if not self.options.get("timeline") else True if self.options.get("design") in report_layouts.DESIGNS             else "viewer" if self.data_kind else False
         yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
                                                  self.handover, self.filtered)).encode("utf-8")
+        yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
         analysis_sections = [report_charts.examination_html(self.material.get("examination"), say),
                              report_charts.html(self.material.get("analytics"), say)
                              + report_charts.metrics_html(self.material.get("processors"), say)]
@@ -2320,12 +2479,12 @@ class EvidenceHTML:
             yield board_report.html(self.context["case_board"], say).encode("utf-8")
         if self.changed and self.events_again and self.options.get("show_changes", True):
             yield changes_section(say, next(self.numbers), history_context(self.context, self.events_again, self.changed), len(self.changed),
-                                  self.digest["titles"], bool(self.options.get("timeline")), self.filtered).encode("utf-8")
+                                  self.digest["titles"], links, self.filtered).encode("utf-8")
         if self.options.get("show_indicators", True) and (self.digest.get("indicators") or {}).get("items"):
             yield indicators_section(say, next(self.numbers), self.digest["indicators"],
                                      ref_link(self.context.get("parts"), "records", "seq", "r")).encode("utf-8")
         if not self.filtered:
-            yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], bool(self.options.get("timeline"))).encode("utf-8")
+            yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], links).encode("utf-8")
 
     def render_integrity(self):
         say = self.say
@@ -2405,10 +2564,11 @@ class EvidenceHTML:
             (say("Collector clock against Telegram"), clocks_html(say, self.source_digest.get("clocks"))),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        yield verify_section(say, next(self.numbers), self.archive_name, self.fp, "report.html", self.archive,
+        own = self.context.get("report_file") or "report.html"
+        yield verify_section(say, next(self.numbers), self.archive_name, self.fp, own, self.archive,
                              "records.jsonl" if self.handover else "events.jsonl").encode("utf-8")
         if self.archive and self.files:
-            yield files_section(say, next(self.numbers), self.files, ("report.html", "README.txt", "SHA256SUMS", "manifest.json",
+            yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
                                                             "manifest.sig")).encode("utf-8")
         yield standards_section(say, next(self.numbers), "handover" if self.handover else "evidence",
                                 rfc3161_count(self.anchors, validated=True)).encode("utf-8")
@@ -2680,7 +2840,8 @@ class ChatHTML:
                  (say("Created"), when(self.created)), (say("Report ID"), '<span class="mono">' + e(self.report_id[:8]) + "</span>")]
         self.ids = self.context.get("message_ids") or {}
         absent = [(say("Numbers absent"), num(self.ids["missing"]), "bad")] if self.ids.get("numbered_per_chat") else []
-        yield (hero(say, say("Chat export") + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None)
+        yield (hero(say, say("Chat export") + " · " + say("Signed"), self.title, facts, self.fp, self.sign is not None,
+                    translation_notice(say, (self.context.get("original") or {}).get("html")))
                + tiles([(say("Messages"), num(self.meta.get("message_count")), "accent", "message"),
                         (say("Participants"), num(len(self.people)), "violet", "users"),
                         (say("With media"), num(self.stats["media"]), "violet", "file"),
@@ -2791,8 +2952,9 @@ class ChatHTML:
             (say("Collector clock against Telegram"), clocks_html(say, read["clock_checks"], "Not recorded in this export")),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
-        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", self.fp, "chat.html", True).encode("utf-8")
-        yield files_section(say, next(self.numbers), self.files, ("chat.html", "README.txt", "SHA256SUMS", "manifest.json",
+        own = self.context.get("report_file") or "chat.html"
+        yield verify_section(say, next(self.numbers), "tgwitness-chat-export.zip", self.fp, own, True).encode("utf-8")
+        yield files_section(say, next(self.numbers), self.files, (own, "README.txt", "SHA256SUMS", "manifest.json",
                                                         "manifest.sig")).encode("utf-8")
         yield standards_section(say, next(self.numbers), "chat").encode("utf-8")
         yield limits_section(say, next(self.numbers), self.context.get("limits") or []).encode("utf-8")

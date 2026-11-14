@@ -4,12 +4,14 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 
+from . import report_profile
 
-DESIGNS = frozenset(("reading_series", "ledger_margin"))
-DESIGN_NAMES = {"reading_series": "Evidence Reading Series", "ledger_margin": "Ledger & Margin"}
+
+DESIGNS = frozenset(("reading_series", "ledger_margin", "profile_overview"))
+DESIGN_NAMES = {"reading_series": "Evidence Reading Series", "ledger_margin": "Ledger & Margin", "profile_overview": "Profile overview"}
 SSR_LIMIT = 500
 SSR_BYTES = 8 * 1024 * 1024
-CSS = Path(__file__).with_name("report_layouts.css").read_text(encoding="utf-8")
+CSS = Path(__file__).with_name("report_layouts.css").read_text(encoding="utf-8") + report_profile.CSS
 
 
 @dataclass(frozen=True)
@@ -20,6 +22,19 @@ class Chapter:
 
 
 def chapter_plan(design, kind="journal"):
+    if design == "profile_overview":
+        return (
+            Chapter("activity", "Activity", ("analytics",)),
+            Chapter("profiles", "Observed profiles", ("profiles",)),
+            Chapter("directory", "Chats", ("directory", "participants")),
+            Chapter("histories", "Changes", ("histories", "journal_changes")),
+            Chapter("journal", "Records" if kind != "chat" else "Messages", ("journal",)),
+            Chapter("case", "Findings & assessment", ("case", "brief", "examination", "assessment", "case_board")),
+            Chapter("scope", "Scope & coverage", ("selection", "minimisation", "source", "coverage", "message_numbers")),
+            Chapter("artifacts", "Files, relationships & indicators", ("relations", "files", "indicators", "admin_log", "actions")),
+            Chapter("assurance", "Custody, integrity & verification", ("integrity", "timestamps", "custody", "verify", "standards", "seal")),
+            Chapter("limitations", "Reading this record", ("limitations",)),
+        )
     if design == "reading_series":
         return (
             Chapter("case", "Case & examination question", ("case", "brief")),
@@ -162,7 +177,8 @@ def journal_replacements(event_factory, context, say, options, total=None, viewe
 
     def sample():
         if not cache:
-            rows, limited = bounded_records(event_factory(), min(SSR_LIMIT, options.get("part_size", SSR_LIMIT)))
+            limit = 5000 if options.get("design") == "profile_overview" else SSR_LIMIT
+            rows, limited = bounded_records(event_factory(), min(limit, options.get("part_size", limit)))
             cache.append((rows, limited or (type(total) is int and total > len(rows))))
         return cache[0]
 
@@ -217,7 +233,18 @@ def journal_replacements(event_factory, context, say, options, total=None, viewe
             yield '<p>' + escape(say("No reply or forward metadata was recorded in this reading copy.")) + '</p>'
         yield '</section>'
 
-    return {"journal": journal, "directory": directory, "relations": relations}
+    replacements = {"journal": journal, "directory": directory, "relations": relations}
+    if options.get("design") == "profile_overview":
+        profile_blocks = []
+
+        def profile_block(key):
+            if not profile_blocks:
+                digest = context.get("report_digest") or context.get("digest") or {}
+                profile_blocks.append(report_profile.directories(sample()[0], digest.get("titles") or {}, say, basis()))
+            yield profile_blocks[0][key]
+
+        replacements.update({"directory": lambda: profile_block("directory"), "profiles": lambda: profile_block("profiles")})
+    return replacements
 
 
 def chat_replacements(record_factory, context, meta, say, options):
@@ -392,6 +419,9 @@ def _body(blocks, design, say, kind, replacements):
     if extras:
         chapters.append(Chapter("additional", "Additional report details", ("additional",)))
         sections["additional"] = extras
+    if design == "profile_overview":
+        yield from report_profile.body(front, sections, chapters, replacements, say, kind == "preview")
+        return
     if design == "reading_series":
         yield '<div class="reading-series-shell"><aside class="reading-series-rail"><b>TgWitness</b>'
         yield navigation(chapters, say)
@@ -455,6 +485,6 @@ def text_keys():
     keys = [node.args[0].value for node in ast.walk(source)
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + list(FIELD_LABELS.values()) + list(DESIGN_NAMES.values())
+    return list(dict.fromkeys(keys + report_profile.text_keys() + list(FIELD_LABELS.values()) + list(DESIGN_NAMES.values())
                              + ["Additional report details"] + [chapter.title for design in DESIGNS
                              for kind in ("journal", "chat") for chapter in chapter_plan(design, kind)]))

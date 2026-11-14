@@ -34,7 +34,7 @@ Builds stay local. See [publishing](../docs/internal/PUBLISHING.md) and
 | `python -m ruff check .` | Python static checks |
 
 Regression tests, fixtures and runners are maintained in the private validation
-workspace. Preserve them when publishing. See the [validation map](../docs/AGENT-GUIDE.md#validation)
+workspace. Preserve them when publishing. See the [validation map](../docs/CODE-MAP.md#validation)
 and [qualification record](../docs/STATUS.md) for the required scope and remaining limits.
 
 ## Docs and utilities

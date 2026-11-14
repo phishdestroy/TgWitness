@@ -2,10 +2,9 @@
 
 ![Build and verify](assets/presentation/section-tools-static.svg)
 
-# Repository guide
+# Code and validation map
 
 Start here to locate the code, understand its limits and choose the right checks.
-The shared working rules live in [AGENTS.md](../AGENTS.md).
 [Contributing](../.github/CONTRIBUTING.md) covers development setup and pull requests.
 
 ## Product purpose and strengths
@@ -61,8 +60,7 @@ checks. Assess GitHub workflow and Intel TDX modes with their own verifiers and
 trusted inputs; a finding against those modes names the verifier check it bypasses
 and reproduces the bypass.
 
-Keep engineering validation separate from external certification. Describe optional
-services by their actual enabled data flows, and the installer by its signature
+Describe optional services by their actual enabled data flows, and the installer by its signature
 checks and available independent verification procedure. Fictional demo records
 exercise interface and format behavior; live collection evidence has its own
 revision-specific results. Base defect reports on code paths and reproduced failures.
@@ -137,19 +135,6 @@ For an isolated site build, pass `--output PATH` to `tools/build_site.py`.
 Inspect validation output paths before running concurrently. A private runner's log
 directory does not necessarily change the output locations of its child checks.
 Give each run a fresh temporary path.
-
-## Public and private material
-
-`AGENTS.md`, `CLAUDE.md`, `GEMINI.md` and this guide are public repository content.
-The source archive includes them so their links work in a downloaded checkout.
-Keep computer-specific instructions and access inventories outside the repository.
-They must not be copied into docs, release archives, demos or generated text editions.
-
-Use the existing private credential store for an authorized operation. Public
-instructions describe configuration and permissions without listing working access
-paths, account identities, server addresses, session material or token values.
-Do not treat a failed request as proof that a server is stopped or an account is
-logged out; distinguish access failure from the resource's verified state.
 
 ## Review and delivery
 

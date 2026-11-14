@@ -68,7 +68,7 @@ reported as their own event types.
 
 ### Choose a design
 
-Eight page designs are available for journal and single-chat HTML and signed PDF
+Nine page designs are available for journal and single-chat HTML and signed PDF
 reports. They use the same records and calculations, with different covers,
 typography, chapter headings, tables and spacing.
 
@@ -82,6 +82,7 @@ typography, chapter headings, tables and spacing.
 | Overview | A panoramic cover, generous spacing and prominent summary figures. |
 | Reading series | A section rail and grouped chapters for findings, scope, changes and the observation journal. |
 | Ledger & margin | Numbered chapters with a wide margin, exact chart tables and a separate message transcript. |
+| Profile overview | Key figures, observed profiles and searchable sections with links to chat records. |
 
 The design is saved per workspace and recorded in the signed export manifest.
 HTML works offline, supports light and dark themes, and adapts to narrow screens
@@ -139,7 +140,14 @@ from the ZIP. Disabled chart series are omitted from the analytical JSON; use a
 minimized export to restrict disclosure of source records.
 
 Data-selection filters apply to journal reports; account and sharing exports retain
-their own acquisition and disclosure scope.
+their own acquisition and disclosure scope. A selection can name whole chats, authors,
+UTC dates, record types and individual messages. Messages picked in a chat with
+**Select** arrive as **Selected messages**; the report then covers the message records
+of those messages and of any chat selected in full, and lists the chosen message
+numbers under **Selected data**. Missing message numbers and their neighbouring
+records are reported only for chats selected in full. **Add message numbers** under
+the chat list adds messages without opening the chat: one line per chat with the chat
+ID, a colon and the message numbers, or `t.me/c/…` links to single messages.
 
 Shared design/chart preferences are frozen into new chat/account exports and account
 sharing previews. Account/sharing language and privacy settings remain independent;
@@ -195,7 +203,7 @@ computation can be repeated from `events.jsonl` with `tgwitness.metrics.run`.
 including in filtered reports. Daily and monthly tables show recent rows, service-share
 tables rank chats by saved message count. Totals cover every row.
 
-From a source checkout, build all eight designs listed above from the same fictional journal:
+From a source checkout, build all nine designs listed above from the same fictional journal:
 
 ```sh
 python tools/build_report_styles.py --output test-results/report-styles

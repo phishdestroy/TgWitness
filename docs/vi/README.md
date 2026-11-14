@@ -481,4 +481,4 @@ Quan điểm của các tác giả và thông báo cho nhà vận hành, bằng 
   <a href="../../.github/SECURITY.md"><b>Báo cáo lỗ hổng</b></a>
 </p>
 
-[Chỉ mục dự án dạng máy đọc được](../../llms.txt) · [Sổ tay dạng văn bản đầy đủ](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Quy tắc kho mã dành cho agent](../../AGENTS.md)
+[Chỉ mục dự án dạng máy đọc được](../../llms.txt) · [Sổ tay dạng văn bản đầy đủ](https://phishdestroy.github.io/TgWitness/llms-full.txt)

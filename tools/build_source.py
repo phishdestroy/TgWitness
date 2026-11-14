@@ -16,7 +16,7 @@ CONTAINER_INPUTS = (
     "deploy/media-worker/sources.lock.json",
 )
 FILES = [
-    "AGENTS.md", "CLAUDE.md", "GEMINI.md", "llms.txt",
+    "llms.txt",
     "addons/README.md", "addons/capture/config/README.md",
     "addons/capture/deploy/README.md",
     "examples/README.md", "integrations/README.md",
@@ -132,6 +132,8 @@ PRIVATE_VALIDATION_TOOLS = {
 def is_public_file(path, directory):
     relative = path.relative_to(directory)
     parts = tuple(part.casefold() for part in relative.parts)
+    if directory.name == "docs" and relative.as_posix() == "AGENT-GUIDE.md":
+        return False
     if directory.name == "tools" and (parts[0] in {"fixtures", "tdx", "tsa"} or parts[-1] in PRIVATE_VALIDATION_TOOLS
                                       or parts[-1].startswith(("test_", "check_"))):
         return False

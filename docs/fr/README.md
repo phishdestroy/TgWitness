@@ -481,4 +481,4 @@ La position des auteurs et l'avis aux opérateurs, en français :
   <a href="../../.github/SECURITY.md"><b>Signaler une vulnérabilité</b></a>
 </p>
 
-[Index du projet lisible par machine](../../llms.txt) · [Manuel complet au format texte](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Règles du dépôt pour les agents](../../AGENTS.md)
+[Index du projet lisible par machine](../../llms.txt) · [Manuel complet au format texte](https://phishdestroy.github.io/TgWitness/llms-full.txt)

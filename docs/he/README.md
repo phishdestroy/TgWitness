@@ -481,4 +481,4 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
   <a href="../../.github/SECURITY.md"><b>דיווח על פגיעות</b></a>
 </p>
 
-[אינדקס הפרויקט הקריא למכונה](../../llms.txt) · [המדריך הטקסטואלי המלא](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [כללי המאגר לסוכנים](../../AGENTS.md)
+[אינדקס הפרויקט הקריא למכונה](../../llms.txt) · [המדריך הטקסטואלי המלא](https://phishdestroy.github.io/TgWitness/llms-full.txt)

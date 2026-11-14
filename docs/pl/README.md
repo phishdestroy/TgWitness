@@ -481,4 +481,4 @@ Stanowisko autorów i informacja dla operatorów po polsku:
   <a href="../../.github/SECURITY.md"><b>Zgłoś podatność</b></a>
 </p>
 
-[Indeks projektu do odczytu maszynowego](../../llms.txt) · [Pełny podręcznik w formie tekstu](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Zasady repozytorium dla agentów](../../AGENTS.md)
+[Indeks projektu do odczytu maszynowego](../../llms.txt) · [Pełny podręcznik w formie tekstu](https://phishdestroy.github.io/TgWitness/llms-full.txt)

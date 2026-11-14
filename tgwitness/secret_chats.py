@@ -7,19 +7,16 @@ import shutil
 import time
 
 from telethon import utils
+from telethon.errors import FloodWaitError
 from telethon.tl import types
 from telethon.tl.tlobject import TLObject
 
+from . import secret_module
 from .monitoring import capture_settings
 from .store import canonical
 from .workers import complete_in_thread
 
-try:
-    import telethon_secret_chat as library
-    from telethon_secret_chat.schema import secret_tl as library_tl
-except ImportError:
-    library = library_tl = None
-
+library = library_tl = VaultStorage = None
 LOG = logging.getLogger("tgwitness.secret_chats")
 SETTING = "secret_chats"
 STATE = "secret_chats"
@@ -29,13 +26,39 @@ HIDDEN = {"key", "iv"}
 QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", "DecryptedMessageActionCommitKey",
          "DecryptedMessageActionAbortKey", "DecryptedMessageActionNoop", "DecryptedMessageActionNotifyLayer",
          "DecryptedMessageActionResend"}
-UNAVAILABLE = ("Pseudo-secret needs the optional package kiaro-telethon-secret-chat. "
-               "Install TgWitness with the secret-chats extra and restart the panel.")
+UNAVAILABLE = "Pseudo-secret needs its protocol module, which is not installed yet."
 SAME = ("direction", "seq_no", "text", "ttl", "reply_to_random_id", "entities", "media")
 
 
 def available():
     return library is not None
+
+
+def bind():
+    global library, library_tl, VaultStorage
+    try:
+        import telethon_secret_chat as module
+        from telethon_secret_chat.schema import secret_tl
+    except ImportError:
+        return False
+
+    class Storage(module.MemoryStorage):
+
+        def __init__(self, vault):
+            super().__init__()
+            self.vault = vault
+            saved = vault.read(STATE)
+            if saved:
+                state = decode(saved)
+                if not all(isinstance(state.get(group), dict) for group in ("chats", "out", "in")):
+                    raise ValueError("The saved secret-chat state is damaged.")
+                self._state = state
+
+        def _write(self):
+            self.vault.save(STATE, encode(self._state))
+
+    library, library_tl, VaultStorage = module, secret_tl, Storage
+    return True
 
 
 def of(collector):
@@ -138,21 +161,7 @@ def retain_file(temporary, media_root):
     return digest, size, repaired
 
 
-if library is not None:
-    class VaultStorage(library.MemoryStorage):
-
-        def __init__(self, vault):
-            super().__init__()
-            self.vault = vault
-            saved = vault.read(STATE)
-            if saved:
-                state = decode(saved)
-                if not all(isinstance(state.get(group), dict) for group in ("chats", "out", "in")):
-                    raise ValueError("The saved secret-chat state is damaged.")
-                self._state = state
-
-        def _write(self):
-            self.vault.save(STATE, encode(self._state))
+bind()
 
 
 class SecretChats:
@@ -246,7 +255,7 @@ class SecretChats:
             raise ValueError(UNAVAILABLE)
         if not settings(self.store)["enabled"]:
             raise ValueError("Turn on pseudo-secret for this account first.")
-        if self.manager is None:
+        if self.manager is None or self.client is None or not self.client.is_connected():
             raise ValueError("Connect this account to Telegram first.")
         return self.manager
 
@@ -413,10 +422,13 @@ class SecretChats:
         return True
 
     def unaffordable(self, reference, media_root):
+        capture = capture_settings(self.store)
+        if not capture["download_media"]:
+            return "attachment downloads are off"
         size = getattr(reference, "size", None)
         if not isinstance(size, int):
             size = None
-        limit = capture_settings(self.store)["max_media_mb"] * 1024**2
+        limit = capture["max_media_mb"] * 1024**2
         if size is not None and size > limit:
             return "larger than the media size limit"
         free = shutil.disk_usage(media_root).free
@@ -443,7 +455,10 @@ class SecretChats:
                                             "reason": refused,
                                             "meaning": "The encrypted file stays queued; nothing was downloaded."})
                 return
-            await self.manager.save_file(reference, temporary)
+            size = getattr(reference, "size", 0)
+            size = max(0, size) if isinstance(size, int) else 0
+            timeout = self.collector.param("media_timeout_seconds") + size // (self.collector.param("media_min_speed_kbps") * 1024)
+            await asyncio.wait_for(self.manager.save_file(reference, temporary), timeout)
             digest, size, repaired = await complete_in_thread(retain_file, temporary, media_root)
             self.note("file", {"secret_chat_id": item["secret_chat_id"], "random_id": item["random_id"],
                                **({"message_event": message} if message else {}),
@@ -532,8 +547,14 @@ class SecretChats:
                 "created_at": chat.created_at, "closed_reason": chat.closed_reason}
 
     def view(self, *, before=None, after=None):
-        connected = self.manager is not None
-        chats = [self.snapshot(chat) for chat in self.manager.list()] if connected else []
+        from . import interactions
+        interaction_problem = None
+        try:
+            interactions.permitted(self.collector)
+        except (ValueError, FloodWaitError) as exc:
+            interaction_problem = str(exc)
+        connected = self.manager is not None and self.client is not None and self.client.is_connected()
+        chats = [self.snapshot(chat) for chat in self.manager.list()] if self.manager is not None else []
         if before is not None and after is not None:
             raise ValueError("Choose an older or newer history page, not both.")
         records = self.store.events(kind="secret_chat.", limit=2001, before=before, after=after)
@@ -544,6 +565,9 @@ class SecretChats:
         if after is None:
             records.reverse()
         return {"available": available(), "settings": settings(self.store), "connected": connected, "error": self.error,
+                "has_session": bool((self.collector.vault.read("credentials") or {}).get("session")),
+                "interaction_problem": interaction_problem,
+                "module": secret_module.describe(),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
                 "records": display(records),
                 "next_before": records[0]["seq"] if more and after is None else None,

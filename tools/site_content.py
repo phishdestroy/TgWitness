@@ -54,6 +54,7 @@ REFERENCE = {
     "evidence": ("Evidence format", "Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.", "evidence zip manifest events jsonl verify dossier replica s3", "docs/EVIDENCE.md"),
     "witness": ("Independent witness", "Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.", "witness bot channel checkpoint tgw1 verify continuity", "docs/WITNESS.md"),
     "timestamp": ("Timestamps", "RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.", "rfc 3161 tsa timestamp authority nonce checkpoint", "docs/TIMESTAMP.md"),
+    "translation": ("Translating reports for court", "Which file is the original, what to file with a certified translation and the terms translators keep.", "translation certified sworn translator court english original terms glossary", "docs/TRANSLATION.md"),
     "security": ("Security and data handling", "Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.", "security threat model token vault fernet encryption report vulnerability", "docs/SECURITY-MODEL.md"),
     "architecture": ("Architecture", "Components of the collector, panel, journal, workers and witness, and how data moves between them.", "architecture components journal workers sqlite telethon fastapi", "docs/ARCHITECTURE.md"),
     "verification": ("What has been tested", "The live Telegram test, automated checks, browser checks and the next qualification runs.", "tests verification live test coverage limitations", "docs/VERIFICATION.md"),
@@ -71,7 +72,7 @@ REFERENCE_GROUPS = (
     ("Set up", ("overview", "quickstart", "installation", "settings", "accounts", "access", "connection", "deployment", "high-assurance")),
     ("Collect", ("panel", "collection", "secret-chats", "history", "operations", "investigation", "features")),
     ("Archive & integrations", ("case-board", "analysis", "search", "mcp", "cli", "media-analysis", "webhooks", "showcase")),
-    ("Evidence", ("how-it-works", "case-reports", "account-export", "evidence", "witness", "timestamp", "storage")),
+    ("Evidence", ("how-it-works", "case-reports", "account-export", "evidence", "translation", "witness", "timestamp", "storage")),
     ("Security & project", ("security", "architecture", "verification", "license", "notice", "changelog")),
 )
 

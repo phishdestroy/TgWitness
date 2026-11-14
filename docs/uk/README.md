@@ -481,4 +481,4 @@ TgWitness записує вміст, доставлений до підключ�
   <a href="../../.github/SECURITY.md"><b>Повідомити про вразливість</b></a>
 </p>
 
-[Машинозчитуваний індекс проєкту](../../llms.txt) · [Повний посібник одним текстом](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [Правила репозиторію для агентів](../../AGENTS.md)
+[Машинозчитуваний індекс проєкту](../../llms.txt) · [Повний посібник одним текстом](https://phishdestroy.github.io/TgWitness/llms-full.txt)

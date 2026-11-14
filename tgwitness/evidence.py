@@ -167,8 +167,12 @@ class BundleSizeLimit(ValueError):
     pass
 
 
+class EmptyReport(ValueError):
+    pass
+
+
 def export_file(store, vault, fmt, options=None, *, include_board=True, compact=False, output_stream=None,
-                max_uncompressed_bytes=None):
+                max_uncompressed_bytes=None, require_records=False):
     if fmt not in ("jsonl", "csv", "html", "json", "pdf", "zip"):
         raise ValueError("Unsupported export format")
     if compact and fmt != "zip":
@@ -244,7 +248,12 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 context["source_events"] = snapshot.events
             if not compact and (selection.enabled or selection.id_gaps) and fmt in ("html", "json", "pdf", "zip"):
                 selected = report.report_selection.analyze(snapshot, selection, preview_limit=0, scratch_root=directory)
-                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps")}
+                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps", "messages_not_found")}
+
+            if require_records and fmt in ("html", "json", "pdf"):
+                count = context["selection"]["counts"]["selected_records"] if "selection" in context else result["events"]
+                if not count:
+                    raise EmptyReport("No records match these choices. Change the filters and build the preview again.")
 
             def chunks(format):
                 events = snapshot.events()
@@ -369,6 +378,12 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                     write_member("PACKAGING.json", [canonical(packaging)])
                     write_member("index.html", [compact_index(result["events"])])
                 else:
+                    english_original(context, write_member, hashes, "report",
+                                     lambda english: pdf_report.report_pdf(
+                                         report.report_data(report_events, coverage, english), english, vault,
+                                         report_events()),
+                                     lambda english: html_chunks(report_events(), coverage, english))
+                    context["files"] = dict(hashes)
                     data = report.report_data(report_events, coverage, context)
                     write_member("report.json", [report.sealed_json(data, context)])
                     write_pdf(write_member, "report.pdf", lambda: pdf_report.report_pdf(
@@ -445,6 +460,21 @@ def write_pdf(write_member, name, render):
     return True
 
 
+def english_original(context, write_member, hashes, prefix, render_pdf, render_html):
+    if report.Words(context["options"].get("language", "en")).language == "en":
+        return None
+    english = {**context, "options": {**context["options"], "language": "en"}, "report_file": prefix + ".en.html",
+               "files": dict(hashes)}
+    original = {"language": "en"}
+    if write_pdf(write_member, prefix + ".en.pdf", lambda: render_pdf(english)):
+        original["pdf"] = prefix + ".en.pdf"
+    english["files"] = dict(hashes)
+    write_member(prefix + ".en.html", render_html(english))
+    original["html"] = prefix + ".en.html"
+    context["original"] = original
+    return original
+
+
 def report_entry(context, options, file="report.html"):
     entry = {"id": context["report_id"], "file": file, "language": options["language"], "sealed": True,
              "design": report.report_design.normalized(options.get("design")),
@@ -457,6 +487,8 @@ def report_entry(context, options, file="report.html"):
     for pdf in ("report.pdf", "chat.pdf"):
         if pdf in context.get("files", {}):
             entry["pdf"] = pdf
+    if context.get("original"):
+        entry["original"] = dict(context["original"])
     if context.get("parts"):
         entry["parts"] = [{k: part[k] for k in ("file", "from", "to", "count")} for part in context["parts"]]
     return entry

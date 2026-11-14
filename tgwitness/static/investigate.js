@@ -1006,7 +1006,7 @@
     paste.rows = 3; paste.maxLength = 100000;
     paste.placeholder = tr('One per line. Prefix with a kind to mix them, for example wallet:bc1…');
     return section('flag', item.name,
-      node('p', 'hint', [item.note, item.chat_ids?.length ? tr('{n} chats', {n: item.chat_ids.length}) : tr('all chats'),
+      node('p', 'hint', [item.note, item.chat_ids?.length ? trn('{n} chat', '{n} chats', item.chat_ids.length) : tr('all chats'),
         item.alert ? tr('alerts on') : tr('alerts off'), item.excerpts ? tr('excerpts on') : tr('excerpts off')]
         .filter(Boolean).join(' · ')),
       item.entries.length ? entries : node('p', 'hint', tr('No entries yet.')), form,
@@ -1096,7 +1096,7 @@
 
   function fillCover(box) {
     box.replaceChildren(
-      el('div', 'doc-callout', icon('lock'), node('p', '', tr('What is recorded here goes into the undercover activity record: who the account pretends to be, under which authority, and who sent each message. TgWitness records and flags; it does not decide whether an authorisation was needed.'))),
+      el('div', 'doc-callout', icon('lock'), node('p', '', tr('What is recorded here goes into the undercover activity record: who the account pretends to be, under which authority, and who sent each message.'))),
       personaSection(box), authoritySection(box),
       el('div', 'doc-row-actions', current ? button('Open the undercover record', 'secondary', () => document_('undercover'), 'doc') : '',
         button('Reload', 'ghost', () => reloadCover(box), 'refresh')));
@@ -1157,7 +1157,7 @@
         el('div', 'doc-goal-main', node('span', 'doc-goal-text', item.reference + ' · ' + tr(names[item.kind] || item.kind)),
           node('span', 'doc-sub', [item.authority, (item.valid_from || '').slice(0, 16).replace('T', ' ') + ' – '
             + (item.valid_to ? item.valid_to.slice(0, 16).replace('T', ' ') : tr('open')),
-            item.chat_ids?.length ? tr('{n} chats', {n: item.chat_ids.length}) : tr('all chats'),
+            item.chat_ids?.length ? trn('{n} chat', '{n} chats', item.chat_ids.length) : tr('all chats'),
             item.withdrawn_at ? tr('withdrawn {at}', {at: item.withdrawn_at.slice(0, 16).replace('T', ' ')}) : ''].filter(Boolean).join(' · ')),
           item.notes ? node('p', 'doc-text', item.notes) : '',
           item.document_sha256 ? node('span', 'doc-sub', 'SHA-256 ' + item.document_sha256.slice(0, 16) + '…') : ''),
@@ -1782,7 +1782,7 @@
       meter.firstChild.style.width = progress + '%';
       const card = el('button', 'doc-session', el('span', 'doc-session-main', node('strong', '', item.title),
         node('span', 'doc-sub', item.chat_title + ' · ' + tr('{n} of {total} goals', {n: item.obtained, total: item.goals})
-          + ' · ' + tr('{n} messages', {n: item.steps})), meter), icon('next'));
+          + ' · ' + trn('{n} message', '{n} messages', item.steps)), meter), icon('next'));
       card.type = 'button'; card.classList.add('doc-plan-card');
       card.addEventListener('click', () => busy(card, () => openPlan(item.id)));
       list.append(el('li', '', card));
@@ -2171,6 +2171,9 @@
   function insightsView(result) {
     const hours = [...Array(24).keys()].map(String), parts = [];
     const c = result.counts, r = result.replies, d = result.deletions;
+    if (!c.messages && !c.deletions && !result.presence.some(person => person.online.some(Boolean))) return [empty('chart',
+      tr('Nothing recorded in this chat yet'),
+      tr('Insights read the journal: messages observed live and history loaded into TgWitness. Signed exports are separate files and are not read here. Load the chat history or keep observation running, then open this chat again.'))];
     const stats = [[c.messages, 'messages'], [c.incoming, 'received'], [c.outgoing, 'sent'], [c.deletions, 'deletion notices'],
       [c.own_deletions, 'own messages deleted']];
     parts.push(el('div', 'doc-stats', ...stats.map(([value, label]) => el('div', 'doc-stat', node('b', '', String(value ?? 0)), node('span', '', tr(label))))));
@@ -2220,8 +2223,12 @@
       Object.assign(analysisState, {chat: chat.value, zone: zone.value, data: result});
       out.replaceChildren(...insightsView(result));
     }, 'chart');
+    chat.addEventListener('change', () => go.click());
+    zone.addEventListener('change', () => go.click());
     out.replaceChildren(...(analysisState.data ? insightsView(analysisState.data)
-      : [empty('chart', tr('Choose a chat'), tr('Reply times, activity hours, deleted messages and presence for one chat.'))]));
+      : [empty('chart', targets.length ? tr('Loading…') : tr('No chats selected'), targets.length ? ''
+        : tr('Select chats in Sources. Insights show reply times, activity hours, deleted messages and presence for one chat.'))]));
+    if (!analysisState.data && targets.length) queueMicrotask(() => go.click());
     return [el('div', 'doc-toolbar', chat, zone, go), out];
   }
 
@@ -2305,5 +2312,15 @@
     toggle.hidden = !allowed();
     if (toggle.hidden && open()) hide();
   }
+  window.TgWitnessDocumentation = {openAccount: async () => {
+    mount();
+    if (!allowed() || !may('account')) return false;
+    if (owner !== key()) {owner = key(); reset();}
+    if (open() && drawer.querySelector('.doc-mark')) return false;
+    current = data = null; sessionTab = 'timeline'; homeTab = 'account';
+    await show();
+    drawer.querySelector('.doc-top button:last-child')?.focus();
+    return true;
+  }};
   document.addEventListener('DOMContentLoaded', () => {watch(); setInterval(watch, 2000);});
 })();

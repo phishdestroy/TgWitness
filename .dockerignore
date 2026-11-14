@@ -60,3 +60,7 @@ build
 **/witness-token.txt
 .venv-capture
 **/proxy-config
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+docs/AGENT-GUIDE.md

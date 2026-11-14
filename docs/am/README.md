@@ -481,4 +481,4 @@ TgWitness ወደ ተገናኘው የTelegram መለያ የደረሰውን ይዘ
   <a href="../../.github/SECURITY.md"><b>ተጋላጭነትን ሪፖርት ያድርጉ</b></a>
 </p>
 
-[በማሽን የሚነበብ የፕሮጀክት ማውጫ](../../llms.txt) · [ሙሉ የጽሑፍ መመሪያ መጽሐፍ](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [ለወኪሎች የሪፖዚቶሪ ደንቦች](../../AGENTS.md)
+[በማሽን የሚነበብ የፕሮጀክት ማውጫ](../../llms.txt) · [ሙሉ የጽሑፍ መመሪያ መጽሐፍ](https://phishdestroy.github.io/TgWitness/llms-full.txt)

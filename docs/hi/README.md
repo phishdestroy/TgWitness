@@ -481,4 +481,4 @@ TgWitness जुड़े हुए Telegram खाते तक पहुँच
   <a href="../../.github/SECURITY.md"><b>कमज़ोरी की रिपोर्ट करें</b></a>
 </p>
 
-[मशीन-पठनीय प्रोजेक्ट इंडेक्स](../../llms.txt) · [पूरी टेक्स्ट हैंडबुक](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [एजेंटों के लिए रिपॉज़िटरी नियम](../../AGENTS.md)
+[मशीन-पठनीय प्रोजेक्ट इंडेक्स](../../llms.txt) · [पूरी टेक्स्ट हैंडबुक](https://phishdestroy.github.io/TgWitness/llms-full.txt)

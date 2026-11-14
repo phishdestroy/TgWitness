@@ -17,6 +17,8 @@ copy inside an archive is a convenience ([manifest and checkpoints](EVIDENCE.md#
 The verifier is one file, [`tgwitness/verify.py`](../tgwitness/verify.py), assembled from
 [`tgwitness/verifier/`](../tgwitness/verifier/README.md);
 `python tools/build_standalone_verifier.py --check` detects drift between the two.
+The journal and signature checks live in `common`, `chain` and `journal` (22 KB together);
+about a third of `verify.py` is the compressed translation data from `languages`.
 It needs Python 3.11+ and `cryptography`.
 
 <details>
@@ -34,6 +36,7 @@ It needs Python 3.11+ and `cryptography`.
 - [Verifying the installer](#verifying-the-installer)
 - [Dates of the published measurements](#dates-of-the-published-measurements)
 - [Development history](#development-history)
+- [Tests and continuous integration](#tests-and-continuous-integration)
 
 </details>
 
@@ -370,3 +373,26 @@ private ([validation record](VERIFICATION.md)).
 
 **Result.** The repository's creation date and commit count describe this repository; the
 software in it is older.
+
+## Tests and continuous integration
+
+- The regression suite has 126 test modules with about 950 test functions. It runs in a
+  private validation environment with synthetic accounts and a fake Telegram transport.
+  Test files are excluded from Git and from source archives
+  ([`.gitignore`](../.gitignore), [`tools/build_source.py`](../tools/build_source.py)).
+  Live runs are recorded separately in the [validation record](VERIFICATION.md).
+- [Checks](../.github/workflows/checks.yml): lint, a pinned dependency audit, standalone
+  verifier agreement, wheel installation and empty-workspace readiness. The full platform
+  run covers Linux, Windows and macOS with Python 3.11–3.13.
+- [PR checks](../.github/workflows/pr-check.yml) repeat lint, the dependency audit and the
+  installed-package readiness check, and build the public site.
+- [Installer acceptance](../.github/workflows/installer-acceptance.yml) verifies the signed
+  installer artifacts and the source revision, then installs and checks the wheel.
+- [Sealed checks](../.github/workflows/sealed-checks.yml) build the sealed collector image
+  from its pinned revision and import it without networking.
+- [Security audit](../.github/workflows/security-audit.yml) runs pip-audit on the pinned lock
+  files, CodeQL for Python, JavaScript and workflows, and Trivy on the container images.
+- [Fuzzing](../.github/workflows/fuzz.yml) exercises the verifier's archive and JSON parsing.
+
+**Result.** The public workflows and their run records show what CI checked for each
+commit. The regression suite itself is not published.

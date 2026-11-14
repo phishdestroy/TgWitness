@@ -45,6 +45,8 @@ STYLES = MappingProxyType({
     "ledger_margin": Style("ledger_margin", rgb("#1D1F22"), rgb("#565B62"), rgb("#0D5C63"),
                            rgb("#D6D2C6"), rgb("#F1EEE5"), paper=rgb("#FBFAF6"),
                            heading_family="Serif", margins=(15, 20, 15), table_border="ALL", table_padding=1.4),
+    "profile_overview": Style("profile_overview", rgb("#121212"), rgb("#626262"), rgb("#161616"),
+                              rgb("#DEDEDE"), rgb("#F5F5F5"), margins=(16, 16, 16), highlight=rgb("#161616")),
 })
 
 
@@ -145,6 +147,16 @@ def title_block(lay, eyebrow, title, facts, signed_note, kind=None):
         _rule(pdf, pdf.get_y(), style.accent, width=30, thickness=.6)
         lay.gap(5)
         _facts(lay, facts, name)
+    elif name == "profile_overview":
+        pdf.set_y(18)
+        lay.text("TG / WITNESS", size=9, style="B")
+        _rule(pdf, 27, style.line)
+        pdf.set_y(34)
+        lay.text(eyebrow.upper(), size=8, color=style.muted)
+        lay.gap(5)
+        _title(lay, title, 34)
+        lay.gap(8)
+        _facts(lay, facts, name)
     elif name == "meridian":
         _box(pdf, pdf.w - 5 if lay.rtl else 0, 0, 5, pdf.h, style.accent)
         pdf.set_y(16)
@@ -235,7 +247,7 @@ def figures(lay, items):
     items = [(str(label), str(value) if value is not None else "—") for label, value in items]
     if not items:
         return
-    width = {"quire": 4, "meridian": 4, "atlas": 2, "ledger": 4, "horizon": 4}[style.name]
+    width = {"quire": 4, "meridian": 4, "atlas": 2, "ledger": 4, "horizon": 4, "profile_overview": 4}[style.name]
     short = [(label, value) for label, value in items if len(value) < 36]
     long = [(label, value) for label, value in items if len(value) >= 36]
     for start in range(0, len(short), width):

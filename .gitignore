@@ -88,3 +88,7 @@ delivery.zip
 /scripts/secret_lab_*.py
 /tools/preview_trusted_live.py
 /docs/assets/presentation/readme-mode-*.svg
+/AGENTS.md
+/CLAUDE.md
+/GEMINI.md
+/docs/AGENT-GUIDE.md

@@ -479,4 +479,4 @@ Telegram 대화와 의도적으로 변조한 Desktop 내보내기 파일을 나�
   <a href="../../.github/SECURITY.md"><b>취약점 신고</b></a>
 </p>
 
-[기계 판독용 프로젝트 색인](../../llms.txt) · [전체 텍스트 핸드북](https://phishdestroy.github.io/TgWitness/llms-full.txt) · [에이전트용 저장소 규칙](../../AGENTS.md)
+[기계 판독용 프로젝트 색인](../../llms.txt) · [전체 텍스트 핸드북](https://phishdestroy.github.io/TgWitness/llms-full.txt)

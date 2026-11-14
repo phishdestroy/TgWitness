@@ -26,6 +26,7 @@ LABELS = {
     'horizon': ('Overview', 'A visual overview with an asymmetric cover and a clear reading path.'),
     'reading_series': ('Reading series', 'A section rail, clear findings and a focused history of changes.'),
     'ledger_margin': ('Ledger & margin', 'Numbered sections, a generous margin and figures with exact tables.'),
+    'profile_overview': ('Profile overview', 'Key figures, observed profiles and searchable sections with links to chat records.'),
 }
 
 
@@ -53,7 +54,7 @@ def build(output, designs=report_design.DESIGNS, language='en'):
                        'review_question': 'Did the recorded delivery terms change?',
                        'review_method': 'Compare the preserved versions of message 408. Review the recorded observation gap before interpreting missing content.',
                        'review_findings': 'The saved terms changed from 20 November and 48,000 to 27 November and 64,000. A separate message was later reported deleted; its earlier saved text remains available.',
-                       'review_conclusion': 'The preserved versions differ. These fictional observations do not identify who changed or deleted the messages.'}
+                       'review_conclusion': 'The preserved versions differ.'}
             for design in designs:
                 bundle = evidence.export_file(store, vault, 'zip', {**options, 'design': design})
                 verified = verify_bundle(bundle, pin)

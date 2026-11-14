@@ -1,6 +1,6 @@
 # System map
 
-Open **More tools → System map** (Expert level) to inspect the current installation. The page is
+Open **More tools → System map**, or **Open the system map** on the Overview page, to inspect the current installation. The page is
 available to the main administrator. It refreshes every five seconds while visible;
 hidden tabs pause reads. Failed reads retain the last snapshot with a stale indicator.
 
@@ -30,7 +30,7 @@ host-wide egress rules and kernel enforcement are checked on the host itself.
 ## Storage and independent records
 
 The storage view distinguishes encrypted credentials and signing-key files from the
-signed journal and media, which are not encrypted by the application. It shows whether
+signed journal and media. It shows whether
 the vault key is local or derived from an external master key. Keys themselves are never
 returned. Addresses and directory paths are hidden in the interface until requested.
 
