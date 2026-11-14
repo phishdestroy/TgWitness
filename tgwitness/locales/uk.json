@@ -8992,5 +8992,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Рекомендація: для суду слід подати англійський оригінал разом із завіреним або присяжним перекладом на мову суду. Присяжний перекладач знає місцеву термінологію та офіційні вимоги до судових документів. Версії цього звіту мовами, відмінними від англійської, є машинними перекладами, призначеними лише для орієнтування.",
   "English original in this archive: {file}": "Англійський оригінал у цьому архіві: {file}",
   "English original of this report, sealed": "Англійський оригінал цього звіту, опечатаний",
-  "English original of the signed PDF": "Англійський оригінал підписаного PDF"
+  "English original of the signed PDF": "Англійський оригінал підписаного PDF",
+  "If supplied, this note is included in the signed export.": "Якщо заповнити цю примітку, вона увійде до підписаного експорту.",
+  "Open your export": "Відкрити експорт",
+  "Original message is not included in this chat.": "Початкове повідомлення не включено до цього чату.",
+  "Personal backup, project archive or another reason": "Особиста резервна копія, архів проєкту або інша причина",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Читайте листування без інтернету. Графіки, відомості про збір і перевірка підписів доступні у звіті."
 }

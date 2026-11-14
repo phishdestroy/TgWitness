@@ -8848,5 +8848,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Khuyến nghị: đối với tòa án, hãy nộp bản gốc tiếng Anh kèm theo bản dịch được chứng nhận hoặc bản dịch có tuyên thệ sang ngôn ngữ của tòa án. Một dịch giả có tuyên thệ am hiểu thuật ngữ địa phương và các yêu cầu chính thức đối với tài liệu tòa án. Các phiên bản của báo cáo này bằng các ngôn ngữ khác ngoài tiếng Anh là bản dịch máy nhằm mục đích tham khảo.",
   "English original in this archive: {file}": "Bản gốc tiếng Anh trong kho lưu trữ này: {file}",
   "English original of this report, sealed": "Bản gốc tiếng Anh của báo cáo này, đã niêm phong",
-  "English original of the signed PDF": "Bản gốc tiếng Anh của tệp PDF có chữ ký"
+  "English original of the signed PDF": "Bản gốc tiếng Anh của tệp PDF có chữ ký",
+  "If supplied, this note is included in the signed export.": "Nếu được nhập, ghi chú này sẽ được đưa vào bản xuất đã ký.",
+  "Open your export": "Mở bản xuất của bạn",
+  "Original message is not included in this chat.": "Tin nhắn gốc không có trong cuộc trò chuyện này.",
+  "Personal backup, project archive or another reason": "Sao lưu cá nhân, lưu trữ dự án hoặc lý do khác",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Đọc các cuộc trò chuyện khi ngoại tuyến. Mở báo cáo để xem biểu đồ, chi tiết thu thập và kiểm tra chữ ký."
 }

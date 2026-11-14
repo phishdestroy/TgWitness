@@ -8904,5 +8904,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Recomendación: para los tribunales, presente el original en inglés junto con una traducción certificada o jurada al idioma del tribunal. Un traductor jurado conoce la terminología local y los requisitos formales de los documentos judiciales. Las versiones de este informe en idiomas distintos del inglés son traducciones automáticas que sirven únicamente a título orientativo.",
   "English original in this archive: {file}": "Original en inglés en este archivo ZIP: {file}",
   "English original of this report, sealed": "Original en inglés de este informe, sellado",
-  "English original of the signed PDF": "Original en inglés del PDF firmado"
+  "English original of the signed PDF": "Original en inglés del PDF firmado",
+  "If supplied, this note is included in the signed export.": "Si se indica, esta nota se incluye en la exportación firmada.",
+  "Open your export": "Abrir la exportación",
+  "Original message is not included in this chat.": "El mensaje original no está incluido en este chat.",
+  "Personal backup, project archive or another reason": "Copia de seguridad personal, archivo de un proyecto u otro motivo",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Lee tus chats sin conexión. Abre el informe para ver gráficos, detalles de la recopilación y comprobaciones de firmas."
 }

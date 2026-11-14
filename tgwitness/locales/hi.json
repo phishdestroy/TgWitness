@@ -8896,5 +8896,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "सिफारिश: अदालत के लिए, अंग्रेजी मूल के साथ अदालत की भाषा में प्रमाणित या शपथ-प्राप्त अनुवाद दाखिल करें। एक शपथ-प्राप्त अनुवादक स्थानीय शब्दावली और अदालत दस्तावेजों की औपचारिक आवश्यकताओं को जानता है। अंग्रेजी के अलावा अन्य भाषाओं में इस रिपोर्ट के संस्करण परिचय के लिए मशीन अनुवाद हैं।",
   "English original in this archive: {file}": "इस आर्काइव में अंग्रेज़ी मूल: {file}",
   "English original of this report, sealed": "इस रिपोर्ट का अंग्रेज़ी मूल, सीलबंद",
-  "English original of the signed PDF": "हस्ताक्षरित PDF का अंग्रेज़ी मूल"
+  "English original of the signed PDF": "हस्ताक्षरित PDF का अंग्रेज़ी मूल",
+  "If supplied, this note is included in the signed export.": "अगर यह नोट दिया जाता है, तो इसे हस्ताक्षरित निर्यात में शामिल किया जाएगा।",
+  "Open your export": "अपना निर्यात खोलें",
+  "Original message is not included in this chat.": "मूल संदेश इस चैट में शामिल नहीं है।",
+  "Personal backup, project archive or another reason": "निजी बैकअप, परियोजना संग्रह या कोई अन्य कारण",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "अपनी चैट ऑफ़लाइन पढ़ें। चार्ट, संग्रह के विवरण और हस्ताक्षर जाँच के लिए रिपोर्ट खोलें।"
 }

@@ -9088,5 +9088,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "توصية: بالنسبة للمحكمة، يجب تقديم النسخة الأصلية باللغة الإنجليزية مصحوبة بترجمة معتمدة أو محلفة إلى لغة المحكمة. فالمترجم المحلف على دراية بالمصطلحات المحلية والمتطلبات الرسمية الخاصة بوثائق المحكمة. أما النسخ الأخرى من هذا التقرير بلغات غير الإنجليزية فهي ترجمات آلية مقدمة للتوجيه فقط.",
   "English original in this archive: {file}": "النسخة الأصلية بالإنجليزية في هذا الأرشيف: {file}",
   "English original of this report, sealed": "النسخة الأصلية بالإنجليزية من هذا التقرير، مختومة",
-  "English original of the signed PDF": "النسخة الأصلية بالإنجليزية من ملف PDF الموقّع"
+  "English original of the signed PDF": "النسخة الأصلية بالإنجليزية من ملف PDF الموقّع",
+  "If supplied, this note is included in the signed export.": "إذا أُضيفت هذه الملاحظة، فستُضمَّن في التصدير الموقّع.",
+  "Open your export": "افتح التصدير",
+  "Original message is not included in this chat.": "الرسالة الأصلية غير مضمنة في هذه المحادثة.",
+  "Personal backup, project archive or another reason": "نسخة احتياطية شخصية أو أرشيف مشروع أو سبب آخر",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "اقرأ محادثاتك دون اتصال. افتح التقرير للاطلاع على الرسوم البيانية وتفاصيل الجمع والتحقق من التوقيعات."
 }

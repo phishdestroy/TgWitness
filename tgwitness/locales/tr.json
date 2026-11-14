@@ -8896,5 +8896,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Öneri: Mahkemeye başvururken, İngilizce orijinal belgeyi mahkeme diline yapılmış onaylı veya yeminli bir çeviri ile birlikte sununuz. Yeminli çevirmen, yerel terminolojiyi ve mahkeme belgelerine ilişkin resmi gereklilikleri bilir. Bu raporun İngilizce dışındaki dillerde hazırlanan versiyonları, yalnızca bilgilendirme amaçlı makine çevirileridir.",
   "English original in this archive: {file}": "Bu arşivdeki İngilizce orijinal: {file}",
   "English original of this report, sealed": "Bu raporun İngilizce orijinali, mühürlü",
-  "English original of the signed PDF": "İmzalı PDF'nin İngilizce orijinali"
+  "English original of the signed PDF": "İmzalı PDF'nin İngilizce orijinali",
+  "If supplied, this note is included in the signed export.": "Girilirse bu not imzalı dışa aktarıma dahil edilir.",
+  "Open your export": "Dışa aktarımı aç",
+  "Original message is not included in this chat.": "Orijinal mesaj bu sohbete dahil edilmemiş.",
+  "Personal backup, project archive or another reason": "Kişisel yedek, proje arşivi veya başka bir neden",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Sohbetlerinizi çevrimdışı okuyun. Grafikler, toplama ayrıntıları ve imza kontrolleri için raporu açın."
 }

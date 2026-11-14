@@ -8944,5 +8944,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "המלצה: לצורך הגשה לבית המשפט, יש להגיש את המקור באנגלית יחד עם תרגום מוסמך או מושבע לשפת בית המשפט. מתרגם מושבע מכיר את המינוח המקומי ואת הדרישות הפורמליות של מסמכים משפטיים. גרסאות של דוח זה בשפות אחרות מלבד אנגלית הן תרגומים אוטומטיים שנועדו לשמש כנקודת התייחסות בלבד.",
   "English original in this archive: {file}": "המקור באנגלית בארכיון זה: {file}",
   "English original of this report, sealed": "המקור באנגלית של דוח זה, חתום",
-  "English original of the signed PDF": "המקור באנגלית של קובץ ה-PDF החתום"
+  "English original of the signed PDF": "המקור באנגלית של קובץ ה-PDF החתום",
+  "If supplied, this note is included in the signed export.": "אם תוזן הערה, היא תיכלל בייצוא החתום.",
+  "Open your export": "פתיחת הייצוא",
+  "Original message is not included in this chat.": "ההודעה המקורית אינה כלולה בצ׳אט הזה.",
+  "Personal backup, project archive or another reason": "גיבוי אישי, ארכיון פרויקט או סיבה אחרת",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "קראו את הצ׳אטים שלכם ללא חיבור לרשת. פתחו את הדוח לצפייה בתרשימים, בפרטי האיסוף ובבדיקות החתימות."
 }

@@ -238,6 +238,7 @@ def account_index(context, chats):
     yield from opening(context, say('Account export'))
     yield encoded('<nav><a href="#start">' + e(say('Start here')) + '</a><a href="#chats">' + e(say('Chats')) + '</a>' + map_link(context, say)
                   + '<a href="#coverage">' + e(say('Coverage')) + '</a><a href="#verification">' + e(say('Verification')) + '</a></nav>')
+    yield encoded(archive_views(context, say))
     yield encoded(recipient_guide(say))
     yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
     yield encoded(case_assessment.html(case_assessment.snapshot(context), say))
@@ -252,6 +253,21 @@ def account_index(context, chats):
 
 def map_link(context, say):
     return ('<a href="' + e(context['activity_map']) + '">' + e(say('Activity map')) + '</a>') if context.get('activity_map') else ''
+
+
+def archive_views(context, say):
+    mode = context.get('options', {}).get('export_format')
+    if mode not in ('telegram_html', 'telegram_json', 'telegram_both'):
+        return ''
+    links = []
+    if mode in ('telegram_html', 'telegram_both'):
+        links.append('<a href="export_results.html"><strong>' + e(say('Chats')) + '</strong> · HTML</a>')
+    if mode in ('telegram_json', 'telegram_both'):
+        links.append('<a href="result.json" download><strong>JSON</strong> · result.json</a>')
+    links.extend((map_link(context, say), '<a href="#verification">' + e(say('Verification')) + '</a>'))
+    return ('<section class="panel archive-views"><h2>' + e(say('Open your export')) + '</h2><p>'
+            + e(say('Read your chats offline. Open the report for charts, collection details and signature checks.'))
+            + '</p><nav>' + ''.join(links) + '</nav></section>')
 
 
 def account_map_page(context, activity, gaps, chats):

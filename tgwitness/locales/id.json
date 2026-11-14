@@ -8848,5 +8848,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Rekomendasi: untuk keperluan pengadilan, lampirkan salinan asli dalam bahasa Inggris beserta terjemahan tersertifikasi atau tersumpah ke dalam bahasa pengadilan. Penerjemah tersumpah memahami terminologi lokal dan persyaratan formal untuk dokumen pengadilan. Versi laporan ini dalam bahasa selain bahasa Inggris merupakan terjemahan mesin yang disediakan sebagai panduan.",
   "English original in this archive: {file}": "Dokumen asli berbahasa Inggris dalam arsip ini: {file}",
   "English original of this report, sealed": "Dokumen asli berbahasa Inggris dari laporan ini, tersegel",
-  "English original of the signed PDF": "Dokumen asli berbahasa Inggris dari PDF yang ditandatangani"
+  "English original of the signed PDF": "Dokumen asli berbahasa Inggris dari PDF yang ditandatangani",
+  "If supplied, this note is included in the signed export.": "Jika diisi, catatan ini disertakan dalam ekspor bertanda tangan.",
+  "Open your export": "Buka ekspor Anda",
+  "Original message is not included in this chat.": "Pesan asli tidak disertakan dalam obrolan ini.",
+  "Personal backup, project archive or another reason": "Cadangan pribadi, arsip proyek, atau alasan lain",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Baca obrolan Anda secara offline. Buka laporan untuk melihat grafik, detail pengumpulan, dan pemeriksaan tanda tangan."
 }

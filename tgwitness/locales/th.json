@@ -8848,5 +8848,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "คำแนะนำ: สำหรับการยื่นต่อศาล ให้ยื่นต้นฉบับภาษาอังกฤษพร้อมกับการแปลที่ได้รับการรับรองหรือแปลโดยผู้แปลที่ได้รับการสาบานในภาษาของศาล ผู้แปลที่ได้รับการสาบานจะเข้าใจศัพท์เฉพาะท้องถิ่นและข้อกำหนดทางการสำหรับเอกสารศาล เวอร์ชันของรายงานนี้ในภาษาอื่นนอกเหนือจากภาษาอังกฤษเป็นการแปลโดยเครื่องเพื่อใช้เป็นข้อมูลเบื้องต้นเท่านั้น",
   "English original in this archive: {file}": "ต้นฉบับภาษาอังกฤษในไฟล์เก็บถาวรนี้: {file}",
   "English original of this report, sealed": "ต้นฉบับภาษาอังกฤษของรายงานนี้ ผนึกแล้ว",
-  "English original of the signed PDF": "ต้นฉบับภาษาอังกฤษของ PDF ที่ลงนามแล้ว"
+  "English original of the signed PDF": "ต้นฉบับภาษาอังกฤษของ PDF ที่ลงนามแล้ว",
+  "If supplied, this note is included in the signed export.": "หากระบุหมายเหตุนี้ ระบบจะรวมไว้ในการส่งออกที่ลงนามแล้ว",
+  "Open your export": "เปิดข้อมูลที่ส่งออก",
+  "Original message is not included in this chat.": "ข้อความต้นฉบับไม่ได้รวมอยู่ในแชตนี้",
+  "Personal backup, project archive or another reason": "สำรองข้อมูลส่วนตัว เก็บถาวรโครงการ หรือเหตุผลอื่น",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "อ่านแชตของคุณแบบออฟไลน์ เปิดรายงานเพื่อดูแผนภูมิ รายละเอียดการเก็บรวบรวม และการตรวจสอบลายเซ็น"
 }

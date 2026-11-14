@@ -8896,5 +8896,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "পরামর্শ: আদালতের জন্য ইংরেজি মূল নথিটি আদালতে ব্যবহৃত ভাষায় একটি প্রত্যয়িত বা শপথকৃত অনুবাদের সাথে দাখিল করুন। শপথকৃত অনুবাদক স্থানীয় পরিভাষা এবং আদালতের নথির আনুষ্ঠানিক প্রয়োজনীয়তাগুলি জানেন। ইংরেজি ছাড়া অন্য ভাষায় এই প্রতিবেদনের সংস্করণগুলো দিকনির্দেশনার জন্য মেশিন অনুবাদ।",
   "English original in this archive: {file}": "এই আর্কাইভে ইংরেজি মূল সংস্করণ: {file}",
   "English original of this report, sealed": "এই প্রতিবেদনের ইংরেজি মূল, সিল করা",
-  "English original of the signed PDF": "স্বাক্ষরিত PDF-এর ইংরেজি মূল"
+  "English original of the signed PDF": "স্বাক্ষরিত PDF-এর ইংরেজি মূল",
+  "If supplied, this note is included in the signed export.": "এই নোটটি দিলে তা স্বাক্ষরিত এক্সপোর্টে অন্তর্ভুক্ত হবে।",
+  "Open your export": "আপনার এক্সপোর্ট খুলুন",
+  "Original message is not included in this chat.": "মূল বার্তাটি এই চ্যাটে অন্তর্ভুক্ত নেই।",
+  "Personal backup, project archive or another reason": "ব্যক্তিগত ব্যাকআপ, প্রকল্পের আর্কাইভ বা অন্য কোনো কারণ",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "ইন্টারনেট ছাড়াই আপনার চ্যাট পড়ুন। চার্ট, সংগ্রহের বিবরণ ও স্বাক্ষর যাচাইয়ের জন্য প্রতিবেদন খুলুন।"
 }

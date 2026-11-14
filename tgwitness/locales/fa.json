@@ -8896,5 +8896,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "توصیه: برای دادگاه، نسخهٔ اصلی انگلیسی را همراه با ترجمهٔ تصدیق‌شده یا سوگندخورده به زبان دادگاه ارائه کنید. یک مترجم سوگندخورده با اصطلاحات محلی و الزامات رسمی اسناد دادگاه آشناست. نسخه‌های این گزارش به زبان‌های غیرانگلیسی، ترجمه‌های ماشینی برای راهنمایی هستند.",
   "English original in this archive: {file}": "نسخهٔ اصلی انگلیسی در این بایگانی: {file}",
   "English original of this report, sealed": "نسخهٔ اصلی انگلیسی این گزارش، مُهروموم‌شده",
-  "English original of the signed PDF": "نسخهٔ اصلی انگلیسی PDF امضاشده"
+  "English original of the signed PDF": "نسخهٔ اصلی انگلیسی PDF امضاشده",
+  "If supplied, this note is included in the signed export.": "در صورت وارد کردن این یادداشت، در خروجی امضاشده گنجانده می‌شود.",
+  "Open your export": "خروجی خود را باز کنید",
+  "Original message is not included in this chat.": "پیام اصلی در این گفتگو گنجانده نشده است.",
+  "Personal backup, project archive or another reason": "پشتیبان شخصی، بایگانی پروژه یا دلیل دیگر",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "گفتگوهای خود را آفلاین بخوانید. برای دیدن نمودارها، جزئیات جمع‌آوری و بررسی امضاها، گزارش را باز کنید."
 }

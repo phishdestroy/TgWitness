@@ -8962,5 +8962,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Рекомендация: для суда необходимо подать оригинал на английском языке вместе с заверенным или присяжным переводом на язык суда. Присяжный переводчик владеет местной терминологией и знает формальные требования к судебным документам. Версии этого отчёта на языках, отличных от английского, представляют собой машинные переводы, предназначенные исключительно для ознакомления.",
   "English original in this archive: {file}": "Английский оригинал в этом архиве: {file}",
   "English original of this report, sealed": "Английский оригинал этого отчёта, запечатанный",
-  "English original of the signed PDF": "Английский оригинал подписанного PDF"
+  "English original of the signed PDF": "Английский оригинал подписанного PDF",
+  "If supplied, this note is included in the signed export.": "Если заполнить эту заметку, она войдёт в подписанный экспорт.",
+  "Open your export": "Открыть выгрузку",
+  "Original message is not included in this chat.": "Исходное сообщение не включено в этот чат.",
+  "Personal backup, project archive or another reason": "Личная резервная копия, архив проекта или другая причина",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Читайте переписку без интернета. Графики, сведения о сборе и проверка подписей доступны в отчёте."
 }

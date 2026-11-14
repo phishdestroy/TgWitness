@@ -3687,5 +3687,10 @@
   "Search all selected records",
   "Search this page",
   "Showing {shown} of {total} rows on this page",
-  "Source and counts"
+  "Source and counts",
+  "If supplied, this note is included in the signed export.",
+  "Open your export",
+  "Original message is not included in this chat.",
+  "Personal backup, project archive or another reason",
+  "Read your chats offline. Open the report for charts, collection details and signature checks."
 ]

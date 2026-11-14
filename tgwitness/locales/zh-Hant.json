@@ -8848,5 +8848,10 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "建議：若需提交至法院，請將英文正本連同經認證或宣誓的譯本（譯為法院指定語言）一併提交。宣誓譯者熟悉當地術語及法院文件的正式要求。本報告的非英文版本均為供參考之機器翻譯。",
   "English original in this archive: {file}": "此封存檔中的英文正本：{file}",
   "English original of this report, sealed": "本報告的英文正本，已封印",
-  "English original of the signed PDF": "簽名版 PDF 的英文正本"
+  "English original of the signed PDF": "簽名版 PDF 的英文正本",
+  "If supplied, this note is included in the signed export.": "若有填寫，此備註會包含在已簽署的匯出中。",
+  "Open your export": "開啟匯出內容",
+  "Original message is not included in this chat.": "此聊天未包含原始訊息。",
+  "Personal backup, project archive or another reason": "個人備份、專案封存或其他原因",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "離線閱讀聊天記錄。開啟報告即可查看圖表、收集詳情和簽章驗證。"
 }
