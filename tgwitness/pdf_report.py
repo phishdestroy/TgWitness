@@ -446,7 +446,7 @@ class Layout:
         self.text(say("Independent review").upper(), size=7, style="B", color=MUTED)
         self.callout(say(item["verification"]), GOLD)
         if item["references"]:
-            self.text(say("Evidence references") + ': ' + ', '.join(item["references"]), size=7.3, color=MUTED)
+            self.text(say("Evidence references") + ': ' + report.case_assessment.reference_text(item["references"]), size=7.3, color=MUTED)
         self.gap(5)
 
     def qr(self, lines, size=27):

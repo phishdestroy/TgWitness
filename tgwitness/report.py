@@ -1329,14 +1329,41 @@ def limits_section(say, number, limits):
 
 def files_section(say, number, files, own):
     shown = sorted(files)
-    rows = [["<code>" + e(n) + "</code>", e(file_purpose(say, n)), '<code title="' + e(files[n]) + '">' + e(short(files[n], 16, 8))
-             + "</code>"] for n in shown[:300]]
-    rows += [["<code>" + e(n) + "</code>", e(file_purpose(say, n)), e(say("listed in manifest.json"))] for n in own]
+    listed = lambda n: ["<code>" + e(n) + "</code>", e(file_purpose(say, n)),
+                        '<code title="' + e(files[n]) + '">' + e(short(files[n], 16, 8)) + "</code>"]
+    rows = [listed(n) for n in shown[:300]]
+    own_rows = [["<code>" + e(n) + "</code>", e(file_purpose(say, n)), e(say("listed in manifest.json"))] for n in own]
+    rows += own_rows
     more = ('<p class="lead">' + e(say("… and {n} more, listed in manifest.json and SHA256SUMS.", n=len(shown) - 300)) + "</p>"
             if len(shown) > 300 else "")
+    columns = [say("File"), say("Purpose"), "SHA-256"]
+    body = table(columns, rows)
+    if len(rows) > FOLDED_ROWS:
+        folders = {}
+        for name in shown:
+            if "/" in name:
+                folders.setdefault(name.split("/", 1)[0], []).append(name)
+        top = [listed(n) for n in shown if "/" not in n] + own_rows
+        body = (table(columns, top)
+                + table([say("Folder"), say("Purpose"), say("Files")],
+                        [["<code>" + e(folder) + "/</code>", e(file_purpose(say, names[0])), num(len(names))]
+                         for folder, names in sorted(folders.items())])
+                + '<details class="layout-case-details"><summary>' + e(say("Files in this archive")) + " · "
+                + num(len(shown) + len(own)) + "</summary>" + table(columns, rows) + more + "</details>")
+        more = ""
     return (section(number, "files", say("Files in this archive"),
                     say("manifest.json lists the SHA-256 of every file and is signed in manifest.sig."))
-            + table([say("File"), say("Purpose"), "SHA-256"], rows) + more + "</section>")
+            + body + more + "</section>")
+
+
+FOLDED_ROWS = 20
+
+
+def folded_table(columns, rows, label):
+    if len(rows) <= FOLDED_ROWS:
+        return table(columns, rows)
+    return (table(columns, rows[-FOLDED_ROWS:]) + '<details class="layout-case-details"><summary>' + e(label) + " · "
+            + num(len(rows)) + "</summary>" + table(columns, rows) + "</details>")
 
 
 def seal_section(say, number, report_id, created_at):
@@ -2071,8 +2098,9 @@ def actions_section(say, number, digest, titles, linked):
                          '<span class="pill ' + tone + '">' + e(say(label)) + "</span>"
                          + (" <small>" + e(result["error_type"]) + "</small>" if result.get("error_type") else ""),
                          " ".join(records)])
-        out += "<h3>" + e(say("Through the panel")) + "</h3>" + table(
-            [say("Time"), say("Action"), say("Chat"), say("Details"), say("Outcome"), say("Records")], rows)
+        out += "<h3>" + e(say("Through the panel")) + "</h3>" + folded_table(
+            [say("Time"), say("Action"), say("Chat"), say("Details"), say("Outcome"), say("Records")], rows,
+            say("Through the panel"))
         if digest.get("action_count", 0) > len(actions):
             out += '<p class="lead">' + e(say("… and {n} more, listed under Records.",
                                               n=digest["action_count"] - len(actions))) + "</p>"
@@ -2080,9 +2108,10 @@ def actions_section(say, number, digest, titles, linked):
         out += '<div class="callout ok">' + e(say("No action through the panel is recorded in this journal.")) + "</div>"
     scope = digest.get("own_scope") or []
     if own:
-        out += "<h3>" + e(say("Messages the account sent itself")) + "</h3>" + table(
+        out += "<h3>" + e(say("Messages the account sent itself")) + "</h3>" + folded_table(
             [say("Time"), say("Chat"), say("Text"), say("Records")],
-            [[when(m["at"]), e(chat_name(m["chat"])), e(m["text"]), record_link(m["seq"], linked)] for m in own])
+            [[when(m["at"]), e(chat_name(m["chat"])), e(m["text"]), record_link(m["seq"], linked)] for m in own],
+            say("Messages the account sent itself"))
         if digest.get("own_total", 0) > len(own):
             out += '<p class="lead">' + e(say("… and {n} more, listed under Records.",
                                               n=digest["own_total"] - len(own))) + "</p>"

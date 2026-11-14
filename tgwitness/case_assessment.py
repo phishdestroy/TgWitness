@@ -76,6 +76,14 @@ def row(key, status, title, basis, limit, verify, facts=None, references=()):
                 verification=verify, facts=facts or {}, references=list(references))
 
 
+REFERENCES_SHOWN = 12
+
+
+def reference_text(references):
+    shown = ", ".join(references[:REFERENCES_SHOWN])
+    return shown + (" … +" + str(len(references) - REFERENCES_SHOWN) if len(references) > REFERENCES_SHOWN else "")
+
+
 def result(item, key, **values):
     item["result"] = {"text": RESULTS[key], "values": values}
 
@@ -304,7 +312,7 @@ def html(data, say):
         parts.extend('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>' for k, v in item["facts"].items())
         parts.append('</dl><p class="assessment-limit"><strong>' + e(say("Scope of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
         if item["references"]:
-            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(', '.join(item["references"])) + '</p>')
+            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(reference_text(item["references"])) + '</p>')
         parts.append('</article>')
     return ''.join(parts) + '</div></section>' + jurisdiction_guidance.html(data.get("jurisdiction_guidance"))
 
