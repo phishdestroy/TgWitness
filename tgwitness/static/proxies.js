@@ -130,7 +130,7 @@
       tile(tr("Listed"), s.listed.toLocaleString(document.documentElement.lang||undefined)),
       tile(tr("Answering"), s.ok.toLocaleString(document.documentElement.lang||undefined), s.ok ? "good" : "warn"),
       tile(tr("Resting"), s.resting.toLocaleString(document.documentElement.lang||undefined), s.resting ? "warn" : ""),
-      tile(tr("Median ping"), s.median_ms ? s.median_ms + " " + tr("ms") : "—", speed(s.median_ms)),
+      tile(tr("Median ping"), s.median_ms ? tr("{n} ms", {n: s.median_ms.toLocaleString(document.documentElement.lang||undefined)}) : "—", speed(s.median_ms)),
       tile(tr("Countries"), s.countries.toLocaleString(document.documentElement.lang||undefined)),
       ...(policy ? [tile(tr("In preferred countries"), s.preferred.toLocaleString(document.documentElement.lang||undefined), view.settings.prefer.length && !s.preferred ? "warn" : ""),
                     tile(tr("Excluded by country"), s.excluded.toLocaleString(document.documentElement.lang||undefined))] : []),
@@ -201,7 +201,7 @@
       if (row.latency_ms) {
         const bar = node("span", "pool-bar " + speed(row.latency_ms)), fill = node("i");
         fill.style.width = Math.max(6, Math.min(100, 100 - row.latency_ms / 15)) + "%";
-        bar.append(fill); ping.append(bar, node("span", "pool-ms", row.latency_ms + " " + tr("ms")));
+        bar.append(fill); ping.append(bar, node("span", "pool-ms", tr("{n} ms", {n: row.latency_ms.toLocaleString(document.documentElement.lang||undefined)})));
       } else ping.append(node("span", "muted", "—"));
       const status = node("td"), pill = node("span", "pool-pill " + row.status, tr(STATUS[row.status]));
       if (row.status === "resting" && row.error_type) pill.title = row.error_type + " · " + trn("{n} failure", "{n} failures", row.failures);

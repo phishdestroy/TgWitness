@@ -21,6 +21,7 @@ is unchanged; everything here cites it.
 - [What a client and an upload time show](#what-a-client-and-an-upload-time-show)
 - [Cover and authority](#cover-and-authority)
 - [Account control](#account-control)
+- [What the other side sees](#what-the-other-side-sees)
 - [Report settings](#report-settings)
 - [Screen recording](#screen-recording)
 - [Documents for court](#documents-for-court)
@@ -207,7 +208,34 @@ profile photos, bio, birthday, links in forwards, calls, peer-to-peer calls that
 can reveal the IP address, and adding the account to groups. A public username, a
 bio and the Premium badge are listed as notices. **Go offline right after each
 panel action** sets the account offline after every action and journals the
-result. Read receipts are never sent by the collector.
+result. Read receipts are sent only as chosen under
+[What the other side sees](#what-the-other-side-sees).
+
+## What the other side sees
+
+**What the other side sees**, in Settings and behind the eye icon of a chat, chooses
+what this account shows to the other side of a chat. **Invisible** is the default: no
+read receipts, no notices that one-time media were opened, no story views and no typing
+status are sent, and a request for one is refused before anything reaches Telegram.
+
+| Signal | Choices |
+| --- | --- |
+| Read receipts | Never; with the **Mark as read** button; after a message sent from the panel; when the chat is opened in the panel |
+| Opened one-time media and played voice messages | Never; with the **Mark as opened** button |
+| Story views | Never; with the **Mark stories as viewed** button |
+| Typing | Hidden; shown while the operator types; shown before a message is sent, for a time that follows the length of the text |
+| Sending without sound | Never; while invisible; always |
+
+The choice is made for the workspace and can differ for one chat, also in
+**Pseudo-secret**. Every request is a journal record with the operator, followed by a
+record of Telegram's answer, for example `visibility.read_requested` and
+`visibility.read_result`. Typing by the other side is shown in the chat and can be
+recorded, one record for each burst.
+
+A read receipt is a request to Telegram, and Telegram decides when the other side
+receives it. In checks with two accounts, one account received the receipts at once
+and the other only together with the reader's next message in the chat. The typing
+status and a message sent without sound reached the other account at once.
 
 ## Report settings
 

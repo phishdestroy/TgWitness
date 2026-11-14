@@ -1,6 +1,6 @@
 {
   "code": "DE",
-  "scope": "Deutschland · Zivilverfahren",
+  "scope": "Deutschland · Zivil- und Strafverfahren (getrennt gekennzeichnete Verweise)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "Sachverständiger",
@@ -9,22 +9,55 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · VDG",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. VDG § 1(1): the Trust Services Act gives effect to the trust-service provisions of the Regulation in its current version. ZPO § 371a(1): private electronic documents with a qualified electronic signature follow the rules on the evidential value of private documents.",
+    "source": "https://www.gesetze-im-internet.de/vdg/__1.html"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing by public bodies competent for criminal offences is governed by BDSG Part 3 (§ 45).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "ZPO § 286",
+      "basis": "The court decides by free conviction whether a factual assertion is true and states its reasons; statutory rules of evidence bind it only where the ZPO says so.",
+      "source": "https://www.gesetze-im-internet.de/zpo/__286.html"
+    },
+    {
+      "route": "civil",
+      "term": "ZPO § 371(1)",
+      "basis": "An electronic document is offered as evidence by inspection (Augenschein), by presenting or transmitting the file.",
+      "source": "https://www.gesetze-im-internet.de/zpo/__371.html"
+    },
+    {
+      "route": "civil",
+      "term": "ZPO § 371a; § 416",
+      "basis": "Signed private documents give full proof that the statements come from the signatories; for electronic documents this applies with a qualified electronic signature. The appearance of authenticity from a verified qualified signature can be shaken only by facts raising serious doubt.",
+      "source": "https://www.gesetze-im-internet.de/zpo/__371a.html"
+    },
+    {
+      "route": "criminal",
+      "term": "StPO § 261",
+      "basis": "The court decides on the result of the taking of evidence by free conviction drawn from the whole of the main hearing.",
+      "source": "https://www.gesetze-im-internet.de/stpo/__261.html"
+    }
+  ],
+  "dpa": {
+    "name": "Aufsichtsbehörde des Landes (nichtöffentliche Stellen); Bundesbeauftragte für den Datenschutz und die Informationsfreiheit (BfDI)",
+    "name_en": "State data protection supervisory authority for private bodies; Federal Commissioner for Data Protection and Freedom of Information",
+    "basis": "BDSG § 40(1); § 8",
+    "source": "https://www.gesetze-im-internet.de/bdsg_2018/__40.html"
+  },
   "sources": [
     {
       "term": "§§ 402 ff. ZPO",
@@ -41,6 +74,69 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "VDG § 1",
+      "url": "https://www.gesetze-im-internet.de/vdg/__1.html"
+    },
+    {
+      "term": "ZPO § 286",
+      "url": "https://www.gesetze-im-internet.de/zpo/__286.html"
+    },
+    {
+      "term": "ZPO § 371",
+      "url": "https://www.gesetze-im-internet.de/zpo/__371.html"
+    },
+    {
+      "term": "ZPO § 371a",
+      "url": "https://www.gesetze-im-internet.de/zpo/__371a.html"
+    },
+    {
+      "term": "ZPO § 416",
+      "url": "https://www.gesetze-im-internet.de/zpo/__416.html"
+    },
+    {
+      "term": "StPO § 261",
+      "url": "https://www.gesetze-im-internet.de/stpo/__261.html"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "BDSG § 45",
+      "url": "https://www.gesetze-im-internet.de/bdsg_2018/__45.html"
+    },
+    {
+      "term": "BDSG § 40",
+      "url": "https://www.gesetze-im-internet.de/bdsg_2018/__40.html"
+    },
+    {
+      "term": "BDSG § 8",
+      "url": "https://www.gesetze-im-internet.de/bdsg_2018/__8.html"
+    },
+    {
+      "term": "BfDI",
+      "url": "https://www.bfdi.bund.de/DE/Home/home_node.html"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from gesetze-im-internet.de and EUR-Lex texts opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Germany.",
+      "sources": [
+        "https://www.gesetze-im-internet.de/vdg/__1.html",
+        "https://www.gesetze-im-internet.de/zpo/__286.html",
+        "https://www.gesetze-im-internet.de/zpo/__371.html",
+        "https://www.gesetze-im-internet.de/zpo/__371a.html",
+        "https://www.gesetze-im-internet.de/zpo/__416.html",
+        "https://www.gesetze-im-internet.de/stpo/__261.html",
+        "https://www.gesetze-im-internet.de/bdsg_2018/__45.html",
+        "https://www.gesetze-im-internet.de/bdsg_2018/__40.html",
+        "https://www.gesetze-im-internet.de/bdsg_2018/__8.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

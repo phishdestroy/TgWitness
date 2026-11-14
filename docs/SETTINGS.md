@@ -56,7 +56,7 @@ sidebar to change the level. The [panel guide](PANEL.md) describes each section.
 
 | Goal | Collection | Files | Outside services | Server address |
 | --- | --- | --- | --- | --- |
-| Just download | One-time export starts from the final setup screen; continuous collection stays off | Photos up to 20 MB | Off | Automatic |
+| Just download | One-time export starts from the final setup screen; continuous collection stays off | Photos up to 20 MB | Timestamps | Automatic |
 | Follow chats | Continuous | Photos and videos up to 60 seconds / 20 MB | Timestamps and problem notifications | Automatic |
 | Evidence for a case | Continuous | All files up to 1 GB | Timestamps, drand, notifications | No, hide it |
 

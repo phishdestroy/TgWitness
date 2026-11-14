@@ -1,6 +1,6 @@
 {
   "code": "ES",
-  "scope": "España · proceso civil",
+  "scope": "España · proceso civil y penal (referencias señaladas por separado)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "perito",
@@ -9,22 +9,55 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · Ley 6/2020",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. Ley 6/2020 art. 1 complements the Regulation; art. 3.2: private electronic documents using a non-qualified trust service are proved under LEC art. 326.3, and those using a qualified service under art. 326.4.",
+    "source": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Ley Orgánica 3/2018 adapts Spanish law to the GDPR; Ley Orgánica 7/2021 governs processing by competent authorities for criminal offences (art. 1).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States. If date and time of a document with a non-qualified service are disputed, LEC art. 326.3 applies.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "LEC art. 299.2; arts. 382, 384",
+      "basis": "Reproductions of words, sound and images and instruments that store or reproduce data are admissible. The court examines them by the means offered and assesses recordings by the rules of sana crítica.",
+      "source": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-323"
+    },
+    {
+      "route": "civil",
+      "term": "LEC art. 326.1-326.3",
+      "basis": "A private document proves fully if its authenticity is not challenged. If it is challenged, the presenting party may propose expert comparison or other evidence; otherwise the court assesses it by sana crítica. Challenges to integrity or date and time of an electronic document with a non-qualified trust service follow art. 326.2.",
+      "source": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-323"
+    },
+    {
+      "route": "criminal",
+      "term": "LECrim art. 741",
+      "basis": "The court assesses the evidence taken at trial according to its conscience, together with the arguments of prosecution and defence.",
+      "source": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+    },
+    {
+      "route": "all",
+      "term": "LOPJ art. 11.1",
+      "basis": "Evidence obtained directly or indirectly by violating fundamental rights or freedoms has no effect, in every type of proceeding.",
+      "source": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-12666"
+    }
+  ],
+  "dpa": {
+    "name": "Agencia Española de Protección de Datos (AEPD)",
+    "name_en": "Spanish Data Protection Agency",
+    "basis": null,
+    "source": "https://www.aepd.es/"
+  },
   "sources": [
     {
       "term": "Ley de Enjuiciamiento Civil, art. 335",
@@ -41,6 +74,50 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Ley 6/2020, arts. 1 y 3",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046"
+    },
+    {
+      "term": "Ley de Enjuiciamiento Criminal, art. 741",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036"
+    },
+    {
+      "term": "Ley Orgánica del Poder Judicial, art. 11",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-12666"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Ley Orgánica 3/2018",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673"
+    },
+    {
+      "term": "Ley Orgánica 7/2021",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-8806"
+    },
+    {
+      "term": "AEPD",
+      "url": "https://www.aepd.es/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from BOE consolidated texts and EUR-Lex opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Spain.",
+      "sources": [
+        "https://www.boe.es/buscar/act.php?id=BOE-A-2000-323",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-1882-6036",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-1985-12666",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-2021-8806",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

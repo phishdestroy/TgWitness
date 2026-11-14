@@ -54,8 +54,15 @@ imported or already saved in the workspace, TgWitness picks a pair from its buil
 login and retaining a saved pair first; remaining candidates are shuffled. If Telegram refuses a pair
 (`API_ID_INVALID`, `API_ID_PUBLISHED_FLOOD`, `UPDATE_APP_TO_LOGIN`), the next one is tried,
 up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is
-saved with the account and reused for it. An **API ID** and **API hash** identify the application to Telegram; they
-do not authorize an account by themselves.
+saved with the account and reused for it.
+
+The built-in pairs are public: they are published in the open source code of Telegram
+clients and libraries. An **API ID** and **API hash** identify the application to Telegram
+and give no access to account data. Sign-in uses the account's own authorization: a login
+code and 2FA password, or a session that account already authorized. Each
+`observation.started` record names the pair used. You can enter your own pair from
+my.telegram.org instead; for material intended for court, do so before collection starts
+(steps below). Create the pair and collect with a dedicated account, not a personal one.
 
 Missing connection fields use a deterministic device/OS pair from the bundled
 [opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735):
@@ -107,6 +114,11 @@ tokens or API hashes. They never accept terms or install updates. A request
 failure or FloodWait stops subsequent requests; a missing result stays unknown.
 Local checks can still report their results while network checks are skipped.
 
+Concurrent requests to restore one workspace's connection share its client and
+wait for its connection setup to finish. A failed or cancelled attempt releases
+the next request to retry. If the saved credentials, client or authorization state
+change during setup, the older attempt stops instead of reporting a ready connection.
+
 FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers,
 the server-requested wait and the effective deadline in `telegram.backoff`.
 Connection details show the method and deadline while requests are paused.
@@ -133,8 +145,7 @@ own connection status shows whether it works. Telegram decides restrictions on i
 side, whichever client profile is used. Disconnected account status
 uses the saved profile instead of generating another device description.
 
-To use your own application instead (the account that registers it is the one at risk; see
-[Why a built-in API pool?](PROJECT-GUIDE.md#connect-a-telegram-account)):
+To use your own application instead:
 
 1. Open [my.telegram.org](https://my.telegram.org) and sign in with any phone number
    you own. The code arrives in the Telegram app, not by SMS.
@@ -247,6 +258,11 @@ or asks for the password. A rejected imported password returns to the password f
 Passwords are not saved. The candidate key is saved encrypted in
 `independent_login.enc`, including changes during data-centre migration. After an
 interruption, select the same donor and this option to resume the saved candidate.
+The donor is checked with `help.getAppConfig` before the approval; a frozen account
+stops there. If Telegram refuses the donor before approving the login, the unapproved
+candidate key is discarded and the import can start again. Another donor replaces a
+saved candidate only when Telegram reports that candidate as not signed in; a
+candidate that is signed in or waiting for its 2FA password is kept.
 The workspace remains reserved for that account; failed completion does not delete
 the new workspace. Keep its data directory and vault key. The final credentials and
 `account.authorized` journal record include the import method, input formats and
@@ -541,8 +557,8 @@ health shows **Download the account loss report**: a signed JSON file with the j
 of the 24 hours before the loss, namely connections, routes, sessions, account notices and coverage
 gaps, each with its journal hash and signature. Check it with
 `python verify.py tgwitness-account-loss.json --fingerprint COLLECTOR_FP`; the evidence export
-holds the complete hash chain. A frozen account is also detected while observing, and its sending and joining
-actions are turned off.
+holds the complete hash chain. A frozen account is also detected when it connects and while observing, and its
+sending and joining actions are turned off.
 
 ## Keeping account files safe
 

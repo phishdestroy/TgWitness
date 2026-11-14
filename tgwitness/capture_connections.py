@@ -76,7 +76,8 @@ class Connection(BaseModel):
 class CaptureConnections:
     def __init__(self, store, vault):
         self.store, self.vault = store, vault
-        self.lock = asyncio.Lock()
+        self.locks = {kind: asyncio.Lock() for kind in KINDS}
+        self.guards = {kind: threading.RLock() for kind in KINDS}
         self.guard = threading.RLock()
 
     def public(self):
@@ -89,7 +90,7 @@ class CaptureConnections:
                                     for kind in KINDS}, "max_export_bytes": MAX_EXPORT}
 
     def save(self, kind, connection):
-        with self.guard:
+        with self.guards[kind], self.guard:
             saved = self.vault.read("capture_connections")
             old = saved.get(kind, {})
             new = connection.model_dump()
@@ -106,7 +107,8 @@ class CaptureConnections:
             return self.public()
 
     def _connection(self, kind):
-        connection = self.vault.read("capture_connections").get(kind, {})
+        with self.guard:
+            connection = self.vault.read("capture_connections").get(kind, {})
         if not connection.get("enabled"):
             raise ValueError("Enable this recorder connection first. This does not start capture.")
         return connection
@@ -156,9 +158,10 @@ class CaptureConnections:
         return checkpoint
 
     def _remember(self, kind, checkpoint):
-        saved = self.vault.read("capture_connections")
-        saved[kind]["checkpoint"] = checkpoint
-        self.vault.save("capture_connections", saved)
+        with self.guard:
+            saved = self.vault.read("capture_connections")
+            saved[kind]["checkpoint"] = checkpoint
+            self.vault.save("capture_connections", saved)
 
     def _identified(self, kind):
         connection = self._connection(kind)
@@ -173,7 +176,7 @@ class CaptureConnections:
     def open(self, kind, url, wait_seconds=5, purpose="", subject=None, chat_id=None):
         if kind != "browser":
             raise ValueError("Only the browser recorder opens addresses.")
-        with self.guard:
+        with self.guards[kind]:
             connection, checkpoint, _ = self._identified(kind)
             answer = self._request(connection, "POST", "open",
                                    {"url": url, "wait_seconds": wait_seconds, "purpose": purpose}, timeout=120)
@@ -197,14 +200,14 @@ class CaptureConnections:
     def object(self, kind, sha256):
         if not isinstance(sha256, str) or not HEX.fullmatch(sha256):
             raise ValueError("Use a SHA-256 object name.")
-        with self.guard:
+        with self.guards[kind]:
             data = self._request(self._connection(kind), "GET", "object/" + sha256, raw=True)
         if hashlib.sha256(data).hexdigest() != sha256:
             raise ValueError("The recorder returned bytes that differ from the requested hash.")
         return data
 
     def request(self, kind, path="status", body=None):
-        with self.guard:
+        with self.guards[kind]:
             connection, checkpoint, status = self._identified(kind)
             if path == "status":
                 return {"status": status, "checkpoint": checkpoint}
@@ -218,7 +221,7 @@ class CaptureConnections:
             return result
 
     def export(self, kind):
-        with self.guard:
+        with self.guards[kind]:
             connection = self._connection(kind)
             checkpoint = self._checkpoint(kind, connection)
             status = self._request(connection, "GET", "status")

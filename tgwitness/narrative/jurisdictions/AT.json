@@ -1,6 +1,6 @@
 {
   "code": "AT",
-  "scope": "Österreich · Zivilverfahren",
+  "scope": "Österreich · Zivil- und Strafverfahren (getrennt gekennzeichnete Verweise)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "Sachverständiger",
@@ -9,22 +9,55 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · SVG",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183; Signatur- und Vertrauensdienstegesetz (SVG), BGBl. I Nr. 50/2016. SVG § 4(1): a qualified electronic signature meets the written-form requirement of § 886 ABGB; other statutory or agreed form requirements remain.",
+    "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20009585&Paragraf=4"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing for the investigation and prosecution of criminal offences is governed by DSG Part 3 (§§ 36 ff.).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States. No separate Austrian time-stamp rule was identified in SVG § 4.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "ZPO § 272",
+      "basis": "The court decides by free conviction, after careful consideration of the whole hearing and taking of evidence, whether a factual statement is true, unless the law provides otherwise.",
+      "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=272"
+    },
+    {
+      "route": "civil",
+      "term": "ZPO §§ 292, 294",
+      "basis": "Public and private documents may be created on paper or electronically. A signed private document gives full proof that its statements come from the signatory; this does not attach to a software export as such.",
+      "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=294"
+    },
+    {
+      "route": "criminal",
+      "term": "StPO § 258(1)",
+      "basis": "The judgment may rely only on what was presented at the main hearing; file documents serve as evidence only if read out or summarised there.",
+      "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002326&Paragraf=258"
+    },
+    {
+      "route": "criminal",
+      "term": "StPO § 126(1)",
+      "basis": "Experts are appointed where investigations or the taking of evidence need special expertise that the prosecuting authorities do not have.",
+      "source": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002326&Paragraf=126"
+    }
+  ],
+  "dpa": {
+    "name": "Datenschutzbehörde (DSB)",
+    "name_en": "Austrian Data Protection Authority",
+    "basis": "DSG § 18",
+    "source": "https://www.dsb.gv.at/"
+  },
   "sources": [
     {
       "term": "§ 351 ZPO",
@@ -41,6 +74,54 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "SVG § 4",
+      "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20009585&Paragraf=4"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "ZPO § 272",
+      "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=272"
+    },
+    {
+      "term": "ZPO § 294",
+      "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=294"
+    },
+    {
+      "term": "StPO § 258",
+      "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002326&Paragraf=258"
+    },
+    {
+      "term": "StPO § 126",
+      "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002326&Paragraf=126"
+    },
+    {
+      "term": "Datenschutzgesetz (DSG)",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001597"
+    },
+    {
+      "term": "Datenschutzbehörde",
+      "url": "https://www.dsb.gv.at/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from official texts opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Austria.",
+      "sources": [
+        "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20009585&Paragraf=4",
+        "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=272",
+        "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001699&Paragraf=294",
+        "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002326&Paragraf=258",
+        "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002326&Paragraf=126",
+        "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10001597",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

@@ -1,0 +1,84 @@
+{
+  "code": "HR",
+  "scope": "Hrvatska · parnični i kazneni postupak (odvojeno označene reference)",
+  "checked_at": "2026-11-14",
+  "expert_role": null,
+  "esig_regulation": {
+    "term": "eIDAS · NN 62/2017",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. The Act implementing Regulation 910/2014 (NN 62/2017) designates the competent bodies (čl. 1) and gives its terms the Regulation's meaning (čl. 2).",
+    "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2017_06_62_1430.html"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. The GDPR Implementation Act (NN 42/2018) supplements the GDPR; processing by competent authorities for criminal offences is governed by the Act of NN 68/2018 (čl. 1).",
+    "deadline_days": null,
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+  },
+  "timestamp_recognition": {
+    "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
+    "automatic_ots_qualification": false,
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+  },
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "ZPP čl. 8; čl. 220",
+      "basis": "The court decides which facts are proven by its conviction, based on careful evaluation of each item of evidence and all evidence together. It decides which proposed evidence to take to establish the decisive facts.",
+      "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+    },
+    {
+      "route": "civil",
+      "term": "ZPP čl. 230",
+      "basis": "A public document issued in the prescribed form by a competent body proves the truth of what it confirms; a software export is not a public document.",
+      "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+    },
+    {
+      "route": "criminal",
+      "term": "ZKP čl. 9; čl. 10",
+      "basis": "Assessment of facts is not bound by formal rules of evidence. Court decisions cannot be based on unlawfully obtained evidence; čl. 10(2) lists the categories.",
+      "source": "https://narodne-novine.nn.hr/clanci/sluzbeni/2008_12_152_4149.html"
+    }
+  ],
+  "dpa": {
+    "name": "Agencija za zaštitu osobnih podataka (AZOP)",
+    "name_en": "Croatian Personal Data Protection Agency",
+    "basis": null,
+    "source": "https://azop.hr/"
+  },
+  "sources": [
+    {
+      "term": "Zakon o parničnom postupku (pročišćeni tekst, NN 148/2011)",
+      "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+    },
+    {
+      "term": "Zakon o kaznenom postupku (NN 152/2008)",
+      "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2008_12_152_4149.html"
+    },
+    {
+      "term": "Zakon o provedbi Uredbe (EU) br. 910/2014 (NN 62/2017)",
+      "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2017_06_62_1430.html"
+    },
+    {
+      "term": "eIDAS (consolidated)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Zakon o provedbi Opće uredbe o zaštiti podataka (NN 42/2018)",
+      "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2018_05_42_805.html"
+    },
+    {
+      "term": "Zakon o zaštiti fizičkih osoba u vezi s obradom i razmjenom osobnih podataka u svrhe sprječavanja, istraživanja, otkrivanja ili progona kaznenih djela (NN 68/2018)",
+      "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2018_07_68_1391.html"
+    },
+    {
+      "term": "AZOP",
+      "url": "https://azop.hr/"
+    }
+  ]
+}

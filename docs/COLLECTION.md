@@ -54,6 +54,10 @@ show what arrived.
 
 **More tools → Sources → Scope** decides which chats a workspace records.
 
+New setup starts with **Choose chats**. Existing saved choices are retained. Choosing
+**All chats** in the setup wizard asks for confirmation when the loaded list contains
+more than 50 chats; the size estimate remains a separate, sample-based operation.
+
 | Mode | Records | New chats |
 | --- | --- | --- |
 | Chosen chats (default) | Only the chats you add by hand | Never added automatically |
@@ -164,11 +168,22 @@ account asks for the usual confirmation.
     earlier messages of a team chat just joined, or what a bot said before observation
     noticed the chat. Messages already saved live are not repeated.
 
-  Chats already in the list when the mode is switched on are added without snapshots.
+  Newly selected chats use these settings when the scope is applied, including chats
+  already present in the account's dialog list. Initial profile and history loading
+  runs for up to three chats concurrently; work for the same chat stays in order.
+  Each history/profile stage uses the configured operation timeout, so stalled requests
+  release their worker. History is saved before the optional profile read; a profile
+  failure does not prevent that history capture. Failed stages retry after 5 seconds,
+  doubling to a maximum of 5 minutes without occupying a worker during the delay.
+  Pending IDs, retry deadlines and completed stages are saved locally. A restart resumes
+  only unfinished stages; a profile retry does not repeat a completed history read.
+  Sources disabled before their turn are skipped. The overview shows active, pending
+  and retrying chat loads separately from attachment downloads.
   A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
   recording of the chat continues. This includes waits while resolving the new chat's
   identity: the pending profile/history task is retained for retry, and an existing
-  longer account-wide wait is not shortened.
+  longer account-wide wait is not shortened. The workers share this wait; concurrency
+  does not bypass Telegram's request limits.
 - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile
   of any source; the newest one is shown above the messages.
 - **Chat state snapshots (preview).** State outside the message stream changes without a
@@ -292,8 +307,13 @@ that notification; admin-log and interaction records retain their own attributio
 
 A snapshot requests the latest visible messages from an enabled source, up to
 500 per request. Results are labeled as history observations. Manual snapshots
-reserve an idle account; pause monitoring explicitly first. Repeated observations
+run alongside observation. Repeated observations
 are kept as separate records.
+
+Snapshots stop if the source is disabled during the read. Replies must belong to the
+requested chat and contain strictly decreasing positive message IDs below the requested
+boundary. An invalid reply interrupts the snapshot before that message is saved;
+already preserved messages remain in the signed journal with the interruption record.
 
 Snapshots follow the attachment policy but remain separate from live-event switches.
 They do not reconstruct deleted messages or missed intermediate versions. You can
@@ -316,6 +336,30 @@ record with its SHA-256 and byte count. Skipped, failed, retried, and interrupte
 work has separate outcomes; a file counts as preserved when its `media.saved` record exists.
 The completed file must also match the byte count in the original observed attachment
 descriptor. A short or unexpectedly long response is not recorded as preserved media.
+
+Within one workspace, concurrent queued jobs for the same attachment representation
+wait for the active transfer, then recheck its saved bytes before reuse. Each job keeps
+its own signed outcome and reference to the earlier saved-file record. Cancelling a
+waiting job does not cancel the active transfer; if that transfer fails or is cancelled,
+the next job can try again. Different attachments can download concurrently.
+
+Jobs with the same account, representation, expected size and capture action stay
+queued while one matching job is running. They do not occupy download slots, so
+other files can start even when the queue begins with many copies of one slow file.
+Completing an attempt wakes the queue. Priority lanes, saved retry delays and
+history ownership still apply; each observation receives its own outcome.
+
+Chat exports also share an active transfer for repeated file representations within
+the same export directory. Each message retains its attachment reference, and reuse
+requires a fresh size and SHA-256 check. Different files can be checked in parallel
+without holding a common transfer lock. Temporary download and copy paths are unique
+to each operation; cancellation waits for any active local file reader before cleanup.
+The export file index serializes only metadata access, not file hashing or downloads.
+
+Server-hash reads for different attachments also run concurrently, sharing the client's
+three file-request slots with byte downloads. Repeated reads of the same representation
+reuse only a complete cached result. File reads leave the ordinary request queue free;
+saved FloodWait deadlines are checked again when a request gets a slot.
 
 Limits are set **per type**: photos, videos, GIFs and animations, round video messages,
 voice messages, music and audio, stickers, and files. Each type can be turned off and has

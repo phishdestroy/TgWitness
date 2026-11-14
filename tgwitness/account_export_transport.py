@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import functools
 import inspect
@@ -13,6 +14,20 @@ from . import file_hashes
 SECRET_FIELDS = frozenset({"access_hash", "file_reference", "auth_key", "api_hash", "session", "string_session",
                            "token", "password", "secret", "hash", "takeout_id", "future_auth_token"})
 DIRECT_PEER_LIMIT = 20
+DISCOVERY_PROBES = 4
+
+
+def history_messages(result, task, cursor=0):
+    messages = result.messages
+    for message in messages:
+        mid = getattr(message, "id", None)
+        if (type(mid) is not int or mid <= 0 or cursor and mid >= cursor
+                or task.get("newest_message_id") is not None and mid > task["newest_message_id"]):
+            raise ValueError("Telegram returned a message outside the frozen page boundary.")
+        peer = getattr(message, "peer_id", None)
+        if peer is not None and utils.get_peer_id(peer) != task["chat_id"]:
+            raise ValueError("Telegram returned history for a different chat.")
+    return sorted(messages, key=lambda message: -message.id)
 
 
 def safe(value, depth=0):
@@ -84,6 +99,11 @@ class Transport:
         self.client = None
         self.metadata = {}
         self.emoji = {}
+        self.progress = None
+
+    def report(self, stage, done, total=None, chat=None):
+        if self.progress:
+            self.progress(stage, done, total, chat)
 
     def save(self):
         self.vault.save(self.secret_name, self.secret)
@@ -150,6 +170,8 @@ class Transport:
         return chats
 
     async def discover(self):
+        from .collector import AUTHORIZATION_ERRORS
+
         ranges = [None] if self.options["chat_kinds"] else []
         gaps = []
         if self.options["transport"] == "takeout" and ranges:
@@ -177,6 +199,7 @@ class Transport:
                 if index not in row["ranges"]:
                     row["ranges"].append(index)
                 row["archived"] = getattr(dialog, "folder_id", None) == 1
+                self.report("chats", len(chats))
         if self.options["transport"] == "takeout" and {"group", "supergroup", "channel"} & set(self.options["chat_kinds"]):
             offset = 0
             while True:
@@ -189,9 +212,10 @@ class Transport:
                         "kind": kind_of(entity) or "channel", "archived": False, "left": True,
                         "ranges": [len(ranges) - 1]})
                 offset += len(result.chats)
+                self.report("left_chats", len(chats))
                 if not result.chats or isinstance(result, t.messages.Chats):
                     break
-        tasks = []
+        tasks, notes = [], {}
         for chat in chats.values():
             chat["selected"] = (chat["kind"] in self.options["chat_kinds"]
                                 and (not selected_ids or chat["id"] in selected_ids)
@@ -201,16 +225,25 @@ class Transport:
             if not chat["selected"]:
                 continue
             for index in chat["ranges"]:
-                task = {"id": "messages:" + str(chat["id"]) + ":" + str(index), "category": "messages",
-                    "chat_id": chat["id"], "telegram_range": ranges[index], "own_only": self.options["own_messages_only"]}
+                tasks.append({"id": "messages:" + str(chat["id"]) + ":" + str(index), "category": "messages",
+                    "chat_id": chat["id"], "telegram_range": ranges[index], "own_only": self.options["own_messages_only"]})
+        titles, checked, slots = {chat["id"]: chat["title"] for chat in chats.values()}, 0, asyncio.Semaphore(DISCOVERY_PROBES)
+        self.report("checking", 0, len(tasks))
+
+        async def probe(task):
+            nonlocal checked
+            async with slots:
                 try:
                     try:
                         response = await self.history(task, 0, 1)
                     except errors.ChannelPrivateError:
                         task["own_only"] = True
-                        gaps.append("Chat " + str(chat["id"]) + ": full history unavailable; exporting own messages only.")
+                        notes[task["id"]] = ("Chat " + str(task["chat_id"])
+                                             + ": full history unavailable; exporting own messages only.")
                         response = await self.history(task, 0, 1)
-                    messages = [m for m in response.messages if not isinstance(m, t.MessageEmpty)]
+                    messages = history_messages(response, task)
+                except AUTHORIZATION_ERRORS:
+                    raise
                 except (errors.TakeoutInvalidError, errors.FloodWaitError, errors.FloodPremiumWaitError, errors.ServerError):
                     raise
                 except errors.RPCError as exc:
@@ -218,7 +251,18 @@ class Transport:
                     messages = []
                 newest = max((m.id for m in messages), default=0)
                 task.update(newest_message_id=newest, cursor_start=newest + 1)
-                tasks.append(task)
+                checked += 1
+                self.report("checking", checked, len(tasks), titles.get(task["chat_id"]))
+
+        probes = [asyncio.ensure_future(probe(task)) for task in tasks]
+        try:
+            await asyncio.gather(*probes)
+        except BaseException:
+            for pending in probes:
+                pending.cancel()
+            await asyncio.gather(*probes, return_exceptions=True)
+            raise
+        gaps += [notes[task["id"]] for task in tasks if task["id"] in notes]
         missing = selected_ids - set(chats)
         gaps += ["Selected chat " + str(cid) + " was not returned in the visible inventory." for cid in sorted(missing)]
         for flag, category in (("include_profile", "profile"), ("include_contacts", "contacts"),
@@ -284,8 +328,9 @@ class Transport:
         if category == "messages":
             result = await self.history(task, cursor)
             entities = {utils.get_peer_id(e): e for e in [*result.users, *result.chats]}
-            rows = sorted([m for m in result.messages if not isinstance(m, t.MessageEmpty)], key=lambda m: -m.id)
-            next_cursor = min((m.id for m in rows), default=cursor)
+            messages = history_messages(result, task, cursor)
+            rows = [message for message in messages if not isinstance(message, t.MessageEmpty)]
+            next_cursor = min((message.id for message in messages), default=cursor)
             output = []
             for message in rows:
                 record = safe(message)
@@ -298,7 +343,7 @@ class Transport:
                               text=getattr(message, "message", ""), outgoing=bool(getattr(message, "out", False)),
                               from_id=sender_id, sender=safe(entities.get(sender_id)))
                 output.append((record, attachments(getattr(message, "media", None))))
-            return output, next_cursor, not rows
+            return output, next_cursor, not messages
         if category == "profile":
             value = await self.client(f.users.GetFullUserRequest(t.InputUserSelf()))
             return [({"category": category, "data": safe(value)}, None)], cursor, True

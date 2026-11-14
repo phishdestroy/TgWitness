@@ -1,6 +1,6 @@
 {
   "code": "FR",
-  "scope": "France · procédure civile",
+  "scope": "France · procédure civile et pénale (références signalées séparément)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "technicien / expert",
@@ -9,22 +9,49 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · décret n° 2017-1416",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. Décret n° 2017-1416, art. 1: the reliability of an electronic signature process is presumed, until proven otherwise, when it uses a qualified electronic signature within eIDAS arts. 26, 28 and 29.",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000035676246"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing by competent authorities for criminal offences falls under title III of loi n° 78-17 (art. 87).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States. Décret n° 2016-1673, art. 3: the integrity condition for a presumed-reliable electronic copy (Code civil art. 1379) is presumed met when a qualified time stamp, seal or signature is used.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Code civil, art. 1366",
+      "basis": "Electronic writing has the same probative force as writing on paper if the person it comes from can be identified and it is created and kept in conditions that guarantee its integrity.",
+      "source": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032042461/"
+    },
+    {
+      "route": "civil",
+      "term": "Code civil, art. 1379",
+      "basis": "A reliable copy has the same probative force as the original; reliability is for the judge. A copy reproducing form and content whose integrity is guaranteed by a decree-compliant process is presumed reliable. The original can still be required if it exists.",
+      "source": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032042394"
+    },
+    {
+      "route": "criminal",
+      "term": "Code de procédure pénale, art. 427",
+      "basis": "Unless the law provides otherwise, offences may be proved by any means and the judge decides by intime conviction, only on evidence produced and discussed at the hearing. Repealed by Ordonnance n° 2025-1091 with effect from 1 January 2029.",
+      "source": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037108959/2026-03-24"
+    }
+  ],
+  "dpa": {
+    "name": "Commission nationale de l'informatique et des libertés (CNIL)",
+    "name_en": "French data protection authority",
+    "basis": null,
+    "source": "https://www.cnil.fr/fr"
+  },
   "sources": [
     {
       "term": "Code de procédure civile, art. 232",
@@ -41,6 +68,54 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Décret n° 2017-1416, art. 1",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000035676246"
+    },
+    {
+      "term": "Décret n° 2016-1673, art. 3",
+      "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000033546189"
+    },
+    {
+      "term": "Code civil, art. 1366",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032042461/"
+    },
+    {
+      "term": "Code civil, art. 1379",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032042394"
+    },
+    {
+      "term": "Code de procédure pénale, art. 427",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037108959/2026-03-24"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Loi n° 78-17, art. 87",
+      "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037817622"
+    },
+    {
+      "term": "CNIL",
+      "url": "https://www.cnil.fr/fr"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from Légifrance and EUR-Lex texts opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in France.",
+      "sources": [
+        "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000035676246",
+        "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000033546189",
+        "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032042461/",
+        "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032042394",
+        "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037108959/2026-03-24",
+        "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037817622",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

@@ -25,7 +25,8 @@ flowchart LR
 Telethon's extra history iterator delay for public-chat exports. It reuses the
 existing Takeout request wrapper, preserves account-wide persisted FloodWait and
 validates the export handle and Telegram split range on resume. Handles remain
-private. There is one outgoing RPC per account.
+private. The shared history lane allows up to three requests in flight per account;
+individual workers retain sequential cursors and shared request spacing.
 
 Sparse numeric ranges can use wider chunks, up to 100,000 IDs. The signed scope
 still contains every planned ID. This is a request-count optimization, independent

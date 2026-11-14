@@ -23,7 +23,7 @@ class SourceTypes(BaseModel):
 class NewChats(BaseModel):
     model_config = ConfigDict(extra="forbid")
     profile: StrictBool = False
-    history: int = Field(default=0, ge=0, le=1000)
+    history: int = Field(default=100, ge=0, le=1000)
 
 
 class Scope(BaseModel):

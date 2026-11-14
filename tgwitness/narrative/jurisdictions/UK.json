@@ -1,6 +1,6 @@
 {
   "code": "UK",
-  "scope": "England and Wales · civil proceedings",
+  "scope": "England and Wales · civil proceedings; criminal references marked separately",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "expert",
@@ -8,15 +8,129 @@
     "source": "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part35",
     "route": "civil"
   },
-  "esig_regulation": null,
-  "data_access_basis": null,
-  "timestamp_recognition": null,
-  "evidence_rules": [],
-  "dpa": null,
+  "esig_regulation": {
+    "term": "Electronic Communications Act 2000, s. 7; UK eIDAS",
+    "basis": "ECA 2000 s. 7(1): in legal proceedings an electronic signature incorporated into or logically associated with an electronic communication or data, and its certification, are admissible on the authenticity or integrity of the communication or data. Trust services are governed by the retained Regulation (EU) No 910/2014 as it applies in UK law (UK eIDAS) and the Electronic Identification and Trust Services for Electronic Transactions Regulations 2016 (SI 2016/696).",
+    "source": "https://www.legislation.gov.uk/ukpga/2000/7/section/7"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "UK GDPR Art. 6(1)(f); DPA 2018 Part 3",
+    "basis": "A private party needs a lawful basis under UK GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)), which does not apply to public authorities performing their tasks. Processing by competent authorities for law-enforcement purposes is governed by Part 3 of the Data Protection Act 2018 (s. 29).",
+    "deadline_days": null,
+    "source": "https://www.legislation.gov.uk/eur/2016/679/article/6"
+  },
+  "timestamp_recognition": {
+    "term": "ECA 2000 s. 7B; UK eIDAS Art. 41",
+    "basis": "ECA s. 7B(1): an electronic time stamp associated with a communication or data, and its certification, are admissible on whether the communication or data existed at that time. UK eIDAS Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified; Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data.",
+    "automatic_ots_qualification": false,
+    "source": "https://www.legislation.gov.uk/eur/2014/910/article/41"
+  },
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Civil Evidence Act 1995, ss. 8 and 13",
+      "basis": "A statement in a document may be proved by producing the document or an authenticated copy, however many removes from the original. A document is anything in which information of any description is recorded.",
+      "source": "https://www.legislation.gov.uk/ukpga/1995/38/section/8"
+    },
+    {
+      "route": "civil",
+      "term": "CPR 32.19",
+      "basis": "A party is deemed to admit the authenticity of a document disclosed under Part 31 unless it serves notice to prove the document at trial within the stated time.",
+      "source": "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part32"
+    },
+    {
+      "route": "criminal",
+      "term": "Criminal Justice Act 2003, s. 133",
+      "basis": "Where a statement in a document is admissible in criminal proceedings, it may be proved by the document or a copy authenticated as the court approves, whether or not the document still exists.",
+      "source": "https://www.legislation.gov.uk/ukpga/2003/44/section/133"
+    },
+    {
+      "route": "criminal",
+      "term": "PACE 1984, s. 78",
+      "basis": "The court may refuse prosecution evidence whose admission would have such an adverse effect on fairness, including how it was obtained, that it ought not to be admitted.",
+      "source": "https://www.legislation.gov.uk/ukpga/1984/60/section/78"
+    }
+  ],
+  "dpa": {
+    "name": "Information Commission",
+    "name_en": "Information Commission",
+    "basis": "Data Protection Act 2018, s. 114A (inserted by the Data (Use and Access) Act 2025, s. 117); s. 114 (Information Commissioner) omitted from 30 September 2026 by s. 118 of that Act",
+    "source": "https://www.legislation.gov.uk/ukpga/2018/12/section/114A"
+  },
   "sources": [
     {
       "term": "Civil Procedure Rules, Part 35",
       "url": "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part35"
+    },
+    {
+      "term": "Electronic Communications Act 2000, s. 7",
+      "url": "https://www.legislation.gov.uk/ukpga/2000/7/section/7"
+    },
+    {
+      "term": "Electronic Communications Act 2000, s. 7B",
+      "url": "https://www.legislation.gov.uk/ukpga/2000/7/section/7B"
+    },
+    {
+      "term": "SI 2016/696",
+      "url": "https://www.legislation.gov.uk/uksi/2016/696/contents"
+    },
+    {
+      "term": "UK eIDAS Art. 41",
+      "url": "https://www.legislation.gov.uk/eur/2014/910/article/41"
+    },
+    {
+      "term": "UK GDPR Art. 6",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/6"
+    },
+    {
+      "term": "Data Protection Act 2018, s. 29",
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/section/29"
+    },
+    {
+      "term": "Data Protection Act 2018, s. 114A",
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/section/114A"
+    },
+    {
+      "term": "Civil Evidence Act 1995, s. 8",
+      "url": "https://www.legislation.gov.uk/ukpga/1995/38/section/8"
+    },
+    {
+      "term": "Civil Evidence Act 1995, s. 13",
+      "url": "https://www.legislation.gov.uk/ukpga/1995/38/section/13"
+    },
+    {
+      "term": "Civil Procedure Rules, Part 32",
+      "url": "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part32"
+    },
+    {
+      "term": "Criminal Justice Act 2003, s. 133",
+      "url": "https://www.legislation.gov.uk/ukpga/2003/44/section/133"
+    },
+    {
+      "term": "Police and Criminal Evidence Act 1984, s. 78",
+      "url": "https://www.legislation.gov.uk/ukpga/1984/60/section/78"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from legislation.gov.uk and justice.gov.uk opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in England and Wales.",
+      "sources": [
+        "https://www.legislation.gov.uk/ukpga/2000/7/section/7",
+        "https://www.legislation.gov.uk/ukpga/2000/7/section/7B",
+        "https://www.legislation.gov.uk/uksi/2016/696/contents",
+        "https://www.legislation.gov.uk/eur/2014/910/article/41",
+        "https://www.legislation.gov.uk/eur/2016/679/article/6",
+        "https://www.legislation.gov.uk/ukpga/2018/12/section/29",
+        "https://www.legislation.gov.uk/ukpga/2018/12/section/114A",
+        "https://www.legislation.gov.uk/ukpga/2025/18/section/117",
+        "https://www.legislation.gov.uk/ukpga/1995/38/section/8",
+        "https://www.legislation.gov.uk/ukpga/1995/38/section/13",
+        "https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part32",
+        "https://www.legislation.gov.uk/ukpga/2003/44/section/133",
+        "https://www.legislation.gov.uk/ukpga/1984/60/section/78"
+      ]
     }
   ]
 }

@@ -38,7 +38,32 @@ def main():
     witness.add_argument("--once", action="store_true")
     witness.add_argument("--cloudflare-config", type=Path, help="Read-only WARP connector / optional Gateway observations")
     witness.add_argument("--cloudflare-token-file", type=Path, help="Independent provider read-only token; never stored in evidence")
+    ayugram = commands.add_parser("ayugram", help="Interpret AyuGram database copies and compare them with a TgWitness journal export")
+    ayugram_commands = ayugram.add_subparsers(dest="ayugram_command", required=True)
+    interpret = ayugram_commands.add_parser("interpret", help="Interpret database copies made by the recorder")
+    copies = interpret.add_mutually_exclusive_group(required=True)
+    copies.add_argument("--data", type=Path, help="Stopped AyuGram recorder: sign interpretation records into its journal")
+    copies.add_argument("--db", type=Path, help="One database copy (never the live ayudata.db); prints its rows")
+    interpret.add_argument("--previous", type=Path, help="Earlier copy of the same database: list rows added, removed or changed")
+    interpret.add_argument("--rotated", type=Path, help="Copy of a rotated ayudata_<unixtime>.db to compare with --previous")
+    interpret.add_argument("--output", type=Path, help="Write JSON to this file instead of standard output")
+    reconcile = ayugram_commands.add_parser("reconcile", help="Compare an AyuGram database copy with a TgWitness evidence ZIP")
+    sources = reconcile.add_mutually_exclusive_group(required=True)
+    sources.add_argument("--db", type=Path, help="Database copy (never the live ayudata.db)")
+    sources.add_argument("--capture-export", type=Path, help="Signed AyuGram recorder export; its newest copy is used")
+    reconcile.add_argument("--capture-fingerprint", help="Independently retained recorder key SHA-256")
+    reconcile.add_argument("--journal", type=Path, required=True, help="TgWitness evidence ZIP")
+    reconcile.add_argument("--journal-fingerprint", help="Independently retained TgWitness key SHA-256")
+    reconcile.add_argument("--output", type=Path, required=True, help="Directory for report.json and report.html")
     args = parser.parse_args()
+    if args.command == "ayugram":
+        from .ayugram import command
+        try:
+            command(args)
+        except (ValueError, OSError) as exc:
+            print(json.dumps({"error": str(exc) or type(exc).__name__}))
+            raise SystemExit(1) from None
+        return
     if args.command == "serve":
         if not 1 <= args.port <= 65535:
             parser.error("Invalid port")

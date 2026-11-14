@@ -42,6 +42,12 @@ METHODS = [
      "retain": "Who did what and when, qualifications, signed declaration or applicable certificate, custody transfers and the exact material examined.",
      "strengthen": "A declaration covers the operator's role in the collection; a provider account owned by a separate party takes the host and hypervisor out of the operator's control."},
 ]
+REFERENCES_NOTE = "Practice guidance, not law. It does not decide admissibility or replace the rules of the selected court."
+REFERENCES = [
+    {"title": "ENFSI Best Practice Manual for the Forensic Examination of Digital Technology (ENFSI-BPM-FIT-01, version 01, November 2015)",
+     "url": "https://enfsi.eu/wp-content/uploads/2016/09/1._forensic_examination_of_digital_technology_0.pdf",
+     "note": "Issued by the European Network of Forensic Science Institutes as a framework of procedures, quality principles and training for forensic laboratories examining digital technology."},
+]
 
 
 @lru_cache(maxsize=1)
@@ -209,6 +215,7 @@ def build(options=None, *, assessment=None):
                           "text": profile["local_criminal"] if criminal else profile["local"]}
                          if choice.local_note and profile.get("has_local_summary", True) else None,
         "safeguards": deepcopy(METHODS) if choice.include_methods else [],
+        "practice_references": deepcopy(REFERENCES) if choice.include_methods else [],
     }
 
 
@@ -272,6 +279,11 @@ def html(data):
             parts.append('<article class="assessment-item"><h3>' + e(method["name"]) + '</h3><p>' + e(method["helps"])
                          + '</p><p><strong>Retain: </strong>' + e(method["retain"]) + '</p><p class="assessment-limit"><strong>Strengthen: </strong>' + e(method["strengthen"]) + '</p></article>')
         parts.append('</div>')
+    if data.get("practice_references"):
+        parts.append('<h3>Practice references</h3><p>' + e(REFERENCES_NOTE) + '</p><ul>')
+        for item in data["practice_references"]:
+            parts.append('<li><a rel="noopener noreferrer" href="' + e(item["url"]) + '">' + e(item["title"]) + '</a>. ' + e(item["note"]) + '</li>')
+        parts.append('</ul>')
     return ''.join(parts) + '</section>'
 
 
@@ -332,3 +344,10 @@ def pdf(lay, data):
             lay.text(method["helps"])
             lay.text("Retain: " + method["retain"])
             lay.text("Strengthen: " + method["strengthen"])
+    if data.get("practice_references"):
+        lay.heading("Practice references")
+        lay.text(REFERENCES_NOTE)
+        for item in data["practice_references"]:
+            lay.text(item["title"])
+            lay.text(item["note"])
+            lay.text(item["url"], size=7.5)

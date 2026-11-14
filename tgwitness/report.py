@@ -443,6 +443,8 @@ def file_purpose(say, name):
         return say("Viewer data: checked against the report seal before display")
     if name.startswith("media/"):
         return say("Saved file, named by its SHA-256")
+    if name.startswith("anchors/") and name.endswith(".ers"):
+        return say("Evidence record (RFC 4998) for the checkpoint")
     if name.startswith("anchors/"):
         return say("Timestamp answer") if not name.endswith(".json") else say("Signed checkpoint that was timestamped")
     if name.startswith(("records/", "messages/")):
@@ -812,7 +814,7 @@ CSS = (
     "background:var(--th)}.grid td{padding:7px 10px;overflow-wrap:break-word}.grid td small{overflow-wrap:anywhere}"
     "@media (max-width:600px){.scroll>.grid{width:max-content;min-width:100%}"
     ".grid th,.grid td{max-width:15em;overflow-wrap:anywhere}.grid th{overflow-wrap:normal}.grid .pill{white-space:normal}}"
-    ".scroll{overflow-x:auto}"
+    ".scroll{overflow-x:auto}.scroll>svg.chat-timeline{min-width:640px}"
     ".pill{display:inline-flex;align-items:center;gap:6px;padding:1px 7px;border-radius:3px;font-size:11.5px;"
     "font-weight:650;border:1px solid color-mix(in srgb,currentColor 30%,transparent);background:var(--tint);"
     "color:var(--accent);white-space:nowrap}"
@@ -1728,7 +1730,13 @@ def record_html(event, say, titles, options, archive, base=""):
     if kind in ("message.deleted", "message.missing_on_recheck") and timer_expected(payload):
         parts.append('<div class="gone">' + e(timer_text(say, kind)) + "</div>")
     elif kind == "message.deleted":
-        parts.append('<div class="gone">' + e(say("Telegram reported this message as deleted.")) + "</div>")
+        from .deletions import attribution_text
+        parts.append('<div class="gone">' + e(say("Telegram reported this message as deleted.") + " "
+                                              + attribution_text(say, payload)) + "</div>")
+    elif kind in ("message.deletion_attributed", "history.cleared_by_peer_suspected"):
+        from .deletions import attribution_text, clear_text
+        parts.append('<div class="gone">' + e(attribution_text(say, {}, payload) if kind == "message.deletion_attributed"
+                                              else clear_text(say, payload)) + "</div>")
     elif kind == "message.missing_on_recheck":
         parts.append('<div class="gone">' + e(say("Telegram no longer returned this message at a later check.")) + "</div>")
     if kind.startswith("media.") and payload.get("ephemeral_media"):
@@ -1851,6 +1859,7 @@ def report_data(events_again, coverage, context):
         "actions": {"panel_actions": digest.get("action_count", 0), "listed": digest.get("actions") or [],
                     "messages_sent": digest.get("own_total", 0), "sent_listed": digest.get("own_messages") or []},
         "timestamps": anchors, "coverage": coverage, "custody": custody(context),
+        "sequence_continuity": sequence_continuity(context, options),
         "case_assessment": case_assessment.journal(context, coverage),
         "case_board": context.get("case_board"),
         "indicators": digest.get("indicators") or {"items": [], "total": 0, "not_listed": 0},
@@ -1930,7 +1939,11 @@ def message_histories(events, changed, limit=HISTORY_LIMIT):
             item["versions"].append(version)
         elif kind in ("message.deleted", "message.missing_on_recheck"):
             item["gone"].append({"seq": event["seq"], "kind": kind, "observed_at": event["observed_at"],
-                                 **({"auto_delete": True} if timer_expected(payload) else {})})
+                                 **({"auto_delete": True} if timer_expected(payload) else {}),
+                                 **({"attribution": {key: payload.get(key) for key in ("attribution", "attribution_facts")}}
+                                    if kind == "message.deleted" else {})})
+        elif kind == "message.deletion_attributed":
+            item["link"] = payload
     return found
 
 
@@ -2020,6 +2033,7 @@ def history_card(say, key, item, titles, linked=True):
                 + e(media_text(say, media)) + "</div>"
         steps.append('<li><div class="vhead">' + head + '</div><div class="text">' + text + "</div>" + shown + "</li>")
         previous = version
+    from .deletions import attribution_text as deletion_attribution_text
     for gone in item["gone"]:
         deleted = gone["kind"] == "message.deleted"
         retained = last_saved_before(item["versions"], gone["seq"])
@@ -2037,6 +2051,8 @@ def history_card(say, key, item, titles, linked=True):
                          say("This is when the deletion notice was observed; the chat's admin log names the acting "
                              "administrator where the account can read it.") if deleted
                          else say("Telegram no longer returned this message at a later check."))
+                     + (" " + e(deletion_attribution_text(say, gone["attribution"], item.get("link")))
+                        if deleted and "attribution" in gone and not gone.get("auto_delete") else "")
                      + "</p>" + kept + "</li>")
     return ('<article class="hist" id="m' + e(chat) + "-" + e(message_id) + '"><header><b>'
             + e(titles.get(chat) or say("Chat {id}", id=chat)) + " · " + e(say("message {id}", id=message_id)) + "</b>"
@@ -2254,6 +2270,31 @@ def gap_html(say, summary):
     return out + '<p class="hint">' + e(view["note"]) + "</p>"
 
 
+def sequence_continuity(context, options):
+    events = context.get("events_again")
+    if not callable(events):
+        return None
+    from .verifier.completeness import COMPLETENESS_KINDS, completeness_certificate
+    try:
+        selection = report_selection.Selection.model_validate(options.get("selection") or {})
+    except ValidationError:
+        selection = report_selection.Selection()
+    chosen = selection.enabled
+    source = events()
+    rows = (event for event in getattr(source, "values", source) if event.get("kind") in COMPLETENESS_KINDS)
+    return completeness_certificate(rows, selection.date_from + "T00:00:00+00:00" if chosen and selection.date_from else None,
+                                    selection.date_to + "T23:59:59.999+00:00" if chosen and selection.date_to else None,
+                                    list(selection.chats) if chosen and selection.chats else None)
+
+
+def continuity_section(say, number, certificate, titles=None):
+    from .verifier.completeness import completeness_lines
+    out = section(number, "continuity", say("Sequence continuity"), say(certificate["proves"]))
+    out += "<p>" + e(say(certificate["does_not_prove"])) + "</p><ul>"
+    out += "".join("<li>" + e(line) + "</li>" for line in completeness_lines(certificate, say, titles))
+    return out + '</ul><p class="hint">' + e(say(certificate["channels"])) + "</p></section>"
+
+
 def coverage_notes(coverage):
     return [[note.get("at"), "—" if note.get("chat_id") is None else str(note["chat_id"]),
              " · ".join(str(note[key]) for key in ("reason", "operation", "error_type") if note.get(key)) or "—"]
@@ -2330,7 +2371,7 @@ def timestamp_summary(anchors, rows):
     return summary
 
 
-def timestamps_section(say, number, anchors, archive_name, fp):
+def timestamps_section(say, number, anchors, archive_name, fp, standalone=False):
     out = section(number, "timestamps", say("Timestamps"),
                   say("A timestamp shows that a checkpoint, and every record before it, existed no later than the stamped "
                       "time. Records after the latest stamped checkpoint rely on the collector's clock."))
@@ -2338,6 +2379,9 @@ def timestamps_section(say, number, anchors, archive_name, fp):
     if latest:
         out += ('<div class="callout ok">' + e(say("Latest independently timestamped record: #{n}", n=latest.get("event_count")))
                 + " · " + when(latest.get("time")) + " · " + e(latest["service"]) + "</div>")
+    elif standalone:
+        out += ('<div class="callout">' + e(say("Timestamp receipts are not part of this report file. The signed archive of this "
+                                                "journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.")) + "</div>")
     else:
         out += ('<div class="callout">' + e(say("No independent timestamps in this export: times come from the collector's "
                                                 "clock. Turn on Evidence mode to stamp checkpoints automatically.")) + "</div>")
@@ -2500,7 +2544,8 @@ class EvidenceHTML:
                         *([(say("Missing on recheck"), num(categories["missing"]), "warn", "eye")]
                           if categories.get("missing") else []),
                         (say("Files"), num(len(self.digest["media"])), "violet", "file"),
-                        (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"])), "ok", "seal"),
+                        (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
+                         if self.anchors or self.archive else "—", "ok", "seal"),
                         (say("Observation period"), e(span_text(say, self.digest["first"], self.digest["last"])), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
@@ -2589,7 +2634,8 @@ class EvidenceHTML:
                       if self.context.get("events_sha256") else "")])
                + "</section>").encode("utf-8")
         if not self.handover:
-            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name, self.fp).encode("utf-8")
+            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name, self.fp,
+                                     not self.archive).encode("utf-8")
 
     def render_custody(self):
         say = self.say
@@ -2597,6 +2643,10 @@ class EvidenceHTML:
             if self.material.get("selection"):
                 yield ('<h2>' + e(say("Source journal coverage")) + '</h2>').encode("utf-8")
             yield coverage_section(say, next(self.numbers), self.coverage).encode("utf-8")
+        continuity = sequence_continuity(self.context, self.options)
+        if continuity:
+            yield continuity_section(say, next(self.numbers), continuity,
+                                     (self.context.get("digest") or {}).get("titles")).encode("utf-8")
         latest = latest_stamp(self.anchors)
         steps = [(say("Observed and recorded"), when(self.source_digest["first"]) + " — " + when(self.source_digest["last"])),
                  (say("Each record hashed and signed at capture"), e(say("Records: {n}", n=self.count)))]
@@ -3150,9 +3200,12 @@ JOURNAL_LEAD = ("Messages of this chat that the observing account saw deleted, m
 
 
 def journal_change_rows(say, items):
+    from .deletions import attribution_text
     for item in items:
-        versions = [v for v in item["events"] if v["kind"] not in JOURNAL_NOTICES]
+        versions = [v for v in item["events"] if v["kind"] not in JOURNAL_NOTICES and "link" not in v]
+        link = next((v["link"] for v in item["events"] if "link" in v), None)
         notices = [say(JOURNAL_NOTICES[v["kind"]]) + " · " + utc_text(v["observed_at"])
+                   + (" · " + attribution_text(say, v["attribution"], link) if "attribution" in v else "")
                    for v in item["events"] if v["kind"] in JOURNAL_NOTICES]
         edits = sum(1 for v in versions if v["kind"] == "message.edited")
         if edits:

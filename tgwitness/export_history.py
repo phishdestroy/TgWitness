@@ -4,6 +4,7 @@ import os
 import secrets
 import shutil
 import tempfile
+import zipfile
 from pathlib import Path
 from datetime import datetime, timezone
 from .replica import filesystem_link
@@ -49,6 +50,9 @@ def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, require
     cached = folder / ident
     entry = {"id": ident, "format": fmt, "encrypted": bool(encrypted), "bytes": size, "sha256": digest,
              "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    if fmt == "asice":
+        with zipfile.ZipFile(path) as archive:
+            entry["members"] = len(archive.infolist())
     if encrypted and encryption == "tgwpw":
         entry["encryption"] = encryption
     if owner is not None and workspace is not None and required_permissions:

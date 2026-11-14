@@ -211,6 +211,7 @@ class JournalIndex:
     def state(self, event):
         db = self.db
         chat, message, kind = event["chat_id"], event["message_id"], event["kind"]
+        promotes_text = kind in TEXT_KINDS
         if chat is not None and message is not None:
             db.execute("INSERT OR IGNORE INTO known_chat_index VALUES (?)", (chat,))
         if chat is not None and kind in CHAT_KINDS:
@@ -218,13 +219,17 @@ class JournalIndex:
             if message is not None:
                 old = db.execute("SELECT * FROM message_state_index WHERE chat_id=? AND message_id=?",
                                  (chat, message)).fetchone()
+                started = (event["payload"].get("acquisition") or {}).get("request_started_seq")
+                if (kind == "message.snapshot" and type(started) is int and started >= 0
+                        and old and old["text_seq"] is not None and old["text_seq"] > started):
+                    promotes_text = False
                 values = (int(kind != "media.saved"), int(kind == "message.edited"),
                           int(kind == "message.deleted"), int(kind == "message.missing_on_recheck"))
                 previous = tuple(old[k] for k in ("has_message", "edited", "deleted", "missing")) if old else (0,)*4
                 updated = tuple(max(a, b) for a, b in zip(previous, values))
-                if kind in TEXT_KINDS:
+                if promotes_text:
                     updated = (*updated[:3], 0)
-                text_seq = event["seq"] if kind in TEXT_KINDS else old["text_seq"] if old else None
+                text_seq = event["seq"] if promotes_text else old["text_seq"] if old else None
                 had_text = bool(old and old["text_seq"] is not None)
                 saved_before = (int(had_text), int(had_text and bool(previous[2])))
                 saved_after = (int(text_seq is not None), int(text_seq is not None and bool(updated[2])))
@@ -238,7 +243,7 @@ class JournalIndex:
                            "last_observed_at=max(coalesce(last_observed_at,''),?) WHERE chat_id=?",
                            (*[b-a for a, b in zip(previous, updated)], *[b-a for a, b in zip(saved_before, saved_after)],
                             event["observed_at"], chat))
-            if kind in TEXT_KINDS:
+            if promotes_text:
                 db.execute("UPDATE chat_state_index SET text_id=?,text_seq=? WHERE chat_id=? "
                            "AND (text_seq IS NULL OR text_id IS NULL OR ?>=text_id)",
                            (message, event["seq"], chat, message))
@@ -258,6 +263,11 @@ class JournalIndex:
         self.db.execute("INSERT INTO event_payload_search(rowid,document) VALUES (?,?)",
                         (seq, search_text(payload)))
         self.advance("payload_search", seq)
+
+    def latest_message_times(self):
+        return dict(self.db.execute(
+            "SELECT c.chat_id,coalesce(json_extract(e.payload,'$.sent_at'),e.source_at) FROM chat_state_index c "
+            "JOIN events e ON e.seq=c.text_seq WHERE c.last_observed_at IS NOT NULL").fetchall())
 
     def candidate(self, query, *, text_only=True):
         value = search_text(query)
@@ -281,6 +291,16 @@ def media_fields(payload):
     return priority, size
 
 
+def media_transfer_key(payload):
+    capture = payload.get("media_capture") or {}
+    action = capture.get("action", "download")
+    identity = attachment_key(raw_attachment((payload.get("raw") or {}).get("media")))
+    size = media_fields(payload)[1]
+    if identity is None or size is None or action not in ("download", "hashes_only"):
+        return None
+    return json.dumps([action, identity, size], separators=(",", ":"))
+
+
 def migrate_media(db):
     columns = {r[1] for r in db.execute("PRAGMA table_info(media_jobs)")}
     added = "priority" not in columns
@@ -290,6 +310,12 @@ def migrate_media(db):
         db.execute("ALTER TABLE media_jobs ADD COLUMN estimated_bytes INTEGER")
     if "expedite" not in columns:
         db.execute("ALTER TABLE media_jobs ADD COLUMN expedite INTEGER NOT NULL DEFAULT 0")
+    if "transfer_key" not in columns:
+        db.execute("ALTER TABLE media_jobs ADD COLUMN transfer_key TEXT")
+        for row in db.execute("SELECT j.message_event,e.payload FROM media_jobs j JOIN events e ON e.seq=j.message_event "
+                              "WHERE j.state IN ('queued','retry','running')"):
+            db.execute("UPDATE media_jobs SET transfer_key=? WHERE message_event=?",
+                       (media_transfer_key(json.loads(row["payload"])), row["message_event"]))
     if added:
         for row in db.execute("SELECT j.message_event,e.payload FROM media_jobs j "
                               "JOIN events e ON e.seq=j.message_event"):
@@ -300,3 +326,5 @@ def migrate_media(db):
                "media_jobs(account_id,priority,message_event,next_attempt) WHERE state IN ('queued','retry')")
     db.execute("CREATE INDEX IF NOT EXISTS media_expedited ON "
                "media_jobs(account_id,expedite DESC,priority,message_event) WHERE state IN ('queued','retry')")
+    db.execute("CREATE INDEX IF NOT EXISTS media_active_transfer ON "
+               "media_jobs(account_id,transfer_key) WHERE state='running'")

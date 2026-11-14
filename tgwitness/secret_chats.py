@@ -5,10 +5,11 @@ import logging
 import secrets
 import shutil
 import time
+from datetime import datetime, timezone
 
 from telethon import utils
 from telethon.errors import FloodWaitError
-from telethon.tl import types
+from telethon.tl import functions, types
 from telethon.tl.tlobject import TLObject
 
 from . import secret_module
@@ -32,6 +33,22 @@ QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", 
          "DecryptedMessageActionResend"}
 UNAVAILABLE = "Pseudo-secret needs its protocol module, which is not installed yet."
 SAME = ("direction", "seq_no", "text", "ttl", "reply_to_random_id", "entities", "media")
+READ_MEANING = ("Sent from the panel: the other side sees its messages dated up to this time as read, and its app "
+                "starts their self-destruct timers. TgWitness keeps its own copies.")
+CONTENT_MEANING = ("Sent from the panel as an encrypted read notice for these messages: the other side sees them as "
+                   "opened, and its app starts their self-destruct timers. TgWitness keeps its own copies.")
+PEER_READ_MEANING = ("Telegram reported that the other side read this account's messages in this chat dated up to "
+                     "max_date. Official apps start the self-destruct timers of those messages at this point.")
+PEER_OPENED_MEANING = ("The other side reported these messages as opened. Official apps send this for viewed timed "
+                       "messages and played voice or video messages. TgWitness keeps every earlier message.")
+
+
+def unix(value):
+    return int(value.timestamp()) if isinstance(value, datetime) else value
+
+
+def moment(value):
+    return datetime.fromtimestamp(value, timezone.utc).isoformat() if type(value) is int else None
 
 
 def available():
@@ -411,10 +428,30 @@ class SecretChats:
     def on_ServiceActionReceived(self, event):
         if event.action_name in QUIET:
             return
+        if event.action_name == "DecryptedMessageActionTyping":
+            return self.peer_typing(event.chat_id, getattr(event.action, "action", None))
+        opened = event.action_name == "DecryptedMessageActionReadMessages"
         self.note("action", {"secret_chat_id": event.chat_id, "peer_user_id": self.peer(event.chat_id),
                              "action": event.action_name.removeprefix("DecryptedMessageAction"),
                              "details": plain(event.action), "applied_by_tgwitness": event.applied,
-                             "meaning": "Reported by the other side. TgWitness keeps every earlier message."})
+                             **({"random_ids": list(getattr(event.action, "random_ids", None) or []),
+                                 "contents_opened": True} if opened else {}),
+                             "meaning": PEER_OPENED_MEANING if opened else
+                             "Reported by the other side. TgWitness keeps every earlier message."})
+
+    def peer_typing(self, chat_id, action=None):
+        from . import visibility
+        if not settings(self.store)["enabled"]:
+            return None
+        return visibility.of(self.collector).peer_typing(chat_id, self.peer(chat_id), action, secret=True)
+
+    def peer_read(self, update):
+        if not settings(self.store)["enabled"]:
+            return None
+        max_date, read_at = unix(update.max_date), unix(update.date)
+        return self.note("peer_read", {"secret_chat_id": update.chat_id, "peer_user_id": self.peer(update.chat_id),
+                                       "max_date": max_date, "max_date_at": moment(max_date), "read_at": moment(read_at),
+                                       "contents_opened": False, "meaning": PEER_READ_MEANING})
 
     def on_DecryptFailed(self, event):
         self.note("decrypt_failed", {"secret_chat_id": event.chat_id, "reason": event.reason})
@@ -590,12 +627,107 @@ class SecretChats:
         return self.snapshot(chat)
 
     async def send(self, chat_id, text):
+        from . import interactions, visibility
         manager = self.require()
+        fields, typing = visibility.effective(self.store, chat_id, True), None
+        if fields["typing"] == "before_send":
+            interactions.permitted(self.collector)
+            typing = await visibility.show_typing(self.collector, "secret_chat.typing", {
+                "secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "method": "messages.setEncryptedTyping"},
+                functions.messages.SetEncryptedTypingRequest(self.input_chat(chat_id), True),
+                visibility.typing_seconds(text))
         random_id = await self.acting(manager.send_message, chat_id, text)
         chat = manager.status(chat_id)
-        self.note("message", {"secret_chat_id": chat_id, "peer_user_id": chat.peer_user_id, "direction": "out",
-                              "random_id": random_id, "text": text, "ttl": chat.ttl})
+        sent = self.note("message", {"secret_chat_id": chat_id, "peer_user_id": chat.peer_user_id, "direction": "out",
+                                     "random_id": random_id, "text": text, "ttl": chat.ttl,
+                                     **({"typing_before_send": typing} if typing else {})})
+        if fields["read_receipts"] == "on_reply":
+            try:
+                await self.mark_read(chat_id, "on_reply", cause={
+                    "after_panel_action": {"action": "send", "message_event": sent["seq"]}})
+            except Exception as exc:
+                LOG.info("No read receipt after the panel message in secret chat %s: %s", chat_id, type(exc).__name__)
         return random_id
+
+    def input_chat(self, chat_id):
+        chat = self.require()._entity(chat_id)
+        return types.InputEncryptedChat(chat.id, chat.access_hash)
+
+    def received(self, chat_id, random_ids=None):
+        query = ("SELECT json_extract(payload,'$.random_id'), max(observed_at), max(json_extract(payload,'$.ttl')), "
+                 "max(json_extract(payload,'$.media._')) FROM events WHERE kind='secret_chat.message' "
+                 "AND json_extract(payload,'$.secret_chat_id')=? AND json_extract(payload,'$.direction')='in'")
+        values = [chat_id]
+        if random_ids is not None:
+            query += " AND json_extract(payload,'$.random_id') IN (" + ",".join("?" * len(random_ids)) + ")"
+            values += list(random_ids)
+        with self.store.lock:
+            return self.store.db.execute(query + " GROUP BY 1 ORDER BY 2 DESC", values).fetchall()
+
+    def unopened(self, chat_id):
+        from . import visibility
+        opened = set(visibility.marks(self.store).get("opened:" + visibility.mark_key(chat_id, True)) or [])
+        return [{"random_id": str(row[0]), "observed_at": row[1], "ttl": row[2], "media": row[3]}
+                for row in self.received(chat_id) if (row[2] or row[3]) and row[0] not in opened][:20]
+
+    def definite(self):
+        return tuple(error for error in (getattr(library, name, None) for name in ("ChatClosed", "ChatNotReady",
+                                                                                     "UnknownChat"))
+                     if isinstance(error, type))
+
+    async def mark_read(self, chat_id, trigger, operator=None, cause=None):
+        from . import interactions, visibility
+        visibility.require(self.store, chat_id, True, "read_receipts", trigger)
+        interactions.permitted(self.collector)
+        self.require()
+        newest = max((row[1] for row in self.received(chat_id)), default=None)
+        if newest is None:
+            raise ValueError("No received message of this chat is saved here, so nothing can be marked as read.")
+        bound, key = int(datetime.fromisoformat(newest).timestamp()), visibility.mark_key(chat_id, True)
+        done = visibility.marks(self.store).get(key)
+        if isinstance(done, int) and done >= bound:
+            return {"status": "unchanged", "secret_chat_id": chat_id, "max_date": done, "trigger": trigger}
+        request = functions.messages.ReadEncryptedHistoryRequest(self.input_chat(chat_id), bound)
+        details = {"secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "trigger": trigger, "max_date": bound,
+                   "max_date_at": moment(bound), "covers": "received messages dated up to this time",
+                   "method": "messages.readEncryptedHistory", **visibility.operator_of(operator), **(cause or {}),
+                   "meaning": READ_MEANING}
+        result = await visibility.dispatch(self.collector, "secret_chat.read", details, lambda: self.client(request),
+                                           None, (type(request), chat_id, bound), self.definite())
+        if result["status"] == "succeeded":
+            visibility.remember(self.store, key, bound)
+            await visibility.opsec.hide_presence(self.collector, result["request_event"])
+        return {**result, "secret_chat_id": chat_id, "max_date": bound, "trigger": trigger}
+
+    async def mark_opened(self, chat_id, random_ids, operator=None):
+        from . import interactions, visibility
+        visibility.require(self.store, chat_id, True, "content_opened", "manual")
+        interactions.permitted(self.collector)
+        manager = self.require()
+        ids = sorted(set(random_ids))
+        if set(ids) - {row[0] for row in self.received(chat_id, ids)}:
+            raise ValueError("Only received messages saved here can be marked as opened.")
+        details = {"secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "trigger": "manual", "random_ids": ids,
+                   "method": "messages.sendEncryptedService", "service_action": "DecryptedMessageActionReadMessages",
+                   **visibility.operator_of(operator), "meaning": CONTENT_MEANING}
+        result = await visibility.dispatch(self.collector, "secret_chat.contents", details,
+                                           lambda: manager.mark_read(chat_id, ids), None, None, self.definite())
+        if result["status"] == "succeeded":
+            key = "opened:" + visibility.mark_key(chat_id, True)
+            done = set(visibility.marks(self.store).get(key) or []) | set(ids)
+            visibility.remember(self.store, key, sorted(done)[-visibility.OPENED_LIMIT:])
+            await visibility.opsec.hide_presence(self.collector, result["request_event"])
+        return {**result, "secret_chat_id": chat_id, "random_ids": [str(value) for value in ids]}
+
+    async def send_typing(self, chat_id, operator=None):
+        from . import interactions, visibility
+        visibility.require(self.store, chat_id, True, "typing", "shown")
+        interactions.permitted(self.collector)
+        self.require()
+        request = functions.messages.SetEncryptedTypingRequest(self.input_chat(chat_id), True)
+        return await visibility.of(self.collector).ping(("secret", chat_id), "secret_chat.typing", {
+            "secret_chat_id": chat_id, "peer_user_id": self.peer(chat_id), "mode": "shown",
+            "method": "messages.setEncryptedTyping", **visibility.operator_of(operator)}, request)
 
     async def close(self, chat_id):
         manager = self.require()

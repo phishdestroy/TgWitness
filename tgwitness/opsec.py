@@ -104,8 +104,9 @@ def save_settings(store, body):
         store.set_setting("hide_online_after_actions", body.hide_online_after_actions)
         store.append("opsec.settings_changed", {
             "hide_online_after_actions": body.hide_online_after_actions,
-            "meaning": "After a panel action the account asks Telegram to show it offline. The quick change from "
-                       "online to offline can itself be noticed; hiding last seen in privacy settings is stronger."})
+            "meaning": "After a panel action, and at the first sign-in, the account asks Telegram to show it offline "
+                       "instead of announcing it online. The quick change from online to offline can itself be "
+                       "noticed; hiding last seen in privacy settings is stronger."})
     return settings(store)
 
 

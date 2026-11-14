@@ -75,6 +75,7 @@ class IndependentSession(Credentials):
         ]
     ] = Field(default_factory=list, max_length=4)
     two_factor_password: str = Field(default="", max_length=512)
+    device_seed: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
 
 class Phone(BaseModel):
@@ -223,6 +224,8 @@ class Snapshot(BaseModel):
     chat_id: int
     limit: int = Field(default=100, ge=1, le=10000)
     pause_observation: bool = False
+    fill: bool = False
+    before_id: int | None = Field(default=None, ge=1)
 
 
 class ParametersUpdate(BaseModel):
@@ -292,6 +295,7 @@ class ProfileImport(AccountImport):
     api_hash: str | None = Field(default=None, pattern=r"^[0-9a-f]{32}$")
     route: Literal["warp", "mtproxy", "direct"] | None = None
     route_consent: bool = False
+    device_seed: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
 
 class RoutePolicyUpdate(RoutePolicy):

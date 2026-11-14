@@ -153,13 +153,21 @@ so tokens and login secrets travel inside SSH or TLS.
 ## Integrity and external time
 
 Verification checks record signatures, the hash chain, attachments and the export manifest
-against the collector key. Each workspace creates its signing key at first start and
-shows its fingerprint in the panel and in every export; the fingerprint retained by
-the recipient pins that key. SQLite triggers enforce append-only behavior for normal
-application writes, and separate master-key storage protects a data-directory copy
-through `TGWITNESS_VAULT_KEY_FILE`.
+against the collector key. A valid signature shows that the bytes have not changed since
+they were signed. Each workspace creates its signing key at first start and shows its
+fingerprint in the panel and in every export. The operator gives the fingerprint to the
+recipient through a separate channel, and `--fingerprint` pins the key.
+
+A changed, inserted or removed record breaks the hash chain or a signature, and the
+verifier reports it. External timestamps and a witness also fix the journal outside the
+workspace. SQLite triggers on the journal table only stop the application from
+overwriting or deleting a record by mistake. `TGWITNESS_VAULT_KEY_FILE` keeps the vault
+key out of a data-directory copy.
+
 RFC 3161 and OpenTimestamps receipts, and witness posts whose dates the verifier reads
 from Telegram, bind the journal prefix they cover to a time set by a third party.
+A drand round written into the journal shows that the records after it were made no
+earlier than that round was published.
 A checked GitHub attestation also carries the verified time of its signature, which
 binds the whole archive to an external time.
 A checkpoint is signed with the collector key and binds the records up to it from the
@@ -181,7 +189,8 @@ grouped by their role in the minimum:
 The **minimum for evidence** is all three required conditions covering the last exported
 record; a verified attested collection run adds the `attested` profile.
 The final line states the result, and the answer names the options that would meet the
-missing conditions.
+missing conditions. Without `--fingerprint` the final line starts with
+`EVIDENCE: minimum not met · missing: confirmed signer key`.
 When verified timestamps cover only earlier records, the answer states the record up to
 which the minimum holds. `--require evidence` or `--require attested` exits with code 2 when
 the profile is not reached for the whole export, and a check requested on the command

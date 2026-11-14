@@ -94,6 +94,9 @@ async def stream(store, after, authorize, disconnected, *, interval=1, lifetime=
                 board_after = next_board
                 if notes:
                     yield "event: board\ndata: " + json.dumps(notes, separators=(",", ":")) + "\n\n"
+        if allowed != authorize():
+            await asyncio.sleep(0.05)
+            continue
         if records:
             cursor = records[-1]["seq"]
             yield "id: " + str(cursor) + "\nevent: journal\ndata: " + json.dumps(records, separators=(",", ":")) + "\n\n"

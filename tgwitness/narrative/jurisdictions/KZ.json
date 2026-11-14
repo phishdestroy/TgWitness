@@ -1,0 +1,77 @@
+{
+  "code": "KZ",
+  "scope": "Қазақстан · азаматтық және қылмыстық процесс (бөлек белгіленген сілтемелер)",
+  "checked_at": "2026-11-14",
+  "expert_role": null,
+  "esig_regulation": {
+    "term": "Закон «Об электронном документе и электронной цифровой подписи»",
+    "basis": "Article 7(1): an electronic document meeting the Law's requirements and certified by the electronic digital signature of an authorised person is equivalent to a signed paper document. Article 10(1): an electronic digital signature equals a handwritten signature when its listed conditions are met, including verification with a public key that has a registration certificate.",
+    "source": "https://old.adilet.zan.kz/rus/docs/Z030000370_"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "Закон «О персональных данных и их защите», ст. 7, 9",
+    "basis": "Article 7 sets the conditions for collecting and processing personal data. Article 9 lists the cases where data may be collected and processed without the subject's consent, beginning with the activity of law-enforcement bodies and courts.",
+    "deadline_days": null,
+    "source": "https://old.adilet.zan.kz/rus/docs/Z1300000094"
+  },
+  "timestamp_recognition": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "ГПК РК ст. 63, 65",
+      "basis": "Evidence is lawfully obtained information about facts. Admissible evidence is evidence obtained under the Code; audio and video recordings and materials on electronic, digital and other carriers may be admitted.",
+      "source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+    },
+    {
+      "route": "civil",
+      "term": "ГПК РК ст. 16, 68",
+      "basis": "Each item is assessed for relevance, admissibility and reliability, and all evidence together for sufficiency. The judge assesses evidence by inner conviction; no evidence has a predetermined force.",
+      "source": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+    },
+    {
+      "route": "criminal",
+      "term": "УПК РК ст. 25, 111, 112",
+      "basis": "Evidence is lawfully obtained factual data and is assessed by inner conviction. Data obtained in violation of the Code are inadmissible where the violation, by depriving or restricting guaranteed rights or otherwise, affected or could affect their reliability.",
+      "source": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+    },
+    {
+      "route": "criminal",
+      "term": "УПК РК ст. 120",
+      "basis": "Documents are evidence if the information set out or certified in them by individuals, legal entities or officials matters for the criminal case.",
+      "source": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+    }
+  ],
+  "dpa": {
+    "name": "Уполномоченный орган в сфере защиты персональных данных",
+    "name_en": "Authorised body for personal data protection (central executive body)",
+    "basis": "Закон «О персональных данных и их защите», ст. 1",
+    "source": "https://old.adilet.zan.kz/rus/docs/Z1300000094"
+  },
+  "sources": [
+    {
+      "term": "Гражданский процессуальный кодекс Республики Казахстан",
+      "url": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+    },
+    {
+      "term": "Гражданский процессуальный кодекс РК (kk)",
+      "url": "https://old.adilet.zan.kz/kaz/docs/K1500000377"
+    },
+    {
+      "term": "Уголовно-процессуальный кодекс Республики Казахстан",
+      "url": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+    },
+    {
+      "term": "Уголовно-процессуальный кодекс РК (kk)",
+      "url": "https://old.adilet.zan.kz/kaz/docs/K1400000231"
+    },
+    {
+      "term": "Закон «Об электронном документе и электронной цифровой подписи»",
+      "url": "https://old.adilet.zan.kz/rus/docs/Z030000370_"
+    },
+    {
+      "term": "Закон «О персональных данных и их защите»",
+      "url": "https://old.adilet.zan.kz/rus/docs/Z1300000094"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ number in memory. Default sampling stays bounded; an explicit full recheck reads
 successive batches and can be cancelled. Unchecked numbers remain visible in the
 result and are not treated as proof of deletion.
 
-Open a chat and choose **Export chat**. Select idle account workspaces that already have access to the source. Every account keeps its configured connection. This feature does not change WARP or choose an exit IP.
+Open a chat and choose **Export chat**. Select account workspaces that already have access to the source; an account that is only observing can take part. Every account keeps its configured connection. This feature does not change WARP or choose an exit IP.
 
 On **Home → Export a chat by link**, enter a public username or invite link to preview
 accessible chat facts and eligible accounts; each account left out shows why. Checking
@@ -37,7 +37,7 @@ in the export. Photo retrieval requires both the export's media option and the
 workspace's media/avatar settings. Message-ID rechecks share account pacing with
 history reads; any server-requested wait still applies to every caller.
 
-**Regular session** preserves the existing acquisition path. **Telegram Takeout session** is an opt-in path for public channels and supergroups. It opens an export session for each participating account, uses the last Telegram split range for this public-only scope, and reads history without Telethon's additional iterator delay. Telegram's own FloodWait remains fully enforced. The current implementation still has one outgoing RPC per account; choosing Takeout does not increase same-account concurrency.
+**Regular session** preserves the existing acquisition path. **Telegram Takeout session** is an opt-in path for public channels and supergroups. It opens an export session for each participating account, uses the last Telegram split range for this public-only scope, and reads history without Telethon's additional iterator delay. Telegram's own FloodWait remains fully enforced. Takeout uses the same bounded history-request lane as regular reads; switching transport does not create extra slots or bypass shared request spacing.
 
 The initial source/date boundaries are measured with regular requests and frozen in the signed plan. Takeout reads those planned ranges. Profiles, admin logs, optional context and attachment retrieval continue to use regular requests; the archive identifies that scope. The Takeout flags request the selected chat type without contacts or file export. Private chats and private groups remain available through the regular path or [account export](ACCOUNT-EXPORT.md).
 
@@ -47,7 +47,7 @@ Takeout handles stay in the encrypted vault. Chunk receipts identify transport a
 
 ## Exclusive account ownership
 
-One account runs one acquisition task. Monitoring, History, account export and chat export are mutually exclusive. Starting an export never pauses monitoring automatically. Deselect a busy account or explicitly pause its current task first. Reservations are acquired before Telegram requests and released on completion, failure or pause. Separate accounts may work concurrently; RPCs within one account are serialized. Full server-requested FloodWait deadlines are persisted and respected before subsequent requests, including after restart, so every new request honors Telegram's latest rate limit.
+One account runs one history run or export at a time, alongside live observation. Pause controls are independent. Reservations are acquired before Telegram requests and released on completion, failure or pause. History reads up to three chats at a time with a cursor per chat. History requests and file requests have separate limits of three in flight each; request spacing remains shared per account. Other RPCs take turns in separate lanes for live updates, the operator, background checks and exports. A slow response releases other lanes to proceed; pacing remains shared per account. Separate accounts work concurrently. Saved FloodWait deadlines are checked again before queued requests are sent, including after restart. Export retries pause that export; the saved deadline for an affected Telegram method still applies to other callers using it.
 
 ## Selection
 

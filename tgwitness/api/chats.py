@@ -388,6 +388,8 @@ async def snapshot(request: Request, body: Snapshot, *, ctx=Depends(current_cont
             "The snapshot is larger than this workspace allows. Raise the limit in Parameters.",
         )
     collector = ctx.app.state.collector
+    if body.fill:
+        return await ctx.operation(collector.fill, body.chat_id, body.limit, body.before_id)
     return await ctx.operation(
         collector.snapshot_paused if body.pause_observation else collector.snapshot, body.chat_id, body.limit
     )
@@ -445,19 +447,54 @@ async def set_parameters(body: ParametersUpdate, *, ctx=Depends(current_context)
 
 async def chats(request: Request, *, ctx=Depends(current_context)):
     store = ctx.app.state.store
+    listed = await complete_in_thread(chat_listing, store, ctx.visible_chats(request))
+    collector = ctx.app.state.collector
+    pending = set(store.get_setting("new_chat_intake_pending", [])) | set(store.get_setting("baseline_pending", []))
+    retries = {}
+    for row in collector.intake_progress.retries():
+        if row["chat_id"] not in retries or row["retry_at"] < retries[row["chat_id"]]["retry_at"]:
+            retries[row["chat_id"]] = row
+    backoff = store.get_setting("rpc_backoff_until", 0)
+    for chat in listed:
+        chat_id = chat["chat_id"]
+        chat["intake_state"] = "running" if chat_id in collector.intake_active else "queued" if chat_id in pending else None
+        if chat["intake_state"] == "queued" and chat_id in retries:
+            retry = retries[chat_id]
+            chat.update(intake_state="retry", intake_retry_at=max(backoff, retry["retry_at"]),
+                        intake_error_type=retry["error_type"], intake_error_seq=retry["error_seq"])
+        entity = collector.dialog_cache.get(chat_id, {}).get("entity")
+        chat["telegram_restrictions"] = [
+            {"platform": item.platform, "reason": item.reason, "text": item.text}
+            for item in getattr(entity, "restriction_reason", None) or []
+        ]
+    return {"chats": listed}
+
+
+def chat_listing(store, allowed):
     overview = store.chat_overview()
-    waiting = await asyncio.to_thread(store.media_waiting_by_chat)
+    with store.lock:
+        for chat_id, sent in store.read_index.latest_message_times().items():
+            if chat_id in overview:
+                overview[chat_id]["last_message_at"] = sent
     listed = [
-        {**t, "enabled": bool(t["enabled"]), **overview.pop(t["chat_id"], {}),
-         **({"media_waiting": waiting[t["chat_id"]]} if t["chat_id"] in waiting else {})}
+        {**t, "enabled": bool(t["enabled"]), **overview.pop(t["chat_id"], {})}
         for t in store.targets()
     ]
     listed += [
         {"chat_id": chat_id, "title": None, "kind": None, "enabled": False, **extra}
         for chat_id, extra in overview.items()
     ]
-    allowed = ctx.visible_chats(request)
-    return {"chats": [c for c in listed if allowed is None or c["chat_id"] in allowed]}
+    listed = [c for c in listed if allowed is None or c["chat_id"] in allowed]
+    with store.reading() as db:
+        counts = {}
+        for row in db.execute("SELECT chat_id,state,count(*) FROM media_jobs WHERE state IN "
+                              "('queued','retry','running','failed') GROUP BY chat_id,state"):
+            counts.setdefault(row[0], {})[row[1]] = row[2]
+    for chat in listed:
+        media = counts.get(chat["chat_id"], {})
+        chat["media_queue"] = {"pending": sum(media.get(key, 0) for key in ("queued", "retry")),
+                               "running": media.get("running", 0), "failed": media.get("failed", 0)}
+    return listed
 
 
 async def interaction_preview(
@@ -515,6 +552,9 @@ async def chat_messages(
     before_id: int | None = None,
     limit: int = 60,
     after_id: int | None = None,
+    filter: Literal["all", "deleted", "edited", "media", "missing"] = "all",
+    q: str = Query(default="", max_length=512),
+    author_id: int | None = None,
     *,
     ctx=Depends(current_context),
 ):
@@ -523,14 +563,18 @@ async def chat_messages(
     if before_id is not None and after_id is not None:
         raise HTTPException(422, "Choose one message cursor.")
     return await asyncio.to_thread(
-        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id
+        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id, filter, q, author_id
     )
 
 
-def message_page(store, chat_id, before_id, limit, after_id):
+def message_page(store, chat_id, before_id, limit, after_id, mode="all", search="", author_id=None):
     from ..gap_analysis import page_gaps
 
-    result = store.chat_messages(chat_id, before_id, limit, after_id=after_id)
+    result = store.chat_messages(chat_id, before_id, limit, after_id=after_id,
+                                 mode=mode, search=search, author_id=author_id)
+    if mode != "all" or search or author_id is not None:
+        result["gaps"] = []
+        return result
     result["gaps"] = page_gaps(
         store,
         chat_id,

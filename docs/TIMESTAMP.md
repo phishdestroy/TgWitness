@@ -100,7 +100,7 @@ input file had different whitespace.
 | TSA signature | The signature, the signing certificate and its chain to the explicit CA are checked at the stamped time |
 | Collector signature | Separately verified by the journal verifier with a pinned key |
 | Revocation | Evidence mode stores OCSP/CRL evidence that `verify.py` checks |
-| Scheduled submission | Evidence mode, off by default |
+| Scheduled submission | Evidence mode, turned on by every setup goal |
 
 `--request` is technically optional, but omitting it prevents verification of the
 original nonce. For this full procedure, the result's `request_checked` must be true.
@@ -130,6 +130,68 @@ checks the issuer's signature, the same time window and that the serial number i
 It then reports `signing certificate not revoked as of <time> (OCSP|CRL)`, the failed check,
 or `revocation not checked (no OCSP/CRL in the archive)`. A signing certificate revoked at or
 before genTime fails verification; a later revocation is shown as a warning.
+
+## Evidence records and renewal (RFC 4998)
+
+An RFC 3161 time stamp holds only as long as its hash algorithm and the TSA's signing key and
+certificate, and a case can outlast them. Evidence mode also keeps an RFC 4998 Evidence Record
+(ERS) for each retained checkpoint and renews it.
+
+On each evidence pass, checkpoints without a record go into a hash tree, and the configured TSAs
+are asked in order for one time stamp over its root. Each checkpoint gets
+`checkpoints/anchors/checkpoint-N.ers`: an `EvidenceRecord` whose `ArchiveTimeStampSequence` holds
+one `ArchiveTimeStampChain` with an `ArchiveTimeStamp` carrying the reduced hash tree for that
+checkpoint and the TSA token. A record can list hashes of neighbouring checkpoints; validators such
+as EU DSS warn about this. An ASiC-E export also carries `META-INF/evidencerecord.ers` with
+`META-INF/ASiCEvidenceRecordManifest.xml`, the evidence record for the container's data objects
+(ETSI EN 319 162-1). A ZIP export carries the checkpoint records under `anchors/`.
+
+Renewal follows RFC 4998 section 5 and only appends:
+
+| Renewal | When | What is stamped |
+| --- | --- | --- |
+| Time stamp renewal | The newest token's signing certificate expires within N months (default 6), its signature hash is marked weak, or on request | Hash of the previous token, same algorithm; the stamp is added to the last chain |
+| Hash-tree renewal | The chain's hash algorithm is marked weak, or on request | `H(H(checkpoint) + H(previous ArchiveTimeStampSequence))` with a stronger algorithm (default SHA-512); a new chain is added |
+
+Each renewal goes to a new file, `checkpoint-N.renewal-K.ers`; earlier files and chains stay byte
+for byte the same. The proof reaches back to the first time stamp only if every link checks in
+order, so renew while the newest token still validates: before its signing certificate expires,
+its revocation information disappears or its hash or signature algorithm breaks. A later renewal
+adds a stamp but does not extend the earlier proof.
+
+The evidence-mode background loop checks the policy daily and on request
+(`evidence_record.demand_renewal`). Each attempt is journalled as `evidence_record.created` or
+`evidence_record.renewed` with the service, time, hash algorithm, tree root, checkpoint range,
+`ok` and errors; unreadable records go to `evidence_record.check_failed`. A failing TSA is retried
+with the checkpoint-stamping backoff, counted separately, while the next listed TSA is tried. The
+policy (`months_before_expiry`, `weak_algorithms`, `algorithm`, `stronger_algorithm`) is the
+profile setting `evidence_record_policy`; the panel has no control for it yet.
+
+The collector checks each new record against its checkpoint and the TSA's signature before writing
+it. `verify.py` checks every record in an export: hash trees, tokens, order of chains and renewals,
+and reports the earliest proven time and the state of the newest stamp. EU DSS reads the same
+records with the checkpoint as detached data.
+
+Regulation (EU) 2024/1183 (eIDAS 2.0) added qualified electronic archiving and qualified electronic
+ledgers to Regulation (EU) No 910/2014. TgWitness writes records in standard formats but is not a
+trust service; its archive and journal have no qualified status. A qualified provider would need,
+among other things:
+
+- Archiving (Articles 45i and 45j): a qualified trust service provider keeping the data for the
+  legal or contractual preservation period, durable and legible beyond the technological validity
+  period and protected against loss and alteration, with an automated integrity report for
+  authorised relying parties from the start of preservation to retrieval. Article 45i(2)
+  presumes integrity and origin for such a service.
+- Ledgers (Articles 45k and 45l): a ledger created and managed by one or more qualified trust
+  service providers that establishes the origin of records, orders them uniquely and
+  chronologically, and makes later changes immediately detectable. The TgWitness journal is
+  hash-chained and signed with the collector's own key, which alone is not a qualified ledger.
+- Both: qualified status granted by a supervisory body and a trusted-list entry (Articles 21 and
+  22), the obligations of Article 24, conformity assessment at least every 24 months (Article 20)
+  and the reference standards of the implementing acts under Articles 45j(2) and 45l(2).
+
+Qualified time stamps from a qualified TSA (Articles 41 and 42) keep their own presumption per
+token; renewal does not create one for the record as a whole.
 
 ## Handoff record
 

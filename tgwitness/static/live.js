@@ -61,7 +61,7 @@
       }}finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
     }catch(error){
       if(error.status===401||error.status===403){if(rev===generation&&controller===ctrl){stop();current.accessEnded();}return;}
-      failures++;delay=error.status===429?10000:Math.min(30000,1500*2**Math.min(failures-1,5));
+      failures++;delay=Number.isFinite(error.retryAfterMs)?Math.max(3000,error.retryAfterMs):error.status===429?10000:Math.min(30000,1500*2**Math.min(failures-1,5));
     }
     finally{if(rev===generation&&context&&controller===ctrl){controller=null;connected=false;render();if(!document.hidden)retry=setTimeout(()=>connect(rev),delay);}}
   }

@@ -1,0 +1,78 @@
+{
+  "code": "GE",
+  "scope": "Georgia · civil and criminal procedure (separately scoped references)",
+  "checked_at": "2026-11-14",
+  "expert_role": null,
+  "esig_regulation": {
+    "term": "Law on Electronic Documents and Electronic Trust Services",
+    "basis": "Article 3(1): a qualified electronic signature has the same legal effect as a handwritten signature. Article 3(2): a qualified electronic seal allows the integrity and origin of an electronic document to be verified, and these are deemed genuine unless proved otherwise.",
+    "source": "https://matsne.gov.ge/en/document/view/3654557"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "Law on Personal Data Protection, Article 5",
+    "basis": "Processing is admissible only on a ground listed in Article 5(1), such as consent, a contract, a legal provision or another listed ground. Supervision is exercised by the State Audit Office (Article 39).",
+    "deadline_days": null,
+    "source": "https://matsne.gov.ge/en/document/view/5827307"
+  },
+  "timestamp_recognition": {
+    "term": "Law on Electronic Documents and Electronic Trust Services, Article 7",
+    "basis": "Article 7(1): qualified time stamps carry a presumption of accuracy of the time and date and of the integrity of the related data. Article 7(2) sets the requirements, including an accurate time source linked to Universal Time.",
+    "automatic_ots_qualification": false,
+    "source": "https://matsne.gov.ge/en/document/view/3654557"
+  },
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Civil Procedure Code, Article 105",
+      "basis": "No evidence has a predetermined weight. The court evaluates evidence by inner conviction after a comprehensive, full and impartial examination.",
+      "source": "https://matsne.gov.ge/en/document/view/29962"
+    },
+    {
+      "route": "civil",
+      "term": "Civil Procedure Code, Article 134(1)-(1¹)",
+      "basis": "Written evidence includes acts, documents and correspondence with information on important circumstances. An electronic document under the Law on Electronic Documents and Electronic Trust Services has evidentiary value.",
+      "source": "https://matsne.gov.ge/en/document/view/29962"
+    },
+    {
+      "route": "criminal",
+      "term": "Criminal Procedure Code, Article 72",
+      "basis": "Evidence obtained through a substantial violation of the Code is inadmissible if it worsens the accused's position. Evidence is also inadmissible where a reasonable doubt that it was replaced or its properties changed has not been refuted.",
+      "source": "https://matsne.gov.ge/en/document/view/90034"
+    },
+    {
+      "route": "criminal",
+      "term": "Criminal Procedure Code, Article 82",
+      "basis": "Evidence is evaluated for relevance, admissibility and trustworthiness, has no predetermined force, and a conviction requires agreed evidence beyond reasonable doubt.",
+      "source": "https://matsne.gov.ge/en/document/view/90034"
+    }
+  ],
+  "dpa": {
+    "name": "State Audit Office",
+    "name_en": "State Audit Office (personal data protection supervision)",
+    "basis": "Law on Personal Data Protection, Article 39",
+    "source": "https://matsne.gov.ge/en/document/view/5827307"
+  },
+  "sources": [
+    {
+      "term": "Civil Procedure Code of Georgia (Matsne, English)",
+      "url": "https://matsne.gov.ge/en/document/view/29962"
+    },
+    {
+      "term": "Criminal Procedure Code of Georgia (Matsne, English)",
+      "url": "https://matsne.gov.ge/en/document/view/90034"
+    },
+    {
+      "term": "Law on Electronic Documents and Electronic Trust Services (Matsne, English)",
+      "url": "https://matsne.gov.ge/en/document/view/3654557"
+    },
+    {
+      "term": "ელექტრონული დოკუმენტისა და ელექტრონული სანდო მომსახურების შესახებ (Matsne)",
+      "url": "https://matsne.gov.ge/ka/document/view/3654557"
+    },
+    {
+      "term": "Law on Personal Data Protection (Matsne)",
+      "url": "https://matsne.gov.ge/en/document/view/5827307"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ from ..access import Refused
 from ..access import check as access_check
 from ..collector import AUTHORIZATION_ERRORS
 from ..collector import ProtectedSession
+from ..collector import loss_text
 from ..evidence import LIMITS
 from ..failures import describe, unexpected
 from ..middleware import request_limit
@@ -544,9 +545,7 @@ class SystemOperations:
                 or (args and args[0] is collector)
             ):
                 collector.handle_authorization_error(exc, name, client=client)
-            raise HTTPException(
-                400, "Telegram authorization expired. Sign in again."
-            ) from None
+            raise HTTPException(400, loss_text(exc)) from None
         except RPCError as exc:
             raise HTTPException(400, describe(exc)) from None
         except (ProtectedSession, KeyInUse, interactions.AccountRestricted) as exc:
@@ -569,41 +568,43 @@ class SystemOperations:
         self.require_live()
         async with self.op_lock:
             self.require_live()
-            if self.app.state.collector.export_claim and getattr(
-                call, "__name__", ""
-            ) in {
-                "configure",
-                "import_new_session",
-                "start_phone",
-                "start_qr",
-                "send_code",
-                "confirm_code",
-                "confirm_password",
-                "sign_out",
-                "forget_session",
-                "set_network",
-                "set_route_policy",
-                "apply",
-                "dialogs",
-                "save_profile",
-                "preview",
-                "execute",
-                "run_queued",
-                "check_current",
-                "test_network",
-                "control",
-                "update_profile",
-                "update_privacy",
-                "update_global",
-                "set_avatar",
-                "remove_avatar",
-            }:
+            collector, name = self.app.state.collector, getattr(call, "__name__", "")
+            if collector.export_claim and (
+                name in {
+                    "configure",
+                    "import_new_session",
+                    "start_phone",
+                    "start_qr",
+                    "send_code",
+                    "confirm_code",
+                    "confirm_password",
+                    "sign_out",
+                    "forget_session",
+                    "set_network",
+                    "set_route_policy",
+                    "apply",
+                    "check_current",
+                    "test_network",
+                }
+                or not collector.running
+                and name in {
+                    "dialogs",
+                    "save_profile",
+                    "preview",
+                    "execute",
+                    "run_queued",
+                    "update_profile",
+                    "update_privacy",
+                    "update_global",
+                    "set_avatar",
+                    "remove_avatar",
+                }
+            ):
                 raise HTTPException(
                     409,
                     "This account is busy. Pause its current task before another Telegram operation.",
                 )
-            collector = self.app.state.collector
-            if not collector.running and getattr(call, "__name__", "") in {
+            if not collector.running and name in {
                 "dialogs",
                 "save_profile",
                 "preview",

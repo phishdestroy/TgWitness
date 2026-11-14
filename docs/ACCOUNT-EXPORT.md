@@ -4,8 +4,14 @@
 
 # Account export and minimized disclosure
 
-An account export reserves its account exclusively. Pause monitoring or another
-acquisition explicitly before starting or resuming; the app never stops it automatically.
+An account export reserves the account's acquisition slot. Live observation can
+continue while the archive is discovered, downloaded, verified and packaged.
+Pause another history or export job before starting a competing acquisition.
+Pausing the archive leaves observation running, and pausing observation retains the archive job.
+
+Exports on different accounts can run at the same time. A Takeout-only job waiting
+for approval releases its account, so a separate regular-session export can start
+while approval is pending. An active acquisition still reserves that account.
 
 As the installation administrator, choose **Home → Export my account**, or **Exports → Telegram account → Configure account export**. Sign in if needed, review the scope, and explicitly start the export. Continuous observation is not required. **Saved observations** is a separate export of the existing journal; its ZIP includes all sources regardless of journal filters. Every workspace has its own jobs, signing identity and storage. Issued panel access, including an unrestricted ordinary export grant, cannot open these account-wide routes.
 
@@ -82,7 +88,9 @@ Each job freezes its options and account identity. Inventory and captured pages 
 
 Pause releases the running account operation. Restarting the application leaves unfinished work available for explicit resume. An expired Takeout session requires an explicit resume; changing Telegram split ranges can require a new acquisition. Resume retains previous observations, so a long-running export is not one atomic snapshot. Other account-changing operations and conflicting exports are blocked during acquisition. Wait for packaging to finish before deleting a workspace.
 
-Resume verifies already captured content before continuing. Large archives on slow storage can exceed the configured **More tools → Parameters → Panel action timeout** (120 seconds by default). Increase that setting before retrying; cancellation/storage interruption leaves a paused job, and failed integrity checks leave a failed job with an explanation. Verification must finish or stop safely before its files can be closed. No large-account throughput claim has been validated by the synthetic checks.
+Resume shows **Verifying saved export data…** immediately and checks saved content in the background before contacting Telegram. The panel remains available during verification. Pause waits for the verification worker to finish safely before releasing the account; it also works when pressed immediately after starting or resuming. On slow storage that wait can be long. Failed integrity checks leave a failed job with an explanation and retain its files.
+
+If Telegram ends the account's authorization during inventory, history or attachment acquisition, the job pauses without marking the unfinished page complete. Reconnect the same account and resume to continue from the last saved page. Unavailable message placeholders advance the history cursor but do not end the read: older available messages are still requested, and a placeholder is not presented as a captured message or a confirmed deletion.
 
 The panel distinguishes a completed selected scope from a partial archive, and records omissions and failed reads. Deliberately excluded files are different from failed or unavailable files. Inspect coverage even when integrity verification succeeds. No local reader can prove Telegram returned every message that ever existed.
 

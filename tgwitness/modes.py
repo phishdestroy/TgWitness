@@ -3,8 +3,9 @@ from typing import Literal
 
 from .health import age, now_utc
 
-Mode = Literal["easy", "signed", "witnessed", "court", "github", "mossad"]
+Mode = Literal["easy", "signed", "witnessed", "court", "github", "maximum"]
 SETTING = "mode"
+RENAMED = {"mossad": "maximum"}
 PENDING = "mode_pending"
 EXISTING = "witnessed"
 MEANING = ("Only what the panel shows and suggests changed. Recording, signing and saved settings "
@@ -56,7 +57,7 @@ MODES = (
              "Everything in Case preparation, plus a check of the running code against a public GitHub commit "
              "and the GitHub Actions capture.",
              "A public repository or fork; no token."),
-    ModeInfo("mossad", "⚫", "Mossad", "High-stakes cases against a well-funded adversary.",
+    ModeInfo("maximum", "⚫", "Maximum", "High-stakes cases against a well-funded adversary.",
              "Every section, a sealed 24/7 server, a hidden IP address and the checklist of all 18 protection layers.",
              "A day or more: a cloud server, Cloudflare and proxies."),
 )
@@ -72,7 +73,7 @@ FEATURES = (
     Feature("timestamps_backup", "court", "Automatic timestamps and an encrypted off-site copy", ("tsa", "ots", "replica")),
     Feature("code_check", "github", "Code check against a GitHub commit", ("code_check",)),
     Feature("github_capture", "github", "GitHub Actions capture"),
-    Feature("cloud", "mossad", "Sealed 24/7 server", ("sealed_server",)),
+    Feature("cloud", "maximum", "Sealed 24/7 server", ("sealed_server",)),
 )
 
 LAYERS = (
@@ -90,10 +91,10 @@ LAYERS = (
     Layer("replica", "court", "Encrypted off-site copy", "extras:evidence"),
     Layer("case_details", "court", "Reports name the case and the examiner", "exports:settings"),
     Layer("code_check", "github", "Running code matches a public GitHub commit", "extras:github"),
-    Layer("hidden_ip", "mossad", "Telegram never sees this machine's IP address", "connection"),
-    Layer("outside_proxy", "mossad", "Timestamps, copies and alerts leave through a proxy", "connection"),
-    Layer("object_lock", "mossad", "Off-site copy locked against deletion", "extras:evidence"),
-    Layer("sealed_server", "mossad", "Sealed 24/7 server with provider records", "extras:cloud"),
+    Layer("hidden_ip", "maximum", "Telegram never sees this machine's IP address", "connection"),
+    Layer("outside_proxy", "maximum", "Timestamps, copies and alerts leave through a proxy", "connection"),
+    Layer("object_lock", "maximum", "Off-site copy locked against deletion", "extras:evidence"),
+    Layer("sealed_server", "maximum", "Sealed 24/7 server with provider records", "extras:cloud"),
 )
 
 NOT_YET = ("Threshold signing by several keys (FROST)", "Checkpoint mirror on GitLab",
@@ -115,6 +116,7 @@ def texts():
 
 def current(store):
     saved = store.get_setting(SETTING, None)
+    saved = RENAMED.get(saved, saved)
     return saved if saved in IDS else None
 
 

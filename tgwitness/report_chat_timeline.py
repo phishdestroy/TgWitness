@@ -130,7 +130,7 @@ def svg(chart, say, flags):
     step = width / len(bins)
     height = 24 + cell_h * len(rows) + 18
     maximum = max((value for row in rows for value in row["cells"]), default=0) or 1
-    parts = ['<div class="scroll"><svg viewBox="0 0 760 ' + str(height) + '" style="min-width:640px" role="img" aria-label="'
+    parts = ['<div class="scroll"><svg viewBox="0 0 760 ' + str(height) + '" class="chat-timeline" role="img" aria-label="'
              + escape(say(TITLE)) + '">'
              '<defs><pattern id="chat-timeline-gap" width="6" height="6" patternUnits="userSpaceOnUse" '
              'patternTransform="rotate(45)"><rect width="6" height="6" fill="#8894a41f"/>'

@@ -198,7 +198,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     level(card);
     const details = node('details', 'protection-details'), summary = node('summary', '', tr('The {total} protection layers', {total: data.total}));
     details.append(summary); layerList(details);
-    details.open = wasOpen ?? data.mode === 'mossad';
+    details.open = wasOpen ?? data.mode === 'maximum';
     card.append(details);
     if (!m) card.append(node('p', 'hint', tr('No mode is chosen yet, so every section is shown.')));
   }
@@ -299,7 +299,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
         toast(tr('Next: the independent witness. Step 2 saves witness.json for the second machine.'));
       }
       else if (id === 'court') openWizard();
-      else if (id === 'mossad') {
+      else if (id === 'maximum') {
         go('extras');
         requestAnimationFrame(() => { const details = card.querySelector('details'); if (details) details.open = true; card.scrollIntoView({block: 'start'}); });
       }

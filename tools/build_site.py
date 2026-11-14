@@ -94,6 +94,7 @@ DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})
 DEMO_STATIC["demo/system-map-data.js"] = "website/demo/system-map-data.js"
 DEMO_STATIC["demo/views/secret-chats.js"] = "tgwitness/static/views/secret-chats.js"
+DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name for name in ("visibility.js", "visibility.css")})
 DEMO_STATIC["demo/views/profile-collection.js"] = "tgwitness/static/views/profile-collection.js"
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
                     for name in ("system-map.js", "system-map-scene.js", "system-map.css")})
@@ -106,7 +107,7 @@ DEMO_STATIC.update({"demo/views/report-guidance.js": "tgwitness/static/views/rep
 DEMO_STATIC.update({"demo/report/" + name: "website/demo/report/" + name
                     for name in ("index.html", "report.html", "sharing-copy.zip", "example.json")})
 DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
-                    for name in ("notifications.js", "notifications.css", "journal.js", "journal.css", "priority.js", "tips.js")})
+                    for name in ("notifications.js", "notifications.css", "journal.js", "journal.css", "priority.js", "tips.js", "save-queue.js")})
 DEMO_STATIC.update({"demo/downloads/" + name: "website/demo/downloads/" + name for name in (
     "tgwitness-demo.zip", "tgwitness-demo.jsonl", "tgwitness-demo.csv", "tgwitness-demo.html",
     "tgwitness-demo-checkpoint.json", "tgwitness-demo-run-receipt.json", "tgwitness-demo-timestamp-request.zip",

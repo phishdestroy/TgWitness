@@ -439,6 +439,9 @@ def assurance(result):
         a.get("kind") == "rfc3161" and a.get("signature", "").startswith("checked against") or
         a.get("kind") == "opentimestamps" and a.get("status") == "confirmed")]
     times = [a["time"] for a in stamps]
+    times += [e["proven_from"] for e in (result.get("evidence_records") or {}).get("records", [])
+              if str(e.get("signature", "")).startswith("checked against")
+              and (e.get("subject") == "export" or e.get("event_count") == result.get("events"))]
     times += [witness[name] for name in ("head_bitcoin_block_time", "head_telegram_post_time") if witness.get(name)]
     independent = bool(witness.get("witness_key_pinned") and witness.get("export_head_witnessed")
                        and witness.get("witness_fingerprint") != result.get("fingerprint"))
@@ -557,23 +560,28 @@ def evidence_conditions(result, kind="evidence"):
     checked = [a for a in anchors if a.get("kind") == "rfc3161" and str(a.get("signature", "")).startswith("checked against")
                or a.get("kind") == "opentimestamps" and a.get("status") == "confirmed"]
     times = [a["time"] for a in checked if a.get("event_count") == events and a.get("time")]
+    records = (result.get("evidence_records") or {}).get("records", [])
+    proven = [e for e in records if str(e.get("signature", "")).startswith("checked against")]
+    covered = [(events if e.get("subject") == "export" else e.get("event_count") or 0, e["proven_from"]) for e in proven]
+    times += [at for count, at in covered if count == events]
     if witness.get("export_head_witnessed") and not witness.get("conflicts"):
         times += [witness[name] for name in ("head_bitcoin_block_time", "head_telegram_post_time") if witness.get(name)]
     runtime = result.get("runtime_attestation") or {}
     attested = runtime.get("verified") is True and runtime.get("key_origin") == "created"
     if attested and runtime.get("attested_at"):
         times.append(runtime["attested_at"])
-    unchecked = [a for a in anchors if a not in checked]
-    stamped = max((a.get("event_count") or 0 for a in checked), default=0)
+    unchecked = [a for a in anchors if a not in checked] + [e for e in records if e not in proven]
+    stamped = max([a.get("event_count") or 0 for a in checked] + [count for count, _ in covered], default=0)
     qualified = next((a["qualified"] for a in checked if a.get("event_count") == events and a.get("qualified")), None)
     if times and qualified:
         status, text, values = ("met", "last exported record existed by {time}; qualified eIDAS time stamp from {service}",
                                 {"time": min(times), "service": qualified["service"]})
     elif times:
         status, text, values = "met", "last exported record existed by {time}", {"time": min(times)}
-    elif checked:
+    elif checked or covered:
         status, text, values = "partial", "records 1–{through} existed by {time}", {
-            "through": stamped, "time": min(a.get("time") or "?" for a in checked if (a.get("event_count") or 0) == stamped)}
+            "through": stamped, "time": min([a.get("time") or "?" for a in checked if (a.get("event_count") or 0) == stamped]
+                                            + [at for count, at in covered if count == stamped])}
     elif unchecked:
         status, text, values = ("unchecked", "{count} timestamp proof(s) present; check them with --tsa-ca or --check-bitcoin",
                                 {"count": len(unchecked)})

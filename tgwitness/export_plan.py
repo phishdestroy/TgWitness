@@ -60,8 +60,8 @@ def availability(entry, chat_id, private):
     until = c.store.get_setting("rpc_backoff_until", 0)
     if until > time.time():
         return "rate_limited", until
-    if c.running or c.observation_starting:
-        return "observing", None
+    if c.observation_starting:
+        return "busy", None
     account_export = getattr(app.state, "account_export", None)
     if (c.export_claim or c.export_busy() or c.history.busy or c.connection_change_task is not None
             or account_export and account_export.busy()):
@@ -164,9 +164,11 @@ async def plan(registry, exports, link, allowed):
         rows.append({"profile_id": profile_id, "label": entry.get("label", profile_id), "usable": reason is None,
                      "reason": reason, "until": until, "member": chat_id in app.state.collector.dialog_cache if app else None,
                      "username": (account or {}).get("username"), "account_id": (account or {}).get("id"),
-                     "connected": bool((check or {}).get("telegram_connected"))})
+                     "connected": bool((check or {}).get("telegram_connected")),
+                     "observing": bool(app and app.state.collector.running)})
     usable = sorted((row for row in rows if row["usable"]),
-                    key=lambda row: (row["profile_id"] != reader, not row["member"], not row["connected"], row["label"]))
+                    key=lambda row: (row["observing"], row["profile_id"] != reader, not row["member"], not row["connected"],
+                                     row["label"]))
     measured = measured_rates(exports, allowed)
     rates = {**DEFAULT_RATES, **measured}
     takeout = facts["kind"] in ("channel", "supergroup") and bool(facts.get("username"))

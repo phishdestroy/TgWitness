@@ -795,9 +795,15 @@
     own.type = 'password'; own.placeholder = tr('Passphrase, at least 20 characters'); own.hidden = true;
     own.autocomplete = 'new-password'; own.setAttribute('aria-label', tr('Passphrase, at least 20 characters'));
     mode.addEventListener('change', () => {own.hidden = mode.value !== 'own';});
+    const where = node('select'), draft = node('p', 'hint', tr('Research draft: built from published sources and not reviewed by a lawyer. These are editable templates; whether the evidence is admissible is decided by the court.'));
+    where.setAttribute('aria-label', tr('Court documents in the package'));
+    for (const [value, text] of [['', 'Court documents: certification of authenticity to complete and sign'],
+      ['UA', 'Court documents: Ukraine, criminal proceeding (research draft): inspection protocol draft, technical annex, file inventory, media handover act']]) where.append(new Option(tr(text), value));
+    where.style.gridColumn = draft.style.gridColumn = '1/-1'; draft.hidden = true;
+    where.addEventListener('change', () => {draft.hidden = where.value !== 'UA';});
     const go = button('Download', 'primary', async () => {
       const response = await api(path(current.id, 'package'), {encryption: mode.value,
-        ...(mode.value === 'own' ? {passphrase: own.value} : {})});
+        ...(mode.value === 'own' ? {passphrase: own.value} : {}), ...(where.value ? {jurisdiction: where.value} : {})});
       const secret = response.headers.get('X-TgWitness-Passphrase');
       saveBlob(await response.blob(), 'tgwitness-case-' + current.id.slice(0, 8) + (mode.value === 'none' ? '' : '.encrypted') + '.zip');
       own.value = '';
@@ -807,7 +813,7 @@
           el('div', 'doc-secret-row', code, button('Copy', 'secondary', () => copy(secret), 'key')));
       } else result.replaceChildren(el('div', 'doc-callout good', icon('check'), node('p', '', tr('Saved. Open it with any ZIP tool; 7-Zip or WinRAR also open encrypted packages.'))));
     }, 'download');
-    box.append(mode, go, own, result);
+    box.append(mode, go, own, where, draft, result);
     return box;
   }
 
@@ -894,7 +900,7 @@
     const fill = () => {
       const info = shieldInfo, latest = info.latest, parts = [];
       parts.push(el('div', 'doc-callout good', icon('shield'),
-        node('p', '', tr('Read receipts are always blocked for this collector: it never marks messages or stories as read.'))));
+        node('p', '', tr('Read receipts are blocked unless chosen under What the other side sees; each one sent is recorded.'))));
       if (latest) {
         const risks = latest.findings.filter(f => f.level === 'risk'), notices = latest.findings.filter(f => f.level === 'notice');
         parts.push(section('shield', 'Account check', node('p', 'doc-sub', tr('Last check: {at}', {at: (latest.event?.observed_at || '').slice(0, 19).replace('T', ' ')})),

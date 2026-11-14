@@ -1,6 +1,6 @@
 {
   "code": "IE",
-  "scope": "Ireland · Superior Courts civil proceedings",
+  "scope": "Ireland · Superior Courts civil proceedings; criminal references marked separately",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "expert witness",
@@ -9,22 +9,43 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · Electronic Commerce Act 2000",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183 applies directly. The Electronic Commerce Act 2000 is the national act on electronic communications and signatures; the national instrument supplementing eIDAS was not verified.",
+    "source": "https://revisedacts.lawreform.ie/eli/2000/act/27/revised/en/html"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing for law-enforcement purposes is governed by Part 5 of the Data Protection Act 2018.",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "all",
+      "term": "Electronic Commerce Act 2000, s. 22",
+      "basis": "In any legal proceedings the rules of evidence do not deny admissibility of an electronic communication, document, contract or writing solely because it is electronic, or, if it is the best evidence reasonably obtainable, because it is not in its original form.",
+      "source": "https://revisedacts.lawreform.ie/eli/2000/act/27/revised/en/html"
+    },
+    {
+      "route": "criminal",
+      "term": "Criminal Evidence Act 1992, Part II (ss. 4-11)",
+      "basis": "Part II governs the admissibility of documentary evidence in criminal proceedings, the evidence of admissibility, notice, and the admission and weight of such evidence.",
+      "source": "https://revisedacts.lawreform.ie/eli/1992/act/12/revised/en/html"
+    }
+  ],
+  "dpa": {
+    "name": "Data Protection Commission",
+    "name_en": "Data Protection Commission",
+    "basis": "Data Protection Act 2018, ss. 10-11",
+    "source": "https://www.dataprotection.ie/"
+  },
   "sources": [
     {
       "term": "Rules of the Superior Courts, Order 39",
@@ -41,6 +62,39 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Electronic Commerce Act 2000 (revised)",
+      "url": "https://revisedacts.lawreform.ie/eli/2000/act/27/revised/en/html"
+    },
+    {
+      "term": "Criminal Evidence Act 1992 (revised)",
+      "url": "https://revisedacts.lawreform.ie/eli/1992/act/12/revised/en/html"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Data Protection Act 2018 (revised)",
+      "url": "https://revisedacts.lawreform.ie/eli/2018/act/7/revised/en/html"
+    },
+    {
+      "term": "Data Protection Commission",
+      "url": "https://www.dataprotection.ie/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from Law Reform Commission revised Acts and EUR-Lex opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Ireland.",
+      "sources": [
+        "https://revisedacts.lawreform.ie/eli/2000/act/27/revised/en/html",
+        "https://revisedacts.lawreform.ie/eli/1992/act/12/revised/en/html",
+        "https://revisedacts.lawreform.ie/eli/2018/act/7/revised/en/html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

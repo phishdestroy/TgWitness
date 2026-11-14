@@ -142,6 +142,7 @@ class StagedTransport:
         self.state()
 
     async def prepare(self):
+        from .collector import AUTHORIZATION_ERRORS
         from .workers import complete_in_thread
         await complete_in_thread(self.recover)
         for task in self.export.inventory["tasks"]:
@@ -161,7 +162,7 @@ class StagedTransport:
                     if not terminal and after == cursor or task["category"] == "messages" and after > cursor:
                         raise ValueError("Telegram pagination made no progress or moved forward.")
                     self.save(task, cursor, after, terminal, observed, started)
-                except errors.TakeoutInvalidError:
+                except (errors.TakeoutInvalidError, *AUTHORIZATION_ERRORS):
                     raise
                 except errors.RPCError as exc:
                     self.save(task, cursor, cursor, True, [], started, error=getattr(exc, "message", None) or type(exc).__name__)

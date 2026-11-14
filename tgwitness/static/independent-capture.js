@@ -24,11 +24,14 @@
     const form = node('form'); setup.append(form);
     const enabled = field(form, 'Allow this panel to control the recorder', 'checkbox', base + '-enabled', connection.enabled);
     const url = field(form, 'Recorder API origin', 'url', base + '-url', connection.url || '');
-    url.placeholder = 'http://127.0.0.1:' + (kind === 'trusted' ? '8793' : kind === 'browser' ? '8791' : '8792'); url.required = true;
+    url.placeholder = 'http://127.0.0.1:' + (kind === 'trusted' ? '8793' : kind === 'browser' ? '8791' : '8792');
     const pin = field(form, 'Recorder key fingerprint (SHA-256)', 'text', base + '-pin', connection.fingerprint || '');
-    pin.maxLength = 64; pin.minLength = 64; pin.required = true; pin.spellcheck = false;
+    pin.maxLength = 64; pin.minLength = 64; pin.spellcheck = false;
+    const requiredFields = () => {url.required = pin.required = enabled.checked;};
+    enabled.addEventListener('change', requiredFields); requiredFields();
     const token = field(form, 'Control token', 'password', base + '-token');
-    token.placeholder = connection.configured ? tr('Saved in the encrypted workspace vault') : tr('Copy control-token.txt from this recorder');
+    const tokenHint = () => {token.placeholder = connection.configured ? tr('Saved in the encrypted workspace vault') : tr('Copy control-token.txt from this recorder');};
+    tokenHint();
     token.maxLength = 512;
     const screen = field(form, 'Client screen URL (optional)', 'url', base + '-screen', connection.screen_url || '');
     form.append(node('p', 'hint', tr('An empty token keeps the saved token only while the recorder address and fingerprint stay the same. Disabling this connection does not pause capture.')));
@@ -59,6 +62,10 @@
     const events = node('ol', 'capture-events'); controls.append(events);
     const errorBox = node('p', 'form-error'); errorBox.setAttribute('role', 'alert'); card.append(errorBox);
     let remote = null, pending = false;
+    function resetRemote() {
+      remote = null; controls.hidden = true; delete status.dataset.state;
+      officialLink.hidden = true; officialLink.removeAttribute('href');
+    }
     const epoch = generation, who = owner();
     const current = () => epoch === generation && who === owner();
     const options = {profile: state.profile, token: state.token};
@@ -70,13 +77,13 @@
     };
     async function run(fn) {
       if (pending || !current()) return;
-      pending = true; fieldset.disabled = true; errorBox.textContent = '';
+      pending = true; fieldset.disabled = true; card.setAttribute('aria-busy', 'true'); errorBox.textContent = '';
       try {await fn();} catch (error) {
         if (current() && !(error instanceof StaleView)) {
-          errorBox.textContent = error.message; controls.hidden = true; remote = null;
+          errorBox.textContent = error.message; resetRemote();
           status.textContent = tr('Recorder state unavailable. Check again before sending commands.');
         }
-      } finally {pending = false; if (current()) fieldset.disabled = false;}
+      } finally {pending = false; if (current()) {fieldset.disabled = false; card.removeAttribute('aria-busy');}}
     }
     function button(parent, text, suffix, fn, primary = false) {
       const item = node('button', primary ? 'primary' : 'secondary', tr(text));
@@ -135,7 +142,7 @@
       const body = {enabled: enabled.checked, url: url.value.trim(), fingerprint: pin.value.trim(), token: token.value.trim(), screen_url: screen.value.trim()};
       token.value = '';
       const result = await call('connection', body); connection = result.connections[kind];
-      check.disabled = !connection.enabled; controls.hidden = true; remote = null;
+      check.disabled = !connection.enabled; resetRemote(); tokenHint();
       screenLink.hidden = !clientScreen(); if (clientScreen()) screenLink.href = clientScreen();
       status.textContent = tr(connection.enabled ? 'Connection saved. Check the recorder to load its current state.' : 'Connection disabled. Recorder capture state has not changed.');
       if (connection.enabled) setup.open = false;

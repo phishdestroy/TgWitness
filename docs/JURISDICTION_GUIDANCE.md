@@ -10,10 +10,12 @@ report settings. The Guidance tab previews the appendix using the current draft.
 Previewing or changing the country does not save it. Existing report designs,
 themes, language settings, scope filters and examination notes continue to apply.
 
-The catalog covers 25 jurisdictions: Australia, Brazil, Canada, mainland China,
-England and Wales, France, Germany, India, Indonesia, Iran, Italy, Malaysia,
-Mexico, Pakistan, the Philippines, Portugal, Russia, Saudi Arabia, Singapore,
-Spain, Turkey, Ukraine, the UAE, the United States and Vietnam. Scope notes
+The catalog has full guidance profiles for 31 jurisdictions: Australia, Brazil,
+Canada, mainland China, Croatia, England and Wales, France, Georgia, Germany,
+India, Indonesia, Iran, Italy, Kazakhstan, Luxembourg, Malaysia, Malta, Mexico,
+Pakistan, the Philippines, Portugal, Russia, Saudi Arabia, Singapore, Slovenia,
+Spain, Turkey, Ukraine, the UAE, the United States and Vietnam. Other countries
+in the expert-examination catalog have examination guidance only. Scope notes
 identify limits such as federal/state differences; a country is not a substitute
 for identifying the actual court. This is a coverage set, not a market ranking.
 
@@ -85,8 +87,11 @@ This task list guides package preparation and records the checks performed.
 
 ## Research status
 
-Catalog version `2026-11-06.1` is a **research draft** with source links for every
-route; Iran's criminal route is marked `needs_local_review`. For each filing, confirm
+Catalog version `2026-11-14.2` is a **research draft** with source links for every
+route; Iran's criminal route is marked `needs_local_review`. The Croatian, Georgian,
+Kazakh, Luxembourg, Maltese and Slovenian profiles cite official legislation portals as
+read on 14 November 2026; later amendments to the cited articles were traced only in
+part. For each filing, confirm
 current law and the actual court, acquisition authority, disclosure, authentication,
 hearsay where applicable, translation and formalities, and have the English guidance
 and native summary reviewed by a practitioner admitted there.
@@ -95,6 +100,11 @@ Selecting a safeguard adds an explanation of its benefit, what to retain and how
 strengthen it. Journal verification uses the trusted collector key; retained witness checkpoints
 allow comparison with an earlier independently observed journal boundary. A provider account
 owned by a separate party takes the host and hypervisor out of the operator's control.
+
+With safeguards selected, the appendix also cites the
+[ENFSI Best Practice Manual for the Forensic Examination of Digital Technology](https://enfsi.eu/wp-content/uploads/2016/09/1._forensic_examination_of_digital_technology_0.pdf)
+(ENFSI-BPM-FIT-01, version 01, November 2015), practice guidance for forensic
+laboratories. It is not law and sets no admissibility rule for any court.
 
 Retention must be established for the actual object versions and permissions;
 encryption, an S3 endpoint or versioning alone is insufficient. See
