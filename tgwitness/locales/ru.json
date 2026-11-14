@@ -9067,7 +9067,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram сообщает, что этого чата больше нет.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Защита ZIP паролем использует WinZip AES со слабым усилением ключа. Задайте длинную случайную парольную фразу от 20 символов, а для конфиденциальных экспортов выберите усиленное шифрование.",
   "Transport route checked for this connection.": "Маршрут для этого подключения проверен.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Сохраняет чаты и фото один раз; другие файлы выбираются в разделе «Сбор и файлы». В фоне ничего не работает. Архив подписан, и verify.py проверяет в нём каждый файл.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Чаты и фотографии сохраняются один раз; остальные файлы выбираются в разделе «Сбор и файлы». Ничто не работает в фоновом режиме. Архив подписан и содержит независимые временные метки, а скрипт verify.py проверяет каждый файл в нём. Требуются запросы за пределами Telegram.",
   "running": "выполняется",
   "cancelled": "отменено",
   "Updates arrived while observation was paused": "Обновления пришли, пока наблюдение было на паузе",
@@ -9321,7 +9321,7 @@
   "Typing status": "Статус ввода",
   "Send without sound": "Отправка без звука",
   "Show when the other side is typing": "Показывать, когда собеседник печатает",
-  "Record the other side’s typing in the journal": "Записывайте в журнале то, что набирает собеседник",
+  "Record the other side’s typing in the journal": "Запишите в журнале, что другой участник набирает текст",
   "Invisible": "Невидимый",
   "Visible like a regular app": "Видимо для других как обычное приложение Telegram",
   "Use the workspace settings": "Используйте настройки рабочей области",
@@ -9508,7 +9508,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Имена пользователей можно менять и использовать повторно; числовой идентификатор остается привязанным к аккаунту. Указывайте идентификаторы с указанием времени, когда имена пользователей были подвергнуты наблюдению.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Категории данных, которые обычно запрашиваются у провайдера: данные об абонентах, журналы доступа (IP-адрес и порт с указанием времени), данные о трафике, контент. Запрос о сохранении данных может быть направлен до их предоставления.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "В каналах и супергруппах, где этот аккаунт является администратором, Telegram хранит удалённые сообщения и предыдущие версии правок в журнале администратора в течение примерно 48 часов.",
-  "Only with the Mark as read button": "Только с помощью кнопки Пометить как прочитанное",
-  "Only with the Mark as opened button": "Только с помощью кнопки Пометить как прочитанное",
-  "Only with the Mark stories as viewed button": "Только с помощью кнопки Пометить истории как прочитанные"
+  "Only with the Mark as read button": "Только с помощью кнопки «Пометить как прочитанное»",
+  "Only with the Mark as opened button": "Только с помощью кнопки «Пометить медиафайлы как открытые»",
+  "Only with the Mark stories as viewed button": "Только с помощью кнопки «Пометить истории как прочитанные»",
+  "Mark as opened": "Пометить медиафайлы как открытые",
+  "Workspace settings": "Настройки рабочей области"
 }

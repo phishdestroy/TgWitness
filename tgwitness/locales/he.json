@@ -9049,7 +9049,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram מדווחת שהצ'אט כבר אינו קיים.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ההגנה באמצעות סיסמה ב-ZIP משתמשת ב-WinZip AES (מתיחת מפתח חלשה). השתמשו בסיסמה ארוכה ואקראית של 20 תווים ומעלה, או בחרו בהצפנה החזקה יותר עבור ייצוא של קבצים רגישים.",
   "Transport route checked for this connection.": "נתיב התקשורת נבדק עבור חיבור זה.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "יש לשמור צ'אטים ותמונות פעם אחת; קבצים אחרים נבחרים תחת תיעוד וקבצים. שום דבר לא ממשיך לפעול ברקע. הארכיון חתום, ו-verify.py בודק כל קובץ בתוכו.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "שמור צ'אטים ותמונות פעם אחת; קבצים אחרים נבחרים תחת תיעוד וקבצים. שום דבר לא ממשיך לפעול ברקע. הארכיון חתום ונושא חותמות זמן עצמאיות, ו-verify.py בודק כל קובץ בתוכו. דורש בקשות מחוץ ל-Telegram.",
   "running": "פועל",
   "cancelled": "בוטל",
   "Updates arrived while observation was paused": "העדכונים הגיעו בזמן שהתצפית הייתה בהשהיה",
@@ -9303,7 +9303,7 @@
   "Typing status": "סטטוס הקלדה",
   "Send without sound": "שליחה ללא צליל",
   "Show when the other side is typing": "הצג מתי הצד השני מקליד",
-  "Record the other side’s typing in the journal": "תעדו את ההקלדה של הצד השני ביומן",
+  "Record the other side’s typing in the journal": "רשום ביומן שהמשתתף האחר מקליד",
   "Invisible": "בלתי נראה",
   "Visible like a regular app": "נראה לאחרים כמו אפליקציית Telegram רגילה",
   "Use the workspace settings": "השתמש בהגדרות סביבת העבודה",
@@ -9490,7 +9490,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "ניתן לשנות שמות משתמש ולעשות בהם שימוש חוזר; המזהה המספרי נשאר קשור לחשבון. יש לצטט את המזהים יחד עם המועדים שבהם נצפו שמות המשתמש.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "קטגוריות נתונים הנדרשות בדרך כלל מספק: נתוני מנוי, יומני גישה (כתובת IP ויציאה עם ציון זמן), נתוני תעבורה, תוכן. ניתן לבקש שימור נתונים לפני מסירתם.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "בערוצים ובקבוצות-על שבהם חשבון זה משמש כמנהל, Telegram שומר הודעות שנמחקו וגרסאות קודמות של עריכות ביומן המנהל למשך כ-48 שעות.",
-  "Only with the Mark as read button": "רק באמצעות כפתור סימון כנקרא",
-  "Only with the Mark as opened button": "רק באמצעות הכפתור סמן כפתוח",
-  "Only with the Mark stories as viewed button": "רק באמצעות הכפתור סימון סיפורים כ\"נצפו\""
+  "Only with the Mark as read button": "רק באמצעות הכפתור \"סימון כנקרא\"",
+  "Only with the Mark as opened button": "רק באמצעות הכפתור \"סמן מדיה כפתוחה\"",
+  "Only with the Mark stories as viewed button": "רק באמצעות הכפתור \"סימון סיפורים כ\"נצפו\"\"",
+  "Mark as opened": "סמן מדיה כפתוחה",
+  "Workspace settings": "הגדרות סביבת העבודה"
 }

@@ -8953,7 +8953,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram 報告指出該對話已不存在。",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP 密碼保護採用 WinZip AES（弱鍵值拉伸）。請使用 20 個以上字元的長隨機密語，或針對敏感資料的匯出選擇「更強的加密」選項。",
   "Transport route checked for this connection.": "已針對此連線檢查傳輸路徑。",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "僅保存一次聊天記錄與照片；其他檔案則在 記錄和檔案 下進行選擇。背景中不會有任何程式持續運行。檔案庫經過簽名，且 verify.py 會檢查其中的每個檔案。",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "聊天記錄與照片只需儲存一次；其他檔案則在 記錄和檔案 中選取。不會有任何程式在背景持續運行。壓縮檔經過簽名並附有獨立的時間戳記，且 verify.py 會檢查其中的每個檔案。需透過 Telegram 外部進行請求。",
   "running": "執行中",
   "cancelled": "已取消",
   "Updates arrived while observation was paused": "在觀察暫停期間收到了更新",
@@ -9207,7 +9207,7 @@
   "Typing status": "輸入狀態",
   "Send without sound": "無聲傳送",
   "Show when the other side is typing": "顯示對方正在輸入中",
-  "Record the other side’s typing in the journal": "將對方輸入的內容記錄在日誌中",
+  "Record the other side’s typing in the journal": "在日誌中記錄另一位參與者正在輸入文字",
   "Invisible": "隱藏",
   "Visible like a regular app": "對他人而言，其外觀與一般Telegram應用程式無異",
   "Use the workspace settings": "使用工作區設定",
@@ -9394,7 +9394,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "使用者名稱可變更並重複使用；數值識別碼則與該帳號綁定。引用識別碼時，請一併註明觀察到該使用者名稱的次數。",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "通常向服務提供者索取的資料類別：用戶資料、存取日誌（包含時間的 IP 位址與埠號）、流量資料、內容。可在提交資料前要求進行資料保存。",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "在該帳號擔任管理員的頻道及超級群組中，Telegram 會將已刪除的訊息及先前編輯版本保留於管理員日誌中約 48 小時。",
-  "Only with the Mark as read button": "僅限透過 標示為已讀 按鈕",
-  "Only with the Mark as opened button": "僅限透過 標記為已開啟 按鈕",
-  "Only with the Mark stories as viewed button": "僅限透過 將動態標記為已讀 按鈕"
+  "Only with the Mark as read button": "僅限透過「標示為已讀」按鈕",
+  "Only with the Mark as opened button": "僅限透過「將媒體標記為已開啟」按鈕",
+  "Only with the Mark stories as viewed button": "僅限透過「將動態標記為已讀」按鈕",
+  "Mark as opened": "將媒體標記為已開啟",
+  "Workspace settings": "工作區的設定"
 }

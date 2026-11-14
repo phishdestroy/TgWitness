@@ -9009,7 +9009,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram segnala che la chat non esiste più.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "La protezione con password ZIP utilizza WinZip AES (allungamento della chiave debole). Utilizzare una passphrase casuale lunga di almeno 20 caratteri oppure scegliere la crittografia più forte per le esportazioni sensibili.",
   "Transport route checked for this connection.": "Percorso di trasporto verificato per questa connessione.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Le chat e le foto vengono salvate una sola volta; gli altri file vengono selezionati in Registrazione e file. Nessun processo rimane in esecuzione in background. L’archivio è firmato e verify.py verifica ogni file in esso contenuto.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Salva le chat e le foto una sola volta; gli altri file vengono selezionati nella sezione Registrazione e file. Nessun processo rimane in esecuzione in background. L'archivio è firmato e contiene timestamp indipendenti, e verify.py verifica ogni file al suo interno. Richiede richieste al di fuori di Telegram.",
   "running": "in esecuzione",
   "cancelled": "annullato",
   "Updates arrived while observation was paused": "Gli aggiornamenti sono arrivati mentre l’osservazione era in pausa",
@@ -9263,7 +9263,7 @@
   "Typing status": "Stato di digitazione",
   "Send without sound": "Invio senza suono",
   "Show when the other side is typing": "Mostra quando l’altra parte sta digitando",
-  "Record the other side’s typing in the journal": "Registra nel diario ciò che l’altra parte sta digitando",
+  "Record the other side’s typing in the journal": "Registra nel diario che l’altro partecipante sta digitando",
   "Invisible": "Invisibile",
   "Visible like a regular app": "Visibile agli altri come una normale app di Telegram",
   "Use the workspace settings": "Utilizza le impostazioni dell’area di lavoro",
@@ -9450,7 +9450,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "I nomi utente possono essere modificati e riutilizzati; l’ID numerico rimane associato all’account. Citare gli ID indicando le occasioni in cui i nomi utente sono stati rilevati.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Categorie di dati comunemente richiesti a un fornitore: dati degli abbonati, registri di accesso (indirizzo IP e porta con ora), dati sul traffico, contenuti. La conservazione può essere richiesta prima della produzione.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "Nei canali e nei supergruppi in cui questo account è amministratore, Telegram conserva i messaggi eliminati e le versioni precedenti delle modifiche nel registro di amministrazione per circa 48 ore.",
-  "Only with the Mark as read button": "Solo con il pulsante Segna come letto",
-  "Only with the Mark as opened button": "Solo con il pulsante Contrassegna come aperto",
-  "Only with the Mark stories as viewed button": "Solo con il pulsante Contrassegna le storie come lette"
+  "Only with the Mark as read button": "Solo con il pulsante \"Segna come letto\"",
+  "Only with the Mark as opened button": "Solo con il pulsante \"Contrassegna i file multimediali come aperti\"",
+  "Only with the Mark stories as viewed button": "Solo con il pulsante \"Contrassegna le storie come lette\"",
+  "Mark as opened": "Contrassegna i file multimediali come aperti",
+  "Workspace settings": "Impostazioni dell’area di lavoro"
 }

@@ -9097,7 +9097,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram informuje, że czat już nie istnieje.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Ochrona hasłem plików ZIP wykorzystuje WinZip AES (słabe rozciąganie klucza). Należy używać długiego, losowego hasła składającego się z co najmniej 20 znaków lub wybrać silniejsze szyfrowanie w przypadku eksportu poufnych danych.",
   "Transport route checked for this connection.": "Sprawdzono trasę transportową dla tego połączenia.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Czat i zdjęcia zapisuje się jednorazowo; pozostałe pliki wybiera się w sekcji Zapis i pliki. Żadna operacja nie działa w tle. Archiwum jest podpisane, a verify.py sprawdza każdy plik w nim zawarty.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Wystarczy raz zapisać czaty i zdjęcia; pozostałe pliki wybiera się w sekcji Zapis i pliki. W tle nie działa żadna aplikacja. Archiwum jest podpisane i zawiera niezależne znaczniki czasu, a skrypt verify.py sprawdza każdy plik w nim zawarty. Wymaga wysyłania żądań poza aplikacją Telegram.",
   "running": "w toku",
   "cancelled": "anulowano",
   "Updates arrived while observation was paused": "Aktualizacje dotarły w czasie, gdy obserwacja była wstrzymana",
@@ -9351,7 +9351,7 @@
   "Typing status": "Status pisania",
   "Send without sound": "Wysyłanie bez dźwięku",
   "Show when the other side is typing": "Pokaż, kiedy druga strona pisze",
-  "Record the other side’s typing in the journal": "Zapisuj w dzienniku to, co wpisuje druga strona",
+  "Record the other side’s typing in the journal": "Zapisz w dzienniku, że drugi uczestnik pisze",
   "Invisible": "Niewidoczne",
   "Visible like a regular app": "Widoczne dla innych tak jak zwykła aplikacja Telegram",
   "Use the workspace settings": "Skorzystaj z ustawień obszaru roboczego",
@@ -9538,7 +9538,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Nazwy użytkowników można zmieniać i ponownie wykorzystywać; identyfikator numeryczny pozostaje przypisany do konta. Należy podawać identyfikatory wraz z informacją o tym, kiedy nazwy użytkowników zostały odnotowane.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Kategorie danych, o których udostępnienie najczęściej zwraca się do dostawcy: dane abonentów, logi dostępu (adres IP i port wraz z czasem), dane o ruchu, treści. Przed przekazaniem danych można zażądać ich zabezpieczenia.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "W kanałach i supergrupach, w których to konto pełni funkcję administratora, Telegram przechowuje usunięte wiadomości oraz wcześniejsze wersje edycji w dzienniku administratora przez około 48 godzin.",
-  "Only with the Mark as read button": "Tylko przy użyciu przycisku Oznacz jako przeczytane",
-  "Only with the Mark as opened button": "Tylko przy użyciu przycisku Oznacz jako otwarte",
-  "Only with the Mark stories as viewed button": "Tylko przy użyciu przycisku Oznaczaj wiadomości jako przeczytane"
+  "Only with the Mark as read button": "Tylko za pomocą przycisku „Oznacz jako przeczytane”",
+  "Only with the Mark as opened button": "Tylko przy użyciu przycisku „Oznacz multimedia jako otwarte”",
+  "Only with the Mark stories as viewed button": "Tylko przy użyciu przycisku „Oznaczaj wiadomości jako przeczytane”",
+  "Mark as opened": "Oznacz multimedia jako otwarte",
+  "Workspace settings": "Ustawienia obszaru roboczego"
 }

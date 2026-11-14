@@ -9001,7 +9001,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram, sohbetin artık mevcut olmadığını bildirir.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP şifre koruması, WinZip AES’i (zayıf anahtar uzatma) kullanır. 20 karakterden uzun rastgele bir parolası kullanın veya hassas dışa aktarımlar için “daha güçlü şifreleme” seçeneğini tercih edin.",
   "Transport route checked for this connection.": "Bu bağlantı için aktarım yolu kontrol edildi.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Sohbetleri ve fotoğrafları bir kez kaydedin; diğer dosyalar Kayıt ve dosyalar altında seçilir. Arka planda çalışan hiçbir işlem yoktur. Arşiv imzalanmıştır ve verify.py içindeki her dosyayı kontrol eder.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Sohbetleri ve fotoğrafları tek seferde kaydedin; diğer dosyalar Kayıt ve dosyalar altında seçilir. Arka planda çalışan hiçbir işlem yoktur. Arşiv imzalanmıştır ve bağımsız zaman damgaları içerir; verify.py, arşivdeki her dosyayı kontrol eder. Telegram dışından istekler gerektirir.",
   "running": "çalışıyor",
   "cancelled": "iptal edildi",
   "Updates arrived while observation was paused": "Gözlem duraklatılmışken güncellemeler geldi",
@@ -9255,7 +9255,7 @@
   "Typing status": "Yazma durumu",
   "Send without sound": "Ses olmadan gönderme",
   "Show when the other side is typing": "Karşı tarafın yazdığını göster",
-  "Record the other side’s typing in the journal": "Karşı tarafın yazdıklarını günlüğe kaydedin",
+  "Record the other side’s typing in the journal": "Diğer katılımcının yazmakta olduğunu günlüğe kaydedin",
   "Invisible": "Görünmez",
   "Visible like a regular app": "Normal bir Telegram uygulaması gibi başkaları tarafından görülebilir",
   "Use the workspace settings": "Çalışma alanı ayarlarını kullanın",
@@ -9442,7 +9442,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Kullanıcı adları değiştirilebilir ve yeniden kullanılabilir; sayısal kimlik numarası hesapla birlikte kalır. Kimlik numaralarını, kullanıcı adlarının gözlemlendiği zamanlarla birlikte belirtin.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Bir sağlayıcıdan genellikle talep edilen veri kategorileri: abone verileri, erişim günlükleri (zaman bilgisi ile birlikte IP adresi ve bağlantı noktası), trafik verileri, içerik. Verilerin ibrazından önce muhafaza edilmesi talep edilebilir.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "Bu hesabın yönetici olduğu kanallarda ve süper gruplarda, Telegram, silinen mesajları ve düzenlemelerin önceki sürümlerini yaklaşık 48 saat boyunca yönetici günlüğünde saklar.",
-  "Only with the Mark as read button": "Yalnızca Okundu olarak işaretle düğmesi ile",
-  "Only with the Mark as opened button": "Yalnızca Açılmış olarak işaretle düğmesi ile",
-  "Only with the Mark stories as viewed button": "Yalnızca Hikayeleri okundu olarak işaretle düğmesi ile"
+  "Only with the Mark as read button": "Yalnızca \"Okundu olarak işaretle\" düğmesiyle",
+  "Only with the Mark as opened button": "Yalnızca \"Medya dosyasını açılmış olarak işaretle\" düğmesi ile",
+  "Only with the Mark stories as viewed button": "Yalnızca \"Hikayeleri okundu olarak işaretle\" düğmesi ile",
+  "Mark as opened": "Medya dosyasını açılmış olarak işaretle",
+  "Workspace settings": "Çalışma alanının ayarları"
 }

@@ -9001,7 +9001,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram রিপোর্ট করে যে চ্যাটটি আর নেই।",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP পাসওয়ার্ড সুরক্ষায় WinZip AES (দুর্বল কী স্ট্রেচিং) ব্যবহার করা হয়। ২০টিরও বেশি অক্ষরের একটি দীর্ঘ এলোমেলো পাসফ্রেজ ব্যবহার করুন, অথবা সংবেদনশীল এক্সপোর্টের জন্য শক্তিশালী এনক্রিপশন নির্বাচন করুন।",
   "Transport route checked for this connection.": "এই সংযোগের জন্য পরিবহন পথ যাচাই করা হয়েছে।",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "চ্যাট এবং ছবি একবার সংরক্ষণ করুন; অন্যান্য ফাইল রেকর্ডিং ও ফাইল-এর অধীনে নির্বাচিত হয়। পটভূমিতে কিছুই চলতে থাকে না। আর্কাইভটি স্বাক্ষরিত, এবং verify.py এতে থাকা প্রতিটি ফাইল যাচাই করে।",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "চ্যাট এবং ছবি একবার সংরক্ষণ করুন; অন্যান্য ফাইলগুলো রেকর্ডিং ও ফাইল-এর অধীনে নির্বাচন করা হয়। পটভূমিতে কিছুই চলতে থাকে না। আর্কাইভটি স্বাক্ষরিত এবং এতে স্বতন্ত্র টাইমস্ট্যাম্প রয়েছে, এবং verify.py এটিতে থাকা প্রতিটি ফাইল যাচাই করে। টেলিগ্রামের বাইরে অনুরোধের প্রয়োজন।",
   "running": "চলমান",
   "cancelled": "বাতিল",
   "Updates arrived while observation was paused": "পর্যবেক্ষণ বিরতিতে থাকা অবস্থায় আপডেটগুলো এসেছিল",
@@ -9255,7 +9255,7 @@
   "Typing status": "টাইপিং স্ট্যাটাস",
   "Send without sound": "শব্দ ছাড়া পাঠানো",
   "Show when the other side is typing": "অন্য পক্ষ টাইপ করছে যখন দেখান",
-  "Record the other side’s typing in the journal": "জার্নালে অন্য পক্ষের টাইপিং রেকর্ড করুন",
+  "Record the other side’s typing in the journal": "জার্নালে রেকর্ড করুন যে অন্য অংশগ্রহণকারী টাইপ করছে",
   "Invisible": "অদৃশ্য",
   "Visible like a regular app": "অন্যান্যদের কাছে একটি সাধারণ Telegram অ্যাপের মতো দৃশ্যমান",
   "Use the workspace settings": "ওয়ার্কস্পেস সেটিংস ব্যবহার করুন",
@@ -9442,7 +9442,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "ইউজারনেম পরিবর্তন ও পুনঃব্যবহার করা যায়; সংখ্যাতাত্ত্বিক আইডি অ্যাকাউন্টে থাকে। ইউজারনেম পর্যবেক্ষণের সময়সহ আইডিগুলো উদ্ধৃত করুন।",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "প্রদানকারীর কাছে সাধারণত যে তথ্য বিভাগগুলি চাওয়া হয়: সাবস্ক্রাইবারের তথ্য, অ্যাক্সেস লগ (IP ঠিকানা ও পোর্টসহ সময়), ট্র্যাফিক ডেটা, বিষয়বস্তু। প্রযোজনা করার আগে সংরক্ষণ অনুরোধ করা যেতে পারে।",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "যে চ্যানেল এবং সুপারগ্রুপে এই অ্যাকাউন্ট প্রশাসক, সেখানে Telegram প্রায় ৪৮ ঘণ্টা ধরে প্রশাসক লগে মুছে ফেলা বার্তা এবং সম্পাদনার পূর্ববর্তী সংস্করণ সংরক্ষণ করে।",
-  "Only with the Mark as read button": "শুধুমাত্র পঠিত হিসেবে চিহ্নিত করুন বোতামের মাধ্যমে",
-  "Only with the Mark as opened button": "শুধুমাত্র খোলা হিসেবে চিহ্নিত করুন বোতামের মাধ্যমে",
-  "Only with the Mark stories as viewed button": "শুধুমাত্র কাহিনীগুলো দেখা হয়েছে হিসেবে চিহ্নিত করুন বোতামের মাধ্যমে"
+  "Only with the Mark as read button": "শুধুমাত্র \"পঠিত হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
+  "Only with the Mark as opened button": "শুধুমাত্র \"মিডিয়া খোলা হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
+  "Only with the Mark stories as viewed button": "শুধুমাত্র \"কাহিনীগুলো দেখা হয়েছে হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
+  "Mark as opened": "মিডিয়া খোলা হিসেবে চিহ্নিত করুন",
+  "Workspace settings": "ওয়ার্কস্পেসের সেটিংস"
 }

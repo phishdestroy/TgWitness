@@ -9001,7 +9001,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram suhbat endi mavjud emasligini xabar beradi.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP parol himoyasi WinZip AES (zaif kalitni cho'zish) usulidan foydalanadi. 20+ belgili uzun tasodifiy parol iborasidan foydalaning yoki sezgir eksportlar uchun kuchliroq shifrlashni tanlang.",
   "Transport route checked for this connection.": "Ushbu ulanish uchun transport yo'li tekshirildi.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Suhbatlar va fotosuratlarni bir marta saqlang; boshqa fayllar Yozuv va fayllar ostida tanlanadi. Orqa fonda hech narsa ishlamaydi. Arxiv imzolangan va verify.py undagi har bir faylni tekshiradi.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Suhbatlar va fotosuratlarni bir marta saqlang; boshqa fayllar Yozuv va fayllar bo'limida tanlanadi. Orqa fonda hech narsa ishlamaydi. Arxiv imzolangan va mustaqil vaqt tamg'alariga ega, verify.py esa undagi har bir faylni tekshiradi. Telegramdan tashqaridagi so'rovlarni talab qiladi.",
   "running": "davom etmoqda",
   "cancelled": "bekor qilindi",
   "Updates arrived while observation was paused": "Kuzatuv to'xtatilgan paytda yangilanishlar keldi",
@@ -9255,7 +9255,7 @@
   "Typing status": "Yozish holati",
   "Send without sound": "Ovozsiz yuborish",
   "Show when the other side is typing": "Qarshi tomon yozayotgan paytda ko'rsatish",
-  "Record the other side’s typing in the journal": "Jurnalga qarama-qarshi tomonning yozuvlarini qayd eting",
+  "Record the other side’s typing in the journal": "Jurnalda boshqa ishtirokchi yozayotganini qayd eting",
   "Invisible": "Ko'rinmas",
   "Visible like a regular app": "Boshqalarga oddiy Telegram ilovasi kabi ko'rinadi",
   "Use the workspace settings": "Ish maydoni sozlamalaridan foydalaning",
@@ -9442,7 +9442,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Foydalanuvchi nomlari o'zgartirilishi va qayta ishlatilishi mumkin; raqamli identifikator hisob bilan birga qoladi. Foydalanuvchi nomlari qachon kuzatilganligini ko'rsatadigan vaqt bilan identifikatorlarni keltiring.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Provayderdan odatda so'raladigan ma'lumot toifalari: obunachining ma'lumotlari, kirish joriy yozuvlari (IP-manzil va port bilan vaqti), trafik ma'lumotlari, kontent. Saqlashni ta'minlash ma'lumotlarni taqdim etishdan oldin so'ralishi mumkin.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "Ushbu hisob ma'mur bo'lgan kanallar va superguruhlarda Telegram o'chirilgan xabarlar va tahrirlarning avvalgi versiyalarini ma'mur logida taxminan 48 soat davomida saqlaydi.",
-  "Only with the Mark as read button": "Faqat O‘qilgan deb belgilash tugmasi bilan",
-  "Only with the Mark as opened button": "Faqat Ochilgan deb belgilash tugmasi bilan",
-  "Only with the Mark stories as viewed button": "Faqat Hikoyalarni ko'rilgan deb belgilash tugmasi bilan"
+  "Only with the Mark as read button": "Faqat \"O‘qilgan deb belgilash\" tugmasi bilan",
+  "Only with the Mark as opened button": "Faqat \"Media ochilgan deb belgilash\" tugmasi bilan",
+  "Only with the Mark stories as viewed button": "Faqat \"Hikoyalarni ko'rilgan deb belgilash\" tugmasi bilan",
+  "Mark as opened": "Media ochilgan deb belgilash",
+  "Workspace settings": "Ish maydoni sozlamalari"
 }

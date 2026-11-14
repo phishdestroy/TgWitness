@@ -9097,7 +9097,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram повідомляє, що чат більше не існує.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Захист ZIP-файлів паролем використовує WinZip AES (слабке розтягування ключа). Використовуйте довгу випадкову парольну фразу довжиною 20 і більше символів або виберіть «сильніше шифрування» для експорту конфіденційних даних.",
   "Transport route checked for this connection.": "Перевірено маршрут передачі даних для цього з’єднання.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Чати та фотографії зберігаються один раз; інші файли обираються у розділі Запис і файли. У фоновому режимі нічого не працює. Архів підписано, а verify.py перевіряє кожен файл у ньому.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Чати та фотографії зберігаються одноразово; інші файли вибираються в розділі Запис і файли. У фоновому режимі нічого не працює. Архів підписано та містить незалежні мітки часу, а verify.py перевіряє кожен файл у ньому. Потрібні запити поза межами Telegram.",
   "running": "виконується",
   "cancelled": "скасовано",
   "Updates arrived while observation was paused": "Оновлення надійшли під час призупинення спостереження",
@@ -9351,7 +9351,7 @@
   "Typing status": "Статус набору тексту",
   "Send without sound": "Відправлення без звуку",
   "Show when the other side is typing": "Показувати, коли співрозмовник набирає текст",
-  "Record the other side’s typing in the journal": "Записуйте в журнал те, що набирає інша сторона",
+  "Record the other side’s typing in the journal": "Зафіксуйте в журналі, що інший учасник набирає текст",
   "Invisible": "Невидимий",
   "Visible like a regular app": "Видно іншим як звичайний додаток Telegram",
   "Use the workspace settings": "Використовуйте налаштування робочого простору",
@@ -9538,7 +9538,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Імена користувачів можна змінювати та використовувати повторно; числовий ідентифікатор залишається прив’язаним до облікового запису. Посилайтеся на ідентифікатори, вказуючи, скільки разів ці імена користувачів були зафіксовані.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Категорії даних, які зазвичай запитують у постачальника: дані про абонентів, журнали доступу (IP-адреса та порт із зазначенням часу), дані про трафік, вміст. Перед наданням даних можна вимагати їх збереження.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "У каналах та супергрупах, де цей акаунт є адміністратором, Telegram зберігає видалені повідомлення та попередні версії редагувань у журналі адміністратора протягом приблизно 48 годин.",
-  "Only with the Mark as read button": "Тільки за допомогою кнопки Позначити як прочитане",
-  "Only with the Mark as opened button": "Тільки за допомогою кнопки Позначити як прочитане",
-  "Only with the Mark stories as viewed button": "Тільки за допомогою кнопки Позначити історії як переглянуті"
+  "Only with the Mark as read button": "Тільки за допомогою кнопки «Позначити як прочитане»",
+  "Only with the Mark as opened button": "Тільки за допомогою кнопки «Позначити медіа як відкриті»",
+  "Only with the Mark stories as viewed button": "Тільки за допомогою кнопки «Позначити історії як переглянуті»",
+  "Mark as opened": "Позначити медіа як відкриті",
+  "Workspace settings": "Налаштування робочого простору"
 }

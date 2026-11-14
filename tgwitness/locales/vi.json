@@ -8953,7 +8953,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram thông báo rằng cuộc trò chuyện đó không còn tồn tại.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Tính năng bảo vệ bằng mật khẩu ZIP sử dụng WinZip AES (kỹ thuật kéo dài khóa yếu). Hãy sử dụng cụm mật khẩu ngẫu nhiên dài từ 20 ký tự trở lên, hoặc chọn phương thức mã hóa mạnh hơn cho các tệp xuất nhạy cảm.",
   "Transport route checked for this connection.": "Tuyến truyền tải đã được kiểm tra cho kết nối này.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Lưu các cuộc trò chuyện và ảnh một lần; các tệp khác được chọn trong Ghi và tệp. Không có gì tiếp tục chạy ở chế độ nền. Kho lưu trữ được ký tên, và verify.py kiểm tra mọi tệp trong đó.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Lưu các cuộc trò chuyện và ảnh một lần; các tệp khác được chọn trong phần Ghi và tệp. Không có quá trình nào chạy ngầm. Tệp lưu trữ được ký số và có dấu thời gian độc lập, và tệp verify.py sẽ kiểm tra từng tệp trong đó. Cần thực hiện các yêu cầu bên ngoài Telegram.",
   "running": "đang chạy",
   "cancelled": "đã hủy",
   "Updates arrived while observation was paused": "Các bản cập nhật đã đến trong khi quá trình quan sát bị tạm dừng",
@@ -9207,7 +9207,7 @@
   "Typing status": "Trạng thái gõ phím",
   "Send without sound": "Gửi tin nhắn mà không có âm thanh",
   "Show when the other side is typing": "Hiển thị khi đối phương đang gõ",
-  "Record the other side’s typing in the journal": "Ghi lại nội dung gõ phím của bên kia vào nhật ký",
+  "Record the other side’s typing in the journal": "Ghi lại trong nhật ký rằng người tham gia kia đang gõ",
   "Invisible": "Ẩn",
   "Visible like a regular app": "Có thể hiển thị cho người khác giống như ứng dụng Telegram thông thường",
   "Use the workspace settings": "Sử dụng cài đặt không gian làm việc",
@@ -9394,7 +9394,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Tên người dùng có thể được thay đổi và sử dụng lại; mã số nhận dạng vẫn gắn liền với tài khoản. Trích dẫn mã số nhận dạng kèm theo thời điểm tên người dùng được ghi nhận.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Các loại dữ liệu thường được yêu cầu từ nhà cung cấp: dữ liệu thuê bao, nhật ký truy cập (địa chỉ IP và cổng cùng thời gian), dữ liệu lưu lượng, nội dung. Việc bảo quản dữ liệu có thể được yêu cầu trước khi cung cấp.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "Trong các kênh và siêu nhóm mà tài khoản này là quản trị viên, Telegram sẽ lưu giữ các tin nhắn đã xóa và các phiên bản chỉnh sửa trước đó trong nhật ký quản trị trong khoảng 48 giờ.",
-  "Only with the Mark as read button": "Chỉ với nút Đánh dấu đã đọc",
-  "Only with the Mark as opened button": "Chỉ với nút Đánh dấu là đã mở",
-  "Only with the Mark stories as viewed button": "Chỉ với nút Đánh dấu các câu chuyện là đã xem"
+  "Only with the Mark as read button": "Chỉ khi nhấn nút \"Đánh dấu đã đọc\"",
+  "Only with the Mark as opened button": "Chỉ với nút \"Đánh dấu phương tiện đã mở\"",
+  "Only with the Mark stories as viewed button": "Chỉ với nút \"Đánh dấu các câu chuyện là đã xem\"",
+  "Mark as opened": "Đánh dấu phương tiện đã mở",
+  "Workspace settings": "Cài đặt của không gian làm việc"
 }

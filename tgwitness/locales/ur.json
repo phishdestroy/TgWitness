@@ -9001,7 +9001,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram رپورٹ کرتا ہے کہ چیٹ اب موجود نہیں ہے۔",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP پاس ورڈ پروٹیکشن WinZip AES (کمزور کی اسٹریچنگ) استعمال کرتی ہے۔ 20+ حروف پر مشتمل ایک طویل بے ترتیب پاس فریز استعمال کریں، یا حساس ایکسپورٹس کے لیے مضبوط انکرپشن کا انتخاب کریں۔",
   "Transport route checked for this connection.": "اس کنکشن کے لیے ٹرانسپورٹ راستہ چیک کیا گیا۔",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "چٹس اور تصاویر ایک بار محفوظ کریں؛ دیگر فائلیں ریکارڈنگ اور فائلیں کے تحت منتخب کی جاتی ہیں۔ پسِ منظر میں کچھ بھی چلتا نہیں رہتا۔ آرکائیو پر دستخط کیے جاتے ہیں، اور verify.py اس میں موجود ہر فائل کی جانچ کرتا ہے۔",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "چٹس اور تصاویر ایک بار محفوظ کریں؛ دیگر فائلیں ریکارڈنگ اور فائلیں کے تحت منتخب کی جاتی ہیں۔ پسِ منظر میں کچھ بھی چلتا نہیں رہتا۔ آرکائیو پر دستخط کیے جاتے ہیں اور اس میں آزاد ٹائم اسٹیمپز شامل ہوتے ہیں، اور verify.py اس میں موجود ہر فائل کی جانچ کرتا ہے۔ ٹیلیگرام کے باہر درخواستوں کی ضرورت ہوتی ہے۔",
   "running": "چل رہا ہے",
   "cancelled": "منسوخ",
   "Updates arrived while observation was paused": "مشاہدہ معطل رہنے کے دوران اپ ڈیٹس موصول ہوئیں",
@@ -9255,7 +9255,7 @@
   "Typing status": "ٹائپنگ اسٹیٹس",
   "Send without sound": "بغیر آواز کے بھیجنا",
   "Show when the other side is typing": "جب دوسری طرف ٹائپ کر رہا ہو تو دکھائیں",
-  "Record the other side’s typing in the journal": "جرنل میں دوسری جانب کی ٹائپنگ کو ریکارڈ کریں",
+  "Record the other side’s typing in the journal": "جرنل میں ریکارڈ کریں کہ دوسرا شریک ٹائپ کر رہا ہے",
   "Invisible": "پوشیدہ",
   "Visible like a regular app": "دوسروں کے لیے ایک عام ٹیلیگرام ایپ کی طرح دکھائی دیتا ہے۔",
   "Use the workspace settings": "ورک اسپیس سیٹنگز استعمال کریں",
@@ -9442,7 +9442,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "یوزر نیم تبدیل کیے جا سکتے ہیں اور دوبارہ استعمال کیے جا سکتے ہیں؛ عددی شناختی نمبر اکاؤنٹ کے ساتھ رہتا ہے۔ شناختی نمبروں کا حوالہ دیتے وقت وہ اوقات بھی درج کریں جب یوزر نیم دیکھے گئے تھے۔",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "ڈیٹا کی وہ زمرے جو عموماً فراہم کنندہ سے طلب کیے جاتے ہیں: صارف کا ڈیٹا، رسائی کے لاگز (IP پتہ اور پورٹ کے ساتھ وقت)، ٹریفک ڈیٹا، مواد۔ پروڈکشن سے قبل تحفظ کی درخواست کی جا سکتی ہے۔",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "ان چینلز اور سپر گروپس میں جہاں یہ اکاؤنٹ ایڈمنسٹریٹر ہے، Telegram حذف شدہ پیغامات اور ترمیمات کے پرانے ورژنز کو ایڈمن لاگ میں تقریباً 48 گھنٹے تک محفوظ رکھتا ہے۔",
-  "Only with the Mark as read button": "صرف پڑھا ہوا نشان زد کریں بٹن کے ساتھ",
-  "Only with the Mark as opened button": "صرف کھولا ہوا نشان کریں بٹن کے ساتھ",
-  "Only with the Mark stories as viewed button": "صرف کہانیوں کو دیکھا ہوا نشان زد کریں بٹن کے ساتھ"
+  "Only with the Mark as read button": "صرف \"پڑھا ہوا نشان زد کریں\" بٹن کے ساتھ",
+  "Only with the Mark as opened button": "صرف \"میڈیا کو کھلا ہوا نشان زد کریں\" بٹن کے ساتھ",
+  "Only with the Mark stories as viewed button": "صرف \"کہانیوں کو دیکھا ہوا نشان زد کریں\" بٹن کے ساتھ",
+  "Mark as opened": "میڈیا کو کھلا ہوا نشان زد کریں",
+  "Workspace settings": "ورک اسپیس کی ترتیبات"
 }

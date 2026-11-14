@@ -9001,7 +9001,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram گزارش می‌دهد که این چت دیگر وجود ندارد.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "حفاظت از رمز عبور ZIP از WinZip AES (کشیدن کلید ضعیف) استفاده می‌کند. از یک عبارت عبور تصادفی و طولانی با بیش از ۲۰ کاراکتر استفاده کنید، یا برای صادرات حساس، رمزگذاری قوی‌تر را انتخاب کنید.",
   "Transport route checked for this connection.": "مسیر انتقال برای این اتصال بررسی شد.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "گفتگوها و عکس‌ها را یک‌بار ذخیره کنید؛ سایر فایل‌ها تحت ضبط و فایل‌ها انتخاب می‌شوند. هیچ چیزی در پس‌زمینه اجرا نمی‌شود. آرشیو امضا شده است و verify.py هر فایل درون آن را بررسی می‌کند.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "چت‌ها و عکس‌ها را یک‌بار ذخیره کنید؛ سایر فایل‌ها تحت عنوان ضبط و فایل‌ها انتخاب می‌شوند. هیچ چیزی در پس‌زمینه اجرا نمی‌شود. آرشیو امضا شده و دارای مهرهای زمانی مستقل است و verify.py هر فایل درون آن را بررسی می‌کند. نیازمند درخواست‌هایی خارج از تلگرام است.",
   "running": "در حال اجرا",
   "cancelled": "لغو شده",
   "Updates arrived while observation was paused": "به‌روزرسانی‌ها در حالی که مشاهده متوقف بود، دریافت شدند",
@@ -9255,7 +9255,7 @@
   "Typing status": "وضعیت تایپ",
   "Send without sound": "ارسال بدون صدا",
   "Show when the other side is typing": "نمایش زمانی که طرف مقابل در حال تایپ است",
-  "Record the other side’s typing in the journal": "تایپ طرف مقابل را در دفترچه یادداشت ثبت کنید",
+  "Record the other side’s typing in the journal": "در مجله ثبت کنید که شرکت‌کننده دیگر در حال تایپ است",
   "Invisible": "نامرئی",
   "Visible like a regular app": "برای دیگران مانند یک اپلیکیشن معمولی تلگرام قابل مشاهده است.",
   "Use the workspace settings": "از تنظیمات فضای کاری استفاده کنید",
@@ -9442,7 +9442,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "نام‌های کاربری قابل تغییر و استفاده مجدد هستند؛ شناسه عددی با حساب کاربری باقی می‌ماند. شناسه‌ها را همراه با زمان مشاهده نام‌های کاربری ذکر کنید.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "دسته‌بندی‌های داده‌ای که معمولاً از ارائه‌دهنده درخواست می‌شود: داده‌های مشترک، گزارش‌های دسترسی (آدرس IP و پورت به همراه زمان)، داده‌های ترافیکی، محتوا. می‌توان درخواست نگهداری داده‌ها را پیش از ارائه آنها کرد.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "در کانال‌ها و ابرگروه‌هایی که این حساب کاربری مدیر است، تلگرام پیام‌های حذف‌شده و نسخه‌های قبلی ویرایش‌ها را برای حدود ۴۸ ساعت در گزارش مدیر نگه می‌دارد.",
-  "Only with the Mark as read button": "فقط با دکمه علامت‌گذاری به‌عنوان خوانده‌شده",
-  "Only with the Mark as opened button": "فقط با دکمه علامت‌گذاری به‌عنوان بازشده",
-  "Only with the Mark stories as viewed button": "فقط با دکمه علامت‌گذاری داستان‌ها به‌عنوان دیده‌شده"
+  "Only with the Mark as read button": "فقط با دکمه «علامت‌گذاری به‌عنوان خوانده‌شده»",
+  "Only with the Mark as opened button": "فقط با دکمه «علامت‌گذاری رسانه به‌عنوان باز»",
+  "Only with the Mark stories as viewed button": "فقط با دکمه «علامت‌گذاری داستان‌ها به‌عنوان دیده‌شده»",
+  "Mark as opened": "علامت‌گذاری رسانه به‌عنوان باز",
+  "Workspace settings": "تنظیمات فضای کاری"
 }

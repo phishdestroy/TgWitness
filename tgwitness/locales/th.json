@@ -8953,7 +8953,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram รายงานว่าการสนทนานี้ไม่มีอยู่อีกต่อไป",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "การป้องกันด้วยรหัสผ่าน ZIP ใช้ WinZip AES (การขยายกุญแจที่อ่อนแอ) ให้ใช้คำผ่านแบบสุ่มที่ยาวอย่างน้อย 20 ตัวอักษร หรือเลือก \"การเข้ารหัสที่แข็งแกร่งกว่า\" สำหรับการส่งออกข้อมูลที่ละเอียดอ่อน",
   "Transport route checked for this connection.": "ได้ตรวจสอบเส้นทางขนส่งสำหรับการเชื่อมต่อนี้แล้ว",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "บันทึกการสนทนาและรูปภาพเพียงครั้งเดียว; ไฟล์อื่น ๆ จะถูกเลือกภายใต้ การบันทึกและไฟล์ ไม่มีกระบวนการใดที่ทำงานในพื้นหลังอย่างต่อเนื่อง ไฟล์เก็บถาวรได้รับการลงนาม และ verify.py จะตรวจสอบทุกไฟล์ภายในนั้น",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "บันทึกการสนทนาและรูปภาพเพียงครั้งเดียว; ไฟล์อื่น ๆ จะถูกเลือกในการบันทึกและไฟล์ ไม่มีกระบวนการใดที่ทำงานอยู่เบื้องหลังอย่างต่อเนื่อง ไฟล์เก็บถาวรได้รับการลงนามและมีเวลาประทับที่แยกกัน และไฟล์ verify.py จะตรวจสอบทุกไฟล์ภายในนั้น ต้องใช้ requests นอก Telegram",
   "running": "กำลังทำงาน",
   "cancelled": "ยกเลิก",
   "Updates arrived while observation was paused": "มีการอัปเดตเข้ามาในขณะที่การสังเกตถูกหยุดชั่วคราว",
@@ -9207,7 +9207,7 @@
   "Typing status": "สถานะการพิมพ์",
   "Send without sound": "ส่งข้อความโดยไม่ใช้เสียง",
   "Show when the other side is typing": "แสดงเมื่อฝ่ายตรงข้ามกำลังพิมพ์",
-  "Record the other side’s typing in the journal": "บันทึกการพิมพ์ของฝ่ายตรงข้ามลงในบันทึก",
+  "Record the other side’s typing in the journal": "บันทึกในสมุดบันทึกว่าผู้เข้าร่วมอีกคนกำลังพิมพ์อยู่",
   "Invisible": "ไม่ปรากฏ",
   "Visible like a regular app": "สามารถมองเห็นได้โดยผู้อื่นเหมือนแอปTelegram ปกติ",
   "Use the workspace settings": "ใช้การตั้งค่าพื้นที่ทำงาน",
@@ -9394,7 +9394,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "ชื่อผู้ใช้สามารถเปลี่ยนและใช้ซ้ำได้; รหัสประจำตัวตัวเลขจะคงอยู่กับบัญชีนั้นเสมอ ให้อ้างอิงรหัสประจำตัวพร้อมทั้งเวลาที่ชื่อผู้ใช้ถูกสังเกตเห็น",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "ประเภทข้อมูลที่มักถูกขอจากผู้ให้บริการ: ข้อมูลผู้สมัครบริการ, บันทึกการเข้าถึง (ที่อยู่ IP และพอร์ตพร้อมเวลา), ข้อมูลการจราจร, เนื้อหา. สามารถขอให้เก็บรักษาข้อมูลไว้ก่อนการส่งมอบได้",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "ในช่องและกลุ่มใหญ่ที่บัญชีนี้ทำหน้าที่เป็นผู้ดูแลระบบ Telegram จะเก็บข้อความที่ถูกลบและเวอร์ชันการแก้ไขก่อนหน้านี้ไว้ในบันทึกผู้ดูแลระบบเป็นเวลาประมาณ 48 ชั่วโมง",
-  "Only with the Mark as read button": "ใช้ได้เฉพาะกับปุ่ม ทำเครื่องหมายว่าอ่านแล้ว เท่านั้น",
-  "Only with the Mark as opened button": "ใช้ได้เฉพาะกับปุ่ม ทำเครื่องหมายว่าเปิดแล้ว เท่านั้น",
-  "Only with the Mark stories as viewed button": "ใช้ได้เฉพาะกับปุ่ม ทำเครื่องหมายว่าได้อ่านแล้ว เท่านั้น"
+  "Only with the Mark as read button": "ใช้ได้เฉพาะกับปุ่ม \"ทำเครื่องหมายว่าอ่านแล้ว\" เท่านั้น",
+  "Only with the Mark as opened button": "ใช้ได้เฉพาะกับปุ่ม \"ทำเครื่องหมายสื่อว่าเปิดแล้ว\" เท่านั้น",
+  "Only with the Mark stories as viewed button": "ใช้ได้เฉพาะกับปุ่ม \"ทำเครื่องหมายว่าได้อ่านแล้ว\" เท่านั้น",
+  "Mark as opened": "ทำเครื่องหมายสื่อว่าเปิดแล้ว",
+  "Workspace settings": "การตั้งค่าพื้นที่ทำงาน"
 }

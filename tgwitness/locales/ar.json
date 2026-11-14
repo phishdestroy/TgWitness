@@ -9193,7 +9193,7 @@
   "Telegram reports that the chat no longer exists.": "يُبلغ Telegramُ بأن المحادثة لم تعد موجودة.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "تستخدم حماية كلمة مرور ملفات ZIP طريقة WinZip AES (تمديد المفتاح الضعيف). استخدم عبارة مرور عشوائية طويلة مكونة من 20 حرفًا أو أكثر، أو اختر «التشفير الأقوى» لعمليات التصدير الحساسة.",
   "Transport route checked for this connection.": "تم التحقق من مسار النقل لهذا الاتصال.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "يتم حفظ المحادثات والصور مرة واحدة؛ ويتم اختيار الملفات الأخرى ضمن التسجيل والملفات. لا يظل أي شيء قيد التشغيل في الخلفية. الأرشيف موقّع، ويقوم verify.py بالتحقق من كل ملف فيه.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "يتم حفظ المحادثات والصور مرة واحدة؛ أما الملفات الأخرى فيتم اختيارها ضمن التسجيل والملفات. لا يوجد أي عملية تعمل في الخلفية. الأرشيف موقّع ويحتوي على طوابع زمنية مستقلة، ويقوم ملف verify.py بفحص كل ملف فيه. يتطلب إجراء طلبات خارج Telegram.",
   "running": "قيد التشغيل",
   "cancelled": "ملغى",
   "Updates arrived while observation was paused": "وصلت التحديثات أثناء توقف المراقبة مؤقتًا",
@@ -9447,7 +9447,7 @@
   "Typing status": "حالة الكتابة",
   "Send without sound": "الإرسال بدون صوت",
   "Show when the other side is typing": "إظهار ما إذا كان الطرف الآخر يكتب",
-  "Record the other side’s typing in the journal": "سجل ما يكتبه الطرف الآخر في السجل",
+  "Record the other side’s typing in the journal": "سجل في اليومية أن المشارك الآخر يقوم بالكتابة",
   "Invisible": "غير مرئي",
   "Visible like a regular app": "مرئي للآخرين مثل تطبيق Telegram العادي",
   "Use the workspace settings": "استخدم إعدادات مساحة العمل",
@@ -9634,7 +9634,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "يمكن تغيير أسماء المستخدمين وإعادة استخدامها؛ بينما يظل المعرّف الرقمي مرتبطًا بالحساب. يُشار إلى المعرّفات مع ذكر المرات التي شوهدت فيها أسماء المستخدمين.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "فئات البيانات التي يُطلب تقديمها عادةً من مزود الخدمة: بيانات المشترك، وسجلات الوصول (عنوان IP والمنفذ مع التوقيت)، وبيانات حركة المرور، والمحتوى. يمكن طلب الحفظ قبل تقديم البيانات.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "في القنوات والمجموعات الفائقة التي يكون هذا الحساب مسؤولاً عنها، يحتفظ Telegram بالرسائل المحذوفة والإصدارات السابقة للتعديلات في سجل المسؤول لمدة 48 ساعة تقريبًا.",
-  "Only with the Mark as read button": "فقط باستخدام الزر تعيين كمقروء",
-  "Only with the Mark as opened button": "فقط باستخدام الزر وضع علامة \"مفتوح\"",
-  "Only with the Mark stories as viewed button": "فقط باستخدام الزر وضع علامة \"تمت مشاهدته\" على القصص"
+  "Only with the Mark as read button": "فقط باستخدام الزر «تعيين كمقروء»",
+  "Only with the Mark as opened button": "فقط باستخدام الزر «وضع علامة «مفتوح» على الوسائط»",
+  "Only with the Mark stories as viewed button": "فقط باستخدام الزر «وضع علامة \"تمت مشاهدته\" على القصص»",
+  "Mark as opened": "وضع علامة «مفتوح» على الوسائط",
+  "Workspace settings": "إعدادات مساحة العمل"
 }

@@ -8953,7 +8953,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram은 해당 채팅이 더 이상 존재하지 않는다고 보고합니다.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP 비밀번호 보호는 WinZip AES(약한 키 스트레칭)를 사용합니다. 20자 이상의 긴 무작위 암호를 사용하거나, 민감한 데이터를 내보낼 때는 ‘더 강력한 암호화’를 선택하십시오.",
   "Transport route checked for this connection.": "이 연결에 대해 전송 경로를 확인했습니다.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "채팅과 사진은 한 번만 저장되며, 다른 파일은 기록과 파일에서 선택합니다. 백그라운드에서 계속 실행되는 프로세스는 없습니다. 아카이브는 서명되어 있으며, verify.py은 그 안의 모든 파일을 확인합니다.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "채팅 내용과 사진은 한 번만 저장하면 되며, 그 외 파일은 기록과 파일에서 선택합니다. 백그라운드에서 지속적으로 실행되는 프로세스는 없습니다. 아카이브는 서명되어 있으며 독립적인 타임스탬프가 포함되어 있고, verify.py가 아카이브 내의 모든 파일을 확인합니다. 텔레그램 외부에서 요청이 필요합니다.",
   "running": "실행 중",
   "cancelled": "취소됨",
   "Updates arrived while observation was paused": "관찰이 일시 중지된 동안 업데이트가 도착했습니다",
@@ -9207,7 +9207,7 @@
   "Typing status": "입력 상태",
   "Send without sound": "소리 없이 전송하기",
   "Show when the other side is typing": "상대방이 입력 중일 때 표시하기",
-  "Record the other side’s typing in the journal": "상대방의 입력 내용을 일지에 기록하세요",
+  "Record the other side’s typing in the journal": "다른 참가자가 입력 중임을 저널에 기록하십시오",
   "Invisible": "보이지 않음",
   "Visible like a regular app": "일반 Telegram 앱과 마찬가지로 다른 사용자에게도 표시됩니다.",
   "Use the workspace settings": "워크스페이스 설정을 사용하세요",
@@ -9394,7 +9394,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "사용자 이름은 변경 및 재사용이 가능하며, 숫자 ID는 계정에 고정됩니다. 사용자 이름이 확인된 시점을 명시하여 ID를 인용하십시오.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "서비스 제공자에게 일반적으로 요청되는 데이터 범주: 가입자 정보, 접속 로그(시간을 포함한 IP 주소 및 포트), 트래픽 데이터, 콘텐츠. 자료 제출 전에 보존 요청이 이루어질 수 있다.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "이 계정이 관리자로 등록된 채널 및 슈퍼그룹에서, Telegram은 삭제된 메시지와 이전 편집 내역을 약 48시간 동안 관리자 로그에 보관합니다.",
-  "Only with the Mark as read button": "읽음으로 표시 버튼을 통해서만",
-  "Only with the Mark as opened button": "'열림'으로 표시 버튼을 통해서만",
-  "Only with the Mark stories as viewed button": "이야기를 '읽음'으로 표시하기 버튼을 통해서만"
+  "Only with the Mark as read button": "“읽음으로 표시” 버튼을 통해서만",
+  "Only with the Mark as opened button": "\"미디어를 '열람됨'으로 표시\" 버튼을 통해서만",
+  "Only with the Mark stories as viewed button": "“이야기를 '읽음'으로 표시하기” 버튼을 통해서만",
+  "Mark as opened": "미디어를 '열람됨'으로 표시",
+  "Workspace settings": "워크스페이스 설정"
 }

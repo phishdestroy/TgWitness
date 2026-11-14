@@ -9001,7 +9001,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram-meldet, dass der Chat nicht mehr existiert.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Der ZIP-Passwortschutz verwendet WinZip AES (schwache Schlüsselverlängerung). Verwenden Sie eine lange, zufällige Passphrase mit mindestens 20 Zeichen oder wählen Sie die stärkere Verschlüsselung für sensible Exporte.",
   "Transport route checked for this connection.": "Für diese Verbindung wurde die Übertragungsroute überprüft.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Chats und Fotos werden einmalig gespeichert; andere Dateien werden unter Aufzeichnung und Dateien ausgewählt. Im Hintergrund läuft nichts weiter. Das Archiv ist signiert, und verify.py überprüft jede darin enthaltene Datei.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "Chats und Fotos werden einmalig gespeichert; andere Dateien werden unter Aufzeichnung und Dateien ausgewählt. Es läuft nichts im Hintergrund weiter. Das Archiv ist signiert und enthält unabhängige Zeitstempel, und verify.py überprüft jede darin enthaltene Datei. Erfordert Anfragen außerhalb von Telegram.",
   "running": "läuft",
   "cancelled": "abgebrochen",
   "Updates arrived while observation was paused": "Aktualisierungen gingen ein, während die Beobachtung unterbrochen war",
@@ -9255,7 +9255,7 @@
   "Typing status": "Eingabestatus",
   "Send without sound": "Senden ohne Ton",
   "Show when the other side is typing": "Anzeigen, wenn die andere Seite tippt",
-  "Record the other side’s typing in the journal": "Halten Sie die Tastatureingaben der Gegenseite im Protokoll fest",
+  "Record the other side’s typing in the journal": "Halte im Protokoll fest, dass der andere Teilnehmer gerade tippt",
   "Invisible": "Unsichtbar",
   "Visible like a regular app": "Für andere sichtbar wie eine normale Telegram-App",
   "Use the workspace settings": "Verwenden Sie die Arbeitsbereichseinstellungen",
@@ -9442,7 +9442,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "Benutzernamen können geändert und wiederverwendet werden; die numerische ID bleibt dem Konto zugeordnet. Geben Sie IDs unter Angabe des Zeitpunkts an, zu dem die Benutzernamen festgestellt wurden.",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "Datenkategorien, die üblicherweise von einem Anbieter angefordert werden: Teilnehmerdaten, Zugriffsprotokolle (IP-Adresse und Port mit Zeitangabe), Verkehrsdaten, Inhalte. Die Aufbewahrung kann vor der Herausgabe angefordert werden.",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "In Kanälen und Supergruppen, in denen dieses Konto Administrator ist, speichert Telegram gelöschte Nachrichten und frühere Versionen von Bearbeitungen etwa 48 Stunden lang im Administratorprotokoll.",
-  "Only with the Mark as read button": "Nur mit der Schaltfläche Als gelesen markieren",
-  "Only with the Mark as opened button": "Nur mit der Schaltfläche Als gelesen markieren",
-  "Only with the Mark stories as viewed button": "Nur mit der Schaltfläche Beiträge als gelesen markieren"
+  "Only with the Mark as read button": "Nur mit der Schaltfläche „Als gelesen markieren“",
+  "Only with the Mark as opened button": "Nur mit der Schaltfläche „Medien als geöffnet markieren“",
+  "Only with the Mark stories as viewed button": "Nur mit der Schaltfläche „Beiträge als gelesen markieren“",
+  "Mark as opened": "Medien als geöffnet markieren",
+  "Workspace settings": "Einstellungen des Arbeitsbereichs"
 }

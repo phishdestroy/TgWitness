@@ -8953,7 +8953,7 @@
   "Telegram reports that the chat no longer exists.": "Telegramは、そのチャットはもはや存在しないと報告しています。",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIPのパスワード保護にはWinZip AES（弱いキーストレッチ）が使用されます。機密性の高いデータをエクスポートする際は、20文字以上の長いランダムなパスフレーズを使用するか、「より強力な暗号化」を選択してください。",
   "Transport route checked for this connection.": "この接続について、転送経路が確認されました。",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "チャットと写真は一度だけ保存され、その他のファイルは 記録とファイル で選択されます。バックグラウンドで実行され続けるプロセスはありません。アーカイブには署名が付与されており、verify.py はその中のすべてのファイルをチェックします。",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed and carries independent timestamps, and verify.py checks every file in it. Needs requests outside Telegram.": "チャットと写真は一度保存すれば済みます。その他のファイルは記録とファイルで選択します。バックグラウンドで動作し続けるプロセスはありません。アーカイブには署名と個別のタイムスタンプが付与されており、verify.pyがその中のすべてのファイルをチェックします。Telegram外部へのリクエストが必要です。",
   "running": "実行中",
   "cancelled": "キャンセルされました",
   "Updates arrived while observation was paused": "観察が一時停止されている間に更新が届きました",
@@ -9207,7 +9207,7 @@
   "Typing status": "入力ステータス",
   "Send without sound": "音を出さずに送信する",
   "Show when the other side is typing": "相手が入力中であることを表示する",
-  "Record the other side’s typing in the journal": "相手の入力内容をジャーナルに記録する",
+  "Record the other side’s typing in the journal": "他の参加者が入力中であることをジャーナルに記録する",
   "Invisible": "非表示",
   "Visible like a regular app": "通常のTelegramアプリと同様に、他のユーザーにも表示されます",
   "Use the workspace settings": "ワークスペースの設定を使用してください",
@@ -9394,7 +9394,9 @@
   "Usernames can be changed and reused; the numeric ID stays with the account. Cite IDs with the times the usernames were observed.": "ユーザー名は変更および再利用が可能であるが、数値IDはアカウントに紐づいたままとなる。IDを引用する際は、そのユーザー名が確認された回数を併記すること。",
   "Data categories commonly asked of a provider: subscriber data, access logs (IP address and port with time), traffic data, content. Preservation can be requested before production.": "プロバイダーに対して一般的に求められるデータの種類：加入者データ、アクセスログ（IPアドレス、ポート、時刻）、トラフィックデータ、コンテンツ。提出に先立ち、データの保存が求められる場合がある。",
   "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier versions of edits in the admin log for about 48 hours.": "このアカウントが管理者となっているチャンネルやスーパーグループにおいて、Telegramは削除されたメッセージや編集の以前のバージョンを、管理者ログに約48時間保存します。",
-  "Only with the Mark as read button": "既読にする ボタンを使用する場合のみ",
-  "Only with the Mark as opened button": "「既読」としてマークする ボタンを使用する場合のみ",
-  "Only with the Mark stories as viewed button": "ストーリーを「既読」にする ボタンを使用する場合のみ"
+  "Only with the Mark as read button": "「既読にする」ボタンを使用する場合のみ",
+  "Only with the Mark as opened button": "「メディアを「開封済み」としてマークする」ボタンを使用する場合のみ",
+  "Only with the Mark stories as viewed button": "「ストーリーを「既読」にする」ボタンを使用する場合のみ",
+  "Mark as opened": "メディアを「開封済み」としてマークする",
+  "Workspace settings": "ワークスペースの設定"
 }
