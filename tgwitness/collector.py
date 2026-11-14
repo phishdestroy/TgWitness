@@ -4178,6 +4178,17 @@ class Collector:
                 finally:
                     self.release_export(owner)
 
+    def snapshot_restriction(self, entity):
+        facts = {}
+        for name in ("restricted", "left", "broadcast", "scam", "fake", "noforwards"):
+            if getattr(entity, name, None) is True:
+                facts[name] = True
+        reasons = [{"platform": getattr(reason, "platform", None), "reason": getattr(reason, "reason", None),
+                    "text": getattr(reason, "text", None)} for reason in getattr(entity, "restriction_reason", None) or []]
+        if reasons:
+            facts["restriction_reasons"] = reasons
+        return facts
+
     async def _snapshot(self, chat_id, limit, entity=None, origin=None, before_id=None):
         if not self.selected(chat_id):
             raise ValueError("Enable this target before taking a history snapshot.")
@@ -4209,11 +4220,17 @@ class Collector:
                                            acquisition={"request_started_seq": request_started_seq})
                 count += 1
         except BaseException as exc:
-            self.store.append("snapshot.interrupted", {"captured": count, "requested": limit,
+            self.store.append("snapshot.interrupted", {"captured": count, "requested": limit, "returned": seen,
                                                       "error_type": type(exc).__name__}, chat_id)
             raise
-        self.store.append("snapshot.completed", {"captured": count, "requested": limit,
-                                                 "reconstructed_missed_events": False}, chat_id)
+        empty = {}
+        if count == 0:
+            if seen == 0:
+                empty = {"telegram_returned_none": True, **self.snapshot_restriction(entity)}
+            else:
+                empty = {"all_already_recorded": seen}
+        self.store.append("snapshot.completed", {"captured": count, "requested": limit, "returned": seen,
+                                                 "reconstructed_missed_events": False, **empty}, chat_id)
         return {"captured": count, "requested": limit, "returned": seen, "oldest_id": oldest}
 
     def export_busy(self):
