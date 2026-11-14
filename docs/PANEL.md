@@ -100,6 +100,9 @@ Chat rows show collection state, pending and failed file downloads, initial hist
 loading and restrictions returned in Telegram's dialog metadata. A lost or unconfirmed
 access state does not identify a content ban. Open **Filters** to select these states
 or sort by the file queue; the selection stays in the URL when the page is reloaded.
+The **Retry** filter finds initial chat loads waiting after an error. Their badge shows
+the error type and, while collecting, the next attempt time. Home summarizes how many
+loads need another attempt. Paused collection retains the jobs until it resumes.
 
 Preserved-attachment journal entries show the observed type, name and byte size.
 New download outcomes also retain the media kind and duration when Telegram provides

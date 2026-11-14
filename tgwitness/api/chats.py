@@ -447,9 +447,18 @@ async def chats(request: Request, *, ctx=Depends(current_context)):
     listed = await complete_in_thread(chat_listing, store, ctx.visible_chats(request))
     collector = ctx.app.state.collector
     pending = set(store.get_setting("new_chat_intake_pending", [])) | set(store.get_setting("baseline_pending", []))
+    retries = {}
+    for row in collector.intake_progress.retries():
+        if row["chat_id"] not in retries or row["retry_at"] < retries[row["chat_id"]]["retry_at"]:
+            retries[row["chat_id"]] = row
+    backoff = store.get_setting("rpc_backoff_until", 0)
     for chat in listed:
         chat_id = chat["chat_id"]
         chat["intake_state"] = "running" if chat_id in collector.intake_active else "queued" if chat_id in pending else None
+        if chat["intake_state"] == "queued" and chat_id in retries:
+            retry = retries[chat_id]
+            chat.update(intake_state="retry", intake_retry_at=max(backoff, retry["retry_at"]),
+                        intake_error_type=retry["error_type"], intake_error_seq=retry["error_seq"])
         entity = collector.dialog_cache.get(chat_id, {}).get("entity")
         chat["telegram_restrictions"] = [
             {"platform": item.platform, "reason": item.reason, "text": item.text}
