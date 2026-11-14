@@ -601,8 +601,23 @@ class Store:
                 "WHERE j.state IN ('queued','retry','running')" + clause, sorted(chat_ids or [])).fetchone()
         return row[0]
 
+    @staticmethod
+    def priority_filter(filters, params, min_priority, max_priority, expedited):
+        bounds = []
+        for operator, value in ((">=", min_priority), ("<=", max_priority)):
+            if value is not None:
+                bounds.append("j.priority" + operator + "?")
+                params.append(value)
+        if bounds:
+            filters.append("(" + " AND ".join(bounds) + (" OR j.expedite=1)" if expedited else ")"))
+
+    def expedite_media(self, chat_id, message_id):
+        with self.transaction():
+            return self.db.execute("UPDATE media_jobs SET expedite=1,next_attempt=0 WHERE chat_id=? AND message_id=? "
+                                   "AND state IN ('queued','retry')", (chat_id, message_id)).rowcount
+
     def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None, history_run=None,
-                    allow_takeout=False, exclude_history_run=None):
+                    allow_takeout=False, exclude_history_run=None, expedited=False):
         filters, params = [], [account_id, time.time() if now is None else now]
         if not allow_takeout:
             filters.append("NOT EXISTS (SELECT 1 FROM events e WHERE e.seq=j.message_event "
@@ -614,16 +629,13 @@ class Store:
             filters.append("NOT EXISTS (SELECT 1 FROM history_items h WHERE h.message_event=j.message_event "
                            "AND h.run_id=?)")
             params.append(exclude_history_run)
-        for operator, value in ((">=", min_priority), ("<=", max_priority)):
-            if value is not None:
-                filters.append("j.priority" + operator + "?")
-                params.append(value)
+        self.priority_filter(filters, params, min_priority, max_priority, expedited)
         with self.transaction():
             row = self.db.execute(
                 "SELECT j.* FROM media_jobs j JOIN targets t USING(chat_id) "
                 "WHERE j.account_id=? AND t.enabled=1 AND j.state IN ('queued','retry') "
                 "AND j.next_attempt<=? " + ("AND " + " AND ".join(filters) if filters else "") +
-                " ORDER BY j.priority,j.message_event LIMIT 1", params).fetchone()
+                " ORDER BY j.expedite DESC,j.priority,j.message_event LIMIT 1", params).fetchone()
             if not row:
                 return None
             self.db.execute("UPDATE media_jobs SET state='running',attempts=attempts+1 WHERE message_event=?",
@@ -632,12 +644,9 @@ class Store:
             job["attempts"] += 1
             return job
 
-    def next_history_media_attempt(self, account_id, run_id, *, min_priority=None, max_priority=None):
+    def next_history_media_attempt(self, account_id, run_id, *, min_priority=None, max_priority=None, expedited=False):
         filters, params = [], [run_id, account_id]
-        for operator, value in ((">=", min_priority), ("<=", max_priority)):
-            if value is not None:
-                filters.append("j.priority" + operator + "?")
-                params.append(value)
+        self.priority_filter(filters, params, min_priority, max_priority, expedited)
         with self.lock:
             return self.db.execute("SELECT min(j.next_attempt) FROM media_jobs j "
                 "JOIN history_items h ON h.message_event=j.message_event JOIN targets t USING(chat_id) "
