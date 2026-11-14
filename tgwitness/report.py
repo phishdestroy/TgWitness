@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import ConfigDict, Field, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
-from . import report_design, report_history, report_layouts, report_repeats, report_selection, report_selection_view
+from . import report_chat_timeline, report_design, report_history, report_layouts, report_repeats, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -1850,11 +1850,18 @@ def report_data(events_again, coverage, context):
         "parts": [{k: p[k] for k in ("index", "file", "from", "to", "count", "first_at", "last_at", "sha256") if k in p}
                   for p in context.get("parts") or []],
         "limitations": context.get("limits") or [],
-        **report_material(context),
+        **with_observed(report_material(context), coverage),
     }
     if handover:
         data["minimisation"] = handover
     return json.loads(json.dumps(data, ensure_ascii=False, default=str))
+
+
+def with_observed(material, coverage):
+    chart = (material.get("analytics") or {}).get("chat_timeline")
+    if chart:
+        chart["observed"] = report_chat_timeline.observed(chart, coverage)
+    return material
 
 
 def report_material(context):
@@ -1868,6 +1875,7 @@ def report_material(context):
     analytics = report_analytics.selected(raw, options) if raw and any(options[k] for k in
                  ("activity_chart", "hourly_chart", "participant_chart", "chat_chart", "composition_chart")) else None
     if analytics:
+        report_chat_timeline.titled(analytics.get("chat_timeline"), digest.get("titles"))
         analytics["participant_labels"] = options["participant_labels"]
         analytics["source"] = {"file": "events.jsonl", "sha256": context.get("events_sha256"),
                                "journal_head": context.get("head_hash"), "records": context.get("event_count")}
@@ -2397,7 +2405,7 @@ class EvidenceHTML:
         self.description = say("Signed record of Telegram observations made by TgWitness, with integrity and custody details.")
         self.sign = self.context.get("sign")
         self.handover = self.context.get("handover")
-        self.material = report_material(self.context)
+        self.material = with_observed(report_material(self.context), self.coverage)
         self.filtered = self.context.get("report_digest") is not None
         self.label, self.shown_count = say("Evidence report"), self.count
         if self.context.get("selection"):

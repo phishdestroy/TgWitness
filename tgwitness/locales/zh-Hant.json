@@ -4868,6 +4868,7 @@
   "The chat at export time": "匯出時的聊天記錄",
   "What Telegram said about the chat when the export began, and the exporting account's place in it. Labels such as scam and fake are Telegram's own.": "Telegram 對導出開始時該聊天室的描述，以及導出帳戶在其中的位置。「詐騙」和「假冒」等標籤均為 Telegram 所自創。",
   "Indicators": "指標",
+  "Each row is a chat and each column a period (UTC); darker cells hold more observed messages. Hatched columns had no capture confirmation at all: what was posted then is unknown. A pale cell in an observed column means no message was recorded there.": "每行代表一個聊天室，每欄代表一個時間段（UTC）；顏色較深的儲存格表示該處觀察到的訊息較多。帶有斜線的欄位完全沒有擷取確認：當時發布了什麼內容不得而知。在「已觀察」欄位中，淺色的儲存格表示該處未記錄任何訊息。",
   "Texts repeated across chats": "在多個聊天室中重複出現的文字",
   "The same message text observed in more than one chat, compared after letter case and spacing are normalised. Texts shorter than {n} characters are not compared. Matching text is a lead: it does not show who wrote the copies or that they are connected.": "在多個聊天室中觀察到的相同訊息文字，經字母大小寫與空格標準化處理後進行比對。少於 {n} 個字元的文字不予比對。匹配的文字僅為線索：它並未顯示誰撰寫了這些副本，亦未顯示它們之間是否存在關聯。",
   "Texts found in more than one chat: {n}.": "在多個聊天室中發現的文字：{n}。",
