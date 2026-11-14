@@ -108,13 +108,13 @@ class History:
             raise ValueError("This account is busy. Pause its current acquisition task before loading history.")
         try:
             await self.collector.restore()
-            if scope_settings(self.store)["mode"] != "selected":
+            if options.observe_during and not self.collector.running:
+                await self.collector.start()
+            elif scope_settings(self.store)["mode"] != "selected":
                 await self.collector.apply_scope()
             targets = self.store.targets(True)
             if not targets:
                 raise ValueError("Select at least one source first.")
-            if options.observe_during and not self.collector.running:
-                await self.collector.start()
             if not self.collector.running:
                 self.store.recover_media()
             return self.create_run(run_id, now, account, targets, options)
