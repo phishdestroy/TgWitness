@@ -29,7 +29,7 @@ from .security import private_write
 from .store import ZERO, canonical, utcnow
 from .verify import MessageGaps, fingerprint, gap_scope, validate_server_hashes
 from .workers import complete_in_thread
-from .telegram_client import FLOOD_ERRORS
+from .telegram_client import FLOOD_ERRORS, in_lane
 
 KINDS = ("private", "bot", "group", "supergroup", "channel")
 MEDIA = ("photo", "video", "video_message", "voice", "audio", "document", "sticker", "animation")
@@ -348,7 +348,7 @@ class AccountExport:
             self.persist()
             self.store.append("account_export.started", {"job_id": job_id, "options_sha256": job["options_sha256"],
                 "account_id": account, "meaning": "selected visible account data; resumable acquisition"})
-            self.task = asyncio.create_task(self.run(job))
+            self.task = asyncio.create_task(in_lane("bulk", lambda: self.run(job)))
             self.task.add_done_callback(lambda done: self.collector.release_export(job_id) if self.task is done else None)
         except BaseException:
             self.collector.release_export(job_id)
@@ -411,7 +411,7 @@ class AccountExport:
                     self.index.close()
                     self.index = None
                 self.collector.release_export(job_id)
-        self.task = asyncio.create_task(finish_saved())
+        self.task = asyncio.create_task(in_lane("bulk", finish_saved))
         self.task.add_done_callback(lambda done: self.collector.release_export(job_id) if self.task is done else None)
         return self.public()
 
@@ -477,7 +477,7 @@ class AccountExport:
             recovering = True
             self.current.update(phase="preparing", stage="verifying", ready=False, error=None, wait_until=None, options=job["options"])
             self.persist()
-            self.task = asyncio.create_task(self.run(job))
+            self.task = asyncio.create_task(in_lane("bulk", lambda: self.run(job)))
             self.task.add_done_callback(lambda done: self.collector.release_export(job_id) if self.task is done else None)
         except BaseException as exc:
             try:

@@ -19,7 +19,55 @@ from .rpc_pacing import bulk_request
 
 _single_attempt = ContextVar("telegram_single_attempt", default=False)
 _read_permit = ContextVar("telegram_read_permit", default=None)
+_lane = ContextVar("telegram_lane", default="live")
+_dispatch_ticket = ContextVar("telegram_dispatch_ticket", default=None)
+LANES = ("live", "operator", "background", "bulk")
+SHORT_POLL_SECONDS = 10
+SHORT_POLL_FLOOR = 2
+SHORT_POLL_CEILING = 120
 LOG = logging.getLogger("tgwitness.telegram_client")
+
+
+@contextmanager
+def lane(name):
+    if name not in LANES:
+        raise ValueError("Unknown request lane: " + str(name))
+    token = _lane.set(name)
+    try:
+        yield
+    finally:
+        _lane.reset(token)
+
+
+async def in_lane(name, work):
+    with lane(name):
+        return await work()
+
+
+class DispatchTicket:
+    __slots__ = ("owner", "pending", "closed")
+
+    def __init__(self, owner):
+        self.owner, self.pending, self.closed = owner, 0, False
+
+    def hold(self):
+        self.pending += 1
+        return self.release
+
+    def release(self):
+        self.pending -= 1
+        if self.closed and not self.pending:
+            self.owner.update_dispatched()
+
+    def close(self):
+        self.closed = True
+        if not self.pending:
+            self.owner.update_dispatched()
+
+
+def hold_dispatch():
+    ticket = _dispatch_ticket.get()
+    return ticket.hold() if ticket is not None else (lambda: None)
 
 try:
     from telethon._updates.messagebox import ENTRY_ACCOUNT, ENTRY_SECRET, MessageBox, PrematureEndReason, PtsInfo
@@ -31,11 +79,61 @@ TOO_LONG_RECOVERY = "channel_difference_too_long"
 
 if MessageBox is not None:
     class GapAwareMessageBox(MessageBox):
-        __slots__ = ("gap_owner", "diffing", "diff_types")
+        __slots__ = ("gap_owner", "diffing", "diff_types", "short_poll", "poll_timeouts", "poll_holds")
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             self.diffing, self.diff_types = None, {}
+            self.short_poll, self.poll_timeouts, self.poll_holds = set(), {}, {}
+
+        def poll_interval(self, entry):
+            timeout = self.poll_timeouts.get(entry)
+            return max(SHORT_POLL_FLOOR, min(SHORT_POLL_CEILING, timeout or SHORT_POLL_SECONDS))
+
+        def reset_deadlines(self, entries, deadline):
+            polled = [entry for entry in entries or () if entry in self.short_poll and entry in self.map]
+            if not polled:
+                super().reset_deadlines(entries, deadline)
+            else:
+                super().reset_deadlines([entry for entry in entries if entry not in polled], deadline)
+                now = asyncio.get_running_loop().time()
+                for entry in polled:
+                    due = max(now + self.poll_interval(entry), self.poll_holds.get(entry, 0))
+                    super().reset_deadlines([entry], min(deadline, due))
+            if self.map and self.next_deadline not in self.map:
+                self.next_deadline = min(self.map, key=lambda entry: self.map[entry].deadline)
+
+        def hold_poll(self, entry, seconds):
+            if entry in self.short_poll and isinstance(seconds, (int, float)):
+                self.poll_holds[entry] = asyncio.get_running_loop().time() + seconds + 1
+
+        def poll_channels(self, channel_ids):
+            wanted = {entry for entry in channel_ids if type(entry) is int}
+            for entry in self.short_poll - wanted:
+                self.poll_timeouts.pop(entry, None)
+                self.poll_holds.pop(entry, None)
+            added = wanted - self.short_poll
+            self.short_poll = wanted
+            now = asyncio.get_running_loop().time()
+            for entry in added:
+                if entry in self.map:
+                    self.reset_deadlines([entry], now + SHORT_POLL_FLOOR)
+            if added:
+                self.wake()
+            return sorted(added)
+
+        def seed_channel(self, channel_id, pts):
+            if type(channel_id) is not int or type(pts) is not int or channel_id in self.map:
+                return False
+            self.try_set_channel_state(channel_id, pts)
+            self.reset_deadlines([channel_id], asyncio.get_running_loop().time() + SHORT_POLL_FLOOR)
+            self.wake()
+            return True
+
+        def wake(self):
+            owner = getattr(self, "gap_owner", None)
+            if owner is not None and hasattr(owner, "wake_updates"):
+                owner.wake_updates()
 
         def session_state(self):
             held = getattr(getattr(self, "gap_owner", None), "accepted_state", None)
@@ -102,6 +200,9 @@ if MessageBox is not None:
         def apply_channel_difference(self, request, diff, chat_hashes):
             self.hold()
             entry = request.channel.channel_id
+            if entry in self.short_poll:
+                timeout = getattr(diff, "timeout", None)
+                self.poll_timeouts[entry] = timeout if type(timeout) is int and timeout > 0 else None
             if not isinstance(diff, types.updates.ChannelDifferenceTooLong):
                 result = self.applying(entry, super().apply_channel_difference, request, diff, chat_hashes)
                 counted = dict(self.diff_types)
@@ -327,10 +428,37 @@ class WitnessClient(TelegramClient):
         return result
 
     async def _dispatch_update(self, update):
-        await super()._dispatch_update(update)
+        ticket = DispatchTicket(self)
+        token = _dispatch_ticket.set(ticket)
+        try:
+            await super()._dispatch_update(update)
+        finally:
+            _dispatch_ticket.reset(token)
+            ticket.close()
+
+    def update_dispatched(self):
         self.undispatched = max(0, self.undispatched - 1)
         if not self.undispatched:
             self.accepted_state = None
+
+    def wake_updates(self):
+        for getter in list(getattr(getattr(self, "_updates_queue", None), "_getters", ())):
+            if not getter.done():
+                getter.set_exception(asyncio.TimeoutError())
+                return True
+        return False
+
+    def poll_channels(self, channel_ids):
+        box = getattr(self, "_message_box", None)
+        return box.poll_channels(channel_ids) if hasattr(box, "poll_channels") else []
+
+    def seed_channel(self, channel_id, pts):
+        box = getattr(self, "_message_box", None)
+        return bool(hasattr(box, "seed_channel") and box.seed_channel(channel_id, pts))
+
+    def unseeded_channels(self):
+        box = getattr(self, "_message_box", None)
+        return sorted(entry for entry in getattr(box, "short_poll", ()) if entry not in box.map)
 
     def difference_gap(self, channel_id, before, after, **details):
         if listener := getattr(self, "difference_gap_listener", None):
@@ -418,26 +546,31 @@ class WitnessClient(TelegramClient):
 
     async def _paced_turn(self, items):
         pacer = getattr(self, "bulk_pacer", None)
+        if pacer is None or _lane.get() == "operator":
+            return
         for item in items:
-            if pacer is not None and bulk_request(item):
+            if bulk_request(item):
                 await pacer.before()
 
     async def _call(self, sender, request, ordered=False, flood_sleep_threshold=None):
         if utils.is_list_like(request):
             request = tuple(request)
         reject_read_receipts(request, _read_permit.get())
-        if not hasattr(self, "_rpc_lock"):
-            self._rpc_lock = asyncio.Lock()
+        if not hasattr(self, "_lane_locks"):
+            self._lane_locks = {name: asyncio.Lock() for name in LANES}
+            self._rpc_lock = self._lane_locks["live"]
             self._bulk_lock = asyncio.Lock()
-            self._rpc_owner = None
+            self._lane_owners = {}
             self._flood_until = getattr(self, "_flood_until", {})
             self._file_slots = asyncio.Semaphore(FILE_REQUESTS)
             self._history_slots = asyncio.Semaphore(3)
         items = request if utils.is_list_like(request) else (request,)
         await self._flood_turn(sender, items)
-        if self._rpc_owner is asyncio.current_task():
+        if self._lane_owners.get(_lane.get()) is asyncio.current_task():
             await self._paced_turn(items)
             return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
+        if _lane.get() == "operator":
+            return await self._turn_call(sender, request, ordered, flood_sleep_threshold)
         if not ordered and not utils.is_list_like(request) and request_method(request)["method"] == "messages.getHistory":
             async with self._history_slots:
                 async with self._bulk_lock:
@@ -455,12 +588,13 @@ class WitnessClient(TelegramClient):
         if not utils.is_list_like(request) and file_request(request):
             async with self._file_slots:
                 return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
-        async with self._rpc_lock:
-            self._rpc_owner = asyncio.current_task()
+        name = _lane.get()
+        async with self._lane_locks[name]:
+            self._lane_owners[name] = asyncio.current_task()
             try:
                 return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
             finally:
-                self._rpc_owner = None
+                self._lane_owners.pop(name, None)
 
     async def _serial_call(self, sender, request, ordered, flood_sleep_threshold):
         if utils.is_list_like(request):
@@ -492,6 +626,9 @@ class WitnessClient(TelegramClient):
         except Exception as exc:
             counts["errors"] += 1
             if isinstance(exc, FLOOD_ERRORS):
+                if isinstance(request, functions.updates.GetChannelDifferenceRequest) and hasattr(
+                        box := getattr(self, "_message_box", None), "hold_poll"):
+                    box.hold_poll(getattr(request.channel, "channel_id", None), exc.seconds)
                 if pacer is not None:
                     pacer.flooded(exc.seconds)
                 counts["flood_waits"] += 1

@@ -23,6 +23,7 @@ from telethon.tl import types
 from . import chat_export, message_details, replica, report, tuning
 from .account_export import durable_write, linked, read_json
 from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
+from .telegram_client import in_lane
 from .export_timing import ExportTiming
 from .distributed_takeout import HistoryTakeout
 from .distributed_pages import FORMAT as PAGE_FORMAT, RangePages
@@ -253,7 +254,7 @@ class DistributedExport:
     def launch(self, run):
         owner = run.state["id"]
         self.runs[owner] = run
-        run.task = asyncio.create_task(run.run())
+        run.task = asyncio.create_task(in_lane("bulk", run.run))
         run.task.add_done_callback(lambda _: self.release(owner))
 
     async def resume(self, job_id):
