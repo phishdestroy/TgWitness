@@ -6492,7 +6492,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "TgWitness'ta gelen her isteği kabul etmek ister misiniz? Kabul edilen sohbetler, bu hesabın diğer cihazlarına ulaşmaz.",
   "Pseudo-secret settings saved.": "Sözde gizli ayarlar kaydedildi.",
   "Request sent. The chat opens when the other side accepts.": "İstek gönderildi. Karşı taraf kabul ettiğinde sohbet açılır.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret için isteğe bağlı kiaro-telethon-secret-chat paketi gereklidir. TgWitness'i secret-chats eklentisiyle birlikte yükleyin ve paneli yeniden başlatın.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Sözde gizli, henüz kurulmamış olan protokol modülüne ihtiyaç duyar.",
   "Turn on pseudo-secret for this account first.": "Öncelikle bu hesap için \"sözde gizlilik\" özelliğini etkinleştirin.",
   "This needs a Telegram user, not a group or channel.": "Bunun için bir Telegram kullanıcısı gerekir, grup veya kanal değil.",
   "Telegram has no user with this username.": "Telegram'da bu kullanıcı adına sahip bir kullanıcı bulunmamaktadır.",
@@ -8907,5 +8907,17 @@
   "Open your export": "Dışa aktarımı aç",
   "Original message is not included in this chat.": "Orijinal mesaj bu sohbete dahil edilmemiş.",
   "Personal backup, project archive or another reason": "Kişisel yedek, proje arşivi veya başka bir neden",
-  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Sohbetlerinizi çevrimdışı okuyun. Grafikler, toplama ayrıntıları ve imza kontrolleri için raporu açın."
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Sohbetlerinizi çevrimdışı okuyun. Grafikler, toplama ayrıntıları ve imza kontrolleri için raporu açın.",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Sözde gizli, protokol modülüne ihtiyaç duyar. Ana yöneticiden modülü bu sayfada kurmasını isteyin.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Sözde gizli ayrı bir protokol modülüyle çalışır: {name} {version}, yazar {author}, lisans {license}. TgWitness tam olarak bu sürümü GitHub'dan indirir, her dosyayı bu sürümde sabitlenen SHA-256 ile karşılaştırır ve yükler. Yeniden başlatma gerekmez.",
+  "Install and turn on": "Kur ve etkinleştir",
+  "Source code and license": "Kaynak kodu ve lisans",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Protokol modülü: {name} {version}, yazar {author}, lisans {license}. Dosyaları her başlatmada bu sürümde sabitlenen SHA-256 ile karşılaştırılır.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Protokol modülü: {name} {version}, yazar {author}, lisans {license}, Python ortamına kurulu.",
+  "Downloading and checking the module…": "Modül indiriliyor ve denetleniyor…",
+  "Module installed. Pseudo-secret is on for this account.": "Modül kuruldu. Sözde gizli bu hesap için açık.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Sözde gizli modülü, bu TgWitness sürümünde sabitlenen sürümden farklı olduğu için yüklenmedi. Yeniden kurun.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Sözde gizli modülü denetimden geçti ancak başlatılamadı. TgWitness'i güncelleyin ve modülü yeniden kurun.",
+  "Only the main administrator can install the pseudo-secret module.": "Sözde gizli modülünü yalnızca ana yönetici kurabilir.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Sözde gizli modülü, bu çalışma alanının bağlantı yolu üzerinden GitHub'dan indirilemedi. Bağlantıyı denetleyip yeniden deneyin."
 }

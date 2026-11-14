@@ -223,6 +223,7 @@ POLICY = {
     "POST /api/collector/{action}": ("collect", None),
     "GET /api/secret-chats": ("view", None),
     "POST /api/secret-chats/settings": ("settings", None),
+    "POST /api/secret-chats/install": ("settings", None),
     "POST /api/secret-chats": ("interact", None),
     "POST /api/secret-chats/{chat_id}/accept": ("interact", None),
     "POST /api/secret-chats/{chat_id}/messages": ("interact", None),

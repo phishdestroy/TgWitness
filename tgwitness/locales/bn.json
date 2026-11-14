@@ -6492,7 +6492,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "TgWitness-এ প্রতিটি ইনকামিং অনুরোধ গ্রহণ করুন? গ্রহণকৃত চ্যাটগুলি এই অ্যাকাউন্টের অন্যান্য ডিভাইসে পৌঁছাবে না।",
   "Pseudo-secret settings saved.": "ছদ্ম-গোপনীয় সেটিংস সংরক্ষিত।",
   "Request sent. The chat opens when the other side accepts.": "অনুরোধ পাঠানো হয়েছে। অন্য পক্ষ গ্রহণ করলে চ্যাট খুলবে।",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "পসো-সিক্রেট-এ অপশনাল প্যাকেজ kiaro-telethon-secret-chat প্রয়োজন। TgWitness-এ secret-chats extra ইনস্টল করুন এবং প্যানেল পুনরায় চালু করুন।",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "ছদ্ম-গোপনের জন্য এর প্রোটোকল মডিউল প্রয়োজন, যা এখনও ইনস্টল করা হয়নি।",
   "Turn on pseudo-secret for this account first.": "প্রথমে এই অ্যাকাউন্টের জন্য ছদ্ম-গোপনীয়তা চালু করুন।",
   "This needs a Telegram user, not a group or channel.": "এর জন্য একটি টেলিগ্রাম ব্যবহারকারী প্রয়োজন, গ্রুপ বা চ্যানেল নয়।",
   "Telegram has no user with this username.": "টেলিগ্রামে এই ব্যবহারকারীর নামধারী কোনো ব্যবহারকারী নেই।",
@@ -8907,5 +8907,17 @@
   "Open your export": "আপনার এক্সপোর্ট খুলুন",
   "Original message is not included in this chat.": "মূল বার্তাটি এই চ্যাটে অন্তর্ভুক্ত নেই।",
   "Personal backup, project archive or another reason": "ব্যক্তিগত ব্যাকআপ, প্রকল্পের আর্কাইভ বা অন্য কোনো কারণ",
-  "Read your chats offline. Open the report for charts, collection details and signature checks.": "ইন্টারনেট ছাড়াই আপনার চ্যাট পড়ুন। চার্ট, সংগ্রহের বিবরণ ও স্বাক্ষর যাচাইয়ের জন্য প্রতিবেদন খুলুন।"
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "ইন্টারনেট ছাড়াই আপনার চ্যাট পড়ুন। চার্ট, সংগ্রহের বিবরণ ও স্বাক্ষর যাচাইয়ের জন্য প্রতিবেদন খুলুন।",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "ছদ্ম-গোপনের জন্য এর প্রোটোকল মডিউল প্রয়োজন। প্রধান প্রশাসককে এই পৃষ্ঠায় এটি ইনস্টল করতে বলুন।",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "ছদ্ম-গোপন একটি আলাদা প্রোটোকল মডিউলে চলে: {name} {version}, লেখক {author}, লাইসেন্স {license}। TgWitness ঠিক এই সংস্করণটি GitHub থেকে ডাউনলোড করে, প্রতিটি ফাইল এই রিলিজে নির্ধারিত SHA-256-এর সঙ্গে মিলিয়ে দেখে এবং লোড করে। পুনরায় চালু করার প্রয়োজন নেই।",
+  "Install and turn on": "ইনস্টল করে চালু করুন",
+  "Source code and license": "সোর্স কোড ও লাইসেন্স",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "প্রোটোকল মডিউল: {name} {version}, লেখক {author}, লাইসেন্স {license}। প্রতিবার চালু হওয়ার সময় এর ফাইলগুলো এই রিলিজে নির্ধারিত SHA-256-এর সঙ্গে মিলিয়ে দেখা হয়।",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "প্রোটোকল মডিউল: {name} {version}, লেখক {author}, লাইসেন্স {license}, Python পরিবেশে ইনস্টল করা আছে।",
+  "Downloading and checking the module…": "মডিউল ডাউনলোড ও যাচাই করা হচ্ছে…",
+  "Module installed. Pseudo-secret is on for this account.": "মডিউল ইনস্টল হয়েছে। এই অ্যাকাউন্টের জন্য ছদ্ম-গোপন চালু আছে।",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "ছদ্ম-গোপন মডিউলটি এই TgWitness রিলিজে নির্ধারিত সংস্করণ থেকে আলাদা, তাই এটি লোড করা হয়নি। আবার ইনস্টল করুন।",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "ছদ্ম-গোপন মডিউল যাচাইয়ে উত্তীর্ণ হয়েছে, কিন্তু চালু হতে পারেনি। TgWitness আপডেট করে মডিউলটি আবার ইনস্টল করুন।",
+  "Only the main administrator can install the pseudo-secret module.": "শুধুমাত্র প্রধান প্রশাসক ছদ্ম-গোপন মডিউল ইনস্টল করতে পারেন।",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "এই ওয়ার্কস্পেসের সংযোগ রুটের মাধ্যমে GitHub থেকে ছদ্ম-গোপন মডিউল ডাউনলোড করা যায়নি। সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।"
 }

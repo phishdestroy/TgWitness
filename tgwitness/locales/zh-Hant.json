@@ -6453,7 +6453,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "是否要接受 TgWitness 中的所有傳入請求？被接受的聊天內容不會傳送到此帳號的其他裝置上。",
   "Pseudo-secret settings saved.": "偽私密設定已儲存。",
   "Request sent. The chat opens when the other side accepts.": "已發送請求。待對方接受後，聊天視窗即會開啟。",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret 需要選用套件 kiaro-telethon-secret-chat。請安裝附帶 secret-chats 附加功能的 TgWitness，並重新啟動面板。",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "偽私密需要其協定模組，該模組尚未安裝。",
   "Turn on pseudo-secret for this account first.": "請先為此帳號啟用偽私密。",
   "This needs a Telegram user, not a group or channel.": "此功能需由 Telegram 用戶使用，而非群組或頻道。",
   "Telegram has no user with this username.": "Telegram 中沒有使用此用戶名的用戶。",
@@ -8859,5 +8859,17 @@
   "Open your export": "開啟匯出內容",
   "Original message is not included in this chat.": "此聊天未包含原始訊息。",
   "Personal backup, project archive or another reason": "個人備份、專案封存或其他原因",
-  "Read your chats offline. Open the report for charts, collection details and signature checks.": "離線閱讀聊天記錄。開啟報告即可查看圖表、收集詳情和簽章驗證。"
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "離線閱讀聊天記錄。開啟報告即可查看圖表、收集詳情和簽章驗證。",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "偽私密需要其協定模組。請讓主要管理員在此頁面安裝。",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "偽私密運作於獨立的協定模組：{name} {version}，作者 {author}，授權 {license}。TgWitness 會從 GitHub 下載這個確切版本，依本版本固定的 SHA-256 核對每個檔案，然後載入。無需重新啟動。",
+  "Install and turn on": "安裝並啟用",
+  "Source code and license": "原始碼與授權",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "協定模組：{name} {version}，作者 {author}，授權 {license}。每次啟動時都會依本版本固定的 SHA-256 核對其檔案。",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "協定模組：{name} {version}，作者 {author}，授權 {license}，已安裝在 Python 環境中。",
+  "Downloading and checking the module…": "正在下載並檢查模組…",
+  "Module installed. Pseudo-secret is on for this account.": "模組已安裝。已為此帳號啟用偽私密。",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "偽私密模組與本 TgWitness 版本固定的版本不一致，因此未載入。請重新安裝。",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "偽私密模組已通過檢查，但無法啟動。請更新 TgWitness 並重新安裝該模組。",
+  "Only the main administrator can install the pseudo-secret module.": "僅有主要管理員可以安裝偽私密模組。",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "無法透過此工作區的連線路徑從 GitHub 下載偽私密模組。請檢查連線後再試一次。"
 }

@@ -1,9 +1,9 @@
 export function createSecretChats(context) {
-  const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, humanSize, actionText} = context;
+  const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, isAdmin, humanSize, actionText} = context;
   const find = id => root.querySelector("#" + id);
   let view = null, selected = null, timer = null, active = false, session = getSession(), request = 0;
   let renderedChat = null, threadStamp = null, activation = 0;
-  let olderRequest = 0, loadingOlder = false, settingsBusy = false;
+  let olderRequest = 0, loadingOlder = false, settingsBusy = false, installing = false;
   const drafts = new Map(), sending = new Set();
   const startDetails = node('details', 'secret-new'), startSummary = node('summary', '', tr('Start chat'));
   find('secret-start').before(startDetails);startDetails.append(startSummary, find('secret-start'));
@@ -60,17 +60,28 @@ export function createSecretChats(context) {
   }
 
   function renderSettings() {
-    const settings = view.settings, editable = may("settings");
-    find("secret-unavailable").hidden = view.available;
-    find("secret-unavailable").textContent = view.available ? "" : tr(view.unavailable_reason);
+    const settings = view.settings, editable = may("settings"), module = view.module || {};
+    const installable = !view.available && editable && isAdmin();
+    const notice = view.available ? '' : module.problem ? tr(module.problem) : installable ? '' :
+      tr('Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.');
+    find("secret-unavailable").hidden = !notice;
+    find("secret-unavailable").textContent = notice;
     if (!settingsBusy) {
       find("secret-enabled").checked = settings.enabled;
       find("secret-accept").checked = settings.accept_incoming;
     }
     find("secret-enabled").disabled = !editable || settingsBusy || !view.available && !settings.enabled;
     find("secret-accept").disabled = !view.available || !editable || !settings.enabled || settingsBusy;
-    find('secret-install').hidden = view.available || !editable || !view.install_command;
-    find('secret-install-command').textContent = view.install_command || '';
+    find('secret-install').hidden = !installable;
+    find('secret-install-text').textContent = tr('Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.', module);
+    find('secret-install-run').disabled = settingsBusy;
+    find('secret-install-source').href = find('secret-module-source').href = module.source || '#';
+    find('secret-module').hidden = !module.state;
+    find('secret-module-text').textContent = module.state === 'checked' ?
+      tr('Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.', module) :
+      module.state ? tr('Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.', module) : '';
+    find('secret-module-digest').hidden = module.state !== 'checked';
+    find('secret-module-digest').textContent = module.state === 'checked' ? 'SHA-256 ' + module.sha256 + ' · commit ' + module.commit : '';
     find('secret-recovery').hidden = !settings.enabled || view.connected || !view.available;
     find('secret-connect').hidden = view.has_session || !may('account');
     find('secret-reconnect').hidden = !view.has_session || !editable;
@@ -78,7 +89,7 @@ export function createSecretChats(context) {
     find('secret-interaction').hidden = !view.interaction_problem || !may('interact') || !view.available || !settings.enabled;
     find('secret-interaction').textContent = tr(view.interaction_problem || '');
     find("secret-status").dataset.state = settingsBusy || !settings.enabled ? 'off' : view.connected ? 'ok' : 'warn';
-    find("secret-status").textContent = settingsBusy ? tr('Saving…') : !settings.enabled ? tr("Pseudo-secret is off for this account.") :
+    find("secret-status").textContent = installing ? tr('Downloading and checking the module…') : settingsBusy ? tr('Saving…') : !settings.enabled ? tr("Pseudo-secret is off for this account.") :
       view.connected ? tr("Connected: new messages are recorded as they arrive.") :
       tr("Not connected yet: Telegram keeps new messages until this account connects.") + (view.error ? " " + tr("Last error: {error}", {error: view.error}) : "");
     const start = find("secret-start");
@@ -320,15 +331,30 @@ export function createSecretChats(context) {
     if (current()) toast(tr("Pseudo-secret settings saved."));
   }
 
+  async function install() {
+    if (!view || settingsBusy) return;
+    const current = actionOwner(), keep = result => ({...result, records: view.records, next_before: view.next_before});
+    let failure = null; settingsBusy = installing = true; request++; render();
+    try {
+      let result = await json("secret-chats/install", {});
+      if (current(false)) view = keep(result);
+      result = await json("secret-chats/settings", {enabled: true, accept_incoming: result.settings.accept_incoming});
+      if (current(false)) view = keep(result);
+    } catch (error) {failure = error;}
+    if (current(false)) {settingsBusy = installing = false; if (active) render();}
+    if (failure) throw failure;
+    if (!current(false)) return;
+    await load();
+    if (current()) toast(tr("Module installed. Pseudo-secret is on for this account."));
+  }
+
   for (const id of ['secret-enabled', 'secret-accept']) find(id).addEventListener('change', event => {
     const current = actionOwner();
     busy(event.currentTarget, saveSettings).finally(() => {if (current()) renderSettings();});
   });
   find('secret-refresh').addEventListener('click', event => busy(event.currentTarget, load));
   find('secret-search').addEventListener('input', () => {if (view) renderList(threads());});
-  find('secret-install-copy').addEventListener('click', event => busy(event.currentTarget, async () => {
-    await navigator.clipboard.writeText(view.install_command); toast(tr('Copied'));
-  }));
+  find('secret-install-run').addEventListener('click', event => busy(event.currentTarget, install));
   find('secret-reconnect').addEventListener('click', event => busy(event.currentTarget, saveSettings));
   find('secret-report').addEventListener('click', event => busy(event.currentTarget, () => context.openReport(selected)));
   find("secret-start").addEventListener("submit", event => {event.preventDefault(); busy(event.submitter, async () => {
@@ -357,7 +383,7 @@ export function createSecretChats(context) {
     },
     leave() {active = false; activation++; request++; clearTimeout(timer);},
     reset() {active = false; activation++; clearTimeout(timer); view = null; selected = null; request++;
-      olderRequest++; loadingOlder = false; settingsBusy = false;
+      olderRequest++; loadingOlder = false; settingsBusy = installing = false;
       renderedChat = null; threadStamp = null; drafts.clear(); sending.clear(); find("secret-user").value = "";
       find('secret-search').value='';delete startDetails.dataset.ready;find('secret-sync').hidden=true;
       find("secret-list").replaceChildren(); find("secret-thread").replaceChildren();},

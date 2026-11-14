@@ -6645,7 +6645,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "هل تقبل كل طلب وارد في TgWitness؟ المحادثات المقبولة لا تصل إلى الأجهزة الأخرى المرتبطة بهذا الحساب.",
   "Pseudo-secret settings saved.": "تم حفظ الإعدادات شبه السرية.",
   "Request sent. The chat opens when the other side accepts.": "تم إرسال الطلب. تفتح المحادثة عندما يقبل الطرف الآخر.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "تحتاج ميزة \"Pseudo-secret\" إلى الحزمة الاختيارية kiaro-telethon-secret-chat. قم بتثبيت TgWitness مع الميزة الإضافية secret-chats وأعد تشغيل اللوحة.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "يحتاج الوضع شبه السري إلى وحدة البروتوكول الخاصة به، وهي غير مثبتة بعد.",
   "Turn on pseudo-secret for this account first.": "قم أولاً بتفعيل ميزة \"السرية الزائفة\" لهذا الحساب.",
   "This needs a Telegram user, not a group or channel.": "يتطلب هذا مستخدم Telegram، وليس مجموعة أو قناة.",
   "Telegram has no user with this username.": "لا يوجد مستخدم في Telegram بهذا الاسم المستخدم.",
@@ -9099,5 +9099,17 @@
   "Open your export": "افتح التصدير",
   "Original message is not included in this chat.": "الرسالة الأصلية غير مضمنة في هذه المحادثة.",
   "Personal backup, project archive or another reason": "نسخة احتياطية شخصية أو أرشيف مشروع أو سبب آخر",
-  "Read your chats offline. Open the report for charts, collection details and signature checks.": "اقرأ محادثاتك دون اتصال. افتح التقرير للاطلاع على الرسوم البيانية وتفاصيل الجمع والتحقق من التوقيعات."
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "اقرأ محادثاتك دون اتصال. افتح التقرير للاطلاع على الرسوم البيانية وتفاصيل الجمع والتحقق من التوقيعات.",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "يحتاج الوضع شبه السري إلى وحدة البروتوكول الخاصة به. اطلب من المسؤول الرئيسي تثبيتها في هذه الصفحة.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "يعمل الوضع شبه السري على وحدة بروتوكول مستقلة: {name} {version} من تأليف {author} بترخيص {license}. ينزّل TgWitness هذا الإصدار بعينه من GitHub، ويتحقق من كل ملف مقابل قيمة SHA-256 المثبتة في هذا الإصدار، ثم يحمّله. لا حاجة إلى إعادة التشغيل.",
+  "Install and turn on": "تثبيت وتشغيل",
+  "Source code and license": "الشيفرة المصدرية والترخيص",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "وحدة البروتوكول: {name} {version} من تأليف {author}، ترخيص {license}. يجري التحقق من ملفاتها عند كل بدء تشغيل مقابل قيمة SHA-256 المثبتة في هذا الإصدار.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "وحدة البروتوكول: {name} {version} من تأليف {author}، ترخيص {license}، مثبتة في بيئة Python.",
+  "Downloading and checking the module…": "جارٍ تنزيل الوحدة والتحقق منها…",
+  "Module installed. Pseudo-secret is on for this account.": "تم تثبيت الوحدة. الوضع شبه السري مفعّل لهذا الحساب.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "وحدة الوضع شبه السري تختلف عن الإصدار المثبت في إصدار TgWitness هذا، لذلك لم تُحمَّل. ثبّتها من جديد.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "اجتازت وحدة الوضع شبه السري التحقق لكنها لم تتمكن من البدء. حدّث TgWitness ثم ثبّت الوحدة من جديد.",
+  "Only the main administrator can install the pseudo-secret module.": "لا يمكن إلا للمسؤول الرئيسي تثبيت وحدة الوضع شبه السري.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "تعذر تنزيل وحدة الوضع شبه السري من GitHub عبر مسار الاتصال الخاص بمساحة العمل هذه. تحقق من الاتصال ثم حاول مرة أخرى."
 }

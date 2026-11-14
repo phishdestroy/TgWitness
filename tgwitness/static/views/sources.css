@@ -138,8 +138,11 @@
 #view-secret-chats .secret-settings { display: grid; gap: 8px; }
 #view-secret-chats .secret-settings .check-label { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: 14px; margin: 0; font-size: 13.5px; }
 #view-secret-chats .secret-chats > .notice, #view-secret-chats .secret-install, #view-secret-chats #secret-recovery { margin: 0 22px 16px; }
-#view-secret-chats .secret-install { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; }
-#view-secret-chats .secret-install code { flex: 1 1 240px; min-width: 0; overflow-wrap: anywhere; font-size: 12px; }
+#view-secret-chats .secret-install { display: grid; gap: 12px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; }
+#view-secret-chats .secret-install p { max-width: 90ch; margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--text-2); }
+#view-secret-chats .secret-install .route-actions { gap: 16px; margin-top: 0; }
+#view-secret-chats .secret-install a, #view-secret-chats #secret-module a { font-size: 13px; }
+#view-secret-chats #secret-module-digest { display: block; margin-top: 4px; font-size: 12px; overflow-wrap: anywhere; }
 #view-secret-chats .secret-layout { display: grid; grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); min-height: 440px; border-top: 1px solid var(--border); }
 #view-secret-chats .secret-side { display: grid; align-content: start; gap: 10px; min-width: 0; padding: 14px; border-inline-end: 1px solid var(--border); }
 #view-secret-chats .secret-list-tools { display: flex; align-items: center; gap: 10px; }

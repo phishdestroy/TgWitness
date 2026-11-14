@@ -6515,7 +6515,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "Soll jede eingehende Anfrage in TgWitness akzeptiert werden? Akzeptierte Chats werden nicht an die anderen Geräte dieses Kontos weitergeleitet.",
   "Pseudo-secret settings saved.": "Pseudo-geheime Einstellungen gespeichert.",
   "Request sent. The chat opens when the other side accepts.": "Anfrage gesendet. Der Chat wird geöffnet, sobald die andere Seite die Anfrage annimmt.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Für „Pseudo-secret“ wird das optionale Paket „kiaro-telethon-secret-chat“ benötigt. Installieren Sie TgWitness mit dem Zusatz „secret-chats“ und starten Sie das Panel neu.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Pseudo-Geheimnis benötigt sein Protokollmodul, das noch nicht installiert ist.",
   "Turn on pseudo-secret for this account first.": "Aktivieren Sie zunächst die Pseudo-Geheimhaltung für dieses Konto.",
   "This needs a Telegram user, not a group or channel.": "Hierfür ist ein Telegram-Benutzer erforderlich, keine Gruppe oder kein Kanal.",
   "Telegram has no user with this username.": "Bei Telegram gibt es keinen Nutzer mit diesem Benutzernamen.",
@@ -8907,5 +8907,17 @@
   "Open your export": "Export öffnen",
   "Original message is not included in this chat.": "Die ursprüngliche Nachricht ist in diesem Chat nicht enthalten.",
   "Personal backup, project archive or another reason": "Persönliche Sicherung, Projektarchiv oder ein anderer Grund",
-  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Lesen Sie Ihre Chats offline. Öffnen Sie den Bericht für Diagramme, Details zur Erfassung und Signaturprüfungen."
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Lesen Sie Ihre Chats offline. Öffnen Sie den Bericht für Diagramme, Details zur Erfassung und Signaturprüfungen.",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Pseudo-Geheimnis benötigt sein Protokollmodul. Bitten Sie den Hauptadministrator, es auf dieser Seite zu installieren.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Pseudo-Geheimnis läuft mit einem separaten Protokollmodul: {name} {version} von {author}, Lizenz {license}. TgWitness lädt genau diese Version von GitHub herunter, prüft jede Datei gegen den in dieser Version festgelegten SHA-256 und lädt das Modul. Ein Neustart ist nicht nötig.",
+  "Install and turn on": "Installieren und aktivieren",
+  "Source code and license": "Quellcode und Lizenz",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Protokollmodul: {name} {version} von {author}, Lizenz {license}. Seine Dateien werden bei jedem Start gegen den in dieser Version festgelegten SHA-256 geprüft.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Protokollmodul: {name} {version} von {author}, Lizenz {license}, in der Python-Umgebung installiert.",
+  "Downloading and checking the module…": "Modul wird heruntergeladen und geprüft…",
+  "Module installed. Pseudo-secret is on for this account.": "Modul installiert. Pseudo-Geheimnis ist für dieses Konto aktiviert.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Das Pseudo-Geheimnis-Modul weicht von der in dieser TgWitness-Version festgelegten Version ab und wurde deshalb nicht geladen. Installieren Sie es erneut.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Das Pseudo-Geheimnis-Modul hat die Prüfung bestanden, konnte aber nicht starten. Aktualisieren Sie TgWitness und installieren Sie das Modul erneut.",
+  "Only the main administrator can install the pseudo-secret module.": "Nur der Hauptadministrator kann das Pseudo-Geheimnis-Modul installieren.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Das Pseudo-Geheimnis-Modul konnte über die Verbindungsroute dieses Arbeitsbereichs nicht von GitHub heruntergeladen werden. Prüfen Sie die Verbindung und versuchen Sie es erneut."
 }

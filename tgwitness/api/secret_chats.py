@@ -1,8 +1,11 @@
+from .. import netclient
 from .. import secret_chats as secret
+from .. import secret_module
 from .dependencies import current_context
 from fastapi import Depends
 from fastapi import HTTPException
 from fastapi import Query
+from fastapi import Request
 from pydantic import BaseModel
 from pydantic import ConfigDict
 from pydantic import Field
@@ -60,6 +63,22 @@ async def update_settings(body: SecretChatSettings, *, ctx=Depends(current_conte
     else:
         await chats_of(ctx).detach()
         collector.close_when_idle()
+    return chats_of(ctx).view()
+
+
+async def install(request: Request, *, ctx=Depends(current_context)):
+    ctx.require_live()
+    if not request.state.principal.admin:
+        raise HTTPException(403, "Only the main administrator can install the pseudo-secret module.")
+    try:
+        await secret_module.install(ctx.app.state.collector.outside_route())
+    except netclient.RouteError as exc:
+        raise HTTPException(409, str(exc))
+    except secret_module.Refused as exc:
+        raise HTTPException(502, str(exc))
+    except (ValueError, OSError, EOFError):
+        raise HTTPException(502, "The pseudo-secret module could not be downloaded from GitHub through this "
+                                 "workspace's connection route. Check the connection and try again.")
     return chats_of(ctx).view()
 
 

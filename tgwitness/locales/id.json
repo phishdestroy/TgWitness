@@ -6453,7 +6453,7 @@
   "Accept every incoming request in TgWitness? Accepted chats do not reach this account's other devices.": "Apakah ingin menerima setiap permintaan yang masuk di TgWitness? Obrolan yang diterima tidak akan terkirim ke perangkat lain yang terhubung dengan akun ini.",
   "Pseudo-secret settings saved.": "Pengaturan pseudo-secret telah disimpan.",
   "Request sent. The chat opens when the other side accepts.": "Permintaan telah dikirim. Obrolan akan terbuka setelah pihak lain menerimanya.",
-  "Pseudo-secret needs the optional package kiaro-telethon-secret-chat. Install TgWitness with the secret-chats extra and restart the panel.": "Pseudo-secret memerlukan paket opsional kiaro-telethon-secret-chat. Instal TgWitness dengan tambahan secret-chats dan mulai ulang panel.",
+  "Pseudo-secret needs its protocol module, which is not installed yet.": "Pseudo-rahasia memerlukan modul protokolnya, yang belum terpasang.",
   "Turn on pseudo-secret for this account first.": "Aktifkan fitur pseudo-secret untuk akun ini terlebih dahulu.",
   "This needs a Telegram user, not a group or channel.": "Ini memerlukan pengguna Telegram, bukan grup atau saluran.",
   "Telegram has no user with this username.": "Tidak ada pengguna Telegram dengan nama pengguna ini.",
@@ -8859,5 +8859,17 @@
   "Open your export": "Buka ekspor Anda",
   "Original message is not included in this chat.": "Pesan asli tidak disertakan dalam obrolan ini.",
   "Personal backup, project archive or another reason": "Cadangan pribadi, arsip proyek, atau alasan lain",
-  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Baca obrolan Anda secara offline. Buka laporan untuk melihat grafik, detail pengumpulan, dan pemeriksaan tanda tangan."
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Baca obrolan Anda secara offline. Buka laporan untuk melihat grafik, detail pengumpulan, dan pemeriksaan tanda tangan.",
+  "Pseudo-secret needs its protocol module. Ask the main administrator to install it on this page.": "Pseudo-rahasia memerlukan modul protokolnya. Minta administrator utama memasangnya di halaman ini.",
+  "Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.": "Pseudo-rahasia berjalan dengan modul protokol terpisah: {name} {version} oleh {author}, berlisensi {license}. TgWitness mengunduh persis versi ini dari GitHub, memeriksa setiap berkas dengan SHA-256 yang ditetapkan dalam rilis ini, lalu memuatnya. Tidak perlu memulai ulang.",
+  "Install and turn on": "Pasang dan aktifkan",
+  "Source code and license": "Kode sumber dan lisensi",
+  "Protocol module: {name} {version} by {author}, {license} license. Its files are checked at every start against the SHA-256 fixed in this release.": "Modul protokol: {name} {version} oleh {author}, lisensi {license}. Berkasnya diperiksa setiap kali mulai dengan SHA-256 yang ditetapkan dalam rilis ini.",
+  "Protocol module: {name} {version} by {author}, {license} license, installed in the Python environment.": "Modul protokol: {name} {version} oleh {author}, lisensi {license}, terpasang di lingkungan Python.",
+  "Downloading and checking the module…": "Mengunduh dan memeriksa modul…",
+  "Module installed. Pseudo-secret is on for this account.": "Modul terpasang. Pseudo-rahasia aktif untuk akun ini.",
+  "The pseudo-secret module differs from the version pinned by this TgWitness release, so it was not loaded. Install it again.": "Modul pseudo-rahasia berbeda dari versi yang ditetapkan rilis TgWitness ini, sehingga tidak dimuat. Pasang lagi.",
+  "The pseudo-secret module passed its check but could not start. Update TgWitness and install it again.": "Modul pseudo-rahasia lolos pemeriksaan tetapi tidak dapat dijalankan. Perbarui TgWitness lalu pasang lagi modulnya.",
+  "Only the main administrator can install the pseudo-secret module.": "Hanya administrator utama yang dapat memasang modul pseudo-rahasia.",
+  "The pseudo-secret module could not be downloaded from GitHub through this workspace's connection route. Check the connection and try again.": "Modul pseudo-rahasia tidak dapat diunduh dari GitHub melalui rute koneksi ruang kerja ini. Periksa koneksi lalu coba lagi."
 }

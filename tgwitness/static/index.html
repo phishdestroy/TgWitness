@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/components/collection.css?v=1">
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/components/modes.css?v=1">
-<link rel="stylesheet" href="/views/sources.css?v=21">
+<link rel="stylesheet" href="/views/sources.css?v=22">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
@@ -461,11 +461,12 @@
     <div class="secret-top"><span class="tile secret-mark" data-tone="violet"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></span>
     <div class="secret-top-text"><p class="secret-status" id="secret-status" role="status"></p>
     <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
-    <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p></details></div>
+    <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p>
+    <p id="secret-module" hidden><span id="secret-module-text"></span> <a id="secret-module-source" target="_blank" rel="noopener noreferrer">Source code and license</a><code id="secret-module-digest"></code></p></details></div>
     <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
     <label class="check-label"><input id="secret-accept" type="checkbox" role="switch" disabled> Accept incoming requests automatically</label></div></div>
     <p class="notice warning" id="secret-unavailable" hidden></p>
-    <div id="secret-install" class="secret-install" hidden><code id="secret-install-command"></code><button class="secondary small" type="button" id="secret-install-copy">Copy install command</button></div>
+    <div id="secret-install" class="secret-install" hidden><p id="secret-install-text"></p><div class="route-actions"><button class="primary" type="button" id="secret-install-run">Install and turn on</button><a id="secret-install-source" target="_blank" rel="noopener noreferrer">Source code and license</a></div></div>
     <div class="route-actions" id="secret-recovery" hidden><button class="secondary" id="secret-connect" type="button" data-open="connection">Connect account</button><button class="secondary" id="secret-reconnect" type="button">Retry</button></div>
     <p class="notice warning" id="secret-sync" hidden role="status"></p>
     <p class="notice" id="secret-interaction" hidden></p>

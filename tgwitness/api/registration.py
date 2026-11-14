@@ -444,6 +444,9 @@ def register(app, ctx):
     router.post("/api/secret-chats/settings", dependencies=[Depends(authenticate)])(
         routes_secret_chats.update_settings
     )
+    router.post("/api/secret-chats/install", dependencies=[Depends(authenticate)])(
+        routes_secret_chats.install
+    )
     router.post("/api/secret-chats", dependencies=[Depends(authenticate)])(
         routes_secret_chats.create
     )
