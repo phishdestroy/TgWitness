@@ -47,7 +47,7 @@ Takeout handles stay in the encrypted vault. Chunk receipts identify transport a
 
 ## Exclusive account ownership
 
-One account runs one history run or export at a time. History, account export and chat export are mutually exclusive; observation keeps recording while any of them runs, and starting one never pauses it. Deselect an account that is busy with another of these tasks, or wait for that task. Reservations are acquired before Telegram requests and released on completion, failure or pause. Separate accounts may work concurrently; RPCs within one account are serialized. Full server-requested FloodWait deadlines are persisted and respected before subsequent requests, including after restart, so every new request honors Telegram's latest rate limit.
+One account runs one history run or export at a time. An account export or a chat export runs while observation keeps recording, and starting one never pauses it. Full history still needs observation paused. Deselect an account that is busy with another of these tasks, or wait for that task. Reservations are acquired before Telegram requests and released on completion, failure or pause. Separate accounts may work concurrently; RPCs within one account are serialized. Full server-requested FloodWait deadlines are persisted and respected before subsequent requests, including after restart, so every new request honors Telegram's latest rate limit.
 
 ## Selection
 

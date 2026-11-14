@@ -107,7 +107,7 @@ class History:
         if not targets:
             raise ValueError("Select at least one source first.")
         run_id, now = secrets.token_hex(16), utcnow()
-        if not self.collector.reserve_export("history:" + run_id):
+        if self.collector.running or not self.collector.reserve_export("history:" + run_id):
             raise ValueError("This account is busy. Pause observation or its current task before loading history.")
         try:
             await self.collector.restore()
@@ -172,7 +172,7 @@ class History:
         if account != run["account_id"]:
             raise ValueError("This history run belongs to a different Telegram account.")
         owner = "history:" + run["id"]
-        if not self.collector.reserve_export(owner):
+        if self.collector.running or not self.collector.reserve_export(owner):
             raise ValueError("This account is busy. Pause observation or its current task before resuming history.")
         try:
             await complete_in_thread(history_cursor.verify, self.store, self.collector.vault, run)

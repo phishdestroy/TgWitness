@@ -25,7 +25,7 @@
 
 ## Unreleased
 
-- Observation no longer has to be paused for other Telegram work on the same account. Full history, an account export, a chat export and loading messages into a chat run while observation keeps recording; one history run or export uses an account at a time. The account page, the Home dashboard and the export dialogs say which tasks wait for each other.
+- Observation no longer has to be paused for exports on the same account. An account export, a chat export and loading messages into a chat run while observation keeps recording; one export uses an account at a time, and full history still needs observation paused. The account page, the Home dashboard and the export dialogs say which tasks wait for each other.
 - Chats: opening an enabled chat that has no saved messages loads its latest 100 messages from Telegram, and **Load earlier messages from Telegram** at the top of a chat reads the next older page. Chats added by the folder and whole-account scopes get their latest messages once, as set under **When a new chat or bot appears** (100 by default for new workspaces). These reads are recorded as history snapshots.
 - Account export: while it discovers chats, the job card shows the stage, the number of chats found, the chat being checked and a progress bar. Chats are checked up to four at a time.
 - Timestamps: a pass that could not run because no route for outside requests existed is repeated as soon as a route appears, and such a pass no longer counts as a failure of the timestamp services.

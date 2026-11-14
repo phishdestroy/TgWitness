@@ -14,7 +14,7 @@ export function accountState(profile = {}) {
     collecting: "Collecting", reconnecting: "Reconnecting", failed: "Needs attention", paused: "Paused"}[kind];
   return {kind, label, hasSession, needsSignIn, sourcesReady,
     canStart: !unavailable && hasSession && !needsSignIn && !collector.running &&
-      collector.phase !== "storage_error" && sourcesReady};
+      collector.phase !== "storage_error" && sourcesReady && collector.account_task !== "history"};
 }
 
 export function accountActivity(profile = {}) {

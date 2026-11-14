@@ -2810,7 +2810,7 @@ class Collector:
         validate_collection_scope(self.store)
         if self.running:
             return
-        if self.observation_starting:
+        if self.history.busy or self.observation_starting:
             raise ValueError("This account is busy. Pause its current task before starting observation.")
         self.observation_starting = True
         client = self.client
@@ -2963,8 +2963,7 @@ class Collector:
         await self.wait_authorization_cleanup()
         if shutdown:
             await self.profiling.suspend()
-        if shutdown:
-            await self.history.pause("process_shutdown")
+        await self.history.pause("process_shutdown" if shutdown else "observation_stopped")
         if shutdown and self.export_task:
             self.export_task.cancel()
             await asyncio.gather(self.export_task, return_exceptions=True)

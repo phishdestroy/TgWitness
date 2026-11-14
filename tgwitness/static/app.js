@@ -108,10 +108,10 @@ let connectionView;
 const connectionViewReady=import('./views/connection.js?v=3').then(({createConnectionView})=>{
   connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
-const accountStateReady=import('./components/account-state.js?v=3').then(module=>{
+const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=11'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=12'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize});
@@ -1534,7 +1534,7 @@ const activityTitles=()=>({reconnecting:tr("Reconnecting to Telegram"),history:t
   export:tr("Export in progress"),profile_image:tr("Updating profile photos"),sign_in:tr("Sign-in required"),
   empty:tr("No Telegram account"),failed:tr("Needs attention"),unavailable:tr("Unavailable"),free:tr("Free")});
 const activityHints=()=>({monitoring:"",
-  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Observation keeps running. Exports wait until it finishes."),
+  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Exports and observation wait until it finishes."),
   export:tr("Observation keeps running. Other exports and full history wait until it finishes."),profile_image:tr("Takes a moment."),
   sign_in:tr("Sign in again to observe or export."),empty:tr("Connect an account to observe or export."),
   failed:tr("Check the problems listed for this account."),free:tr("Ready to export or observe.")});
@@ -2275,18 +2275,20 @@ function renderHistory(){
   show("history-start",!active&&!paused);show("history-pause",active);
   show("history-resume",paused);show("history-cancel",active||paused);
   show("history-report",exists&&may("export"));
+  const observing=!!s?.collector?.running;
   $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export||!s?.targets.some(x=>x.enabled);
   $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export;
-  const busyAccount=!s?.demo&&!!s?.collector.has_session&&!s?.collector.available_for_export&&!active;
+  const busyAccount=!s?.demo&&!!s?.collector.has_session&&(!s?.collector.available_for_export||observing)&&!active;
   show("history-availability",busyAccount);
-  $("history-availability").textContent=!busyAccount?"":
-    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Wait for its current task before loading history.");
+  $("history-availability").textContent=!busyAccount?"":observing&&s?.collector.available_for_export?
+    tr("Observation is running. Loading history pauses it; with the option above it starts again when the history is loaded."):
+    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Pause observation or its current task before loading history.");
   const labels={running:tr("Loading history"),paused:tr("History paused"),complete:tr("History reading finished"),
     incomplete:tr("History finished with gaps"),cancelled:tr("History run ended")};
   const counts=h.sources_by_phase||{},finished=(counts.complete||0)+(counts.failed||0)+(counts.skipped||0);
   $("history-progress").textContent=exists?(labels[phase]||phase)+" · "+tr("{messages} messages · {done} of {total} sources",{
     messages:h.captured,done:finished,total:h.sources_total})+(h.reason?" · "+(errorName(h.reason)||tr(h.reason)):""):
-    tr("{n} enabled sources. Observation keeps running while history loads.",{n:s?.targets.filter(x=>x.enabled).length||0});
+    tr("{n} enabled sources. History requires an idle account; pause observation first.",{n:s?.targets.filter(x=>x.enabled).length||0});
   $("history-media").textContent=exists?tr("Attachments: {done} saved, {pending} pending, {failed} failed. Unavailable messages: {missing}.",{
     done:h.media?.done||0,pending:h.media_pending||0,failed:h.media?.failed||0,missing:h.unavailable||0}):"";
   $("history-wait").textContent=h.wait_until>Date.now()/1000?
@@ -2313,6 +2315,10 @@ for(const action of ["start","pause","resume","cancel"]){
     const options=action==="start"?{transport:$("history-transport").value,
       media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
       compare_saved:$("history-compare").checked,observe_after:$("history-observe").checked}:{};
+    if(["start","resume"].includes(action)&&state.status?.collector?.running){
+      if(!(await askConfirm(tr("Observation is running on this account. Loading history pauses it. Updates that arrive meanwhile are requested again from the saved position when observation starts. Continue?"),{confirmText:tr("Pause and load history")})))return;
+      await json("collector/stop",{});
+    }
     await json("history/"+action,options);await refreshStatus();await refreshEvents();
   }));
 }

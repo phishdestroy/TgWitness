@@ -6,7 +6,7 @@
 
 ## Bring in the history
 
-**More tools → Sources → Chats in scope**: check the enabled chats, hit **Load full
+**More tools → Sources → Chats in scope**: check the enabled chats, pause observation, hit **Load full
 history**. Pause and resume whenever, after a restart resume by hand. Check sources and the
 download queue, keep the signed progress report. [History guide](../HISTORY.md).
 
