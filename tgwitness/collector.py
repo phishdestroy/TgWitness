@@ -1061,7 +1061,7 @@ class Collector:
         return any(key in FLOOD_GUARDED[guard] for key in self.flood_waits())
 
     def pause_until(self):
-        return max(self.store.get_setting("rpc_backoff_until", 0), *self.flood_waits().values())
+        return max([self.store.get_setting("rpc_backoff_until", 0), *self.flood_waits().values()])
 
     def updates_arrived(self):
         self.updates_seen += 1
