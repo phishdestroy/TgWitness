@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="228" height="58" viewBox="0 0 228 58" role="img" aria-labelledby="title desc">
+<title id="title">Open the handbook</title><desc id="desc">Tasks, guides and answers</desc>
+<rect x=".5" y=".5" width="227" height="57" rx="8" fill="#102238" stroke="#36516b"/>
+<g fill="none" stroke="#98d8c0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 21c-4-3-8-3-12-1v19c4-2 8-2 12 1 4-3 8-3 12-1V20c-4-2-8-2-12 1Zm0 0v19"/></g>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="48" y="25" font-size="14" font-weight="600" fill="#edf5fc">Open the handbook</text><text x="48" y="43" font-size="11" fill="#a0b6cb">Tasks, guides and answers</text></g>
+</svg>

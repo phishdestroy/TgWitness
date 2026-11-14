@@ -4850,7 +4850,8 @@
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "セクションはリストの上のウィンドウで開き、<code>/settings/connection</code> のような独自のアドレスを持ちます。戻る矢印、閉じるボタン、Escape、ウィンドウ外のクリック、ブラウザーの戻るボタンでリストに戻ります。<strong>どのチャット？</strong>は<strong>チャットの選択を保存</strong>で保存します。未保存の変更があるまま閉じると、先に確認が表示されます。変更のたびに<strong>元に戻す</strong>が 20 秒間表示され、<strong>最近の変更点</strong>の各項目は後から取り消せます。取り消しはジャーナル内の新しい <code>settings.changed</code> 記録であり、カスタムのファイル上限も元に戻します。",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "プロファイル概要",
 "f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "主要な数値、観測されたプロファイル、チャット記録へのリンク付きの検索可能なセクション。",
-"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：レポートの言語が英語でない場合の、同じレポートの英語の原本です。同じ方法で封印・署名され、署名付きマニフェストの <code>report.original</code> に記載されます。選択した言語のレポートは、英語の原本を認証翻訳または宣誓翻訳とともに提出するよう勧める注記で始まります。<a href=\"TRANSLATION.md\">裁判所向けレポートの翻訳</a>を参照してください。"
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：レポートの言語が英語でない場合の、同じレポートの英語の原本です。同じ方法で封印・署名され、署名付きマニフェストの <code>report.original</code> に記載されます。選択した言語のレポートは、英語の原本を認証翻訳または宣誓翻訳とともに提出するよう勧める注記で始まります。<a href=\"TRANSLATION.md\">裁判所向けレポートの翻訳</a>を参照してください。",
+"f8f3bc3f023892d4c86ed24d9ccb6a3b00fd7a5ef6ecfbbddde75f516aa36fa1": "RFC 3161の権限が2回連続で失敗した場合、次の試行の前に待機します。待機時間は、最初は1インターバル、次に\n2、4と続き、最大6時間まで、あるいは<code>Retry-After</code>で指定された時間（最大1日）までとなります。待機中の権限のみを\n検出したパスはレコードを書き込みません。それ以外の場合は、<code>anchor.completed</code>がそれらを\n<code>deferred</code>の下に<code>retry_at</code>とともにリストします。それらが再度応答するまで、パネルにはタイムスタンプが<strong>「Degraded」</strong>として表示されます。"
 },
 "modes": {
 "modes.actions.body": "プレビュー、リクエスト、および結果の受信確認には署名が付与されます。ボタンが押される前に、サーバーはメッセージを再度取得し、変更されたキーボードを拒否します。返されたコールバックのテキストおよびURLは、記録されたコンテキストとして残ります。",

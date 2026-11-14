@@ -6,6 +6,7 @@ import re
 import time
 import uuid
 from contextlib import suppress
+from email.utils import parsedate_to_datetime
 from urllib.parse import urlsplit
 
 from cryptography import x509
@@ -33,6 +34,8 @@ REPLACED_TSA = {"http://timestamp.digicert.com": "https://timestamp.sectigo.com"
 DEFAULT_OTS = ["https://a.pool.opentimestamps.org", "https://b.pool.opentimestamps.org",
                "https://a.pool.eternitywall.com", "https://ots.btc.catallaxy.com"]
 LOOP_SECONDS = 30
+BACKOFF_LIMIT = 6 * 3600
+RETRY_AFTER_LIMIT = 24 * 3600
 OTS_UPGRADE_AGE = 3600
 OTS_UPGRADE_FILES = 8
 OTS_TREE_LIMIT = 1024 * 1024
@@ -307,6 +310,27 @@ def problem(exc):
     return type(exc).__name__
 
 
+def retry_after(exc):
+    value = str((getattr(exc, "headers", None) or {}).get("retry-after", "")).strip()
+    if value.isdigit():
+        return min(int(value), RETRY_AFTER_LIMIT)
+    with suppress(TypeError, ValueError, OverflowError):
+        return min(max(0, int(parsedate_to_datetime(value).timestamp() - time.time())), RETRY_AFTER_LIMIT)
+    return 0
+
+
+def deferred_services(store, settings):
+    saved = store.get_setting("evidence_backoff", {}) or {}
+    return [{"service": url, "failures": saved[url].get("failures"), "retry_at": saved[url].get("retry_at")}
+            for url in settings["tsa_urls"] if isinstance(saved.get(url), dict) and saved[url].get("until", 0) > time.time()]
+
+
+def backoff_entry(entry, exc, interval):
+    failures = (entry or {}).get("failures", 0) + 1
+    delay = max(0 if failures == 1 else min(interval * 2 ** (failures - 2), BACKOFF_LIMIT), retry_after(exc))
+    return {"failures": failures, "until": time.time() + delay - LOOP_SECONDS, "retry_at": next_at(delay)}
+
+
 def latest_checkpoint(store):
     directory = store.root / "checkpoints"
     latest = directory / "latest.json"
@@ -395,11 +419,17 @@ async def anchor_latest(store, network, settings):
     digest = hashlib.sha256(data).digest()
     folder = store.root / "checkpoints" / "anchors"
     folder.mkdir(exist_ok=True, mode=0o700)
-    results, covered = [], []
+    results, covered, deferred = [], [], []
+    saved = store.get_setting("evidence_backoff", {}) or {}
+    backoff = {url: saved[url] for url in settings["tsa_urls"] if isinstance(saved.get(url), dict)}
     for url in settings["tsa_urls"]:
         target = folder / (name + "." + service_name(url) + ".tsr")
         if target.exists():
             covered.append({"service": url, "kind": "rfc3161"})
+            continue
+        if backoff.get(url, {}).get("until", 0) > time.time():
+            deferred.append({"service": url, "kind": "rfc3161", "failures": backoff[url]["failures"],
+                             "retry_at": backoff[url]["retry_at"]})
             continue
         received = False
         try:
@@ -414,8 +444,13 @@ async def anchor_latest(store, network, settings):
             revocation = await revocation_evidence(reply, target, network)
             results.append({"service": url, "kind": "rfc3161", "ok": True, "time": summary["time"], **signed,
                             "revocation": revocation})
+            backoff.pop(url, None)
         except Exception as exc:
-            results.append({"service": url, "kind": "rfc3161", "ok": False, "received": received, "error": problem(exc)})
+            backoff[url] = backoff_entry(backoff.get(url), exc, settings["interval_minutes"] * 60)
+            results.append({"service": url, "kind": "rfc3161", "ok": False, "received": received, "error": problem(exc),
+                            "failures": backoff[url]["failures"], "retry_at": backoff[url]["retry_at"]})
+    if backoff != saved:
+        store.set_setting("evidence_backoff", backoff)
     for outcome in await ots_stamp(digest, settings["ots_calendars"], folder, name, network):
         if outcome.pop("covered", False):
             covered.append(outcome)
@@ -425,10 +460,12 @@ async def anchor_latest(store, network, settings):
         return None
     record = {"checkpoint": {"file": source.name, "event_count": statement["event_count"],
                              "head_hash": statement["head_hash"], "sha256": digest.hex()},
-              "results": results, "covered": covered}
+              "results": results, "covered": covered, **({"deferred": deferred} if deferred else {})}
     store.append("anchor.completed", {**record, "meaning": "Only this checkpoint hash was sent; answers are "
                                       "stored in checkpoints/anchors and included in evidence exports. "
-                                      "covered: services that answered for this checkpoint on an earlier pass."})
+                                      "covered: services that answered for this checkpoint on an earlier pass."
+                                      + (" deferred: services that failed repeatedly and wait until retry_at."
+                                         if deferred else "")})
     at = utcnow()
     store.set_setting("evidence_last", {"at": at, **record})
     if any(r["ok"] for r in results):
@@ -627,4 +664,5 @@ async def anchor_loop(store, network_config, wakeup, status, devices=None, gatew
             status.update(outcome="error", error=type(exc).__name__)
             store.append("collector.error", {"operation": "evidence anchoring", "error_type": type(exc).__name__})
         finally:
-            status.update(busy=False, last_pass_at=utcnow(), next_at=next_at(settings["interval_minutes"] * 60))
+            status.update(busy=False, last_pass_at=utcnow(), next_at=next_at(settings["interval_minutes"] * 60),
+                          deferred=deferred_services(store, settings))

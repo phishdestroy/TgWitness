@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="228" height="58" viewBox="0 0 228 58" role="img" aria-labelledby="title desc">
+<title id="title">Try the workspace</title><desc id="desc">Explore a fictional case</desc>
+<rect x=".5" y=".5" width="227" height="57" rx="8" fill="#102238" stroke="#36516b"/>
+<g fill="none" stroke="#dfbd86" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="18" width="22" height="22" rx="4"/><path d="m22 24 8 5-8 5Z"/></g>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="48" y="25" font-size="14" font-weight="600" fill="#edf5fc">Try the workspace</text><text x="48" y="43" font-size="11" fill="#a0b6cb">Explore a fictional case</text></g>
+</svg>

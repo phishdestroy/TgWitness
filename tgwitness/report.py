@@ -795,7 +795,8 @@ CSS = (
     ".kv td{padding:7px 12px;overflow-wrap:anywhere}"
     ".grid{font-size:13.5px}.grid th{text-align:start;font-size:12px;font-weight:650;color:var(--soft);padding:7px 10px;"
     "background:var(--th)}.grid td{padding:7px 10px;overflow-wrap:break-word}.grid td small{overflow-wrap:anywhere}"
-    "@media (max-width:600px){.grid th,.grid td{overflow-wrap:anywhere;hyphens:auto}}"
+    "@media (max-width:600px){.scroll>.grid{width:max-content;min-width:100%}"
+    ".grid th,.grid td{max-width:15em;overflow-wrap:anywhere}.grid th{overflow-wrap:normal}.grid .pill{white-space:normal}}"
     ".scroll{overflow-x:auto}"
     ".pill{display:inline-flex;align-items:center;gap:6px;padding:1px 7px;border-radius:3px;font-size:11.5px;"
     "font-weight:650;border:1px solid color-mix(in srgb,currentColor 30%,transparent);background:var(--tint);"
@@ -2264,9 +2265,9 @@ def coverage_section(say, number, coverage):
         if coverage["notes_total"] > len(notes):
             out += "<p>" + e(say("Showing {shown} of {total} coverage notes.", shown=len(notes),
                                  total=coverage["notes_total"])) + "</p>"
-    out += ("<h3>" + e(say("Verifier summary")) + '</h3><p class="lead">' + e(say("As verify.py prints it, in English."))
-            + '</p><ul class="mono" style="font-size:13px">' + "".join("<li>" + e(line) + "</li>" for line in coverage_lines(coverage))
-            + "</ul>")
+    out += ('<details class="layout-case-details"><summary>' + e(say("Verifier summary")) + '</summary><p class="lead">'
+            + e(say("As verify.py prints it, in English.")) + '</p><ul class="mono" style="font-size:13px">'
+            + "".join("<li>" + e(line) + "</li>" for line in coverage_lines(coverage)) + "</ul></details>")
     return out + "</section>"
 
 

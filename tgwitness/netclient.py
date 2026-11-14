@@ -27,9 +27,9 @@ class RouteError(Exception):
 
 
 class HTTPError(ValueError):
-    def __init__(self, status, body=b""):
+    def __init__(self, status, body=b"", headers=None):
         super().__init__("HTTP " + str(status))
-        self.status, self.body = status, body
+        self.status, self.body, self.headers = status, body, headers or {}
 
 
 def private_allowed():
@@ -284,7 +284,7 @@ async def _request(method, url, network, headers=None, body=b"", length=None, si
             while chunk := await asyncio.wait_for(reader.read(room(PIECE)), timeout):
                 await take(chunk)
         if not ok:
-            raise HTTPError(status, data[:2000])
+            raise HTTPError(status, data[:2000], fields)
         return status, fields, data
     finally:
         writer.close()

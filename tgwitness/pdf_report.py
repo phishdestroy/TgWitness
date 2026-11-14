@@ -435,7 +435,7 @@ class Layout:
         self.text(say(assessment.STATUSES[item["status"]]), size=8, color=OK if item["status"] == "checked_locally" else MUTED)
         self.gap(3)
         conclusion = item["result"]
-        self.text(say(conclusion["text"], **conclusion["values"]), size=10.5, style="B", height=5.2)
+        self.text(assessment.result_text(conclusion, say), size=10.5, style="B", height=5.2)
         self.gap(2)
         self.text(say(item["basis"]), size=8.5, color=MUTED)
         self.gap(2)

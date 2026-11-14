@@ -4902,7 +4902,8 @@
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "分区在列表上方的窗口中打开，并有自己的地址，例如 <code>/settings/connection</code>。返回箭头、关闭按钮、Escape、点击窗口外部以及浏览器的后退按钮都会回到列表。<strong>哪些聊天？</strong>通过<strong>保存聊天选择</strong>保存；有未保存的更改时关闭会先询问。每次更改都会显示<strong>撤销</strong> 20 秒，<strong>最近的更改</strong>中的每一项之后也都可以撤销。撤销会在日志中新增一条 <code>settings.changed</code> 记录，并恢复自定义文件限制。",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "资料概览",
 "f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "关键数据、观察到的资料，以及可搜索并链接到聊天记录的章节。",
-"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：当报告语言不是英文时，同一报告的英文原件，以相同方式封印和签名，并在已签名清单的 <code>report.original</code> 下列出。所选语言的报告开头建议将英文原件连同经认证或宣誓的译文一并提交；参见<a href=\"TRANSLATION.md\">为法院翻译报告</a>。"
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：当报告语言不是英文时，同一报告的英文原件，以相同方式封印和签名，并在已签名清单的 <code>report.original</code> 下列出。所选语言的报告开头建议将英文原件连同经认证或宣誓的译文一并提交；参见<a href=\"TRANSLATION.md\">为法院翻译报告</a>。",
+"f8f3bc3f023892d4c86ed24d9ccb6a3b00fd7a5ef6ecfbbddde75f516aa36fa1": "连续两次失败的 RFC 3161 授权实体在下次尝试前会进行等待：先等待一个时间间隔，然后\n两个、四个，以此类推，最长可达六小时，或根据其 <code>Retry-After</code> 指定的时间，最长可达一天。若通过检查时\n仅发现处于等待状态的授权实体，则不生成记录；否则，<code>anchor.completed</code> 会将其列在\n<code>deferred</code> 下，并附带 <code>retry_at</code>。在它们再次响应之前，面板将时间戳显示为<strong>性能下降</strong>。"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
