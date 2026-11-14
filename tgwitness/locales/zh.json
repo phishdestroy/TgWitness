@@ -8854,5 +8854,10 @@
   "All receipts ({n})": "全部收据（{n}）",
   "{account} observed {chats} from {first} to {last}.": "{account}在{first}至{last}期间观察了{chats}。",
   "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "日志包含{records}：{messages}、{edits}、{deletions}以及{files}。",
-  "{n} saved files": "{n}个已保存的文件"
+  "{n} saved files": "{n}个已保存的文件",
+  "If supplied, this note is included in the signed export.": "如果填写，此备注将包含在已签名的导出中。",
+  "Open your export": "打开导出内容",
+  "Original message is not included in this chat.": "此聊天未包含原始消息。",
+  "Personal backup, project archive or another reason": "个人备份、项目归档或其他原因",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "离线阅读聊天记录。打开报告即可查看图表、采集详情和签名验证。"
 }

@@ -8910,5 +8910,10 @@
   "All receipts ({n})": "Tous les justificatifs ({n})",
   "{account} observed {chats} from {first} to {last}.": "{account} a observé {chats} du {first} au {last}.",
   "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "Le journal contient {records} : {messages}, {edits}, {deletions} et {files}.",
-  "{n} saved files": {"one": "{n} fichier enregistré", "other": "{n} fichiers enregistrés"}
+  "{n} saved files": {"one": "{n} fichier enregistré", "other": "{n} fichiers enregistrés"},
+  "If supplied, this note is included in the signed export.": "Si elle est renseignée, cette note est incluse dans l’export signé.",
+  "Open your export": "Ouvrir votre export",
+  "Original message is not included in this chat.": "Le message original n’est pas inclus dans cette discussion.",
+  "Personal backup, project archive or another reason": "Sauvegarde personnelle, archive de projet ou autre motif",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "Lisez vos discussions hors ligne. Ouvrez le rapport pour consulter les graphiques, les détails de la collecte et les vérifications de signatures."
 }

@@ -8902,5 +8902,10 @@
   "All receipts ({n})": "تمام رسیدیں ({n})",
   "{account} observed {chats} from {first} to {last}.": "{account} نے {first} سے {last} تک {chats} کا مشاہدہ کیا۔",
   "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "جرنل میں {records} ہیں: {messages}، {edits}، {deletions} اور {files}۔",
-  "{n} saved files": {"one": "{n} محفوظ فائل", "other": "{n} محفوظ فائلیں"}
+  "{n} saved files": {"one": "{n} محفوظ فائل", "other": "{n} محفوظ فائلیں"},
+  "If supplied, this note is included in the signed export.": "اگر یہ نوٹ درج کیا جائے تو اسے دستخط شدہ برآمد میں شامل کیا جائے گا۔",
+  "Open your export": "اپنی برآمد کھولیں",
+  "Original message is not included in this chat.": "اصل پیغام اس چیٹ میں شامل نہیں ہے۔",
+  "Personal backup, project archive or another reason": "ذاتی بیک اپ، منصوبے کا محفوظ شدہ ریکارڈ یا کوئی اور وجہ",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "اپنی چیٹس آف لائن پڑھیں۔ چارٹس، جمع کرنے کی تفصیلات اور دستخطوں کی جانچ کے لیے رپورٹ کھولیں۔"
 }

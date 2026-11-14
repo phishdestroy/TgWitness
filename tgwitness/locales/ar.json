@@ -9094,5 +9094,10 @@
   "All receipts ({n})": "كل الإيصالات ({n})",
   "{account} observed {chats} from {first} to {last}.": "رصد {account} {chats} من {first} إلى {last}.",
   "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "يحتوي السجل على {records}: {messages}، و{edits}، و{deletions}، و{files}.",
-  "{n} saved files": {"zero": "{n} ملفات محفوظة", "one": "{n} ملف محفوظ", "two": "{n} ملفان محفوظان", "few": "{n} ملفات محفوظة", "many": "{n} ملفًا محفوظًا", "other": "{n} ملف محفوظ"}
+  "{n} saved files": {"zero": "{n} ملفات محفوظة", "one": "{n} ملف محفوظ", "two": "{n} ملفان محفوظان", "few": "{n} ملفات محفوظة", "many": "{n} ملفًا محفوظًا", "other": "{n} ملف محفوظ"},
+  "If supplied, this note is included in the signed export.": "إذا أُضيفت هذه الملاحظة، فستُضمَّن في التصدير الموقّع.",
+  "Open your export": "افتح التصدير",
+  "Original message is not included in this chat.": "الرسالة الأصلية غير مضمنة في هذه المحادثة.",
+  "Personal backup, project archive or another reason": "نسخة احتياطية شخصية أو أرشيف مشروع أو سبب آخر",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "اقرأ محادثاتك دون اتصال. افتح التقرير للاطلاع على الرسوم البيانية وتفاصيل الجمع والتحقق من التوقيعات."
 }

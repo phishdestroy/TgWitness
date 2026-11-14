@@ -8854,5 +8854,10 @@
   "All receipts ({n})": "すべての受領記録（{n}）",
   "{account} observed {chats} from {first} to {last}.": "{account}は{first}から{last}まで{chats}を監視しました。",
   "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "このジャーナルには{records}が含まれます：{messages}、{edits}、{deletions}、{files}。",
-  "{n} saved files": "保存済みファイル{n}件"
+  "{n} saved files": "保存済みファイル{n}件",
+  "If supplied, this note is included in the signed export.": "入力した場合、このメモは署名付きエクスポートに含まれます。",
+  "Open your export": "エクスポートを開く",
+  "Original message is not included in this chat.": "元のメッセージはこのチャットに含まれていません。",
+  "Personal backup, project archive or another reason": "個人用バックアップ、プロジェクトのアーカイブ、またはその他の理由",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "チャットをオフラインで読めます。グラフ、収集の詳細、署名の検証についてはレポートを開いてください。"
 }

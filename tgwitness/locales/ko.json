@@ -8854,5 +8854,10 @@
   "All receipts ({n})": "모든 영수증 ({n})",
   "{account} observed {chats} from {first} to {last}.": "{account}은(는) {first}부터 {last}까지 {chats}을(를) 관찰했습니다.",
   "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "이 저널에는 {records}이(가) 있습니다: {messages}, {edits}, {deletions}, {files}.",
-  "{n} saved files": "저장된 파일 {n}개"
+  "{n} saved files": "저장된 파일 {n}개",
+  "If supplied, this note is included in the signed export.": "입력한 메모는 서명된 내보내기에 포함됩니다.",
+  "Open your export": "내보내기 열기",
+  "Original message is not included in this chat.": "원본 메시지가 이 채팅에 포함되어 있지 않습니다.",
+  "Personal backup, project archive or another reason": "개인 백업, 프로젝트 보관 또는 기타 이유",
+  "Read your chats offline. Open the report for charts, collection details and signature checks.": "채팅을 오프라인으로 읽으세요. 차트, 수집 세부 정보 및 서명 검증은 보고서에서 확인할 수 있습니다."
 }
