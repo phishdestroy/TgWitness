@@ -915,7 +915,8 @@ class AccountExport:
                     except errors.TakeoutInvalidError:
                         raise
                     except errors.RPCError as exc:
-                        self.seal(job, task, cursor, cursor, True, [], 0, started, "failed", type(exc).__name__)
+                        self.seal(job, task, cursor, cursor, True, [], 0, started, "failed",
+                                  getattr(exc, "message", None) or type(exc).__name__)
                         terminal = True
                     except ValueError as exc:
                         if task["category"] == "other_data" and options["transport"] == "regular":
