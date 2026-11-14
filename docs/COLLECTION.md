@@ -343,6 +343,13 @@ its own signed outcome and reference to the earlier saved-file record. Cancellin
 waiting job does not cancel the active transfer; if that transfer fails or is cancelled,
 the next job can try again. Different attachments can download concurrently.
 
+Chat exports also share an active transfer for repeated file representations within
+the same export directory. Each message retains its attachment reference, and reuse
+requires a fresh size and SHA-256 check. Different files can be checked in parallel
+without holding a common transfer lock. Temporary download and copy paths are unique
+to each operation; cancellation waits for any active local file reader before cleanup.
+The export file index serializes only metadata access, not file hashing or downloads.
+
 Server-hash reads for different attachments also run concurrently, sharing the client's
 three file-request slots with byte downloads. Repeated reads of the same representation
 reuse only a complete cached result. File reads leave the ordinary request queue free;
