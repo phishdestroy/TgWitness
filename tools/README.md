@@ -44,7 +44,4 @@ and [qualification record](../docs/STATUS.md) for the required scope and remaini
 - [site_diagrams.py](site_diagrams.py): interactive diagrams.
 - [site_i18n.py](site_i18n.py) / [i18n_keys.py](i18n_keys.py): site and panel translations.
 - [site_llms.py](site_llms.py): task index and text editions of the public handbook. Generated from the same page inventory; no account data or application imports.
-- [verify_live_probe.py](verify_live_probe.py): verify an existing probe export.
 - [bench_fulltext.py](bench_fulltext.py): full-text index build and query timing on a synthetic signed journal.
-- [export_clinic_preview.py](export_clinic_preview.py): loopback preview of the Export Clinic's allowlisted downloads, using [site_test_server.py](site_test_server.py).
-- [research_sources.py](research_sources.py): fetch upstream API docs.
