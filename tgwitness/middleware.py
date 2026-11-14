@@ -28,6 +28,13 @@ def request_limit(path, default=16384):
         return 1536 * 1024
     if path.endswith("/api/account/avatar"):
         return 7 * 1024 * 1024
+    if "/external-signatures/" in path:
+        if path.endswith("/check"):
+            return 3 * 1024 * 1024
+        if path.rsplit("/", 1)[-1].isdigit():
+            return 26 * 1024 * 1024
+    if "/api/watchlists/" in path and path.endswith("/import"):
+        return 512 * 1024
     return default
 
 
