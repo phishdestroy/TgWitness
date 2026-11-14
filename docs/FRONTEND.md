@@ -60,6 +60,9 @@ and `app.js` still has old controllers.
   check request and workspace generation before applying a response.
 - Hidden tabs pause periodic reads. Retries repeat status reads only, never a POST after an
   unclear network error.
+- Startup reads access and the workspace list concurrently, then reads status for the
+  resolved workspace. The initial profile result is reused. Chat export discovery waits
+  for a selected chat and shares its in-flight request; only active jobs are polled.
 
 ## Forms
 
@@ -68,6 +71,12 @@ value. On save, compare the sent snapshot with the current draft and keep newer 
 Clear write-only credentials from the field and the Discard baseline. Tokens and credentials
 never go to browser storage, except the panel sign-in token in tab-scoped `sessionStorage`
 (cleared on lock).
+
+Wizard drafts and appearance preferences debounce saves by 400 ms. Each queue keeps
+the latest complete payload, allows one write at a time and settles all callers of
+the combined save. A workspace reset cancels unsent work; completed old requests
+must pass the owner/generation guard before changing UI state. Failed writes are
+reported to their callers and are never retried automatically.
 
 Use `tr()` for UI text. Keep `tools/i18n_keys.py` aware of dynamic labels. New module files
 go into the wheel, demo asset list and source archive.
