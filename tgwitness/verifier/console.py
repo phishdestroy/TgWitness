@@ -18,6 +18,17 @@ KINDS = {"evidence": "Evidence archive", "chat": "Chat export", "account": "Acco
          "dossier": "People profiles", "proof": "Public proof", "report": "Sealed report",
          "history": "History report", "handover": "Handover extract", "selection": "Viewer selection",
          "distributed": "Distributed acquisition", "board": "Case Board", "attestation": "Collector attestation"}
+CONSOLE_LIST_LIMIT = 10
+
+
+def utc_stamp(value):
+    match = re.fullmatch(r"(\d{4}-\d\d-\d\d)T(\d\d:\d\d:\d\d)(?:\.\d+)?(?:Z|\+00:00)", str(value))
+    return match[1] + " " + match[2] + " UTC" if match else str(value)
+
+
+def duration_text(seconds):
+    seconds = int(seconds)
+    return "%d:%02d:%02d" % (seconds // 3600, seconds % 3600 // 60, seconds % 60)
 
 
 def verifier_language(value):
@@ -254,40 +265,64 @@ class Console:
         if not anchors:
             self.say("  " + self.paint(self.t("No independent timestamps: times come from the collector's clock."), "dim"))
             return
+        # One entry for each service: a long journal carries a proof from every service at every checkpoint.
+        groups = {}
         for anchor in anchors:
-            point = self.t("checkpoint #{n}", n=self.number(int(anchor["checkpoint"][11:-5]))) \
-                if anchor["checkpoint"][11:-5].isdigit() else anchor["checkpoint"]
-            if anchor.get("kind") == "rfc3161":
-                checked = anchor.get("signature", "").startswith("checked")
-                self.check("ok" if checked else "warn", "RFC 3161 · " + anchor["service"],
-                           point + " · " + anchor.get("time", "?").replace("T", " ").replace("Z", " UTC"))
-                self.say("  " + " " * 27 + self.paint(self.t("signature chained to your root" if checked
-                                                               else "signature not checked: add --tsa-ca"), "dim"))
-                revocation = anchor.get("revocation") or {}
-                status = revocation.get("status")
-                if status == "good":
-                    self.say("  " + " " * 27 + self.paint(self.t(
-                        "signing certificate not revoked as of {time} ({source})", source=revocation["source"],
-                        time=revocation["as_of"].replace("T", " ").replace("Z", " UTC")), "dim"))
-                elif status == "revoked_after":
-                    self.check("warn", "Timestamp warning", self.t(
-                        "signing certificate revoked at {time}, after the time stamp ({source})", source=revocation["source"],
-                        time=revocation["revoked_at"].replace("T", " ").replace("Z", " UTC")))
-                elif status == "failed":
-                    self.check("warn", "Timestamp warning", self.t("revocation check failed: {reason}", reason=revocation["error"]))
-                elif status:
-                    self.say("  " + " " * 27 + self.paint(self.t("revocation not checked (no OCSP/CRL in the archive)"), "dim"))
-                if anchor.get("certificate_reference"):
-                    self.say("  " + self.t("Signing certificate reference") + ": " + anchor["certificate_reference"])
-                for warning in anchor.get("warnings") or []:
-                    self.check("warn", "Timestamp warning", self.t(warning))
+            groups.setdefault((anchor.get("kind") == "rfc3161", anchor["service"]), []).append(anchor)
+        shown = lambda value: value.replace("T", " ").replace("Z", " UTC").replace("+00:00", " UTC")
+        note = lambda text: self.say("    " + self.paint(text, "dim"))
+        for (rfc, service), items in groups.items():
+            numbers = sorted(int(item["checkpoint"][11:-5]) for item in items if item["checkpoint"][11:-5].isdigit())
+            if len(numbers) != len(items):
+                point = ", ".join(sorted({item["checkpoint"] for item in items})[:3])
+            elif len(items) == 1:
+                point = self.t("checkpoint #{n}", n=self.number(numbers[0]))
             else:
-                status = anchor.get("status")
-                detail = {"pending": "pending: run ots upgrade, then ots verify",
-                          "bitcoin-unverified": "Bitcoin attestation present; run ots verify"}.get(
-                              status, "unknown attestation type; no verified Bitcoin timestamp")
-                self.check("wait" if status == "pending" else "warn", "OpenTimestamps · " + anchor["service"][:10],
-                           point + " · " + self.t(detail))
+                point = self.t("checkpoints: {n} (#{first}–#{last})", n=self.number(len(items)),
+                               first=self.number(numbers[0]), last=self.number(numbers[-1]))
+            if rfc:
+                checked = sum(item.get("signature", "").startswith("checked") for item in items)
+                times = sorted(item["time"] for item in items if item.get("time"))
+                span = "?" if not times else shown(times[0]) + (" – " + shown(times[-1]) if times[-1] != times[0] else "")
+                self.check("ok" if checked == len(items) else "warn", "RFC 3161 · " + service, point + " · " + span)
+                if checked in (0, len(items)):
+                    note(self.t("signature chained to your root" if checked else "signature not checked: add --tsa-ca"))
+                else:
+                    note(self.t("signature chained to your root") + ": " + self.number(checked) + " / " + self.number(len(items)))
+                found = [item.get("revocation") or {} for item in items]
+                good = [item for item in found if item.get("status") == "good"]
+                if good:
+                    latest = max(good, key=lambda item: item["as_of"])
+                    note(self.t("signing certificate not revoked as of {time} ({source})", source=latest["source"],
+                                time=shown(latest["as_of"])))
+                if any(item.get("status") not in (None, "good", "revoked_after", "failed") for item in found):
+                    note(self.t("revocation not checked (no OCSP/CRL in the archive)"))
+                references = sorted({item["certificate_reference"] for item in items if item.get("certificate_reference")})
+                if references:
+                    note(self.t("Signing certificate reference") + ": " + ", ".join(references))
+                warnings = [self.t("signing certificate revoked at {time}, after the time stamp ({source})",
+                                   source=item["source"], time=shown(item["revoked_at"]))
+                            for item in found if item.get("status") == "revoked_after"]
+                warnings += [self.t("revocation check failed: {reason}", reason=item["error"])
+                             for item in found if item.get("status") == "failed"]
+                warnings += [self.t(warning) for item in items for warning in item.get("warnings") or []]
+                for warning in dict.fromkeys(warnings):
+                    self.check("warn", "Timestamp warning", warning)
+            else:
+                states = {}
+                for item in items:
+                    states.setdefault(item.get("status"), []).append(item)
+                state = "ok" if set(states) == {"confirmed"} else "wait" if set(states) == {"pending"} else "warn"
+                self.check(state, "OpenTimestamps · " + service, point)
+                for status, members in states.items():
+                    detail = self.t({"pending": "pending: run ots upgrade, then ots verify", "confirmed": "Confirmed",
+                                     "bitcoin-unverified": "Bitcoin attestation present; run ots verify"}.get(
+                                         status, "unknown attestation type; no verified Bitcoin timestamp"))
+                    if status == "confirmed":
+                        times = sorted(item["time"] for item in members if item.get("time"))
+                        detail += " · Bitcoin" + (" · " + shown(times[0]) + (" – " + shown(times[-1]) if times[-1] != times[0] else "")
+                                                  if times else "")
+                    note(detail + (": " + self.number(len(members)) if len(items) > 1 else ""))
 
     def lines(self, label, lines, limit=8):
         if not lines:
@@ -304,25 +339,34 @@ class Console:
         self.explain("Coverage")
         periods, gaps = coverage["continuous"], coverage["gaps"]
         self.check("none", "Observation periods", self.number(len(periods)) if periods else "No observation period recorded.")
-        for period in periods:
-            self.say("    " + str(period["from"]) + " → " + str(period["to"]) + " · "
-                     + self.t("Duration") + ": " + str(int(period["seconds"])) + " s")
+        # The full lists are in coverage.json and in the JSON answer; a long journal would bury the verdict here.
+        for period in periods[:CONSOLE_LIST_LIMIT]:
+            self.say("    " + utc_stamp(period["from"]) + " → " + utc_stamp(period["to"]) + " · "
+                     + self.t("Duration") + ": " + duration_text(period["seconds"]))
+        if len(periods) > CONSOLE_LIST_LIMIT:
+            self.say("    " + self.paint(self.t("… and {n} more", n=len(periods) - CONSOLE_LIST_LIMIT), "dim"))
         self.check("warn" if gaps else "none", "Observation gaps", self.number(len(gaps)))
-        for gap in gaps:
-            self.say("    " + str(gap["from"]) + " → " + str(gap["to"]))
-            self.say("    " + self.t("Reason") + ": " + self.coverage_reason(str(gap["reason"])))
+        for gap in gaps[:CONSOLE_LIST_LIMIT]:
+            self.say("    " + utc_stamp(gap["from"]) + " → " + utc_stamp(gap["to"]) + " · "
+                     + self.t("Reason") + ": " + self.coverage_reason(str(gap["reason"])))
+        if len(gaps) > CONSOLE_LIST_LIMIT:
+            self.say("    " + self.paint(self.t("… and {n} more", n=len(gaps) - CONSOLE_LIST_LIMIT), "dim"))
         for window in coverage.get("session_windows") or []:
             self.check("warn", WINDOW_WORDS.get(window["reason"], str(window["reason"])),
-                       str(window["from"]) + " → " + str(window["to"])
+                       utc_stamp(window["from"]) + " → " + utc_stamp(window["to"])
                        + (" · " + self.t("open at the last record") if window.get("not_resumed_by_last_record") else ""))
         session = coverage.get("session") or {}
+        starts = {}
         for item in session.get("sessions_at_start") or []:
-            self.check("warn" if item.get("others") else "none", "Other sessions at start",
-                       ("?" if item.get("others") is None else self.number(item["others"])) + " · " + str(item["at"]))
+            starts.setdefault(item.get("others"), []).append(str(item["at"]))
+        for others, times in starts.items():
+            self.check("warn" if others else "none", "Other sessions at start",
+                       ("?" if others is None else self.number(others)) + " · " + utc_stamp(times[0])
+                       + (" → " + utc_stamp(times[-1]) + " · ×" + self.number(len(times)) if len(times) > 1 else ""))
         if session.get("sessions_added"):
             self.check("warn", "Sessions added during observation",
                        self.number(sum(item["added"] for item in session["sessions_added"]))
-                       + " · " + str(session["sessions_added"][0]["at"]))
+                       + " · " + utc_stamp(session["sessions_added"][0]["at"]))
         groups, other, unlabelled, captures, sealed = source_counts(coverage)
         parts = [self.t(label) + " " + self.number(sum(count for _, count in found)) for label, found in groups]
         parts += [name + " " + self.number(count) for name, count in other]
@@ -356,7 +400,8 @@ class Console:
             minutes = re.search(r"for (\d+) min", text)
             return self.t("Interrupted") + (" · " + minutes[1] + " min" if minutes else "")
         if text.startswith("observation stopped: "):
-            return self.t("Stopped") + ": " + text.partition(": ")[2]
+            cause = text.partition(": ")[2]
+            return self.t("Stopped") + ("" if cause == "shutdown" else ": " + cause)
         return text
 
     def outside(self, outside):
@@ -366,8 +411,8 @@ class Console:
         self.heading("Live recording and devices")
         if drand["rounds"]:
             self.check("none", "drand", self.t("Recorded") + ": " + str(drand["rounds"]) + " · "
-                       + str(drand["first"]["at"]) + " → " + str(drand["last"]["at"]))
-            self.field("Gap", str(drand["largest_gap_seconds"]) + " s")
+                       + utc_stamp(drand["first"]["at"]) + " → " + utc_stamp(drand["last"]["at"]))
+            self.field("Gap", duration_text(drand["largest_gap_seconds"]))
             checked = drand.get("checked")
             self.check("ok" if checked and checked.get("relays") else "warn", "drand",
                        (self.t("Matches") + ": " + str(checked["confirmed"]) + "/" + str(checked["asked"])
@@ -573,7 +618,7 @@ class Console:
         if note in self.words:
             return self.t(note)
         if note.startswith("OpenTimestamps structure only:"):
-            return self.t("signature not checked: add --tsa-ca").replace("--tsa-ca", "ots verify")
+            return "OpenTimestamps: " + self.t("Not checked") + " · ots verify"
         if note.startswith("The witness key is not pinned:") or note.startswith("A public proof is signed by its witness:"):
             return self.t("Witness") + ": " + reader_message("key_unconfirmed", self.lang) + " · --witness-fingerprint"
         if note.startswith("Witnessed from "):

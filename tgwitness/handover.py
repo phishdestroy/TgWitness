@@ -548,8 +548,7 @@ def export(store, vault, options, report_options=None):
             context["files"] = dict(hashes)
             write_member("report.html", report.evidence_chunks(records(), coverage, context))
             listed = {**hashes, **dict.fromkeys(("README.txt", "SHA256SUMS", "manifest.json", "manifest.sig"), "")}
-            write_member("README.txt", [verification_kit.quickstart(report_options.get("language", "en")), b"\n",
-                                       report.readme(context, listed, "\n".join(LIMITS) + "\n")])
+            write_member("README.txt", [report.readme(context, listed, "\n".join(LIMITS) + "\n")])
             write_member("SHA256SUMS", [report.sha256sums(hashes)])
             manifest = {"format": FORMAT, "created_at": created, "public_key": vault.public_key,
                         "fingerprint": fingerprint(vault.public_key), "producer": producer(),

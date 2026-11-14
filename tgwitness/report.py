@@ -439,6 +439,7 @@ def file_purpose(say, name):
     if name.startswith(("records/", "messages/")):
         return say("Part of a long list, a sealed page of its own")
     return {
+        "analytics.json": say("The figures behind the charts in the report"),
         "report.json": say("The report as signed JSON, for case systems and scripts"),
         "report.pdf": say("The report as a signed PDF, for printing and filing"),
         "indicators.csv": say("Indicators for spreadsheets: links, domains, wallets, accounts (formula-safe)"),
@@ -623,7 +624,7 @@ def readme(context, files, english):
     evidence, handover = context["kind"] == "evidence", context["kind"] == "handover"
     archive = "tgwitness-evidence.zip" if evidence else "tgwitness-handover.zip" if handover else "tgwitness-chat-export.zip"
     title = say("Evidence archive") if evidence else say("Handover extract") if handover else say("Chat export")
-    lines = ["TgWitness · " + title, options.get("case_title") or "", "=" * 64]
+    lines = ["TgWitness · " + title, *([options["case_title"]] if options.get("case_title") else []), "=" * 64]
     if handover:
         lines += [say("Purpose") + ": " + context["handover"]["purpose"].replace("\n", " "), ""]
     for label, key in ((say("Case ID"), "case_id"), (say("Examiner"), "examiner"), (say("Organization"), "organization")):
@@ -634,12 +635,12 @@ def readme(context, files, english):
     report_name = "chat.html" if not (evidence or handover) else "report.html"
     lines += ["", say("Start here"), "-" * 64,
               say("Extract the complete archive before opening the HTML report. Keep viewer/ and media/ beside it."),
-              "  " + report_name + " — " + say("Report, search, filters and archive verification"),
-              say("Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder.")]
+              "  " + report_name + " — " + say("Report, search, filters and archive verification")]
     original = context.get("original") or {}
     if original.get("html") and say.language != "en":
         lines += ["  " + original["html"] + " — " + say("English original of this report, sealed"),
                   translation_text(say)]
+    lines += [say("Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder.")]
     lines += ["", say("What is in this archive"), "-" * 64]
     folders = ("media/", "anchors/", "records/", "messages/", "viewer/")
     shown = [n for n in sorted(files) if not n.startswith(folders)]
@@ -652,6 +653,7 @@ def readme(context, files, english):
             lines.append("  " + prefix.ljust(width) + file_purpose(say, prefix + ("x.json" if prefix == "anchors/" else ""))
                          + " (" + str(count) + ")")
     lines += ["", say("How to verify"), "-" * 64,
+              *([say("To check the archive, follow START_HERE.txt.")] if "START_HERE.txt" in files else []),
               say("Run these commands in the extracted folder, with the original ZIP in its parent folder."),
               say("Use a verifier from a trusted checkout. The bundled copy is provided for convenience."),
               "1. " + say("Get the signer's key fingerprint from a trusted channel, not from this archive."),
