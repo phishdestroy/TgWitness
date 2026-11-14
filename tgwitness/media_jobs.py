@@ -1,9 +1,12 @@
-from contextlib import suppress
+import asyncio
+from contextlib import asynccontextmanager, suppress
 from dataclasses import dataclass
 import hashlib
 import json
 import os
+import secrets
 import shutil
+import threading
 from pathlib import Path
 
 from . import ephemeral, file_hashes
@@ -16,6 +19,7 @@ ATTACHMENTS = ".attachments.jsonl"
 HEX = frozenset("0123456789abcdef")
 KNOWN_DIRECTORIES = 4
 known_files = {}
+files_lock = threading.RLock()
 
 
 LANES = {
@@ -69,6 +73,26 @@ class MediaAttempt:
             raise ValueError("Invalid media transition: " + self.phase + " -> " + outcome.state)
         self.store.finish_media(self.job, outcome.state, outcome.payload, delay=outcome.delay)
         self.phase = outcome.state
+
+
+class MediaLocks:
+    def __init__(self):
+        self.entries = {}
+
+    @asynccontextmanager
+    async def hold(self, key):
+        if key is None:
+            yield
+            return
+        entry = self.entries.setdefault(key, [asyncio.Lock(), 0])
+        entry[1] += 1
+        try:
+            async with entry[0]:
+                yield
+        finally:
+            entry[1] -= 1
+            if not entry[1]:
+                del self.entries[key]
 
 
 def lane_limits(lane):
@@ -134,37 +158,40 @@ def stored_copy(store, media_root, media, size):
 
 
 def exported_files(directory):
-    name = str(directory)
-    if name not in known_files:
-        found, path = {}, Path(directory) / ATTACHMENTS
-        if path.is_file() and not path.is_symlink():
-            with path.open(encoding="utf-8") as stream:
-                for line in stream:
-                    try:
-                        item = json.loads(line)
-                        key, digest, size = item["identity"], item["sha256"], item["bytes"]
-                    except (ValueError, KeyError, TypeError):
-                        continue
-                    if isinstance(key, str) and isinstance(digest, str) and len(digest) == 64 and set(digest) <= HEX \
-                            and type(size) is int:
-                        found[key] = (digest, size)
-        while len(known_files) >= KNOWN_DIRECTORIES:
-            known_files.pop(next(iter(known_files)), None)
-        known_files[name] = found
-    return known_files[name]
+    with files_lock:
+        name = str(directory)
+        if name not in known_files:
+            found, path = {}, Path(directory) / ATTACHMENTS
+            if path.is_file() and not path.is_symlink():
+                with path.open(encoding="utf-8") as stream:
+                    for line in stream:
+                        try:
+                            item = json.loads(line)
+                            key, digest, size = item["identity"], item["sha256"], item["bytes"]
+                        except (ValueError, KeyError, TypeError):
+                            continue
+                        if isinstance(key, str) and isinstance(digest, str) and len(digest) == 64 and set(digest) <= HEX \
+                                and type(size) is int:
+                            found[key] = (digest, size)
+            while len(known_files) >= KNOWN_DIRECTORIES:
+                known_files.pop(next(iter(known_files)), None)
+            known_files[name] = found
+        return known_files[name]
 
 
 def forget_files(directory):
-    known_files.pop(str(directory), None)
+    with files_lock:
+        known_files.pop(str(directory), None)
 
 
 def remember_file(directory, media, digest, size):
     key = attachment(media)[1]
-    found = exported_files(directory)
-    if key and found.get(key) != (digest, size):
-        found[key] = (digest, size)
-        with suppress(OSError), (Path(directory) / ATTACHMENTS).open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps({"identity": key, "sha256": digest, "bytes": size}) + "\n")
+    with files_lock:
+        found = exported_files(directory)
+        if key and found.get(key) != (digest, size):
+            found[key] = (digest, size)
+            with suppress(OSError), (Path(directory) / ATTACHMENTS).open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps({"identity": key, "sha256": digest, "bytes": size}) + "\n")
 
 
 def reuse_into(store, directory, media, size):
@@ -180,18 +207,22 @@ def reuse_into(store, directory, media, size):
         return None
     source, target = store.root / "media" / known["sha256"], directory / known["sha256"]
     if not target.exists():
-        temporary = directory / ("reuse-" + known["sha256"])
+        temporary = directory / ("reuse-" + known["sha256"] + "-" + secrets.token_hex(8))
         try:
-            temporary.unlink(missing_ok=True)
             try:
                 os.link(source, temporary)
             except OSError:
                 shutil.copyfile(source, temporary)
-            temporary.replace(target)
+            try:
+                temporary.replace(target)
+            except OSError:
+                if not intact(target, known["sha256"], size):
+                    raise
         except OSError:
+            return None
+        finally:
             with suppress(OSError):
                 temporary.unlink(missing_ok=True)
-            return None
     elif not intact(target, known["sha256"], size):
         return None
     remember_file(directory, media, known["sha256"], size)

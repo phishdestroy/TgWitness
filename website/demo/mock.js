@@ -99,7 +99,19 @@
     if (!included) return null;
     const before = params.get('before_id'), after = params.get('after_id');
     const limit = Math.min(200, Math.max(1, Number(params.get('limit')) || 60));
-    const ordered = [...known.values()].sort((a, b) => a.message_id - b.message_id);
+    const mode = params.get('filter') || 'all', author = params.get('author_id');
+    const query = (params.get('q') || '').normalize('NFKC').toLowerCase();
+    const ordered = [...known.values()].filter(message =>
+      (mode === 'all' || (mode === 'deleted' ? message.deleted : mode === 'missing' ? message.missing && !message.deleted
+        : mode === 'media' ? message.has_media || message.media.length : message.edited))
+      && (author === null || message.sender?.id === Number(author))
+      && (!query || message.versions.some(version => (version.text || '').normalize('NFKC').toLowerCase().includes(query))))
+      .map(message => ({...message, current_version: message.current_version || message.versions.at(-1),
+        versions: message.versions.map(version => ({...version,
+          matches_search: !!query && (version.text || '').normalize('NFKC').toLowerCase().includes(query)}))}))
+      .map(message => ({...message, current_version: message.current_version && {...message.current_version,
+        matches_search: !!query && (message.current_version.text || '').normalize('NFKC').toLowerCase().includes(query)}}))
+      .sort((a, b) => a.message_id - b.message_id);
     const matching = ordered.filter(message => (before === null || message.message_id < Number(before))
       && (after === null || message.message_id > Number(after)));
     const messages = after === null ? matching.slice(-limit) : matching.slice(0, limit);

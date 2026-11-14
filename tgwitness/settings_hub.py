@@ -51,7 +51,7 @@ class Draft(BaseModel):
     route: Literal["auto", "warp", "proxy", "direct"] = "auto"
     allow_direct: bool = False
     unchecked: bool = False
-    scope: Literal["account", "selected", "folder"] = "account"
+    scope: Literal["account", "selected", "folder"] = "selected"
     chat_ids: list[int] = Field(default_factory=list, max_length=10000)
     folder_id: int | None = Field(default=None, ge=0, le=4096)
     account_kind: Literal["dedicated", "main"] | None = None
@@ -97,6 +97,11 @@ def wizard_state(app):
     if saved is None:
         existing = bool(s.get_setting("setup", None) or c.status()["has_session"] or s.targets())
         saved = {"completed": existing, "skipped": False}
+        if existing:
+            from .scope import scope_settings
+            scope = scope_settings(s)
+            saved.update(scope=scope["mode"], folder_id=scope["folder_id"],
+                         chat_ids=[t["chat_id"] for t in s.targets(True)])
     return {**Draft().model_dump(), **saved}
 
 

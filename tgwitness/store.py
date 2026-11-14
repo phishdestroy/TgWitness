@@ -373,30 +373,67 @@ class Store:
                 "SELECT message_id FROM message_state_index INDEXED BY " + index + " WHERE " + where +
                 " ORDER BY message_id DESC LIMIT ?", (*params, limit))]
 
-    def chat_messages(self, chat_id, before_id=None, limit=60, *, after_id=None):
+    def _chat_selection(self, chat_id, mode, search, author_id):
+        where, params = "m.chat_id=?", [chat_id]
+        if mode not in {"all", "deleted", "edited", "media", "missing"}:
+            raise ValueError("Unknown message filter.")
+        text_marks = ",".join("?" * len(TEXT_KINDS))
+        related = "e.chat_id=m.chat_id AND e.message_id=m.message_id"
+        if mode == "deleted":
+            where += " AND m.deleted=1"
+        elif mode == "missing":
+            where += " AND m.missing=1 AND m.deleted=0"
+        elif mode == "edited":
+            where += (" AND (m.edited=1 OR EXISTS(SELECT 1 FROM events e WHERE " + related
+                      + " AND e.kind IN (" + text_marks + ") AND json_extract(e.payload,'$.edited_at') IS NOT NULL))")
+            params.extend(TEXT_KINDS)
+        elif mode == "media":
+            where += (" AND EXISTS(SELECT 1 FROM events e WHERE " + related
+                      + " AND ((e.kind IN (" + text_marks + ") AND json_extract(e.payload,'$.has_media')=1)"
+                      + " OR (e.kind='media.saved' AND json_extract(e.payload,'$.media_sha256') IS NOT NULL)))")
+            params.extend(TEXT_KINDS)
+        if author_id is not None:
+            where += (" AND (SELECT coalesce(json_extract(e.payload,'$.sender_id'),"
+                      "json_extract(e.payload,'$.sender_observation.id')) FROM events e WHERE " + related
+                      + " AND e.kind IN (" + text_marks + ") AND coalesce(json_extract(e.payload,'$.sender_id'),"
+                      "json_extract(e.payload,'$.sender_observation.id')) IS NOT NULL ORDER BY e.seq LIMIT 1)=?")
+            params.extend((*TEXT_KINDS, author_id))
+        if search:
+            source, _, selection, values = self._event_selection(
+                chat_id=chat_id, kind=",".join(TEXT_KINDS), search=search, text_only=True)
+            where += " AND m.message_id IN (SELECT message_id FROM " + source + selection + ")"
+            params.extend(values)
+        return where, params
+
+    def chat_messages(self, chat_id, before_id=None, limit=60, *, after_id=None,
+                      mode="all", search=None, author_id=None):
         if before_id is not None and after_id is not None:
             raise ValueError("Choose one message cursor.")
         if not 1 <= limit <= 200:
             raise ValueError("Limit must be 1–200.")
         marks = ",".join("?" * len(CHAT_KINDS))
-        where, params = "chat_id=?", [chat_id]
+        scope, scope_params = self._chat_selection(chat_id, mode, search, author_id)
+        where, params = scope, list(scope_params)
         if before_id is not None:
-            where += " AND message_id<?"
+            where += " AND m.message_id<?"
             params.append(before_id)
         if after_id is not None:
-            where += " AND message_id>?"
+            where += " AND m.message_id>?"
             params.append(after_id)
         direction = "ASC" if after_id is not None else "DESC"
         with self.reading() as db:
-            ids = [r[0] for r in db.execute(
-                "SELECT message_id FROM message_state_index WHERE " + where + " ORDER BY message_id " + direction + " LIMIT ?",
-                (*params, limit))]
+            states = {r["message_id"]: r for r in db.execute(
+                "SELECT m.* FROM message_state_index m WHERE " + where + " ORDER BY m.message_id " + direction + " LIMIT ?",
+                (*params, limit))}
+            ids = list(states)
             if not ids:
                 return {"messages": [], "next_before": None, "next_after": None}
             older = db.execute(
-                "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id<? LIMIT 1", (chat_id, min(ids))).fetchone()
+                "SELECT 1 FROM message_state_index m WHERE " + scope + " AND m.message_id<? LIMIT 1",
+                (*scope_params, min(ids))).fetchone()
             newer = db.execute(
-                "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id>? LIMIT 1", (chat_id, max(ids))).fetchone()
+                "SELECT 1 FROM message_state_index m WHERE " + scope + " AND m.message_id>? LIMIT 1",
+                (*scope_params, max(ids))).fetchone()
             rows = db.execute(
                 "SELECT seq, hash, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
@@ -408,14 +445,16 @@ class Store:
                 "message_id": row["message_id"], "first_seq": row["seq"],
                 "reference": {"event_hash": row["hash"], "seq": row["seq"], "kind": row["kind"]}, "sender": None, "sent_at": None,
                 "reply_to": None, "has_media": False, "service_action": None, "grouped_id": None,
-                "versions": [], "media": [], "deleted": False, "deleted_observed_at": None,
+                "versions": [], "current_version": None, "media": [], "deleted": False, "deleted_observed_at": None,
                 "missing": False, "missing_observed_at": None, "auto_deleted": False,
                 "telegram_edited_at": None, "from_scheduled": False, "origins": []})
             kind = row["kind"]
             if kind in GONE_KINDS and isinstance(payload.get("auto_delete"), dict) and payload["auto_delete"].get("expected"):
                 item["auto_deleted"] = True
             if kind in TEXT_KINDS:
-                item["missing"], item["missing_observed_at"], item["auto_deleted"] = False, None, False
+                current = row["seq"] == states[row["message_id"]]["text_seq"]
+                if current:
+                    item["missing"], item["missing_observed_at"], item["auto_deleted"] = False, None, False
                 observed = payload.get("sender_observation") or {}
                 if item["sender"] is None and (payload.get("sender_id") is not None or observed):
                     item["sender"] = {"id": payload.get("sender_id", observed.get("id")),
@@ -434,12 +473,17 @@ class Store:
                 text, buttons = payload.get("text") or "", keyboard.of_payload(payload)
                 observable = message_content.of_payload(payload)
                 content_hash = hashlib.sha256(canonical(observable)).hexdigest()
+                version = {"text": text, "buttons": buttons, "observed_at": row["observed_at"], "event_hash": row["hash"],
+                           "entities": observable["entities"], "content_hash": content_hash,
+                           "edited_at": payload.get("edited_at"), "kind": kind, "seq": row["seq"],
+                           "matches_search": bool(search and search_text(search) in search_text(text))}
+                if current:
+                    item["current_version"] = version
                 if not item["versions"] or item["versions"][-1]["content_hash"] != content_hash \
                         or item["versions"][-1]["edited_at"] != payload.get("edited_at"):
-                    item["versions"].append({"text": text, "buttons": buttons, "observed_at": row["observed_at"], "event_hash": row["hash"],
-                                             "entities": observable["entities"],
-                                             "content_hash": content_hash,
-                                             "edited_at": payload.get("edited_at"), "kind": kind, "seq": row["seq"]})
+                    item["versions"].append(version)
+                elif current:
+                    item["versions"][-1] = version
             elif kind == "message.deleted":
                 item["deleted"] = True
                 item["deleted_observed_at"] = item["deleted_observed_at"] or row["observed_at"]
@@ -462,9 +506,11 @@ class Store:
         result = []
         for item in sorted(messages.values(), key=lambda m: m["message_id"]):
             item["captured"] = bool(item["versions"])
-            item["text"] = item["versions"][-1]["text"] if item["versions"] else None
-            item["buttons"] = item["versions"][-1]["buttons"] if item["versions"] else None
-            item["edited"] = len(item["versions"]) > 1 or bool(item["telegram_edited_at"])
+            current = item["current_version"]
+            item["text"] = current["text"] if current else None
+            item["buttons"] = current["buttons"] if current else None
+            item["missing"] = bool(states[item["message_id"]]["missing"])
+            item["edited"] = bool(states[item["message_id"]]["edited"] or item["telegram_edited_at"])
             result.append(item)
         return {"messages": result, "next_before": min(ids) if older else None,
                 "next_after": max(ids) if newer else None}

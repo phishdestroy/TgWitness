@@ -1669,6 +1669,12 @@
           </div>
         </header>
         <div class="chat-status" id="chat-status"></div>
+        <form class="chat-search-form" id="chat-search-form" role="search">
+          <label class="visually-hidden" for="chat-message-search">Search saved messages</label>
+          <input id="chat-message-search" type="search" maxlength="512" placeholder="Search saved messages" autocomplete="off" aria-describedby="chat-search-hint" data-level="simple">
+          <button class="quiet small" id="chat-search-clear" type="button" hidden>Clear search</button>
+          <span class="visually-hidden" id="chat-search-hint">Search and filters cover all saved messages in this chat, including earlier versions.</span>
+        </form>
         <div class="export-box" hidden id="export-box" role="status"></div>
         <div class="chat-feed" id="chat-feed"></div>
         <div class="chat-live" id="chat-live"></div>

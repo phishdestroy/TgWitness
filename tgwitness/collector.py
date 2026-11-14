@@ -40,6 +40,7 @@ from .message_numbers import RECHECK_EDGE, MissingNumbers
 from . import replica
 from . import tuning
 from .history import History
+from .intake_progress import IntakeProgress
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient, FLOOD_ERRORS, TOO_LONG_RECOVERY, request_method, hold_dispatch, in_lane
@@ -57,7 +58,7 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaOutcome, REUSE_MEANING, failure_outcome, lane_limits, plan_media,
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, failure_outcome, lane_limits, plan_media,
                          remember_file, reuse_into, stored_copy, validate_observation)
 from . import secret_chats
 from .scope import allowed, folder_rule, in_folder, kind_of, recheck_settings, scope_settings, visibility
@@ -657,6 +658,9 @@ class Collector:
         self.reconciler = None
         self.intake = asyncio.Queue()
         self.intake_worker = None
+        self.intake_active = set()
+        self.intake_waiting = set()
+        self.intake_progress = IntakeProgress(store)
         self.chat_state_worker = None
         self.presence_worker = None
         self.recheck_wakeup = asyncio.Event()
@@ -678,7 +682,7 @@ class Collector:
         self.buffer_limit = tuning.BY_KEY["startup_buffer"].default
         self.storage_low = False
         self.download_reserved = 0
-        self.export_files_lock = asyncio.Lock()
+        self.media_locks = MediaLocks()
         self._forensics_clients = weakref.WeakSet()
         self.history = History(self)
         from .profiling import Profiling
@@ -722,6 +726,7 @@ class Collector:
             "media_pending": sum(n for s, n in self.store.media_stats().items()
                                  if s in ("queued", "running", "retry")),
             "media_jobs": self.store.media_stats(),
+            "chat_loading": self.intake_status(),
             "oldest_pending_media_at": self.store.media_oldest(),
             "source_status": self.source_status_view(),
             "last_update_at": self.last_update_at,
@@ -914,7 +919,33 @@ class Collector:
                                             "meaning": "Added automatically by the observation scope.",
                                             "visibility": "unknown", "role": "unknown"}
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
-            self.intake.put_nowait((chat_id, entity, False))
+            self.request_intake(chat_id, entity)
+
+    def intake_status(self, allowed=None):
+        pending = (set(self.store.get_setting("new_chat_intake_pending", []))
+                   | set(self.store.get_setting("baseline_pending", [])))
+        active = self.intake_active.copy()
+        if allowed is not None:
+            pending.intersection_update(allowed)
+            active.intersection_update(allowed)
+        result = {"running": len(active), "pending": len(pending - active), "workers": 3}
+        retries = [row for row in self.intake_progress.retries() if row["chat_id"] in pending - active]
+        if retries:
+            result.update(retrying=len({row["chat_id"] for row in retries}),
+                next_retry_at=max(min(row["retry_at"] for row in retries), self.store.get_setting("rpc_backoff_until", 0)))
+        return result
+
+    def queue_intake(self, chat_id, entity=None, baseline=False):
+        key = (chat_id, baseline)
+        if key not in self.intake_waiting:
+            self.intake_waiting.add(key)
+            self.intake.put_nowait((chat_id, entity, baseline))
+
+    def request_intake(self, chat_id, entity=None):
+        pending = self.store.get_setting("new_chat_intake_pending", [])
+        if chat_id not in pending:
+            self.store.set_setting("new_chat_intake_pending", [*pending, chat_id])
+            self.queue_intake(chat_id, entity)
 
     def request_baseline(self, chat_ids):
         pending = self.store.get_setting("baseline_pending", [])
@@ -924,7 +955,7 @@ class Collector:
         self.store.set_setting("baseline_pending", pending + added)
         if self.running:
             for chat_id in added:
-                self.intake.put_nowait((chat_id, None, True))
+                self.queue_intake(chat_id, baseline=True)
 
     async def take_baseline(self, chat_id):
         if chat_id not in self.store.get_setting("baseline_pending", []):
@@ -942,40 +973,122 @@ class Collector:
             await asyncio.sleep(60)
 
     async def intake_loop(self):
-        for chat_id in self.store.get_setting("baseline_pending", []):
-            self.intake.put_nowait((chat_id, None, True))
+        jobs = []
+        while not self.intake.empty():
+            jobs.append(self.intake.get_nowait())
+            self.intake.task_done()
+        jobs.extend((chat_id, None, False) for chat_id in self.store.get_setting("new_chat_intake_pending", []))
+        jobs.extend((chat_id, None, True) for chat_id in self.store.get_setting("baseline_pending", []))
+        self.intake_waiting.clear()
+        for job in jobs:
+            if self.intake_progress.get(job[0], job[2]).get("retry_at", 0) <= time.time():
+                self.queue_intake(*job)
+        locks = {}
+        workers = [asyncio.create_task(self.intake_next(locks)) for _ in range(3)]
+        workers.append(asyncio.create_task(self.intake_retries()))
+        try:
+            done, _ = await asyncio.wait(workers, return_when=asyncio.FIRST_COMPLETED)
+            await asyncio.gather(*done)
+        finally:
+            for worker in workers:
+                worker.cancel()
+            await asyncio.gather(*workers, return_exceptions=True)
+
+    async def intake_retries(self):
         while self.running:
-            chat_id, entity, baseline = await self.intake.get()
-            client = self.client
-            options = scope_settings(self.store)["new_chats"]
-            while self.running and time.time() < max(self.store.get_setting("rpc_backoff_until", 0), self.intake_resume_at):
-                await asyncio.sleep(1)
+            for row in self.intake_progress.retries():
+                if row["retry_at"] <= time.time() or not self.selected(row["chat_id"]):
+                    self.queue_intake(row["chat_id"], baseline=bool(row["baseline"]))
+            await asyncio.sleep(1)
+
+    def defer_intake(self, chat_id, baseline, exc, stages=()):
+        attempts = self.intake_progress.get(chat_id, baseline).get("attempts", 0) + 1
+        delay = min(300, 5 * 2 ** min(attempts - 1, 6))
+        retry_at = max(time.time() + delay, self.store.get_setting("rpc_backoff_until", 0))
+        with self.store.transaction():
+            event = self.store.append("collector.error", {
+                "operation": "new chat intake", "error_type": type(exc).__name__, "attempt": attempts,
+                "failed_stages": list(stages), "retry_at": retry_at,
+                "retry_after_seconds": max(0, round(retry_at - time.time())),
+                "coverage": "a profile or earlier-history read is incomplete; the pending job is retained for retry"}, chat_id)
+            self.intake_progress.defer(chat_id, baseline, attempts, retry_at, type(exc).__name__, event["seq"])
+
+    async def capture_intake(self, chat_id, entity):
+        options, saved, errors = scope_settings(self.store)["new_chats"], self.intake_progress.get(chat_id, False), []
+        if not any(options[stage] and not saved.get(stage + "_done") for stage in ("history", "profile")):
+            return []
+        entity = entity or await self.lookup_entity(chat_id)
+        if entity is None:
+            raise ValueError("chat_entity_unavailable")
+        for stage in ("history", "profile"):
+            if not options[stage] or saved.get(stage + "_done"):
+                continue
             try:
-                if baseline:
-                    await self.take_baseline(chat_id)
-                    continue
-                entity = entity or await self.lookup_entity(chat_id)
-                if entity is None:
-                    raise ValueError("chat_entity_unavailable")
-                if options["profile"]:
-                    await self.capture_profile(chat_id, entity)
-                if options["history"] and self.selected(chat_id):
-                    await self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
+                await self.wait_intake()
+                if not self.selected(chat_id):
+                    return []
+                operation = (self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
+                             if stage == "history" else self.capture_profile(chat_id, entity))
+                await asyncio.wait_for(operation, self.param("operation_timeout_seconds"))
+                self.intake_progress.done(chat_id, False, stage)
+            except (*AUTHORIZATION_ERRORS, *FLOOD_ERRORS):
+                raise
+            except Exception as exc:
+                errors.append((stage, exc))
+        return errors
+
+    async def wait_intake(self):
+        while self.running and time.time() < max(self.store.get_setting("rpc_backoff_until", 0), self.intake_resume_at):
+            await asyncio.sleep(1)
+        if not self.running:
+            raise asyncio.CancelledError
+
+    async def intake_next(self, locks):
+        while self.running:
+            chat_id, entity, baseline = job = await self.intake.get()
+            client = self.client
+            requeue = False
+            try:
+                async with locks.setdefault(chat_id, asyncio.Lock()):
+                    if not self.selected(chat_id):
+                        self.intake_progress.clear(chat_id, baseline)
+                        continue
+                    await self.wait_intake()
+                    self.intake_active.add(chat_id)
+                    try:
+                        errors = []
+                        if baseline:
+                            await asyncio.wait_for(self.take_baseline(chat_id), self.param("operation_timeout_seconds"))
+                        elif self.selected(chat_id):
+                            errors = await self.capture_intake(chat_id, entity)
+                        if errors:
+                            self.defer_intake(chat_id, baseline, errors[0][1], [stage for stage, _ in errors])
+                        else:
+                            self.intake_progress.clear(chat_id, baseline)
+                    finally:
+                        self.intake_active.discard(chat_id)
             except asyncio.CancelledError:
+                requeue = True
                 raise
             except FLOOD_ERRORS as exc:
-                self.intake_resume_at = time.time() + exc.seconds
-                self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds,
-                                                       "method": method_of(exc)})
-                self.intake.put_nowait((chat_id, entity, baseline))
+                self.intake_resume_at = max(self.intake_resume_at, time.time() + exc.seconds)
+                retry_at = max(self.intake_resume_at, self.store.get_setting("rpc_backoff_until", 0))
+                with self.store.transaction():
+                    self.store.set_setting("rpc_backoff_until", retry_at)
+                    event = self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds,
+                        "retry_at": retry_at, "method": method_of(exc)}, chat_id)
+                    self.intake_progress.defer(chat_id, baseline,
+                        self.intake_progress.get(chat_id, baseline).get("attempts", 0), retry_at, type(exc).__name__, event["seq"])
             except Exception as exc:
                 if self.handle_authorization_error(exc, "new chat intake", client=client):
-                    self.intake.put_nowait((chat_id, entity, baseline))
+                    requeue = True
                     return
-                self.store.append("collector.error", {
-                    "operation": "new chat intake", "error_type": type(exc).__name__,
-                    "coverage": "messages of this chat are still recorded live; its profile or earlier "
-                                "messages may be missing"}, chat_id)
+                self.defer_intake(chat_id, baseline, exc)
+            finally:
+                self.intake.task_done()
+                self.intake_waiting.discard((chat_id, baseline))
+                if requeue:
+                    self.queue_intake(*job)
             if not self.intake.empty():
                 await asyncio.sleep(self.param("recheck_pause_seconds") / 2)
 
@@ -1078,7 +1191,7 @@ class Collector:
                                     else "earlier history of added chats is not fetched")})
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
             for chat_id in added:
-                self.intake.put_nowait((chat_id, self.dialog_cache[chat_id]["entity"], False))
+                self.request_intake(chat_id, self.dialog_cache[chat_id]["entity"])
         return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
 
     def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):
@@ -4183,7 +4296,15 @@ class Collector:
                                                **({"origin": origin} if origin else {}),
                                                **({"before_id": before_id} if before_id else {})}, chat_id)
         try:
+            previous = before_id or 2**63
             async for message in self.client.iter_messages(entity, limit=limit, max_id=before_id or 0):
+                if not self.selected(chat_id):
+                    raise ValueError("History snapshot stopped because the source was disabled.")
+                if type(message.id) is not int or not 0 < message.id < previous:
+                    raise ValueError("History reply does not advance the requested cursor.")
+                if getattr(message, "peer_id", None) is not None and utils.get_peer_id(message.peer_id) != chat_id:
+                    raise ValueError("History reply belongs to a different chat.")
+                previous = message.id
                 seen, oldest = seen + 1, message.id
                 if origin and self.own_skipped(message):
                     continue
@@ -4644,8 +4765,14 @@ class Collector:
         if size is None or size > limit:
             return {"file_status": "above_limit" if size else "unknown_size", "file_kind": kind,
                     **({"file_size": size} if size else {})}
-        async with self.export_files_lock:
-            reused = await complete_in_thread(reuse_into, self.store, directory, downloadable_media(message), size)
+        directory = Path(directory).resolve()
+        info = file_hashes.representation(downloadable_media(message))
+        key = ("export", str(directory), canonical(info), size) if info else None
+        async with self.media_locks.hold(key):
+            return await self.export_attachment_file(message, directory, kind, size, limit)
+
+    async def export_attachment_file(self, message, directory, kind, size, limit):
+        reused = await complete_in_thread(reuse_into, self.store, directory, downloadable_media(message), size)
         if reused:
             return {"file": "media/" + reused["sha256"], "file_sha256": reused["sha256"], "file_size": size,
                     "file_kind": kind, "file_reused": reused["source"]}
@@ -4657,7 +4784,7 @@ class Collector:
             if max(current, total) > limit:
                 raise ValueError("above_limit")
         timeout = self.param("media_timeout_seconds") + size // (self.param("media_min_speed_kbps") * 1024)
-        temp = directory / ("part-" + str(message.id))
+        temp = directory / ("part-" + str(message.id) + "-" + secrets.token_hex(8))
         self.download_reserved += size
         try:
             for attempt in range(3):
@@ -4681,8 +4808,7 @@ class Collector:
                             raise ValueError("existing_content_addressed_file_is_corrupt")
                     else:
                         temp.replace(destination)
-                    async with self.export_files_lock:
-                        await complete_in_thread(remember_file, directory, media, digest, written)
+                    await complete_in_thread(remember_file, directory, media, digest, written)
                     return {"file": "media/" + digest, "file_sha256": digest, "file_size": written, "file_kind": kind}
                 except FLOOD_ERRORS as exc:
                     if attempt == 2:
@@ -5090,13 +5216,16 @@ class Collector:
         job = attempt.job
         if size is None or size > job["max_bytes"]:
             raise ValueError("unknown_size_or_above_limit")
-        if shutil.disk_usage(media_root).free - self.download_reserved < size + 64 * 1024**2:
-            raise OSError("insufficient_free_space")
-        self.download_reserved += size
-        try:
-            await self.fetch_media(attempt, message, size, media_root, temp, client)
-        finally:
-            self.download_reserved -= size
+        info = file_hashes.representation(downloadable_media(message))
+        key = ("download", job["account_id"], canonical(info), size) if info else None
+        async with self.media_locks.hold(key):
+            if shutil.disk_usage(media_root).free - self.download_reserved < size + 64 * 1024**2:
+                raise OSError("insufficient_free_space")
+            self.download_reserved += size
+            try:
+                await self.fetch_media(attempt, message, size, media_root, temp, client)
+            finally:
+                self.download_reserved -= size
 
     async def fetch_media(self, attempt, message, size, media_root, temp, client):
         job = attempt.job
@@ -5117,6 +5246,8 @@ class Collector:
                 "media_sha256": known["sha256"], "size": size,
                 "original_name": getattr(message.file, "name", None),
                 "mime_type": getattr(message.file, "mime_type", None),
+                "media_kind": media_kind(message),
+                "duration_seconds": getattr(message.file, "duration", None),
                 "file_reference_refreshed": False, "attachment": info, "downloaded_bytes": 0,
                 "bytes_reused": {"media_event": known["seq"], "meaning": REUSE_MEANING}}))
             return
@@ -5155,6 +5286,8 @@ class Collector:
             "media_sha256": digest, "size": actual_size,
             "original_name": getattr(message.file, "name", None),
             "mime_type": getattr(message.file, "mime_type", None),
+            "media_kind": media_kind(message),
+            "duration_seconds": getattr(message.file, "duration", None),
             "file_reference_refreshed": refreshed,
             **({"attachment": info} if info else {}),
         }))
@@ -5163,11 +5296,10 @@ class Collector:
         client = client or self.client
         if not hasattr(self, "_file_hash_cache"):
             self._file_hash_cache, self._file_hash_cache_bytes = {}, 0
-            self._file_hash_lock = asyncio.Lock()
         media = downloadable_media(message)
         identity = file_hashes.representation(media)
         key = canonical({"account_id": (self.store.get_setting("account", {}) or {}).get("id"), "representation": identity})
-        async with self._file_hash_lock:
+        async with self.media_locks.hold(("hashes", key)):
             if key in self._file_hash_cache:
                 return self._file_hash_cache[key][0]
             try:

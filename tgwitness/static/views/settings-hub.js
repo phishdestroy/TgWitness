@@ -1,5 +1,6 @@
 import {createGroupSettings} from './group-settings.js?v=1';
 import {accountState} from '../components/account-state.js';
+import {createSaveQueue} from '../components/save-queue.js';
 
 export function createSettingsHub(ctx) {
   const {root, wizardRoot, state, json, tr, node, toast, navigate, askConfirm, $, refreshStatus} = ctx;
@@ -29,7 +30,7 @@ export function createSettingsHub(ctx) {
     replica:'Keeps a copy of the journal in storage you choose.',
     outside:'Timestamps, notifications and off-site copies contact services outside Telegram.'};
   const sections=['appearance','level','goal','connection','telegram','chats','collection','protection','notifications','group'];
-  let preferencesQueue=Promise.resolve(), draftQueue=Promise.resolve(), preferencesSequence=0, draftSequence=0, checkSequence=0;
+  let preferencesQueue=createSaveQueue(), draftQueue=createSaveQueue(), preferencesSequence=0, draftSequence=0, checkSequence=0;
   const owner=()=>({generation,profile:state.profile,token:state.token,revision:state.workspaceRevision});
   const signedIn=()=>{const account=accountState(state.status||{});return account.hasSession&&!account.needsSignIn&&!state.authorizing;};
   const number=value=>Number(value).toLocaleString(document.documentElement.lang||undefined);
@@ -126,10 +127,10 @@ export function createSettingsHub(ctx) {
   function savePreferences(patch,who=owner()){
     requireOwner(who);
     prefs={...prefs,...patch};const body={...prefs}, sequence=++preferencesSequence;
-    preferencesQueue=preferencesQueue.catch(()=>{}).then(async()=>{
+    return preferencesQueue.save(async()=>{
       const result=await request(who,'preferences',body);
       if(sequence===preferencesSequence){prefs=result.saved;applyPresentation();}
-    });return preferencesQueue;
+    });
   }
   async function bootstrap({openFirstRun=true}={}) {
     const who=owner(), initialRoute=location.href, draftVersion=draftSequence, preferenceVersion=preferencesSequence;
@@ -175,14 +176,14 @@ export function createSettingsHub(ctx) {
   function saveDraft(patch={},who=owner()){
     requireOwner(who);
     draft={...draft,...patch};const body=draftBody(), sequence=++draftSequence;
-    draftQueue=draftQueue.catch(()=>{}).then(async()=>{
+    return draftQueue.save(async()=>{
       let result;
       try{result=await request(who,'first-run',body);}catch(error){
         if(current(who)&&sequence===draftSequence&&data?.wizard)draft={...data.wizard};
         throw error;
       }
       data=result;if(sequence===draftSequence)draft={...result.wizard};
-    });return draftQueue;
+    });
   }
   async function applyGoal(goal,{first=false,keep=false,quiet=false}={},who=owner()){
     const plan=await request(who,'settings/goal/preview',{goal,keep_manual:keep});
@@ -634,7 +635,9 @@ export function createSettingsHub(ctx) {
   function draftChecked(){return !routeDirty&&fresh(data.connection)&&data.connection.strategy?.mode===draft.route&&!!data.connection.strategy?.allow_direct===draft.allow_direct;}
   function paintConnection(connection){const box=$('hub-connection-result');if(!box)return;box.replaceChildren();
     const ok=fresh(connection);box.className='connection-result '+(ok?'working':'unchecked');
-    box.append(message(ok?tr('Working · {n} ms',{n:number(connection.check.latency_ms)}):'Connection has not been verified.'));
+    box.append(message(ok?tr('Telegram connection')+' · '+tr('Working · {n} ms',{n:number(connection.check.latency_ms)}):'Connection has not been verified.'));
+    if(ok&&connection.check.http_latency_ms!=null)box.append(message('HTTP · '+tr('{n} ms',{n:number(connection.check.http_latency_ms)})));
+    if(connection?.check?.checked_at)box.append(message(when(connection.check.checked_at*1000)));
     if(!ok){
       if(connection?.pool?.listed&&connection.pool.healthy===0&&connection.pool.probed_at){openOptions();box.className='connection-result failed';box.prepend(message('No public proxy answers. Try WARP or your own proxy.'));}
       if(state.view==='first-run')box.append(button('Try WARP',async()=>{draft.route='warp';await renderWizard();}),button('Check again',checkConnection));
@@ -762,6 +765,9 @@ export function createSettingsHub(ctx) {
     const changed=async()=>{if(inSettings){scopeDirty=true;updateScopeSave();}else{await saveDraft();updateNext();}};
     const rerender=async()=>{if(inSettings)render();else await renderWizard();};
     cards(body,[['account','layers:blue','All chats','Includes new chats in continuous collection.'],['selected','check:green','Choose chats','Only the chats you select.'],['folder','inbox:orange','Telegram folder','Use a folder from Telegram.']],draft.scope,async scope=>{
+      if(scope==='account'&&!dialogs&&signedIn())dialogs=await request(who,'dialogs');
+      if(scope==='account'&&draft.scope!=='account'&&(dialogs?.dialogs.length||0)>50
+        &&!await confirm(who,tr('All chats')+' · '+tr('{n} chats',{n:dialogs.dialogs.length})+'\n\n'+tr('Recording sees everything the account sees, including private chats of other people. A separate account keeps your own chats out of the journal and does not risk your main account.')))return;
       draft.scope=scope;await changed();await rerender();});
     if(main){
       for(const key of ['account','folder']){const card=body.querySelector('[data-answer="'+key+'"]');card.disabled=true;card.title=tr('Only on a separate account.');}
@@ -932,7 +938,7 @@ export function createSettingsHub(ctx) {
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;
     },
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue=draftQueue=Promise.resolve();},
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);section=null;shownForm=null;closeSheet();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=shownStep=shownStage=null;levelChosen=moreOpen=methodShown=false;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue.close(ctx.staleView());draftQueue.close(ctx.staleView());preferencesQueue=createSaveQueue();draftQueue=createSaveQueue();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }

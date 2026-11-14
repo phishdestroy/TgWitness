@@ -389,3 +389,7 @@ button.tip-toggle { width: 20px !important; height: 20px !important; min-height:
 .route-advice > span { flex: 1 1 280px; display: flex; align-items: center; gap: 10px; font-size: 13px; line-height: 1.5; }
 .route-advice > span::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--status-warn); }
 .route-advice > button { min-height: 36px; }
+
+.chat-search-form { display: flex; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--border); }
+.chat-search-form input { flex: 1; min-width: 0; width: 100%; }
+.chat-search-form button { flex-shrink: 0; }
