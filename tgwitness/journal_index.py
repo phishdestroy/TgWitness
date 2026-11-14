@@ -291,6 +291,16 @@ def media_fields(payload):
     return priority, size
 
 
+def media_transfer_key(payload):
+    capture = payload.get("media_capture") or {}
+    action = capture.get("action", "download")
+    identity = attachment_key(raw_attachment((payload.get("raw") or {}).get("media")))
+    size = media_fields(payload)[1]
+    if identity is None or size is None or action not in ("download", "hashes_only"):
+        return None
+    return json.dumps([action, identity, size], separators=(",", ":"))
+
+
 def migrate_media(db):
     columns = {r[1] for r in db.execute("PRAGMA table_info(media_jobs)")}
     added = "priority" not in columns
@@ -300,6 +310,12 @@ def migrate_media(db):
         db.execute("ALTER TABLE media_jobs ADD COLUMN estimated_bytes INTEGER")
     if "expedite" not in columns:
         db.execute("ALTER TABLE media_jobs ADD COLUMN expedite INTEGER NOT NULL DEFAULT 0")
+    if "transfer_key" not in columns:
+        db.execute("ALTER TABLE media_jobs ADD COLUMN transfer_key TEXT")
+        for row in db.execute("SELECT j.message_event,e.payload FROM media_jobs j JOIN events e ON e.seq=j.message_event "
+                              "WHERE j.state IN ('queued','retry','running')"):
+            db.execute("UPDATE media_jobs SET transfer_key=? WHERE message_event=?",
+                       (media_transfer_key(json.loads(row["payload"])), row["message_event"]))
     if added:
         for row in db.execute("SELECT j.message_event,e.payload FROM media_jobs j "
                               "JOIN events e ON e.seq=j.message_event"):
@@ -310,3 +326,5 @@ def migrate_media(db):
                "media_jobs(account_id,priority,message_event,next_attempt) WHERE state IN ('queued','retry')")
     db.execute("CREATE INDEX IF NOT EXISTS media_expedited ON "
                "media_jobs(account_id,expedite DESC,priority,message_event) WHERE state IN ('queued','retry')")
+    db.execute("CREATE INDEX IF NOT EXISTS media_active_transfer ON "
+               "media_jobs(account_id,transfer_key) WHERE state='running'")

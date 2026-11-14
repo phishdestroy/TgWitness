@@ -6,7 +6,7 @@ import time
 from collections import OrderedDict, deque
 
 from telethon import types, utils
-from .telegram_client import FLOOD_ERRORS
+from .telegram_client import FLOOD_ERRORS, in_lane
 
 from .security import private_write
 from .store import utcnow
@@ -94,7 +94,7 @@ class AvatarHistory:
             return False
         self.pending.append((key, entity, utcnow()))
         if self.worker is None or self.worker.done():
-            self.worker = loop.create_task(self.run())
+            self.worker = loop.create_task(in_lane("background", self.run))
         return True
 
     async def run(self):

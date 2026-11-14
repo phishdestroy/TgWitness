@@ -15,7 +15,7 @@ behavior, see [how collection works](COLLECTION.md).
 In **More tools → Account → Connection route**, the administrator can choose **This account**, **An account
 group** or **All accounts**, then select a route. **Review selection** lists the
 affected accounts. **Prepare and check** tests the proposed route without changing
-the saved one. **Apply checked connection** checks again, pauses observation if
+the saved one. **Apply checked connection** validates the preview, pauses observation if
 necessary, saves the route and resumes observation that was already running.
 It never starts collection in a previously idle account. History downloads remain
 paused and can be resumed separately. Pause active exports before switching.
@@ -26,6 +26,13 @@ account's result; it is not an all-or-nothing transaction across databases. A
 failed switch restores that account's previous settings. A failure to resume is
 shown explicitly. Previews expire after ten minutes and changes to connection
 settings or group membership require a new check.
+
+Apply reuses a successful preflight result for up to 90 seconds when its route,
+mode and policy are unchanged. A managed tunnel must still have the same running
+process. Older results, changed tunnel processes and automatic MTProxy pool routes
+are checked again. The signed application record retains the original check time
+and records reuse and its age. Each preflight closes its temporary unauthenticated
+client; the collector connects using its own authorized session.
 
 | Route | What TgWitness manages |
 | --- | --- |

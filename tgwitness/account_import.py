@@ -244,6 +244,11 @@ def preview(files, passcode="", languages=None):
             "No session — only application settings. Add a .session or TData file, or sign in by phone or QR."}
 
 
+def frozen_config(answer):
+    values = getattr(getattr(answer, "config", None), "value", None) or []
+    return any(isinstance(item, types.JsonObjectValue) and item.key == "freeze_since_date" for item in values)
+
+
 CHECK_SECONDS = 20
 CHECK_STATES = {"session_revoked": "revoked", "session_expired": "revoked", "session_ended": "revoked",
                 "not_authorized": "revoked", "account_banned": "banned", "account_deleted": "banned",
@@ -299,8 +304,7 @@ async def check_session(collector, account, api_id=None, api_hash=None, language
             if not account_loss_cause(exc):
                 raise
             return lost(account_loss_cause(exc), telegram_error(exc))
-        values = getattr(getattr(answer, "config", None), "value", None) or []
-        if any(isinstance(item, types.JsonObjectValue) and item.key == "freeze_since_date" for item in values):
+        if frozen_config(answer):
             return lost("account_frozen")
         return {"state": "alive",
                 "message": "The session is active. The check only read this account's profile and settings.",

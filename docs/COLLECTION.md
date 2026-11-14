@@ -337,6 +337,30 @@ work has separate outcomes; a file counts as preserved when its `media.saved` re
 The completed file must also match the byte count in the original observed attachment
 descriptor. A short or unexpectedly long response is not recorded as preserved media.
 
+Within one workspace, concurrent queued jobs for the same attachment representation
+wait for the active transfer, then recheck its saved bytes before reuse. Each job keeps
+its own signed outcome and reference to the earlier saved-file record. Cancelling a
+waiting job does not cancel the active transfer; if that transfer fails or is cancelled,
+the next job can try again. Different attachments can download concurrently.
+
+Jobs with the same account, representation, expected size and capture action stay
+queued while one matching job is running. They do not occupy download slots, so
+other files can start even when the queue begins with many copies of one slow file.
+Completing an attempt wakes the queue. Priority lanes, saved retry delays and
+history ownership still apply; each observation receives its own outcome.
+
+Chat exports also share an active transfer for repeated file representations within
+the same export directory. Each message retains its attachment reference, and reuse
+requires a fresh size and SHA-256 check. Different files can be checked in parallel
+without holding a common transfer lock. Temporary download and copy paths are unique
+to each operation; cancellation waits for any active local file reader before cleanup.
+The export file index serializes only metadata access, not file hashing or downloads.
+
+Server-hash reads for different attachments also run concurrently, sharing the client's
+three file-request slots with byte downloads. Repeated reads of the same representation
+reuse only a complete cached result. File reads leave the ordinary request queue free;
+saved FloodWait deadlines are checked again when a request gets a slot.
+
 Limits are set **per type**: photos, videos, GIFs and animations, round video messages,
 voice messages, music and audio, stickers, and files. Each type can be turned off and has
 its own size limit from 1 to 2,000 MiB; new workspaces start with 20 MiB for photos,

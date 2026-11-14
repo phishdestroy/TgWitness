@@ -9609,5 +9609,7 @@
   "Search matched an earlier saved version.": "검색 결과 이전에 저장된 버전과 일치했습니다.",
   "Search saved messages": "저장된 메시지 검색",
   "{n} saved versions": "{n}개의 저장된 버전",
-  "Chat loading: {running} active · {pending} pending": "채팅 불러오기: {running}개 진행 중 · {pending}개 대기 중"
+  "Chat loading: {running} active · {pending} pending": "채팅 불러오기: {running}개 진행 중 · {pending}개 대기 중",
+  "The Telegram connection changed. Retry the operation.": "Telegram 연결이 변경되었습니다. 작업을 다시 시도하세요.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "프록시 소스 설정을 읽을 수 없습니다. 프록시 목록을 사용하기 전에 proxy-sources.json을 복원하세요."
 }
