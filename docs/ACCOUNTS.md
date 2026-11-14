@@ -114,6 +114,11 @@ tokens or API hashes. They never accept terms or install updates. A request
 failure or FloodWait stops subsequent requests; a missing result stays unknown.
 Local checks can still report their results while network checks are skipped.
 
+Concurrent requests to restore one workspace's connection share its client and
+wait for its connection setup to finish. A failed or cancelled attempt releases
+the next request to retry. If the saved credentials, client or authorization state
+change during setup, the older attempt stops instead of reporting a ready connection.
+
 FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers,
 the server-requested wait and the effective deadline in `telegram.backoff`.
 Connection details show the method and deadline while requests are paused.

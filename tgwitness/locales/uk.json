@@ -9753,5 +9753,6 @@
   "Search matched an earlier saved version.": "Пошук знайшов збіг із раніше збереженою версією.",
   "Search saved messages": "Пошук збережених повідомлень",
   "{n} saved versions": "{n} збережених версій",
-  "Chat loading: {running} active · {pending} pending": "Завантаження чатів: {running} завантажуються · {pending} у черзі"
+  "Chat loading: {running} active · {pending} pending": "Завантаження чатів: {running} завантажуються · {pending} у черзі",
+  "The Telegram connection changed. Retry the operation.": "З’єднання з Telegram змінилося. Повторіть дію."
 }

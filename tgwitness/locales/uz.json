@@ -9657,5 +9657,6 @@
   "Search matched an earlier saved version.": "Qidiruv oldin saqlangan versiyani topdi.",
   "Search saved messages": "Saqlangan xabarlarni qidirish",
   "{n} saved versions": "{n} saqlangan versiyalar",
-  "Chat loading: {running} active · {pending} pending": "Chatlarni yuklash: {running} ta faol · {pending} ta navbatda"
+  "Chat loading: {running} active · {pending} pending": "Chatlarni yuklash: {running} ta faol · {pending} ta navbatda",
+  "The Telegram connection changed. Retry the operation.": "Telegram ulanishi o‘zgardi. Amalni qayta bajaring."
 }
