@@ -22,7 +22,7 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   eventBefore:null,eventAfter:null,eventMatched:null,cursor: null, request: 0, drawerSeq: null,
   profile: sessionStorage.getItem("tgwitness-profile") || "default", profiles: [], demoToken: "", monitoringDirty: false,
   captureDirty: false, workspaceRevision: 0, verification: null, opened:false, connectionSettings:false,
-  chat: null, chats: [], chatsLoading: false, chatsError: false, chatMessages: [], chatNextBefore: null, chatNextAfter: null, chatInfo: null, chatFilter: "all", chatView: "messages", chatAuthor: null,
+  chat: null, chats: [], chatsLoading: false, chatsError: false, chatMessages: [], chatNextBefore: null, chatNextAfter: null, chatInfo: null, chatFilter: "all", chatSearch: "", chatView: "messages", chatAuthor: null,
   scope: null, scopeDirty: false, dossier: null, notifications: [], witnessToken: null, parameters: null, parametersDirty: false,
   me: null, access: null, accessEdit: null, accessChats: {}, consoleAfter: 0,
   accountExportJobs: [], accountExportDefaults: null, accountExportCapabilities: null,
@@ -1780,7 +1780,8 @@ async function switchProfile(id,options={}){
   if(options.history!==false)window.TgWitnessRouter?.record({workspace:id,chatId:null,seq:null});
   state.events=[];state.dialogs=[];state.cursor=null;state.filter="";state.source="";state.search="";state.eventSince="";state.eventUntil="";state.eventSystem=false;
   state.eventBefore=state.eventAfter=state.eventMatched=null;
-  state.chat=null;state.chats=[];state.chatsLoading=false;state.chatsError=false;state.chatMessages=[];state.chatNextBefore=null;state.chatNextAfter=null;state.chatInfo=null;state.chatFilter="all";state.chatView="messages";state.chatAuthor=null;
+  clearTimeout(chatSearchTimer);$("chat-message-search").value="";
+  state.chat=null;state.chats=[];state.chatsLoading=false;state.chatsError=false;state.chatMessages=[];state.chatNextBefore=null;state.chatNextAfter=null;state.chatInfo=null;state.chatFilter="all";state.chatSearch="";state.chatView="messages";state.chatAuthor=null;
   state.scope=null;state.scopeDirty=false;state.dossier=null;state.notifications=[];resetWitnessSetup();
   closeNotifications();renderNotifications();renderExportState(null);
   state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;
@@ -5274,16 +5275,30 @@ function beginChat(id){
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
   chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
+  clearTimeout(chatSearchTimer);state.chatSearch="";$("chat-message-search").value="";
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
   renderComposer();renderChat();renderChatsList();
 }
+function setChatQuery(changes){
+  clearTimeout(chatSearchTimer);
+  Object.assign(state,{chatSearch:$("chat-message-search").value},changes);
+  $("chat-message-search").value=state.chatSearch;state.chatView="messages";
+  state.chatMessages=[];state.chatNextBefore=null;state.chatNextAfter=null;chatReady=false;
+  renderChatStatus();renderChatFeed();renderComposer();
+  return loadChatMessages("open");
+}
+$("chat-search-form").addEventListener("submit",event=>{event.preventDefault();setChatQuery({});});
+$("chat-message-search").addEventListener("input",()=>{
+  clearTimeout(chatSearchTimer);chatSearchTimer=setTimeout(()=>setChatQuery({}),250);
+});
+$("chat-search-clear").addEventListener("click",()=>{setChatQuery({chatSearch:""});$("chat-message-search").focus();});
 async function openChat(id,options={}){
   viewQuery("chats",".chats-shell").dataset.panel="chat";
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
-  if(loaded&&state.chat===id&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&may("sources")&&!chatAutoLoaded.has(key)){
+  if(loaded&&state.chat===id&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null&&!state.chatMessages.length&&info?.enabled&&c?.running&&!s.demo&&may("sources")&&!chatAutoLoaded.has(key)){
     chatAutoLoaded.add(key);loadHistory(null,100,null,true).catch(()=>{});
   }
   return loaded;
@@ -5300,6 +5315,9 @@ async function loadChatMessages(mode){
   if(mode==='refresh'&&(chatPagePending?.generation===generation||state.chatNextAfter!==null||(state.chatView==='messages'&&!atBottom))){renderChat();return true;}
   if((mode==='older'&&state.chatNextBefore===null)||(mode==='newer'&&state.chatNextAfter===null))return true;
   const request=++chatPageRequest,params=new URLSearchParams({limit:String(mode==='refresh'?Math.min(200,Math.max(60,state.chatMessages.length)):60)});
+  params.set("filter",state.chatFilter);
+  if(state.chatSearch)params.set("q",state.chatSearch);
+  if(state.chatAuthor!==null)params.set("author_id",String(state.chatAuthor));
   if(mode==="older")params.set("before_id",String(state.chatNextBefore));
   if(mode==="newer")params.set("after_id",String(state.chatNextAfter));
   chatPagePending={request,generation};
@@ -5317,7 +5335,7 @@ async function loadChatMessages(mode){
   const known=state.chatMessages.reduce((last,m)=>Math.max(last,m.message_id),0);
   const bounds=feed.getBoundingClientRect(),visible=[...feed.querySelectorAll('.msg,.chat-service[id]')].find(row=>{const r=row.getBoundingClientRect();return r.bottom>bounds.top&&r.top<bounds.bottom;});
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
-  const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&result.messages.length&&result.messages[0].message_id>known);
+  const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
   const previousBefore=state.chatNextBefore,previousAfter=state.chatNextAfter;
   if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);
   const merged=new Map((reset?[]:state.chatMessages).map(m=>[m.message_id,m]));
@@ -5333,7 +5351,8 @@ async function loadChatMessages(mode){
 
   if(mode==="open")replay(feed,"entering",900);
   else if(mode==="refresh")state.chatMessages.forEach(m=>{if(m.message_id>known)$("msg-"+m.message_id)?.classList.add("fresh");});
-  if(mode==="open"||mode==='latest'||(mode==="refresh"&&atBottom))feed.scrollTop=feed.scrollHeight;
+  if(mode==="open"||mode==='latest')feed.scrollTop=state.chatSearch?0:feed.scrollHeight;
+  else if(mode==="refresh"&&atBottom)feed.scrollTop=feed.scrollHeight;
   else{const kept=anchor&&feed.querySelector('#'+CSS.escape(anchor.id));
     if(kept)feed.scrollTop+=kept.getBoundingClientRect().top-feed.getBoundingClientRect().top-anchor.offset;else feed.scrollTop=top;}
   return true;
@@ -5362,7 +5381,7 @@ function renderChat(){
   const split=typeof info.deleted_saved==="number",saved=split?info.saved:info.messages||0;
   const metrics=[[null,null,kind,""],["all","message",trn("{n} message","{n} messages",saved),""],
     ["deleted","trash",info.deleted?tr("{n} deleted",{n:info.deleted}):"","deleted"],
-    ["deleted","question",info.missing?tr("{n} not found on recheck",{n:info.missing}):"","missing"],
+    ["missing","question",info.missing?tr("{n} not found on recheck",{n:info.missing}):"","missing"],
     ["edited","edit",info.edited?tr("{n} edited",{n:info.edited}):"","edited"]].filter(item=>item[2]);
   const sub=$("chat-sub"),summaryKey=JSON.stringify([state.chat,metrics]);
   if(sub.dataset.key!==summaryKey){
@@ -5372,7 +5391,7 @@ function renderChat(){
       if(!filter){sub.append(node("span","",label));return;}
       const chip=node("button","chat-metric");chip.type="button";chip.dataset.chatFilter=filter;if(tone)chip.dataset.tone=tone;
       chip.append(icon(glyph),node("span","",label));
-      chip.addEventListener("click",()=>{state.chatFilter=filter!=="all"&&state.chatFilter===filter?"all":filter;state.chatView="messages";renderChatStatus();renderChatFeed();renderComposer();});
+      chip.addEventListener("click",()=>setChatQuery({chatFilter:filter!=="all"&&state.chatFilter===filter?"all":filter}));
       sub.append(chip);
     });
   }
@@ -5385,6 +5404,8 @@ function renderChat(){
 function renderChatStatus(){
   if(state.view!=='chats')return;
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
+  $("chat-search-form").hidden=state.chatView!=="messages";
+  $("chat-search-clear").hidden=!state.chatSearch;
   for(const chip of $("chat-sub").querySelectorAll("button[data-chat-filter]"))chip.setAttribute("aria-pressed",String(chip.dataset.chatFilter!=="all"&&state.chatView==="messages"&&chip.dataset.chatFilter===state.chatFilter));
   const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
     current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
@@ -5409,11 +5430,11 @@ function renderChatStatus(){
     if(allowed){chip.type='button';chip.setAttribute('aria-label',label+' · '+tr('Recording settings'));chip.addEventListener('click',()=>busy(chip,openRecordingSettings));}mode.append(chip);
   }
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
-  for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["media",tr("Media")]]){
+  for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["missing",tr("Not found at recheck")],["edited",tr("Edited")],["media",tr("Media")]]){
     const f=node("button","filter"+(state.chatFilter===key?" active":""),label);f.type="button";
     f.dataset.chatFilter=key;
     f.setAttribute("aria-pressed",String(state.chatFilter===key));
-    f.addEventListener("click",()=>{state.chatFilter=key;renderChatStatus();renderChatFeed();});filters.append(f);
+    f.addEventListener("click",()=>setChatQuery({chatFilter:key}));filters.append(f);
   }
   const tabs=node('div','chat-view-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label',tr('Chat views'));
   const views=[['messages',tr('Messages')],['activity',tr('People')],['people',tr('Authors')],['profile',tr('Profile')]];
@@ -5424,7 +5445,7 @@ function renderChatStatus(){
         if(revision===state.workspaceRevision)await window.TgWitnessAnalysis?.focusChat(chat);});return;}
       state.chatView=name;renderChatStatus();renderChatFeed();renderComposer();});tabs.append(tab);}
   const toolbar=node("details","action-menu chat-filter-row"),summary=node('summary'),filterPanel=node('div','action-menu-panel');
-  summary.append(icon('settings'),node('span','',tr({all:'Filters',deleted:'Deleted',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters')));
+  summary.append(icon('settings'),node('span','',tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters')));
   filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';
   const recording=$('chat-recording-options');recording.replaceChildren();
   if(!s.demo){
@@ -5477,7 +5498,7 @@ function renderChatStatus(){
     const who=state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),chip=node("div","chat-author-chip");
     const author=who?senderName(who):"ID "+state.chatAuthor;chip.append(node("span","",tr("Showing only messages from {name}",{name:author})));
     const clear=node("button","text-link",tr("Show everyone"));clear.type="button";
-    clear.addEventListener("click",()=>{state.chatAuthor=null;renderChatStatus();renderChatFeed();});chip.append(clear);box.append(chip);
+    clear.addEventListener("click",()=>setChatQuery({chatAuthor:null}));chip.append(clear);box.append(chip);
   }
   const blocked=s.demo||!c.has_session||!info.enabled||(c.available_for_export===false&&!c.running);
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
@@ -5520,7 +5541,7 @@ function renderChatFeed(){
     active.matches(".sender-details > summary")?".sender-details > summary":null;
   const oldRows=new Map([...feed.querySelectorAll('.msg')].map(row=>[row.id,row])),days=new Map([...feed.querySelectorAll('.chat-day')].map(day=>[day.dataset.day,day])),next=[],replaced=new Set();
   if(!chatReady){feed.replaceChildren(viewState("loading",tr("Loading…")));return;}
-  const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:state.chatFilter==='media'?m.has_media||m.media.length:m.edited))
+  const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted:state.chatFilter==="missing"?m.missing&&!m.deleted:state.chatFilter==='media'?m.has_media||m.media.length:m.edited))
     &&(state.chatAuthor===null||m.sender?.id===state.chatAuthor));
   const pickable=shown.filter(m=>!m.service_action).map(m=>m.message_id);
   if(pickable.length!==chatShown.length||pickable.some((id,index)=>id!==chatShown[index])){chatShown=pickable;if(chatPick)renderChatStatus();}
@@ -5535,7 +5556,7 @@ function renderChatFeed(){
   if(state.chatNextBefore){let older=feed.querySelector('.chat-older');if(!older){older=node("button","quiet chat-older",tr("Show older messages"));older.type="button";
     older.addEventListener("click",()=>busy(older,()=>loadChatMessages("older")));}next.push(older);}
   else{const info=state.chatInfo,c=s.collector,first=state.chatMessages[0]?.message_id;
-    if(first>1&&state.chatView==='messages'&&state.chatFilter==='all'&&state.chatAuthor===null&&info?.enabled&&c.has_session&&!s.demo&&may('sources')
+    if(first>1&&state.chatView==='messages'&&state.chatFilter==='all'&&!state.chatSearch&&state.chatAuthor===null&&info?.enabled&&c.has_session&&!s.demo&&may('sources')
       &&!chatTelegramTop.has(state.profile+":"+state.chat)&&!(c.available_for_export===false&&!c.running)){
       let earlier=feed.querySelector('.chat-earlier');if(!earlier){earlier=node("button","quiet chat-older chat-earlier",tr("Load earlier messages from Telegram"));earlier.type="button";
         earlier.addEventListener("click",()=>loadHistory(earlier,100,state.chatMessages[0]?.message_id));}next.push(earlier);}}
@@ -5547,8 +5568,8 @@ function renderChatFeed(){
     next.push(controls);
   };
   if(!shown.length){
-    const filtered=state.chatFilter!=="all"||state.chatAuthor!==null;
-    const empty=filtered?viewState("filtered-empty",tr("No messages match these filters"),tr(state.chatNextBefore?"Older messages are not loaded yet — use “Show older messages”.":"Try another filter or show all saved messages."),tr("Clear filters"),()=>{state.chatFilter="all";state.chatAuthor=null;renderChatStatus();renderChatFeed();}):
+    const filtered=state.chatFilter!=="all"||!!state.chatSearch||state.chatAuthor!==null;
+    const empty=filtered?viewState("filtered-empty",tr("No messages match these filters"),tr("Search and filters cover all saved messages in this chat, including earlier versions."),tr("Clear filters"),()=>setChatQuery({chatFilter:"all",chatAuthor:null,chatSearch:""})):
       viewState("empty",tr("No messages saved for this chat yet"),tr(s.demo?"This demo chat has no messages.":"Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions."),tr("Load last 100 messages"),!s.demo&&s.collector.has_session&&info.enabled?()=>loadHistory(null,100):null);
     empty.classList.add("chat-feed-empty");
     next.push(empty);newer();placeChildren(feed,next);return;
@@ -5558,7 +5579,7 @@ function renderChatFeed(){
   const joins=(a,b)=>!!a&&!!b&&!a.service_action&&!b.service_action&&(a.sender?.id??null)!==null&&a.sender?.id===b.sender?.id&&
     panelTime.dayKey(sentAt(a))===panelTime.dayKey(sentAt(b))&&instant(b)>=instant(a)&&instant(b)-instant(a)<300000;
   let lastDay=null,lastShown=null;
-  const marking=chatGaps&&state.chatFilter==="all"&&state.chatAuthor===null,marksBefore=new Map();
+  const marking=chatGaps&&state.chatFilter==="all"&&!state.chatSearch&&state.chatAuthor===null,marksBefore=new Map();
   if(marking){
     const times=shown.map(m=>new Date(m.sent_at||m.versions[0]?.observed_at||NaN).getTime()).filter(Number.isFinite),edge=time=>new Date(time).toISOString().replace('Z','+00:00');
     const range=times.length?{since:edge(times.reduce((a,b)=>Math.min(a,b))-86400000),until:state.chatNextAfter===null?null:edge(times.reduce((a,b)=>Math.max(a,b))+86400000)}:{since:null,until:null};
@@ -5629,7 +5650,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(changePill){changePill.type="button";changePill.setAttribute("aria-expanded","false");
     changePill.addEventListener("click",()=>{const open=changePill.getAttribute("aria-expanded")!=="true";changePill.setAttribute("aria-expanded",String(open));
       hideTooltip();let note=bubble.querySelector(".change-note");if(!note){note=node("p","change-note",changePill.title);bubble.append(note);}note.hidden=!open;});}
-  if(m.versions.length>1){const e=mark("button","pill-edited","edit",tr("Edited · {n} versions",{n:m.versions.length}),tr("Show every saved version"));e.type="button";
+  if(m.versions.length>1){const e=mark("button","pill-edited","edit",tr(m.edited?"Edited · {n} versions":"{n} saved versions",{n:m.versions.length}),tr("Show every saved version"));e.type="button";
     e.setAttribute("aria-expanded","false");
     e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");e.setAttribute("aria-expanded",String(!open));if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});}
   else if(m.edited)mark("span","pill-edited","edit",tr("Edited"),tr("Telegram marks this message as edited; the earlier text was not saved."));
@@ -5640,6 +5661,9 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
       composeReply=m.message_id;composeOpen=true;renderComposer();$("chat-message").focus();});meta.append(reply);}
+  if(state.chatSearch&&m.versions.some(v=>v.matches_search)&&!m.current_version?.matches_search){
+    bubble.append(node("p","hint",tr("Search matched an earlier saved version.")),versionsNode(m));
+  }
   bubble.append(meta);row.append(bubble);
   if(chatPick){
     const chosen=chatPick.has(m.message_id),box=node("button","msg-pick");box.type="button";box.setAttribute("role","checkbox");box.setAttribute("aria-checked",String(chosen));
@@ -5649,7 +5673,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
       if(!chatPick||event.target.closest("a,button:not(.msg-pick),summary,input,select,textarea,video,audio,.versions,.sender-facts,.change-note"))return;
       event.stopImmediatePropagation();if(event.shiftKey)event.preventDefault();togglePick(m.message_id,event.shiftKey);},{capture:true});
   }
-  const version=m.versions.at(-1);
+  const version=m.current_version||m.versions.at(-1);
   const ref=version||m.reference;
   if(ref)boardView?.attach(row,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id,payload:{text:version?.text||''}},version?bubble.querySelector('.bubble-text'):null);
   return row;
@@ -5682,7 +5706,7 @@ async function renderPeople(feed){
     row.children[row.children.length-2].append(timeNode(p.first_message_at));row.lastElementChild.append(timeNode(p.last_message_at));
     if(p.id!==null){row.tabIndex=0;row.title=tr(profiled&&p.id!==id?"Open this person's profile":"Show this person's messages");
       const open=profiled&&p.id!==id?()=>openDossier(p.id).catch(e=>toast(e.message,true)):
-        ()=>{state.chatAuthor=p.id;state.chatFilter="all";state.chatView='messages';renderChatStatus();renderChatFeed();renderComposer();};
+        ()=>setChatQuery({chatAuthor:p.id,chatFilter:"all"});
       row.addEventListener("click",open);row.addEventListener("keydown",e=>{if(e.key==="Enter")open();});}
     body.append(row);
   }
@@ -5817,7 +5841,7 @@ async function openDossier(personId){
     factSection(tr("Phone numbers mentioned"),m.phones),factSection(tr("Usernames mentioned"),m.usernames),factSection(tr("Links"),m.links),
     factSection(tr("Matches of your patterns"),m.patterns||[],item=>item.value+(item.detail?" · "+item.detail:"")));
   const show_=node("button","secondary",tr("Show this person's messages"));show_.type="button";
-  show_.addEventListener("click",()=>{closeDetail();state.chatAuthor=person.id;state.chatFilter="all";state.chatView='messages';renderChatStatus();renderChatFeed();renderComposer();});
+  show_.addEventListener("click",()=>{closeDetail();setChatQuery({chatAuthor:person.id,chatFilter:"all"});});
   const limits=node("details","detail-block");limits.append(node("summary","",tr("What a profile can and cannot show")));
   const ul=node("ul");statement.limitations.forEach(x=>ul.append(node("li","",x)));limits.append(ul);
   content.append(show_,limits,node("p","detail-hash",tr("Built {time} from {n} journal records · signed with this workspace's key",{time:fmtFull(statement.built_at),n:Object.keys(statement.record_hashes).length})));
@@ -5825,8 +5849,11 @@ async function openDossier(personId){
 }
 function versionsNode(m){
   const box=node("div","versions");box.append(node("div","versions-title",tr("Saved versions, oldest first")));
-  m.versions.forEach((v,i)=>{const item=node("div","version"+(i===m.versions.length-1?" current":""));
-    item.append(node("small","",(i===0?tr("First saved"):tr("Edit {n}",{n:i}))+" · "+tr("saved {time}",{time:fmtFull(v.observed_at)})));
+  const current=m.current_version||m.versions.at(-1);
+  m.versions.forEach((v,i)=>{const item=node("div","version"+(v.seq===current?.seq?" current":""));
+    item.append(node("small","",tr("Saved version {n}",{n:i+1})+" · "+tr("saved {time}",{time:fmtFull(v.observed_at)})));
+    if(v.seq===current?.seq)item.append(node("small","",tr("Displayed version")));
+    if(v.matches_search)item.append(node("small","",tr("Search match")));
     const sensitive=window.TgWitnessPrivacy.enabled&&(window.TgWitnessPrivacy.ranges(v.text).length||i&&window.TgWitnessPrivacy.ranges(m.versions[i-1].text).length);
     const presentation=value=>JSON.parse(window.TgWitnessPrivacy.recordPreview(value));
     item.append(i&&!sensitive?window.TgWitnessReview.compare(presentation(m.versions[i-1]),presentation(v),tr):messageText(v.text||tr("(no text)"),m,"version-text"));
@@ -5856,7 +5883,7 @@ function buttonsNode(keyboard,message=null){
         press.addEventListener("click",()=>busy(press,async()=>{
           if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision||chat!==state.chat)return;
           await panelAction({action:"press",chat_id:chat,message_id:message.message_id,
-            keyboard_event:message.versions.at(-1).seq,row:rowIndex,column},{profile,revision});
+            keyboard_event:(message.current_version||message.versions.at(-1)).seq,row:rowIndex,column},{profile,revision});
         }));item.append(press);
       }
       line.append(item);
@@ -5868,7 +5895,7 @@ function buttonsNode(keyboard,message=null){
 
 
 let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
-let chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
+let chatSearchTimer=null,chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
 const CHAT_PICK_LIMIT=1000;
 let chatPickAnchor=null;
 function renderPick(focus){

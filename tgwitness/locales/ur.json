@@ -9649,5 +9649,12 @@
   "Select at least one available account.": "کم از کم ایک دستیاب اکاؤنٹ منتخب کریں۔",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} دستیاب اکاؤنٹس منتخب۔ ہر اکاؤنٹ اپنی کنکشن اور درخواست کی حدیں برقرار رکھتا ہے۔",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "ہر اکاؤنٹ مشاہدے کے ساتھ ایک ہسٹری یا ایکسپورٹ ٹاسک چلاتا ہے۔ پاز کنٹرولز آزاد ہیں؛ متعین کردہ حصے پاز کے بعد بھی دستیاب رہتے ہیں۔",
-  "Select all available accounts": "تمام دستیاب اکاؤنٹس منتخب کریں"
+  "Select all available accounts": "تمام دستیاب اکاؤنٹس منتخب کریں",
+  "Clear search": "تلاش صاف کریں",
+  "Displayed version": "نمایاں کردہ ورژن",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "سرچ اور فلٹرز اس چیٹ کے تمام محفوظ شدہ پیغامات، بشمول پرانی ورژنز، پر لاگو ہوتے ہیں۔",
+  "Search match": "سرچ میچ",
+  "Search matched an earlier saved version.": "سرچ نے ایک پہلے محفوظ شدہ ورژن سے میل کھایا۔",
+  "Search saved messages": "محفوظ شدہ پیغامات تلاش کریں",
+  "{n} saved versions": "{n} محفوظ شدہ ورژنز"
 }

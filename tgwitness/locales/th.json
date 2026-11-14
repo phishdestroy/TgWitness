@@ -9601,5 +9601,12 @@
   "Select at least one available account.": "เลือกบัญชีที่มีอยู่อย่างน้อยหนึ่งบัญชี",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} บัญชีที่เลือกไว้แล้ว แต่ละบัญชีมีขีดจำกัดการเชื่อมต่อและคำขอของตัวเอง",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "แต่ละบัญชีจะทำงานหนึ่งงานประวัติหรือการส่งออกควบคู่ไปกับการสังเกตการณ์ การควบคุมการหยุดชั่วคราวเป็นอิสระกัน; ส่วนที่บันทึกไว้แล้วยังคงใช้งานได้หลังการหยุดชั่วคราว",
-  "Select all available accounts": "เลือกบัญชีทั้งหมดที่มีอยู่"
+  "Select all available accounts": "เลือกบัญชีทั้งหมดที่มีอยู่",
+  "Clear search": "ล้างการค้นหา",
+  "Displayed version": "เวอร์ชันที่แสดง",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "การค้นหาและตัวกรองครอบคลุมข้อความที่บันทึกไว้ทั้งหมดในแชทนี้ รวมถึงเวอร์ชันก่อนหน้าด้วย",
+  "Search match": "ผลการค้นหาที่ตรงกัน",
+  "Search matched an earlier saved version.": "การค้นหาพบเวอร์ชันที่บันทึกไว้ก่อนหน้านี้",
+  "Search saved messages": "ค้นหาข้อความที่บันทึกไว้",
+  "{n} saved versions": "{n} เวอร์ชันที่บันทึกไว้"
 }

@@ -9745,5 +9745,12 @@
   "Select at least one available account.": "Виберіть принаймні один доступний обліковий запис.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "Вибрано {n} доступних облікових записів. Кожен обліковий запис має власні обмеження щодо підключень та запитів.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Кожен обліковий запис виконує одне завдання з історії або експорту паралельно зі спостереженням. Елементи керування паузою є незалежними; зафіксовані фрагменти залишаються доступними після паузи.",
-  "Select all available accounts": "Вибрати всі доступні акаунти"
+  "Select all available accounts": "Вибрати всі доступні акаунти",
+  "Clear search": "Очистити пошук",
+  "Displayed version": "Відображена версія",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "Пошук та фільтри охоплюють усі збережені повідомлення в цьому чаті, включаючи попередні версії.",
+  "Search match": "Збіг пошуку",
+  "Search matched an earlier saved version.": "Пошук знайшов збіг із раніше збереженою версією.",
+  "Search saved messages": "Пошук збережених повідомлень",
+  "{n} saved versions": "{n} збережених версій"
 }

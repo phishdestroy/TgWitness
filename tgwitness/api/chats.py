@@ -516,6 +516,9 @@ async def chat_messages(
     before_id: int | None = None,
     limit: int = 60,
     after_id: int | None = None,
+    filter: Literal["all", "deleted", "edited", "media", "missing"] = "all",
+    q: str = Query(default="", max_length=512),
+    author_id: int | None = None,
     *,
     ctx=Depends(current_context),
 ):
@@ -524,14 +527,18 @@ async def chat_messages(
     if before_id is not None and after_id is not None:
         raise HTTPException(422, "Choose one message cursor.")
     return await asyncio.to_thread(
-        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id
+        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id, filter, q, author_id
     )
 
 
-def message_page(store, chat_id, before_id, limit, after_id):
+def message_page(store, chat_id, before_id, limit, after_id, mode="all", search="", author_id=None):
     from ..gap_analysis import page_gaps
 
-    result = store.chat_messages(chat_id, before_id, limit, after_id=after_id)
+    result = store.chat_messages(chat_id, before_id, limit, after_id=after_id,
+                                 mode=mode, search=search, author_id=author_id)
+    if mode != "all" or search or author_id is not None:
+        result["gaps"] = []
+        return result
     result["gaps"] = page_gaps(
         store,
         chat_id,

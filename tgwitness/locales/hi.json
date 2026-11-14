@@ -9649,5 +9649,12 @@
   "Select at least one available account.": "कम से कम एक उपलब्ध खाते का चयन करें।",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} उपलब्ध खाते चुने गए। प्रत्येक खाता अपना स्वयं का कनेक्शन और अनुरोध सीमाएँ रखता है।",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "प्रत्येक खाता अवलोकन के साथ एक इतिहास या निर्यात कार्य चलाता है। पॉज़ नियंत्रण स्वतंत्र हैं; एक पॉज़ के बाद प्रतिबद्ध चंक्स उपलब्ध रहते हैं।",
-  "Select all available accounts": "सभी उपलब्ध खातों का चयन करें"
+  "Select all available accounts": "सभी उपलब्ध खातों का चयन करें",
+  "Clear search": "खोज साफ़ करें",
+  "Displayed version": "प्रदर्शित संस्करण",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "खोज और फ़िल्टर इस चैट में सहेजे गए सभी संदेशों को कवर करते हैं, जिसमें पिछले संस्करण भी शामिल हैं।",
+  "Search match": "खोज मिलान",
+  "Search matched an earlier saved version.": "खोज से एक पुराना सहेजा गया संस्करण मिला।",
+  "Search saved messages": "सहेजे गए संदेश खोजें",
+  "{n} saved versions": "{n} सहेजे गए संस्करण"
 }

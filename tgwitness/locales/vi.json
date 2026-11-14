@@ -9601,5 +9601,12 @@
   "Select at least one available account.": "Chọn ít nhất một tài khoản khả dụng.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "Đã chọn {n} tài khoản có sẵn. Mỗi tài khoản duy trì giới hạn kết nối và yêu cầu riêng.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Mỗi tài khoản chạy một tác vụ lịch sử hoặc xuất dữ liệu song song với quá trình quan sát. Các điều khiển tạm dừng hoạt động độc lập; các khối dữ liệu đã được cam kết vẫn có sẵn sau khi tạm dừng.",
-  "Select all available accounts": "Chọn tất cả các tài khoản có sẵn"
+  "Select all available accounts": "Chọn tất cả các tài khoản có sẵn",
+  "Clear search": "Xóa tìm kiếm",
+  "Displayed version": "Phiên bản được hiển thị",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "Tính năng tìm kiếm và bộ lọc bao gồm tất cả các tin nhắn đã lưu trong cuộc trò chuyện này, bao gồm cả các phiên bản trước đó.",
+  "Search match": "Kết quả tìm kiếm khớp",
+  "Search matched an earlier saved version.": "Kết quả tìm kiếm khớp với một phiên bản đã lưu trước đó.",
+  "Search saved messages": "Tìm kiếm tin nhắn đã lưu",
+  "{n} saved versions": "{n} phiên bản đã lưu"
 }

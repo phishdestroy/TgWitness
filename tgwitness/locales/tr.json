@@ -9649,5 +9649,12 @@
   "Select at least one available account.": "En az bir kullanılabilir hesap seçin.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} adet kullanılabilir hesap seçildi. Her hesap kendi bağlantı ve istek sınırlarını korur.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Her hesap, gözlemle birlikte bir geçmiş veya dışa aktarma görevi yürütür. Duraklatma kontrolleri bağımsızdır; kaydedilmiş parçalar, duraklatma sonrasında da kullanılabilir durumda kalır.",
-  "Select all available accounts": "Mevcut tüm hesapları seçin"
+  "Select all available accounts": "Mevcut tüm hesapları seçin",
+  "Clear search": "Aramayı temizle",
+  "Displayed version": "Görüntülenen sürüm",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "Arama ve filtreler, önceki sürümler de dahil olmak üzere bu sohbetteki tüm kaydedilmiş mesajları kapsar.",
+  "Search match": "Arama eşleşmesi",
+  "Search matched an earlier saved version.": "Arama, daha önce kaydedilmiş bir sürümle eşleşti.",
+  "Search saved messages": "Kaydedilmiş mesajları arama",
+  "{n} saved versions": "{n} kaydedilmiş sürüm"
 }

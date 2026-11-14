@@ -9657,5 +9657,12 @@
   "Select at least one available account.": "Selezionare almeno un account disponibile.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "Selezionati {n} account disponibili. Ogni account mantiene i propri limiti di connessione e di richiesta.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Ogni account esegue un’attività di cronologia o di esportazione parallelamente all’osservazione. I controlli di pausa sono indipendenti; i blocchi confermati rimangono disponibili dopo una pausa.",
-  "Select all available accounts": "Seleziona tutti gli account disponibili"
+  "Select all available accounts": "Seleziona tutti gli account disponibili",
+  "Clear search": "Cancella ricerca",
+  "Displayed version": "Versione visualizzata",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "La ricerca e i filtri coprono tutti i messaggi salvati in questa chat, comprese le versioni precedenti.",
+  "Search match": "Risultati della ricerca",
+  "Search matched an earlier saved version.": "La ricerca ha trovato una corrispondenza con una versione salvata in precedenza.",
+  "Search saved messages": "Ricerca dei messaggi salvati",
+  "{n} saved versions": "{n} versioni salvate"
 }

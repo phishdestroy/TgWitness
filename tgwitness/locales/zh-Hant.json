@@ -9601,5 +9601,12 @@
   "Select at least one available account.": "請選擇至少一個可用的帳戶。",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "已選取 {n} 個可用帳戶。每個帳戶皆維持其專屬的連線與請求限制。",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "每個帳戶在執行觀察的同時，會運行一個歷史紀錄或匯出任務。暫停控制功能是獨立運作的；已提交的區塊在暫停後仍可使用。",
-  "Select all available accounts": "選取所有可用帳戶"
+  "Select all available accounts": "選取所有可用帳戶",
+  "Clear search": "清除搜尋",
+  "Displayed version": "顯示版本",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "搜尋與篩選功能涵蓋此聊天室中所有已儲存的訊息，包括較早的版本。",
+  "Search match": "搜尋結果",
+  "Search matched an earlier saved version.": "搜尋結果與較早的儲存版本相符。",
+  "Search saved messages": "搜尋已儲存的訊息",
+  "{n} saved versions": "{n} 個儲存版本"
 }

@@ -9649,5 +9649,12 @@
   "Select at least one available account.": "Kamida bitta mavjud akkauntni tanlang.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} mavjud hisoblar tanlandi. Har bir hisob o'zining aloqa va so'rov limitlarini alohida saqlaydi.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Har bir hisob kuzatuv bilan birga bitta tarix yoki eksport vazifasini bajaradi. To'xtatish boshqaruvlari mustaqil; pauza berilgandan keyin ham topshirilgan bo'laklar mavjud bo'lib qoladi.",
-  "Select all available accounts": "Mavjud barcha hisoblarni tanlang"
+  "Select all available accounts": "Mavjud barcha hisoblarni tanlang",
+  "Clear search": "Qidiruvni tozalash",
+  "Displayed version": "Ko'rsatilgan versiya",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "Qidiruv va filtrlar ushbu suhbatdagi barcha saqlangan xabarlarni, shu jumladan avvalgi versiyalarni ham qamrab oladi.",
+  "Search match": "Qidiruv mosligi",
+  "Search matched an earlier saved version.": "Qidiruv oldin saqlangan versiyani topdi.",
+  "Search saved messages": "Saqlangan xabarlarni qidirish",
+  "{n} saved versions": "{n} saqlangan versiyalar"
 }

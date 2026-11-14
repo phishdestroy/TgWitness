@@ -9601,5 +9601,12 @@
   "Select at least one available account.": "Pilih sekurang-kurangnya satu akaun yang tersedia.",
   "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n}akaun tersedia yang dipilih. Setiap akaun mengekalkan sambungan dan had permintaan masing-masing.",
   "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Setiap akaun menjalankan satu tugas sejarah atau eksport bersama pemerhatian. Kawalan jeda adalah bebas; ketulan yang telah disimpan kekal tersedia selepas jeda.",
-  "Select all available accounts": "Pilih semua akaun yang tersedia"
+  "Select all available accounts": "Pilih semua akaun yang tersedia",
+  "Clear search": "Bersihkan carian",
+  "Displayed version": "Versi yang dipaparkan",
+  "Search and filters cover all saved messages in this chat, including earlier versions.": "Carian dan penapis merangkumi semua mesej yang disimpan dalam sembang ini, termasuk versi terdahulu.",
+  "Search match": "Padanan carian",
+  "Search matched an earlier saved version.": "Carian menemui versi simpanan terdahulu yang sepadan.",
+  "Search saved messages": "Cari mesej yang disimpan",
+  "{n} saved versions": "{n} versi yang disimpan"
 }
