@@ -36,7 +36,7 @@ class Profiles:
 
     def __init__(self, app, root, factory):
         self.app, self.root, self.factory = app, root, factory
-        label = app.state.store.get_setting("profile_label", "Main account")
+        label = app.state.store.get_setting("profile_label", "Main workspace")
         self.entries = {"default": {"id": "default", "label": label, "app": app, "cm": None}}
         self.opening = {}
         self.session_reservations = {}

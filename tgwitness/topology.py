@@ -334,7 +334,7 @@ def snapshot(ctx, request, after=0):
     state = ctx.app.state
     registry = getattr(state, "profiles", None)
     entries = registry.entries if registry else {
-        ctx.profile_id: {"label": state.store.get_setting("profile_label", "Main account"), "app": ctx.app}}
+        ctx.profile_id: {"label": state.store.get_setting("profile_label", "Main workspace"), "app": ctx.app}}
     groups = {item["id"]: item["label"] for item in (registry.groups() if registry else [])}
     accounts = []
     for identifier, entry in list(entries.items()):

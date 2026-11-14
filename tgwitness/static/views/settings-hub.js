@@ -771,11 +771,15 @@ export function createSettingsHub(ctx) {
     if(dialogs){
       if(draft.scope==='folder')body.append(select('Telegram folder',[['','Choose a folder'],...dialogs.folders.map(f=>[String(f.id),f.title])],String(draft.folder_id??''),async id=>{draft.folder_id=id===''?null:Number(id);await changed();}));
       if(draft.scope==='selected'){
-        const filter=node('input');filter.type='search';filter.placeholder=tr('Search chats');body.append(filter);
+        const filter=node('input');filter.type='search';filter.placeholder=tr('Search by name or ID');body.append(filter);
+        const chosen=node('p','hint wizard-chosen');body.append(chosen);
+        const count=()=>{chosen.textContent=tr('{n} selected',{n:draft.chat_ids.length});};count();
+        const kinds={private:tr('Private chat'),bot:tr('Bot'),group:tr('Group'),supergroup:tr('Supergroup'),channel:tr('Channel')};
         const list=node('div','wizard-chats');body.append(list);
         for(const chat of dialogs.dialogs){const row=node('label','check-label'), check=node('input');check.type='checkbox';check.checked=draft.chat_ids.includes(chat.chat_id);
-          check.onchange=()=>run(async()=>{draft.chat_ids=check.checked?[...new Set([...draft.chat_ids,chat.chat_id])]:draft.chat_ids.filter(id=>id!==chat.chat_id);await changed();});
-          row.dataset.title=chat.title.toLocaleLowerCase();row.append(check,document.createTextNode(chat.title));list.append(row);}
+          check.onchange=()=>run(async()=>{draft.chat_ids=check.checked?[...new Set([...draft.chat_ids,chat.chat_id])]:draft.chat_ids.filter(id=>id!==chat.chat_id);count();await changed();});
+          const name=node('span','wizard-chat-name',chat.title),about=node('span','wizard-chat-kind',[kinds[chat.kind],'ID '+chat.chat_id].filter(Boolean).join(' · '));
+          name.dir='auto';row.dataset.title=(chat.title+' '+chat.chat_id).toLocaleLowerCase();row.append(check,name,about);list.append(row);}
         filter.oninput=()=>{for(const row of list.children)row.hidden=!row.dataset.title.includes(filter.value.toLocaleLowerCase());};
       }
       body.append(message(tr('{n} chats loaded. File size and duration are estimates.',{n:dialogs.dialogs.length})));

@@ -523,7 +523,7 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
       const result=await json('topology?after='+lastEvent,undefined,{root:true,signal:controller.signal});
       if(serial!==generation||!visible||controller.signal.aborted)return;
       if(result.schema!=='tgwitness-topology-v1'||!Array.isArray(result.accounts))throw new Error(tr('Topology data is unavailable.'));
-      for(const account of result.accounts)if(account.id==='default'&&account.label==='Main account')account.label=tr('Main account');
+      for(const account of result.accounts)if(account.id==='default'&&account.label==='Main workspace')account.label=tr('Main workspace');
       const wasDemo=!!data?.demo;data=result;received=Date.now();failed=false;find('error').hidden=true;
       const fresh=merge(result.traffic?.events);renderAll();
       requestAnimationFrame(()=>{if(serial===generation)animate(fresh);prev=new Map(result.accounts.map(a=>[a.id,a]));polled=performance.now();first=false;});
