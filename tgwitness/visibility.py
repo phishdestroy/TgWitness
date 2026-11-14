@@ -37,6 +37,7 @@ SWEEP_SECONDS = 5
 BEFORE_SEND = (1.0, 12.0)
 CHARACTERS_PER_SECOND = 8
 OPENED_LIMIT = 500
+TIMELINE_LIMIT = 100
 NOT_OBSERVED = "Enable observation for this chat in Sources first."
 REFUSED = {"read_receipts": "This chat's read receipt setting does not allow this. Nothing was sent to Telegram.",
            "content_opened": "Opened-media notices are off for this chat. Nothing was sent to Telegram.",
@@ -59,7 +60,9 @@ BEFORE_MEANING = ("Sent from the panel before a message: the other side saw “t
 BURST_MEANING = ("End of a typing burst sent from the panel. Telegram apps show “typing…” for about 6 seconds after "
                  "the last notice.")
 PEER_MEANING = ("Typing notices Telegram delivered to this account, joined into one record per burst. Telegram "
-                "repeats them every few seconds while the other side types; this is not a record of keystrokes.")
+                "repeats them every few seconds while the other side types; this is not a record of keystrokes. "
+                "The timeline lists the reported actions in order with the times they were received; upload "
+                "progress is the percentage the other side's app reported.")
 
 
 class Fields(BaseModel):
@@ -475,6 +478,20 @@ def typing_source(update):
     return utils.get_peer_id(types.PeerChannel(update.channel_id)), user
 
 
+def action_details(action):
+    try:
+        found = vars(action)
+    except TypeError:
+        return {}
+    return {key: value for key, value in found.items() if not key.startswith("_") and type(value) in (int, str)}
+
+
+def timeline_entry(item):
+    progress = item["progress"]
+    return {**item["entry"], "first_at": stamp(item["first"]), "last_at": stamp(item["last"]), "updates": item["updates"],
+            **({"progress_first": progress[0], "progress_last": progress[1]} if progress else {})}
+
+
 def heard_update(collector, update):
     from . import secret_chats
     if isinstance(update, types.UpdateEncryptedMessagesRead):
@@ -484,7 +501,7 @@ def heard_update(collector, update):
     chat_id, user_id = typing_source(update)
     if user_id is None or not collector.selected(chat_id):
         return None
-    return of(collector).peer_typing(chat_id, user_id, update.action)
+    return of(collector).peer_typing(chat_id, user_id, update.action, topic=getattr(update, "top_msg_id", None))
 
 
 class Visibility:
@@ -530,7 +547,7 @@ class Visibility:
             "last_notice_at": stamp(burst["sent"]), "notices": burst["notices"],
             **({"stopped_by_error": error} if error else {}), "meaning": BURST_MEANING}, burst["chat_id"])
 
-    def peer_typing(self, chat_id, user_id, action=None, secret=False, now=None):
+    def peer_typing(self, chat_id, user_id, action=None, secret=False, now=None, topic=None):
         now = time.time() if now is None else now
         self.sweep(now)
         fields = effective(self.collector.store, chat_id, secret)
@@ -544,17 +561,38 @@ class Visibility:
                 shown[user_id] = {"until": now + TYPING_SECONDS, "action": name}
         if fields["record_peer_typing"] and not cancel:
             burst = self.peers.setdefault((secret, chat_id, user_id), {"started": now, "last": now, "updates": 0,
-                                                                       "actions": []})
+                                                                       "actions": [], "timeline": [], "omitted": 0})
             burst["last"], burst["updates"] = now, burst["updates"] + 1
             if name not in burst["actions"]:
                 burst["actions"].append(name)
+            self.step(burst, name, action, topic, now)
         self.arm()
+
+    def step(self, burst, name, action, topic, now):
+        details = action_details(action) if action is not None else {}
+        progress = details.pop("progress", None)
+        entry = {"action": name, **({"top_msg_id": topic} if topic is not None else {}),
+                 **({"details": details} if details else {})}
+        timeline = burst["timeline"]
+        same = bool(timeline) and timeline[-1]["entry"] == entry
+        if burst["omitted"] or not same and len(timeline) >= TIMELINE_LIMIT:
+            burst["omitted"] += 1
+            return
+        if not same:
+            timeline.append({"entry": entry, "first": now, "last": now, "updates": 0, "progress": None})
+        latest = timeline[-1]
+        latest["last"], latest["updates"] = now, latest["updates"] + 1
+        if progress is not None:
+            latest["progress"] = [progress if latest["progress"] is None else latest["progress"][0], progress]
 
     def flush(self, mark):
         secret, chat_id, user_id = mark
         burst = self.peers.pop(mark)
         summary = {"started_at": stamp(burst["started"]), "last_seen_at": stamp(burst["last"]),
-                   "updates": burst["updates"], "actions": burst["actions"], "meaning": PEER_MEANING}
+                   "updates": burst["updates"], "actions": burst["actions"],
+                   "timeline": [timeline_entry(item) for item in burst["timeline"]],
+                   **({"timeline_omitted_updates": burst["omitted"]} if burst["omitted"] else {}),
+                   "meaning": PEER_MEANING}
         if secret:
             self.collector.store.append("secret_chat.peer_typing", {"secret_chat_id": chat_id, "peer_user_id": user_id,
                                                                     **summary})
