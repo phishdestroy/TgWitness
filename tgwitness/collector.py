@@ -677,7 +677,6 @@ class Collector:
         self.storage_low = False
         self.download_reserved = 0
         self.media_locks = MediaLocks()
-        self.export_files_lock = asyncio.Lock()
         self._forensics_clients = weakref.WeakSet()
         self.history = History(self)
         from .profiling import Profiling
@@ -4662,8 +4661,14 @@ class Collector:
         if size is None or size > limit:
             return {"file_status": "above_limit" if size else "unknown_size", "file_kind": kind,
                     **({"file_size": size} if size else {})}
-        async with self.export_files_lock:
-            reused = await complete_in_thread(reuse_into, self.store, directory, downloadable_media(message), size)
+        directory = Path(directory).resolve()
+        info = file_hashes.representation(downloadable_media(message))
+        key = ("export", str(directory), canonical(info), size) if info else None
+        async with self.media_locks.hold(key):
+            return await self.export_attachment_file(message, directory, kind, size, limit)
+
+    async def export_attachment_file(self, message, directory, kind, size, limit):
+        reused = await complete_in_thread(reuse_into, self.store, directory, downloadable_media(message), size)
         if reused:
             return {"file": "media/" + reused["sha256"], "file_sha256": reused["sha256"], "file_size": size,
                     "file_kind": kind, "file_reused": reused["source"]}
@@ -4675,7 +4680,7 @@ class Collector:
             if max(current, total) > limit:
                 raise ValueError("above_limit")
         timeout = self.param("media_timeout_seconds") + size // (self.param("media_min_speed_kbps") * 1024)
-        temp = directory / ("part-" + str(message.id))
+        temp = directory / ("part-" + str(message.id) + "-" + secrets.token_hex(8))
         self.download_reserved += size
         try:
             for attempt in range(3):
@@ -4699,8 +4704,7 @@ class Collector:
                             raise ValueError("existing_content_addressed_file_is_corrupt")
                     else:
                         temp.replace(destination)
-                    async with self.export_files_lock:
-                        await complete_in_thread(remember_file, directory, media, digest, written)
+                    await complete_in_thread(remember_file, directory, media, digest, written)
                     return {"file": "media/" + digest, "file_sha256": digest, "file_size": written, "file_kind": kind}
                 except FLOOD_ERRORS as exc:
                     if attempt == 2:

@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- Chat exports download repeated attachment representations once per export directory
+  and verify unrelated retained files concurrently. Each message keeps its own file
+  reference; size and SHA-256 checks still run before reuse. Unique temporary paths
+  and synchronized file-index updates preserve parallel copies, cancellation and retry.
+
 - Attachment jobs for the same file now wait for one transfer and independently verify the saved bytes before reuse, preserving a signed outcome for each observation. Different files and server-hash reads run concurrently; hash requests share the bounded file-request pool and no longer hold the ordinary Telegram request queue. Cancellation, incomplete hash reads and failed transfers leave later jobs able to continue.
 
 - Connection setup reuses a fresh preflight result for the same route instead of repeating its handshake immediately on Apply. Startup reads access and workspaces concurrently, chat export discovery waits for a selected chat, and rapid wizard/preference edits save only the latest queued state. Stale route results are checked again; workspace changes cancel unsent saves.
