@@ -25,6 +25,13 @@
 
 ## Unreleased
 
+- History's messages-first mode uses the selected attachment worker count after
+  reading text. Changing the capture preference during a run no longer leaves its
+  deferred attachments without workers; pause and resume retain queued jobs.
+- Stopping observation cancels a pending start, including an automatic start after
+  history. A completed history task cannot restart observation after Stop. New
+  observation, history, export and connection changes are refused until connection
+  cleanup has finished; existing jobs keep their account reservation.
 - Live journal streams recheck access after reading and delivering Case Board
   updates. Revoked sessions and reduced chat permissions cannot receive a prepared
   journal batch from the previous access scope.
