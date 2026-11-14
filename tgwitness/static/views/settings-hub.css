@@ -43,6 +43,27 @@
 .route-status:before{content:'●';color:#2e9967;margin-inline-end:7px}
 .route-status.route-offline{border-color:#d84646}
 .route-status.route-offline:before{color:#d84646}
+.route-status.route-slow{border-color:var(--warning)}
+.route-status.route-slow:before{color:var(--warning)}
+.route-health{margin-top:12px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.route-health-bad{border-color:var(--warning-border);background:var(--warning-soft)}
+.route-health-title{font-weight:600;color:var(--warning)}
+.route-health .hint{margin-top:4px}
+.route-samples{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.route-samples span{padding:2px 9px;border-radius:999px;background:var(--surface-2);font:var(--type-support);font-variant-numeric:tabular-nums}
+.route-samples .slow{background:var(--warning-soft);color:var(--warning);border:1px solid var(--warning-border)}
+.route-samples .failed{background:var(--danger-soft);color:var(--danger)}
+.connection-result .route-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.connection-result .route-actions button{margin:0}
+.route-reroll{margin:10px 0;padding:10px 12px;border-radius:8px;background:var(--surface-2)}
+.route-reroll-stage{font-weight:500}
+.route-reroll-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+.route-reroll-list li{display:flex;justify-content:space-between;gap:12px;font:var(--type-support);font-variant-numeric:tabular-nums}
+.route-reroll-list .fast span:last-child{color:var(--success)}
+.route-reroll-list .fair span:last-child{color:var(--warning)}
+.route-reroll-list .slow span:last-child,.route-reroll-list .failed span:last-child{color:var(--danger)}
+@media (prefers-reduced-motion:no-preference){.route-reroll-stage.running{animation:route-pulse 1.6s ease-in-out infinite}}
+@keyframes route-pulse{50%{opacity:.55}}
 .setup-summary{display:grid;grid-template-columns:1fr 2fr;gap:16px}
 .setup-summary dd{margin:0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .wizard-chats{max-height:320px;overflow:auto;margin:20px 0}

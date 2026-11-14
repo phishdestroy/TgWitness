@@ -32,7 +32,7 @@ FILES = [
     ".clusterfuzzlite/project.yaml", ".clusterfuzzlite/Dockerfile", ".clusterfuzzlite/build.sh",
     "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
     "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "deploy/constraints-mcp.txt",
-    "deploy/Dockerfile.sealed",
+    "deploy/Dockerfile.sealed", "deploy/prometheus/tgwitness.yml", "deploy/grafana/tgwitness.json",
     "examples/export-hashes.json", "examples/sealed-hashes.json", "examples/sealed-account.json",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",

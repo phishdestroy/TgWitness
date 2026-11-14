@@ -13,6 +13,7 @@ PAUSE = "Telegram asked to pause requests. Wait until the pause ends, then try a
 SPAM_BLOCK = ("Telegram restricts this account from writing to people and chats it has not contacted before "
               "(spam block). Check the account with @SpamBot.")
 TEXTS = {
+    "restricted_by_telegram": "Telegram marks this chat as restricted; it was skipped.",
     "AuthKeyDuplicatedError": "Telegram ended this session because it was used in two places at once. Sign in again "
                               "and use the session only in TgWitness.",
     "AuthKeyUnregisteredError": SIGNED_OUT,

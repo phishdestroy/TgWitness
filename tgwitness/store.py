@@ -534,6 +534,30 @@ class Store:
         records = [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
         return list(reversed(records)) if after is not None else records
 
+    def coverage_records(self, chat_id, kinds, *, since=None, until=None, hide_admin=False, limit=2000, timeout_s=2):
+        where = ["kind IN (" + ",".join("?" * len(kinds)) + ")", "(chat_id=? OR chat_id IS NULL)"]
+        params = [*kinds, chat_id]
+        if hide_admin:
+            where.append(ADMIN_RECORDS)
+        for comparison, value in (("observed_at>=?", since), ("observed_at<=?", until)):
+            if value is not None:
+                where.append(comparison)
+                params.append(value.astimezone(timezone.utc).isoformat(timespec="milliseconds"))
+        rows = self.bounded_read(
+            "SELECT seq,kind,chat_id,observed_at,json_extract(payload,'$.reason') AS reason,"
+            "json_extract(payload,'$.previous_observation.observed_at') AS previous FROM events WHERE "
+            + " AND ".join(where) + " ORDER BY seq DESC LIMIT ?", [*params, limit + 1], timeout_s)
+        records = []
+        for row in reversed(rows[:limit]):
+            payload = {}
+            if row["reason"] is not None:
+                payload["reason"] = row["reason"]
+            if row["previous"] is not None:
+                payload["previous_observation"] = {"observed_at": row["previous"]}
+            records.append({"seq": row["seq"], "kind": row["kind"], "chat_id": row["chat_id"],
+                            "observed_at": row["observed_at"], "payload": payload})
+        return {"events": records, "limited": len(rows) > limit}
+
     def count_events(self, *, timeout_s=2, **filters):
         source, _, where, params = self._event_selection(**filters)
         return self.bounded_read("SELECT count(*) FROM " + source + where, params, timeout_s)[0][0]
@@ -666,6 +690,11 @@ class Store:
         with self.reading() as db:
             return {r[0]: r[1] for r in db.execute(
                 "SELECT state,count(*) FROM media_jobs" + clause + " GROUP BY state", sorted(chat_ids or []))}
+
+    def media_waiting_by_chat(self):
+        with self.reading() as db:
+            return {r[0]: r[1] for r in db.execute(
+                "SELECT chat_id,count(*) FROM media_jobs WHERE state IN ('queued','retry','running') GROUP BY chat_id")}
 
     def media_oldest(self, chat_ids=None):
         clause = " AND j.chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""

@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.9.3-workflows4">
+<link rel="stylesheet" href="/style.css?v=0.9.3-workflows6">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=13">
+<link rel="stylesheet" href="/views/settings-hub.css?v=14">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/views/system-map.css?v=3">
 <link rel="stylesheet" href="/services.css?v=1">
@@ -29,9 +29,10 @@
 <link rel="stylesheet" href="/views/access.css?v=30">
 <link rel="stylesheet" href="/components/journal.css?v=6">
 <link rel="stylesheet" href="/views/chats.css?v=16">
-<link rel="stylesheet" href="/views/chat-list.css?v=14">
+<link rel="stylesheet" href="/views/chat-list.css?v=15">
 <link rel="stylesheet" href="/views/board.css?v=3">
 <link rel="stylesheet" href="/views/topology.css?v=2">
+<link rel="stylesheet" href="/views/swarm.css?v=2">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
@@ -39,7 +40,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-profiles16"></script>
+<script defer src="/app.js?v=0.9.3-profiles17"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=13"></script>
@@ -49,12 +50,12 @@
 <script defer src="/media-analysis.js?v=2"></script>
 <script defer src="/webhooks.js?v=2"></script>
 <script defer src="/proxies.js?v=3"></script>
-<script defer src="/fleet.js?v=7"></script>
+<script defer src="/fleet.js?v=8"></script>
 <script defer src="/review.js?v=1"></script>
-<script defer src="/live.js?v=3"></script>
+<script defer src="/live.js?v=4"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
 <link href="/views/exports.css?v=33" rel="stylesheet">
-<link href="/views/workflows.css?v=11" rel="stylesheet">
+<link href="/views/workflows.css?v=12" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
 <link href="/components/forms.css?v=35" rel="stylesheet">
 <link href="/components/feedback.css?v=36" rel="stylesheet">
@@ -98,6 +99,7 @@
   <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20v-.5A5.5 5.5 0 0 1 8.5 14h1a5.5 5.5 0 0 1 5.5 5.5v.5M18 8v6M21 11h-6"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></symbol>
   <symbol id="i-activity" viewBox="0 0 24 24"><path d="M21 12h-3.5l-2.5 7-6-14-2.5 7H3"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
   <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></symbol>
   <symbol id="i-question" viewBox="0 0 24 24"><path d="M9 9.2a3 3 0 0 1 5.8 1c0 2-3 2.6-3 4.3M12 18h.01"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5Z"/></symbol>
@@ -161,6 +163,7 @@
     <div class="nav-section">Workspace</div>
     <button class="nav" data-view="topology" data-level="simple"><svg aria-hidden="true" class="nav-icon"><use href="#i-activity"/></svg> Network topology</button>
     <button class="nav" data-view="accounts"><svg aria-hidden="true" class="nav-icon"><use href="#i-users"/></svg> Accounts <b id="nav-accounts">1</b></button>
+    <button class="nav" data-view="swarm"><svg aria-hidden="true" class="nav-icon"><use href="#i-grid"/></svg> Swarm</button>
     <button class="nav" data-view="settings" data-level="simple"><svg aria-hidden="true" class="nav-icon"><use href="#i-settings"/></svg> Settings</button>
     <details class="nav-more" id="nav-more"><summary>More tools</summary>
     <button class="nav" data-view="board"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> Case Board <b id="board-unread" hidden>0</b></button>
@@ -659,7 +662,7 @@
     <p class="hint">Encryption wraps the unchanged signed file. The password is not stored; without it the file cannot be opened.</p>
   </div>
   <details class="source-options" id="export-chat-tools"><summary>Capture or export one chat</summary>
-    <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><label for="chat-export-files">Files</label><select id="chat-export-files"><option value="">As in Sources → Recording</option><option value="download">Download files</option><option value="hashes">Only file fingerprints (fast)</option><option value="skip">Messages only, no files</option></select><p class="hint">Messages are read first; files follow in a second stage with their own progress.</p><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button><button class="primary" hidden id="chat-export-partial-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download partial export</button></div><p id="chat-export-progress" role="status"></p><div hidden id="chat-export-partial"><p class="hint" id="chat-export-partial-info"></p><div class="chat-export-actions"><button class="secondary" id="chat-export-resume" type="button">Resume export</button><button class="quiet" id="chat-export-restart" type="button">Start over</button></div></div><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p><p class="hint">Attachments follow Sources → Recording: with downloads on, files within those limits are saved into the export by their SHA-256; for any other file the export names the reason.</p></form>
+    <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><label for="chat-export-files">Files</label><select id="chat-export-files"><option value="">As in Sources → Recording</option><option value="download">Download files</option><option value="hashes">Only file fingerprints (fast)</option><option value="skip">Messages only, no files</option></select><p class="hint">Messages are read first; files follow in a second stage with their own progress.</p><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="secondary" hidden id="chat-export-live" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download messages read so far</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button><button class="primary" hidden id="chat-export-partial-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download partial export</button></div><p id="chat-export-progress" role="status"></p><p class="hint" hidden id="chat-export-live-info"></p><div hidden id="chat-export-partial"><p class="hint" id="chat-export-partial-info"></p><div class="chat-export-actions"><button class="secondary" id="chat-export-resume" type="button">Resume export</button><button class="quiet" id="chat-export-restart" type="button">Start over</button></div></div><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p><p class="hint">Attachments follow Sources → Recording: with downloads on, files within those limits are saved into the export by their SHA-256; for any other file the export names the reason.</p></form>
   </details>
   <section class="card padded exports-history" aria-labelledby="exports-history-title">
     <div class="card-heading compact"><div><h2 id="exports-history-title">Prepared exports</h2><p id="exports-last" class="hint"></p></div><button class="quiet" type="button" id="exports-history-refresh">Refresh</button></div>
@@ -1632,6 +1635,7 @@
 <section class="view" hidden id="view-settings"></section>
 <section class="view" hidden id="view-board"></section>
 <section class="view" hidden id="view-topology" aria-label="Network topology"></section>
+<section class="view" hidden id="view-swarm" aria-label="Swarm"></section>
 <section class="view" hidden id="view-first-run"></section>
 <section class="view" hidden id="view-chats">
   <div class="chats-shell" data-panel="chat">
@@ -1914,7 +1918,7 @@
   </div></div>
 </section>
 <section class="view" hidden id="view-system-log">
-  <div class="page-heading"><div><h1>System log</h1><p class="page-description">Activity since this process started: connections, proxy changes, sign-ins, refusals and settings changes across workspaces. Messages remain in the journal.</p></div><button id="console-refresh" class="secondary" type="button">Refresh</button></div>
+  <div class="page-heading"><div><h1>System log</h1><p class="page-description">Activity since this process started: connections, proxy changes, sign-ins, refusals and settings changes across workspaces. Messages remain in the journal.</p></div><div class="console-actions"><button id="console-flight" class="quiet" type="button" title="The last 10,000 log lines and journal record kinds of this process, for troubleshooting. Record contents are not included."><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Save flight record</button><button id="console-refresh" class="secondary" type="button">Refresh</button></div></div>
   <div class="card padded"><p class="hint">IP addresses are hidden in this view. Local service logs and signed journal records are unchanged.</p><div class="system-log-tools"><label class="check-label"><input checked id="console-follow" type="checkbox"> Follow new lines</label><p id="console-state" role="status"></p></div><pre class="access-console" id="access-console" tabindex="0" aria-label="Process log"></pre></div>
 </section>
 </div>

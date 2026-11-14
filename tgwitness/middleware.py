@@ -17,6 +17,8 @@ def request_limit(path, default=16384):
         return 512 * 1024
     if "/api/analysis/reports/" in path:
         return 65536
+    if path.endswith("/api/swarm/exports"):
+        return 128 * 1024
     if path.endswith(("/api/auth/import", "/api/auth/import/preview", "/api/profiles/import", "/api/profiles/check")):
         from .account_import import IMPORT_REQUEST_LIMIT
         return IMPORT_REQUEST_LIMIT

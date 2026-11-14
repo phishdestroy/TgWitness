@@ -547,6 +547,8 @@ form > .health-detail { margin-top: 14px; }
 .page-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 24px; margin-bottom: 22px; }
 .page-heading > div { min-width: 0; }
 .page-heading > button { flex-shrink: 0; }
+.console-actions { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
+.console-actions .icon { width: 15px; height: 15px; }
 .page-description { margin-top: 6px; color: var(--muted); font-size: 14px; }
 .page-kicker { margin-bottom: 8px; }
 .card { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
@@ -1961,7 +1963,6 @@ h3.alerts-kinds { margin: 18px 0 6px; font-size: 15px; }
 .chat-profile { border: 0; border-radius: 0; padding: 8px 0 0; background: transparent; border-top: 1px solid var(--border); }
 .chat-item-badges .pill { color: var(--muted); background: transparent; border: 0; padding: 0 6px 0 0; font-weight: 400; }
 .chat-state { border: 0; border-radius: 0; padding: 0; font-weight: 400; background: transparent !important; }
-.event-icon:not(.delete):not(.coverage) { color: var(--muted); background: var(--surface-3); }
 .status-chip.warn { color: var(--warning); background: var(--warning-soft); }
 .chat-feed[data-pattern="dots"] { background-image: radial-gradient(var(--feed-dot) 1px, transparent 1px); background-size: 20px 20px; }
 .sender-details { min-width: 0; }

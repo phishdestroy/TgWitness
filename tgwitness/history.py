@@ -339,6 +339,9 @@ class History:
                 if not self.collector.selected(job["chat_id"]):
                     self.finish_source(job, "skipped", "source_disabled")
                     continue
+                if (self.collector.source_status.get(str(job["chat_id"])) or {}).get("state") == "restricted_by_telegram":
+                    self.finish_source(job, "skipped", "restricted_by_telegram")
+                    continue
                 if shutil.disk_usage(self.store.root).free < self.collector.param("media_min_free_mb") * 1024**2:
                     self.transition(run_id, "paused", "insufficient_free_space")
                     return
@@ -363,6 +366,11 @@ class History:
 
                     self.transition(run_id, "paused", type(exc).__name__)
                     return
+                except ValueError as exc:
+                    from .collector import AuthorizationRequired
+                    if isinstance(exc, AuthorizationRequired) or self.collector.authorization_required:
+                        raise
+                    self.finish_source(job, "failed", str(exc)[:200] or type(exc).__name__)
                 await asyncio.sleep(0.05)
         except asyncio.CancelledError:
             raise

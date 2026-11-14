@@ -47,6 +47,8 @@ GROUPS = (
                                   "its version and method."),
     ("connection", "Telegram connection", "Timeouts and retries. Request timeouts and retries apply the next "
                                           "time the account connects."),
+    ("performance", "Performance", "How many files this account downloads at once and how gently a newly connected "
+                                   "account starts. Telegram's own waits always apply."),
     ("actions", "Telegram actions", "Pace of joins, messages and bot buttons from this account. An action beyond "
                                     "the pace waits in a queue and runs when its turn comes."),
     ("proxies", "Automatic MTProxy", "When this account's listed proxy is replaced. List downloads and checks are "
@@ -152,6 +154,23 @@ PARAMETERS = (
     Parameter("telegram_request_retries", "connection", 2, 0, 20, "times", "Request retries"),
     Parameter("telegram_connection_retries", "connection", 5, 0, 100, "times", "Connection retries"),
     Parameter("reconnect_max_seconds", "connection", 300, 10, 3600, "seconds", "Longest wait between reconnect attempts"),
+    Parameter("media_workers", "performance", 3, 1, 32, "files", "Attachments downloaded at once",
+              "Per account and queue: the most attachments downloaded at once. Downloads start at two, add one after "
+              "each round of files without a Telegram wait and halve when Telegram asks a file download to wait. "
+              "Applies the next time the account connects."),
+    Parameter("media_connections_per_dc", "performance", 4, 0, 8, "connections",
+              "File connections per Telegram data center",
+              "Files are read over their own connections, so downloads never hold up message collection. The number "
+              "grows from one while files queue up and shrinks when Telegram asks to slow down. They use this "
+              "account's route. 0 reads files over the account's main connection."),
+    Parameter("warmup_minutes", "performance", 15, 0, 120, "minutes", "Gentle start for a newly connected account",
+              "Bulk reads of a newly connected account start at half speed and reach the learned pace over this "
+              "time. 0 turns the gentle start off."),
+    Parameter("journal_fast_writes", "performance", False, label="Faster journal writes",
+              help="Writes each signed record without waiting for the disk to confirm it, which takes about half the "
+                   "time per record. A crash of TgWitness loses nothing, but a power cut or a crash of the computer "
+                   "can lose the last records, and those may already be in a checkpoint or timestamp sent elsewhere. "
+                   "Keep it off unless the disk is protected against power loss. Applies at the next start."),
     Parameter("action_join_seconds", "actions", 180, 0, 86400, "seconds", "Pause between joins",
               "Groups, channels and invite links. Telegram answers quick joins with FloodWait."),
     Parameter("action_joins_per_hour", "actions", 10, 1, 100, "joins", "Joins per hour at most"),

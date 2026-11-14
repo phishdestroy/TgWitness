@@ -23,13 +23,13 @@ from .common import (
     tempfile,
     validate_server_hashes,
 )
-def check_attachments(archive, manifest):
+def check_attachments(archive, manifest, numbers=None):
     from .chain import canonical
     files = manifest["files"]
     for name, digest in files.items():
         if name.startswith("media/") and name[len("media/"):] != digest:
             raise ValueError("Attachment name differs from its SHA-256: " + name)
-    referenced, hash_files, count, numbers = 0, set(), 0, set()
+    referenced, hash_files, count, numbers = 0, set(), 0, set() if numbers is None else numbers
     for message in chat_messages(archive):
         count += 1
         number = message.get("id")

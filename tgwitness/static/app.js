@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout10').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout11').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -111,10 +111,11 @@ const connectionViewReady=import('./views/connection.js?v=2').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=10'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=12'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
-    refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize});
+    refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
+    openChatIn:(profile,chat)=>openChatIn(profile,chat)});
 });
 function busyExplanation(detail,profile){
   if(typeof detail!=='string'||!detail.startsWith('This account is busy'))return null;
@@ -164,6 +165,7 @@ const viewReady=Promise.all([
         if(name==='observations')window.TgWitnessJournal?.leave();
         if(name==='board')boardView?.leave();
         if(name==='topology')topologyView?.leave();
+        if(name==='swarm')swarmView?.leave();
       },
       resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
     });
@@ -172,6 +174,7 @@ const viewReady=Promise.all([
 function resetViewContent(view){
   if(view==='board')boardView?.reset();
   if(view==='topology')topologyView?.resetSession();
+  if(view==='swarm')swarmView?.resetSession();
   const root=panelRoots.get(view);for(const form of root.querySelectorAll('form'))form.reset();
   for(const field of root.querySelectorAll('input,textarea'))if(!field.form){field.value=field.defaultValue;field.checked=field.defaultChecked;}
   if(view==='connection'){networkLoadedFor=null;policyOutsideDirty=false;policyFormDirty=false;state.policy=null;connectionView?.reset();}
@@ -197,15 +200,16 @@ function resetViewContent(view){
 }
 async function loadPanelView(view){
   if(view==='topology'){await topologyReady;await topologyView.enter();return;}
+  if(view==='swarm'){await swarmReady;await swarmView.enter();return;}
   if(view==='system-map'){await systemMapReady;await systemMapView.enter();return;}
   if(view==='board'){await boardReady;await boardView.load();return;}
   if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load();}
-  else if(view==='start'){await homeReady;await loadProfiles().catch(()=>{});renderWorkflowControls();}
+  else if(view==='start'){await homeReady;await loadProfiles(cachedProfiles()).catch(()=>{});renderWorkflowControls();}
   else if(view==='sources'){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
   else if(view==='witness')await loadExtras();
   else if(view==='parameters')await loadParameters();
-  else if(view==='accounts'){renderAccounts();await loadProfiles();}
-  else if(view==='group'){await groupViewReady;await loadProfiles();await groupView.load(state.groupId);}
+  else if(view==='accounts'){renderAccounts();await loadProfiles(cachedProfiles());}
+  else if(view==='group'){await groupViewReady;await loadProfiles(cachedProfiles());await groupView.load(state.groupId);}
   else if(view==='chats')await refreshChats(true);
   else if(view==='secret-chats')await showSecretChats(true);
   else if(view==='observations')await refreshEvents();
@@ -217,7 +221,7 @@ async function loadPanelView(view){
   }
   else if(view==='integrations')await window.TgWitnessIntegrations?.load();
   else if(view==='analysis')await window.TgWitnessAnalysis?.load();
-  else if(view==='connection'){await loadProfiles();if(!state.status.demo)await loadPolicy();await connectionViewReady;await connectionView.enter();}
+  else if(view==='connection'){await loadProfiles(cachedProfiles());if(!state.status.demo)await loadPolicy();await connectionViewReady;await connectionView.enter();}
 }
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
@@ -228,9 +232,11 @@ function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":stat
   step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null,
   hub:state.view==="settings"?settingsHub?.section||null:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=11").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=12").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
-      error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
+      error:message=>toast(tr(message),true),notice:path=>toast(tr("There is no page at {path}. Opened {page} instead.",
+        {path,page:document.querySelector('.sidebar [data-view="'+CSS.escape(state.view)+'"]')?.textContent.trim()||state.view})),
+      apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
   return routerTask;
 }
@@ -253,6 +259,7 @@ async function applyRouteToPanel(route,current){
   await navigate(route.view,{history:false,load:async()=>{
   const view=state.view;
   if(view==='topology'){await topologyReady;if(current())await topologyView.enter();return;}
+  if(view==='swarm'){await swarmReady;if(current())await swarmView.enter();return;}
   if(view==='system-map'){await systemMapReady;if(current())await systemMapView.enter();return;}
   if(view==='board'){await boardReady;await boardView.load();return;}
   if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step,view==='settings'?route.hub:undefined);}
@@ -377,6 +384,8 @@ const labels = {
   "telegram.backoff": [tr("Telegram rate limit"), "clock", "coverage"], "export.failed": [tr("Export failed"), "alert", "coverage"],
   "network.changed": [tr("Connection route changed"), "link", "system"], "network.probe": [tr("Connection test"), "link", "system"],
   "network.route_assigned": [tr("Proxy assigned"), "link", "system"], "network.route_rotated": [tr("Proxy replaced"), "refresh", "coverage"],
+  "network.slow_route": [tr("Connection route is slow"), "clock", "coverage"], "network.route_recovered": [tr("Connection route recovered"), "refresh", "system"],
+  "network.warp_rerolled": [tr("WARP tunnel re-rolled"), "refresh", "system"], "network.warp_reroll_failed": [tr("WARP re-roll failed"), "alert", "coverage"],
   "network.route_unavailable": [tr("No working proxy"), "alert", "coverage"],
   "network.route_fallback": [tr("Connected directly without a proxy"), "alert", "coverage"],
   "network.policy_changed": [tr("IP protection changed"), "shield", "system"],
@@ -399,6 +408,8 @@ const labels = {
   "scope.changed": [tr("Observation scope changed"), "settings", "coverage"],
   "scope.applied": [tr("Sources updated by the scope"), "sources", "system"],
   "source.discovered": [tr("New chat under observation"), "plus", "system"],
+  "source.restricted": [tr("Blocked by Telegram"), "alert", "coverage"],
+  "source.restriction_lifted": [tr("No longer blocked by Telegram"), "refresh", "system"],
   "target.removed": [tr("Source removed"), "trash", "system"], "target.priority": [tr("Source priority changed"), "star", "system"],
   "recheck.changed": [tr("Recheck settings changed"), "settings", "system"],
   "dossier.changed": [tr("People profiles switched"), "users", "system"],
@@ -724,13 +735,21 @@ function unlockFailed(error) {
   retry.addEventListener('click',()=>{retry.disabled=true;location.reload();});
   message.append(document.createElement('br'),retry);
 }
-async function unlock() {
+function bootData(workspace,token){
+  return json("bootstrap?"+new URLSearchParams({workspace:workspace||"default"}),undefined,{root:true,token})
+    .catch(error=>{if([403,404,405].includes(error.status))return null;throw error;});
+}
+async function unlock(prefetched=null) {
   accessStarted=true;
   await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady,chatListReady,accountStateReady,disclosurePreviewReady,workspaceSafetyReady]);
   const router=await ensureRouter(),requested=router.parse();
-  state.me = await json("access/me",undefined,{root:true});
-  state.accessNames=state.me?.admin?(await json("access",undefined,{root:true}).catch(()=>({}))).names||{}:{};
-  await loadProfiles();
+  const boot=await (prefetched||bootData(requested.workspace,state.token));
+  if(boot){state.me=boot.me;state.accessNames=boot.access_names||{};await loadProfiles(boot.profiles);}
+  else{
+    state.me = await json("access/me",undefined,{root:true});
+    state.accessNames=state.me?.admin?(await json("access",undefined,{root:true}).catch(()=>({}))).names||{}:{};
+    await loadProfiles();
+  }
   if(state.profiles.some(profile=>profile.id===requested.workspace&&!profile.error_type))state.profile=requested.workspace;
   if(!state.profiles.some(p=>p.id===state.profile && !p.error_type))
     state.profile=state.profiles.find(p=>!p.error_type)?.id||"default";
@@ -739,11 +758,11 @@ async function unlock() {
   if(!new URL(location.href).searchParams.has('ws')){
     const initialURL=new URL(location.href);initialURL.searchParams.set('ws',state.profile);history.replaceState(history.state,'',initialURL);
   }
-  state.status = await json("status");
+  state.status = boot?.status&&boot.workspace===state.profile?boot.status:await json("status");
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
   if(!state.opened&&(!requested.explicit||requested.error)){
-    state.view=state.status.demo||state.status.targets?.length&&state.status.stats.total?'chats':viewAllowed('start')?'start':'chats';
+    state.view=!state.status.demo&&viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view))state.view="chats";
   state.opened=true;
@@ -770,6 +789,7 @@ function may(permission){return !!state.me&&(state.me.admin||state.me.permission
 
 function viewAllowed(view){
   if(view==='topology')return !!state.me?.admin;
+  if(view==='swarm')return !!state.me?.admin;
   if(view==='system-map')return !!state.me?.admin;
   if(view==='board')return may('board.read');
   const limited=!!state.status?.chats_limited;
@@ -872,7 +892,7 @@ function navigate(view,options={}) {
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  const viewLabel={'system-map':'System map',topology:'Network topology',settings:'Settings','first-run':'First setup',start:"Start here",chats:"Chats","secret-chats":"Pseudo-secret",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",group:"Group",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view];
+  const viewLabel={'system-map':'System map',topology:'Network topology',swarm:'Swarm',settings:'Settings','first-run':'First setup',start:"Start here",chats:"Chats","secret-chats":"Pseudo-secret",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",group:"Group",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view];
   $("view-label").textContent=tr(viewLabel);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
@@ -912,9 +932,11 @@ function renderExportJobLink(){
   const jobs=state.accountExportJobs||[],canUse=!!state.me?.admin&&viewAllowed('evidence');
   show('exports-job-link',canUse&&state.exportTask!=='account'&&jobs.length>0);
   const active=jobs.filter(job=>['preparing','running','waiting','packaging'].includes(job.phase)&&job.active!==false).length;
-  const attention=jobs.filter(job=>['failed','partial','paused'].includes(job.phase)||job.phase==='waiting'&&job.active===false).length;
+  const flagged=jobs.filter(job=>['failed','partial','paused'].includes(job.phase)||job.phase==='waiting'&&job.active===false),attention=flagged.length;
+  const phases={failed:'Failed',partial:'Partly saved',paused:'Paused',waiting:'Waiting'};
+  const why=flagged.slice(0,2).map(job=>tr(phases[job.phase]||job.phase)+(job.error?': '+(errorName(job.error)||tr(job.error)):job.reason?': '+tr(job.reason):'')).join(' · ');
   $('exports-job-summary').textContent=tr('Account exports: {total} · in progress: {active} · ready: {ready} · review: {attention}',
-    {total:jobs.length,active,ready:jobs.filter(job=>job.ready).length,attention});
+    {total:jobs.length,active,ready:jobs.filter(job=>job.ready).length,attention})+(why?' — '+why:'');
 }
 function renderWorkflowControls(){
   if(!state.status||!accountState)return;
@@ -963,7 +985,7 @@ function renderWorkflowControls(){
 }
 import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
-import("./views/chat-gaps.js?v=4").then(({createChatGaps})=>{
+import("./views/chat-gaps.js?v=5").then(({createChatGaps})=>{
   chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations')});
   if(state.view==='chats'&&state.chat!==null&&chatReady)renderChatFeed();
 }).catch(error=>toast(error.message,true));
@@ -1226,6 +1248,46 @@ document.addEventListener("keydown",event=>{
   if(event.key.toLowerCase()==="k"&&(event.ctrlKey||event.metaKey)&&!event.altKey&&!event.shiftKey&&!event.isComposing
       &&!$("workspace").hidden&&!$("workspace").inert){event.preventDefault();if(!event.repeat)toggleQuick();}
 });
+let goPrefix=0;
+const goTargets={h:"start",c:"chats",j:"observations",e:"evidence",a:"accounts",w:"swarm",s:"settings"};
+document.addEventListener("keydown",event=>{
+  if(event.defaultPrevented||event.ctrlKey||event.metaKey||event.altKey||event.isComposing||event.repeat||!state.me
+     ||$("workspace").hidden||$("workspace").inert||!$("detail-drawer").hidden||document.querySelector("dialog[open]")
+     ||event.target.closest("input,textarea,select,[contenteditable='true'],audio,video"))return;
+  const key=event.key;
+  if(Date.now()-goPrefix<1200){
+    goPrefix=0;
+    if(Object.hasOwn(goTargets,key)&&viewAllowed(goTargets[key])){event.preventDefault();navigate(goTargets[key]);}
+    return;
+  }
+  if(key==="g"&&!event.shiftKey){goPrefix=Date.now();return;}
+  if(key==="?"){event.preventDefault();toast(tr("Keys: g then h Home, c Chats, j Journal, e Exports, a Accounts, w Swarm, s Settings · j / k next or previous chat · Ctrl+K go to"));return;}
+  if((key==="j"||key==="k")&&!event.shiftKey&&state.view==="chats"){
+    const items=[...document.querySelectorAll("#chats-list .chat-choice")];
+    const index=items.findIndex(item=>item.getAttribute("aria-pressed")==="true");
+    const next=items[index<0?0:Math.max(0,Math.min(items.length-1,index+(key==="j"?1:-1)))];
+    if(next&&next!==items[index]){event.preventDefault();next.focus();next.click();}
+  }
+});
+const faviconMark=new Image();faviconMark.src="/mark.svg";
+let faviconState="";
+function renderFavicon(){
+  const collector=state.status?.collector||{},task=collector.activity?.task;
+  const kind=!state.me||state.status?.demo?"":["chat_export","export","history"].includes(task)?"busy":collector.running?"live":collector.has_session?"paused":"";
+  const link=document.querySelector('link[rel="icon"]');
+  if(!link||kind===faviconState)return;
+  faviconState=kind;
+  if(!kind){link.href="/mark.svg";return;}
+  const draw=()=>{
+    if(faviconState!==kind)return;
+    const canvas=document.createElement("canvas");canvas.width=canvas.height=64;
+    const pen=canvas.getContext("2d");pen.drawImage(faviconMark,0,0,64,64);
+    pen.beginPath();pen.arc(50,50,12,0,Math.PI*2);pen.fillStyle={live:"#16a34a",paused:"#d97706",busy:"#2563eb"}[kind];pen.fill();
+    pen.lineWidth=4;pen.strokeStyle="#ffffff";pen.stroke();link.href=canvas.toDataURL("image/png");
+  };
+  if(faviconMark.complete)draw();else faviconMark.addEventListener("load",draw,{once:true});
+}
+window.addEventListener("tgwitness:lock",()=>{faviconState="";const link=document.querySelector('link[rel="icon"]');if(link)link.href="/mark.svg";});
 
 const healthStates={off:[tr("Off"),"pause"],configured:[tr("Configured"),"settings"],running:[tr("In progress"),"refresh"],
   working:[tr("Working"),"check"],degraded:[tr("Degraded"),"alert"],failed:[tr("Error"),"x"],unknown:[tr("State unknown"),"question"]};
@@ -1356,6 +1418,7 @@ const modesReady=import("./components/modes.js?v=2").then(({createModes})=>{
 modesReady.catch(error=>toast(error.message,true));
 function renderStatus() {
   const s=state.status,c=s.collector;
+  renderFavicon();
   $("workspace").dataset.demo=String(!!s.demo);
   $("workspace").dataset.onlineDemo=String(!!window.TGW_ONLINE_DEMO);
   show("demo-banner",s.demo);
@@ -1494,11 +1557,13 @@ async function refreshStatus() {
   settingsHub?.status();
   if(!viewAllowed(state.view))navigate("chats");
 }
-async function loadProfiles(){
-  const request=++profilesRequest,result=await json("profiles",undefined,{root:true});
+let profilesLoadedAt=0;
+const cachedProfiles=()=>Date.now()-profilesLoadedAt<3000&&state.profiles?{profiles:state.profiles,cached:true}:undefined;
+async function loadProfiles(prefetched){
+  const request=++profilesRequest,result=prefetched||await json("profiles",undefined,{root:true});
   const {updateWorkspaceOptions}=await workspaceOptionsReady;
   if(request!==profilesRequest)return;
-  state.profiles=result.profiles;
+  state.profiles=result.profiles;if(!result.cached)profilesLoadedAt=Date.now();
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main workspace")profile.label=tr("Main workspace");
   const select=$("profile-select");updateWorkspaceOptions(select,state.profiles,state.profile,tr);
@@ -1583,7 +1648,7 @@ import("./views/accounts.js?v=layout1").then(({createAccounts})=>{
   return accountsView;
 }).catch(error=>toast(error.message,true));
 let groupView=null;
-const groupViewReady=import("./views/group.js?v=2").then(({createGroupView})=>{
+const groupViewReady=import("./views/group.js?v=3").then(({createGroupView})=>{
   groupView=createGroupView({root:$("view-group"),json,tr,trn,node,toast,getState:()=>state,avatarNode,stateBadge,
     accountState:p=>accountState(p),accountPhaseLabel,healthPartNames,collectorLines,needsLook,fmtTime,fmtDuration,may,
     switchProfile,navigate,loadProfiles,diagnose:openDiagnostics,openChat:openChatIn,exportTogether,
@@ -1892,6 +1957,12 @@ function excerpt(e) {
     case "network.route_unavailable": return (p.fallback_to_direct?tr("Telegram is contacted directly, as the IP protection allows"):
       tr("Telegram is not contacted until a listed proxy answers"))+failure;
     case "network.route_fallback": return tr("Telegram sees this server's address until a listed proxy answers");
+    case "network.slow_route": return (p.status==="down"?tr("Two route checks in a row failed"):tr("Moving average {n} ms",{n:p.ema_ms}))+
+      (p.threshold_ms?" · "+tr("threshold {n} ms",{n:p.threshold_ms}):"");
+    case "network.route_recovered": return tr("Moving average {n} ms",{n:p.ema_ms});
+    case "network.warp_rerolled": return [p.identity_changed?tr("New WARP identity"):tr("WARP endpoint {endpoint}",{endpoint:p.endpoint_after}),
+      p.before_ms!=null&&p.after_ms!=null?p.before_ms+" → "+p.after_ms+" ms":""].filter(Boolean).join(" · ");
+    case "network.warp_reroll_failed": return tr("WARP re-roll failed")+failure;
     case "network.policy_changed": return exposureNames[p.exposure]||p.exposure;
     case "network.connection_applied": return tr("Transport route checked for this connection.");
     case "network.probe": return p.connected ? tr("Telegram transport connected") : tr("Connection failed")+failure;
@@ -1912,6 +1983,7 @@ function excerpt(e) {
     case "scope.changed": return scopeName(p.after?.mode)+(p.after?.mode!=="selected"&&p.acknowledged?" · "+tr("warning confirmed"):"");
     case "scope.applied": return tr("{added} added · {paused} paused · {resumed} resumed",{added:(p.added||[]).length,paused:(p.paused||[]).length,resumed:(p.resumed||[]).length});
     case "source.discovered": return (p.title||"")+" · "+termText(p.kind);
+    case "source.restricted": return (p.restriction||[]).map(item=>item.text||item.reason).filter(Boolean).join(" · ")||tr("Blocked by Telegram");
     case "target.removed": return p.title||"";
     case "target.priority": return (p.title||"")+" · "+tr(p.priority?"priority":"regular");
     case "recheck.changed": return tr("Priority chats every {a} min · others every {b} min (0 = off)",{a:p.recheck_minutes,b:p.recheck_other_minutes});
@@ -2292,6 +2364,7 @@ function resetChatExportTools(){
   $("chat-export-progress").textContent="";
   show("chat-export-download",false);show("chat-export-cancel",false);
   show("chat-export-partial-download",false);show("chat-export-partial",false);state.exportPartial=null;
+  renderExportLive(null);
 }
 function renderChatExportTools(){
   const s=state.status;if(!s||state.view!=="evidence")return;
@@ -2372,12 +2445,20 @@ function renderExportPartial(x){
     {title:x.title||tr("chat"),messages:x.partial.messages.toLocaleString(LANG),low:x.partial.low,high:x.partial.high});
   for(const id of ["chat-export-resume","chat-export-restart"])$(id).disabled=!s||s.demo||!s.collector.has_session;
 }
+function renderExportLive(x){
+  const live=x?.live,ready=!!live&&live.pages>0&&may("export"),info=$("chat-export-live-info");
+  state.exportLive=ready?{id:x.id,name:(x.title||"chat_"+x.chat_id).replace(/[\\/:*?"<>|\s]+/g,"_")+"_live.zip"}:null;
+  show("chat-export-live",ready);info.hidden=!ready;
+  info.textContent=ready?trn("{n} message already signed. Download it at any time.","{n} messages already signed. Download them at any time.",live.messages)+
+    (live.error&&x.phase==="running"?" "+tr("The signed snapshot stopped growing. The export continues."):""):"";
+}
 function renderExportState(x){
   const prog=$("chat-export-progress");
   const running=!!x&&x.phase==="running",done=!!x&&x.phase==="done"&&x.ready;
   const stopped=!!x&&["failed","cancelled"].includes(x.phase);
   show("chat-export-cancel",running);show("chat-export-download",done);show("chat-export-partial-download",stopped&&!!x.ready);
   renderExportPartial(stopped&&x.partial?.retained?x:null);
+  renderExportLive(running||stopped?x:null);
   const percent=running&&x.total?Math.min(99,Math.floor((x.captured||0)*100/x.total)):null;
   if(!x||x.phase==="unknown"){prog.textContent="";return;}
   const resumed=x.resumed?" ("+tr("resumed")+")":"";
@@ -2452,6 +2533,11 @@ function saveExport(button){return busy(button,async()=>{
   $("chat-export-progress").textContent=tr("Downloaded. Export another chat if needed.");
 });}
 $("chat-export-download").addEventListener("click",e=>saveExport(e.currentTarget));
+$("chat-export-live").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const target=state.exportLive;if(!target)return;
+  if(await download("chat-export/"+encodeURIComponent(target.id)+"/live",target.name,true)===false)return;
+  toast(tr("Signed snapshot downloaded. verify.py inside checks it."));
+}));
 $("chat-export-partial-download").addEventListener("click",e=>saveExport(e.currentTarget));
 const accountExportKinds=["private","bot","group","supergroup","channel"];
 const accountExportMedia=["photo","video","video_message","voice","audio","document","sticker","animation"];
@@ -5119,12 +5205,39 @@ function initials(name){
   const text=String(name||"").replace(/^@/,""),words=text.split(/\s+/).filter(w=>/^\p{L}/u.test(w)&&w!=="ID");
   return words.length?(words[0][0]+(words[1]?.[0]||"")).toUpperCase():/\d/.test(text)?"#":"?";
 }
+const avatarBatches=new Map();let avatarsBatched=true;
+function flushAvatars(profile){
+  const batch=avatarBatches.get(profile);if(!batch)return;
+  avatarBatches.delete(profile);clearTimeout(batch.timer);
+  const ids=[...batch.waiting.keys()];
+  json("avatars?"+new URLSearchParams({ids:ids.join(",")}),undefined,{profile}).then(result=>{
+    for(const id of ids)for(const done of batch.waiting.get(id))done.resolve(result.avatars?.[id]??null);
+  },error=>{
+    if(error?.status===404)avatarsBatched=false;
+    for(const waiting of batch.waiting.values())for(const done of waiting)done.reject(error);
+  });
+}
+function batchedAvatar(id,profile){
+  let batch=avatarBatches.get(profile);
+  if(!batch){batch={waiting:new Map(),timer:null};avatarBatches.set(profile,batch);}
+  return new Promise((resolve,reject)=>{
+    if(!batch.waiting.has(id))batch.waiting.set(id,[]);
+    batch.waiting.get(id).push({resolve,reject});
+    if(batch.waiting.size>=48)flushAvatars(profile);
+    else if(!batch.timer)batch.timer=setTimeout(()=>flushAvatars(profile),16);
+  });
+}
+function singleAvatar(id,profile){
+  return api("avatar/"+id,undefined,{profile})
+    .then(r=>r.status===204?null:r.blob())
+    .then(b=>b&&URL.createObjectURL(new Blob([b],{type:"image/jpeg"})));
+}
 function loadAvatar(id,profile=state.profile){
   if(id===null||id===undefined||typeof id!=="number"||state.status?.demo)return Promise.resolve(null);
   const key=profile+":"+id;
-  if(!avatarCache.has(key))avatarCache.set(key,api("avatar/"+id,undefined,{profile})
-    .then(r=>r.status===204?(setTimeout(()=>avatarCache.delete(key),600000),null):r.blob())
-    .then(b=>b&&URL.createObjectURL(new Blob([b],{type:"image/jpeg"})))
+  if(!avatarCache.has(key))avatarCache.set(key,(avatarsBatched?batchedAvatar(id,profile).catch(error=>{
+      if(error?.status===404)return singleAvatar(id,profile);throw error;}):singleAvatar(id,profile))
+    .then(url=>{if(!url)setTimeout(()=>avatarCache.delete(key),600000);return url;})
     .catch(()=>{setTimeout(()=>avatarCache.delete(key),60000);return null;}));
   return avatarCache.get(key);
 }
@@ -5194,7 +5307,7 @@ async function refreshChats(refresh=false,wanted=null){
   return await loadChatMessages(refresh?"refresh":"open");
 }
 let chatListView=null;
-const chatListReady=import('./views/chat-list.js?v=layout2').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=layout3').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats()});
   return chatListView;
@@ -6185,6 +6298,7 @@ function renderMulti(){
     const label=wait||tr({pending:"starting",running:"downloading",done:"finished",skipped:"skipped",failed:"stopped — its share goes to the others"}[w.state]||w.state);
     const li=node("li","export-worker "+w.state);
     li.append(node("b","",w.label),node("span","",label+(w.error?" ("+w.error+")":"")),node("span","num",trn("{n} message","{n} messages",w.captured)));
+    if(w.handovers)li.append(node("span","hint",tr("Ranges handed to other accounts: {n}",{n:w.handovers})));
     workers.append(li);
   }
   box.append(workers);
@@ -6513,6 +6627,18 @@ const topologyReady=import('./views/topology.js?v=4').then(({createTopology})=>{
   return topologyView;
 });
 topologyReady.catch(error=>toast(error.message,true));
+let swarmView=null;
+const swarmReady=Promise.all([import('./views/swarm.js?v=2'),homeReady]).then(([{createSwarm}])=>{
+  swarmView=createSwarm({root:$('view-swarm'),tr,trn,json,getState:()=>state,options:()=>viewOptions('swarm'),toast,
+    download:(path,filename,stream,root)=>download(path,filename,stream,root),
+    taskLabel:activity=>homeTask?.(activity),
+    openAccount:async profile=>{
+      if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;
+      await navigate('start');
+    }});
+  return swarmView;
+});
+swarmReady.catch(error=>toast(error.message,true));
 let accessView=null,systemLogView=null;
 let systemMapView=null;
 const systemMapReady=import('./views/system-map.js?v=4').then(({createSystemMap})=>{
@@ -6530,9 +6656,9 @@ systemMapReady.catch(error=>toast(error.message,true));
 const accessReady=import("./views/access.js").then(({createAccessView})=>{
   accessView=createAccessView({root:$("view-access"),tr,navigate,localInput,getState:()=>state});return accessView;
 });
-const systemLogReady=import("./views/system-log.js").then(({createSystemLog})=>{
+const systemLogReady=import("./views/system-log.js?v=3").then(({createSystemLog})=>{
   systemLogView=createSystemLog({root:$("view-system-log"),tr,json,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
-    options:()=>viewOptions('system-log'),formatTime:fmtTime,toast});return systemLogView;
+    options:()=>viewOptions('system-log'),formatTime:fmtTime,toast,download:(path,filename,stream,root)=>download(path,filename,stream,root)});return systemLogView;
 });
 accessReady.catch(error=>toast(error.message,true));systemLogReady.catch(error=>toast(error.message,true));
 async function loadConsole(){return (await systemLogReady).load();}
@@ -6625,8 +6751,9 @@ async function pollWorkspace(){
 setInterval(pollWorkspace,5000);
 async function bootstrap(){
   await Promise.all([timeReady,shellReady,viewReady,chatListReady]);
-  await ensureRouter();
-  const revision=state.workspaceRevision;
+  const router=await ensureRouter();
+  const revision=state.workspaceRevision,earlyToken=state.token,early=earlyToken?bootData(router.parse().workspace,earlyToken):null;
+  early?.catch(()=>{});
   try{
     const response=await fetch("/api/demo-access",{cache:"no-store",credentials:"omit"});
     const entry=response.ok?await response.json():{};
@@ -6640,6 +6767,6 @@ async function bootstrap(){
     }
   }catch(error){                                                                     }
   if(!accessStarted&&revision===state.workspaceRevision&&state.token)
-    await unlock().catch(unlockFailed);
+    await unlock(early&&state.token===earlyToken?early:null).catch(unlockFailed);
 }
 bootstrap();

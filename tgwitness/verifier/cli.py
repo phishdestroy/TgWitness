@@ -34,6 +34,8 @@ from .password import password_command
 from .distributed import verify_distributed_work
 from .handover import verify_handover
 from .languages import VERIFIER_LANGUAGES
+from .live import live_archive, verify_live_export
+from .parallel import parallel_jobs, parallel_shutdown
 from .outside import outside_lines
 from .presentation import producer_line
 from .reports import REPORT_JSON, verify_report, verify_selection
@@ -149,7 +151,7 @@ def interactive_verify(args):
             fp = entered_fingerprint(input(say("key") + " "))
         except ValueError:
             print(say("bad_key"))
-    command = [str(path), "--pretty", "--explain", "--lang", lang, "--max-gib", str(args.max_gib)]
+    command = [str(path), "--pretty", "--explain", "--lang", lang, "--max-gib", str(args.max_gib), "--jobs", str(args.jobs)]
     if fp:
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
@@ -253,6 +255,12 @@ def verification_parser():
     parser.add_argument("--pause", action="store_true", help="Wait for Enter after an interactive check (for launchers)")
     parser.add_argument("--explain", action="store_true", help="Explain what each readable check establishes")
     parser.add_argument("--interactive", action="store_true", help="Ask for the original ZIP and trusted key; save a readable transcript")
+    parser.add_argument("--range", metavar="CHAT:FROM-TO",
+                        help="With a handover extract: confirm that messages FROM to TO of chat CHAT are in it, "
+                             "each checked (write --range=-100123:10-20 for a negative chat ID)")
+    parser.add_argument("--jobs", default="auto",
+                        help="Processes that check a large archive together: a number, or auto for one per CPU "
+                             "(at most 16). 1 checks everything in this process.")
     return parser
 
 
@@ -409,10 +417,17 @@ def verification_archive(args):
         pinned = bool(args.fingerprint)
     elif is_format(archive_format, "handover-v1"):
         shown = "handover"
-        result = verify_handover(args.bundle, args.fingerprint)
+        result = verify_handover(args.bundle, args.fingerprint, chosen_range(args.range))
         pinned = bool(args.fingerprint)
         notes.append("Minimised records are authenticated by the signature over the original record's hash; "
                      "confirm their content against the complete journal by that hash.")
+        if result["records_proven"] is not None:
+            notes.append("Merkle proofs: each of the " + str(result["records_proven"]) + " records belongs to the journal of "
+                         + str(result["journal_events"]) + " records with root " + str(result["merkle_root"])[:16] + "…")
+        if result["range"]:
+            notes.append("Range " + str(result["range"]["chat_id"]) + ":" + str(result["range"]["from"]) + "-"
+                         + str(result["range"]["to"]) + ": " + str(result["range"]["records"]) + " record(s) for "
+                         + str(result["range"]["messages"]) + " message(s) in this extract, each checked.")
     elif is_format(archive_format, "witness-v1"):
         shown = "witness"
         result = verify_witness(args.bundle, args.witness_fingerprint or args.fingerprint, args.check_drand, args.check_bitcoin)
@@ -482,7 +497,7 @@ def refuse_inapplicable(args, kind):
     refused = [flag for name, flag in REQUESTED_CHECKS
                if getattr(args, name, None) and name not in implied and name not in APPLICABLE_CHECKS.get(kind, ())]
     if getattr(args, "evidence", None) and kind in ("evidence", "chat", "handover", "witness", "account", "distributed",
-                                                    "attestation"):
+                                                    "attestation", "live"):
         refused.append("--evidence")
     if getattr(args, "compare_fingerprint", None):
         refused.append("--compare-fingerprint without --compare")
@@ -496,9 +511,20 @@ def refuse_inapplicable(args, kind):
                          + " input; supply the archive and options that check it")
 
 
+def chosen_range(value):
+    if not value:
+        return None
+    match = re.fullmatch(r"(-?\d{1,20}):(\d{1,12})-(\d{1,12})", value.strip())
+    if not match or int(match[2]) > int(match[3]):
+        raise ValueError("--range needs CHAT:FROM-TO, for example --range=-1001234567890:100-200")
+    return int(match[1]), int(match[2]), int(match[3])
+
+
 def verification_requirements(args, checked):
     result, notes, shown = checked.details, checked.notes, checked.kind
     refuse_inapplicable(args, shown)
+    if getattr(args, "range", None) and shown != "handover":
+        raise ValueError("--range checks messages in a handover extract; give the extract instead")
     chronology = result.get("chronology")
     if chronology:
         notes.append("Observation time anomalies: " + str(chronology["regressions"]) + " backward step(s), "
@@ -564,6 +590,15 @@ def verify_input(path, policy):
         checked = CheckResult("report", result, bool(args.fingerprint))
     elif args.bundle.suffix.lower() == ".json":
         checked = verification_json(args)
+    elif live_archive(args.bundle):
+        if args.checkpoint or args.witness or args.tsa_ca or args.channel or args.evidence:
+            raise ValueError("Journal/report options do not apply to a live chat export")
+        result = verify_live_export(args.bundle, args.fingerprint, args.max_gib)
+        notes = [result["meaning"]]
+        if result["salvaged"]:
+            notes.append("This archive was not closed: pages up to its last seal were checked; "
+                         + str(result["salvaged"]["unsealed_bytes"]) + " bytes after that seal were not.")
+        checked = CheckResult("live", result, bool(args.fingerprint), notes)
     else:
         checked = verification_archive(args)
     return verification_requirements(args, checked)
@@ -656,6 +691,17 @@ def main(argv=None):
         return password_command(argv[1:])
     parser = verification_parser()
     args = verification_arguments(parser, argv)
+    try:
+        parallel_jobs(args.jobs)
+    except ValueError:
+        parser.error("--jobs needs a positive number or auto")
+    try:
+        return verification_main(args, parser)
+    finally:
+        parallel_shutdown()
+
+
+def verification_main(args, parser):
     if args.interactive:
         verification_interactive(args, parser)
     if not args.bundle:

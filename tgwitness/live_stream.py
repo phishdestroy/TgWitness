@@ -74,7 +74,7 @@ def notifications(store, after, allowed, limit=100, hide_admin=False):
         return [dict(row) for row in rows]
 
 
-async def stream(store, after, authorize, disconnected, *, interval=1, lifetime=45,
+async def stream(store, after, authorize, disconnected, *, interval=1, lifetime=300,
                  board_after=0, board_authorize=None, workspace="default", hide_admin=False):
     cursor = after
     deadline = time.monotonic() + lifetime

@@ -15,8 +15,14 @@ from ..collector import Collector
 from ..demo import seed_demo
 from ..disclosure import Disclosures
 from ..distributed_export import DistributedExport
+from ..swarm.bulk_actions import BulkActions
+from ..swarm.exports import SwarmExports
 from ..evidence import cleanup_exports
 from ..evidence import retain_checkpoint
+from ..export.live_export import repair as repair_live_exports
+from ..media.cas import MediaLibrary
+from ..obs.flight_recorder import RECORDER
+from ..swarm.dashboard import meter
 from ..monitoring import capture_settings
 from ..operator_bot import OperatorBot
 from ..profiles import Profiles
@@ -53,6 +59,7 @@ class LifecycleOperations:
         profiles = None
         try:
             cleanup_exports(self.root)
+            repair_live_exports(self.root)
             threading.Thread(
                 target=pdf_report.available, name="pdf-preload", daemon=True
             ).start()
@@ -66,6 +73,13 @@ class LifecycleOperations:
                 store.bind(vault)
 
             await complete_in_thread(open_journal)
+            if tuning.value(store, "journal_fast_writes"):
+                store.db.execute("PRAGMA synchronous=NORMAL")
+            RECORDER.attach()
+            if self.allow_profiles:
+                RECORDER.root = self.root
+            RECORDER.watch(store, self.profile_id)
+            meter(store)
             await complete_in_thread(store.verify, vault.public_key)
             if self.demo:
                 if store.stats()["total"] and (not store.get_setting("demo", False)):
@@ -91,6 +105,12 @@ class LifecycleOperations:
             )
             collector.account_guard = self.account_guard
             collector.proxy_pool = self.shared_pool
+            library = self.root / "cas" if self.allow_profiles else (
+                self.root.parent.parent / "cas" if self.root.parent.name == "profiles" else None)
+            collector.media_library = MediaLibrary(library) if library is not None and not self.demo else None
+            if self.allow_profiles and collector.media_library is not None:
+                threading.Thread(target=collector.media_library.sweep, name="media-library-sweep",
+                                 daemon=True).start()
             app.state.store, app.state.vault, app.state.collector = (
                 store,
                 vault,
@@ -281,6 +301,8 @@ class LifecycleOperations:
                 app.state.access.group_of = profiles.group_of
                 await profiles.open()
                 app.state.multi_export = DistributedExport(profiles)
+                app.state.swarm_exports = SwarmExports(app)
+                app.state.swarm_bulk = BulkActions(app)
                 from ..archive_api import startup as start_mcp
 
                 await start_mcp(app)
@@ -296,6 +318,10 @@ class LifecycleOperations:
                     await stop_mcp(app)
                 if getattr(app.state, "media_analysis", None):
                     await app.state.media_analysis.close()
+                if getattr(app.state, "swarm_bulk", None):
+                    await app.state.swarm_bulk.close()
+                if getattr(app.state, "swarm_exports", None):
+                    await app.state.swarm_exports.close()
                 if getattr(app.state, "multi_export", None):
                     await app.state.multi_export.close()
                 if profiles:

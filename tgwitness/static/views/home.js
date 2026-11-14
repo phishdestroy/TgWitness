@@ -20,8 +20,167 @@ export function taskInfo(activity) {
   return row ? {label: row[0], blocks: row[1], allows: row[2], action: row[3], path: row[4]} : null;
 }
 
-export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize}) {
+const STOP_REASONS = {operator: 'Stopped from the panel', shutdown: 'TgWitness was shut down'};
+
+export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize, openChatIn}) {
   let activity = null, loadedAt = 0, loading = false, loadedFor = null;
+  let live = null, liveAt = 0, liveLoading = false, liveFor = null, ticker = null;
+  const number = value => Number(value || 0).toLocaleString(document.documentElement.lang || undefined, {maximumFractionDigits: 1});
+
+  async function loadLive(profile) {
+    if (liveLoading || (liveFor === profile && Date.now() - liveAt < 10000)) return;
+    liveLoading = true;
+    try {
+      const next = await json('overview/live');
+      if (getState().profile !== profile) return;
+      live = next; liveAt = Date.now(); liveFor = profile;
+      render();
+    } catch {
+      if (liveFor !== profile) live = null;
+    } finally {
+      liveLoading = false;
+    }
+  }
+
+  function ago(iso) {
+    const seconds = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 1000));
+    if (!Number.isFinite(seconds)) return '';
+    if (seconds < 60) return tr('{n} s ago', {n: seconds});
+    if (seconds < 3600) return tr('{n} min ago', {n: Math.floor(seconds / 60)});
+    if (seconds < 172800) return tr('{n} h ago', {n: Math.floor(seconds / 3600)});
+    return tr('{n} days ago', {n: Math.floor(seconds / 86400)});
+  }
+
+  function lasting(iso) {
+    const minutes = Math.max(0, Math.floor((Date.now() - Date.parse(iso)) / 60000));
+    if (!Number.isFinite(minutes)) return '';
+    if (minutes < 60) return tr('{n} min', {n: minutes});
+    if (minutes < 2880) return tr('{h} h {m} min', {h: Math.floor(minutes / 60), m: minutes % 60});
+    return tr('{n} days', {n: Math.floor(minutes / 1440)});
+  }
+
+  function clock(iso, render) {
+    const element = node('span', 'home-clock');
+    element.dataset.at = iso;
+    element.dataset.format = render;
+    element.textContent = render === 'ago' ? ago(iso) : lasting(iso);
+    return element;
+  }
+
+  function tick() {
+    if (!root?.isConnected || document.hidden || getState().view !== 'start') return;
+    for (const element of root.querySelectorAll('.home-clock[data-at]'))
+      element.textContent = element.dataset.format === 'ago' ? ago(element.dataset.at) : lasting(element.dataset.at);
+  }
+
+  function hero(state) {
+    const collector = state.status?.collector || {}, observation = live?.observation || {};
+    const running = !!collector.running, starting = collector.activity?.task === 'starting_observation';
+    const none = !running && !starting && !collector.has_session && !state.status?.demo;
+    const box = node('section', 'home-hero ' + (running ? 'is-live' : starting ? 'is-starting' : none ? 'is-empty' : 'is-paused'));
+    const head = node('div', 'home-hero-head'), title = node('h2', 'home-hero-title');
+    title.append(node('span', 'home-hero-dot'), document.createTextNode(running ? tr('Observing') : starting ? tr('Starting observation')
+      : none ? tr('No Telegram account connected') : tr('Observation paused')));
+    if (observation.since && !starting && !none) title.append(node('span', 'home-hero-since', ' · '), clock(observation.since, 'lasting'));
+    head.append(title);
+    const can = state.me?.admin || state.me?.permissions?.includes('collect');
+    if (can && collector.has_session && !state.status?.demo && !starting) {
+      const action = node('button', running ? 'secondary' : 'primary', running ? tr('Pause') : tr('Resume now'));
+      action.type = 'button';
+      action.addEventListener('click', () => busy(action, async () => {
+        await json('collector/' + (running ? 'stop' : 'start'), {});
+        liveAt = 0;
+        await refresh();
+      }));
+      head.append(action);
+    }
+    box.append(head);
+    const facts = node('p', 'home-hero-facts');
+    if (none) {
+      const connect = node('button', 'primary', tr('Connect account'));
+      connect.type = 'button';
+      connect.addEventListener('click', () => navigate('connection'));
+      head.append(connect);
+    } else if (!running && !starting && observation.change === 'observation.stopped')
+      facts.append(node('span', '', tr(STOP_REASONS[observation.reason] || 'Stopped by an error or a change of the account')));
+    else if (!running && !starting && observation.change === 'process.stopped') facts.append(node('span', '', tr(STOP_REASONS.shutdown)));
+    if (live?.last_record_at) {
+      const last = node('span', '', tr('Last record') + ' ');
+      last.append(clock(live.last_record_at, 'ago'));
+      facts.append(last);
+    }
+    if (facts.childNodes.length) box.append(facts);
+    if (live) {
+      const strip = node('div', 'home-rates');
+      const stat = (value, label, warn) => {
+        const tile = node('div', 'home-rate' + (warn ? ' warn' : ''));
+        tile.append(node('strong', '', value), node('span', '', label));
+        return tile;
+      };
+      strip.append(stat(number(live.rates.messages_per_minute), tr('messages per minute')),
+                   stat(number(live.rates.media_per_minute), tr('files per minute')),
+                   stat(tr('{n} s', {n: number(live.floodwait_today.seconds)}), tr('Telegram waits today'), live.floodwait_today.seconds > 0));
+      box.append(strip, node('p', 'home-note', tr('Averages over the last 5 minutes. Waits are the pauses Telegram requested since midnight UTC.')));
+    }
+    return box;
+  }
+
+  function chatsCard(state) {
+    if (!live) return null;
+    const box = node('section', 'home-card home-chats'), head = node('div', 'home-heading');
+    head.append(node('h2', '', tr('Chats')));
+    box.append(head);
+    const columns = node('div', 'home-chat-columns');
+    const column = (title, rows, value, empty) => {
+      const wrap = node('div', 'home-chat-column');
+      wrap.append(node('h3', '', title));
+      if (!rows.length) { wrap.append(node('p', 'home-empty', empty)); return wrap; }
+      const list = node('ul', 'home-chat-list');
+      for (const row of rows) {
+        const item = node('li'), open = node('button', 'home-chat-open');
+        open.type = 'button';
+        open.append(node('span', 'home-chat-name', row.title || ('#' + row.chat_id)), value(row));
+        open.addEventListener('click', () => busy(open, () => openChatIn ? openChatIn(state.profile, row.chat_id) : navigate('chats')));
+        item.append(open); list.append(item);
+      }
+      wrap.append(list);
+      return wrap;
+    };
+    columns.append(
+      column(tr('Most active, 24 hours'), live.active_chats, row => node('span', 'home-chat-value', number(row.events)),
+             tr('No new messages in the last 24 hours.')),
+      column(tr('Longest silence'), live.quiet_chats, row => row.last_at ? clock(row.last_at, 'ago') : node('span', 'home-chat-value', tr('nothing saved yet')),
+             tr('No enabled sources.')));
+    box.append(columns);
+    return box;
+  }
+
+  function witnessesCard() {
+    if (!live || (!live.witnesses && !live.evidence_enabled)) return null;
+    const box = node('section', 'home-card home-witnesses'), head = node('div', 'home-heading');
+    head.append(node('h2', '', tr('Time witnesses')));
+    box.append(head);
+    const w = live.witnesses;
+    if (w) {
+      const all = w.answered === w.total && w.total > 0;
+      box.append(node('p', 'home-witness-score' + (all ? ' ok' : ' partial'), tr('{ok} of {total} services', {ok: w.answered, total: w.total})));
+      const when = node('p', 'home-note', tr('Last checkpoint') + ' ');
+      when.append(clock(w.at, 'ago'));
+      if (w.records) when.append(document.createTextNode(' · ' + trn('{n} record', '{n} records', w.records)));
+      box.append(when);
+    } else box.append(node('p', 'home-empty', tr('No independent timestamp yet.')));
+    if (live.evidence_enabled && !getState().status?.demo) {
+      const verify = node('button', 'secondary small', tr('Timestamp now'));
+      verify.type = 'button';
+      verify.addEventListener('click', () => busy(verify, async () => {
+        await json('evidence/anchor', {});
+        toast(tr('An independent timestamp was requested. Results appear in a minute.'));
+        liveAt = 0;
+      }));
+      box.append(verify);
+    }
+    return box;
+  }
   const svgNS = 'http://www.w3.org/2000/svg';
   const svgNode = (tag, attributes) => {
     const element = document.createElementNS(svgNS, tag);
@@ -229,6 +388,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       const state = getState();
       if (!root || !state.status) return;
       loadActivity(state.profile);
+      loadLive(state.profile);
+      if (!ticker) ticker = setInterval(tick, 1000);
       const profiles = (state.profiles && state.profiles.length) ? state.profiles
         : [{id: state.profile, label: tr('Main workspace'), collector: state.status.collector, health: state.status.health}];
       const accounts = node('section', 'home-card home-accounts');
@@ -243,12 +404,12 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       for (const profile of profiles) grid.append(accountCard(profile, state));
       accounts.append(grid);
       const side = node('div', 'home-side');
-      side.append(running(profiles), system(state));
+      side.append(...[running(profiles), witnessesCard(), system(state)].filter(Boolean));
       const main = node('div', 'home-main');
-      main.append(accounts, chart());
+      main.append(...[accounts, chatsCard(state), chart()].filter(Boolean));
       const layout = node('div', 'home-layout');
       layout.append(main, side);
-      root.replaceChildren(layout);
+      root.replaceChildren(hero(state), layout);
   }
 
   return {render};

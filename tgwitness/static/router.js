@@ -1,9 +1,10 @@
-const paths={"system-map":"system-map",board:"board",topology:"topology",settings:"settings","first-run":"first-run",start:"start",chats:"chats","secret-chats":"secret-chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",group:"groups",
+const paths={"system-map":"system-map",board:"board",topology:"topology",swarm:"swarm",settings:"settings","first-run":"first-run",start:"start",chats:"chats","secret-chats":"secret-chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",group:"groups",
   access:"access","system-log":"system-log",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed"};
 const views=Object.fromEntries(Object.entries(paths).map(([view,path])=>[path,view]));
 const legacy={start:"start",account:"connection",connection:"connection",journal:"observations",observations:"observations",
   exports:"evidence",evidence:"evidence",extras:"witness",witness:"witness",sealed:"sealed",chats:"chats",
   sources:"sources",parameters:"parameters",accounts:"accounts",access:"access","system-log":"system-log",integrations:"integrations",analysis:"analysis"};
+const aliases={"network-topology":"topology",fleet:"swarm","swarm-dashboard":"swarm","case-board":"board",home:"start",dashboard:"start",overview:"start",map:"system-map",logs:"system-log",log:"system-log"};
 const cards=new Set(["setup","alerts","evidence","cloud","bot","github","storage","capture"]);
 const hubSections=new Set(["appearance","level","goal","connection","telegram","chats","collection","protection","notifications","group"]);
 const firstRunStep=value=>/^[1-7]$/.test(value||"")?Number(value):null;
@@ -19,7 +20,9 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   const oldView=legacy[fragment];
   if(oldView)path="/"+paths[oldView];
   const parts=path.replace(/^\/+|\/+$/g,"").split("/").filter(Boolean);
+  if(parts.length===1&&Object.hasOwn(aliases,parts[0]))parts[0]=aliases[parts[0]];
   const explicit=!!query.get("route")||!!oldView||parts.length>0&&parts[0]!=="index.html"||query.has("event");
+  const unknown=parts.length>0&&parts[0]!=="index.html"&&!Object.hasOwn(views,parts[0])&&!query.has("event");
   const route={view:views[parts[0]]||null,workspace:query.get("ws")||query.get("workspace")||workspace,
     chatId:null,seq:null,kind:query.get("kind")||"",source:query.get("source")||"",q:query.get("q")||"",
     since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",slice:query.get('slice')||null,added:query.get('added')==='1',
@@ -36,13 +39,16 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   if(parts[0]==="first-run"&&parts.length>1){route.step=firstRunStep(parts[1]);if(route.step===null||parts.length>2)route.error="Record is unavailable to this access.";}
   if(parts[0]==="settings"&&parts.length>1){route.hub=hubSections.has(parts[1])&&parts.length===2?parts[1]:null;if(!route.hub)route.error="Record is unavailable to this access.";}
   if(parts[0]==="groups"){route.group=groupPattern.test(parts[1]||"")&&parts.length===2?parts[1]:null;if(!route.group)route.error="Record is unavailable to this access.";}
-  if(parts.length>1&&!["chats","journal","extras","first-run","groups","settings"].includes(parts[0]))route.error="Record is unavailable to this access.";
+  if(parts.length>1&&!unknown&&!["chats","journal","extras","first-run","groups","settings"].includes(parts[0]))route.error="Record is unavailable to this access.";
   if(query.has("event")){
     route.seq=integer(query.get("event"));route.view="observations";
     if(route.seq===null||route.seq<=0)route.error="Record is unavailable to this access.";
   }
   if(route.view==="parameters"&&!oldView&&fragment&&!fragment.startsWith("/"))route.section=fragment.replace(/^parameters-group-/,"");
-  if(explicit&&!route.view)route.error="Record is unavailable to this access.";
+  if(explicit&&!route.view){
+    if(unknown&&!route.error){route.view="start";route.missing="/"+parts.join("/");}
+    else route.error="Record is unavailable to this access.";
+  }
   if(route.source&&integer(route.source)===null)route.error="Record is unavailable to this access.";
   if(query.has("before")&&(route.before===null||route.before<=0))route.error="Record is unavailable to this access.";
   return route;
@@ -94,9 +100,11 @@ export function createRouter(context){
       await context.apply(route,valid);
       if(!valid())return;
       const final={...context.snapshot(),...route,view:context.snapshot().view};
+      delete final.missing;
       history.replaceState({tgwitness:{route:final}},"",routeURL(final,{staticDemo}));
       lastReplay=location.href;
       emit(final,reason);
+      if(route.missing)context.notice?.(route.missing);
     }catch(error){if(valid()&&error.name!=="StaleView")context.error(error.message);}
   }
   const onHistory=()=>{if(lastReplay!==location.href)void replay();};

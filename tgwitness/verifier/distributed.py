@@ -11,11 +11,15 @@ from .common import (
     read_json_file,
     strict_json,
 )
+DISTRIBUTED_PAGE_FORMATS = ("tgwitness-distributed-pages-v1", "tgwitness-distributed-pages-v2")
+
+
 def verify_distributed_pages(stream, envelopes, job, task):
     from .chain import canonical
-    format_name = "tgwitness-distributed-pages-v1"
-    if job.get("checkpoint_format") != format_name:
+    format_name = job.get("checkpoint_format")
+    if format_name not in DISTRIBUTED_PAGE_FORMATS:
         raise ValueError("Unsupported distributed checkpoint format.")
+    handovers = format_name == DISTRIBUTED_PAGE_FORMATS[1]
     low, high = task["low"], task["high"]
     if type(low) is not int or type(high) is not int or not 0 < low <= high:
         raise ValueError("Invalid checkpoint range.")
@@ -28,8 +32,11 @@ def verify_distributed_pages(stream, envelopes, job, task):
         value = envelope["statement"]
         profile = value["profile_id"]
         worker = workers.get(profile)
+        changed = state["profile_id"] not in (None, profile)
+        handover = value.get("handover_from") if handovers else None
         if (not worker or profile not in eligible or envelope["public_key"] != worker["public_key"]
-                or state["profile_id"] not in (None, profile)):
+                or (handover != state["profile_id"] if changed else handover is not None)
+                or not handovers and "handover_from" in value):
             raise ValueError("Checkpoint observer differs from the signed plan or preceding pages.")
         Ed25519PublicKey.from_public_bytes(base64.b64decode(worker["public_key"], validate=True)).verify(
             base64.b64decode(envelope["signature"], validate=True), canonical(value))
@@ -49,7 +56,8 @@ def verify_distributed_pages(stream, envelopes, job, task):
         generation = value.get("transport_generation")
         if (value.get("transport") != job.get("transport", "regular")
                 or value["transport"] == "takeout" and (type(generation) is not int or generation < 1
-                    or state["transport_generation"] is not None and generation < state["transport_generation"])
+                    or not changed and state["transport_generation"] is not None
+                    and generation < state["transport_generation"])
                 or value["transport"] == "regular" and generation is not None):
             raise ValueError("Checkpoint transport differs from the plan or preceding pages.")
         for name in ("captured_from", "captured_until"):
@@ -103,7 +111,7 @@ def verify_distributed_work(directory, expected_fingerprint=None, max_gib=None):
     if expected_fingerprint and fp != expected_fingerprint:
         raise ValueError("Public key differs from the independently trusted fingerprint")
     if (job.get("format") != "tgwitness-distributed-job-v1"
-            or job.get("checkpoint_format") != "tgwitness-distributed-pages-v1"
+            or job.get("checkpoint_format") not in DISTRIBUTED_PAGE_FORMATS
             or type(job.get("chunk_size")) is not int or job["chunk_size"] < 1):
         raise ValueError("This directory does not use the supported distributed checkpoint format.")
     workers = {w["profile_id"]: w for w in job["workers"]}

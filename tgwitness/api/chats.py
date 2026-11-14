@@ -47,7 +47,10 @@ from fastapi.responses import FileResponse
 from fastapi.responses import Response
 from pydantic import BaseModel
 from typing import Literal
+from datetime import datetime
+from pathlib import Path
 import asyncio
+import base64
 import json
 import re
 import secrets
@@ -443,8 +446,10 @@ async def set_parameters(body: ParametersUpdate, *, ctx=Depends(current_context)
 async def chats(request: Request, *, ctx=Depends(current_context)):
     store = ctx.app.state.store
     overview = store.chat_overview()
+    waiting = await asyncio.to_thread(store.media_waiting_by_chat)
     listed = [
-        {**t, "enabled": bool(t["enabled"]), **overview.pop(t["chat_id"], {})}
+        {**t, "enabled": bool(t["enabled"]), **overview.pop(t["chat_id"], {}),
+         **({"media_waiting": waiting[t["chat_id"]]} if t["chat_id"] in waiting else {})}
         for t in store.targets()
     ]
     listed += [
@@ -534,6 +539,35 @@ def message_page(store, chat_id, before_id, limit, after_id):
         after_id=after_id,
     )
     return result
+
+
+COVERAGE_KINDS = ("coverage.gap", "connection.restored", "process.started", "process.stopped",
+                  "observation.started", "observation.stopped")
+
+
+async def chat_coverage(
+    request: Request,
+    chat_id: int,
+    since: str | None = None,
+    until: str | None = None,
+    *,
+    ctx=Depends(current_context),
+):
+    dates = []
+    for value in (since, until):
+        try:
+            date = datetime.fromisoformat(value) if value is not None and len(value) <= 64 else None
+            if value is not None and (date is None or date.tzinfo is None):
+                raise ValueError()
+            dates.append(date)
+        except (ValueError, OverflowError):
+            raise HTTPException(422, "Dates must be ISO timestamps with a timezone.") from None
+    try:
+        return await asyncio.to_thread(
+            ctx.app.state.store.coverage_records, chat_id, COVERAGE_KINDS, since=dates[0], until=dates[1],
+            hide_admin=not request.state.principal.admin)
+    except TimeoutError:
+        raise HTTPException(503, "The journal is busy. Retry in a moment.") from None
 
 
 async def chat_authors(chat_id: int, *, ctx=Depends(current_context)):
@@ -675,6 +709,35 @@ async def notifications(request: Request, *, ctx=Depends(current_context)):
 
 async def chat_scale(chat_id: int, *, ctx=Depends(current_context)):
     return await ctx.operation(ctx.app.state.collector.chat_scale, chat_id)
+
+
+async def avatars(request: Request, ids: str = "", *, ctx=Depends(current_context)):
+    try:
+        wanted = list(dict.fromkeys(int(value) for value in ids.split(",") if value.strip()))
+    except ValueError:
+        raise HTTPException(422, "Use comma-separated numeric IDs.") from None
+    if not 1 <= len(wanted) <= 48 or any(not -(2**63) <= value < 2**63 for value in wanted):
+        raise HTTPException(422, "Ask for 1–48 avatars at a time.")
+    store = ctx.app.state.store
+    if store.get_setting("demo", False):
+        return {"avatars": {str(value): None for value in wanted}}
+    allowed = ctx.visible_chats(request)
+
+    async def one(peer_id):
+        if allowed is not None and peer_id not in allowed and not await asyncio.to_thread(
+                store.sender_in_chats, peer_id, allowed):
+            return None
+        try:
+            path = await ctx.app.state.collector.avatar(peer_id)
+        except Exception:
+            return None
+        if not path:
+            return None
+        data = await asyncio.to_thread(Path(path).read_bytes)
+        return "data:image/jpeg;base64," + base64.b64encode(data).decode("ascii")
+
+    found = await asyncio.gather(*(one(peer_id) for peer_id in wanted))
+    return {"avatars": {str(peer_id): value for peer_id, value in zip(wanted, found)}}
 
 
 async def avatar(request: Request, peer_id: int, *, ctx=Depends(current_context)):

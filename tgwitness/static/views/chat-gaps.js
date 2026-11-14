@@ -56,8 +56,23 @@ export function intervals(events, chat) {
 }
 
 export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allowJournal}) {
-  let numbers = new Map(), periods = [], loadedKey = "", pendingKey = "";
-  const cache = new Map();
+  let numbers = new Map(), periods = [], loadedKey = "", pendingKey = "", compact = true;
+  const cache = new Map(), answers = new Map();
+
+  function coverage(chat, range, dataKey) {
+    const query = new URLSearchParams();
+    for (const name of ["since", "until"]) if (range[name]) query.set(name, range[name]);
+    const id = chat + "|" + query + "|" + dataKey;
+    if (answers.has(id)) return Promise.resolve(answers.get(id));
+    const legacy = () => json("events?kind=" + KINDS + "&limit=500" + (query.size ? "&" + query : ""));
+    const request = compact ? json("chats/" + encodeURIComponent(chat) + "/coverage" + (query.size ? "?" + query : ""))
+      .catch(error => {if (error?.status !== 404) throw error; compact = false; return legacy();}) : legacy();
+    return request.then(result => {
+      answers.set(id, result);
+      if (answers.size > 24) answers.delete(answers.keys().next().value);
+      return result;
+    });
+  }
 
   function marker(kind, key, build) {
     const id = kind + ":" + key;
@@ -126,8 +141,7 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     if (key === loadedKey || key === pendingKey) return;
     if (!loadedKey.startsWith(chatKey + "|")) periods = [];
     pendingKey = key;
-    const window = ["since", "until"].filter(name => range[name]).map(name => "&" + name + "=" + encodeURIComponent(range[name])).join("");
-    json("events?kind=" + KINDS + "&limit=500" + window).then(result => {
+    coverage(chat, range, dataKey).then(result => {
       if (pendingKey !== key) return;
       const next = intervals(result.events || [], chat), changed = JSON.stringify(next) !== JSON.stringify(periods);
       periods = next; loadedKey = key; pendingKey = "";

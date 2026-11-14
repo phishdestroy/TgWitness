@@ -11,7 +11,7 @@ export function createSettingsHub(ctx) {
   const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'simple',observations:'simple',evidence:'simple',settings:'simple',
     board:'standard',accounts:'simple',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
-  let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null;
+  let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null, rerollTimer=null;
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
   let autoTried=false, routeDirty=false, checkFailure=null;
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null, methodShown=false;
@@ -36,10 +36,18 @@ export function createSettingsHub(ctx) {
   function requireOwner(who){
     if(!current(who))throw ctx.staleView();
   }
+  const recent=new Map();
   async function request(who,path,body){
-    requireOwner(who);
+    requireOwner(who);if(body!==undefined)recent.clear();
     const result=await json(path,body,{profile:who.profile,token:who.token});
     requireOwner(who);return result;
+  }
+  function shared(who,path){
+    const key=who.profile+'|'+who.revision+'|'+who.token+'|'+path,hit=recent.get(key);
+    if(hit&&Date.now()-hit.at<2000)return hit.promise;
+    const promise=request(who,path);recent.set(key,{at:Date.now(),promise});
+    promise.catch(()=>{if(recent.get(key)?.promise===promise)recent.delete(key);});
+    return promise;
   }
   async function confirm(who,message){
     requireOwner(who);const accepted=await askConfirm(message);requireOwner(who);return accepted;
@@ -135,7 +143,7 @@ export function createSettingsHub(ctx) {
     const demo=state.status?.demo||window.TGW_ONLINE_DEMO;
     for(const control of document.querySelectorAll('[data-ui-level]'))control.hidden=!!demo;
     if(demo){$('hub-route-status').hidden=true;return;}
-    const loaded=await request(who,'preferences');
+    const loaded=await shared(who,'preferences');
     if(preferenceVersion===preferencesSequence)prefs=loaded.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};
     const requestedLanguage=new URL(location.href).searchParams.get('lang');
     if(requestedLanguage===ctx.language&&prefs.language!==requestedLanguage)await savePreferences({language:requestedLanguage},who);
@@ -143,7 +151,7 @@ export function createSettingsHub(ctx) {
     requireOwner(who);
     if(prefs.language!==ctx.language){await ctx.changeLanguage(prefs.language);return;}
     if(!state.me?.admin||state.status?.demo)return;
-    const loadedSettings=await request(who,'settings');
+    const loadedSettings=await shared(who,'settings');
     if(draftVersion!==draftSequence){scheduleStatus();return;}
     data=loadedSettings;draft={...data.wizard};
     if(openFirstRun&&location.href===initialRoute&&!draft.completed&&!draft.skipped)await navigate('first-run');
@@ -160,8 +168,8 @@ export function createSettingsHub(ctx) {
     }
     if(state.status?.demo){closed('Demo workspace. Connect accounts in your live installation.');return;}
     if(!state.me?.admin){closed('Only the workspace administrator can change collection settings.');return;}
-    if(!prefs){const result=await request(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
-    data=await request(who,'settings');draft={...data.wizard};
+    if(!prefs){const result=await shared(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:lastLevel(),...(prefs||{})};applyPresentation();}
+    data=await shared(who,'settings');draft={...data.wizard};
     visited=Math.max(visited,draft.step);
     if(state.view==='first-run'&&wanted&&wanted!==draft.step&&wanted<=visited&&!live){
       recordedStep=wanted;
@@ -183,9 +191,10 @@ export function createSettingsHub(ctx) {
       data=result;if(sequence===draftSequence)draft={...result.wizard};
     });return draftQueue;
   }
-  async function applyGoal(goal,{first=false,keep=false,quiet=false}={},who=owner()){
+  async function applyGoal(goal,{first=false,keep=false,quiet=false,ask=false}={},who=owner()){
     const plan=await request(who,'settings/goal/preview',{goal,keep_manual:keep});
     const text=plan.diff.map(row=>tr(data.fields.find(f=>f.key===row.key)?.label||row.key)+': '+describe(row.before)+' → '+describe(row.after)).join('\n');
+    if(ask&&plan.diff.length&&!await confirm(who,ctx.trn('Return {n} setting to the recommended value?','Return {n} settings to the recommended values?',plan.diff.length)+'\n\n'+text))return false;
     if(!first&&!quiet&&!await confirm(who,tr('Change goal?')+'\n\n'+(text||tr('The settings already match.'))))return false;
     const before={...data.values},goalBefore=data.goal;
     data=await request(who,'settings/goal',{goal,revision:plan.revision,keep_manual:keep});
@@ -409,7 +418,7 @@ export function createSettingsHub(ctx) {
       const chip=node('div','hub-chip');chip.append(node('dt','',fieldLabel(key)),node('dd','',value));chips.append(chip);
     }
     const actions=node('div','hub-actions');
-    if(modified.length&&data.goal)actions.append(button('Return to recommended',()=>applyGoal(data.goal,{quiet:true}).then(()=>render()),'secondary'));
+    if(modified.length&&data.goal)actions.append(button('Return to recommended',()=>applyGoal(data.goal,{quiet:true,ask:true}).then(()=>render()),'secondary'));
     actions.append(button('Undo last change',restoreLatest,'quiet hub-undo-last'));
     card.append(head,message(data.goal?tr('Chosen for “{goal}”. Change only what you need: every change can be undone.',{goal:label(data.goal)})
       :tr('Safe defaults are in use. Change only what you need: every change can be undone.')),chips,actions);box.append(card);
@@ -636,11 +645,68 @@ export function createSettingsHub(ctx) {
       if(connection?.pool?.listed&&connection.pool.healthy===0&&connection.pool.probed_at){openOptions();box.className='connection-result failed';box.prepend(message('No public proxy answers. Try WARP or your own proxy.'));}
       if(state.view==='first-run')box.append(button('Try WARP',async()=>{draft.route='warp';await renderWizard();}),button('Check again',checkConnection));
     }
+    const health=healthView(connection);if(health)box.append(health);
+    if(connection?.reroll?.state==='running')pollReroll(owner());
+  }
+  function routeTime(ms){return ms==null?'—':ms<1000?tr('{n} ms',{n:ms}):tr('{n} s',{n:(ms/1000).toFixed(1)});}
+  function rerollView(reroll){
+    const box=node('div','route-reroll'),place=value=>value==='default'?tr('Default endpoint'):value==='new identity'?tr('New WARP identity'):value;
+    if(reroll.state==='running')box.append(node('p','route-reroll-stage running',reroll.trying==='identity'?tr('Registering a new WARP identity…'):
+      reroll.trying&&reroll.trying!=='default'?tr('Trying WARP endpoint {endpoint}…',{endpoint:place(reroll.trying)}):tr('Measuring the WARP route…')));
+    else if(reroll.state==='done')box.append(node('p','route-reroll-stage',reroll.before_ms!=null&&reroll.after_ms!=null?
+      tr('Re-roll finished: {before} → {after}',{before:routeTime(reroll.before_ms),after:routeTime(reroll.after_ms)}):tr('Re-roll finished.')));
+    else if(reroll.state==='failed')box.append(node('p','route-reroll-stage error-text',tr(reroll.error||'WARP re-roll failed.')));
+    if(reroll.tried?.length){const list=node('ol','route-reroll-list');
+      for(const item of reroll.tried){const row=node('li',item.ms==null?'failed':item.ms<1500?'fast':item.ms<5000?'fair':'slow');
+        row.append(node('span','',place(item.endpoint)),node('span','',item.ms==null?tr('No answer'):routeTime(item.ms)));list.append(row);}
+      box.append(list);}
+    return box;
+  }
+  function healthView(connection){
+    const health=connection?.health,actions=connection?.actions||{},reroll=connection?.reroll;
+    if(!health||health.status==='unknown'&&!reroll)return null;
+    const slow=['slow','down'].includes(health.status),wrap=node('div','route-health '+(slow?'route-health-bad':'route-health-good'));
+    if(slow)wrap.append(node('p','route-health-title',health.status==='down'?tr('{route} stopped answering Telegram checks.',{route:label(connection.mode)}):
+      tr('{route} takes {time} to reach Telegram.',{route:label(connection.mode),time:routeTime(health.ema_ms)})));
+    if(health.connect_ms!=null)wrap.append(node('p','hint',tr('Tunnel connection {connect} · Telegram round trip {rtt}',{connect:routeTime(health.connect_ms),rtt:routeTime(health.rtt_ms)})));
+    if(health.samples?.length>1){const chips=node('div','route-samples');chips.setAttribute('aria-label',tr('Recent checks'));
+      for(const ms of health.samples)chips.append(node('span',ms==null?'failed':ms>health.threshold_ms?'slow':'',ms==null?'✕':routeTime(ms)));wrap.append(chips);}
+    if(reroll&&(reroll.state==='running'||Date.now()/1000-(reroll.finished_at||0)<900))wrap.append(rerollView(reroll));
+    if(slow||reroll?.state==='running'){
+      const row=node('div','route-actions'),busyNow=reroll?.state==='running';
+      if(actions.reroll){const again=button('Re-roll WARP',()=>startReroll('endpoint'),'primary small'),renew=button('New WARP identity',()=>startReroll('identity'),'secondary small');
+        again.disabled=renew.disabled=busyNow;row.append(again,renew);}
+      if(actions.warp)row.append(button('Switch to WARP',()=>switchRoute('warp'),'secondary small'));
+      row.append(button('Try direct',()=>switchRoute('direct'),'secondary small'));
+      if(actions.mtproxy)row.append(button('Switch to MTProxy',()=>switchRoute('mtproxy'),'secondary small'));
+      wrap.append(row);
+      if(health.reroll?.confirm_needed)wrap.append(message('An automatic re-roll did not make the route faster. Re-roll again or choose another route.'));
+      else if(actions.reroll)wrap.append(message('A slow WARP route is re-rolled automatically at most once every 30 minutes.'));
+    }
+    return wrap;
+  }
+  async function startReroll(kind){
+    const who=owner();
+    if(kind==='identity'&&!(await confirm(who,tr('Register a new WARP device for this account? The tunnel restarts and Telegram reconnects; the account and its session stay the same.'))))return;
+    const result=await request(who,'connection/reroll',{kind});
+    data.connection=result.current;paintConnection(result.current);updateIndicator(result.current);
+  }
+  function pollReroll(who){clearTimeout(rerollTimer);rerollTimer=setTimeout(async()=>{
+    if(!current(who))return;
+    try{const result=await request(who,'connection');if(!current(who))return;data.connection=result.current;paintConnection(result.current);updateIndicator(result.current);}catch{}
+  },1500);}
+  async function switchRoute(mode){
+    const who=owner();
+    if(mode==='direct'&&!data.connection.actions?.direct&&!(await confirm(who,tr('Telegram will see this server’s public IP address for this account. Switch to a direct connection?'))))return;
+    draft.route=mode;draft.unchecked=false;routeDirty=true;checkFailure=null;if(mode==='direct')draft.allow_direct=true;
+    await checkConnection(mode==='warp',who);
   }
   function updateIndicator(connection){
     const el=$('hub-route-status');if(!el)return;
     const ok=fresh(connection)&&(!state.status.collector.running||state.status.collector.connected!==false);
-    el.classList.toggle('route-offline',!ok);el.textContent=ok?label(connection.mode)+' · '+connection.check.latency_ms+' '+tr('ms'):tr('No connection');
+    const slow=ok&&['slow','down'].includes(connection?.health?.status);
+    el.classList.toggle('route-offline',!ok);el.classList.toggle('route-slow',slow);
+    el.textContent=ok?label(connection.mode)+' · '+(slow?routeTime(connection.health.ema_ms)+' ⚠':connection.check.latency_ms+' '+tr('ms')):tr('No connection');
     el.onclick=()=>run(async()=>{await navigate('settings');if(state.view==='settings'&&data)openSection('connection');});
     const warning=$('hub-proxy-warning');
     warning.hidden=ok||!connection?.pool?.listed||connection.pool.healthy!==0||!connection.pool.probed_at;

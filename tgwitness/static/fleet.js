@@ -208,19 +208,24 @@
           && groupActions.get(group.id) === marker && may("collect");
         groupActions.set(group.id, marker); decorate();
         try {
-          for (const profile of members().filter(due[action])) {
-            if (!current()) return;
-            if (!groups.find(item => item.id === group.id)?.members.includes(profile.id)) continue;
-            try {
-              await json("collector/" + action, {}, {profile: profile.id});
-              if (!current()) return;
-              done.push(profile.label);
-            } catch (error) {
-              if (!current() || error instanceof StaleView) return;
-              failed.push(profile.label + ": " + error.message);
+          const queue = members().filter(due[action]);
+          let stale = false;
+          const worker = async () => {
+            while (queue.length && !stale) {
+              const profile = queue.shift();
+              if (!current()) { stale = true; return; }
+              if (!groups.find(item => item.id === group.id)?.members.includes(profile.id)) continue;
+              try {
+                await json("collector/" + action, {}, {profile: profile.id});
+                done.push(profile.label);
+              } catch (error) {
+                if (!current() || error instanceof StaleView) { stale = true; return; }
+                failed.push(profile.label + ": " + error.message);
+              }
             }
-          }
-          if (!current()) return;
+          };
+          await Promise.all(Array.from({length: Math.min(8, queue.length)}, worker));
+          if (stale || !current()) return;
           await loadProfiles();
           if (!current()) return;
           toast([action === "start" ? trn("{n} workspace started.", "{n} workspaces started.", done.length)

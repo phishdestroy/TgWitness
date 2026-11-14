@@ -52,11 +52,17 @@ export function createGroupView(ctx){
     if(!consent.current())return;
     working=true;render();const done=[],failed=[];
     try{
-      for(const p of due){
-        if(!consent.current())return;
-        try{await json('collector/'+action,{},{profile:p.id,token:consent.token});if(!consent.current())return;done.push(p.label);}
-        catch(error){if(error.name==='StaleView')return;failed.push(p.label+': '+error.message);}
-      }
+      const queue=[...due];let stale=false;
+      const worker=async()=>{
+        while(queue.length&&!stale){
+          const p=queue.shift();
+          if(!consent.current()){stale=true;return;}
+          try{await json('collector/'+action,{},{profile:p.id,token:consent.token});done.push(p.label);}
+          catch(error){if(error.name==='StaleView'){stale=true;return;}failed.push(p.label+': '+error.message);}
+        }
+      };
+      await Promise.all(Array.from({length:Math.min(8,queue.length)},worker));
+      if(stale||!consent.current())return;
       await ctx.loadProfiles();
       if(!consent.current())return;
       toast([action==='start'?trn('{n} workspace started.','{n} workspaces started.',done.length):

@@ -16,6 +16,7 @@ import sys
 import tempfile
 import unicodedata
 import zipfile
+import zlib
 from array import array
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -234,4 +235,4 @@ def read_json_file(path):
     return strict_json(path.read_text(encoding="utf-8"))
 
 
-__all__ = ['CheckUnavailable', 'DRAND_CHAIN', 'DRAND_CHECK_LIMIT', 'DRAND_GENESIS', 'DRAND_PERIOD', 'DRAND_RELAYS', 'Ed25519PublicKey', 'FIELDS', 'GATEWAY_FIELDS', 'InvalidSignature', 'MAX_JSON_BYTES', 'MAX_MANIFEST_BYTES', 'MAX_MEMBERS', 'MAX_RECORD_BYTES', 'MAX_SMALL_MEMBER_BYTES', 'MAX_UNCOMPRESSED_GIB', 'OTS_BITCOIN', 'OTS_MAGIC', 'OTS_PENDING', 'Path', 'SEAL_CLOSE', 'SEAL_OPEN', 'SEAL_WINDOW', 'UnsupportedAlgorithm', 'VerifierTooOld', 'argparse', 'array', 'authenticate_statement', 'base64', 'bisect', 'bounded_lines', 'datetime', 'ec', 'encode_dss_signature', 'ends_at_directory', 'hashes', 'hashlib', 'heapq', 'io', 'json', 'math', 'member_digest', 'ocsp', 'open_archive', 'os', 'padding', 're', 'read_json_file', 'read_manifest', 'read_member', 'rsa', 'safe_text', 'shutil', 'sqlite3', 'strict_json', 'sys', 'tempfile', 'timedelta', 'timezone', 'unicodedata', 'unique_keys', 'validate_server_hashes', 'x509', 'zipfile']
+__all__ = ['CheckUnavailable', 'DRAND_CHAIN', 'DRAND_CHECK_LIMIT', 'DRAND_GENESIS', 'DRAND_PERIOD', 'DRAND_RELAYS', 'Ed25519PublicKey', 'FIELDS', 'GATEWAY_FIELDS', 'InvalidSignature', 'MAX_JSON_BYTES', 'MAX_MANIFEST_BYTES', 'MAX_MEMBERS', 'MAX_RECORD_BYTES', 'MAX_SMALL_MEMBER_BYTES', 'MAX_UNCOMPRESSED_GIB', 'OTS_BITCOIN', 'OTS_MAGIC', 'OTS_PENDING', 'Path', 'SEAL_CLOSE', 'SEAL_OPEN', 'SEAL_WINDOW', 'UnsupportedAlgorithm', 'VerifierTooOld', 'argparse', 'array', 'authenticate_statement', 'base64', 'bisect', 'bounded_lines', 'datetime', 'ec', 'encode_dss_signature', 'ends_at_directory', 'hashes', 'hashlib', 'heapq', 'io', 'json', 'math', 'member_digest', 'ocsp', 'open_archive', 'os', 'padding', 're', 'read_json_file', 'read_manifest', 'read_member', 'rsa', 'safe_text', 'shutil', 'sqlite3', 'strict_json', 'struct', 'sys', 'tempfile', 'timedelta', 'timezone', 'unicodedata', 'unique_keys', 'validate_server_hashes', 'x509', 'zipfile', 'zlib']

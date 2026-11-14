@@ -14,6 +14,8 @@ from telethon.tl import functions, types
 from telethon.tl.tlobject import TLRequest
 
 from .rpc_pacing import bulk_request
+from .transport.burst import guard
+from .transport.multi_connection import DEFAULT_SESSIONS, MediaConnectionPool, download_file, media_owner
 
 _single_attempt = ContextVar("telegram_single_attempt", default=False)
 LOG = logging.getLogger("tgwitness.telegram_client")
@@ -185,6 +187,7 @@ class WitnessClient(TelegramClient):
     def __init__(self, *args, **kwargs):
         self.accepted_state, self.undispatched = None, 0
         super().__init__(*args, **kwargs)
+        guard(getattr(self, "_sender", None))
         if GapAwareMessageBox is not None:
             box = GapAwareMessageBox(self._log["messagebox"])
             box.gap_owner = self
@@ -229,6 +232,28 @@ class WitnessClient(TelegramClient):
     def rpc_activity(self):
         return copy.deepcopy(getattr(self, "_rpc_activity", None))
 
+    def media_connections(self):
+        pool = getattr(self, "_media_pool", None)
+        if pool is None:
+            pool = self._media_pool = MediaConnectionPool(self, maximum=self.media_connections_limit)
+        return pool
+
+    def media_connections_limit(self):
+        getter = getattr(self, "media_connections_getter", None)
+        return getter() if getter else DEFAULT_SESSIONS
+
+    async def _download_file(self, input_location, file=None, *, part_size_kb=None, file_size=None,
+                             progress_callback=None, dc_id=None, key=None, iv=None, msg_data=None, cdn_redirect=None):
+        owner = media_owner(self)
+        if (not isinstance(owner, WitnessClient) or key is not None or iv is not None or msg_data is not None
+                or cdn_redirect is not None or not owner.is_connected() or not owner.media_connections().enabled()):
+            return await TelegramClient._download_file(
+                self, input_location, file, part_size_kb=part_size_kb, file_size=file_size,
+                progress_callback=progress_callback, dc_id=dc_id, key=key, iv=iv, msg_data=msg_data,
+                cdn_redirect=cdn_redirect)
+        return await download_file(owner, self._call, input_location, file, part_size_kb=part_size_kb,
+                                   file_size=file_size, progress_callback=progress_callback, dc_id=dc_id)
+
     async def connect(self):
         from .client_identity import apply_init_params
         apply_init_params(self)
@@ -240,6 +265,8 @@ class WitnessClient(TelegramClient):
 
     async def _disconnect_coro(self):
         pending = self.is_connected() or getattr(self, "_connection_cleanup_pending", False)
+        if (pool := getattr(self, "_media_pool", None)) is not None:
+            await pool.close()
         try:
             return await super()._disconnect_coro()
         finally:
@@ -291,7 +318,7 @@ class WitnessClient(TelegramClient):
         pacer = getattr(self, "bulk_pacer", None)
         for item in items:
             if pacer is not None and bulk_request(item):
-                await pacer.before()
+                await pacer.before(request_method(item)["method"])
 
     async def _call(self, sender, request, ordered=False, flood_sleep_threshold=None):
         if utils.is_list_like(request):
@@ -302,7 +329,7 @@ class WitnessClient(TelegramClient):
             self._bulk_lock = asyncio.Lock()
             self._rpc_owner = None
             self._flood_until = getattr(self, "_flood_until", {})
-            self._file_slots = asyncio.Semaphore(FILE_REQUESTS)
+            self._file_slots = asyncio.Semaphore(getattr(self, "file_requests", FILE_REQUESTS))
         items = request if utils.is_list_like(request) else (request,)
         await self._flood_turn(sender, items)
         if self._rpc_owner is asyncio.current_task():
@@ -318,6 +345,8 @@ class WitnessClient(TelegramClient):
         if not utils.is_list_like(request) and update_request(request):
             return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
         if not utils.is_list_like(request) and file_request(request):
+            if getattr(sender, "tgwitness_pool", False):
+                return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
             async with self._file_slots:
                 return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
         async with self._rpc_lock:
@@ -344,7 +373,7 @@ class WitnessClient(TelegramClient):
         try:
             result = await super()._call(sender, request, ordered, flood_sleep_threshold)
             if paced:
-                pacer.success()
+                pacer.success(info["method"])
             counts["ok"] += 1
             if (isinstance(result, _OWN_UPDATES) or getattr(result, "SUBCLASS_OF_ID", None) == types.Updates.SUBCLASS_OF_ID) \
                     and (listener := getattr(self, "updates_listener", None)):
@@ -357,8 +386,10 @@ class WitnessClient(TelegramClient):
             counts["errors"] += 1
             if isinstance(exc, FLOOD_ERRORS):
                 if pacer is not None:
-                    pacer.flooded(exc.seconds)
+                    pacer.flooded(exc.seconds, info["method"])
                 counts["flood_waits"] += 1
+                if file_request(request):
+                    getattr(self, "_flood_waited_requests", {}).pop(request.CONSTRUCTOR_ID, None)
                 flood = self._flood_key(request, sender)
                 until = self._flood_until[flood] = max(self.flood_until(flood), time.time() + exc.seconds + 1)
                 if save := getattr(self, "rpc_backoff_setter", None):
@@ -369,7 +400,8 @@ class WitnessClient(TelegramClient):
                              "flood_key": flood, "error_type": type(exc).__name__, "retry_after_seconds": exc.seconds,
                              "wait_until": until, "observed_at": time.time(),
                              "activity": self.rpc_activity()})
-            if sender is not None and sender is not self._sender and isinstance(exc, EXPORTED_AUTHORIZATION_ERRORS):
+            if (sender is not None and sender is not self._sender and not getattr(sender, "tgwitness_home", False)
+                    and isinstance(exc, EXPORTED_AUTHORIZATION_ERRORS)):
                 self.exported_authorization_failed(sender, exc)
             elif handler := getattr(self, "rpc_error_handler", None):
                 handler(exc)
@@ -379,9 +411,12 @@ class WitnessClient(TelegramClient):
 
     def exported_authorization_failed(self, sender, exc):
         dc_id = getattr(sender, "dc_id", None)
-        if not hasattr(self, "_stale_exports"):
-            self._stale_exports = set()
-        self._stale_exports.add(dc_id)
+        if getattr(sender, "tgwitness_pool", False):
+            self.media_connections().forget_key(dc_id)
+        else:
+            if not hasattr(self, "_stale_exports"):
+                self._stale_exports = set()
+            self._stale_exports.add(dc_id)
         if listener := getattr(self, "exported_error_handler", None):
             try:
                 listener(exc, dc_id)

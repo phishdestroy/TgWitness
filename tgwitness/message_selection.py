@@ -134,6 +134,7 @@ class SelectionIndex:
         self.db.row_factory = sqlite3.Row
         self.db.executescript("""
             PRAGMA journal_mode=WAL;
+            PRAGMA synchronous=NORMAL;
             CREATE TABLE IF NOT EXISTS messages (
                 id INTEGER PRIMARY KEY, profile TEXT NOT NULL, record TEXT NOT NULL,
                 parent INTEGER, parent_chat INTEGER, topic INTEGER, direct INTEGER NOT NULL,

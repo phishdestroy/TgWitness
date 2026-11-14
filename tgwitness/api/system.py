@@ -30,6 +30,7 @@ from fastapi.responses import Response
 from fastapi.security import HTTPAuthorizationCredentials
 from telethon.errors import RPCError
 import asyncio
+import json
 import logging
 import re
 import secrets
@@ -84,6 +85,92 @@ async def overview_activity(days: int = 60, *, ctx=Depends(current_context)):
         item = series.setdefault(day, {"day": day, "messages": 0, "edits": 0, "deletions": 0})
         item[groups[kind]] += count
     return {"since": since, "days": days, "series": [series[day] for day in sorted(series)]}
+
+
+LIVE_MESSAGES = ("message.new", "message.edited", "message.deleted")
+OBSERVATION_KINDS = ("observation.started", "observation.stopped", "process.started", "process.stopped")
+
+
+async def overview_live(*, ctx=Depends(current_context)):
+    from datetime import timedelta
+    from ..anchoring import evidence_settings
+
+    store, collector = ctx.app.state.store, ctx.app.state.collector
+    now = datetime.now(timezone.utc)
+    stamp = lambda value: value.isoformat(timespec="milliseconds")
+    window, day = stamp(now - timedelta(minutes=5)), stamp(now - timedelta(hours=24))
+    today = stamp(now.replace(hour=0, minute=0, second=0, microsecond=0))
+    marks = ",".join("?" * len(LIVE_MESSAGES))
+
+    def read():
+        with store.reading() as db:
+            last_change = db.execute(
+                "SELECT seq,kind,observed_at,json_extract(payload,'$.reason') FROM events WHERE kind IN ("
+                + ",".join("?" * len(OBSERVATION_KINDS)) + ") ORDER BY seq DESC LIMIT 1", OBSERVATION_KINDS).fetchone()
+            messages = db.execute("SELECT count(*) FROM events WHERE observed_at>=? AND kind IN (" + marks + ")",
+                                  (window, *LIVE_MESSAGES)).fetchone()[0]
+            media = db.execute("SELECT count(*) FROM events WHERE observed_at>=? AND kind='media.saved'",
+                               (window,)).fetchone()[0]
+            waited = db.execute("SELECT coalesce(sum(json_extract(payload,'$.retry_after_seconds')),0),count(*) "
+                                "FROM events WHERE kind='telegram.backoff' AND observed_at>=?", (today,)).fetchone()
+            latest = db.execute("SELECT observed_at FROM events WHERE kind NOT IN ('collector.heartbeat','host.state') "
+                                "ORDER BY seq DESC LIMIT 1").fetchone()
+            active = db.execute(
+                "SELECT e.chat_id,count(*) AS n,t.title FROM events e LEFT JOIN targets t ON t.chat_id=e.chat_id "
+                "WHERE e.observed_at>=? AND e.chat_id IS NOT NULL AND e.kind IN (" + marks + ") "
+                "GROUP BY e.chat_id ORDER BY n DESC LIMIT 5", (day, *LIVE_MESSAGES)).fetchall()
+            quiet = db.execute(
+                "SELECT t.chat_id,t.title,(SELECT observed_at FROM events e WHERE e.chat_id=t.chat_id "
+                "ORDER BY e.seq DESC LIMIT 1) AS last FROM targets t WHERE t.enabled "
+                "ORDER BY last IS NOT NULL, last LIMIT 5").fetchall()
+            anchor = db.execute("SELECT seq,observed_at,payload FROM events WHERE kind='anchor.completed' "
+                                "ORDER BY seq DESC LIMIT 1").fetchone()
+        return last_change, messages, media, waited, latest, active, quiet, anchor
+
+    last_change, messages, media, waited, latest, active, quiet, anchor = await complete_in_thread(read)
+    status = collector.status()
+    witnesses = None
+    if anchor:
+        payload = json.loads(anchor[2]) if isinstance(anchor[2], str) else {}
+        results = payload.get("results") or []
+        witnesses = {"seq": anchor[0], "at": anchor[1], "answered": sum(1 for item in results if item.get("ok")),
+                     "total": len(results), "records": (payload.get("checkpoint") or {}).get("event_count")}
+    return {
+        "observation": {"running": bool(collector.running), "phase": status.get("phase"),
+                        "since": last_change[2] if last_change else None,
+                        "change": last_change[1] if last_change else None,
+                        "reason": last_change[3] if last_change else None},
+        "rates": {"window_seconds": 300, "messages_per_minute": round(messages / 5, 1),
+                  "media_per_minute": round(media / 5, 1)},
+        "floodwait_today": {"seconds": int(waited[0] or 0), "events": waited[1]},
+        "last_record_at": latest[0] if latest else None,
+        "active_chats": [{"chat_id": row[0], "events": row[1], "title": row[2]} for row in active],
+        "quiet_chats": [{"chat_id": row[0], "title": row[1], "last_at": row[2]} for row in quiet],
+        "witnesses": witnesses, "evidence_enabled": bool(evidence_settings(store)["enabled"]),
+        "generated_at": stamp(now),
+    }
+
+
+async def bootstrap(request: Request, workspace: str | None = None, *, ctx=Depends(current_context)):
+    from .accounts import profiles_list
+
+    principal = request.state.principal
+    listed = await profiles_list(request, ctx=ctx)
+    usable = [entry["id"] for entry in listed["profiles"] if not entry.get("error_type")]
+    workspace = workspace if workspace in usable else usable[0] if usable else "default"
+    result = {"me": principal.public(), "access_names": {}, "profiles": listed, "workspace": workspace,
+              "status": None}
+    if principal.admin:
+        result["access_names"] = ctx.access_state(request).get("names") or {}
+    entry = ctx.app.state.profiles.entries.get(workspace) or {}
+    child = entry.get("app")
+    if child is not None:
+        try:
+            access_check(principal, workspace, POLICY["GET /api/status"], {})
+            result["status"] = await status(request, ctx=child.state.api_context)
+        except (Refused, HTTPException):
+            pass
+    return result
 
 
 async def status(request: Request, *, ctx=Depends(current_context)):

@@ -17,6 +17,7 @@ from telethon.tl import functions, types
 
 from .security import KeyInUse, KeyLock
 from .tdata import read_tdata_zip
+from .transport.burst import HANDSHAKES
 from . import api_pool
 from . import client_identity
 
@@ -277,7 +278,8 @@ async def check_session(collector, account, api_id=None, api_hash=None, language
         request = getattr(client, "_init_request", None)
         if isinstance(request, functions.InitConnectionRequest):
             request.lang_pack = device["lang_pack"]
-        await asyncio.wait_for(client.connect(), CHECK_SECONDS)
+        async with HANDSHAKES.turn("session_check"):
+            await asyncio.wait_for(client.connect(), CHECK_SECONDS)
         try:
             users = await asyncio.wait_for(client(functions.users.GetUsersRequest([types.InputUserSelf()])),
                                            CHECK_SECONDS)

@@ -23,6 +23,7 @@ from . import netclient
 from .network import NetworkConfig
 from .panelctl import listening_pid
 from .security import owner_only, private_write
+from .transport.burst import REGISTRATIONS
 
 
 VERSIONS = {"wgcf": "2.3.1", "wireproxy": "1.1.3"}
@@ -44,6 +45,23 @@ HASHES = {
 }
 MAX_DOWNLOAD = 32 * 1024 * 1024
 CREATE_FLAGS = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+WARP_ENDPOINTS = ("162.159.192.1:2408", "162.159.192.1:500", "162.159.192.1:1701", "162.159.192.1:4500",
+                  "162.159.193.10:2408", "162.159.195.1:2408", "188.114.96.1:2408", "188.114.97.1:2408",
+                  "188.114.98.1:2408", "188.114.99.1:2408")
+
+
+def endpoint_value(text):
+    if not isinstance(text, str) or len(text) > 64:
+        raise ValueError("Invalid tunnel endpoint.")
+    host, separator, port = text.rpartition(":")
+    try:
+        address = ipaddress.ip_address(host.strip("[]"))
+        number = int(port)
+    except ValueError:
+        raise ValueError("Invalid tunnel endpoint.") from None
+    if not separator or not address.is_global or not 1 <= number <= 65535:
+        raise ValueError("Invalid tunnel endpoint.")
+    return ("[" + str(address) + "]" if address.version == 6 else str(address)) + ":" + str(number)
 
 
 def check_asset_url(url):
@@ -168,13 +186,16 @@ def wireguard_profile(text):
                          "and no scripts, includes or extra listeners.") from None
 
 
-async def runtime_config(profile, route):
-    addresses = await netclient.resolve(profile["host"], profile["port"])
-    netclient.refuse_internal(profile["host"], addresses)
-    if not addresses:
-        raise ValueError("The VPN endpoint could not be resolved.")
-    address = addresses[0]
-    endpoint = ("[" + address + "]" if ":" in address else address) + ":" + str(profile["port"])
+async def runtime_config(profile, route, endpoint=None):
+    if endpoint:
+        endpoint = endpoint_value(endpoint)
+    else:
+        addresses = await netclient.resolve(profile["host"], profile["port"])
+        netclient.refuse_internal(profile["host"], addresses)
+        if not addresses:
+            raise ValueError("The VPN endpoint could not be resolved.")
+        address = sorted(addresses, key=lambda value: ipaddress.ip_address(value.split("%", 1)[0]).version)[0]
+        endpoint = ("[" + address + "]" if ":" in address else address) + ":" + str(profile["port"])
     peer = {**profile["peer"], "Endpoint": endpoint}
     sections = {"Interface": profile["interface"], "Peer": peer,
                 "Socks5": {"BindAddress": f"127.0.0.1:{route.port}", "Username": route.username, "Password": route.password}}
@@ -233,7 +254,8 @@ class PortableRoutes:
                         private_write(path / "wgcf-account.toml", account["toml"].encode())
                     else:
                         try:
-                            await run_helper(wgcf, ["register", "--accept-tos"], path)
+                            async with REGISTRATIONS.turn("register"):
+                                await run_helper(wgcf, ["register", "--accept-tos"], path)
                         finally:
                             account_file = path / "wgcf-account.toml"
                             if account_file.is_file() and account_file.stat().st_size <= 16384:
@@ -283,7 +305,7 @@ class PortableRoutes:
                 raise ValueError("A tunnel using this WireGuard key is already running. Stop it before changing its profile.")
         executable = executable or await install_helper(self.root / "bin", "wireproxy")
         route = NetworkConfig.model_validate(saved["network"])
-        config = await runtime_config(profile, route)
+        config = await runtime_config(profile, route, saved.get("endpoint") if saved.get("mode") == "warp" else None)
         path = self.root / (identifier + ".conf")
         private_write(path, config.encode())
         try:
@@ -329,6 +351,42 @@ class PortableRoutes:
         saved = self.selected()
         if saved and not saved.get("paused"):
             await self.start(saved)
+
+    async def restart(self, saved):
+        async with self.lock:
+            await self._stop(saved["id"])
+            await self._start(saved)
+
+    async def new_identity(self, saved):
+        self.root.mkdir(parents=True, exist_ok=True)
+        owner_only(self.root)
+        wgcf = await install_helper(self.root / "bin", "wgcf", True)
+        with tempfile.TemporaryDirectory(prefix="registration-", dir=self.root) as folder:
+            path = Path(folder)
+            owner_only(path)
+            async with REGISTRATIONS.turn("new_identity"):
+                await run_helper(wgcf, ["register", "--accept-tos"], path)
+            account_file = path / "wgcf-account.toml"
+            if not account_file.is_file() or account_file.stat().st_size > 16384:
+                raise ValueError("WARP registration did not return a device account.")
+            account = account_file.read_text()
+            await run_helper(wgcf, ["generate", "--keepalive=25"], path)
+            text = (path / "wgcf-profile.conf").read_text()
+        wireguard_profile(text)
+        previous = {name: self.vault.read(name) for name in ("warp_account", "warp_profile")}
+        updated = {key: value for key, value in saved.items() if key != "endpoint"}
+        updated["profile"] = text
+        await self.restart(updated)
+        self.vault.save("warp_account", {"toml": account})
+        self.vault.save("warp_profile", {"profile": text})
+        self.vault.save("portable_route", updated)
+        return updated, previous
+
+    async def keep(self, saved, previous=None):
+        await self.restart(saved)
+        for name, value in (previous or {}).items():
+            self.vault.save(name, value or {})
+        self.vault.save("portable_route", saved)
 
     async def stop(self, identifier):
         async with self.lock:

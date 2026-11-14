@@ -116,6 +116,24 @@ enable logging in your infrastructure, redact Authorization headers and tokens.
 
 Container instructions and backup procedures: [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
 
+## Metrics and flight record
+
+`GET /api/metrics` answers in the Prometheus text format: per account the state,
+records per second for messages and files, the file queue, file connections, the time
+left in a Telegram wait, and since the process started the records written, seconds
+Telegram asked to wait, attachment bytes saved and problem records by kind; per
+workspace the journal size and record count; for the server the connection setups
+running, waiting and timed out. It answers only the main administrator. Copy the job
+from [prometheus/tgwitness.yml](prometheus/tgwitness.yml), put the panel token in a file
+only Prometheus can read, and import [grafana/tgwitness.json](grafana/tgwitness.json)
+into Grafana with that Prometheus as the data source. Workspace labels appear in the
+metrics; Telegram usernames and message content do not.
+
+The process keeps its last 10,000 log lines and journal record kinds in memory, without
+record contents. **System log → Save flight record** downloads them as JSON lines. On Linux
+and macOS, `kill -USR1 <pid>` writes the same file to `flight/` in the data directory,
+keeping the five most recent.
+
 ## Template index
 
 | File | Purpose |
@@ -130,3 +148,5 @@ Container instructions and backup procedures: [DEPLOYMENT.md](../docs/DEPLOYMENT
 | [windows-task.ps1](windows-task.ps1) | Windows logon task script |
 | [org.tgwitness.collector.plist.example](org.tgwitness.collector.plist.example) | macOS launchd user agent |
 | [proxies.config.example](proxies.config.example) | Operator proxy catalogue configuration |
+| [prometheus/tgwitness.yml](prometheus/tgwitness.yml) | Prometheus scrape job for `/api/metrics` |
+| [grafana/tgwitness.json](grafana/tgwitness.json) | Grafana dashboard for those metrics |

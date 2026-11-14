@@ -2,6 +2,10 @@ import re
 
 from fastapi.exception_handlers import http_exception_handler
 from starlette.exceptions import HTTPException
+from starlette.responses import RedirectResponse
+
+ALIASES = {"/network-topology": "/topology", "/case-board": "/board", "/home": "/start", "/dashboard": "/start",
+           "/overview": "/start", "/map": "/system-map", "/logs": "/system-log", "/log": "/system-log"}
 
 
 DOCUMENTS = (
@@ -39,6 +43,13 @@ def register(app, static):
         return await http_exception_handler(request, error)
 
     app.add_exception_handler(HTTPException, missing)
+
+    async def alias(request):
+        query = request.url.query
+        return RedirectResponse(ALIASES[request.url.path] + ("?" + query if query else ""), status_code=307)
+
     for path in (*DOCUMENTS, "/chats/{chat_id}", "/journal/event/{seq}"):
         app.add_route(path, document, methods=["GET", "HEAD"], name="panel-document")
+    for path in ALIASES:
+        app.add_route(path, alias, methods=["GET", "HEAD"], name="panel-alias")
     app.add_route("/groups/{group_id}", group_document, methods=["GET", "HEAD"], name="panel-group-document")

@@ -1,5 +1,7 @@
 (() => {
   let context=null,controller=null,retry=null,flushTimer=null,cursor=0,boardCursor=0,pending=0,paused=false,connected=false,flushing=false,generation=0;
+  let failures=0,hiddenTimer=null;
+  const HIDDEN_GRACE=60000;
   const bars=[];
   function render(){
     if(!context)return;
@@ -35,11 +37,11 @@
   }
   async function connect(rev){
     if(!context||rev!==generation||document.hidden||controller)return;
-    const current=context,ctrl=new AbortController();controller=ctrl;
+    const current=context,ctrl=new AbortController();controller=ctrl;let delay=250+Math.random()*250;
     try{
       const response=await current.api("stream?after="+cursor+"&board_after="+boardCursor,undefined,{signal:ctrl.signal});
       if(rev!==generation||controller!==ctrl){await response.body?.cancel();return;}
-      connected=true;render();const reader=response.body.getReader(),decoder=new TextDecoder();let buffer="";
+      connected=true;failures=0;render();const reader=response.body.getReader(),decoder=new TextDecoder();let buffer="";
       try{for(;;){
         const {value,done}=await reader.read();if(done||rev!==generation||controller!==ctrl)break;
         buffer=(buffer+decoder.decode(value,{stream:true})).replace(/\r\n/g,"\n");if(buffer.length>262144)throw new Error("Stream frame too large");
@@ -57,16 +59,23 @@
           if(events.length){cursor=events.at(-1).seq;changed(events);}
         }
       }}finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
-    }catch(error){if(error.status===401||error.status===403){if(rev===generation&&controller===ctrl){stop();current.accessEnded();}return;}}
-    finally{if(rev===generation&&context&&controller===ctrl){controller=null;connected=false;render();if(!document.hidden)retry=setTimeout(()=>connect(rev),3000);}}
+    }catch(error){
+      if(error.status===401||error.status===403){if(rev===generation&&controller===ctrl){stop();current.accessEnded();}return;}
+      failures++;delay=error.status===429?10000:Math.min(30000,1500*2**Math.min(failures-1,5));
+    }
+    finally{if(rev===generation&&context&&controller===ctrl){controller=null;connected=false;render();if(!document.hidden)retry=setTimeout(()=>connect(rev),delay);}}
   }
-  function stop(){generation++;controller?.abort();controller=null;clearTimeout(retry);clearTimeout(flushTimer);context=null;pending=0;connected=false;flushing=false;for(const b of bars)b.bar.hidden=true;}
+  function stop(){generation++;controller?.abort();controller=null;clearTimeout(retry);clearTimeout(flushTimer);clearTimeout(hiddenTimer);hiddenTimer=null;context=null;pending=0;connected=false;flushing=false;failures=0;for(const b of bars)b.bar.hidden=true;}
   function start(ctx){
     setup(ctx.hosts||[]);
     if(context?.key===ctx.key){context=ctx;for(const b of bars)b.bar.hidden=false;render();return;}
     stop();context=ctx;cursor=ctx.head||0;boardCursor=window.TgWitnessBoard?.cursor()||0;paused=false;for(const b of bars)b.bar.hidden=false;render();connect(generation);
   }
-  document.addEventListener("visibilitychange",()=>{if(!context)return;if(document.hidden){controller?.abort();controller=null;connected=false;clearTimeout(retry);render();}else{clearTimeout(retry);connect(generation);}});
+  document.addEventListener("visibilitychange",()=>{
+    if(!context)return;clearTimeout(hiddenTimer);hiddenTimer=null;
+    if(document.hidden){hiddenTimer=setTimeout(()=>{hiddenTimer=null;if(!document.hidden||!context)return;controller?.abort();controller=null;connected=false;clearTimeout(retry);render();},HIDDEN_GRACE);}
+    else if(!controller){clearTimeout(retry);connect(generation);}
+  });
   document.addEventListener("selectionchange",()=>{if(!window.getSelection()?.toString())flush();});
   document.addEventListener("scroll",()=>flush(),true);
   window.addEventListener("tgwitness:lock",stop);

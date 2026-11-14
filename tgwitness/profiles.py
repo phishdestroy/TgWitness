@@ -13,6 +13,7 @@ from .account_import import session_key
 from .export_history import unexported
 
 
+OPEN_AT_ONCE = 6
 UNEXPORTED = ("Export evidence before deleting: the journal has records that are not in a signed evidence ZIP yet. "
               "Pause observation and download the signed ZIP under Export records.")
 UNREADABLE = ("This workspace could not start, so its journal cannot be exported here. Preserve its data directory: "
@@ -119,12 +120,20 @@ class Profiles:
             account["owner"] = collector
 
     async def open(self):
-        try:
-            for entry in self.app.state.store.get_setting("profiles", []):
+        stored = list(self.app.state.store.get_setting("profiles", []))
+        before, slots = list(self.entries), asyncio.Semaphore(OPEN_AT_ONCE)
+
+        async def opened(entry):
+            async with slots:
                 await self.open_entry(entry)
+        try:
+            await asyncio.gather(*(opened(entry) for entry in stored))
         except BaseException:
             await self.close()
             raise
+        order = [*before, *(entry["id"] for entry in stored)]
+        self.entries = {key: self.entries[key] for key in [*order, *(k for k in self.entries if k not in order)]
+                        if key in self.entries}
         from .group_settings import migrate
         migrate(self)
 

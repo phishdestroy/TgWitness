@@ -25,7 +25,9 @@ from .account_export import durable_write, linked, read_json
 from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
 from .export_timing import ExportTiming
 from .distributed_takeout import HistoryTakeout
-from .distributed_pages import FORMAT as PAGE_FORMAT, RangePages
+from .distributed_pages import FORMAT as PAGE_FORMAT, FORMATS as PAGE_FORMATS, RangePages
+from .swarm.rebalancer import (HANDOVER_SECONDS, REBALANCE_SECONDS, YIELD_PAUSE, Handover, gap_of,
+                               slow_holders)
 from .message_selection import Selection, SelectionIndex, utc
 from .message_numbers import RECHECK_EDGE, MissingNumbers
 from .monitoring import capture_settings
@@ -321,6 +323,7 @@ class Run:
         self.task = self.db = self.recheck = None
         self.chunk_failures, self.entities = {}, {}
         self.history_transports, self.page_states = {}, {}
+        self.idle, self.holding = set(), {}
         self.timing = (timing or ExportTiming()) if job is not None else None
 
     def update_timing(self):
@@ -352,7 +355,7 @@ class Run:
     def prepare_chunks(self):
         directory = self.directory(self.state["id"])
         retained_count = self.state["captured"]
-        if self.job.get("checkpoint_format") not in (None, PAGE_FORMAT):
+        if self.job.get("checkpoint_format") not in (None, *PAGE_FORMATS):
             raise ValueError("Unsupported distributed checkpoint format.")
         self.page_states = {}
         path = directory / "work.sqlite3"
@@ -363,7 +366,7 @@ class Run:
                 stale.unlink(missing_ok=True)
         self.db = sqlite3.connect(path, check_same_thread=False)
         self.db.row_factory = sqlite3.Row
-        self.db.executescript("DROP TABLE IF EXISTS tasks; DROP TABLE IF EXISTS eligible; "
+        self.db.executescript("PRAGMA synchronous=NORMAL; DROP TABLE IF EXISTS tasks; DROP TABLE IF EXISTS eligible; "
             "CREATE TABLE tasks(low INTEGER PRIMARY KEY, high INTEGER, phase TEXT, profile TEXT, count INTEGER, sha256 TEXT);"
             "CREATE TABLE eligible(low INTEGER,profile TEXT,PRIMARY KEY(profile,low));")
         for segment in self.job["segments"]:
@@ -371,7 +374,7 @@ class Run:
                 high = min(segment["high"], low + self.job["chunk_size"] - 1)
                 self.db.execute("INSERT INTO tasks VALUES(?,?,'pending',NULL,0,NULL)", (low, high))
                 self.db.executemany("INSERT INTO eligible VALUES(?,?)", [(low, p) for p in segment["profiles"]])
-        if self.job.get("checkpoint_format") == PAGE_FORMAT:
+        if self.job.get("checkpoint_format") in PAGE_FORMATS:
             for folder in (directory / "pages").iterdir():
                 if not folder.name.isdigit() or linked(folder) or not folder.is_dir():
                     raise ValueError("Invalid checkpoint directory.")
@@ -398,7 +401,7 @@ class Run:
             if self.job.get("transport", "regular") == "takeout" and (value.get("transport") != "takeout"
                     or type(value.get("transport_generation")) is not int or value["transport_generation"] < 1):
                 raise ValueError("Chunk receipt does not identify its Takeout generation.")
-            if self.job.get("checkpoint_format") == PAGE_FORMAT:
+            if self.job.get("checkpoint_format") in PAGE_FORMATS:
                 pages = self.page_states.get(value["low"])
                 if (not pages or not pages.state["terminal"] or pages.state["profile_id"] != profile
                         or value.get("checkpoint") != self.page_summary(pages.state)
@@ -412,7 +415,7 @@ class Run:
                             (profile, count, digest, value["low"]))
         self.db.commit()
         verified_count = self.db.execute("SELECT coalesce(sum(count),0) FROM tasks").fetchone()[0]
-        if self.job.get("checkpoint_format") == PAGE_FORMAT and verified_count < retained_count:
+        if self.job.get("checkpoint_format") in PAGE_FORMATS and verified_count < retained_count:
             raise ValueError("Saved checkpoint progress is missing; preserve this job for inspection.")
         self.update_counts()
 
@@ -439,14 +442,17 @@ class Run:
                 "WHERE profile=?", (worker["profile_id"],)).fetchone()
             worker.update(ranges=ranges, captured=messages)
 
-    @staticmethod
-    def page_summary(state):
-        return {"format": PAGE_FORMAT, "pages": state["pages"], "head_sha256": state["head_sha256"],
+    def page_summary(self, state):
+        return {"format": self.job["checkpoint_format"], "pages": state["pages"], "head_sha256": state["head_sha256"],
                 "count": state["count"], "byte_end": state["byte_end"]}
+
+    def handovers(self):
+        return self.job.get("checkpoint_format") == PAGE_FORMAT
 
     def record_page(self, low, state):
         self.db.execute("UPDATE tasks SET profile=?,count=? WHERE low=?", (state["profile_id"], state["count"], low))
-        self.db.execute("DELETE FROM eligible WHERE low=? AND profile!=?", (low, state["profile_id"]))
+        if not self.handovers():
+            self.db.execute("DELETE FROM eligible WHERE low=? AND profile!=?", (low, state["profile_id"]))
         self.db.commit()
 
     async def work(self, worker):
@@ -463,33 +469,44 @@ class Run:
                                    "AND t.phase='pending' ORDER BY low DESC LIMIT 1", (profile,)).fetchone()
             if not task:
                 if self.db.execute("SELECT 1 FROM tasks WHERE phase='running' LIMIT 1").fetchone():
+                    self.idle.add(profile)
                     await asyncio.sleep(.1)
                     continue
+                self.idle.discard(profile)
                 worker["state"] = "done"
                 return
+            self.idle.discard(profile)
             self.db.execute("UPDATE tasks SET phase='running' WHERE low=?", (task["low"],))
             self.db.commit()
+            self.holding[profile] = task["low"]
             path = directory / "chunks" / (str(task["low"]) + ".jsonl")
             temporary = path.with_name(str(task["low"]) + "." + secrets.token_hex(8) + ".part")
             worker["current_range"] = [task["low"], task["high"]]
+            pages = None
+
             def waiting(seconds):
                 worker.update(state="waiting", wait_until=time.time() + seconds)
+                if (pages is not None and self.handovers() and seconds >= HANDOVER_SECONDS
+                        and self.others_can_take(task["low"], profile)):
+                    raise Handover(seconds, "flood_wait")
             transport = self.history_transports.get(profile)
             try:
                 if shutil.disk_usage(directory).free < collector.param("media_min_free_mb") * 1024**2:
                     raise ValueError("Insufficient free disk space for another chunk.")
                 if linked(temporary) or linked(path):
                     raise ValueError("Chunk paths must not be links.")
-                pages = None
-                if self.job.get("checkpoint_format") == PAGE_FORMAT:
+                if self.job.get("checkpoint_format") in PAGE_FORMATS:
                     pages = self.page_states.get(task["low"])
                     if pages is None:
                         pages = self.page_states[task["low"]] = RangePages(directory, self.job, task)
+
                     def committed(state):
                         self.record_page(task["low"], state)
                         worker.update(state="running", wait_until=None)
                         self.update_counts()
                         self.persist()
+                        if worker.pop("yield_range", False) and not state["terminal"] and self.handovers():
+                            raise Handover(0, "slower_than_a_free_account")
                     await pages.fetch(collector, self.entities[profile], profile, committed, waiting, transport,
                                       page_timeout=PAGE_TIMEOUT, attempts=1)
                     if await complete_in_thread(pages.verify) != pages.state:
@@ -520,6 +537,19 @@ class Run:
                 self.persist()
             except asyncio.CancelledError:
                 raise
+            except Handover as handover:
+                self.db.execute("UPDATE tasks SET phase='pending' WHERE low=?", (task["low"],))
+                self.db.commit()
+                self.holding.pop(profile, None)
+                self.state["handovers"] = self.state.get("handovers", 0) + 1
+                worker.update(handovers=worker.get("handovers", 0) + 1, last_handover=handover.reason,
+                              current_range=None)
+                if handover.seconds:
+                    worker.update(state="waiting", wait_until=time.time() + handover.seconds)
+                self.persist()
+                await asyncio.sleep(handover.seconds or YIELD_PAUSE)
+                worker.update(state="running", wait_until=None)
+                continue
             except telegram_errors.TakeoutInvalidError:
                 if transport:
                     transport.invalidate()
@@ -556,31 +586,79 @@ class Run:
                 continue
             finally:
                 temporary.unlink(missing_ok=True)
+                if self.holding.get(profile) == task["low"]:
+                    self.holding.pop(profile, None)
             outages = errors = 0
             await asyncio.sleep(0)
+
+    @staticmethod
+    def attributed(path, observers, fallback):
+        segments = iter(observers)
+        current, offset = next(segments, None), 0
+        with path.open("rb") as stream:
+            for line in stream:
+                while current is not None and offset >= current[1]:
+                    current = next(segments, None)
+                yield json.loads(line), current[2] if current is not None else fallback
+                offset += len(line)
+
+    def others_can_take(self, low, profile):
+        candidates = {row[0] for row in self.db.execute("SELECT profile FROM eligible WHERE low=? AND profile!=?",
+                                                        (low, profile))}
+        return any(worker["profile_id"] in candidates and worker["state"] not in ("failed", "skipped", "done")
+                   for worker in self.state["workers"])
+
+    async def rebalance(self):
+        while True:
+            await asyncio.sleep(REBALANCE_SECONDS)
+            if not self.handovers() or not self.idle or self.job.get("transport") == "takeout":
+                continue
+            gaps = {profile: gap_of(self.app_for(profile).state.collector)
+                    for profile in {*self.idle, *self.holding}}
+            for profile in slow_holders(gaps, set(self.holding), set(self.idle)):
+                worker = next((w for w in self.state["workers"] if w["profile_id"] == profile), None)
+                if worker is not None and self.others_can_take(self.holding[profile], profile):
+                    worker["yield_range"] = True
+
+    async def parents(self, profile, numbers):
+        collector = self.app_for(profile).state.collector
+        found = {}
+        for start in range(0, len(numbers), 100):
+            batch = numbers[start:start + 100]
+            try:
+                answer = await collector.client.get_messages(self.entities[profile], ids=batch)
+            except TypeNotFoundError:
+                if len(batch) == 1:
+                    raise
+                answer = []
+                for number in batch:
+                    answer.append(await collector.client.get_messages(self.entities[profile], ids=number))
+            found.update(zip(batch, answer))
+        return found
 
     async def context(self, index, options):
         for depth in range(1, options.context_depth + 1):
             missing = index.expand(options, depth)
-            fetched = set()
+            fetched, wanted = set(), {}
             for row in missing:
                 if (row["parent_chat"], row["parent"]) in fetched:
                     continue
                 fetched.add((row["parent_chat"], row["parent"]))
-                reason = "outside_selected_source"
                 if row["parent_chat"] == self.job["chat_id"]:
-                    profile = row["profile"]
-                    collector = self.app_for(profile).state.collector
-                    message = await collector.client.get_messages(self.entities[profile], ids=row["parent"])
+                    wanted.setdefault(row["profile"], []).append(row["parent"])
+                else:
+                    index.db.execute("UPDATE messages SET missing_parent=? WHERE parent=? AND parent_chat=?",
+                                     ("outside_selected_source", row["parent"], row["parent_chat"]))
+            for profile, numbers in wanted.items():
+                for number, message in (await self.parents(profile, numbers)).items():
                     if message and not isinstance(message, types.MessageEmpty):
-                        if message.id != row["parent"] or utils.get_peer_id(message.peer_id) != self.job["chat_id"]:
+                        if message.id != number or utils.get_peer_id(message.peer_id) != self.job["chat_id"]:
                             raise ValueError("Context reply belongs to a different message or source.")
                         index.add(message_record(message), profile)
                         index.db.execute("UPDATE messages SET selected=1,depth=? WHERE id=?", (depth, message.id))
                         continue
-                    reason = "unavailable_to_fetching_account"
-                index.db.execute("UPDATE messages SET missing_parent=? WHERE parent=? AND parent_chat=?",
-                                 (reason, row["parent"], row["parent_chat"]))
+                    index.db.execute("UPDATE messages SET missing_parent=? WHERE parent=? AND parent_chat=?",
+                                     ("unavailable_to_fetching_account", number, self.job["chat_id"]))
             index.db.commit()
 
     async def finish_selection(self, directory, options):
@@ -594,9 +672,10 @@ class Run:
                 path = directory / "chunks" / (str(task["low"]) + ".jsonl")
                 if self.check_chunk(path, task) != (task["count"], task["sha256"]):
                     raise ValueError("Acquired chunk changed before selection.")
-                with path.open(encoding="utf-8") as stream:
-                    for line in stream:
-                        index.add(json.loads(line), task["profile"])
+                pages = self.page_states.get(task["low"])
+                observers = await complete_in_thread(pages.observers) if pages is not None else []
+                for record, profile in self.attributed(path, observers, task["profile"]):
+                    index.add(record, profile)
                 index.db.commit()
                 await asyncio.sleep(0)
             self.recheck = await self.recheck_absent(index, options)
@@ -770,9 +849,11 @@ class Run:
             self.set_phase("running")
             self.persist()
             workers = [asyncio.create_task(self.work(w)) for w in self.state["workers"] if w["state"] != "skipped"]
+            balancer = asyncio.create_task(self.rebalance())
             try:
                 await asyncio.gather(*workers)
             finally:
+                balancer.cancel()
                 for task in workers:
                     if not task.done() and not task.cancelling():
                         task.cancel()
@@ -814,9 +895,10 @@ class Run:
                                     "segments": self.job["segments"], "chunk_size": self.job["chunk_size"], "clock_at_start": clock,
                                     "clock_at_end": await lead.telegram_clock(),
                                     "clock_scope": "Current run; saved chunks retain their original local commit times."}}
-            if self.job.get("checkpoint_format") == PAGE_FORMAT:
-                meta["acquisition"]["checkpoints"] = {"format": PAGE_FORMAT, "max_messages": 100,
+            if self.job.get("checkpoint_format") in PAGE_FORMATS:
+                meta["acquisition"]["checkpoints"] = {"format": self.job["checkpoint_format"], "max_messages": 100,
                     "pages": sum(p.state["pages"] for p in self.page_states.values()),
+                    "handovers": self.state.get("handovers", 0),
                     "scope": "Local decoded-message checkpoints, not RPC responses. Excluded records and page receipts "
                              "are not included in this archive. Working files are removed after successful archive "
                              "verification; selected messages have the archive's account signatures."}
