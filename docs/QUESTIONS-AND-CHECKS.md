@@ -293,14 +293,15 @@ explains the choice and links Telegram's documentation for each point.
   opentele2 and Grampo.
 - [`tgwitness/api_pool.py`](../tgwitness/api_pool.py) contains 50 public pairs. A fresh
   login tries Telegram Desktop's pair (2040) first, then up to seven shuffled others
-  (`login_order`); if Telegram refuses a pair, the next one is tried. "Only the Telegram Desktop pair (2040) is sent with a matching
-  Telegram Desktop client description"
+  (`login_order`); if Telegram refuses a pair, the next one is tried. Only the Telegram
+  Desktop pair (2040) is sent with a matching Telegram Desktop client description
   ([authentication methods](CONNECTION-SECURITY.md#authentication-methods)).
   Missing device fields come from bundled opentele2 catalogs
   ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
 - **Your own pair.** Enter it under **API ID + Hash** and TgWitness uses it instead of
   the pool. For material intended for court, create a pair at my.telegram.org and enter it
   before collection starts ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
+  Create the pair and collect with a dedicated account, not a personal one.
 - Each `observation.started` record names the `api_id` (never the hash), whether the
   pair is built-in or the operator's own, the client description and the route type.
   Reports and `custody.json` list them ([producer](EVIDENCE.md#producer)), so a

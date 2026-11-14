@@ -100,7 +100,7 @@ input file had different whitespace.
 | TSA signature | The signature, the signing certificate and its chain to the explicit CA are checked at the stamped time |
 | Collector signature | Separately verified by the journal verifier with a pinned key |
 | Revocation | Evidence mode stores OCSP/CRL evidence that `verify.py` checks |
-| Scheduled submission | Evidence mode, off by default |
+| Scheduled submission | Evidence mode, turned on by every setup goal |
 
 `--request` is technically optional, but omitting it prevents verification of the
 original nonce. For this full procedure, the result's `request_checked` must be true.
