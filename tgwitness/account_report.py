@@ -521,13 +521,17 @@ def account_chat(context, chat, rows):
     if state_note(chat, say):
         yield encoded('<p class="notice">' + e(state_note(chat, say)) + '</p>')
     yield encoded(copy_context(context, say))
-    yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
-    if (context.get('pagination') or {}).get('page', 1) == 1 and context.get('chat_map'):
-        yield encoded(context['chat_map'])
-    yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>')
-    yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a><a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a><a href="#verification">' +
-                  e(say('Verification')) + '</a></nav><section id="messages">')
     pagination = context.get('pagination') or {}
+    # Charts and the assessment describe the whole chat: they open it once, and later pages go straight to messages.
+    first = pagination.get('page', 1) == 1
+    if first:
+        yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
+        if context.get('chat_map'):
+            yield encoded(context['chat_map'])
+    yield encoded('<p>' + e(say('Cite the archive reference, the file path and the record reference beside a message. Record numbers apply only to this copy.')) + '</p>')
+    yield encoded('<nav><a href="#messages">' + e(say('Messages')) + '</a>'
+                  + ('<a href="#case-assessment">' + e(say(case_assessment.TITLE)) + '</a>' if first else '')
+                  + '<a href="#verification">' + e(say('Verification')) + '</a></nav><section id="messages">')
     yield encoded(page_navigation(context, say))
     page_path = pagination.get('file') or ('chats/' + str(chat['id']) + '.html' if type(chat.get('id')) is int else 'chat.html')
     seen = False
@@ -539,8 +543,9 @@ def account_chat(context, chat, rows):
     if pagination.get('page', 1) == pagination.get('pages', 1):
         yield encoded(gap_marks(context, say, last=True))
     yield encoded(page_navigation(context, say) + '</section>')
-    yield encoded(case_assessment.html(case_assessment.snapshot(context, 'account_chat',
-        {'message_count': chat.get('message_count')}), say))
+    if first:
+        yield encoded(case_assessment.html(case_assessment.snapshot(context, 'account_chat',
+            {'message_count': chat.get('message_count')}), say))
     yield encoded(verification(context, say))
     yield ending(say)
 
