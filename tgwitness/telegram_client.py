@@ -19,9 +19,11 @@ _single_attempt = ContextVar("telegram_single_attempt", default=False)
 LOG = logging.getLogger("tgwitness.telegram_client")
 
 try:
-    from telethon._updates.messagebox import ENTRY_ACCOUNT, MessageBox
+    from telethon._updates.messagebox import ENTRY_ACCOUNT, MessageBox, PrematureEndReason
 except ImportError:
     MessageBox = None
+
+TOO_LONG_RECOVERY = "channel_difference_too_long"
 
 
 if MessageBox is not None:
@@ -54,15 +56,44 @@ if MessageBox is not None:
 
         def apply_channel_difference(self, request, diff, chat_hashes):
             self.hold()
-            if isinstance(diff, types.updates.ChannelDifferenceTooLong):
-                entry = request.channel.channel_id
-                self.report_gap(entry, entry, getattr(diff.dialog, "pts", None))
-            return super().apply_channel_difference(request, diff, chat_hashes)
+            if not isinstance(diff, types.updates.ChannelDifferenceTooLong):
+                return super().apply_channel_difference(request, diff, chat_hashes)
+            entry = request.channel.channel_id
+            before, after = getattr(self.map.get(entry), "pts", None), getattr(diff.dialog, "pts", None)
+            if type(before) is int and type(after) is int and after <= before:
+                diff.dialog.pts = after = before + 1
+            latest = sorted((m for m in diff.messages if isinstance(m, (types.Message, types.MessageService))),
+                            key=lambda m: m.id)
+            self.report_gap(entry, entry, after, top_message=getattr(diff.dialog, "top_message", None),
+                            recovered=len(latest))
+            super().apply_channel_difference(request, diff, chat_hashes)
+            updates = []
+            for message in latest:
+                update = types.UpdateNewChannelMessage(message=message, pts=0, pts_count=0)
+                update.tgwitness_recovery = TOO_LONG_RECOVERY
+                updates.append(update)
+            return updates, diff.users, diff.chats
 
-        def report_gap(self, channel_id, entry, after):
+        def get_channel_difference(self, chat_hashes):
+            entry = next((id for id in self.getting_diff_for if isinstance(id, int)), None)
+            before = getattr(self.map.get(entry), "pts", None)
+            request = super().get_channel_difference(chat_hashes)
+            if request is None and entry is not None and before is not None and entry not in self.map:
+                self.report_gap(entry, None, None, before=before, cause="channel_state_dropped")
+            return request
+
+        def end_channel_difference(self, request, reason, chat_hashes):
+            super().end_channel_difference(request, reason, chat_hashes)
+            owner = getattr(self, "gap_owner", None)
+            if reason == PrematureEndReason.BANNED and owner is not None:
+                owner.channel_unavailable(request.channel.channel_id)
+
+        def report_gap(self, channel_id, entry, after, *, before=None, **details):
             owner = getattr(self, "gap_owner", None)
             if owner is not None:
-                owner.difference_gap(channel_id, getattr(self.map.get(entry), "pts", None), after)
+                if entry is not None:
+                    before = getattr(self.map.get(entry), "pts", None)
+                owner.difference_gap(channel_id, before, after, **details)
 else:
     GapAwareMessageBox = None
 FLOOD_ERRORS = (FloodWaitError, FloodPremiumWaitError)
@@ -173,12 +204,19 @@ class WitnessClient(TelegramClient):
         if not self.undispatched:
             self.accepted_state = None
 
-    def difference_gap(self, channel_id, before, after):
+    def difference_gap(self, channel_id, before, after, **details):
         if listener := getattr(self, "difference_gap_listener", None):
             try:
-                listener(channel_id, before, after)
+                listener(channel_id, before, after, **details)
             except Exception:
                 LOG.exception("Recording an undelivered update interval failed")
+
+    def channel_unavailable(self, channel_id):
+        if listener := getattr(self, "channel_unavailable_listener", None):
+            try:
+                listener(channel_id)
+            except Exception:
+                LOG.exception("Recording a channel that stopped returning updates failed")
 
     async def history_page(self, entity, *, limit, offset_id):
         peer = await self.get_input_entity(entity)

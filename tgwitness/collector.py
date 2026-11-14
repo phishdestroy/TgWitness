@@ -42,7 +42,7 @@ from . import tuning
 from .history import History
 from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
-from .telegram_client import WitnessClient, FLOOD_ERRORS, request_method
+from .telegram_client import WitnessClient, FLOOD_ERRORS, TOO_LONG_RECOVERY, request_method
 from .security import KeyLock
 from .workers import complete_in_thread
 from .store import RECEIVED_AT, canonical, utcnow
@@ -202,6 +202,8 @@ AUTO_DELETE_MEANING = {
 }
 
 
+CHANNEL_STATE_DROPPED_MEANING = ("The Telegram client could not request this channel's missed updates and discarded its "
+                                 "update position. Updates received in between may be missing.")
 FLOOD_GUARDED = {"recheck": ("messages.getHistory", "messages.getMessages", "channels.getMessages"),
                  "watch": ("updates.getState",), "people": ("users.getUsers",)}
 RECONNECT_MEANING = ("Telegram's client library reconnected on its own. The connection was lost for an unknown "
@@ -316,7 +318,12 @@ ACTIVITY_CLAIMS = (("snapshot:", "loading_messages"), ("scale:", "measuring_chat
 
 
 def recovered_source(update):
-    return "update_recovery" if getattr(update, "pts", None) == 0 else None
+    return getattr(update, "tgwitness_recovery", None) or ("update_recovery" if getattr(update, "pts", None) == 0
+                                                           else None)
+
+
+def recovered_kind(source):
+    return "message.recovered" if source == TOO_LONG_RECOVERY else "message.new"
 
 
 def method_of(exc):
@@ -1014,6 +1021,7 @@ class Collector:
         client.exported_error_handler = exported_error
         client.connection_listener = lambda state: self.connection_changed(client, state)
         client.difference_gap_listener = self.difference_gap
+        client.channel_unavailable_listener = self.channel_unavailable
         for handler, builder in ((self.on_new, events.NewMessage()),
                                  (self.on_edit, events.MessageEdited()),
                                  (self.on_delete, events.MessageDeleted()),
@@ -2197,18 +2205,32 @@ class Collector:
                             for f in self.folders.values()],
                 "limit": limit, "may_be_truncated": count >= limit}
 
-    def difference_gap(self, channel_id, before, after):
+    def difference_gap(self, channel_id, before, after, top_message=None, recovered=None, cause=None):
         chat_id = utils.get_peer_id(types.PeerChannel(channel_id)) if channel_id is not None else None
         if chat_id is not None and not self.selected(chat_id):
             return
-        self.store.append("coverage.gap", {
-            "reason": "Telegram reported that updates for this interval are too old to deliver",
-            "scope": "account" if chat_id is None else "channel", "pts_before": before, "pts_after": after,
-            "completeness": "incomplete", "run_id": self.run_id,
-            "meaning": "Edits, deletions and other updates in this interval were not delivered and are absent from "
-                       "this journal. New messages can still be recovered by reading history."}, chat_id)
+        if cause == "channel_state_dropped":
+            self.store.append("coverage.gap", {
+                "reason": cause, "scope": "channel", "pts_before": before, "completeness": "unknown",
+                "run_id": self.run_id, "meaning": CHANNEL_STATE_DROPPED_MEANING}, chat_id)
+        else:
+            self.store.append("coverage.gap", {
+                "reason": "Telegram reported that updates for this interval are too old to deliver",
+                "scope": "account" if chat_id is None else "channel", "pts_before": before, "pts_after": after,
+                **({"telegram_top_message": top_message, "latest_messages_returned": recovered}
+                   if recovered is not None else {}),
+                "completeness": "incomplete", "run_id": self.run_id,
+                "meaning": "Edits, deletions and other updates in this interval were not delivered and are absent from "
+                           "this journal. New messages can still be recovered by reading history."
+                           + (" The latest messages Telegram returned with this answer are recorded as recovered, "
+                              "in their state at recovery." if recovered else "")}, chat_id)
         if self.running:
             self.request_recheck(None if chat_id is None else [chat_id])
+
+    def channel_unavailable(self, channel_id):
+        chat_id = utils.get_peer_id(types.PeerChannel(channel_id))
+        if self.selected(chat_id):
+            self.access_lost(chat_id, "no_access")
 
     def connection_changed(self, client, state):
         if client is self.client:
@@ -2933,6 +2955,11 @@ class Collector:
         sender = sender or getattr(message, "sender", None)
         payload = describe_message(message, sender)
         payload["source"] = source or ("history_snapshot" if kind == "message.snapshot" else "live_update")
+        if source == TOO_LONG_RECOVERY:
+            payload["content_as_of"] = "recovery"
+            payload["recovery_meaning"] = ("Telegram returned this message among a channel's latest messages because "
+                                           "its missed updates were too old to deliver. The content is its state at "
+                                           "recovery; earlier versions were not delivered.")
         payload["collector_account_id"] = (self.store.get_setting("account", {}) or {}).get("id")
         payload["run_id"] = self.run_id
         if history_run_id is not None:
@@ -3069,7 +3096,7 @@ class Collector:
             source = recovered_source(update)
             if source and self.store.message_state(event.chat_id, event.message.id)["content"]:
                 return
-            await self.capture_message(event.message, "message.new", event.chat_id, update, source)
+            await self.capture_message(event.message, recovered_kind(source), event.chat_id, update, source)
         except Exception as exc:
             await self.live_failure(exc, "message.new", client, [getattr(event, "chat_id", None)])
 
@@ -3230,7 +3257,7 @@ class Collector:
                 if (not membership or settings["membership"]) and (removed or await self.covers(chat_id)):
                     source = recovered_source(update)
                     if not (source and self.store.message_state(chat_id, update.message.id)["content"]):
-                        await self.capture_message(update.message, "message.new", chat_id, update, source,
+                        await self.capture_message(update.message, recovered_kind(source), chat_id, update, source,
                                                    sender=(getattr(update, "_entities", None) or {}).get(update.message.sender_id))
                 if removed:
                     await self.check_access(chat_id, update)
