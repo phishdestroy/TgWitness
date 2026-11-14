@@ -120,6 +120,7 @@
 - Settings open with the recommended values in use and four everyday sections; goal, files, record protection, notifications and the expert tools move under **Advanced settings**. Every change can be undone at once or later from **Recent changes**, custom file limits included. Switches, choice buttons and a short explanation under each setting replace bare checkboxes and question marks; the interface level moves to **Language, time and appearance**.
 - `verify.py --tsa-ca` and `python -m tgwitness.anchor verify` check the RFC 3161 signature, the signing certificate and its chain in Python with the `cryptography` library. OpenSSL is no longer needed, also on Windows; `--openssl` is removed from `tgwitness.anchor verify`.
 - Proxy lists: an unreadable or invalid `proxy-sources.json` no longer falls back to the defaults, which turn on every bundled list and country lookups for proxy addresses. Proxy lists stay unused and the panel asks to restore the file; saving the list settings again replaces it.
+- **Record the other side’s typing in the journal**: `visibility.peer_typing` and `secret_chat.peer_typing` records list the reported actions in order with the times they were received (`timeline`), with the forum topic (`top_msg_id`), the upload progress at the first and last notice of a step and the plain fields of the action, such as the emoji of an emoji interaction. A burst keeps its first 100 steps and counts the notices after them.
 
 ## 0.9.3 preview · 11 November 2026
 
