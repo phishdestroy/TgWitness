@@ -722,6 +722,24 @@ def register(app, ctx):
         "/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)]
     )(routes_export.export_ticket)
     router.get("/api/exports/{export_id}/download")(routes_export.export_again)
+    router.get("/api/exports/{export_id}/external-signatures", dependencies=[Depends(authenticate)])(
+        routes_export.external_signatures
+    )
+    router.post(
+        "/api/exports/{export_id}/external-signatures/request", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_request)
+    router.post(
+        "/api/exports/{export_id}/external-signatures/ticket", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_ticket)
+    router.get("/api/exports/{export_id}/external-signatures/download")(
+        routes_export.external_signature_download
+    )
+    router.post(
+        "/api/exports/{export_id}/external-signatures/{number}", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_attach)
+    router.post(
+        "/api/exports/{export_id}/external-signatures/{number}/check", dependencies=[Depends(authenticate)]
+    )(routes_export.external_signature_check)
     router.post("/api/privacy/reveal", dependencies=[Depends(authenticate)])(
         routes_chats.reveal_secret
     )

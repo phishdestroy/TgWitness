@@ -1,4 +1,6 @@
 from .. import app as application
+from .. import asic
+from .. import external_signature
 from .. import handover
 from .. import pdf_report
 from .. import report
@@ -31,6 +33,8 @@ from pydantic import Field
 from pydantic import model_validator
 from typing import Literal
 import asyncio
+import base64
+import binascii
 import json
 import secrets
 
@@ -38,6 +42,26 @@ import secrets
 class DisclosureConfirmation(BaseModel):
     model_config = {"extra": "forbid"}
     preview_id: str = Field(min_length=16, max_length=100)
+
+
+class ExternalSignatureUpload(BaseModel):
+    model_config = {"extra": "forbid"}
+    signature: str = Field(min_length=4, max_length=22_400_000)
+    roots: str = Field(default="", max_length=1_400_000)
+    certificates: str = Field(default="", max_length=1_400_000)
+
+
+class ExternalSignatureCertificates(BaseModel):
+    model_config = {"extra": "forbid"}
+    roots: str | None = Field(default=None, max_length=1_400_000)
+    certificates: str | None = Field(default=None, max_length=1_400_000)
+
+
+MEDIA_TYPES = {"zip": "application/zip", "asice": "application/vnd.etsi.asic-e+zip",
+               "jsonl": "application/x-ndjson", "csv": "text/csv", "html": "text/html",
+               "json": "application/json", "pdf": "application/pdf"}
+ASIC_PASSWORD = ("Password-protected exports cannot be ASiC-E containers: signature validators must read the "
+                 "container. Choose ZIP, or turn off the password.")
 
 
 class ReportExportRequest(ExportPassword):
@@ -401,44 +425,37 @@ async def chat_export_download(
 
 async def export(
     request: Request,
-    fmt: Literal["zip", "jsonl", "csv", "html", "json", "pdf"],
+    fmt: Literal["zip", "asice", "jsonl", "csv", "html", "json", "pdf"],
     language: str | None = None,
     *,
     ctx=Depends(current_context),
 ):
     path, headers = await ctx.build_export(fmt, request, language=language)
-    media_types = {
-        "zip": "application/zip",
-        "jsonl": "application/x-ndjson",
-        "csv": "text/csv",
-        "html": "text/html",
-        "json": "application/json",
-        "pdf": "application/pdf",
-    }
     name = (
         "tgwitness-report." + fmt
         if fmt in ("json", "pdf")
         else "tgwitness-evidence." + fmt
     )
     return TemporaryDownload(
-        path, filename=name, media_type=media_types[fmt], headers=headers
+        path, filename=name, media_type=MEDIA_TYPES[fmt], headers=headers
     )
 
 
 async def export_encrypted(
     request: Request,
-    fmt: Literal["zip", "jsonl", "csv", "html", "json", "pdf"],
+    fmt: Literal["zip", "asice", "jsonl", "csv", "html", "json", "pdf"],
     body: ReportExportRequest,
     language: str | None = None,
     *,
     ctx=Depends(current_context),
 ):
+    if fmt == "asice" and body.password is not None:
+        raise HTTPException(422, ASIC_PASSWORD)
     path, headers = await ctx.build_export(
         fmt, request, body.password, language, body.encryption, body.options
     )
     encrypted = body.password is not None
-    media_types = {"zip": "application/zip", "jsonl": "application/x-ndjson",
-                   "csv": "text/csv", "html": "text/html", "json": "application/json", "pdf": "application/pdf"}
+    media_types = MEDIA_TYPES
     name = "tgwitness-report." + fmt if fmt in ("json", "pdf") else "tgwitness-evidence." + fmt
     return TemporaryDownload(
         path,
@@ -620,6 +637,143 @@ async def export_again(
         raise
 
 
+def decoded(text, what):
+    try:
+        return base64.b64decode(text or "", validate=True)
+    except (binascii.Error, ValueError):
+        raise HTTPException(422, what + " must be Base64.") from None
+
+
+def signature_export(ctx, export_id, unavailable_ok=False):
+    from ..export_history import locate
+
+    try:
+        path, entry = locate(ctx.app.state.store, export_id, False)
+        return path, entry, None
+    except ValueError as exc:
+        if not unavailable_ok:
+            raise HTTPException(409, str(exc)) from None
+        from ..export_history import metadata
+
+        return None, metadata(ctx.app.state.store, export_id) or {}, str(exc)
+
+
+async def external_signatures(export_id: str, request: Request, *, ctx=Depends(current_context)):
+    ctx.prepared_access(request, export_id)
+
+    def inspect():
+        path, entry, problem = signature_export(ctx, export_id, True)
+        return external_signature.status(ctx.app.state.store, export_id, path, entry, problem)
+
+    try:
+        async with ctx.export_lock:
+            return await complete_in_thread(inspect)
+    except ValueError as exc:
+        raise HTTPException(409, str(exc)) from None
+
+
+async def external_signature_request(export_id: str, request: Request, *, ctx=Depends(current_context)):
+    ctx.prepared_access(request, export_id)
+
+    def prepare():
+        path, entry, _ = signature_export(ctx, export_id)
+        return external_signature.request(ctx.app.state.store, export_id, path, entry)
+
+    try:
+        async with ctx.export_lock:
+            return await complete_in_thread(prepare)
+    except (ValueError, OSError) as exc:
+        raise HTTPException(409, str(exc)) from None
+
+
+async def external_signature_attach(
+    export_id: str, number: str, body: ExternalSignatureUpload, request: Request, *, ctx=Depends(current_context)
+):
+    ctx.prepared_access(request, export_id)
+    signature = decoded(body.signature, "The signature")
+    roots, certificates = decoded(body.roots, "The root certificates"), decoded(body.certificates, "The certificates")
+
+    def attach():
+        external_signature.attach(ctx.app.state.store, export_id, number, signature, roots, certificates)
+        path, entry, problem = signature_export(ctx, export_id, True)
+        found = external_signature.status(ctx.app.state.store, export_id, path, entry, problem)
+        return next(item for item in found["signatures"] if str(item["number"]) == str(int(number)))
+
+    try:
+        async with ctx.export_lock:
+            return await complete_in_thread(attach)
+    except (ValueError, OSError) as exc:
+        raise HTTPException(409, str(exc)) from None
+
+
+async def external_signature_check(
+    export_id: str, number: str, body: ExternalSignatureCertificates, request: Request, *, ctx=Depends(current_context)
+):
+    ctx.prepared_access(request, export_id)
+    roots = None if body.roots is None else decoded(body.roots, "The root certificates")
+    certificates = None if body.certificates is None else decoded(body.certificates, "The certificates")
+
+    def check():
+        external_signature.supply(ctx.app.state.store, export_id, number, roots, certificates)
+        path, entry, problem = signature_export(ctx, export_id, True)
+        found = external_signature.status(ctx.app.state.store, export_id, path, entry, problem)
+        return next(item for item in found["signatures"] if str(item["number"]) == str(int(number)))
+
+    try:
+        async with ctx.export_lock:
+            return await complete_in_thread(check)
+    except (ValueError, OSError) as exc:
+        raise HTTPException(409, str(exc)) from None
+
+
+async def external_signature_ticket(export_id: str, request: Request, *, ctx=Depends(current_context)):
+    ctx.prepared_access(request, export_id)
+    async with ctx.export_lock:
+        await complete_in_thread(signature_export, ctx, export_id)
+    await ctx.identify_download(request, request.headers.get("authorization", "").partition(" ")[2])
+    ctx.prepared_access(request, export_id)
+    target = "exports/" + export_id + "/external-signatures/download"
+    return ctx.issue_download_ticket(request, target, target)
+
+
+async def external_signature_download(export_id: str, request: Request, *, ctx=Depends(current_context)):
+    credential = await ctx.authorize_download(request, "exports/" + export_id + "/external-signatures/download")
+    found = {}
+
+    def prepare():
+        path, entry, _ = signature_export(ctx, export_id)
+        output, kind, numbers = external_signature.signed_copy(ctx.app.state.store, export_id, path, entry)
+        found.update(kind=kind, numbers=numbers, entry=entry)
+        return output
+
+    try:
+        async with ctx.export_lock:
+            ctx.prepared_access(request, export_id)
+            path = await build_file(prepare)
+    except ValueError as exc:
+        raise HTTPException(409, str(exc)) from None
+    try:
+        try:
+            who = await ctx.identify_download(request, credential)
+            if who is None:
+                raise Refused("This access has expired.")
+            access_check(who, ctx.profile_id, POLICY["GET /api/exports/{export_id}/external-signatures/download"], {})
+            ctx.require_prepared_access(request, found["entry"])
+        except Refused as exc:
+            raise HTTPException(403, str(exc)) from None
+        return TemporaryDownload(
+            path,
+            filename="tgwitness-" + ctx.profile_id[:8] + "-" + export_id[:8] + "-signed."
+            + ("asice" if found["kind"] == "asice" else "zip"),
+            media_type=MEDIA_TYPES["asice" if found["kind"] == "asice" else "zip"],
+            headers={"Cache-Control": "no-store",
+                     "X-TgWitness-External-Signatures": ",".join(str(n) for n in found["numbers"])},
+        )
+    except BaseException:
+        path.unlink(missing_ok=True)
+        raise
+
+
 class ExportOperations:
     def account_download_path(self, export_id, disclosure_id=None):
         try:
@@ -718,7 +872,10 @@ class ExportOperations:
     async def build_export(self, fmt, request, password=None, language=None, encryption="zip", draft=None):
         from .. import export_history
 
+        if fmt == "asice" and password is not None:
+            raise HTTPException(422, ASIC_PASSWORD)
         receipt = {}
+        container = {"timestamp": self.export_timestamp(asyncio.get_running_loop())} if fmt == "asice" else None
         if draft is not None:
             options = draft.model_dump()
             if language or options["language"] == "auto":
@@ -730,13 +887,16 @@ class ExportOperations:
         permissions = ["view", "export"] + (["board.read"] if include_board else [])
 
         def build():
+            if container is not None:
+                container["signer"] = asic.workspace_signer(self.app.state.vault)
             path = application.export_file(
                 self.app.state.store,
                 self.app.state.vault,
-                fmt,
+                "zip" if fmt == "asice" else fmt,
                 options,
                 include_board=include_board,
                 require_records=fmt in ("html", "json", "pdf"),
+                container=container,
             )
             try:
                 if password is not None:
@@ -760,7 +920,7 @@ class ExportOperations:
 
         head = self.app.state.store.stats()["head"]["seq"]
         async with self.export_lock, self.app.state.storage.lock:
-            if fmt == "zip":
+            if fmt in ("zip", "asice"):
                 try:
                     self.app.state.storage.require_local_media()
                 except ValueError as exc:
@@ -789,9 +949,28 @@ class ExportOperations:
         except BaseException:
             path.unlink(missing_ok=True)
             raise
-        if fmt == "zip":
+        if fmt in ("zip", "asice"):
             export_history.evidence_exported(self.app.state.store, head)
-        return (path, export_history.headers(receipt))
+        headers = export_history.headers(receipt)
+        if container is not None:
+            headers["X-TgWitness-CAdES-Level"] = container["result"]["level"]
+            if container.get("evidence_record"):
+                headers["X-TgWitness-Evidence-Record"] = ("error" if "error" in container["evidence_record"]
+                                                          else container["evidence_record"]["time"])
+        return (path, headers)
+
+    def export_timestamp(self, loop):
+        from ..anchoring import evidence_settings, post
+
+        settings = evidence_settings(self.app.state.store)
+        if not settings["enabled"] or not settings["tsa_urls"]:
+            return None
+
+        def send(url, query):
+            return asyncio.run_coroutine_threadsafe(post(
+                url, query, {"Content-Type": "application/timestamp-query", "Accept": "application/timestamp-reply"},
+                self.app.state.collector.outside_route()), loop).result(90)
+        return asic.tsa_timestamp(settings["tsa_urls"], send)
 
     async def identify_download(self, request, credential):
         try:

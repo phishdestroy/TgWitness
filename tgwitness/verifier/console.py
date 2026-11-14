@@ -494,6 +494,11 @@ class Console:
             self.check("ok", "Record chain", self.t("{n} records · head {hash}", n=self.number(result["events"]),
                                                     hash=head[:8] + "…" + head[-8:]))
             self.seal(result, "report.html")
+            if result.get("container"):
+                self.check("none", "ASiC-E container",
+                           self.t("Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES "
+                                  "signatures are not checked by this verifier",
+                                  n=self.number(len(result["container"]["unchecked_members"]))))
             if result.get("witness"):
                 witness = result["witness"]
                 self.check("ok" if witness["consistent"] else "warn", "Witness",

@@ -223,7 +223,9 @@
       "checkpoints: {n} (#{first}–#{last})": "checkpoints: {n} (#{first}–#{last})",
       "Timestamp warning": "Timestamp warning",
       "Signing certificate reference": "Signing certificate reference",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2",
+      "ASiC-E container": "ASiC-E container",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier"
     },
     "reader": {
       "launch": "Extract the whole ZIP. Double-click VERIFY.cmd, or drag the original ZIP onto it. On macOS/Linux run sh VERIFY.sh.",
@@ -494,7 +496,9 @@
       "checkpoints: {n} (#{first}–#{last})": "контрольні точки: {n} (#{first}–#{last})",
       "Timestamp warning": "Попередження щодо мітки часу",
       "Signing certificate reference": "Посилання на сертифікат підпису",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Орган, що видає мітку часу, позначає свій сертифікат підпису як SHA-1 (RFC 2634 SigningCertificate); слід віддавати перевагу органам, які повертають SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Орган, що видає мітку часу, позначає свій сертифікат підпису як SHA-1 (RFC 2634 SigningCertificate); слід віддавати перевагу органам, які повертають SigningCertificateV2",
+      "ASiC-E container": "Контейнер ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Записів поза підписаним маніфестом (mimetype, META-INF): {n} · їхні підписи CAdES цей верифікатор не перевіряє"
     },
     "reader": {
       "launch": "Розпакуйте весь ZIP. Двічі натисніть VERIFY.cmd або перетягніть на нього вихідний ZIP. У macOS/Linux виконайте sh VERIFY.sh.",
@@ -765,7 +769,9 @@
       "checkpoints: {n} (#{first}–#{last})": "puntos de control: {n} (#{first}–#{last})",
       "Timestamp warning": "Advertencia sobre la marca de tiempo",
       "Signing certificate reference": "Referencia al certificado de firma",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "La marca de tiempo denomina su certificado de firma como SHA-1 (RFC 2634 SigningCertificate); se prefieren las autoridades que devuelven SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "La marca de tiempo denomina su certificado de firma como SHA-1 (RFC 2634 SigningCertificate); se prefieren las autoridades que devuelven SigningCertificateV2",
+      "ASiC-E container": "Contenedor ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Entradas fuera del manifiesto firmado (mimetype, META-INF): {n} · sus CAdES firmas no son verificadas por este verificador"
     },
     "reader": {
       "launch": "Extraiga todo el ZIP. Haga doble clic en VERIFY.cmd o arrastre el ZIP original sobre él. En macOS/Linux ejecute sh VERIFY.sh.",
@@ -1036,7 +1042,9 @@
       "checkpoints: {n} (#{first}–#{last})": "pontos de verificação: {n} (#{first}–#{last})",
       "Timestamp warning": "Aviso sobre carimbo de data/hora",
       "Signing certificate reference": "Referência ao certificado de assinatura",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "O carimbo de data e hora nomeia seu certificado de assinatura como SHA-1 (RFC 2634 SigningCertificate); prefira autoridades que retornem SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "O carimbo de data e hora nomeia seu certificado de assinatura como SHA-1 (RFC 2634 SigningCertificate); prefira autoridades que retornem SigningCertificateV2",
+      "ASiC-E container": "ASiC-E contêiner",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Entradas fora do manifesto assinado (mimetype, META-INF): {n} · suas CAdES assinaturas não são verificadas por este verificador"
     },
     "reader": {
       "launch": "Extraia todo o ZIP. Dê um duplo clique em VERIFY.cmd ou arraste o ZIP original sobre ele. No macOS/Linux, execute sh VERIFY.sh.",
@@ -1307,7 +1315,9 @@
       "checkpoints: {n} (#{first}–#{last})": "kontrol noktaları: {n} (#{first}–#{last})",
       "Timestamp warning": "Zaman damgası uyarısı",
       "Signing certificate reference": "İmza sertifikası referansı",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Zaman damgası, imza sertifikasını SHA-1 (RFC 2634 SigningCertificate) olarak adlandırır; SigningCertificateV2 değerini döndüren yetkilileri tercih eder"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Zaman damgası, imza sertifikasını SHA-1 (RFC 2634 SigningCertificate) olarak adlandırır; SigningCertificateV2 değerini döndüren yetkilileri tercih eder",
+      "ASiC-E container": "ASiC-E kapsayıcı",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "İmzalı manifestonun dışındaki girdiler (mimetype, META-INF): {n} · bunların CAdES imzaları bu doğrulayıcı tarafından kontrol edilmez"
     },
     "reader": {
       "launch": "ZIP dosyasının tamamını çıkarın. VERIFY.cmd dosyasına çift tıklayın veya özgün ZIP dosyasını üzerine sürükleyin. macOS/Linux üzerinde sh VERIFY.sh çalıştırın.",
@@ -1578,7 +1588,9 @@
       "checkpoints: {n} (#{first}–#{last})": "نقاط الفحص: {n} (#{first}–#{last})",
       "Timestamp warning": "تحذير بشأن الطابع الزمني",
       "Signing certificate reference": "مرجع شهادة التوقيع",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "يُسمي الطابع الزمني شهادة التوقيع الخاصة به بـ SHA-1 (RFC 2634 SigningCertificate)؛ ويفضل استخدام السلطات التي تُرجع SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "يُسمي الطابع الزمني شهادة التوقيع الخاصة به بـ SHA-1 (RFC 2634 SigningCertificate)؛ ويفضل استخدام السلطات التي تُرجع SigningCertificateV2",
+      "ASiC-E container": "حاوية ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "المدخلات خارج قائمة المحتويات الموقعة (mimetype، META-INF): {n} · لا يتم التحقق من توقيعاتها CAdES بواسطة أداة التحقق هذه"
     },
     "reader": {
       "launch": "استخرج محتويات ZIP بالكامل. انقر مرتين على VERIFY.cmd أو اسحب ملف ZIP الأصلي إليه. على macOS/Linux شغّل sh VERIFY.sh.",
@@ -1849,7 +1861,9 @@
       "checkpoints: {n} (#{first}–#{last})": "نقاط کنترل: {n} (#{first}–#{last})",
       "Timestamp warning": "هشدار مهر زمانی",
       "Signing certificate reference": "مرجع گواهی امضا",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "تایم‌استامپ نام گواهی امضای خود را با SHA-1 (RFC 2634 SigningCertificate) نام‌گذاری می‌کند؛ مراجعی را ترجیح دهید که SigningCertificateV2 را بازگردانند."
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "تایم‌استامپ نام گواهی امضای خود را با SHA-1 (RFC 2634 SigningCertificate) نام‌گذاری می‌کند؛ مراجعی را ترجیح دهید که SigningCertificateV2 را بازگردانند.",
+      "ASiC-E container": "ASiC-E کانتینر",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "ورودی‌های خارج از مانیفست امضا شده (mimetype, META-INF): {n} · امضاهای CAdES آنها توسط این اعتبارسنج بررسی نمی‌شوند"
     },
     "reader": {
       "launch": "تمام محتوای ZIP را استخراج کنید. روی VERIFY.cmd دوبار کلیک کنید یا ZIP اصلی را روی آن بکشید. در macOS/Linux دستور sh VERIFY.sh را اجرا کنید.",
@@ -2120,7 +2134,9 @@
       "checkpoints: {n} (#{first}–#{last})": "چیک پوائنٹس: {n} (#{first}–#{last})",
       "Timestamp warning": "ٹائم اسٹیمپ انتباہ",
       "Signing certificate reference": "دستخطی سرٹیفکیٹ حوالہ",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "ٹائم اسٹیمپ اپنے دستخط کنندہ سرٹیفکیٹ کا نام SHA-1 (RFC 2634 SigningCertificate) کے ذریعے رکھتا ہے؛ SigningCertificateV2 واپس کرنے والی اتھارٹیز کو ترجیح دیں۔"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "ٹائم اسٹیمپ اپنے دستخط کنندہ سرٹیفکیٹ کا نام SHA-1 (RFC 2634 SigningCertificate) کے ذریعے رکھتا ہے؛ SigningCertificateV2 واپس کرنے والی اتھارٹیز کو ترجیح دیں۔",
+      "ASiC-E container": "ASiC-E کنٹینر",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "دستخط شدہ منیفیسٹ کے باہر اندراجات (mimetype, META-INF): {n}· ان کے CAdES دستخط اس ویریفائر کے ذریعے چیک نہیں کیے جاتے۔"
     },
     "reader": {
       "launch": "پورا ZIP نکالیں۔ VERIFY.cmd پر دو بار کلک کریں یا اصل ZIP کو اس پر کھینچ کر چھوڑیں۔ macOS/Linux پر sh VERIFY.sh چلائیں۔",
@@ -2391,7 +2407,9 @@
       "checkpoints: {n} (#{first}–#{last})": "चेकपॉइंट्स: {n} (#{first}–#{last})",
       "Timestamp warning": "टाइमस्टैम्प चेतावनी",
       "Signing certificate reference": "हस्ताक्षर प्रमाणपत्र संदर्भ",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "टाइमस्टैम्प अपने हस्ताक्षर प्रमाणपत्र का नाम SHA-1 (RFC 2634 SigningCertificate); द्वारा रखता है; SigningCertificateV2 लौटाने वाले प्राधिकरणों को प्राथमिकता दें।"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "टाइमस्टैम्प अपने हस्ताक्षर प्रमाणपत्र का नाम SHA-1 (RFC 2634 SigningCertificate); द्वारा रखता है; SigningCertificateV2 लौटाने वाले प्राधिकरणों को प्राथमिकता दें।",
+      "ASiC-E container": "ASiC-E कंटेनर",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "हस्ताक्षरित मैनिफेस्ट के बाहर की प्रविष्टियाँ (mimetype, META-INF): {n} · उनके CAdES हस्ताक्षर इस सत्यापनकर्ता द्वारा सत्यापित नहीं किए जाते हैं"
     },
     "reader": {
       "launch": "पूरा ZIP निकालें। VERIFY.cmd पर डबल-क्लिक करें या मूल ZIP को उस पर खींचकर छोड़ें। macOS/Linux पर sh VERIFY.sh चलाएँ।",
@@ -2662,7 +2680,9 @@
       "checkpoints: {n} (#{first}–#{last})": "titik pemeriksaan: {n} (#{first}–#{last})",
       "Timestamp warning": "Peringatan cap waktu",
       "Signing certificate reference": "Referensi sertifikat penandatanganan",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Cap waktu menamai sertifikat penandatanganannya dengan SHA-1 (RFC 2634 SigningCertificate); utamakan otoritas yang mengembalikan SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Cap waktu menamai sertifikat penandatanganannya dengan SHA-1 (RFC 2634 SigningCertificate); utamakan otoritas yang mengembalikan SigningCertificateV2",
+      "ASiC-E container": "Kontainer ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Entri di luar manifest yang ditandatangani (mimetype, META-INF): {n} · tanda tangan CAdES mereka tidak diperiksa oleh verifikator ini"
     },
     "reader": {
       "launch": "Ekstrak seluruh ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asli ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -2933,7 +2953,9 @@
       "checkpoints: {n} (#{first}–#{last})": "các điểm kiểm tra: {n} (#{first}–#{last})",
       "Timestamp warning": "Cảnh báo về dấu thời gian",
       "Signing certificate reference": "Tham chiếu chứng chỉ ký",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Dấu thời gian đặt tên cho chứng chỉ ký của mình là SHA-1 (RFC 2634 SigningCertificate); ưu tiên các cơ quan trả về SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Dấu thời gian đặt tên cho chứng chỉ ký của mình là SHA-1 (RFC 2634 SigningCertificate); ưu tiên các cơ quan trả về SigningCertificateV2",
+      "ASiC-E container": "ASiC-E container",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Các mục nằm ngoài bản kê khai đã ký (mimetype, META-INF): {n} · các chữ ký CAdES của chúng không được công cụ xác minh này kiểm tra"
     },
     "reader": {
       "launch": "Giải nén toàn bộ ZIP. Nhấp đúp VERIFY.cmd hoặc kéo ZIP gốc vào đó. Trên macOS/Linux, chạy sh VERIFY.sh.",
@@ -3204,7 +3226,9 @@
       "checkpoints: {n} (#{first}–#{last})": "检查点：{n} (#{first}–#{last})",
       "Timestamp warning": "时间戳警告",
       "Signing certificate reference": "签名证书参考",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "时间戳使用 SHA-1 (RFC 2634 SigningCertificate) 来命名其签名证书；优先选择返回 SigningCertificateV2 的权威机构"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "时间戳使用 SHA-1 (RFC 2634 SigningCertificate) 来命名其签名证书；优先选择返回 SigningCertificateV2 的权威机构",
+      "ASiC-E container": "ASiC-E 容器",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "签名清单之外的条目（mimetype、META-INF）：{n} · 其 CAdES 签名未被本验证器验证"
     },
     "reader": {
       "launch": "请完整解压 ZIP。双击 VERIFY.cmd，或将原始 ZIP 拖到它上面。在 macOS/Linux 中运行 sh VERIFY.sh。",
@@ -3475,7 +3499,9 @@
       "checkpoints: {n} (#{first}–#{last})": "points de contrôle : {n} (#{first}–#{last})",
       "Timestamp warning": "Avertissement concernant l’horodatage",
       "Signing certificate reference": "Référence relative au certificat de signature",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "L’horodateur nomme son certificat de signature SHA-1 (RFC 2634 SigningCertificate) ; privilégiez les autorités qui renvoient SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "L’horodateur nomme son certificat de signature SHA-1 (RFC 2634 SigningCertificate) ; privilégiez les autorités qui renvoient SigningCertificateV2",
+      "ASiC-E container": "Conteneur ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Entrées ne figurant pas dans le manifeste signé (mimetype, META-INF): {n} · leurs signatures CAdES ne sont pas vérifiées par ce vérificateur"
     },
     "reader": {
       "launch": "Extrayez tout le ZIP. Double-cliquez sur VERIFY.cmd ou déposez le ZIP original dessus. Sous macOS/Linux, exécutez sh VERIFY.sh.",
@@ -3746,7 +3772,9 @@
       "checkpoints: {n} (#{first}–#{last})": "Checkpoints: {n} (#{first}–#{last})",
       "Timestamp warning": "Warnung zum Zeitstempel",
       "Signing certificate reference": "Verweis auf das Signaturzertifikat",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Der Zeitstempel benennt sein Signaturzertifikat mit SHA-1 (RFC 2634 SigningCertificate); es werden Behörden bevorzugt, die SigningCertificateV2 zurückgeben."
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Der Zeitstempel benennt sein Signaturzertifikat mit SHA-1 (RFC 2634 SigningCertificate); es werden Behörden bevorzugt, die SigningCertificateV2 zurückgeben.",
+      "ASiC-E container": "ASiC-E-Container",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Einträge außerhalb des signierten Manifests (mimetype, META-INF): {n} · ihre CAdES-Signaturen werden von diesem Verifizierer nicht überprüft"
     },
     "reader": {
       "launch": "Entpacken Sie die gesamte ZIP-Datei. Doppelklicken Sie auf VERIFY.cmd oder ziehen Sie die ursprüngliche ZIP-Datei darauf. Unter macOS/Linux führen Sie sh VERIFY.sh aus.",
@@ -4017,7 +4045,9 @@
       "checkpoints: {n} (#{first}–#{last})": "checkpoint: {n} (#{first}–#{last})",
       "Timestamp warning": "Avviso relativo al timestamp",
       "Signing certificate reference": "Riferimento al certificato di firma",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Il timestamp denomina il proprio certificato di firma con SHA-1 (RFC 2634 SigningCertificate); sono da preferire le autorità che restituiscono SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Il timestamp denomina il proprio certificato di firma con SHA-1 (RFC 2634 SigningCertificate); sono da preferire le autorità che restituiscono SigningCertificateV2",
+      "ASiC-E container": "Contenitore ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Voci al di fuori del manifesto firmato (mimetype, META-INF): {n} · le loro CAdES firme non vengono verificate da questo verificatore"
     },
     "reader": {
       "launch": "Estrai l'intero ZIP. Fai doppio clic su VERIFY.cmd oppure trascinaci sopra lo ZIP originale. Su macOS/Linux esegui sh VERIFY.sh.",
@@ -4288,7 +4318,9 @@
       "checkpoints: {n} (#{first}–#{last})": "checkpointlar: {n} (#{first}–#{last})",
       "Timestamp warning": "Vaqt belgisi ogohlantirishi",
       "Signing certificate reference": "Imzolash sertifikati bo'yicha ma'lumotnoma",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Vaqt belgisi o'z imzolash sertifikatini SHA-1 (RFC 2634 SigningCertificate) orqali nomlaydi; SigningCertificateV2 ni qaytaradigan vakolatli organlarni afzal ko'radi"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Vaqt belgisi o'z imzolash sertifikatini SHA-1 (RFC 2634 SigningCertificate) orqali nomlaydi; SigningCertificateV2 ni qaytaradigan vakolatli organlarni afzal ko'radi",
+      "ASiC-E container": "ASiC-E konteyner",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Imzolangan manifestdan tashqaridagi yozuvlar (mimetype, META-INF): {n}· ularning CAdES imzolari ushbu tekshiruvchi tomonidan tekshirilmaydi"
     },
     "reader": {
       "launch": "ZIP arxivini to‘liq oching. VERIFY.cmd faylini ikki marta bosing yoki asl ZIP faylini uning ustiga olib boring. macOS/Linux tizimida sh VERIFY.sh buyrug‘ini bajaring.",
@@ -4559,7 +4591,9 @@
       "checkpoints: {n} (#{first}–#{last})": "체크포인트: {n} (#{first}–#{last})",
       "Timestamp warning": "타임스탬프 경고",
       "Signing certificate reference": "서명 인증서 참조",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "타임스탬프는 서명 인증서를 SHA-1 (RFC 2634 SigningCertificate)으로 명명하며, SigningCertificateV2을 반환하는 인증 기관을 우선적으로 사용합니다."
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "타임스탬프는 서명 인증서를 SHA-1 (RFC 2634 SigningCertificate)으로 명명하며, SigningCertificateV2을 반환하는 인증 기관을 우선적으로 사용합니다.",
+      "ASiC-E container": "ASiC-E 컨테이너",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "서명된 매니페스트 외부의 항목(mimetype, META-INF): {n} · 해당 항목의 CAdES 서명은 이 검증기에 의해 확인되지 않습니다."
     },
     "reader": {
       "launch": "ZIP 전체를 압축 해제하세요. VERIFY.cmd를 두 번 클릭하거나 원본 ZIP을 그 위로 끌어 놓으세요. macOS/Linux에서는 sh VERIFY.sh를 실행하세요.",
@@ -4830,7 +4864,9 @@
       "checkpoints: {n} (#{first}–#{last})": "檢查點：{n} (#{first}–#{last})",
       "Timestamp warning": "時間戳記警告",
       "Signing certificate reference": "簽名憑證參考",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "時間戳記以其簽名憑證命名為 SHA-1 (RFC 2634 SigningCertificate)；應優先選用會回傳 SigningCertificateV2 的授權機構"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "時間戳記以其簽名憑證命名為 SHA-1 (RFC 2634 SigningCertificate)；應優先選用會回傳 SigningCertificateV2 的授權機構",
+      "ASiC-E container": "ASiC-E 容器",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "簽名清單之外的項目（mimetype、META-INF）：{n} · 其 CAdES 簽名不會由本驗證器進行檢查"
     },
     "reader": {
       "launch": "請完整解壓縮 ZIP。按兩下 VERIFY.cmd，或將原始 ZIP 拖曳到它上面。在 macOS/Linux 中執行 sh VERIFY.sh。",
@@ -5101,7 +5137,9 @@
       "checkpoints: {n} (#{first}–#{last})": "titik pemeriksaan: {n} (#{first}–#{last})",
       "Timestamp warning": "Amaran cap masa",
       "Signing certificate reference": "Rujukan sijil penandatanganan",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Cap masa menamakan sijil tandatanganannya oleh SHA-1 (RFC 2634 SigningCertificate); utamakan pihak berkuasa yang mengembalikan SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Cap masa menamakan sijil tandatanganannya oleh SHA-1 (RFC 2634 SigningCertificate); utamakan pihak berkuasa yang mengembalikan SigningCertificateV2",
+      "ASiC-E container": "ASiC-E konten",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Kandungan di luar manifes yang ditandatangani (mimetype, META-INF): {n}· tandatangan CAdES mereka tidak disemak oleh pengesah ini"
     },
     "reader": {
       "launch": "Ekstrak keseluruhan ZIP. Klik dua kali VERIFY.cmd atau seret ZIP asal ke atasnya. Pada macOS/Linux, jalankan sh VERIFY.sh.",
@@ -5372,7 +5410,9 @@
       "checkpoints: {n} (#{first}–#{last})": "punkty kontrolne: {n} (#{first}–#{last})",
       "Timestamp warning": "Ostrzeżenie dotyczące znacznika czasu",
       "Signing certificate reference": "Odniesienie do certyfikatu podpisu",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Sygnatura czasowa nazywa swój certyfikat podpisujący jako SHA-1 (RFC 2634 SigningCertificate); preferowane są urzędy, które zwracają SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Sygnatura czasowa nazywa swój certyfikat podpisujący jako SHA-1 (RFC 2634 SigningCertificate); preferowane są urzędy, które zwracają SigningCertificateV2",
+      "ASiC-E container": "Kontener ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Wpisy spoza podpisanego manifestu (mimetype, META-INF): {n} · ich CAdES podpisy nie są sprawdzane przez ten weryfikator"
     },
     "reader": {
       "launch": "Rozpakuj cały ZIP. Kliknij dwukrotnie VERIFY.cmd lub przeciągnij na niego oryginalny ZIP. W macOS/Linux uruchom sh VERIFY.sh.",
@@ -5643,7 +5683,9 @@
       "checkpoints: {n} (#{first}–#{last})": "チェックポイント: {n} (#{first}–#{last})",
       "Timestamp warning": "タイムスタンプに関する警告",
       "Signing certificate reference": "署名証明書の参照",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "タイムスタンプは、その署名証明書を SHA-1 (RFC 2634 SigningCertificate) と命名します。SigningCertificateV2 を返す認証機関を優先してください。"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "タイムスタンプは、その署名証明書を SHA-1 (RFC 2634 SigningCertificate) と命名します。SigningCertificateV2 を返す認証機関を優先してください。",
+      "ASiC-E container": "ASiC-E コンテナ",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "署名付きマニフェストに含まれないエントリ（mimetype、META-INF）：{n} · それらの CAdES 署名は、この検証ツールによって検証されません"
     },
     "reader": {
       "launch": "ZIP全体を展開してください。VERIFY.cmdをダブルクリックするか、元のZIPをその上にドラッグしてください。macOS/Linuxでは sh VERIFY.sh を実行します。",
@@ -5914,7 +5956,9 @@
       "checkpoints: {n} (#{first}–#{last})": "checkpoints: {n} (#{first}–#{last})",
       "Timestamp warning": "คำเตือนเกี่ยวกับเวลาประทับ",
       "Signing certificate reference": "การอ้างอิงใบรับรองการลงนาม",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "เครื่องหมายเวลาจะตั้งชื่อใบรับรองการลงนามด้วย SHA-1 (RFC 2634 SigningCertificate); ให้เลือกหน่วยงานที่ให้ SigningCertificateV2 เป็นอันดับแรก"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "เครื่องหมายเวลาจะตั้งชื่อใบรับรองการลงนามด้วย SHA-1 (RFC 2634 SigningCertificate); ให้เลือกหน่วยงานที่ให้ SigningCertificateV2 เป็นอันดับแรก",
+      "ASiC-E container": "ASiC-E container",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "รายการที่อยู่นอก manifest ที่ลงนามแล้ว (mimetype, META-INF): {n} · ลายเซ็น CAdES ของรายการเหล่านั้นไม่ได้รับการตรวจสอบโดยตัวตรวจสอบนี้"
     },
     "reader": {
       "launch": "แตกไฟล์ ZIP ทั้งหมด ดับเบิลคลิก VERIFY.cmd หรือลาก ZIP ต้นฉบับไปวางบนไฟล์นั้น สำหรับ macOS/Linux ให้เรียกใช้ sh VERIFY.sh",
@@ -6185,7 +6229,9 @@
       "checkpoints: {n} (#{first}–#{last})": "נקודות ביקורת: {n} (#{first}–#{last})",
       "Timestamp warning": "אזהרה בנוגע לחותמת זמן",
       "Signing certificate reference": "הפניה לתעודת חתימה",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "חותמת הזמן מכנה את תעודת החתימה שלה SHA-1 (RFC 2634 SigningCertificate); יש להעדיף רשויות המחזירות SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "חותמת הזמן מכנה את תעודת החתימה שלה SHA-1 (RFC 2634 SigningCertificate); יש להעדיף רשויות המחזירות SigningCertificateV2",
+      "ASiC-E container": "ASiC-E מכולה",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "רשומות מחוץ למניפסט החתום (mimetype, META-INF): {n} · חתימות ה-CAdES שלהן אינן נבדקות על ידי בודק זה"
     },
     "reader": {
       "launch": "חלצו את כל תוכן ה-ZIP. לחצו פעמיים על VERIFY.cmd או גררו אליו את קובץ ה-ZIP המקורי. ב-macOS/Linux הריצו sh VERIFY.sh.",
@@ -6456,7 +6502,9 @@
       "checkpoints: {n} (#{first}–#{last})": "চেকপয়েন্টসমূহ: {n} (#{first}–#{last})",
       "Timestamp warning": "টাইমস্ট্যাম্প সতর্কতা",
       "Signing certificate reference": "স্বাক্ষর সার্টিফিকেট রেফারেন্স",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "টাইমস্ট্যাম্পটি তার স্বাক্ষরকারী সার্টিফিকেটকে SHA-1 (RFC 2634 SigningCertificate) দ্বারা নামকরণ করে; SigningCertificateV2 ফেরত দেয় এমন কর্তৃপক্ষকে অগ্রাধিকার দিন।"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "টাইমস্ট্যাম্পটি তার স্বাক্ষরকারী সার্টিফিকেটকে SHA-1 (RFC 2634 SigningCertificate) দ্বারা নামকরণ করে; SigningCertificateV2 ফেরত দেয় এমন কর্তৃপক্ষকে অগ্রাধিকার দিন।",
+      "ASiC-E container": "ASiC-E কন্টেইনার",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "স্বাক্ষরিত ম্যানিফেস্টের বাইরে থাকা এন্ট্রিগুলো (mimetype, META-INF): {n}· তাদের CAdES স্বাক্ষরগুলো এই যাচাইকারী দ্বারা যাচাই করা হয় না"
     },
     "reader": {
       "launch": "পুরো ZIP খুলে নিন। VERIFY.cmd-তে দুবার ক্লিক করুন অথবা মূল ZIP-টি তার ওপর টেনে ছেড়ে দিন। macOS/Linux-এ sh VERIFY.sh চালান।",
@@ -6727,7 +6775,9 @@
       "checkpoints: {n} (#{first}–#{last})": "контрольных точек: {n} (№{first}–№{last})",
       "Timestamp warning": "Предупреждение о метке времени",
       "Signing certificate reference": "Ссылка на сертификат подписи",
-      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Метка времени указывает свой сертификат подписи через SHA-1 (RFC 2634 SigningCertificate); предпочтительны службы, которые возвращают SigningCertificateV2"
+      "The timestamp names its signing certificate by SHA-1 (RFC 2634 SigningCertificate); prefer authorities that return SigningCertificateV2": "Метка времени указывает свой сертификат подписи через SHA-1 (RFC 2634 SigningCertificate); предпочтительны службы, которые возвращают SigningCertificateV2",
+      "ASiC-E container": "Контейнер ASiC-E",
+      "Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES signatures are not checked by this verifier": "Записей вне подписанного манифеста (mimetype, META-INF): {n} · их подписи CAdES этот верификатор не проверяет"
     },
     "reader": {
       "launch": "Распакуйте весь ZIP. Дважды нажмите VERIFY.cmd или перетащите на него исходный ZIP. В macOS/Linux выполните sh VERIFY.sh.",
