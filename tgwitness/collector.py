@@ -3824,13 +3824,13 @@ class Collector:
         due = []
         for target in self.store.targets(True):
             minutes = settings["recheck_minutes"] if target["priority"] else settings["recheck_other_minutes"]
-            if target["priority"]:
-                minutes = deletions.shortened_minutes(self.store, target["chat_id"], minutes)
             if not minutes:
                 continue
             seen = last.get(target["chat_id"], 0)
             if seen and target["chat_id"] < -1000000000000 and target["chat_id"] not in self.recheck_continuing:
                 minutes = max(minutes, control)
+            if target["priority"]:
+                minutes = deletions.shortened_minutes(self.store, target["chat_id"], minutes)
             if (forced and target["priority"]) or seen < reconnected or now - seen >= minutes * 60:
                 due.append((0 if target["priority"] else 1, seen, target))
         due.sort(key=lambda item: item[:2])
