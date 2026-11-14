@@ -739,11 +739,12 @@ async function unlock() {
   accessStarted=true;
   await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady,chatListReady,accountStateReady,disclosurePreviewReady,workspaceSafetyReady]);
   const router=await ensureRouter(),requested=router.parse();
-  state.me = await json("access/me",undefined,{root:true});
+  const [me,profiles] = await Promise.all([json("access/me",undefined,{root:true}),readProfiles()]);
+  state.me = me;
   const accessToken=state.token;
   const names=state.me?.admin?json("access",undefined,{root:true}).catch(()=>({})):Promise.resolve({});
   void names.then(result=>{if(state.token===accessToken)state.accessNames=result.names||{};});
-  await loadProfiles();
+  await loadProfiles(profiles);
   if(state.profiles.some(profile=>profile.id===requested.workspace&&!profile.error_type))state.profile=requested.workspace;
   if(!state.profiles.some(p=>p.id===state.profile && !p.error_type))
     state.profile=state.profiles.find(p=>!p.error_type)?.id||"default";
@@ -1515,8 +1516,8 @@ async function readProfiles(){
   const pending={key,promise:json("profiles",undefined,{root:true})};profilesFetch=pending;
   try{return await pending.promise;}finally{if(profilesFetch===pending)profilesFetch=null;}
 }
-async function loadProfiles(){
-  const request=++profilesRequest,result=await readProfiles();
+async function loadProfiles(prefetched){
+  const request=++profilesRequest,result=prefetched||await readProfiles();
   const {updateWorkspaceOptions}=await workspaceOptionsReady;
   if(request!==profilesRequest)return;
   state.profiles=result.profiles;
@@ -6254,7 +6255,7 @@ $("export-period").addEventListener("change",()=>{
 $("export-from").disabled=$("export-to").disabled=true;
 function renderMulti(){
   if(state.view!=='chats')return;
-  if(state.multiChecked!==state.chat)void resumeMulti();
+  if(state.chat!==null&&state.multiChecked!==state.chat)void resumeMulti();
   const x=state.multi,box=$("export-box"),known=x&&!["none","unknown"].includes(x.phase);
   const running=multiActive(x),mine=known&&x.chat_id===state.chat;
   const percent=known?exportPercent(x,running):null;
@@ -6326,7 +6327,7 @@ async function pollMulti(id,attempt=0){
 }
 async function resumeMulti(attempt=0){
   const chat=state.chat;
-  if(state.multiChecked===chat||!state.token||!may("export")||$("workspace").hidden)return;
+  if(chat===null||state.multiChecked===chat||!state.token||!may("export")||$("workspace").hidden)return;
   if(multiDiscovery&&multiDiscovery.chat===chat&&multiCurrent(multiDiscovery.revision,multiDiscovery.token,multiDiscovery.request))return multiDiscovery.promise;
   clearTimeout(multiPoll);multiPoll=null;
   const request={revision:state.workspaceRevision,token:state.token,request:++multiRequest,chat};
