@@ -517,9 +517,14 @@ async def chat_messages(
         raise HTTPException(422, "Limit must be 1–200.")
     if before_id is not None and after_id is not None:
         raise HTTPException(422, "Choose one message cursor.")
+    return await asyncio.to_thread(
+        message_page, ctx.app.state.store, chat_id, before_id, limit, after_id
+    )
+
+
+def message_page(store, chat_id, before_id, limit, after_id):
     from ..gap_analysis import page_gaps
 
-    store = ctx.app.state.store
     result = store.chat_messages(chat_id, before_id, limit, after_id=after_id)
     result["gaps"] = page_gaps(
         store,
@@ -532,7 +537,7 @@ async def chat_messages(
 
 
 async def chat_authors(chat_id: int, *, ctx=Depends(current_context)):
-    return ctx.app.state.store.chat_authors(chat_id)
+    return await asyncio.to_thread(ctx.app.state.store.chat_authors, chat_id)
 
 
 async def chat_profile(chat_id: int, *, ctx=Depends(current_context)):
@@ -679,7 +684,9 @@ async def avatar(request: Request, peer_id: int, *, ctx=Depends(current_context)
     if (
         allowed is not None
         and peer_id not in allowed
-        and (not ctx.app.state.store.sender_in_chats(peer_id, allowed))
+        and not await asyncio.to_thread(
+            ctx.app.state.store.sender_in_chats, peer_id, allowed
+        )
     ):
         raise HTTPException(404)
     path = await ctx.app.state.collector.avatar(peer_id)
@@ -716,8 +723,8 @@ async def media(
     if re.fullmatch("[0-9a-f]{64}", digest) is None:
         raise HTTPException(404)
     allowed = ctx.visible_chats(request)
-    if allowed is not None and (
-        not ctx.app.state.store.media_in_chats(digest, allowed)
+    if allowed is not None and not await asyncio.to_thread(
+        ctx.app.state.store.media_in_chats, digest, allowed
     ):
         raise HTTPException(404)
     path = ctx.root / "media" / digest

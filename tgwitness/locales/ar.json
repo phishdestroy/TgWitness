@@ -9198,6 +9198,7 @@
   "running": "قيد التشغيل",
   "cancelled": "ملغى",
   "Updates arrived while observation was paused": "وصلت التحديثات أثناء توقف المراقبة مؤقتًا",
+  "Updates from an unidentified chat were not recorded": "لم تُسجَّل تحديثات من دردشة تعذّر التعرّف عليها",
   "Too many updates arrived during startup": "وصلت تحديثات كثيرة جدًا أثناء بدء التشغيل",
   "Telegram could not deliver older updates": "لم يتمكن Telegram من تسليم التحديثات الأقدم",
   "Choose a scope for this procedure.": "اختر نطاق هذه الإجراءات.",

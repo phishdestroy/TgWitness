@@ -7,6 +7,8 @@ MESSAGE_KINDS = {"message.new", "message.snapshot", "message.recovered", "messag
 PROFILE_KINDS = {"actor.profile", "actor.profile_changed"}
 PROFILE_FIELDS = ("display_name", "username")
 TABLES = ("people_state", "people_observations", "people_messages", "people_refresh_jobs")
+REFRESH_QUEUE_LIMIT = 128
+QUEUE_FULL_REPEAT_SECONDS = 600
 
 
 def stamp(value):
@@ -84,6 +86,7 @@ def membership(event):
 class PeopleIndex:
     def __init__(self, db):
         self.db = db
+        self.queue_full_noted = {}
         for sql in (
             "CREATE TABLE IF NOT EXISTS people_state(chat_id INTEGER,user_id INTEGER,first_seq INTEGER,last_seq INTEGER,"
             "profile TEXT NOT NULL DEFAULT '{}',status TEXT NOT NULL DEFAULT '{}',membership TEXT NOT NULL DEFAULT '{}',"
@@ -252,7 +255,13 @@ def request_refresh(store, uid, source, **facts):
     with store.transaction():
         if store.db.execute("SELECT 1 FROM people_refresh_jobs WHERE user_id=?", (uid,)).fetchone():
             return
-        if store.db.execute("SELECT count(*) FROM people_refresh_jobs").fetchone()[0] >= 128:
+        if store.db.execute("SELECT count(*) FROM people_refresh_jobs").fetchone()[0] >= REFRESH_QUEUE_LIMIT:
+            noted, now = store.read_index.people.queue_full_noted, time.monotonic()
+            if now - noted.get(uid, now - QUEUE_FULL_REPEAT_SECONDS) < QUEUE_FULL_REPEAT_SECONDS:
+                return
+            if len(noted) >= 5000:
+                noted.clear()
+            noted[uid] = now
             for chat in store.read_index.people.known_chats(uid):
                 store.append("actor.profile_unavailable", {"user_id": uid, "error_type": "RefreshQueueFull"}, chat, actor_id=uid)
             return

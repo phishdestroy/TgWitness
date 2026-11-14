@@ -3,6 +3,7 @@ const INTERRUPTIONS = {transport_disconnected: "Connection to Telegram lost", au
 const STOPS = {shutdown: "TgWitness was shut down", operator: "Observation paused"};
 const MOMENTS = {"updates delivered while observation was paused": "Updates arrived while observation was paused",
   "startup buffer full": "Too many updates arrived during startup", source_access_lost: "The account lost access to a source",
+  scope_undetermined: "Updates from an unidentified chat were not recorded",
   updates_diverted: "Updates are going to another session",
   session_revoked_externally: "The session was ended from another device or by Telegram.",
   "Telegram reported that updates for this interval are too old to deliver": "Telegram could not deliver older updates"};

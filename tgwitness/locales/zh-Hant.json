@@ -8958,6 +8958,7 @@
   "running": "執行中",
   "cancelled": "已取消",
   "Updates arrived while observation was paused": "在觀察暫停期間收到了更新",
+  "Updates from an unidentified chat were not recorded": "未記錄來自無法識別之聊天的更新",
   "Too many updates arrived during startup": "啟動期間收到過多更新",
   "Telegram could not deliver older updates": "Telegram 無法傳送較早的更新內容",
   "Choose a scope for this procedure.": "請選擇此程序的適用範圍。",

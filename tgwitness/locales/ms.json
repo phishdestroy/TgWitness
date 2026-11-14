@@ -8958,6 +8958,7 @@
   "running": "berjalan",
   "cancelled": "dibatalkan",
   "Updates arrived while observation was paused": "Kemas kini tiba semasa pemerhatian dihentikan",
+  "Updates from an unidentified chat were not recorded": "Kemas kini daripada sembang yang tidak dikenal pasti tidak direkodkan",
   "Too many updates arrived during startup": "Terlalu banyak kemas kini tiba semasa permulaan",
   "Telegram could not deliver older updates": "Telegram tidak dapat menyampaikan kemas kini yang lebih lama",
   "Choose a scope for this procedure.": "Pilih skop untuk prosedur ini.",

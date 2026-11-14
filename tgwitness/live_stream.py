@@ -67,8 +67,8 @@ def notifications(store, after, allowed, limit=100, hide_admin=False):
             return []
         where.append("chat_id IN (" + ",".join("?" * len(allowed)) + ")")
         args.extend(sorted(allowed))
-    with store.lock:
-        rows = store.db.execute(
+    with store.reading() as db:
+        rows = db.execute(
             "SELECT seq,kind,chat_id,message_id,observed_at FROM events WHERE "
             + " AND ".join(where) + " ORDER BY seq LIMIT ?", (*args, limit)).fetchall()
         return [dict(row) for row in rows]

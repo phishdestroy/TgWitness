@@ -300,12 +300,12 @@ class SecretChats:
         if random_id is not None:
             query += " AND json_extract(payload,'$.random_id')=?"
             values.append(random_id)
-        with self.store.lock:
-            return self.store.db.execute(query + " LIMIT 1", values).fetchone() is not None
+        with self.store.reading() as db:
+            return db.execute(query + " LIMIT 1", values).fetchone() is not None
 
     def earlier(self, kind, chat_id, random_id):
-        with self.store.lock:
-            return [(row[0], json.loads(row[1])) for row in self.store.db.execute(
+        with self.store.reading() as db:
+            return [(row[0], json.loads(row[1])) for row in db.execute(
                 "SELECT seq, payload FROM events WHERE kind=? AND json_extract(payload,'$.secret_chat_id')=?"
                 " AND json_extract(payload,'$.random_id')=? ORDER BY seq", ("secret_chat." + kind, chat_id, random_id))]
 

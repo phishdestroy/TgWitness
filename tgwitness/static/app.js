@@ -1933,7 +1933,7 @@ function excerpt(e) {
     recheck_visibility_uncertain:tr("Some messages could not be confirmed on recheck"),recheck_unparsed:tr("Some message numbers could not be read on recheck"),
     probe_ack_missed_live:tr("A probe answer did not arrive live"),probe_ack_live:tr("Probe answers arrive live again"),
     "updates delivered while observation was paused":tr("Updates arrived while observation was paused"),
-    "startup buffer full":tr("Too many updates arrived during startup"),
+    "startup buffer full":tr("Too many updates arrived during startup"),scope_undetermined:tr("Updates from an unidentified chat were not recorded"),
     "Telegram reported that updates for this interval are too old to deliver":tr("Telegram could not deliver older updates")})[p.reason]||p.reason;
   const serviceLine=action=>{const text=serviceText(action);return text.charAt(0).toLocaleUpperCase(LANG)+text.slice(1);};
   if (p.service_action) return serviceLine(p.service_action);
