@@ -170,9 +170,9 @@ export function createSetup(context) {
     add({text: () => tr("Photos and files: not downloaded, a note says a file was sent."),
       media: () => tr("Photos and files: standard limits."),
       all: () => tr("Photos and files: everything up to 1 GB each.")}[a.files]());
-    add(tr("Chats read from the account's list: {n}.", {n: data.limits.dialog_limit[a.size].toLocaleString()}));
+    add(tr("Chats read from the account's list: {n}.", {n: data.limits.dialog_limit[a.size].toLocaleString(document.documentElement.lang||undefined)}));
     if (a.files === "all" && a.size === "large")
-      add(tr("Downloads pause when free disk space falls below {n} MiB.", {n: data.limits.reserve_mb.toLocaleString()}));
+      add(tr("Downloads pause when free disk space falls below {n} MiB.", {n: data.limits.reserve_mb.toLocaleString(document.documentElement.lang||undefined)}));
     if (a.timestamps && !itemOn("credibility", "timestamps"))
       add(tr("Timestamps every {n} minutes.", {n: String(data.recommended[a.goal].interval_minutes)}));
   }

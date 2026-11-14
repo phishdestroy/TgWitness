@@ -8772,7 +8772,6 @@
   "Runs": "Exécute",
   "Runs attributed with high confidence": "Exécutions attribuées avec un haut degré de confiance",
   "Runs with high confidence": "Fonctionne avec un haut niveau de fiabilité",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Enregistrez les discussions et les fichiers en une seule fois. Aucun processus ne continue de s’exécuter en arrière-plan. L’archive est signée, et le script verify.py vérifie chaque fichier qu’elle contient.",
   "Saved by day": "Enregistré par jour",
   "Saved records in this account": "Enregistrements sauvegardés sur ce compte",
   "Sender not recorded": "Expéditeur non enregistré",
@@ -9010,5 +9009,6 @@
   "Ended from TgWitness.": "Clôturé depuis TgWitness.",
   "Telegram reports that the chat no longer exists.": "Telegram indique que la conversation n'existe plus.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "La protection par mot de passe ZIP utilise WinZip AES (étirement de clé faible). Utilisez une phrase de passe aléatoire longue de plus de 20 caractères, ou choisissez le « cryptage plus fort » pour les exportations sensibles.",
-  "Transport route checked for this connection.": "Itinéraire de transport vérifié pour cette connexion."
+  "Transport route checked for this connection.": "Itinéraire de transport vérifié pour cette connexion.",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Les discussions et les photos sont sauvegardées une seule fois ; les autres fichiers sont sélectionnés sous Enregistrement et fichiers. Aucun processus ne continue de s’exécuter en arrière-plan. L’archive est signée, et verify.py vérifie chaque fichier qu’elle contient."
 }

@@ -8766,7 +8766,6 @@
   "Runs": "چلتا ہے",
   "Runs attributed with high confidence": "اعلیٰ اعتماد کے ساتھ منسوب شدہ",
   "Runs with high confidence": "اعلیٰ اعتماد کے ساتھ چلتا ہے",
-  "Save chats and files once. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "چٹس اور فائلز کو صرف ایک بار محفوظ کریں۔ پسِ منظر میں کچھ بھی چلتا نہیں رہتا۔ آرکائیو پر دستخط کیے جاتے ہیں، اور verify.py اس میں موجود ہر فائل کی تصدیق کرتا ہے۔",
   "Saved by day": "دن کے حساب سے محفوظ شدہ",
   "Saved records in this account": "اس اکاؤنٹ میں محفوظ شدہ ریکارڈز",
   "Sender not recorded": "موکل ریکارڈ نہیں ہوا",
@@ -9002,5 +9001,6 @@
   "Ended from TgWitness.": "TgWitness کی طرف سے ختم۔",
   "Telegram reports that the chat no longer exists.": "Telegram رپورٹ کرتا ہے کہ چیٹ اب موجود نہیں ہے۔",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP پاس ورڈ پروٹیکشن WinZip AES (کمزور کی اسٹریچنگ) استعمال کرتی ہے۔ 20+ حروف پر مشتمل ایک طویل بے ترتیب پاس فریز استعمال کریں، یا حساس ایکسپورٹس کے لیے مضبوط انکرپشن کا انتخاب کریں۔",
-  "Transport route checked for this connection.": "اس کنکشن کے لیے ٹرانسپورٹ راستہ چیک کیا گیا۔"
+  "Transport route checked for this connection.": "اس کنکشن کے لیے ٹرانسپورٹ راستہ چیک کیا گیا۔",
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "چٹس اور تصاویر ایک بار محفوظ کریں؛ دیگر فائلیں ریکارڈنگ اور فائلیں کے تحت منتخب کی جاتی ہیں۔ پسِ منظر میں کچھ بھی چلتا نہیں رہتا۔ آرکائیو پر دستخط کیے جاتے ہیں، اور verify.py اس میں موجود ہر فائل کی جانچ کرتا ہے۔"
 }

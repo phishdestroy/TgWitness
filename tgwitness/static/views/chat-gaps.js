@@ -62,7 +62,7 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     return marker("numbers", list.map(gap => gap.low + "-" + gap.high).join(","), box => {
       const ranges = list.slice(0, LISTED).map(gap => gap.low === gap.high ? "#" + gap.low : "#" + gap.low + "–#" + gap.high);
       if (list.length > LISTED) ranges.push("…");
-      box.append(icon("question"), node("b", "", total.toLocaleString()),
+      box.append(icon("question"), node("b", "", total.toLocaleString(document.documentElement.lang||undefined)),
         node("span", "", tr("Message numbers not observed") + ": " + ranges.join(", ")));
     });
   }

@@ -39,7 +39,7 @@ export function createAccounts(context) {
       let item=box.querySelector('[data-count="'+id+'"]');
       if(!item){item=make('button','accounts-total');item.type='button';item.dataset.count=id;item.append(make('strong'),make('span','',label));box.append(item);
         on(item,'click',()=>{find('accounts-search').value='';find('accounts-filter').value=filter;page=0;updateStatus();});}
-      item.firstElementChild.textContent=value.toLocaleString();
+      item.firstElementChild.textContent=value.toLocaleString(document.documentElement.lang||undefined);
       item.hidden=value===0&&filter!=='all'&&find('accounts-filter').value!==filter;
       item.setAttribute('aria-pressed',String(find('accounts-filter').value===filter));
     }

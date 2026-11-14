@@ -21,11 +21,11 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
     const from = Number(el.dataset.value || 0);
     el.dataset.value = value;
     cancelAnimationFrame(el.frame);
-    if (from === value || still() || !el.dataset.ready) { el.dataset.ready = "1"; el.textContent = value.toLocaleString(); return; }
+    if (from === value || still() || !el.dataset.ready) { el.dataset.ready = "1"; el.textContent = value.toLocaleString(document.documentElement.lang||undefined); return; }
     const start = performance.now();
     const step = now => {
       const t = Math.min(1, (now - start) / 700), eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(from + (value - from) * eased).toLocaleString();
+      el.textContent = Math.round(from + (value - from) * eased).toLocaleString(document.documentElement.lang||undefined);
       if (t < 1) el.frame = requestAnimationFrame(step);
     };
     el.frame = requestAnimationFrame(step);
@@ -66,7 +66,7 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
       const item = node("li"), dot = node("i", "pulse-dot");
       dot.dataset.series = id;
       item.append(dot, node("span", "", tr(label)));
-      if (values) item.append(node("b", "", values[id].toLocaleString()));
+      if (values) item.append(node("b", "", values[id].toLocaleString(document.documentElement.lang||undefined)));
       list.append(item);
     }
     return list;
@@ -85,7 +85,7 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
     const svg = document.createElementNS(SVG, "svg");
     svg.setAttribute("viewBox", "0 0 120 120"); svg.setAttribute("class", "pulse-donut"); svg.setAttribute("role", "img");
     const parts = [...SERIES.map(([id, label]) => [id, label]), ["other", "Other"]].filter(([id]) => sums[id]);
-    svg.setAttribute("aria-label", parts.map(([id, label]) => tr(label) + ": " + sums[id].toLocaleString()).join(", "));
+    svg.setAttribute("aria-label", parts.map(([id, label]) => tr(label) + ": " + sums[id].toLocaleString(document.documentElement.lang||undefined)).join(", "));
     const track = document.createElementNS(SVG, "circle");
     for (const [key, value] of [["cx", 60], ["cy", 60], ["r", 46], ["class", "pulse-track"]]) track.setAttribute(key, value);
     svg.append(track);
@@ -98,13 +98,13 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
       arc.dataset.series = id;
       arc.style.animationDelay = index * 90 + "ms";
       const hint = document.createElementNS(SVG, "title");
-      hint.textContent = tr(SERIES.find(row => row[0] === id)?.[1] || "Other") + ": " + sums[id].toLocaleString() + " · " + Math.round(share) + "%";
+      hint.textContent = tr(SERIES.find(row => row[0] === id)?.[1] || "Other") + ": " + sums[id].toLocaleString(document.documentElement.lang||undefined) + " · " + Math.round(share) + "%";
       arc.append(hint);
       svg.append(arc);
       offset += share;
     });
     const center = node("div", "pulse-donut-center");
-    center.append(node("strong", "", total.toLocaleString()), node("span", "", tr("Records")));
+    center.append(node("strong", "", total.toLocaleString(document.documentElement.lang||undefined)), node("span", "", tr("Records")));
     const ring = node("div", "pulse-donut-wrap");
     ring.append(svg, center);
     body.append(ring, legend(sums));
@@ -126,12 +126,12 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
       fill.style.animationDelay = index * 70 + "ms";
       meter.append(fill);
       const facts = node("span", "pulse-row-facts");
-      facts.append(node("b", "", chat.messages.toLocaleString()));
+      facts.append(node("b", "", chat.messages.toLocaleString(document.documentElement.lang||undefined)));
       for (const [glyph, value, tone, label] of [["edit", chat.edited, "edits", "Edits"], ["trash", chat.deleted, "deletions", "Deletions"]]) {
         if (!value) continue;
         const fact = node("span", "pulse-fact"); fact.dataset.series = tone; fact.title = tr(label);
         fact.setAttribute("aria-label", tr(label) + ": " + value);
-        fact.append(icon(glyph), document.createTextNode(value.toLocaleString()));
+        fact.append(icon(glyph), document.createTextNode(value.toLocaleString(document.documentElement.lang||undefined)));
         facts.append(fact);
       }
       row.append(name, meter, facts);

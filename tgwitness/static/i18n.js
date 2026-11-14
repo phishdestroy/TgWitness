@@ -15,7 +15,7 @@ function tr(text,vars){const out=DICT[text];return fill(typeof out==="string"?ou
 function errorName(name){const text=(window.TGW_ERRORS||{})[name];return typeof text==="string"?tr(text):"";}
 
 function trn(one,other,n,vars){
-  const all={n:Number(n).toLocaleString(),...vars},forms=DICT[other];
+  const all={n:Number(n).toLocaleString(LANG),...vars},forms=DICT[other];
   if(forms&&typeof forms==="object")return fill(forms[new Intl.PluralRules(LANG).select(Number(n))]??forms.other,all);
   return tr(Number(n)===1?one:other,all);
 }

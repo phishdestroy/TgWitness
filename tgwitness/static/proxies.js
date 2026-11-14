@@ -127,13 +127,13 @@
   function renderStats() {
     const s = view.summary, box = $("pool-stats"), policy = view.settings.prefer.length || view.settings.avoid.length;
     box.replaceChildren(
-      tile(tr("Listed"), s.listed.toLocaleString()),
-      tile(tr("Answering"), s.ok.toLocaleString(), s.ok ? "good" : "warn"),
-      tile(tr("Resting"), s.resting.toLocaleString(), s.resting ? "warn" : ""),
+      tile(tr("Listed"), s.listed.toLocaleString(document.documentElement.lang||undefined)),
+      tile(tr("Answering"), s.ok.toLocaleString(document.documentElement.lang||undefined), s.ok ? "good" : "warn"),
+      tile(tr("Resting"), s.resting.toLocaleString(document.documentElement.lang||undefined), s.resting ? "warn" : ""),
       tile(tr("Median ping"), s.median_ms ? s.median_ms + " " + tr("ms") : "—", speed(s.median_ms)),
-      tile(tr("Countries"), s.countries.toLocaleString()),
-      ...(policy ? [tile(tr("In preferred countries"), s.preferred.toLocaleString(), view.settings.prefer.length && !s.preferred ? "warn" : ""),
-                    tile(tr("Excluded by country"), s.excluded.toLocaleString())] : []),
+      tile(tr("Countries"), s.countries.toLocaleString(document.documentElement.lang||undefined)),
+      ...(policy ? [tile(tr("In preferred countries"), s.preferred.toLocaleString(document.documentElement.lang||undefined), view.settings.prefer.length && !s.preferred ? "warn" : ""),
+                    tile(tr("Excluded by country"), s.excluded.toLocaleString(document.documentElement.lang||undefined))] : []),
       tile(tr("Last check"), s.checking ? tr("Checking now…") : s.checked_at ? clock(s.checked_at) : tr("Not yet")));
     $("pool-check").disabled = s.checking;
     const plan = view.schedule;
@@ -227,7 +227,7 @@
         tr("No servers yet. Update the lists or add your own below."));
       cell.colSpan = 7; empty.append(cell); body.append(empty);
     }
-    $("pool-count").textContent = tr("{shown} of {total} servers", {shown: shown.length.toLocaleString(), total: rows.length.toLocaleString()});
+    $("pool-count").textContent = tr("{shown} of {total} servers", {shown: shown.length.toLocaleString(document.documentElement.lang||undefined), total: rows.length.toLocaleString(document.documentElement.lang||undefined)});
     show("pool-more", rows.length > shown.length);
   }
 
