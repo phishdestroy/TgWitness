@@ -43,6 +43,13 @@ def reception_fields(reception):
             "processing_delay_ms": max(0, (time.monotonic_ns() - reception["monotonic_ns"]) // 1_000_000)}
 
 
+def chat_rows(name, values):
+    if not isinstance(values, dict):
+        return []
+    return [(name, int(key), json.dumps(value)) for key, value in values.items()
+            if str(key).lstrip("-").isdigit()]
+
+
 class ReadConnection:
     __slots__ = ("db", "__weakref__")
 
@@ -137,11 +144,8 @@ class Store:
             row = self.db.execute("SELECT value FROM settings WHERE key=?", (name,)).fetchone()
             if row is None:
                 continue
-            values = json.loads(row[0])
-            if isinstance(values, dict):
-                self.db.executemany("INSERT OR REPLACE INTO chat_settings VALUES (?,?,?)", [
-                    (name, int(key), json.dumps(value)) for key, value in values.items()
-                    if key.lstrip("-").isdigit()])
+            self.db.executemany("INSERT OR REPLACE INTO chat_settings VALUES (?,?,?)",
+                                chat_rows(name, json.loads(row[0])))
             self.db.execute("DELETE FROM settings WHERE key=?", (name,))
 
     @contextmanager
@@ -783,13 +787,20 @@ class Store:
         return {"counts": counts, "total": sum(counts.values()), "head": dict(tail) if tail else None}
 
     def get_setting(self, key, default=None):
+        if key in CHAT_SETTINGS:
+            values = self.chat_settings(key)
+            return {str(chat_id): value for chat_id, value in values.items()} if values else default
         with self.reading() as db:
             row = db.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
         return json.loads(row[0]) if row else default
 
     def set_setting(self, key, value):
         with self.transaction():
-            self.db.execute("INSERT OR REPLACE INTO settings VALUES (?,?)", (key, json.dumps(value)))
+            if key in CHAT_SETTINGS:
+                self.db.execute("DELETE FROM chat_settings WHERE name=?", (key,))
+                self.db.executemany("INSERT INTO chat_settings VALUES (?,?,?)", chat_rows(key, value))
+            else:
+                self.db.execute("INSERT OR REPLACE INTO settings VALUES (?,?)", (key, json.dumps(value)))
 
     def chat_setting(self, name, chat_id, default=None):
         with self.reading() as db:
