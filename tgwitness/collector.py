@@ -202,6 +202,8 @@ AUTO_DELETE_MEANING = {
 }
 
 
+MIGRATED_MEANING = ("Telegram upgraded this group to a supergroup with a new chat ID. Observation continues in the new "
+                    "chat; the earlier messages stay in the original group.")
 CHANNEL_STATE_DROPPED_MEANING = ("The Telegram client could not request this channel's missed updates and discarded its "
                                  "update position. Updates received in between may be missing.")
 FLOOD_GUARDED = {"recheck": ("messages.getHistory", "messages.getMessages", "channels.getMessages"),
@@ -2725,6 +2727,11 @@ class Collector:
         await self._snapshot_session_state("observation_start")
         await self.dialogs()
         await self.apply_scope(refresh=False)
+        for target in self.store.targets(True):
+            entity = (self.dialog_cache.get(target["chat_id"]) or {}).get("entity")
+            channel_id = getattr(getattr(entity, "migrated_to", None), "channel_id", None)
+            if isinstance(entity, types.Chat) and type(channel_id) is int:
+                self.follow_migration(target["chat_id"], channel_id, "observation_start")
         self.source_status, overview = {}, self.store.chat_overview()
         for target in self.store.targets(True):
             status = self.source_visibility(target["chat_id"], overview)
@@ -3221,6 +3228,35 @@ class Collector:
         self.source_status[str(chat_id)] = {"state": "access_lost", "checked_at": utcnow(), **lost[str(chat_id)],
                                             "meaning": ACCESS_LOST_MEANING}
 
+    def follow_migration(self, chat_id, channel_id, detected, update=None):
+        new_id = utils.get_peer_id(types.PeerChannel(channel_id))
+        targets = {target["chat_id"]: target for target in self.store.targets()}
+        target, followed = targets.get(chat_id), self.store.get_setting("migrated_sources", {})
+        if target is None or not target["enabled"] or str(chat_id) in followed:
+            return None
+        facts = {"from_chat_id": chat_id, "to_chat_id": new_id, "detected": detected, "meaning": MIGRATED_MEANING,
+                 **({} if detected == "service_message" else {
+                     "coverage": "messages posted in the new chat before this record are not recovered automatically; "
+                                 "load its history to add them"})}
+        with self.store.transaction():
+            if new_id not in targets:
+                self.store.set_target(new_id, target["title"], "supergroup", True, origin="migrated",
+                                      priority=target["priority"])
+            self.store.set_setting("migrated_sources", {**followed, str(chat_id): new_id})
+            self.store.append("source.migrated", {**facts, **({"raw": plain(update)} if update is not None else {})},
+                              chat_id)
+            self.store.append("source.migrated", facts, new_id)
+            if detected == "service_message":
+                floors = self.store.get_setting("recheck_floor", {})
+                floors[str(new_id)] = 0
+                self.store.set_setting("recheck_floor", floors)
+        if new_id not in targets:
+            self.source_status[str(new_id)] = {"state": "discovered", "checked_at": utcnow(),
+                                               "meaning": MIGRATED_MEANING, "visibility": "unknown", "role": "unknown"}
+        if self.running:
+            self.request_recheck([new_id])
+        return new_id
+
     async def on_raw(self, update):
         client = self.client
         self.updates_arrived()
@@ -3261,6 +3297,8 @@ class Collector:
                                                    sender=(getattr(update, "_entities", None) or {}).get(update.message.sender_id))
                 if removed:
                     await self.check_access(chat_id, update)
+                if isinstance(action, types.MessageActionChatMigrateTo) and self.selected(chat_id):
+                    self.follow_migration(chat_id, action.channel_id, "service_message", update)
             elif isinstance(update, (types.UpdatePinnedChannelMessages, types.UpdatePinnedMessages)) and not update.pinned:
                 chat_id = (utils.get_peer_id(types.PeerChannel(update.channel_id))
                            if isinstance(update, types.UpdatePinnedChannelMessages) else utils.get_peer_id(update.peer))
