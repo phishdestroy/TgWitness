@@ -603,6 +603,7 @@ class Collector:
         self.people = {}
         self.profile_requests = {}
         self.avatar_lock = asyncio.Lock()
+        self.restore_lock = asyncio.Lock()
         self.avatar_failures = {}
         self.avatar_history = AvatarHistory(store, lambda: self.client)
         self.running = False
@@ -2317,24 +2318,40 @@ class Collector:
         return "ready" if self.vault.read("credentials").get("session") else "offline"
 
     async def restore(self):
+        async with self.restore_lock:
+            await self.restore_connection()
+
+    async def restore_connection(self):
         await self.wait_authorization_cleanup()
         credentials = self.vault.read("credentials")
         if not credentials.get("session"):
             raise ValueError("Connect a Telegram account first.")
         client = self.client
         authorization_generation = self.authorization_generation
+
+        def current():
+            if (client is not self.client or authorization_generation != self.authorization_generation
+                    or self.vault.read("credentials") != credentials):
+                raise ValueError("The Telegram connection changed. Retry the operation.")
+
         try:
             if not client:
                 await self.ensure_route()
+                current()
                 client = self.client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
             if not client.is_connected():
                 secret_chats.of(self).listen(client)
                 await self.connect_client(client)
-            if not await client.is_user_authorized():
+                current()
+            authorized = await client.is_user_authorized()
+            current()
+            if not authorized:
                 cause, error = await self.refusal(client)
+                current()
                 raise AccountLost(cause, error)
             if self.authorization_required:
                 me = await client.get_me()
+                current()
                 if me is None:
                     raise AuthorizationRequired("Telegram authorization expired. Sign in again.")
                 existing = self.store.get_setting("account", {}) or {}
@@ -2356,6 +2373,7 @@ class Collector:
             self.vault.save("credentials", credentials)
         if client is self.client and authorization_generation == self.authorization_generation:
             await self.check_client_connection(client)
+            current()
             if secret_chats.settings(self.store)["enabled"]:
                 chats = secret_chats.of(self)
                 try:
@@ -2364,6 +2382,7 @@ class Collector:
                 except Exception as exc:
                     chats.error = type(exc).__name__
                     secret_chats.LOG.exception("Secret chats could not start")
+                current()
             if self.store.get_setting("forensics_raw_updates", False) and client not in self._forensics_clients:
                 from .forensics import raw_updates
                 raw_updates.register(client, _JournalAppend(self.store),
@@ -4984,6 +5003,7 @@ class Collector:
                     stopped.set()
             finally:
                 slots.release()
+                self.media_wakeup.set()
         try:
             while (not self.authorization_required and (self.running or owner and self.export_claim == owner)
                    and not stopped.is_set()):
@@ -5025,7 +5045,7 @@ class Collector:
                 capture = capture_settings(self.store)
                 job = self.store.claim_media(account.get("id", 0), history_run=history_run,
                                              allow_takeout=client_for_job is not None, exclude_history_run=deferred,
-                                             **limits) if capture["download_media"] else None
+                                             exclude_active=True, **limits) if capture["download_media"] else None
                 if not job:
                     if owner:
                         retry_at = self.store.next_history_media_attempt(account.get("id", 0), history_run, **limits)

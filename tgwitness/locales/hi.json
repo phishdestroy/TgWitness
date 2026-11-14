@@ -9657,5 +9657,6 @@
   "Search matched an earlier saved version.": "खोज से एक पुराना सहेजा गया संस्करण मिला।",
   "Search saved messages": "सहेजे गए संदेश खोजें",
   "{n} saved versions": "{n} सहेजे गए संस्करण",
-  "Chat loading: {running} active · {pending} pending": "चैट लोड हो रही हैं: {running} सक्रिय · {pending} लंबित"
+  "Chat loading: {running} active · {pending} pending": "चैट लोड हो रही हैं: {running} सक्रिय · {pending} लंबित",
+  "The Telegram connection changed. Retry the operation.": "Telegram कनेक्शन बदल गया है। कार्रवाई फिर से करें।"
 }

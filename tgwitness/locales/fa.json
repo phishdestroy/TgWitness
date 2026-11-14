@@ -9657,5 +9657,6 @@
   "Search matched an earlier saved version.": "جستجو نسخهٔ ذخیره شدهٔ قبلی را یافت.",
   "Search saved messages": "جستجوی پیام‌های ذخیره‌شده",
   "{n} saved versions": "{n} نسخهٔ ذخیره شده",
-  "Chat loading: {running} active · {pending} pending": "بارگیری گفتگوها: {running} فعال · {pending} در انتظار"
+  "Chat loading: {running} active · {pending} pending": "بارگیری گفتگوها: {running} فعال · {pending} در انتظار",
+  "The Telegram connection changed. Retry the operation.": "اتصال Telegram تغییر کرده است. عملیات را دوباره انجام دهید."
 }

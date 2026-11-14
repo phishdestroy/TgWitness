@@ -25,6 +25,14 @@
 
 ## Unreleased
 
+- Concurrent connection restores share one client and one connection attempt per
+  workspace. Interrupted setup releases waiting callers; an attempt whose credentials,
+  client or authorization state changed cannot report success for the replacement.
+- Repeated attachment jobs stay queued while a matching transfer runs, leaving
+  download slots available for other files. Priority, retry delays and history
+  ownership are retained. Existing queues gain the transfer index without rewriting
+  signed observations, and every completed job still records its own signed outcome.
+
 - Chat exports download repeated attachment representations once per export directory
   and verify unrelated retained files concurrently. Each message keeps its own file
   reference; size and SHA-256 checks still run before reuse. Unique temporary paths

@@ -17,6 +17,7 @@ from .fulltext import FullText
 from .journal_index import CHAT_KINDS, MEDIA_KINDS, STORED_MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
 from .journal_index import GONE_KINDS as GONE_KINDS
 from .journal_index import NUL_PAYLOAD
+from .journal_index import media_transfer_key
 from .people import observed_names
 
 LOG = logging.getLogger("tgwitness.store")
@@ -245,10 +246,11 @@ class Store:
             if media_job:
                 self.db.execute(
                     "INSERT INTO media_jobs(message_event,account_id,chat_id,message_id,"
-                    "descriptor,descriptor_hash,max_bytes,priority,estimated_bytes) VALUES (?,?,?,?,?,?,?,?,?)",
+                    "descriptor,descriptor_hash,max_bytes,priority,estimated_bytes,transfer_key) VALUES (?,?,?,?,?,?,?,?,?,?)",
                     (event["seq"], media_job["account_id"], chat_id, message_id,
                      media_job["descriptor"], hashlib.sha256(media_job["descriptor"]).hexdigest(),
-                     media_job["max_bytes"], media_job.get("priority", 10), media_job.get("estimated_bytes")))
+                     media_job["max_bytes"], media_job.get("priority", 10), media_job.get("estimated_bytes"),
+                     media_transfer_key(payload)))
             self.committed.append(event)
             return event
 
@@ -738,8 +740,11 @@ class Store:
                                    "AND state IN ('queued','retry')", (chat_id, message_id)).rowcount
 
     def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None, history_run=None,
-                    allow_takeout=False, exclude_history_run=None, expedited=False):
+                    allow_takeout=False, exclude_history_run=None, expedited=False, exclude_active=False):
         filters, params = [], [account_id, time.time() if now is None else now]
+        if exclude_active:
+            filters.append("(j.transfer_key IS NULL OR NOT EXISTS (SELECT 1 FROM media_jobs a "
+                           "WHERE a.account_id=j.account_id AND a.transfer_key=j.transfer_key AND a.state='running'))")
         if not allow_takeout:
             filters.append("NOT EXISTS (SELECT 1 FROM events e WHERE e.seq=j.message_event "
                            "AND json_extract(e.payload,'$.acquisition.source_mode')='takeout')")
