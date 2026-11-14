@@ -8139,7 +8139,6 @@
   "Your server": "Seu servidor",
   "Your way in": "Seu caminho de acesso",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "A proteção por senha do ZIP utiliza o WinZip AES (expansão de chave fraca). Use uma senha aleatória longa com mais de 20 caracteres ou entrega lacrada para exportações confidenciais.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] tipo = mega usuário = … senha = …",
   "account connections": "conexões das contas",
   "accounts allowed": "contas permitidas",
@@ -9004,5 +9003,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "O system_version descreve uma plataforma móvel para o Desktop API.",
   "The app_version does not match the reviewed official version formats.": "O app_version não corresponde aos formatos da versão oficial revisada.",
   "The mobile system_lang_code has no region component.": "O system_lang_code móvel não possui componente de região.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "A camada de esquema do Telethon difere da linha de base do perfil revisado (230); verifique a compatibilidade da biblioteca."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "A camada de esquema do Telethon difere da linha de base do perfil revisado (230); verifique a compatibilidade da biblioteca.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Essa conversa agora está armazenada no TgWitness; outros dispositivos da conta não têm acesso a ela.",
+  "The other side ended the chat.": "A outra parte encerrou o chat.",
+  "Ended from TgWitness.": "Encerrado pelo TgWitness.",
+  "Telegram reports that the chat no longer exists.": "O Telegram informa que o chat não existe mais.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "A proteção por senha do ZIP usa o WinZip AES (estiramento de chave fraco). Use uma senha aleatória longa com mais de 20 caracteres ou escolha a criptografia mais forte para exportações confidenciais.",
+  "Transport route checked for this connection.": "Rota de transporte verificada para esta conexão."
 }

@@ -8139,7 +8139,6 @@
   "Your server": "Tu servidor",
   "Your way in": "Cómo empezar",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "La protección con contraseña de los archivos ZIP utiliza WinZip AES (expansión de clave débil). Utiliza una frase de contraseña aleatoria larga de al menos 20 caracteres, o envío sellado para exportaciones confidenciales.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] tipo = mega usuario = … contraseña = …",
   "account connections": "conexiones de las cuentas",
   "accounts allowed": "cuentas permitidas",
@@ -9004,5 +9003,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "El system_version describe una plataforma móvil para el Desktop API.",
   "The app_version does not match the reviewed official version formats.": "El app_version no se corresponde con los formatos de las versiones oficiales revisadas.",
   "The mobile system_lang_code has no region component.": "El móvil system_lang_code no tiene componente de región.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "La capa de esquema de Telethon difiere de la línea de base del perfil revisado (230); revisar la compatibilidad de la biblioteca."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "La capa de esquema de Telethon difiere de la línea de base del perfil revisado (230); revisar la compatibilidad de la biblioteca.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Este chat se encuentra ahora en TgWitness; los demás dispositivos de la cuenta no tienen acceso a él.",
+  "The other side ended the chat.": "La otra parte dio por finalizado el chat.",
+  "Ended from TgWitness.": "Finalizado desde TgWitness.",
+  "Telegram reports that the chat no longer exists.": "Telegram informa de que el chat ya no existe.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "La protección con contraseña de ZIP utiliza WinZip AES (extensión de clave débil). Utiliza una frase de contraseña aleatoria larga de más de 20 caracteres o elige el cifrado más seguro para las exportaciones confidenciales.",
+  "Transport route checked for this connection.": "Ruta de transporte comprobada para esta conexión."
 }

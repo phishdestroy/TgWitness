@@ -8178,7 +8178,6 @@
   "Your server": "השרת שלכם",
   "Your way in": "הדרך שלכם להיכנס",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ההגנה באמצעות סיסמת ZIP משתמשת ב-WinZip AES (מתיחת מפתח חלשה). יש להשתמש בסיסמה ארוכה ואקראית של 20 תווים ומעלה, או במשלוח אטום עבור ייצוא של מידע רגיש.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "חיבורי החשבונות",
   "accounts allowed": "חשבונות מורשים",
@@ -9044,5 +9043,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "ה-system_version מתאר פלטפורמה ניידת עבור ה-Desktop API.",
   "The app_version does not match the reviewed official version formats.": "ה-app_version אינו תואם לפורמטים של הגרסאות הרשמיות שנבדקו.",
   "The mobile system_lang_code has no region component.": "למכשיר הנייד system_lang_code אין רכיב אזור.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "שכבת הסכימה של Telethon שונה מקו הבסיס של הפרופיל שנבדק (230); יש לבדוק את תאימות הספרייה."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "שכבת הסכימה של Telethon שונה מקו הבסיס של הפרופיל שנבדק (230); יש לבדוק את תאימות הספרייה.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "צ'אט זה נמצא כעת ב-TgWitness; מכשירים אחרים של החשבון אינם מקבלים אותו.",
+  "The other side ended the chat.": "הצד השני סיים את הצ'אט.",
+  "Ended from TgWitness.": "הסתיים מ-TgWitness.",
+  "Telegram reports that the chat no longer exists.": "Telegram מדווחת שהצ'אט כבר אינו קיים.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ההגנה באמצעות סיסמה ב-ZIP משתמשת ב-WinZip AES (מתיחת מפתח חלשה). השתמשו בסיסמה ארוכה ואקראית של 20 תווים ומעלה, או בחרו בהצפנה החזקה יותר עבור ייצוא של קבצים רגישים.",
+  "Transport route checked for this connection.": "נתיב התקשורת נבדק עבור חיבור זה."
 }

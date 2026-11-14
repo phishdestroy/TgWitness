@@ -8139,7 +8139,6 @@
   "Your server": "آپ کا سرور",
   "Your way in": "آپ کا داخلے کا راستہ",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP پاس ورڈ تحفظ WinZip AES (کمزور کی اسٹریچنگ) استعمال کرتا ہے۔ حساس برآمدات کے لیے20+ حروف پر مشتمل ایک طویل بے ترتیب پاس فریز یا سیل شدہ ترسیل استعمال کریں۔",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "اکاؤنٹس کے کنکشنز",
   "accounts allowed": "اجازت یافتہ اکاؤنٹس",
@@ -8996,5 +8995,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version Desktop API کے لیے ایک موبائل پلیٹ فارم کو بیان کرتا ہے۔",
   "The app_version does not match the reviewed official version formats.": "app_version جائزہ شدہ سرکاری ورژن فارمیٹس سے مطابقت نہیں رکھتا۔",
   "The mobile system_lang_code has no region component.": "موبائل system_lang_code میں علاقائی جزو نہیں ہوتا۔",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon کی اسکیما پرت جائزہ شدہ پروفائل بیس لائن (230) سے مختلف ہے؛ جائزہ لائبریری مطابقت۔"
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon کی اسکیما پرت جائزہ شدہ پروفائل بیس لائن (230) سے مختلف ہے؛ جائزہ لائبریری مطابقت۔",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "یہ چیٹ اب TgWitness میں محفوظ ہے؛ اکاؤنٹ کے دیگر آلات اسے حاصل نہیں کرتے۔",
+  "The other side ended the chat.": "دوسری جانب نے چیٹ ختم کی۔",
+  "Ended from TgWitness.": "TgWitness کی طرف سے ختم۔",
+  "Telegram reports that the chat no longer exists.": "Telegram رپورٹ کرتا ہے کہ چیٹ اب موجود نہیں ہے۔",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP پاس ورڈ پروٹیکشن WinZip AES (کمزور کی اسٹریچنگ) استعمال کرتی ہے۔ 20+ حروف پر مشتمل ایک طویل بے ترتیب پاس فریز استعمال کریں، یا حساس ایکسپورٹس کے لیے مضبوط انکرپشن کا انتخاب کریں۔",
+  "Transport route checked for this connection.": "اس کنکشن کے لیے ٹرانسپورٹ راستہ چیک کیا گیا۔"
 }

@@ -1856,7 +1856,10 @@ function excerpt(e) {
     case "secret_chat.requested": return (p.direction==="out"?tr("Started by this account"):tr("Started by the other side"))+" · "+tr("user ID {id}",{id:p.peer_user_id});
     case "secret_chat.ready": return tr("Key picture {hex}",{hex:(p.key_visualization||"").slice(0,16)+"…"});
     case "secret_chat.action": return secretActionText(p);
-    case "secret_chat.closed": return p.history_deleted_by_peer?tr("The other side deleted the chat; the journal keeps every record."):p.reason||"";
+    case "secret_chat.accepted": return tr("This chat now lives in TgWitness; other devices of the account do not get it.");
+    case "secret_chat.closed": return p.history_deleted_by_peer?tr("The other side deleted the chat; the journal keeps every record."):
+      ({"the peer discarded the chat":tr("The other side ended the chat."),"ended from TgWitness":tr("Ended from TgWitness."),
+        "Telegram reports the chat no longer exists":tr("Telegram reports that the chat no longer exists.")})[p.reason]||p.reason||"";
     case "secret_chat.file": return humanSize(p.size)+" · SHA-256 "+String(p.media_sha256||"").slice(0,12)+"…";
     case "secret_chat.file_deferred": return p.reason||"";
     case "interaction.requested": return [p.request?.action,p.button?.text,p.request?.text].filter(Boolean).join(" · ");
@@ -1890,6 +1893,7 @@ function excerpt(e) {
       tr("Telegram is not contacted until a listed proxy answers"))+failure;
     case "network.route_fallback": return tr("Telegram sees this server's address until a listed proxy answers");
     case "network.policy_changed": return exposureNames[p.exposure]||p.exposure;
+    case "network.connection_applied": return tr("Transport route checked for this connection.");
     case "network.probe": return p.connected ? tr("Telegram transport connected") : tr("Connection failed")+failure;
     case "network.connection_checked": return p.telegram_connected?[tr("Telegram connected"),p.exit_ip,countryName(p.country),p.warp?"WARP: "+p.warp:"",
       p.latency_ms!=null?tr("{n} ms",{n:p.latency_ms}):""].filter(Boolean).join(" · "):tr("Not connected")+failure;
@@ -2197,7 +2201,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=9").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=10").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
@@ -3007,7 +3011,7 @@ $("account-disclosure-form").addEventListener("submit",event=>{
   event.preventDefault();busy(event.submitter,createAccountDisclosure);
 });
 let exportsView=null;
-const exportsReady=import('./views/exports.js?v=3').then(({createExports})=>{
+const exportsReady=import('./views/exports.js?v=4').then(({createExports})=>{
   exportsView=createExports({root:$("view-evidence"),tr,json,getSession:()=>state.workspaceRevision+":"+state.profile,fmtTime,toast,
     onTab:tab=>{if(state.view==='evidence')window.TgWitnessRouter?.record({tab});},
     downloadAgain:entry=>download('exports/'+entry.id+'/download','tgwitness-'+entry.id.slice(0,8)+'.'+(entry.encrypted?(entry.encryption||'zip'):entry.format),true)});
@@ -5638,7 +5642,7 @@ function dossierBar(chat,profiled){
   const encryptionHint=node("p","hint");
   const updateEncryptionHint=()=>{encryptionHint.textContent=tr(encryption.value==="tgwpw"
     ? "Open with an independently obtained verify.py: python verify.py unseal-password export.tgwpw --out output-file. Then verify the decrypted evidence."
-    : "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.");};
+    : "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.");};
   encryption.addEventListener("change",updateEncryptionHint);updateEncryptionHint();
   bar.append(node("p","",tr("Profiles are on. Click a person to open their profile. The export is a separate signed file; it is deleted with the chat.")),
     action("secondary",tr("Export profiles"),async()=>{

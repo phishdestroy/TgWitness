@@ -8139,7 +8139,6 @@
   "Your server": "Sizning serveringiz",
   "Your way in": "Kirish usulingiz",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP parol himoyasi WinZip AES (zaif kalitni cho'zish)dan foydalanadi. Nozik eksportlar uchun 20+ belgili uzun tasodifiy parol iborasidan yoki muhrlangan yetkazib berishdan foydalaning.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "hisob ulanishlari",
   "accounts allowed": "ruxsat berilgan hisoblar",
@@ -8996,5 +8995,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version Desktop API uchun mobil platformani tasvirlaydi.",
   "The app_version does not match the reviewed official version formats.": "app_version ko'rib chiqilgan rasmiy versiya formatlariga mos kelmaydi.",
   "The mobile system_lang_code has no region component.": "Mobil system_lang_code mintaqa komponenti yo'q.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethonning sxema qatlami ko'rib chiqilgan profil asosiy ko'rsatkichidan (230) farq qiladi; ko'rib chiqish kutubxonasi mosligi."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethonning sxema qatlami ko'rib chiqilgan profil asosiy ko'rsatkichidan (230) farq qiladi; ko'rib chiqish kutubxonasi mosligi.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "Ushbu suhbat endi TgWitnessda mavjud; hisobning boshqa qurilmalari uni ko'rmaydi.",
+  "The other side ended the chat.": "Qarshi tomon suhbatni yakunladi.",
+  "Ended from TgWitness.": "TgWitness tomonidan yakunlandi.",
+  "Telegram reports that the chat no longer exists.": "Telegram suhbat endi mavjud emasligini xabar beradi.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP parol himoyasi WinZip AES (zaif kalitni cho'zish) usulidan foydalanadi. 20+ belgili uzun tasodifiy parol iborasidan foydalaning yoki sezgir eksportlar uchun kuchliroq shifrlashni tanlang.",
+  "Transport route checked for this connection.": "Ushbu ulanish uchun transport yo'li tekshirildi."
 }
