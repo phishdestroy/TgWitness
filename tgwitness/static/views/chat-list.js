@@ -17,7 +17,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     labelNode.append(node('span', '', tr(label)), select); fields.append(labelNode); return select;
   }
   const kind = selectField('chat-list-kind', 'Type', [['', 'All'], ['channel', 'Channels'], ['group', 'Groups'], ['bot', 'Bots'], ['private', 'Private chats']]);
-  const status = selectField('chat-list-state', 'State', [['', 'All'], ['active', 'Collecting'], ['loading', 'Loading history'], ['pending', 'Pending media'], ['failed', 'Failed media'], ['restricted', 'Restricted'], ['lost', 'Access to the chat lost'], ['auto', 'Auto-discovered'], ['unconfirmed', 'Access unconfirmed'], ['excluded', 'Excluded'], ['paused', 'Paused'], ['priority', 'Priority']]);
+  const status = selectField('chat-list-state', 'State', [['', 'All'], ['active', 'Collecting'], ['loading', 'Loading history'], ['retry', 'Retry'], ['pending', 'Pending media'], ['failed', 'Failed media'], ['restricted', 'Restricted'], ['lost', 'Access to the chat lost'], ['auto', 'Auto-discovered'], ['unconfirmed', 'Access unconfirmed'], ['excluded', 'Excluded'], ['paused', 'Paused'], ['priority', 'Priority']]);
   fields.prepend(sortLabel); filters.append(fields); controls.append(filters); root.querySelector('.chat-search').after(controls);
   root.querySelector('.chats-sidebar').append(root.querySelector('.chat-open'));
   const pending = new Set();
@@ -44,6 +44,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     if (mode === 'failed') return chat.media_queue?.failed > 0;
     if (mode === 'restricted') return chat.telegram_restrictions?.length > 0;
     if (mode === 'loading') return !!chat.intake_state;
+    if (mode === 'retry') return chat.intake_state === 'retry';
     return sourceState(chat) === mode;
   }
   function matches(chat) {
@@ -89,7 +90,14 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       restricted.title = chat.telegram_restrictions.map(item => [item.platform, item.text || item.reason].filter(Boolean).join(': ')).join('\n');
       progress.append(restricted);
     }
-    if (chat.intake_state) progress.append(node('span', 'pill pill-state', tr(chat.intake_state === 'running' ? 'Loading history' : 'Queued')));
+    if (chat.intake_state) {
+      const intake = node('span', 'pill pill-state', tr(chat.intake_state === 'running' ? 'Loading history' : chat.intake_state === 'retry' ? 'Retry' : 'Queued'));
+      if (chat.intake_state === 'retry') {
+        intake.append(' · ', chat.intake_error_type || '');
+        if (state === 'active') intake.append(' · ', timeNode(new Date(chat.intake_retry_at * 1000).toISOString(), '', 'list'));
+      }
+      progress.append(intake);
+    }
     if (queued(chat)) progress.append(badge('pill-state', tr('Pending media'), tr('Pending media')+': '+queued(chat), 'download'));
     if (chat.media_queue?.failed) progress.append(badge('pill-deleted', tr('Failed media'), tr('Failed media')+': '+chat.media_queue.failed));
     body.append(top, bottom, progress); return [avatarNode(chat.chat_id, title), body];

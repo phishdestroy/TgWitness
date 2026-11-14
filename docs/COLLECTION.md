@@ -171,10 +171,14 @@ account asks for the usual confirmation.
   Newly selected chats use these settings when the scope is applied, including chats
   already present in the account's dialog list. Initial profile and history loading
   runs for up to three chats concurrently; work for the same chat stays in order.
-  A slow chat does not hold up all other chats. The pending chat IDs are saved locally
-  and unfinished work resumes when observation starts again, including after a restart.
-  Sources disabled before their turn are skipped. The overview shows active and pending
-  chat loads separately from attachment downloads.
+  Each history/profile stage uses the configured operation timeout, so stalled requests
+  release their worker. History is saved before the optional profile read; a profile
+  failure does not prevent that history capture. Failed stages retry after 5 seconds,
+  doubling to a maximum of 5 minutes without occupying a worker during the delay.
+  Pending IDs, retry deadlines and completed stages are saved locally. A restart resumes
+  only unfinished stages; a profile retry does not repeat a completed history read.
+  Sources disabled before their turn are skipped. The overview shows active, pending
+  and retrying chat loads separately from attachment downloads.
   A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
   recording of the chat continues. This includes waits while resolving the new chat's
   identity: the pending profile/history task is retained for retry, and an existing
@@ -305,6 +309,11 @@ A snapshot requests the latest visible messages from an enabled source, up to
 500 per request. Results are labeled as history observations. Manual snapshots
 run alongside observation. Repeated observations
 are kept as separate records.
+
+Snapshots stop if the source is disabled during the read. Replies must belong to the
+requested chat and contain strictly decreasing positive message IDs below the requested
+boundary. An invalid reply interrupts the snapshot before that message is saved;
+already preserved messages remain in the signed journal with the interruption record.
 
 Snapshots follow the attachment policy but remain separate from live-event switches.
 They do not reconstruct deleted messages or missed intermediate versions. You can
