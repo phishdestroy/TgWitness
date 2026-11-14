@@ -60,8 +60,8 @@ def availability(entry, chat_id, private):
     until = c.store.get_setting("rpc_backoff_until", 0)
     if until > time.time():
         return "rate_limited", until
-    if c.running or c.observation_starting:
-        return "observing", None
+    if c.observation_starting:
+        return "busy", None
     account_export = getattr(app.state, "account_export", None)
     if (c.export_claim or c.export_busy() or c.history.busy or c.connection_change_task is not None
             or account_export and account_export.busy()):

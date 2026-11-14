@@ -683,11 +683,11 @@ class Collector:
         return {
             "network": self.route_status(),
             "phase": self.phase, "running": self.running,
-            "account_task": ("monitoring" if self.running or self.observation_starting else
-                             "history" if self.history.busy else
+            "account_task": ("history" if self.history.busy else
                              "profile_image" if (self.export_claim or "").startswith("avatar:") else
-                             "export" if self.export_claim else None),
-            "available_for_export": not (self.running or self.observation_starting or self.export_claim
+                             "export" if self.export_claim else
+                             "monitoring" if self.running or self.observation_starting else None),
+            "available_for_export": not (self.observation_starting or self.export_claim
                                          or self.export_busy() or self.history.busy or self.connection_change_task),
             "connected": bool(self.client and self.client.is_connected()),
             "has_session": bool(credentials.get("session")),
@@ -1307,7 +1307,7 @@ class Collector:
 
     async def rewind_paused_updates(self):
         dropped, self.paused_drops = self.paused_drops, 0
-        if not dropped or not self.client:
+        if not dropped or not self.client or self.export_claim or self.export_busy() or self.history.busy:
             return dropped, False
         if self.client.is_connected():
             await self.client.disconnect()
@@ -2810,7 +2810,7 @@ class Collector:
         validate_collection_scope(self.store)
         if self.running:
             return
-        if self.export_claim or self.export_busy() or self.history.busy or self.observation_starting:
+        if self.observation_starting:
             raise ValueError("This account is busy. Pause its current task before starting observation.")
         self.observation_starting = True
         client = self.client
@@ -2963,7 +2963,8 @@ class Collector:
         await self.wait_authorization_cleanup()
         if shutdown:
             await self.profiling.suspend()
-        await self.history.pause("process_shutdown" if shutdown else "observation_stopped")
+        if shutdown:
+            await self.history.pause("process_shutdown")
         if shutdown and self.export_task:
             self.export_task.cancel()
             await asyncio.gather(self.export_task, return_exceptions=True)
@@ -4067,31 +4068,35 @@ class Collector:
 
     def activity(self):
         claim, detail = self.export_claim or "", None
+        brief = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), None)
         if self.authorization_required:
             task = "sign_in_required"
         elif self.connection_change_task is not None:
             task = "connection_change"
         elif self.observation_starting:
             task = "starting_observation"
-        elif self.running:
-            task = "observation"
         elif self.history.busy or claim.startswith("history:"):
             task = "history"
         elif self.export_busy() or self.export_state and claim == self.export_state.get("id"):
             task = "chat_export"
             detail = {key: self.export_state.get(key) for key in ("id", "chat_id", "title", "phase", "captured", "total",
                                                                   "eta_seconds", "stage")} if self.export_state else None
-        elif claim:
-            task = next((kind for prefix, kind in ACTIVITY_CLAIMS if claim.startswith(prefix)), "export")
+        elif claim and not brief:
+            task = "export"
+        elif self.running:
+            task = "observation"
+        elif brief:
+            task = brief
         elif self.profiling.busy:
             task = "profiling"
         else:
             task = None
         until = self.pause_until()
-        return {"task": task, "detail": detail, "telegram_pause_until": until if until > time.time() else None}
+        return {"task": task, "detail": detail, "observing": self.running,
+                "telegram_pause_until": until if until > time.time() else None}
 
     def reserve_export(self, owner):
-        if (self.running or self.observation_starting or self.history.busy or self.export_busy()
+        if (self.observation_starting or self.history.busy or self.export_busy()
                 or self.export_claim or self.connection_change_task is not None):
             return False
         self.export_claim = owner

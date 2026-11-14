@@ -108,10 +108,10 @@ let connectionView;
 const connectionViewReady=import('./views/connection.js?v=3').then(({createConnectionView})=>{
   connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
-const accountStateReady=import('./components/account-state.js?v=2').then(module=>{
+const accountStateReady=import('./components/account-state.js?v=3').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=10'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=11'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize});
@@ -937,10 +937,8 @@ function renderWorkflowControls(){
     trn('{n} selected chat','{n} selected chats',sources)].filter(Boolean).join(' · ');
   renderWorkflowGaps(state.status.stats.counts?.['coverage.gap']||0);
   const exporter=viewQuery('start','[data-workflow="account-all"]');
-  exporter.textContent=tr(!demo&&activity.observing?'Pause observation and export':'Export everything');
-  $('workflow-account-hint').textContent=!demo&&activity.observing?
-    tr('Observation pauses for the export. Start it again in Accounts when the export finishes.'):
-    !demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):'';
+  exporter.textContent=tr('Export everything');
+  $('workflow-account-hint').textContent=!demo&&activity.busy?tr('{task}. The export can start when it finishes.',{task:activity.title}):'';
   renderWorkflowAccounts();pulseUI?.update(state.status);
   const investigate=viewQuery('start','[data-workflow="investigation"]');
   investigate.textContent=tr(state.status.collector.running?'Open investigation':'Set up observation');
@@ -1056,18 +1054,14 @@ function importedKeyNotice(id){
 async function exportEverything(){
   if(!state.me?.admin||!viewAllowed('evidence'))return;
   if(!state.status.demo&&!accountSignedIn()){state.workflow={profile:state.profile,kind:'account'};await openWorkflowSignIn();return;}
-  const observing=state.status.collector?.activity?.task==='observation';
-  const message=tr("Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.")
-    +(observing?' '+tr("Observation pauses while the export runs."):'');
+  const message=tr("Export everything this account can read: all chats and files, profile photos, stories, contacts and other account data, in every format. The automatic method uses Takeout, or the regular session if Takeout must wait.");
   if(!(await askConfirm(message,{confirmText:tr("Export everything")})))return;
-  if(observing)await json("collector/stop",{});
   await json("account-export/start",accountExportFallback);
   selectExportTask('account');await navigate('evidence');exportsView?.select('downloads');await loadAccountExport();
   toast(tr("Account export started. Progress and omissions appear here; you can leave this page and return."));
 }
 async function openAccountWorkflow(){
   if(!state.me?.admin||!viewAllowed('evidence'))return;
-  if(!state.status.demo&&state.status.collector?.running&&!(await pauseForExport(state.profile)))return;
   const workflow=state.workflow={profile:state.profile,kind:'account'},revision=state.workspaceRevision;
   const current=()=>state.workflow===workflow&&revision===state.workspaceRevision&&state.me?.admin&&viewAllowed('evidence');
   if(!state.status.demo&&!accountSignedIn()){
@@ -1539,9 +1533,9 @@ function accountPhaseLabel(p){
 const activityTitles=()=>({reconnecting:tr("Reconnecting to Telegram"),history:tr("Downloading history"),
   export:tr("Export in progress"),profile_image:tr("Updating profile photos"),sign_in:tr("Sign-in required"),
   empty:tr("No Telegram account"),failed:tr("Needs attention"),unavailable:tr("Unavailable"),free:tr("Free")});
-const activityHints=()=>({monitoring:tr("To export this account, pause observation."),
-  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Exports and observation wait until it finishes."),
-  export:tr("Observation waits until the export finishes."),profile_image:tr("Takes a moment."),
+const activityHints=()=>({monitoring:"",
+  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Observation keeps running. Exports wait until it finishes."),
+  export:tr("Observation keeps running. Other exports and full history wait until it finishes."),profile_image:tr("Takes a moment."),
   sign_in:tr("Sign in again to observe or export."),empty:tr("Connect an account to observe or export."),
   failed:tr("Check the problems listed for this account."),free:tr("Ready to export or observe.")});
 const activityOf=p=>accountActivity?accountActivity(p):{kind:"unavailable",observing:false,busy:false,canExport:false};
@@ -1553,24 +1547,13 @@ function accountActivityText(p){
 }
 function busyAccountText(p){
   const activity=accountActivityText(p);
-  return (activity.busy?activity.title:tr("Busy"))+" · "+
-    tr(activity.observing?"Pause observation to use this account.":"Available when it finishes.");
+  return (activity.busy?activity.title:tr("Busy"))+" · "+tr("Available when it finishes.");
 }
 function profileEntry(id=state.profile){
   const entry=(state.profiles||[]).find(p=>p.id===id);
   return id===state.profile&&state.status?{...(entry||{}),collector:state.status.collector}:entry;
 }
-async function pauseForExport(id){
-  const p=profileEntry(id);
-  if(!p?.collector?.running)return true;
-  if(!(await (await collectionReady).confirmPause(p.label)))return false;
-  await json("collector/stop",{},{profile:id});
-  toast(tr("Paused collection for {name}.",{name:p.label}));
-  await loadProfiles();if(id===state.profile)await refreshStatus();
-  return true;
-}
 async function exportAccountFrom(id){
-  if(!(await pauseForExport(id)))return;
   if(state.profile!==id)await switchProfile(id);
   if(state.profile===id)await openAccountWorkflow();
 }
@@ -1693,7 +1676,7 @@ function renderAccounts(){
       actions.append(toggle);
       const activity=activityOf(p);
       if(activity.canExport&&!s.demo&&state.me?.admin&&viewAllowed('evidence')){
-        const exporter=node("button","secondary",tr(activity.observing?"Pause and export":"Export account"));
+        const exporter=node("button","secondary",tr("Export account"));
         exporter.type="button";exporter.dataset.action="export";
         exporter.addEventListener("click",()=>busy(exporter,()=>exportAccountFrom(p.id)));
         actions.prepend(exporter);
@@ -2292,20 +2275,18 @@ function renderHistory(){
   show("history-start",!active&&!paused);show("history-pause",active);
   show("history-resume",paused);show("history-cancel",active||paused);
   show("history-report",exists&&may("export"));
-  const observing=s?.collector?.activity?.task==="observation";
-  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!(s?.collector.available_for_export||observing)||!s?.targets.some(x=>x.enabled);
-  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!(s?.collector.available_for_export||observing);
+  $("history-start").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export||!s?.targets.some(x=>x.enabled);
+  $("history-resume").disabled=!!s?.demo||!s?.collector.has_session||!s?.collector.available_for_export;
   const busyAccount=!s?.demo&&!!s?.collector.has_session&&!s?.collector.available_for_export&&!active;
   show("history-availability",busyAccount);
-  $("history-availability").textContent=!busyAccount?"":observing?
-    tr("Observation is running. Loading history pauses it; with the option above it starts again when the history is loaded."):
-    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Pause observation or its current task before loading history.");
+  $("history-availability").textContent=!busyAccount?"":
+    busyExplanation("This account is busy",state.profile)||tr("This account is busy. Wait for its current task before loading history.");
   const labels={running:tr("Loading history"),paused:tr("History paused"),complete:tr("History reading finished"),
     incomplete:tr("History finished with gaps"),cancelled:tr("History run ended")};
   const counts=h.sources_by_phase||{},finished=(counts.complete||0)+(counts.failed||0)+(counts.skipped||0);
   $("history-progress").textContent=exists?(labels[phase]||phase)+" · "+tr("{messages} messages · {done} of {total} sources",{
     messages:h.captured,done:finished,total:h.sources_total})+(h.reason?" · "+(errorName(h.reason)||tr(h.reason)):""):
-    tr("{n} enabled sources. History requires an idle account; pause observation first.",{n:s?.targets.filter(x=>x.enabled).length||0});
+    tr("{n} enabled sources. Observation keeps running while history loads.",{n:s?.targets.filter(x=>x.enabled).length||0});
   $("history-media").textContent=exists?tr("Attachments: {done} saved, {pending} pending, {failed} failed. Unavailable messages: {missing}.",{
     done:h.media?.done||0,pending:h.media_pending||0,failed:h.media?.failed||0,missing:h.unavailable||0}):"";
   $("history-wait").textContent=h.wait_until>Date.now()/1000?
@@ -2332,10 +2313,6 @@ for(const action of ["start","pause","resume","cancel"]){
     const options=action==="start"?{transport:$("history-transport").value,
       media_workers:Number($("history-workers").value),admin_log:$("history-admin").checked,
       compare_saved:$("history-compare").checked,observe_after:$("history-observe").checked}:{};
-    if(["start","resume"].includes(action)&&state.status?.collector?.activity?.task==="observation"){
-      if(!(await askConfirm(tr("Observation is running on this account. Loading history pauses it. Updates that arrive meanwhile are requested again from the saved position when observation starts. Continue?"),{confirmText:tr("Pause and load history")})))return;
-      await json("collector/stop",{});
-    }
     await json("history/"+action,options);await refreshStatus();await refreshEvents();
   }));
 }
@@ -2899,15 +2876,8 @@ function renderAccountExportBusy(){
   show("account-export-busy",busy);if(!busy)return;
   const activity=accountActivityText({...(profileEntry()||{}),collector,
     sources_enabled:state.status.targets.filter(target=>target.enabled).length});
-  $("account-export-busy-copy").textContent=activity.observing?
-    tr("{task}. Pause observation to start the export; start it again in Accounts afterwards.",{task:activity.title}):
-    tr("{task}. The export can start when it finishes.",{task:activity.title});
-  show("account-export-pause",activity.observing);
+  $("account-export-busy-copy").textContent=tr("{task}. The export can start when it finishes.",{task:activity.title});
 }
-$("account-export-pause").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  if(!(await pauseForExport(state.profile)))return;
-  await loadAccountExport();
-}));
 async function accountExportAction(job,verb){
   await json("account-export/"+encodeURIComponent(job.id)+"/"+verb,{});
   await loadAccountExport();
@@ -6153,7 +6123,7 @@ async function openExportDialog(){
     const c=p.collector,lead=p.id===state.profile,connected=!!c?.has_session&&!p.error_type,account=c?.account;
     const row=node("label","export-account"),box=node("input"),who=node("span","export-account-who"),text=node("span");
     const limited=c?.rpc_backoff_until>Date.now()/1000;
-    const occupied=limited||c?.running||c?.account_task||c?.available_for_export===false;
+    const occupied=limited||c?.available_for_export===false;
     box.type="checkbox";box.value=p.id;box.disabled=!connected||!!occupied||basic&&!lead;box.addEventListener("change",estimate);
     box.checked=!box.disabled&&(lead||!!exportPreselect?.has(p.id));
     text.append(node("b","",p.label),node("small","",limited?tr("Telegram rate limit: wait until {time}.",{
@@ -6321,7 +6291,7 @@ let linkPlan=null,linkJob=null,linkPoll=null;
 const EXPORT_PHASES={preparing:tr("preparing"),running:tr("running"),selecting:tr("selecting"),packaging:tr("packaging"),done:tr("done"),
   paused:tr("paused"),failed:tr("failed"),cancelled:tr("cancelled"),waiting:tr("waiting")};
 const LINK_REASONS={unavailable:"workspace unavailable",no_session:"no Telegram account connected",signed_out:"signed out: sign in again",
-  observing:"observing: pause observation to include it",busy:"busy with another task",not_member:"not a member of this chat"};
+  busy:"busy with another task",not_member:"not a member of this chat"};
 function linkEstimate(){
   const p=linkPlan,n=$("link-export-plan").querySelectorAll("input[name=link-account]:checked").length;
   const table=p.estimates[$("link-export-transport").value]||p.estimates.regular,at=k=>table[Math.min(k,table.length)-1];
@@ -6364,7 +6334,7 @@ function renderLinkPlan(){
     });
   }
   box.append(accounts);
-  if(!p.accounts.some(a=>a.usable))box.append(node("p","notice warning",tr("No idle account can run this export. Pause observation or wait for other tasks, then check the link again.")));
+  if(!p.accounts.some(a=>a.usable))box.append(node("p","notice warning",tr("No account can run this export now. Wait for its other tasks to finish, then check the link again.")));
   const estimate=node("p","export-estimate");estimate.id="link-export-estimate";box.append(estimate,node("p","hint",tr(p.estimate_scope)));
   const start=node("button","primary",tr("Start export"));start.type="button";start.id="link-export-start";
   start.addEventListener("click",()=>busy(start,startLinkExport));box.append(start);
@@ -6583,7 +6553,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=5').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=6').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;

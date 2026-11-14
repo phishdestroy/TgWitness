@@ -390,7 +390,7 @@
   </section>
   <section class="card padded" id="history-card" aria-labelledby="history-heading">
     <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>
-    <p class="notice">Pause observation before loading history. New live changes are not recorded while history is loading; later reads cannot recover every deletion or intermediate edit.</p>
+    <p class="notice">Observation keeps running while history loads, so new messages and changes are still recorded. A history read cannot recover every earlier deletion or intermediate edit.</p>
     <details id="history-details"><summary>Details</summary>
       <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Past deletions and edits are only available when Telegram returns them in Recent Actions.</p>
       <p class="hint">For a separate archive of the account's current history, use Exports → Telegram account. This run only loads the enabled sources listed at its start.</p>
@@ -498,8 +498,8 @@
     <summary>Compare collection methods</summary>
     <dl class="collection-methods-grid">
       <div><dt>Saved observations</dt><dd>Export saved records without reading Telegram. Observation can keep running.</dd></div>
-      <div><dt>Full history</dt><dd>Read past messages into this workspace. Pause observation first; new live changes are not recorded during history loading.</dd></div>
-      <div><dt>Telegram account</dt><dd>Download selected chats into a separate archive. Pause observation on this account first.</dd></div>
+      <div><dt>Full history</dt><dd>Read past messages into this workspace. Observation keeps running meanwhile.</dd></div>
+      <div><dt>Telegram account</dt><dd>Download selected chats into a separate archive. Observation keeps running meanwhile.</dd></div>
       <div><dt>Live observation</dt><dd>Keep new messages and changes delivered while observation is running. Start it from Sources.</dd></div>
       <div><dt data-no-translate>Trusted Live</dt><dd>Use an official Desktop or Web session with video or native JSON. Setup and hybrid comparison require manual steps. Preview.</dd></div>
     </dl>
@@ -520,7 +520,7 @@
   <dialog class="account-export-dialog" id="account-export-dialog" aria-labelledby="account-export-dialog-title">
     <form id="account-export-form" method="dialog">
       <div class="account-export-dialog-head"><div><span class="eyebrow">NEW ACCOUNT EXPORT</span><h2 id="account-export-dialog-title" tabindex="-1">Choose what to save</h2></div><button class="quiet" id="account-export-close" type="button" aria-label="Close export settings">×</button></div>
-      <div class="account-export-busy" hidden id="account-export-busy" role="status"><p id="account-export-busy-copy"></p><button class="secondary" hidden id="account-export-pause" type="button">Pause observation</button></div>
+      <div class="account-export-busy" hidden id="account-export-busy" role="status"><p id="account-export-busy-copy"></p></div>
       <p class="muted">Every accessible chat and its full visible history are selected by default. Observation sources are separate from this export.</p>
       <p class="hint">For a personal backup, describe that purpose. You can prepare a separate sharing copy after the export finishes.</p>
       <p class="hint" hidden id="account-export-imported-key"></p>
