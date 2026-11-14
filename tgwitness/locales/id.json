@@ -9376,5 +9376,6 @@
   "Only with the Mark as opened button": "Hanya dengan tombol \"Tandai media sebagai telah dibuka\"",
   "Only with the Mark stories as viewed button": "Hanya dengan tombol \"Tandai cerita sebagai sudah dibaca\"",
   "Mark as opened": "Tandai media sebagai telah dibuka",
-  "Workspace settings": "Pengaturan ruang kerja"
+  "Workspace settings": "Pengaturan ruang kerja",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Kontainer ini berisi {n} berkas. EU DSS dengan pengaturan default menolak kontainer yang berisi lebih dari 1.000 berkas."
 }

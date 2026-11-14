@@ -9424,5 +9424,6 @@
   "Only with the Mark as opened button": "Faqat \"Media ochilgan deb belgilash\" tugmasi bilan",
   "Only with the Mark stories as viewed button": "Faqat \"Hikoyalarni ko'rilgan deb belgilash\" tugmasi bilan",
   "Mark as opened": "Media ochilgan deb belgilash",
-  "Workspace settings": "Ish maydoni sozlamalari"
+  "Workspace settings": "Ish maydoni sozlamalari",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Ushbu konteynerda {n} ta fayl mavjud. EU DSS standart sozlamalar bilan 1000 tadan ortiq faylli konteynerlarni rad etadi."
 }

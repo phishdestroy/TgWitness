@@ -9432,5 +9432,6 @@
   "Only with the Mark as opened button": "Uniquement avec le bouton « Marquer les médias comme ouverts »",
   "Only with the Mark stories as viewed button": "Uniquement avec le bouton « Marquer les stories comme lues »",
   "Mark as opened": "Marquer les médias comme ouverts",
-  "Workspace settings": "Paramètres de l'espace de travail"
+  "Workspace settings": "Paramètres de l'espace de travail",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Ce conteneur contient {n} fichiers. EU DSS, avec ses paramètres par défaut, refuse les conteneurs contenant plus de 1 000 fichiers."
 }

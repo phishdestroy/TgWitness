@@ -9376,5 +9376,6 @@
   "Only with the Mark as opened button": "仅通过“将媒体标记为已打开”按钮",
   "Only with the Mark stories as viewed button": "仅通过“将动态标记为已读”按钮",
   "Mark as opened": "将媒体标记为已打开",
-  "Workspace settings": "工作区的设置"
+  "Workspace settings": "工作区的设置",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "该容器包含{n}个文件。在默认设置下，EU DSS会拒绝处理包含超过1000个文件的容器。"
 }

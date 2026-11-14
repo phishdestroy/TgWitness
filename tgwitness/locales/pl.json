@@ -9520,5 +9520,6 @@
   "Only with the Mark as opened button": "Tylko przy użyciu przycisku „Oznacz multimedia jako otwarte”",
   "Only with the Mark stories as viewed button": "Tylko przy użyciu przycisku „Oznaczaj wiadomości jako przeczytane”",
   "Mark as opened": "Oznacz multimedia jako otwarte",
-  "Workspace settings": "Ustawienia obszaru roboczego"
+  "Workspace settings": "Ustawienia obszaru roboczego",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Ten kontener zawiera {n} plików. EU DSS przy ustawieniach domyślnych odrzuca kontenery zawierające więcej niż 1000 plików."
 }

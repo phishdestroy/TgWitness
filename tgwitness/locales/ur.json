@@ -9424,5 +9424,6 @@
   "Only with the Mark as opened button": "صرف \"میڈیا کو کھلا ہوا نشان زد کریں\" بٹن کے ساتھ",
   "Only with the Mark stories as viewed button": "صرف \"کہانیوں کو دیکھا ہوا نشان زد کریں\" بٹن کے ساتھ",
   "Mark as opened": "میڈیا کو کھلا ہوا نشان زد کریں",
-  "Workspace settings": "ورک اسپیس کی ترتیبات"
+  "Workspace settings": "ورک اسپیس کی ترتیبات",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "یہ کنٹینر {n} فائلیں رکھتا ہے۔ ڈیفالٹ ترتیبات کے ساتھ EU DSS 1000 سے زیادہ فائلوں والے کنٹینرز کو مسترد کر دیتا ہے۔"
 }

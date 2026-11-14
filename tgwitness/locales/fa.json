@@ -9424,5 +9424,6 @@
   "Only with the Mark as opened button": "فقط با دکمه «علامت‌گذاری رسانه به‌عنوان باز»",
   "Only with the Mark stories as viewed button": "فقط با دکمه «علامت‌گذاری داستان‌ها به‌عنوان دیده‌شده»",
   "Mark as opened": "علامت‌گذاری رسانه به‌عنوان باز",
-  "Workspace settings": "تنظیمات فضای کاری"
+  "Workspace settings": "تنظیمات فضای کاری",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "این کانتینر حاوی {n} فایل است. EU DSS با تنظیمات پیش‌فرض، کانتینرهایی با بیش از ۱۰۰۰ فایل را رد می‌کند."
 }

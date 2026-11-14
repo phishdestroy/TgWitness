@@ -9424,5 +9424,6 @@
   "Only with the Mark as opened button": "केवल \"मीडिया को खुला हुआ चिह्नित करें\" बटन के साथ",
   "Only with the Mark stories as viewed button": "केवल \"कहानियों को देखा हुआ चिह्नित करें\" बटन के साथ",
   "Mark as opened": "मीडिया को खुला हुआ चिह्नित करें",
-  "Workspace settings": "कार्यक्षेत्र की सेटिंग्स"
+  "Workspace settings": "कार्यक्षेत्र की सेटिंग्स",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "इस कंटेनर में {n} फ़ाइलें हैं। डिफ़ॉल्ट सेटिंग्स के साथ EU DSS 1000 से अधिक फ़ाइलों वाले कंटेनरों को अस्वीकार कर देता है।"
 }

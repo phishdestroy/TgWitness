@@ -9376,5 +9376,6 @@
   "Only with the Mark as opened button": "Chỉ với nút \"Đánh dấu phương tiện đã mở\"",
   "Only with the Mark stories as viewed button": "Chỉ với nút \"Đánh dấu các câu chuyện là đã xem\"",
   "Mark as opened": "Đánh dấu phương tiện đã mở",
-  "Workspace settings": "Cài đặt của không gian làm việc"
+  "Workspace settings": "Cài đặt của không gian làm việc",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Thùng chứa này chứa {n} tệp. EU DSS với cài đặt mặc định sẽ từ chối các thùng chứa có hơn 1.000 tệp."
 }

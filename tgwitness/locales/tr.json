@@ -9424,5 +9424,6 @@
   "Only with the Mark as opened button": "Yalnızca \"Medya dosyasını açılmış olarak işaretle\" düğmesi ile",
   "Only with the Mark stories as viewed button": "Yalnızca \"Hikayeleri okundu olarak işaretle\" düğmesi ile",
   "Mark as opened": "Medya dosyasını açılmış olarak işaretle",
-  "Workspace settings": "Çalışma alanının ayarları"
+  "Workspace settings": "Çalışma alanının ayarları",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Bu konteyner {n} dosya içerir. Varsayılan ayarlarla çalışan EU DSS, 1000'den fazla dosya içeren konteynerleri kabul etmez."
 }

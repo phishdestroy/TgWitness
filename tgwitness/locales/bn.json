@@ -9424,5 +9424,6 @@
   "Only with the Mark as opened button": "শুধুমাত্র \"মিডিয়া খোলা হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
   "Only with the Mark stories as viewed button": "শুধুমাত্র \"কাহিনীগুলো দেখা হয়েছে হিসেবে চিহ্নিত করুন\" বোতামের মাধ্যমে",
   "Mark as opened": "মিডিয়া খোলা হিসেবে চিহ্নিত করুন",
-  "Workspace settings": "ওয়ার্কস্পেসের সেটিংস"
+  "Workspace settings": "ওয়ার্কস্পেসের সেটিংস",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "এই কন্টেইনারে {n}টি ফাইল রয়েছে। ডিফল্ট সেটিংস সহ EU DSS ১০০০টির বেশি ফাইলের কন্টেইনার প্রত্যাখ্যান করে।"
 }

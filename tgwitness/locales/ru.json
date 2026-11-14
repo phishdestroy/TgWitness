@@ -9490,5 +9490,6 @@
   "Only with the Mark as opened button": "Только с помощью кнопки «Пометить медиафайлы как открытые»",
   "Only with the Mark stories as viewed button": "Только с помощью кнопки «Пометить истории как прочитанные»",
   "Mark as opened": "Пометить медиафайлы как открытые",
-  "Workspace settings": "Настройки рабочей области"
+  "Workspace settings": "Настройки рабочей области",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Этот контейнер содержит {n} файлов. EU DSS с настройками по умолчанию отклоняет контейнеры, содержащие более 1000 файлов."
 }

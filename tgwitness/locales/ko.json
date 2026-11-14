@@ -9376,5 +9376,6 @@
   "Only with the Mark as opened button": "\"미디어를 '열람됨'으로 표시\" 버튼을 통해서만",
   "Only with the Mark stories as viewed button": "“이야기를 '읽음'으로 표시하기” 버튼을 통해서만",
   "Mark as opened": "미디어를 '열람됨'으로 표시",
-  "Workspace settings": "워크스페이스 설정"
+  "Workspace settings": "워크스페이스 설정",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "이 컨테이너에는 {n}개의 파일이 들어 있습니다. EU DSS은 기본 설정에서 1,000개 이상의 파일이 포함된 컨테이너를 거부합니다."
 }

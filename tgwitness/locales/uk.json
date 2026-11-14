@@ -9520,5 +9520,6 @@
   "Only with the Mark as opened button": "Тільки за допомогою кнопки «Позначити медіа як відкриті»",
   "Only with the Mark stories as viewed button": "Тільки за допомогою кнопки «Позначити історії як переглянуті»",
   "Mark as opened": "Позначити медіа як відкриті",
-  "Workspace settings": "Налаштування робочого простору"
+  "Workspace settings": "Налаштування робочого простору",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Цей контейнер містить {n} файлів. EU DSS із налаштуваннями за замовчуванням відхиляє контейнери, що містять понад 1000 файлів."
 }

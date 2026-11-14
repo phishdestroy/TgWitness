@@ -185,6 +185,7 @@ export function createExports({root, tr, json, getSession, fmtTime, toast,downlo
           });
           const detail=make('details'),summary=make('summary',tr('SHA-256'));detail.append(summary,hash,copy);row.append(detail);
           if(entry.cache_warning)row.append(make('p',tr(entry.cache_warning),'hint'));
+          if(entry.format==='asice'&&entry.members>1000)row.append(make('p',tr('This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.',{n:entry.members}),'hint'));
           if(entry.available&&entry.id){const again=make('button',tr('Download again'),'secondary');again.type='button';
             again.addEventListener('click',async()=>{again.disabled=true;try{await downloadAgain(entry);}catch(error){toast(error.message,true);}finally{again.disabled=false;}});row.append(again);}
           if(entry.available&&entry.id&&!entry.encrypted&&['zip','asice'].includes(entry.format)){

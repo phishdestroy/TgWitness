@@ -9616,5 +9616,6 @@
   "Only with the Mark as opened button": "فقط باستخدام الزر «وضع علامة «مفتوح» على الوسائط»",
   "Only with the Mark stories as viewed button": "فقط باستخدام الزر «وضع علامة \"تمت مشاهدته\" على القصص»",
   "Mark as opened": "وضع علامة «مفتوح» على الوسائط",
-  "Workspace settings": "إعدادات مساحة العمل"
+  "Workspace settings": "إعدادات مساحة العمل",
+  "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "يحتوي هذا الحاوية على {n} ملفًا. يرفض EU DSS، عند استخدام الإعدادات الافتراضية، الحاويات التي تحتوي على أكثر من 1000 ملف."
 }
