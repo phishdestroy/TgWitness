@@ -252,9 +252,8 @@ record's hash, checks its signature against the export key and compares the coun
 manifest; the evidence export holds the complete hash chain. The report lists these messages under
 **Deletions and earlier versions**.
 
-Every report opens with **In brief**: one paragraph, then what the material shows and what it does
-not (who is behind an account, completeness of delivery, deletions before observation, clock time
-without a timestamp). The page's own seal stamp turns amber when the browser has checked the seal's
+Every report opens with **In brief**: one paragraph, then what the material shows and what the
+record includes. The page's own seal stamp turns amber when the browser has checked the seal's
 signature, not the page: a browser does not give a page its own bytes. It turns green only when
 the reader drops the file into the check at the end of the page and every byte matches, and only if
 the page shown is that file; otherwise it turns red.
