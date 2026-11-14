@@ -5,11 +5,20 @@
   <img src="../assets/presentation/casework-handbook.svg" width="1440" alt="TgWitness — Work the case. Keep the record. An illustrated sequence follows a captured message, its edit and the retained record.">
 </picture>
 
-# The investigation handbook
+# The TgWitness handbook
 
-From the first captured message to an export someone else can check.
+Download chats, follow changes or prepare a case. Start with the task you need.
 
-[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Start your first case](Getting-Started.md) · [How the record works](../HOW-IT-WORKS.md) · [Project](../../README.md)
+[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Set up TgWitness](Getting-Started.md) · [How the record works](../HOW-IT-WORKS.md) · [Project](../../README.md)
+
+## Start with your task
+
+| Task in the panel | Start here |
+| --- | --- |
+| **Just download** | [Export one chat](Chat-Export.md) or [download an account](../ACCOUNT-EXPORT.md). Read the HTML archive, save media and keep JSON for other tools. |
+| **Follow chats** | [Choose sources and coverage](Collection.md). Keep accessible history, captured edits and deletion notices. |
+| **Evidence for a case** | [Investigate saved records](Investigations.md), [prepare a report](../CASE_REPORTS.md) and [verify the export](Exports-and-Verification.md). |
+
 
 ## From a chat to a case.
 
@@ -24,6 +33,8 @@ From the first captured message to an export someone else can check.
 
 ## Your first investigation
 
+From the first captured message to an export someone else can check.
+
 1. [Connect a dedicated account](Accounts.md)
 2. [Pick sources and scope](Collection.md)
 3. [Follow the records across chats](Investigations.md)
@@ -33,7 +44,10 @@ Quick sanity check: send a test message in a chat you control, edit it, delete i
 should see the message, a second version, and the content still there after the deletion.
 Then verify the export and keep the result with the test archive.
 
-## Pick your task
+<a name="pick-your-task"></a>
+
+<details>
+<summary><strong>All handbook topics · panel, accounts, integrations, backups and troubleshooting</strong></summary>
 
 | I want to… | Open |
 | --- | --- |
@@ -50,6 +64,8 @@ Then verify the export and keep the result with the test archive.
 | Alerts, encrypted remote copy | [Notifications](Notifications.md) · [Off-site copy](Off-site-Copy.md) |
 | Run on a server, recover | [Server and Docker](Server-and-Docker.md) · [Backup and recovery](Backup-and-Recovery.md) |
 | Fix something, look up a term | [Troubleshooting](Troubleshooting.md) · [FAQ](FAQ.md) · [Glossary](Glossary.md) |
+
+</details>
 
 <details>
 <summary><strong>Setup and advanced guides</strong></summary>

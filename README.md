@@ -8,11 +8,12 @@
 <p align="center"><strong>Capture Telegram history. Follow the changes. Build a report others can verify.</strong></p>
 
 <p align="center">
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><strong>Try the workspace</strong></a> &nbsp; · &nbsp;
-  <a href="#quick-start"><strong>Install</strong></a> &nbsp; · &nbsp;
-  <a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a> &nbsp; · &nbsp;
-  <a href="https://github.com/phishdestroy/TgWitness/wiki">Handbook</a>
+  <a href="#quick-start"><img src="docs/assets/presentation/readme-action-install.svg" width="228" height="58" alt="Install TgWitness: Linux, macOS and Windows"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/readme-action-demo.svg" width="228" height="58" alt="Try the workspace: explore a fictional case"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/readme-action-handbook.svg" width="228" height="58" alt="Open the handbook: tasks, guides and answers"></a>
 </p>
+
+<p align="center"><a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a> · <a href="#what-tgwitness-does">What you can do</a> · <a href="docs/CHANGELOG.md">Release notes</a></p>
 
 <p align="center">
   <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · pre-release"></a>
@@ -67,6 +68,24 @@ The installer checks package hashes and release signatures against its embedded 
 
 ## Why TgWitness
 
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-features-mobile.svg">
+  <img src="docs/assets/presentation/readme-features.svg" width="1200" alt="Three animated workflows: export a chat to HTML and JSON, find a shared link across recorded chats, and retain captured versions after a deletion notice.">
+</picture>
+
+Choose a task when you open the panel:
+
+| Task | Result |
+| --- | --- |
+| **Just download** | Read chats offline in a Telegram-style HTML view, keep Telegram Desktop-compatible JSON and save the selected media. |
+| **Follow chats** | Collect accessible history and keep observing new messages, captured edits and deletion notices. |
+| **Evidence for a case** | Select records, add a cover and charts, then share PDF, HTML or JSON reports with verification data. |
+
+<details>
+<summary><strong>All capabilities · people, reports, accounts, Secret Chats and verification</strong></summary>
+
 | You want to… | What you get |
 | --- | --- |
 | **Keep what was said** | Messages, captured edits, deletion notices and preserved files in a signed journal. [Collection →](docs/COLLECTION.md) |
@@ -76,23 +95,34 @@ The installer checks package hashes and release signatures against its embedded 
 | **Work with Secret Chats** | An integrated conversation view and exports for chats created or accepted by TgWitness, using a protocol module the panel installs with one button. [Secret Chats →](docs/PSEUDO-SECRET.md) |
 | **Let someone check the result** | Signed archives, a standalone verifier, retained checkpoints and optional timestamps, GitHub acquisition attestations or Intel TDX measurements. [Checks →](docs/EVIDENCE.md) |
 
+</details>
+
+<details>
+<summary><strong>Inside a download · readable chats, JSON, media and reports</strong></summary>
+
+For an account export, extract the ZIP and open `index.html`. It links to the selected chat views, report, coverage information and verification steps. Choose HTML and JSON together to include both the Telegram-style reader and `result.json` for other tools. Downloaded media stays with the archive.
+
+A one-chat export includes `chat.html` for offline reading and `chat.json` for analysis. Reports have their own controls for the cover, selected messages, charts and output format. Keep the original signed ZIP when sharing or making a working copy.
+
+[Account downloads](docs/ACCOUNT-EXPORT.md) · [Export one chat](docs/wiki/Chat-Export.md) · [Report studio](docs/CASE_REPORTS.md)
+
+</details>
+
 Self-hosted. Encrypted session storage. Localhost panel by default. No telemetry.
 Source visibility, unavailable data and collection gaps remain visible in the saved record.
 
-## From a conversation to a case
+<a name="from-a-conversation-to-a-case"></a>
 
-<picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-features-mobile.svg">
-  <img src="docs/assets/presentation/readme-features.svg" width="1200" alt="Three animated workflows: export a chat to HTML and JSON, find a shared link across recorded chats, and retain captured versions after a deletion notice.">
-</picture>
+<details>
+<summary><strong>From a conversation to a case · collect, investigate, share</strong></summary>
 
 1. **Collect.** Choose chats, history and file limits. Progress, pauses and retries stay visible.
 2. **Investigate.** Search saved material, compare versions and connect findings on a Case Board.
 3. **Share.** Select relevant records, preview the report and deliver it with its verification data.
 
 [Search](docs/SEARCH.md) · [Investigation tools](docs/INVESTIGATION-MODE.md) · [Chat exports](docs/wiki/Chat-Export.md) · [Case packages](docs/CASE_REPORTS.md)
+
+</details>
 
 <a name="how-it-works"></a>
 
@@ -154,13 +184,16 @@ TgWitness takes no side: the same checks apply to the operator and the project.
 
 <a name="review-notes"></a>
 
-## Review notes
+<details>
+<summary><strong>Review notes · development history, tests, verifier and defaults</strong></summary>
 
 - **History.** TgWitness was developed and tested for about six months before publication. This repository starts with a squashed import (`8fb40fe0e`, 658 files). [Development history](docs/QUESTIONS-AND-CHECKS.md#development-history)
 - **Tests.** The regression suite of 126 test modules (about 950 test functions) runs in a private validation environment with synthetic accounts and a fake Telegram transport; test files are excluded from Git and source archives. Public CI runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and verifier fuzzing. [Tests and CI](docs/QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)
 - **Verifier.** `tgwitness/verify.py` is assembled from 21 modules in `tgwitness/verifier/`. The journal and signature checks (`common`, `chain`, `journal`) total 22 KB; a third of the file is compressed translation data. [Verifier sources](tgwitness/verifier/README.md)
 - **Telegram client.** Sign-in uses built-in public API pairs unless you enter your own, and each observation records which pair was used. [API pairs](docs/QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
 - **Defaults.** New workspaces connect through public MTProxy lists. The vault key stays in the data directory unless a new installation uses an external master key. [Connection security](docs/CONNECTION-SECURITY.md#external-master-key)
+
+</details>
 
 ## Explore more
 

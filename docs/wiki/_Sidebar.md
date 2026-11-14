@@ -2,6 +2,8 @@
 
 - [Home](Home.md)
 - [Getting started](Getting-Started.md)
+- [Download chats](Chat-Export.md)
+- [Reports and charts](../CASE_REPORTS.md)
 - [Panel guide](../PANEL.md)
 
 **01 · Connect and capture**
