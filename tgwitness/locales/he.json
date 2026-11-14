@@ -9050,5 +9050,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram מדווחת שהצ'אט כבר אינו קיים.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ההגנה באמצעות סיסמה ב-ZIP משתמשת ב-WinZip AES (מתיחת מפתח חלשה). השתמשו בסיסמה ארוכה ואקראית של 20 תווים ומעלה, או בחרו בהצפנה החזקה יותר עבור ייצוא של קבצים רגישים.",
   "Transport route checked for this connection.": "נתיב התקשורת נבדק עבור חיבור זה.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "יש לשמור צ'אטים ותמונות פעם אחת; קבצים אחרים נבחרים תחת תיעוד וקבצים. שום דבר לא ממשיך לפעול ברקע. הארכיון חתום, ו-verify.py בודק כל קובץ בתוכו."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "יש לשמור צ'אטים ותמונות פעם אחת; קבצים אחרים נבחרים תחת תיעוד וקבצים. שום דבר לא ממשיך לפעול ברקע. הארכיון חתום, ו-verify.py בודק כל קובץ בתוכו.",
+  "running": "פועל",
+  "cancelled": "בוטל"
 }

@@ -8259,7 +8259,7 @@
   "route check": "রুট যাচাই",
   "route check · WARP": "রুট যাচাই · WARP",
   "routes": "রুটসমূহ",
-  "selecting": "নির্বাচন",
+  "selecting": "নির্বাচন করছে",
   "service types": "সেবা প্রকার",
   "session · API keys · signing key": "সেশন · API কী · স্বাক্ষর কী",
   "some exceptions set in Telegram could not be kept; edit them here or in the Telegram app": "টেলিগ্রামে সেট করা কিছু ব্যতিক্রম রাখা যায়নি; সেগুলো এখানে বা টেলিগ্রাম অ্যাপে সম্পাদনা করুন",
@@ -9002,5 +9002,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram রিপোর্ট করে যে চ্যাটটি আর নেই।",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP পাসওয়ার্ড সুরক্ষায় WinZip AES (দুর্বল কী স্ট্রেচিং) ব্যবহার করা হয়। ২০টিরও বেশি অক্ষরের একটি দীর্ঘ এলোমেলো পাসফ্রেজ ব্যবহার করুন, অথবা সংবেদনশীল এক্সপোর্টের জন্য শক্তিশালী এনক্রিপশন নির্বাচন করুন।",
   "Transport route checked for this connection.": "এই সংযোগের জন্য পরিবহন পথ যাচাই করা হয়েছে।",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "চ্যাট এবং ছবি একবার সংরক্ষণ করুন; অন্যান্য ফাইল রেকর্ডিং ও ফাইল-এর অধীনে নির্বাচিত হয়। পটভূমিতে কিছুই চলতে থাকে না। আর্কাইভটি স্বাক্ষরিত, এবং verify.py এতে থাকা প্রতিটি ফাইল যাচাই করে।"
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "চ্যাট এবং ছবি একবার সংরক্ষণ করুন; অন্যান্য ফাইল রেকর্ডিং ও ফাইল-এর অধীনে নির্বাচিত হয়। পটভূমিতে কিছুই চলতে থাকে না। আর্কাইভটি স্বাক্ষরিত, এবং verify.py এতে থাকা প্রতিটি ফাইল যাচাই করে।",
+  "running": "চলমান",
+  "cancelled": "বাতিল"
 }

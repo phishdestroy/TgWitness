@@ -8954,5 +8954,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram melaporkan bahawa sembang itu tidak wujud lagi.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "Perlindungan kata laluan ZIP menggunakan WinZip AES (panjangan kunci lemah). Gunakan frasa laluan rawak panjang dengan 20+ aksara, atau pilih penyulitan lebih kuat untuk eksport sensitif.",
   "Transport route checked for this connection.": "Laluan pengangkutan diperiksa untuk sambungan ini.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Simpan sembang dan foto sekali sahaja; fail lain dipilih di bawah Rakaman dan fail. Tiada apa yang terus berjalan di latar belakang. Arkib itu ditandatangani, dan verify.py memeriksa setiap fail di dalamnya."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Simpan sembang dan foto sekali sahaja; fail lain dipilih di bawah Rakaman dan fail. Tiada apa yang terus berjalan di latar belakang. Arkib itu ditandatangani, dan verify.py memeriksa setiap fail di dalamnya.",
+  "running": "berjalan",
+  "cancelled": "dibatalkan"
 }

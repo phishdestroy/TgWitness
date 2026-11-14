@@ -9194,5 +9194,7 @@
   "Telegram reports that the chat no longer exists.": "يُبلغ Telegramُ بأن المحادثة لم تعد موجودة.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "تستخدم حماية كلمة مرور ملفات ZIP طريقة WinZip AES (تمديد المفتاح الضعيف). استخدم عبارة مرور عشوائية طويلة مكونة من 20 حرفًا أو أكثر، أو اختر «التشفير الأقوى» لعمليات التصدير الحساسة.",
   "Transport route checked for this connection.": "تم التحقق من مسار النقل لهذا الاتصال.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "يتم حفظ المحادثات والصور مرة واحدة؛ ويتم اختيار الملفات الأخرى ضمن التسجيل والملفات. لا يظل أي شيء قيد التشغيل في الخلفية. الأرشيف موقّع، ويقوم verify.py بالتحقق من كل ملف فيه."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "يتم حفظ المحادثات والصور مرة واحدة؛ ويتم اختيار الملفات الأخرى ضمن التسجيل والملفات. لا يظل أي شيء قيد التشغيل في الخلفية. الأرشيف موقّع، ويقوم verify.py بالتحقق من كل ملف فيه.",
+  "running": "قيد التشغيل",
+  "cancelled": "ملغى"
 }

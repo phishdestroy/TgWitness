@@ -8259,7 +8259,7 @@
   "route check": "vérification de route",
   "route check · WARP": "vérification de route · WARP",
   "routes": "routes",
-  "selecting": "sélection",
+  "selecting": "sélection en cours",
   "service types": "types de services",
   "session · API keys · signing key": "session · clés API · clé de signature",
   "some exceptions set in Telegram could not be kept; edit them here or in the Telegram app": "Certaines exceptions définies dans Telegram n’ont pas pu être conservées ; modifiez-les ici ou dans l’application Telegram",
@@ -9010,5 +9010,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram indique que la conversation n'existe plus.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "La protection par mot de passe ZIP utilise WinZip AES (étirement de clé faible). Utilisez une phrase de passe aléatoire longue de plus de 20 caractères, ou choisissez le « cryptage plus fort » pour les exportations sensibles.",
   "Transport route checked for this connection.": "Itinéraire de transport vérifié pour cette connexion.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Les discussions et les photos sont sauvegardées une seule fois ; les autres fichiers sont sélectionnés sous Enregistrement et fichiers. Aucun processus ne continue de s’exécuter en arrière-plan. L’archive est signée, et verify.py vérifie chaque fichier qu’elle contient."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Les discussions et les photos sont sauvegardées une seule fois ; les autres fichiers sont sélectionnés sous Enregistrement et fichiers. Aucun processus ne continue de s’exécuter en arrière-plan. L’archive est signée, et verify.py vérifie chaque fichier qu’elle contient.",
+  "running": "en cours",
+  "cancelled": "annulé"
 }

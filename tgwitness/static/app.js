@@ -6139,7 +6139,7 @@ function renderMulti(){
   if(state.multiChecked!==state.chat)void resumeMulti();
   const x=state.multi,box=$("export-box"),known=x&&!["none","unknown"].includes(x.phase);
   const running=multiActive(x),mine=known&&x.chat_id===state.chat;
-  const percent=known&&x.ranges_total?Math.min(running?99:100,Math.floor(x.ranges_done*100/x.ranges_total)):null;
+  const percent=known?exportPercent(x,running):null;
   $("chat-export-label").textContent=running&&mine?tr("Exporting")+(percent!==null?" "+percent+"%":"…"):tr("Export chat");
   show("chat-export-get",!!(mine&&x.phase==="done"&&x.ready));
   if(!mine||(!running&&state.multiHidden===x.id)){show("export-box",false);return;}
@@ -6159,7 +6159,7 @@ function renderMulti(){
   if(x.phase==="paused"&&x.error)box.append(node("p","hint",tr(x.error)));
   if(x.wait_until&&x.phase==="paused")box.append(node("p","hint",tr("Requests paused until")+": "+formatTime(new Date(x.wait_until*1000).toISOString())));
   if(Object.keys(x.transport_close_errors||{}).length)box.append(node("p","hint",tr("Takeout finalization is pending. The saved archive remains verifiable.")));
-  box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+tr(x.phase)));
+  box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+(EXPORT_PHASES[x.phase]||x.phase)));
   if(x.performance){
     const p=x.performance,s=p.phase_seconds,seconds=value=>tr("{n} s",{
       n:value.toLocaleString(undefined,{maximumFractionDigits:1})});
@@ -6236,6 +6236,8 @@ function saveMulti(button){return busy(button,async()=>{
   renderMulti();toast(tr("Signed chat export saved."));
 });}
 let linkPlan=null,linkJob=null,linkPoll=null;
+const EXPORT_PHASES={preparing:tr("preparing"),running:tr("running"),selecting:tr("selecting"),packaging:tr("packaging"),done:tr("done"),
+  paused:tr("paused"),failed:tr("failed"),cancelled:tr("cancelled"),waiting:tr("waiting")};
 const LINK_REASONS={unavailable:"workspace unavailable",no_session:"no Telegram account connected",signed_out:"signed out: sign in again",
   observing:"observing: pause observation to include it",busy:"busy with another task",not_member:"not a member of this chat"};
 function linkEstimate(){
@@ -6270,6 +6272,7 @@ function renderLinkPlan(){
   for(const a of p.accounts){
     const row=node("label","export-account"),box2=node("input"),who=node("span","export-account-who"),text=node("span");
     box2.type="checkbox";box2.name="link-account";box2.value=a.profile_id;box2.checked=a.chosen;box2.disabled=!a.usable;
+    if(a.profile_id==="default"&&a.label==="Main workspace")a.label=tr("Main workspace");
     text.append(node("b","",a.label),node("small","",a.usable?[a.username?"@"+a.username:"",a.account_id?"ID "+a.account_id:""].filter(Boolean).join(" · "):
       a.reason==="rate_limited"?tr("Telegram rate limit: wait until {time}.",{time:formatTime(new Date(a.until*1000).toISOString())}):tr(LINK_REASONS[a.reason]||a.reason)));
     who.append(avatarNode(a.account_id,a.username||a.label,"",a.profile_id),text);row.append(box2,who);accounts.append(row);
@@ -6294,15 +6297,20 @@ async function startLinkExport(){
   linkJob=x;renderLinkJob();pollLinkJob(x.id);
   toast(tr("Export started with {n} accounts reserved exclusively for this task.",{n:profiles.length}));
 }
+function exportPercent(x,running){
+  // One long range would stay at 0% until it ends; the message count moves while it is read.
+  const shares=[x.ranges_total?x.ranges_done/x.ranges_total:null,x.total?(x.captured||0)/x.total:null].filter(share=>share!==null);
+  return shares.length?Math.min(running?99:100,Math.floor(Math.max(...shares)*100)):null;
+}
 function renderLinkJob(){
   const x=linkJob,box=$("link-export-plan");box.replaceChildren();show("link-export-plan",true);
-  const running=multiActive(x),percent=x.ranges_total?Math.min(running?99:100,Math.floor(x.ranges_done*100/x.ranges_total)):null;
+  const running=multiActive(x),percent=exportPercent(x,running);
   const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
   box.append(node("b","",running?tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts):
     x.phase==="done"?tr(x.ready?"Export ready: {captured} messages, signed.":"Export saved: {captured} messages, signed.",counts):
     x.phase==="failed"?tr("Export failed: {error}",{error:x.error||tr("unknown error")}):x.phase==="paused"?tr("Export paused; saved chunks are retained."):tr("Export cancelled.")));
   if(running&&percent!==null){const bar=node("progress","export-bar");bar.max=100;bar.value=percent;bar.setAttribute("aria-label",tr("Export progress"));box.append(bar);}
-  box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+tr(x.phase)));
+  box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+(EXPORT_PHASES[x.phase]||x.phase)));
   if(x.phase==="paused"&&x.error)box.append(node("p","hint",tr(x.error)));
   if(x.performance)box.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
     messages:x.performance.new_messages.toLocaleString(LANG),time:tr("{n} s",{n:Math.round(x.performance.elapsed_seconds).toLocaleString(LANG)})})));

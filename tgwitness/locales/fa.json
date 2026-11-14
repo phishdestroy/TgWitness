@@ -8259,7 +8259,7 @@
   "route check": "بررسی مسیر",
   "route check · WARP": "بررسی مسیر · WARP",
   "routes": "مسیرها",
-  "selecting": "انتخاب",
+  "selecting": "انتخاب در حال انجام",
   "service types": "انواع سرویس‌ها",
   "session · API keys · signing key": "نشست · کلیدهای API · کلید امضا",
   "some exceptions set in Telegram could not be kept; edit them here or in the Telegram app": "برخی استثناهای تنظیم‌شده در تلگرام نمی‌توانند حفظ شوند؛ آن‌ها را اینجا یا در اپلیکیشن تلگرام ویرایش کنید.",
@@ -9002,5 +9002,7 @@
   "Telegram reports that the chat no longer exists.": "Telegram گزارش می‌دهد که این چت دیگر وجود ندارد.",
   "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "حفاظت از رمز عبور ZIP از WinZip AES (کشیدن کلید ضعیف) استفاده می‌کند. از یک عبارت عبور تصادفی و طولانی با بیش از ۲۰ کاراکتر استفاده کنید، یا برای صادرات حساس، رمزگذاری قوی‌تر را انتخاب کنید.",
   "Transport route checked for this connection.": "مسیر انتقال برای این اتصال بررسی شد.",
-  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "گفتگوها و عکس‌ها را یک‌بار ذخیره کنید؛ سایر فایل‌ها تحت ضبط و فایل‌ها انتخاب می‌شوند. هیچ چیزی در پس‌زمینه اجرا نمی‌شود. آرشیو امضا شده است و verify.py هر فایل درون آن را بررسی می‌کند."
+  "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "گفتگوها و عکس‌ها را یک‌بار ذخیره کنید؛ سایر فایل‌ها تحت ضبط و فایل‌ها انتخاب می‌شوند. هیچ چیزی در پس‌زمینه اجرا نمی‌شود. آرشیو امضا شده است و verify.py هر فایل درون آن را بررسی می‌کند.",
+  "running": "در حال اجرا",
+  "cancelled": "لغو شده"
 }
