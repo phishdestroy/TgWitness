@@ -9656,5 +9656,6 @@
   "Search match": "Arama eşleşmesi",
   "Search matched an earlier saved version.": "Arama, daha önce kaydedilmiş bir sürümle eşleşti.",
   "Search saved messages": "Kaydedilmiş mesajları arama",
-  "{n} saved versions": "{n} kaydedilmiş sürüm"
+  "{n} saved versions": "{n} kaydedilmiş sürüm",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Proxy kaynağı ayarları okunamıyor. Proxy listelerini kullanmadan önce proxy-sources.json dosyasını geri yükleyin."
 }

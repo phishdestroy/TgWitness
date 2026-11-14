@@ -9608,5 +9608,6 @@
   "Search match": "검색 일치",
   "Search matched an earlier saved version.": "검색 결과 이전에 저장된 버전과 일치했습니다.",
   "Search saved messages": "저장된 메시지 검색",
-  "{n} saved versions": "{n}개의 저장된 버전"
+  "{n} saved versions": "{n}개의 저장된 버전",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "프록시 소스 설정을 읽을 수 없습니다. 프록시 목록을 사용하기 전에 proxy-sources.json을 복원하세요."
 }

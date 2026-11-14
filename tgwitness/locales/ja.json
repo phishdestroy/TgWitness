@@ -9608,5 +9608,6 @@
   "Search match": "検索の一致",
   "Search matched an earlier saved version.": "検索の結果、以前に保存されたバージョンと一致しました。",
   "Search saved messages": "保存されたメッセージの検索",
-  "{n} saved versions": "{n}件の保存バージョン"
+  "{n} saved versions": "{n}件の保存バージョン",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "プロキシソースの設定を読み取れません。プロキシリストを使用する前に proxy-sources.json を復元してください。"
 }

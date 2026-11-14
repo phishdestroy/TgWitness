@@ -9656,5 +9656,6 @@
   "Search match": "سرچ میچ",
   "Search matched an earlier saved version.": "سرچ نے ایک پہلے محفوظ شدہ ورژن سے میل کھایا۔",
   "Search saved messages": "محفوظ شدہ پیغامات تلاش کریں",
-  "{n} saved versions": "{n} محفوظ شدہ ورژنز"
+  "{n} saved versions": "{n} محفوظ شدہ ورژنز",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "پراکسی ذرائع کی ترتیبات پڑھی نہیں جا سکتیں۔ پراکسی فہرستیں استعمال کرنے سے پہلے proxy-sources.json بحال کریں۔"
 }

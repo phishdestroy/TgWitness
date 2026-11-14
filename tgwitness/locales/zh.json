@@ -9608,5 +9608,6 @@
   "Search match": "搜索匹配",
   "Search matched an earlier saved version.": "搜索结果匹配了较早的已保存版本。",
   "Search saved messages": "搜索已保存的消息",
-  "{n} saved versions": "{n}个保存版本"
+  "{n} saved versions": "{n}个保存版本",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "无法读取代理来源设置。请先恢复 proxy-sources.json，再使用代理列表。"
 }

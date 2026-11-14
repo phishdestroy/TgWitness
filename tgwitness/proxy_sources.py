@@ -77,8 +77,10 @@ def source_id(kind, text):
 def load(root):
     try:
         return SourceSettings.model_validate_json((Path(root) / SETTINGS).read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+    except FileNotFoundError:
         return SourceSettings()
+    except (OSError, ValueError):
+        raise ValueError("Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.") from None
 
 
 def save(root, settings):

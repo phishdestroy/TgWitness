@@ -9608,5 +9608,6 @@
   "Search match": "Kecocokan pencarian",
   "Search matched an earlier saved version.": "Pencarian menemukan versi yang disimpan sebelumnya.",
   "Search saved messages": "Pencarian pesan yang disimpan",
-  "{n} saved versions": "{n} versi yang disimpan"
+  "{n} saved versions": "{n} versi yang disimpan",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Pengaturan sumber proxy tidak dapat dibaca. Pulihkan proxy-sources.json sebelum menggunakan daftar proxy."
 }

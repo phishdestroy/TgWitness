@@ -283,7 +283,10 @@ def host(state):
 
 def pool(ctx, state):
     catalog = getattr(ctx, "public_proxies", None)
-    settings = catalog.settings() if catalog else proxy_sources.load(ctx.root)
+    try:
+        settings = catalog.settings() if catalog else proxy_sources.load(ctx.root)
+    except ValueError:
+        settings = proxy_sources.SourceSettings(disabled=[item["id"] for item in PROXY_LISTS], countries=False)
     token = False
     try:
         token = bool(catalog and catalog.github_token())
