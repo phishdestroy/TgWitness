@@ -25,13 +25,28 @@
 
 ## Unreleased
 
+- Concurrent connection restores share one client and one connection attempt per
+  workspace. Interrupted setup releases waiting callers; an attempt whose credentials,
+  client or authorization state changed cannot report success for the replacement.
+- Repeated attachment jobs stay queued while a matching transfer runs, leaving
+  download slots available for other files. Priority, retry delays and history
+  ownership are retained. Existing queues gain the transfer index without rewriting
+  signed observations, and every completed job still records its own signed outcome.
+
+- Chat exports download repeated attachment representations once per export directory
+  and verify unrelated retained files concurrently. Each message keeps its own file
+  reference; size and SHA-256 checks still run before reuse. Unique temporary paths
+  and synchronized file-index updates preserve parallel copies, cancellation and retry.
+
 - Attachment jobs for the same file now wait for one transfer and independently verify the saved bytes before reuse, preserving a signed outcome for each observation. Different files and server-hash reads run concurrently; hash requests share the bounded file-request pool and no longer hold the ordinary Telegram request queue. Cancellation, incomplete hash reads and failed transfers leave later jobs able to continue.
 
 - Connection setup reuses a fresh preflight result for the same route instead of repeating its handshake immediately on Apply. Startup reads access and workspaces concurrently, chat export discovery waits for a selected chat, and rapid wizard/preference edits save only the latest queued state. Stale route results are checked again; workspace changes cancel unsent saves.
 - Initial chat loading retries failed stages with a persisted delay and bounds stalled requests by the operation timeout. History is saved before optional profile enrichment; completed stages survive restart and are not repeated during a retry. Chats and Home expose delayed work. Snapshot reads reject messages from another chat, invalid ID order or an older-page boundary violation, and stop when the source is disabled; saved records and signed interruption evidence are retained.
+- Live updates, operator requests, background checks and exports use separate request lanes. Slow responses do not hold another lane; pacing and Telegram waits for the same method remain shared. Updates stay ordered within each chat. Account-wide deletions also order later updates across chats. Shutdown joins pending handlers before recording observation stopped and records a gap if the drain deadline expires. Extra short polling covers up to 50 selected channels, with priority sources first, using Telegram’s interval (10 seconds by default, bounded to 2–120 seconds). Other enabled chats continue normal update delivery. Opening a chat bypasses history pacing and history slots while still respecting server waits.
 - Observation no longer has to be paused for exports on the same account. An account export, a chat export and loading messages into a chat run while observation keeps recording; one export uses an account at a time, and full history can also run alongside observation. The account page, the Home dashboard and the export dialogs say which tasks wait for each other.
 - Chats: opening an enabled chat that has no saved messages loads its latest 100 messages from Telegram, and **Load earlier messages from Telegram** at the top of a chat reads the next older page. Chats added by the folder and whole-account scopes get their latest messages once, as set under **When a new chat or bot appears** (100 by default for new workspaces). These reads are recorded as history snapshots.
 - Account export: while it discovers chats, the job card shows the stage, the number of chats found, the chat being checked and a progress bar. Chats are checked up to four at a time.
+- Accounts: when Telegram rejects an account, panel actions and a paused account export name the cause: frozen, banned, deleted, or a session used in two places at once. A frozen account is detected as soon as it connects, not only while observing. An independent login checks the donor for a freeze before asking Telegram to approve the new session. If Telegram refuses the donor before approval, the unapproved key is discarded, so the import can start again; another donor also replaces a saved key that Telegram reports as not signed in. A key that is signed in or waiting for its two-step password is kept.
 - Timestamps: a pass that could not run because no route for outside requests existed is repeated as soon as a route appears, and such a pass no longer counts as a failure of the timestamp services.
 - Network map: the line of a connected account passes through the published Telegram range that contains its data centre address. Certificate status requests of timestamp services are shown under **TSA · OTS**; **Unlisted host** is kept for requests no component accounts for.
 - Accounts: each connected account has **Profile and privacy** and **Account security**; the account page has **Profile and privacy** next to sessions and the two-step password. The check list at the end of first-run setup groups external services by kind.
@@ -104,7 +119,10 @@
 - Settings: each section opens at its own address and closes with **Back to settings**, the close button, Escape or the browser's Back button. **Which chats?** is edited in place instead of reopening first setup. First setup opened after setup is complete has a close button. Analysis → Insights loads the selected chat at once and explains an empty journal instead of showing zeros.
 - Settings open with the recommended values in use and four everyday sections; goal, files, record protection, notifications and the expert tools move under **Advanced settings**. Every change can be undone at once or later from **Recent changes**, custom file limits included. Switches, choice buttons and a short explanation under each setting replace bare checkboxes and question marks; the interface level moves to **Language, time and appearance**.
 - `verify.py --tsa-ca` and `python -m tgwitness.anchor verify` check the RFC 3161 signature, the signing certificate and its chain in Python with the `cryptography` library. OpenSSL is no longer needed, also on Windows; `--openssl` is removed from `tgwitness.anchor verify`.
-- When **Hide online after actions** is on, the first sign-in of a newly created session asks Telegram to show the account as offline instead of announcing it online, so starting observation no longer briefly reveals the account as just-online to anyone who can see its last seen.
+- Proxy lists: an unreadable or invalid `proxy-sources.json` no longer falls back to the defaults, which turn on every bundled list and country lookups for proxy addresses. Proxy lists stay unused and the panel asks to restore the file; saving the list settings again replaces it.
+- **Record the other side’s typing in the journal**: `visibility.peer_typing` and `secret_chat.peer_typing` records list the reported actions in order with the times they were received (`timeline`), with the forum topic (`top_msg_id`), the upload progress at the first and last notice of a step and the plain fields of the action, such as the emoji of an emoji interaction. A burst keeps its first 100 steps and counts the notices after them.
+- History snapshots record `returned`, `captured`, `already_recorded` and `skipped_own` separately. `telegram_returned_none` includes the observed restriction flags when Telegram returns no messages. `all_already_recorded` is used only when every returned message already has saved content; policy exclusions are not described as preservation.
+- When **Hide online after actions** is on, the first sign-in of a newly created session sends an offline status request in place of the online request. This records the requested behavior; Telegram controls the status delivered to other clients.
 
 ## 0.9.3 preview · 11 November 2026
 

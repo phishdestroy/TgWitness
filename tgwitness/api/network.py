@@ -128,11 +128,15 @@ async def network_proxies(request: Request, *, ctx=Depends(current_context)):
 
 async def network_proxies_check(request: Request, *, ctx=Depends(current_context)):
     ctx.require_live()
-    if ctx.shared_pool.check_task is None:
-        ctx.shared_pool.check_task = asyncio.create_task(
-            ctx.shared_pool.check_all(ctx.app.state.collector.outside_route())
-        )
-    return ctx.proxy_view(request.state.principal)
+    try:
+        ctx.shared_pool.catalog.settings()
+        if ctx.shared_pool.check_task is None:
+            ctx.shared_pool.check_task = asyncio.create_task(
+                ctx.shared_pool.check_all(ctx.app.state.collector.outside_route())
+            )
+        return ctx.proxy_view(request.state.principal)
+    except ValueError as exc:
+        raise HTTPException(503, str(exc)) from None
 
 
 async def network_sources(
@@ -141,7 +145,10 @@ async def network_sources(
     ctx.require_live()
     catalog = ctx.shared_pool.catalog
     async with catalog.lock:
-        before = {item.id for item in catalog.settings().custom}
+        try:
+            before = {item.id for item in catalog.settings().custom}
+        except ValueError:
+            before = set()
         known = {source["id"] for source in proxy_catalog.SOURCES}
         if set(body.disabled) - known:
             raise HTTPException(422, "Unknown bundled list.")

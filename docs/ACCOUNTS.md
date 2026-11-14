@@ -114,6 +114,11 @@ tokens or API hashes. They never accept terms or install updates. A request
 failure or FloodWait stops subsequent requests; a missing result stays unknown.
 Local checks can still report their results while network checks are skipped.
 
+Concurrent requests to restore one workspace's connection share its client and
+wait for its connection setup to finish. A failed or cancelled attempt releases
+the next request to retry. If the saved credentials, client or authorization state
+change during setup, the older attempt stops instead of reporting a ready connection.
+
 FloodWait diagnostics retain the failed TL method, any Takeout/range wrappers,
 the server-requested wait and the effective deadline in `telegram.backoff`.
 Connection details show the method and deadline while requests are paused.
@@ -253,6 +258,11 @@ or asks for the password. A rejected imported password returns to the password f
 Passwords are not saved. The candidate key is saved encrypted in
 `independent_login.enc`, including changes during data-centre migration. After an
 interruption, select the same donor and this option to resume the saved candidate.
+The donor is checked with `help.getAppConfig` before the approval; a frozen account
+stops there. If Telegram refuses the donor before approving the login, the unapproved
+candidate key is discarded and the import can start again. Another donor replaces a
+saved candidate only when Telegram reports that candidate as not signed in; a
+candidate that is signed in or waiting for its 2FA password is kept.
 The workspace remains reserved for that account; failed completion does not delete
 the new workspace. Keep its data directory and vault key. The final credentials and
 `account.authorized` journal record include the import method, input formats and
@@ -547,8 +557,8 @@ health shows **Download the account loss report**: a signed JSON file with the j
 of the 24 hours before the loss, namely connections, routes, sessions, account notices and coverage
 gaps, each with its journal hash and signature. Check it with
 `python verify.py tgwitness-account-loss.json --fingerprint COLLECTOR_FP`; the evidence export
-holds the complete hash chain. A frozen account is also detected while observing, and its sending and joining
-actions are turned off.
+holds the complete hash chain. A frozen account is also detected when it connects and while observing, and its
+sending and joining actions are turned off.
 
 ## Keeping account files safe
 
