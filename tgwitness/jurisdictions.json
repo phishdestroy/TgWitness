@@ -1052,7 +1052,7 @@
         "Record hashes and transfers",
         "Identify the witness who explains the collection"
       ],
-      "local": "Keep the original files, video and a description of the collection method. The court requires the best evidence a party can produce and may disallow evidence that is not the best available. The export software's signature is not a qualified electronic signature and does not prove who sent a message.",
+      "local": "Keep the original files, video and a description of the collection method. The court requires the best evidence a party can produce and may disallow evidence that is not the best available. The export software's signature is not a qualified electronic signature; it shows that the exported bytes are unchanged since signing, and who sent a message is shown by other evidence.",
       "local_criminal": "In criminal proceedings the fullest and most satisfactory proof available must be produced. Keep originals, hash values and a record of every transfer, and identify a witness who can explain the collection. Confirm the procedure with counsel.",
       "sources": [
         {

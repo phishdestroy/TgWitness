@@ -138,7 +138,7 @@
     },
     {
       "checked_at": "2026-11-14",
-      "scope": "Added criminal-route references confirmed in Supreme Court decisions and reviews and in trust-list pages of the central certification authority. zakon.rada.gov.ua was not reachable from the research hosts on this date, so the earlier statute references (Law 2155-VIII art. 18 and 26, CPC art. 256) were not re-checked against the statute text. data_access_basis and dpa stay empty: no primary source was opened for them. Research draft for review by a Ukrainian lawyer; it does not establish admissibility.",
+      "scope": "Added criminal-route references confirmed in Supreme Court decisions and reviews and in trust-list pages of the central certification authority. zakon.rada.gov.ua was not reachable from the research hosts on this date, so the earlier statute references (Law 2155-VIII art. 18 and 26, CPC art. 256) were not re-checked against the statute text. data_access_basis and dpa stay empty: no primary source was opened for them. Research draft for review by a Ukrainian lawyer; admissibility is decided by the court.",
       "sources": [
         "https://reyestr.court.gov.ua/Review/137226568",
         "https://reyestr.court.gov.ua/Review/88265263",

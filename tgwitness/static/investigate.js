@@ -795,7 +795,7 @@
     own.type = 'password'; own.placeholder = tr('Passphrase, at least 20 characters'); own.hidden = true;
     own.autocomplete = 'new-password'; own.setAttribute('aria-label', tr('Passphrase, at least 20 characters'));
     mode.addEventListener('change', () => {own.hidden = mode.value !== 'own';});
-    const where = node('select'), draft = node('p', 'hint', tr('Research draft: built from published sources and not reviewed by a lawyer. These are editable templates; they do not establish that the evidence is admissible.'));
+    const where = node('select'), draft = node('p', 'hint', tr('Research draft: built from published sources and not reviewed by a lawyer. These are editable templates; whether the evidence is admissible is decided by the court.'));
     where.setAttribute('aria-label', tr('Court documents in the package'));
     for (const [value, text] of [['', 'Court documents: certification of authenticity to complete and sign'],
       ['UA', 'Court documents: Ukraine, criminal proceeding (research draft): inspection protocol draft, technical annex, file inventory, media handover act']]) where.append(new Option(tr(text), value));
