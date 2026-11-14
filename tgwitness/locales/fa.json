@@ -9645,5 +9645,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "این حساب در حال انجام عملیات است. پیش از از سرگیری خروجی‌گیری، وظیفه دریافت فعلی آن را متوقف کنید.",
   "Verifying saved export data…": "تأیید داده‌های خروجی ذخیره‌شده…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "دامنه کل حساب، تمام دیالوگ‌های قابل دسترسی را قبل از شروع این اجرا، از جمله چت‌های بایگانی‌شده، کشف می‌کند. هر چت دارای مکان‌نما (cursor) قابل ازسرگیری خود است.",
-  "{n} enabled sources. History loads in the background while observation continues.": "منابع فعال‌شده توسط {n}. تاریخچه در پس‌زمینه بارگذاری می‌شود در حالی که مشاهده ادامه دارد."
+  "{n} enabled sources. History loads in the background while observation continues.": "منابع فعال‌شده توسط {n}. تاریخچه در پس‌زمینه بارگذاری می‌شود در حالی که مشاهده ادامه دارد.",
+  "Select at least one available account.": "حداقل یک حساب موجود را انتخاب کنید.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "حساب‌های موجود {n} انتخاب شده‌اند. هر حساب اتصال و محدودیت‌های درخواست خود را حفظ می‌کند.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "هر حساب یک وظیفه تاریخچه یا خروجی را به موازات مشاهده اجرا می‌کند. کنترل‌های مکث مستقل هستند؛ بلوک‌های ارسال‌شده پس از مکث نیز در دسترس باقی می‌مانند.",
+  "Select all available accounts": "انتخاب همه حساب‌های موجود"
 }

@@ -1542,7 +1542,7 @@ const activityTitles=()=>({reconnecting:tr("Reconnecting to Telegram"),history:t
   export:tr("Export in progress"),profile_image:tr("Updating profile photos"),sign_in:tr("Sign-in required"),
   empty:tr("No Telegram account"),failed:tr("Needs attention"),unavailable:tr("Unavailable"),free:tr("Free")});
 const activityHints=()=>({monitoring:tr("History and account exports can run alongside observation."),
-  reconnecting:tr("Observation resumes when the connection returns."),history:tr("Exports and observation wait until it finishes."),
+  reconnecting:tr("Observation resumes when the connection returns."),history:tr("History loads in the background. Keep observation on to preserve new messages, edits and deletion notices as they arrive."),
   export:tr("Observation keeps running. Other exports and full history wait until it finishes."),profile_image:tr("Takes a moment."),
   sign_in:tr("Sign in again to observe or export."),empty:tr("Connect an account to observe or export."),
   failed:tr("Check the problems listed for this account."),free:tr("Ready to export or observe.")});
@@ -6129,7 +6129,7 @@ async function openExportDialog(){
   if(basic)facts.append(node("p","export-fact warn",tr("This is an ordinary group: message numbers differ between accounts, so only this account can download it.")));
   function estimate(){
     const n=list.querySelectorAll("input:checked").length;
-    $("export-dialog-estimate").textContent=tr("{n} idle accounts selected. Each account keeps its own connection and request limits.",{n});
+    $("export-dialog-estimate").textContent=tr("{n} available accounts selected. Each account keeps its own connection and request limits.",{n});
     $("export-dialog-start").disabled=!n;
   }
   for(const p of state.profiles){
@@ -6170,7 +6170,7 @@ async function openExportDialog(){
   const choice=await new Promise(resolve=>dialog.addEventListener("close",()=>resolve(dialog.returnValue),{once:true}));
   if(choice!=="start"||revision!==state.workspaceRevision||generation!==chatGeneration)return;
   const profiles=[...list.querySelectorAll("input:checked")].map(b=>b.value);
-  if(!profiles.length)throw new Error(tr("Select at least one idle account."));
+  if(!profiles.length)throw new Error(tr("Select at least one available account."));
   const dates=exportPeriod();
   const selection={...dates,languages:$("export-message-language").value?[$("export-message-language").value]:[],
     uncertain_language:$("export-uncertain-language").checked?"include":"exclude",reply_mode:$("export-reply-mode").value,
@@ -6355,7 +6355,7 @@ function renderLinkPlan(){
 }
 async function startLinkExport(){
   const p=linkPlan,profiles=[...$("link-export-plan").querySelectorAll("input[name=link-account]:checked")].map(b=>b.value);
-  if(!profiles.length)throw new Error(tr("Select at least one idle account."));
+  if(!profiles.length)throw new Error(tr("Select at least one available account."));
   const token=state.token,x=await json("multi-export/start",{chat_id:p.chat_id,lead:profiles.includes(p.reader)?p.reader:profiles[0],
     profiles,transport:$("link-export-transport").value,username:p.username||null},{root:true});
   if(state.token!==token)return;

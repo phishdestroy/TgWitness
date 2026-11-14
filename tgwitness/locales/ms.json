@@ -9597,5 +9597,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "Akaun ini sedang sibuk. Jeda tugas pemerolehan semasa sebelum meneruskan eksport.",
   "Verifying saved export data…": "Mengesahkan data eksport yang disimpan…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Skop akaun keseluruhan mengesan semua dialog yang boleh diakses sebelum larian ini bermula, termasuk sembang yang diarkibkan. Setiap sembang mempunyai penunjuk yang boleh disambung semula.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n}: sumber yang diaktifkan. Sejarah dimuat di latar belakang sementara pemerhatian diteruskan."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n}: sumber yang diaktifkan. Sejarah dimuat di latar belakang sementara pemerhatian diteruskan.",
+  "Select at least one available account.": "Pilih sekurang-kurangnya satu akaun yang tersedia.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n}akaun tersedia yang dipilih. Setiap akaun mengekalkan sambungan dan had permintaan masing-masing.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Setiap akaun menjalankan satu tugas sejarah atau eksport bersama pemerhatian. Kawalan jeda adalah bebas; ketulan yang telah disimpan kekal tersedia selepas jeda.",
+  "Select all available accounts": "Pilih semua akaun yang tersedia"
 }

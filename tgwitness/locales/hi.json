@@ -9645,5 +9645,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "यह खाता व्यस्त है। निर्यात फिर से शुरू करने से पहले इसके वर्तमान अधिग्रहण कार्य को रोकें।",
   "Verifying saved export data…": "सहेजे गए निर्यात डेटा का सत्यापन…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "पूरे खाते का दायरा इस रन के शुरू होने से पहले सभी सुलभ डायलॉग्स का पता लगाता है, जिसमें संग्रहीत चैट भी शामिल हैं। प्रत्येक चैट का अपना फिर से शुरू करने योग्य कर्सर होता है।",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n} सक्षम स्रोत। इतिहास पृष्ठभूमि में लोड होता है जबकि अवलोकन जारी रहता है।"
+  "{n} enabled sources. History loads in the background while observation continues.": "{n} सक्षम स्रोत। इतिहास पृष्ठभूमि में लोड होता है जबकि अवलोकन जारी रहता है।",
+  "Select at least one available account.": "कम से कम एक उपलब्ध खाते का चयन करें।",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} उपलब्ध खाते चुने गए। प्रत्येक खाता अपना स्वयं का कनेक्शन और अनुरोध सीमाएँ रखता है।",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "प्रत्येक खाता अवलोकन के साथ एक इतिहास या निर्यात कार्य चलाता है। पॉज़ नियंत्रण स्वतंत्र हैं; एक पॉज़ के बाद प्रतिबद्ध चंक्स उपलब्ध रहते हैं।",
+  "Select all available accounts": "सभी उपलब्ध खातों का चयन करें"
 }

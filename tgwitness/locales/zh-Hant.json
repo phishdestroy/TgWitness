@@ -9597,5 +9597,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "此帳戶正處於繁忙狀態。請在恢復匯出前，先暫停其當前的資料擷取任務。",
   "Verifying saved export data…": "正在驗證已儲存的匯出資料……",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "全帳戶範圍會在本次執行開始前偵測所有可存取的對話，包括已歸檔的聊天紀錄。每個聊天都擁有可恢復的游標。",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n} 個已啟用的來源。歷史紀錄在背景中載入，同時監測仍持續進行。"
+  "{n} enabled sources. History loads in the background while observation continues.": "{n} 個已啟用的來源。歷史紀錄在背景中載入，同時監測仍持續進行。",
+  "Select at least one available account.": "請選擇至少一個可用的帳戶。",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "已選取 {n} 個可用帳戶。每個帳戶皆維持其專屬的連線與請求限制。",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "每個帳戶在執行觀察的同時，會運行一個歷史紀錄或匯出任務。暫停控制功能是獨立運作的；已提交的區塊在暫停後仍可使用。",
+  "Select all available accounts": "選取所有可用帳戶"
 }

@@ -9645,5 +9645,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "Bu hesap meşgul. Dışa aktarmaya devam etmeden önce mevcut toplama görevini duraklatın.",
   "Verifying saved export data…": "Kaydedilen dışa aktarma verileri doğrulanıyor…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Tüm hesap kapsamı, bu çalıştırma başlamadan önce arşivlenmiş sohbetler dahil olmak üzere erişilebilir tüm diyalogları tespit eder. Her sohbetin kendi devam ettirilebilir imleci vardır.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n} adet etkin kaynak. Gözlem devam ederken geçmiş arka planda yüklenir."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n} adet etkin kaynak. Gözlem devam ederken geçmiş arka planda yüklenir.",
+  "Select at least one available account.": "En az bir kullanılabilir hesap seçin.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} adet kullanılabilir hesap seçildi. Her hesap kendi bağlantı ve istek sınırlarını korur.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Her hesap, gözlemle birlikte bir geçmiş veya dışa aktarma görevi yürütür. Duraklatma kontrolleri bağımsızdır; kaydedilmiş parçalar, duraklatma sonrasında da kullanılabilir durumda kalır.",
+  "Select all available accounts": "Mevcut tüm hesapları seçin"
 }

@@ -9693,5 +9693,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "חשבון זה עסוק. יש להשהות את משימת האיסוף הנוכחית שלו לפני חידוש הייצוא.",
   "Verifying saved export data…": "אימות נתוני הייצוא שנשמרו…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "היקף החשבון כולו מגלה את כל השיחות הנגישות לפני תחילת הריצה, כולל צ'אטים בארכיון. לכל צ'אט יש סמן משלו שניתן לחדש ממנו.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n} מקורות מופעלים. ההיסטוריה נטענת ברקע בזמן שהניטור נמשך."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n} מקורות מופעלים. ההיסטוריה נטענת ברקע בזמן שהניטור נמשך.",
+  "Select at least one available account.": "בחר לפחות חשבון אחד זמין.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "נבחרו {n} חשבונות זמינים. לכל חשבון יש מגבלות חיבור ובקשות משלו.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "כל חשבון מריץ משימת היסטוריה או ייצוא אחת במקביל לתצפית. פקדי ההשהיה הם עצמאיים; קטעים שנשמרו נשארים זמינים לאחר ההשהיה.",
+  "Select all available accounts": "בחר את כל החשבונות הזמינים"
 }

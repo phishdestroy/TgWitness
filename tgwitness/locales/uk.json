@@ -9741,5 +9741,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "Цей обліковий запис зайнятий. Призупиніть його поточне завдання збору даних перед відновленням експорту.",
   "Verifying saved export data…": "Перевірка збережених даних експорту…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Область дії Весь обліковий запис виявляє всі доступні діалоги до початку цього запуску, включаючи архівні чати. Кожен чат має власний курсор, який можна відновити.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n}-джерел увімкнено. Історія завантажується у фоновому режимі, тоді як спостереження триває."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n}-джерел увімкнено. Історія завантажується у фоновому режимі, тоді як спостереження триває.",
+  "Select at least one available account.": "Виберіть принаймні один доступний обліковий запис.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "Вибрано {n} доступних облікових записів. Кожен обліковий запис має власні обмеження щодо підключень та запитів.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Кожен обліковий запис виконує одне завдання з історії або експорту паралельно зі спостереженням. Елементи керування паузою є незалежними; зафіксовані фрагменти залишаються доступними після паузи.",
+  "Select all available accounts": "Вибрати всі доступні акаунти"
 }

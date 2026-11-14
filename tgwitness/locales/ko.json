@@ -9597,5 +9597,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "이 계정은 사용 중입니다. 내보내기를 재개하기 전에 현재 수집 작업을 일시 중지하십시오.",
   "Verifying saved export data…": "저장된 내보내기 데이터 확인 중…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "전체 계정 범위에서는 아카이브된 채팅을 포함하여, 이번 실행이 시작되기 전에 접근 가능한 모든 대화를 탐지합니다. 각 채팅에는 재개 가능한 고유한 커서가 있습니다.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n}개의 활성화된 소스. 관측이 계속되는 동안 기록이 백그라운드에서 로드됩니다."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n}개의 활성화된 소스. 관측이 계속되는 동안 기록이 백그라운드에서 로드됩니다.",
+  "Select at least one available account.": "사용 가능한 계정을 하나 이상 선택하십시오.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "사용 가능한 계정 {n}개 선택됨. 각 계정은 자체 연결 및 요청 제한을 유지합니다.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "각 계정은 관측과 함께 하나의 기록 또는 내보내기 작업을 실행합니다. 일시 중지 제어 기능은 독립적이며, 일시 중지 후에도 커밋된 청크는 계속 사용할 수 있습니다.",
+  "Select all available accounts": "사용 가능한 모든 계정 선택"
 }

@@ -9597,5 +9597,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "该账户正在忙。在恢复导出之前，请暂停其当前的数据采集任务。",
   "Verifying saved export data…": "正在验证已保存的导出数据……",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "全账户范围会在本次运行开始前发现所有可访问的对话，包括已归档的聊天记录。每个聊天都有其可恢复的游标。",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n}个已启用的数据源。历史记录在后台加载，同时观察继续进行。"
+  "{n} enabled sources. History loads in the background while observation continues.": "{n}个已启用的数据源。历史记录在后台加载，同时观察继续进行。",
+  "Select at least one available account.": "请选择至少一个可用账户。",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "已选定 {n} 个可用账户。每个账户均保持独立的连接和请求限制。",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "每个账户在进行观测的同时，还会运行一个历史记录或导出任务。暂停控件是独立的；已提交的块在暂停后仍然可用。",
+  "Select all available accounts": "选择所有可用账户"
 }

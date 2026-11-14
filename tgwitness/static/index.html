@@ -499,7 +499,7 @@
     <summary>Compare collection methods</summary>
     <dl class="collection-methods-grid">
       <div><dt>Saved observations</dt><dd>Export saved records without reading Telegram. Observation can keep running.</dd></div>
-      <div><dt>Full history</dt><dd>Read past messages into this workspace. Pause observation first; new live changes are not recorded during history loading.</dd></div>
+      <div><dt>Full history</dt><dd>History loads in the background. Keep observation on to preserve new messages, edits and deletion notices as they arrive.</dd></div>
       <div><dt>Telegram account</dt><dd>Download selected chats into a separate archive. Observation keeps running meanwhile.</dd></div>
       <div><dt>Live observation</dt><dd>Keep new messages and changes delivered while observation is running. Start it from Sources.</dd></div>
       <div><dt data-no-translate>Trusted Live</dt><dd>Use an official Desktop or Web session with video or native JSON. Setup and hybrid comparison require manual steps. Preview.</dd></div>
@@ -1710,9 +1710,9 @@
       <p class="hint">Language is detected locally. Context can fall outside the selected dates or language and is labelled separately.</p>
     </fieldset>
     <fieldset class="export-accounts"><legend>Accounts that download it</legend><div id="export-dialog-accounts"></div>
-      <button class="text-link" id="export-select-all" type="button">Select all idle accounts</button></fieldset>
+      <button class="text-link" id="export-select-all" type="button">Select all available accounts</button></fieldset>
     <p class="export-estimate" id="export-dialog-estimate"></p>
-    <p class="hint">One account runs one task. Monitoring accounts cannot join this export. Pause monitoring explicitly or select other idle accounts. Committed chunks are retained when an export is paused.</p>
+    <p class="hint">Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.</p>
     <div class="export-dialog-actions"><button class="secondary" type="button" value="cancel" id="export-dialog-cancel">Cancel</button><button class="primary" id="export-dialog-start" type="submit" value="start">Start export</button></div>
   </form>
 </dialog>

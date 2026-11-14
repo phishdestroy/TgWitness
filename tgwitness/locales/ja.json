@@ -9597,5 +9597,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "このアカウントはビジー状態です。エクスポートを再開する前に、現在の取得タスクを一時停止してください。",
   "Verifying saved export data…": "保存されたエクスポートデータの検証中…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "アカウント全体のスコープでは、この実行が開始される前に、アーカイブされたチャットを含め、アクセス可能なすべてのダイアログが検出されます。各チャットには、それぞれ再開可能なカーソルがあります。",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n}個の有効なソース。観測が継続している間、履歴はバックグラウンドで読み込まれます。"
+  "{n} enabled sources. History loads in the background while observation continues.": "{n}個の有効なソース。観測が継続している間、履歴はバックグラウンドで読み込まれます。",
+  "Select at least one available account.": "利用可能なアカウントを少なくとも1つ選択してください。",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "利用可能な{n}個のアカウントが選択されました。各アカウントは独自の接続およびリクエスト制限を維持します。",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "各アカウントは、観測と並行して1つの履歴またはエクスポートタスクを実行します。一時停止の制御は独立しており、コミット済みのチャンクは一時停止後も利用可能です。",
+  "Select all available accounts": "利用可能なすべてのアカウントを選択"
 }

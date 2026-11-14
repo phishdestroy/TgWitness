@@ -9645,5 +9645,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "Ushbu hisob band. Eksportni davom ettirishdan oldin uning joriy ma'lumot yig'ish vazifasini to'xtating.",
   "Verifying saved export data…": "Saqlangan eksport ma'lumotlarini tekshirish…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "Butun hisob doirasi ushbu ish boshlanishidan oldin arxivlangan suhbatlar hamda barcha mavjud dialog oynalarini aniqlaydi. Har bir suhbatda qayta tiklanadigan kursor mavjud.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n}li manbalar. Tarix fon rejimida yuklanadi, kuzatuv esa davom etadi."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n}li manbalar. Tarix fon rejimida yuklanadi, kuzatuv esa davom etadi.",
+  "Select at least one available account.": "Kamida bitta mavjud akkauntni tanlang.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} mavjud hisoblar tanlandi. Har bir hisob o'zining aloqa va so'rov limitlarini alohida saqlaydi.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Har bir hisob kuzatuv bilan birga bitta tarix yoki eksport vazifasini bajaradi. To'xtatish boshqaruvlari mustaqil; pauza berilgandan keyin ham topshirilgan bo'laklar mavjud bo'lib qoladi.",
+  "Select all available accounts": "Mavjud barcha hisoblarni tanlang"
 }

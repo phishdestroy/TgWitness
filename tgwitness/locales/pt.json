@@ -9653,5 +9653,9 @@
   "This account is busy. Pause its current acquisition task before resuming the export.": "Esta conta está ocupada. Pause sua tarefa de aquisição atual antes de retomar a exportação.",
   "Verifying saved export data…": "Verificando os dados de exportação salvos…",
   "Whole-account scope discovers all accessible dialogs before this run starts, including archived chats. Each chat has its own resumable cursor.": "O escopo de toda a conta identifica todas as conversas acessíveis antes do início desta execução, incluindo conversas arquivadas. Cada conversa possui seu próprio cursor que pode ser retomado.",
-  "{n} enabled sources. History loads in the background while observation continues.": "{n} fontes habilitadas. O histórico é carregado em segundo plano enquanto a observação continua."
+  "{n} enabled sources. History loads in the background while observation continues.": "{n} fontes habilitadas. O histórico é carregado em segundo plano enquanto a observação continua.",
+  "Select at least one available account.": "Selecione pelo menos uma conta disponível.",
+  "{n} available accounts selected. Each account keeps its own connection and request limits.": "{n} contas disponíveis selecionadas. Cada conta mantém seus próprios limites de conexão e de solicitações.",
+  "Each account runs one history or export task alongside observation. Pause controls are independent; committed chunks remain available after a pause.": "Cada conta executa uma tarefa de histórico ou exportação paralelamente à observação. Os controles de pausa são independentes; os blocos confirmados permanecem disponíveis após uma pausa.",
+  "Select all available accounts": "Selecione todas as contas disponíveis"
 }
