@@ -22,6 +22,7 @@ SETTING = "secret_chats"
 STATE = "secret_chats"
 PENDING = "secret_chat_files"
 HELD = "secret_chat_unwritten"
+REFRESH_SECONDS = 30
 HIDDEN = {"key", "iv"}
 QUIET = {"DecryptedMessageActionRequestKey", "DecryptedMessageActionAcceptKey", "DecryptedMessageActionCommitKey",
          "DecryptedMessageActionAbortKey", "DecryptedMessageActionNoop", "DecryptedMessageActionNotifyLayer",
@@ -231,7 +232,18 @@ class SecretChats:
                 raise
             self.write_held()
             self.resume_files()
+            self.spawn(self.refresh(manager, client))
             return True
+
+    async def refresh(self, manager, client):
+        while self.manager is manager:
+            await asyncio.sleep(REFRESH_SECONDS)
+            if self.manager is manager and client.is_connected() and any(
+                    getattr(chat.state, "name", "") != "CLOSED" for chat in manager.list()):
+                try:
+                    await client.catch_up()
+                except Exception:
+                    LOG.exception("Secret chat updates could not be refreshed")
 
     async def detach(self):
         async with self.lock:
