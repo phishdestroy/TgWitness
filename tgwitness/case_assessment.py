@@ -67,6 +67,10 @@ CSS = """
 .evidence-conditions tr[data-status="checked_locally"] strong{color:#2e9d5b}.evidence-conditions tr[data-status="not_included"] strong{color:#8894a4}
 .evidence-conditions code,.evidence-conditions pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
 @media(max-width:760px){.case-assessment .assessment-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.evidence-conditions thead{display:none}
+.evidence-conditions tbody,.evidence-conditions tr,.evidence-conditions th,.evidence-conditions td{display:block}
+.evidence-conditions tr{border-top:1px solid #8894a455;padding:6px 0}.evidence-conditions th,.evidence-conditions td{border:0;padding:4px 0}
+.evidence-conditions td[data-label]::before{content:attr(data-label);display:block;font-size:11px;color:#697d99}}
 @media print{.case-assessment .assessment-grid{display:block}.assessment-item{margin-bottom:10px}.evidence-conditions{overflow:visible}}
 """
 
@@ -290,13 +294,14 @@ def conditions_html(data, say, e):
     if not data:
         return ""
     rows, role = [], None
+    labels = [' data-label="' + e(say(text)) + '">' for text in ("What it establishes", "In this archive", "How the recipient checks it")]
     for item in data["conditions"]:
         if item.get("role") and item["role"] != role:
             role = item["role"]
             rows.append('<tr class="condition-role"><th colspan="4" scope="rowgroup">' + e(say(role)) + '</th></tr>')
-        rows.append('<tr data-status="' + e(item["status"]) + '"><th scope="row">' + e(say(item["title"])) + '</th><td>'
-                    + e(say(item["scope"])) + '</td><td><strong>' + e(say(STATUSES[item["status"]])) + '</strong><br>'
-                    + e(result_text(item["detail"], say)) + '</td><td><code dir="ltr">'
+        rows.append('<tr data-status="' + e(item["status"]) + '"><th scope="row">' + e(say(item["title"])) + '</th><td'
+                    + labels[0] + e(say(item["scope"])) + '</td><td' + labels[1] + '<strong>' + e(say(STATUSES[item["status"]]))
+                    + '</strong><br>' + e(result_text(item["detail"], say)) + '</td><td' + labels[2] + '<code dir="ltr">'
                     + e(item["check"]) + '</code></td></tr>')
     return ('<div class="evidence-conditions"><h3>' + e(say(CONDITIONS_TITLE)) + '</h3><p>' + e(say(CONDITIONS_INTRO))
             + '</p><table><thead><tr><th>' + e(say("Condition")) + '</th><th>' + e(say("What it establishes")) + '</th><th>'
