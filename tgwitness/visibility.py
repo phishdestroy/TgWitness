@@ -10,6 +10,7 @@ from telethon.errors import RPCError
 from telethon.tl import functions, types
 
 from . import opsec
+from .store import RECEPTION
 from .telegram_client import FLOOD_ERRORS, ReadReceiptBlocked, read_permit, request_method
 
 LOG = logging.getLogger("tgwitness.visibility")
@@ -548,7 +549,9 @@ class Visibility:
             **({"stopped_by_error": error} if error else {}), "meaning": BURST_MEANING}, burst["chat_id"])
 
     def peer_typing(self, chat_id, user_id, action=None, secret=False, now=None, topic=None):
-        now = time.time() if now is None else now
+        processed = time.time() if now is None else now
+        reception = RECEPTION.get()
+        now = reception["wall_ns"] / 10**9 if now is None and reception else processed
         self.sweep(now)
         fields = effective(self.collector.store, chat_id, secret)
         cancel = type(action).__name__ == "SendMessageCancelAction"
@@ -557,7 +560,7 @@ class Visibility:
             shown = self.live.setdefault((secret, chat_id), {})
             if cancel:
                 shown.pop(user_id, None)
-            else:
+            elif now + TYPING_SECONDS > processed:
                 shown[user_id] = {"until": now + TYPING_SECONDS, "action": name}
         if fields["record_peer_typing"] and not cancel:
             burst = self.peers.setdefault((secret, chat_id, user_id), {"started": now, "last": now, "updates": 0,

@@ -9665,5 +9665,7 @@
   "Search matched an earlier saved version.": "La búsqueda ha encontrado una versión guardada anterior.",
   "Search saved messages": "Buscar mensajes guardados",
   "{n} saved versions": "{n} versiones guardadas",
-  "Chat loading: {running} active · {pending} pending": "Carga de chats: {running} activos · {pending} pendientes"
+  "Chat loading: {running} active · {pending} pending": "Carga de chats: {running} activos · {pending} pendientes",
+  "The Telegram connection changed. Retry the operation.": "La conexión de Telegram ha cambiado. Reintenta la operación.",
+  "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "No se pueden leer los ajustes de las fuentes de proxy. Restaure proxy-sources.json antes de usar listas de proxy."
 }
