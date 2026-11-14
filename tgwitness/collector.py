@@ -45,7 +45,7 @@ from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient, FLOOD_ERRORS, TOO_LONG_RECOVERY, request_method
 from .security import KeyLock
 from .workers import complete_in_thread
-from .store import canonical, utcnow
+from .store import RECEPTION, canonical, utcnow
 from .evidence import retain_checkpoint
 from .netclient import RouteError, proxy_address
 from .network import NetworkConfig, NoRoute, RoutePolicy, saved_route
@@ -146,6 +146,37 @@ def update_chat(update):
     return None
 
 
+def update_message_ids(update):
+    number = getattr(getattr(update, "message", None), "id", None)
+    if type(number) is int:
+        return [number]
+    numbers = getattr(update, "messages", None)
+    if isinstance(numbers, list):
+        return [n for n in numbers if type(n) is int]
+    number = getattr(update, "msg_id", None)
+    return [number] if type(number) is int else []
+
+
+def listed(values, key):
+    values = sorted(values)
+    return {key: values[:GAP_DETAIL_LIMIT],
+            **({key + "_not_listed": len(values) - GAP_DETAIL_LIMIT} if len(values) > GAP_DETAIL_LIMIT else {})}
+
+
+def update_details(update, chat_ids):
+    raw = getattr(update, "original_update", None) or update
+    details = {}
+    if chats := [chat_id for chat_id in chat_ids or [] if chat_id is not None]:
+        details["chat_ids"] = chats
+    if raw is not None:
+        details["update_type"] = type(raw).__name__
+        if numbers := update_message_ids(raw):
+            details.update(listed(set(numbers), "message_ids"))
+        if type(pts := getattr(raw, "pts", None)) is int:
+            details["telegram_pts"] = pts
+    return details
+
+
 DELETION_BATCH_MEANING = (
     "Telegram reported several message IDs as deleted in one update.")
 ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
@@ -203,6 +234,11 @@ AUTO_DELETE_MEANING = {
 
 
 BUFFER_DRAIN_ROUNDS = 5
+GAP_DETAIL_LIMIT = 1000
+SCOPE_RETRY_SECONDS = 300
+SCOPE_UNDETERMINED_MEANING = ("Telegram delivered updates from this chat, but the chat's details could not be read, "
+                              "so it was not possible to check whether the chat belongs to the observation scope. "
+                              "These updates were not recorded.")
 MIGRATED_MEANING = ("Telegram upgraded this group to a supergroup with a new chat ID. Observation continues in the new "
                     "chat; the earlier messages stay in the original group.")
 CHANNEL_STATE_DROPPED_MEANING = ("The Telegram client could not request this channel's missed updates and discarded its "
@@ -556,6 +592,7 @@ class Collector:
         self.auto_only_reason = None
         self.security_log_checked_at = -SECURITY_LOG_EVERY
         self.security_log_last_id = 0
+        self.security_log_error = None
         self.observed_since = None
         self.pending_login_method = None
         self.people = {}
@@ -607,6 +644,7 @@ class Collector:
         self.target_revision = -1
         self.folders = {}
         self.scope_rejected = set()
+        self.scope_unresolved = {}
         self.scope_refreshed_at = 0
         self.reconciler = None
         self.intake = asyncio.Queue()
@@ -624,6 +662,8 @@ class Collector:
         self.transport_down = False
         self.buffered = []
         self.buffer_overflow = False
+        self.buffer_dropped = {}
+        self.dispatch_lock = asyncio.Lock()
         self.buffer_limit = tuning.BY_KEY["startup_buffer"].default
         self.storage_low = False
         self.download_reserved = 0
@@ -755,7 +795,7 @@ class Collector:
         self.refresh_targets()
         return chat_id in self.target_ids
 
-    async def covers(self, chat_id, entity=None):
+    async def covers(self, chat_id, entity=None, *, message_ids=()):
         if chat_id is None:
             return False
         if self.selected(chat_id):
@@ -767,11 +807,16 @@ class Collector:
             return False
         entry = self.dialog_cache.get(chat_id) or {}
         entity = entry.get("entity") or entity
-        if entity is None:
-            entity = await self.lookup_entity(chat_id)
+        failures = []
+        pending = self.scope_unresolved.get(chat_id)
+        if entity is None and (pending is None or time.monotonic() >= pending["retry_at"]):
+            entity = await self.lookup_entity(chat_id, failures)
         kind = entry.get("kind") or kind_of(entity)
         if kind is None:
+            self.scope_undetermined(chat_id, message_ids, failures)
             return False
+        if self.scope_unresolved.get(chat_id):
+            self.record_undetermined(chat_id, self.scope_unresolved.pop(chat_id))
         rule = self.folder_for(scope)
         if not allowed(scope, kind) or (scope["mode"] == "folder" and (
                 rule is None or not in_folder(rule, chat_id, kind, entity, entry.get("archived", False)))):
@@ -780,7 +825,7 @@ class Collector:
         self.discover(chat_id, kind, entity, scope)
         return True
 
-    async def lookup_entity(self, chat_id):
+    async def lookup_entity(self, chat_id, failures=None):
         client = self.client
         get_entity = getattr(client, "get_entity", None)
         if not get_entity:
@@ -793,8 +838,43 @@ class Collector:
             raise
         except FLOOD_ERRORS:
             raise
-        except Exception:
+        except Exception as exc:
+            if failures is not None:
+                failures.append(type(exc).__name__)
             return None
+
+    def scope_undetermined(self, chat_id, message_ids, failures):
+        now = time.monotonic()
+        pending = self.scope_unresolved.get(chat_id)
+        if pending is None:
+            pending = self.scope_unresolved[chat_id] = {"retry_at": 0}
+        if not pending.get("updates"):
+            pending.update(updates=0, message_ids=set(), first_update_at=utcnow())
+        pending["updates"] += 1
+        pending["message_ids"].update(n for n in message_ids if type(n) is int)
+        if now >= pending["retry_at"]:
+            pending["retry_at"] = now + SCOPE_RETRY_SECONDS
+            self.record_undetermined(chat_id, pending, failures)
+
+    def record_undetermined(self, chat_id, pending, failures=()):
+        if not pending.get("updates"):
+            return
+        self.store.append("coverage.gap", {
+            "reason": "scope_undetermined", "updates": pending["updates"],
+            **listed(pending["message_ids"], "message_ids"),
+            "first_update_at": pending["first_update_at"],
+            **({"lookup_error": failures[-1]} if failures else {}),
+            "next_lookup_after_seconds": SCOPE_RETRY_SECONDS,
+            "completeness": "these updates were not recorded", "meaning": SCOPE_UNDETERMINED_MEANING}, chat_id)
+        pending["updates"] = 0
+
+    def flush_undetermined(self):
+        pending, self.scope_unresolved = self.scope_unresolved, {}
+        for chat_id, entry in pending.items():
+            try:
+                self.record_undetermined(chat_id, entry)
+            except Exception:
+                LOG.exception("Recording unrecorded updates of chat %s failed", chat_id)
 
     def folder_for(self, scope):
         if scope["mode"] != "folder":
@@ -1032,18 +1112,52 @@ class Collector:
 
                 if client is not self.client:
                     return
+                received = (time.time_ns(), time.monotonic_ns())
                 if self.buffering:
                     if len(self.buffered) < self.buffer_limit:
-                        self.buffered.append((handler, update))
+                        self.buffered.append((handler, update, received))
                     else:
                         self.buffer_overflow = True
-                elif self.running:
-                    await handler(update)
-                elif handler == self.on_raw:
-                    self.paused_drops += 1
+                        if handler == self.on_raw:
+                            self.note_buffer_drop(update)
+                    return
+                async with self.dispatch_lock:
+                    if client is not self.client:
+                        return
+                    if self.running:
+                        await self.dispatch(handler, update, received)
+                    elif handler == self.on_raw:
+                        self.paused_drops += 1
             client.add_event_handler(active_client_only, builder)
         client.route_id = self.current_route_id() if self.automatic() else None
         return client
+
+    async def dispatch(self, handler, update, received):
+        reception = {"wall_ns": received[0], "monotonic_ns": received[1]}
+        token = RECEPTION.set(reception)
+        try:
+            await handler(update)
+        finally:
+            reception.clear()
+            RECEPTION.reset(token)
+
+    def note_buffer_drop(self, update):
+        entry = self.buffer_dropped.setdefault(update_chat(update), {"updates": 0})
+        entry["updates"] += 1
+        if numbers := update_message_ids(update):
+            low, high = min(numbers), max(numbers)
+            entry["first_message_id"] = min(entry.get("first_message_id", low), low)
+            entry["last_message_id"] = max(entry.get("last_message_id", high), high)
+
+    def record_buffer_overflow(self):
+        chats = sorted(self.buffer_dropped.items(), key=lambda item: (item[0] is None, item[0] or 0))
+        self.store.append("coverage.gap", {
+            "reason": "startup buffer full", "completeness": "updates received while starting were dropped",
+            "updates_dropped": sum(entry["updates"] for entry in self.buffer_dropped.values()),
+            "buffer_limit": self.buffer_limit,
+            "chats": [{"chat_id": chat_id, **entry} for chat_id, entry in chats[:GAP_DETAIL_LIMIT]],
+            **({"chats_not_listed": len(chats) - GAP_DETAIL_LIMIT} if len(chats) > GAP_DETAIL_LIMIT else {})})
+        self.buffer_dropped = {}
 
     def telegram_paused(self, until, method=None):
         waits, key = self.flood_waits(), method or "unknown"
@@ -2333,7 +2447,9 @@ class Collector:
 
     async def poll_security_log(self, trigger="periodic"):
         client = self.client
+        self.security_log_error = None
         if not client or not client.is_connected():
+            self.security_log_error = "not_connected"
             return False
         last = self.store.get_setting("security_log_last_id", None)
         self.security_log_last_id = last or 0
@@ -2342,7 +2458,8 @@ class Collector:
                 client.get_messages(SECURITY_LOG_USER, limit=20, min_id=last or 0), 15)
         except asyncio.CancelledError:
             raise
-        except Exception:
+        except Exception as exc:
+            self.security_log_error = type(exc).__name__
             return False
         messages = sorted((m for m in messages or [] if getattr(m, "id", 0) > (last or 0)), key=lambda m: m.id)
         if last is not None and not messages:
@@ -2411,11 +2528,15 @@ class Collector:
             pass
         try:
             if not await self.poll_security_log(trigger):
+                failed = self.security_log_error
                 self.store.append("session.security_baseline", {
                     "trigger": trigger,
                     "last_security_event_id": self.security_log_last_id,
                     "other_sessions": counted,
-                    "meaning": "Security log (Telegram 777000) polled at this point."})
+                    **({"security_log_read": False, "security_log_error": failed} if failed else {}),
+                    "meaning": "Security log (Telegram 777000) polled at this point." if not failed else
+                               "The security log (Telegram 777000) could not be read at this point; "
+                               "last_security_event_id is the newest notice read earlier."})
         except asyncio.CancelledError:
             raise
         except Exception:
@@ -2650,7 +2771,7 @@ class Collector:
             raise ValueError("Select at least one group or channel first.")
         await self.cancel_login()
         self.observed_since = datetime.now(timezone.utc)
-        self.buffered, self.buffering, self.buffer_overflow = [], True, False
+        self.buffered, self.buffering, self.buffer_overflow, self.buffer_dropped = [], True, False, {}
         self.updates_probe = self.updates_diverted = None
         self.probe_pending = self.probe_missed = None
         self.probe_skipped = {}
@@ -2693,20 +2814,20 @@ class Collector:
                 "meaning": "These updates were not recorded and no saved position exists to request them again. "
                            "New messages can still be recovered by reading history."})
         self.mark_recheck_start()
-        try:
-            for _ in range(BUFFER_DRAIN_ROUNDS):
-                pending, self.buffered = self.buffered, []
-                if not pending:
-                    break
-                for handler, update in pending:
-                    await handler(update)
-        finally:
-            pending, self.buffered, self.buffering = self.buffered, [], False
-        if self.buffer_overflow:
-            self.store.append("coverage.gap", {"reason": "startup buffer full",
-                                               "completeness": "updates received while starting were dropped"})
-        for handler, update in pending:
-            await handler(update)
+        async with self.dispatch_lock:
+            try:
+                for _ in range(BUFFER_DRAIN_ROUNDS):
+                    pending, self.buffered = self.buffered, []
+                    if not pending:
+                        break
+                    for item in pending:
+                        await self.dispatch(*item)
+            finally:
+                pending, self.buffered, self.buffering = self.buffered, [], False
+            if self.buffer_overflow:
+                self.record_buffer_overflow()
+            for item in pending:
+                await self.dispatch(*item)
         self.watchdog = asyncio.create_task(self.supervise(self.monitor, "connection monitor"))
         self.media_worker = asyncio.create_task(self.supervise(lambda: self.download_worker("bulk"), "media worker"))
         self.urgent_media_worker = asyncio.create_task(
@@ -2789,6 +2910,7 @@ class Collector:
         if not shutdown:
             self.store.set_setting("resume", False)
         if active:
+            self.flush_undetermined()
             with suppress(Exception):
                 await self._snapshot_session_state("observation_stop")
             self.store.append("observation.stopped", {"reason": "shutdown" if shutdown else "operator",
@@ -2912,7 +3034,7 @@ class Collector:
                 await catch_up()
             self.recheck_wakeup.set()
 
-    async def failure(self, exc, context, *, client=None, fatal=False):
+    async def failure(self, exc, context, *, client=None, fatal=False, details=None):
         if self.handle_authorization_error(exc, context, client=client):
             return
         self.last_error = type(exc).__name__
@@ -2921,6 +3043,7 @@ class Collector:
         try:
             self.store.append("collector.error", {"operation": context, "error_type": type(exc).__name__,
                                                  "observation_stopped": fatal, "run_id": self.run_id,
+                                                 **(details or {}),
                                                  "coverage": "this update may not have been recorded"})
             if fatal:
                 self.store.append("observation.stopped", {"reason": "collector_error", "operation": context,
@@ -2935,8 +3058,8 @@ class Collector:
             if self.client and not (self.export_busy() or self.export_claim):
                 await self.client.disconnect()
 
-    async def live_failure(self, exc, context, client, chat_ids):
-        await self.failure(exc, context, client=client)
+    async def live_failure(self, exc, context, client, chat_ids, update=None):
+        await self.failure(exc, context, client=client, details=update_details(update, chat_ids))
         if not self.running or client is not self.client:
             return
         try:
@@ -2950,9 +3073,7 @@ class Collector:
             return
         chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
         if chat_ids:
-            last = self.store.get_setting("recheck_last", {})
-            last.update((str(chat_id), 0) for chat_id in chat_ids)
-            self.store.set_setting("recheck_last", last)
+            self.store.set_chat_settings("recheck_last", dict.fromkeys(chat_ids, 0))
 
     async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
                               acquisition=None, sender=None):
@@ -2972,7 +3093,10 @@ class Collector:
         if acquisition is not None:
             payload["acquisition"] = acquisition
         if update is not None:
-            payload["transport_update"] = plain(update)
+            transport = plain(update)
+            if isinstance(transport, dict) and transport.get("message") == payload["raw"]:
+                transport["message"] = {"same_as": "raw"}
+            payload["transport_update"] = transport
 
         if kind == "message.edited":
             payload["editor_id"] = None
@@ -3035,31 +3159,32 @@ class Collector:
                             "setting": "preserve_ephemeral_media", "overridden": overridden,
                             "still_applied": "per-type size ceiling, free-disk reserve and FloodWait limits"}
         profile = self.sender_profile(sender, chat_id) if kind == "message.new" else None
-        event = self.store.append(kind, payload, chat_id, message.id,
-                                  message.sender_id if kind in ("message.new", "message.recovered") else None,
-                                  date_string(getattr(message, "edit_date", None) or message.date),
-                                  media_job=job)
+        with self.store.transaction():
+            event = self.store.append(kind, payload, chat_id, message.id,
+                                      message.sender_id if kind in ("message.new", "message.recovered") else None,
+                                      date_string(getattr(message, "edit_date", None) or message.date),
+                                      media_job=job)
+            if profile:
+                self.store.append("actor.profile_changed", {"user_id": sender.id, **profile,
+                    "contact": bool(getattr(sender, "contact", False)), "source": "message_sender",
+                    "message_event": event["seq"], "collector_account_id": payload["collector_account_id"],
+                    "meaning": PROFILE_CHANGE_MEANING}, chat_id, actor_id=sender.id)
+            elif kind == "message.new" and sender is None:
+                self.request_profile(message, chat_id, event)
+            if getattr(message, "action", None):
+                self.store.append("membership.service" if isinstance(message.action, (
+                    types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
+                    types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest
+                )) else "chat.service", {
+                    "message_event": event["seq"], "action": plain(message.action),
+                    "attribution": "service-message sender; meaning depends on the action type"
+                }, chat_id, message.id, message.sender_id, date_string(message.date))
+            if media_skip:
+                status = "unavailable" if media_skip == "ephemeral_attachment_unavailable_at_observation" else "not_saved"
+                self.store.append("media.skipped", {"message_event": event["seq"], "reason": media_skip,
+                    **(ephemeral.outcome(ephemeral_media, status) if ephemeral_media else {})},
+                                  chat_id, message.id)
         self.remember(sender, chat_id=chat_id)
-        if profile:
-            self.store.append("actor.profile_changed", {"user_id": sender.id, **profile,
-                "contact": bool(getattr(sender, "contact", False)), "source": "message_sender",
-                "message_event": event["seq"], "collector_account_id": payload["collector_account_id"],
-                "meaning": PROFILE_CHANGE_MEANING}, chat_id, actor_id=sender.id)
-        elif kind == "message.new" and sender is None:
-            self.request_profile(message, chat_id, event)
-        if getattr(message, "action", None):
-            self.store.append("membership.service" if isinstance(message.action, (
-                types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
-                types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest
-            )) else "chat.service", {
-                "message_event": event["seq"], "action": plain(message.action),
-                "attribution": "service-message sender; meaning depends on the action type"
-            }, chat_id, message.id, message.sender_id, date_string(message.date))
-        if media_skip:
-            status = "unavailable" if media_skip == "ephemeral_attachment_unavailable_at_observation" else "not_saved"
-            self.store.append("media.skipped", {"message_event": event["seq"], "reason": media_skip,
-                **(ephemeral.outcome(ephemeral_media, status) if ephemeral_media else {})},
-                              chat_id, message.id)
         if job:
             self.media_wakeup.set()
         self.last_update_at = utcnow()
@@ -3095,7 +3220,7 @@ class Collector:
         if not (self.running and monitoring_settings(self.store)["messages"]) or self.own_skipped(event.message):
             return
         try:
-            if not await self.covers(event.chat_id, getattr(event, "chat", None)):
+            if not await self.covers(event.chat_id, getattr(event, "chat", None), message_ids=[event.message.id]):
                 return
             update = getattr(event, "original_update", None)
             source = recovered_source(update)
@@ -3103,14 +3228,14 @@ class Collector:
                 return
             await self.capture_message(event.message, recovered_kind(source), event.chat_id, update, source)
         except Exception as exc:
-            await self.live_failure(exc, "message.new", client, [getattr(event, "chat_id", None)])
+            await self.live_failure(exc, "message.new", client, [getattr(event, "chat_id", None)], event)
 
     async def on_edit(self, event):
         client = self.client
         if not (self.running and monitoring_settings(self.store)["edits"]) or self.own_skipped(event.message):
             return
         try:
-            if not await self.covers(event.chat_id, getattr(event, "chat", None)):
+            if not await self.covers(event.chat_id, getattr(event, "chat", None), message_ids=[event.message.id]):
                 return
             content = self.store.message_state(event.chat_id, event.message.id)["content"]
             payload = describe_message(event.message)
@@ -3120,7 +3245,7 @@ class Collector:
             await self.capture_message(event.message, "message.edited", event.chat_id,
                                        getattr(event, "original_update", None))
         except Exception as exc:
-            await self.live_failure(exc, "message.edited", client, [getattr(event, "chat_id", None)])
+            await self.live_failure(exc, "message.edited", client, [getattr(event, "chat_id", None)], event)
 
     def record_deletion(self, chat_id, message_id, raw, resolution=None, batch=None):
         state = self.store.message_state(chat_id, message_id)
@@ -3188,14 +3313,14 @@ class Collector:
                         if ids:
                             self.store.append("deletion.unscoped", {"message_ids": ids, "scope": scope,
                                                                     "deleted_by": None, "raw": raw})
-            elif await self.covers(event.chat_id):
+            elif await self.covers(event.chat_id, message_ids=event.deleted_ids):
                 with self.store.transaction():
                     batch = self.deletion_batch(event.chat_id, list(event.deleted_ids), raw)
                     for message_id in event.deleted_ids:
                         self.record_deletion(event.chat_id, message_id, raw, batch=batch)
         except Exception as exc:
             chat_id = getattr(event, "chat_id", None)
-            await self.live_failure(exc, "message.deleted", client, None if chat_id is None else [chat_id])
+            await self.live_failure(exc, "message.deleted", client, None if chat_id is None else [chat_id], event)
 
     async def check_access(self, chat_id, update):
         try:
@@ -3245,9 +3370,7 @@ class Collector:
                               chat_id)
             self.store.append("source.migrated", facts, new_id)
             if detected == "service_message":
-                floors = self.store.get_setting("recheck_floor", {})
-                floors[str(new_id)] = 0
-                self.store.set_setting("recheck_floor", floors)
+                self.store.set_chat_settings("recheck_floor", {new_id: 0})
         if new_id not in targets:
             self.source_status[str(new_id)] = {"state": "discovered", "checked_at": utcnow(),
                                                "meaning": MIGRATED_MEANING, "visibility": "unknown", "role": "unknown"}
@@ -3288,7 +3411,8 @@ class Collector:
                 membership = isinstance(update.message.action, (
                     types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
                     types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest))
-                if (not membership or settings["membership"]) and (removed or await self.covers(chat_id)):
+                if (not membership or settings["membership"]) and (
+                        removed or await self.covers(chat_id, message_ids=[update.message.id])):
                     source = recovered_source(update)
                     if not (source and self.store.message_state(chat_id, update.message.id)["content"]):
                         await self.capture_message(update.message, recovered_kind(source), chat_id, update, source,
@@ -3300,7 +3424,7 @@ class Collector:
             elif isinstance(update, (types.UpdatePinnedChannelMessages, types.UpdatePinnedMessages)) and not update.pinned:
                 chat_id = (utils.get_peer_id(types.PeerChannel(update.channel_id))
                            if isinstance(update, types.UpdatePinnedChannelMessages) else utils.get_peer_id(update.peer))
-                if await self.covers(chat_id):
+                if await self.covers(chat_id, message_ids=update.messages):
                     for message_id in update.messages:
                         self.store.append("message.unpinned", {
                             "unpinned_by": None, "raw": plain(update),
@@ -3316,7 +3440,7 @@ class Collector:
                 if not settings["reactions"]:
                     return
                 chat_id = utils.get_peer_id(update.peer)
-                if await self.covers(chat_id):
+                if await self.covers(chat_id, message_ids=[update.msg_id]):
                     self.store.append("reaction.snapshot", {
                         "raw": plain(update), "visibility": "aggregate and recent reactions if supplied",
                         "complete_actor_list": False, "change_actor": None,
@@ -3349,7 +3473,7 @@ class Collector:
                     "admin_id": getattr(call, "admin_id", None), "participant_id": getattr(call, "participant_id", None),
                     "raw": plain(update), "meaning": "Telegram delivered a phone call update to this session."})
         except Exception as exc:
-            await self.live_failure(exc, "raw.update", client, [update_chat(update)])
+            await self.live_failure(exc, "raw.update", client, [update_chat(update)], update)
 
     async def presence_loop(self):
         from .presence_watch import loop
@@ -3608,22 +3732,23 @@ class Collector:
                 await self.recheck_pass(due)
 
     def mark_recheck_start(self):
-        walked = self.store.get_setting("recheck_walked", {})
+        walked, added = self.store.chat_settings("recheck_walked"), {}
         for target in self.store.targets(True):
-            key = str(target["chat_id"])
-            if key not in walked and (last := self.store.last_message_id(target["chat_id"])) is not None:
-                walked[key] = last
-        self.store.set_setting("recheck_walked", walked)
+            chat_id = target["chat_id"]
+            if chat_id not in walked and (last := self.store.last_message_id(chat_id)) is not None:
+                added[chat_id] = last
+        if added:
+            self.store.set_chat_settings("recheck_walked", added)
 
     def due_targets(self, forced=False, reconnected=0):
-        settings, last, now = recheck_settings(self.store), self.store.get_setting("recheck_last", {}), time.time()
+        settings, last, now = recheck_settings(self.store), self.store.chat_settings("recheck_last"), time.time()
         control = settings["recheck_other_minutes"] or settings["recheck_minutes"]
         due = []
         for target in self.store.targets(True):
             minutes = settings["recheck_minutes"] if target["priority"] else settings["recheck_other_minutes"]
             if not minutes:
                 continue
-            seen = last.get(str(target["chat_id"]), 0)
+            seen = last.get(target["chat_id"], 0)
             if seen and target["chat_id"] < -1000000000000 and target["chat_id"] not in self.recheck_continuing:
                 minutes = max(minutes, control)
             if (forced and target["priority"]) or seen < reconnected or now - seen >= minutes * 60:
@@ -3645,9 +3770,7 @@ class Collector:
                     self.recheck_continuing.add(target["chat_id"])
                 else:
                     self.recheck_continuing.discard(target["chat_id"])
-                    last = self.store.get_setting("recheck_last", {})
-                    last[str(target["chat_id"])] = time.time()
-                    self.store.set_setting("recheck_last", last)
+                    self.store.set_chat_settings("recheck_last", {target["chat_id"]: time.time()})
             except FLOOD_ERRORS as exc:
                 self.recheck_resume_at = time.time() + exc.seconds
                 self.store.append("telegram.backoff", {"operation": "recheck", "retry_after_seconds": exc.seconds,
@@ -3674,43 +3797,42 @@ class Collector:
         entity = await self.resolve_target(chat_id)
         result = {"chat_id": chat_id, "recovered": 0, "edited": 0, "missing": 0, "checked": 0}
         if settings["messages"]:
-            floors = self.store.get_setting("recheck_floor", {})
+            saved_floor = self.store.chat_setting("recheck_floor", chat_id)
             last = self.store.last_message_id(chat_id)
-            if last is None and str(chat_id) not in floors:
+            if last is None and saved_floor is None:
 
-                floors[str(chat_id)] = await self.number_before(entity)
-                self.store.set_setting("recheck_floor", floors)
+                self.store.set_chat_settings("recheck_floor", {chat_id: await self.number_before(entity)})
             elif limit := self.param("recheck_new_limit"):
 
 
-                walked = self.store.get_setting("recheck_walked", {})
-                floor = max(walked.get(str(chat_id), last) or 0, floors.get(str(chat_id), 0))
-                seen, reached, stopped = 0, floor, False
-                async for message in self.client.iter_messages(entity, min_id=floor, reverse=True, limit=limit):
-                    if not self.running:
-                        stopped = True
-                        break
-                    seen, reached = seen + 1, message.id
-                    if self.own_skipped(message):
-                        floors[str(chat_id)] = message.id
-                        self.store.set_setting("recheck_floor", floors)
-                        continue
-                    if isinstance(getattr(message, "action", None), MEMBERSHIP_ACTIONS) and not settings["membership"]:
-                        floors[str(chat_id)] = message.id
-                        self.store.set_setting("recheck_floor", floors)
-                        continue
-                    if self.store.message_state(chat_id, message.id)["content"]:
-                        continue
-                    await self.capture_message(message, "message.recovered", chat_id, source="recheck")
-                    result["recovered"] += 1
-                walked = self.store.get_setting("recheck_walked", {})
+                walked = self.store.chat_setting("recheck_walked", chat_id)
+                floor = max((last if walked is None else walked) or 0, saved_floor or 0)
+                seen, reached, stopped, skipped = 0, floor, False, None
+                try:
+                    async for message in self.client.iter_messages(entity, min_id=floor, reverse=True, limit=limit):
+                        if not self.running:
+                            stopped = True
+                            break
+                        seen, reached = seen + 1, message.id
+                        if self.own_skipped(message) or (
+                                isinstance(getattr(message, "action", None), MEMBERSHIP_ACTIONS)
+                                and not settings["membership"]):
+                            skipped = message.id
+                            continue
+                        if self.store.message_state(chat_id, message.id)["content"]:
+                            continue
+                        await self.capture_message(message, "message.recovered", chat_id, source="recheck")
+                        result["recovered"] += 1
+                finally:
+                    if skipped is not None:
+                        self.store.set_chat_settings("recheck_floor", {chat_id: skipped})
                 if stopped or seen >= limit:
 
-                    walked[str(chat_id)] = reached
+                    walked = reached
                     result["continues_after"] = reached
                 else:
-                    walked[str(chat_id)] = max(reached, self.store.last_message_id(chat_id) or 0)
-                self.store.set_setting("recheck_walked", walked)
+                    walked = max(reached, self.store.last_message_id(chat_id) or 0)
+                self.store.set_chat_settings("recheck_walked", {chat_id: walked})
         if not (settings["edits"] or settings["deletions"]):
             return result
 
@@ -3718,11 +3840,9 @@ class Collector:
         newest = self.store.alive_message_ids(chat_id, limit=batch, include_missing=True)
         older = []
         if len(newest) == batch:
-            cursors = self.store.get_setting("recheck_cursor", {})
-            below = min(cursors.get(str(chat_id)) or newest[-1], newest[-1])
+            below = min(self.store.chat_setting("recheck_cursor", chat_id) or newest[-1], newest[-1])
             older = self.store.alive_message_ids(chat_id, below=below, limit=batch, include_missing=True)
-            cursors[str(chat_id)] = older[-1] if len(older) == batch else None
-            self.store.set_setting("recheck_cursor", cursors)
+            self.store.set_chat_settings("recheck_cursor", {chat_id: older[-1] if len(older) == batch else None})
         ids = newest + older
         if not ids:
             return result

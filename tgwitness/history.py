@@ -59,25 +59,25 @@ class History:
         return self.task is not None and not self.task.done()
 
     def current(self):
-        with self.store.lock:
-            row = self.store.db.execute("SELECT * FROM history_runs ORDER BY rowid DESC LIMIT 1").fetchone()
+        with self.store.reading() as db:
+            row = db.execute("SELECT * FROM history_runs ORDER BY rowid DESC LIMIT 1").fetchone()
             return dict(row) if row else None
 
     def status(self):
-        with self.store.lock:
+        with self.store.reading() as db:
             run = self.current()
             if not run:
                 return {"phase": "none"}
             run_id = run["id"]
-            counts = dict(self.store.db.execute("SELECT phase,count(*) FROM history_sources "
-                                               "WHERE run_id=? GROUP BY phase", (run_id,)))
-            totals = self.store.db.execute("SELECT coalesce(sum(captured),0),coalesce(sum(unavailable),0) "
-                                           "FROM history_sources WHERE run_id=?", (run_id,)).fetchone()
-            sources = [dict(row) for row in self.store.db.execute(
+            counts = dict(db.execute("SELECT phase,count(*) FROM history_sources "
+                                     "WHERE run_id=? GROUP BY phase", (run_id,)))
+            totals = db.execute("SELECT coalesce(sum(captured),0),coalesce(sum(unavailable),0) "
+                                "FROM history_sources WHERE run_id=?", (run_id,)).fetchone()
+            sources = [dict(row) for row in db.execute(
                 "SELECT chat_id,title,phase,captured,unavailable,upper_id,offset_id,error,metadata FROM history_sources "
                 "WHERE run_id=? ORDER BY CASE phase WHEN 'reading' THEN 0 WHEN 'failed' THEN 1 "
                 "WHEN 'skipped' THEN 2 ELSE 3 END,position LIMIT 50", (run_id,))]
-            media = dict(self.store.db.execute(
+            media = dict(db.execute(
                 "SELECT j.state,count(*) FROM history_items h JOIN media_jobs j ON j.message_event=h.message_event "
                 "WHERE h.run_id=? GROUP BY j.state", (run_id,)))
             for source in sources:
@@ -254,10 +254,10 @@ class History:
                 await asyncio.sleep(min(30, 2 ** failures))
 
     def source(self, run_id):
-        with self.store.lock:
-            row = self.store.db.execute("SELECT * FROM history_sources WHERE run_id=? "
-                                        "AND phase IN ('queued','reading') ORDER BY position LIMIT 1",
-                                        (run_id,)).fetchone()
+        with self.store.reading() as db:
+            row = db.execute("SELECT * FROM history_sources WHERE run_id=? "
+                             "AND phase IN ('queued','reading') ORDER BY position LIMIT 1",
+                             (run_id,)).fetchone()
             return dict(row) if row else None
 
     def finish_source(self, job, phase, error=None):
@@ -319,9 +319,9 @@ class History:
                     if self.transport and state["media_pending"]:
                         self.transition(run_id, "paused", "takeout_media_pending; enable its sources and media policy to resume")
                         return
-                    with self.store.lock:
+                    with self.store.reading() as db:
                         admin_gaps = any(any(v.get("status") == "unavailable" for k, v in json.loads(r[0]).items()
-                                            if k.startswith("admin_")) for r in self.store.db.execute(
+                                            if k.startswith("admin_")) for r in db.execute(
                             "SELECT metadata FROM history_sources WHERE run_id=?", (run_id,)))
                     phase = "incomplete" if state["unavailable"] or any(
                         state["sources_by_phase"].get(k) for k in ("failed", "skipped")) or admin_gaps else "complete"

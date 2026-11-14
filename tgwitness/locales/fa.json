@@ -9006,6 +9006,7 @@
   "running": "در حال اجرا",
   "cancelled": "لغو شده",
   "Updates arrived while observation was paused": "به‌روزرسانی‌ها در حالی که مشاهده متوقف بود، دریافت شدند",
+  "Updates from an unidentified chat were not recorded": "به‌روزرسانی‌های یک گفتگوی شناسایی‌نشده ثبت نشد",
   "Too many updates arrived during startup": "در حین راه‌اندازی، به‌روزرسانی‌های زیادی دریافت شد",
   "Telegram could not deliver older updates": "تلگرام نتوانست به‌روزرسانی‌های قدیمی‌تر را تحویل دهد",
   "Choose a scope for this procedure.": "دامنه این رسیدگی را انتخاب کنید.",

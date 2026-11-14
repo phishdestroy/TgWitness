@@ -8958,6 +8958,7 @@
   "running": "đang chạy",
   "cancelled": "đã hủy",
   "Updates arrived while observation was paused": "Các bản cập nhật đã đến trong khi quá trình quan sát bị tạm dừng",
+  "Updates from an unidentified chat were not recorded": "Không ghi lại các bản cập nhật từ một cuộc trò chuyện không xác định",
   "Too many updates arrived during startup": "Quá nhiều bản cập nhật đã đến trong quá trình khởi động",
   "Telegram could not deliver older updates": "Telegram không thể gửi các bản cập nhật cũ hơn",
   "Choose a scope for this procedure.": "Chọn phạm vi áp dụng cho thủ tục này.",

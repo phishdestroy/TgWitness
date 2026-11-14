@@ -278,8 +278,12 @@ The record combines several sources:
 | Panel interaction | The requested action and its recorded outcome under the selected account. |
 | Recheck | Telegram's current response compared with the previously saved message. |
 
-`observed_at` records reception on the collector clock; `source_at` retains a
-source date where that event supplies one. Telegram clock-offset observations,
+`observed_at` is the time the record was written on the collector clock and
+increases with `seq`. Records written while handling a live update also carry
+`received_at`, the time the update reached the collector, and
+`processing_delay_ms`, the time from reception to writing; updates held while
+observation starts are processed in arrival order before later ones. `source_at`
+retains a source date where that event supplies one. Telegram clock-offset observations,
 clock-discontinuity records and [external time checks](TIMESTAMP.md) provide the
 associated timing context. An ordinary message notification's fields describe
 that notification; admin-log and interaction records retain their own attribution.

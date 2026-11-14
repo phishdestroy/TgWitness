@@ -93,8 +93,8 @@ class StagedTransport:
         for path in sorted((self.root / "history-pages").glob("*.json")):
             self.checked(path)
         self.export.index.commit()
-        with self.export.store.lock:
-            committed = self.export.store.db.execute("SELECT payload FROM events WHERE kind='account_export.history_page' "
+        with self.export.store.reading() as db:
+            committed = db.execute("SELECT payload FROM events WHERE kind='account_export.history_page' "
                 "AND json_extract(payload,'$.job_id')=? ORDER BY seq DESC LIMIT 1", (self.job["job_id"],)).fetchone()
         if committed:
             boundary = json.loads(committed[0])

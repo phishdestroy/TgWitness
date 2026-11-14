@@ -9072,6 +9072,7 @@
   "running": "выполняется",
   "cancelled": "отменено",
   "Updates arrived while observation was paused": "Обновления пришли, пока наблюдение было на паузе",
+  "Updates from an unidentified chat were not recorded": "Обновления из неопознанного чата не записаны",
   "Too many updates arrived during startup": "При запуске пришло слишком много обновлений",
   "Telegram could not deliver older updates": "Telegram не смог доставить более старые обновления",
   "Choose a scope for this procedure.": "Выберите область применения процедуры.",

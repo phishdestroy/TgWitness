@@ -71,10 +71,14 @@ async def overview_activity(days: int = 60, *, ctx=Depends(current_context)):
     store = ctx.app.state.store
     groups = {"message.new": "messages", "message.snapshot": "messages", "message.recovered": "messages",
               "message.edited": "edits", "message.deleted": "deletions", "message.missing_on_recheck": "deletions"}
-    with store.lock:
-        rows = store.db.execute(
-            "SELECT substr(observed_at,1,10),kind,count(*) FROM events WHERE observed_at>=? AND kind IN ("
-            + ",".join("?" * len(groups)) + ") GROUP BY 1,2", (since, *groups)).fetchall()
+
+    def read():
+        with store.reading() as db:
+            return db.execute(
+                "SELECT substr(observed_at,1,10),kind,count(*) FROM events WHERE observed_at>=? AND kind IN ("
+                + ",".join("?" * len(groups)) + ") GROUP BY 1,2", (since, *groups)).fetchall()
+
+    rows = await complete_in_thread(read)
     series = {}
     for day, kind, count in rows:
         item = series.setdefault(day, {"day": day, "messages": 0, "edits": 0, "deletions": 0})

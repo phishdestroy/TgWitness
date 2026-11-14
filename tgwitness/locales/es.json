@@ -9014,6 +9014,7 @@
   "running": "en ejecución",
   "cancelled": "cancelado",
   "Updates arrived while observation was paused": "Las actualizaciones llegaron mientras la observación estaba en pausa",
+  "Updates from an unidentified chat were not recorded": "No se registraron las actualizaciones de un chat no identificado",
   "Too many updates arrived during startup": "Llegaron demasiadas actualizaciones durante el inicio",
   "Telegram could not deliver older updates": "Telegram no pudo entregar actualizaciones anteriores",
   "Choose a scope for this procedure.": "Seleccione el ámbito de este procedimiento.",

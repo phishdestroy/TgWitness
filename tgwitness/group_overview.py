@@ -26,11 +26,11 @@ def allowed_silence(store):
 def observed(store, since):
     coverage = Coverage()
     coverage.allowed = allowed_silence(store)
-    with store.lock:
-        before = store.db.execute(
+    with store.reading() as db:
+        before = db.execute(
             "SELECT kind FROM events WHERE observed_at<? AND kind IN (" + ",".join("?" * len(OPENING)) + ")"
             " ORDER BY seq DESC LIMIT 1", (since, *OPENING)).fetchone()
-        rows = store.db.execute(
+        rows = db.execute(
             "SELECT observed_at,kind,chat_id,message_id,payload FROM events WHERE observed_at>=? AND kind IN ("
             + ",".join("?" * len(STATE_KINDS)) + ") ORDER BY seq", (since, *STATE_KINDS)).fetchall()
     if before and before["kind"] == "observation.started":
@@ -53,10 +53,10 @@ def interruptions(periods, start, end, allowed):
 
 
 def latest(store, kinds):
-    with store.lock:
-        seq = max((store.db.execute("SELECT max(seq) FROM events WHERE kind=?", (kind,)).fetchone()[0] or 0)
+    with store.reading() as db:
+        seq = max((db.execute("SELECT max(seq) FROM events WHERE kind=?", (kind,)).fetchone()[0] or 0)
                   for kind in kinds)
-        row = store.db.execute("SELECT observed_at,kind FROM events WHERE seq=?", (seq,)).fetchone() if seq else None
+        row = db.execute("SELECT observed_at,kind FROM events WHERE seq=?", (seq,)).fetchone() if seq else None
     return {"at": row["observed_at"], "kind": row["kind"]} if row else None
 
 
