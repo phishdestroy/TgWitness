@@ -9657,5 +9657,6 @@
   "Search matched an earlier saved version.": "Qidiruv oldin saqlangan versiyani topdi.",
   "Search saved messages": "Saqlangan xabarlarni qidirish",
   "{n} saved versions": "{n} saqlangan versiyalar",
+  "Chat loading: {running} active · {pending} pending": "Chatlarni yuklash: {running} ta faol · {pending} ta navbatda",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Proksi manbalari sozlamalarini o‘qib bo‘lmadi. Proksi ro‘yxatlaridan foydalanishdan oldin proxy-sources.json faylini tiklang."
 }

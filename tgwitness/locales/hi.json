@@ -9657,5 +9657,6 @@
   "Search matched an earlier saved version.": "खोज से एक पुराना सहेजा गया संस्करण मिला।",
   "Search saved messages": "सहेजे गए संदेश खोजें",
   "{n} saved versions": "{n} सहेजे गए संस्करण",
+  "Chat loading: {running} active · {pending} pending": "चैट लोड हो रही हैं: {running} सक्रिय · {pending} लंबित",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "प्रॉक्सी स्रोतों की सेटिंग्स पढ़ी नहीं जा सकतीं। प्रॉक्सी सूचियों का उपयोग करने से पहले proxy-sources.json को पुनर्स्थापित करें।"
 }

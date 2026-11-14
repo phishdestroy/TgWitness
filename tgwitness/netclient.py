@@ -62,7 +62,7 @@ def literal(host):
 
 
 async def resolve(host, port):
-    infos = await asyncio.get_running_loop().getaddrinfo(host, port, type=socket.SOCK_STREAM)
+    infos = await asyncio.to_thread(socket.getaddrinfo, host, port, type=socket.SOCK_STREAM)
     return list(dict.fromkeys(info[4][0] for info in infos))
 
 

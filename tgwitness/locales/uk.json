@@ -9753,5 +9753,6 @@
   "Search matched an earlier saved version.": "Пошук знайшов збіг із раніше збереженою версією.",
   "Search saved messages": "Пошук збережених повідомлень",
   "{n} saved versions": "{n} збережених версій",
+  "Chat loading: {running} active · {pending} pending": "Завантаження чатів: {running} завантажуються · {pending} у черзі",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Не вдається прочитати налаштування джерел проксі. Відновіть файл proxy-sources.json, перш ніж користуватися списками проксі."
 }

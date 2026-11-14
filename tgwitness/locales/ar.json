@@ -9849,5 +9849,6 @@
   "Search matched an earlier saved version.": "أدى البحث إلى مطابقة إصدار سابق محفوظ.",
   "Search saved messages": "البحث في الرسائل المحفوظة",
   "{n} saved versions": "{n} نسخة محفوظة",
+  "Chat loading: {running} active · {pending} pending": "تحميل المحادثات: {running} قيد التنفيذ · {pending} قيد الانتظار",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "تتعذّر قراءة إعدادات مصادر الوكلاء. استعِد الملف proxy-sources.json قبل استخدام قوائم الوكلاء."
 }
