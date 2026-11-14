@@ -31,7 +31,7 @@ def hide_addresses(text):
 
 COLLECTOR_FIELDS = frozenset((
     "phase", "running", "connected", "has_session", "authorization_required", "account",
-    "last_heartbeat", "media_pending", "media_jobs", "oldest_pending_media_at", "source_status",
+    "last_heartbeat", "media_pending", "media_jobs", "oldest_pending_media_at", "source_status", "chat_loading",
     "last_update_at", "chat_export", "recheck", "storage_low", "scope", "rpc_backoff_until",
     "reconnect_attempts", "next_reconnect_at", "recheck_enabled", "recheck_interval_minutes", "activity",
 ))

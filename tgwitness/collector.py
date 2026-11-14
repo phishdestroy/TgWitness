@@ -653,6 +653,7 @@ class Collector:
         self.reconciler = None
         self.intake = asyncio.Queue()
         self.intake_worker = None
+        self.intake_active = set()
         self.chat_state_worker = None
         self.presence_worker = None
         self.recheck_wakeup = asyncio.Event()
@@ -716,6 +717,7 @@ class Collector:
             "media_pending": sum(n for s, n in self.store.media_stats().items()
                                  if s in ("queued", "running", "retry")),
             "media_jobs": self.store.media_stats(),
+            "chat_loading": self.intake_status(),
             "oldest_pending_media_at": self.store.media_oldest(),
             "source_status": self.source_status_view(),
             "last_update_at": self.last_update_at,
@@ -908,6 +910,21 @@ class Collector:
                                             "meaning": "Added automatically by the observation scope.",
                                             "visibility": "unknown", "role": "unknown"}
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
+            self.request_intake(chat_id, entity)
+
+    def intake_status(self, allowed=None):
+        pending = (set(self.store.get_setting("new_chat_intake_pending", []))
+                   | set(self.store.get_setting("baseline_pending", [])))
+        active = self.intake_active.copy()
+        if allowed is not None:
+            pending.intersection_update(allowed)
+            active.intersection_update(allowed)
+        return {"running": len(active), "pending": len(pending - active), "workers": 3}
+
+    def request_intake(self, chat_id, entity=None):
+        pending = self.store.get_setting("new_chat_intake_pending", [])
+        if chat_id not in pending:
+            self.store.set_setting("new_chat_intake_pending", [*pending, chat_id])
             self.intake.put_nowait((chat_id, entity, False))
 
     def request_baseline(self, chat_ids):
@@ -936,29 +953,65 @@ class Collector:
             await asyncio.sleep(60)
 
     async def intake_loop(self):
-        for chat_id in self.store.get_setting("baseline_pending", []):
-            self.intake.put_nowait((chat_id, None, True))
+        jobs, queued = [], set()
+        while not self.intake.empty():
+            jobs.append(self.intake.get_nowait())
+            self.intake.task_done()
+        jobs.extend((chat_id, None, False) for chat_id in self.store.get_setting("new_chat_intake_pending", []))
+        jobs.extend((chat_id, None, True) for chat_id in self.store.get_setting("baseline_pending", []))
+        for job in jobs:
+            key = (job[0], job[2])
+            if key not in queued:
+                self.intake.put_nowait(job)
+                queued.add(key)
+        locks = {}
+        workers = [asyncio.create_task(self.intake_next(locks)) for _ in range(3)]
+        try:
+            done, _ = await asyncio.wait(workers, return_when=asyncio.FIRST_COMPLETED)
+            await asyncio.gather(*done)
+        finally:
+            for worker in workers:
+                worker.cancel()
+            await asyncio.gather(*workers, return_exceptions=True)
+
+    async def wait_intake(self):
+        while self.running and time.time() < max(self.store.get_setting("rpc_backoff_until", 0), self.intake_resume_at):
+            await asyncio.sleep(1)
+        if not self.running:
+            raise asyncio.CancelledError
+
+    async def intake_next(self, locks):
         while self.running:
-            chat_id, entity, baseline = await self.intake.get()
+            chat_id, entity, baseline = job = await self.intake.get()
             client = self.client
-            options = scope_settings(self.store)["new_chats"]
-            while self.running and time.time() < max(self.store.get_setting("rpc_backoff_until", 0), self.intake_resume_at):
-                await asyncio.sleep(1)
             try:
-                if baseline:
-                    await self.take_baseline(chat_id)
-                    continue
-                entity = entity or await self.lookup_entity(chat_id)
-                if entity is None:
-                    raise ValueError("chat_entity_unavailable")
-                if options["profile"]:
-                    await self.capture_profile(chat_id, entity)
-                if options["history"] and self.selected(chat_id):
-                    await self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
+                async with locks.setdefault(chat_id, asyncio.Lock()):
+                    await self.wait_intake()
+                    self.intake_active.add(chat_id)
+                    try:
+                        if baseline:
+                            await self.take_baseline(chat_id)
+                        elif self.selected(chat_id):
+                            options = scope_settings(self.store)["new_chats"]
+                            entity = entity or await self.lookup_entity(chat_id)
+                            if entity is None:
+                                raise ValueError("chat_entity_unavailable")
+                            if options["profile"] and self.selected(chat_id):
+                                await self.wait_intake()
+                                await self.capture_profile(chat_id, entity)
+                            if options["history"] and self.selected(chat_id):
+                                await self.wait_intake()
+                                await self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
+                        if not baseline:
+                            self.store.set_setting("new_chat_intake_pending",
+                                [c for c in self.store.get_setting("new_chat_intake_pending", []) if c != chat_id])
+                    finally:
+                        self.intake_active.discard(chat_id)
             except asyncio.CancelledError:
+                self.intake.put_nowait(job)
                 raise
             except FLOOD_ERRORS as exc:
-                self.intake_resume_at = time.time() + exc.seconds
+                self.intake_resume_at = max(self.intake_resume_at, time.time() + exc.seconds)
                 self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds,
                                                        "method": method_of(exc)})
                 self.intake.put_nowait((chat_id, entity, baseline))
@@ -970,6 +1023,8 @@ class Collector:
                     "operation": "new chat intake", "error_type": type(exc).__name__,
                     "coverage": "messages of this chat are still recorded live; its profile or earlier "
                                 "messages may be missing"}, chat_id)
+            finally:
+                self.intake.task_done()
             if not self.intake.empty():
                 await asyncio.sleep(self.param("recheck_pause_seconds") / 2)
 
@@ -1072,7 +1127,7 @@ class Collector:
                                     else "earlier history of added chats is not fetched")})
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
             for chat_id in added:
-                self.intake.put_nowait((chat_id, self.dialog_cache[chat_id]["entity"], False))
+                self.request_intake(chat_id, self.dialog_cache[chat_id]["entity"])
         return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
 
     def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):
@@ -5051,6 +5106,8 @@ class Collector:
             "media_sha256": digest, "size": actual_size,
             "original_name": getattr(message.file, "name", None),
             "mime_type": getattr(message.file, "mime_type", None),
+            "media_kind": media_kind(message),
+            "duration_seconds": getattr(message.file, "duration", None),
             "file_reference_refreshed": refreshed,
             **({"attachment": info} if info else {}),
         }))

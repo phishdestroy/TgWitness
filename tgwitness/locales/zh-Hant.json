@@ -9608,5 +9608,6 @@
   "Search match": "搜尋結果",
   "Search matched an earlier saved version.": "搜尋結果與較早的儲存版本相符。",
   "Search saved messages": "搜尋已儲存的訊息",
-  "{n} saved versions": "{n} 個儲存版本"
+  "{n} saved versions": "{n} 個儲存版本",
+  "Chat loading: {running} active · {pending} pending": "聊天載入：{running} 個進行中 · {pending} 個等待中"
 }

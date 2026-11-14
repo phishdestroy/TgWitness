@@ -9848,5 +9848,6 @@
   "Search match": "مطابقة البحث",
   "Search matched an earlier saved version.": "أدى البحث إلى مطابقة إصدار سابق محفوظ.",
   "Search saved messages": "البحث في الرسائل المحفوظة",
-  "{n} saved versions": "{n} نسخة محفوظة"
+  "{n} saved versions": "{n} نسخة محفوظة",
+  "Chat loading: {running} active · {pending} pending": "تحميل المحادثات: {running} قيد التنفيذ · {pending} قيد الانتظار"
 }

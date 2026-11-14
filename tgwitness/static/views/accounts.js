@@ -80,7 +80,8 @@ export function createAccounts(context) {
   function controls(){
     const chosen=profiles().filter(p=>selected.has(p.id)), count=selected.size;
     find('accounts-selected').textContent=tr('{n} selected',{n:count});
-    for(const id of ['accounts-selected','accounts-pause','accounts-resume','accounts-clear'])find(id).hidden=!count;
+    for(const id of ['accounts-selected','accounts-pause','accounts-resume','accounts-clear'])find(id).hidden=false;
+    find('accounts-bulk').classList.toggle('has-selection',!!count);
     find('accounts-pause').disabled=working||!allowed()||!chosen.some(p=>eligible(p,'stop'));
     find('accounts-resume').disabled=working||!allowed()||!chosen.some(p=>eligible(p,'start'));
     find('accounts-clear').disabled=working||!count;

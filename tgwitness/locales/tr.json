@@ -9656,5 +9656,6 @@
   "Search match": "Arama eşleşmesi",
   "Search matched an earlier saved version.": "Arama, daha önce kaydedilmiş bir sürümle eşleşti.",
   "Search saved messages": "Kaydedilmiş mesajları arama",
-  "{n} saved versions": "{n} kaydedilmiş sürüm"
+  "{n} saved versions": "{n} kaydedilmiş sürüm",
+  "Chat loading: {running} active · {pending} pending": "Sohbet yükleme: {running} etkin · {pending} beklemede"
 }

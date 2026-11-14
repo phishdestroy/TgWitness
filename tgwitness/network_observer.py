@@ -108,7 +108,7 @@ def detach(collector):
 def context():
     inherited = _scope.get()
     observer, workspace = (inherited[0], inherited[1]) if inherited else (None, None)
-    component, purpose = "unattributed", "Unattributed application request"
+    component, purpose = inherited[3:5] if inherited and len(inherited) >= 5 else ("unattributed", "Unattributed application request")
     frame = sys._getframe(1)
     try:
         for _ in range(48):
@@ -204,7 +204,7 @@ async def observe_request(work, method, url, network, *args, **kwargs):
                               purpose=purpose, destination=target, method=method,
                               route=route, gateway=gateway, outcome="started",
                               parent=_scope.get()[2] if _scope.get() else None)
-    token = _scope.set((observer, workspace, identifier))
+    token = _scope.set((observer, workspace, identifier, component, purpose))
     started = time.monotonic()
     try:
         result = await work(method, url, network, *args, **kwargs)

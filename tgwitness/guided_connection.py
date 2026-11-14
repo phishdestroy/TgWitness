@@ -168,10 +168,12 @@ async def probe(collector, route, mode, *, outside=True):
                   "exit_ip": None, "country": None, "warp": None}
         if not concrete.telegram_only and (outside or mode == "warp"):
             try:
+                exit_started = time.monotonic()
                 _, _, body = await asyncio.wait_for(netclient.request("GET", "https://www.cloudflare.com/cdn-cgi/trace",
                     concrete, timeout=15, limit=8192), 20)
                 fields = dict(line.split("=", 1) for line in body.decode("ascii").splitlines() if "=" in line)
                 result.update(exit_ip=str(ipaddress.ip_address(fields["ip"])),
+                              http_latency_ms=round((time.monotonic() - exit_started) * 1000),
                               country=fields.get("loc") if len(fields.get("loc", "")) == 2 else None,
                               warp=fields.get("warp") if fields.get("warp") in ("on", "plus", "off") else None)
             except (OSError, ValueError, TimeoutError, netclient.RouteError):

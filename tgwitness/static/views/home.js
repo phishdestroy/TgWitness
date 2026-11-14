@@ -174,6 +174,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     }
     }
     const jobs = collector.media_jobs || {};
+    const loading = collector.chat_loading || {};
+    if (loading.running || loading.pending) card.append(node('p', 'home-note', tr('Chat loading: {running} active · {pending} pending', {running: loading.running || 0, pending: loading.pending || 0})));
     if (collector.has_session) card.append(node('p', 'home-note', tr('Files: {running} downloading · {pending} queued · {failed} failed', {running: jobs.running || 0, pending: (jobs.queued || 0) + (jobs.retry || 0), failed: jobs.failed || 0})));
     const history = profile.id === state.profile ? state.status?.history : null;
     if (history && history.phase !== 'none') {

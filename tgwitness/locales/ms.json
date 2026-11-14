@@ -9608,5 +9608,6 @@
   "Search match": "Padanan carian",
   "Search matched an earlier saved version.": "Carian menemui versi simpanan terdahulu yang sepadan.",
   "Search saved messages": "Cari mesej yang disimpan",
-  "{n} saved versions": "{n} versi yang disimpan"
+  "{n} saved versions": "{n} versi yang disimpan",
+  "Chat loading: {running} active · {pending} pending": "Memuatkan sembang: {running} aktif · {pending} menunggu"
 }

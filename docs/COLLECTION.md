@@ -54,6 +54,10 @@ show what arrived.
 
 **More tools → Sources → Scope** decides which chats a workspace records.
 
+New setup starts with **Choose chats**. Existing saved choices are retained. Choosing
+**All chats** in the setup wizard asks for confirmation when the loaded list contains
+more than 50 chats; the size estimate remains a separate, sample-based operation.
+
 | Mode | Records | New chats |
 | --- | --- | --- |
 | Chosen chats (default) | Only the chats you add by hand | Never added automatically |
@@ -164,11 +168,18 @@ account asks for the usual confirmation.
     earlier messages of a team chat just joined, or what a bot said before observation
     noticed the chat. Messages already saved live are not repeated.
 
-  Chats already in the list when the mode is switched on are added without snapshots.
+  Newly selected chats use these settings when the scope is applied, including chats
+  already present in the account's dialog list. Initial profile and history loading
+  runs for up to three chats concurrently; work for the same chat stays in order.
+  A slow chat does not hold up all other chats. The pending chat IDs are saved locally
+  and unfinished work resumes when observation starts again, including after a restart.
+  Sources disabled before their turn are skipped. The overview shows active and pending
+  chat loads separately from attachment downloads.
   A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
   recording of the chat continues. This includes waits while resolving the new chat's
   identity: the pending profile/history task is retained for retry, and an existing
-  longer account-wide wait is not shortened.
+  longer account-wide wait is not shortened. The workers share this wait; concurrency
+  does not bypass Telegram's request limits.
 - **Profiles on request.** **Chats → Profile → Save profile now** saves the current profile
   of any source; the newest one is shown above the messages.
 - **Chat state snapshots (preview).** State outside the message stream changes without a

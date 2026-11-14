@@ -1,10 +1,13 @@
 import re
+from difflib import get_close_matches
 
 from fastapi.exception_handlers import http_exception_handler
 from starlette.exceptions import HTTPException
+from starlette.responses import JSONResponse
 
 
 DOCUMENTS = (
+    "/home", "/case-board", "/pseudo-secret", "/network-topology",
     "/settings", "/first-run", "/board", "/system-map", "/secret-chats",
     "/topology", "/start", "/chats", "/journal", "/sources", "/parameters", "/account", "/accounts",
     "/access", "/system-log", "/integrations", "/exports", "/extras", "/analysis", "/sealed",
@@ -33,9 +36,8 @@ def register(app, static):
         if (error.status_code == 404 and request.method in ("GET", "HEAD")
                 and "text/html" in request.headers.get("accept", "")
                 and not request.url.path.startswith(("/api/", "/profiles/"))):
-            response = await static.get_response("index.html", request.scope)
-            response.status_code = 404
-            return response
+            return JSONResponse({"error": "No such page", "did_you_mean":
+                get_close_matches(request.url.path, DOCUMENTS, n=3, cutoff=0.4)}, status_code=404)
         return await http_exception_handler(request, error)
 
     app.add_exception_handler(HTTPException, missing)

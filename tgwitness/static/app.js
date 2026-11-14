@@ -221,6 +221,7 @@ async function loadPanelView(view){
 }
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
+  ...chatListView?.snapshot(),
   tab:state.view==='sources'?sourcesView?.tab:state.view==='evidence'?exportsView?.tab:null,
   slice:state.boardSlice||null,added:!!state.boardAdded,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
@@ -258,6 +259,7 @@ async function applyRouteToPanel(route,current){
   if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step,view==='settings'?route.hub:undefined);}
   else if(view==="chats"){
     await refreshChats(false,route.chatId);
+    if(current())chatListView?.restore(route);
     if(current()&&route.chatId!==null){
       if(state.chat!==route.chatId)await openChat(route.chatId,{history:false});
       else loadChatProfile().catch(()=>{});
@@ -738,7 +740,9 @@ async function unlock() {
   await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady,chatListReady,accountStateReady,disclosurePreviewReady,workspaceSafetyReady]);
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
-  state.accessNames=state.me?.admin?(await json("access",undefined,{root:true}).catch(()=>({}))).names||{}:{};
+  const accessToken=state.token;
+  const names=state.me?.admin?json("access",undefined,{root:true}).catch(()=>({})):Promise.resolve({});
+  void names.then(result=>{if(state.token===accessToken)state.accessNames=result.names||{};});
   await loadProfiles();
   if(state.profiles.some(profile=>profile.id===requested.workspace&&!profile.error_type))state.profile=requested.workspace;
   if(!state.profiles.some(p=>p.id===state.profile && !p.error_type))
@@ -752,18 +756,20 @@ async function unlock() {
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
   if(!state.opened&&(!requested.explicit||requested.error)){
-    state.view=state.status.demo||state.status.targets?.length&&state.status.stats.total?'chats':viewAllowed('start')?'start':'chats';
+    state.view=state.status.demo?'chats':viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view))state.view="chats";
   state.opened=true;
   sessionStorage.setItem("tgwitness-token", state.token);
   show("gate",false); show("workspace",true); $("panel-token").value="";
-  navigate(state.view,{history:false});
-
-  renderStatus(); setAuthStep(accountSignedIn() ? "authorized" : "credentials");
-  loadNotifications().catch(()=>{});
-  await router.start();
-  await bootstrapSettings({openFirstRun:!requested.explicit});
+  bootstrapProfiles={profiles:state.profiles};
+  try{
+    await navigate(state.view,{history:false,...(requested.explicit&&!requested.error?{load:async()=>{}}:{})});
+    renderStatus(); setAuthStep(accountSignedIn() ? "authorized" : "credentials");
+    loadNotifications().catch(()=>{});
+    await router.start();
+    await bootstrapSettings({openFirstRun:!requested.explicit});
+  }finally{bootstrapProfiles=null;}
 }
 $("unlock-form").addEventListener("submit", async event => {
   event.preventDefault(); $("login-error").textContent="";
@@ -1501,8 +1507,16 @@ async function refreshStatus() {
   settingsHub?.status();
   if(!viewAllowed(state.view))navigate("chats");
 }
+let profilesFetch=null,bootstrapProfiles=null;
+async function readProfiles(){
+  if(bootstrapProfiles)return bootstrapProfiles;
+  const key=state.workspaceRevision+":"+state.token;
+  if(profilesFetch?.key===key)return profilesFetch.promise;
+  const pending={key,promise:json("profiles",undefined,{root:true})};profilesFetch=pending;
+  try{return await pending.promise;}finally{if(profilesFetch===pending)profilesFetch=null;}
+}
 async function loadProfiles(){
-  const request=++profilesRequest,result=await json("profiles",undefined,{root:true});
+  const request=++profilesRequest,result=await readProfiles();
   const {updateWorkspaceOptions}=await workspaceOptionsReady;
   if(request!==profilesRequest)return;
   state.profiles=result.profiles;
@@ -1879,6 +1893,7 @@ function excerpt(e) {
   if (e.kind==="reaction.snapshot") return p.counts ? Object.entries(p.counts).map(([k,v])=>k+" "+v).join("  ·  ") : tr("Reaction snapshot received · actor list may be incomplete");
   const failure=p.error_type ? " · "+(errorName(p.error_type)||p.error_type) : "";
   switch (e.kind) {
+    case "media.saved": return attachmentSummary(p);
     case "actor.profile_changed": return Object.entries(p.changes||{}).map(([k,c])=>(k==="display_name"?tr("Name"):k==="username"?tr("Username"):k)+": "
       +[c.before,c.after].map(v=>v==null||v===""?"—":k==="username"?"@"+v:v).join(" → ")).join(" · ");
     case "actor.avatar_saved": return p.previous_photo_id===undefined?"":p.previous_photo_id===null?tr("Added a profile photo"):tr("Replaced the previous profile photo");
@@ -1985,6 +2000,15 @@ function excerpt(e) {
   if (p.coverage) return tr(p.coverage);
   if (p.meaning) return p.meaning;
   return tr("Open the source record for observation details");
+}
+function attachmentSummary(p){
+  const mime=String(p.mime_type||''),kind=p.media_kind||(p.attachment?.kind==='photo'?'photo':mime.startsWith('image/')?'photo':mime.startsWith('video/')?'video':mime.startsWith('audio/')?'audio':'document');
+  const names={photo:'Photo',video:'Video',voice:'Voice message',audio:'Audio',document:'Document',video_note:'Video messages',animation:'Animations',sticker:'Stickers'};
+  const duration=Number(p.duration_seconds),parts=[tr(names[kind]||'Attachment')];
+  if(p.original_name)parts.push(p.original_name);
+  if(Number.isFinite(p.size)&&p.size>=0)parts.push(humanSize(p.size));
+  if(p.duration_seconds!=null&&Number.isFinite(duration)&&duration>=0)parts.push(Math.floor(duration/60)+':'+String(Math.floor(duration%60)).padStart(2,'0'));
+  return parts.join(' · ');
 }
 function safeExcerpt(e){
   try{return excerpt(e);}
@@ -5223,10 +5247,9 @@ async function openRecordingSettings(){
 }
 const exportRunning=()=>multiRunning()&&state.multi.chat_id===state.chat||state.status?.collector.chat_export?.phase==="running";
 let chatListRequest=0;
-async function refreshChats(refresh=false,wanted=null){
+async function refreshChats(refresh=false,wanted=null,messages=true){
   if(!state.status||state.view!=='chats')return;
-  void resumeMulti();
-  const revision=state.workspaceRevision,request=++chatListRequest;
+  const revision=state.workspaceRevision,request=++chatListRequest,previousChat=state.chat;
   const current=()=>request===chatListRequest&&revision===state.workspaceRevision&&state.view==='chats';
   state.chatsLoading=true;state.chatsError=false;renderChatsList();
   if(state.chat===null)renderChatEmpty();
@@ -5246,6 +5269,7 @@ async function refreshChats(refresh=false,wanted=null){
     if(matchMedia('(max-width: 767px)').matches)viewQuery("chats",".chats-shell").dataset.panel="list";}
   renderChatsList();
   if(state.chat===null){renderChatEmpty();return;}
+  if(!messages&&state.chat===previousChat){renderChat();return;}
   return await loadChatMessages(refresh?"refresh":"open");
 }
 let chatListView=null;
@@ -6109,7 +6133,7 @@ function mediaNode(media){
 }
 const chatTelegramTop=new Set(),chatAutoLoaded=new Set();
 async function loadHistory(button,limit,before=null,quiet=false){
-  const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration;
+  const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration,request=chatPageRequest;
   const current=()=>profile===state.profile&&revision===state.workspaceRevision&&chat===state.chat&&generation===chatGeneration;
   const work=async()=>{
     if(!quiet)toast(tr("Loading the last {n} messages from Telegram…",{n:limit}));
@@ -6119,17 +6143,19 @@ async function loadHistory(button,limit,before=null,quiet=false){
       $("chat-history-feedback")?.remove();
       if(r.returned<limit)chatTelegramTop.add(profile+":"+chat);
       if(!quiet||r.captured)toast(tr("Loaded {n} messages.",{n:r.captured}));
-      await refreshStatus();await refreshChats();
-      if(current()&&before){if(r.captured){state.chatNextBefore=before;await loadChatMessages("older");}else renderChat();}
+      await refreshStatus();await refreshChats(true,null,false);
+      if(!current()||request!==chatPageRequest)return;
+      if(before){if(r.captured){state.chatNextBefore=before;await loadChatMessages("older");}else renderChat();}
+      else await loadChatMessages("refresh");
     }catch(error){
       if(!current()||error instanceof StaleView)return;
       $("chat-history-feedback")?.remove();
-      if(quiet)return;
+      if(quiet)chatAutoLoaded.delete(profile+":"+chat);
       const notice=viewState("error",tr("Could not load messages"),error.message,tr("Retry"),()=>current()?loadHistory(null,limit,before):undefined);
-      notice.id="chat-history-feedback";$("chat-feed").before(notice);throw error;
+      notice.id="chat-history-feedback";$("chat-feed").before(notice);if(!quiet)throw error;
     }
   };
-  return button?busy(button,work):work();
+  return busy(button,work);
 }
 $("chats-manage").addEventListener("click",()=>navigate("sources"));
 $("chat-load-history").addEventListener("click",e=>loadHistory(e.currentTarget,Number($("chat-history-limit").value)));
@@ -6716,6 +6742,7 @@ async function bootstrap(){
   await Promise.all([timeReady,shellReady,viewReady,chatListReady]);
   await ensureRouter();
   const revision=state.workspaceRevision;
+  if(state.token){await unlock().catch(unlockFailed);return;}
   try{
     const response=await fetch("/api/demo-access",{cache:"no-store",credentials:"omit"});
     const entry=response.ok?await response.json():{};
