@@ -184,7 +184,6 @@ class WitnessClient(TelegramClient):
 
     def __init__(self, *args, **kwargs):
         self.accepted_state, self.undispatched = None, 0
-        self._flood_until = {}
         super().__init__(*args, **kwargs)
         if GapAwareMessageBox is not None:
             box = GapAwareMessageBox(self._log["messagebox"])
@@ -270,7 +269,7 @@ class WitnessClient(TelegramClient):
                                     if issubclass(self._connection, TcpMTProxy) else None)
 
     def _flood_key(self, request, sender=None):
-        return flood_key(request, getattr(sender, "dc_id", None) or getattr(self.session, "dc_id", None))
+        return flood_key(request, getattr(sender, "dc_id", None) or getattr(getattr(self, "session", None), "dc_id", None))
 
     def flood_until(self, key):
         getter = getattr(self, "flood_getter", None)
@@ -302,6 +301,7 @@ class WitnessClient(TelegramClient):
             self._rpc_lock = asyncio.Lock()
             self._bulk_lock = asyncio.Lock()
             self._rpc_owner = None
+            self._flood_until = getattr(self, "_flood_until", {})
             self._file_slots = asyncio.Semaphore(FILE_REQUESTS)
         items = request if utils.is_list_like(request) else (request,)
         await self._flood_turn(sender, items)
@@ -362,7 +362,7 @@ class WitnessClient(TelegramClient):
                 flood = self._flood_key(request, sender)
                 until = self._flood_until[flood] = max(self.flood_until(flood), time.time() + exc.seconds + 1)
                 if save := getattr(self, "rpc_backoff_setter", None):
-                    save(until, method_name(request), flood)
+                    save(until, flood)
                 if observe := getattr(self, "rpc_backoff_observer", None):
                     failed = getattr(exc, "request", None)
                     observe({**info, "failed_method": request_method(failed)["method"] if failed is not None else info["method"],

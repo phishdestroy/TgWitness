@@ -614,7 +614,6 @@ class Collector:
         self.chat_state_worker = None
         self.presence_worker = None
         self.recheck_wakeup = asyncio.Event()
-        self.recheck_everything = False
         self.recheck_resume_at = 0
         self.recheck_continuing = set()
         self.intake_resume_at = 0
@@ -636,7 +635,7 @@ class Collector:
 
     def status(self):
         credentials = self.vault.read("credentials")
-        backoff, paused_by = self.store.get_setting("rpc_backoff_until", 0), self.store.get_setting("rpc_backoff_method", None)
+        backoff, paused_by = self.pause_until(), self.store.get_setting("rpc_backoff_method", None)
         return {
             "network": self.route_status(),
             "phase": self.phase, "running": self.running,
@@ -672,11 +671,10 @@ class Collector:
             "probe_missed": self.probe_missed if self.running else None,
             "session_revoked": self.session_revoked if self.running else None,
             "max_handler_ms": round(self.max_handler_ms, 2),
-            "rpc_backoff_until": self.store.get_setting("rpc_backoff_until", 0),
+            "rpc_backoff_until": backoff,
             "rpc_backoff": self.store.get_setting("rpc_backoff", None),
             "rpc_activity": self.client.rpc_activity() if isinstance(self.client, WitnessClient) else None,
             "rpc_backoff_method": paused_by["method"] if paused_by and paused_by["until"] >= backoff - 2 else None,
-            "rpc_flood_until": self.flood_waits(),
             "disk_free_bytes": shutil.disk_usage(self.store.root).free,
             "run_id": self.run_id,
             "reconnect_attempts": self.reconnect_attempts,
@@ -1047,13 +1045,12 @@ class Collector:
         client.route_id = self.current_route_id() if self.automatic() else None
         return client
 
-    def telegram_paused(self, until, method=None, key=None):
-        waits = self.flood_waits()
-        key = key or method or "unknown"
-        if until > waits.get(key, 0):
-            waits[key] = until
-            self.store.set_setting("rpc_flood_until", waits)
-            self.store.set_setting("rpc_backoff_method", {"until": until, "method": method, "key": key})
+    def telegram_paused(self, until, method=None):
+        waits, key = self.flood_waits(), method or "unknown"
+        if until > waits.get(key, time.time()):
+            if until >= max(waits.values(), default=0):
+                self.store.set_setting("rpc_backoff_method", {"until": until, "method": key})
+            self.store.set_setting("rpc_flood_until", {**waits, key: until})
 
     def flood_waits(self):
         saved, now = self.store.get_setting("rpc_flood_until", {}), time.time()
@@ -1061,10 +1058,10 @@ class Collector:
                 if isinstance(until, (int, float)) and until > now} if isinstance(saved, dict) else {}
 
     def flood_paused(self, guard):
-        client = self.client
-        if not isinstance(client, WitnessClient):
-            return False
-        return any(client.flood_until(key) > time.time() for key in FLOOD_GUARDED[guard])
+        return any(key in FLOOD_GUARDED[guard] for key in self.flood_waits())
+
+    def pause_until(self):
+        return max(self.store.get_setting("rpc_backoff_until", 0), *self.flood_waits().values())
 
     def updates_arrived(self):
         self.updates_seen += 1
@@ -1076,7 +1073,7 @@ class Collector:
             self.store.append("connection.restored", {
                 "reason": "updates_resumed", "diverted_since": diverted["since"],
                 "completeness": "updates Telegram sent to the other session in between may be missing"})
-            self.request_recheck()
+            self.recheck_wakeup.set()
         elif (probe and probe["suspect_at"] is not None and not diverted and self.updates_seen == probe["seen"]
               and now - probe["suspect_at"] >= UPDATES_GRACE_SECONDS):
             self.updates_diverted = {"since": utcnow(), "seen": probe["seen"]}
@@ -1084,9 +1081,10 @@ class Collector:
                 "reason": "updates_diverted", "telegram_pts_before": probe["pts"], "telegram_pts": probe["server_pts"],
                 "silent_since": probe["since"], "meaning": UPDATES_DIVERTED_MEANING,
                 "completeness": "updates in this period may be missing"})
-            self.request_recheck()
+            self.recheck_wakeup.set()
         client = self.client
-        if probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS or self.flood_paused("watch"):
+        if (probe and now - probe["checked_at"] < UPDATES_CHECK_SECONDS or self.flood_paused("watch")
+                or getattr(client, "_rpc_lock", None) and client._rpc_lock.locked()):
             return
         seen = self.updates_seen
         try:
@@ -1144,8 +1142,9 @@ class Collector:
                 session.set_update_state(0, types.updates.State(
                     pts=a["pts"], qts=a["qts"], date=datetime.fromtimestamp(a["date"], timezone.utc),
                     seq=a["seq"], unread_count=0))
-            now, tracked = datetime.now(timezone.utc), self.tracked_channels()
-            channels = [c for c in saved.get("channels", []) if tracked is None or c["id"] in tracked]
+            now, channels = datetime.now(timezone.utc), saved.get("channels", [])
+            tracked = self.tracked_channels() if channels else None
+            channels = [c for c in channels if tracked is None or c["id"] in tracked]
             for channel in channels:
                 session.set_update_state(channel["id"], types.updates.State(
                     pts=channel["pts"], qts=0, date=now, seq=0, unread_count=0))
@@ -2248,7 +2247,7 @@ class Collector:
                     self.note("connection.restored", {
                         "reason": "transport_connected", "detected": "on automatic reconnect"})
                 if self.running:
-                    self.request_recheck()
+                    self.recheck_wakeup.set()
             return
         role = "current" if client is self.client else "candidate" if client is self.login_client else "other"
         if state == "opened":
@@ -2828,7 +2827,7 @@ class Collector:
                     "reason": "transport_connected" if connected else "transport_disconnected",
                     "completeness": "unknown; intermediate events may be missing"})
                 if connected:
-                    self.request_recheck()
+                    self.recheck_wakeup.set()
                 else:
                     await self.note_drop()
                 self.updates_probe = None
@@ -2911,7 +2910,7 @@ class Collector:
             catch_up = getattr(self.client, "catch_up", None)
             if catch_up:
                 await catch_up()
-            self.request_recheck()
+            self.recheck_wakeup.set()
 
     async def failure(self, exc, context, *, client=None, fatal=False):
         if self.handle_authorization_error(exc, context, client=client):
@@ -2947,15 +2946,13 @@ class Collector:
 
     def request_recheck(self, chat_ids=None):
         if chat_ids is None:
-            self.recheck_everything = True
-        else:
-            chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
-            if not chat_ids:
-                return
+            self.recheck_wakeup.set()
+            return
+        chat_ids = [chat_id for chat_id in chat_ids if chat_id is not None and self.selected(chat_id)]
+        if chat_ids:
             last = self.store.get_setting("recheck_last", {})
             last.update((str(chat_id), 0) for chat_id in chat_ids)
             self.store.set_setting("recheck_last", last)
-        self.recheck_wakeup.set()
 
     async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None,
                               acquisition=None, sender=None):
@@ -3506,7 +3503,7 @@ class Collector:
             "completeness": "updates in this period may be missing"})
         with suppress(Exception):
             self.store.set_setting("probe_last", {"at": utcnow(), "result": "missed", "n": pending["n"]})
-        self.request_recheck()
+        self.recheck_wakeup.set()
 
     def probe_update(self, update):
         message = update.message
@@ -3576,11 +3573,12 @@ class Collector:
     async def recheck_loop(self):
         delay, forced, reconnected = self.param("recheck_first_delay_seconds"), True, 0
         while self.running:
-            with suppress(TimeoutError):
+            try:
                 await asyncio.wait_for(self.recheck_wakeup.wait(), delay)
+                forced, reconnected = True, time.time()
+            except TimeoutError:
+                pass
             self.recheck_wakeup.clear()
-            if self.recheck_everything:
-                self.recheck_everything, forced, reconnected = False, True, time.time()
             if not self.running:
                 return
             delay = self.param("recheck_tick_seconds")
@@ -3872,7 +3870,7 @@ class Collector:
             task = "profiling"
         else:
             task = None
-        until = self.store.get_setting("rpc_backoff_until", 0)
+        until = self.pause_until()
         return {"task": task, "detail": detail, "telegram_pause_until": until if until > time.time() else None}
 
     def reserve_export(self, owner):

@@ -4666,10 +4666,6 @@ function renderSeenBy(){
     rows.push([tr("Telegram rate limit"),backoff?.failed_method||backoff?.method||tr("Method unavailable")]);
     rows.push([tr("Requests paused until"),formatTime(new Date(c.rpc_backoff_until*1000).toISOString())]);
   }
-  for(const [method,until] of Object.entries(c.rpc_flood_until||{}))if(until>Date.now()/1000){
-    rows.push([tr("Telegram rate limit"),method]);
-    rows.push([tr("Requests paused until"),formatTime(new Date(until*1000).toISOString())]);
-  }
   if(checked){
     rows.push([tr("Current authorization"),typeof checked.official_app==="boolean"?
       tr(checked.official_app?"Telegram marks it as an official app":"Telegram marks it as an unofficial app"):tr("Official-app flag unavailable")]);
