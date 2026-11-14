@@ -8956,5 +8956,8 @@
   "Transport route checked for this connection.": "Rute transportasi telah diperiksa untuk koneksi ini.",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Simpan obrolan dan foto satu kali; berkas lain dipilih di bawah Perekaman dan file. Tidak ada yang terus berjalan di latar belakang. Arsip tersebut ditandatangani, dan verify.py memeriksa setiap berkas di dalamnya.",
   "running": "berjalan",
-  "cancelled": "dibatalkan"
+  "cancelled": "dibatalkan",
+  "Updates arrived while observation was paused": "Pembaruan tiba saat pengamatan sedang dijeda",
+  "Too many updates arrived during startup": "Terlalu banyak pembaruan yang masuk saat proses startup",
+  "Telegram could not deliver older updates": "Telegramt tidak dapat mengirimkan pembaruan yang lebih lama"
 }

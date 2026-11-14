@@ -9004,5 +9004,8 @@
   "Transport route checked for this connection.": "এই সংযোগের জন্য পরিবহন পথ যাচাই করা হয়েছে।",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "চ্যাট এবং ছবি একবার সংরক্ষণ করুন; অন্যান্য ফাইল রেকর্ডিং ও ফাইল-এর অধীনে নির্বাচিত হয়। পটভূমিতে কিছুই চলতে থাকে না। আর্কাইভটি স্বাক্ষরিত, এবং verify.py এতে থাকা প্রতিটি ফাইল যাচাই করে।",
   "running": "চলমান",
-  "cancelled": "বাতিল"
+  "cancelled": "বাতিল",
+  "Updates arrived while observation was paused": "পর্যবেক্ষণ বিরতিতে থাকা অবস্থায় আপডেটগুলো এসেছিল",
+  "Too many updates arrived during startup": "স্টার্টআপের সময় অনেকগুলো আপডেট এসেছিল",
+  "Telegram could not deliver older updates": "Telegram পুরনো আপডেটগুলো সরবরাহ করতে পারেনি"
 }

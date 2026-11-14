@@ -9012,5 +9012,8 @@
   "Transport route checked for this connection.": "Itinéraire de transport vérifié pour cette connexion.",
   "Save chats and photos once; other files are chosen under Collection and files. Nothing keeps running in the background. The archive is signed, and verify.py checks every file in it.": "Les discussions et les photos sont sauvegardées une seule fois ; les autres fichiers sont sélectionnés sous Enregistrement et fichiers. Aucun processus ne continue de s’exécuter en arrière-plan. L’archive est signée, et verify.py vérifie chaque fichier qu’elle contient.",
   "running": "en cours",
-  "cancelled": "annulé"
+  "cancelled": "annulé",
+  "Updates arrived while observation was paused": "Des mises à jour sont arrivées alors que l’observation était en pause",
+  "Too many updates arrived during startup": "Trop de mises à jour sont arrivées lors du démarrage",
+  "Telegram could not deliver older updates": "Telegram n’a pas pu fournir les mises à jour plus anciennes"
 }
