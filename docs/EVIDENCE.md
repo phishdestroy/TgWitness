@@ -65,8 +65,9 @@ part of that record with the checks below.
 | Output | Verification and use |
 | --- | --- |
 | Evidence ZIP | Canonical events, signed manifest, coverage, custody entries, attachments and available external receipts; check the archive and its selected acquisition mode. |
+| ASiC-E container | The evidence ZIP as an ETSI ASiC-E container (EN 319 162-1): a `mimetype` entry and `META-INF/ASiCManifest.xml` with a CAdES signature made with the workspace's own certificate, at level B-B, or B-T when timestamping is on. Signature validators such as EU DSS check its format and integrity; the certificate is self-issued, so they report that no trust anchor was found. `verify.py` checks the Ed25519 manifest and every file it lists, and names the container entries it does not check. |
 | HTML and JSON reports | Individually sealed views with source references, also listed in the ZIP manifest. Their recorded counts summarize journal event kinds. |
-| PDF reports | Ed25519 seal plus CMS PDF signature over the byte range. The TgWitness verifier uses the trusted Ed25519 key; a viewer's certificate-trust display is a separate check. |
+| PDF reports | Ed25519 seal plus a PAdES baseline PDF signature (B-B; B-T with a signature time stamp when timestamping is on) over the byte range. The TgWitness verifier uses the trusted Ed25519 key; a viewer's certificate-trust display is a separate check. |
 | CSV | A spreadsheet view covered by the ZIP manifest. Formula escaping protects spreadsheet use; original signed text remains in the journal. |
 | JSONL | Signed event records, including attachment references. The evidence ZIP additionally carries the preserved attachment bytes. |
 | Chat export and Desktop-compatible views | History acquisition and available admin-log records, with the requested rendering and signed archive. Live monitoring's saved versions are a separate acquisition path. |
@@ -80,6 +81,31 @@ A printout or screen capture is a presentation of the signed material. Its repor
 ID, key fingerprint and QR reference help locate the original file for verification.
 Custody declarations record the supplied examiner and transfer information;
 verifier results and acquisition receipts are retained as separate evidence.
+
+### External signatures
+
+An operator can add a signature made with a key that TgWitness never holds, for
+example an investigator's qualified electronic signature or an organisation's seal.
+On **Exports**, **External signature** on a prepared export that is not
+password-protected hands out the exact bytes to sign: for an ASiC-E container a new
+`META-INF/ASiCManifestNNN.xml` that lists every file with its SHA-256, for a ZIP the
+export's `manifest.json`. The signer returns a CMS (CAdES) `.p7s` file, detached or
+with the content embedded.
+
+TgWitness checks that the signature covers exactly those bytes and that its value
+verifies with the signer's certificate (RSA PKCS#1 v1.5, RSASSA-PSS, ECDSA, Ed25519,
+Ed448). It checks the certificate chain only against root certificates the operator
+supplies. It does not check revocation or trusted lists and does not say whether a
+certificate is qualified. Each signature has one state: waiting for a signature,
+attached and not checked, verified, algorithm not supported, signature invalid,
+signed bytes do not match, or certificate not chained to a supplied root. A change to the export after
+the bytes were handed out turns every signature for it to "signed bytes do not match".
+
+**Download with signatures** adds the signatures and their manifests to the ASiC-E
+container under `META-INF`, or puts the unchanged ZIP, the `.p7s` files and
+`SIGNATURES.txt` into an outer ZIP. Invalid signatures and signatures over other
+bytes are left out. A signature whose algorithm TgWitness cannot check is included;
+the panel shows its state, and for a ZIP `SIGNATURES.txt` records it.
 
 ## Comparing chat exports
 
@@ -217,13 +243,17 @@ report is sealed with the workspace's Ed25519 key and can be verified separately
   and a selection for data protection can be made from them while the signed file stays whole.
 - `report.pdf` / `chat.pdf`: a formal document for printing and filing, signed twice over the same
   bytes, the whole file except the signature value (`/ByteRange`). The standard PDF signature
-  (`adbe.pkcs7.detached`, CMS with SHA-256 and ECDSA P-256) uses a self-issued document-signing
-  certificate kept in the workspace vault; its subject serial number is the Ed25519 key
-  fingerprint. The Ed25519 seal travels inside the CMS as the unsigned attribute
-  `2.25.240684792623320047764573196045913242332` and names the certificate's SHA-256 with
-  `"content": "pdf-byte-range"`, so the Ed25519 key vouches for the certificate. A PDF reader shows
-  whether the file changed after signing and calls the signer unknown until the certificate is
-  trusted; compare the Ed25519 fingerprint instead. Chinese, Japanese and Korean PDFs need a font
+  is a PAdES baseline signature (ETSI EN 319 142-1, `/SubFilter /ETSI.CAdES.detached`: CMS with
+  SHA-256 and ECDSA P-256, signing-certificate-v2, no CMS signing time; the claimed time is `/M`).
+  It is level B-B; when timestamping is on and a timestamp authority answers over the route for
+  requests outside Telegram, the CMS also carries an RFC 3161 signature time stamp (B-T). It uses
+  a self-issued document-signing certificate kept in the workspace vault; its subject serial
+  number is the Ed25519 key fingerprint. The Ed25519 seal travels inside the CMS as the unsigned
+  attribute `2.25.240684792623320047764573196045913242332` and names the certificate's SHA-256
+  with `"content": "pdf-byte-range"`, so the Ed25519 key vouches for the certificate. The
+  certificate is not a qualified certificate: a PDF reader shows the signature as valid but the
+  signer as untrusted or unknown unless the certificate chains to a list that reader trusts;
+  compare the Ed25519 fingerprint instead. Chinese, Japanese and Korean PDFs need a font
   on the server (or in `TGWITNESS_FONT_DIR`); without one the ZIP carries the HTML and JSON reports
   only.
 - `report.en.html`, `report.en.pdf` / `chat.en.html`, `chat.en.pdf`: the English original of the

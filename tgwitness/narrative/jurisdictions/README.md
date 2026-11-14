@@ -19,6 +19,15 @@ alongside the terms included in the report.
 | `expert_role`, `esig_regulation`, `data_access_basis` | Referenced terms and source material |
 | `timestamp_recognition`, `evidence_rules`, `dpa` | Additional reference entries, where supplied |
 | `sources` | Labels and URLs reproduced in the report |
+| `review_updates` | Later partial reviews: date, scope and the sources opened |
+
+Each reference entry has a `term`, a short English `basis` and a `source` URL.
+`expert_role`, `data_access_basis` and each `evidence_rules` item carry a `route`
+(`civil`, `criminal` or `all`); the report shows `data_access_basis` only for a
+matching route. `timestamp_recognition.automatic_ots_qualification` is always
+`false`: an OpenTimestamps receipt is not a qualified time stamp. `dpa` names the
+supervisory authority (`name`, `name_en`, `basis`, `source`). The report shows the
+`evidence_rules` items of the matching route and the `dpa` entry after the other terms.
 
 See [`DE.json`](DE.json) for the file structure and [`render.py`](../render.py)
 for its use in reports. Preserve source URLs and check dates when updating

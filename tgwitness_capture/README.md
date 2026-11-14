@@ -26,6 +26,7 @@ The main application's collector is in [`tgwitness/`](../tgwitness/README.md).
 | Official Web | [`official.py`](official.py), [`official_api.py`](official_api.py), [`official_proof.py`](official_proof.py), [`gateway.py`](gateway.py) |
 | Trusted Live | [`trusted_runtime.py`](trusted_runtime.py), [`trusted_service.py`](trusted_service.py), [`trusted_anchor.py`](trusted_anchor.py), [`trusted_verify.py`](trusted_verify.py) |
 | Continuity | [`continuity.py`](continuity.py) |
+| AyuGram database interpretation and journal comparison | [`ayugram.py`](ayugram.py) |
 | Recorder interfaces | [static/](static/README.md) |
 
 ## Inspect the commands
@@ -38,6 +39,6 @@ python -m tgwitness_capture --help
 python -m tgwitness_capture verify --help
 ```
 
-The CLI exposes `serve`, `identity`, `export`, `verify` and `witness`.
+The CLI exposes `serve`, `identity`, `export`, `verify`, `witness` and `ayugram`.
 [Configuration examples](../addons/capture/config/README.md) are maintained with
 the add-on; capture regressions remain in the private validation workspace.

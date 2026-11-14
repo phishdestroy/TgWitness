@@ -147,12 +147,71 @@ REQUEST_NOTES = (
     "In channels and supergroups where this account is an administrator, Telegram keeps deleted messages and earlier "
     "versions of edits in the admin log for about 48 hours.",
 )
+BUDAPEST = "https://ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2012_III_140/COO_2026_100_2_797559.pdf"
+COOPERATION_NOTE = ("Each reference states what the instrument says. Whether it applies to a case, and which authority may "
+                    "use it, is for the requesting authority to determine.")
+COOPERATION = (
+    {"instrument": "Council of Europe Convention on Cybercrime (Budapest, 23 November 2001, ETS No. 185)",
+     "provisions": "Articles 16, 17 and 18",
+     "text": "Each Party enables its competent authorities to order the expeditious preservation of specified stored "
+             "computer data, including traffic data; a preservation order to a person runs for as long as necessary, up "
+             "to 90 days, and a Party may provide for its renewal (Article 16). For preserved traffic data, each Party "
+             "ensures expeditious disclosure to its competent authority of enough traffic data to identify the service "
+             "providers and the path of the communication (Article 17). Authorities may order a "
+             "person in the territory to submit specified computer data in that person's possession or control, and a "
+             "service provider offering services in the territory to submit subscriber information (Article 18).",
+     "source": BUDAPEST, "checked": "2026-11-14"},
+    {"instrument": "Council of Europe Convention on Cybercrime (Budapest, 23 November 2001, ETS No. 185)",
+     "provisions": "Article 29",
+     "text": "A Party may ask another Party to order or obtain the expeditious preservation of data stored in that other "
+             "Party's territory, before a mutual assistance request for the data. The request names the authority, the "
+             "offence and facts, the data and its relation to the offence, the custodian or location, the necessity, "
+             "and the intended mutual assistance request. Dual criminality is not required, subject to the reservation "
+             "in paragraph 4. Preservation lasts at least 60 days.",
+     "source": BUDAPEST, "checked": "2026-11-14"},
+    {"instrument": "Council of Europe Convention on Cybercrime (Budapest, 23 November 2001, ETS No. 185)",
+     "provisions": "Article 32",
+     "text": "Without the authorisation of another Party, a Party may access publicly available stored computer data "
+             "wherever it is located, or access or receive, through a computer system in its territory, stored computer "
+             "data located in another Party with the lawful and voluntary consent of the person who has the lawful "
+             "authority to disclose the data through that system.",
+     "source": BUDAPEST, "checked": "2026-11-14"},
+    {"instrument": "Second Additional Protocol to the Convention on Cybercrime on enhanced co-operation and disclosure of "
+                   "electronic evidence (CETS No. 224)",
+     "provisions": "Articles 7, 8 and 9",
+     "text": "Adopted by the Committee of Ministers of the Council of Europe on 17 November 2021. Article 7 provides for an "
+             "order issued directly to a service provider in the territory of another Party for disclosure of subscriber "
+             "information; a Party may require simultaneous notification of such orders (paragraph 5.a) or reserve the "
+             "right not to apply Article 7 (paragraph 9). Article 8 covers giving effect to orders from another Party "
+             "for expedited production of subscriber information and traffic data. Article 9 covers expedited "
+             "disclosure of stored computer data in an emergency. The ratification status of the Protocol was not "
+             "confirmed in this research; check the Council of Europe Treaty Office chart for CETS No. 224 on the date "
+             "of the request.",
+     "source": "https://publications.europa.eu/resource/celex/32022D0722", "checked": "2026-11-14"},
+    {"instrument": "Regulation (EU) 2023/1543 on European Production Orders and European Preservation Orders for "
+                   "electronic evidence in criminal proceedings",
+     "provisions": "Articles 1–7, 10, 11 and 34",
+     "text": "Applies from 18 August 2026 (Article 34). It lets an authority of an EU Member State, in criminal "
+             "proceedings, order a service provider that offers services in the Union and is established or represented "
+             "by a legal representative in another Member State to produce or preserve electronic evidence, regardless "
+             "of where the data is located (Articles 1 and 2). Orders cover subscriber data, data requested only to "
+             "identify the user, traffic data and content data (Article 3, points 9 to 12). Production orders for "
+             "subscriber or identification data are issued by a judge, court, investigating judge or public prosecutor, "
+             "or validated by one of them; orders for other traffic data or content data are issued or validated by a "
+             "judge, court or investigating judge, and only for the offences in Article 5(4), including offences "
+             "punishable in the issuing State by a maximum custodial sentence of at least three years; preservation "
+             "orders for any category are issued or validated by a judge, court, investigating judge or public "
+             "prosecutor (Articles 4 to 6). Requested data is transmitted within 10 days of receipt, or within 8 hours in "
+             "an emergency (Article 10). Preservation lasts 60 days unless a subsequent request for production is "
+             "confirmed, and can be extended by 30 days (Article 11).",
+     "source": "https://publications.europa.eu/resource/celex/32023R1543", "checked": "2026-11-14"},
+)
 
 
 def annex(model):
     found = subjects(model)
     return {"format": "tgwitness-request-annex-v1", "chats": found["chats"], "people": found["people"],
-            "notes": list(REQUEST_NOTES)}
+            "notes": list(REQUEST_NOTES), "references": [dict(item) for item in COOPERATION]}
 
 
 def annex_csv(data):
@@ -200,7 +259,17 @@ def annex_html(data, title, say):
                    + "</th></tr>" + people + "</table>" if people else "<p>" + e(say("None recorded.")) + "</p>")
                 + "<h2>" + e(say("Message references")) + "</h2>" + (refs or "<p>" + e(say("None recorded.")) + "</p>")
                 + "<h2>" + e(say("Notes")) + "</h2><ul>" + "".join("<li>" + e(say(note)) + "</li>" for note in data["notes"][2:])
-                + "</ul>", getattr(say, "language", "en"))
+                + "</ul>" + references_html(data.get("references") or [], say), getattr(say, "language", "en"))
+
+
+def references_html(items, say):
+    if not items:
+        return ""
+    return ("<h2>" + e(say("International cooperation references")) + "</h2><p>" + e(say(COOPERATION_NOTE)) + "</p><table><tr><th>"
+            + "</th><th>".join(e(say(h)) for h in ("Instrument", "Provisions", "What it says", "Source")) + "</th></tr>"
+            + "".join("<tr><td>" + e(say(item["instrument"])) + "</td><td>" + e(say(item["provisions"])) + "</td><td>"
+                      + e(say(item["text"])) + '</td><td class="mono">' + e(item["source"]) + "<br>"
+                      + e(say("Opened {date}", date=item["checked"])) + "</td></tr>" for item in items) + "</table>")
 
 
 PROCESS = (
@@ -260,3 +329,142 @@ def certification_html(session, model, fixed, fingerprint, hashes, say, stamped=
             + "</p>" + "".join("<p>" + e(say(label)) + ': <span class="blank"></span></p>' for label in (
                 "Full name", "Title and organisation", "Qualifications", "Signature", "Date", "Place")) + "</div>")
     return page(say("Certification of authenticity of electronic records"), body, getattr(say, "language", "en"))
+
+
+UA_FILES = (("court/inspection-protocol.html", "Inspection protocol (draft for the official)"),
+            ("court/technical-annex.html", "Technical annex"), ("court/file-inventory.html", "File inventory"),
+            ("court/media-transfer-act.html", "Media handover act"))
+UA_BASIS = ("The structure of this draft follows the Criminal Procedure Code of Ukraine, articles 104–107 (procedural "
+            "records) and article 237 (inspection). Check the completed protocol against those articles.")
+UA_NOTICE = ("Draft prepared by TgWitness. It fills in only what the software recorded. The official who conducts the "
+             "procedural action decides the legal ground and the procedure, completes the blank fields and signs. This "
+             "draft contains no legal conclusions.")
+UA_COVERT = ("Records of covert investigative (search) actions under chapter 21 of the Criminal Procedure Code follow "
+             "their own form. This draft is not such a record.")
+UA_UNVERIFIED = ("The timestamp receipts are included as collected. The package builder did not verify their signatures, "
+                 "trust chains or binding to the checkpoint.")
+UA_LIMITS = ("A valid signature shows that these bytes were signed with the workspace key. It does not identify the author "
+             "of a message and does not show that the content of a message is true.",
+             "Compare the signing key fingerprint with one obtained independently, not with the copy in this package.")
+
+
+def blank(label, say):
+    return '<p><b>' + e(say(label)) + '</b> <i>(' + e(say("entered by the official")) + ')</i>: <span class="blank"></span></p>'
+
+
+def facts(rows):
+    return "<dl>" + "".join("<dt>" + e(name) + '</dt><dd class="mono">' + e(value) + "</dd>" for name, value in rows) + "</dl>"
+
+
+def ua_basics(session, model, fixed, fingerprint, say, version):
+    times = [block["step"].get("at") for block in steps(model) if block["step"].get("at")]
+    return [(say("Document"), session["title"]), (say("Document ID"), session["id"]),
+            (say("Revision"), session.get("revision") or 1),
+            (say("Software that prepared this package"), "TgWitness " + str(version)),
+            (say("Statement SHA-256"), fixed["statement_sha256"]),
+            (say("Recorded in journal record"), "#" + str(fixed["event_seq"])), (say("Workspace signing key"), fingerprint),
+            (say("Fixed at (UTC)"), fixed["at"]),
+            (say("Observed period (UTC)"), (min(times) + " – " + max(times)) if times else "—")]
+
+
+def protocol_html(session, model, fixed, fingerprint, listed, say, stamped=(), missing=(), account=None, version=""):
+    known = action_protocol
+    chats = [episode for episode in model["episodes"] if episode["chat_id"] is not None]
+    limits = list(model.get("limits") or []) + [limit for limit in known.LIMITS if limit not in (model.get("limits") or [])]
+    hidden = sum(bool(block["step"].get("hidden")) for block in steps(model))
+    records = "".join("<tr><td>" + e(number) + "</td><td>" + e(block["step"].get("at") or "—") + '</td><td class="mono">'
+                      + e(block.get("chat_id") if block.get("chat_id") is not None else "—") + "</td><td>#"
+                      + e(block["step"]["ref"]["seq"]) + '</td><td class="mono">' + e(block["step"]["ref"].get("hash") or "—")
+                      + "</td></tr>" for number, block in enumerate(steps(model), 1)
+                      if not block["step"].get("hidden") and (block["step"].get("ref") or {}).get("seq"))
+    files = "".join("<tr><td><b>" + e(item["exhibit"]) + '</b></td><td class="mono">data/' + e(item["file"]) + '</td><td class="mono">'
+                    + e(item["sha256"]) + "</td><td>" + e(item["size"]) + "</td></tr>" for item in listed)
+    gaps = ([say(limit) for limit in limits]
+            + ([say("{n} documented steps are hidden for a stated reason and sealed.", n=hidden)] if hidden else [])
+            + [say("Not included: {sha256} ({reason}).", sha256=item["sha256"], reason=say(item["description"])) for item in missing]
+            + ([say("The record selection reached its size limit; later records may be missing from this document.")]
+               if model.get("truncated") else []))
+    body = ("<h1>" + e(say("Inspection protocol (draft for the official)")) + '</h1><p class="lead">' + e(say(UA_BASIS)) + "</p>"
+            '<div class="note">' + e(say(UA_NOTICE)) + "</div>" '<div class="note">' + e(say(UA_COVERT)) + "</div>"
+            "<h2>1. " + e(say("Details only the official can enter")) + "</h2>"
+            + "".join(blank(label, say) for label in (
+                "Criminal proceeding number", "Legal ground for the procedural action", "Date, start and end time",
+                "Place", "Official conducting the action (name, position)", "Participants and their procedural status",
+                "Attesting witnesses, or the technical means used to record the action"))
+            + "<h2>2. " + e(say("Source and acquisition method")) + "</h2><ol>"
+            + "".join("<li>" + e(say(text)) + "</li>" for text in PROCESS) + "</ol>"
+            + ("<p><b>" + e(say("Telegram account used for the observation")) + ':</b> <span class="mono">' + e(account) + "</span></p>"
+               if account else blank("Telegram account used for the observation", say))
+            + facts(ua_basics(session, model, fixed, fingerprint, say, version))
+            + "<h3>" + e(say("Accounts and chats")) + "</h3><ul>" + "".join(
+                "<li>" + e(known.episode_title(episode, say)) + ' — <span class="mono">' + e(say("Telegram ID {id}", id=episode["chat_id"]))
+                + "</span></li>" for episode in chats) + "</ul>"
+            "<h2>3. " + e(say("Selected records")) + "</h2>"
+            + ("<table><tr><th>" + "</th><th>".join(e(say(h)) for h in ("Step", "Record time (UTC)", "Telegram ID", "Journal record",
+                                                                      "Record SHA-256")) + "</th></tr>" + records + "</table>"
+               if records else "<p>" + e(say("None recorded.")) + "</p>")
+            + "<h2>4. " + e(say("Files and their SHA-256")) + "</h2>"
+            + ("<table><tr><th>" + "</th><th>".join(e(say(h)) for h in ("Exhibit", "File", "SHA-256", "Bytes")) + "</th></tr>"
+               + files + "</table>" if files else "<p>" + e(say("This record cites no files.")) + "</p>")
+            + "<p>" + e(say("The full list of files in the package with their SHA-256 is in the file inventory.")) + "</p>"
+            "<h2>5. " + e(say("Timestamps obtained")) + "</h2><p>"
+            + (e(", ".join(stamped)) + "</p><p>" + e(say(UA_UNVERIFIED)) if stamped else e(say("none in this package"))) + "</p>"
+            "<h2>6. " + e(say("Recorded limitations and gaps")) + "</h2><ul>" + "".join("<li>" + e(text) + "</li>" for text in gaps)
+            + "</ul><h2>7. " + e(say("Annexes")) + "</h2><ul>"
+            + "".join("<li>" + e(say(title)) + ' — <span class="mono">data/' + e(path) + "</span></li>" for path, title in UA_FILES[1:])
+            + "</ul><h2>8. " + e(say("Signatures")) + '</h2><div class="sign">'
+            + "".join(blank(label, say) for label in ("Official", "Participants", "Attesting witnesses, if involved",
+                                                      "Specialist, if involved")) + "</div>")
+    return page(say("Inspection protocol (draft for the official)"), body, getattr(say, "language", "en"))
+
+
+def technical_annex_html(session, model, fixed, fingerprint, say, commands, stamped=(), version=""):
+    body = ("<h1>" + e(say("Technical annex")) + '</h1><p class="lead">' + e(session["title"]) + "</p><p>"
+            + e(say("How the records in this package were produced and how a forensic expert can check them independently.")) + "</p>"
+            "<h2>1. " + e(say("Identification")) + "</h2>" + facts(ua_basics(session, model, fixed, fingerprint, say, version))
+            + "<h2>2. " + e(say("How the records were produced")) + "</h2><ol>"
+            + "".join("<li>" + e(say(text)) + "</li>" for text in PROCESS) + "</ol>"
+            "<h2>3. " + e(say("Methods used")) + "</h2><ul>"
+            + "".join("<li>" + e(say(text)) + "</li>" for text in (
+                "SHA-256 (FIPS 180-4): fingerprints of journal records, of the signed statement and of every file.",
+                "Ed25519 (RFC 8032): signatures of journal records and of the statement with the workspace key.",
+                "BagIt (RFC 8493): manifest-sha256.txt and tagmanifest-sha256.txt list the SHA-256 of every file in the package.",
+                "RFC 3161 and OpenTimestamps: receipts that bind a checkpoint hash to an outside time source.")) + "</ul>"
+            "<h2>4. " + e(say("Timestamps obtained")) + "</h2><p>"
+            + (e(", ".join(stamped)) + "</p><p>" + e(say(UA_UNVERIFIED)) if stamped else e(say("none in this package"))) + "</p>"
+            "<h2>5. " + e(say("Repeat the check yourself")) + "</h2><p>" + e(say("Run these commands in the package folder.")) + "</p><ol>"
+            + "".join("<li><b>" + e(say(title)) + "</b><br>" + e(say(hint)) + '<br><span class="mono">' + e(command) + "</span></li>"
+                      for title, hint, command in commands) + "</ol>"
+            "<h2>6. " + e(say("What the checks do not show")) + "</h2><ul>"
+            + "".join("<li>" + e(say(text)) + "</li>" for text in UA_LIMITS) + "</ul>")
+    return page(say("Technical annex"), body, getattr(say, "language", "en"))
+
+
+def inventory_html(entries, listed, title, say):
+    exhibit = {"data/" + item["file"]: item["exhibit"] for item in listed}
+    rows = "".join('<tr><td class="mono">' + e(path) + "</td><td>" + e(size) + '</td><td class="mono">' + e(digest) + "</td><td>"
+                   + e(exhibit.get(path) or "—") + "</td></tr>" for path, size, digest in entries)
+    body = ("<h1>" + e(say("File inventory")) + '</h1><p class="lead">' + e(title) + "</p><p>"
+            + e(say("Every file of the package payload except this inventory, with its size and SHA-256. manifest-sha256.txt "
+                    "in the package folder also lists this inventory.")) + "</p><table><tr><th>"
+            + "</th><th>".join(e(say(h)) for h in ("File", "Bytes", "SHA-256", "Exhibit")) + "</th></tr>" + rows + "</table>")
+    return page(say("File inventory"), body, getattr(say, "language", "en"))
+
+
+def transfer_act_html(session, fixed, say, name):
+    body = ("<h1>" + e(say("Media handover act")) + '</h1><p class="lead">' + e(session["title"]) + '</p><div class="note">'
+            + e(say("The operator enters the fields below. The archive hash is computed after the archive is written, so "
+                    "TgWitness cannot fill it in.")) + "</div><h2>1. " + e(say("Package")) + "</h2>"
+            + facts([(say("Package folder"), name), (say("Statement SHA-256"), fixed["statement_sha256"]),
+                     (say("Fixed at (UTC)"), fixed["at"])])
+            + "<h2>2. " + e(say("Medium and archive")) + "</h2>"
+            + "".join('<p><b>' + e(say(label)) + '</b> <i>(' + e(say("entered by the operator")) + ')</i>: <span class="blank"></span></p>'
+                      for label in ("Medium type, make, model and serial number", "Archive file name on the medium",
+                                    "SHA-256 of the archive file", "Encryption, and how the passphrase is handed over",
+                                    "Packaging and seal"))
+            + "<h2>3. " + e(say("Handover")) + '</h2><div class="sign">'
+            + "".join('<p><b>' + e(say(label)) + '</b> <i>(' + e(say("entered by the operator")) + ')</i>: <span class="blank"></span></p>'
+                      for label in ("Date and time", "Place", "Handed over by (name, position, organisation)",
+                                    "Received by (name, position, organisation)", "Signature of the person handing over",
+                                    "Signature of the person receiving")) + "</div>")
+    return page(say("Media handover act"), body, getattr(say, "language", "en"))

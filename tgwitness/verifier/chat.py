@@ -15,7 +15,7 @@ from .common import (
     strict_json,
 )
 JOURNAL_KINDS = ("message.new", "message.snapshot", "message.recovered", "message.edited", "message.deleted",
-                 "message.missing_on_recheck")
+                 "message.missing_on_recheck", "message.deletion_attributed")
 
 
 def check_journal_changes(archive, manifest, public):

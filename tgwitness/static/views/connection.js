@@ -1,7 +1,10 @@
 export function createConnectionView({root, tr, json, state, refreshStatus, askConfirm, formatTime}) {
   const get = id => root.querySelector('#' + id);
   const el = (tag, text, cls) => { const n = document.createElement(tag); if(text)n.textContent=text; if(cls)n.className=cls; return n; };
-  let generation=0, draftRevision=0, loads=0, timer=null, data=null, draft=null, plan=null, mode='warp', visible=false, pending=null, touched=false;
+  let generation=0, draftRevision=0, loads=0, timer=null, data=null, draft=null, plan=null, planRows=[], mode='warp', visible=false, pending=null, touched=false;
+  const number=value=>Number(value).toLocaleString(document.documentElement.lang||undefined);
+  const sameSelection=(a,b)=>JSON.stringify({...a,accept_setup:false})===JSON.stringify({...b,accept_setup:false});
+  const single=()=>get('connect-scope').value==='account';
   const regions=(()=>{try{return new Intl.DisplayNames([document.documentElement.lang||'en'],{type:'region'});}catch{return null;}})();
   const country=code=>{try{return code&&regions?regions.of(code):code;}catch{return code;}};
   const labels = {direct:tr('Direct'),vpn:tr('VPN'),proxy:tr('My proxy'),mtproxy:tr('Public MTProto'),warp:tr('WARP')};
@@ -14,7 +17,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     warp:tr('Run a local WARP tunnel for this account. TgWitness manages it inside its data folder using wgcf and wireproxy, an unofficial integration. No system VPN or driver is installed.'),
   };
   function status(text, error=false){get('connect-progress').textContent=text;get('connect-progress').classList.toggle('error',error);}
-  function invalidate(){draftRevision++;draft=null;plan=null;status('');get('connect-prepare').hidden=true;get('connect-apply').hidden=true;get('connect-continue').hidden=true;get('connect-review').replaceChildren();}
+  function invalidate(){draftRevision++;draft=null;plan=null;planRows=[];status('');get('connect-preview').textContent=tr(single()?'Prepare and check':'Review selection');get('connect-prepare').hidden=true;get('connect-apply').hidden=true;get('connect-continue').hidden=true;get('connect-review').replaceChildren();}
   function choose(value){
     mode=value;invalidate();
     for(const button of root.querySelectorAll('[data-connect-mode]')){
@@ -41,7 +44,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   function proof(check){
     if(!check)return tr('Not checked yet');
     return [check.telegram_connected?tr('Telegram connected'):tr('Not connected'),check.exit_ip||tr('Exit address unavailable'),
-      country(check.country),check.warp?('WARP: '+check.warp):'',tr('{n} ms',{n:check.latency_ms}),
+      country(check.country),check.warp?('WARP: '+check.warp):'',check.latency_ms==null?'':tr('{n} ms',{n:number(check.latency_ms)}),
       formatTime(new Date(check.checked_at*1000).toISOString())].filter(Boolean).join(' · ');
   }
   function rows(items){
@@ -78,7 +81,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     get('connect-cancel').hidden=!['preparing','ready'].includes(job.state);
     get('connect-continue').hidden=job.state!=='applied'||job.rows.some(row=>!row.applied||row.error);
     if(job.state==='ready'){
-      plan=job.plan;get('connect-step').textContent=tr('3. Review and apply');rows(job.rows);
+      plan=job.plan;planRows=job.rows||[];get('connect-step').textContent=tr('3. Review and apply');rows(job.rows);
       status(tr('Connection checked. Review the accounts below, then apply. This preview expires in 10 minutes.'));
     }else if(job.state==='applied'){
       plan=null;rows(job.rows);status(job.rows.some(x=>!x.applied||x.error)?
@@ -119,8 +122,8 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     finally{if(stamp===generation)button.disabled=false;}
   }
   for(const b of root.querySelectorAll('[data-connect-mode]'))b.addEventListener('click',()=>{touched=true;choose(b.dataset.connectMode);});
-  get('connect-fields').addEventListener('input',invalidate);
-  get('connect-fields').addEventListener('change',invalidate);
+  get('connect-fields').addEventListener('input',event=>{if(event.target.id!=='connect-consent')invalidate();});
+  get('connect-fields').addEventListener('change',event=>{if(event.target.id!=='connect-consent')invalidate();});
   get('connect-scope').addEventListener('change',()=>{
     get('connect-group-wrap').hidden=get('connect-scope').value!=='group';
     get('connect-keep-wrap').hidden=get('connect-scope').value==='account';
@@ -141,23 +144,36 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   });
   get('connect-preview').addEventListener('click',e=>action(e.currentTarget,async stamp=>{
     const revision=draftRevision,body=readDraft(),preview=await json('connection/preview',body,{root:true});
-    if(stamp!==generation||revision!==draftRevision)return;draft=body;rows(preview.rows);get('connect-prepare').hidden=false;
+    if(stamp!==generation||revision!==draftRevision)return;draft=body;rows(preview.rows);
     get('connect-step').textContent=tr('2. Prepare and check');
+    if(body.scope==='account'){await prepare(stamp);return;}
+    get('connect-prepare').hidden=false;
     status(tr('Review this selection. Preparing checks the new route while the saved connection keeps working.'));
   }));
-  get('connect-prepare').addEventListener('click',e=>action(e.currentTarget,async stamp=>{
+  async function prepare(stamp){
     if(!draft)return;
-    if(JSON.stringify(draft)!==JSON.stringify(readDraft())){invalidate();return;}
-    const body=draft;setBusy(true);
+    const now=readDraft();
+    if(!sameSelection(draft,now)){invalidate();return;}
+    const body={...draft,accept_setup:now.accept_setup};setBusy(true);
     try{
       await json('connection/prepare',body,{root:true});
       if(stamp!==generation)return;draft=null;get('connect-wireguard').value='';get('connect-password').value='';get('connect-secret').value='';await load();
     }catch(error){if(stamp===generation)setBusy(false);throw error;}
-  }));
+  }
+  get('connect-prepare').addEventListener('click',e=>action(e.currentTarget,prepare));
+  function activity(){
+    const changed=planRows.filter(row=>!row.skipped),own=changed.some(row=>row.id===state.profile),local=state.status?.collector||{};
+    return {running:changed.some(row=>row.running)||own&&!!local.running,
+      live:changed.some(row=>row.has_session||row.connected||row.signing_in)||own&&!!(local.has_session||local.connected)};
+  }
   get('connect-apply').addEventListener('click',e=>action(e.currentTarget,async stamp=>{
     if(!plan)return;
-    const checkedPlan=plan,revision=draftRevision;
-    if(!await askConfirm(tr('Apply the checked routes? Active observation pauses during the switch and resumes if the connection succeeds. History downloads remain paused. External requests will use this route or be disabled for MTProto.'),{confirmText:tr('Apply connection')}))return;
+    const checkedPlan=plan,revision=draftRevision,fresh=await json('connection',undefined,{root:true});
+    if(stamp!==generation||revision!==draftRevision||checkedPlan!==plan)return;
+    if(fresh.job.state!=='ready'||fresh.job.plan!==checkedPlan){await load();return;}
+    planRows=fresh.job.rows||[];const now=activity();
+    if((now.running||now.live)&&!await askConfirm(tr(now.running?'Apply the checked routes? Active observation pauses during the switch and resumes if the connection succeeds. History downloads remain paused. External requests will use this route or be disabled for MTProto.':
+      'Apply the checked routes? Observation is not running, so nothing pauses. Open Telegram connections are closed and an unfinished sign-in is cancelled. External requests will use this route or be disabled for MTProto.'),{confirmText:tr('Apply connection')}))return;
     if(stamp!==generation||revision!==draftRevision||checkedPlan!==plan)return;
     await json('connection/apply',{plan:checkedPlan},{root:true});if(stamp===generation)await load();
   }));

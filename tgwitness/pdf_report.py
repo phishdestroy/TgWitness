@@ -1,17 +1,22 @@
 from . import render_data
 import difflib
 import hashlib
+import json
 import logging
 import os
 import re
+import sqlite3
 import threading
+import time
 import uuid
+from contextlib import closing
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 
 from cryptography import x509
 from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from cryptography.x509.oid import NameOID
 
 from . import report, report_design_pdf, report_composition_pdf
@@ -25,6 +30,7 @@ BYTE_RANGE_PLACEHOLDER = b"[0000000000 0000000000 0000000000 0000000000]"
 SIGNED_DATA, DATA = "1.2.840.113549.1.7.2", "1.2.840.113549.1.7.1"
 CONTENT_TYPE, MESSAGE_DIGEST, SIGNING_TIME = "1.2.840.113549.1.9.3", "1.2.840.113549.1.9.4", "1.2.840.113549.1.9.5"
 SIGNING_CERTIFICATE_V2, SHA256, ECDSA_SHA256 = "1.2.840.113549.1.9.16.2.47", "2.16.840.1.101.3.4.2.1", "1.2.840.10045.4.3.2"
+RSA_SHA256 = "1.2.840.113549.1.1.11"
 INK, MUTED, LINE, FILL = (20, 44, 59), (89, 104, 112), (214, 219, 218), (245, 245, 240)
 GOLD, WHITE = (198, 158, 91), (255, 255, 255)
 OK, BAD, WARN = (23, 102, 58), (161, 25, 31), (138, 75, 0)
@@ -663,6 +669,9 @@ def changes(lay, say, changed, titles):
                          "administrator where the account can read it.") if deleted
                      else say("Telegram no longer returned this message at a later check."),
                      size=8.5, color=BAD)
+            if deleted and "attribution" in step and not step.get("auto_delete"):
+                from .deletions import attribution_text
+                lay.text(attribution_text(say, step["attribution"], item.get("link")), size=8.5, color=BAD)
         lay.gap(2)
     if changed["messages_changed"] > changed["listed"]:
         lay.text(say("… and {n} more changed messages, listed under Records.",
@@ -706,6 +715,12 @@ def records(lay, say, events, titles, options):
         if report.report_analytics.secret_chat_id(event) is not None:
             for line in report.secret_record_lines(say, payload):
                 lay.text(line, size=8, color=MUTED)
+        if event["kind"] in ("message.deleted", "message.deletion_attributed", "history.cleared_by_peer_suspected") \
+                and not report.timer_expected(payload):
+            from .deletions import attribution_text, clear_text
+            lay.text(attribution_text(say, payload) if event["kind"] == "message.deleted" else
+                     attribution_text(say, {}, payload) if event["kind"] == "message.deletion_attributed" else
+                     clear_text(say, payload), size=8, color=MUTED)
         if payload.get("text_withheld"):
             lay.text(say("Text withheld in this extract"), size=8, color=MUTED)
         if report.CATEGORIES.get(event["kind"]) in ("message", "edited"):
@@ -816,18 +831,32 @@ def signatures_section(lay, say, certificate, fp, name):
         "the Ed25519 seal of the key below. Any change to the file breaks both."))
     cert_der = certificate.public_bytes(serialization.Encoding.DER)
     names = certificate.subject.get_attributes_for_oid(NameOID.COMMON_NAME)
-    lay.kv([(say("PDF signature"), "adbe.pkcs7.detached · ECDSA P-256 · SHA-256"),
+    issuers = certificate.issuer.get_attributes_for_oid(NameOID.COMMON_NAME)
+    key, own = certificate.public_key(), certificate.issuer == certificate.subject and any(
+        item.value == "Document signing vouched for by the Ed25519 key"
+        for item in certificate.subject.get_attributes_for_oid(NameOID.ORGANIZATIONAL_UNIT_NAME))
+    method = "RSA " + str(key.key_size) if isinstance(key, rsa.RSAPublicKey) else "ECDSA " + {
+        "secp256r1": "P-256", "secp384r1": "P-384", "secp521r1": "P-521"}.get(key.curve.name, key.curve.name)
+    lay.kv([(say("PDF signature"), "PAdES baseline (ETSI EN 319 142-1) · ETSI.CAdES.detached · " + method + " · SHA-256"),
+            (say("PAdES level"), say("B-B. B-T when timestamping is on and a timestamp authority answered at signing "
+                                     "time; a PDF reader then lists the time stamp in the signature details.")),
             (say("Certificate"), (names[0].value if names else certificate.subject.rfc4514_string())
-             + " · " + say("self-issued")),
+             + " · " + (say("self-issued") if own else say("issued by") + " "
+                        + (issuers[0].value if issuers else certificate.issuer.rfc4514_string()))),
             (say("Certificate valid"), report.utc_text(certificate.not_valid_before_utc.isoformat()) + " — "
              + report.utc_text(certificate.not_valid_after_utc.isoformat())),
             (say("Certificate SHA-256"), Mono(hashlib.sha256(cert_der).hexdigest())),
             (say("Ed25519 key fingerprint (SHA-256)"), Mono(report.grouped(fp))),
             (say("Seal"), say("Inside the PDF signature; it names the certificate's SHA-256, so the Ed25519 key vouches "
                               "for the certificate."))])
-    lay.text(say("A PDF reader confirms that the document has not changed since it was signed. It shows the signer as "
-                 "unknown until the reader trusts this certificate: compare the Ed25519 fingerprint with a copy kept "
-                 "apart from the collector instead."), size=8.8)
+    lay.text(say("A PDF reader confirms that the document has not changed since it was signed. This certificate was "
+                 "made by TgWitness itself and is not a qualified certificate: a PDF reader shows the signature as valid "
+                 "but the signer as untrusted or unknown, unless the certificate chains to a list that reader trusts. "
+                 "Compare the Ed25519 fingerprint with a copy kept apart from the collector instead.") if own else
+             say("A PDF reader confirms that the document has not changed since it was signed. It shows the signer as "
+                 "trusted only if this certificate chains to a list that reader trusts. TgWitness did not check whether "
+                 "the certificate is qualified. Compare the Ed25519 fingerprint with a copy kept apart from the "
+                 "collector as well."), size=8.8)
     lay.gap(1)
     lay.command("python verify.py " + name + " --fingerprint " + fp)
     if lay.pdf.missing:
@@ -1583,8 +1612,9 @@ def add_signature_field(pdf, say):
     from fpdf.annotations import PDFAnnotation
     from fpdf.enums import AnnotationFlag
     from fpdf.sign import Signature
-    from fpdf.syntax import PDFDate, PDFString
+    from fpdf.syntax import Name, PDFDate, PDFString
     value = Signature(reason=PDFString(say("Report sealed")), m=PDFDate(datetime.now(timezone.utc)))
+    value.sub_filter = Name("ETSI.CAdES.detached")
     value.contents = "<" + "0" * CONTENTS_HEX + ">"
     pdf.pages[pdf.page].add_annotation(PDFAnnotation(
         "Widget", field_type="Sig", x=0, y=0, width=0, height=0, title="TgWitness seal", value=value,
@@ -1646,33 +1676,6 @@ def identity(vault):
     return key, certificate
 
 
-def sign(buffer, key, certificate, seal_for):
-    buffer = bytearray(buffer)
-    placeholder = b"<" + b"0" * CONTENTS_HEX + b">"
-    start = buffer.find(placeholder)
-    if start < 0 or buffer.find(placeholder, start + 1) >= 0:
-        raise ValueError("The PDF has no single signature placeholder")
-    end = start + len(placeholder)
-    objects = list(re.finditer(rb"(?:^|\n)\d+ 0 obj\r?\n", buffer[:start]))
-    object_start = objects[-1].end() if objects else -1
-    object_end = buffer.find(b"\nendobj", end)
-    prefix = b"/ByteRange " + BYTE_RANGE_PLACEHOLDER
-    at = buffer.find(prefix, object_start, start) if object_start >= 0 else -1
-    if at < 0 or object_end < 0 or b"/Type /Sig" not in buffer[end:object_end] \
-            or buffer.find(prefix, at + 1, start) >= 0:
-        raise ValueError("The PDF has no byte range placeholder")
-    at += len(b"/ByteRange ")
-    buffer[at:at + len(BYTE_RANGE_PLACEHOLDER)] = b"[%010d %010d %010d %010d]" % (0, start, end, len(buffer) - end)
-    digest = hashlib.sha256(bytes(buffer[:start]) + bytes(buffer[end:])).digest()
-    der_certificate = certificate.public_bytes(serialization.Encoding.DER)
-    seal = seal_for(digest.hex(), hashlib.sha256(der_certificate).hexdigest())
-    value = signed_data(digest, key, certificate, der_certificate, canonical(seal)).hex().encode()
-    if len(value) > CONTENTS_HEX:
-        raise ValueError("The PDF signature does not fit its placeholder")
-    buffer[start + 1:end - 1] = value + b"0" * (CONTENTS_HEX - len(value))
-    return bytes(buffer)
-
-
 def _length(n):
     if n < 0x80:
         return bytes([n])
@@ -1709,37 +1712,90 @@ def _int(n):
     return _tlv(0x02, n.to_bytes((n.bit_length() + 8) // 8, "big"))
 
 
-def signed_data(digest, key, certificate, der_certificate, seal):
-    when = datetime.now(timezone.utc).strftime("%y%m%d%H%M%SZ").encode()
+def signed_data(digest, signer, unsigned=lambda signature: ()):
+    certificate = signer.certificate
+    der_certificate = certificate.public_bytes(serialization.Encoding.DER)
     attribute = lambda kind, value: _seq(_oid(kind), _set(value))
-    signed = _set(attribute(CONTENT_TYPE, _oid(DATA)), attribute(SIGNING_TIME, _tlv(0x17, when)),
-                  attribute(MESSAGE_DIGEST, _tlv(0x04, digest)),
-                  attribute(SIGNING_CERTIFICATE_V2, _seq(_seq(_seq(_tlv(0x04, hashlib.sha256(der_certificate).digest()))))))
-    signature = key.sign(signed, ec.ECDSA(hashes.SHA256()))
-    unsigned = _set(attribute(SEAL_ATTRIBUTE, _tlv(0x0C, seal)))
-    signer = _seq(_int(1), _seq(certificate.issuer.public_bytes(), _int(certificate.serial_number)), _seq(_oid(SHA256)),
-                  b"\xa0" + signed[1:], _seq(_oid(ECDSA_SHA256)), _tlv(0x04, signature), b"\xa1" + unsigned[1:])
-    body = _seq(_int(1), _set(_seq(_oid(SHA256))), _seq(_oid(DATA)), _tlv(0xA0, der_certificate), _set(signer))
+    issuer_serial = _seq(_seq(_tlv(0xA4, certificate.issuer.public_bytes())), _int(certificate.serial_number))
+    signed = _set(attribute(CONTENT_TYPE, _oid(DATA)), attribute(MESSAGE_DIGEST, _tlv(0x04, digest)),
+                  attribute(SIGNING_CERTIFICATE_V2, _seq(_seq(_seq(
+                      _tlv(0x04, hashlib.sha256(der_certificate).digest()), issuer_serial)))))
+    signature = signer.sign(signed)
+    extra = [attribute(kind, value) for kind, value in unsigned(signature)]
+    algorithm = _seq(_oid(signer.algorithm), *([b"\x05\x00"] if signer.algorithm == RSA_SHA256 else []))
+    info = _seq(_int(1), _seq(certificate.issuer.public_bytes(), _int(certificate.serial_number)), _seq(_oid(SHA256)),
+                b"\xa0" + signed[1:], algorithm, _tlv(0x04, signature), *([b"\xa1" + _set(*extra)[1:]] if extra else []))
+    chain = b"".join(item.public_bytes(serialization.Encoding.DER) for item in signer.chain)
+    body = _seq(_int(1), _set(_seq(_oid(SHA256))), _seq(_oid(DATA)), _tlv(0xA0, der_certificate + chain), _set(info))
     return _seq(_oid(SIGNED_DATA), _tlv(0xA0, body))
 
 
-def report_pdf(data, context, vault, events=None):
-    certificate = identity(vault)[1]
-    return sealed_pdf(evidence_pdf(data, context, events, certificate), vault, report.seal_statement(context))
+def own_signer(vault):
+    from .pades import KeySigner
+    return KeySigner(*identity(vault))
 
 
-def chat_report_pdf(meta, context, vault, messages=None):
-    certificate = identity(vault)[1]
-    return sealed_pdf(chat_pdf(meta, context, messages, certificate), vault,
-                      report.seal_statement(context, report.chat_subject(meta, context)))
+def saved_settings(vault, *keys):
+    path = Path(getattr(vault, "root", None) or "") / "journal.sqlite3"
+    if not getattr(vault, "root", None) or not path.is_file():
+        return {}
+    try:
+        with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True, timeout=5)) as db:
+            return {key: json.loads(value) for key, value in db.execute(
+                "SELECT key, value FROM settings WHERE key IN (" + ", ".join("?" * len(keys)) + ")", keys)}
+    except (sqlite3.Error, ValueError):
+        return {}
 
 
-def sealed_pdf(unsigned, vault, statement):
-    key, certificate = identity(vault)
+def outside_route(vault):
+    from .collector import Collector
+    saved = saved_settings(vault, "route_policy")
+    holder = SimpleNamespace(vault=vault, store=SimpleNamespace(get_setting=lambda key, default=None:
+                                                                saved.get(key, default)))
+    for name in ("network_config", "route_policy", "outside_proxy", "outside_route"):
+        setattr(holder, name, getattr(Collector, name).__get__(holder))
+    return holder.outside_route()
 
-    def seal_for(content, certificate_sha256):
-        signed = {**statement, "content_sha256": content, "content": "pdf-byte-range",
-                  "document_certificate_sha256": certificate_sha256}
-        return {"statement": signed, "signature": vault.sign(canonical(signed)),
+
+def timestamp_authorities(vault):
+    from .anchoring import evidence_settings
+    saved = saved_settings(vault, "evidence", "evidence_backoff")
+    try:
+        settings = evidence_settings(SimpleNamespace(get_setting=lambda key, default=None: saved.get(key, default)))
+    except ValueError:
+        return []
+    backoff = saved.get("evidence_backoff") if isinstance(saved.get("evidence_backoff"), dict) else {}
+    return [url for url in settings["tsa_urls"] if settings["enabled"]
+            and not (isinstance(backoff.get(url), dict) and backoff[url].get("until", 0) > time.time())]
+
+
+def report_pdf(data, context, vault, events=None, signer=None):
+    signer = signer or own_signer(vault)
+    return sealed_pdf(evidence_pdf(data, context, events, signer.certificate), vault, report.seal_statement(context),
+                      signer)
+
+
+def chat_report_pdf(meta, context, vault, messages=None, signer=None):
+    signer = signer or own_signer(vault)
+    return sealed_pdf(chat_pdf(meta, context, messages, signer.certificate), vault,
+                      report.seal_statement(context, report.chat_subject(meta, context)), signer)
+
+
+def sealed_pdf(unsigned, vault, statement, signer=None):
+    from . import pades
+    signer = signer or own_signer(vault)
+
+    def attributes(digest, der_certificate):
+        signed = {**statement, "content_sha256": digest.hex(), "content": "pdf-byte-range",
+                  "document_certificate_sha256": hashlib.sha256(der_certificate).hexdigest()}
+        seal = {"statement": signed, "signature": vault.sign(canonical(signed)),
                 "fingerprint": fingerprint(signed["public_key"])}
-    return sign(unsigned, key, certificate, seal_for)
+        return [(SEAL_ATTRIBUTE, _tlv(0x0C, canonical(seal)))]
+    urls = timestamp_authorities(vault)
+    fetch = pades.network_fetch(outside_route(vault)) if urls else None
+    data, outcome = pades.sign_pdf(unsigned, signer, "B-T" if urls else "B-B", tsa_urls=urls, fetch=fetch,
+                                   attributes=attributes)
+    if outcome["not_reached"] and urls:
+        logging.getLogger(__name__).warning("PDF signature stays at PAdES %s: %s", outcome["level"],
+                                            outcome["not_reached"]["reason"])
+    return data

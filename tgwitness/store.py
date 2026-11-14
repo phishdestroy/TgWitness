@@ -333,7 +333,7 @@ class Store:
                 "reply_to": None, "has_media": False, "service_action": None, "grouped_id": None,
                 "versions": [], "media": [], "deleted": False, "deleted_observed_at": None,
                 "missing": False, "missing_observed_at": None, "auto_deleted": False,
-                "telegram_edited_at": None, "origins": []})
+                "telegram_edited_at": None, "from_scheduled": False, "origins": []})
             kind = row["kind"]
             if kind in GONE_KINDS and isinstance(payload.get("auto_delete"), dict) and payload["auto_delete"].get("expected"):
                 item["auto_deleted"] = True
@@ -349,6 +349,7 @@ class Store:
                 item["service_action"] = item["service_action"] or payload.get("service_action")
                 item["grouped_id"] = item["grouped_id"] or payload.get("grouped_id")
                 item["telegram_edited_at"] = payload.get("edited_at") or item["telegram_edited_at"]
+                item["from_scheduled"] = item["from_scheduled"] or bool((payload.get("raw") or {}).get("from_scheduled"))
                 origin = {"message.new": "live", "message.snapshot": "history", "message.edited": "edit",
                           "message.recovered": "recheck"}[kind]
                 if origin not in item["origins"]:

@@ -25,6 +25,17 @@ def legacy(code):
     return json.loads(path.read_text(encoding='utf-8')) if code and path.is_file() else None
 
 
+def reference_rows(old, procedure):
+    if not old:
+        return []
+    rows = [(item['term'], item.get('basis') or '', item.get('source')) for item in old.get('evidence_rules') or []
+            if item.get('route') in (procedure, 'all')]
+    dpa = old.get('dpa')
+    if dpa:
+        rows.append((dpa['name'], ' · '.join(x for x in (dpa.get('name_en'), dpa.get('basis')) if x), dpa.get('source')))
+    return rows
+
+
 def jurisdiction(code, procedure='criminal', procedure_scope=None):
     if code is None:
         return None
@@ -37,6 +48,7 @@ def jurisdiction(code, procedure='criminal', procedure_scope=None):
             value = old.get(key)
             if value:
                 rows.append((value['term'], value.get('basis', value.get('qes_name', '')), value['source']))
+        rows.extend(reference_rows(old, procedure))
         return {'name': old['scope'], 'procedure': None, 'checked': old['checked_at'], 'rows': rows}
     part = route(record, procedure, procedure_scope)
     if not part:
@@ -54,6 +66,7 @@ def jurisdiction(code, procedure='criminal', procedure_scope=None):
         rows.append((timestamp['basis'], timestamp.get('qualified_recognition') or '', timestamp.get('source')))
     if old and old.get('data_access_basis') and old['data_access_basis'].get('route') in (procedure, 'all'):
         rows.append((old['data_access_basis']['term'], '', old['data_access_basis']['source']))
+    rows.extend(reference_rows(old, procedure))
     return {'name': record['name_local'] + ' · ' + record['name_en'] + ' (' + record['code'] + ')', 'procedure': procedure,
             'checked': record['checked_at'], 'rows': rows}
 

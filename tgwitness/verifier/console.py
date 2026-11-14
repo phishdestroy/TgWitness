@@ -7,6 +7,9 @@ from .common import (
     sys,
     unicodedata,
 )
+from .completeness import (
+    completeness_lines,
+)
 from .coverage import (
     SESSION_NOTES,
     source_counts,
@@ -259,9 +262,17 @@ class Console:
         else:
             self.check("none", "SHA256SUMS", self.t("not present (older export)"))
 
-    def timestamps(self, anchors):
+    def timestamps(self, anchors, records=None):
         self.heading("Timestamps")
         self.explain("Timestamps")
+        if records:
+            from .evidence_records import ers_lines
+            for state, label, detail, notes in ers_lines(records, self.t):
+                self.check(state, label, detail)
+                for text in notes:
+                    self.say("    " + self.paint(text, "dim"))
+        if not anchors and records:
+            return
         if not anchors:
             self.say("  " + self.paint(self.t("No independent timestamps: times come from the collector's clock."), "dim"))
             return
@@ -494,6 +505,11 @@ class Console:
             self.check("ok", "Record chain", self.t("{n} records · head {hash}", n=self.number(result["events"]),
                                                     hash=head[:8] + "…" + head[-8:]))
             self.seal(result, "report.html")
+            if result.get("container"):
+                self.check("none", "ASiC-E container",
+                           self.t("Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES "
+                                  "signatures are not checked by this verifier",
+                                  n=self.number(len(result["container"]["unchecked_members"]))))
             if result.get("witness"):
                 witness = result["witness"]
                 self.check("ok" if witness["consistent"] else "warn", "Witness",
@@ -555,9 +571,13 @@ class Console:
         else:
             self.check("ok", "Signature", self.t("Ed25519 · valid"))
         if shown == "evidence":
-            self.timestamps(result.get("anchors") or [])
+            self.timestamps(result.get("anchors") or [], result.get("evidence_records"))
             self.coverage(result["coverage"])
             self.outside(result["outside"])
+            if result.get("sequence_continuity"):
+                self.heading("Sequence continuity")
+                for line in completeness_lines(result["sequence_continuity"], self.t):
+                    self.say("    " + line)
             notes = [n for n in notes if n not in coverage_lines(result["coverage"])
                      and n not in outside_lines(result["outside"]) and not n.startswith("No retained checkpoint")]
         elif shown == "account":

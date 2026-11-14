@@ -46,7 +46,7 @@ JOURNAL_LIMIT = ("This snapshot holds only what Telegram returned at export. Del
                  "the complete hash chain.")
 JOURNAL_FILE = "journal-changes.jsonl"
 JOURNAL_KINDS = ("message.new", "message.snapshot", "message.recovered", "message.edited", "message.deleted",
-                 "message.missing_on_recheck")
+                 "message.missing_on_recheck", "message.deletion_attributed")
 CHANGE_KINDS = ("message.deleted", "message.missing_on_recheck", "message.edited")
 JOURNAL_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id", "actor_id", "payload",
                   "previous_hash", "hash", "signature")
@@ -112,7 +112,12 @@ def journal_items(path, limit=JOURNAL_SHOWN):
             payload = event["payload"] if isinstance(event["payload"], dict) else {}
             items.setdefault(number, {"message_id": number, "events": []})["events"].append({
                 "seq": event["seq"], "kind": event["kind"], "observed_at": event["observed_at"],
-                "text": payload.get("text") if isinstance(payload.get("text"), str) else None})
+                "text": payload.get("text") if isinstance(payload.get("text"), str) else None,
+                **({"attribution": {key: payload.get(key) for key in ("attribution", "attribution_facts")}}
+                   if event["kind"] == "message.deleted" and not (payload.get("auto_delete") or {}).get("expected")
+                   else {}),
+                **({"link": {key: payload.get(key) for key in ("actor_id", "actor_is_this_account")}}
+                   if event["kind"] == "message.deletion_attributed" else {})})
     return list(items.values())
 
 
@@ -125,7 +130,7 @@ def journal_knowledge(path):
             if event["kind"] in ("message.deleted", "message.missing_on_recheck"):
                 if entry["at"] is None:
                     entry.update(kind=event["kind"], at=event["observed_at"])
-            else:
+            elif event["kind"] != "message.deletion_attributed":
                 entry["saved"] = True
     return known
 

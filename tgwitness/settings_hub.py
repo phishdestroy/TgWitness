@@ -1,14 +1,20 @@
 import hashlib
 import asyncio
 import json
+import secrets
+import tempfile
 import time
+from pathlib import Path
 from typing import Literal
 
 from fastapi import Depends, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import alerts, i18n, preferences, replica, tuning
+from . import alerts, anchoring, i18n, preferences, replica, tuning
+from .anchor import timestamp_request
 from .anchoring import evidence_settings, EvidenceMode
+from .tsa_roots import trusted_roots
+from .verify import timestamp_reply_summary, timestamp_signature
 from .monitoring import capture_settings, Capture, MEDIA_TYPES
 from .scope import ScopeUpdate, in_folder
 from .store import utcnow
@@ -228,6 +234,92 @@ def checked(app, draft=None):
             return False
     return bool(result.get("telegram_connected") and time.time() - result.get("checked_at", 0) < 300
                 and result.get("revision") == connection_revision(app.state.collector))
+
+
+SERVICE_SECONDS = 30
+
+
+def sample_bytes():
+    return b"TgWitness setup check " + secrets.token_bytes(16)
+
+
+async def check_tsa(url, network):
+    data = sample_bytes()
+    query, received = timestamp_request(data), False
+    try:
+        reply = await asyncio.wait_for(anchoring.post(url, query, {"Content-Type": "application/timestamp-query",
+                                                                   "Accept": "application/timestamp-reply"},
+                                                      network, timeout=20), SERVICE_SECONDS)
+        received = True
+        summary = timestamp_reply_summary(reply, hashlib.sha256(data).digest(), query)
+        timestamp_signature(reply, trusted_roots())
+        return {"state": "working", "reason": "answered", "time": summary["time"]}
+    except Exception as exc:
+        return {"state": "failed", "reason": "rejected" if received else "unreachable", "error": anchoring.problem(exc)}
+
+
+async def check_ots(url, network):
+    digest = hashlib.sha256(sample_bytes()).digest()
+    with tempfile.TemporaryDirectory() as folder:
+        try:
+            result = (await asyncio.wait_for(anchoring.ots_stamp(digest, [url], Path(folder), "setup-check", network),
+                                             SERVICE_SECONDS))[0]
+        except Exception as exc:
+            return {"state": "failed", "reason": "unreachable", "error": anchoring.problem(exc)}
+    if result.get("ok"):
+        return {"state": "working", "reason": "answered", "status": result["status"]}
+    return {"state": "failed", "reason": "rejected" if result.get("received") else "unreachable", "error": result["error"]}
+
+
+async def check_drand(network):
+    from .witness import drand_latest
+    try:
+        beacon = await asyncio.wait_for(drand_latest(network), SERVICE_SECONDS)
+    except Exception as exc:
+        return {"state": "failed", "reason": "unreachable", "error": anchoring.problem(exc)}
+    if not beacon:
+        return {"state": "failed", "reason": "unreachable", "error": "No drand relay returned a current round."}
+    return {"state": "working", "reason": "answered", "round": beacon["round"]}
+
+
+def notification_check(store, vault, network):
+    urls = vault.read("alerts").get("urls", [])
+    if not urls:
+        return {"state": "failed", "reason": "no_destination"}
+    problem = alerts.route_problem(urls, network)
+    if problem:
+        return {"state": "failed", "reason": "route", "error": problem, "destinations": len(urls)}
+    last = store.get_setting("alerts_last", None) or {}
+    if not last.get("at") or not last.get("error") and not last.get("notifications"):
+        return {"state": "configured", "reason": "not_sent", "destinations": len(urls)}
+    if last.get("error"):
+        return {"state": "failed", "reason": "delivery_failed", "at": last["at"], "error": last["error"],
+                "destinations": len(urls)}
+    return {"state": "working", "reason": "delivered", "at": last["at"], "destinations": len(urls)}
+
+
+async def service_checks(app):
+    s, current = app.state.store, values(app)
+    network = app.state.collector.outside_route()
+    blocked = str(network.error) if network.kind == "none" else None
+    settings = evidence_settings(s)
+    planned = []
+    if current["timestamps"]:
+        planned += [("rfc3161", url, check_tsa) for url in settings["tsa_urls"]]
+        planned += [("opentimestamps", url, check_ots) for url in settings["ots_calendars"]]
+    if current["drand"]:
+        planned.append(("drand", None, lambda _, route: check_drand(route)))
+    if blocked:
+        results = [{"state": "unknown", "reason": "not_checked", "error": blocked} for _ in planned]
+    else:
+        results = await asyncio.gather(*(work(address, network) for _, address, work in planned))
+    rows = [{"service": service, "address": address, **result}
+            for (service, address, _), result in zip(planned, results)]
+    if current["timestamps"] and not settings["tsa_urls"] and not settings["ots_calendars"]:
+        rows.insert(0, {"service": "timestamps", "address": None, "state": "failed", "reason": "no_service"})
+    if current["notifications"]:
+        rows.append({"service": "notifications", "address": None, **notification_check(s, app.state.vault, network)})
+    return rows
 
 
 def register(app, authenticate, require_live, operation, save_evidence, save_capture):
@@ -481,6 +573,11 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
         s = app.state.store
         s.set_setting("first_run", {**wizard_state(app), "skipped": True})
         return state(app)
+
+    @app.post("/api/first-run/services", dependencies=deps)
+    async def services():
+        require_live()
+        return {"rows": await service_checks(app)}
 
     @app.post("/api/first-run/finish", dependencies=deps)
     async def finish(body: Draft):

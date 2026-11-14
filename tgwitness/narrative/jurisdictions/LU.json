@@ -1,0 +1,93 @@
+{
+  "code": "LU",
+  "scope": "Luxembourg · procédure civile et pénale (références signalées séparément)",
+  "checked_at": "2026-11-14",
+  "expert_role": {
+    "term": "technicien / expert",
+    "basis": "Nouveau Code de procédure civile, art. 432: the judge may appoint any person to inform it by findings, a consultation or an expert opinion on a question of fact requiring technical knowledge, and sets a time limit for the report.",
+    "source": "https://data.legilux.public.lu/eli/etat/leg/code/procedure_civile/20251219/fr/html",
+    "route": "civil"
+  },
+  "esig_regulation": {
+    "term": "eIDAS · loi du 14 août 2000 relative au commerce électronique",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. Loi du 14 août 2000, art. 18 (consolidated 2021): a signature based on a qualified certificate and a secure creation device is a signature under Code civil art. 1322-1, and a judge may not reject an electronic signature solely because it is electronic.",
+    "source": "https://data.legilux.public.lu/eli/etat/leg/loi/2000/08/14/n8/consolide/20211206/fr/html"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing in criminal matters is governed by the loi du 1er août 2018 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel en matière pénale.",
+    "deadline_days": null,
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+  },
+  "timestamp_recognition": {
+    "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
+    "automatic_ots_qualification": false,
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+  },
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Code civil, art. 1322-1; art. 1322-2",
+      "basis": "A signature may be handwritten or electronic; an electronic signature is data inseparably linked to the act that guarantees its integrity. An electronic private deed counts as an original when it gives reliable guarantees of integrity from its first creation in final form.",
+      "source": "https://data.legilux.public.lu/eli/etat/leg/code/civil/20251226/fr/html"
+    },
+    {
+      "route": "civil",
+      "term": "Code civil, art. 1334; art. 1341",
+      "basis": "When the original no longer exists, copies made under a regularly followed method by its custodian have the probative value of private deeds and are presumed faithful unless proven otherwise. Legal acts above the amount fixed by grand-ducal regulation must be proved by a notarial or private deed.",
+      "source": "https://data.legilux.public.lu/eli/etat/leg/code/civil/20251226/fr/html"
+    },
+    {
+      "route": "criminal",
+      "term": "Code de procédure pénale, art. 154; art. 189",
+      "basis": "Contraventions are proved by official records or reports, or by witnesses; délits are proved in the same way (art. 189).",
+      "source": "https://data.legilux.public.lu/eli/etat/leg/code/procedure_penale/20260607/fr/html"
+    }
+  ],
+  "dpa": {
+    "name": "Commission nationale pour la protection des données (CNPD)",
+    "name_en": "National Commission for Data Protection",
+    "basis": "Loi du 1er août 2018 (Mémorial A 686), art. 3-4",
+    "source": "https://cnpd.public.lu/fr.html"
+  },
+  "sources": [
+    {
+      "term": "Nouveau Code de procédure civile (version du 19 décembre 2025)",
+      "url": "https://data.legilux.public.lu/eli/etat/leg/code/procedure_civile/20251219/fr/html"
+    },
+    {
+      "term": "Code civil (version du 26 décembre 2025)",
+      "url": "https://data.legilux.public.lu/eli/etat/leg/code/civil/20251226/fr/html"
+    },
+    {
+      "term": "Code de procédure pénale (version du 7 juin 2026)",
+      "url": "https://data.legilux.public.lu/eli/etat/leg/code/procedure_penale/20260607/fr/html"
+    },
+    {
+      "term": "Loi du 14 août 2000 relative au commerce électronique (consolidée au 6 décembre 2021)",
+      "url": "https://data.legilux.public.lu/eli/etat/leg/loi/2000/08/14/n8/consolide/20211206/fr/html"
+    },
+    {
+      "term": "eIDAS (consolidated)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Loi du 1er août 2018 (CNPD)",
+      "url": "https://data.legilux.public.lu/eli/etat/leg/loi/2018/08/01/a686/jo/fr/html"
+    },
+    {
+      "term": "Loi du 1er août 2018 (matière pénale)",
+      "url": "https://data.legilux.public.lu/eli/etat/leg/loi/2018/08/01/a689/jo/fr/html"
+    },
+    {
+      "term": "CNPD",
+      "url": "https://cnpd.public.lu/fr.html"
+    }
+  ]
+}

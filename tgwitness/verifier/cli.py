@@ -620,6 +620,10 @@ def verification_output(args, checked, console, mode):
             verification_print("  - " + line)
     verification_print(json.dumps(result, indent=2))
     verification_print(producer_line(result.get("producer")))
+    if result.get("container"):
+        verification_print("ASiC-E container: entries outside the signed manifest (mimetype, META-INF): "
+                           + str(len(result["container"]["unchecked_members"]))
+                           + "; their CAdES signatures are not checked by this verifier.")
     seal = result.get("report_seal")
     if seal:
         verification_print("Report seal verified: " + ("chat.html" if shown == "chat" else "report.html" if shown == "evidence"

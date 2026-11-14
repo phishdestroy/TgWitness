@@ -1,0 +1,80 @@
+{
+  "code": "SI",
+  "scope": "Slovenija · pravdni in kazenski postopek (ločeno označeni sklici)",
+  "checked_at": "2026-11-14",
+  "expert_role": null,
+  "esig_regulation": {
+    "term": "eIDAS · ZEISZ",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183; Zakon o elektronski identifikaciji in storitvah zaupanja (ZEISZ), Uradni list RS 121/2021, 1. člen (content and purpose of the act).",
+    "source": "https://www.uradni-list.si/_pdf/2021/Ur/u2021121.pdf"
+  },
+  "data_access_basis": {
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. ZVOP-2 (Uradni list RS 163/2022) governs data protection in the public and private sector. The Slovenian implementation of Directive (EU) 2016/680 was not verified.",
+    "deadline_days": null,
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+  },
+  "timestamp_recognition": {
+    "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
+    "automatic_ots_qualification": false,
+    "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+  },
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "ZPP 8. člen",
+      "basis": "The court decides which facts are proven by its conviction, based on careful evaluation of each item of evidence and all evidence together and on the outcome of the whole proceedings.",
+      "source": "https://www.uradni-list.si/_pdf/2007/Ur/u2007073.pdf"
+    },
+    {
+      "route": "civil",
+      "term": "ZPP 16.a člen",
+      "basis": "Electronic form counts as written form where the data are suitable for processing by the court, accessible and fit for later use. Data may not be denied evidential value solely because they are electronic.",
+      "source": "https://www.uradni-list.si/_pdf/2007/Ur/u2007073.pdf"
+    },
+    {
+      "route": "criminal",
+      "term": "ZKP 18. člen",
+      "basis": "Assessment of facts is not bound by formal rules of evidence. The court may not base its decision on evidence obtained in violation of constitutional human rights, or in breach of procedural provisions where the act so provides.",
+      "source": "https://www.uradni-list.si/_pdf/2012/Ur/u2012032.pdf"
+    }
+  ],
+  "dpa": {
+    "name": "Informacijski pooblaščenec",
+    "name_en": "Information Commissioner of the Republic of Slovenia",
+    "basis": null,
+    "source": "https://www.ip-rs.si/"
+  },
+  "sources": [
+    {
+      "term": "Zakon o pravdnem postopku, uradno prečiščeno besedilo (ZPP-UPB3), Uradni list RS 73/2007",
+      "url": "https://www.uradni-list.si/_pdf/2007/Ur/u2007073.pdf"
+    },
+    {
+      "term": "Zakon o kazenskem postopku, uradno prečiščeno besedilo (ZKP-UPB8), Uradni list RS 32/2012",
+      "url": "https://www.uradni-list.si/_pdf/2012/Ur/u2012032.pdf"
+    },
+    {
+      "term": "ZEISZ, Uradni list RS 121/2021",
+      "url": "https://www.uradni-list.si/_pdf/2021/Ur/u2021121.pdf"
+    },
+    {
+      "term": "ZVOP-2, Uradni list RS 163/2022",
+      "url": "https://www.uradni-list.si/_pdf/2022/Ur/u2022163.pdf"
+    },
+    {
+      "term": "eIDAS (consolidated)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Informacijski pooblaščenec",
+      "url": "https://www.ip-rs.si/"
+    }
+  ]
+}

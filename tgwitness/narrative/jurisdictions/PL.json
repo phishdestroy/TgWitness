@@ -1,6 +1,6 @@
 {
   "code": "PL",
-  "scope": "Polska · postępowanie cywilne",
+  "scope": "Polska · postępowanie cywilne i karne (odesłania oznaczone osobno)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "biegły",
@@ -9,22 +9,55 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · ustawa o usługach zaufania",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183; Act on trust services and electronic identification (consolidated text Dz. U. 2024 poz. 1725), art. 1: national trust infrastructure, trust service providers and their supervision.",
+    "source": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001725"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing by competent authorities for combating crime is governed by the Act on the protection of personal data processed in connection with preventing and combating crime (consolidated text Dz. U. 2023 poz. 1206).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "KPC art. 233 § 1",
+      "basis": "The court assesses the credibility and weight of evidence by its own conviction after comprehensive consideration of the material.",
+      "source": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000468"
+    },
+    {
+      "route": "civil",
+      "term": "KPC art. 243¹; art. 308",
+      "basis": "The rules on documents apply to documents containing text that identify their issuer. Other documents, including image and sound recordings, are taken by applying the rules on inspection and on documents.",
+      "source": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000468"
+    },
+    {
+      "route": "criminal",
+      "term": "KPK art. 7",
+      "basis": "Authorities form their conviction on all evidence taken, assessed freely according to correct reasoning, knowledge and life experience.",
+      "source": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000490"
+    },
+    {
+      "route": "criminal",
+      "term": "KPK art. 168a",
+      "basis": "Evidence is not inadmissible solely because it was obtained in breach of procedure or by a prohibited act, unless a public official obtained it in the course of duty through homicide, intentional bodily harm or deprivation of liberty.",
+      "source": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000490"
+    }
+  ],
+  "dpa": {
+    "name": "Prezes Urzędu Ochrony Danych Osobowych (UODO)",
+    "name_en": "President of the Personal Data Protection Office",
+    "basis": "Ustawa o ochronie danych osobowych (Dz. U. 2019 poz. 1781), art. 34",
+    "source": "https://uodo.gov.pl/"
+  },
   "sources": [
     {
       "term": "Kodeks postępowania cywilnego",
@@ -41,6 +74,49 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Ustawa o usługach zaufania oraz identyfikacji elektronicznej (Dz. U. 2024 poz. 1725)",
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001725"
+    },
+    {
+      "term": "Kodeks postępowania cywilnego (Dz. U. 2026 poz. 468)",
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000468"
+    },
+    {
+      "term": "Kodeks postępowania karnego (Dz. U. 2026 poz. 490)",
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000490"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Ustawa o ochronie danych osobowych (Dz. U. 2019 poz. 1781)",
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190001781"
+    },
+    {
+      "term": "Ustawa o ochronie danych osobowych przetwarzanych w związku z zapobieganiem i zwalczaniem przestępczości (Dz. U. 2023 poz. 1206)",
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230001206"
+    },
+    {
+      "term": "UODO",
+      "url": "https://uodo.gov.pl/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from ISAP consolidated texts and EUR-Lex opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Poland.",
+      "sources": [
+        "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001725",
+        "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000468",
+        "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000490",
+        "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190001781",
+        "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230001206",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

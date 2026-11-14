@@ -1,21 +1,64 @@
 {
   "code": "CH",
-  "scope": "Schweiz · elektronische Signaturen",
+  "scope": "Schweiz · Zivil- und Strafverfahren, elektronische Signaturen",
   "checked_at": "2026-11-06",
-  "expert_role": null,
+  "expert_role": {
+    "term": "sachverständige Person",
+    "basis": "ZPO Art. 183: the court may obtain an expert opinion on a party's request or of its own motion after hearing the parties; the grounds for recusal of court officers apply.",
+    "source": "https://www.fedlex.admin.ch/eli/cc/2010/262/de#art_183",
+    "route": "civil"
+  },
   "esig_regulation": {
     "term": "ZertES",
     "qes_name": "qualifizierte elektronische Signatur",
+    "basis": "ZertES (SR 943.03) Art. 2 defines electronic, advanced and qualified electronic signatures and the qualified electronic time stamp. OR Art. 14 Abs. 2bis: a qualified electronic signature combined with a qualified time stamp is equivalent to a handwritten signature, subject to other statutory or agreed rules.",
     "source": "https://www.bit.admin.ch/de/e-signatur"
   },
-  "data_access_basis": null,
+  "data_access_basis": {
+    "route": "all",
+    "term": "DSG Art. 31",
+    "basis": "Processing that infringes personality is unlawful unless justified by consent, an overriding private or public interest, or law (Art. 31(1)).",
+    "deadline_days": null,
+    "source": "https://www.fedlex.admin.ch/eli/cc/2022/491/de#art_31"
+  },
   "timestamp_recognition": {
     "term": "qualifizierter elektronischer Zeitstempel",
+    "basis": "ZertES Art. 2 lit. j: a qualified electronic time stamp is issued by a provider recognised under ZertES and bears a regulated electronic seal. OR Art. 14 Abs. 2bis links signature equivalence to a qualified time stamp. No statutory presumption for time stamps comparable to eIDAS Art. 41(2) was identified in these provisions.",
     "automatic_ots_qualification": false,
     "source": "https://www.bit.admin.ch/de/zeitstempel"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "ZPO Art. 157; Art. 152 Abs. 2",
+      "basis": "The court forms its conviction by free evaluation of the evidence. Unlawfully obtained evidence is considered only if the interest in finding the truth prevails.",
+      "source": "https://www.fedlex.admin.ch/eli/cc/2010/262/de#art_157"
+    },
+    {
+      "route": "civil",
+      "term": "ZPO Art. 177; Art. 180 Abs. 1",
+      "basis": "Documents include electronic files, photos and recordings. A document may be filed as a copy; the original or a certified copy can be required where there are reasonable doubts about authenticity.",
+      "source": "https://www.fedlex.admin.ch/eli/cc/2010/262/de#art_177"
+    },
+    {
+      "route": "criminal",
+      "term": "StPO Art. 10 Abs. 2; Art. 139 Abs. 1",
+      "basis": "The court evaluates evidence freely according to its conviction from the whole proceedings. Authorities use all legally admissible evidence suited to finding the truth.",
+      "source": "https://www.fedlex.admin.ch/eli/cc/2010/267/de#art_10"
+    },
+    {
+      "route": "criminal",
+      "term": "StPO Art. 141",
+      "basis": "Evidence obtained by prohibited methods is never usable. Evidence obtained by authorities through criminal acts or in breach of validity rules is usable only where indispensable to solve serious offences.",
+      "source": "https://www.fedlex.admin.ch/eli/cc/2010/267/de#art_141"
+    }
+  ],
+  "dpa": {
+    "name": "Eidgenössischer Datenschutz- und Öffentlichkeitsbeauftragter (EDÖB)",
+    "name_en": "Federal Data Protection and Information Commissioner",
+    "basis": "DSG Art. 43",
+    "source": "https://www.edoeb.admin.ch/de"
+  },
   "sources": [
     {
       "term": "ZertES",
@@ -28,6 +71,44 @@
     {
       "term": "qualifizierter elektronischer Zeitstempel",
       "url": "https://www.bit.admin.ch/de/zeitstempel"
+    },
+    {
+      "term": "ZertES (SR 943.03)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2016/752/de"
+    },
+    {
+      "term": "Obligationenrecht Art. 14",
+      "url": "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_14"
+    },
+    {
+      "term": "Zivilprozessordnung (ZPO)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2010/262/de"
+    },
+    {
+      "term": "Strafprozessordnung (StPO)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2010/267/de"
+    },
+    {
+      "term": "Datenschutzgesetz (DSG)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2022/491/de"
+    },
+    {
+      "term": "EDÖB",
+      "url": "https://www.edoeb.admin.ch/de"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added the civil expert role, data-protection basis, evidence rules and supervisory authority, and the ZertES and OR references, from Fedlex consolidated texts opened on this date (ZPO version of 1 July 2026, StPO of 1 April 2025, DSG of 7 July 2025, OR of 1 October 2026, ZertES of 1 January 2020). Research draft for review by a lawyer admitted in Switzerland.",
+      "sources": [
+        "https://www.fedlex.admin.ch/eli/cc/2016/752/de",
+        "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_14",
+        "https://www.fedlex.admin.ch/eli/cc/2010/262/de",
+        "https://www.fedlex.admin.ch/eli/cc/2010/267/de",
+        "https://www.fedlex.admin.ch/eli/cc/2022/491/de",
+        "https://www.edoeb.admin.ch/de"
+      ]
     }
   ]
 }

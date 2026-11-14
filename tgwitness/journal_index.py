@@ -259,6 +259,11 @@ class JournalIndex:
                         (seq, search_text(payload)))
         self.advance("payload_search", seq)
 
+    def latest_message_times(self):
+        return dict(self.db.execute(
+            "SELECT c.chat_id,coalesce(json_extract(e.payload,'$.sent_at'),e.source_at) FROM chat_state_index c "
+            "JOIN events e ON e.seq=c.text_seq WHERE c.last_observed_at IS NOT NULL").fetchall())
+
     def candidate(self, query, *, text_only=True):
         value = search_text(query)
         enabled = self.search_enabled if text_only else self.payload_search_enabled

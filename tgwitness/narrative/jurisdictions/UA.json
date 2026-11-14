@@ -39,6 +39,36 @@
       "source": "https://zakon.rada.gov.ua/laws/show/4651-17"
     },
     {
+      "route": "criminal",
+      "term": "КПК ст. 99 ч. 3 · оригінал електронного документа",
+      "basis": "The original of an electronic document is its display, given the same meaning as the document (art. 99(3), as quoted by the Supreme Court). The Supreme Court treats all identical copies of an electronic document as originals; the carrier matters only when it is itself material evidence. Copying a video and not examining the recording device are not by themselves grounds for inadmissibility (case 511/1762/20 of 03.06.2026; case 496/5125/15-к of 09.05.2024).",
+      "source": "https://reyestr.court.gov.ua/Review/137226568"
+    },
+    {
+      "route": "criminal",
+      "term": "КПК ст. 246 ч. 1; ст. 252 ч. 2, 4 · записи НСРД",
+      "basis": "Facts and methods of covert actions are not disclosed except as the Code provides (art. 246(1)); covert actions may be recorded with technical means and the prosecutor preserves the items and documents obtained (art. 252(2), (4)). Where an expert established that covert-action recordings were copies, the Supreme Court upheld their exclusion with derived evidence (case 149/745/14 of 11.03.2020); in case 554/5090/16-к (Joint Chamber, 29.03.2021) the original flash drives were provided and the defence declined a repeat examination.",
+      "source": "https://reyestr.court.gov.ua/Review/88265263"
+    },
+    {
+      "route": "criminal",
+      "term": "Огляд чи НСРД · доступ до електронних інформаційних систем",
+      "basis": "The Supreme Court describes obtaining information from electronic information systems as a covert action needing an investigating judge's ruling where access is restricted by the holder or by logical protection, and not needing one otherwise; it accepted an inspection of a phone opened with the owner's consent and password without overcoming logical protection (cases 727/6578/17 of 09.04.2020 and 354/1184/23 of 29.04.2026). Which route a given acquisition falls under is for the official and a Ukrainian lawyer.",
+      "source": "https://reyestr.court.gov.ua/Review/88749345"
+    },
+    {
+      "route": "criminal",
+      "term": "КПК ст. 242 ч. 1–2 · коли експертиза обов’язкова",
+      "basis": "An expert must be engaged where the relevant circumstances cannot be reliably established without special knowledge (art. 242(1)) or in the cases listed in art. 242(2) (Joint Chamber, case 420/1667/18 of 25.11.2019, cited in case 750/4082/16-к of 08.09.2020). This research found no Supreme Court position that every recording needs a computer-technical examination.",
+      "source": "https://reyestr.court.gov.ua/Review/91555053"
+    },
+    {
+      "route": "all",
+      "term": "Довірчий список України · Закон 2155-VIII ст. 20, 26",
+      "basis": "The Ukrainian trust list names qualified services for electronic signatures and seals (art. 20) and for electronic time stamps (art. 26). CA/QC marks providers assessed by conformity bodies accredited under eIDAS; MR-CA/QC marks providers certified under the national scheme, which the trust-list operator states is not covered by EU mutual recognition. The operator reported on 28.04.2023 that the European Commission clarified that Ukrainian qualified signatures can be used as advanced signatures in the EU; no concluded EU–Ukraine mutual-recognition agreement was found on czo.gov.ua on 2026-11-14.",
+      "source": "https://czo.gov.ua/uaschemerules"
+    },
+    {
       "route": "civil",
       "term": "ЦПК ст. 102; ст. 106 ч. 5",
       "basis": "Distinguish a court-appointed expert from a party-commissioned opinion; the latter states its court-submission purpose and the expert's awareness of false-opinion liability.",
@@ -58,6 +88,42 @@
     {
       "term": "Electronic Identification and Electronic Trust Services, Law 2155-VIII",
       "url": "https://zakon.rada.gov.ua/laws/show/2155-19"
+    },
+    {
+      "term": "Supreme Court, case 511/1762/20 (03.06.2026)",
+      "url": "https://reyestr.court.gov.ua/Review/137226568"
+    },
+    {
+      "term": "Supreme Court, case 149/745/14 (11.03.2020)",
+      "url": "https://reyestr.court.gov.ua/Review/88265263"
+    },
+    {
+      "term": "Supreme Court, Joint Chamber, case 554/5090/16-к (29.03.2021)",
+      "url": "https://reyestr.court.gov.ua/Review/96074938"
+    },
+    {
+      "term": "Supreme Court, case 727/6578/17 (09.04.2020)",
+      "url": "https://reyestr.court.gov.ua/Review/88749345"
+    },
+    {
+      "term": "Supreme Court, case 354/1184/23 (29.04.2026)",
+      "url": "https://reyestr.court.gov.ua/Review/136197243"
+    },
+    {
+      "term": "Supreme Court, case 750/4082/16-к (08.09.2020)",
+      "url": "https://reyestr.court.gov.ua/Review/91555053"
+    },
+    {
+      "term": "Supreme Court review of Criminal Cassation Court practice, May 2024",
+      "url": "https://supreme.court.gov.ua/userfiles/media/new_folder_for_uploads/supreme/ogliady/Oglyad_KKS_05_2024_1.pdf"
+    },
+    {
+      "term": "Central certification authority: Ukrainian trust list scheme rules",
+      "url": "https://czo.gov.ua/uaschemerules"
+    },
+    {
+      "term": "Central certification authority: news of 28.04.2023 on EU use of Ukrainian qualified signatures",
+      "url": "https://czo.gov.ua/news-details?id=603"
     }
   ],
   "review_updates": [
@@ -68,6 +134,21 @@
         "https://zakon.rada.gov.ua/laws/show/4651-17",
         "https://zakon.rada.gov.ua/laws/show/1618-15",
         "https://zakon.rada.gov.ua/laws/show/2155-19"
+      ]
+    },
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added criminal-route references confirmed in Supreme Court decisions and reviews and in trust-list pages of the central certification authority. zakon.rada.gov.ua was not reachable from the research hosts on this date, so the earlier statute references (Law 2155-VIII art. 18 and 26, CPC art. 256) were not re-checked against the statute text. data_access_basis and dpa stay empty: no primary source was opened for them. Research draft for review by a Ukrainian lawyer; it does not establish admissibility.",
+      "sources": [
+        "https://reyestr.court.gov.ua/Review/137226568",
+        "https://reyestr.court.gov.ua/Review/88265263",
+        "https://reyestr.court.gov.ua/Review/96074938",
+        "https://reyestr.court.gov.ua/Review/88749345",
+        "https://reyestr.court.gov.ua/Review/136197243",
+        "https://reyestr.court.gov.ua/Review/91555053",
+        "https://supreme.court.gov.ua/userfiles/media/new_folder_for_uploads/supreme/ogliady/Oglyad_KKS_05_2024_1.pdf",
+        "https://czo.gov.ua/uaschemerules",
+        "https://czo.gov.ua/news-details?id=603"
       ]
     }
   ]

@@ -303,12 +303,16 @@ def observe(collector, entity, add=True):
     return chat_id
 
 
-async def sent(collector, entity, text, reply_to=None):
-    message = await collector.client.send_message(entity, text, reply_to=reply_to,
-                                                  parse_mode=None, link_preview=False)
+async def sent(collector, entity, text, reply_to=None, request_event=None):
+    from . import visibility as seen
     chat_id = utils.get_peer_id(entity)
+    typing = await seen.before_send(collector, chat_id, entity, text, request_event)
+    silent = seen.silent(collector.store, chat_id)
+    message = await collector.client.send_message(entity, text, reply_to=reply_to, parse_mode=None,
+                                                  link_preview=False, silent=silent)
     event = await collector.capture_message(message, "message.new", chat_id, source="panel_action")
-    return {"chat_id": chat_id, "message_id": message.id, "message_event": event["seq"]}
+    return {"chat_id": chat_id, "message_id": message.id, "message_event": event["seq"], "silent": silent,
+            **({"typing_before_send": typing} if typing else {})}
 
 
 def prepare(collector, body, account, fresh=True):
@@ -451,13 +455,13 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
             if getattr(entity, "bot", False):
                 dispatched = True
                 result.update(await sent(collector, entity, "/start" + (
-                    " " + target["start"] if target.get("start") else "")))
+                    " " + target["start"] if target.get("start") else ""), request_event=pending["request_event"]))
         elif body.action == "send":
             dispatched = True
-            result.update(await sent(collector, entity, body.text, body.reply_to))
+            result.update(await sent(collector, entity, body.text, body.reply_to, pending["request_event"]))
         elif selected["type"] == "text":
             dispatched = True
-            result.update(await sent(collector, entity, selected["text"]))
+            result.update(await sent(collector, entity, selected["text"], request_event=pending["request_event"]))
         else:
             dispatched = True
             answer = await collector.client(functions.messages.GetBotCallbackAnswerRequest(

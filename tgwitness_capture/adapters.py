@@ -1,4 +1,5 @@
 import asyncio
+import re
 import sqlite3
 import tempfile
 import time
@@ -156,11 +157,42 @@ class BrowserCapture:
         self.runtime = self.browser = None
 
 
-def sqlite_snapshot(journal, source_path, client_version, limit=512 * 1024 * 1024):
+def sqlite_snapshot(journal, source_path, client_version, limit=512 * 1024 * 1024, rotated=None):
     source_path = Path(source_path).resolve(strict=True)
     if not source_path.is_file():
         raise ValueError("Database source is not a file")
     started = utcnow()
+    artifact, schema, user_version = sqlite_copy(journal, source_path, "ayugram_database", limit)
+    metadata = {"source": "ayugram", "method": "sqlite-online-backup", "client_version": client_version,
+                "source_filename": source_path.name, "schema_sha256": digest(canonical(schema)),
+                "user_version": user_version, "quick_check": "ok", "snapshot_started_at": started,
+                "snapshot_finished_at": utcnow(), "scope": "configured SQLite database",
+                "message_schema_interpreted": False}
+    if source_path.name != "ayudata.db":
+        return metadata, [artifact], started
+    artifacts, copies, errors = [artifact], [], []
+    present = sorted(path for path in source_path.parent.iterdir()
+                     if re.fullmatch(r"ayudata_\d+\.db", path.name) and path.is_file())
+    for path in present:
+        state = path.stat()
+        if rotated is None or rotated.get(path.name) == (state.st_size, state.st_mtime_ns):
+            continue
+        try:
+            item = sqlite_copy(journal, path, "ayugram_database_rotated", limit)[0]
+        except Exception as exc:
+            errors.append({"component": "rotated_database", "source_filename": path.name, "error": type(exc).__name__})
+            continue
+        rotated[path.name] = (state.st_size, state.st_mtime_ns)
+        artifacts.append(item)
+        copies.append({"source_filename": path.name, "sha256": item["sha256"], "size": item["size"]})
+    metadata.update(rotated_present=[path.name for path in present], rotated_databases=copies,
+                    snapshot_finished_at=utcnow())
+    if errors:
+        metadata["errors"] = errors
+    return metadata, artifacts, started
+
+
+def sqlite_copy(journal, source_path, role, limit):
     deadline = time.monotonic() + 15
     with tempfile.TemporaryDirectory(dir=journal.pending) as temporary:
         snapshot = Path(temporary) / "snapshot.sqlite3"
@@ -187,9 +219,5 @@ def sqlite_snapshot(journal, source_path, client_version, limit=512 * 1024 * 102
             source.close()
             target.close()
         with snapshot.open("rb") as stream:
-            artifact = journal.artifact_stream(stream, "ayugram_database", "application/vnd.sqlite3", limit)
-    return {"source": "ayugram", "method": "sqlite-online-backup", "client_version": client_version,
-            "source_filename": source_path.name, "schema_sha256": digest(canonical(schema)),
-            "user_version": user_version, "quick_check": "ok", "snapshot_started_at": started,
-            "snapshot_finished_at": utcnow(), "scope": "configured SQLite database",
-            "message_schema_interpreted": False}, [artifact], started
+            artifact = journal.artifact_stream(stream, role, "application/vnd.sqlite3", limit)
+    return artifact, schema, user_version

@@ -233,7 +233,11 @@ async def profiles_import(
                 else collector.configure
             )
             extra = (
-                (account.get("formats", []), account.get("two_factor_password", ""))
+                (
+                    account.get("formats", []),
+                    account.get("two_factor_password", ""),
+                    body.device_seed,
+                )
                 if body.new_session
                 else ()
             )
@@ -558,6 +562,7 @@ async def independent_session(
         client_languages(request),
         body.formats,
         body.two_factor_password,
+        body.device_seed,
     )
 
 
@@ -585,12 +590,17 @@ async def import_account(body: AccountImport, *, ctx=Depends(current_context)):
         raise HTTPException(422, str(exc)) from None
 
 
-async def import_preview(body: AccountImport, *, ctx=Depends(current_context)):
+async def import_preview(
+    body: AccountImport, request: Request, *, ctx=Depends(current_context)
+):
     ctx.require_live()
     from ..account_import import preview
 
     return await asyncio.to_thread(
-        preview, [item.model_dump() for item in body.files], body.passcode
+        preview,
+        [item.model_dump() for item in body.files],
+        body.passcode,
+        client_languages(request),
     )
 
 

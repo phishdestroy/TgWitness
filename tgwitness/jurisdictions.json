@@ -763,10 +763,10 @@
       "scope": "Civil and criminal original/copy rules differ",
       "language": "uk",
       "law": "Civil Procedure Code, article 100",
-      "criminal_law": "Criminal Procedure Code, articles 99–100",
+      "criminal_law": "Criminal Procedure Code, articles 86–87, 99, 242, 246, 252 (wording as quoted by the Supreme Court)",
       "basis": "Electronic evidence includes messages, recordings and metadata. The civil route distinguishes originals from electronic copies authenticated with the required qualified signature.",
       "prepare": "Identify who holds the original. If using the electronic-copy route, arrange the required authentication; TgWitness Ed25519 is not itself a qualified electronic signature.",
-      "criminal": "Criminal Procedure Code articles 99–100 address documents, computer data, originals and specified copy conditions. Do not import the civil qualified-signature route automatically.",
+      "criminal": "Criminal route, separate from the civil route; do not import the civil qualified-signature route automatically. Evidence is admissible if obtained in the manner set by the Criminal Procedure Code (art. 86(1)); evidence obtained through a substantial violation of human rights and freedoms, and evidence derived from such information, is inadmissible (art. 87(1)). Documents can include photo, audio and video material and other information carriers, including computer data (art. 99(1)–(2)). A party must give the court the original document; the original of an electronic document is its display, given the same meaning as the document (art. 99(3)). The Supreme Court has held that all identical copies of an electronic document can be treated as originals and that the carrier matters only when it is itself material evidence (cases 511/1762/20 of 03.06.2026 and 496/5125/15-к of 09.05.2024), and that copying a video and not examining the device that recorded it are not by themselves grounds for inadmissibility (case 511/1762/20). Where an expert established that covert-action recordings on discs were copies, it upheld their exclusion and the exclusion of derived evidence (case 149/745/14 of 11.03.2020). Covert investigative actions are a separate category whose facts and methods are not disclosed except as the Code provides (art. 246(1)); they may be recorded with technical means, and the prosecutor preserves the resulting items and documents (art. 252(2), (4)). The Supreme Court has described obtaining information from electronic information systems as a covert action that needs an investigating judge's ruling where access is restricted by the holder or by logical protection, and accepted the inspection of a phone opened with the owner's consent and password without overcoming logical protection (cases 727/6578/17 of 09.04.2020 and 354/1184/23 of 29.04.2026). An expert examination is required where the circumstances cannot be reliably established without special knowledge (art. 242(1)) or in the cases listed in art. 242(2) (Joint Chamber, case 420/1667/18 of 25.11.2019, as cited in case 750/4082/16-к). This research draft does not decide which route applies to a given use and needs review by a Ukrainian lawyer.",
       "human": "The holder or certifier of the copy; the required procedural participant for the selected route.",
       "tasks": [
         "Identify and preserve the original",
@@ -775,7 +775,7 @@
         "Document acquisition and transfer"
       ],
       "local": "Збережіть оригінал архіву, відео та метадані. Для подання електронної копії врахуйте вимоги статті 100 ЦПК щодо КЕП і повідомте, у кого зберігається оригінал. Підпис TgWitness сам по собі не є КЕП.",
-      "local_criminal": "Збережіть оригінали, відео та опис отримання і передачі. Для кримінального провадження застосовуйте статті 99–100 КПК і відповідні правила щодо оригіналів та копій. Не переносіть автоматично вимоги цивільного процесу; підпис архіву не встановлює особу автора повідомлення.",
+      "local_criminal": "Кримінальне провадження має власні правила, окремі від цивільного процесу; вимоги ЦПК щодо КЕП не переносяться автоматично. Доказ визнається допустимим, якщо його отримано в порядку, встановленому КПК (ч. 1 ст. 86); недопустимими є докази, отримані внаслідок істотного порушення прав і свобод людини, а також похідні від них (ч. 1 ст. 87). Документами можуть бути матеріали фотозйомки, звукозапису, відеозапису та інші носії інформації, у тому числі комп’ютерні дані (ч. 1–2 ст. 99); оригіналом електронного документа є його відображення, якому надається таке ж значення, як документу (ч. 3 ст. 99). За практикою ККС ВС усі ідентичні за змістом примірники електронного документа можуть розглядатися як оригінали, а матеріальний носій має значення лише тоді, коли електронний документ є речовим доказом (справи № 511/1762/20, № 496/5125/15-к). Негласні слідчі (розшукові) дії мають окремий порядок дозволу та фіксації (ч. 1 ст. 246, ч. 2 і 4 ст. 252). Експертиза обов’язкова, якщо обставини неможливо достовірно встановити без спеціальних знань (ч. 1 ст. 242), або у випадках, передбачених ч. 2 ст. 242 (постанова Об’єднаної палати ККС ВС у справі № 420/1667/18). Підпис архіву TgWitness не встановлює особу автора повідомлення і не є КЕП. Це дослідницька чернетка, яку має перевірити український адвокат.",
       "sources": [
         {
           "title": "Civil Procedure Code, article 100",
@@ -784,8 +784,36 @@
       ],
       "criminal_sources": [
         {
-          "title": "Criminal Procedure Code, articles 99–100",
+          "title": "Criminal Procedure Code of Ukraine, official text (not reachable from the research hosts on 2026-11-14; article wording taken from the Supreme Court decisions below)",
           "url": "https://zakon.rada.gov.ua/laws/show/4651-17#Text"
+        },
+        {
+          "title": "Supreme Court, case 511/1762/20 of 03.06.2026: CPC arts. 86(1), 87(1), 93(2), 99(1)–(3); copies of a video (opened 2026-11-14)",
+          "url": "https://reyestr.court.gov.ua/Review/137226568"
+        },
+        {
+          "title": "Supreme Court review of Criminal Cassation Court practice, May 2024, section 4.1: case 496/5125/15-к, electronic originals (opened 2026-11-14)",
+          "url": "https://supreme.court.gov.ua/userfiles/media/new_folder_for_uploads/supreme/ogliady/Oglyad_KKS_05_2024_1.pdf"
+        },
+        {
+          "title": "Supreme Court, case 149/745/14 of 11.03.2020: CPC arts. 99(3), 252(2), (4); copies of covert-action recordings (opened 2026-11-14)",
+          "url": "https://reyestr.court.gov.ua/Review/88265263"
+        },
+        {
+          "title": "Supreme Court, Joint Chamber, case 554/5090/16-к of 29.03.2021: CPC art. 246(1); original carriers of covert-action records (opened 2026-11-14)",
+          "url": "https://reyestr.court.gov.ua/Review/96074938"
+        },
+        {
+          "title": "Supreme Court, case 727/6578/17 of 09.04.2020: obtaining information from electronic information systems (opened 2026-11-14)",
+          "url": "https://reyestr.court.gov.ua/Review/88749345"
+        },
+        {
+          "title": "Supreme Court, case 354/1184/23 of 29.04.2026: inspection of a phone with the owner's consent (opened 2026-11-14)",
+          "url": "https://reyestr.court.gov.ua/Review/136197243"
+        },
+        {
+          "title": "Supreme Court, case 750/4082/16-к of 08.09.2020: CPC art. 242(1)–(2), Joint Chamber case 420/1667/18 (opened 2026-11-14)",
+          "url": "https://reyestr.court.gov.ua/Review/91555053"
         }
       ],
       "reviewed_on": "2026-11-06",
@@ -892,7 +920,235 @@
       ],
       "reviewed_on": "2026-11-06",
       "criminal_status": "research_draft"
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "scope": "Civil ZPP and criminal ZKP routes; later amendments not fully traced",
+      "language": "hr",
+      "law": "Zakon o parničnom postupku (consolidated text NN 148/2011), articles 8, 220 and 230",
+      "criminal_law": "Zakon o kaznenom postupku (NN 152/2008), articles 9–10",
+      "basis": "The court decides which facts are proven by its conviction, weighing each item of evidence and all evidence together, and chooses which proposed evidence to take. Public documents have special probative force; a software export is not one.",
+      "prepare": "Preserve the original files, video and collection method, and record hashes and transfers. A qualified time stamp carries eIDAS presumptions; the export's own signature is not a qualified signature. Trace later ZPP amendments before filing.",
+      "criminal": "ZKP article 9: the assessment of facts is not bound by formal rules of evidence. Article 10: court decisions cannot rest on unlawfully obtained evidence. Later amendments to these articles were not traced.",
+      "human": "Collector or other competent witness; a technical expert where the court orders one.",
+      "tasks": [
+        "Preserve original files and the recording",
+        "Describe the collection method",
+        "Record hashes and transfers",
+        "Check later amendments to the cited articles"
+      ],
+      "local": "Sačuvajte izvorne datoteke, videozapis i opis načina prikupljanja. Sud slobodno ocjenjuje dokaze, svaki zasebno i sve zajedno. Potpis softvera za izvoz nije kvalificirani elektronički potpis i ne dokazuje identitet pošiljatelja. Izvoz nema dokaznu snagu javne isprave.",
+      "local_criminal": "U kaznenom postupku sud nije vezan formalnim dokaznim pravilima, ali se sudska odluka ne smije temeljiti na nezakonitim dokazima. Dokumentirajte izvor, način prikupljanja, hash vrijednosti i svaku predaju materijala. Zakonitost prikupljanja provjerite s odvjetnikom.",
+      "sources": [
+        {
+          "title": "Zakon o parničnom postupku, consolidated text NN 148/2011, articles 8, 220 and 230",
+          "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2011_12_148_2993.html"
+        },
+        {
+          "title": "eIDAS 910/2014 as amended, articles 41 and 42",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+        }
+      ],
+      "criminal_sources": [
+        {
+          "title": "Zakon o kaznenom postupku, NN 152/2008, articles 9–10",
+          "url": "https://narodne-novine.nn.hr/clanci/sluzbeni/2008_12_152_4149.html"
+        }
+      ],
+      "reviewed_on": "2026-11-14",
+      "criminal_status": "research_draft"
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "scope": "Civil ZPP and criminal ZKP routes; official consolidated texts of 2007 and 2012",
+      "language": "sl",
+      "law": "Zakon o pravdnem postopku (ZPP-UPB3), articles 8 and 16.a",
+      "criminal_law": "Zakon o kazenskem postopku (ZKP-UPB8), article 18",
+      "basis": "The court decides which facts are proven by its conviction. Data may not be denied evidential value solely because they are electronic, and electronic form counts as written form when the data are accessible and fit for later use.",
+      "prepare": "Preserve the original files, video and collection method, and explain how the data stayed accessible and fit for later use. Check amendments made after the 2007 consolidated text.",
+      "criminal": "ZKP article 18: no formal rules of evidence bind the court, but it may not rest a decision on evidence obtained by violating constitutional rights, or procedural provisions where the Act so provides. Amendments after the 2012 consolidated text were not traced.",
+      "human": "Collector or other competent witness; a technical expert where the court orders one.",
+      "tasks": [
+        "Preserve original files and the recording",
+        "Describe the collection method",
+        "Show that the data stay accessible and usable",
+        "Check later amendments to the cited articles"
+      ],
+      "local": "Shranite izvirne datoteke, videoposnetek in opis načina zbiranja. Podatkom v elektronski obliki se ne sme odreči dokazne vrednosti samo zato, ker so v elektronski obliki; sodišče dokaze presoja po svojem prepričanju. Podpis programa za izvoz ni kvalificirani elektronski podpis in ne dokazuje identitete pošiljatelja.",
+      "local_criminal": "V kazenskem postopku sodišče ni vezano na formalna dokazna pravila, ne sme pa opreti odločbe na dokaze, pridobljene s kršitvijo ustavno določenih pravic ali določb, za katere zakon to določa. Dokumentirajte vir, način zbiranja, zgoščene vrednosti in vsako predajo gradiva.",
+      "sources": [
+        {
+          "title": "Zakon o pravdnem postopku (ZPP-UPB3), Uradni list RS 73/2007, articles 8 and 16.a",
+          "url": "https://www.uradni-list.si/_pdf/2007/Ur/u2007073.pdf"
+        },
+        {
+          "title": "eIDAS 910/2014 as amended, articles 41 and 42",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+        }
+      ],
+      "criminal_sources": [
+        {
+          "title": "Zakon o kazenskem postopku (ZKP-UPB8), Uradni list RS 32/2012, article 18",
+          "url": "https://www.uradni-list.si/_pdf/2012/Ur/u2012032.pdf"
+        }
+      ],
+      "reviewed_on": "2026-11-14",
+      "criminal_status": "research_draft"
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "scope": "Civil Code and electronic-commerce law; criminal procedure referenced separately",
+      "language": "fr",
+      "law": "Code civil, articles 1322-1, 1322-2 and 1334; loi du 14 août 2000, article 18",
+      "criminal_law": "Code de procédure pénale, articles 154 and 189",
+      "basis": "A signature may be handwritten or electronic. An electronic private deed counts as an original when it gives reliable guarantees of integrity from its creation, and a judge may not reject an electronic signature solely because it is electronic.",
+      "prepare": "Preserve originals, video and the collection method, and explain how integrity was kept from first creation. The exporter's signature is not a qualified electronic signature and does not identify the Telegram sender.",
+      "criminal": "Contraventions and délits are proved by official records or reports, or by witnesses (CPP articles 154 and 189). Other admissibility and procedure questions were not reviewed.",
+      "human": "Collector or other competent witness; a technician appointed by the judge (NCPC article 432) where technical findings are needed.",
+      "tasks": [
+        "Preserve originals and the recording",
+        "Explain integrity from first creation",
+        "Separate collector identity from alleged authorship",
+        "Record hashes and transfers"
+      ],
+      "local": "Conservez les fichiers originaux, la vidéo et la description de la méthode de collecte. La signature peut être manuscrite ou électronique, et l’acte sous seing privé électronique vaut original s’il présente des garanties fiables quant au maintien de son intégrité. La signature du logiciel d’export n’est pas une signature électronique qualifiée et ne prouve pas l’identité de l’expéditeur.",
+      "local_criminal": "En matière pénale, la preuve des contraventions et des délits suit les articles 154 et 189 du Code de procédure pénale. Conservez les originaux, les empreintes numériques et la trace de chaque transmission. Vérifiez avec un avocat la licéité de la collecte et le mode de production devant la juridiction.",
+      "sources": [
+        {
+          "title": "Code civil, articles 1322-1, 1322-2 and 1334 (version of 26 December 2025)",
+          "url": "https://data.legilux.public.lu/eli/etat/leg/code/civil/20251226/fr/html"
+        },
+        {
+          "title": "Loi du 14 août 2000 relative au commerce électronique, article 18 (consolidated 2021)",
+          "url": "https://data.legilux.public.lu/eli/etat/leg/loi/2000/08/14/n8/consolide/20211206/fr/html"
+        }
+      ],
+      "criminal_sources": [
+        {
+          "title": "Code de procédure pénale, articles 154 and 189 (version of 7 June 2026)",
+          "url": "https://data.legilux.public.lu/eli/etat/leg/code/procedure_penale/20260607/fr/html"
+        }
+      ],
+      "reviewed_on": "2026-11-14",
+      "criminal_status": "research_draft"
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "scope": "Civil Cap. 12 and criminal Cap. 9 routes",
+      "language": "en",
+      "law": "Code of Organization and Civil Procedure (Cap. 12), articles 559–560 and 636",
+      "criminal_law": "Criminal Code (Cap. 9), article 638",
+      "basis": "The court requires the best evidence a party can produce and disallows evidence that is irrelevant, superfluous or not the best available. Authentic copies equal originals only for the documents the Code lists.",
+      "prepare": "Preserve the original files, video and collection method, and explain why the material offered is the best available. The export's own signature is not a qualified electronic signature.",
+      "criminal": "Article 638: the fullest and most satisfactory proof available must be produced, without omitting any important witness; one believed witness can be sufficient.",
+      "human": "Collector or other competent witness able to explain the method; a technical expert where the court appoints one.",
+      "tasks": [
+        "Preserve original files and the recording",
+        "Explain why this is the best evidence available",
+        "Record hashes and transfers",
+        "Identify the witness who explains the collection"
+      ],
+      "local": "Keep the original files, video and a description of the collection method. The court requires the best evidence a party can produce and may disallow evidence that is not the best available. The export software's signature is not a qualified electronic signature and does not prove who sent a message.",
+      "local_criminal": "In criminal proceedings the fullest and most satisfactory proof available must be produced. Keep originals, hash values and a record of every transfer, and identify a witness who can explain the collection. Confirm the procedure with counsel.",
+      "sources": [
+        {
+          "title": "Code of Organization and Civil Procedure (Cap. 12), articles 559–560 and 636",
+          "url": "https://legislation.mt/eli/cap/12/eng/pdf"
+        },
+        {
+          "title": "eIDAS 910/2014 as amended, articles 41 and 42",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+        }
+      ],
+      "criminal_sources": [
+        {
+          "title": "Criminal Code (Cap. 9), article 638",
+          "url": "https://legislation.mt/eli/cap/9/eng/pdf"
+        }
+      ],
+      "reviewed_on": "2026-11-14",
+      "criminal_status": "research_draft"
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "scope": "Civil and criminal procedure codes; checked in Matsne English translations",
+      "language": "ka",
+      "law": "Civil Procedure Code, articles 105 and 134",
+      "criminal_law": "Criminal Procedure Code, articles 72 and 82",
+      "basis": "No evidence has a predetermined weight; the court evaluates evidence by inner conviction. An electronic document under the Law on Electronic Documents and Electronic Trust Services has evidentiary value.",
+      "prepare": "Preserve the original files, video and collection method. A qualified time stamp under that Law carries presumptions of time and integrity; the export's own signature is not a qualified electronic signature.",
+      "criminal": "Evidence obtained through a substantial violation of the Code is inadmissible if it worsens the accused's position, and evidence is inadmissible where a reasonable doubt that it was replaced or altered has not been refuted (article 72). A conviction requires agreed evidence beyond reasonable doubt (article 82).",
+      "human": "Collector or other competent witness; a technical expert where the procedure requires one.",
+      "tasks": [
+        "Preserve original files and the recording",
+        "Describe the collection method",
+        "Record hashes and transfers",
+        "Confirm the Georgian-language text of each cited article"
+      ],
+      "local": "შეინახეთ ორიგინალი ფაილები, ვიდეოჩანაწერი და შეგროვების მეთოდის აღწერა. სასამართლო მტკიცებულებებს აფასებს შინაგანი რწმენით და არცერთ მტკიცებულებას არ აქვს წინასწარ დადგენილი ძალა. ექსპორტის პროგრამის ხელმოწერა არ არის კვალიფიციური ელექტრონული ხელმოწერა და არ ადასტურებს გამგზავნის ვინაობას.",
+      "local_criminal": "სისხლის სამართლის საქმეში მტკიცებულება დაუშვებელია, თუ არ გაქარწყლდა გონივრული ეჭვი, რომ იგი შეიცვალა ან შეიცვალა მისი თვისებები. შეინახეთ ორიგინალები, ჰეშ-მნიშვნელობები და ყოველი გადაცემის ჩანაწერი. შეგროვების კანონიერება გადაამოწმეთ ადვოკატთან.",
+      "sources": [
+        {
+          "title": "Civil Procedure Code of Georgia, articles 105 and 134",
+          "url": "https://matsne.gov.ge/en/document/view/29962"
+        },
+        {
+          "title": "Law on Electronic Documents and Electronic Trust Services, articles 3 and 7",
+          "url": "https://matsne.gov.ge/en/document/view/3654557"
+        }
+      ],
+      "criminal_sources": [
+        {
+          "title": "Criminal Procedure Code of Georgia, articles 72 and 82",
+          "url": "https://matsne.gov.ge/en/document/view/90034"
+        }
+      ],
+      "reviewed_on": "2026-11-14",
+      "criminal_status": "research_draft"
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "scope": "Civil and criminal procedure codes; Russian and Kazakh texts",
+      "language": "kk",
+      "law": "Civil Procedure Code, articles 16, 63, 65 and 68",
+      "criminal_law": "Criminal Procedure Code, articles 25, 111, 112 and 120",
+      "basis": "Evidence is lawfully obtained information about facts, assessed by the judge's inner conviction for relevance, admissibility, reliability and sufficiency. Audio and video recordings and materials on electronic or digital carriers may be admitted.",
+      "prepare": "Preserve the original files, video and collection method, and show how the material was obtained. An electronic digital signature under the Law on Electronic Documents requires a registration certificate; the export's own signature is not one.",
+      "criminal": "Evidence is lawfully obtained factual data assessed by inner conviction (articles 25, 111). Data obtained in violation of the Code are inadmissible where the violation affected or could affect their reliability (article 112). Documents are evidence if their content matters for the case (article 120).",
+      "human": "Collector or other competent witness; a specialist or expert where the procedure requires one.",
+      "tasks": [
+        "Preserve original files and the recording",
+        "Show how the material was lawfully obtained",
+        "Record hashes and transfers",
+        "Check the Kazakh and Russian texts of each cited article"
+      ],
+      "local": "Түпнұсқа файлдарды, бейнежазбаны және жинау әдісінің сипаттамасын сақтаңыз. Судья дәлелдемелерді өзінің ішкі сенімі бойынша бағалайды, ешбір дәлелдеменің күні бұрын белгіленген күші болмайды. Экспорттаушы бағдарламаның қолтаңбасы заңда көзделген электрондық цифрлық қолтаңба емес және жіберушінің жеке басын растамайды.",
+      "local_criminal": "Қылмыстық істе осы Кодекстің талаптары бұзыла отырып алынған нақты деректер, егер бұзушылық олардың анықтығына әсер етсе немесе әсер етуі мүмкін болса, дәлелдеме ретінде жол берілмейді. Түпнұсқаларды, хэш-мәндерді және әрбір беру фактісін құжаттаңыз.",
+      "sources": [
+        {
+          "title": "Civil Procedure Code of the Republic of Kazakhstan, articles 16, 63, 65 and 68",
+          "url": "https://old.adilet.zan.kz/rus/docs/K1500000377"
+        },
+        {
+          "title": "Law on Electronic Documents and Electronic Digital Signatures, articles 7 and 10",
+          "url": "https://old.adilet.zan.kz/rus/docs/Z030000370_"
+        }
+      ],
+      "criminal_sources": [
+        {
+          "title": "Criminal Procedure Code of the Republic of Kazakhstan, articles 25, 111, 112 and 120",
+          "url": "https://old.adilet.zan.kz/rus/docs/K1400000231"
+        }
+      ],
+      "reviewed_on": "2026-11-14",
+      "criminal_status": "research_draft"
     }
   ],
-  "version": "2026-11-14.1"
+  "version": "2026-11-14.2"
 }

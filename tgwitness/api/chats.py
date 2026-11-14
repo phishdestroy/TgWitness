@@ -443,6 +443,10 @@ async def set_parameters(body: ParametersUpdate, *, ctx=Depends(current_context)
 async def chats(request: Request, *, ctx=Depends(current_context)):
     store = ctx.app.state.store
     overview = store.chat_overview()
+    with store.lock:
+        for chat_id, sent in store.read_index.latest_message_times().items():
+            if chat_id in overview:
+                overview[chat_id]["last_message_at"] = sent
     listed = [
         {**t, "enabled": bool(t["enabled"]), **overview.pop(t["chat_id"], {})}
         for t in store.targets()

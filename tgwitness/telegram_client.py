@@ -2,7 +2,9 @@ import asyncio
 import copy
 import logging
 import time
+from contextlib import contextmanager
 from contextvars import ContextVar
+from datetime import datetime
 
 from telethon import TelegramClient, utils
 from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
@@ -15,17 +17,22 @@ from telethon.tl.tlobject import TLRequest
 from .rpc_pacing import bulk_request
 
 _single_attempt = ContextVar("telegram_single_attempt", default=False)
+_read_permit = ContextVar("telegram_read_permit", default=None)
 LOG = logging.getLogger("tgwitness.telegram_client")
 
 try:
-    from telethon._updates.messagebox import ENTRY_ACCOUNT, MessageBox
+    from telethon._updates.messagebox import ENTRY_ACCOUNT, ENTRY_SECRET, MessageBox, PrematureEndReason, PtsInfo
 except ImportError:
     MessageBox = None
 
 
 if MessageBox is not None:
     class GapAwareMessageBox(MessageBox):
-        __slots__ = ("gap_owner",)
+        __slots__ = ("gap_owner", "diffing", "diff_types")
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.diffing, self.diff_types = None, {}
 
         def session_state(self):
             held = getattr(getattr(self, "gap_owner", None), "accepted_state", None)
@@ -45,18 +52,95 @@ if MessageBox is not None:
             self.hold()
             return super().process_updates(updates, chat_hashes, result)
 
+        def apply_pts_info(self, update, *, reset_deadlines):
+            if isinstance(update, types.UpdateChannelTooLong):
+                self.report_sequence("event", update.channel_id, "channel_too_long",
+                                     getattr(self.map.get(update.channel_id), "pts", None), update.pts)
+                return super().apply_pts_info(update, reset_deadlines=reset_deadlines)
+            info = PtsInfo.from_update(update)
+            if info is None or info.entry is ENTRY_SECRET:
+                return super().apply_pts_info(update, reset_deadlines=reset_deadlines)
+            if self.diffing is not None and info.entry == self.diffing:
+                name = type(update).__name__
+                self.diff_types[name] = self.diff_types.get(name, 0) + 1
+                update.tgwitness_recovered = True
+                return update
+            known = info.entry in self.map
+            result = super().apply_pts_info(update, reset_deadlines=reset_deadlines)
+            if result is not None:
+                method = "push" if self.diffing is None else "getDifference"
+                self.report_sequence("update", info.entry, info.pts, info.pts_count, type(update).__name__, known,
+                                     method)
+            return result
+
+        def applying(self, entry, call, *args):
+            self.diffing, self.diff_types = entry, {}
+            try:
+                return call(*args)
+            finally:
+                self.diffing = None
+
         def apply_difference(self, diff, chat_hashes):
             self.hold()
+            before = getattr(self.map.get(ENTRY_ACCOUNT), "pts", None)
             if isinstance(diff, types.updates.DifferenceTooLong):
                 self.report_gap(None, ENTRY_ACCOUNT, diff.pts)
-            return super().apply_difference(diff, chat_hashes)
+            result = self.applying(ENTRY_ACCOUNT, super().apply_difference, diff, chat_hashes)
+            if before is not None and not isinstance(diff, types.updates.DifferenceTooLong):
+                state = getattr(diff, "intermediate_state", None) or getattr(diff, "state", None)
+                counted = dict(self.diff_types)
+                if getattr(diff, "new_messages", None):
+                    counted["UpdateNewMessage"] = counted.get("UpdateNewMessage", 0) + len(diff.new_messages)
+                self.report_sequence("difference", ENTRY_ACCOUNT, before, state.pts if state else before,
+                                     "getDifference", type(diff).__name__,
+                                     not isinstance(diff, types.updates.DifferenceSlice), counted)
+            return result
 
         def apply_channel_difference(self, request, diff, chat_hashes):
             self.hold()
+            entry = request.channel.channel_id
             if isinstance(diff, types.updates.ChannelDifferenceTooLong):
-                entry = request.channel.channel_id
                 self.report_gap(entry, entry, getattr(diff.dialog, "pts", None))
-            return super().apply_channel_difference(request, diff, chat_hashes)
+            result = self.applying(entry, super().apply_channel_difference, request, diff, chat_hashes)
+            if not isinstance(diff, types.updates.ChannelDifferenceTooLong):
+                counted = dict(self.diff_types)
+                if getattr(diff, "new_messages", None):
+                    counted["UpdateNewChannelMessage"] = (counted.get("UpdateNewChannelMessage", 0)
+                                                          + len(diff.new_messages))
+                self.report_sequence("difference", entry, request.pts, diff.pts, "getChannelDifference",
+                                     type(diff).__name__, bool(diff.final), counted)
+            return result
+
+        def end_difference(self):
+            self.report_sequence("event", ENTRY_ACCOUNT, "difference_failed",
+                                 getattr(self.map.get(ENTRY_ACCOUNT), "pts", None), None)
+            return super().end_difference()
+
+        def get_channel_difference(self, chat_hashes):
+            entry = next((id for id in self.getting_diff_for if isinstance(id, int)), None)
+            pts = getattr(self.map.get(entry), "pts", None)
+            request = super().get_channel_difference(chat_hashes)
+            if entry is not None and request is None and entry not in self.map:
+                self.report_sequence("dropped", entry, "no_access_hash", pts)
+            return request
+
+        def end_channel_difference(self, request, reason, chat_hashes):
+            entry = request.channel.channel_id
+            pts = getattr(self.map.get(entry), "pts", None)
+            result = super().end_channel_difference(request, reason, chat_hashes)
+            if reason == PrematureEndReason.BANNED:
+                self.report_sequence("dropped", entry, "banned", pts)
+            else:
+                self.report_sequence("event", entry, "difference_failed", pts, None)
+            return result
+
+        def report_sequence(self, *report):
+            listener = getattr(getattr(self, "gap_owner", None), "sequence_listener", None)
+            if listener is not None:
+                try:
+                    listener(*report)
+                except Exception:
+                    LOG.exception("Recording the update sequence failed")
 
         def report_gap(self, channel_id, entry, after):
             owner = getattr(self, "gap_owner", None)
@@ -74,7 +158,7 @@ _READ_RECEIPTS = (functions.messages.ReadHistoryRequest, functions.messages.Read
                   functions.channels.ReadHistoryRequest, functions.channels.ReadMessageContentsRequest,
                   functions.messages.ReadDiscussionRequest, functions.messages.ReadMentionsRequest,
                   functions.messages.ReadReactionsRequest, functions.messages.ReadEncryptedHistoryRequest,
-                  functions.stories.ReadStoriesRequest)
+                  functions.stories.ReadStoriesRequest, functions.stories.IncrementStoryViewsRequest)
 _OWN_UPDATES = (types.messages.AffectedMessages, types.messages.AffectedHistory, types.messages.AffectedFoundMessages)
 _FILE_READS = (functions.upload.GetFileRequest, functions.upload.GetCdnFileRequest)
 FILE_REQUESTS = 3
@@ -102,7 +186,62 @@ class ReadReceiptBlocked(ValueError):
     pass
 
 
-def reject_read_receipts(request):
+def _peer_key(peer):
+    try:
+        return utils.get_peer_id(peer)
+    except (TypeError, ValueError):
+        return None
+
+
+def _channel_key(channel):
+    channel_id = getattr(channel, "channel_id", None)
+    return utils.get_peer_id(types.PeerChannel(channel_id)) if type(channel_id) is int else None
+
+
+def _moment(value):
+    return int(value.timestamp()) if isinstance(value, datetime) else value
+
+
+PERMITTED_READS = {
+    functions.messages.ReadHistoryRequest: lambda r: (_peer_key(r.peer), r.max_id),
+    functions.channels.ReadHistoryRequest: lambda r: (_channel_key(r.channel), r.max_id),
+    functions.messages.ReadMessageContentsRequest: lambda r: (None, tuple(r.id or ())),
+    functions.channels.ReadMessageContentsRequest: lambda r: (_channel_key(r.channel), tuple(r.id or ())),
+    functions.messages.ReadEncryptedHistoryRequest: lambda r: (getattr(r.peer, "chat_id", None), _moment(r.max_date)),
+    functions.stories.ReadStoriesRequest: lambda r: (_peer_key(r.peer), r.max_id),
+}
+
+
+class ReadPermit:
+    def __init__(self, request_type, chat_id, bound):
+        if request_type not in PERMITTED_READS or bound is None or bound == ():
+            raise ValueError("This read request cannot be permitted.")
+        self.request_type, self.key, self.open = request_type, (chat_id, bound), True
+
+    def admits(self, request):
+        if not self.open or type(request) is not self.request_type:
+            return False
+        try:
+            return PERMITTED_READS[self.request_type](request) == self.key
+        except Exception:
+            return False
+
+
+@contextmanager
+def read_permit(request_type, chat_id, bound):
+    permit = ReadPermit(request_type, chat_id, bound)
+    token = _read_permit.set(permit)
+    try:
+        yield permit
+    finally:
+        permit.open = False
+        _read_permit.reset(token)
+
+
+def reject_read_receipts(request, permit=None):
+    if permit is not None and permit.admits(request):
+        permit.open = False
+        return
     pending = [request]
     while pending:
         item = pending.pop()
@@ -217,7 +356,7 @@ class WitnessClient(TelegramClient):
     async def _call(self, sender, request, ordered=False, flood_sleep_threshold=None):
         if utils.is_list_like(request):
             request = tuple(request)
-        reject_read_receipts(request)
+        reject_read_receipts(request, _read_permit.get())
         if not hasattr(self, "_rpc_lock"):
             self._rpc_lock = asyncio.Lock()
             self._rpc_owner = None

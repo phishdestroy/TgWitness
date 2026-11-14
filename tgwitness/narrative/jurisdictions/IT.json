@@ -1,6 +1,6 @@
 {
   "code": "IT",
-  "scope": "Italia · processo civile",
+  "scope": "Italia · processo civile e penale (riferimenti indicati separatamente)",
   "checked_at": "2026-11-06",
   "expert_role": {
     "term": "consulente tecnico",
@@ -9,22 +9,55 @@
     "route": "civil"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · CAD (d.lgs. 82/2005)",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. CAD art. 20(1-bis): an electronic document meets the written form and has the effect of c.c. art. 2702 when it bears a digital, other qualified or advanced electronic signature, or is formed by an AgID-compliant process after identifying its author. Art. 20(1-ter): use of a qualified or digital signature device is presumed attributable to its holder unless proven otherwise.",
+    "source": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-03-07;82~art20"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. D.lgs. 51/2018 implements Directive (EU) 2016/680 for competent authorities (art. 1).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States. CAD art. 20(1-bis): the date and time of formation of an electronic document are opposable to third parties if applied in accordance with the AgID Guidelines.",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "CAD art. 20(1-bis)",
+      "basis": "Outside the signature cases above, the suitability of an electronic document as written form and its probative value are freely assessed in court, considering its security, integrity and immutability.",
+      "source": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-03-07;82~art20"
+    },
+    {
+      "route": "criminal",
+      "term": "C.p.p. art. 192(1)",
+      "basis": "The judge evaluates the evidence and states in the reasoning the results obtained and the criteria used.",
+      "source": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art192"
+    },
+    {
+      "route": "criminal",
+      "term": "C.p.p. art. 191",
+      "basis": "Evidence acquired in breach of legal prohibitions cannot be used; this can be raised by the court of its own motion at any stage.",
+      "source": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art191"
+    },
+    {
+      "route": "criminal",
+      "term": "C.p.p. art. 234",
+      "basis": "Writings and other documents representing facts, persons or things by photography, film, sound recording or any other means may be acquired. A copy may be acquired when the original is destroyed, lost or taken and cannot be recovered.",
+      "source": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art234"
+    }
+  ],
+  "dpa": {
+    "name": "Garante per la protezione dei dati personali",
+    "name_en": "Italian Data Protection Authority",
+    "basis": null,
+    "source": "https://www.garanteprivacy.it/"
+  },
   "sources": [
     {
       "term": "Codice di procedura civile, art. 61",
@@ -41,6 +74,49 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "CAD, d.lgs. 82/2005, art. 20",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-03-07;82~art20"
+    },
+    {
+      "term": "Codice di procedura penale, art. 191",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art191"
+    },
+    {
+      "term": "Codice di procedura penale, art. 192",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art192"
+    },
+    {
+      "term": "Codice di procedura penale, art. 234",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art234"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "D.lgs. 51/2018, art. 1",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2018-05-18;51~art1"
+    },
+    {
+      "term": "Garante per la protezione dei dati personali",
+      "url": "https://www.garanteprivacy.it/"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from Normattiva and EUR-Lex texts opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Italy.",
+      "sources": [
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-03-07;82~art20",
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art191",
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art192",
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1988-09-22;447~art234",
+        "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2018-05-18;51~art1",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

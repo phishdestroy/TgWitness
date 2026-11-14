@@ -25,6 +25,7 @@ from .common import (
     timezone,
     x509,
 )
+from .national import DIGEST_NAMES, NATIONAL_SIGNATURES, Unsupported, digest, signed_value, tbs_key, verify
 QUALIFIED_TSU = {
     "8751fca3d49938f02aaea3d69983adf3d9f324447b4c00b817c3900198c0fbfd": "EC1 TSU 2021",
     "3917e4995093954bc162568c7188c00a222023166824480e8f84a4e1f3441dc1": "EC2 TSU 2021",
@@ -147,10 +148,12 @@ def query_nonce(query):
                  if t == 0x02), None)
 
 
-def timestamp_reply_summary(reply, digest, query=None):
+def timestamp_reply_summary(reply, digest, query=None, data=None):
     token = timestamp_token(reply)
     info = tst_info(token["tst"])
-    if info["algorithm"] != "2.16.840.1.101.3.4.2.1" or info["hash"] != digest:
+    expected = digest if info["algorithm"] == "2.16.840.1.101.3.4.2.1" else (
+        hashed(info["algorithm"], data) if data is not None and info["algorithm"] in DIGEST_NAMES else None)
+    if expected is None or info["hash"] != expected:
         raise ValueError("The timestamp does not cover this checkpoint")
     if query is not None and info["nonce"] != query_nonce(query):
         raise ValueError("The timestamp nonce differs from the request")
@@ -171,6 +174,27 @@ def signed_attributes(reply, start, end):
     return found
 
 
+def hashed(algorithm, data):
+    if isinstance(algorithm, str):
+        if algorithm in DIGEST_NAMES:
+            return digest(algorithm, data)
+        algorithm = DIGESTS[algorithm]
+    hasher = hashes.Hash(algorithm())
+    hasher.update(data)
+    return hasher.finalize()
+
+
+def issued_by(certificate, issuer):
+    method = certificate.signature_algorithm_oid.dotted_string
+    if method not in NATIONAL_SIGNATURES:
+        return certificate.verify_directly_issued_by(issuer)
+    if certificate.issuer != issuer.subject:
+        raise ValueError("The certificate names a different issuer")
+    if not signed_value(tbs_key(issuer.tbs_certificate_bytes), method, certificate.signature,
+                        certificate.tbs_certificate_bytes):
+        raise InvalidSignature()
+
+
 def signing_certificate_hash(reply, attributes):
     if SIGNING_CERTIFICATE_V2 in attributes:
         name, default = SIGNING_CERTIFICATE_V2, hashes.SHA256
@@ -184,11 +208,13 @@ def signing_certificate_hash(reply, attributes):
     identifiers = children(reply, first[2], first[3])
     algorithm = default
     if identifiers[0][0] == 0x30:
-        algorithm = DIGESTS.get(oid(reply, *children(reply, identifiers[0][2], identifiers[0][3])[0][2:]))
+        algorithm = oid(reply, *children(reply, identifiers[0][2], identifiers[0][3])[0][2:])
+        algorithm = DIGESTS.get(algorithm) or (algorithm if algorithm in DIGEST_NAMES else None)
         identifiers = identifiers[1:]
     if algorithm is None or identifiers[0][0] != 0x04:
         raise ValueError("Unsupported signing certificate reference")
-    return algorithm, reply[identifiers[0][2]:identifiers[0][3]], algorithm().name
+    reference = DIGEST_NAMES[algorithm] if isinstance(algorithm, str) else algorithm().name
+    return algorithm, reply[identifiers[0][2]:identifiers[0][3]], reference
 
 
 def certificate_reference_details(algorithm):
@@ -213,16 +239,14 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
     items = children(reply, start, end)
     if len(items) < 6 or items[3][0] != 0xA0 or items[4][0] != 0x30 or items[5][0] != 0x04:
         raise ValueError("The timestamp signer has no signed attributes")
-    digest = DIGESTS.get(oid(reply, *children(reply, items[2][2], items[2][3])[0][2:]))
-    if digest is None:
+    content_digest = oid(reply, *children(reply, items[2][2], items[2][3])[0][2:])
+    if content_digest not in DIGESTS and content_digest not in DIGEST_NAMES:
         raise ValueError("Unsupported timestamp digest algorithm")
     attributes = signed_attributes(reply, items[3][2], items[3][3])
     content_type, message_digest = attributes.get(CONTENT_TYPE), attributes.get(MESSAGE_DIGEST)
     if not content_type or oid(reply, *content_type[0][2:]) != TST_INFO:
         raise ValueError("The signed attributes do not describe a TSTInfo")
-    hasher = hashes.Hash(digest())
-    hasher.update(token["tst"])
-    if not message_digest or reply[message_digest[0][2]:message_digest[0][3]] != hasher.finalize():
+    if not message_digest or reply[message_digest[0][2]:message_digest[0][3]] != hashed(content_digest, token["tst"]):
         raise ValueError("The signature does not cover this TSTInfo")
     algorithm, named, reference = signing_certificate_hash(reply, attributes)
     raw = {}
@@ -230,9 +254,7 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
         raw[data] = x509.load_der_x509_certificate(data)
     signer_data = None
     for data in raw:
-        hasher = hashes.Hash(algorithm())
-        hasher.update(data)
-        if hasher.finalize() == named:
+        if hashed(algorithm, data) == named:
             signer_data = data
     if signer_data is None:
         raise ValueError("The reply does not carry the certificate the signature names")
@@ -246,32 +268,46 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
     signed = b"\x31" + reply[items[3][1] + 1:items[3][3]]
     signature = reply[items[5][2]:items[5][3]]
     method = oid(reply, *children(reply, items[4][2], items[4][3])[0][2:])
-    key = signer.public_key()
-    try:
-        if isinstance(key, rsa.RSAPublicKey) and method in RSA_SIGNATURES:
-            key.verify(signature, signed, padding.PKCS1v15(), (RSA_SIGNATURES[method] or digest)())
-        elif isinstance(key, ec.EllipticCurvePublicKey) and method in ECDSA_SIGNATURES:
-            key.verify(signature, signed, ec.ECDSA(ECDSA_SIGNATURES[method]()))
-        else:
-            raise ValueError("Unsupported timestamp signature algorithm " + method)
-    except InvalidSignature:
-        raise ValueError("The timestamp signature is invalid") from None
+    if method in NATIONAL_SIGNATURES:
+        if not verify(tbs_key(signer.tbs_certificate_bytes), method, signature, signed):
+            raise ValueError("The timestamp signature is invalid")
+    else:
+        try:
+            key = signer.public_key()
+        except UnsupportedAlgorithm:
+            raise ValueError("Unsupported timestamp signature algorithm " + method) from None
+        try:
+            if isinstance(key, rsa.RSAPublicKey) and method in RSA_SIGNATURES and (
+                    RSA_SIGNATURES[method] or content_digest in DIGESTS):
+                key.verify(signature, signed, padding.PKCS1v15(), (RSA_SIGNATURES[method] or DIGESTS[content_digest])())
+            elif isinstance(key, ec.EllipticCurvePublicKey) and method in ECDSA_SIGNATURES:
+                key.verify(signature, signed, ec.ECDSA(ECDSA_SIGNATURES[method]()))
+            else:
+                raise ValueError("Unsupported timestamp signature algorithm " + method)
+        except InvalidSignature:
+            raise ValueError("The timestamp signature is invalid") from None
     trusted = {root.fingerprint(hashes.SHA256()): root for root in roots}
     chain, current = [signer], signer
     while not (len(chain) > 1 and chain[-1].fingerprint(hashes.SHA256()) in trusted):
         if len(chain) > 8:
             raise ValueError("The timestamp certificate chain is too long")
         candidates = list(trusted.values()) + [c for c in [*raw.values(), *intermediates] if c not in chain]
-        issuer = None
+        issuer, unsupported = None, None
         for candidate in candidates:
             if candidate.subject != current.issuer:
                 continue
             try:
-                current.verify_directly_issued_by(candidate)
+                issued_by(current, candidate)
+            except (Unsupported, UnsupportedAlgorithm):
+                unsupported = current.signature_algorithm_oid.dotted_string
+                continue
             except (ValueError, TypeError, InvalidSignature):
                 continue
             issuer = candidate
             break
+        if issuer is None and unsupported:
+            raise ValueError("Unsupported signature algorithm or parameters in the timestamp certificate chain: "
+                             + unsupported)
         if issuer is None:
             raise ValueError("The timestamp certificate does not chain to a trusted root")
         try:
@@ -556,9 +592,7 @@ def revocation_subject(reply, extra=()):
     for data in token["certificates"]:
         loaded[data] = x509.load_der_x509_certificate(data)
     for data in loaded:
-        hasher = hashes.Hash(algorithm())
-        hasher.update(data)
-        if hasher.finalize() == named:
+        if hashed(algorithm, data) == named:
             signer = loaded[data]
     certificates = list(loaded.values())
     if signer is None:
@@ -567,8 +601,8 @@ def revocation_subject(reply, extra=()):
         if candidate.subject != signer.issuer:
             continue
         try:
-            signer.verify_directly_issued_by(candidate)
-        except (ValueError, TypeError, InvalidSignature):
+            issued_by(signer, candidate)
+        except (ValueError, TypeError, InvalidSignature, UnsupportedAlgorithm):
             continue
         return {"signer": signer, "issuer": candidate, "time": tst_info(token["tst"])["time"]}
     raise ValueError("The issuer of the signing certificate is neither in the reply nor in the given root file")
@@ -687,7 +721,7 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                 reply = read_member(archive, proof_name)
                 query_name = proof_name[:-4] + ".tsq"
                 query = read_member(archive, query_name) if query_name in names else None
-                entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query))
+                entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query, data))
                 if tsa_ca:
                     timestamp_signature(reply, tsa_roots(tsa_ca))
                 entry["signature"] = "checked against the given root" if tsa_ca else "not checked (use --tsa-ca)"

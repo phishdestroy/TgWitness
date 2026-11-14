@@ -4,13 +4,17 @@
   const context=()=>({profile:state.profile,revision:state.workspaceRevision,selection:accountImportRevision});
   const current=c=>c.profile===state.profile&&c.revision===state.workspaceRevision&&c.selection===accountImportRevision&&!!state.token;
   const occupied=()=>!!state.status?.collector?.account;
-  const adding=()=>occupied()&&(intent==='add'||intent==='auto'&&accountSignedIn());
+  const importedId=()=>inspection&&current(inspection.owner)?inspection.result.expected_user_id??null:null;
+  const sameAccount=()=>importedId()!==null&&importedId()===state.status?.collector?.account?.id;
+  const otherAccount=()=>importedId()!==null&&state.status?.collector?.account?.id!=null&&importedId()!==state.status.collector.account.id;
+  const adding=()=>occupied()&&!state.authorizing&&!sameAccount()&&(intent==='add'||intent==='auto'&&accountSignedIn()&&otherAccount());
   function selected(){
     const files=[...$("session-file").files];
     return files.length?files:$("session-string").value.trim()?
       [new File([$("session-string").value.trim()],"session.txt",{type:"text/plain"})]:[];
   }
   function controls(){
+    if($("import-new-workspace"))$("import-new-workspace").hidden=!adding();
     if(authMethod!=="files")return;
     const allowed=!!inspection?.result.can_connect&&current(inspection.owner);
     if(!$("auth-continue").hasAttribute("aria-busy"))$("auth-continue").disabled=!allowed;
@@ -29,14 +33,20 @@
     head.append(mark,node("strong","",tr(titles[result.state]||"File cannot be used")));box.append(head);
     if(result.message)box.append(node("p","",tr(result.message)));
     if(result.formats?.length)box.append(node("p","hint",result.formats.map(format=>tr(format)).join(" + ")));
-    const profile=result.client_profile;
-    if(profile){
-      const details=node("dl","import-check-details");
-      for(const [label,value] of [["Device",profile.device_model],["Platform",profile.system_version],
-        ["App version",profile.app_version],["Language",profile.lang_code]]){
+    const profile=result.client_profile,independent=result.state==="ready"&&$("import-new-session").checked;
+    const device=shown=>{const details=node("dl","import-check-details");
+      for(const [label,value] of [["Device",shown.device_model],["Platform",shown.system_version],
+        ["App version",shown.app_version],["Language",shown.lang_code]]){
         if(!value)continue;const item=node("div");item.append(node("dt","",tr(label)),node("dd","",value));details.append(item);
       }
-      box.append(details);
+      box.append(details);};
+    if(independent&&result.independent_profile){
+      box.append(node("p","hint",tr("Independent authorization: Telegram sees a new Telegram Desktop session with this device. It is not taken from these files. If an independent login of this donor is already pending, its earlier device stays.")));
+      device(result.independent_profile);
+    }else if(independent)box.append(node("p","hint",tr("Independent authorization: Telegram sees a new Telegram Desktop session on Windows. Its device model and Windows version are chosen when the authorization is created; they are not taken from these files.")));
+    if(profile){
+      box.append(node("p","hint",tr(independent?"Device of the donor session. TgWitness shows it to Telegram only while the donor approves the new authorization.":"Device shown to Telegram, taken from these files.")));
+      device(profile);
     }
     if(result.state==="missing_session"){
       const actions=node("div","import-check-actions");
@@ -123,7 +133,8 @@
     const credentials=apiCredentials();if(!credentials)return;
     authProgress(tr("Creating the workspace and checking the session with Telegram…"));
     try{
-      const result=await json("profiles/import",{files:item.files,passcode:item.passcode,label:name.trim(),new_session:$("import-new-session").checked,
+      const independent=$("import-new-session").checked,seed=independent&&item.result.device_seed;
+      const result=await json("profiles/import",{files:item.files,passcode:item.passcode,label:name.trim(),new_session:independent,...(seed?{device_seed:seed}:{}),
         ...(credentials.api_id?{api_id:credentials.api_id,api_hash:credentials.api_hash.toLowerCase()}: {})},{root:true});
       if(!current(item.owner))return;
       await switchProfile(result.profile.id);await navigate("connection");
@@ -148,7 +159,7 @@
   }
   function renderAccount(){
     if(!state.status)return;
-    const account=state.status?.collector?.account,connected=accountSignedIn();
+    const account=state.status?.collector?.account,connected=accountSignedIn()&&!state.authorizing;
     if(!$("account-add-another")){
       const add=node("button","secondary",tr("Add another account"));add.id="account-add-another";add.type="button";
       add.addEventListener("click",beginAdd);$("account-manage").before(add);
@@ -177,7 +188,9 @@
     $(id).addEventListener("input",()=>{if(authMethod==="files")inspect();});
   }
   for(const id of ["api-id","api-hash"])$(id).addEventListener("change",()=>{if(authMethod==="files"&&selected().length)inspect();});
+  $("import-new-session").addEventListener("change",()=>{if(authMethod==="files"&&inspection&&current(inspection.owner))render(inspection.result);});
   window.TgWitnessAccountImport={inspect,read,connectNew,occupied,adding,clear,renderAccount,beginAdd,
+    deviceSeed:()=>inspection&&current(inspection.owner)?inspection.result.device_seed||null:null,
     syncControls:controls,edit(){editing=true;intent='renew';},isEditing:()=>editing,methodChanged(){
       if(authMethod==="files")inspect();
       else{inspectionSerial++;inspection=null;pending=null;render({state:"empty",can_connect:false});$("auth-continue").disabled=false;}

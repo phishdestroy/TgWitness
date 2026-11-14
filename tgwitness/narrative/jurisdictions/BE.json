@@ -8,22 +8,49 @@
     "source": "https://www.ejustice.just.fgov.be/eli/loi/1967/10/10/1967101053/justel"
   },
   "esig_regulation": {
-    "term": "eIDAS",
-    "basis": "Regulation (EU) No 910/2014",
-    "source": "https://eur-lex.europa.eu/eli/reg/2014/910"
+    "term": "eIDAS · Code de droit économique, livre XII, titre 2",
+    "basis": "Regulation (EU) No 910/2014 as amended by Regulation (EU) 2024/1183. CDE art. XII.24 § 1 (loi du 21 juillet 2016): title 2 of book XII implements Regulation 910/2014 and adds rules for signature, seal, archiving, registered-delivery and time-stamping services. Code civil art. 8.1, 3°: an electronic signature is one within eIDAS art. 3(10)-(12).",
+    "source": "https://www.ejustice.just.fgov.be/eli/loi/2016/07/21/2016009485/justel"
   },
   "data_access_basis": {
-    "term": "GDPR Art. 15; Art. 12(3)",
+    "route": "all",
+    "term": "GDPR Art. 6(1)(f); Art. 10; Art. 15; Art. 12(3)",
+    "basis": "A private party needs a lawful basis under GDPR Art. 6(1), for example legitimate interests (Art. 6(1)(f)); data on criminal offences needs official authority or a legal authorisation (Art. 10). A person can request their own data (Art. 15) within the Art. 12(3) period. Processing by competent criminal-justice authorities falls under title 2 of the loi du 30 juillet 2018, which transposes Directive (EU) 2016/680 (art. 25).",
     "deadline_days": null,
-    "source": "https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf"
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
   },
   "timestamp_recognition": {
     "term": "eIDAS Articles 41 and 24a(6)",
+    "basis": "Art. 41(1): a time stamp is not denied legal effect or admissibility solely because it is electronic or not qualified. Art. 41(2): a qualified time stamp is presumed accurate as to date and time and integrity of the bound data. Art. 42(1) sets the qualified requirements; Art. 24a(6) recognises qualified time stamps across Member States. CDE book XII, title 2 adds rules for time-stamping services of providers established in Belgium (art. XII.24 § 2).",
     "automatic_ots_qualification": false,
     "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
   },
-  "evidence_rules": [],
-  "dpa": null,
+  "evidence_rules": [
+    {
+      "route": "civil",
+      "term": "Code civil, art. 8.8",
+      "basis": "Unless the law provides otherwise, proof may be given by any means (preuve libre).",
+      "source": "https://www.ejustice.just.fgov.be/eli/loi/2019/04/13/2019A12168/justel"
+    },
+    {
+      "route": "civil",
+      "term": "Code civil, art. 8.1, 1° and art. 8.9",
+      "basis": "A writing (écrit) may be on any medium if it stays accessible and its integrity is preserved. A legal act of EUR 3,500 or more must be proved by a signed writing.",
+      "source": "https://www.ejustice.just.fgov.be/eli/loi/2019/04/13/2019A12168/justel"
+    },
+    {
+      "route": "criminal",
+      "term": "Titre préliminaire du Code de procédure pénale, art. 32",
+      "basis": "Irregularly obtained evidence is declared null only if a formal condition is prescribed on pain of nullity, the irregularity affected its reliability, or its use is contrary to a fair trial.",
+      "source": "https://www.ejustice.just.fgov.be/eli/loi/1878/04/17/1878041750/justel"
+    }
+  ],
+  "dpa": {
+    "name": "Autorité de protection des données / Gegevensbeschermingsautoriteit",
+    "name_en": "Belgian Data Protection Authority",
+    "basis": "Loi du 3 décembre 2017, art. 3-4",
+    "source": "https://www.autoriteprotectiondonnees.be/citoyen"
+  },
   "sources": [
     {
       "term": "Code judiciaire, articles 555/6-555/16",
@@ -40,6 +67,49 @@
     {
       "term": "eIDAS Articles 41 and 24a(6)",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018"
+    },
+    {
+      "term": "Loi du 21 juillet 2016 (CDE livre XII, titre 2)",
+      "url": "https://www.ejustice.just.fgov.be/eli/loi/2016/07/21/2016009485/justel"
+    },
+    {
+      "term": "Code civil, livre 8 « La preuve »",
+      "url": "https://www.ejustice.just.fgov.be/eli/loi/2019/04/13/2019A12168/justel"
+    },
+    {
+      "term": "Titre préliminaire du Code de procédure pénale, art. 32",
+      "url": "https://www.ejustice.just.fgov.be/eli/loi/1878/04/17/1878041750/justel"
+    },
+    {
+      "term": "GDPR (Regulation (EU) 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "term": "Loi du 30 juillet 2018, titre 2",
+      "url": "https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581/justel"
+    },
+    {
+      "term": "Loi du 3 décembre 2017 (Autorité de protection des données)",
+      "url": "https://www.ejustice.just.fgov.be/eli/loi/2017/12/03/2017031916/justel"
+    },
+    {
+      "term": "Autorité de protection des données",
+      "url": "https://www.autoriteprotectiondonnees.be/citoyen"
+    }
+  ],
+  "review_updates": [
+    {
+      "checked_at": "2026-11-14",
+      "scope": "Added trust-service, time-stamp, data-access, evidence-rule and supervisory-authority references from official Justel and EUR-Lex texts opened on this date. expert_role keeps its earlier check date. Research draft for review by a lawyer admitted in Belgium.",
+      "sources": [
+        "https://www.ejustice.just.fgov.be/eli/loi/2016/07/21/2016009485/justel",
+        "https://www.ejustice.just.fgov.be/eli/loi/2019/04/13/2019A12168/justel",
+        "https://www.ejustice.just.fgov.be/eli/loi/1878/04/17/1878041750/justel",
+        "https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581/justel",
+        "https://www.ejustice.just.fgov.be/eli/loi/2017/12/03/2017031916/justel",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014R0910-20241018",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
     }
   ]
 }

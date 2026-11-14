@@ -31,7 +31,8 @@ export function createSettingsHub(ctx) {
   const sections=['appearance','level','goal','connection','telegram','chats','collection','protection','notifications','group'];
   let preferencesQueue=Promise.resolve(), draftQueue=Promise.resolve(), preferencesSequence=0, draftSequence=0, checkSequence=0;
   const owner=()=>({generation,profile:state.profile,token:state.token,revision:state.workspaceRevision});
-  const signedIn=()=>{const account=accountState(state.status||{});return account.hasSession&&!account.needsSignIn;};
+  const signedIn=()=>{const account=accountState(state.status||{});return account.hasSession&&!account.needsSignIn&&!state.authorizing;};
+  const number=value=>Number(value).toLocaleString(document.documentElement.lang||undefined);
   const current=who=>who.generation===generation&&who.profile===state.profile&&who.token===state.token&&who.revision===state.workspaceRevision;
   function requireOwner(who){
     if(!current(who))throw ctx.staleView();
@@ -363,7 +364,7 @@ export function createSettingsHub(ctx) {
     const inheritance=data.inheritance,connected=fresh(data.connection);
     const rows=[['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected'),state.status?.collector?.connected?'ok':'warn','account:blue'],
       ['chats','Which chats?',label(data.wizard.scope||'account')+(data.wizard.scope==='selected'?' · '+(data.wizard.chat_ids?.length||0):''),'ok','message:green'],
-      ['connection','Connection',label(data.connection.mode)+(connected?' · '+tr('Working · {n} ms',{n:data.connection.check.latency_ms}):''),connected?'ok':'warn','shield:teal'],
+      ['connection','Connection',label(data.connection.mode)+(connected?' · '+tr('Working · {n} ms',{n:number(data.connection.check.latency_ms)}):''),connected?'ok':'warn','shield:teal'],
       ['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone+' · '+label(prefs.level),'none','sun:orange'],
       ['goal','Goal',data.goal?label(data.goal):tr('Not chosen'),'none','star:pink'],
       ['collection','Collection and files',label(data.values.files),'none','archive:indigo'],
@@ -493,7 +494,9 @@ export function createSettingsHub(ctx) {
       if(data.needs_notification_destination)detail.append(message('Notifications are enabled. Add a destination to receive them.','notice warning'));
       const actions=node('div','hub-actions');actions.append(button('Notification destinations',()=>openForm('alerts-form')),button('Off-site copy',()=>openForm('replica-form')));detail.append(actions);
     }
-    if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);}
+    if(section==='protection'){const actions=node('div','hub-actions');actions.append(button('Advanced protection settings',()=>openForm('evidence-form')));detail.append(actions);
+      const seen=node('div','hub-visibility');detail.append(seen);
+      import('./visibility.js?v=1').then(({createVisibility})=>createVisibility({json,tr,node,icon:ctx.icon,toast,may:ctx.may||(()=>true)}).workspace(seen)).catch(error=>toast(error.message,true));}
     if(data.collection_problem&&section==='collection')detail.append(message('Collection could not start. Check the connection and selected chats.','notice warning'));
     if(data.outside_problem&&['connection','protection','notifications'].includes(section))detail.append(message('External services need a working SOCKS5 or WARP route.','notice warning'));
     if(shownForm&&formSection(shownForm)===section)move($(shownForm),detail);
@@ -631,7 +634,7 @@ export function createSettingsHub(ctx) {
   function draftChecked(){return !routeDirty&&fresh(data.connection)&&data.connection.strategy?.mode===draft.route&&!!data.connection.strategy?.allow_direct===draft.allow_direct;}
   function paintConnection(connection){const box=$('hub-connection-result');if(!box)return;box.replaceChildren();
     const ok=fresh(connection);box.className='connection-result '+(ok?'working':'unchecked');
-    box.append(message(ok?tr('Working · {n} ms',{n:connection.check.latency_ms}):'Connection has not been verified.'));
+    box.append(message(ok?tr('Working · {n} ms',{n:number(connection.check.latency_ms)}):'Connection has not been verified.'));
     if(!ok){
       if(connection?.pool?.listed&&connection.pool.healthy===0&&connection.pool.probed_at){openOptions();box.className='connection-result failed';box.prepend(message('No public proxy answers. Try WARP or your own proxy.'));}
       if(state.view==='first-run')box.append(button('Try WARP',async()=>{draft.route='warp';await renderWizard();}),button('Check again',checkConnection));
@@ -640,7 +643,7 @@ export function createSettingsHub(ctx) {
   function updateIndicator(connection){
     const el=$('hub-route-status');if(!el)return;
     const ok=fresh(connection)&&(!state.status.collector.running||state.status.collector.connected!==false);
-    el.classList.toggle('route-offline',!ok);el.textContent=ok?label(connection.mode)+' · '+connection.check.latency_ms+' '+tr('ms'):tr('No connection');
+    el.classList.toggle('route-offline',!ok);el.textContent=ok?label(connection.mode)+' · '+tr('{n} ms',{n:number(connection.check.latency_ms)}):tr('No connection');
     el.onclick=()=>run(async()=>{await navigate('settings');if(state.view==='settings'&&data)openSection('connection');});
     const warning=$('hub-proxy-warning');
     warning.hidden=ok||!connection?.pool?.listed||connection.pool.healthy!==0||!connection.pool.probed_at;
@@ -736,7 +739,7 @@ export function createSettingsHub(ctx) {
         const result=await request(action,'first-run/finish',draftBody());data=result;draft={...result.wizard};await refresh(action);
         if(result.action==='export'){await navigate('evidence');return;}
         if(state.view!=='first-run')return;
-        live={started:Date.now(),done:false};await renderWizard(action);watchLive(action);return;
+        live={started:Date.now(),done:false};await renderWizard(action);watchLive(action);void run(()=>checkServices(action));return;
       }
       if(choosing){
         if(data.goal!==draft.goal&&!await applyGoal(draft.goal,{first:!data.goal},action))return;
@@ -825,6 +828,7 @@ export function createSettingsHub(ctx) {
       list.append(row);
     });
     live.shown=true;page.append(list);
+    if(live.services!==undefined)renderServices(page);
     if(live.timedOut)page.append(button('Check again',async()=>{
       live.started=Date.now();live.timedOut=false;await renderWizard();watchLive();
     },'primary'));
@@ -835,6 +839,45 @@ export function createSettingsHub(ctx) {
         actions.append(button(text,async()=>{live=null;clearTimeout(liveTimer);await navigate(view);},style));
       page.append(actions);
     }
+  }
+  const serviceNames={timestamps:'Independent timestamps',rfc3161:'RFC 3161 timestamp service',opentimestamps:'OpenTimestamps calendar',drand:'drand randomness beacon',notifications:'Notifications'};
+  const when=value=>new Date(value).toLocaleString(prefs.language,{timeZone:prefs.timezone,dateStyle:'medium',timeStyle:'medium'});
+  function serviceLine(row){
+    if(row.reason==='answered')return row.service==='rfc3161'?tr('Answered a test request with a signed timestamp: {time}.',{time:when(row.time)}):
+      row.service==='drand'?tr('Round {round} received.',{round:number(row.round)}):tr('Answered a test request. Its proof stays pending until a Bitcoin block confirms it.');
+    if(row.reason==='rejected')return tr('Answered, but the reply did not pass the check: {error}',{error:row.error});
+    if(row.reason==='unreachable')return tr('No usable answer: {error}',{error:tr(row.error)});
+    if(row.reason==='not_checked')return tr('Not checked: {error}',{error:tr(row.error)});
+    if(row.reason==='no_service')return tr('Timestamps are enabled, but no timestamp service is configured.');
+    if(row.reason==='no_destination')return tr('Notifications are enabled. Add a destination to receive them.');
+    if(row.reason==='route')return tr(row.error);
+    if(row.reason==='not_sent')return tr('Destinations configured: {n}. Nothing has been sent yet.',{n:number(row.destinations)});
+    if(row.reason==='delivery_failed')return tr('Last delivery failed at {time}: {error}',{time:when(row.at),error:row.error});
+    if(row.reason==='delivered')return tr('Last delivery succeeded at {time}.',{time:when(row.at)});
+    return row.reason;
+  }
+  function renderServices(page){
+    page.append(node('h2','',tr('External services turned on by this goal')));
+    const list=node('div','first-run-live');list.setAttribute('aria-live','polite');
+    const rows=live.services===null?[{state:'running',name:tr('Checking external services…'),line:''}]:
+      live.services.error?[{state:'unknown',name:tr('External services were not checked'),line:live.services.error}]:
+      live.services.map(row=>({state:row.state,name:tr(serviceNames[row.service]||row.service)+(row.address?' · '+(()=>{try{return new URL(row.address).hostname;}catch{return row.address;}})():''),line:serviceLine(row)}));
+    rows.forEach((row,i)=>{
+      const item=node('div','first-run-check');item.dataset.state=row.state;item.style.setProperty('--i',String(i));
+      item.append(ctx.stateBadge(row.state),node('strong','',row.name),node('span','hint',row.line));list.append(item);
+    });
+    page.append(list);
+    if(live.services!==null)page.append(button('Check again',()=>checkServices()));
+  }
+  async function checkServices(who=owner()){
+    const session=live;
+    if(!session||!(data.values.timestamps||data.values.drand||data.values.notifications))return;
+    session.services=null;if(state.view==='first-run')await renderWizard(who);
+    let result;
+    try{result=(await request(who,'first-run/services',{})).rows;}
+    catch(error){if(error.name==='StaleView')throw error;result={error:error.message};}
+    if(live!==session)return;
+    session.services=result;if(state.view==='first-run')await renderWizard(who);
   }
   function watchLive(who=owner()){
     clearTimeout(liveTimer);

@@ -11,11 +11,24 @@ from .common import (
     read_member,
     strict_json,
 )
+ASIC_MIMETYPE = b"application/vnd.etsi.asic-e+zip"
+
+
+def container_members(archive, names, listed):
+    if "mimetype" in listed or "mimetype" not in names \
+            or archive.getinfo("mimetype").file_size != len(ASIC_MIMETYPE) \
+            or read_member(archive, "mimetype") != ASIC_MIMETYPE:
+        return []
+    return sorted(name for name in names if name not in listed
+                  and (name == "mimetype" or name.startswith("META-INF/")))
+
+
 def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None, check_drand=False, max_gib=None,
                   check_bitcoin=False):
     from .account import verify_account_export
     from .board import verify_board
     from .chain import canonical, fingerprint, is_format
+    from .completeness import COMPLETENESS_KINDS, completeness_certificate
     from .coverage import Coverage
     from .journal import media_reference, verify_checkpoint, verify_events
     from .outside import OutsideRecords, confirm_drand
@@ -33,7 +46,8 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
             raise ValueError("Public key differs from the independently trusted fingerprint")
         Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
             base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
-        if set(names) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
+        container = container_members(archive, names, manifest["files"])
+        if set(names) - set(container) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing bundle members")
         for name, digest in manifest["files"].items():
             if member_digest(archive, name) != digest:
@@ -55,6 +69,7 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
             if isinstance(saved_gaps, dict):
                 gap_settings = saved_gaps.get("parameters")
         observed, outside = Coverage(gap_settings), OutsideRecords()
+        sequence_events = []
         hash_files, account_exports, starts = set(), [], []
 
         def measured(lines):
@@ -85,6 +100,8 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
                         raise ValueError("Preserved media size differs from the signed journal: " + digest)
                 observed.add(event)
                 outside.add(event)
+                if event["kind"] in COMPLETENESS_KINDS:
+                    sequence_events.append(event)
                 yield event
         with archive.open("events.jsonl") as stream:
             result = verify_events(measured(bounded_lines(stream)), public)
@@ -103,9 +120,12 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
             raise ValueError("Manifest does not match journal")
         result["coverage"] = observed.result()
         result["outside"] = outside.result()
+        result["sequence_continuity"] = completeness_certificate(sequence_events)
         if check_drand and outside.rounds:
             result["outside"]["drand"]["checked"] = confirm_drand(outside.rounds)
         result["producer"] = manifest.get("producer")
+        if container:
+            result["container"] = {"format": "ASiC-E", "unchecked_members": container}
         result.update(format=manifest["format"], files_checked=len(manifest["files"]), sha256sums=sums,
                       report_seal=seal, report_json=companions["json"], report_parts=companions["parts"],
                       report_pdf=companions["pdf"], case=manifest.get("case") or {})
@@ -126,6 +146,10 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
             if checkpoint_anchor:
                 result["checkpoint_drand_anchor"] = {**checkpoint_anchor, "confirmed_by_relays": bool(check_drand)}
         result["anchors"] = verify_anchors(archive, names, public, result["events"], hash_at, tsa_ca, check_bitcoin)
+        from .evidence_records import verify_evidence_records
+        records = verify_evidence_records(archive, names, container, tsa_ca)
+        if records:
+            result["evidence_records"] = records
         result["board"] = verify_board(archive, manifest, checkpoint)
         tdx = verify_tdx_starts(starts, public)
         if tdx:
