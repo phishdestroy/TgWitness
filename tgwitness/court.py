@@ -316,7 +316,14 @@ def certification_html(session, model, fixed, fingerprint, hashes, say, stamped=
                                                                        "when each record was saved."))
             + "</li><li>" + e(say("Telegram times are server dates sent by Telegram with each message, to the second."))
             + "</li><li>" + e(say("Included timestamp receipts are listed in section 1 and stored under data/timestamps/. "
-                                  "Their signatures, timestamp chains and binding to this document have not been verified."))
+                                  "They belong to the first stamped checkpoint that covers the journal record of this "
+                                  "document. When each RFC 3161 reply arrived, the collector checked that it covers the "
+                                  "checkpoint SHA-256 and the request nonce, and checked its signature and certificate "
+                                  "chain against the TSA roots pinned in TgWitness; a reply that failed was not saved. "
+                                  "Each OpenTimestamps proof was checked to commit to the checkpoint SHA-256. "
+                                  "python -m tgwitness.anchor verify with the checkpoint, .tsq and .tsr files and the "
+                                  "TSA root certificate repeats the RFC 3161 check; ots verify checks the "
+                                  "OpenTimestamps proof against Bitcoin."))
             + "</li></ul><h2>5. " + e(say("Files and their SHA-256")) + "</h2><table><tr><th>" + e(say("File")) + "</th><th>SHA-256</th></tr>"
             + rows + "</table><h2>6. " + e(say("Scope of the records")) + "</h2><ul>"
             + "".join("<li>" + e(say(limit)) + "</li>" for limit in limits)

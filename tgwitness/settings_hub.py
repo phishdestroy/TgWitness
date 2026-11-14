@@ -21,8 +21,8 @@ from .store import utcnow
 
 Goal = Literal["copy", "watch", "evidence"]
 PRESETS = {
-    "copy": {"continuous": False, "files": "photos", "timestamps": False, "drand": False,
-             "notifications": False, "replica": False, "outside": False, "ip": "auto"},
+    "copy": {"continuous": False, "files": "photos", "timestamps": True, "drand": False,
+             "notifications": False, "replica": False, "outside": True, "ip": "auto"},
     "watch": {"continuous": True, "files": "short_media", "timestamps": True, "drand": False,
               "notifications": True, "replica": False, "outside": True, "ip": "auto"},
     "evidence": {"continuous": True, "files": "all", "timestamps": True, "drand": True,

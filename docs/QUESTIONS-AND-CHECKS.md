@@ -6,9 +6,9 @@
 
 [Independent verification](TRUST.md) · [What the record establishes](FOR-THE-RECORD.md) · [Validation record](VERIFICATION.md)
 
-**ZERO TRUST.** You do not have to trust anyone: not the operator who collected an
-archive, not PhishDestroy, and not any title or signature. Each answer below states
-what the record establishes and gives the command or file that checks it.
+Each answer below states what the record establishes and gives the command or file that
+checks it. The checks do not depend on trusting the operator who collected an archive or
+PhishDestroy.
 
 Trusted inputs come from a channel other than the file being checked: the collector
 fingerprint from the sender, a timestamp authority's root from that authority, a commit
@@ -86,8 +86,8 @@ openssl dgst -sha256 -verify release-signing.pub -signature install.sh.sig insta
 
 ## How a record is tied to Telegram
 
-- The collector signs each record the moment it arrives. Its origin is established by
-  the connection it arrived through, which is checked on its own terms
+- The collector signs each record the moment it arrives through the account's
+  authenticated Telegram connection. The journal records that connection and the capture
   ([where the messages come from](EVIDENCE.md#where-the-messages-come-from)).
 - Telegram delivers messages to every client, official apps included, inside an MTProto
   session. Its authorization key is negotiated against Telegram's pinned server key, and
@@ -110,8 +110,12 @@ openssl dgst -sha256 -verify release-signing.pub -signature install.sh.sig insta
   signing key to the attested execution (`key_origin: created`;
   [verification scope](EVIDENCE.md#verification-scope)).
 
-**What the verifier reports.** With `--fingerprint`: `self_attested` (signatures,
-hash chain, manifest and file hashes). With third-party time covering the last record:
+**What the verifier reports.** A valid signature shows that the bytes have not changed
+since they were signed; the operator gives the key fingerprint to the recipient through a
+separate channel. Without `--fingerprint` the final line starts with
+`EVIDENCE: minimum not met · missing: confirmed signer key`. With `--fingerprint`:
+`self_attested` (signatures, hash chain, manifest and file hashes). With third-party time
+covering the last record:
 `EVIDENCE: minimum met`. With a checked attested run: profile `attested`
 (`evidence_conditions` in [`tgwitness/verifier/witness.py`](../tgwitness/verifier/witness.py)).
 
@@ -122,9 +126,12 @@ hash chain, manifest and file hashes). With third-party time covering the last r
   checkpoints every 10 minutes by default at three TSAs, one of them the Belgian
   government's qualified eIDAS TSA (`DEFAULT_TSA` in `tgwitness/anchoring.py`), and on
   OpenTimestamps.
-- A record covered by a stamp cannot be changed, inserted or removed afterwards: the
-  hash chain breaks and the verifier rejects the archive. Records after the last stamp are
-  named: `EVIDENCE: minimum met up to record N of M · later records need a binding`.
+- Changing, inserting or removing a record breaks the hash chain or a signature, and the
+  verifier rejects the archive. A stamp fixes the chain head it covers at a third-party time,
+  so a covered record cannot be replaced later without the mismatch showing. Records after
+  the last stamp are named: `EVIDENCE: minimum met up to record N of M · later records need a binding`.
+- SQLite triggers on the journal table only stop the application from overwriting or
+  deleting a record by mistake; detection rests on the chain, signatures, stamps and witness.
 - With drand on, each pass also writes a public drand round that nobody knew before its
   time. The round sets the earliest time and the next stamp the latest, so a checkpoint
   cannot be prepared in advance; `--check-drand` compares the rounds with public relays
@@ -176,9 +183,9 @@ stamping. TgWitness fixes each record from the moment it arrives.
   [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/) shows a
   conversation beside deliberately altered Desktop export files.
 - TgWitness signs each observation when it arrives and links it into the hash chain
-  ([what is signed](EVIDENCE.md#what-is-signed)). When evidence mode is turned on (in
-  settings, or by the **Follow chats** and **Evidence for a case** setup goals), it
-  timestamps signed checkpoints on a schedule.
+  ([what is signed](EVIDENCE.md#what-is-signed)). RFC 3161 and OpenTimestamps stamps of
+  signed checkpoints are on by default in every setup goal; **Evidence for a case** also
+  records drand rounds. The `.tsr` and `.ots` files under `anchors/` let anyone check them.
 - TgWitness can use a qualified TSA. The manual RFC 3161 procedure sends a checkpoint
   to any TSA and checks the reply with
   `python -m tgwitness.anchor verify --checkpoint checkpoint.json --request timestamp.tsq --response timestamp.tsr --ca trusted-tsa-root.pem`
@@ -229,9 +236,8 @@ adapts it to the applicable rules elsewhere.
   Recitals 47 and 49; Art. 9(2)(f) for legal claims) and the erasure exception "for
   the establishment or defence of legal claims (Art. 17(3)(e))"
   ([responsibility and data protection](PROJECT-GUIDE.md#responsibility-and-data-protection-gdpr)).
-- The journal is append-only, so single records cannot be removed without breaking
-  the signature chain. Retention is planned per workspace, and deleting the workspace
-  removes its records. Off-site copies under S3 Object Lock cannot be deleted before
+- Removing a single record breaks the hash chain, and the verifier reports it. Retention
+  is planned per workspace, and deleting the workspace removes its records. Off-site copies under S3 Object Lock cannot be deleted before
   their retention date (same section).
 - People profiles are off by default and switched on per chat. Exports make it
   possible to answer access requests under Art. 15 (same section).
@@ -274,22 +280,17 @@ catalog or your own route.
 The [dedicated account guide](https://phishdestroy.github.io/TgWitness/docs/dedicated-account/#api)
 explains the choice and links Telegram's documentation for each point.
 
-- **The pair is a name, not a key.** An API ID and API hash "identify the application
-  and give no access to any account; Telethon's documentation notes that one pair works
-  with any phone number". Access to an account comes only from its own sign-in: a login
-  code and 2FA password, or a session that account already authorized.
-- **Nobody sees anything of yours through a pair.** Signing in creates an authorization
-  key by a Diffie–Hellman exchange; the key is never sent, and "other programs with the
-  same pair have their own keys and cannot use yours". Traffic is encrypted with that
-  key, not with the API hash. "Telegram has no method that lists accounts, sessions or
-  messages by API ID"; the owner of a pair sees only its app settings.
-- **Why public pairs.** The pairs of official Telegram apps (Desktop 2040, Android 6,
-  Telegram X 21724, iOS 10840, macOS 2834, Web 2496) are public and built into many
-  independent programs and libraries, such as opentele, opentele2 and Grampo. More than a
-  million accounts have been registered through them, and they have worked for more than
-  five years. A new pair created at my.telegram.org is tied to one account, and in the
-  project's experience about 99% of such accounts get logged out
-  ([why not your main account](https://phishdestroy.github.io/TgWitness/docs/dedicated-account/#why)).
+- **A pair names the application.** An API ID and API hash identify the application to
+  Telegram and give no access to account data. Sign-in uses the account's own
+  authorization: a login code and 2FA password, or a session that account already authorized.
+- **A shared pair shares no access.** Signing in creates an authorization key by
+  a Diffie–Hellman exchange; the key is never sent, and other programs with the same pair
+  have their own keys. Traffic is encrypted with that key, not with the API hash. Telegram
+  has no method that lists accounts, sessions or messages by API ID.
+- **Built-in pairs are public.** The pairs of official Telegram apps (Desktop 2040,
+  Android 6, Telegram X 21724, iOS 10840, macOS 2834, Web 2496) and the others in the pool
+  are published in the open source code of Telegram clients and libraries such as opentele,
+  opentele2 and Grampo.
 - [`tgwitness/api_pool.py`](../tgwitness/api_pool.py) contains 50 public pairs. A fresh
   login tries Telegram Desktop's pair (2040) first, then up to seven shuffled others
   (`login_order`); if Telegram refuses a pair, the next one is tried. "Only the Telegram Desktop pair (2040) is sent with a matching
@@ -297,17 +298,18 @@ explains the choice and links Telegram's documentation for each point.
   ([authentication methods](CONNECTION-SECURITY.md#authentication-methods)).
   Missing device fields come from bundled opentele2 catalogs
   ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
-- **Your own pair works too.** Enter it under **API ID + Hash** and TgWitness uses it
-  instead of the pool ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
+- **Your own pair.** Enter it under **API ID + Hash** and TgWitness uses it instead of
+  the pool. For material intended for court, create a pair at my.telegram.org and enter it
+  before collection starts ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
 - Each `observation.started` record names the `api_id` (never the hash), whether the
   pair is built-in or the operator's own, the client description and the route type.
   Reports and `custody.json` list them ([producer](EVIDENCE.md#producer)), so a
   recipient can see which client observed.
 
-**Result.** The pair that signed in does not change what the account receives or what
-the record proves. "Telegram decides restrictions on its side, whichever client profile
-is used" ([accounts](ACCOUNTS.md#before-you-start-api-id-and-api-hash)); that is why the
-guide says to use a separate account, never your main one.
+**Result.** The pair that signed in does not change what the account receives, and the
+record names it. Telegram decides restrictions on its side, whichever client profile is
+used ([accounts](ACCOUNTS.md#before-you-start-api-id-and-api-hash)), so the guide
+recommends a separate account.
 
 ## Verifying the installer
 

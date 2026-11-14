@@ -147,8 +147,8 @@ earlier comparison results. Archive format and signature verification are unchan
    materials. Check the intended collection setup with the
    [live acceptance procedure](internal/LIVE_ACCEPTANCE.md).
 2. Retain the workspace's public-key fingerprint independently before relying on
-   its exports. Turn on evidence mode so checkpoints receive RFC 3161 and
-   OpenTimestamps receipts. Save signed checkpoints outside the collector during
+   its exports. Keep evidence mode on (the default) so checkpoints receive RFC 3161
+   and OpenTimestamps receipts. Save signed checkpoints outside the collector during
    collection. Record interruptions and the limits of the account's visibility.
 3. Export a **signed ZIP** and retain the signed run receipt. Use a checkpoint at
    or before the exported journal boundary. A later checkpoint can correctly reject
@@ -603,10 +603,11 @@ another channel; on its own it does not meet the minimum for evidence.
 ## Reading a verification result
 
 The verifier reports archive integrity, signer pinning and assurance checks
-separately. Without independently supplied trust inputs, an internally consistent
-archive can pass its signature and format checks with `signer_pinned: false`.
-This is useful for checking the supplied bytes; signer and acquisition checks
-are separate results, selected below.
+separately. A valid signature shows that the bytes have not changed since they were
+signed. The operator gives the key fingerprint to the recipient through a separate
+channel. Without `--fingerprint`, an intact archive passes its signature and format
+checks with `signer_pinned: false`, and the final line starts with
+`EVIDENCE: minimum not met · missing: confirmed signer key`.
 
 For an automated local-archive policy that requires a pinned signer and the minimum
 for evidence:
@@ -651,15 +652,14 @@ provenance and TDX measurements provide the environment checks; the
 
 ### Where the messages come from
 
-Telegram delivers messages to every client, official apps included, through an
-MTProto session rather than with per-message signatures. The session's
-authorization key is negotiated against Telegram's pinned server key, and every
-update arrives encrypted and integrity-checked under that key. The collector
-receives messages through that authenticated session and signs each observation
-into the journal as it arrives, with the chat, message and sender identifiers and
-the server dates Telegram supplied. In GitHub Actions capture and Intel TDX
-deployments, attestation additionally binds that session and signing key to the
-approved collector execution.
+Telegram delivers messages to every client, official apps included, inside an
+MTProto session. The session's authorization key is negotiated against Telegram's
+pinned server key, and every update arrives encrypted and integrity-checked under
+that key. The collector receives messages through the account's authenticated
+session and signs each observation into the journal as it arrives, with the chat,
+message and sender identifiers and the date Telegram set on each message. In GitHub
+Actions capture and Intel TDX deployments, attestation also binds that session and
+signing key to the approved collector execution.
 
 The journal records where the authorization key came from. Signing in by phone or QR,
 or an independent login from a session file, writes `account.authorized` with
@@ -667,12 +667,13 @@ or an independent login from a session file, writes `account.authorized` with
 `imported`. An imported key also exists wherever it came from. Attested deployments
 refuse imported keys.
 
-Evaluate source attribution through the acquisition path in the table above:
-authenticated Telegram connection, recorded updates or captured frames, their binding
-to journal entries, and the verified execution environment where applicable. Archive
-signatures preserve that record for later checking. Retained checkpoints establish
-earlier journal boundaries; coverage records identify collection outcomes and verified
-external timestamps place the committed bytes in time.
+The Telegram origin of a record rests on the account's authenticated connection, the
+connection and capture records in the journal, captured MTProto frames matched to journal
+entries ([`tgwitness/forensics/`](../tgwitness/forensics/)), the Telegram date of each
+message and, for attested capture, the verified execution environment. Archive signatures
+preserve that record for later checking. Retained checkpoints fix earlier journal
+boundaries, coverage records show collection outcomes, and verified external timestamps
+place the committed bytes in time.
 
 For a local workspace, the recipient supplies trusted collector or witness inputs.
 For sealed acquisition, the trusted policy and attestation bind the archive digest to
@@ -761,10 +762,12 @@ at or before the exported prefix, not an arbitrary later checkpoint.
 
 ## RFC 3161 preparation and response verification (0.2)
 
-Evidence mode (off by default) sends only the SHA-256 of each signed checkpoint to the listed
-RFC 3161 authorities and OpenTimestamps calendars, over the workspace route and never over MTProxy.
-Answers are kept in `checkpoints/anchors/`, exported, and checked by `verify.py` (`--tsa-ca` checks
-the TSA signature; confirm OpenTimestamps proofs with `ots upgrade` and `ots verify`).
+Evidence mode sends only the SHA-256 of each signed checkpoint to the listed RFC 3161
+authorities and OpenTimestamps calendars, over the workspace route and never over MTProxy.
+Timestamps are on by default in every setup goal; **Evidence for a case** also records drand.
+Answers are kept in `checkpoints/anchors/`, exported as `.tsr` and `.ots` files under `anchors/`,
+and checked by `verify.py` (`--tsa-ca` checks the TSA signature; confirm OpenTimestamps proofs
+with `ots upgrade` and `ots verify`).
 
 An RFC 3161 authority that fails twice in a row waits before the next attempt: one interval, then
 two, four and so on up to six hours, or as long as its `Retry-After` asks, up to a day. A pass that
@@ -790,8 +793,9 @@ See the [procedure](TIMESTAMP.md) and [validation results](VERIFICATION.md).
 
 ## Optional records in evidence mode: drand and Telegram devices
 
-Two more records can run on the same passes as the timestamps. Both are off by default and
-take effect only while evidence mode is on: More tools → Extras → Evidence & backups → **More witnesses · optional**,
+Two more records can run on the same passes as the timestamps. Both take effect only while
+evidence mode is on. **Evidence for a case** turns drand on; otherwise both start off. Switch them
+under More tools → Extras → Evidence & backups → **More witnesses · optional**,
 or `"drand": true` and `"devices": true` in `POST /api/evidence`. One failing does not stop the
 other or the timestamps; the panel shows the latest result of each under the form.
 
