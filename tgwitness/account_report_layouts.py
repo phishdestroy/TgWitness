@@ -110,11 +110,14 @@ def transcript(context, rows, *, chat=None, sharing=False):
     figures = view.stats(context.get('counts', {}), say) if sharing else ''
     blocks = {
         'case': introduction,
-        'assessment': lambda: (case_assessment.html(assessment, say),),
         'selection': scope,
         'journal': messages,
         'verify': lambda: (view.verification(context, say, sharing=sharing),),
     }
-    if analytics or (sharing and context.get('counts')):
+    # Charts and the assessment describe the whole chat: they open it once, and later pages go straight to messages.
+    first = sharing or (context.get('pagination') or {}).get('page', 1) == 1
+    if first:
+        blocks['assessment'] = lambda: (case_assessment.html(assessment, say),)
+    if first and (analytics or (sharing and context.get('counts'))):
         blocks['analytics'] = lambda: (figures, analytics)
     yield from document(context, title, blocks, sharing=sharing)
