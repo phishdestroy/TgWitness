@@ -9656,5 +9656,6 @@
   "Search match": "खोज मिलान",
   "Search matched an earlier saved version.": "खोज से एक पुराना सहेजा गया संस्करण मिला।",
   "Search saved messages": "सहेजे गए संदेश खोजें",
-  "{n} saved versions": "{n} सहेजे गए संस्करण"
+  "{n} saved versions": "{n} सहेजे गए संस्करण",
+  "Chat loading: {running} active · {pending} pending": "चैट लोड हो रही हैं: {running} सक्रिय · {pending} लंबित"
 }

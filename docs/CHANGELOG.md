@@ -25,6 +25,15 @@
 
 ## Unreleased
 
+- Chat exports download repeated attachment representations once per export directory
+  and verify unrelated retained files concurrently. Each message keeps its own file
+  reference; size and SHA-256 checks still run before reuse. Unique temporary paths
+  and synchronized file-index updates preserve parallel copies, cancellation and retry.
+
+- Attachment jobs for the same file now wait for one transfer and independently verify the saved bytes before reuse, preserving a signed outcome for each observation. Different files and server-hash reads run concurrently; hash requests share the bounded file-request pool and no longer hold the ordinary Telegram request queue. Cancellation, incomplete hash reads and failed transfers leave later jobs able to continue.
+
+- Connection setup reuses a fresh preflight result for the same route instead of repeating its handshake immediately on Apply. Startup reads access and workspaces concurrently, chat export discovery waits for a selected chat, and rapid wizard/preference edits save only the latest queued state. Stale route results are checked again; workspace changes cancel unsent saves.
+- Initial chat loading retries failed stages with a persisted delay and bounds stalled requests by the operation timeout. History is saved before optional profile enrichment; completed stages survive restart and are not repeated during a retry. Chats and Home expose delayed work. Snapshot reads reject messages from another chat, invalid ID order or an older-page boundary violation, and stop when the source is disabled; saved records and signed interruption evidence are retained.
 - Observation no longer has to be paused for exports on the same account. An account export, a chat export and loading messages into a chat run while observation keeps recording; one export uses an account at a time, and full history can also run alongside observation. The account page, the Home dashboard and the export dialogs say which tasks wait for each other.
 - Chats: opening an enabled chat that has no saved messages loads its latest 100 messages from Telegram, and **Load earlier messages from Telegram** at the top of a chat reads the next older page. Chats added by the folder and whole-account scopes get their latest messages once, as set under **When a new chat or bot appears** (100 by default for new workspaces). These reads are recorded as history snapshots.
 - Account export: while it discovers chats, the job card shows the stage, the number of chats found, the chat being checked and a progress bar. Chats are checked up to four at a time.

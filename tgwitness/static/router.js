@@ -1,6 +1,7 @@
 const paths={"system-map":"system-map",board:"board",topology:"topology",settings:"settings","first-run":"first-run",start:"start",chats:"chats","secret-chats":"secret-chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",group:"groups",
   access:"access","system-log":"system-log",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed"};
 const views=Object.fromEntries(Object.entries(paths).map(([view,path])=>[path,view]));
+Object.assign(views,{home:'start','case-board':'board','pseudo-secret':'secret-chats','network-topology':'topology'});
 const legacy={start:"start",account:"connection",connection:"connection",journal:"observations",observations:"observations",
   exports:"evidence",evidence:"evidence",extras:"witness",witness:"witness",sealed:"sealed",chats:"chats",
   sources:"sources",parameters:"parameters",accounts:"accounts",access:"access","system-log":"system-log",integrations:"integrations",analysis:"analysis"};
@@ -22,6 +23,7 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   const explicit=!!query.get("route")||!!oldView||parts.length>0&&parts[0]!=="index.html"||query.has("event");
   const route={view:views[parts[0]]||null,workspace:query.get("ws")||query.get("workspace")||workspace,
     chatId:null,seq:null,kind:query.get("kind")||"",source:query.get("source")||"",q:query.get("q")||"",
+    chatFilter:query.get('filter')||'',chatSort:query.get('sort')||'activity',chatKind:query.get('type')||'',chatQuery:query.get('q')||'',
     since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",slice:query.get('slice')||null,added:query.get('added')==='1',
     before:query.has("before")?integer(query.get("before")):null,extra:null,section:null,step:null,group:null,hub:null,tab:query.get('tab')||null,explicit};
   const tabs={sources:['scope','chats','recording'],evidence:['downloads','settings']};
@@ -61,6 +63,7 @@ export function routeURL(route,{base=location.href,staticDemo=false}={}){
   query.set("ws",route.workspace||"default");
   if(['sources','evidence'].includes(route.view)&&route.tab)query.set('tab',route.tab);
   if(current.searchParams.has("lang"))query.set("lang",current.searchParams.get("lang"));
+  if(route.view==='chats')for(const [key,value] of [['filter',route.chatFilter],['sort',route.chatSort==='activity'?'':route.chatSort],['type',route.chatKind],['q',route.chatQuery]])if(value)query.set(key,value);
   if(route.view==="observations")for(const key of ["kind","source","q","since","until"])if(route[key])query.set(key,route[key]);
   if(route.view==="observations"&&route.system)query.set("system","1");
   if(route.view==='observations'&&route.slice){query.set('slice',route.slice);if(route.added)query.set('added','1');}

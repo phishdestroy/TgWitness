@@ -168,10 +168,12 @@ async def probe(collector, route, mode, *, outside=True):
                   "exit_ip": None, "country": None, "warp": None}
         if not concrete.telegram_only and (outside or mode == "warp"):
             try:
+                exit_started = time.monotonic()
                 _, _, body = await asyncio.wait_for(netclient.request("GET", "https://www.cloudflare.com/cdn-cgi/trace",
                     concrete, timeout=15, limit=8192), 20)
                 fields = dict(line.split("=", 1) for line in body.decode("ascii").splitlines() if "=" in line)
                 result.update(exit_ip=str(ipaddress.ip_address(fields["ip"])),
+                              http_latency_ms=round((time.monotonic() - exit_started) * 1000),
                               country=fields.get("loc") if len(fields.get("loc", "")) == 2 else None,
                               warp=fields.get("warp") if fields.get("warp") in ("on", "plus", "off") else None)
             except (OSError, ValueError, TimeoutError, netclient.RouteError):
@@ -343,6 +345,9 @@ class GuidedConnection:
                                                outside_enabled=body.outside_enabled and (not route.telegram_only or c.outside_proxy() is not None))
                 progress("Checking Telegram and the exit address")
                 item["check"] = auto_check or await asyncio.wait_for(probe(c, route, body.mode, outside=body.outside_enabled), 45)
+                item["checked_monotonic"] = time.monotonic()
+                item["check_key"] = self.check_key(item, actual_mode)
+                item["checked_process"] = portable.processes.get(item["managed"]["id"]) if item["managed"] else None
                 row["check"] = item["check"]
             self.plan = {"token": secrets.token_hex(24), "expires": time.monotonic() + 600,
                          "body": body, "ids": self.targets(body), "items": items}
@@ -412,12 +417,34 @@ class GuidedConnection:
                         await portable.stop(managed["id"])
             return self.job
 
+    @staticmethod
+    def check_key(item, mode):
+        return hashlib.sha256(json.dumps([item["route"].model_dump(), item["policy"].model_dump(), mode],
+                                         sort_keys=True).encode()).hexdigest()
+
+    def reusable_check(self, item, mode, portable):
+        checked = item.get("checked_monotonic")
+        if (checked is None or not 0 <= time.monotonic() - checked < 90
+                or item["route"].kind == "mtproxy_auto"
+                or item.get("check_key") != self.check_key(item, mode)
+                or not item.get("check", {}).get("telegram_connected")):
+            return False
+        if item["managed"]:
+            process = portable.processes.get(item["managed"]["id"])
+            if process is None or process is not item.get("checked_process") or process.returncode is not None:
+                return False
+        return True
+
     async def apply_one(self, item, mode):
         c, portable = item["app"].state.collector, item["app"].state.connection.portable
         old = {name: c.vault.read(name) for name in ("network", "outside_proxy", "portable_route")}
         policy, was_running = c.route_policy(), c.running
         try:
-            check = await asyncio.wait_for(probe(c, item["route"], mode, outside=item["policy"].outside_enabled), 45)
+            if self.reusable_check(item, mode, portable):
+                check = {**item["check"], "reused_preflight": True,
+                         "preflight_age_seconds": round(time.monotonic() - item["checked_monotonic"], 3)}
+            else:
+                check = await asyncio.wait_for(probe(c, item["route"], mode, outside=item["policy"].outside_enabled), 45)
             await install(c, item["route"], item["managed"], item["policy"], mode, check)
         except BaseException as exc:
             for name, value in old.items():

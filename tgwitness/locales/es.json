@@ -9664,5 +9664,6 @@
   "Search match": "Coincidencia de búsqueda",
   "Search matched an earlier saved version.": "La búsqueda ha encontrado una versión guardada anterior.",
   "Search saved messages": "Buscar mensajes guardados",
-  "{n} saved versions": "{n} versiones guardadas"
+  "{n} saved versions": "{n} versiones guardadas",
+  "Chat loading: {running} active · {pending} pending": "Carga de chats: {running} activos · {pending} pendientes"
 }

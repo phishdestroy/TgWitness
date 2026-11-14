@@ -9608,5 +9608,6 @@
   "Search match": "ผลการค้นหาที่ตรงกัน",
   "Search matched an earlier saved version.": "การค้นหาพบเวอร์ชันที่บันทึกไว้ก่อนหน้านี้",
   "Search saved messages": "ค้นหาข้อความที่บันทึกไว้",
-  "{n} saved versions": "{n} เวอร์ชันที่บันทึกไว้"
+  "{n} saved versions": "{n} เวอร์ชันที่บันทึกไว้",
+  "Chat loading: {running} active · {pending} pending": "การโหลดแชท: {running} กำลังทำงาน · {pending} รอดำเนินการ"
 }

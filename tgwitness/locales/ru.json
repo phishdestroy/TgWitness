@@ -9722,5 +9722,6 @@
   "{n} saved versions": "Сохранённых версий: {n}",
   "Displayed version": "Показанная версия",
   "Search match": "Совпадение с запросом",
-  "Search matched an earlier saved version.": "Совпадение найдено в прежней сохранённой версии."
+  "Search matched an earlier saved version.": "Совпадение найдено в прежней сохранённой версии.",
+  "Chat loading: {running} active · {pending} pending": "Прогрузка чатов: {running} загружаются · {pending} в очереди"
 }

@@ -9608,5 +9608,6 @@
   "Search match": "검색 일치",
   "Search matched an earlier saved version.": "검색 결과 이전에 저장된 버전과 일치했습니다.",
   "Search saved messages": "저장된 메시지 검색",
-  "{n} saved versions": "{n}개의 저장된 버전"
+  "{n} saved versions": "{n}개의 저장된 버전",
+  "Chat loading: {running} active · {pending} pending": "채팅 불러오기: {running}개 진행 중 · {pending}개 대기 중"
 }
