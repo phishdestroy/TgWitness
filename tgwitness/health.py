@@ -56,6 +56,7 @@ def stamp_counts(last):
     for covered in (last or {}).get("covered", []):
         counts["covered"] += 1
         counts["covered_verified"] += covered.get("kind") == "rfc3161"
+    counts["deferred"] = len((last or {}).get("deferred", []))
     return counts
 
 
@@ -68,7 +69,7 @@ def timestamps(settings, last, success, failure, runtime, route_problem, now):
               "next_attempt_at": runtime.get("next_at") if settings["enabled"] else None,
               "last_success_at": (success or {}).get("at"), "last_verified_at": (success or {}).get("verified_at"),
               "last_failure": failure, "counts": counts, "interval_seconds": interval,
-              "checkpoint": (last or {}).get("checkpoint")}
+              "checkpoint": (last or {}).get("checkpoint"), "deferred": runtime.get("deferred") or []}
     if not settings["enabled"]:
         return part("off", "disabled", **detail)
     if route_problem:
@@ -83,14 +84,14 @@ def timestamps(settings, last, success, failure, runtime, route_problem, now):
     if (now - max(seen)).total_seconds() > 2 * interval + SLACK_SECONDS:
         return part("unknown", "stale", **detail)
     newest_pass = parse(detail["last_pass_at"])
-    if runtime.get("outcome") == "up_to_date" and (not last or newest_pass >= parse(last.get("at"))):
+    if runtime.get("outcome") == "up_to_date" and not detail["deferred"] and (not last or newest_pass >= parse(last.get("at"))):
         return part("working", "up_to_date", **detail)
     if runtime.get("outcome") == "no_checkpoint" and not last:
         return part("configured", "no_checkpoint", **detail)
     answered = counts["verified"] + counts["ots_pending"] + counts["ots_bitcoin_unverified"] + counts["covered"]
     if not answered:
         return part("failed", "no_answer", **detail)
-    if counts["rejected"] or counts["unreachable"]:
+    if counts["rejected"] or counts["unreachable"] or counts["deferred"] or detail["deferred"]:
         return part("degraded", "partial", **detail)
     if settings["tsa_urls"] and not (counts["verified"] or counts["covered_verified"]):
         return part("degraded", "unverified", **detail)

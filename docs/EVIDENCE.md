@@ -732,6 +732,11 @@ RFC 3161 authorities and OpenTimestamps calendars, over the workspace route and 
 Answers are kept in `checkpoints/anchors/`, exported, and checked by `verify.py` (`--tsa-ca` checks
 the TSA signature; confirm OpenTimestamps proofs with `ots upgrade` and `ots verify`).
 
+An RFC 3161 authority that fails twice in a row waits before the next attempt: one interval, then
+two, four and so on up to six hours, or as long as its `Retry-After` asks, up to a day. A pass that
+finds only waiting authorities writes no record; otherwise `anchor.completed` lists them under
+`deferred` with `retry_at`. Until they answer again, the panel shows timestamps as **Degraded**.
+
 The panel prepares a request archive containing canonical checkpoint.json bytes,
 a SHA-256 message imprint and random nonce in timestamp.tsq, checksums, and instructions.
 No network request is made; the token the authority returns for this request is the timestamp.

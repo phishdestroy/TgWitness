@@ -4850,7 +4850,8 @@
 "c7f08998e424c243c15ae2522ed5d60be905bb96517303e237887917c69e0107": "區段會在清單上方的視窗中開啟，並有自己的位址，例如 <code>/settings/connection</code>。返回箭頭、關閉按鈕、Escape、點擊視窗外部以及瀏覽器的上一頁按鈕都會回到清單。<strong>哪些聊天？</strong>以<strong>儲存聊天選擇</strong>儲存；有未儲存的變更時關閉會先詢問。每次變更都會顯示<strong>撤銷</strong> 20 秒，<strong>近期變更</strong>中的每一項之後也都能撤銷。撤銷會在日誌中新增一筆 <code>settings.changed</code> 紀錄，並恢復自訂的檔案限制。",
 "f0ebe90e1d874ea9c0e2753e464feee9aa8c355d52678be0654d229caa8e4d94": "個人資料概覽",
 "f09bd2b9227aeca2ea078b2b27799bd7c1d833a1a2d1c104a9a2c53485def9a7": "關鍵數據、觀察到的個人資料，以及可搜尋並連結到聊天紀錄的章節。",
-"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：當報告語言不是英文時，同一報告的英文正本，以相同方式封印與簽署，並在已簽署清單的 <code>report.original</code> 下列出。所選語言的報告開頭建議將英文正本連同經認證或宣誓的譯文一併提交；請參閱<a href=\"TRANSLATION.md\">為法院翻譯報告</a>。"
+"26197fd1540be8adf006c778fee6fae9ec0912714150eedac9acfba0bf00675d": "<code>report.en.html</code>、<code>report.en.pdf</code> / <code>chat.en.html</code>、<code>chat.en.pdf</code>：當報告語言不是英文時，同一報告的英文正本，以相同方式封印與簽署，並在已簽署清單的 <code>report.original</code> 下列出。所選語言的報告開頭建議將英文正本連同經認證或宣誓的譯文一併提交；請參閱<a href=\"TRANSLATION.md\">為法院翻譯報告</a>。",
+"f8f3bc3f023892d4c86ed24d9ccb6a3b00fd7a5ef6ecfbbddde75f516aa36fa1": "若 RFC 3161 授權實體連續兩次失敗，將在下次嘗試前進行等待：先等待一個間隔，接著\n兩個、四個，以此類推，最長可達六小時，或依其 <code>Retry-After</code> 設定的時間，最長可達一天。若一次檢查\n僅發現處於等待狀態的授權實體，則不寫入任何記錄；否則，<code>anchor.completed</code> 會將其列於\n<code>deferred</code> 之下，並附上 <code>retry_at</code>。在它們再次回應之前，面板將顯示時間戳記為<strong>「效能下降」</strong>。"
 },
 "modes": {
 "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",
