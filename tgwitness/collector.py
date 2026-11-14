@@ -58,7 +58,7 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaOutcome, REUSE_MEANING, failure_outcome, lane_limits, plan_media,
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, failure_outcome, lane_limits, plan_media,
                          remember_file, reuse_into, stored_copy, validate_observation)
 from . import secret_chats
 from .scope import allowed, folder_rule, in_folder, kind_of, recheck_settings, scope_settings, visibility
@@ -676,6 +676,7 @@ class Collector:
         self.buffer_limit = tuning.BY_KEY["startup_buffer"].default
         self.storage_low = False
         self.download_reserved = 0
+        self.media_locks = MediaLocks()
         self.export_files_lock = asyncio.Lock()
         self._forensics_clients = weakref.WeakSet()
         self.history = History(self)
@@ -5107,13 +5108,16 @@ class Collector:
         job = attempt.job
         if size is None or size > job["max_bytes"]:
             raise ValueError("unknown_size_or_above_limit")
-        if shutil.disk_usage(media_root).free - self.download_reserved < size + 64 * 1024**2:
-            raise OSError("insufficient_free_space")
-        self.download_reserved += size
-        try:
-            await self.fetch_media(attempt, message, size, media_root, temp, client)
-        finally:
-            self.download_reserved -= size
+        info = file_hashes.representation(downloadable_media(message))
+        key = ("download", job["account_id"], canonical(info), size) if info else None
+        async with self.media_locks.hold(key):
+            if shutil.disk_usage(media_root).free - self.download_reserved < size + 64 * 1024**2:
+                raise OSError("insufficient_free_space")
+            self.download_reserved += size
+            try:
+                await self.fetch_media(attempt, message, size, media_root, temp, client)
+            finally:
+                self.download_reserved -= size
 
     async def fetch_media(self, attempt, message, size, media_root, temp, client):
         job = attempt.job
@@ -5134,6 +5138,8 @@ class Collector:
                 "media_sha256": known["sha256"], "size": size,
                 "original_name": getattr(message.file, "name", None),
                 "mime_type": getattr(message.file, "mime_type", None),
+                "media_kind": media_kind(message),
+                "duration_seconds": getattr(message.file, "duration", None),
                 "file_reference_refreshed": False, "attachment": info, "downloaded_bytes": 0,
                 "bytes_reused": {"media_event": known["seq"], "meaning": REUSE_MEANING}}))
             return
@@ -5182,11 +5188,10 @@ class Collector:
         client = client or self.client
         if not hasattr(self, "_file_hash_cache"):
             self._file_hash_cache, self._file_hash_cache_bytes = {}, 0
-            self._file_hash_lock = asyncio.Lock()
         media = downloadable_media(message)
         identity = file_hashes.representation(media)
         key = canonical({"account_id": (self.store.get_setting("account", {}) or {}).get("id"), "representation": identity})
-        async with self._file_hash_lock:
+        async with self.media_locks.hold(("hashes", key)):
             if key in self._file_hash_cache:
                 return self._file_hash_cache[key][0]
             try:
