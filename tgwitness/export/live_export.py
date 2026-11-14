@@ -5,6 +5,7 @@ import logging
 import shutil
 import time
 from contextlib import suppress
+from copy import copy
 from pathlib import Path
 
 from .. import report, verification_kit
@@ -135,6 +136,7 @@ class LiveExport:
         self.lines, self.bytes, self.page_started, self.read_from = [], 0, None, None
         self.wake, self.task, self.closing = asyncio.Event(), None, False
         self.state, self.stop, self.error, self.sealed_at = "reading", None, None, None
+        self.final_state, self.final_stop, self.finish_task = None, None, None
 
     @staticmethod
     def sweep(directory, keep=None):
@@ -209,9 +211,14 @@ class LiveExport:
         if shutil.disk_usage(self.directory).free < self.min_free + 4 * (len(data) + len(page)):
             raise OSError("Not enough free disk space for the live archive.")
         files = {page_name(number, ".jsonl"): digest(data), page_name(number, ".html"): digest(page)}
-        seal = self.chain.page(number, files, facts)
-        self.zip.append([(page_name(number, ".jsonl"), data), (page_name(number, ".html"), page),
-                         (seal_name(number), seal)], lambda _: self.chain.manifest(self.state, self.stop))
+        chain, offset = copy(self.chain), self.zip.offset
+        seal = chain.page(number, files, facts)
+        try:
+            self.zip.append([(page_name(number, ".jsonl"), data), (page_name(number, ".html"), page),
+                            (seal_name(number), seal)], lambda _: chain.manifest(self.state, self.stop))
+        finally:
+            if self.zip.offset != offset:
+                self.chain = chain
 
     async def flush(self):
         count = size = 0
@@ -233,22 +240,51 @@ class LiveExport:
         self.error, self.lines, self.bytes = type(exc).__name__, [], 0
 
     async def close(self, state, stop=None):
-        if self.task is None or self.closing:
+        if self.task is None:
             return
+        if self.final_state is None or state == "stopped":
+            self.final_state, self.final_stop = state, stop
         self.closing = True
         self.wake.set()
+        if (self.state, self.stop) == (self.final_state, self.final_stop):
+            return
+        task = self.finalizer()
+        try:
+            await asyncio.shield(task)
+        except asyncio.CancelledError:
+            self.final_state, self.final_stop = "stopped", "cancelled"
+            task = self.finalizer()
+            while not task.done():
+                try:
+                    await asyncio.shield(task)
+                except asyncio.CancelledError:
+                    continue
+                except Exception:
+                    break
+            if not task.cancelled():
+                task.exception()
+            raise
+
+    def finalizer(self):
+        if self.finish_task is None or self.finish_task.done():
+            self.finish_task = asyncio.create_task(self.seal_closed())
+        return self.finish_task
+
+    async def seal_closed(self):
         try:
             await asyncio.shield(self.task)
         except Exception as exc:
             self.fail(exc)
-        if self.error:
-            return
-        self.state, self.stop = state, stop
-        try:
-            await complete_in_thread(self.zip.append, [], lambda _: self.chain.manifest(state, stop))
-            self.sealed_at = utcnow()
-        except Exception as exc:
-            self.fail(exc)
+        while not self.error:
+            state, stop = self.final_state, self.final_stop
+            try:
+                await complete_in_thread(self.zip.append, [], lambda _: self.chain.manifest(state, stop))
+                self.state, self.stop, self.sealed_at = state, stop, utcnow()
+            except Exception as exc:
+                self.fail(exc)
+                return
+            if (state, stop) == (self.final_state, self.final_stop):
+                return
 
     def ready(self):
         return self.zip.offset is not None and self.chain.pages > 0

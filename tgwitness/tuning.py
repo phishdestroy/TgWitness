@@ -160,14 +160,15 @@ PARAMETERS = (
     Parameter("telegram_connection_retries", "connection", 5, 0, 100, "times", "Connection retries"),
     Parameter("reconnect_max_seconds", "connection", 300, 10, 3600, "seconds", "Longest wait between reconnect attempts"),
     Parameter("media_workers", "performance", 3, 1, 32, "files", "Attachments downloaded at once",
-              "Per account and queue: the most attachments downloaded at once. Downloads start at two, add one after "
+              "Per attachment worker queue; live priority lanes and history workers have separate limits. "
+              "Downloads start at two, add one after "
               "each round of files without a Telegram wait and halve when Telegram asks a file download to wait. "
               "Applies the next time the account connects."),
     Parameter("media_connections_per_dc", "performance", 4, 0, 8, "connections",
               "File connections per Telegram data center",
-              "Files are read over their own connections, so downloads never hold up message collection. The number "
-              "grows from one while files queue up and shrinks when Telegram asks to slow down. They use this "
-              "account's route. 0 reads files over the account's main connection."),
+              "Dedicated file connections use Telegram's advertised media endpoints. Otherwise files share the "
+              "existing connection. The number grows from one while files queue up and shrinks when Telegram "
+              "asks to slow down. They use this account's route. 0 keeps the existing file transport."),
     Parameter("warmup_minutes", "performance", 15, 0, 120, "minutes", "Gentle start for a newly connected account",
               "Bulk reads of a newly connected account start at half speed and reach the learned pace over this "
               "time. 0 turns the gentle start off."),

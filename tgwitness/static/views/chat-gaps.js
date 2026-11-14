@@ -59,10 +59,10 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
   let numbers = new Map(), periods = [], loadedKey = "", pendingKey = "", compact = true;
   const cache = new Map(), answers = new Map();
 
-  function coverage(chat, range, dataKey) {
+  function coverage(chatKey, chat, range, dataKey) {
     const query = new URLSearchParams();
     for (const name of ["since", "until"]) if (range[name]) query.set(name, range[name]);
-    const id = chat + "|" + query + "|" + dataKey;
+    const id = chatKey + "|" + chat + "|" + query + "|" + dataKey;
     if (answers.has(id)) return Promise.resolve(answers.get(id));
     const legacy = () => json("events?kind=" + KINDS + "&limit=500" + (query.size ? "&" + query : ""));
     const request = compact ? json("chats/" + encodeURIComponent(chat) + "/coverage" + (query.size ? "?" + query : ""))
@@ -141,7 +141,7 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     if (key === loadedKey || key === pendingKey) return;
     if (!loadedKey.startsWith(chatKey + "|")) periods = [];
     pendingKey = key;
-    coverage(chat, range, dataKey).then(result => {
+    coverage(chatKey, chat, range, dataKey).then(result => {
       if (pendingKey !== key) return;
       const next = intervals(result.events || [], chat), changed = JSON.stringify(next) !== JSON.stringify(periods);
       periods = next; loadedKey = key; pendingKey = "";

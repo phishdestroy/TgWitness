@@ -22,6 +22,10 @@ PAGE_SIZE = 100
 COMMIT_BATCH = 32
 
 
+class SourceUnavailable(ValueError):
+    pass
+
+
 class History:
     def __init__(self, collector):
         self.collector, self.store = collector, collector.store
@@ -300,10 +304,7 @@ class History:
             if self.collector.handle_authorization_error(exc, "history", client=client):
                 raise
             self.finish_source(job, "failed", type(exc).__name__)
-        except ValueError as exc:
-            from .collector import AuthorizationRequired
-            if isinstance(exc, AuthorizationRequired) or self.collector.authorization_required:
-                raise
+        except SourceUnavailable as exc:
             self.finish_source(job, "failed", str(exc)[:200] or type(exc).__name__)
         retain_checkpoint(self.store, self.collector.vault)
 
@@ -440,7 +441,13 @@ class History:
 
     async def read_page(self, job):
         chat_id, run_id = job["chat_id"], job["run_id"]
-        entity = await self.network(lambda: self.collector.resolve_target(chat_id), run_id)
+        try:
+            entity = await self.network(lambda: self.collector.resolve_target(chat_id), run_id)
+        except ValueError as exc:
+            from .collector import AuthorizationRequired
+            if isinstance(exc, AuthorizationRequired) or self.collector.authorization_required:
+                raise
+            raise SourceUnavailable(str(exc)) from exc
         options, meta = options_of(self.current()), self.metadata(job)
         if options.admin_log and await self.network(lambda: history_admin.page(self, job, entity, "before"), run_id):
             return
