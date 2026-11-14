@@ -976,7 +976,7 @@ function renderWorkflowGaps(gaps){
   box.hidden=!gaps||!viewAllowed('observations');
   if(box.hidden||key===workflowGapKey)return;
   workflowGapKey=key;
-  const copy=node('span','',tr('Coverage gaps in the journal: {n}.',{n:gaps.toLocaleString()}));
+  const copy=node('span','',tr('Coverage gaps in the journal: {n}.',{n:gaps.toLocaleString(LANG)}));
   const open=node('button','text-link',tr('Show in the journal'));open.type='button';
   open.addEventListener('click',()=>{
     state.boardSlice=null;state.filter='coverage.gap';state.source='';state.search='';state.eventSince='';state.eventUntil='';
@@ -985,7 +985,7 @@ function renderWorkflowGaps(gaps){
   box.replaceChildren(copy,open);
   json('events?kind=coverage.gap&limit=1').then(result=>{
     const last=result.events?.[0];
-    if(last&&workflowGapKey===key)copy.textContent=tr('Coverage gaps in the journal: {n}. Latest: {time}.',{n:gaps.toLocaleString(),time:fmtTime(last.observed_at)});
+    if(last&&workflowGapKey===key)copy.textContent=tr('Coverage gaps in the journal: {n}. Latest: {time}.',{n:gaps.toLocaleString(LANG),time:fmtTime(last.observed_at)});
   }).catch(()=>{});
 }
 function renderWorkflowAccounts(){
@@ -1363,7 +1363,7 @@ function renderStatus() {
   $("collector-toggle").disabled=s.demo||(!c.running&&!accountState(s).canStart);
   $("collector-toggle").title=tr(s.demo?"Demo uses fictional observations":accountState(s).needsSignIn?'Sign in again':!c.has_session?"Connect an account first":
     !hasSources(s)?"Select at least one source first":"");
-  const navCount=$("nav-count"),total=s.stats.total.toLocaleString();
+  const navCount=$("nav-count"),total=s.stats.total.toLocaleString(LANG);
   if(navCount.textContent!==total){if(navCount.dataset.profile===state.profile&&/\d/.test(navCount.textContent))replay(navCount,"count-bump",700);navCount.textContent=total;}
   navCount.dataset.profile=state.profile;
   renderCollectorHealth(s.health);collectionUI?.update();
@@ -1413,13 +1413,13 @@ function renderViewStatus(view){
   const c=s.collector,counts=s.stats.counts;
   if(view==='start'){renderWorkflowControls();renderSetupStart();}
   else if(view==='observations'){
-    $("stat-messages").textContent=((counts["message.new"]||0)+(counts["message.snapshot"]||0)).toLocaleString();
-    $("stat-edits").textContent=(counts["message.edited"]||0).toLocaleString();
-    $("stat-deletes").textContent=(counts["message.deleted"]||0).toLocaleString();
+    $("stat-messages").textContent=((counts["message.new"]||0)+(counts["message.snapshot"]||0)).toLocaleString(LANG);
+    $("stat-edits").textContent=(counts["message.edited"]||0).toLocaleString(LANG);
+    $("stat-deletes").textContent=(counts["message.deleted"]||0).toLocaleString(LANG);
     $("stat-sources").textContent=s.targets.filter(x=>x.enabled).length;
     $("sources-footnote").textContent=tr(s.demo ? "Synthetic sources" : c.running ? "Observation enabled" : "Observation paused");
     renderOverviewEmpty(s);
-    $("event-total").textContent=s.stats.total.toLocaleString();
+    $("event-total").textContent=s.stats.total.toLocaleString(LANG);
     fillSourceSelect("source-filter",state.source,true);
     window.TgWitnessJournal?.sync();
   }else if(view==='chats'){
@@ -2241,7 +2241,7 @@ function renderHistory(){
   $("history-media").textContent=exists?tr("Attachments: {done} saved, {pending} pending, {failed} failed. Unavailable messages: {missing}.",{
     done:h.media?.done||0,pending:h.media_pending||0,failed:h.media?.failed||0,missing:h.unavailable||0}):"";
   $("history-wait").textContent=h.wait_until>Date.now()/1000?
-    tr("Telegram wait until {time}",{time:new Date(h.wait_until*1000).toLocaleString()}):
+    tr("Telegram wait until {time}",{time:fmtTime(new Date(h.wait_until*1000).toISOString())}):
     exists&&h.pacing?.delay_seconds?tr("Account request spacing: {seconds} s",{seconds:Number(h.pacing.delay_seconds).toFixed(1)}):"";
   const list=$("history-sources");list.replaceChildren();
   const phases={queued:tr("Queued"),reading:tr("Reading history"),complete:tr("History reading finished"),
@@ -2356,7 +2356,7 @@ function renderExportPartial(x){
   if(!x)return;
   const s=state.status;
   $("chat-export-partial-info").textContent=tr("{title}: {messages} messages saved before the stop, IDs {low}–{high}.",
-    {title:x.title||tr("chat"),messages:x.partial.messages.toLocaleString(),low:x.partial.low,high:x.partial.high});
+    {title:x.title||tr("chat"),messages:x.partial.messages.toLocaleString(LANG),low:x.partial.low,high:x.partial.high});
   for(const id of ["chat-export-resume","chat-export-restart"])$(id).disabled=!s||s.demo||!s.collector.has_session;
 }
 function renderExportState(x){
@@ -2368,10 +2368,10 @@ function renderExportState(x){
   const percent=running&&x.total?Math.min(99,Math.floor((x.captured||0)*100/x.total)):null;
   if(!x||x.phase==="unknown"){prog.textContent="";return;}
   const resumed=x.resumed?" ("+tr("resumed")+")":"";
-  const counts={title:(x.title||tr("chat"))+resumed,captured:(x.captured||0).toLocaleString(),total:(x.total||0).toLocaleString(),percent};
+  const counts={title:(x.title||tr("chat"))+resumed,captured:(x.captured||0).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
   if(running&&x.stage==="recheck")prog.textContent=tr("Exporting {title}: ",counts)+tr("rechecking absent message numbers")+"…";
   else if(running&&x.stage==="packaging")prog.textContent=tr("Exporting {title}: ",counts)+tr("packaging and signing the archive")+"…";
-  else if(running&&x.stage==="files")prog.textContent=tr("Exporting {title}: ",counts)+tr("{captured} messages saved; files: {done}/{total}",{captured:counts.captured,done:(x.files_done||0).toLocaleString(),total:(x.files_total||0).toLocaleString()})+
+  else if(running&&x.stage==="files")prog.textContent=tr("Exporting {title}: ",counts)+tr("{captured} messages saved; files: {done}/{total}",{captured:counts.captured,done:(x.files_done||0).toLocaleString(LANG),total:(x.files_total||0).toLocaleString(LANG)})+
     (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
   else if(running)prog.textContent=tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages read",counts)+
     (x.eta_seconds!==null&&x.eta_seconds!==undefined?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):"")+"…";
@@ -2685,7 +2685,7 @@ function renderAccountExportJobs(){
       const bar=node("progress");bar.setAttribute("aria-label",tr("Export in progress"));card.append(bar);
     }
     const facts=node("div","account-export-metrics");
-    const metric=(label,value)=>{if(Number.isFinite(value)){const item=node("span");item.append(label+": ",node("b","",value.toLocaleString()));facts.append(item);}};
+    const metric=(label,value)=>{if(Number.isFinite(value)){const item=node("span");item.append(label+": ",node("b","",value.toLocaleString(LANG)));facts.append(item);}};
     metric(tr("chats discovered"),counts.chats_discovered);
     metric(tr("chats selected"),counts.chats_selected);
     metric(tr("chats finished"),counts.chats_done);
@@ -3334,7 +3334,7 @@ async function refreshReportPreview(){
     $("report-preview-frame").dataset.reportDesign=body.design;
     $("report-preview-frame").srcdoc=result.html;show("report-preview-frame",true);show("report-preview-empty",false);
     reportPreviewState('ready');
-    $("report-design-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
+    $("report-design-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString(LANG)});
   }catch(error){
     if(!current()||error instanceof StaleView||error.name==='AbortError')return;
     reportPreviewState('error');$("report-design-preview-status").textContent=tr("Preview failed. Update to retry.")+" "+error.message;
@@ -3417,7 +3417,7 @@ function timestampsFacts(e,h){
   if(!e.settings.enabled)return [];
   const c=h.counts,l=e.last,facts=[];
   if(l?.checkpoint)facts.push(tr("Latest checkpoint ({n} records): verified timestamps {verified} · OpenTimestamps proofs awaiting confirmation {pending} · answers rejected by the checks {rejected} · no answer {unreachable}",
-    {n:l.checkpoint.event_count.toLocaleString(),verified:c.verified+c.covered_verified,
+    {n:l.checkpoint.event_count.toLocaleString(LANG),verified:c.verified+c.covered_verified,
      pending:c.ots_pending+c.ots_bitcoin_unverified+c.covered-c.covered_verified,rejected:c.rejected,unreachable:c.unreachable}));
   const tsa=(l?.results||[]).filter(r=>r.ok&&r.kind==="rfc3161").map(r=>hostOf(r.service)+(r.time?" ("+fmtFull(r.time)+")":""));
   if(tsa.length)facts.push(tr("Timestamped by {list}. ",{list:tsa.join(", ")}).trim());
@@ -3519,9 +3519,9 @@ function replicaFacts(r,h){
   const s=r.settings,l=r.last;if(!s.enabled)return [];
   return [tr("Copies to {bucket}/{location}. ",{bucket:s.bucket,location:r.location}).trim(),
     l&&tr("Last pass {time}: {n} object(s), {size}; journal copied up to record {seq}.",{time:fmtFull(l.at),n:l.objects,
-      size:humanSize(l.bytes),seq:(l.journal_seq||0).toLocaleString()}),
+      size:humanSize(l.bytes),seq:(l.journal_seq||0).toLocaleString(LANG)}),
     tr("Last successful copy: {time}",{time:when(h.last_success_at)}),
-    h.lag_records!=null&&tr("Journal records not yet copied: {lag} of {head}.",{lag:h.lag_records.toLocaleString(),head:(h.head_seq||0).toLocaleString()}),
+    h.lag_records!=null&&tr("Journal records not yet copied: {lag} of {head}.",{lag:h.lag_records.toLocaleString(LANG),head:(h.head_seq||0).toLocaleString(LANG)}),
     h.next_attempt_at&&tr("Next attempt: {time}",{time:fmtFull(h.next_attempt_at)}),
     l?.object_lock&&lockText(l.object_lock)];
 }
@@ -3760,7 +3760,7 @@ const parameterItems=()=>(state.parameters?.groups||[]).flatMap(g=>g.items);
 function parameterLabel(key){const item=parameterItems().find(i=>i.key===key);return item?tr(item.label):key.replaceAll("_"," ");}
 function parameterValue(value){
   if(Array.isArray(value))return trn("{n} line","{n} lines",value.length);
-  return typeof value==="boolean"?tr(value?"On":"Off"):Number(value).toLocaleString();
+  return typeof value==="boolean"?tr(value?"On":"Off"):Number(value).toLocaleString(LANG);
 }
 let parametersView=null;
 const parametersReady=import("./views/parameters.js?v=3").then(({createParameters})=>{
@@ -5292,7 +5292,7 @@ function renderChat(){
       sub.append(chip);
     });
   }
-  sub.title=[kind,tr("{n} saved",{n:saved.toLocaleString()}),
+  sub.title=[kind,tr("{n} saved",{n:saved.toLocaleString(LANG)}),
     split?(info.deleted_saved?tr("{n} deleted, text kept",{n:info.deleted_saved}):""):(info.deleted?tr("{n} deleted",{n:info.deleted}):""),
     split&&info.deleted_unsaved?tr("{n} deleted before saving",{n:info.deleted_unsaved}):"",
     info.missing?tr("{n} not found on recheck",{n:info.missing}):"",info.edited?tr("{n} edited",{n:info.edited}):""].filter(Boolean).join(" · ");
@@ -5376,7 +5376,7 @@ function renderChatStatus(){
   }
   if(chatPick&&state.chatView==='messages'){
     const bar=node('div','chat-pick-bar');bar.setAttribute('role','group');bar.setAttribute('aria-label',tr('Selected messages'));
-    const count=node('strong','',tr('{n} selected',{n:chatPick.size.toLocaleString()}));count.setAttribute('role','status');
+    const count=node('strong','',tr('{n} selected',{n:chatPick.size.toLocaleString(LANG)}));count.setAttribute('role','status');
     const all=node('button','text-link',tr('Select shown'));all.type='button';all.disabled=!chatShown.some(id=>!chatPick.has(id));
     all.dataset.pick='all';
     all.addEventListener('click',()=>{let full=false;for(const id of chatShown){if(chatPick.has(id))continue;if(chatPick.size>=CHAT_PICK_LIMIT){full=true;break;}chatPick.add(id);}
@@ -5785,7 +5785,7 @@ function renderPick(focus){
   renderChatStatus();renderChatFeed();
   if(focus)(document.querySelector(focus)||document.querySelector('.chat-pick-toggle'))?.focus({preventScroll:true});
 }
-function pickLimit(){toast(tr('Select no more than {n} messages.',{n:CHAT_PICK_LIMIT.toLocaleString()}),true);}
+function pickLimit(){toast(tr('Select no more than {n} messages.',{n:CHAT_PICK_LIMIT.toLocaleString(LANG)}),true);}
 function togglePick(id,range=false){
   if(!chatPick)return;
   const from=chatShown.indexOf(chatPickAnchor),to=chatShown.indexOf(id);
@@ -5965,7 +5965,7 @@ function profileNode(standalone=false){
     add(tr("Description"),data.bot?.description||data.about);
     if(data.bot)add(tr("About"),data.about);
     add(tr("Username"),data.username?"@"+data.username:"");
-    add(tr("Members"),typeof data.participants==="number"?data.participants.toLocaleString():"");
+    add(tr("Members"),typeof data.participants==="number"?data.participants.toLocaleString(LANG):"");
     add(tr("Invite link"),data.invite_link);
     add(tr("Linked chat"),data.linked_chat_id);
     if(facts.childNodes.length)box.append(facts);
@@ -6122,7 +6122,7 @@ function renderMulti(){
   if(!mine||(!running&&state.multiHidden===x.id)){show("export-box",false);return;}
   box.replaceChildren();show("export-box",true);
   const head=node("div","export-head");
-  const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(),total:(x.total||0).toLocaleString(),percent};
+  const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
   head.append(node("b","",running?tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts)+
     (x.eta_seconds?" · "+tr("{time} left",{time:fmtDuration(x.eta_seconds)}):""):x.phase==="done"?tr(x.ready?"Export ready: {captured} messages, signed.":"Export saved: {captured} messages, signed.",counts):
     x.phase==="failed"?tr("Export failed: {error}",{error:x.error||tr("unknown error")}):x.phase==="paused"?tr("Export paused; saved chunks are retained."):tr("Export cancelled.")));
@@ -6141,7 +6141,7 @@ function renderMulti(){
     const p=x.performance,s=p.phase_seconds,seconds=value=>tr("{n} s",{
       n:value.toLocaleString(undefined,{maximumFractionDigits:1})});
     box.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
-      messages:p.new_messages.toLocaleString(),time:seconds(p.elapsed_seconds)})+
+      messages:p.new_messages.toLocaleString(LANG),time:seconds(p.elapsed_seconds)})+
       (p.messages_per_second!==null?" "+tr("Acquisition: {rate} messages/s (including waits).",{
         rate:p.messages_per_second.toLocaleString(undefined,{maximumFractionDigits:1})}):"")));
     box.append(node("p","hint",tr("Preparation: {preparing}. Acquisition: {running}. Selection and attachments: {selecting}. Packaging and verification: {packaging}.",{
@@ -6174,7 +6174,7 @@ async function pollMulti(id,attempt=0){
     if(!current())return;
     state.multi=x;renderMulti();
     if(multiActive(x))multiPoll=setTimeout(()=>{if(current())pollMulti(id);},1500);
-    else if(before==="running"&&x.phase==="done")toast(tr("Chat export finished: {n} messages. Save the signed archive.",{n:x.captured.toLocaleString()}));
+    else if(before==="running"&&x.phase==="done")toast(tr("Chat export finished: {n} messages. Save the signed archive.",{n:x.captured.toLocaleString(LANG)}));
     else if(before==="running"&&x.phase==="failed")toast(tr("Chat export failed: {error}",{error:x.error||tr("unknown error")}),true);
   }catch(e){
     if(!current()||e instanceof StaleView)return;
@@ -6231,11 +6231,11 @@ function renderLinkPlan(){
   const head=node("div","link-export-facts");head.append(node("b","",p.title||tr("Chat")));box.append(head);
   if(!p.readable){box.append(node("p","notice warning",tr(p.reason)));return;}
   const facts=[{channel:tr("Channel"),supergroup:tr("Group"),group:tr("Group")}[p.kind]||p.kind,
-    tr("last message number {n}",{n:p.last_id.toLocaleString()})];
-  if(p.visible!==null)facts.push(tr("{n} visible messages",{n:p.visible.toLocaleString()}));
-  if(p.participants_count)facts.push(tr("{n} members",{n:p.participants_count.toLocaleString()}));
+    tr("last message number {n}",{n:p.last_id.toLocaleString(LANG)})];
+  if(p.visible!==null)facts.push(tr("{n} visible messages",{n:p.visible.toLocaleString(LANG)}));
+  if(p.participants_count)facts.push(tr("{n} members",{n:p.participants_count.toLocaleString(LANG)}));
   head.append(node("span","hint",facts.join(" · ")));
-  if(p.missing)box.append(node("p","hint",tr("Difference between last message number and visible count: {n}. This is a planning estimate.",{n:p.missing.toLocaleString()})));
+  if(p.missing)box.append(node("p","hint",tr("Difference between last message number and visible count: {n}. This is a planning estimate.",{n:p.missing.toLocaleString(LANG)})));
   if(p.history_visible===false)box.append(node("p","hint",tr("New members do not see earlier history in this group.")));
   const label=node("label","",tr("History acquisition")+" "),select=node("select");select.id="link-export-transport";
   select.append(new Option(tr("Regular session"),"regular"));
@@ -6274,7 +6274,7 @@ async function startLinkExport(){
 function renderLinkJob(){
   const x=linkJob,box=$("link-export-plan");box.replaceChildren();show("link-export-plan",true);
   const running=multiActive(x),percent=x.ranges_total?Math.min(running?99:100,Math.floor(x.ranges_done*100/x.ranges_total)):null;
-  const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(),total:(x.total||0).toLocaleString(),percent};
+  const counts={title:x.title||tr("chat"),captured:(x.phase==="done"?x.counts?.selected??x.captured:x.captured).toLocaleString(LANG),total:(x.total||0).toLocaleString(LANG),percent};
   box.append(node("b","",running?tr("Exporting {title}: ",counts)+tr(x.total?"{captured} of {total} messages ({percent}%)":"{captured} messages",counts):
     x.phase==="done"?tr(x.ready?"Export ready: {captured} messages, signed.":"Export saved: {captured} messages, signed.",counts):
     x.phase==="failed"?tr("Export failed: {error}",{error:x.error||tr("unknown error")}):x.phase==="paused"?tr("Export paused; saved chunks are retained."):tr("Export cancelled.")));
@@ -6282,7 +6282,7 @@ function renderLinkJob(){
   box.append(node("p","hint",tr("Read {done} of {total} planned ranges.",{done:x.ranges_done||0,total:x.ranges_total||0})+" "+tr(x.phase)));
   if(x.phase==="paused"&&x.error)box.append(node("p","hint",tr(x.error)));
   if(x.performance)box.append(node("p","hint",tr("Current run: {messages} new messages · {time} elapsed.",{
-    messages:x.performance.new_messages.toLocaleString(),time:tr("{n} s",{n:Math.round(x.performance.elapsed_seconds).toLocaleString()})})));
+    messages:x.performance.new_messages.toLocaleString(LANG),time:tr("{n} s",{n:Math.round(x.performance.elapsed_seconds).toLocaleString(LANG)})})));
   const actions=node("div","route-actions"),action=(cls,label,work)=>{
     const b=node("button",cls,label);b.type="button";b.addEventListener("click",()=>busy(b,work));actions.append(b);};
   if(running)action("quiet",tr("Pause"),async()=>{await json("multi-export/"+encodeURIComponent(x.id)+"/pause",{},{root:true});await pollLinkJob(x.id);});
