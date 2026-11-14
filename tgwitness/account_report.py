@@ -7,7 +7,7 @@ from datetime import datetime
 
 from . import activity_maps, case_assessment, i18n, report_layouts, snapshot_analytics
 from .report_analytics import Presentation
-from .report import DOSSIER_CSS, Words
+from .report import DOSSIER_CSS, Words, file_purpose, utc_text
 from .store import canonical
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
@@ -29,7 +29,32 @@ VALUES = {'keep': 'Keep matching text', 'omit': 'Omit message text',
           'regular': 'Regular Telegram API', 'takeout': 'Telegram Takeout'}
 VALUES.update(download='Download files', hashes_only='Save server hashes only', exclude='Exclude file bytes',
               collapsed='One marker for each run', each='One marker for each message')
-REASONS = ('Stopped before acquisition completed.',)
+REASONS = {'Stopped before acquisition completed.': 'Stopped before acquisition completed.',
+           'media_type_not_selected': 'This type of file was not selected for the export.',
+           'media_policy': 'File contents were left out by the export settings.',
+           'duration_limit': 'Longer than the duration limit set for the export.',
+           'per_file_limit': 'Larger than the size limit set for one file.',
+           'total_budget': 'The size limit set for the whole export was reached.',
+           'packaging_reserve': 'Not enough free disk space was left to save this file.',
+           'hashes_only': 'File hashes saved; file bytes were not downloaded.',
+           'hashes_unavailable': 'Telegram did not return hashes for this file.',
+           'no_additional_data': 'Telegram returned no data for this file.'}
+ARCHIVE_FILES = {'export_results.html': 'Your chats, laid out the way Telegram shows them',
+                 'index.html': 'The report: what was collected, how complete it is and how to check it',
+                 'map.html': 'Activity map: when messages were written and which message numbers are missing',
+                 'result.json': 'All chats in one file, in the Telegram Desktop JSON format',
+                 'inventory.json': 'Chats and tasks fixed when the export started, signed',
+                 'job.json': 'Export settings fixed when the export started',
+                 'message-gaps.json': 'Message numbers missing from each chat',
+                 'analytics.json': 'The figures behind the charts in the report',
+                 'chats/': 'Chat pages for reading and for citing a record',
+                 'data/': 'Authoritative records, one signed page per file',
+                 'receipts/': 'A signed receipt for each page of records',
+                 'hashes/': 'Hashes Telegram reported for files that were not downloaded',
+                 'media/': 'Saved file, named by its SHA-256'}
+ARCHIVE_START = ('export_results.html', 'index.html', 'map.html')
+STATE_NOTES = {'missing': 'This chat was not exported. None of its messages are in this archive.',
+               'partial': 'This chat was exported in part. Messages that acquisition did not reach are not in this archive.'}
 CONTEXT_LABELS = {'archive_reference': 'Archive reference', 'created_at': 'Copy created',
                   'requested_at': 'Collection requested', 'captured_from': 'First recorded capture',
                   'captured_until': 'Last recorded capture'}
@@ -313,8 +338,7 @@ def chats_section(chats, say):
         if type(chat.get('id')) is not int:
             continue
         yield encoded('<li><a class="user" dir="auto" href="chats/' + str(chat['id']) + '.html">' +
-                      e(text(chat.get('title')) or str(chat['id'])) + '</a><span>' + e(say('Messages')) + ': ' +
-                      e(chat.get('message_count', '—')) + '</span></li>')
+                      e(text(chat.get('title')) or str(chat['id'])) + '</a><span>' + e(chat_note(chat, say)) + '</span></li>')
     yield encoded('</ul></section>')
 
 
@@ -494,6 +518,8 @@ def account_chat(context, chat, rows):
     yield from opening(context, text(chat.get('title')) or str(chat.get('id', '')))
     yield encoded('<p><a href="../index.html">← ' + e(say('Account export')) + '</a></p><p>' +
                   e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.')) + '</p>')
+    if state_note(chat, say):
+        yield encoded('<p class="notice">' + e(state_note(chat, say)) + '</p>')
     yield encoded(copy_context(context, say))
     yield encoded(snapshot_analytics.html_section(context.get('analytics'), context.get('presentation', {}), say))
     if (context.get('pagination') or {}).get('page', 1) == 1 and context.get('chat_map'):
@@ -548,7 +574,57 @@ def sharing_report(context, rows):
 
 
 def reason_text(value, say):
-    return say(value) if value in REASONS else text(value)
+    return say(REASONS[value]) if value in REASONS else text(value)
+
+
+def chat_note(chat, say):
+    state = chat.get('export_state')
+    if state == 'missing':
+        return say('Not exported')
+    shown = say('Messages') + ': ' + str(chat.get('message_count', '—'))
+    return shown + ' · ' + say('Exported in part') if state == 'partial' else shown
+
+
+def state_note(chat, say):
+    note = STATE_NOTES.get(chat.get('export_state'))
+    return say(note) if note else ''
+
+
+def readme(context, files):
+    say = Words(context.get('report_language', 'en'))
+    counts, complete, rule = context.get('counts') or {}, context.get('complete_within_scope') is True, '-' * 64
+    lines = ['TgWitness · ' + say('Account export'), '=' * 64,
+             say('Archive reference') + ': ' + text(context.get('archive_reference')),
+             say('Collection requested') + ': ' + utc_text(context.get('requested_at')),
+             say('Signing key fingerprint') + ': ' + text(context.get('fingerprint')),
+             say('Completed within selected scope') if complete else say('Partial acquisition')]
+    if not complete and type(counts.get('chats_selected')) is int:
+        lines.append(say('Chats exported in full: {done} of {total}. The report lists what is missing.',
+                         done=counts.get('chats_done', 0), total=counts['chats_selected']))
+    lines += ['', say('Start here'), rule,
+              say('Extract the complete archive, then open a page in any browser. The pages work offline.')]
+    lines += ['  ' + name + ' — ' + say(ARCHIVE_FILES[name]) for name in ARCHIVE_START if name in files]
+    lines += [say('Keep the original ZIP unchanged. Save selections and working notes outside the extracted folder.'),
+              '', say('How to verify'), rule, say('To check the archive, follow START_HERE.txt.'),
+              say("Get the signer's key fingerprint from a trusted channel, not from this archive."),
+              say('Use a verifier from a trusted checkout. The bundled copy is provided for convenience.'),
+              '  python verify.py ORIGINAL.zip --fingerprint TRUSTED_SHA256',
+              '', say('What is in this archive'), rule]
+    folders = [name for name in ARCHIVE_FILES if name.endswith('/')]
+    shown = sorted(name for name in files if '/' not in name)
+    width = max(len(name) for name in shown + folders) + 3
+    for name in shown:
+        purpose = say(ARCHIVE_FILES[name]) if name in ARCHIVE_FILES else file_purpose(say, name)
+        lines.append(('  ' + name.ljust(width) + purpose).rstrip())
+    for prefix in folders:
+        count = sum(1 for name in files if name.startswith(prefix))
+        if count:
+            lines.append('  ' + prefix.ljust(width) + say(ARCHIVE_FILES[prefix]) + ' (' + str(count) + ')')
+    lines += ['', say('Reading this record'), rule] + ['- ' + say(item) for item in context.get('limitations', ())]
+    result = '\n'.join(lines) + '\n'
+    if say.language != 'en':
+        result += '\n' + '=' * 64 + '\nEnglish\n' + '=' * 64 + '\n' + readme({**context, 'report_language': 'en'}, files).decode('utf-8')
+    return result.encode('utf-8')
 
 
 def text_keys():
@@ -560,4 +636,6 @@ def text_keys():
             and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
     return list(dict.fromkeys(keys + case_assessment.text_keys() + activity_maps.text_keys() + list(COUNT_LABELS.values()) + list(SCOPE_LABELS.values()) +
                               list(VALUES.values()) + list(CONTEXT_LABELS.values()) + list(WITHHELD_RULE_LABELS.values())
-                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps', *REASONS]))
+                              + list(REPLY_STATE_LABELS.values()) + ['Tasks completed', 'Tasks planned', 'Failures and gaps',
+                                                                     *REASONS.values(), *STATE_NOTES.values(),
+                                                                     *ARCHIVE_FILES.values()]))

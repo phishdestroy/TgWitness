@@ -628,6 +628,15 @@ class AccountExport:
         self.counts["messages_seen"] += receipt.get("seen_count", 0) if receipt["category"] == "messages" else 0
         self.failures += receipt["outcome"] == "failed"
 
+    def chat_states(self, counts):
+        complete = {}
+        for task in self.inventory["tasks"]:
+            page = self.progress.get(task["id"])
+            complete[task["chat_id"]] = complete.get(task["chat_id"], True) and bool(
+                page and page["terminal"] and page["outcome"] == "ok")
+        return {chat: "complete" if done else "partial" if counts.get(chat) else "missing"
+                for chat, done in complete.items()}
+
     def update_counts(self):
         if not self.inventory:
             return
@@ -1045,6 +1054,7 @@ class AccountExport:
                     if hashes[name] != name.removeprefix("media/"):
                         raise ValueError("An attachment changed while packaging.")
                 selected = [c for c in self.inventory["chats"] if c["selected"]]
+                states = self.chat_states(chat_counts)
                 gap_scan, activity = MessageGaps(gap_scope(job["options"], self.inventory)), activity_maps.ActivityMap()
                 for chat in selected:
                     for data_file in message_pages.get(chat["id"], ()):
@@ -1074,7 +1084,8 @@ class AccountExport:
                     for row in message_rows():
                         analytics.snapshot(row, chat)
                         chat_analytics.snapshot(row, chat)
-                    display_chat = {**chat, "message_count": chat_counts.get(chat["id"], 0)}
+                    display_chat = {**chat, "message_count": chat_counts.get(chat["id"], 0),
+                                    "export_state": states.get(chat["id"], "missing")}
                     context = {**report_context, "analytics": account_report.snapshot_analytics.project(chat_analytics.result(), report_context["presentation"]),
                                "chat_map": account_report.chat_map(report_context, activity, gap_map, display_chat),
                                "gap_markers": activity_maps.MarkerPlacer(activity_maps.markers(gap_map, chat["id"], chat.get("kind")))}
@@ -1085,10 +1096,11 @@ class AccountExport:
                 write("map.html", account_report.account_map_page(report_context, activity, gap_map, selected))
                 report_context["activity_map"] = "map.html"
                 write("index.html", account_report.account_index(report_context,
-                    ({**chat, "message_count": chat_counts.get(chat["id"], 0)} for chat in selected)))
+                    ({**chat, "message_count": chat_counts.get(chat["id"], 0),
+                      "export_state": states.get(chat["id"], "missing")} for chat in selected)))
                 if job["options"].get("export_format", "tgwitness") != "tgwitness":
                     from .telegram_export import DesktopExport
-                    desktop = DesktopExport(directory, self.inventory, self.receipts, job, self.current["coverage"])
+                    desktop = DesktopExport(directory, self.inventory, self.receipts, job, self.current["coverage"], states)
                     try:
                         if job["options"]["export_format"] in ("telegram_json", "telegram_both"):
                             write("result.json", desktop.json())
@@ -1098,12 +1110,9 @@ class AccountExport:
                     finally:
                         desktop.close()
                 verification_kit.write(write, report_context["report_language"])
-                write("README.txt", [verification_kit.quickstart(report_context["report_language"]), b"\n",
-                    ("TgWitness account export\n\n" + "\n".join(LIMITATIONS)
-                    + "\n\nVerify using verify.py from a trusted checkout, with --fingerprint TRUSTED_SHA256.\n"
-                    + "data/*.jsonl are authoritative; receipts bind each page to frozen options and inventory.\n"
-                    + "HTML is a readable derivative. Media names are content hashes.\n").encode()])
                 write("verify.py", chunks(Path(__file__).with_name("verify.py")))
+                write("README.txt", [account_report.readme(report_context, {
+                    *hashes, "README.txt", "SHA256SUMS", "manifest.json", "manifest.sig"})])
                 write("SHA256SUMS", ["".join(f"{digest}  {name}\n" for name, digest in sorted(hashes.items())).encode()])
                 loss = None if self.complete() else self.store.account_loss_statement(job["created_at"])
                 manifest = {"format": "tgwitness-account-export-v1", "public_key": self.vault.public_key,

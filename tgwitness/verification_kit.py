@@ -70,8 +70,9 @@ def quickstart(lang="en"):
                 + "\n\nVERIFY.cmd\n\n" + quickstart("en").decode("utf-8")).encode("utf-8")
     reader = VERIFIER_LANGUAGES[lang]["reader"]
     paragraphs = [VERIFIER_LANGUAGES[lang]["words"]["TgWitness verifier"]]
-    paragraphs += [reader[key] for key in ("launch", "keep_zip", "runtime", "standalone", "trust", "key_advice",
-                                         "key", "output", "unsigned", "limits_exit", "limits", "instructions", "advanced")]
+    paragraphs += [reader[key] for key in ("launch", "keep_zip", "key_advice", "runtime", "standalone", "trust")]
+    paragraphs += [reader["output"] + " " + reader["unsigned"]]
+    paragraphs += [reader[key] for key in ("limits_exit", "limits", "advanced")]
     paragraphs += ["https://github.com/phishdestroy/TgWitness/releases"]
     return ("\n\n".join(paragraphs) + "\n").encode("utf-8")
 

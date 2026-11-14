@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from .account_report import reason_text
+from .account_report import chat_note, reason_text, state_note
 from .report import Words
 from .telegram_export import MEDIA_PATH, dates, entity_spans, message, name
 
@@ -94,6 +94,10 @@ class View:
                 + ('<a href="' + prefix + 'result.json" download>JSON</a>' if self.export.job['options'].get('export_format') == 'telegram_both' else '')
                 + '<a href="' + prefix + 'index.html#verification">' + e(say('Verification')) + '</a></nav></header><main>').encode()
 
+    def state(self, chat):
+        states = self.export.states
+        return states.get(chat['id'], 'missing') if states else 'complete'
+
     def index(self, selected):
         say = self.say
         yield self.head(say('Account export'))
@@ -105,9 +109,12 @@ class View:
         for number, chat in enumerate(selected, 1):
             title = chat.get('title') or str(chat['id'])
             count = self.export.index.execute('SELECT COUNT(*) FROM messages WHERE chat=?', (chat['id'],)).fetchone()[0]
+            state = self.state(chat)
             yield ('<li><a class="chat-row" href="chats/chat_' + f'{number:03d}' + '/messages.html">'
-                   + avatar(title) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count">'
-                   + e(say('Messages')) + ': ' + str(count) + '</span><span aria-hidden="true">›</span></a></li>').encode()
+                   + avatar(title) + '<span class="chat-name" dir="auto">' + e(title) + '</span><span class="chat-count'
+                   + ('' if state == 'complete' else ' gap') + '">'
+                   + e(chat_note({'message_count': count, 'export_state': state}, say))
+                   + '</span><span aria-hidden="true">›</span></a></li>').encode()
         yield ('</ul>' + ('<p class="empty">' + e(say('No messages')) + '</p>' if not selected else '')
                + '<footer>TgWitness · ' + e(say('A snapshot of history visible to this Telegram account during acquisition.'))
                + '</footer></main></body></html>').encode()
@@ -151,8 +158,8 @@ class View:
     def attachments(self, row, value):
         say = self.say
         parts = []
-        labels = {'photo': 'Photo', 'video': 'Videos', 'video_message': 'Video messages', 'audio': 'Audio',
-                  'voice': 'Voice messages', 'document': 'Documents', 'sticker': 'Stickers', 'animation': 'Animations'}
+        labels = {'photo': 'Photo', 'video': 'Video', 'video_message': 'Video message', 'audio': 'Audio',
+                  'voice': 'Voice message', 'document': 'File', 'sticker': 'Sticker', 'animation': 'GIF'}
         for attachment in row.get('attachments') or []:
             kind, path = attachment.get('kind'), attachment.get('file')
             label = say(labels.get(kind, 'Attachment'))
@@ -214,9 +221,12 @@ class View:
 
     def page(self, chat, batch, page, pages):
         title = chat.get('title') or str(chat['id'])
+        note = state_note({'export_state': self.state(chat)}, self.say)
         yield self.head(title, '../../')
         yield ('<header class="chat-heading">' + avatar(title) + '<div><h1 dir="auto">' + e(title)
-               + '</h1><p class="muted">Telegram · UTC</p></div></header>' + self.pager(page, pages) + '<section class="conversation" aria-label="' + e(self.say('Messages')) + '">').encode()
+               + '</h1><p class="muted">Telegram · UTC</p></div></header>' + self.pager(page, pages)
+               + ('<p class="chat-note">' + e(note) + '</p>' if note else '')
+               + '<section class="conversation" aria-label="' + e(self.say('Messages')) + '">').encode()
         day = None
         for row in batch:
             current = dates(row.get('date')).get('date', '')[:10]
@@ -224,7 +234,7 @@ class View:
                 yield ('<div class="date-divider"><span>' + e(current or self.say('Not recorded')) + '</span></div>').encode()
                 day = current
             yield self.card(row, chat).encode()
-        if not batch:
+        if not batch and not note:
             yield ('<p class="empty">' + e(self.say('No message records are included in this view. Check the scope and omissions before drawing conclusions.')) + '</p>').encode()
         yield ('</section>' + self.pager(page, pages) + '<footer>TgWitness · <a href="../../chats/' + str(chat['id'])
                + '.html">' + e(self.say('Report')) + '</a> · <a href="../../index.html#coverage">' + e(self.say('Coverage')) + '</a></footer></main></body></html>').encode()
