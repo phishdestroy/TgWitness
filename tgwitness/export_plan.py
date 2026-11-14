@@ -164,9 +164,11 @@ async def plan(registry, exports, link, allowed):
         rows.append({"profile_id": profile_id, "label": entry.get("label", profile_id), "usable": reason is None,
                      "reason": reason, "until": until, "member": chat_id in app.state.collector.dialog_cache if app else None,
                      "username": (account or {}).get("username"), "account_id": (account or {}).get("id"),
-                     "connected": bool((check or {}).get("telegram_connected"))})
+                     "connected": bool((check or {}).get("telegram_connected")),
+                     "observing": bool(app and app.state.collector.running)})
     usable = sorted((row for row in rows if row["usable"]),
-                    key=lambda row: (row["profile_id"] != reader, not row["member"], not row["connected"], row["label"]))
+                    key=lambda row: (row["observing"], row["profile_id"] != reader, not row["member"], not row["connected"],
+                                     row["label"]))
     measured = measured_rates(exports, allowed)
     rates = {**DEFAULT_RATES, **measured}
     takeout = facts["kind"] in ("channel", "supergroup") and bool(facts.get("username"))
