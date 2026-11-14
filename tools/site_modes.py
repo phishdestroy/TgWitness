@@ -12,7 +12,7 @@ except ImportError:
 EXTRA_LANGUAGES = {
     "am": ("አማርኛ", "am", "ltr", "am_ET"),
 }
-LANGUAGES = {**SITE_LANGUAGES, **EXTRA_LANGUAGES}
+LANGUAGES = dict(sorted({**SITE_LANGUAGES, **EXTRA_LANGUAGES}.items(), key=lambda item: item[0] == "ru"))
 
 SOURCE = "website/guides/modes.html"
 LOCAL = "guides/modes.html"

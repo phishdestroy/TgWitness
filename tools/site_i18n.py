@@ -8,7 +8,6 @@ from pathlib import Path
 
 LANGUAGES = {
     "en": ("English", "en", "ltr", "en_US"),
-    "ru": ("Русский", "ru", "ltr", "ru_RU"),
     "uk": ("Українська", "uk", "ltr", "uk_UA"),
     "es": ("Español", "es", "ltr", "es_ES"),
     "pt": ("Português (Brasil)", "pt-BR", "ltr", "pt_BR"),
@@ -32,6 +31,7 @@ LANGUAGES = {
     "th": ("ไทย", "th", "ltr", "th_TH"),
     "he": ("עברית", "he", "rtl", "he_IL"),
     "bn": ("বাংলা", "bn", "ltr", "bn_BD"),
+    "ru": ("Русский", "ru", "ltr", "ru_RU"),
 }
 
 

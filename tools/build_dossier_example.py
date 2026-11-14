@@ -132,7 +132,7 @@ def build(output, languages=('en', 'de', 'ru'), templates=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'test-results/report-dossier')
-    parser.add_argument('--language', action='append', choices=tuple(TITLES))
+    parser.add_argument('--language', action='append', choices=tuple(sorted(TITLES, key=lambda code: code == 'ru')))
     parser.add_argument('--templates', action='store_true', help='Build all four report presets with synthetic activity')
     args = parser.parse_args()
     print(json.dumps(build(args.output,languages=args.language or ('en','de','ru'),templates=args.templates), indent=2))

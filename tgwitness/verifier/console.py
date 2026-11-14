@@ -39,10 +39,11 @@ def verifier_language(value):
         return known[value]
     if value.startswith("zh-") and any(part in ("hant", "tw", "hk", "mo") for part in value.split("-")[1:]):
         return "zh-Hant"
-    windows = dict(zip(("english", "russian", "ukrainian", "spanish", "portuguese", "turkish", "arabic", "persian",
-                        "urdu", "hindi", "indonesian", "vietnamese", "chinese", "french", "german", "italian",
-                        "uzbek", "korean", "chinese (traditional)", "malay", "polish", "japanese", "thai", "hebrew", "bengali"),
-                       VERIFIER_LANGUAGES))
+    windows = {"english": "en", "russian": "ru", "ukrainian": "uk", "spanish": "es",
+               "portuguese": "pt", "turkish": "tr", "arabic": "ar", "persian": "fa", "urdu": "ur",
+               "hindi": "hi", "indonesian": "id", "vietnamese": "vi", "chinese": "zh", "french": "fr",
+               "german": "de", "italian": "it", "uzbek": "uz", "korean": "ko", "chinese (traditional)": "zh-Hant",
+               "malay": "ms", "polish": "pl", "japanese": "ja", "thai": "th", "hebrew": "he", "bengali": "bn"}
     base = value.split("-")[0]
     return known.get(base) or windows.get(base)
 
@@ -63,7 +64,7 @@ def console_language(choice=None):
 def choose_verifier_language(default):
     from .languages import VERIFIER_LANGUAGES
     codes = tuple(VERIFIER_LANGUAGES)
-    print("\n" + " / ".join(VERIFIER_LANGUAGES[c]["words"]["Language"] for c in ("en", "ru", "zh", "ar")))
+    print("\n" + " / ".join(VERIFIER_LANGUAGES[c]["words"]["Language"] for c in ("en", "zh", "ar", "ru")))
     for index, code in enumerate(codes, 1):
         print(str(index).rjust(2) + ". " + VERIFIER_LANGUAGES[code]["name"] + " [" + code + "]")
     while True:
