@@ -10,7 +10,7 @@ from telethon.extensions import BinaryReader
 from .people import profile_from_entity
 from .profile_capture import ProfileCapture
 from .store import canonical, utcnow
-from .telegram_client import FLOOD_ERRORS
+from .telegram_client import FLOOD_ERRORS, in_lane
 
 
 STAGES = ("profile", "avatars", "gifts", "links", "done")
@@ -170,7 +170,7 @@ class Profiling(ProfileCapture):
 
     def launch(self):
         if not self.busy:
-            self.task = asyncio.create_task(self.work())
+            self.task = asyncio.create_task(in_lane("bulk", self.work))
 
     def restore(self):
         run = self.current()
@@ -231,12 +231,12 @@ class Profiling(ProfileCapture):
 
     async def ask(self, run, call, timeout=30):
         self.require_account(run)
-        until = self.store.get_setting("rpc_backoff_until", 0)
+        until = max(self.store.get_setting("rpc_backoff_until", 0), getattr(self, "flood_until", 0))
         while until > time.time():
             self.change_run(run, reason="telegram_wait", wait_until=until)
             await asyncio.sleep(min(5, until - time.time()))
             self.require_account(run)
-            until = self.store.get_setting("rpc_backoff_until", 0)
+            until = max(self.store.get_setting("rpc_backoff_until", 0), getattr(self, "flood_until", 0))
         delay = max(0, self.next_rpc - time.monotonic())
         if delay:
             await asyncio.sleep(delay)
@@ -357,7 +357,7 @@ class Profiling(ProfileCapture):
                         await asyncio.sleep(min(5, max(.1, pending - time.time())))
                 except FLOOD_ERRORS as exc:
                     until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-                    self.store.set_setting("rpc_backoff_until", until)
+                    self.flood_until = until
                     self.change_run(run, reason="telegram_wait", wait_until=until)
                 await asyncio.sleep(0)
         except CollectionPaused as exc:

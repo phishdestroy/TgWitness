@@ -50,8 +50,9 @@ its upper ID on its first successful read. SDK methods may make additional RPCs,
 all subject to account request spacing and persisted waits. Up to three history
 requests can be in flight. Different chats have separate cursors; the scheduler
 rotates between them after pages, so a large or stalled chat does not block every
-other source. File requests have a separate three-request limit. Neither lane
-holds the ordinary RPC lock while waiting for network replies.
+other source. File requests have a separate three-request limit. Other history
+requests use the account's bulk lane, so neither they nor history pages hold
+requests of observation or of the operator.
 
 Folder and whole-account scopes enumerate all accessible dialogs, including archived
 ones, before signing the source plan. The selected-chat picker retains its configured
@@ -60,10 +61,12 @@ initial snapshot; they do not silently change the already signed history plan.
 
 Bulk history, dialog and admin-log requests start with one-second spacing.
 Twenty consecutive successes reduce it by 20%, with a 0.5-second floor. FloodWait
-increases spacing by 0.5, 2 or 5 seconds, up to 10 seconds, and persists an account-wide
-cooldown of the server's wait plus a one-second margin. Text and media share that
-cooldown. File chunks do not incur the artificial history delay or advance the history
-success streak. This is a local pacing policy, not a published Telegram rate entitlement.
+increases spacing by 0.5, 2 or 5 seconds, up to 10 seconds, and persists a cooldown of
+the server's wait plus a one-second margin for the history run and for the method
+Telegram limited. Observation and attachment downloads keep going meanwhile. File chunks
+do not incur the artificial history delay or advance the history success streak.
+Messages the operator loads into an open chat are read without this spacing and
+without waiting for a history slot. This is a local pacing policy, not a published Telegram rate entitlement.
 
 Transient history requests retry five times with exponential backoff; exhaustion
 pauses the run. FloodWait does not spend that retry budget. Cancellation interrupts
@@ -125,7 +128,9 @@ and retained as a separate observation. This ordering rule changes the derived
 display index; it does not rewrite either signed version.
 
 Media workers run concurrently with text acquisition. History reads and file reads
-use separate bounded request lanes; up to three requests in each lane run in parallel. Each media worker
+use separate bounded request lanes; up to three requests in each lane run in parallel. Other
+requests of one account take turns within their own lane: live updates, the operator's reads,
+background checks, and history or exports. Each media worker
 downloads up to three files at once. Files stream to temporary paths, are hashed incrementally and
 atomically moved to content-addressed storage. Completed, skipped, retrying and failed
 attachments append new events. Signed message records are never rewritten to add a
