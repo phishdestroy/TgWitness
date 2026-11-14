@@ -245,13 +245,17 @@ export function createSecretChats(context) {
     if (heldKey) box.querySelector('[data-focus-key="' + CSS.escape(heldKey) + '"]')?.focus({preventScroll: true});
   }
 
+  const endings = {"the peer discarded the chat": tr("The other side ended the chat."), "ended from TgWitness": tr("Ended from TgWitness."),
+    "the peer deleted the chat": tr("The other side deleted the chat; the journal keeps every record."),
+    "Telegram reports the chat no longer exists": tr("Telegram reports that the chat no longer exists.")};
+
   function eventText(record) {
     const p = record.payload;
     switch (record.kind) {
       case "secret_chat.requested": return p.direction === "out" ? tr("Requested by this account") : tr("Request from the other side");
       case "secret_chat.accepted": return p.automatic ? tr("Accepted automatically") : tr("Accepted here");
       case "secret_chat.ready": return tr("Established");
-      case "secret_chat.closed": return p.history_deleted_by_peer ? tr("The other side deleted the chat; the journal keeps every record.") : tr("Ended") + (p.reason ? " · " + p.reason : "");
+      case "secret_chat.closed": return p.history_deleted_by_peer ? tr("The other side deleted the chat; the journal keeps every record.") : tr("Ended") + (p.reason ? " · " + (endings[p.reason] || p.reason) : "");
       case "secret_chat.action": return actionText(p);
       case "secret_chat.decrypt_failed": return tr("A message could not be decrypted and was refused.");
       case "secret_chat.send_failed": return tr("Telegram rejected a sent message.");

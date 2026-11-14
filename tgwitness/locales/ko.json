@@ -8100,7 +8100,6 @@
   "Your server": "귀하의 서버",
   "Your way in": "시작하기",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP 암호 보호에는 WinZip AES(약한 키 스트레칭)가 사용됩니다. 민감한 데이터를 내보낼 때는 20자 이상의 긴 무작위 암호 구문을 사용하거나, 봉인된 전달 방식을 사용하십시오.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "계정 연결",
   "accounts allowed": "허용된 계정",
@@ -8948,5 +8947,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version은 Desktop API용 모바일 플랫폼을 나타냅니다.",
   "The app_version does not match the reviewed official version formats.": "app_version는 검토된 공식 버전 형식과 일치하지 않습니다.",
   "The mobile system_lang_code has no region component.": "모바일 system_lang_code에는 지역 구성 요소가 없습니다.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon의 스키마 계층은 검토된 프로필 기준(230)과 다릅니다. 라이브러리 호환성을 검토하십시오."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon의 스키마 계층은 검토된 프로필 기준(230)과 다릅니다. 라이브러리 호환성을 검토하십시오.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "이 채팅은 이제 TgWitness에 저장되어 있으며, 해당 계정의 다른 기기에는 전송되지 않습니다.",
+  "The other side ended the chat.": "상대방이 채팅을 종료했습니다.",
+  "Ended from TgWitness.": "TgWitness에서 종료됨.",
+  "Telegram reports that the chat no longer exists.": "Telegram은 해당 채팅이 더 이상 존재하지 않는다고 보고합니다.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP 비밀번호 보호는 WinZip AES(약한 키 스트레칭)를 사용합니다. 20자 이상의 긴 무작위 암호를 사용하거나, 민감한 데이터를 내보낼 때는 ‘더 강력한 암호화’를 선택하십시오.",
+  "Transport route checked for this connection.": "이 연결에 대해 전송 경로를 확인했습니다."
 }

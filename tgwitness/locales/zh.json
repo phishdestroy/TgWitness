@@ -8100,7 +8100,6 @@
   "Your server": "您的服务器",
   "Your way in": "入门指南",
   "ZIP (7-Zip / WinRAR)": "ZIP（7-Zip / WinRAR）",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "ZIP 密码保护采用 WinZip AES（弱密钥拉伸）。请使用20个字符以上的长随机密码短语，或对敏感导出文件采用密封交付方式。",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "账户连接",
   "accounts allowed": "已允许的账户",
@@ -8948,5 +8947,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version 描述了 Desktop API 的移动平台。",
   "The app_version does not match the reviewed official version formats.": "app_version 与已审核的官方版本格式不符。",
   "The mobile system_lang_code has no region component.": "移动端 system_lang_code 不包含区域组件。",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon 的模式层与已审查的配置文件基线（230）不同；请审查库兼容性。"
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "Telethon 的模式层与已审查的配置文件基线（230）不同；请审查库兼容性。",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "该聊天记录现存储于 TgWitness 中；该账户的其他设备无法获取该记录。",
+  "The other side ended the chat.": "对方结束了聊天。",
+  "Ended from TgWitness.": "来自 TgWitness 的结束记录。",
+  "Telegram reports that the chat no longer exists.": "Telegram报告称该聊天已不存在。",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "ZIP密码保护使用WinZip AES（弱密钥拉伸）。请使用20个字符以上的长随机密码短语，或针对敏感导出文件选择“更强的加密”选项。",
+  "Transport route checked for this connection.": "已验证此连接的传输路径。"
 }

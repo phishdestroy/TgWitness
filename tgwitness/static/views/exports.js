@@ -13,7 +13,7 @@ export function createExports({root, tr, json, getSession, fmtTime, toast,downlo
   encryptionHint.id='export-encryption-hint';encryption.setAttribute('aria-describedby',encryptionHint.id);
   const encryptionText=()=>{encryptionHint.textContent=tr(encryption.value==='tgwpw'
     ? 'Open with an independently obtained verify.py: python verify.py unseal-password export.tgwpw --out output-file. Then verify the decrypted evidence.'
-    : 'ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.');};
+    : 'ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.');};
   encryption.addEventListener('change',encryptionText);encryptionText();
   find('export-password-field').append(encryptionLabel,encryption,encryptionHint);
   const retryButton=make('button',tr('Retry export'),'secondary');retryButton.type='button';retryButton.hidden=true;

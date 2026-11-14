@@ -8295,7 +8295,6 @@
   "Your server": "خادمك",
   "Your way in": "طريقك إلى هنا",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "تستخدم حماية ملفات ZIP بكلمة مرور تقنية WinZip AES (تمديد المفتاح الضعيف). استخدم عبارة مرور عشوائية طويلة مكونة من 20 حرفًا أو أكثر، أو التسليم المختوم للملفات الحساسة المصدَّرة.",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "اتصالات الحسابات",
   "accounts allowed": "حسابات مسموح لها",
@@ -9188,5 +9187,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "يصف system_version منصة جوال لـ Desktop API.",
   "The app_version does not match the reviewed official version formats.": "لا يتطابق الرمز app_version مع تنسيقات الإصدارات الرسمية التي تمت مراجعتها.",
   "The mobile system_lang_code has no region component.": "لا يحتوي الجهاز المحمول system_lang_code على مكون المنطقة.",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "تختلف طبقة المخطط في Telethon عن خط الأساس للملف الشخصي الذي تمت مراجعته (230)؛ راجع توافق المكتبة."
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "تختلف طبقة المخطط في Telethon عن خط الأساس للملف الشخصي الذي تمت مراجعته (230)؛ راجع توافق المكتبة.",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "توجد هذه المحادثة الآن في TgWitness؛ ولا تحصل عليها الأجهزة الأخرى المرتبطة بالحساب.",
+  "The other side ended the chat.": "أنهى الطرف الآخر المحادثة.",
+  "Ended from TgWitness.": "انتهت من TgWitness.",
+  "Telegram reports that the chat no longer exists.": "يُبلغ Telegramُ بأن المحادثة لم تعد موجودة.",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "تستخدم حماية كلمة مرور ملفات ZIP طريقة WinZip AES (تمديد المفتاح الضعيف). استخدم عبارة مرور عشوائية طويلة مكونة من 20 حرفًا أو أكثر، أو اختر «التشفير الأقوى» لعمليات التصدير الحساسة.",
+  "Transport route checked for this connection.": "تم التحقق من مسار النقل لهذا الاتصال."
 }

@@ -8100,7 +8100,6 @@
   "Your server": "เซิร์ฟเวอร์ของคุณ",
   "Your way in": "วิธีเริ่มต้น",
   "ZIP (7-Zip / WinRAR)": "ZIP (7-Zip / WinRAR)",
-  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or sealed delivery for sensitive exports.": "การป้องกันด้วยรหัสผ่าน ZIP ใช้ WinZip AES (การยืดกุญแจที่อ่อนแอ) ให้ใช้คำผ่านแบบสุ่มที่ยาวอย่างน้อย20 ตัวอักษร หรือใช้การส่งแบบปิดผนึกสำหรับการส่งออกข้อมูลที่ละเอียดอ่อน",
   "[mycloud] type = mega user = … pass = …": "[mycloud] type = mega user = … pass = …",
   "account connections": "การเชื่อมต่อของบัญชี",
   "accounts allowed": "บัญชีที่อนุญาต",
@@ -8948,5 +8947,11 @@
   "The system_version describes a mobile platform for the Desktop API.": "system_version อธิบายแพลตฟอร์มมือถือสำหรับ Desktop API",
   "The app_version does not match the reviewed official version formats.": "app_version ไม่ตรงกับรูปแบบเวอร์ชันอย่างเป็นทางการที่ได้รับการตรวจสอบแล้ว",
   "The mobile system_lang_code has no region component.": "system_lang_code บนมือถือไม่มีส่วนประกอบภูมิภาค",
-  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "ชั้นสคีมาของ Telethon แตกต่างจากพื้นฐานโปรไฟล์ที่ได้รับการตรวจสอบ (230); ตรวจสอบความเข้ากันได้ของไลบรารี"
+  "Telethon's schema layer differs from the reviewed profile baseline (230); review library compatibility.": "ชั้นสคีมาของ Telethon แตกต่างจากพื้นฐานโปรไฟล์ที่ได้รับการตรวจสอบ (230); ตรวจสอบความเข้ากันได้ของไลบรารี",
+  "This chat now lives in TgWitness; other devices of the account do not get it.": "การสนทนานี้ปัจจุบันถูกเก็บไว้ในTgWitness; อุปกรณ์อื่น ๆ ของบัญชีดังกล่าวจะไม่ได้รับข้อมูลนี้",
+  "The other side ended the chat.": "ฝ่ายตรงข้ามได้ปิดการสนทนาแล้ว",
+  "Ended from TgWitness.": "สิ้นสุดจากTgWitness",
+  "Telegram reports that the chat no longer exists.": "Telegram รายงานว่าการสนทนานี้ไม่มีอยู่อีกต่อไป",
+  "ZIP password protection uses WinZip AES (weak key stretching). Use a long random passphrase of 20+ characters, or choose the stronger encryption for sensitive exports.": "การป้องกันด้วยรหัสผ่าน ZIP ใช้ WinZip AES (การขยายกุญแจที่อ่อนแอ) ให้ใช้คำผ่านแบบสุ่มที่ยาวอย่างน้อย 20 ตัวอักษร หรือเลือก \"การเข้ารหัสที่แข็งแกร่งกว่า\" สำหรับการส่งออกข้อมูลที่ละเอียดอ่อน",
+  "Transport route checked for this connection.": "ได้ตรวจสอบเส้นทางขนส่งสำหรับการเชื่อมต่อนี้แล้ว"
 }

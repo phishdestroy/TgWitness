@@ -141,7 +141,7 @@
 @media (max-width: 900px) { .home-layout { grid-template-columns: 1fr; } }
 .home-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; min-width: 0; }
 .home-sub { color: var(--muted); font-size: 12px; }
-.home-svg { width: 100%; height: auto; display: block; margin-top: 4px; }
+.home-svg { width: 100%; height: auto; display: block; margin-top: 4px; direction: ltr; }
 .home-axis { stroke: var(--border); stroke-width: 1; fill: none; }
 .home-bar { fill: var(--accent-text); opacity: .85; }
 .home-bar:hover { opacity: 1; }

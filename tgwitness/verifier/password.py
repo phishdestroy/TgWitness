@@ -129,5 +129,7 @@ def password_command(argv):
     try:
         decrypt_password_file(args.source, args.out, password)
     except Exception as exc:
-        parser.exit(1, "Could not decrypt the export: " + type(exc).__name__ + "\n")
+        reason = ("the password is wrong or the file was changed" if type(exc).__name__ == "InvalidTag"
+                  else str(exc) if isinstance(exc, (ValueError, OSError)) and str(exc) else type(exc).__name__)
+        parser.exit(1, "Could not decrypt the export: " + reason + "\n")
     print("Export decrypted. Run verification on the resulting evidence separately.")
