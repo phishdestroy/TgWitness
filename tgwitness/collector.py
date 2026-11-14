@@ -41,7 +41,7 @@ from . import replica
 from . import tuning
 from .history import History
 from .intake_progress import IntakeProgress
-from .account_import import session_key, validate_string
+from .account_import import frozen_config, session_key, validate_string
 from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient, FLOOD_ERRORS, TOO_LONG_RECOVERY, request_method, hold_dispatch, in_lane
 from .update_sequence import (CLOSED_MEANING, SEGMENT_LIMIT, SEQUENCE_MEANING, SequenceLog, VERSION as SEQUENCE_VERSION,
@@ -50,6 +50,7 @@ from .security import KeyLock
 from .workers import complete_in_thread
 from .store import RECEPTION, canonical, utcnow
 from .evidence import retain_checkpoint
+from .failures import explain
 from .netclient import RouteError, proxy_address
 from .network import NetworkConfig, NoRoute, RoutePolicy, saved_route
 from .proxy_catalog import NoProxyAvailable, ProxyPool, PublicCatalog
@@ -336,6 +337,15 @@ def account_loss_cause(exc):
 
 def telegram_error(exc):
     return next((error for kind, error, _ in ACCOUNT_LOSS if isinstance(exc, kind)), type(exc).__name__)
+
+
+def loss_cause(exc):
+    return exc.cause if isinstance(exc, AccountLost) else account_loss_cause(exc)
+
+
+def loss_text(exc, default="Telegram authorization expired. Sign in again."):
+    kind = next((kind for kind, _, cause in ACCOUNT_LOSS if cause == loss_cause(exc)), None)
+    return explain(kind.__name__) if kind else default
 
 
 class AccountLost(AuthorizationRequired):
@@ -2428,6 +2438,7 @@ class Collector:
             result = await post_login(candidate)
             self.store.append("account.initialized", {"account_id": me.id, "source": "telegram_api", "requests": result})
         await self.check_client_connection(candidate)
+        await self.check_frozen()
 
     async def check_client_connection(self, client):
         if getattr(client, "tgwitness_connection_check", None) is None:
@@ -2464,6 +2475,7 @@ class Collector:
             raise ValueError("Connect a Telegram account first.")
         client = self.client
         authorization_generation = self.authorization_generation
+        fresh = False
 
         def current():
             if (client is not self.client or authorization_generation != self.authorization_generation
@@ -2479,6 +2491,7 @@ class Collector:
                 secret_chats.of(self).listen(client)
                 await self.connect_client(client)
                 current()
+                fresh = True
             authorized = await client.is_user_authorized()
             current()
             if not authorized:
@@ -2510,6 +2523,9 @@ class Collector:
         if client is self.client and authorization_generation == self.authorization_generation:
             await self.check_client_connection(client)
             current()
+            if fresh:
+                await self.check_frozen()
+                current()
             if secret_chats.settings(self.store)["enabled"]:
                 chats = secret_chats.of(self)
                 try:
@@ -2780,8 +2796,7 @@ class Collector:
             answer = await asyncio.wait_for(self.client(functions.help.GetAppConfigRequest(hash=0)), 30)
         except Exception:
             return None
-        values = getattr(getattr(answer, "config", None), "value", None) or []
-        frozen = any(isinstance(item, types.JsonObjectValue) and item.key == "freeze_since_date" for item in values)
+        frozen = frozen_config(answer)
         current = self.store.get_setting("account_restriction", None) or {}
         if frozen and current.get("kind") != "frozen":
             value = {"kind": "frozen", "since": time.time(), "until": None, "telegram_error": None}
