@@ -150,13 +150,22 @@ class Store:
             yield self.db
             return
         reader = getattr(self.readers, "connection", None)
+        if reader is not None and reader.db.in_transaction:
+            yield reader.db
+            return
+        if self.db.in_transaction and self.lock.acquire(blocking=False):
+            try:
+                pending = self.db.in_transaction
+                if pending:
+                    yield self.db
+            finally:
+                self.lock.release()
+            if pending:
+                return
         if reader is None:
             reader = self.readers.connection = ReadConnection(self.root / "journal.sqlite3")
             self.read_connections.add(reader)
         db = reader.db
-        if db.in_transaction:
-            yield db
-            return
         db.execute("BEGIN")
         try:
             yield db
