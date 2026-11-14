@@ -8962,5 +8962,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Рекомендация: для суда необходимо подать оригинал на английском языке вместе с заверенным или присяжным переводом на язык суда. Присяжный переводчик владеет местной терминологией и знает формальные требования к судебным документам. Версии этого отчёта на языках, отличных от английского, представляют собой машинные переводы, предназначенные исключительно для ознакомления.",
   "English original in this archive: {file}": "Английский оригинал в этом архиве: {file}",
   "English original of this report, sealed": "Английский оригинал этого отчёта, запечатанный",
-  "English original of the signed PDF": "Английский оригинал подписанного PDF"
+  "English original of the signed PDF": "Английский оригинал подписанного PDF",
+  "Receipts": "Квитанции",
+  "Receipts for the latest checkpoint": "Квитанции последней контрольной точки",
+  "All receipts ({n})": "Все квитанции ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} наблюдал {chats} с {first} по {last}.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "В журнале {records}: {messages}, {edits}, {deletions} и {files}.",
+  "{n} saved files": {"one": "{n} сохранённый файл", "few": "{n} сохранённых файла", "many": "{n} сохранённых файлов", "other": "{n} сохранённого файла"}
 }

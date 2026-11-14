@@ -8848,5 +8848,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "推奨事項：裁判所に提出する際は、英語の原本と、裁判所の公用語への公認翻訳または宣誓翻訳を併せて提出してください。宣誓翻訳者は、現地の専門用語や裁判書類の形式上の要件を熟知しています。英語以外の言語で作成された本報告書の各バージョンは、参考用の機械翻訳です。",
   "English original in this archive: {file}": "このアーカイブ内の英語の原本：{file}",
   "English original of this report, sealed": "このレポートの英語の原本（封印済み）",
-  "English original of the signed PDF": "署名付き PDF の英語の原本"
+  "English original of the signed PDF": "署名付き PDF の英語の原本",
+  "Receipts": "受領記録",
+  "Receipts for the latest checkpoint": "最新のチェックポイントの受領記録",
+  "All receipts ({n})": "すべての受領記録（{n}）",
+  "{account} observed {chats} from {first} to {last}.": "{account}は{first}から{last}まで{chats}を監視しました。",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "このジャーナルには{records}が含まれます：{messages}、{edits}、{deletions}、{files}。",
+  "{n} saved files": "保存済みファイル{n}件"
 }

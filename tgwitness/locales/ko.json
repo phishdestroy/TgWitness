@@ -8848,5 +8848,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "권장 사항: 법원에 제출할 경우, 영어 원본과 법원 사용 언어로 된 공증 또는 선서 번역본을 함께 제출하십시오. 선서 번역가는 해당 지역의 전문 용어와 법원 문서에 대한 형식적 요건을 잘 알고 있습니다. 영어 이외의 언어로 된 이 보고서의 버전은 참고용으로 제공되는 기계 번역본입니다.",
   "English original in this archive: {file}": "이 아카이브의 영어 원본: {file}",
   "English original of this report, sealed": "이 보고서의 영어 원본, 봉인됨",
-  "English original of the signed PDF": "서명된 PDF의 영어 원본"
+  "English original of the signed PDF": "서명된 PDF의 영어 원본",
+  "Receipts": "영수증",
+  "Receipts for the latest checkpoint": "최신 체크포인트의 영수증",
+  "All receipts ({n})": "모든 영수증 ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account}은(는) {first}부터 {last}까지 {chats}을(를) 관찰했습니다.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "이 저널에는 {records}이(가) 있습니다: {messages}, {edits}, {deletions}, {files}.",
+  "{n} saved files": "저장된 파일 {n}개"
 }

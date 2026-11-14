@@ -8944,5 +8944,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "המלצה: לצורך הגשה לבית המשפט, יש להגיש את המקור באנגלית יחד עם תרגום מוסמך או מושבע לשפת בית המשפט. מתרגם מושבע מכיר את המינוח המקומי ואת הדרישות הפורמליות של מסמכים משפטיים. גרסאות של דוח זה בשפות אחרות מלבד אנגלית הן תרגומים אוטומטיים שנועדו לשמש כנקודת התייחסות בלבד.",
   "English original in this archive: {file}": "המקור באנגלית בארכיון זה: {file}",
   "English original of this report, sealed": "המקור באנגלית של דוח זה, חתום",
-  "English original of the signed PDF": "המקור באנגלית של קובץ ה-PDF החתום"
+  "English original of the signed PDF": "המקור באנגלית של קובץ ה-PDF החתום",
+  "Receipts": "אישורים",
+  "Receipts for the latest checkpoint": "אישורים לנקודת הביקורת האחרונה",
+  "All receipts ({n})": "כל האישורים ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} צפה ב-{chats} מ-{first} עד {last}.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "היומן מכיל {records}: {messages}, {edits}, {deletions} ו-{files}.",
+  "{n} saved files": {"one": "{n} קובץ שמור", "two": "{n} קבצים שמורים", "other": "{n} קבצים שמורים"}
 }

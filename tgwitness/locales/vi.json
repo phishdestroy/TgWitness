@@ -8848,5 +8848,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Khuyến nghị: đối với tòa án, hãy nộp bản gốc tiếng Anh kèm theo bản dịch được chứng nhận hoặc bản dịch có tuyên thệ sang ngôn ngữ của tòa án. Một dịch giả có tuyên thệ am hiểu thuật ngữ địa phương và các yêu cầu chính thức đối với tài liệu tòa án. Các phiên bản của báo cáo này bằng các ngôn ngữ khác ngoài tiếng Anh là bản dịch máy nhằm mục đích tham khảo.",
   "English original in this archive: {file}": "Bản gốc tiếng Anh trong kho lưu trữ này: {file}",
   "English original of this report, sealed": "Bản gốc tiếng Anh của báo cáo này, đã niêm phong",
-  "English original of the signed PDF": "Bản gốc tiếng Anh của tệp PDF có chữ ký"
+  "English original of the signed PDF": "Bản gốc tiếng Anh của tệp PDF có chữ ký",
+  "Receipts": "Biên nhận",
+  "Receipts for the latest checkpoint": "Biên nhận của điểm kiểm tra mới nhất",
+  "All receipts ({n})": "Tất cả biên nhận ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} đã quan sát {chats} từ {first} đến {last}.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "Nhật ký chứa {records}: {messages}, {edits}, {deletions} và {files}.",
+  "{n} saved files": "{n} tệp đã lưu"
 }

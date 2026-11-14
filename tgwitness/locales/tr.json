@@ -8896,5 +8896,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Öneri: Mahkemeye başvururken, İngilizce orijinal belgeyi mahkeme diline yapılmış onaylı veya yeminli bir çeviri ile birlikte sununuz. Yeminli çevirmen, yerel terminolojiyi ve mahkeme belgelerine ilişkin resmi gereklilikleri bilir. Bu raporun İngilizce dışındaki dillerde hazırlanan versiyonları, yalnızca bilgilendirme amaçlı makine çevirileridir.",
   "English original in this archive: {file}": "Bu arşivdeki İngilizce orijinal: {file}",
   "English original of this report, sealed": "Bu raporun İngilizce orijinali, mühürlü",
-  "English original of the signed PDF": "İmzalı PDF'nin İngilizce orijinali"
+  "English original of the signed PDF": "İmzalı PDF'nin İngilizce orijinali",
+  "Receipts": "Makbuzlar",
+  "Receipts for the latest checkpoint": "En son kontrol noktasının makbuzları",
+  "All receipts ({n})": "Tüm makbuzlar ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account}, {first} ile {last} arasında {chats} gözlemledi.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "Günlükte {records} var: {messages}, {edits}, {deletions} ve {files}.",
+  "{n} saved files": "{n} kayıtlı dosya"
 }

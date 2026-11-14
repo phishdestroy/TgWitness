@@ -8992,5 +8992,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Zalecenie: w przypadku postępowania sądowego należy złożyć oryginał w języku angielskim wraz z tłumaczeniem poświadczonym lub przysięgłym na język sądowy. Tłumacz przysięgły zna lokalną terminologię oraz wymogi formalne dotyczące dokumentów sądowych. Wersje niniejszego raportu w językach innych niż angielski są tłumaczeniami maszynowymi i służą wyłącznie w celach orientacyjnych.",
   "English original in this archive: {file}": "Angielski oryginał w tym archiwum: {file}",
   "English original of this report, sealed": "Angielski oryginał tego raportu, opieczętowany",
-  "English original of the signed PDF": "Angielski oryginał podpisanego pliku PDF"
+  "English original of the signed PDF": "Angielski oryginał podpisanego pliku PDF",
+  "Receipts": "Potwierdzenia",
+  "Receipts for the latest checkpoint": "Potwierdzenia dla najnowszego punktu kontrolnego",
+  "All receipts ({n})": "Wszystkie potwierdzenia ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} obserwował {chats} od {first} do {last}.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "Dziennik zawiera {records}: {messages}, {edits}, {deletions} i {files}.",
+  "{n} saved files": {"one": "{n} zapisany plik", "few": "{n} zapisane pliki", "many": "{n} zapisanych plików", "other": "{n} zapisanego pliku"}
 }

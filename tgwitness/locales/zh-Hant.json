@@ -8848,5 +8848,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "建議：若需提交至法院，請將英文正本連同經認證或宣誓的譯本（譯為法院指定語言）一併提交。宣誓譯者熟悉當地術語及法院文件的正式要求。本報告的非英文版本均為供參考之機器翻譯。",
   "English original in this archive: {file}": "此封存檔中的英文正本：{file}",
   "English original of this report, sealed": "本報告的英文正本，已封印",
-  "English original of the signed PDF": "簽名版 PDF 的英文正本"
+  "English original of the signed PDF": "簽名版 PDF 的英文正本",
+  "Receipts": "收據",
+  "Receipts for the latest checkpoint": "最新檢查點的收據",
+  "All receipts ({n})": "全部收據（{n}）",
+  "{account} observed {chats} from {first} to {last}.": "{account} 在 {first} 至 {last} 期間觀察了 {chats}。",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "日誌包含 {records}：{messages}、{edits}、{deletions} 以及 {files}。",
+  "{n} saved files": "{n} 個已儲存的檔案"
 }

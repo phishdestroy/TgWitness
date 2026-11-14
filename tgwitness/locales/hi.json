@@ -8896,5 +8896,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "सिफारिश: अदालत के लिए, अंग्रेजी मूल के साथ अदालत की भाषा में प्रमाणित या शपथ-प्राप्त अनुवाद दाखिल करें। एक शपथ-प्राप्त अनुवादक स्थानीय शब्दावली और अदालत दस्तावेजों की औपचारिक आवश्यकताओं को जानता है। अंग्रेजी के अलावा अन्य भाषाओं में इस रिपोर्ट के संस्करण परिचय के लिए मशीन अनुवाद हैं।",
   "English original in this archive: {file}": "इस आर्काइव में अंग्रेज़ी मूल: {file}",
   "English original of this report, sealed": "इस रिपोर्ट का अंग्रेज़ी मूल, सीलबंद",
-  "English original of the signed PDF": "हस्ताक्षरित PDF का अंग्रेज़ी मूल"
+  "English original of the signed PDF": "हस्ताक्षरित PDF का अंग्रेज़ी मूल",
+  "Receipts": "रसीदें",
+  "Receipts for the latest checkpoint": "नवीनतम चेकपॉइंट की रसीदें",
+  "All receipts ({n})": "सभी रसीदें ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} ने {first} से {last} तक {chats} का अवलोकन किया।",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "जर्नल में {records} हैं: {messages}, {edits}, {deletions} और {files}।",
+  "{n} saved files": {"one": "{n} सहेजी गई फ़ाइल", "other": "{n} सहेजी गई फ़ाइलें"}
 }

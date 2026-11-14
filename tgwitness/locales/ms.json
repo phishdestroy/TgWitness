@@ -8848,5 +8848,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Cadangan: untuk mahkamah, serahkan asal Bahasa Inggeris bersama terjemahan yang disahkan atau disumpah ke dalam bahasa mahkamah. Penerjemah bersumpah mengetahui terminologi tempatan dan keperluan formal bagi dokumen mahkamah. Versi laporan ini dalam bahasa selain Bahasa Inggeris adalah terjemahan mesin untuk panduan.",
   "English original in this archive: {file}": "Asal Bahasa Inggeris dalam arkib ini: {file}",
   "English original of this report, sealed": "Asal Bahasa Inggeris laporan ini, dimeterai",
-  "English original of the signed PDF": "Asal Bahasa Inggeris PDF yang ditandatangani"
+  "English original of the signed PDF": "Asal Bahasa Inggeris PDF yang ditandatangani",
+  "Receipts": "Resit",
+  "Receipts for the latest checkpoint": "Resit untuk titik pemeriksaan terkini",
+  "All receipts ({n})": "Semua resit ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} memerhati {chats} dari {first} hingga {last}.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "Jurnal ini mengandungi {records}: {messages}, {edits}, {deletions} dan {files}.",
+  "{n} saved files": "{n} fail disimpan"
 }

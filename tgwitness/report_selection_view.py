@@ -85,8 +85,9 @@ def html(material, say):
         out += '<p>' + e(say(CONTEXT_NOTE)) + '</p>'
         if shared:
             out += '<p>' + e(say(SHARED_NUMBERING, n=shared)) + '</p>'
-        out += '<p class="lead">' + e(say("Unobserved IDs: {ids} in {ranges} ranges.",
-                                        ids=gaps["ids_total"], ranges=gaps["ranges_total"])) + '</p>'
+        if gaps["ids_total"]:
+            out += '<p class="lead">' + e(say("Unobserved IDs: {ids} in {ranges} ranges.",
+                                            ids=gaps["ids_total"], ranges=gaps["ranges_total"])) + '</p>'
         rows = gaps.get("rows") or []
         if rows:
             out += table([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],
@@ -123,7 +124,8 @@ def pdf(lay, material):
     lay.text(say(CONTEXT_NOTE), size=9)
     if shared:
         lay.text(say(SHARED_NUMBERING, n=shared), size=9)
-    lay.text(say("Unobserved IDs: {ids} in {ranges} ranges.", ids=gaps["ids_total"], ranges=gaps["ranges_total"]))
+    if gaps["ids_total"]:
+        lay.text(say("Unobserved IDs: {ids} in {ranges} ranges.", ids=gaps["ids_total"], ranges=gaps["ranges_total"]))
     rows = gaps.get("rows") or []
     if rows:
         lay.grid([say("Chat"), say("Missing ID range"), say("Saved before"), say("Saved after")],

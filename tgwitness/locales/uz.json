@@ -8896,5 +8896,11 @@
   "Recommendation: for court, file the English original with a certified or sworn translation into the court language. A sworn translator knows the local terminology and the formal requirements for court documents. Versions of this report in languages other than English are machine translations for orientation.": "Tavsiya: sud uchun ingliz tilidagi asl nusxani sud tiliga qilingan tasdiqlangan yoki qasamli tarjima bilan birga topshiring. Qasamli tarjimon mahalliy atamalar va sud hujjatlariga qo'yiladigan rasmiy talablarni biladi. Ingliz tilidan boshqa tillarda taqdim etilgan ushbu hisobot versiyalari yo'riqnoma maqsadida avtomatlashtirilgan tarjimalar hisoblanadi.",
   "English original in this archive: {file}": "Ushbu arxivdagi inglizcha asl nusxa: {file}",
   "English original of this report, sealed": "Ushbu hisobotning inglizcha asl nusxasi, muhrlangan",
-  "English original of the signed PDF": "Imzolangan PDF ning inglizcha asl nusxasi"
+  "English original of the signed PDF": "Imzolangan PDF ning inglizcha asl nusxasi",
+  "Receipts": "Kvitansiyalar",
+  "Receipts for the latest checkpoint": "Eng so'nggi tekshiruv nuqtasi kvitansiyalari",
+  "All receipts ({n})": "Barcha kvitansiyalar ({n})",
+  "{account} observed {chats} from {first} to {last}.": "{account} kuzatuvi: {chats}, {first} dan {last} gacha.",
+  "The journal holds {records}: {messages}, {edits}, {deletions} and {files}.": "Jurnalda {records} bor: {messages}, {edits}, {deletions} va {files}.",
+  "{n} saved files": "{n} ta saqlangan fayl"
 }
