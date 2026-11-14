@@ -9170,7 +9170,7 @@
 "Mark stories as viewed": "Marcar mensagens como lidas",
 "Marked as read. The request and its result are in the journal.": "Marcado como lido. A solicitação e seu resultado estão no diário.",
 "Messages marked as opened from the panel": "Mensagens marcadas como lidas no painel",
-"No saved message waits to be marked as opened.": "Nenhuma mensagem salva aguarda para ser marcada como lida.",
+  "No saved message waits to be marked as opened.": "Não há mais nenhuma mídia ou mensagem de voz descartável salva para ser marcada como aberta.",
 "No usable answer: {error}": "Nenhuma resposta válida: {error}",
 "Not answered: {error}": "Sem resposta: {error}",
 "Not checked: {error}": "Não verificado: {error}",
@@ -9434,5 +9434,6 @@
   "Mark as opened": "Marcar mídia como aberta",
   "Workspace settings": "Configurações do espaço de trabalho",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Este contêiner contém {n} arquivos. O EU DSS, com as configurações padrão, recusa contêineres com mais de 1.000 arquivos.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "O Telegram decide quando o outro lado recebe um aviso de leitura: imediatamente ou somente junto com a próxima mensagem dessa conta no chat."
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "O Telegram decide quando o outro lado recebe um aviso de leitura: imediatamente ou somente junto com a próxima mensagem dessa conta no chat.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "O Telegram mantém essas conversas em apenas um dispositivo. O TgWitness participa com a autorização da própria conta e registra todas as mensagens, temporizadores, arquivos e notificações de exclusão no diário assinado, mesmo depois que o outro lado os exclui. Ele envia confirmaciones de leitura e o status de digitação apenas conforme selecionado em “O que a outra parte vê”, e nunca envia notificações de captura de tela."
 }

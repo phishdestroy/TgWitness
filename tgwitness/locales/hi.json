@@ -9162,7 +9162,7 @@
 "Mark stories as viewed": "कहानियों को देखा हुआ चिह्नित करें",
 "Marked as read. The request and its result are in the journal.": "पढ़ा हुआ चिह्नित। अनुरोध और उसका परिणाम जर्नल में हैं।",
 "Messages marked as opened from the panel": "पैनल से खुले के रूप में चिह्नित संदेश",
-"No saved message waits to be marked as opened.": "कोई भी सहेजा गया संदेश खोला हुआ चिह्नित होने का इंतजार नहीं कर रहा है।",
+  "No saved message waits to be marked as opened.": "खोले गए के रूप में चिह्नित करने के लिए कोई सहेजा गया एक-बार का मीडिया या वॉयस संदेश शेष नहीं है।",
 "No usable answer: {error}": "कोई उपयोगी उत्तर नहीं: {error}",
 "Not answered: {error}": "उत्तर नहीं दिया गया: {error}",
 "Not checked: {error}": "जांचा नहीं गया: {error}",
@@ -9426,5 +9426,6 @@
   "Mark as opened": "मीडिया को खुला हुआ चिह्नित करें",
   "Workspace settings": "कार्यक्षेत्र की सेटिंग्स",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "इस कंटेनर में {n} फ़ाइलें हैं। डिफ़ॉल्ट सेटिंग्स के साथ EU DSS 1000 से अधिक फ़ाइलों वाले कंटेनरों को अस्वीकार कर देता है।",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram यह तय करता है कि दूसरी तरफ़ को रीड रसीद कब मिलती है: तुरंत, या चैट में इस खाते के अगले संदेश के साथ ही।"
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram यह तय करता है कि दूसरी तरफ़ को रीड रसीद कब मिलती है: तुरंत, या चैट में इस खाते के अगले संदेश के साथ ही।",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram इन चैट्स को केवल एक डिवाइस पर ही रखता है। TgWitness इस खाते की अपनी प्राधिकृति के साथ भाग लेता है और हस्ताक्षरित जर्नल में हर संदेश, टाइमर, फ़ाइल और हटाने की सूचना को रिकॉर्ड करता है, भले ही दूसरी तरफ उन्हें हटा दे। यह केवल \"दूसरी तरफ क्या देखती है\" के तहत चुने अनुसार ही रीड रसीद और टाइपिंग स्टेटस भेजता है, और कभी भी स्क्रीनशॉट सूचनाएं नहीं भेजता।"
 }

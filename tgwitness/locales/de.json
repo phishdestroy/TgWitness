@@ -9162,7 +9162,7 @@
 "Mark stories as viewed": "Beiträge als gelesen markieren",
 "Marked as read. The request and its result are in the journal.": "Als gelesen markiert. Die Anfrage und ihr Ergebnis befinden sich im Protokoll.",
 "Messages marked as opened from the panel": "Nachrichten, die im Bedienfeld als „gelesen“ markiert sind",
-"No saved message waits to be marked as opened.": "Es gibt keine gespeicherte Nachricht, die darauf wartet, als gelesen markiert zu werden.",
+  "No saved message waits to be marked as opened.": "Es sind keine gespeicherten einmaligen Medien oder Sprachnachrichten mehr vorhanden, die als geöffnet markiert werden könnten.",
 "No usable answer: {error}": "Keine brauchbare Antwort: {error}",
 "Not answered: {error}": "Keine Antwort: {error}",
 "Not checked: {error}": "Nicht geprüft: {error}",
@@ -9426,5 +9426,6 @@
   "Mark as opened": "Medien als geöffnet markieren",
   "Workspace settings": "Einstellungen des Arbeitsbereichs",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Dieser Container enthält {n} Dateien. EU DSS lehnt bei Standardeinstellungen Container mit mehr als 1000 Dateien ab.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram entscheidet, wann die andere Seite eine Lesebestätigung erhält: sofort oder erst mit der nächsten Nachricht dieses Kontos in dem Chat."
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram entscheidet, wann die andere Seite eine Lesebestätigung erhält: sofort oder erst mit der nächsten Nachricht dieses Kontos in dem Chat.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram speichert diese Chats nur auf einem Gerät. TgWitness greift mit der eigenen Autorisierung dieses Kontos ein und protokolliert jede Nachricht, jeden Timer, jede Datei und jede Löschbenachrichtigung im signierten Protokoll, auch nachdem die andere Seite sie gelöscht hat. Es sendet Lesebestätigungen und den Tippstatus nur gemäß der unter „Was die andere Seite sieht“ gewählten Einstellung und sendet niemals Screenshot-Benachrichtigungen."
 }

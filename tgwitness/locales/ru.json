@@ -9208,7 +9208,7 @@
 "Changing these settings needs the Settings permission.": "Для изменения этих настроек требуется право доступа «Настройки».",
 "Chat opened in the panel": "Чат, открытый в панели",
 "Checking external services…": "Проверка внешних сервисов…",
-"Chooses what this account lets the other side of a chat see. Everything is invisible unless you choose otherwise here; each read receipt, opened-media notice, story view and typing status sent from the panel is recorded in the journal.": "Здесь вы можете выбрать, какую информацию об этом аккаунте будет видеть собеседник в чате. По умолчанию всё остаётся невидимым, пока вы не выберете иное; каждое подтверждение прочтения, уведомление об открытии медиафайла, просмотр истории и статус набора текста, отправленные с панели, фиксируются в журнале.",
+  "Chooses what this account lets the other side of a chat see. Everything is invisible unless you choose otherwise here; each read receipt, opened-media notice, story view and typing status sent from the panel is recorded in the journal.": "Здесь выбирается, что этот аккаунт позволяет видеть собеседнику в чате. Всё остаётся невидимым, пока вы не выберете здесь иное; каждое уведомление о прочтении, уведомление об открытии медиафайла, просмотр истории и статус «печатаю…», отправленные с панели, фиксируются в журнале.",
 "Court documents in the package": "Судебные документы в пакете",
 "Destinations configured: {n}. Nothing has been sent yet.": "Настроенные пункты назначения: {n}. Пока ничего не отправлено.",
 "Device of the imported session.": "Устройство импортированной сессии.",
@@ -9228,7 +9228,7 @@
 "Mark stories as viewed": "Пометить истории как прочитанные",
 "Marked as read. The request and its result are in the journal.": "Помечено как прочитанное. Запрос и его результат находятся в журнале.",
 "Messages marked as opened from the panel": "Сообщения, помеченные как прочитанные на панели",
-"No saved message waits to be marked as opened.": "Нет сохраненных сообщений, ожидающих отметки о прочтении.",
+  "No saved message waits to be marked as opened.": "Не осталось ни одного сохраненного одноразового медиафайла или голосового сообщения, которое можно было бы пометить как открытое.",
 "No usable answer: {error}": "Нет подходящего ответа: {error}",
 "Not answered: {error}": "Ответ не найден: {error}",
 "Not checked: {error}": "Не проверено: {error}",
@@ -9492,5 +9492,6 @@
   "Mark as opened": "Пометить медиафайлы как открытые",
   "Workspace settings": "Настройки рабочей области",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Этот контейнер содержит {n} файлов. EU DSS с настройками по умолчанию отклоняет контейнеры, содержащие более 1000 файлов.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram решает, когда собеседник получит уведомление о прочтении: сразу или только вместе со следующим сообщением этого аккаунта в чате."
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram решает, когда собеседник получит уведомление о прочтении: сразу или только вместе со следующим сообщением этого аккаунта в чате.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram хранит эти чаты только на одном устройстве. TgWitness участвует в них с собственной авторизацией этого аккаунта и записывает каждое сообщение, таймер, файл и уведомление об удалении в подписанный журнал, в том числе после того, как собеседник их удалит. Он отправляет уведомления о прочтении и статус «печатаю» только в соответствии с настройками в «Что видит собеседник» и никогда не отправляет уведомления о скриншотах."
 }

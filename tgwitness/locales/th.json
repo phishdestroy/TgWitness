@@ -9114,7 +9114,7 @@
 "Mark stories as viewed": "ทำเครื่องหมายว่าได้อ่านแล้ว",
 "Marked as read. The request and its result are in the journal.": "ถูกทำเครื่องหมายว่าอ่านแล้ว คำขอและผลลัพธ์อยู่ในบันทึก",
 "Messages marked as opened from the panel": "ข้อความที่ได้รับการทำเครื่องหมายว่าเปิดแล้วจากแผงควบคุม",
-"No saved message waits to be marked as opened.": "ไม่มีข้อความที่เก็บไว้รอให้ถูกทำเครื่องหมายว่าได้เปิดแล้ว",
+  "No saved message waits to be marked as opened.": "ไม่มีสื่อแบบใช้ครั้งเดียวหรือข้อความเสียงที่บันทึกไว้เหลืออยู่เพื่อทำเครื่องหมายว่าเปิดแล้ว",
 "No usable answer: {error}": "ไม่มีคำตอบที่ใช้งานได้: {error}",
 "Not answered: {error}": "ไม่ได้รับคำตอบ: {error}",
 "Not checked: {error}": "ยังไม่ตรวจสอบ: {error}",
@@ -9378,5 +9378,6 @@
   "Mark as opened": "ทำเครื่องหมายสื่อว่าเปิดแล้ว",
   "Workspace settings": "การตั้งค่าพื้นที่ทำงาน",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "คอนเทนเนอร์นี้เก็บไฟล์{n} ไฟล์ EU DSS ด้วยตั้งค่าเริ่มต้นจะปฏิเสธคอนเทนเนอร์ที่มีไฟล์มากกว่า 1000 ไฟล์",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram จะตัดสินใจว่าฝ่ายตรงข้ามจะได้รับใบยืนยันการอ่านเมื่อใด: ทันที หรือเพียงเมื่อส่งพร้อมกับข้อความถัดไปของบัญชีนี้ในแชท"
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram จะตัดสินใจว่าฝ่ายตรงข้ามจะได้รับใบยืนยันการอ่านเมื่อใด: ทันที หรือเพียงเมื่อส่งพร้อมกับข้อความถัดไปของบัญชีนี้ในแชท",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram เก็บการสนทนาเหล่านี้ไว้บนอุปกรณ์เดียวเท่านั้น TgWitness ทำงานด้วยสิทธิ์การอนุญาตของบัญชีนี้เอง และบันทึกทุกข้อความ ตัวจับเวลา ไฟล์ และแจ้งเตือนการลบลงในบันทึกที่ลงนามแล้ว แม้หลังจากที่ฝ่ายตรงข้ามได้ลบพวกมันไปแล้ว มันจะส่งการยืนยันการอ่านและสถานะการพิมพ์เฉพาะตามที่เลือกไว้ภายใต้ \"สิ่งที่ฝ่ายตรงข้ามเห็น\" เท่านั้น และไม่ส่งแจ้งเตือนภาพหน้าจอเลย"
 }

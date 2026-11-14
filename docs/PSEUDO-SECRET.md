@@ -89,8 +89,10 @@ reported in the historical 6 November development-snapshot audit.
 
 Decrypted messages whose journal write fails are held in the vault for retry.
 Attachment size and free-disk checks defer downloads while keeping their jobs.
-The module reuses the account's existing connection; it does not send read, typing
-or screenshot notifications. See [secret_chats.py](../tgwitness/secret_chats.py),
+The module reuses the account's existing connection. Read and typing notices are sent
+only as chosen under
+[What the other side sees](INVESTIGATION-MODE.md#what-the-other-side-sees); screenshot
+notifications are never sent. See [secret_chats.py](../tgwitness/secret_chats.py),
 [API routes](../tgwitness/api/secret_chats.py) and
 [access policy](../tgwitness/access.py).
 

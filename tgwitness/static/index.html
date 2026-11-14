@@ -461,7 +461,7 @@
   <section class="card secret-chats" id="secret-chats">
     <div class="secret-top"><span class="tile secret-mark" data-tone="violet"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></span>
     <div class="secret-top-text"><p class="secret-status" id="secret-status" role="status"></p>
-    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It never sends read receipts, typing or screenshot notices.</p>
+    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.</p>
     <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p>
     <p id="secret-module" hidden><span id="secret-module-text"></span> <a id="secret-module-source" target="_blank" rel="noopener noreferrer">Source code and license</a><code id="secret-module-digest"></code></p></details></div>
     <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>

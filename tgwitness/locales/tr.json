@@ -9162,7 +9162,7 @@
 "Mark stories as viewed": "Hikayeleri okundu olarak işaretle",
 "Marked as read. The request and its result are in the journal.": "Okundu olarak işaretlendi. İstek ve sonucu günlükte yer almaktadır.",
 "Messages marked as opened from the panel": "Panelden \"açılmış\" olarak işaretlenen mesajlar",
-"No saved message waits to be marked as opened.": "Açılmış olarak işaretlenmeyi bekleyen kaydedilmiş mesaj yok.",
+  "No saved message waits to be marked as opened.": "Açılmış olarak işaretlenebilecek kaydedilmiş tek seferlik medya veya sesli mesaj kalmamıştır.",
 "No usable answer: {error}": "Kullanılabilir bir yanıt yok: {error}",
 "Not answered: {error}": "Yanıtlanmadı: {error}",
 "Not checked: {error}": "Kontrol edilmedi: {error}",
@@ -9426,5 +9426,6 @@
   "Mark as opened": "Medya dosyasını açılmış olarak işaretle",
   "Workspace settings": "Çalışma alanının ayarları",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Bu konteyner {n} dosya içerir. Varsayılan ayarlarla çalışan EU DSS, 1000'den fazla dosya içeren konteynerleri kabul etmez.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram, karşı tarafın okundu bildirimini ne zaman alacağına karar verir: hemen mi, yoksa bu hesabın sohbetteki bir sonraki mesajıyla birlikte mi?"
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram, karşı tarafın okundu bildirimini ne zaman alacağına karar verir: hemen mi, yoksa bu hesabın sohbetteki bir sonraki mesajıyla birlikte mi?",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram, bu sohbetleri yalnızca tek bir cihazda saklar. TgWitness, bu hesabın kendi yetkilendirmesiyle devreye girer ve her mesajı, zamanlayıcıyı, dosyayı ve silme bildirimini, karşı taraf bunları sildikten sonra bile imzalı günlüğe kaydeder. Okundu bildirimlerini ve yazma durumunu yalnızca \"Karşı tarafın gördükleri\" altında seçilen şekilde gönderir ve asla ekran görüntüsü bildirimleri göndermez."
 }

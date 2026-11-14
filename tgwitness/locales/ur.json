@@ -9162,7 +9162,7 @@
 "Mark stories as viewed": "کہانیوں کو دیکھا ہوا نشان زد کریں",
 "Marked as read. The request and its result are in the journal.": "پڑھا ہوا نشان زد۔ درخواست اور اس کا نتیجہ جرنل میں ہیں۔",
 "Messages marked as opened from the panel": "پینل سے کھلے ہوئے کے طور پر نشان زد کردہ پیغامات",
-"No saved message waits to be marked as opened.": "کوئی محفوظ پیغام کھولا جانے کے لیے انتظار نہیں کر رہا۔",
+  "No saved message waits to be marked as opened.": "کوئی محفوظ شدہ ایک بار استعمال ہونے والا میڈیا یا وائس میسج نہیں بچا جسے کھولا ہوا قرار دیا جا سکے۔",
 "No usable answer: {error}": "کوئی قابل استعمال جواب نہیں: {error}",
 "Not answered: {error}": "جواب نہیں دیا گیا: {error}",
 "Not checked: {error}": "چیک نہیں کیا گیا: {error}",
@@ -9426,5 +9426,6 @@
   "Mark as opened": "میڈیا کو کھلا ہوا نشان زد کریں",
   "Workspace settings": "ورک اسپیس کی ترتیبات",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "یہ کنٹینر {n} فائلیں رکھتا ہے۔ ڈیفالٹ ترتیبات کے ساتھ EU DSS 1000 سے زیادہ فائلوں والے کنٹینرز کو مسترد کر دیتا ہے۔",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram فیصلہ کرتا ہے کہ دوسری جانب ریڈ ریسیٹ کب وصول کرے: فوری طور پر، یا صرف اس اکاؤنٹ کے اگلے پیغام کے ساتھ چیٹ میں۔"
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram فیصلہ کرتا ہے کہ دوسری جانب ریڈ ریسیٹ کب وصول کرے: فوری طور پر، یا صرف اس اکاؤنٹ کے اگلے پیغام کے ساتھ چیٹ میں۔",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram ان چیٹس کو صرف ایک ڈیوائس پر محفوظ رکھتا ہے۔ TgWitness اس اکاؤنٹ کی اپنی اجازت کے ساتھ حصہ لیتا ہے اور ہر پیغام، ٹائمر، فائل اور حذف کرنے کے نوٹس کو دستخط شدہ جرنل میں ریکارڈ کرتا ہے، چاہے دوسری جانب انہیں حذف ہی کیوں نہ کر دے۔ یہ ریڈ ریسیٹ اور ٹائپنگ اسٹیٹس صرف \"دوسری جانب کیا دیکھتی ہے\" کے تحت منتخب کردہ صورت میں بھیجتا ہے، اور کبھی بھی اسکرین شاٹ کے نوٹس نہیں بھیجتا۔"
 }

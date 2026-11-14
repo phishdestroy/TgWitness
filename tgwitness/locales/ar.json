@@ -9354,7 +9354,7 @@
 "Mark stories as viewed": "وضع علامة \"تمت مشاهدته\" على القصص",
 "Marked as read. The request and its result are in the journal.": "تم وضع علامة \"مقروء\". يرد الطلب ونتيجته في السجل.",
 "Messages marked as opened from the panel": "الرسائل التي تم وضع علامة «مفتوحة» عليها من اللوحة",
-"No saved message waits to be marked as opened.": "لا توجد رسائل محفوظة في انتظار وضع علامة \"مفتوحة\" عليها.",
+  "No saved message waits to be marked as opened.": "لم يتبق أي وسائط أو رسائل صوتية لمرة واحدة محفوظة ليتم وضع علامة «مفتوح» عليها.",
 "No usable answer: {error}": "لا توجد إجابة صالحة: {error}",
 "Not answered: {error}": "لم يتم الرد: {error}",
 "Not checked: {error}": "لم يتم التحقق: {error}",
@@ -9618,5 +9618,6 @@
   "Mark as opened": "وضع علامة «مفتوح» على الوسائط",
   "Workspace settings": "إعدادات مساحة العمل",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "يحتوي هذا الحاوية على {n} ملفًا. يرفض EU DSS، عند استخدام الإعدادات الافتراضية، الحاويات التي تحتوي على أكثر من 1000 ملف.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "يقرر Telegram متى يتلقى الطرف الآخر إشعار القراءة: فورًا، أو فقط مع الرسالة التالية التي يرسلها هذا الحساب في المحادثة."
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "يقرر Telegram متى يتلقى الطرف الآخر إشعار القراءة: فورًا، أو فقط مع الرسالة التالية التي يرسلها هذا الحساب في المحادثة.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "يحتفظ Telegram بهذه المحادثات على جهاز واحد فقط. يشارك TgWitness، بتفويض من هذا الحساب نفسه، ويسجل كل رسالة ومؤقت وملف وإشعار حذف في السجل الموقّع، حتى بعد أن يحذفها الطرف الآخر. ويرسل إشعارات القراءة وحالة الكتابة فقط وفقًا لما تم اختياره تحت «ما يراه الطرف الآخر»، ولا يرسل أبدًا إشعارات لقطات الشاشة."
 }

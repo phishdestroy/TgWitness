@@ -9170,7 +9170,7 @@
 "Mark stories as viewed": "Marcar las historias como leídas",
 "Marked as read. The request and its result are in the journal.": "Marcado como leído. La solicitud y su resultado figuran en el diario.",
 "Messages marked as opened from the panel": "Mensajes marcados como leídos desde el panel",
-"No saved message waits to be marked as opened.": "No hay ningún mensaje guardado pendiente de marcarse como leído.",
+  "No saved message waits to be marked as opened.": "No queda ningún archivo multimedia ni mensaje de voz de un solo uso guardado que se pueda marcar como abierto.",
 "No usable answer: {error}": "No hay ninguna respuesta válida: {error}",
 "Not answered: {error}": "Sin respuesta: {error}",
 "Not checked: {error}": "No comprobado: {error}",
@@ -9434,5 +9434,6 @@
   "Mark as opened": "Marcar los archivos multimedia como abiertos",
   "Workspace settings": "Configuración del espacio de trabajo",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Este contenedor contiene {n} archivos. EU DSS, con la configuración predeterminada, rechaza los contenedores de más de 1 000 archivos.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram decide cuándo recibe la otra parte un acuse de lectura: de inmediato o solo junto con el siguiente mensaje de esta cuenta en el chat."
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram decide cuándo recibe la otra parte un acuse de lectura: de inmediato o solo junto con el siguiente mensaje de esta cuenta en el chat.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram guarda estos chats únicamente en un dispositivo. TgWitness interviene con la autorización propia de esta cuenta y registra cada mensaje, temporizador, archivo y aviso de eliminación en el diario firmado, incluso después de que la otra parte los haya eliminado. Envía confirmaciones de lectura y el estado de escritura solo según lo seleccionado en «Lo que ve la otra parte», y nunca envía avisos de captura de pantalla."
 }

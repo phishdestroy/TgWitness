@@ -135,7 +135,7 @@ export function createVisibility(deps) {
       const fields = data.effective, override = data.override || {}, editable = may('settings') && !data.workspace.invisible;
       const acting = may('interact') && !data.interaction_problem;
       panel.append(node('strong', '', tr('What the other side sees')), node('p', 'vis-opening', openingText(fields)));
-      if (!secret && fields.read_receipts !== 'never') panel.append(node('p', 'hint', tr(DELIVERY)));
+      if (fields.read_receipts !== 'never') panel.append(node('p', 'hint', tr(DELIVERY)));
       if (data.workspace.invisible) panel.append(node('p', 'notice', tr('Invisible is on for this workspace: nothing below is sent until it is turned off.')));
       const save = async (next, input) => run(input, async () => {
         data = await json('visibility', {chat_id: chatId, secret, override: next}); draw(); toast(tr('Saved.'));

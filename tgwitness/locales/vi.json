@@ -9114,7 +9114,7 @@
 "Mark stories as viewed": "Đánh dấu các câu chuyện là đã xem",
 "Marked as read. The request and its result are in the journal.": "Đã được đánh dấu là đã đọc. Yêu cầu và kết quả của nó được ghi lại trong nhật ký.",
 "Messages marked as opened from the panel": "Các tin nhắn được đánh dấu là đã mở từ bảng điều khiển",
-"No saved message waits to be marked as opened.": "Không có tin nhắn đã lưu nào đang chờ được đánh dấu là đã đọc.",
+  "No saved message waits to be marked as opened.": "Không còn phương tiện truyền thông hoặc tin nhắn thoại dùng một lần nào được lưu lại để đánh dấu là đã mở.",
 "No usable answer: {error}": "Không có câu trả lời hợp lệ: {error}",
 "Not answered: {error}": "Chưa được trả lời: {error}",
 "Not checked: {error}": "Chưa được kiểm tra: {error}",
@@ -9378,5 +9378,6 @@
   "Mark as opened": "Đánh dấu phương tiện đã mở",
   "Workspace settings": "Cài đặt của không gian làm việc",
   "This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.": "Thùng chứa này chứa {n} tệp. EU DSS với cài đặt mặc định sẽ từ chối các thùng chứa có hơn 1.000 tệp.",
-  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram quyết định thời điểm bên kia nhận được thông báo đã đọc: ngay lập tức, hoặc chỉ khi có tin nhắn tiếp theo từ tài khoản này trong cuộc trò chuyện."
+  "Telegram decides when the other side receives a read receipt: at once, or only with this account’s next message in the chat.": "Telegram quyết định thời điểm bên kia nhận được thông báo đã đọc: ngay lập tức, hoặc chỉ khi có tin nhắn tiếp theo từ tài khoản này trong cuộc trò chuyện.",
+  "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.": "Telegram chỉ lưu trữ các cuộc trò chuyện này trên một thiết bị duy nhất. TgWitness tham gia với quyền truy cập riêng của tài khoản này và ghi lại mọi tin nhắn, bộ đếm thời gian, tệp tin và thông báo xóa vào nhật ký đã ký, ngay cả sau khi bên kia đã xóa chúng. Ứng dụng này chỉ gửi xác nhận đã đọc và trạng thái đang gõ theo lựa chọn trong mục \"Những gì phía bên kia nhìn thấy\", và không bao giờ gửi thông báo chụp màn hình."
 }
