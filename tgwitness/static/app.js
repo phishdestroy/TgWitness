@@ -1283,7 +1283,8 @@ document.addEventListener("keydown",event=>{
     if(next&&next!==items[index]){event.preventDefault();next.focus();next.click();}
   }
 });
-const faviconMark=new Image();faviconMark.src="/mark.svg";
+const faviconSource=document.querySelector('link[rel="icon"]')?.href||new URL('mark.svg',document.baseURI).href;
+const faviconMark=new Image();faviconMark.src=faviconSource;
 let faviconState="";
 function renderFavicon(){
   const collector=state.status?.collector||{},task=collector.activity?.task;
@@ -1291,7 +1292,7 @@ function renderFavicon(){
   const link=document.querySelector('link[rel="icon"]');
   if(!link||kind===faviconState)return;
   faviconState=kind;
-  if(!kind){link.href="/mark.svg";return;}
+  if(!kind){link.href=faviconSource;return;}
   const draw=()=>{
     if(faviconState!==kind)return;
     const canvas=document.createElement("canvas");canvas.width=canvas.height=64;
@@ -1301,7 +1302,7 @@ function renderFavicon(){
   };
   if(faviconMark.complete)draw();else faviconMark.addEventListener("load",draw,{once:true});
 }
-window.addEventListener("tgwitness:lock",()=>{faviconState="";const link=document.querySelector('link[rel="icon"]');if(link)link.href="/mark.svg";});
+window.addEventListener("tgwitness:lock",()=>{faviconState="";const link=document.querySelector('link[rel="icon"]');if(link)link.href=faviconSource;});
 
 const healthStates={off:[tr("Off"),"pause"],configured:[tr("Configured"),"settings"],running:[tr("In progress"),"refresh"],
   working:[tr("Working"),"check"],degraded:[tr("Degraded"),"alert"],failed:[tr("Error"),"x"],unknown:[tr("State unknown"),"question"]};

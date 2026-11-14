@@ -12,7 +12,7 @@ export function createSwarmExport({root,json,tr,trn,toast,download}){
   const number=value=>Number(value||0).toLocaleString(document.documentElement.lang||undefined,{maximumFractionDigits:1});
   const size=bytes=>bytes>=1048576?tr('{n} MB',{n:number(bytes/1048576)}):tr('{n} KB',{n:number(Math.max(1,bytes/1024))});
   const listeners=new AbortController();
-  let data=null,timer=null,visible=false,request=0,chosen=new Set(),mode='all';
+  let data=null,timer=null,visible=false,request=0,session=0,chosen=new Set(),mode='all';
   root.innerHTML=`<details class="se" data-se="card">
     <summary class="se-summary">${icon('download')}<b>${t('Swarm export')}</b><span class="se-sub" data-se="summary">${t('Paste chats; free accounts export them in parallel.')}</span></summary>
     <form class="se-form" data-se="form">
@@ -139,15 +139,17 @@ export function createSwarmExport({root,json,tr,trn,toast,download}){
   find('form').addEventListener('submit',async event=>{
     event.preventDefault();
     const button=find('start');if(button.disabled)return;button.disabled=true;
+    const peers=find('peers'),sent=peers.value,owner=session;
     try{
       const accounts=mode==='chosen'?[...chosen]:null;
       if(mode==='chosen'&&!accounts.length)throw new Error(tr('Choose at least one account workspace.'));
-      const job=await json('swarm/exports',{peers:find('peers').value,accounts,files:find('files').value||null,
+      const job=await json('swarm/exports',{peers:sent,accounts,files:find('files').value||null,
         priority:Number(find('priority').value)},{root:true});
-      find('peers').value='';
+      if(owner!==session)return;
+      if(peers.value===sent)peers.value='';
       toast(tr('Export started. Chats: {n}.',{n:number(job.peers)})+(job.problems?.length?' '+tr('Skipped lines: {n}',{n:job.problems.length}):''));
-      await refresh();schedule();
-    }catch(error){toast(error.message,true);}finally{button.disabled=false;}
+      if(visible){await refresh();if(owner===session)schedule();}
+    }catch(error){if(owner===session)toast(error.message,true);}finally{if(owner===session)button.disabled=false;}
   },{signal:listeners.signal});
   root.addEventListener('change',event=>{
     const target=event.target;
@@ -172,7 +174,7 @@ export function createSwarmExport({root,json,tr,trn,toast,download}){
   return {
     async enter(){visible=true;await refresh();schedule();},
     leave(){visible=false;clearTimeout(timer);request++;},
-    reset(){visible=false;clearTimeout(timer);request++;data=null;chosen=new Set();mode='all';jobsBox.innerHTML='';find('peers').value='';card.open=false;},
-    destroy(){visible=false;clearTimeout(timer);listeners.abort();},
+    reset(){visible=false;clearTimeout(timer);request++;session++;data=null;chosen=new Set();mode='all';jobsBox.innerHTML='';find('peers').value='';find('start').disabled=false;card.open=false;},
+    destroy(){visible=false;clearTimeout(timer);request++;session++;listeners.abort();},
   };
 }

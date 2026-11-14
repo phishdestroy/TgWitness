@@ -8,10 +8,11 @@ MEANING = ("Several parts of the collector may ask for the same Telegram file at
 
 
 class _Flight:
-    __slots__ = ("lock", "users", "origin", "since")
+    __slots__ = ("lock", "users", "origin", "since", "saved")
 
     def __init__(self):
         self.lock, self.users, self.origin, self.since = asyncio.Lock(), 0, None, None
+        self.saved = None
 
 
 class DownloadDedup:
@@ -50,6 +51,15 @@ class DownloadDedup:
     def active(self, scope=None):
         return sum(1 for (owner, _), flight in self.flights.items()
                    if flight.lock.locked() and (scope is None or owner == str(scope)))
+
+    def saved(self, scope, key):
+        flight = self.flights.get((str(scope), key))
+        return flight.saved if flight is not None else None
+
+    def remember(self, scope, key, path, digest, size, source):
+        flight = self.flights.get((str(scope), key))
+        if flight is not None:
+            flight.saved = {"path": path, "sha256": digest, "bytes": size, "source": source}
 
     def snapshot(self, scope=None, limit=20):
         now, rows = self.clock(), []

@@ -60,8 +60,8 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, attachment, failure_outcome, lane_limits,
-                         plan_media, remember_file, reuse_into, stored_copy, validate_observation)
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, failure_outcome, lane_limits,
+                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, validate_observation)
 from .media.dedup_queue import DOWNLOADS
 from .media.workers import AdaptiveSlots
 from .export.batch_requests import MessageBatcher
@@ -4740,6 +4740,8 @@ class Collector:
                 "reconstructed_missed_events": False, "sessions": len(meta["acquisition"]["sessions"])}, chat_id)
             if self.export_live is live:
                 self.export_live = None
+            if live:
+                await complete_in_thread(live.discard)
             await complete_in_thread(partial.discard)
         except asyncio.CancelledError:
             record.update(phase="cancelled")
@@ -4970,11 +4972,21 @@ class Collector:
         key = ("export", str(directory), canonical(info), size) if info else None
         origin = {"kind": "export", "chat_id": getattr(message, "chat_id", None), "message_id": message.id}
         async with self.media_locks.hold(key):
-            async with DOWNLOADS.turn(self.store.root, attachment(downloadable_media(message))[1], origin):
-                return await self.export_attachment_file(message, directory, kind, size, limit)
+            identity = download_key(downloadable_media(message), size)
+            async with DOWNLOADS.turn(self.store.root, identity, origin):
+                result = await self.export_attachment_file(message, directory, kind, size, limit)
+                if result.get("file_sha256"):
+                    DOWNLOADS.remember(self.store.root, identity, directory / result["file_sha256"],
+                                       result["file_sha256"], size, {"export": origin})
+                return result
 
     async def export_attachment_file(self, message, directory, kind, size, limit):
         reused = await complete_in_thread(reuse_into, self.store, directory, downloadable_media(message), size)
+        if not reused:
+            identity = download_key(downloadable_media(message), size)
+            reused = await complete_in_thread(reuse_download, directory, DOWNLOADS.saved(self.store.root, identity), size)
+            if reused:
+                await complete_in_thread(remember_file, directory, downloadable_media(message), reused["sha256"], size)
         if reused:
             return {"file": "media/" + reused["sha256"], "file_sha256": reused["sha256"], "file_size": size,
                     "file_kind": kind, "file_reused": reused["source"]}
@@ -5184,7 +5196,7 @@ class Collector:
 
     async def open_live(self, record, info, partial, options=None):
         self.export_live = None
-        live = LiveExport(partial.directory, self.vault, {
+        live = LiveExport(self.store.root / "temporary-exports" / "live", self.vault, {
             "export_id": record["id"], "account": self.store.get_setting("account", None),
             "chat": {"id": record["chat_id"], "title": info.get("title"), "kind": info.get("kind"),
                      "visibility": info.get("visibility")}},
@@ -5324,7 +5336,11 @@ class Collector:
         media_root.mkdir(exist_ok=True)
         slots = AdaptiveSlots(self.param("media_workers"), floods=self.file_flood_until)
         active, stopped = set(), asyncio.Event()
-        self.media_slots[lane] = slots
+        slot_key, number = lane, 1
+        while slot_key in self.media_slots:
+            number += 1
+            slot_key = lane + ":" + str(number)
+        self.media_slots[slot_key] = slots
 
         async def download(job, capture):
             try:
@@ -5408,6 +5424,9 @@ class Collector:
                 task.cancel()
             await asyncio.gather(*active, return_exceptions=True)
             raise
+        finally:
+            if self.media_slots.get(slot_key) is slots:
+                self.media_slots.pop(slot_key)
 
     async def process_media_job(self, job, capture, media_root, client_for_job=None):
         temp = media_root / ("pending-" + str(job["message_event"]))
@@ -5476,7 +5495,7 @@ class Collector:
         job = attempt.job
         origin = {"kind": "media_job", "message_event": job["message_event"], "chat_id": job["chat_id"],
                   "priority": job.get("priority")}
-        async with DOWNLOADS.turn(self.store.root, attachment(downloadable_media(message))[1], origin):
+        async with DOWNLOADS.turn(self.store.root, download_key(downloadable_media(message), size), origin):
             await self.fetch_media_turn(attempt, message, size, media_root, temp, client)
 
     async def fetch_media_turn(self, attempt, message, size, media_root, temp, client):
@@ -5490,6 +5509,12 @@ class Collector:
         media = downloadable_media(message)
         refreshed = False
         info, known = await complete_in_thread(stored_copy, self.store, media_root, media, size)
+        reused = {"media_event": known["seq"]} if known else None
+        if known is None:
+            shared = DOWNLOADS.saved(self.store.root, download_key(media, size))
+            known = await complete_in_thread(reuse_download, media_root, shared, size)
+            if known:
+                reused = known["source"]
         if known:
             attempt.advance("fetching")
             attempt.advance("hashed_bytes")
@@ -5501,7 +5526,7 @@ class Collector:
                 "media_kind": media_kind(message),
                 "duration_seconds": getattr(message.file, "duration", None),
                 "file_reference_refreshed": False, "attachment": info, "downloaded_bytes": 0,
-                "bytes_reused": {"media_event": known["seq"], "meaning": REUSE_MEANING}}))
+                "bytes_reused": {**reused, "meaning": REUSE_MEANING}}))
             return
 
         async def download(media):

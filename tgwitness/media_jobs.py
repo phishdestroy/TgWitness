@@ -141,6 +141,11 @@ def attachment(media):
     return info, attachment_key(info)
 
 
+def download_key(media, size):
+    key = attachment(media)[1]
+    return (key, size) if key is not None else None
+
+
 def intact(path, digest, size):
     path = Path(path)
     if path.is_symlink() or not path.is_file() or path.stat().st_size != size:
@@ -227,6 +232,31 @@ def reuse_into(store, directory, media, size):
         return None
     remember_file(directory, media, known["sha256"], size)
     return {"sha256": known["sha256"], "source": {"media_event": known["seq"]}}
+
+
+def reuse_download(directory, saved, size):
+    if saved is None or saved["bytes"] != size:
+        return None
+    digest = saved["sha256"]
+    source, target = Path(saved["path"]), Path(directory) / digest
+    temporary = target.with_name("reuse-" + digest + "-" + secrets.token_hex(8))
+    try:
+        if not intact(source, digest, size):
+            return None
+        if target.exists():
+            if not intact(target, digest, size):
+                return None
+        else:
+            shutil.copyfile(source, temporary)
+            if not intact(temporary, digest, size):
+                return None
+            temporary.replace(target)
+        return {"sha256": digest, "source": saved["source"]}
+    except OSError:
+        return None
+    finally:
+        with suppress(OSError):
+            temporary.unlink(missing_ok=True)
 
 
 def failure_outcome(exc, attempts, maximum_attempts, maximum_delay):
