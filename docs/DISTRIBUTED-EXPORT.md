@@ -47,7 +47,7 @@ Takeout handles stay in the encrypted vault. Chunk receipts identify transport a
 
 ## Exclusive account ownership
 
-One account runs one history run or export at a time, alongside live observation. Pause controls are independent. Reservations are acquired before Telegram requests and released on completion, failure or pause. History reads up to three chats at a time with a cursor per chat. History requests and file requests have separate limits of three in flight each; request spacing remains shared per account. Other RPCs take turns in separate lanes for live updates, the operator, background checks and exports, so an export never holds observation's requests. Separate accounts work concurrently. Saved FloodWait deadlines are checked again before queued requests are sent, including after restart; a FloodWait in an export pauses that export, not observation.
+One account runs one history run or export at a time, alongside live observation. Pause controls are independent. Reservations are acquired before Telegram requests and released on completion, failure or pause. History reads up to three chats at a time with a cursor per chat. History requests and file requests have separate limits of three in flight each; request spacing remains shared per account. Other RPCs take turns in separate lanes for live updates, the operator, background checks and exports. A slow response releases other lanes to proceed; pacing remains shared per account. Separate accounts work concurrently. Saved FloodWait deadlines are checked again before queued requests are sent, including after restart. Export retries pause that export; the saved deadline for an affected Telegram method still applies to other callers using it.
 
 ## Selection
 

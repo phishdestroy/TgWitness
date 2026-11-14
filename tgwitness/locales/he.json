@@ -9705,5 +9705,6 @@
   "Search matched an earlier saved version.": "החיפוש מצא התאמה לגרסה מוקדמת שנשמרה.",
   "Search saved messages": "חיפוש הודעות שמורות",
   "{n} saved versions": "{n} גרסאות שמורות",
-  "Chat loading: {running} active · {pending} pending": "טעינת שיחות: {running} פעילות · {pending} ממתינות"
+  "Chat loading: {running} active · {pending} pending": "טעינת שיחות: {running} פעילות · {pending} ממתינות",
+  "The Telegram connection changed. Retry the operation.": "החיבור ל-Telegram השתנה. נסו לבצע את הפעולה שוב."
 }

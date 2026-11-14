@@ -579,7 +579,6 @@ class WitnessClient(TelegramClient):
         if getattr(self, "bulk_pacer", None) is not None and any(bulk_request(item) for item in items):
             async with self._bulk_lock:
                 await self._paced_turn(items)
-                return await self._turn_call(sender, request, ordered, flood_sleep_threshold)
         return await self._turn_call(sender, request, ordered, flood_sleep_threshold)
 
     async def _turn_call(self, sender, request, ordered, flood_sleep_threshold):

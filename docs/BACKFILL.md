@@ -51,8 +51,8 @@ all subject to account request spacing and persisted waits. Up to three history
 requests can be in flight. Different chats have separate cursors; the scheduler
 rotates between them after pages, so a large or stalled chat does not block every
 other source. File requests have a separate three-request limit. Other history
-requests use the account's bulk lane, so neither they nor history pages hold
-requests of observation or of the operator.
+requests use the account's bulk lane. Their responses do not hold another lane;
+shared pacing and Telegram deadlines for the same method still apply.
 
 Folder and whole-account scopes enumerate all accessible dialogs, including archived
 ones, before signing the source plan. The selected-chat picker retains its configured
@@ -63,7 +63,8 @@ Bulk history, dialog and admin-log requests start with one-second spacing.
 Twenty consecutive successes reduce it by 20%, with a 0.5-second floor. FloodWait
 increases spacing by 0.5, 2 or 5 seconds, up to 10 seconds, and persists a cooldown of
 the server's wait plus a one-second margin for the history run and for the method
-Telegram limited. Observation and attachment downloads keep going meanwhile. File chunks
+Telegram limited. Other observation and attachment requests can continue while
+respecting any deadline that applies to their method. File chunks
 do not incur the artificial history delay or advance the history success streak.
 Messages the operator loads into an open chat are read without this spacing and
 without waiting for a history slot. This is a local pacing policy, not a published Telegram rate entitlement.

@@ -9753,5 +9753,6 @@
   "Search matched an earlier saved version.": "Wyszukiwanie dopasowało wcześniejszą zapisaną wersję.",
   "Search saved messages": "Wyszukiwanie zapisanych wiadomości",
   "{n} saved versions": "{n} zapisanych wersji",
-  "Chat loading: {running} active · {pending} pending": "Wczytywanie czatów: {running} w toku · {pending} oczekujących"
+  "Chat loading: {running} active · {pending} pending": "Wczytywanie czatów: {running} w toku · {pending} oczekujących",
+  "The Telegram connection changed. Retry the operation.": "Połączenie z Telegramem uległo zmianie. Ponów operację."
 }
