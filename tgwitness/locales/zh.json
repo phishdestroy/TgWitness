@@ -8881,5 +8881,6 @@
   "Other sessions at start": "其他会议在开始时",
   "Telegram service notices before observation: {n}": "观察前的 Telegram 服务通知：{n}",
   "Key ID {id}": "密钥 ID {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "其他已登录会话：{n}。每个会话都会单独接收更新，并可发送、编辑或删除该账户的消息。"
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "其他已登录会话：{n}。每个会话都会单独接收更新，并可发送、编辑或删除该账户的消息。",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "小于 1 MB · {min}–{max} 分钟。基于样本数据；实际结果可能有所不同。"
 }

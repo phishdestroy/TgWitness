@@ -101,7 +101,7 @@ def timestamp(value, say):
     else:
         offset = date.strftime('%z')
         zone = 'UTC' if not date.utcoffset() else 'UTC' + offset[:3] + ':' + offset[3:5] + (':' + offset[5:] if len(offset) > 5 else '')
-        shown = date.replace(tzinfo=None).isoformat(sep=' ')
+        shown = date.replace(tzinfo=None).isoformat(sep=' ', timespec='seconds')
     return '<time dir="ltr" datetime="' + e(raw) + '">' + e(shown) + '</time> · <bdi>' + e(zone) + '</bdi>'
 
 

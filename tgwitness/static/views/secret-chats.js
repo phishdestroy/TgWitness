@@ -36,6 +36,11 @@ export function createSecretChats(context) {
     return [...map.values()].sort((a, b) => String(b.last).localeCompare(String(a.last)));
   }
 
+  function named(item) {
+    const person = view.people?.[item.peer];
+    return person?.name ? person.name + (person.username ? ' · @' + person.username : '') : tr("User ID {id}", {id: item.peer ?? "?"});
+  }
+
   function stateOf(item) {
     const state = item.snapshot?.state || (item.items.some(r => r.kind === "secret_chat.closed") ? "closed" : "unknown");
     return state === 'closed' ? state : !view.settings.enabled ? 'paused' : !view.connected ? 'offline' : state;
@@ -113,7 +118,7 @@ export function createSecretChats(context) {
       button.dataset.secretChat = String(item.id);
       button.dataset.state = stateOf(item);
       button.setAttribute('aria-pressed', String(item.id === selected));
-      button.append(face(item), node("b", "", tr("User ID {id}", {id: item.peer ?? "?"})), node("small", "", stateText(item) + " · " +
+      button.append(face(item), node("b", "", named(item)), node("small", "", stateText(item) + " · " +
         trn("{n} record", "{n} records", item.items.length) + ' · #' + item.id));
       button.addEventListener("click", () => {selected = item.id; render();});
       list.append(button);
@@ -172,7 +177,8 @@ export function createSecretChats(context) {
       box.append(empty); return;
     }
     const head = node("div", "secret-thread-head"), who = node('div', 'secret-thread-who');
-    who.append(node("b", "", tr("User ID {id}", {id: item.peer ?? "?"})), pill(item));
+    who.append(node("b", "", named(item)), pill(item));
+    if (view.people?.[item.peer]?.name) who.append(node("small", "hint", tr("User ID {id}", {id: item.peer})));
     head.append(face(item), who);
     const key = item.snapshot?.key_visualization || item.items.find(r => r.kind === "secret_chat.ready")?.payload.key_visualization;
     if (key) {

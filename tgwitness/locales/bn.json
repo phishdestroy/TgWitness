@@ -8929,5 +8929,6 @@
   "Other sessions at start": "অন্যান্য সেশন শুরুতে",
   "Telegram service notices before observation: {n}": "Telegram সেবার পর্যবেক্ষণের আগে নোটিশ: {n}",
   "Key ID {id}": "কী আইডি {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "অন্যান্য সাইন-ইন সেশন: {n}। প্রতিটি আলাদাভাবে আপডেট পায় এবং এই অ্যাকাউন্টের বার্তা পাঠাতে, সম্পাদনা করতে বা মুছতে পারে।"
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "অন্যান্য সাইন-ইন সেশন: {n}। প্রতিটি আলাদাভাবে আপডেট পায় এবং এই অ্যাকাউন্টের বার্তা পাঠাতে, সম্পাদনা করতে বা মুছতে পারে।",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "১ এমবি-এর কম · {min}–{max} মিনিট। নমুনাভিত্তিক; প্রকৃত ফলাফল ভিন্ন হতে পারে।"
 }

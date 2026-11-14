@@ -2191,7 +2191,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=8").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=9").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;

@@ -8929,5 +8929,6 @@
   "Other sessions at start": "Boshqa sessiyalar boshida",
   "Telegram service notices before observation: {n}": "Telegram xizmati kuzatuvdan oldin bildirishnomalari: {n}",
   "Key ID {id}": "Kalit ID {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Boshqa tizimga kirgan sessiyalar: {n}. Har biri yangilanishlarni alohida oladi va shuningdek, ushbu hisobning xabarlarini yuborishi, tahrirlashi yoki o'chirishi mumkin."
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "Boshqa tizimga kirgan sessiyalar: {n}. Har biri yangilanishlarni alohida oladi va shuningdek, ushbu hisobning xabarlarini yuborishi, tahrirlashi yoki o'chirishi mumkin.",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "1 MB dan kam · {min}–{max} daqiqa. Namuna asosida; haqiqiy natijalar farq qilishi mumkin."
 }

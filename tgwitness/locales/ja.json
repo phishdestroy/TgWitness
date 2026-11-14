@@ -8881,5 +8881,6 @@
   "Other sessions at start": "開始時のその他のセッション",
   "Telegram service notices before observation: {n}": "観察前のTelegramサービスからの通知：{n}",
   "Key ID {id}": "キーID {id}",
-  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "その他のログイン済みセッション：{n}。各セッションは個別に更新情報を受け取り、このアカウントのメッセージを送信、編集、削除することもできます。"
+  "Other signed-in sessions: {n}. Each receives updates separately and can also send, edit or delete this account's messages.": "その他のログイン済みセッション：{n}。各セッションは個別に更新情報を受け取り、このアカウントのメッセージを送信、編集、削除することもできます。",
+  "Less than 1 MB · {min}–{max} minutes. Based on a sample; actual results may differ.": "1 MB未満・{min}～{max}分。サンプルに基づくものであり、実際の結果は異なる場合があります。"
 }

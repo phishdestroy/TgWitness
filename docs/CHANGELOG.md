@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- **Pseudo-secret** shows the other side's name and username when the account knows them, with the user ID beside it, and applies Secret Chat updates that Telegram delivers while the account is still connecting. Account export pages show times to the second. The first-setup estimate says `Less than 1 MB` instead of `About 0 MB`.
 - Stopping the panel keeps the main workspace's route up until its Telegram connection has closed, so shutdown no longer spends a minute on reconnection attempts through a tunnel that is already gone.
 - **Pseudo-secret** notices within half a minute when the other side ends a chat: while a chat is open the account asks Telegram for missed updates every 30 seconds, because Telegram does not always push the ending to a connected session.
 - `verify.py` given an unpacked folder says to pass the original ZIP instead of failing with a key error. The journal names the session records written when observation starts and shows their values instead of raw English notes.
