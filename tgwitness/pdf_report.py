@@ -1282,7 +1282,7 @@ class ChatPDF:
             if notice:
                 self.lay.callout(notice)
             self.lay.figures([(say("Messages"), self.meta.get("message_count")), (say("Participants"), len(self.people)),
-                         (say("With media"), self.stats["media"]), (say("Edited"), self.stats["edited"]), (say("Service"), self.stats["service"])]
+                         (say("With media"), self.stats["media"]), (say("Edited"), self.stats["edited"]), (say("Service messages"), self.stats["service"])]
                         + ([(say("Numbers absent"), self.ids["missing"])] if self.ids.get("numbered_per_chat") else [])
                         + [(say("Period"), report.span_text(say, self.stats["first_at"], self.stats["last_at"]))])
             self.lay.gap(5)
