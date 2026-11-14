@@ -913,7 +913,8 @@ class EvidencePDF:
                          (say("Edits"), cats["edited"]), (say("Deletions"), cats["deleted"]),
                          *([(say("Missing on recheck"), cats["missing"])] if cats.get("missing") else []),
                          (say("Files"), summary["files"]),
-                         (say("Timestamps"), summary["timestamps"]),
+                         (say("Timestamps"), summary["timestamps"] if summary["timestamps"] or self.context.get("archive")
+                          else None),
                          (say("Observation period"), report.span_text(say, summary["first_record_at"], summary["last_record_at"]))])
             data_name = "records.jsonl" if self.handover else "events.jsonl"
             self.lay.gap(5)
@@ -1085,6 +1086,9 @@ class EvidencePDF:
             if latest:
                 self.lay.callout(say("Latest independently timestamped record: #{n}", n=latest.get("event_count")) + " · "
                             + report.utc_text(latest.get("time")) + " · " + latest["service"], OK)
+            elif not self.context.get("archive"):
+                self.lay.callout(say("Timestamp receipts are not part of this report file. The signed archive of this "
+                                     "journal (ZIP or ASiC-E) carries the receipts made in Evidence mode."))
             else:
                 self.lay.callout(say("No independent timestamps in this export: times come from the collector's clock. Turn "
                                 "on Evidence mode to stamp checkpoints automatically."))

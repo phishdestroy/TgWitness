@@ -2371,7 +2371,7 @@ def timestamp_summary(anchors, rows):
     return summary
 
 
-def timestamps_section(say, number, anchors, archive_name, fp):
+def timestamps_section(say, number, anchors, archive_name, fp, standalone=False):
     out = section(number, "timestamps", say("Timestamps"),
                   say("A timestamp shows that a checkpoint, and every record before it, existed no later than the stamped "
                       "time. Records after the latest stamped checkpoint rely on the collector's clock."))
@@ -2379,6 +2379,9 @@ def timestamps_section(say, number, anchors, archive_name, fp):
     if latest:
         out += ('<div class="callout ok">' + e(say("Latest independently timestamped record: #{n}", n=latest.get("event_count")))
                 + " · " + when(latest.get("time")) + " · " + e(latest["service"]) + "</div>")
+    elif standalone:
+        out += ('<div class="callout">' + e(say("Timestamp receipts are not part of this report file. The signed archive of this "
+                                                "journal (ZIP or ASiC-E) carries the receipts made in Evidence mode.")) + "</div>")
     else:
         out += ('<div class="callout">' + e(say("No independent timestamps in this export: times come from the collector's "
                                                 "clock. Turn on Evidence mode to stamp checkpoints automatically.")) + "</div>")
@@ -2541,7 +2544,8 @@ class EvidenceHTML:
                         *([(say("Missing on recheck"), num(categories["missing"]), "warn", "eye")]
                           if categories.get("missing") else []),
                         (say("Files"), num(len(self.digest["media"])), "violet", "file"),
-                        (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"])), "ok", "seal"),
+                        (say("Timestamps"), num(len([a for a in self.anchors if a.get("kind") != "unreadable"]))
+                         if self.anchors or self.archive else "—", "ok", "seal"),
                         (say("Observation period"), e(span_text(say, self.digest["first"], self.digest["last"])), "pink", "eye")])
                + (toc(links) if self.data_kind else "")).encode("utf-8")
 
@@ -2630,7 +2634,8 @@ class EvidenceHTML:
                       if self.context.get("events_sha256") else "")])
                + "</section>").encode("utf-8")
         if not self.handover:
-            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name, self.fp).encode("utf-8")
+            yield timestamps_section(say, next(self.numbers), self.anchors, self.archive_name, self.fp,
+                                     not self.archive).encode("utf-8")
 
     def render_custody(self):
         say = self.say
