@@ -1,4 +1,5 @@
-from contextlib import suppress
+import asyncio
+from contextlib import asynccontextmanager, suppress
 from dataclasses import dataclass
 import hashlib
 import json
@@ -69,6 +70,26 @@ class MediaAttempt:
             raise ValueError("Invalid media transition: " + self.phase + " -> " + outcome.state)
         self.store.finish_media(self.job, outcome.state, outcome.payload, delay=outcome.delay)
         self.phase = outcome.state
+
+
+class MediaLocks:
+    def __init__(self):
+        self.entries = {}
+
+    @asynccontextmanager
+    async def hold(self, key):
+        if key is None:
+            yield
+            return
+        entry = self.entries.setdefault(key, [asyncio.Lock(), 0])
+        entry[1] += 1
+        try:
+            async with entry[0]:
+                yield
+        finally:
+            entry[1] -= 1
+            if not entry[1]:
+                del self.entries[key]
 
 
 def lane_limits(lane):

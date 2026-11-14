@@ -452,7 +452,8 @@ class WitnessClient(TelegramClient):
     async def _turn_call(self, sender, request, ordered, flood_sleep_threshold):
         if not utils.is_list_like(request) and update_request(request):
             return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
-        if not utils.is_list_like(request) and file_request(request):
+        if not utils.is_list_like(request) and (file_request(request)
+                or _wraps(request, (functions.upload.GetFileHashesRequest,))):
             async with self._file_slots:
                 return await self._serial_call(sender, request, ordered, flood_sleep_threshold)
         async with self._rpc_lock:
