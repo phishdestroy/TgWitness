@@ -381,10 +381,15 @@ observations are distinct receipts, not a claim of distinct Telegram actions.
 
 Raw Telegram dates are ISO strings; binary fields become objects containing
 bytes_base64. Message text, entities, media descriptors, reply metadata, reactions,
-and service actions are retained in raw message metadata when supplied.
+and service actions are retained in raw message metadata when supplied. A live
+message also keeps the Telegram update that delivered it in `transport_update`; when
+that update carries the same message as `raw`, its `message` field is
+`{"same_as": "raw"}` instead of a second copy.
 
-`observed_at` is the collector's UTC observation time; `source_at` is the date
-supplied by that Telegram event. Live edits retain the supplied edit date, history
+`observed_at` is the collector's UTC time of writing the record; `source_at` is the date
+supplied by that Telegram event. Records written while handling a live update add
+`payload.received_at`, the UTC time the update reached the collector, and
+`payload.processing_delay_ms`. Live edits retain the supplied edit date, history
 snapshots retain the message date with a current observation time, and an ordinary
 deletion notification records reception time with a null source date. Admin-log
 entries retain their supplied action date separately. Reception order and source

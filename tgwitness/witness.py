@@ -458,11 +458,11 @@ class Witness:
 
     async def retry_daily_ots(self):
         cursor = self.store.get_setting('witness_daily_retry_cursor', 0)
-        with self.store.lock:
-            rows = self.store.db.execute("SELECT * FROM events WHERE kind='witness.daily' AND seq>? ORDER BY seq LIMIT 32",
-                                         (cursor,)).fetchall()
+        with self.store.reading() as db:
+            rows = db.execute("SELECT * FROM events WHERE kind='witness.daily' AND seq>? ORDER BY seq LIMIT 32",
+                              (cursor,)).fetchall()
             if not rows:
-                rows = self.store.db.execute("SELECT * FROM events WHERE kind='witness.daily' ORDER BY seq LIMIT 32").fetchall()
+                rows = db.execute("SELECT * FROM events WHERE kind='witness.daily' ORDER BY seq LIMIT 32").fetchall()
         deadline, attempts = time.monotonic() + 60, []
         for row in rows:
             event = self.store.decode(row)

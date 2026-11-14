@@ -9005,6 +9005,7 @@
   "running": "চলমান",
   "cancelled": "বাতিল",
   "Updates arrived while observation was paused": "পর্যবেক্ষণ বিরতিতে থাকা অবস্থায় আপডেটগুলো এসেছিল",
+  "Updates from an unidentified chat were not recorded": "শনাক্ত করা যায়নি এমন একটি চ্যাটের আপডেট রেকর্ড করা হয়নি",
   "Too many updates arrived during startup": "স্টার্টআপের সময় অনেকগুলো আপডেট এসেছিল",
   "Telegram could not deliver older updates": "Telegram পুরনো আপডেটগুলো সরবরাহ করতে পারেনি",
   "Choose a scope for this procedure.": "এই কার্যধারার পরিসর নির্বাচন করুন।",

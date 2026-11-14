@@ -561,8 +561,8 @@ class AccountExport:
                 raise ValueError("Captured page count differs from its receipt.")
             self.accept(envelope)
         self.index.commit()
-        with self.store.lock:
-            committed = self.store.db.execute("SELECT payload FROM events WHERE kind='account_export.page' "
+        with self.store.reading() as db:
+            committed = db.execute("SELECT payload FROM events WHERE kind='account_export.page' "
                 "AND json_extract(payload,'$.job_id')=? ORDER BY seq DESC LIMIT 1", (job["job_id"],)).fetchone()
         if committed:
             boundary = json.loads(committed[0])

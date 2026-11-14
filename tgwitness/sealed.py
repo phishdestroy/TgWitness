@@ -116,8 +116,8 @@ class Session:
         if not self.account_job and self.phase == "collecting":
             history = self.collector.history.status()
             if time.monotonic() - self.media_bytes_at >= 5:
-                with self.store.lock:
-                    self.media_bytes = self.store.db.execute(
+                with self.store.reading() as db:
+                    self.media_bytes = db.execute(
                         "SELECT coalesce(sum(estimated_bytes),0) FROM media_jobs WHERE state='done'").fetchone()[0]
                 self.media_bytes_at = time.monotonic()
             account = {"counts": {"messages_seen": history.get("captured", 0), "unique_media_bytes": self.media_bytes},

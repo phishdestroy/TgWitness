@@ -224,9 +224,9 @@ def media_preview(store, query, allowed, source_ref):
             raise ValueError("This file is not available to this access.")
         scope = " AND chat_id IN (" + ",".join("?" * len(allowed)) + ")"
         params += sorted(allowed)
-    with store.lock:
-        row = store.db.execute("SELECT * FROM events WHERE kind='media.saved' AND json_extract(payload,'$.media_sha256')=?"
-                               + scope + " ORDER BY seq LIMIT 1", params).fetchone()
+    with store.reading() as db:
+        row = db.execute("SELECT * FROM events WHERE kind='media.saved' AND json_extract(payload,'$.media_sha256')=?"
+                         + scope + " ORDER BY seq LIMIT 1", params).fetchone()
     if row is None:
         raise ValueError("This file is not available to this access.")
     event = {**dict(row), "payload": json.loads(row["payload"])}

@@ -9005,6 +9005,7 @@
   "running": "चला हुआ",
   "cancelled": "रद्द",
   "Updates arrived while observation was paused": "अवलोकन रुका होने के दौरान अपडेट्स आए",
+  "Updates from an unidentified chat were not recorded": "एक अज्ञात चैट के अपडेट रिकॉर्ड नहीं किए गए",
   "Too many updates arrived during startup": "स्टार्टअप के दौरान बहुत सारे अपडेट आ गए",
   "Telegram could not deliver older updates": "Telegram पुराने अपडेट नहीं पहुँचा सका",
   "Choose a scope for this procedure.": "इस कार्यवाही का दायरा चुनें।",

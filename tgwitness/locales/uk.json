@@ -9101,6 +9101,7 @@
   "running": "виконується",
   "cancelled": "скасовано",
   "Updates arrived while observation was paused": "Оновлення надійшли під час призупинення спостереження",
+  "Updates from an unidentified chat were not recorded": "Оновлення з нерозпізнаного чату не записано",
   "Too many updates arrived during startup": "Під час запуску надійшло занадто багато оновлень",
   "Telegram could not deliver older updates": "Telegram не зміг доставити старіші оновлення",
   "Choose a scope for this procedure.": "Виберіть сферу застосування процедури.",

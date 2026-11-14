@@ -9005,6 +9005,7 @@
   "running": "çalışıyor",
   "cancelled": "iptal edildi",
   "Updates arrived while observation was paused": "Gözlem duraklatılmışken güncellemeler geldi",
+  "Updates from an unidentified chat were not recorded": "Tanımlanamayan bir sohbetten gelen güncellemeler kaydedilmedi",
   "Too many updates arrived during startup": "Başlatma sırasında çok fazla güncelleme geldi",
   "Telegram could not deliver older updates": "Telegram, eski güncellemeleri iletemedi",
   "Choose a scope for this procedure.": "Bu usulün uygulama kapsamını seçin.",

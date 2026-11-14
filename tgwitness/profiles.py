@@ -196,8 +196,8 @@ class Profiles:
             return None
         if entry.get("app") is not None:
             store = entry["app"].state.store
-            with store.lock:
-                return UNEXPORTED if unexported(store.db) else None
+            with store.reading() as db:
+                return UNEXPORTED if unexported(db) else None
         journal = self.root / "profiles" / profile_id / "journal.sqlite3"
         if not journal.is_file():
             return None

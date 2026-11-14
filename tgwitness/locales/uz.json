@@ -9005,6 +9005,7 @@
   "running": "davom etmoqda",
   "cancelled": "bekor qilindi",
   "Updates arrived while observation was paused": "Kuzatuv to'xtatilgan paytda yangilanishlar keldi",
+  "Updates from an unidentified chat were not recorded": "Aniqlanmagan chatdagi yangilanishlar yozib olinmadi",
   "Too many updates arrived during startup": "Boshlanish paytida juda ko'p yangilanishlar keldi",
   "Telegram could not deliver older updates": "Telegram eski yangilanishlarni yetkazib bera olmadi",
   "Choose a scope for this procedure.": "Ushbu tartibning qo‘llanish doirasini tanlang.",

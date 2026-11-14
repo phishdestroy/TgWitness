@@ -228,8 +228,8 @@ def options(collector):
 
 def due(store, minutes, limit=100):
     cutoff = (datetime.now(timezone.utc) - timedelta(minutes=minutes)).isoformat(timespec="milliseconds")
-    with store.lock:
-        rows = store.db.execute(
+    with store.reading() as db:
+        rows = db.execute(
             "SELECT t.chat_id FROM targets t LEFT JOIN (SELECT chat_id, max(observed_at) AS last FROM events "
             "WHERE kind=? GROUP BY chat_id) s ON s.chat_id=t.chat_id WHERE t.enabled=1 AND (s.last IS NULL OR s.last<?) "
             "ORDER BY s.last IS NOT NULL, s.last LIMIT ?", (KIND, cutoff, limit if limit is not None else -1)).fetchall()
@@ -241,7 +241,7 @@ async def run_due(collector, attempted):
     if minutes <= 0:
         return 0
     done = 0
-    for chat_id in due(collector.store, minutes, limit=None):
+    for chat_id in await asyncio.to_thread(due, collector.store, minutes, None):
         if not collector.running or done >= 100:
             break
         now = time.monotonic()

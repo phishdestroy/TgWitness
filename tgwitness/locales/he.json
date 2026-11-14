@@ -9053,6 +9053,7 @@
   "running": "פועל",
   "cancelled": "בוטל",
   "Updates arrived while observation was paused": "העדכונים הגיעו בזמן שהתצפית הייתה בהשהיה",
+  "Updates from an unidentified chat were not recorded": "עדכונים מצ׳אט שלא זוהה לא נרשמו",
   "Too many updates arrived during startup": "התקבלו יותר מדי עדכונים במהלך ההפעלה",
   "Telegram could not deliver older updates": "Telegram לא הצליחה לספק עדכונים ישנים יותר",
   "Choose a scope for this procedure.": "יש לבחור את תחולת ההליך.",

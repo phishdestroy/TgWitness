@@ -4,7 +4,9 @@ import logging
 import sqlite3
 import threading
 import time
+import weakref
 from contextlib import contextmanager
+from contextvars import ContextVar
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -28,9 +30,38 @@ JOURNAL_KIND_GROUPS = {"membership": ("membership.",), "media": ("media.",), "ac
     "coverage": ("coverage.", "connection.", "collector.", "process.", "observation.", "snapshot.", "target.",
                  "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed",
                  "media.retry", "media.recovered", "deletion.unscoped", "session.",)}
+RECEPTION = ContextVar("journal_reception", default=None)
+CHAT_SETTINGS = ("recheck_last", "recheck_floor", "recheck_walked", "recheck_cursor")
 
 def utcnow():
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
+
+
+def reception_fields(reception):
+    received = datetime.fromtimestamp(reception["wall_ns"] / 1e9, timezone.utc)
+    return {"received_at": received.isoformat(timespec="milliseconds"),
+            "processing_delay_ms": max(0, (time.monotonic_ns() - reception["monotonic_ns"]) // 1_000_000)}
+
+
+def chat_rows(name, values):
+    if not isinstance(values, dict):
+        return []
+    return [(name, int(key), json.dumps(value)) for key, value in values.items()
+            if str(key).lstrip("-").isdigit()]
+
+
+class ReadConnection:
+    __slots__ = ("db", "__weakref__")
+
+    def __init__(self, path):
+        db = sqlite3.connect(path, check_same_thread=False)
+        weakref.finalize(self, db.close)
+        db.create_function("search_text", 1, search_text, deterministic=True)
+        db.create_function("nul_text", 1, nul_text, deterministic=True)
+        db.row_factory = sqlite3.Row
+        db.execute("PRAGMA busy_timeout=5000")
+        db.execute("PRAGMA query_only=ON")
+        self.db = db
 
 
 def canonical(value):
@@ -64,6 +95,9 @@ class Store:
             CREATE INDEX IF NOT EXISTS event_kind ON events(kind, seq);
             CREATE INDEX IF NOT EXISTS event_observed ON events(observed_at, seq);
             CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS chat_settings (
+              name TEXT NOT NULL, chat_id INTEGER NOT NULL, value TEXT NOT NULL,
+              PRIMARY KEY (name, chat_id)) WITHOUT ROWID;
             CREATE TABLE IF NOT EXISTS targets (
               chat_id INTEGER PRIMARY KEY, title TEXT NOT NULL, enabled INTEGER NOT NULL,
               kind TEXT NOT NULL);
@@ -96,11 +130,51 @@ class Store:
         self.listeners = []
         self.committed = []
         self.transaction_depth = 0
+        self.readers = threading.local()
+        self.read_connections = weakref.WeakSet()
         with self.transaction():
             continuity.initialize(self.db)
             migrate_media(self.db)
+            self.migrate_chat_settings()
             self.read_index = JournalIndex(self.db)
         self.fulltext = FullText(self)
+
+    def migrate_chat_settings(self):
+        for name in CHAT_SETTINGS:
+            row = self.db.execute("SELECT value FROM settings WHERE key=?", (name,)).fetchone()
+            if row is None:
+                continue
+            self.db.executemany("INSERT OR REPLACE INTO chat_settings VALUES (?,?,?)",
+                                chat_rows(name, json.loads(row[0])))
+            self.db.execute("DELETE FROM settings WHERE key=?", (name,))
+
+    @contextmanager
+    def reading(self):
+        if self.lock._is_owned():
+            yield self.db
+            return
+        reader = getattr(self.readers, "connection", None)
+        if reader is not None and reader.db.in_transaction:
+            yield reader.db
+            return
+        if self.db.in_transaction and self.lock.acquire(blocking=False):
+            try:
+                pending = self.db.in_transaction
+                if pending:
+                    yield self.db
+            finally:
+                self.lock.release()
+            if pending:
+                return
+        if reader is None:
+            reader = self.readers.connection = ReadConnection(self.root / "journal.sqlite3")
+            self.read_connections.add(reader)
+        db = reader.db
+        db.execute("BEGIN")
+        try:
+            yield db
+        finally:
+            db.rollback()
 
     @contextmanager
     def transaction(self):
@@ -153,6 +227,9 @@ class Store:
     def append(self, kind, payload, chat_id=None, message_id=None, actor_id=None, source_at=None,
                media_job=None):
         payload = json.loads(json.dumps(payload, ensure_ascii=False, allow_nan=False))
+        reception = RECEPTION.get()
+        if reception and isinstance(payload, dict) and "received_at" not in payload:
+            payload.update(reception_fields(reception))
         with self.transaction():
             tail = self.db.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
             event = dict(seq=tail["seq"] + 1 if tail else 1, observed_at=utcnow(),
@@ -182,8 +259,8 @@ class Store:
         return result
 
     def chat_overview(self):
-        with self.lock:
-            rows = self.db.execute(
+        with self.reading() as db:
+            rows = db.execute(
                 "SELECT c.*,e.payload FROM chat_state_index c LEFT JOIN events e ON e.seq=c.text_seq "
                 "WHERE c.last_observed_at IS NOT NULL").fetchall()
             result = {}
@@ -202,17 +279,17 @@ class Store:
 
     def chat_authors(self, chat_id):
         text_marks = ",".join("?" * len(TEXT_KINDS))
-        with self.lock:
-            rows = self.db.execute(
+        with self.reading() as db:
+            rows = db.execute(
                 "SELECT message_id, kind, json_extract(payload,'$.sender_id') AS sender_id,"
                 " json_extract(payload,'$.sender_observation.display_name') AS name,"
                 " json_extract(payload,'$.sender_observation.username') AS username,"
                 " coalesce(json_extract(payload,'$.sent_at'), source_at) AS sent_at"
                 " FROM events WHERE chat_id=? AND message_id IS NOT NULL AND kind IN (" + text_marks + ")"
                 " ORDER BY seq", (chat_id, *TEXT_KINDS)).fetchall()
-            deleted = {r[0] for r in self.db.execute(
+            deleted = {r[0] for r in db.execute(
                 "SELECT DISTINCT message_id FROM events WHERE chat_id=? AND kind='message.deleted'", (chat_id,))}
-            missing = {r[0] for r in self.db.execute(
+            missing = {r[0] for r in db.execute(
                 "SELECT message_id FROM message_state_index WHERE chat_id=? AND missing=1",
                 (chat_id,))} - deleted
         people, edited, owner = {}, set(), {}
@@ -241,25 +318,25 @@ class Store:
         return {"authors": result, "deleted_without_author": len(deleted - set(owner))}
 
     def last_message_id(self, chat_id):
-        with self.lock:
-            row = self.db.execute("SELECT message_id FROM message_state_index INDEXED BY message_text WHERE chat_id=? "
+        with self.reading() as db:
+            row = db.execute("SELECT message_id FROM message_state_index INDEXED BY message_text WHERE chat_id=? "
                                   "AND text_seq IS NOT NULL ORDER BY message_id DESC LIMIT 1", (chat_id,)).fetchone()
         return row[0] if row else None
 
     def saved_message_ids(self, chat_id, message_ids):
         ids = sorted({m for m in message_ids if isinstance(m, int)})
         found = set()
-        with self.lock:
+        with self.reading() as db:
             for start in range(0, len(ids), 500):
                 part = ids[start:start + 500]
-                found.update(row[0] for row in self.db.execute(
+                found.update(row[0] for row in db.execute(
                     "SELECT message_id FROM message_state_index WHERE chat_id=? AND text_seq IS NOT NULL "
                     "AND message_id IN (" + ",".join("?" * len(part)) + ")", (chat_id, *part)))
         return found
 
     def watchlist_hits(self, lowest, highest):
-        with self.lock:
-            rows = self.db.execute(
+        with self.reading() as db:
+            rows = db.execute(
                 "SELECT json_extract(payload,'$.entry_id') AS entry_id,"
                 "json_extract(payload,'$.record') AS record FROM events INDEXED BY event_kind "
                 "WHERE kind='watchlist.hit' AND json_extract(payload,'$.record') BETWEEN ? AND ?",
@@ -267,8 +344,8 @@ class Store:
         return {(row["entry_id"], row["record"]) for row in rows if isinstance(row["entry_id"], str)}
 
     def message_state(self, chat_id, message_id):
-        with self.lock:
-            row = self.db.execute(
+        with self.reading() as db:
+            row = db.execute(
                 "SELECT e.seq,e.hash,json_extract(e.payload,'$.text') AS text,"
                 "json_extract(e.payload,'$.edited_at') AS edited_at,"
                 "json_extract(e.payload,'$.outgoing') AS outgoing,json_extract(e.payload,'$.sent_at') AS sent_at,"
@@ -291,8 +368,8 @@ class Store:
         if below is not None:
             where += " AND message_id<?"
             params.append(below)
-        with self.lock:
-            return [r[0] for r in self.db.execute(
+        with self.reading() as db:
+            return [r[0] for r in db.execute(
                 "SELECT message_id FROM message_state_index INDEXED BY " + index + " WHERE " + where +
                 " ORDER BY message_id DESC LIMIT ?", (*params, limit))]
 
@@ -310,17 +387,17 @@ class Store:
             where += " AND message_id>?"
             params.append(after_id)
         direction = "ASC" if after_id is not None else "DESC"
-        with self.lock:
-            ids = [r[0] for r in self.db.execute(
+        with self.reading() as db:
+            ids = [r[0] for r in db.execute(
                 "SELECT message_id FROM message_state_index WHERE " + where + " ORDER BY message_id " + direction + " LIMIT ?",
                 (*params, limit))]
             if not ids:
                 return {"messages": [], "next_before": None, "next_after": None}
-            older = self.db.execute(
+            older = db.execute(
                 "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id<? LIMIT 1", (chat_id, min(ids))).fetchone()
-            newer = self.db.execute(
+            newer = db.execute(
                 "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id>? LIMIT 1", (chat_id, max(ids))).fetchone()
-            rows = self.db.execute(
+            rows = db.execute(
                 "SELECT seq, hash, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
                 " ORDER BY seq", (chat_id, *ids, *CHAT_KINDS)).fetchall()
@@ -375,8 +452,8 @@ class Store:
         unnamed = {m["sender"]["id"] for m in messages.values()
                    if m["sender"] and not m["sender"]["name"] and type(m["sender"]["id"]) is int}
         if unnamed:
-            with self.lock:
-                known = observed_names(self.db, chat_id, unnamed)
+            with self.reading() as db:
+                known = observed_names(db, chat_id, unnamed)
             for item in messages.values():
                 names = known.get(item["sender"]["id"]) if item["sender"] and not item["sender"]["name"] else None
                 if names:
@@ -393,27 +470,27 @@ class Store:
                 "next_after": max(ids) if newer else None}
 
     def events_after(self, seq, limit):
-        with self.lock:
-            return [self.decode(r) for r in self.db.execute(
+        with self.reading() as db:
+            return [self.decode(r) for r in db.execute(
                 "SELECT * FROM events WHERE seq>? ORDER BY seq LIMIT ?", (seq, limit))]
 
     def counts_since(self, observed_at, kinds):
-        with self.lock:
-            return {(r[0], r[1]): r[2] for r in self.db.execute(
+        with self.reading() as db:
+            return {(r[0], r[1]): r[2] for r in db.execute(
                 "SELECT chat_id, kind, count(*) FROM events WHERE observed_at>=? AND kind IN ("
                 + ",".join("?" * len(kinds)) + ") GROUP BY chat_id, kind", (observed_at, *kinds))}
 
     def media_saved_after(self, seq):
-        with self.lock:
-            return [(r[0], r[1]) for r in self.db.execute(
+        with self.reading() as db:
+            return [(r[0], r[1]) for r in db.execute(
                 "SELECT seq, json_extract(payload,'$.media_sha256') FROM events WHERE kind IN ("
                 + ",".join("?" * len(STORED_MEDIA_KINDS)) + ") AND seq>? ORDER BY seq",
                 (*STORED_MEDIA_KINDS, seq)) if r[1]]
 
     def media_in_chats(self, sha256, chat_ids):
         marks = ",".join("?" * len(chat_ids))
-        with self.lock:
-            return self.db.execute(
+        with self.reading() as db:
+            return db.execute(
                 "SELECT 1 FROM events WHERE kind IN (?,?) AND chat_id IN (" + marks + ")"
                 " AND json_extract(payload,'$.media_sha256')=? LIMIT 1",
                 (*MEDIA_KINDS, *sorted(chat_ids), sha256)).fetchone() is not None
@@ -421,14 +498,14 @@ class Store:
     def stored_media(self, identity):
         if not identity:
             return None
-        with self.lock:
-            row = self.db.execute("SELECT sha256,bytes,seq FROM media_identity_index WHERE identity=?",
-                                  (identity,)).fetchone()
+        with self.reading() as db:
+            row = db.execute("SELECT sha256,bytes,seq FROM media_identity_index WHERE identity=?",
+                             (identity,)).fetchone()
         return dict(row) if row else None
 
     def account_loss_statement(self, since=None):
-        with self.lock:
-            row = self.db.execute(
+        with self.reading() as db:
+            row = db.execute(
                 "SELECT seq,hash,observed_at,payload FROM events WHERE kind='coverage.gap' AND observed_at>=? "
                 "AND json_extract(payload,'$.reason')='authorization_required' ORDER BY seq DESC LIMIT 1",
                 (since or "",)).fetchone()
@@ -441,8 +518,8 @@ class Store:
 
     def sender_in_chats(self, sender_id, chat_ids):
         marks = ",".join("?" * len(chat_ids))
-        with self.lock:
-            return self.db.execute(
+        with self.reading() as db:
+            return db.execute(
                 "SELECT 1 FROM events WHERE chat_id IN (" + marks + ") AND message_id IS NOT NULL"
                 " AND json_extract(payload,'$.sender_id')=? LIMIT 1", (*sorted(chat_ids), sender_id)).fetchone() is not None
 
@@ -541,26 +618,23 @@ class Store:
         return [dict(r) for r in self.bounded_read(sql, [*params, limit, offset], 3)]
 
     def bounded_read(self, sql, params, timeout_s):
-        if timeout_s is None:
-            with self.lock:
-                return self.db.execute(sql, params).fetchall()
-        deadline = time.monotonic() + timeout_s
-        if not self.lock.acquire(timeout=timeout_s):
-            raise TimeoutError("Archive is busy. Retry shortly.")
-        try:
-            self.db.set_progress_handler(lambda: int(time.monotonic() >= deadline), 1000)
-            return self.db.execute(sql, params).fetchall()
-        except sqlite3.OperationalError as exc:
-            if time.monotonic() >= deadline:
-                raise TimeoutError("Archive search timed out. Narrow the query.") from None
-            raise exc
-        finally:
-            self.db.set_progress_handler(None, 0)
-            self.lock.release()
+        with self.reading() as db:
+            if timeout_s is None:
+                return db.execute(sql, params).fetchall()
+            deadline = time.monotonic() + timeout_s
+            db.set_progress_handler(lambda: int(time.monotonic() >= deadline), 1000)
+            try:
+                return db.execute(sql, params).fetchall()
+            except sqlite3.OperationalError as exc:
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("Archive search timed out. Narrow the query.") from None
+                raise exc
+            finally:
+                db.set_progress_handler(None, 0)
 
     def all_events(self):
-        with self.lock:
-            return [self.decode(r) for r in self.db.execute("SELECT * FROM events ORDER BY seq")]
+        with self.reading() as db:
+            return [self.decode(r) for r in db.execute("SELECT * FROM events ORDER BY seq")]
 
     @contextmanager
     def snapshot(self):
@@ -590,14 +664,14 @@ class Store:
 
     def media_stats(self, chat_ids=None):
         clause = " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
-        with self.lock:
-            return {r[0]: r[1] for r in self.db.execute(
+        with self.reading() as db:
+            return {r[0]: r[1] for r in db.execute(
                 "SELECT state,count(*) FROM media_jobs" + clause + " GROUP BY state", sorted(chat_ids or []))}
 
     def media_oldest(self, chat_ids=None):
         clause = " AND j.chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
-        with self.lock:
-            row = self.db.execute(
+        with self.reading() as db:
+            row = db.execute(
                 "SELECT min(e.observed_at) FROM media_jobs j JOIN events e ON e.seq=j.message_event "
                 "WHERE j.state IN ('queued','retry','running')" + clause, sorted(chat_ids or [])).fetchone()
         return row[0]
@@ -648,8 +722,8 @@ class Store:
     def next_history_media_attempt(self, account_id, run_id, *, min_priority=None, max_priority=None, expedited=False):
         filters, params = [], [run_id, account_id]
         self.priority_filter(filters, params, min_priority, max_priority, expedited)
-        with self.lock:
-            return self.db.execute("SELECT min(j.next_attempt) FROM media_jobs j "
+        with self.reading() as db:
+            return db.execute("SELECT min(j.next_attempt) FROM media_jobs j "
                 "JOIN history_items h ON h.message_event=j.message_event JOIN targets t USING(chat_id) "
                 "WHERE h.run_id=? AND j.account_id=? AND t.enabled=1 AND j.state IN ('queued','retry')"
                 + (" AND " + " AND ".join(filters) if filters else ""), params).fetchone()[0]
@@ -682,8 +756,8 @@ class Store:
 
     def ephemeral_outcome(self, message_event, status):
         from . import ephemeral
-        with self.lock:
-            row = self.db.execute("SELECT payload FROM events WHERE seq=?", (message_event,)).fetchone()
+        with self.reading() as db:
+            row = db.execute("SELECT payload FROM events WHERE seq=?", (message_event,)).fetchone()
         original = json.loads(row[0]) if row else {}
         facts = original.get("ephemeral_media") or ephemeral.describe((original.get("raw") or {}).get("media"))
         return ephemeral.outcome(facts, status) if facts else {}
@@ -702,25 +776,47 @@ class Store:
                             (state, time.time() + delay, payload.get("error_type"), job["message_event"]))
 
     def stats(self, chat_ids=None):
-        with self.lock:
+        with self.reading() as db:
             if chat_ids is None:
-                rows = self.db.execute("SELECT kind,total FROM event_kind_counts")
+                rows = db.execute("SELECT kind,total FROM event_kind_counts")
             else:
-                rows = self.db.execute("SELECT kind,sum(total) FROM chat_event_kind_counts "
-                                       "WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ") GROUP BY kind",
-                                       sorted(chat_ids))
+                rows = db.execute("SELECT kind,sum(total) FROM chat_event_kind_counts "
+                                  "WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ") GROUP BY kind",
+                                  sorted(chat_ids))
             counts = {r[0]: r[1] for r in rows}
-            tail = self.db.execute("SELECT seq,hash,observed_at FROM events ORDER BY seq DESC LIMIT 1").fetchone()
+            tail = db.execute("SELECT seq,hash,observed_at FROM events ORDER BY seq DESC LIMIT 1").fetchone()
         return {"counts": counts, "total": sum(counts.values()), "head": dict(tail) if tail else None}
 
     def get_setting(self, key, default=None):
-        with self.lock:
-            row = self.db.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
+        if key in CHAT_SETTINGS:
+            values = self.chat_settings(key)
+            return {str(chat_id): value for chat_id, value in values.items()} if values else default
+        with self.reading() as db:
+            row = db.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
         return json.loads(row[0]) if row else default
 
     def set_setting(self, key, value):
         with self.transaction():
-            self.db.execute("INSERT OR REPLACE INTO settings VALUES (?,?)", (key, json.dumps(value)))
+            if key in CHAT_SETTINGS:
+                self.db.execute("DELETE FROM chat_settings WHERE name=?", (key,))
+                self.db.executemany("INSERT INTO chat_settings VALUES (?,?,?)", chat_rows(key, value))
+            else:
+                self.db.execute("INSERT OR REPLACE INTO settings VALUES (?,?)", (key, json.dumps(value)))
+
+    def chat_setting(self, name, chat_id, default=None):
+        with self.reading() as db:
+            row = db.execute("SELECT value FROM chat_settings WHERE name=? AND chat_id=?", (name, chat_id)).fetchone()
+        return json.loads(row[0]) if row else default
+
+    def chat_settings(self, name):
+        with self.reading() as db:
+            return {row[0]: json.loads(row[1])
+                    for row in db.execute("SELECT chat_id,value FROM chat_settings WHERE name=?", (name,))}
+
+    def set_chat_settings(self, name, values):
+        with self.transaction():
+            self.db.executemany("INSERT OR REPLACE INTO chat_settings VALUES (?,?,?)",
+                                [(name, chat_id, json.dumps(value)) for chat_id, value in values.items()])
 
     def targets(self, enabled_only=False):
         with self.lock:
@@ -755,15 +851,15 @@ class Store:
         return bool(removed)
 
     def account_message_chat(self, message_id):
-        with self.lock:
-            chats = [r[0] for r in self.db.execute(
+        with self.reading() as db:
+            chats = [r[0] for r in db.execute(
                 "SELECT chat_id FROM message_state_index WHERE message_id=? AND text_seq IS NOT NULL"
                 " AND chat_id>-1000000000000 LIMIT 2", (message_id,))]
         return chats[0] if len(chats) == 1 else None
 
     def latest_reply_keyboard(self, chat_id, window=500, before_message_id=None):
-        with self.lock:
-            row = self.db.execute(
+        with self.reading() as db:
+            row = db.execute(
                 "SELECT seq, json_extract(payload,'$.raw.reply_markup') FROM (SELECT seq, message_id, payload FROM events"
                 " WHERE chat_id=? ORDER BY seq DESC LIMIT ?) WHERE"
                 " json_extract(payload,'$.raw.reply_markup._')='ReplyKeyboardMarkup'"
@@ -788,13 +884,13 @@ class Store:
         if before is not None:
             where += " AND seq<?"
             params.append(before)
-        with self.lock:
-            return [self.decode(r) for r in self.db.execute(
+        with self.reading() as db:
+            return [self.decode(r) for r in db.execute(
                 "SELECT * FROM events WHERE " + where + " ORDER BY seq DESC LIMIT ?", (*params, limit))]
 
     def chat_records(self, chat_id, kinds):
-        with self.lock:
-            return [self.decode(r) for r in self.db.execute(
+        with self.reading() as db:
+            return [self.decode(r) for r in db.execute(
                 "SELECT * FROM events WHERE chat_id=? AND kind IN (" + ",".join("?" * len(kinds)) + ")"
                 " ORDER BY seq", (chat_id, *kinds))]
 
@@ -811,8 +907,8 @@ class Store:
             sender_filter += " AND chat_id IN (" + ",".join("?" * len(allowed_chats)) + ")"
             params.extend(allowed_chats)
         result = {}
-        with self.lock:
-            for chat_id, sender, count in self.db.execute(
+        with self.reading() as db:
+            for chat_id, sender, count in db.execute(
                     "SELECT chat_id, json_extract(payload,'$.sender_id') AS sender, count(DISTINCT message_id) FROM events"
                     " WHERE kind IN (" + marks + ") AND chat_id IS NOT NULL"
                     " AND " + sender_filter +
@@ -821,6 +917,8 @@ class Store:
         return result
 
     def close(self):
+        for reader in list(self.read_connections):
+            reader.db.close()
         self.fulltext.close()
         self.db.close()
 

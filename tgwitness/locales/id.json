@@ -8957,6 +8957,7 @@
   "running": "berjalan",
   "cancelled": "dibatalkan",
   "Updates arrived while observation was paused": "Pembaruan tiba saat pengamatan sedang dijeda",
+  "Updates from an unidentified chat were not recorded": "Pembaruan dari obrolan yang tidak teridentifikasi tidak direkam",
   "Too many updates arrived during startup": "Terlalu banyak pembaruan yang masuk saat proses startup",
   "Telegram could not deliver older updates": "Telegramt tidak dapat mengirimkan pembaruan yang lebih lama",
   "Choose a scope for this procedure.": "Pilih cakupan untuk prosedur ini.",

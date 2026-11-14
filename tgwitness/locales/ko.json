@@ -8957,6 +8957,7 @@
   "running": "실행 중",
   "cancelled": "취소됨",
   "Updates arrived while observation was paused": "관찰이 일시 중지된 동안 업데이트가 도착했습니다",
+  "Updates from an unidentified chat were not recorded": "식별할 수 없는 채팅의 업데이트가 기록되지 않았습니다",
   "Too many updates arrived during startup": "시작 과정에서 너무 많은 업데이트가 도착했습니다",
   "Telegram could not deliver older updates": "Telegram은 이전 업데이트를 전달할 수 없었습니다",
   "Choose a scope for this procedure.": "이 절차의 적용 범위를 선택하세요.",

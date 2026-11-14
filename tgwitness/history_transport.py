@@ -16,8 +16,8 @@ class HistoryTransport:
         self.source_ranges = {}
 
     def saved(self, kind):
-        with self.store.lock:
-            row = self.store.db.execute("SELECT payload FROM events WHERE kind=? "
+        with self.store.reading() as db:
+            row = db.execute("SELECT payload FROM events WHERE kind=? "
                 "AND json_extract(payload,'$.history_run_id')=? ORDER BY seq DESC LIMIT 1",
                 (kind, self.run["id"])).fetchone()
         return json.loads(row[0]) if row else None
@@ -31,8 +31,8 @@ class HistoryTransport:
         plan = self.saved("history.takeout.plan")
         if plan is None:
             kinds = set()
-            with self.store.lock:
-                ids = [r[0] for r in self.store.db.execute(
+            with self.store.reading() as db:
+                ids = [r[0] for r in db.execute(
                     "SELECT chat_id FROM history_sources WHERE run_id=?", (self.run["id"],))]
             for cid in ids:
                 kind = kind_of(await network(lambda: self.collector.resolve_target(cid)))
@@ -57,8 +57,8 @@ class HistoryTransport:
         if previous and previous["ranges"] != ranges:
             raise ValueError("Takeout ranges changed. End this run and start a new acquisition.")
         if previous is None:
-            with self.store.lock:
-                ids = [r[0] for r in self.store.db.execute(
+            with self.store.reading() as db:
+                ids = [r[0] for r in db.execute(
                     "SELECT chat_id FROM history_sources WHERE run_id=?", (self.run["id"],))]
             source_ranges = {str(cid): [] for cid in ids}
             for index, split in enumerate(ranges):
