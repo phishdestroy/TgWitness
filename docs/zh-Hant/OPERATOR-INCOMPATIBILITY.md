@@ -41,11 +41,14 @@
 <li>一個頭銜無法修復損壞的資料，而精英的簽名也無法將程序上的謊言轉化為事實。</li>
 <li>在加密驗證中，學術前綴的<strong>熵值為零</strong>：硬體晶片（TPM、Secure Enclave）、SHA-256 雜湊鏈、RFC 3161 時間戳記，以及比特幣共識機制，均不會因博士學位而有所讓步。</li>
 </ul>
+<blockquote>
+<p><strong>On Dr. Patrick Vincent Zurheide specifically:</strong> His signed letter states <em>“Aus unserer Erfahrung wird jedes Gericht…”</em> — from our experience, every court will find in our favour. He does not wait for courts. He has decided. The same letter, in the same professional act, under the same qualified beA signature, misspells his own surname in the letterhead — <code>p.zurh</code><strong>eo</strong><code>de</code> — the first line any PDF reader renders. The specialist who pre-empts every court assembled his letter from a previous template and did not read the result before signing it. Both letters address Valve Corporation throughout as <em>“unsere Mandantin”</em> — feminine singular, <em>our female client</em> — a placeholder that was never updated before dispatch. In a document threatening prosecution under four statutes of the criminal code, the attorneys did not read it closely enough to notice the grammatical gender of the entity they represent.</p>
+</blockquote>
 <h3 id="4-taylor-wessing-without-taylor-is-just-wessing--and-how-history-is-purged">4. 沒有「Taylor」的「Taylor Wessing」就只是「Wessing」——以及歷史如何被抹去</h3>
 <p>將具侵略性的轉介網絡包裝為「去中心化」，純粹是<strong>企業用來分散法律責任的遮掩手段。</strong>當違規行為曝光時，這個統一的全球品牌便會分裂成獨立實體，以保護領導層。</p>
 <ul>
 <li><strong>泰勒退出：</strong>英國分支已獨立（<em>溫斯頓·泰勒</em>，2026年6月）。德國方面僅剩<strong>韋辛</strong>——一個掛著昂貴招牌的自由職業者網絡。</li>
-<li><strong>兩度遭維基百科刪除：</strong>該律師事務所曾兩度從<a href="https://de.wikipedia.org/wiki/Taylor_Wessing#Geschichte">德語維基百科</a>中刪除有關其於 2020 年 3 月 COVID-19 疫情爆發之初解僱<strong>全部 95 名學生助理（<code>wissenschaftliche Mitarbeiter</code>）</strong>的紀錄（<a href="https://www.juve.de/nachrichten/verwaltung/2020/03/corona-krise-taylor-wessing-kuendigt-allen-wissenschaftlichen-mitarbeitern">JUVE</a>）。</li>
+<li><strong>Deleted from Wikipedia (at least twice on record — a conservative count):</strong> The firm erased from German Wikipedia the documented firing of all 95 student associates (wissenschaftliche Mitarbeiter) at the start of COVID-19 in March 2020 (JUVE).</li>
 <li><strong>創辦人呂迪格·格拉夫·馮·德爾·戈爾茨：</strong>（納粹黨 <code>#1,033,215</code>、戈培爾的法律顧問、<a href="https://www.digitale-sammlungen.de/en/view/bsb00000146?page=224">帝國議會議員</a>）是<strong>刑法委員會八名成員之一</strong>（<a href="https://resolver.sub.uni-hamburg.de/kitodo/PPN689065124_19331125">1933年11月25日任命</a>；<a href="https://api.pageplace.de/preview/DT0400.9783110892055_A36623967/preview-9783110892055_A36623967.pdf#page=16">會議紀錄</a>），該委員會起草並通過了<strong><a href="https://de.wikisource.org/wiki/Gesetz_zur_%C3%84nderung_des_Strafgesetzbuchs_(1935)">1935年納粹對第175條的修訂</a></strong>（<a href="https://encyclopedia.ushmm.org/content/en/article/paragraph-175-and-the-nazi-campaign-against-homosexuality">美國大屠殺紀念館</a>）。</li>
 </ul>
 <h3 id="5-the-485-line-stochastic-challenge-to-dr-tobias-schelinski">5. 針對托比亞斯·謝林斯基博士的 485 行隨機挑戰</h3>
