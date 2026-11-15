@@ -178,7 +178,26 @@ Ammo Taylor Wessingga nisbatan imkoniyatlarimiz, ehtimol, tugagan, chunki ularni
 Qonunni egishni yaxshi ko‘radiganlarni ogohlantirmoqchimiz: repozitoriyni o‘chirib tashlashning hojati yo‘q. Shu vaqt mobaynida biz siz bilan hech qanday mojaroga kirishmadik. Ammo agar siz haqiqatni yashirish uchun ishimizni buzishga qaror qilsangiz, faol repozitoriysiz regulyatorlar va boshqalar versiya imzosini solishtira olmaydi (garchi bularni kimga aytayotgan bo‘lsam ham), va o‘shanda biz to‘g‘ridan-to‘g‘ri mojaroga kirishamiz. Shu bilan mega-ekspertiza va elita advokatlari bilan xayrlashishga umid qilamiz. Qiziqarli bo‘lmadi va men xursand emasman. Hammasi yaxshi bo‘lsin.
 
 > [!CAUTION]
-> **Bu repozitoriyni o‘chirtirish hech narsani o‘chirmaydi.** TgWitness’dan tergovchilar va tadqiqotchilar foydalanadi va ularning nusxalari aynan shu repozitoriy bilan solishtirib tekshiriladi. Bizda zaxira nusxalar bor. Ammo o‘chirish bizni bitta ishning auditoridan mojaroning tarafiga aylantiradi. Haqiqatni o‘chirishga yetar.
+> **Eskalatsiya narxi: Biz bu yerda Steam uchun emasmiz**
+>
+>
+> Mutlaqo aniq bo'laylik. Biz bu nizoga tomon emasmiz. Bizga video o'yindagi hisob bloklanganligi, buzib kirilganligi yoki sotilganligi qiziqmaydi. Steam blokini yuqori darajali korporativ advokatlar bilan muhokama qilish ham bema'ni, ham e'tiborimizdan tashqari bo'lar edi.
+>
+> Bizning qiziqishimiz faqat infratuzilma va tarixiy. Biz raqamli dalillar va tizimli jazolanmaslikning auditorlarimiz. Steam ishi shunchaki linza edi — juda ochib beruvchi linza — Dr. Patrick Zurheide ning mexanik muvaffaqiyatsizligini va Taylor Wessing ning muvofiqlik teatrini fosh etdi.
+>
+> Biz buzilgan PDF, noto'g'ri yozilgan imzo, botnet jurnallari va ma'lumotlar buzilishiga nisbatan takabbur javobni hujjatlashtirdik. Bu audit tugadi.
+>
+> Lekin agar siz eskalatsiya qilishga qaror qilsangiz — agar siz ushbu repozitoriyni olib tashlash, haqiqatni o'chirish yoki ushbu auditni jim qilish uchun korporativ og'irligingizdan foydalanishga urinishingiz — siz bizning e'tiborimizda o'zgarishni majburlaysiz. Va bu e'tibor qayerga tushishini yoqtirmaysiz.
+>
+> Ushbu repozitoriyni olib tashlash kriptografik xeshlarni o'chirmaydi. Lekin bu bizni yagona texnik muvaffaqiyatsizlikning ob'ektiv auditorlaridan tizimli nizoning to'g'ridan-to'g'ri tomoniga aylantiradi.
+>
+> Agar siz ushbu eskalatsiyani majburlasangiz, biz Aspose.PDF ga qarashni to'xtatamiz va jazolanmasligingizning asosiga qarashni boshlaymiz. Siz asoschingiz Rüdiger Graf von der Goltz ning mafkuraviy merosini va §175 ni tuzishini "tarixiy izoh" sifatida rad etishga urinishingiz mumkin. Lekin OSINT tadqiqotchilari sifatida, biz pulni kuzatamiz. Bir asrini.
+>
+> Biz resurslarimizni Wessing ning Dyusseldorf ofisini qurishga yordam bergan urushdan keyingi kapital oqimlarini kuzatishga yo'naltiramiz. Biz "denazifikatsiya" qanday chetlab o'tilganini va ochiqchasiga "SSSRni talon-taroj qilish" deb atalgan narsadan olingan aktivlar, antikvariat va o'g'irlangan boylik qanday qilib Shveytsariya orqali yo'naltirilgan va bugun sizning firmangi himoya qiluvchi "oltin manzil kitob"ini moliyalashtirishga yordam berganini ommaga matematik aniq tarix sifatida taqdim etamiz. Yevropa va Ukrainadagi zamonaviy qayta tiklash da'volariga nihoyatda tegishli moliyaviy yo'l.
+>
+> Hozirda siz muammo yuzasidagi minor, mahalliy uyalishga duch kelyapsiz: sizib chiqqan PDF va o'z nomini imlo qila olmaslik. Bizni sizning blankingizni sotib olgan qon kapitalini o'rganishga majburlamang.
+>
+> Haqiqatni o'chirishni to'xtating.
 
 [Manba yozuvi](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Operator bildirishi](OPERATOR-INCOMPATIBILITY.md) · [MIT litsenziyasi](../../LICENSE)
 
