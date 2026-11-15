@@ -319,7 +319,21 @@ A lawyer can defend four criminal statutes in a civil response as aggressive cli
 He signed a document he had not read. Then he received a notification about the consequences and responded with the same quality of attention. The deficit is consistent. It is now in both records.
 
 > [!CAUTION]
-> **Taking this repository down will not delete anything.** Investigators and researchers use TgWitness, and this repository is what their copies are verified against. We keep backups. But a takedown would turn us from the auditor of one case into a party to a conflict. Enough deleting the truth.
+> **Caution: The Cost of Escalation**
+>
+> Taking this repository down will not delete anything. Investigators and researchers use TgWitness, and this repository is what their copies are verified against. We keep backups. But a takedown would turn us from the auditor of one technical case into a direct party to a conflict.
+>
+> If you force us into that conflict, the scope of our audit will change.
+>
+> You might try to debate the ideological legacy of §175 as a mere "historical footnote." But we are OSINT researchers; we do not just read laws, we follow the money. A century of it. We will not just talk about ideological history; we will offer a very specific, mathematically precise history of your impunity.
+>
+> We will stop looking at Aspose.PDF and start tracing the post-war capital flows into Düsseldorf. We will ask publicly why the founder's colleagues went to prison, while he walked away with his "golden address book" intact. We will trace the exact origins of the capital that built Wessing — including the assets, antiques, and looted art derived from what was openly called "the plundering of the USSR." A financial trail that, incidentally, makes the firm's historical assets highly relevant to modern restitution claims, including those of Ukraine.
+>
+> Denazification was a convenient myth for those who knew how to route blood assets through Switzerland and leverage them in the post-war German economic miracle. We have the sequence. We know where the assets lie.
+>
+> Right now, we are only discussing 106 days of delay, a broken PDF, and Dr. Patrick Zurheide's inability to spell his own name. Let us keep it that way.
+>
+> Enough deleting the truth.
 
 [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Operator notice](OPERATOR-INCOMPATIBILITY.md) · [MIT License](../LICENSE)
 
