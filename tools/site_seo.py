@@ -29,6 +29,7 @@ PAGES = {
     "docs/security/": ("Secure Telegram Sessions & Evidence Storage", "Review TgWitness session storage, signing keys, panel access and network exposure. Apply the security model to your Telegram collection workspace.", "Telegram session security"),
     "docs/access/": ("Share Telegram Case Access with Reviewers", "Grant reviewers access to selected Telegram accounts and chats. Set permissions, expiry and session limits, then revoke access when the task ends.", "Telegram evidence reviewer access"),
     "docs/witness/": ("Set Up a Telegram Evidence Witness Bot", "Run an independent witness bot with its own signing key. Publish Telegram journal checkpoints and compare evidence exports with records retained elsewhere.", "Telegram evidence witness bot"),
+    "docs/signed-export/": ("Zero Trust Case Study: Taylor Wessing, Dr. Zurheide & Dr. Schelinski", "Taylor Wessing's Dr. Patrick Zurheide and Dr. Tobias Schelinski signed a GDPR answer. Checked against its own file, it fails. A case study in zero trust.", "Taylor Wessing Zurheide Schelinski"),
     "docs/server/": ("Host TgWitness: Telegram Collection Server", "Run TgWitness on a server with persistent evidence storage, private panel access and backups. Check collection and recovery after updates or restarts.", "self hosted Telegram collection"),
     "docs/troubleshooting/": ("Fix Telegram Login, FloodWait & Collection Gaps", "Diagnose Telegram login errors, FloodWait, disconnected collectors and missing observations. Check panel access, journal coverage and witness status.", "Telegram FloodWait troubleshooting"),
     "docs/export-clinic/": ("Telegram Desktop Export: Controlled Experiment", "Inspect a recorded Telegram Desktop export experiment across seven test conversations. Compare paired files, observed results and the original recording.", "Telegram Desktop export comparison"),
@@ -94,6 +95,7 @@ RUSSIAN = {
     "docs/security/": "Защита сессий Telegram и хранилища доказательств",
     "docs/access/": "Доступ рецензентов к материалам дела Telegram",
     "docs/witness/": "Настройка бота-свидетеля для доказательств Telegram",
+    "docs/signed-export/": "Зачем нужен zero trust: кейс Taylor Wessing, Dr. Zurheide и Dr. Schelinski",
     "docs/server/": "Сервер TgWitness для сбора данных Telegram",
     "docs/troubleshooting/": "Telegram: ошибки входа, FloodWait и пропуски сбора",
     "docs/export-clinic/": "Экспорт Telegram Desktop: контролируемый эксперимент",
@@ -168,7 +170,7 @@ def metadata(path, title, description, lang):
         if local.startswith("docs/reference/") and " · " in title:
             title = title.rsplit(" · ", 1)[0]
         topic = "Phala / Intel TDX" if local.endswith("high-assurance/") else "Telegram"
-        if local not in {"docs/reference/license/", "docs/reference/notice/", "docs/reference/changelog/", "docs/reference/architecture/", "docs/reference/verification/", "docs/reference/installation/"} and topic.lower() not in title.lower():
+        if local not in {"docs/reference/license/", "docs/reference/notice/", "docs/reference/changelog/", "docs/reference/architecture/", "docs/reference/verification/", "docs/reference/installation/", "docs/signed-export/"} and topic.lower() not in title.lower():
             title = topic + " · " + title
     return title + " | TgWitness", description, title
 

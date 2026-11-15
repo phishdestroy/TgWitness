@@ -96,7 +96,7 @@ if (observe && tocLinks.length) {
 
 
 if (observe && !motion.matches) {
-  const blocks = document.querySelectorAll('.guide-content > :is(h2, .guide-grid, .lab, figure, .table-wrap, .threat-grid, .checklist, .fact-strip, .wiki-index), .hub-catalog > :is(h2, .guide-grid, .wiki-index), .wiki-body > :is(h2, .flow-figure, .table-wrap, pre)');
+  const blocks = document.querySelectorAll('.guide-content > :is(h2, .guide-grid, .lab, figure, .table-wrap, .threat-grid, .checklist, .fact-strip, .wiki-index), .guide-content > .signed-case > :is(h2, .lab, figure, .table-wrap, .threat-grid, .fact-strip, .case-matrix, .case-checks, .case-contradiction, .case-dates, .case-verdicts, .case-quotes, .case-workflow, .case-row-one, .principle-grid),.hub-catalog > :is(h2, .guide-grid, .wiki-index), .wiki-body > :is(h2, .flow-figure, .table-wrap, pre)');
   const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add('is-revealed');
