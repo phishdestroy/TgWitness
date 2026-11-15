@@ -178,7 +178,26 @@ Tetapi pilihan kami berkenaan Taylor Wessing kemungkinan besar sudah habis, kera
 Kami ingin memberi amaran kepada mereka yang suka membengkokkan undang-undang: tidak perlu menurunkan repositori. Sepanjang masa ini kami tidak pernah berkonflik dengan anda. Tetapi jika anda memutuskan untuk merosakkan kerja kami bagi menyembunyikan kebenaran, maka tanpa repositori yang aktif, pengawal selia dan pihak lain tidak akan dapat membandingkan tandatangan sesuatu versi (walaupun kepada siapa saya memberitahu ini), dan ketika itulah kami akan memasuki konflik langsung. Dengan itu, kami berharap dapat mengucapkan selamat tinggal kepada kepakaran mega dan peguam elit. Ia tidak seronok, dan saya tidak gembira. Semoga berjaya.
 
 > [!CAUTION]
-> **Menurunkan repositori ini tidak akan memadam apa-apa.** Penyiasat dan penyelidik menggunakan TgWitness, dan salinan mereka disahkan berbanding repositori ini. Kami ada sandaran. Tetapi penurunan akan mengubah kami daripada juruaudit satu kes menjadi pihak dalam konflik. Cukuplah memadam kebenaran.
+> **Kos Peningkatan: Kami Bukan Di Sini Untuk Steam**
+>
+>
+> Izinkan kami menjelaskan dengan mutlak. Kami bukan pihak dalam pertikaian ini. Kami tidak berminat sama ada akaun dalam permainan video telah diharamkan, digodam, atau dijual. Berhujah mengenai larangan Steam dengan peguam korporat elit adalah tidak masuk akal dan di luar fokus kami.
+>
+> Minat kami adalah semata-mata infrastruktur dan sejarah. Kami adalah juruaudit bukti digital dan impuniti sistemik. Kes Steam hanyalah kanta — kanta yang sangat mendedahkan — yang mendedahkan kegagalan mekanikal Dr. Patrick Zurheide dan teater pematuhan Taylor Wessing.
+>
+> Kami mendokumentasikan PDF yang rosak, tandatangan yang salah ejaan, log botnet, dan tindak balas yang sombong terhadap pelanggaran data. Audit itu selesai.
+>
+> Tetapi jika anda memutuskan untuk mengganas — jika anda cuba menggunakan berat korporat anda untuk menghapuskan repositori ini, memadam kebenaran, atau membungkam audit ini — anda akan memaksa perubahan dalam fokus kami. Dan anda tidak akan suka ke mana fokus itu jatuh.
+>
+> Menghapuskan repositori ini tidak akan memadam cincang kriptografi. Tetapi ia akan mengubah kami daripada juruaudit objektif kegagalan teknikal tunggal kepada pihak langsung dalam konflik sistemik.
+>
+> Jika anda memaksa peningkatan itu, kami akan berhenti melihat Aspose.PDF dan mula melihat asas impuniti anda. Anda mungkin cuba menolak warisan ideologi pengasas anda, Rüdiger Graf von der Goltz, dan penggubalan §175 oleh beliau sebagai "nota kaki sejarah." Tetapi sebagai penyelidik OSINT, kami mengikuti wang. Satu abad daripadanya.
+>
+> Kami akan mengalihkan sumber kami untuk menjejaki aliran modal selepas perang yang membina pejabat Düsseldorf Wessing. Kami akan menawarkan kepada orang ramai sejarah yang tepat secara matematik tentang bagaimana "denazifikasi" telah dipintas, dan bagaimana aset, barang antik, dan kekayaan yang dirampas — yang diperoleh daripada apa yang secara terbuka disebut "penjarahan USSR" — telah dihalakan melalui Switzerland untuk mendanai "buku alamat emas" yang melindungi firma anda hari ini. Jejak kewangan yang masih sangat relevan dengan tuntutan restitusi moden di Eropah dan Ukraine.
+>
+> Anda sedang menghadapi rasa malu yang kecil dan terlokalisasi mengenai PDF yang bocor dan ketidakupayaan untuk mengeja nama sendiri. Jangan paksa kami memeriksa modal darah yang membeli kepala surat anda.
+>
+> Cukuplah memadam kebenaran.
 
 [Rekod sumber](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Notis pengendali](OPERATOR-INCOMPATIBILITY.md) · [Lesen MIT](../../LICENSE)
 
