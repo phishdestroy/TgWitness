@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Zauważono. Pole {n} nie jest zgodne z zobowiązaniem podpisanym przez firmę: kopertę zmieniono po tym, jak wnioskodawca otrzymał kopię.",
   "{n} of {total} values match the commitments the firm signed.": "{n} z {total} wartości jest zgodnych z zobowiązaniami podpisanymi przez firmę.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Krok 3 z 3: decyzję podejmuje organ, a nie firma. Przykład: dane logowania pozostają zastrzeżone jako dane stron trzecich; treść skargi jest udostępniana wnioskodawcy.",
-  "Decryption is unavailable in this browser.": "W tej przeglądarce funkcja odszyfrowywania jest niedostępna."
+  "Decryption is unavailable in this browser.": "W tej przeglądarce funkcja odszyfrowywania jest niedostępna.",
+  "Stays withheld: third-party data": "Wstrzymane pobrania: dane stron trzecich",
+  "Released: it concerns the requester's account": "Ujawniono: dotyczy to konta wnioskodawcy",
+  "Authority's view": "Stanowisko organu",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "Firma ponownie zapieczętowała kopertę, umieszczając na niej inny tekst. Proszę sprawdzić dane organu."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Chce Pan/Pani tylko zapoznać się z serwisem? Proszę dwukrotnie kliknąć <code>scripts\\Demo.cmd</code>, aby uruchomić izolowaną wersję demonstracyjną. Nie jest wymagane logowanie do serwisu Telegram.",
@@ -5425,7 +5429,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "Strona 830, „Historia zabezpieczeń”, jest zasłonięta czarnymi prostokątami. Ostatnia zmiana hasła miała miejsce w lipcu 2024 r.; w 2025 r. nie odnotowano żadnych zmian. Daty, adresy i identyfikatory z tych wierszy nie zostały przedstawione.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy nie jest stroną sporu i nie zajmuje stanowiska w kwestii tego, czy zablokowanie konta Steam było uzasadnione. Na tej stronie nie podano tożsamości osoby, której dane dotyczą; nie zamieszczono identyfikatorów kont, nazw użytkowników, adresów IP ani danych osobowych. Teksty skarg są cytowane bez podawania nazw użytkowników osób zgłaszających, w tym teksty umieszczone w czarnych prostokątach, które pozostają w warstwie tekstowej pliku. Pisma: nr dok. 42282474, 15 sierpnia 2025 r. (3 strony); nr dok. 42603633, 1 października 2025 r. (9 stron). Załącznik: Załącznik 1 (830 stron). Odniesienia do stron opierają się na kolejności stron w pliku PDF. Angielskie tłumaczenia niemieckich cytatów pochodzą od nas. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Szersza dokumentacja sprawy</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">106-dniowa sprawa dotycząca RODO</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Alfabet cyrylicki: co najmniej jeden znak z tego alfabetu. Schemat logowania: litery łacińskie, po których następują 3–5 cyfr, nic więcej. Uwzględniono wszystkie 1 995 loginów reporterów, w tym te znajdujące się obok 50 widocznych tekstów, i nadal można je wyodrębnić. Żaden login reportera nie został tutaj przytoczony. Cztery czytelne teksty powtarzają się słowo w słowo w dziewięciu rekordach;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "występuje trzy razy (str. 446, 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "występuje trzy razy (str. 446, 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "dla klucza publicznego organu"
  },
  "modes": {
   "modes.actions.body": "Potwierdzenia podglądu, żądania i wyników są podpisane. Przed naciśnięciem przycisku serwer ponownie pobiera wiadomość i odrzuca zmienioną treść wprowadzoną z klawiatury. Zwrócony tekst wywołania zwrotnego oraz adresy URL pozostają w zarejestrowanym kontekście.",

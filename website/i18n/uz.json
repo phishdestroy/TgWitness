@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Tutib olindi. Field {n} firma imzolagan majburiyatga mos kelmaydi: konvert so'rovchi nusxa olgandan keyin o'zgartirilgan.",
   "{n} of {total} values match the commitments the firm signed.": "{n} qiymatlardan {total} ta kompaniya imzolagan majburiyatlarga to'g'ri keladi.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "3 qadamdan 3-qadam: qarorni firma emas, vakolatli organ qabul qiladi. Misol: kirish ma'lumotlari uchinchi tomon ma'lumotlari sifatida saqlanadi; shikoyat matni so'rov qiluvchiga taqdim etiladi.",
-  "Decryption is unavailable in this browser.": "Ushbu brauzerda dekriptiya mavjud emas."
+  "Decryption is unavailable in this browser.": "Ushbu brauzerda dekriptiya mavjud emas.",
+  "Stays withheld: third-party data": "Saqlab qo'yilgan ma'lumotlar: uchinchi tomon ma'lumotlari",
+  "Released: it concerns the requester's account": "E'lon qilindi: bu so'rovchi hisobiga taalluqli",
+  "Authority's view": "Hokimiyatning qarashi",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "Firma konvertni boshqa matn bilan qayta yopdi.  Hokimiyatning tekshiruvini o'tkazing."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Faqatgina o&#x27;rganmoqchimisiz? Ajratilgan demo uchun <code>scripts\\Demo.cmd</code> ustiga ikki marta bosing. Telegramga kirish shart emas.",
@@ -5425,7 +5429,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "830-bet, \"Xavfsizlik tarixi\", qora to'g'ri burchaklar ostida joylashgan. Uning oxirgi parol o'zgarishi 2024 yil iyul oyida bo'lib, 2025 yilda hech qanday o'zgarish qayd etilmagan. Ushbu qatordagi sanalar, manzillar va identifikatorlar qayta keltirilmagan.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy nizoda tomon emas va Steam hisobini bloklash o'rinli bo'lganmi yoki yo'qligini aytmaydi. Ushbu sahifada ma'lumot subyekti aniqlanmagan; hisob identifikatorlari, loginlar, IP-manzillar va shaxsiy ma'lumotlar keltirilmagan. Shikoyat matnlari xabar beruvchilarning loginlarisiz keltirilgan, jumladan qora to'rtburchaklar ostidagi matnlar ham, ular faylning matn qatlamida saqlanib qoladi. Xatlar: Dok.-Nr. 42282474, 2025 yil 15 avgust (3 sahifa); Dok.-Nr. 42603633, 2025 yil 1 oktyabr (9 sahifa). Ilova: Anlage 1 (830 sahifa). Sahifalarga havolalar PDF sahifa tartibiga muvofiq berilgan. Nemis iqtiboslarining inglizcha tarjimalari bizniki. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Kengaytirilgan ish hujjatlari to'plami</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">106 kunlik GDPR hujjatlari</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Cyrillic: o'sha yozuvdagi kamida bitta belgidan iborat. Kirish naqshi: lotin harflari, keyin 3–5 raqam, boshqa hech narsa. 50 ta ko'rinadigan matndan tashqari barcha 1 995 ta muxbir kirishlari qamrab olingan va ularni olish mumkin bo'lib qoladi. Bu yerda hech bir muxbir kirishi qayta ko'rsatilmagan. To'rt o'qiladigan matn to'qqiz yozuv bo'ylab so'zma-so'z takrorlanadi;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "uch marta uchraydi (446, 447-betlarda)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "uch marta uchraydi (446, 447-betlarda).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "hokimiyatning jamoat kaliti uchun"
  },
  "modes": {
   "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",

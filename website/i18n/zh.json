@@ -568,7 +568,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "被发现了。字段{n}与该公司签署的承诺不符：在请求方收到副本后，信封被更换了。",
   "{n} of {total} values match the commitments the firm signed.": "{n}个{total}个值符合该公司签署的承诺。",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "第 3 步（共 3 步）：由主管部门而非公司作出决定。示例：登录信息作为第三方数据不予披露；投诉内容则提供给申请方。",
-  "Decryption is unavailable in this browser.": "此浏览器不支持解密功能。"
+  "Decryption is unavailable in this browser.": "此浏览器不支持解密功能。",
+  "Stays withheld: third-party data": "暂未显示的住宿：第三方数据",
+  "Released: it concerns the requester's account": "已发布：此事涉及请求者的账户",
+  "Authority's view": "主管部门的观点",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "该公司已用另一份文本重新封好信封。请核查该机构的支票。"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "只是想了解一下？双击 <code>scripts\\Demo.cmd</code> 即可体验独立演示。无需登录 Telegram。",
@@ -5477,7 +5481,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "第830页的“安全历史记录”部分被黑色矩形遮盖。其最近一次密码更改时间为2024年7月；2025年未记录任何更改。这些行中的日期、地址和标识符均未显示。",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy 并非该争议的当事人，且未就封禁 Steam 账户是否合理发表意见。本页面未披露数据主体的身份；未转载账户标识符、登录名、IP 地址及个人数据。投诉文本的引用均未包含举报人的登录名，包括黑色矩形覆盖下的文本，这些内容仍保留在文件的文本层中。信函：文件编号 42282474， 2025年8月15日（3页）；文件编号：42603633，2025年10月1日（9页）。附件：Anlage 1（830页）。页码引用采用PDF页码顺序。德语引文的英文译文由我们提供。<a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">维德案卷宗</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">历时106天的《通用数据保护条例》（GDPR）案卷</a>。",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "西里尔字母：至少包含一个该字母表的字符。登录模式：拉丁字母后跟3至5位数字，无其他内容。所有1,995条记者登录记录（包括50条可见文本旁边的那些）均已涵盖，且仍可提取。此处未列出任何记者的登录信息。有四条可读文本在九条记录中逐字重复；",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "出现三次（第446、447页）。"
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "出现三次（第446、447页）。",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "该证书颁发机构的公钥"
  },
  "modes": {
   "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

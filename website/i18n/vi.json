@@ -568,7 +568,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Đã phát hiện. Trường {n} không khớp với cam kết mà công ty đã ký: phong bì đã bị thay đổi sau khi người yêu cầu nhận được bản sao.",
   "{n} of {total} values match the commitments the firm signed.": "{n} trong số {total} giá trị phù hợp với các cam kết mà công ty đã ký kết.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Bước 3 trong tổng số 3 bước: cơ quan có thẩm quyền, chứ không phải công ty, là bên ra quyết định. Ví dụ: thông tin đăng nhập vẫn được giữ lại dưới dạng dữ liệu của bên thứ ba; nội dung khiếu nại được cung cấp cho người yêu cầu.",
-  "Decryption is unavailable in this browser.": "Trình duyệt này không hỗ trợ giải mã."
+  "Decryption is unavailable in this browser.": "Trình duyệt này không hỗ trợ giải mã.",
+  "Stays withheld: third-party data": "Các lượt lưu trú bị giữ lại: dữ liệu từ bên thứ ba",
+  "Released: it concerns the requester's account": "Đã giải quyết: liên quan đến tài khoản của người yêu cầu",
+  "Authority's view": "Quan điểm của cơ quan chức năng",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "Công ty đã niêm phong lại phong bì với nội dung khác. Hãy tiến hành kiểm tra theo thẩm quyền."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Chỉ đang tìm hiểu sơ qua? Vui lòng nhấp đúp vào <code>scripts\\Demo.cmd</code> để trải nghiệm bản demo độc lập. Không cần đăng nhập Telegram.",
@@ -5477,7 +5481,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "Trang 830, “Lịch sử bảo mật”, nằm dưới các hình chữ nhật màu đen. Lần thay đổi mật khẩu gần nhất là vào tháng 7 năm 2024; không ghi nhận bất kỳ thay đổi nào trong năm 2025. Ngày tháng, địa chỉ và mã định danh từ các hàng đó không được trình bày lại.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy không phải là bên liên quan trong tranh chấp và không đưa ra nhận định về việc liệu việc khóa tài khoản Steam có hợp lý hay không. Chủ thể dữ liệu không được nêu tên trên trang này; các thông tin nhận dạng tài khoản, tên đăng nhập, địa chỉ IP và dữ liệu cá nhân không được trích dẫn. Nội dung các đơn khiếu nại được trích dẫn mà không kèm theo tên đăng nhập của người khiếu nại, bao gồm cả các đoạn văn bản nằm trong các hình chữ nhật màu đen, vốn vẫn được giữ nguyên trong lớp văn bản của tệp. Thư: Số tài liệu 42282474, ngày 15 tháng 8 năm 2025 (3 trang); Dok.-Nr. 42603633, ngày 1 tháng 10 năm 2025 (9 trang). Phụ lục: Anlage 1 (830 trang). Các tham chiếu trang tuân theo thứ tự trang trong tệp PDF. Các bản dịch tiếng Anh của các trích dẫn tiếng Đức do chúng tôi thực hiện. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Hồ sơ vụ việc mở rộng</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">Hồ sơ GDPR kéo dài 106 ngày</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Chữ Cyrillic: ít nhất một ký tự thuộc bảng chữ cái đó. Cấu trúc tên đăng nhập: các chữ cái La-tinh tiếp theo là 3–5 chữ số, không có gì khác. Tất cả 1.995 tên đăng nhập của phóng viên, bao gồm cả những tên nằm bên cạnh 50 văn bản hiển thị, đều được ghi lại và vẫn có thể trích xuất được. Không có tên đăng nhập nào của phóng viên được trích dẫn tại đây. Bốn văn bản có thể đọc được lặp lại y nguyên từng từ trong chín bản ghi;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "xuất hiện ba lần (trang 446, 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "xuất hiện ba lần (trang 446, 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "đối với khóa công khai của cơ quan này"
  },
  "modes": {
   "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",

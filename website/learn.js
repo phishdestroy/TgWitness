@@ -526,7 +526,8 @@
     const fields = [...lab.querySelectorAll('[data-seal-field]')];
     const decisions = [...lab.querySelectorAll('[data-seal-decision]')];
     const steps = [...lab.querySelectorAll('[data-seal-step]')];
-    const values = fields.map(field => field.dataset.sealField);
+    const censors = [...sheet.querySelectorAll('.censor-box')];
+    const values = fields.map((field, i) => field.dataset.sealField || (censors[i] ? censors[i].textContent : ''));
     const guess = fields.findIndex(field => field.hasAttribute('data-seal-guess'));
     const swapIndex = Number(swapButton.dataset.sealSwap);
     const encoder = new TextEncoder();
@@ -589,7 +590,7 @@
       });
       decisions.forEach(node => {
         node.hidden = phase !== 'decided';
-        node.textContent = T(node.dataset.sealDecision);
+        node.textContent = {withhold:T('Stays withheld: third-party data'), release:T('Released: it concerns the requester\'s account')}[node.dataset.sealDecision] || '';
       });
       const matches = checks ? checks.filter(Boolean).length : 0;
       const counted = T('{n} of {total} match', {n:matches, total:fields.length});
@@ -606,8 +607,8 @@
         failed:[counted, T('Commitment broken'), T('The envelope does not match the copy the firm signed.'),
           T('Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.',
             {n:checks ? checks.indexOf(false) + 1 : 0})],
-        verified:[counted, T("Authority's view"), opened_, T('{n} of {total} values match the commitments the firm signed.', {n:matches, total:fields.length})],
-        decided:[counted, T("Authority's view"), opened_,
+        verified:[counted, T('Authority\'s view'), opened_, T('{n} of {total} values match the commitments the firm signed.', {n:matches, total:fields.length})],
+        decided:[counted, T('Authority\'s view'), opened_,
           T('Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.')],
       }[phase];
       [badge.textContent, state.textContent, foot.textContent, status.textContent] = text;
@@ -640,7 +641,7 @@
     swapButton.addEventListener('click', () => {
       stop();
       swap = !swap; opened = null; checks = null; phase = 'idle'; render();
-      if (swap) status.textContent = T("The firm has re-sealed the envelope with a different text. Run the authority's check.");
+      if (swap) status.textContent = T('The firm has re-sealed the envelope with a different text. Run the authority\'s check.');
     });
     render();
     showControls(lab);

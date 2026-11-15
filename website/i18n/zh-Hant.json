@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "被發現了。欄位 {n} 與該公司簽署的承諾不符：在申請人收到副本後，信封已被更換。",
   "{n} of {total} values match the commitments the firm signed.": "{n}個{total}個數值符合該公司簽署的承諾。",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "第 3 步（共 3 步）：由主管機關而非該公司決定。舉例來說：登入資訊仍作為第三方資料不予公開；投訴內容則會提供給申請人。",
-  "Decryption is unavailable in this browser.": "此瀏覽器不支援解密功能。"
+  "Decryption is unavailable in this browser.": "此瀏覽器不支援解密功能。",
+  "Stays withheld: third-party data": "暫緩顯示：第三方資料",
+  "Released: it concerns the requester's account": "已釋出：此事項涉及申請人的帳戶",
+  "Authority's view": "當局的觀點",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "該公司已使用不同內容的文字重新封好信封。請核對該機構的支票。"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "只是想試試看嗎？雙擊 <code>scripts\\Demo.cmd</code> 即可體驗獨立演示版本。無需登入 Telegram。",
@@ -5425,7 +5429,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "第 830 頁的「安全記錄」部分被黑色矩形遮蓋。其最後一次密碼變更日期為 2024 年 7 月；2025 年並無變更紀錄。該等資料列中的日期、地址及識別碼均未列出。",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy 並非本爭議的當事方，亦未就封鎖 Steam 帳號是否合理發表意見。本頁未揭露資料當事人的身分；帳號識別碼、登入名稱、IP 位址及個人資料均未被轉載。投訴內容的引述均未包含舉報者的登入名稱，包括黑色矩形遮蓋下的文字，該等內容仍保留於檔案的文字層中。信函：文件編號 42282474， 2025年8月15日（3頁）；文件編號 42603633，2025年10月1日（9頁）。附件：Anlage 1（830頁）。頁碼參照採用 PDF 頁面順序。德語引文的英文譯文由我們提供。<a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Wider 案件檔案</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">為期 106 天的 GDPR 檔案</a>。",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "西里爾字母：至少包含該字母表中的一個字元。登入模式：拉丁字母後接 3 至 5 位數字，無其他內容。所有 1,995 筆記者登入紀錄（包括那 50 則可見文字旁的紀錄）均已涵蓋，且仍可提取。此處未列出任何記者登入紀錄。有四則可讀文字在九筆紀錄中逐字重複；",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "出現三次（第 446、447 頁）。"
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "出現三次（第 446、447 頁）。",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "該機構的公鑰"
  },
  "modes": {
   "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",

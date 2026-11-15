@@ -568,7 +568,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Detectado. El campo {n} no se ajusta al compromiso que firmó la empresa: el sobre se modificó después de que el solicitante recibiera la copia.",
   "{n} of {total} values match the commitments the firm signed.": "{n} de los valores {total} coinciden con los compromisos que la empresa ha suscrito.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Paso 3 de 3: la decisión la toma la autoridad, no la empresa. Ejemplo: los datos de inicio de sesión se mantienen confidenciales como datos de terceros; el texto de la reclamación se facilita al solicitante.",
-  "Decryption is unavailable in this browser.": "La función de descifrado no está disponible en este navegador."
+  "Decryption is unavailable in this browser.": "La función de descifrado no está disponible en este navegador.",
+  "Stays withheld: third-party data": "Estancias retenidas: datos de terceros",
+  "Released: it concerns the requester's account": "Publicado: se refiere a la cuenta del solicitante",
+  "Authority's view": "Punto de vista de la autoridad",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "La empresa ha vuelto a precintar el sobre con un texto diferente. Comprueba la validez del documento de la autoridad."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "¿Solo está echando un vistazo? Haga doble clic en <code>scripts\\Demo.cmd</code> para acceder a una demostración aislada. No es necesario iniciar sesión en Telegram.",
@@ -5477,7 +5481,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "La página 830, «Historial de seguridad», aparece cubierta por rectángulos negros. El último cambio de contraseña data de julio de 2024; no se registra ningún cambio en 2025. No se reproducen las fechas, direcciones e identificadores de esas filas.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy no es parte en la controversia y no se pronuncia sobre si el bloqueo de la cuenta de Steam estaba justificado. En esta página no se identifica al interesado; no se reproducen los identificadores de cuenta, los nombres de usuario, las direcciones IP ni los datos personales. Los textos de las reclamaciones se citan sin los nombres de usuario de los denunciantes, incluidos los textos que aparecen bajo rectángulos negros, que permanecen en la capa de texto del archivo. Cartas: N.º de doc. 42282474, 15 de agosto de 2025 (3 páginas); n.º de doc. 42603633, 1 de octubre de 2025 (9 páginas). Anexo: Anexo 1 (830 páginas). Las referencias a las páginas siguen el orden de las páginas del PDF. Las traducciones al inglés de las citas en alemán son nuestras. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Expediente completo del caso</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">El expediente del RGPD de 106 días</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Alfabeto cirílico: al menos un carácter de ese alfabeto. Patrón de inicio de sesión: letras latinas seguidas de entre 3 y 5 dígitos, nada más. Se han recopilado los 1.995 inicios de sesión de los periodistas, incluidos los que aparecen junto a los 50 textos visibles, y siguen siendo extraíbles. Aquí no se reproduce ningún inicio de sesión de los periodistas. Cuatro textos legibles se repiten palabra por palabra en nueve registros;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "aparece tres veces (págs. 446 y 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "aparece tres veces (págs. 446 y 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "para la clave pública de la autoridad"
  },
  "modes": {
   "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",

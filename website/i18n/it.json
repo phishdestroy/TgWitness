@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Errore. Il campo {n} non corrisponde all'impegno sottoscritto dall'azienda: la busta è stata modificata dopo che il richiedente ne aveva ricevuto la copia.",
   "{n} of {total} values match the commitments the firm signed.": "{n} dei {total} valori corrispondono agli impegni sottoscritti dall'azienda.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Fase 3 di 3: è l'autorità, e non l'azienda, a decidere. Esempio: le credenziali di accesso rimangono riservate in quanto dati di terzi; il testo del reclamo viene comunicato al richiedente.",
-  "Decryption is unavailable in this browser.": "La decrittografia non è disponibile in questo browser."
+  "Decryption is unavailable in this browser.": "La decrittografia non è disponibile in questo browser.",
+  "Stays withheld: third-party data": "Dati non comunicati: dati di terze parti",
+  "Released: it concerns the requester's account": "Pubblicato: riguarda l'account del richiedente",
+  "Authority's view": "Il punto di vista dell'Autorità",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "L'azienda ha richiuso la busta con un testo diverso. Verifica l'autenticità del documento."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Sta solo dando un’occhiata? Faccia doppio clic su <code>scripts\\Demo.cmd</code> per una demo isolata. Non è necessario effettuare l’accesso a Telegram.",
@@ -5425,7 +5429,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "La pagina 830, “Cronologia della sicurezza”, è coperta da rettangoli neri. L’ultima modifica della password risale a luglio 2024; non risulta alcuna modifica nel 2025. Le date, gli indirizzi e gli identificativi di quelle righe non sono riportati.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy non è parte in causa nella controversia e non si pronuncia sulla legittimità del blocco dell’account Steam. L’interessato non è identificato in questa pagina; non vengono riportati identificativi dell’account, credenziali di accesso, indirizzi IP e dati personali. I testi dei reclami sono citati senza le credenziali di accesso dei segnalanti, compresi i testi all’interno dei rettangoli neri, che rimangono nel livello di testo del file. Lettere: n. doc. 42282474, 15 agosto 2025 (3 pagine); n. doc. 42603633, 1° ottobre 2025 (9 pagine). Allegato: Allegato 1 (830 pagine). I riferimenti alle pagine seguono l’ordine delle pagine del PDF. Le traduzioni in inglese delle citazioni in tedesco sono a cura nostra. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Dossier completo del caso</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">Il fascicolo GDPR di 106 giorni</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Cirillico: almeno un carattere di quell’alfabeto. Schema di accesso: lettere latine seguite da 3–5 cifre, nient’altro. Tutti i 1.995 accessi dei giornalisti, compresi quelli relativi ai 50 testi visibili, sono stati acquisiti e rimangono estraibili. Nessun accesso dei giornalisti viene riportato qui. Quattro testi leggibili si ripetono parola per parola in nove record;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "compare tre volte (pp. 446, 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "compare tre volte (pp. 446, 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "per la chiave pubblica dell'autorità"
  },
  "modes": {
   "modes.actions.body": "Le conferme di anteprima, di richiesta e di risultato sono firmate. Prima che venga premuto un pulsante, il server recupera nuovamente il messaggio e rifiuta eventuali modifiche apportate tramite tastiera. Il testo e gli URL restituiti dalla callback rimangono registrati nel contesto.",

@@ -568,7 +568,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Detectado. O campo {n} não corresponde ao compromisso assinado pela empresa: o envelope foi alterado depois que o solicitante recebeu a cópia.",
   "{n} of {total} values match the commitments the firm signed.": "{n} dos {total} valores correspondem aos compromissos assumidos pela empresa.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Etapa 3 de 3: a decisão cabe à autoridade, e não à empresa. Exemplo: os dados de login permanecem confidenciais como dados de terceiros; o texto da reclamação é divulgado ao solicitante.",
-  "Decryption is unavailable in this browser.": "A descriptografia não está disponível neste navegador."
+  "Decryption is unavailable in this browser.": "A descriptografia não está disponível neste navegador.",
+  "Stays withheld: third-party data": "Dados retidos: dados de terceiros",
+  "Released: it concerns the requester's account": "Liberado: diz respeito à conta do solicitante",
+  "Authority's view": "Opinião da autoridade",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "A empresa voltou a lacrar o envelope com um texto diferente. Verifique a autenticidade do documento."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Está apenas explorando? Clique duas vezes em <code>scripts\\Demo.cmd</code> para acessar uma demonstração isolada. Não é necessário fazer login no Telegram.",
@@ -5477,7 +5481,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "A página 830, “Histórico de segurança”, está coberta por retângulos pretos. A última alteração da senha data de julho de 2024; não há registro de nenhuma alteração em 2025. As datas, endereços e identificadores dessas linhas não foram reproduzidos.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "A PhishDestroy não é parte na disputa e não se pronuncia sobre se o bloqueio da conta do Steam foi justificado. O titular dos dados não é identificado nesta página; identificadores de conta, nomes de usuário, endereços IP e dados pessoais não são reproduzidos. Os textos das reclamações são citados sem os nomes de usuário dos autores, incluindo os textos sob retângulos pretos, que permanecem na camada de texto do arquivo. Cartas: N.º do documento 42282474, 15 de agosto de 2025 (3 páginas); Doc. nº 42603633, 1º de outubro de 2025 (9 páginas). Anexo: Anexo 1 (830 páginas). As referências às páginas seguem a ordem das páginas do PDF. As traduções para o inglês das citações em alemão são de nossa autoria. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Dossiê mais amplo do caso</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">O processo de 106 dias sobre o GDPR</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Cirílico: pelo menos um caractere desse alfabeto. Padrão de login: letras latinas seguidas de 3 a 5 dígitos, nada mais. Todos os 1.995 logins de repórteres, incluindo aqueles ao lado dos 50 textos visíveis, estão incluídos e continuam acessíveis para extração. Nenhum login de repórter é reproduzido aqui. Quatro textos legíveis se repetem, palavra por palavra, em nove registros;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "aparece três vezes (p. 446, 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "aparece três vezes (p. 446, 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "para a chave pública da autoridade"
  },
  "modes": {
   "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",
