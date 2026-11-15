@@ -4,22 +4,6 @@
 
 # Valve, Taylor Wessing and 106 days of waiting under the GDPR: a breakdown of the file and its 70,717 words
 
----
-
-## Observation — The Carelessness Correlation
-
-Dr. Zurheide called the breach notification *"durchaus unterhaltsame"* — quite entertaining — and noted that our message appeared to be translated. The observation is noted.
-
-The same person, in the same professional capacity, under a qualified beA signature, in a paid engagement spanning 106 days, produced the following in a single document:
-
-- **His own surname misspelled in the letterhead** — `p.zurh`**`eo`**`de@*****wessing.com` — the first bytes any PDF reader renders.
-- **"Die Antwortet lautet ja"** — verb used as noun, meaning *"the answer answers yes"* — in two separate sections, identically.
-- **1,044 filled vector paths drawn over text** that remained fully present in the content stream. 905,672 characters extractable by anyone with `pdftotext`.
-- **`Aspose.PDF for .NET 20.8`** — released August 2020, five years without update, with documented and patched redaction-class vulnerabilities in later releases — processing sensitive personal data of minors.
-
-A lawyer can defend four criminal statutes in a civil response as aggressive representation. No lawyer in the world can defend misspelling their own surname, failing basic grammar twice, and treating vector overlays as redaction. These are not legal positions. They are quality-assurance failures, documented at the byte level, certified by a qualified electronic signature.
-
-He signed a document he had not read. Then he received a notification about the consequences and responded with the same quality of attention. The deficit is consistent. It is now in both records.
 
 [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Operator notice](OPERATOR-INCOMPATIBILITY.md)
 
@@ -312,6 +296,27 @@ into any conflict with you in all this time. But if you decide to break our work
 without an active repository regulators and others will not be able to compare the signature of a version (though who
 am I telling), and then we will enter into direct conflict. On that note, we hope to take our leave of mega-expertise
 and elite lawyers. It was not fun, and I am not glad. All the best.
+
+
+---
+
+## Observation — The Carelessness Correlation
+
+Upon understanding the scope of the redaction failure, PhishDestroy notified the firm immediately. The reason was not adversarial: the probability that this file is not the only one is critically high. The same pipeline — `Aspose.PDF for .NET 20.8`, the same sticker method, the same `"Anlage 1 / Taylor Wessing"` label — could be present in every document that passed through the same process. The notification was sent in German, by people who do not speak German, as a responsible disclosure to the data protection contact of the responsible firm.
+
+Dr. Zurheide called it *"durchaus unterhaltsame"* — quite entertaining — and noted that our message appeared to be translated.
+
+The same person, in the same professional capacity, under a qualified beA signature, in a paid engagement spanning 106 days, produced the following in a single document:
+
+- **His own surname misspelled in the letterhead** — `p.zurh`**`eo`**`de@*****wessing.com` — the first bytes any PDF reader renders.
+- **"Die Antwortet lautet ja"** — verb used as noun, meaning *"the answer answers yes"* — in two separate sections, identically.
+- **1,044 filled vector paths drawn over text** that remained fully present in the content stream. 905,672 characters extractable by anyone with `pdftotext`.
+- **`Aspose.PDF for .NET 20.8`** — released August 2020, five years without update, with documented and patched redaction-class vulnerabilities in later releases — processing sensitive personal data of minors.
+- **The client's grammatical gender, unreconciled** — both letters use *"unsere Mandantin"* (feminine singular) to refer to Valve Corporation throughout. The template placeholder was not updated before dispatch. In a document that terminates an account with immediate effect and threatens prosecution under four statutes of the criminal code, the attorneys did not read their own text closely enough to notice the gender of the entity they represent. This is not a stylistic choice. It is a copy-paste artifact in a bespoke legal instrument for which a client was billed.
+
+A lawyer can defend four criminal statutes in a civil response as aggressive client representation. No lawyer in the world can defend misspelling their own surname under a qualified signature, writing *"the answer answers yes"* in two separate sections identically, treating vector overlays as permanent redaction, running five-year-old software with documented vulnerabilities on minors' data, and not reading the gender of their own client in the final draft. These are not legal positions. They are quality-assurance failures at the level of a first-year proofreading pass, certified forever by a qualified electronic signature.
+
+He signed a document he had not read. Then he received a notification about the consequences and responded with the same quality of attention. The deficit is consistent. It is now in both records.
 
 > [!CAUTION]
 > **Taking this repository down will not delete anything.** Investigators and researchers use TgWitness, and this repository is what their copies are verified against. We keep backups. But a takedown would turn us from the auditor of one case into a party to a conflict. Enough deleting the truth.
