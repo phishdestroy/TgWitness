@@ -178,7 +178,26 @@ Nhưng các lựa chọn của chúng tôi đối với Taylor Wessing rất có
 Chúng tôi muốn cảnh báo những ai thích bẻ cong pháp luật: không cần phải đánh sập kho mã. Suốt thời gian qua chúng tôi chưa hề xung đột với các bạn. Nhưng nếu các bạn quyết định phá hỏng công việc của chúng tôi để che giấu sự thật, thì khi không có kho mã đang hoạt động, các cơ quan quản lý và những người khác sẽ không thể đối chiếu chữ ký của một phiên bản (dù tôi đang kể cho ai nghe chứ), và khi đó chúng tôi sẽ bước vào xung đột trực tiếp. Với điều đó, chúng tôi hy vọng được chia tay với siêu chuyên môn và các luật sư tinh hoa. Chẳng vui chút nào, và tôi không vui. Chúc mọi điều tốt đẹp.
 
 > [!CAUTION]
-> **Gỡ kho lưu trữ này xuống sẽ không xóa được gì.** Các nhà điều tra và nhà nghiên cứu dùng TgWitness, và bản sao của họ được đối chiếu với chính kho lưu trữ này. Chúng tôi có bản sao lưu. Nhưng một lần gỡ xuống sẽ biến chúng tôi từ người kiểm toán một vụ việc thành một bên của cuộc xung đột. Đừng xóa sự thật nữa.
+> **Cái giá của sự leo thang: Chúng tôi không ở đây vì Steam**
+>
+> Hãy để chúng tôi nói thẳng. Chúng tôi không phải là bên trong tranh chấp này. Chúng tôi không quan tâm liệu một tài khoản trong trò chơi video có bị cấm, bị hack hay bị bán hay không. Tranh cãi về lệnh cấm Steam với các luật sư doanh nghiệp hàng đầu sẽ vừa vô lý vừa thấp hơn trọng tâm của chúng tôi.
+>
+> Mối quan tâm của chúng tôi hoàn toàn mang tính cơ sở hạ tầng và lịch sử. Chúng tôi là kiểm toán viên về bằng chứng kỹ thuật số và sự miễn trừ trách nhiệm có hệ thống. Vụ Steam chỉ là một ống kính — một ống kính vô cùng tiết lộ — phơi bày sự thất bại cơ học của Dr. Patrick Zurheide và nhà hát tuân thủ của Taylor Wessing.
+>
+> Chúng tôi đã ghi lại PDF bị lỗi, chữ ký bị sai chính tả, nhật ký botnet và phản hồi kiêu ngạo về vi phạm dữ liệu. Cuộc kiểm toán đó đã hoàn tất.
+>
+> Nhưng nếu bạn quyết định leo thang — nếu bạn cố gắng sử dụng sức nặng doanh nghiệp để xóa kho lưu trữ này, xóa bỏ sự thật hoặc bịt miệng cuộc kiểm toán này — bạn sẽ buộc phải có sự thay đổi trong trọng tâm của chúng tôi. Và bạn sẽ không thích nơi trọng tâm đó đáp xuống.
+>
+> Xóa kho lưu trữ này sẽ không xóa các hash mật mã. Nhưng nó sẽ biến chúng tôi từ những kiểm toán viên khách quan về một thất bại kỹ thuật đơn lẻ thành một bên trực tiếp trong một cuộc xung đột có hệ thống.
+>
+> Nếu bạn buộc sự leo thang đó, chúng tôi sẽ ngừng nhìn vào Aspose.PDF và bắt đầu nhìn vào nền tảng sự miễn trừ trách nhiệm của bạn. Bạn có thể cố gắng bác bỏ di sản tư tưởng của người sáng lập Rüdiger Graf von der Goltz và việc soạn thảo §175 của ông là một "chú thích lịch sử." Nhưng với tư cách là các nhà nghiên cứu OSINT, chúng tôi theo dõi tiền. Cả một thế kỷ.
+>
+> Chúng tôi sẽ chuyển nguồn lực để theo dõi các dòng vốn hậu chiến đã xây dựng văn phòng Düsseldorf của Wessing. Chúng tôi sẽ cung cấp cho công chúng một lịch sử chính xác về mặt toán học về cách "phi phát xít hóa" bị né tránh, và cách các tài sản, đồ cổ và của cải bị cướp bóc — bắt nguồn từ những gì được gọi công khai là "cuộc cướp bóc Liên Xô" — đã được định tuyến qua Thụy Sĩ để tài trợ cho "cuốn sổ địa chỉ vàng" bảo vệ công ty của bạn ngày nay. Một vết tích tài chính vẫn còn rất liên quan đến các yêu cầu hoàn trả hiện đại ở châu Âu và Ukraine.
+>
+> Hiện tại, bạn đang đối mặt với sự bối rối nhỏ nhặt, cục bộ về một PDF bị rò rỉ và sự không có khả năng đánh vần tên của chính mình. Đừng buộc chúng tôi phải kiểm tra vốn máu đã mua tiêu đề thư của bạn.
+>
+> Đủ rồi việc xóa sự thật.
+
 
 [Bản ghi nguồn](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Thông báo dành cho người vận hành](OPERATOR-INCOMPATIBILITY.md) · [Giấy phép MIT](../../LICENSE)
 
