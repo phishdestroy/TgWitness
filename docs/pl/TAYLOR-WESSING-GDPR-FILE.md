@@ -178,7 +178,26 @@ Ale nasze możliwości wobec Taylor Wessing są najprawdopodobniej wyczerpane, b
 Chcemy ostrzec tych, którzy lubią naginać prawo: nie trzeba usuwać repozytorium. Przez cały ten czas nie weszliśmy z wami w żaden konflikt. Ale jeśli postanowicie zepsuć naszą pracę, żeby ukryć prawdę, to bez aktywnego repozytorium organy nadzorcze i inni nie będą mogli porównać podpisu wersji (choć komu ja to mówię), i wtedy wejdziemy w bezpośredni konflikt. Na tym mamy nadzieję pożegnać się z megaekspertyzą i elitarnymi prawnikami. Nie było zabawnie i nie cieszę się. Wszystkiego dobrego.
 
 > [!CAUTION]
-> **Usunięcie tego repozytorium niczego nie skasuje.** Z TgWitness korzystają śledczy i badacze, a ich kopie weryfikuje się właśnie względem tego repozytorium. Mamy kopie zapasowe. Ale usunięcie zrobiłoby z nas, audytorów jednej sprawy, stronę konfliktu. Dość kasowania prawdy.
+> **Cena eskalacji: nie jesteśmy tutaj z powodu Steam**
+>
+> Bądźmy absolutnie jasni. Nie jesteśmy stroną w tym sporze. Nie interesuje nas, czy konto w grze wideo zostało zbanowane, zhakowane czy sprzedane. Kłócenie się o bana na Steam z elitarnymi prawnikami korporacyjnymi byłoby zarówno absurdalne, jak i poniżej naszego poziomu zainteresowania.
+>
+> Nasze zainteresowanie jest ściśle infrastrukturalne i historyczne. Jesteśmy audytorami dowodów cyfrowych i systemowej bezkarności. Sprawa Steam była jedynie soczewką — bardzo odkrywczą — która ujawniła mechaniczną porażkę Dr. Patricka Zurheide i teatr zgodności Taylor Wessing.
+>
+> Udokumentowaliśmy uszkodzony PDF, podpis z błędem ortograficznym, logi botnetu i arogancką odpowiedź na naruszenie danych. Ten audyt jest zakończony.
+>
+> Ale jeśli zdecydujecie się eskalować — jeśli spróbujecie użyć swojej korporacyjnej wagi, aby usunąć to repozytorium, wymazać prawdę lub uciszyć ten audyt — zmusicicie zmianę naszego skupienia. I nie spodoba wam się, gdzie to skupienie wyląduje.
+>
+> Usunięcie tego repozytorium nie usunie skrótów kryptograficznych. Ale zamieni nas z obiektywnych audytorów pojedynczej awarii technicznej w bezpośrednią stronę systemowego konfliktu.
+>
+> Jeśli wymuszicie tę eskalację, przestaniemy patrzeć na Aspose.PDF i zaczniemy badać fundament waszej bezkarności. Możecie próbować odrzucić ideologiczne dziedzictwo waszego założyciela, Rüdigera Grafa von der Goltza, i jego opracowanie §175 jako "historyczny przypis." Ale jako badacze OSINT śledzimy pieniądze. Przez stulecie.
+>
+> Przekierujemy nasze zasoby na śledzenie powojennych przepływów kapitału, które zbudowały biuro Wessinga w Düsseldorfie. Zaoferujemy opinii publicznej matematycznie precyzyjną historię tego, jak obchodzono "denazyfikację", i jak aktywa, antyki i złupione bogactwa — wywodzące się z tego, co otwarcie nazywano "grabieżą ZSRR" — były przekierowywane przez Szwajcarię, aby finansować "złotą książkę adresową", która dziś chroni waszą firmę. Ślad finansowy, który pozostaje wysoce aktualny dla nowoczesnych roszczeń restytucyjnych w Europie i na Ukrainie.
+>
+> Obecnie stoicie twarzą w twarz z drobnym, zlokalizowanym zakłopotaniem z powodu wycieku PDF i niezdolności do przeliterowania własnego imienia. Nie zmuszajcie nas do badania kapitału krwi, który kupił wasz papier firmowy.
+>
+> Dość kasowania prawdy.
+
 
 [Zapis źródłowy](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Informacja dla operatorów](OPERATOR-INCOMPATIBILITY.md) · [licencja MIT](../../LICENSE)
 

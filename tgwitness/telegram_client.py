@@ -395,7 +395,7 @@ def reject_read_receipts(request, permit=None):
 
 def request_method(request):
     wrappers = (functions.InvokeWithTakeoutRequest, functions.InvokeWithMessagesRangeRequest,
-                functions.InvokeWithLayerRequest, functions.InitConnectionRequest)
+                functions.InvokeWithLayerRequest, functions.InvokeWithoutUpdatesRequest, functions.InitConnectionRequest)
     names = []
     for _ in range(8):
         cls = type(request)

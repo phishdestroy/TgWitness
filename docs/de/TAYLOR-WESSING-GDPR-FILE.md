@@ -279,7 +279,26 @@ verabschieden wir uns hoffentlich von Mega-Expertise und Elite-Juristen. Es war 
 auch nicht. Alles Gute.
 
 > [!CAUTION]
-> **Eine Löschung dieses Repositorys löscht nichts.** Ermittler und Forschende nutzen TgWitness, und mit diesem Repository werden ihre Kopien abgeglichen. Wir haben Backups. Aber eine Löschung würde uns vom Prüfer eines einzelnen Falls zur Konfliktpartei machen. Genug davon, die Wahrheit zu löschen.
+> **Der Preis der Eskalation: Wir sind nicht wegen Steam hier**
+>
+> Lassen Sie uns absolut klar sein. Wir sind keine Partei in diesem Streit. Es interessiert uns nicht, ob ein Konto in einem Videospiel gesperrt, gehackt oder verkauft wurde. Über eine Steam-Sperre mit Spitzenjuristen zu streiten, wäre ebenso absurd wie unter unserem Niveau.
+>
+> Unser Interesse ist rein infrastrukturell und historisch. Wir sind Prüfer digitaler Beweise und systemischer Straflosigkeit. Der Steam-Fall war lediglich eine Linse — eine höchst aufschlussreiche — die das mechanische Versagen von Dr. Patrick Zurheide und das Compliance-Theater von Taylor Wessing offenbarte.
+>
+> Wir haben das defekte PDF, die falsch buchstabierte Unterschrift, die Botnet-Logs und die arrogante Reaktion auf eine Datenpanne dokumentiert. Dieses Audit ist abgeschlossen.
+>
+> Wenn Sie sich jedoch zur Eskalation entschließen — wenn Sie versuchen, Ihr unternehmerisches Gewicht einzusetzen, um dieses Repository zu löschen, die Wahrheit auszuradieren oder dieses Audit zum Schweigen zu bringen — werden Sie eine Verschiebung unseres Fokus erzwingen. Und es wird Ihnen nicht gefallen, wohin dieser Fokus führt.
+>
+> Das Löschen dieses Repositorys wird die kryptografischen Hashes nicht entfernen. Aber es wird uns von objektiven Prüfern eines einzelnen technischen Versagens zu einer direkten Partei in einem systemischen Konflikt machen.
+>
+> Wenn Sie diese Eskalation erzwingen, werden wir aufhören, Aspose.PDF zu betrachten, und beginnen, das Fundament Ihrer Straflosigkeit zu untersuchen. Sie mögen versuchen, das ideologische Erbe Ihres Gründers Rüdiger Graf von der Goltz und seinen Entwurf des §175 als „historische Fußnote" abzutun. Aber als OSINT-Forscher folgen wir dem Geld. Ein Jahrhundert davon.
+>
+> Wir werden unsere Ressourcen darauf verwenden, die Nachkriegskapitalströme nachzuverfolgen, die das Düsseldorfer Büro von Wessing aufgebaut haben. Wir werden der Öffentlichkeit eine mathematisch präzise Geschichte darüber anbieten, wie „Entnazifizierung" umgangen wurde, und wie Vermögenswerte, Antiquitäten und geraubtes Vermögen — das aus dem, was offen als „Plünderung der UdSSR" bezeichnet wurde, stammte — über die Schweiz geschleust wurde, um das „goldene Adressbuch" zu finanzieren, das Ihre Kanzlei heute schützt. Eine Finanzspur, die für moderne Restitutionsansprüche in Europa und der Ukraine höchst relevant bleibt.
+>
+> Derzeit sehen Sie sich einer kleinen, lokalisierten Peinlichkeit wegen eines geleakten PDFs und der Unfähigkeit, den eigenen Namen zu buchstabieren, gegenüber. Zwingen Sie uns nicht, das Blutkapital zu untersuchen, das Ihren Briefkopf finanziert hat.
+>
+> Genug damit, die Wahrheit zu löschen.
+
 
 [Quelldatensatz](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Hinweis zum Betreiber](OPERATOR-INCOMPATIBILITY.md) · [MIT-Lizenz](../../LICENSE)
 

@@ -95,6 +95,8 @@ class SwarmExports:
         self.app, self.clock = app, clock
         self.scheduler = SwarmScheduler(availability=self.availability)
         self.jobs, self.loops, self.supervisor, self.cooldown = {}, {}, None, {}
+        self.active = {}
+        self.closing = False
         self.load()
 
     def entries(self):
@@ -187,6 +189,8 @@ class SwarmExports:
         return self.public_job(job)
 
     def ensure_running(self):
+        if self.closing:
+            return
         for profile in self.entries():
             loop = self.loops.get(profile)
             if loop is None or loop.done():
@@ -196,13 +200,17 @@ class SwarmExports:
 
     async def serve(self, profile):
         async for task in self.scheduler.steal_loop(profile):
+            operation = asyncio.create_task(self.run(task, profile))
+            self.active[task.id] = operation
             try:
-                await self.run(task, profile)
+                await operation
             except asyncio.CancelledError:
-                raise
+                if task.state != "cancelled" or asyncio.current_task().cancelling():
+                    raise
             except Exception as exc:
                 self.scheduler.fail(task, type(exc).__name__)
             finally:
+                self.active.pop(task.id, None)
                 self.save()
 
     async def supervise(self):
@@ -216,6 +224,9 @@ class SwarmExports:
                 loop.cancel()
             await asyncio.gather(*self.loops.values(), return_exceptions=True)
             self.loops = {}
+            self.supervisor = None
+            if not self.closing and any(task.state not in FINAL for task in self.scheduler.tasks.values()):
+                self.ensure_running()
 
     async def resolve(self, collector, peer):
         client = collector.client
@@ -265,58 +276,83 @@ class SwarmExports:
         task.progress.update(chat_id=chat_id, title=utils.get_display_name(entity) or None)
         if task.state == "cancelled":
             return
+        previous_export, export_id = collector.export_task, None
         try:
-            record = await collector.start_export(chat_id, None, job["files"], False)
-        except ValueError as exc:
-            if "busy" in str(exc):
-                self.scheduler.requeue(task, delay=BUSY_RETRY, reason="account_busy")
-            else:
-                self.scheduler.requeue(task, exclude=profile, reason=str(exc))
-            return
-        export_id = record["id"]
-        task.progress["export_id"] = export_id
-        state = record
-        while True:
-            state = collector.poll_export(export_id)
-            task.progress.update({key: state.get(key) for key in ("captured", "total", "eta_seconds", "stage",
-                                                                  "files_done", "files_total")})
-            left = self.wait_left(collector)
-            task.waiting = "telegram_wait" if left > WAIT_FLOOR else None
-            task.progress["wait_seconds"] = round(left) if task.waiting else None
-            if state.get("phase") != "running":
-                break
-            if task.state == "cancelled":
-                await collector.cancel_export(export_id)
+            try:
+                record = await collector.start_export(chat_id, None, job["files"], False)
+            except ValueError as exc:
+                if "busy" in str(exc):
+                    self.scheduler.requeue(task, delay=BUSY_RETRY, reason="account_busy")
+                else:
+                    self.scheduler.requeue(task, exclude=profile, reason=str(exc))
                 return
-            if task.yield_requested:
-                await collector.cancel_export(export_id)
-                self.scheduler.requeue(task, reason="moved_by_operator")
+            export_id = record["id"]
+            task.progress["export_id"] = export_id
+            state = record
+            while True:
+                state = collector.poll_export(export_id)
+                task.progress.update({key: state.get(key) for key in ("captured", "total", "eta_seconds", "stage",
+                                                                      "files_done", "files_total")})
+                left = self.wait_left(collector)
+                task.waiting = "telegram_wait" if left > WAIT_FLOOR else None
+                task.progress["wait_seconds"] = round(left) if task.waiting else None
+                if state.get("phase") != "running":
+                    break
+                if task.state == "cancelled":
+                    return
+                if task.yield_requested:
+                    await self.stop_export(collector, export_id)
+                    self.scheduler.requeue(task, reason="moved_by_operator")
+                    return
+                await asyncio.sleep(POLL)
+            task.waiting = None
+            if state.get("ready") and collector.export_path is not None:
+                entry = await asyncio.to_thread(
+                    export_history.prepared, app.state.store, collector.export_path, "zip", False,
+                    owner=job.get("owner"), workspace=profile,
+                    required_permissions=["view", "export"], chat_ids=[chat_id])
+                result = {"workspace": profile, "prepared": entry["id"], "bytes": entry["bytes"],
+                          "sha256": entry["sha256"], "filename": state.get("filename"),
+                          "captured": state.get("captured"), "partial": state.get("phase") != "done",
+                          "cache_warning": entry.get("cache_warning")}
+                if state.get("phase") == "done":
+                    self.scheduler.finish(task, result)
+                else:
+                    task.result = result
+                    self.scheduler.fail(task, state.get("error") or "Failed")
                 return
-            await asyncio.sleep(POLL)
-        task.waiting = None
-        if state.get("ready") and collector.export_path is not None:
-            entry = await asyncio.to_thread(
-                export_history.prepared, app.state.store, collector.export_path, "zip", False,
-                owner=job.get("owner"), workspace=profile,
-                required_permissions=["view", "export"], chat_ids=[chat_id])
-            result = {"workspace": profile, "prepared": entry["id"], "bytes": entry["bytes"],
-                      "sha256": entry["sha256"], "filename": state.get("filename"),
-                      "captured": state.get("captured"), "partial": state.get("phase") != "done",
-                      "cache_warning": entry.get("cache_warning")}
-            if state.get("phase") == "done":
-                self.scheduler.finish(task, result)
+            if state.get("phase") == "cancelled" and task.state != "cancelled":
+                self.scheduler.fail(task, "The export was cancelled in its workspace.")
+                return
+            error = state.get("error") or "Failed"
+            if collector.authorization_required:
+                self.scheduler.requeue(task, exclude=profile, reason="Telegram signed this account out.")
             else:
-                task.result = result
-                self.scheduler.fail(task, state.get("error") or "Failed")
+                self.scheduler.fail(task, error)
+        finally:
+            if export_id is None and collector.export_task is not previous_export:
+                export_id = (collector.export_state or {}).get("id")
+            if export_id is not None:
+                await self.stop_export(collector, export_id)
+
+    async def stop_export(self, collector, export_id):
+        if not collector.export_busy() or (collector.export_state or {}).get("id") != export_id:
             return
-        if state.get("phase") == "cancelled" and task.state != "cancelled":
-            self.scheduler.fail(task, "The export was cancelled in its workspace.")
-            return
-        error = state.get("error") or "Failed"
-        if collector.authorization_required:
-            self.scheduler.requeue(task, exclude=profile, reason="Telegram signed this account out.")
+        if collector.export_state.get("phase") == "running":
+            stopping = asyncio.create_task(collector.cancel_export(export_id))
         else:
-            self.scheduler.fail(task, error)
+            stopping = asyncio.gather(collector.export_task, return_exceptions=True)
+        cancelled = False
+        while not stopping.done():
+            try:
+                await asyncio.shield(stopping)
+            except asyncio.CancelledError:
+                cancelled = True
+        if cancelled:
+            if not stopping.cancelled():
+                stopping.exception()
+            raise asyncio.CancelledError
+        stopping.result()
 
     def task(self, task_id):
         return self.scheduler.get(task_id)
@@ -324,6 +360,9 @@ class SwarmExports:
     def control(self, task_id, action, *, priority=None, account=None):
         if action == "cancel":
             task = self.scheduler.cancel(task_id)
+            operation = self.active.get(task_id)
+            if task.state == "cancelled" and operation is not None:
+                operation.cancel()
         elif action == "priority":
             task = self.scheduler.reprioritize(task_id, priority if priority is not None else 2)
         elif action == "reassign":
@@ -332,6 +371,8 @@ class SwarmExports:
             task = self.scheduler.reassign(task_id, account)
         elif action == "retry":
             task = self.scheduler.get(task_id)
+            if task_id in self.active:
+                raise ValueError("This export is still stopping. Retry when it has stopped.")
             if task.state not in ("failed", "cancelled"):
                 raise ValueError("Only a failed or cancelled task can start again.")
             task.excluded.clear()
@@ -345,7 +386,8 @@ class SwarmExports:
         return task.public(self.scheduler.clock())
 
     def forget(self, job_id):
-        if any(task.group == job_id and task.state not in FINAL for task in self.scheduler.tasks.values()):
+        if any(task.group == job_id and (task.state not in FINAL or task.id in self.active)
+               for task in self.scheduler.tasks.values()):
             raise ValueError("Cancel the waiting tasks of this export first.")
         self.scheduler.forget(job_id)
         self.jobs.pop(job_id, None)
@@ -382,7 +424,10 @@ class SwarmExports:
                 tasks = job.pop("tasks", [])
                 self.jobs[job["id"]] = job
                 for row in tasks:
-                    task = Task(row["kind"], row["payload"], priority=row["priority"], group=job["id"], id=row["id"])
+                    affinity = row.get("affinity", job.get("accounts"))
+                    task = Task(row["kind"], row["payload"], priority=row["priority"], group=job["id"], id=row["id"],
+                                affinity=frozenset(affinity) if affinity is not None else None,
+                                pinned=row.get("pinned"))
                     self.scheduler.submit(task)
                     task.account, task.result, task.progress = row.get("account"), row.get("result"), row.get("progress") or {}
                     task.excluded, task.attempts = dict(row.get("excluded") or {}), row.get("attempts", 0)
@@ -393,6 +438,7 @@ class SwarmExports:
                     task.finished = self.scheduler.clock()
 
     async def close(self):
+        self.closing = True
         for loop in [*self.loops.values(), *([self.supervisor] if self.supervisor else [])]:
             loop.cancel()
         await asyncio.gather(*self.loops.values(), *([self.supervisor] if self.supervisor else []),

@@ -30,16 +30,21 @@ FLOODS = (errors.FloodWaitError, errors.FloodPremiumWaitError)
 TRANSIENT = (TimeoutError, ConnectionError, OSError, errors.TimedOutError, errors.ServerError)
 MEANING = ("Files are read over their own connections to each Telegram data center, separate from the connection that "
            "reads messages. Their number grows from one while files queue up and shrinks when Telegram asks to slow "
-           "down.")
+           "down. If no dedicated media endpoint is available, file reads reuse the existing connection.")
+
+
+class MediaRouteUnavailable(ValueError):
+    pass
 
 
 class _Session:
-    __slots__ = ("sender", "busy", "used", "broken", "parts", "bytes", "opened")
+    __slots__ = ("sender", "busy", "used", "broken", "parts", "bytes", "opened", "init_lock")
 
     def __init__(self, sender, now):
         self.sender, self.busy, self.used, self.broken = sender, 0, now, False
         self.parts = self.bytes = 0
         self.opened = now
+        self.init_lock = asyncio.Lock()
 
 
 class _Dc:
@@ -222,6 +227,8 @@ class MediaConnectionPool:
             sender = await self.opener(dc)
         except asyncio.CancelledError:
             raise
+        except MediaRouteUnavailable as exc:
+            dc.error, dc.error_at = exc, self.clock()
         except Exception as exc:
             dc.error, dc.error_at = exc, self.clock()
             dc.stats["failures"] += 1
@@ -260,30 +267,39 @@ class MediaConnectionPool:
             dc.target = max(1, min(dc.target, len(dc.live()) or 1))
 
     async def close(self):
-        for task in list(self.openers):
-            task.cancel()
+        pending = list(self.openers)
         if self.reaper is not None:
-            self.reaper.cancel()
+            pending.append(self.reaper)
+        for task in pending:
+            task.cancel()
         senders = [session.sender for dc in self.dcs.values() for session in dc.sessions]
         for dc in self.dcs.values():
             dc.sessions = []
             self.poke(dc)
         self.dcs, self.reaper = {}, None
-        await asyncio.gather(*(self.disconnect(sender) for sender in senders), return_exceptions=True)
+        await asyncio.gather(*pending, *(self.disconnect(sender) for sender in senders), return_exceptions=True)
+        while self.tasks:
+            await asyncio.gather(*tuple(self.tasks), return_exceptions=True)
 
     async def open_sender(self, dc):
         client = self.client
+        await client._get_dc(dc.dc_id)
+        config = getattr(client, "_config", None)
+        options = [option for option in getattr(config, "dc_options", ())
+                   if option.id == dc.dc_id and getattr(option, "media_only", False)
+                   and not getattr(option, "cdn", False)]
+        if not options:
+            raise MediaRouteUnavailable("No dedicated media endpoint is available for this data center.")
+        option = next((option for option in options
+                       if bool(option.ipv6) == bool(getattr(client, "_use_ipv6", False))), options[0])
         if dc.home:
             key = client.session.auth_key
             if key is None or not key.key:
                 raise ConnectionError("The account has no authorization key yet.")
-            return await self.connect(dc, AuthKey(key.key), client.session.server_address, client.session.port,
-                                      functions.help.GetConfigRequest())
-        option = await client._get_dc(dc.dc_id)
+            return await self.connect(dc, AuthKey(key.key), option.ip_address, option.port, None)
         async with dc.key_lock:
             if dc.auth_key is not None:
-                return await self.connect(dc, AuthKey(dc.auth_key), option.ip_address, option.port,
-                                          functions.help.GetConfigRequest())
+                return await self.connect(dc, AuthKey(dc.auth_key), option.ip_address, option.port, None)
             sender = await self.connect(dc, None, option.ip_address, option.port, None)
             try:
                 exported = await client(functions.auth.ExportAuthorizationRequest(dc.dc_id))
@@ -298,9 +314,9 @@ class MediaConnectionPool:
     async def connect(self, dc, key, host, port, query):
         client = self.client
         timeout = getattr(client, "_timeout", 10) or 10
-        sender = MTProtoSender(key, loggers=client._log, retries=1, auto_reconnect=False, connect_timeout=timeout,
-                               updates_queue=getattr(client, "_updates_queue", None) if dc.home else None)
+        sender = MTProtoSender(key, loggers=client._log, retries=1, auto_reconnect=False, connect_timeout=timeout)
         sender.dc_id, sender.tgwitness_pool, sender.tgwitness_home = dc.dc_id, True, dc.home
+        sender.tgwitness_initialized = False
         connection = client._connection(host, port, dc.dc_id, loggers=client._log, proxy=client._proxy,
                                         local_addr=getattr(client, "_local_addr", None))
         try:
@@ -313,11 +329,21 @@ class MediaConnectionPool:
             raise
         return sender
 
-    async def initialize(self, sender, query):
+    async def initialize(self, sender, query, call=None):
         init = copy.copy(self.client._init_request)
         init.query = query
         request = functions.InvokeWithLayerRequest(LAYER, functions.InvokeWithoutUpdatesRequest(init))
-        await asyncio.wait_for(sender.send(request), (getattr(self.client, "_timeout", 10) or 10) + 15)
+        result = await asyncio.wait_for(call(sender, request) if call else sender.send(request),
+                                        (getattr(self.client, "_timeout", 10) or 10) + 15)
+        sender.tgwitness_initialized = True
+        return result
+
+    async def request(self, session, call, request):
+        if not getattr(session.sender, "tgwitness_initialized", True):
+            async with session.init_lock:
+                if not session.sender.tgwitness_initialized:
+                    return await self.initialize(session.sender, request, call)
+        return await call(session.sender, request)
 
     def snapshot(self):
         now, rows = self.clock(), []
@@ -326,7 +352,9 @@ class MediaConnectionPool:
             rows.append({"dc": dc.dc_id, "home": dc.home, "connections": len(live), "target": dc.target,
                          "opening": dc.opening, "busy": sum(session.busy for session in live), "waiting": dc.waiters,
                          "flooded_seconds_ago": round(now - dc.flooded) if dc.flooded > -math.inf else None,
-                         "error": type(dc.error).__name__ if dc.error is not None else None, **dc.stats})
+                         "shared_connection": isinstance(dc.error, MediaRouteUnavailable),
+                         "error": type(dc.error).__name__ if dc.error is not None
+                         and not isinstance(dc.error, MediaRouteUnavailable) else None, **dc.stats})
         return {"enabled": self.enabled(), "limit": self.limit(), "per_connection": self.per_session, "dcs": rows,
                 "meaning": MEANING}
 
@@ -340,10 +368,20 @@ class PartReader:
         for attempt in range(PART_ATTEMPTS):
             dc_id, pause = self.dc_id, 0
             dc = self.pool.dc(dc_id)
-            session = await self.pool.take(dc)
+            session, borrowed = None, False
             try:
-                result = await asyncio.wait_for(self.call(session.sender, functions.upload.GetFileRequest(
-                    self.location, offset, self.part)), self.timeout)
+                session = await self.pool.take(dc)
+                sender = session.sender
+            except MediaRouteUnavailable:
+                if dc.home:
+                    sender = self.pool.client._sender
+                else:
+                    sender = await self.pool.client._borrow_exported_sender(dc.dc_id)
+                    borrowed = True
+            try:
+                request = functions.upload.GetFileRequest(self.location, offset, self.part)
+                result = await asyncio.wait_for(self.pool.request(session, self.call, request) if session
+                                                else self.call(sender, request), self.timeout)
             except errors.FileMigrateError as exc:
                 self.dc_id = exc.new_dc
                 continue
@@ -353,7 +391,8 @@ class PartReader:
                     raise
                 pause = exc.seconds
             except TRANSIENT as exc:
-                self.pool.failed(dc_id, session, exc)
+                if session:
+                    self.pool.failed(dc_id, session, exc)
                 if attempt == PART_ATTEMPTS - 1:
                     raise
                 pause = .25 * 2 ** attempt
@@ -362,10 +401,14 @@ class PartReader:
                     raise ValueError("unexpected_file_part_answer")
                 if len(result.bytes) > self.part:
                     raise ValueError("file_part_larger_than_requested")
-                self.pool.served(dc_id, session, len(result.bytes))
+                if session:
+                    self.pool.served(dc_id, session, len(result.bytes))
                 return result.bytes
             finally:
-                self.pool.give_back(dc, session)
+                if session:
+                    self.pool.give_back(dc, session)
+                elif borrowed:
+                    await self.pool.client._return_exported_sender(sender)
             if pause:
                 await asyncio.sleep(pause)
         raise ConnectionError("file_part_unavailable")
@@ -395,8 +438,12 @@ class PartReader:
                     if len(data) < self.part and (end is None or offset < end):
                         end = offset
                 if end is not None:
+                    discarded = [task for offset, task in pending.items() if offset > end]
+                    for task in discarded:
+                        task.cancel()
+                    await asyncio.gather(*discarded, return_exceptions=True)
                     for offset in [offset for offset in pending if offset > end]:
-                        pending.pop(offset).cancel()
+                        del pending[offset]
                     for offset in [offset for offset in ready if offset > end]:
                         del ready[offset]
         finally:
