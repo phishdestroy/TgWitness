@@ -178,7 +178,26 @@ Ma le nostre opzioni nei confronti di Taylor Wessing sono molto probabilmente es
 Vogliamo avvertire chi ama piegare la legge: non serve buttare giù il repository. In tutto questo tempo non siamo entrati in alcun conflitto con voi. Ma se decidete di rompere il nostro lavoro per nascondere la verità, allora senza un repository attivo le autorità di controllo e altri non potranno confrontare la firma di una versione (ma a chi lo sto dicendo), e allora entreremo in conflitto diretto. Con questo speriamo di congedarci dalla mega-competenza e dagli avvocati d’élite. Non è stato divertente, e non ne sono felice. Tutto il meglio.
 
 > [!CAUTION]
-> **Rimuovere questo repository non cancellerà nulla.** Investigatori e ricercatori usano TgWitness, ed è con questo repository che le loro copie vengono verificate. Abbiamo dei backup. Ma una rimozione ci trasformerebbe da revisori di un solo caso in parte di un conflitto. Basta cancellare la verità.
+> **Il costo dell'escalation: non siamo qui per Steam**
+>
+> Siamo assolutamente chiari. Non siamo parte di questa disputa. Non abbiamo alcun interesse nel sapere se un account in un videogioco è stato bannato, hackerato o venduto. Discutere di un ban su Steam con avvocati aziendali d'élite sarebbe assurdo e al di sotto del nostro obiettivo.
+>
+> Il nostro interesse è strettamente infrastrutturale e storico. Siamo revisori di prove digitali e impunità sistemica. Il caso Steam era semplicemente una lente — molto rivelatrice — che ha esposto il fallimento meccanico del Dr. Patrick Zurheide e il teatro di conformità di Taylor Wessing.
+>
+> Abbiamo documentato il PDF difettoso, la firma con errori di ortografia, i log del botnet e la risposta arrogante a una violazione dei dati. Quell'audit è completo.
+>
+> Ma se decidete di intensificare — se tentate di usare il vostro peso aziendale per eliminare questo repository, cancellare la verità o mettere a tacere questo audit — costringerete un cambiamento nel nostro focus. E non vi piacerà dove atterrerà quel focus.
+>
+> L'eliminazione di questo repository non cancellerà gli hash crittografici. Ma ci trasformerà da revisori oggettivi di un singolo fallimento tecnico in parte diretta di un conflitto sistemico.
+>
+> Se costringete quella escalation, smetteremo di guardare Aspose.PDF e inizieremo ad esaminare il fondamento della vostra impunità. Potreste tentare di liquidare l'eredità ideologica del vostro fondatore, Rüdiger Graf von der Goltz, e la sua redazione del §175 come una "nota a piè di pagina storica." Ma come ricercatori OSINT, seguiamo il denaro. Un secolo di esso.
+>
+> Reindirizzeremo le nostre risorse per tracciare i flussi di capitale del dopoguerra che hanno costruito l'ufficio di Düsseldorf di Wessing. Offriremo al pubblico una storia matematicamente precisa di come la "denazificazione" è stata aggirata, e come asset, antiquariato e ricchezze saccheggiate — derivate da ciò che veniva apertamente chiamato "il saccheggio dell'URSS" — sono stati instradati attraverso la Svizzera per finanziare il "libro degli indirizzi d'oro" che protegge la vostra azienda oggi. Una traccia finanziaria che rimane altamente rilevante per le richieste di restituzione moderne in Europa e Ucraina.
+>
+> Attualmente affrontate un imbarazzo minore e localizzato per un PDF trapelato e l'incapacità di scrivere correttamente il proprio nome. Non costringeteci ad esaminare il capitale di sangue che ha comprato la vostra carta intestata.
+>
+> Basta cancellare la verità.
+
 
 [Documento originale](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Avviso per gli operatori](OPERATOR-INCOMPATIBILITY.md) · [licenza MIT](../../LICENSE)
 
