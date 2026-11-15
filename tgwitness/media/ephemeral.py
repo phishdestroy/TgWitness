@@ -34,7 +34,13 @@ class EphemeralPriorityLane:
             "coro": download_coro,
             "started_at": self.clock(),
         }
-        self._event().set()
+        try:
+            import asyncio as _asyncio
+            loop = _asyncio.get_running_loop()
+            if self._wakeup is not None and self._loop is loop:
+                self._wakeup.set()
+        except RuntimeError:
+            pass
 
     def _is_urgent(self, entry):
         expires_at = entry.get("expires_at")

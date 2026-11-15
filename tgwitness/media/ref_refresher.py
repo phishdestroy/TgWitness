@@ -50,8 +50,13 @@ class RefRefresher:
             return
         if key not in self._pending:
             self._pending[key] = _PendingRef(chat_id, message_id, now)
-        event = self._event()
-        event.set()
+        try:
+            import asyncio as _asyncio
+            loop = _asyncio.get_running_loop()
+            if self._wakeup is not None and self._loop is loop:
+                self._wakeup.set()
+        except RuntimeError:
+            pass
 
     def _ready_batch(self, now):
         by_chat: dict[int, list] = defaultdict(list)

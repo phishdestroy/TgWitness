@@ -62,7 +62,7 @@ class JournalCompactor:
         return candidates
 
     def _find_segments(self):
-        now = self.clock()
+        now = time.time()
         segments = []
         for folder in self._candidate_dirs():
             for path in sorted(folder.glob(SEGMENT_GLOB)):
