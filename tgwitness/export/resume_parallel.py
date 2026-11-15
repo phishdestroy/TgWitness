@@ -32,7 +32,7 @@ class ParallelIntegrityCheck:
         try:
             with self.store.reading() as db:
                 rows = db.execute(
-                    "SELECT message_id FROM events WHERE kind='message' AND chat_id=? AND message_id IS NOT NULL",
+                    "SELECT message_id FROM events WHERE kind IN ('message.new','message.snapshot','message.edited','message.recovered') AND chat_id=? AND message_id IS NOT NULL",
                     (chat_id,)
                 ).fetchall()
             return [r[0] for r in rows]
@@ -44,7 +44,7 @@ class ParallelIntegrityCheck:
             with self.store.reading() as db:
                 for mid in ids:
                     row = db.execute(
-                        "SELECT 1 FROM events WHERE chat_id=? AND message_id=? AND kind='message' LIMIT 1",
+                        "SELECT 1 FROM events WHERE chat_id=? AND message_id=? AND kind IN ('message.new','message.snapshot','message.edited','message.recovered') LIMIT 1",
                         (chat_id, mid)
                     ).fetchone()
                     if row:
