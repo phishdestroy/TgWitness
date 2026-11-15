@@ -25,6 +25,20 @@
 
 ## Unreleased
 
+- Four priority lanes (`realtime`, `text`, `media`, `maintenance`) share account capacity; realtime updates always proceed and are never slowed by downloads or rechecks. Each lane tracks per-account FloodWait quotas, and the text and media lanes run on separate connections so a wait on one does not block the other.
+- Self-destructing media has its own download pool with priority over all other media; if expiry is less than 30 seconds away, all other media downloads on that account pause until the ephemeral file is secured.
+- A background worker refreshes expired `file_reference` tokens in batches of up to 100 message IDs per peer, reducing permanently failed attachment downloads from expired references.
+- Distributed export now works for private supergroups: only accounts confirmed as members receive a split range; membership is checked via `GetParticipants` before assigning any work.
+- On resume, 1 % of already-downloaded message IDs are re-verified in the background while the export continues; divergences go to `integrity.diverged.jsonl` and a summary line (`sampled integrity ok: N/N`) appears in the export result.
+- Old closed export segments (`.jsonl`) are recompressed to `.jsonl.zst` in the background without blocking the active writer; the hash chain is preserved.
+- SQLite WAL mode, `synchronous=NORMAL`, 32 MB cache and 256 MB mmap are applied to every workspace connection and can be overridden per account via the `sqlite_tune` workspace setting.
+- Media GC removes shared files whose hard-link count has dropped to one and have no entry in the journal; it runs on request and reports bytes freed.
+- WARP tunnels for all accounts start in parallel (rate-limited to avoid Cloudflare registration floods) instead of one after another; each tunnel is health-checked every 60 seconds and restarted automatically when its EMA latency or fail rate degrades.
+- MTProxy pool tracks EMA latency and fail rate per proxy; a proxy is ejected when its fail rate over five minutes exceeds 20 %, and new requests route around it without interrupting active sessions.
+- New accounts start with doubled request gaps; the multiplier decreases linearly to 1.0 over the first 15 minutes, reducing early account bans.
+- A second Telegram account can replay random message IDs from collected chats and write divergence records when content differs; the witness run is fully async with less than 5 % throughput overhead.
+- OpenTelemetry-compatible per-task spans are recorded in memory and exposed via `/api/trace`; when `OTEL_EXPORTER_OTLP_ENDPOINT` is set, spans are exported to that collector.
+- Message processing is split into `fetch → parse → sign → write → index` stages connected by bounded asyncio queues; CPU-bound signing and writing run in a thread executor so network fetches are never blocked by disk I/O or cryptography.
 - Connection: the route check no longer creates a new Telegram authorization key every minute; it measures one unauthenticated MTProto round trip to the account's data center and reports the connection and round-trip times separately. A moving average marks a route slow or unavailable in the journal; a slow WARP route can be re-rolled to another Cloudflare endpoint or a new WARP identity, automatically at most once every 30 minutes. A WARP endpoint name that resolves to IPv6 and IPv4 now uses IPv4.
 - Panel speed: the panel opens with one `/api/bootstrap` request instead of five in a row; the live update stream stays open while the tab is briefly hidden, reconnects within half a second after its regular end and honours `Too many live streams`; settings, preferences and the account list are no longer requested twice on opening; coverage markers in a chat use `/api/chats/{id}/coverage` with only the records of that chat and the account; avatars of a list arrive in one `/api/avatars` request.
 - An idle Telegram connection stays open for two minutes after the last panel action instead of closing after each one.

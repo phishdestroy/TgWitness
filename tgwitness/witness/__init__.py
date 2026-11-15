@@ -18,18 +18,18 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
-from . import __version__, verification_kit
-from . import continuity
-from .anchoring import DEFAULT_OTS, ots_stamp, service_name, upgrade_pending_ots
-from .evidence import producer
-from .netclient import HTTPError, RouteError, request
-from .network import NetworkConfig
-from .security import InstanceLock, private_write
-from .store import Store, canonical, utcnow
-from .verify import fingerprint, is_format, post_statement, post_token, verify_events, verify_capture
-from .verify import verify_continuity
-from .verify import DRAND_CHAIN, DRAND_RELAYS, DRAND_GENESIS, DRAND_PERIOD, drand_beacon, witness_challenge
-from .verify import daily_payload
+from .. import __version__, verification_kit
+from .. import continuity
+from ..anchoring import DEFAULT_OTS, ots_stamp, service_name, upgrade_pending_ots
+from ..evidence import producer
+from ..netclient import HTTPError, RouteError, request
+from ..network import NetworkConfig
+from ..security import InstanceLock, private_write
+from ..store import Store, canonical, utcnow
+from ..verify import fingerprint, is_format, post_statement, post_token, verify_events, verify_capture
+from ..verify import verify_continuity
+from ..verify import DRAND_CHAIN, DRAND_RELAYS, DRAND_GENESIS, DRAND_PERIOD, drand_beacon, witness_challenge
+from ..verify import daily_payload
 
 DEFAULT_INTERVAL = 10
 TIMEOUT = 30
@@ -530,7 +530,7 @@ def export(root, out):
     result = verify_events(events, key.public_key)
     started = [e for e in events if e["kind"] == "witness.started"]
     data = b"".join(canonical(e) + b"\n" for e in events)
-    verifier = Path(__file__).with_name("verify.py").read_bytes()
+    verifier = (Path(__file__).parent.parent / "verify.py").read_bytes()
     readme = ("TgWitness independent witness journal.\n\n"
               "events.jsonl: the witness's own hash-chained, Ed25519-signed records: each journal head it\n"
               "fetched from the collector (record count and head hash), answers that failed, and posts.\n"

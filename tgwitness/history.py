@@ -306,6 +306,11 @@ class History:
             self.finish_source(job, "failed", type(exc).__name__)
         except SourceUnavailable as exc:
             self.finish_source(job, "failed", str(exc)[:200] or type(exc).__name__)
+        except ValueError as exc:
+            from .collector import AuthorizationRequired
+            if isinstance(exc, AuthorizationRequired) or self.collector.authorization_required:
+                raise
+            self.finish_source(job, "failed", str(exc)[:200] or type(exc).__name__)
         retain_checkpoint(self.store, self.collector.vault)
 
     def finish_source(self, job, phase, error=None):

@@ -41,11 +41,14 @@
 <li>头衔无法修复损坏的数据，精英的签名也无法将程序上的虚假陈述变成事实。</li>
 <li>在加密验证中，学术前缀的<strong>熵为零</strong>：硬件芯片（TPM、安全隔离区）、SHA-256哈希链、RFC 3161时间戳以及比特币共识机制均不以博士学位为依据。</li>
 </ul>
+<blockquote>
+<p><strong>On Dr. Patrick Vincent Zurheide specifically:</strong> His signed letter states <em>“Aus unserer Erfahrung wird jedes Gericht…”</em> — from our experience, every court will find in our favour. He does not wait for courts. He has decided. The same letter, in the same professional act, under the same qualified beA signature, misspells his own surname in the letterhead — <code>p.zurh</code><strong>eo</strong><code>de</code> — the first line any PDF reader renders. The specialist who pre-empts every court assembled his letter from a previous template and did not read the result before signing it. Both letters address Valve Corporation throughout as <em>“unsere Mandantin”</em> — feminine singular, <em>our female client</em> — a placeholder that was never updated before dispatch. In a document threatening prosecution under four statutes of the criminal code, the attorneys did not read it closely enough to notice the grammatical gender of the entity they represent.</p>
+</blockquote>
 <h3 id="4-taylor-wessing-without-taylor-is-just-wessing--and-how-history-is-purged">4. “Taylor Wessing”若去掉“Taylor”就只剩“Wessing”——以及历史如何被抹去</h3>
 <p>将一种激进的推荐网络包装成“去中心化”，不过是<strong>企业为分散法律责任而设置的保护伞。</strong>当违规行为被曝光时，这个统一的全球品牌便会分裂成多个独立实体，以保护领导层。</p>
 <ul>
 <li><strong>泰勒退出了：</strong>英国分部已脱离（<em>温斯顿·泰勒</em>，2026年6月）。德国方面只剩下<strong>韦辛</strong>——一个挂着昂贵招牌的自由职业者网络。</li>
-<li><strong>两次被维基百科删除：</strong>该律所曾两次从德语<a href="https://de.wikipedia.org/wiki/Taylor_Wessing#Geschichte">维基百科</a>中删除有关2020年3月新冠疫情爆发初期解雇<strong>全部95名学生助理（<code>wissenschaftliche Mitarbeiter</code>）</strong>的记录（<a href="https://www.juve.de/nachrichten/verwaltung/2020/03/corona-krise-taylor-wessing-kuendigt-allen-wissenschaftlichen-mitarbeitern">JUVE</a>）。</li>
+<li><strong>Deleted from Wikipedia (at least twice on record — a conservative count):</strong> The firm erased from German Wikipedia the documented firing of all 95 student associates (wissenschaftliche Mitarbeiter) at the start of COVID-19 in March 2020 (JUVE).</li>
 <li><strong>创始人吕迪格·格拉夫·冯·德尔·戈尔茨：</strong>（纳粹党 <code>#1,033,215</code>、戈培尔的法律顾问、<a href="https://www.digitale-sammlungen.de/en/view/bsb00000146?page=224">帝国议会议员</a>）是<strong>刑法委员会8名成员之一</strong>（<a href="https://resolver.sub.uni-hamburg.de/kitodo/PPN689065124_19331125">1933年11月25日任命</a>；<a href="https://api.pageplace.de/preview/DT0400.9783110892055_A36623967/preview-9783110892055_A36623967.pdf#page=16">会议记录</a>），该委员会起草并颁布了<strong><a href="https://de.wikisource.org/wiki/Gesetz_zur_%C3%84nderung_des_Strafgesetzbuchs_(1935)">1935年纳粹对第175条的修订</a></strong>（<a href="https://encyclopedia.ushmm.org/content/en/article/paragraph-175-and-the-nazi-campaign-against-homosexuality">美国大屠杀纪念馆</a>）。</li>
 </ul>
 <h3 id="5-the-485-line-stochastic-challenge-to-dr-tobias-schelinski">5. 针对托比亚斯·谢林斯基博士的485行随机挑战</h3>
