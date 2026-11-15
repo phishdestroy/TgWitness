@@ -35,8 +35,7 @@ class EphemeralPriorityLane:
             "started_at": self.clock(),
         }
         try:
-            import asyncio as _asyncio
-            loop = _asyncio.get_running_loop()
+            loop = asyncio.get_running_loop()
             if self._wakeup is not None and self._loop is loop:
                 self._wakeup.set()
         except RuntimeError:
@@ -62,8 +61,8 @@ class EphemeralPriorityLane:
             self._active.pop(key, None)
 
     async def run(self):
-        event = self._event()
         while True:
+            event = self._event()
             event.clear()
             urgent = [e for e in self._active.values() if self._is_urgent(e)]
             if urgent:

@@ -88,7 +88,7 @@ class LaneManager:
             self._event.clear()
             remaining = max(0.01, deadline - self.clock()) if deadline else None
             try:
-                await asyncio.wait_for(asyncio.shield(self._event.wait()), timeout=remaining)
+                await asyncio.wait_for(self._event.wait(), timeout=remaining)
             except asyncio.TimeoutError:
                 break
 
