@@ -367,7 +367,286 @@
     showControls(lab);
   }
 
-  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash};
+  const textDigest = async text => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))),
+    byte => byte.toString(16).padStart(2, '0')).join('');
+
+  function steps(lab) {
+    const nodes = [...lab.querySelectorAll('[data-step]')];
+    const status = lab.querySelector('[data-steps-status]');
+    const run = lab.querySelector('[data-steps-run]');
+    const finished = status.textContent;
+    const outcome = nodes.map(node => node.className);
+    let timers = [];
+    const play = () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      const pace =motion.matches ? .4 : 1;
+      run.disabled = true;
+      lab.dataset.state = 'ok';
+      nodes.forEach(node => { node.className = 'hash-node is-pending'; });
+      nodes.forEach((node, index) => {
+        timers.push(setTimeout(() => {
+          node.classList.add('is-checking');
+          status.textContent = T('Checking {n} of {total}…', {n:index + 1, total:nodes.length});
+        }, (250 + index * 1300) * pace));
+        timers.push(setTimeout(() => {
+          node.className = outcome[index];
+          if (index === nodes.length - 1) {
+            status.textContent = finished;
+            lab.dataset.state = 'error';
+            run.disabled = false;
+          }
+        }, (1150 + index * 1300) * pace));
+      });
+    };
+    run.addEventListener('click', play);
+    showControls(lab);
+    if (!motion.matches && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        play();
+      }, {threshold:.5});
+      observer.observe(lab);
+    }
+  }
+
+  async function compare(lab) {
+    if (!globalThis.crypto?.subtle) throw new Error('Web Crypto unavailable');
+    const inputs = [...lab.querySelectorAll('[data-compare-input]')];
+    const outputs = [...lab.querySelectorAll('[data-compare-out]')];
+    const status = lab.querySelector('[data-compare-status]');
+    const chars = lab.querySelector('[data-compare-chars]');
+    const charsLabel = lab.querySelector('[data-compare-chars-label]');
+    const hex = lab.querySelector('[data-compare-hex]');
+    const bits = lab.querySelector('[data-compare-bits]');
+    const prefix = lab.querySelector('[data-compare-prefix]');
+    const reset = lab.querySelector('[data-compare-reset]');
+    const base = inputs.map(input => input.value);
+    let revision = 0;
+    const render = async () => {
+      const current = ++revision;
+      const digests = await Promise.all(inputs.map(input => textDigest(input.value)));
+      if (current !== revision) return;
+      const [a, b] = digests;
+      let hexCount = 0, bitCount = 0;
+      const parts = [document.createDocumentFragment(), document.createDocumentFragment()];
+      for (let i = 0; i < a.length; i++) {
+        const differs = a[i] !== b[i];
+        if (differs) hexCount++;
+        for (let x = parseInt(a[i], 16) ^ parseInt(b[i], 16); x; x >>= 1) bitCount += x & 1;
+        [a[i], b[i]].forEach((digit, side) => {
+          if (!differs) { parts[side].append(digit); return; }
+          const mark = document.createElement('mark');
+          mark.textContent = digit;
+          parts[side].append(mark);
+        });
+      }
+      outputs.forEach((output, side) => { output.replaceChildren(parts[side]); output.title = digests[side]; });
+      const left = [...inputs[0].value], right = [...inputs[1].value];
+      let charCount = Math.abs(left.length - right.length);
+      for (let i = 0; i < Math.min(left.length, right.length); i++) if (left[i] !== right[i]) charCount++;
+      chars.textContent = String(charCount);
+      charsLabel.textContent = charCount === 1 ? T('character apart') : T('characters apart');
+      hex.textContent = String(hexCount);
+      bits.textContent = String(bitCount);
+      lab.dataset.state = hexCount ? 'error' : 'ok';
+      const prefixed = prefix?.getAttribute('aria-pressed') === 'true';
+      status.textContent = !hexCount ? T('Identical bytes, identical fingerprints. Anyone can confirm it.')
+        : prefixed ? T('The prefix adds bytes to both lines. Both fingerprints change completely, and the difference is still there.')
+        : charCount === 1 ? T('One character apart. Two unrelated fingerprints.')
+        : T('Different bytes, different fingerprints. No title can make them match.');
+    };
+    const apply = on => {
+      prefix?.setAttribute('aria-pressed', String(on));
+      inputs.forEach((input, index) => { input.value = (on ? prefix.dataset.comparePrefix : '') + base[index]; });
+      return render();
+    };
+    inputs.forEach(input => input.addEventListener('input', () => { render().catch(() => {}); }));
+    prefix?.addEventListener('click', () => { apply(prefix.getAttribute('aria-pressed') !== 'true').catch(() => {}); });
+    reset?.addEventListener('click', () => { apply(false).catch(() => {}); });
+    await render();
+    showControls(lab);
+  }
+
+  async function chain(lab) {
+    if (!globalThis.crypto?.subtle) throw new Error('Web Crypto unavailable');
+    const nodes = [...lab.querySelectorAll('[data-chain-node]')];
+    const status = lab.querySelector('[data-chain-status]');
+    const edit = lab.querySelector('[data-chain-edit]');
+    const index = Number(edit.dataset.chainEdit);
+    const original = nodes.map(node => node.dataset.text);
+    const zero = '0'.repeat(64);
+    const link = (previous, text) => textDigest(previous + '\n' + text);
+    const sealed = [];
+    for (const text of original) sealed.push(await link(sealed.at(-1) || zero, text));
+    const initial = status.textContent;
+    let revision = 0;
+    const render = async edited => {
+      const current = ++revision;
+      const texts = [...original];
+      if (edited) texts[index] = texts[index].replace(edit.dataset.chainFrom, edit.dataset.chainTo);
+      const calculated = await Promise.all(texts.map((text, i) => link(i ? sealed[i - 1] : zero, text)));
+      if (current !== revision) return;
+      nodes.forEach((node, i) => {
+        const changed = calculated[i] !== sealed[i];
+        const unlinked = i > 0 && calculated[i - 1] !== sealed[i - 1];
+        node.classList.toggle('is-broken', changed || unlinked);
+        node.querySelector('[data-chain-text]').textContent = texts[i];
+        const hash = node.querySelector('[data-chain-hash]');
+        hash.textContent = calculated[i].slice(0, 14) + '…';
+        hash.title = calculated[i];
+        node.querySelector('.hash-verdict').textContent = changed ? T('≠ saved hash') : unlinked ? T('Previous hash no longer matches') : T('= saved hash');
+      });
+      edit.setAttribute('aria-pressed', String(edited));
+      lab.dataset.state = edited ? 'error' : 'ok';
+      status.textContent = edited
+        ? T('Record {n} changed, so its hash changed. Record {next} still holds the old fingerprint: the correction is visible to anyone who checks.', {n:index + 1, next:index + 2})
+        : initial;
+    };
+    edit.addEventListener('click', () => { render(edit.getAttribute('aria-pressed') !== 'true').catch(() => {}); });
+    await render(false);
+    showControls(lab);
+  }
+
+  async function seal(lab) {
+    if (!globalThis.crypto?.subtle) throw new Error('Web Crypto unavailable');
+    const $ = selector => lab.querySelector(selector);
+    const sheet = $('[data-seal-sheet]');
+    const pdfBadge = $('[data-seal-pdf-badge]');
+    const pdfFoot = $('[data-seal-pdf-foot]');
+    const badge = $('[data-seal-badge]');
+    const state = $('[data-seal-state]');
+    const foot = $('[data-seal-foot]');
+    const envelopeOut = $('[data-seal-envelope]');
+    const status = $('[data-seal-status]');
+    const run = $('[data-seal-run]');
+    const xrayButton = $('[data-seal-xray]');
+    const swapButton = $('[data-seal-swap]');
+    const fields = [...lab.querySelectorAll('[data-seal-field]')];
+    const decisions = [...lab.querySelectorAll('[data-seal-decision]')];
+    const steps = [...lab.querySelectorAll('[data-seal-step]')];
+    const values = fields.map(field => field.dataset.sealField);
+    const guess = fields.findIndex(field => field.hasAttribute('data-seal-guess'));
+    const swapIndex = Number(swapButton.dataset.sealSwap);
+    const encoder = new TextEncoder();
+    const hex = bytes => Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+    const unhex = text => Uint8Array.from(text.match(/../g), pair => parseInt(pair, 16));
+    const short = digest => digest.slice(0, 12) + '…';
+    const commit = async (salt, value) => {
+      const data = encoder.encode(value);
+      const joined = new Uint8Array(salt.length + data.length);
+      joined.set(salt);
+      joined.set(data, salt.length);
+      return hex(new Uint8Array(await crypto.subtle.digest('SHA-256', joined)));
+    };
+    const authority =await crypto.subtle.generateKey({name:'RSA-OAEP', modulusLength:3072, publicExponent:new Uint8Array([1, 0, 1]), hash:'SHA-256'},
+      false, ['encrypt', 'decrypt']);
+    const sealFor = async entries => {
+      const key = await crypto.subtle.generateKey({name:'AES-GCM', length:256}, true, ['encrypt']);
+      const nonce = crypto.getRandomValues(new Uint8Array(12));
+      const wrapped = new Uint8Array(await crypto.subtle.encrypt({name:'RSA-OAEP'}, authority.publicKey, await crypto.subtle.exportKey('raw', key)));
+      const payload = encoder.encode(JSON.stringify(entries.map(entry => ({value:entry.value, salt:hex(entry.salt)}))));
+      return {wrapped, nonce, body:new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv:nonce}, key, payload))};
+    };
+    const open = async envelope => {
+      const raw = await crypto.subtle.decrypt({name:'RSA-OAEP'}, authority.privateKey, envelope.wrapped);
+      const key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']);
+      return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM', iv:envelope.nonce}, key, envelope.body)));
+    };
+    const entries = values.map(value => ({value, salt:crypto.getRandomValues(new Uint8Array(16))}));
+    const commitments = await Promise.all(entries.map(entry => commit(entry.salt, entry.value)));
+    const unsalted = guess >= 0 ? await textDigest(values[guess]) : '';
+    const honest = await sealFor(entries);
+    const forged = await sealFor(entries.map((entry, i) => i === swapIndex
+      ? {value:swapButton.dataset.sealSwapTo, salt:crypto.getRandomValues(new Uint8Array(16))} : entry));
+    const sample = envelope => T('{bytes} bytes · {sample}…', {bytes:envelope.wrapped.length + envelope.nonce.length + envelope.body.length,
+      sample:btoa(String.fromCharCode(...envelope.body.slice(0, 15)))});
+    const placeholders = fields.map(field => field.textContent);
+    const initial = {pdfBadge:pdfBadge.textContent, pdfFoot:pdfFoot.textContent, badge:badge.textContent, state:state.textContent,
+      foot:foot.textContent, envelope:envelopeOut.textContent, status:status.textContent};
+    const stepStates = {idle:['', '', ''], handover:['is-active', '', ''], opening:['is-done', 'is-active', ''],
+      failed:['is-done', 'is-failed', ''], verified:['is-done', 'is-done', 'is-active'], decided:['is-done', 'is-done', 'is-done']};
+    let xray = false, swap = false, phase = 'idle', opened = null, checks = null, timers = [], revision = 0;
+    const render = () => {
+      xrayButton.setAttribute('aria-pressed', String(xray));
+      swapButton.setAttribute('aria-pressed', String(swap));
+      run.disabled = phase === 'handover' || phase === 'opening';
+      sheet.classList.toggle('is-xray', xray);
+      pdfBadge.textContent = xray ? T('{n} fields readable', {n:fields.length}) : initial.pdfBadge;
+      pdfFoot.textContent = xray ? T('Text extraction reads every string beneath the rectangles.') : initial.pdfFoot;
+      envelopeOut.textContent = xray ? sample(swap ? forged : honest) : initial.envelope;
+      steps.forEach((node, i) => {
+        node.classList.remove('is-active', 'is-done', 'is-failed');
+        if (stepStates[phase][i]) node.classList.add(stepStates[phase][i]);
+      });
+      const shown = Boolean(opened) && ['failed', 'verified', 'decided'].includes(phase);
+      fields.forEach((field, i) => {
+        field.title = 'c = ' + commitments[i];
+        field.classList.toggle('is-match', shown && checks[i]);
+        field.classList.toggle('is-mismatch', shown && !checks[i]);
+        field.textContent = shown ? (checks[i] ? '✓ ' : '✗ ') + opened[i].value : xray ? 'c = ' + short(commitments[i]) : placeholders[i];
+      });
+      decisions.forEach(node => {
+        node.hidden = phase !== 'decided';
+        node.textContent = T(node.dataset.sealDecision);
+      });
+      const matches = checks ? checks.filter(Boolean).length : 0;
+      const counted = T('{n} of {total} match', {n:matches, total:fields.length});
+      const opened_ = T('Opened with the authority key. Every value matches its commitment.');
+      const text = {
+        idle:[initial.badge, xray ? T('No plaintext in the copy') : initial.state,
+          xray && guess >= 0 ? T('Unsalted, the SHA-256 of the text would be {plain}, and a word list finds it. Salted, it is {salted}: nothing to look up.',
+            {plain:short(unsalted), salted:short(commitments[guess])}) : initial.foot,
+          xray ? T('Raw bytes: the PDF gives away every hidden word. The copy holds only salted commitments, the envelope only ciphertext.') : initial.status],
+        handover:[initial.badge, T('Handed to the authority'), initial.foot,
+          T('Step 1 of 3: the requester hands the signed copy and the sealed envelope to the authority. Neither of them can open the envelope.')],
+        opening:[initial.badge, T('Opening'), initial.foot,
+          T('Step 2 of 3: the authority decrypts with its private key and recomputes SHA-256(salt ‖ value) for every field…')],
+        failed:[counted, T('Commitment broken'), T('The envelope does not match the copy the firm signed.'),
+          T('Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.',
+            {n:checks ? checks.indexOf(false) + 1 : 0})],
+        verified:[counted, T("Authority's view"), opened_, T('{n} of {total} values match the commitments the firm signed.', {n:matches, total:fields.length})],
+        decided:[counted, T("Authority's view"), opened_,
+          T('Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.')],
+      }[phase];
+      [badge.textContent, state.textContent, foot.textContent, status.textContent] = text;
+      const tone = phase === 'failed' || (phase === 'idle' && xray) ? 'error' : phase === 'decided' ? 'ok' : '';
+      if (tone) lab.dataset.state = tone; else delete lab.dataset.state;
+    };
+    const wait = ms => new Promise(resolve => { timers.push(setTimeout(resolve, motion.matches ? 0 : ms)); });
+    const stop = () => { revision++; timers.forEach(clearTimeout); timers = []; };
+    const check = async () => {
+      stop();
+      const current = revision;
+      opened = null; checks = null; phase = 'handover'; render();
+      await wait(900);
+      if (current !== revision) return;
+      phase = 'opening'; render();
+      const result = await open(swap ? forged : honest);
+      const verdicts = await Promise.all(result.map(async (entry, i) => await commit(unhex(entry.salt), entry.value) === commitments[i]));
+      await wait(900);
+      if (current !== revision) return;
+      opened = result; checks = verdicts; phase = verdicts.every(Boolean) ? 'verified' : 'failed'; render();
+      if (phase === 'failed') return;
+      await wait(1100);
+      if (current !== revision) return;
+      phase = 'decided'; render();
+    };
+    run.addEventListener('click', () => {
+      check().catch(() => { stop(); phase = 'idle'; render(); status.textContent = T('Decryption is unavailable in this browser.'); });
+    });
+    xrayButton.addEventListener('click', () => { xray = !xray; render(); });
+    swapButton.addEventListener('click', () => {
+      stop();
+      swap = !swap; opened = null; checks = null; phase = 'idle'; render();
+      if (swap) status.textContent = T("The firm has re-sealed the envelope with a different text. Run the authority's check.");
+    });
+    render();
+    showControls(lab);
+  }
+
+  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash, steps, compare, chain, seal};
   document.querySelectorAll('[data-lab]').forEach(lab => {
     Promise.resolve().then(() => setups[lab.dataset.lab](lab)).catch(() => {
       lab.querySelectorAll('[data-enhanced]').forEach(node => { node.hidden = true; });

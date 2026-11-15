@@ -15,6 +15,7 @@ GUIDES = {
     "security": ("Keep it secure", "See where sessions, keys and evidence live, what leaves your machine, what the protections cover and how to harden an installation.", "security threat model secrets vault token encryption hardening privacy vulnerability report", "docs/SECURITY-MODEL.md"),
     "access": ("Share a case", "Give reviewers and analysts access to selected accounts and chats, with separate permissions, session limits and revocable tokens.", "access permissions roles scope reviewer analyst token sessions IP expiry revoke", "docs/ACCESS.md"),
     "witness": ("Set up a witness bot", "Publish signed journal checkpoints to your Telegram channel with a separate witness, its own key and read-only collector access.", "bot botfather telegram channel continuity checkpoint independent witness", "docs/WITNESS.md"),
+    "signed-export": ("Why zero trust: Taylor Wessing, Dr. Zurheide, Dr. Schelinski", "A zero-trust case study: a GDPR answer signed by Dr. Patrick Zurheide and Dr. Tobias Schelinski of Taylor Wessing, checked against its own file, and the checkable model that would have left no room to deceive or doubt.", "case study qualified electronic signature lawyer signed export GDPR article 15 access request redaction pdf Taylor Wessing Zurheide Schelinski hash zero trust", "docs/EVIDENCE.md"),
     "server": ("Keep it running", "Run TgWitness on a server with persistent storage, private panel access, backups and checks after a restart.", "docker compose deployment vps backup restore update restart operations", "docs/DEPLOYMENT.md"),
     "troubleshooting": ("Find what went wrong", "Check panel access, Telegram connection, missing messages, FloodWait and witness status using the right signals for each problem.", "help error token login disconnected floodwait gap pts qts recovery github", "docs/OPERATIONS.md"),
 }
@@ -22,7 +23,7 @@ GUIDES = {
 GROUPS = (
     ("First steps", "Your first captured message", ("start", "dedicated-account", "accounts", "proxies", "exports", "capture")),
     ("Investigation & reporting", "From saved records to a shared report", ("cases", "case-board", "reports", "handover", "groups")),
-    ("Understand the evidence", "Learn by trying it", ("concepts", "security", "witness")),
+    ("Understand the evidence", "Learn by trying it", ("concepts", "security", "witness", "signed-export")),
     ("Go further", "Add only what you need", ("archive", "access", "server", "troubleshooting")),
 )
 
@@ -94,5 +95,5 @@ LABELS = {
 }
 
 NEXT = {"archive": "case-board", "capture": "exports", "dedicated-account": "accounts", "start": "accounts", "accounts": "exports", "access": "security", "proxies": "accounts", "exports": "reports",
-        "concepts": "cases", "cases": "case-board", "case-board": "reports", "reports": "handover", "handover": "access", "groups": "cases", "security": "start", "witness": "server",
+        "concepts": "cases", "cases": "case-board", "case-board": "reports", "reports": "handover", "handover": "access", "groups": "cases", "security": "start", "witness": "server", "signed-export": "exports",
         "server": "troubleshooting", "troubleshooting": "start"}

@@ -35,6 +35,8 @@ LANGS = tuple(site_i18n.LANGUAGES)
 NOTICE_SLUGS = ("license", "notice")
 NOTICE_LANGUAGES = site_modes.LANGUAGES
 ASSETS = {
+    "assets/signed-export-statistics.json": "website/case-study/signed-export-statistics.json",
+    "assets/signed-export-audit.py": "tools/audit_signed_export.py",
     "assets/mark.svg": "tgwitness/static/mark.svg",
     "assets/chats-dark.png": "docs/assets/chats-dark.png",
     "assets/workspace.png": "docs/assets/workspace.png",

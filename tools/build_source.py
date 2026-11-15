@@ -46,7 +46,7 @@ FILES = [
 ]
 BUILD_FILES = {
     "tools": (
-        "README.md", "bench_fulltext.py", "build_board_schemas.py", "build_dossier_example.py",
+        "README.md", "audit_signed_export.py", "bench_fulltext.py", "build_board_schemas.py", "build_dossier_example.py",
         "build_installer.py", "build_portable.py", "build_report_styles.py", "build_site.py",
         "build_source.py", "build_standalone_verifier.py", "build_verifier.py", "build_wiki.py",
         "container_publication.py", "i18n_keys.py", "installer_checks.py", "installer_publication.py",
@@ -97,6 +97,7 @@ EXPORT_CLINIC_ASSETS = (
       for version in ("before", "modified")),
 )
 FILES.extend("website/export-clinic/media/" + name for name in EXPORT_CLINIC_ASSETS)
+FILES.append("website/case-study/signed-export-statistics.json")
 FILES.extend("addons/capture/" + name for name in (
     "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml", "compose.official.yaml",
     "config/browser.example.json", "config/ayugram.example.json", "config/official.example.json", "config/official-upstream.example.json",
