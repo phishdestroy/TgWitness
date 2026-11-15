@@ -62,6 +62,8 @@ def availability(entry, chat_id, private):
         return "rate_limited", until
     if c.observation_starting:
         return "busy", None
+    if c.running:
+        return "observing", None
     account_export = getattr(app.state, "account_export", None)
     if (c.export_claim or c.export_busy() or c.history.busy or c.connection_change_task is not None
             or account_export and account_export.busy()):
