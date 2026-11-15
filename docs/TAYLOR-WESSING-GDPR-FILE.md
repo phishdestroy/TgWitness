@@ -211,6 +211,29 @@ We are not a party to this dispute, and frankly we are tired of it. In the time 
 
 ---
 
+## 7. On the notification — the same hand, the same pen
+
+PhishDestroy wrote to Dr. Patrick Zurheide in German. PhishDestroy does not speak German. We used translation tools, as anyone would, to write in the official language of the recipient's jurisdiction — as a courtesy. The result, by Dr. Zurheide's own assessment, was:
+
+> *"anscheinend übersetzte, aber durchaus unterhaltsame Nachricht"*
+> *("apparently translated, but quite entertaining message")*
+
+We note this without elaboration. And we note, alongside it, one small fact:
+
+**Dok.-Nr. 42603633, 1 October 2025.** A qualified beA signature. Taylor Wessing letterhead. A document authored in German, by a native speaker, a Doctor of German law, an LL.M. Aberdeen, a Certified Scrum Master, dispatched through the mandatory German attorney channel — containing **his own surname misspelled in the very first line any PDF reader renders**:
+
+| Signed · Dok.-Nr. 42603633 · Page 1 letterhead | Public record |
+|:---|:---|
+| `p.zurh`**`eo`**`de@*****wessing.com` | `p.zurh`**`ei`**`de@*****wessing.com` |
+
+PhishDestroy, writing in a language it does not speak, produced an apparently translated message.
+Dr. Zurheide, writing in his own language, in his professional capacity, under a qualified beA signature, produced a misspelling of his own name — now immutably encoded in EU timestamping infrastructure.
+
+We do not know whose German is worse. We do know whose hash is permanent.
+
+
+---
+
 Since the lawyers think they are the law, and that people's lives, children's lives, do not matter, that is their
 choice. It is not our conflict. But we can say with confidence that the firm's impunity is historically confirmed,
 going back to its founder Goltz, one of the eight who drafted the amendments to §175, and to his only famous case,
