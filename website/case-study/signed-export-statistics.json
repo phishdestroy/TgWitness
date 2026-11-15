@@ -1,0 +1,396 @@
+{
+  "source_sha256": "2bb927e2c42fdc2e3ad089ae302dd887c343f6798aba00fcfac279224ff7d6af",
+  "source_pages": [
+    444,
+    620
+  ],
+  "records": 1995,
+  "method": "PDF table-cell borders; continuation cells joined across pages; word-box overlap with opaque black rectangles",
+  "continuation_cells_joined": 118,
+  "visibility": {
+    "visible": 50,
+    "boxed": 1944,
+    "empty": 1
+  },
+  "visible_boxed_comparison": {
+    "visible": {
+      "records": 50,
+      "suspected_hijacker": 43,
+      "descriptions_containing_cyrillic": 2,
+      "login_latin_letters_then_3_to_5_digits": 31,
+      "distinct_login_strings": 50
+    },
+    "boxed": {
+      "records": 1944,
+      "suspected_hijacker": 269,
+      "descriptions_containing_cyrillic": 1077,
+      "login_latin_letters_then_3_to_5_digits": 420,
+      "distinct_login_strings": 1817
+    }
+  },
+  "comparison_method": {
+    "cyrillic": "Description contains at least one character in U+0400–U+052F; script indicator, not language or nationality.",
+    "login_pattern": "Full string matches [A-Za-z]+[0-9]{3,5}; formatting only, not proof of automation or common authorship.",
+    "denominators": "50 visible and 1944 boxed non-empty descriptions; one empty description excluded."
+  },
+  "latest_client_web_logon": {
+    "value": "2025-05-23 20:48:31 UTC",
+    "page": 1,
+    "scope": "Value in the supplied export, not an independent audit of all sessions or message events."
+  },
+  "reporter_rows_with_text_under_boxes": 1995,
+  "complete_date_and_time": 1945,
+  "incomplete_date_values": {
+    "2025-09-": 3,
+    "2025-08-": 46,
+    "2025-08-1": 1
+  },
+  "by_month": {
+    "2021-02": {
+      "total": 2,
+      "boxed": 2
+    },
+    "2021-06": {
+      "total": 2,
+      "boxed": 2
+    },
+    "2021-11": {
+      "total": 1,
+      "boxed": 1
+    },
+    "2021-12": {
+      "total": 20,
+      "boxed": 20
+    },
+    "2022-01": {
+      "total": 10,
+      "boxed": 10
+    },
+    "2022-02": {
+      "total": 7,
+      "boxed": 7
+    },
+    "2022-03": {
+      "total": 43,
+      "boxed": 43
+    },
+    "2022-04": {
+      "total": 9,
+      "boxed": 9
+    },
+    "2022-05": {
+      "total": 2,
+      "boxed": 2
+    },
+    "2022-06": {
+      "total": 7,
+      "boxed": 7
+    },
+    "2022-07": {
+      "total": 2,
+      "boxed": 2
+    },
+    "2022-08": {
+      "total": 11,
+      "boxed": 11
+    },
+    "2022-09": {
+      "total": 7,
+      "boxed": 7
+    },
+    "2022-10": {
+      "total": 6,
+      "boxed": 6
+    },
+    "2022-11": {
+      "total": 5,
+      "boxed": 5
+    },
+    "2022-12": {
+      "total": 13,
+      "boxed": 13
+    },
+    "2023-01": {
+      "total": 111,
+      "boxed": 111
+    },
+    "2023-02": {
+      "total": 48,
+      "boxed": 48
+    },
+    "2023-03": {
+      "total": 156,
+      "boxed": 155,
+      "empty": 1
+    },
+    "2023-04": {
+      "total": 59,
+      "boxed": 59
+    },
+    "2023-05": {
+      "total": 52,
+      "boxed": 52
+    },
+    "2023-06": {
+      "total": 53,
+      "boxed": 53
+    },
+    "2023-07": {
+      "total": 66,
+      "boxed": 66
+    },
+    "2023-08": {
+      "total": 52,
+      "boxed": 52
+    },
+    "2023-09": {
+      "total": 73,
+      "boxed": 73
+    },
+    "2023-10": {
+      "total": 44,
+      "boxed": 44
+    },
+    "2023-11": {
+      "total": 53,
+      "boxed": 53
+    },
+    "2023-12": {
+      "total": 58,
+      "boxed": 58
+    },
+    "2024-01": {
+      "total": 69,
+      "boxed": 69
+    },
+    "2024-02": {
+      "total": 58,
+      "boxed": 58
+    },
+    "2024-03": {
+      "total": 111,
+      "boxed": 111
+    },
+    "2024-04": {
+      "total": 36,
+      "boxed": 36
+    },
+    "2024-05": {
+      "total": 33,
+      "boxed": 33
+    },
+    "2024-06": {
+      "total": 46,
+      "boxed": 46
+    },
+    "2024-07": {
+      "total": 83,
+      "boxed": 83
+    },
+    "2024-08": {
+      "total": 53,
+      "boxed": 53
+    },
+    "2024-09": {
+      "total": 54,
+      "boxed": 54
+    },
+    "2024-10": {
+      "total": 70,
+      "boxed": 70
+    },
+    "2024-11": {
+      "total": 79,
+      "boxed": 79
+    },
+    "2024-12": {
+      "total": 82,
+      "boxed": 82
+    },
+    "2025-01": {
+      "total": 92,
+      "boxed": 92
+    },
+    "2025-02": {
+      "total": 32,
+      "boxed": 32
+    },
+    "2025-03": {
+      "total": 35,
+      "boxed": 35
+    },
+    "2025-04": {
+      "total": 20,
+      "boxed": 20
+    },
+    "2025-05": {
+      "total": 12,
+      "boxed": 12
+    },
+    "2025-06": {
+      "total": 1,
+      "boxed": 1
+    },
+    "2025-07": {
+      "total": 7,
+      "boxed": 7
+    },
+    "2025-08": {
+      "total": 47,
+      "visible": 47
+    },
+    "2025-09": {
+      "total": 3,
+      "visible": 3
+    }
+  },
+  "report_types": {
+    "Offensive Profile": {
+      "total": 1148,
+      "boxed": 1147,
+      "empty": 1
+    },
+    "Suspected Hijacker": {
+      "total": 312,
+      "visible": 43,
+      "boxed": 269
+    },
+    "Cheating": {
+      "total": 290,
+      "visible": 2,
+      "boxed": 288
+    },
+    "Offensive Persona Name": {
+      "total": 87,
+      "visible": 1,
+      "boxed": 86
+    },
+    "Offensive Avatar": {
+      "total": 57,
+      "visible": 3,
+      "boxed": 54
+    },
+    "Harassment": {
+      "total": 46,
+      "visible": 1,
+      "boxed": 45
+    },
+    "Spamming": {
+      "total": 37,
+      "boxed": 37
+    },
+    "Spoofing": {
+      "total": 16,
+      "boxed": 16
+    },
+    "Auto Moderation": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Trade Scam": {
+      "total": 1,
+      "boxed": 1
+    }
+  },
+  "language_estimates": {
+    "Uncertain / short / non-linguistic": {
+      "total": 1061,
+      "visible": 34,
+      "boxed": 1026,
+      "empty": 1
+    },
+    "Russian": {
+      "total": 594,
+      "visible": 1,
+      "boxed": 593
+    },
+    "English": {
+      "total": 264,
+      "visible": 14,
+      "boxed": 250
+    },
+    "Spanish": {
+      "total": 18,
+      "boxed": 18
+    },
+    "Portuguese": {
+      "total": 13,
+      "visible": 1,
+      "boxed": 12
+    },
+    "German": {
+      "total": 11,
+      "boxed": 11
+    },
+    "Polish": {
+      "total": 9,
+      "boxed": 9
+    },
+    "Turkish": {
+      "total": 8,
+      "boxed": 8
+    },
+    "French": {
+      "total": 5,
+      "boxed": 5
+    },
+    "Italian": {
+      "total": 3,
+      "boxed": 3
+    },
+    "Korean": {
+      "total": 2,
+      "boxed": 2
+    },
+    "Belarusian": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Bulgarian": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Somali": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Tagalog": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Dutch": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Irish": {
+      "total": 1,
+      "boxed": 1
+    },
+    "Hungarian": {
+      "total": 1,
+      "boxed": 1
+    }
+  },
+  "language_method": {
+    "library": "lingua-language-detector",
+    "version": "2.2.0",
+    "languages": "all 75",
+    "minimum_words": 3,
+    "minimum_letters": 12,
+    "minimum_score": 0.7,
+    "minimum_top_two_gap": 0.2,
+    "note": "Automatic predominant-language estimate, not a calibrated accuracy probability; short/ambiguous text is unassigned. No nationality inference. All processing local."
+  },
+  "visible_duplicate_groups": 4,
+  "visible_rows_in_duplicate_groups": 9,
+  "empty_description_rows": [
+    {
+      "row": 1604,
+      "pages": [
+        585,
+        586
+      ],
+      "month": "2023-03"
+    }
+  ]
+}
