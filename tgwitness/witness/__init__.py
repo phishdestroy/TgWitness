@@ -530,7 +530,7 @@ def export(root, out):
     result = verify_events(events, key.public_key)
     started = [e for e in events if e["kind"] == "witness.started"]
     data = b"".join(canonical(e) + b"\n" for e in events)
-    verifier = Path(__file__).with_name("verify.py").read_bytes()
+    verifier = (Path(__file__).parent.parent / "verify.py").read_bytes()
     readme = ("TgWitness independent witness journal.\n\n"
               "events.jsonl: the witness's own hash-chained, Ed25519-signed records: each journal head it\n"
               "fetched from the collector (record count and head hash), answers that failed, and posts.\n"
