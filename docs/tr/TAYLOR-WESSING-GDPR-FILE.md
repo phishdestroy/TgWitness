@@ -178,7 +178,26 @@ Ama Taylor Wessing konusundaki seçeneklerimiz büyük olasılıkla tükendi, ç
 Yasayı eğip bükmeyi sevenleri uyarmak istiyoruz: depoyu kaldırmaya gerek yok. Bunca zaman boyunca sizinle hiçbir çatışmaya girmedik. Ama gerçeği gizlemek için çalışmamızı bozmaya karar verirseniz, etkin bir depo olmadan düzenleyiciler ve diğerleri bir sürümün imzasını karşılaştıramaz (gerçi kime anlatıyorum) ve o zaman doğrudan çatışmaya gireriz. Bununla birlikte mega uzmanlığa ve seçkin avukatlara veda etmeyi umuyoruz. Eğlenceli değildi ve memnun değilim. Her şey gönlünüzce olsun.
 
 > [!CAUTION]
-> **Bu depoyu kaldırtmak hiçbir şeyi silmez.** Soruşturmacılar ve araştırmacılar TgWitness kullanıyor ve kopyaları bu depoyla karşılaştırılarak doğrulanıyor. Yedeklerimiz var. Ama bir kaldırma, bizi tek bir vakanın denetçisinden bir çatışmanın tarafına dönüştürür. Gerçeği silmek yeter.
+> **Tırmanmanın Bedeli: Burada Steam İçin Değiliz**
+>
+> Kesinlikle açık olalım. Bu anlaşmazlığın tarafı değiliz. Bir video oyunundaki hesabın yasaklanıp yasaklanmadığı, hacklenip hacklenmediği veya satılıp satılmadığıyla ilgilenmiyoruz. Üst düzey kurumsal avukatlarla Steam yasağı üzerine tartışmak hem saçma hem de odak noktamızın altında olurdu.
+>
+> İlgimiz kesinlikle altyapısal ve tarihseldir. Dijital kanıtların ve sistemik cezasızlığın denetçileriyiz. Steam davası sadece bir mercekti — son derece aydınlatıcı bir mercek — Dr. Patrick Zurheide'nin mekanik başarısızlığını ve Taylor Wessing'in uyum tiyatrosunu ortaya koydu.
+>
+> Bozuk PDF'yi, yanlış yazılmış imzayı, botnet günlüklerini ve bir veri ihlaline verilen kibirli yanıtı belgeledik. Bu denetim tamamlandı.
+>
+> Ancak tırmanmaya karar verirseniz — bu depoyu kaldırmak, gerçeği silmek veya bu denetimi susturmak için kurumsal ağırlığınızı kullanmaya çalışırsanız — odak noktamızda bir değişikliği zorlamış olursunuz. Ve bu odak noktasının nereye düştüğünü beğenmezsiniz.
+>
+> Bu depoyu kaldırmak kriptografik karma değerlerini silmeyecektir. Ancak bizi tek bir teknik başarısızlığın nesnel denetçilerinden sistemik bir çatışmanın doğrudan tarafına dönüştürecektir.
+>
+> Bu tırmanmayı zorlarsanız, Aspose.PDF'ye bakmayı bırakacak ve cezasızlığınızın temeline bakmaya başlayacağız. Kurucunuz Rüdiger Graf von der Goltz'un ideolojik mirasını ve §175'i taslak hazırlamasını "tarihsel bir dipnot" olarak reddetmeye çalışabilirsiniz. Ancak OSINT araştırmacıları olarak parayı takip ediyoruz. Bir yüzyıllık.
+>
+> Kaynaklarımızı Wessing'in Düsseldorf ofisini inşa eden savaş sonrası sermaye akışlarını izlemeye yönlendireceğiz. Kamuoyuna "denazifikasyon"un nasıl atlatıldığına ve açıkça "SSCB'nin yağmalanması" olarak adlandırılan şeyden elde edilen varlıkların, antika eşyaların ve yağmalanmış serveti — firmanızı bugün koruyan "altın adres defteri"ni finanse etmek için İsviçre üzerinden nasıl yönlendirildiğine dair matematiksel açıdan kesin bir tarih sunacağız. Avrupa ve Ukrayna'daki modern iade talepleriyle son derece ilgili kalan bir mali iz.
+>
+> Şu anda sızdırılan bir PDF ve kendi adınızı heceleyememe nedeniyle küçük, yerel bir utançla karşı karşıyasınız. Bizi antetli kağıdınızı satın alan kan sermayesini incelemeye zorlamayın.
+>
+> Gerçeği silmek yeter.
+
 
 [Kaynak kaydı](https://phishdestroy.io/steam_dossier/taylor_wessing) · [Operatör bildirimi](OPERATOR-INCOMPATIBILITY.md) · [MIT Lisansı](../../LICENSE)
 
