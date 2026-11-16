@@ -349,6 +349,10 @@ LOSS_MEANING = {
 }
 
 
+LOSS_CONTEXT_MEANING = ("State recorded before Telegram ended the session: its age, the other sessions of the account "
+                        "at the last check, and Telegram's last security notice. Telegram does not say who ended it.")
+
+
 def account_loss_cause(exc):
     return next((cause for kind, _, cause in ACCOUNT_LOSS if isinstance(exc, kind)), None)
 
@@ -797,6 +801,8 @@ class Collector:
         if not isinstance(exc, AUTHORIZATION_ERRORS):
             return False
         if client is not None and client is not self.client:
+            if client is self.login_client:
+                return True
             self.note("account.authorization_error", {
                 "operation": operation, "error_type": type(exc).__name__, "telegram_error": telegram_error(exc),
                 "client": type(client).__name__, "dc_id": getattr(getattr(client, "session", None), "dc_id", None),
@@ -811,7 +817,7 @@ class Collector:
         self.phase, self.last_error = "authorization_required", type(exc).__name__
         cause = exc.cause if isinstance(exc, AccountLost) else account_loss_cause(exc) or "not_authorized"
         error = exc.error if isinstance(exc, AccountLost) else telegram_error(exc)
-        place = self.loss_place()
+        place = {**self.loss_place(), "before_loss": self.loss_context()}
         self.store.set_setting("account_loss", {"cause": cause, "at": utcnow(), "telegram_error": error, **place})
         if first:
             self.note("coverage.gap", {"reason": "authorization_required", "operation": operation,
@@ -829,6 +835,27 @@ class Collector:
         except Exception:
             place["route"] = None
         return place
+
+    def loss_context(self):
+        context = {}
+        try:
+            waited = self.session_age()
+            if waited is not None:
+                context["session_age_seconds"] = round(waited)
+            found = self.store.events_of(("account.sessions",), limit=1)
+            if found:
+                context["sessions_checked_at"] = found[0]["observed_at"]
+                context["other_sessions"] = [{key: entry.get(key) for key in ("device_model", "app_name", "api_id",
+                                                                               "country", "created_at")}
+                                             for entry in (found[0]["payload"] or {}).get("others") or []]
+            notice = self.store.events_of(("account.security_event",), limit=1)
+            if notice:
+                context["last_security_notice"] = {key: (notice[0]["payload"] or {}).get(key)
+                                                   for key in ("event_kind", "sent_at")}
+        except Exception:
+            pass
+        context["meaning"] = LOSS_CONTEXT_MEANING
+        return context
 
     async def wait_authorization_cleanup(self):
         task = self.authorization_cleanup
