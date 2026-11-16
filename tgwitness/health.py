@@ -184,7 +184,7 @@ def connection(c, now):
               "telegram_pause_until": iso(parse(c.get("rpc_backoff_until"))),
               "telegram_pause_method": c.get("rpc_backoff_method")}
     if c.get("authorization_required"):
-        return part("failed", "signed_out", **detail)
+        return part("failed", "signed_out", cause=(c.get("account_loss") or {}).get("cause"), **detail)
     if c.get("phase") in FAILED_PHASES:
         if c["phase"] == "authorization_required":
             detail["cause"] = (c.get("account_loss") or {}).get("cause")
