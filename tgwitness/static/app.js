@@ -5413,7 +5413,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
 function beginChat(id){
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
-  messageImage?.close();historyForward?.close();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
+  messageImage?.close();historyForward?.close();closePersonCard();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
   clearTimeout(chatSearchTimer);state.chatSearch="";$("chat-message-search").value="";
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
@@ -5650,13 +5650,30 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=3').then(({createPeopleTimeline})=>{
+const peopleTimelineReady=import('./views/people-timeline.js?v=4').then(({createPeopleTimeline})=>{
   peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
     record:openRecord,formatTime:fmtFull,canCollect:()=>!!state.me?.admin&&!state.status?.demo,attachment:mediaNode});return peopleTimeline;
 });
 window.addEventListener('tgwitness:lock',()=>peopleTimeline?.reset());
+const personCardHost=node('aside','person-card');personCardHost.id='person-card';personCardHost.hidden=true;personCardHost.setAttribute('aria-label',tr('Profile'));
+$('chat-feed').after(personCardHost);
+let personCard=null;
+function closePersonCard(){personCardHost.hidden=true;personCard?.reset();personCardHost.replaceChildren();}
+async function openPersonCard(userId){
+  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=4');
+  personCard||=createPeopleTimeline({root:personCardHost,json,tr,
+    owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
+    active:()=>state.view==='chats'&&state.chat!==null&&!personCardHost.hidden,
+    record:openRecord,formatTime:fmtFull,canCollect:()=>!!state.me?.admin&&!state.status?.demo,attachment:mediaNode,
+    single:true,onClose:closePersonCard,actions:uid=>{if(!viewAllowed('evidence'))return [];
+      const report=node('button','secondary small',tr('Build report'));report.type='button';report.addEventListener('click',()=>busy(report,()=>reportFor(state.chat,uid)));return [report];}});
+  personCardHost.hidden=false;await personCard.openPerson(userId);
+  personCardHost.querySelector('.person-card-head button')?.focus({preventScroll:true});
+}
+personCardHost.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePersonCard();}});
+window.addEventListener('tgwitness:lock',closePersonCard);
 function renderChatFeed(){
   if(state.view!=='chats')return;
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
@@ -5765,6 +5782,7 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(!post)row.append(continued?node("span","avatar-spacer"):avatarNode(m.sender?.id,name));
   if(!grouped&&!post){const head=node("div","bubble-head"),details=node("details","sender-details"),summary=node("summary",avatarClass(m.sender?.id??name)+"-text"),facts=node("div","sender-facts");
     summary.title=m.sender?.username?'@'+m.sender.username:tr("Author details");summary.setAttribute('aria-label',tr('Author details')+': '+name);summary.append(node("span","sender",name));
+    if(m.sender?.id!==null&&m.sender?.id!==undefined)summary.addEventListener('click',event=>{event.preventDefault();openPersonCard(m.sender.id).catch(error=>toast(error.message,true));});
     if(m.sender?.username)facts.append(node("span","","@"+m.sender.username));
     if(m.sender?.id!==null&&m.sender?.id!==undefined)facts.append(node("span","","ID "+m.sender.id));
     if(!facts.children.length)facts.append(node("span","",tr("No saved author details")));

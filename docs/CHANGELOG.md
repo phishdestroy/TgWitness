@@ -46,6 +46,9 @@
   the workspace key and journaled as `export.image_attested`;
   `verify.py page-01.png pages.sig.json` detects a changed page, statement or key, and
   `--evidence` confirms every record against a signed evidence ZIP.
+- Pressing an author's name in a chat opens a person card beside the messages with
+  the saved profile, photos, gifts, links, activity timeline and journal records,
+  **Refresh profile** and **Build report**; the chat stays where it was.
 - Cloud-chat history can be forwarded in order to a new private channel or
   supergroup, or an existing channel/group with posting access. A preview fixes
   the history boundary before an explicit start. Transfers retain albums, shared
