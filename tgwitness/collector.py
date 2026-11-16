@@ -2507,6 +2507,8 @@ class Collector:
         fresh = False
 
         def current():
+            if authorization_generation != self.authorization_generation and self.authorization_required:
+                raise ValueError("Telegram authorization expired. Sign in again.")
             if (client is not self.client or authorization_generation != self.authorization_generation
                     or self.vault.read("credentials") != credentials):
                 raise ValueError("The Telegram connection changed. Retry the operation.")
