@@ -35,6 +35,9 @@ evidence contract](BACKFILL.md) for transport, retry and trust details.
   live observation, not to that source's remaining historical pages.
 - Inaccessible sources and sources disabled during acquisition remain visible as
   failed or skipped. Other sources continue; the overall result is incomplete.
+- Telegram shows a chat's admin log only to its administrators. For an ordinary member the
+  admin-log read is recorded as `history.admin_log.unavailable` with `reason: not_admin` and
+  does not make the history incomplete; an admin-log read that fails for an administrator does.
 - FloodWait delays respect the saved account backoff. Transient failures retry up to
   five times; exhaustion and low disk space pause with the cursor intact.
 - **End this history run** preserves saved observations. It does not remove them or

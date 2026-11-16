@@ -41,6 +41,8 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- History read by an ordinary group member is no longer always `incomplete`: the admin log is shown only to
+  administrators, so its refusal is recorded with `reason: not_admin` and leaves the history complete.
 - The history transfer preview shows how many messages the chat has and how long the transfer takes at the
   current pace (at the default 30 messages per hour, 1,000 messages take about 33 hours); a running transfer
   shows sent of total and the time left.
