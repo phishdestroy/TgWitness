@@ -161,8 +161,12 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   the next recorded resumption, with the reason when the journal has one. The markers
   appear with all messages shown and hide while a message filter is on.
 - **Build report** above the messages opens the report studio with this chat selected.
-  The same button under a message author's details selects the chat and that author.
+  The same button in an author's person card selects the chat and that author.
   Both change only the draft; save it before exporting.
+- Pressing an author's name opens a person card beside the messages: saved profile,
+  bio, profile photos, gifts, links, message counts and the activity timeline with its
+  journal records, plus **Refresh profile** and **Build report**. **Close**, Esc or
+  another chat closes the card; the chat keeps its position.
 - **Select** above the messages turns on message selection: press messages to mark
   them, Shift-press to mark a range, or use **Select shown**, then **Build report**.
   The report studio opens with **Selected messages** filled in. The report covers the

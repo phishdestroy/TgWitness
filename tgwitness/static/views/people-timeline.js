@@ -1,6 +1,6 @@
 import {createProfileCollection} from './profile-collection.js?v=2';
 
-export function createPeopleTimeline({root, json, tr, owner, active, record, formatTime,canCollect,attachment}) {
+export function createPeopleTimeline({root, json, tr, owner, active, record, formatTime,canCollect,attachment,single=false,onClose=null,actions=null}) {
   const node=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=text;el.className=cls;return el;};
   let bound=null, request=0, offset=0, person=null, days=7, mode='all', pending=false, lastLoad=0;
   const collection=createProfileCollection({json,tr,owner,active,record,formatTime,canCollect,attachment,onComplete:()=>load(true)});
@@ -13,7 +13,9 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
   function button(text,work,cls='secondary'){const b=node('button',tr(text),cls);b.type='button';b.addEventListener('click',work);return b;}
   function guard(work){return async()=>{const key=owner();try{await work();}catch(error){const status=root.querySelector('.people-timeline-status');if(active()&&key===owner()&&status)status.textContent=error.message;}};}
   function mount(){
-    root.replaceChildren();const box=node('section','','people-timeline padded'),heading=node('div','','people-timeline-toolbar');
+    root.replaceChildren();const box=node('section','','people-timeline padded'+(single?' person-card-body':'')),heading=node('div','','people-timeline-toolbar');
+    if(single){const head=node('div','','person-card-head'),close=button('Close',()=>onClose?.(),'quiet');head.append(node('h3',tr('Profile')),close);box.append(head);
+      collection.mount(box);box.append(node('p','','hint people-timeline-status'),node('div','','people-timeline-content'));root.append(box);return;}
     box.append(node('h3',tr('People')));
     collection.mount(box);
     const filter=node('select');filter.setAttribute('aria-label',tr('Filter participants'));filter.id='people-timeline-filter';
@@ -60,7 +62,8 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
     if(offset+data.people.length<data.total)pages.append(button('Next',()=>{offset+=100;load(true);}));content.append(pages);
   }
   function detail(content,data,key,ticket){
-    const p=data.person;content.append(button('Back to participants',()=>{person=null;load(true);}));
+    const p=data.person;if(!single)content.append(button('Back to participants',()=>{person=null;load(true);}));
+    if(single&&actions){const bar=node('div','','person-card-actions');bar.append(...actions(p.user_id));content.append(bar);}
     collection.profile(content,p,()=>current(key,ticket));
     if(p.profile.flags?.deleted)content.append(node('p',tr('Telegram marked this account deleted. The cause and exact deletion time are unknown.'),'hint'));
     content.append(node('p',`${label(p.activity)} · ${tr('Last message')}: ${p.last_message_at?formatTime(p.last_message_at):'—'}`,'hint'));
@@ -83,5 +86,9 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
       }finally{if(more.isConnected)more.disabled=false;}
     }));history.append(more);}
   }
-  return {load,reset(){collection.reset();bound=null;request++;pending=false;lastLoad=0;}};
+  function openPerson(userId){
+    const key=owner();if(bound!==key||!root.querySelector('.people-timeline')){bound=key;request++;offset=0;pending=false;lastLoad=0;mount();}
+    person=userId;pending=false;return load(true);
+  }
+  return {load,openPerson,reset(){collection.reset();bound=null;request++;pending=false;lastLoad=0;person=null;}};
 }
