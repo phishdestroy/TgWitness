@@ -9963,5 +9963,9 @@
   "Open Diagnostics.": "Abra o Diagnóstico.",
   "Confidence: high": "Confiança: alta",
   "Confidence: medium": "Confiança: média",
-  "Confidence: low": "Confiança: baixa"
+  "Confidence: low": "Confiança: baixa",
+  "Sensitive content (18+)": "Conteúdo sensível (18+)",
+  "turned on by TgWitness": "ativado pelo TgWitness",
+  "Telegram does not let this account change it": "O Telegram não permite que esta conta o altere",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Esta sessão entrou há menos de 24 horas, por isso esta exportação usou a sessão normal em vez do Takeout."
 }

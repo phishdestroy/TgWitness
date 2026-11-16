@@ -9902,5 +9902,9 @@
   "Open Diagnostics.": "Buka Diagnostik.",
   "Confidence: high": "Keyakinan: tinggi",
   "Confidence: medium": "Keyakinan: sedang",
-  "Confidence: low": "Keyakinan: rendah"
+  "Confidence: low": "Keyakinan: rendah",
+  "Sensitive content (18+)": "Konten sensitif (18+)",
+  "turned on by TgWitness": "diaktifkan oleh TgWitness",
+  "Telegram does not let this account change it": "Telegram tidak mengizinkan akun ini mengubahnya",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Sesi ini masuk kurang dari 24 jam lalu, jadi ekspor ini memakai sesi biasa, bukan Takeout."
 }
