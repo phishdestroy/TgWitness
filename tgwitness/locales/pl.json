@@ -10028,5 +10028,9 @@
   "What to collect": "Co zbierać",
   "{authors} authors with saved messages · {messages} messages": "Autorzy z zapisanymi wiadomościami: {authors} · wiadomości: {messages}",
   "{n} accounts will share the work.": "Liczba kont dzielących pracę: {n}.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profile, opisy, zdjęcia profilowe, prezenty i linki wszystkich, którzy pisali na tym czacie. Kilka kont może podzielić się pracą."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profile, opisy, zdjęcia profilowe, prezenty i linki wszystkich, którzy pisali na tym czacie. Kilka kont może podzielić się pracą.",
+  "Offline · 0 B sent": "Offline · wysłano 0 B",
+  "Network requests: {n}": "Żądania sieciowe: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Liczone przez tę przeglądarkę od otwarcia strony. Zasady strony nie pozwalają na żadne połączenia sieciowe.",
+  "Blocked attempts: {n}": "Zablokowane próby: {n}"
 }

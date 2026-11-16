@@ -9875,5 +9875,9 @@
   "What to collect": "收集內容",
   "{authors} authors with saved messages · {messages} messages": "有已儲存訊息的作者 {authors} 位 · 訊息 {messages} 則",
   "{n} accounts will share the work.": "{n} 個帳號將分擔工作。",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "在此聊天中發言的所有人的個人資料、簡介、大頭貼、禮物和連結。可由多個帳號分擔工作。"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "在此聊天中發言的所有人的個人資料、簡介、大頭貼、禮物和連結。可由多個帳號分擔工作。",
+  "Offline · 0 B sent": "離線 · 已傳送 0 B",
+  "Network requests: {n}": "網路請求：{n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "由此瀏覽器自頁面開啟以來統計。頁面政策不允許任何網路連線。",
+  "Blocked attempts: {n}": "已攔截的嘗試：{n}"
 }

@@ -9936,5 +9936,9 @@
   "What to collect": "Cosa raccogliere",
   "{authors} authors with saved messages · {messages} messages": "{authors} autori con messaggi salvati · {messages} messaggi",
   "{n} accounts will share the work.": "{n} account si divideranno il lavoro.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profili, bio, foto profilo, regali e link di tutti quelli che hanno scritto in questa chat. Più account possono dividersi il lavoro."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profili, bio, foto profilo, regali e link di tutti quelli che hanno scritto in questa chat. Più account possono dividersi il lavoro.",
+  "Offline · 0 B sent": "Offline · 0 B inviati",
+  "Network requests: {n}": "Richieste di rete: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Conteggiate da questo browser dall'apertura della pagina. La policy della pagina non consente connessioni di rete.",
+  "Blocked attempts: {n}": "Tentativi bloccati: {n}"
 }

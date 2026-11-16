@@ -9926,5 +9926,9 @@
   "What to collect": "क्या इकट्ठा करें",
   "{authors} authors with saved messages · {messages} messages": "सहेजे गए संदेशों वाले लेखक: {authors} · संदेश: {messages}",
   "{n} accounts will share the work.": "{n} खाते काम बाँटेंगे।",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "इस चैट में लिखने वाले हर व्यक्ति के प्रोफ़ाइल, बायो, प्रोफ़ाइल फ़ोटो, उपहार और लिंक। कई खाते काम बाँट सकते हैं।"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "इस चैट में लिखने वाले हर व्यक्ति के प्रोफ़ाइल, बायो, प्रोफ़ाइल फ़ोटो, उपहार और लिंक। कई खाते काम बाँट सकते हैं।",
+  "Offline · 0 B sent": "ऑफ़लाइन · 0 B भेजे गए",
+  "Network requests: {n}": "नेटवर्क अनुरोध: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "पेज खुलने के बाद से इस ब्राउज़र द्वारा गिना गया। पेज की नीति किसी नेटवर्क कनेक्शन की अनुमति नहीं देती।",
+  "Blocked attempts: {n}": "रोके गए प्रयास: {n}"
 }

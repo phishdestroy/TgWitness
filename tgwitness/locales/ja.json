@@ -9875,5 +9875,9 @@
   "What to collect": "収集する内容",
   "{authors} authors with saved messages · {messages} messages": "保存済みメッセージのある作成者 {authors} 人 · メッセージ {messages} 件",
   "{n} accounts will share the work.": "{n} 個のアカウントで作業を分担します。",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "このチャットに書き込んだ全員のプロフィール、自己紹介、プロフィール写真、ギフト、リンク。複数のアカウントで作業を分担できます。"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "このチャットに書き込んだ全員のプロフィール、自己紹介、プロフィール写真、ギフト、リンク。複数のアカウントで作業を分担できます。",
+  "Offline · 0 B sent": "オフライン · 送信 0 B",
+  "Network requests: {n}": "ネットワーク要求: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "ページを開いてからこのブラウザーが数えた値です。ページのポリシーはネットワーク接続を一切許可しません。",
+  "Blocked attempts: {n}": "ブロックされた試行: {n}"
 }

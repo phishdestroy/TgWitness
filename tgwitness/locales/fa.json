@@ -9926,5 +9926,9 @@
   "What to collect": "چه چیزی گردآوری شود",
   "{authors} authors with saved messages · {messages} messages": "نویسندگان با پیام ذخیره‌شده: {authors} · پیام‌ها: {messages}",
   "{n} accounts will share the work.": "{n} حساب کار را تقسیم می‌کنند.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "پروفایل، بیو، عکس‌های پروفایل، هدیه‌ها و پیوندهای همهٔ کسانی که در این گفتگو نوشته‌اند. چند حساب می‌توانند کار را تقسیم کنند."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "پروفایل، بیو، عکس‌های پروفایل، هدیه‌ها و پیوندهای همهٔ کسانی که در این گفتگو نوشته‌اند. چند حساب می‌توانند کار را تقسیم کنند.",
+  "Offline · 0 B sent": "آفلاین · 0 بایت ارسال شد",
+  "Network requests: {n}": "درخواست‌های شبکه: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "این مرورگر از زمان باز شدن صفحه شمرده است. سیاست صفحه هیچ اتصال شبکه‌ای را مجاز نمی‌داند.",
+  "Blocked attempts: {n}": "تلاش‌های مسدودشده: {n}"
 }

@@ -9926,5 +9926,9 @@
   "What to collect": "کیا جمع کرنا ہے",
   "{authors} authors with saved messages · {messages} messages": "محفوظ پیغامات والے مصنفین: {authors} · پیغامات: {messages}",
   "{n} accounts will share the work.": "{n} اکاؤنٹس کام بانٹیں گے۔",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "اس چیٹ میں لکھنے والے ہر شخص کے پروفائل، بایو، پروفائل تصاویر، تحائف اور لنکس۔ کئی اکاؤنٹس کام بانٹ سکتے ہیں۔"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "اس چیٹ میں لکھنے والے ہر شخص کے پروفائل، بایو، پروفائل تصاویر، تحائف اور لنکس۔ کئی اکاؤنٹس کام بانٹ سکتے ہیں۔",
+  "Offline · 0 B sent": "آف لائن · 0 B بھیجے گئے",
+  "Network requests: {n}": "نیٹ ورک درخواستیں: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "صفحہ کھلنے کے بعد سے اس براؤزر نے گنا۔ صفحے کی پالیسی کسی نیٹ ورک کنکشن کی اجازت نہیں دیتی۔",
+  "Blocked attempts: {n}": "روکی گئی کوششیں: {n}"
 }

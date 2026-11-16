@@ -10130,5 +10130,9 @@
   "What to collect": "ما الذي يُجمع",
   "{authors} authors with saved messages · {messages} messages": "المؤلفون ذوو الرسائل المحفوظة: {authors} · الرسائل: {messages}",
   "{n} accounts will share the work.": "عدد الحسابات التي ستتقاسم العمل: {n}.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "الملفات الشخصية والنبذات وصور الملف الشخصي والهدايا والروابط لكل من كتب في هذه الدردشة. يمكن لعدة حسابات تقاسم العمل."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "الملفات الشخصية والنبذات وصور الملف الشخصي والهدايا والروابط لكل من كتب في هذه الدردشة. يمكن لعدة حسابات تقاسم العمل.",
+  "Offline · 0 B sent": "دون اتصال · أُرسل 0 بايت",
+  "Network requests: {n}": "طلبات الشبكة: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "يحسبها هذا المتصفح منذ فتح الصفحة. سياسة الصفحة لا تسمح بأي اتصال بالشبكة.",
+  "Blocked attempts: {n}": "محاولات محظورة: {n}"
 }

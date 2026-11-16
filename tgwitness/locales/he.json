@@ -9977,5 +9977,9 @@
   "What to collect": "מה לאסוף",
   "{authors} authors with saved messages · {messages} messages": "מחברים עם הודעות שמורות: {authors} · הודעות: {messages}",
   "{n} accounts will share the work.": "{n} חשבונות יחלקו את העבודה.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "פרופילים, ביו, תמונות פרופיל, מתנות וקישורים של כל מי שכתב בצ'אט הזה. כמה חשבונות יכולים לחלק ביניהם את העבודה."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "פרופילים, ביו, תמונות פרופיל, מתנות וקישורים של כל מי שכתב בצ'אט הזה. כמה חשבונות יכולים לחלק ביניהם את העבודה.",
+  "Offline · 0 B sent": "לא מקוון · נשלחו 0 B",
+  "Network requests: {n}": "בקשות רשת: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "נספר על ידי הדפדפן הזה מאז שהדף נפתח. מדיניות הדף אינה מתירה חיבורי רשת.",
+  "Blocked attempts: {n}": "ניסיונות שנחסמו: {n}"
 }

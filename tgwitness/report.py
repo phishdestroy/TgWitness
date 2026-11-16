@@ -1026,6 +1026,15 @@ const zone=$("#drop");if(zone){const input=$("#drop-file"),out=$("#drop-result")
   zone.addEventListener("dragleave",()=>zone.classList.remove("over"));
   zone.addEventListener("drop",e=>{e.preventDefault();zone.classList.remove("over");if(e.dataTransfer.files[0])check(e.dataTransfer.files[0]);});
   input.addEventListener("change",()=>{if(input.files[0])check(input.files[0]);});}
+const net=$("#net-badge");if(net&&location.protocol==="file:"&&self.performance&&performance.getEntriesByType){let requests=0,blocked=0;
+  const count=list=>{for(const r of list)if(/^(https?|wss?):/i.test(r.name))requests++;};
+  const show=()=>{net.className="sig-badge net-badge "+(requests?"bad":"ok");
+    net.querySelector("span").textContent=requests?say("Network requests: {n}").replace("{n}",requests):say("Offline · 0 B sent");
+    net.title=say("Counted by this browser since the page opened. The page policy allows no network connections.")
+      +(blocked?" "+say("Blocked attempts: {n}").replace("{n}",blocked):"");net.hidden=false;};
+  count(performance.getEntriesByType("resource"));
+  if(self.PerformanceObserver)try{new PerformanceObserver(l=>{count(l.getEntries());show();}).observe({type:"resource"});}catch(e){}
+  addEventListener("securitypolicyviolation",()=>{blocked++;show();});show();}
 """
 CONSOLE_JS = Path(__file__).with_name("report_console.js").read_text(encoding="utf-8")
 CSS += Path(__file__).with_name("report_console.css").read_text(encoding="utf-8")
@@ -1048,7 +1057,9 @@ SCRIPT_WORDS = ("Context message", "Matches export filters", "Copy", "Copied", "
                 "The seal is not at the end of the file.", "The seal signature is not valid.",
                 "This file was changed after it was sealed.", "Seal intact: every byte of this file is as signed.",
                 "Key fingerprint", "a different key than this report",
-                "This browser cannot check Ed25519 signatures. Use verify.py.") + tuple(dict.fromkeys(
+                "This browser cannot check Ed25519 signatures. Use verify.py.", "Offline · 0 B sent", "Network requests: {n}",
+                "Counted by this browser since the page opened. The page policy allows no network connections.",
+                "Blocked attempts: {n}") + tuple(dict.fromkeys(
     json.loads('"' + text + '"') for text in re.findall(r'\bsayf?\("((?:[^"\\]|\\.)*)"', CONSOLE_JS)))
 
 
@@ -1096,7 +1107,8 @@ def bar(say, label, links, viewer_kind=None):
     return ('<header class="bar"><a class="brand" href="#summary">' + MARK + '<span>TgWitness</span><span class="version">'
             + e(__version__) + '</span></a><span class="doc-kind">' + e(label) + "</span>" + nav
             + '<div class="prefs no-print"><a class="sig-badge" id="sig-badge" href="#check" data-view="check">' + icon("shield")
-            + "<span>" + e(say("Checking…")) + '</span></a><span class="lang-pill" title="' + e(say("Report language")) + '">'
+            + "<span>" + e(say("Checking…")) + '</span></a><span class="sig-badge net-badge" id="net-badge" hidden>' + icon("check")
+            + '<span></span></span><span class="lang-pill" title="' + e(say("Report language")) + '">'
             + icon("globe") + '<span data-lang="' + e(say.language) + '">' + e(say.language) + "</span></span>"
             '<div class="theme-pick" role="group" aria-label="' + e(say("Theme")) + '">'
             + "".join('<button type="button" data-theme-pick="' + mode + '" title="' + e(say(label_)) + '">' + icon(glyph) + "</button>"

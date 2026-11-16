@@ -9926,5 +9926,9 @@
   "What to collect": "Nimani yig'ish kerak",
   "{authors} authors with saved messages · {messages} messages": "Saqlangan xabarli mualliflar: {authors} · xabarlar: {messages}",
   "{n} accounts will share the work.": "Ishni {n} ta hisob bo'lishadi.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Bu chatda yozgan har bir kishining profili, biosi, profil rasmlari, sovg'alari va havolalari. Ishni bir nechta hisob bo'lishishi mumkin."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Bu chatda yozgan har bir kishining profili, biosi, profil rasmlari, sovg'alari va havolalari. Ishni bir nechta hisob bo'lishishi mumkin.",
+  "Offline · 0 B sent": "Oflayn · 0 B yuborildi",
+  "Network requests: {n}": "Tarmoq so'rovlari: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Sahifa ochilgandan beri ushbu brauzer hisoblagan. Sahifa siyosati hech qanday tarmoq ulanishiga ruxsat bermaydi.",
+  "Blocked attempts: {n}": "Bloklangan urinishlar: {n}"
 }

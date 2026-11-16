@@ -9875,5 +9875,9 @@
   "What to collect": "สิ่งที่จะรวบรวม",
   "{authors} authors with saved messages · {messages} messages": "ผู้เขียนที่มีข้อความที่บันทึก {authors} คน · ข้อความ {messages} รายการ",
   "{n} accounts will share the work.": "บัญชี {n} บัญชีจะแบ่งงานกัน",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "โปรไฟล์ ประวัติย่อ รูปโปรไฟล์ ของขวัญ และลิงก์ของทุกคนที่เขียนในแชทนี้ หลายบัญชีสามารถแบ่งงานกันได้"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "โปรไฟล์ ประวัติย่อ รูปโปรไฟล์ ของขวัญ และลิงก์ของทุกคนที่เขียนในแชทนี้ หลายบัญชีสามารถแบ่งงานกันได้",
+  "Offline · 0 B sent": "ออฟไลน์ · ส่ง 0 B",
+  "Network requests: {n}": "คำขอเครือข่าย: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "นับโดยเบราว์เซอร์นี้ตั้งแต่เปิดหน้า นโยบายของหน้าไม่อนุญาตการเชื่อมต่อเครือข่ายใด ๆ",
+  "Blocked attempts: {n}": "ความพยายามที่ถูกบล็อก: {n}"
 }
