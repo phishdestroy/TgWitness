@@ -9974,5 +9974,11 @@
   "Preparing page {n} of {total}": "Подготовка страницы {n} из {total}",
   "Loading saved messages: {n}": "Загрузка сохранённых сообщений: {n}",
   "Only the latest {n} saved messages are included.": "Включены только последние {n} сохранённых сообщений.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "На каждой странице указаны её записи журнала. В ZIP добавляется файл подписи, который проверяет verify.py."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "На каждой странице указаны её записи журнала. В ZIP добавляется файл подписи, который проверяет verify.py.",
+  "Rhythm": "Ритм",
+  "Starts after {hours} h of silence": "Начинает после {hours} ч тишины",
+  "Median reply time": "Медианное время ответа",
+  "Longest run in a row": "Самая длинная серия подряд",
+  "Night share, 00–06 UTC": "Доля ночи, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "День недели × час, UTC. По сохранённым сообщениям этого чата."
 }

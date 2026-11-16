@@ -166,7 +166,11 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
 - Pressing an author's name opens a person card beside the messages: saved profile,
   bio, profile photos, gifts, links, message counts and the activity timeline with its
   journal records, plus **Refresh profile** and **Build report**. **Close**, Esc or
-  another chat closes the card; the chat keeps its position.
+  another chat closes the card; the chat keeps its position. **Rhythm** in the card
+  counts the author's saved messages in this chat in UTC: active days, starts after
+  6 hours of silence, median time to reply to someone else within 24 hours, the
+  longest run of consecutive messages, the share sent between 00:00 and 06:00 and a
+  weekday × hour heatmap.
 - **Select** above the messages turns on message selection: press messages to mark
   them, Shift-press to mark a range, or use **Select shown**, then **Build report**.
   The report studio opens with **Selected messages** filled in. The report covers the

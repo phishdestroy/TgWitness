@@ -9851,5 +9851,11 @@
   "Preparing page {n} of {total}": "Menyiapkan halaman {n} dari {total}",
   "Loading saved messages: {n}": "Memuat pesan tersimpan: {n}",
   "Only the latest {n} saved messages are included.": "Hanya {n} pesan tersimpan terbaru yang disertakan.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Setiap halaman menyebutkan catatan jurnalnya. ZIP menambahkan file tanda tangan yang diperiksa verify.py."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Setiap halaman menyebutkan catatan jurnalnya. ZIP menambahkan file tanda tangan yang diperiksa verify.py.",
+  "Rhythm": "Ritme",
+  "Starts after {hours} h of silence": "Memulai setelah {hours} jam hening",
+  "Median reply time": "Median waktu balasan",
+  "Longest run in a row": "Rentetan terpanjang berturut-turut",
+  "Night share, 00–06 UTC": "Porsi malam, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "Hari × jam, UTC. Dihitung dari pesan tersimpan di obrolan ini."
 }

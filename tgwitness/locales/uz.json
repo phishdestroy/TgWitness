@@ -9902,5 +9902,11 @@
   "Preparing page {n} of {total}": "{total} tadan {n}-sahifa tayyorlanmoqda",
   "Loading saved messages: {n}": "Saqlangan xabarlar yuklanmoqda: {n}",
   "Only the latest {n} saved messages are included.": "Faqat oxirgi {n} ta saqlangan xabar kiritilgan.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Har bir sahifada uning jurnal yozuvlari ko'rsatiladi. ZIP verify.py tekshiradigan imzo faylini qo'shadi."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Har bir sahifada uning jurnal yozuvlari ko'rsatiladi. ZIP verify.py tekshiradigan imzo faylini qo'shadi.",
+  "Rhythm": "Ritm",
+  "Starts after {hours} h of silence": "{hours} soat jimlikdan keyin boshlaydi",
+  "Median reply time": "Javob vaqtining medianasi",
+  "Longest run in a row": "Ketma-ket eng uzun qator",
+  "Night share, 00–06 UTC": "Tun ulushi, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "Hafta kuni × soat, UTC. Ushbu chatning saqlangan xabarlaridan hisoblangan."
 }

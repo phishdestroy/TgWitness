@@ -9851,5 +9851,11 @@
   "Preparing page {n} of {total}": "Đang chuẩn bị trang {n}/{total}",
   "Loading saved messages: {n}": "Đang tải tin nhắn đã lưu: {n}",
   "Only the latest {n} saved messages are included.": "Chỉ bao gồm {n} tin nhắn đã lưu gần nhất.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Mỗi trang ghi rõ các bản ghi nhật ký của trang đó. Tệp ZIP kèm theo một tệp chữ ký để verify.py kiểm tra."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Mỗi trang ghi rõ các bản ghi nhật ký của trang đó. Tệp ZIP kèm theo một tệp chữ ký để verify.py kiểm tra.",
+  "Rhythm": "Nhịp",
+  "Starts after {hours} h of silence": "Bắt đầu sau {hours} giờ im lặng",
+  "Median reply time": "Thời gian trả lời trung vị",
+  "Longest run in a row": "Chuỗi liên tiếp dài nhất",
+  "Night share, 00–06 UTC": "Tỷ lệ ban đêm, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "Thứ × giờ, UTC. Tính từ tin nhắn đã lưu của cuộc trò chuyện này."
 }

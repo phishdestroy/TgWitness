@@ -9851,5 +9851,11 @@
   "Preparing page {n} of {total}": "正在準備第 {n} 頁，共 {total} 頁",
   "Loading saved messages: {n}": "正在載入已儲存的訊息：{n}",
   "Only the latest {n} saved messages are included.": "僅包含最新的 {n} 則已儲存訊息。",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "每頁都列出其對應的日誌記錄。ZIP 中附帶一個簽章檔，可由 verify.py 驗證。"
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "每頁都列出其對應的日誌記錄。ZIP 中附帶一個簽章檔，可由 verify.py 驗證。",
+  "Rhythm": "節奏",
+  "Starts after {hours} h of silence": "沉默 {hours} 小時後首先發言",
+  "Median reply time": "回覆時間中位數",
+  "Longest run in a row": "最長連續發言",
+  "Night share, 00–06 UTC": "夜間占比（00–06 UTC）",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "星期 × 小時，UTC。根據此聊天中已儲存的訊息統計。"
 }

@@ -10004,5 +10004,11 @@
   "Preparing page {n} of {total}": "Підготовка сторінки {n} з {total}",
   "Loading saved messages: {n}": "Завантаження збережених повідомлень: {n}",
   "Only the latest {n} saved messages are included.": "Включено лише останні {n} збережених повідомлень.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "На кожній сторінці вказано її записи журналу. До ZIP додається файл підпису, який перевіряє verify.py."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "На кожній сторінці вказано її записи журналу. До ZIP додається файл підпису, який перевіряє verify.py.",
+  "Rhythm": "Ритм",
+  "Starts after {hours} h of silence": "Починає після {hours} год тиші",
+  "Median reply time": "Медіанний час відповіді",
+  "Longest run in a row": "Найдовша серія поспіль",
+  "Night share, 00–06 UTC": "Частка ночі, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "День тижня × година, UTC. За збереженими повідомленнями цього чату."
 }

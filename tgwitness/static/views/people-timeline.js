@@ -68,6 +68,12 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
     if(p.profile.flags?.deleted)content.append(node('p',tr('Telegram marked this account deleted. The cause and exact deletion time are unknown.'),'hint'));
     content.append(node('p',`${label(p.activity)} · ${tr('Last message')}: ${p.last_message_at?formatTime(p.last_message_at):'—'}`,'hint'));
     if(data.last_message_gap_days!=null)content.append(node('p',tr('Gap between the two latest saved message times: {days} days. Historical imports do not mean a return today.').replace('{days}',data.last_message_gap_days.toFixed(1)),'hint'));
+    const rhythm=node('details','','person-rhythm');rhythm.append(node('summary',tr('Rhythm')));content.append(rhythm);
+    rhythm.addEventListener('toggle',guard(async()=>{
+      if(!rhythm.open||rhythm.dataset.loaded)return;rhythm.dataset.loaded='1';
+      const chat=key.split(':').at(-1),value=await json(`chats/${encodeURIComponent(chat)}/people/${p.user_id}/rhythm`);
+      if(current(key,ticket))showRhythm(rhythm,value);
+    }));
     const history=node('details','','profile-history');history.append(node('summary',tr('Activity timeline')));content.append(history);
     const events=node('ol','','people-timeline-events');history.append(events);
     function append(items){for(const item of items){const li=node('li'),title={message:item.data.edited?'Message edited':'Message observed',profile:'Profile observed',status:'Status observed',membership:'Membership observed',refresh_requested:'Profile refresh requested',profile_unavailable:'Profile unavailable'}[item.category]||item.category;
@@ -85,6 +91,24 @@ export function createPeopleTimeline({root, json, tr, owner, active, record, for
         if(!current(key,ticket))return;append(value.events);before=value.next_before;if(!before)more.remove();
       }finally{if(more.isConnected)more.disabled=false;}
     }));history.append(more);}
+  }
+  function showRhythm(box,r){
+    const lang=document.documentElement.lang||undefined,count=new Intl.NumberFormat(lang),percent=new Intl.NumberFormat(lang,{style:'percent',maximumFractionDigits:0});
+    const duration=seconds=>{if(seconds==null)return '—';const [value,unit]=seconds<3600?[Math.max(1,Math.round(seconds/60)),'minute']:[Math.round(seconds/360)/10,'hour'];
+      return new Intl.NumberFormat(lang,{style:'unit',unit,unitDisplay:'short',maximumFractionDigits:1}).format(value);};
+    const facts=node('dl','','person-rhythm-facts');
+    for(const [title,value] of [[tr('Messages'),count.format(r.messages)],[tr('Active days'),count.format(r.active_days)],
+      [tr('Starts after {hours} h of silence').replace('{hours}',r.pause_hours),count.format(r.started_after_pause)],
+      [tr('Median reply time'),duration(r.median_reply_seconds)],[tr('Longest run in a row'),count.format(r.longest_run)],
+      [tr('Night share, 00–06 UTC'),r.night_share==null?'—':percent.format(r.night_share)]]){const row=node('div');row.append(node('dt',title),node('dd',value));facts.append(row);}
+    const table=node('table','','person-rhythm-heat'),caption=node('caption',tr('Weekday × hour, UTC. Counted from the saved messages of this chat.')),head=node('tr');
+    head.append(node('th'));for(let hour=0;hour<24;hour++){const th=node('th',hour%6?'':String(hour));th.scope='col';head.append(th);}
+    const body=node('tbody'),peak=Math.max(1,...r.heatmap.flat()),days=new Intl.DateTimeFormat(lang,{weekday:'short',timeZone:'UTC'});
+    r.heatmap.forEach((hours,index)=>{const row=node('tr'),day=days.format(new Date(Date.UTC(2024,0,1+index))),label=node('th',day);label.scope='row';row.append(label);
+      hours.forEach((value,hour)=>{const cell=node('td');cell.style.setProperty('--level',String(Math.round(value/peak*100)));cell.title=`${day} ${String(hour).padStart(2,'0')}:00 · ${count.format(value)}`;
+        if(!value)cell.className='empty';row.append(cell);});body.append(row);});
+    const thead=node('thead');thead.append(head);table.append(caption,thead,body);
+    box.append(facts,table);if(r.limited)box.append(node('p',tr('Only the latest {n} saved messages are included.').replace('{n}',count.format(r.limit)),'hint'));
   }
   function openPerson(userId){
     const key=owner();if(bound!==key||!root.querySelector('.people-timeline')){bound=key;request++;offset=0;pending=false;lastLoad=0;mount();}

@@ -9851,5 +9851,11 @@
   "Preparing page {n} of {total}": "กำลังเตรียมหน้า {n} จาก {total}",
   "Loading saved messages: {n}": "กำลังโหลดข้อความที่บันทึกไว้: {n}",
   "Only the latest {n} saved messages are included.": "รวมเฉพาะข้อความที่บันทึกไว้ล่าสุด {n} ข้อความ",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "แต่ละหน้าระบุบันทึกในสมุดบันทึกของหน้านั้น ไฟล์ ZIP มีไฟล์ลายเซ็นที่ verify.py ใช้ตรวจสอบ"
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "แต่ละหน้าระบุบันทึกในสมุดบันทึกของหน้านั้น ไฟล์ ZIP มีไฟล์ลายเซ็นที่ verify.py ใช้ตรวจสอบ",
+  "Rhythm": "จังหวะ",
+  "Starts after {hours} h of silence": "เริ่มหลังเงียบ {hours} ชม.",
+  "Median reply time": "ค่ามัธยฐานเวลาตอบกลับ",
+  "Longest run in a row": "ส่งติดต่อกันยาวที่สุด",
+  "Night share, 00–06 UTC": "สัดส่วนกลางคืน 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "วัน × ชั่วโมง UTC นับจากข้อความที่บันทึกไว้ของแชทนี้"
 }

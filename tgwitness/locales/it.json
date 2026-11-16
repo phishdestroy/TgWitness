@@ -9912,5 +9912,11 @@
   "Preparing page {n} of {total}": "Preparazione della pagina {n} di {total}",
   "Loading saved messages: {n}": "Caricamento dei messaggi salvati: {n}",
   "Only the latest {n} saved messages are included.": "Sono inclusi solo gli ultimi {n} messaggi salvati.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Ogni pagina indica i propri record del giornale. Lo ZIP aggiunge un file di firma che verify.py verifica."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Ogni pagina indica i propri record del giornale. Lo ZIP aggiunge un file di firma che verify.py verifica.",
+  "Rhythm": "Ritmo",
+  "Starts after {hours} h of silence": "Inizia dopo {hours} h di silenzio",
+  "Median reply time": "Tempo mediano di risposta",
+  "Longest run in a row": "Serie consecutiva più lunga",
+  "Night share, 00–06 UTC": "Quota notturna, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "Giorno × ora, UTC. Calcolato dai messaggi salvati di questa chat."
 }
