@@ -5265,9 +5265,9 @@ async function showAccountSessions(){
   const others=r.sessions.filter(s=>!s.current).length;
   box.append(node("p","hint",others?tr("Other sessions signed in to this account: {n}",{n:others}):
     tr("No other sessions. Only this one is signed in.")));
-  if(others){
+  const approver=r.sessions.some(s=>s.approved_this_workspace&&!s.current);
+  if(r.sessions.some(s=>!s.current&&!s.approved_this_workspace)){
     const all=node("button","quiet danger",tr("End all other sessions"));all.type="button";
-    const approver=r.sessions.some(s=>s.approved_this_workspace);
     all.addEventListener("click",e=>busy(e.currentTarget,async()=>{
       if(!(await askConfirm(tr(approver?"End every other session in Telegram except the one that approved this workspace's sign-in?":"End all other sessions in Telegram? Every other device signed in to this account is logged out."),{danger:true,confirmText:tr("End all other sessions")})))return;
       if(!owner.current())return;
@@ -5276,15 +5276,17 @@ async function showAccountSessions(){
     }));
     box.append(all);
   }
-  const only=node("button","quiet danger",tr("Make this the only session"));only.type="button";
-  only.addEventListener("click",e=>busy(e.currentTarget,async()=>{
-    if(!(await askConfirm(tr("End every other session of this account and turn on a two-step password if it has none? After that, signing in anywhere else needs that password."),{danger:true,confirmText:tr("Make this the only session")})))return;
-    if(!owner.current())return;
-    const done=await json("account/sessions/only",{},{profile:owner.profile,token:owner.token});
-    if(done.password)await window.TgWitnessDialogs.prompt(done.password,{title:tr("Two-step password"),label:tr("Two-step password set by TgWitness. Save it now: it is shown only once and TgWitness does not keep it."),required:false});
-    toast(tr("This is now the only session of this account."));await showAccountSessions();
-  }));
-  box.append(only);
+  if(!approver){
+    const only=node("button","quiet danger",tr("Make this the only session"));only.type="button";
+    only.addEventListener("click",e=>busy(e.currentTarget,async()=>{
+      if(!(await askConfirm(tr("End every other session of this account and turn on a two-step password if it has none? After that, signing in anywhere else needs that password."),{danger:true,confirmText:tr("Make this the only session")})))return;
+      if(!owner.current())return;
+      const done=await json("account/sessions/only",{},{profile:owner.profile,token:owner.token});
+      if(done.password)await window.TgWitnessDialogs.prompt(done.password,{title:tr("Two-step password"),label:tr("Two-step password set by TgWitness. Save it now: it is shown only once and TgWitness does not keep it."),required:false});
+      toast(tr("This is now the only session of this account."));await showAccountSessions();
+    }));
+    box.append(only);
+  }
   if(r.key_origin==="created"){
     const auto=node("label","check-label"),box_=node("input");
     box_.type="checkbox";box_.checked=!!r.auto_only_session;box_.disabled=state.status.demo||!may("account");
