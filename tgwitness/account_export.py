@@ -859,7 +859,17 @@ class AccountExport:
         recorded = (self.inventory or {}).get("transport")
         if recorded in ("takeout", "regular"):
             return recorded
-        return "regular" if self.vault.read("account-export-" + job["job_id"]).get("takeout_declined") else "takeout"
+        secret = self.vault.read("account-export-" + job["job_id"])
+        if secret.get("takeout_declined"):
+            return "regular"
+        blocked = self.collector.takeout_blocked()
+        if not blocked:
+            return "takeout"
+        from .collector import TAKEOUT_SKIPPED_MEANING
+        self.vault.save("account-export-" + job["job_id"], {**secret, "takeout_declined": blocked})
+        self.store.append("account_export.transport", {"job_id": job["job_id"], "transport": "regular",
+                                                       "reason": blocked, "meaning": TAKEOUT_SKIPPED_MEANING[blocked]})
+        return "regular"
 
     async def run(self, job):
         from .collector import AUTHORIZATION_ERRORS, loss_cause, loss_text
@@ -877,6 +887,7 @@ class AccountExport:
             except errors.TakeoutInitDelayError as exc:
                 if job["options"]["transport"] != "auto" or self.inventory is not None:
                     raise
+                self.collector.takeout_wait(exc.seconds)
                 secret = self.vault.read("account-export-" + job["job_id"])
                 self.vault.save("account-export-" + job["job_id"], {**secret, "takeout_declined": exc.seconds})
                 self.store.append("account_export.transport", {"job_id": job["job_id"], "transport": "regular",
@@ -898,7 +909,10 @@ class AccountExport:
                     self.current.pop("discovery", None)
                     self.current["current_chat"] = None
                 if job["options"]["transport"] == "auto" and options["transport"] == "regular":
-                    gaps = ["Telegram asked to wait before a Takeout export; this export used the regular session."] + gaps
+                    fresh = self.vault.read("account-export-" + job["job_id"]).get("takeout_declined") == "fresh_session"
+                    gaps = ["This session signed in less than 24 hours ago, so this export used the regular session "
+                            "instead of Takeout." if fresh else
+                            "Telegram asked to wait before a Takeout export; this export used the regular session."] + gaps
                 inventory = {"format": "tgwitness-account-export-inventory-v1", "public_key": self.vault.public_key,
                     "job_id": job["job_id"], "account_id": job["account_id"], "options_sha256": job["options_sha256"],
                     "transport": options["transport"],
@@ -994,6 +1008,7 @@ class AccountExport:
                 "Takeout session with the same options and checks that the saved pagination ranges still apply.")
             self.persist()
         except errors.TakeoutInitDelayError as exc:
+            self.collector.takeout_wait(exc.seconds)
             self.current.update(phase="waiting", wait_until=time.time() + exc.seconds,
                                 delay_seconds=exc.seconds, wait_reason="takeout_approval",
                                 error=None)

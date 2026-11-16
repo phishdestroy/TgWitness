@@ -9902,5 +9902,9 @@
   "Open Diagnostics.": "打开诊断。",
   "Confidence: high": "可信度：高",
   "Confidence: medium": "可信度：中",
-  "Confidence: low": "可信度：低"
+  "Confidence: low": "可信度：低",
+  "Sensitive content (18+)": "敏感内容 (18+)",
+  "turned on by TgWitness": "已由 TgWitness 开启",
+  "Telegram does not let this account change it": "Telegram 不允许此账户更改此设置",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "此会话登录不足 24 小时，因此本次导出使用了普通会话而非 Takeout。"
 }
