@@ -294,6 +294,7 @@ kbd { font: 11px/1.4 var(--mono); }
   background: var(--surface-2); color: var(--muted); font-size: 13px;
 }
 .quick-footer kbd { padding: 2px 4px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface); }
+@media (hover: none) and (pointer: coarse) { .quick-footer { display: none; } }
 .gate { position: relative; display: grid; grid-template-columns: minmax(0, 540px) minmax(0, 420px); align-content: center; justify-content: center; align-items: center; gap: clamp(40px, 7vw, 112px); min-height: 100vh; padding: 64px 48px; overflow: hidden; background: var(--bg); }
 .gate::before {
   content: ""; position: absolute; inset: -45% -20% auto; height: 75%; pointer-events: none;
