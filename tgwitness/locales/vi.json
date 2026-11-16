@@ -9832,5 +9832,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "Chỉ gồm văn bản và tên tệp đính kèm. Phần chọn dài được chia thành nhiều trang.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "Một số tin nhắn đã chọn nằm ngoài phạm vi đã tải. Hãy tải lại hoặc thay đổi lựa chọn.",
   "Rendered from saved messages": "Được tạo từ các tin nhắn đã lưu",
-  "Could not create the image. Try fewer messages.": "Không thể tạo ảnh. Hãy chọn ít tin nhắn hơn."
+  "Could not create the image. Try fewer messages.": "Không thể tạo ảnh. Hãy chọn ít tin nhắn hơn.",
+  "Forward chat": "Chuyển tiếp cuộc trò chuyện",
+  "New channel": "Kênh mới",
+  "Existing channel or group": "Kênh hoặc nhóm hiện có",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "Chuyển tiếp lịch sử Telegram có thể truy cập theo thứ tự. Kênh và nhóm mới là riêng tư. Các hạn chế chuyển tiếp vẫn áp dụng.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "Chưa rõ kết quả tạo. Kiểm tra Telegram trước khi bắt đầu lần chuyển khác.",
+  "Message outcome unknown. Review the destination before resuming.": "Chưa rõ kết quả gửi. Kiểm tra nơi nhận trước khi tiếp tục.",
+  "Forwarding is restricted in this chat.": "Cuộc trò chuyện này hạn chế chuyển tiếp.",
+  "Choose a channel or group where this account can post.": "Chọn kênh hoặc nhóm mà tài khoản này có thể đăng bài.",
+  "Enter a title for the new channel or group.": "Nhập tên cho kênh hoặc nhóm mới.",
+  "The history page is not in message order.": "Tin nhắn trên trang lịch sử không đúng thứ tự.",
+  "No messages to export.": "Không có tin nhắn để xuất.",
+  "The album is too large to forward intact.": "Album quá lớn để chuyển tiếp nguyên vẹn.",
+  "The Telegram account changed. Start a new transfer.": "Tài khoản Telegram đã thay đổi. Bắt đầu lần chuyển mới.",
+  "This preview expired. Preview the transfer again.": "Bản xem trước đã hết hạn. Xem trước việc chuyển tiếp lần nữa."
 }

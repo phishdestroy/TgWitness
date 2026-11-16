@@ -9883,5 +9883,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "Faqat matn va ilova nomlari. Uzun tanlovlar sahifalarga bo‘linadi.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "Tanlangan ayrim xabarlar yuklangan oraliqdan tashqarida. Ularni qayta yuklang yoki tanlovni o‘zgartiring.",
   "Rendered from saved messages": "Saqlangan xabarlardan yaratildi",
-  "Could not create the image. Try fewer messages.": "Rasmni yaratib bo‘lmadi. Kamroq xabar tanlang."
+  "Could not create the image. Try fewer messages.": "Rasmni yaratib bo‘lmadi. Kamroq xabar tanlang.",
+  "Forward chat": "Chatni uzatish",
+  "New channel": "Yangi kanal",
+  "Existing channel or group": "Mavjud kanal yoki guruh",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "Mavjud Telegram tarixini tartib bilan uzating. Yangi kanallar va guruhlar yopiq bo‘ladi. Uzatish cheklovlari amal qiladi.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "Yaratish natijasi noma’lum. Yana ko‘chirishni boshlashdan oldin Telegramni tekshiring.",
+  "Message outcome unknown. Review the destination before resuming.": "Yuborish natijasi noma’lum. Davom etishdan oldin manzilni tekshiring.",
+  "Forwarding is restricted in this chat.": "Bu chatda xabarlarni uzatish cheklangan.",
+  "Choose a channel or group where this account can post.": "Bu hisob xabar yoza oladigan kanal yoki guruhni tanlang.",
+  "Enter a title for the new channel or group.": "Yangi kanal yoki guruh nomini kiriting.",
+  "The history page is not in message order.": "Tarix sahifasidagi xabarlar tartibda emas.",
+  "No messages to export.": "Eksport qilinadigan xabarlar yo‘q.",
+  "The album is too large to forward intact.": "Albomni butunligicha uzatish uchun u juda katta.",
+  "The Telegram account changed. Start a new transfer.": "Telegram hisobi o‘zgardi. Yangi ko‘chirishni boshlang.",
+  "This preview expired. Preview the transfer again.": "Bu ko‘rib chiqish eskirgan. Ko‘chirishni qayta ko‘rib chiqing."
 }

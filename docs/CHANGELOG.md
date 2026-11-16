@@ -40,6 +40,16 @@
   UTC times, reply references, attachment labels and edit/deletion marks. Long
   messages continue across pages. Rendering stays in the browser, masks possible
   secrets and clears the preview on lock or workspace/chat changes.
+- Cloud-chat history can be forwarded in order to a new private channel or
+  supergroup, or an existing channel/group with posting access. A preview fixes
+  the history boundary before an explicit start. Transfers retain albums, shared
+  pacing and FloodWait, support pause/resume/cancel, and journal confirmed sends
+  and skips. Unknown send results require review; unknown creation results never
+  trigger an automatic second creation. Available to the main administrator.
+- Forwarding restores durable progress after journal failures and releases the
+  account after failed starts, resumes and shutdown writes. Cancellation survives
+  rejected requests and a final empty history page; stale polling errors no longer
+  replace newer dialog feedback.
 - Four priority lanes (`realtime`, `text`, `media`, `maintenance`) share account capacity; realtime updates always proceed and are never slowed by downloads or rechecks. Each lane tracks per-account FloodWait quotas, and the text and media lanes run on separate connections so a wait on one does not block the other.
 - Self-destructing media has its own download pool with priority over all other media; if expiry is less than 30 seconds away, all other media downloads on that account pause until the ephemeral file is secured.
 - A background worker refreshes expired `file_reference` tokens in batches of up to 100 message IDs per peer, reducing permanently failed attachment downloads from expired references.

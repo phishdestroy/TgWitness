@@ -212,6 +212,54 @@ attachment labels. The preview holds a snapshot until closed and clears on panel
 lock or a workspace/chat change. The signed journal and report selection remain
 unchanged. See [case reports](CASE_REPORTS.md) for complete report exports.
 
+### Forward a chat to a channel or group
+
+The main administrator can open a saved cloud chat and choose **Forward chat**
+from its tools menu. Choose **New channel**, **New group**, or **Existing channel
+or group**. New destinations are private; an existing destination uses its numeric
+Telegram ID and must allow this account to post. Forum destinations are not supported.
+
+Pause observation or another active account job and enable Telegram actions before
+previewing. Read-only accounts and the **Evidence for a case** goal block transfers.
+**Preview** reads the accessible Telegram history boundary and checks the destination.
+It does not create a destination or send messages. **Start** starts the transfer;
+the preview expires after ten minutes. One transfer can be active per workspace.
+
+The transfer reads Telegram history from oldest to newest, through the last message
+seen in the preview. It is not limited to the messages already saved in TgWitness.
+Messages arriving above that boundary are excluded. Native forwarding preserves
+Telegram's available author attribution and media without downloading and uploading
+copies. Albums within the boundary stay together. Notifications are silent. Replies,
+topic structure, reactions, edits and deleted or inaccessible messages are not
+reconstructed. Secret Chats are outside this workflow. Telegram's content protection
+and posting restrictions remain in force.
+
+The panel shows confirmed sends, skips, state and the next allowed attempt time.
+Service messages and individually protected messages are skipped with a recorded
+reason. Account message spacing and hourly limits apply to every message; an album
+waits until its reserved slots are due. FloodWait and slow-mode pauses update the
+account's shared RPC backoff. The account's existing pacing defaults remain unchanged.
+
+**Pause** stops between requests; **Cancel** stops remaining work without removing
+messages already sent or deleting a created destination. An in-flight request may
+finish before either action takes effect. Closing the dialog does not cancel a job.
+After a process restart, unfinished jobs require an explicit **Resume**. A lost or
+incomplete send response pauses the job for review: inspect the destination before
+resuming. A retry retains the stored Telegram random IDs and confirmed counts;
+this is not a guarantee of indefinite deduplication by Telegram. An unknown creation
+result cannot be resumed automatically: check Telegram and cancel the old job before
+starting a new transfer to the destination that was created, if any.
+
+If saving a job or its journal entry fails, the worker restores the last saved
+state and releases the account. A send or creation that may already have reached
+Telegram remains marked for review. Retry a failed start or resume after storage
+is available again; confirmed progress advances only with its journal entry.
+
+Signed `interaction.forward.*` journal entries record the boundary, destination,
+confirmed source/destination message IDs and skips. They document the transfer;
+they do not replace the original signed observations and exports.
+
+
 ## Journal
 
 Every record the workspace has signed, newest first.

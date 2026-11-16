@@ -9955,5 +9955,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "Только текст и названия вложений. Длинные подборки разбиваются на страницы.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "Некоторые выбранные сообщения не загружены. Загрузите их снова или измените выбор.",
   "Rendered from saved messages": "Создано из сохранённых сообщений",
-  "Could not create the image. Try fewer messages.": "Не удалось создать изображение. Выберите меньше сообщений."
+  "Could not create the image. Try fewer messages.": "Не удалось создать изображение. Выберите меньше сообщений.",
+  "Forward chat": "Переслать чат",
+  "New channel": "Новый канал",
+  "Existing channel or group": "Существующий канал или группа",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "Пересылка доступной истории Telegram по порядку. Новые каналы и группы создаются приватными. Действуют ограничения на пересылку.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "Результат создания неизвестен. Проверьте Telegram перед новым переносом.",
+  "Message outcome unknown. Review the destination before resuming.": "Результат отправки неизвестен. Проверьте сообщения в месте назначения перед продолжением.",
+  "Forwarding is restricted in this chat.": "В этом чате ограничена пересылка.",
+  "Choose a channel or group where this account can post.": "Выберите канал или группу, где этот аккаунт может публиковать сообщения.",
+  "Enter a title for the new channel or group.": "Введите название нового канала или группы.",
+  "The history page is not in message order.": "Сообщения на странице истории идут не по порядку.",
+  "No messages to export.": "Нет сообщений для экспорта.",
+  "The album is too large to forward intact.": "Альбом слишком большой для пересылки целиком.",
+  "The Telegram account changed. Start a new transfer.": "Аккаунт Telegram изменился. Начните новый перенос.",
+  "This preview expired. Preview the transfer again.": "Предпросмотр устарел. Просмотрите перенос ещё раз."
 }

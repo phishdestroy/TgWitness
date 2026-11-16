@@ -9883,5 +9883,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "Nur Text und Anhangsbezeichnungen. Lange Auswahlen werden auf Seiten verteilt.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "Einige ausgewählte Nachrichten liegen außerhalb des geladenen Bereichs. Laden Sie sie erneut oder ändern Sie die Auswahl.",
   "Rendered from saved messages": "Aus gespeicherten Nachrichten erstellt",
-  "Could not create the image. Try fewer messages.": "Das Bild konnte nicht erstellt werden. Wählen Sie weniger Nachrichten aus."
+  "Could not create the image. Try fewer messages.": "Das Bild konnte nicht erstellt werden. Wählen Sie weniger Nachrichten aus.",
+  "Forward chat": "Chat weiterleiten",
+  "New channel": "Neuer Kanal",
+  "Existing channel or group": "Bestehender Kanal oder bestehende Gruppe",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "Verfügbare Telegram-Nachrichten der Reihe nach weiterleiten. Neue Kanäle und Gruppen sind privat. Weiterleitungsbeschränkungen gelten.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "Ergebnis der Erstellung unbekannt. Prüfen Sie Telegram vor einer weiteren Übertragung.",
+  "Message outcome unknown. Review the destination before resuming.": "Sendeergebnis unbekannt. Prüfen Sie das Ziel, bevor Sie fortfahren.",
+  "Forwarding is restricted in this chat.": "Die Weiterleitung ist in diesem Chat eingeschränkt.",
+  "Choose a channel or group where this account can post.": "Wählen Sie einen Kanal oder eine Gruppe, in denen dieses Konto Nachrichten senden darf.",
+  "Enter a title for the new channel or group.": "Geben Sie einen Namen für den neuen Kanal oder die neue Gruppe ein.",
+  "The history page is not in message order.": "Die Verlaufsseite enthält Nachrichten in falscher Reihenfolge.",
+  "No messages to export.": "Keine Nachrichten zum Exportieren.",
+  "The album is too large to forward intact.": "Das Album ist zu groß, um es vollständig weiterzuleiten.",
+  "The Telegram account changed. Start a new transfer.": "Das Telegram-Konto wurde geändert. Starten Sie eine neue Übertragung.",
+  "This preview expired. Preview the transfer again.": "Diese Vorschau ist abgelaufen. Zeigen Sie die Übertragung erneut in der Vorschau an."
 }

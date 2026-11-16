@@ -9883,5 +9883,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "صرف متن اور منسلک فائلوں کے نام۔ طویل انتخاب صفحات میں تقسیم ہوتا ہے۔",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "کچھ منتخب پیغامات لوڈ شدہ حد سے باہر ہیں۔ انہیں دوبارہ لوڈ کریں یا انتخاب تبدیل کریں۔",
   "Rendered from saved messages": "محفوظ شدہ پیغامات سے تیار کردہ",
-  "Could not create the image. Try fewer messages.": "تصویر نہیں بن سکی۔ کم پیغامات منتخب کریں۔"
+  "Could not create the image. Try fewer messages.": "تصویر نہیں بن سکی۔ کم پیغامات منتخب کریں۔",
+  "Forward chat": "چیٹ فارورڈ کریں",
+  "New channel": "نیا چینل",
+  "Existing channel or group": "موجودہ چینل یا گروپ",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "دستیاب Telegram ہسٹری ترتیب سے فارورڈ کریں۔ نئے چینل اور گروپ نجی ہوتے ہیں۔ فارورڈ کرنے کی پابندیاں لاگو ہوتی ہیں۔",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "بنانے کا نتیجہ نامعلوم ہے۔ دوسری منتقلی شروع کرنے سے پہلے Telegram دیکھیں۔",
+  "Message outcome unknown. Review the destination before resuming.": "بھیجنے کا نتیجہ نامعلوم ہے۔ دوبارہ شروع کرنے سے پہلے منزل کا جائزہ لیں۔",
+  "Forwarding is restricted in this chat.": "اس چیٹ میں فارورڈ کرنے پر پابندی ہے۔",
+  "Choose a channel or group where this account can post.": "ایسا چینل یا گروپ منتخب کریں جہاں یہ اکاؤنٹ پوسٹ کر سکتا ہو۔",
+  "Enter a title for the new channel or group.": "نئے چینل یا گروپ کا نام درج کریں۔",
+  "The history page is not in message order.": "ہسٹری کے صفحے پر پیغامات ترتیب میں نہیں ہیں۔",
+  "No messages to export.": "برآمد کرنے کے لیے کوئی پیغام نہیں۔",
+  "The album is too large to forward intact.": "البم اتنا بڑا ہے کہ اسے مکمل فارورڈ نہیں کیا جا سکتا۔",
+  "The Telegram account changed. Start a new transfer.": "Telegram اکاؤنٹ تبدیل ہو گیا ہے۔ نئی منتقلی شروع کریں۔",
+  "This preview expired. Preview the transfer again.": "اس پیش نظارے کی مدت ختم ہو گئی۔ منتقلی کا پیش نظارہ دوبارہ دیکھیں۔"
 }

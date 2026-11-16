@@ -27,6 +27,10 @@ GROUP_ID = re.compile(r"[a-f0-9]{32}")
 
 
 POLICY = {
+    "GET /api/history-forward": None,
+    "POST /api/history-forward/plan": None,
+    "POST /api/history-forward/start": None,
+    "POST /api/history-forward/{job_id}/{action}": None,
     "GET /api/capture": ("settings", None),
     "POST /api/capture/{kind}/connection": ("settings", None),
     "GET /api/capture/{kind}/status": ("settings", None),

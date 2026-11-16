@@ -9893,5 +9893,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "Solo testo e nomi degli allegati. Le selezioni lunghe sono suddivise in pagine.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "Alcuni messaggi selezionati non sono caricati. Caricali di nuovo o modifica la selezione.",
   "Rendered from saved messages": "Creato dai messaggi salvati",
-  "Could not create the image. Try fewer messages.": "Impossibile creare l’immagine. Seleziona meno messaggi."
+  "Could not create the image. Try fewer messages.": "Impossibile creare l’immagine. Seleziona meno messaggi.",
+  "Forward chat": "Inoltra chat",
+  "New channel": "Nuovo canale",
+  "Existing channel or group": "Canale o gruppo esistente",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "Inoltra in ordine la cronologia Telegram disponibile. I nuovi canali e gruppi sono privati. Si applicano le restrizioni di inoltro.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "Esito della creazione sconosciuto. Controlla Telegram prima di un altro trasferimento.",
+  "Message outcome unknown. Review the destination before resuming.": "Esito dell’invio sconosciuto. Controlla la destinazione prima di riprendere.",
+  "Forwarding is restricted in this chat.": "L’inoltro è limitato in questa chat.",
+  "Choose a channel or group where this account can post.": "Scegli un canale o gruppo in cui questo account può pubblicare.",
+  "Enter a title for the new channel or group.": "Inserisci un nome per il nuovo canale o gruppo.",
+  "The history page is not in message order.": "I messaggi nella pagina della cronologia non sono in ordine.",
+  "No messages to export.": "Nessun messaggio da esportare.",
+  "The album is too large to forward intact.": "L’album è troppo grande per essere inoltrato interamente.",
+  "The Telegram account changed. Start a new transfer.": "L’account Telegram è cambiato. Avvia un nuovo trasferimento.",
+  "This preview expired. Preview the transfer again.": "Questa anteprima è scaduta. Visualizza nuovamente l’anteprima del trasferimento."
 }

@@ -9985,5 +9985,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "Лише текст і назви вкладень. Довгі добірки поділяються на сторінки.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "Деякі вибрані повідомлення не завантажено. Завантажте їх знову або змініть вибір.",
   "Rendered from saved messages": "Створено зі збережених повідомлень",
-  "Could not create the image. Try fewer messages.": "Не вдалося створити зображення. Виберіть менше повідомлень."
+  "Could not create the image. Try fewer messages.": "Не вдалося створити зображення. Виберіть менше повідомлень.",
+  "Forward chat": "Переслати чат",
+  "New channel": "Новий канал",
+  "Existing channel or group": "Наявний канал або група",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "Пересилання доступної історії Telegram за порядком. Нові канали та групи створюються приватними. Діють обмеження пересилання.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "Результат створення невідомий. Перевірте Telegram перед новим перенесенням.",
+  "Message outcome unknown. Review the destination before resuming.": "Результат надсилання невідомий. Перевірте місце призначення перед продовженням.",
+  "Forwarding is restricted in this chat.": "У цьому чаті обмежено пересилання.",
+  "Choose a channel or group where this account can post.": "Виберіть канал або групу, де цей обліковий запис може публікувати повідомлення.",
+  "Enter a title for the new channel or group.": "Введіть назву нового каналу або групи.",
+  "The history page is not in message order.": "Повідомлення на сторінці історії розташовані не за порядком.",
+  "No messages to export.": "Немає повідомлень для експорту.",
+  "The album is too large to forward intact.": "Альбом завеликий для пересилання цілком.",
+  "The Telegram account changed. Start a new transfer.": "Обліковий запис Telegram змінився. Почніть нове перенесення.",
+  "This preview expired. Preview the transfer again.": "Попередній перегляд застарів. Перегляньте перенесення знову."
 }

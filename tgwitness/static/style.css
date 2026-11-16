@@ -2520,3 +2520,12 @@ button.primary[aria-busy=true]::after { color: #fff; }
   .message-image-footer button { padding-inline: 10px; }
   .message-image-footer .primary { flex-basis: 100%; }
 }
+.history-forward-dialog { width: min(620px, calc(100vw - 24px)); max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); overflow: auto; padding: 20px; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-large); }
+.forward-head, .forward-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.forward-head h2 { margin: 0; margin-inline-end: auto; font: var(--type-section); }
+.history-forward-dialog form { display: grid; gap: 12px; }
+.history-forward-dialog label { display: grid; gap: 6px; }
+.forward-details { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr); gap: 8px 16px; padding: 16px 0; border-block: 1px solid var(--border); }
+.forward-details dt { color: var(--muted); }.forward-details dd { margin: 0; overflow-wrap: anywhere; }
+.forward-summary p { overflow-wrap: anywhere; }.history-forward-dialog > .notice:empty { display: none; }
+@media (max-width: 480px) { .history-forward-dialog { padding: 14px; }.forward-details { grid-template-columns: 1fr; gap: 4px; }.forward-details dd { margin-bottom: 8px; } }

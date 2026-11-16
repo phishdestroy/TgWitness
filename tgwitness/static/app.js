@@ -5413,7 +5413,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
 function beginChat(id){
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
-  messageImage?.close();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
+  messageImage?.close();historyForward?.close();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
   clearTimeout(chatSearchTimer);state.chatSearch="";$("chat-message-search").value="";
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
@@ -5643,6 +5643,7 @@ function renderChatStatus(){
   }
   const blocked=s.demo||!c.has_session||!info.enabled||(c.available_for_export===false&&!c.running);
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
+  forwardButton.hidden = !state.me?.admin || s.demo;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
   if(focusedFilter)summary.focus({preventScroll:true});
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
@@ -6060,6 +6061,19 @@ async function imageForSelection() {
   await messageImage.open(value, current);
 }
 window.addEventListener('tgwitness:lock', () => messageImage?.close());
+let historyForward = null;
+const forwardButton = node('button', 'quiet', tr('Forward chat'));forwardButton.type = 'button';forwardButton.id = 'chat-forward-history';
+$('chat-pattern').before(forwardButton);
+forwardButton.addEventListener('click', () => busy(forwardButton, async () => {
+  const owner = actionOwner(), chat = state.chat, generation = chatGeneration;
+  $('chat-tools-menu').open = false;
+  const {createHistoryForward} = await import('./views/history-forward.js?v=1');
+  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
+  if (!current()) return;
+  historyForward ||= createHistoryForward({json, tr, confirm: message => askConfirm(message)});
+  await historyForward.open({id: chat, title: state.chatInfo?.title || tr('Chat {id}', {id: chat})}, current);
+}));
+window.addEventListener('tgwitness:lock', () => historyForward?.close());
 
 let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
 let chatSearchTimer=null,chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
@@ -6092,7 +6106,7 @@ const chatSafety=window.TgWitnessChatSafety?.create({
   changed:()=>{composeOpen=false;composeReply=null;renderComposer();renderChatFeed();}});
 const pendingActions=new Map();
 function resetInteractions(){
-  messageImage?.close();
+  messageImage?.close();historyForward?.close();
   chatSafety?.reset();
   $("chat-history-feedback")?.remove();
   composeContext=null;composeReply=null;composeOpen=false;linkPreview=null;

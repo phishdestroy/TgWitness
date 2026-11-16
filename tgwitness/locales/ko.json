@@ -9832,5 +9832,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "텍스트와 첨부 파일 이름만 포함합니다. 긴 선택 내용은 여러 페이지로 나뉩니다.",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "선택한 메시지 일부가 불러온 범위 밖에 있습니다. 다시 불러오거나 선택을 변경하세요.",
   "Rendered from saved messages": "저장된 메시지로 생성됨",
-  "Could not create the image. Try fewer messages.": "이미지를 만들 수 없습니다. 메시지를 더 적게 선택하세요."
+  "Could not create the image. Try fewer messages.": "이미지를 만들 수 없습니다. 메시지를 더 적게 선택하세요.",
+  "Forward chat": "대화 전달",
+  "New channel": "새 채널",
+  "Existing channel or group": "기존 채널 또는 그룹",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "접근 가능한 Telegram 기록을 순서대로 전달합니다. 새 채널과 그룹은 비공개입니다. 전달 제한이 적용됩니다.",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "생성 결과를 알 수 없습니다. 다른 전송을 시작하기 전에 Telegram을 확인하세요.",
+  "Message outcome unknown. Review the destination before resuming.": "전송 결과를 알 수 없습니다. 재개하기 전에 대상을 확인하세요.",
+  "Forwarding is restricted in this chat.": "이 대화에서는 전달이 제한됩니다.",
+  "Choose a channel or group where this account can post.": "이 계정이 게시할 수 있는 채널 또는 그룹을 선택하세요.",
+  "Enter a title for the new channel or group.": "새 채널 또는 그룹의 이름을 입력하세요.",
+  "The history page is not in message order.": "기록 페이지의 메시지 순서가 올바르지 않습니다.",
+  "No messages to export.": "내보낼 메시지가 없습니다.",
+  "The album is too large to forward intact.": "앨범이 너무 커서 통째로 전달할 수 없습니다.",
+  "The Telegram account changed. Start a new transfer.": "Telegram 계정이 변경되었습니다. 새 전송을 시작하세요.",
+  "This preview expired. Preview the transfer again.": "이 미리보기는 만료되었습니다. 전송 내용을 다시 미리 보세요."
 }

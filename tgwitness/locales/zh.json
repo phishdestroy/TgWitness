@@ -9832,5 +9832,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "仅包含文本和附件名称。较长的选中内容会分页。",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "部分选中的消息不在已加载范围内。请重新加载或更改选择。",
   "Rendered from saved messages": "根据已保存的消息生成",
-  "Could not create the image. Try fewer messages.": "无法生成图片。请减少选中的消息数量。"
+  "Could not create the image. Try fewer messages.": "无法生成图片。请减少选中的消息数量。",
+  "Forward chat": "转发聊天",
+  "New channel": "新建频道",
+  "Existing channel or group": "现有频道或群组",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "按顺序转发可访问的 Telegram 历史记录。新频道和群组均为私密。转发限制仍然适用。",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "创建结果未知。开始另一次转移前，请检查 Telegram。",
+  "Message outcome unknown. Review the destination before resuming.": "发送结果未知。继续前，请检查目标会话。",
+  "Forwarding is restricted in this chat.": "此聊天限制转发。",
+  "Choose a channel or group where this account can post.": "请选择此账号可以发帖的频道或群组。",
+  "Enter a title for the new channel or group.": "请输入新频道或群组的名称。",
+  "The history page is not in message order.": "历史页面上的消息顺序不正确。",
+  "No messages to export.": "没有可导出的消息。",
+  "The album is too large to forward intact.": "相册过大，无法完整转发。",
+  "The Telegram account changed. Start a new transfer.": "Telegram 账号已更改。请开始新的转移。",
+  "This preview expired. Preview the transfer again.": "此预览已过期。请重新预览转移内容。"
 }

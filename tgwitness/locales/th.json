@@ -9832,5 +9832,19 @@
   "Text and attachment labels only. Long selections are split into pages.": "มีเฉพาะข้อความและชื่อไฟล์แนบ ส่วนที่เลือกที่ยาวจะถูกแบ่งเป็นหน้า",
   "Some selected messages are outside the loaded window. Load them again or change the selection.": "ข้อความที่เลือกบางรายการอยู่นอกช่วงที่โหลด โปรดโหลดใหม่หรือเปลี่ยนการเลือก",
   "Rendered from saved messages": "สร้างจากข้อความที่บันทึกไว้",
-  "Could not create the image. Try fewer messages.": "สร้างรูปภาพไม่ได้ โปรดลองเลือกข้อความให้น้อยลง"
+  "Could not create the image. Try fewer messages.": "สร้างรูปภาพไม่ได้ โปรดลองเลือกข้อความให้น้อยลง",
+  "Forward chat": "ส่งต่อแชต",
+  "New channel": "ช่องใหม่",
+  "Existing channel or group": "ช่องหรือกลุ่มที่มีอยู่",
+  "Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.": "ส่งต่อประวัติ Telegram ที่เข้าถึงได้ตามลำดับ ช่องและกลุ่มใหม่จะเป็นแบบส่วนตัว โดยยังอยู่ภายใต้ข้อจำกัดการส่งต่อ",
+  "Creation outcome unknown. Check Telegram before starting another transfer.": "ไม่ทราบผลการสร้าง โปรดตรวจสอบ Telegram ก่อนเริ่มการโอนอีกครั้ง",
+  "Message outcome unknown. Review the destination before resuming.": "ไม่ทราบผลการส่ง โปรดตรวจสอบปลายทางก่อนดำเนินการต่อ",
+  "Forwarding is restricted in this chat.": "แชตนี้จำกัดการส่งต่อ",
+  "Choose a channel or group where this account can post.": "เลือกช่องหรือกลุ่มที่บัญชีนี้สามารถโพสต์ได้",
+  "Enter a title for the new channel or group.": "ป้อนชื่อช่องหรือกลุ่มใหม่",
+  "The history page is not in message order.": "ข้อความในหน้าประวัติไม่ได้เรียงตามลำดับ",
+  "No messages to export.": "ไม่มีข้อความให้ส่งออก",
+  "The album is too large to forward intact.": "อัลบั้มใหญ่เกินกว่าจะส่งต่อทั้งชุดได้",
+  "The Telegram account changed. Start a new transfer.": "บัญชี Telegram เปลี่ยนไป โปรดเริ่มการโอนใหม่",
+  "This preview expired. Preview the transfer again.": "ตัวอย่างนี้หมดอายุแล้ว โปรดดูตัวอย่างการโอนอีกครั้ง"
 }
