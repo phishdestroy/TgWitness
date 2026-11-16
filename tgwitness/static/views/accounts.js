@@ -3,7 +3,7 @@ import {accountState} from "../components/account-state.js";
 export function createAccounts(context) {
   const {root,tr,getState,getSession,json,loadProfiles,refreshStatus,toast,switchProfile,navigate,diagnose}=context;
   const find=id=>root.querySelector('#'+id), listeners=new AbortController(), selected=new Set();
-  let session=getSession(), page=0, working=false, visible=[];
+  let session=getSession(), page=0, working=false, visible=[], operation=null;
   const make=(tag,cls='',text='')=>{const n=root.ownerDocument.createElement(tag);n.className=cls;n.textContent=text;return n;};
   const on=(node,event,fn)=>node.addEventListener(event,fn,{signal:listeners.signal});
   const profiles=()=>getState().profiles||[];
@@ -23,7 +23,7 @@ export function createAccounts(context) {
     if(![...find('accounts-filter').options].some(option=>option.value===value))find('accounts-filter').add(new Option(tr(label),value));
   }
   function resetSession(){
-    session=getSession();selected.clear();working=false;page=0;
+    session=getSession();operation=null;selected.clear();working=false;page=0;
     find('accounts-result').hidden=true;find('accounts-result').textContent='';
     find('accounts-search').value='';find('accounts-filter').value='all';find('accounts-sort').value='attention';
     find('accounts-overview').replaceChildren();find('accounts-selected').textContent=tr('{n} selected',{n:0});
@@ -110,31 +110,44 @@ export function createAccounts(context) {
     find('accounts-prev').disabled=page===0;find('accounts-next').disabled=(page+1)*10>=filtered.length;controls();
   }
   async function run(action){
-    if(working||!allowed())return;
+    if(working||!allowed()||listeners.signal.aborted)return;
+    if(session!==getSession()){resetSession();updateStatus();return;}
     const chosen=profiles().filter(p=>selected.has(p.id)&&eligible(p,action));if(!chosen.length)return;
+    const started=getSession(),ticket={},button=find(action==='stop'?'accounts-pause':'accounts-resume');
+    const focused=root.ownerDocument.activeElement===button;operation=ticket;working=true;
+    const current=()=>operation===ticket&&started===getSession()&&!listeners.signal.aborted;
+    updateStatus();
     const text=action==='stop'?tr('Pause {n} workspaces? New messages, edits and deletions will not be collected while paused. Missed activity can only be recovered partly.',{n:chosen.length}):
       tr('Resume {n} workspaces? They will connect to Telegram and collect their selected sources. Telegram request limits still apply.',{n:chosen.length});
-    if(!(await window.TgWitnessDialogs.confirm(text+'\n\n'+chosen.map(p=>p.label).join('\n'))))return;
-    const started=getSession();working=true;updateStatus();const done=[],failed=[];
+    const done=[],failed=[];
     try{
+      if(!(await window.TgWitnessDialogs.confirm(text+'\n\n'+chosen.map(p=>p.label).join('\n')))||!current()||!allowed())return;
+      const result=find('accounts-result');result.hidden=true;result.textContent='';
       for(const p of chosen){
-        if(started!==getSession()||!allowed())return;
-        const current=profiles().find(value=>value.id===p.id);if(!current||!eligible(current,action))continue;
-        try{await json('collector/'+action,{},{profile:p.id});if(started!==getSession())return;done.push(p.label);selected.delete(p.id);}
-        catch(error){if(started!==getSession()||error.name==='StaleView')return;failed.push(p.label+': '+error.message);}
+        if(!current()||!allowed())return;
+        const profile=profiles().find(value=>value.id===p.id);if(!profile||!eligible(profile,action))continue;
+        try{await json('collector/'+action,{},{profile:p.id});if(!current())return;done.push(p.label);selected.delete(p.id);}
+        catch(error){if(!current()||error.name==='StaleView')return;failed.push(p.label+': '+error.message);}
       }
-      if(started!==getSession())return;
-      const result=find('accounts-result');result.hidden=false;
-      result.textContent=tr('{n} workspaces updated.',{n:done.length})+(failed.length?' '+tr('Not changed: {list}',{list:failed.join('; ')}):'');
-      await loadProfiles();if(started===getSession())await refreshStatus();
-    }finally{if(started===getSession()){working=false;updateStatus();}}
+      if(!current())return;
+      result.classList.toggle('warning',failed.length>0);result.hidden=false;
+      const summary=done.length||!failed.length?tr('{n} workspaces updated.',{n:done.length}):'';
+      result.textContent=summary+(failed.length?(summary?' ':'')+tr('Request failed')+': '+failed.join('; '):'');
+      await loadProfiles();if(current())await refreshStatus();
+    }catch(error){if(current()&&error.name!=='StaleView')toast(error.message,true);}
+    finally{if(current()){
+      operation=null;working=false;updateStatus();
+      if(focused&&root.isConnected&&root.ownerDocument.activeElement===root.ownerDocument.body){
+        const target=button.disabled?find('accounts-select-page'):button;if(!target.disabled)target.focus();
+      }
+    }}
   }
   for(const id of ['accounts-search','accounts-filter','accounts-sort'])on(find(id),id==='accounts-search'?'input':'change',()=>{page=0;updateStatus();});
   on(find('accounts-prev'),'click',()=>{page--;updateStatus();});on(find('accounts-next'),'click',()=>{page++;updateStatus();});
   on(find('accounts-select-page'),'change',event=>{for(const p of visible)if(!p.error_type)event.target.checked?selected.add(p.id):selected.delete(p.id);updateStatus();});
   on(find('accounts-clear'),'click',()=>{selected.clear();updateStatus();});
-  on(find('accounts-pause'),'click',()=>run('stop').catch(error=>toast(error.message,true)));
-  on(find('accounts-resume'),'click',()=>run('start').catch(error=>toast(error.message,true)));
+  on(find('accounts-pause'),'click',()=>run('stop'));
+  on(find('accounts-resume'),'click',()=>run('start'));
   on(find('fleet-group-new'),'click',()=>{find('accounts-groups').open=true;});
   return {ownsRows:true,updateStatus,enter:updateStatus,resetSession,leave(){},destroy(){listeners.abort();resetSession();}};
 }

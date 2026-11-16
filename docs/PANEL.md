@@ -311,6 +311,13 @@ Progress survives a restart; attachments follow your media settings. See
   **Account security → Witness probe** uses a second workspace to check that this
   session receives updates live; see [witness probe](ACCOUNTS.md#witness-probe).
 
+Bulk pause and resume keep the confirmed selection within the session where it
+was opened. Controls stay disabled while confirmation or execution is pending;
+changing workspaces or locking the panel cancels the remaining commands.
+After execution, the panel refreshes account states. A failed request is reported
+as a request failure: a lost response does not prove that the server left the
+collector unchanged. Commands are not automatically repeated.
+
 ## Extras
 
 Optional: an account and sources are enough to start collecting. Only the option you
