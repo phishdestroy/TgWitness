@@ -98,6 +98,7 @@ SECURITY_LOG_USER = 777000
 SECURITY_EVENT_MEANING = ("Security notice from Telegram (user 777000). "
                           "login_code: an SMS code was requested for this account. "
                           "new_login: a new session was authorized. "
+                          "data_export: a session of this account asked to export its Telegram data. "
                           "2fa_changed: two-step verification was changed. "
                           "during_observation: Telegram sent the notice after this observation run began.")
 SECURITY_BASELINE_MEANING = ("Security notices from Telegram (user 777000) that were already present when this "
@@ -137,6 +138,7 @@ def sessions_snapshot(authorizations):
 def security_notice(message):
     text = message.message or ""
     kind = ("login_code" if "Login code:" in text else
+            "data_export" if "data export request" in text.lower() else
             "new_login" if "logged in" in text.lower() or "new login" in text.lower() else
             "2fa_changed" if "Two-Step Verification" in text else
             "oauth_login" if "via @" in text or "logged in on" in text.lower() else

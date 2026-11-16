@@ -28,6 +28,7 @@
 - History reading no longer skips chats Telegram marks as restricted; the restriction stays in the journal
   and whatever Telegram delivers is saved. Messages keep their own restriction reasons. On connect the
   account allows sensitive (18+) content when Telegram lets it, recorded as `account.content_settings`.
+- Telegram's data export notice is recorded as `data_export` instead of a new sign-in.
 - Bulk account pause/resume prevents overlapping confirmations and discards stale
   operations after session resets. Failed responses no longer claim that the
   collector was unchanged; account states are refreshed without repeating commands.
