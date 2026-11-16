@@ -842,12 +842,15 @@ class Collector:
             waited = self.session_age()
             if waited is not None:
                 context["session_age_seconds"] = round(waited)
-            found = self.store.events_of(("account.sessions",), limit=1)
+            found = self.session_observation()
             if found:
-                context["sessions_checked_at"] = found[0]["observed_at"]
+                checked = self.store.get_setting("sessions_checked", {}) or {}
+                context["sessions_checked_at"] = checked.get("at") or found["observed_at"]
+                context["sessions_observed_at"] = found["observed_at"]
+                context["sessions_event_seq"] = found["seq"]
                 context["other_sessions"] = [{key: entry.get(key) for key in ("device_model", "app_name", "api_id",
                                                                                "country", "created_at")}
-                                             for entry in (found[0]["payload"] or {}).get("others") or []]
+                                             for entry in (found["payload"] or {}).get("others") or []]
             notice = self.store.events_of(("account.security_event",), limit=1)
             if notice:
                 context["last_security_notice"] = {key: (notice[0]["payload"] or {}).get(key)
@@ -2825,11 +2828,18 @@ class Collector:
 
     async def check_sessions(self, client=None):
         client = client or self.client
+        generation = self.authorization_generation
+
+        def current():
+            return client is self.client and generation == self.authorization_generation
+
         await asyncio.sleep(0)
         self.sessions_checking += 1
         try:
             result = await asyncio.wait_for(client(functions.account.GetAuthorizationsRequest()), 30)
         except AUTHORIZATION_ERRORS:
+            if not current():
+                return None
             previous = self.store.get_setting("sessions_seen", None)
             if previous and previous.get("current") is not None:
                 self.session_revoked = self.session_revoked or {"since": utcnow()}
@@ -2840,12 +2850,15 @@ class Collector:
                     "completeness": "records after this point were captured on a ghost session"})
             return None
         except FLOOD_ERRORS as exc:
-            self.sessions_checked_at = max(self.sessions_checked_at, time.monotonic() + exc.seconds)
+            if current():
+                self.sessions_checked_at = max(self.sessions_checked_at, time.monotonic() + exc.seconds)
             return None
         except Exception:
             return None
         finally:
             self.sessions_checking -= 1
+        if not current():
+            return None
         snapshot = sessions_snapshot(result.authorizations)
         self.store.set_setting("sessions_checked", {"at": utcnow(), "others": len(snapshot["others"]),
                                                     "current": snapshot["current"] is not None})
@@ -2856,7 +2869,7 @@ class Collector:
             self.session_revoked = None
         elif lost_current:
             self.session_revoked = self.session_revoked or {"since": utcnow()}
-        if previous != snapshot:
+        if previous != snapshot or self.session_observation() is None:
             known = {s["hash"] for s in (previous or {}).get("others", [])}
             now = {s["hash"] for s in snapshot["others"]}
             self.store.set_setting("sessions_seen", snapshot)
@@ -3122,10 +3135,17 @@ class Collector:
             return None
         return age(found[0]["observed_at"], now_utc())
 
+    def session_observation(self):
+        found = self.store.events_of(("account.sessions",), limit=1)
+        authorized = self.store.events_of(("account.authorized",), limit=1)
+        if not found or authorized and found[0]["seq"] < authorized[0]["seq"]:
+            return None
+        return found[0]
+
     def session_age(self):
         from .health import age, now_utc
-        found = self.store.events_of(("account.sessions",), limit=1)
-        created = ((found[0]["payload"] or {}).get("current") or {}).get("created_at") if found else None
+        found = self.session_observation()
+        created = ((found["payload"] or {}).get("current") or {}).get("created_at") if found else None
         waited = age(created, now_utc()) if created else None
         return waited if waited is not None else self.authorized_age()
 
