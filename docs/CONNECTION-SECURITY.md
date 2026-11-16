@@ -216,11 +216,14 @@ route separately. Manual fields remain available. See [Telegram proxy links](htt
 
 ### Public proxies supplied by your installation
 
-The built-in list combines four sources:
+The built-in list combines seven sources:
 [SoliSpirit/mtproto](https://github.com/SoliSpirit/mtproto),
 [zakky8/mtproto-proxy-pro](https://github.com/zakky8/mtproto-proxy-pro),
-[kort0881/telegram-proxy-collector](https://github.com/kort0881/telegram-proxy-collector)
-and [3yed-61/MTP-Collector](https://github.com/3yed-61/MTP-Collector).
+[kort0881/telegram-proxy-collector](https://github.com/kort0881/telegram-proxy-collector),
+[3yed-61/MTP-Collector](https://github.com/3yed-61/MTP-Collector),
+[Therealwh/MTPproxyLIST](https://github.com/Therealwh/MTPproxyLIST),
+[KhodeJav/telegram-proxy-collector](https://github.com/KhodeJav/telegram-proxy-collector)
+and [tgmtproxy/telegram-mtproto-proxy-list](https://github.com/tgmtproxy/telegram-mtproto-proxy-list).
 The bundled snapshot contains endpoint facts, source attribution and download dates.
 Listings are inputs; the connectivity checks below decide which proxies are used.
 

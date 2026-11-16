@@ -26,6 +26,7 @@
 ## Unreleased
 
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
+- The public MTProxy pool also reads the hourly list from tgmtproxy/telegram-mtproto-proxy-list.
 - Author profile collection finishes each person (profile, photos, gifts, links) before starting the next, so the
   “done” counter and the time estimate move from the start. Before, every stage ran for all people first and the
   counter stayed at zero for most of the run.

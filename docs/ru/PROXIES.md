@@ -13,13 +13,14 @@
 2. Нажмите **Проверьте подключение к Telegram**. Входить в аккаунт для этой проверки не нужно.
 3. Если соединение установлено, подключайте аккаунт и выбирайте источники наблюдения.
 
-**Обновите публичные списки** скачивает списки из шести источников:
+**Обновите публичные списки** скачивает списки из семи источников:
 [SoliSpirit/mtproto](https://github.com/SoliSpirit/mtproto),
 [zakky8/mtproto-proxy-pro](https://github.com/zakky8/mtproto-proxy-pro),
 [kort0881/telegram-proxy-collector](https://github.com/kort0881/telegram-proxy-collector),
 [3yed-61/MTP-Collector](https://github.com/3yed-61/MTP-Collector),
-[Therealwh/MTPproxyLIST](https://github.com/Therealwh/MTPproxyLIST) и
-[KhodeJav/telegram-proxy-collector](https://github.com/KhodeJav/telegram-proxy-collector).
+[Therealwh/MTPproxyLIST](https://github.com/Therealwh/MTPproxyLIST),
+[KhodeJav/telegram-proxy-collector](https://github.com/KhodeJav/telegram-proxy-collector) и
+[tgmtproxy/telegram-mtproto-proxy-list](https://github.com/tgmtproxy/telegram-mtproto-proxy-list).
 У каждого источника видна дата сохранения. Если источник временно недоступен или
 вернул только несовместимые записи, сохраняется его предыдущий список. Обновление
 не меняет вручную выбранный маршрут аккаунта. Автоматический MTProxy выбирает сервер
