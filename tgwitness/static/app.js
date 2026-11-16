@@ -5839,7 +5839,7 @@ function renderChatFeed(){
         settings.title=tr('Applies to future captures. Earlier files may no longer be available.');settings.addEventListener('click',()=>busy(settings,openRecordingSettings));notice.append(settings);}}
     next.push(notice);
   }
-  if(state.chatNextBefore){let older=feed.querySelector('.chat-older');if(!older){older=node("button","quiet chat-older",tr("Show older messages"));older.type="button";
+  if(state.chatNextBefore){let older=feed.querySelector('.chat-older:not(.chat-earlier)');if(!older){older=node("button","quiet chat-older",tr("Show older messages"));older.type="button";
     older.addEventListener("click",()=>busy(older,()=>loadChatMessages("older")));}next.push(older);}
   else{const info=state.chatInfo,c=s.collector,first=state.chatMessages[0]?.message_id;
     if(first>1&&state.chatView==='messages'&&state.chatFilter==='all'&&!state.chatSearch&&state.chatAuthor===null&&info?.enabled&&c.has_session&&!s.demo&&may('sources')
