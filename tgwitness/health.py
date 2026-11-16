@@ -281,10 +281,62 @@ def media(c, capture, now):
     return part("working", "ok", **detail)
 
 
-def collector(c, capture, heartbeat_seconds, enabled_sources, now):
+GAP_REASON = "Telegram reported that updates for this interval are too old to deliver"
+GAP_RECENT_SECONDS = 6 * 3600
+
+
+def finding(cause, confidence, action, **detail):
+    return {"cause": cause, "confidence": confidence, "action": action, **{k: v for k, v in detail.items() if v is not None}}
+
+
+def verdict(parts, c, now, gap_at=None):
+    link, feed, chats = parts["connection"], parts["intake"], parts["sources"]
+    if link["reason"] == "signed_out" or feed["reason"] == "session_revoked":
+        return finding("signed_out", "high", "sign_in", detail=link.get("cause"))
+    if feed["reason"] in ("updates_diverted", "probe_ack_missed_live"):
+        return finding("second_session", "high" if feed["reason"] == "probe_ack_missed_live" else "medium", "one_client",
+                       since=(c.get("probe_missed") or c.get("updates_diverted") or {}).get("since"))
+    if link["reason"] == "telegram_pause":
+        return finding("flood_wait", "high", "wait", until=link.get("telegram_pause_until"), method=link.get("telegram_pause_method"))
+    if feed["reason"] == "journal_write_failures" or link["reason"] == "storage_error":
+        return finding("stopped", "high", "free_disk")
+    if link["reason"] in ("collector_error", "resume_failed"):
+        return finding("stopped", "high", "restart", detail=link.get("error"))
+    if (c.get("account_restriction") or {}).get("kind") == "frozen":
+        return finding("restricted", "high", "check_account")
+    if link["reason"] == "reconnecting" or feed["reason"] == "disconnected":
+        return finding("route", "medium" if (link.get("attempts") or 0) >= 3 else "low", "check_route", detail=link.get("error"))
+    if link["reason"] == "no_account":
+        return finding("no_account", "high", "connect")
+    if link["reason"] == "paused":
+        return finding("paused", "high", "resume")
+    if feed["reason"] in ("stale", "no_heartbeat"):
+        return finding("not_responding", "medium", "restart")
+    if chats["state"] == "failed" or chats["reason"] == "no_sources":
+        return finding("no_chats" if chats["reason"] == "no_sources" else "chat_access", "high", "check_chats")
+    gap = age(gap_at, now)
+    if gap is not None and gap <= GAP_RECENT_SECONDS:
+        return finding("update_gap", "medium", "read_history", since=gap_at)
+    if chats["state"] == "degraded":
+        return finding("chat_access", "medium", "check_chats")
+    if feed["reason"] == "live":
+        return finding("quiet", "medium", "nothing", last_event_at=feed.get("last_event_at"))
+    return finding("unknown", "low", "diagnose")
+
+
+def collector(c, capture, heartbeat_seconds, enabled_sources, now, gap_at=None):
     parts = {"connection": connection(c, now), "intake": intake(c, heartbeat_seconds, now),
              "sources": sources(c, enabled_sources), "media": media(c, capture, now)}
-    return {**parts, "state": worst((parts["connection"]["state"], parts["intake"]["state"]))}
+    return {**parts, "state": worst((parts["connection"]["state"], parts["intake"]["state"])),
+            "verdict": verdict(parts, c, now, gap_at)}
+
+
+def last_gap(store):
+    with store.reading() as db:
+        row = db.execute("SELECT observed_at FROM (SELECT observed_at, payload, seq FROM events WHERE kind='coverage.gap' "
+                         "ORDER BY seq DESC LIMIT 200) WHERE json_extract(payload,'$.reason')=? ORDER BY seq DESC LIMIT 1",
+                         (GAP_REASON,)).fetchone()
+    return row[0] if row else None
 
 
 def collector_of(app_state, status=None, now=None, *, enabled_sources=None):
@@ -293,7 +345,8 @@ def collector_of(app_state, status=None, now=None, *, enabled_sources=None):
     store = app_state.store
     return collector(status or app_state.collector.status(), capture_settings(store),
                      tuning.value(store, "heartbeat_seconds"),
-                     len(store.targets(True)) if enabled_sources is None else enabled_sources, now or now_utc())
+                     len(store.targets(True)) if enabled_sources is None else enabled_sources, now or now_utc(),
+                     last_gap(store))
 
 
 def next_at(seconds, now=None):

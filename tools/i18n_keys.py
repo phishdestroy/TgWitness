@@ -18,6 +18,17 @@ PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "session_import.
                  "cloud_wizard.py", "levels.py", "capture_api.py", "capture_connections.py", "fulltext.py", "search_api.py", "gap_analysis.py")
 
 DYNAMIC_SCRIPT_KEYS = (
+    "Telegram signed this account out", "Updates are going to another session", "Telegram paused this account's requests",
+    "Observation stopped", "Telegram has frozen this account", "Telegram cannot be reached on the current route",
+    "No Telegram account is connected.", "Observation is paused.", "The collector is not responding", "No source is selected.",
+    "The account cannot read some chats", "Telegram could not deliver older updates", "Nothing is wrong: the chats are quiet",
+    "Cause unknown", "Sign in again", "Close the other client or import a new session for this account.",
+    "Observation waits and resumes on its own.", "Free disk space, then resume observation.",
+    "Restart observation. If it stops again, open Diagnostics.", "Check the account in the official Telegram app.",
+    "Check the route in connection settings or choose another proxy.", "Connect a Telegram account.", "Resume observation.",
+    "Check that the account is still in the selected chats.", "Read the missed history of the affected chats.",
+    "Nothing to do: new messages are recorded when they arrive.", "Open Diagnostics.",
+    "Confidence: high", "Confidence: medium", "Confidence: low",
     'Forward chat',
     'New channel',
     'Existing channel or group',

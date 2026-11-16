@@ -1400,9 +1400,35 @@ function collectorLines(name,p){
   if(p.reason==="queue_waiting")return [tr("Attachments have been waiting for more than an hour."),...facts];
   return [tr("Attachment downloads are off."),...facts];
 }
+const VERDICT_CAUSES={signed_out:["Telegram signed this account out","connection","failed"],
+  second_session:["Updates are going to another session","intake","failed"],flood_wait:["Telegram paused this account's requests","connection","degraded"],
+  stopped:["Observation stopped","connection","failed"],restricted:["Telegram has frozen this account","connection","failed"],
+  route:["Telegram cannot be reached on the current route","connection","degraded"],no_account:["No Telegram account is connected.","connection","off"],
+  paused:["Observation is paused.","connection","off"],not_responding:["The collector is not responding","intake","unknown"],
+  no_chats:["No source is selected.","sources","off"],chat_access:["The account cannot read some chats","sources","degraded"],
+  update_gap:["Telegram could not deliver older updates","sources","degraded"],quiet:["Nothing is wrong: the chats are quiet","intake","working"],
+  unknown:["Cause unknown","intake","unknown"]};
+const VERDICT_ACTIONS={sign_in:"Sign in again",one_client:"Close the other client or import a new session for this account.",
+  wait:"Observation waits and resumes on its own.",free_disk:"Free disk space, then resume observation.",
+  restart:"Restart observation. If it stops again, open Diagnostics.",check_account:"Check the account in the official Telegram app.",
+  check_route:"Check the route in connection settings or choose another proxy.",connect:"Connect a Telegram account.",
+  resume:"Resume observation.",check_chats:"Check that the account is still in the selected chats.",
+  read_history:"Read the missed history of the affected chats.",nothing:"Nothing to do: new messages are recorded when they arrive.",
+  diagnose:"Open Diagnostics."};
+const VERDICT_LEVELS={high:"Confidence: high",medium:"Confidence: medium",low:"Confidence: low"};
+const VERDICT_ALARMS=["second_session","flood_wait","stopped","restricted","not_responding","chat_access","update_gap"];
+function healthVerdict(v){
+  if(!v)return null;
+  const [title,part,state]=VERDICT_CAUSES[v.cause]||VERDICT_CAUSES.unknown,confidence=VERDICT_LEVELS[v.confidence]?v.confidence:"low";
+  const facts=[v.until&&telegramPauseText({telegram_pause_until:v.until,telegram_pause_method:v.method}),
+    v.cause==="signed_out"&&v.detail&&accountLossText(v.detail),v.cause!=="signed_out"&&v.detail&&tr("Last error: {error}",{error:errorName(v.detail)||v.detail}),
+    v.last_event_at&&tr("Last event received: {time}",{time:when(v.last_event_at)})];
+  return {title:tr(title),part,state,confidence,quiet:v.cause==="quiet",level:tr(VERDICT_LEVELS[confidence]),
+    action:tr(VERDICT_ACTIONS[v.action]||VERDICT_ACTIONS.diagnose),facts};
+}
 let healthUI=null;
-const healthReady=import("./components/health.js?v=layout1").then(({createHealthBar})=>{
-  healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,
+const healthReady=import("./components/health.js?v=verdict1").then(({createHealthBar})=>{
+  healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,verdict:healthVerdict,
     actionContext:{getState:()=>state,getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,toast,getSources:()=>sourcesReady,navigate,saveBlob},
     diagnose:openDiagnostics,canDiagnose:name=>viewAllowed(healthDiagnostics[name]?.view),workspace:$("workspace")});
   if(state.status)renderCollectorHealth(state.status.health);
@@ -1443,6 +1469,9 @@ function renderStatus() {
   $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected);
   $("status-chip").classList.toggle("warn",!s.demo && (!c.running || !c.connected));
   $("workspace-status").dataset.state=s.demo?"demo":c.running&&c.connected?"live":c.running||accountState(s).needsSignIn?"warn":"off";
+  const alarm=!s.demo&&c.running&&c.connected&&VERDICT_ALARMS.includes(s.health?.verdict?.cause)?healthVerdict(s.health.verdict):null;
+  $("status-chip").title=alarm?alarm.title+" · "+alarm.action:"";
+  if(alarm){$("status-chip").textContent=alarm.title;$("status-chip").classList.remove("live");$("status-chip").classList.add("warn");$("workspace-status").dataset.state="warn";}
   $("collector-toggle").textContent=tr(c.running ? "Pause observation" : "Start observation");
   $("collector-toggle").disabled=s.demo||(!c.running&&!accountState(s).canStart);
   $("collector-toggle").title=tr(s.demo?"Demo uses fictional observations":accountState(s).needsSignIn?'Sign in again':!c.has_session?"Connect an account first":
