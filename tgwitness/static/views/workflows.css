@@ -11,7 +11,7 @@
 .workflow-link { grid-column: 1 / -1; }
 .workflow-link button { margin-top: 0; }
 .link-export-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; width: 100%; max-width: 720px; align-items: end; }
-.link-export-form label { grid-column: 1 / -1; font-weight: 600; }
+.link-export-form label { grid-column: 1 / -1; margin: 0 0 2px; font-weight: 600; }
 .link-export-plan { width: 100%; max-width: 720px; display: grid; gap: 10px; }
 .link-export-plan .export-accounts { margin: 0; }
 .link-export-plan .export-accounts { max-height: 340px; overflow: auto; }
