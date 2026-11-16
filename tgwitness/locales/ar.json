@@ -10216,5 +10216,12 @@
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "ما الذي يغادر هذه اللوحة ومن يستلمه: يحصل مزوّد الذكاء الاصطناعي فقط على الرسائل التي يطلبها عميله؛ ويقرأ اتصال الأرشيف برمزه الخاص مساحات العمل والدردشات المسموح بها فقط؛ ويرسل الـ webhook البيانات الوصفية، ونص الرسائل فقط إذا اخترته أيضًا.",
   "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "عملاء ذكاء اصطناعي أو سطر أوامر يقرؤون هذا الأرشيف برمز. يرى كل اتصال مساحات العمل والدردشات المختارة له فقط، ويمكن إلغاؤه في أي وقت.",
   "Joining needs administrator approval: Telegram sends a join request.": "يتطلب الانضمام موافقة المشرف: يرسل Telegram طلب انضمام.",
-  "Send join request": "إرسال طلب انضمام"
+  "Send join request": "إرسال طلب انضمام",
+  "Connection for this account": "الاتصال لهذا الحساب",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "نفق Cloudflare خاص، أكثر استقرارًا. يُنزّل الأدوات المساعدة من GitHub عند أول استخدام.",
+  "Setting up WARP for this account…": "جارٍ إعداد WARP لهذا الحساب…",
+  "The connection check took too long. Try again or choose another route.": "استغرق التحقق من الاتصال وقتًا طويلًا. حاول مرة أخرى أو اختر مسارًا آخر.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "جارٍ إنشاء مساحة العمل وإعداد WARP والتحقق من الجلسة لدى Telegram…",
+  "WARP · recommended": "WARP · موصى به",
+  "Managed local tunnel": "نفق محلي مُدار"
 }

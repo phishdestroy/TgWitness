@@ -4755,6 +4755,7 @@ function setAuthMethod(method){
     button.classList.toggle("active",selected);button.setAttribute("aria-pressed",String(selected));
   });
   show("import-details",method==="files");show("auth-continue",method!=="qr");show("start-qr",method==="qr");
+  renderSigninRoute();
   show("phone-fields",method==="phone");$("phone").required=method==="phone";
   show("qr-intro",method==="qr");
   show("auth-key-fields",method==="key");
@@ -4806,6 +4807,41 @@ async function loginRequest(path,body,options){
 function authProgress(message){
   $("auth-progress").textContent=message;show("auth-progress",!!message);
 }
+function signinRouteNeeded(){
+  const c=state.status?.collector,r=c?.network;
+  if(state.status?.demo||!c||!r)return false;
+  if(window.TgWitnessAccountImport?.adding?.())return authMethod==="files";
+  return !c.account&&!r.chosen&&!r.managed&&r.kind==="mtproxy_auto";
+}
+const SIGNIN_ROUTE_HINTS={warp:"Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.",
+  mtproxy:"Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.",direct:"Telegram will see this server’s address."};
+function renderSigninRoute(){
+  const needed=signinRouteNeeded(),hint=SIGNIN_ROUTE_HINTS[$("signin-route-mode").value];show("signin-route",needed);
+  if(needed)$("signin-route-hint").textContent=hint?tr(hint):"";
+}
+function signinRoute(){return signinRouteNeeded()?$("signin-route-mode").value||"warp":null;}
+$("signin-route-mode").addEventListener("change",renderSigninRoute);
+async function applySigninRoute(mode,profile){
+  authProgress(tr(mode==="warp"?"Setting up WARP for this account…":"Checking connection…"));
+  try{
+    await json("connection/prepare",{mode,scope:"account",account:profile,accept_setup:mode==="warp",
+      outside_enabled:mode!=="mtproxy",allow_direct:mode==="direct"},{profile});
+    const deadline=Date.now()+240000;
+    let applying=false;
+    while(Date.now()<deadline){
+      await new Promise(resolve=>setTimeout(resolve,800));
+      const current=await json("connection",undefined,{profile}),job=current.job||{};
+      if(job.state==="ready"&&!applying){applying=true;await json("connection/apply",{plan:job.plan},{profile});continue;}
+      if(job.state==="applied"){
+        const failed=(job.rows||[]).find(row=>!row.applied);
+        if(failed)throw new Error(tr(failed.error||"Connection failed. Try WARP or your own proxy."));
+        return;
+      }
+      if(["failed","expired","idle"].includes(job.state))throw new Error(tr(job.error||job.stage||"Connection failed. Try WARP or your own proxy."));
+    }
+    throw new Error(tr("The connection check took too long. Try again or choose another route."));
+  }finally{authProgress("");}
+}
 panelQueries("[data-auth-method]").forEach(button=>button.addEventListener("click",()=>setAuthMethod(button.dataset.authMethod)));
 $("api-id").addEventListener("paste",event=>{
   const text=event.clipboardData?.getData("text")||"";
@@ -4855,7 +4891,8 @@ function renderConnection(){
   $("route-summary").textContent=route;
   $("route-line-text").textContent=tr("Connection: {route}",{route:r.managed?[routeText(r),exitText(r.check)].filter(Boolean).join(" · "):
     r.kind==="direct"||(auto&&!now)?route:route+" · "+(now||r).host+":"+(now||r).port});
-  show("route-line",!state.status.demo);show("network-running",!state.status.demo&&c.running);
+  show("route-line",!state.status.demo&&!signinRouteNeeded());show("network-running",!state.status.demo&&c.running);
+  renderSigninRoute();
   renderSeenBy();
   if(!$("network-pause-change")){const b=node("button","secondary small",tr("Pause observation and change the route"));b.type="button";b.id="network-pause-change";
     b.addEventListener("click",()=>busy(b,async()=>{
@@ -5172,7 +5209,7 @@ $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.su
   }else if(method==="key"){
     if(!await loadAuthKey())return;
   }else{
-    if(window.TgWitnessAccountImport?.adding()){await window.TgWitnessAccountImport.connectNew();return;}
+    if(window.TgWitnessAccountImport?.adding()){await window.TgWitnessAccountImport.connectNew(signinRoute());return;}
     if($("session-file").files.length){
       const imported=await loadAccountFiles();if(!imported)return;
     }
@@ -5184,6 +5221,12 @@ $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.su
   const selection=accountImportRevision;
   await cancelQR();
   if(revision!==state.workspaceRevision||method!==authMethod||selection!==accountImportRevision)return;
+  const route=signinRoute();
+  if(route&&route!=="mtproxy"){
+    await applySigninRoute(route,profile);
+    await refreshStatus();
+    if(revision!==state.workspaceRevision||method!==authMethod||selection!==accountImportRevision)return;
+  }
   const body=method==="phone"?{...credentials,phone:$("phone").value}:
     {...credentials,session:$("session-string").value.trim(),expected_user_id:importExpectedId};
   const independent=method!=="phone"&&$("import-new-session").checked;
@@ -5213,6 +5256,12 @@ async function beginQR(){
   const credentials=apiCredentials();if(!credentials)return;
   await cancelQR();
   const profile=state.profile,revision=state.workspaceRevision,token=state.token;
+  const route=signinRoute();
+  if(route&&route!=="mtproxy"){
+    await applySigninRoute(route,profile);
+    await refreshStatus();
+    if(revision!==state.workspaceRevision||!state.token)return;
+  }
   const result=await loginRequest("auth/qr/start",credentials,{profile,token});
   if(revision!==state.workspaceRevision||!state.token){
     await json("auth/qr/"+encodeURIComponent(result.id)+"/cancel",{},{profile,token});

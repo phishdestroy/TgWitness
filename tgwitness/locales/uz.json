@@ -10012,5 +10012,12 @@
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Bu paneldan nima chiqadi va kim oladi: sun’iy intellekt provayderi faqat mijozi so‘ragan xabarlarni oladi; arxiv ulanishi o‘z tokeni bilan faqat ruxsat berilgan ish maydonlari va chatlarni o‘qiydi; webhook metama’lumot yuboradi, xabar matnini esa faqat siz tanlasangiz.",
   "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Ushbu arxivni token bilan o‘qiydigan sun’iy intellekt yoki buyruq satri mijozlari. Har bir ulanish faqat o‘zi uchun tanlangan ish maydonlari va chatlarni ko‘radi va istalgan vaqtda bekor qilinishi mumkin.",
   "Joining needs administrator approval: Telegram sends a join request.": "Qo‘shilish uchun administrator tasdig‘i kerak: Telegram qo‘shilish so‘rovini yuboradi.",
-  "Send join request": "Qo‘shilish so‘rovini yuborish"
+  "Send join request": "Qo‘shilish so‘rovini yuborish",
+  "Connection for this account": "Ushbu hisob uchun ulanish",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "O‘z Cloudflare tunneli, barqarorroq. Birinchi ishlatishda yordamchi dasturlarni GitHub’dan yuklab oladi.",
+  "Setting up WARP for this account…": "Ushbu hisob uchun WARP sozlanmoqda…",
+  "The connection check took too long. Try again or choose another route.": "Ulanishni tekshirish juda uzoq davom etdi. Qayta urinib ko‘ring yoki boshqa yo‘nalishni tanlang.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Ish maydoni yaratilmoqda, WARP sozlanmoqda va seans Telegram’da tekshirilmoqda…",
+  "WARP · recommended": "WARP · tavsiya etiladi",
+  "Managed local tunnel": "Mahalliy boshqariladigan tunnel"
 }

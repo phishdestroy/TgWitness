@@ -10022,5 +10022,12 @@
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Cosa esce da questo pannello e chi lo riceve: un fornitore di IA riceve solo i messaggi richiesti dal suo client; una connessione all’archivio legge con il proprio token solo gli spazi di lavoro e le chat consentiti; un webhook invia metadati, e il testo dei messaggi solo se lo scegli.",
   "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Client di IA o da riga di comando che leggono questo archivio con un token. Ogni connessione vede solo gli spazi di lavoro e le chat scelti per essa e può essere revocata in qualsiasi momento.",
   "Joining needs administrator approval: Telegram sends a join request.": "Per entrare serve l’approvazione di un amministratore: Telegram invia una richiesta di adesione.",
-  "Send join request": "Invia richiesta di adesione"
+  "Send join request": "Invia richiesta di adesione",
+  "Connection for this account": "Connessione per questo account",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Tunnel Cloudflare dedicato, più stabile. Al primo uso scarica gli helper da GitHub.",
+  "Setting up WARP for this account…": "Configurazione di WARP per questo account…",
+  "The connection check took too long. Try again or choose another route.": "La verifica della connessione ha richiesto troppo tempo. Riprova o scegli un altro percorso.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Creazione dello spazio di lavoro, configurazione di WARP e verifica della sessione con Telegram…",
+  "WARP · recommended": "WARP · consigliato",
+  "Managed local tunnel": "Tunnel locale gestito"
 }

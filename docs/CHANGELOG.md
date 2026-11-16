@@ -26,6 +26,9 @@
 ## Unreleased
 
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
+- Signing in to a workspace that has no chosen connection asks for one first, with WARP preselected and marked as
+  recommended. Before, such sign-ins went silently through public MTProxy servers. Adding another account from
+  files passes the chosen route to its new workspace, and the connection page lists WARP first.
 - The public MTProxy pool also reads the hourly list from tgmtproxy/telegram-mtproto-proxy-list.
 - Author profile collection finishes each person (profile, photos, gifts, links) before starting the next, so the
   “done” counter and the time estimate move from the start. Before, every stage ran for all people first and the

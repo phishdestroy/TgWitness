@@ -9961,5 +9961,12 @@
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "이 패널에서 무엇이 나가고 누가 받는지: AI 제공자는 해당 클라이언트가 요청한 메시지만 받습니다. 아카이브 연결은 자체 토큰으로 허용된 작업 공간과 채팅만 읽습니다. 웹훅은 메타데이터를 보내며, 메시지 본문은 따로 선택한 경우에만 보냅니다.",
   "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "토큰으로 이 아카이브를 읽는 AI 또는 명령줄 클라이언트입니다. 각 연결은 자신에게 선택된 작업 공간과 채팅만 볼 수 있으며 언제든지 취소할 수 있습니다.",
   "Joining needs administrator approval: Telegram sends a join request.": "참여하려면 관리자 승인이 필요합니다. Telegram이 참여 요청을 보냅니다.",
-  "Send join request": "참여 요청 보내기"
+  "Send join request": "참여 요청 보내기",
+  "Connection for this account": "이 계정의 연결",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "전용 Cloudflare 터널, 더 안정적입니다. 처음 사용할 때 GitHub에서 도우미를 내려받습니다.",
+  "Setting up WARP for this account…": "이 계정의 WARP를 설정하는 중…",
+  "The connection check took too long. Try again or choose another route.": "연결 확인이 너무 오래 걸렸습니다. 다시 시도하거나 다른 경로를 선택하세요.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "작업 공간을 만들고 WARP를 설정한 뒤 Telegram에서 세션을 확인하는 중…",
+  "WARP · recommended": "WARP · 추천",
+  "Managed local tunnel": "관리형 로컬 터널"
 }

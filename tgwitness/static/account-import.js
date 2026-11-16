@@ -15,6 +15,7 @@
   }
   function controls(){
     if($("import-new-workspace"))$("import-new-workspace").hidden=!adding();
+    renderSigninRoute();
     if(authMethod!=="files")return;
     const allowed=!!inspection?.result.can_connect&&current(inspection.owner);
     if(!$("auth-continue").hasAttribute("aria-busy"))$("auth-continue").disabled=!allowed;
@@ -123,7 +124,7 @@
     if(result.api_hash)$("api-hash").value=result.api_hash;
     $("tdata-passcode").value="";renderApiState();render(item.result);return result;
   }
-  async function connectNew(){
+  async function connectNew(route=null){
     const item=await checked();
     if(!state.me?.admin)throw new Error(tr("Ask the installation administrator to add another workspace."));
     const account=state.status.collector.account,who=account.username?"@"+account.username:"ID "+account.id;
@@ -131,10 +132,11 @@
       {title:tr("Add another account"),label:tr("New workspace name"),value:item.name,maxLength:80,confirmText:tr("Create workspace and connect")});
     if(!name?.trim()||!current(item.owner))return;
     const credentials=apiCredentials();if(!credentials)return;
-    authProgress(tr("Creating the workspace and checking the session with Telegram…"));
+    authProgress(tr(route==="warp"?"Creating the workspace, setting up WARP and checking the session with Telegram…":"Creating the workspace and checking the session with Telegram…"));
     try{
       const independent=$("import-new-session").checked,seed=independent&&item.result.device_seed;
       const result=await json("profiles/import",{files:item.files,passcode:item.passcode,label:name.trim(),new_session:independent,...(seed?{device_seed:seed}:{}),
+        ...(route?{route,route_consent:route==="warp"}:{}),
         ...(credentials.api_id?{api_id:credentials.api_id,api_hash:credentials.api_hash.toLowerCase()}: {})},{root:true});
       if(!current(item.owner))return;
       await switchProfile(result.profile.id);await navigate("connection");

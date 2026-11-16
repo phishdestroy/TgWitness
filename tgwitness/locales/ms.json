@@ -9961,5 +9961,12 @@
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Apa yang keluar dari panel ini dan siapa yang menerimanya: penyedia AI hanya mendapat mesej yang diminta kliennya; sambungan arkib hanya membaca ruang kerja dan sembang yang dibenarkan dengan tokennya sendiri; webhook menghantar metadata, dan teks mesej hanya jika anda turut memilihnya.",
   "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Klien AI atau baris arahan yang membaca arkib ini dengan token. Setiap sambungan hanya melihat ruang kerja dan sembang yang dipilih untuknya dan boleh dibatalkan pada bila-bila masa.",
   "Joining needs administrator approval: Telegram sends a join request.": "Menyertai memerlukan kelulusan pentadbir: Telegram menghantar permintaan untuk menyertai.",
-  "Send join request": "Hantar permintaan menyertai"
+  "Send join request": "Hantar permintaan menyertai",
+  "Connection for this account": "Sambungan untuk akaun ini",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Terowong Cloudflare sendiri, lebih stabil. Memuat turun pembantu dari GitHub pada penggunaan pertama.",
+  "Setting up WARP for this account…": "Menyediakan WARP untuk akaun ini…",
+  "The connection check took too long. Try again or choose another route.": "Semakan sambungan mengambil masa terlalu lama. Cuba lagi atau pilih laluan lain.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Mencipta ruang kerja, menyediakan WARP dan menyemak sesi dengan Telegram…",
+  "WARP · recommended": "WARP · disyorkan",
+  "Managed local tunnel": "Terowong tempatan terurus"
 }

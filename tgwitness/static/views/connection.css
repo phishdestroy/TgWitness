@@ -21,5 +21,5 @@
 .connect-review{overflow:auto;margin-top:1rem}.connect-table{width:100%;border-collapse:collapse;font-size:.9rem}
 .connect-table th,.connect-table td{text-align:left;padding:.75rem;border-bottom:1px solid var(--line,var(--border));overflow-wrap:anywhere;vertical-align:top}
 .connect-guide [hidden]{display:none!important}.connect-guide .error{color:var(--danger,#cf5353)}
-@media(max-width:760px){.connect-routes{grid-template-columns:repeat(2,minmax(0,1fr))}.connect-route:last-child{grid-column:1/-1}.connect-fields{grid-template-columns:1fr}.connect-table{min-width:420px}}
+@media(max-width:760px){.connect-routes{grid-template-columns:repeat(2,minmax(0,1fr))}.connect-route:first-child{grid-column:1/-1}.connect-fields{grid-template-columns:1fr}.connect-table{min-width:420px}}
 @media (max-width:600px){.login-methods{grid-template-columns:repeat(4,auto)}.login-method{padding-inline:8px;hyphens:manual;overflow-wrap:normal}}

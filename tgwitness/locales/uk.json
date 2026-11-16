@@ -10114,5 +10114,12 @@
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Що виходить із панелі й кому: ШІ-провайдер отримує лише повідомлення, які запросив його клієнт; підключення до архіву читає лише дозволені робочі області й чати за власним токеном; вебхук надсилає метадані, а текст повідомлень — лише якщо ви це оберете.",
   "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "ШІ- або консольні клієнти, що читають цей архів за токеном. Кожне підключення бачить лише вибрані для нього робочі області й чати, і його можна відкликати будь-коли.",
   "Joining needs administrator approval: Telegram sends a join request.": "Для вступу потрібне схвалення адміністратора: Telegram надішле заявку.",
-  "Send join request": "Надіслати заявку"
+  "Send join request": "Надіслати заявку",
+  "Connection for this account": "Підключення для цього облікового запису",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Власний тунель Cloudflare, стабільніший. Під час першого запуску завантажує помічників з GitHub.",
+  "Setting up WARP for this account…": "Налаштовуємо WARP для цього облікового запису…",
+  "The connection check took too long. Try again or choose another route.": "Перевірка підключення тривала надто довго. Спробуйте ще раз або виберіть інший маршрут.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Створюємо робочий простір, налаштовуємо WARP і перевіряємо сесію в Telegram…",
+  "WARP · recommended": "WARP · рекомендовано",
+  "Managed local tunnel": "Керуваний локальний тунель"
 }

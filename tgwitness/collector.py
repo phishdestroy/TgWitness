@@ -2018,6 +2018,7 @@ class Collector:
             public.update(self.pool().describe(self.route_owner))
         public["exposure"] = self.route_policy()["exposure"]
         public["managed"] = self.managed_route()
+        public["chosen"] = bool(self.store.get_setting("connection_strategy", None))
         check = self.store.get_setting("connection_check", None)
         public["check"] = {key: check.get(key) for key in ("telegram_connected", "exit_ip", "country", "warp", "checked_at")} \
             if check else None
