@@ -10105,5 +10105,12 @@
   "Public MTProxy (third-party server from an open list)": "Публічний MTProxy (сторонній сервер із відкритого списку)",
   "Public MTProxy": "Публічний MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Оператор проксі бачить, що цей сервер підключається, і його IP-адресу, але не повідомлення: MTProto шифрує їх аж до Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Тут поки немає повідомлень і змін. Записів у журналі: {n}. Системні записи, як-от входи й перевірки з’єднання, приховано."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Тут поки немає повідомлень і змін. Записів у журналі: {n}. Системні записи, як-от входи й перевірки з’єднання, приховано.",
+  "Show fewer sections": "Показати менше розділів",
+  "Chats being recorded": "Чати, що записуються",
+  "Pauses: {n}": "Паузи: {n}",
+  "Saved records: {n}": "Збережено записів: {n}",
+  "Coverage gaps: {n}": "Прогалини в охопленні: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Що виходить із панелі й кому: ШІ-провайдер отримує лише повідомлення, які запросив його клієнт; підключення до архіву читає лише дозволені робочі області й чати за власним токеном; вебхук надсилає метадані, а текст повідомлень — лише якщо ви це оберете.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "ШІ- або консольні клієнти, що читають цей архів за токеном. Кожне підключення бачить лише вибрані для нього робочі області й чати, і його можна відкликати будь-коли."
 }

@@ -9,8 +9,8 @@ export function createSettingsHub(ctx) {
   const goalLevels = {copy:'simple',watch:'standard',evidence:'standard'};
   const routes = [['auto','sparkle:violet','Automatic','Try WARP, then public proxies.'],['warp','shield:teal','Cloudflare WARP','Connect through a local tunnel.'],['proxy','link:orange','My proxy','Paste one proxy address.'],['direct','external:slate','Direct','Telegram will see this server’s address.']];
   const levels = [['simple','star:green','Simple','Only the essentials.'],['standard','settings:blue','Standard','Common settings and explanations.'],['expert','braces:slate','Expert','All fields, limits and technical details.']];
-  const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'simple',observations:'simple',evidence:'simple',settings:'simple',
-    board:'standard',accounts:'simple',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
+  const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'standard',observations:'standard',evidence:'simple',settings:'simple',
+    board:'standard',accounts:'standard',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
   let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null, rerollTimer=null;
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
@@ -125,9 +125,16 @@ export function createSettingsHub(ctx) {
     document.documentElement.dataset.uiLevel=prefs.level;
     try{localStorage.setItem('tgwitness-ui-level',prefs.level);}catch{}
     for(const b of document.querySelectorAll('.sidebar .nav[data-view]'))b.dataset.level=navLevels[b.dataset.view]||'expert';
-    for(const [view,simple,full] of [['start','Home','Home'],['observations','Journal','Journal'],['evidence','Exports','Exports']]){
+    for(const [view,simple,full] of [['start','Home','Home'],['observations','Records','Journal'],['evidence','Exports','Exports'],['sources','What to record','Sources']]){
       const b=document.querySelector('.sidebar [data-view="'+view+'"]');
       const text=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(text)text.textContent=' '+tr(prefs.level==='simple'?simple:full)+' ';
+    }
+    for(const [id,simple,full] of [['journal-title','Records','Journal'],['sources-title','What to record','Sources']]){
+      const el=document.getElementById(id);if(el&&!el.children.length)el.textContent=tr(prefs.level==='simple'?simple:full);
+    }
+    for(const id of ['sources-tab-chats','target-list-title']){
+      const el=document.getElementById(id),text=el&&[...el.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());
+      if(text)text.textContent=tr(prefs.level==='simple'?'Chats being recorded':'Chats in scope')+(id==='sources-tab-chats'?' ':'');
     }
     for(const control of document.querySelectorAll('[data-ui-level]'))control.value=prefs.level;
     ctx.applyPreferences(prefs);

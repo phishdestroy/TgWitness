@@ -99,3 +99,6 @@
   .journal-filter-chip { max-width:100%; }
   .journal-pager { width:100%; margin-left:0; justify-content:space-between; }
 }
+.journal-type-filters .journal-more-types{display:none}
+html[data-ui-level=simple] .journal-type-filters:not(.expanded) .filter-extra:not(.active){display:none}
+html[data-ui-level=simple] .journal-type-filters:not(.expanded) .journal-more-types{display:inline-flex}

@@ -226,3 +226,6 @@
   #view-secret-chats .secret-message { max-width: 92%; }
   #view-secret-chats .secret-send { grid-template-columns: 1fr; }
 }
+#view-sources .scope-warning { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; padding: 12px 14px; border-width: 1px 1px 1px 4px; border-radius: 12px; }
+#view-sources .scope-warning > .icon { flex: none; width: 20px; height: 20px; margin-top: 1px; color: var(--warning); }
+#view-sources .scope-warning p { margin: 0 0 6px; color: var(--text); font-weight: 600; }

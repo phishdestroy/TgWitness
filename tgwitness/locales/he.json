@@ -10054,5 +10054,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy ציבורי (שרת צד שלישי מרשימה פתוחה)",
   "Public MTProxy": "MTProxy ציבורי",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "מפעיל הפרוקסי רואה שהשרת הזה מתחבר ואת כתובת ה-IP שלו, אבל לא את ההודעות: MTProto מצפין אותן עד Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "אין כאן עדיין הודעות או שינויים. רשומות ביומן: {n}. רשומות מערכת כמו כניסות ובדיקות חיבור מוסתרות."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "אין כאן עדיין הודעות או שינויים. רשומות ביומן: {n}. רשומות מערכת כמו כניסות ובדיקות חיבור מוסתרות.",
+  "Show fewer sections": "הצגת פחות אזורים",
+  "Chats being recorded": "צ׳אטים שמוקלטים",
+  "Pauses: {n}": "הפסקות: {n}",
+  "Saved records: {n}": "רשומות שנשמרו: {n}",
+  "Coverage gaps: {n}": "פערי כיסוי: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "מה יוצא מהפאנל ומי מקבל אותו: ספק בינה מלאכותית מקבל רק את ההודעות שהלקוח שלו מבקש; חיבור לארכיון קורא עם אסימון משלו רק את סביבות העבודה והצ׳אטים המותרים; webhook שולח מטא-נתונים, ואת טקסט ההודעות רק אם תבחרו בכך.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "לקוחות בינה מלאכותית או שורת פקודה שקוראים את הארכיון הזה עם אסימון. כל חיבור רואה רק את סביבות העבודה והצ׳אטים שנבחרו עבורו, ואפשר לבטל אותו בכל עת."
 }

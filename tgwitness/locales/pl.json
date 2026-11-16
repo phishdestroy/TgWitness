@@ -10105,5 +10105,12 @@
   "Public MTProxy (third-party server from an open list)": "Publiczny MTProxy (serwer zewnętrzny z otwartej listy)",
   "Public MTProxy": "Publiczny MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Operator proxy widzi, że ten serwer się łączy, i jego adres IP, ale nie wiadomości: MTProto szyfruje je aż do Telegrama.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Nie ma tu jeszcze wiadomości ani zmian. Wpisy w dzienniku: {n}. Wpisy systemowe, takie jak logowania i sprawdzenia połączenia, są ukryte."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Nie ma tu jeszcze wiadomości ani zmian. Wpisy w dzienniku: {n}. Wpisy systemowe, takie jak logowania i sprawdzenia połączenia, są ukryte.",
+  "Show fewer sections": "Pokaż mniej sekcji",
+  "Chats being recorded": "Nagrywane czaty",
+  "Pauses: {n}": "Przerwy: {n}",
+  "Saved records: {n}": "Zapisane wpisy: {n}",
+  "Coverage gaps: {n}": "Luki w pokryciu: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Co opuszcza ten panel i kto to otrzymuje: dostawca AI dostaje tylko wiadomości, o które poprosi jego klient; połączenie z archiwum czyta własnym tokenem tylko dozwolone obszary robocze i czaty; webhook wysyła metadane, a treść wiadomości tylko wtedy, gdy ją wybierzesz.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Klienci AI lub wiersza poleceń, którzy czytają to archiwum za pomocą tokena. Każde połączenie widzi tylko wybrane dla niego obszary robocze i czaty i można je w każdej chwili cofnąć."
 }

@@ -9952,5 +9952,12 @@
   "Public MTProxy (third-party server from an open list)": "公共 MTProxy（来自公开列表的第三方服务器）",
   "Public MTProxy": "公共 MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "代理运营者能看到此服务器在连接及其 IP 地址，但看不到消息：MTProto 会一直加密到 Telegram。",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "这里还没有消息或更改。日志记录：{n}。登录和连接检查等系统记录已隐藏。"
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "这里还没有消息或更改。日志记录：{n}。登录和连接检查等系统记录已隐藏。",
+  "Show fewer sections": "显示更少的部分",
+  "Chats being recorded": "正在记录的聊天",
+  "Pauses: {n}": "暂停：{n}",
+  "Saved records: {n}": "已保存记录：{n}",
+  "Coverage gaps: {n}": "覆盖缺口：{n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "哪些内容会离开此面板、由谁接收：AI 提供方只收到其客户端请求的消息；归档连接凭自己的令牌只读取允许的工作区和聊天；Webhook 发送元数据，只有在你另外选择时才发送消息文本。",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "使用令牌读取此归档的 AI 或命令行客户端。每个连接只能看到为它选定的工作区和聊天，并可随时撤销。"
 }

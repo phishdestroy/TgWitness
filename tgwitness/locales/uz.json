@@ -10003,5 +10003,12 @@
   "Public MTProxy (third-party server from an open list)": "Ommaviy MTProxy (ochiq ro‘yxatdagi uchinchi tomon serveri)",
   "Public MTProxy": "Ommaviy MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Proksi operatori bu server ulanayotganini va uning IP manzilini ko‘radi, lekin xabarlarni ko‘rmaydi: MTProto ularni Telegramgacha shifrlaydi.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Bu yerda hali xabar yoki o‘zgarish yo‘q. Jurnaldagi yozuvlar: {n}. Kirishlar va ulanish tekshiruvlari kabi tizim yozuvlari yashirilgan."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Bu yerda hali xabar yoki o‘zgarish yo‘q. Jurnaldagi yozuvlar: {n}. Kirishlar va ulanish tekshiruvlari kabi tizim yozuvlari yashirilgan.",
+  "Show fewer sections": "Kamroq bo‘lim ko‘rsatish",
+  "Chats being recorded": "Yozib olinayotgan chatlar",
+  "Pauses: {n}": "Pauzalar: {n}",
+  "Saved records: {n}": "Saqlangan yozuvlar: {n}",
+  "Coverage gaps: {n}": "Qamrovdagi bo‘shliqlar: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Bu paneldan nima chiqadi va kim oladi: sun’iy intellekt provayderi faqat mijozi so‘ragan xabarlarni oladi; arxiv ulanishi o‘z tokeni bilan faqat ruxsat berilgan ish maydonlari va chatlarni o‘qiydi; webhook metama’lumot yuboradi, xabar matnini esa faqat siz tanlasangiz.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Ushbu arxivni token bilan o‘qiydigan sun’iy intellekt yoki buyruq satri mijozlari. Har bir ulanish faqat o‘zi uchun tanlangan ish maydonlari va chatlarni ko‘radi va istalgan vaqtda bekor qilinishi mumkin."
 }

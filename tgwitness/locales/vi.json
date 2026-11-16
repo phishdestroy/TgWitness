@@ -9952,5 +9952,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy công khai (máy chủ bên thứ ba từ danh sách mở)",
   "Public MTProxy": "MTProxy công khai",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Người vận hành proxy thấy máy chủ này kết nối và địa chỉ IP của nó, nhưng không thấy tin nhắn: MTProto mã hóa chúng đến tận Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Chưa có tin nhắn hay thay đổi nào ở đây. Bản ghi trong nhật ký: {n}. Các bản ghi hệ thống như đăng nhập và kiểm tra kết nối đang bị ẩn."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Chưa có tin nhắn hay thay đổi nào ở đây. Bản ghi trong nhật ký: {n}. Các bản ghi hệ thống như đăng nhập và kiểm tra kết nối đang bị ẩn.",
+  "Show fewer sections": "Hiện ít mục hơn",
+  "Chats being recorded": "Cuộc trò chuyện đang ghi",
+  "Pauses: {n}": "Tạm dừng: {n}",
+  "Saved records: {n}": "Bản ghi đã lưu: {n}",
+  "Coverage gaps: {n}": "Khoảng trống ghi nhận: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Những gì rời khỏi bảng điều khiển này và ai nhận được: nhà cung cấp AI chỉ nhận các tin nhắn mà máy khách của họ yêu cầu; kết nối lưu trữ chỉ đọc các không gian làm việc và cuộc trò chuyện được phép bằng mã thông báo riêng; webhook gửi siêu dữ liệu, còn nội dung tin nhắn chỉ khi bạn chọn thêm.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Máy khách AI hoặc dòng lệnh đọc kho lưu trữ này bằng mã thông báo. Mỗi kết nối chỉ thấy các không gian làm việc và cuộc trò chuyện được chọn cho nó và có thể bị thu hồi bất cứ lúc nào."
 }

@@ -10013,5 +10013,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy público (servidor de terceiros de uma lista aberta)",
   "Public MTProxy": "MTProxy público",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "O operador do proxy vê que este servidor se conecta e o endereço IP dele, mas não as mensagens: o MTProto as criptografa até o Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Ainda não há mensagens nem alterações aqui. Registros no diário: {n}. Registros do sistema, como logins e verificações de conexão, estão ocultos."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Ainda não há mensagens nem alterações aqui. Registros no diário: {n}. Registros do sistema, como logins e verificações de conexão, estão ocultos.",
+  "Show fewer sections": "Mostrar menos seções",
+  "Chats being recorded": "Chats gravados",
+  "Pauses: {n}": "Pausas: {n}",
+  "Saved records: {n}": "Registros salvos: {n}",
+  "Coverage gaps: {n}": "Lacunas de cobertura: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "O que sai deste painel e quem recebe: um provedor de IA recebe só as mensagens que o cliente dele pede; uma conexão de arquivo lê, com o próprio token, só os espaços de trabalho e chats permitidos; um webhook envia metadados, e o texto das mensagens só se você também escolher.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Clientes de IA ou de linha de comando que leem este arquivo com um token. Cada conexão vê apenas os espaços de trabalho e chats escolhidos para ela e pode ser revogada a qualquer momento."
 }

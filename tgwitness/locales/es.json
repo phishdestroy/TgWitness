@@ -10013,5 +10013,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy público (servidor de terceros de una lista abierta)",
   "Public MTProxy": "MTProxy público",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "El operador del proxy ve que este servidor se conecta y su dirección IP, pero no los mensajes: MTProto los cifra hasta Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Aún no hay mensajes ni cambios aquí. Registros en el diario: {n}. Los registros del sistema, como inicios de sesión y comprobaciones de conexión, están ocultos."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Aún no hay mensajes ni cambios aquí. Registros en el diario: {n}. Los registros del sistema, como inicios de sesión y comprobaciones de conexión, están ocultos.",
+  "Show fewer sections": "Mostrar menos secciones",
+  "Chats being recorded": "Chats que se registran",
+  "Pauses: {n}": "Pausas: {n}",
+  "Saved records: {n}": "Registros guardados: {n}",
+  "Coverage gaps: {n}": "Huecos de cobertura: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Qué sale de este panel y quién lo recibe: un proveedor de IA recibe solo los mensajes que pide su cliente; una conexión de archivo lee con su propio token solo los espacios de trabajo y chats permitidos; un webhook envía metadatos, y el texto de los mensajes solo si también lo eliges.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Clientes de IA o de línea de comandos que leen este archivo con un token. Cada conexión ve solo los espacios de trabajo y chats elegidos para ella y puede revocarse en cualquier momento."
 }

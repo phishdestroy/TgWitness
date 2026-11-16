@@ -10003,5 +10003,12 @@
   "Public MTProxy (third-party server from an open list)": "পাবলিক MTProxy (খোলা তালিকার তৃতীয় পক্ষের সার্ভার)",
   "Public MTProxy": "পাবলিক MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "প্রক্সি পরিচালক দেখেন যে এই সার্ভার সংযোগ করছে এবং এর IP ঠিকানা, কিন্তু বার্তা নয়: MTProto সেগুলো Telegram পর্যন্ত এনক্রিপ্ট রাখে।",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "এখানে এখনও কোনো বার্তা বা পরিবর্তন নেই। জার্নালে রেকর্ড: {n}। সাইন-ইন ও সংযোগ যাচাইয়ের মতো সিস্টেম রেকর্ড লুকানো।"
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "এখানে এখনও কোনো বার্তা বা পরিবর্তন নেই। জার্নালে রেকর্ড: {n}। সাইন-ইন ও সংযোগ যাচাইয়ের মতো সিস্টেম রেকর্ড লুকানো।",
+  "Show fewer sections": "কম বিভাগ দেখান",
+  "Chats being recorded": "রেকর্ড হওয়া চ্যাট",
+  "Pauses: {n}": "বিরতি: {n}",
+  "Saved records: {n}": "সংরক্ষিত রেকর্ড: {n}",
+  "Coverage gaps: {n}": "কভারেজ ফাঁক: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "এই প্যানেল থেকে কী বাইরে যায় এবং কে পায়: AI প্রদানকারী কেবল সেই বার্তাগুলো পায় যা তার ক্লায়েন্ট চায়; আর্কাইভ সংযোগ নিজের টোকেন দিয়ে কেবল অনুমোদিত ওয়ার্কস্পেস ও চ্যাট পড়ে; ওয়েবহুক মেটাডেটা পাঠায়, আর বার্তার লেখা কেবল আপনি তা বেছে নিলে।",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "AI বা কমান্ড-লাইন ক্লায়েন্ট যারা টোকেন দিয়ে এই আর্কাইভ পড়ে। প্রতিটি সংযোগ কেবল তার জন্য বাছাই করা ওয়ার্কস্পেস ও চ্যাট দেখে এবং যেকোনো সময় বাতিল করা যায়।"
 }

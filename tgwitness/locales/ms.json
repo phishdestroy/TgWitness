@@ -9952,5 +9952,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy awam (pelayan pihak ketiga daripada senarai terbuka)",
   "Public MTProxy": "MTProxy awam",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Pengendali proksi nampak bahawa pelayan ini bersambung dan alamat IPnya, tetapi bukan mesej: MTProto menyulitkannya hingga ke Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Belum ada mesej atau perubahan di sini. Rekod dalam jurnal: {n}. Rekod sistem seperti log masuk dan semakan sambungan disembunyikan."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Belum ada mesej atau perubahan di sini. Rekod dalam jurnal: {n}. Rekod sistem seperti log masuk dan semakan sambungan disembunyikan.",
+  "Show fewer sections": "Tunjukkan kurang bahagian",
+  "Chats being recorded": "Sembang yang dirakam",
+  "Pauses: {n}": "Jeda: {n}",
+  "Saved records: {n}": "Rekod disimpan: {n}",
+  "Coverage gaps: {n}": "Jurang liputan: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Apa yang keluar dari panel ini dan siapa yang menerimanya: penyedia AI hanya mendapat mesej yang diminta kliennya; sambungan arkib hanya membaca ruang kerja dan sembang yang dibenarkan dengan tokennya sendiri; webhook menghantar metadata, dan teks mesej hanya jika anda turut memilihnya.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Klien AI atau baris arahan yang membaca arkib ini dengan token. Setiap sambungan hanya melihat ruang kerja dan sembang yang dipilih untuknya dan boleh dibatalkan pada bila-bila masa."
 }

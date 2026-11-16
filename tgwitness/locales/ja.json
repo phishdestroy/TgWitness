@@ -9952,5 +9952,12 @@
   "Public MTProxy (third-party server from an open list)": "公開 MTProxy（公開リストの第三者サーバー）",
   "Public MTProxy": "公開 MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "プロキシの運営者には、このサーバーが接続していることと IP アドレスは見えますが、メッセージは見えません。MTProto が Telegram まで暗号化します。",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "ここにはまだメッセージや変更がありません。ジャーナルの記録: {n}。サインインや接続チェックなどのシステム記録は非表示です。"
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "ここにはまだメッセージや変更がありません。ジャーナルの記録: {n}。サインインや接続チェックなどのシステム記録は非表示です。",
+  "Show fewer sections": "表示するセクションを減らす",
+  "Chats being recorded": "記録中のチャット",
+  "Pauses: {n}": "一時停止: {n}",
+  "Saved records: {n}": "保存済みの記録: {n}",
+  "Coverage gaps: {n}": "カバレッジの欠落: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "このパネルから何が出ていき、誰が受け取るか: AI プロバイダーはそのクライアントが要求したメッセージだけを受け取ります。アーカイブ接続は独自のトークンで、許可したワークスペースとチャットだけを読み取ります。Webhook はメタデータを送信し、メッセージ本文は選択した場合にのみ送ります。",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "トークンでこのアーカイブを読む AI またはコマンドラインのクライアント。各接続は自分用に選ばれたワークスペースとチャットだけを参照でき、いつでも取り消せます。"
 }

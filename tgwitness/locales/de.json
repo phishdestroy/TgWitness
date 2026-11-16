@@ -10003,5 +10003,12 @@
   "Public MTProxy (third-party server from an open list)": "Öffentlicher MTProxy (fremder Server aus einer offenen Liste)",
   "Public MTProxy": "Öffentlicher MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Der Proxy-Betreiber sieht, dass sich dieser Server verbindet, und seine IP-Adresse, aber nicht die Nachrichten: MTProto verschlüsselt sie bis zu Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Hier gibt es noch keine Nachrichten oder Änderungen. Einträge im Journal: {n}. Systemeinträge wie Anmeldungen und Verbindungsprüfungen sind ausgeblendet."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Hier gibt es noch keine Nachrichten oder Änderungen. Einträge im Journal: {n}. Systemeinträge wie Anmeldungen und Verbindungsprüfungen sind ausgeblendet.",
+  "Show fewer sections": "Weniger Bereiche anzeigen",
+  "Chats being recorded": "Aufgezeichnete Chats",
+  "Pauses: {n}": "Pausen: {n}",
+  "Saved records: {n}": "Gespeicherte Einträge: {n}",
+  "Coverage gaps: {n}": "Abdeckungslücken: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Was dieses Panel verlässt und wer es erhält: Ein KI-Anbieter bekommt nur die Nachrichten, die sein Client anfordert; eine Archivverbindung liest mit eigenem Token nur die erlaubten Arbeitsbereiche und Chats; ein Webhook sendet Metadaten, Nachrichtentext nur, wenn Sie ihn zusätzlich wählen.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "KI- oder Befehlszeilen-Clients, die dieses Archiv mit einem Token lesen. Jede Verbindung sieht nur die für sie gewählten Arbeitsbereiche und Chats und kann jederzeit widerrufen werden."
 }

@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout15').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout16').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -111,9 +111,9 @@ const connectionViewReady=import('./views/connection.js?v=3').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=14'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=16'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
-  homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,
+  homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,openJournal:kind=>openJournalFilter(kind),
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
     openChatIn:(profile,chat)=>openChatIn(profile,chat)});
 });
@@ -853,7 +853,7 @@ function applyAccess(){
   if(analysisText)analysisText.textContent=" "+analysisTitle;
   $("view-analysis").querySelector("h1").textContent=analysisTitle;
   document.querySelectorAll(".sidebar .nav[data-view]").forEach(n=>n.hidden=!viewAllowed(n.dataset.view));
-  $('nav-more').hidden=![...$('nav-more').querySelectorAll('[data-view]')].some(button=>!button.hidden);
+  $('nav-more').hidden=![...$('nav-more').querySelectorAll('[data-view]')].some(button=>!button.hidden);syncHiddenNav();
   document.querySelectorAll(".nav-section").forEach(heading=>{
     let next=heading.nextElementSibling,visible=false;
     while(next&&!next.classList.contains("nav-section")){visible=visible||!next.hidden;next=next.nextElementSibling;}
@@ -922,7 +922,7 @@ function navigate(view,options={}) {
   if(view!==state.view&&$("toast").classList.contains("error")){clearTimeout(toastTimer);show("toast",false);}
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
   if(view!=="connection")window.TgWitnessProxies?.stop?.();
-  state.view=view;
+  state.view=view;syncHiddenNav();
   if(view==='start')state.workflow=null;
   const advanced=document.querySelector('#nav-more [data-view="'+CSS.escape(view)+'"]');
   if(advanced)$('nav-more').open=true;
@@ -1029,8 +1029,9 @@ function renderWorkflowControls(){
 }
 import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
-import("./views/chat-gaps.js?v=5").then(({createChatGaps})=>{
-  chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations')});
+import("./views/chat-gaps.js?v=6").then(({createChatGaps})=>{
+  chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations'),
+    fmtDay:value=>panelTime?.day(value),dayKey:value=>panelTime?.dayKey(value)});
   if(state.view==='chats'&&state.chat!==null&&chatReady)renderChatFeed();
 }).catch(error=>toast(error.message,true));
 let pulseUI=null;
@@ -1179,16 +1180,25 @@ for(const box of document.querySelectorAll(".sidebar-bottom > details")){
   box.addEventListener("toggle",()=>{try{localStorage.setItem(key,box.open?"1":"0");}catch{}});
 }
 function syncHiddenNav(){
-  const level=document.documentElement.dataset.uiLevel,rank={simple:0,standard:1,expert:2},hint=$("nav-hidden-hint");
-  const hidden=level?[...document.querySelectorAll(".sidebar nav .nav[data-view]")].filter(nav=>!nav.hidden&&rank[nav.dataset.level]>rank[level]).length:0;
-  hint.hidden=!hidden;
-  if(hidden)hint.textContent=trn("Show {n} hidden section","Show {n} hidden sections",hidden);
+  const root=document.documentElement,level=root.dataset.uiLevel,rank={simple:0,standard:1,expert:2},hint=$("nav-hidden-hint");
+  const navs=[...document.querySelectorAll(".sidebar nav .nav[data-view]")],above=nav=>!!level&&rank[nav.dataset.level]>rank[level];
+  const hidden=navs.filter(nav=>!nav.hidden&&above(nav)).length,all=root.dataset.navAll==="true";
+  for(const nav of navs)nav.classList.toggle("nav-level-hidden",above(nav)&&!all&&nav.dataset.view!==state.view);
+  for(const heading of document.querySelectorAll(".sidebar nav .nav-section")){
+    let next=heading.nextElementSibling,visible=false;
+    while(next&&!next.matches(".nav-section,.nav-more,.nav-hidden-hint")){if(next.matches(".nav")&&!next.hidden&&!next.classList.contains("nav-level-hidden"))visible=true;next=next.nextElementSibling;}
+    heading.hidden=!visible;
+  }
+  const more=$("nav-more");more.hidden=![...more.querySelectorAll(".nav")].some(nav=>!nav.hidden&&!nav.classList.contains("nav-level-hidden"));
+  hint.hidden=!hidden;hint.setAttribute("aria-expanded",String(all));
+  if(hidden)hint.textContent=all?tr("Show fewer sections"):trn("Show {n} hidden section","Show {n} hidden sections",hidden);
 }
-new MutationObserver(syncHiddenNav).observe(document.documentElement,{attributes:true,attributeFilter:["data-ui-level"]});
+new MutationObserver(syncHiddenNav).observe(document.documentElement,{attributes:true,attributeFilter:["data-ui-level","data-nav-all"]});
+window.addEventListener("tgwitness:route",syncHiddenNav);
 import("./components/tips.js?v=4").then(({createTips})=>createTips({tr,icon,roots:[...panelRoots.values()]})).catch(error=>toast(error.message,true));
 $("nav-hidden-hint").addEventListener("click",()=>{
-  const select=document.querySelector(".sidebar [data-ui-level]");if(!select)return;
-  select.value="expert";select.dispatchEvent(new Event("change"));
+  const root=document.documentElement;
+  if(root.dataset.navAll==="true")delete root.dataset.navAll;else root.dataset.navAll="true";
 });
 function selectQuick(index){
   const options=[...quickResults.children];
@@ -2263,7 +2273,7 @@ async function refreshRanked(request) {
   state.searchIndex=result.index;
   renderEvents();
 }
-const journalReady=import('./components/journal.js?v=layout5').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=layout6').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     request:(path,body)=>json(path,body),admin:()=>!!state.me?.admin,
     prepare:()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false,restoreFocus:false});},
@@ -4008,7 +4018,7 @@ function renderScope(){
       chip.append(undo);box.append(chip);
     }
   }
-  show("scope-warning",draft.mode!=="selected");$("scope-warning").textContent=wideWarning();
+  show("scope-warning",draft.mode!=="selected");$("scope-warning-text").textContent=wideWarning();
   $("scope-unsaved").textContent=state.scopeDirty?tr("Unsaved changes — press Save scope to apply."):tr("Saved: {mode}.",{mode:scopeName(saved.mode)});
 }
 $("scope-form").addEventListener("change",()=>{state.scopeDirty=true;renderScope();});
@@ -6496,6 +6506,7 @@ async function loadHistory(button,limit,before=null,quiet=false){
   };
   return busy(button,work);
 }
+$("exports-more").addEventListener("click",event=>{$("view-evidence").classList.add("exports-expanded");event.currentTarget.setAttribute("aria-expanded","true");$("collection-methods").querySelector("summary").focus();});
 $("chat-load-history").addEventListener("click",e=>loadHistory(e.currentTarget,Number($("chat-history-limit").value)));
 
 let multiPoll=null,multiRequest=0,multiDiscovery=null;

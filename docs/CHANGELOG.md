@@ -48,6 +48,17 @@
   what a public proxy operator can see; Expert also shows the proxy host.
 - Home tiles put the label above the number, help toggles read “What is this?”, and a chat name shows a tooltip
   only when it is cut off.
+- The Simple level is simpler: the menu shows Home, Chats, Exports and Settings; other sections appear under
+  “Show hidden sections” until the page reloads, without changing the level. Simple also folds the system,
+  composition and per-day blocks on Home, secondary export options, and journal filters other than messages,
+  edits and deletions, and names the journal “Records” and Sources “What to record”.
+- Home starts with one line of saved records, coverage gaps, sign-in and low-disk state; each part opens the
+  matching page.
+- A coverage gap inside a chat is one line with the number of pauses, the time span and the total length; the
+  full list is under Details.
+- The warning for folder and whole-account scope sits right below the scope choice with a link to the dedicated
+  account guide.
+- Integrations say what leaves the panel and who receives it; archive connections explain what they are.
 - Recheck access to helper workspaces when resuming or retrying profile collection.
 - Keep session age and loss context within the current authorization, ignore late session checks from
   replaced clients, and distinguish the last successful check from the saved session snapshot.

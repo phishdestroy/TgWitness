@@ -9952,5 +9952,12 @@
   "Public MTProxy (third-party server from an open list)": "공개 MTProxy(공개 목록의 제3자 서버)",
   "Public MTProxy": "공개 MTProxy",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "프록시 운영자는 이 서버가 접속한다는 사실과 IP 주소는 볼 수 있지만 메시지는 볼 수 없습니다. MTProto가 Telegram까지 암호화합니다.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "아직 메시지나 변경 사항이 없습니다. 저널 기록: {n}. 로그인과 연결 확인 같은 시스템 기록은 숨겨져 있습니다."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "아직 메시지나 변경 사항이 없습니다. 저널 기록: {n}. 로그인과 연결 확인 같은 시스템 기록은 숨겨져 있습니다.",
+  "Show fewer sections": "섹션 적게 보기",
+  "Chats being recorded": "기록 중인 채팅",
+  "Pauses: {n}": "일시 중지: {n}",
+  "Saved records: {n}": "저장된 기록: {n}",
+  "Coverage gaps: {n}": "수집 공백: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "이 패널에서 무엇이 나가고 누가 받는지: AI 제공자는 해당 클라이언트가 요청한 메시지만 받습니다. 아카이브 연결은 자체 토큰으로 허용된 작업 공간과 채팅만 읽습니다. 웹훅은 메타데이터를 보내며, 메시지 본문은 따로 선택한 경우에만 보냅니다.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "토큰으로 이 아카이브를 읽는 AI 또는 명령줄 클라이언트입니다. 각 연결은 자신에게 선택된 작업 공간과 채팅만 볼 수 있으며 언제든지 취소할 수 있습니다."
 }

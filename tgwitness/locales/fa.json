@@ -10003,5 +10003,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy عمومی (سرور شخص ثالث از یک فهرست باز)",
   "Public MTProxy": "MTProxy عمومی",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "گرداننده پروکسی می‌بیند که این سرور وصل می‌شود و نشانی IP آن را، اما پیام‌ها را نمی‌بیند: MTProto آن‌ها را تا خود Telegram رمزگذاری می‌کند.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "هنوز پیام یا تغییری اینجا نیست. رکوردهای دفتر: {n}. رکوردهای سیستمی مانند ورودها و بررسی‌های اتصال پنهان هستند."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "هنوز پیام یا تغییری اینجا نیست. رکوردهای دفتر: {n}. رکوردهای سیستمی مانند ورودها و بررسی‌های اتصال پنهان هستند.",
+  "Show fewer sections": "نمایش بخش‌های کمتر",
+  "Chats being recorded": "گفتگوهای در حال ضبط",
+  "Pauses: {n}": "توقف‌ها: {n}",
+  "Saved records: {n}": "رکوردهای ذخیره‌شده: {n}",
+  "Coverage gaps: {n}": "شکاف‌های پوشش: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "چه چیزی از این پنل خارج می‌شود و چه کسی آن را دریافت می‌کند: ارائه‌دهنده هوش مصنوعی فقط پیام‌هایی را می‌گیرد که کلاینتش درخواست کند؛ اتصال بایگانی با توکن خودش فقط فضاهای کاری و گفتگوهای مجاز را می‌خواند؛ وب‌هوک فراداده می‌فرستد و متن پیام را فقط اگر خودتان انتخاب کنید.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "کلاینت‌های هوش مصنوعی یا خط فرمان که این بایگانی را با توکن می‌خوانند. هر اتصال فقط فضاهای کاری و گفتگوهای انتخاب‌شده برای خودش را می‌بیند و هر زمان می‌توان آن را لغو کرد."
 }

@@ -10013,5 +10013,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy public (serveur tiers issu d’une liste ouverte)",
   "Public MTProxy": "MTProxy public",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "L’opérateur du proxy voit que ce serveur se connecte et son adresse IP, mais pas les messages : MTProto les chiffre jusqu’à Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Aucun message ni modification ici pour l’instant. Entrées dans le journal : {n}. Les entrées système comme les connexions et les vérifications de connexion sont masquées."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Aucun message ni modification ici pour l’instant. Entrées dans le journal : {n}. Les entrées système comme les connexions et les vérifications de connexion sont masquées.",
+  "Show fewer sections": "Afficher moins de sections",
+  "Chats being recorded": "Discussions enregistrées",
+  "Pauses: {n}": "Pauses : {n}",
+  "Saved records: {n}": "Entrées enregistrées : {n}",
+  "Coverage gaps: {n}": "Lacunes de couverture : {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Ce qui quitte ce panneau et qui le reçoit : un fournisseur d’IA ne reçoit que les messages demandés par son client ; une connexion d’archive ne lit, avec son propre jeton, que les espaces de travail et discussions autorisés ; un webhook envoie des métadonnées, et le texte des messages seulement si vous le choisissez.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Clients d’IA ou en ligne de commande qui lisent cette archive avec un jeton. Chaque connexion ne voit que les espaces de travail et discussions choisis pour elle et peut être révoquée à tout moment."
 }

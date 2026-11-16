@@ -10207,5 +10207,12 @@
   "Public MTProxy (third-party server from an open list)": "MTProxy عام (خادم طرف ثالث من قائمة مفتوحة)",
   "Public MTProxy": "MTProxy عام",
   "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "يرى مشغّل الوكيل أن هذا الخادم يتصل وعنوان IP الخاص به، لكنه لا يرى الرسائل: يشفّرها MTProto حتى تصل إلى Telegram.",
-  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "لا توجد رسائل أو تغييرات هنا بعد. السجلات في اليومية: {n}. السجلات النظامية مثل تسجيلات الدخول وفحوص الاتصال مخفية."
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "لا توجد رسائل أو تغييرات هنا بعد. السجلات في اليومية: {n}. السجلات النظامية مثل تسجيلات الدخول وفحوص الاتصال مخفية.",
+  "Show fewer sections": "عرض أقسام أقل",
+  "Chats being recorded": "الدردشات المسجّلة",
+  "Pauses: {n}": "فترات التوقف: {n}",
+  "Saved records: {n}": "السجلات المحفوظة: {n}",
+  "Coverage gaps: {n}": "فجوات التغطية: {n}",
+  "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "ما الذي يغادر هذه اللوحة ومن يستلمه: يحصل مزوّد الذكاء الاصطناعي فقط على الرسائل التي يطلبها عميله؛ ويقرأ اتصال الأرشيف برمزه الخاص مساحات العمل والدردشات المسموح بها فقط؛ ويرسل الـ webhook البيانات الوصفية، ونص الرسائل فقط إذا اخترته أيضًا.",
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "عملاء ذكاء اصطناعي أو سطر أوامر يقرؤون هذا الأرشيف برمز. يرى كل اتصال مساحات العمل والدردشات المختارة له فقط، ويمكن إلغاؤه في أي وقت."
 }
