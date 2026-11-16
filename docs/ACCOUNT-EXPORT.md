@@ -82,6 +82,12 @@ calendar, participants over time for groups, and a mark in the transcript where 
 absent. `verify.py` recomputes `message-gaps.json` from the signed pages and rejects a
 changed file.
 
+The activity map lists the largest channel and supergroup gaps, including their
+number ranges and neighbouring message times. Open a range to jump to its marked
+position in the paginated transcript. These marks describe absent numbers; they
+do not establish a deletion event, its time or the missing message text. Wide
+tables scroll within their cards on small screens.
+
 ## Resume, coverage and verification
 
 Each job freezes its options and account identity. Inventory and captured pages are signed; page receipts record hashes, cursors, times, attachment outcomes and their preceding receipt. Only committed pages advance progress. Restart/resume checks those records before continuing. A changed account, changed signed page or inconsistent receipt chain is rejected. Options cannot be edited halfway through an acquisition: start another job for another scope.

@@ -1123,6 +1123,7 @@ class AccountExport:
                                "gap_markers": activity_maps.MarkerPlacer(activity_maps.markers(gap_map, chat["id"], chat.get("kind")))}
                     for name, content in account_report.account_chat_pages(context, display_chat, message_rows):
                         write(name, content)
+                    activity.gap_links[chat["id"]] = context["gap_markers"].locations
                 report_context["analytics"] = account_report.snapshot_analytics.project(analytics.result(), report_context["presentation"])
                 write("analytics.json", [canonical(report_context["analytics"])])
                 write("map.html", account_report.account_map_page(report_context, activity, gap_map, selected))

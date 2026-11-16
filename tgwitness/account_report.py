@@ -314,6 +314,10 @@ def gap_marks(context, say, current=None, last=False):
     if placer is None:
         return ''
     found = placer.rest() if last else placer.before(current)
+    page = (context.get('pagination') or {}).get('file')
+    if page:
+        for marker in found:
+            placer.locations[(marker[0], marker[1])] = page + '#' + activity_maps.marker_anchor(marker)
     return ''.join(activity_maps.marker_html(marker, say) for marker in found)
 
 

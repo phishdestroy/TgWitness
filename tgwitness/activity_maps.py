@@ -24,7 +24,7 @@ SCOPE_REASONS = {"chat_kinds": "some chat kinds were not selected", "chat_ids": 
 CSS = """
 .activity-map{--map-accent:var(--chart-accent,var(--accent,#235dcc));--map-loss:#d9480f;--map-empty:var(--line,#dce2eb);--map-paper:var(--card,var(--paper,#fff))}
 @media(prefers-color-scheme:dark){.activity-map{--map-loss:#ff8a4c}}
-.activity-map .map-card{padding:20px 22px;border:1px solid var(--line);background:var(--map-paper);border-radius:12px;margin:18px 0;break-inside:avoid}
+.activity-map .map-card{min-width:0;padding:20px 22px;border:1px solid var(--line);background:var(--map-paper);border-radius:12px;margin:18px 0;break-inside:avoid}
 .activity-map h3{font:600 15px/1.4 system-ui,sans-serif;margin:0 0 6px}.activity-map .map-note{font-size:12px;color:var(--muted);margin:4px 0 14px;max-width:90ch}
 .map-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}.map-kpis div{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--map-paper);min-width:0}
 .map-kpis strong{display:block;font-size:22px;line-height:1.3;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.map-kpis strong.small{font-size:15px;line-height:1.5}.map-kpis span{font-size:12px;color:var(--muted)}
@@ -48,6 +48,11 @@ CSS = """
 .map-table td.num,.map-table th.num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}.map-badge{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;border:1px solid var(--line);margin-inline-start:4px}
 .map-badge.proven,.map-badge.high{border-color:var(--map-loss);color:var(--map-loss)}.gap-mark{margin:10px 0;padding:9px 14px;border:1px dashed var(--map-loss,#d9480f);border-radius:8px;font-size:13px;color:var(--ink)}
 .gap-mark b{color:var(--map-loss,#d9480f)}.gap-mark small{display:block;color:var(--muted)}
+.gap-mark:target{outline:3px solid var(--map-loss,#d9480f);outline-offset:3px;scroll-margin-top:32px}
+.map-runs summary{cursor:pointer;font-weight:600}.map-run-list{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.map-run-list li{min-width:0}.map-run{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:12px 14px;border:1px solid var(--line);border-inline-start:3px solid var(--map-loss);border-radius:6px;text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
+a.map-run:hover,a.map-run:focus-visible{outline:2px solid var(--map-loss);outline-offset:2px}.map-run strong{font:600 16px/1.4 ui-monospace,monospace}.map-run small{grid-column:1/-1;color:var(--muted);font-size:12px}.map-run span{font-variant-numeric:tabular-nums}
+@media(max-width:720px){.map-run-list{grid-template-columns:1fr}.activity-map .map-card{padding:16px}}
 @media(max-width:720px){.map-pair{grid-template-columns:1fr}.map-lanes col.lane-col{width:110px}.map-lanes col.total-col{width:0}.map-lanes td.total{display:none}}
 @media print{.map-grid td,.map-grid td::after,.map-legend i{print-color-adjust:exact;-webkit-print-color-adjust:exact}.map-scroll{overflow:visible}}
 """
@@ -92,6 +97,7 @@ def number(value):
 class ActivityMap:
     def __init__(self):
         self.times, self.senders, self.kinds = {}, {}, {}
+        self.gap_links = {}
 
     def add(self, chat_id, kind, row):
         at = seconds(row.get("date"))
@@ -343,6 +349,7 @@ def account_map(activity, gaps, chats, say):
                        (day_text(start) + " → " + day_text(end) if start is not None else "—", say("First and last message")),
                        (lost_total, say("Absent message numbers")),
                        (shared["proven"] if shared else 0, say("Proven by a reply or pin"))]))
+    parts.append(numbered_runs(gaps, titles, activity.gap_links, say))
     parts.append(calendar(days, lost_days, say))
     if start is not None:
         origin, step, count = grid(start, end)
@@ -367,6 +374,28 @@ def chat_title(chat, titles, say):
     return titles.get(chat) or say("Chat {id} (not in this export)", id=chat)
 
 
+def numbered_runs(gaps, titles, links, say):
+    runs = [(high - low + 1, item["chat"], low, high, start, end)
+            for item in (gaps or {}).get("chats", []) for low, high, start, end in item["ranges"]]
+    if not runs:
+        return ""
+    parts = ['<details class="map-card map-runs" id="message-gaps"><summary>'
+             + e(say("Largest runs of absent numbers")) + ' · ' + str(len(runs)) + '</summary><ul class="map-run-list">']
+    for count, chat, low, high, start, end in sorted(runs, key=lambda row: (-row[0], row[1], row[2]))[:GAPS_SHOWN]:
+        numbers = str(low) + ("" if low == high else "–" + str(high))
+        location = links.get(chat, {}).get((low, high))
+        tag = 'a' if location else 'div'
+        parts.append('<li><' + tag + ' class="map-run"' + (' href="' + e(location) + '"' if location else '') + '>'
+                     + '<strong>' + e(numbers) + '</strong><span>' + str(count) + '</span><small dir="auto">'
+                     + e(chat_title(chat, titles, say)) + '</small><small>'
+                     + e(say("Between {start} and {end}.", start=time_text(start), end=time_text(end))) + '</small>'
+                     + ('<small>' + e(say("Open")) + ' →</small>' if location else '') + '</' + tag + '></li>')
+    parts.append('</ul>')
+    if len(runs) > GAPS_SHOWN:
+        parts.append('<p class="map-note">' + e(say("message-gaps.json lists all runs, {n} more than shown here.", n=len(runs) - GAPS_SHOWN)) + '</p>')
+    return ''.join(parts) + '</details>'
+
+
 def gap_details(gaps, titles, say):
     shared, parts = gaps["shared"], []
     scope = gaps["scope"]
@@ -383,17 +412,17 @@ def gap_details(gaps, titles, say):
                            (shared["below_first"], say("Numbers below the oldest exported message"))]))
         rows = sorted((item for item in shared["by_chat"] if item[2] or item[3] >= 0.05), key=lambda item: (-(item[2] + item[3]), item[0]))
         if rows:
-            parts.append('<table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Messages"))
+            parts.append('<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Messages"))
                          + '</th><th class="num">' + e(say("Proven absent")) + '</th><th class="num">' + e(say("Likely absent"))
                          + '</th><th class="num">' + e(say("Runs with high confidence")) + '</th></tr></thead><tbody>')
             for chat, messages, proven, expected, high in rows[:200]:
                 link = ('<a href="chats/' + str(chat) + '.html" dir="auto">' + e(chat_title(chat, titles, say)) + '</a>') if messages else e(chat_title(chat, titles, say))
                 parts.append('<tr><td>' + link + '</td><td class="num">' + str(messages) + '</td><td class="num">' + str(proven)
                              + '</td><td class="num">' + number(expected) + '</td><td class="num">' + str(high) + '</td></tr>')
-            parts.append('</tbody></table>')
+            parts.append('</tbody></table></div>')
         if shared["gaps"]:
             ordered = sorted(shared["gaps"], key=lambda g: (-g["count"], g["from"]))[:GAPS_SHOWN]
-            parts.append('<h3>' + e(say("Largest runs of absent numbers")) + '</h3><table class="map-table"><thead><tr><th>'
+            parts.append('<h3>' + e(say("Largest runs of absent numbers")) + '</h3><div class="map-scroll"><table class="map-table"><thead><tr><th>'
                          + e(say("Numbers")) + '</th><th>' + e(say("Between")) + '</th><th>' + e(say("Neighbours")) + '</th><th>'
                          + e(say("Most likely chat")) + '</th></tr></thead><tbody>')
             for gap in ordered:
@@ -407,7 +436,7 @@ def gap_details(gaps, titles, say):
                 parts.append('<tr><td class="num">' + e(numbers) + '</td><td>' + e(time_text(gap["after"][2])) + '<br>' + e(time_text(gap["before"][2]))
                              + '</td><td dir="auto">' + e(neighbours) + '</td><td dir="auto">' + e(likely) + ' · ' + str(round(share * 100))
                              + '% ' + badge + proven + '</td></tr>')
-            parts.append('</tbody></table>')
+            parts.append('</tbody></table></div>')
             if len(shared["gaps"]) > GAPS_SHOWN:
                 parts.append('<p class="map-note">' + e(say("message-gaps.json lists all runs, {n} more than shown here.", n=len(shared["gaps"]) - GAPS_SHOWN)) + '</p>')
         anomalies = shared["conflicts"]["count"] + shared["time_inversions"]["count"]
@@ -419,14 +448,14 @@ def gap_details(gaps, titles, say):
     if numbered:
         parts.append('<div class="map-card"><h3>' + e(say("Channels and supergroups")) + '</h3><p class="map-note">'
                      + e(say("Each of these chats numbers its own messages, so every missing number between the first and last exported message is a message of that chat.")) + '</p>'
-                     '<table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Numbers"))
+                     '<div class="map-scroll"><table class="map-table"><thead><tr><th>' + e(say("Chat")) + '</th><th class="num">' + e(say("Numbers"))
                      + '</th><th class="num">' + e(say("Messages")) + '</th><th class="num">' + e(say("Absent numbers"))
                      + '</th><th class="num">' + e(say("Runs")) + '</th></tr></thead><tbody>')
         for item in sorted(numbered, key=lambda i: (-i["absent"], i["chat"])):
             parts.append('<tr><td><a href="chats/' + str(item["chat"]) + '.html" dir="auto">' + e(titles.get(item["chat"], str(item["chat"])))
                          + '</a></td><td class="num">' + str(item["first"]) + "–" + str(item["last"]) + '</td><td class="num">' + str(item["present"])
                          + '</td><td class="num">' + str(item["absent"]) + '</td><td class="num">' + str(len(item["ranges"])) + '</td></tr>')
-        parts.append('</tbody></table></div>')
+        parts.append('</tbody></table></div></div>')
     parts.append('<p class="map-note">' + e(say("Method: kernel bandwidth {minutes} minutes, up to {n} neighbouring messages on each side; message-gaps.json holds every run and verify.py recomputes it from the signed pages.",
                                                 minutes=gaps["method"]["bandwidth_seconds"] // 60, n=gaps["method"]["neighbors"])) + '</p>')
     return ''.join(parts)
@@ -477,6 +506,10 @@ def markers(gaps, chat_id, kind):
     return sorted(found)
 
 
+def marker_anchor(marker):
+    return 'gap-' + str(marker[0]) + '-' + str(marker[1])
+
+
 def marker_html(marker, say):
     low, high, kind, amount, start, end, proven = marker
     numbers = str(low) + ("" if low == high else "–" + str(high))
@@ -489,13 +522,14 @@ def marker_html(marker, say):
         text = say("About {n} message(s) likely absent here: message numbers {numbers} ({confidence}).", n=number(amount), numbers=numbers,
                    confidence=say(CONFIDENCE[kind]))
     detail = say("Between {start} and {end}.", start=time_text(start), end=time_text(end))
-    return ('<div class="gap-mark" data-gap="' + e(numbers) + '"><b>' + e(say("Absent")) + '</b> · ' + e(text)
+    return ('<div class="gap-mark" id="' + e(marker_anchor(marker)) + '" data-gap="' + e(numbers) + '"><b>' + e(say("Absent")) + '</b> · ' + e(text)
             + '<small>' + e(detail) + '</small></div>')
 
 
 class MarkerPlacer:
     def __init__(self, found):
         self.pending = sorted(found)
+        self.locations = {}
 
     def before(self, current):
         found = []
