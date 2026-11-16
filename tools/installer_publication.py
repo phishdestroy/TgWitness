@@ -2,11 +2,12 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
+from http.client import HTTPException
 import json
 from pathlib import Path
 import re
 import time
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from cryptography.hazmat.primitives import hashes, serialization
@@ -27,7 +28,7 @@ class NoRedirects(HTTPRedirectHandler):
         raise ValueError("Installer downloads must not redirect")
 
 
-def fetch(path, limit=MAX_BYTES):
+def fetch_once(path, limit):
     request = Request(ORIGIN + "/" + path, headers={
         "User-Agent": "TgWitnessInstallerCheck/1", "Cache-Control": "no-cache"})
     with build_opener(NoRedirects).open(request, timeout=45) as response:
@@ -37,6 +38,22 @@ def fetch(path, limit=MAX_BYTES):
         if len(data) > limit:
             raise ValueError("Installer download exceeds size limit")
         return data
+
+
+def transient(exc):
+    if isinstance(exc, HTTPError):
+        return exc.code == 429 or exc.code >= 500
+    return isinstance(exc, (URLError, ConnectionError, TimeoutError, HTTPException))
+
+
+def fetch(path, limit=MAX_BYTES, attempts=5, pause=3):
+    for attempt in range(attempts):
+        try:
+            return fetch_once(path, limit)
+        except Exception as exc:
+            if attempt == attempts - 1 or not transient(exc):
+                raise
+        time.sleep(pause * 2 ** attempt)
 
 
 def validate_manifest(raw, release_id, public, *, allow_test=False):
