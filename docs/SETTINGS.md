@@ -72,6 +72,10 @@ in another tab.
 
 ## Connection
 
+Until a route is chosen here, a new workspace uses **Automatic MTProxy · public lists**
+with **Hide the address** ([connection security](CONNECTION-SECURITY.md)).
+The **Automatic** choice below is a separate setup step.
+
 **Automatic** tries WARP, then public MTProxy servers, then a direct connection, the
 last only when the server's address may be shown. Automatic and WARP can install
 hash-checked components and register the server with Cloudflare; without that consent

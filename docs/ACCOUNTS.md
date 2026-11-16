@@ -60,9 +60,11 @@ The built-in pairs are public: they are published in the open source code of Tel
 clients and libraries. An **API ID** and **API hash** identify the application to Telegram
 and give no access to account data. Sign-in uses the account's own authorization: a login
 code and 2FA password, or a session that account already authorized. Each
-`observation.started` record names the pair used. You can enter your own pair from
-my.telegram.org instead; for material intended for court, do so before collection starts
-(steps below). Create the pair and collect with a dedicated account, not a personal one.
+`observation.started` record names the pair used, so a built-in pair is documented for
+court in the same way as your own. You can enter your own pair from my.telegram.org instead.
+In the project's experience a new personal pair gets most accounts logged out, so use one
+only when a case requires your own application: create it with a dedicated account and
+enter it before collection starts (steps below).
 
 Missing connection fields use a deterministic device/OS pair from the bundled
 [opentele2 2.0.0 catalogs](https://github.com/DedInc/opentele2/tree/7e973bc71cd7a714ad13ac703c0895a90d36a735):
