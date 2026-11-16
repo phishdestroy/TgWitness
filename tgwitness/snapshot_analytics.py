@@ -2,12 +2,18 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 import html
 import math
+import statistics
 
 
 CHARTS = (("activity", "Activity over time"), ("heatmap", "Weekly rhythm"),
           ("participants", "Activity by participant"), ("chats", "Activity by chat"),
           ("composition", "Record composition"))
 LIMIT = 10000
+RECENT = 200000
+REPLIES = 5000
+HABITS_LISTED = 100
+PAUSE_HOURS = 6
+REPLY_WINDOW = 24 * 3600
 MESSAGE_KINDS = ("message.new", "message.snapshot", "message.recovered")
 KIND_LABELS = {"messages": "Message observations", "edits": "Edit observations", "deletions": "Deletion notices",
                "service": "Service messages", "other": "Other records", "rows": "Message rows"}
@@ -39,6 +45,34 @@ class Analytics:
         self.heat = [[0] * 24 for _ in range(7)]
         self.first = self.last = None
         self.overflow = {"participants": 0, "chats": 0}
+        self.habits, self.recent, self.previous = {}, {}, {}
+
+    def habit(self, key, chat, time, message_id, reply):
+        if type(message_id) is int:
+            spot = (chat, message_id)
+            if spot in self.recent:
+                return
+            if len(self.recent) >= RECENT:
+                self.recent.pop(next(iter(self.recent)))
+            self.recent[spot] = (key, time)
+        person = self.habits.get(key)
+        if person is None:
+            if len(self.habits) >= LIMIT:
+                return
+            person = self.habits[key] = {"messages": 0, "night": 0, "started": 0, "longest": 0, "replies": []}
+        person["messages"] += 1
+        person["night"] += time.hour < 6
+        last = self.previous.get(chat)
+        run = last[2] + 1 if last and last[0] == key else 1
+        if run == 1 and last and (time - last[1]).total_seconds() >= PAUSE_HOURS * 3600:
+            person["started"] += 1
+        person["longest"] = max(person["longest"], run)
+        self.previous[chat] = (key, time, run)
+        target = self.recent.get((chat, reply)) if type(reply) is int else None
+        if target and target[0] != key and len(person["replies"]) < REPLIES:
+            delay = (time - target[1]).total_seconds()
+            if 0 <= delay <= REPLY_WINDOW:
+                person["replies"].append(delay)
 
     def group(self, table, names, value, name, kind):
         key = label(value)
@@ -49,7 +83,7 @@ class Analytics:
         if key and label(name):
             names[key] = label(name)
 
-    def message(self, at, sender, name, chat, title):
+    def message(self, at, sender, name, chat, title, message_id=None, reply=None):
         self.messages += 1
         self.group(self.people, self.people_names, sender, name, "participants")
         self.group(self.chats, self.chat_names, chat, title, "chats")
@@ -57,6 +91,8 @@ class Analytics:
         if time is None:
             self.undated += 1
             return
+        if self.basis == "snapshot" and label(sender):
+            self.habit(label(sender), label(chat), time, message_id, reply)
         self.first = min(self.first, time) if self.first else time
         self.last = max(self.last, time) if self.last else time
         self.heat[time.weekday()][time.hour] += 1
@@ -92,7 +128,7 @@ class Analytics:
             if isinstance(sender, dict):
                 sender = next((str(key) + ':' + str(sender[key]) for key in ("user_id", "channel_id", "chat_id") if type(sender.get(key)) is int), None)
             self.message(row.get("date"), sender, row.get("from") or name,
-                         chat.get("id"), chat.get("title"))
+                         chat.get("id"), chat.get("title"), row.get("id"), row.get("reply_to_message_id"))
 
     def result(self):
         series = []
@@ -112,7 +148,13 @@ class Analytics:
             return [{"id": key or None, "label": names.get(key) or key or UNKNOWN, "count": count}
                     for key, count in sorted(table.items(), key=lambda item: (-item[1], item[0]))]
 
+        habits = [{"id": key, "label": self.people_names.get(key) or key, "messages": person["messages"],
+                   "night_share": round(person["night"] / person["messages"], 4), "started_after_pause": person["started"],
+                   "longest_run": person["longest"], "replies_timed": len(person["replies"]),
+                   "median_reply_seconds": statistics.median(person["replies"]) if person["replies"] else None}
+                  for key, person in sorted(self.habits.items(), key=lambda item: (-item[1]["messages"], item[0]))[:HABITS_LISTED]]
         return {"format": "tgwitness-report-analytics-v1", "basis": self.basis, "timezone": "UTC",
+                **({"habits": habits, "pause_hours": PAUSE_HOURS} if habits else {}),
                 "records": self.total, "messages": self.messages, "undated": self.undated,
                 "first": self.first.isoformat() if self.first else None,
                 "last": self.last.isoformat() if self.last else None,
@@ -155,9 +197,16 @@ def project(data, options):
         "label": ("Participant %02d" % aliases[row["id"]]) if row["id"] is not None else UNKNOWN}
         if options.get("participant_labels", "aliases") == "aliases" else {**row, "label": str(row["id"]) if row["id"] is not None else UNKNOWN}
         for row in people]
+    if "habits" in data:
+        output["habits"] = ([{**row, "id": "participant-%02d" % aliases[row["id"]], "label": "Participant %02d" % aliases[row["id"]]}
+                             for row in data["habits"] if row["id"] in aliases]
+                            if options.get("participant_labels", "aliases") == "aliases"
+                            else [{**row, "label": str(row["id"])} for row in data["habits"]])
     for key, control in CONTROLS.items():
         if not options.get(control, True):
             output.pop(key, None)
+            if key == "participants":
+                output.pop("habits", None)
     return output
 
 
@@ -214,6 +263,30 @@ def heatmap(data, say):
     return ''.join(parts) + '</tbody></table></div><p class="chart-note">' + e(say("Darker cells mean more included observations. Maximum per cell: {n}", n=peak)) + '</p>'
 
 
+def duration(seconds, say):
+    if seconds is None:
+        return "—"
+    if seconds < 3600:
+        return say("{n} min", n=max(1, round(seconds / 60)))
+    return say("{n} h", n=round(seconds / 3600, 1))
+
+
+def habit_rows(data, say, top_n):
+    titles = [say("Participant"), say("Messages"), say("Starts after {hours} h of silence", hours=data.get("pause_hours", PAUSE_HOURS)),
+              say("Median reply time"), say("Longest run in a row"), say("Night share, 00–06 UTC")]
+    rows = [[row["label"], str(row["messages"]), str(row["started_after_pause"]), duration(row["median_reply_seconds"], say),
+             str(row["longest_run"]), str(round(row["night_share"] * 100)) + "%"] for row in data.get("habits", [])[:top_n]]
+    return titles, rows
+
+
+def habits_html(data, say, top_n):
+    titles, rows = habit_rows(data, say, top_n)
+    return ('<article class="chart-card chart-habits"><h3>' + e(say("Rhythm")) + '</h3><div class="heatmap-scroll"><table class="habits-table"><thead><tr>'
+            + ''.join('<th scope="col">' + e(title) + '</th>' for title in titles) + '</tr></thead><tbody>'
+            + ''.join('<tr><th scope="row" dir="auto">' + e(row[0]) + '</th>' + ''.join('<td>' + e(cell) + '</td>' for cell in row[1:]) + '</tr>'
+                      for row in rows) + '</tbody></table></div></article>')
+
+
 def html_section(data, options, say):
     if not data or not selected(options):
         return ""
@@ -244,6 +317,8 @@ def html_section(data, options, say):
         if data.get("unlisted", {}).get(key):
             parts.append('<p class="chart-note">' + e(say("Category limit reached. Unlisted observations: {n}", n=data["unlisted"][key])) + '</p>')
         parts.append('</article>')
+        if key == "participants" and data.get("habits"):
+            parts.append(habits_html(data, say, options.get("chart_limit", 10)))
     parts.append('</div><p class="analytics-caution">' + e(say(CAUTION)) + '</p></section>')
     return ''.join(parts)
 
@@ -318,6 +393,15 @@ def _pdf_section(lay, data, options):
                 lay.text(say("No included data for this chart."))
         if data.get("unlisted", {}).get(key):
             lay.text(say("Category limit reached. Unlisted observations: {n}", n=data["unlisted"][key]), size=8)
+        if key == "participants" and data.get("habits"):
+            titles, rows = habit_rows(data, say, options.get("chart_limit", 10))
+            lay.need(22 + len(rows) * 13)
+            lay.heading(say("Rhythm"))
+            for row in rows:
+                lay.need(14)
+                lay.text(row[0], size=8)
+                lay.text("   ·   ".join(title + ": " + cell for title, cell in zip(titles[1:], row[1:])), size=7)
+                lay.gap(2)
     lay.text(say(CAUTION), size=8)
 
 

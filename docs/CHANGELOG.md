@@ -58,6 +58,10 @@
   connected accounts can share the work: each is reserved for the run, busy accounts
   are left alone, progress shows the percentage, time left and each account's share,
   and every record names the account that read it.
+- Chat and account export reports add a **Rhythm** table under Activity by
+  participant: messages, conversations started after 6 hours of silence, median
+  reply time, the longest run in a row and the night share, in message order and
+  UTC. It follows the participant chart setting and its labels (aliases by default).
 - Cloud-chat history can be forwarded in order to a new private channel or
   supergroup, or an existing channel/group with posting access. A preview fixes
   the history boundary before an explicit start. Transfers retain albums, shared
