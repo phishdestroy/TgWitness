@@ -2465,6 +2465,7 @@ class Collector:
                 if existing.get("id") != me.id:
                     self.store.set_setting("account_warmup", {"account_id": me.id, "started_at": time.time()})
                 self.store.set_setting("account", {"id": me.id, "username": me.username,
+                                                   "name": utils.get_display_name(me) or None,
                                                    "key_origin": self.pending_key_origin})
                 self.store.set_setting("account_loss", None)
                 login_method = self.pending_login_method or ("session_import" if self.pending_key_origin == "imported" else None)
@@ -2605,6 +2606,8 @@ class Collector:
                 await self.check_frozen()
                 current()
                 await self.allow_sensitive()
+                current()
+                await self.remember_account_name()
                 current()
             if secret_chats.settings(self.store)["enabled"]:
                 chats = secret_chats.of(self)
@@ -2912,6 +2915,18 @@ class Collector:
             self.store.set_setting("account_restriction", None)
             self.store.append("account.restriction_expired", {"kind": "frozen", "source": "help.getAppConfig"})
         return frozen
+
+    async def remember_account_name(self):
+        account = self.store.get_setting("account", None) or {}
+        if not account.get("id") or "name" in account:
+            return
+        try:
+            me = await asyncio.wait_for(self.client.get_me(), 20)
+        except Exception:
+            return
+        latest = self.store.get_setting("account", None) or {}
+        if me is not None and me.id == latest.get("id") and "name" not in latest:
+            self.store.set_setting("account", {**latest, "name": utils.get_display_name(me) or None})
 
     async def allow_sensitive(self):
         try:

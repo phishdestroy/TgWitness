@@ -41,6 +41,9 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- Reports name the observing or exporting account by its Telegram name, with @username and ID in brackets,
+  instead of a bare `id 8644525789`. The workspace keeps the account name from sign-in; older workspaces fill
+  it in on the next connection.
 - Recording a chat that is not in the loaded chat list, such as a private chat reached from a message, looks
   it up in Telegram instead of failing with “Refresh the group list…”. When Telegram does not return it either,
   the message says to press **Refresh chat list** or check that the account is still in the chat.

@@ -706,6 +706,8 @@ def workspace_name(store):
     account = store.get_setting("account", None) or {}
     if account.get("username"):
         return "@" + account["username"]
+    if (account.get("name") or "").strip():
+        return account["name"].strip()
     return "ID " + str(account["id"]) if account.get("id") else "TgWitness"
 
 
