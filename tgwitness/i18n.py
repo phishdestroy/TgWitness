@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from functools import lru_cache
 from pathlib import Path
 
@@ -68,14 +69,29 @@ def plural(lang, count):
     return "one" if n == 1 else "other"
 
 
+@lru_cache(maxsize=8)
+def _catalog(fallback_path, locale_path, revisions):
+    fallback = {text: text for text in json.loads(fallback_path.read_text(encoding="utf-8"))}
+    table = {**fallback, **json.loads(locale_path.read_text(encoding="utf-8"))}
+    mutable = tuple((key, value) for key, value in table.items() if isinstance(value, (dict, list)))
+    return table, mutable
+
+
+def _dictionary(path):
+    paths = (ENGLISH_FALLBACKS, path)
+    revisions = tuple((stat.st_mtime_ns, stat.st_ctime_ns, stat.st_size, stat.st_ino)
+                      for stat in (item.stat() for item in paths))
+    table, mutable = _catalog(*paths, revisions)
+    return {**table, **{key: deepcopy(value) for key, value in mutable}}
+
+
 def words(lang):
     if lang == "en":
         return {}
     path = LOCALE_FILES.get(lang)
     if path is None:
         raise ValueError("Unsupported panel language")
-    fallback = {text: text for text in json.loads(ENGLISH_FALLBACKS.read_text(encoding="utf-8"))}
-    return {**fallback, **json.loads(path.read_text(encoding="utf-8"))}
+    return _dictionary(path)
 
 
 @lru_cache(maxsize=None)
@@ -92,5 +108,4 @@ def guide_words(lang):
     path = GUIDE_FILES.get(lang)
     if path is None:
         raise ValueError("Unsupported guide language")
-    fallback = {text: text for text in json.loads(ENGLISH_FALLBACKS.read_text(encoding="utf-8"))}
-    return {**fallback, **json.loads(path.read_text(encoding="utf-8"))}
+    return _dictionary(path)
