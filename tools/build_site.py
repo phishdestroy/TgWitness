@@ -303,7 +303,9 @@ def inventory(root=ROOT):
         strings += site_i18n.script_strings((root / name).read_text(encoding="utf-8"))
     fragments = {"home": home_body((root / "website/index.html").read_text(encoding="utf-8")),
                  "intro": (root / "website/guide_intro.html").read_text(encoding="utf-8"),
-                 "export-clinic": (root / "website/export-clinic/page.html").read_text(encoding="utf-8")}
+                 "export-clinic": (root / "website/export-clinic/page.html").read_text(encoding="utf-8"),
+                 "capture-instructions": site_wiki.to_html(site_wiki.split_title(
+                     (root / CAPTURE_DOCS["en"]).read_text(encoding="utf-8"))[1])[0]}
     strings += [site_export_clinic.DESCRIPTION, *CLINIC_LABELS]
     for slug in GUIDES:
         if slug == "dedicated-account":
@@ -428,9 +430,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     fragments = {slug: read_public(f"website/guides/en/{slug}.html").decode("utf-8")
                  for slug in GUIDES if slug != "dedicated-account"}
     account_template = read_public(site_account.SOURCE).decode("utf-8")
-    capture_instructions, images = {}, {}
+    capture_instructions, capture_bodies, images = {}, {}, {}
     for code, source in CAPTURE_DOCS.items():
-        body = site_wiki.to_html(site_wiki.split_title(read_public(source).decode("utf-8"))[1])[0]
+        body = site_wiki.to_html(site_wiki.split_title(read_public(source).decode("utf-8").replace("\r\n", "\n"))[1])[0]
+        capture_bodies[code] = body
         capture_instructions[code] = site_wiki.rewrite_links(
             body, source, "", {}, {}, lambda page, target: "@@ROOT@@" + target,
             repo_url, branch, images, root)
@@ -587,10 +590,15 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             translated, missing = ((site_account.main_content(account_page), 0) if slug == "dedicated-account"
                                    else localize(fragments[slug]))
             if slug == "capture":
-                source_lang = lang if lang in CAPTURE_DOCS else "en"
+                if lang in CAPTURE_DOCS:
+                    instructions = capture_instructions[lang]
+                else:
+                    instructions = site_wiki.rewrite_links(
+                        localize(capture_bodies["en"])[0], CAPTURE_DOCS["en"], "", {}, {},
+                        lambda page, target: "@@ROOT@@" + target, repo_url, branch, images, root)
                 translated += (f'<details class="detail-block"><summary>{labels["reference"]}</summary>'
-                               f'<div class="wiki-body" lang="{source_lang}" dir="ltr">'
-                               + capture_instructions[source_lang] + '</div></details>')
+                               f'<div class="wiki-body" lang="{lang}" dir="{"rtl" if rtl else "ltr"}">'
+                               + instructions + '</div></details>')
             if slug == "concepts":
                 translated += (f'<p class="callout"><a href="@@ROOT@@{base}docs/export-clinic/">{html.escape(t(CLINIC_LABELS[2]))}</a>. '
                                f'{html.escape(t(CLINIC_LABELS[3]))}</p>')
