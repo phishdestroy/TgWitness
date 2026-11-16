@@ -9953,5 +9953,11 @@
   "Preparing page {n} of {total}": "מכין את עמוד {n} מתוך {total}",
   "Loading saved messages: {n}": "טוען הודעות שמורות: {n}",
   "Only the latest {n} saved messages are included.": "נכללות רק {n} ההודעות השמורות האחרונות.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "כל עמוד מציין את רשומות היומן שלו. קובץ ה-ZIP מוסיף קובץ חתימה ש-verify.py בודק."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "כל עמוד מציין את רשומות היומן שלו. קובץ ה-ZIP מוסיף קובץ חתימה ש-verify.py בודק.",
+  "Rhythm": "קצב",
+  "Starts after {hours} h of silence": "מתחיל אחרי {hours} שעות שקט",
+  "Median reply time": "זמן תגובה חציוני",
+  "Longest run in a row": "הרצף הארוך ביותר",
+  "Night share, 00–06 UTC": "חלק הלילה, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "יום בשבוע × שעה, UTC. מחושב מההודעות השמורות בצ'אט זה."
 }

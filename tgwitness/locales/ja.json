@@ -9851,5 +9851,11 @@
   "Preparing page {n} of {total}": "{total} ページ中 {n} ページ目を準備しています",
   "Loading saved messages: {n}": "保存済みメッセージを読み込み中: {n}",
   "Only the latest {n} saved messages are included.": "保存済みメッセージのうち最新の {n} 件のみを含みます。",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "各ページには対応するジャーナル記録が記載されます。ZIP には verify.py で検証できる署名ファイルが含まれます。"
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "各ページには対応するジャーナル記録が記載されます。ZIP には verify.py で検証できる署名ファイルが含まれます。",
+  "Rhythm": "リズム",
+  "Starts after {hours} h of silence": "{hours} 時間の沈黙後に最初に発言",
+  "Median reply time": "返信時間の中央値",
+  "Longest run in a row": "最長の連続投稿",
+  "Night share, 00–06 UTC": "夜間の割合 (00–06 UTC)",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "曜日 × 時間 (UTC)。このチャットの保存済みメッセージから集計。"
 }

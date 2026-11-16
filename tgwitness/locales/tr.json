@@ -9902,5 +9902,11 @@
   "Preparing page {n} of {total}": "{total} sayfadan {n}. sayfa hazırlanıyor",
   "Loading saved messages: {n}": "Kaydedilen mesajlar yükleniyor: {n}",
   "Only the latest {n} saved messages are included.": "Yalnızca kaydedilen son {n} mesaj dahil edildi.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Her sayfa kendi günlük kayıtlarını belirtir. ZIP, verify.py'nin denetlediği bir imza dosyası ekler."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Her sayfa kendi günlük kayıtlarını belirtir. ZIP, verify.py'nin denetlediği bir imza dosyası ekler.",
+  "Rhythm": "Ritim",
+  "Starts after {hours} h of silence": "{hours} saat sessizlikten sonra başlatır",
+  "Median reply time": "Ortanca yanıt süresi",
+  "Longest run in a row": "Arka arkaya en uzun seri",
+  "Night share, 00–06 UTC": "Gece payı, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "Gün × saat, UTC. Bu sohbetin kaydedilen mesajlarından sayıldı."
 }

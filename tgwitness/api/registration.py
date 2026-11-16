@@ -617,6 +617,7 @@ def register(app, ctx):
         "/api/chats/{chat_id}/people/{user_id}", dependencies=[Depends(authenticate)]
     )(routes_chats.person_timeline)
     router.get("/api/chats/{chat_id}/people/{user_id}/assets", dependencies=[Depends(authenticate)])(routes_profiling.assets)
+    router.get("/api/chats/{chat_id}/people/{user_id}/rhythm", dependencies=[Depends(authenticate)])(routes_chats.person_rhythm)
     router.get("/api/profiling", dependencies=[Depends(authenticate)])(routes_profiling.status)
     router.post("/api/profiling/{action}", dependencies=[Depends(authenticate)])(routes_profiling.action)
     router.post("/api/chats/{chat_id}/dossier", dependencies=[Depends(authenticate)])(

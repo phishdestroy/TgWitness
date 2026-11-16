@@ -5650,7 +5650,7 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=4').then(({createPeopleTimeline})=>{
+const peopleTimelineReady=import('./views/people-timeline.js?v=5').then(({createPeopleTimeline})=>{
   peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
@@ -5662,7 +5662,7 @@ $('chat-feed').after(personCardHost);
 let personCard=null;
 function closePersonCard(){personCardHost.hidden=true;personCard?.reset();personCardHost.replaceChildren();}
 async function openPersonCard(userId){
-  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=4');
+  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=5');
   personCard||=createPeopleTimeline({root:personCardHost,json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chat!==null&&!personCardHost.hidden,

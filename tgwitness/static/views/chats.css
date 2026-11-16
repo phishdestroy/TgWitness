@@ -161,3 +161,8 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .person-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.person-card-head h3{margin:0}
 .person-card-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
 @media (prefers-reduced-motion: reduce){.person-card{animation:none}}
+.person-rhythm{margin:12px 0}.person-rhythm>summary{cursor:pointer;font-weight:600}
+.person-rhythm-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px 16px;margin:12px 0}.person-rhythm-facts dt{color:var(--muted);font-size:12px}.person-rhythm-facts dd{margin:2px 0 0;font-weight:600}
+.person-rhythm-heat{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:2px}.person-rhythm-heat caption{caption-side:bottom;text-align:start;color:var(--muted);font-size:12px;padding-top:6px}
+.person-rhythm-heat th{font-size:10px;font-weight:500;color:var(--muted);padding:0;text-align:start;overflow:hidden;white-space:nowrap}.person-rhythm-heat thead th{overflow:visible}.person-rhythm-heat thead th:first-child{width:3.4em}.person-rhythm-heat tbody th{text-overflow:ellipsis;padding-inline-end:4px}
+.person-rhythm-heat td{height:12px;padding:0;border-radius:2px;background:color-mix(in srgb,var(--accent) calc(var(--level)*1%),var(--surface-2))}.person-rhythm-heat td.empty{background:var(--surface-2)}

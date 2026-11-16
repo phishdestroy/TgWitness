@@ -49,6 +49,10 @@
 - Pressing an author's name in a chat opens a person card beside the messages with
   the saved profile, photos, gifts, links, activity timeline and journal records,
   **Refresh profile** and **Build report**; the chat stays where it was.
+- The person card has a **Rhythm** section counted in UTC from the author's saved
+  messages in that chat: active days, conversations started after 6 hours of
+  silence, median reply time, the longest run in a row, the night share and a
+  weekday × hour heatmap. Only the latest 20,000 messages are counted.
 - Cloud-chat history can be forwarded in order to a new private channel or
   supergroup, or an existing channel/group with posting access. A preview fixes
   the history boundary before an explicit start. Transfers retain albums, shared

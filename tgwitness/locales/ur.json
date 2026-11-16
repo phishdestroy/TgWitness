@@ -9902,5 +9902,11 @@
   "Preparing page {n} of {total}": "{total} میں سے صفحہ {n} تیار ہو رہا ہے",
   "Loading saved messages: {n}": "محفوظ پیغامات لوڈ ہو رہے ہیں: {n}",
   "Only the latest {n} saved messages are included.": "صرف تازہ ترین {n} محفوظ پیغامات شامل ہیں۔",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "ہر صفحہ اپنے جرنل ریکارڈز کا حوالہ دیتا ہے۔ ZIP میں ایک دستخطی فائل شامل ہوتی ہے جسے verify.py جانچتا ہے۔"
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "ہر صفحہ اپنے جرنل ریکارڈز کا حوالہ دیتا ہے۔ ZIP میں ایک دستخطی فائل شامل ہوتی ہے جسے verify.py جانچتا ہے۔",
+  "Rhythm": "ردھم",
+  "Starts after {hours} h of silence": "{hours} گھنٹے خاموشی کے بعد آغاز کرتا ہے",
+  "Median reply time": "جواب کا وسطی وقت",
+  "Longest run in a row": "لگاتار طویل ترین سلسلہ",
+  "Night share, 00–06 UTC": "رات کا حصہ، 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "ہفتے کا دن × گھنٹہ، UTC۔ اس چیٹ کے محفوظ پیغامات سے شمار کیا گیا۔"
 }

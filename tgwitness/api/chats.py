@@ -5,6 +5,7 @@ from .. import i18n
 from .. import interactions
 from .. import people
 from .. import recording
+from .. import rhythm
 from .. import tuning
 from ..access import Refused
 from ..access import check as access_check
@@ -699,6 +700,19 @@ async def person_timeline(
         )
     except ValueError as exc:
         raise HTTPException(404, str(exc)) from None
+    await ctx.recheck_export_scope(request, {chat_id})
+    return value
+
+
+async def person_rhythm(
+    request: Request,
+    chat_id: int = ApiPath(ge=-(2**63), le=2**63 - 1),
+    user_id: int = ApiPath(ge=1, le=2**63 - 1),
+    *,
+    ctx=Depends(current_context),
+):
+    ctx.require_chat(request, chat_id)
+    value = await asyncio.to_thread(rhythm.person_rhythm, ctx.app.state.store, chat_id, user_id)
     await ctx.recheck_export_scope(request, {chat_id})
     return value
 

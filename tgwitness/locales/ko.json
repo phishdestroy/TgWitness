@@ -9851,5 +9851,11 @@
   "Preparing page {n} of {total}": "{total}페이지 중 {n}페이지 준비 중",
   "Loading saved messages: {n}": "저장된 메시지 불러오는 중: {n}",
   "Only the latest {n} saved messages are included.": "저장된 메시지 중 최근 {n}개만 포함됩니다.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "각 페이지에는 해당 저널 기록이 표시됩니다. ZIP에는 verify.py로 검증하는 서명 파일이 추가됩니다."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "각 페이지에는 해당 저널 기록이 표시됩니다. ZIP에는 verify.py로 검증하는 서명 파일이 추가됩니다.",
+  "Rhythm": "리듬",
+  "Starts after {hours} h of silence": "{hours}시간 침묵 후 먼저 시작",
+  "Median reply time": "답장 시간 중앙값",
+  "Longest run in a row": "가장 긴 연속 메시지",
+  "Night share, 00–06 UTC": "야간 비율, 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "요일 × 시간, UTC. 이 채팅의 저장된 메시지로 계산했습니다."
 }

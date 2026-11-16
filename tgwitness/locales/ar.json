@@ -10106,5 +10106,11 @@
   "Preparing page {n} of {total}": "جارٍ تجهيز الصفحة {n} من {total}",
   "Loading saved messages: {n}": "جارٍ تحميل الرسائل المحفوظة: {n}",
   "Only the latest {n} saved messages are included.": "تُضمَّن آخر {n} رسالة محفوظة فقط.",
-  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "تذكر كل صفحة سجلات اليومية الخاصة بها. ويضيف ملف ZIP ملف توقيع يتحقق منه verify.py."
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "تذكر كل صفحة سجلات اليومية الخاصة بها. ويضيف ملف ZIP ملف توقيع يتحقق منه verify.py.",
+  "Rhythm": "الإيقاع",
+  "Starts after {hours} h of silence": "يبدأ بعد {hours} ساعات من الصمت",
+  "Median reply time": "متوسط زمن الرد",
+  "Longest run in a row": "أطول سلسلة متتالية",
+  "Night share, 00–06 UTC": "حصة الليل، 00–06 UTC",
+  "Weekday × hour, UTC. Counted from the saved messages of this chat.": "يوم الأسبوع × الساعة، UTC. محسوبة من الرسائل المحفوظة في هذه الدردشة."
 }
