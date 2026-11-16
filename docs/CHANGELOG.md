@@ -26,6 +26,8 @@
 ## Unreleased
 
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
+- Chat search also lists the account's Telegram chats that are not observed yet, each with “Add”, and offers to open
+  a typed @username or t.me link right away. Before, adding a chat meant leaving for Sources or the link form.
 - Signing in to a workspace that has no chosen connection asks for one first, with WARP preselected and marked as
   recommended. Before, such sign-ins went silently through public MTProxy servers. Adding another account from
   files passes the chosen route to its new workspace, and the connection page lists WARP first.

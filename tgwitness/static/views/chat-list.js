@@ -84,13 +84,76 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     else if (next !== undefined) {event.preventDefault(); items[(next + items.length) % items.length]?.focus();}
   });
   document.addEventListener('pointerdown', event => {if (!addMenu.hidden && !addMenu.contains(event.target) && !addButton.contains(event.target)) closeAdd(false);});
-  function openLink(text) {
+  function openLink(text, preview = false) {
     linkBox.open = true;
     const input = linkBox.querySelector('input');
     if (text) input.value = text;
     input.focus(); linkBox.scrollIntoView({block: 'nearest'});
+    if (preview && text) linkBox.querySelector('form')?.requestSubmit();
   }
   const linkLike = text => /^(@[\w]{3,}|[\w]{5,}|(https?:\/\/)?(t|telegram)\.me\/\S+|tg:\/\/\S+)$/i.test(text);
+  const kindWords = {channel: 'Channel', broadcast: 'Channel', supergroup: 'Group', megagroup: 'Group', group: 'Group', chat: 'Group',
+    bot: 'Bot', user: 'Private chat', private: 'Private chat'};
+  let dialogsFor = null, dialogsLoading = false, dialogsError = '', linkRow = null;
+  const dialogRows = new Map(), section = node('p', 'chat-list-section', tr('In Telegram'));
+  function ensureDialogs() {
+    const current = getSession();
+    if (dialogsFor === current || dialogsLoading || !adds.loadDialogs) return;
+    if ((adds.dialogs?.() || []).length) {dialogsFor = current; return;}
+    dialogsLoading = true; dialogsError = '';
+    adds.loadDialogs().then(() => {if (current === getSession()) dialogsFor = current;})
+      .catch(error => {if (current === getSession() && error.name !== 'StaleView') {dialogsFor = current; dialogsError = error.message;}})
+      .finally(() => {if (current === getSession()) {dialogsLoading = false; render();}});
+  }
+  async function watch(dialog, button) {
+    const current = getSession(); button.disabled = true;
+    try {
+      await adds.watch(dialog.chat_id);
+      if (current !== getSession()) return;
+      search.value = ''; changed(true);
+      await openChat(dialog.chat_id);
+    } catch (error) {
+      if (current === getSession() && error.name !== 'StaleView') toast(error.message, true);
+    } finally {if (button.isConnected) button.disabled = false;}
+  }
+  function dialogRow(dialog) {
+    const row = node('div', 'chat-item chat-item-new'), open = node('button', 'chat-choice'), add = node('button', 'primary small chat-watch', tr('Add'));
+    open.type = add.type = 'button'; row.dataset.dialog = String(dialog.chat_id);
+    const title = dialog.title || tr('Chat {id}', {id: dialog.chat_id}), body = node('span', 'chat-item-body');
+    const top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
+    top.append(node('span', 'chat-item-title', title));
+    bottom.append(node('span', 'chat-item-preview', tr(kindWords[dialog.kind] || 'Channel')));
+    body.append(top, bottom); open.append(avatarNode(dialog.chat_id, title), body);
+    add.setAttribute('aria-label', tr('Add') + ': ' + title);
+    open.addEventListener('click', () => watch(dialog, add));
+    add.addEventListener('click', () => watch(dialog, add));
+    row.append(open, add); return row;
+  }
+  function searchExtras(terms, query) {
+    const extras = [];
+    if (adds.canWatch?.()) {
+      ensureDialogs();
+      const saved = new Set(getState().chats.map(chat => chat.chat_id));
+      const found = (adds.dialogs?.() || []).filter(dialog => !saved.has(dialog.chat_id)
+        && matches({title: dialog.title, chat_id: dialog.chat_id, kind: dialog.kind}, terms)).slice(0, 30);
+      if (found.length || dialogsLoading || dialogsError) extras.push(section);
+      if (dialogsLoading && !found.length) extras.push(node('p', 'hint chat-list-searching', tr('Loading…')));
+      else if (dialogsError && !found.length) extras.push(node('p', 'hint chat-list-searching', dialogsError));
+      extras.push(...found.map(dialog => {
+        if (!dialogRows.has(dialog.chat_id)) dialogRows.set(dialog.chat_id, dialogRow(dialog));
+        return dialogRows.get(dialog.chat_id);
+      }));
+    }
+    if (linkLike(query) && adds.canOpenLink?.()) {
+      if (linkRow?.dataset.query !== query) {
+        linkRow = node('button', 'chat-search-link'); linkRow.type = 'button'; linkRow.dataset.query = query;
+        linkRow.append(icon('link'), node('span', '', tr('Open Telegram link') + ': ' + query));
+        linkRow.addEventListener('click', () => openLink(query, true));
+      }
+      extras.push(linkRow);
+    }
+    return extras;
+  }
   let secretItems = [], secretAt = 0, secretBusy = false;
   function loadSecret() {
     if (!secret?.allowed() || secretBusy || Date.now() - secretAt < 30000) return;
@@ -298,6 +361,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       const label = priorityHint(tr, !!chat.priority, state.status?.collector) + ' — ' + (chat.title || chat.chat_id);
       star.title = label; star.setAttribute('aria-label', label); return row;
     });
+    const extras = terms.length ? searchExtras(terms, search.value.trim()) : [];
     if (!state.chats.length && state.chatsLoading) {
       const loading = viewState('loading', tr('Loading…')), skeleton = node('div', 'chat-list-skeleton');
       skeleton.setAttribute('aria-hidden', 'true');
@@ -305,7 +369,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       loading.append(skeleton); rows.push(loading);
     } else if (!state.chats.length && state.chatsError) {
       rows.push(viewState('error', tr('Could not load data'), '', tr('Retry'), reload));
-    } else if (!rows.length) {
+    } else if (!rows.length && !extras.length) {
       const fresh = !state.chats.length && !secrets.length && !terms.length, query = search.value.trim();
       const empty = node('div', 'chats-none' + (fresh ? ' fresh' : ''));
       if (fresh) {const mark = node('span', 'chats-none-mark'); mark.append(icon('message')); empty.append(mark);}
@@ -317,6 +381,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       rows.push(empty);
     }
     if (shown.length < chats.length) rows.push(more);
+    rows.push(...extras);
     place(list, rows); renderWait(); const selected = Number(!!kind.value) + Number(!!status.value) + Number(sort.value !== 'activity');
     count.hidden = !selected; count.textContent = String(selected); summary.classList.toggle('filtered', !!selected);
     renderFilters();
@@ -350,6 +415,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     session = getSession(); pending.clear(); resetFilters(); list.replaceChildren(); list.removeAttribute('aria-busy');
     activeFilters.replaceChildren(); activeFilters.hidden = true; resultCount.textContent = ''; results.hidden = true;
     secretItems = []; secretAt = 0; secretBusy = false; closeAdd(false); linkBox.open = false;
+    dialogRows.clear(); linkRow = null; dialogsError = '';
   }
   function snapshot() {return {chatFilter:status.value, chatSort:sort.value, chatKind:kind.value, chatQuery:search.value};}
   function restore(route) {
@@ -365,7 +431,8 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     if (!plainKey(event)) return;
     if (event.key === 'Escape' && search.value) {event.preventDefault(); event.stopPropagation(); search.value = ''; changed(true);}
     else if (['ArrowDown', 'ArrowUp', 'Enter'].includes(event.key)) {
-      const choices = [...list.querySelectorAll('.chat-choice')], choice = event.key === 'ArrowUp' ? choices.at(-1) : choices[0];
+      const choices = [...list.querySelectorAll(event.key === 'Enter' ? '.chat-item:not(.chat-item-new) .chat-choice' : '.chat-choice')];
+      const choice = event.key === 'ArrowUp' ? choices.at(-1) : choices[0];
       if (!choice) return;
       event.preventDefault();
       if (event.key === 'Enter') choice.click(); else choice.focus();
