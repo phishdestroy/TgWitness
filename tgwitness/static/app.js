@@ -5664,7 +5664,7 @@ function renderChat(){
   if(sub.dataset.key!==summaryKey){
     sub.dataset.key=summaryKey;sub.replaceChildren();
     metrics.forEach(([filter,glyph,label,tone],index)=>{
-      if(index)sub.append(" · ");
+      if(index)sub.append(node("span","chat-sub-sep"," · "));
       if(!filter){sub.append(node("span","",label));return;}
       const chip=node("button","chat-metric");chip.type="button";chip.dataset.chatFilter=filter;if(tone)chip.dataset.tone=tone;
       chip.append(icon(glyph),node("span","",label));
