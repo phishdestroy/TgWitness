@@ -9940,5 +9940,17 @@
   "Messages in the chat": "チャットのメッセージ数",
   "Expected duration": "予想所要時間",
   "Time left": "残り時間",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness はこのチャットを読み込んでおらず、Telegram もこのアカウントに返しませんでした。「出典」で「チャットリストを更新」を押すか、アカウントがまだチャットにいるか確認してください。"
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness はこのチャットを読み込んでおらず、Telegram もこのアカウントに返しませんでした。「出典」で「チャットリストを更新」を押すか、アカウントがまだチャットにいるか確認してください。",
+  "Add a chat or channel": "チャットまたはチャンネルを追加",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "このエクスポートには約 {needed} の空きディスク容量が必要です。空きは {free} です。空き容量を確保してから、もう一度計画してください。",
+  "Unavailable messages (deleted or hidden): {n}": "利用できないメッセージ（削除または非表示）: {n}",
+  "Checking {link}…": "{link} を確認中…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "まだ何も記録されていません。監視、サインイン、エクスポートの実行中にここに行が表示されます。",
+  "What is this?": "これは何？",
+  "Do not use the same session file in other programs.": "同じセッションファイルを他のプログラムで使わないでください。",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "ディスクの空き容量: 必要な {min} のうち {free}。空き容量ができるまで、エクスポートとファイルのダウンロードは待機します。",
+  "Public MTProxy (third-party server from an open list)": "公開 MTProxy（公開リストの第三者サーバー）",
+  "Public MTProxy": "公開 MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "プロキシの運営者には、このサーバーが接続していることと IP アドレスは見えますが、メッセージは見えません。MTProto が Telegram まで暗号化します。",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "ここにはまだメッセージや変更がありません。ジャーナルの記録: {n}。サインインや接続チェックなどのシステム記録は非表示です。"
 }

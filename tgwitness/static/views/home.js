@@ -22,7 +22,7 @@ export function taskInfo(activity) {
 
 const STOP_REASONS = {operator: 'Stopped from the panel', shutdown: 'TgWitness was shut down'};
 
-export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize, openChatIn}) {
+export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize, openChatIn, signInText}) {
   let session = null;
   const resources = {activity: {interval: 60000}, live: {interval: 10000}};
   const sessionKey = () => getState().workspaceRevision + ':' + getState().profile;
@@ -351,6 +351,10 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     who.append(node('strong', '', profile.label), node('small', '', account.username ? '@' + account.username : account.id ? 'ID ' + account.id : tr('No Telegram account yet')));
     head.append(initial, who, chip(info.kind, tr(info.label)));
     card.append(head, activityLine(profile));
+    if (info.needsSignIn && signInText) card.append(node('p', 'home-warning', signInText(collector)));
+    if (collector.storage_low && collector.disk_free_bytes != null)
+      card.append(node('p', 'home-warning', tr('Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.',
+        {free: humanSize(collector.disk_free_bytes), min: humanSize(collector.media_min_free_bytes)})));
     const observed = observationFacts(collector);
     if (observed) card.append(observed);
     const pause = collector.activity?.telegram_pause_until;

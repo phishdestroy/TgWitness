@@ -10195,5 +10195,17 @@
   "Messages in the chat": "الرسائل في المحادثة",
   "Expected duration": "المدة المتوقعة",
   "Time left": "الوقت المتبقي",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "لم يحمّل TgWitness هذه المحادثة، ولم يُرجعها Telegram لهذا الحساب. اضغط «تحديث قائمة المحادثات» في «المصادر»، أو تحقق من أن الحساب ما زال في المحادثة."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "لم يحمّل TgWitness هذه المحادثة، ولم يُرجعها Telegram لهذا الحساب. اضغط «تحديث قائمة المحادثات» في «المصادر»، أو تحقق من أن الحساب ما زال في المحادثة.",
+  "Add a chat or channel": "إضافة دردشة أو قناة",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "يحتاج هذا التصدير إلى نحو {needed} من المساحة الحرة على القرص؛ المتاح {free}. حرّر مساحة ثم خطّط من جديد.",
+  "Unavailable messages (deleted or hidden): {n}": "رسائل غير متاحة (محذوفة أو مخفية): {n}",
+  "Checking {link}…": "جارٍ التحقق من {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "لم يُسجَّل شيء بعد. تظهر الأسطر هنا أثناء المراقبة أو تسجيل الدخول أو التصدير.",
+  "What is this?": "ما هذا؟",
+  "Do not use the same session file in other programs.": "لا تستخدم ملف الجلسة نفسه في برامج أخرى.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "المساحة الحرة على القرص: {free} من {min} المطلوبة. تنتظر عمليات التصدير وتنزيل الملفات حتى تتوفر مساحة.",
+  "Public MTProxy (third-party server from an open list)": "MTProxy عام (خادم طرف ثالث من قائمة مفتوحة)",
+  "Public MTProxy": "MTProxy عام",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "يرى مشغّل الوكيل أن هذا الخادم يتصل وعنوان IP الخاص به، لكنه لا يرى الرسائل: يشفّرها MTProto حتى تصل إلى Telegram.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "لا توجد رسائل أو تغييرات هنا بعد. السجلات في اليومية: {n}. السجلات النظامية مثل تسجيلات الدخول وفحوص الاتصال مخفية."
 }

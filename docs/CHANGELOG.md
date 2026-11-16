@@ -27,6 +27,27 @@
 
 - Share resumable-history flood deadlines with other workers and retry admin-log reads after Premium flood waits.
 - Persist history FloodWait deadlines so other workers respect the same pause.
+- The workspace switcher shows each account with its avatar, name and a colored status (observing, observation
+  off, sign-in required, needs attention), lists the other accounts with their problem count, and has “Add
+  account” and “All accounts” at the bottom.
+- The chat list works like Telegram's: folder tabs in one row that hide when empty, a “+” menu to add a chat or
+  channel, open a Telegram link or start a pseudo-secret chat, and pseudo-secret chats listed with the others
+  (green, with a lock) and under their own tab. When observation is off the list says so once instead of
+  marking every chat “Paused”. A search for an @username or t.me link with no match offers to open it.
+- A failed action shows its reason right below the button that started it, with a link to the collection status
+  when the disk is short; error toasts stay until closed or until another page opens.
+- The export plan reports free disk space with the same check `/multi-export/start` uses (`disk` in the plan);
+  when space is short it warns before Start and keeps Start disabled. The status `storage_low` now also turns on
+  when free space is below the minimum while observation is off. Planning shows “Checking @name…”, and the
+  ten-account estimate appears only with ten usable accounts.
+- Empty screens explain themselves: the journal says how many records it holds and offers to show system
+  records, archive connections offer to create one, and an empty system log says when lines appear.
+- The session banner is one line with the cause (for example, a session used in two places at once) and expands
+  for the full text; Home shows the same cause and a low-disk warning on the account card.
+- Settings names the connection route (public MTProxy, Cloudflare WARP, direct) with the exit country and says
+  what a public proxy operator can see; Expert also shows the proxy host.
+- Home tiles put the label above the number, help toggles read “What is this?”, and a chat name shows a tooltip
+  only when it is cut off.
 - Recheck access to helper workspaces when resuming or retrying profile collection.
 - Keep session age and loss context within the current authorization, ignore late session checks from
   replaced clients, and distinguish the last successful check from the saved session snapshot.

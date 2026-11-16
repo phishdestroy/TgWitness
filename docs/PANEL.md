@@ -121,13 +121,16 @@ New download outcomes also retain the media kind and duration when Telegram prov
 them. Older signed records stay unchanged; absent metadata is not reconstructed.
 
 - Search the list by name or ID. Several words match in any order, including a
-  name and part of an ID together. **Choose** adds or removes watched chats.
-  **Open Telegram link** takes a username or invite link and saves a preview to the
-  journal. **Join / open and observe** then joins the chat and adds it to your sources;
+  name and part of an ID together. The **+** button opens **Add a chat or channel** (adds or removes
+  watched chats), **Open Telegram link** and **Pseudo-secret · Start chat**. **Open Telegram link** takes a
+  username or invite link and saves a preview to the journal; a search for an @username or t.me link with no
+  match offers the same. **Join / open and observe** then joins the chat and adds it to your sources;
   opening a bot sends it `/start`.
-- The list has four quick filters: **All**, **Priority**, **Changes** (saved edits
+- Pseudo-secret chats appear in the same list, green with a lock, and open in Pseudo-secret.
+  When observation is off the list shows one **Observation off** line with **Start observation**.
+- The quick filters are tabs in one row: **All**, **Pseudo-secret**, **Priority**, **Changes** (saved edits
   or deletion notices), and **Needs attention** (lost or unconfirmed access, messages not found on recheck,
-  failed media, history retries or Telegram restrictions). Counts respect the
+  failed media, history retries or Telegram restrictions). Tabs with nothing in them are hidden. Counts respect the
   search and type filter; a quick filter replaces the state filter. These choices
   stay in the URL for reloads and Back/Forward navigation.
   **Needs attention** does not label a message as deleted. Type, state and custom

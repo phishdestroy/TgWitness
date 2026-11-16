@@ -9940,5 +9940,17 @@
   "Messages in the chat": "채팅의 메시지",
   "Expected duration": "예상 소요 시간",
   "Time left": "남은 시간",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness가 이 채팅을 불러오지 않았고 Telegram도 이 계정에 반환하지 않았습니다. 「출처」에서 「채팅 목록 새로고침」을 누르거나 계정이 아직 채팅에 있는지 확인하세요."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness가 이 채팅을 불러오지 않았고 Telegram도 이 계정에 반환하지 않았습니다. 「출처」에서 「채팅 목록 새로고침」을 누르거나 계정이 아직 채팅에 있는지 확인하세요.",
+  "Add a chat or channel": "채팅 또는 채널 추가",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "이 내보내기에는 약 {needed}의 디스크 여유 공간이 필요합니다. 현재 여유 공간은 {free}입니다. 공간을 확보한 뒤 다시 계획하세요.",
+  "Unavailable messages (deleted or hidden): {n}": "사용할 수 없는 메시지(삭제되었거나 숨김): {n}",
+  "Checking {link}…": "{link} 확인 중…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "아직 기록된 내용이 없습니다. 관찰, 로그인 또는 내보내기가 실행되는 동안 여기에 줄이 표시됩니다.",
+  "What is this?": "이것은 무엇인가요?",
+  "Do not use the same session file in other programs.": "같은 세션 파일을 다른 프로그램에서 사용하지 마세요.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "디스크 여유 공간: 필요한 {min} 중 {free}. 공간이 확보될 때까지 내보내기와 파일 다운로드가 대기합니다.",
+  "Public MTProxy (third-party server from an open list)": "공개 MTProxy(공개 목록의 제3자 서버)",
+  "Public MTProxy": "공개 MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "프록시 운영자는 이 서버가 접속한다는 사실과 IP 주소는 볼 수 있지만 메시지는 볼 수 없습니다. MTProto가 Telegram까지 암호화합니다.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "아직 메시지나 변경 사항이 없습니다. 저널 기록: {n}. 로그인과 연결 확인 같은 시스템 기록은 숨겨져 있습니다."
 }

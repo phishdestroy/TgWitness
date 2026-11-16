@@ -12,3 +12,11 @@ body:has(.view:not([hidden]) .form-draft-bar:not([hidden]),.view:not([hidden]) .
 @media(prefers-reduced-motion:reduce){.view[data-loading=true]::before{animation:none;width:100%;opacity:.7}}
 @media(max-width:767px){.panel-connection-notice{padding:8px 12px;font-size:12px}}
 @media(max-width:767px){body:has(.view:not([hidden]) .form-draft-bar:not([hidden]),.view:not([hidden]) .parameters-actions,.view:not([hidden]) .recording-savebar) .toast{bottom:160px}}
+.action-error{display:flex;align-items:flex-start;gap:10px;margin:10px 0;padding:10px 12px;border:1px solid var(--danger-border);border-radius:12px;background:var(--danger-soft);color:var(--text);font-size:13px;line-height:1.45}
+.action-error>.icon{flex:none;width:18px;height:18px;margin-top:1px;color:var(--danger)}
+.action-error-text{display:grid;gap:4px;flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.action-error-text strong{color:var(--danger);font-size:13px}
+.action-error-text p{margin:0}
+.action-error-text .text-link{justify-self:start;min-height:28px;padding:0}
+.action-error>button.action-error-close{flex:0 0 28px!important;width:28px!important;min-width:28px!important;max-width:28px!important;height:28px!important;min-height:28px!important;padding:4px!important;margin:-4px -4px 0 0!important}
+.action-error-close .icon{width:14px;height:14px}

@@ -10001,5 +10001,17 @@
   "Messages in the chat": "Messaggi nella chat",
   "Expected duration": "Durata prevista",
   "Time left": "Tempo rimanente",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness non ha caricato questa chat e Telegram non l’ha restituita per questo account. Premi «Aggiorna elenco chat» in «Fonti» oppure verifica che l’account sia ancora nella chat."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness non ha caricato questa chat e Telegram non l’ha restituita per questo account. Premi «Aggiorna elenco chat» in «Fonti» oppure verifica che l’account sia ancora nella chat.",
+  "Add a chat or channel": "Aggiungi una chat o un canale",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Questa esportazione richiede circa {needed} di spazio libero su disco; ne sono liberi {free}. Libera spazio e pianifica di nuovo.",
+  "Unavailable messages (deleted or hidden): {n}": "Messaggi non disponibili (eliminati o nascosti): {n}",
+  "Checking {link}…": "Controllo di {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Non è stato ancora registrato nulla. Le righe compaiono qui durante l’osservazione, un accesso o un’esportazione.",
+  "What is this?": "Che cos’è?",
+  "Do not use the same session file in other programs.": "Non usare lo stesso file di sessione in altri programmi.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Spazio libero su disco: {free} dei {min} richiesti. Esportazioni e download dei file attendono che si liberi spazio.",
+  "Public MTProxy (third-party server from an open list)": "MTProxy pubblico (server di terzi da un elenco aperto)",
+  "Public MTProxy": "MTProxy pubblico",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "L’operatore del proxy vede che questo server si connette e il suo indirizzo IP, ma non i messaggi: MTProto li cifra fino a Telegram.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Qui non ci sono ancora messaggi né modifiche. Voci nel registro: {n}. Le voci di sistema, come accessi e controlli di connessione, sono nascoste."
 }

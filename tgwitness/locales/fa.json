@@ -9991,5 +9991,17 @@
   "Messages in the chat": "پیام‌های گفتگو",
   "Expected duration": "مدت پیش‌بینی‌شده",
   "Time left": "زمان باقی‌مانده",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness این گفتگو را بارگیری نکرده و Telegram هم آن را برای این حساب برنگرداند. در «منابع» روی «نوسازی فهرست گفتگوها» بزنید یا بررسی کنید که حساب هنوز در گفتگو باشد."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness این گفتگو را بارگیری نکرده و Telegram هم آن را برای این حساب برنگرداند. در «منابع» روی «نوسازی فهرست گفتگوها» بزنید یا بررسی کنید که حساب هنوز در گفتگو باشد.",
+  "Add a chat or channel": "افزودن گفتگو یا کانال",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "این خروجی به حدود {needed} فضای آزاد دیسک نیاز دارد؛ {free} آزاد است. فضا آزاد کنید و دوباره برنامه‌ریزی کنید.",
+  "Unavailable messages (deleted or hidden): {n}": "پیام‌های در دسترس نیست (حذف‌شده یا پنهان): {n}",
+  "Checking {link}…": "در حال بررسی {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "هنوز چیزی ثبت نشده است. خط‌ها هنگام مشاهده، ورود یا خروجی گرفتن اینجا نمایش داده می‌شوند.",
+  "What is this?": "این چیست؟",
+  "Do not use the same session file in other programs.": "از همین فایل نشست در برنامه‌های دیگر استفاده نکنید.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "فضای آزاد دیسک: {free} از {min} لازم. خروجی‌ها و دانلود فایل‌ها تا آزاد شدن فضا منتظر می‌مانند.",
+  "Public MTProxy (third-party server from an open list)": "MTProxy عمومی (سرور شخص ثالث از یک فهرست باز)",
+  "Public MTProxy": "MTProxy عمومی",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "گرداننده پروکسی می‌بیند که این سرور وصل می‌شود و نشانی IP آن را، اما پیام‌ها را نمی‌بیند: MTProto آن‌ها را تا خود Telegram رمزگذاری می‌کند.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "هنوز پیام یا تغییری اینجا نیست. رکوردهای دفتر: {n}. رکوردهای سیستمی مانند ورودها و بررسی‌های اتصال پنهان هستند."
 }

@@ -9940,5 +9940,17 @@
   "Messages in the chat": "Tin nhắn trong cuộc trò chuyện",
   "Expected duration": "Thời lượng dự kiến",
   "Time left": "Thời gian còn lại",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness chưa tải cuộc trò chuyện này và Telegram không trả về nó cho tài khoản này. Nhấn «Làm mới danh sách trò chuyện» trong «Nguồn», hoặc kiểm tra tài khoản còn trong cuộc trò chuyện không."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness chưa tải cuộc trò chuyện này và Telegram không trả về nó cho tài khoản này. Nhấn «Làm mới danh sách trò chuyện» trong «Nguồn», hoặc kiểm tra tài khoản còn trong cuộc trò chuyện không.",
+  "Add a chat or channel": "Thêm cuộc trò chuyện hoặc kênh",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Bản xuất này cần khoảng {needed} dung lượng đĩa trống; hiện còn {free}. Hãy giải phóng dung lượng rồi lập kế hoạch lại.",
+  "Unavailable messages (deleted or hidden): {n}": "Tin nhắn không khả dụng (đã xóa hoặc bị ẩn): {n}",
+  "Checking {link}…": "Đang kiểm tra {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Chưa có gì được ghi lại. Các dòng sẽ xuất hiện ở đây khi đang theo dõi, đăng nhập hoặc xuất dữ liệu.",
+  "What is this?": "Đây là gì?",
+  "Do not use the same session file in other programs.": "Không dùng cùng một tệp phiên trong chương trình khác.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Dung lượng đĩa trống: {free} trên {min} cần thiết. Việc xuất và tải tệp sẽ chờ đến khi có đủ dung lượng.",
+  "Public MTProxy (third-party server from an open list)": "MTProxy công khai (máy chủ bên thứ ba từ danh sách mở)",
+  "Public MTProxy": "MTProxy công khai",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Người vận hành proxy thấy máy chủ này kết nối và địa chỉ IP của nó, nhưng không thấy tin nhắn: MTProto mã hóa chúng đến tận Telegram.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Chưa có tin nhắn hay thay đổi nào ở đây. Bản ghi trong nhật ký: {n}. Các bản ghi hệ thống như đăng nhập và kiểm tra kết nối đang bị ẩn."
 }

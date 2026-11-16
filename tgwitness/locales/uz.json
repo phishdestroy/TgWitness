@@ -9991,5 +9991,17 @@
   "Messages in the chat": "Chatdagi xabarlar",
   "Expected duration": "Kutilayotgan davomiylik",
   "Time left": "Qolgan vaqt",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness bu chatni yuklamagan va Telegram uni bu akkaunt uchun qaytarmadi. «Manbalar» bo‘limida «Chatlar ro‘yxatini yangilash»ni bosing yoki akkaunt hali ham chatda ekanini tekshiring."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness bu chatni yuklamagan va Telegram uni bu akkaunt uchun qaytarmadi. «Manbalar» bo‘limida «Chatlar ro‘yxatini yangilash»ni bosing yoki akkaunt hali ham chatda ekanini tekshiring.",
+  "Add a chat or channel": "Chat yoki kanal qo‘shish",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Bu eksport uchun taxminan {needed} bo‘sh disk joyi kerak; bo‘sh joy {free}. Joy bo‘shating va qayta rejalashtiring.",
+  "Unavailable messages (deleted or hidden): {n}": "Mavjud bo‘lmagan xabarlar (o‘chirilgan yoki yashirilgan): {n}",
+  "Checking {link}…": "{link} tekshirilmoqda…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Hali hech narsa qayd etilmagan. Kuzatuv, kirish yoki eksport paytida bu yerda qatorlar paydo bo‘ladi.",
+  "What is this?": "Bu nima?",
+  "Do not use the same session file in other programs.": "Xuddi shu seans faylini boshqa dasturlarda ishlatmang.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Bo‘sh disk joyi: kerakli {min} dan {free}. Eksport va fayl yuklab olish joy bo‘shaguncha kutadi.",
+  "Public MTProxy (third-party server from an open list)": "Ommaviy MTProxy (ochiq ro‘yxatdagi uchinchi tomon serveri)",
+  "Public MTProxy": "Ommaviy MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Proksi operatori bu server ulanayotganini va uning IP manzilini ko‘radi, lekin xabarlarni ko‘rmaydi: MTProto ularni Telegramgacha shifrlaydi.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Bu yerda hali xabar yoki o‘zgarish yo‘q. Jurnaldagi yozuvlar: {n}. Kirishlar va ulanish tekshiruvlari kabi tizim yozuvlari yashirilgan."
 }

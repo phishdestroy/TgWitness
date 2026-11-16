@@ -9940,5 +9940,17 @@
   "Messages in the chat": "ข้อความในแชท",
   "Expected duration": "ระยะเวลาโดยประมาณ",
   "Time left": "เวลาที่เหลือ",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness ยังไม่ได้โหลดแชทนี้ และ Telegram ไม่ได้ส่งแชทนี้กลับมาสำหรับบัญชีนี้ กด «รีเฟรชรายชื่อแชท» ใน «แหล่งข้อมูล» หรือตรวจว่าบัญชียังอยู่ในแชท"
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness ยังไม่ได้โหลดแชทนี้ และ Telegram ไม่ได้ส่งแชทนี้กลับมาสำหรับบัญชีนี้ กด «รีเฟรชรายชื่อแชท» ใน «แหล่งข้อมูล» หรือตรวจว่าบัญชียังอยู่ในแชท",
+  "Add a chat or channel": "เพิ่มแชทหรือช่อง",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "การส่งออกนี้ต้องใช้พื้นที่ดิสก์ว่างประมาณ {needed} ขณะนี้ว่าง {free} โปรดเพิ่มพื้นที่ว่างแล้ววางแผนใหม่",
+  "Unavailable messages (deleted or hidden): {n}": "ข้อความที่ใช้ไม่ได้ (ถูกลบหรือซ่อน): {n}",
+  "Checking {link}…": "กำลังตรวจสอบ {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "ยังไม่มีการบันทึก บรรทัดจะปรากฏที่นี่ระหว่างการสังเกตการณ์ การลงชื่อเข้าใช้ หรือการส่งออก",
+  "What is this?": "นี่คืออะไร?",
+  "Do not use the same session file in other programs.": "อย่าใช้ไฟล์เซสชันเดียวกันในโปรแกรมอื่น",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "พื้นที่ดิสก์ว่าง: {free} จาก {min} ที่ต้องการ การส่งออกและการดาวน์โหลดไฟล์จะรอจนกว่าจะมีพื้นที่ว่าง",
+  "Public MTProxy (third-party server from an open list)": "MTProxy สาธารณะ (เซิร์ฟเวอร์ของบุคคลที่สามจากรายการเปิด)",
+  "Public MTProxy": "MTProxy สาธารณะ",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "ผู้ให้บริการพร็อกซีเห็นว่าเซิร์ฟเวอร์นี้เชื่อมต่อและเห็นที่อยู่ IP แต่ไม่เห็นข้อความ เพราะ MTProto เข้ารหัสไว้จนถึง Telegram",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "ยังไม่มีข้อความหรือการเปลี่ยนแปลงที่นี่ รายการในบันทึก: {n} ส่วนรายการระบบ เช่น การลงชื่อเข้าใช้และการตรวจสอบการเชื่อมต่อ ถูกซ่อนไว้"
 }

@@ -9940,5 +9940,17 @@
   "Messages in the chat": "聊天中的消息",
   "Expected duration": "预计时长",
   "Time left": "剩余时间",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness 尚未加载此聊天，Telegram 也没有为此账户返回它。请在「来源」中点击「刷新聊天列表」，或确认该账户仍在聊天中。"
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness 尚未加载此聊天，Telegram 也没有为此账户返回它。请在「来源」中点击「刷新聊天列表」，或确认该账户仍在聊天中。",
+  "Add a chat or channel": "添加聊天或频道",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "此导出需要约 {needed} 可用磁盘空间；当前可用 {free}。请释放空间后重新规划。",
+  "Unavailable messages (deleted or hidden): {n}": "不可用的消息（已删除或隐藏）：{n}",
+  "Checking {link}…": "正在检查 {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "尚未记录任何内容。观察、登录或导出运行时，这里会显示日志行。",
+  "What is this?": "这是什么？",
+  "Do not use the same session file in other programs.": "请勿在其他程序中使用同一会话文件。",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "磁盘可用空间：{free}，所需 {min}。导出和文件下载将等待，直到释放出空间。",
+  "Public MTProxy (third-party server from an open list)": "公共 MTProxy（来自公开列表的第三方服务器）",
+  "Public MTProxy": "公共 MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "代理运营者能看到此服务器在连接及其 IP 地址，但看不到消息：MTProto 会一直加密到 Telegram。",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "这里还没有消息或更改。日志记录：{n}。登录和连接检查等系统记录已隐藏。"
 }

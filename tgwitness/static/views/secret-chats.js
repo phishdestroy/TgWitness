@@ -498,6 +498,10 @@ export function createSecretChats(context) {
       if (!current()) return;
       selected = id; find('secret-search').value = ''; render();
     },
+    startNew() {
+      startDetails.dataset.ready = 'true'; startDetails.open = true;
+      startDetails.scrollIntoView({block: 'nearest'}); find('secret-user').focus({preventScroll: true});
+    },
     async enter() {
       active = true; activation++;
       try {await load();} finally {schedule();}

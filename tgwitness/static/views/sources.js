@@ -564,6 +564,7 @@ export function createSources(context) {
     find("sources-scope-summary").textContent = context.scopeName(status.scope?.mode || "selected");
     find("sources-count-summary").textContent = tr("{n} enabled sources", {n: status.targets.filter(item => item.enabled).length});
     find("sources-recording-summary").textContent = tr(status.collector.running ? "Observation enabled" : "Observation paused");
+    find("sources-recording-summary").dataset.tone = status.demo ? "info" : status.collector.running ? "ok" : "off";
     find("sources-tab-count").textContent = String(status.targets.length);
     const note = find("recording-result");
     if (status.demo) note.textContent = tr("This demo is read-only. Recording settings can be changed in your own workspace.");

@@ -9991,5 +9991,17 @@
   "Messages in the chat": "চ্যাটে বার্তা",
   "Expected duration": "প্রত্যাশিত সময়কাল",
   "Time left": "বাকি সময়",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness এই চ্যাট লোড করেনি, আর Telegram এই অ্যাকাউন্টের জন্য এটি ফেরত দেয়নি। «উৎসসমূহ»-এ «চ্যাট তালিকা রিফ্রেশ করুন» চাপুন, অথবা দেখুন অ্যাকাউন্টটি এখনও চ্যাটে আছে কি না।"
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness এই চ্যাট লোড করেনি, আর Telegram এই অ্যাকাউন্টের জন্য এটি ফেরত দেয়নি। «উৎসসমূহ»-এ «চ্যাট তালিকা রিফ্রেশ করুন» চাপুন, অথবা দেখুন অ্যাকাউন্টটি এখনও চ্যাটে আছে কি না।",
+  "Add a chat or channel": "চ্যাট বা চ্যানেল যোগ করুন",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "এই এক্সপোর্টের জন্য প্রায় {needed} খালি ডিস্ক স্থান দরকার; খালি আছে {free}। জায়গা খালি করে আবার পরিকল্পনা করুন।",
+  "Unavailable messages (deleted or hidden): {n}": "অনুপলব্ধ বার্তা (মুছে ফেলা বা লুকানো): {n}",
+  "Checking {link}…": "{link} যাচাই করা হচ্ছে…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "এখনও কিছু লগ হয়নি। পর্যবেক্ষণ, সাইন-ইন বা এক্সপোর্ট চলার সময় এখানে লাইন দেখা যায়।",
+  "What is this?": "এটা কী?",
+  "Do not use the same session file in other programs.": "একই সেশন ফাইল অন্য প্রোগ্রামে ব্যবহার করবেন না।",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "খালি ডিস্ক স্থান: প্রয়োজনীয় {min}-এর মধ্যে {free}। জায়গা খালি না হওয়া পর্যন্ত এক্সপোর্ট ও ফাইল ডাউনলোড অপেক্ষা করবে।",
+  "Public MTProxy (third-party server from an open list)": "পাবলিক MTProxy (খোলা তালিকার তৃতীয় পক্ষের সার্ভার)",
+  "Public MTProxy": "পাবলিক MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "প্রক্সি পরিচালক দেখেন যে এই সার্ভার সংযোগ করছে এবং এর IP ঠিকানা, কিন্তু বার্তা নয়: MTProto সেগুলো Telegram পর্যন্ত এনক্রিপ্ট রাখে।",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "এখানে এখনও কোনো বার্তা বা পরিবর্তন নেই। জার্নালে রেকর্ড: {n}। সাইন-ইন ও সংযোগ যাচাইয়ের মতো সিস্টেম রেকর্ড লুকানো।"
 }

@@ -10093,5 +10093,17 @@
   "Messages in the chat": "Wiadomości w czacie",
   "Expected duration": "Przewidywany czas",
   "Time left": "Pozostało",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness nie wczytał tego czatu, a Telegram nie zwrócił go dla tego konta. Kliknij „Odśwież listę czatów” w sekcji „Źródła” albo sprawdź, czy konto nadal jest w czacie."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness nie wczytał tego czatu, a Telegram nie zwrócił go dla tego konta. Kliknij „Odśwież listę czatów” w sekcji „Źródła” albo sprawdź, czy konto nadal jest w czacie.",
+  "Add a chat or channel": "Dodaj czat lub kanał",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Ten eksport wymaga około {needed} wolnego miejsca na dysku; wolne jest {free}. Zwolnij miejsce i zaplanuj ponownie.",
+  "Unavailable messages (deleted or hidden): {n}": "Niedostępne wiadomości (usunięte lub ukryte): {n}",
+  "Checking {link}…": "Sprawdzam {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Nic jeszcze nie zapisano. Wiersze pojawiają się tutaj podczas obserwacji, logowania lub eksportu.",
+  "What is this?": "Co to jest?",
+  "Do not use the same session file in other programs.": "Nie używaj tego samego pliku sesji w innych programach.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Wolne miejsce na dysku: {free} z wymaganych {min}. Eksporty i pobieranie plików czekają, aż zwolni się miejsce.",
+  "Public MTProxy (third-party server from an open list)": "Publiczny MTProxy (serwer zewnętrzny z otwartej listy)",
+  "Public MTProxy": "Publiczny MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Operator proxy widzi, że ten serwer się łączy, i jego adres IP, ale nie wiadomości: MTProto szyfruje je aż do Telegrama.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Nie ma tu jeszcze wiadomości ani zmian. Wpisy w dzienniku: {n}. Wpisy systemowe, takie jak logowania i sprawdzenia połączenia, są ukryte."
 }

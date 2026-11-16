@@ -9940,5 +9940,17 @@
   "Messages in the chat": "Mesej dalam sembang",
   "Expected duration": "Jangkaan tempoh",
   "Time left": "Masa berbaki",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness belum memuatkan sembang ini, dan Telegram tidak memulangkannya untuk akaun ini. Tekan «Muat semula senarai sembang» di «Sumber», atau semak bahawa akaun masih dalam sembang."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness belum memuatkan sembang ini, dan Telegram tidak memulangkannya untuk akaun ini. Tekan «Muat semula senarai sembang» di «Sumber», atau semak bahawa akaun masih dalam sembang.",
+  "Add a chat or channel": "Tambah sembang atau saluran",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Eksport ini memerlukan kira-kira {needed} ruang cakera kosong; {free} tersedia. Kosongkan ruang, kemudian rancang semula.",
+  "Unavailable messages (deleted or hidden): {n}": "Mesej tidak tersedia (dipadam atau disembunyikan): {n}",
+  "Checking {link}…": "Menyemak {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Belum ada apa-apa dilog. Baris muncul di sini semasa pemerhatian, log masuk atau eksport berjalan.",
+  "What is this?": "Apakah ini?",
+  "Do not use the same session file in other programs.": "Jangan gunakan fail sesi yang sama dalam program lain.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Ruang cakera kosong: {free} daripada {min} yang diperlukan. Eksport dan muat turun fail menunggu sehingga ruang dikosongkan.",
+  "Public MTProxy (third-party server from an open list)": "MTProxy awam (pelayan pihak ketiga daripada senarai terbuka)",
+  "Public MTProxy": "MTProxy awam",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Pengendali proksi nampak bahawa pelayan ini bersambung dan alamat IPnya, tetapi bukan mesej: MTProto menyulitkannya hingga ke Telegram.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Belum ada mesej atau perubahan di sini. Rekod dalam jurnal: {n}. Rekod sistem seperti log masuk dan semakan sambungan disembunyikan."
 }

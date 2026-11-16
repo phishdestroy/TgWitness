@@ -38,7 +38,7 @@ export function createPulse({anchor, chartsAnchor, node, tr, icon, json, session
       if (action) { box.type = "button"; box.addEventListener("click", () => tiles.get(id).action()); }
       const mark = node("span", "tile"); mark.dataset.tone = tone; mark.append(icon(glyph));
       const number = node("strong", "pulse-num", "0"), text = node("span", "pulse-label", tr(label));
-      box.append(mark, number, text);
+      box.append(mark, text, number);
       kpis.append(box);
       item = {box, number, mark};
       tiles.set(id, item);

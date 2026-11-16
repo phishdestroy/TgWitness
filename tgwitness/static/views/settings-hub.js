@@ -370,11 +370,18 @@ export function createSettingsHub(ctx) {
     if(sheet.open)sheet.close();
     sheet.replaceChildren();
   }
+  function routeSummary(conn){
+    const kind=conn.mode,code=conn.check?.country;
+    let place='';try{place=code?new Intl.DisplayNames([document.documentElement.lang||'en'],{type:'region'}).of(code):'';}catch{place=code||'';}
+    const name={mtproxy_auto:tr('Public MTProxy (third-party server from an open list)'),warp:'Cloudflare WARP',direct:tr('Direct connection'),vpn:tr('WireGuard VPN')}[kind]||label(kind);
+    const host=document.documentElement.dataset.uiLevel==='expert'&&kind==='mtproxy_auto'?state.status?.collector?.network?.current?.host:'';
+    return [name,place,host].filter(Boolean).join(' · ');
+  }
   function summaryRows(){
     const inheritance=data.inheritance,connected=fresh(data.connection);
     const rows=[['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected'),state.status?.collector?.connected?'ok':'warn','account:blue'],
       ['chats','Which chats?',label(data.wizard.scope||'account')+(data.wizard.scope==='selected'?' · '+(data.wizard.chat_ids?.length||0):''),'ok','message:green'],
-      ['connection','Connection',label(data.connection.mode)+(connected?' · '+tr('Working · {n} ms',{n:number(data.connection.check.latency_ms)}):''),connected?'ok':'warn','shield:teal'],
+      ['connection','Connection',routeSummary(data.connection)+(connected?' · '+tr('Working · {n} ms',{n:number(data.connection.check.latency_ms)}):''),connected?'ok':'warn','shield:teal'],
       ['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone+' · '+label(prefs.level),'none','sun:orange'],
       ['goal','Goal',data.goal?label(data.goal):tr('Not chosen'),'none','star:pink'],
       ['collection','Collection and files',label(data.values.files),'none','archive:indigo'],
@@ -397,6 +404,7 @@ export function createSettingsHub(ctx) {
     const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;b.dataset.tone=tone;
     const line=node('span','hub-summary-value');if(tone!=='none')line.append(node('span','hub-dot'));line.append(document.createTextNode(summary));
     b.append(glyph(icon,'hub-summary-icon'),node('strong','',tr(name)),line,arrow());box.append(b);
+    if(id==='connection'&&data.connection?.mode==='mtproxy_auto')b.append(node('small','hub-summary-note',tr('The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.')));
   }
   function toolRow(box,icon,text,fn,level){
     const b=button('',fn,'hub-summary hub-tool');if(level)b.dataset.level=level;

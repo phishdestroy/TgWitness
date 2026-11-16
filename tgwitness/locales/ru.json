@@ -10063,5 +10063,17 @@
   "Messages in the chat": "Сообщений в чате",
   "Expected duration": "Ожидаемая длительность",
   "Time left": "Осталось",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness ещё не загрузил этот чат, и Telegram не вернул его для этого аккаунта. Нажмите «Обновить список чатов» в разделе «Источники» или проверьте, что аккаунт всё ещё состоит в чате."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness ещё не загрузил этот чат, и Telegram не вернул его для этого аккаунта. Нажмите «Обновить список чатов» в разделе «Источники» или проверьте, что аккаунт всё ещё состоит в чате.",
+  "Add a chat or channel": "Добавить чат или канал",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Для этой выгрузки нужно около {needed} свободного места на диске, свободно {free}. Освободите место и постройте план заново.",
+  "Unavailable messages (deleted or hidden): {n}": "Недоступные сообщения (удалены или скрыты): {n}",
+  "Checking {link}…": "Проверяю {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Пока ничего не записано. Строки появляются здесь во время наблюдения, входа или выгрузки.",
+  "What is this?": "Что это?",
+  "Do not use the same session file in other programs.": "Не используйте этот файл сессии в других программах.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Свободно на диске: {free} из нужных {min}. Выгрузки и загрузка файлов ждут, пока не освободится место.",
+  "Public MTProxy (third-party server from an open list)": "Публичный MTProxy (сторонний сервер из открытого списка)",
+  "Public MTProxy": "Публичный MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Оператор прокси видит, что этот сервер подключается, и его IP-адрес, но не сообщения: MTProto шифрует их до самого Telegram.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Здесь пока нет сообщений и изменений. Записей в журнале: {n}. Системные записи, например входы и проверки соединения, скрыты."
 }

@@ -307,6 +307,7 @@ export function createJournal(context){
     shown.textContent=Number.isFinite(state.eventMatched)?tr("{shown} of {total} matching records",{shown:state.events.length,total:state.eventMatched.toLocaleString()}):
       tr("{shown} records in this window",{shown:state.events.length});
     range.textContent="";range.hidden=true;
+    shown.hidden=!state.events.length&&!Number.isFinite(state.eventMatched);
     older.disabled=pageBusy||state.cursor===null;newer.disabled=pageBusy||state.eventAfter===null;
     latest.disabled=pageBusy;latest.hidden=state.eventBefore===null;
     $("events-body").closest(".table-wrap").setAttribute("aria-busy",String(pageBusy));

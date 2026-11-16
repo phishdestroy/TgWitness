@@ -73,7 +73,7 @@ const boardReady=import('./views/board.js?v=6').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=layout14').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=layout15').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run,.hub-sheet')).map(el=>{
     const root=[...panelRoots].find(([,r])=>r.contains(el));
@@ -111,9 +111,9 @@ const connectionViewReady=import('./views/connection.js?v=3').then(({createConne
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=13'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=14'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
-  homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,
+  homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
     openChatIn:(profile,chat)=>openChatIn(profile,chat)});
 });
@@ -617,7 +617,7 @@ function toast(message, error=false) {
   n.replaceChildren(mark,node("strong","toast-title",tr("Error")),node("span","toast-text",message),close);
   n.classList.toggle("error", error); show("toast", true);
   if(n.showPopover){n.popover="manual";try{n.hidePopover();}catch{}n.showPopover();}
-  const life=error?9000:5000,arm=()=>{clearTimeout(toastTimer);toastTimer=setTimeout(()=>leave("toast"),life);};
+  const arm=()=>{clearTimeout(toastTimer);if(!error)toastTimer=setTimeout(()=>leave("toast"),5000);};
   n.onpointerenter=()=>clearTimeout(toastTimer);n.onpointerleave=arm;arm();
 }
 document.addEventListener("click",event=>{
@@ -672,7 +672,7 @@ async function api(path, body, options={}) {
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
     if(fetchOptions.signal?.aborted)throw new StaleView();
-    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;
+    const error=new Error(busyExplanation(detail,profile)||tr(detail));error.status=response.status;error.detail=String(detail);if(parameter)error.parameter=parameter;
     const retryAfter=response.headers.get('Retry-After');
     if(retryAfter){const seconds=Number(retryAfter),delay=Number.isFinite(seconds)?seconds*1000:Date.parse(retryAfter)-Date.now();
       if(Number.isFinite(delay))error.retryAfterMs=Math.max(0,delay);}
@@ -688,15 +688,41 @@ async function json(path, body, options) {
   if(!options?.allowStale&&revision!==state.workspaceRevision)throw new StaleView();
   return result;
 }
+const actionErrors=new WeakMap();
+function actionErrorAnchor(button){
+  let anchor=button;
+  for(let level=0;level<2&&anchor.parentElement;level++){
+    const parent=anchor.parentElement,style=getComputedStyle(parent);
+    const row=style.display.includes("flex")&&!style.flexDirection.startsWith("column");
+    if(!row||![...parent.children].every(child=>child.matches("button,a,select,label,.action-error")))break;
+    anchor=parent;
+  }
+  return anchor;
+}
+function showActionError(button,error){
+  if(!button?.isConnected||button.closest(".toast"))return;
+  const box=node("div","action-error"),text=node("div","action-error-text"),close=node("button","quiet action-error-close");
+  box.setAttribute("role","alert");close.type="button";close.setAttribute("aria-label",tr("Close"));close.append(icon("x"));
+  text.append(node("strong","",tr("Error")),node("p","",error.message));
+  if(/^Not enough free disk space/.test(error.detail||"")){
+    const open=node("button","text-link",tr("Collection status"));open.type="button";
+    open.addEventListener("click",()=>{const menu=$("workspace-status");menu.open=true;menu.querySelector("summary").focus();});
+    text.append(open);
+  }
+  box.append(icon("alert"),text,close);
+  close.addEventListener("click",()=>{box.remove();if(button.isConnected)button.focus({preventScroll:true});});
+  actionErrorAnchor(button).after(box);actionErrors.set(button,box);
+}
 async function busy(button, work) {
   if (button?.disabled) return;
   clearTimeout(toastTimer);show("toast",false);
-  if (button) {button.disabled = true;button.setAttribute("aria-busy","true");}
+  if (button) {button.disabled = true;button.setAttribute("aria-busy","true");actionErrors.get(button)?.remove();actionErrors.delete(button);}
   const form=button?.closest("form");form?.querySelector(".form-error")?.remove();
   try { return await work(); } catch (e) {
     if(e instanceof StaleView||e instanceof Cancelled)return;
     toast(e.message, true);
     if(form){const message=node("p","form-error",e.message);message.setAttribute("role","alert");form.append(message);}
+    else showActionError(button,e);
     if(e.field&&form?.contains($(e.field))){showFieldError($(e.field),e.message);$(e.field).focus();}
   }
   finally { if (button) {button.disabled=false;button.removeAttribute("aria-busy");
@@ -842,7 +868,6 @@ function applyAccess(){
   renderWorkflowControls();
 
   const limited=!!state.status?.chats_limited;
-  $("chats-manage").hidden=!viewAllowed("sources");
   viewQuery("chats",".chat-open").hidden=!may("interact")||limited;
   $("chat-load-history").hidden=$("chat-history-limit").hidden=!may("sources");
   $("chat-export-start").hidden=!may("export");
@@ -894,6 +919,7 @@ function syncLive(){
 function navigate(view,options={}) {
   if(!viewAllowed(view))view="chats";
   if(view!==state.view)window.TgWitnessJournal?.leave();
+  if(view!==state.view&&$("toast").classList.contains("error")){clearTimeout(toastTimer);show("toast",false);}
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
   if(view!=="connection")window.TgWitnessProxies?.stop?.();
   state.view=view;
@@ -1012,7 +1038,7 @@ function openJournalFilter(kind){
   state.boardSlice=null;state.filter=kind;state.source='';state.search='';state.eventSince='';state.eventUntil='';
   state.eventBefore=state.eventAfter=state.cursor=null;navigate('observations');
 }
-import("./views/pulse.js?v=3").then(({createPulse})=>{
+import("./views/pulse.js?v=4").then(({createPulse})=>{
   pulseUI=createPulse({anchor:viewQuery('start','.workflow-intro'),chartsAnchor:viewQuery('start','.workflow-choices'),node,tr,icon,json,session:()=>state.workspaceRevision+':'+state.profile,
     can:viewAllowed,openJournal:openJournalFilter,openChat:id=>id===null?navigate('chats'):navigate('chats').then(()=>openChat(id))});
   if(state.status&&state.view==='start')renderWorkflowControls();
@@ -1159,7 +1185,7 @@ function syncHiddenNav(){
   if(hidden)hint.textContent=trn("Show {n} hidden section","Show {n} hidden sections",hidden);
 }
 new MutationObserver(syncHiddenNav).observe(document.documentElement,{attributes:true,attributeFilter:["data-ui-level"]});
-import("./components/tips.js?v=3").then(({createTips})=>createTips({tr,icon,roots:[...panelRoots.values()]})).catch(error=>toast(error.message,true));
+import("./components/tips.js?v=4").then(({createTips})=>createTips({tr,icon,roots:[...panelRoots.values()]})).catch(error=>toast(error.message,true));
 $("nav-hidden-hint").addEventListener("click",()=>{
   const select=document.querySelector(".sidebar [data-ui-level]");if(!select)return;
   select.value="expert";select.dispatchEvent(new Event("change"));
@@ -1348,8 +1374,15 @@ function accountLossText(cause){
   return {account_banned:tr("Telegram banned this account. Observation stopped; the journal is kept."),
     account_frozen:tr("Telegram froze this account and refuses most requests. Observation stopped; the account can appeal through @SpamBot."),
     account_deleted:tr("The Telegram account was deleted. Observation stopped; the journal is kept."),
-    session_duplicated:tr("Telegram ended this session because it was used in two places at once. Sign in again with a new session.")}[cause]
+    session_duplicated:tr("Telegram ended this session because it was used in two places at once. Sign in again with a new session.")+" "+
+      tr("Do not use the same session file in other programs.")}[cause]
     ||tr("Telegram signed this account out. Sign in again to resume observation.");
+}
+function signInText(c){
+  const loss=c?.account_loss,known=["account_banned","account_frozen","account_deleted","session_duplicated"].includes(loss?.cause);
+  if(known)return accountLossText(loss.cause);
+  return tr('Telegram no longer accepts this session. Sign in to the same account; saved records and sources stay in this workspace.')+
+    (loss?.telegram_error?" ("+loss.telegram_error+")":"");
 }
 function telegramPauseText(p){
   return p.telegram_pause_method?tr("Telegram paused this account's requests until {time} (method {method}).",{time:fmtFull(p.telegram_pause_until),method:p.telegram_pause_method}):
@@ -1458,6 +1491,15 @@ const collectionReady=import("./components/collection.js?v=2").then(({createColl
   collectionUI=createCollectionControl({node,tr,status:()=>state.status,workspace:$("workspace")});collectionUI.update();return collectionUI;
 });
 collectionReady.catch(error=>toast(error.message,true));
+let accountSwitch=null;
+const accountSwitchReady=import("./components/account-switch.js?v=3").then(({createAccountSwitch})=>{
+  accountSwitch=createAccountSwitch({node,icon,tr,avatar:avatarNode,profiles:()=>state.profiles,current:()=>state.profile,status:()=>state.status,
+    choose:id=>{const select=$("profile-select");select.value=id;select.dispatchEvent(new Event("change"));},
+    add:()=>$("manage-profiles").click(),canAdd:()=>!$("manage-profiles").hidden,
+    manage:()=>navigate("accounts"),canManage:()=>viewAllowed("accounts")});
+  accountSwitch.update();return accountSwitch;
+});
+accountSwitchReady.catch(error=>toast(error.message,true));
 let modesUI=null;
 const modeSession=()=>state.workspaceRevision+":"+state.profile;
 const modesReady=import("./components/modes.js?v=3").then(({createModes})=>{
@@ -1488,18 +1530,25 @@ function renderStatus() {
   const navCount=$("nav-count"),total=s.stats.total.toLocaleString(LANG);
   if(navCount.textContent!==total){if(navCount.dataset.profile===state.profile&&/\d/.test(navCount.textContent))replay(navCount,"count-bump",700);navCount.textContent=total;}
   navCount.dataset.profile=state.profile;
-  renderCollectorHealth(s.health);collectionUI?.update();
+  renderCollectorHealth(s.health);collectionUI?.update();accountSwitch?.update();
   const signIn=accountState(s).needsSignIn;
+  compactCollectorError();
   show("collector-error",!!c.last_error||signIn);
   show('collector-sign-in',signIn&&viewAllowed('connection'));
-  $("collector-error-copy").textContent=signIn?
-    tr('Telegram no longer accepts this session. Sign in to the same account; saved records and sources stay in this workspace.'):
+  $("collector-error-copy").textContent=signIn?signInText(c):
     c.last_error ? tr("Collector reported {error}. Review coverage events before relying on completeness.",{error:errorName(c.last_error)||c.last_error}) : "";
   renderSetup();
   renderWorkflowControls();
   if($("credentials-form").isConnected)renderAccountIdentity(s);
   modesUI?.sync(modeSession());
   viewHost?.updateStatus(s);
+}
+function compactCollectorError(){
+  const box=$("collector-error");if(box.dataset.compact)return;box.dataset.compact="true";
+  const more=node("button","quiet collector-error-more");more.type="button";more.id="collector-error-more";
+  more.setAttribute("aria-expanded","false");more.setAttribute("aria-controls","collector-error-copy");more.setAttribute("aria-label",tr("Show more"));more.title=tr("Show more");
+  more.append(icon("chevron"));box.prepend(icon("alert"));box.append(more);
+  more.addEventListener("click",()=>{const open=!box.classList.contains("expanded");box.classList.toggle("expanded",open);more.setAttribute("aria-expanded",String(open));});
 }
 function renderAccountIdentity(s){
   const account=s.collector.account;
@@ -1592,6 +1641,9 @@ $("empty-action").addEventListener("click",()=>{
     viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
     window.TgWitnessRouter?.record();
     busy($("empty-action"),()=>refreshEvents());
+  }else if($("empty-action").dataset.mode==="system"){
+    state.eventSystem=true;state.cursor=state.eventBefore=state.eventAfter=null;window.TgWitnessRouter?.record();
+    busy($("empty-action"),()=>refreshEvents());
   }else nextSetupStep();
 });
 function fillSourceSelect(id,value,all=false) {
@@ -1627,7 +1679,7 @@ async function loadProfiles(prefetched){
   state.profiles=result.profiles;if(!result.cached)profilesLoadedAt=Date.now();
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main workspace")profile.label=tr("Main workspace");
-  const select=$("profile-select");updateWorkspaceOptions(select,state.profiles,state.profile,tr);
+  const select=$("profile-select");updateWorkspaceOptions(select,state.profiles,state.profile,tr);accountSwitch?.update();
   const list=$("profiles-list"),showList=state.view==='connection',oldRows=new Map([...list.children].map(row=>[row.dataset.profile,row])),rows=[];
   for(const profile of state.profiles){
     if(!showList)continue;
@@ -2160,13 +2212,16 @@ function renderEvents() {
   finally{window.TgWitnessJournal.syncPage();}
   show("empty-events",state.events.length===0);
   const filtered=state.filter||state.source||state.search||state.eventSince||state.eventUntil,c=state.status.collector;
-  $("empty-copy").textContent=tr(filtered ? "No events match these filters. Try another source, event type, or search." :
+  const total=state.status.stats?.total||0,system=!filtered&&!state.eventSystem&&total>0&&state.eventBefore===null;
+  $("empty-copy").textContent=system?tr("No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.",{n:total.toLocaleString(LANG)}):
+    tr(filtered ? "No events match these filters. Try another source, event type, or search." :
     !c.has_session?"Connect an account to start your journal.":!hasSources(state.status)?
     "Your account is connected. Choose which groups and channels to observe.":c.running?
     "Observation is on. New activity will appear here when Telegram delivers it.":"Your sources are ready. Start observation to save new activity.");
-  $("empty-action").textContent=tr(filtered?"Clear filters":!c.has_session?"Connect account →":
+  $("empty-action").textContent=tr(filtered?"Clear filters":system?"Show system records":!c.has_session?"Connect account →":
     !hasSources(state.status)?"Choose sources →":"Start observation");
-  show("empty-action",!!filtered||(!state.status.demo&&!c.running));
+  $("empty-action").dataset.mode=system?"system":"";
+  show("empty-action",!!filtered||system||(!state.status.demo&&!c.running));
   window.TgWitnessJournal.syncPage();
 }
 async function refreshEvents(direction=false) {
@@ -2208,7 +2263,7 @@ async function refreshRanked(request) {
   state.searchIndex=result.index;
   renderEvents();
 }
-const journalReady=import('./components/journal.js?v=layout4').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=layout5').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     request:(path,body)=>json(path,body),admin:()=>!!state.me?.admin,
     prepare:()=>{state.boardSlice=null;state.boardAdded=false;$('board-slice-context')?.remove();state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false,restoreFocus:false});},
@@ -2363,7 +2418,7 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=3").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=4").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
@@ -2388,7 +2443,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=13").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=14").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
@@ -4771,7 +4826,7 @@ function renderConnection(){
   renderApiState();
   const c=state.status.collector,r=c.network||{kind:"mtproxy_auto"},p=state.status.protection||{};
   const route=tr({direct:"Direct connection",socks5:"SOCKS5 proxy",http:"HTTP CONNECT proxy",mtproxy:"MTProxy · experimental",
-    mtproxy_auto:"Automatic MTProxy"}[r.kind]);
+    mtproxy_auto:"Public MTProxy"}[r.kind]);
   const auto=r.kind==="mtproxy_auto",now=auto&&r.current,pool=(auto&&r.pool)||{};
   $("route-summary").textContent=route;
   $("route-line-text").textContent=tr("Connection: {route}",{route:r.managed?[routeText(r),exitText(r.check)].filter(Boolean).join(" · "):
@@ -4843,7 +4898,7 @@ function routeText(route){
   if(route.managed==="warp")return "Cloudflare WARP";
   if(route.managed==="vpn")return tr("WireGuard VPN");
   if(route.fallback_to_direct||route.kind==="direct")return tr("Direct connection");
-  return tr({mtproxy_auto:"Automatic MTProxy",socks5:"SOCKS5 proxy",http:"HTTP proxy",mtproxy:"MTProxy"}[route.kind]||route.kind||"");
+  return tr({mtproxy_auto:"Public MTProxy",socks5:"SOCKS5 proxy",http:"HTTP proxy",mtproxy:"MTProxy"}[route.kind]||route.kind||"");
 }
 function countryName(code){try{return code?new Intl.DisplayNames([document.documentElement.lang||"en"],{type:"region"}).of(code):"";}catch{return code||"";}}
 function exitText(check){return check&&check.exit_ip?[check.exit_ip,countryName(check.country)].filter(Boolean).join(" · "):"";}
@@ -4860,7 +4915,7 @@ function renderSeenBy(){
   const pair=id.api_id?"api_id "+id.api_id+" · "+tr(id.api_pair==="own application"?"own application":"built-in public pair"):
     tr("Chosen at sign-in");
   const device=[id.device_model,id.system_version,id.app_version].filter(Boolean).join(" · ");
-  const rows=[[tr("Network address"),address],[tr("Application"),pair],
+  const rows=[[tr("Network address"),address],...(r.kind==="mtproxy_auto"?[["",tr("The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.")]]:[]),[tr("Application"),pair],
     [tr("Session in Telegram's device list"),device||tr("Telethon's default description of this computer")]];
   if(id.meaning)rows.push(["",tr("This public pair belongs to Telegram Desktop; the session is described as Telegram Desktop.")]);
   show("independent-session-pending",!!c.pending_new_session);
@@ -5432,9 +5487,21 @@ async function refreshChats(refresh=false,wanted=null,messages=true){
   return await loadChatMessages(refresh?"refresh":"open");
 }
 let chatListView=null;
-const chatListReady=import('./views/chat-list.js?v=layout4').then(({createChatList})=>{
+const secretAllowed=()=>viewAllowed('secret-chats')&&!window.TGW_ONLINE_DEMO&&!state.status?.demo;
+async function openSecretChat(id,start=false){
+  const revision=state.workspaceRevision;await navigate('secret-chats');
+  if(revision!==state.workspaceRevision||state.view!=='secret-chats')return;
+  if(start)secretChatsView?.startNew();else await secretChatsView?.selectChat(id);
+}
+const chatListReady=import('./views/chat-list.js?v=telegram1').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
-    getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats()});
+    getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats(),
+    adds:{chooseChats:()=>navigate('sources'),canChoose:()=>viewAllowed('sources'),
+      canOpenLink:()=>!viewQuery('chats','.chat-open').hidden&&!state.status?.demo&&accountSignedIn(),
+      startSecret:()=>openSecretChat(null,true),canSecret:()=>viewAllowed('secret-chats')&&!state.status?.demo&&may('interact')&&accountSignedIn()},
+    secret:{allowed:secretAllowed,load:()=>json('secret-chats'),open:id=>openSecretChat(id)},
+    observation:()=>{const s=state.status;return {off:!!s&&!s.demo&&accountState?.(s).kind==='paused',canStart:!$('collector-toggle').disabled&&!$('collector-toggle').hidden};},
+    startObservation:()=>$('collector-toggle').click()});
   return chatListView;
 });
 function renderChatsList(){chatListView?.render();}
@@ -6429,7 +6496,6 @@ async function loadHistory(button,limit,before=null,quiet=false){
   };
   return busy(button,work);
 }
-$("chats-manage").addEventListener("click",()=>navigate("sources"));
 $("chat-load-history").addEventListener("click",e=>loadHistory(e.currentTarget,Number($("chat-history-limit").value)));
 
 let multiPoll=null,multiRequest=0,multiDiscovery=null;
@@ -6636,11 +6702,11 @@ function linkEstimate(){
   const table=p.estimates[$("link-export-transport").value]||p.estimates.regular,at=k=>table[Math.min(k,table.length)-1];
   const parts=[tr("1 account {time}",{time:fmtDuration(at(1))})];
   if(n>1)parts.push(tr("{n} selected accounts {time}",{n,time:fmtDuration(at(n))}));
-  if(!p.single_account&&table.length>=10&&n!==10)parts.push(tr("10 accounts {time}",{time:fmtDuration(at(10))}));
+  if(!p.single_account&&table.length>=10&&n!==10&&p.accounts.filter(a=>a.usable).length>=10)parts.push(tr("10 accounts {time}",{time:fmtDuration(at(10))}));
   const transport=$("link-export-transport").value;
   $("link-export-estimate").textContent=tr("Estimated time:")+" "+parts.join(" · ")+". "+
     tr("Planning rate: {rate} messages/s per account ({source}).",{rate:p.rates[transport],source:tr(p.rate_sources[transport])});
-  $("link-export-start").disabled=!n;
+  $("link-export-start").disabled=!n||p.disk?.disk_ok===false;
 }
 function renderLinkPlan(){
   const p=linkPlan,box=$("link-export-plan");box.replaceChildren();show("link-export-plan",true);
@@ -6651,7 +6717,8 @@ function renderLinkPlan(){
   if(p.visible!==null)facts.push(tr("{n} visible messages",{n:p.visible.toLocaleString(LANG)}));
   if(p.participants_count)facts.push(tr("{n} members",{n:p.participants_count.toLocaleString(LANG)}));
   head.append(node("span","hint",facts.join(" · ")));
-  if(p.missing)box.append(node("p","hint",tr("Difference between last message number and visible count: {n}. This is a planning estimate.",{n:p.missing.toLocaleString(LANG)})));
+  if(p.missing)box.append(node("p","hint",document.documentElement.dataset.uiLevel==="simple"?tr("Unavailable messages (deleted or hidden): {n}",{n:p.missing.toLocaleString(LANG)}):
+    tr("Difference between last message number and visible count: {n}. This is a planning estimate.",{n:p.missing.toLocaleString(LANG)})));
   if(p.history_visible===false)box.append(node("p","hint",tr("New members do not see earlier history in this group.")));
   const label=node("label","",tr("History acquisition")+" "),select=node("select");select.id="link-export-transport";
   select.append(new Option(tr("Regular session"),"regular"));
@@ -6675,6 +6742,14 @@ function renderLinkPlan(){
   box.append(accounts);
   if(!p.accounts.some(a=>a.usable))box.append(node("p","notice warning",tr("No account can run this export now. Wait for its other tasks to finish, then check the link again.")));
   const estimate=node("p","export-estimate");estimate.id="link-export-estimate";box.append(estimate,node("p","hint",tr(p.estimate_scope)));
+  if(p.disk?.disk_ok===false){
+    const warn=node("div","notice warning link-export-disk");warn.setAttribute("role","alert");
+    warn.append(node("p","",tr("This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.",
+      {needed:humanSize(p.disk.needed_bytes),free:humanSize(p.disk.free_bytes)})));
+    const open=node("button","text-link",tr("Collection status"));open.type="button";
+    open.addEventListener("click",()=>{const menu=$("workspace-status");menu.open=true;menu.querySelector("summary").focus();});
+    warn.append(open);box.append(warn);
+  }
   const start=node("button","primary",tr("Start export"));start.type="button";start.id="link-export-start";
   start.addEventListener("click",()=>busy(start,startLinkExport));box.append(start);
   select.addEventListener("change",linkEstimate);linkEstimate();
@@ -6738,9 +6813,12 @@ $("link-export-form").addEventListener("submit",e=>{e.preventDefault();busy(e.su
   const link=$("link-export-input").value.trim();
   if(!link)throw new Error(tr("Paste a chat link or @username."));
   clearTimeout(linkPoll);linkPoll=null;linkJob=linkPlan=null;show("link-export-plan",false);
-  const token=state.token,plan=await json("multi-export/plan",{link},{root:true});
-  if(state.token!==token)return;
-  linkPlan=plan;renderLinkPlan();
+  const button=e.submitter,label=button?.textContent;if(button)button.textContent=tr("Checking {link}…",{link:link.length>40?link.slice(0,39)+"…":link});
+  try{
+    const token=state.token,plan=await json("multi-export/plan",{link},{root:true});
+    if(state.token!==token)return;
+    linkPlan=plan;renderLinkPlan();
+  }finally{if(button)button.textContent=label;}
 });});
 window.addEventListener("tgwitness:lock",resetLinkExport);
 $("chat-export-start").addEventListener("click",e=>busy(e.currentTarget,openExportDialog));
@@ -6930,7 +7008,7 @@ systemMapReady.catch(error=>toast(error.message,true));
 const accessReady=import("./views/access.js").then(({createAccessView})=>{
   accessView=createAccessView({root:$("view-access"),tr,navigate,localInput,getState:()=>state});return accessView;
 });
-const systemLogReady=import("./views/system-log.js?v=3").then(({createSystemLog})=>{
+const systemLogReady=import("./views/system-log.js?v=4").then(({createSystemLog})=>{
   systemLogView=createSystemLog({root:$("view-system-log"),tr,json,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
     options:()=>viewOptions('system-log'),formatTime:fmtTime,toast,download:(path,filename,stream,root)=>download(path,filename,stream,root)});return systemLogView;
 });
@@ -7046,7 +7124,7 @@ async function bootstrap(){
   if(!accessStarted&&revision===state.workspaceRevision&&state.token)
     await unlock().catch(unlockFailed);
 }
-const HSCROLL=".demo-actions,.journal-type-filters,.chat-view-tabs,.profile-tabs,.parameters-nav,.health-part-tabs,.doc-tabs";
+const HSCROLL=".demo-actions,.chat-list-views,.journal-type-filters,.chat-view-tabs,.profile-tabs,.parameters-nav,.health-part-tabs,.doc-tabs";
 const hscrollSeen=new WeakSet(),hscrollSize=new ResizeObserver(entries=>entries.forEach(entry=>hscrollMark(entry.target)));
 let hscrollQueued=false;
 function hscrollMark(el){

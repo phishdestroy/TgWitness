@@ -125,7 +125,8 @@
       item.revoke.disabled=!!entry.revoked_at||item.revoke.hasAttribute("aria-busy");
       if(box.children[index]!==item.row)box.insertBefore(item.row,box.children[index]||null);
     });
-    if(!connections.length&&!box.childElementCount)box.append(viewState("empty",tr("No archive connections"),tr("Create a connection above to grant read-only access.")));
+    if(!connections.length&&!box.childElementCount)box.append(viewState("empty",tr("No archive connections"),tr("Create a connection above to grant read-only access."),
+      tr("Create connection"),()=>{const form=$("mcp-form");form.scrollIntoView({block:"start"});form.querySelector("input:not([disabled]),select:not([disabled])")?.focus({preventScroll:true});}));
   }
   function schedule(){
     clearTimeout(timer);timer=null;

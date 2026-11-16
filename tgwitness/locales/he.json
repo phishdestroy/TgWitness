@@ -10042,5 +10042,17 @@
   "Messages in the chat": "הודעות בצ'אט",
   "Expected duration": "משך צפוי",
   "Time left": "זמן שנותר",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness לא טען את הצ'אט הזה, ו־Telegram לא החזיר אותו לחשבון הזה. לחצו על „רענון רשימת צ'אטים” ב„מקורות”, או ודאו שהחשבון עדיין בצ'אט."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness לא טען את הצ'אט הזה, ו־Telegram לא החזיר אותו לחשבון הזה. לחצו על „רענון רשימת צ'אטים” ב„מקורות”, או ודאו שהחשבון עדיין בצ'אט.",
+  "Add a chat or channel": "הוספת צ׳אט או ערוץ",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "הייצוא הזה צריך כ-{needed} של שטח פנוי בדיסק; פנויים {free}. פנו מקום ותכננו מחדש.",
+  "Unavailable messages (deleted or hidden): {n}": "הודעות לא זמינות (נמחקו או מוסתרות): {n}",
+  "Checking {link}…": "בודק את {link}…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "עדיין לא נרשם דבר. שורות מופיעות כאן בזמן מעקב, כניסה או ייצוא.",
+  "What is this?": "מה זה?",
+  "Do not use the same session file in other programs.": "אל תשתמשו באותו קובץ סשן בתוכנות אחרות.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "שטח פנוי בדיסק: {free} מתוך {min} הנדרשים. ייצואים והורדות קבצים ממתינים עד שיתפנה מקום.",
+  "Public MTProxy (third-party server from an open list)": "MTProxy ציבורי (שרת צד שלישי מרשימה פתוחה)",
+  "Public MTProxy": "MTProxy ציבורי",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "מפעיל הפרוקסי רואה שהשרת הזה מתחבר ואת כתובת ה-IP שלו, אבל לא את ההודעות: MTProto מצפין אותן עד Telegram.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "אין כאן עדיין הודעות או שינויים. רשומות ביומן: {n}. רשומות מערכת כמו כניסות ובדיקות חיבור מוסתרות."
 }

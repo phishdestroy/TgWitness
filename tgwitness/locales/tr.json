@@ -9991,5 +9991,17 @@
   "Messages in the chat": "Sohbetteki mesajlar",
   "Expected duration": "Tahmini süre",
   "Time left": "Kalan süre",
-  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness bu sohbeti yüklemedi ve Telegram bu hesap için onu döndürmedi. «Kaynaklar» bölümünde «Sohbet listesini yenile»ye basın veya hesabın hâlâ sohbette olduğunu kontrol edin."
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness bu sohbeti yüklemedi ve Telegram bu hesap için onu döndürmedi. «Kaynaklar» bölümünde «Sohbet listesini yenile»ye basın veya hesabın hâlâ sohbette olduğunu kontrol edin.",
+  "Add a chat or channel": "Sohbet veya kanal ekle",
+  "This export needs about {needed} of free disk space; {free} is free. Free up space, then plan again.": "Bu dışa aktarma yaklaşık {needed} boş disk alanı gerektiriyor; boş alan {free}. Yer açın ve yeniden planlayın.",
+  "Unavailable messages (deleted or hidden): {n}": "Kullanılamayan mesajlar (silinmiş veya gizli): {n}",
+  "Checking {link}…": "{link} denetleniyor…",
+  "Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.": "Henüz bir şey kaydedilmedi. Satırlar gözlem, oturum açma veya dışa aktarma sırasında burada görünür.",
+  "What is this?": "Bu nedir?",
+  "Do not use the same session file in other programs.": "Aynı oturum dosyasını başka programlarda kullanmayın.",
+  "Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.": "Boş disk alanı: gereken {min} alanın {free} kadarı boş. Dışa aktarmalar ve dosya indirmeleri yer açılana kadar bekler.",
+  "Public MTProxy (third-party server from an open list)": "Herkese açık MTProxy (açık listedeki üçüncü taraf sunucu)",
+  "Public MTProxy": "Herkese açık MTProxy",
+  "The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.": "Proxy işletmecisi bu sunucunun bağlandığını ve IP adresini görür, ancak mesajları göremez: MTProto onları Telegram'a kadar şifreler.",
+  "No messages or changes here yet. Records in the journal: {n}. System records such as sign-ins and connection checks are hidden.": "Burada henüz mesaj veya değişiklik yok. Günlükteki kayıtlar: {n}. Oturum açma ve bağlantı denetimi gibi sistem kayıtları gizli."
 }
