@@ -5,3 +5,6 @@ form[data-dirty=false] .form-draft-bar{position:static;justify-content:flex-star
 @media(max-width:767px){.form-draft-bar{bottom:8px;padding:8px;gap:6px}.form-draft-bar button{font-size:12px}}
 
 @media(max-width:767px){.form-draft-bar{flex-wrap:wrap}.form-draft-bar span{flex-basis:100%}}
+.recommended-pill{padding:0 7px;border-color:var(--success-border);background:var(--success-soft);color:var(--success);font-size:11px;line-height:1.6}
+.scope-modes label>.recommended-pill{align-self:flex-start;margin-inline-start:auto}
+.report-template>.recommended-pill{align-self:flex-start}

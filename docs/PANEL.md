@@ -343,6 +343,8 @@ apply to future activity; saved records stay.
   reply-keyboard presses.
 - **When a new chat or bot appears**: save its profile and up to the chosen number of
   its latest visible messages.
+- **Chosen chats** is marked as recommended. **Discard changes** returns the form to the
+  saved scope until you press **Save scope**.
 
 [Pseudo-secret](PSEUDO-SECRET.md) is the included Secret Chat interface, enabled
 per account after installing its protocol module with one button. Cloud observation
@@ -384,6 +386,9 @@ Progress survives a restart; attachments follow your media settings. See
   stays clear of Telegram's FloodWait limits. 0 turns a group off. Mark priority chats
   with the star in the list; chats per pass and the pause between chats are in
   Parameters. See [collection](COLLECTION.md).
+- The save bar says whether these settings match the recommended ones. **Return to
+  recommended** fills in the recommended values; **Save recording settings** applies them
+  and **Discard changes** restores the saved ones.
 
 ## Exports
 

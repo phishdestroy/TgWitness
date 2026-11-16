@@ -104,7 +104,7 @@ not all participants. Full-journal charts keep their separately stated scope.
 
 | Contents preset | Included by default |
 | --- | --- |
-| Case dossier | Activity, observation times, participants, chats and the record transcript. |
+| Case dossier (recommended) | Activity, observation times, participants, chats and the record transcript. |
 | Briefing | An activity overview without participant rankings or the transcript. |
 | Activity review | Activity, observation times, participants, chats and composition, with source references and exact figures. |
 | Custom report | Your own combination of charts, transcript and previews. |

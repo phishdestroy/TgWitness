@@ -12,6 +12,7 @@
 #view-sources .sources-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 10px 16px 12px; background: none; color: var(--muted); white-space: nowrap; min-height: 44px; }
 #view-sources .sources-tabs button[aria-selected="true"] { color: var(--accent-text); border-bottom-color: var(--accent); }
 #view-sources .sources-tabs button:hover { background: var(--surface-2); color: var(--text); }
+html[data-ui-level=simple] #view-sources #sources-tab-secret { display: none; }
 #view-sources:has(#sources-tab-recording[aria-selected="true"]) #load-dialogs,
 #view-sources:has(#sources-tab-recording[aria-selected="true"]) .source-refresh-info { display: none; }
 #view-sources .tab-count { min-width: 20px; padding: 1px 6px; border-radius: 5px; background: var(--surface-3); color: var(--text-2); font-size: 12px; font-variant-numeric: tabular-nums; }
@@ -100,8 +101,9 @@
   #view-sources .recording-sections .monitoring-presets { gap: 6px; margin: 12px 0; }
   #view-sources .recording-sections .monitoring-presets button { flex: 1 1 auto; font-size: 12px; }
   #view-sources .recording-savebar { flex-wrap: wrap; bottom: 6px; padding: 12px; gap: 10px; }
-  #view-sources .recording-actions { width: 100%; }
+  #view-sources .recording-actions { width: 100%; flex-wrap: wrap; }
   #view-sources .recording-actions button { flex: 1; font-size: 12px; padding-inline: 8px; }
+  #view-sources #recording-recommended-apply { flex-basis: 100%; }
   #view-sources .source-list-heading { padding: 14px 12px 0; }
   #view-sources .source-list-heading h2 { font-size: 15px; }
   #view-sources .source-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; gap: 8px; }

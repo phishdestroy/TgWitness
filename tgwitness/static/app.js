@@ -2428,7 +2428,7 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=4").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=5").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
@@ -3992,6 +3992,7 @@ function chatTitle(id){
 function renderScope(){
   const form=$("scope-form"),sc=state.scope,demo=!!state.status?.demo;
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=demo||!sc);
+  show("scope-discard",!!sc&&state.scopeDirty);
   if(!sc){$("scope-unsaved").textContent=demo?tr("The scope can be changed in a real workspace, not in the demo."):"";return;}
   const saved=sc.settings,select=$("scope-folder");
   if(!state.scopeDirty){
@@ -4022,6 +4023,7 @@ function renderScope(){
   $("scope-unsaved").textContent=state.scopeDirty?tr("Unsaved changes — press Save scope to apply."):tr("Saved: {mode}.",{mode:scopeName(saved.mode)});
 }
 $("scope-form").addEventListener("change",()=>{state.scopeDirty=true;renderScope();});
+$("scope-discard").addEventListener("click",()=>{state.scopeDirty=false;renderScope();$("scope-form").querySelector("button[type=submit]").focus();});
 $("scope-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   const draft=scopeDraft(),saved=state.scope.settings,revision=state.workspaceRevision,profile=state.profile;
   if(draft.mode==="folder"&&draft.folder_id===null)throw new Error(tr("Choose a Telegram folder. Load chats first if the list is empty."));

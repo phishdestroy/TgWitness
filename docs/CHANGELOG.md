@@ -59,6 +59,10 @@
 - The warning for folder and whole-account scope sits right below the scope choice with a link to the dedicated
   account guide.
 - Integrations say what leaves the panel and who receives it; archive connections explain what they are.
+- Sources and Exports mark the recommended choice: Chosen chats for the scope and Case dossier for report
+  contents. Recording says whether its settings match the recommended ones and has **Return to recommended**
+  (`recommended` in the status); the scope form has **Discard changes**. Simple hides the Pseudo-secret tab in
+  Sources, since pseudo-secret chats are in the chat list.
 - Recheck access to helper workspaces when resuming or retrying profile collection.
 - Keep session age and loss context within the current authorization, ignore late session checks from
   replaced clients, and distinguish the last successful check from the saved session snapshot.
