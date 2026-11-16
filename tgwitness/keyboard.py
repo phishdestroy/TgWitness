@@ -1,3 +1,7 @@
+import base64
+import binascii
+
+
 TYPES = {
 
     "InlineButtonTypeUrl": "url", "InlineButtonTypeCallback": "callback", "InlineButtonTypeCopy": "copy",
@@ -16,6 +20,7 @@ TYPES = {
     "KeyboardButtonGame": "game", "KeyboardButtonBuy": "buy", "KeyboardButtonCopy": "copy",
 }
 FIELDS = ("url", "query", "copy_text", "user_id", "fwd_text")
+MAX_CALLBACK_BASE64 = 65536
 
 
 def keyboard(markup):
@@ -44,3 +49,27 @@ def keyboard(markup):
 
 def of_payload(payload):
     return keyboard(((payload or {}).get("raw") or {}).get("reply_markup"))
+
+
+def texts(markup):
+    if not isinstance(markup, dict):
+        return
+    for row in markup.get("rows") or []:
+        if not isinstance(row, list):
+            continue
+        for button in row:
+            if not isinstance(button, dict):
+                continue
+            for field in ("text", "url", "copy_text", "query"):
+                value = button.get(field)
+                if isinstance(value, str) and value:
+                    yield field, value
+            encoded = button.get("data_base64")
+            if not isinstance(encoded, str) or not 0 < len(encoded) <= MAX_CALLBACK_BASE64:
+                continue
+            try:
+                decoded = base64.b64decode(encoded, validate=True).decode("utf-8")
+            except (ValueError, UnicodeError, binascii.Error):
+                continue
+            if decoded:
+                yield "callback", decoded

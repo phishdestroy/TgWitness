@@ -12,7 +12,9 @@ from .telegram_client import FLOOD_ERRORS
 MEANING = ("Telegram's own similar-channel suggestions for each source, recorded as observations. A suggestion is "
            "produced by Telegram from its usage signals and is a lead about how Telegram groups the channels.")
 FILTER_MEANING = ("Filters drop suggestions from this record. A dropped channel was still suggested by Telegram; "
-                  "counts below report what was suggested and what this run kept.")
+                  "total is Telegram's reported count, suggested is the received channel count, returned is the "
+                  "processed count and kept is the count passing filters. complete covers receipt and processing, "
+                  "before filters.")
 FLAGS = ("broadcast", "megagroup", "gigagroup", "verified", "scam", "fake", "restricted", "noforwards")
 
 
@@ -62,7 +64,9 @@ def excluded(node, options):
 
 async def suggestions(collector, entity):
     answer = await collector.client(functions.channels.GetChannelRecommendationsRequest(channel=entity))
-    return [chat for chat in getattr(answer, "chats", []) if isinstance(chat, types.Channel)]
+    chats = getattr(answer, "chats", [])
+    total = getattr(answer, "count", len(chats))
+    return [chat for chat in chats if isinstance(chat, types.Channel)], total
 
 
 async def discover(collector, seeds, options=None, progress=None):
@@ -71,7 +75,7 @@ async def discover(collector, seeds, options=None, progress=None):
     run_id = secrets.token_hex(8)
     store.append("graph.started", {"graph_run_id": run_id, "seeds": list(seeds), "options": options.model_dump(),
                                    "meaning": MEANING})
-    nodes, edges, dropped, stopped = {}, [], {}, None
+    nodes, edges, dropped, stopped, sources = {}, [], {}, None, []
     queue = [(chat_id, 0) for chat_id in dict.fromkeys(seeds)]
     for chat_id, _ in queue:
         nodes[chat_id] = {"chat_id": chat_id, "depth": 0, "discovered_from": None, "seed": True}
@@ -88,7 +92,7 @@ async def discover(collector, seeds, options=None, progress=None):
             break
         try:
             entity = await collector.resolve_target(chat_id)
-            found = await suggestions(collector, entity)
+            found, total = await suggestions(collector, entity)
         except FLOOD_ERRORS as exc:
             until = max(time.time() + exc.seconds, store.get_setting("rpc_backoff_until", 0))
             store.set_setting("rpc_backoff_until", until)
@@ -117,9 +121,12 @@ async def discover(collector, seeds, options=None, progress=None):
                 break
             nodes[node["chat_id"]] = node
             queue.append((node["chat_id"], depth + 1))
-        store.append("graph.suggestions", {
-            "graph_run_id": run_id, "depth": depth, "suggested": len(found), "returned": len(suggested),
-            "kept": len(kept), "channels": suggested, "meaning": MEANING + " " + FILTER_MEANING}, chat_id)
+        counts = {"total": total, "suggested": len(found), "returned": len(suggested), "kept": len(kept),
+                  "response_complete": len(found) == total,
+                  "complete": len(found) == total and len(suggested) == len(found)}
+        sources.append({"chat_id": chat_id, "depth": depth, **counts})
+        store.append("graph.suggestions", {"graph_run_id": run_id, "depth": depth, **counts,
+                                            "channels": suggested, "meaning": MEANING + " " + FILTER_MEANING}, chat_id)
         if progress:
             progress({"run_id": run_id, "visited": len(edges), "channels": len(nodes), "depth": depth})
         if stopped:
@@ -128,7 +135,7 @@ async def discover(collector, seeds, options=None, progress=None):
             await asyncio.sleep(options.pause_seconds)
     result = {"format": "tgwitness-channel-graph-v1", "graph_run_id": run_id, "generated_at": utcnow(),
               "options": options.model_dump(), "seeds": list(seeds), "nodes": list(nodes.values()), "edges": edges,
-              "dropped": dropped, "stopped": stopped, "meaning": MEANING}
+              "dropped": dropped, "stopped": stopped, "sources": sources, "meaning": MEANING}
     store.append("graph.finished", {"graph_run_id": run_id, "channels": len(nodes), "edges": len(edges),
                                     "dropped": dropped, "stopped": stopped, "meaning": MEANING})
     return result

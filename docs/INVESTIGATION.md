@@ -156,6 +156,25 @@ people with saved messages, not every member of the group. **More tools → Para
 cited per fact** limits the reference list, not the underlying activity count.
 Mentions and avatar similarity are leads; ownership and identity rest on numeric IDs and attributed senders.
 
+The signed dossier separates encoder hints from forwarded and reused files into
+`clients.forwarded` and `clients.reused`. Such files do not contribute to
+`clients.observed` or the `media_timing.pre_existing` list. A reused file means
+the same Telegram document ID was observed in a different message earlier in
+this journal, within the reader's permitted chats. Its first observed record is
+cited; another observation or edit of the same message is not a reuse.
+
+The dossier's `paid_reactions` section retains the latest available Stars
+leaderboard for each listed message, with source records and anonymous flags.
+These are snapshot counts, not sums of additional payments or a complete list
+of people who reacted. A snapshot without a leaderboard supplies no replacement
+list. The section reports omitted messages when its display limit is reached.
+
+Watchlists and indicator exports inspect button labels, URLs, copy text, inline
+queries and callback bytes that decode as valid UTF-8. Invalid or oversized
+callback encodings are skipped by text extraction; the original bytes remain
+in the saved record. Existing watchlists need a rescan to inspect older records
+with these additional fields. Inspection does not press the button.
+
 In the worked example:
 
 | Link | Records | Supported observation |
@@ -211,6 +230,46 @@ acquires that chat's history using the eligible accounts.
 For longer work, retain boundaries with an [independent witness](WITNESS.md).
 Use controlled delivery checks to qualify
 each account's capture path and visibility.
+
+## Media recurrence and forwarding sources
+
+Evidence reports compare Telegram document IDs and SHA-256 hashes from saved-file
+records separately. They show distinct messages, chats and the first and last
+retained occurrence, with an expandable observation timeline in HTML. Repeated
+snapshots or edits of the same message do not increase an occurrence count for the
+same key. A different file in an edited message retains its own occurrence.
+
+"First observed" follows journal sequence within the report selection. It does not
+claim the earliest publication on Telegram. Document IDs identify Telegram documents;
+SHA-256 compares saved bytes. Matching 64-bit dHashes of different saved
+images are shown as visual leads; this comparison uses equal hashes, not a
+nearest-neighbor search. Image bytes must match their saved SHA-256 before dHash
+analysis; files over 64 MiB and images over 40 million pixels are skipped.
+
+Forward-source summaries count distinct destination messages. Header peer IDs,
+hidden names, post-author signatures and Saved Messages context stay separate.
+People-profile JSON includes each sender's sources; channel posts also appear in
+the chat-level summary. A named source without a peer ID is a text grouping, not
+an identified person. Imported-chat headers remain marked as imported.
+
+Non-compact evidence ZIPs include `media-repeats.json`, `forward-sources.json` and
+`observed-sources.gexf`, protected by the archive manifest. The GEXF 1.3 graph has
+typed `forwarded_from` and `recommended` edges. Arrows run from the observed chat
+to the referenced peer. Recommendation weights count retained recommendation
+observations; forward weights count distinct messages. Hidden names and imported
+headers do not create identity edges. No graph operation resolves profiles or
+calls Telegram. Edge metadata includes source sequences and hashes.
+
+The summaries follow the report's selection; the evidence ZIP still contains the
+complete signed journal. A selection containing only message events compares
+document IDs; saved-byte and image comparisons require saved-file events in the
+selected stream. The current cloud-message selection excludes `media.saved`.
+Limits are explicit: 200,000 retained key/message
+occurrences per analysis, 100,000 media keys, 20 report groups, 100 chronology
+references per group and 1,000 exported graph edges. When a comparison cap is
+reached, results show omitted occurrences and counts become lower bounds.
+Chronology and graph display limits are reported separately. Compact ZIPs omit
+these derived summaries. The signed source records remain unchanged.
 
 ## 7. Assemble and verify the case handoff
 

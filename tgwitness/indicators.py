@@ -9,7 +9,7 @@ import warnings
 from datetime import datetime, timezone
 from urllib.parse import urlsplit
 
-from . import crypto_ids
+from . import crypto_ids, keyboard
 
 NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "https://github.com/phishdestroy/TgWitness#indicators")
 MAX_INDICATORS = 20000
@@ -42,6 +42,7 @@ TON = re.compile(r"(?<![A-Za-z0-9_+/-])[EUk0]Q[A-Za-z0-9_+/-]{46}(?![A-Za-z0-9_+
 TON_RAW = re.compile(r"(?<![\w:-])(?:0|-1):[0-9a-fA-F]{64}(?![0-9a-fA-F])")
 
 IMAGE_PIXELS = 40_000_000
+IMAGE_BYTES = 64 * 1024**2
 
 
 def b58decode(text):
@@ -284,9 +285,19 @@ class Indicators:
                           chain_note="Taken from a payment link in the message.")
 
     def image(self, sha256, path, ref, at):
-        dhash = image_hash(path)
+        try:
+            if path.is_symlink():
+                return None
+            with path.open("rb") as stream:
+                data = stream.read(IMAGE_BYTES + 1)
+        except OSError:
+            return None
+        if len(data) > IMAGE_BYTES or hashlib.sha256(data).hexdigest() != sha256:
+            return None
+        dhash = image_hash(io.BytesIO(data))
         if dhash:
             self.note("image", sha256, "attachment", ref, at, dhash=dhash)
+        return dhash
 
     def message(self, text, details, ref, at):
         self.text(text, "text", ref, at)
@@ -301,10 +312,11 @@ class Indicators:
                     self.note("phone", ("+" if shown.strip().startswith("+") else "") + digits, "text", ref, at)
             elif kind == "bank_card":
                 continue
-        for row in (details.get("buttons") or {}).get("rows") or []:
-            for button in row:
-                if isinstance(button, dict) and isinstance(button.get("url"), str):
-                    self.link(button["url"], "button", ref, at)
+        for field, value in keyboard.texts(details.get("buttons")):
+            if field == "url":
+                self.link(value, "button", ref, at)
+            else:
+                self.text(value, "button " + field, ref, at)
         preview = (details.get("media_info") or {}).get("url")
         if isinstance(preview, str):
             self.link(preview, "link preview", ref, at)

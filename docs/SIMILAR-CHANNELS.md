@@ -30,15 +30,16 @@ the panel first.
 | --- | --- | --- |
 | `seeds` | Channels the walk starts from | 1–50 chat IDs |
 | `depth` | How many suggestion steps to follow; `1` reads the seeds only | 0–4 |
-| `per_source` | Suggestions kept from one channel | 1–200 |
+| `per_source` | Suggestions processed from one channel before filters | 1–200 |
 | `total` | Channels in the whole result, including the seeds | 1–2000 |
 | `min_participants`, `max_participants` | Subscriber range to keep | any order-consistent pair |
 | `require_username` | Drop channels without a public username | off by default |
 | `skip_restricted` | Drop channels Telegram marks as restricted | off by default |
 | `pause_seconds` | Wait between requests | 0–60 |
 
-Filters shape the result, not the record: the journal keeps every channel
-Telegram suggested and reports how many were dropped and why.
+Filters shape the retained node list. The journal keeps each processed
+suggestion, including suggestions dropped by a filter, and reports the counts.
+The `per_source` and whole-run budgets can leave received suggestions unprocessed.
 
 ## What the journal keeps
 
@@ -47,6 +48,15 @@ record per visited channel holds what Telegram returned, how many were kept and
 the channel IDs and usernames. `graph.source_unavailable` marks a seed the
 account cannot read. `graph.finished` closes the run with the totals and the
 reason it stopped.
+
+Each suggestion record separates Telegram's reported `total` from the received
+channel count (`suggested`), processed count (`returned`) and count passing
+filters (`kept`). A sliced API response can therefore report a larger total than
+the list available to this account. `response_complete` indicates that all
+reported suggestions were received; `complete` additionally requires processing
+the entire received list. These flags describe the response and processing before
+filters, not a complete map of Telegram channels. The result's `sources` list
+retains the same counts and flags for each successfully queried source.
 
 A walk stops early and says so when it reaches `total`, or when Telegram asks the
 account to wait. A flood-wait answer is recorded as `telegram.backoff`, the

@@ -17,7 +17,8 @@ BASIS = {
 MEANING = ("Client that encoded the file, read from the file's own metadata. "
            "A forwarded or re-uploaded file carries the encoder of whoever made it first.")
 PROVENANCE_MEANING = ("Difference between document and message dates in retained metadata. It shows how long "
-                      "before sending the file already existed.")
+                      "before sending the file already existed. Forwarded media and document IDs previously "
+                      "observed in another message are classified separately; reuse is not a new upload.")
 
 
 def attributes(info):
@@ -28,6 +29,11 @@ def document_of(raw):
     media = raw.get("media") if isinstance(raw, dict) else None
     document = (media or {}).get("document") if isinstance(media, dict) else None
     return document if isinstance(document, dict) else None
+
+
+def document_id(raw):
+    value = (document_of(raw) or {}).get("id")
+    return str(value) if type(value) is int and value else None
 
 
 def round_video(raw):
@@ -86,14 +92,23 @@ def moment(value):
     return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
 
 
-def provenance(raw):
+def provenance(raw, previous_document=None):
     document = document_of(raw)
-    sent, uploaded = moment((raw or {}).get("date")), moment((document or {}).get("date"))
-    if sent is None or uploaded is None:
+    if document is None:
         return None
-    gap = int((sent - uploaded).total_seconds())
-    found = {"uploaded_at": uploaded.isoformat(), "sent_at": sent.isoformat(), "uploaded_before_seconds": gap}
-    if gap > PRE_EXISTING_SECONDS:
+    sent, uploaded = moment((raw or {}).get("date")), moment((document or {}).get("date"))
+    gap = int((sent - uploaded).total_seconds()) if sent is not None and uploaded is not None else None
+    found = {"uploaded_at": uploaded.isoformat() if uploaded else None,
+             "sent_at": sent.isoformat() if sent else None, "uploaded_before_seconds": gap}
+    if previous_document:
+        found["previous_document"] = dict(previous_document)
+    if (raw or {}).get("fwd_from"):
+        found["status"] = "forwarded"
+    elif previous_document:
+        found["status"] = "reused_file"
+    elif gap is None:
+        return None
+    elif gap > PRE_EXISTING_SECONDS:
         found["status"] = "uploaded_earlier"
     elif gap < -PRE_EXISTING_SECONDS:
         found["status"] = "uploaded_later"
@@ -122,7 +137,7 @@ def sticker_sets(raw):
     return unique
 
 
-def describe(raw, voice_bytes=None):
+def describe(raw, voice_bytes=None, *, previous_document=None):
     found = {}
     client = round_video(raw)
     if client is None and voice_bytes is not None:
@@ -130,8 +145,10 @@ def describe(raw, voice_bytes=None):
         if any((a or {}).get("voice") for a in info.get("attributes") or []):
             client = voice_client(voice_bytes)
     if client:
-        found["client"] = {**client, "meaning": MEANING}
-    timing = provenance(raw)
+        attribution = "forward_origin" if raw.get("fwd_from") else \
+            "reused_file" if previous_document else "media_encoder"
+        found["client"] = {**client, "attributed_to": attribution, "meaning": MEANING}
+    timing = provenance(raw, previous_document)
     if timing and timing["status"] != "uploaded_with_message":
         found["media_timing"] = {**timing, "meaning": PROVENANCE_MEANING}
     sets = sticker_sets(raw)
