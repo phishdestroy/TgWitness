@@ -166,3 +166,11 @@ button.pill-deleted:hover, button.pill-missing:hover { transform: translateY(-1p
 .person-rhythm-heat{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:2px}.person-rhythm-heat caption{caption-side:bottom;text-align:start;color:var(--muted);font-size:12px;padding-top:6px}
 .person-rhythm-heat th{font-size:10px;font-weight:500;color:var(--muted);padding:0;text-align:start;overflow:hidden;white-space:nowrap}.person-rhythm-heat thead th{overflow:visible}.person-rhythm-heat thead th:first-child{width:3.4em}.person-rhythm-heat tbody th{text-overflow:ellipsis;padding-inline-end:4px}
 .person-rhythm-heat td{height:12px;padding:0;border-radius:2px;background:color-mix(in srgb,var(--accent) calc(var(--level)*1%),var(--surface-2))}.person-rhythm-heat td.empty{background:var(--surface-2)}
+.authors-collect{margin:12px 0;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.authors-collect[hidden]{display:none}
+.authors-collect-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}.authors-collect-head>div{min-width:0}.authors-collect-head p{margin:2px 0 0}
+.authors-collect-progress{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:10px}.authors-collect progress{width:100%;margin:8px 0 4px}
+.authors-collect-workers{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}.authors-collect-workers li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 12px;align-items:baseline;font-size:13px}
+.authors-collect-workers li b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.authors-collect-workers li>span:last-child{font-variant-numeric:tabular-nums;text-align:end}
+.authors-collect-dialog fieldset{border:0;margin:12px 0 0;padding:0;display:grid;gap:6px}.authors-collect-dialog legend{font-weight:600;margin-bottom:4px}
+.authors-collect-accounts{display:flex;flex-direction:column;gap:4px;max-height:260px;overflow-y:auto;margin-top:4px}.authors-collect-accounts[hidden]{display:none}.authors-collect-accounts select{max-width:100%}
+@media (max-width:480px){.authors-collect-workers li{grid-template-columns:minmax(0,1fr) auto}.authors-collect-workers li>.hint{grid-column:1/-1;grid-row:2}}

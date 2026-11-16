@@ -197,6 +197,15 @@ them. Older signed records stay unchanged; absent metadata is not reconstructed.
   and links. Every fact points to its record. **Export profiles** saves a signed file,
   optionally in a password ZIP; turning profiles off deletes the profile file. See
   [people profiles](EVIDENCE.md#people-profiles).
+- **Collect all authors** on the same tab asks Telegram for the profile, bio, profile
+  photos, gifts and bio links of everyone with saved messages in the chat. In a channel
+  or supergroup other connected accounts can share the work. Each chosen account is
+  reserved for the collection, takes whole people and reaches an author through one of
+  that author's saved messages. An account busy with another task is not touched and
+  joins once it is free. An author it cannot reach goes back to the chat's own account.
+  Progress shows the percentage, the time left and each account's share; **Pause**
+  releases the accounts. Every saved record names the account that read it, and the
+  journal records when each account joined and left.
 - **Save profile now** records a snapshot of the chat or bot profile: description,
   members, invite link, bot commands.
 
