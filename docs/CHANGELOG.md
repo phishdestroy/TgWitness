@@ -55,6 +55,9 @@
   cards on narrow screens.
 - Long transcripts get a page index with a UTC month calendar, date and record
   ranges per page, and first/last/nearby page links that work without JavaScript.
+- A timed-out dedicated media connection falls back to the standard file connection
+  instead of pausing the download; the data center retries its dedicated route once
+  per minute in the background.
 - Four priority lanes (`realtime`, `text`, `media`, `maintenance`) share account capacity; realtime updates always proceed and are never slowed by downloads or rechecks. Each lane tracks per-account FloodWait quotas, and the text and media lanes run on separate connections so a wait on one does not block the other.
 - Self-destructing media has its own download pool with priority over all other media; if expiry is less than 30 seconds away, all other media downloads on that account pause until the ephemeral file is secured.
 - A background worker refreshes expired `file_reference` tokens in batches of up to 100 message IDs per peer, reducing permanently failed attachment downloads from expired references.

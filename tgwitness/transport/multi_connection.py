@@ -20,6 +20,7 @@ PART = 512 * 1024
 GROW_AFTER = .25
 FLOOD_COOLDOWN = 60
 OPEN_RETRY = 5
+ROUTE_RETRY = 60
 SESSION_IDLE = 60
 POOL_IDLE = 120
 REAP_EVERY = 10
@@ -30,7 +31,8 @@ FLOODS = (errors.FloodWaitError, errors.FloodPremiumWaitError)
 TRANSIENT = (TimeoutError, ConnectionError, OSError, errors.TimedOutError, errors.ServerError)
 MEANING = ("Files are read over their own connections to each Telegram data center, separate from the connection that "
            "reads messages. Their number grows from one while files queue up and shrinks when Telegram asks to slow "
-           "down. If no dedicated media endpoint is available, file reads reuse the existing connection.")
+           "down. If a dedicated media endpoint is unavailable or its connection fails, file reads use the standard "
+           "connection. Dedicated connections are retried in the background after one minute.")
 
 
 class MediaRouteUnavailable(ValueError):
@@ -115,10 +117,11 @@ class MediaConnectionPool:
         task.add_done_callback(self.openers.discard)
 
     def grow(self, dc):
+        if self.retry_after(dc):
+            return
         now, live = self.clock(), len(dc.live()) + dc.opening
         if not live:
-            if now - dc.error_at >= OPEN_RETRY:
-                self.spawn(dc)
+            self.spawn(dc)
             return
         if live < min(dc.target, self.limit()):
             self.spawn(dc)
@@ -131,6 +134,12 @@ class MediaConnectionPool:
         live = sorted(dc.live(), key=lambda session: session.opened)
         return live[:max(1, dc.target)]
 
+    def retry_after(self, dc):
+        if dc.error is None:
+            return 0
+        delay = ROUTE_RETRY if isinstance(dc.error, MediaRouteUnavailable) else OPEN_RETRY
+        return max(0, dc.error_at + delay - self.clock())
+
     async def take(self, dc):
         while True:
             free = [session for session in self.usable(dc) if session.busy < self.per_session]
@@ -139,8 +148,11 @@ class MediaConnectionPool:
                 session.busy += 1
                 self.watch()
                 return session
+            if not dc.live() and isinstance(dc.error, MediaRouteUnavailable):
+                self.grow(dc)
+                raise MediaRouteUnavailable(str(dc.error)) from dc.error
             if not dc.live() and not dc.opening and dc.error is not None \
-                    and self.clock() - dc.error_at < OPEN_RETRY:
+                    and self.retry_after(dc):
                 raise dc.error
             self.grow(dc)
             event = dc.event
@@ -231,6 +243,9 @@ class MediaConnectionPool:
             dc.error, dc.error_at = exc, self.clock()
         except Exception as exc:
             dc.error, dc.error_at = exc, self.clock()
+            if isinstance(exc, TRANSIENT):
+                dc.error = MediaRouteUnavailable("The dedicated media connection is temporarily unavailable.")
+                dc.error.__cause__ = exc
             dc.stats["failures"] += 1
             dc.target = max(1, min(dc.target, len(dc.live())))
         else:
@@ -349,10 +364,13 @@ class MediaConnectionPool:
         now, rows = self.clock(), []
         for dc in sorted(self.dcs.values(), key=lambda item: item.dc_id or 0):
             live = dc.live()
+            shared = not live and isinstance(dc.error, MediaRouteUnavailable)
             rows.append({"dc": dc.dc_id, "home": dc.home, "connections": len(live), "target": dc.target,
                          "opening": dc.opening, "busy": sum(session.busy for session in live), "waiting": dc.waiters,
                          "flooded_seconds_ago": round(now - dc.flooded) if dc.flooded > -math.inf else None,
-                         "shared_connection": isinstance(dc.error, MediaRouteUnavailable),
+                         "shared_connection": shared,
+                         "shared_retry_seconds": math.ceil(self.retry_after(dc)) if shared else None,
+                         "shared_reason": type(dc.error.__cause__).__name__ if shared and dc.error.__cause__ else None,
                          "error": type(dc.error).__name__ if dc.error is not None
                          and not isinstance(dc.error, MediaRouteUnavailable) else None, **dc.stats})
         return {"enabled": self.enabled(), "limit": self.limit(), "per_connection": self.per_session, "dcs": rows,
