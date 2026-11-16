@@ -2,54 +2,46 @@
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-mobile-static.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-static.svg">
   <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-hero-mobile.svg">
-  <img src="docs/assets/presentation/casework-hero.svg" width="1200" alt="TgWitness — Capture Telegram. Preserve the record. History, investigation and verifiable exports.">
+  <img src="docs/assets/presentation/casework-hero.svg" width="1200" alt="TgWitness — Messages change. Keep the evidence. Capture conversations, preserve observed edits and deletions, and share a record others can verify.">
 </picture>
 
-**A self-hosted workspace for preserving and investigating Telegram conversations.** Download history, retain captured edits and deletion notices, trace connections across chats, and deliver reports with independently verifiable records.
+<p align="center"><strong>Capture Telegram history. Follow the changes. Build a report others can verify.</strong></p>
 
 <p align="center">
-  <a href="#quick-start"><strong>Install</strong></a> ·
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><strong>Try the demo</strong></a> ·
-  <a href="docs/README.md"><strong>Documentation</strong></a> ·
-  <a href="https://github.com/phishdestroy/TgWitness/wiki">Handbook</a> ·
-  <a href="docs/CHANGELOG.md">Changelog</a>
+  <a href="#quick-start"><img src="docs/assets/presentation/readme-action-install.svg" width="228" height="58" alt="Install TgWitness: Linux, macOS and Windows"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/readme-action-demo.svg" width="228" height="58" alt="Try the workspace: explore a fictional case"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/readme-action-handbook.svg" width="228" height="58" alt="Open the handbook: tasks, guides and answers"></a>
 </p>
+
+<p align="center"><a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a> · <a href="#what-tgwitness-does">What you can do</a> · <a href="docs/CHANGELOG.md">Release notes</a></p>
 
 <p align="center">
   <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · pre-release"></a>
+  <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
+  <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
 </p>
 
-<a name="screenshots"></a><a name="see-it-in-action"></a>
+<a name="screenshots"></a>
+<a name="see-it-in-action"></a>
 
 <a href="https://phishdestroy.github.io/TgWitness/demo/">
 <picture>
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-workspace-mobile-dark-still.webp">
-  <img src="docs/assets/presentation/readme-workspace-dark-still.webp" width="1440" alt="TgWitness workspace showing an original message, its saved edit and an inline comparison. Fictional demonstration records.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-mobile-dark-still.webp">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-dark-still.webp">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-workspace-mobile-dark.webp">
+  <img src="docs/assets/presentation/readme-workspace-dark.webp" width="1440" alt="The TgWitness demo in motion: captured messages, saved versions and content retained after deletion. Fictional demonstration records.">
 </picture>
 </a>
 
-<p align="center"><sub>Actual interface, fictional case. <a href="https://phishdestroy.github.io/TgWitness/demo/">Explore without signing in</a> · <a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a></sub></p>
+<p align="center"><sub>The actual workspace with fictional records. Click to explore — no Telegram login needed.</sub></p>
 
-<a name="what-tgwitness-does"></a><a name="from-a-conversation-to-a-case"></a><a name="why-tgwitness"></a>
-
-## From conversation to case
-
-| Workflow | What you can do |
-| --- | --- |
-| **Collect** | Export chats or accounts with media. Load history with resumable cursors, standard requests or Takeout, and distribute supported chat exports across accounts. [Collection modes →](docs/COLLECTION-MODES.md) |
-| **Follow changes** | Observe new messages, keep captured versions, compare edits and review deletion notices alongside preserved content. [Collection →](docs/COLLECTION.md) |
-| **Investigate** | Search across saved chats, build subject cards and Case Boards, follow forwarded sources, find repeated media, and use watchlists, OCR and transcription. [Investigation tools →](docs/INVESTIGATION-MODE.md) |
-| **Prepare a report** | Select chats or individual messages, choose a design, add a cover and charts, then export PDF, HTML or JSON. Create minimized copies for sharing. [Report studio →](docs/CASE_REPORTS.md) |
-| **Verify and hand over** | Deliver signed archives, file hashes, checkpoints and timestamp receipts with a standalone verifier. [Evidence format →](docs/EVIDENCE.md) |
-
-Separate account workspaces keep sessions and signing keys apart. The panel also supports [Secret Chats](docs/PSEUDO-SECRET.md) created or accepted by TgWitness, [message images and history forwarding](docs/PANEL.md), and automation through the [CLI](docs/CLI.md), [MCP](docs/MCP.md) and [signed webhooks](docs/WEBHOOKS.md).
-
-<a name="quick-start"></a><a name="run-it-on-your-machine"></a>
+<a name="quick-start"></a>
+<a name="run-it-on-your-machine"></a>
 
 ## Install
 
-The installer includes Python, verifies package hashes and release signatures, and records the source revision. Run the same command again to update.
+Python is included. Run the same command again to update.
 
 **Linux / macOS**
 
@@ -57,57 +49,104 @@ The installer includes Python, verifies package hashes and release signatures, a
 curl -fsSL https://get.destroy.tools/install.sh | bash
 ```
 
-**Windows · PowerShell or Command Prompt**
+**Windows · PowerShell or CMD**
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 | iex"
 ```
 
-On an Ubuntu server, run as root to install the background service. On a desktop, run as your normal user. The Windows execution policy applies only to this process.
+<sub>Ubuntu server: run as root. Desktop: run as your normal user. The PowerShell policy applies to this process only.</sub>
 
-[Inspect and verify the installer](docs/INSTALLATION.md#verify-before-running) · [Docker](docs/DEPLOYMENT.md) · [From source](docs/QUICKSTART.md) · [Releases](https://github.com/phishdestroy/TgWitness/releases)
+The installer checks package hashes and release signatures against its embedded key. Each signed build identifies its source revision.
+[Verify before running](docs/INSTALLATION.md#verify-before-running) · [Releases](https://github.com/phishdestroy/TgWitness/releases) · [Docker](docs/DEPLOYMENT.md) · [Install from source](docs/QUICKSTART.md)
 
 <a name="start-simple"></a>
 
-### Your first workspace
+**First run:** choose **Just download**, **Follow chats** or **Evidence for a case** → connect an account → choose chats. The panel shows the controls for that task. [Setup guide →](docs/SETTINGS.md)
 
-1. **Choose a task:** **Just download**, **Follow chats** or **Evidence for a case**.
-2. **Connect a collection account:** use QR, phone sign-in or a supported session import.
-3. **Select chats and scope:** choose the history period, files and observation settings, then start.
+<a name="what-tgwitness-does"></a>
 
-Progress, saved records, pauses and retry status stay visible in the panel. [First-run guide →](docs/SETTINGS.md)
+## Why TgWitness
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-features-mobile.svg">
+  <img src="docs/assets/presentation/readme-features.svg" width="1200" alt="Three animated workflows: export a chat to HTML and JSON, find a shared link across recorded chats, and retain captured versions after a deletion notice.">
+</picture>
+
+Choose a task when you open the panel:
+
+| Task | Result |
+| --- | --- |
+| **Just download** | Read chats offline in a Telegram-style HTML view, keep Telegram Desktop-compatible JSON and save the selected media. |
+| **Follow chats** | Collect accessible history and keep observing new messages, captured edits and deletion notices. |
+| **Evidence for a case** | Select records, add a cover and charts, then share PDF, HTML or JSON reports with verification data. |
+
+RFC 3161 and OpenTimestamps timestamps are on by default in every task; the `.tsr` and `.ots` files in `anchors/` let anyone check an archive. **Evidence for a case** also records drand rounds, saves all files, hides the server's IP address from Telegram and turns off Telegram actions from the panel.
 
 <details>
-<summary><strong>What is inside an export?</strong></summary>
+<summary><strong>All capabilities · people, reports, accounts, Secret Chats and verification</strong></summary>
 
-- **Account export:** `index.html` opens the archive; choose HTML and JSON together to include the chat reader and `result.json`.
-- **Chat export:** `chat.html` for offline reading, `chat.json` for analysis and the selected downloaded media.
-- **Case report:** selected records, cover, charts and verification material in the formats you choose.
-
-Keep the original signed ZIP alongside any working or sharing copy. [Account export](docs/ACCOUNT-EXPORT.md) · [Chat export](docs/wiki/Chat-Export.md) · [Case reports](docs/CASE_REPORTS.md)
+| You want to… | What you get |
+| --- | --- |
+| **Keep what was said** | Messages, captured edits, deletion notices and preserved files in a signed journal. [Collection →](docs/COLLECTION.md) |
+| **Understand the people** | Available profiles, avatar and gift observations with dates, bio links and a history of changes. Collection can pause and resume. [Panel →](docs/PANEL.md) |
+| **Make a clear report** | Pick chats or individual messages, edit the cover, choose a design and charts, then preview and download PDF, HTML or JSON. [Reports →](docs/CASE_REPORTS.md) |
+| **Export once or keep watching** | Account exports, accessible history and continuous observation, with separate workspaces and keys for each account. [Collection modes →](docs/COLLECTION-MODES.md) |
+| **Work with Secret Chats** | An integrated conversation view and exports for chats created or accepted by TgWitness, using a protocol module the panel installs with one button. [Secret Chats →](docs/PSEUDO-SECRET.md) |
+| **Let someone check the result** | Signed archives, a standalone verifier, retained checkpoints and optional timestamps, GitHub acquisition attestations or Intel TDX measurements. [Checks →](docs/EVIDENCE.md) |
 
 </details>
 
-<a name="how-it-works"></a><a name="a-record-someone-else-can-check"></a>
+<details>
+<summary><strong>Inside a download · readable chats, JSON, media and reports</strong></summary>
 
-## Verification built into the record
+For an account export, extract the ZIP and open `index.html`. It links to the selected chat views, report, coverage information and verification steps. Choose HTML and JSON together to include both the Telegram-style reader and `result.json` for other tools. Downloaded media stays with the archive.
 
-Every journal observation joins a hash chain and receives an Ed25519 signature. Export manifests cover the delivered files. Recipients can check the archive independently with a separately trusted signing-key fingerprint.
+A one-chat export includes `chat.html` for offline reading and `chat.json` for analysis. Reports have their own controls for the cover, selected messages, charts and output format. Keep the original signed ZIP when sharing or making a working copy.
 
-| Layer | What the recipient checks |
-| --- | --- |
-| **Journal and files** | Signatures, ordering, attachment hashes and the delivered manifest. |
-| **Continuity and time** | Retained checkpoints, independent witness records, RFC 3161 timestamps and OpenTimestamps receipts. |
-| **Collection environment** | For the selected acquisition mode: GitHub workflow attestations or Intel TDX measurements, freshness and collector-key binding. |
+[Account downloads](docs/ACCOUNT-EXPORT.md) · [Export one chat](docs/wiki/Chat-Export.md) · [Report studio](docs/CASE_REPORTS.md)
 
-Coverage gaps, unavailable data and acquisition context travel with the record. [Verification guide](docs/VERIFICATION.md) · [Timestamps](docs/TIMESTAMP.md) · [Independent witness](docs/WITNESS.md) · [Intel TDX](docs/HIGH-ASSURANCE.md)
+</details>
 
-**Published qualification:** 3,598,381 records across 48 verified archives in the public-history runs of 6 November 2026. These are selected documented runs; [the report](docs/EXPORT-BENCHMARK-2026-11-06.md) records their workload, environment and results. [Capabilities and qualification](docs/STATUS.md) · [CI by revision](https://github.com/phishdestroy/TgWitness/actions)
+Self-hosted. Encrypted session storage. Localhost panel by default. No telemetry.
+Source visibility, unavailable data and collection gaps remain visible in the saved record.
+
+**Why zero trust.** [A live case study](https://phishdestroy.github.io/TgWitness/docs/signed-export/): a GDPR answer signed by two Taylor Wessing partners, checked against its own file, and how a checkable export leaves no room to deceive or to doubt.
+
+<a name="from-a-conversation-to-a-case"></a>
 
 <details>
-<summary><strong>Run the verifier on a sample archive</strong></summary>
+<summary><strong>From a conversation to a case · collect, investigate, share</strong></summary>
 
-The fictional sample includes `verify.py`. With Python 3.11+ and `cryptography` installed:
+1. **Collect.** Choose chats, history and file limits. Progress, pauses and retries stay visible.
+2. **Investigate.** Search saved material, compare versions and connect findings on a Case Board.
+3. **Share.** Select relevant records, preview the report and deliver it with its verification data.
+
+[Search](docs/SEARCH.md) · [Investigation tools](docs/INVESTIGATION-MODE.md) · [Chat exports](docs/wiki/Chat-Export.md) · [Case packages](docs/CASE_REPORTS.md)
+
+</details>
+
+<a name="how-it-works"></a>
+
+## A record someone else can check
+
+Captured observations form a signed, hash-linked journal. Exports include preserved files and a verifier; recipients can check them against a signing-key fingerprint received separately.
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-chain-mobile.svg">
+  <img src="docs/assets/presentation/casework-chain.svg" width="1200" alt="New messages, saved edits and deletion observations form a linked, signed journal. Verify it against an independently trusted key.">
+</picture>
+
+**3,598,381 records · 48 verified archives.** Documented public-history runs from 6 November 2026. [Measurements and verification →](docs/EXPORT-BENCHMARK-2026-11-06.md)
+
+<details>
+<summary><strong>Try the verifier on a sample archive</strong></summary>
+
+The fictional sample includes `verify.py`. Use Python 3.11+ with `cryptography` installed:
 
 ```sh
 curl -LO https://phishdestroy.github.io/TgWitness/demo/downloads/tgwitness-demo.zip
@@ -115,13 +154,13 @@ unzip -o tgwitness-demo.zip verify.py
 python verify.py tgwitness-demo.zip
 ```
 
-This checks the sample's internal integrity and displays its signing-key fingerprint. For a real handover, obtain the expected fingerprint separately. With TgWitness installed, check an evidence package against the trusted key and timestamp authority:
+The verifier reports the records, journal head and signing-key fingerprint. A valid signature shows that the bytes have not changed since they were signed. The operator gives the key fingerprint to the recipient through a separate channel; without `--fingerprint` the final line starts with `EVIDENCE: minimum not met · missing: confirmed signer key`. To check an evidence package against a separately trusted key and timestamp authority:
 
 ```sh
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TSA-ROOT.pem --require evidence
 ```
 
-[Verification walkthrough →](docs/wiki/Exports-and-Verification.md)
+[Verification steps](docs/wiki/Exports-and-Verification.md) · [Timestamps](docs/TIMESTAMP.md) · [Independent witness](docs/WITNESS.md)
 
 </details>
 
@@ -129,33 +168,88 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --tsa-ca TS
 
 <a name="manifesto"></a>
 
-TgWitness applies the same checks to the operator and the project. [Questions and checks](docs/QUESTIONS-AND-CHECKS.md) · [A signed-export case study](https://phishdestroy.github.io/TgWitness/docs/signed-export/) · [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+<details>
+<summary><strong>What each check covers</strong></summary>
+
+| Check | What it checks |
+| --- | --- |
+| Journal signatures and manifest | Recorded bytes, ordering and delivered files against the expected signing key. |
+| Retained checkpoint or independent witness | The journal against a separately retained length and head hash. |
+| External timestamp | The covered hash, authority's signature and timestamp validation evidence. |
+| GitHub Actions capture | The archive against its acquisition attestation, approved workflow and collector revision. |
+| Intel TDX | The attested environment, expected measurements, fresh challenge and bound collector key. |
+
+TgWitness takes no side: the same checks apply to the operator and the project.
+[Questions and checks](docs/QUESTIONS-AND-CHECKS.md) · [GitHub capture](docs/SEALED-ACTIONS.md) · [Intel TDX](docs/HIGH-ASSURANCE.md) · [Export Clinic](https://phishdestroy.github.io/TgWitness/docs/export-clinic/)
+
+</details>
 
 <!-- authors-manifesto:end -->
 
-<a name="operations"></a><a name="layout-review"></a><a name="explore-more"></a>
-
-## Run it on your terms
-
-Run on your computer or server, in Docker, on a GitHub capture runner or in a Phala Intel TDX environment. Sessions and credentials stay in an encrypted vault; the panel binds to localhost by default. The [System map](docs/SYSTEM-MAP.md) shows configured connections to Telegram, proxies, storage, witnesses and optional services.
-
-| Need | Start here |
-| --- | --- |
-| Set up accounts and connections | [Accounts](docs/ACCOUNTS.md) · [Connection security](docs/CONNECTION-SECURITY.md) · [Access control](docs/ACCESS.md) |
-| Deploy, update or recover | [Installation](docs/INSTALLATION.md) · [Deployment](docs/DEPLOYMENT.md) · [Operations](docs/OPERATIONS.md) |
-| Choose an acquisition environment | [Collection modes](docs/COLLECTION-MODES.md) · [GitHub capture](docs/SEALED-ACTIONS.md) · [Official-client capture](docs/TRUSTED-LIVE.md) |
-| Understand formats and architecture | [Evidence model](docs/EVIDENCE.md) · [Security model](docs/SECURITY-MODEL.md) · [Code map](docs/CODE-MAP.md) |
-
-<a name="review-notes"></a><a name="repository-map"></a>
-
-## Project and contributions
-
-TgWitness is MIT-licensed. Start with the [contribution guide](.github/CONTRIBUTING.md) and [code map](docs/CODE-MAP.md). The private regression harness uses synthetic accounts and fault injection; public CI records source checks, dependency audits, packaging, installer verification and security analysis for each revision. [Development history and validation](docs/QUESTIONS-AND-CHECKS.md)
-
-[Get help](.github/SUPPORT.md) · [Report a vulnerability](.github/SECURITY.md) · [Release notes](docs/CHANGELOG.md) · [Machine-readable index](llms.txt)
+<a name="review-notes"></a>
 
 <details>
-<summary><strong>Project position and operator notice</strong></summary>
+<summary><strong>Review notes · development history, tests, verifier and defaults</strong></summary>
+
+- **History.** TgWitness was developed and tested for about six months before publication. This repository starts with a squashed import (`8fb40fe0e`, 658 files). [Development history](docs/QUESTIONS-AND-CHECKS.md#development-history)
+- **Tests.** The regression suite of 126 test modules (about 950 test functions) runs in a private validation environment with synthetic accounts and a fake Telegram transport; test files are excluded from Git and source archives. Public CI runs lint, dependency audits, wheel installs, installer signature checks, CodeQL, Trivy and verifier fuzzing. [Tests and CI](docs/QUESTIONS-AND-CHECKS.md#tests-and-continuous-integration)
+- **Verifier.** `tgwitness/verify.py` is assembled from 21 modules in `tgwitness/verifier/`. The journal and signature checks (`common`, `chain`, `journal`) total 22 KB; a third of the file is compressed translation data. [Verifier sources](tgwitness/verifier/README.md)
+- **Telegram client.** Sign-in uses built-in public API pairs unless you enter your own, and each observation records which pair was used. The built-in pairs are published in the open source code of Telegram clients and libraries; they name the application and give no access to account data. Sign-in uses the account's own authorization. You can enter your own pair from my.telegram.org instead; for material intended for court, do so before collection starts. Use a dedicated account for collection and for creating the pair, not a personal one. [API pairs](docs/QUESTIONS-AND-CHECKS.md#built-in-api-pairs-identify-a-client-not-an-account)
+- **Defaults.** New workspaces connect through public MTProxy lists. The vault key stays in the data directory unless a new installation uses an external master key. [Connection security](docs/CONNECTION-SECURITY.md#external-master-key)
+
+</details>
+
+## Explore more
+
+<details>
+<summary><strong>Investigation tools and integrations</strong></summary>
+
+| Area | Guides |
+| --- | --- |
+| People, communities and cases | [Subject cards, watchlists, conversations and court documents](docs/INVESTIGATION-MODE.md) |
+| Accounts and routes | [Account groups and session imports](docs/ACCOUNTS.md) · [Proxies and IP modes](docs/CONNECTION-SECURITY.md) |
+| Saved content | [Full-text search](docs/SEARCH.md) · [Local OCR and transcription](docs/MEDIA-ANALYSIS.md) · [Analysis and optional AI](docs/ANALYSIS.md) |
+| Automation | [CLI](docs/CLI.md) · [Scoped MCP access](docs/MCP.md) · [Signed webhooks](docs/WEBHOOKS.md) |
+| Official-client capture | [Optional recorders](docs/OPTIONAL-CAPTURE.md) · [Trusted Live](docs/TRUSTED-LIVE.md) · [Sealed official Web](docs/OFFICIAL-WITNESS.md) |
+| Shared review | [Access tokens and chat scopes](docs/ACCESS.md) · [Archive verification](docs/VERIFICATION.md) |
+
+The [capability record](docs/STATUS.md) lists each acquisition mode and its qualification. The interactive demo uses fictional records.
+
+</details>
+
+<a name="operations"></a>
+<a name="layout-review"></a>
+
+<details>
+<summary><strong>Deployment, updates and recovery</strong></summary>
+
+Run on your computer or server, in Docker, on a GitHub-hosted capture runner or in a Phala Intel TDX environment. Each account keeps its own workspace, session and signing key.
+
+The installer uses signed builds from the [Installer workflow](.github/workflows/installer.yml). Rerunning it updates an installation; tagged packages are also available under [Releases](https://github.com/phishdestroy/TgWitness/releases).
+
+Sessions and credentials stay in the encrypted vault. The [System map](docs/SYSTEM-MAP.md) shows configured connections to Telegram, proxies, storage, witnesses and optional services.
+
+[Install and update](docs/INSTALLATION.md) · [Deployment](docs/DEPLOYMENT.md) · [Operations](docs/OPERATIONS.md) · [Security model](docs/SECURITY-MODEL.md) · [Dedicated account](https://phishdestroy.github.io/TgWitness/docs/dedicated-account/)
+
+</details>
+
+<a name="repository-map"></a>
+
+<details>
+<summary><strong>For developers</strong></summary>
+
+| Directory | Purpose |
+| --- | --- |
+| [tgwitness/](tgwitness/README.md) | Collector, signed journal, API, panel, reports and verification |
+| [website/](website/README.md) | Public site, translated guides and fictional interactive demo |
+| [docs/](docs/README.md) | Product guides, formats, qualification and architecture |
+| [tools/](tools/README.md) | Builds, packaging and publication checks |
+| [.github/](.github/AUTOMATION.md) | CI, releases and delivery |
+| [integrations/](integrations/README.md) | Webhook schema and n8n example |
+
+[Repository guide](docs/CODE-MAP.md) · [Contributing](.github/CONTRIBUTING.md) · [Project guide](docs/PROJECT-GUIDE.md)
+
+</details>
 
 <!-- operator-notice:start -->
 
@@ -172,15 +266,19 @@ TgWitness is MIT-licensed. Start with the [contribution guide](.github/CONTRIBUT
 
 <!-- operator-notice:end -->
 
-</details>
-
 <details>
-<summary><strong>Read the overview in your language</strong></summary>
-
-25 interface languages · 26 guide languages.
+<summary><strong>Read the project overview in your language</strong></summary>
 
 **English** · [Українська](docs/uk/README.md) · [Español](docs/es/README.md) · [Português (Brasil)](docs/pt/README.md) · [Türkçe](docs/tr/README.md) · [العربية](docs/ar/README.md) · [فارسی](docs/fa/README.md) · [اردو](docs/ur/README.md) · [हिन्दी](docs/hi/README.md) · [Bahasa Indonesia](docs/id/README.md) · [Tiếng Việt](docs/vi/README.md) · [简体中文](docs/zh/README.md) · [繁體中文](docs/zh-Hant/README.md) · [Français](docs/fr/README.md) · [Deutsch](docs/de/README.md) · [Italiano](docs/it/README.md) · [Polski](docs/pl/README.md) · [O‘zbekcha](docs/uz/README.md) · [한국어](docs/ko/README.md) · [日本語](docs/ja/README.md) · [Bahasa Melayu](docs/ms/README.md) · [ไทย](docs/th/README.md) · [עברית](docs/he/README.md) · [বাংলা](docs/bn/README.md) · [አማርኛ](docs/am/README.md) · [Русский](docs/ru/README.md)
 
 </details>
 
-<p align="center"><a href="docs/README.md">Documentation</a> · <a href="https://github.com/phishdestroy/TgWitness/wiki">Handbook</a> · <a href="https://phishdestroy.github.io/TgWitness/demo/">Interactive demo</a> · <a href="LICENSE">MIT license</a></p>
+<p align="center">
+  <a href="docs/README.md">Documentation</a> ·
+  <a href="https://github.com/phishdestroy/TgWitness/wiki">Handbook</a> ·
+  <a href=".github/SUPPORT.md">Get help</a> ·
+  <a href=".github/SECURITY.md">Report a vulnerability</a> ·
+  <a href="LICENSE">MIT license</a>
+</p>
+
+[Machine-readable index](llms.txt) · [Complete text handbook](https://phishdestroy.github.io/TgWitness/llms-full.txt)
