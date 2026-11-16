@@ -40,18 +40,18 @@ def fetch_once(path, limit):
         return data
 
 
-def transient(exc):
+def transient(exc, statuses=True):
     if isinstance(exc, HTTPError):
-        return exc.code == 429 or exc.code >= 500
+        return statuses and (exc.code == 429 or exc.code >= 500)
     return isinstance(exc, (URLError, ConnectionError, TimeoutError, HTTPException))
 
 
-def fetch(path, limit=MAX_BYTES, attempts=5, pause=3):
+def fetch(path, limit=MAX_BYTES, attempts=5, pause=3, statuses=True):
     for attempt in range(attempts):
         try:
             return fetch_once(path, limit)
         except Exception as exc:
-            if attempt == attempts - 1 or not transient(exc):
+            if attempt == attempts - 1 or not transient(exc, statuses):
                 raise
         time.sleep(pause * 2 ** attempt)
 
@@ -170,38 +170,52 @@ def index(site, public):
     (site / "releases.json").write_bytes(raw)
 
 
-def retain(site, public):
+def published_manifest(release_id, public):
+    prefix = "releases/" + release_id + "/"
+    raw = fetch(prefix + "manifest.json", 128 * 1024)
+    try:
+        signature = fetch(prefix + "manifest.json.sig", 4096)
+    except HTTPError as exc:
+        if exc.code != 404:
+            raise
+        signature = None
+    verify_manifest(raw, signature, release_id, public)
+    return release_id, raw, signature, validate_manifest(raw, release_id, public)
+
+
+def retain_release(site, public, release_id, raw, signature, manifest):
+    release = site / "releases" / release_id
+    prefix = "releases/" + release_id + "/"
+
+    def read(name):
+        local = release / name
+        if local.is_file() and not local.is_symlink():
+            data = local.read_bytes()
+            if hashlib.sha256(data).hexdigest() == manifest["files"][name]["sha256"]:
+                return data
+        return fetch(prefix + name)
+
+    files = verify_release(raw, release_id, read, public)
+    files["manifest.json"] = raw
+    if signature is not None:
+        files["manifest.json.sig"] = signature
+    for name in tuple(files):
+        if name not in {"manifest.json", "manifest.json.sig"}:
+            files[name + ".sha256"] = (hashlib.sha256(files[name]).hexdigest() + "  " + name + "\n").encode()
+    for name, data in files.items():
+        target = release / name
+        if target.exists() and target.read_bytes() != data:
+            raise ValueError("Immutable release collision: " + release_id)
+    release.mkdir(parents=True, exist_ok=True)
+    for name, data in files.items():
+        (release / name).write_bytes(data)
+
+
+def retain(site, public, workers=8):
     ids = release_ids(fetch("releases.json", 128 * 1024))
-    manifests = []
-    for release_id in ids:
-        prefix = "releases/" + release_id + "/"
-        raw = fetch(prefix + "manifest.json", 128 * 1024)
-        try:
-            signature = fetch(prefix + "manifest.json.sig", 4096)
-        except HTTPError as exc:
-            if exc.code != 404:
-                raise
-            signature = None
-        verify_manifest(raw, signature, release_id, public)
-        validate_manifest(raw, release_id, public)
-        manifests.append((release_id, raw, signature))
-    for release_id, raw, signature in manifests:
-        release = site / "releases" / release_id
-        prefix = "releases/" + release_id + "/"
-        files = verify_release(raw, release_id, lambda name: fetch(prefix + name), public)
-        files["manifest.json"] = raw
-        if signature is not None:
-            files["manifest.json.sig"] = signature
-        for name in tuple(files):
-            if name not in {"manifest.json", "manifest.json.sig"}:
-                files[name + ".sha256"] = (hashlib.sha256(files[name]).hexdigest() + "  " + name + "\n").encode()
-        for name, data in files.items():
-            target = release / name
-            if target.exists() and target.read_bytes() != data:
-                raise ValueError("Immutable release collision: " + release_id)
-        release.mkdir(parents=True, exist_ok=True)
-        for name, data in files.items():
-            (release / name).write_bytes(data)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        manifests = list(pool.map(lambda release_id: published_manifest(release_id, public), ids))
+        list(pool.map(lambda item: retain_release(site, public, *item), manifests))
     index(site, public)
 
 
@@ -258,7 +272,7 @@ def verify_public(site, *, attempts=7, delay=5):
 
     def check(path):
         try:
-            return fetch("" if path == "index.html" else path) == (site / path).read_bytes()
+            return fetch("" if path == "index.html" else path, statuses=False) == (site / path).read_bytes()
         except HTTPError as exc:
             if exc.code not in (404, 502, 503, 504):
                 raise
