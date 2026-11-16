@@ -62,6 +62,7 @@ input:where(:not([type=checkbox]):not([type=radio])):focus, select:focus, textar
 @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } }
 
 .page-heading h1, .hub-heading h1, #view-topology .tp-title h1, #view-swarm .sw-title h1, .extras-intro h1 { font-size: 28px; line-height: 1.15; letter-spacing: -.025em; font-weight: 680; }
+.page-heading > .route-actions { margin-top: 0; }
 .extras-intro { padding-top: 0; }
 .extras-intro > .eyebrow { display: none; }
 .extras-intro h1 { margin-top: 0; }
