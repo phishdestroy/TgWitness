@@ -197,7 +197,10 @@ def problem(collector):
     try:
         interactions.permitted(collector)
     except (ValueError, RPCError) as exc:
-        return str(exc)
+        for message in (interactions.GOAL_OFF, interactions.READ_ONLY):
+            if str(exc) == message:
+                return message
+        return "Telegram actions are temporarily unavailable for this account."
     return None
 
 

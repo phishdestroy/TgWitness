@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 9845800a8bf0d916a48d5d383b1d2270114a19615e1f7e879996d518a7f2bf00
+# TgWitness verifier sources SHA-256: c65860da775172686ec57fc4d70ba7579ed28e945c89ef6cc1e6f45a607c0c05
 """Standalone verifier"""
 import argparse
 import base64
@@ -1339,7 +1339,7 @@ def hashed(algorithm, data):
 
 def certificate_fingerprint(algorithm, data):
     if isinstance(algorithm, str):
-        return hashed(algorithm, data)
+        return digest(algorithm, data)
     return x509.load_der_x509_certificate(data).fingerprint(algorithm())
 
 
