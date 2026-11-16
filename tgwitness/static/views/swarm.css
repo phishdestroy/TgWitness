@@ -31,6 +31,7 @@
 #view-swarm .sw-chip[aria-pressed="true"] { border-color: var(--accent-border); background: var(--accent-soft); color: var(--accent-text); }
 #view-swarm .sw-chip[aria-pressed="true"] b { background: var(--surface); color: var(--accent-text); }
 #view-swarm .sw-tools { display: flex; gap: 8px; align-items: center; }
+#view-swarm .sw-tools label { margin: 0; }
 #view-swarm .sw-search { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
 #view-swarm .sw-search .icon { width: 15px; height: 15px; color: var(--icon); }
 #view-swarm .sw-search input { width: 180px; min-height: 0; height: 28px; padding: 0; border: 0; background: transparent; color: var(--text); font: var(--type-support); outline: none; }

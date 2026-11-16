@@ -9959,5 +9959,14 @@
   "Saved records: {n}": "Bản ghi đã lưu: {n}",
   "Coverage gaps: {n}": "Khoảng trống ghi nhận: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Những gì rời khỏi bảng điều khiển này và ai nhận được: nhà cung cấp AI chỉ nhận các tin nhắn mà máy khách của họ yêu cầu; kết nối lưu trữ chỉ đọc các không gian làm việc và cuộc trò chuyện được phép bằng mã thông báo riêng; webhook gửi siêu dữ liệu, còn nội dung tin nhắn chỉ khi bạn chọn thêm.",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Máy khách AI hoặc dòng lệnh đọc kho lưu trữ này bằng mã thông báo. Mỗi kết nối chỉ thấy các không gian làm việc và cuộc trò chuyện được chọn cho nó và có thể bị thu hồi bất cứ lúc nào."
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Máy khách AI hoặc dòng lệnh đọc kho lưu trữ này bằng mã thông báo. Mỗi kết nối chỉ thấy các không gian làm việc và cuộc trò chuyện được chọn cho nó và có thể bị thu hồi bất cứ lúc nào.",
+  "Joining needs administrator approval: Telegram sends a join request.": "Cần quản trị viên phê duyệt để tham gia: Telegram sẽ gửi yêu cầu tham gia.",
+  "Send join request": "Gửi yêu cầu tham gia",
+  "Connection for this account": "Kết nối cho tài khoản này",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Đường hầm Cloudflare riêng, ổn định hơn. Tải công cụ hỗ trợ từ GitHub ở lần dùng đầu.",
+  "Setting up WARP for this account…": "Đang thiết lập WARP cho tài khoản này…",
+  "The connection check took too long. Try again or choose another route.": "Việc kiểm tra kết nối mất quá nhiều thời gian. Hãy thử lại hoặc chọn tuyến khác.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Đang tạo không gian làm việc, thiết lập WARP và kiểm tra phiên với Telegram…",
+  "WARP · recommended": "WARP · được đề xuất",
+  "Managed local tunnel": "Đường hầm cục bộ được quản lý"
 }

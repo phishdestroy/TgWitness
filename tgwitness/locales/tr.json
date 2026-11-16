@@ -10010,5 +10010,14 @@
   "Saved records: {n}": "Kaydedilen kayıtlar: {n}",
   "Coverage gaps: {n}": "Kapsam boşlukları: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Bu panelden ne çıkar ve kim alır: Bir yapay zekâ sağlayıcısı yalnızca istemcisinin istediği mesajları alır; bir arşiv bağlantısı kendi belirteciyle yalnızca izin verilen çalışma alanlarını ve sohbetleri okur; bir webhook üst verileri gönderir, mesaj metnini yalnızca siz seçerseniz.",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Bu arşivi bir belirteçle okuyan yapay zekâ veya komut satırı istemcileri. Her bağlantı yalnızca kendisi için seçilen çalışma alanlarını ve sohbetleri görür ve her an iptal edilebilir."
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Bu arşivi bir belirteçle okuyan yapay zekâ veya komut satırı istemcileri. Her bağlantı yalnızca kendisi için seçilen çalışma alanlarını ve sohbetleri görür ve her an iptal edilebilir.",
+  "Joining needs administrator approval: Telegram sends a join request.": "Katılmak için yönetici onayı gerekir: Telegram bir katılma isteği gönderir.",
+  "Send join request": "Katılma isteği gönder",
+  "Connection for this account": "Bu hesap için bağlantı",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Hesaba özel Cloudflare tüneli, daha kararlı. İlk kullanımda yardımcıları GitHub’dan indirir.",
+  "Setting up WARP for this account…": "Bu hesap için WARP kuruluyor…",
+  "The connection check took too long. Try again or choose another route.": "Bağlantı kontrolü çok uzun sürdü. Yeniden deneyin veya başka bir rota seçin.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Çalışma alanı oluşturuluyor, WARP kuruluyor ve oturum Telegram’da kontrol ediliyor…",
+  "WARP · recommended": "WARP · önerilen",
+  "Managed local tunnel": "Yönetilen yerel tünel"
 }

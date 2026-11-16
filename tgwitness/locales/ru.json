@@ -10082,5 +10082,14 @@
   "Saved records: {n}": "Сохранено записей: {n}",
   "Coverage gaps: {n}": "Пробелы в охвате: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Что уходит из панели и кому: ИИ-провайдер получает только сообщения, которые запросил его клиент; подключение к архиву читает только разрешённые рабочие области и чаты по своему токену; вебхук отправляет метаданные, а текст сообщений — только если вы это выберете.",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "ИИ- или консольные клиенты, которые читают этот архив по токену. Каждое подключение видит только выбранные для него рабочие области и чаты, и его можно отозвать в любой момент."
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "ИИ- или консольные клиенты, которые читают этот архив по токену. Каждое подключение видит только выбранные для него рабочие области и чаты, и его можно отозвать в любой момент.",
+  "Joining needs administrator approval: Telegram sends a join request.": "Для вступления нужно одобрение администратора: Telegram отправит заявку.",
+  "Send join request": "Отправить заявку",
+  "Connection for this account": "Подключение для этого аккаунта",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Свой туннель Cloudflare, стабильнее. При первом запуске скачивает помощников с GitHub.",
+  "Setting up WARP for this account…": "Настраиваем WARP для этого аккаунта…",
+  "The connection check took too long. Try again or choose another route.": "Проверка подключения заняла слишком много времени. Попробуйте ещё раз или выберите другой маршрут.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Создаём рабочее пространство, настраиваем WARP и проверяем сессию в Telegram…",
+  "WARP · recommended": "WARP · рекомендуется",
+  "Managed local tunnel": "Управляемый локальный туннель"
 }

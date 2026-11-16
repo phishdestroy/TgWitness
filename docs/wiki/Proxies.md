@@ -63,7 +63,7 @@ A passing test means the network path works. Not that you're logged in, anonymou
 
 ## Public lists
 
-Lists from six public sources ship with the app. The pool refreshes and checks them in
+Lists from seven public sources ship with the app. The pool refreshes and checks them in
 the background, a failed download keeps the last good list. **Update public lists**
 refreshes without touching a manual route.
 

@@ -9959,5 +9959,14 @@
   "Saved records: {n}": "บันทึกที่จัดเก็บ: {n}",
   "Coverage gaps: {n}": "ช่องว่างการครอบคลุม: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "อะไรออกจากแผงนี้และใครได้รับ: ผู้ให้บริการ AI ได้รับเฉพาะข้อความที่ไคลเอนต์ของตนร้องขอ การเชื่อมต่อคลังข้อมูลอ่านได้เฉพาะพื้นที่ทำงานและแชทที่อนุญาตด้วยโทเค็นของตนเอง ส่วน webhook ส่งเมทาดาทา และส่งข้อความเฉพาะเมื่อคุณเลือกเพิ่ม",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "ไคลเอนต์ AI หรือบรรทัดคำสั่งที่อ่านคลังข้อมูลนี้ด้วยโทเค็น แต่ละการเชื่อมต่อเห็นเฉพาะพื้นที่ทำงานและแชทที่เลือกไว้ให้ และเพิกถอนได้ทุกเมื่อ"
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "ไคลเอนต์ AI หรือบรรทัดคำสั่งที่อ่านคลังข้อมูลนี้ด้วยโทเค็น แต่ละการเชื่อมต่อเห็นเฉพาะพื้นที่ทำงานและแชทที่เลือกไว้ให้ และเพิกถอนได้ทุกเมื่อ",
+  "Joining needs administrator approval: Telegram sends a join request.": "การเข้าร่วมต้องได้รับการอนุมัติจากผู้ดูแล: Telegram จะส่งคำขอเข้าร่วม",
+  "Send join request": "ส่งคำขอเข้าร่วม",
+  "Connection for this account": "การเชื่อมต่อสำหรับบัญชีนี้",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "ทันเนล Cloudflare ของตัวเอง เสถียรกว่า ดาวน์โหลดตัวช่วยจาก GitHub ในการใช้งานครั้งแรก",
+  "Setting up WARP for this account…": "กำลังตั้งค่า WARP สำหรับบัญชีนี้…",
+  "The connection check took too long. Try again or choose another route.": "การตรวจสอบการเชื่อมต่อใช้เวลานานเกินไป ลองอีกครั้งหรือเลือกเส้นทางอื่น",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "กำลังสร้างพื้นที่ทำงาน ตั้งค่า WARP และตรวจสอบเซสชันกับ Telegram…",
+  "WARP · recommended": "WARP · แนะนำ",
+  "Managed local tunnel": "อุโมงค์ท้องถิ่นที่จัดการ"
 }

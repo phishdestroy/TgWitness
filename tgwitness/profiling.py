@@ -597,7 +597,7 @@ class Profiling(ProfileCapture):
                         continue
                     claimed = sorted(self.claimed)
                     job = unpack(self.store.db.execute("SELECT * FROM profiling_users WHERE run_id=? AND phase='pending' AND next_attempt<=? AND coalesce(worker,'')=''" +
-                        (" AND user_id NOT IN (" + ",".join("?" * len(claimed)) + ")" if claimed else "") + " ORDER BY updated,user_id LIMIT 1",
+                        (" AND user_id NOT IN (" + ",".join("?" * len(claimed)) + ")" if claimed else "") + " ORDER BY stage='profile',updated,user_id LIMIT 1",
                         (run["id"], time.time(), *claimed)).fetchone())
                     if job:
                         self.change_run(run, current_user=job["user_id"], current_stage=job["stage"])

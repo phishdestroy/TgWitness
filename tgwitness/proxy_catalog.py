@@ -44,6 +44,9 @@ SOURCES = (
     {"id": "khodejav", "label": "KhodeJav/telegram-proxy-collector",
      "url": "https://raw.githubusercontent.com/KhodeJav/telegram-proxy-collector/main/output/proxies.txt",
      "homepage": "https://github.com/KhodeJav/telegram-proxy-collector"},
+    {"id": "tgmtproxy", "label": "tgmtproxy/telegram-mtproto-proxy-list",
+     "url": "https://raw.githubusercontent.com/tgmtproxy/telegram-mtproto-proxy-list/main/proxies.txt",
+     "homepage": "https://github.com/tgmtproxy/telegram-mtproto-proxy-list"},
 )
 SEED = Path(__file__).with_name("public_proxies.json")
 FORMAT = "tgwitness-public-proxies-v1"

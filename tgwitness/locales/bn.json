@@ -10010,5 +10010,14 @@
   "Saved records: {n}": "সংরক্ষিত রেকর্ড: {n}",
   "Coverage gaps: {n}": "কভারেজ ফাঁক: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "এই প্যানেল থেকে কী বাইরে যায় এবং কে পায়: AI প্রদানকারী কেবল সেই বার্তাগুলো পায় যা তার ক্লায়েন্ট চায়; আর্কাইভ সংযোগ নিজের টোকেন দিয়ে কেবল অনুমোদিত ওয়ার্কস্পেস ও চ্যাট পড়ে; ওয়েবহুক মেটাডেটা পাঠায়, আর বার্তার লেখা কেবল আপনি তা বেছে নিলে।",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "AI বা কমান্ড-লাইন ক্লায়েন্ট যারা টোকেন দিয়ে এই আর্কাইভ পড়ে। প্রতিটি সংযোগ কেবল তার জন্য বাছাই করা ওয়ার্কস্পেস ও চ্যাট দেখে এবং যেকোনো সময় বাতিল করা যায়।"
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "AI বা কমান্ড-লাইন ক্লায়েন্ট যারা টোকেন দিয়ে এই আর্কাইভ পড়ে। প্রতিটি সংযোগ কেবল তার জন্য বাছাই করা ওয়ার্কস্পেস ও চ্যাট দেখে এবং যেকোনো সময় বাতিল করা যায়।",
+  "Joining needs administrator approval: Telegram sends a join request.": "যোগ দিতে অ্যাডমিনের অনুমোদন লাগবে: Telegram যোগদানের অনুরোধ পাঠায়।",
+  "Send join request": "যোগদানের অনুরোধ পাঠান",
+  "Connection for this account": "এই অ্যাকাউন্টের সংযোগ",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "নিজস্ব Cloudflare টানেল, বেশি স্থিতিশীল। প্রথম ব্যবহারে GitHub থেকে সহায়ক প্রোগ্রাম ডাউনলোড করে।",
+  "Setting up WARP for this account…": "এই অ্যাকাউন্টের জন্য WARP সেট আপ হচ্ছে…",
+  "The connection check took too long. Try again or choose another route.": "সংযোগ যাচাইয়ে অনেক বেশি সময় লেগেছে। আবার চেষ্টা করুন বা অন্য রুট বেছে নিন।",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "ওয়ার্কস্পেস তৈরি হচ্ছে, WARP সেট আপ হচ্ছে এবং Telegram-এ সেশন যাচাই হচ্ছে…",
+  "WARP · recommended": "WARP · সুপারিশকৃত",
+  "Managed local tunnel": "পরিচালিত স্থানীয় টানেল"
 }

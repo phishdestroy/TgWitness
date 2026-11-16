@@ -109,7 +109,7 @@
   --placeholder: #838da0;
   --icon: #aab3c3;
   --icon-faint: #6f7a8e;
-  --toggle-off: #3a4559;
+  --toggle-off: #4f5b72;
   --scrollbar: #3a4559;
   --row-hover: #1a2133;
   --topbar: var(--surface-work);
@@ -294,6 +294,7 @@ kbd { font: 11px/1.4 var(--mono); }
   background: var(--surface-2); color: var(--muted); font-size: 13px;
 }
 .quick-footer kbd { padding: 2px 4px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface); }
+@media (hover: none) and (pointer: coarse) { .quick-footer { display: none; } }
 .gate { position: relative; display: grid; grid-template-columns: minmax(0, 540px) minmax(0, 420px); align-content: center; justify-content: center; align-items: center; gap: clamp(40px, 7vw, 112px); min-height: 100vh; padding: 64px 48px; overflow: hidden; background: var(--bg); }
 .gate::before {
   content: ""; position: absolute; inset: -45% -20% auto; height: 75%; pointer-events: none;
@@ -1681,7 +1682,7 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
 .notify-item.unread span { color: var(--text); font-weight: 600; }
 .notify-empty { padding: 8px 4px; }
 .scope-modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
-.scope-modes label { display: flex; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
+.scope-modes label { display: flex; gap: 10px; margin: 0; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
 .scope-modes label:hover { border-color: var(--border-hover, var(--border-strong)); }
 .scope-modes label:has(input:checked) { background: var(--accent-soft); border-color: var(--accent-border); }
 .scope-modes input { align-self: flex-start; margin-top: 3px; }

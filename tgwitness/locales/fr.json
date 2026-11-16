@@ -10020,5 +10020,14 @@
   "Saved records: {n}": "Entrées enregistrées : {n}",
   "Coverage gaps: {n}": "Lacunes de couverture : {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "Ce qui quitte ce panneau et qui le reçoit : un fournisseur d’IA ne reçoit que les messages demandés par son client ; une connexion d’archive ne lit, avec son propre jeton, que les espaces de travail et discussions autorisés ; un webhook envoie des métadonnées, et le texte des messages seulement si vous le choisissez.",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Clients d’IA ou en ligne de commande qui lisent cette archive avec un jeton. Chaque connexion ne voit que les espaces de travail et discussions choisis pour elle et peut être révoquée à tout moment."
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "Clients d’IA ou en ligne de commande qui lisent cette archive avec un jeton. Chaque connexion ne voit que les espaces de travail et discussions choisis pour elle et peut être révoquée à tout moment.",
+  "Joining needs administrator approval: Telegram sends a join request.": "L’adhésion doit être approuvée par un administrateur : Telegram envoie une demande d’adhésion.",
+  "Send join request": "Envoyer une demande d’adhésion",
+  "Connection for this account": "Connexion pour ce compte",
+  "Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.": "Tunnel Cloudflare dédié, plus stable. Télécharge des assistants depuis GitHub au premier usage.",
+  "Setting up WARP for this account…": "Configuration de WARP pour ce compte…",
+  "The connection check took too long. Try again or choose another route.": "La vérification de la connexion a pris trop de temps. Réessayez ou choisissez une autre route.",
+  "Creating the workspace, setting up WARP and checking the session with Telegram…": "Création de l’espace de travail, configuration de WARP et vérification de la session auprès de Telegram…",
+  "WARP · recommended": "WARP · recommandé",
+  "Managed local tunnel": "Tunnel local géré"
 }

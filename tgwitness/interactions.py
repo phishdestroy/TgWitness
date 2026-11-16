@@ -274,7 +274,8 @@ async def preview(collector, body):
               "participants_count": getattr(entity, "participants_count", None)
                                     or getattr(chat, "participants_count", None),
               "history_visible": None,
-              "request_needed": bool(getattr(entity, "request_needed", False)),
+              "request_needed": bool(getattr(entity, "request_needed", False)
+                                     or (not member and getattr(entity, "join_request", False))),
               "expires_at": time.time() + 600,
               "account_id": (collector.store.get_setting("account", {}) or {}).get("id"),
               "raw": plain(entity), **facts}

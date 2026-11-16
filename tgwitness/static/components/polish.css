@@ -61,7 +61,11 @@ input:where(:not([type=checkbox]):not([type=radio])):focus, select:focus, textar
 @keyframes view-in { from { opacity: 0; } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } }
 
-.page-heading h1, .hub-heading h1 { font-size: 28px; line-height: 1.15; letter-spacing: -.025em; font-weight: 680; }
+.page-heading h1, .hub-heading h1, #view-topology .tp-title h1, #view-swarm .sw-title h1, .extras-intro h1 { font-size: 28px; line-height: 1.15; letter-spacing: -.025em; font-weight: 680; }
+.page-heading > .route-actions { margin-top: 0; }
+.extras-intro { padding-top: 0; }
+.extras-intro > .eyebrow { display: none; }
+.extras-intro h1 { margin-top: 0; }
 
 details:not(.nav-more):not(.setting-help) > summary { transition: color .15s, background-color .15s; }
 details > summary::before { transition: transform .25s var(--ease-spring); }
@@ -188,6 +192,19 @@ html:has(dialog:modal) { background: color-mix(in srgb, rgb(10 16 30) 42%, var(-
   :root:not([data-motion="always"]) details::details-content { transition: none; }
   :root:not([data-motion="always"]) dialog::backdrop { animation: none; }
 }
-#view-evidence :is(.collection-methods, .export-preferences, #export-more-formats, #handover-card, #export-chat-tools, .verification-details) { border-radius: 14px; }
-#view-evidence :is(.collection-methods, .export-preferences, #export-more-formats, #handover-card, #export-chat-tools, .verification-details) > summary { min-height: 52px; padding: 14px 20px; font-size: 14px; font-weight: 600; color: var(--text); }
+#view-evidence :is(.collection-methods, .export-preferences, #export-more-formats, #handover-card, #export-chat-tools, .verification-details) { padding: 0; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); box-shadow: none; }
+#view-evidence :is(.collection-methods, .export-preferences, #export-more-formats, #handover-card, #export-chat-tools, .verification-details) > summary { display: flex; align-items: center; min-height: 52px; padding: 14px 20px; border: 0; border-radius: inherit; background: transparent; box-shadow: none; font-size: 14px; font-weight: 600; color: var(--text); }
+#view-evidence :is(.collection-methods, .export-preferences) > :not(summary) { margin: 0 20px 16px; }
+#view-evidence #handover-card > .handover-body { padding: 0 20px 20px; }
+#view-evidence :is(.collection-methods, .export-preferences, .evidence-hero, #export-readable-report, #export-more-formats, #handover-card, #export-encrypt, #export-chat-tools, .exports-history, .verification-details) { margin-block: 12px 0; }
+#view-evidence #export-readable-report .card-heading { padding: 0 0 12px; }
+#view-evidence #export-encrypt { padding: 14px 20px; }
+#view-evidence #export-encrypt > .check-label { margin: 0; }
+#view-evidence .exports-history > .card-heading.compact { flex-direction: row; align-items: center; }
+@media (max-width: 600px) {
+  #view-evidence #export-encrypt { padding: 12px 16px; }
+  #view-evidence :is(.collection-methods, .export-preferences, #export-more-formats, #handover-card, #export-chat-tools, .verification-details) > summary { padding: 12px 16px; }
+  #view-evidence :is(.collection-methods, .export-preferences) > :not(summary) { margin-inline: 16px; }
+  #view-evidence #handover-card > .handover-body { padding: 0 16px 16px; }
+}
 #view-accounts .fleet-card-group { padding-inline-end: 24px; }
