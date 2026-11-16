@@ -1682,7 +1682,7 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
 .notify-item.unread span { color: var(--text); font-weight: 600; }
 .notify-empty { padding: 8px 4px; }
 .scope-modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
-.scope-modes label { display: flex; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
+.scope-modes label { display: flex; gap: 10px; margin: 0; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
 .scope-modes label:hover { border-color: var(--border-hover, var(--border-strong)); }
 .scope-modes label:has(input:checked) { background: var(--accent-soft); border-color: var(--accent-border); }
 .scope-modes input { align-self: flex-start; margin-top: 3px; }

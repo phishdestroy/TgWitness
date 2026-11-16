@@ -7154,7 +7154,7 @@ async function bootstrap(){
   if(!accessStarted&&revision===state.workspaceRevision&&state.token)
     await unlock().catch(unlockFailed);
 }
-const HSCROLL=".demo-actions,.chat-list-views,.journal-type-filters,.chat-view-tabs,.profile-tabs,.parameters-nav,.health-part-tabs,.doc-tabs";
+const HSCROLL=".demo-actions,.chat-list-views,.journal-type-filters,.chat-view-tabs,.profile-tabs,.parameters-nav,.health-part-tabs,.doc-tabs,.sources-tabs";
 const hscrollSeen=new WeakSet(),hscrollSize=new ResizeObserver(entries=>entries.forEach(entry=>hscrollMark(entry.target)));
 let hscrollQueued=false;
 function hscrollMark(el){
