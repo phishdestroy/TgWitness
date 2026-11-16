@@ -13,7 +13,7 @@
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/readme-action-handbook.svg" width="228" height="58" alt="Open the handbook: tasks, guides and answers"></a>
 </p>
 
-<p align="center"><a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a> · <a href="#what-tgwitness-does">What you can do</a> · <a href="docs/CHANGELOG.md">Release notes</a></p>
+<p align="center"><a href="https://tgwitness-demo.destroy.tools/">Watch live capture</a> · <a href="#what-tgwitness-does">What you can do</a> · <a href="docs/CHANGELOG.md">Release notes</a> · <a href="#taylor-wessing-project-notice">Project notice</a></p>
 
 <p align="center">
   <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="146" height="30" alt="v0.9.3 · pre-release"></a>
@@ -21,6 +21,29 @@
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
 </p>
+
+<a name="taylor-wessing-project-notice"></a><a name="project-position-and-operator-notice"></a>
+
+## Taylor Wessing: project notice
+
+PhishDestroy's published position on **Taylor Wessing, Dr. Tobias Schelinski and Dr. Patrick Vincent Zurheide**, with the source record and technical case file.
+
+<!-- operator-notice:start -->
+
+<a href="docs/OPERATOR-INCOMPATIBILITY.md">
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-gdpr-impunity-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-gdpr-impunity-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-gdpr-impunity-mobile.svg">
+  <img src="docs/assets/presentation/readme-gdpr-impunity.svg" width="1200" alt="GDPR, violated. Doctors, unpunished. Read the operator notice.">
+</picture>
+</a>
+
+[Read the operator notice →](docs/OPERATOR-INCOMPATIBILITY.md) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
+
+<!-- operator-notice:end -->
+
+[The 106-day GDPR file](docs/TAYLOR-WESSING-GDPR-FILE.md) · [Signed-export case study](https://phishdestroy.github.io/TgWitness/docs/signed-export/) · [Original NOTICE](NOTICE)
 
 <a name="screenshots"></a>
 <a name="see-it-in-action"></a>
@@ -94,6 +117,8 @@ RFC 3161 and OpenTimestamps timestamps are on by default in every task; the `.ts
 | **Understand the people** | Available profiles, avatar and gift observations with dates, bio links and a history of changes. Collection can pause and resume. [Panel →](docs/PANEL.md) |
 | **Make a clear report** | Pick chats or individual messages, edit the cover, choose a design and charts, then preview and download PDF, HTML or JSON. [Reports →](docs/CASE_REPORTS.md) |
 | **Export once or keep watching** | Account exports, accessible history and continuous observation, with separate workspaces and keys for each account. [Collection modes →](docs/COLLECTION-MODES.md) |
+| **Move accessible history** | Forward to a channel or group with a preview, album handling and pause/resume controls. [History forwarding →](docs/PANEL.md#forward-a-chat-to-a-channel-or-group) |
+| **Save messages as images** | Light, Dark and Classic layouts, page previews and a signed image ZIP with verification data. [Message images →](docs/PANEL.md#save-selected-messages-as-images) |
 | **Work with Secret Chats** | An integrated conversation view and exports for chats created or accepted by TgWitness, using a protocol module the panel installs with one button. [Secret Chats →](docs/PSEUDO-SECRET.md) |
 | **Let someone check the result** | Signed archives, a standalone verifier, retained checkpoints and optional timestamps, GitHub acquisition attestations or Intel TDX measurements. [Checks →](docs/EVIDENCE.md) |
 
@@ -127,6 +152,17 @@ Source visibility, unavailable data and collection gaps remain visible in the sa
 [Search](docs/SEARCH.md) · [Investigation tools](docs/INVESTIGATION-MODE.md) · [Chat exports](docs/wiki/Chat-Export.md) · [Case packages](docs/CASE_REPORTS.md)
 
 </details>
+
+## Make the result easy to read
+
+Select chats or individual messages, choose the report design and language, and add a cover, notes and charts. Preview the selection before exporting PDF, HTML or JSON. Sharing copies can use minimized data while the original signed archive stays intact.
+
+<a href="docs/CASE_REPORTS.md">
+  <img src="docs/assets/reports/dossier-en.png" width="1200" alt="Example English HTML report with a case cover, record counts, signature status and a linked contents list. Fictional case data.">
+</a>
+
+<p align="center"><sub>Example report with fictional records. <a href="docs/CASE_REPORTS.md">Open the report guide</a> · <a href="docs/EVIDENCE.md#handover-extract">Prepare a sharing copy</a></sub></p>
+
 
 <a name="how-it-works"></a>
 
@@ -250,21 +286,6 @@ Sessions and credentials stay in the encrypted vault. The [System map](docs/SYST
 [Repository guide](docs/CODE-MAP.md) · [Contributing](.github/CONTRIBUTING.md) · [Project guide](docs/PROJECT-GUIDE.md)
 
 </details>
-
-<!-- operator-notice:start -->
-
-<a href="docs/OPERATOR-INCOMPATIBILITY.md">
-<picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-gdpr-impunity-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-gdpr-impunity-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-gdpr-impunity-mobile.svg">
-  <img src="docs/assets/presentation/readme-gdpr-impunity.svg" width="1200" alt="GDPR, violated. Doctors, unpunished. Read the operator notice.">
-</picture>
-</a>
-
-[Read the operator notice →](docs/OPERATOR-INCOMPATIBILITY.md) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
-
-<!-- operator-notice:end -->
 
 <details>
 <summary><strong>Read the project overview in your language</strong></summary>
