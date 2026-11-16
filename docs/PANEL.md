@@ -423,8 +423,8 @@ Bulk pause and resume keep the confirmed selection within the session where it
 was opened. Controls stay disabled while confirmation or execution is pending;
 changing workspaces or locking the panel cancels the remaining commands.
 After execution, the panel refreshes account states. A failed request is reported
-as a request failure: a lost response does not prove that the server left the
-collector unchanged. Commands are not automatically repeated.
+as a request failure, because the server may already have applied the command.
+Commands are not automatically repeated.
 
 ## Extras
 

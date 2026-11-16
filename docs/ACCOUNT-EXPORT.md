@@ -90,9 +90,9 @@ changed file.
 
 The activity map lists the largest channel and supergroup gaps, including their
 number ranges and neighbouring message times. Open a range to jump to its marked
-position in the paginated transcript. These marks describe absent numbers; they
-do not establish a deletion event, its time or the missing message text. Wide
-tables scroll within their cards on small screens.
+position in the paginated transcript. These marks record absent numbers between
+saved neighbours; deletion events, their times and message texts come only from
+saved records. Wide tables scroll within their cards on small screens.
 
 Long transcripts include a page index with message-date ranges and a calendar.
 Choose a month to open its first record in captured page order. Month counts use
