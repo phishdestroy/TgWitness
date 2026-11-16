@@ -1426,6 +1426,13 @@ function healthVerdict(v){
   return {title:tr(title),part,state,confidence,quiet:v.cause==="quiet",level:tr(VERDICT_LEVELS[confidence]),
     action:tr(VERDICT_ACTIONS[v.action]||VERDICT_ACTIONS.diagnose),facts};
 }
+function chatSilence(s,chat){
+  const source=s.collector?.source_status?.[String(chat)]?.state,check=tr(VERDICT_ACTIONS.check_chats);
+  if(source==="access_lost")return {title:tr("Access to the chat lost"),action:check,part:"sources"};
+  if(source==="access_unconfirmed")return {title:tr("Source access unconfirmed"),action:check,part:"sources"};
+  const v=VERDICT_ALARMS.includes(s.health?.verdict?.cause)&&!["chat_access","update_gap"].includes(s.health.verdict.cause)?healthVerdict(s.health.verdict):null;
+  return v?{title:v.title,action:v.action,part:v.part}:null;
+}
 let healthUI=null;
 const healthReady=import("./components/health.js?v=verdict1").then(({createHealthBar})=>{
   healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,verdict:healthVerdict,
@@ -5578,11 +5585,12 @@ function renderChatStatus(){
   for(const chip of $("chat-sub").querySelectorAll("button[data-chat-filter]"))chip.setAttribute("aria-pressed",String(chip.dataset.chatFilter!=="all"&&state.chatView==="messages"&&chip.dataset.chatFilter===state.chatFilter));
   const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
     current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
+    s.health?.verdict?.cause,current.source_status?.[String(state.chat)]?.state,
     modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning(),chatPick?chatPick.size:-1,chatPick?chatShown.filter(id=>!chatPick.has(id)).length:0]);
   if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const focusedView=box.contains(document.activeElement)?document.activeElement.dataset.chatView:null;
-  const c=s.collector;box.replaceChildren();
+  const c=s.collector,silence=!s.demo&&c.running&&c.connected?chatSilence(s,state.chat):null;box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text,description=text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=description;state_.append(t);};
   state_.setAttribute('role','status');
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>busy(b,work));state_.append(b);return b;};
@@ -5592,6 +5600,8 @@ function renderChatStatus(){
   else if(!c.running){say("warn",tr("Observation off"),tr("Observation is off — new messages, edits and deletions are not being saved."));
     if(may("collect")&&!s.chats_limited)action("text-link",tr("Start observation"),async()=>{if(!await confirmOtherSessions())return;await json("collector/start",{});await refreshStatus();toast(tr("Observation started. New messages, edits and deletions will appear here."));});}
   else if(c.storage_low)say("warn",tr("Files paused: low disk space"),tr("Observing, but the disk is almost full ({size} free): photos & files are paused until space is freed. Messages are still saved.",{size:humanSize(c.disk_free_bytes)}));
+  else if(silence){say("warn",silence.title,silence.title+" · "+silence.action);
+    action("text-link",tr("Collector health"),async()=>healthUI?.open(silence.part));}
   else say(c.connected?"ok":"warn",c.connected?tr("Observing"):tr("Reconnecting to Telegram"),c.connected?tr("Observing — new messages, edits and deletions are saved as they happen.")+recheckText(c):tr("Reconnecting to Telegram — missed changes are requested again once connected."));
   const mode=node("div","chat-mode-chips");
   for(const [name,label] of [['mode',tr("Mode: {mode}",{mode:recordingMode(s)})],['files',s.capture?.download_media?mediaLimitText(s.capture,true):tr("Files off")]]){
@@ -5618,7 +5628,7 @@ function renderChatStatus(){
   filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';
   const recording=$('chat-recording-options');recording.replaceChildren();
   if(!s.demo){
-    if(!info.enabled||!c.has_session||c.running&&(c.storage_low||!c.connected))box.append(state_);
+    if(!info.enabled||!c.has_session||c.running&&(c.storage_low||!c.connected)||silence)box.append(state_);
     else recording.append(state_);
     recording.append(mode);
   }

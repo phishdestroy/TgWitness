@@ -67,6 +67,8 @@
   frozen account, the route, lost chat access, a recent update gap or simply quiet
   chats; each with a confidence level and the next step, and "Cause unknown" when
   no signal explains it. Problems replace "Observing" in the workspace status.
+  An open chat names lost or unconfirmed access to that chat, or the account-wide
+  cause, above its messages with a link to collector health.
 - HTML reports opened from disk show **Offline · 0 B sent** next to the signature
   badge. The browser counts network requests since the page opened; any request
   turns it into a red count, and attempts blocked by the page policy are listed in
