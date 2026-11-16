@@ -41,6 +41,10 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- Pseudo-secret installs in one click in the default Hide IP mode. When the workspace route cannot reach
+  GitHub, the page says why and offers **Download directly and turn on**: only this one pinned, checked
+  download leaves without the proxy, after a confirmation. The journal records
+  `secret_chat.module_installed` with the commit, SHA-256 and route.
 - TgWitness never ends the session that approved a workspace's QR sign-in: Telegram also ends the session it
   approved. Importing records that session; the session list marks it, “End session” refuses it, and ending
   other sessions or making this the only session keeps it. The import hint no longer says the two

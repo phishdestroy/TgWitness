@@ -315,6 +315,7 @@ const sessionEndReasons={"signed out":tr("signed out"),"replaced by a newer sess
 const labels = {
   "interaction.preview": [tr("Telegram link preview saved"), "link", "system"],
   "secret_chat.settings": [tr("Pseudo-secret settings changed"), "settings", "system"],
+  "secret_chat.module_installed": [tr("Pseudo-secret module installed"), "shield", "system"],
   "secret_chat.requested": [tr("Pseudo-secret requested"), "lock", "system"], "secret_chat.accepted": [tr("Pseudo-secret accepted"), "lock", "system"],
   "secret_chat.accept_failed": [tr("Pseudo-secret not accepted"), "alert", "coverage"], "secret_chat.ready": [tr("Pseudo-secret established"), "lock", "system"],
   "secret_chat.message": [tr("Pseudo-secret message"), "message", ""], "secret_chat.file": [tr("Pseudo-secret file preserved"), "clip", ""],
@@ -2008,6 +2009,8 @@ function excerpt(e) {
     case "secret_chat.message": return (p.direction==="out"?tr("Sent"):tr("Received"))+" · "+(p.text||(p.media?tr("Attachment"):""))+(p.ttl?" · "+tr("timer {n} s",{n:p.ttl}):"");
     case "secret_chat.requested": return (p.direction==="out"?tr("Started by this account"):tr("Started by the other side"))+" · "+tr("user ID {id}",{id:p.peer_user_id});
     case "secret_chat.ready": return tr("Key picture {hex}",{hex:(p.key_visualization||"").slice(0,16)+"…"});
+    case "secret_chat.module_installed": return [p.name,p.version,"commit "+String(p.commit||"").slice(0,12),
+      p.route==="direct_once"?tr("downloaded once without the proxy"):""].filter(Boolean).join(" · ");
     case "secret_chat.action": return secretActionText(p);
     case "secret_chat.accepted": return tr("This chat now lives in TgWitness; other devices of the account do not get it.");
     case "secret_chat.closed": return p.history_deleted_by_peer?tr("The other side deleted the chat; the journal keeps every record."):
@@ -2385,7 +2388,7 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=12").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=13").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;

@@ -14,6 +14,7 @@ from telethon.tl.tlobject import TLObject
 
 from . import secret_module
 from .monitoring import capture_settings
+from .network import NoRoute
 from .store import canonical, utcnow
 from .workers import complete_in_thread
 
@@ -88,6 +89,13 @@ def of(collector):
         existing = SecretChats(collector)
         collector.secret_chats = existing
     return existing
+
+
+def install_route(collector):
+    route = collector.outside_route()
+    if isinstance(route, NoRoute):
+        return {"blocked": str(route.error)}
+    return {"via": "proxy" if route.kind in ("socks5", "http") else "direct"}
 
 
 def settings(store):
@@ -780,6 +788,7 @@ class SecretChats:
                 "interaction_problem": interaction_problem,
                 "interaction_goal": interaction_problem == interactions.GOAL_OFF,
                 "module": secret_module.describe(),
+                "install_route": None if available() else install_route(self.collector),
                 "chats": display(sorted(chats, key=lambda chat: chat["created_at"] or 0, reverse=True)),
                 "people": {str(user_id): self.person(user_id) for user_id in
                            {chat["peer_user_id"] for chat in chats if type(chat["peer_user_id"]) is int}},

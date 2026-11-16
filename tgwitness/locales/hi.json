@@ -9979,5 +9979,10 @@
   "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "इसी ने इस वर्कस्पेस के साइन-इन को मंज़ूरी दी। इसे खत्म करने पर यह वर्कस्पेस भी खत्म हो जाएगा, इसलिए TgWitness इसे बनाए रखता है।",
   "End every other session in Telegram except the one that approved this workspace's sign-in?": "क्या Telegram में बाकी सभी सत्र खत्म करें, सिवाय उसके जिसने इस वर्कस्पेस के साइन-इन को मंज़ूरी दी?",
   "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "इस सत्र ने इस वर्कस्पेस के साइन-इन को मंज़ूरी दी। इसके खत्म होने पर Telegram इसके द्वारा मंज़ूर किया गया सत्र भी खत्म कर देता है, इसलिए TgWitness इसे खत्म नहीं करता।",
-  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "अन्य सत्र खत्म कर दिए गए। जिस सत्र ने इस वर्कस्पेस के साइन-इन को मंज़ूरी दी, वह अब भी साइन इन है: उसे खत्म करने से इस वर्कस्पेस का सत्र भी खत्म हो जाएगा।"
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "अन्य सत्र खत्म कर दिए गए। जिस सत्र ने इस वर्कस्पेस के साइन-इन को मंज़ूरी दी, वह अब भी साइन इन है: उसे खत्म करने से इस वर्कस्पेस का सत्र भी खत्म हो जाएगा।",
+  "Pseudo-secret module installed": "छद्म-गोपनीय मॉड्यूल इंस्टॉल हुआ",
+  "downloaded once without the proxy": "प्रॉक्सी के बिना एक बार डाउनलोड हुआ",
+  "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "इसके बजाय आप यह एक फ़ाइल सीधे इस कंप्यूटर से डाउनलोड कर सकते हैं: GitHub एक बार कंप्यूटर का IP पता देखता है, Telegram ट्रैफ़िक नहीं बदलता।",
+  "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "छद्म-गोपनीय मॉड्यूल GitHub से सीधे इस कंप्यूटर से डाउनलोड करें? इस एक डाउनलोड में GitHub कंप्यूटर का IP पता देखता है। वर्कस्पेस का रूट और Telegram ट्रैफ़िक वैसे ही रहते हैं।",
+  "Download directly and turn on": "सीधे डाउनलोड करें और चालू करें"
 }

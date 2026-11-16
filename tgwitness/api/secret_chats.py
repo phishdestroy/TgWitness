@@ -1,6 +1,7 @@
 from .. import netclient
 from .. import secret_chats as secret
 from .. import secret_module
+from ..network import NetworkConfig, NoRoute
 from .dependencies import current_context
 from fastapi import Depends
 from fastapi import HTTPException
@@ -14,6 +15,16 @@ from pydantic import Field
 class SecretChatSettings(BaseModel):
     enabled: bool
     accept_incoming: bool = False
+
+
+MODULE_INSTALLED_MEANING = ("The pseudo-secret protocol module was downloaded from GitHub, matched the SHA-256 fixed "
+                            "in this release and was loaded. route: how the download left this computer; direct_once "
+                            "means the administrator allowed this one download without the workspace's proxy.")
+
+
+class SecretModuleInstall(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    direct_once: bool = False
 
 
 class SecretChatCreate(BaseModel):
@@ -71,12 +82,22 @@ async def update_settings(body: SecretChatSettings, *, ctx=Depends(current_conte
     return chats_of(ctx).view()
 
 
-async def install(request: Request, *, ctx=Depends(current_context)):
+async def install(request: Request, body: SecretModuleInstall | None = None, *, ctx=Depends(current_context)):
     ctx.require_live()
     if not request.state.principal.admin:
         raise HTTPException(403, "Only the main administrator can install the pseudo-secret module.")
+    collector = ctx.app.state.collector
+    direct = bool(body and body.direct_once)
+    route = NetworkConfig(kind="direct") if direct else collector.outside_route()
     try:
-        await secret_module.install(ctx.app.state.collector.outside_route())
+        if isinstance(route, NoRoute):
+            raise route.error
+        installed = not secret.available()
+        await secret_module.install(route)
+        if installed:
+            collector.store.append("secret_chat.module_installed", {
+                **{key: secret_module.INFO[key] for key in ("name", "version", "commit", "sha256", "source")},
+                "route": "direct_once" if direct else route.kind, "meaning": MODULE_INSTALLED_MEANING})
     except netclient.RouteError as exc:
         raise HTTPException(409, str(exc))
     except secret_module.Refused as exc:

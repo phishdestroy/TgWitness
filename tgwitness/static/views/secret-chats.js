@@ -156,9 +156,14 @@ export function createSecretChats(context) {
     }
     find("secret-enabled").disabled = !editable || settingsBusy || !view.available && !settings.enabled;
     find("secret-accept").disabled = !view.available || !editable || !settings.enabled || settingsBusy;
+    const blocked = view.install_route?.blocked;
     find('secret-install').hidden = !installable;
     find('secret-install-text').textContent = tr('Pseudo-secret runs on a separate protocol module, {name} {version} by {author}, under the {license} license. TgWitness downloads this exact version from GitHub, checks every file against the SHA-256 fixed in this release and loads it. No restart is needed.', module);
-    find('secret-install-run').disabled = settingsBusy;
+    find('secret-install-route').hidden = !blocked;
+    find('secret-install-route').textContent = blocked ? tr(blocked) + ' ' + tr('You can download this one file directly from this computer instead: GitHub sees this computer\'s IP address once, Telegram traffic does not change.') : '';
+    find('secret-install-run').hidden = !!blocked;
+    find('secret-install-direct').hidden = !blocked;
+    find('secret-install-run').disabled = find('secret-install-direct').disabled = settingsBusy;
     find('secret-install-source').href = find('secret-module-source').href = module.source || '#';
     find('secret-module').hidden = !module.state;
     find('secret-module-text').textContent = module.state === 'checked' ?
@@ -445,12 +450,13 @@ export function createSecretChats(context) {
     if (current()) toast(tr("Pseudo-secret settings saved."));
   }
 
-  async function install() {
+  async function install(direct = false) {
     if (!view || settingsBusy) return;
+    if (direct && !(await confirm(tr('Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer\'s IP address for this one download. The workspace route and Telegram traffic stay as they are.')))) return;
     const current = actionOwner(), keep = result => ({...result, records: view.records, next_before: view.next_before});
     let failure = null; settingsBusy = installing = true; request++; render();
     try {
-      let result = await json("secret-chats/install", {});
+      let result = await json("secret-chats/install", direct ? {direct_once: true} : {});
       if (current(false)) view = keep(result);
       result = await json("secret-chats/settings", {enabled: true, accept_incoming: result.settings.accept_incoming});
       if (current(false)) view = keep(result);
@@ -468,7 +474,8 @@ export function createSecretChats(context) {
   });
   find('secret-refresh').addEventListener('click', event => busy(event.currentTarget, load));
   find('secret-search').addEventListener('input', () => {if (view) renderList(threads());});
-  find('secret-install-run').addEventListener('click', event => busy(event.currentTarget, install));
+  find('secret-install-run').addEventListener('click', event => busy(event.currentTarget, () => install(false)));
+  find('secret-install-direct').addEventListener('click', event => busy(event.currentTarget, () => install(true)));
   find('secret-reconnect').addEventListener('click', event => busy(event.currentTarget, saveSettings));
   find('secret-report').addEventListener('click', event => busy(event.currentTarget, () => context.openReport(selected)));
   find("secret-start").addEventListener("submit", event => {event.preventDefault(); busy(event.submitter, async () => {

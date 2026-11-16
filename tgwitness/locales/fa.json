@@ -9979,5 +9979,10 @@
   "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "ورود این فضای کاری را تأیید کرد. پایان دادن به آن این فضای کاری را هم پایان می‌دهد، پس TgWitness آن را نگه می‌دارد.",
   "End every other session in Telegram except the one that approved this workspace's sign-in?": "همهٔ نشست‌های دیگر در Telegram پایان یابند، به‌جز نشستی که ورود این فضای کاری را تأیید کرد؟",
   "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "این نشست ورود این فضای کاری را تأیید کرد. وقتی پایان یابد، Telegram نشستی را که تأیید کرده هم پایان می‌دهد، پس TgWitness آن را پایان نمی‌دهد.",
-  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "نشست‌های دیگر پایان یافتند. نشستی که ورود این فضای کاری را تأیید کرد هنوز وارد است: پایان دادن به آن نشست این فضای کاری را هم پایان می‌دهد."
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "نشست‌های دیگر پایان یافتند. نشستی که ورود این فضای کاری را تأیید کرد هنوز وارد است: پایان دادن به آن نشست این فضای کاری را هم پایان می‌دهد.",
+  "Pseudo-secret module installed": "ماژول شبه‌مخفی نصب شد",
+  "downloaded once without the proxy": "یک بار بدون پراکسی دانلود شد",
+  "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "می‌توانید به‌جای آن همین یک فایل را مستقیم از این رایانه دانلود کنید: GitHub یک بار نشانی IP رایانه را می‌بیند و ترافیک Telegram تغییر نمی‌کند.",
+  "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "ماژول شبه‌مخفی مستقیم از این رایانه از GitHub دانلود شود؟ GitHub در همین یک دانلود نشانی IP رایانه را می‌بیند. مسیر فضای کاری و ترافیک Telegram همان‌طور می‌مانند.",
+  "Download directly and turn on": "دانلود مستقیم و فعال‌سازی"
 }
