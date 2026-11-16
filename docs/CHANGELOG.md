@@ -41,6 +41,8 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- On narrow screens, rows that scroll sideways (demo actions, journal filters, chat and profile tabs,
+  Parameters sections, health tabs) fade at the edge where more items are hidden, in both writing directions.
 - Reports name the observing or exporting account by its Telegram name, with @username and ID in brackets,
   instead of a bare `id 8644525789`. The workspace keeps the account name from sign-in; older workspaces fill
   it in on the next connection.

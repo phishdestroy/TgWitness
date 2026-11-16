@@ -7046,4 +7046,17 @@ async function bootstrap(){
   if(!accessStarted&&revision===state.workspaceRevision&&state.token)
     await unlock().catch(unlockFailed);
 }
+const HSCROLL=".demo-actions,.journal-type-filters,.chat-view-tabs,.profile-tabs,.parameters-nav,.health-part-tabs,.doc-tabs";
+const hscrollSeen=new WeakSet(),hscrollSize=new ResizeObserver(entries=>entries.forEach(entry=>hscrollMark(entry.target)));
+let hscrollQueued=false;
+function hscrollMark(el){
+  const max=el.scrollWidth-el.clientWidth,at=Math.abs(el.scrollLeft);
+  el.classList.toggle("hscroll-more-start",max>2&&at>2);el.classList.toggle("hscroll-more-end",max>2&&at<max-2);
+}
+function hscrollScan(){
+  hscrollQueued=false;
+  for(const el of document.querySelectorAll(HSCROLL)){if(!hscrollSeen.has(el)){hscrollSeen.add(el);hscrollSize.observe(el);}hscrollMark(el);}
+}
+document.addEventListener("scroll",event=>{if(event.target instanceof Element&&event.target.matches(HSCROLL))hscrollMark(event.target);},{capture:true,passive:true});
+new MutationObserver(()=>{if(!hscrollQueued){hscrollQueued=true;requestAnimationFrame(hscrollScan);}}).observe(document.body,{childList:true,subtree:true});
 bootstrap();

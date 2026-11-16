@@ -393,3 +393,9 @@ button.tip-toggle { width: 20px !important; height: 20px !important; min-height:
 .chat-search-form { display: flex; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--border); }
 .chat-search-form input { flex: 1; min-width: 0; width: 100%; }
 .chat-search-form button { flex-shrink: 0; }
+.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+.hscroll-more-start { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+.hscroll-more-start.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] .hscroll-more-end { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] .hscroll-more-start { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] .hscroll-more-start.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }
