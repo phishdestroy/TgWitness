@@ -9846,5 +9846,10 @@
   "No messages to export.": "Không có tin nhắn để xuất.",
   "The album is too large to forward intact.": "Album quá lớn để chuyển tiếp nguyên vẹn.",
   "The Telegram account changed. Start a new transfer.": "Tài khoản Telegram đã thay đổi. Bắt đầu lần chuyển mới.",
-  "This preview expired. Preview the transfer again.": "Bản xem trước đã hết hạn. Xem trước việc chuyển tiếp lần nữa."
+  "This preview expired. Preview the transfer again.": "Bản xem trước đã hết hạn. Xem trước việc chuyển tiếp lần nữa.",
+  "Save chat as images": "Lưu cuộc trò chuyện dưới dạng ảnh",
+  "Preparing page {n} of {total}": "Đang chuẩn bị trang {n}/{total}",
+  "Loading saved messages: {n}": "Đang tải tin nhắn đã lưu: {n}",
+  "Only the latest {n} saved messages are included.": "Chỉ bao gồm {n} tin nhắn đã lưu gần nhất.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Mỗi trang ghi rõ các bản ghi nhật ký của trang đó. Tệp ZIP kèm theo một tệp chữ ký để verify.py kiểm tra."
 }

@@ -9999,5 +9999,10 @@
   "No messages to export.": "Немає повідомлень для експорту.",
   "The album is too large to forward intact.": "Альбом завеликий для пересилання цілком.",
   "The Telegram account changed. Start a new transfer.": "Обліковий запис Telegram змінився. Почніть нове перенесення.",
-  "This preview expired. Preview the transfer again.": "Попередній перегляд застарів. Перегляньте перенесення знову."
+  "This preview expired. Preview the transfer again.": "Попередній перегляд застарів. Перегляньте перенесення знову.",
+  "Save chat as images": "Зберегти чат як зображення",
+  "Preparing page {n} of {total}": "Підготовка сторінки {n} з {total}",
+  "Loading saved messages: {n}": "Завантаження збережених повідомлень: {n}",
+  "Only the latest {n} saved messages are included.": "Включено лише останні {n} збережених повідомлень.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "На кожній сторінці вказано її записи журналу. До ZIP додається файл підпису, який перевіряє verify.py."
 }

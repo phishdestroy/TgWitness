@@ -9897,5 +9897,10 @@
   "No messages to export.": "Eksport qilinadigan xabarlar yo‘q.",
   "The album is too large to forward intact.": "Albomni butunligicha uzatish uchun u juda katta.",
   "The Telegram account changed. Start a new transfer.": "Telegram hisobi o‘zgardi. Yangi ko‘chirishni boshlang.",
-  "This preview expired. Preview the transfer again.": "Bu ko‘rib chiqish eskirgan. Ko‘chirishni qayta ko‘rib chiqing."
+  "This preview expired. Preview the transfer again.": "Bu ko‘rib chiqish eskirgan. Ko‘chirishni qayta ko‘rib chiqing.",
+  "Save chat as images": "Chatni rasm sifatida saqlash",
+  "Preparing page {n} of {total}": "{total} tadan {n}-sahifa tayyorlanmoqda",
+  "Loading saved messages: {n}": "Saqlangan xabarlar yuklanmoqda: {n}",
+  "Only the latest {n} saved messages are included.": "Faqat oxirgi {n} ta saqlangan xabar kiritilgan.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Har bir sahifada uning jurnal yozuvlari ko'rsatiladi. ZIP verify.py tekshiradigan imzo faylini qo'shadi."
 }

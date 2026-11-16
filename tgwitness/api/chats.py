@@ -22,6 +22,10 @@ from ..downloads import build_file
 from ..evidence import encrypt_export
 from ..evidence import producer
 from ..history_options import HistoryOptions
+from ..image_attestation import ImageAttestation
+from ..image_attestation import QrText
+from ..image_attestation import attest
+from ..image_attestation import qr_rows
 from ..monitoring import Capture
 from ..monitoring import Monitoring
 from ..monitoring import capture_settings
@@ -545,6 +549,27 @@ async def interaction_state(
     if ctx.visible_chats(request) is not None:
         ctx.require_chat(request, pending["request"].get("chat_id"))
     return interactions.progress(pending)
+
+
+async def image_attestation(
+    request: Request, chat_id: int, body: ImageAttestation, *, ctx=Depends(current_context)
+):
+    ctx.require_chat(request, chat_id)
+    if not request.state.principal.may("export"):
+        raise HTTPException(403, "Signing images needs the export permission.")
+    store = ctx.app.state.store
+    account = (store.get_setting("account", {}) or {}).get("id")
+    try:
+        return await complete_in_thread(
+            attest, store, ctx.app.state.vault, chat_id,
+            [page.model_dump() for page in body.pages], body.style, account,
+        )
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from None
+
+
+async def image_qr(body: QrText, *, ctx=Depends(current_context)):
+    return {"rows": qr_rows(body.text)}
 
 
 async def chat_messages(

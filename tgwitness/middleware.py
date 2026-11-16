@@ -13,7 +13,7 @@ MAX_PENDING_BODIES_PER_CLIENT = 4
 
 
 def request_limit(path, default=16384):
-    if "/api/account-export" in path:
+    if "/api/account-export" in path or path.endswith("/image-attestation"):
         return 512 * 1024
     if "/api/analysis/reports/" in path:
         return 65536

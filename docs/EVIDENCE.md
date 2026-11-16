@@ -106,6 +106,27 @@ in an ASiC-E container. For a ZIP, it puts the unchanged ZIP, the `.p7s` files a
 are left out. A signature with an algorithm TgWitness cannot check is included; the
 panel shows its state, as does `SIGNATURES.txt` for a ZIP.
 
+### Signed chat images
+
+**Download signed ZIP** in the image preview saves PNG pages, `pages.sig.json` and
+`README.txt`. Each page ends with the journal record numbers it shows, the chat, the
+render time, the workspace key fingerprint and the command that checks it. The panel
+sends only each page's SHA-256 and record numbers; the server confirms that the records
+belong to the chat, signs the statement (`tgwitness-image-attestation-v1`) with the
+workspace key and journals the signing as `export.image_attested`.
+
+```
+python verify.py page-01.png page-02.png pages.sig.json
+python verify.py page-*.png pages.sig.json --fingerprint TRUSTED_SHA256 --evidence evidence.zip
+```
+
+The verifier checks the signature, matches every PNG to a signed page and reports the
+key fingerprint. `--fingerprint` compares the signer with a fingerprint obtained from the
+sender independently. `--evidence` reads a signed evidence ZIP of the same workspace and
+requires every record of the images to be present with the same hash. A changed pixel,
+a changed statement or another key fails the check. The images show saved records in
+TgWitness's own layout; they do not show what Telegram displayed to anyone.
+
 ## Comparing chat exports
 
 Verify and compare two signed chat-export ZIPs with independently retained signer

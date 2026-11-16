@@ -9897,5 +9897,10 @@
   "No messages to export.": "پیامی برای خروجی گرفتن وجود ندارد.",
   "The album is too large to forward intact.": "آلبوم برای بازفرستادن یکجا بیش از حد بزرگ است.",
   "The Telegram account changed. Start a new transfer.": "حساب Telegram تغییر کرده است. انتقال جدیدی را شروع کنید.",
-  "This preview expired. Preview the transfer again.": "این پیش‌نمایش منقضی شده است. انتقال را دوباره پیش‌نمایش کنید."
+  "This preview expired. Preview the transfer again.": "این پیش‌نمایش منقضی شده است. انتقال را دوباره پیش‌نمایش کنید.",
+  "Save chat as images": "ذخیره گفتگو به صورت تصویر",
+  "Preparing page {n} of {total}": "در حال آماده‌سازی صفحه {n} از {total}",
+  "Loading saved messages: {n}": "در حال بارگیری پیام‌های ذخیره‌شده: {n}",
+  "Only the latest {n} saved messages are included.": "فقط {n} پیام ذخیره‌شدهٔ آخر گنجانده شده است.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "هر صفحه رکوردهای دفتر روزنامهٔ خود را نام می‌برد. فایل ZIP یک فایل امضا اضافه می‌کند که verify.py آن را بررسی می‌کند."
 }

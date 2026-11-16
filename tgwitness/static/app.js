@@ -6038,29 +6038,57 @@ function buttonsNode(keyboard,message=null){
 
 
 let messageImage = null;
+function imageMessage(message) {
+  const stamp = message.sent_at || message.versions[0]?.observed_at;
+  const time = stamp && Number.isFinite(new Date(stamp).getTime()) ? new Date(stamp).toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' UTC') : '—';
+  const status = [message.deleted ? tr('Deleted') : message.missing ? tr('Not found at recheck') : '',
+    message.versions.length > 1 ? tr('Edited · {n} versions', {n: message.versions.length}) : message.edited ? tr('Edited') : ''].filter(Boolean).join(' · ');
+  const attachments = message.media.map(media => tr('Attachment') + ': ' + (media.name || media.mime_type || tr('File')));
+  if (message.has_media && !attachments.length) attachments.push(tr('Attachment file not saved'));
+  return {id: message.message_id, author: senderName(message), time, status, record: message.current_version?.seq ?? message.reference?.seq,
+    reply: message.reply_to ? tr('Reply') + ' #' + message.reply_to : '', attachments,
+    text: message.captured ? message.text || '' : tr(message.deleted ? 'Deleted before TgWitness could save it — only the deletion notice was recorded.' : 'Content was not saved.')};
+}
+async function openMessageImage(value, chat, owner, generation) {
+  const {createMessageImage} = await import('./views/message-image.js?v=2');
+  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
+  if (!current()) return;
+  messageImage ||= createMessageImage({tr, mask: value => window.TgWitnessPrivacy.preview(value),
+    sign: (id, body) => json('chats/' + encodeURIComponent(id) + '/image-attestation', body),
+    qr: text => json('image-qr', {text})});
+  await messageImage.open({...value, chatId: chat, fingerprint: state.status?.fingerprint || ''}, current);
+}
 async function imageForSelection() {
   const owner = actionOwner(), chat = state.chat, generation = chatGeneration, ids = [...(chatPick || [])];
   if (!ids.length) return;
   if (ids.length > 50) {toast(tr('Select no more than {n} messages.', {n: 50}), true);return;}
   const selected = state.chatMessages.filter(message => ids.includes(message.message_id)).sort((a, b) => a.message_id - b.message_id);
   if (selected.length !== ids.length) {toast(tr('Some selected messages are outside the loaded window. Load them again or change the selection.'), true);return;}
-  const value = {title: state.chatInfo?.title || tr('Chat {id}', {id: chat}), messages: selected.map(message => {
-    const stamp = message.sent_at || message.versions[0]?.observed_at;
-    const time = stamp && Number.isFinite(new Date(stamp).getTime()) ? new Date(stamp).toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' UTC') : '—';
-    const status = [message.deleted ? tr('Deleted') : message.missing ? tr('Not found at recheck') : '',
-      message.versions.length > 1 ? tr('Edited · {n} versions', {n: message.versions.length}) : message.edited ? tr('Edited') : ''].filter(Boolean).join(' · ');
-    const attachments = message.media.map(media => tr('Attachment') + ': ' + (media.name || media.mime_type || tr('File')));
-    if (message.has_media && !attachments.length) attachments.push(tr('Attachment file not saved'));
-    return {id: message.message_id, author: senderName(message), time, status,
-      reply: message.reply_to ? tr('Reply') + ' #' + message.reply_to : '', attachments,
-      text: message.captured ? message.text || '' : tr(message.deleted ? 'Deleted before TgWitness could save it — only the deletion notice was recorded.' : 'Content was not saved.')};
-  })};
-  const {createMessageImage} = await import('./views/message-image.js?v=1');
-  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
-  if (!current()) return;
-  messageImage ||= createMessageImage({tr, mask: value => window.TgWitnessPrivacy.preview(value)});
-  await messageImage.open(value, current);
+  await openMessageImage({scope: 'selection', title: state.chatInfo?.title || tr('Chat {id}', {id: chat}), messages: selected.map(imageMessage)}, chat, owner, generation);
 }
+async function imageForChat(button) {
+  const owner = actionOwner(), chat = state.chat, generation = chatGeneration, limit = 2000, found = new Map();
+  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
+  let before = null, limited = false;
+  while (found.size < limit) {
+    const page = await json('chats/' + encodeURIComponent(chat) + '/messages?limit=200' + (before ? '&before_id=' + before : ''));
+    if (!current()) return;
+    for (const message of page.messages || []) found.set(message.message_id, message);
+    button.textContent = tr('Loading saved messages: {n}', {n: found.size});
+    if (!page.next_before || !(page.messages || []).length) break;
+    before = page.next_before;
+  }
+  if (found.size >= limit) limited = true;
+  const messages = [...found.values()].sort((a, b) => a.message_id - b.message_id).slice(-limit);
+  if (!messages.length) {toast(tr('Content was not saved.'), true);return;}
+  await openMessageImage({scope: 'chat', limited, title: state.chatInfo?.title || tr('Chat {id}', {id: chat}), messages: messages.map(imageMessage)}, chat, owner, generation);
+}
+const chatImagesButton = node('button', 'quiet', tr('Save chat as images'));chatImagesButton.type = 'button';chatImagesButton.id = 'chat-save-images';
+$('chat-pattern').before(chatImagesButton);
+chatImagesButton.addEventListener('click', () => busy(chatImagesButton, async () => {
+  $('chat-tools-menu').open = false;
+  try {await imageForChat(chatImagesButton);} finally {chatImagesButton.textContent = tr('Save chat as images');}
+}));
 window.addEventListener('tgwitness:lock', () => messageImage?.close());
 let historyForward = null;
 const forwardButton = node('button', 'quiet', tr('Forward chat'));forwardButton.type = 'button';forwardButton.id = 'chat-forward-history';

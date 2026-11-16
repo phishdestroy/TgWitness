@@ -9846,5 +9846,10 @@
   "No messages to export.": "ไม่มีข้อความให้ส่งออก",
   "The album is too large to forward intact.": "อัลบั้มใหญ่เกินกว่าจะส่งต่อทั้งชุดได้",
   "The Telegram account changed. Start a new transfer.": "บัญชี Telegram เปลี่ยนไป โปรดเริ่มการโอนใหม่",
-  "This preview expired. Preview the transfer again.": "ตัวอย่างนี้หมดอายุแล้ว โปรดดูตัวอย่างการโอนอีกครั้ง"
+  "This preview expired. Preview the transfer again.": "ตัวอย่างนี้หมดอายุแล้ว โปรดดูตัวอย่างการโอนอีกครั้ง",
+  "Save chat as images": "บันทึกแชทเป็นรูปภาพ",
+  "Preparing page {n} of {total}": "กำลังเตรียมหน้า {n} จาก {total}",
+  "Loading saved messages: {n}": "กำลังโหลดข้อความที่บันทึกไว้: {n}",
+  "Only the latest {n} saved messages are included.": "รวมเฉพาะข้อความที่บันทึกไว้ล่าสุด {n} ข้อความ",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "แต่ละหน้าระบุบันทึกในสมุดบันทึกของหน้านั้น ไฟล์ ZIP มีไฟล์ลายเซ็นที่ verify.py ใช้ตรวจสอบ"
 }

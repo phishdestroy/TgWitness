@@ -9846,5 +9846,10 @@
   "No messages to export.": "Tidak ada pesan untuk diekspor.",
   "The album is too large to forward intact.": "Album terlalu besar untuk diteruskan secara utuh.",
   "The Telegram account changed. Start a new transfer.": "Akun Telegram berubah. Mulai pemindahan baru.",
-  "This preview expired. Preview the transfer again.": "Pratinjau ini kedaluwarsa. Pratinjau pemindahan lagi."
+  "This preview expired. Preview the transfer again.": "Pratinjau ini kedaluwarsa. Pratinjau pemindahan lagi.",
+  "Save chat as images": "Simpan obrolan sebagai gambar",
+  "Preparing page {n} of {total}": "Menyiapkan halaman {n} dari {total}",
+  "Loading saved messages: {n}": "Memuat pesan tersimpan: {n}",
+  "Only the latest {n} saved messages are included.": "Hanya {n} pesan tersimpan terbaru yang disertakan.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Setiap halaman menyebutkan catatan jurnalnya. ZIP menambahkan file tanda tangan yang diperiksa verify.py."
 }

@@ -9897,5 +9897,10 @@
   "No messages to export.": "Dışa aktarılacak mesaj yok.",
   "The album is too large to forward intact.": "Albüm tek parça olarak iletilemeyecek kadar büyük.",
   "The Telegram account changed. Start a new transfer.": "Telegram hesabı değişti. Yeni bir aktarım başlatın.",
-  "This preview expired. Preview the transfer again.": "Bu önizlemenin süresi doldu. Aktarımı yeniden önizleyin."
+  "This preview expired. Preview the transfer again.": "Bu önizlemenin süresi doldu. Aktarımı yeniden önizleyin.",
+  "Save chat as images": "Sohbeti görsel olarak kaydet",
+  "Preparing page {n} of {total}": "{total} sayfadan {n}. sayfa hazırlanıyor",
+  "Loading saved messages: {n}": "Kaydedilen mesajlar yükleniyor: {n}",
+  "Only the latest {n} saved messages are included.": "Yalnızca kaydedilen son {n} mesaj dahil edildi.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "Her sayfa kendi günlük kayıtlarını belirtir. ZIP, verify.py'nin denetlediği bir imza dosyası ekler."
 }

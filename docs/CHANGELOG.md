@@ -40,6 +40,12 @@
   UTC times, reply references, attachment labels and edit/deletion marks. Long
   messages continue across pages. Rendering stays in the browser, masks possible
   secrets and clears the preview on lock or workspace/chat changes.
+- **Save chat as images** renders up to the latest 2,000 saved messages of a chat.
+  Every page ends with its journal record numbers, the key fingerprint, the check
+  command and a QR code. **Download signed ZIP** adds `pages.sig.json`, signed with
+  the workspace key and journaled as `export.image_attested`;
+  `verify.py page-01.png pages.sig.json` detects a changed page, statement or key, and
+  `--evidence` confirms every record against a signed evidence ZIP.
 - Cloud-chat history can be forwarded in order to a new private channel or
   supergroup, or an existing channel/group with posting access. A preview fixes
   the history boundary before an explicit start. Transfers retain albums, shared

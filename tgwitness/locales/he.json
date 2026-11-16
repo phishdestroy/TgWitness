@@ -9948,5 +9948,10 @@
   "No messages to export.": "אין הודעות לייצוא.",
   "The album is too large to forward intact.": "האלבום גדול מדי להעברה בשלמותו.",
   "The Telegram account changed. Start a new transfer.": "חשבון Telegram השתנה. יש להתחיל העברה חדשה.",
-  "This preview expired. Preview the transfer again.": "תוקף התצוגה המקדימה פג. יש להציג שוב תצוגה מקדימה של ההעברה."
+  "This preview expired. Preview the transfer again.": "תוקף התצוגה המקדימה פג. יש להציג שוב תצוגה מקדימה של ההעברה.",
+  "Save chat as images": "שמירת הצ'אט כתמונות",
+  "Preparing page {n} of {total}": "מכין את עמוד {n} מתוך {total}",
+  "Loading saved messages: {n}": "טוען הודעות שמורות: {n}",
+  "Only the latest {n} saved messages are included.": "נכללות רק {n} ההודעות השמורות האחרונות.",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "כל עמוד מציין את רשומות היומן שלו. קובץ ה-ZIP מוסיף קובץ חתימה ש-verify.py בודק."
 }

@@ -210,10 +210,19 @@ Two switches above the messages protect the account and the reader:
 ### Save selected messages as images
 
 In a cloud chat, choose **Select**, mark the messages, then choose **Save as image**.
-The preview offers **Light**, **Dark** and **Classic** styles. Download the displayed
-page as PNG; use Previous and Next for a longer selection. Up to 50 messages may be
-selected, and all of them must still be in the loaded chat window. The panel asks
-you to reduce an oversized selection instead of silently dropping messages.
+To capture a whole chat, choose **Save chat as images** in the chat tools menu; it
+loads up to the latest 2,000 saved messages and says when older ones are left out.
+The preview offers **Light**, **Dark** and **Classic** styles; use Previous and Next
+for longer captures. **Download signed ZIP** saves every page as PNG together with
+`pages.sig.json` and `README.txt` ([signed chat images](EVIDENCE.md#signed-chat-images)).
+Up to 50 messages may be selected, and all of them must still be in the loaded chat
+window. The panel asks you to reduce an oversized selection instead of silently
+dropping messages.
+
+Every page ends with an authenticity block: the journal record numbers it shows, the
+chat, the render time, the workspace key fingerprint, the `verify.py` command for that
+page and a QR code with the chat, key and render time. Signing requires the export
+permission and adds an `export.image_attested` record to the journal.
 
 The image includes the saved text, author, message number, UTC time, reply number,
 attachment labels and saved edit/deletion status. It uses the latest saved text
@@ -223,8 +232,8 @@ the next page with its message number and part count. Each page identifies itsel
 as rendered from saved messages. The PNG is a visual excerpt; use the archive and
 its verifier when handing over the signed records and attachments.
 
-Rendering happens in the browser without uploading the selection or making a
-Telegram request. The existing secret masker protects text, author names and
+Rendering happens in the browser without making a Telegram request; for signing,
+only each page's SHA-256 and record numbers are sent to the panel. The existing secret masker protects text, author names and
 attachment labels. The preview holds a snapshot until closed and clears on panel
 lock or a workspace/chat change. The signed journal and report selection remain
 unchanged. See [case reports](CASE_REPORTS.md) for complete report exports.

@@ -9846,5 +9846,10 @@
   "No messages to export.": "没有可导出的消息。",
   "The album is too large to forward intact.": "相册过大，无法完整转发。",
   "The Telegram account changed. Start a new transfer.": "Telegram 账号已更改。请开始新的转移。",
-  "This preview expired. Preview the transfer again.": "此预览已过期。请重新预览转移内容。"
+  "This preview expired. Preview the transfer again.": "此预览已过期。请重新预览转移内容。",
+  "Save chat as images": "将聊天保存为图片",
+  "Preparing page {n} of {total}": "正在准备第 {n} 页，共 {total} 页",
+  "Loading saved messages: {n}": "正在加载已保存的消息：{n}",
+  "Only the latest {n} saved messages are included.": "仅包含最新的 {n} 条已保存消息。",
+  "Each page names its journal records. The ZIP adds a signature file that verify.py checks.": "每页都列出其对应的日志记录。ZIP 中附带一个签名文件，可由 verify.py 校验。"
 }
