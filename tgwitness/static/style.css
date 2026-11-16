@@ -548,6 +548,7 @@ form > .health-detail { margin-top: 14px; }
 .page-heading > div { min-width: 0; }
 .page-heading > button { flex-shrink: 0; }
 .console-actions { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
+@media (max-width: 600px) { .console-actions { flex-shrink: 1; min-width: 0; } }
 .console-actions .icon { width: 15px; height: 15px; }
 .page-description { margin-top: 6px; color: var(--muted); font-size: 14px; }
 .page-kicker { margin-bottom: 8px; }
