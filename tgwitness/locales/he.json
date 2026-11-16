@@ -10007,5 +10007,6 @@
   "Confidence: low": "ודאות: נמוכה",
   "Sensitive content (18+)": "תוכן רגיש (18+)",
   "turned on by TgWitness": "הופעל על ידי TgWitness",
-  "Telegram does not let this account change it": "Telegram אינו מאפשר לחשבון זה לשנות זאת"
+  "Telegram does not let this account change it": "Telegram אינו מאפשר לחשבון זה לשנות זאת",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "הסשן הזה התחבר לפני פחות מ־24 שעות, ולכן הייצוא השתמש בסשן הרגיל במקום ב־Takeout."
 }

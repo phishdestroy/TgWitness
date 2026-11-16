@@ -9905,5 +9905,6 @@
   "Confidence: low": "可信度：低",
   "Sensitive content (18+)": "敏感內容 (18+)",
   "turned on by TgWitness": "已由 TgWitness 開啟",
-  "Telegram does not let this account change it": "Telegram 不允許此帳號變更此設定"
+  "Telegram does not let this account change it": "Telegram 不允許此帳號變更此設定",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "此工作階段登入未滿 24 小時，因此本次匯出使用了一般工作階段而非 Takeout。"
 }

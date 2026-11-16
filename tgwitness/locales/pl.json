@@ -10058,5 +10058,6 @@
   "Confidence: low": "Pewność: niska",
   "Sensitive content (18+)": "Treści wrażliwe (18+)",
   "turned on by TgWitness": "włączone przez TgWitness",
-  "Telegram does not let this account change it": "Telegram nie pozwala temu kontu tego zmienić"
+  "Telegram does not let this account change it": "Telegram nie pozwala temu kontu tego zmienić",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Ta sesja zalogowała się mniej niż 24 godziny temu, więc ten eksport użył zwykłej sesji zamiast Takeout."
 }

@@ -10028,5 +10028,6 @@
   "Confidence: low": "Уверенность: низкая",
   "Sensitive content (18+)": "Чувствительный контент (18+)",
   "turned on by TgWitness": "включён TgWitness",
-  "Telegram does not let this account change it": "Telegram не даёт этому аккаунту его менять"
+  "Telegram does not let this account change it": "Telegram не даёт этому аккаунту его менять",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Эта сессия вошла меньше 24 часов назад, поэтому экспорт шёл через обычную сессию, а не через Takeout."
 }

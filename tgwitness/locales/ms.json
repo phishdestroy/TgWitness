@@ -9905,5 +9905,6 @@
   "Confidence: low": "Keyakinan: rendah",
   "Sensitive content (18+)": "Kandungan sensitif (18+)",
   "turned on by TgWitness": "dihidupkan oleh TgWitness",
-  "Telegram does not let this account change it": "Telegram tidak membenarkan akaun ini mengubahnya"
+  "Telegram does not let this account change it": "Telegram tidak membenarkan akaun ini mengubahnya",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Sesi ini log masuk kurang daripada 24 jam lalu, jadi eksport ini menggunakan sesi biasa dan bukan Takeout."
 }

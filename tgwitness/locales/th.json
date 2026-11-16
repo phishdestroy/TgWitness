@@ -9905,5 +9905,6 @@
   "Confidence: low": "ความมั่นใจ: ต่ำ",
   "Sensitive content (18+)": "เนื้อหาที่ละเอียดอ่อน (18+)",
   "turned on by TgWitness": "เปิดโดย TgWitness",
-  "Telegram does not let this account change it": "Telegram ไม่อนุญาตให้บัญชีนี้เปลี่ยน"
+  "Telegram does not let this account change it": "Telegram ไม่อนุญาตให้บัญชีนี้เปลี่ยน",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "เซสชันนี้ลงชื่อเข้าใช้ไม่ถึง 24 ชั่วโมง การส่งออกนี้จึงใช้เซสชันปกติแทน Takeout"
 }

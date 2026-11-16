@@ -9905,5 +9905,6 @@
   "Confidence: low": "確度: 低",
   "Sensitive content (18+)": "センシティブなコンテンツ (18+)",
   "turned on by TgWitness": "TgWitness がオンにしました",
-  "Telegram does not let this account change it": "Telegram はこのアカウントでの変更を許可していません"
+  "Telegram does not let this account change it": "Telegram はこのアカウントでの変更を許可していません",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "このセッションはサインインから24時間未満のため、このエクスポートは Takeout ではなく通常のセッションを使いました。"
 }

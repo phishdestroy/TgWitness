@@ -9956,5 +9956,6 @@
   "Confidence: low": "اطمینان: پایین",
   "Sensitive content (18+)": "محتوای حساس (18+)",
   "turned on by TgWitness": "توسط TgWitness روشن شد",
-  "Telegram does not let this account change it": "Telegram اجازه نمی‌دهد این حساب آن را تغییر دهد"
+  "Telegram does not let this account change it": "Telegram اجازه نمی‌دهد این حساب آن را تغییر دهد",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "این نشست کمتر از ۲۴ ساعت پیش وارد شده است، پس این خروجی به‌جای Takeout از نشست معمولی استفاده کرد."
 }

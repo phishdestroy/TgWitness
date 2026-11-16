@@ -116,6 +116,12 @@ ONLY_SESSION_MEANING = ("All other sessions of this account were ended from this
 ONLY_SESSION_ENDED_MEANING = ("Telegram's session list shows a session other than this workspace's after this "
                               "session was made the only one.")
 AUTO_ONLY_SESSION_AFTER = 24 * 3600
+TAKEOUT_FRESH_SECONDS = 24 * 3600
+TAKEOUT_SKIPPED_MEANING = {
+    "fresh_session": "This session signed in less than 24 hours ago. Telegram answers a Takeout request from such a "
+                     "session with a data export warning to the account, so history is read without Takeout.",
+    "takeout_approval_wait": "Telegram asked to wait before the next Takeout request, so history is read without "
+                             "Takeout until then."}
 AUTO_ONLY_SESSION_EVERY = 300
 AUTO_ONLY_SESSION_MEANING = ("Setting of this workspace: end every other session of the account automatically once "
                              "Telegram allows it, 24 hours after the session key created here signed in. Telegram "
@@ -3089,6 +3095,24 @@ class Collector:
             return None
         return age(found[0]["observed_at"], now_utc())
 
+    def session_age(self):
+        from .health import age, now_utc
+        found = self.store.events_of(("account.sessions",), limit=1)
+        created = ((found[0]["payload"] or {}).get("current") or {}).get("created_at") if found else None
+        waited = age(created, now_utc()) if created else None
+        return waited if waited is not None else self.authorized_age()
+
+    def takeout_blocked(self):
+        until = max(self.store.get_setting("takeout_wait_until", 0) or 0,
+                    self.store.get_setting("history_takeout_wait_until", 0) or 0)
+        if time.time() < until:
+            return "takeout_approval_wait"
+        waited = self.session_age()
+        return "fresh_session" if waited is None or waited < TAKEOUT_FRESH_SECONDS else None
+
+    def takeout_wait(self, seconds):
+        self.store.set_setting("takeout_wait_until", time.time() + max(0, seconds or 0))
+
     async def auto_only_session(self):
         if not self.store.get_setting("auto_only_session", False) or self.store.get_setting("only_session", None):
             return
@@ -4899,12 +4923,19 @@ class Collector:
         if not isinstance(entity, types.Channel):
             yield self.client, None
             return
+        blocked = self.takeout_blocked()
+        if blocked:
+            self.note("telegram.takeout_unavailable", {"reason": blocked, "meaning": TAKEOUT_SKIPPED_MEANING[blocked]})
+            yield self.client, None
+            return
         try:
             session = await self.client(functions.account.InitTakeoutSessionRequest(
                 message_megagroups=True, message_channels=True))
             if not isinstance(session, types.account.Takeout):
                 raise ValueError("Telegram did not open a Takeout session.")
         except (TakeoutInitDelayError, RPCError, OSError, ConnectionError, TimeoutError, ValueError) as exc:
+            if isinstance(exc, TakeoutInitDelayError):
+                self.takeout_wait(exc.seconds)
             self.note("telegram.takeout_unavailable", {
                 "error_type": type(exc).__name__, "retry_after": getattr(exc, "seconds", None),
                 "meaning": "History is read without a Takeout session, about three times slower."})
