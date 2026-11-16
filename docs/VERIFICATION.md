@@ -549,6 +549,7 @@ and one signed in from its own workspace. Revisions `6c7171228`, `4d6206a52` and
 | Auth key and DC line import | Recognised as **Auth key HEX and DC**; signed in within 4 s |
 | Independent sign-in from a workspace | `key_origin: created` after 19 s |
 | **Make this the only session** on a key minutes old | Telegram refused (`FRESH_RESET_AUTHORISATION_FORBIDDEN`); the panel named the 24-hour limit and the automatic option stayed on |
+| Donor logged out 1–9 minutes after an independent sign-in (two accounts, November 2026) | The approved workspace session ended 0.1 s and under 60 s later with `AUTH_KEY_UNREGISTERED`; TgWitness now never ends the approving session |
 | Witness probe | Answers arrived as live updates after 0.9–5.0 s. Workspaces with an imported key start in Read-only and record `probe.skipped` until it is turned off |
 | A second client on the same session key for 5.5 min | 3 of 4 probe answers did not reach the collector live and were found in history (`coverage.gap`, `probe_ack_missed_live`); intake stayed marked as failed until the next live answer (`connection.restored`) |
 | New sign-in with a login code | `account.sessions` listed it under `added` 65 s after Telegram's creation time; ended from **Sessions of this account** |

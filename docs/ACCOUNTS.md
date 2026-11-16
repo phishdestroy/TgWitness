@@ -252,8 +252,15 @@ the donor connection. No existing authorization is logged out or revoked.
 **Keep the donor's original client fully closed during this step.** The initial
 connection still uses its copied key, so this mode cannot remove that initial
 parallel-use risk. Once the new authorization is connected, the owner can reopen
-the original client and use both independently. Interactive **QR code** login lets
+the original client and use both at the same time. Interactive **QR code** login lets
 the original client approve the login without copying or connecting its key here.
+
+**Do not log out or end the donor session.** When the session that approved a QR
+login ends, Telegram also ends the session it approved; in a live check the new
+authorization stopped within a second of the donor logging out. The import records
+the donor session (`session_origin.approved_by`: device, API ID and creation time).
+The session list marks it, **End session** refuses it, and **End all other sessions**
+and **Make this the only session** leave it signed in.
 
 If Telegram requests 2FA, this mode uses `twoFA` from the selected JSON when present,
 or asks for the password. A rejected imported password returns to the password form.
@@ -290,6 +297,10 @@ token acceptance automatically or revoke sessions to work around restrictions.
 **More tools → Account → Account security → Sessions of this account → End all other sessions** calls `auth.resetAuthorizations` on the
 operator's request and records `account.all_other_sessions_terminated` with the session
 counts before and after. Telegram accepts it from a session signed in for 24 hours.
+When this workspace signed in by QR from an imported session, the session that approved it
+stays signed in: TgWitness ends the others one by one with `account.resetAuthorization` and
+records `kept_approving_session`. **Make this the only session** then stops with that reason
+and changes no password.
 
 **Make this the only session** does the same for a key created by signing in from this
 workspace, then turns on a two-step password if the account has none. The panel shows that
