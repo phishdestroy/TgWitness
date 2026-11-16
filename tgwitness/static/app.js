@@ -6401,13 +6401,15 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
   const profile=state.profile,revision=state.workspaceRevision;linkPreview=null;$("chat-link-preview").replaceChildren();
   const preview=await json("interactions/preview",{link:$("chat-link").value},{profile});
   if(revision!==state.workspaceRevision||$("chat-link").value.trim()!==preview.link)return;linkPreview=preview;
-  const box=$("chat-link-preview"),open=node("button","primary",tr("Join / open"));open.type="button";
+  const request=!!preview.request_needed&&!preview.already_member;
+  const box=$("chat-link-preview"),open=node("button","primary",tr(request?"Send join request":"Join / open"));open.type="button";
   box.append(node("strong","",preview.title),node("code","target",preview.link));
   if(preview.about)box.append(node("p","",preview.about));
   const facts=[preview.participants_count!=null?tr("Members")+": "+preview.participants_count:"",
     preview.history_visible===true?tr("New members see earlier messages"):
     preview.history_visible===false?tr("New members do not see earlier messages"):""].filter(Boolean);
   if(facts.length)box.append(node("p","hint",facts.join(" · ")));
+  if(request)box.append(node("p","hint",tr("Joining needs administrator approval: Telegram sends a join request.")));
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);

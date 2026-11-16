@@ -10214,5 +10214,7 @@
   "Saved records: {n}": "السجلات المحفوظة: {n}",
   "Coverage gaps: {n}": "فجوات التغطية: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "ما الذي يغادر هذه اللوحة ومن يستلمه: يحصل مزوّد الذكاء الاصطناعي فقط على الرسائل التي يطلبها عميله؛ ويقرأ اتصال الأرشيف برمزه الخاص مساحات العمل والدردشات المسموح بها فقط؛ ويرسل الـ webhook البيانات الوصفية، ونص الرسائل فقط إذا اخترته أيضًا.",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "عملاء ذكاء اصطناعي أو سطر أوامر يقرؤون هذا الأرشيف برمز. يرى كل اتصال مساحات العمل والدردشات المختارة له فقط، ويمكن إلغاؤه في أي وقت."
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "عملاء ذكاء اصطناعي أو سطر أوامر يقرؤون هذا الأرشيف برمز. يرى كل اتصال مساحات العمل والدردشات المختارة له فقط، ويمكن إلغاؤه في أي وقت.",
+  "Joining needs administrator approval: Telegram sends a join request.": "يتطلب الانضمام موافقة المشرف: يرسل Telegram طلب انضمام.",
+  "Send join request": "إرسال طلب انضمام"
 }

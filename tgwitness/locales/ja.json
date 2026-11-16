@@ -9959,5 +9959,7 @@
   "Saved records: {n}": "保存済みの記録: {n}",
   "Coverage gaps: {n}": "カバレッジの欠落: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "このパネルから何が出ていき、誰が受け取るか: AI プロバイダーはそのクライアントが要求したメッセージだけを受け取ります。アーカイブ接続は独自のトークンで、許可したワークスペースとチャットだけを読み取ります。Webhook はメタデータを送信し、メッセージ本文は選択した場合にのみ送ります。",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "トークンでこのアーカイブを読む AI またはコマンドラインのクライアント。各接続は自分用に選ばれたワークスペースとチャットだけを参照でき、いつでも取り消せます。"
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "トークンでこのアーカイブを読む AI またはコマンドラインのクライアント。各接続は自分用に選ばれたワークスペースとチャットだけを参照でき、いつでも取り消せます。",
+  "Joining needs administrator approval: Telegram sends a join request.": "参加には管理者の承認が必要です。Telegram が参加リクエストを送信します。",
+  "Send join request": "参加リクエストを送信"
 }

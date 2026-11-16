@@ -10010,5 +10010,7 @@
   "Saved records: {n}": "رکوردهای ذخیره‌شده: {n}",
   "Coverage gaps: {n}": "شکاف‌های پوشش: {n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "چه چیزی از این پنل خارج می‌شود و چه کسی آن را دریافت می‌کند: ارائه‌دهنده هوش مصنوعی فقط پیام‌هایی را می‌گیرد که کلاینتش درخواست کند؛ اتصال بایگانی با توکن خودش فقط فضاهای کاری و گفتگوهای مجاز را می‌خواند؛ وب‌هوک فراداده می‌فرستد و متن پیام را فقط اگر خودتان انتخاب کنید.",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "کلاینت‌های هوش مصنوعی یا خط فرمان که این بایگانی را با توکن می‌خوانند. هر اتصال فقط فضاهای کاری و گفتگوهای انتخاب‌شده برای خودش را می‌بیند و هر زمان می‌توان آن را لغو کرد."
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "کلاینت‌های هوش مصنوعی یا خط فرمان که این بایگانی را با توکن می‌خوانند. هر اتصال فقط فضاهای کاری و گفتگوهای انتخاب‌شده برای خودش را می‌بیند و هر زمان می‌توان آن را لغو کرد.",
+  "Joining needs administrator approval: Telegram sends a join request.": "پیوستن به تأیید مدیر نیاز دارد: Telegram درخواست عضویت می‌فرستد.",
+  "Send join request": "ارسال درخواست عضویت"
 }

@@ -9959,5 +9959,7 @@
   "Saved records: {n}": "已儲存記錄：{n}",
   "Coverage gaps: {n}": "涵蓋缺口：{n}",
   "What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.": "哪些內容會離開此面板、由誰接收：AI 提供者只收到其用戶端請求的訊息；封存連線憑自己的權杖只讀取允許的工作區與對話；Webhook 傳送中繼資料，只有在你另外選擇時才傳送訊息文字。",
-  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "使用權杖讀取此封存的 AI 或命令列用戶端。每個連線只能看到為它選定的工作區與對話，並可隨時撤銷。"
+  "AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.": "使用權杖讀取此封存的 AI 或命令列用戶端。每個連線只能看到為它選定的工作區與對話，並可隨時撤銷。",
+  "Joining needs administrator approval: Telegram sends a join request.": "加入需要管理員核准：Telegram 會送出入群申請。",
+  "Send join request": "送出入群申請"
 }

@@ -26,6 +26,8 @@
 ## Unreleased
 
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
+- A link preview for a public group that accepts members only after an administrator's approval now says so, and
+  its button reads “Send join request”. Before, only invite links were checked, so such groups looked open.
 - Share resumable-history flood deadlines with other workers and retry admin-log reads after Premium flood waits.
 - Persist history FloodWait deadlines so other workers respect the same pause.
 - The workspace switcher shows each account with its avatar, name and a colored status (observing, observation
