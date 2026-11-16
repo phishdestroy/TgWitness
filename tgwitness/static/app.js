@@ -5670,7 +5670,8 @@ function renderChatStatus(){
   $("chat-search-form").hidden=state.chatView!=="messages";
   $("chat-search-clear").hidden=!state.chatSearch;
   for(const chip of $("chat-sub").querySelectorAll("button[data-chat-filter]"))chip.setAttribute("aria-pressed",String(chip.dataset.chatFilter!=="all"&&state.chatView==="messages"&&chip.dataset.chatFilter===state.chatFilter));
-  const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
+  const authorMessage=state.chatAuthor===null?null:state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),authorName=authorMessage?senderName(authorMessage):null;
+  const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,authorName,
     current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
     s.health?.verdict?.cause,current.source_status?.[String(state.chat)]?.state,
     modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning(),chatPick?chatPick.size:-1,chatPick?chatShown.filter(id=>!chatPick.has(id)).length:0]);
@@ -5763,8 +5764,8 @@ function renderChatStatus(){
     bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),image,build,cancel);box.append(bar);
   }
   if(state.chatAuthor!==null&&state.chatView==='messages'){
-    const who=state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),chip=node("div","chat-author-chip");
-    const author=who?senderName(who):"ID "+state.chatAuthor;chip.append(node("span","",tr("Showing only messages from {name}",{name:author})));
+    const chip=node("div","chat-author-chip");
+    const author=authorName??"ID "+state.chatAuthor;chip.append(node("span","",tr("Showing only messages from {name}",{name:author})));
     const clear=node("button","text-link",tr("Show everyone"));clear.type="button";
     clear.addEventListener("click",()=>setChatQuery({chatAuthor:null}));chip.append(clear);box.append(chip);
   }
