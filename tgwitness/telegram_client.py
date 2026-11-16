@@ -277,6 +277,7 @@ FLOOD_ERRORS = (FloodWaitError, FloodPremiumWaitError)
 EXPORTED_AUTHORIZATION_ERRORS = (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
                                  SessionExpiredError, SessionRevokedError)
 _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
+            functions.channels.CreateChannelRequest, functions.messages.ForwardMessagesRequest,
             functions.messages.ImportChatInviteRequest, functions.channels.JoinChannelRequest,
             functions.auth.AcceptLoginTokenRequest)
 _READ_RECEIPTS = (functions.messages.ReadHistoryRequest, functions.messages.ReadMessageContentsRequest,

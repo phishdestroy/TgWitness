@@ -38,7 +38,7 @@ from .live import live_archive, verify_live_export
 from .parallel import parallel_jobs, parallel_shutdown
 from .outside import outside_lines
 from .presentation import producer_line
-from .reports import REPORT_JSON, verify_report, verify_selection
+from .reports import REPORT_JSON, image_command, verify_report, verify_selection
 from .timestamps import ATTESTATION_RECORDS, tdx_lines, use_bitcoin_sources, verify_collector_attestation
 from .witness import ASSURANCE_TIERS, assurance, assurance_line, channel_head_time, check_channel, cross_check_witness, verify_dossier, verify_history_report, verify_public_proof, verify_witness
 from .witness import (
@@ -693,6 +693,8 @@ def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if argv and argv[0] == "unseal-password":
         return password_command(argv[1:])
+    if argv and argv[0].lower().endswith(".png"):
+        return image_command(argv)
     parser = verification_parser()
     args = verification_arguments(parser, argv)
     try:

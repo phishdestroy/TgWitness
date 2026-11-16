@@ -25,20 +25,63 @@
 
 ## Unreleased
 
-- Four priority lanes (`realtime`, `text`, `media`, `maintenance`) share account capacity; realtime updates always proceed and are never slowed by downloads or rechecks. Each lane tracks per-account FloodWait quotas, and the text and media lanes run on separate connections so a wait on one does not block the other.
-- Self-destructing media has its own download pool with priority over all other media; if expiry is less than 30 seconds away, all other media downloads on that account pause until the ephemeral file is secured.
-- A background worker refreshes expired `file_reference` tokens in batches of up to 100 message IDs per peer, reducing permanently failed attachment downloads from expired references.
-- Distributed export now works for private supergroups: only accounts confirmed as members receive a split range; membership is checked via `GetParticipants` before assigning any work.
-- On resume, 1 % of already-downloaded message IDs are re-verified in the background while the export continues; divergences go to `integrity.diverged.jsonl` and a summary line (`sampled integrity ok: N/N`) appears in the export result.
-- Old closed export segments (`.jsonl`) are recompressed to `.jsonl.zst` in the background without blocking the active writer; the hash chain is preserved.
-- SQLite WAL mode, `synchronous=NORMAL`, 32 MB cache and 256 MB mmap are applied to every workspace connection and can be overridden per account via the `sqlite_tune` workspace setting.
-- Media GC removes shared files whose hard-link count has dropped to one and have no entry in the journal; it runs on request and reports bytes freed.
-- WARP tunnels for all accounts start in parallel (rate-limited to avoid Cloudflare registration floods) instead of one after another; each tunnel is health-checked every 60 seconds and restarted automatically when its EMA latency or fail rate degrades.
-- MTProxy pool tracks EMA latency and fail rate per proxy; a proxy is ejected when its fail rate over five minutes exceeds 20 %, and new requests route around it without interrupting active sessions.
-- New accounts start with doubled request gaps; the multiplier decreases linearly to 1.0 over the first 15 minutes, reducing early account bans.
-- A second Telegram account can replay random message IDs from collected chats and write divergence records when content differs; the witness run is fully async with less than 5 % throughput overhead.
-- OpenTelemetry-compatible per-task spans are recorded in memory and exposed via `/api/trace`; when `OTEL_EXPORTER_OTLP_ENDPOINT` is set, spans are exported to that collector.
-- Message processing is split into `fetch → parse → sign → write → index` stages connected by bounded asyncio queues; CPU-bound signing and writing run in a thread executor so network fetches are never blocked by disk I/O or cryptography.
+- Bulk account pause/resume prevents overlapping confirmations and discards stale
+  operations after session resets. Failed responses no longer claim that the
+  collector was unchanged; account states are refreshed without repeating commands.
+- Overview clears cached summaries and charts on account or sign-in changes and ignores responses from earlier sessions. Loading and failed reads have separate states, with a retry that respects the server's requested delay and preserves keyboard focus. Failed refreshes retain the same workspace's last successful data with its timestamp.
+- Account cards show the collector heartbeat and the last received Telegram event as separate times.
+- Secret Chats add local phrase search with matching-message navigation, keyboard
+  controls and highlights that retain the surrounding conversation. Searches stay
+  within loaded records and are cleared at workspace/session boundaries.
+- Loading older Secret Chat records preserves the visible message and its reading
+  position; refreshes retain the current search match and unsent message draft.
+- Selected cloud-chat messages can be downloaded as PNG with Light, Dark or
+  Classic styling, a preview and page navigation. Images retain message numbers,
+  UTC times, reply references, attachment labels and edit/deletion marks. Long
+  messages continue across pages. Rendering stays in the browser, masks possible
+  secrets and clears the preview on lock or workspace/chat changes.
+- **Save chat as images** renders up to the latest 2,000 saved messages of a chat.
+  Every page ends with its journal record numbers, the key fingerprint, the check
+  command and a QR code. **Download signed ZIP** adds `pages.sig.json`, signed with
+  the workspace key and journaled as `export.image_attested`;
+  `verify.py page-01.png pages.sig.json` detects a changed page, statement or key, and
+  `--evidence` confirms every record against a signed evidence ZIP.
+- Cloud-chat history can be forwarded in order to a new private channel or
+  supergroup, or an existing channel/group with posting access. A preview fixes
+  the history boundary before an explicit start. Transfers retain albums, shared
+  pacing and FloodWait, support pause/resume/cancel, and journal confirmed sends
+  and skips. Unknown send results require review; unknown creation results never
+  trigger an automatic second creation. Available to the main administrator.
+- Forwarding restores durable progress after journal failures and releases the
+  account after failed starts, resumes and shutdown writes. Cancellation survives
+  rejected requests and a final empty history page; stale polling errors no longer
+  replace newer dialog feedback.
+- The account report's activity map links each large channel or supergroup gap to
+  its marked position in the paginated transcript; wide tables scroll inside their
+  cards on narrow screens.
+- Long transcripts get a page index with a UTC month calendar, date and record
+  ranges per page, and first/last/nearby page links that work without JavaScript.
+- A timed-out dedicated media connection falls back to the standard file connection
+  instead of pausing the download; the data center retries its dedicated route once
+  per minute in the background.
+- Report packaging reuses parsed translation catalogues, cutting the packaging time
+  of a 14,691-message export by about 16 %.
+- `/api/trace` shows the main administrator recent panel API requests of the workspace with method, route template, status and duration, plus median, 95th percentile and slowest time per route. Request paths, parameters and bodies are not recorded.
+- A FloodWait while reading history or exporting a chat no longer pauses live
+  observation. The wait stays limited to Telegram's history method, which the
+  account's other history readers already respect; live updates keep arriving.
+- Chat pagination ends the opening animation before preserving the reading
+  position. Reduced-motion mode disables that animation entirely, avoiding an
+  intermittent shift when earlier messages appear.
+- The two newest paragraphs of the website notice are translated in all 25
+  catalogues instead of appearing in English.
+- The static demo's Console link opens the correct route in a new tab.
+- The chat list adds quick filters with counts for priority chats, captured changes
+  and access/recheck issues, removable filter chips, multiword name/ID search and
+  keyboard navigation. Large lists render in batches of 80 while keeping the open
+  and focused chat available. Clearing filters preserves pending priority requests.
+- Swarm and the system log fit phone screens: account cards, tools and log actions
+  wrap instead of widening the page.
 - Connection: the route check no longer creates a new Telegram authorization key every minute; it measures one unauthenticated MTProto round trip to the account's data center and reports the connection and round-trip times separately. A moving average marks a route slow or unavailable in the journal; a slow WARP route can be re-rolled to another Cloudflare endpoint or a new WARP identity, automatically at most once every 30 minutes. A WARP endpoint name that resolves to IPv6 and IPv4 now uses IPv4.
 - Panel speed: the panel opens with one `/api/bootstrap` request instead of five in a row; the live update stream stays open while the tab is briefly hidden, reconnects within half a second after its regular end and honours `Too many live streams`; settings, preferences and the account list are no longer requested twice on opening; coverage markers in a chat use `/api/chats/{id}/coverage` with only the records of that chat and the account; avatars of a list arrive in one `/api/avatars` request.
 - An idle Telegram connection stays open for two minutes after the last panel action instead of closing after each one.

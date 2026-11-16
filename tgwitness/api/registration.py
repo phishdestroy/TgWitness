@@ -1,6 +1,7 @@
 from . import access as routes_access
 from . import accounts as routes_accounts
 from . import chats as routes_chats
+from . import forwarding as routes_forwarding
 from . import cloud as routes_cloud
 from . import documentation as routes_documentation
 from . import evidence as routes_evidence
@@ -79,6 +80,7 @@ def register(app, ctx):
     router.get("/api/swarm", dependencies=[Depends(authenticate)])(routes_swarm.swarm)
     router.get("/api/metrics", dependencies=[Depends(authenticate)])(routes_swarm.metrics)
     router.get("/api/flight", dependencies=[Depends(authenticate)])(routes_swarm.flight_record)
+    router.get("/api/trace", dependencies=[Depends(authenticate)])(routes_swarm.trace)
     router.get("/api/system-map", dependencies=[Depends(authenticate)])(system_map)
     app.include_router(router)
     router = APIRouter()
@@ -479,6 +481,10 @@ def register(app, ctx):
     router.post("/api/interactions/read-only", dependencies=[Depends(authenticate)])(
         routes_chats.interaction_read_only
     )
+    router.get("/api/history-forward", dependencies=[Depends(authenticate)])(routes_forwarding.current)
+    router.post("/api/history-forward/plan", dependencies=[Depends(authenticate)])(routes_forwarding.plan)
+    router.post("/api/history-forward/start", dependencies=[Depends(authenticate)])(routes_forwarding.start)
+    router.post("/api/history-forward/{job_id}/{action}", dependencies=[Depends(authenticate)])(routes_forwarding.control)
     router.get("/api/interactions/{request_id}", dependencies=[Depends(authenticate)])(
         routes_chats.interaction_state
     )
@@ -588,6 +594,10 @@ def register(app, ctx):
     router.get("/api/chats/{chat_id}/messages", dependencies=[Depends(authenticate)])(
         routes_chats.chat_messages
     )
+    router.post("/api/chats/{chat_id}/image-attestation", dependencies=[Depends(authenticate)])(
+        routes_chats.image_attestation
+    )
+    router.post("/api/image-qr", dependencies=[Depends(authenticate)])(routes_chats.image_qr)
     router.get("/api/chats/{chat_id}/authors", dependencies=[Depends(authenticate)])(
         routes_chats.chat_authors
     )

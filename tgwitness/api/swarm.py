@@ -132,6 +132,12 @@ async def metrics(request: Request, *, ctx=Depends(current_context)):
     return Response(text, media_type=CONTENT_TYPE, headers={"Cache-Control": "no-store"})
 
 
+async def trace(request: Request, *, ctx=Depends(current_context)):
+    from ..obs.trace import TRACER
+    admin(request)
+    return JSONResponse(TRACER.public(ctx.profile_id), headers={"Cache-Control": "no-store"})
+
+
 async def flight_record(request: Request, *, ctx=Depends(current_context)):
     from ..obs.flight_recorder import RECORDER
     admin(request)

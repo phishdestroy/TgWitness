@@ -299,9 +299,11 @@ explains the choice and links Telegram's documentation for each point.
   Missing device fields come from bundled opentele2 catalogs
   ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
 - **Your own pair.** Enter it under **API ID + Hash** and TgWitness uses it instead of
-  the pool. For material intended for court, create a pair at my.telegram.org and enter it
-  before collection starts ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
-  Create the pair and collect with a dedicated account, not a personal one.
+  the pool. A built-in pair is recorded for court in the same way (next point). In the
+  project's experience a new personal pair from my.telegram.org gets most accounts logged
+  out, so use one only when a case requires your own application: create it with a
+  dedicated account and enter it before collection starts
+  ([API ID and API hash](ACCOUNTS.md#before-you-start-api-id-and-api-hash)).
 - Each `observation.started` record names the `api_id` (never the hash), whether the
   pair is built-in or the operator's own, the client description and the route type.
   Reports and `custody.json` list them ([producer](EVIDENCE.md#producer)), so a

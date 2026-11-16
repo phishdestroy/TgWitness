@@ -23,24 +23,74 @@ export function taskInfo(activity) {
 const STOP_REASONS = {operator: 'Stopped from the panel', shutdown: 'TgWitness was shut down'};
 
 export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize, openChatIn}) {
-  let activity = null, loadedAt = 0, loading = false, loadedFor = null;
-  let live = null, liveAt = 0, liveLoading = false, liveFor = null, ticker = null;
-  const number = value => Number(value || 0).toLocaleString(document.documentElement.lang || undefined, {maximumFractionDigits: 1});
+  let session = null;
+  const resources = {activity: {interval: 60000}, live: {interval: 10000}};
+  const sessionKey = () => getState().workspaceRevision + ':' + getState().profile;
+  window.addEventListener('tgwitness:lock', () => resetSession(null));
 
-  async function loadLive(profile) {
-    if (liveLoading || (liveFor === profile && Date.now() - liveAt < 10000)) return;
-    liveLoading = true;
+  function resetSession(next) {
+    session = next;
+    for (const resource of Object.values(resources)) {
+      resource.request?.abort();
+      Object.assign(resource, {value: null, checkedAt: 0, loadedAt: 0, retryAt: 0, error: false, request: null});
+    }
+    root.replaceChildren();
+  }
+
+  async function loadResource(name, force = false) {
+    const resource = resources[name], now = Date.now();
+    if (resource.request || now < resource.retryAt || (!force && resource.checkedAt && now - resource.checkedAt < resource.interval)) return;
+    const key = session, profile = getState().profile, request = new AbortController();
+    const current = () => resource.request === request && session === key && sessionKey() === key && !!getState().status;
+    resource.request = request;
+    if (force) render();
     try {
-      const next = await json('overview/live');
-      if (getState().profile !== profile) return;
-      live = next; liveAt = Date.now(); liveFor = profile;
-      render();
-    } catch {
-      if (liveFor !== profile) live = null;
+      const next = await json('overview/' + name, undefined, {profile, signal: request.signal});
+      if (!current()) return;
+      resource.value = next; resource.loadedAt = Date.now(); resource.error = false; resource.retryAt = 0;
+    } catch (error) {
+      if (!current()) return;
+      resource.error = true;
+      resource.retryAt = Date.now() + Math.max(0, Number(error.retryAfterMs) || 0);
     } finally {
-      liveLoading = false;
+      if (current()) {
+        resource.request = null; resource.checkedAt = Date.now();
+        render();
+      }
     }
   }
+
+  function readState(name) {
+    const resource = resources[name];
+    if (resource.value && !resource.error) return null;
+    const box = node('div', 'home-activity home-request-state');
+    box.setAttribute('role', 'status');
+    box.setAttribute('aria-busy', String(!!resource.request));
+    box.append(node('p', resource.error && !resource.request ? 'home-warning' : 'home-empty',
+      tr(resource.request || !resource.error ? 'Loading…' : 'Could not load data')));
+    if (resource.error) {
+      if (resource.loadedAt) box.append(node('small', 'home-note', tr('Last update') + ': ' + formatTime(new Date(resource.loadedAt).toISOString())));
+      if (resource.retryAt > Date.now()) box.append(node('small', 'home-note', tr('Next attempt: {time}', {time: formatTime(new Date(resource.retryAt).toISOString())})));
+      const retry = node('button', 'secondary small', tr('Retry'));
+      retry.type = 'button'; retry.dataset.overviewRetry = name;
+      retry.disabled = !!resource.request || Date.now() < resource.retryAt;
+      retry.addEventListener('click', () => loadResource(name, true));
+      box.append(retry);
+    }
+    return box;
+  }
+
+  function observationFacts(collector) {
+    if (!collector.has_session && !collector.last_heartbeat && !collector.last_update_at) return null;
+    const box = node('div', 'home-observation');
+    for (const [key, label] of [['last_heartbeat', 'Collector heartbeat: {time}'], ['last_update_at', 'Last event received: {time}']]) {
+      const value = collector[key], time = value ? formatTime(value) : '—';
+      box.append(node('p', 'home-note', tr(label, {time})));
+    }
+    return box;
+  }
+  let ticker = null;
+  const number = value => Number(value || 0).toLocaleString(document.documentElement.lang || undefined, {maximumFractionDigits: 1});
 
   function ago(iso) {
     const seconds = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 1000));
@@ -68,12 +118,17 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
   }
 
   function tick() {
-    if (!root?.isConnected || document.hidden || getState().view !== 'start') return;
+    if (!root?.isConnected || document.hidden || getState().view !== 'start' || !getState().status) return;
+    for (const button of root.querySelectorAll('[data-overview-retry]')) {
+      const resource = resources[button.dataset.overviewRetry];
+      button.disabled = !!resource.request || Date.now() < resource.retryAt;
+    }
     for (const element of root.querySelectorAll('.home-clock[data-at]'))
       element.textContent = element.dataset.format === 'ago' ? ago(element.dataset.at) : lasting(element.dataset.at);
   }
 
   function hero(state) {
+    const live = resources.live.value;
     const collector = state.status?.collector || {}, observation = live?.observation || {};
     const running = !!collector.running, starting = collector.activity?.task === 'starting_observation';
     const none = !running && !starting && !collector.has_session && !state.status?.demo;
@@ -89,12 +144,14 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       action.type = 'button';
       action.addEventListener('click', () => busy(action, async () => {
         await json('collector/' + (running ? 'stop' : 'start'), {});
-        liveAt = 0;
+        resources.live.checkedAt = 0;
         await refresh();
       }));
       head.append(action);
     }
     box.append(head);
+    const pending = readState('live');
+    if (pending) box.append(pending);
     const facts = node('p', 'home-hero-facts');
     if (none) {
       const connect = node('button', 'primary', tr('Connect account'));
@@ -126,6 +183,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
   }
 
   function chatsCard(state) {
+    const live = resources.live.value;
     if (!live) return null;
     const box = node('section', 'home-card home-chats'), head = node('div', 'home-heading');
     head.append(node('h2', '', tr('Chats')));
@@ -156,6 +214,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
   }
 
   function witnessesCard() {
+    const live = resources.live.value;
     if (!live || (!live.witnesses && !live.evidence_enabled)) return null;
     const box = node('section', 'home-card home-witnesses'), head = node('div', 'home-heading');
     head.append(node('h2', '', tr('Time witnesses')));
@@ -175,7 +234,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       verify.addEventListener('click', () => busy(verify, async () => {
         await json('evidence/anchor', {});
         toast(tr('An independent timestamp was requested. Results appear in a minute.'));
-        liveAt = 0;
+        resources.live.checkedAt = 0;
       }));
       box.append(verify);
     }
@@ -188,26 +247,16 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     return element;
   };
 
-  async function loadActivity(profile) {
-    if (loading || (loadedFor === profile && Date.now() - loadedAt < 60000)) return;
-    loading = true;
-    try {
-      activity = await json('overview/activity');
-      loadedAt = Date.now(); loadedFor = profile;
-      render();
-    } catch {
-      activity = null;
-    } finally {
-      loading = false;
-    }
-  }
-
   function chart() {
+    const activity = resources.activity.value;
     const box = node('section', 'home-card home-chart');
     const head = node('div', 'home-heading');
     const sub = node('span', 'home-sub', tr('last {n} days, this account', {n: activity?.days || 60}));
     head.append(node('h2', '', tr('Saved by day')), sub);
     box.append(head);
+    const pending = readState('activity');
+    if (pending) box.append(pending);
+    if (!activity) return box;
     const days = activity?.days || 60, start = activity ? new Date(activity.since + 'T00:00:00Z') : new Date(Date.now() - (days - 1) * 86400000);
     const byDay = new Map((activity?.series || []).map(item => [item.day, item]));
     const values = [...Array(days).keys()].map(index => {
@@ -302,6 +351,8 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     who.append(node('strong', '', profile.label), node('small', '', account.username ? '@' + account.username : account.id ? 'ID ' + account.id : tr('No Telegram account yet')));
     head.append(initial, who, chip(info.kind, tr(info.label)));
     card.append(head, activityLine(profile));
+    const observed = observationFacts(collector);
+    if (observed) card.append(observed);
     const pause = collector.activity?.telegram_pause_until;
     if (pause) card.append(node('p', 'home-warning', tr('Telegram asked to pause requests until {time}.', {time: formatTime(new Date(pause * 1000).toISOString())})));
     const actions = node('div', 'home-actions');
@@ -422,9 +473,13 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
 
   function render() {
       const state = getState();
-      if (!root || !state.status) return;
-      loadActivity(state.profile);
-      loadLive(state.profile);
+      if (!root) return;
+      const next = state.status ? sessionKey() : null;
+      if (session !== next) resetSession(next);
+      if (!state.status) {root.replaceChildren(); return;}
+      const focused = root.contains(document.activeElement) ? document.activeElement.dataset.overviewRetry || document.activeElement.dataset.overviewFocus : null;
+      if (!document.hidden && state.view === 'start') loadResource('activity');
+      if (!document.hidden && state.view === 'start') loadResource('live');
       if (!ticker) ticker = setInterval(tick, 1000);
       const profiles = (state.profiles && state.profiles.length) ? state.profiles.map(profile => profile.id === state.profile ? {...profile, collector: state.status.collector} : profile)
         : [{id: state.profile, label: tr('Main workspace'), collector: state.status.collector, health: state.status.health}];
@@ -446,6 +501,11 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       const layout = node('div', 'home-layout');
       layout.append(main, side);
       root.replaceChildren(hero(state), layout);
+      if (focused) {
+        const button = root.querySelector('[data-overview-retry="' + focused + '"]');
+        const target = button && !button.disabled ? button : root.querySelector(focused === 'activity' ? '.home-chart h2' : '.home-hero h2');
+        if (target) {target.dataset.overviewFocus = focused; target.tabIndex = target.tagName === 'BUTTON' ? 0 : -1; target.focus({preventScroll: true});}
+      }
   }
 
   return {render};

@@ -80,6 +80,18 @@ Select an account to inspect its path. Available but disabled services stay visi
 
 ## Start here
 
+The overview clears its account-specific chart and summary when you switch accounts
+or sign in again. Loading, failed reads and a period with no saved records have
+separate states. **Retry** repeats the failed read; if the server requests a wait,
+the next attempt time appears. A failed refresh keeps the last successful data for
+the same workspace and labels it with its last update time.
+
+Each connected account shows **Collector heartbeat** and **Last event received**
+separately. The first is collector activity; the second is the latest Telegram
+update received. A quiet source can leave the second time unchanged while the
+collector keeps running. Open the collection-status menu for connection, intake,
+source and attachment diagnostics.
+
 Choose a task. **Export my account** downloads what the account can read now.
 **Follow an investigation** records new messages, observed edits and deletion notices
 from the chats you choose. While observation is paused, Chats, Journal and Sources
@@ -108,10 +120,27 @@ Preserved-attachment journal entries show the observed type, name and byte size.
 New download outcomes also retain the media kind and duration when Telegram provides
 them. Older signed records stay unchanged; absent metadata is not reconstructed.
 
-- Search the list by name or ID. **Choose** adds or removes watched chats.
+- Search the list by name or ID. Several words match in any order, including a
+  name and part of an ID together. **Choose** adds or removes watched chats.
   **Open Telegram link** takes a username or invite link and saves a preview to the
   journal. **Join / open and observe** then joins the chat and adds it to your sources;
   opening a bot sends it `/start`.
+- The list has four quick filters: **All**, **Priority**, **Changes** (saved edits
+  or deletion notices), and **Needs attention** (lost or unconfirmed access, messages not found on recheck,
+  failed media, history retries or Telegram restrictions). Counts respect the
+  search and type filter; a quick filter replaces the state filter. These choices
+  stay in the URL for reloads and Back/Forward navigation.
+  **Needs attention** does not label a message as deleted. Type, state and custom
+  sorting remain visible as removable chips when **Filters** is collapsed.
+- Large lists show 80 matches at a time; **Show more** adds the next 80. The open
+  chat and a focused row stay available when they match, even outside that batch.
+  The counter shows displayed chats out of all matches. Search covers the entire
+  list, including chats that have not been displayed yet.
+- From search, **↓** moves to the first result, **↑** to the last displayed result,
+  and **Enter** opens the first match. Within the list, **↑/↓** and **Home/End**
+  move focus; **Enter** opens the focused chat. **Escape** returns to search, where
+  pressing it again clears the query. **Clear filters** resets the list without
+  changing collection or the open conversation.
 - The chat header counts messages **deleted, text kept**, **deleted before saving**
   and **not found on recheck**. Each count is a button that shows only those messages;
   press it again to show all. **Deleted** and **Not found at recheck** on a message open
@@ -177,6 +206,85 @@ Two switches above the messages protect the account and the reader:
   (card numbers are checked with the Luhn sum). **Show** reveals one value; the reveal is
   recorded in the journal. Turning masking off for this browser is recorded too.
   Only the display changes: the original records and every export keep the full text.
+
+### Save selected messages as images
+
+In a cloud chat, choose **Select**, mark the messages, then choose **Save as image**.
+To capture a whole chat, choose **Save chat as images** in the chat tools menu; it
+loads up to the latest 2,000 saved messages and says when older ones are left out.
+The preview offers **Light**, **Dark** and **Classic** styles; use Previous and Next
+for longer captures. **Download signed ZIP** saves every page as PNG together with
+`pages.sig.json` and `README.txt` ([signed chat images](EVIDENCE.md#signed-chat-images)).
+Up to 50 messages may be selected, and all of them must still be in the loaded chat
+window. The panel asks you to reduce an oversized selection instead of silently
+dropping messages.
+
+Every page ends with an authenticity block: the journal record numbers it shows, the
+chat, the render time, the workspace key fingerprint, the `verify.py` command for that
+page and a QR code with the chat, key and render time. Signing requires the export
+permission and adds an `export.image_attested` record to the journal.
+
+The image includes the saved text, author, message number, UTC time, reply number,
+attachment labels and saved edit/deletion status. It uses the latest saved text
+with the number of retained versions; attachment contents, inline buttons,
+reactions and earlier text versions are not rendered. A long message continues on
+the next page with its message number and part count. Each page identifies itself
+as rendered from saved messages. The PNG is a visual excerpt; use the archive and
+its verifier when handing over the signed records and attachments.
+
+Rendering happens in the browser without making a Telegram request; for signing,
+only each page's SHA-256 and record numbers are sent to the panel. The existing secret masker protects text, author names and
+attachment labels. The preview holds a snapshot until closed and clears on panel
+lock or a workspace/chat change. The signed journal and report selection remain
+unchanged. See [case reports](CASE_REPORTS.md) for complete report exports.
+
+### Forward a chat to a channel or group
+
+The main administrator can open a saved cloud chat and choose **Forward chat**
+from its tools menu. Choose **New channel**, **New group**, or **Existing channel
+or group**. New destinations are private; an existing destination uses its numeric
+Telegram ID and must allow this account to post. Forum destinations are not supported.
+
+Pause observation or another active account job and enable Telegram actions before
+previewing. Read-only accounts and the **Evidence for a case** goal block transfers.
+**Preview** reads the accessible Telegram history boundary and checks the destination.
+It does not create a destination or send messages. **Start** starts the transfer;
+the preview expires after ten minutes. One transfer can be active per workspace.
+
+The transfer reads Telegram history from oldest to newest, through the last message
+seen in the preview. It is not limited to the messages already saved in TgWitness.
+Messages arriving above that boundary are excluded. Native forwarding preserves
+Telegram's available author attribution and media without downloading and uploading
+copies. Albums within the boundary stay together. Notifications are silent. Replies,
+topic structure, reactions, edits and deleted or inaccessible messages are not
+reconstructed. Secret Chats are outside this workflow. Telegram's content protection
+and posting restrictions remain in force.
+
+The panel shows confirmed sends, skips, state and the next allowed attempt time.
+Service messages and individually protected messages are skipped with a recorded
+reason. Account message spacing and hourly limits apply to every message; an album
+waits until its reserved slots are due. FloodWait and slow-mode pauses update the
+account's shared RPC backoff. The account's existing pacing defaults remain unchanged.
+
+**Pause** stops between requests; **Cancel** stops remaining work without removing
+messages already sent or deleting a created destination. An in-flight request may
+finish before either action takes effect. Closing the dialog does not cancel a job.
+After a process restart, unfinished jobs require an explicit **Resume**. A lost or
+incomplete send response pauses the job for review: inspect the destination before
+resuming. A retry retains the stored Telegram random IDs and confirmed counts;
+this is not a guarantee of indefinite deduplication by Telegram. An unknown creation
+result cannot be resumed automatically: check Telegram and cancel the old job before
+starting a new transfer to the destination that was created, if any.
+
+If saving a job or its journal entry fails, the worker restores the last saved
+state and releases the account. A send or creation that may already have reached
+Telegram remains marked for review. Retry a failed start or resume after storage
+is available again; confirmed progress advances only with its journal entry.
+
+Signed `interaction.forward.*` journal entries record the boundary, destination,
+confirmed source/destination message IDs and skips. They document the transfer;
+they do not replace the original signed observations and exports.
+
 
 ## Journal
 
@@ -310,6 +418,13 @@ Progress survives a restart; attachments follow your media settings. See
   [account security](ACCOUNTS.md#create-an-independent-authorization).
   **Account security → Witness probe** uses a second workspace to check that this
   session receives updates live; see [witness probe](ACCOUNTS.md#witness-probe).
+
+Bulk pause and resume keep the confirmed selection within the session where it
+was opened. Controls stay disabled while confirmation or execution is pending;
+changing workspaces or locking the panel cancels the remaining commands.
+After execution, the panel refreshes account states. A failed request is reported
+as a request failure, because the server may already have applied the command.
+Commands are not automatically repeated.
 
 ## Extras
 

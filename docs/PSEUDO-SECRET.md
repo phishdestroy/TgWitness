@@ -80,6 +80,28 @@ imported cloud session does not transfer those keys. Secret-chat key material an
 counters use the workspace vault; preserved messages and decrypted files use the
 normal workspace storage protections.
 
+## Find saved messages
+
+Use **Search messages** inside an open chat to find a literal phrase, ignoring
+case. **Previous** and **Next**, or Enter and Shift+Enter in the search field,
+move between matching messages. The counter counts messages; the first matching
+phrase in each message is highlighted. Escape clears the search.
+
+Search keeps the surrounding conversation, saved files and deletion notices
+visible. It searches the records already loaded in the panel. When earlier
+records remain, the panel says so; **Load older records** extends the history and
+updates the search results while keeping the current message in place.
+
+Each chat keeps its search while you switch within the same workspace. Locking
+the panel or changing workspaces clears those searches. Search terms stay in the
+page's memory and are not stored in browser storage or sent as API queries.
+Searching does not send Telegram messages or typing/read notices. The existing
+visibility settings still govern opening a chat and other actions.
+
+**Build report** keeps the selected chat's report scope; a display search does
+not silently restrict the exported records. Preview the report's selection
+before downloading it.
+
 ## Persistence and interaction controls
 
 The integrated implementation uses durable journal lookup for duplicate detection,

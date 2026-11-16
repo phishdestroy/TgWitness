@@ -96,6 +96,8 @@ DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})
 DEMO_STATIC["demo/system-map-data.js"] = "website/demo/system-map-data.js"
 DEMO_STATIC["demo/views/secret-chats.js"] = "tgwitness/static/views/secret-chats.js"
+DEMO_STATIC["demo/views/message-image.js"] = "tgwitness/static/views/message-image.js"
+DEMO_STATIC["demo/views/history-forward.js"] = "tgwitness/static/views/history-forward.js"
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name for name in ("visibility.js", "visibility.css")})
 DEMO_STATIC["demo/views/profile-collection.js"] = "tgwitness/static/views/profile-collection.js"
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
@@ -875,6 +877,7 @@ def build_demo(read_public, write):
         (*DEMO_DICTIONARIES, *GUIDE_DICTIONARIES))).hexdigest()[:16]
     for target, source in DEMO_PAGES.items():
         page = read_public(source).decode("utf-8").replace('href="/"', 'href="../"')
+        page = page.replace('href="/system-log"', 'href="?route=%2Fsystem-log"')
         page = re.sub(r'\b(src|href)="/(?=[A-Za-z])', r'\1="', page)
         guide = target != "demo/index.html"
         original_loader = ('<script src="guide-locale.js"></script>' if guide

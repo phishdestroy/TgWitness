@@ -25,6 +25,11 @@ the original languages.
 | `english_fallbacks.json` in the package | Compatibility fallback keys; every current key also has an entry in each translation |
 | [`i18n_keys.py`](../../tools/i18n_keys.py) | Lists interface strings that translations need to cover |
 
+Server-side dictionary reads reuse up to eight parsed catalogues, so each page of
+a long report does not reload its translations. A change to either the language
+file or English fallback file invalidates that catalogue on the next dictionary
+request. Callers receive separate dictionaries, including their plural forms.
+
 ## Update a translation
 
 Preserve placeholders and markup, and check the actual UI in the selected language.

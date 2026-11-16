@@ -11,6 +11,81 @@ export function createSecretChats(context) {
   const startDetails = node('details', 'secret-new'), startSummary = node('summary', '', tr('Start chat'));
   find('secret-start').before(startDetails);startDetails.append(startSummary, find('secret-start'));
 
+
+  const threadSearches = new Map();
+  const searchBar = node('div', 'secret-message-search'), searchInput = node('input');
+  const searchStatus = node('p', 'secret-search-status'), searchScope = node('p', 'hint secret-search-scope');
+  const searchPrevious = node('button', 'quiet', tr('Previous')), searchNext = node('button', 'quiet', tr('Next'));
+  const searchClear = node('button', 'quiet', tr('Clear'));
+  searchBar.setAttribute('role', 'search');searchBar.setAttribute('aria-label', tr('Search messages'));
+  searchInput.type = 'search';searchInput.maxLength = 300;searchInput.autocomplete = 'off';
+  searchInput.placeholder = tr('Search messages');searchInput.setAttribute('aria-label', tr('Search messages'));
+  searchInput.dataset.focusKey = 'message-search';searchStatus.setAttribute('role', 'status');
+  searchStatus.setAttribute('aria-atomic', 'true');
+  for (const [button, key] of [[searchPrevious, 'previous'], [searchNext, 'next'], [searchClear, 'clear']]) {
+    button.type = 'button';button.dataset.focusKey = 'search-' + key;
+    button.setAttribute('aria-label', button.textContent + ' · ' + tr('Search messages'));
+  }
+  searchScope.textContent = tr('Earlier records are available. Load older records to see more history.');
+  const searchActions = node('div', 'secret-search-actions');searchActions.append(searchPrevious, searchNext, searchClear);
+  searchBar.append(searchInput, searchActions, searchStatus, searchScope);
+  function searchState() {
+    if (!threadSearches.has(selected)) threadSearches.set(selected, {query: '', record: null});
+    return threadSearches.get(selected);
+  }
+  function focusMatch(feed, mark) {
+    feed.scrollTop += mark.getBoundingClientRect().top - feed.getBoundingClientRect().top - feed.clientHeight / 2 + mark.getBoundingClientRect().height / 2;
+  }
+  function searchThread(feed, jump = false) {
+    const state = searchState(), query = state.query.trim(), matches = [];
+    const pattern = query ? new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'iu') : null;
+    for (const text of feed.querySelectorAll('.secret-text')) {
+      const value = text.textContent, found = pattern?.exec(value);
+      text.replaceChildren(document.createTextNode(value));
+      if (!found) continue;
+      const mark = node('mark', 'secret-search-match', found[0]);
+      mark.dataset.recordSeq = text.closest('[data-record-seq]').dataset.recordSeq;
+      text.replaceChildren(document.createTextNode(value.slice(0, found.index)), mark,
+        document.createTextNode(value.slice(found.index + found[0].length)));
+      matches.push(mark);
+    }
+    const index = Math.max(0, matches.findIndex(mark => mark.dataset.recordSeq === state.record));
+    state.record = matches[index]?.dataset.recordSeq || null;
+    for (const mark of matches) mark.setAttribute('aria-current', String(mark.dataset.recordSeq === state.record));
+    searchPrevious.disabled = searchNext.disabled = !matches.length;
+    searchClear.disabled = !state.query;searchStatus.hidden = !query;searchScope.hidden = !view.next_before;
+    const position = node('bdi', '', (matches.length ? index + 1 : 0).toLocaleString(document.documentElement.lang || undefined) +
+      ' / ' + matches.length.toLocaleString(document.documentElement.lang || undefined));
+    position.dir = 'ltr';
+    searchStatus.replaceChildren(...(matches.length ? [document.createTextNode(tr('Messages') + ': '), position] : [document.createTextNode(tr('No matches.'))]));
+    if (jump && matches.length) focusMatch(feed, matches[index]);
+  }
+  function moveMatch(direction) {
+    const feed = find('secret-thread').querySelector('.secret-feed');if (!feed) return;
+    const matches = [...feed.querySelectorAll('.secret-search-match')];if (!matches.length) return;
+    const state = searchState(), current = matches.findIndex(mark => mark.dataset.recordSeq === state.record);
+    const next = matches[(current + direction + matches.length) % matches.length];state.record = next.dataset.recordSeq;
+    for (const mark of matches) mark.setAttribute('aria-current', String(mark === next));
+    searchStatus.querySelector('bdi').textContent = (matches.indexOf(next) + 1).toLocaleString(document.documentElement.lang || undefined) +
+      ' / ' + matches.length.toLocaleString(document.documentElement.lang || undefined);
+    focusMatch(feed, next);
+  }
+  searchInput.addEventListener('input', () => {
+    const feed = find('secret-thread').querySelector('.secret-feed');if (!feed) return;
+    const state = searchState();state.query = searchInput.value;state.record = null;searchThread(feed, true);
+  });
+  searchInput.addEventListener('keydown', event => {
+    if (event.isComposing) return;
+    if (event.key === 'Enter') {event.preventDefault();moveMatch(event.shiftKey ? -1 : 1);}
+    if (event.key === 'Escape') {event.preventDefault();event.stopPropagation();searchClear.click();}
+  });
+  searchPrevious.addEventListener('click', () => moveMatch(-1));searchNext.addEventListener('click', () => moveMatch(1));
+  searchClear.addEventListener('click', () => {
+    const feed = find('secret-thread').querySelector('.secret-feed');if (!feed) return;
+    Object.assign(searchState(), {query: '', record: null});searchInput.value = '';searchThread(feed);
+    searchInput.focus({preventScroll: true});
+  });
+
   function actionOwner() {
     const owner = getSession(), started = activation;
     return (requireActive = true) => (!requireActive || (active && started === activation)) && owner === session && owner === getSession();
@@ -142,6 +217,7 @@ export function createSecretChats(context) {
   function message(record, item) {
     const p = record.payload, out = p.direction === "out";
     const row = node("div", "secret-message " + (out ? "out" : "in") + (item.deleted.has(p.random_id) ? " deleted" : ""));
+    row.dataset.recordSeq = String(record.seq);
     if (p.text) row.append(node("p", "secret-text", p.text));
     if (p.media) row.append(node("p", "hint", tr("Attachment") + " · " + String(p.media._ || "").replace("DecryptedMessageMedia", "")));
     const file = item.files.get("e" + record.seq) || item.files.get("r" + p.random_id);
@@ -163,7 +239,7 @@ export function createSecretChats(context) {
   function renderThread(items) {
     const box = find("secret-thread");
     const item = items.find(entry => entry.id === selected);
-    const stamp = JSON.stringify([item, items.length, formatTime("2026-01-01T00:00:00+00:00"), may("interact"), sending.has(selected), view.connected, view.settings.enabled, view.interaction_problem, settingsBusy],
+    const stamp = JSON.stringify([item, items.length, formatTime("2026-01-01T00:00:00+00:00"), may("interact"), sending.has(selected), view.connected, view.settings.enabled, view.interaction_problem, settingsBusy, view.next_before],
       (_, value) => value instanceof Map || value instanceof Set ? [...value] : value);
     if (stamp === threadStamp) return;
     const previous = box.querySelector("textarea"), oldFeed = box.querySelector(".secret-feed");
@@ -173,6 +249,10 @@ export function createSecretChats(context) {
     const heldKey = sameChat && box.contains(document.activeElement) ? document.activeElement.dataset.focusKey : null;
     const scroll = sameChat && oldFeed && oldFeed.scrollHeight - oldFeed.scrollTop - oldFeed.clientHeight > 24
       ? oldFeed.scrollTop : null;
+    const anchor = scroll !== null && [...oldFeed.children].find(row => row.getBoundingClientRect().bottom > oldFeed.getBoundingClientRect().top + 1);
+    const anchorOffset = anchor ? anchor.getBoundingClientRect().top - oldFeed.getBoundingClientRect().top : 0;
+    const searchFocused = sameChat && document.activeElement === searchInput;
+    const searchSelection = searchFocused ? [searchInput.selectionStart, searchInput.selectionEnd] : null;
     threadStamp = stamp; renderedChat = selected;
     box.replaceChildren();
     sight.set(item ? item.id : null);
@@ -217,11 +297,15 @@ export function createSecretChats(context) {
       actions.append(close);
     }
     head.append(actions);
-    box.append(head);
+    searchInput.value = searchState().query;
+    box.append(head, searchBar);
     const feed = node("div", "secret-feed");
     for (const record of item.items) {
       if (record.kind === "secret_chat.message") feed.append(message(record, item));
-      else feed.append(node("p", "secret-event", formatTime(record.observed_at) + " · " + eventText(record)));
+      else {
+        const row = node("p", "secret-event", formatTime(record.observed_at) + " · " + eventText(record));
+        row.dataset.recordSeq = String(record.seq);feed.append(row);
+      }
     }
     box.append(feed);
     if (["ready", "rekeying"].includes(state) && may("interact")) {
@@ -248,7 +332,13 @@ export function createSecretChats(context) {
       box.append(form, node("p", "hint", tr("Sent messages are recorded. Whether the other side sees its messages as read is set under the eye button above.")));
       if (focus) {input.focus({preventScroll: true}); input.setSelectionRange(...selection);}
     }
+    searchThread(feed);
     feed.scrollTop = scroll ?? feed.scrollHeight;
+    if (anchor) {
+      const retained = [...feed.children].find(row => row.dataset.recordSeq === anchor.dataset.recordSeq);
+      if (retained) feed.scrollTop += retained.getBoundingClientRect().top - feed.getBoundingClientRect().top - anchorOffset;
+    }
+    if (searchFocused) {searchInput.focus({preventScroll: true});searchInput.setSelectionRange(...searchSelection);}
     if (heldKey) box.querySelector('[data-focus-key="' + CSS.escape(heldKey) + '"]')?.focus({preventScroll: true});
     if (active) sight.seen();
   }
@@ -294,7 +384,7 @@ export function createSecretChats(context) {
     if (owner !== session) {
       session = owner; view = null; selected = null; renderedChat = null; threadStamp = null;
       olderRequest++; loadingOlder = false;
-      drafts.clear(); sending.clear(); find("secret-user").value = "";
+      drafts.clear(); sending.clear(); threadSearches.clear(); searchInput.value = ''; find("secret-user").value = "";
       find("secret-list").replaceChildren(); find("secret-thread").replaceChildren();
     }
     const cursor = view ? view.records.at(-1)?.seq || 0 : null;
@@ -408,7 +498,7 @@ export function createSecretChats(context) {
     leave() {active = false; activation++; request++; clearTimeout(timer); threadStamp = null; sight.set(null);},
     reset() {active = false; activation++; clearTimeout(timer); view = null; selected = null; request++; sight.set(null);
       olderRequest++; loadingOlder = false; settingsBusy = installing = false;
-      renderedChat = null; threadStamp = null; drafts.clear(); sending.clear(); find("secret-user").value = "";
+      renderedChat = null; threadStamp = null; drafts.clear(); sending.clear(); threadSearches.clear(); searchInput.value = ''; find("secret-user").value = "";
       find('secret-search').value='';delete startDetails.dataset.ready;find('secret-sync').hidden=true;
       find("secret-list").replaceChildren(); find("secret-thread").replaceChildren();},
   };

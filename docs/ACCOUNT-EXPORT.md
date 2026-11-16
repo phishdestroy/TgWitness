@@ -64,6 +64,12 @@ Profile-photo history, stories, session metadata and other account data are sele
 
 Photo payloads use the still-image variant identified in their metadata and hash manifests, including photos with an animated avatar variant. That animation is not substituted for the selected still image. A shorter or longer payload than the observed size is recorded as a failed attachment, and a changed representation during file-reference renewal is rejected. These failures leave the archive partial while retaining the message records. Independent verification also rejects saved attachments whose signed length contradicts their observed size or representation, including in older archives.
 
+If a dedicated media connection fails temporarily, attachment reads use the
+standard file connection. After one minute, the dedicated route is retried in
+the background while downloads continue. This recovery keeps the configured
+connection limit and applies separately to each data center. Telegram flood
+waits and authorization failures still propagate.
+
 ## Message numbers and activity map
 
 Every account archive contains `message-gaps.json` and `map.html`. Channels and supergroups
@@ -81,6 +87,18 @@ absent numbers, with tables of every chat and the largest runs. Chat pages show 
 calendar, participants over time for groups, and a mark in the transcript where messages are
 absent. `verify.py` recomputes `message-gaps.json` from the signed pages and rejects a
 changed file.
+
+The activity map lists the largest channel and supergroup gaps, including their
+number ranges and neighbouring message times. Open a range to jump to its marked
+position in the paginated transcript. These marks record absent numbers between
+saved neighbours; deletion events, their times and message texts come only from
+saved records. Wide tables scroll within their cards on small screens.
+
+Long transcripts include a page index with message-date ranges and a calendar.
+Choose a month to open its first record in captured page order. Month counts use
+recorded message dates in UTC; undated records remain in the transcript. Page
+navigation includes the first, last and nearby pages, and opens the message
+section directly. The index works offline without JavaScript.
 
 ## Resume, coverage and verification
 

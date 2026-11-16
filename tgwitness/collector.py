@@ -4922,8 +4922,6 @@ class Collector:
                     raise
                 wait = exc.seconds + 1
                 self.store.append("telegram.backoff", {"seconds": wait, "context": "chat_export"})
-                until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
-                self.store.set_setting("rpc_backoff_until", until)
                 if on_wait:
                     on_wait(wait)
                 await asyncio.sleep(wait)

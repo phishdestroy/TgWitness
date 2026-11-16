@@ -75,6 +75,11 @@ h2{font-size:20px;line-height:1.4;margin:28px 0 12px}h3{font-size:16px;margin:0}
 .message-text{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;margin:16px 0}.message.withheld{border-style:dashed;background:transparent}.reply-state{font-size:13px;color:var(--muted,#666);margin:8px 0 0}.user{unicode-bidi:plaintext;overflow-wrap:anywhere;min-width:0}
 a{color:var(--accent);text-underline-offset:3px}a,code,pre,dd{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:12px/1.6 ui-monospace,monospace;margin:12px 0 0}
 nav{display:flex;gap:8px 18px;flex-wrap:wrap;margin:18px 0;font-size:13px}nav a{padding:4px 0}
+.transcript-pages{align-items:center}.transcript-page-numbers{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;direction:ltr}.transcript-page-numbers a,.transcript-page-numbers [aria-current]{display:inline-grid;place-items:center;min-width:36px;min-height:36px;padding:4px 8px;border:1px solid var(--line);border-radius:5px;text-decoration:none;font-variant-numeric:tabular-nums}.transcript-page-numbers [aria-current]{background:var(--soft);color:var(--accent);font-weight:700;border-color:var(--accent)}
+.account-dossier.transcript-index .account-cover{padding:24px 28px;margin-bottom:16px}.account-dossier.transcript-index .account-cover h1{font-size:clamp(25px,4vw,38px);margin:14px 0;max-width:none}.account-dossier.transcript-index .account-cover .lead{font-size:14px}.transcript-summary{display:flex;gap:24px 44px;flex-wrap:wrap;margin:20px 0}.transcript-summary dt{font-size:12px;color:var(--muted)}.transcript-summary dd{margin:4px 0 0;font:600 25px/1.3 ui-monospace,monospace}
+.transcript-calendar h3{font:600 20px/1.5 ui-monospace,monospace;margin-top:24px}.transcript-months{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:10px 0 22px}.transcript-months>a,.transcript-months>span{display:flex;flex-direction:column;gap:4px;padding:10px 6px;text-align:center;border:1px solid var(--line);border-radius:6px;text-decoration:none;min-width:0;overflow-wrap:anywhere}.transcript-months>a{background:var(--paper);border-bottom:3px solid var(--accent)}.transcript-months>span{color:var(--muted)}.transcript-months small{font-variant-numeric:tabular-nums}
+.transcript-page-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.transcript-page-list li{margin:0;min-width:0}.transcript-page-list a{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;padding:14px;border:1px solid var(--line);border-radius:6px;text-decoration:none;background:var(--paper)}.transcript-page-list small{width:100%}.transcript-months a:focus-visible,.transcript-page-list a:focus-visible,.transcript-pages a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){.transcript-months{grid-template-columns:repeat(3,minmax(0,1fr))}.transcript-page-list{grid-template-columns:1fr}.account-dossier.transcript-index .account-cover{padding:20px}}
 code{font:12px/1.6 ui-monospace,monospace}.command{display:block;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;white-space:pre-wrap;direction:ltr;unicode-bidi:plaintext}
 details{border-top:1px solid var(--line);padding-top:10px;margin-top:16px}summary{cursor:pointer;color:var(--muted);font-size:12px}li{margin-bottom:7px}footer{border-top:1px solid var(--line);margin-top:32px;padding-top:16px;font-size:12px;color:var(--muted)}
 @media(prefers-color-scheme:dark){:root{--bg:#101722;--paper:#182231;--ink:#e8eef8;--muted:#abb8cb;--line:#354258;--accent:#9cc0ff;--soft:#233553;--warn:#332c1f}}
@@ -163,7 +168,7 @@ def copy_context(context, say, sharing=False):
     return ''.join(parts) + '</section>'
 
 
-def opening(context, title, sharing=False):
+def opening(context, title, sharing=False, compact=False):
     say = Words(context.get('report_language', 'en'))
     kind = say('Sharing copy') if sharing else say('Account export')
     lead = (say('A minimized, signed copy for review and sharing. The original account export is unchanged.') if sharing else
@@ -175,7 +180,7 @@ def opening(context, title, sharing=False):
     yield encoded('<!doctype html><html data-template="' + template + '"' + layout_attribute + ' lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
                   '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;;' + e(script_policy) + '">'
-                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + activity_maps.CSS + '</style></head><body class="dossier account-dossier"><main>'
+                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + report_layouts.CSS + activity_maps.CSS + '</style></head><body class="dossier account-dossier' + (' transcript-index' if compact else '') + '"><main>'
                   '<header class="account-cover"><div class="cover-register"><span dir="ltr">TG / WITNESS</span><span>'
                   + e(say('Evidence dossier')) + '</span></div><p class="badge">' + e(kind) + '</p>'
                   '<h1 class="user" dir="auto">' + e(title) + '</h1><p class="lead">' + e(lead) + '</p></header>')
@@ -314,6 +319,10 @@ def gap_marks(context, say, current=None, last=False):
     if placer is None:
         return ''
     found = placer.rest() if last else placer.before(current)
+    page = (context.get('pagination') or {}).get('file')
+    if page:
+        for marker in found:
+            placer.locations[(marker[0], marker[1])] = page + '#' + activity_maps.marker_anchor(marker)
     return ''.join(activity_maps.marker_html(marker, say) for marker in found)
 
 
@@ -461,26 +470,77 @@ CHAT_PAGE_RECORDS = 250
 CHAT_PAGE_DATA_BYTES = 512 * 1024
 
 
+def chat_page_name(stem, page):
+    return stem + ('' if page == 1 else '-' + str(page)) + '.html'
+
+
+def account_chat_index(context, chat, counts, months):
+    say = Words(context.get('report_language', 'en'))
+    stem = str(chat['id'])
+    yield from opening(context, (text(chat.get('title')) or stem) + ' · ' + say('Transcript pages'), compact=True)
+    yield encoded('<nav><a href="../index.html">← ' + e(say('Account export')) + '</a><a href="../map.html">'
+                  + e(say('Activity map')) + '</a><a href="' + chat_page_name(stem, 1) + '#messages">'
+                  + e(say('Messages')) + '</a></nav><dl class="transcript-summary"><div><dt>' + e(say('Messages'))
+                  + '</dt><dd>' + str(sum(row[0] for row in counts)) + '</dd></div><div><dt>' + e(say('Transcript pages'))
+                  + '</dt><dd><a href="#transcript-pages">' + str(len(counts)) + '</a></dd></div></dl>')
+    yield encoded('<p>' + e(say('Message records are shown in captured page order. Signed JSONL remains authoritative.'))
+                  + '</p>')
+    if months:
+        years = sorted({month[:4] for month in months}, reverse=True)
+        yield encoded('<section class="transcript-calendar"><h2>' + e(say('Calendar')) + '</h2><nav>'
+                      + ''.join('<a href="#year-' + year + '">' + year + '</a>' for year in years) + '</nav>')
+        for year in years:
+            yield encoded('<h3 id="year-' + year + '">' + year + '</h3><div class="transcript-months">')
+            for number, label in enumerate(activity_maps.MONTH_NAMES, 1):
+                month = year + '-' + f'{number:02d}'
+                if month in months:
+                    page, record, count = months[month]
+                    yield encoded('<a data-month="' + month + '" href="' + chat_page_name(stem, page) + f'#record-{record:06d}'
+                                  + '" aria-label="' + e(month + ' · ' + say('Messages') + ': ' + str(count)) + '">'
+                                  + e(say(label)) + '<small>' + str(count) + '</small></a>')
+                else:
+                    yield encoded('<span>' + e(say(label)) + '<small>—</small></span>')
+            yield encoded('</div>')
+        yield encoded('</section>')
+    yield encoded('<section id="transcript-pages"><h2>' + e(say('Transcript pages')) + ' · ' + str(len(counts))
+                  + '</h2><ul class="transcript-page-list">')
+    first = 1
+    for page, (count, start, end) in enumerate(counts, 1):
+        dates = ('—' if start is None else activity_maps.day_text(start) + ' — ' + activity_maps.day_text(end) + ' UTC')
+        yield encoded('<li><a href="' + chat_page_name(stem, page) + '#messages"><strong>' + e(say('Page')) + ' ' + str(page)
+                      + '</strong><span>' + e(say('Messages')) + ': ' + str(count) + '</span><small>' + e(dates)
+                      + '</small><small>' + e(say('Records')) + ' ' + str(first) + '–' + str(first + count - 1) + '</small></a></li>')
+        first += count
+    yield encoded('</ul></section>')
+    yield ending(say)
+
+
 def account_chat_pages(context, chat, rows):
-    counts, count, size = [], 0, 0
-    for row in rows():
+    counts, months, count, size, start, end = [], {}, 0, 0, None, None
+    for record, row in enumerate(rows(), 1):
         length = len(canonical(row))
         if count and (count >= CHAT_PAGE_RECORDS or size + length > CHAT_PAGE_DATA_BYTES):
-            counts.append(count)
-            count, size = 0, 0
+            counts.append((count, start, end))
+            count, size, start, end = 0, 0, None, None
+        at = activity_maps.seconds(row.get('date'))
+        if at is not None and at >= 0:
+            start = at if start is None else min(start, at)
+            end = at if end is None else max(end, at)
+            month = activity_maps.day_text(at)[:7]
+            months.setdefault(month, [len(counts) + 1, record, 0])[2] += 1
         count, size = count + 1, size + length
     if count or not counts:
-        counts.append(count)
+        counts.append((count, start, end))
     stem = str(chat['id'])
-    def filename(page):
-        return stem + ('' if page == 1 else '-' + str(page)) + '.html'
+    if len(counts) > 1:
+        yield 'chats/' + stem + '-pages.html', account_chat_index(context, chat, counts, months)
     incoming, first = iter(rows()), 1
-    for page, count in enumerate(counts, 1):
-        name = 'chats/' + filename(page)
+    for page, (count, start, end) in enumerate(counts, 1):
+        name = 'chats/' + chat_page_name(stem, page)
         pagination = {'page': page, 'pages': len(counts), 'first_record': first,
-            'last_record': first + count - 1, 'file': name,
-            'previous': filename(page - 1) if page > 1 else None,
-            'next': filename(page + 1) if page < len(counts) else None}
+            'last_record': first + count - 1, 'file': name, 'stem': stem, 'index': stem + '-pages.html',
+            'previous': chat_page_name(stem, page - 1) if page > 1 else None,
+            'next': chat_page_name(stem, page + 1) if page < len(counts) else None}
         consumed = 0
         def page_rows():
             nonlocal consumed
@@ -500,12 +560,26 @@ def page_navigation(context, say):
     if page.get('pages', 1) <= 1:
         return ''
     parts = ['<nav class="transcript-pages" aria-label="' + e(say('Transcript pages')) + '">']
+    if page.get('index'):
+        parts.append('<a href="' + e(page['index']) + '">' + e(say('Transcript pages')) + '</a>')
     if page.get('previous'):
-        parts.append('<a rel="prev" href="' + e(page['previous']) + '">← ' + e(say('Previous page')) + '</a>')
+        parts.append('<a rel="prev" href="' + e(page['previous']) + '#messages">← ' + e(say('Previous page')) + '</a>')
+    if page.get('stem'):
+        numbers = sorted({1, page['pages'], *range(max(1, page['page'] - 2), min(page['pages'], page['page'] + 2) + 1)})
+        parts.append('<span class="transcript-page-numbers">')
+        previous = 0
+        for number in numbers:
+            if previous and number > previous + 1:
+                parts.append('<span aria-hidden="true">…</span>')
+            label = e(say('Page')) + ' ' + str(number)
+            parts.append('<span aria-current="page" aria-label="' + label + '">' + str(number) + '</span>' if number == page['page'] else
+                         '<a href="' + e(chat_page_name(page['stem'], number)) + '#messages" aria-label="' + label + '">' + str(number) + '</a>')
+            previous = number
+        parts.append('</span>')
     parts.append('<span>' + e(say('Page')) + ' ' + str(page['page']) + ' / ' + str(page['pages'])
                  + ' · ' + e(say('Records')) + ' ' + str(page['first_record']) + '–' + str(page['last_record']) + '</span>')
     if page.get('next'):
-        parts.append('<a rel="next" href="' + e(page['next']) + '">' + e(say('Next page')) + ' →</a>')
+        parts.append('<a rel="next" href="' + e(page['next']) + '#messages">' + e(say('Next page')) + ' →</a>')
     return ''.join(parts) + '</nav>'
 
 

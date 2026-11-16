@@ -9,6 +9,7 @@ from .. import secret_module
 from .. import tuning
 from ..access import AccessControl
 from ..account_export import AccountExport
+from ..history_forward import HistoryForward
 from ..anchoring import anchor_loop
 from ..app import create_app
 from ..collector import Collector
@@ -117,6 +118,7 @@ class LifecycleOperations:
                 collector,
             )
             app.state.account_export = AccountExport(collector, store, vault)
+            app.state.history_forward = HistoryForward(collector, self.op_lock)
             from ..guided_connection import GuidedConnection
 
             app.state.connection = GuidedConnection(app, self.profile_id)
@@ -329,6 +331,8 @@ class LifecycleOperations:
                     await profiles.close()
                 if getattr(app.state, "disclosures", None):
                     await app.state.disclosures.close()
+                if getattr(app.state, "history_forward", None):
+                    await app.state.history_forward.close()
                 if getattr(app.state, "account_export", None):
                     await app.state.account_export.close()
                 check_task = (

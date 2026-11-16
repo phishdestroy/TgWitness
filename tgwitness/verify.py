@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 1f2ba66031ed34cb8434561d420e6c3cee082843bd1cd105c373441de2a7e408
+# TgWitness verifier sources SHA-256: 6d996f97d8ee08ba76b2f860aad5de63f7963c3d53ba95b9af99ecb0565e2c90
 """Standalone verifier"""
 import argparse
 import base64
@@ -4429,6 +4429,109 @@ def verify_selection(path, expected_fingerprint=None, evidence=None):
             "producer": checked.get("producer"), "case": checked.get("case") or {}}
 
 
+IMAGE_FORMAT = "tgwitness-image-attestation-v1"
+
+
+def manifest_digest(manifest, name):
+    files = manifest.get("files")
+    if isinstance(files, dict):
+        value = files.get(name)
+        return value.get("sha256") if isinstance(value, dict) else value
+    if isinstance(files, list):
+        return next((item.get("sha256") for item in files if isinstance(item, dict) and item.get("name") == name), None)
+    return None
+
+
+def verify_image(images, signature_file, trusted=None, evidence=None):
+    attested = read_json_file(signature_file)
+    statement = attested.get("statement") if isinstance(attested, dict) else None
+    if not isinstance(statement, dict) or statement.get("format") != IMAGE_FORMAT:
+        raise ValueError(signature_file.name + " is not a TgWitness image signature")
+    public = attested.get("public_key")
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
+        base64.b64decode(attested.get("signature") or "", validate=True), canonical(statement))
+    signer = fingerprint(public)
+    if trusted and signer != trusted.strip().lower():
+        raise ValueError("The image signer key differs from the trusted fingerprint")
+    pages = {page["png_sha256"]: page for page in statement.get("pages") or []}
+    checked = []
+    for path in images:
+        digest = hashlib.sha256()
+        with open(path, "rb") as stream:
+            for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                digest.update(chunk)
+        page = pages.get(digest.hexdigest())
+        if page is None:
+            raise ValueError(path.name + " is not a signed page of this statement: the image was changed or belongs to another signature")
+        checked.append({"file": path.name, "page": page["page"], "records": len(page["records"])})
+    matched = None
+    if evidence:
+        archive = open_archive(evidence)
+        try:
+            manifest = read_manifest(archive)
+            if manifest.get("fingerprint") != signer and fingerprint(manifest["public_key"]) != signer:
+                raise ValueError("The evidence archive was signed by another key")
+            expected = manifest_digest(manifest, "events.jsonl")
+            if expected and member_digest(archive, "events.jsonl") != expected:
+                raise ValueError("events.jsonl differs from the signed archive manifest")
+            wanted = {record["seq"]: record["hash"] for page in pages.values() for record in page["records"]}
+            found = {}
+            with archive.open("events.jsonl") as stream:
+                for line in bounded_lines(stream):
+                    if line.strip():
+                        record = strict_json(line)
+                        if record.get("seq") in wanted:
+                            found[record["seq"]] = record.get("hash")
+        finally:
+            archive.close()
+        missing = sum(1 for seq, value in wanted.items() if found.get(seq) != value)
+        if missing:
+            raise ValueError(str(missing) + " signed records of the image are not in the evidence archive")
+        matched = len(wanted)
+    return {"verified": True, "format": IMAGE_FORMAT, "fingerprint": signer, "key_pinned": bool(trusted),
+            "chat": statement.get("chat"), "created_at": statement.get("created_at"), "style": statement.get("style"),
+            "pages_total": len(pages), "checked": checked, "evidence_records_matched": matched,
+            "recorded_as": attested.get("recorded_as"), "meaning": statement.get("meaning")}
+
+
+def image_command(argv):
+    import argparse
+
+    parser = argparse.ArgumentParser(prog="verify.py IMAGE.png [IMAGE.png ...] IMAGES.sig.json",
+                                     description="Check TgWitness chat images against their signature file.")
+    parser.add_argument("files", nargs="+", type=Path)
+    parser.add_argument("--fingerprint", help="Collector key fingerprint retained independently")
+    parser.add_argument("--evidence", type=Path, help="Evidence ZIP that must contain every signed record of the images")
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args(argv)
+    signatures = [path for path in args.files if path.name.lower().endswith(".json")]
+    images = [path for path in args.files if not path.name.lower().endswith(".json")]
+    if len(signatures) != 1 or not images:
+        parser.error("give the PNG pages and one .sig.json file")
+    try:
+        result = verify_image(images, signatures[0], args.fingerprint, args.evidence)
+    except Exception as exc:
+        reason = ("the signature does not match the statement" if type(exc).__name__ == "InvalidSignature"
+                  else str(exc) or type(exc).__name__)
+        print(json.dumps({"verified": False, "error": reason}) if args.json
+              else "IMAGE: fail\nVERIFICATION FAILED: " + reason)
+        raise SystemExit(1)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, indent=1))
+        return 0
+    chat = result["chat"] or {}
+    records = sum(item["records"] for item in result["checked"])
+    print("IMAGE: signed rendering of saved records · " + str(len(result["checked"])) + " of "
+          + str(result["pages_total"]) + " pages · " + str(records) + " records")
+    print("  Chat: " + str(chat.get("title") or "") + " (" + str(chat.get("id")) + ")")
+    for item in result["checked"]:
+        print("  " + item["file"] + ": page " + str(item["page"]) + ", " + str(item["records"]) + " records")
+    print("  Signer key: " + result["fingerprint"] + (" (matches the trusted fingerprint)" if result["key_pinned"]
+          else " (not compared with a retained fingerprint · --fingerprint)"))
+    print("  Evidence archive: " + (str(result["evidence_records_matched"]) + " records found in the signed archive"
+          if result["evidence_records_matched"] is not None else "not checked · --evidence archive.zip"))
+    print("  " + result["meaning"])
+    return 0
 ANNOTATION_FIELDS = ("seq", "at", "access_id", "access_label", "kind", "payload", "previous_hash")
 ANNOTATION_FORMAT = "tgwitness-annotations-v1"
 BOARD_KINDS = {"board." + kind for kind in ("bookmark", "highlight", "slice", "collection", "comment", "status", "move", "remove")}
@@ -11246,6 +11349,8 @@ def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if argv and argv[0] == "unseal-password":
         return password_command(argv[1:])
+    if argv and argv[0].lower().endswith(".png"):
+        return image_command(argv)
     parser = verification_parser()
     args = verification_arguments(parser, argv)
     try:

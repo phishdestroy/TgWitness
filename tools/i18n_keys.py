@@ -18,6 +18,21 @@ PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "session_import.
                  "cloud_wizard.py", "levels.py", "capture_api.py", "capture_connections.py", "fulltext.py", "search_api.py", "gap_analysis.py")
 
 DYNAMIC_SCRIPT_KEYS = (
+    'Forward chat',
+    'New channel',
+    'Existing channel or group',
+    'Forward available Telegram history in order. New channels and groups are private. Forwarding restrictions apply.',
+    'Creation outcome unknown. Check Telegram before starting another transfer.',
+    'Message outcome unknown. Review the destination before resuming.',
+    'Forwarding is restricted in this chat.',
+    'Choose a channel or group where this account can post.',
+    'Enter a title for the new channel or group.',
+    'The history page is not in message order.',
+    'No messages to export.',
+    'The album is too large to forward intact.',
+    'Unknown action.',
+    'The Telegram account changed. Start a new transfer.',
+    'This preview expired. Preview the transfer again.',
     "Inline diff", "Side by side", "Raw", "Previously observed", "Newly observed version",
     "All", "Priority", "Paused", "Unconfirmed access", "Enable selected", "Pause selected",
     "Mark priority", "Add selected", "Add all matching", "SHA-256", "Message ID", "Sender ID",

@@ -5413,7 +5413,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
 function beginChat(id){
   $("export-dialog").close("cancel");
   $("chat-history-feedback")?.remove();
-  chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
+  messageImage?.close();historyForward?.close();chatGeneration++;chatReady=false;chatPick=null;chatPickAnchor=null;chatShown=[];state.chat=id;state.chatInfo=null;state.chatMessages=[];
   clearTimeout(chatSearchTimer);state.chatSearch="";$("chat-message-search").value="";
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
@@ -5471,6 +5471,7 @@ async function loadChatMessages(mode){
   }
   finally{if(chatPagePending?.request===request)chatPagePending=null;}
   if(request!==chatPageRequest||state.view!=='chats'||revision!==state.workspaceRevision||id!==state.chat||generation!==chatGeneration)return;
+  if(mode!=="open")feed.classList.remove("entering");
   const known=state.chatMessages.reduce((last,m)=>Math.max(last,m.message_id),0);
   const bounds=feed.getBoundingClientRect(),visible=[...feed.querySelectorAll('.msg,.chat-service[id]')].find(row=>{const r=row.getBoundingClientRect();return r.bottom>bounds.top&&r.top<bounds.bottom;});
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
@@ -5631,7 +5632,9 @@ function renderChatStatus(){
     build.addEventListener('click',()=>busy(build,()=>reportFor(state.chat,null,[...chatPick].sort((a,b)=>a-b))));
     const cancel=node('button','quiet small',tr('Cancel'));cancel.type='button';
     cancel.addEventListener('click',()=>{chatPick=null;chatPickAnchor=null;renderPick('.chat-pick-toggle');});
-    bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),build,cancel);box.append(bar);
+    const image = node('button', 'secondary small', tr('Save as image'));image.type = 'button';image.disabled = !chatPick.size;image.dataset.pickImage = '';
+    image.addEventListener('click', () => busy(image, imageForSelection));
+    bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),image,build,cancel);box.append(bar);
   }
   if(state.chatAuthor!==null&&state.chatView==='messages'){
     const who=state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),chip=node("div","chat-author-chip");
@@ -5641,6 +5644,7 @@ function renderChatStatus(){
   }
   const blocked=s.demo||!c.has_session||!info.enabled||(c.available_for_export===false&&!c.running);
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
+  forwardButton.hidden = !state.me?.admin || s.demo;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
   if(focusedFilter)summary.focus({preventScroll:true});
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
@@ -6033,6 +6037,73 @@ function buttonsNode(keyboard,message=null){
 }
 
 
+let messageImage = null;
+function imageMessage(message) {
+  const stamp = message.sent_at || message.versions[0]?.observed_at;
+  const time = stamp && Number.isFinite(new Date(stamp).getTime()) ? new Date(stamp).toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' UTC') : '—';
+  const status = [message.deleted ? tr('Deleted') : message.missing ? tr('Not found at recheck') : '',
+    message.versions.length > 1 ? tr('Edited · {n} versions', {n: message.versions.length}) : message.edited ? tr('Edited') : ''].filter(Boolean).join(' · ');
+  const attachments = message.media.map(media => tr('Attachment') + ': ' + (media.name || media.mime_type || tr('File')));
+  if (message.has_media && !attachments.length) attachments.push(tr('Attachment file not saved'));
+  return {id: message.message_id, author: senderName(message), time, status, record: message.current_version?.seq ?? message.reference?.seq,
+    reply: message.reply_to ? tr('Reply') + ' #' + message.reply_to : '', attachments,
+    text: message.captured ? message.text || '' : tr(message.deleted ? 'Deleted before TgWitness could save it — only the deletion notice was recorded.' : 'Content was not saved.')};
+}
+async function openMessageImage(value, chat, owner, generation) {
+  const {createMessageImage} = await import('./views/message-image.js?v=2');
+  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
+  if (!current()) return;
+  messageImage ||= createMessageImage({tr, mask: value => window.TgWitnessPrivacy.preview(value),
+    sign: (id, body) => json('chats/' + encodeURIComponent(id) + '/image-attestation', body),
+    qr: text => json('image-qr', {text})});
+  await messageImage.open({...value, chatId: chat, fingerprint: state.status?.fingerprint || ''}, current);
+}
+async function imageForSelection() {
+  const owner = actionOwner(), chat = state.chat, generation = chatGeneration, ids = [...(chatPick || [])];
+  if (!ids.length) return;
+  if (ids.length > 50) {toast(tr('Select no more than {n} messages.', {n: 50}), true);return;}
+  const selected = state.chatMessages.filter(message => ids.includes(message.message_id)).sort((a, b) => a.message_id - b.message_id);
+  if (selected.length !== ids.length) {toast(tr('Some selected messages are outside the loaded window. Load them again or change the selection.'), true);return;}
+  await openMessageImage({scope: 'selection', title: state.chatInfo?.title || tr('Chat {id}', {id: chat}), messages: selected.map(imageMessage)}, chat, owner, generation);
+}
+async function imageForChat(button) {
+  const owner = actionOwner(), chat = state.chat, generation = chatGeneration, limit = 2000, found = new Map();
+  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
+  let before = null, limited = false;
+  while (found.size < limit) {
+    const page = await json('chats/' + encodeURIComponent(chat) + '/messages?limit=200' + (before ? '&before_id=' + before : ''));
+    if (!current()) return;
+    for (const message of page.messages || []) found.set(message.message_id, message);
+    button.textContent = tr('Loading saved messages: {n}', {n: found.size});
+    if (!page.next_before || !(page.messages || []).length) break;
+    before = page.next_before;
+  }
+  if (found.size >= limit) limited = true;
+  const messages = [...found.values()].sort((a, b) => a.message_id - b.message_id).slice(-limit);
+  if (!messages.length) {toast(tr('Content was not saved.'), true);return;}
+  await openMessageImage({scope: 'chat', limited, title: state.chatInfo?.title || tr('Chat {id}', {id: chat}), messages: messages.map(imageMessage)}, chat, owner, generation);
+}
+const chatImagesButton = node('button', 'quiet', tr('Save chat as images'));chatImagesButton.type = 'button';chatImagesButton.id = 'chat-save-images';
+$('chat-pattern').before(chatImagesButton);
+chatImagesButton.addEventListener('click', () => busy(chatImagesButton, async () => {
+  $('chat-tools-menu').open = false;
+  try {await imageForChat(chatImagesButton);} finally {chatImagesButton.textContent = tr('Save chat as images');}
+}));
+window.addEventListener('tgwitness:lock', () => messageImage?.close());
+let historyForward = null;
+const forwardButton = node('button', 'quiet', tr('Forward chat'));forwardButton.type = 'button';forwardButton.id = 'chat-forward-history';
+$('chat-pattern').before(forwardButton);
+forwardButton.addEventListener('click', () => busy(forwardButton, async () => {
+  const owner = actionOwner(), chat = state.chat, generation = chatGeneration;
+  $('chat-tools-menu').open = false;
+  const {createHistoryForward} = await import('./views/history-forward.js?v=1');
+  const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
+  if (!current()) return;
+  historyForward ||= createHistoryForward({json, tr, confirm: message => askConfirm(message)});
+  await historyForward.open({id: chat, title: state.chatInfo?.title || tr('Chat {id}', {id: chat})}, current);
+}));
+window.addEventListener('tgwitness:lock', () => historyForward?.close());
+
 let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
 let chatSearchTimer=null,chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
 const CHAT_PICK_LIMIT=1000;
@@ -6064,6 +6135,7 @@ const chatSafety=window.TgWitnessChatSafety?.create({
   changed:()=>{composeOpen=false;composeReply=null;renderComposer();renderChatFeed();}});
 const pendingActions=new Map();
 function resetInteractions(){
+  messageImage?.close();historyForward?.close();
   chatSafety?.reset();
   $("chat-history-feedback")?.remove();
   composeContext=null;composeReply=null;composeOpen=false;linkPreview=null;
