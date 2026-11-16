@@ -80,6 +80,7 @@ def register(app, ctx):
     router.get("/api/swarm", dependencies=[Depends(authenticate)])(routes_swarm.swarm)
     router.get("/api/metrics", dependencies=[Depends(authenticate)])(routes_swarm.metrics)
     router.get("/api/flight", dependencies=[Depends(authenticate)])(routes_swarm.flight_record)
+    router.get("/api/trace", dependencies=[Depends(authenticate)])(routes_swarm.trace)
     router.get("/api/system-map", dependencies=[Depends(authenticate)])(system_map)
     app.include_router(router)
     router = APIRouter()

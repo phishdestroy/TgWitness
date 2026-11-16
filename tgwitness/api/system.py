@@ -14,6 +14,7 @@ from ..failures import describe, unexpected
 from ..middleware import request_limit
 from ..monitoring import capture_settings
 from ..monitoring import monitoring_settings
+from ..obs.trace import traced
 from ..scope import recheck_settings
 from ..security import KeyInUse
 from ..telegram_client import FLOOD_ERRORS
@@ -445,7 +446,7 @@ class SystemOperations:
             request.headers["content-length"]
         ) > request_limit(request.url.path):
             return JSONResponse({"detail": "Request body too large"}, status_code=413)
-        response = await call_next(request)
+        response = await traced(request, call_next, self.profile_id)
         audit = getattr(request.state, "audit", None)
         if audit and audit[0] is self.app:
             path = request.url.path
