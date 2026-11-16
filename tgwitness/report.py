@@ -2138,7 +2138,7 @@ def minimisation_section(say, number, handover, journal_count):
 
 
 ACTION_NAMES = {"open": "Opened a link: joined the chat or started the bot", "send": "Sent a message",
-                "press": "Pressed a button"}
+                "press": "Pressed a button", "forward": "Forwarded messages"}
 OUTCOMES = {"succeeded": ("ok", "done"), "rejected": ("bad", "refused"), "unknown": ("warn", "outcome unknown"),
             "approval_pending": ("warn", "join request awaiting approval")}
 

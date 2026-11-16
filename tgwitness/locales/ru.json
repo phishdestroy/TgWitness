@@ -10091,5 +10091,18 @@
   "The connection check took too long. Try again or choose another route.": "Проверка подключения заняла слишком много времени. Попробуйте ещё раз или выберите другой маршрут.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Создаём рабочее пространство, настраиваем WARP и проверяем сессию в Telegram…",
   "WARP · recommended": "WARP · рекомендуется",
-  "Managed local tunnel": "Управляемый локальный туннель"
+  "Managed local tunnel": "Управляемый локальный туннель",
+  "Forward": "Переслать",
+  "Forward to": "Переслать в",
+  "Forward as {account}?": "Переслать от {account}?",
+  "Forwarded {n} messages to {chat}.": "Переслано сообщений: {n} в {chat}.",
+  "Forward up to {n} messages at a time.": "За раз можно переслать не больше {n} сообщений.",
+  "No matching chats.": "Подходящих чатов нет.",
+  "Destination chat": "Чат назначения",
+  "Requested to forward {n} messages": "Запрошена пересылка сообщений: {n}",
+  "Requested to forward {n} messages to chat {chat}.": "Запрошена пересылка сообщений: {n} в чат {chat}.",
+  "Forwarded messages": "Пересланы сообщения",
+  "Select messages and a chat to forward them to.": "Выберите сообщения и чат, куда их переслать.",
+  "Select each message once.": "Выберите каждое сообщение один раз.",
+  "Choose another chat to forward to.": "Выберите другой чат для пересылки."
 }

@@ -10019,5 +10019,18 @@
   "The connection check took too long. Try again or choose another route.": "Ulanishni tekshirish juda uzoq davom etdi. Qayta urinib ko‘ring yoki boshqa yo‘nalishni tanlang.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Ish maydoni yaratilmoqda, WARP sozlanmoqda va seans Telegram’da tekshirilmoqda…",
   "WARP · recommended": "WARP · tavsiya etiladi",
-  "Managed local tunnel": "Mahalliy boshqariladigan tunnel"
+  "Managed local tunnel": "Mahalliy boshqariladigan tunnel",
+  "Forward": "Uzatish",
+  "Forward to": "Bu yerga uzatish",
+  "Forward as {account}?": "{account} nomidan uzatilsinmi?",
+  "Forwarded {n} messages to {chat}.": "{n} ta xabar {chat} ga uzatildi.",
+  "Forward up to {n} messages at a time.": "Bir martada ko'pi bilan {n} ta xabar uzating.",
+  "No matching chats.": "Mos chat yo'q.",
+  "Destination chat": "Manzil chat",
+  "Requested to forward {n} messages": "{n} ta xabarni uzatish so'raldi",
+  "Requested to forward {n} messages to chat {chat}.": "{n} ta xabarni {chat} chatiga uzatish so'raldi.",
+  "Forwarded messages": "Uzatilgan xabarlar",
+  "Select messages and a chat to forward them to.": "Xabarlar va manzil chatni tanlang.",
+  "Select each message once.": "Har bir xabarni faqat bir marta tanlang.",
+  "Choose another chat to forward to.": "Uzatish uchun boshqa chatni tanlang."
 }

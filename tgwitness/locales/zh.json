@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "连接检查耗时过长。请重试或选择其他线路。",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "正在创建工作区、设置 WARP 并通过 Telegram 检查会话…",
   "WARP · recommended": "WARP · 推荐",
-  "Managed local tunnel": "受管本地隧道"
+  "Managed local tunnel": "受管本地隧道",
+  "Forward": "转发",
+  "Forward to": "转发到",
+  "Forward as {account}?": "以 {account} 身份转发？",
+  "Forwarded {n} messages to {chat}.": "已将 {n} 条消息转发到 {chat}。",
+  "Forward up to {n} messages at a time.": "每次最多转发 {n} 条消息。",
+  "No matching chats.": "没有匹配的聊天。",
+  "Destination chat": "目标聊天",
+  "Requested to forward {n} messages": "已请求转发 {n} 条消息",
+  "Requested to forward {n} messages to chat {chat}.": "已请求将 {n} 条消息转发到聊天 {chat}。",
+  "Forwarded messages": "已转发的消息",
+  "Select messages and a chat to forward them to.": "请选择消息和目标聊天。",
+  "Select each message once.": "每条消息只能选择一次。",
+  "Choose another chat to forward to.": "请选择另一个聊天作为转发目标。"
 }

@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "연결 확인이 너무 오래 걸렸습니다. 다시 시도하거나 다른 경로를 선택하세요.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "작업 공간을 만들고 WARP를 설정한 뒤 Telegram에서 세션을 확인하는 중…",
   "WARP · recommended": "WARP · 추천",
-  "Managed local tunnel": "관리형 로컬 터널"
+  "Managed local tunnel": "관리형 로컬 터널",
+  "Forward": "전달",
+  "Forward to": "전달할 곳",
+  "Forward as {account}?": "{account}(으)로 전달할까요?",
+  "Forwarded {n} messages to {chat}.": "메시지 {n}개를 {chat}(으)로 전달했습니다.",
+  "Forward up to {n} messages at a time.": "한 번에 최대 {n}개 메시지를 전달할 수 있습니다.",
+  "No matching chats.": "일치하는 채팅이 없습니다.",
+  "Destination chat": "대상 채팅",
+  "Requested to forward {n} messages": "메시지 {n}개 전달 요청",
+  "Requested to forward {n} messages to chat {chat}.": "메시지 {n}개를 채팅 {chat}(으)로 전달 요청했습니다.",
+  "Forwarded messages": "전달한 메시지",
+  "Select messages and a chat to forward them to.": "메시지와 대상 채팅을 선택하세요.",
+  "Select each message once.": "각 메시지는 한 번만 선택하세요.",
+  "Choose another chat to forward to.": "전달할 다른 채팅을 선택하세요."
 }

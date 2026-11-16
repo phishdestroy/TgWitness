@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "Việc kiểm tra kết nối mất quá nhiều thời gian. Hãy thử lại hoặc chọn tuyến khác.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Đang tạo không gian làm việc, thiết lập WARP và kiểm tra phiên với Telegram…",
   "WARP · recommended": "WARP · được đề xuất",
-  "Managed local tunnel": "Đường hầm cục bộ được quản lý"
+  "Managed local tunnel": "Đường hầm cục bộ được quản lý",
+  "Forward": "Chuyển tiếp",
+  "Forward to": "Chuyển tiếp tới",
+  "Forward as {account}?": "Chuyển tiếp với tư cách {account}?",
+  "Forwarded {n} messages to {chat}.": "Đã chuyển tiếp {n} tin nhắn tới {chat}.",
+  "Forward up to {n} messages at a time.": "Mỗi lần chuyển tiếp tối đa {n} tin nhắn.",
+  "No matching chats.": "Không có cuộc trò chuyện phù hợp.",
+  "Destination chat": "Cuộc trò chuyện đích",
+  "Requested to forward {n} messages": "Đã yêu cầu chuyển tiếp {n} tin nhắn",
+  "Requested to forward {n} messages to chat {chat}.": "Đã yêu cầu chuyển tiếp {n} tin nhắn tới cuộc trò chuyện {chat}.",
+  "Forwarded messages": "Tin nhắn đã chuyển tiếp",
+  "Select messages and a chat to forward them to.": "Chọn tin nhắn và cuộc trò chuyện đích.",
+  "Select each message once.": "Chỉ chọn mỗi tin nhắn một lần.",
+  "Choose another chat to forward to.": "Chọn cuộc trò chuyện khác để chuyển tiếp."
 }

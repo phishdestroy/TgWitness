@@ -10019,5 +10019,18 @@
   "The connection check took too long. Try again or choose another route.": "সংযোগ যাচাইয়ে অনেক বেশি সময় লেগেছে। আবার চেষ্টা করুন বা অন্য রুট বেছে নিন।",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "ওয়ার্কস্পেস তৈরি হচ্ছে, WARP সেট আপ হচ্ছে এবং Telegram-এ সেশন যাচাই হচ্ছে…",
   "WARP · recommended": "WARP · সুপারিশকৃত",
-  "Managed local tunnel": "পরিচালিত স্থানীয় টানেল"
+  "Managed local tunnel": "পরিচালিত স্থানীয় টানেল",
+  "Forward": "ফরোয়ার্ড",
+  "Forward to": "এখানে ফরোয়ার্ড",
+  "Forward as {account}?": "{account} হিসেবে ফরোয়ার্ড করবেন?",
+  "Forwarded {n} messages to {chat}.": "{n}টি বার্তা {chat}-এ ফরোয়ার্ড হয়েছে।",
+  "Forward up to {n} messages at a time.": "একবারে সর্বোচ্চ {n}টি বার্তা ফরোয়ার্ড করুন।",
+  "No matching chats.": "মিলে যাওয়া কোনো চ্যাট নেই।",
+  "Destination chat": "গন্তব্য চ্যাট",
+  "Requested to forward {n} messages": "{n}টি বার্তা ফরোয়ার্ডের অনুরোধ করা হয়েছে",
+  "Requested to forward {n} messages to chat {chat}.": "{n}টি বার্তা চ্যাট {chat}-এ ফরোয়ার্ডের অনুরোধ করা হয়েছে।",
+  "Forwarded messages": "ফরোয়ার্ড করা বার্তা",
+  "Select messages and a chat to forward them to.": "বার্তা ও গন্তব্য চ্যাট বেছে নিন।",
+  "Select each message once.": "প্রতিটি বার্তা একবারই বেছে নিন।",
+  "Choose another chat to forward to.": "ফরোয়ার্ডের জন্য অন্য চ্যাট বেছে নিন।"
 }

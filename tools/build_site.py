@@ -100,6 +100,7 @@ DEMO_STATIC["demo/system-map-data.js"] = "website/demo/system-map-data.js"
 DEMO_STATIC["demo/views/secret-chats.js"] = "tgwitness/static/views/secret-chats.js"
 DEMO_STATIC["demo/views/message-image.js"] = "tgwitness/static/views/message-image.js"
 DEMO_STATIC["demo/views/history-forward.js"] = "tgwitness/static/views/history-forward.js"
+DEMO_STATIC["demo/views/chat-picker.js"] = "tgwitness/static/views/chat-picker.js"
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name for name in ("visibility.js", "visibility.css")})
 DEMO_STATIC["demo/views/profile-collection.js"] = "tgwitness/static/views/profile-collection.js"
 DEMO_STATIC["demo/views/authors-collect.js"] = "tgwitness/static/views/authors-collect.js"

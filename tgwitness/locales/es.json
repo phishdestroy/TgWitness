@@ -10029,5 +10029,18 @@
   "The connection check took too long. Try again or choose another route.": "La comprobación de la conexión tardó demasiado. Inténtelo de nuevo o elija otra ruta.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Creando el espacio de trabajo, configurando WARP y comprobando la sesión con Telegram…",
   "WARP · recommended": "WARP · recomendado",
-  "Managed local tunnel": "Túnel local gestionado"
+  "Managed local tunnel": "Túnel local gestionado",
+  "Forward": "Reenviar",
+  "Forward to": "Reenviar a",
+  "Forward as {account}?": "¿Reenviar como {account}?",
+  "Forwarded {n} messages to {chat}.": "{n} mensajes reenviados a {chat}.",
+  "Forward up to {n} messages at a time.": "Reenvía como máximo {n} mensajes a la vez.",
+  "No matching chats.": "No hay chats que coincidan.",
+  "Destination chat": "Chat de destino",
+  "Requested to forward {n} messages": "Se solicitó reenviar {n} mensajes",
+  "Requested to forward {n} messages to chat {chat}.": "Se solicitó reenviar {n} mensajes al chat {chat}.",
+  "Forwarded messages": "Mensajes reenviados",
+  "Select messages and a chat to forward them to.": "Selecciona mensajes y un chat de destino.",
+  "Select each message once.": "Selecciona cada mensaje una sola vez.",
+  "Choose another chat to forward to.": "Elige otro chat de destino."
 }

@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "接続の確認に時間がかかりすぎました。もう一度試すか、別のルートを選んでください。",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "ワークスペースを作成し、WARP を設定して、Telegram でセッションを確認しています…",
   "WARP · recommended": "WARP · おすすめ",
-  "Managed local tunnel": "管理対象のローカルトンネル"
+  "Managed local tunnel": "管理対象のローカルトンネル",
+  "Forward": "転送",
+  "Forward to": "転送先",
+  "Forward as {account}?": "{account} として転送しますか?",
+  "Forwarded {n} messages to {chat}.": "{n} 件のメッセージを {chat} に転送しました。",
+  "Forward up to {n} messages at a time.": "一度に転送できるのは {n} 件までです。",
+  "No matching chats.": "一致するチャットはありません。",
+  "Destination chat": "転送先のチャット",
+  "Requested to forward {n} messages": "{n} 件のメッセージの転送をリクエストしました",
+  "Requested to forward {n} messages to chat {chat}.": "{n} 件のメッセージをチャット {chat} へ転送するようリクエストしました。",
+  "Forwarded messages": "転送したメッセージ",
+  "Select messages and a chat to forward them to.": "メッセージと転送先のチャットを選んでください。",
+  "Select each message once.": "各メッセージは一度だけ選んでください。",
+  "Choose another chat to forward to.": "別の転送先チャットを選んでください。"
 }

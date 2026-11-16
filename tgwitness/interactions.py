@@ -3,7 +3,7 @@ import base64
 import re
 import secrets
 import time
-from typing import Literal
+from typing import Annotated, Literal
 from urllib.parse import parse_qs, urlsplit
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, model_validator
@@ -22,6 +22,7 @@ QUEUE = "interaction.queue"
 PACE = {"join": ("action_join_seconds", "action_joins_per_hour"),
         "message": ("action_message_seconds", "action_messages_per_hour"),
         "bot": ("action_button_seconds", "action_buttons_per_hour")}
+FORWARD_LIMIT = 100
 READ_ONLY = "This account is read-only. Turn off Read-only on the account page to send, join or press bot buttons."
 READ_ONLY_STOP = "Read-only was turned on before this action's turn. It was not sent."
 RESTART_STOP = "TgWitness stopped before this action's turn. It was not sent."
@@ -35,13 +36,15 @@ class Preview(BaseModel):
 class Action(BaseModel):
     model_config = ConfigDict(extra="forbid")
     request_id: str = Field(pattern=r"^[a-zA-Z0-9_-]{16,80}$")
-    action: Literal["open", "send", "press"]
+    action: Literal["open", "send", "press", "forward"]
     preview_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     observe: StrictBool | None = None
     chat_id: int | None = None
     text: str | None = Field(default=None, max_length=4096)
     reply_to: int | None = Field(default=None, gt=0)
     message_id: int | None = Field(default=None, gt=0)
+    message_ids: list[Annotated[int, Field(gt=0)]] | None = Field(default=None, min_length=1, max_length=FORWARD_LIMIT)
+    destination: int | None = None
     keyboard_event: int | None = Field(default=None, gt=0)
     row: int | None = Field(default=None, ge=0, le=99)
     column: int | None = Field(default=None, ge=0, le=99)
@@ -59,6 +62,13 @@ class Action(BaseModel):
         if self.action == "press" and any(v is None for v in (
                 self.message_id, self.keyboard_event, self.row, self.column)):
             raise ValueError("Select a saved message button.")
+        if self.action == "forward":
+            if not self.message_ids or self.destination is None:
+                raise ValueError("Select messages and a chat to forward them to.")
+            if len(set(self.message_ids)) != len(self.message_ids):
+                raise ValueError("Select each message once.")
+            if self.destination == self.chat_id:
+                raise ValueError("Choose another chat to forward to.")
         if self.planned_at is not None and self.planned_at > time.time() + 14 * 86400:
             raise ValueError("Plan actions within the next 14 days.")
         return self
@@ -316,6 +326,22 @@ async def sent(collector, entity, text, reply_to=None, request_event=None):
             **({"typing_before_send": typing} if typing else {})}
 
 
+async def forwarded(collector, source, target, body):
+    from . import visibility as seen
+    destination = utils.get_peer_id(target)
+    messages = await collector.client.forward_messages(target, body.message_ids, from_peer=source,
+                                                      silent=seen.silent(collector.store, destination))
+    messages = [m for m in (messages if isinstance(messages, list) else [messages]) if m is not None]
+    events = []
+    if collector.selected(destination):
+        for message in messages:
+            events.append((await collector.capture_message(message, "message.new", destination,
+                                                           source="panel_action"))["seq"])
+    return {"chat_id": body.chat_id, "destination": destination, "destination_title": utils.get_display_name(target),
+            "forwarded": len(messages), "forwarded_ids": [m.id for m in messages],
+            **({"message_events": events} if events else {})}
+
+
 def prepare(collector, body, account, fresh=True):
     store = collector.store
     if body.action == "open":
@@ -325,7 +351,7 @@ def prepare(collector, body, account, fresh=True):
         return prepared, None, None
     if not collector.selected(body.chat_id):
         raise ValueError("Enable observation for this chat in Sources first.")
-    if body.action == "send":
+    if body.action in ("send", "forward"):
         return None, None, None
     events = store.events(chat_id=body.chat_id, message_id=body.message_id,
                           before=body.keyboard_event + 1, limit=1)
@@ -371,8 +397,8 @@ async def execute(collector, body, queue=None, operator=None):
     permitted(collector)
     account = (store.get_setting("account", {}) or {}).get("id")
     prepared, saved, selected = prepare(collector, body, account)
-    category = ("bot" if body.action == "press" else "message" if body.action == "send" or prepared["kind"] == "bot"
-                else "join")
+    category = ("bot" if body.action == "press" else "message" if body.action in ("send", "forward")
+                or prepared["kind"] == "bot" else "join")
     run_at = reserve(store, category, body.planned_at)
     if run_at > time.time():
         if queue:
@@ -408,9 +434,11 @@ async def run_queued(collector, body, authorized=None):
 
 async def perform(collector, body, account, prepared, saved, selected, pending=None, operator=None):
     store = collector.store
-    entity = None
+    entity = target = None
     if body.action != "open":
         entity = await collector.resolve_target(body.chat_id)
+    if body.action == "forward":
+        target = await collector.resolve_target(body.destination)
     if body.action == "press":
         current = await collector.client.get_messages(entity, ids=body.message_id)
         live = buttons_of(current) if current else None
@@ -460,6 +488,9 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
         elif body.action == "send":
             dispatched = True
             result.update(await sent(collector, entity, body.text, body.reply_to, pending["request_event"]))
+        elif body.action == "forward":
+            dispatched = True
+            result.update(await forwarded(collector, entity, target, body))
         elif selected["type"] == "text":
             dispatched = True
             result.update(await sent(collector, entity, selected["text"], request_event=pending["request_event"]))

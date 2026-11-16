@@ -386,6 +386,8 @@ def build(events, window_seconds=WINDOW_SECONDS, max_following=MAX_FOLLOWING, ch
                 "type": "requested", "at": event.get("observed_at"), "ref": reference(event),
                 "action": request.get("action"), "text": clip(request.get("text")), "button": button.get("text"),
                 "button_type": button.get("type"), "message_id": request.get("message_id"),
+                "forwarded": len(request["message_ids"]) if isinstance(request.get("message_ids"), list) else None,
+                "destination": request.get("destination"),
                 "queued_until": payload.get("queued_until"), "operator": operator}))
             queued = payload.get("queued_until")
             at = (datetime.fromtimestamp(queued, timezone.utc).isoformat(timespec="milliseconds")
@@ -571,6 +573,9 @@ def sentence(step, say, clock=same):
         elif action == "press":
             line = say("Requested to press the button {button} on message #{id}.",
                        button=quoted(step.get("button", "")), id=step.get("message_id", "?"))
+        elif action == "forward":
+            line = say("Requested to forward {n} messages to chat {chat}.", n=step.get("forwarded", "?"),
+                       chat=step.get("destination", "?"))
         else:
             line = say("Requested to open the link.")
         queued = step.get("queued_until")

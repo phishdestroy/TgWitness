@@ -5828,7 +5828,10 @@ function renderChatStatus(){
     cancel.addEventListener('click',()=>{chatPick=null;chatPickAnchor=null;renderPick('.chat-pick-toggle');});
     const image = node('button', 'secondary small', tr('Save as image'));image.type = 'button';image.disabled = !chatPick.size;image.dataset.pickImage = '';
     image.addEventListener('click', () => busy(image, imageForSelection));
-    bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),image,build,cancel);box.append(bar);
+    const forward = node('button', 'secondary small', tr('Forward'));forward.type = 'button';forward.disabled = !chatPick.size || chatPick.size > 100;forward.dataset.pickForward = '';
+    forward.hidden = !canForward();if (chatPick.size > 100) forward.title = tr('Forward up to {n} messages at a time.', {n: 100});
+    forward.addEventListener('click', () => busy(forward, () => forwardMessages([...chatPick].sort((a, b) => a - b), forward)));
+    bar.append(icon('check'),count,all,clear,node('span','chat-pick-space'),forward,image,build,cancel);box.append(bar);
   }
   if(state.chatAuthor!==null&&state.chatView==='messages'){
     const chip=node("div","chat-author-chip");
@@ -6015,7 +6018,9 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
-      composeReply=m.message_id;composeOpen=true;renderComposer();$("chat-message").focus();});meta.append(reply);}
+      composeReply=m.message_id;composeOpen=true;renderComposer();$("chat-message").focus();});meta.append(reply);
+    if(canForward()&&!m.service_action){const forward=node("button","text-link msg-forward",tr("Forward"));forward.type="button";
+      forward.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;busy(forward,()=>forwardMessages([m.message_id],forward));});meta.append(forward);}}
   if(state.chatSearch&&m.versions.some(v=>v.matches_search)&&!m.current_version?.matches_search){
     bubble.append(node("p","hint",tr("Search matched an earlier saved version.")),versionsNode(m));
   }
@@ -6328,13 +6333,39 @@ $('chat-pattern').before(forwardButton);
 forwardButton.addEventListener('click', () => busy(forwardButton, async () => {
   const owner = actionOwner(), chat = state.chat, generation = chatGeneration;
   $('chat-tools-menu').open = false;
-  const {createHistoryForward} = await import('./views/history-forward.js?v=2');
+  const {createHistoryForward} = await import('./views/history-forward.js?v=3');
+  const picker = await chatPickerReady();
   const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
   if (!current()) return;
-  historyForward ||= createHistoryForward({json, tr, confirm: message => askConfirm(message)});
+  historyForward ||= createHistoryForward({json, tr, confirm: message => askConfirm(message),
+    choose: options => picker.ui.pick({...options, filter: item => ['channel', 'supergroup', 'group'].includes(item.kind) && picker.writable(item)})});
   await historyForward.open({id: chat, title: state.chatInfo?.title || tr('Chat {id}', {id: chat})}, current);
 }));
 window.addEventListener('tgwitness:lock', () => historyForward?.close());
+let chatPicker = null;
+async function chatPickerReady() {
+  if (chatPicker) return chatPicker;
+  const module = await import('./views/chat-picker.js?v=1');
+  chatPicker ||= {writable: module.writable, ui: module.createChatPicker({tr, saved: () => state.chats, dialogs: () => state.dialogs,
+    loadDialogs: async () => {const profile = state.profile, result = await json('dialogs', undefined, {profile});if (profile === state.profile) state.dialogs = result.dialogs || [];},
+    avatar: (id, name) => avatarNode(id, name)})};
+  return chatPicker;
+}
+function canForward() {
+  const s = state.status;
+  return !!(s && !s.demo && s.collector.has_session && s.setup_goal !== 'evidence' && !s.actions?.read_only && may('interact'));
+}
+async function forwardMessages(ids, opener) {
+  const chat = state.chat, profile = state.profile, revision = state.workspaceRevision, generation = chatGeneration;
+  if (!ids.length) return;
+  if (!chatSafety?.writable()) {toast(tr('Turn off Read-only before acting from this account.'), true);return;}
+  const picker = await chatPickerReady();
+  if (chat !== state.chat || generation !== chatGeneration) return;
+  const target = await picker.ui.pick({title: tr('Forward to'), filter: picker.writable, exclude: [chat], opener});
+  if (!target || chat !== state.chat || generation !== chatGeneration) return;
+  const result = await panelAction({action: 'forward', chat_id: chat, message_ids: ids, destination: target.chat_id}, {profile, revision});
+  if (result && ['succeeded', 'queued'].includes(result.status) && chat === state.chat && chatPick) {chatPick = null;chatPickAnchor = null;renderPick('.chat-pick-toggle');}
+}
 
 let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
 let chatSearchTimer=null,chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null,chatPick=null,chatShown=[];
@@ -6408,7 +6439,9 @@ function actionResult(result){
     unknown:tr("The result is unknown. Check the chat before attempting a new action."),
     queued:result.run_at?tr("Queued to keep a safe pace. Runs at {time}.",{time:fmtTime(new Date(result.run_at*1000).toISOString())}):""};
   box.append(node("strong","",labels[result.status]||result.status));
+  if(result.status==="succeeded"&&result.forwarded!=null)box.append(node("p","",tr("Forwarded {n} messages to {chat}.",{n:result.forwarded,chat:result.destination_title||result.destination})));
   if(result.error)box.append(node("p","",tr(result.error)));
+  else if(result.error_type==="ChatForwardsRestrictedError")box.append(node("p","",tr("Forwarding is restricted in this chat.")));
   else if(result.error_type)box.append(node("span","",result.error_type));
   if(result.retry_after)box.append(node("p","",tr("Retry after {n} seconds.",{n:result.retry_after})));
   if(result.answer?.message)box.append(window.TgWitnessPrivacy.render(result.answer.message,{className:"bubble-text",tr}));

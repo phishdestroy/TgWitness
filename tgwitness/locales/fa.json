@@ -10019,5 +10019,18 @@
   "The connection check took too long. Try again or choose another route.": "بررسی اتصال بیش از حد طول کشید. دوباره تلاش کنید یا مسیر دیگری انتخاب کنید.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "در حال ساخت فضای کاری، راه‌اندازی WARP و بررسی نشست در Telegram…",
   "WARP · recommended": "WARP · توصیه شده",
-  "Managed local tunnel": "تونل محلی مدیریت‌شده"
+  "Managed local tunnel": "تونل محلی مدیریت‌شده",
+  "Forward": "هدایت",
+  "Forward to": "هدایت به",
+  "Forward as {account}?": "با {account} هدایت شود؟",
+  "Forwarded {n} messages to {chat}.": "{n} پیام به {chat} هدایت شد.",
+  "Forward up to {n} messages at a time.": "هر بار حداکثر {n} پیام را هدایت کنید.",
+  "No matching chats.": "گفتگوی مطابقی نیست.",
+  "Destination chat": "گفتگوی مقصد",
+  "Requested to forward {n} messages": "درخواست هدایت {n} پیام",
+  "Requested to forward {n} messages to chat {chat}.": "درخواست هدایت {n} پیام به گفتگوی {chat}.",
+  "Forwarded messages": "پیام‌های هدایت‌شده",
+  "Select messages and a chat to forward them to.": "پیام‌ها و گفتگوی مقصد را انتخاب کنید.",
+  "Select each message once.": "هر پیام را فقط یک بار انتخاب کنید.",
+  "Choose another chat to forward to.": "گفتگوی دیگری برای هدایت انتخاب کنید."
 }

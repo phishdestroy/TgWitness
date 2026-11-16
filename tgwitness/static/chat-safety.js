@@ -38,7 +38,7 @@
       const scope = key(); pending = true;
       try {return await new Promise(resolve => {
         dialog = document.createElement('dialog'); dialog.className = 'chat-action-confirm'; dialog.setAttribute('aria-labelledby', 'chat-action-title');
-        const title = document.createElement('h2'); title.id = 'chat-action-title'; title.textContent = tr(action === 'send' ? 'Send as {account}?' : action === 'press' ? 'Press this bot button as {account}?' : 'Open or join as {account}?', {account: identity()});
+        const title = document.createElement('h2'); title.id = 'chat-action-title'; title.textContent = tr(action === 'send' ? 'Send as {account}?' : action === 'forward' ? 'Forward as {account}?' : action === 'press' ? 'Press this bot button as {account}?' : 'Open or join as {account}?', {account: identity()});
         const description = document.createElement('p'); description.textContent = tr('This acts on Telegram using the connected account and is recorded in the journal.');
         const rememberLabel = document.createElement('label'), remember = document.createElement('input'); remember.type = 'checkbox'; remember.id = 'chat-action-remember';
         rememberLabel.hidden=action==='open';
