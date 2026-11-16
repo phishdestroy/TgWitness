@@ -88,6 +88,12 @@ position in the paginated transcript. These marks describe absent numbers; they
 do not establish a deletion event, its time or the missing message text. Wide
 tables scroll within their cards on small screens.
 
+Long transcripts include a page index with message-date ranges and a calendar.
+Choose a month to open its first record in captured page order. Month counts use
+recorded message dates in UTC; undated records remain in the transcript. Page
+navigation includes the first, last and nearby pages, and opens the message
+section directly. The index works offline without JavaScript.
+
 ## Resume, coverage and verification
 
 Each job freezes its options and account identity. Inventory and captured pages are signed; page receipts record hashes, cursors, times, attachment outcomes and their preceding receipt. Only committed pages advance progress. Restart/resume checks those records before continuing. A changed account, changed signed page or inconsistent receipt chain is rejected. Options cannot be edited halfway through an acquisition: start another job for another scope.

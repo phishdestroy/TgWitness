@@ -8230,7 +8230,7 @@
   "Title (optional)": "Заголовок (необязательно)",
   "Too many pending downloads. Retry in a minute.": "Слишком много ожидающих загрузок. Повторите попытку через минуту.",
   "Total output size and completion time remain unknown. Reports and temporary files also require space.": "Общий размер выходных данных и время выполнения остаются неизвестными. Отчёты и временные файлы также требуют места.",
-  "Transcript pages": "Страницы стенограмм",
+  "Transcript pages": "Страницы переписки",
   "Transfer archive files or prepare the storage helper": "Перенести архивные файлы или подготовить помощник хранения",
   "Trusted-live recorder": "Надёжный рекордер в режиме реального времени",
   "Tunnel configuration present": "Наличие конфигурации туннеля",
