@@ -72,7 +72,7 @@
 .action-menu-panel > strong { display: block; font-size: 13px; margin-bottom: 14px; }
 .workspace-status > summary { border-color: transparent; background: var(--surface-2); }
 .workspace-status > summary > .icon:first-child { display: none; }
-.workspace-status .status-chip { padding: 0; background: transparent; color: var(--muted); font-size: 12px; font-weight: 500; min-height: 0; white-space: nowrap; }
+.workspace-status .status-chip { padding: 0; background: transparent; color: var(--muted); font-size: 12px; font-weight: 500; min-height: 0; white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
 .workspace-status .status-chip.online { color: var(--success); }
 .workspace-status .menu-chevron { width: 12px; height: 12px; transform: rotate(90deg); color: var(--muted); }
 .workspace-status-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }

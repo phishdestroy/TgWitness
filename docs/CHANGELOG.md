@@ -62,6 +62,11 @@
   participant: messages, conversations started after 6 hours of silence, median
   reply time, the longest run in a row and the night share, in message order and
   UTC. It follows the participant chart setting and its labels (aliases by default).
+- Collector health names one cause when nothing arrives: sign-out, a second
+  session, a Telegram pause (with method and end time), a stopped collector, a
+  frozen account, the route, lost chat access, a recent update gap or simply quiet
+  chats; each with a confidence level and the next step, and "Cause unknown" when
+  no signal explains it. Problems replace "Observing" in the workspace status.
 - HTML reports opened from disk show **Offline · 0 B sent** next to the signature
   badge. The browser counts network requests since the page opened; any request
   turns it into a red count, and attempts blocked by the page policy are listed in

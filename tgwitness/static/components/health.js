@@ -1,5 +1,5 @@
 import {createHealthActions} from "./health-actions.js";
-export function createHealthBar({node, icon, tr, stateNames, partNames, lines, diagnose, canDiagnose, workspace, actionContext}) {
+export function createHealthBar({node, icon, tr, stateNames, partNames, lines, verdict, diagnose, canDiagnose, workspace, actionContext}) {
   const names = ["connection", "intake", "sources", "media"];
   const labels = {connection: tr("Telegram"), intake: tr("Intake"), sources: tr("Sources"), media: tr("Attachments")};
   const bar = node("div", "health-toolbar"); bar.setAttribute("aria-label", tr("Collector health"));
@@ -9,7 +9,13 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, d
   close.append(icon("x")); head.append(title, close);
   const tabs = node("div", "health-part-tabs"); tabs.setAttribute("role", "tablist"); tabs.setAttribute("aria-label", tr("Collector health"));
   const content = node("div", "health-part-body"); content.id = "health-strip";
-  dialog.append(head, tabs, content); document.body.append(dialog);
+  const card = node("section", "health-verdict"), cardTitle = node("h3"), cardLevel = node("span", "health-verdict-level");
+  const cardAction = node("p", "health-verdict-action"), cardFacts = node("div", "health-facts");
+  card.setAttribute("aria-label", tr("Why nothing arrives")); card.append(node("p", "eyebrow", tr("Why nothing arrives")), cardTitle, cardLevel, cardAction, cardFacts);
+  card.hidden = true; dialog.append(head, card, tabs, content); document.body.append(dialog);
+  const verdictChip = node("button", "health-verdict-chip"); verdictChip.type = "button"; verdictChip.hidden = true;
+  verdictChip.setAttribute("aria-haspopup", "dialog"); verdictChip.setAttribute("aria-controls", dialog.id);
+  let verdictPart = "intake";
   workspace.querySelector(".health-details")?.remove(); workspace.querySelector("#workspace-health").append(bar);
   const chips = new Map(), panels = new Map(), buttons = new Map();
   let selected = null, latest = null, identity = null;
@@ -47,6 +53,7 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, d
     panel.append(panelTitle, badge, facts, actions); content.append(panel);
     panels.set(name, {root: panel, badge, facts, actions, diagnostic});
   }
+  bar.append(verdictChip); verdictChip.addEventListener("click", () => open(verdictPart));
   tabs.addEventListener("keydown", event => {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
@@ -95,6 +102,14 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, d
         if (paragraph.textContent !== text) paragraph.textContent = text;
       });
       panel.diagnostic.hidden = !canDiagnose(name);
+    }
+    const found = verdict ? verdict(health.verdict) : null;
+    card.hidden = !found; verdictChip.hidden = !found || found.quiet;
+    if (found) {
+      verdictPart = found.part; card.dataset.confidence = found.confidence; verdictChip.dataset.state = found.state;
+      cardTitle.textContent = found.title; cardLevel.textContent = found.level; cardAction.textContent = found.action;
+      cardFacts.replaceChildren(...found.facts.filter(Boolean).map(text => node("p", "", text)));
+      verdictChip.textContent = found.title; verdictChip.title = found.title + " · " + found.level + "\n" + found.action;
     }
     actions?.update();
   }
