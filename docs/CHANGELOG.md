@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- A sign-in that has not finished yet no longer writes `account.authorization_error` entries that read as a
+  lost authorization.
 - History reading no longer skips chats Telegram marks as restricted; the restriction stays in the journal
   and whatever Telegram delivers is saved. Messages keep their own restriction reasons. On connect the
   account allows sensitive (18+) content when Telegram lets it, recorded as `account.content_settings`.

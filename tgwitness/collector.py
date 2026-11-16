@@ -797,6 +797,8 @@ class Collector:
         if not isinstance(exc, AUTHORIZATION_ERRORS):
             return False
         if client is not None and client is not self.client:
+            if client is self.login_client:
+                return True
             self.note("account.authorization_error", {
                 "operation": operation, "error_type": type(exc).__name__, "telegram_error": telegram_error(exc),
                 "client": type(client).__name__, "dc_id": getattr(getattr(client, "session", None), "dc_id", None),
