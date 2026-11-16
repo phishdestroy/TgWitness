@@ -6,6 +6,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 
+from . import keyboard
 from .indicators import Indicators
 from .store import utcnow
 
@@ -247,12 +248,7 @@ def texts_of(event):
         for key in ("href", "text"):
             if isinstance(item.get(key), str):
                 found.append(item[key])
-    for row in (parsed.get("buttons") or {}).get("rows") or []:
-        for button in row:
-            if isinstance(button, dict):
-                for key in ("text", "url"):
-                    if isinstance(button.get(key), str):
-                        found.append(button[key])
+    found.extend(text for _, text in keyboard.texts(parsed.get("buttons")))
     for item in payload.get("codes") or []:
         if isinstance(item, dict) and isinstance(item.get("text"), str):
             found.append(item["text"])

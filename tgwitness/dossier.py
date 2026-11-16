@@ -7,7 +7,7 @@ import secrets
 import stat
 from datetime import datetime, timezone
 
-from . import device_attribution, tuning
+from . import device_attribution, message_details, report_forwards, tuning
 from .avatar_history import history_events, history_index
 from .security import private_write
 from .store import GONE_KINDS, TEXT_KINDS, canonical, utcnow
@@ -336,21 +336,60 @@ def voice_files(store, chat_id):
     return found
 
 
+def document_history(store, records, allowed_chats):
+    wanted = {device_attribution.document_id(event["payload"].get("raw")) for event in records}
+    wanted.discard(None)
+    if not wanted:
+        return {}
+    where = "kind IN (" + ",".join("?" * len(TEXT_KINDS)) + ") AND seq<=? AND message_id IS NOT NULL"
+    params = [*TEXT_KINDS, max(event["seq"] for event in records)]
+    if allowed_chats is not None:
+        where += " AND chat_id IN (" + ",".join("?" * len(allowed_chats)) + ")"
+        params.extend(sorted(allowed_chats))
+    found = {}
+    with store.reading() as db:
+        for row in db.execute("SELECT seq,chat_id,message_id,observed_at,"
+                              "CAST(json_extract(payload,'$.raw.media.document.id') AS TEXT) AS document_id "
+                              "FROM events WHERE " + where + " AND json_type(payload,'$.raw.media.document.id')='integer' "
+                              "ORDER BY seq", params):
+            document = row["document_id"]
+            if document not in wanted or document in found:
+                continue
+            found[document] = {"document_id": document, "chat_id": row["chat_id"], "message_id": row["message_id"],
+                               "record": row["seq"], "observed_at": row["observed_at"]}
+            if len(found) == len(wanted):
+                break
+    return found
+
+
 def build(store, chat_id, title=None, *, allowed_chats=None):
     allowed_chats = None if allowed_chats is None else set(allowed_chats)
     if allowed_chats is not None and chat_id not in allowed_chats:
         raise ValueError("This chat is outside the permitted scope.")
     settings = options(store)
     refs, find, patterns = settings["max_refs"], settings["find"], tuning.patterns(settings["patterns"])
-    records = store.chat_records(chat_id, TEXT_KINDS + GONE_KINDS)
+    records = store.chat_records(chat_id, TEXT_KINDS + GONE_KINDS + ("reaction.snapshot",))
+    documents = document_history(store, records, allowed_chats)
     people, owner, message_seq = {}, {}, {}
-    gone = {}
+    gone, paid = {}, {}
+    forward_sources = report_forwards.Sources()
     voices = voice_files(store, chat_id)
     for event in records:
+        forward_sources.add(event)
         if event["kind"] in GONE_KINDS:
             gone.setdefault(event["message_id"], []).append(event)
             continue
         payload = event["payload"]
+        raw = payload.get("raw") or {}
+        reactions = raw.get("reactions") if isinstance(raw, dict) else None
+        if isinstance(reactions, dict) and isinstance(reactions.get("top_reactors"), list) \
+                and event["message_id"] is not None:
+            paid[event["message_id"]] = {"message_id": event["message_id"], "record": event["seq"],
+                                         "observed_at": event["observed_at"],
+                                         "reactors": message_details.paid_reactors(reactions),
+                                         "complete_actor_list": False}
+        if event["kind"] == "reaction.snapshot":
+            continue
         gone[event["message_id"]] = [e for e in gone.get(event["message_id"], [])
                                      if e["kind"] != "message.missing_on_recheck"]
         observed = payload.get("sender_observation") or {}
@@ -361,7 +400,8 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
             "id": sender, "names": Facts(refs), "usernames": Facts(refs), "photo_ids": Facts(refs), "flags": {},
             "messages": set(), "edited": set(), "first": None, "last": None, "hours": [0] * 24,
             "replies_to": {}, "replied_by": {},
-            "clients": Facts(refs), "sticker_sets": Facts(refs), "media_timing": [],
+            "clients": Facts(refs), "forwarded_clients": Facts(refs), "reused_clients": Facts(refs),
+            "sticker_sets": Facts(refs), "media_timing": [],
             "mentions": {kind: Facts(refs) for kind in MENTION_TYPES + ("patterns",)}})
         person["names"].add(observed.get("display_name"), event)
         person["usernames"].add(("@" + observed["username"].lower()) if observed.get("username") else None, event)
@@ -393,10 +433,17 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
             person["replies_to"].setdefault(reply, {}).setdefault(message_id, []).append(event["seq"])
         for category, value, extra in mentions(payload, find, patterns):
             person["mentions"][category].add(value, event, extra)
-        found = device_attribution.describe(payload.get("raw") or {}, voices.get(message_id))
+        previous = documents.get(device_attribution.document_id(raw))
+        if previous and (previous["record"] >= event["seq"]
+                         or (previous["chat_id"], previous["message_id"]) == (chat_id, message_id)):
+            previous = None
+        found = device_attribution.describe(raw, voices.get(message_id), previous_document=previous)
         client = found.get("client")
         if client and client.get("client"):
-            person["clients"].add(client["client"], event, {"basis": client["basis"], "confidence": client["confidence"]})
+            category = {"forward_origin": "forwarded_clients", "reused_file": "reused_clients"}.get(
+                client["attributed_to"], "clients")
+            person[category].add(client["client"], event, {"basis": client["basis"], "confidence": client["confidence"],
+                                                         "attributed_to": client["attributed_to"]})
         for entry in found.get("sticker_sets") or []:
             person["sticker_sets"].add(entry.get("set_id") or entry.get("custom_emoji_id"), event,
                                        {"from": entry["from"], "alt": entry.get("alt")})
@@ -405,7 +452,8 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
             person["media_timing"].append({"message_id": message_id, "record": event["seq"],
                                            "status": timing["status"],
                                            "uploaded_before_seconds": timing["uploaded_before_seconds"],
-                                           "uploaded_at": timing["uploaded_at"], "sent_at": timing["sent_at"]})
+                                           "uploaded_at": timing["uploaded_at"], "sent_at": timing["sent_at"],
+                                           **({"previous_document": previous} if previous else {})})
     avatars = avatar_index(store.root) if allowed_chats is None else {}
     avatar_records = history_events(store, chat_id)
     histories = history_index(store, chat_id, avatar_records)
@@ -419,7 +467,14 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
     elsewhere = store.sender_chats(list(people), allowed_chats=allowed_chats)
     titles = {t["chat_id"]: t["title"] for t in store.targets()
               if allowed_chats is None or t["chat_id"] in allowed_chats}
-    result, referenced = [], set()
+    paid_rows = sorted(paid.values(), key=lambda item: item["record"], reverse=True)[:refs]
+    source_summary = forward_sources.result(shown=refs)
+    person_sources = forward_sources.people(shown=refs)
+    result, referenced = [], {item["record"] for item in paid_rows}
+    for summary in [source_summary, *person_sources.values()]:
+        for row in summary["rows"] + summary.get("edges", []):
+            referenced.update(row["records"])
+            referenced.add(row["last"]["seq"])
     for person in people.values():
         replies, replying = {}, {}
         for parent, by_message in person.pop("replies_to").items():
@@ -473,13 +528,15 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
                 "deleted_records": [deleted[m][0]["seq"] for m in sorted(deleted_ids)][:refs],
                 "hours_utc": person["hours"]},
             "relations": {
+                "forwarded_from": person_sources.get(person["id"]),
                 "replies_to": person["replies_to"],
                 "replied_by": sorted(({"id": k, "count": v} for k, v in person["replied_by"].items()),
                                      key=lambda r: -r["count"]),
                 "other_chats": sorted(({"chat_id": c, "title": titles.get(c), "messages": n}
                                        for c, n in elsewhere.get(person["id"], {}).items() if c != chat_id),
                                       key=lambda r: -r["messages"])},
-            "clients": {"observed": person["clients"].out(), "meaning": device_attribution.MEANING},
+            "clients": {"observed": person["clients"].out(), "forwarded": person["forwarded_clients"].out(),
+                        "reused": person["reused_clients"].out(), "meaning": device_attribution.MEANING},
             "sticker_sets": person["sticker_sets"].out(),
             "media_timing": {"pre_existing": [t for t in person["media_timing"] if t["status"] == "uploaded_earlier"],
                              "other": [t for t in person["media_timing"] if t["status"] != "uploaded_earlier"],
@@ -487,9 +544,15 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
             "mentions": mentioned,
         }
         for facts in (profile["names"], profile["usernames"], profile["avatar"]["photo_ids"], history, profile["avatar"]["changes"],
+                      profile["clients"]["observed"], profile["clients"]["forwarded"], profile["clients"]["reused"],
+                      profile["sticker_sets"],
                       *mentioned.values(), *(r["records"] for r in profile["relations"]["replies_to"])):
             for item in facts:
                 referenced.update(item["records"] if isinstance(item, dict) else [item])
+        for timing in person["media_timing"]:
+            referenced.add(timing["record"])
+            if timing.get("previous_document"):
+                referenced.add(timing["previous_document"]["record"])
         for match in profile["avatar"]["history_similar"]:
             referenced.update(match["records"] + match["other_records"])
         referenced.update(profile["activity"]["deleted_records"])
@@ -508,7 +571,11 @@ def build(store, chat_id, title=None, *, allowed_chats=None):
     return {"format": FORMAT, "chat": {"id": chat_id, "title": title or titles.get(chat_id)},
             "built_at": utcnow(), "journal": {"event_count": head["seq"] if head else 0,
                                               "head_hash": head["hash"] if head else None},
-            "people": result, "record_hashes": hashes, "settings": settings, "limitations": LIMITS,
+            "people": result, "forward_sources": source_summary,
+            "paid_reactions": {"messages": paid_rows, "not_listed": len(paid) - len(paid_rows),
+                "meaning": "Latest retained paid Stars leaderboard per message, not a complete actor list. "
+                           "Counts are snapshot values, not additional payments; anonymous entries keep that flag."},
+            "record_hashes": hashes, "settings": settings, "limitations": LIMITS,
             "contents_in_journal": False}
 
 

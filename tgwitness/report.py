@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import ConfigDict, Field, ValidationError, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
-from . import report_chat_timeline, report_design, report_history, report_layouts, report_repeats, report_selection, report_selection_view
+from . import report_chat_timeline, report_design, report_forwards, report_history, report_layouts, report_media, report_repeats, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -138,7 +138,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -251,6 +251,8 @@ class Digest:
         self.trust_signals = {"drand": 0, "starts": 0, "tdx": 0}
         self.analytics = report_analytics.Analytics()
         self.repeats = report_repeats.Repeats()
+        self.media_repeats = report_media.MediaRepeats()
+        self.forward_sources = report_forwards.Sources()
         self.metrics = metrics.Pipeline(processors, rows_listed)
 
     @staticmethod
@@ -261,6 +263,8 @@ class Digest:
 
     def add(self, event):
         self.analytics.add(event)
+        self.media_repeats.add(event)
+        self.forward_sources.add(event)
         self.metrics.add(event)
         kind, payload, chat = event["kind"], event["payload"], report_analytics.chat_key(event)
         if kind == "beacon.drand":
@@ -316,7 +320,8 @@ class Digest:
     def hash_images(self, folder):
         for digest, info in self.media.items():
             if str(info.get("mime_type") or "").startswith("image/") and (folder / digest).is_file():
-                self.indicators.image(digest, folder / digest, info.get("ref"), info.get("at"))
+                dhash = self.indicators.image(digest, folder / digest, info.get("ref"), info.get("at"))
+                self.media_repeats.image(digest, dhash)
 
     def add_action(self, event):
         kind, payload, at = event["kind"], event["payload"], event["observed_at"]
@@ -355,7 +360,8 @@ class Digest:
                 "actions": list(self.actions.values()), "action_count": self.action_count,
                 "own_messages": self.own_messages, "own_total": self.own_total, "own_scope": sorted(self.own_scope),
                 "analytics": self.analytics.result(), "processors": self.metrics.result(),
-                "repeated": self.repeats.result()}
+                "repeated": self.repeats.result(), "repeated_media": self.media_repeats.result(),
+                "forward_sources": self.forward_sources.result()}
 
 
 def describe_anchor(checkpoint_name, checkpoint, proof_name, proof, query=None, *, public_key=None,
@@ -456,6 +462,9 @@ def file_purpose(say, name):
         "indicators.csv": say("Indicators for spreadsheets: links, domains, wallets, accounts (formula-safe)"),
         "indicators.stix.json": say("The same indicators as a STIX 2.1 bundle"),
         "indicators.misp.json": say("The same indicators as a MISP event"),
+        "media-repeats.json": say("Media occurrences with match types and source records"),
+        "forward-sources.json": say("Observed forwarding sources and recommendation references"),
+        "observed-sources.gexf": say("Typed source graph in GEXF format"),
         "chat.pdf": say("The report as a signed PDF, for printing and filing"),
         "message-ids.json": say("Message numbers: present, absent and every absent run"),
         "events.jsonl": say("Authoritative journal: one signed record per line"),
@@ -1876,6 +1885,8 @@ def report_data(events_again, coverage, context):
         "case_board": context.get("case_board"),
         "indicators": digest.get("indicators") or {"items": [], "total": 0, "not_listed": 0},
         "repeated": digest.get("repeated"),
+        "repeated_media": digest.get("repeated_media"),
+        "forward_sources": digest.get("forward_sources"),
         "files": context.get("files") or {},
         "parts": [{k: p[k] for k in ("index", "file", "from", "to", "count", "first_at", "last_at", "sha256") if k in p}
                   for p in context.get("parts") or []],
@@ -2597,6 +2608,11 @@ class EvidenceHTML:
                                      ref_link(self.context.get("parts"), "records", "seq", "r")).encode("utf-8")
         if self.options.get("show_indicators", True) and (self.digest.get("repeated") or {}).get("rows"):
             yield report_repeats.html(say, next(self.numbers), self.digest["repeated"], self.digest["titles"]).encode("utf-8")
+        if self.options.get("show_indicators", True):
+            for key, module in (("repeated_media", report_media), ("forward_sources", report_forwards)):
+                data = self.digest.get(key) or {}
+                if data.get("rows") or data.get("dropped"):
+                    yield module.html(say, next(self.numbers), data, self.digest["titles"]).encode("utf-8")
         if not self.filtered:
             yield actions_section(say, next(self.numbers), self.digest, self.digest["titles"], links).encode("utf-8")
 
