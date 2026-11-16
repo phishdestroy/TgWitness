@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Persist history FloodWait deadlines so other workers respect the same pause.
 - Recheck access to helper workspaces when resuming or retrying profile collection.
 - Keep session age and loss context within the current authorization, ignore late session checks from
   replaced clients, and distinguish the last successful check from the saved session snapshot.
