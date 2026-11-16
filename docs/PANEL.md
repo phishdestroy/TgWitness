@@ -120,10 +120,27 @@ Preserved-attachment journal entries show the observed type, name and byte size.
 New download outcomes also retain the media kind and duration when Telegram provides
 them. Older signed records stay unchanged; absent metadata is not reconstructed.
 
-- Search the list by name or ID. **Choose** adds or removes watched chats.
+- Search the list by name or ID. Several words match in any order, including a
+  name and part of an ID together. **Choose** adds or removes watched chats.
   **Open Telegram link** takes a username or invite link and saves a preview to the
   journal. **Join / open and observe** then joins the chat and adds it to your sources;
   opening a bot sends it `/start`.
+- The list has four quick filters: **All**, **Priority**, **Changes** (saved edits
+  or deletion notices), and **Needs attention** (lost or unconfirmed access, messages not found on recheck,
+  failed media, history retries or Telegram restrictions). Counts respect the
+  search and type filter; a quick filter replaces the state filter. These choices
+  stay in the URL for reloads and Back/Forward navigation.
+  **Needs attention** does not label a message as deleted. Type, state and custom
+  sorting remain visible as removable chips when **Filters** is collapsed.
+- Large lists show 80 matches at a time; **Show more** adds the next 80. The open
+  chat and a focused row stay available when they match, even outside that batch.
+  The counter shows displayed chats out of all matches. Search covers the entire
+  list, including chats that have not been displayed yet.
+- From search, **↓** moves to the first result, **↑** to the last displayed result,
+  and **Enter** opens the first match. Within the list, **↑/↓** and **Home/End**
+  move focus; **Enter** opens the focused chat. **Escape** returns to search, where
+  pressing it again clears the query. **Clear filters** resets the list without
+  changing collection or the open conversation.
 - The chat header counts messages **deleted, text kept**, **deleted before saving**
   and **not found on recheck**. Each count is a button that shows only those messages;
   press it again to show all. **Deleted** and **Not found at recheck** on a message open
