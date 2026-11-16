@@ -29,7 +29,7 @@
 .sidebar .nav.active .nav-icon { color: var(--accent-text); }
 .sidebar .nav b { background: var(--rail-hover); color: var(--muted); font-size: 10px; font-weight: 500; min-width: 20px; }
 .sidebar .nav.active b { background: var(--surface); color: var(--accent-text); }
-.sidebar .nav-section { margin: 24px 12px 8px; font-size: 10px; font-weight: 600; letter-spacing: .1em; }
+.sidebar .nav-section { margin: 20px 12px 6px; padding: 0; font-size: 10px; line-height: 16px; font-weight: 600; letter-spacing: .1em; }
 .sidebar .nav-more { margin-top: 18px; padding-top: 10px; }
 .sidebar .nav-more > summary { min-height: 42px; padding: 10px 12px; font-size: 12px; color: var(--muted); }
 .sidebar-bottom { margin-top: auto; padding-top: 24px; position: static; }
