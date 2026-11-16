@@ -28,7 +28,7 @@
 <li><strong>Die beiden Unterzeichner widersprachen sich in offiziellen Schriftsätzen direkt:</strong> Schelinski bestätigte 1.938 Beschwerden als Schuldnachweis <em>„unabhängig von den Einzelheiten“</em>; Zurheide legte 2.002 Datensätze mit 64 nachträglichen Einträgen vor und machte eine Verzögerung von 106 Tagen für <em>die „manuelle Schwärzung“</em> einer Datei geltend, die in <strong>36 Sekunden</strong> zusammengestellt worden war durch <code>Aspose.PDF for .NET 20.8</code>;</li>
 <li><strong>Die Rechtsanwälte unterliegen der irrigen Annahme, dass unternehmensinterne Vorwürfe Vorrang vor den gesetzlichen Bestimmungen zur Offenlegung von Daten hätten.</strong></li>
 </ol>
-<h3 id="2-both-doctors-personally-used-the-right-to-be-forgotten--it-is-not-magic-we-have-not-forgotten">2. Beide Ärzte haben persönlich vom „Recht auf Vergessenwerden“ Gebrauch gemacht – es ist keine Zauberei, wir haben nicht vergessen</h3>
+<h3 id="2-both-doctors-personally-used-the-right-to-be-forgotten--it-is-not-magic-we-have-not-forgotten">2. Beide Doktoren haben persönlich vom „Recht auf Vergessenwerden“ Gebrauch gemacht – es ist keine Zauberei, wir haben nicht vergessen</h3>
 <ul>
 <li>Im Anschluss an unsere technische Prüfung der fehlerhaften Schwärzung in der PDF-Datei <strong>reichte Dr. Patrick Vincent Zurheide einen Antrag auf Löschung aus Suchmaschinen gemäß Art. 17 DSGVO ein.</strong></li>
 <li><strong>Genau drei Tage später reichte Dr. Tobias Schelinski seinen eigenen Antrag auf Löschung aus den Suchergebnissen ein.</strong></li>

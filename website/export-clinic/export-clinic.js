@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  const DICT = (() => { try { return JSON.parse(document.getElementById('site-dict')?.textContent || '{}'); } catch { return {}; } })();
+  const T = (text, values = {}) => (DICT[text] || text).replace(/\{(\w+)\}/g, (match, key) => key in values ? values[key] : match);
   const assetBase = new URL(document.querySelector('.export-clinic').dataset.assets, document.baseURI);
   const asset = path => new URL(path, assetBase).href;
   const downloadBase = new URL(document.querySelector('.export-clinic').dataset.downloads, document.baseURI);
@@ -24,8 +26,8 @@
     video.load();
     document.querySelectorAll('[data-version]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
     document.getElementById('film-version-caption').textContent = mode === 'short'
-      ? '1:59.7 · Setup and repeated steps are accelerated ×2–×15 and labeled. Sign-in, the first export and selected comparisons run at their original speed. No audio.'
-      : '6:08.8 source duration · Complete recording with no time edits. This MP4 is a container conversion without video re-encoding. Original MKV available below.';
+      ? T('1:59.7 · Setup and repeated steps are accelerated ×2–×15 and labeled. Sign-in, the first export and selected comparisons run at their original speed. No audio.')
+      : T('6:08.8 source duration · Complete recording with no time edits. This MP4 is a container conversion without video re-encoding. Original MKV available below.');
     chapters.forEach(chapter => chapter.querySelector('.chapter-time').textContent = clock(Number(chapter.dataset[mode])));
   }));
   chapters.forEach(button => button.addEventListener('click', () => seek(Number(button.dataset[mode]))));
@@ -49,15 +51,15 @@
   function renderCase() {
     const item = active.differences[sample];
     byId('case-name').textContent = active.chat_name;
-    byId('case-count').textContent = `${active.message_count} messages · ${active.changed_messages} changed`;
+    byId('case-count').textContent = T('{count} messages · {changed} changed', {count:active.message_count, changed:active.changed_messages});
     message(byId('before-message'), item.before_text);
     message(byId('modified-message'), item.modified_text);
-    byId('message-reference').textContent = `result.json · message ${item.message_id} · ${item.date.replace('T', ' ')}`;
+    byId('message-reference').textContent = 'result.json · ' + T('message {id}', {id:item.message_id}) + ' · ' + item.date.replace('T', ' ');
     byId('before-hash').textContent = active.json_before_sha256.slice(0, 16) + '…';
     byId('modified-hash').textContent = active.json_modified_sha256.slice(0, 16) + '…';
     byId('before-copy').dataset.hash = active.json_before_sha256;
     byId('modified-copy').dataset.hash = active.json_modified_sha256;
-    byId('sample-position').textContent = `Changed message ${sample + 1} of ${active.differences.length}`;
+    byId('sample-position').textContent = T('Changed message {n} of {total}', {n:sample + 1, total:active.differences.length});
     byId('sample-previous').disabled = sample === 0;
     byId('sample-next').disabled = sample === active.differences.length - 1;
     document.querySelectorAll('[data-case]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.case === active.id)));
@@ -66,8 +68,8 @@
     if (active.image_pair) {
       byId('before-image').src = asset(active.image_pair.before);
       byId('modified-image').src = asset(active.image_pair.modified);
-      byId('before-image').alt = `Retained image before local modification, ${active.label}`;
-      byId('modified-image').alt = `Deliberately substituted image, ${active.label}`;
+      byId('before-image').alt = T('Retained image before local modification, {label}', {label:active.label});
+      byId('modified-image').alt = T('Deliberately substituted image, {label}', {label:active.label});
       byId('image-filename').textContent = active.image_pair.file;
     }
   }
