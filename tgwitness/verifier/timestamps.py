@@ -185,6 +185,12 @@ def hashed(algorithm, data):
     return hasher.finalize()
 
 
+def certificate_fingerprint(algorithm, data):
+    if isinstance(algorithm, str):
+        return hashed(algorithm, data)
+    return x509.load_der_x509_certificate(data).fingerprint(algorithm())
+
+
 def issued_by(certificate, issuer):
     method = certificate.signature_algorithm_oid.dotted_string
     if method not in NATIONAL_SIGNATURES:
@@ -255,7 +261,7 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
         raw[data] = x509.load_der_x509_certificate(data)
     signer_data = None
     for data in raw:
-        if hashed(algorithm, data) == named:
+        if certificate_fingerprint(algorithm, data) == named:
             signer_data = data
     if signer_data is None:
         raise ValueError("The reply does not carry the certificate the signature names")
@@ -593,7 +599,7 @@ def revocation_subject(reply, extra=()):
     for data in token["certificates"]:
         loaded[data] = x509.load_der_x509_certificate(data)
     for data in loaded:
-        if hashed(algorithm, data) == named:
+        if certificate_fingerprint(algorithm, data) == named:
             signer = loaded[data]
     certificates = list(loaded.values())
     if signer is None:

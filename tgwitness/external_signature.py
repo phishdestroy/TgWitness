@@ -382,7 +382,7 @@ def certificate_reference(attributes, der):
     first = items(data, items(data, certificates[0])[0])
     if first[0][0] == 0x30:
         chosen, first = algorithm(data, first[0])[0], first[1:]
-    expected = digest(chosen, der) if chosen else hashlib.sha1(der).digest()
+    expected = digest(chosen, der) if chosen else x509.load_der_x509_certificate(der).fingerprint(hashes.SHA1())
     if not first or first[0][0] != 0x04 or value(data, first[0]) != expected:
         raise ValueError("The signing-certificate attribute names a different certificate")
     return "matches" if chosen else "matches_sha1"

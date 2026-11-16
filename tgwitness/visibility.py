@@ -700,6 +700,25 @@ class Attach:
         await self.app(scope, receive, send)
 
 
+def action_error(exc):
+    from . import interactions, secret_chats
+
+    allowed = (
+        NOT_OBSERVED, *REFUSED.values(), interactions.GOAL_OFF, secret_chats.UNAVAILABLE,
+        "No message of this chat is saved here, so nothing can be marked as read.",
+        "Only messages saved here can be marked as read.",
+        "Only incoming messages saved here can be marked as opened.",
+        "No received message of this chat is saved here, so nothing can be marked as read.",
+        "Only received messages saved here can be marked as opened.",
+        "Turn on pseudo-secret for this account first.",
+        "Connect this account to Telegram first.",
+    )
+    for message in allowed:
+        if str(exc) == message:
+            return message
+    return "The visibility action could not be completed."
+
+
 def register(app, authenticate, require_live, operation):
     from fastapi import Depends, HTTPException, Request
     from . import secret_chats
@@ -729,7 +748,7 @@ def register(app, authenticate, require_live, operation):
         try:
             return await operation(call, *args)
         except ValueError as exc:
-            raise HTTPException(409, str(exc)) from None
+            raise HTTPException(409, action_error(exc)) from None
 
     @app.get("/api/visibility", dependencies=[Depends(authenticate)])
     async def visibility_view():
