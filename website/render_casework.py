@@ -55,56 +55,41 @@ def mark(d, x, y):
 
 
 def main_cover(display, text, mobile, still):
-    width, height = (640, 700) if mobile else (1200, 450)
-    title = "Messages change. Keep the evidence."
+    width, height = (640, 524) if mobile else (1200, 326)
+    title = "TgWitness — Capture Telegram. Preserve the record."
     d = canvas(display, width, height, title, True, corners=False)
-    d.add('<defs><linearGradient id="headline" x2="1" y2=".3">'
-          '<stop stop-color="#9dbbff"/><stop offset="1" stop-color="#92e0cc"/>'
-          '</linearGradient></defs>')
     if not still:
         d.add('''<style>
-.readme-stage{animation:readme-stage 12.6s ease-in-out infinite}
-.stage-1{animation-delay:-8.4s}.stage-2{animation-delay:-4.2s}
-@keyframes readme-stage{0%,26%,100%{opacity:1}33%,93%{opacity:.13}}
-@media(prefers-reduced-motion:reduce){.readme-stage{animation:none;opacity:1}}
+.record-link{stroke-dasharray:12 150;animation:record-link 9s linear infinite}
+@keyframes record-link{to{stroke-dashoffset:-324}}
+@media(prefers-reduced-motion:reduce){.record-link{animation:none}}
 </style>''')
-    mark(d, 40, 32)
-    d.text("TgWitness", 89, 60, 29, INK, 700, -.8)
-    d.text("TELEGRAM INVESTIGATIONS", 40, 101, 13 if mobile else 12, BLUE, 600, 1.4)
-    d.text("Messages change.", 37, 167 if mobile else 169, 58 if mobile else 55, INK, 700, -1.8)
-    d.text("Keep the evidence.", 37, 231 if mobile else 230, 58 if mobile else 55, "url(#headline)", 700, -1.8)
+    mark(d, 36, 29)
+    d.text("PHISHDESTROY / OPEN SOURCE", 86, 54, 17 if mobile else 13, MUTED, 500, 1)
+    d.text("TgWitness", 33, 135, 70, INK, 700, -2.4)
     d.font = text
-    d.text("Capture conversations. Keep the changes.", 40, 280, 25 if mobile else 21, MUTED)
-    d.text("Share a record others can verify.", 40, 316, 25 if mobile else 21, MUTED)
+    d.text("Capture Telegram.", 37, 189, 32, INK, 600, -.6)
+    d.text("Preserve the record.", 37, 231, 32, BLUE, 600, -.6)
     if not mobile:
-        d.add('<path d="M40 357H584" stroke="#30495f"/>')
-        for i, (label, x) in enumerate((("CAPTURE", 40), ("INVESTIGATE", 225), ("VERIFY", 449))):
-            d.text(f"0{i+1}", x, 396, 12, GREEN, 600)
-            d.text(label, x+27, 396, 13, MUTED, 600, .8)
-        d.add('<path d="M170 391h22m-5-4 5 4-5 4M392 391h22m-5-4 5 4-5 4" '
-              'fill="none" stroke="#6689aa" stroke-width="1.5"/>')
-    x, y, w = (32, 353, 576) if mobile else (654, 99, 506)
-    d.add(f'<rect x="{x}" y="{y}" width="{w}" height="279" rx="18" '
-          'fill="#102136" stroke="#38516a"/>')
-    d.add(f'<circle cx="{x+24}" cy="{y+26}" r="3.5" fill="{GREEN}"/>')
-    d.text("ONE MESSAGE. ITS RECORDED HISTORY.", x+38, y+31, 15 if mobile else 11, MUTED, 600, .7)
-    records = (("MESSAGE OBSERVED", "Meet at 14:00.", BLUE),
-               ("EDIT PRESERVED", "Meet at 15:00.", GOLD),
-               ("DELETION OBSERVED", "Saved versions remain.", GREEN))
+        d.add('<path d="M37 263H559" stroke="#30495f"/>')
+        d.text("History · Investigation · Verifiable exports", 37, 294, 17, MUTED)
+    x, y, w = (36, 282, 568) if mobile else (654, 40, 506)
+    d.text("A MESSAGE AND ITS SAVED HISTORY", x, y, 20 if mobile else 12, MUTED, 600, .8)
+    d.add(f'<path d="M{x+9} {y+37}v136" stroke="#3e5d76" stroke-width="2"/>')
+    if not still:
+        d.add(f'<path class="record-link" d="M{x+9} {y+37}v136" stroke="{BLUE}" stroke-width="2"/>')
+    records = (("MESSAGE", "Meet at 14:00.", BLUE),
+               ("EDIT", "Meet at 15:00.", GOLD),
+               ("DELETION NOTICE", "Both versions retained.", GREEN))
     for i, (label, message, color) in enumerate(records):
-        yy = y+49+i*72
-        d.add(f'<rect x="{x+16}" y="{yy}" width="{w-32}" height="64" rx="10" '
-              'fill="#152b42" stroke="#30485f"/>')
-        d.add(f'<rect class="readme-stage stage-{i}" x="{x+16}" y="{yy}" width="{w-32}" '
-              f'height="64" rx="10" fill="none" stroke="{color}" stroke-width="1.5"/>')
-        d.text(f"0{i+1}", x+30, yy+39, 15, color, 600)
-        d.text(label, x+66, yy+22, 13 if mobile else 11, color, 600, .6)
-        d.text(message, x+66, yy+49, 23 if mobile else 21, INK, 600)
-        d.add(f'<path d="m{x+w-50} {yy+30} 6 6 12-14" fill="none" '
-              f'stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
-    d.text("FICTIONAL EXAMPLE / SIGNED OBSERVATIONS", x+18, y+310, 16 if mobile else 11, MUTED, 500, .4)
+        yy = y+17+i*64
+        d.add(f'<circle cx="{x+9}" cy="{yy+25}" r="5" fill="#0c1c2e" stroke="{color}" stroke-width="2"/>'
+              f'<rect x="{x+30}" y="{yy}" width="{w-30}" height="54" rx="8" fill="#142b41" stroke="#30495f"/>')
+        d.text(label, x+46, yy+19, 17 if mobile else 10, color, 600, .6)
+        d.text(message, x+46, yy+43, 24 if mobile else 20, INK, 500)
+    d.text("Illustrative history · signed observations", x+30, y+226, 18 if mobile else 12, MUTED)
     name = "casework-hero" + ("-mobile" if mobile else "") + ("-static" if still else "") + ".svg"
-    save(d, name, title + " A fictional message changes from 'Meet at 14:00' to 'Meet at 15:00'. After a deletion notice, its captured versions remain in the signed journal. Capture, investigate and verify.")
+    save(d, name, title + " A fictional message changes from 'Meet at 14:00' to 'Meet at 15:00'. A deletion notice follows; both captured versions remain in the signed journal.")
 
 
 def hero(display, text, mobile=False, still=False, wiki=False):
