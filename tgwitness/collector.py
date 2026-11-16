@@ -204,7 +204,8 @@ def update_details(update, chat_ids):
 
 
 DELETION_BATCH_MEANING = (
-    "Telegram reported several message IDs as deleted in one update.")
+    "Telegram reported several message IDs as deleted in one update. "
+    "The notice does not identify who deleted them or prove the whole history was cleared.")
 ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
                        "stopped at that moment; records saved before it remain in the journal.")
 RESTRICTED_MEANING = ("Telegram marks this chat as restricted and gives the reason shown. Ordinary clients hide its "

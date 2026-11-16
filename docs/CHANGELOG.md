@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
 - Share resumable-history flood deadlines with other workers and retry admin-log reads after Premium flood waits.
 - Persist history FloodWait deadlines so other workers respect the same pause.
 - The workspace switcher shows each account with its avatar, name and a colored status (observing, observation

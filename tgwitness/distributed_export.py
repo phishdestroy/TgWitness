@@ -519,17 +519,18 @@ class Run:
                     with temporary.open("r+b") as stream:
                         os.fsync(stream.fileno())
                     temporary.replace(path)
+                receipt_profile = pages.state["profile_id"] if pages else profile
                 receipt = {"job_id": self.job["id"], "low": task["low"], "high": task["high"],
-                           "profile_id": profile, "count": count, "sha256": digest, "observed_at": utcnow()}
+                           "profile_id": receipt_profile, "count": count, "sha256": digest, "observed_at": utcnow()}
                 if transport:
                     receipt.update(transport="takeout", transport_generation=pages.state["transport_generation"] if pages
                                    else transport.secret["generations"][-1]["generation"])
                 if pages:
                     receipt["checkpoint"] = self.page_summary(pages.state)
                 durable_write(directory / "receipts" / (str(task["low"]) + ".json"),
-                              canonical(self.signed(receipt, collector.vault)))
+                              canonical(self.signed(receipt, self.app_for(receipt_profile).state.vault)))
                 self.db.execute("UPDATE tasks SET phase='done',profile=?,count=?,sha256=? WHERE low=?",
-                                (profile, count, digest, task["low"]))
+                                (receipt_profile, count, digest, task["low"]))
                 self.db.commit()
                 worker.update(state="running", wait_until=None)
                 self.update_counts()
