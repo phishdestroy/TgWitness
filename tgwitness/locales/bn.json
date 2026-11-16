@@ -9926,5 +9926,9 @@
   "What to collect": "কী সংগ্রহ করবেন",
   "{authors} authors with saved messages · {messages} messages": "সংরক্ষিত বার্তাসহ লেখক: {authors} · বার্তা: {messages}",
   "{n} accounts will share the work.": "{n}টি অ্যাকাউন্ট কাজ ভাগ করে নেবে।",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "এই চ্যাটে যারা লিখেছেন তাদের সবার প্রোফাইল, বায়ো, প্রোফাইল ছবি, উপহার ও লিঙ্ক। কয়েকটি অ্যাকাউন্ট কাজ ভাগ করে নিতে পারে।"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "এই চ্যাটে যারা লিখেছেন তাদের সবার প্রোফাইল, বায়ো, প্রোফাইল ছবি, উপহার ও লিঙ্ক। কয়েকটি অ্যাকাউন্ট কাজ ভাগ করে নিতে পারে।",
+  "Offline · 0 B sent": "অফলাইন · 0 B পাঠানো হয়েছে",
+  "Network requests: {n}": "নেটওয়ার্ক অনুরোধ: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "পৃষ্ঠাটি খোলার পর থেকে এই ব্রাউজার গুনেছে। পৃষ্ঠার নীতি কোনো নেটওয়ার্ক সংযোগের অনুমতি দেয় না।",
+  "Blocked attempts: {n}": "অবরুদ্ধ প্রচেষ্টা: {n}"
 }

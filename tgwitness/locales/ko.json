@@ -9875,5 +9875,9 @@
   "What to collect": "수집할 항목",
   "{authors} authors with saved messages · {messages} messages": "저장된 메시지가 있는 작성자 {authors}명 · 메시지 {messages}개",
   "{n} accounts will share the work.": "계정 {n}개가 작업을 나눕니다.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "이 채팅에 글을 쓴 모든 사람의 프로필, 소개, 프로필 사진, 선물, 링크. 여러 계정이 작업을 나눌 수 있습니다."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "이 채팅에 글을 쓴 모든 사람의 프로필, 소개, 프로필 사진, 선물, 링크. 여러 계정이 작업을 나눌 수 있습니다.",
+  "Offline · 0 B sent": "오프라인 · 0 B 전송",
+  "Network requests: {n}": "네트워크 요청: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "페이지를 연 이후 이 브라우저가 센 값입니다. 페이지 정책은 어떤 네트워크 연결도 허용하지 않습니다.",
+  "Blocked attempts: {n}": "차단된 시도: {n}"
 }

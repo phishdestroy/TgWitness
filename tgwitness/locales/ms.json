@@ -9875,5 +9875,9 @@
   "What to collect": "Apa yang dikumpul",
   "{authors} authors with saved messages · {messages} messages": "{authors} pengarang dengan mesej tersimpan · {messages} mesej",
   "{n} accounts will share the work.": "{n} akaun akan berkongsi kerja.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profil, bio, foto profil, hadiah dan pautan semua orang yang menulis dalam sembang ini. Beberapa akaun boleh berkongsi kerja."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profil, bio, foto profil, hadiah dan pautan semua orang yang menulis dalam sembang ini. Beberapa akaun boleh berkongsi kerja.",
+  "Offline · 0 B sent": "Luar talian · 0 B dihantar",
+  "Network requests: {n}": "Permintaan rangkaian: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Dikira oleh pelayar ini sejak halaman dibuka. Dasar halaman tidak membenarkan sebarang sambungan rangkaian.",
+  "Blocked attempts: {n}": "Cubaan disekat: {n}"
 }

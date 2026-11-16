@@ -9998,5 +9998,9 @@
   "What to collect": "Что собирать",
   "{authors} authors with saved messages · {messages} messages": "Авторов с сохранёнными сообщениями: {authors} · сообщений: {messages}",
   "{n} accounts will share the work.": "Аккаунтов в работе: {n}.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Профили, био, аватары, подарки и ссылки всех, кто писал в этом чате. Работу можно разделить между несколькими аккаунтами."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Профили, био, аватары, подарки и ссылки всех, кто писал в этом чате. Работу можно разделить между несколькими аккаунтами.",
+  "Offline · 0 B sent": "Офлайн · отправлено 0 Б",
+  "Network requests: {n}": "Сетевых запросов: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Считает этот браузер с момента открытия страницы. Политика страницы не разрешает сетевых соединений.",
+  "Blocked attempts: {n}": "Заблокировано попыток: {n}"
 }

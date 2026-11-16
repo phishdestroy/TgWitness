@@ -9875,5 +9875,9 @@
   "What to collect": "Yang dikumpulkan",
   "{authors} authors with saved messages · {messages} messages": "{authors} penulis dengan pesan tersimpan · {messages} pesan",
   "{n} accounts will share the work.": "{n} akun akan berbagi pekerjaan.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profil, bio, foto profil, hadiah, dan tautan semua orang yang menulis di obrolan ini. Beberapa akun dapat berbagi pekerjaan."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Profil, bio, foto profil, hadiah, dan tautan semua orang yang menulis di obrolan ini. Beberapa akun dapat berbagi pekerjaan.",
+  "Offline · 0 B sent": "Luring · 0 B terkirim",
+  "Network requests: {n}": "Permintaan jaringan: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Dihitung oleh browser ini sejak halaman dibuka. Kebijakan halaman tidak mengizinkan koneksi jaringan apa pun.",
+  "Blocked attempts: {n}": "Percobaan yang diblokir: {n}"
 }

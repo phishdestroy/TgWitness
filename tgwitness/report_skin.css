@@ -41,6 +41,7 @@ a{color:var(--accent-text);text-underline-offset:3px;text-decoration-thickness:1
 .sig-badge.partial{border-color:var(--warn-line);background:var(--warntint);color:var(--warn)}
 .sig-badge.ok{border-color:var(--ok-line);background:var(--oktint);color:var(--ok)}
 .sig-badge.bad{border-color:var(--bad-line);background:var(--badtint);color:var(--bad)}
+.net-badge[hidden]{display:none}
 .lang-pill{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 11px;border:1px solid var(--line);
   border-radius:9px;background:var(--bg2);color:var(--ink);font-size:13px;font-weight:600}
 .lang-pill .i{width:16px;height:16px;color:var(--muted)}

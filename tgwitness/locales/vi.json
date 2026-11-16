@@ -9875,5 +9875,9 @@
   "What to collect": "Thu thập những gì",
   "{authors} authors with saved messages · {messages} messages": "{authors} tác giả có tin nhắn đã lưu · {messages} tin nhắn",
   "{n} accounts will share the work.": "{n} tài khoản sẽ chia nhau công việc.",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Hồ sơ, tiểu sử, ảnh đại diện, quà tặng và liên kết của mọi người đã viết trong cuộc trò chuyện này. Nhiều tài khoản có thể chia nhau công việc."
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "Hồ sơ, tiểu sử, ảnh đại diện, quà tặng và liên kết của mọi người đã viết trong cuộc trò chuyện này. Nhiều tài khoản có thể chia nhau công việc.",
+  "Offline · 0 B sent": "Ngoại tuyến · đã gửi 0 B",
+  "Network requests: {n}": "Yêu cầu mạng: {n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "Do trình duyệt này đếm từ khi mở trang. Chính sách của trang không cho phép kết nối mạng nào.",
+  "Blocked attempts: {n}": "Lần thử bị chặn: {n}"
 }

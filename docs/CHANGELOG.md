@@ -62,6 +62,10 @@
   participant: messages, conversations started after 6 hours of silence, median
   reply time, the longest run in a row and the night share, in message order and
   UTC. It follows the participant chart setting and its labels (aliases by default).
+- HTML reports opened from disk show **Offline · 0 B sent** next to the signature
+  badge. The browser counts network requests since the page opened; any request
+  turns it into a red count, and attempts blocked by the page policy are listed in
+  its tooltip. Served over HTTP, the badge stays hidden.
 - Cloud-chat history can be forwarded in order to a new private channel or
   supergroup, or an existing channel/group with posting access. A preview fixes
   the history boundary before an explicit start. Transfers retain albums, shared

@@ -9875,5 +9875,9 @@
   "What to collect": "收集内容",
   "{authors} authors with saved messages · {messages} messages": "有已保存消息的作者 {authors} 位 · 消息 {messages} 条",
   "{n} accounts will share the work.": "{n} 个账户将分担工作。",
-  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "在此聊天中发言的所有人的资料、简介、头像、礼物和链接。可由多个账户分担工作。"
+  "Profiles, bios, profile photos, gifts and links of everyone who wrote in this chat. Several accounts can share the work.": "在此聊天中发言的所有人的资料、简介、头像、礼物和链接。可由多个账户分担工作。",
+  "Offline · 0 B sent": "离线 · 已发送 0 B",
+  "Network requests: {n}": "网络请求：{n}",
+  "Counted by this browser since the page opened. The page policy allows no network connections.": "由此浏览器自页面打开以来统计。页面策略不允许任何网络连接。",
+  "Blocked attempts: {n}": "已拦截的尝试：{n}"
 }
