@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "Pemeriksaan koneksi terlalu lama. Coba lagi atau pilih rute lain.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Membuat ruang kerja, menyiapkan WARP, dan memeriksa sesi dengan Telegram…",
   "WARP · recommended": "WARP · direkomendasikan",
-  "Managed local tunnel": "Terowongan lokal yang dikelola"
+  "Managed local tunnel": "Terowongan lokal yang dikelola",
+  "Forward": "Teruskan",
+  "Forward to": "Teruskan ke",
+  "Forward as {account}?": "Teruskan sebagai {account}?",
+  "Forwarded {n} messages to {chat}.": "{n} pesan diteruskan ke {chat}.",
+  "Forward up to {n} messages at a time.": "Teruskan paling banyak {n} pesan sekaligus.",
+  "No matching chats.": "Tidak ada obrolan yang cocok.",
+  "Destination chat": "Obrolan tujuan",
+  "Requested to forward {n} messages": "Diminta meneruskan {n} pesan",
+  "Requested to forward {n} messages to chat {chat}.": "Diminta meneruskan {n} pesan ke obrolan {chat}.",
+  "Forwarded messages": "Pesan diteruskan",
+  "Select messages and a chat to forward them to.": "Pilih pesan dan obrolan tujuan.",
+  "Select each message once.": "Pilih setiap pesan sekali saja.",
+  "Choose another chat to forward to.": "Pilih obrolan lain sebagai tujuan."
 }

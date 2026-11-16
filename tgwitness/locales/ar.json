@@ -10223,5 +10223,18 @@
   "The connection check took too long. Try again or choose another route.": "استغرق التحقق من الاتصال وقتًا طويلًا. حاول مرة أخرى أو اختر مسارًا آخر.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "جارٍ إنشاء مساحة العمل وإعداد WARP والتحقق من الجلسة لدى Telegram…",
   "WARP · recommended": "WARP · موصى به",
-  "Managed local tunnel": "نفق محلي مُدار"
+  "Managed local tunnel": "نفق محلي مُدار",
+  "Forward": "إعادة توجيه",
+  "Forward to": "إعادة التوجيه إلى",
+  "Forward as {account}?": "إعادة التوجيه باسم {account}؟",
+  "Forwarded {n} messages to {chat}.": "تمت إعادة توجيه {n} رسائل إلى {chat}.",
+  "Forward up to {n} messages at a time.": "أعد توجيه {n} رسالة على الأكثر في كل مرة.",
+  "No matching chats.": "لا توجد محادثات مطابقة.",
+  "Destination chat": "محادثة الوجهة",
+  "Requested to forward {n} messages": "طُلبت إعادة توجيه {n} رسائل",
+  "Requested to forward {n} messages to chat {chat}.": "طُلبت إعادة توجيه {n} رسائل إلى المحادثة {chat}.",
+  "Forwarded messages": "رسائل معاد توجيهها",
+  "Select messages and a chat to forward them to.": "اختر الرسائل ومحادثة الوجهة.",
+  "Select each message once.": "اختر كل رسالة مرة واحدة.",
+  "Choose another chat to forward to.": "اختر محادثة أخرى لإعادة التوجيه."
 }

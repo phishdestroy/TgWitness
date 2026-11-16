@@ -10019,5 +10019,18 @@
   "The connection check took too long. Try again or choose another route.": "کنکشن کی جانچ میں بہت دیر لگی۔ دوبارہ کوشش کریں یا کوئی اور راستہ منتخب کریں۔",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "ورک اسپیس بنائی جا رہی ہے، WARP سیٹ اپ ہو رہا ہے اور Telegram کے ساتھ سیشن جانچا جا رہا ہے…",
   "WARP · recommended": "WARP · تجویز کردہ",
-  "Managed local tunnel": "مینجڈ لوکل ٹنل"
+  "Managed local tunnel": "مینجڈ لوکل ٹنل",
+  "Forward": "فارورڈ کریں",
+  "Forward to": "اس میں فارورڈ کریں",
+  "Forward as {account}?": "{account} کے طور پر فارورڈ کریں؟",
+  "Forwarded {n} messages to {chat}.": "{n} پیغامات {chat} میں فارورڈ ہو گئے۔",
+  "Forward up to {n} messages at a time.": "ایک وقت میں زیادہ سے زیادہ {n} پیغامات فارورڈ کریں۔",
+  "No matching chats.": "کوئی مماثل چیٹ نہیں۔",
+  "Destination chat": "منزل چیٹ",
+  "Requested to forward {n} messages": "{n} پیغامات فارورڈ کرنے کی درخواست کی گئی",
+  "Requested to forward {n} messages to chat {chat}.": "{n} پیغامات چیٹ {chat} میں فارورڈ کرنے کی درخواست کی گئی۔",
+  "Forwarded messages": "فارورڈ شدہ پیغامات",
+  "Select messages and a chat to forward them to.": "پیغامات اور منزل چیٹ منتخب کریں۔",
+  "Select each message once.": "ہر پیغام صرف ایک بار منتخب کریں۔",
+  "Choose another chat to forward to.": "فارورڈ کرنے کے لیے کوئی اور چیٹ منتخب کریں۔"
 }

@@ -10019,5 +10019,18 @@
   "The connection check took too long. Try again or choose another route.": "Bağlantı kontrolü çok uzun sürdü. Yeniden deneyin veya başka bir rota seçin.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Çalışma alanı oluşturuluyor, WARP kuruluyor ve oturum Telegram’da kontrol ediliyor…",
   "WARP · recommended": "WARP · önerilen",
-  "Managed local tunnel": "Yönetilen yerel tünel"
+  "Managed local tunnel": "Yönetilen yerel tünel",
+  "Forward": "İlet",
+  "Forward to": "Şuraya ilet",
+  "Forward as {account}?": "{account} olarak iletilsin mi?",
+  "Forwarded {n} messages to {chat}.": "{n} mesaj {chat} sohbetine iletildi.",
+  "Forward up to {n} messages at a time.": "Tek seferde en fazla {n} mesaj iletin.",
+  "No matching chats.": "Eşleşen sohbet yok.",
+  "Destination chat": "Hedef sohbet",
+  "Requested to forward {n} messages": "{n} mesajın iletilmesi istendi",
+  "Requested to forward {n} messages to chat {chat}.": "{n} mesajın {chat} sohbetine iletilmesi istendi.",
+  "Forwarded messages": "İletilen mesajlar",
+  "Select messages and a chat to forward them to.": "Mesajları ve hedef sohbeti seçin.",
+  "Select each message once.": "Her mesajı yalnızca bir kez seçin.",
+  "Choose another chat to forward to.": "İletmek için başka bir sohbet seçin."
 }

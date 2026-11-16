@@ -1,6 +1,6 @@
-export function createHistoryForward({json, tr, confirm}) {
+export function createHistoryForward({json, tr, confirm, choose}) {
   let dialog = null, generation = 0, timer = null, current = () => false, opener = null;
-  let form, mode, title, destination, review, summary, feedback, start, check, actions, plan, job, startId, source;
+  let form, mode, title, destination, chosen = null, review, summary, feedback, start, check, actions, plan, job, startId, source;
   let pending = false, operation = 0, stamp = '';
   const make = (tag, text = '', cls = '') => {const el = document.createElement(tag);el.textContent = text;if (cls) el.className = cls;return el;};
   const button = (label, work, cls = 'secondary') => {const el = make('button', tr(label), cls);el.type = 'button';el.addEventListener('click', work);return el;};
@@ -11,12 +11,13 @@ export function createHistoryForward({json, tr, confirm}) {
     if (opener?.isConnected) opener.focus({preventScroll: true});opener = null;
   }
   function owner() {const ticket = generation;return () => ticket === generation && !!dialog && current();}
-  function values() {return {source: source.id, mode: mode.value, destination: mode.value === 'existing' ? Number(destination.value) : null, title: mode.value === 'existing' ? '' : title.value.trim()};}
+  function values() {return {source: source.id, mode: mode.value, destination: mode.value === 'existing' ? chosen.chat_id : null, title: mode.value === 'existing' ? '' : title.value.trim()};}
   function controls() {
     if (!dialog) return;
     mode.disabled = title.disabled = destination.disabled = pending || !!active();
     title.closest('label').hidden = mode.value === 'existing';title.required = mode.value !== 'existing';
-    destination.closest('label').hidden = mode.value !== 'existing';destination.required = mode.value === 'existing';
+    destination.closest('.forward-destination').hidden = mode.value !== 'existing';
+    destination.textContent = chosen ? chosen.title : tr('Choose a chat');destination.classList.toggle('chosen', !!chosen);
     check.disabled = pending || !!active();start.disabled = pending || !!active() || !plan || plan.expires_at * 1000 <= Date.now();
     form.hidden = !!active();
     for (const el of actions.children) el.disabled = pending;
@@ -77,6 +78,7 @@ export function createHistoryForward({json, tr, confirm}) {
   function schedule() {clearTimeout(timer);if (dialog) timer = setTimeout(poll, 2000);}
   async function preview() {
     if (pending || !form.reportValidity()) return;
+    if (mode.value === 'existing' && !chosen) {feedback.textContent = tr('Choose a chat');destination.focus();return;}
     const valid = owner(), body = values();operation++;pending = true;feedback.textContent = '';controls();
     try {const result = await json('history-forward/plan', body);if (!valid()) return;plan = result;startId = Array.from(crypto.getRandomValues(new Uint8Array(16)), value => value.toString(16).padStart(2, '0')).join('');showPlan();}
     catch (error) {if (valid()) {invalidate();feedback.textContent = error.message;}}
@@ -118,8 +120,15 @@ export function createHistoryForward({json, tr, confirm}) {
       const option = make('option', tr(label));option.value = value;mode.append(option);
     }
     title = field('Title', make('input'));title.type = 'text';title.maxLength = 128;title.value = source.title.slice(0, 128);
-    destination = field('Telegram ID', make('input'));destination.type = 'text';destination.inputMode = 'numeric';destination.pattern = '-[1-9][0-9]{0,15}';
-    for (const field of [mode, title, destination]) field.addEventListener('input', invalidate);
+    chosen = null;
+    const place = make('div', '', 'forward-destination');place.append(make('span', tr('Destination chat')));
+    destination = button('Choose a chat', async () => {
+      const valid = owner(), picked = await choose({title: tr('Destination chat'), exclude: [source.id], opener: destination});
+      if (!valid() || !picked) return;
+      chosen = picked;invalidate();
+    }, 'secondary forward-choose');
+    place.append(destination);form.append(place);
+    for (const field of [mode, title]) field.addEventListener('input', invalidate);
     check = button('Preview', preview);form.append(check);
     start = button('Start', begin, 'primary');review = make('div', '', 'forward-review');
     summary = make('div', '', 'forward-summary');summary.setAttribute('aria-live', 'polite');

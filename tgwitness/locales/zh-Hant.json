@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "連線檢查耗時過久。請重試或選擇其他路線。",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "正在建立工作區、設定 WARP 並透過 Telegram 檢查工作階段…",
   "WARP · recommended": "WARP · 推薦",
-  "Managed local tunnel": "受管本地隧道"
+  "Managed local tunnel": "受管本地隧道",
+  "Forward": "轉傳",
+  "Forward to": "轉傳到",
+  "Forward as {account}?": "以 {account} 身分轉傳？",
+  "Forwarded {n} messages to {chat}.": "已將 {n} 則訊息轉傳到 {chat}。",
+  "Forward up to {n} messages at a time.": "每次最多轉傳 {n} 則訊息。",
+  "No matching chats.": "沒有符合的聊天。",
+  "Destination chat": "目標聊天",
+  "Requested to forward {n} messages": "已要求轉傳 {n} 則訊息",
+  "Requested to forward {n} messages to chat {chat}.": "已要求將 {n} 則訊息轉傳到聊天 {chat}。",
+  "Forwarded messages": "已轉傳的訊息",
+  "Select messages and a chat to forward them to.": "請選擇訊息和目標聊天。",
+  "Select each message once.": "每則訊息只能選擇一次。",
+  "Choose another chat to forward to.": "請選擇另一個聊天作為轉傳目標。"
 }

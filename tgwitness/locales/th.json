@@ -9968,5 +9968,18 @@
   "The connection check took too long. Try again or choose another route.": "การตรวจสอบการเชื่อมต่อใช้เวลานานเกินไป ลองอีกครั้งหรือเลือกเส้นทางอื่น",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "กำลังสร้างพื้นที่ทำงาน ตั้งค่า WARP และตรวจสอบเซสชันกับ Telegram…",
   "WARP · recommended": "WARP · แนะนำ",
-  "Managed local tunnel": "อุโมงค์ท้องถิ่นที่จัดการ"
+  "Managed local tunnel": "อุโมงค์ท้องถิ่นที่จัดการ",
+  "Forward": "ส่งต่อ",
+  "Forward to": "ส่งต่อไปยัง",
+  "Forward as {account}?": "ส่งต่อในนาม {account} ไหม",
+  "Forwarded {n} messages to {chat}.": "ส่งต่อ {n} ข้อความไปยัง {chat} แล้ว",
+  "Forward up to {n} messages at a time.": "ส่งต่อได้ครั้งละไม่เกิน {n} ข้อความ",
+  "No matching chats.": "ไม่มีแชทที่ตรงกัน",
+  "Destination chat": "แชทปลายทาง",
+  "Requested to forward {n} messages": "ขอส่งต่อ {n} ข้อความ",
+  "Requested to forward {n} messages to chat {chat}.": "ขอส่งต่อ {n} ข้อความไปยังแชท {chat}",
+  "Forwarded messages": "ข้อความที่ส่งต่อ",
+  "Select messages and a chat to forward them to.": "เลือกข้อความและแชทปลายทาง",
+  "Select each message once.": "เลือกแต่ละข้อความเพียงครั้งเดียว",
+  "Choose another chat to forward to.": "เลือกแชทอื่นเพื่อส่งต่อ"
 }

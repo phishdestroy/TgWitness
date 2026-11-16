@@ -673,6 +673,8 @@ class SystemOperations:
                     )
                 if allowed is not None and body.chat_id not in allowed:
                     raise Refused("This chat is not open to this access.")
+                if allowed is not None and body.action == "forward" and body.destination not in allowed:
+                    raise Refused("This chat is not open to this access.")
             except Refused as exc:
                 raise ValueError(str(exc)) from None
 

@@ -10070,5 +10070,18 @@
   "The connection check took too long. Try again or choose another route.": "בדיקת החיבור נמשכה זמן רב מדי. נסו שוב או בחרו נתיב אחר.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "יוצרים את סביבת העבודה, מגדירים WARP ובודקים את הסשן מול Telegram…",
   "WARP · recommended": "WARP · מומלץ",
-  "Managed local tunnel": "מנהרה מקומית מנוהלת"
+  "Managed local tunnel": "מנהרה מקומית מנוהלת",
+  "Forward": "העבר",
+  "Forward to": "העבר אל",
+  "Forward as {account}?": "להעביר בתור {account}?",
+  "Forwarded {n} messages to {chat}.": "הועברו {n} הודעות אל {chat}.",
+  "Forward up to {n} messages at a time.": "אפשר להעביר עד {n} הודעות בכל פעם.",
+  "No matching chats.": "אין צ'אטים תואמים.",
+  "Destination chat": "צ'אט יעד",
+  "Requested to forward {n} messages": "התבקשה העברה של {n} הודעות",
+  "Requested to forward {n} messages to chat {chat}.": "התבקשה העברה של {n} הודעות לצ'אט {chat}.",
+  "Forwarded messages": "הודעות שהועברו",
+  "Select messages and a chat to forward them to.": "בחר הודעות וצ'אט יעד.",
+  "Select each message once.": "בחר כל הודעה פעם אחת בלבד.",
+  "Choose another chat to forward to.": "בחר צ'אט אחר להעברה."
 }

@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- Messages can be forwarded from the chat view: “Forward” under a message or for up to 100 selected messages, to a
+  chat picked by name. It uses the account's message pace and is recorded in the journal. “Forward chat” now picks an
+  existing destination by name instead of asking for its numeric Telegram ID.
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
 - Chat search also lists the account's Telegram chats that are not observed yet, each with “Add”, and offers to open
   a typed @username or t.me link right away. Before, adding a chat meant leaving for Sources or the link form.

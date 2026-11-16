@@ -10029,5 +10029,18 @@
   "The connection check took too long. Try again or choose another route.": "La vérification de la connexion a pris trop de temps. Réessayez ou choisissez une autre route.",
   "Creating the workspace, setting up WARP and checking the session with Telegram…": "Création de l’espace de travail, configuration de WARP et vérification de la session auprès de Telegram…",
   "WARP · recommended": "WARP · recommandé",
-  "Managed local tunnel": "Tunnel local géré"
+  "Managed local tunnel": "Tunnel local géré",
+  "Forward": "Transférer",
+  "Forward to": "Transférer vers",
+  "Forward as {account}?": "Transférer en tant que {account} ?",
+  "Forwarded {n} messages to {chat}.": "{n} messages transférés vers {chat}.",
+  "Forward up to {n} messages at a time.": "Transférez au plus {n} messages à la fois.",
+  "No matching chats.": "Aucun chat correspondant.",
+  "Destination chat": "Chat de destination",
+  "Requested to forward {n} messages": "Transfert de {n} messages demandé",
+  "Requested to forward {n} messages to chat {chat}.": "Transfert de {n} messages vers le chat {chat} demandé.",
+  "Forwarded messages": "Messages transférés",
+  "Select messages and a chat to forward them to.": "Sélectionnez des messages et un chat de destination.",
+  "Select each message once.": "Sélectionnez chaque message une seule fois.",
+  "Choose another chat to forward to.": "Choisissez un autre chat de destination."
 }

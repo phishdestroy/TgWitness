@@ -535,6 +535,8 @@ async def interaction_action(
                 "This access opens only chosen chats; this part of the workspace is closed to it.",
             )
         ctx.require_chat(request, body.chat_id)
+        if body.action == "forward":
+            ctx.require_chat(request, body.destination)
     principal = request.state.principal
     operator = {
         "label": getattr(principal, "label", None) or ("Main administrator" if principal.admin else None),

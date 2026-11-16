@@ -155,7 +155,8 @@
     switch (step.type) {
       case 'checked_link': return tr('Checked the link {link}', {link: step.link || ''});
       case 'requested': return step.action === 'send' ? tr('Requested to send: {text}', {text: short(step.text)})
-        : step.action === 'press' ? tr('Requested to press {button}', {button: step.button || ''}) : tr('Requested to open the link');
+        : step.action === 'press' ? tr('Requested to press {button}', {button: step.button || ''})
+        : step.action === 'forward' ? tr('Requested to forward {n} messages', {n: step.forwarded ?? '?'}) : tr('Requested to open the link');
       case 'observing': return tr('Added {title} to observation', {title: step.title || ''});
       case 'sent': return tr('Sent #{id}: {text}', {id: step.message_id, text: short(step.text)});
       case 'sent_elsewhere': return tr('Sent #{id} from another app: {text}', {id: step.message_id, text: short(step.text)});

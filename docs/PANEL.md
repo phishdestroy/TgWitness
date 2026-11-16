@@ -258,12 +258,24 @@ attachment labels. The preview holds a snapshot until closed and clears on panel
 lock or a workspace/chat change. The signed journal and report selection remain
 unchanged. See [case reports](CASE_REPORTS.md) for complete report exports.
 
+### Forward messages
+
+Turn off **Read-only** for the chat, then choose **Forward** under a message, or
+**Select**, mark up to 100 messages and choose **Forward**. Pick the destination by
+name: the list holds saved chats and the account's Telegram chats where it can post
+(groups, private chats, bots and channels it administers). The panel asks for
+confirmation, then forwards natively through Telegram with the account's message
+pace. The request and its result are signed journal records naming the source chat,
+message numbers and destination. Copies are saved in the destination only when that
+chat is observed. A chat that forbids forwarding returns a refusal and nothing is sent.
+
 ### Forward a chat to a channel or group
 
 The main administrator can open a saved cloud chat and choose **Forward chat**
 from its tools menu. Choose **New channel**, **New group**, or **Existing channel
-or group**. New destinations are private; an existing destination uses its numeric
-Telegram ID and must allow this account to post. Forum destinations are not supported.
+or group**. New destinations are private. For an existing destination, **Choose a
+chat** lists the account's groups and the channels it administers; search by name.
+The destination must allow this account to post. Forum destinations are not supported.
 
 Pause observation or another active account job and enable Telegram actions before
 previewing. Read-only accounts and the **Evidence for a case** goal block transfers.
