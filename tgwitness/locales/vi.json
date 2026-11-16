@@ -9902,5 +9902,9 @@
   "Open Diagnostics.": "Mở Chẩn đoán.",
   "Confidence: high": "Độ tin cậy: cao",
   "Confidence: medium": "Độ tin cậy: trung bình",
-  "Confidence: low": "Độ tin cậy: thấp"
+  "Confidence: low": "Độ tin cậy: thấp",
+  "Sensitive content (18+)": "Nội dung nhạy cảm (18+)",
+  "turned on by TgWitness": "do TgWitness bật",
+  "Telegram does not let this account change it": "Telegram không cho tài khoản này thay đổi",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Phiên này đăng nhập chưa đến 24 giờ, nên lần xuất này dùng phiên thường thay vì Takeout."
 }
