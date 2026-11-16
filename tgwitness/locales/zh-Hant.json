@@ -9827,5 +9827,10 @@
   "Chat loading: {running} active · {pending} pending": "聊天載入：{running} 個進行中 · {pending} 個等待中",
   "The Telegram connection changed. Retry the operation.": "Telegram 連線已變更。請重試此操作。",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "無法讀取代理來源設定。請先還原 proxy-sources.json，再使用代理清單。",
-  "No longer blocked by Telegram": "Telegram 已解除封鎖"
+  "No longer blocked by Telegram": "Telegram 已解除封鎖",
+  "Save as image": "儲存為圖片",
+  "Text and attachment labels only. Long selections are split into pages.": "僅包含文字和附件名稱。較長的選取內容會分頁。",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "部分選取的訊息不在已載入範圍內。請重新載入或變更選取範圍。",
+  "Rendered from saved messages": "根據已儲存的訊息產生",
+  "Could not create the image. Try fewer messages.": "無法產生圖片。請減少選取的訊息數量。"
 }

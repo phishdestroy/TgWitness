@@ -9878,5 +9878,10 @@
   "Chat loading: {running} active · {pending} pending": "چیٹس لوڈ ہو رہی ہیں: {running} فعال · {pending} منتظر",
   "The Telegram connection changed. Retry the operation.": "Telegram کا کنکشن بدل گیا ہے۔ یہ عمل دوبارہ آزمائیں۔",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "پراکسی ذرائع کی ترتیبات پڑھی نہیں جا سکتیں۔ پراکسی فہرستیں استعمال کرنے سے پہلے proxy-sources.json بحال کریں۔",
-  "No longer blocked by Telegram": "Telegram نے بلاک ہٹا دیا"
+  "No longer blocked by Telegram": "Telegram نے بلاک ہٹا دیا",
+  "Save as image": "تصویر کے طور پر محفوظ کریں",
+  "Text and attachment labels only. Long selections are split into pages.": "صرف متن اور منسلک فائلوں کے نام۔ طویل انتخاب صفحات میں تقسیم ہوتا ہے۔",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "کچھ منتخب پیغامات لوڈ شدہ حد سے باہر ہیں۔ انہیں دوبارہ لوڈ کریں یا انتخاب تبدیل کریں۔",
+  "Rendered from saved messages": "محفوظ شدہ پیغامات سے تیار کردہ",
+  "Could not create the image. Try fewer messages.": "تصویر نہیں بن سکی۔ کم پیغامات منتخب کریں۔"
 }

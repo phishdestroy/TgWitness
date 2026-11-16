@@ -190,6 +190,28 @@ Two switches above the messages protect the account and the reader:
   recorded in the journal. Turning masking off for this browser is recorded too.
   Only the display changes: the original records and every export keep the full text.
 
+### Save selected messages as images
+
+In a cloud chat, choose **Select**, mark the messages, then choose **Save as image**.
+The preview offers **Light**, **Dark** and **Classic** styles. Download the displayed
+page as PNG; use Previous and Next for a longer selection. Up to 50 messages may be
+selected, and all of them must still be in the loaded chat window. The panel asks
+you to reduce an oversized selection instead of silently dropping messages.
+
+The image includes the saved text, author, message number, UTC time, reply number,
+attachment labels and saved edit/deletion status. It uses the latest saved text
+with the number of retained versions; attachment contents, inline buttons,
+reactions and earlier text versions are not rendered. A long message continues on
+the next page with its message number and part count. Each page identifies itself
+as rendered from saved messages. The PNG is a visual excerpt; use the archive and
+its verifier when handing over the signed records and attachments.
+
+Rendering happens in the browser without uploading the selection or making a
+Telegram request. The existing secret masker protects text, author names and
+attachment labels. The preview holds a snapshot until closed and clears on panel
+lock or a workspace/chat change. The signed journal and report selection remain
+unchanged. See [case reports](CASE_REPORTS.md) for complete report exports.
+
 ## Journal
 
 Every record the workspace has signed, newest first.

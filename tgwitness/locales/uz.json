@@ -9878,5 +9878,10 @@
   "Chat loading: {running} active · {pending} pending": "Chatlarni yuklash: {running} ta faol · {pending} ta navbatda",
   "The Telegram connection changed. Retry the operation.": "Telegram ulanishi o‘zgardi. Amalni qayta bajaring.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Proksi manbalari sozlamalarini o‘qib bo‘lmadi. Proksi ro‘yxatlaridan foydalanishdan oldin proxy-sources.json faylini tiklang.",
-  "No longer blocked by Telegram": "Telegram blokni olib tashladi"
+  "No longer blocked by Telegram": "Telegram blokni olib tashladi",
+  "Save as image": "Rasm sifatida saqlash",
+  "Text and attachment labels only. Long selections are split into pages.": "Faqat matn va ilova nomlari. Uzun tanlovlar sahifalarga bo‘linadi.",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "Tanlangan ayrim xabarlar yuklangan oraliqdan tashqarida. Ularni qayta yuklang yoki tanlovni o‘zgartiring.",
+  "Rendered from saved messages": "Saqlangan xabarlardan yaratildi",
+  "Could not create the image. Try fewer messages.": "Rasmni yaratib bo‘lmadi. Kamroq xabar tanlang."
 }

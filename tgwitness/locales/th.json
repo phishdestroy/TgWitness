@@ -9827,5 +9827,10 @@
   "Chat loading: {running} active · {pending} pending": "การโหลดแชท: {running} กำลังทำงาน · {pending} รอดำเนินการ",
   "The Telegram connection changed. Retry the operation.": "การเชื่อมต่อ Telegram เปลี่ยนไป โปรดลองดำเนินการอีกครั้ง",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "อ่านการตั้งค่าแหล่งพร็อกซีไม่ได้ กู้คืน proxy-sources.json ก่อนใช้รายการพร็อกซี",
-  "No longer blocked by Telegram": "Telegram ยกเลิกการบล็อกแล้ว"
+  "No longer blocked by Telegram": "Telegram ยกเลิกการบล็อกแล้ว",
+  "Save as image": "บันทึกเป็นรูปภาพ",
+  "Text and attachment labels only. Long selections are split into pages.": "มีเฉพาะข้อความและชื่อไฟล์แนบ ส่วนที่เลือกที่ยาวจะถูกแบ่งเป็นหน้า",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "ข้อความที่เลือกบางรายการอยู่นอกช่วงที่โหลด โปรดโหลดใหม่หรือเปลี่ยนการเลือก",
+  "Rendered from saved messages": "สร้างจากข้อความที่บันทึกไว้",
+  "Could not create the image. Try fewer messages.": "สร้างรูปภาพไม่ได้ โปรดลองเลือกข้อความให้น้อยลง"
 }

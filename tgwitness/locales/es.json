@@ -9888,5 +9888,10 @@
   "Chat loading: {running} active · {pending} pending": "Carga de chats: {running} activos · {pending} pendientes",
   "The Telegram connection changed. Retry the operation.": "La conexión de Telegram ha cambiado. Reintenta la operación.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "No se pueden leer los ajustes de las fuentes de proxy. Restaure proxy-sources.json antes de usar listas de proxy.",
-  "No longer blocked by Telegram": "Telegram retiró el bloqueo"
+  "No longer blocked by Telegram": "Telegram retiró el bloqueo",
+  "Save as image": "Guardar como imagen",
+  "Text and attachment labels only. Long selections are split into pages.": "Solo texto y nombres de adjuntos. Las selecciones largas se dividen en páginas.",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "Algunos mensajes seleccionados están fuera del intervalo cargado. Cárgalos de nuevo o cambia la selección.",
+  "Rendered from saved messages": "Creado a partir de mensajes guardados",
+  "Could not create the image. Try fewer messages.": "No se pudo crear la imagen. Selecciona menos mensajes."
 }

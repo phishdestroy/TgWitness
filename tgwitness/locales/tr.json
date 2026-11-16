@@ -9878,5 +9878,10 @@
   "Chat loading: {running} active · {pending} pending": "Sohbet yükleme: {running} etkin · {pending} beklemede",
   "The Telegram connection changed. Retry the operation.": "Telegram bağlantısı değişti. İşlemi yeniden deneyin.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "Proxy kaynağı ayarları okunamıyor. Proxy listelerini kullanmadan önce proxy-sources.json dosyasını geri yükleyin.",
-  "No longer blocked by Telegram": "Telegram engeli kaldırdı"
+  "No longer blocked by Telegram": "Telegram engeli kaldırdı",
+  "Save as image": "Görsel olarak kaydet",
+  "Text and attachment labels only. Long selections are split into pages.": "Yalnızca metin ve ek adları. Uzun seçimler sayfalara bölünür.",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "Seçili mesajların bazıları yüklenen aralığın dışında. Yeniden yükleyin veya seçimi değiştirin.",
+  "Rendered from saved messages": "Kaydedilen mesajlardan oluşturuldu",
+  "Could not create the image. Try fewer messages.": "Görsel oluşturulamadı. Daha az mesaj seçin."
 }

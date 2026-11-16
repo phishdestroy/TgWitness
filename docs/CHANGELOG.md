@@ -35,6 +35,11 @@
   within loaded records and are cleared at workspace/session boundaries.
 - Loading older Secret Chat records preserves the visible message and its reading
   position; refreshes retain the current search match and unsent message draft.
+- Selected cloud-chat messages can be downloaded as PNG with Light, Dark or
+  Classic styling, a preview and page navigation. Images retain message numbers,
+  UTC times, reply references, attachment labels and edit/deletion marks. Long
+  messages continue across pages. Rendering stays in the browser, masks possible
+  secrets and clears the preview on lock or workspace/chat changes.
 - Four priority lanes (`realtime`, `text`, `media`, `maintenance`) share account capacity; realtime updates always proceed and are never slowed by downloads or rechecks. Each lane tracks per-account FloodWait quotas, and the text and media lanes run on separate connections so a wait on one does not block the other.
 - Self-destructing media has its own download pool with priority over all other media; if expiry is less than 30 seconds away, all other media downloads on that account pause until the ephemeral file is secured.
 - A background worker refreshes expired `file_reference` tokens in batches of up to 100 message IDs per peer, reducing permanently failed attachment downloads from expired references.

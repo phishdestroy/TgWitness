@@ -9878,5 +9878,10 @@
   "Chat loading: {running} active · {pending} pending": "بارگیری گفتگوها: {running} فعال · {pending} در انتظار",
   "The Telegram connection changed. Retry the operation.": "اتصال Telegram تغییر کرده است. عملیات را دوباره انجام دهید.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "تنظیمات منابع پروکسی خوانده نمی‌شود. پیش از استفاده از فهرست‌های پروکسی، فایل proxy-sources.json را بازیابی کنید.",
-  "No longer blocked by Telegram": "Telegram مسدودسازی را برداشت"
+  "No longer blocked by Telegram": "Telegram مسدودسازی را برداشت",
+  "Save as image": "ذخیره به‌صورت تصویر",
+  "Text and attachment labels only. Long selections are split into pages.": "فقط متن و نام پیوست‌ها. انتخاب‌های طولانی به چند صفحه تقسیم می‌شوند.",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "برخی پیام‌های انتخاب‌شده خارج از محدوده بارگیری‌شده هستند. آن‌ها را دوباره بارگیری کنید یا انتخاب را تغییر دهید.",
+  "Rendered from saved messages": "ساخته‌شده از پیام‌های ذخیره‌شده",
+  "Could not create the image. Try fewer messages.": "تصویر ساخته نشد. پیام‌های کمتری انتخاب کنید."
 }

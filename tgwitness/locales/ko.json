@@ -9827,5 +9827,10 @@
   "Chat loading: {running} active · {pending} pending": "채팅 불러오기: {running}개 진행 중 · {pending}개 대기 중",
   "The Telegram connection changed. Retry the operation.": "Telegram 연결이 변경되었습니다. 작업을 다시 시도하세요.",
   "Proxy source settings cannot be read. Restore proxy-sources.json before using proxy lists.": "프록시 소스 설정을 읽을 수 없습니다. 프록시 목록을 사용하기 전에 proxy-sources.json을 복원하세요.",
-  "No longer blocked by Telegram": "Telegram이 차단을 해제함"
+  "No longer blocked by Telegram": "Telegram이 차단을 해제함",
+  "Save as image": "이미지로 저장",
+  "Text and attachment labels only. Long selections are split into pages.": "텍스트와 첨부 파일 이름만 포함합니다. 긴 선택 내용은 여러 페이지로 나뉩니다.",
+  "Some selected messages are outside the loaded window. Load them again or change the selection.": "선택한 메시지 일부가 불러온 범위 밖에 있습니다. 다시 불러오거나 선택을 변경하세요.",
+  "Rendered from saved messages": "저장된 메시지로 생성됨",
+  "Could not create the image. Try fewer messages.": "이미지를 만들 수 없습니다. 메시지를 더 적게 선택하세요."
 }
