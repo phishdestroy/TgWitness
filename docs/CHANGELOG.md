@@ -28,6 +28,16 @@
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
 - A link preview for a public group that accepts members only after an administrator's approval now says so, and
   its button reads “Send join request”. Before, only invite links were checked, so such groups looked open.
+- After “Load earlier from Telegram”, older saved messages page again instead of asking Telegram on every click.
+- The author filter chip in a chat names the person instead of showing a bare ID.
+- Monitoring changes in the journal are summarized in the panel language.
+- The session list hides “Make this the only session” and “End all other sessions” when the session that approved
+  a QR sign-in would block them.
+- Health and sign-in messages keep the recorded cause of a lost account (revoked, expired or ended session, ban,
+  freeze, duplicated key) instead of a generic sign-out.
+- Panel polish: one page title style, visible switches in the dark theme, phone layouts for Home, Settings,
+  Accounts, sign-in tabs and Sources tabs, a tidier chat header and bubble times, aligned Exports cards, and
+  larger touch targets.
 - Share resumable-history flood deadlines with other workers and retry admin-log reads after Premium flood waits.
 - Persist history FloodWait deadlines so other workers respect the same pause.
 - The workspace switcher shows each account with its avatar, name and a colored status (observing, observation
