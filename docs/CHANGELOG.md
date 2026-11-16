@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Recheck access to helper workspaces when resuming or retrying profile collection.
 - Add media occurrence timelines with separate document, saved-byte and image-dHash comparisons.
 - Add source-linked forwarding summaries to reports and people-profile JSON, plus a typed GEXF export.
 - Verify image bytes before deriving dHash indicators; report comparison and display limits.
