@@ -58,7 +58,7 @@ def gift_details(saved):
 
 class ProfileCapture:
     async def capture_profile(self, run, job, peer):
-        result = await self.ask(run, lambda: self.collector.client(functions.users.GetFullUserRequest(utils.get_input_user(peer))))
+        result = await self.ask(run, lambda: self.client(functions.users.GetFullUserRequest(utils.get_input_user(peer))))
         entity = next((user for user in result.users if user.id == job["user_id"]), None)
         if entity is None or getattr(entity, "min", False):
             raise ValueError("IncompleteProfile")
@@ -105,7 +105,7 @@ class ProfileCapture:
             if shutil.disk_usage(folder).free < (self.collector.param("media_min_free_mb") + 2) * 1024**2:
                 return {"image_status": "insufficient_free_space"}
             with PhotoBuffer() as stream:
-                await self.ask(run, lambda: self.collector.client.download_media(media, file=stream, thumb=-1), timeout=30)
+                await self.ask(run, lambda: self.client.download_media(media, file=stream, thumb=-1), timeout=30)
                 data = stream.getvalue()
             if not data:
                 return {"image_status": "not_returned"}
@@ -125,7 +125,7 @@ class ProfileCapture:
         if not run["options"]["avatars"]:
             self.update_job(run, job, stage="gifts", cursor="", attempts=0)
             return
-        result = await self.ask(run, lambda: self.collector.client(functions.photos.GetUserPhotosRequest(
+        result = await self.ask(run, lambda: self.client(functions.photos.GetUserPhotosRequest(
             user_id=utils.get_input_user(peer), offset=0, max_id=int(job["cursor"] or 0), limit=100)))
         photos = list(result.photos)
         previous = job["cursor"]
@@ -153,7 +153,7 @@ class ProfileCapture:
             self.update_job(run, job, stage="links", cursor="", attempts=0)
             return
         previous = job["cursor"]
-        result = await self.ask(run, lambda: self.collector.client(functions.payments.GetSavedStarGiftsRequest(
+        result = await self.ask(run, lambda: self.client(functions.payments.GetSavedStarGiftsRequest(
             peer=peer, offset=previous, limit=100)))
         for saved in result.gifts:
             details = gift_details(saved)
@@ -198,10 +198,10 @@ class ProfileCapture:
         details = dict(reference)
         if reference.get("username") or reference.get("channel_id"):
             target = reference.get("username") or types.PeerChannel(reference["channel_id"])
-            entity = await self.ask(run, lambda: self.collector.client.get_entity(target))
+            entity = await self.ask(run, lambda: self.client.get_entity(target))
             details.update(peer_id=utils.get_peer_id(entity), title=utils.get_display_name(entity), username=getattr(entity, "username", None))
             if isinstance(entity, types.Channel):
-                result = await self.ask(run, lambda: self.collector.client(functions.channels.GetFullChannelRequest(entity)))
+                result = await self.ask(run, lambda: self.client(functions.channels.GetFullChannelRequest(entity)))
                 full = result.full_chat
                 details.update(kind="group" if entity.megagroup else "channel", about=full.about,
                     participants=getattr(full, "participants_count", None), linked_chat_id=getattr(full, "linked_chat_id", None))

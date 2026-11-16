@@ -5650,7 +5650,7 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=5').then(({createPeopleTimeline})=>{
+const peopleTimelineReady=import('./views/people-timeline.js?v=6').then(({createPeopleTimeline})=>{
   peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
@@ -5662,7 +5662,7 @@ $('chat-feed').after(personCardHost);
 let personCard=null;
 function closePersonCard(){personCardHost.hidden=true;personCard?.reset();personCardHost.replaceChildren();}
 async function openPersonCard(userId){
-  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=5');
+  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=6');
   personCard||=createPeopleTimeline({root:personCardHost,json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chat!==null&&!personCardHost.hidden,
@@ -5839,10 +5839,29 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(ref)boardView?.attach(row,{hash:ref.event_hash,seq:ref.seq,kind:ref.kind,chat_id:state.chat,message_id:m.message_id,payload:{text:version?.text||''}},version?bubble.querySelector('.bubble-text'):null);
   return row;
 }
-let peopleRequest=0;
+let peopleRequest=0,authorsCollect=null;
+function otherAccounts(){
+  return (state.profiles||[]).filter(p=>p.id!==state.profile).map(p=>{
+    const c=p.collector,connected=!!c?.has_session&&!p.error_type&&!c?.authorization_required,limited=c?.rpc_backoff_until>Date.now()/1000,occupied=c?.available_for_export===false,account=c?.account;
+    return {id:p.id,label:p.label,free:connected&&!limited&&!occupied,
+      note:!connected?tr("no Telegram account connected"):limited?tr("Telegram rate limit: wait until {time}.",{time:formatTime(new Date(c.rpc_backoff_until*1000).toISOString())}):
+        occupied?busyAccountText(p):account?(account.username?"@"+account.username+" · ":"")+"ID "+account.id:""};
+  });
+}
+async function authorsCollectView(){
+  if(authorsCollect)return authorsCollect;
+  const {createAuthorsCollect}=await import('./views/authors-collect.js?v=1');
+  authorsCollect||=createAuthorsCollect({json,tr,duration:fmtDuration,canCollect:()=>!!state.me?.admin&&!state.status?.demo,accounts:otherAccounts,
+    groups:()=>json('profile-groups',undefined,{root:true}),active:chat=>state.view==='chats'&&state.chatView==='people'&&state.chat===chat,
+    onComplete:()=>renderChatFeed()});
+  return authorsCollect;
+}
+window.addEventListener('tgwitness:lock',()=>authorsCollect?.reset());
 async function renderPeople(feed){
   const id=state.chat,generation=chatGeneration,request=++peopleRequest,result=await json("chats/"+encodeURIComponent(id)+"/authors",undefined,viewOptions('chats'));
+  const collect=await authorsCollectView();
   if(request!==peopleRequest||state.view!=='chats'||id!==state.chat||generation!==chatGeneration||state.chatView!=="people")return;
+  const collectBox=collect.mount(id,result,state.chatInfo);
   const old=feed.querySelector('.people'),profiled=(state.status.dossiers||[]).includes(id),key=JSON.stringify([result,profiled]);
   if(old?.renderKey===key&&old.chat===id){feed.querySelector('.refresh-notice')?.remove();return;}
   const box=node("div","people");
@@ -5850,6 +5869,7 @@ async function renderPeople(feed){
   box.append(node("h3","",trn("{n} person with saved messages","{n} people with saved messages",result.authors.length)),
     node("p","hint",tr("Counted from messages saved in this workspace. Load history or export the chat for the full list. Names are the profile seen when the message was saved.")));
   if(result.deleted_without_author)box.append(node("p","hint",tr("{n} deleted message(s) were never saved, so their author is unknown.",{n:result.deleted_without_author})));
+  box.append(collectBox);
   const keepBar=old?.chat===id&&old.profiled===profiled?old.querySelector('.dossier-bar'):null;
   if(!keepBar)box.append(dossierBar(id,profiled));
   const table=node("table","people-table"),head=node("tr");

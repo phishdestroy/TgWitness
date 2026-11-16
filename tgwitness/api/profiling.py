@@ -1,9 +1,9 @@
 import asyncio
 import json
-from typing import Literal
+from typing import Annotated, Literal
 
 from fastapi import Depends, HTTPException, Path, Query, Request
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, StringConstraints, model_validator
 
 from .dependencies import current_context
 from ..profiling import CollectionPaused
@@ -17,6 +17,7 @@ class ProfileOptions(BaseModel):
     avatars: bool = True
     gifts: bool = True
     links: bool = True
+    accounts: list[Annotated[str, StringConstraints(pattern=r"^(default|[a-f0-9]{32})$")]] = Field(default_factory=list, max_length=1000)
 
     @model_validator(mode="after")
     def selected(self):
@@ -25,6 +26,7 @@ class ProfileOptions(BaseModel):
         if any(type(chat) is not int or not -(2**63) <= chat < 2**63 or chat == 0 for chat in self.chat_ids):
             raise ValueError("Choose valid Telegram chats.")
         self.chat_ids = list(dict.fromkeys(self.chat_ids))
+        self.accounts = list(dict.fromkeys(self.accounts))
         return self
 
 
@@ -32,11 +34,13 @@ async def status(*, ctx=Depends(current_context)):
     return ctx.app.state.collector.profiling.status()
 
 
-async def action(action: Literal["start", "pause", "resume", "cancel", "retry"], body: ProfileOptions | None = None, *, ctx=Depends(current_context)):
+async def action(request: Request, action: Literal["start", "pause", "resume", "cancel", "retry"], body: ProfileOptions | None = None, *, ctx=Depends(current_context)):
     ctx.require_live()
     service = ctx.app.state.collector.profiling
     if action == "start" and (body is None or not body.all_chats and not body.chat_ids):
         raise HTTPException(422, "Choose the chats and profile data to collect.")
+    if action == "start" and body.accounts and not ctx.opens_chat_everywhere(request.state.principal, body.chat_ids[0] if body.chat_ids else 0, body.accounts):
+        raise HTTPException(403, "This access does not open this chat in every chosen account.")
     try:
         return await ctx.operation(getattr(service, action), *([body.model_dump()] if action == "start" else []))
     except CollectionPaused as exc:

@@ -4,7 +4,7 @@ export function createProfileCollection({json,tr,owner,active,canCollect,formatT
   const stages={participants:'Participants',profile:'Profile',avatars:'Profile photos',gifts:'Gifts',links:'Links'};
   const phases={idle:'Ready',running:'Collecting',paused:'Paused',complete:'Completed',partial:'Incomplete',cancelled:'Cancelled'};
   const reasons={telegram_wait:'Telegram asked us to wait. Collection resumes automatically.',retry_wait:'Waiting before another attempt.',
-    waiting_for_account:'Another task is using this account.',account_changed:'This collection belongs to another Telegram account.',
+    waiting_for_account:'Another task is using this account.',helpers_working:'Other accounts are finishing their share.',account_changed:'This collection belongs to another Telegram account.',
     authorization_required:'Connect a Telegram account first.',source_paused:'Resume the selected chats to continue.',operator:'Paused by you.',cancelled:'Cancelled'};
   let host=null,key=null,timer=null,serial=0,statusRequest=0,working=false,readError=false,completed=null,last=null,selectedPerson=null,selectedTab='profile';
   let scope=null,options=null,status=null,actions=null,error=null,start=null;
