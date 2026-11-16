@@ -28,6 +28,8 @@
 - Bulk account pause/resume prevents overlapping confirmations and discards stale
   operations after session resets. Failed responses no longer claim that the
   collector was unchanged; account states are refreshed without repeating commands.
+- Overview clears cached summaries and charts on account or sign-in changes and ignores responses from earlier sessions. Loading and failed reads have separate states, with a retry that respects the server's requested delay and preserves keyboard focus. Failed refreshes retain the same workspace's last successful data with its timestamp.
+- Account cards show the collector heartbeat and the last received Telegram event as separate times.
 - Four priority lanes (`realtime`, `text`, `media`, `maintenance`) share account capacity; realtime updates always proceed and are never slowed by downloads or rechecks. Each lane tracks per-account FloodWait quotas, and the text and media lanes run on separate connections so a wait on one does not block the other.
 - Self-destructing media has its own download pool with priority over all other media; if expiry is less than 30 seconds away, all other media downloads on that account pause until the ephemeral file is secured.
 - A background worker refreshes expired `file_reference` tokens in batches of up to 100 message IDs per peer, reducing permanently failed attachment downloads from expired references.

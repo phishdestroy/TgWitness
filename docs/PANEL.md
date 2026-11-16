@@ -80,6 +80,18 @@ Select an account to inspect its path. Available but disabled services stay visi
 
 ## Start here
 
+The overview clears its account-specific chart and summary when you switch accounts
+or sign in again. Loading, failed reads and a period with no saved records have
+separate states. **Retry** repeats the failed read; if the server requests a wait,
+the next attempt time appears. A failed refresh keeps the last successful data for
+the same workspace and labels it with its last update time.
+
+Each connected account shows **Collector heartbeat** and **Last event received**
+separately. The first is collector activity; the second is the latest Telegram
+update received. A quiet source can leave the second time unchanged while the
+collector keeps running. Open the collection-status menu for connection, intake,
+source and attachment diagnostics.
+
 Choose a task. **Export my account** downloads what the account can read now.
 **Follow an investigation** records new messages, observed edits and deletion notices
 from the chats you choose. While observation is paused, Chats, Journal and Sources
