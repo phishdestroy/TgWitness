@@ -77,7 +77,9 @@ STATIC = {"style.css": "website/style.css", "site.js": "website/site.js", "disco
           "docs.css": "website/docs.css", "docs.js": "website/docs.js", "context.css": "website/context.css",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js",
           "workflows.css": "website/workflows.css", "workflows.js": "website/workflows.js", **ASSETS, **WIKI_ASSETS, **site_export_clinic.STATIC, **site_validation.STATIC}
-SITE_SCRIPTS = ("website/learn.js", "website/docs.js", "website/site.js", "website/workflows.js")
+SITE_SCRIPTS = ("website/learn.js", "website/docs.js", "website/site.js", "website/workflows.js", "website/export-clinic/export-clinic.js")
+CLINIC_LABELS = ("Controlled experiment", "EXPERIMENT", "Export Clinic: watch the controlled Desktop experiment",
+                 "Compare the two-minute film, the original recording and seven pairs of test exports. Local modification is disclosed.")
 MODES_PAGES = site_modes.FILES
 
 
@@ -130,7 +132,7 @@ WIKI_HUB = "docs/reference/"
 LOCAL_PAGES = ("", "docs/", *(f"docs/{slug}/" for slug in GUIDES), WIKI_HUB, *(f"{WIKI_HUB}{slug}/" for slug in REFERENCE))
 NOTICE_PAGES = tuple(f"{WIKI_HUB}{slug}/" for slug in NOTICE_SLUGS)
 PAGE_LOCALES = tuple((lang, local) for lang in NOTICE_LANGUAGES
-                     for local in (LOCAL_PAGES if lang in LANGS else NOTICE_PAGES)) + (("en", site_export_clinic.PATH),) + tuple((lang, site_validation.PATH) for lang in site_validation.LANGUAGES)
+                     for local in (LOCAL_PAGES if lang in LANGS else NOTICE_PAGES)) + tuple((lang, site_export_clinic.PATH) for lang in LANGS) + tuple((lang, site_validation.PATH) for lang in site_validation.LANGUAGES)
 PAGES = tuple(("" if lang == "en" else lang + "/") + local for lang, local in PAGE_LOCALES)
 SEARCH_FILES = tuple(("" if lang == "en" else lang + "/") + "docs/search.json" for lang in NOTICE_LANGUAGES)
 MARKDOWN_PAGES = {path + "index.html": site_llms.markdown_path(path) for path in PAGES}
@@ -165,7 +167,7 @@ def page_languages(local):
     if local == site_validation.PATH:
         return {lang: site_i18n.LANGUAGES[lang] for lang in site_validation.LANGUAGES}
     if local == site_export_clinic.PATH:
-        return {"en": site_i18n.LANGUAGES["en"]}
+        return site_i18n.LANGUAGES
     return NOTICE_LANGUAGES if local in NOTICE_PAGES else site_i18n.LANGUAGES
 
 
@@ -243,7 +245,7 @@ def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extr
             graph[-1]["version"] = version
     context_path = ("ru/" if lang == "ru" else "") + WIKI_HUB + "overview/"
     graph[0]["relatedLink"] = [base_url + "/" + context_path,
-                               base_url + "/" + ("ru/" if lang == "ru" else "") + site_validation.PATH]
+                               base_url + "/" + (prefix(lang) if lang in site_validation.LANGUAGES else "") + site_validation.PATH]
     graph[0]["encoding"] = {"@type": "MediaObject", "encodingFormat": "text/markdown",
                              "contentUrl": base_url + "/" + site_llms.markdown_path(path)}
     if crumbs:
@@ -300,7 +302,11 @@ def inventory(root=ROOT):
     for name in SITE_SCRIPTS:
         strings += site_i18n.script_strings((root / name).read_text(encoding="utf-8"))
     fragments = {"home": home_body((root / "website/index.html").read_text(encoding="utf-8")),
-                 "intro": (root / "website/guide_intro.html").read_text(encoding="utf-8")}
+                 "intro": (root / "website/guide_intro.html").read_text(encoding="utf-8"),
+                 "export-clinic": (root / "website/export-clinic/page.html").read_text(encoding="utf-8"),
+                 "capture-instructions": site_wiki.to_html(site_wiki.split_title(
+                     (root / CAPTURE_DOCS["en"]).read_text(encoding="utf-8"))[1])[0]}
+    strings += [site_export_clinic.DESCRIPTION, *CLINIC_LABELS]
     for slug in GUIDES:
         if slug == "dedicated-account":
             continue
@@ -424,9 +430,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     fragments = {slug: read_public(f"website/guides/en/{slug}.html").decode("utf-8")
                  for slug in GUIDES if slug != "dedicated-account"}
     account_template = read_public(site_account.SOURCE).decode("utf-8")
-    capture_instructions, images = {}, {}
+    capture_instructions, capture_bodies, images = {}, {}, {}
     for code, source in CAPTURE_DOCS.items():
-        body = site_wiki.to_html(site_wiki.split_title(read_public(source).decode("utf-8"))[1])[0]
+        body = site_wiki.to_html(site_wiki.split_title(read_public(source).decode("utf-8").replace("\r\n", "\n"))[1])[0]
+        capture_bodies[code] = body
         capture_instructions[code] = site_wiki.rewrite_links(
             body, source, "", {}, {}, lambda page, target: "@@ROOT@@" + target,
             repo_url, branch, images, root)
@@ -583,14 +590,18 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             translated, missing = ((site_account.main_content(account_page), 0) if slug == "dedicated-account"
                                    else localize(fragments[slug]))
             if slug == "capture":
-                source_lang = lang if lang in CAPTURE_DOCS else "en"
+                if lang in CAPTURE_DOCS:
+                    instructions = capture_instructions[lang]
+                else:
+                    instructions = site_wiki.rewrite_links(
+                        localize(capture_bodies["en"])[0], CAPTURE_DOCS["en"], "", {}, {},
+                        lambda page, target: "@@ROOT@@" + target, repo_url, branch, images, root)
                 translated += (f'<details class="detail-block"><summary>{labels["reference"]}</summary>'
-                               f'<div class="wiki-body" lang="{source_lang}" dir="ltr">'
-                               + capture_instructions[source_lang] + '</div></details>')
+                               f'<div class="wiki-body" lang="{lang}" dir="{"rtl" if rtl else "ltr"}">'
+                               + instructions + '</div></details>')
             if slug == "concepts":
-                translated += ('<p class="callout" lang="en" dir="ltr"><a href="@@ROOT@@docs/export-clinic/">'
-                               'Export Clinic: watch the controlled Desktop experiment</a>. Compare the two-minute film, '
-                               'the original recording and seven pairs of test exports. Local modification is disclosed.</p>')
+                translated += (f'<p class="callout"><a href="@@ROOT@@{base}docs/export-clinic/">{html.escape(t(CLINIC_LABELS[2]))}</a>. '
+                               f'{html.escape(t(CLINIC_LABELS[3]))}</p>')
             guide_html[slug], guide_missing[slug] = translated, missing
             texts[hub + slug + "/"] = PlainText(render(translated, guide_values(hub + slug + "/"))).text
         for slug in page_slugs:
@@ -600,10 +611,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
              "description": validation_texts.get(lang, validation_texts["en"])["description"],
              "keywords": "benchmark speed audit validation servers tests", "text": validation_texts.get(lang, validation_texts["en"])["description"],
              "url": relative(hub, (base if lang in site_validation.LANGUAGES else "") + site_validation.PATH)},
-            {"title": site_export_clinic.TITLE + (" · English" if lang != "en" else ""),
-             "description": site_export_clinic.DESCRIPTION, "keywords": site_export_clinic.KEYWORDS,
-             "text": site_export_clinic.DESCRIPTION,
-             "url": relative(hub, site_export_clinic.PATH)},
+            {"title": site_export_clinic.TITLE,
+             "description": t(site_export_clinic.DESCRIPTION), "keywords": site_export_clinic.KEYWORDS,
+             "text": t(site_export_clinic.DESCRIPTION),
+             "url": relative(hub, base + site_export_clinic.PATH)},
             *({"title": guides[key][0], "description": guides[key][1], "keywords": guides[key][2],
                "text": texts[hub + key + "/"][:SEARCH_TEXT], "url": key + "/"} for key in (GUIDES if full_site else ())),
             {"title": modes_words["modes.eyebrow"], "description": modes_words["modes.seo"],
@@ -628,9 +639,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                     mark = ' aria-current="page"' if path == hub + key + "/" else ''
                     items.append(f'<a href="{relative(path, hub + key + "/")}"{mark}>{guides[key][0]}</a>')
                     if key == "concepts":
-                        mark = ' aria-current="page"' if path == site_export_clinic.PATH else ''
-                        suffix = ' · EN' if lang != "en" else ''
-                        items.append(f'<a lang="en" dir="ltr" href="{relative(path, site_export_clinic.PATH)}"{mark}>Export Clinic{suffix}</a>')
+                        mark = ' aria-current="page"' if path == base + site_export_clinic.PATH else ''
+                        items.append(f'<a href="{relative(path, base + site_export_clinic.PATH)}"{mark}>Export Clinic</a>')
                         validation_lang = lang if lang in site_validation.LANGUAGES else "en"
                         validation_path = prefix(validation_lang) + site_validation.PATH
                         mark = ' aria-current="page"' if path == validation_path else ''
@@ -720,7 +730,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                 content += f'<h2 id="section-{index}">{t(heading)}</h2><div class="guide-grid">'
                 content += "".join(card(hub, hub + key + "/", f"{list(GUIDES).index(key) + 1:02d}", *guides[key][:2]) for key in keys)
                 if "concepts" in keys:
-                    content += '<div lang="en" dir="ltr">' + card(hub, site_export_clinic.PATH, "EXPERIMENT / EN", site_export_clinic.TITLE, site_export_clinic.DESCRIPTION) + '</div>'
+                    content += card(hub, base + site_export_clinic.PATH, html.escape(t(CLINIC_LABELS[1])), site_export_clinic.TITLE,
+                                    html.escape(t(site_export_clinic.DESCRIPTION)))
                 content += '</div>'
             content += (f'<h2 id="reference">{labels["wiki_title"]}</h2><p>{labels["wiki_intro"]}</p>'
                         f'<div class="wiki-index">' + "".join(
@@ -763,13 +774,16 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                 content += '</div>'
             page(WIKI_HUB, labels["wiki"], t(WIKI_DESCRIPTION),
                  [(labels["home"], base), (labels["docs"], hub), (labels["wiki"], wiki_hub)], content, headings(content), "")
-        if lang == "en":
-            content = ('<p class="eyebrow">Documentation / Controlled experiment</p><h1>Export Clinic</h1>'
-                       + site_export_clinic.content(read_public, render, guide_values(site_export_clinic.PATH), json_script))
-            footer = '<a class="next-guide" href="../concepts/"><span>Continue reading</span><strong>See how evidence works →</strong></a>'
-            page(site_export_clinic.PATH, site_export_clinic.TITLE, site_export_clinic.DESCRIPTION,
-                 [(labels["home"], base), (labels["docs"], hub), (site_export_clinic.TITLE, site_export_clinic.PATH)],
-                 content, headings(content), footer)
+        if full_site:
+            clinic_html, clinic_missing = localize(read_public("website/export-clinic/page.html").decode("utf-8").replace("\r\n", "\n"))
+            content = (f'<p class="eyebrow">{labels["docs"]} / {html.escape(t(CLINIC_LABELS[0]))}</p><h1>Export Clinic</h1>'
+                       + site_export_clinic.content(read_public, render, guide_values(base + site_export_clinic.PATH), json_script,
+                                                    lambda template: clinic_html))
+            footer = (f'<a class="next-guide" href="../concepts/"><span>{labels["next"]}</span>'
+                      f'<strong>{guides["concepts"][0]} {arrow}</strong></a>')
+            page(site_export_clinic.PATH, site_export_clinic.TITLE, t(site_export_clinic.DESCRIPTION),
+                 [(labels["home"], base), (labels["docs"], hub), (site_export_clinic.TITLE, base + site_export_clinic.PATH)],
+                 content, headings(content), footer, notice(clinic_missing))
         if lang in site_validation.LANGUAGES:
             words = validation_texts[lang]
             content = site_validation.content(read_public, render, guide_values(base + site_validation.PATH), lang)

@@ -22,7 +22,7 @@ STATIC = {f"assets/export-clinic/{name}": f"website/export-clinic/media/{name}" 
 STATIC.update({f"export-clinic.{ext}": f"website/export-clinic/export-clinic.{ext}" for ext in ("css", "js")})
 
 
-def content(read_public, render, values, json_script):
-    template = read_public("website/export-clinic/page.html").decode("utf-8")
+def content(read_public, render, values, json_script, localize=lambda template: template):
+    template = localize(read_public("website/export-clinic/page.html").decode("utf-8"))
     data = json.loads(read_public("website/export-clinic/media/comparison-data.json"))
     return render(template, {**values, "DOWNLOAD_BASE": DOWNLOAD_BASE}) + '<script type="application/json" id="comparison-data">' + json_script(data) + '</script>'

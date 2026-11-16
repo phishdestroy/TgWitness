@@ -4,8 +4,10 @@ import math
 import re
 from datetime import datetime
 
+import site_i18n
+
 PATH = "docs/validation/"
-LANGUAGES = ("en", "ru")
+LANGUAGES = tuple(site_i18n.LANGUAGES)
 STATIC = {f"validation/{name}": f"website/validation/{name}"
           for name in ("validation.css", "validation.js", "snapshot.json", "performance.svg")}
 STATIC.update({f"validation/audit/{name}": f"website/validation/audit/{name}"

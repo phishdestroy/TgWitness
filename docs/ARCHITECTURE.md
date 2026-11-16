@@ -11,7 +11,7 @@ An encrypted vault holds API credentials, the StringSession, and signing key.
 The frontend is plain bundled HTML/CSS/JavaScript: no Node build, CDNs, or runtime
 frontend downloads are needed.
 
-<p lang="en" translate="no">Optional browser and AyuGram recorders run in <strong>separate processes or containers</strong>.
+<p>Optional browser and AyuGram recorders run in <strong>separate processes or containers</strong>.
 The <code>tgwitness_capture</code> package owns their event format, keys, artifacts,
 checkpoint API, independent witness and standalone verifier. It is bundled in the main
 wheel and can also be installed alone from <code>addons/capture</code>, without importing
