@@ -497,7 +497,13 @@ class Profiling(ProfileCapture):
         self.check(run, worker)
         self.waiting(run, worker, 0)
         pacer.next_rpc = time.monotonic() + self.rpc_interval
-        answer = await asyncio.wait_for(call(), timeout)
+        try:
+            answer = await asyncio.wait_for(call(), timeout)
+        except asyncio.CancelledError:
+            if asyncio.current_task().cancelling():
+                raise
+            self.check(run, worker)
+            raise ConnectionError("Telegram dropped the request") from None
         self.check(run, worker)
         return answer
 
@@ -634,7 +640,8 @@ class Profiling(ProfileCapture):
         except asyncio.CancelledError:
             raise
         except Exception as exc:
-            self.change_run(run, phase="paused", reason=type(exc).__name__, current_user=None, current_stage=None)
+            reason = "authorization_required" if self.collector.authorization_required else type(exc).__name__
+            self.change_run(run, phase="paused", reason=reason, current_user=None, current_stage=None)
             self.store.append("profiling.interrupted", {"profiling_run_id": run["id"], "error_type": type(exc).__name__})
             await self.stop_helpers()
         finally:
