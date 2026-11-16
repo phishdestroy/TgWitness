@@ -877,6 +877,7 @@ def build_demo(read_public, write):
         (*DEMO_DICTIONARIES, *GUIDE_DICTIONARIES))).hexdigest()[:16]
     for target, source in DEMO_PAGES.items():
         page = read_public(source).decode("utf-8").replace('href="/"', 'href="../"')
+        page = page.replace('href="/system-log"', 'href="?route=%2Fsystem-log"')
         page = re.sub(r'\b(src|href)="/(?=[A-Za-z])', r'\1="', page)
         guide = target != "demo/index.html"
         original_loader = ('<script src="guide-locale.js"></script>' if guide
