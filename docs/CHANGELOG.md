@@ -25,6 +25,7 @@
 
 ## Unreleased
 
+- Share resumable-history flood deadlines with other workers and retry admin-log reads after Premium flood waits.
 - Persist history FloodWait deadlines so other workers respect the same pause.
 - Recheck access to helper workspaces when resuming or retrying profile collection.
 - Keep session age and loss context within the current authorization, ignore late session checks from

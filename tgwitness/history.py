@@ -257,6 +257,7 @@ class History:
                 return await asyncio.wait_for(call(), self.collector.param("operation_timeout_seconds"))
             except FLOOD_ERRORS as exc:
                 until = max(time.time() + exc.seconds + 1, self.store.get_setting("rpc_backoff_until", 0))
+                self.store.set_setting("rpc_backoff_until", until)
                 self.store.set_setting("history_wait_until", until)
                 self.store.append("history.waiting", {"history_run_id": run_id,
                     "retry_after_seconds": exc.seconds, "retry_at": until})
