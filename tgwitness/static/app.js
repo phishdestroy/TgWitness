@@ -1380,7 +1380,13 @@ function healthRow(name,title,item,lines){
   return row;
 }
 const healthPartNames={connection:tr("Telegram connection"),intake:tr("Event intake"),sources:tr("Sources"),media:tr("Attachment queue")};
+function sessionLossReason(cause){
+  return {session_revoked:tr("The session was ended from another device or by Telegram."),session_expired:tr("Telegram let the session expire."),
+    session_ended:tr("Telegram no longer recognises this session: it was ended or the account was removed.")}[cause]||"";
+}
 function accountLossText(cause){
+  const reason=sessionLossReason(cause);
+  if(reason)return reason+" "+tr("Sign in again to observe or export.");
   return {account_banned:tr("Telegram banned this account. Observation stopped; the journal is kept."),
     account_frozen:tr("Telegram froze this account and refuses most requests. Observation stopped; the account can appeal through @SpamBot."),
     account_deleted:tr("The Telegram account was deleted. Observation stopped; the journal is kept."),
@@ -1391,7 +1397,8 @@ function accountLossText(cause){
 function signInText(c){
   const loss=c?.account_loss,known=["account_banned","account_frozen","account_deleted","session_duplicated"].includes(loss?.cause);
   if(known)return accountLossText(loss.cause);
-  return tr('Telegram no longer accepts this session. Sign in to the same account; saved records and sources stay in this workspace.')+
+  const reason=sessionLossReason(loss?.cause);
+  return (reason?reason+" ":"")+tr('Telegram no longer accepts this session. Sign in to the same account; saved records and sources stay in this workspace.')+
     (loss?.telegram_error?" ("+loss.telegram_error+")":"");
 }
 function telegramPauseText(p){
