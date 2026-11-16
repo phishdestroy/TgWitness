@@ -187,7 +187,7 @@ def hashed(algorithm, data):
 
 def certificate_fingerprint(algorithm, data):
     if isinstance(algorithm, str):
-        return hashed(algorithm, data)
+        return digest(algorithm, data)
     return x509.load_der_x509_certificate(data).fingerprint(algorithm())
 
 
