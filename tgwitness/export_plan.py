@@ -6,6 +6,7 @@ import time
 from telethon import errors, functions, types, utils
 
 from . import interactions, report
+from .disk_space import disk_check
 from .distributed_export import CHUNK, RECHECK_EDGE, RECHECK_PER_ACCOUNT
 from .scope import kind_of, public_username
 
@@ -187,8 +188,11 @@ async def plan(registry, exports, link, allowed):
     for row in rows:
         row["chosen"] = row["profile_id"] in chosen
     rows.sort(key=lambda row: (not row["chosen"], not row["usable"], row["label"]))
+    lead = reader if reader in chosen or not chosen else chosen[0]
+    messages = min(facts["last_id"], facts["visible"]) if facts["visible"] is not None else facts["last_id"]
+    disk = disk_check(exports.root, messages, entries[lead]["app"].state.collector.param("media_min_free_mb"))
     return {**result, "accounts": rows, "chosen": chosen, "single_account": basic, "takeout_available": takeout,
-            "estimates": estimates, "rates": rates,
+            "estimates": estimates, "rates": rates, "disk": disk,
             "rate_sources": {kind: "measured" if kind in measured else "default" for kind in rates},
             "estimate_scope": "Planning only: visible messages divided by measured or default reading rates, "
                               "plus number recheck and packaging. Attachments and Telegram waits are not included."}

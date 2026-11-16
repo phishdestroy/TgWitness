@@ -51,6 +51,7 @@ from .security import KeyLock
 from .workers import complete_in_thread
 from .store import RECEPTION, canonical, utcnow
 from .evidence import retain_checkpoint
+from .disk_space import disk_check
 from .failures import explain
 from .netclient import RouteError, proxy_address
 from .network import NetworkConfig, NoRoute, RoutePolicy, saved_route
@@ -796,7 +797,7 @@ class Collector:
             "chat_export": self.export_public(),
             "activity": self.activity(),
             "recheck": self.recheck_state,
-            "storage_low": self.storage_low,
+            "storage_low": self.storage_low or not disk_check(self.store.root, 0, self.param("media_min_free_mb"))["disk_ok"],
             "media_min_free_bytes": self.param("media_min_free_mb") * 1024**2,
             **recheck_settings(self.store),
             "scope": scope_settings(self.store),

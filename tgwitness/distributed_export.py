@@ -26,6 +26,7 @@ from .collector import AUTHORIZATION_ERRORS, message_record, unparsed_record
 from .telegram_client import in_lane
 from .export_timing import ExportTiming
 from .distributed_takeout import HistoryTakeout
+from .disk_space import DISK_SHORT, disk_check
 from .distributed_pages import FORMAT as PAGE_FORMAT, FORMATS as PAGE_FORMATS, RangePages
 from .swarm.rebalancer import (HANDOVER_SECONDS, REBALANCE_SECONDS, YIELD_PAUSE, Handover, gap_of,
                                slow_holders)
@@ -45,8 +46,6 @@ OUTAGE_PAUSE = 30
 POISON_ACCOUNTS = 2
 ACCOUNT_ERRORS = 3
 RECHECK_PER_ACCOUNT = 1000
-RECORD_BYTES = 1024
-WORKING_COPIES = 5
 ACTIVE = ("preparing", "running", "selecting", "packaging")
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 
@@ -219,10 +218,9 @@ class DistributedExport:
                 total = None
             messages = sum(s["high"] - s["low"] + 1 for s in segments)
             messages = min(messages, total) if total is not None else messages
-            needed = messages * RECORD_BYTES * WORKING_COPIES + lead.param("media_min_free_mb") * 1024**2
-            free = shutil.disk_usage(self.root).free
-            if free < needed:
-                raise ValueError("Not enough free disk space for this export. Free up space or choose a shorter period.")
+            disk = disk_check(self.root, messages, lead.param("media_min_free_mb"))
+            if not disk["disk_ok"]:
+                raise ValueError(DISK_SHORT)
             info = lead.dialog_cache.get(chat_id) or {"title": utils.get_display_name(entity), "kind": kind_of(entity)}
             chunk_size = CHUNK * min(50, min(densities, default=1))
             state = {"id": export_id, "chat_id": chat_id, "title": info.get("title"), "lead": lead_id,
@@ -238,7 +236,7 @@ class DistributedExport:
                         "checkpoint_format": PAGE_FORMAT,
                         "selection": options.model_dump(), "report": report.resolved(lead.store, language),
                         "chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind")}}
-            state["disk"] = {"estimated_messages": messages, "needed_bytes": needed, "free_bytes": free}
+            state["disk"] = {key: disk[key] for key in ("estimated_messages", "needed_bytes", "free_bytes")}
             run = Run(self, state, job, timing=timing)
             run.entities = entities
             directory = self.directory(export_id)
