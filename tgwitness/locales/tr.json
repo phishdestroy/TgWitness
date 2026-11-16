@@ -9953,5 +9953,8 @@
   "Open Diagnostics.": "Tanılama'yı açın.",
   "Confidence: high": "Güven: yüksek",
   "Confidence: medium": "Güven: orta",
-  "Confidence: low": "Güven: düşük"
+  "Confidence: low": "Güven: düşük",
+  "Sensitive content (18+)": "Hassas içerik (18+)",
+  "turned on by TgWitness": "TgWitness tarafından açıldı",
+  "Telegram does not let this account change it": "Telegram bu hesabın bunu değiştirmesine izin vermiyor"
 }

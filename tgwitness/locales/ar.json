@@ -10157,5 +10157,8 @@
   "Open Diagnostics.": "افتح التشخيص.",
   "Confidence: high": "الثقة: عالية",
   "Confidence: medium": "الثقة: متوسطة",
-  "Confidence: low": "الثقة: منخفضة"
+  "Confidence: low": "الثقة: منخفضة",
+  "Sensitive content (18+)": "المحتوى الحساس (18+)",
+  "turned on by TgWitness": "فعّله TgWitness",
+  "Telegram does not let this account change it": "لا يسمح Telegram لهذا الحساب بتغييره"
 }

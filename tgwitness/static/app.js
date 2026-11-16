@@ -362,6 +362,7 @@ const labels = {
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
   "account.authorization_error": [tr("Another client lost its authorization"), "alert", "system"],
   "account.restriction_expired": [tr("Account restriction ended"), "refresh", "system"],
+  "account.content_settings": [tr("Sensitive content (18+)"), "shield", "system"],
   "account.read_only": [tr("Read-only for Telegram actions changed"), "lock", "system"],
   "connection.opened": [tr("Connected to Telegram"), "link", "system"],
   "connection.closed": [tr("Disconnected from Telegram"), "link", "system"],
@@ -2072,6 +2073,8 @@ function excerpt(e) {
     case "account.session_ended": return [p.device_model,[p.app_name,p.app_version].filter(Boolean).join(" "),p.country].filter(Boolean).join(" · ");
     case "account.restricted": case "account.restriction_expired": return restrictionText(p.kind);
     case "account.read_only": return tr(p.enabled?"On":"Off");
+    case "account.content_settings": return [tr(p.sensitive_enabled?"On":"Off"),p.changed?tr("turned on by TgWitness"):"",
+      !p.can_change&&!p.sensitive_enabled?tr("Telegram does not let this account change it"):"",p.error||""].filter(Boolean).join(" · ");
     case "profile.created": return p.label||workspaceName(p.id);
     case "profile.unavailable": return workspaceName(p.profile_id)+failure;
     case "snapshot.started": return tr("Up to {n} recent messages",{n:p.limit});

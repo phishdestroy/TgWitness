@@ -9963,5 +9963,8 @@
   "Open Diagnostics.": "Abra Diagnóstico.",
   "Confidence: high": "Confianza: alta",
   "Confidence: medium": "Confianza: media",
-  "Confidence: low": "Confianza: baja"
+  "Confidence: low": "Confianza: baja",
+  "Sensitive content (18+)": "Contenido sensible (18+)",
+  "turned on by TgWitness": "activado por TgWitness",
+  "Telegram does not let this account change it": "Telegram no permite que esta cuenta lo cambie"
 }

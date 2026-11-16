@@ -9953,5 +9953,8 @@
   "Open Diagnostics.": "Diagnostikani oching.",
   "Confidence: high": "Ishonch: yuqori",
   "Confidence: medium": "Ishonch: o'rtacha",
-  "Confidence: low": "Ishonch: past"
+  "Confidence: low": "Ishonch: past",
+  "Sensitive content (18+)": "Nozik kontent (18+)",
+  "turned on by TgWitness": "TgWitness yoqdi",
+  "Telegram does not let this account change it": "Telegram bu akkauntga uni o‘zgartirishga ruxsat bermaydi"
 }

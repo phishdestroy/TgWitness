@@ -10055,5 +10055,8 @@
   "Open Diagnostics.": "Відкрийте діагностику.",
   "Confidence: high": "Впевненість: висока",
   "Confidence: medium": "Впевненість: середня",
-  "Confidence: low": "Впевненість: низька"
+  "Confidence: low": "Впевненість: низька",
+  "Sensitive content (18+)": "Чутливий вміст (18+)",
+  "turned on by TgWitness": "увімкнено TgWitness",
+  "Telegram does not let this account change it": "Telegram не дає цьому акаунту його змінювати"
 }

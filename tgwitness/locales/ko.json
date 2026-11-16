@@ -9902,5 +9902,8 @@
   "Open Diagnostics.": "진단을 여세요.",
   "Confidence: high": "신뢰도: 높음",
   "Confidence: medium": "신뢰도: 보통",
-  "Confidence: low": "신뢰도: 낮음"
+  "Confidence: low": "신뢰도: 낮음",
+  "Sensitive content (18+)": "민감한 콘텐츠 (18+)",
+  "turned on by TgWitness": "TgWitness가 켬",
+  "Telegram does not let this account change it": "Telegram이 이 계정의 변경을 허용하지 않습니다"
 }

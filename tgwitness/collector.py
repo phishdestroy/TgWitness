@@ -193,7 +193,9 @@ DELETION_BATCH_MEANING = (
 ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
                        "stopped at that moment; records saved before it remain in the journal.")
 RESTRICTED_MEANING = ("Telegram marks this chat as restricted and gives the reason shown. Ordinary clients hide its "
-                      "content; records saved before the restriction remain in the journal.")
+                      "content; TgWitness keeps reading and saving whatever Telegram still delivers.")
+SENSITIVE_MEANING = ("Telegram hides content it marks as sensitive (18+) unless the account allows it. TgWitness "
+                     "allows it so such messages and media are saved.")
 UPDATES_CHECK_SECONDS = 120
 UPDATES_GRACE_SECONDS = 30
 UPDATES_DIVERTED_MEANING = ("Telegram's update counter for this account grew while no update reached this session. "
@@ -2468,6 +2470,7 @@ class Collector:
             self.store.append("account.initialized", {"account_id": me.id, "source": "telegram_api", "requests": result})
         await self.check_client_connection(candidate)
         await self.check_frozen()
+        await self.allow_sensitive()
 
     async def check_client_connection(self, client):
         if getattr(client, "tgwitness_connection_check", None) is None:
@@ -2556,6 +2559,8 @@ class Collector:
             current()
             if fresh:
                 await self.check_frozen()
+                current()
+                await self.allow_sensitive()
                 current()
             if secret_chats.settings(self.store)["enabled"]:
                 chats = secret_chats.of(self)
@@ -2853,6 +2858,28 @@ class Collector:
             self.store.set_setting("account_restriction", None)
             self.store.append("account.restriction_expired", {"kind": "frozen", "source": "help.getAppConfig"})
         return frozen
+
+    async def allow_sensitive(self):
+        try:
+            answer = await asyncio.wait_for(self.client(functions.account.GetContentSettingsRequest()), 30)
+        except Exception:
+            return None
+        before, can = bool(answer.sensitive_enabled), bool(answer.sensitive_can_change)
+        enabled, error = before, None
+        if not before and can:
+            try:
+                await asyncio.wait_for(self.client(functions.account.SetContentSettingsRequest(sensitive_enabled=True)), 30)
+                enabled = True
+            except Exception as exc:
+                error = type(exc).__name__
+        state = {"sensitive_enabled": enabled, "can_change": can}
+        if enabled != before or error or self.store.get_setting("content_settings", None) != state:
+            with self.store.transaction():
+                self.store.set_setting("content_settings", state)
+                self.store.append("account.content_settings", {
+                    **state, "was_enabled": before, "changed": enabled != before, "error": error,
+                    "source": "account.getContentSettings", "meaning": SENSITIVE_MEANING})
+        return state
 
     async def poll_security_log(self, trigger="periodic"):
         client = self.client

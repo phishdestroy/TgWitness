@@ -9953,5 +9953,8 @@
   "Open Diagnostics.": "डायग्नॉस्टिक्स खोलें।",
   "Confidence: high": "भरोसा: उच्च",
   "Confidence: medium": "भरोसा: मध्यम",
-  "Confidence: low": "भरोसा: कम"
+  "Confidence: low": "भरोसा: कम",
+  "Sensitive content (18+)": "संवेदनशील सामग्री (18+)",
+  "turned on by TgWitness": "TgWitness ने चालू किया",
+  "Telegram does not let this account change it": "Telegram इस खाते को इसे बदलने नहीं देता"
 }

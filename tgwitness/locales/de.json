@@ -9953,5 +9953,8 @@
   "Open Diagnostics.": "Öffnen Sie die Diagnose.",
   "Confidence: high": "Sicherheit: hoch",
   "Confidence: medium": "Sicherheit: mittel",
-  "Confidence: low": "Sicherheit: niedrig"
+  "Confidence: low": "Sicherheit: niedrig",
+  "Sensitive content (18+)": "Sensible Inhalte (18+)",
+  "turned on by TgWitness": "von TgWitness eingeschaltet",
+  "Telegram does not let this account change it": "Telegram lässt dieses Konto das nicht ändern"
 }

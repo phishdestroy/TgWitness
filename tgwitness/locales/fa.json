@@ -9953,5 +9953,8 @@
   "Open Diagnostics.": "عیب‌یابی را باز کنید.",
   "Confidence: high": "اطمینان: بالا",
   "Confidence: medium": "اطمینان: متوسط",
-  "Confidence: low": "اطمینان: پایین"
+  "Confidence: low": "اطمینان: پایین",
+  "Sensitive content (18+)": "محتوای حساس (18+)",
+  "turned on by TgWitness": "توسط TgWitness روشن شد",
+  "Telegram does not let this account change it": "Telegram اجازه نمی‌دهد این حساب آن را تغییر دهد"
 }
