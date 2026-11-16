@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- When Telegram ends the session, the loss record keeps what was known just before it: the session's age,
+  the other sessions at the last check and Telegram's last security notice (`before_loss`).
 - A sign-in that has not finished yet no longer writes `account.authorization_error` entries that read as a
   lost authorization.
 - History reading no longer skips chats Telegram marks as restricted; the restriction stays in the journal
