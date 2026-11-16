@@ -6181,7 +6181,7 @@ $('chat-pattern').before(forwardButton);
 forwardButton.addEventListener('click', () => busy(forwardButton, async () => {
   const owner = actionOwner(), chat = state.chat, generation = chatGeneration;
   $('chat-tools-menu').open = false;
-  const {createHistoryForward} = await import('./views/history-forward.js?v=1');
+  const {createHistoryForward} = await import('./views/history-forward.js?v=2');
   const current = () => owner.current() && chat === state.chat && generation === chatGeneration;
   if (!current()) return;
   historyForward ||= createHistoryForward({json, tr, confirm: message => askConfirm(message)});

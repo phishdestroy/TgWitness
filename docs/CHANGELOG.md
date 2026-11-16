@@ -41,6 +41,9 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- The history transfer preview shows how many messages the chat has and how long the transfer takes at the
+  current pace (at the default 30 messages per hour, 1,000 messages take about 33 hours); a running transfer
+  shows sent of total and the time left.
 - On narrow screens, rows that scroll sideways (demo actions, journal filters, chat and profile tabs,
   Parameters sections, health tabs) fade at the edge where more items are hidden, in both writing directions.
 - Reports name the observing or exporting account by its Telegram name, with @username and ID in brackets,

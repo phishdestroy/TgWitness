@@ -24,6 +24,13 @@ TERMINAL = {'completed', 'cancelled'}
 ITEM_ERRORS = {'MessageIdInvalidError', 'MsgIdInvalidError', 'MediaEmptyError', 'BroadcastPublicVotersForbiddenError'}
 
 
+def estimate(count, seconds, hourly):
+    if not isinstance(count, int) or count <= 0:
+        return None
+    each = max(seconds or 0, 3600 / hourly if hourly else 0)
+    return round(count * each)
+
+
 class ForwardPlan(BaseModel):
     model_config = ConfigDict(extra='forbid')
     source: StrictInt = Field(ge=-(2**53-1), le=2**53-1)
@@ -124,11 +131,13 @@ class HistoryForward:
             if not latest:
                 raise ValueError('No messages to export.')
             destination = await self.destination(body.destination) if body.mode == 'existing' else None
+            seconds, hourly = (tuning.value(self.store, key) for key in ('action_message_seconds', 'action_messages_per_hour'))
+            count = getattr(latest, 'total', None)
             plan = {'id': secrets.token_hex(16), **body.model_dump(), 'account_id': account,
                 'source_title': utils.get_display_name(source), 'destination_title': utils.get_display_name(destination) if destination else body.title,
                 'upper_id': latest[0].id, 'expires_at': time.time() + 600,
-                'message_seconds': tuning.value(self.store, 'action_message_seconds'),
-                'messages_per_hour': tuning.value(self.store, 'action_messages_per_hour')}
+                'message_seconds': seconds, 'messages_per_hour': hourly, 'message_count': count,
+                'estimated_seconds': estimate(count, seconds, hourly)}
             self.store.set_setting(PLAN, plan)
             return {key: value for key, value in plan.items() if key != 'account_id'}
         except (*FLOOD_ERRORS, SlowModeWaitError) as exc:

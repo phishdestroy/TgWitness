@@ -27,9 +27,17 @@ export function createHistoryForward({json, tr, confirm}) {
     for (const [label, value] of entries) {list.append(make('dt', tr(label)), make('dd', String(value ?? '—')));}
     root.replaceChildren(list);
   }
+  function duration(seconds) {
+    if (seconds == null) return null;
+    const total = Math.max(1, Math.round(seconds / 60)), hours = Math.floor(total / 60), minutes = total % 60;
+    return hours ? tr('about {h} h {m} min', {h: hours, m: minutes}) : tr('about {m} min', {m: minutes});
+  }
   function showPlan() {
     details(review, [['Source', plan.source_title], ['Destination', plan.destination_title], ['Message ID', '≤ ' + plan.upper_id],
+      ...(plan.message_count ? [['Messages in the chat', plan.message_count]] : []),
+      ...(plan.estimated_seconds != null ? [['Expected duration', duration(plan.estimated_seconds)]] : []),
       ['Pause between messages', plan.message_seconds + ' s'], ['Messages per hour at most', plan.messages_per_hour]]);
+    if (plan.estimated_seconds >= 3600) review.append(make('p', tr('At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.', {time: duration(plan.estimated_seconds)}), 'hint'));
     review.append(start);controls();
   }
   function showJob() {
@@ -39,7 +47,10 @@ export function createHistoryForward({json, tr, confirm}) {
     if (!job) {summary.replaceChildren();actions.replaceChildren();controls();return;}
     const states = {running:'Running', waiting:'Waiting', pausing:'Pause', paused:'Paused', cancelling:'Cancel', cancelled:'Cancelled', completed:'Completed', uncertain:'Check', creation_unknown:'Check'};
     details(summary, [['Source', job.source_title], ['Destination', job.destination_title + (job.destination ? ' · ' + job.destination : '')],
-      ['State', tr(states[job.state] || 'Paused')], ['Sent', job.forwarded], ['Skipped', job.skipped],
+      ['State', tr(states[job.state] || 'Paused')],
+      ['Sent', job.forwarded + (job.message_count ? ' / ' + job.message_count : '')], ['Skipped', job.skipped],
+      ...(active() && job.message_count && job.estimated_seconds ? [['Time left', duration(Math.max(0, job.estimated_seconds *
+        (1 - (job.forwarded + job.skipped) / job.message_count)))]] : []),
       ...(job.wait_until ? [['Resume', new Date(job.wait_until * 1000).toLocaleString()]] : [])]);
     if (job.error) summary.append(make('p', tr(job.error), 'notice warning'));
     if (job.recent_skips?.length) {
