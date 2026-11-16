@@ -8063,7 +8063,6 @@
   "Use selected media action": "از اقدام رسانهٔ انتخاب‌شده استفاده کنید",
   "Use the complete recorder control token (at least 32 printable ASCII characters).": "از توکن کنترل ضبط‌کننده کامل (حداقل 32 کاراکتر ASCII قابل چاپ) استفاده کنید.",
   "Use the endpoint and region shown in your storage account.": "از نقطه پایانی و منطقه‌ای که در حساب ذخیره‌سازی خود مشاهده می‌کنید استفاده کنید.",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.": "از جلسه واردشده فقط برای تأیید ورود جدید استفاده کنید. کلاینت اصلی آن را تا پایان این فرایند بسته نگه دارید؛ پس از آن، هر دو مجوز می‌توانند به‌طور مستقل استفاده شوند. برای استفاده مجدد مستقیم از جلسه واردشده، آن را بدون بررسی رها کنید.",
   "Use two-letter message language codes.": "از کدهای زبان پیام دو حرفی استفاده کنید.",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.": "از بات خود در BotFather استفاده کنید. فقط چت و افرادی که در زیر فهرست شده‌اند می‌توانند از آن استفاده کنند. دستورات، وضعیت و شمارش‌ها را برمی‌گردانند؛ متن گفتگو در فضای کاری باقی می‌ماند.",
   "Valid from": "اعتبار از",
@@ -9975,5 +9974,10 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.": "به محدودیت مقایسهٔ منابع رسیدیم: {n} مورد اضافی مقایسه نشد.",
   "Source without a peer ID": "منبع بدون شناسهٔ موجودیت",
   "Observed chat": "گفت‌وگوی مشاهده‌شده",
-  "Forward source": "منبع بازفرستادن"
+  "Forward source": "منبع بازفرستادن",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.": "از نشست واردشده فقط برای تأیید یک ورود جدید استفاده کنید. تا پایان این کار، کلاینت اصلی آن را بسته نگه دارید؛ پس از آن می‌توان از هر دو هم‌زمان استفاده کرد. از نشست واردشده خارج نشوید و آن را پایان ندهید: در این صورت Telegram مجوزی را که تأیید کرده هم پایان می‌دهد. برای استفادهٔ مستقیم از نشست واردشده، این گزینه را علامت نزنید.",
+  "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "ورود این فضای کاری را تأیید کرد. پایان دادن به آن این فضای کاری را هم پایان می‌دهد، پس TgWitness آن را نگه می‌دارد.",
+  "End every other session in Telegram except the one that approved this workspace's sign-in?": "همهٔ نشست‌های دیگر در Telegram پایان یابند، به‌جز نشستی که ورود این فضای کاری را تأیید کرد؟",
+  "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "این نشست ورود این فضای کاری را تأیید کرد. وقتی پایان یابد، Telegram نشستی را که تأیید کرده هم پایان می‌دهد، پس TgWitness آن را پایان نمی‌دهد.",
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "نشست‌های دیگر پایان یافتند. نشستی که ورود این فضای کاری را تأیید کرد هنوز وارد است: پایان دادن به آن نشست این فضای کاری را هم پایان می‌دهد."
 }

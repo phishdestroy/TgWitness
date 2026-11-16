@@ -41,6 +41,10 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- TgWitness never ends the session that approved a workspace's QR sign-in: Telegram also ends the session it
+  approved. Importing records that session; the session list marks it, “End session” refuses it, and ending
+  other sessions or making this the only session keeps it. The import hint no longer says the two
+  authorizations are independent.
 - When Telegram ends the session, the loss record keeps what was known just before it: the session's age,
   the other sessions at the last check and Telegram's last security notice (`before_loss`).
 - A sign-in that has not finished yet no longer writes `account.authorization_error` entries that read as a

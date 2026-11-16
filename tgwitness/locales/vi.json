@@ -8024,7 +8024,6 @@
   "Use selected media action": "Sử dụng hành động phương tiện đã chọn",
   "Use the complete recorder control token (at least 32 printable ASCII characters).": "Sử dụng mã thông báo điều khiển trình ghi đầy đủ (ít nhất 32 ký tự ASCII có thể in được).",
   "Use the endpoint and region shown in your storage account.": "Sử dụng điểm cuối và khu vực được hiển thị trong tài khoản lưu trữ của bạn.",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.": "Chỉ sử dụng phiên đã nhập để phê duyệt lần đăng nhập mới. Giữ phiên khách hàng gốc đóng cho đến khi quá trình này hoàn tất; sau đó, cả hai ủy quyền đều có thể được sử dụng độc lập. Để trống ô này để tái sử dụng trực tiếp phiên đã nhập.",
   "Use two-letter message language codes.": "Sử dụng mã ngôn ngữ tin nhắn gồm hai chữ cái.",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.": "Sử dụng bot của riêng bạn từ BotFather. Chỉ cuộc trò chuyện và những người được liệt kê bên dưới mới có thể sử dụng nó. Các lệnh trả về trạng thái và số lượng; văn bản cuộc trò chuyện vẫn được lưu trong không gian làm việc.",
   "Valid from": "Có hiệu lực từ",
@@ -9924,5 +9923,10 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.": "Đã đạt giới hạn so sánh nguồn: {n} lần xuất hiện bổ sung chưa được so sánh.",
   "Source without a peer ID": "Nguồn không có ID thực thể",
   "Observed chat": "Cuộc trò chuyện đã quan sát",
-  "Forward source": "Nguồn chuyển tiếp"
+  "Forward source": "Nguồn chuyển tiếp",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.": "Chỉ dùng phiên đã nhập để phê duyệt một lần đăng nhập mới. Giữ ứng dụng gốc đóng cho đến khi xong; sau đó có thể dùng cả hai cùng lúc. Đừng đăng xuất hay kết thúc phiên đã nhập: khi đó Telegram cũng kết thúc quyền truy cập mà nó đã phê duyệt. Để trống ô này để dùng trực tiếp phiên đã nhập.",
+  "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "Đã phê duyệt đăng nhập của không gian làm việc này. Kết thúc nó cũng sẽ kết thúc không gian làm việc này, nên TgWitness giữ lại.",
+  "End every other session in Telegram except the one that approved this workspace's sign-in?": "Kết thúc mọi phiên khác trong Telegram, trừ phiên đã phê duyệt đăng nhập của không gian làm việc này?",
+  "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "Phiên này đã phê duyệt đăng nhập của không gian làm việc này. Khi nó kết thúc, Telegram cũng kết thúc phiên mà nó đã phê duyệt, nên TgWitness không kết thúc nó.",
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "Các phiên khác đã kết thúc. Phiên đã phê duyệt đăng nhập của không gian làm việc này vẫn đang đăng nhập: kết thúc nó cũng sẽ kết thúc phiên của không gian làm việc này."
 }

@@ -41,7 +41,7 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-sensitive1"></script>
+<script defer src="/app.js?v=0.9.3-approver1"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=14"></script>
@@ -1485,7 +1485,7 @@
         <p data-for="reuse">Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
         <p data-for="reuse">For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
         <p data-for="independent">With “Create an independent authorization”, the donor still connects briefly. Close its original client for this step. Reopen it after TgWitness confirms that the new authorization is connected.</p>
-        <p data-for="independent">Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.</p>
+        <p data-for="independent">Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.</p>
       </details>
       <div id="phone-fields"><label for="phone">Phone number</label><input autocomplete="tel" id="phone" pattern="\+[0-9]{7,16}" placeholder="+1 234 567 8900" required type="tel"></div>
       <div hidden id="qr-intro"><div class="qr-instructions"><span>1</span><p>Open Telegram on your phone.</p><span>2</span><p>Settings → Devices → Link Desktop Device.</p><span>3</span><p>Scan the code shown here.</p></div></div>

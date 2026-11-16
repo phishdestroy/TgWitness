@@ -115,6 +115,12 @@ ONLY_SESSION_MEANING = ("All other sessions of this account were ended from this
                         "notices (777000) and its session list keep being recorded.")
 ONLY_SESSION_ENDED_MEANING = ("Telegram's session list shows a session other than this workspace's after this "
                               "session was made the only one.")
+APPROVER_PROTECTED = ("This session approved this workspace's sign-in. When it ends, Telegram also ends the session "
+                      "it approved, so TgWitness does not end it.")
+APPROVER_KEPT = ("Other sessions were ended. The session that approved this workspace's sign-in is still signed in: "
+                 "ending it would also end this workspace's session.")
+APPROVER_KEPT_MEANING = ("The session that approved this workspace's sign-in was left signed in, because Telegram ends "
+                         "a session approved by QR code when the approving session ends.")
 AUTO_ONLY_SESSION_AFTER = 24 * 3600
 TAKEOUT_FRESH_SECONDS = 24 * 3600
 TAKEOUT_SKIPPED_MEANING = {
@@ -3030,6 +3036,7 @@ class Collector:
         await self.restore()
         result = await asyncio.wait_for(self.client(functions.account.GetAuthorizationsRequest()), 30)
         await self.check_sessions()
+        approver = self.approving_hash(result.authorizations)
         return {"key_origin": (self.store.get_setting("account", None) or {}).get("key_origin"),
                 "auto_only_session": bool(self.store.get_setting("auto_only_session", False)),
                 "only_session": self.store.get_setting("only_session", None),
@@ -3039,8 +3046,17 @@ class Collector:
                     "platform": a.platform, "app_name": a.app_name, "app_version": a.app_version,
                     "official_app": bool(a.official_app), "country": a.country, "region": a.region,
                     "created_at": date_string(a.date_created), "active_at": date_string(a.date_active),
-                    "password_pending": bool(a.password_pending)} for a in result.authorizations],
+                    "password_pending": bool(a.password_pending),
+                    "approved_this_workspace": a.hash == approver} for a in result.authorizations],
                 "inactive_ttl_days": getattr(result, "authorization_ttl_days", None)}
+
+    def approving_hash(self, authorizations):
+        origin = ((self.vault.read("credentials") or {}).get("session_origin") or {}).get("approved_by")
+        if not isinstance(origin, dict) or not origin.get("created_at"):
+            return None
+        return next((a.hash for a in authorizations if not a.current and a.date_created is not None
+                     and a.date_created.isoformat() == origin["created_at"] and a.api_id == origin.get("api_id")),
+                    None)
 
     async def end_session(self, session_hash):
         await self.restore()
@@ -3050,6 +3066,8 @@ class Collector:
             raise ValueError("This session is no longer signed in.")
         if target.current:
             raise ProtectedSession("This is the session TgWitness works on. It cannot be ended from here.")
+        if target.hash == self.approving_hash(result.authorizations):
+            raise ProtectedSession(APPROVER_PROTECTED)
         try:
             await self.client(functions.account.ResetAuthorizationRequest(hash=target.hash))
         except FreshResetAuthorisationForbiddenError:
@@ -3066,8 +3084,15 @@ class Collector:
         await self.restore()
         snapshot_before = await self.check_sessions()
         others_before = len((snapshot_before or {}).get("others", []))
+        listed = await asyncio.wait_for(self.client(functions.account.GetAuthorizationsRequest()), 30)
+        approver = self.approving_hash(listed.authorizations)
         try:
-            await asyncio.wait_for(self.client(functions.auth.ResetAuthorizationsRequest()), 30)
+            if approver is None:
+                await asyncio.wait_for(self.client(functions.auth.ResetAuthorizationsRequest()), 30)
+            else:
+                for entry in listed.authorizations:
+                    if not entry.current and entry.hash != approver:
+                        await asyncio.wait_for(self.client(functions.account.ResetAuthorizationRequest(hash=entry.hash)), 30)
         except FreshResetAuthorisationForbiddenError:
             raise ValueError("Telegram lets a session end other sessions only after it has been signed in for "
                              "24 hours.") from None
@@ -3075,8 +3100,10 @@ class Collector:
         others_after = len((snapshot_after or {}).get("others", []))
         self.store.append("account.all_other_sessions_terminated", {
             "sessions_before": others_before, "sessions_after": others_after,
-            "initiated_by": "this workspace"})
-        return {"terminated": others_before, "remaining_others": others_after}
+            "initiated_by": "this workspace",
+            **({"kept_approving_session": True, "meaning": APPROVER_KEPT_MEANING} if approver is not None else {})})
+        return {"terminated": others_before - others_after, "remaining_others": others_after,
+                "kept_approving_session": approver is not None}
 
     async def make_only_session(self, take=True):
         await self.restore()
@@ -3084,6 +3111,8 @@ class Collector:
             raise ValueError("This session key was imported, so copies of it can exist outside Telegram's session "
                              "list. Sign in again from this workspace first.")
         ended = await self.terminate_all_other_sessions()
+        if ended["kept_approving_session"]:
+            raise ValueError(APPROVER_KEPT)
         if ended["remaining_others"]:
             raise ValueError("Telegram still lists " + str(ended["remaining_others"]) + " other session(s). "
                              "Try again in a minute.")

@@ -2907,7 +2907,7 @@
   "Use selected media action",
   "Use the complete recorder control token (at least 32 printable ASCII characters).",
   "Use the endpoint and region shown in your storage account.",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.",
   "Use two-letter message language codes.",
   "Use verify.py from a trusted checkout with --fingerprint and a fingerprint obtained separately. Compare a previously retained checkpoint or an independent witness archive.",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.",

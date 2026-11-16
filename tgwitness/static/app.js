@@ -5192,8 +5192,9 @@ async function showAccountSessions(){
     tr("No other sessions. Only this one is signed in.")));
   if(others){
     const all=node("button","quiet danger",tr("End all other sessions"));all.type="button";
+    const approver=r.sessions.some(s=>s.approved_this_workspace);
     all.addEventListener("click",e=>busy(e.currentTarget,async()=>{
-      if(!(await askConfirm(tr("End all other sessions in Telegram? Every other device signed in to this account is logged out."),{danger:true,confirmText:tr("End all other sessions")})))return;
+      if(!(await askConfirm(tr(approver?"End every other session in Telegram except the one that approved this workspace's sign-in?":"End all other sessions in Telegram? Every other device signed in to this account is logged out."),{danger:true,confirmText:tr("End all other sessions")})))return;
       if(!owner.current())return;
       const done=await json("account/sessions/end-others",{},{profile:owner.profile,token:owner.token});
       toast(tr("Other sessions ended: {n}",{n:done.terminated}));await showAccountSessions();
@@ -5227,6 +5228,7 @@ async function showAccountSessions(){
     row.append(node("span","muted",[[s.region,s.country].filter(Boolean).join(", "),tr("first sign-in {date}",{date:(s.created_at||"").slice(0,10)}),
       s.current?"":tr("last active {date}",{date:(s.active_at||"").slice(0,10)})].filter(Boolean).join(" · ")));
     if(s.current)row.append(node("strong","",tr("This session (TgWitness)")));
+    else if(s.approved_this_workspace)row.append(node("strong","",tr("Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.")));
     else{
       const end=node("button","quiet danger",tr("End session"));end.type="button";
       end.addEventListener("click",e=>busy(e.currentTarget,async()=>{

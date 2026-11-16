@@ -8024,7 +8024,6 @@
   "Use selected media action": "Gunakan tindakan media terpilih",
   "Use the complete recorder control token (at least 32 printable ASCII characters).": "Gunakan token kawalan perekod lengkap (sekurang-kurangnya 32 aksara ASCII yang boleh dicetak).",
   "Use the endpoint and region shown in your storage account.": "Gunakan titik akhir dan rantau yang ditunjukkan dalam akaun storan anda.",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.": "Gunakan sesi yang diimport hanya untuk meluluskan log masuk baru. Biarkan klien asalnya tertutup sehingga ini selesai; selepas itu kedua-dua kebenaran boleh digunakan secara berasingan. Biarkan tidak diperiksa untuk menggunakan semula sesi yang diimport secara langsung.",
   "Use two-letter message language codes.": "Gunakan kod bahasa mesej dua huruf.",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.": "Gunakan bot anda sendiri daripada BotFather. Hanya sembang dan orang yang disenaraikan di bawah boleh menggunakannya. Perintah mengembalikan status dan kiraan; teks perbualan kekal di ruang kerja.",
   "Valid from": "Bersahih dari",
@@ -9924,5 +9923,10 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.": "Had perbandingan sumber dicapai: {n} kemunculan tambahan tidak dibandingkan.",
   "Source without a peer ID": "Sumber tanpa ID entiti",
   "Observed chat": "Sembang yang diperhatikan",
-  "Forward source": "Sumber pemajuan"
+  "Forward source": "Sumber pemajuan",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.": "Gunakan sesi yang diimport hanya untuk meluluskan log masuk baharu. Pastikan klien asalnya ditutup sehingga selesai; selepas itu kedua-duanya boleh digunakan serentak. Jangan log keluar atau menamatkan sesi yang diimport: Telegram juga akan menamatkan kebenaran yang diluluskannya. Biarkan tidak ditanda untuk menggunakan sesi yang diimport secara terus.",
+  "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "Meluluskan log masuk ruang kerja ini. Menamatkannya juga akan menamatkan ruang kerja ini, jadi TgWitness mengekalkannya.",
+  "End every other session in Telegram except the one that approved this workspace's sign-in?": "Tamatkan semua sesi lain dalam Telegram kecuali sesi yang meluluskan log masuk ruang kerja ini?",
+  "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "Sesi ini meluluskan log masuk ruang kerja ini. Apabila ia tamat, Telegram juga menamatkan sesi yang diluluskannya, jadi TgWitness tidak menamatkannya.",
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "Sesi lain telah ditamatkan. Sesi yang meluluskan log masuk ruang kerja ini masih log masuk: menamatkannya juga akan menamatkan sesi ruang kerja ini."
 }

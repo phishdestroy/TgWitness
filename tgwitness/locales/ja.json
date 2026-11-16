@@ -8024,7 +8024,6 @@
   "Use selected media action": "選択されたメディアアクションを使用する",
   "Use the complete recorder control token (at least 32 printable ASCII characters).": "完全なレコーダー制御トークン（少なくとも32文字の印刷可能なASCII文字）を使用してください。",
   "Use the endpoint and region shown in your storage account.": "ご自身のストレージアカウントに表示されているエンドポイントとリージョンを使用してください。",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.": "インポートされたセッションは、新しいログインの承認にのみ使用してください。これが完了するまで、元のクライアントを閉じたままにしておいてください。その後、両方の認証を独立して使用できるようになります。インポートされたセッションを直接再利用する場合は、このチェックボックスをオフのままにしてください。",
   "Use two-letter message language codes.": "メッセージ言語コードには2文字のコードを使用してください。",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.": "BotFatherから作成した独自のボットを使用してください。以下のチャットおよびユーザーのみがこれを使用できます。コマンドはステータスとカウントを返します。会話のテキストはワークスペースに残ります。",
   "Valid from": "有効期間：",
@@ -9924,5 +9923,10 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.": "転送元の比較上限に達しました。追加の {n} 件の出現は比較されていません。",
   "Source without a peer ID": "エンティティ ID のない転送元",
   "Observed chat": "観測したチャット",
-  "Forward source": "転送元"
+  "Forward source": "転送元",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.": "インポートしたセッションは新しいログインの承認にのみ使用してください。完了するまで元のクライアントは閉じておいてください。その後は両方を同時に使用できます。インポートしたセッションからログアウトしたり終了したりしないでください。そうすると Telegram はそのセッションが承認した認証も終了します。インポートしたセッションを直接使う場合はオフのままにしてください。",
+  "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "このワークスペースのログインを承認したセッションです。終了するとこのワークスペースも終了するため、TgWitness は残しておきます。",
+  "End every other session in Telegram except the one that approved this workspace's sign-in?": "このワークスペースのログインを承認したセッションを除き、Telegram の他のすべてのセッションを終了しますか？",
+  "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "このセッションがこのワークスペースのログインを承認しました。終了すると Telegram は承認したセッションも終了するため、TgWitness は終了しません。",
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "他のセッションを終了しました。このワークスペースのログインを承認したセッションはまだログイン中です。終了するとこのワークスペースのセッションも終了します。"
 }

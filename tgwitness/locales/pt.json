@@ -8063,7 +8063,6 @@
   "Use selected media action": "Use a ação de mídia selecionada",
   "Use the complete recorder control token (at least 32 printable ASCII characters).": "Use o token de controle completo do gravador (pelo menos 32 caracteres ASCII imprimíveis).",
   "Use the endpoint and region shown in your storage account.": "Use o endpoint e a região indicados na sua conta de armazenamento.",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.": "Use a sessão importada apenas para aprovar um novo login. Mantenha o cliente original fechado até que isso seja concluído; depois, ambas as autorizações poderão ser usadas independentemente. Deixe desmarcada a opção para reutilizar a sessão importada diretamente.",
   "Use two-letter message language codes.": "Utilize códigos de idioma de mensagem de duas letras.",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.": "Use seu próprio bot do BotFather. Apenas o chat e as pessoas listadas abaixo podem usá-lo. Os comandos retornam status e contagens; o texto da conversa permanece no espaço de trabalho.",
   "Valid from": "Válido a partir de",
@@ -9985,5 +9984,10 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.": "Limite de comparação de fontes atingido: {n} ocorrências adicionais não foram comparadas.",
   "Source without a peer ID": "Fonte sem ID de entidade",
   "Observed chat": "Chat observado",
-  "Forward source": "Fonte do encaminhamento"
+  "Forward source": "Fonte do encaminhamento",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.": "Use a sessão importada apenas para aprovar uma nova entrada. Mantenha o cliente original fechado até isso terminar; depois, as duas podem ser usadas ao mesmo tempo. Não saia nem encerre a sessão importada: o Telegram também encerraria a autorização que ela aprovou. Deixe desmarcado para usar a sessão importada diretamente.",
+  "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "Aprovou a entrada deste espaço de trabalho. Encerrá-la também encerraria este espaço, por isso o TgWitness a mantém.",
+  "End every other session in Telegram except the one that approved this workspace's sign-in?": "Encerrar no Telegram todas as outras sessões, exceto a que aprovou a entrada deste espaço de trabalho?",
+  "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "Esta sessão aprovou a entrada deste espaço de trabalho. Quando ela termina, o Telegram também encerra a sessão que ela aprovou, por isso o TgWitness não a encerra.",
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "As outras sessões foram encerradas. A sessão que aprovou a entrada deste espaço de trabalho continua ativa: encerrá-la também encerraria a sessão deste espaço."
 }

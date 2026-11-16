@@ -8063,7 +8063,6 @@
   "Use selected media action": "Utilizar la acción multimedia seleccionada",
   "Use the complete recorder control token (at least 32 printable ASCII characters).": "Utiliza el token de control completo del registrador (al menos 32 caracteres ASCII imprimibles).",
   "Use the endpoint and region shown in your storage account.": "Utiliza el punto final y la región que aparecen en tu cuenta de almacenamiento.",
-  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.": "Utiliza la sesión importada únicamente para autorizar un nuevo inicio de sesión. Mantén cerrado el cliente original hasta que esto finalice; a continuación, ambas autorizaciones podrán utilizarse de forma independiente. Deja la casilla sin marcar para reutilizar directamente la sesión importada.",
   "Use two-letter message language codes.": "Utiliza códigos de idioma de mensajes de dos letras.",
   "Use your own bot from BotFather. Only the chat and people listed below can use it. Commands return status and counts; conversation text stays in the workspace.": "Utiliza tu propio bot de BotFather. Solo el chat y las personas que se indican a continuación pueden utilizarlo. Los comandos devuelven el estado y los recuentos; el texto de la conversación permanece en el espacio de trabajo.",
   "Valid from": "Válido a partir del",
@@ -9985,5 +9984,10 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.": "Límite de comparación de fuentes alcanzado: no se compararon {n} apariciones adicionales.",
   "Source without a peer ID": "Fuente sin ID de entidad",
   "Observed chat": "Chat observado",
-  "Forward source": "Fuente del reenvío"
+  "Forward source": "Fuente del reenvío",
+  "Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.": "Usa la sesión importada solo para aprobar un nuevo inicio de sesión. Mantén cerrado su cliente original hasta que termine; después, ambas pueden usarse a la vez. No cierres ni finalices la sesión importada: Telegram finalizaría también la autorización que aprobó. Deja la casilla sin marcar para usar directamente la sesión importada.",
+  "Approved this workspace's sign-in. Ending it would also end this workspace, so TgWitness keeps it.": "Aprobó el inicio de sesión de este espacio de trabajo. Finalizarla también finalizaría este espacio, así que TgWitness la conserva.",
+  "End every other session in Telegram except the one that approved this workspace's sign-in?": "¿Finalizar en Telegram todas las demás sesiones, excepto la que aprobó el inicio de sesión de este espacio de trabajo?",
+  "This session approved this workspace's sign-in. When it ends, Telegram also ends the session it approved, so TgWitness does not end it.": "Esta sesión aprobó el inicio de sesión de este espacio de trabajo. Cuando finaliza, Telegram también finaliza la sesión que aprobó, así que TgWitness no la finaliza.",
+  "Other sessions were ended. The session that approved this workspace's sign-in is still signed in: ending it would also end this workspace's session.": "Se finalizaron las demás sesiones. La sesión que aprobó el inicio de sesión de este espacio de trabajo sigue activa: finalizarla también finalizaría la sesión de este espacio."
 }
