@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 6d996f97d8ee08ba76b2f860aad5de63f7963c3d53ba95b9af99ecb0565e2c90
+# TgWitness verifier sources SHA-256: a922f05d0453b734a915af5a7392260c1d62bf3d12c7dccb6e21cb9192c6c2e7
 """Standalone verifier"""
 import argparse
 import base64
@@ -11299,6 +11299,7 @@ def verification_output(args, checked, console, mode):
         if failed:
             raise SystemExit(2)
         return
+    verification_print(assurance_line(result))
     verification_print(evidence_line(evidence))
     for row in evidence["conditions"]:
         verification_print("  [" + row["status"] + "] " + CONDITION_LABELS[row["id"]] + " (" + row["role"].replace("_", " ")

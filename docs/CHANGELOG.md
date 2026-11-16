@@ -41,6 +41,8 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- The verifier's plain output starts with the `ASSURANCE:` line on success as well as on failure, followed by
+  the `EVIDENCE:` line, as For the record advises reading it.
 - History read by an ordinary group member is no longer always `incomplete`: the admin log is shown only to
   administrators, so its refusal is recorded with `reason: not_admin` and leaves the history complete.
 - The history transfer preview shows how many messages the chat has and how long the transfer takes at the

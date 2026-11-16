@@ -643,6 +643,7 @@ def verification_output(args, checked, console, mode):
         if failed:
             raise SystemExit(2)
         return
+    verification_print(assurance_line(result))
     verification_print(evidence_line(evidence))
     for row in evidence["conditions"]:
         verification_print("  [" + row["status"] + "] " + CONDITION_LABELS[row["id"]] + " (" + row["role"].replace("_", " ")
