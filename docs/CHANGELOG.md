@@ -25,6 +25,16 @@
 
 ## Unreleased
 
+- When Telegram ends the session, the loss record keeps what was known just before it: the session's age,
+  the other sessions at the last check and Telegram's last security notice (`before_loss`).
+- A sign-in that has not finished yet no longer writes `account.authorization_error` entries that read as a
+  lost authorization.
+- History reading no longer skips chats Telegram marks as restricted; the restriction stays in the journal
+  and whatever Telegram delivers is saved. Messages keep their own restriction reasons. On connect the
+  account allows sensitive (18+) content when Telegram lets it, recorded as `account.content_settings`.
+- Telegram's data export notice is recorded as `data_export` instead of a new sign-in.
+- Chat exports and automatic account exports no longer request Takeout from a session that signed in less
+  than 24 hours ago, or while Telegram asks to wait, so Telegram sends no data export warning to the account.
 - Bulk account pause/resume prevents overlapping confirmations and discards stale
   operations after session resets. Failed responses no longer claim that the
   collector was unchanged; account states are refreshed without repeating commands.

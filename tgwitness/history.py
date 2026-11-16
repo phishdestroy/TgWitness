@@ -283,9 +283,6 @@ class History:
         if not self.collector.selected(job["chat_id"]):
             self.finish_source(job, "skipped", "source_disabled")
             return
-        if (self.collector.source_status.get(str(job["chat_id"])) or {}).get("state") == "restricted_by_telegram":
-            self.finish_source(job, "skipped", "restricted_by_telegram")
-            return
         client = self.collector.client
         try:
             await self.read_page(job)

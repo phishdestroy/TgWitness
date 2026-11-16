@@ -178,5 +178,7 @@ def details(raw):
              "reactions": reactions(raw.get("reactions")),
              "auto_delete_seconds": raw.get("ttl_period"), "protected": raw.get("noforwards") or None,
              "album_id": raw.get("grouped_id"),
-             "media_info": media_info(raw.get("media"), None if raw.get("out") else raw.get("media_unread"))}
+             "media_info": media_info(raw.get("media"), None if raw.get("out") else raw.get("media_unread")),
+             "restriction": [{key: item.get(key) for key in ("platform", "reason", "text")}
+                             for item in raw.get("restriction_reason") or [] if isinstance(item, dict)]}
     return {k: v for k, v in found.items() if v not in (None, "", [], {})}
