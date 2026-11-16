@@ -98,6 +98,7 @@ SECURITY_LOG_USER = 777000
 SECURITY_EVENT_MEANING = ("Security notice from Telegram (user 777000). "
                           "login_code: an SMS code was requested for this account. "
                           "new_login: a new session was authorized. "
+                          "data_export: a session of this account asked to export its Telegram data. "
                           "2fa_changed: two-step verification was changed. "
                           "during_observation: Telegram sent the notice after this observation run began.")
 SECURITY_BASELINE_MEANING = ("Security notices from Telegram (user 777000) that were already present when this "
@@ -115,6 +116,12 @@ ONLY_SESSION_MEANING = ("All other sessions of this account were ended from this
 ONLY_SESSION_ENDED_MEANING = ("Telegram's session list shows a session other than this workspace's after this "
                               "session was made the only one.")
 AUTO_ONLY_SESSION_AFTER = 24 * 3600
+TAKEOUT_FRESH_SECONDS = 24 * 3600
+TAKEOUT_SKIPPED_MEANING = {
+    "fresh_session": "This session signed in less than 24 hours ago. Telegram answers a Takeout request from such a "
+                     "session with a data export warning to the account, so history is read without Takeout.",
+    "takeout_approval_wait": "Telegram asked to wait before the next Takeout request, so history is read without "
+                             "Takeout until then."}
 AUTO_ONLY_SESSION_EVERY = 300
 AUTO_ONLY_SESSION_MEANING = ("Setting of this workspace: end every other session of the account automatically once "
                              "Telegram allows it, 24 hours after the session key created here signed in. Telegram "
@@ -137,6 +144,7 @@ def sessions_snapshot(authorizations):
 def security_notice(message):
     text = message.message or ""
     kind = ("login_code" if "Login code:" in text else
+            "data_export" if "data export request" in text.lower() else
             "new_login" if "logged in" in text.lower() or "new login" in text.lower() else
             "2fa_changed" if "Two-Step Verification" in text else
             "oauth_login" if "via @" in text or "logged in on" in text.lower() else
@@ -193,7 +201,9 @@ DELETION_BATCH_MEANING = (
 ACCESS_LOST_MEANING = ("The account was removed from this chat or can no longer read it. Observation of this chat "
                        "stopped at that moment; records saved before it remain in the journal.")
 RESTRICTED_MEANING = ("Telegram marks this chat as restricted and gives the reason shown. Ordinary clients hide its "
-                      "content; records saved before the restriction remain in the journal.")
+                      "content; TgWitness keeps reading and saving whatever Telegram still delivers.")
+SENSITIVE_MEANING = ("Telegram hides content it marks as sensitive (18+) unless the account allows it. TgWitness "
+                     "allows it so such messages and media are saved.")
 UPDATES_CHECK_SECONDS = 120
 UPDATES_GRACE_SECONDS = 30
 UPDATES_DIVERTED_MEANING = ("Telegram's update counter for this account grew while no update reached this session. "
@@ -337,6 +347,10 @@ LOSS_MEANING = {
     "account_frozen": "Telegram froze this account and refuses most requests; the account can appeal through @SpamBot.",
     "not_authorized": "Telegram reports the session as signed out and gave no reason.",
 }
+
+
+LOSS_CONTEXT_MEANING = ("State recorded before Telegram ended the session: its age, the other sessions of the account "
+                        "at the last check, and Telegram's last security notice. Telegram does not say who ended it.")
 
 
 def account_loss_cause(exc):
@@ -787,6 +801,8 @@ class Collector:
         if not isinstance(exc, AUTHORIZATION_ERRORS):
             return False
         if client is not None and client is not self.client:
+            if client is self.login_client:
+                return True
             self.note("account.authorization_error", {
                 "operation": operation, "error_type": type(exc).__name__, "telegram_error": telegram_error(exc),
                 "client": type(client).__name__, "dc_id": getattr(getattr(client, "session", None), "dc_id", None),
@@ -801,7 +817,7 @@ class Collector:
         self.phase, self.last_error = "authorization_required", type(exc).__name__
         cause = exc.cause if isinstance(exc, AccountLost) else account_loss_cause(exc) or "not_authorized"
         error = exc.error if isinstance(exc, AccountLost) else telegram_error(exc)
-        place = self.loss_place()
+        place = {**self.loss_place(), "before_loss": self.loss_context()}
         self.store.set_setting("account_loss", {"cause": cause, "at": utcnow(), "telegram_error": error, **place})
         if first:
             self.note("coverage.gap", {"reason": "authorization_required", "operation": operation,
@@ -819,6 +835,27 @@ class Collector:
         except Exception:
             place["route"] = None
         return place
+
+    def loss_context(self):
+        context = {}
+        try:
+            waited = self.session_age()
+            if waited is not None:
+                context["session_age_seconds"] = round(waited)
+            found = self.store.events_of(("account.sessions",), limit=1)
+            if found:
+                context["sessions_checked_at"] = found[0]["observed_at"]
+                context["other_sessions"] = [{key: entry.get(key) for key in ("device_model", "app_name", "api_id",
+                                                                               "country", "created_at")}
+                                             for entry in (found[0]["payload"] or {}).get("others") or []]
+            notice = self.store.events_of(("account.security_event",), limit=1)
+            if notice:
+                context["last_security_notice"] = {key: (notice[0]["payload"] or {}).get(key)
+                                                   for key in ("event_kind", "sent_at")}
+        except Exception:
+            pass
+        context["meaning"] = LOSS_CONTEXT_MEANING
+        return context
 
     async def wait_authorization_cleanup(self):
         task = self.authorization_cleanup
@@ -2468,6 +2505,7 @@ class Collector:
             self.store.append("account.initialized", {"account_id": me.id, "source": "telegram_api", "requests": result})
         await self.check_client_connection(candidate)
         await self.check_frozen()
+        await self.allow_sensitive()
 
     async def check_client_connection(self, client):
         if getattr(client, "tgwitness_connection_check", None) is None:
@@ -2556,6 +2594,8 @@ class Collector:
             current()
             if fresh:
                 await self.check_frozen()
+                current()
+                await self.allow_sensitive()
                 current()
             if secret_chats.settings(self.store)["enabled"]:
                 chats = secret_chats.of(self)
@@ -2854,6 +2894,28 @@ class Collector:
             self.store.append("account.restriction_expired", {"kind": "frozen", "source": "help.getAppConfig"})
         return frozen
 
+    async def allow_sensitive(self):
+        try:
+            answer = await asyncio.wait_for(self.client(functions.account.GetContentSettingsRequest()), 30)
+        except Exception:
+            return None
+        before, can = bool(answer.sensitive_enabled), bool(answer.sensitive_can_change)
+        enabled, error = before, None
+        if not before and can:
+            try:
+                await asyncio.wait_for(self.client(functions.account.SetContentSettingsRequest(sensitive_enabled=True)), 30)
+                enabled = True
+            except Exception as exc:
+                error = type(exc).__name__
+        state = {"sensitive_enabled": enabled, "can_change": can}
+        if enabled != before or error or self.store.get_setting("content_settings", None) != state:
+            with self.store.transaction():
+                self.store.set_setting("content_settings", state)
+                self.store.append("account.content_settings", {
+                    **state, "was_enabled": before, "changed": enabled != before, "error": error,
+                    "source": "account.getContentSettings", "meaning": SENSITIVE_MEANING})
+        return state
+
     async def poll_security_log(self, trigger="periodic"):
         client = self.client
         self.security_log_error = None
@@ -3059,6 +3121,24 @@ class Collector:
         if not found or (found[0]["payload"] or {}).get("key_origin") != "created":
             return None
         return age(found[0]["observed_at"], now_utc())
+
+    def session_age(self):
+        from .health import age, now_utc
+        found = self.store.events_of(("account.sessions",), limit=1)
+        created = ((found[0]["payload"] or {}).get("current") or {}).get("created_at") if found else None
+        waited = age(created, now_utc()) if created else None
+        return waited if waited is not None else self.authorized_age()
+
+    def takeout_blocked(self):
+        until = max(self.store.get_setting("takeout_wait_until", 0) or 0,
+                    self.store.get_setting("history_takeout_wait_until", 0) or 0)
+        if time.time() < until:
+            return "takeout_approval_wait"
+        waited = self.session_age()
+        return "fresh_session" if waited is None or waited < TAKEOUT_FRESH_SECONDS else None
+
+    def takeout_wait(self, seconds):
+        self.store.set_setting("takeout_wait_until", time.time() + max(0, seconds or 0))
 
     async def auto_only_session(self):
         if not self.store.get_setting("auto_only_session", False) or self.store.get_setting("only_session", None):
@@ -4870,12 +4950,19 @@ class Collector:
         if not isinstance(entity, types.Channel):
             yield self.client, None
             return
+        blocked = self.takeout_blocked()
+        if blocked:
+            self.note("telegram.takeout_unavailable", {"reason": blocked, "meaning": TAKEOUT_SKIPPED_MEANING[blocked]})
+            yield self.client, None
+            return
         try:
             session = await self.client(functions.account.InitTakeoutSessionRequest(
                 message_megagroups=True, message_channels=True))
             if not isinstance(session, types.account.Takeout):
                 raise ValueError("Telegram did not open a Takeout session.")
         except (TakeoutInitDelayError, RPCError, OSError, ConnectionError, TimeoutError, ValueError) as exc:
+            if isinstance(exc, TakeoutInitDelayError):
+                self.takeout_wait(exc.seconds)
             self.note("telegram.takeout_unavailable", {
                 "error_type": type(exc).__name__, "retry_after": getattr(exc, "seconds", None),
                 "meaning": "History is read without a Takeout session, about three times slower."})
