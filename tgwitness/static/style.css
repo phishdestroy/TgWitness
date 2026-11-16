@@ -1482,6 +1482,7 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
 @keyframes toast-out { to { opacity: 0; transform: translate(-50%, 8px) scale(.97); } }
 @keyframes drift { to { transform: translate3d(6%, 8%, 0) scale(1.18); } }
 @media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="always"]) .chat-feed.entering > * { animation: none !important; }
   :root:not([data-motion="always"]) *, :root:not([data-motion="always"]) *::before, :root:not([data-motion="always"]) *::after {
     animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition: none !important; scroll-behavior: auto !important;
   }

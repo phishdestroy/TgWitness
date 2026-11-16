@@ -64,6 +64,9 @@
 - A FloodWait while reading history or exporting a chat no longer pauses live
   observation. The wait stays limited to Telegram's history method, which the
   account's other history readers already respect; live updates keep arriving.
+- Chat pagination ends the opening animation before preserving the reading
+  position. Reduced-motion mode disables that animation entirely, avoiding an
+  intermittent shift when earlier messages appear.
 - Connection: the route check no longer creates a new Telegram authorization key every minute; it measures one unauthenticated MTProto round trip to the account's data center and reports the connection and round-trip times separately. A moving average marks a route slow or unavailable in the journal; a slow WARP route can be re-rolled to another Cloudflare endpoint or a new WARP identity, automatically at most once every 30 minutes. A WARP endpoint name that resolves to IPv6 and IPv4 now uses IPv4.
 - Panel speed: the panel opens with one `/api/bootstrap` request instead of five in a row; the live update stream stays open while the tab is briefly hidden, reconnects within half a second after its regular end and honours `Too many live streams`; settings, preferences and the account list are no longer requested twice on opening; coverage markers in a chat use `/api/chats/{id}/coverage` with only the records of that chat and the account; avatars of a list arrive in one `/api/avatars` request.
 - An idle Telegram connection stays open for two minutes after the last panel action instead of closing after each one.
