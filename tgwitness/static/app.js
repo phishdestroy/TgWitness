@@ -2109,6 +2109,11 @@ function excerpt(e) {
       existing_content_addressed_file_is_corrupt:"The saved copy of this file is damaged"}[p.reason]||p.reason||p.meaning||"");
     case "target.changed": return (p.title||tr("Source"))+" · "+tr(p.enabled?"observed":"paused");
     case "capture.changed": return p.download_media ? tr("Attachments on · {list}",{list:mediaLimitText(p)}) : tr("Attachment downloads off");
+    case "monitoring.changed": {
+      const after=p.after||{},keys=Object.keys(after).filter(key=>p.before?.[key]!==after[key]);
+      const text=(keys.length?keys:Object.keys(after)).map(key=>termText(key)+": "+tr(after[key]?"On":"Off")).join(" · ");
+      return text.charAt(0).toLocaleUpperCase(LANG)+text.slice(1);
+    }
     case "connection.retry": return tr("Attempt {n}",{n:p.attempt});
     case "connection.retry_failed": return tr("Attempt {n}",{n:p.attempt})+failure;
     case "telegram.backoff": return tr("Telegram asked to wait {n} s",{n:p.retry_after_seconds});
