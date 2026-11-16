@@ -26,6 +26,9 @@
 ## Unreleased
 
 - Preserve the last checkpoint's signing account when another worker finishes a distributed export range after interruption.
+- Author profile collection finishes each person (profile, photos, gifts, links) before starting the next, so the
+  “done” counter and the time estimate move from the start. Before, every stage ran for all people first and the
+  counter stayed at zero for most of the run.
 - A link preview for a public group that accepts members only after an administrator's approval now says so, and
   its button reads “Send join request”. Before, only invite links were checked, so such groups looked open.
 - After “Load earlier from Telegram”, older saved messages page again instead of asking Telegram on every click.
