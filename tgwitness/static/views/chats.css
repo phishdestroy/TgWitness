@@ -126,6 +126,9 @@ button.chat-setting-chip:hover { border-color: var(--accent); color: var(--accen
 .chat-gap[data-kind=coverage] .icon { color: var(--warning); }
 .chat-gap[data-kind=coverage] strong { flex: none; font-weight: 650; }
 .chat-gap-lines { display: grid; gap: 1px; min-width: 0; font-variant-numeric: tabular-nums; }
+.chat-gap-summary { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; }
+.chat-gap-details > summary { width: fit-content; min-height: 24px; color: var(--accent-text); font-size: 12px; cursor: pointer; }
+.chat-gap-all { display: grid; gap: 2px; margin-top: 4px; color: var(--text-2); font-size: 12px; }
 #chat-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
 .chat-metric { display: inline-flex; align-items: center; gap: 5px; min-height: 24px; padding: 1px 9px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text-2); font: inherit; font-weight: 550; cursor: pointer; transition: background-color .18s, border-color .18s, color .18s, transform .18s var(--ease-out); }
 .chat-metric .icon { width: 13px; height: 13px; }

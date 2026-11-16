@@ -138,14 +138,27 @@ export function createSources(context) {
     }
   }
 
+  function recommendedDraft() {
+    const value = getState().status?.recommended;
+    if (!value || !baseline) return null;
+    const {download_media, max_media_mb, preserve_ephemeral_media, types} = value.capture;
+    return {monitoring: value.monitoring, recheck: value.recheck,
+      capture: {...baseline.capture, download_media, max_media_mb, preserve_ephemeral_media, types}};
+  }
+
   function renderDraft() {
     if (!baseline) return;
-    const draft = read();
-    let count = 0;
+    const draft = read(), recommended = recommendedDraft();
+    let count = 0, differ = 0, fixable = 0;
     for (const group of Object.keys(dirty)) {
       dirty[group] = allowed(group) && !same(draft[group], baseline[group]);
       if (dirty[group]) count += changes(baseline[group], draft[group]);
+      const away = recommended ? changes(recommended[group], draft[group]) : 0;
+      differ += away; if (allowed(group)) fixable += away;
     }
+    find("recording-recommended").textContent = recommended
+      ? tr(differ ? "Some settings differ from the recommended ones" : "Recommended settings are on") : "";
+    find("recording-recommended-apply").disabled = saving || !fixable;
     context.setDirty({...dirty});
     find("recording-change-count").textContent = count
       ? tr(count === 1 ? "1 unsaved change" : "{n} unsaved changes", {n: count}) : tr("No unsaved changes");
@@ -564,6 +577,7 @@ export function createSources(context) {
     find("sources-scope-summary").textContent = context.scopeName(status.scope?.mode || "selected");
     find("sources-count-summary").textContent = tr("{n} enabled sources", {n: status.targets.filter(item => item.enabled).length});
     find("sources-recording-summary").textContent = tr(status.collector.running ? "Observation enabled" : "Observation paused");
+    find("sources-recording-summary").dataset.tone = status.demo ? "info" : status.collector.running ? "ok" : "off";
     find("sources-tab-count").textContent = String(status.targets.length);
     const note = find("recording-result");
     if (status.demo) note.textContent = tr("This demo is read-only. Recording settings can be changed in your own workspace.");
@@ -590,6 +604,14 @@ export function createSources(context) {
       renderDraft();
     });
   }
+  on(find("recording-recommended-apply"), "click", () => {
+    const recommended = recommendedDraft();
+    if (saving || !recommended) return;
+    for (const group of Object.keys(dirty)) if (allowed(group)) write(group, recommended[group]);
+    clearValidation();
+    find("recording-result").textContent = "";
+    renderDraft();
+  });
   on(find("recording-discard"), "click", () => {
     if (saving || !baseline) return;
     for (const group of Object.keys(dirty)) write(group, baseline[group]);
@@ -646,7 +668,8 @@ export function createSources(context) {
       find(id).textContent = "";
     find("source-action-result").textContent = "";
     context.setDirty({...dirty}); form.reset(); clearValidation(); find("recording-result").textContent = "";
-    find("recording-save").disabled = find("recording-discard").disabled = true;
+    find("recording-save").disabled = find("recording-discard").disabled = find("recording-recommended-apply").disabled = true;
+    find("recording-recommended").textContent = "";
     find("recording-tab-dirty").hidden = true;
     for (const id of ["target-list", "dialog-list", "scope-exclude"])
       find(id)?.replaceChildren();

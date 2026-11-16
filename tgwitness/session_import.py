@@ -12,6 +12,18 @@ from .store import utcnow
 PENDING = "Another independent login is pending. Import its original donor again to finish it."
 
 
+async def donor_authorization(donor):
+    try:
+        result = await asyncio.wait_for(donor(functions.account.GetAuthorizationsRequest()), 20)
+    except (RPCError, OSError, asyncio.TimeoutError):
+        return None
+    current = next((a for a in result.authorizations if a.current), None)
+    if current is None or current.date_created is None:
+        return None
+    return {"device_model": current.device_model, "app_name": current.app_name, "api_id": current.api_id,
+            "created_at": current.date_created.isoformat()}
+
+
 def refused(exc):
     from .collector import loss_cause
     return isinstance(exc, ValueError) or loss_cause(exc) is not None
@@ -145,11 +157,13 @@ async def create_session(collector, api_id, api_hash, session, expected_user_id=
             release_account = c.account_guard(me.id, c)
         if candidate is None:
             new_id, new_hash = next(pair for pair in api_pool.POOL if pair[0] == api_pool.DESKTOP_ID)
+            approver = await donor_authorization(donor)
             pending = {"donor": donor_id, "account_id": me.id, "credentials": {
                 "api_id": new_id, "api_hash": new_hash,
                 "client_profile": client_identity.resolve(new_id, languages, seed or secrets.token_hex(32)),
                 "session_origin": {"method": "qr_from_import", "formats": list(formats),
-                                   "donor_api_id": api_id, "created_at": utcnow()}}}
+                                   "donor_api_id": api_id, "created_at": utcnow(),
+                                   **({"approved_by": approver} if approver else {})}}}
             await prepare_candidate()
         qr = await candidate.qr_login()
         waiter = asyncio.create_task(qr.wait(timeout=60))

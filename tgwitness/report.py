@@ -1226,6 +1226,16 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
     return summary, shows, includes
 
 
+def account_label(account):
+    account = account or {}
+    handles = [x for x in (("@" + account["username"]) if account.get("username") else "",
+                           ("id " + str(account["id"])) if account.get("id") else "") if x]
+    name = (account.get("name") or "").strip()
+    if name:
+        return name + (" (" + ", ".join(handles) + ")" if handles else "")
+    return " · ".join(handles)
+
+
 def chat_brief(say, meta, stats, ids, account_text):
     chat, profile = meta.get("chat") or {}, (meta.get("chat") or {}).get("profile") or {}
     summary = say("The {n} messages Telegram returned to {account} for {chat}, sent from {first} to {last}, exported on "
@@ -2575,8 +2585,7 @@ class EvidenceHTML:
     def render_summary(self):
         say = self.say
         account = self.context.get("account") or {}
-        self.account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
-                                              ("id " + str(account["id"])) if account.get("id") else "") if x)
+        self.account_text = account_label(account)
         self.numbers = iter(range(1, 100))
         links = False if not self.options.get("timeline") else True if self.options.get("design") in report_layouts.DESIGNS             else "viewer" if self.data_kind else False
         yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
@@ -2990,8 +2999,7 @@ class ChatHTML:
     def render_summary(self):
         say = self.say
         account = self.meta.get("account") or {}
-        self.account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
-                                              ("id " + str(account["id"])) if account.get("id") else "") if x)
+        self.account_text = account_label(account)
         self.numbers = iter(range(1, 100))
         yield brief_section(say, *chat_brief(say, self.meta, self.stats, self.ids, self.account_text)).encode("utf-8")
         yield snapshot_analytics.html_section(self.context.get("analytics"), self.options, say).encode("utf-8")

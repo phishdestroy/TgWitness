@@ -13,12 +13,12 @@
 <link rel="stylesheet" href="/components/collection.css?v=1">
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/components/modes.css?v=1">
-<link rel="stylesheet" href="/views/sources.css?v=22">
+<link rel="stylesheet" href="/views/sources.css?v=25">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=31">
 <link rel="stylesheet" href="/views/group.css?v=1">
 <link rel="stylesheet" href="/views/setup.css?v=4">
-<link rel="stylesheet" href="/views/settings-hub.css?v=16">
+<link rel="stylesheet" href="/views/settings-hub.css?v=17">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/views/system-map.css?v=3">
 <link rel="stylesheet" href="/services.css?v=1">
@@ -27,9 +27,9 @@
 <link rel="stylesheet" href="/workspace-safety.css?v=1">
 <link rel="stylesheet" href="/account-import.css?v=2">
 <link rel="stylesheet" href="/views/access.css?v=30">
-<link rel="stylesheet" href="/components/journal.css?v=6">
-<link rel="stylesheet" href="/views/chats.css?v=19">
-<link rel="stylesheet" href="/views/chat-list.css?v=16">
+<link rel="stylesheet" href="/components/journal.css?v=7">
+<link rel="stylesheet" href="/views/chats.css?v=20">
+<link rel="stylesheet" href="/views/chat-list.css?v=17">
 <link rel="stylesheet" href="/views/visibility.css?v=1">
 <link rel="stylesheet" href="/views/board.css?v=3">
 <link rel="stylesheet" href="/views/topology.css?v=3">
@@ -41,12 +41,12 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.9.3-sensitive1"></script>
+<script defer src="/app.js?v=0.9.3-telegram2"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=14"></script>
 <script defer src="/account-import.js?v=3"></script>
-<script defer src="/integrations.js?v=5"></script>
+<script defer src="/integrations.js?v=6"></script>
 <script defer src="/analysis.js?v=5"></script>
 <script defer src="/media-analysis.js?v=2"></script>
 <script defer src="/webhooks.js?v=2"></script>
@@ -55,14 +55,15 @@
 <script defer src="/review.js?v=1"></script>
 <script defer src="/live.js?v=5"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
-<link href="/views/exports.css?v=35" rel="stylesheet">
-<link href="/views/workflows.css?v=13" rel="stylesheet">
+<link href="/views/exports.css?v=36" rel="stylesheet">
+<link href="/views/workflows.css?v=15" rel="stylesheet">
 <link href="/views/disclosure-preview.css?v=1" rel="stylesheet">
-<link href="/components/forms.css?v=35" rel="stylesheet">
-<link href="/components/feedback.css?v=36" rel="stylesheet">
-<link href="/components/layout.css?v=14" rel="stylesheet">
+<link href="/components/forms.css?v=36" rel="stylesheet">
+<link href="/components/feedback.css?v=38" rel="stylesheet">
+<link href="/components/layout.css?v=16" rel="stylesheet">
 <link href="/components/polish.css?v=7" rel="stylesheet">
 <link href="/views/pulse.css?v=2" rel="stylesheet">
+<link href="/components/account-switch.css?v=3" rel="stylesheet">
 </head>
 <body>
 <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -282,7 +283,7 @@
 
 <section class="view" id="view-observations">
   <div class="page-heading">
-    <div><h1>Journal</h1><p class="page-description">Captured messages. Preserved changes. One record.</p></div>
+    <div><h1 id="journal-title">Journal</h1><p class="page-description">Captured messages. Preserved changes. One record.</p></div>
     <button class="primary" data-export="zip" data-mode-feature="signed_exports"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Export signed ZIP</button>
   </div>
   <details class="journal-overview" id="journal-overview"><summary>Overview</summary><div class="stats">
@@ -338,10 +339,11 @@
   <form class="card padded scope-card" id="scope-form"><div class="eyebrow">Observation scope</div><h2>What this account records</h2>
     <div class="investigation-preset"><button class="secondary" id="scope-investigation" type="button"><svg aria-hidden="true" class="icon"><use href="#i-eye"/></svg> Investigation mode</button><p class="hint">For a dedicated account that joins teams and talks to bots: records every chat, group, private chat and bot it sees, its own messages and button presses, and for each new chat or bot saves its profile and earlier visible messages at once. Applied as soon as you confirm the whole-account scope.</p><a class="format-help" href="/dedicated-account.html" rel="noopener" target="_blank">Why never your main account ↗</a></div>
     <div aria-label="Observation scope" class="scope-modes" role="radiogroup">
-      <label><input name="scope-mode" type="radio" value="selected"><span><strong>Chosen chats</strong><small>Only the chats you add below.</small></span></label>
+      <label><input name="scope-mode" type="radio" value="selected"><span><strong>Chosen chats</strong><small>Only the chats you add below.</small></span><span class="pill recommended-pill">Recommended</span></label>
       <label><input name="scope-mode" type="radio" value="folder"><span><strong>Telegram folder</strong><small>Chats in one of the account's folders, including chats added to it later.</small></span></label>
       <label><input name="scope-mode" type="radio" value="account"><span><strong>Whole account</strong><small>Every chat the account sees, and every new chat, group, private chat or bot as it appears.</small></span></label>
     </div>
+    <div class="notice warning scope-warning" hidden id="scope-warning" role="note"><svg aria-hidden="true" class="icon"><use href="#i-alert"/></svg><div><p id="scope-warning-text"></p><a class="format-help" href="/dedicated-account.html" rel="noopener" target="_blank">Why never your main account ↗</a></div></div>
     <div hidden id="scope-folder-field"><label for="scope-folder">Folder</label><select id="scope-folder"></select><p class="hint" id="scope-folder-hint"></p></div>
     <fieldset class="scope-types" hidden id="scope-types"><legend>Source types</legend>
       <label class="check-label"><input id="scope-channels" type="checkbox"> Channels</label>
@@ -356,8 +358,7 @@
       <p class="hint">Saved right after the chat appears: earlier messages of a team chat you just joined, the greeting a bot sent before observation noticed it. Messages already saved live are not repeated.</p>
     </fieldset>
     <div class="scope-exclude" id="scope-exclude"></div>
-    <p class="notice warning" hidden id="scope-warning"></p>
-    <div class="scope-actions"><button class="primary" type="submit">Save scope</button><span id="scope-unsaved" role="status"></span></div>
+    <div class="scope-actions"><button class="primary" type="submit">Save scope</button><button class="quiet" hidden id="scope-discard" type="button">Discard changes</button><span id="scope-unsaved" role="status"></span></div>
     <details class="scope-limits"><summary>Scope of folder and whole-account modes</summary><p class="hint">Secret chats are recorded in Sources → Pseudo-secret, where TgWitness itself opens or accepts the chat. After a restart TgWitness resumes the saved update position and catches up what Telegram returns; any remaining interval appears as a gap in the report. Folder and whole-account modes inspect all accessible dialogs, including archived chats. New matching chats are added as they appear; the initial history snapshot follows the setting above. Full history keeps its own signed source plan and progress. Muted or read state of a folder is not applied: such chats stay observed. Inline bot buttons pressed in another app are invisible to TgWitness; the bot's reply or edit is recorded.</p></details>
   </form>
   </div>
@@ -453,8 +454,8 @@
   </section>
     </div>
     <div class="recording-savebar" id="recording-savebar">
-      <div><strong id="recording-change-count" role="status">No unsaved changes</strong><p id="recording-result" class="hint" aria-live="polite"></p></div>
-      <div class="recording-actions"><button class="quiet" type="button" id="recording-discard" disabled>Discard changes</button><button class="primary" type="submit" id="recording-save" disabled>Save recording settings</button></div>
+      <div><strong id="recording-change-count" role="status">No unsaved changes</strong><p id="recording-recommended" class="hint"></p><p id="recording-result" class="hint" aria-live="polite"></p></div>
+      <div class="recording-actions"><button class="quiet" type="button" id="recording-recommended-apply" disabled>Return to recommended</button><button class="quiet" type="button" id="recording-discard" disabled>Discard changes</button><button class="primary" type="submit" id="recording-save" disabled>Save recording settings</button></div>
     </div>
   </form>
   </div>
@@ -471,7 +472,7 @@
     <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
     <label class="check-label"><input id="secret-accept" type="checkbox" role="switch" disabled> Accept incoming requests automatically</label></div></div>
     <p class="notice warning" id="secret-unavailable" hidden></p>
-    <div id="secret-install" class="secret-install" hidden><p id="secret-install-text"></p><div class="route-actions"><button class="primary" type="button" id="secret-install-run">Install and turn on</button><a id="secret-install-source" target="_blank" rel="noopener noreferrer">Source code and license</a></div></div>
+    <div id="secret-install" class="secret-install" hidden><p id="secret-install-text"></p><p id="secret-install-route" class="hint" hidden></p><div class="route-actions"><button class="primary" type="button" id="secret-install-run">Install and turn on</button><button class="primary" type="button" id="secret-install-direct" hidden>Download directly and turn on</button><a id="secret-install-source" target="_blank" rel="noopener noreferrer">Source code and license</a></div></div>
     <div class="route-actions" id="secret-recovery" hidden><button class="secondary" id="secret-connect" type="button" data-open="connection">Connect account</button><button class="secondary" id="secret-reconnect" type="button">Retry</button></div>
     <p class="notice warning" id="secret-sync" hidden role="status"></p>
     <p class="notice warning" id="secret-interaction" hidden></p>
@@ -498,6 +499,7 @@
     <button id="export-task-account" type="button" data-export-task="account" aria-pressed="false" aria-controls="export-account-panel"><strong>Telegram account</strong><span>Read the history available now. Choose chats, dates and files.</span></button>
     <button id="export-task-journal" type="button" data-export-task="journal" aria-pressed="true" aria-controls="export-journal-panel"><strong>Saved observations</strong><span>Export the messages and changes already recorded by TgWitness.</span></button>
   </div>
+  <button class="secondary exports-more" id="exports-more" type="button" aria-expanded="false">Show more</button>
   <details class="collection-methods" id="collection-methods">
     <summary>Compare collection methods</summary>
     <dl class="collection-methods-grid">
@@ -851,6 +853,7 @@
         <label class="report-template"><input type="radio" name="report-template" value="dossier" id="report-template-dossier" checked>
           <div class="report-template-heading"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg><strong>Case dossier</strong></div>
           <small>Detailed findings, charts and the record transcript.</small>
+          <span class="pill recommended-pill">Recommended</span>
         </label>
         <label class="report-template"><input type="radio" name="report-template" value="brief" id="report-template-brief">
           <div class="report-template-heading"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg><strong>Briefing</strong></div>
@@ -1485,7 +1488,7 @@
         <p data-for="reuse">Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</p>
         <p data-for="reuse">For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</p>
         <p data-for="independent">With “Create an independent authorization”, the donor still connects briefly. Close its original client for this step. Reopen it after TgWitness confirms that the new authorization is connected.</p>
-        <p data-for="independent">Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both authorizations can be used independently. Leave unchecked to reuse the imported session directly.</p>
+        <p data-for="independent">Use the imported session only to approve a new login. Keep its original client closed until this finishes; afterward both can be used at the same time. Do not log out or end the imported session: Telegram then also ends the authorization it approved. Leave unchecked to reuse the imported session directly.</p>
       </details>
       <div id="phone-fields"><label for="phone">Phone number</label><input autocomplete="tel" id="phone" pattern="\+[0-9]{7,16}" placeholder="+1 234 567 8900" required type="tel"></div>
       <div hidden id="qr-intro"><div class="qr-instructions"><span>1</span><p>Open Telegram on your phone.</p><span>2</span><p>Settings → Devices → Link Desktop Device.</p><span>3</span><p>Scan the code shown here.</p></div></div>
@@ -1811,7 +1814,7 @@
 </section>
 
 <section class="view" hidden id="view-integrations">
-  <div class="page-heading"><div><h1>Integrations</h1></div></div>
+  <div class="page-heading"><div><h1>Integrations</h1><p class="page-description">What leaves this panel and who receives it: an AI provider gets only the messages its client requests, an archive connection reads only the workspaces and chats you allow with its own token, and a webhook sends metadata unless you also choose message text.</p></div></div>
   <details class="card padded" id="ai-settings"><summary>AI provider settings</summary>
   <p id="ai-status" class="notice" role="status"></p>
 
@@ -1856,7 +1859,7 @@
     <p id="mcp-check-result" role="status"></p>
     <div class="route-actions"><button class="quiet" id="mcp-hide-token" type="button">Done, hide the token</button><a id="mcp-client-help" href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration" target="_blank" rel="noopener noreferrer">Client configuration reference</a></div>
   </section>
-  <section class="card padded"><div class="card-heading compact"><h2>Archive connections</h2><button class="quiet" id="mcp-refresh" type="button">Refresh</button></div><div id="mcp-list"></div></section>
+  <section class="card padded"><div class="card-heading compact"><div><h2>Archive connections</h2><p class="hint">AI or command-line clients that read this archive with a token. Each connection sees only the workspaces and chats chosen for it and can be revoked at any time.</p></div><button class="quiet" id="mcp-refresh" type="button">Refresh</button></div><div id="mcp-list"></div></section>
   <section class="card padded"><h2>Outgoing webhooks</h2><p class="hint" id="webhook-workspace"></p><p class="hint">Structured notifications for n8n and SIEM. Metadata is sent by default; message text requires a separate choice.</p>
     <p class="hint"><a id="webhooks-help" data-site-doc="webhooks" href="https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/" target="_blank" rel="noopener noreferrer">Help &amp; documentation</a></p>
     <form id="webhook-form"><div class="two-columns"><div><label for="webhook-name">Destination name</label><input id="webhook-name" maxlength="80" required></div><div><label for="webhook-url">HTTPS destination URL</label><input id="webhook-url" type="url" required></div></div>

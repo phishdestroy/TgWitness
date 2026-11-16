@@ -9,8 +9,8 @@ export function createSettingsHub(ctx) {
   const goalLevels = {copy:'simple',watch:'standard',evidence:'standard'};
   const routes = [['auto','sparkle:violet','Automatic','Try WARP, then public proxies.'],['warp','shield:teal','Cloudflare WARP','Connect through a local tunnel.'],['proxy','link:orange','My proxy','Paste one proxy address.'],['direct','external:slate','Direct','Telegram will see this server’s address.']];
   const levels = [['simple','star:green','Simple','Only the essentials.'],['standard','settings:blue','Standard','Common settings and explanations.'],['expert','braces:slate','Expert','All fields, limits and technical details.']];
-  const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'simple',observations:'simple',evidence:'simple',settings:'simple',
-    board:'standard',accounts:'simple',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
+  const navLevels = {'system-map':'expert',topology:'expert',start:'simple',chats:'simple','secret-chats':'standard',observations:'standard',evidence:'simple',settings:'simple',
+    board:'standard',accounts:'standard',access:'standard',sources:'standard',connection:'expert',witness:'expert',analysis:'expert',
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
   let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null, rerollTimer=null;
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
@@ -125,9 +125,16 @@ export function createSettingsHub(ctx) {
     document.documentElement.dataset.uiLevel=prefs.level;
     try{localStorage.setItem('tgwitness-ui-level',prefs.level);}catch{}
     for(const b of document.querySelectorAll('.sidebar .nav[data-view]'))b.dataset.level=navLevels[b.dataset.view]||'expert';
-    for(const [view,simple,full] of [['start','Home','Home'],['observations','Journal','Journal'],['evidence','Exports','Exports']]){
+    for(const [view,simple,full] of [['start','Home','Home'],['observations','Records','Journal'],['evidence','Exports','Exports'],['sources','What to record','Sources']]){
       const b=document.querySelector('.sidebar [data-view="'+view+'"]');
       const text=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(text)text.textContent=' '+tr(prefs.level==='simple'?simple:full)+' ';
+    }
+    for(const [id,simple,full] of [['journal-title','Records','Journal'],['sources-title','What to record','Sources']]){
+      const el=document.getElementById(id);if(el&&!el.children.length)el.textContent=tr(prefs.level==='simple'?simple:full);
+    }
+    for(const id of ['sources-tab-chats','target-list-title']){
+      const el=document.getElementById(id),text=el&&[...el.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());
+      if(text)text.textContent=tr(prefs.level==='simple'?'Chats being recorded':'Chats in scope')+(id==='sources-tab-chats'?' ':'');
     }
     for(const control of document.querySelectorAll('[data-ui-level]'))control.value=prefs.level;
     ctx.applyPreferences(prefs);
@@ -370,11 +377,18 @@ export function createSettingsHub(ctx) {
     if(sheet.open)sheet.close();
     sheet.replaceChildren();
   }
+  function routeSummary(conn){
+    const kind=conn.mode,code=conn.check?.country;
+    let place='';try{place=code?new Intl.DisplayNames([document.documentElement.lang||'en'],{type:'region'}).of(code):'';}catch{place=code||'';}
+    const name={mtproxy_auto:tr('Public MTProxy (third-party server from an open list)'),warp:'Cloudflare WARP',direct:tr('Direct connection'),vpn:tr('WireGuard VPN')}[kind]||label(kind);
+    const host=document.documentElement.dataset.uiLevel==='expert'&&kind==='mtproxy_auto'?state.status?.collector?.network?.current?.host:'';
+    return [name,place,host].filter(Boolean).join(' · ');
+  }
   function summaryRows(){
     const inheritance=data.inheritance,connected=fresh(data.connection);
     const rows=[['telegram','Telegram account',tr(accountState(state.status||{}).needsSignIn?'Sign in again':state.status?.collector?.connected?'Connected':signedIn()?'Session found':'Not connected'),state.status?.collector?.connected?'ok':'warn','account:blue'],
       ['chats','Which chats?',label(data.wizard.scope||'account')+(data.wizard.scope==='selected'?' · '+(data.wizard.chat_ids?.length||0):''),'ok','message:green'],
-      ['connection','Connection',label(data.connection.mode)+(connected?' · '+tr('Working · {n} ms',{n:number(data.connection.check.latency_ms)}):''),connected?'ok':'warn','shield:teal'],
+      ['connection','Connection',routeSummary(data.connection)+(connected?' · '+tr('Working · {n} ms',{n:number(data.connection.check.latency_ms)}):''),connected?'ok':'warn','shield:teal'],
       ['appearance','Language, time and appearance',ctx.languages[prefs.language]+' · '+prefs.timezone+' · '+label(prefs.level),'none','sun:orange'],
       ['goal','Goal',data.goal?label(data.goal):tr('Not chosen'),'none','star:pink'],
       ['collection','Collection and files',label(data.values.files),'none','archive:indigo'],
@@ -397,6 +411,7 @@ export function createSettingsHub(ctx) {
     const b=button('',()=>openSection(id),'hub-summary');b.dataset.section=id;b.dataset.tone=tone;
     const line=node('span','hub-summary-value');if(tone!=='none')line.append(node('span','hub-dot'));line.append(document.createTextNode(summary));
     b.append(glyph(icon,'hub-summary-icon'),node('strong','',tr(name)),line,arrow());box.append(b);
+    if(id==='connection'&&data.connection?.mode==='mtproxy_auto')b.append(node('small','hub-summary-note',tr('The proxy operator sees that this server connects and its IP address, but not the messages: MTProto encrypts them all the way to Telegram.')));
   }
   function toolRow(box,icon,text,fn,level){
     const b=button('',fn,'hub-summary hub-tool');if(level)b.dataset.level=level;

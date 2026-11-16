@@ -1,7 +1,7 @@
 import {priorityHint} from "../components/priority.js?v=1";
 
 export function createChatList({root, tr, node, icon, avatarNode, timeNode, getState, getSession,
-  may, json, refreshStatus, openChat, toast, viewState, reload}) {
+  may, json, refreshStatus, openChat, toast, viewState, reload, adds = {}, secret = null, observation = null, startObservation = null}) {
   const find = id => root.querySelector('#' + id), search = find('chat-search'), list = find('chats-list');
   const pageSize = 80, collator = new Intl.Collator(document.documentElement.lang || undefined, {numeric: true, sensitivity: 'base'});
   let visibleLimit = pageSize;
@@ -9,6 +9,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   const views = node('div', 'chat-list-views'); views.setAttribute('role', 'group'); views.setAttribute('aria-label', tr('Filters'));
   const viewChoices = [
     ['all', tr('All'), tr('Chats')],
+    ['secret', tr('Pseudo-secret'), tr('Pseudo-secret')],
     ['priority', tr('Priority'), tr('Priority')],
     ['changes', tr('Changes'), tr('Edits') + ' · ' + tr('Deletions')],
     ['attention', tr('Needs attention'), tr('Access unconfirmed') + ' · ' + tr('Not found at recheck')],
@@ -17,6 +18,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const button = node('button', 'chat-list-view'), total = node('span', 'chat-list-view-count');
     button.type = 'button'; button.dataset.chatListView = value; button.title = description;
     total.setAttribute('aria-hidden', 'true'); button.append(node('span', '', label), total);
+    if (value === 'secret') button.prepend(icon('lock'));
     button.addEventListener('click', () => {status.value = value === 'all' ? '' : value; changed();});
     views.append(button); return [value, {button, total, label}];
   }));
@@ -33,8 +35,12 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     labelNode.append(node('span', '', tr(label)), select); fields.append(labelNode); return select;
   }
   const kind = selectField('chat-list-kind', 'Type', [['', 'All'], ['channel', 'Channels'], ['group', 'Groups'], ['bot', 'Bots'], ['private', 'Private chats']]);
-  const status = selectField('chat-list-state', 'State', [['', 'All'], ['changes', 'Changes'], ['attention', 'Needs attention'], ['active', 'Collecting'], ['loading', 'Loading history'], ['retry', 'Retry'], ['pending', 'Pending media'], ['failed', 'Failed media'], ['restricted', 'Restricted'], ['lost', 'Access to the chat lost'], ['auto', 'Auto-discovered'], ['unconfirmed', 'Access unconfirmed'], ['excluded', 'Excluded'], ['paused', 'Paused'], ['priority', 'Priority']]);
+  const status = selectField('chat-list-state', 'State', [['', 'All'], ['changes', 'Changes'], ['attention', 'Needs attention'], ['active', 'Collecting'], ['loading', 'Loading history'], ['retry', 'Retry'], ['pending', 'Pending media'], ['failed', 'Failed media'], ['restricted', 'Restricted'], ['lost', 'Access to the chat lost'], ['auto', 'Auto-discovered'], ['unconfirmed', 'Access unconfirmed'], ['excluded', 'Excluded'], ['paused', 'Paused'], ['priority', 'Priority'], ['secret', 'Pseudo-secret']]);
   const wait = node('p', 'chat-list-wait'); wait.hidden = true; wait.setAttribute('role', 'status');
+  const off = node('div', 'chat-list-off'), offStart = node('button', 'secondary small', tr('Start observation'));
+  off.hidden = true; off.setAttribute('role', 'status'); offStart.type = 'button';
+  off.append(icon('pause'), node('span', '', tr('Observation off')), offStart);
+  offStart.addEventListener('click', () => startObservation?.());
   fields.prepend(sortLabel); filters.append(fields);
   const activeFilters = node('div', 'chat-list-active-filters'); activeFilters.setAttribute('role', 'group'); activeFilters.setAttribute('aria-label', tr('Filters'));
   const results = node('div', 'chat-list-results'), resultCount = node('span'), clear = node('button', 'text-link', tr('Clear filters'));
@@ -42,8 +48,77 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   clear.type = 'button'; clear.addEventListener('click', () => {resetFilters(); changed(); search.focus();});
   results.append(resultCount, clear);
   controls.append(views, filters, activeFilters, results); root.querySelector('.chat-search').after(controls);
-  controls.after(wait);
-  root.querySelector('.chats-sidebar').append(root.querySelector('.chat-open'));
+  controls.after(off, wait);
+  const linkBox = root.querySelector('.chat-open'); list.before(linkBox);
+  const addButton = find('chats-manage'), addMenu = node('div', 'chat-add-menu');
+  addMenu.id = 'chat-add-menu'; addMenu.hidden = true; addMenu.setAttribute('role', 'menu'); addMenu.setAttribute('aria-label', tr('Add'));
+  addButton.replaceChildren(icon('plus')); addButton.title = tr('Add'); addButton.setAttribute('aria-label', tr('Add'));
+  addButton.setAttribute('aria-haspopup', 'menu'); addButton.setAttribute('aria-expanded', 'false'); addButton.setAttribute('aria-controls', addMenu.id);
+  addButton.after(addMenu);
+  const addChoices = () => [
+    ['sources', tr('Add a chat or channel'), adds.chooseChats, adds.canChoose],
+    ['link', tr('Open Telegram link'), () => openLink(''), adds.canOpenLink],
+    ['lock', tr('Pseudo-secret') + ' · ' + tr('Start chat'), adds.startSecret, adds.canSecret],
+  ].filter(([, , run, allowed]) => run && allowed?.());
+  function closeAdd(restore) {
+    if (addMenu.hidden) return;
+    addMenu.hidden = true; addButton.setAttribute('aria-expanded', 'false');
+    if (restore) addButton.focus({preventScroll: true});
+  }
+  function openAdd() {
+    addMenu.replaceChildren(...addChoices().map(([symbol, label, run]) => {
+      const item = node('button', 'chat-add-item'); item.type = 'button'; item.setAttribute('role', 'menuitem');
+      item.append(icon(symbol), node('span', '', label));
+      item.addEventListener('click', () => {closeAdd(false); run();});
+      return item;
+    }));
+    addMenu.hidden = false; addButton.setAttribute('aria-expanded', 'true');
+    addMenu.querySelector('button')?.focus();
+  }
+  addButton.addEventListener('click', () => addMenu.hidden ? openAdd() : closeAdd(false));
+  addMenu.addEventListener('keydown', event => {
+    const items = [...addMenu.querySelectorAll('button')], index = items.indexOf(document.activeElement);
+    const next = {ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: items.length - 1}[event.key];
+    if (event.key === 'Escape') {event.preventDefault(); event.stopPropagation(); closeAdd(true);}
+    else if (event.key === 'Tab') closeAdd(false);
+    else if (next !== undefined) {event.preventDefault(); items[(next + items.length) % items.length]?.focus();}
+  });
+  document.addEventListener('pointerdown', event => {if (!addMenu.hidden && !addMenu.contains(event.target) && !addButton.contains(event.target)) closeAdd(false);});
+  function openLink(text) {
+    linkBox.open = true;
+    const input = linkBox.querySelector('input');
+    if (text) input.value = text;
+    input.focus(); linkBox.scrollIntoView({block: 'nearest'});
+  }
+  const linkLike = text => /^(@[\w]{3,}|[\w]{5,}|(https?:\/\/)?(t|telegram)\.me\/\S+|tg:\/\/\S+)$/i.test(text);
+  let secretItems = [], secretAt = 0, secretBusy = false;
+  function loadSecret() {
+    if (!secret?.allowed() || secretBusy || Date.now() - secretAt < 30000) return;
+    const owner = getSession(); secretBusy = true; secretAt = Date.now();
+    secret.load().then(result => {
+      if (owner !== getSession()) return;
+      secretItems = secretThreads(result); render();
+    }).catch(() => {}).finally(() => {if (owner === getSession()) secretBusy = false;});
+  }
+  function secretThreads(result) {
+    const map = new Map(), people = result?.people || {}, enabled = !!result?.settings?.enabled;
+    const entry = id => {if (!map.has(id)) map.set(id, {id, peer: null, state: null, last: '', text: '', out: false}); return map.get(id);};
+    for (const snapshot of result?.chats || []) Object.assign(entry(snapshot.id), {peer: snapshot.peer_user_id, state: snapshot.state});
+    for (const record of result?.records || []) {
+      const p = record.payload || {}, id = p.secret_chat_id;
+      if (id === undefined || id === null) continue;
+      const item = entry(id); item.peer = item.peer || p.peer_user_id || null;
+      if (record.kind === 'secret_chat.closed') item.state = item.state || 'closed';
+      if (String(record.observed_at || '') >= item.last) item.last = record.observed_at || item.last;
+      if (record.kind === 'secret_chat.message') {item.text = p.text || (p.media ? tr('Attachment') : item.text); item.out = p.direction === 'out';}
+    }
+    return [...map.values()].map(item => {
+      const person = people[item.peer], title = person?.name || (person?.username ? '@' + person.username : tr('User ID {id}', {id: item.peer ?? '?'}));
+      return {secret: true, secretId: item.id, chat_id: 's' + item.id, kind: 'private', title, search: [title, person?.username || '', item.peer || ''].join(' '),
+        state: item.state === 'closed' ? 'closed' : !enabled ? 'paused' : item.state, last_message_at: item.last, observedTime: Date.parse(item.last || '') || 0,
+        last_text: item.text, out: item.out};
+    });
+  }
   const more = node('button', 'chat-list-more', tr('Show more')); more.type = 'button';
   more.addEventListener('click', () => {
     const previous = new Set([...list.querySelectorAll('.chat-item')].map(row => row.dataset.chat));
@@ -71,6 +146,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   const restrictions = chat => chat.telegram_restrictions?.length ? chat.telegram_restrictions
     : sourceOf(chat)?.state === 'restricted_by_telegram' ? sourceOf(chat).restriction || [{}] : [];
   function stateMatches(chat, mode) {
+    if (chat.secret || mode === 'secret') return !!chat.secret && mode === 'secret';
     if (mode === 'auto') return chat.origin === 'scope';
     if (mode === 'priority') return chat.priority;
     if (mode === 'pending') return queued(chat) > 0;
@@ -85,7 +161,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   }
   const normalize = value => String(value).normalize('NFKC').toLocaleLowerCase();
   function matches(chat, terms) {
-    const text = normalize(`${chat.title || ''} ${chat.chat_id}`);
+    const text = normalize(chat.secret ? chat.search : `${chat.title || ''} ${chat.chat_id}`);
     return terms.every(term => text.includes(term)) && (!kind.value || types[chat.kind] === kind.value);
   }
   function inView(chat, view) {return view === 'all' || stateMatches(chat, view);}
@@ -119,6 +195,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const title = chat.title || tr('Chat {id}', {id: chat.chat_id}), body = node('span', 'chat-item-body');
     const top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom'), badges = node('span', 'chat-item-badges');
     top.append(node('span', 'chat-item-title', title));
+    if (chat.origin === 'scope') top.append(node('span', 'visually-hidden', ' · ' + tr('Auto-discovered')));
     if (chat.priority) {const mark = icon('star'); mark.classList.add('chat-item-priority'); top.append(mark);}
     top.append(timeNode(chat.last_message_at || chat.last_observed_at, 'chat-item-time', 'list'));
     bottom.append(node('span', 'chat-item-preview', chat.last_text ? (chat.last_sender ? chat.last_sender + ': ' : '') + window.TgWitnessPrivacy.preview(chat.last_text)
@@ -129,7 +206,8 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     if (chat.missing) badges.append(badge('pill-missing', tr('{n} not found on recheck', {n: chat.missing}), chat.missing, 'question'));
     if (chat.edited) badges.append(badge('pill-edited', tr('{n} edited', {n: chat.edited}), chat.edited, 'edit'));
     const progress = node('span', 'chat-item-status'), state = chat.collectionState;
-    const label = {excluded: 'Excluded', unconfirmed: 'Access unconfirmed', lost: 'Access to the chat lost', paused: 'Paused', active: 'Collecting'}[state];
+    const running = !!getState().status?.collector?.running;
+    const label = {excluded: 'Excluded', unconfirmed: 'Access unconfirmed', lost: 'Access to the chat lost', paused: running ? 'Paused' : ''}[state];
     if (label) {
       const pill = node('span', 'pill pill-state' + (state === 'lost' ? ' pill-blocked' : ''), tr(label));
       if (state === 'lost') pill.title = lostHint(chat);
@@ -150,7 +228,20 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     }
     if (queued(chat)) progress.append(badge('pill-state', tr('Pending media'), tr('Pending media')+': '+queued(chat), 'download'));
     if (chat.media_queue?.failed) progress.append(badge('pill-deleted', tr('Failed media'), tr('Failed media')+': '+chat.media_queue.failed));
-    body.append(top, bottom, progress); return [avatarNode(chat.chat_id, title), body];
+    body.append(top, bottom); if (progress.children.length) body.append(progress);
+    return [avatarNode(chat.chat_id, title), body];
+  }
+  function secretPresentation(chat) {
+    const body = node('span', 'chat-item-body'), top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
+    const title = node('span', 'chat-item-title'), lock = icon('lock'), face = avatarNode(null, chat.title);
+    lock.classList.add('chat-item-lock'); title.append(lock, document.createTextNode(chat.title));
+    face.classList.add('secret-face'); face.replaceChildren(icon('lock'));
+    top.append(title, timeNode(chat.last_message_at, 'chat-item-time', 'list'));
+    bottom.append(node('span', 'chat-item-preview', chat.last_text ? (chat.out ? tr('You') + ': ' : '') + window.TgWitnessPrivacy.preview(chat.last_text) : tr('No messages saved yet')));
+    body.append(top, bottom);
+    const word = {requested: 'Waiting for the other side', pending: 'Request received', closed: 'Ended', paused: 'Paused'}[chat.state];
+    if (word) {const progress = node('span', 'chat-item-status'); progress.append(node('span', 'pill pill-state', tr(word))); body.append(progress);}
+    return [face, body];
   }
   async function priority(id) {
     const state = getState(), chat = currentChats().find(item => item.chat_id === id), current = getSession();
@@ -167,7 +258,13 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   function makeRow(chat) {
     const row = node('div', 'chat-item'), open = node('button', 'chat-choice'), star = node('button', 'chat-priority');
     row.dataset.chat = String(chat.chat_id); open.type = star.type = 'button';
-    open.addEventListener('click', () => openChat(chat.chat_id).catch(error => {if (error.name !== 'StaleView') toast(error.message, true);}));
+    if (chat.secret) row.classList.add('secret');
+    const run = chat.secret ? () => secret.open(chat.secretId) : () => openChat(chat.chat_id);
+    open.addEventListener('click', () => run().catch(error => {if (error.name !== 'StaleView') toast(error.message, true);}));
+    open.addEventListener('pointerenter', event => {
+      const name = open.querySelector('.chat-item-title');
+      if (event.pointerType === 'mouse' && name && name.scrollWidth > name.clientWidth) open.title = name.textContent; else open.removeAttribute('title');
+    });
     star.append(icon('star')); star.addEventListener('click', () => priority(chat.chat_id));
     row.append(open, star); return row;
   }
@@ -175,22 +272,27 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const state = getState(); if (state.view !== 'chats') return;
     if (session !== getSession()) resetSession();
     list.setAttribute('aria-busy', String(state.chatsLoading));
-    const terms = normalize(search.value).trim().split(/\s+/).filter(Boolean), candidates = currentChats().filter(chat => matches(chat, terms));
+    loadSecret();
+    const secrets = secret?.allowed() ? secretItems : [];
+    const terms = normalize(search.value).trim().split(/\s+/).filter(Boolean), candidates = [...currentChats(), ...secrets].filter(chat => matches(chat, terms));
     for (const [value, {button, total, label}] of viewButtons) {
-      const amount = candidates.filter(chat => inView(chat, value)).length;
+      const amount = candidates.filter(chat => inView(chat, value)).length, pressed = value === (status.value || 'all');
       const formatted = amount.toLocaleString(); total.textContent = formatted;
-      button.setAttribute('aria-pressed', String(value === (status.value || 'all'))); button.setAttribute('aria-label', label + ': ' + formatted);
+      button.hidden = value !== 'all' && !pressed && !amount;
+      button.setAttribute('aria-pressed', String(pressed)); button.setAttribute('aria-label', label + ': ' + formatted);
     }
+    const watch = observation?.() || {};
+    off.hidden = !watch.off || !state.chats.length; offStart.disabled = !watch.canStart;
+    addButton.hidden = !addChoices().length;
     const chats = candidates.filter(chat => !status.value || stateMatches(chat, status.value)).sort(compare);
     const existing = new Map([...list.children].map(row => [row.dataset.chat, row]));
     const focused = list.contains(document.activeElement) ? document.activeElement.closest('.chat-item')?.dataset.chat : null;
     const shown = chats.filter((chat, index) => index < visibleLimit || chat.chat_id === state.chat || String(chat.chat_id) === focused);
     const rows = shown.map(chat => {
       const row = existing.get(String(chat.chat_id)) || makeRow(chat), open = row.querySelector('.chat-choice'), star = row.querySelector('.chat-priority');
-      const signature = JSON.stringify(chat);
-      if (row.renderKey !== signature) {open.replaceChildren(...presentation(chat)); row.renderKey = signature;}
+      const signature = JSON.stringify([chat, !!state.status?.collector?.running]);
+      if (row.renderKey !== signature) {open.replaceChildren(...(chat.secret ? secretPresentation(chat) : presentation(chat))); row.renderKey = signature;}
       row.classList.toggle('active', chat.chat_id === state.chat); open.setAttribute('aria-pressed', String(chat.chat_id === state.chat));
-      open.title = [chat.title || tr('Chat {id}', {id: chat.chat_id}), chat.origin === 'scope' ? tr('Auto-discovered') : ''].filter(Boolean).join(' · ');
       star.hidden = !chat.known; star.disabled = !may('sources') || state.status.demo || state.status.chats_limited || pending.has(chat.chat_id);
       star.classList.toggle('on', !!chat.priority); star.setAttribute('aria-pressed', String(!!chat.priority));
       const label = priorityHint(tr, !!chat.priority, state.status?.collector) + ' — ' + (chat.title || chat.chat_id);
@@ -204,8 +306,14 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     } else if (!state.chats.length && state.chatsError) {
       rows.push(viewState('error', tr('Could not load data'), '', tr('Retry'), reload));
     } else if (!rows.length) {
-      const empty = node('div', 'chats-none'); empty.append(node('p', 'hint', tr(!state.chats.length ? 'No chats chosen yet.'
+      const fresh = !state.chats.length && !secrets.length && !terms.length, query = search.value.trim();
+      const empty = node('div', 'chats-none' + (fresh ? ' fresh' : ''));
+      if (fresh) {const mark = node('span', 'chats-none-mark'); mark.append(icon('message')); empty.append(mark);}
+      empty.append(node('p', 'hint', tr(fresh ? 'No chats chosen yet.'
         : kind.value || status.value ? 'No chats match these filters.' : 'No chats match your search.')));
+      const step = fresh && adds.canChoose?.() ? [tr('Add a chat or channel'), adds.chooseChats, 'primary']
+        : linkLike(query) && adds.canOpenLink?.() ? [tr('Open Telegram link') + ': ' + query, () => openLink(query), 'secondary'] : null;
+      if (step) {const go = node('button', step[2] + ' small', step[0]); go.type = 'button'; go.addEventListener('click', step[1]); empty.append(go);}
       rows.push(empty);
     }
     if (shown.length < chats.length) rows.push(more);
@@ -216,7 +324,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     const text = tr('Chats') + ': ' + amount;
     if (resultCount.textContent !== text) resultCount.textContent = text;
     clear.hidden = !terms.length && !selected;
-    results.hidden = !state.chats.length && !terms.length && !selected;
+    results.hidden = !terms.length && !selected;
   }
   function renderFilters() {
     const chosen = [kind, status, sort].filter(field => field.value && (field !== sort || field.value !== 'activity'));
@@ -241,6 +349,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   function resetSession() {
     session = getSession(); pending.clear(); resetFilters(); list.replaceChildren(); list.removeAttribute('aria-busy');
     activeFilters.replaceChildren(); activeFilters.hidden = true; resultCount.textContent = ''; results.hidden = true;
+    secretItems = []; secretAt = 0; secretBusy = false; closeAdd(false); linkBox.open = false;
   }
   function snapshot() {return {chatFilter:status.value, chatSort:sort.value, chatKind:kind.value, chatQuery:search.value};}
   function restore(route) {
@@ -273,5 +382,5 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     if (next < 0) search.focus(); else choices[Math.min(next, choices.length - 1)]?.focus();
   });
   for (const field of [sort, kind, status]) field.addEventListener('change', () => changed());
-  return {render, resetSession, snapshot, restore};
+  return {render, resetSession, snapshot, restore, openLink, refreshSecret() {secretAt = 0; loadSecret();}};
 }

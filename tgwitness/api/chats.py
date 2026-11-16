@@ -33,6 +33,7 @@ from ..monitoring import capture_settings
 from ..monitoring import monitoring_settings
 from ..monitoring import normalize_capture
 from ..scope import EXCLUDE_LIMIT
+from ..scope import kind_of
 from ..scope import Recheck
 from ..scope import ScopeUpdate
 from ..scope import WIDE_WARNING
@@ -51,6 +52,8 @@ from fastapi import Request
 from fastapi.responses import FileResponse
 from fastapi.responses import Response
 from pydantic import BaseModel
+from telethon import utils
+from telethon.errors import RPCError
 from typing import Literal
 from datetime import datetime
 from pathlib import Path
@@ -67,6 +70,24 @@ class Reveal(BaseModel):
     reason: Literal["message", "display_preference"] = "message"
 
 
+UNKNOWN_CHAT = ("TgWitness has not loaded this chat, and Telegram did not return it for this account. Press "
+                "Refresh chat list on Sources, or check that this account is still in the chat.")
+
+
+async def known_chat(collector, chat_id):
+    entry = collector.dialog_cache.get(chat_id)
+    if entry:
+        return entry
+    try:
+        entity = await collector.resolve_target(chat_id)
+    except (ValueError, RPCError, OSError, asyncio.TimeoutError):
+        return None
+    if entity is None:
+        return None
+    return collector.dialog_cache.get(chat_id) or {"title": utils.get_display_name(entity) or str(chat_id),
+                                                   "kind": kind_of(entity) or "private"}
+
+
 async def dialogs(*, ctx=Depends(current_context)):
     return await ctx.operation(ctx.app.state.collector.dialogs)
 
@@ -79,11 +100,9 @@ async def target(request: Request, body: Target, *, ctx=Depends(current_context)
         existing = next(
             (t for t in store.targets() if t["chat_id"] == body.chat_id), None
         )
-        entry = collector.dialog_cache.get(body.chat_id) or existing
+        entry = collector.dialog_cache.get(body.chat_id) or existing or await known_chat(collector, body.chat_id)
         if not entry:
-            raise HTTPException(
-                400, "Refresh the group list and select an available target."
-            )
+            raise HTTPException(400, UNKNOWN_CHAT)
         with store.transaction():
             store.set_target(
                 body.chat_id,
@@ -123,13 +142,11 @@ async def targets_batch(
             return {"targets": ctx.visible_targets(request), **result}
         existing = {t["chat_id"]: t for t in store.targets()}
         entries = {
-            chat_id: existing.get(chat_id) or collector.dialog_cache.get(chat_id)
+            chat_id: existing.get(chat_id) or await known_chat(collector, chat_id)
             for chat_id in ids
         }
         if any((entry is None for entry in entries.values())):
-            raise HTTPException(
-                400, "Refresh the group list and select an available target."
-            )
+            raise HTTPException(400, UNKNOWN_CHAT)
         added = []
         with store.transaction():
             for chat_id, entry in entries.items():

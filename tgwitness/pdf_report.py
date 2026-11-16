@@ -921,8 +921,7 @@ class EvidencePDF:
             self.lay.qr(paper_lines(self.report_id, self.fp, data_name, self.data["subject"].get("records_sha256" if self.handover else "events_sha256")))
             self.acquisition = self.data["custody"]["acquisition"]
             self.account = self.acquisition.get("account") or {}
-            self.account_text = " · ".join(x for x in (("@" + self.account["username"]) if self.account.get("username") else "",
-                                                  ("id " + str(self.account["id"])) if self.account.get("id") else "") if x)
+            self.account_text = report.account_label(self.account)
             self.digest = {"categories": cats, "chats": [None] * summary["chats"], "media": [None] * summary["files"],
                       "first": summary["first_record_at"], "last": summary["last_record_at"]}
             self.titles = {str(c["chat_id"]): c["title"] for c in self.data["chats"] if c.get("title")}
@@ -994,9 +993,7 @@ class EvidencePDF:
         self.lay.section(say("Case"))
         self.lay.kv([(say("Case title"), self.case.get("title")), (say("Case ID"), self.case.get("id")),
                 (say("Examiner"), self.case.get("examiner")), (say("Organization"), self.case.get("organization")),
-                (say("Observing account"), " · ".join(x for x in (("@" + self.account["username"]) if self.account.get("username")
-                                                                  else "", ("id " + str(self.account["id"])) if self.account.get("id")
-                                                                  else "") if x)),
+                (say("Observing account"), report.account_label(self.account)),
                 (say("Report language"), self.data["language"]), (say("Report ID"), Mono(self.report_id)),
                 (say("Created"), report.utc_text(self.data["created_at"])),
                 (say("Produced by"), "TgWitness " + str((self.data.get("producer") or {}).get("version")) + " · "
@@ -1326,8 +1323,7 @@ class ChatPDF:
             self.lay.gap(5)
             self.lay.qr(paper_lines(self.report_id, self.fp, "chat.json", self.context.get("chat_json_sha256")))
             self.account = self.meta.get("account") or {}
-            self.account_text = " · ".join(x for x in (("@" + self.account["username"]) if self.account.get("username") else "",
-                                                  ("id " + str(self.account["id"])) if self.account.get("id") else "") if x)
+            self.account_text = report.account_label(self.account)
 
             callbacks = {
                 "brief": self.render_brief,
@@ -1382,8 +1378,7 @@ class ChatPDF:
                 (say("Examiner"), self.case.get("examiner")), (say("Organization"), self.case.get("organization")),
                 (say("Chat"), self.chat_title + " · " + str(self.chat.get("kind") or "") + " · id " + str(self.chat.get("id"))),
                 (say("First message"), report.utc_text(self.stats["first_at"])), (say("Last message"), report.utc_text(self.stats["last_at"])),
-                (say("Exporting account"), " · ".join(x for x in (("@" + self.account["username"]) if self.account.get("username") else "",
-                                                                  ("id " + str(self.account["id"])) if self.account.get("id") else "") if x)),
+                (say("Exporting account"), report.account_label(self.account)),
                 (say("Report language"), say.language), (say("Report ID"), Mono(self.report_id))])
         if self.case.get("notes"):
             self.lay.heading(say("Notes"))

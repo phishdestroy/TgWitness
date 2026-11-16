@@ -12,9 +12,12 @@ from ..collector import loss_text
 from ..evidence import LIMITS
 from ..failures import describe, unexpected
 from ..middleware import request_limit
+from ..monitoring import Monitoring
 from ..monitoring import capture_settings
 from ..monitoring import monitoring_settings
+from ..monitoring import normalize_capture
 from ..obs.trace import traced
+from ..scope import RECHECK_DEFAULTS
 from ..scope import recheck_settings
 from ..security import KeyInUse
 from ..telegram_client import FLOOD_ERRORS
@@ -204,6 +207,11 @@ async def status(request: Request, *, ctx=Depends(current_context)):
         "monitoring": monitoring_settings(store),
         "scope": collector_status["scope"],
         "recheck": recheck_settings(store),
+        "recommended": {
+            "monitoring": Monitoring().model_dump(),
+            "capture": normalize_capture(None),
+            "recheck": dict(RECHECK_DEFAULTS),
+        },
         "dossiers": [
             c for c in dossier.enabled_chats(store) if allowed is None or c in allowed
         ],

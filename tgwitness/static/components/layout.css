@@ -341,6 +341,7 @@
 .sidebar .nav-hidden-hint { display: block; width: 100%; min-height: 34px; margin-top: 6px; padding: 6px 12px; border: 0; border-radius: 8px; background: none; color: var(--accent-text); font-size: 12px; text-align: start; cursor: pointer; }
 .sidebar .nav-hidden-hint:hover { background: var(--rail-hover); }
 .sidebar .nav-hidden-hint[hidden] { display: none; }
+.sidebar .nav.nav-level-hidden, .sidebar .nav-more[hidden] { display: none; }
 .event-row[data-category="system"] .event-title { font-weight: 500; color: var(--text-2); }
 .event-row[data-category="system"] .event-excerpt { color: var(--muted); font-size: 12px; }
 .event-row[data-category="system"] .event-icon { opacity: .6; }
@@ -393,3 +394,9 @@ button.tip-toggle { width: 20px !important; height: 20px !important; min-height:
 .chat-search-form { display: flex; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--border); }
 .chat-search-form input { flex: 1; min-width: 0; width: 100%; }
 .chat-search-form button { flex-shrink: 0; }
+.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+.hscroll-more-start { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+.hscroll-more-start.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] .hscroll-more-end { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] .hscroll-more-start { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+[dir="rtl"] .hscroll-more-start.hscroll-more-end { -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); }

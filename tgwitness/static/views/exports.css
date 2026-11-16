@@ -29,3 +29,6 @@
 .editor-always strong::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--tile-green,#22b573);box-shadow:inset 0 0 0 3px var(--surface-2),0 0 0 1.5px var(--tile-green,#22b573)}
 .editor-always ul{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
 .editor-always li{padding:3px 9px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-2);font-size:11.5px;line-height:1.5}
+#view-evidence .exports-more { display: none; }
+html[data-ui-level=simple] #view-evidence:not(.exports-expanded) :is(#collection-methods, .export-preferences, #export-more-formats, #sealed-capture-option, #handover-card, #export-chat-tools, label[for=export-container], #export-container, #export-container-hint) { display: none; }
+html[data-ui-level=simple] #view-evidence:not(.exports-expanded) .exports-more { display: inline-flex; justify-self: start; margin: 4px 0 12px; }

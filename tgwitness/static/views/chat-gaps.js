@@ -55,7 +55,7 @@ export function intervals(events, chat) {
   return merged;
 }
 
-export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allowJournal}) {
+export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allowJournal, fmtDay = null, dayKey = null}) {
   let numbers = new Map(), periods = [], loadedKey = "", pendingKey = "", compact = true;
   const cache = new Map(), answers = new Map();
 
@@ -97,16 +97,40 @@ export function createChatGaps({node, tr, icon, json, fmtTime, openJournal, allo
     });
   }
 
+  function length(seconds) {
+    const n = Math.max(0, Math.round(seconds));
+    if (n < 60) return tr("{n} s", {n});
+    if (n < 3600) return tr("{n} min", {n: Math.round(n / 60)});
+    return tr("{n} h", {n: Math.floor(n / 3600)}) + " " + tr("{n} min", {n: Math.round(n % 3600 / 60)});
+  }
+  function span(from, to) {
+    const clock = value => fmtTime(new Date(value).toISOString(), {mode: "clock"});
+    if (!fmtDay || !dayKey) return fmtTime(new Date(from).toISOString()) + (to === null ? " – …" : to === from ? "" : " – " + fmtTime(new Date(to).toISOString()));
+    const start = fmtDay(new Date(from).toISOString()) + ", " + clock(from);
+    if (to === null) return start + " – …";
+    if (to === from || clock(to) === clock(from) && dayKey(new Date(to).toISOString()) === dayKey(new Date(from).toISOString())) return start;
+    return start + "–" + (dayKey(new Date(to).toISOString()) === dayKey(new Date(from).toISOString()) ? "" : fmtDay(new Date(to).toISOString()) + ", ") + clock(to);
+  }
   function periodMarker(list) {
     return marker("coverage", list.map(item => item.from + "-" + item.to).join(","), box => {
-      const lines = node("span", "chat-gap-lines");
-      for (const item of list.slice(0, LISTED)) {
-        const reasons = item.reasons.map(reason => tr(reason)).join(" · ");
+      const ongoing = list.some(item => item.to === null);
+      const seconds = list.reduce((sum, item) => sum + (item.to === null ? 0 : (item.to - item.from) / 1000), 0);
+      const reasons = [...new Set(list.flatMap(item => item.reasons))].map(reason => tr(reason));
+      const summary = [list.length > 1 ? tr("Pauses: {n}", {n: list.length.toLocaleString(document.documentElement.lang || undefined)}) : "",
+        span(list[0].from, ongoing ? null : Math.max(...list.map(item => item.to))), seconds >= 1 ? length(seconds) : "",
+        list.length === 1 ? reasons.join(" · ") : ""].filter(Boolean).join(" · ");
+      const lines = node("span", "chat-gap-lines"), head = node("span", "chat-gap-summary");
+      head.append(node("strong", "", tr("Coverage gap")), node("span", "", summary));
+      lines.append(head);
+      const details = node("details", "chat-gap-details"), all = node("span", "chat-gap-all");
+      details.append(node("summary", "", tr("Details")), all);
+      for (const item of list) {
+        const why = item.reasons.map(reason => tr(reason)).join(" · ");
         const from = fmtTime(new Date(item.from).toISOString()), to = item.to === null ? "…" : fmtTime(new Date(item.to).toISOString());
-        lines.append(node("span", "", (from === to ? from : from + " – " + to) + (reasons ? " · " + reasons : "")));
+        all.append(node("span", "", (from === to ? from : from + " – " + to) + (why ? " · " + why : "")));
       }
-      if (list.length > LISTED) lines.append(node("span", "", "+" + (list.length - LISTED)));
-      box.append(icon("alert"), node("strong", "", tr("Coverage gap")), lines);
+      if (list.length > 1 || reasons.length) lines.append(details);
+      box.append(icon("alert"), lines);
       if (allowJournal()) {
         const open = node("button", "text-link", tr("Show in the journal"));
         open.type = "button";

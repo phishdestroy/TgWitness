@@ -222,7 +222,7 @@ account asks for the usual confirmation.
   message again and refuses the action if the keyboard differs from the saved version.
   Callback receipts retain Telegram's popup text, alert flag and URL; the answer is also shown
   below the conversation. URLs remain selectable text and are not opened automatically.
-- Expand **Open Telegram link**, enter `@username`, a public `https://t.me/name` link,
+- Press **+** → **Open Telegram link**, enter `@username`, a public `https://t.me/name` link,
   `https://t.me/+invite` / `joinchat/invite`, or a bot link with `?start=parameter`, and press
   **Save preview**. The original link and Telegram's preview are signed before joining.
   **Join / open and observe** then joins the group/channel or opens the user/bot, adds the

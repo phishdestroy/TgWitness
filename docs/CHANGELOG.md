@@ -27,6 +27,42 @@
 
 - Share resumable-history flood deadlines with other workers and retry admin-log reads after Premium flood waits.
 - Persist history FloodWait deadlines so other workers respect the same pause.
+- The workspace switcher shows each account with its avatar, name and a colored status (observing, observation
+  off, sign-in required, needs attention), lists the other accounts with their problem count, and has “Add
+  account” and “All accounts” at the bottom.
+- The chat list works like Telegram's: folder tabs in one row that hide when empty, a “+” menu to add a chat or
+  channel, open a Telegram link or start a pseudo-secret chat, and pseudo-secret chats listed with the others
+  (green, with a lock) and under their own tab. When observation is off the list says so once instead of
+  marking every chat “Paused”. A search for an @username or t.me link with no match offers to open it.
+- A failed action shows its reason right below the button that started it, with a link to the collection status
+  when the disk is short; error toasts stay until closed or until another page opens.
+- The export plan reports free disk space with the same check `/multi-export/start` uses (`disk` in the plan);
+  when space is short it warns before Start and keeps Start disabled. The status `storage_low` now also turns on
+  when free space is below the minimum while observation is off. Planning shows “Checking @name…”, and the
+  ten-account estimate appears only with ten usable accounts.
+- Empty screens explain themselves: the journal says how many records it holds and offers to show system
+  records, archive connections offer to create one, and an empty system log says when lines appear.
+- The session banner is one line with the cause (for example, a session used in two places at once) and expands
+  for the full text; Home shows the same cause and a low-disk warning on the account card.
+- Settings names the connection route (public MTProxy, Cloudflare WARP, direct) with the exit country and says
+  what a public proxy operator can see; Expert also shows the proxy host.
+- Home tiles put the label above the number, help toggles read “What is this?”, and a chat name shows a tooltip
+  only when it is cut off.
+- The Simple level is simpler: the menu shows Home, Chats, Exports and Settings; other sections appear under
+  “Show hidden sections” until the page reloads, without changing the level. Simple also folds the system,
+  composition and per-day blocks on Home, secondary export options, and journal filters other than messages,
+  edits and deletions, and names the journal “Records” and Sources “What to record”.
+- Home starts with one line of saved records, coverage gaps, sign-in and low-disk state; each part opens the
+  matching page.
+- A coverage gap inside a chat is one line with the number of pauses, the time span and the total length; the
+  full list is under Details.
+- The warning for folder and whole-account scope sits right below the scope choice with a link to the dedicated
+  account guide.
+- Integrations say what leaves the panel and who receives it; archive connections explain what they are.
+- Sources and Exports mark the recommended choice: Chosen chats for the scope and Case dossier for report
+  contents. Recording says whether its settings match the recommended ones and has **Return to recommended**
+  (`recommended` in the status); the scope form has **Discard changes**. Simple hides the Pseudo-secret tab in
+  Sources, since pseudo-secret chats are in the chat list.
 - Recheck access to helper workspaces when resuming or retrying profile collection.
 - Keep session age and loss context within the current authorization, ignore late session checks from
   replaced clients, and distinguish the last successful check from the saved session snapshot.
@@ -41,6 +77,29 @@
   UTF-8 callback data. Similar-channel results preserve Telegram's reported total
   and distinguish incomplete responses from local processing limits.
 
+- The verifier's plain output starts with the `ASSURANCE:` line on success as well as on failure, followed by
+  the `EVIDENCE:` line, as For the record advises reading it.
+- History read by an ordinary group member is no longer always `incomplete`: the admin log is shown only to
+  administrators, so its refusal is recorded with `reason: not_admin` and leaves the history complete.
+- The history transfer preview shows how many messages the chat has and how long the transfer takes at the
+  current pace (at the default 30 messages per hour, 1,000 messages take about 33 hours); a running transfer
+  shows sent of total and the time left.
+- On narrow screens, rows that scroll sideways (demo actions, journal filters, chat and profile tabs,
+  Parameters sections, health tabs) fade at the edge where more items are hidden, in both writing directions.
+- Reports name the observing or exporting account by its Telegram name, with @username and ID in brackets,
+  instead of a bare `id 8644525789`. The workspace keeps the account name from sign-in; older workspaces fill
+  it in on the next connection.
+- Recording a chat that is not in the loaded chat list, such as a private chat reached from a message, looks
+  it up in Telegram instead of failing with “Refresh the group list…”. When Telegram does not return it either,
+  the message says to press **Refresh chat list** or check that the account is still in the chat.
+- Pseudo-secret installs in one click in the default Hide IP mode. When the workspace route cannot reach
+  GitHub, the page says why and offers **Download directly and turn on**: only this one pinned, checked
+  download leaves without the proxy, after a confirmation. The journal records
+  `secret_chat.module_installed` with the commit, SHA-256 and route.
+- TgWitness never ends the session that approved a workspace's QR sign-in: Telegram also ends the session it
+  approved. Importing records that session; the session list marks it, “End session” refuses it, and ending
+  other sessions or making this the only session keeps it. The import hint no longer says the two
+  authorizations are independent.
 - When Telegram ends the session, the loss record keeps what was known just before it: the session's age,
   the other sessions at the last check and Telegram's last security notice (`before_loss`).
 - A sign-in that has not finished yet no longer writes `account.authorization_error` entries that read as a

@@ -29,8 +29,8 @@ export function createTips({tr, icon, roots = []}) {
     let toggle = heading?.querySelector(":scope > .tip-toggle");
     if (!toggle) {
       toggle = document.createElement("button");
-      toggle.type = "button"; toggle.className = "tip-toggle"; toggle.title = tr("Details");
-      toggle.setAttribute("aria-label", tr("Details")); toggle.setAttribute("aria-expanded", "false");
+      toggle.type = "button"; toggle.className = "tip-toggle"; toggle.title = tr("What is this?");
+      toggle.setAttribute("aria-label", tr("What is this?")); toggle.setAttribute("aria-expanded", "false");
       toggle.append(icon("question"));
       toggle.addEventListener("click", event => {
         event.preventDefault(); event.stopPropagation();

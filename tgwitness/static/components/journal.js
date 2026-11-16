@@ -90,10 +90,13 @@ export function createJournal(context){
   const all=button("All events","filter");all.dataset.filter="";types.append(all);
   all.addEventListener("click",()=>{state.filter="";change();});
   for(const [value,label] of TYPES){
-    const b=button(label,"filter");b.dataset.filter=value;
+    const b=button(label,"filter"+(["messages","message.edited","message.deleted"].includes(value)?"":" filter-extra"));b.dataset.filter=value;
     b.addEventListener("click",()=>{const values=selected();values.has(value)?values.delete(value):values.add(value);state.filter=[...values].join(",");change();});
     types.append(b);
   }
+  const moreTypes=button("Show more","filter journal-more-types");moreTypes.setAttribute("aria-expanded","false");
+  moreTypes.addEventListener("click",()=>{types.classList.add("expanded");moreTypes.setAttribute("aria-expanded","true");types.querySelector(".filter-extra")?.focus();});
+  types.append(moreTypes);
   const controls=node("div","journal-controls"),searchWrap=node("div","search-wrap");
   searchWrap.append(icon("search"),search);
   const source=button("All sources","secondary journal-source-toggle");source.id="journal-source-toggle";
@@ -307,6 +310,7 @@ export function createJournal(context){
     shown.textContent=Number.isFinite(state.eventMatched)?tr("{shown} of {total} matching records",{shown:state.events.length,total:state.eventMatched.toLocaleString()}):
       tr("{shown} records in this window",{shown:state.events.length});
     range.textContent="";range.hidden=true;
+    shown.hidden=!state.events.length&&!Number.isFinite(state.eventMatched);
     older.disabled=pageBusy||state.cursor===null;newer.disabled=pageBusy||state.eventAfter===null;
     latest.disabled=pageBusy;latest.hidden=state.eventBefore===null;
     $("events-body").closest(".table-wrap").setAttribute("aria-busy",String(pageBusy));

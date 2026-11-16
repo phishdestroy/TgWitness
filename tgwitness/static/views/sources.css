@@ -1,9 +1,18 @@
 #view-sources .sources-summary { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: -8px 0 20px; color: var(--muted); font-size: 13px; }
 #view-sources .sources-summary span + span::before { content: "·"; margin-inline-end: 16px; color: var(--icon-faint); }
+#view-sources #sources-recording-summary[data-tone] { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+#view-sources #sources-recording-summary[data-tone]::before { content: ""; width: 8px; height: 8px; margin: 0; border-radius: 50%; background: var(--status-off, var(--muted)); }
+#view-sources #sources-recording-summary[data-tone="ok"] { color: var(--success); }
+#view-sources #sources-recording-summary[data-tone="ok"]::before { background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+#view-sources #sources-recording-summary[data-tone="off"] { color: var(--warning); }
+#view-sources #sources-recording-summary[data-tone="off"]::before { background: var(--warning); }
+#view-sources #sources-recording-summary[data-tone="info"] { color: var(--accent-text); }
+#view-sources #sources-recording-summary[data-tone="info"]::before { background: var(--accent); }
 #view-sources .sources-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
 #view-sources .sources-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 10px 16px 12px; background: none; color: var(--muted); white-space: nowrap; min-height: 44px; }
 #view-sources .sources-tabs button[aria-selected="true"] { color: var(--accent-text); border-bottom-color: var(--accent); }
 #view-sources .sources-tabs button:hover { background: var(--surface-2); color: var(--text); }
+html[data-ui-level=simple] #view-sources #sources-tab-secret { display: none; }
 #view-sources:has(#sources-tab-recording[aria-selected="true"]) #load-dialogs,
 #view-sources:has(#sources-tab-recording[aria-selected="true"]) .source-refresh-info { display: none; }
 #view-sources .tab-count { min-width: 20px; padding: 1px 6px; border-radius: 5px; background: var(--surface-3); color: var(--text-2); font-size: 12px; font-variant-numeric: tabular-nums; }
@@ -92,8 +101,9 @@
   #view-sources .recording-sections .monitoring-presets { gap: 6px; margin: 12px 0; }
   #view-sources .recording-sections .monitoring-presets button { flex: 1 1 auto; font-size: 12px; }
   #view-sources .recording-savebar { flex-wrap: wrap; bottom: 6px; padding: 12px; gap: 10px; }
-  #view-sources .recording-actions { width: 100%; }
+  #view-sources .recording-actions { width: 100%; flex-wrap: wrap; }
   #view-sources .recording-actions button { flex: 1; font-size: 12px; padding-inline: 8px; }
+  #view-sources #recording-recommended-apply { flex-basis: 100%; }
   #view-sources .source-list-heading { padding: 14px 12px 0; }
   #view-sources .source-list-heading h2 { font-size: 15px; }
   #view-sources .source-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; gap: 8px; }
@@ -218,3 +228,6 @@
   #view-secret-chats .secret-message { max-width: 92%; }
   #view-secret-chats .secret-send { grid-template-columns: 1fr; }
 }
+#view-sources .scope-warning { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; padding: 12px 14px; border-width: 1px 1px 1px 4px; border-radius: 12px; }
+#view-sources .scope-warning > .icon { flex: none; width: 20px; height: 20px; margin-top: 1px; color: var(--warning); }
+#view-sources .scope-warning p { margin: 0 0 6px; color: var(--text); font-weight: 600; }

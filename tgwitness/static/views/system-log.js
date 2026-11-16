@@ -23,7 +23,9 @@ export function createSystemLog({root,tr,json,getState,getSession,options,format
     }
     while(pre.childElementCount>3000)pre.firstElementChild.remove();
     after=result.last;
-    find('console-state').textContent=tr('{n} recent log lines',{n:pre.childElementCount});
+    find('console-state').textContent=pre.childElementCount?tr('{n} recent log lines',{n:pre.childElementCount}):
+      tr('Nothing has been logged yet. Lines appear here while observation, sign-in or an export runs.');
+    pre.hidden=!pre.childElementCount;
     if(result.lines.length&&find('console-follow').checked)pre.scrollTop=pre.scrollHeight;
   }
   find('console-refresh').addEventListener('click',()=>load().catch(error=>{if(error.name!=='StaleView')toast(error.message,true);}),{signal:listeners.signal});

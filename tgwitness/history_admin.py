@@ -18,6 +18,9 @@ POLL_MEANING = ("Scheduled read of this chat's admin log, deletions and edits on
                 "Telegram returned it.")
 RIGHTS_MEANING = ("This account's role in the chat and its right to delete other members' messages, as "
                   "channels.getChannels returned them at this time.")
+NOT_ADMIN_MEANING = ("Telegram shows a chat's admin log only to its administrators, and this account is not one. The "
+                     "message history itself is read in full; only the administrators' record of edits and deletions "
+                     "is out of reach, so the history is not marked incomplete for this.")
 LINK_MEANING = ("The chat's admin log names the account that deleted this message. The deletion notice recorded "
                 "earlier is unchanged; this record links it to the admin-log entry.")
 
@@ -45,10 +48,13 @@ async def page(history, job, entity, stage):
     except errors.RPCError as exc:
         if history.collector.handle_authorization_error(exc, "history admin log", client=history.collector.client):
             raise
-        progress.update(status="unavailable", error=type(exc).__name__, ended_at=utcnow())
+        member = isinstance(exc, errors.ChatAdminRequiredError)
+        progress.update(status="not_applicable" if member else "unavailable", error=type(exc).__name__,
+                        **({"reason": "not_admin"} if member else {}), ended_at=utcnow())
         with history.store.transaction():
             history.store.append("history.admin_log.unavailable", {"history_run_id": job["run_id"],
-                "source": "admin_log", "stage": stage, "error_type": type(exc).__name__}, job["chat_id"])
+                "source": "admin_log", "stage": stage, "error_type": type(exc).__name__,
+                **({"reason": "not_admin", "meaning": NOT_ADMIN_MEANING} if member else {})}, job["chat_id"])
             history.save_metadata(job, meta)
         return True
     previous = progress["offset"] or 2**63

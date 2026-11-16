@@ -1,0 +1,60 @@
+.workspace .topbar .profile-switch.has-account-switch { display: flex; align-items: center; gap: 4px; position: relative; flex: 0 1 360px; width: auto; min-width: 0; }
+.workspace .topbar .profile-switch.has-account-switch > select { position: absolute; inset-block-start: 0; inset-inline-start: 0; width: 1px; min-width: 0; height: 1px; min-height: 0; margin: 0; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); opacity: 0; pointer-events: none; }
+.workspace .topbar .profile-switch.has-account-switch > .observation-indicator,
+.workspace .topbar .profile-switch.has-account-switch > .workspace-identity { display: none; }
+.workspace .topbar .profile-switch.has-account-switch > #manage-profiles { flex: none; }
+.workspace .topbar .profile-switch.has-account-switch > .account-switch { display: flex; }
+.workspace .topbar .profile-switch.has-account-switch > .account-switch[hidden] { display: none; }
+.account-switch { align-items: center; gap: 10px; min-width: 0; max-width: 100%; min-height: 48px; padding: 4px 10px 4px 4px; border: 1px solid transparent; border-radius: 14px; background: transparent; color: var(--text); text-align: start; cursor: pointer; }
+.account-switch:hover, .account-switch[aria-expanded="true"] { background: var(--row-hover); border-color: var(--border); }
+.account-switch:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.account-switch-text { display: grid; gap: 2px; min-width: 0; }
+.account-switch-name { overflow: hidden; font-size: 14px; font-weight: 650; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
+.account-switch-line { display: flex; align-items: center; gap: 6px; min-width: 0; color: var(--muted); font-size: 12px; line-height: 16px; white-space: nowrap; }
+.account-switch-handle { overflow: hidden; text-overflow: ellipsis; }
+.account-switch-chevron { flex: none; width: 14px; height: 14px; margin-inline-start: auto; color: var(--muted); transform: rotate(90deg); transition: transform .15s; }
+.account-switch[aria-expanded="true"] .account-switch-chevron { transform: rotate(-90deg); }
+.account-face { position: relative; flex: none; display: inline-flex; }
+.account-face .avatar { width: 40px; height: 40px; font-size: 14px; }
+.account-face.sm .avatar { width: 36px; height: 36px; font-size: 13px; }
+.account-face-alert { position: absolute; inset-block-start: -3px; inset-inline-end: -4px; min-width: 18px; height: 18px; padding: 0 4px; border: 2px solid var(--surface); border-radius: 9px; background: var(--danger-solid, var(--danger)); color: #fff; font-size: 10px; line-height: 14px; text-align: center; }
+.account-chip { display: inline-flex; flex: none; align-items: center; gap: 5px; color: var(--text-2); font-size: 12px; font-weight: 500; }
+.account-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-off, var(--muted)); }
+.account-chip[data-tone="ok"] { color: var(--success); }
+.account-chip[data-tone="ok"] .account-chip-dot { background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+.account-chip[data-tone="warn"] { color: var(--warning); }
+.account-chip[data-tone="warn"] .account-chip-dot { background: var(--warning); }
+.account-chip[data-tone="bad"] { color: var(--danger); }
+.account-chip[data-tone="bad"] .account-chip-dot { background: var(--danger); }
+.account-chip[data-tone="info"] { color: var(--accent-text); }
+.account-chip[data-tone="info"] .account-chip-dot { background: var(--accent); }
+.account-menu { position: absolute; inset-block-start: calc(100% + 6px); inset-inline-start: 0; z-index: 80; width: min(360px, calc(100vw - 20px)); max-height: min(70vh, 560px); overflow-y: auto; padding: 6px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-lg); }
+.workspace .topbar .profile-switch.has-account-switch > .account-menu:not([hidden]) { display: block; }
+.account-menu[hidden] { display: none; }
+.account-menu-list { display: grid; gap: 2px; }
+.account-menu-item { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 8px 10px; border: 0; border-radius: 12px; background: transparent; color: var(--text); text-align: start; cursor: pointer; }
+.account-menu-item:hover, .account-menu-item:focus-visible { background: var(--row-hover); outline: none; }
+.account-menu-item:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
+.account-menu-item[aria-checked="true"] { background: var(--accent-soft); }
+.account-menu-item:disabled { opacity: .55; cursor: not-allowed; }
+.account-menu-body { display: grid; gap: 3px; flex: 1; min-width: 0; }
+.account-menu-name { overflow: hidden; font-size: 14px; font-weight: 600; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu-sub { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--muted); font-size: 12px; line-height: 16px; }
+.account-menu-extra { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu-check { flex: none; width: 18px; height: 18px; color: var(--accent-text); }
+.account-menu-foot { display: grid; gap: 2px; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+.account-menu-foot[hidden] { display: none; }
+.account-menu-action { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 8px 12px; border: 0; border-radius: 12px; background: transparent; color: var(--accent-text); font-size: 14px; font-weight: 500; text-align: start; cursor: pointer; }
+.account-menu-action .icon { width: 18px; height: 18px; margin-inline: 11px; }
+.account-menu-action:hover, .account-menu-action:focus-visible { background: var(--row-hover); outline: none; }
+.account-menu-action:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
+.workspace .topbar:has(.has-account-switch) .workspace-status > summary:has(.status-chip:is(:not([title]), [title=""])) > .icon:first-child { display: block; width: 18px; height: 18px; }
+.workspace .topbar:has(.has-account-switch) .workspace-status .status-chip:is(:not([title]), [title=""]) { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+@media (max-width: 767px) {
+  .workspace .topbar .profile-switch.has-account-switch { flex: 1 1 0; }
+  .account-switch { min-height: 44px; gap: 8px; padding: 2px 6px 2px 2px; }
+  .account-face.sm .avatar { width: 34px; height: 34px; font-size: 12px; }
+  .account-switch-name { font-size: 13px; }
+  .account-switch-handle { display: none; }
+  .account-menu { position: fixed; inset-block-start: 62px; inset-inline: 10px; width: auto; }
+}

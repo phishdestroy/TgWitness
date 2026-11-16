@@ -24,8 +24,15 @@
 .workflow-status[data-state="sign_in"], .workflow-status[data-state="failed"] { border-color: var(--warning-border); }
 .workflow-handoff { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; padding: 16px 20px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: var(--radius-panel); }
 .workflow-handoff p { margin: 0; flex: 1 1 240px; }
-#collector-error { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-#collector-error-copy { flex: 1 1 260px; }
+#collector-error { display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; min-height: 44px; padding: 6px 8px 6px 12px; }
+#collector-error > .icon { flex: none; width: 18px; height: 18px; margin: 0; }
+#collector-error-copy { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px; line-height: 18px; }
+#collector-error.expanded { flex-wrap: wrap; align-items: flex-start; }
+#collector-error.expanded #collector-error-copy { flex-basis: calc(100% - 64px); white-space: normal; }
+#collector-error #collector-sign-in { flex: none; min-height: 32px; padding: 4px 12px; }
+#collector-error .collector-error-more { flex: none; width: 32px; min-width: 32px; height: 32px; min-height: 32px; padding: 7px; color: inherit; }
+#collector-error .collector-error-more .icon { width: 16px; height: 16px; margin: 0; transform: rotate(90deg); transition: transform .15s; }
+#collector-error.expanded .collector-error-more .icon { transform: rotate(-90deg); }
 .sidebar .nav-more { border: 0; border-top: 1px solid var(--rail-border); margin-top: 16px; padding-top: 10px; }
 .sidebar .nav-more > summary { color: var(--rail-text); min-height: 44px; padding: 12px; font-size: 13px; cursor: pointer; }
 .sidebar .nav-more > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 6px; }
@@ -192,3 +199,18 @@
 .home-activity .home-idle.none { color: var(--muted); }
 .workflow-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
 .workflow-buttons button { margin-top: 0; }
+#home-dashboard .home-more { display: none; }
+html[data-ui-level=simple] #home-dashboard:not(.home-expanded) :is(.home-system, .home-chart) { display: none; }
+html[data-ui-level=simple] #home-dashboard:not(.home-expanded) .home-more { display: inline-flex; margin: 4px 0 16px; }
+html[data-ui-level=simple] #view-start:not(:has(#home-dashboard.home-expanded)) .pulse-mix { display: none; }
+.home-summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.home-summary-item { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); font: inherit; font-size: 13.5px; font-weight: 600; text-align: start; }
+button.home-summary-item { cursor: pointer; }
+button.home-summary-item:hover { border-color: var(--border-hover); background: var(--row-hover); }
+button.home-summary-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.home-summary-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--status-off, var(--muted)); }
+.home-summary-item[data-tone=ok] .home-summary-dot { background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+.home-summary-item[data-tone=warn] { border-color: var(--warning-border); background: var(--warning-soft); }
+.home-summary-item[data-tone=warn] .home-summary-dot { background: var(--warning); }
+.home-summary-item[data-tone=bad] { border-color: var(--danger-border); background: var(--danger-soft); color: var(--danger); }
+.home-summary-item[data-tone=bad] .home-summary-dot { background: var(--danger); }

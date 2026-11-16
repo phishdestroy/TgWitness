@@ -22,7 +22,7 @@ export function taskInfo(activity) {
 
 const STOP_REASONS = {operator: 'Stopped from the panel', shutdown: 'TgWitness was shut down'};
 
-export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize, openChatIn}) {
+export function createHome({root, tr, node, getState, accountState, switchProfile, navigate, json, refresh, formatTime, busy, toast, humanSize, openChatIn, signInText, openJournal}) {
   let session = null;
   const resources = {activity: {interval: 60000}, live: {interval: 10000}};
   const sessionKey = () => getState().workspaceRevision + ':' + getState().profile;
@@ -125,6 +125,24 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     }
     for (const element of root.querySelectorAll('.home-clock[data-at]'))
       element.textContent = element.dataset.format === 'ago' ? ago(element.dataset.at) : lasting(element.dataset.at);
+  }
+
+  function summary(state) {
+    const s = state.status || {}, c = s.collector || {}, info = accountState(s), counts = s.stats?.counts || {};
+    const number = value => Number(value || 0).toLocaleString(document.documentElement.lang || undefined);
+    const items = [['ok', tr('Saved records: {n}', {n: number(s.stats?.total)}), () => navigate('observations')]];
+    if (counts['coverage.gap']) items.push(['warn', tr('Coverage gaps: {n}', {n: number(counts['coverage.gap'])}), openJournal ? () => openJournal('coverage.gap') : null]);
+    if (!s.demo && info.needsSignIn) items.push(['bad', tr('Sign-in required'), () => navigate('connection')]);
+    if (!s.demo && c.storage_low) items.push(['warn', tr('Files paused: low disk space'), null]);
+    const box = node('section', 'home-summary');
+    box.setAttribute('aria-label', tr('Overview'));
+    for (const [tone, text, action] of items) {
+      const item = node(action ? 'button' : 'span', 'home-summary-item');
+      if (action) {item.type = 'button'; item.addEventListener('click', action);}
+      item.dataset.tone = tone; item.append(node('span', 'home-summary-dot'), node('span', '', text));
+      box.append(item);
+    }
+    return box;
   }
 
   function hero(state) {
@@ -351,6 +369,10 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     who.append(node('strong', '', profile.label), node('small', '', account.username ? '@' + account.username : account.id ? 'ID ' + account.id : tr('No Telegram account yet')));
     head.append(initial, who, chip(info.kind, tr(info.label)));
     card.append(head, activityLine(profile));
+    if (info.needsSignIn && signInText) card.append(node('p', 'home-warning', signInText(collector)));
+    if (collector.storage_low && collector.disk_free_bytes != null)
+      card.append(node('p', 'home-warning', tr('Free disk space: {free} of the required {min}. Exports and file downloads wait until space is freed.',
+        {free: humanSize(collector.disk_free_bytes), min: humanSize(collector.media_min_free_bytes)})));
     const observed = observationFacts(collector);
     if (observed) card.append(observed);
     const pause = collector.activity?.telegram_pause_until;
@@ -471,6 +493,7 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
     return box;
   }
 
+  let expanded = false;
   function render() {
       const state = getState();
       if (!root) return;
@@ -500,7 +523,11 @@ export function createHome({root, tr, node, getState, accountState, switchProfil
       main.append(...[accounts, chatsCard(state), chart()].filter(Boolean));
       const layout = node('div', 'home-layout');
       layout.append(main, side);
-      root.replaceChildren(hero(state), layout);
+      const more = node('button', 'secondary home-more', tr('Show more'));
+      more.type = 'button'; more.setAttribute('aria-expanded', String(expanded));
+      more.addEventListener('click', () => {expanded = true; root.classList.add('home-expanded'); more.setAttribute('aria-expanded', 'true');});
+      root.classList.toggle('home-expanded', expanded);
+      root.replaceChildren(summary(state), hero(state), layout, more);
       if (focused) {
         const button = root.querySelector('[data-overview-retry="' + focused + '"]');
         const target = button && !button.disabled ? button : root.querySelector(focused === 'activity' ? '.home-chart h2' : '.home-hero h2');
