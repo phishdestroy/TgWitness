@@ -113,6 +113,8 @@ A one-chat export includes `chat.html` for offline reading and `chat.json` for a
 Self-hosted. Encrypted session storage. Localhost panel by default. No telemetry.
 Source visibility, unavailable data and collection gaps remain visible in the saved record.
 
+**Why zero trust.** [A live case study](https://phishdestroy.github.io/TgWitness/docs/signed-export/): a GDPR answer signed by two Taylor Wessing partners, checked against its own file, and how a checkable export leaves no room to deceive or to doubt.
+
 <a name="from-a-conversation-to-a-case"></a>
 
 <details>
