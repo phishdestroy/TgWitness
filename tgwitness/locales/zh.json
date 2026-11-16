@@ -9933,5 +9933,12 @@
   "downloaded once without the proxy": "未经代理下载一次",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "也可以改为直接从这台电脑下载这一个文件：GitHub 会看到这台电脑的 IP 地址一次，Telegram 流量不变。",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "要直接从这台电脑从 GitHub 下载伪私密模块吗？这一次下载中 GitHub 会看到这台电脑的 IP 地址。工作区路由和 Telegram 流量保持不变。",
-  "Download directly and turn on": "直接下载并启用"
+  "Download directly and turn on": "直接下载并启用",
+  "about {h} h {m} min": "约 {h} 小时 {m} 分钟",
+  "about {m} min": "约 {m} 分钟",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "按此速度，转移需要 {time}。它在后台运行，可以暂停和继续；速度在「参数」→「Telegram 操作」中调整。",
+  "Messages in the chat": "聊天中的消息",
+  "Expected duration": "预计时长",
+  "Time left": "剩余时间",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness 尚未加载此聊天，Telegram 也没有为此账户返回它。请在「来源」中点击「刷新聊天列表」，或确认该账户仍在聊天中。"
 }

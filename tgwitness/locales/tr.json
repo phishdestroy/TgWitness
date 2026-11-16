@@ -9984,5 +9984,12 @@
   "downloaded once without the proxy": "proxy olmadan bir kez indirildi",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "Bunun yerine bu tek dosyayı doğrudan bu bilgisayardan indirebilirsiniz: GitHub bilgisayarın IP adresini bir kez görür, Telegram trafiği değişmez.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "Sözde gizli modül GitHub'dan doğrudan bu bilgisayardan indirilsin mi? GitHub bu tek indirmede bilgisayarın IP adresini görür. Çalışma alanının rotası ve Telegram trafiği aynı kalır.",
-  "Download directly and turn on": "Doğrudan indir ve etkinleştir"
+  "Download directly and turn on": "Doğrudan indir ve etkinleştir",
+  "about {h} h {m} min": "yaklaşık {h} sa {m} dk",
+  "about {m} min": "yaklaşık {m} dk",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "Bu hızla aktarım {time} sürer. Arka planda çalışır; duraklatıp sürdürebilirsiniz, hız ise «Parametreler» → «Telegram eylemleri» bölümünden değiştirilir.",
+  "Messages in the chat": "Sohbetteki mesajlar",
+  "Expected duration": "Tahmini süre",
+  "Time left": "Kalan süre",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness bu sohbeti yüklemedi ve Telegram bu hesap için onu döndürmedi. «Kaynaklar» bölümünde «Sohbet listesini yenile»ye basın veya hesabın hâlâ sohbette olduğunu kontrol edin."
 }

@@ -9933,5 +9933,12 @@
   "downloaded once without the proxy": "dimuat turun sekali tanpa proksi",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "Anda boleh memuat turun satu fail ini terus dari komputer ini: GitHub melihat alamat IP komputer sekali, trafik Telegram tidak berubah.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "Muat turun modul pseudo-rahsia daripada GitHub terus dari komputer ini? GitHub melihat alamat IP komputer untuk satu muat turun ini. Laluan ruang kerja dan trafik Telegram kekal sama.",
-  "Download directly and turn on": "Muat turun terus dan hidupkan"
+  "Download directly and turn on": "Muat turun terus dan hidupkan",
+  "about {h} h {m} min": "kira-kira {h} j {m} min",
+  "about {m} min": "kira-kira {m} min",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "Pada kadar ini, pemindahan mengambil masa {time}. Ia berjalan di latar belakang; anda boleh menjeda dan menyambungnya, dan kadarnya diubah di «Parameter» → «Tindakan Telegram».",
+  "Messages in the chat": "Mesej dalam sembang",
+  "Expected duration": "Jangkaan tempoh",
+  "Time left": "Masa berbaki",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness belum memuatkan sembang ini, dan Telegram tidak memulangkannya untuk akaun ini. Tekan «Muat semula senarai sembang» di «Sumber», atau semak bahawa akaun masih dalam sembang."
 }

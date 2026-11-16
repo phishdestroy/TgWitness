@@ -10086,5 +10086,12 @@
   "downloaded once without the proxy": "завантажено один раз без проксі",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "Можна завантажити цей один файл напряму з цього комп’ютера: GitHub один раз побачить IP-адресу комп’ютера, трафік Telegram не змінюється.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "Завантажити модуль псевдосекретного чату з GitHub напряму з цього комп’ютера? GitHub побачить IP-адресу комп’ютера під час цього одного завантаження. Маршрут робочого простору й трафік Telegram залишаються без змін.",
-  "Download directly and turn on": "Завантажити напряму й увімкнути"
+  "Download directly and turn on": "Завантажити напряму й увімкнути",
+  "about {h} h {m} min": "близько {h} год {m} хв",
+  "about {m} min": "близько {m} хв",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "За такого темпу перенесення триватиме {time}. Воно йде у фоні: його можна призупинити й продовжити, а темп змінюється в розділі «Параметри» → «Дії в Telegram».",
+  "Messages in the chat": "Повідомлень у чаті",
+  "Expected duration": "Очікувана тривалість",
+  "Time left": "Залишилося",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness ще не завантажив цей чат, і Telegram не повернув його для цього акаунта. Натисніть «Оновити список чатів» у розділі «Джерела» або перевірте, що акаунт досі є в чаті."
 }

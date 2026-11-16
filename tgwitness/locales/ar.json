@@ -10188,5 +10188,12 @@
   "downloaded once without the proxy": "نُزّلت مرة واحدة دون الوكيل",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "يمكنك بدلًا من ذلك تنزيل هذا الملف الواحد مباشرةً من هذا الحاسوب: يرى GitHub عنوان IP الخاص بالحاسوب مرة واحدة، ولا تتغير حركة Telegram.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "هل تريد تنزيل الوحدة شبه السرية من GitHub مباشرةً من هذا الحاسوب؟ يرى GitHub عنوان IP الخاص بالحاسوب في هذا التنزيل الواحد. يبقى مسار مساحة العمل وحركة Telegram كما هما.",
-  "Download directly and turn on": "التنزيل مباشرةً والتشغيل"
+  "Download directly and turn on": "التنزيل مباشرةً والتشغيل",
+  "about {h} h {m} min": "نحو {h} ساعة و{m} دقيقة",
+  "about {m} min": "نحو {m} دقيقة",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "بهذه الوتيرة يستغرق النقل {time}. يعمل في الخلفية؛ يمكنك إيقافه مؤقتًا واستئنافه، وتُغيَّر الوتيرة من «المعلمات» ← «إجراءات Telegram».",
+  "Messages in the chat": "الرسائل في المحادثة",
+  "Expected duration": "المدة المتوقعة",
+  "Time left": "الوقت المتبقي",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "لم يحمّل TgWitness هذه المحادثة، ولم يُرجعها Telegram لهذا الحساب. اضغط «تحديث قائمة المحادثات» في «المصادر»، أو تحقق من أن الحساب ما زال في المحادثة."
 }

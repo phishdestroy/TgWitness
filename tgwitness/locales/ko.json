@@ -9933,5 +9933,12 @@
   "downloaded once without the proxy": "프록시 없이 한 번 다운로드함",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "대신 이 파일 하나만 이 컴퓨터에서 직접 다운로드할 수 있습니다. GitHub에는 이 컴퓨터의 IP 주소가 한 번 보이며 Telegram 트래픽은 바뀌지 않습니다.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "유사 비밀 모듈을 이 컴퓨터에서 GitHub로부터 직접 다운로드할까요? 이 한 번의 다운로드에서 GitHub에 컴퓨터의 IP 주소가 보입니다. 작업 공간 경로와 Telegram 트래픽은 그대로입니다.",
-  "Download directly and turn on": "직접 다운로드하고 활성화"
+  "Download directly and turn on": "직접 다운로드하고 활성화",
+  "about {h} h {m} min": "약 {h}시간 {m}분",
+  "about {m} min": "약 {m}분",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "이 속도라면 이전에 {time}이 걸립니다. 백그라운드에서 실행되며 일시 중지와 재개가 가능하고, 속도는 「매개변수」 → 「텔레그램 액션」에서 바꿉니다.",
+  "Messages in the chat": "채팅의 메시지",
+  "Expected duration": "예상 소요 시간",
+  "Time left": "남은 시간",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness가 이 채팅을 불러오지 않았고 Telegram도 이 계정에 반환하지 않았습니다. 「출처」에서 「채팅 목록 새로고침」을 누르거나 계정이 아직 채팅에 있는지 확인하세요."
 }

@@ -9933,5 +9933,12 @@
   "downloaded once without the proxy": "ดาวน์โหลดหนึ่งครั้งโดยไม่ผ่านพร็อกซี",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "คุณสามารถดาวน์โหลดไฟล์นี้ไฟล์เดียวโดยตรงจากคอมพิวเตอร์นี้แทนได้ GitHub จะเห็นที่อยู่ IP ของคอมพิวเตอร์หนึ่งครั้ง และการรับส่งข้อมูลของ Telegram ไม่เปลี่ยน",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "ดาวน์โหลดโมดูล Pseudo-secret จาก GitHub โดยตรงจากคอมพิวเตอร์นี้หรือไม่ GitHub จะเห็นที่อยู่ IP ของคอมพิวเตอร์ในการดาวน์โหลดครั้งนี้ เส้นทางของพื้นที่ทำงานและการรับส่งข้อมูลของ Telegram ยังคงเดิม",
-  "Download directly and turn on": "ดาวน์โหลดโดยตรงและเปิดใช้งาน"
+  "Download directly and turn on": "ดาวน์โหลดโดยตรงและเปิดใช้งาน",
+  "about {h} h {m} min": "ประมาณ {h} ชม. {m} นาที",
+  "about {m} min": "ประมาณ {m} นาที",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "ด้วยความเร็วนี้ การโอนจะใช้เวลา {time} ทำงานอยู่เบื้องหลัง หยุดชั่วคราวและทำต่อได้ และเปลี่ยนความเร็วได้ที่ «พารามิเตอร์» → «การดำเนินการใน Telegram»",
+  "Messages in the chat": "ข้อความในแชท",
+  "Expected duration": "ระยะเวลาโดยประมาณ",
+  "Time left": "เวลาที่เหลือ",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness ยังไม่ได้โหลดแชทนี้ และ Telegram ไม่ได้ส่งแชทนี้กลับมาสำหรับบัญชีนี้ กด «รีเฟรชรายชื่อแชท» ใน «แหล่งข้อมูล» หรือตรวจว่าบัญชียังอยู่ในแชท"
 }

@@ -9984,5 +9984,12 @@
   "downloaded once without the proxy": "proksisiz bir marta yuklab olindi",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "Buning o‘rniga shu bitta faylni to‘g‘ridan-to‘g‘ri shu kompyuterdan yuklab olishingiz mumkin: GitHub kompyuterning IP manzilini bir marta ko‘radi, Telegram trafigi o‘zgarmaydi.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "Pseudo-maxfiy modul GitHub’dan to‘g‘ridan-to‘g‘ri shu kompyuterdan yuklab olinsinmi? Shu bitta yuklashda GitHub kompyuterning IP manzilini ko‘radi. Ish maydoni yo‘nalishi va Telegram trafigi o‘zgarmaydi.",
-  "Download directly and turn on": "To‘g‘ridan-to‘g‘ri yuklab olish va yoqish"
+  "Download directly and turn on": "To‘g‘ridan-to‘g‘ri yuklab olish va yoqish",
+  "about {h} h {m} min": "taxminan {h} soat {m} daq",
+  "about {m} min": "taxminan {m} daq",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "Bu tezlikda ko‘chirish {time} davom etadi. U fonda ishlaydi; uni to‘xtatib, davom ettirish mumkin, tezlik esa «Parametrlar» → «Telegram harakatlari» bo‘limida o‘zgartiriladi.",
+  "Messages in the chat": "Chatdagi xabarlar",
+  "Expected duration": "Kutilayotgan davomiylik",
+  "Time left": "Qolgan vaqt",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness bu chatni yuklamagan va Telegram uni bu akkaunt uchun qaytarmadi. «Manbalar» bo‘limida «Chatlar ro‘yxatini yangilash»ni bosing yoki akkaunt hali ham chatda ekanini tekshiring."
 }

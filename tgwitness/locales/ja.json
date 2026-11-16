@@ -9933,5 +9933,12 @@
   "downloaded once without the proxy": "プロキシを使わずに1回ダウンロード",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "代わりに、このファイル1つだけをこのコンピューターから直接ダウンロードできます。GitHub にはこのコンピューターの IP アドレスが1回だけ見え、Telegram の通信は変わりません。",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "疑似秘密モジュールを GitHub からこのコンピューターで直接ダウンロードしますか？この1回のダウンロードで GitHub にはコンピューターの IP アドレスが見えます。ワークスペースの経路と Telegram の通信はそのままです。",
-  "Download directly and turn on": "直接ダウンロードして有効にする"
+  "Download directly and turn on": "直接ダウンロードして有効にする",
+  "about {h} h {m} min": "約{h}時間{m}分",
+  "about {m} min": "約{m}分",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "このペースでは転送に{time}かかります。バックグラウンドで動作し、一時停止と再開ができます。ペースは「パラメータ」→「Telegramのアクション」で変更できます。",
+  "Messages in the chat": "チャットのメッセージ数",
+  "Expected duration": "予想所要時間",
+  "Time left": "残り時間",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness はこのチャットを読み込んでおらず、Telegram もこのアカウントに返しませんでした。「出典」で「チャットリストを更新」を押すか、アカウントがまだチャットにいるか確認してください。"
 }

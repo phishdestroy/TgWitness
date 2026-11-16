@@ -9933,5 +9933,12 @@
   "downloaded once without the proxy": "đã tải một lần không qua proxy",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "Bạn có thể tải riêng tệp này trực tiếp từ máy tính này: GitHub thấy địa chỉ IP của máy một lần, lưu lượng Telegram không thay đổi.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "Tải mô-đun Bí mật giả từ GitHub trực tiếp từ máy tính này? GitHub thấy địa chỉ IP của máy trong lần tải này. Tuyến của không gian làm việc và lưu lượng Telegram giữ nguyên.",
-  "Download directly and turn on": "Tải trực tiếp và bật"
+  "Download directly and turn on": "Tải trực tiếp và bật",
+  "about {h} h {m} min": "khoảng {h} giờ {m} phút",
+  "about {m} min": "khoảng {m} phút",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "Với tốc độ này, việc chuyển mất {time}. Nó chạy ngầm; bạn có thể tạm dừng và tiếp tục, còn tốc độ được đổi trong «Các tham số» → «Các thao tác trên Telegram».",
+  "Messages in the chat": "Tin nhắn trong cuộc trò chuyện",
+  "Expected duration": "Thời lượng dự kiến",
+  "Time left": "Thời gian còn lại",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness chưa tải cuộc trò chuyện này và Telegram không trả về nó cho tài khoản này. Nhấn «Làm mới danh sách trò chuyện» trong «Nguồn», hoặc kiểm tra tài khoản còn trong cuộc trò chuyện không."
 }

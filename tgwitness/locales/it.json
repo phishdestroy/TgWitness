@@ -9994,5 +9994,12 @@
   "downloaded once without the proxy": "scaricato una volta senza il proxy",
   "You can download this one file directly from this computer instead: GitHub sees this computer's IP address once, Telegram traffic does not change.": "Puoi invece scaricare questo singolo file direttamente da questo computer: GitHub vede una volta l’indirizzo IP del computer, il traffico Telegram non cambia.",
   "Download the pseudo-secret module from GitHub directly from this computer? GitHub sees this computer's IP address for this one download. The workspace route and Telegram traffic stay as they are.": "Scaricare il modulo pseudo-segreto da GitHub direttamente da questo computer? GitHub vede l’indirizzo IP del computer per questo singolo download. Il percorso dello spazio di lavoro e il traffico Telegram restano invariati.",
-  "Download directly and turn on": "Scarica direttamente e attiva"
+  "Download directly and turn on": "Scarica direttamente e attiva",
+  "about {h} h {m} min": "circa {h} h {m} min",
+  "about {m} min": "circa {m} min",
+  "At this pace the transfer takes {time}. It runs in the background; you can pause and resume it, and Parameters → Telegram actions change the pace.": "A questo ritmo il trasferimento richiede {time}. Procede in background; puoi metterlo in pausa e riprenderlo, e il ritmo si cambia in «Parametri» → «Azioni su Telegram».",
+  "Messages in the chat": "Messaggi nella chat",
+  "Expected duration": "Durata prevista",
+  "Time left": "Tempo rimanente",
+  "TgWitness has not loaded this chat, and Telegram did not return it for this account. Press Refresh chat list on Sources, or check that this account is still in the chat.": "TgWitness non ha caricato questa chat e Telegram non l’ha restituita per questo account. Premi «Aggiorna elenco chat» in «Fonti» oppure verifica che l’account sia ancora nella chat."
 }
