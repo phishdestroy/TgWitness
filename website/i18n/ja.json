@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "見つかりました。フィールド{n}が、同社が署名した契約内容と一致していません。依頼者が写しを受け取った後に、封筒が変更されていました。",
   "{n} of {total} values match the commitments the firm signed.": "{total}個の値のうち{n}個が、同社が締結した契約内容と一致しています。",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "ステップ3（全3ステップ中）：決定権は企業ではなく当局にある。例：ログイン情報は第三者データとして非公開のままとするが、苦情の内容は請求者に開示される。",
-  "Decryption is unavailable in this browser.": "このブラウザでは復号化機能をご利用いただけません。"
+  "Decryption is unavailable in this browser.": "このブラウザでは復号化機能をご利用いただけません。",
+  "Stays withheld: third-party data": "保留中の滞在：サードパーティデータ",
+  "Released: it concerns the requester's account": "公開済み：依頼者のアカウントに関するものです",
+  "Authority's view": "当局の見解",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "同社は、別の文言を記載して封筒を再封しました。当局による確認を行ってください。"
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "まずは試してみたいですか？「<code>scripts\\Demo.cmd</code>」をダブルクリックすると、独立したデモ環境をご利用いただけます。Telegramへのログインは不要です。",
@@ -5425,7 +5429,8 @@
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroyは本紛争の当事者ではなく、Steamアカウントのブロックが正当であったかどうかについては言及していません。本ページではデータ主体は特定されておらず、アカウント識別子、ログイン情報、IPアドレス、および個人データは掲載されていません。苦情の文面は、報告者のログイン情報を除いて引用されており、ファイルのテキストレイヤーに残されている黒い四角で覆われた部分も含みます。書簡：文書番号 42282474、 2025年8月15日（3ページ）；文書番号 42603633、2025年10月1日（9ページ）。添付資料：Anlage 1（830ページ）。ページ参照はPDFのページ順に従う。ドイツ語の引用文の英語訳は当方によるものである。<a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">関連事件ファイル</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">106日間にわたるGDPRファイル</a>。",
   "9ee978805f59f2076ffc214ec7c6b1b9e32edba44231e6b52625cb1cfe439aa1": "<strong>905,672</strong><span>黒い四角形の下に表示される文字</span>",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "キリル文字：その文字体系の文字が少なくとも1文字含まれていること。ログイン形式：ラテン文字の後に3～5桁の数字が続くもので、それ以外は含まれないこと。表示されている50件のテキスト以外のものを含め、1,995件の記者ログイン情報のすべてが対象となっており、引き続き抽出可能です。ここでは、いかなる記者のログイン情報も掲載していません。9件の記録において、4つの判読可能なテキストが単語単位で完全に重複しています；",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "3回登場する（446、447ページ）。"
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "3回登場する（446、447ページ）。",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "当局の公開鍵について"
  },
  "modes": {
   "modes.actions.body": "プレビュー、リクエスト、および結果の受信確認には署名が付与されます。ボタンが押される前に、サーバーはメッセージを再度取得し、変更されたキーボードを拒否します。返されたコールバックのテキストおよびURLは、記録されたコンテキストとして残ります。",

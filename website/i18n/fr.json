@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Erreur. Le champ {n} ne correspond pas à l'engagement signé par l'entreprise : l'enveloppe a été modifiée après que le demandeur eut reçu la copie.",
   "{n} of {total} values match the commitments the firm signed.": "{n} des {total} valeurs correspondent aux engagements pris par l'entreprise.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Étape 3 sur 3 : c'est l'autorité, et non l'entreprise, qui prend la décision. Exemple : les identifiants de connexion restent confidentiels en tant que données de tiers ; le texte de la réclamation est communiqué au demandeur.",
-  "Decryption is unavailable in this browser.": "Le décryptage n'est pas disponible dans ce navigateur."
+  "Decryption is unavailable in this browser.": "Le décryptage n'est pas disponible dans ce navigateur.",
+  "Stays withheld: third-party data": "Séjours non comptabilisés : données provenant de sources tierces",
+  "Released: it concerns the requester's account": "Publié : cela concerne le compte du demandeur",
+  "Authority's view": "Point de vue de l'autorité",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "La société a refermé l'enveloppe en y inscrivant un texte différent. Vérifiez l'authenticité du chèque."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Vous souhaitez simplement découvrir l&#x27;outil ? Double-cliquez sur <code>scripts\\Demo.cmd</code> pour accéder à une démo isolée. Aucune connexion à Telegram n&#x27;est nécessaire.",
@@ -5425,7 +5429,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "La page 830, intitulée « Historique de sécurité », est masquée par des rectangles noirs. Le dernier changement de mot de passe remonte à juillet 2024 ; aucun changement n'est enregistré pour l'année 2025. Les dates, adresses et identifiants figurant dans ces lignes ne sont pas reproduits.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy n'est pas partie au litige et ne se prononce pas sur le bien-fondé du blocage du compte Steam. La personne concernée n'est pas identifiée sur cette page ; les identifiants de compte, les identifiants de connexion, les adresses IP et les données à caractère personnel ne sont pas reproduits. Les textes des plaintes sont cités sans les identifiants de connexion des auteurs, y compris les textes figurant sous des rectangles noirs, qui restent dans le calque de texte du dossier. Lettres : n° de dossier 42282474, 15 août 2025 (3 pages) ; n° de dossier 42603633, 1er octobre 2025 (9 pages). Annexe : Annexe 1 (830 pages). Les références de page suivent l'ordre des pages du PDF. Les traductions en anglais des citations en allemand sont de notre fait. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Dossier complet de l'affaire</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">Le dossier RGPD de 106 jours</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Alphabet cyrillique : au moins un caractère de cet alphabet. Format d’identifiant : lettres latines suivies de 3 à 5 chiffres, rien d’autre. Les 1 995 identifiants de journalistes, y compris ceux qui accompagnent les 50 textes visibles, sont tous pris en compte et restent extractibles. Aucun identifiant de journaliste n’est reproduit ici. Quatre textes lisibles se répètent mot pour mot dans neuf enregistrements ;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "apparaît trois fois (pp. 446, 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "apparaît trois fois (pp. 446, 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "pour la clé publique de l'autorité"
  },
  "modes": {
   "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",

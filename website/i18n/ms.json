@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "Ditangkap. Medan {n}tidak sepadan dengan komitmen yang ditandatangani oleh firma: sampul itu ditukar selepas pemohon menerima salinan.",
   "{n} of {total} values match the commitments the firm signed.": "{n}ilai daripada {total}ilai sepadan dengan komitmen yang ditandatangani oleh firma.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "Langkah 3 daripada 3: pihak berkuasa, bukan firma, membuat keputusan. Contoh: log masuk kekal dirahsiakan sebagai data pihak ketiga; teks aduan dikeluarkan kepada pemohon.",
-  "Decryption is unavailable in this browser.": "Dekripsi tidak tersedia dalam pelayar ini."
+  "Decryption is unavailable in this browser.": "Dekripsi tidak tersedia dalam pelayar ini.",
+  "Stays withheld: third-party data": "Data pihak ketiga telah dikekalkan.",
+  "Released: it concerns the requester's account": "Dibebaskan: ia berkaitan dengan akaun pemohon",
+  "Authority's view": "Pandangan pihak berkuasa",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "Firma itu telah menyegel semula sampul surat dengan teks yang berbeza. Jalankan semakan pihak berkuasa."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "Hanya ingin meneroka? Klik dua kali <code>scripts\\Demo.cmd</code> untuk demo terasing. Tidak perlu log masuk Telegram.",
@@ -5425,7 +5429,8 @@
   "55ce8b323784661351f2edd4408d75a5e7a76ccc05ed4eb1eff234bc8743a43a": "Halaman 830, \"Sejarah Keselamatan\", berada di bawah petak segi empat hitam. Perubahan kata laluan terakhir adalah pada Julai 2024; tiada perubahan direkodkan pada 2025. Tarikh, alamat dan pengecam daripada baris-baris tersebut tidak disiarkan semula.",
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy bukan pihak dalam pertikaian dan tidak menyatakan sama ada penyekatan akaun Steam itu dibenarkan. Subjek data tidak dikenal pasti di halaman ini; pengecam akaun, log masuk, alamat IP dan data peribadi tidak disiarkan semula. Teks aduan dipetik tanpa log masuk pelapor, termasuk teks di bawah segi empat hitam, yang kekal dalam lapisan teks fail. Surat: Dok.-Nr. 42282474, 15 Ogos 2025 (3 halaman); Dok.-Nr. 42603633, 1 Oktober 2025 (9 halaman). Lampiran: Anlage 1 (830 halaman). Rujukan halaman menggunakan susunan halaman PDF. Terjemahan Inggeris bagi petikan Jerman adalah oleh kami. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">Dossier kes yang lebih luas</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">Fail GDPR 106 hari</a>.",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "Cyrillic: sekurang-kurangnya satu aksara daripada skrip itu. Corak log masuk: huruf Latin diikuti oleh 3–5 digit, tiada apa-apa lagi. Semua 1,995 log masuk wartawan, termasuk yang di sebelah 50 teks yang kelihatan, dilindungi dan kekal boleh diekstrak. Tiada log masuk wartawan diulang di sini. Empat teks boleh dibaca diulang perkataan demi perkataan merentasi sembilan rekod;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "muncul tiga kali (hlm. 446, 447)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "muncul tiga kali (hlm. 446, 447).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "untuk kunci awam pihak berkuasa"
  },
  "modes": {
   "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

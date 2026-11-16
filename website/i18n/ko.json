@@ -516,7 +516,11 @@
   "Caught. Field {n} does not match the commitment the firm signed: the envelope was changed after the requester received the copy.": "적발되었습니다. 필드 {n}이 회사가 서명한 약정과 일치하지 않습니다. 요청자가 사본을 받은 후 봉투가 변경되었습니다.",
   "{n} of {total} values match the commitments the firm signed.": "{total}개 값 중 {n}개가 해당 기업이 체결한 약정에 부합합니다.",
   "Step 3 of 3: the authority, not the firm, decides. Example: the login stays withheld as third-party data; the complaint text is released to the requester.": "3단계 중 3단계: 결정 권한은 해당 기관에 있으며, 해당 기업에는 없습니다. 예시: 로그인 정보는 제3자 데이터로 분류되어 공개되지 않으며, 민원 내용은 요청자에게 공개됩니다.",
-  "Decryption is unavailable in this browser.": "이 브라우저에서는 암호 해독 기능을 사용할 수 없습니다."
+  "Decryption is unavailable in this browser.": "이 브라우저에서는 암호 해독 기능을 사용할 수 없습니다.",
+  "Stays withheld: third-party data": "보류된 숙박 내역: 제3자 데이터",
+  "Released: it concerns the requester's account": "공개됨: 요청자의 계정과 관련된 사항입니다.",
+  "Authority's view": "당국의 견해",
+  "The firm has re-sealed the envelope with a different text. Run the authority's check.": "해당 회사는 다른 문구가 적힌 봉투로 다시 봉인했습니다. 당국의 확인 절차를 진행해 주십시오."
  },
  "blocks": {
   "01b10dac1fa0afb8f0599bf68ea7b236f62983a1bdd7747105158d1661acc4c0": "그냥 둘러보고 계신가요? <code>scripts\\Demo.cmd</code>를 더블 클릭하면 독립형 데모를 체험할 수 있습니다. 텔레그램 로그인은 필요하지 않습니다.",
@@ -5425,7 +5429,8 @@
   "98010e9d4ce0684c476108fda6c2fdf5d41c6047491952e234f71e0cdd5fc7c7": "PhishDestroy는 이 분쟁의 당사자가 아니며, 스팀 계정 차단 조치가 정당했는지에 대해서는 언급하지 않습니다. 이 페이지에는 정보 주체가 명시되어 있지 않으며, 계정 식별자, 로그인 정보, IP 주소 및 개인 정보는 기재되어 있지 않습니다. 신고 내용은 신고자의 로그인 정보를 제외하고 인용되었으며, 파일의 텍스트 레이어에 남아 있는 검은색 사각형으로 가려진 부분도 포함됩니다. 서신: 문서 번호 42282474, 2025년 8월 15일 (3페이지); 문서 번호 42603633, 2025년 10월 1일 (9페이지). 첨부 파일: Anlage 1 (830페이지). 페이지 참조는 PDF 페이지 순서를 따릅니다. 독일어 인용문의 영어 번역은 본사가 직접 수행했습니다. <a href=\"https://phishdestroy.io/steam_dossier/taylor_wessing\">관련 사건 자료</a> · <a href=\"@@REPO_URL@@/blob/@@BRANCH@@/docs/TAYLOR-WESSING-GDPR-FILE.md\">106일간의 GDPR 사건 기록</a>.",
   "9ee978805f59f2076ffc214ec7c6b1b9e32edba44231e6b52625cb1cfe439aa1": "<strong>905,672</strong><span>검은색 사각형 아래에서 읽을 수 있는 글자</span>",
   "f3f3a2609c5aa600ad1fd0e74eb6906101be85a7a966e463fd5a3f4c0966b4da": "키릴 문자: 해당 문자 체계의 문자가 적어도 하나 포함되어야 합니다. 로그인 형식: 라틴 알파벳 뒤에 3~5자리 숫자가 이어지며, 그 외의 내용은 포함되어서는 안 됩니다. 표시된 50개의 텍스트 옆에 있는 것을 포함하여 총 1,995개의 기자 로그인 정보가 모두 포함되어 있으며, 여전히 추출이 가능합니다. 여기에는 어떤 기자의 로그인 정보도 재현되어 있지 않습니다. 읽을 수 있는 네 개의 텍스트가 아홉 개의 기록에 걸쳐 단어 하나하나까지 똑같이 반복되어 있습니다;",
-  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "세 번 등장한다(446, 447쪽)."
+  "f06e151ff876c81fa99642ef3918bc0ee8d41c0365508a685ec475203205d9b8": "세 번 등장한다(446, 447쪽).",
+  "12d4e8be25c94062a028ab86a7edbd778b0f07ef0d16d37c604b830bbb10a14d": "해당 기관의 공개 키"
  },
  "modes": {
   "modes.actions.body": "미리보기, 요청 및 결과 수신 확인은 서명됩니다. 버튼을 누르기 전에 서버는 메시지를 다시 가져오고, 변경된 키보드는 거부합니다. 반환된 콜백 텍스트와 URL은 기록된 컨텍스트로 유지됩니다.",

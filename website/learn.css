@@ -863,7 +863,7 @@
 .signed-case .table-wrap td { overflow-wrap:anywhere; }
 .signed-case .table-wrap td code { overflow-wrap:anywhere; word-break:break-all; }
 .seal-envelope { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px 12px; padding:9px 12px; border:1px dashed #3f9c80; border-radius:8px; background:#0c1d1a; font:10.5px/1.6 var(--mono); color:#9fe3c9; }
-.seal-envelope code { background:none; color:#d4f3e7; overflow-wrap:anywhere; }
+.seal-envelope :is(code,.seal-envelope-out) { background:none; color:#d4f3e7; font-weight:600; overflow-wrap:anywhere; }
 .seal-steps { list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:18px 0 0; padding:0; }
 .seal-steps li { display:flex; gap:10px; align-items:flex-start; margin:0; padding:12px; border:1px solid #2e4563; border-radius:10px; background:#13223a; font-size:12px; line-height:1.55; color:#b3c4dc; transition:border-color .3s,background .3s,color .3s; }
 .seal-steps b { display:inline-flex; align-items:center; justify-content:center; flex:0 0 24px; height:24px; border-radius:50%; background:#20365a; color:#cfe0ff; font:600 12px/1 var(--mono); }
