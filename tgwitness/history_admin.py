@@ -40,7 +40,7 @@ async def page(history, job, entity, stage):
         result = await history.collector.client(f.channels.GetAdminLogRequest(entity, "",
             progress["offset"], lower, 100,
             events_filter=t.ChannelAdminLogEventsFilter(delete=True, edit=True)))
-    except (errors.FloodWaitError, errors.ServerError, errors.TakeoutInvalidError):
+    except (*FLOOD_ERRORS, errors.ServerError, errors.TakeoutInvalidError):
         raise
     except errors.RPCError as exc:
         if history.collector.handle_authorization_error(exc, "history admin log", client=history.collector.client):
