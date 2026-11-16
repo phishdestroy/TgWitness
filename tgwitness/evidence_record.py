@@ -8,13 +8,12 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape, quoteattr
 
 from cryptography import x509
-from cryptography.hazmat.primitives import hashes
 from pydantic import BaseModel, ConfigDict, Field
 
 from .anchor import der
 from .security import private_write
-from .verifier.timestamps import (DIGESTS, children, der as element, oid, query_nonce, signed_attributes,
-                                  signing_certificate_hash, timestamp_signature, timestamp_token, tst_info)
+from .verifier.timestamps import (DIGESTS, certificate_fingerprint, children, der as element, oid, query_nonce,
+                                  signed_attributes, signing_certificate_hash, timestamp_signature, timestamp_token, tst_info)
 
 ALGORITHMS = {"sha256": "2.16.840.1.101.3.4.2.1", "sha384": "2.16.840.1.101.3.4.2.2",
               "sha512": "2.16.840.1.101.3.4.2.3"}
@@ -130,9 +129,7 @@ def token_details(token):
     algorithm, named, _ = signing_certificate_hash(reply, signed_attributes(reply, items[3][2], items[3][3]))
     signer = None
     for data in found["certificates"]:
-        hasher = hashes.Hash(algorithm())
-        hasher.update(data)
-        if hasher.finalize() == named:
+        if certificate_fingerprint(algorithm, data) == named:
             signer = x509.load_der_x509_certificate(data)
     return {"algorithm": NAMES[info["algorithm"]], "hash": info["hash"], "time": info["time"], "signer": signer,
             "signature_digest": SIGNATURE_DIGESTS.get(method, method)}

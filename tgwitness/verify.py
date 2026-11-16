@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: a922f05d0453b734a915af5a7392260c1d62bf3d12c7dccb6e21cb9192c6c2e7
+# TgWitness verifier sources SHA-256: 9845800a8bf0d916a48d5d383b1d2270114a19615e1f7e879996d518a7f2bf00
 """Standalone verifier"""
 import argparse
 import base64
@@ -1337,6 +1337,12 @@ def hashed(algorithm, data):
     return hasher.finalize()
 
 
+def certificate_fingerprint(algorithm, data):
+    if isinstance(algorithm, str):
+        return hashed(algorithm, data)
+    return x509.load_der_x509_certificate(data).fingerprint(algorithm())
+
+
 def issued_by(certificate, issuer):
     method = certificate.signature_algorithm_oid.dotted_string
     if method not in NATIONAL_SIGNATURES:
@@ -1407,7 +1413,7 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
         raw[data] = x509.load_der_x509_certificate(data)
     signer_data = None
     for data in raw:
-        if hashed(algorithm, data) == named:
+        if certificate_fingerprint(algorithm, data) == named:
             signer_data = data
     if signer_data is None:
         raise ValueError("The reply does not carry the certificate the signature names")
@@ -1744,7 +1750,7 @@ def revocation_subject(reply, extra=()):
     for data in token["certificates"]:
         loaded[data] = x509.load_der_x509_certificate(data)
     for data in loaded:
-        if hashed(algorithm, data) == named:
+        if certificate_fingerprint(algorithm, data) == named:
             signer = loaded[data]
     certificates = list(loaded.values())
     if signer is None:
@@ -2426,7 +2432,7 @@ def ers_signer(reply, token):
             return None
         algorithm, named, _ = signing_certificate_hash(reply, signed_attributes(reply, items[3][2], items[3][3]))
         for data in token["certificates"]:
-            if hashed(algorithm, data) == named:
+            if certificate_fingerprint(algorithm, data) == named:
                 return x509.load_der_x509_certificate(data)
     except (ValueError, TypeError, IndexError, KeyError):
         return None

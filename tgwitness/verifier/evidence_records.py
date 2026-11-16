@@ -12,6 +12,7 @@ from .common import (
 from .national import DIGEST_NAMES
 from .timestamps import (
     DIGESTS,
+    certificate_fingerprint,
     children,
     der,
     hashed,
@@ -64,7 +65,7 @@ def ers_signer(reply, token):
             return None
         algorithm, named, _ = signing_certificate_hash(reply, signed_attributes(reply, items[3][2], items[3][3]))
         for data in token["certificates"]:
-            if hashed(algorithm, data) == named:
+            if certificate_fingerprint(algorithm, data) == named:
                 return x509.load_der_x509_certificate(data)
     except (ValueError, TypeError, IndexError, KeyError):
         return None
