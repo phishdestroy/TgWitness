@@ -26,6 +26,8 @@
 ## Unreleased
 
 - Recheck access to helper workspaces when resuming or retrying profile collection.
+- Keep session age and loss context within the current authorization, ignore late session checks from
+  replaced clients, and distinguish the last successful check from the saved session snapshot.
 - Add media occurrence timelines with separate document, saved-byte and image-dHash comparisons.
 - Add source-linked forwarding summaries to reports and people-profile JSON, plus a typed GEXF export.
 - Verify image bytes before deriving dHash indicators; report comparison and display limits.
