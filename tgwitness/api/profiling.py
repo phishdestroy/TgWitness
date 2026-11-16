@@ -39,10 +39,18 @@ async def action(request: Request, action: Literal["start", "pause", "resume", "
     service = ctx.app.state.collector.profiling
     if action == "start" and (body is None or not body.all_chats and not body.chat_ids):
         raise HTTPException(422, "Choose the chats and profile data to collect.")
-    if action == "start" and body.accounts and not ctx.opens_chat_everywhere(request.state.principal, body.chat_ids[0] if body.chat_ids else 0, body.accounts):
-        raise HTTPException(403, "This access does not open this chat in every chosen account.")
+
+    async def collect():
+        options = body.model_dump() if action == "start" else (service.current() or {}).get("options", {})
+        accounts = options.get("accounts") or []
+        if action in {"start", "resume", "retry"} and accounts:
+            chats = options.get("chat_ids") or []
+            if not chats or not ctx.opens_chat_everywhere(request.state.principal, chats[0], accounts):
+                raise HTTPException(403, "This access does not open this chat in every chosen account.")
+        return await getattr(service, action)(*([options] if action == "start" else []))
+
     try:
-        return await ctx.operation(getattr(service, action), *([body.model_dump()] if action == "start" else []))
+        return await ctx.operation(collect)
     except CollectionPaused as exc:
         messages = {"account_changed": "This collection belongs to another Telegram account.",
             "authorization_required": "Sign in to Telegram before continuing.", "source_paused": "Resume the selected chats before continuing their profile collection."}

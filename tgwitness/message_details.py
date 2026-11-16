@@ -116,6 +116,20 @@ def reactions(raw):
     return found
 
 
+def paid_reactors(raw):
+    found = []
+    if not isinstance(raw, dict) or not isinstance(raw.get("top_reactors"), list):
+        return found
+    for item in raw["top_reactors"]:
+        if not isinstance(item, dict) or type(item.get("count")) is not int or item["count"] < 0:
+            continue
+        peer = peer_id(item.get("peer_id"))
+        found.append({"peer_id": peer if type(peer) is int else None, "count": item["count"],
+                      "anonymous": item.get("anonymous") is True, "top": item.get("top") is True,
+                      "my": item.get("my") is True})
+    return found
+
+
 def forward(header):
     if not isinstance(header, dict):
         return None
@@ -160,7 +174,7 @@ def media_info(media, unread=None):
     return {k: v for k, v in info.items() if v not in (None, "")}
 
 
-COUNTERS = ("views", "forwards", "replies", "reactions")
+COUNTERS = ("views", "forwards", "replies", "reactions", "paid_reactors")
 
 
 def stable(record):
@@ -176,6 +190,7 @@ def details(raw):
              "forwards": raw.get("forwards"), "buttons": keyboard.keyboard(raw.get("reply_markup")),
              "replies": (raw.get("replies") or {}).get("replies") if isinstance(raw.get("replies"), dict) else None,
              "reactions": reactions(raw.get("reactions")),
+             "paid_reactors": paid_reactors(raw.get("reactions")),
              "auto_delete_seconds": raw.get("ttl_period"), "protected": raw.get("noforwards") or None,
              "album_id": raw.get("grouped_id"),
              "media_info": media_info(raw.get("media"), None if raw.get("out") else raw.get("media_unread")),

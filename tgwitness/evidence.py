@@ -318,6 +318,11 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 verification_kit.write(write_member, options.get("language", "en"))
                 if not compact:
                     write_indicators(write_member, (context.get("report_digest") or summary).get("indicators"), context)
+                    analysis = context.get("report_digest") or summary
+                    source = {"journal_head": context["head_hash"], "selection": selection.model_dump()}
+                    write_member("media-repeats.json", [canonical({**analysis["repeated_media"], "source": source})])
+                    write_member("forward-sources.json", [canonical({**analysis["forward_sources"], "source": source})])
+                    write_member("observed-sources.gexf", [report.report_forwards.gexf(analysis["forward_sources"], analysis["titles"])])
                 for event in snapshot.events():
                     if event["kind"] == "sealed.account_export":
                         item = event["payload"]

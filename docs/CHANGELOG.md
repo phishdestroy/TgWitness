@@ -25,6 +25,20 @@
 
 ## Unreleased
 
+- Recheck access to helper workspaces when resuming or retrying profile collection.
+- Keep session age and loss context within the current authorization, ignore late session checks from
+  replaced clients, and distinguish the last successful check from the saved session snapshot.
+- Add media occurrence timelines with separate document, saved-byte and image-dHash comparisons.
+- Add source-linked forwarding summaries to reports and people-profile JSON, plus a typed GEXF export.
+- Verify image bytes before deriving dHash indicators; report comparison and display limits.
+
+- Dossiers separate forwarded and reused media from sender encoder hints and
+  pre-existing-media findings, citing earlier permitted observations of the same
+  document ID. Paid Stars leaderboards retain counts, anonymous flags and source records.
+- Watchlists and indicators inspect button copy text, inline queries and valid
+  UTF-8 callback data. Similar-channel results preserve Telegram's reported total
+  and distinguish incomplete responses from local processing limits.
+
 - When Telegram ends the session, the loss record keeps what was known just before it: the session's age,
   the other sessions at the last check and Telegram's last security notice (`before_loss`).
 - A sign-in that has not finished yet no longer writes `account.authorization_error` entries that read as a

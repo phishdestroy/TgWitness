@@ -1032,6 +1032,11 @@ class EvidencePDF:
             indicators_section(self.lay, say, self.data["indicators"])
         if self.options.get("show_indicators", True) and (self.data.get("repeated") or {}).get("rows"):
             report.report_repeats.pdf(self.lay, say, self.data["repeated"], self.titles)
+        if self.options.get("show_indicators", True):
+            for key, module in (("repeated_media", report.report_media), ("forward_sources", report.report_forwards)):
+                data = self.data.get(key) or {}
+                if data.get("rows") or data.get("dropped"):
+                    module.pdf(self.lay, say, data, self.titles)
 
     def render_actions(self):
         say = self.say
