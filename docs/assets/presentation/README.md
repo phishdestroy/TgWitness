@@ -61,9 +61,10 @@ version for `prefers-reduced-motion: reduce`. Keep those sources before the regu
 mobile source: the narrow static version first, then the wide static version,
 then the animated narrow version at `max-width: 640px`.
 
-The README demo uses its dark recording in both page themes, matching the diagrams.
-Its source conditions select only width and motion: GitHub's theme handling
-replaces compound color-scheme conditions and can select the wrong crop or still.
+The README uses the dark workspace stills in both page themes, with a separate
+phone crop. The recording remains available for other presentations. Keep the
+cover's width and reduced-motion sources: GitHub's theme handling replaces compound
+color-scheme conditions and can select the wrong crop or still.
 
 To refresh the demo recording, build the site and run
 `python website/capture_readme.py` with Playwright and Pillow installed.
