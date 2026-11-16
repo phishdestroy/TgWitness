@@ -9953,5 +9953,9 @@
   "Open Diagnostics.": "Tanılama'yı açın.",
   "Confidence: high": "Güven: yüksek",
   "Confidence: medium": "Güven: orta",
-  "Confidence: low": "Güven: düşük"
+  "Confidence: low": "Güven: düşük",
+  "Sensitive content (18+)": "Hassas içerik (18+)",
+  "turned on by TgWitness": "TgWitness tarafından açıldı",
+  "Telegram does not let this account change it": "Telegram bu hesabın bunu değiştirmesine izin vermiyor",
+  "This session signed in less than 24 hours ago, so this export used the regular session instead of Takeout.": "Bu oturum 24 saatten kısa süre önce giriş yaptı; bu yüzden bu dışa aktarma Takeout yerine normal oturumu kullandı."
 }
