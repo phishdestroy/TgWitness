@@ -12,6 +12,7 @@ MEANING = ("The journal is behind the last head this computer recorded for the s
            "The data directory was restored from an older copy or replaced. Records after 'remembered' are missing "
            "here; archives exported before this point can hold records that this journal does not. Keep both and "
            "show this record with any archive exported from now on.")
+UNWRITABLE = set()
 
 
 def state_dir():
@@ -39,7 +40,11 @@ def remember(store, public_key):
                                         "public_key": public_key, "seq": head["seq"], "hash": head["hash"],
                                         "at": utcnow()}).encode("utf-8"))
     except OSError as exc:
-        LOG.warning("Could not record the journal head outside the data directory: %s", type(exc).__name__)
+        if path.parent not in UNWRITABLE:
+            UNWRITABLE.add(path.parent)
+            LOG.warning("Could not record the journal head in %s (%s); a restore from an older copy will not be "
+                        "detected. Set TGWITNESS_STATE_DIR to a writable folder outside the data directory",
+                        path.parent, type(exc).__name__)
 
 
 def check(store, public_key):

@@ -179,7 +179,8 @@ def serve_args(root):
 def unit_text(root, config, python):
     hardening = ""
     if config["system"]:
-        hardening = ("DynamicUser=yes\nStateDirectory=" + config["service"] + "\nStateDirectoryMode=0700\n"
+        hardening = ("DynamicUser=yes\nStateDirectory=" + config["service"] + " " + config["service"] + "-state\n"
+                     "StateDirectoryMode=0700\nEnvironment=TGWITNESS_STATE_DIR=/var/lib/" + config["service"] + "-state\n"
                      "ProtectSystem=strict\nProtectHome=yes\nPrivateTmp=yes\n")
         if config["mode"] == "domain":
             hardening += "AmbientCapabilities=CAP_NET_BIND_SERVICE\nCapabilityBoundingSet=CAP_NET_BIND_SERVICE\n"

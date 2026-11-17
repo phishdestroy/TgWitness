@@ -354,11 +354,15 @@ Media recovery is separate from Telegram update recovery and cannot recreate van
 
 ## Backup, restore, and capacity
 
-`tgwitness backup FOLDER` copies the data directory while the panel keeps running: SQLite
-files through the online backup API, then keys, checkpoints, media and profiles, with a
-`backup-manifest.json` that lists every file's SHA-256 and the journal heads. To restore,
-stop TgWitness and replace the whole data directory with that folder. The next start
-records that the journal was restored from an older copy.
+`tgwitness backup FOLDER` copies the data directory while the panel keeps running:
+checkpoints first, then SQLite files through the online backup API, then keys, media and
+profiles, so no copied checkpoint is newer than the copied journal. `backup-manifest.json`
+lists every file's SHA-256 and the journal heads. To restore, stop TgWitness and replace the
+whole data directory with that folder. The next start records that the journal was restored
+from an older copy. That record compares the journal with the head kept in
+`TGWITNESS_STATE_DIR`, a folder outside the data directory: the `tgwitness-state` volume in
+Compose, `/var/lib/tgwitness-state` in the systemd units, and the user's local state folder
+otherwise. Without a writable state folder the restore is not detected and the log says so once.
 
 Without the command, stop the process before copying the **entire data directory**, including vault.key,
 signing.enc, credentials.enc, SQLite database/WAL files, media, token, checkpoints,
