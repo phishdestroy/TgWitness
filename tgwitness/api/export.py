@@ -998,7 +998,7 @@ class ExportOperations:
             path.unlink(missing_ok=True)
             raise
         if fmt in ("zip", "asice"):
-            export_history.evidence_exported(self.app.state.store, head)
+            export_history.evidence_exported(self.app.state.store, sealed.get("through") or head)
         headers = export_history.headers(receipt)
         headers["X-TgWitness-Sealed-Through"] = str(sealed["through"]) if sealed.get("through") else "none"
         if container is not None:
