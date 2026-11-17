@@ -31,6 +31,7 @@
   and it opens data directories whose path holds `#`, `?` or `%`.
 - The journal head that detects a restore is kept in `TGWITNESS_STATE_DIR`: a `tgwitness-state` volume in Compose and
   `/var/lib/tgwitness-state` in the systemd units, where the home folder is read-only. An unwritable folder is logged once.
+- Chat exports of chats with more than 32,766 deleted or edited messages no longer fail while listing their saved files.
 - RFC 3161 and OpenTimestamps timestamps are on by default where requests outside Telegram have a route, and every
   evidence export time-stamps its last record before it is built. Before, archives failed `--require evidence`
   because the records written after the last timestamp had no external time.
