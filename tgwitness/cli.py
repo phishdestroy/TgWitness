@@ -507,20 +507,25 @@ def backup(args):
         print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
         return EXIT_USAGE
     target.mkdir(parents=True, exist_ok=True, mode=0o700)
-    files, databases, others = [], [], []
+    files, checkpoints, databases, others = [], [], [], []
     for folder, directories, names in os.walk(root):
         directories[:] = [d for d in directories if d not in BACKUP_SKIP_DIRS]
         for name in names:
             path = Path(folder) / name
             if name in BACKUP_SKIP_NAMES or name.endswith(BACKUP_SKIP_SUFFIXES) or not path.is_file():
                 continue
-            (databases if is_sqlite(path) else others).append(path)
-    for path in databases + others:
+            if is_sqlite(path):
+                databases.append(path)
+            elif "checkpoints" in path.relative_to(root).parts:
+                checkpoints.append(path)
+            else:
+                others.append(path)
+    for path in checkpoints + databases + others:
         relative = path.relative_to(root)
         copy = target / relative
         copy.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         if path in databases:
-            source = sqlite3.connect("file:" + path.as_posix() + "?mode=ro", uri=True)
+            source = sqlite3.connect(path.as_uri() + "?mode=ro", uri=True)
             destination = sqlite3.connect(copy)
             try:
                 source.backup(destination)
@@ -536,7 +541,7 @@ def backup(args):
         files.append({"path": relative.as_posix(), "bytes": copy.stat().st_size, "sha256": file_sha256(copy)})
     heads = {}
     for name, workspace in workspaces(target, "all"):
-        connection = sqlite3.connect("file:" + (workspace / "journal.sqlite3").as_posix() + "?mode=ro&immutable=1", uri=True)
+        connection = sqlite3.connect((workspace / "journal.sqlite3").as_uri() + "?mode=ro&immutable=1", uri=True)
         try:
             row = connection.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
         finally:

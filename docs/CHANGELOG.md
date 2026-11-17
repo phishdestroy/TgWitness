@@ -25,6 +25,14 @@
 
 ## Unreleased
 
+- `migrate-to-external` also re-encrypts resumable account-export queues and saved profiling peers; before, it removed
+  `vault.key` while they still needed it. Profiling re-resolves a saved peer that no longer opens.
+- `tgwitness backup` copies checkpoints before the journal, so a backup taken during collection starts after restore,
+  and it opens data directories whose path holds `#`, `?` or `%`.
+- The journal head that detects a restore is kept in `TGWITNESS_STATE_DIR`: a `tgwitness-state` volume in Compose and
+  `/var/lib/tgwitness-state` in the systemd units, where the home folder is read-only. An unwritable folder is logged once.
+- Chat exports of chats with more than 32,766 deleted or edited messages no longer fail while listing their saved files.
+- An evidence export sealed at record N marks records only up to N as exported.
 - RFC 3161 and OpenTimestamps timestamps are on by default where requests outside Telegram have a route, and every
   evidence export time-stamps its last record before it is built. Before, archives failed `--require evidence`
   because the records written after the last timestamp had no external time.

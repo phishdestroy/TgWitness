@@ -9,12 +9,13 @@ Type=simple
 User=tgwitness
 Group=tgwitness
 WorkingDirectory=/opt/tgwitness
-StateDirectory=tgwitness
+StateDirectory=tgwitness tgwitness-state
 StateDirectoryMode=0700
 UMask=0077
 Environment=TGWITNESS_DATA=/var/lib/tgwitness
+Environment=TGWITNESS_STATE_DIR=/var/lib/tgwitness-state
 Environment=PYTHONDONTWRITEBYTECODE=1
-# For a NEW external-key installation only:
+# External master key: a new installation, or after python -m tgwitness.security migrate-to-external:
 # Environment=TGWITNESS_VAULT_KEY_FILE=/etc/tgwitness/master.key
 # Behind Caddyfile.example on this host, so access limits see real client addresses.
 # Leave it unset for SSH-tunnel-only access: local users could then claim any address.
@@ -45,7 +46,7 @@ RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
 SystemCallErrorNumber=EPERM
-ReadWritePaths=/var/lib/tgwitness
+ReadWritePaths=/var/lib/tgwitness /var/lib/tgwitness-state
 
 [Install]
 WantedBy=multi-user.target

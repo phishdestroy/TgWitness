@@ -3,7 +3,7 @@ LABEL org.opencontainers.image.title="TgWitness" \
       org.opencontainers.image.description="Self-hosted Telegram observation journal with signed exports" \
       org.opencontainers.image.licenses="MIT"
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONUTF8=1 PIP_DISABLE_PIP_VERSION_CHECK=1 TGWITNESS_DATA=/data \
-    PATH="/opt/venv/bin:$PATH"
+    TGWITNESS_STATE_DIR=/state PATH="/opt/venv/bin:$PATH"
 COPY deploy/containers /usr/share/tgwitness-build/containers
 RUN sh /usr/share/tgwitness-build/containers/install-packages.sh runtime \
     && python3.12 -m venv /opt/venv
@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir --require-hashes -r build.lock \
     && pip install --no-cache-dir --no-deps --no-build-isolation . \
     && python -m pip check && python -m pip uninstall --yes pip \
     && addgroup -g 10001 collector && adduser -D -u 10001 -G collector -h /home/collector collector \
-    && mkdir /data /witness && chown collector:collector /data /witness
+    && mkdir /data /witness /state && chown collector:collector /data /witness /state
 USER collector
 VOLUME ["/data"]
 EXPOSE 8787

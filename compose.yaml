@@ -13,6 +13,7 @@ services:
       - "127.0.0.1:${TGWITNESS_PORT:-8787}:8787"
     volumes:
       - tgwitness-data:/data
+      - tgwitness-state:/state
     init: true
     stop_grace_period: 30s
     security_opt:
@@ -59,4 +60,5 @@ services:
       - /tmp:size=64m,mode=1777
 volumes:
   tgwitness-data:
+  tgwitness-state:
   witness-data:

@@ -348,10 +348,11 @@ Type=simple
 User=tgwitness
 Group=tgwitness
 WorkingDirectory=/var/lib/tgwitness
-StateDirectory=tgwitness
+StateDirectory=tgwitness tgwitness-state
 StateDirectoryMode=0700
 UMask=0077
 Environment=TGWITNESS_DATA=/var/lib/tgwitness
+Environment=TGWITNESS_STATE_DIR=/var/lib/tgwitness-state
 Environment=TGWITNESS_ASSURANCE=@PROVIDER@
 Environment=TGWITNESS_NO_BROWSER=1
 Environment=PYTHONDONTWRITEBYTECODE=1
@@ -386,7 +387,7 @@ SystemCallErrorNumber=EPERM
 # the host measurement counts SSH processes there.
 InaccessiblePaths=-/etc/cloudflared -/etc/systemd/system/cloudflared.service
 IPAddressDeny=169.254.169.254 fd00:ec2::254
-ReadWritePaths=/var/lib/tgwitness
+ReadWritePaths=/var/lib/tgwitness /var/lib/tgwitness-state
 
 [Install]
 WantedBy=multi-user.target

@@ -4,12 +4,13 @@ import json
 import logging
 import os
 import secrets
+import sqlite3
 import subprocess
 import sys
 import time
 from pathlib import Path
 
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
@@ -238,6 +239,45 @@ def read_master(master_file, root):
     return master
 
 
+def vault_files(folder, suffix=".enc"):
+    return sorted([*folder.glob("*" + suffix), *folder.glob("account-exports/*/attachment-queue/*" + suffix)])
+
+
+def marker_salt(marker):
+    try:
+        config = json.loads(marker.read_bytes())
+        salt = base64.b64decode(config["salt"], validate=True)
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    return salt if config.get("format") == EXTERNAL_FORMAT and len(salt) == 32 else None
+
+
+def migrate_peers(folder, local, external):
+    path = folder / "journal.sqlite3"
+    if not path.is_file():
+        return 0
+    db = sqlite3.connect(path, timeout=30)
+    try:
+        if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='profiling_users'").fetchone() is None:
+            return 0
+        rows = db.execute("SELECT run_id, user_id, peer FROM profiling_users WHERE peer IS NOT NULL").fetchall()
+        with db:
+            for run_id, user_id, token in rows:
+                try:
+                    external.decrypt(token)
+                    continue
+                except InvalidToken:
+                    pass
+                try:
+                    value = external.encrypt(local.decrypt(token))
+                except InvalidToken:
+                    value = None
+                db.execute("UPDATE profiling_users SET peer=? WHERE run_id=? AND user_id=?", (value, run_id, user_id))
+        return len(rows)
+    finally:
+        db.close()
+
+
 def migrate_to_external(root, master_file):
     root = Path(root).resolve()
     master = read_master(master_file, root)
@@ -248,25 +288,24 @@ def migrate_to_external(root, master_file):
         for folder in folders:
             key_path, marker = folder / "vault.key", folder / "vault.external.json"
             if not key_path.exists():
-                for kept in folder.glob("*.enc.local"):
+                for kept in vault_files(folder, ".enc.local"):
                     kept.unlink()
                 continue
-            for kept in folder.glob("*.enc.local"):
+            for kept in vault_files(folder, ".enc.local"):
                 os.replace(kept, kept.with_suffix(""))
-            if marker.exists():
-                marker.unlink()
             local = Fernet(key_path.read_bytes())
-            salt = os.urandom(32)
+            salt = marker_salt(marker) or os.urandom(32)
             external = external_fernet(master, salt)
-            files = sorted(folder.glob("*.enc"))
+            private_write(marker, json.dumps({"format": EXTERNAL_FORMAT,
+                                              "salt": base64.b64encode(salt).decode()}).encode())
+            files = vault_files(folder)
             plain = {path: local.decrypt(path.read_bytes()) for path in files}
             for path, data in plain.items():
                 private_write(path.with_name(path.name + ".new"), external.encrypt(data))
             for path in files:
                 os.replace(path, path.with_name(path.name + ".local"))
                 os.replace(path.with_name(path.name + ".new"), path)
-            private_write(marker, json.dumps({"format": EXTERNAL_FORMAT,
-                                              "salt": base64.b64encode(salt).decode()}).encode())
+            peers = migrate_peers(folder, local, external)
             for path, data in plain.items():
                 if external.decrypt(path.read_bytes()) != data:
                     raise RuntimeError("Re-encrypted vault file does not read back: " + path.name)
@@ -274,7 +313,7 @@ def migrate_to_external(root, master_file):
             for path in files:
                 path.with_name(path.name + ".local").unlink()
             moved.append({"workspace": str(folder.relative_to(root)) if folder != root else "default",
-                          "files": len(files)})
+                          "files": len(files), "peers": peers})
     finally:
         lock.close()
     return moved
@@ -292,10 +331,15 @@ def main():
             parser.exit(2, "Give the data directory with --data-dir.\n")
         try:
             moved = migrate_to_external(args.data_dir, args.path)
-        except (OSError, ValueError, RuntimeError) as exc:
+        except InvalidToken:
+            parser.exit(1, "Migration stopped: a vault file does not open with the vault.key of its workspace. Restore "
+                           "it from a backup and run the command again; vault.key is removed only after every file "
+                           "of that workspace reads back.\n")
+        except (OSError, ValueError, RuntimeError, sqlite3.Error) as exc:
             parser.exit(1, "Migration stopped: " + str(exc) + "\n")
         for item in moved:
-            print("Workspace " + item["workspace"] + ": " + str(item["files"]) + " vault files re-encrypted; vault.key removed.")
+            print("Workspace " + item["workspace"] + ": " + str(item["files"]) + " vault files and "
+                  + str(item["peers"]) + " saved profiling peers re-encrypted; vault.key removed.")
         print("Start TgWitness with TGWITNESS_VAULT_KEY_FILE=" + str(Path(args.path).resolve()) + " from now on, "
               "and keep that key file and its backup apart from the data directory.")
         return

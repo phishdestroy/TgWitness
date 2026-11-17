@@ -103,10 +103,10 @@ def journal_changes(store, chat_id, folder=None):
             messages.add(event["message_id"])
         saved = []
         if messages:
-            numbers = sorted(messages)
             for row in snapshot.connection.execute(
-                    "SELECT seq, message_id, payload FROM events WHERE chat_id=? AND kind='media.saved' AND "
-                    "message_id IN (" + ",".join("?" * len(numbers)) + ") ORDER BY seq", (chat_id, *numbers)):
+                    "SELECT seq, message_id, payload FROM events WHERE chat_id=? AND kind='media.saved' AND message_id IN "
+                    "(SELECT message_id FROM events WHERE chat_id=? AND kind IN (" + changes + ") AND message_id IS NOT "
+                    "NULL) ORDER BY seq", (chat_id, chat_id, *CHANGE_KINDS)):
                 digest = json.loads(row["payload"]).get("media_sha256")
                 source = Path(store.root) / "media" / str(digest)
                 if isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest) and source.is_file():

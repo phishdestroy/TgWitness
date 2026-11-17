@@ -207,8 +207,9 @@ class LifecycleOperations:
                 with store.transaction():
                     store.append("journal.rolled_back", rolled_back)
                     store.set_setting("journal_rollback", {**rolled_back, "detected_at": process_event["observed_at"]})
-                LOG.warning("Journal is behind the head recorded for this data directory (%d < %d): restored from "
-                            "an older copy", previous["seq"] if previous else 0, rolled_back["remembered"]["seq"])
+                LOG.warning("Journal head #%d does not continue head #%d recorded for this data directory (%s): "
+                            "restored from an older copy or replaced", previous["seq"] if previous else 0,
+                            rolled_back["remembered"]["seq"], rolled_back["reason"])
             interactions.abandon(store, interactions.RESTART_STOP)
             retain_checkpoint(store, vault)
             journal_ready = True
