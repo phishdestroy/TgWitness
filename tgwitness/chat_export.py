@@ -54,6 +54,10 @@ JOURNAL_MEANING = ("Records from this workspace's journal for the messages of th
                    "recheck or edited while observed: every saved version and the notice. Each record keeps its "
                    "journal hash and Ed25519 signature; the evidence export holds the complete hash chain.")
 JOURNAL_SHOWN = 300
+JOURNAL_MEDIA_MEANING = ("Files the journal saved for messages of this chat that were later deleted, missing on "
+                         "recheck or edited: each entry names the message, the signed media.saved record in the "
+                         "evidence journal and the file under media/, named by its SHA-256. Telegram no longer "
+                         "returns these files, so the snapshot in chat.json does not reference them.")
 NAMES_MEANING = ("Sender names as the journal of this workspace recorded them: delivered with the message when it was "
                  "received live, otherwise the last name recorded before the message was sent. Messages not listed show "
                  "the name at export: from in chat.json, with its source in from_source.")
@@ -97,8 +101,19 @@ def journal_changes(store, chat_id, folder=None):
             output.write(canonical({key: event[key] for key in JOURNAL_FIELDS}) + b"\n")
             records += 1
             messages.add(event["message_id"])
+        saved = []
+        if messages:
+            numbers = sorted(messages)
+            for row in snapshot.connection.execute(
+                    "SELECT seq, message_id, payload FROM events WHERE chat_id=? AND kind='media.saved' AND "
+                    "message_id IN (" + ",".join("?" * len(numbers)) + ") ORDER BY seq", (chat_id, *numbers)):
+                digest = json.loads(row["payload"]).get("media_sha256")
+                source = Path(store.root) / "media" / str(digest)
+                if isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest) and source.is_file():
+                    saved.append({"message_id": row["message_id"], "media_saved_seq": row["seq"], "sha256": digest,
+                                  "file": "media/" + digest, "source": str(source)})
     return {"deleted": deleted, "edited": edited, "records": records, "messages": len(messages),
-            "meaning": JOURNAL_MEANING, "path": str(path)}
+            "meaning": JOURNAL_MEANING, "path": str(path), **({"saved_media": saved} if saved else {})}
 
 
 def journal_items(path, limit=JOURNAL_SHOWN):
@@ -403,6 +418,10 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
                 finally:
                     kept.unlink(missing_ok=True)
                 journal["file"] = JOURNAL_FILE
+            journal_media = journal.pop("saved_media", []) if isinstance(journal, dict) else []
+            if journal_media:
+                journal["saved_media"] = [{k: v for k, v in item.items() if k != "source"} for item in journal_media]
+                journal["saved_media_meaning"] = JOURNAL_MEDIA_MEANING
             chat_id = (meta.get("chat") or {}).get("id")
             attributed, at_export = sender_names(scratch_path, names, chat_id)
             meta["sender_names"] = {"file": "sender-names.json", "from_journal": len(attributed), "at_export": at_export,
@@ -430,6 +449,13 @@ def build_bundle(scratch_path, meta, vault, out_path, max_bytes=MAX_BUNDLE_BYTES
                     write_member("media/" + source.name, iter(lambda: incoming.read(1024 * 1024), b""))
                 if hashes["media/" + source.name] != source.name:
                     raise ValueError("Attachment changed while the export was written: " + source.name)
+            for item in journal_media:
+                if item["file"] in hashes:
+                    continue
+                with Path(item["source"]).open("rb") as incoming:
+                    write_member(item["file"], iter(lambda: incoming.read(1024 * 1024), b""))
+                if hashes[item["file"]] != item["sha256"]:
+                    raise ValueError("Saved journal attachment changed while the export was written: " + item["sha256"])
             stats = chat_stats(scratch_path)
             if stats["files_reused"]:
                 meta["attachments_reused"] = {"messages": stats["files_reused"], "meaning": REUSED_MEANING}

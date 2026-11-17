@@ -297,7 +297,10 @@ class Console:
                 times = sorted(item["time"] for item in items if item.get("time"))
                 span = "?" if not times else shown(times[0]) + (" – " + shown(times[-1]) if times[-1] != times[0] else "")
                 self.check("ok" if checked == len(items) else "warn", "RFC 3161 · " + service, point + " · " + span)
-                if checked in (0, len(items)):
+                unmatched = sum(item.get("signature", "").startswith("no matching root") for item in items)
+                if unmatched == len(items):
+                    note(self.t("signature not checked: no matching root in --tsa-ca"))
+                elif checked in (0, len(items)):
                     note(self.t("signature chained to your root" if checked else "signature not checked: add --tsa-ca"))
                 else:
                     note(self.t("signature chained to your root") + ": " + self.number(checked) + " / " + self.number(len(items)))

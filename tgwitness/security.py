@@ -82,7 +82,7 @@ class Vault:
             if not external:
                 raise RuntimeError("This vault requires TGWITNESS_VAULT_KEY_FILE. Refusing local key replacement.")
             if key_path.exists() or (not marker.exists() and any(p.exists() for p in protected)):
-                raise RuntimeError("External keys require a new data directory; existing local vaults are not migrated automatically.")
+                raise RuntimeError("This data directory still uses its local vault key. Stop TgWitness and run: python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA")
             source = Path(external).resolve(strict=True)
             if source.is_relative_to(root.resolve()) or source.stat().st_size > 128:
                 raise RuntimeError("Provide a small master-key file outside the data directory.")
@@ -94,11 +94,9 @@ class Vault:
             config = json.loads(marker.read_bytes())
             salt = base64.b64decode(config["salt"], validate=True)
 
-            if config["format"] not in ("tgwitness-external-vault-v1", "tgwatch-external-vault-v1") or len(salt) != 32:
+            if config["format"] not in (EXTERNAL_FORMAT, "tgwatch-external-vault-v1") or len(salt) != 32:
                 raise RuntimeError("Invalid external vault metadata; restore the original file.")
-            key = HKDF(algorithm=hashes.SHA256(), length=32, salt=salt,
-                       info=b"TgWitness external vault v1").derive(base64.urlsafe_b64decode(master))
-            self.fernet = Fernet(base64.urlsafe_b64encode(key))
+            self.fernet = external_fernet(master, salt)
         else:
             if not key_path.exists():
                 if any(p.exists() for p in protected):
@@ -222,12 +220,85 @@ class KeyLock:
             self.stream.close()
 
 
+EXTERNAL_FORMAT = "tgwitness-external-vault-v1"
+
+
+def external_fernet(master, salt):
+    key = HKDF(algorithm=hashes.SHA256(), length=32, salt=salt,
+               info=b"TgWitness external vault v1").derive(base64.urlsafe_b64decode(master))
+    return Fernet(base64.urlsafe_b64encode(key))
+
+
+def read_master(master_file, root):
+    source = Path(master_file).resolve(strict=True)
+    if source.is_relative_to(Path(root).resolve()) or source.stat().st_size > 128:
+        raise ValueError("Provide a small master-key file outside the data directory.")
+    master = source.read_bytes().strip()
+    Fernet(master)
+    return master
+
+
+def migrate_to_external(root, master_file):
+    root = Path(root).resolve()
+    master = read_master(master_file, root)
+    folders = [root, *(sorted(p for p in (root / "profiles").iterdir() if p.is_dir()) if (root / "profiles").is_dir() else [])]
+    lock = InstanceLock(root)
+    moved = []
+    try:
+        for folder in folders:
+            key_path, marker = folder / "vault.key", folder / "vault.external.json"
+            if not key_path.exists():
+                for kept in folder.glob("*.enc.local"):
+                    kept.unlink()
+                continue
+            for kept in folder.glob("*.enc.local"):
+                os.replace(kept, kept.with_suffix(""))
+            if marker.exists():
+                marker.unlink()
+            local = Fernet(key_path.read_bytes())
+            salt = os.urandom(32)
+            external = external_fernet(master, salt)
+            files = sorted(folder.glob("*.enc"))
+            plain = {path: local.decrypt(path.read_bytes()) for path in files}
+            for path, data in plain.items():
+                private_write(path.with_name(path.name + ".new"), external.encrypt(data))
+            for path in files:
+                os.replace(path, path.with_name(path.name + ".local"))
+                os.replace(path.with_name(path.name + ".new"), path)
+            private_write(marker, json.dumps({"format": EXTERNAL_FORMAT,
+                                              "salt": base64.b64encode(salt).decode()}).encode())
+            for path, data in plain.items():
+                if external.decrypt(path.read_bytes()) != data:
+                    raise RuntimeError("Re-encrypted vault file does not read back: " + path.name)
+            key_path.unlink()
+            for path in files:
+                path.with_name(path.name + ".local").unlink()
+            moved.append({"workspace": str(folder.relative_to(root)) if folder != root else "default",
+                          "files": len(files)})
+    finally:
+        lock.close()
+    return moved
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Create an external vault master key without printing it.")
-    parser.add_argument("command", choices=["create-master-key"])
-    parser.add_argument("path", type=Path)
+    parser.add_argument("command", choices=["create-master-key", "migrate-to-external"])
+    parser.add_argument("path", type=Path, help="New master-key file, or with migrate-to-external the existing one")
+    parser.add_argument("--data-dir", type=Path, help="Data directory to migrate (the panel must be stopped)")
     args = parser.parse_args()
+    if args.command == "migrate-to-external":
+        if args.data_dir is None:
+            parser.exit(2, "Give the data directory with --data-dir.\n")
+        try:
+            moved = migrate_to_external(args.data_dir, args.path)
+        except (OSError, ValueError, RuntimeError) as exc:
+            parser.exit(1, "Migration stopped: " + str(exc) + "\n")
+        for item in moved:
+            print("Workspace " + item["workspace"] + ": " + str(item["files"]) + " vault files re-encrypted; vault.key removed.")
+        print("Start TgWitness with TGWITNESS_VAULT_KEY_FILE=" + str(Path(args.path).resolve()) + " from now on, "
+              "and keep that key file and its backup apart from the data directory.")
+        return
     try:
         fd = os.open(args.path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(fd, "wb") as output:

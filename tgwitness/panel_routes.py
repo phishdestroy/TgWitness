@@ -53,5 +53,7 @@ def register(app, static):
     for path in ALIASES:
         app.add_route(path, alias, methods=["GET", "HEAD"], name="panel-alias")
     for path in (*DOCUMENTS, "/chats/{chat_id}", "/journal/event/{seq}"):
+        if path in ALIASES:
+            continue
         app.add_route(path, document, methods=["GET", "HEAD"], name="panel-document")
     app.add_route("/groups/{group_id}", group_document, methods=["GET", "HEAD"], name="panel-group-document")

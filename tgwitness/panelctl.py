@@ -456,6 +456,22 @@ def reachable(url, expected=None):
         return False
 
 
+def release_of(text):
+    found = re.search(r"[\\/]versions[\\/]([0-9a-f]{12}-[0-9a-f]{12})[\\/]", text or "")
+    return found.group(1) if found else None
+
+
+def release_note(root, config):
+    from . import __version__
+    installed = release_of(sys.executable)
+    pid = background_pid(root) or listening_pid(config.get("port", 8787))
+    running = release_of(process_command(pid)) if pid else None
+    if running and installed and running != installed:
+        return ("Running release " + running + "; release " + installed + " is installed. Apply it with: "
+                "tgwitness restart")
+    return "Version " + __version__ + (" (release " + installed + ")" if installed else "")
+
+
 def show(root, credentials=False, wait=0):
     config = read_config(root)
     data = Path(config["data"])
@@ -485,6 +501,7 @@ def show(root, credentials=False, wait=0):
             raise ValueError("Panel readiness was not confirmed. Your installation and data were kept.")
         return
     print("\nYour panel is ready\n\n  Open: " + url)
+    print("  " + release_note(root, config))
     if credentials:
         print("  Access key: " + (data / "panel-token.txt").read_text().strip())
     print("\nData: " + str(data) + "\n\nManage: tgwitness status | open | restart | stop | logs\n"

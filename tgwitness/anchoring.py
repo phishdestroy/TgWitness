@@ -261,7 +261,7 @@ async def upgrade_pending_ots(store, network, settings, folder=None):
 
 class EvidenceMode(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    enabled: bool = False
+    enabled: bool = True
     tsa_urls: list[str] = Field(default_factory=lambda: list(DEFAULT_TSA), max_length=8)
     ots_calendars: list[str] = Field(default_factory=lambda: list(DEFAULT_OTS), max_length=8)
     interval_minutes: int = Field(default=10, ge=5, le=1440)
@@ -752,6 +752,9 @@ async def anchor_loop(store, network_config, wakeup, status, devices=None, gatew
         try:
             network = network_config()
             blocked = getattr(network, "kind", None) == "none"
+            if blocked:
+                status["outcome"] = "no_route"
+                continue
             record = await anchor_latest(store, network, settings)
             await upgrade_pending_ots(store, network, settings)
             await record_extras(store, network, settings, devices, gateway() if gateway else None)

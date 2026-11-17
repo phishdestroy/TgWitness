@@ -1,6 +1,7 @@
 import hashlib
 import json
 import logging
+import re
 import sqlite3
 import threading
 import time
@@ -33,6 +34,13 @@ JOURNAL_KIND_GROUPS = {"membership": ("membership.",), "media": ("media.",), "ac
                  "media.retry", "media.recovered", "deletion.unscoped", "session.",)}
 RECEPTION = ContextVar("journal_reception", default=None)
 CHAT_SETTINGS = ("recheck_last", "recheck_floor", "recheck_walked", "recheck_cursor")
+
+SCHEMA_VERSION = 1
+
+
+def version_key(version):
+    return tuple(int(part) for part in re.findall(r"\d+", str(version).split("+", 1)[0])[:3])
+
 
 def utcnow():
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
@@ -79,6 +87,12 @@ class Store:
         self.root = root
         self.lock = threading.RLock()
         self.db = sqlite3.connect(root / "journal.sqlite3", check_same_thread=False)
+        found = self.db.execute("PRAGMA user_version").fetchone()[0]
+        if found > SCHEMA_VERSION:
+            self.db.close()
+            raise RuntimeError("This journal was written by a newer TgWitness (storage schema %d; this program knows "
+                               "%d). Start that version or newer. Older versions can damage data they do not know."
+                               % (found, SCHEMA_VERSION))
         self.db.create_function("search_text", 1, search_text, deterministic=True)
         self.db.create_function("nul_text", 1, nul_text, deterministic=True)
         self.db.row_factory = sqlite3.Row
@@ -138,7 +152,18 @@ class Store:
             migrate_media(self.db)
             self.migrate_chat_settings()
             self.read_index = JournalIndex(self.db)
+        if found < SCHEMA_VERSION:
+            self.db.execute("PRAGMA user_version=%d" % SCHEMA_VERSION)
         self.fulltext = FullText(self)
+
+    def last_software_version(self):
+        with self.reading() as db:
+            row = db.execute("SELECT payload FROM events WHERE kind='process.started' ORDER BY seq DESC LIMIT 1").fetchone()
+        try:
+            version = json.loads(row[0]).get("version") if row else None
+        except ValueError:
+            return None
+        return version if isinstance(version, str) else None
 
     def migrate_chat_settings(self):
         for name in CHAT_SETTINGS:
@@ -709,14 +734,18 @@ class Store:
             return [self.decode(r) for r in db.execute("SELECT * FROM events ORDER BY seq")]
 
     @contextmanager
-    def snapshot(self):
+    def snapshot(self, through=None):
         connection = sqlite3.connect(self.root / "journal.sqlite3")
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA query_only=ON")
         connection.execute("BEGIN")
         try:
-            head = connection.execute("SELECT seq,hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
-            yield JournalSnapshot(connection, dict(head) if head else None)
+            if through is None:
+                head = connection.execute("SELECT seq,hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
+            else:
+                head = connection.execute("SELECT seq,hash FROM events WHERE seq<=? ORDER BY seq DESC LIMIT 1",
+                                          (int(through),)).fetchone()
+            yield JournalSnapshot(connection, dict(head) if head else None, through)
         finally:
             connection.rollback()
             connection.close()
@@ -999,15 +1028,22 @@ class Store:
 
 
 class JournalSnapshot:
-    def __init__(self, connection, head):
+    def __init__(self, connection, head, through=None):
         self.connection, self.head = connection, head
+        self.through = None if through is None else int(through)
 
     def events(self):
-        for row in self.connection.execute("SELECT * FROM events ORDER BY seq"):
+        if self.through is None:
+            rows = self.connection.execute("SELECT * FROM events ORDER BY seq")
+        else:
+            rows = self.connection.execute("SELECT * FROM events WHERE seq<=? ORDER BY seq", (self.through,))
+        for row in rows:
             yield Store.decode(row)
 
     def hash_at(self, seq):
         if seq == 0:
             return ZERO
+        if self.through is not None and seq > self.through:
+            return None
         row = self.connection.execute("SELECT hash FROM events WHERE seq=?", (seq,)).fetchone()
         return row[0] if row else None

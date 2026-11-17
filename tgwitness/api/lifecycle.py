@@ -32,12 +32,17 @@ from ..security import InstanceLock
 from ..security import Vault
 from ..storage import Storage
 from ..store import Store
+from ..store import version_key
 from ..workers import complete_in_thread
 from contextlib import asynccontextmanager
 from pathlib import Path
 import asyncio
+import logging
+import os
 import secrets
 import threading
+
+LOG = logging.getLogger("tgwitness.lifecycle")
 
 
 class LifecycleOperations:
@@ -177,6 +182,16 @@ class LifecycleOperations:
                 if quote is not None:
                     app.state.run_receipt["tdx_start"] = quote
             collector.run_id = app.state.run_receipt["run_id"]
+            last_version = store.last_software_version()
+            if (last_version and version_key(last_version) > version_key(__version__)
+                    and os.environ.get("TGWITNESS_ALLOW_DOWNGRADE") != "1"):
+                raise RuntimeError(
+                    "This journal was last opened by TgWitness " + last_version + ", newer than this "
+                    + __version__ + ". Start " + last_version + " or newer. To go back on purpose, restore the "
+                    "backup made before the update, or set TGWITNESS_ALLOW_DOWNGRADE=1 for this start.")
+            from .. import rollback
+
+            rolled_back = await asyncio.to_thread(rollback.check, store, vault.public_key)
             previous = store.stats()["head"]
             process_event = store.append(
                 "process.started",
@@ -188,6 +203,12 @@ class LifecycleOperations:
                 },
             )
             app.state.run_event_seq = process_event["seq"]
+            if rolled_back:
+                with store.transaction():
+                    store.append("journal.rolled_back", rolled_back)
+                    store.set_setting("journal_rollback", {**rolled_back, "detected_at": process_event["observed_at"]})
+                LOG.warning("Journal is behind the head recorded for this data directory (%d < %d): restored from "
+                            "an older copy", previous["seq"] if previous else 0, rolled_back["remembered"]["seq"])
             interactions.abandon(store, interactions.RESTART_STOP)
             retain_checkpoint(store, vault)
             journal_ready = True

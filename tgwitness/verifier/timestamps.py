@@ -316,7 +316,7 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
             raise ValueError("Unsupported signature algorithm or parameters in the timestamp certificate chain: "
                              + unsupported)
         if issuer is None:
-            raise ValueError("The timestamp certificate does not chain to a trusted root")
+            raise ValueError(TSA_UNTRUSTED)
         try:
             constraints = issuer.extensions.get_extension_for_class(x509.BasicConstraints).value
         except x509.ExtensionNotFound:
@@ -558,15 +558,39 @@ def confirm_ots(proof, digest, fetch=None):
     return summary
 
 
-def tsa_roots(path):
-    data = Path(path).read_bytes()
-    try:
-        roots = x509.load_pem_x509_certificates(data)
-    except ValueError:
-        roots = [x509.load_der_x509_certificate(data)]
+def tsa_paths(tsa_ca):
+    return [tsa_ca] if isinstance(tsa_ca, (str, Path)) else list(tsa_ca or ())
+
+
+def tsa_roots(tsa_ca):
+    roots = []
+    for path in tsa_paths(tsa_ca):
+        data = Path(path).read_bytes()
+        try:
+            found = x509.load_pem_x509_certificates(data)
+        except ValueError:
+            found = [x509.load_der_x509_certificate(data)]
+        if not found:
+            raise ValueError("The --tsa-ca file " + str(path) + " holds no certificate")
+        roots += found
     if not roots:
         raise ValueError("The --tsa-ca file holds no certificate")
     return roots
+
+
+TSA_CHECKED = "checked against the given root"
+TSA_NO_MATCHING_ROOT = "no matching root in --tsa-ca"
+TSA_UNTRUSTED = "The timestamp certificate does not chain to a trusted root"
+
+
+def tsa_signature_status(reply, roots):
+    try:
+        timestamp_signature(reply, roots)
+    except ValueError as exc:
+        if str(exc) == TSA_UNTRUSTED:
+            return TSA_NO_MATCHING_ROOT
+        raise
+    return TSA_CHECKED
 
 
 def qualified_timestamp(reply):
@@ -699,10 +723,12 @@ def timestamp_revocation(archive, names, base, reply, tsa_ca=None):
     found = [kind for kind in ("ocsp", "crl") if base + "." + kind in names]
     if not found:
         return {"status": "not checked", "detail": "revocation not checked (no OCSP/CRL in the archive)"}
-    try:
-        extra = x509.load_pem_x509_certificates(Path(tsa_ca).read_bytes()) if tsa_ca else []
-    except (OSError, ValueError):
-        extra = []
+    extra = []
+    for path in tsa_paths(tsa_ca):
+        try:
+            extra += x509.load_pem_x509_certificates(Path(path).read_bytes())
+        except (OSError, ValueError):
+            pass
     problems = []
     for kind in found:
         try:
@@ -715,6 +741,7 @@ def timestamp_revocation(archive, names, base, reply, tsa_ca=None):
 def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None, check_bitcoin=False):
     from .journal import verify_checkpoint
     results = []
+    roots = tsa_roots(tsa_ca) if tsa_paths(tsa_ca) else None
     for name in sorted(n for n in names if n.startswith("anchors/") and n.endswith(".json")):
         data = read_member(archive, name)
         retained_checkpoint = strict_json(data)
@@ -729,10 +756,8 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                 query_name = proof_name[:-4] + ".tsq"
                 query = read_member(archive, query_name) if query_name in names else None
                 entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query, data))
-                if tsa_ca:
-                    timestamp_signature(reply, tsa_roots(tsa_ca))
-                entry["signature"] = "checked against the given root" if tsa_ca else "not checked (use --tsa-ca)"
-                if tsa_ca:
+                entry["signature"] = tsa_signature_status(reply, roots) if roots else "not checked (use --tsa-ca)"
+                if entry["signature"] == TSA_CHECKED:
                     entry.update(qualified_timestamp(reply))
                 try:
                     entry.update(timestamp_certificate_reference(reply))

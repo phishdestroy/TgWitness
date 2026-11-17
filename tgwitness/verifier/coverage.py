@@ -178,6 +178,10 @@ class Coverage:
                                                                        payload.get("login_method"), at)
         elif kind == "session.import_warning":
             s.setdefault("import_warning_at", at)
+        elif kind == "session.takeover_risk" and isinstance(payload.get("risks"), list):
+            names = [r["kind"] for r in payload["risks"] if isinstance(r, dict) and isinstance(r.get("kind"), str)]
+            if names:
+                s.setdefault("takeover_risks", []).append({"at": at, "risks": names})
         elif kind == "account.security_event":
             counts = s.setdefault("security_events", {})
             name = str(payload.get("event_kind") or "security_notice")

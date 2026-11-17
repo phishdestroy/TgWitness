@@ -36,7 +36,12 @@ import asyncio
 import base64
 import binascii
 import json
+import logging
 import secrets
+
+LOG = logging.getLogger("tgwitness.export")
+SEALED_FORMATS = ("zip", "asice", "html", "json", "pdf")
+SEAL_SECONDS = 60
 
 
 class DisclosureConfirmation(BaseModel):
@@ -938,6 +943,7 @@ class ExportOperations:
                 include_board=include_board,
                 require_records=fmt in ("html", "json", "pdf"),
                 container=container,
+                through=sealed.get("through"),
             )
             try:
                 if password is not None:
@@ -959,6 +965,7 @@ class ExportOperations:
                 path.unlink(missing_ok=True)
                 raise
 
+        sealed = await self.seal_export() if fmt in SEALED_FORMATS else {}
         head = self.app.state.store.stats()["head"]["seq"]
         async with self.export_lock, self.app.state.storage.lock:
             if fmt in ("zip", "asice"):
@@ -993,12 +1000,37 @@ class ExportOperations:
         if fmt in ("zip", "asice"):
             export_history.evidence_exported(self.app.state.store, head)
         headers = export_history.headers(receipt)
+        headers["X-TgWitness-Sealed-Through"] = str(sealed["through"]) if sealed.get("through") else "none"
         if container is not None:
             headers["X-TgWitness-CAdES-Level"] = container["result"]["level"]
             if container.get("evidence_record"):
                 headers["X-TgWitness-Evidence-Record"] = ("error" if "error" in container["evidence_record"]
                                                           else container["evidence_record"]["time"])
         return (path, headers)
+
+    async def seal_export(self):
+        from ..anchoring import anchor_latest, evidence_settings
+        from ..evidence import retain_checkpoint
+
+        store, vault = self.app.state.store, self.app.state.vault
+        settings = evidence_settings(store)
+        if not settings["enabled"] or not (settings["tsa_urls"] or settings["ots_calendars"]):
+            return {"skipped": "timestamps turned off"}
+        network = self.app.state.collector.outside_route()
+        if getattr(network, "kind", None) == "none":
+            return {"skipped": "no route for requests outside Telegram"}
+        checkpoint = await asyncio.to_thread(retain_checkpoint, store, vault)
+        through = checkpoint["statement"]["event_count"]
+        name = "checkpoint-" + str(through).zfill(12)
+        try:
+            async with asyncio.timeout(SEAL_SECONDS):
+                await anchor_latest(store, network, settings)
+        except Exception as exc:
+            LOG.warning("Export seal for record %d failed: %s", through, type(exc).__name__)
+        folder = store.root / "checkpoints" / "anchors"
+        stamped = folder.is_dir() and any(proof.name.startswith(name + ".") and proof.suffix == ".tsr"
+                                          for proof in folder.iterdir())
+        return {"through": through} if through and stamped else {"skipped": "no timestamp authority answered"}
 
     def export_timestamp(self, loop):
         from ..anchoring import evidence_settings, post
