@@ -6,6 +6,7 @@ import secrets
 import time
 from collections import deque
 
+from cryptography.fernet import InvalidToken
 from telethon import functions, types, utils
 from telethon.extensions import BinaryReader
 
@@ -542,8 +543,13 @@ class Profiling(ProfileCapture):
 
     async def peer(self, run, job):
         if job["peer"]:
-            with BinaryReader(self.collector.vault.fernet.decrypt(job["peer"])) as reader:
-                return reader.tgread_object()
+            try:
+                saved = self.collector.vault.fernet.decrypt(job["peer"])
+            except InvalidToken:
+                saved = None
+            if saved is not None:
+                with BinaryReader(saved) as reader:
+                    return reader.tgread_object()
         peer = await self.ask(run, lambda: self.collector.client.get_input_entity(types.PeerUser(job["user_id"])))
         self.update_job(run, job, peer=self.collector.vault.fernet.encrypt(bytes(peer)))
         return peer

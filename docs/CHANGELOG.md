@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- `migrate-to-external` also re-encrypts resumable account-export queues and saved profiling peers; before, it removed
+  `vault.key` while they still needed it. Profiling re-resolves a saved peer that no longer opens.
 - RFC 3161 and OpenTimestamps timestamps are on by default where requests outside Telegram have a route, and every
   evidence export time-stamps its last record before it is built. Before, archives failed `--require evidence`
   because the records written after the last timestamp had no external time.
