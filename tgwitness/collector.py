@@ -3025,7 +3025,7 @@ class Collector:
             self.store.set_setting("takeover_risk", {**record, "at": utcnow()} if risks else None)
             self.store.append("session.takeover_risk", record)
         if risks:
-            LOG.warning("Imported session can be ended by whoever controls the account: %s",
+            LOG.warning("This session can be ended by whoever controls these account settings: %s",
                         ", ".join(risk["kind"] for risk in risks))
         return record
 
