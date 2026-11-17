@@ -4814,7 +4814,7 @@ function signinRouteNeeded(){
   return !c.account&&!r.chosen&&!r.managed&&r.kind==="mtproxy_auto";
 }
 const SIGNIN_ROUTE_HINTS={warp:"Own Cloudflare tunnel, more stable. Downloads helpers from GitHub on first use.",
-  mtproxy:"Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.",direct:"Telegram will see this server’s address."};
+  mtproxy:"Works without setup, but public servers come and go: connections drop more often and files download slower. WARP is more stable.",direct:"Telegram will see this server’s address."};
 function renderSigninRoute(){
   const needed=signinRouteNeeded(),hint=SIGNIN_ROUTE_HINTS[$("signin-route-mode").value];show("signin-route",needed);
   if(needed)$("signin-route-hint").textContent=hint?tr(hint):"";

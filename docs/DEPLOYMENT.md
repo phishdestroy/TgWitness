@@ -354,7 +354,13 @@ Media recovery is separate from Telegram update recovery and cannot recreate van
 
 ## Backup, restore, and capacity
 
-Stop the process before copying the **entire data directory**, including vault.key,
+`tgwitness backup FOLDER` copies the data directory while the panel keeps running: SQLite
+files through the online backup API, then keys, checkpoints, media and profiles, with a
+`backup-manifest.json` that lists every file's SHA-256 and the journal heads. To restore,
+stop TgWitness and replace the whole data directory with that folder. The next start
+records that the journal was restored from an older copy.
+
+Without the command, stop the process before copying the **entire data directory**, including vault.key,
 signing.enc, credentials.enc, SQLite database/WAL files, media, token, checkpoints,
 and all profiles/ subdirectories. Restore
 the complete copy while the destination service is stopped. Missing vault keys or

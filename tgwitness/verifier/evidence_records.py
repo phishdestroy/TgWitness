@@ -21,9 +21,11 @@ from .timestamps import (
     signed_attributes,
     signing_certificate_hash,
     stamp_time,
-    timestamp_signature,
+    TSA_CHECKED,
+    TSA_NO_MATCHING_ROOT,
     timestamp_token,
     tsa_roots,
+    tsa_signature_status,
     tst_info,
 )
 ERS_RECORD = re.compile(r"anchors/(checkpoint-\d{12,})(?:\.renewal-(\d{1,6}))?\.ers")
@@ -146,7 +148,7 @@ def ers_root(algorithm, values, partials):
 
 def ers_check(data, measure, roots=None, now=None):
     record = ers_parse(data)
-    previous, stamps, other = [], [], 0
+    previous, stamps, other, signatures = [], [], 0, []
     for index, chain in enumerate(record["chains"]):
         algorithm, where = chain["algorithm"], " of chain " + str(index + 1)
         if algorithm not in record["algorithms"]:
@@ -166,7 +168,7 @@ def ers_check(data, measure, roots=None, now=None):
             if not index and not position and stamp["partials"]:
                 other = len([value for value in stamp["partials"][0] if value not in values])
             if roots is not None:
-                timestamp_signature(stamp["reply"], roots)
+                signatures.append(tsa_signature_status(stamp["reply"], roots))
             if stamps and stamp["time"] < stamps[-1]["time"]:
                 raise ValueError("ArchiveTimeStamp " + str(position + 1) + where + " is older than the one it renews")
             stamps.append(stamp)
@@ -184,10 +186,12 @@ def ers_check(data, measure, roots=None, now=None):
                   "signer": newest["signer"].subject.rfc4514_string() if newest["signer"] is not None else None,
                   "expires": stamp_time(expires) if expires else None,
                   "state": "unknown" if expires is None else "in force" if now <= expires else "expired"}
-    if roots is not None:
+    if signatures and signatures[-1] == TSA_CHECKED:
         protection.update(qualified_timestamp(newest["reply"]))
     chains = record["chains"]
-    return {"record": record, "chains": len(chains), "stamps": len(stamps),
+    signature = ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if set(signatures) == {TSA_CHECKED}
+                 else TSA_NO_MATCHING_ROOT)
+    return {"record": record, "signature": signature, "chains": len(chains), "stamps": len(stamps),
             "timestamp_renewals": len(stamps) - len(chains), "hash_tree_renewals": len(chains) - 1,
             "algorithms": [ers_algorithm_name(chain["algorithm"]) for chain in chains],
             "earliest": stamp_time(stamps[0]["time"]), "proven_from": stamp_time(stamps[proven]["time"]),
@@ -214,7 +218,7 @@ def ers_stream(archive, name, algorithm):
 
 def ers_entry(summary, roots):
     return {**{key: value for key, value in summary.items() if key != "record"},
-            "signature": "checked against the given root" if roots is not None else "not checked (use --tsa-ca)"}
+            "signature": summary.get("signature") or ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED)}
 
 
 def verify_evidence_records(archive, names, container=(), tsa_ca=None, now=None):
@@ -266,7 +270,8 @@ def verify_evidence_records(archive, names, container=(), tsa_ca=None, now=None)
             "earliest": {"time": earliest["proven_from"], "subject": earliest["subject"],
                          "event_count": earliest.get("event_count")},
             "newest": weakest["newest"],
-            "signature": "checked against the given root" if roots is not None else "not checked (use --tsa-ca)"}
+            "signature": "not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if all(
+                entry["signature"] == TSA_CHECKED for entry in entries) else TSA_NO_MATCHING_ROOT}
 
 
 def ers_lines(records, t):

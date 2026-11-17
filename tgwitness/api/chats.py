@@ -613,7 +613,7 @@ async def chat_messages(
 
 
 def message_page(store, chat_id, before_id, limit, after_id, mode="all", search="", author_id=None):
-    from ..gap_analysis import page_gaps
+    from ..gap_analysis import offline_windows, page_gaps
 
     result = store.chat_messages(chat_id, before_id, limit, after_id=after_id,
                                  mode=mode, search=search, author_id=author_id)
@@ -627,6 +627,10 @@ def message_page(store, chat_id, before_id, limit, after_id, mode="all", search=
         before_id=before_id,
         after_id=after_id,
     )
+    times = sorted(m["sent_at"] for m in result["messages"] if isinstance(m.get("sent_at"), str))
+    newest_page = before_id is None and after_id is None
+    result["offline"] = offline_windows(store, since=times[0] if times else None,
+                                        until=None if newest_page or not times else times[-1])
     return result
 
 

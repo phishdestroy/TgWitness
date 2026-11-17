@@ -46,6 +46,8 @@ LIMITATIONS = [
 ]
 
 
+TERMINAL_PHASES = ("done", "partial", "failed")
+
 class AccountExportOptions(BaseModel):
     model_config = ConfigDict(extra="forbid")
     transport: Literal["auto", "takeout", "regular"] = "auto"
@@ -278,6 +280,11 @@ class AccountExport:
         return statement
 
     def public(self, job_id=None):
+        state = self.public_state(job_id)
+        state["terminal"] = state.get("phase") in TERMINAL_PHASES and not state.get("active")
+        return state
+
+    def public_state(self, job_id=None):
         job_id = job_id or (self.current or {}).get("id")
         if not job_id:
             return {"phase": "none", "active": False}

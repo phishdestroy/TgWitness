@@ -107,6 +107,11 @@ SECURITY_BASELINE_MEANING = ("Security notices from Telegram (user 777000) that 
                              "later records list only notices with a higher message ID.")
 SESSIONS_MEANING = ("Signed-in sessions of this account as Telegram lists them. 'current' is this workspace's session; "
                     "its address is stored as a SHA-256 digest with Telegram's country and region.")
+TAKEOVER_RISK_MEANING = (
+    "Signals that someone other than this operator can sign in to this account and end this session: "
+    "the session key was created by a different app ID than the one this client sends, or the account has a login "
+    "email, a recovery email or a two-step password. TgWitness cannot tell who controls them; if the operator did "
+    "not set them, the previous owner can sign in and end this session at any time.")
 SESSION_REVOKED_EXTERNALLY_MEANING = (
     "Telegram's session list no longer shows this workspace as the current session. "
     "auth.resetAuthorizations removes all other sessions from Telegram's list instantly "
@@ -768,6 +773,8 @@ class Collector:
             "api_pool_size": len(api_pool.POOL) - len(api_pool.rejected),
             "account": self.store.get_setting("account", None),
             "account_loss": self.store.get_setting("account_loss", None),
+            "takeover_risk": self.store.get_setting("takeover_risk", None),
+            "journal_rollback": self.store.get_setting("journal_rollback", None),
             "account_restriction": self.store.get_setting("account_restriction", None),
             "client": self.client_identity(credentials=credentials),
             "client_checks": self.store.get_setting("client_checks", None),
@@ -2471,6 +2478,7 @@ class Collector:
                                                    "name": utils.get_display_name(me) or None,
                                                    "key_origin": self.pending_key_origin})
                 self.store.set_setting("account_loss", None)
+                self.store.set_setting("takeover_risk", None)
                 login_method = self.pending_login_method or ("session_import" if self.pending_key_origin == "imported" else None)
                 self.store.append("account.authorized", {"account_id": me.id, "key_origin": self.pending_key_origin,
                                                          "client": self.client_identity(candidate),
@@ -2990,6 +2998,37 @@ class Collector:
         self.security_log_last_id = newest
         return last is None
 
+    async def assess_takeover_risk(self, client, snapshot):
+        current = (snapshot or {}).get("current") or {}
+        risks = []
+        sent, created = getattr(client, "api_id", None), current.get("api_id")
+        if sent and created and int(sent) != int(created):
+            risks.append({"kind": "app_id_mismatch", "session_app_id": int(created), "client_app_id": int(sent),
+                          "session_app": current.get("app_name"), "official_app": current.get("official_app")})
+        state, password_error = None, None
+        try:
+            state = await asyncio.wait_for(client(functions.account.GetPasswordRequest()), 30)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            password_error = type(exc).__name__
+        if state is not None:
+            if getattr(state, "login_email_pattern", None):
+                risks.append({"kind": "login_email", "pattern": state.login_email_pattern})
+            if getattr(state, "has_recovery", None) or getattr(state, "email_unconfirmed_pattern", None):
+                risks.append({"kind": "recovery_email",
+                              "unconfirmed_pattern": getattr(state, "email_unconfirmed_pattern", None) or None})
+            if getattr(state, "has_password", None):
+                risks.append({"kind": "two_step_password", "hint_set": bool(getattr(state, "hint", None))})
+        record = {"risks": risks, "password_check_error": password_error, "meaning": TAKEOVER_RISK_MEANING}
+        with self.store.transaction():
+            self.store.set_setting("takeover_risk", {**record, "at": utcnow()} if risks else None)
+            self.store.append("session.takeover_risk", record)
+        if risks:
+            LOG.warning("Imported session can be ended by whoever controls the account: %s",
+                        ", ".join(risk["kind"] for risk in risks))
+        return record
+
     async def _snapshot_session_state(self, trigger):
         client = self.client
         if not client or not client.is_connected():
@@ -3008,6 +3047,8 @@ class Collector:
                     "sessions_at_start": snapshot,
                     "meaning": ("This session was imported. Its auth_key may have been active "
                                 "on other devices before this observation started.")})
+            if snapshot is not None and trigger == "observation_start":
+                await self.assess_takeover_risk(client, snapshot)
             if snapshot and trigger == "observation_start":
                 others = snapshot.get("others", [])
                 if others:

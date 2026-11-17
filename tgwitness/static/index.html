@@ -1438,7 +1438,7 @@
       <label class="check-label" id="connect-keep-wrap" hidden><input type="checkbox" id="connect-keep" checked>Keep accounts that already have their own route</label>
       <div class="connect-routes" role="group" aria-label="Connection route">
         <button type="button" class="connect-route" data-connect-mode="warp" aria-pressed="true"><strong>WARP</strong><mark class="signin-route-badge">Recommended</mark><span>Managed local tunnel</span></button>
-        <button type="button" class="connect-route" data-connect-mode="mtproxy" aria-pressed="false"><strong>Public MTProxy</strong><span>Automatic pool</span></button>
+        <button type="button" class="connect-route" data-connect-mode="mtproxy" aria-pressed="false"><strong>Public MTProxy</strong><span>Less stable · automatic pool</span></button>
         <button type="button" class="connect-route" data-connect-mode="proxy" aria-pressed="false"><strong>My proxy</strong><span>Server or proxy URL</span></button>
         <button type="button" class="connect-route" data-connect-mode="vpn" aria-pressed="false"><strong>VPN</strong><span>Import WireGuard</span></button>
         <button type="button" class="connect-route" data-connect-mode="direct" aria-pressed="false"><strong>Direct</strong><span>This machine's IP</span></button>
@@ -1514,7 +1514,7 @@
         <div><label for="api-hash">API Hash</label><input autocomplete="off" id="api-hash" pattern="[a-fA-F0-9]{32}" placeholder="32-character hash" type="password"></div></div>
         <p class="hint" id="api-pair-help">Have <code>app_id:app_hash</code>? Paste the pair into API ID.</p><p class="hint api-purpose">These identify your app. To access an account, also use phone, QR or a session. An API Hash is different from an Auth Key.</p><p class="hint" id="api-pair-result" role="status"></p>
       </details>
-      <div class="signin-route" hidden id="signin-route"><label for="signin-route-mode">Connection for this account</label><select id="signin-route-mode"><option value="warp">WARP · recommended</option><option value="mtproxy">Public MTProxy · automatic pool</option><option value="direct">Direct · this machine's IP</option></select><p class="hint" id="signin-route-hint" role="status"></p></div>
+      <div class="signin-route" hidden id="signin-route"><label for="signin-route-mode">Connection for this account</label><select id="signin-route-mode"><option value="warp">WARP · recommended</option><option value="mtproxy">Public MTProxy · less stable</option><option value="direct">Direct · this machine's IP</option></select><p class="hint" id="signin-route-hint" role="status"></p></div>
       <div class="auth-actions"><button class="primary" id="auth-continue" type="submit">Continue</button><button class="primary" hidden id="start-qr" type="button">Show QR code</button></div>
       <p class="auth-progress hint" hidden id="auth-progress" role="status"></p>
       <a class="format-help" href="/guide.html#formats" rel="noopener" target="_blank">Format details &amp; examples ↗</a>
@@ -1752,7 +1752,7 @@
       <div><label for="fleet-group-name">New group name</label><input id="fleet-group-name" maxlength="80" placeholder="e.g. Scam monitors"></div>
       <div><label for="fleet-passcode">TData passcode · optional</label><input autocomplete="off" id="fleet-passcode" maxlength="512" type="password"></div>
       <div><label for="fleet-api">API ID:Hash · optional</label><input autocomplete="off" id="fleet-api" placeholder="Built-in pool when empty" spellcheck="false"></div>
-      <div><label for="fleet-route">Connection route</label><select id="fleet-route"><option value="warp">WARP · recommended</option><option value="mtproxy">Public MTProxy · automatic pool</option><option value="direct">Direct · this machine's IP</option></select></div>
+      <div><label for="fleet-route">Connection route</label><select id="fleet-route"><option value="warp">WARP · recommended</option><option value="mtproxy">Public MTProxy · less stable</option><option value="direct">Direct · this machine's IP</option></select></div>
     </div>
     <p class="hint" id="fleet-route-hint" role="status"></p>
     <label class="check-label" id="fleet-route-consent-wrap"><input type="checkbox" id="fleet-route-consent">Allow setup to download the pinned WARP helpers from GitHub and register a WARP device with Cloudflare for each account, under its terms.</label>

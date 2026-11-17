@@ -1,13 +1,19 @@
 import argparse
+import hashlib
 import json
 import os
+import shutil
 import sqlite3
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
-COMMANDS = ("index", "search", "context", "messages", "stats", "export")
+COMMANDS = ("index", "search", "context", "messages", "stats", "export", "backup")
+SQLITE_HEADER = b"SQLite format 3\x00"
+BACKUP_SKIP_SUFFIXES = ("-wal", "-shm", "-journal", ".tmp", ".pid")
+BACKUP_SKIP_NAMES = (".instance.lock",)
+BACKUP_SKIP_DIRS = ("temporary-exports",)
 EXIT_FAILURE, EXIT_USAGE, EXIT_BUSY, EXIT_REFUSED = 1, 2, 3, 4
 HTTP_EXITS = {401: EXIT_REFUSED, 403: EXIT_REFUSED, 404: EXIT_USAGE, 422: EXIT_USAGE, 429: EXIT_BUSY, 503: EXIT_BUSY}
 WEEKDAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
@@ -472,6 +478,86 @@ def export(archive, args):
     return None, None
 
 
+def is_sqlite(path):
+    try:
+        with open(path, "rb") as handle:
+            return handle.read(16) == SQLITE_HEADER
+    except OSError:
+        return False
+
+
+def file_sha256(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def backup(args):
+    root = (args.data_dir or default_root()).resolve()
+    target = args.destination.resolve()
+    if not (root / "journal.sqlite3").is_file():
+        print("No journal found in " + str(root), file=sys.stderr)
+        return EXIT_FAILURE
+    if target == root or target.is_relative_to(root) or root.is_relative_to(target):
+        print("Choose a backup folder outside the data directory.", file=sys.stderr)
+        return EXIT_USAGE
+    if target.exists() and any(target.iterdir()):
+        print("The backup folder must be new or empty: " + str(target), file=sys.stderr)
+        return EXIT_USAGE
+    target.mkdir(parents=True, exist_ok=True, mode=0o700)
+    files, databases, others = [], [], []
+    for folder, directories, names in os.walk(root):
+        directories[:] = [d for d in directories if d not in BACKUP_SKIP_DIRS]
+        for name in names:
+            path = Path(folder) / name
+            if name in BACKUP_SKIP_NAMES or name.endswith(BACKUP_SKIP_SUFFIXES) or not path.is_file():
+                continue
+            (databases if is_sqlite(path) else others).append(path)
+    for path in databases + others:
+        relative = path.relative_to(root)
+        copy = target / relative
+        copy.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        if path in databases:
+            source = sqlite3.connect("file:" + path.as_posix() + "?mode=ro", uri=True)
+            destination = sqlite3.connect(copy)
+            try:
+                source.backup(destination)
+            finally:
+                destination.close()
+                source.close()
+        else:
+            try:
+                shutil.copy2(path, copy)
+            except FileNotFoundError:
+                continue
+        os.chmod(copy, 0o600)
+        files.append({"path": relative.as_posix(), "bytes": copy.stat().st_size, "sha256": file_sha256(copy)})
+    heads = {}
+    for name, workspace in workspaces(target, "all"):
+        connection = sqlite3.connect("file:" + (workspace / "journal.sqlite3").as_posix() + "?mode=ro&immutable=1", uri=True)
+        try:
+            row = connection.execute("SELECT seq, hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
+        finally:
+            connection.close()
+        heads[name] = {"seq": row[0], "hash": row[1]} if row else None
+    from . import __version__
+    manifest = {"format": "tgwitness-backup-v1", "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "source": str(root), "version": __version__, "journal_heads": heads, "files": files,
+                "restore": "Stop TgWitness, replace the whole data directory with this folder (without this manifest), "
+                           "then start. The journal records that it was restored from an older copy."}
+    (target / "backup-manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
+    os.chmod(target / "backup-manifest.json", 0o600)
+    summary = {"backup": str(target), "files": len(files), "databases": len(databases),
+               "bytes": sum(item["bytes"] for item in files), "journal_heads": heads}
+    print(json.dumps(summary, ensure_ascii=False) if args.json else
+          "Backed up " + str(len(files)) + " files (" + str(len(databases)) + " databases) to " + str(target)
+          + "\nJournal heads: " + ", ".join(k + " #" + str((v or {}).get("seq")) for k, v in heads.items())
+          + "\nKeep this folder as private as the data directory: it holds the Telegram session and signing keys.")
+    return 0
+
+
 def archive_command(args):
     try:
         archive = open_archive(args)
@@ -566,7 +652,14 @@ def main(argv=None):
     dumped = commands.add_parser("export", parents=[common, dates], help="Saved observations as JSON Lines in journal order")
     dumped.add_argument("--chat", type=int, help="Chat ID (default: every chat in scope)")
     dumped.add_argument("--output", help="Write to this new file instead of stdout")
+    saved = commands.add_parser("backup", help="Copy the whole data directory while the panel keeps running")
+    saved.add_argument("destination", type=Path, help="New or empty folder outside the data directory")
+    saved.add_argument("--data-dir", type=Path, default=None,
+                       help="Data directory (default TGWITNESS_DATA, data/live or this installation's data)")
+    saved.add_argument("--json", action="store_true", help="Print one JSON document on stdout")
     args = parser.parse_args(argv)
     if args.command == "index":
         return index(args)
+    if args.command == "backup":
+        return backup(args)
     return archive_command(args)

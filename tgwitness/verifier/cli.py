@@ -156,8 +156,9 @@ def interactive_verify(args):
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
                  "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
-        if getattr(args, name):
-            command += ["--" + name.replace("_", "-"), str(getattr(args, name))]
+        value = getattr(args, name)
+        for item in value if isinstance(value, list) else [value] if value else ():
+            command += ["--" + name.replace("_", "-"), str(item)]
     for name in ("require_witness", "check_drand", "check_bitcoin", "strict", "board", "no_color"):
         if getattr(args, name):
             command.append("--" + name.replace("_", "-"))
@@ -215,7 +216,9 @@ def verification_parser():
                         help="Evidence/chat/account/disclosure/witness ZIP, report JSON/HTML, or a stopped distributed acquisition directory")
     parser.add_argument("--fingerprint", help="Public key fingerprint retained independently")
     parser.add_argument("--checkpoint", type=Path, help="Previously retained signed checkpoint JSON")
-    parser.add_argument("--tsa-ca", type=Path, help="Root certificate of the timestamp authority (PEM)")
+    parser.add_argument("--tsa-ca", type=Path, action="append",
+                        help="Root certificate(s) of a timestamp authority (PEM); repeat for several authorities. "
+                             "Tokens from an authority without a root here are reported as not checked")
     parser.add_argument("--witness", type=Path, help="Witness journal export to cross-check an evidence ZIP against")
     parser.add_argument("--witness-fingerprint", help="Witness key fingerprint retained independently")
     parser.add_argument("--require-witness", action="store_true",
@@ -306,6 +309,19 @@ def verification_interactive(args, parser):
     raise SystemExit(code)
 
 
+def archive_kind(path):
+    try:
+        with zipfile.ZipFile(path) as archive:
+            manifest = json.loads(archive.read("manifest.json"))
+    except (OSError, KeyError, ValueError, zipfile.BadZipFile):
+        return None
+    value = str(manifest.get("format", "")) if isinstance(manifest, dict) else ""
+    for kind, marker in (("chat", "chat-export"), ("account", "account-export"), ("evidence", "evidence")):
+        if marker in value:
+            return kind
+    return value or None
+
+
 def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
@@ -314,6 +330,11 @@ def verification_comparison(args, parser, mode):
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
     try:
+        for path in (args.bundle, args.compare):
+            kind = archive_kind(path)
+            if kind and kind != "chat":
+                raise ValueError("--compare compares two chat exports; " + str(path) + " is not one (" + kind + " archive)"
+                                 + ". Verify each archive on its own")
         compared = compare_chat_exports(args.bundle, args.compare, args.fingerprint, args.compare_fingerprint, args.max_gib)
     except Exception as exc:
         code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1

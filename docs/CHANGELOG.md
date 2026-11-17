@@ -25,6 +25,30 @@
 
 ## Unreleased
 
+- RFC 3161 and OpenTimestamps timestamps are on by default where requests outside Telegram have a route, and every
+  evidence export time-stamps its last record before it is built. Before, archives failed `--require evidence`
+  because the records written after the last timestamp had no external time.
+- `verify.py --tsa-ca` can be repeated, and a token from an authority without a given root is reported as not
+  checked instead of failing the whole archive. A token with a bad signature still fails.
+- Chat exports include the saved files of messages that were deleted or edited, linked to their signed
+  `media.saved` records in the manifest. Before, those files were only in the evidence ZIP.
+- `tgwitness backup FOLDER` copies the data directory while the panel keeps running, with SHA-256 for every file
+  and the journal head of each workspace.
+- A journal restored from an older copy is recorded as `journal.rolled_back` at the next start and shown in the
+  status, so archives exported before and after the restore can be told apart.
+- The storage schema is versioned. TgWitness refuses data written by a newer schema, and a journal last opened by a
+  newer version, unless `TGWITNESS_ALLOW_DOWNGRADE=1` is set for that start.
+- `python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA` moves an existing local vault to an
+  external master key and recovers if it is interrupted.
+- Observation start records `session.takeover_risk` when the session key was created by another app ID or the
+  account has a login email, recovery email or two-step password, and the verifier reports it.
+- Chat pages list the times the collector was offline, with deletions Telegram reported without a chat while it
+  caught up.
+- Public MTProxy is marked as less stable in route choices; WARP stays recommended.
+- `tgwitness status` shows the running version and an installed update waiting for a restart; `doctor` no longer
+  fails the address check for its own running panel; `verify.py --compare` explains that it compares chat exports.
+- Account export status carries `terminal`; duplicate panel routes are gone; Python files keep LF line endings on
+  every checkout, so `verify.py` hashes the same on Windows.
 - Messages can be forwarded from the chat view: “Forward” under a message or for up to 100 selected messages, to a
   chat picked by name. It uses the account's message pace and is recorded in the journal. “Forward chat” now picks an
   existing destination by name instead of asking for its numeric Telegram ID.

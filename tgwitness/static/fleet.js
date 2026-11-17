@@ -484,7 +484,7 @@
 
   const ROUTE_HINTS = {
     warp: "Each account gets its own WARP tunnel before its first sign-in. Many Cloudflare users share WARP exit addresses.",
-    mtproxy: "Sessions reach Telegram through public MTProxy servers from open lists. Files download slower.",
+    mtproxy: "Works without setup, but public servers come and go: connections drop more often and files download slower. WARP is more stable.",
     direct: "Telegram sees this machine's public IP address for every imported account."};
 
   function routeHint() {

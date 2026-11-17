@@ -19,6 +19,7 @@ COMMANDS_HELP = """commands:
   verify ARCHIVE        Check a signed export, report or proof offline
   index, search, context, messages, stats, export
                         Read the saved journal from the command line
+  backup FOLDER         Copy the data directory while the panel keeps running
 
 Commands from setup to tunnel need a copy installed by install.sh or install.ps1.
 Details: tgwitness COMMAND --help

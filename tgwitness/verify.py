@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: c65860da775172686ec57fc4d70ba7579ed28e945c89ef6cc1e6f45a607c0c05
+# TgWitness verifier sources SHA-256: 12cf6c55b8321f39238264f6457643120165b9c376323d2694de380e9ea163a8
 """Standalone verifier"""
 import argparse
 import base64
@@ -1468,7 +1468,7 @@ def timestamp_signature(reply, roots, *, include_reference=False, intermediates=
             raise ValueError("Unsupported signature algorithm or parameters in the timestamp certificate chain: "
                              + unsupported)
         if issuer is None:
-            raise ValueError("The timestamp certificate does not chain to a trusted root")
+            raise ValueError(TSA_UNTRUSTED)
         try:
             constraints = issuer.extensions.get_extension_for_class(x509.BasicConstraints).value
         except x509.ExtensionNotFound:
@@ -1709,15 +1709,39 @@ def confirm_ots(proof, digest, fetch=None):
     return summary
 
 
-def tsa_roots(path):
-    data = Path(path).read_bytes()
-    try:
-        roots = x509.load_pem_x509_certificates(data)
-    except ValueError:
-        roots = [x509.load_der_x509_certificate(data)]
+def tsa_paths(tsa_ca):
+    return [tsa_ca] if isinstance(tsa_ca, (str, Path)) else list(tsa_ca or ())
+
+
+def tsa_roots(tsa_ca):
+    roots = []
+    for path in tsa_paths(tsa_ca):
+        data = Path(path).read_bytes()
+        try:
+            found = x509.load_pem_x509_certificates(data)
+        except ValueError:
+            found = [x509.load_der_x509_certificate(data)]
+        if not found:
+            raise ValueError("The --tsa-ca file " + str(path) + " holds no certificate")
+        roots += found
     if not roots:
         raise ValueError("The --tsa-ca file holds no certificate")
     return roots
+
+
+TSA_CHECKED = "checked against the given root"
+TSA_NO_MATCHING_ROOT = "no matching root in --tsa-ca"
+TSA_UNTRUSTED = "The timestamp certificate does not chain to a trusted root"
+
+
+def tsa_signature_status(reply, roots):
+    try:
+        timestamp_signature(reply, roots)
+    except ValueError as exc:
+        if str(exc) == TSA_UNTRUSTED:
+            return TSA_NO_MATCHING_ROOT
+        raise
+    return TSA_CHECKED
 
 
 def qualified_timestamp(reply):
@@ -1850,10 +1874,12 @@ def timestamp_revocation(archive, names, base, reply, tsa_ca=None):
     found = [kind for kind in ("ocsp", "crl") if base + "." + kind in names]
     if not found:
         return {"status": "not checked", "detail": "revocation not checked (no OCSP/CRL in the archive)"}
-    try:
-        extra = x509.load_pem_x509_certificates(Path(tsa_ca).read_bytes()) if tsa_ca else []
-    except (OSError, ValueError):
-        extra = []
+    extra = []
+    for path in tsa_paths(tsa_ca):
+        try:
+            extra += x509.load_pem_x509_certificates(Path(path).read_bytes())
+        except (OSError, ValueError):
+            pass
     problems = []
     for kind in found:
         try:
@@ -1865,6 +1891,7 @@ def timestamp_revocation(archive, names, base, reply, tsa_ca=None):
 
 def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None, check_bitcoin=False):
     results = []
+    roots = tsa_roots(tsa_ca) if tsa_paths(tsa_ca) else None
     for name in sorted(n for n in names if n.startswith("anchors/") and n.endswith(".json")):
         data = read_member(archive, name)
         retained_checkpoint = strict_json(data)
@@ -1879,10 +1906,8 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                 query_name = proof_name[:-4] + ".tsq"
                 query = read_member(archive, query_name) if query_name in names else None
                 entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query, data))
-                if tsa_ca:
-                    timestamp_signature(reply, tsa_roots(tsa_ca))
-                entry["signature"] = "checked against the given root" if tsa_ca else "not checked (use --tsa-ca)"
-                if tsa_ca:
+                entry["signature"] = tsa_signature_status(reply, roots) if roots else "not checked (use --tsa-ca)"
+                if entry["signature"] == TSA_CHECKED:
                     entry.update(qualified_timestamp(reply))
                 try:
                     entry.update(timestamp_certificate_reference(reply))
@@ -2513,7 +2538,7 @@ def ers_root(algorithm, values, partials):
 
 def ers_check(data, measure, roots=None, now=None):
     record = ers_parse(data)
-    previous, stamps, other = [], [], 0
+    previous, stamps, other, signatures = [], [], 0, []
     for index, chain in enumerate(record["chains"]):
         algorithm, where = chain["algorithm"], " of chain " + str(index + 1)
         if algorithm not in record["algorithms"]:
@@ -2533,7 +2558,7 @@ def ers_check(data, measure, roots=None, now=None):
             if not index and not position and stamp["partials"]:
                 other = len([value for value in stamp["partials"][0] if value not in values])
             if roots is not None:
-                timestamp_signature(stamp["reply"], roots)
+                signatures.append(tsa_signature_status(stamp["reply"], roots))
             if stamps and stamp["time"] < stamps[-1]["time"]:
                 raise ValueError("ArchiveTimeStamp " + str(position + 1) + where + " is older than the one it renews")
             stamps.append(stamp)
@@ -2551,10 +2576,12 @@ def ers_check(data, measure, roots=None, now=None):
                   "signer": newest["signer"].subject.rfc4514_string() if newest["signer"] is not None else None,
                   "expires": stamp_time(expires) if expires else None,
                   "state": "unknown" if expires is None else "in force" if now <= expires else "expired"}
-    if roots is not None:
+    if signatures and signatures[-1] == TSA_CHECKED:
         protection.update(qualified_timestamp(newest["reply"]))
     chains = record["chains"]
-    return {"record": record, "chains": len(chains), "stamps": len(stamps),
+    signature = ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if set(signatures) == {TSA_CHECKED}
+                 else TSA_NO_MATCHING_ROOT)
+    return {"record": record, "signature": signature, "chains": len(chains), "stamps": len(stamps),
             "timestamp_renewals": len(stamps) - len(chains), "hash_tree_renewals": len(chains) - 1,
             "algorithms": [ers_algorithm_name(chain["algorithm"]) for chain in chains],
             "earliest": stamp_time(stamps[0]["time"]), "proven_from": stamp_time(stamps[proven]["time"]),
@@ -2581,7 +2608,7 @@ def ers_stream(archive, name, algorithm):
 
 def ers_entry(summary, roots):
     return {**{key: value for key, value in summary.items() if key != "record"},
-            "signature": "checked against the given root" if roots is not None else "not checked (use --tsa-ca)"}
+            "signature": summary.get("signature") or ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED)}
 
 
 def verify_evidence_records(archive, names, container=(), tsa_ca=None, now=None):
@@ -2633,7 +2660,8 @@ def verify_evidence_records(archive, names, container=(), tsa_ca=None, now=None)
             "earliest": {"time": earliest["proven_from"], "subject": earliest["subject"],
                          "event_count": earliest.get("event_count")},
             "newest": weakest["newest"],
-            "signature": "checked against the given root" if roots is not None else "not checked (use --tsa-ca)"}
+            "signature": "not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if all(
+                entry["signature"] == TSA_CHECKED for entry in entries) else TSA_NO_MATCHING_ROOT}
 
 
 def ers_lines(records, t):
@@ -3155,6 +3183,10 @@ class Coverage:
                                                                        payload.get("login_method"), at)
         elif kind == "session.import_warning":
             s.setdefault("import_warning_at", at)
+        elif kind == "session.takeover_risk" and isinstance(payload.get("risks"), list):
+            names = [r["kind"] for r in payload["risks"] if isinstance(r, dict) and isinstance(r.get("kind"), str)]
+            if names:
+                s.setdefault("takeover_risks", []).append({"at": at, "risks": names})
         elif kind == "account.security_event":
             counts = s.setdefault("security_events", {})
             name = str(payload.get("event_kind") or "security_notice")
@@ -10314,7 +10346,10 @@ class Console:
                 times = sorted(item["time"] for item in items if item.get("time"))
                 span = "?" if not times else shown(times[0]) + (" – " + shown(times[-1]) if times[-1] != times[0] else "")
                 self.check("ok" if checked == len(items) else "warn", "RFC 3161 · " + service, point + " · " + span)
-                if checked in (0, len(items)):
+                unmatched = sum(item.get("signature", "").startswith("no matching root") for item in items)
+                if unmatched == len(items):
+                    note(self.t("signature not checked: no matching root in --tsa-ca"))
+                elif checked in (0, len(items)):
                     note(self.t("signature chained to your root" if checked else "signature not checked: add --tsa-ca"))
                 else:
                     note(self.t("signature chained to your root") + ": " + self.number(checked) + " / " + self.number(len(items)))
@@ -10818,8 +10853,9 @@ def interactive_verify(args):
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
                  "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
-        if getattr(args, name):
-            command += ["--" + name.replace("_", "-"), str(getattr(args, name))]
+        value = getattr(args, name)
+        for item in value if isinstance(value, list) else [value] if value else ():
+            command += ["--" + name.replace("_", "-"), str(item)]
     for name in ("require_witness", "check_drand", "check_bitcoin", "strict", "board", "no_color"):
         if getattr(args, name):
             command.append("--" + name.replace("_", "-"))
@@ -10877,7 +10913,9 @@ def verification_parser():
                         help="Evidence/chat/account/disclosure/witness ZIP, report JSON/HTML, or a stopped distributed acquisition directory")
     parser.add_argument("--fingerprint", help="Public key fingerprint retained independently")
     parser.add_argument("--checkpoint", type=Path, help="Previously retained signed checkpoint JSON")
-    parser.add_argument("--tsa-ca", type=Path, help="Root certificate of the timestamp authority (PEM)")
+    parser.add_argument("--tsa-ca", type=Path, action="append",
+                        help="Root certificate(s) of a timestamp authority (PEM); repeat for several authorities. "
+                             "Tokens from an authority without a root here are reported as not checked")
     parser.add_argument("--witness", type=Path, help="Witness journal export to cross-check an evidence ZIP against")
     parser.add_argument("--witness-fingerprint", help="Witness key fingerprint retained independently")
     parser.add_argument("--require-witness", action="store_true",
@@ -10968,6 +11006,19 @@ def verification_interactive(args, parser):
     raise SystemExit(code)
 
 
+def archive_kind(path):
+    try:
+        with zipfile.ZipFile(path) as archive:
+            manifest = json.loads(archive.read("manifest.json"))
+    except (OSError, KeyError, ValueError, zipfile.BadZipFile):
+        return None
+    value = str(manifest.get("format", "")) if isinstance(manifest, dict) else ""
+    for kind, marker in (("chat", "chat-export"), ("account", "account-export"), ("evidence", "evidence")):
+        if marker in value:
+            return kind
+    return value or None
+
+
 def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
@@ -10976,6 +11027,11 @@ def verification_comparison(args, parser, mode):
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
     try:
+        for path in (args.bundle, args.compare):
+            kind = archive_kind(path)
+            if kind and kind != "chat":
+                raise ValueError("--compare compares two chat exports; " + str(path) + " is not one (" + kind + " archive)"
+                                 + ". Verify each archive on its own")
         compared = compare_chat_exports(args.bundle, args.compare, args.fingerprint, args.compare_fingerprint, args.max_gib)
     except Exception as exc:
         code = 3 if args.strict and isinstance(exc, VerifierTooOld) else 1

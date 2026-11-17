@@ -105,6 +105,8 @@ def retain_checkpoint(store, vault):
     if not numbered.exists():
         private_write(numbered, data)
     private_write(directory / "latest.json", data)
+    from . import rollback
+    rollback.remember(store, vault.public_key)
     return value
 
 
@@ -174,7 +176,7 @@ class EmptyReport(ValueError):
 
 
 def export_file(store, vault, fmt, options=None, *, include_board=True, compact=False, output_stream=None,
-                max_uncompressed_bytes=None, require_records=False, container=None):
+                max_uncompressed_bytes=None, require_records=False, container=None, through=None):
     if fmt not in ("jsonl", "csv", "html", "json", "pdf", "zip"):
         raise ValueError("Unsupported export format")
     if container is not None and (fmt != "zip" or output_stream is not None):
@@ -196,8 +198,11 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
         path = Path(temp.name)
         temp.close()
     try:
-        retained = store.retained_checkpoint()
-        with store.snapshot() as snapshot:
+        sealed = store.root / "checkpoints" / ("checkpoint-" + str(through).zfill(12) + ".json") if through else None
+        retained = json.loads(sealed.read_bytes()) if sealed and sealed.is_file() else store.retained_checkpoint()
+        if through and retained and retained["statement"]["event_count"] > through:
+            retained = None
+        with store.snapshot(through=through) as snapshot:
             snapshot_at = utcnow()
             from . import board
             board_export = board.export_state(snapshot.connection, vault) if include_board and board.head(snapshot.connection)["seq"] else None

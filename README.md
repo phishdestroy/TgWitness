@@ -83,7 +83,7 @@ Choose a task when you open the panel:
 | **Follow chats** | Collect accessible history and keep observing new messages, captured edits and deletion notices. |
 | **Evidence for a case** | Select records, add a cover and charts, then share PDF, HTML or JSON reports with verification data. |
 
-RFC 3161 and OpenTimestamps timestamps are on by default in every task; the `.tsr` and `.ots` files in `anchors/` let anyone check an archive. **Evidence for a case** also records drand rounds, saves all files, hides the server's IP address from Telegram and turns off Telegram actions from the panel.
+RFC 3161 and OpenTimestamps timestamps are on by default whenever requests outside Telegram have a route, and every evidence export time-stamps its last record before it is built; the `.tsr` and `.ots` files in `anchors/` let anyone check an archive. When the server's IP is hidden and no separate proxy is set for outside requests, archives carry no external time and say so. **Evidence for a case** also records drand rounds, saves all files, hides the server's IP address from Telegram and turns off Telegram actions from the panel.
 
 <details>
 <summary><strong>All capabilities · people, reports, accounts, Secret Chats and verification</strong></summary>

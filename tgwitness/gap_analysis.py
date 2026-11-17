@@ -1,6 +1,7 @@
 import json
 import sqlite3
 import time
+from datetime import datetime, timedelta
 
 from .verify import CHANNEL_IDS_BELOW, GAP_DEFAULTS, MESSAGE_KINDS, Sequences, missing_ranges, numbered_per_chat
 
@@ -83,3 +84,46 @@ def capture_summary(store, chat_ids=None, *, chat_id=None, budget=4, titles=None
     if not complete:
         summary["partial"] = "Time limit reached; only part of the journal was measured. Choose one chat."
     return summary
+
+
+OFFLINE_MEANING = ("The collector process was not running between these times, so nothing was recorded live. Messages "
+                   "sent and deleted inside this window can be missing without a trace; unattributed_deletions counts "
+                   "deletions Telegram reported without a chat while the collector caught up after the restart.")
+CATCH_UP_SECONDS = 900
+
+
+def offline_windows(store, since=None, until=None, budget=2):
+    try:
+        rows = store.bounded_read("SELECT seq, observed_at, payload FROM events WHERE kind='process.started' ORDER BY seq",
+                                  [], budget)
+    except TimeoutError:
+        return []
+    windows = []
+    for seq, started_at, payload in rows:
+        try:
+            previous = (json.loads(payload).get("previous_observation") or {})
+        except ValueError:
+            continue
+        stopped_at = previous.get("observed_at")
+        if not isinstance(stopped_at, str) or (since and started_at < since) or (until and stopped_at > until):
+            continue
+        windows.append({"from": stopped_at, "to": started_at, "process_started_seq": seq})
+    for window in windows:
+        start = parse_time(window["to"])
+        limit = None if start is None else (start + timedelta(seconds=CATCH_UP_SECONDS)).isoformat(timespec="milliseconds")
+        try:
+            found = store.bounded_read("SELECT count(*) FROM events WHERE kind='deletion.unscoped' AND seq>? "
+                                       "AND observed_at<=?", [window["process_started_seq"], limit or window["to"]],
+                                       budget)
+            window["unattributed_deletions"] = found[0][0] if found else 0
+        except TimeoutError:
+            window["unattributed_deletions"] = None
+        window["meaning"] = OFFLINE_MEANING
+    return windows
+
+
+def parse_time(value):
+    try:
+        return datetime.fromisoformat(value)
+    except (TypeError, ValueError):
+        return None

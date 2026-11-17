@@ -74,7 +74,19 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
             probe.bind((host, port))
         add("listen_address", "pass", "Address and port available at check time")
     except (OSError, ValueError):
-        add("listen_address", "fail", "Use a local IP and available port; a running instance may already own it.")
+        running = False
+        if root.exists():
+            from .security import InstanceLock
+            try:
+                InstanceLock(root).close()
+            except RuntimeError:
+                running = True
+            except OSError:
+                pass
+        if running:
+            add("listen_address", "pass", "The panel of this data directory is running and holds the port")
+        else:
+            add("listen_address", "fail", "Use a local IP and available port; a running instance may already own it.")
 
     external = os.environ.get("TGWITNESS_VAULT_KEY_FILE")
     marker = root / "vault.external.json"
@@ -92,7 +104,7 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
     elif marker.exists():
         add("external_key", "fail", "This data directory requires TGWITNESS_VAULT_KEY_FILE")
     else:
-        add("vault_mode", "warning", "Default local key mode; use encrypted storage for journal and attachments")
+        add("vault_mode", "warning", "vault.key sits next to the encrypted session and signing key, so any copy of the data directory opens them. Move it out: python -m tgwitness.security create-master-key KEYFILE, stop TgWitness, python -m tgwitness.security migrate-to-external KEYFILE --data-dir DATA, then start with TGWITNESS_VAULT_KEY_FILE=KEYFILE")
     if os.environ.get("TGWITNESS_TOKEN") and len(os.environ["TGWITNESS_TOKEN"]) < 24:
         add("panel_token", "fail", "TGWITNESS_TOKEN must contain at least 24 characters")
     return {"ready": not any(c["status"] == "fail" for c in checks), "platform": platform.platform(),
