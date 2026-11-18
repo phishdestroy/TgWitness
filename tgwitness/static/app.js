@@ -2358,7 +2358,7 @@ function evidenceWorkspace(){
   return state.status?.setup_goal==='evidence'||EVIDENCE_MODES.includes(modesUI?.mode());
 }
 async function confirmOtherSessions(){
-  if(state.status?.demo||!evidenceWorkspace())return true;
+  if(state.status?.demo||!evidenceWorkspace()||(state.status?.scope?.mode==="selected"&&state.status?.scope?.strict))return true;
   const owner=actionOwner();
   let others=0;
   try{

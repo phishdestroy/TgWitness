@@ -105,11 +105,23 @@ a permission that covers the chosen chats only. While it is on:
 
 - Telegram's service notifications (777000) are not read: not when observation starts or stops and not every
   minute while observing. No `session.security_baseline` or `account.security_event` records are written.
-- The account's session list is not read: not when observation starts or stops, not every two minutes while
-  observing, not when a connection opens, and not by the connection check, whose *Current authorization* entry
-  is shown as skipped. The two-step verification status used by the takeover check is not read either. So
-  `account.sessions`, `session.concurrent_at_start` and `session.takeover_risk` are not written, and a session
-  ended from another device is not reported as `session_revoked_externally`.
+- The account's session list is not read: not when observation starts or stops (the panel's question about
+  other sessions for **Evidence for a case** and the evidence protection modes is skipped too), not every two
+  minutes while observing, not when a connection opens, and not by the connection check, whose *Current
+  authorization* entry is shown as skipped. The two-step verification status used by the takeover check is not
+  read either. So `account.sessions`, `session.concurrent_at_start` and `session.takeover_risk` are not written,
+  and a session ended from another device is not reported as `session_revoked_externally`.
+- While this is the only session of the account (**Make this the only session** or its automatic version), the
+  session list is still read every two minutes while observing and when a connection opens, so that
+  `session.exclusive_ended` is recorded when another session appears. 777000 stays unread in that period, although
+  the `session.exclusive_from` record says Telegram's sign-in notices keep being recorded.
+- Deletion notices are compared with a session check only if one ran in the last 10 minutes (while this is the
+  only session, or after opening **Sessions of this account**). Otherwise, unless the last rights check shows that
+  this account could not delete the message (never so in private chats and ordinary groups), they read: *Who
+  deleted it is not known: this account itself, from another session or device, could also have deleted it.*
+- With a session key that was imported, nothing in the journal gives the time this session signed in until the
+  session list is read (for example in **Sessions of this account**). Until then chat exports and **Automatic**
+  account exports use the regular session instead of Takeout, with the reason `session_age_unknown`.
 - Turning a chat on does not read its earlier messages. Without the switch, each chat turned on (in Sources, in
   Chats, by joining from the panel or in the setup wizard) gets one `baseline` snapshot of its latest messages,
   up to **More tools → Parameters → Largest history snapshot** (500 by default), when observation next runs.
@@ -129,7 +141,9 @@ still read at start, and again when the scope is saved while observing, to find 
 notices without a chat (`deletion.unscoped`) are still recorded: they carry message IDs only and may belong to
 a chosen private chat or ordinary group. The frozen-account check (`help.getAppConfig`), the other connection
 checks, and features you turn on yourself (ending other sessions automatically, the witness probe,
-pseudo-secret chats, **Sessions of this account**) keep working.
+pseudo-secret chats, **Sessions of this account**, and Telegram's list of signed-in devices under **More
+witnesses**, which reads the session list at each timestamp pass and which setup ticks for the **Follow chats**
+and **Evidence for a case** goals) keep working.
 
 Turn it on before signing in; otherwise sign-in itself checks the current authorization and turns on sensitive
 content. Each change is a signed `scope.changed` record, and `observation.started` carries the value as

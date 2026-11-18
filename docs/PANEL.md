@@ -98,7 +98,8 @@ from the chats you choose. While observation is paused, Chats, Journal and Sourc
 show the setup card: connect the account, choose sources, start observation.
 With the goal **Evidence for a case**, or in the Witnessed, Case preparation,
 GitHub-verified or Maximum [protection mode](#protection-modes), starting observation
-first reads Telegram's session list. If other sessions are signed in, the panel names
+first reads Telegram's session list (not while **Strict: read only the chosen chats** is on).
+If other sessions are signed in, the panel names
 their number and offers **Start anyway** or **Open Sessions of this account**. Other
 goals and modes start without that question.
 The goal question stays on this page until you

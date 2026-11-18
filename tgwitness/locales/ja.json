@@ -10213,5 +10213,6 @@
   "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち",
   "Strict: read only the chosen chats": "厳格：選択したチャットだけを読む",
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitnessは、Telegramのサービス通知（777000）、アカウントのセッション一覧、2段階認証の状態を読み取らず、チャットをオンにしたときにその過去のメッセージを読み取らず、アカウントのセンシティブなコンテンツの設定を変更せず、通話の更新を記録しません。セッション乗っ取りの確認はオフのままです。選択したチャットを見つけるため、開始時にはチャット一覧を引き続き読み取ります。サインインする前にオンにしてください。",
-  "Strict chosen chats: the account's session list is not read.": "厳格な選択チャット：アカウントのセッション一覧は読み取りません。"
+  "Strict chosen chats: the account's session list is not read.": "厳格な選択チャット：アカウントのセッション一覧は読み取りません。",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "厳格な選択チャットではセッション一覧を読み取らないため、このセッションがいつサインインしたかは不明です。このエクスポートは Takeout ではなく通常のセッションを使いました。"
 }

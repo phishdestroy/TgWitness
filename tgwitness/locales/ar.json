@@ -10468,5 +10468,6 @@
   "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار",
   "Strict: read only the chosen chats": "صارم: قراءة المحادثات المختارة فقط",
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "لا يقرأ TgWitness إشعارات خدمة Telegram (777000) ولا قائمة جلسات الحساب ولا حالة التحقق بخطوتين، ولا يقرأ الرسائل السابقة لمحادثة عند تفعيلها، ولا يغيّر إعداد المحتوى الحساس للحساب، ولا يسجّل تحديثات المكالمات الهاتفية. تبقى فحوصات الاستيلاء على الجلسة متوقفة. تُقرأ قائمة المحادثات عند البدء مع ذلك للعثور على المحادثات المختارة. فعّله قبل تسجيل الدخول.",
-  "Strict chosen chats: the account's session list is not read.": "المحادثات المختارة بوضع صارم: لا تُقرأ قائمة جلسات الحساب."
+  "Strict chosen chats: the account's session list is not read.": "المحادثات المختارة بوضع صارم: لا تُقرأ قائمة جلسات الحساب.",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "في وضع المحادثات المختارة الصارم لا تُقرأ قائمة الجلسات، لذا لا يُعرف متى سجّلت هذه الجلسة الدخول؛ استخدم هذا التصدير الجلسة العادية بدلًا من Takeout."
 }

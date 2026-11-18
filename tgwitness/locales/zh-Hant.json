@@ -10213,5 +10213,6 @@
   "Checkpoint timestamp pending": "檢查點時間戳記待確認",
   "Strict: read only the chosen chats": "嚴格：只讀取已選取的聊天室",
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness 不會讀取 Telegram 服務通知（777000）、帳戶的工作階段清單或其兩步驟驗證狀態，開啟聊天室時不會讀取其先前的訊息，不會變更帳戶的敏感內容設定，也不會記錄通話更新。工作階段劫持檢查保持關閉。開始時仍會讀取聊天清單以找出已選取的聊天室。請在登入前開啟。",
-  "Strict chosen chats: the account's session list is not read.": "嚴格的已選取聊天室：不讀取帳戶的工作階段清單。"
+  "Strict chosen chats: the account's session list is not read.": "嚴格的已選取聊天室：不讀取帳戶的工作階段清單。",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "在嚴格的已選取聊天室模式下不讀取工作階段清單，因此無法得知此工作階段何時登入；本次匯出使用了一般工作階段而非 Takeout。"
 }

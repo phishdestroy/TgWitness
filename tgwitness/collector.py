@@ -136,6 +136,9 @@ TAKEOUT_FRESH_SECONDS = 24 * 3600
 TAKEOUT_SKIPPED_MEANING = {
     "fresh_session": "This session signed in less than 24 hours ago. Telegram answers a Takeout request from such a "
                      "session with a data export warning to the account, so history is read without Takeout.",
+    "session_age_unknown": "With strict chosen chats the session list is not read, so when this session signed in is "
+                           "unknown. History is read without Takeout, as for a session that signed in less than 24 "
+                           "hours ago.",
     "takeout_approval_wait": "Telegram asked to wait before the next Takeout request, so history is read without "
                              "Takeout until then."}
 AUTO_ONLY_SESSION_EVERY = 300
@@ -2877,7 +2880,7 @@ class Collector:
         self.note("connection." + state, {"role": role, "route": self.route_receipt(),
                                           "dc_id": getattr(client.session, "dc_id", None)})
         if (state == "opened" and role == "current" and time.monotonic() - self.sessions_checked_at > SESSIONS_EVERY
-                and not strict_selected(self.store)):
+                and (not strict_selected(self.store) or self.store.get_setting("only_session", None))):
             self.sessions_checked_at = time.monotonic()
             with suppress(RuntimeError):
                 asyncio.get_running_loop().create_task(self.check_sessions(client))
@@ -3292,6 +3295,8 @@ class Collector:
         if time.time() < until:
             return "takeout_approval_wait"
         waited = self.session_age()
+        if waited is None and strict_selected(self.store):
+            return "session_age_unknown"
         return "fresh_session" if waited is None or waited < TAKEOUT_FRESH_SECONDS else None
 
     def takeout_wait(self, seconds):
@@ -3693,7 +3698,7 @@ class Collector:
                 if (time.monotonic() - self.sessions_checked_at >= SESSIONS_OBSERVING_EVERY and not self.sessions_checking
                         and time.time() >= self.store.get_setting("rpc_backoff_until", 0)):
                     self.sessions_checked_at = time.monotonic()
-                    if not strict_selected(self.store):
+                    if not strict_selected(self.store) or self.store.get_setting("only_session", None):
                         await self.check_sessions()
                     await self.check_frozen()
                 if now - self.security_log_checked_at >= SECURITY_LOG_EVERY:

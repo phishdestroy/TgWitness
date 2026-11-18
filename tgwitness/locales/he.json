@@ -10315,5 +10315,6 @@
   "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה",
   "Strict: read only the chosen chats": "מחמיר: לקרוא רק את הצ'אטים הנבחרים",
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness אינו קורא את הודעות השירות של Telegram (777000), את רשימת ההפעלות של החשבון או את מצב האימות הדו-שלבי שלו, אינו קורא הודעות קודמות של צ'אט כשמפעילים אותו, אינו משנה את הגדרת התוכן הרגיש של החשבון ואינו מתעד עדכוני שיחות טלפון. בדיקות ההשתלטות על הפעלה נשארות כבויות. רשימת הצ'אטים עדיין נקראת בהתחלה כדי למצוא את הצ'אטים הנבחרים. יש להפעיל זאת לפני הכניסה.",
-  "Strict chosen chats: the account's session list is not read.": "צ'אטים נבחרים במצב מחמיר: רשימת ההפעלות של החשבון אינה נקראת."
+  "Strict chosen chats: the account's session list is not read.": "צ'אטים נבחרים במצב מחמיר: רשימת ההפעלות של החשבון אינה נקראת.",
+  "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "בצ'אטים נבחרים במצב מחמיר רשימת ההפעלות אינה נקראת, ולכן לא ידוע מתי הסשן הזה התחבר; הייצוא השתמש בסשן הרגיל במקום ב־Takeout."
 }
