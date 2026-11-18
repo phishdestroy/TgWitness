@@ -443,6 +443,9 @@ def assurance(result):
               if str(e.get("signature", "")).startswith("checked against")
               and (e.get("subject") == "export" or e.get("event_count") == result.get("events"))]
     times += [witness[name] for name in ("head_bitcoin_block_time", "head_telegram_post_time") if witness.get(name)]
+    runtime = result.get("runtime_attestation") or {}
+    if runtime.get("verified") is True and runtime.get("key_origin") == "created" and runtime.get("attested_at"):
+        times.append(runtime["attested_at"])
     independent = bool(witness.get("witness_key_pinned") and witness.get("export_head_witnessed")
                        and witness.get("witness_fingerprint") != result.get("fingerprint"))
     days = witness.get("days", result.get("days", []))
@@ -450,7 +453,6 @@ def assurance(result):
     bad_witness = bool(witness.get("conflicts") or witness.get("anomalies") or any(d["status"] == "fail" for d in days))
     complete_days = bool(days and not missing and all(d["bitcoin"] == "confirmed" for d in days)
                          and witness.get("head_bitcoin_block_time"))
-    runtime = result.get("runtime_attestation") or {}
     tdx = tdx_condition(result["tdx"]) if result.get("tdx") else None
     ladder = [
         {"tier": "self_attested", "status": "pass", "detail": "signature, hashes and applicable chain/manifest checks"},

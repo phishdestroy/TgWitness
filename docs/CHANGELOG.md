@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The verifier counts the checked GitHub attestation time of a sealed run as external time on the assurance ladder too.
+  Before, the same output read "[met] External time" under `EVIDENCE` and `ASSURANCE: self_attested`, because only
+  the evidence minimum counted that time.
 - GitHub Actions capture: a capture cancelled in the panel, or whose time ran out before collection started, ends
   the run with the notice "No archive" instead of a failed run reading "RuntimeError"; a failed run names the
   supervisor's reason, which is fixed text without private data. The temporary panel opens in the browser's
