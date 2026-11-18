@@ -1824,7 +1824,7 @@
   "Prepare export",
   "Prepare minimized disclosure",
   "Prepare or check a local VPN helper",
-  "Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, plus the latest file. SHA-256 identifies the exact file.",
+  "Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, always including the latest file if it fits in 2 GiB. A larger file is not kept: save it during its first download. SHA-256 identifies the exact file.",
   "Preparing preview…",
   "Preparing signed derivative",
   "Preparing transformed preview…",

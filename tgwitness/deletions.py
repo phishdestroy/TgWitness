@@ -10,14 +10,16 @@ CHANNEL_FLOOR = -1000000000000
 SESSIONS_MAX_AGE = 600
 RIGHTS_MAX_AGE = 24 * 3600
 CLEAR_MIN_IDS = 10
-ATTRIBUTIONS = ("own_action", "peer_or_admin", "unknown_other_session_present")
+ATTRIBUTIONS = ("own_action", "peer_or_admin", "unknown_other_session_present", "not_named")
 ATTRIBUTION_MEANING = (
     "Who could have deleted the message, from the facts this collector held when the notice arrived; Telegram's "
-    "notice does not name who deleted. peer_or_admin: no session of this account could have deleted it, so the other "
-    "side, a chat administrator or Telegram removed it. unknown_other_session_present: this account itself, from "
-    "another session or device, may have deleted it. own_action: deleted from this workspace, which has no function "
-    "that deletes messages. A notice recovered through getDifference arrived after the deletion, at an unknown "
-    "later time, so the session check made when it arrived is not used for it.")
+    "notice does not name who deleted. not_named: the deleting account stays unknown; the facts give the last check "
+    "of this account's rights and sessions with its age, and a session or role may have changed since that check. "
+    "unknown_other_session_present: this account itself, from another session or device, may have deleted it. "
+    "own_action: deleted from this workspace, which has no function that deletes messages. peer_or_admin appears "
+    "only in records written before 18 November 2026, when the last check was read as excluding this account. "
+    "A notice recovered through getDifference arrived after the deletion, at an unknown later time, so the session "
+    "check made when it arrived is not used for it.")
 CLEAR_MEANING = (
     "Suspected: one deletion notice for a private chat removed at least {n} saved messages, including messages this "
     "account sent, and no saved message between the first and the last of them is left. Clearing the history for "
@@ -30,11 +32,14 @@ SHORTENED_MEANING = (
 RESTORED_MEANING = ("No deletion notice for a never-saved message arrived in this chat during one shortened recheck "
                     "interval. The configured interval applies again.")
 TEXTS = {
-    "account_cannot_delete_here": "Not deleted by this account: it had no right to delete this message in this chat. "
-                                  "Its author, a chat administrator or Telegram removed it.",
-    "no_other_session": "Not deleted by this account: it had no other signed-in session at the session check {seconds} s "
-                        "earlier, and this workspace does not delete messages. The other side, a chat administrator "
-                        "or Telegram removed it.",
+    "account_cannot_delete_here": "Who deleted it is not known: the deletion notice names no one. At the last rights "
+                                  "check this account had no right to delete this message in this chat.",
+    "account_cannot_delete_here_aged": "Who deleted it is not known: the deletion notice names no one. At the last "
+                                       "rights check, {seconds} s earlier, this account had no right to delete this "
+                                       "message in this chat.",
+    "no_other_session": "Who deleted it is not known: the deletion notice names no one. At the last session check, "
+                        "{seconds} s earlier, this account had no other signed-in session, and this workspace does not "
+                        "delete messages.",
     "this_account_may_have_deleted": "Who deleted it is not known: this account itself, from another session or "
                                      "device, could also have deleted it.",
 }
@@ -113,16 +118,17 @@ def attribution(store, chat_id, content, batched=False, recovered=False):
     author = "unknown" if outgoing is None else "this_account" if outgoing else "another_account"
     can = account_can_delete(kind, author, rights)
     if can is False:
-        value, rule = "peer_or_admin", "account_cannot_delete_here"
+        value, rule = "not_named", "account_cannot_delete_here"
     elif (not recovered and kind != "saved_messages" and sessions and sessions["other_sessions"] == 0
           and sessions["this_session_listed"] and sessions["age_seconds"] is not None
           and sessions["age_seconds"] <= SESSIONS_MAX_AGE):
-        value, rule = "peer_or_admin", "no_other_session"
+        value, rule = "not_named", "no_other_session"
     else:
         value, rule = "unknown_other_session_present", "this_account_may_have_deleted"
     facts = {"rule": rule, "message_author": author, "this_account_could_delete": can}
     if batched:
-        facts.update(context="deletion.batch", sessions_age_seconds=(sessions or {}).get("age_seconds"))
+        facts.update(context="deletion.batch", sessions_age_seconds=(sessions or {}).get("age_seconds"),
+                     rights_age_seconds=(rights or {}).get("age_seconds"))
         if recovered:
             facts["recovered_through_difference"] = True
     else:
@@ -140,6 +146,10 @@ def attribution_text(say, payload, link=None):
     if rule == "no_other_session":
         seconds = (facts.get("sessions_check") or {}).get("age_seconds", facts.get("sessions_age_seconds"))
         return say(TEXTS[rule], seconds=seconds if type(seconds) is int else "?")
+    if rule == "account_cannot_delete_here":
+        seconds = (facts.get("rights") or {}).get("age_seconds", facts.get("rights_age_seconds"))
+        if type(seconds) is int:
+            return say(TEXTS["account_cannot_delete_here_aged"], seconds=seconds)
     return say(TEXTS[rule])
 
 
