@@ -94,7 +94,7 @@ the recipient should get less, use a disclosure export.
 If the file picker is denied or writing fails, the panel falls back to a normal browser
 download through a short-lived one-time cookie. Tokens never go into URLs.
 
-Prepared exports show size, SHA-256 and **Download again**. The cache keeps up to 20
+Prepared exports show what each file holds, size, SHA-256 and **Download again**. The cache keeps up to 20
 files within 2 GiB plus the latest one. "Sent to the browser" doesn't mean received,
 check your Downloads. Chat exports, handovers, account archives, disclosures and group
 exports say "saved" only after the panel wrote the file through the browser's save picker.

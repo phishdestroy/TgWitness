@@ -10300,5 +10300,7 @@
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness tidak membaca notifikasi layanan Telegram (777000), daftar sesi akun, atau status verifikasi dua langkahnya, tidak membaca pesan sebelumnya dari obrolan saat Anda mengaktifkannya, tidak mengubah pengaturan konten sensitif akun, dan tidak mencatat pembaruan panggilan telepon. Pemeriksaan pengambilalihan sesi tetap nonaktif. Daftar obrolan tetap dibaca saat mulai untuk menemukan obrolan yang dipilih. Aktifkan sebelum masuk.",
   "Strict chosen chats: the account's session list is not read.": "Obrolan yang dipilih secara ketat: daftar sesi akun tidak dibaca.",
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Dengan obrolan yang dipilih secara ketat, daftar sesi tidak dibaca, jadi waktu sesi ini masuk tidak diketahui; ekspor ini memakai sesi biasa, bukan Takeout.",
-  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Semua {n} berkas sesuai dengan manifes yang ditandatangani, tetapi kontainer ASiC-E rusak."
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Semua {n} berkas sesuai dengan manifes yang ditandatangani, tetapi kontainer ASiC-E rusak.",
+  "Report: {scope}": "Laporan: {scope}",
+  "Case: {name}": "Kasus: {name}"
 }

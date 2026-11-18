@@ -1,4 +1,4 @@
-export function createExports({root, tr, json, getSession, fmtTime, toast,downloadAgain,onTab}) {
+export function createExports({root, tr, trn, json, getSession, fmtTime, toast,downloadAgain,onTab}) {
   const find = id => root.querySelector('#'+id), tabs = [...root.querySelectorAll('[data-export-tab]')];
   let session = getSession(), request = 0, transfer = 0, selected = 'downloads', entries = [];
   const bytes = size => size < 1024 ? tr('{n} B',{n:size}) : size < 1048576
@@ -165,6 +165,37 @@ export function createExports({root, tr, json, getSession, fmtTime, toast,downlo
       event.preventDefault();select(event.key==='Home'?'downloads':event.key==='End'?'settings':selected==='downloads'?'settings':'downloads',true);
     });
   }
+  // A prepared export's card names what the file holds: complete journal, report, journal records or handover extract,
+  // the case, the record count and the report selection it was built with. Older entries fall back to their format.
+  const KINDS=['archive','report','journal','handover'],
+    KIND_NAMES={archive:'Signed archive',report:'Report',journal:'Journal records',handover:'Handover extract'};
+  const kindOf=entry=>KINDS.includes(entry.about?.kind)?entry.about.kind:entry.format==='handover'?'handover'
+    :['html','pdf','json'].includes(entry.format)?'report':['jsonl','csv'].includes(entry.format)?'journal':'archive';
+  function describe(entry) {
+    const about=entry.about||{},kind=kindOf(entry),box=make('p','','export-about'),parts=[],chosen=about.selection;
+    const records=Number.isInteger(about.records)?about.records:kind==='archive'&&Number.isInteger(entry.covers?.seq)?entry.covers.seq:null;
+    if(kind==='archive'||(kind==='report'&&!chosen))parts.push(tr('Complete journal'));
+    if(records!==null)parts.push(tr('Records: {n}',{n:records}));
+    if(kind==='handover'&&!chosen&&Array.isArray(entry.chat_ids))parts.push(trn('{n} chat','{n} chats',entry.chat_ids.length));
+    if(chosen){
+      const scope=[];
+      if(chosen.chats)scope.push(trn('{n} chat','{n} chats',chosen.chats));
+      if(chosen.messages)scope.push(trn('{n} message','{n} messages',chosen.messages));
+      if(!chosen.chats&&!chosen.messages)scope.push(tr('All chats'));
+      scope.push(chosen.from||chosen.to?(chosen.from||'…')+' – '+(chosen.to||'…'):tr('All dates'));
+      parts.push(kind==='archive'?tr('Report: {scope}',{scope:scope.join(' · ')}):scope.join(' · '));
+    }
+    box.append(make('b',tr(KIND_NAMES[kind])));
+    if(parts.length)box.append(' · '+parts.join(' · '));
+    const title=typeof about.case?.title==='string'?about.case.title:'',id=typeof about.case?.id==='string'?about.case.id:'';
+    if(title||id)box.append(make('span',tr('Case: {name}',{name:[title,id&&(title?'('+id+')':id)].filter(Boolean).join(' ')}),'export-case'));
+    return box;
+  }
+  const kindField=make('div','','exports-kind'),kindLabel=make('label',tr('Show')),kindFilter=make('select');
+  kindFilter.id='exports-history-kind';kindLabel.htmlFor=kindFilter.id;kindField.hidden=true;kindField.append(kindLabel,kindFilter);
+  find('exports-history-list').before(kindField);
+  const filterRows=()=>{for(const row of find('exports-history-list').children)row.hidden=!!kindFilter.value&&row.dataset.kind!==kindFilter.value;};
+  kindFilter.addEventListener('change',filterRows);
   async function load(options={}) {
     const mine=++request, owner=getSession();
     find('exports-history-refresh').disabled=true;
@@ -177,13 +208,14 @@ export function createExports({root, tr, json, getSession, fmtTime, toast,downlo
         const rows=entries.map(entry=>{
           const row=make('div','','export-receipt'),label=make('strong',entry.format==='asice'?'ASiC-E':entry.format.toUpperCase());
           const time=make('time');time.dateTime=entry.created_at;
+          row.dataset.kind=kindOf(entry);
           row.append(label,make('span',entry.encrypted?tr('Encrypted'):tr('Plain file'),'hint'),
             time,make('span',bytes(entry.bytes)));
           const hash=make('code',entry.sha256),copy=make('button',tr('Copy SHA-256'),'quiet');
           copy.type='button';copy.addEventListener('click',async()=>{
             try{await navigator.clipboard.writeText(entry.sha256);toast(tr('Hash copied.'));}catch{toast(tr('Could not copy. Select and copy the hash.'),true);}
           });
-          const detail=make('details'),summary=make('summary',tr('SHA-256'));detail.append(summary,hash,copy);row.append(detail);
+          const detail=make('details'),summary=make('summary',tr('SHA-256'));detail.append(summary,hash,copy);row.append(detail,describe(entry));
           if(entry.cache_warning)row.append(make('p',tr(entry.cache_warning),'hint'));
           if(entry.format==='asice'&&entry.members>1000)row.append(make('p',tr('This container holds {n} files. EU DSS with default settings refuses containers of more than 1000 files.',{n:entry.members}),'hint'));
           if(entry.available&&entry.id){const again=make('button',tr('Download again'),'secondary');again.type='button';
@@ -195,6 +227,10 @@ export function createExports({root, tr, json, getSession, fmtTime, toast,downlo
           return row;
         });
         list.replaceChildren(...rows);list.dataset.stamp=stamp;
+        const kinds=KINDS.filter(kind=>entries.some(entry=>kindOf(entry)===kind)),wanted=kinds.includes(kindFilter.value)?kindFilter.value:'';
+        kindFilter.replaceChildren(new Option(tr('All'),''),...kinds.map(kind=>new Option(tr(KIND_NAMES[kind]),kind)));
+        kindFilter.value=wanted;kindField.hidden=kinds.length<2;
+        filterRows();
       }
       renderTimes();
       find('exports-history-status').textContent=entries.length?'':tr('No exports prepared yet. Choose a format above.');

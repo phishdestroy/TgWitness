@@ -10351,5 +10351,7 @@
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness, Telegram की सेवा सूचनाएँ (777000), खाते की सत्र सूची या उसकी दो-चरणीय सत्यापन स्थिति नहीं पढ़ता, किसी चैट को चालू करने पर उसके पुराने संदेश नहीं पढ़ता, खाते की संवेदनशील सामग्री सेटिंग नहीं बदलता और फ़ोन कॉल अपडेट दर्ज नहीं करता। सत्र पर कब्ज़े की जाँचें बंद रहती हैं। चुनी गई चैट्स ढूँढने के लिए शुरुआत में चैट सूची फिर भी पढ़ी जाती है। साइन इन करने से पहले इसे चालू करें।",
   "Strict chosen chats: the account's session list is not read.": "सख्त चुनी गई चैट्स: खाते की सत्र सूची नहीं पढ़ी जाती।",
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "सख्त चुनी गई चैट्स में सत्र सूची नहीं पढ़ी जाती, इसलिए यह सत्र कब साइन इन हुआ यह पता नहीं है; इस निर्यात ने Takeout के बजाय सामान्य सत्र का उपयोग किया।",
-  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "सभी {n} फ़ाइलें हस्ताक्षरित मैनिफ़ेस्ट से मेल खाती हैं, लेकिन ASiC-E कंटेनर क्षतिग्रस्त है।"
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "सभी {n} फ़ाइलें हस्ताक्षरित मैनिफ़ेस्ट से मेल खाती हैं, लेकिन ASiC-E कंटेनर क्षतिग्रस्त है।",
+  "Report: {scope}": "रिपोर्ट: {scope}",
+  "Case: {name}": "मामला: {name}"
 }

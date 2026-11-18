@@ -570,6 +570,13 @@ async def export_handover(
                     required_permissions=permissions,
                     chat_ids=body.chats,
                     encryption=body.encryption,
+                    described=export_history.about(
+                        "handover", options,
+                        {"enabled": True, "chats": body.chats,
+                         "date_from": body.since.date().isoformat() if body.since else "",
+                         "date_to": body.until.date().isoformat() if body.until else ""},
+                        recorded["counts"].get("unchanged", 0) + recorded["counts"].get("minimised", 0),
+                    ),
                 )
             )
             return path
@@ -1002,6 +1009,12 @@ class ExportOperations:
                         required_permissions=permissions,
                         encryption=encryption,
                         covers=covers,
+                        described=export_history.about(
+                            "archive" if fmt in ("zip", "asice") else "journal" if fmt in ("jsonl", "csv") else "report",
+                            options,
+                            options.get("selection") if fmt in ("zip", "asice", "html", "json", "pdf") else None,
+                            covers["seq"] if covers else None,
+                        ),
                     )
                 )
                 return path

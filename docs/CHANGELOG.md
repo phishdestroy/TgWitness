@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- Each card in **Prepared exports** names what the file holds: **Signed archive** with *Complete journal* and its
+  record count, **Report**, **Journal records** or **Handover extract** with its chat and record counts, the case
+  title and ID, and the report selection the file was built with (chats, chosen messages, dates, or *All chats* and
+  *All dates*). **Show** narrows the list to one kind when it holds more than one. Files prepared before this change
+  show their kind from the format and, for a signed archive, its record count. Before, a card showed only the format,
+  *Plain file*, the date, the size and the SHA-256, so several HTML or ZIP files in a row could not be told apart.
 - **Sources → Scope → Chosen chats** has a new switch, **Strict: read only the chosen chats**, off by default. While
   it is on, TgWitness does not read Telegram's service notifications (777000), the account's session list or its
   two-step verification status (at start, including the panel's check for other sessions with the **Evidence for

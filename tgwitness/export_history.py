@@ -68,8 +68,25 @@ def unexported(db):
     return annotations_head(db) > saved.get("annotations", 0)
 
 
+def about(kind, options=None, selection=None, records=None):
+    """What a prepared export holds, for its card: kind, case, records and the report selection as configured."""
+    options = options or {}
+    value = {"kind": kind}
+    case = {key: options.get(name) for key, name in (("title", "case_title"), ("id", "case_id"))
+            if isinstance(options.get(name), str) and options.get(name)}
+    if case:
+        value["case"] = case
+    if type(records) is int:
+        value["records"] = records
+    if isinstance(selection, dict) and selection.get("enabled") is True:
+        value["selection"] = {"chats": len(selection.get("chats") or []) + len(selection.get("secret_chats") or []),
+                              "messages": len(selection.get("messages") or []),
+                              "from": selection.get("date_from") or "", "to": selection.get("date_to") or ""}
+    return value
+
+
 def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, required_permissions=None, chat_ids=None,
-             encryption="zip", covers=None):
+             encryption="zip", covers=None, described=None):
     if encryption not in ("zip", "tgwpw"):
         raise ValueError("Unknown password-encryption format")
     with path.open("rb") as source:
@@ -90,6 +107,8 @@ def prepared(store, path, fmt, encrypted, *, owner=None, workspace=None, require
         entry["encryption"] = encryption
     if covers is not None:
         entry["covers"] = covers
+    if described is not None:
+        entry["about"] = described
     if owner is not None and workspace is not None and required_permissions:
         entry.update(owner=owner, workspace=workspace, required_permissions=sorted(set(required_permissions)),
                      chat_ids=sorted(set(chat_ids)) if chat_ids is not None else None)
