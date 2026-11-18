@@ -88,6 +88,9 @@
 - The **Accounts** advice about public MTProxy servers counts only workspaces with a signed-in Telegram account. Before,
   a new workspace that had never signed in was counted as "1 account uses public MTProxy servers" because public
   MTProxy is its default route; the route is still shown on its card.
+- The showcase publishing page follows the panel language, including the content consent, the preview labels, the
+  link and revoke messages and the page's `lang`; message texts stay as captured. Before, it was English only, also
+  after choosing Russian in the panel.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
