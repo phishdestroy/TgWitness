@@ -2522,8 +2522,6 @@ def timestamps_section(say, number, anchors, archive_name, standalone=False):
     return out + "</section>"
 
 
-RECEIVED_ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip",
-                     "chat": "tgwitness-chat-export.zip"}
 RECEIVED_WHERE = "Run these commands in the extracted folder, with the received file {name} in its parent folder."
 RECEIVED_RENAMED = "If the file you received has another name, use that name in the commands, in double quotes."
 
@@ -2531,7 +2529,8 @@ RECEIVED_RENAMED = "If the file you received has another name, use that name in 
 def received_archive(context, kind=None):
     """The name the export is delivered under; the verify commands in README, HTML and PDF point at this file."""
     context = context or {}
-    return context.get("archive_name") or RECEIVED_ARCHIVES.get(kind or context.get("kind"), RECEIVED_ARCHIVES["evidence"])
+    archives = case_assessment.ARCHIVES
+    return context.get("archive_name") or archives.get(kind or context.get("kind"), archives["evidence"])
 
 
 def verify_section(say, number, archive_name, report_name, archive, data_name=None):

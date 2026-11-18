@@ -36,6 +36,8 @@ from .workers import complete_in_thread
 
 STATIC = Path(__file__).with_name("static")
 TERMINAL = {"sealed", "cancelled", "failed"}
+# The account export travels inside the sealed evidence archive under this name; its own verify commands point at it.
+ACCOUNT_MEMBER = "account-export.zip"
 
 
 class StrictBody(BaseModel):
@@ -190,7 +192,7 @@ class Session:
         if self.status()["remaining_seconds"] <= 0:
             raise ValueError("No capture time remains.")
         options = selection.account_options.model_dump()
-        job = await self.account_export.start(options)
+        job = await self.account_export.start(options, archive_name=ACCOUNT_MEMBER)
         self.account_job = job["id"]
         self.selection = selection.settings()
         self.store.append("sealed.selection", {"mode": "account", "options": options,
@@ -265,7 +267,7 @@ class Session:
                     if not cancel:
                         job = await self.account_export.finalize_partial(self.account_job, "Capture ended: " + reason)
                         path = self.account_export.result_path(self.account_job)
-                        self.store.append("sealed.account_export", {"job_id": self.account_job, "file": "account-export.zip",
+                        self.store.append("sealed.account_export", {"job_id": self.account_job, "file": ACCOUNT_MEMBER,
                             "sha256": file_sha(path), "bytes": path.stat().st_size, "complete_within_scope": job["phase"] == "done",
                             "coverage": job["coverage"], "counts": job["counts"]})
                 except Exception as exc:

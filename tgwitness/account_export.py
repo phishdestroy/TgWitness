@@ -319,7 +319,9 @@ class AccountExport:
         durable_write(self.directory(self.current["id"]) / "status.json",
                       canonical({k: v for k, v in self.current.items() if k != "transfer"}))
 
-    async def start(self, options):
+    async def start(self, options, archive_name=None):
+        """archive_name: the name the archive is delivered under when it is not the panel download name, as in a sealed
+        evidence archive; the verify commands inside the archive point at it."""
         options = AccountExportOptions.model_validate(options).model_dump()
         from .export_preflight import assess
         assessment = assess(options, shutil.disk_usage(self.root).free)
@@ -353,6 +355,8 @@ class AccountExport:
             self.current = {"id": job_id, "account_id": account, "phase": "preparing", "options": options,
                 "created_at": job["created_at"], "ready": False, "current_chat": None, "wait_until": None,
                 "error": None, "omissions": [], "counts": {}, "coverage": {}}
+            if archive_name:
+                self.current["archive_name"] = archive_name
             self.persist()
             self.store.append("account_export.started", {"job_id": job_id, "options_sha256": job["options_sha256"],
                 "account_id": account, "meaning": "selected visible account data; resumable acquisition"})
@@ -1128,7 +1132,8 @@ class AccountExport:
                 write("message-gaps.json", [canonical(gap_map)])
                 report_context = {"report_language": job["options"].get("report_language", "en"), "archive": True,
                     "presentation": job["options"].get("report_presentation", {}),
-                    "archive_reference": job["job_id"], "archive_name": account_report.delivered_file(job["job_id"]),
+                    "archive_reference": job["job_id"],
+                    "archive_name": self.current.get("archive_name") or account_report.delivered_file(job["job_id"]),
                     "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),

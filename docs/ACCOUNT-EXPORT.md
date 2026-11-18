@@ -112,10 +112,10 @@ If Telegram ends the account's authorization during inventory, history or attach
 
 The panel distinguishes a completed selected scope from a partial archive, and records omissions and failed reads. Deliberately excluded files are different from failed or unavailable files. Inspect coverage even when integrity verification succeeds. No local reader can prove Telegram returned every message that ever existed.
 
-Finished ZIPs remain available for repeated and HTTP-range downloads. An account archive contains `manifest.json`, `manifest.sig`, signed `job.json`, `inventory.json`, `receipts/`, authoritative `data/*.jsonl`, selected `media/`, readable HTML and a verifier. Pin the collector fingerprint through an independent channel, then verify using a trusted installation:
+Finished ZIPs remain available for repeated and HTTP-range downloads. An account archive contains `manifest.json`, `manifest.sig`, signed `job.json`, `inventory.json`, `receipts/`, authoritative `data/*.jsonl`, selected `media/`, readable HTML and a verifier. Pin the collector fingerprint through an independent channel, then verify using a trusted installation. The panel saves the archive as `tgwitness-account-export-EXPORT_ID.zip`; a sealed capture carries it inside its evidence archive as `account-export.zip`. Use the name of the file you have:
 
 ```sh
-python -m tgwitness.verify account-export.zip --fingerprint TRUSTED_SHA256
+python -m tgwitness.verify tgwitness-account-export-EXPORT_ID.zip --fingerprint TRUSTED_SHA256
 ```
 
 For archives whose expanded contents exceed 4 GiB, set an explicit adequate `--max-gib`. The panel verifies its authenticated, completed local archives using their declared expanded size and published ZIP digest; the external CLI keeps its independent size limit. Verify before opening the readable HTML. The archive's bundled verifier is convenient, but a verifier obtained independently avoids trusting executable code delivered with the evidence.
@@ -149,11 +149,11 @@ In `messages.jsonl` (format `tgwitness-account-disclosure-v2`) each message has 
 
 The minimized format omits structured account profiles, contacts, avatars, sessions, stories, raw Telegram objects, forwarding headers, reply quotations, contact cards and location metadata. It excludes the original JSONL files, private filter settings, pseudonym key and identity map. Selected text, explicitly retained identities and included files can still contain the same names, IDs or phrases used in those filters; they need separate review. The private policy and pseudonym key are retained encrypted in the local vault for the job; deleting the job clears its associated private disclosure records. The public policy records filter counts rather than filter values. The stated purpose is public in the manifest and HTML: explicit private criteria and, in pseudonymized modes, known hidden identities are masked there too, including when message text is omitted. Keep the purpose free of unnecessary personal details; unknown identifying context can remain.
 
-Its manifest binds the derivative files, public policy and original ZIP's hash. Verification can establish integrity and, if the source is supplied locally, matching source linkage:
+Its manifest binds the derivative files, public policy and original ZIP's hash. Verification can establish integrity and, if the source is supplied locally, matching source linkage. The panel saves the sharing copy as `tgwitness-disclosure-DISCLOSURE_ID.zip`:
 
 ```sh
-python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256
-python -m tgwitness.verify minimized-disclosure.zip --fingerprint TRUSTED_SHA256 --evidence account-export.zip
+python -m tgwitness.verify tgwitness-disclosure-DISCLOSURE_ID.zip --fingerprint TRUSTED_SHA256
+python -m tgwitness.verify tgwitness-disclosure-DISCLOSURE_ID.zip --fingerprint TRUSTED_SHA256 --evidence tgwitness-account-export-EXPORT_ID.zip
 ```
 
 Source linkage shows which archive and collector key the disclosure came from. The disclosure carries only the selected content; review the selection and the removal of identifying details against the original export.
