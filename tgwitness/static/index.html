@@ -610,6 +610,7 @@
       <p class="hint"><a data-go-reports="settings" href="#">Choose report language &amp; case details</a></p>
       <button class="primary" data-export="zip"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed ZIP</button>
       <small>Includes all sources through a fixed journal boundary, regardless of filters. Streaming export · ZIP limit: 4 GiB uncompressed unless changed in Parameters.</small>
+      <p class="hint" hidden id="export-browser-limit">This browser cannot write a download to disk as it arrives. A file over 2 GiB is not kept for a second download: download such a file in Chrome or Edge, or with the command line under Large downloads &amp; verification.</p>
     </div>
   </div>
   <section class="card padded report-card report-download-card" id="export-readable-report">
@@ -673,7 +674,7 @@
   </details>
   <section class="card padded exports-history" aria-labelledby="exports-history-title">
     <div class="card-heading compact"><div><h2 id="exports-history-title">Prepared exports</h2><p id="exports-last" class="hint"></p></div><button class="quiet" type="button" id="exports-history-refresh">Refresh</button></div>
-    <p class="hint">Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, plus the latest file. SHA-256 identifies the exact file.</p>
+    <p class="hint">Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, always including the latest file if it fits in 2 GiB. A larger file is not kept: save it during its first download. SHA-256 identifies the exact file.</p>
     <div id="exports-history-list"></div><p id="exports-history-status" class="hint" role="status"></p>
   </section>
   </div>

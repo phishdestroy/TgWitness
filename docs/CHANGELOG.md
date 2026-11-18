@@ -37,6 +37,10 @@
   arrow keys from the search field reach each new row's own button. In an open chat, Ctrl+F (⌘F) puts the cursor in
   **Search saved messages**; pressed there again it reaches the browser's page search. Before, clicking the name of a
   search result added the chat to observation or started the join.
+- An export that is not kept for another download, such as a file over 2 GiB, no longer sends a browser without
+  file streaming to a repeat download that fails. The panel learns from the response that no saved copy exists and
+  names Chrome or Edge and the command-line download instead. In such a browser the signed archive card says so
+  before the download, and the Prepared exports note no longer promises to keep the latest file whatever its size.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
