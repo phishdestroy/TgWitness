@@ -25,6 +25,18 @@
 
 ## Unreleased
 
+- Reports: the **Observation period** figure of HTML and PDF evidence reports and handover extracts adds up the
+  continuous observation periods listed under Coverage and reads "Not recorded" when there are none, and the first
+  custody step is named "Recorded in the journal". Before, the figure showed the time from the first to the last
+  record of any kind: a journal of local service records showed "10 min", and a three-day pause between two runs
+  counted as observation. `verify.py --plain` and the Verifier summary of HTML and PDF reports say "No observation
+  period recorded." whenever there is none; before, a session-key, gap or record-source line hid it. In a chat
+  export page of the reading designs, a reply to a message in another chat says so instead of quoting the message
+  with the same number in this chat. The status words and labels of the evidence conditions table use the colours of
+  the report theme, at least 4.5:1, instead of fixed greys and green of 2.8–4.2:1. Verification commands name the
+  file they are in: `report.en.pdf` and `chat.en.pdf` instead of `report.pdf` and `chat.pdf`, a PDF saved on its own
+  `tgwitness-report.pdf` and an HTML report saved on its own `tgwitness-evidence.html`, as the panel names these
+  downloads; the case assessment of a chat export points to `../tgwitness-chat-export.zip`, like its Verify section.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
