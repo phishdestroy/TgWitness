@@ -567,6 +567,12 @@ export function createSources(context) {
     dialogOpen = false; renderDialogs(); context.focusObservation();
   });
 
+  function renderRefresh() {
+    const refresh = context.statusRefresh(), line = find("sources-refresh-summary");
+    line.textContent = !refresh.at ? "" : tr(refresh.failed ? "Status not updated since {time}" : "Status updated {time}", {time: context.formatTime(refresh.at)});
+    line.hidden = !refresh.at;
+  }
+
   function updateStatus(status) {
     if (!status) return;
     find("sources-tab-secret").hidden = !!status.demo;
@@ -592,10 +598,11 @@ export function createSources(context) {
     const linked = status.demo || (collector.has_session && !signIn);
     find("sources-recording-summary").textContent = status.demo ? tr(collector.running ? "Observation enabled" : "Observation paused")
       : signIn ? tr("Sign in again") : !collector.has_session ? tr("Telegram is not connected")
-      : !collector.running ? tr("Observation stopped")
+      : !collector.running ? tr(collector.operator_paused ? "Observation paused" : "Observation stopped")
       : collector.connected ? tr("Observation enabled") : tr("Observation enabled") + " · " + tr("Reconnecting to Telegram");
     find("sources-recording-summary").dataset.tone = status.demo ? "info" : linked && collector.running && collector.connected ? "ok" : "off";
     find("sources-connect").hidden = linked || !context.canConnect();
+    renderRefresh();
     find("sources-tab-count").textContent = String(status.targets.length);
     const note = find("recording-result");
     if (status.demo) note.textContent = tr("This demo is read-only. Recording settings can be changed in your own workspace.");
@@ -700,7 +707,7 @@ export function createSources(context) {
   return {
     get tab() {return tab;},
     enter({params} = {}) {showTab(params?.tab || tab, false, {history: false}); updateStatus(getState().status);},
-    updateStatus, showTab, renderTargets, loadDialogs, runSourceAction,
+    updateStatus, renderRefresh, showTab, renderTargets, loadDialogs, runSourceAction,
     filterTargets(value) {
       showTab("chats"); find("target-search").value=""; find("target-kind").value="";
       find("target-filter").value=value; sourcePage=0; renderTargets();

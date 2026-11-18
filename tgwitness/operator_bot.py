@@ -84,7 +84,7 @@ class OperatorBot:
             async with self.state.operation_lock:
                 if self.public()["settings"] != cfg or self.state.vault.read("operator_bot").get("token") != token:
                     return None
-                await (self.state.collector.stop() if command == "/pause" else self.state.collector.start())
+                await (self.state.collector.pause() if command == "/pause" else self.state.collector.start())
         else:
             manager = self.state.storage
             if manager.lock.locked() or (manager.task and not manager.task.done()):

@@ -139,6 +139,8 @@
   "Account formats": "รูปแบบบัญชี",
   "Account not connected": "บัญชีไม่เชื่อมต่อ",
   "Telegram is not connected": "ยังไม่ได้เชื่อมต่อ Telegram",
+  "Status updated {time}": "อัปเดตสถานะแล้ว {time}",
+  "Status not updated since {time}": "สถานะไม่ได้อัปเดตตั้งแต่ {time}",
   "Account self-destruct": "บัญชีทำลายตัวเอง",
   "Account settings": "การตั้งค่าบัญชี",
   "Accounts": "บัญชี",

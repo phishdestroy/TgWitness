@@ -593,6 +593,8 @@
   "Waiting for QR": "Ожидание QR-кода",
   "Account not connected": "Аккаунт не подключён",
   "Telegram is not connected": "Telegram не подключён",
+  "Status updated {time}": "Состояние обновлено {time}",
+  "Status not updated since {time}": "Состояние не обновлялось с {time}",
   "Pause observation": "Приостановить наблюдение",
   "Demo uses fictional observations": "В демо-версии используются вымышленные наблюдения",
   "Connect an account first": "Сначала подключите аккаунт",

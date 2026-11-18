@@ -523,6 +523,8 @@
   "Waiting for QR": "Aguardando o QR",
   "Account not connected": "Conta não conectada",
   "Telegram is not connected": "O Telegram não está conectado",
+  "Status updated {time}": "Estado atualizado {time}",
+  "Status not updated since {time}": "Estado sem atualização desde {time}",
   "Pause observation": "Pausar a observação",
   "Demo uses fictional observations": "A demonstração utiliza observações fictícias",
   "Connect an account first": "Conecte uma conta primeiro",

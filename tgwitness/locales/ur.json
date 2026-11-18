@@ -523,6 +523,8 @@
   "Waiting for QR": "QR کے انتظار میں",
   "Account not connected": "اکاؤنٹ منسلک نہیں ہے",
   "Telegram is not connected": "Telegram منسلک نہیں ہے",
+  "Status updated {time}": "حالت اپ ڈیٹ ہوئی {time}",
+  "Status not updated since {time}": "حالت {time} سے اپ ڈیٹ نہیں ہوئی",
   "Pause observation": "مشاہدے کو معطل کریں",
   "Demo uses fictional observations": "ڈیمو خیالی مشاہدات استعمال کرتا ہے۔",
   "Connect an account first": "سب سے پہلے ایک اکاؤنٹ منسلک کریں",

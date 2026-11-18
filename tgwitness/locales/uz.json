@@ -139,6 +139,8 @@
   "Account formats": "Hisob formatlari",
   "Account not connected": "Hisobga ulanmagan",
   "Telegram is not connected": "Telegram ulanmagan",
+  "Status updated {time}": "Holat yangilandi {time}",
+  "Status not updated since {time}": "Holat {time} dan beri yangilanmagan",
   "Account self-destruct": "Hisobni o'z-o'zini yo'q qilish",
   "Account settings": "Hisob sozlamalari",
   "Accounts": "Hisoblar",

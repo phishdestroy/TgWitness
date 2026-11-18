@@ -139,6 +139,8 @@
   "Account formats": "Formaty kont",
   "Account not connected": "Konto nie jest połączone",
   "Telegram is not connected": "Telegram nie jest połączony",
+  "Status updated {time}": "Stan zaktualizowany {time}",
+  "Status not updated since {time}": "Stan nieaktualizowany od {time}",
   "Account self-destruct": "Samozniszczenie konta",
   "Account settings": "Ustawienia konta",
   "Accounts": "Konta",

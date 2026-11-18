@@ -43,7 +43,7 @@
 <script defer src="/dialogs.js?v=3"></script>
 <script defer src="/privacy.js?v=4"></script>
 <script defer src="/chat-safety.js?v=2"></script>
-<script defer src="/app.js?v=0.9.3-sighthidden1"></script>
+<script defer src="/app.js?v=0.9.3-pause1"></script>
 <script defer src="/services.js?v=1-m"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=18"></script>
@@ -331,7 +331,7 @@
     <div class="source-refresh-status"><span class="hint" id="dialog-refresh-status" role="status" aria-live="polite">Not refreshed in this session.</span><button type="button" class="text-link" id="dialog-refresh-retry" hidden>Retry</button></div>
     <progress id="dialog-refresh-progress" aria-label="Refreshing chat list" hidden></progress>
   </div>
-  <div class="sources-summary" aria-label="Source overview"><span id="sources-scope-summary"></span><span id="sources-count-summary"></span><span id="sources-recording-summary"></span><button class="text-link" hidden id="sources-connect" type="button">Connect account</button></div>
+  <div class="sources-summary" aria-label="Source overview"><span id="sources-scope-summary"></span><span id="sources-count-summary"></span><span id="sources-recording-summary"></span><span hidden id="sources-refresh-summary"></span><button class="text-link" hidden id="sources-connect" type="button">Connect account</button></div>
   <div class="sources-tabs" role="tablist" aria-label="Source settings">
     <button type="button" id="sources-tab-scope" role="tab" aria-controls="sources-panel-scope" aria-selected="true" data-source-tab="scope">Scope</button>
     <button type="button" id="sources-tab-chats" role="tab" aria-controls="sources-panel-chats" aria-selected="false" tabindex="-1" data-source-tab="chats">Chats in scope <span id="sources-tab-count" class="tab-count">0</span></button>

@@ -139,6 +139,8 @@
   "Account formats": "פורמטים של חשבונות",
   "Account not connected": "החשבון אינו מחובר",
   "Telegram is not connected": "Telegram אינו מחובר",
+  "Status updated {time}": "המצב עודכן {time}",
+  "Status not updated since {time}": "המצב לא עודכן מאז {time}",
   "Account self-destruct": "השמדה עצמית של חשבון",
   "Account settings": "הגדרות חשבון",
   "Accounts": "חשבונות",

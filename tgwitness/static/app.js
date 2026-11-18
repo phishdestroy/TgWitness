@@ -823,6 +823,7 @@ async function unlock(prefetched=null,languageChoice=null) {
     const initialURL=new URL(location.href);initialURL.searchParams.set('ws',state.profile);history.replaceState(history.state,'',initialURL);
   }
   state.status = boot?.status&&boot.workspace===state.profile?boot.status:await json("status");
+  state.statusAt=new Date().toISOString();state.statusFailed=false;
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
   if(!state.opened&&(!requested.explicit||requested.error)){
@@ -1667,7 +1668,7 @@ function renderViewStatus(view){
     $("stat-edits").textContent=(counts["message.edited"]||0).toLocaleString(LANG);
     $("stat-deletes").textContent=(counts["message.deleted"]||0).toLocaleString(LANG);
     $("stat-sources").textContent=s.targets.filter(x=>x.enabled).length;
-    $("sources-footnote").textContent=tr(s.demo ? "Synthetic sources" : c.running ? "Observation enabled" : "Observation paused");
+    $("sources-footnote").textContent=tr(s.demo ? "Synthetic sources" : c.running ? "Observation enabled" : !c.has_session ? "Telegram is not connected" : c.operator_paused ? "Observation paused" : "Observation stopped");
     renderOverviewEmpty(s);
     $("event-total").textContent=s.stats.total.toLocaleString(LANG);
     fillSourceSelect("source-filter",state.source,true);
@@ -1735,8 +1736,11 @@ function fillSourceSelect(id,value,all=false) {
 let statusRequest=0,profilesRequest=0;
 const workspaceOptionsReady=import("./components/workspaces.js?v=2");
 async function refreshStatus() {
-  const request=++statusRequest,revision=state.workspaceRevision,result=await json("status");
+  const request=++statusRequest,revision=state.workspaceRevision;let result;
+  try{result=await json("status");}
+  catch(error){if(revision===state.workspaceRevision&&request===statusRequest&&state.statusAt){state.statusFailed=true;sourcesView?.renderRefresh();}throw error;}
   if(revision!==state.workspaceRevision||request!==statusRequest)return;
+  state.statusAt=new Date().toISOString();state.statusFailed=false;
   workspaceSafety?.acceptStatus(result);
   if(result.me&&JSON.stringify(result.me)!==JSON.stringify(state.me))state.me=result.me;
   state.status=result;applyAccess();renderStatus();workspaceSafety?.sync();
@@ -2029,7 +2033,7 @@ async function switchProfile(id,options={}){
   state.request++;clearVerification();
   state.workflow=null;state.exportTask="journal";
   state.profile=id;state.monitoringDirty=false;state.captureDirty=false;sessionStorage.setItem("tgwitness-profile",id);
-  state.status=null;$("profile-select").value=id;
+  state.status=state.statusAt=null;$("profile-select").value=id;
   if(options.history!==false)window.TgWitnessRouter?.record({workspace:id,chatId:null,seq:null});
   state.events=[];state.dialogs=[];state.cursor=null;state.filter="";state.source="";state.search="";state.eventSince="";state.eventUntil="";state.eventSystem=false;
   state.eventBefore=state.eventAfter=state.eventMatched=null;
@@ -2529,12 +2533,13 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=7").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=8").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
     renderScope,focusObservation:()=>$("collector-toggle").focus({preventScroll:true}),
     needsSignIn:s=>!!accountState?.(s)?.needsSignIn,canConnect:()=>viewAllowed("connection"),connect:()=>navigate("connection"),
+    statusRefresh:()=>({at:state.statusAt,failed:!!state.statusFailed}),
     confirm:(message,options)=>askConfirm(message,options),
     scopeExclusions:(ids,excluded)=>{if(state.scopeDirty)state.scopeExclude=excluded?
       [...new Set([...state.scopeExclude,...ids])]:state.scopeExclude.filter(id=>!ids.includes(id));},
