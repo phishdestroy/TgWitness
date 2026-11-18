@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: c40989dca6e77142f07902dd18d64e7933b2c275e0d9067f20240dadbcbe7dee
+# TgWitness verifier sources SHA-256: 35e8315e4fdbba6a4bb4fb186a74ed78f091403cfec07a1b0b879922a124d608
 """Standalone verifier"""
 import argparse
 import base64
@@ -1734,28 +1734,32 @@ TSA_NO_MATCHING_ROOT = "no matching root in --tsa-ca"
 TSA_UNTRUSTED = "The timestamp certificate does not chain to a trusted root"
 
 
-def tsa_signature_status(reply, roots):
+def tsa_signature_check(reply, roots):
     try:
-        timestamp_signature(reply, roots)
+        checked = timestamp_signature(reply, roots)
     except ValueError as exc:
         if str(exc) == TSA_UNTRUSTED:
-            return TSA_NO_MATCHING_ROOT
+            return TSA_NO_MATCHING_ROOT, None
         raise
-    return TSA_CHECKED
+    return TSA_CHECKED, checked["signer_sha256"]
 
 
-def qualified_timestamp(reply):
+def qualified_timestamp(reply, signer_sha256):
+    service = QUALIFIED_TSU.get(signer_sha256 or "")
+    if not service:
+        return {}
     for data in timestamp_token(reply)["certificates"]:
         certificate = x509.load_der_x509_certificate(data)
-        service = QUALIFIED_TSU.get(certificate.fingerprint(hashes.SHA256()).hex())
-        if not service:
+        if certificate.fingerprint(hashes.SHA256()).hex() != signer_sha256:
             continue
         try:
             statements = certificate.extensions.get_extension_for_oid(x509.ObjectIdentifier(QC_STATEMENTS)).value.value
         except x509.ExtensionNotFound:
-            continue
+            return {}
         if QC_COMPLIANCE in statements:
-            return {"qualified": {"service": service, "provider": QUALIFIED_PROVIDER, "trusted_list": QUALIFIED_LIST}}
+            return {"qualified": {"service": service, "provider": QUALIFIED_PROVIDER, "trusted_list": QUALIFIED_LIST,
+                                  "signer_sha256": signer_sha256}}
+        return {}
     return {}
 
 
@@ -1906,9 +1910,9 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                 query_name = proof_name[:-4] + ".tsq"
                 query = read_member(archive, query_name) if query_name in names else None
                 entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query, data))
-                entry["signature"] = tsa_signature_status(reply, roots) if roots else "not checked (use --tsa-ca)"
+                entry["signature"], signer = tsa_signature_check(reply, roots) if roots else ("not checked (use --tsa-ca)", None)
                 if entry["signature"] == TSA_CHECKED:
-                    entry.update(qualified_timestamp(reply))
+                    entry.update(qualified_timestamp(reply, signer))
                 try:
                     entry.update(timestamp_certificate_reference(reply))
                 except (ValueError, IndexError, TypeError):
@@ -2558,7 +2562,8 @@ def ers_check(data, measure, roots=None, now=None):
             if not index and not position and stamp["partials"]:
                 other = len([value for value in stamp["partials"][0] if value not in values])
             if roots is not None:
-                signatures.append(tsa_signature_status(stamp["reply"], roots))
+                status, last_signer = tsa_signature_check(stamp["reply"], roots)
+                signatures.append(status)
             if stamps and stamp["time"] < stamps[-1]["time"]:
                 raise ValueError("ArchiveTimeStamp " + str(position + 1) + where + " is older than the one it renews")
             stamps.append(stamp)
@@ -2577,7 +2582,7 @@ def ers_check(data, measure, roots=None, now=None):
                   "expires": stamp_time(expires) if expires else None,
                   "state": "unknown" if expires is None else "in force" if now <= expires else "expired"}
     if signatures and signatures[-1] == TSA_CHECKED:
-        protection.update(qualified_timestamp(newest["reply"]))
+        protection.update(qualified_timestamp(newest["reply"], last_signer))
     chains = record["chains"]
     signature = ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if set(signatures) == {TSA_CHECKED}
                  else TSA_NO_MATCHING_ROOT)
@@ -7615,10 +7620,10 @@ def evidence_conditions(result, kind="evidence"):
         times.append(runtime["attested_at"])
     unchecked = [a for a in anchors if a not in checked] + [e for e in records if e not in proven]
     stamped = max([a.get("event_count") or 0 for a in checked] + [count for count, _ in covered], default=0)
-    qualified = next((a["qualified"] for a in checked if a.get("event_count") == events and a.get("qualified")), None)
-    if times and qualified:
+    qualified = next((a for a in checked if a.get("event_count") == events and a.get("qualified") and a.get("time")), None)
+    if qualified:
         status, text, values = ("met", "last exported record existed by {time}; qualified eIDAS time stamp from {service}",
-                                {"time": min(times), "service": qualified["service"]})
+                                {"time": qualified["time"], "service": qualified["qualified"]["service"]})
     elif times:
         status, text, values = "met", "last exported record existed by {time}", {"time": min(times)}
     elif checked or covered:

@@ -50,6 +50,10 @@
 - `verify.py --interactive --require evidence|attested` applies the required profile and exits 2 when it is not
   reached, as the direct command does; before, the interactive run dropped `--require` and could exit 0.
   `--compare` refuses `--require` before reading the archives instead of ignoring it.
+- The verifier marks an RFC 3161 time stamp as a qualified eIDAS time stamp only when the certificate that signed it
+  is the listed qualified unit; before, any qualified certificate carried in the token was enough. The external time
+  line of a qualified stamp now shows that stamp's own time instead of the earliest time of all sources, and the
+  `qualified` entry names the signer certificate's SHA-256.
 - A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
   summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".
