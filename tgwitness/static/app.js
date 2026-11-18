@@ -7317,7 +7317,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=6').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=7').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;
