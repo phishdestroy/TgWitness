@@ -983,7 +983,8 @@ class ExportOperations:
         covers = None
         if fmt in ("zip", "asice"):
             with self.app.state.store.reading() as db:
-                annotations = export_history.annotations_head(db) if include_board else 0
+                annotations = 0 if not include_board else (
+                    sealed["annotations"] if sealed.get("through") else export_history.annotations_head(db))
             covers = {"seq": sealed.get("through") or head, "annotations": annotations}
         async with self.export_lock, self.app.state.storage.lock:
             if fmt in ("zip", "asice"):
@@ -1046,7 +1047,10 @@ class ExportOperations:
         folder = store.root / "checkpoints" / "anchors"
         stamped = folder.is_dir() and any(proof.name.startswith(name + ".") and proof.suffix == ".tsr"
                                           for proof in folder.iterdir())
-        return {"through": through} if through and stamped else {"skipped": "no timestamp authority answered"}
+        noted = (checkpoint["statement"].get("annotations_head") or {"seq": 0})["seq"]
+        if through and stamped:
+            return {"through": through, "annotations": noted}
+        return {"skipped": "no timestamp authority answered"}
 
     def export_timestamp(self, loop):
         from ..anchoring import evidence_settings, post
