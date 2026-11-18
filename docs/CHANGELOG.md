@@ -25,6 +25,17 @@
 
 ## Unreleased
 
+- Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
+  preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
+  differed. The expected size and the size estimates for exports and storage now come from the image that is
+  downloaded.
+- Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
+  app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
+  taken from an invite join now comes from Telegram's answer, without another invite check.
+- An action that stops after it was sent now shows its reason in the panel and keeps it in the result record, instead
+  of the error type alone.
+- The interactive report names mini application and pseudo-secret records in the report language instead of showing
+  the internal record type.
 - Five fixes from the external review of 0.9.3, checked on RunPod before and after:
   printing a selection of records prints only the selection sheet, not the full dossier with its cover and the hashes
   of unselected records; the signed acquisition method, report title and summary follow what the journal holds — a
@@ -71,6 +82,12 @@
   timestamps on and no receipt yet it says it is waiting for the service, or that requests outside Telegram are
   turned off so no timestamp can be requested, and the summary reads "Integrity only until a timestamp receipt covers
   the last record". `/api/verify` adds `conditions.timestamp_state`.
+- Escape closes the command palette first when it was opened from the mobile menu, returning the focus to **Go to…**;
+  the next Escape closes the menu. Before, the first Escape closed the menu under the palette and the focus was lost
+  after the second.
+- The **Accounts** advice about public MTProxy servers counts only workspaces with a signed-in Telegram account. Before,
+  a new workspace that had never signed in was counted as "1 account uses public MTProxy servers" because public
+  MTProxy is its default route; the route is still shown on its card.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record

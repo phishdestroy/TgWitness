@@ -9854,6 +9854,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "创建结果未知。开始另一次转移前，请检查 Telegram。",
   "Message outcome unknown. Review the destination before resuming.": "发送结果未知。继续前，请检查目标会话。",
   "Forwarding is restricted in this chat.": "此聊天限制转发。",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "此聊天需先在机器人的小程序中通过检查才接纳新成员。TgWitness 不会打开它，因此账号未加入。",
   "Choose a channel or group where this account can post.": "请选择此账号可以发帖的频道或群组。",
   "Enter a title for the new channel or group.": "请输入新频道或群组的名称。",
   "The history page is not in message order.": "历史页面上的消息顺序不正确。",

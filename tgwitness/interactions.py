@@ -28,6 +28,18 @@ READ_ONLY_STOP = "Read-only was turned on before this action's turn. It was not 
 RESTART_STOP = "TgWitness stopped before this action's turn. It was not sent."
 
 
+class JoinCheck(Exception):
+    def __init__(self, bot_id):
+        super().__init__(bot_id)
+        self.bot_id = bot_id
+
+
+def admitted(answer):
+    if isinstance(answer, types.messages.ChatInviteJoinResultWebView):
+        raise JoinCheck(answer.bot_id)
+    return getattr(answer, "updates", answer)
+
+
 class Preview(BaseModel):
     model_config = ConfigDict(extra="forbid")
     link: str = Field(min_length=1, max_length=512)
@@ -500,7 +512,7 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
                     entity = checked.chat
                 else:
                     dispatched = True
-                    joined = await collector.client(functions.messages.ImportChatInviteRequest(target["invite"]))
+                    joined = admitted(await collector.client(functions.messages.ImportChatInviteRequest(target["invite"])))
                     chats = getattr(joined, "chats", None) or []
                     if chats:
                         entity = chats[0]
@@ -517,7 +529,7 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
                 if isinstance(entity, types.Channel):
                     try:
                         dispatched = True
-                        await collector.client(functions.channels.JoinChannelRequest(entity))
+                        admitted(await collector.client(functions.channels.JoinChannelRequest(entity)))
                     except UserAlreadyParticipantError:
                         pass
             result["chat_id"] = observe(collector, entity, body.observe is not False)
@@ -541,6 +553,8 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
             result.update(chat_id=body.chat_id, message_id=body.message_id, answer=plain(answer))
     except InviteRequestSentError:
         result["status"] = "approval_pending"
+    except JoinCheck as exc:
+        result.update(status="rejected", error_type="ChatInviteJoinResultWebView", bot_id=exc.bot_id)
     except FLOOD_ERRORS as exc:
         store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
                                                    store.get_setting("rpc_backoff_until", 0)))
@@ -550,7 +564,8 @@ async def perform(collector, body, account, prepared, saved, selected, pending=N
         cancelled = isinstance(exc, asyncio.CancelledError)
         definite = (isinstance(exc, ValueError) and not dispatched) or (isinstance(exc, RPCError) and exc.code < 500
                                                   and type(exc).__name__ != "BotResponseTimeoutError")
-        result.update(status="rejected" if definite else "unknown", error_type=type(exc).__name__)
+        result.update(status="rejected" if definite else "unknown", error_type=type(exc).__name__,
+                      **({"error": str(exc)} if isinstance(exc, ValueError) else {}))
     finish(store, pending, result)
     if cancelled:
         raise asyncio.CancelledError

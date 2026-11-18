@@ -1831,7 +1831,7 @@ function renderAccounts(){
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
   $("account-add-form").querySelector("button").disabled=s.demo;
-  const publicRoutes=list.filter(p=>!p.error_type&&p.collector?.network?.kind==="mtproxy_auto").length,advice=$("accounts-route-advice");
+  const publicRoutes=list.filter(p=>!p.error_type&&p.collector?.has_session&&p.collector?.network?.kind==="mtproxy_auto").length,advice=$("accounts-route-advice");
   advice.hidden=!publicRoutes||s.demo||!state.me?.admin||!viewAllowed('connection');
   if(!advice.hidden){
     $("accounts-route-advice-copy").textContent=trn("{n} account uses public MTProxy servers: its address changes and the connection drops, so messages can be missed.",
@@ -6615,6 +6615,7 @@ function actionResult(result){
   if(result.status==="succeeded"&&result.forwarded!=null)box.append(node("p","",tr("Forwarded {n} messages to {chat}.",{n:result.forwarded,chat:result.destination_title||result.destination})));
   if(result.error)box.append(node("p","",tr(result.error)));
   else if(result.error_type==="ChatForwardsRestrictedError")box.append(node("p","",tr("Forwarding is restricted in this chat.")));
+  else if(result.error_type==="ChatInviteJoinResultWebView")box.append(node("p","",tr("This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.")));
   else if(result.error_type)box.append(node("span","",result.error_type));
   if(result.retry_after)box.append(node("p","",tr("Retry after {n} seconds.",{n:result.retry_after})));
   if(result.answer?.message)box.append(window.TgWitnessPrivacy.render(result.answer.message,{className:"bubble-text",tr}));

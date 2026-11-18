@@ -3845,7 +3845,7 @@ class Collector:
                 media_skip = "authorized account identity unavailable"
             else:
                 descriptor = bytes(message)
-                size = getattr(message.file, "size", None)
+                size = file_hashes.expected_bytes(message)
                 job = {"account_id": account["id"], "descriptor": descriptor,
                        "max_bytes": rule["max_mb"] * 1024**2,
                        "priority": media_priority(message, size), "estimated_bytes": size}
@@ -5185,7 +5185,7 @@ class Collector:
             return {"file_status": "skipped_by_export_option", "file_kind": kind}
         if not settings["download_media"] and files is None:
             return {}
-        rule, size = settings["types"].get(kind) or {"enabled": False, "max_mb": 0}, getattr(message.file, "size", None)
+        rule, size = settings["types"].get(kind) or {"enabled": False, "max_mb": 0}, file_hashes.expected_bytes(message)
         if not rule["enabled"] and files != "hashes":
             return {"file_status": "type_not_collected", "file_kind": kind}
         if not duration_allowed(message, rule) and files != "hashes":

@@ -114,7 +114,7 @@ export function createResponsiveShell({node, icon, tr}) {
   });
   window.addEventListener("tgwitness:lock", () => {closeMenus();setOpen(false, false);});
   document.addEventListener("keydown", event => {
-    if (!opened) return;
+    if (!opened || document.querySelector("dialog:modal")) return;
     if (event.key === "Escape") { event.preventDefault(); setOpen(false); return; }
     if (event.key !== "Tab") return;
     const controls = [...sidebar.querySelectorAll("a[href],button,input,select,summary,[tabindex='0']")]

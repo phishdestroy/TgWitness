@@ -10109,6 +10109,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "نتيجة الإنشاء غير معروفة. تحقق من Telegram قبل بدء نقل آخر.",
   "Message outcome unknown. Review the destination before resuming.": "نتيجة الإرسال غير معروفة. راجع الوجهة قبل الاستئناف.",
   "Forwarding is restricted in this chat.": "إعادة التوجيه مقيدة في هذه المحادثة.",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "تقبل هذه الدردشة الأعضاء الجدد بعد اجتياز تحقق في التطبيق المصغّر لأحد البوتات. لا يفتحه TgWitness، لذلك لم ينضم الحساب.",
   "Choose a channel or group where this account can post.": "اختر قناة أو مجموعة يمكن لهذا الحساب النشر فيها.",
   "Enter a title for the new channel or group.": "أدخل اسمًا للقناة أو المجموعة الجديدة.",
   "The history page is not in message order.": "الرسائل في صفحة السجل ليست مرتبة.",

@@ -9854,6 +9854,7 @@
   "Creation outcome unknown. Check Telegram before starting another transfer.": "ไม่ทราบผลการสร้าง โปรดตรวจสอบ Telegram ก่อนเริ่มการโอนอีกครั้ง",
   "Message outcome unknown. Review the destination before resuming.": "ไม่ทราบผลการส่ง โปรดตรวจสอบปลายทางก่อนดำเนินการต่อ",
   "Forwarding is restricted in this chat.": "แชตนี้จำกัดการส่งต่อ",
+  "This chat admits new members after a check in a bot's mini app. TgWitness does not open it, so the account has not joined.": "แชทนี้รับสมาชิกใหม่หลังผ่านการตรวจสอบในมินิแอปของบอต TgWitness ไม่เปิดมินิแอปนั้น บัญชีจึงยังไม่ได้เข้าร่วม",
   "Choose a channel or group where this account can post.": "เลือกช่องหรือกลุ่มที่บัญชีนี้สามารถโพสต์ได้",
   "Enter a title for the new channel or group.": "ป้อนชื่อช่องหรือกลุ่มใหม่",
   "The history page is not in message order.": "ข้อความในหน้าประวัติไม่ได้เรียงตามลำดับ",
