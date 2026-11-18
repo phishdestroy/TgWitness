@@ -50,6 +50,9 @@
 - The journal's **Best match · word forms** search pages through more than 200 results: **Older records**, **Newer
   records** and **Latest** move between pages of 200 up to the search window of 1,000, and the footer names the
   results shown, such as “Results 201–400”. Before, only the first 200 results could be opened.
+- Settings → **Which chats?** and the setup steps of a finished setup show the scope that is saved now, not the one
+  chosen during setup. Marking the account as your main one in setup is refused while the workspace records more
+  than chosen chats, except for a one-time copy with recording stopped; the message says to narrow the scope first.
 - After a collector process that ended without an orderly stop, the next start checks every attachment recorded
   as saved during that run against its SHA-256. A missing or different file is recorded as
   `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.

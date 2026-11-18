@@ -5346,6 +5346,7 @@
   "Recording waits for a working connection": "La registrazione attende una connessione funzionante",
   "Chats to record chosen": "Chat da registrare scelte",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Sul tuo account principale si possono registrare solo le chat scelte. Scegli delle chat o usa un account separato.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Questo spazio di lavoro registra già più delle chat scelte. Limitalo alle chat scelte in «Quali chat?» prima di indicare questo account come principale.",
   "Only on a separate account.": "Solo su un account separato.",
   "Is this a separate account or your main one?": "È un account separato o il tuo account principale?",
   "Setup is applied.": "La configurazione è applicata.",

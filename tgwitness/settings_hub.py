@@ -94,17 +94,21 @@ def file_policy(choice):
 
 
 def wizard_state(app):
+    from .scope import scope_settings
     s, c = app.state.store, app.state.collector
     saved = s.get_setting("first_run", None)
     if saved is None:
         existing = bool(s.get_setting("setup", None) or c.status()["has_session"] or s.targets())
         saved = {"completed": existing, "skipped": False}
-        if existing:
-            from .scope import scope_settings
-            scope = scope_settings(s)
-            saved.update(scope=scope["mode"], folder_id=scope["folder_id"],
-                         chat_ids=[t["chat_id"] for t in s.targets(True)])
+    if saved.get("completed"):
+        scope = scope_settings(s)
+        saved = {**saved, "scope": scope["mode"], "folder_id": scope["folder_id"],
+                 "chat_ids": [t["chat_id"] for t in s.targets(True)]}
     return {**Draft().model_dump(), **saved}
+
+
+WIDE_MAIN = ("This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? "
+             "before marking this account as your main one.")
 
 
 def values(app):
@@ -505,6 +509,11 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
         if body.step >= 6 and not app.state.collector.status()["has_session"]:
             raise HTTPException(409, "Connect Telegram first.")
         old = wizard_state(app)
+        if body.account_kind == "main" and old.get("account_kind") != "main":
+            from .scope import scope_settings
+            collecting = app.state.collector.running or app.state.store.get_setting("resume", False)
+            if (body.goal != "copy" or collecting) and scope_settings(app.state.store)["mode"] != "selected":
+                raise HTTPException(409, WIDE_MAIN)
         app.state.store.set_setting("first_run", {**old, **body.model_dump(), "at": utcnow()})
         return state(app)
 

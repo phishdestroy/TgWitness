@@ -5319,6 +5319,7 @@
   "Recording waits for a working connection": "การบันทึกกำลังรอการเชื่อมต่อที่ทำงานได้",
   "Chats to record chosen": "เลือกแชทที่จะบันทึกแล้ว",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "บนบัญชีหลักของคุณบันทึกได้เฉพาะแชทที่เลือก เลือกแชทหรือใช้บัญชีแยก",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "พื้นที่ทำงานนี้บันทึกมากกว่าแชทที่เลือกอยู่แล้ว โปรดจำกัดให้เหลือเฉพาะแชทที่เลือกใน “แชทใดบ้าง?” ก่อนทำเครื่องหมายบัญชีนี้เป็นบัญชีหลัก",
   "Only on a separate account.": "เฉพาะบนบัญชีแยก",
   "Is this a separate account or your main one?": "นี่เป็นบัญชีแยกหรือบัญชีหลักของคุณ?",
   "Setup is applied.": "ใช้การตั้งค่าแล้ว",

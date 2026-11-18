@@ -5319,6 +5319,7 @@
   "Recording waits for a working connection": "記録は動作する接続を待っています",
   "Chats to record chosen": "記録するチャットを選びました",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "メインアカウントでは選んだチャットのみ記録できます。チャットを選ぶか、別のアカウントを使ってください。",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "このワークスペースはすでに選択したチャット以外も記録しています。このアカウントをメインアカウントとして指定する前に、「どのチャット？」で選択したチャットに絞ってください。",
   "Only on a separate account.": "別アカウントでのみ。",
   "Is this a separate account or your main one?": "これは別のアカウントですか、それともメインアカウントですか？",
   "Setup is applied.": "設定を適用しました。",

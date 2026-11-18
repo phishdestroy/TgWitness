@@ -5319,6 +5319,7 @@
   "Recording waits for a working connection": "기록이 작동하는 연결을 기다리는 중",
   "Chats to record chosen": "기록할 채팅 선택됨",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "주 계정에서는 선택한 채팅만 기록할 수 있습니다. 채팅을 고르거나 별도 계정을 사용하세요.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "이 워크스페이스는 이미 선택한 채팅보다 많은 채팅을 기록하고 있습니다. 이 계정을 주 계정으로 지정하기 전에 '어떤 채팅?'에서 선택한 채팅으로 좁히세요.",
   "Only on a separate account.": "별도 계정에서만.",
   "Is this a separate account or your main one?": "별도 계정인가요, 아니면 주 계정인가요?",
   "Setup is applied.": "설정이 적용되었습니다.",

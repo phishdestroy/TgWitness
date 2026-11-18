@@ -5346,6 +5346,7 @@
   "Recording waits for a working connection": "L'enregistrement attend une connexion fonctionnelle",
   "Chats to record chosen": "Discussions à enregistrer choisies",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Sur votre compte principal, seules les discussions choisies peuvent être enregistrées. Choisissez des discussions ou utilisez un compte distinct.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Cet espace de travail enregistre déjà plus que les chats choisis. Limitez-le aux chats choisis sous « Quels chats ? » avant d’indiquer ce compte comme votre compte principal.",
   "Only on a separate account.": "Uniquement sur un compte distinct.",
   "Is this a separate account or your main one?": "S'agit-il d'un compte distinct ou de votre compte principal ?",
   "Setup is applied.": "La configuration est appliquée.",
