@@ -4152,7 +4152,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "रिकॉर्ड नंबर messages.jsonl लाइन क्रम का पालन करते हैं। वे इस प्रति में रिकॉर्ड की पहचान करते हैं, न कि मूल Telegram संदेश आईडी की।",
   "Record reference": "रिकॉर्ड संदर्भ",
   "Regular Telegram API": "सामान्य Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "उदाहरण ZIP फ़ाइलनाम को उस फ़ाइल से बदलें जो आपको प्राप्त हुई है, और TRUSTED_SHA256 को अलग से पुष्टि किए गए फ़िंगरप्रिंट से बदलें। सत्यापन परिणाम को अपनी समीक्षा नोट्स के साथ रखें।",
   "Report labels may include English fallbacks. Original messages are not translated.": "रिपोर्ट लेबल में अंग्रेज़ी फ़ॉलबैक शामिल हो सकते हैं। मूल संदेश अनुवादित नहीं किए जाते।",
   "Report labels use this language. Original messages stay unchanged.": "रिपोर्ट लेबल इस भाषा का उपयोग करते हैं। मूल संदेश अपरिवर्तित रहते हैं।",
   "Report language: {language}.": "रिपोर्ट भाषा: {language}।",

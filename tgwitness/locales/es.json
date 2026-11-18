@@ -4152,7 +4152,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "Los números de registro siguen el orden de las líneas messages.jsonl. Identifican los registros de esta copia, no los ID de mensaje originales Telegram.",
   "Record reference": "Referencia del registro",
   "Regular Telegram API": "Normal Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "Sustituye el nombre de archivo de ejemplo ZIP por el archivo que hayas recibido, y TRUSTED_SHA256 por la huella digital confirmada por separado. Guarda el resultado de la verificación junto con tus notas de revisión.",
   "Report labels may include English fallbacks. Original messages are not translated.": "Las etiquetas de los informes pueden incluir versiones alternativas en inglés. Los mensajes originales no se traducen.",
   "Report labels use this language. Original messages stay unchanged.": "Las etiquetas de los informes utilizan este lenguaje. Los mensajes originales permanecen inalterados.",
   "Report language: {language}.": "Lenguaje del informe: {language}.",

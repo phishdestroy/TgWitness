@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- The verify commands of an account export and of its sharing copy now name the file as it is delivered,
+  `tgwitness-account-export-<id>.zip` and `tgwitness-disclosure-<id>.zip`, run from the extracted folder with that
+  file one level up, as chat and evidence archives already do. Before, README.txt said `ORIGINAL.zip`, the HTML report
+  `account-export.zip` or `disclosure.zip` with `--evidence original.zip`, and the download address sent yet another
+  name, so a command copied as written ended in "file not found". The download address now sends the same names as
+  the panel.
 - Masking of possible secrets now also hides a Telegram bot token written right after `bot`, as in Bot API addresses
   (`https://api.telegram.org/bot<token>/sendMessage`). Before, only a token standing on its own was masked, so the
   token in such an address stayed readable wherever the panel masks secrets: chat list, messages and journal records.

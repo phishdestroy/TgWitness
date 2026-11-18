@@ -4206,7 +4206,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "Номери записів відповідають порядку рядків messages.jsonl. Вони ідентифікують записи в цій копії, а не оригінальні ідентифікатори повідомлень Telegram.",
   "Record reference": "Посилання на запис",
   "Regular Telegram API": "Звичайний Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "Замініть приклад імені файлу ZIP на файл, який ви отримали, а TRUSTED_SHA256 — на відбиток, підтверджений окремо. Збережіть результат перевірки разом із вашими примітками щодо огляду.",
   "Report labels may include English fallbacks. Original messages are not translated.": "Назви звітів можуть містити англійські альтернативи. Оригінальні повідомлення не перекладаються.",
   "Report labels use this language. Original messages stay unchanged.": "У мітках звітів використовується ця мова. Оригінальні повідомлення залишаються незмінними.",
   "Report language: {language}.": "Мова звіту: {language}.",
