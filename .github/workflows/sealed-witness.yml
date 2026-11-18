@@ -40,7 +40,7 @@ jobs:
       contents: read
       id-token: write
       attestations: write
-    uses: phishdestroy/TgWitness/.github/workflows/sealed-collector.yml@615e96c927841399a4720bddfa8d08f76c9173ce  # sealed-collector-v0.9.3-20261112
+    uses: phishdestroy/TgWitness/.github/workflows/sealed-collector.yml@3aedb45ce0e682d1120555165b026fd2f3bdb685  # sealed-collector-v0.9.3-20261118
     with:
       recipient: ${{ inputs.recipient }}
       session_minutes: ${{ inputs.session_minutes }}
