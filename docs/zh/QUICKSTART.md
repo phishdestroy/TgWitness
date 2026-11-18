@@ -87,7 +87,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 API 凭据用于标识您的应用程序；它们本身并不能授权账户。私有群组无需公开用户名，但您的账户必须拥有访问权限。
 
-对于已有账户，请参阅[账户与会话格式](../ACCOUNTS.md)：面板支持 Telethon StringSession、Telethon/Pyrogram SQLite、单账户 TData ZIP 以及受支持的账户 JSON。将会话及其配套 JSON 一起选中，然后点击**连接账户**。二维码登录同样可用，并支持相同的可选 API 设置。不支持 TDLib、机器人会话以及 CSV/JSON 格式的账户清单。
+对于已有账户，请参阅[账户与会话格式](../ACCOUNTS.md)：面板支持 Telethon StringSession、Telethon/Pyrogram SQLite、单账户 TData ZIP 以及受支持的账户 JSON。将会话及其配套 JSON 一起选中，然后点击**检查文件**，再点击**连接账户**。二维码登录同样可用，并支持相同的可选 API 设置。不支持 TDLib、机器人会话以及 CSV/JSON 格式的账户清单。
 
 如有多个账户，请使用**账户 → 导入账户**，并选择它们受支持的会话文件。配套的 JSON 文件按基本文件名（basename）配对；每个导入的账户都会获得自己的工作区。请参阅[批量导入与账户分组](../ACCOUNTS.md#bulk-import-and-account-groups)。
 
