@@ -50,6 +50,9 @@
 - An access without the account or sources permission no longer sees **Connect account** or **Choose chats** on an
   empty chat list, which led back to Chats; it reads that the workspace administrator connects the account or
   chooses the chats this access can read.
+- The setup goals describe timestamps as they work: each record is signed when it is saved, journal checkpoints are
+  sent for independent timestamps at intervals, and an archive carries a timestamp only when a service answered.
+  Before, **Evidence for a case** said it confirms each record as it is written with independent timestamps.
 
 - The chat search on **Chats** now searches Telegram itself, as the Telegram app does. Under the saved chats and the
   account's own chats it lists **Global search**: chats the account is in and public channels, groups, bots and people
