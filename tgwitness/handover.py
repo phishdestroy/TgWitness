@@ -30,6 +30,48 @@ GLOBAL_KEEP = frozenset((
     "network.route_fallback", "network.policy_changed", "account.authorized", "account.signed_out",
     "monitoring.changed", "capture.changed", "parameters.changed", "recheck.changed", "evidence.changed",
     "anchor.completed", "storage.low", "storage.ok"))
+GLOBAL_FIELDS = {kind: frozenset(fields.split()) for kind, fields in {
+    "process.started": "version previous_observation run coverage",
+    "process.stopped": "reason",
+    "observation.started": "run_id monotonic_ns account client route clock capture monitoring scope parameters targets "
+                           "coverage catch_up_from restart_note",
+    "observation.stopped": "reason operation run_id media_jobs_preserved",
+    "coverage.gap": "reason completeness meaning synthetic run_id operation error_type cause telegram_error "
+                    "saved_records_retained dc_id route before_loss pending_handlers concurrent_sessions sessions "
+                    "scope pts_before pts_after telegram_top_message latest_messages_returned telegram_pts_before "
+                    "telegram_pts silent_since detected updates_while_paused updates_not_recorded buffer_limit "
+                    "updates_dropped chats chats_not_listed n token found_by waited_seconds ack_sent_at "
+                    "ack_delay_seconds probe_chat_id probe_message_id ack_message_id witness_account_id",
+    "connection.restored": "reason completeness detected diverted_since missed_since n synthetic",
+    "connection.retry": "attempt",
+    "connection.retry_failed": "attempt error_type retry_at_unix",
+    "collector.heartbeat": "connected run_id monotonic_ns media_jobs interval_seconds meaning",
+    "clock.discontinuity": "run_id wall_minus_monotonic_seconds meaning",
+    "telegram.backoff": "operation context method wrappers failed_method flood_key error_type retry_after_seconds "
+                        "seconds retry_at wait_until observed_at activity",
+    "network.changed": "kind has_credentials fallback_to_direct",
+    "network.route_assigned": "kind proxy_id source returned_from_direct fallback_to_direct meaning",
+    "network.route_rotated": "kind from_proxy_id to_proxy_id source reason error_type previous_cooldown_seconds "
+                             "fallback_to_direct",
+    "network.route_unavailable": "kind previous_proxy_id reason error_type fallback_to_direct meaning",
+    "network.route_fallback": "kind to reason exposure without_proxy_seconds fallback_to_direct meaning",
+    "network.policy_changed": "exposure outside_enabled outside_proxy outside_route before source meaning",
+    "account.authorized": "account_id key_origin client login_method session_origin meaning",
+    "account.signed_out": "account_id telegram_session_ended error_type kept",
+    "monitoring.changed": "before after applies_to coverage history_snapshots",
+    "capture.changed": "download_media include_avatars media_action oversized_media messages_first "
+                       "preserve_ephemeral_media record_disabled_media max_media_mb types",
+    "parameters.changed": "before after applies",
+    "recheck.changed": "recheck_minutes recheck_other_minutes meaning",
+    "evidence.changed": "enabled tsa_urls ots_calendars interval_minutes drand devices gateway fingerprint",
+    "anchor.completed": "checkpoint results covered deferred meaning",
+    "storage.low": "free_bytes threshold_bytes media_jobs",
+    "storage.ok": "free_bytes media_jobs",
+    "scope.applied": "mode folder types own_actions added paused resumed excluded dialogs_inspected dialog_refresh_failed "
+                     "coverage",
+    "scope.changed": "before after acknowledged warning coverage",
+    "recheck.completed": "chats duration_seconds recovered edited missing checked meaning"}.items()}
+PROBE_FIELDS = ("probe_chat_id", "probe_message_id", "ack_message_id", "witness_account_id")
 CHAT_KEEP = frozenset((
     "target.changed", "target.priority", "target.removed", "source.added", "source.discovered", "coverage.gap",
     "snapshot.started", "snapshot.completed", "snapshot.interrupted", "chat_export.started", "chat_export.completed",
@@ -264,7 +306,7 @@ class Minimiser:
                 shown["button"] = None
         else:
             shown = fields(payload, {"request_id", "request_event", "status", "chat_id", "message_id",
-                                     "message_event", "error_type", "retry_after"})
+                                     "message_event", "error_type", "retry_after", "already_member"})
             answer = payload.get("answer")
             if isinstance(answer, dict):
                 names = {"cache_time", "alert", "has_url", "native_ui"}
@@ -300,7 +342,7 @@ class Minimiser:
             listed = [t for t in payload["chats"] if isinstance(t, dict)
                       and (t.get("chat_id") in chats or event["kind"] == "coverage.gap" and t.get("chat_id") is None)]
             shown["chats"] = listed
-            if listed != payload["chats"]:
+            if listed != payload["chats"] or "chats_not_listed" in payload:
                 shown.pop("chats_not_listed", None)
                 totals = ("updates_dropped",) if event["kind"] == "coverage.gap" else ("recovered", "edited", "missing", "checked")
                 field_of = {"updates_dropped": "updates"}
@@ -308,9 +350,18 @@ class Minimiser:
                     if isinstance(payload.get(total), int):
                         part = field_of.get(total, total)
                         shown[total] = sum(t[part] for t in listed if type(t.get(part)) is int)
-        if shown == payload:
+        if payload.get("probe_chat_id") not in chats:
+            for field in PROBE_FIELDS:
+                shown.pop(field, None)
+        allowed = GLOBAL_FIELDS.get(event["kind"], ())
+        shown = {k: v for k, v in shown.items() if k in allowed}
+        withheld = [] if shown == payload else ["other chats"]
+        witness = shown.get("witness_account_id")
+        if witness is not None and not self.shown(witness):
+            shown["witness_account_id"], withheld = self.label(witness), withheld + ["sender"]
+        if not withheld:
             return self.keep(event)
-        return self.minimise(event, shown, ["other chats"])
+        return self.minimise(event, shown, withheld)
 
     def message(self, event):
         payload, key = event["payload"], (event["chat_id"], event["message_id"])

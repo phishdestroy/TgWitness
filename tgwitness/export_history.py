@@ -22,18 +22,33 @@ SETUP_KINDS = ("process.*", "network.*", "connection.*", "account.authorized", "
                "group.settings_inherited", "anchor.*", "evidence_record.*")
 
 
-def evidence_exported(store, seq, annotations=0):
+def evidence_exported(store, seq, annotations=0, archive=None):
     with store.transaction():
         previous = store.get_setting(EVIDENCE_KEY, None) or {}
-        store.set_setting(EVIDENCE_KEY, {"seq": max(seq, previous.get("seq", 0)),
-                                         "annotations": max(annotations, previous.get("annotations", 0)),
-                                         "at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+        value = {"seq": max(seq, previous.get("seq", 0)),
+                 "annotations": max(annotations, previous.get("annotations", 0)),
+                 "at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+        latest = archive if archive and seq >= previous.get("seq", 0) else previous.get("archive")
+        if latest:
+            value["archive"] = latest
+        store.set_setting(EVIDENCE_KEY, value)
 
 
 def delivered(store, entry):
     covers = (entry or {}).get("covers")
     if isinstance(covers, dict) and type(covers.get("seq")) is int:
-        evidence_exported(store, covers["seq"], covers.get("annotations") or 0)
+        archive = {key: entry[key] for key in ("sha256", "bytes", "format", "encrypted", "created_at") if key in entry}
+        evidence_exported(store, covers["seq"], covers.get("annotations") or 0, archive or None)
+
+
+def delivered_archive(db):
+    row = db.execute("SELECT value FROM settings WHERE key=?", (EVIDENCE_KEY,)).fetchone()
+    saved = json.loads(row[0]) if row else {}
+    if not saved.get("seq"):
+        return None
+    archive = saved.get("archive") if isinstance(saved.get("archive"), dict) else {}
+    return {"sha256": archive.get("sha256"), "bytes": archive.get("bytes"), "format": archive.get("format"),
+            "created_at": archive.get("created_at"), "delivered_at": saved.get("at")}
 
 
 def annotations_head(db):
