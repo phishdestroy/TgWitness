@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- GitHub Actions capture: a capture cancelled in the panel, or whose time ran out before collection started, ends
+  the run with the notice "No archive" instead of a failed run reading "RuntimeError"; a failed run names the
+  supervisor's reason, which is fixed text without private data. The temporary panel opens in the browser's
+  language when it is English or Russian, and the QR sign-in button no longer touches the line above it.
 - GitHub Actions capture runs the current collector: the approved workflow `3aedb45c` checks out collector
   `1d07ebb1` instead of the 0.9.3 build of 11 November, and the pair is the newest entry of the sealed release
   policy. Archives from earlier approved pairs still verify.

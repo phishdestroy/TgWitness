@@ -12,6 +12,7 @@
 .runner-api { display:grid; grid-template-columns:1fr 2fr; gap:16px; }
 .runner-page input,.runner-page select { margin:8px 0 16px; }
 .runner-page button { min-height:42px; }
+.runner-page #qr { margin-top:18px; }
 .runner-page #qr-image { display:block; width:220px; max-width:100%; background:white; padding:12px; border-radius:var(--radius); margin:18px auto; }
 .runner-phone { border-top:1px solid var(--border); margin-top:22px; padding-top:20px; }
 .runner-progress { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:22px 0; }

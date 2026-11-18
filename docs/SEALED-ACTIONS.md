@@ -44,7 +44,8 @@ substitution on sample data. **Start my capture** opens the wizard.
    or `tgwitness/static/capture.html` from a trusted checkout in a modern browser.
    The helper makes no network requests for key or
    file processing. The helper supports the site's interface languages; the
-   temporary collection panel supports English and Russian.
+   temporary collection panel supports English and Russian and opens in the
+   browser's language when it is one of them.
 2. Generate a key and save **sealed-key.json**. This is the only private
    decryption key. Copy the separate public **recipient** value. Losing the
    private key loses access to both the connection and the archive.
@@ -198,7 +199,7 @@ placed in the attestation. The attestation timestamp is not a message timestamp.
 | No `sealed-connection` artifact | Check whether the job started and completed its startup/upload step. Queue, runner, image download, tunnel or repository policy failures can prevent startup. |
 | Cannot open the connection | Load the saved key for this run, unzip the downloaded artifact and select `connection.tgwsealed`. The runner must still be active. |
 | History is paused | Check the panel's status and use Resume while the session remains active, or finish with the data already collected. Telegram limits and inaccessible content can leave gaps. |
-| No `sealed-result` | Cancellation or expiry before starting collection produces no archive. A failed collection, attestation or packaging step also prevents delivery. Inspect the failed step without posting credentials. |
+| No `sealed-result` | Cancellation or expiry before starting collection produces no archive; the run then ends with the notice **No archive**. A failed collection, attestation or packaging step also prevents delivery; the failed step names the supervisor's reason without private data. Inspect it without posting credentials. |
 | Browser cannot decrypt a large archive | Use the streaming CLI below for packages larger than 256 MiB. A wrong or lost private key cannot decrypt the result. |
 | Verification rejects the signer | Use a trusted current TgWitness installation and the exact caller `OWNER/REPOSITORY`. Do not accept a replacement policy supplied with the archive. |
 | Telegram still lists the temporary session | End it in Settings → Devices. Logout can fail and a forcibly terminated workflow may not run cleanup. |
