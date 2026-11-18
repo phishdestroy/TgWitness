@@ -455,7 +455,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 readme = (("TgWitness compact evidence archive\n\n" + packaging["meaning"] + "\n\n"
                            + "Open index.html. Verify evidence.zip using verify.py from an independently trusted checkout.\n"
                            + "\n".join(LIMITS) + README).encode() if compact else
-                          report.readme(context, listed, "\n".join(LIMITS) + README))
+                          report.readme(context, listed, "\n".join(LIMITS) + README.replace(
+                              "python verify.py evidence.zip", "python verify.py ../" + context["archive_name"])))
                 write_member("README.txt", [verification_kit.quickstart(options.get("language", "en")), b"\n", readme]
                              if compact else [readme])
                 write_member("SHA256SUMS", [report.sha256sums(hashes)])
