@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- The Investigation panel reads investigation mode each time it opens; before, it kept the state from its first
+  opening and could offer to turn on a mode already turned on in Sources.
+- Opening a mini application while Telegram asks to wait returns the waiting time instead of a refusal; a frozen or
+  limited account is recorded as restricted, as for other account actions. Screenshots of a mini application open
+  for an access limited to its chat.
 - Mini applications open from the panel: **Open mini app** under a button and **Info → Mini apps** in a chat list
   the chat's mini application buttons, `t.me/<bot>/<app>` and `?startapp` links, and a bot's menu and main app.
   Opening one asks Telegram for its address as the account, loads it once in an isolated headless Chromium through

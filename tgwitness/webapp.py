@@ -11,6 +11,7 @@ from .indicators import Indicators
 from .keyboard import of_payload
 from .security import private_write
 from .store import utcnow
+from .telegram_client import FLOOD_ERRORS
 
 MAX_BYTES = 4 * 1024**2
 MAX_ENDPOINTS = 500
@@ -252,6 +253,8 @@ async def launch(collector, chat_id, entry):
     details = {"entry": entry["type"], "platform": PLATFORM}
     message_id = None
     if entry["type"] == "button":
+        if entry.get("seq") is None:
+            raise ValueError("Select a saved mini application button.")
         rows = store.events(chat_id=chat_id, before=int(entry["seq"]) + 1, limit=1)
         if not rows or rows[0]["seq"] != entry["seq"]:
             raise ValueError("Select a saved mini application button.")
@@ -313,6 +316,9 @@ async def launch(collector, chat_id, entry):
     except errors.RPCError as exc:
         store.append("webapp.launch_failed", {**details, "error": type(exc).__name__, "message": str(exc)[:300]},
                      chat_id, message_id)
+        if isinstance(exc, FLOOD_ERRORS):
+            raise
+        interactions.note_restriction(store, exc)
         raise ValueError("Telegram refused to open this mini application. The journal records its answer.") from None
     address = getattr(answer, "url", None)
     if not isinstance(address, str) or not address.startswith(("https://", "http://")):
@@ -508,7 +514,7 @@ def register(app, authenticate, require_live, visible_chats):
             raise HTTPException(409, str(exc)) from None
         except interactions.AccountRestricted as exc:
             raise HTTPException(409, str(exc)) from None
-        except errors.FloodWaitError as exc:
+        except FLOOD_ERRORS as exc:
             raise HTTPException(429, {"message": "Telegram asked to wait before the next account action.",
                                       "retry_after": exc.seconds}) from None
         except errors.RPCError:

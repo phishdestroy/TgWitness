@@ -253,7 +253,7 @@
     if (owner !== key()) {owner = key(); reset();}
     drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true');
     if (!modules) modules = await json('extensions').catch(() => ({loaded: [], goal: null}));
-    if (!scopeInfo && may('sources') && !state.status?.demo) scopeInfo = await json('scope').catch(() => null);
+    if (may('sources') && !state.status?.demo) scopeInfo = await json('scope').catch(() => scopeInfo);
     clearInterval(timer);
     timer = setInterval(() => {if (open() && current && !current.fixed && !typing()) refresh().catch(() => {});}, 5000);
     current ? await refresh() : await listing();

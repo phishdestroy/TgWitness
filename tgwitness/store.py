@@ -561,12 +561,12 @@ class Store:
                 (*STORED_MEDIA_KINDS, seq)) if r[1]]
 
     def media_in_chats(self, sha256, chat_ids):
-        marks = ",".join("?" * len(chat_ids))
+        marks, kinds = ",".join("?" * len(chat_ids)), MEDIA_KINDS + ("webapp.file",)
         with self.reading() as db:
             return db.execute(
-                "SELECT 1 FROM events WHERE kind IN (?,?) AND chat_id IN (" + marks + ")"
+                "SELECT 1 FROM events WHERE kind IN (" + ",".join("?" * len(kinds)) + ") AND chat_id IN (" + marks + ")"
                 " AND json_extract(payload,'$.media_sha256')=? LIMIT 1",
-                (*MEDIA_KINDS, *sorted(chat_ids), sha256)).fetchone() is not None
+                (*kinds, *sorted(chat_ids), sha256)).fetchone() is not None
 
     def stored_media(self, identity):
         if not identity:
