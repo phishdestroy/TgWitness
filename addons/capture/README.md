@@ -323,7 +323,8 @@ resource signing, rrweb playback and automatic import into TgWitness are not par
 this preview. Original signed packages can be independently retained and reviewed.
 
 Default limits: 512 MiB per artifact, 8 GiB per verified archive, 100,000 archive
-members, 2 MiB per journal event. Oversize files fail explicitly. Frequent PNGs may
+members, 2 MiB per journal event. Oversize files fail explicitly. An export that would
+exceed the archive limits stops before the ZIP is written and names the limit. Frequent PNGs may
 cost more storage than compressed video; measure with your sources. Polling and
 periodic backups can miss transient states and do not reconstruct unobserved history.
 

@@ -68,6 +68,11 @@
   notice names no one, and the rights and session checks it was compared with can be up to 24 hours and 10 minutes
   old. New records keep the deleting account unknown with the attribution `not_named` and state the last rights or
   session check with its age; reports and the panel word older `peer_or_admin` records the same way.
+- The public showcase manager follows the theme chosen in the panel; before, it followed only the system theme. A
+  capture export over its verifier's limits (512 MiB per file, 8 GiB in total, 100,000 entries) stops before the ZIP
+  is written and names the limit, instead of writing the whole archive and then reporting a failed verification. The
+  pseudo-secret description no longer says that every file is saved: a file waits while downloads are off or its
+  size or free disk space stops it, and each deferred or failed download is recorded.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
