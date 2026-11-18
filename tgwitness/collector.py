@@ -5134,8 +5134,6 @@ class Collector:
                 if writing:
                     raise
                 wait = exc.seconds + 1
-                until = max(time.time() + wait, self.store.get_setting("rpc_backoff_until", 0) or 0)
-                self.store.set_setting("rpc_backoff_until", until)
                 self.store.append("telegram.backoff", {"seconds": wait, "context": "chat_export"})
                 if on_wait:
                     on_wait(wait)
