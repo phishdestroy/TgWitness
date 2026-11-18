@@ -33,6 +33,10 @@
 - A minimised handover keeps only the selected chats in the observed-chat list of `process.started`. Before, every
   start record carried the ID, title and type of each observed chat into the handover, so a handover of one chat
   named all the others.
+- A standalone HTML report saved without its records (over 20,000 records or 32 MiB) fills its Check tab, also when
+  opened at `#check`: the seal result, an explanation that the data is not embedded and the archive check. Before,
+  the tab stayed empty.
+
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
   could leave the journal naming a file whose bytes were never written.
