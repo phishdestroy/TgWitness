@@ -10,7 +10,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 
 from .continuity import LIMITS, STYLE_HASH, analyze, parse_export, render
-from .export import export_zip
+from .export import ExportLimit, export_zip
 from .format import canonical, digest, utcnow
 from .journal import Journal, durable_write
 from .trusted_model import Choice, ExportChoice, Scroll, SetupInput, VisualNote
@@ -455,6 +455,8 @@ def create_app(root, config, runtime=None):
             path = rec.journal.root / "exports" / (uuid.uuid4().hex + ".zip")
             try:
                 await asyncio.to_thread(export_zip, rec.journal, path)
+            except ExportLimit as exc:
+                raise HTTPException(409, str(exc)) from None
             except Exception:
                 raise HTTPException(503, "Export verification failed; no archive released") from None
             return FileResponse(path, media_type="application/zip", filename="trusted-live.zip")

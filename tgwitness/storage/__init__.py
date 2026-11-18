@@ -188,6 +188,19 @@ def parse_config(text):
     return remote, kind
 
 
+def remote_media(root):
+    path = Path(root) / "storage.sqlite3"
+    if not path.is_file() or replica.filesystem_link(path):
+        return frozenset()
+    db = sqlite3.connect(path)
+    try:
+        return frozenset(row[0] for row in db.execute("SELECT digest FROM objects WHERE evicted=1"))
+    except sqlite3.Error:
+        return frozenset()
+    finally:
+        db.close()
+
+
 class Receipts:
     def __init__(self, root):
         if replica.filesystem_link(root / "storage.sqlite3"):

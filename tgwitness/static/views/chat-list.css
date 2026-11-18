@@ -60,6 +60,7 @@
 .chats-sidebar .chat-item { position: relative; padding: 0; gap: 0; align-items: stretch; }
 .chat-choice { display: flex; gap: 10px; align-items: center; flex: 1; min-width: 0; padding: 12px 8px; border: 0; background: none; color: inherit; text-align: start; }
 .chat-choice:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: inherit; }
+.chat-choice-static { cursor: default; }
 .chat-priority { flex: 0 0 28px; width: 28px; min-height: 36px; align-self: center; padding: 4px; margin-inline-end: 4px; border: 0; background: none; color: var(--muted); }
 .chat-priority .icon { width: 15px; height: 15px; }
 .chat-priority.on { color: var(--accent-text); }

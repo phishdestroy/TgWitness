@@ -69,8 +69,8 @@ from .media.workers import AdaptiveSlots
 from .export.batch_requests import MessageBatcher
 from .export.live_export import NOT_READY as LIVE_NOT_READY, LiveExport
 from . import secret_chats
-from .scope import (allowed, folder_rule, in_folder, kind_of, public_username, recheck_settings, restriction,
-                    scope_settings, visibility)
+from .scope import (OPERATOR_PAUSED, allowed, folder_rule, in_folder, kind_of, operator_paused, public_username,
+                    recheck_settings, restriction, scope_settings, visibility)
 from .verify import fingerprint
 
 LOG = logging.getLogger("tgwitness.collector")
@@ -708,6 +708,7 @@ class Collector:
         self.unavailable_since = None
         self.pool_retry_at = 0
         self.target_ids = set()
+        self.scope_ids = set()
         self.known_ids = set()
         self.target_revision = -1
         self.folders = {}
@@ -901,6 +902,7 @@ class Collector:
         if self.target_revision != self.store.targets_revision:
             targets = self.store.targets()
             self.target_ids = {t["chat_id"] for t in targets if t["enabled"]}
+            self.scope_ids = {t["chat_id"] for t in targets if t["enabled"] and t["origin"] == "scope"}
             self.known_ids = {t["chat_id"] for t in targets}
             self.target_revision = self.store.targets_revision
 
@@ -911,10 +913,12 @@ class Collector:
     async def covers(self, chat_id, entity=None, *, message_ids=()):
         if chat_id is None:
             return False
-        if self.selected(chat_id):
-            return True
         scope = scope_settings(self.store)
-        if scope["mode"] == "selected" or chat_id in scope["exclude"]:
+        if chat_id in scope["exclude"]:
+            return False
+        if self.selected(chat_id):
+            return not (scope["mode"] == "selected" and chat_id in self.scope_ids)
+        if scope["mode"] == "selected":
             return False
         if chat_id in self.known_ids or chat_id in self.scope_rejected:
             return False
@@ -1227,19 +1231,28 @@ class Collector:
     async def apply_scope(self, refresh=True):
         scope = scope_settings(self.store)
         self.scope_rejected = set()
+        failure = None
         if refresh or (scope["mode"] != "selected" and not self.dialog_cache):
-            await self.dialogs()
+            try:
+                await self.dialogs()
+            except (asyncio.CancelledError, *AUTHORIZATION_ERRORS):
+                raise
+            except Exception as exc:
+                failure = exc
         self.scope_refreshed_at = time.time()
         excluded, rule = set(scope["exclude"]), self.folder_for(scope)
-        if scope["mode"] == "folder" and rule is None:
+        if scope["mode"] == "folder" and rule is None and failure is None:
             raise ValueError("The chosen Telegram folder was not found. Choose a folder again.")
         added, paused, resumed = [], [], []
         known = {t["chat_id"]: t for t in self.store.targets()}
+        held = operator_paused(self.store)
         with self.store.transaction():
             for chat_id, target in known.items():
                 if chat_id in excluded and target["enabled"]:
                     self.store.set_target(chat_id, target["title"], target["kind"], False)
                     paused.append(chat_id)
+                elif target["origin"] == "scope" and chat_id in held and not target["enabled"]:
+                    continue
                 elif target["origin"] == "scope":
                     entry = self.dialog_cache.get(chat_id)
                     if (scope["mode"] == "selected" or chat_id in excluded
@@ -1247,6 +1260,8 @@ class Collector:
                         wanted = False
                     elif scope["mode"] == "account":
                         wanted = True
+                    elif rule is None:
+                        wanted = bool(target["enabled"])
                     elif entry:
                         wanted = in_folder(rule, chat_id, entry["kind"], entry["entity"], entry["archived"])
                     elif rule.get("all") or chat_id in rule["include"] or chat_id in rule["exclude"]:
@@ -1257,7 +1272,7 @@ class Collector:
                     if bool(target["enabled"]) != wanted:
                         self.store.set_target(chat_id, target["title"], target["kind"], wanted)
                         (resumed if wanted else paused).append(chat_id)
-            if scope["mode"] != "selected":
+            if scope["mode"] != "selected" and failure is None:
                 for chat_id, entry in self.dialog_cache.items():
                     if chat_id in known or chat_id in excluded or not allowed(scope, entry["kind"]):
                         continue
@@ -1266,6 +1281,10 @@ class Collector:
                         continue
                     self.store.set_target(chat_id, entry["title"], entry["kind"], True, origin="scope", priority=0)
                     added.append(chat_id)
+            kept = {chat_id for chat_id in held if known.get(chat_id, {}).get("origin") == "scope"
+                    and not known[chat_id]["enabled"]}
+            if kept != held:
+                self.store.set_setting(OPERATOR_PAUSED, sorted(kept))
             if added or paused or resumed:
                 self.store.append("scope.applied", {
                     "mode": scope["mode"], "folder": (rule or {}).get("title"), "types": scope["types"],
@@ -1274,6 +1293,7 @@ class Collector:
                               for c in added],
                     "paused": paused, "resumed": resumed, "excluded": sorted(excluded),
                     "dialogs_inspected": len(self.dialog_cache),
+                    **({"dialog_refresh_failed": type(failure).__name__} if failure else {}),
                     "coverage": ("all accessible dialogs inspected; " if scope["mode"] != "selected"
                                  else "configured dialog list inspected; ") + "new matching chats are added as they appear; " + (
                                     "the latest " + str(scope["new_chats"]["history"]) + " messages of each added chat "
@@ -1282,6 +1302,8 @@ class Collector:
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
             for chat_id in added:
                 self.request_intake(chat_id, self.dialog_cache[chat_id]["entity"])
+        if failure is not None:
+            raise failure
         return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
 
     def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):

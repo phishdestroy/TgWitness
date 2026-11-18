@@ -984,6 +984,7 @@ class ExportOperations:
                 require_records=fmt in ("html", "json", "pdf"),
                 container=container,
                 through=sealed.get("through"),
+                chosen_at=sealed.get("chosen_at"),
             )
             try:
                 if password is not None:
@@ -1078,7 +1079,8 @@ class ExportOperations:
         folder = store.root / "checkpoints" / "anchors"
         proofs = [proof for proof in folder.iterdir() if proof.name.startswith(name + ".")] if folder.is_dir() else []
         found = {"rfc3161"} if any(proof.suffix == ".tsr" for proof in proofs) else set()
-        digest = hashlib.sha256((store.root / "checkpoints" / (name + ".json")).read_bytes()).digest()
+        data = (store.root / "checkpoints" / (name + ".json")).read_bytes()
+        digest = hashlib.sha256(data).digest()
         for proof in proofs:
             if proof.suffix == ".ots":
                 try:
@@ -1087,9 +1089,10 @@ class ExportOperations:
                     continue
                 if status in ("pending", "bitcoin-unverified"):
                     found.add("opentimestamps-" + status)
-        noted = (checkpoint["statement"].get("annotations_head") or {"seq": 0})["seq"]
+        noted = (json.loads(data)["statement"].get("annotations_head") or {"seq": 0})["seq"]
         if through and found:
-            return {"through": through, "proofs": sorted(found), "annotations": noted}
+            return {"through": through, "proofs": sorted(found), "annotations": noted,
+                    "chosen_at": checkpoint["statement"]["created_at"]}
         return {"skipped": "no timestamp authority or calendar answered"}
 
     def export_timestamp(self, loop):

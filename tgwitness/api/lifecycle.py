@@ -30,7 +30,7 @@ from ..profiles import Profiles
 from ..provenance import run_receipt
 from ..security import InstanceLock
 from ..security import Vault
-from ..storage import Storage
+from ..storage import Storage, remote_media
 from ..store import Store
 from ..store import version_key
 from ..workers import complete_in_thread
@@ -193,6 +193,7 @@ class LifecycleOperations:
 
             rolled_back = await asyncio.to_thread(rollback.check, store, vault.public_key)
             previous = store.stats()["head"]
+            unclean_after = store.unclean_stop()
             process_event = store.append(
                 "process.started",
                 {
@@ -211,6 +212,8 @@ class LifecycleOperations:
                             "restored from an older copy or replaced", previous["seq"] if previous else 0,
                             rolled_back["remembered"]["seq"], rolled_back["reason"])
             interactions.abandon(store, interactions.RESTART_STOP)
+            if unclean_after is not None:
+                await complete_in_thread(store.reconcile_saved_media, unclean_after, remote_media(store.root))
             retain_checkpoint(store, vault)
             journal_ready = True
             await complete_in_thread(store.fulltext.start)
