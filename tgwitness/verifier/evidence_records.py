@@ -25,7 +25,7 @@ from .timestamps import (
     TSA_NO_MATCHING_ROOT,
     timestamp_token,
     tsa_roots,
-    tsa_signature_status,
+    tsa_signature_check,
     tst_info,
 )
 ERS_RECORD = re.compile(r"anchors/(checkpoint-\d{12,})(?:\.renewal-(\d{1,6}))?\.ers")
@@ -168,7 +168,8 @@ def ers_check(data, measure, roots=None, now=None):
             if not index and not position and stamp["partials"]:
                 other = len([value for value in stamp["partials"][0] if value not in values])
             if roots is not None:
-                signatures.append(tsa_signature_status(stamp["reply"], roots))
+                status, last_signer = tsa_signature_check(stamp["reply"], roots)
+                signatures.append(status)
             if stamps and stamp["time"] < stamps[-1]["time"]:
                 raise ValueError("ArchiveTimeStamp " + str(position + 1) + where + " is older than the one it renews")
             stamps.append(stamp)
@@ -187,7 +188,7 @@ def ers_check(data, measure, roots=None, now=None):
                   "expires": stamp_time(expires) if expires else None,
                   "state": "unknown" if expires is None else "in force" if now <= expires else "expired"}
     if signatures and signatures[-1] == TSA_CHECKED:
-        protection.update(qualified_timestamp(newest["reply"]))
+        protection.update(qualified_timestamp(newest["reply"], last_signer))
     chains = record["chains"]
     signature = ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if set(signatures) == {TSA_CHECKED}
                  else TSA_NO_MATCHING_ROOT)

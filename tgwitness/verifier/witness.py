@@ -574,10 +574,10 @@ def evidence_conditions(result, kind="evidence"):
         times.append(runtime["attested_at"])
     unchecked = [a for a in anchors if a not in checked] + [e for e in records if e not in proven]
     stamped = max([a.get("event_count") or 0 for a in checked] + [count for count, _ in covered], default=0)
-    qualified = next((a["qualified"] for a in checked if a.get("event_count") == events and a.get("qualified")), None)
-    if times and qualified:
+    qualified = next((a for a in checked if a.get("event_count") == events and a.get("qualified") and a.get("time")), None)
+    if qualified:
         status, text, values = ("met", "last exported record existed by {time}; qualified eIDAS time stamp from {service}",
-                                {"time": min(times), "service": qualified["service"]})
+                                {"time": qualified["time"], "service": qualified["qualified"]["service"]})
     elif times:
         status, text, values = "met", "last exported record existed by {time}", {"time": min(times)}
     elif checked or covered:
