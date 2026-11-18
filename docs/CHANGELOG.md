@@ -53,6 +53,9 @@
 - With more than 50 selected channels, the short update poll takes the probe channel and priority sources first.
   Before, priority 0 and 1 sorted alike, so the first 50 channels by title were polled and a priority source or the
   probe channel later in the alphabet could be left out.
+- The Telegram Desktop JSON of an account export lists only contacts in `contacts.list`. Before, each saved page of
+  frequent correspondents (`top_peers`) added an empty contact entry. The top-peer pages stay in the export's signed
+  data files.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed

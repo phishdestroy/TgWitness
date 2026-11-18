@@ -216,6 +216,8 @@ class DesktopExport:
             yield b',"contacts":{"about":"Selected contacts visible to this account.","list":['
             comma = b""
             for row in self.metadata("contacts"):
+                if row.get("type") is not None:
+                    continue
                 value = row.get("data") or {}
                 yield comma + canonical({"first_name": value.get("first_name") or "", "last_name": value.get("last_name") or "",
                                          "phone_number": value.get("phone") or "", **dates(value.get("date"))})
