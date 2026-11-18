@@ -463,6 +463,7 @@
   "Synthetic demo created": "Demostración sintética creada",
   "Attachment retry scheduled": "Reintento de envío de archivos adjuntos programado",
   "Interrupted media jobs recovered": "Tareas multimedia interrumpidas recuperadas",
+  "Attachment missing after an unexpected stop": "Adjunto ausente tras una detención inesperada",
   "Source access unconfirmed": "Acceso al código fuente sin confirmar",
   "Monitoring settings changed": "Se han modificado los ajustes de supervisión",
   "Source selection changed": "Se ha modificado la selección de fuentes",

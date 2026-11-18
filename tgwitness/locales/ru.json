@@ -533,6 +533,7 @@
   "Synthetic demo created": "Создано синтетическое демо",
   "Attachment retry scheduled": "Запланирована повторная загрузка вложения",
   "Interrupted media jobs recovered": "Восстановлены прерванные задания обработки медиафайлов",
+  "Attachment missing after an unexpected stop": "Вложение утрачено после аварийной остановки",
   "Source access unconfirmed": "Доступ к источнику не подтверждён",
   "Monitoring settings changed": "Изменены настройки мониторинга",
   "Source selection changed": "Изменено выделение источника",

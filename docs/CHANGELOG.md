@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- After a collector process that ended without an orderly stop, the next start checks every attachment recorded
+  as saved during that run against its SHA-256. A missing or different file is recorded as
+  `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
 - The Telegram Desktop JSON of an account export with contacts adds `frequent_contacts`: each frequent
   correspondent, inline bot and call partner from the saved top-peer pages with its ID, category, chat type, name and
   rating. These pages stay out of `contacts.list`.

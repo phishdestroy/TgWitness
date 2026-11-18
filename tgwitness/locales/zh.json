@@ -463,6 +463,7 @@
   "Synthetic demo created": "已创建合成演示",
   "Attachment retry scheduled": "附件重试已安排",
   "Interrupted media jobs recovered": "已恢复的中断媒体任务",
+  "Attachment missing after an unexpected stop": "意外停止后附件缺失",
   "Source access unconfirmed": "源代码访问状态未确认",
   "Monitoring settings changed": "监控设置已更改",
   "Source selection changed": "源选择已更改",

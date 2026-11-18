@@ -338,6 +338,12 @@ work has separate outcomes; a file counts as preserved when its `media.saved` re
 The completed file must also match the byte count in the original observed attachment
 descriptor. A short or unexpectedly long response is not recorded as preserved media.
 
+The file and its folder entry are flushed to disk before `media.saved` is written. When the previous collector
+process ended without an orderly stop, the next start reads every file recorded as saved during that run. A file
+that is missing or whose bytes differ from the recorded SHA-256 gets a `media.missing_after_restart` record, its
+download is queued again, and differing bytes are moved to `media-damaged/`. Files moved to off-site storage are
+not read.
+
 Within one workspace, concurrent queued jobs for the same attachment representation
 wait for the active transfer, then recheck its saved bytes before reuse. Each job keeps
 its own signed outcome and reference to the earlier saved-file record. Cancelling a

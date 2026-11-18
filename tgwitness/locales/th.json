@@ -751,6 +751,7 @@
   "Installation help ↗": "คู่มือการติดตั้ง ↗",
   "Integrity confirmed": "ความสมบูรณ์ได้รับการยืนยัน",
   "Interrupted media jobs recovered": "งานสื่อที่ถูกขัดจังหวะได้รับการกู้คืนแล้ว",
+  "Attachment missing after an unexpected stop": "ไฟล์แนบหายไปหลังการหยุดทำงานโดยไม่คาดคิด",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "ลิงก์ MTProxy ไม่ถูกต้อง โปรดใช้โฮสต์ที่ถูกต้อง พอร์ต 1-65535 และรหัสลับแบบ hex หรือ dd 32 หลัก; TLS ee ปลอมไม่ได้รับการสนับสนุน",
   "Invalid TData account or authorization count.": "บัญชี TData หรือจำนวนการอนุญาตไม่ถูกต้อง",
   "Invalid Telethon StringSession.": "StringSession ของ Telethon ไม่ถูกต้อง",

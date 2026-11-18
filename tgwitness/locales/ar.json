@@ -463,6 +463,7 @@
   "Synthetic demo created": "تم إنشاء عرض توضيحي اصطناعي",
   "Attachment retry scheduled": "إعادة محاولة تحميل المرفقات مجدولة",
   "Interrupted media jobs recovered": "استعادة مهام الوسائط المتوقفة",
+  "Attachment missing after an unexpected stop": "مرفق مفقود بعد توقف غير متوقع",
   "Source access unconfirmed": "لم يتم تأكيد الوصول إلى المصدر",
   "Monitoring settings changed": "تم تغيير إعدادات المراقبة",
   "Source selection changed": "تم تغيير اختيار المصدر",

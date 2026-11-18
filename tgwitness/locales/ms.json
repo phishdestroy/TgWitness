@@ -751,6 +751,7 @@
   "Installation help ↗": "Bantuan pemasangan ↗",
   "Integrity confirmed": "Integriti disahkan",
   "Interrupted media jobs recovered": "Tugas media yang terganggu dipulihkan",
+  "Attachment missing after an unexpected stop": "Lampiran hilang selepas henti tanpa diduga",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Pautan MTProxy tidak sah. Gunakan hos yang sah, port 1–65535 dan rahsia hex atau dd 32 digit; Fake TLS ee tidak disokong.",
   "Invalid TData account or authorization count.": "Akaun TData tidak sah atau bilangan kebenaran tidak sah.",
   "Invalid Telethon StringSession.": "Sesi Rentetan Telegram Tidak Sah.",
