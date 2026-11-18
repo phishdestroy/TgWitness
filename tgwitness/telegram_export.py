@@ -193,6 +193,36 @@ class DesktopExport:
                     for raw in stream:
                         yield json.loads(raw)
 
+    def frequent_contacts(self):
+        categories = {"TopPeerCategoryCorrespondents": "people", "TopPeerCategoryBotsInline": "inline_bots",
+                      "TopPeerCategoryPhoneCalls": "calls"}
+        for row in self.metadata("contacts"):
+            if row.get("type") != "top_peers":
+                continue
+            data = row.get("data") or {}
+            users = {u.get("id"): u for u in data.get("users", []) if isinstance(u, dict)}
+            chats = {c.get("id"): c for c in data.get("chats", []) if isinstance(c, dict)}
+            for group in data.get("categories", []):
+                category = categories.get(((group or {}).get("category") or {}).get("_"))
+                if category is None:
+                    continue
+                for top in group.get("peers", []):
+                    target = (top or {}).get("peer") or {}
+                    if "user_id" in target:
+                        ident, kind, entity = target["user_id"], "user", users.get(target["user_id"])
+                    else:
+                        ident = target.get("channel_id", target.get("chat_id"))
+                        entity = chats.get(ident) or {}
+                        if "channel_id" in target:
+                            kind = (("public_" if entity.get("username") else "private_")
+                                    + ("channel" if entity.get("broadcast") else "supergroup"))
+                        else:
+                            kind = "private_group"
+                    if not isinstance(ident, int):
+                        continue
+                    yield {"id": ident, "category": category, "type": kind, "name": name(entity),
+                           "rating": top.get("rating")}
+
     def chat(self, chat):
         kind = {"private": "personal_chat", "bot": "bot_chat", "group": "private_group",
                 "supergroup": "private_supergroup", "channel": "private_channel"}[chat["kind"]]
@@ -224,8 +254,13 @@ class DesktopExport:
                 value = row.get("data") or {}
                 yield comma + canonical({"first_name": value.get("first_name") or "", "last_name": value.get("last_name") or "",
                                          "phone_number": value.get("phone") or "", **dates(value.get("date"))})
-                comma = b"," 
+                comma = b","
             yield b"]}"
+            order = {"people": 0, "inline_bots": 1, "calls": 2}
+            frequent = sorted(self.frequent_contacts(), key=lambda item: order[item["category"]])
+            if frequent:
+                yield (b',"frequent_contacts":{"about":"Frequent contacts and their ratings as Telegram reported them to '
+                       b'this account.","list":[' + b",".join(canonical(item) for item in frequent) + b"]}")
         for key, category in (("sessions", "sessions"), ("web_sessions", "sessions"),
                               ("profile_pictures", "profile_photos"), ("stories", "stories")):
             if not any(e["statement"]["category"] == category for e in self.receipts):
