@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- The record viewer of a report no longer adds a record that the filters hide. When new filters leave out the record
+  whose card is open, the card closes; **Select** in a card works only for a shown record, while records chosen
+  before the filters changed stay selected. **Go to #** opens exactly the number typed and otherwise says whether
+  that record is not in the report or hidden by the filters; before, typing #2 in a report with only #1 highlighted
+  #1. **Copy text** copies the message text, a system record offers **Copy description** for the description it
+  shows, and a record with neither says **No text to copy**; before, the button wrote an empty clipboard.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a

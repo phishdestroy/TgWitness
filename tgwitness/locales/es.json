@@ -10274,5 +10274,10 @@
   "Select and copy the link.": "Seleccione y copie el enlace.",
   "Global search": "Búsqueda global",
   "Checkpoint not timestamped": "Punto de control sin sello de tiempo",
-  "Checkpoint timestamp pending": "Sello de tiempo del punto de control pendiente"
+  "Checkpoint timestamp pending": "Sello de tiempo del punto de control pendiente",
+  "Record #{n} not found": "No se encontró el registro n.º {n}",
+  "Record #{n} is hidden by the filters": "El registro n.º {n} está oculto por los filtros",
+  "Enter a record number": "Introduzca un número de registro",
+  "Copy description": "Copiar descripción",
+  "No text to copy": "No hay texto para copiar"
 }

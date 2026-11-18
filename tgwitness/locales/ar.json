@@ -10468,5 +10468,10 @@
   "Select and copy the link.": "حدد الرابط وانسخه.",
   "Global search": "البحث العام",
   "Checkpoint not timestamped": "لم تُختم نقطة التحقق بالوقت",
-  "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار"
+  "Checkpoint timestamp pending": "ختم الوقت لنقطة التحقق قيد الانتظار",
+  "Record #{n} not found": "السجل رقم {n} غير موجود",
+  "Record #{n} is hidden by the filters": "السجل رقم {n} مخفي بسبب عوامل التصفية",
+  "Enter a record number": "أدخل رقم السجل",
+  "Copy description": "نسخ الوصف",
+  "No text to copy": "لا يوجد نص للنسخ"
 }

@@ -10274,5 +10274,10 @@
   "Select and copy the link.": "Sélectionnez et copiez le lien.",
   "Global search": "Recherche globale",
   "Checkpoint not timestamped": "Point de contrôle non horodaté",
-  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente"
+  "Checkpoint timestamp pending": "Horodatage du point de contrôle en attente",
+  "Record #{n} not found": "Enregistrement n° {n} introuvable",
+  "Record #{n} is hidden by the filters": "L’enregistrement n° {n} est masqué par les filtres",
+  "Enter a record number": "Saisissez un numéro d’enregistrement",
+  "Copy description": "Copier la description",
+  "No text to copy": "Aucun texte à copier"
 }

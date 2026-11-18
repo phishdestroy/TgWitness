@@ -10264,5 +10264,10 @@
   "Select and copy the link.": "Bağlantıyı seçip kopyalayın.",
   "Global search": "Genel arama",
   "Checkpoint not timestamped": "Kontrol noktası zaman damgası almadı",
-  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede"
+  "Checkpoint timestamp pending": "Kontrol noktası zaman damgası beklemede",
+  "Record #{n} not found": "#{n} numaralı kayıt bulunamadı",
+  "Record #{n} is hidden by the filters": "#{n} numaralı kayıt filtrelerle gizlendi",
+  "Enter a record number": "Bir kayıt numarası girin",
+  "Copy description": "Açıklamayı kopyala",
+  "No text to copy": "Kopyalanacak metin yok"
 }

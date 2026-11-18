@@ -10213,5 +10213,10 @@
   "Select and copy the link.": "Chọn và sao chép liên kết.",
   "Global search": "Tìm kiếm toàn cầu",
   "Checkpoint not timestamped": "Điểm kiểm tra chưa được đóng dấu thời gian",
-  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận"
+  "Checkpoint timestamp pending": "Dấu thời gian của điểm kiểm tra đang chờ xác nhận",
+  "Record #{n} not found": "Không tìm thấy bản ghi #{n}",
+  "Record #{n} is hidden by the filters": "Bản ghi #{n} bị bộ lọc ẩn",
+  "Enter a record number": "Nhập số bản ghi",
+  "Copy description": "Sao chép mô tả",
+  "No text to copy": "Không có văn bản để sao chép"
 }

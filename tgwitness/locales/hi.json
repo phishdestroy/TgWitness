@@ -10264,5 +10264,10 @@
   "Select and copy the link.": "लिंक चुनें और कॉपी करें।",
   "Global search": "वैश्विक खोज",
   "Checkpoint not timestamped": "चेकपॉइंट पर टाइमस्टैम्प नहीं मिला",
-  "Checkpoint timestamp pending": "चेकपॉइंट का टाइमस्टैम्प लंबित"
+  "Checkpoint timestamp pending": "चेकपॉइंट का टाइमस्टैम्प लंबित",
+  "Record #{n} not found": "रिकॉर्ड #{n} नहीं मिला",
+  "Record #{n} is hidden by the filters": "रिकॉर्ड #{n} फ़िल्टर के कारण छिपा है",
+  "Enter a record number": "रिकॉर्ड संख्या दर्ज करें",
+  "Copy description": "विवरण कॉपी करें",
+  "No text to copy": "कॉपी करने के लिए कोई पाठ नहीं"
 }

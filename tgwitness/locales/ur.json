@@ -10264,5 +10264,10 @@
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
   "Global search": "عالمی تلاش",
   "Checkpoint not timestamped": "چیک پوائنٹ پر ٹائم اسٹیمپ نہیں لگا",
-  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا"
+  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا",
+  "Record #{n} not found": "ریکارڈ #{n} نہیں ملا",
+  "Record #{n} is hidden by the filters": "ریکارڈ #{n} فلٹرز کی وجہ سے پوشیدہ ہے",
+  "Enter a record number": "ریکارڈ نمبر درج کریں",
+  "Copy description": "تفصیل کاپی کریں",
+  "No text to copy": "کاپی کرنے کے لیے کوئی متن نہیں"
 }

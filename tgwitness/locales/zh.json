@@ -10213,5 +10213,10 @@
   "Select and copy the link.": "请选择并复制链接。",
   "Global search": "全局搜索",
   "Checkpoint not timestamped": "检查点未获得时间戳",
-  "Checkpoint timestamp pending": "检查点时间戳待确认"
+  "Checkpoint timestamp pending": "检查点时间戳待确认",
+  "Record #{n} not found": "未找到记录 #{n}",
+  "Record #{n} is hidden by the filters": "记录 #{n} 已被筛选条件隐藏",
+  "Enter a record number": "请输入记录编号",
+  "Copy description": "复制说明",
+  "No text to copy": "没有可复制的文本"
 }
