@@ -30,6 +30,10 @@
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".
 - Previewing an invite link records the chat as a channel or supergroup when the invite says so; before, every invite
   to a chat the account had not joined was recorded as a group in `interaction.preview`.
+- Ending other sessions while keeping the one that approved the QR sign-in is recorded even when Telegram stops it
+  part way, for example with a FloodWait: the record counts the sessions already ended and names the refusal.
+  Before, those sessions ended without a journal record. The verifier no longer reads such a run as "All other
+  sessions ended": it states how many were ended and that the approving session was kept.
 - A new workspace's connection screen no longer names two routes at once: until the account signs in, the route bar
   reads "Chosen at sign-in" and **What Telegram sees** follows the route picked in the sign-in form, instead of the
   public MTProxy default the form replaces. The route bar updates when the route changes, for example after signing

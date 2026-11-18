@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 9c15c12cd5b7acf786915f890336fdfb5d36843796060898a7350397ce7ed129
+# TgWitness verifier sources SHA-256: 4653cca448dddbc8ab811c9d41e1922929ad4ddff1b7307eea5ac8f7325a427a
 """Standalone verifier"""
 import argparse
 import base64
@@ -3192,7 +3192,10 @@ class Coverage:
             name = str(payload.get("event_kind") or "security_notice")
             counts[name] = counts.get(name, 0) + 1
         elif kind == "account.all_other_sessions_terminated":
-            s.setdefault("other_sessions_ended", []).append({"at": at, "ended": payload.get("sessions_before")})
+            s.setdefault("other_sessions_ended", []).append({
+                "at": at, "ended": payload.get("sessions_before"), "count": payload.get("sessions_ended"),
+                "kept_approver": payload.get("kept_approving_session") is True,
+                "interrupted": payload.get("interrupted_by") if isinstance(payload.get("interrupted_by"), str) else None})
         elif kind == "account.password_changed":
             s.setdefault("password_changes", []).append({"at": at, "operation": payload.get("operation")})
         elif kind == "account.phone_call":
@@ -3484,6 +3487,13 @@ def session_lines(coverage):
         lines.append("Telegram security notices (777000): " + ", ".join(
             name + " " + str(count) for name, count in sorted(s["security_events"].items())))
     for item in s.get("other_sessions_ended") or []:
+        if item.get("kept_approver") or item.get("interrupted"):
+            lines.append("Other sessions ended from this workspace at " + item["at"]
+                         + (": " + str(item["count"]) + " of " + str(item["ended"])
+                            if isinstance(item.get("count"), int) and isinstance(item.get("ended"), int) else "")
+                         + ("; the session that approved this workspace's sign-in was kept" if item.get("kept_approver") else "")
+                         + ("; stopped by " + item["interrupted"] if item.get("interrupted") else ""))
+            continue
         lines.append("All other sessions ended from this workspace at " + item["at"]
                      + (" (" + str(item["ended"]) + " signed in before)" if isinstance(item.get("ended"), int) else ""))
     for item in s.get("password_changes") or []:
