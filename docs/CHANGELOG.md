@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
+  summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
+  **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".
 - Previewing an invite link records the chat as a channel or supergroup when the invite says so; before, every invite
   to a chat the account had not joined was recorded as a group in `interaction.preview`.
 - Ending other sessions while keeping the one that approved the QR sign-in is recorded even when Telegram stops it

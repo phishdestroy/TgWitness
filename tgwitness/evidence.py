@@ -241,7 +241,12 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
             selection = report.report_selection.Selection.model_validate(options.get("selection") or {})
             report_events = snapshot.events
             if not compact and selection.enabled and fmt in ("html", "json", "pdf", "zip"):
-                selected_event = report.report_selection.compile_selection(selection)
+                selection_matches = report.report_selection.compile_selection(selection)
+                selected_messages = report.report_selection.selected_messages(snapshot.events(), selection_matches)
+
+                def selected_event(event):
+                    return selection_matches(event) or report.report_selection.saved_file_of(event, selected_messages)
+
                 def report_events():
                     return (event for event in snapshot.events() if selected_event(event))
 

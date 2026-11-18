@@ -141,6 +141,21 @@ def matches(event, selection):
     return compile_selection(selection)(event)
 
 
+FILE_KINDS = frozenset(("media.saved",))
+
+
+def _message_key(event):
+    return report_analytics._identifier(event.get("chat_id")), _message_id(event.get("message_id"))
+
+
+def selected_messages(events, predicate):
+    return {key for key in (_message_key(event) for event in events if predicate(event)) if key[1] is not None}
+
+
+def saved_file_of(event, messages):
+    return event.get("kind") in FILE_KINDS and _message_key(event) in messages
+
+
 def _preview(event):
     payload = event.get("payload")
     payload = payload if isinstance(payload, dict) else {}
