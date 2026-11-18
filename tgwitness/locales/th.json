@@ -10233,5 +10233,7 @@
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "รู้จำคอนเทนเนอร์ ASiC-E แล้ว: แมนิเฟสต์ระบุ {n} ไฟล์ และ SHA-256 ตรงกัน",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "ไม่ได้ตรวจสอบลายเซ็น CAdES ของคอนเทนเนอร์ (META-INF/signature.p7s) ในเบราว์เซอร์นี้",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "ไม่มี META-INF/ASiCManifest.xml หรือ META-INF/signature.p7s",
-  "its manifest cannot be read": "อ่านแมนิเฟสต์ไม่ได้"
+  "its manifest cannot be read": "อ่านแมนิเฟสต์ไม่ได้",
+  "Check files": "ตรวจสอบไฟล์",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "การเลือกไฟล์หรือวางข้อความเซสชันจะไม่ส่งสิ่งใดออกไป ปุ่ม <strong>ตรวจสอบไฟล์</strong> จะส่งไฟล์ไปยังเซิร์ฟเวอร์ TgWitness ที่รันแผงนี้ และเซิร์ฟเวอร์จะอ่านไฟล์โดยไม่ลงชื่อเข้าใช้ Telegram"
 }

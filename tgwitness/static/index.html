@@ -47,7 +47,7 @@
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=17"></script>
-<script defer src="/account-import.js?v=5"></script>
+<script defer src="/account-import.js?v=6"></script>
 <script defer src="/integrations.js?v=6"></script>
 <script defer src="/analysis.js?v=5"></script>
 <script defer src="/media-analysis.js?v=2"></script>
@@ -1502,7 +1502,8 @@
         <div class="key-metadata"><div><label for="auth-dc">DC ID</label><select id="auth-dc"><option value="">Select DC</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div><label for="auth-user-id">User ID <span class="subtle">· optional</span></label><input autocomplete="off" id="auth-user-id" inputmode="numeric" maxlength="19" placeholder="User ID" type="text"></div></div>
       </div>
       <div hidden id="import-details">
-        <label class="account-file-picker" for="session-file"><svg aria-hidden="true" class="icon"><use href="#i-upload"/></svg><strong id="file-picker-title">Choose account files</strong><span id="file-picker-caption">One account · up to 4 files · 8 MiB total</span><input accept=".session,.zip,.json,.tgwitness-session,.tgwatch-session,.txt" aria-label="Choose account files" id="session-file" multiple type="file"></label>
+        <label class="account-file-picker" for="session-file"><svg aria-hidden="true" class="icon"><use href="#i-upload"/></svg><strong id="file-picker-title">Choose account files</strong><span id="file-picker-caption">One account · up to 4 files · 8 MiB total</span><input accept=".session,.zip,.json,.tgwitness-session,.tgwatch-session,.txt" aria-describedby="import-destination" aria-label="Choose account files" id="session-file" multiple type="file"></label>
+        <p class="hint" id="import-destination">Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.</p>
         <p class="hint selected-files" hidden id="selected-files" role="status"></p>
 
         <details class="import-advanced"><summary>Passcode or session text</summary>

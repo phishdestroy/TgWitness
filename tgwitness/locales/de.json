@@ -10284,5 +10284,7 @@
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E-Container erkannt: sein Manifest führt {n} Dateien auf, ihre SHA-256 stimmen überein.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Die CAdES-Signatur des Containers (META-INF/signature.p7s) wurde in diesem Browser nicht geprüft.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml oder META-INF/signature.p7s fehlt",
-  "its manifest cannot be read": "sein Manifest ist nicht lesbar"
+  "its manifest cannot be read": "sein Manifest ist nicht lesbar",
+  "Check files": "Dateien prüfen",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Beim Auswählen von Dateien oder Einfügen von Sitzungstext wird nichts gesendet. <strong>Dateien prüfen</strong> sendet sie an den TgWitness-Server, auf dem dieses Panel läuft; er liest sie, ohne sich bei Telegram anzumelden."
 }

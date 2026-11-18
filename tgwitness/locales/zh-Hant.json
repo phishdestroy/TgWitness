@@ -10233,5 +10233,7 @@
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "已識別 ASiC-E 容器：其清單列出 {n} 個檔案，SHA-256 均相符。",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "此瀏覽器未檢查容器的 CAdES 簽章（META-INF/signature.p7s）。",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "缺少 META-INF/ASiCManifest.xml 或 META-INF/signature.p7s",
-  "its manifest cannot be read": "無法讀取其清單"
+  "its manifest cannot be read": "無法讀取其清單",
+  "Check files": "檢查檔案",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "選擇檔案或貼上會話文字不會傳送任何內容。<strong>檢查檔案</strong>會將其傳送到執行此面板的 TgWitness 伺服器；伺服器在不登入 Telegram 的情況下讀取它們。"
 }

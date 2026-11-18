@@ -98,6 +98,14 @@
   witness account is replaced by its pseudonym, as message senders are. A field these records do not normally carry
   is withheld, and the record is marked minimised. Before, these records went into the handover whole unless they
   held a known chat list.
+- Choosing account files or pasting session text under **Files** no longer sends them to the TgWitness server. The
+  form says where they go, and the server reads them only after **Check files** or **Read files without signing in**;
+  **Connect account** follows a successful check as before. Before, choosing files sent them at once and each
+  character typed into the TData passcode or session text, or a changed API pair, sent them again. The check also
+  shows the user ID the files state. Pasting session text now clears the selected files, so the check and the
+  connection use the latest choice; before, a file chosen earlier replaced the pasted session when connecting.
+  **Auth key** with **Create an independent authorization** now reaches the independent login on an attested
+  deployment instead of being refused there as a reused key.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
