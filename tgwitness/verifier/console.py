@@ -510,6 +510,9 @@ class Console:
                                                     hash=head[:8] + "…" + head[-8:]))
             self.seal(result, "report.html")
             if result.get("container"):
+                if result["container"].get("manifest_files") is not None:
+                    self.check("ok", "ASiC-E manifest", self.t("{n} files · SHA-256 match",
+                                                               n=self.number(result["container"]["manifest_files"])))
                 self.check("none", "ASiC-E container",
                            self.t("Entries outside the signed manifest (mimetype, META-INF): {n} · their CAdES "
                                   "signatures are not checked by this verifier",

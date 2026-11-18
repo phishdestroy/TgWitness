@@ -1,17 +1,25 @@
 from .common import (
     Ed25519PublicKey,
     MAX_JSON_BYTES,
+    MAX_MANIFEST_BYTES,
     VerifierTooOld,
     base64,
     bounded_lines,
     hashlib,
     io,
     open_archive,
+    re,
     read_manifest,
     read_member,
     strict_json,
 )
 ASIC_MIMETYPE = b"application/vnd.etsi.asic-e+zip"
+ASIC_NAMESPACE = "http://uri.etsi.org/02918/v1.2.1#"
+ASIC_DIGEST_NAMESPACE = "http://www.w3.org/2000/09/xmldsig#"
+ASIC_SHA256 = "http://www.w3.org/2001/04/xmlenc#sha256"
+ASIC_MANIFEST, ASIC_SIGNATURE = "META-INF/ASiCManifest.xml", "META-INF/signature.p7s"
+ASIC_RECORD_MANIFEST, ASIC_RECORD = "META-INF/ASiCEvidenceRecordManifest.xml", "META-INF/evidencerecord.ers"
+ASIC_ADDED_MANIFEST = re.compile(r"META-INF/ASiCManifest([0-9]{3})\.xml")
 
 
 def container_members(archive, names, listed):
@@ -21,6 +29,104 @@ def container_members(archive, names, listed):
         return []
     return sorted(name for name in names if name not in listed
                   and (name == "mimetype" or name.startswith("META-INF/")))
+
+
+def asic_references(archive, name, signature):
+    """Data objects and their SHA-256 listed by one ASiC manifest whose only SigReference names signature; None when
+    the manifest cannot be read that way. A DTD or entity declaration is refused."""
+    from urllib.parse import unquote
+    from xml.parsers import expat
+    references, signatures, digest = [], [], None
+    parser = expat.ParserCreate(namespace_separator=" ")
+
+    def refuse(*_):
+        raise ValueError("declaration")
+
+    def start(tag, attributes):
+        nonlocal digest
+        if tag == ASIC_NAMESPACE + " SigReference":
+            signatures.append(attributes.get("URI"))
+        elif tag == ASIC_NAMESPACE + " DataObjectReference":
+            references.append({"uri": attributes.get("URI") or "", "method": None, "value": None})
+        elif references and tag == ASIC_DIGEST_NAMESPACE + " DigestMethod" and references[-1]["method"] is None:
+            references[-1]["method"] = attributes.get("Algorithm")
+        elif references and tag == ASIC_DIGEST_NAMESPACE + " DigestValue" and references[-1]["value"] is None:
+            digest = []
+
+    def text(data):
+        if digest is not None:
+            digest.append(data)
+
+    def end(tag):
+        nonlocal digest
+        if digest is not None and tag == ASIC_DIGEST_NAMESPACE + " DigestValue":
+            references[-1]["value"], digest = "".join(digest).strip(), None
+    parser.StartDoctypeDeclHandler = parser.EntityDeclHandler = refuse
+    parser.StartElementHandler, parser.CharacterDataHandler, parser.EndElementHandler = start, text, end
+    try:
+        parser.Parse(read_member(archive, name, MAX_MANIFEST_BYTES), True)
+    except (expat.ExpatError, ValueError):
+        return None
+    if not references or signatures != [signature]:
+        return None
+    listed = {}
+    for item in references:
+        try:
+            uri = unquote(item["uri"], errors="strict")
+        except UnicodeDecodeError:
+            return None
+        if not uri or uri == "mimetype" or uri.startswith("META-INF/") or uri in listed \
+                or item["method"] != ASIC_SHA256 or not item["value"]:
+            return None
+        try:
+            listed[uri] = base64.b64decode(item["value"], validate=True).hex()
+        except ValueError:
+            listed[uri] = ""
+    return listed
+
+
+def verify_container(archive, names, container, digests):
+    """The ASiC-E layer as the report's Check tab reads it: META-INF/ASiCManifest.xml must list every data object with
+    its SHA-256, an added ASiCManifestNNN.xml or ASiCEvidenceRecordManifest.xml must match the files it lists, and no
+    other entry may sit under META-INF/. The CAdES signatures themselves are not checked here."""
+    objects = [name for name in names if name != "mimetype" and not name.startswith("META-INF/")]
+    present = set(objects)
+
+    def actual(name):
+        if name in digests:
+            return digests[name]
+        if name in present:
+            return hashlib.sha256(read_member(archive, name, MAX_MANIFEST_BYTES)).hexdigest()
+        return None
+    if ASIC_MANIFEST not in container or ASIC_SIGNATURE not in container:
+        raise ValueError("ASiC-E container damaged: " + ASIC_MANIFEST + " or " + ASIC_SIGNATURE + " is missing")
+    main = asic_references(archive, ASIC_MANIFEST, ASIC_SIGNATURE)
+    if main is None:
+        raise ValueError("ASiC-E container damaged: " + ASIC_MANIFEST + " cannot be read")
+    problems, covered, checked = [], {"mimetype", ASIC_MANIFEST, ASIC_SIGNATURE}, [ASIC_MANIFEST]
+    changed = [name for name, value in main.items() if actual(name) != value]
+    unlisted = [name for name in objects if name not in main]
+    if changed:
+        problems.append("SHA-256 differs from " + ASIC_MANIFEST + ": " + ", ".join(changed[:30]))
+    if unlisted:
+        problems.append("not listed in " + ASIC_MANIFEST + ": " + ", ".join(unlisted[:30]))
+    for name in container:
+        added = ASIC_ADDED_MANIFEST.fullmatch(name)
+        if not added and name != ASIC_RECORD_MANIFEST:
+            continue
+        target = ASIC_RECORD if not added else "META-INF/signature" + added[1] + ".p7s"
+        other = asic_references(archive, name, target) if target in container else None
+        if other is None or any(item not in present or actual(item) != value for item, value in other.items()):
+            problems.append(name + " does not match the files it lists")
+            continue
+        covered.update((name, target))
+        checked.append(name)
+    outside = [name for name in container if name not in covered]
+    if outside:
+        problems.append("not covered by any container manifest: " + ", ".join(outside[:30]))
+    if problems:
+        raise ValueError("ASiC-E container damaged: " + " · ".join(problems))
+    return {"manifest_files": len(main), "manifests_checked": checked}
 
 
 def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None, check_drand=False, max_gib=None,
@@ -140,7 +246,8 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None,
             result["outside"]["drand"]["checked"] = confirm_drand(outside.rounds)
         result["producer"] = manifest.get("producer")
         if container:
-            result["container"] = {"format": "ASiC-E", "unchecked_members": container}
+            result["container"] = {"format": "ASiC-E", "unchecked_members": container,
+                                   **verify_container(archive, names, container, manifest["files"])}
         result.update(format=manifest["format"], files_checked=len(manifest["files"]), sha256sums=sums,
                       report_seal=seal, report_json=companions["json"], report_parts=companions["parts"],
                       report_pdf=companions["pdf"], case=manifest.get("case") or {})

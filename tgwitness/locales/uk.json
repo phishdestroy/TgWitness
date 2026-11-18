@@ -10453,6 +10453,7 @@
   "TgWitness does not read Telegram's service notifications (777000), the account's session list or its two-step verification status, does not read earlier messages of a chat when you turn it on, does not change the account's sensitive content setting and does not record phone call updates. Session takeover checks stay off. The chat list is still read at start to find the chosen chats. Turn it on before signing in.": "TgWitness не читає службові сповіщення Telegram (777000), список сесій облікового запису та стан двоетапної перевірки, не читає попередні повідомлення чату, коли ви його вмикаєте, не змінює налаштування чутливого вмісту облікового запису й не записує оновлення про дзвінки. Перевірки перехоплення сесії залишаються вимкненими. Список чатів під час запуску все одно читається, щоб знайти вибрані чати. Увімкніть до входу.",
   "Strict chosen chats: the account's session list is not read.": "Суворий режим вибраних чатів: список сесій облікового запису не читається.",
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "У суворому режимі вибраних чатів список сесій не читається, тому невідомо, коли ця сесія увійшла; експорт ішов через звичайну сесію, а не через Takeout.",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Усі файли ({n}) відповідають підписаному маніфесту, але контейнер ASiC-E пошкоджено.",
   "Report: {scope}": "Звіт: {scope}",
   "Case: {name}": "Справа: {name}"
 }
