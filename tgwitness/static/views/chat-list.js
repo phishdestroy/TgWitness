@@ -117,15 +117,14 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     } finally {if (button.isConnected) button.disabled = false;}
   }
   function dialogRow(dialog) {
-    const row = node('div', 'chat-item chat-item-new'), open = node('button', 'chat-choice'), add = node('button', 'primary small chat-watch', tr('Add'));
-    open.type = add.type = 'button'; row.dataset.dialog = String(dialog.chat_id);
+    const row = node('div', 'chat-item chat-item-new'), open = node('span', 'chat-choice chat-choice-static'), add = node('button', 'primary small chat-watch', tr('Observe'));
+    add.type = 'button'; row.dataset.dialog = String(dialog.chat_id);
     const title = dialog.title || tr('Chat {id}', {id: dialog.chat_id}), body = node('span', 'chat-item-body');
     const top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
     top.append(node('span', 'chat-item-title', title));
     bottom.append(node('span', 'chat-item-preview', tr(kindWords[dialog.kind] || 'Channel')));
     body.append(top, bottom); open.append(avatarNode(dialog.chat_id, title), body);
-    add.setAttribute('aria-label', tr('Add') + ': ' + title);
-    open.addEventListener('click', () => watch(dialog, add));
+    add.setAttribute('aria-label', tr('Observe {name}', {name: title}));
     add.addEventListener('click', () => watch(dialog, add));
     row.append(open, add); return row;
   }
@@ -156,12 +155,17 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     } finally {if (button.isConnected) button.disabled = false;}
   }
   function globalRow(result) {
-    const row = node('div', 'chat-item chat-item-new'), open = node('button', 'chat-choice');
+    const card = !!result.username && !!adds.canOpenLink?.(), row = node('div', 'chat-item chat-item-new');
+    const open = card ? node('button', 'chat-choice') : node('span', 'chat-choice chat-choice-static');
     const title = result.title || (result.username ? '@' + result.username : tr('Chat {id}', {id: result.chat_id}));
     const joinable = !result.member && !!result.username && ['channel', 'supergroup', 'group'].includes(result.kind);
     const person = !result.member && !!result.username && !joinable;
-    const add = node('button', 'primary small chat-watch', tr(joinable ? 'Join / open' : person ? 'Open' : 'Add'));
-    open.type = add.type = 'button'; row.dataset.dialog = String(result.chat_id);
+    const add = node('button', 'primary small chat-watch', tr(joinable ? 'Join / open and observe' : person ? 'Open' : 'Observe'));
+    add.type = 'button'; row.dataset.dialog = String(result.chat_id);
+    if (card) {
+      open.type = 'button'; open.title = tr('Open Telegram link');
+      open.addEventListener('click', () => openLink('@' + result.username, true));
+    }
     const body = node('span', 'chat-item-body'), top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
     top.append(node('span', 'chat-item-title', title));
     if (result.verified) top.append(icon('check'));
@@ -171,10 +175,10 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
       result.scam ? 'SCAM' : result.fake ? 'FAKE' : ''].filter(Boolean);
     bottom.append(node('span', 'chat-item-preview', facts.join(' · ')));
     body.append(top, bottom); open.append(avatarNode(result.chat_id, title), body);
-    add.setAttribute('aria-label', add.textContent + ': ' + title);
+    add.setAttribute('aria-label', result.member ? tr('Observe {name}', {name: title}) : add.textContent + ': ' + title);
     const choose = joinable ? () => join(result, add) : person ? () => openLink('@' + result.username, true) : () => watch(result, add);
     if (!result.member && (!result.username || !adds.canJoin?.())) add.disabled = true;
-    else {open.addEventListener('click', choose); add.addEventListener('click', choose);}
+    else add.addEventListener('click', choose);
     row.append(open, add); return row;
   }
   function searchExtras(terms, query) {
@@ -488,11 +492,14 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
   }
   const plainKey = event => !event.defaultPrevented && !event.isComposing && !event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey;
   search.addEventListener('input', () => changed(true));
+  const rowTarget = item => item?.matches('.chat-item-new') ? item.querySelector('button:not(:disabled)') : item?.querySelector('.chat-choice');
+  const targets = () => [...list.querySelectorAll('.chat-item, .chat-list-more')]
+    .map(item => item.matches('.chat-list-more') ? item : rowTarget(item)).filter(Boolean);
   search.addEventListener('keydown', event => {
     if (!plainKey(event)) return;
     if (event.key === 'Escape' && search.value) {event.preventDefault(); event.stopPropagation(); search.value = ''; changed(true);}
     else if (['ArrowDown', 'ArrowUp', 'Enter'].includes(event.key)) {
-      const choices = [...list.querySelectorAll(event.key === 'Enter' ? '.chat-item:not(.chat-item-new) .chat-choice' : '.chat-choice')];
+      const choices = event.key === 'Enter' ? [...list.querySelectorAll('.chat-item:not(.chat-item-new) .chat-choice')] : targets();
       const choice = event.key === 'ArrowUp' ? choices.at(-1) : choices[0];
       if (!choice) return;
       event.preventDefault();
@@ -500,10 +507,10 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     }
   });
   list.addEventListener('keydown', event => {
-    if (!plainKey(event) || !event.target.matches('.chat-choice, .chat-priority, .chat-list-more')) return;
+    if (!plainKey(event) || !event.target.matches('.chat-choice, .chat-priority, .chat-list-more, .chat-watch')) return;
     if (event.key === 'Escape') {event.preventDefault(); event.stopPropagation(); search.focus(); return;}
-    const choices = [...list.querySelectorAll('.chat-choice, .chat-list-more')];
-    const choice = event.target.closest('.chat-item')?.querySelector('.chat-choice') || event.target;
+    const choices = targets();
+    const choice = rowTarget(event.target.closest('.chat-item')) || event.target;
     const index = choices.indexOf(choice), next = {ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: choices.length - 1}[event.key];
     if (next === undefined) return;
     event.preventDefault();

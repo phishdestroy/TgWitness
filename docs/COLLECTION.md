@@ -65,7 +65,11 @@ more than 50 chats; the size estimate remains a separate, sample-based operation
 | Whole account | Every chat the account sees | Every new chat, group, private chat or bot is added the moment its first update arrives |
 
 - **Source types** (channels, groups, private chats, bots) narrow the folder and
-  whole-account modes. Chosen chats can be of any type, including private chats and bots.
+  whole-account modes. Chosen chats can be of any type, including private chats and bots;
+  source types never stop a chat you added by hand. A type turned off, an exclusion or a
+  switch to chosen chats stops automatically added sources as soon as it is saved, before
+  the source list is recalculated and also when Telegram cannot be reached: their new
+  messages, history passes, new-chat history, peer settings and profile observations.
 - **Excluded chats** are never recorded, in any mode. In folder and whole-account modes,
   *Exclude* and *Remove* on a source put it on this list, so the scope does not add it again.
   Choosing the chat again by hand (in Sources, from Chats or under Settings → **Which chats?**)
@@ -343,6 +347,12 @@ record with its SHA-256 and byte count. Skipped, failed, retried, and interrupte
 work has separate outcomes; a file counts as preserved when its `media.saved` record exists.
 The completed file must also match the byte count in the original observed attachment
 descriptor. A short or unexpectedly long response is not recorded as preserved media.
+
+The file and its folder entry are flushed to disk before `media.saved` is written. When the previous collector
+process ended without an orderly stop, the next start reads every file recorded as saved during that run. A file
+that is missing or whose bytes differ from the recorded SHA-256 gets a `media.missing_after_restart` record, its
+download is queued again, and differing bytes are moved to `media-damaged/`. Files moved to off-site storage are
+not read.
 
 Within one workspace, concurrent queued jobs for the same attachment representation
 wait for the active transfer, then recheck its saved bytes before reuse. Each job keeps

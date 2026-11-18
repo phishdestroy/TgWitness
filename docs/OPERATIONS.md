@@ -118,14 +118,23 @@ journal and its Case Board notes has been downloaded in full. Preparing the arch
 enough: a record outside setup events or a note added after the download keeps **Delete**
 unavailable.
 
-When the panel saves the file itself, it counts the export only after it has received every
-byte and saved the file, and then reports the size to `POST /api/exports/{id}/received`; a
-download that breaks off is not counted. A file the browser downloads on its own (an export
-larger than the panel's browser buffer) and a download by another HTTP client are counted when
-the server has sent the whole response. The operating system and a reverse proxy buffer several
-megabytes of a response, so for these downloads the server cannot see a break near the end:
+When the panel receives the file itself, it counts the export only after it has received every
+byte, and then reports the size to `POST /api/exports/{id}/received`; a download that breaks off
+is not counted. With a browser save picker (File System Access) the panel reports it after the
+file is written and closed. Without one, the panel hands the received file to the browser's
+downloads and cannot see whether the browser kept it, for example when its save dialog is
+cancelled; the panel then says that the download started, not that the file was saved. A file
+the browser downloads on its own (an export larger than the panel's browser buffer) and a
+download by another HTTP client are counted when the server has sent the whole response. The
+operating system and a reverse proxy buffer several megabytes of a response, so for these
+downloads the server cannot see a break near the end. Unless the panel said the file was saved,
 check the downloaded file before deleting. A group export counts for its accounts when it is
 downloaded right after it is prepared; downloading it again from **Prepared exports** does not.
+
+Before deleting, the panel shows the format, size, preparation time and SHA-256 of the last downloaded
+signed archive and asks to confirm that this archive is saved outside the workspace. The server refuses
+`DELETE /api/profiles/{id}` without `kept_copy` set to that SHA-256 (or to `confirmed` for an archive
+downloaded before the fingerprint was recorded).
 
 Deleting an additional workspace stops its collector and removes its local data. If a
 locked file or filesystem error interrupts removal, the panel reports the failure and

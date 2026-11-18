@@ -10,6 +10,26 @@ from .format import FORMAT, canonical, check_events, digest, seal, utcnow
 from .journal import sync_directory
 
 
+class ExportLimit(ValueError):
+    pass
+
+
+def check_limits(files, artifacts):
+    from .verify import MAX_ENTRIES, MAX_FILE, MAX_TOTAL
+    sizes = {**{name: len(raw) for name, raw in files.items()},
+             **{"objects/" + value: size for value, size in artifacts.items()}}
+    if len(sizes) + 2 > MAX_ENTRIES:
+        raise ExportLimit(f"The capture needs {len(sizes) + 2} archive entries; "
+                          f"its verifier accepts at most {MAX_ENTRIES}. No archive was written.")
+    for name, size in sizes.items():
+        if size > MAX_FILE:
+            raise ExportLimit(f"{name} is {size} bytes; the capture verifier accepts at most "
+                              f"{MAX_FILE // 1024 ** 2} MiB per file. No archive was written.")
+    if (total := sum(sizes.values())) > MAX_TOTAL:
+        raise ExportLimit(f"The capture holds {total} bytes; its verifier accepts at most "
+                          f"{MAX_TOTAL // 1024 ** 3} GiB per archive. No archive was written.")
+
+
 def report(events, observer_id, key_fingerprint):
     from .official_proof import official_report
     official = official_report(events)
@@ -67,6 +87,7 @@ def export_zip(journal, destination):
                 previous = artifacts.setdefault(artifact["sha256"], artifact["size"])
                 if previous != artifact["size"]:
                     raise ValueError("Inconsistent artifact size")
+        check_limits(files, artifacts)
         manifest_files = {name: {"sha256": digest(raw), "size": len(raw)} for name, raw in files.items()}
         fd, temporary = tempfile.mkstemp(dir=destination.parent, suffix=".part")
         try:

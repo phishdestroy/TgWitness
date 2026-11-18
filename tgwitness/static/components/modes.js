@@ -4,6 +4,7 @@ export const EXTRA_FEATURES = {bot: 'witness', evidence: 'timestamps_backup', gi
 
 export function createModes({node, tr, json, may, status, query, go, toast}) {
   let data = null, key = '', loadedAt = 0, request = 0, selected = null, easyOpened = '', home = null;
+  const gated = () => !document.documentElement.dataset.uiLevel;
   const isLocked = featureId => {
     if(document.documentElement.dataset.uiLevel)return false;
     const feature = data?.features.find(f => f.id === featureId);
@@ -104,6 +105,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
 
   function featureNames(ids) { return ids.map(id => tr(data.features.find(f => f.id === id).name)); }
   function between(from, to) {
+    if (!gated()) return {shown: [], hidden: []};
     const low = from ? rank(from) : data.modes.length, high = rank(to);
     return {
       shown: from ? data.features.filter(f => rank(from) < rank(f.mode) && rank(f.mode) <= high).map(f => f.id) : [],
@@ -118,7 +120,8 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     title.id = 'mode-dialog-title'; close.setAttribute('aria-label', tr('Close'));
     close.addEventListener('click', () => dialog.close());
     head.append(title, close);
-    dialog.append(head, node('p', 'hint', tr('A mode decides what the panel shows and suggests. Recording and signing are the same in every mode; a hidden section keeps working and nothing is deleted.')));
+    dialog.append(head, node('p', 'hint', gated() ? tr('A mode decides what the panel shows and suggests. Recording and signing are the same in every mode; a hidden section keeps working and nothing is deleted.')
+      : tr('A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.')));
     modeCards(dialog, {current: data.mode, compact: true, choose: may('settings') ? id => {
       selected = id === data.mode ? null : id; renderDialog();
       dialog.querySelector('.mode-diff input, .mode-diff button.primary:not(:disabled)')?.focus();
@@ -141,7 +144,8 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     if (lower) {
       const line = node('label', 'check-label');
       confirm = node('input'); confirm.type = 'checkbox';
-      line.append(confirm, document.createTextNode(' ' + tr('I understand: hidden sections keep working and nothing is deleted.')));
+      line.append(confirm, document.createTextNode(' ' + tr(gated() ? 'I understand: hidden sections keep working and nothing is deleted.'
+        : 'I understand: recording and signing stay the same and nothing is deleted.')));
       box.append(line);
     }
     const apply = button('primary', tr(lower ? 'Lower to {mode}' : 'Switch to {mode}', {mode: tr(m.name)}));
@@ -174,7 +178,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     if (!data) return;
     const m = info(data.mode);
     switchDot.textContent = m ? m.emoji : '◌';
-    switchName.textContent = m ? tr(m.name) : tr('All sections');
+    switchName.textContent = m ? tr(m.name) : tr(gated() ? 'All sections' : 'Not chosen');
     switchLevel.textContent = data.active + '/' + data.total;
     const text = m ? tr('Protection mode: {mode}. {active} of {total} protection layers.', {mode: tr(m.name), active: data.active, total: data.total})
       : tr('No protection mode chosen yet. {active} of {total} protection layers.', {active: data.active, total: data.total});
@@ -183,7 +187,7 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
 
   function renderCard() {
     card.hidden = !data;
-    const signature = data ? JSON.stringify([data, may('settings')]) : '';
+    const signature = data ? JSON.stringify([data, may('settings'), gated()]) : '';
     if (!data || card.dataset.signature === signature) return;
     card.dataset.signature = signature;
     const m = info(data.mode), wasOpen = card.querySelector('details')?.open;
@@ -194,13 +198,14 @@ export function createModes({node, tr, json, may, status, query, go, toast}) {
     change.addEventListener('click', () => show());
     head.append(title, change);
     card.append(head);
-    card.append(node('p', 'hint', tr('A mode changes the panel view. The status of each layer is below.')));
+    card.append(node('p', 'hint', tr(gated() ? 'A mode changes the panel view. The status of each layer is below.'
+      : 'A mode sets the protection target. The status of each layer is below.')));
     level(card);
     const details = node('details', 'protection-details'), summary = node('summary', '', tr('The {total} protection layers', {total: data.total}));
     details.append(summary); layerList(details);
     details.open = wasOpen ?? data.mode === 'maximum';
     card.append(details);
-    if (!m) card.append(node('p', 'hint', tr('No mode is chosen yet, so every section is shown.')));
+    if (!m && gated()) card.append(node('p', 'hint', tr('No mode is chosen yet, so every section is shown.')));
   }
 
   function lockText(feature) {

@@ -6,6 +6,7 @@ from .format import FORMAT, HEX, ZERO, check_checkpoint, check_events, check_sea
 
 MAX_TOTAL = 8 * 1024 ** 3
 MAX_FILE = 512 * 1024 ** 2
+MAX_ENTRIES = 100000
 
 
 def verify_zip(path, expected_fingerprint=None, checkpoint=None, receipt=None,
@@ -13,7 +14,7 @@ def verify_zip(path, expected_fingerprint=None, checkpoint=None, receipt=None,
     with zipfile.ZipFile(path) as archive:
         infos = archive.infolist()
         names = [item.filename for item in infos]
-        if len(names) != len(set(names)) or len(names) > 100000:
+        if len(names) != len(set(names)) or len(names) > MAX_ENTRIES:
             raise ValueError("Duplicate or excessive archive entries")
         if any(item.file_size > MAX_FILE or item.flag_bits & 1 or item.is_dir()
                or (item.external_attr >> 16) & 0o170000 not in {0, 0o100000} for item in infos):

@@ -186,7 +186,8 @@ export function createJournal(context){
   const visibleRows=()=>[...$("events-body").querySelectorAll(".event-row")].filter(row=>!row.hidden);
   function selectRow(row,focus=false){
     selectedSeq=row?Number(row.dataset.seq):null;
-    for(const item of visibleRows()){const active=item===row;item.tabIndex=active?0:-1;item.classList.toggle("journal-selected",active);}
+    for(const item of visibleRows()){const active=item===row;item.tabIndex=active?0:-1;item.classList.toggle("journal-selected",active);
+      for(const control of item.querySelectorAll("button"))control.tabIndex=active?0:-1;}
     if(focus&&row){row.focus();row.scrollIntoView({block:"nearest"});}
   }
   function restoreSelection(){const rows=visibleRows();selectRow(rows.find(row=>Number(row.dataset.seq)===selectedSeq)||rows[0]||null);}

@@ -38,6 +38,7 @@ from ..scope import Recheck
 from ..scope import ScopeUpdate
 from ..scope import WIDE_WARNING
 from ..scope import recheck_settings
+from ..scope import hold_operator_pause
 from ..scope import scope_settings
 from ..scope import unexclude
 from ..store import canonical
@@ -125,6 +126,7 @@ async def target(request: Request, body: Target, *, ctx=Depends(current_context)
             )
             if body.enabled and (not (existing and existing["enabled"])):
                 collector.request_baseline([body.chat_id])
+            hold_operator_pause(store, resumed=[body.chat_id])
     return {"targets": ctx.visible_targets(request)}
 
 
@@ -177,6 +179,9 @@ async def targets_batch(
                 )
                 if enabled and (not existing.get(chat_id, {}).get("enabled")):
                     added.append(chat_id)
+            if body.enabled is not None:
+                automatic = [chat_id for chat_id, entry in entries.items() if entry.get("origin") == "scope"]
+                hold_operator_pause(store, paused=[] if body.enabled else automatic, resumed=ids if body.enabled else [])
             collector.request_baseline(added)
     return {"targets": ctx.visible_targets(request), "updated": len(ids)}
 

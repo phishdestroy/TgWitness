@@ -42,6 +42,7 @@ FIELDS = [
     )
 ]
 KEYS = tuple(field["key"] for field in FIELDS)
+LATER_CHANGE = "A later change affects the same settings. Change them directly instead of undoing this one."
 
 
 class Draft(BaseModel):
@@ -67,6 +68,7 @@ class GoalChange(BaseModel):
 class Restore(BaseModel):
     model_config = ConfigDict(extra="forbid")
     seq: int = Field(ge=1)
+    hash: str | None = Field(default=None, max_length=128)
     revision: str
 
 
@@ -183,9 +185,13 @@ def edited(current, body):
     return desired
 
 
+def conflicts(desired):
+    return {k for k in ("timestamps", "notifications", "replica") if desired[k] and not desired["outside"]} | (
+        {"drand"} if desired["drand"] and not desired["timestamps"] else set())
+
+
 def coherent(desired):
-    return not (desired["drand"] and not desired["timestamps"]
-                or any(desired[k] for k in ("timestamps", "notifications", "replica")) and not desired["outside"])
+    return not conflicts(desired)
 
 
 def main_account_scope(app, body):
@@ -214,7 +220,7 @@ def changes(store, limit=20):
         goal = "goal_after" in payload and payload.get("goal_before") != payload["goal_after"]
         if not diff and not goal:
             continue
-        rows.append({"seq": event["seq"], "at": event["observed_at"], "changes": diff,
+        rows.append({"seq": event["seq"], "hash": event["hash"], "at": event["observed_at"], "changes": diff,
                      **({"goal_before": payload.get("goal_before"), "goal_after": payload["goal_after"]} if goal else {}),
                      **({"restored": payload["restored"]} if payload.get("restored") else {})})
         if len(rows) >= limit:
@@ -348,7 +354,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
     async def goal_preview(body: GoalChange):
         return preview(app, body)
 
-    async def apply_values(desired, note=None, capture=None):
+    async def apply_values(desired, note=None, capture=None, keep_conflicts=False, allowed=()):
         s, c = app.state.store, app.state.collector
         before, before_capture = values(app), capture_settings(app.state.store)
         if desired["continuous"]:
@@ -356,7 +362,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                 validate_collection_scope(s)
             except ValueError as exc:
                 raise HTTPException(409, str(exc)) from None
-        if not coherent(desired):
+        if conflicts(desired) - (conflicts(before) if keep_conflicts else set()) - set(allowed):
             raise HTTPException(409, "The preserved manual settings conflict with this goal. Review external requests and timestamps.")
         if desired["replica"]:
             destination = replica.replica_settings(s)
@@ -445,12 +451,19 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             if body.revision != revision(app):
                 raise HTTPException(409, "Settings changed. Review the differences again.")
             found = app.state.store.events_of(["settings.changed"], limit=1, after=body.seq - 1, before=body.seq + 1)
-            if not found:
+            if not found or body.hash is not None and found[0]["hash"] != body.hash:
                 raise HTTPException(404, "This change is not in the journal.")
             payload = found[0]["payload"]
-            current = values(app)
-            desired = {**current, **{key: value for key, value in (payload.get("before") or {}).items() if key in KEYS}}
-            capture = payload.get("capture_before") if desired["files"] == "custom" else None
+            before, after = payload.get("before") or {}, payload.get("after") or {}
+            keys = [key for key in KEYS if key in before and key in after and before[key] != after[key]]
+            current, s = values(app), app.state.store
+            seen = {**current, "continuous": current["continuous"]
+                    or bool(s.get_setting("collection_problem", None)) and s.get_setting("collection_intent", False)}
+            goal = (s.get_setting("goal_preset", None) or {}).get("goal")
+            if any(seen[key] != after[key] for key in keys) or "goal_after" in payload and goal != payload["goal_after"]:
+                raise HTTPException(409, LATER_CHANGE)
+            desired = {**current, **{key: before[key] for key in keys}}
+            capture = payload.get("capture_before") if "files" in keys and desired["files"] == "custom" else None
             if capture is not None:
                 try:
                     capture = Capture.model_validate(capture).model_dump()
@@ -458,11 +471,13 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                     capture = None
             if desired["files"] == "custom" and capture is None:
                 desired["files"] = current["files"]
-            goal = (app.state.store.get_setting("goal_preset", None) or {}).get("goal")
+            earlier = conflicts({**current, **{key: before[key] for key in KEYS if key in before}})
+            if conflicts(desired) - conflicts(current) - earlier:
+                raise HTTPException(409, LATER_CHANGE)
             note = {"restored": body.seq}
             if "goal_after" in payload:
                 note.update(goal_before=goal, goal_after=payload.get("goal_before"))
-            await apply_values(desired, note, capture)
+            await apply_values(desired, note, capture, keep_conflicts=True, allowed=earlier)
             if "goal_after" in payload:
                 if payload.get("goal_before") in PRESETS:
                     save_goal(app.state.store, payload["goal_before"])
@@ -478,7 +493,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
         async with app.state.operation_lock:
             if body.revision != revision(app):
                 raise HTTPException(409, "Settings changed. Review the differences again.")
-            await apply_values(edited(values(app), body))
+            await apply_values(edited(values(app), body), keep_conflicts=True)
         return state(app)
 
     @app.post("/api/first-run", dependencies=deps)

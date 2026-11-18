@@ -61,16 +61,16 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, failure_outcome, lane_limits,
-                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_directory, sync_file,
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, durable_replace, failure_outcome,
+                         lane_limits, plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_file,
                          validate_observation)
 from .media.dedup_queue import DOWNLOADS
 from .media.workers import AdaptiveSlots
 from .export.batch_requests import MessageBatcher
 from .export.live_export import NOT_READY as LIVE_NOT_READY, LiveExport
 from . import secret_chats
-from .scope import (allowed, folder_rule, in_folder, kind_of, public_username, recheck_settings, restriction,
-                    scope_settings, visibility)
+from .scope import (OPERATOR_PAUSED, allowed, folder_rule, in_folder, kind_of, operator_paused, public_username,
+                    recheck_settings, restriction, scope_settings, visibility)
 from .verify import fingerprint
 
 LOG = logging.getLogger("tgwitness.collector")
@@ -708,6 +708,8 @@ class Collector:
         self.unavailable_since = None
         self.pool_retry_at = 0
         self.target_ids = set()
+        self.scope_ids = set()
+        self.scope_kinds = {}
         self.known_ids = set()
         self.target_revision = -1
         self.folders = {}
@@ -901,6 +903,8 @@ class Collector:
         if self.target_revision != self.store.targets_revision:
             targets = self.store.targets()
             self.target_ids = {t["chat_id"] for t in targets if t["enabled"]}
+            self.scope_ids = {t["chat_id"] for t in targets if t["enabled"] and t["origin"] == "scope"}
+            self.scope_kinds = {t["chat_id"]: t["kind"] for t in targets if t["chat_id"] in self.scope_ids}
             self.known_ids = {t["chat_id"] for t in targets}
             self.target_revision = self.store.targets_revision
 
@@ -908,13 +912,31 @@ class Collector:
         self.refresh_targets()
         return chat_id in self.target_ids
 
+    def admitted(self, chat_id, scope=None):
+        """An enabled target is collected only while the saved scope still allows it: exclusions apply to every
+        target and the mode and chat types to automatically added ones from the moment they are saved, before
+        the target list is recalculated. Manual targets keep their contract in every mode."""
+        if chat_id is None or not self.selected(chat_id):
+            return False
+        scope = scope or scope_settings(self.store)
+        if chat_id in scope["exclude"]:
+            return False
+        if chat_id not in self.scope_ids:
+            return True
+        if scope["mode"] == "selected":
+            return False
+        kind = (self.dialog_cache.get(chat_id) or {}).get("kind") or self.scope_kinds.get(chat_id)
+        return kind is None or allowed(scope, kind)
+
     async def covers(self, chat_id, entity=None, *, message_ids=()):
         if chat_id is None:
             return False
-        if self.selected(chat_id):
-            return True
         scope = scope_settings(self.store)
-        if scope["mode"] == "selected" or chat_id in scope["exclude"]:
+        if chat_id in scope["exclude"]:
+            return False
+        if self.selected(chat_id):
+            return self.admitted(chat_id, scope)
+        if scope["mode"] == "selected":
             return False
         if chat_id in self.known_ids or chat_id in self.scope_rejected:
             return False
@@ -924,6 +946,14 @@ class Collector:
         pending = self.scope_unresolved.get(chat_id)
         if entity is None and (pending is None or time.monotonic() >= pending["retry_at"]):
             entity = await self.lookup_entity(chat_id, failures)
+            # The scope or the target list may have changed while Telegram answered: decide on the current ones.
+            scope = scope_settings(self.store)
+            if chat_id in scope["exclude"]:
+                return False
+            if self.selected(chat_id):
+                return self.admitted(chat_id, scope)
+            if scope["mode"] == "selected" or chat_id in self.known_ids or chat_id in self.scope_rejected:
+                return False
         kind = entry.get("kind") or kind_of(entity)
         if kind is None:
             self.scope_undetermined(chat_id, message_ids, failures)
@@ -1050,7 +1080,7 @@ class Collector:
     async def take_baseline(self, chat_id):
         if chat_id not in self.store.get_setting("baseline_pending", []):
             return
-        if self.selected(chat_id):
+        if self.admitted(chat_id):
             await self.snapshot(chat_id, self.param("snapshot_max"), origin="baseline")
         self.store.set_setting("baseline_pending",
                                [c for c in self.store.get_setting("baseline_pending", []) if c != chat_id])
@@ -1115,7 +1145,7 @@ class Collector:
                 continue
             try:
                 await self.wait_intake()
-                if not self.selected(chat_id):
+                if not self.admitted(chat_id):
                     return []
                 operation = (self.snapshot(chat_id, options["history"], entity=entity, origin="new_chat")
                              if stage == "history" else self.capture_profile(chat_id, entity))
@@ -1140,7 +1170,7 @@ class Collector:
             requeue = False
             try:
                 async with locks.setdefault(chat_id, asyncio.Lock()):
-                    if not self.selected(chat_id):
+                    if not self.admitted(chat_id):
                         self.intake_progress.clear(chat_id, baseline)
                         continue
                     await self.wait_intake()
@@ -1149,7 +1179,7 @@ class Collector:
                         errors = []
                         if baseline:
                             await asyncio.wait_for(self.take_baseline(chat_id), self.param("operation_timeout_seconds"))
-                        elif self.selected(chat_id):
+                        elif self.admitted(chat_id):
                             errors = await self.capture_intake(chat_id, entity)
                         if errors:
                             self.defer_intake(chat_id, baseline, errors[0][1], [stage for stage, _ in errors])
@@ -1227,19 +1257,30 @@ class Collector:
     async def apply_scope(self, refresh=True):
         scope = scope_settings(self.store)
         self.scope_rejected = set()
-        if scope["mode"] != "selected" and (refresh or not self.dialog_cache):
-            await self.dialogs()
+        failure = None
+        attempted = scope["mode"] != "selected" and (refresh or not self.dialog_cache)
+        if attempted:
+            try:
+                await self.dialogs()
+            except (asyncio.CancelledError, *AUTHORIZATION_ERRORS):
+                raise
+            except Exception as exc:
+                failure = exc
+        listing = "unavailable" if failure is not None else "refreshed" if attempted else "saved"
         self.scope_refreshed_at = time.time()
         excluded, rule = set(scope["exclude"]), self.folder_for(scope)
-        if scope["mode"] == "folder" and rule is None:
+        if scope["mode"] == "folder" and rule is None and failure is None:
             raise ValueError("The chosen Telegram folder was not found. Choose a folder again.")
         added, paused, resumed = [], [], []
         known = {t["chat_id"]: t for t in self.store.targets()}
+        held = operator_paused(self.store)
         with self.store.transaction():
             for chat_id, target in known.items():
                 if chat_id in excluded and target["enabled"]:
                     self.store.set_target(chat_id, target["title"], target["kind"], False)
                     paused.append(chat_id)
+                elif target["origin"] == "scope" and chat_id in held and not target["enabled"]:
+                    continue
                 elif target["origin"] == "scope":
                     entry = self.dialog_cache.get(chat_id)
                     if (scope["mode"] == "selected" or chat_id in excluded
@@ -1247,6 +1288,8 @@ class Collector:
                         wanted = False
                     elif scope["mode"] == "account":
                         wanted = True
+                    elif rule is None:
+                        wanted = bool(target["enabled"])
                     elif entry:
                         wanted = in_folder(rule, chat_id, entry["kind"], entry["entity"], entry["archived"])
                     elif rule.get("all") or chat_id in rule["include"] or chat_id in rule["exclude"]:
@@ -1257,7 +1300,7 @@ class Collector:
                     if bool(target["enabled"]) != wanted:
                         self.store.set_target(chat_id, target["title"], target["kind"], wanted)
                         (resumed if wanted else paused).append(chat_id)
-            if scope["mode"] != "selected":
+            if scope["mode"] != "selected" and failure is None:
                 for chat_id, entry in self.dialog_cache.items():
                     if chat_id in known or chat_id in excluded or not allowed(scope, entry["kind"]):
                         continue
@@ -1266,6 +1309,10 @@ class Collector:
                         continue
                     self.store.set_target(chat_id, entry["title"], entry["kind"], True, origin="scope", priority=0)
                     added.append(chat_id)
+            kept = {chat_id for chat_id in held if known.get(chat_id, {}).get("origin") == "scope"
+                    and not known[chat_id]["enabled"]}
+            if kept != held:
+                self.store.set_setting(OPERATOR_PAUSED, sorted(kept))
             if added or paused or resumed:
                 self.store.append("scope.applied", {
                     "mode": scope["mode"], "folder": (rule or {}).get("title"), "types": scope["types"],
@@ -1273,16 +1320,25 @@ class Collector:
                     "added": [{"chat_id": c, "title": self.dialog_cache[c]["title"], "kind": self.dialog_cache[c]["kind"]}
                               for c in added],
                     "paused": paused, "resumed": resumed, "excluded": sorted(excluded),
-                    "dialogs_inspected": len(self.dialog_cache),
-                    "coverage": ("all accessible dialogs inspected; " if scope["mode"] != "selected"
-                                 else "configured dialog list inspected; ") + "new matching chats are added as they appear; " + (
+                    "dialog_list": listing,
+                    **({"dialogs_inspected": len(self.dialog_cache)} if listing == "refreshed"
+                       else {"saved_dialogs": len(self.dialog_cache)}),
+                    **({"dialog_refresh_failed": type(failure).__name__} if failure else {}),
+                    "coverage": (("all accessible dialogs inspected; " if scope["mode"] != "selected"
+                                  else "configured dialog list inspected; ") if listing == "refreshed"
+                                 else ("the dialog list could not be read in this pass" if failure is not None
+                                       else "the dialog list was not read in this pass")
+                                 + "; the saved list of " + str(len(self.dialog_cache)) + " dialogs and the saved "
+                                 "targets were used; ") + "new matching chats are added as they appear; " + (
                                     "the latest " + str(scope["new_chats"]["history"]) + " messages of each added chat "
                                     "are read once, earlier history is not fetched" if scope["new_chats"]["history"]
                                     else "earlier history of added chats is not fetched")})
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
             for chat_id in added:
                 self.request_intake(chat_id, self.dialog_cache[chat_id]["entity"])
-        return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
+        if failure is not None:
+            raise failure
+        return {"added": len(added), "paused": len(paused), "resumed": len(resumed), "dialog_list": listing}
 
     def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):
         from . import client_identity
@@ -3902,7 +3958,7 @@ class Collector:
         return bool(getattr(message, "out", False)) and not scope_settings(self.store)["own_actions"]
 
     def profiles_observed(self, chat_id):
-        return self.running and self.selected(chat_id) and monitoring_settings(self.store)["profiles"]
+        return self.running and self.admitted(chat_id) and monitoring_settings(self.store)["profiles"]
 
     def sender_profile(self, sender, chat_id):
         if sender is None or not self.profiles_observed(chat_id):
@@ -4134,7 +4190,7 @@ class Collector:
                     types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
                     types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest))
                 if (not membership or settings["membership"]) and (
-                        removed or await self.covers(chat_id, message_ids=[update.message.id])):
+                        (removed and self.admitted(chat_id)) or await self.covers(chat_id, message_ids=[update.message.id])):
                     source = recovered_source(update)
                     if not (source and self.store.message_state(chat_id, update.message.id)["content"]):
                         await self.capture_message(update.message, recovered_kind(source), chat_id, update, source,
@@ -4173,7 +4229,7 @@ class Collector:
                                if getattr(update.settings, name, False) is True)
                 stated = {name: plain(getattr(update.settings, name, None)) for name in PEER_SETTING_FACTS
                           if getattr(update.settings, name, None) is not None}
-                if (flags or stated) and self.selected(chat_id):
+                if (flags or stated) and self.admitted(chat_id):
                     self.store.append("peer.settings_changed", {
                         "flags": flags, "stated": stated, "raw": plain(update),
                         "meaning": "Peer-setting flags and fields received from Telegram for this account and "
@@ -4685,7 +4741,7 @@ class Collector:
         return facts
 
     async def _snapshot(self, chat_id, limit, entity=None, origin=None, before_id=None):
-        if not self.selected(chat_id):
+        if not self.admitted(chat_id):
             raise ValueError("Enable this target before taking a history snapshot.")
         await self.restore()
         entity = entity or await self.resolve_target(chat_id)
@@ -4699,7 +4755,7 @@ class Collector:
         try:
             previous = before_id or 2**63
             async for message in self.client.iter_messages(entity, limit=limit, max_id=before_id or 0):
-                if not self.selected(chat_id):
+                if not self.admitted(chat_id):
                     raise ValueError("History snapshot stopped because the source was disabled.")
                 if type(message.id) is not int or not 0 < message.id < previous:
                     raise ValueError("History reply does not advance the requested cursor.")
@@ -5479,7 +5535,7 @@ class Collector:
             self.people.pop(next(iter(self.people)))
         self.people[utils.get_peer_id(entity)] = entity
         if chat_id is not None:
-            if self.running and self.selected(chat_id) and monitoring_settings(self.store)["profiles"]:
+            if self.running and self.admitted(chat_id) and monitoring_settings(self.store)["profiles"]:
                 from .people import observe_entity
                 observe_entity(self.store, entity, chat_id)
             if capture_settings(self.store)["include_avatars"]:
@@ -5796,10 +5852,15 @@ class Collector:
                 raise ValueError("existing_content_addressed_file_is_corrupt")
             temp.unlink()
         else:
-            temp.replace(destination)
-            await complete_in_thread(sync_directory, media_root)
-            if self.media_library is not None:
-                await complete_in_thread(self.media_library.adopt, destination, digest)
+            try:
+                await complete_in_thread(durable_replace, temp, destination)
+            except OSError:
+                if not temp.is_file() or not destination.is_file() or await complete_in_thread(file_digest, destination) != digest:
+                    raise
+                temp.unlink()
+            else:
+                if self.media_library is not None:
+                    await complete_in_thread(self.media_library.adopt, destination, digest)
         attempt.advance("stored")
         attempt.finish(MediaOutcome("done", {
             "media_sha256": digest, "size": actual_size,
