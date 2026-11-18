@@ -407,6 +407,9 @@ def register(app, ctx):
     router.patch("/api/mode", dependencies=[Depends(authenticate)])(
         routes_evidence.change_mode
     )
+    router.post("/api/journal/rollback/acknowledge", dependencies=[Depends(authenticate)])(
+        routes_evidence.acknowledge_journal_rollback
+    )
     router.post("/api/source-check", dependencies=[Depends(authenticate)])(
         routes_evidence.run_source_check
     )

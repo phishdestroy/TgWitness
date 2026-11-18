@@ -375,13 +375,13 @@ class SecretChats:
         accept = settings(self.store)["accept_incoming"]
         if not self.recorded("requested", event.chat_id):
             self.note("requested", {"secret_chat_id": event.chat_id, "peer_user_id": event.peer_user_id,
-                                    "direction": "in", "accepted_automatically": accept})
+                                    "direction": "in", "accepted_automatically": accept, **self.identity(event.peer_user_id)})
         if accept:
             self.spawn(self.accept(event.chat_id, automatic=True))
 
     def on_ChatReady(self, event):
         payload = {"secret_chat_id": event.chat_id, "peer_user_id": event.peer_user_id,
-                   "key_fingerprint": event.key_fingerprint}
+                   "key_fingerprint": event.key_fingerprint, **self.identity(event.peer_user_id)}
         if event.key_hash:
             payload["key_visualization"] = library.key_visualization(event.key_hash).hex
         self.note("ready", payload)
@@ -612,7 +612,8 @@ class SecretChats:
         if not isinstance(utils.get_peer(entity), types.PeerUser):
             raise ValueError("This needs a Telegram user, not a group or channel.")
         chat = await self.acting(manager.create, entity)
-        self.note("requested", {"secret_chat_id": chat.id, "peer_user_id": chat.peer_user_id, "direction": "out"})
+        self.note("requested", {"secret_chat_id": chat.id, "peer_user_id": chat.peer_user_id, "direction": "out",
+                                **self.identity(chat.peer_user_id)})
         return self.snapshot(chat)
 
     async def accept(self, chat_id, automatic=False):
@@ -747,6 +748,11 @@ class SecretChats:
                 "peer_user_id": chat.peer_user_id, "outbound": chat.is_outbound, "ttl": chat.ttl, "layer": chat.layer,
                 "key_visualization": library.key_visualization(chat.key_hash).hex if chat.key_hash else None,
                 "created_at": chat.created_at, "closed_reason": chat.closed_reason}
+
+    def identity(self, user_id):
+        known = self.person(user_id) if type(user_id) is int else None
+        return {key: value for key, value in (("peer_name", (known or {}).get("name")),
+                                              ("peer_username", (known or {}).get("username"))) if value}
 
     def person(self, user_id):
         collector = self.collector

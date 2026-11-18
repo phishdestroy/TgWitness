@@ -14,7 +14,7 @@ from typing import Literal
 from pydantic import ConfigDict, Field, ValidationError, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, metrics, report_analytics, report_charts, snapshot_analytics
-from . import report_chat_timeline, report_design, report_forwards, report_history, report_layouts, report_media, report_repeats, report_selection, report_selection_view
+from . import report_chat_timeline, report_design, report_forwards, report_history, report_layouts, report_media, report_repeats, report_secret, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -138,7 +138,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + snapshot_analytics.text_keys() + report_selection_view.text_keys() + report_repeats.text_keys() + report_media.text_keys() + report_forwards.text_keys() + report_layouts.text_keys() + report_composition_pdf.text_keys() + report_secret.text_keys() + list(SCRIPT_WORDS) + list(SINGULAR.values()) + LIMITS + EXPORT_LIMITS + [JOURNAL_LIMIT] + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -274,6 +274,9 @@ class Digest:
             if isinstance(payload.get("run"), dict) and payload["run"].get("tdx_start"):
                 self.trust_signals["tdx"] += 1
         self.categories[category(kind)] += 1
+        if kind == "secret_chat.action" and payload.get("action") == "DeleteMessages":
+            removed = payload["details"].get("random_ids") if isinstance(payload.get("details"), dict) else None
+            self.categories["deleted"] += len(removed) if isinstance(removed, list) else 1
         self.first, self.last = self.first or event["observed_at"], event["observed_at"]
         self.first_hash = self.first_hash or event["hash"]
         if kind in ("observation.started", "account.authorized") and isinstance(payload.get("client"), dict):
@@ -1054,6 +1057,7 @@ CSS += DOSSIER_CSS
 CSS += report_charts.CSS
 CSS += report_design.CSS
 CSS += report_layouts.CSS
+CSS += report_secret.CSS
 SCRIPT += "\n" + CONSOLE_JS + "\n" + report_layouts.report_profile.SCRIPT
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
 CSP = ("default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: file:; script-src " + SCRIPT_HASH
@@ -1890,6 +1894,7 @@ def report_data(events_again, coverage, context):
         "actions": {"panel_actions": digest.get("action_count", 0), "listed": digest.get("actions") or [],
                     "messages_sent": digest.get("own_total", 0), "sent_listed": digest.get("own_messages") or []},
         "timestamps": anchors, "coverage": coverage, "custody": custody(context),
+        "encrypted_chats": context.get("encrypted_chats") or [],
         "sequence_continuity": sequence_continuity(context, options),
         "case_assessment": case_assessment.journal(context, coverage),
         "case_board": context.get("case_board"),
@@ -2488,6 +2493,8 @@ class EvidenceHTML:
         self.created, self.count, self.head_hash = self.context.get("created_at") or utcnow(), self.context.get("event_count"), self.context.get("head_hash")
         self.case, self.archive_name = case_of(self.options), "tgwitness-evidence.zip"
         self.title = self.options.get("case_title") or say("Telegram observation journal")
+        if self.context.get("encrypted_only"):
+            self.title = self.options.get("case_title") or report_secret.title_of(say, self.context["encrypted_chats"])
         self.description = say("Signed record of Telegram observations made by TgWitness, with integrity and custody details.")
         self.sign = self.context.get("sign")
         self.handover = self.context.get("handover")
@@ -2591,6 +2598,9 @@ class EvidenceHTML:
         yield brief_section(say, *evidence_brief(say, self.digest, self.shown_count, self.anchors, self.coverage, self.account_text,
                                                  self.handover, self.filtered)).encode("utf-8")
         yield report_selection_view.html(self.material.get("selection"), say).encode("utf-8")
+        if self.context.get("encrypted_chats"):
+            yield report_secret.html(self.context["encrypted_chats"], say, next(self.numbers), utc_text, size_text,
+                                     self.context.get("media_root"), self.archive).encode("utf-8")
         analysis_sections = [report_charts.examination_html(self.material.get("examination"), say),
                              report_charts.html(self.material.get("analytics"), say)
                              + report_charts.metrics_html(self.material.get("processors"), say)]
