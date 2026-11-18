@@ -27,6 +27,8 @@
 
 - `verify.py --compare` names a non-chat archive only for formats it knows; an archive from a newer TgWitness
   again reports that the verifier is too old, with exit code 3 under `--strict`.
+- A FloodWait while exporting chat history waits on the history request only and no longer pauses observation
+  of the account.
 - The navigation rail widens to the longest word of its labels in the panel language, so labels such as
   “Псевдосекрет”, “Einstellungen” or “Configuración” no longer break in the middle of a word.
 - Pseudo-secret reports read long chats in linear time, stop embedding image previews in HTML after 48 MB, skip PDF
