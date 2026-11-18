@@ -18,6 +18,8 @@ from ..disclosure import DisclosurePolicy
 from ..downloads import RetainedDownload
 from ..downloads import TemporaryDownload
 from ..downloads import build_file
+from ..downloads import confirm_delivery
+from ..downloads import delivery
 from ..evidence import encrypt_export
 from ..evidence import EmptyReport
 from ..workers import complete_in_thread
@@ -492,9 +494,10 @@ async def export(
         if fmt in ("json", "pdf")
         else "tgwitness-evidence." + fmt
     )
+    mark, held = ctx.export_delivered(headers, request)
     return TemporaryDownload(
-        path, filename=name, media_type=MEDIA_TYPES[fmt], headers=headers,
-        delivered=ctx.export_delivered(headers),
+        path, filename=name, media_type=MEDIA_TYPES[fmt], headers={**headers, **held},
+        delivered=mark,
     )
 
 
@@ -514,13 +517,14 @@ async def export_encrypted(
     encrypted = body.password is not None
     media_types = MEDIA_TYPES
     name = "tgwitness-report." + fmt if fmt in ("json", "pdf") else "tgwitness-evidence." + fmt
+    mark, held = ctx.export_delivered(headers, request)
     return TemporaryDownload(
         path,
         filename="tgwitness-evidence-" + fmt + "-encrypted." + body.encryption if encrypted else name,
         media_type=("application/zip" if body.encryption == "zip" else "application/octet-stream")
         if encrypted else media_types[fmt],
-        headers=headers,
-        delivered=ctx.export_delivered(headers),
+        headers={**headers, **held},
+        delivered=mark,
     )
 
 
@@ -644,6 +648,27 @@ async def export_ticket(
     )
 
 
+class DeliveryReceipt(BaseModel):
+    model_config = {"extra": "forbid"}
+    bytes: int = Field(strict=True, ge=0)
+
+
+async def export_received(
+    export_id: str, body: DeliveryReceipt, request: Request, *, ctx=Depends(current_context)
+):
+    """The panel received every byte of a prepared export; count it for workspace deletion."""
+    from ..export_history import delivered
+
+    entry = ctx.prepared_access(request, export_id)
+    if body.bytes != entry.get("bytes"):
+        raise HTTPException(409, "The received file is not the complete prepared export. Download it again.")
+    counted = confirm_delivery(ctx.app, export_id)
+    if not counted and entry.get("covers"):
+        delivered(ctx.app.state.store, entry)
+        counted = True
+    return {"counted": counted}
+
+
 async def export_again(
     export_id: str, request: Request, *, ctx=Depends(current_context)
 ):
@@ -679,6 +704,8 @@ async def export_again(
             if receipt["encrypted"] or receipt["format"] in ("handover", "group")
             else receipt["format"]
         )
+        mark, held = delivery(ctx.app, request, export_id, (lambda: delivered(ctx.app.state.store, receipt))
+                              if receipt.get("covers") else None)
         return TemporaryDownload(
             path,
             filename="tgwitness-"
@@ -688,8 +715,8 @@ async def export_again(
             + "."
             + extension,
             media_type="application/octet-stream",
-            headers={**headers(receipt), "Cache-Control": "no-store"},
-            delivered=lambda: delivered(ctx.app.state.store, receipt),
+            headers={**headers(receipt), "Cache-Control": "no-store", **held},
+            delivered=mark,
         )
     except BaseException:
         path.unlink(missing_ok=True)
@@ -1106,11 +1133,14 @@ class ExportOperations:
         if not self.export_visible(request, export_id):
             raise HTTPException(403, "This chat is not open to this access.")
 
-    def export_delivered(self, headers):
+    def export_delivered(self, headers, request=None):
+        """The mark that counts this export for workspace deletion and the headers announcing a held mark."""
         from ..export_history import delivered, metadata
 
         store, ident = self.app.state.store, headers.get("X-TgWitness-Export-ID")
-        return lambda: delivered(store, metadata(store, ident))
+        if not ident or not (metadata(store, ident) or {}).get("covers"):
+            return None, {}
+        return delivery(self.app, request, ident, lambda: delivered(store, metadata(store, ident)))
 
     def require_prepared_access(self, request, entry):
         from ..export_history import permitted

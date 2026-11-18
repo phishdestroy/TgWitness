@@ -115,9 +115,17 @@ stops collection regardless of the browser state.
 
 An additional workspace can be deleted once a signed ZIP or ASiC-E container covering its
 journal and its Case Board notes has been downloaded in full. Preparing the archive is not
-enough: an interrupted download, a record outside setup events or a note added after the
-download keeps **Delete** unavailable. A download of the prepared copy from
-**Prepared exports** counts when it completes.
+enough: a record outside setup events or a note added after the download keeps **Delete**
+unavailable.
+
+When the panel saves the file itself, it counts the export only after it has received every
+byte and saved the file, and then reports the size to `POST /api/exports/{id}/received`; a
+download that breaks off is not counted. A file the browser downloads on its own (an export
+larger than the panel's browser buffer) and a download by another HTTP client are counted when
+the server has sent the whole response. The operating system and a reverse proxy buffer several
+megabytes of a response, so for these downloads the server cannot see a break near the end:
+check the downloaded file before deleting. A group export counts for its accounts when it is
+downloaded right after it is prepared; downloading it again from **Prepared exports** does not.
 
 Deleting an additional workspace stops its collector and removes its local data. If a
 locked file or filesystem error interrupts removal, the panel reports the failure and

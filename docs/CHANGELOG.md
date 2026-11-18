@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- An evidence export downloaded in the panel counts for workspace deletion only after the panel has received and
+  saved every byte and confirmed it with `POST /api/exports/{id}/received`. Before, the server counted the download
+  when it had sent the last byte; Linux kept a whole 1.6 MB archive in its socket buffer, so a download broken off
+  after 7 KB was still counted and **Delete** became available. Downloads the browser makes on its own and other HTTP
+  clients still count when the server has sent the whole response; the operations guide says what that cannot see.
 - A minimised handover keeps only the selected chats in the observed-chat list of `process.started`. Before, every
   start record carried the ID, title and type of each observed chat into the handover, so a handover of one chat
   named all the others.
