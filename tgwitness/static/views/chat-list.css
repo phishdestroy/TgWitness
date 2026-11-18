@@ -94,7 +94,7 @@
 .chats-sidebar .chat-item.active :is(.chat-item-preview, .chat-item-time) { opacity: .92; }
 .chats-sidebar .chat-item.active .chat-item-badges .pill.pill-state { border-color: rgba(255, 255, 255, .6); }
 @media (hover: none) {
-  .chats-sidebar .chat-priority { position: static; height: auto; min-height: 36px; background: none; box-shadow: none; opacity: 1; margin-inline-end: 4px; }
+  .chats-sidebar .chat-priority { position: static; flex-basis: 44px; width: 44px; height: auto; min-height: 44px; background: none; box-shadow: none; opacity: 1; margin-inline-end: 0; }
 }
 .chat-list-section { margin: 14px 12px 4px; color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .chat-list-searching { margin: 6px 12px; }

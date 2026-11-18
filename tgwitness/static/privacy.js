@@ -67,14 +67,29 @@
     });
     wrap.append(button);
   }
-  function render(value, {className = '', tr = x => x, reveal, current = () => true} = {}) {
+  function urls(text, secrets) {
+    const found = [];
+    for (const match of text.matchAll(/\b(?:https?:\/\/|www\.|t\.me\/)[^\s<>"'`]+/gi)) {
+      let url = match[0].replace(/[.,;:!?»”’]+$/u, '');
+      while (url.endsWith(')') && url.split('(').length < url.split(')').length) url = url.slice(0, -1).replace(/[.,;:!?»”’]+$/u, '');
+      const start = match.index, end = start + url.length;
+      // A link that runs into a masked secret is not offered whole: copying it would hand out the secret or a cut link.
+      if (/^(?:https?:\/\/|www\.|t\.me\/)./i.test(url) && !secrets.some(item => item.start < end && start < item.end)) found.push({start, end, url});
+    }
+    return found;
+  }
+  function render(value, {className = '', tr = x => x, reveal, current = () => true, link = null} = {}) {
     const text = String(value ?? ''), root = document.createElement('div'); root.className = className;
     return tracked(root, () => {
       root.replaceChildren();
-      if (!enabled) {root.textContent = text; return;}
-      const found = ranges(text); let offset = 0;
-      for (const item of found) {
+      const found = enabled ? ranges(text) : [], links = link ? urls(text, found) : [];
+      let offset = 0;
+      for (const item of [...found, ...links].sort((a, b) => a.start - b.start)) {
         root.append(document.createTextNode(text.slice(offset, item.start)));
+        if (item.url) {
+          const address = document.createElement('span'); address.className = 'text-url'; address.textContent = item.url;
+          root.append(address, link(item.url)); offset = item.end; continue;
+        }
         const secret = text.slice(item.start, item.end), wrap = document.createElement('span'), label = document.createElement('span');
         wrap.className = 'secret-mask'; label.textContent = mask(secret); label.title = tr('Possible secret'); wrap.append(label);
         revealButton(root, wrap, label, mask(secret), secret, {tr, reveal, current});

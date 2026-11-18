@@ -10559,5 +10559,8 @@
   "Report: {scope}": "التقرير: {scope}",
   "Case: {name}": "القضية: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "يفحص الاستطلاع القصير {polled} من أصل {total} قناة؛ وتواصل القنوات الأخرى تلقي التحديثات المرسلة، لكن إعادة الفحص مفعّلة لـ {rechecked} منها فقط.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "يفحص الاستطلاع القصير {polled} من أصل {total} قناة؛ وتتلقى القنوات الأخرى التحديثات المرسلة فقط: إعادة الفحص متوقفة لها."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "يفحص الاستطلاع القصير {polled} من أصل {total} قناة؛ وتتلقى القنوات الأخرى التحديثات المرسلة فقط: إعادة الفحص متوقفة لها.",
+  "By observation time": "حسب وقت المراقبة",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "لم يُسجَّل وقت الإرسال من Telegram؛ لذلك تُؤرَّخ هذه الرسالة وتُرتَّب حسب وقت رصد TgWitness لها.",
+  "Copy URL": "نسخ عنوان URL"
 }

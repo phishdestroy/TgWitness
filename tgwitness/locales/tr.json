@@ -10355,5 +10355,8 @@
   "Report: {scope}": "Rapor: {scope}",
   "Case: {name}": "Dosya: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Kısa yoklama {total} kanalın {polled} tanesini denetliyor; diğerleri gönderilen güncellemeleri almaya devam ediyor, ancak yeniden denetimler bunlardan yalnızca {rechecked} tanesi için açık.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Kısa yoklama {total} kanalın {polled} tanesini denetliyor; diğerleri yalnızca gönderilen güncellemeleri alıyor: bunlar için yeniden denetimler kapalı."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Kısa yoklama {total} kanalın {polled} tanesini denetliyor; diğerleri yalnızca gönderilen güncellemeleri alıyor: bunlar için yeniden denetimler kapalı.",
+  "By observation time": "Gözlem zamanına göre",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram gönderim zamanı kaydedilmedi; bu mesaj TgWitness'in onu gözlemlediği zamana göre tarihlenir ve sıralanır.",
+  "Copy URL": "URL'yi kopyala"
 }

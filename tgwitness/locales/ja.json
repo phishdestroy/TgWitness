@@ -10304,5 +10304,8 @@
   "Report: {scope}": "レポート：{scope}",
   "Case: {name}": "事件：{name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "短いポーリングは{total}件中{polled}件のチャンネルを確認します。残りのチャンネルにもプッシュ更新は引き続き届きますが、再確認がオンなのはそのうち{rechecked}件だけです。",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短いポーリングは{total}件中{polled}件のチャンネルを確認します。残りのチャンネルに届くのはプッシュ更新だけです。これらの再確認はオフです。"
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短いポーリングは{total}件中{polled}件のチャンネルを確認します。残りのチャンネルに届くのはプッシュ更新だけです。これらの再確認はオフです。",
+  "By observation time": "観察時刻による",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram の送信時刻は記録されていません。このメッセージの日付と位置は TgWitness が観察した時刻に基づきます。",
+  "Copy URL": "URL をコピー"
 }

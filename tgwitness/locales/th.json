@@ -10304,5 +10304,8 @@
   "Report: {scope}": "รายงาน: {scope}",
   "Case: {name}": "คดี: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "การสำรวจแบบสั้นตรวจสอบ {polled} จาก {total} ช่อง ช่องอื่นยังคงได้รับการอัปเดตที่ส่งมา แต่การตรวจสอบซ้ำเปิดอยู่เพียง {rechecked} ช่องในจำนวนนั้น",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "การสำรวจแบบสั้นตรวจสอบ {polled} จาก {total} ช่อง ช่องอื่นได้รับเพียงการอัปเดตที่ส่งมา: การตรวจสอบซ้ำปิดอยู่สำหรับช่องเหล่านั้น"
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "การสำรวจแบบสั้นตรวจสอบ {polled} จาก {total} ช่อง ช่องอื่นได้รับเพียงการอัปเดตที่ส่งมา: การตรวจสอบซ้ำปิดอยู่สำหรับช่องเหล่านั้น",
+  "By observation time": "ตามเวลาที่สังเกต",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "ไม่ได้บันทึกเวลาส่งของ Telegram ข้อความนี้จึงลงวันที่และจัดลำดับตามเวลาที่ TgWitness สังเกตเห็น",
+  "Copy URL": "คัดลอก URL"
 }

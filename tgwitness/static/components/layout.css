@@ -290,6 +290,8 @@
   .board-save { display: inline-grid; place-items: center; min-width: 32px; min-height: 32px; }
   .account-select, .source-select-cell, th.source-select-cell { position: relative; }
   .account-select > input::after, input.source-select::after, #target-select-page::after { content: ""; position: absolute; inset: -10px; }
+  .chat-back, .msg-pick, .chat-pick-toggle { position: relative; }
+  .chat-back::after, .msg-pick::after, .chat-pick-toggle::after { content: ""; position: absolute; top: 50%; left: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
 }
 .notice.demo { padding: 10px 12px 10px 18px; gap: 8px 20px; }
 .demo-intro { display: flex; align-items: baseline; gap: 10px; flex: 1 1 280px; min-width: 0; }

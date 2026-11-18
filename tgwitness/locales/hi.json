@@ -10355,5 +10355,8 @@
   "Report: {scope}": "रिपोर्ट: {scope}",
   "Case: {name}": "मामला: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को भेजे गए अपडेट मिलते रहते हैं, लेकिन दोबारा जाँच उनमें से केवल {rechecked} के लिए चालू है।",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को केवल भेजे गए अपडेट मिलते हैं: उनके लिए दोबारा जाँच बंद है।"
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को केवल भेजे गए अपडेट मिलते हैं: उनके लिए दोबारा जाँच बंद है।",
+  "By observation time": "निगरानी के समय के अनुसार",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram का भेजने का समय दर्ज नहीं हुआ; इसलिए इस संदेश की तारीख और स्थान उस समय से तय होते हैं जब TgWitness ने इसे देखा।",
+  "Copy URL": "URL कॉपी करें"
 }

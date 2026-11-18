@@ -6312,7 +6312,12 @@ function messageText(value,m,className="bubble-text"){
   const profile=state.profile,revision=state.workspaceRevision,chat=state.chat,generation=chatGeneration;
   return window.TgWitnessPrivacy.render(value,{className,tr,
     current:()=>profile===state.profile&&revision===state.workspaceRevision&&chat===state.chat&&generation===chatGeneration,
-    reveal:m?()=>json("privacy/reveal",{chat_id:chat,message_id:m.message_id},{profile}):null});
+    reveal:m?()=>json("privacy/reveal",{chat_id:chat,message_id:m.message_id},{profile}):null,link:copyUrlButton});
+}
+function copyUrlButton(url){
+  const button=node("button","text-url-copy");button.type="button";button.title=tr("Copy URL");button.setAttribute("aria-label",tr("Copy URL")+": "+url);button.append(icon("link"));
+  button.addEventListener("click",()=>busy(button,async()=>{await navigator.clipboard.writeText(url);toast(tr("Copied"));}));
+  return button;
 }
 function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   const row=node("div","msg"+(grouped?" grouped":"")+(continued?" continued":"")+(post?" post":"")+(m.deleted?" deleted":m.missing?" missing":""));row.id="msg-"+m.message_id;
@@ -6360,6 +6365,8 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   else if(m.edited)mark("span","pill-edited","edit",tr("Edited"),tr("Telegram marks this message as edited; the earlier text was not saved."));
   if(m.from_scheduled)mark("span","pill-scheduled","clock",tr("Sent as a scheduled message"),tr("Telegram marks this message as sent from a schedule (from_scheduled)."));
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
+  if(!m.sent_at&&(m.versions[0]?.observed_at||m.deleted_observed_at)){const o=node("span","origin origin-observed",tr("By observation time"));
+    o.title=tr("Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.");meta.append(o);}
   const stamp=timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock");
   stamp.dataset.sent=m.sent_at||"";stamp.dataset.saved=m.versions[0]?.observed_at||"";messageTimes(stamp);meta.append(stamp);
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";

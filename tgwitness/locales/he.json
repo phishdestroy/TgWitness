@@ -10406,5 +10406,8 @@
   "Report: {scope}": "דוח: {scope}",
   "Case: {name}": "תיק: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "התשאול הקצר בודק {polled} מתוך {total} ערוצים; השאר ממשיכים לקבל עדכונים שנשלחים, אך בדיקות חוזרות פועלות רק עבור {rechecked} מהם.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "התשאול הקצר בודק {polled} מתוך {total} ערוצים; השאר מקבלים רק עדכונים שנשלחים: בדיקות חוזרות כבויות עבורם."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "התשאול הקצר בודק {polled} מתוך {total} ערוצים; השאר מקבלים רק עדכונים שנשלחים: בדיקות חוזרות כבויות עבורם.",
+  "By observation time": "לפי זמן התצפית",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "זמן השליחה של Telegram לא נרשם; ההודעה מתוארכת וממוקמת לפי הזמן שבו TgWitness צפה בה.",
+  "Copy URL": "העתקת כתובת URL"
 }
