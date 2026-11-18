@@ -10353,5 +10353,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Katı seçilen sohbetlerde oturum listesi okunmaz; bu yüzden bu oturumun ne zaman giriş yaptığı bilinmiyor ve bu dışa aktarma Takeout yerine normal oturumu kullandı.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "{n} dosyanın tümü imzalı manifest ile uyumlu, ancak ASiC-E kapsayıcısı bozuk.",
   "Report: {scope}": "Rapor: {scope}",
-  "Case: {name}": "Dosya: {name}"
+  "Case: {name}": "Dosya: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Kısa yoklama {total} kanalın {polled} tanesini denetliyor; diğerleri gönderilen güncellemeleri almaya devam ediyor, ancak yeniden denetimler bunlardan yalnızca {rechecked} tanesi için açık.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Kısa yoklama {total} kanalın {polled} tanesini denetliyor; diğerleri yalnızca gönderilen güncellemeleri alıyor: bunlar için yeniden denetimler kapalı."
 }

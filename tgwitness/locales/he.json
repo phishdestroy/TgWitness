@@ -10404,5 +10404,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "בצ'אטים נבחרים במצב מחמיר רשימת ההפעלות אינה נקראת, ולכן לא ידוע מתי הסשן הזה התחבר; הייצוא השתמש בסשן הרגיל במקום ב־Takeout.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "כל {n} הקבצים תואמים למניפסט החתום, אך מכל ASiC-E פגום.",
   "Report: {scope}": "דוח: {scope}",
-  "Case: {name}": "תיק: {name}"
+  "Case: {name}": "תיק: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "התשאול הקצר בודק {polled} מתוך {total} ערוצים; השאר ממשיכים לקבל עדכונים שנשלחים, אך בדיקות חוזרות פועלות רק עבור {rechecked} מהם.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "התשאול הקצר בודק {polled} מתוך {total} ערוצים; השאר מקבלים רק עדכונים שנשלחים: בדיקות חוזרות כבויות עבורם."
 }

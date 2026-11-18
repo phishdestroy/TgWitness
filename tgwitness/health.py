@@ -229,7 +229,7 @@ def intake(c, heartbeat_seconds, now):
     return part("working", "live", **detail)
 
 
-def sources(c, enabled_sources):
+def sources(c, enabled_sources, recheck=None):
     statuses = list((c.get("source_status") or {}).values())
     counts = {"enabled": enabled_sources, "checked": len(statuses),
               "visible": sum(s.get("state") in ("visible_in_dialogs", "receiving_updates") for s in statuses),
@@ -244,6 +244,10 @@ def sources(c, enabled_sources):
         counts.update(short_poll_polled=poll.get("polled"), short_poll_channels=poll.get("channels"),
                       short_poll_waiting=[item.get("title") or str(item.get("chat_id")) for item in poll["waiting"]],
                       short_poll_rotating=poll.get("rotating_priority") is not None)
+        if recheck is not None:
+            counts["short_poll_rechecked"] = sum(
+                bool(recheck["recheck_minutes" if item.get("priority") else "recheck_other_minutes"])
+                for item in poll["waiting"])
     scope = (c.get("scope") or {}).get("mode", "selected")
     if not enabled_sources and scope == "selected":
         return part("off", "no_sources", counts=counts)
@@ -329,9 +333,9 @@ def verdict(parts, c, now, gap_at=None):
     return finding("unknown", "low", "diagnose")
 
 
-def collector(c, capture, heartbeat_seconds, enabled_sources, now, gap_at=None):
+def collector(c, capture, heartbeat_seconds, enabled_sources, now, gap_at=None, recheck=None):
     parts = {"connection": connection(c, now), "intake": intake(c, heartbeat_seconds, now),
-             "sources": sources(c, enabled_sources), "media": media(c, capture, now)}
+             "sources": sources(c, enabled_sources, recheck), "media": media(c, capture, now)}
     return {**parts, "state": worst((parts["connection"]["state"], parts["intake"]["state"])),
             "verdict": verdict(parts, c, now, gap_at)}
 
@@ -346,12 +350,13 @@ def last_gap(store):
 
 def collector_of(app_state, status=None, now=None, *, enabled_sources=None):
     from .monitoring import capture_settings
+    from .scope import recheck_settings
     from . import tuning
     store = app_state.store
     return collector(status or app_state.collector.status(), capture_settings(store),
                      tuning.value(store, "heartbeat_seconds"),
                      len(store.targets(True)) if enabled_sources is None else enabled_sources, now or now_utc(),
-                     last_gap(store))
+                     last_gap(store), recheck_settings(store))
 
 
 def next_at(seconds, now=None):

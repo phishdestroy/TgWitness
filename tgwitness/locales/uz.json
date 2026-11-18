@@ -10353,5 +10353,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Qat'iy tanlangan suhbatlarda seanslar ro'yxati o'qilmaydi, shuning uchun bu seans qachon kirgani noma'lum; eksport Takeout o‘rniga oddiy seansdan foydalandi.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Barcha {n} ta fayl imzolangan manifestga mos keladi, lekin ASiC-E konteyneri shikastlangan.",
   "Report: {scope}": "Hisobot: {scope}",
-  "Case: {name}": "Ish: {name}"
+  "Case: {name}": "Ish: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari yuboriladigan yangilanishlarni olishda davom etadi, lekin qayta tekshiruvlar ulardan faqat {rechecked} tasi uchun yoqilgan.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari faqat yuboriladigan yangilanishlarni oladi: ular uchun qayta tekshiruvlar o'chirilgan."
 }

@@ -10302,5 +10302,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "在严格的选定聊天模式下不读取会话列表，因此无法得知此会话何时登录；本次导出使用了普通会话而非 Takeout。",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "全部 {n} 个文件均与签名清单一致，但 ASiC-E 容器已损坏。",
   "Report: {scope}": "报告：{scope}",
-  "Case: {name}": "案件：{name}"
+  "Case: {name}": "案件：{name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "短轮询检查 {total} 个频道中的 {polled} 个；其余频道仍会收到推送的更新，但其中只有 {rechecked} 个开启了重新检查。",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短轮询检查 {total} 个频道中的 {polled} 个；其余频道只会收到推送的更新：它们的重新检查已关闭。"
 }

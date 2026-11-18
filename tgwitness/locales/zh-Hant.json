@@ -10302,5 +10302,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "在嚴格的已選取聊天室模式下不讀取工作階段清單，因此無法得知此工作階段何時登入；本次匯出使用了一般工作階段而非 Takeout。",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "全部 {n} 個檔案均與簽名清單相符，但 ASiC-E 容器已損壞。",
   "Report: {scope}": "報告：{scope}",
-  "Case: {name}": "案件：{name}"
+  "Case: {name}": "案件：{name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "短輪詢檢查 {total} 個頻道中的 {polled} 個；其餘頻道仍會收到推送的更新，但其中只有 {rechecked} 個開啟了重新檢查。",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短輪詢檢查 {total} 個頻道中的 {polled} 個；其餘頻道只會收到推送的更新：它們的重新檢查已關閉。"
 }

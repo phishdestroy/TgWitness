@@ -10302,5 +10302,7 @@
   "With strict chosen chats the session list is not read, so when this session signed in is unknown; this export used the regular session instead of Takeout.": "Dengan perbualan terpilih secara ketat, senarai sesi tidak dibaca, jadi masa sesi ini log masuk tidak diketahui; eksport ini menggunakan sesi biasa dan bukan Takeout.",
   "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Semua {n} fail sepadan dengan manifes yang ditandatangani, tetapi bekas ASiC-E rosak.",
   "Report: {scope}": "Laporan: {scope}",
-  "Case: {name}": "Kes: {name}"
+  "Case: {name}": "Kes: {name}",
+  "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Tinjauan pendek menyemak {polled} daripada {total} saluran; saluran lain masih menerima kemas kini yang dihantar, tetapi semakan semula hanya dihidupkan untuk {rechecked} daripadanya.",
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Tinjauan pendek menyemak {polled} daripada {total} saluran; saluran lain hanya menerima kemas kini yang dihantar: semakan semula dimatikan untuknya."
 }
