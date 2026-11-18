@@ -718,6 +718,25 @@ def readme(context, files):
     return result.encode('utf-8')
 
 
+def sharing_readme(context):
+    """README.txt text of a sharing copy after the verifier quickstart: in its report language and, for another
+    language, again in English."""
+    say = Words(context.get('report_language', 'en'))
+    name, source = context['archive_name'], context['source_archive_name']
+    lines = [say('Sharing copy'), '', *(say(item) for item in context.get('limitations', ())), '',
+             say('The original source, identity map and private selection criteria are NOT included.'),
+             say('Run the verifier from an independently trusted installation.'),
+             say(RECEIVED_WHERE, name=name), say(RECEIVED_RENAMED),
+             'python verify.py ../' + name + ' --fingerprint TRUSTED_SHA256',
+             say('Optional source comparison checks the archive reference, not the correctness of filtering or redaction.'),
+             'python verify.py ../' + name + ' --fingerprint TRUSTED_SHA256 --evidence ../' + source,
+             say('For large packages add --max-gib with the expanded size. index.html is protected by the manifest.')]
+    result = '\n'.join(lines) + '\n'
+    if say.language != 'en':
+        result += '\n' + '=' * 64 + '\nEnglish\n' + '=' * 64 + '\n' + sharing_readme({**context, 'report_language': 'en'})
+    return result
+
+
 def text_keys():
     import ast
     from pathlib import Path

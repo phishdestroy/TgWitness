@@ -10319,5 +10319,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Tinjauan pendek menyemak {polled} daripada {total} saluran; saluran lain hanya menerima kemas kini yang dihantar: semakan semula dimatikan untuknya.",
   "By observation time": "Mengikut masa pemantauan",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Masa hantar Telegram tidak direkodkan; mesej ini diberi tarikh dan disusun mengikut masa TgWitness memantaunya.",
-  "Copy URL": "Salin URL"
+  "Copy URL": "Salin URL",
+  "The original source, identity map and private selection criteria are NOT included.": "Sumber asal, peta identiti dan kriteria pemilihan peribadi TIDAK disertakan.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Untuk pakej besar, tambah --max-gib dengan saiz selepas diekstrak. index.html dilindungi oleh manifest."
 }

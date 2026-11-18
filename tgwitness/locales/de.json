@@ -10370,5 +10370,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Die Kurzabfrage prüft {polled} von {total} Kanälen; die übrigen erhalten nur zugestellte Updates: Erneute Prüfungen sind für sie ausgeschaltet.",
   "By observation time": "Nach Beobachtungszeit",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Die Sendezeit von Telegram wurde nicht erfasst; diese Nachricht wird nach dem Zeitpunkt datiert und eingeordnet, zu dem TgWitness sie beobachtet hat.",
-  "Copy URL": "URL kopieren"
+  "Copy URL": "URL kopieren",
+  "The original source, identity map and private selection criteria are NOT included.": "Die ursprüngliche Quelle, die Identitätszuordnung und die privaten Auswahlkriterien sind NICHT enthalten.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Für große Pakete --max-gib mit der entpackten Größe angeben. index.html ist durch das Manifest geschützt."
 }

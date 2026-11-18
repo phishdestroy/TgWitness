@@ -10319,5 +10319,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Thăm dò ngắn kiểm tra {polled} trên {total} kênh; các kênh còn lại chỉ nhận cập nhật được gửi đến: kiểm tra lại đang tắt cho các kênh này.",
   "By observation time": "Theo thời gian quan sát",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Thời gian gửi của Telegram không được ghi lại; tin nhắn này được ghi ngày và sắp xếp theo thời điểm TgWitness quan sát được.",
-  "Copy URL": "Sao chép URL"
+  "Copy URL": "Sao chép URL",
+  "The original source, identity map and private selection criteria are NOT included.": "Nguồn gốc, bảng đối chiếu danh tính và tiêu chí chọn riêng tư KHÔNG được kèm theo.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Với gói lớn, hãy thêm --max-gib cùng kích thước sau khi giải nén. index.html được bảo vệ bởi manifest."
 }

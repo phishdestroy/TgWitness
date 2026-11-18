@@ -920,8 +920,12 @@ class ExportOperations:
                 "Cache-Control": "private, no-store",
                 "X-TgWitness-Download-Ticket": target + "/ticket",
             }
-            if not disclosure_id:
+            # The same names the panel saves these files under and their verify commands point at.
+            if disclosure_id:
+                filename = delivered_file(disclosure_id, sharing=True)
+            else:
                 state = self.app.state.account_export.public(export_id)
+                filename = state["filename"]
                 if state.get("archive_sha256"):
                     headers["ETag"] = '"' + state["archive_sha256"] + '"'
             self.account_downloads[export_id] = (
@@ -943,10 +947,7 @@ class ExportOperations:
                 return RetainedDownload(
                     path,
                     release=release,
-                    # The same names the panel saves these files under and their verify commands point at.
-                    filename=delivered_file(disclosure_id, sharing=True)
-                    if disclosure_id
-                    else delivered_file(export_id),
+                    filename=filename,
                     media_type="application/zip",
                     headers=headers,
                 )

@@ -35,6 +35,12 @@
   checked again and it is saved under its original name as a plain download, so the browser does not open it. Before
   the check the details point to **Check**; a missing or changed file is named as such. Before, a saved file other
   than an image could not be reached from the report.
+- The panel saves an account export and its sharing copies under the name the server gives, the same name their
+  verify commands point at. Before, the panel built the names itself, and an export made by a sealed capture was saved
+  as `tgwitness-account-export-<id>.zip` while its commands named `account-export.zip`.
+- README.txt of a sharing copy explains the copy and its verify commands in the copy's report language, followed by
+  the English text, as the account export's README.txt does. Before, that part was in English only.
+- On a narrow screen the report's network badge keeps a number and its unit together, as in "0 B sent".
 - The `search`, `context`, `messages`, `stats` and `export` commands refuse a chat, message, sender or sequence number
   that does not fit in a signed 64-bit integer with a usage error naming the argument. Before, such a number stopped
   the command with a Python traceback from the database.

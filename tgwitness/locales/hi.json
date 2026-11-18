@@ -10370,5 +10370,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को केवल भेजे गए अपडेट मिलते हैं: उनके लिए दोबारा जाँच बंद है।",
   "By observation time": "निगरानी के समय के अनुसार",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram का भेजने का समय दर्ज नहीं हुआ; इसलिए इस संदेश की तारीख और स्थान उस समय से तय होते हैं जब TgWitness ने इसे देखा।",
-  "Copy URL": "URL कॉपी करें"
+  "Copy URL": "URL कॉपी करें",
+  "The original source, identity map and private selection criteria are NOT included.": "मूल स्रोत, पहचान तालिका और निजी चयन मानदंड इसमें शामिल नहीं हैं।",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "बड़े पैकेज के लिए खुलने के बाद के आकार के साथ --max-gib जोड़ें। index.html मैनिफ़ेस्ट से सुरक्षित है।"
 }

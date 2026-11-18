@@ -10319,5 +10319,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短輪詢檢查 {total} 個頻道中的 {polled} 個；其餘頻道只會收到推送的更新：它們的重新檢查已關閉。",
   "By observation time": "依觀察時間",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "未記錄 Telegram 的傳送時間；此訊息依 TgWitness 觀察到它的時間標註日期並排序。",
-  "Copy URL": "複製 URL"
+  "Copy URL": "複製 URL",
+  "The original source, identity map and private selection criteria are NOT included.": "不包含原始來源、身分對照表和私人篩選條件。",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "對於大型套件，請用 --max-gib 指定解壓後的大小。index.html 受清單保護。"
 }

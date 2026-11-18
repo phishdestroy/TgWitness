@@ -10370,5 +10370,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "نظرسنجی کوتاه {polled} کانال از {total} کانال را بررسی می‌کند؛ بقیه فقط به‌روزرسانی‌های ارسالی را دریافت می‌کنند: بررسی دوباره برای آن‌ها خاموش است.",
   "By observation time": "بر اساس زمان مشاهده",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "زمان ارسال Telegram ثبت نشده است؛ تاریخ و جای این پیام بر اساس زمانی است که TgWitness آن را مشاهده کرد.",
-  "Copy URL": "کپی URL"
+  "Copy URL": "کپی URL",
+  "The original source, identity map and private selection criteria are NOT included.": "منبع اصلی، جدول تطبیق هویت‌ها و معیارهای خصوصی انتخاب در این بسته نیستند.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "برای بسته‌های بزرگ --max-gib را با اندازهٔ بازشده اضافه کنید. index.html با مانیفست محافظت می‌شود."
 }

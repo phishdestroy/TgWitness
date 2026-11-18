@@ -3717,5 +3717,7 @@
   "Source comparison limit reached: {n} additional occurrences were not compared.",
   "Source without a peer ID",
   "Observed chat",
-  "Forward source"
+  "Forward source",
+  "The original source, identity map and private selection criteria are NOT included.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest."
 ]

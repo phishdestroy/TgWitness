@@ -1098,7 +1098,7 @@ const zone=$("#drop");if(zone){const input=$("#drop-file"),out=$("#drop-result")
 const net=$("#net-badge");if(net&&location.protocol==="file:"&&self.performance&&performance.getEntriesByType){let requests=0,blocked=0;
   const count=list=>{for(const r of list)if(/^(https?|wss?):/i.test(r.name))requests++;};
   const show=()=>{net.className="sig-badge net-badge "+(requests?"bad":"ok");
-    net.querySelector("span").textContent=requests?say("Network requests: {n}").replace("{n}",requests):say("Offline · 0 B sent");
+    net.querySelector("span").textContent=requests?say("Network requests: {n}").replace("{n}",requests):say("Offline · 0 B sent").replace(/(\d) /g,"$1\u00a0");
     net.title=say("Counted by this browser since the page opened. The page policy allows no network connections.")
       +(blocked?" "+say("Blocked attempts: {n}").replace("{n}",blocked):"");net.hidden=false;};
   count(performance.getEntriesByType("resource"));

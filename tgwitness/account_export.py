@@ -282,6 +282,9 @@ class AccountExport:
     def public(self, job_id=None):
         state = self.public_state(job_id)
         state["terminal"] = state.get("phase") in TERMINAL_PHASES and not state.get("active")
+        if state.get("id"):
+            # The panel saves the archive under this name and its verify commands point at it.
+            state["filename"] = state.get("archive_name") or account_report.delivered_file(state["id"])
         return state
 
     def public_state(self, job_id=None):
