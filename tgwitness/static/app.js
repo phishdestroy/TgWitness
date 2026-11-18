@@ -104,7 +104,7 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({creat
   catalog();
 });
 let connectionView;
-const connectionViewReady=import('./views/connection.js?v=4').then(({createConnectionView})=>{
+const connectionViewReady=import('./views/connection.js?v=5').then(({createConnectionView})=>{
   connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
