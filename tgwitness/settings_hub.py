@@ -524,18 +524,21 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
 
     async def save_scope(body):
         from . import recording
+        from .scope import scope_settings
         c, s = app.state.collector, app.state.store
         selected = await selected_chats(body)
         with s.transaction():
-            recording.save(s, recording.RecordingUpdate(scope=ScopeUpdate(mode=body.scope,
-                folder_id=body.folder_id, acknowledged=True)))
+            saved = scope_settings(s)
+            exclude = [cid for cid in saved["exclude"] if cid not in selected] if body.scope == "selected" else saved["exclude"]
+            recording.save(s, recording.RecordingUpdate(scope=ScopeUpdate(**{**saved, "mode": body.scope,
+                "folder_id": body.folder_id, "exclude": exclude}, acknowledged=True)))
             if body.scope == "selected":
                 enabled = {chat["chat_id"] for chat in s.targets(True)}
                 for chat in s.targets():
                     s.set_target(chat["chat_id"], chat["title"], chat["kind"], chat["chat_id"] in selected)
                 for cid in selected:
                     d = c.dialog_cache[cid]
-                    s.set_target(cid, d["title"], d["kind"], True)
+                    s.set_target(cid, d["title"], d["kind"], True, origin="manual")
                 s.append("sources.selected", {"chat_ids": sorted(selected)})
                 c.request_baseline(sorted(selected - enabled))
         return selected

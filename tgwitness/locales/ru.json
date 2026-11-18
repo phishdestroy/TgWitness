@@ -3783,6 +3783,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} выбрано · показано {shown} из {total}",
   "{shown} of {total}": "{shown} из {total}",
   "{shown} of {total} matching records": "Совпадающих записей: {shown} из {total}",
+  "Results {from}–{to}": "Результаты {from}–{to}",
   "{shown} of {total} parameters": "Параметров: {shown} из {total}",
   "{shown} records in this window": "Записей в этом окне: {shown}",
   "Русский": "Русский",

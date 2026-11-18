@@ -3732,6 +3732,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} נבחרו · מוצגים {shown} מתוך {total}",
   "{shown} of {total}": "{shown} מתוך {total}",
   "{shown} of {total} matching records": "{shown} מתוך {total} רשומות תואמות",
+  "Results {from}–{to}": "תוצאות {from}–{to}",
   "{shown} of {total} parameters": "{shown} מתוך {total} פרמטרים",
   "{shown} records in this window": "{shown} רשומות בחלון זה",
   "Русский": "Русский",

@@ -3801,6 +3801,7 @@
   "{selected} selected · {shown} of {total} shown": "المحدد: {selected} · المعروض: {shown} من {total}",
   "{shown} of {total}": "{shown} من {total}",
   "{shown} of {total} matching records": "{shown} من {total} من السجلات المطابقة",
+  "Results {from}–{to}": "النتائج {from}–{to}",
   "{shown} of {total} parameters": "{shown} من {total} من المعلمات",
   "{shown} records in this window": "السجلات في هذه النافذة: {shown}",
   "Русский": "Русский",

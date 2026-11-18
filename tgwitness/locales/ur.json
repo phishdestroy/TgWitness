@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} منتخب شدہ · {total} میں سے {shown} دکھائے گئے",
   "{shown} of {total}": "{total} میں سے {shown}",
   "{shown} of {total} matching records": "{total} میں سے {shown} مماثل ریکارڈز",
+  "Results {from}–{to}": "نتائج {from}–{to}",
   "{shown} of {total} parameters": "{total} میں سے {shown} پیرامیٹرز",
   "{shown} records in this window": "اس ونڈو میں {shown} ریکارڈز",
   "Русский": "روسی",

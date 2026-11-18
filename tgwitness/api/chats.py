@@ -354,10 +354,10 @@ async def set_scope(body: ScopeUpdate, *, ctx=Depends(current_context)):
     store, collector = (ctx.app.state.store, ctx.app.state.collector)
     async with ctx.op_lock:
         try:
-            changed, _ = recording.save(store, recording.RecordingUpdate(scope=body))
+            recording.save(store, recording.RecordingUpdate(scope=body))
         except recording.Invalid as exc:
             raise HTTPException(exc.status, str(exc)) from None
-        if "scope" in changed and collector.running:
+        if collector.running:
             await ctx.perform_operation(collector.apply_scope)
     return ctx.scope_state()
 

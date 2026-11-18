@@ -2325,7 +2325,7 @@ async function refreshEvents(direction=false) {
   if(state.view!=='observations')return;
   await journalReady;
   window.TgWitnessJournal.sync();
-  if(state.search&&state.searchMode==="relevance"&&!state.boardSlice){await refreshRanked(++state.request);return;}
+  if(state.search&&state.searchMode==="relevance"&&!state.boardSlice){await refreshRanked(++state.request,direction);return;}
   const request=++state.request,params=new URLSearchParams({limit:"200",include_count:"true"});
   const after=direction==="newer"?state.eventAfter:null;
   const before=direction==="latest"?null:direction===true||direction==="older"?state.cursor:state.eventBefore;
@@ -2346,8 +2346,10 @@ async function refreshEvents(direction=false) {
   renderEvents();
   if(direction)window.TgWitnessRouter?.record({seq:null,before:state.eventBefore});
 }
-async function refreshRanked(request) {
-  const params=new URLSearchParams({q:state.search,limit:"200",source:state.searchSource||"messages"});
+async function refreshRanked(request,direction=false) {
+  const offset=direction===true||direction==="older"?state.cursor:direction==="newer"?state.eventAfter:direction==="latest"?0:state.eventBefore||0;
+  if(offset===null)return;
+  const params=new URLSearchParams({q:state.search,limit:"200",offset:String(offset),source:state.searchSource||"messages"});
   if(state.filter)params.set('kind',state.filter);
   if(state.source)params.set("chat_id",state.source);
   if(state.eventSince)params.set("since",state.eventSince);
@@ -2355,7 +2357,8 @@ async function refreshRanked(request) {
   const result=await json("search?"+params,undefined,viewOptions('observations'));
   if(request!==state.request)return;
   const counts=Object.values(result.matched||{});
-  state.events=result.events;state.cursor=state.eventAfter=state.eventBefore=null;
+  state.events=result.events;state.cursor=Number.isInteger(result.next_offset)?result.next_offset:null;
+  state.eventAfter=offset>0?Math.max(0,offset-200):null;state.eventBefore=offset>0?offset:null;
   state.eventMatched=counts.length&&counts.every(Number.isFinite)?counts.reduce((a,b)=>a+b,0):null;
   state.searchIndex=result.index;
   renderEvents();

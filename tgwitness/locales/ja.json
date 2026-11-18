@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} 件選択中 · {total} 件中 {shown} 件を表示",
   "{shown} of {total}": "{total} 件中 {shown} 件",
   "{shown} of {total} matching records": "一致する記録 {total} 件中 {shown} 件",
+  "Results {from}–{to}": "結果 {from}–{to}",
   "{shown} of {total} parameters": "パラメータ {total} 個中 {shown} 個",
   "{shown} records in this window": "このウィンドウ内の記録 {shown} 件",
   "Русский": "ロシア語",

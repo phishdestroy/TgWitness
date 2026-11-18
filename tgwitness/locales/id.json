@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} dipilih · {shown} dari {total} ditampilkan",
   "{shown} of {total}": "{shown} dari {total}",
   "{shown} of {total} matching records": "{shown} dari {total} catatan yang cocok",
+  "Results {from}–{to}": "Hasil {from}–{to}",
   "{shown} of {total} parameters": "{shown} dari {total} parameter",
   "{shown} records in this window": "{shown} catatan di jendela ini",
   "Русский": "Русский",

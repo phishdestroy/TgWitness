@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "เลือกแล้ว {selected} รายการ · แสดง {shown} จาก {total} รายการ",
   "{shown} of {total}": "{shown} จาก {total}",
   "{shown} of {total} matching records": "ระเบียนที่ตรงกัน {shown} จาก {total} รายการ",
+  "Results {from}–{to}": "ผลลัพธ์ {from}–{to}",
   "{shown} of {total} parameters": "พารามิเตอร์ {shown} จาก {total} รายการ",
   "{shown} records in this window": "{shown} ระเบียนในช่วงเวลานี้",
   "Русский": "Русский",

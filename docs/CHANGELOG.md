@@ -50,6 +50,9 @@
   the error, and its coverage text no longer claims that all accessible dialogs were inspected. Before, a failed read
   was described as a full inspection and the size of the old list appeared as `dialogs_inspected`. Earlier records
   are unchanged.
+- The journal's **Best match · word forms** search pages through more than 200 results: **Older records**, **Newer
+  records** and **Latest** move between pages of 200 up to the search window of 1,000, and the footer names the
+  results shown, such as “Results 201–400”. Before, only the first 200 results could be opened.
 - After a collector process that ended without an orderly stop, the next start checks every attachment recorded
   as saved during that run against its SHA-256. A missing or different file is recorded as
   `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
@@ -201,6 +204,13 @@
   posted stay in the editor instead of being cleared. A note, comment or
   status that was saved is no longer reported as failed when only the following board refresh fails, so trying again
   no longer adds it twice.
+- **Save chat selection** in Settings and at the end of first setup keep the source types, excluded chats, own
+  actions and new-chat settings of Sources → Scope, take a chosen chat off the excluded chats and keep it as a
+  hand-picked source. Before, they replaced the whole scope with defaults, so a previously excluded chat or private
+  chats could be added again and own messages recorded again, and a chosen chat that the scope had added was paused
+  on the next application. Saving a chosen-chats scope while observing no longer rereads the account's chat list,
+  and saving the same scope again after a failed application applies it again instead of reporting success without
+  applying.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
