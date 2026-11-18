@@ -10406,5 +10406,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Rozumiem: rejestrowanie i podpisywanie pozostają bez zmian i nic nie jest usuwane.",
   "A mode sets the protection target. The status of each layer is below.": "Tryb określa cel ochrony. Stan każdej warstwy znajduje się poniżej.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Potwierdź przejście na niższy tryb: rejestrowanie i podpisywanie pozostają bez zmian i nic nie zostanie usunięte.",
-  "Connected · no chats chosen": "Połączono · nie wybrano czatów"
+  "Connected · no chats chosen": "Połączono · nie wybrano czatów",
+  "Keep a copy of the checkpoint outside the collector.": "Przechowuj kopię punktu kontrolnego poza kolektorem.",
+  "Keep the encryption key apart from this computer.": "Przechowuj klucz szyfrowania z dala od tego komputera.",
+  "Step 3 shows how to start your witness.": "Krok 3 pokazuje, jak uruchomić świadka."
 }

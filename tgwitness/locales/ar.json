@@ -10508,5 +10508,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "أفهم ما يلي: يبقى التسجيل والتوقيع كما هما ولا يُحذف أي شيء.",
   "A mode sets the protection target. The status of each layer is below.": "يحدد الوضع هدف الحماية. حالة كل طبقة موضحة أدناه.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "تأكيد الوضع الأدنى: يبقى التسجيل والتوقيع كما هما ولا يُحذف أي شيء.",
-  "Connected · no chats chosen": "متصل · لم يتم اختيار أي محادثة"
+  "Connected · no chats chosen": "متصل · لم يتم اختيار أي محادثة",
+  "Keep a copy of the checkpoint outside the collector.": "احتفظ بنسخة من نقطة التحقق خارج المُجمِّع.",
+  "Keep the encryption key apart from this computer.": "احتفظ بمفتاح التشفير بعيدًا عن هذا الحاسوب.",
+  "Step 3 shows how to start your witness.": "تشرح الخطوة 3 كيفية تشغيل الشاهد."
 }

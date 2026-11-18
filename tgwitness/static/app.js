@@ -3462,6 +3462,12 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
 }
 function saveBlob(blob,filename){
   const url=URL.createObjectURL(blob),a=node("a");a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  return 'browser';
+}
+// A file handed to the browser may still be refused or cancelled there: only a write through the file picker is "saved".
+function deliveredToast(saved,advice){
+  if(!saved)return;
+  toast(tr(saved===true?'File saved.':'Download started. Check your browser’s downloads.')+(advice?' '+advice:''));
 }
 panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
   const fmt=b.dataset.export,password=$("export-password").value;
@@ -3761,12 +3767,13 @@ $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";
 });
 $("save-checkpoint").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  const checkpoint=await json("checkpoint");saveBlob(new Blob([JSON.stringify(checkpoint,null,2)],{type:"application/json"}),"tgwitness-checkpoint.json");
-  toast(tr("Checkpoint downloaded. Retain it outside the collector."));
+  const checkpoint=await json("checkpoint");
+  deliveredToast(saveBlob(new Blob([JSON.stringify(checkpoint,null,2)],{type:"application/json"}),"tgwitness-checkpoint.json"),
+    tr("Keep a copy of the checkpoint outside the collector."));
 }));
 $("save-run-receipt").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  const receipt=await json("run-receipt");saveBlob(new Blob([JSON.stringify(receipt,null,2)],{type:"application/json"}),"tgwitness-run-receipt.json");
-  toast(tr("Signed acquisition process receipt downloaded."));
+  const receipt=await json("run-receipt");
+  deliveredToast(saveBlob(new Blob([JSON.stringify(receipt,null,2)],{type:"application/json"}),"tgwitness-run-receipt.json"));
 }));
 $("save-anchor-request").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   await download("anchor-request","tgwitness-timestamp-request.zip");
@@ -3957,7 +3964,7 @@ $("replica-sync").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   renderReplica(await json("replica/sync",{}));toast(tr("Copying now."));
 }));
 $("replica-key").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  if(await download("replica/key","tgwitness-replica-key.json"))toast(tr("Encryption key saved. Keep it apart from this computer."));
+  deliveredToast(await download("replica/key","tgwitness-replica-key.json"),tr("Keep the encryption key apart from this computer."));
 }));
 async function loadAlerts(){
   if(!state.status)return;
@@ -4721,7 +4728,7 @@ $("witness-setup-form").addEventListener("submit",e=>{e.preventDefault();busy(e.
   if(proxy)config.proxy=proxy;
   if(discord){delete config.bot_token_file;delete config.channel;delete config.bot_api;config.discord_webhook_file='discord-webhook.txt';}
   saveBlob(new Blob([JSON.stringify(config,null,2)+"\n"],{type:"application/json"}),"witness.json");
-  $("witness-setup-result").textContent=tr("Configuration saved. Step 3 shows how to start your witness.");
+  $("witness-setup-result").textContent=tr("Download started. Check your browser’s downloads.")+" "+tr("Step 3 shows how to start your witness.");
   $("witness-launch").open=true;
 });});
 
@@ -6347,7 +6354,7 @@ function dossierBar(chat,profiled){
   encryption.addEventListener("change",updateEncryptionHint);updateEncryptionHint();
   bar.append(node("p","",tr("Profiles are on. Click a person to open their profile. The export is a separate signed file; it is deleted with the chat.")),
     action("secondary",tr("Export profiles"),async()=>{
-      if(await download("chats/"+encodeURIComponent(chat)+"/dossier/export","tgwitness-dossier-"+chat+".json"))toast(tr("Signed profiles saved."));
+      deliveredToast(await download("chats/"+encodeURIComponent(chat)+"/dossier/export","tgwitness-dossier-"+chat+".json"));
     }),
     password,encryption,encryptionHint,
     action("quiet",tr("Export encrypted"),async()=>{

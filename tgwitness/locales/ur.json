@@ -10304,5 +10304,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "میں سمجھتا ہوں: ریکارڈنگ اور دستخط پہلے جیسے رہتے ہیں اور کچھ بھی حذف نہیں ہوتا۔",
   "A mode sets the protection target. The status of each layer is below.": "موڈ حفاظت کا ہدف طے کرتا ہے۔ ہر پرت کی حالت نیچے ہے۔",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "کم موڈ کی تصدیق کریں: ریکارڈنگ اور دستخط پہلے جیسے رہتے ہیں اور کچھ بھی حذف نہیں ہوتا۔",
-  "Connected · no chats chosen": "منسلک · کوئی چیٹ منتخب نہیں کی گئی"
+  "Connected · no chats chosen": "منسلک · کوئی چیٹ منتخب نہیں کی گئی",
+  "Keep a copy of the checkpoint outside the collector.": "چیک پوائنٹ کی ایک نقل کلیکٹر سے باہر رکھیں۔",
+  "Keep the encryption key apart from this computer.": "انکرپشن کلید کو اس کمپیوٹر سے الگ رکھیں۔",
+  "Step 3 shows how to start your witness.": "مرحلہ 3 بتاتا ہے کہ اپنا گواہ کیسے شروع کریں۔"
 }

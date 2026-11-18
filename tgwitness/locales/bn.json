@@ -10304,5 +10304,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "আমি বুঝি: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকে এবং কিছুই মুছে যায় না।",
   "A mode sets the protection target. The status of each layer is below.": "মোড সুরক্ষার লক্ষ্য ঠিক করে। প্রতিটি স্তরের অবস্থা নিচে দেখানো আছে।",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "নিম্ন মোড নিশ্চিত করুন: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকবে এবং কিছুই মুছে যাবে না।",
-  "Connected · no chats chosen": "সংযুক্ত · কোনো চ্যাট বেছে নেওয়া হয়নি"
+  "Connected · no chats chosen": "সংযুক্ত · কোনো চ্যাট বেছে নেওয়া হয়নি",
+  "Keep a copy of the checkpoint outside the collector.": "চেকপয়েন্টের একটি কপি কালেক্টরের বাইরে রাখুন।",
+  "Keep the encryption key apart from this computer.": "এনক্রিপশন কী এই কম্পিউটার থেকে আলাদা জায়গায় রাখুন।",
+  "Step 3 shows how to start your witness.": "ধাপ ৩-এ আপনার সাক্ষী চালু করার উপায় দেখানো আছে।"
 }

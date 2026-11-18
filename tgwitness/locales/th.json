@@ -10253,5 +10253,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "ฉันเข้าใจแล้ว: การบันทึกและการลงลายมือชื่อยังคงเหมือนเดิม และไม่มีสิ่งใดถูกลบ",
   "A mode sets the protection target. The status of each layer is below.": "โหมดกำหนดเป้าหมายการป้องกัน สถานะของแต่ละชั้นอยู่ด้านล่าง",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "ยืนยันการเปลี่ยนไปใช้โหมดที่ต่ำกว่า: การบันทึกและการลงลายมือชื่อยังคงเหมือนเดิม และไม่มีสิ่งใดถูกลบ",
-  "Connected · no chats chosen": "เชื่อมต่อแล้ว · ยังไม่ได้เลือกแชต"
+  "Connected · no chats chosen": "เชื่อมต่อแล้ว · ยังไม่ได้เลือกแชต",
+  "Keep a copy of the checkpoint outside the collector.": "เก็บสำเนาของจุดตรวจสอบไว้นอกตัวเก็บข้อมูล",
+  "Keep the encryption key apart from this computer.": "เก็บกุญแจเข้ารหัสแยกจากคอมพิวเตอร์เครื่องนี้",
+  "Step 3 shows how to start your witness.": "ขั้นตอนที่ 3 อธิบายวิธีเริ่มพยานของคุณ"
 }

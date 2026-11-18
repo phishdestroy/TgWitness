@@ -10376,5 +10376,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Я понимаю: запись и подписание остаются прежними, и ничего не удаляется.",
   "A mode sets the protection target. The status of each layer is below.": "Режим задаёт цель защиты. Состояние каждого уровня — ниже.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Подтвердите переход на более низкий режим: запись и подписание остаются прежними, и ничего не удаляется.",
-  "Connected · no chats chosen": "Подключено · чаты не выбраны"
+  "Connected · no chats chosen": "Подключено · чаты не выбраны",
+  "Keep a copy of the checkpoint outside the collector.": "Храните копию контрольной точки вне сборщика.",
+  "Keep the encryption key apart from this computer.": "Храните ключ шифрования отдельно от этого компьютера.",
+  "Step 3 shows how to start your witness.": "Шаг 3 объясняет, как запустить свидетеля."
 }

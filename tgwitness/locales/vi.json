@@ -10253,5 +10253,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Tôi hiểu: việc ghi và ký vẫn như cũ và không có gì bị xóa.",
   "A mode sets the protection target. The status of each layer is below.": "Chế độ đặt mục tiêu bảo vệ. Trạng thái của từng lớp ở bên dưới.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Xác nhận chế độ thấp hơn: việc ghi và ký vẫn như cũ và không có gì bị xóa.",
-  "Connected · no chats chosen": "Đã kết nối · chưa chọn cuộc trò chuyện nào"
+  "Connected · no chats chosen": "Đã kết nối · chưa chọn cuộc trò chuyện nào",
+  "Keep a copy of the checkpoint outside the collector.": "Giữ một bản sao của điểm kiểm tra bên ngoài bộ thu thập.",
+  "Keep the encryption key apart from this computer.": "Giữ khóa mã hóa tách biệt khỏi máy tính này.",
+  "Step 3 shows how to start your witness.": "Bước 3 hướng dẫn cách khởi động nhân chứng của bạn."
 }

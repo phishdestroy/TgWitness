@@ -10253,5 +10253,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "理解しました：記録と署名は変わらず、何も削除されません。",
   "A mode sets the protection target. The status of each layer is below.": "モードは保護の目標を決めます。各レイヤーの状態は下に表示されます。",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "低いモードへの切り替えを確認してください：記録と署名は変わらず、何も削除されません。",
-  "Connected · no chats chosen": "接続済み · チャットが選択されていません"
+  "Connected · no chats chosen": "接続済み · チャットが選択されていません",
+  "Keep a copy of the checkpoint outside the collector.": "チェックポイントのコピーをコレクターの外に保管してください。",
+  "Keep the encryption key apart from this computer.": "暗号鍵はこのコンピューターとは別の場所に保管してください。",
+  "Step 3 shows how to start your witness.": "ステップ 3 でウィットネスの起動方法を説明しています。"
 }

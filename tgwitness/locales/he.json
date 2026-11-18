@@ -10355,5 +10355,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "אני מבין: ההקלטה והחתימה נשארות כפי שהן ושום דבר לא נמחק.",
   "A mode sets the protection target. The status of each layer is below.": "מצב קובע את יעד ההגנה. המצב של כל שכבה מופיע למטה.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "אשר את המעבר למצב הנמוך יותר: ההקלטה והחתימה נשארות כפי שהן ושום דבר לא נמחק.",
-  "Connected · no chats chosen": "מחובר · לא נבחרו צ'אטים"
+  "Connected · no chats chosen": "מחובר · לא נבחרו צ'אטים",
+  "Keep a copy of the checkpoint outside the collector.": "שמרו עותק של נקודת הביקורת מחוץ לאוסף.",
+  "Keep the encryption key apart from this computer.": "שמרו את מפתח ההצפנה בנפרד ממחשב זה.",
+  "Step 3 shows how to start your witness.": "שלב 3 מראה איך להפעיל את העד."
 }

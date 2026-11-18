@@ -10304,5 +10304,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Men tushunaman: yozib olish va imzolash o'zgarmaydi va hech narsa o'chirilmaydi.",
   "A mode sets the protection target. The status of each layer is below.": "Rejim himoya maqsadini belgilaydi. Har bir qatlam holati quyida.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Pastki rejimni tasdiqlang: yozib olish va imzolash o'zgarmaydi va hech narsa o'chirilmaydi.",
-  "Connected · no chats chosen": "Ulangan · chatlar tanlanmagan"
+  "Connected · no chats chosen": "Ulangan · chatlar tanlanmagan",
+  "Keep a copy of the checkpoint outside the collector.": "Nazorat nuqtasining nusxasini yig'uvchidan tashqarida saqlang.",
+  "Keep the encryption key apart from this computer.": "Shifrlash kalitini bu kompyuterdan alohida saqlang.",
+  "Step 3 shows how to start your witness.": "3-qadam guvohingizni qanday ishga tushirishni ko'rsatadi."
 }

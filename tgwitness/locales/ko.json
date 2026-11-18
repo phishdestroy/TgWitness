@@ -10253,5 +10253,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "알겠습니다: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다.",
   "A mode sets the protection target. The status of each layer is below.": "모드는 보호 목표를 정합니다. 각 계층의 상태는 아래에 있습니다.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "하위 모드 확인: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다.",
-  "Connected · no chats chosen": "연결됨 · 선택한 채팅 없음"
+  "Connected · no chats chosen": "연결됨 · 선택한 채팅 없음",
+  "Keep a copy of the checkpoint outside the collector.": "체크포인트 사본을 수집기 밖에 보관하세요.",
+  "Keep the encryption key apart from this computer.": "암호화 키는 이 컴퓨터와 분리해서 보관하세요.",
+  "Step 3 shows how to start your witness.": "3단계에서 증인을 시작하는 방법을 안내합니다."
 }

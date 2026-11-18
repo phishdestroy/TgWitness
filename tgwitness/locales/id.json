@@ -10253,5 +10253,8 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Saya mengerti: perekaman dan penandatanganan tetap sama dan tidak ada yang dihapus.",
   "A mode sets the protection target. The status of each layer is below.": "Mode menetapkan target perlindungan. Status setiap lapisan ada di bawah.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Konfirmasi mode yang lebih rendah: perekaman dan penandatanganan tetap sama dan tidak ada yang dihapus.",
-  "Connected · no chats chosen": "Terhubung · belum ada obrolan yang dipilih"
+  "Connected · no chats chosen": "Terhubung · belum ada obrolan yang dipilih",
+  "Keep a copy of the checkpoint outside the collector.": "Simpan salinan titik periksa di luar kolektor.",
+  "Keep the encryption key apart from this computer.": "Simpan kunci enkripsi terpisah dari komputer ini.",
+  "Step 3 shows how to start your witness.": "Langkah 3 menunjukkan cara menjalankan saksi Anda."
 }
