@@ -516,7 +516,8 @@ class Disclosures:
                 counts.update(chats=len(chats), media=len(media))
                 report_context = {'report_language': policy.report_language, 'policy': shared_policy, 'archive': True,
                     'presentation': policy.report_presentation.model_dump(), 'analytics': account_report.snapshot_analytics.project(analytics.result(), policy.report_presentation.model_dump()),
-                    'archive_reference': identity, 'created_at': created,
+                    'archive_reference': identity, 'archive_name': account_report.disclosure_file(identity),
+                    'source_archive_name': account_report.archive_file(ticket['job_id']), 'created_at': created,
                     'counts': counts, 'fingerprint': fingerprint(self.vault.public_key),
                     'source_archive_sha256': digest, 'limitations': WARNINGS}
                 write('index.html', account_report.sharing_report(report_context, rows()))
@@ -530,8 +531,11 @@ class Disclosures:
                     ('Minimized disclosure\n\n' + '\n'.join(WARNINGS)
                     + '\n\nThe original source, identity map and private selection criteria are NOT included.\n'
                     + 'Verify from an independently trusted installation:\n'
-                    + 'python verify.py disclosure.zip --fingerprint TRUSTED_SHA256\n'
-                    + 'Optional --evidence original.zip checks source linkage, not the correctness of redaction.\n'
+                    + account_report.RECEIVED_WHERE.format(name=report_context['archive_name']) + '\n'
+                    + account_report.RECEIVED_RENAMED + '\n'
+                    + 'python verify.py ../' + report_context['archive_name'] + ' --fingerprint TRUSTED_SHA256\n'
+                    + 'Optional --evidence ../' + report_context['source_archive_name']
+                    + ' checks source linkage, not the correctness of redaction.\n'
                     + 'For large packages add --max-gib with the expanded size. index.html is protected by the manifest.\n').encode()])
                 write('SHA256SUMS', [''.join(f'{v}  {k}\n' for k, v in sorted(hashes.items())).encode()])
                 manifest = dict(format='tgwitness-account-disclosure-v2', public_key=self.vault.public_key,

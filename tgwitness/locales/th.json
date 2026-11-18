@@ -4125,7 +4125,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "หมายเลขบันทึกตามลำดับบรรทัด messages.jsonl ซึ่งใช้ระบุบันทึกในสำเนานี้ ไม่ใช่ ID ข้อความ Telegram ของต้นฉบับ",
   "Record reference": "อ้างอิงบันทึก",
   "Regular Telegram API": "ปกติ Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "แทนชื่อไฟล์ตัวอย่าง ZIP ด้วยไฟล์ที่คุณได้รับ และ TRUSTED_SHA256 ด้วยลายนิ้วมือที่ได้รับการยืนยันแยกต่างหาก เก็บผลการตรวจสอบไว้พร้อมกับบันทึกการตรวจสอบของคุณ",
   "Report labels may include English fallbacks. Original messages are not translated.": "ป้ายกำกับรายงานอาจรวมถึงข้อความสำรองเป็นภาษาอังกฤษ ข้อความต้นฉบับไม่ได้รับการแปล",
   "Report labels use this language. Original messages stay unchanged.": "ป้ายกำกับในรายงานใช้ภาษาดังกล่าว ข้อความต้นฉบับยังคงไม่เปลี่ยนแปลง",
   "Report language: {language}.": "ภาษาของรายงาน: {language}.",

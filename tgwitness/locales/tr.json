@@ -4152,7 +4152,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "Kayıt numaraları messages.jsonl satır sırasını takip eder. Bu numaralar orijinal Telegram mesaj kimliklerini değil, bu kopyadaki kayıtları tanımlar.",
   "Record reference": "Kayıt referansı",
   "Regular Telegram API": "Normal Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "Örnek ZIP dosya adını aldığınız dosya adıyla, TRUSTED_SHA256'i ise ayrı olarak onaylanan parmak iziyle değiştirin. Doğrulama sonucunu inceleme notlarınızla birlikte saklayın.",
   "Report labels may include English fallbacks. Original messages are not translated.": "Rapor etiketleri İngilizce yedek metinler içerebilir. Orijinal mesajlar çevrilmez.",
   "Report labels use this language. Original messages stay unchanged.": "Rapor etiketlerinde bu dil kullanılır. Orijinal mesajlar değişmeden kalır.",
   "Report language: {language}.": "Rapor dili: {language}.",

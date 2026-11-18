@@ -1128,8 +1128,8 @@ class AccountExport:
                 write("message-gaps.json", [canonical(gap_map)])
                 report_context = {"report_language": job["options"].get("report_language", "en"), "archive": True,
                     "presentation": job["options"].get("report_presentation", {}),
-                    "archive_reference": job["job_id"], "requested_at": job["created_at"],
-                    "captured_from": captured_from, "captured_until": captured_until,
+                    "archive_reference": job["job_id"], "archive_name": account_report.archive_file(job["job_id"]),
+                    "requested_at": job["created_at"], "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
                     "complete_within_scope": self.complete(),
                     "omissions": [*self.inventory.get("gaps", []), *self.current.get("omissions", [])],

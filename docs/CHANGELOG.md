@@ -28,6 +28,16 @@
 - The chat header no longer shows the **What the other side sees** button where it has no chat to load, such as in
   the demo: there it was an unnamed eye icon that opened an empty menu. Before its settings load, the button is named
   **What the other side sees** once instead of twice.
+- **Older records**, **Newer records** and **Latest** under the journal keep the keyboard focus after the next page
+  loads, or pass it to the next pager button when there is no further page. Before, the pressed button was disabled
+  while the page loaded and the focus fell to the page itself, so a screen reader lost its place. An error message
+  no longer shows a line counting down: it stays until it is closed.
+- The verify commands of an account export and of its sharing copy now name the file as it is delivered,
+  `tgwitness-account-export-<id>.zip` and `tgwitness-disclosure-<id>.zip`, run from the extracted folder with that
+  file one level up, as chat and evidence archives already do. Before, README.txt said `ORIGINAL.zip`, the HTML report
+  `account-export.zip` or `disclosure.zip` with `--evidence original.zip`, and the download address sent yet another
+  name, so a command copied as written ended in "file not found". The download address now sends the same names as
+  the panel.
 - Masking of possible secrets now also hides a Telegram bot token written right after `bot`, as in Bot API addresses
   (`https://api.telegram.org/bot<token>/sendMessage`). Before, only a token standing on its own was masked, so the
   token in such an address stayed readable wherever the panel masks secrets: chat list, messages and journal records.

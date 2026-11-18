@@ -4125,7 +4125,6 @@
   "Record numbers follow messages.jsonl line order. They identify records in this copy, not original Telegram message IDs.": "Các số bản ghi tuân theo thứ tự dòng messages.jsonl. Chúng xác định các bản ghi trong bản sao này, không phải các ID tin nhắn Telegram gốc.",
   "Record reference": "Tham chiếu bản ghi",
   "Regular Telegram API": "Thông thường Telegram API",
-  "Replace the example ZIP filename with the file you received, and TRUSTED_SHA256 with the fingerprint confirmed separately. Keep the verification result with your review notes.": "Thay thế tên tệp ZIP bằng tệp bạn nhận được và TRUSTED_SHA256 bằng dấu vân tay đã xác nhận riêng. Lưu kết quả xác minh cùng với ghi chú đánh giá của bạn.",
   "Report labels may include English fallbacks. Original messages are not translated.": "Các nhãn báo cáo có thể bao gồm các tùy chọn tiếng Anh dự phòng. Các tin nhắn gốc không được dịch.",
   "Report labels use this language. Original messages stay unchanged.": "Các nhãn báo cáo sử dụng ngôn ngữ này. Các tin nhắn gốc vẫn được giữ nguyên.",
   "Report language: {language}.": "Ngôn ngữ báo cáo: {language}.",
