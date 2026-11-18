@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- In the chat search, choosing a row no longer changes anything by itself. A chat of the account is added only with
+  **Observe**; a public chat found by **Global search** is joined only with **Join / open and observe**, which asks
+  for the usual confirmation; its name opens the link preview instead. `j` / `k` move through saved chats only, and
+  arrow keys from the search field reach each new row's own button. In an open chat, Ctrl+F (⌘F) puts the cursor in
+  **Search saved messages**; pressed there again it reaches the browser's page search. Before, clicking the name of a
+  search result added the chat to observation or started the join.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
