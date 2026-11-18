@@ -61,16 +61,16 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, failure_outcome, lane_limits,
-                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_directory, sync_file,
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, durable_replace, failure_outcome,
+                         lane_limits, plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_file,
                          validate_observation)
 from .media.dedup_queue import DOWNLOADS
 from .media.workers import AdaptiveSlots
 from .export.batch_requests import MessageBatcher
 from .export.live_export import NOT_READY as LIVE_NOT_READY, LiveExport
 from . import secret_chats
-from .scope import (allowed, folder_rule, in_folder, kind_of, public_username, recheck_settings, restriction,
-                    scope_settings, visibility)
+from .scope import (OPERATOR_PAUSED, allowed, folder_rule, in_folder, kind_of, operator_paused, public_username,
+                    recheck_settings, restriction, scope_settings, visibility)
 from .verify import fingerprint
 
 LOG = logging.getLogger("tgwitness.collector")
@@ -1245,11 +1245,14 @@ class Collector:
             raise ValueError("The chosen Telegram folder was not found. Choose a folder again.")
         added, paused, resumed = [], [], []
         known = {t["chat_id"]: t for t in self.store.targets()}
+        held = operator_paused(self.store)
         with self.store.transaction():
             for chat_id, target in known.items():
                 if chat_id in excluded and target["enabled"]:
                     self.store.set_target(chat_id, target["title"], target["kind"], False)
                     paused.append(chat_id)
+                elif target["origin"] == "scope" and chat_id in held and not target["enabled"]:
+                    continue
                 elif target["origin"] == "scope":
                     entry = self.dialog_cache.get(chat_id)
                     if (scope["mode"] == "selected" or chat_id in excluded
@@ -1278,6 +1281,10 @@ class Collector:
                         continue
                     self.store.set_target(chat_id, entry["title"], entry["kind"], True, origin="scope", priority=0)
                     added.append(chat_id)
+            kept = {chat_id for chat_id in held if known.get(chat_id, {}).get("origin") == "scope"
+                    and not known[chat_id]["enabled"]}
+            if kept != held:
+                self.store.set_setting(OPERATOR_PAUSED, sorted(kept))
             if added or paused or resumed:
                 self.store.append("scope.applied", {
                     "mode": scope["mode"], "folder": (rule or {}).get("title"), "types": scope["types"],
@@ -5811,10 +5818,15 @@ class Collector:
                 raise ValueError("existing_content_addressed_file_is_corrupt")
             temp.unlink()
         else:
-            temp.replace(destination)
-            await complete_in_thread(sync_directory, media_root)
-            if self.media_library is not None:
-                await complete_in_thread(self.media_library.adopt, destination, digest)
+            try:
+                await complete_in_thread(durable_replace, temp, destination)
+            except OSError:
+                if not temp.is_file() or not destination.is_file() or await complete_in_thread(file_digest, destination) != digest:
+                    raise
+                temp.unlink()
+            else:
+                if self.media_library is not None:
+                    await complete_in_thread(self.media_library.adopt, destination, digest)
         attempt.advance("stored")
         attempt.finish(MediaOutcome("done", {
             "media_sha256": digest, "size": actual_size,

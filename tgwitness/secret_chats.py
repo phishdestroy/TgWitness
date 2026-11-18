@@ -13,6 +13,7 @@ from telethon.tl import functions, types
 from telethon.tl.tlobject import TLObject
 
 from . import secret_module
+from .media_jobs import durable_replace, sync_file
 from .monitoring import capture_settings
 from .network import NoRoute
 from .store import canonical, utcnow
@@ -170,6 +171,7 @@ def display(value, field=None):
 
 
 def retain_file(temporary, media_root):
+    sync_file(temporary)
     with temporary.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     size = temporary.stat().st_size
@@ -186,7 +188,7 @@ def retain_file(temporary, media_root):
         quarantine = media_root / (".corrupt-" + digest + "-" + secrets.token_hex(8))
         target.replace(quarantine)
         repaired = {"previous_sha256": previous, "retained_as": quarantine.name}
-    temporary.replace(target)
+    durable_replace(temporary, target)
     return digest, size, repaired
 
 
