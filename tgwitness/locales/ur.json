@@ -10306,6 +10306,7 @@
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "کم موڈ کی تصدیق کریں: ریکارڈنگ اور دستخط پہلے جیسے رہتے ہیں اور کچھ بھی حذف نہیں ہوتا۔",
   "Connected · no chats chosen": "منسلک · کوئی چیٹ منتخب نہیں کی گئی",
   "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "یہ کمانڈز نکالے گئے فولڈر میں چلائیں؛ موصول شدہ فائل {name} اس کے اوپر والے فولڈر میں ہونی چاہیے۔",
+  "If the file you received has another name, use that name in the commands, in double quotes.": "اگر موصولہ فائل کا نام مختلف ہے تو کمانڈز میں وہی نام دوہرے واوین میں لکھیں۔",
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "اگر فائل کسی اور نام سے محفوظ ہوئی ہے، مثلاً براؤزر نے نام بدل دیا، تو ان کمانڈز میں وہی نام استعمال کریں۔",
   "Keep a copy of the checkpoint outside the collector.": "چیک پوائنٹ کی ایک نقل کلیکٹر سے باہر رکھیں۔",
   "Keep the encryption key apart from this computer.": "انکرپشن کلید کو اس کمپیوٹر سے الگ رکھیں۔",

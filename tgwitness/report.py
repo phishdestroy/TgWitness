@@ -2518,7 +2518,7 @@ def timestamps_section(say, number, anchors, archive_name, standalone=False):
 RECEIVED_ARCHIVES = {"evidence": "tgwitness-evidence.zip", "handover": "tgwitness-handover.zip",
                      "chat": "tgwitness-chat-export.zip"}
 RECEIVED_WHERE = "Run these commands in the extracted folder, with the received file {name} in its parent folder."
-RECEIVED_RENAMED = "If the file was saved under another name, for example by the browser, use that name in these commands."
+RECEIVED_RENAMED = "If the file you received has another name, use that name in the commands, in double quotes."
 
 
 def received_archive(context, kind=None):
