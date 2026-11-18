@@ -222,6 +222,7 @@ async def status(request: Request, *, ctx=Depends(current_context)):
         "limitations": LIMITS,
         "chats_limited": allowed is not None,
         "assurance": bool(ctx.app.state.assurance),
+        "me": principal.public(),
     }
     if connection_details(principal, allowed):
         result.update(
