@@ -23,8 +23,12 @@ def initialize(db):
     """)
 
 
-def records(connection):
-    return (json.loads(row[0]) for row in connection.execute("SELECT record FROM annotations ORDER BY seq"))
+def records(connection, through=None):
+    if through is None:
+        rows = connection.execute("SELECT record FROM annotations ORDER BY seq")
+    else:
+        rows = connection.execute("SELECT record FROM annotations WHERE seq<=? ORDER BY seq", (through,))
+    return (json.loads(row[0]) for row in rows)
 
 
 def head(connection):
@@ -32,13 +36,17 @@ def head(connection):
     return {"seq": row[0], "hash": row[1]} if row else {"seq": 0, "hash": ZERO}
 
 
-def journal_head(connection):
-    row = connection.execute("SELECT seq,hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
+def journal_head(connection, through=None):
+    if through is None:
+        row = connection.execute("SELECT seq,hash FROM events ORDER BY seq DESC LIMIT 1").fetchone()
+    else:
+        row = connection.execute("SELECT seq,hash FROM events WHERE seq<=? ORDER BY seq DESC LIMIT 1", (through,)).fetchone()
     return {"seq": row[0], "hash": row[1]} if row else {"seq": 0, "hash": ZERO}
 
 
-def event_by_hash(connection, value):
-    row = connection.execute("SELECT * FROM events WHERE hash=?", (value,)).fetchone()
+def event_by_hash(connection, value, through=None):
+    row = connection.execute("SELECT * FROM events WHERE hash=?" + ("" if through is None else " AND seq<=?"),
+                             (value,) if through is None else (value, through)).fetchone()
     if row:
         value = dict(row)
         value["payload"] = json.loads(value["payload"])
@@ -302,22 +310,22 @@ class Board:
                 "count_exact": True, "slice": {"id": identifier, "title": card["title"], "query": card["query"]}}
 
 
-def export_state(connection, vault):
-    state = board_replay(records(connection), vault.public_key)
+def export_state(connection, vault, through=None, annotations=None):
+    state = board_replay(records(connection, annotations), vault.public_key)
     statement = {"format": "tgwitness-case-board-v1", "public_key": vault.public_key,
-                 "created_at": utcnow(), "journal_head": journal_head(connection), "state": state,
+                 "created_at": utcnow(), "journal_head": journal_head(connection, through), "state": state,
                  "meaning": "Team notes and bookmarks"}
     return {"statement": statement, "signature": vault.sign(canonical(statement))}
 
 
-def export_slices(connection, state):
+def export_slices(connection, state, through=None):
     for item in state["items"]:
         if item["kind"] != "board.slice" or item["removed"]:
             continue
         query, snapshot = item["query"], item["snapshot"]
-        where, args = board_where(query)
+        where, args = board_where(query, through)
         yield item["id"], {"id": item["id"], "query": query, "snapshot": snapshot,
-            "current": board_slice_summary(connection, query),
+            "current": board_slice_summary(connection, query, through),
             "event_hashes": [row[0] for row in connection.execute("SELECT hash FROM events WHERE " + where + " ORDER BY hash", args)],
             "added_seq": [row[0] for row in connection.execute("SELECT seq FROM events WHERE " + where + " AND seq>? ORDER BY seq", (*args, snapshot["journal_head"]["seq"]))],
             "removed_seq": []}

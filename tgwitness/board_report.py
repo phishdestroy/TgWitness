@@ -6,7 +6,7 @@ from . import board
 MEANING = "Team notes and bookmarks"
 
 
-def material(connection, statement, options):
+def material(connection, statement, options, through=None):
     mode = options.get("case_board", "bookmarks")
     if mode == "off" or not statement:
         return None
@@ -15,11 +15,11 @@ def material(connection, statement, options):
     cards = [item for item in items.values() if item["kind"] in {"board.bookmark", "board.highlight", "board.slice"}]
     for item in cards:
         if item.get("target"):
-            target = board.event_by_hash(connection, item["target"]["event_hash"])
+            target = board.event_by_hash(connection, item["target"]["event_hash"], through)
             item["observation"] = target
             item["dangling"] = target is None
         else:
-            item["current"] = board.board_slice_summary(connection, item["query"])
+            item["current"] = board.board_slice_summary(connection, item["query"], through)
             item["diff"] = {"added": item["current"]["record_count"]-item["snapshot"]["record_count"], "removed": 0}
         item["comments"] = []
     lookup = {item["id"]: item for item in cards}
