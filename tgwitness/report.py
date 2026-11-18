@@ -615,10 +615,9 @@ TRANSLATION_TERMS = (
 def translation_text(say, original=None):
     if say.language == "en":
         return ""
-    text = say("Recommendation: for court, file the English original with a certified or sworn translation into the "
-               "court language. A sworn translator knows the local terminology and the formal requirements for court "
-               "documents. Versions of this report in languages other than English are machine translations for "
-               "orientation.")
+    text = say("This version of the report is a machine translation of its English original, for orientation; message "
+               "texts stay as captured. Which language a court accepts and whether it needs a certified or sworn "
+               "translation depends on that court's rules.")
     if original:
         text += " " + say("English original in this archive: {file}", file=original)
     return text

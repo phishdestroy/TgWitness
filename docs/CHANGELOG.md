@@ -53,6 +53,12 @@
 - A standalone HTML report saved without its records (over 20,000 records or 32 MiB) fills its Check tab, also when
   opened at `#check`: the seal result, an explanation that the data is not embedded and the archive check. Before,
   the tab stayed empty.
+- START_HERE.txt in every verifier language no longer says that RFC 3161 checks need OpenSSL: verify.py checks the
+  time stamp itself with `--tsa-ca`, and OpenSSL is needed only for the optional manual `openssl ts` command.
+- The translation notice on report covers and in README.txt says that a non-English version is a machine
+  translation of the English original named next to it, with message texts as captured, and leaves the filing
+  language and certified translation to the court's rules. Before, the Russian notice read as an obligation to file
+  the English original.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
