@@ -72,6 +72,9 @@
   chat view reads the replied chat from the saved Telegram record and shows "Reply to #N in another chat". Messages
   saved earlier are read the same way. The Telegram Desktop JSON of an account export adds `reply_to_peer_id` for
   such replies.
+- An open panel follows changes to its access: `/api/status` carries the access's current permissions, and the panel
+  updates its views and actions when they change. Before, a granted or removed export permission showed only after
+  the page was reloaded; the server already checked each request against the current permissions.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed

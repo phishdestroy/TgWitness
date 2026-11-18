@@ -1690,6 +1690,7 @@ async function refreshStatus() {
   const request=++statusRequest,revision=state.workspaceRevision,result=await json("status");
   if(revision!==state.workspaceRevision||request!==statusRequest)return;
   workspaceSafety?.acceptStatus(result);
+  if(result.me&&JSON.stringify(result.me)!==JSON.stringify(state.me))state.me=result.me;
   state.status=result;applyAccess();renderStatus();workspaceSafety?.sync();
   settingsHub?.status();
   if(!viewAllowed(state.view))navigate("chats");
