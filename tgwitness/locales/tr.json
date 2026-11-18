@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "{n}'de gösterilen tüm öğeleri seçmek ister misiniz?",
   "{a} of {b}": "{a}'den {b}'ye",
   "Nothing matches these filters.": "Bu filtrelere uyan hiçbir sonuç bulunamadı.",
+  "Show these categories": "Bu kategorileri göster",
+  "{n} matching records are in hidden categories: {names}.": "Eşleşen {n} kayıt gizli kategorilerde: {names}.",
   "deleted": "silindi",
   "found on recheck": "recheck'te bulundu",
   "wallet": "cüzdan",

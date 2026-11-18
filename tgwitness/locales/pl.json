@@ -5051,6 +5051,8 @@
   "Select all {n} shown items?": "Czy chcesz zaznaczyć wszystkie wyświetlone pozycje o identyfikatorze {n}?",
   "{a} of {b}": "{a} z {b}",
   "Nothing matches these filters.": "Nie znaleziono żadnych wyników spełniających te kryteria.",
+  "Show these categories": "Pokaż te kategorie",
+  "{n} matching records are in hidden categories: {names}.": "Pasujące wpisy ({n}) są w ukrytych kategoriach: {names}.",
   "deleted": "usunięto",
   "found on recheck": "znalezione na recheck",
   "wallet": "portfel",

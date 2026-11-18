@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "Sélectionner tous les éléments affichés portant la référence « {n} » ?",
   "{a} of {b}": "{a} ou {b}",
   "Nothing matches these filters.": "Aucun résultat ne correspond à ces filtres.",
+  "Show these categories": "Afficher ces catégories",
+  "{n} matching records are in hidden categories: {names}.": "{n} enregistrements correspondants sont dans des catégories masquées : {names}.",
   "deleted": "supprimé",
   "found on recheck": "Trouvé sur recheck",
   "wallet": "portefeuille",

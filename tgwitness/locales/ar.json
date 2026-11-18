@@ -5105,6 +5105,8 @@
   "Select all {n} shown items?": "هل تريد تحديد جميع العناصر المعروضة التي تحتوي على الرمز {n}؟",
   "{a} of {b}": "{a} من {b}",
   "Nothing matches these filters.": "لا يوجد ما يطابق هذه المعايير.",
+  "Show these categories": "إظهار هذه الفئات",
+  "{n} matching records are in hidden categories: {names}.": "{n} من السجلات المطابقة في فئات مخفية: {names}.",
   "deleted": "تم الحذف",
   "found on recheck": "موجود على recheck",
   "wallet": "المحفظة",

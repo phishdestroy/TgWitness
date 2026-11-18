@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "{n} ko'rsatilgan barcha elementlarni tanlang?",
   "{a} of {b}": "{a} ning {b}",
   "Nothing matches these filters.": "Hech narsa ushbu filtrlarga mos kelmaydi.",
+  "Show these categories": "Bu toifalarni ko‘rsatish",
+  "{n} matching records are in hidden categories: {names}.": "Mos keladigan {n} ta yozuv yashirin toifalarda: {names}.",
   "deleted": "o'chirildi",
   "found on recheck": "recheckda topildi",
   "wallet": "hamyon",

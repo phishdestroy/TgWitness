@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "آیا همه موارد نمایش‌داده‌شده با شناسه {n} را انتخاب می‌کنید؟",
   "{a} of {b}": "{a} از {b}",
   "Nothing matches these filters.": "هیچ‌چیز با این فیلترها مطابقت ندارد.",
+  "Show these categories": "نمایش این دسته‌ها",
+  "{n} matching records are in hidden categories: {names}.": "{n} رکورد منطبق در دسته‌های پنهان است: {names}.",
   "deleted": "حذف شده",
   "found on recheck": "یافته‌شده در بازبینی مجدد",
   "wallet": "کیف‌پول",

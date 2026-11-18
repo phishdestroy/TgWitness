@@ -4970,6 +4970,8 @@
   "Select all {n} shown items?": "표시된 모든 {n} 항목을 선택하시겠습니까?",
   "{a} of {b}": "{a} 또는 {b}",
   "Nothing matches these filters.": "이 필터에 해당하는 항목이 없습니다.",
+  "Show these categories": "이 분류 표시",
+  "{n} matching records are in hidden categories: {names}.": "일치하는 기록 {n}개가 숨겨진 분류에 있습니다: {names}.",
   "deleted": "삭제됨",
   "found on recheck": "recheck에서 발견됨",
   "wallet": "지갑",

@@ -4970,6 +4970,8 @@
   "Select all {n} shown items?": "เลือกทั้งหมด{n} ที่แสดงอยู่หรือไม่?",
   "{a} of {b}": "{a} ของ {b}",
   "Nothing matches these filters.": "ไม่มีผลลัพธ์ที่ตรงกับตัวกรองเหล่านี้",
+  "Show these categories": "แสดงหมวดหมู่เหล่านี้",
+  "{n} matching records are in hidden categories: {names}.": "มีบันทึกที่ตรงกัน {n} รายการอยู่ในหมวดหมู่ที่ซ่อนไว้: {names}",
   "deleted": "ถูกลบ",
   "found on recheck": "พบใน recheck",
   "wallet": "wallet",

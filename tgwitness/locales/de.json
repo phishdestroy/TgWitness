@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "Alle angezeigten Elemente mit der Kennung „{n}“ auswählen?",
   "{a} of {b}": "{a} von {b}",
   "Nothing matches these filters.": "Es gibt keine Treffer für diese Filter.",
+  "Show these categories": "Diese Kategorien anzeigen",
+  "{n} matching records are in hidden categories: {names}.": "{n} passende Einträge liegen in ausgeblendeten Kategorien: {names}.",
   "deleted": "gelöscht",
   "found on recheck": "Gefunden auf recheck",
   "wallet": "Wallet",

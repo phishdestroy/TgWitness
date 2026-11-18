@@ -4970,6 +4970,8 @@
   "Select all {n} shown items?": "Chọn tất cả các mục được hiển thị có mã {n}?",
   "{a} of {b}": "{a} của {b}",
   "Nothing matches these filters.": "Không có kết quả nào phù hợp với các bộ lọc này.",
+  "Show these categories": "Hiện các danh mục này",
+  "{n} matching records are in hidden categories: {names}.": "{n} bản ghi khớp nằm trong các danh mục bị ẩn: {names}.",
   "deleted": "đã xóa",
   "found on recheck": "tìm thấy trên recheck",
   "wallet": "ví",

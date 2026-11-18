@@ -5051,6 +5051,8 @@
   "Select all {n} shown items?": "Вибрати всі елементи з позначкою «{n}»?",
   "{a} of {b}": "{a} з {b}",
   "Nothing matches these filters.": "За цими фільтрами нічого не знайдено.",
+  "Show these categories": "Показати ці категорії",
+  "{n} matching records are in hidden categories: {names}.": "Відповідні записи ({n}) у прихованих категоріях: {names}.",
   "deleted": "видалено",
   "found on recheck": "знайдено на recheck",
   "wallet": "гаманець",

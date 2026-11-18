@@ -198,16 +198,18 @@ async function startViewer(meta){
     for(const b of $$("[data-sel]"))b.addEventListener("click",()=>selection(b.dataset.sel));}
   function terms(q){const out=[];for(const m of q.matchAll(/"([^"]+)"|(\S+)/g)){const t=(m[1]||m[2]).toLowerCase();
       if(/^#\d+$/.test(t))out.push({num:+t.slice(1)});else if(/^@\w+$/.test(t))out.push({user:t.slice(1)});else out.push({text:t});}return out;}
-  function apply(){const f=V.filter,want=terms(f.q),out=[];
+  function apply(){const f=V.filter,want=terms(f.q),out=[],off=new Map();
     for(const it of V.items){
-      if(!f.cats.has(it.cat))continue;if(f.keys&&!f.keys.has(it.key))continue;
+      if(f.keys&&!f.keys.has(it.key))continue;
       if(f.chats.size&&!f.chats.has(String(it.chat)))continue;if(f.people.size&&!f.people.has(String(it.uid??it.who)))continue;
       const day=(it.at||"").slice(0,10);if(f.from&&day<f.from)continue;if(f.to&&day>f.to)continue;
       if(f.only.has("link")&&!it.link)continue;if(f.only.has("wallet")&&!it.wallet)continue;if(f.only.has("media")&&!it.file&&!(it.d||{}).media_info)continue;
       if(f.only.has("edited")&&!(it.edited||it.cat==="edited"))continue;if(f.only.has("found")&&!it.found)continue;
       if(f.only.has("deleted")&&!["edited","deleted"].includes(it.cat))continue;if(f.only.has("selected")&&!V.selected.has(it.key))continue;
       if(want.length&&!want.every(t=>t.num!=null?it.n===t.num:t.user?String(it.user||"").toLowerCase()===t.user:it.hay.includes(t.text)))continue;
+      if(!f.cats.has(it.cat)){off.set(it.cat,(off.get(it.cat)||0)+1);continue;}
       out.push(it);}
+    V.off=off;
     if(f.sort==="desc")out.reverse();V.results=out;V.terms=want.filter(t=>t.text).map(t=>t.text);
     V.plain=f.sort==="asc"&&!f.q&&!f.people.size&&!f.keys&&!f.only.size&&!f.from&&!f.to
       &&Object.keys(meta.cats).every(c=>f.cats.has(c))&&!V.files.bad.length&&!V.files.missing.length;
@@ -218,7 +220,14 @@ async function startViewer(meta){
     render(0);}
 
   function render(from){V.from=from;V.to=from;const list=$("#v-list");list.innerHTML="";$("#v-earlier").hidden=from===0;
-    if(!V.results.length)list.innerHTML='<div class="v-empty">'+esc(say("Nothing matches these filters."))+"</div>";more();}
+    if(!V.results.length){const off=V.off||new Map(),n=[...off.values()].reduce((a,b)=>a+b,0);
+      list.innerHTML='<div class="v-empty">'+esc(say("Nothing matches these filters."))+(n?"<p>"+esc(sayf("{n} matching records are in hidden categories: {names}.",
+        {n:num(n),names:[...off.keys()].map(c=>meta.cats[c]||c).join(", ")}))+'</p><button type="button" class="v-btn" id="v-show-hidden">'
+        +esc(say("Show these categories"))+"</button>":"")+"</div>";
+      const reveal=$("#v-show-hidden");if(reveal)reveal.addEventListener("click",()=>{for(const c of off.keys())V.filter.cats.add(c);
+        for(const b of $$("#v-cats [data-cat]"))b.setAttribute("aria-pressed",String(V.filter.cats.has(b.dataset.cat)));apply();
+        const first=$("#v-list [data-key]");if(first)first.focus();});}
+    more();}
   function day(it){return (it&&it.at||"").slice(0,10);}
   function gapBetween(a,b){return chat&&meta.numbered&&V.plain&&a&&b&&b.n>a.n+1;}
   function together(a,b){return chat&&a&&b&&V.filter.sort==="asc"&&a.cat!=="service"&&b.cat!=="service"&&String(a.uid??a.who)===String(b.uid??b.who)

@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "{n} दिखाए गए सभी आइटम चुनें?",
   "{a} of {b}": "{a} का {b}",
   "Nothing matches these filters.": "इन फ़िल्टरों से कोई मेल नहीं मिलता।",
+  "Show these categories": "ये श्रेणियाँ दिखाएँ",
+  "{n} matching records are in hidden categories: {names}.": "मेल खाने वाले {n} रिकॉर्ड छिपी श्रेणियों में हैं: {names}।",
   "deleted": "हटाया गया",
   "found on recheck": "रीचेक पर पाया गया",
   "wallet": "वॉलेट",
