@@ -109,6 +109,7 @@ code{direction:ltr;unicode-bidi:isolate}
 .msg-media{display:flex;align-items:center;gap:8px;margin:2px 0 6px;padding:8px 10px;border-radius:12px;background:var(--bg2);color:var(--soft);
   font-size:13px}
 .msg-media .i{width:18px;height:18px;color:var(--violet)}
+.msg-media{flex-wrap:wrap}.msg-media small{flex-basis:100%;font-size:11.5px;color:var(--soft)}.msg-media.missing{border:1px dashed var(--line,currentColor)}.msg-media.missing small{color:var(--amber,var(--soft))}
 .msg-img{display:block;max-width:100%;max-height:300px;margin:3px 0 6px;border-radius:12px}
 .msg-service{display:flex;justify-content:center;margin:10px 0}
 .msg-service span{max-width:85%;padding:4px 12px;border-radius:999px;background:rgb(15 23 40 / .32);color:#fff;font-size:12.5px;cursor:pointer}
