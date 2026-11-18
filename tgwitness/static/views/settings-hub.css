@@ -215,6 +215,11 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .first-run-body .answer-card:hover:not(:disabled) .answer-icon{transform:scale(1.08) rotate(-5deg)}
 .first-run-body .answer-card[aria-pressed=true] .answer-icon{background:var(--accent-soft)}
 .first-run-body .answer-card strong{font-size:17px;line-height:1.3}
+.first-run-body .goal-cards .answer-card{min-height:0}
+.first-run-body .answer-card,.first-run-body .wizard-more>summary{scroll-margin-block:16px 120px}
+.goal-details{display:grid;gap:6px;margin:-8px 0 20px;padding:16px 18px;border:1px solid var(--accent-border);border-radius:14px;background:var(--accent-soft)}
+.goal-details strong{font-size:15px}
+.goal-details .hint{margin:0;line-height:1.55}
 .first-run-body .answer-card>.answer-badge{position:absolute;top:16px;inset-inline-end:16px;padding:3px 10px;border:1px solid var(--success-border);border-radius:20px;background:var(--success-soft);color:var(--success);font-size:11px;font-weight:650;line-height:1.5;transition:inset-inline-end .25s}
 .first-run-body .answer-card[aria-pressed=true]>.answer-badge{inset-inline-end:46px}
 .wizard-pane:not([data-direction=none]) .first-run-body>.answer-cards>.answer-card{animation:wizard-rise .5s cubic-bezier(.2,.8,.2,1) backwards}
