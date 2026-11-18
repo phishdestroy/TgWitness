@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "{n} প্রদর্শিত সমস্ত আইটেম নির্বাচন করুন?",
   "{a} of {b}": "{a} এর {b}",
   "Nothing matches these filters.": "এই ফিল্টারগুলির সাথে কিছুই মেলে না।",
+  "Show these categories": "এই বিভাগগুলো দেখান",
+  "{n} matching records are in hidden categories: {names}.": "মিলে যাওয়া {n}টি রেকর্ড লুকানো বিভাগে আছে: {names}।",
   "deleted": "মুছে ফেলা হয়েছে",
   "found on recheck": "recheck-এ পাওয়া গেছে",
   "wallet": "ওয়ালেট",

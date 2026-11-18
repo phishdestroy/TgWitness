@@ -4970,6 +4970,8 @@
   "Select all {n} shown items?": "表示されているすべての{n}項目を選択しますか？",
   "{a} of {b}": "{a}（{b}）",
   "Nothing matches these filters.": "これらのフィルターに一致する結果はありません。",
+  "Show these categories": "これらのカテゴリを表示",
+  "{n} matching records are in hidden categories: {names}.": "一致する {n} 件の記録は非表示のカテゴリにあります: {names}。",
   "deleted": "削除済み",
   "found on recheck": "recheckで発見",
   "wallet": "wallet",

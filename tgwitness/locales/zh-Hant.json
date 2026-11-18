@@ -4970,6 +4970,8 @@
   "Select all {n} shown items?": "要選取所有顯示的 {n} 項目嗎？",
   "{a} of {b}": "{a} 中的 {b}",
   "Nothing matches these filters.": "沒有任何項目符合這些篩選條件。",
+  "Show these categories": "顯示這些類別",
+  "{n} matching records are in hidden categories: {names}.": "{n} 筆相符記錄位於隱藏的類別中：{names}。",
   "deleted": "已刪除",
   "found on recheck": "來源：recheck",
   "wallet": "錢包",

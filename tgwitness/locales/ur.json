@@ -4997,6 +4997,8 @@
   "Select all {n} shown items?": "{n} میں دکھائے گئے تمام آئٹمز منتخب کریں؟",
   "{a} of {b}": "{a} کا {b}",
   "Nothing matches these filters.": "ان فلٹرز کے مطابق کچھ بھی نہیں ملتا۔",
+  "Show these categories": "یہ زمرے دکھائیں",
+  "{n} matching records are in hidden categories: {names}.": "{n} مماثل ریکارڈ چھپی ہوئی زمروں میں ہیں: {names}۔",
   "deleted": "مٹا دیا گیا",
   "found on recheck": "ریچیک پر پایا گیا",
   "wallet": "والٹ",
