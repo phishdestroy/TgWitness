@@ -755,6 +755,7 @@
   "Installation help ↗": "עזרה בהתקנה ↗",
   "Integrity confirmed": "שלמות מאושרת",
   "Interrupted media jobs recovered": "משימות מדיה שהופסקו שוחזרו",
+  "Attachment missing after an unexpected stop": "קובץ מצורף חסר לאחר עצירה לא צפויה",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "קישור MTProxy לא חוקי. השתמש במארח חוקי, יציאה 1-65535 וסיסמה סודית בת 32 תווים בשיטת הקסדצימלי או בינארי; TLS מזויף אינו נתמך.",
   "Invalid TData account or authorization count.": "חשבון TData או מספר האישורים אינם חוקיים.",
   "Invalid Telethon StringSession.": "StringSession של Telethon אינו חוקי.",

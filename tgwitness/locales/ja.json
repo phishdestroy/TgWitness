@@ -751,6 +751,7 @@
   "Installation help ↗": "インストールに関するヘルプ ↗",
   "Integrity confirmed": "完全性が確認されました",
   "Interrupted media jobs recovered": "中断されたメディアジョブの復旧",
+  "Attachment missing after an unexpected stop": "予期しない停止の後に添付ファイルが見つかりません",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "MTProxyのリンクが無効です。有効なホスト、ポート1～65535、および32桁の16進数またはdd形式のシークレットを使用してください。偽のTLS eeはサポートされていません。",
   "Invalid TData account or authorization count.": "TDataアカウントまたは認証回数が無効です。",
   "Invalid Telethon StringSession.": "Telethon StringSessionが無効です。",

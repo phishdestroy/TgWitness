@@ -463,6 +463,7 @@
   "Synthetic demo created": "Створено синтетичну демонстраційну версію",
   "Attachment retry scheduled": "Заплановано повторну спробу завантаження вкладення",
   "Interrupted media jobs recovered": "Відновлено перервані завдання з обробки мультимедіа",
+  "Attachment missing after an unexpected stop": "Вкладення втрачено після аварійної зупинки",
   "Source access unconfirmed": "Доступ до вихідного коду не підтверджено",
   "Monitoring settings changed": "Змінено налаштування моніторингу",
   "Source selection changed": "Змінено вибір джерела",

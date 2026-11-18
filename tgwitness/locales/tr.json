@@ -463,6 +463,7 @@
   "Synthetic demo created": "Oluşturulan sentetik demo",
   "Attachment retry scheduled": "Ek yeniden deneme zamanlandı",
   "Interrupted media jobs recovered": "Kesintiye uğrayan medya işleri kurtarıldı",
+  "Attachment missing after an unexpected stop": "Beklenmeyen durmadan sonra ek eksik",
   "Source access unconfirmed": "Kaynağa erişim doğrulanmadı",
   "Monitoring settings changed": "İzleme ayarlarında değişiklik yapıldı",
   "Source selection changed": "Kaynak seçimi değiştirildi",

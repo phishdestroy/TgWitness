@@ -753,6 +753,7 @@
   "Installation help ↗": "Guida all’installazione ↗",
   "Integrity confirmed": "Integrità confermata",
   "Interrupted media jobs recovered": "Recupero dei processi multimediali interrotti",
+  "Attachment missing after an unexpected stop": "Allegato mancante dopo un arresto imprevisto",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Collegamento MTProxy non valido. Utilizzi un host valido, una porta compresa tra 1 e 65535 e una chiave segreta di 32 cifre in formato esadecimale o dd; il certificato TLS falso non è supportato.",
   "Invalid TData account or authorization count.": "Account TData o numero di autorizzazioni non validi.",
   "Invalid Telethon StringSession.": "StringSession Telethon non valida.",

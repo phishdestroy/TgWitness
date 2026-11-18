@@ -751,6 +751,7 @@
   "Installation help ↗": "安裝說明 ↗",
   "Integrity confirmed": "完整性已確認",
   "Interrupted media jobs recovered": "已恢復中斷的媒體處理任務",
+  "Attachment missing after an unexpected stop": "意外停止後附件遺失",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "MTProxy 連結無效。請使用有效的主機名稱、1 至 65535 之間的埠號，以及 32 位元的十六進位或 dd 格式密鑰；不支援偽造的 TLS ee。",
   "Invalid TData account or authorization count.": "TData 帳戶或授權次數無效。",
   "Invalid Telethon StringSession.": "Telethon StringSession 無效。",

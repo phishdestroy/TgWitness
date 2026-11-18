@@ -463,6 +463,7 @@
   "Synthetic demo created": "دموی مصنوعی ایجاد شد",
   "Attachment retry scheduled": "تکرار پیوست برنامه‌ریزی شد",
   "Interrupted media jobs recovered": "وظایف رسانه‌ای متوقف‌شده بازیابی شدند",
+  "Attachment missing after an unexpected stop": "پیوست پس از توقف غیرمنتظره از دست رفته است",
   "Source access unconfirmed": "دسترسی به منبع تأیید نشده",
   "Monitoring settings changed": "تنظیمات نظارت تغییر کرد",
   "Source selection changed": "انتخاب منبع تغییر کرد",
