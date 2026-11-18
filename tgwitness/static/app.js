@@ -601,10 +601,16 @@ function timeNode(value,cls="",mode="relative"){
   }
   return result;
 }
+function messageTimes(item){
+  const sent=item.dataset.sent,saved=item.dataset.saved;
+  item.title=[tr("Sent: {time}",{time:sent?fmtTime(sent):tr("Not recorded")}),...(saved?[tr("Saved: {time}",{time:fmtTime(saved)})]:[])].join(" · ");
+  item.setAttribute("aria-label",item.title);
+}
 function updateTimes(){
   for(const item of document.querySelectorAll("[data-timestamp]")){
     const value=item.dateTime||item.dataset.timestamp;
     item.textContent=fmtTime(value,{mode:item.dataset.timeMode||"absolute"});item.title=fmtTime(value);
+    if(item.dataset.saved!==undefined)messageTimes(item);
   }
 }
 setInterval(()=>{if(!document.hidden)updateTimes();},30000);
@@ -6273,9 +6279,14 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   if(m.captured){if(m.text)bubble.append(messageText(m.text,m));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   m.media.forEach(media=>bubble.append(mediaNode(media)));
-  if(m.has_media&&!m.media.length){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
+  const file=m.file?.state;
+  if(m.has_media&&!m.media.length&&!file){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
   const meta=node("div","bubble-meta");
   const mark=(tag,cls,symbol,label,title)=>{const d=node(tag,"pill "+cls);d.append(icon(symbol),node("span","",label));d.title=title;meta.append(d);return d;};
+  if(file==="saved")mark("span","pill-file","clip",tr("File saved"),tr("The attachment file is saved in this workspace."));
+  else if(file==="queued"||file==="retry")mark("span","pill-file pill-file-waiting","clock",tr("Queued"),tr("The attachment file is waiting to be downloaded."));
+  else if(file){const reason=excerpt({kind:m.file.kind,payload:{reason:m.file.reason,error_type:m.file.error_type}})||tr("Attachment file not saved");
+    mark("span","pill-file pill-file-missing","clip",reason,tr("Attachment file not saved")+": "+reason);}
   if(m.deleted&&m.auto_deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion seen {time}, when the message's auto-delete timer expired: an expected removal by the timer.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.deleted)mark("button","pill-deleted","trash",tr("Deleted"),tr("Deletion notice received {time}; the saved content stays.",{time:fmtFull(m.deleted_observed_at)}));
   else if(m.missing&&m.auto_deleted)mark("button","pill-missing","question",tr("Not found at recheck"),tr("Telegram no longer returned this message at {time}; its auto-delete timer had expired before that check.",{time:fmtFull(m.missing_observed_at)}));
@@ -6290,7 +6301,8 @@ function messageRow(m,grouped,byId,{continued=false,post=false}={}){
   else if(m.edited)mark("span","pill-edited","edit",tr("Edited"),tr("Telegram marks this message as edited; the earlier text was not saved."));
   if(m.from_scheduled)mark("span","pill-scheduled","clock",tr("Sent as a scheduled message"),tr("Telegram marks this message as sent from a schedule (from_scheduled)."));
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
-  meta.append(timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock"));
+  const stamp=timeNode(m.sent_at||m.versions[0]?.observed_at,"time","clock");
+  stamp.dataset.sent=m.sent_at||"";stamp.dataset.saved=m.versions[0]?.observed_at||"";messageTimes(stamp);meta.append(stamp);
   if(chatSafety?.writable()&&!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
