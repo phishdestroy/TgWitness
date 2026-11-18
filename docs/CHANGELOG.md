@@ -35,6 +35,10 @@
 - The pseudo-secret conversation section of an HTML, JSON or PDF report and its Report Studio preview follow the
   report's dates, event types and senders. Before, a selected pseudo-secret chat showed every message, file and
   notice of that chat, including texts the filters left out of the rest of the report.
+- A minimised handover withholds chats outside its selection from `scope.changed` (`before` and `after` exclusion
+  lists), from an account-wide `coverage.gap` for a full startup buffer (chat IDs and message ID ranges) and from
+  `recheck.completed`; the totals of those records are recounted for the chats kept. Before, these records were
+  passed whole or with their nested chat lists.
 - A report on selected chats, senders or messages keeps the saved files of the selected messages: the cover and
   summary counted 0 files and left out the `media.saved` records, because the selection keeps only message records.
   **Activity by chat** names chats by title and ID, as the chat timeline does, instead of "Chat -100…".

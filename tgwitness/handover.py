@@ -196,9 +196,9 @@ class Minimiser:
     def present(self, event):
         kind, chat = event["kind"], event["chat_id"]
         if chat is None:
-            if kind in GLOBAL_KEEP:
+            if kind in GLOBAL_KEEP and not isinstance(event["payload"].get("chats"), list):
                 return self.keep(event)
-            if kind in ("observation.started", "scope.applied", "scope.changed", "recheck.completed"):
+            if kind in GLOBAL_KEEP or kind in ("observation.started", "scope.applied", "scope.changed", "recheck.completed"):
                 return self.other_chats_removed(event)
             if kind == "interaction.preview" and event["seq"] in self.previews:
                 return self.interaction(event)
@@ -283,14 +283,26 @@ class Minimiser:
         shown = dict(payload)
         if isinstance(payload.get("targets"), list):
             shown["targets"] = [t for t in payload["targets"] if t in chats]
-        if isinstance(payload.get("scope"), dict) and isinstance(payload["scope"].get("exclude"), list):
-            shown["scope"] = {**payload["scope"], "exclude": [t for t in payload["scope"]["exclude"] if t in chats]}
+        for field in ("scope", "before", "after"):
+            if isinstance(payload.get(field), dict) and isinstance(payload[field].get("exclude"), list):
+                shown[field] = {**payload[field], "exclude": [t for t in payload[field]["exclude"] if t in chats]}
         for field in ("exclude", "excluded", "paused", "resumed"):
             if isinstance(payload.get(field), list):
                 shown[field] = [t for t in payload[field] if t in chats]
-        for field in ("added", "chats"):
-            if isinstance(payload.get(field), list):
-                shown[field] = [t for t in payload[field] if isinstance(t, dict) and t.get("chat_id") in chats]
+        if isinstance(payload.get("added"), list):
+            shown["added"] = [t for t in payload["added"] if isinstance(t, dict) and t.get("chat_id") in chats]
+        if isinstance(payload.get("chats"), list):
+            listed = [t for t in payload["chats"] if isinstance(t, dict)
+                      and (t.get("chat_id") in chats or event["kind"] == "coverage.gap" and t.get("chat_id") is None)]
+            shown["chats"] = listed
+            if listed != payload["chats"]:
+                shown.pop("chats_not_listed", None)
+                totals = ("updates_dropped",) if event["kind"] == "coverage.gap" else ("recovered", "edited", "missing", "checked")
+                field_of = {"updates_dropped": "updates"}
+                for total in totals:
+                    if isinstance(payload.get(total), int):
+                        part = field_of.get(total, total)
+                        shown[total] = sum(t[part] for t in listed if type(t.get(part)) is int)
         if shown == payload:
             return self.keep(event)
         return self.minimise(event, shown, ["other chats"])
