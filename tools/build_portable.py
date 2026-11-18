@@ -226,7 +226,8 @@ def main():
     build_tools = build / "build-tools"
     build_environment = dict(os.environ, PYTHONPATH=str(build_tools))
     for target, packages in ((build_tools, ["--require-hashes", "-r", str(ROOT / "deploy/build.lock")]),
-                             (site_packages, ["--require-hashes", "-r", str(ROOT / "deploy/requirements.lock")]),
+                             (site_packages, ["--require-hashes", "--no-build-isolation", "-r",
+                                              str(ROOT / "deploy/requirements.lock")]),
                              (site_packages, ["--no-deps", "--no-build-isolation", str(ROOT)])):
         subprocess.run([sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "--no-warn-script-location",
                         "--no-compile", "--target", str(target), *packages], check=True, cwd=ROOT, env=build_environment)

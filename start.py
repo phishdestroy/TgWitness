@@ -58,8 +58,8 @@ def main():
         print("Installing TgWitness dependencies…", flush=True)
         failed = ("Installing dependencies failed (details above). Check the Internet connection or proxy "
                   "(pip honours HTTPS_PROXY) and run the launcher again.")
-        for lock in ("deploy/build.lock", "deploy/requirements.lock"):
-            step([str(python), "-m", "pip", "install", "--disable-pip-version-check", "--require-hashes",
+        for lock, isolation in (("deploy/build.lock", []), ("deploy/requirements.lock", ["--no-build-isolation"])):
+            step([str(python), "-m", "pip", "install", "--disable-pip-version-check", "--require-hashes", *isolation,
                   "-r", str(ROOT / lock)], failed)
         step([str(python), "-m", "pip", "install", "--disable-pip-version-check", "--no-deps", "--no-build-isolation",
               "-e", str(ROOT)], failed)

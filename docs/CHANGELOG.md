@@ -65,6 +65,9 @@
   each with the conditions and meaning of its `history.cleared_by_peer_suspected` record. Before,
   `cleared_histories` counted every `deletion.batch`, so an ordinary deletion of two messages read as a cleared
   history; that field is removed.
+- `start.py` and the Windows portable builder install `deploy/requirements.lock` with `--no-build-isolation`, as the
+  Dockerfile does: source-only packages build with the setuptools pinned in `deploy/build.lock` instead of a build
+  environment pip resolves on its own.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
