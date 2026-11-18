@@ -226,6 +226,11 @@ class Profiling(ProfileCapture):
                 if not entry or entry.get("app") is None or entry["app"].state.collector is self.collector:
                     raise ValueError("Choose other account workspaces that are open.")
             entity = self.collector.dialog_cache.get(selected[0]["chat_id"], {}).get("entity")
+            if entity is None:
+                try:
+                    entity = await self.collector.lookup_entity(selected[0]["chat_id"])
+                except FLOOD_ERRORS:
+                    entity = None
             options = {**options, "username": public_username(entity) if entity is not None else None}
         self.helpers, self.claimed = {}, set()
         run = {"id": secrets.token_hex(16), "account_id": account, "phase": "running", "options": options,

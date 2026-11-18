@@ -26,6 +26,8 @@
 ## Unreleased
 
 - Distributed exports prepare all chosen accounts at once instead of one after another.
+- Helper accounts in profile collection open a public group the main account has not joined: its username is looked
+  up when the group is not among the main account's dialogs. Before, the helpers stopped with `no_access`.
 - `migrate-to-external` also re-encrypts resumable account-export queues and saved profiling peers; before, it removed
   `vault.key` while they still needed it. Profiling re-resolves a saved peer that no longer opens.
 - `tgwitness backup` copies checkpoints before the journal, so a backup taken during collection starts after restore,
