@@ -5802,8 +5802,10 @@ function renderChatEmpty(){
   if(!state.chats.length&&state.chatsError){box.append(viewState('error',tr('Could not load data'),'',tr('Retry'),()=>refreshChats()));return;}
   const add=(title,text,label,view)=>{box.append(node("h2","",title),node("p","",text));
     if(label){const b=node("button","primary",label);b.type="button";b.addEventListener("click",()=>navigate(view));box.append(b);}};
-  if(!s.demo&&!s.collector.has_session)add(tr("Connect a Telegram account"),tr("TgWitness reads chats through an account you control. Connect it with a phone number, QR code or session file."),tr("Connect account"),"connection");
-  else if(!state.chats.length)add(tr("Choose chats to watch"),tr("Pick the groups and channels to investigate. Their messages, edits and deletions will appear here."),tr("Choose chats"),"sources");
+  if(!s.demo&&!s.collector.has_session)viewAllowed("connection")?add(tr("Connect a Telegram account"),tr("TgWitness reads chats through an account you control. Connect it with a phone number, QR code or session file."),tr("Connect account"),"connection")
+    :add(tr("No Telegram account is connected."),tr("The workspace administrator connects the Telegram account."));
+  else if(!state.chats.length)viewAllowed("sources")?add(tr("Choose chats to watch"),tr("Pick the groups and channels to investigate. Their messages, edits and deletions will appear here."),tr("Choose chats"),"sources")
+    :add(tr("No chats are open to this access yet"),tr("The workspace administrator chooses which chats are observed and which of them this access can read."));
   else add(tr("Select a chat"),tr("Pick a chat on the left to see its messages."));
 }
 function renderChat(){
