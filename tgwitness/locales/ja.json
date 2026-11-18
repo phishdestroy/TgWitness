@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "ショーケースへのアクセスを作成しました。いつでも取り消せます。",
   "Showcase link copied.": "ショーケースのリンクをコピーしました。",
   "Select and copy the link.": "リンクを選択してコピーしてください。",
-  "Global search": "グローバル検索"
+  "Global search": "グローバル検索",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "署名付きジャーナルのハッシュと一致しないローカルファイルが{count}個ありました。そのバイトは変更されずに、このワークスペースの storage-conflicts フォルダーに EXPECTED_SHA256.LOCAL_SHA256 という名前で保存されています。それぞれジャーナルに storage.local_conflict として記録されています。"
 }

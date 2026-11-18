@@ -10269,5 +10269,6 @@
   "Showcase access created. You can revoke it at any time.": "Accesso alla vetrina creato. Puoi revocarlo in qualsiasi momento.",
   "Showcase link copied.": "Link della vetrina copiato.",
   "Select and copy the link.": "Seleziona e copia il link.",
-  "Global search": "Ricerca globale"
+  "Global search": "Ricerca globale",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} file locali non corrispondevano all’hash del registro firmato. I loro byte sono conservati senza modifiche nella cartella storage-conflicts di questo spazio di lavoro come EXPECTED_SHA256.LOCAL_SHA256; ognuno è annotato nel registro come storage.local_conflict."
 }

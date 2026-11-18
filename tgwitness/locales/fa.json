@@ -10259,5 +10259,6 @@
   "Showcase access created. You can revoke it at any time.": "دسترسی ویترین ساخته شد. هر زمان می‌توانید آن را لغو کنید.",
   "Showcase link copied.": "پیوند ویترین کپی شد.",
   "Select and copy the link.": "پیوند را انتخاب و کپی کنید.",
-  "Global search": "جستجوی سراسری"
+  "Global search": "جستجوی سراسری",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} فایل محلی با هش ثبت‌شده در دفترچه امضاشده مطابقت نداشت. بایت‌های آن‌ها بدون تغییر در پوشه storage-conflicts این فضای کاری با نام EXPECTED_SHA256.LOCAL_SHA256 نگه داشته شده‌اند؛ هر مورد در دفترچه با عنوان storage.local_conflict ثبت شده است."
 }

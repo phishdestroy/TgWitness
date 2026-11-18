@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "Akses pameran dicipta. Anda boleh membatalkannya pada bila-bila masa.",
   "Showcase link copied.": "Pautan pameran disalin.",
   "Select and copy the link.": "Pilih dan salin pautan.",
-  "Global search": "Carian global"
+  "Global search": "Carian global",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} fail tempatan berbeza daripada cincang dalam jurnal yang ditandatangani. Baitnya disimpan tanpa diubah dalam folder storage-conflicts ruang kerja ini sebagai EXPECTED_SHA256.LOCAL_SHA256; setiap satu direkodkan dalam jurnal sebagai storage.local_conflict."
 }

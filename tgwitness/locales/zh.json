@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "已创建展示页访问。你可以随时撤销。",
   "Showcase link copied.": "已复制展示页链接。",
   "Select and copy the link.": "请选择并复制链接。",
-  "Global search": "全局搜索"
+  "Global search": "全局搜索",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} 个本地文件与签名日志中的哈希不一致。其字节已原样保存在此工作区的 storage-conflicts 文件夹中，名称为 EXPECTED_SHA256.LOCAL_SHA256；每一项都以 storage.local_conflict 记录在日志中。"
 }

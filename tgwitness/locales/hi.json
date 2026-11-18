@@ -10259,5 +10259,6 @@
   "Showcase access created. You can revoke it at any time.": "शोकेस एक्सेस बनाया गया। आप इसे कभी भी वापस ले सकते हैं।",
   "Showcase link copied.": "शोकेस लिंक कॉपी हुआ।",
   "Select and copy the link.": "लिंक चुनें और कॉपी करें।",
-  "Global search": "वैश्विक खोज"
+  "Global search": "वैश्विक खोज",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} स्थानीय फ़ाइल(ें) हस्ताक्षरित जर्नल के हैश से मेल नहीं खाईं। उनके बाइट इस वर्कस्पेस के storage-conflicts फ़ोल्डर में EXPECTED_SHA256.LOCAL_SHA256 नाम से बिना बदलाव के रखे गए हैं; हर एक जर्नल में storage.local_conflict के रूप में दर्ज है।"
 }

@@ -10463,5 +10463,6 @@
   "Showcase access created. You can revoke it at any time.": "أُنشئ الوصول إلى واجهة العرض. يمكنك إلغاؤه في أي وقت.",
   "Showcase link copied.": "نُسخ رابط واجهة العرض.",
   "Select and copy the link.": "حدد الرابط وانسخه.",
-  "Global search": "البحث العام"
+  "Global search": "البحث العام",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} ملف (ملفات) محلي اختلف عن التجزئة المسجلة في السجل الموقّع. بايتاتها محفوظة دون تغيير في مجلد storage-conflicts الخاص بمساحة العمل هذه باسم EXPECTED_SHA256.LOCAL_SHA256؛ ويُسجَّل كل منها في السجل باسم storage.local_conflict."
 }

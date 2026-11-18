@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "Akses etalase dibuat. Anda dapat mencabutnya kapan saja.",
   "Showcase link copied.": "Tautan etalase disalin.",
   "Select and copy the link.": "Pilih dan salin tautan.",
-  "Global search": "Pencarian global"
+  "Global search": "Pencarian global",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} berkas lokal berbeda dari hash di jurnal yang ditandatangani. Byte-nya disimpan tanpa perubahan di folder storage-conflicts pada ruang kerja ini sebagai EXPECTED_SHA256.LOCAL_SHA256; masing-masing dicatat di jurnal sebagai storage.local_conflict."
 }

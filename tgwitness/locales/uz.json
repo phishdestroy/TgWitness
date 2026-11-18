@@ -10259,5 +10259,6 @@
   "Showcase access created. You can revoke it at any time.": "Vitrinaga kirish yaratildi. Uni istalgan vaqtda bekor qilishingiz mumkin.",
   "Showcase link copied.": "Vitrina havolasi nusxalandi.",
   "Select and copy the link.": "Havolani belgilang va nusxalang.",
-  "Global search": "Global qidiruv"
+  "Global search": "Global qidiruv",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} ta mahalliy fayl imzolangan jurnaldagi xeshdan farq qildi. Ularning baytlari ushbu ish maydonining storage-conflicts jildida EXPECTED_SHA256.LOCAL_SHA256 nomi bilan o'zgarishsiz saqlanadi; har biri jurnalga storage.local_conflict sifatida yozilgan."
 }

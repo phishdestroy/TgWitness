@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "สร้างการเข้าถึงหน้าแสดงผลแล้ว คุณเพิกถอนได้ทุกเมื่อ",
   "Showcase link copied.": "คัดลอกลิงก์หน้าแสดงผลแล้ว",
   "Select and copy the link.": "เลือกและคัดลอกลิงก์",
-  "Global search": "ค้นหาทั่วโลก"
+  "Global search": "ค้นหาทั่วโลก",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "ไฟล์ในเครื่อง {count} ไฟล์ไม่ตรงกับแฮชในสมุดบันทึกที่มีลายเซ็น ไบต์ของไฟล์เหล่านั้นถูกเก็บไว้โดยไม่เปลี่ยนแปลงในโฟลเดอร์ storage-conflicts ของพื้นที่ทำงานนี้ในชื่อ EXPECTED_SHA256.LOCAL_SHA256 และแต่ละไฟล์ถูกบันทึกในสมุดบันทึกเป็น storage.local_conflict"
 }

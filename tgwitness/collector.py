@@ -61,8 +61,8 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, failure_outcome, lane_limits,
-                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_directory, sync_file,
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, durable_replace, failure_outcome,
+                         lane_limits, plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_file,
                          validate_observation)
 from .media.dedup_queue import DOWNLOADS
 from .media.workers import AdaptiveSlots
@@ -5796,8 +5796,7 @@ class Collector:
                 raise ValueError("existing_content_addressed_file_is_corrupt")
             temp.unlink()
         else:
-            temp.replace(destination)
-            await complete_in_thread(sync_directory, media_root)
+            await complete_in_thread(durable_replace, temp, destination)
             if self.media_library is not None:
                 await complete_in_thread(self.media_library.adopt, destination, digest)
         attempt.advance("stored")

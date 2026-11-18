@@ -10310,5 +10310,6 @@
   "Showcase access created. You can revoke it at any time.": "הגישה לחלון הראווה נוצרה. אפשר לבטל אותה בכל עת.",
   "Showcase link copied.": "הקישור לחלון הראווה הועתק.",
   "Select and copy the link.": "סמנו והעתיקו את הקישור.",
-  "Global search": "חיפוש גלובלי"
+  "Global search": "חיפוש גלובלי",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} קבצים מקומיים לא תאמו את הגיבוב ביומן החתום. הבייטים שלהם נשמרים ללא שינוי בתיקייה storage-conflicts של סביבת העבודה הזו בשם EXPECTED_SHA256.LOCAL_SHA256; כל אחד מהם נרשם ביומן כ-storage.local_conflict."
 }

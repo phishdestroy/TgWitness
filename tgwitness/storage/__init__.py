@@ -25,6 +25,7 @@ from cryptography.exceptions import InvalidSignature, InvalidTag
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from .. import replica, tuning
+from ..media_jobs import durable_replace, sync_file
 from ..security import private_write
 from ..store import canonical, utcnow
 from ..verify import fingerprint
@@ -408,7 +409,21 @@ class Storage:
                 "has_config": bool(secret.get("config")), "has_key": bool(secret.get("key")),
                 "rclone_installed": installed, "rclone_version": VERSION, "helper_problem": helper_problem,
                 "last": self.store.get_setting("storage_last"), "remote_types": sorted(REMOTE_TYPES),
-                "disk": self.disk_status()}
+                "disk": self.disk_status(), "local_conflicts": self.kept_conflicts()}
+
+    def kept_conflicts(self, limit=20):
+        folder = self.store.root / "storage-conflicts"
+        try:
+            if replica.filesystem_link(folder) or not folder.is_dir():
+                return {"count": 0, "files": []}
+            with os.scandir(folder) as entries:
+                kept = sorted(entry.name for entry in entries
+                              if re.fullmatch(r"[a-f0-9]{64}\.[a-f0-9]{64}", entry.name) and entry.is_file(follow_symlinks=False))
+            files = [{"sha256": name[:64], "local_sha256": name[65:], "bytes": (folder / name).stat().st_size,
+                      "kept_as": "storage-conflicts/" + name} for name in kept[:limit]]
+        except OSError:
+            return {"count": 0, "files": []}
+        return {"count": len(kept), "files": files}
 
     def backend(self, config=None):
         saved = config or settings(self.store)
@@ -709,7 +724,8 @@ class Storage:
                     kept = self.keep_conflict(path, digest)
                     if conflicts is not None:
                         conflicts.append(kept)
-                restored.replace(path)
+                sync_file(restored)
+                durable_replace(restored, path)
             receipts.evict(digest, False)
             self.save_refreshed(backend)
             self.store.append("storage.restored", {"sha256": digest, "bytes": receipt["bytes"]})
@@ -745,7 +761,7 @@ class Storage:
     def require_local_media(self):
         receipts = Receipts(self.store.root)
         try:
-            missing = sum(1 for row in receipts.rows() if row["evicted"] and not safe_file(self.store.root, row["sha256"]).is_file())
+            missing = sum(1 for row in receipts.rows() if row["evicted"] and not held_locally(self.store.root, row))
         finally:
             receipts.close()
         if missing:
@@ -909,6 +925,10 @@ def main():
         value = json.loads(args.recovery.read_text(encoding="utf-8"))
         result = asyncio.run(recover_directory(value, args.fingerprint, args.credentials.read_text(encoding="utf-8"), args.output))
         print(f"Recovered {result['restored']} files into {args.output / 'media'}. Original journal and signing keys are not recreated.")
+        if result["conflicts"]:
+            print(f"{len(result['conflicts'])} local file(s) differed from the journal hash. Their bytes were kept unchanged:")
+            for kept in result["conflicts"]:
+                print(f"  expected {kept['sha256']}, local {kept['local_sha256']}: {args.output / kept['kept_as']}")
     except (ValueError, OSError, TimeoutError) as exc:
         parser.exit(1, "Recovery stopped: " + (str(exc) if isinstance(exc, ValueError) else type(exc).__name__) + "\n")
 

@@ -1795,7 +1795,7 @@ import("./views/accounts.js?v=warnings1").then(({createAccounts})=>{
   return accountsView;
 }).catch(error=>toast(error.message,true));
 let groupView=null;
-const groupViewReady=import("./views/group.js?v=3").then(({createGroupView})=>{
+const groupViewReady=import("./views/group.js?v=4").then(({createGroupView})=>{
   groupView=createGroupView({root:$("view-group"),json,tr,trn,node,toast,getState:()=>state,avatarNode,stateBadge,
     accountState:p=>accountState(p),accountPhaseLabel,healthPartNames,collectorLines,needsLook,fmtTime,fmtDuration,may,
     switchProfile,navigate,loadProfiles,diagnose:openDiagnostics,openChat:openChatIn,exportTogether,
@@ -2650,7 +2650,7 @@ $("handover-form").addEventListener("submit",event=>{event.preventDefault();busy
   const progress=(await exportsReady).begin({encrypted:encrypt,encryption});
   try{
     const saved=await download("handover",encrypt?"tgwitness-handover-encrypted."+encryption:"tgwitness-handover.zip",true,false,body,progress);
-    if(saved)toast(tr("Handover extract saved. Its purpose and rules are recorded in the journal."));
+    if(saved===true)toast(tr("Handover extract saved. Its purpose and rules are recorded in the journal."));
   }catch(error){progress({phase:"failed",error:error.message});throw error;}
 });});
 $("snapshot-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
@@ -2751,8 +2751,9 @@ $("chat-export-restart").addEventListener("click",e=>busy(e.currentTarget,()=>co
 function saveExport(button){return busy(button,async()=>{
   if(!state.exportId)throw new Error(tr("No finished export to download."));
   const revision=state.workspaceRevision;
-  if(await download("chat-export/"+encodeURIComponent(state.exportId)+"/download",state.exportName,true)===false)return;
-  if(revision!==state.workspaceRevision)return;
+  const saved=await download("chat-export/"+encodeURIComponent(state.exportId)+"/download",state.exportName,true);
+  if(saved===false||revision!==state.workspaceRevision)return;
+  if(saved!==true){$("chat-export-progress").textContent=tr("Download started. Check your browser’s downloads.");return;}
   toast(tr("Signed chat export downloaded."));
   show("chat-export-download",false);show("chat-export-partial-download",false);state.exportId=null;
   $("chat-export-progress").textContent=tr("Downloaded. Export another chat if needed.");
@@ -2760,7 +2761,7 @@ function saveExport(button){return busy(button,async()=>{
 $("chat-export-download").addEventListener("click",e=>saveExport(e.currentTarget));
 $("chat-export-live").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const target=state.exportLive;if(!target)return;
-  if(await download("chat-export/"+encodeURIComponent(target.id)+"/live",target.name,true)===false)return;
+  if(await download("chat-export/"+encodeURIComponent(target.id)+"/live",target.name,true)!==true)return;
   toast(tr("Signed snapshot downloaded. verify.py inside checks it."));
 }));
 $("chat-export-partial-download").addEventListener("click",e=>saveExport(e.currentTarget));
@@ -3164,7 +3165,7 @@ async function accountExportAction(job,verb){
 async function accountExportDownload(job){
   if(!job.ready)throw new Error(tr("This account archive is not ready to download."));
   const name="tgwitness-account-export-"+String(job.id).replace(/[^a-zA-Z0-9_-]/g,"")+".zip";
-  if(await download("account-export/"+encodeURIComponent(job.id)+"/download",name,true))
+  if(await download("account-export/"+encodeURIComponent(job.id)+"/download",name,true)===true)
     toast(tr("Signed account archive saved. You can download it again from this job."));
 }
 async function accountExportDelete(job){
@@ -3309,7 +3310,7 @@ async function createAccountDisclosure(){
 async function accountDisclosureDownload(job,item){
   if(!item.ready)throw new Error(tr("This disclosure is still being prepared."));
   const path="account-export/"+encodeURIComponent(job.id)+"/disclosures/"+encodeURIComponent(item.id)+"/download";
-  if(await download(path,accountDisclosureFilename(item),true))
+  if(await download(path,accountDisclosureFilename(item),true)===true)
     toast(tr("Signed disclosure saved. Review it before sharing."));
 }
 $("account-disclosure-form").addEventListener("input",accountDisclosureInvalidate);
@@ -3368,7 +3369,7 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
     const link=node('a');link.href=target.href;link.download=filename;document.body.append(link);link.click();link.remove();
     progress({phase:'browser',total:expected,expected});void exportsView?.load();
     toast(tr(preparedId?'Download started. Check your browser’s downloads. The file is also in Prepared exports.':
-      'Download started. Check your browser’s downloads.'));return true;
+      'Download started. Check your browser’s downloads.'));return 'browser';
   }
   try{
     current();
@@ -3398,7 +3399,7 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
       await json('exports/'+encodeURIComponent(preparedId)+'/received',{bytes:total},root?{root:true,token}:{profile,token}).catch(()=>{});
     progress({phase:handle?'done':'browser',total,expected});
     if(stream)toast(tr(handle?'File saved.':'Download started. Check your browser’s downloads.'));
-    return true;
+    return handle?true:'browser';
   }catch(error){
     if(reader)await reader.cancel().catch(()=>{});else await response.body?.cancel().catch(()=>{});
     if(writer)await writer.abort().catch(()=>{});
@@ -7015,8 +7016,9 @@ async function resumeMulti(attempt=0){
 }
 function saveMulti(button){return busy(button,async()=>{
   const x=state.multi;if(!x?.ready)throw new Error(tr("No finished export to save."));
-  if(await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true)===false)return;
-  renderMulti();toast(tr("Signed chat export saved."));
+  const saved=await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true);
+  if(saved===false)return;
+  renderMulti();if(saved===true)toast(tr("Signed chat export saved."));
 });}
 let linkPlan=null,linkJob=null,linkPoll=null;
 const EXPORT_PHASES={preparing:tr("preparing"),running:tr("running"),selecting:tr("selecting"),packaging:tr("packaging"),done:tr("done"),
@@ -7112,7 +7114,7 @@ function renderLinkJob(){
   if(["paused","failed","cancelled"].includes(x.phase))action("primary",tr("Resume saved chunks"),async()=>{
     await json("multi-export/"+encodeURIComponent(x.id)+"/resume",{},{root:true});await pollLinkJob(x.id);});
   if(x.phase==="done"&&x.ready)action("primary",tr("Save signed export"),async()=>{
-    if(await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true)===false)return;
+    if(await download("multi-export/"+encodeURIComponent(x.id)+"/download",x.filename||"tgwitness-chat-export.zip",true,true)!==true)return;
     toast(tr("Signed chat export saved."));});
   if(!running)action("quiet",tr("Start over with another link"),async()=>{resetLinkExport();$("link-export-input").focus();});
   box.append(actions);
@@ -7306,7 +7308,7 @@ const topologyReady=import('./views/topology.js?v=6').then(({createTopology})=>{
 });
 topologyReady.catch(error=>toast(error.message,true));
 let swarmView=null;
-const swarmReady=Promise.all([import('./views/swarm.js?v=2'),homeReady]).then(([{createSwarm}])=>{
+const swarmReady=Promise.all([import('./views/swarm.js?v=3'),homeReady]).then(([{createSwarm}])=>{
   swarmView=createSwarm({root:$('view-swarm'),tr,trn,json,getState:()=>state,options:()=>viewOptions('swarm'),toast,
     download:(path,filename,stream,root)=>download(path,filename,stream,root),
     taskLabel:activity=>homeTask?.(activity),

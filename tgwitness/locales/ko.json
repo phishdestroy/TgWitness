@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "쇼케이스 접근을 만들었습니다. 언제든지 철회할 수 있습니다.",
   "Showcase link copied.": "쇼케이스 링크를 복사했습니다.",
   "Select and copy the link.": "링크를 선택해 복사하세요.",
-  "Global search": "전체 검색"
+  "Global search": "전체 검색",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "로컬 파일 {count}개가 서명된 저널의 해시와 달랐습니다. 해당 바이트는 이 작업 공간의 storage-conflicts 폴더에 EXPECTED_SHA256.LOCAL_SHA256 이름으로 변경 없이 보관되며, 각 파일은 저널에 storage.local_conflict로 기록됩니다."
 }

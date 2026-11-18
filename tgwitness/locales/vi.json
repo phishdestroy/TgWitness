@@ -10208,5 +10208,6 @@
   "Showcase access created. You can revoke it at any time.": "Đã tạo quyền truy cập trang trưng bày. Bạn có thể thu hồi bất cứ lúc nào.",
   "Showcase link copied.": "Đã sao chép liên kết trang trưng bày.",
   "Select and copy the link.": "Chọn và sao chép liên kết.",
-  "Global search": "Tìm kiếm toàn cầu"
+  "Global search": "Tìm kiếm toàn cầu",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "{count} tệp cục bộ khác với mã băm trong sổ nhật ký có chữ ký. Các byte của chúng được giữ nguyên trong thư mục storage-conflicts của không gian làm việc này với tên EXPECTED_SHA256.LOCAL_SHA256; mỗi tệp được ghi vào sổ nhật ký dưới dạng storage.local_conflict."
 }

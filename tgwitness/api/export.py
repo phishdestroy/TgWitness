@@ -1017,7 +1017,7 @@ class ExportOperations:
         async with self.export_lock, self.app.state.storage.lock:
             if fmt in ("zip", "asice"):
                 try:
-                    self.app.state.storage.require_local_media()
+                    await complete_in_thread(self.app.state.storage.require_local_media)
                 except ValueError as exc:
                     raise HTTPException(409, str(exc)) from None
             try:

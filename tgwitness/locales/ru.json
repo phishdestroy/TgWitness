@@ -10331,5 +10331,6 @@
   "Showcase access created. You can revoke it at any time.": "Доступ к витрине создан. Его можно отозвать в любое время.",
   "Showcase link copied.": "Ссылка на витрину скопирована.",
   "Select and copy the link.": "Выделите и скопируйте ссылку.",
-  "Global search": "Глобальный поиск"
+  "Global search": "Глобальный поиск",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "Локальных файлов, не совпавших с хешем из подписанного журнала: {count}. Их байты сохранены без изменений в папке storage-conflicts этой рабочей области под именем EXPECTED_SHA256.LOCAL_SHA256; каждый случай записан в журнал как storage.local_conflict."
 }
