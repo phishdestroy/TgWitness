@@ -10208,5 +10208,8 @@
   "Showcase access created. You can revoke it at any time.": "Đã tạo quyền truy cập trang trưng bày. Bạn có thể thu hồi bất cứ lúc nào.",
   "Showcase link copied.": "Đã sao chép liên kết trang trưng bày.",
   "Select and copy the link.": "Chọn và sao chép liên kết.",
-  "Global search": "Tìm kiếm toàn cầu"
+  "Global search": "Tìm kiếm toàn cầu",
+  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "Tại lần kiểm tra quyền {seconds} giây trước thông báo này, tài khoản này không có quyền xóa tin nhắn này trong cuộc trò chuyện này. Nếu điều đó không thay đổi, tác giả, một quản trị viên cuộc trò chuyện hoặc Telegram đã xóa nó; thông báo không cho biết là ai.",
+  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "Tại lần kiểm tra phiên {seconds} giây trước thông báo này, tài khoản này không có phiên đăng nhập nào khác, và không gian làm việc này không xóa tin nhắn. Nếu từ đó không có phiên nào được thêm, bên kia, một quản trị viên cuộc trò chuyện hoặc Telegram đã xóa nó; thông báo không cho biết là ai.",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "Chỉ {limit} kênh được thăm dò thêm để lấy cập nhật, trước hết là cuộc trò chuyện thăm dò và các nguồn ưu tiên. Nằm ngoài lần thăm dò ngắn này ({n}): {names}. Các cập nhật Telegram gửi đến và các lần kiểm tra lại vẫn bao quát chúng."
 }

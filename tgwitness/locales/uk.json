@@ -10361,5 +10361,8 @@
   "Showcase access created. You can revoke it at any time.": "Доступ до вітрини створено. Його можна відкликати будь-коли.",
   "Showcase link copied.": "Посилання на вітрину скопійовано.",
   "Select and copy the link.": "Виділіть і скопіюйте посилання.",
-  "Global search": "Глобальний пошук"
+  "Global search": "Глобальний пошук",
+  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "Під час перевірки прав за {seconds} с до цього сповіщення обліковий запис не мав права видаляти це повідомлення в цьому чаті. Якщо відтоді нічого не змінилося, його видалив автор, адміністратор чату або Telegram; хто саме, сповіщення не повідомляє.",
+  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "Під час перевірки сеансів за {seconds} с до цього сповіщення обліковий запис не мав інших сеансів входу, а цей робочий простір не видаляє повідомлення. Якщо відтоді не з'явився новий сеанс, повідомлення видалила інша сторона, адміністратор чату або Telegram; хто саме, сповіщення не повідомляє.",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "Додатково опитуються лише {limit} каналів, насамперед чат для перевірки та пріоритетні джерела. Не потрапили до цього короткого опитування ({n}): {names}. Оновлення, які доставляє Telegram, і повторні перевірки й надалі їх охоплюють."
 }

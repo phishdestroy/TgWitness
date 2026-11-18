@@ -10259,5 +10259,8 @@
   "Showcase access created. You can revoke it at any time.": "شوکیس رسائی بن گئی۔ آپ اسے کسی بھی وقت منسوخ کر سکتے ہیں۔",
   "Showcase link copied.": "شوکیس لنک کاپی ہو گیا۔",
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
-  "Global search": "عالمی تلاش"
+  "Global search": "عالمی تلاش",
+  "At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.": "اس اطلاع سے {seconds} سیکنڈ پہلے اختیارات کی جانچ میں اس اکاؤنٹ کو اس چیٹ میں یہ پیغام حذف کرنے کا اختیار نہیں تھا۔ اگر یہ نہیں بدلا تھا تو اسے اس کے مصنف، چیٹ کے کسی منتظم یا ٹیلیگرام نے ہٹایا؛ اطلاع یہ نہیں بتاتی کہ کس نے۔",
+  "At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.": "اس اطلاع سے {seconds} سیکنڈ پہلے سیشن کی جانچ میں اس اکاؤنٹ کا کوئی دوسرا سائن ان شدہ سیشن نہیں تھا، اور یہ ورک اسپیس پیغامات حذف نہیں کرتا۔ اگر تب سے کوئی سیشن شامل نہیں ہوا تو اسے دوسری جانب، چیٹ کے کسی منتظم یا ٹیلیگرام نے ہٹایا؛ اطلاع یہ نہیں بتاتی کہ کس نے۔",
+  "Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.": "اپ ڈیٹس کے لیے اضافی طور پر صرف {limit} چینلز پول کیے جاتے ہیں، پہلے پروب چیٹ اور ترجیحی ذرائع۔ اس مختصر پول سے باہر ({n}): {names}۔ ٹیلیگرام کی پہنچائی گئی اپ ڈیٹس اور دوبارہ جانچ اب بھی انہیں شامل کرتی ہیں۔"
 }

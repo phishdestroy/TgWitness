@@ -264,7 +264,7 @@ class Minimiser:
                 shown["button"] = None
         else:
             shown = fields(payload, {"request_id", "request_event", "status", "chat_id", "message_id",
-                                     "message_event", "error_type", "retry_after"})
+                                     "message_event", "error_type", "retry_after", "already_member"})
             answer = payload.get("answer")
             if isinstance(answer, dict):
                 names = {"cache_time", "alert", "has_url", "native_ui"}

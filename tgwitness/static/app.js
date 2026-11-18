@@ -1449,12 +1449,15 @@ function collectorLines(name,p){
   }
   if(name==="sources"){
     const counts=c.checked?tr("Visible: {visible} · added automatically: {added} · not found: {unconfirmed}",c):"";
-    if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts];
-    if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts];
-    if(p.reason==="none_visible")return [tr("None of the sources was found among the account's chats."),counts];
-    if(p.reason==="access_lost")return [tr("The account was removed from every source or can no longer read them."),counts];
-    if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts];
-    if(p.reason==="not_checked")return [tr("Sources are checked when observation starts.")];
+    const poll=p.short_poll,shown=poll?.left_out_chats||[];
+    const left=poll?.left_out?tr("Only {limit} channels are also polled for updates, the probe chat and priority sources first. Left out of this short poll ({n}): {names}. Updates Telegram delivers and rechecks still cover them.",
+      {limit:poll.limit,n:poll.left_out,names:shown.map(x=>x.title||x.chat_id).join(", ")+(poll.left_out>shown.length?", +"+(poll.left_out-shown.length):"")}):"";
+    if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts,left];
+    if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts,left];
+    if(p.reason==="none_visible")return [tr("None of the sources was found among the account's chats."),counts,left];
+    if(p.reason==="access_lost")return [tr("The account was removed from every source or can no longer read them."),counts,left];
+    if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts,left];
+    if(p.reason==="not_checked")return [tr("Sources are checked when observation starts."),left];
     return [tr("No source is selected.")];
   }
   const facts=[tr("Waiting: {pending} · retrying: {retry} · not saved: {failed}",c),
@@ -2042,14 +2045,14 @@ function accessName(p) {
   return p.access_id==="admin"||p.label==="Main administrator"?tr("Main administrator"):p.label||state.accessNames?.[p.access_id]||p.access_id||"";
 }
 const DELETION_ATTRIBUTION={
-  account_cannot_delete_here:()=>tr("Not deleted by this account: it had no right to delete this message in this chat. Its author, a chat administrator or Telegram removed it."),
-  no_other_session:seconds=>tr("Not deleted by this account: it had no other signed-in session at the session check {seconds} s earlier, and this workspace does not delete messages. The other side, a chat administrator or Telegram removed it.",{seconds}),
+  account_cannot_delete_here:seconds=>tr("At the rights check {seconds} s before this notice, this account had no right to delete this message in this chat. If that had not changed, its author, a chat administrator or Telegram removed it; the notice does not say who.",{seconds}),
+  no_other_session:seconds=>tr("At the session check {seconds} s before this notice, this account had no other signed-in session, and this workspace does not delete messages. If no session was added since, the other side, a chat administrator or Telegram removed it; the notice does not say who.",{seconds}),
   this_account_may_have_deleted:()=>tr("Who deleted it is not known: this account itself, from another session or device, could also have deleted it.")};
 function deletionAttribution(p,link){
   if(link&&Number.isInteger(link.actor_id))return link.actor_is_this_account?tr("The chat's admin log names this account as the one that deleted it."):tr("The chat's admin log names user {id} as the account that deleted it.",{id:link.actor_id});
   const facts=p.attribution_facts||{},text=DELETION_ATTRIBUTION[facts.rule];
   if(!["own_action","peer_or_admin","unknown_other_session_present"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
-  const seconds=facts.sessions_check?.age_seconds??facts.sessions_age_seconds;
+  const seconds=facts.rule==="account_cannot_delete_here"?facts.rights?.age_seconds??facts.rights_age_seconds:facts.sessions_check?.age_seconds??facts.sessions_age_seconds;
   return text(Number.isInteger(seconds)?seconds:"?");
 }
 function deletionExcerpt(e){
@@ -6618,6 +6621,7 @@ function actionResult(result){
     unknown:tr("The result is unknown. Check the chat before attempting a new action."),
     queued:result.run_at?tr("Queued to keep a safe pace. Runs at {time}.",{time:fmtTime(new Date(result.run_at*1000).toISOString())}):""};
   box.append(node("strong","",labels[result.status]||result.status));
+  if(result.already_member)box.append(node("p","",tr("This account is already a member of the chat.")));
   if(result.status==="succeeded"&&result.forwarded!=null)box.append(node("p","",tr("Forwarded {n} messages to {chat}.",{n:result.forwarded,chat:result.destination_title||result.destination})));
   if(result.error)box.append(node("p","",tr(result.error)));
   else if(result.error_type==="ChatForwardsRestrictedError")box.append(node("p","",tr("Forwarding is restricted in this chat.")));
@@ -6691,6 +6695,7 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
     preview.history_visible===false?tr("New members do not see earlier messages"):""].filter(Boolean);
   if(facts.length)box.append(node("p","hint",facts.join(" · ")));
   if(request)box.append(node("p","hint",tr("Joining needs administrator approval: Telegram sends a join request.")));
+  if(preview.already_member)box.append(node("p","hint",tr("This account is already a member of the chat.")));
   const watch=node("label","check-label"),observe=node("input");observe.type="checkbox";observe.id="chat-link-observe";observe.checked=true;
   watch.append(observe,document.createTextNode(" "+tr("Observe: add this chat to sources")));
   box.append(node("p","hint",tr("The preview is saved. Opening a bot sends /start.")),watch,open);
