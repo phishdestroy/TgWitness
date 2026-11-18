@@ -14,7 +14,9 @@ KEY = "Encryption key"
 LIMITED = "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them."
 MESSAGE_LIMIT = 5000
 PREVIEW_BYTES = 2 * 1024 * 1024
+PREVIEW_TOTAL = 48 * 1024 * 1024
 PDF_IMAGE_BYTES = 8 * 1024 * 1024
+PDF_IMAGE_PIXELS = 50_000_000
 IMAGES = ("image/jpeg", "image/png", "image/webp", "image/gif")
 MEDIA = {"Photo": "Photo", "Video": "Video", "Audio": "Audio", "GeoPoint": "Location", "Contact": "Contact",
          "Venue": "Place", "WebPage": "Link preview", "ExternalDocument": "Sticker"}
@@ -69,7 +71,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         if type(chat_id) is not int or wanted is not None and chat_id not in wanted:
             continue
         chat = found.setdefault(chat_id, {"id": chat_id, "peer": {}, "items": [], "state": "pending", "started": None,
-                                          "ended": None, "key": None, "truncated": False, "messages": {},
+                                          "ended": None, "key": None, "truncated": False, "messages": {}, "shown": 0,
                                           "counts": {"received": 0, "sent": 0, "files": 0, "deleted": 0,
                                                      "screenshots": 0, "read": 0}})
         peer = payload.get("peer_user_id")
@@ -97,9 +99,10 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
         elif name == "message":
             out = payload.get("direction") == "out"
             chat["counts"]["sent" if out else "received"] += 1
-            if sum(1 for item in chat["items"] if item["type"] == "message") >= limit:
+            if chat["shown"] >= limit:
                 chat["truncated"] = True
                 continue
+            chat["shown"] += 1
             message = {"type": "message", "seq": seq, "at": at, "hash": digest, "direction": "out" if out else "in",
                        "text": payload.get("text") if isinstance(payload.get("text"), str) else "",
                        "ttl": payload.get("ttl") if type(payload.get("ttl")) is int and payload.get("ttl") > 0 else None,
@@ -152,6 +155,7 @@ def collect(connection, through=None, chats=None, titles=None, limit=MESSAGE_LIM
             if title:
                 peer["name"] = title
         chat.pop("messages")
+        chat.pop("shown")
         result.append(chat)
     return sorted(result, key=lambda chat: (chat["started"] or {}).get("at") or "")
 
@@ -250,6 +254,7 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
         return ""
     e = lambda value: escape("" if value is None else str(value))
     lock = '<svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>'
+    budget = PREVIEW_TOTAL
     parts = ['<section class="card long" id="secret-conversation"><h2><span class="sec-icon tone-violet">' + lock
              + '</span><span class="num">' + str(number) + '</span><span class="section-title">' + e(say(TITLE))
              + '</span></h2><p class="lead">' + e(say(LEAD)) + "</p>"]
@@ -279,10 +284,12 @@ def html(conversations, say, number, when, size_text, media_root=None, archive=F
                 if archive:
                     parts.append('<img loading="lazy" alt="' + e(media.get("name") or say("Photo")) + '" src="media/' + e(item["file"]["sha256"]) + '">')
                 else:
-                    found = preview(media_root, item["file"], PREVIEW_BYTES)
+                    found = preview(media_root, item["file"], min(PREVIEW_BYTES, budget))
                     if found is not None:
+                        data = found.read_bytes()
+                        budget -= len(data)
                         parts.append('<img loading="lazy" alt="' + e(media.get("name") or say("Photo")) + '" src="data:'
-                                     + e(media.get("mime") or "image/jpeg") + ";base64," + base64.b64encode(found.read_bytes()).decode("ascii") + '">')
+                                     + e(media.get("mime") or "image/jpeg") + ";base64," + base64.b64encode(data).decode("ascii") + '">')
             if item["text"]:
                 parts.append('<div class="text">' + e(item["text"]) + "</div>")
             if media:
@@ -337,8 +344,9 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                         from PIL import Image
                         with Image.open(image) as picture:
                             w, h = picture.size
-                        scale = min(inner / w, 52 / h)
-                        blocks.append(("image", str(image), (w * scale, h * scale)))
+                        if w * h <= PDF_IMAGE_PIXELS:
+                            scale = min(inner / w, 52 / h)
+                            blocks.append(("image", str(image), (w * scale, h * scale)))
                     except Exception:
                         pass
             if item["text"]:
@@ -355,6 +363,19 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                 page.set_font("Sans", "B" if kind == "badge" else "", 9 if kind == "text" else 7.2)
                 heights.append(page.multi_cell(inner, 4.2 if kind == "text" else 3.4, value, dry_run=True, output="HEIGHT"))
             total = sum(heights) + len(blocks) + 5
+            if total + 2 > page.h - page.t_margin - page.b_margin:
+                for (kind, value, extra), height in zip(blocks, heights):
+                    if kind == "image":
+                        lay.need(extra[1] + 2)
+                        draw_image(page, value, page.l_margin + 4, page.get_y(), extra)
+                        page.set_y(page.get_y() + extra[1] + 1)
+                        continue
+                    page.set_font("Sans", "B" if kind == "badge" else "", 9 if kind == "text" else 7.2)
+                    page.set_text_color(*extra)
+                    page.multi_cell(width, 4.2 if kind == "text" else 3.4, value, align="R" if kind == "meta" else "L",
+                                    new_x=lay.XPos.LMARGIN, new_y=lay.YPos.NEXT)
+                page.ln(2.2)
+                continue
             lay.need(total + 2)
             left = page.l_margin + (width - bubble if out != lay.rtl else 0)
             top = page.get_y()
@@ -365,7 +386,7 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
             y = top + 3
             for (kind, value, extra), height in zip(blocks, heights):
                 if kind == "image":
-                    page.image(value, x=left + 4, y=y, w=extra[0], h=extra[1])
+                    draw_image(page, value, left + 4, y, extra)
                 else:
                     page.set_xy(left + 4, y)
                     page.set_font("Sans", "B" if kind == "badge" else "", 9 if kind == "text" else 7.2)
@@ -374,3 +395,10 @@ def pdf(lay, conversations, say, when, size_text, colors, media_root=None):
                 y += height + 1
             page.set_xy(page.l_margin, top + total + 2.2)
         lay.gap(4)
+
+
+def draw_image(page, path, x, y, size):
+    try:
+        page.image(path, x=x, y=y, w=size[0], h=size[1])
+    except Exception:
+        pass

@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- Pseudo-secret reports read long chats in linear time, stop embedding image previews in HTML after 48 MB, skip PDF
+  images above 50 megapixels and let a message taller than a page continue on the next page instead of drawing its
+  frame past the page edge.
 - Distributed exports prepare all chosen accounts at once instead of one after another.
 - TgWitness remembers the username of a public group it opened without joining, so profile-collection helpers and
   “Load history” still find the group after a restart. Before, the helpers stopped with `no_access` and loading
