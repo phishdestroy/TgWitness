@@ -3632,6 +3632,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Usunąć to źródło? Zapisane wiadomości i pliki pozostaną. Zapisane w pamięci podręcznej profile osób zostaną usunięte.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "Usunąć źródła ({n})? Zapisane wiadomości i pliki pozostaną. Zapisane w pamięci podręcznej profile osób zostaną usunięte.",
   "Reply to #{id} · outside this loaded window": "Odpowiedź na #{id} · poza wczytanym zakresem",
+  "Reply to #{id} in another chat": "Odpowiedź na #{id} w innym czacie",
   "Resolved": "Rozwiązany",
   "Restore default for {name}": "Przywróć wartość domyślną dla: {name}",
   "Restore defaults…": "Przywróć domyślne…",

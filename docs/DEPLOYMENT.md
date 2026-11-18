@@ -175,7 +175,10 @@ there for simultaneous exports, journal/WAL growth, media and backups.
 The launcher uses deploy/constraints.txt to pin qualified runtime dependency versions.
 Docker and high-assurance servers install from deploy/requirements.lock and
 deploy/build.lock with pip --require-hashes: every package file must match a SHA-256
-recorded in the commit, so a file replaced on PyPI or a mirror is refused. The Python base
+recorded in the commit, so a file replaced on PyPI or a mirror is refused. Packages that
+ship only source (jieba, pyaes) are built with the setuptools pinned in deploy/build.lock
+(`--no-build-isolation`) by the launcher, the Windows portable builder and the Dockerfile,
+so pip does not resolve a separate, unpinned build environment. The Python base
 image and operating-system packages still require independent release qualification.
 
 Do not use docker compose down -v unless you intend to destroy the journal and keys.

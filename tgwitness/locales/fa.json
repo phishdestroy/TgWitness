@@ -3586,6 +3586,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "این منبع حذف شود؟ پیام‌ها و فایل‌های ذخیره‌شده باقی می‌مانند. پروفایل‌های کش‌شده افراد حذف می‌شوند.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "{n} منبع حذف شود؟ پیام‌ها و فایل‌های ذخیره‌شده باقی می‌مانند. پروفایل‌های کش‌شده افراد حذف می‌شوند.",
   "Reply to #{id} · outside this loaded window": "پاسخ به #{id} · خارج از این بازه بارگذاری‌شده",
+  "Reply to #{id} in another chat": "پاسخ به #{id} در گفت‌وگوی دیگر",
   "Resolved": "برطرف‌شده",
   "Restore default for {name}": "بازگردانی پیش‌فرض برای {name}",
   "Restore defaults…": "بازگردانی پیش‌فرض‌ها…",

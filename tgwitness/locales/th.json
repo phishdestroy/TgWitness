@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "นำแหล่งข้อมูลนี้ออกหรือไม่ ข้อความและไฟล์ที่บันทึกไว้จะยังอยู่ แต่โปรไฟล์บุคคลที่แคชไว้จะถูกลบ",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "นำแหล่งข้อมูล {n} รายการออกหรือไม่ ข้อความและไฟล์ที่บันทึกไว้จะยังอยู่ แต่โปรไฟล์บุคคลที่แคชไว้จะถูกลบ",
   "Reply to #{id} · outside this loaded window": "ตอบกลับ #{id} · อยู่นอกช่วงที่โหลดไว้",
+  "Reply to #{id} in another chat": "ตอบกลับ #{id} ในแชทอื่น",
   "Resolved": "แก้ไขแล้ว",
   "Restore default for {name}": "คืนค่าเริ่มต้นสำหรับ {name}",
   "Restore defaults…": "คืนค่าเริ่มต้น…",

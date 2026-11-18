@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "確定要移除此來源嗎？已儲存的訊息與檔案將會保留，快取的人員個人資料將被移除。",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "確定要移除 {n} 個來源嗎？已儲存的訊息與檔案將會保留，快取的人員個人資料將被移除。",
   "Reply to #{id} · outside this loaded window": "回覆 #{id} · 不在目前已載入範圍內",
+  "Reply to #{id} in another chat": "回覆另一個聊天中的 #{id}",
   "Resolved": "已解析",
   "Restore default for {name}": "還原 {name} 的預設值",
   "Restore defaults…": "還原預設值…",

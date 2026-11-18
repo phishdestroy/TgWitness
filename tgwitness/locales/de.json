@@ -3586,6 +3586,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Diese Quelle entfernen? Gespeicherte Nachrichten und Dateien bleiben erhalten. Zwischengespeicherte Personenprofile werden entfernt.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "{n} Quellen entfernen? Gespeicherte Nachrichten und Dateien bleiben erhalten. Zwischengespeicherte Personenprofile werden entfernt.",
   "Reply to #{id} · outside this loaded window": "Antwort auf #{id} · außerhalb des geladenen Bereichs",
+  "Reply to #{id} in another chat": "Antwort auf #{id} in einem anderen Chat",
   "Resolved": "Aufgelöst",
   "Restore default for {name}": "Standard für {name} wiederherstellen",
   "Restore defaults…": "Standardwerte wiederherstellen…",

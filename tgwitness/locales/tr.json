@@ -3586,6 +3586,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Bu kaynak kaldırılsın mı? Kayıtlı mesajlar ve dosyalar korunur. Önbelleğe alınmış kişi profilleri kaldırılır.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "{n} kaynak kaldırılsın mı? Kayıtlı mesajlar ve dosyalar korunur. Önbelleğe alınmış kişi profilleri kaldırılır.",
   "Reply to #{id} · outside this loaded window": "#{id} için yanıt · yüklü görünümün dışında",
+  "Reply to #{id} in another chat": "Başka bir sohbetteki #{id} iletisine yanıt",
   "Resolved": "Çözümlendi",
   "Restore default for {name}": "{name} için varsayılanı geri yükle",
   "Restore defaults…": "Varsayılanları geri yükle…",

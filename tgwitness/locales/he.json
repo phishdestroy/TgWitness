@@ -3609,6 +3609,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "להסיר מקור זה? הודעות וקבצים שמורים יישארו. פרופילי אנשים במטמון יוסרו.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "להסיר {n} מקורות? הודעות וקבצים שמורים יישארו. פרופילי אנשים במטמון יוסרו.",
   "Reply to #{id} · outside this loaded window": "תגובה אל #{id} · מחוץ לחלון שנטען",
+  "Reply to #{id} in another chat": "תגובה ל-#{id} בצ'אט אחר",
   "Resolved": "נפתר",
   "Restore default for {name}": "שחזור ברירת מחדל עבור {name}",
   "Restore defaults…": "שחזור ברירות מחדל…",

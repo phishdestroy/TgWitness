@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "确定移除此数据源？已保存的消息和文件将保留，缓存的用户资料将被移除。",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "确定移除 {n} 个数据源？已保存的消息和文件将保留，缓存的用户资料将被移除。",
   "Reply to #{id} · outside this loaded window": "回复 #{id} · 超出当前加载范围",
+  "Reply to #{id} in another chat": "回复另一个聊天中的 #{id}",
   "Resolved": "已解析",
   "Restore default for {name}": "恢复 {name} 的默认值",
   "Restore defaults…": "恢复默认值…",

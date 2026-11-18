@@ -3586,6 +3586,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "এই উৎসটি সরাবেন? সংরক্ষিত বার্তা এবং ফাইলগুলো থেকে যাবে। ক্যাশ করা ব্যক্তিদের প্রোফাইল মুছে ফেলা হবে।",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "{n}টি উৎস সরাবেন? সংরক্ষিত বার্তা এবং ফাইলগুলো থেকে যাবে। ক্যাশ করা ব্যক্তিদের প্রোফাইল মুছে ফেলা হবে।",
   "Reply to #{id} · outside this loaded window": "#{id}-এর উত্তর · এই লোড করা উইন্ডোর বাইরে",
+  "Reply to #{id} in another chat": "অন্য চ্যাটে #{id}-এর উত্তর",
   "Resolved": "সমাধানকৃত",
   "Restore default for {name}": "{name}-এর জন্য ডিফল্ট পুনরুদ্ধার করুন",
   "Restore defaults…": "ডিফল্ট পুনরুদ্ধার করুন…",

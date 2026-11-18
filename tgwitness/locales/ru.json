@@ -3655,6 +3655,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Удалить этот источник? Сохранённые сообщения и файлы остаются. Профили пользователей из кэша удаляются.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "Удалить источники ({n})? Сохранённые сообщения и файлы останутся. Кэш профилей людей будет удалён.",
   "Reply to #{id} · outside this loaded window": "Ответить на № {id} · за пределами этого загруженного окна",
+  "Reply to #{id} in another chat": "Ответ на № {id} в другом чате",
   "Resolved": "Решено",
   "Restore default for {name}": "Восстановить настройки по умолчанию для {name}",
   "Restore defaults…": "Восстановить настройки по умолчанию…",

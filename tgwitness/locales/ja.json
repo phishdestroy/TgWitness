@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "このソースを削除しますか？ 保存済みのメッセージとファイルは残ります。キャッシュされた人物プロフィールは削除されます。",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "{n} 件のソースを削除しますか？ 保存済みのメッセージとファイルは残ります。キャッシュされた人物プロフィールは削除されます。",
   "Reply to #{id} · outside this loaded window": "#{id} への返信 · 読み込み範囲外",
+  "Reply to #{id} in another chat": "別のチャットの #{id} への返信",
   "Resolved": "解決済み",
   "Restore default for {name}": "{name} をデフォルトに戻す",
   "Restore defaults…": "デフォルトに戻す…",
