@@ -60,7 +60,8 @@
   message names both times with the display time zone: **Sent** by Telegram and **Saved** by the collector.
 - The journal's download button is named **Download entire journal (ZIP)** and asks first, naming the workspace
   and account, every source, the period up to the latest record with its time zone, the number of records and of
-  saved files, and, when the list is filtered, that the filters and search do not apply. **Choose records to
+  saved files, and, when the list is filtered, that the filters and search do not apply. The account is named as in
+  the workspace menu, followed by its @username and ID once each. **Choose records to
   export** next to it opens the export selection, with the journal's chosen source when there is one. The overview
   moved below the list, so search and filters come right after the page title.
 - `verify.py` checks the ASiC-E layer of an evidence container the way the report's Check tab does.
