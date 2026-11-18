@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "شوکیس رسائی بن گئی۔ آپ اسے کسی بھی وقت منسوخ کر سکتے ہیں۔",
   "Showcase link copied.": "شوکیس لنک کاپی ہو گیا۔",
   "Select and copy the link.": "لنک منتخب کر کے کاپی کریں۔",
-  "Global search": "عالمی تلاش"
+  "Global search": "عالمی تلاش",
+  "Checkpoint not timestamped": "چیک پوائنٹ پر ٹائم اسٹیمپ نہیں لگا",
+  "Checkpoint timestamp pending": "چیک پوائنٹ کا ٹائم اسٹیمپ زیر التوا"
 }

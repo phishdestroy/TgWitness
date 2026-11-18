@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "শোকেস অ্যাক্সেস তৈরি হয়েছে। যেকোনো সময় প্রত্যাহার করতে পারবেন।",
   "Showcase link copied.": "শোকেস লিংক কপি হয়েছে।",
   "Select and copy the link.": "লিংকটি নির্বাচন করে কপি করুন।",
-  "Global search": "বিশ্বব্যাপী অনুসন্ধান"
+  "Global search": "বিশ্বব্যাপী অনুসন্ধান",
+  "Checkpoint not timestamped": "চেকপয়েন্টে টাইমস্ট্যাম্প পাওয়া যায়নি",
+  "Checkpoint timestamp pending": "চেকপয়েন্টের টাইমস্ট্যাম্প অপেক্ষমাণ"
 }

@@ -25,6 +25,12 @@
 
 ## Unreleased
 
+- A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
+  the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
+  OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
+  time-stamping authority answer. When every service failed for the same reason, the description names it — for
+  example that requests outside Telegram are turned off. Before, a pass where 0 of 7 services answered was titled
+  **Checkpoint timestamped**. The signed records are unchanged.
 - In the chat search, choosing a row no longer changes anything by itself. A chat of the account is added only with
   **Observe**; a public chat found by **Global search** is joined only with **Join / open and observe**, which asks
   for the usual confirmation; its name opens the link preview instead. `j` / `k` move through saved chats only, and
@@ -50,6 +56,10 @@
   opens their existing **Seal** section instead of a missing `#check`; changing the panel language on the sign-in
   choice keeps **Files**, **Key** or **QR** and the independent-authorization choice instead of falling back to
   **Phone**; the journal keeps its pause and resume control for live updates at 320 and 390 px.
+- On a workspace set up for the main account, a folder or whole-account scope is refused when it is saved from
+  Sources or Investigation while observation runs or is set to resume, as it already was at start and in setup.
+  Before, it could be saved during recording and then made the next start fail.
+
 - **Join / open** on a public channel or group found by the chat search now joins it in one step: the panel takes the
   preview, asks for the usual action confirmation, joins, adds the chat to sources and opens it. Bots and people
   open the link preview, which says that opening a bot sends `/start`. Member counts follow the panel language.

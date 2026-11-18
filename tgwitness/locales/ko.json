@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "쇼케이스 접근을 만들었습니다. 언제든지 철회할 수 있습니다.",
   "Showcase link copied.": "쇼케이스 링크를 복사했습니다.",
   "Select and copy the link.": "링크를 선택해 복사하세요.",
-  "Global search": "전체 검색"
+  "Global search": "전체 검색",
+  "Checkpoint not timestamped": "체크포인트에 타임스탬프 없음",
+  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중"
 }
