@@ -6609,6 +6609,7 @@
   "Start over with another link": "Yana bir havola bilan qaytadan boshlang",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "Ushbu havola odamni yoki botni ochadi. Xususiy suhbatni eksport qilish uchun uni Suhbatlar bo'limida oching va u yerdan Eksport funksiyasidan foydalaning.",
   "Plan the export": "Eksportni rejalashtiring",
+  "The link changed. Plan the export for the new chat.": "Havola o‘zgardi. Yangi chat uchun eksportni rejalashtiring.",
   "@channel or https://t.me/…": "@channel yoki https://t.me/…",
   "Just download": "Shunchaki yuklab olish",
   "Easiest": "Eng oson",

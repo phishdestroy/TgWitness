@@ -30,6 +30,10 @@
   of the files it lists, and the signature or record it points to is named as not checked in the browser. Before, the
   signed copy of an ASiC-E failed with its added signature listed as outside the manifest, and the evidence record
   manifest was accepted without checking its hashes.
+- **Export a chat by link** keeps a plan tied to the link it was made for. Editing, pasting or clearing the link
+  removes the plan and its **Start export** button and says the link changed; a plan answer that arrives after the
+  link was edited, another link was checked or the panel was locked is dropped. Before, the plan of the first chat
+  stayed under a new link and **Start export** exported the first chat.
 - A connected account with **Chosen chats** and no chat enabled is shown as **Connected · no chats chosen** on Home
   and in the top bar, in amber, with **Choose chats** on Home. Before, both said a green **Observing** although no
   conversation was being recorded. Home also says **Reconnecting** while the connection is down, as the top bar did.

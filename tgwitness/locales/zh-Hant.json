@@ -6570,6 +6570,7 @@
   "Start over with another link": "使用另一個連結重新開始",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "此連結會開啟某位使用者或某個機器人。若要匯出私人聊天記錄，請在「聊天」中開啟該聊天，並使用當中的「匯出」功能。",
   "Plan the export": "規劃匯出",
+  "The link changed. Plan the export for the new chat.": "連結已變更。請為新聊天規劃匯出。",
   "@channel or https://t.me/…": "@channel 或 https://t.me/…",
   "Just download": "只要下載",
   "Easiest": "最簡單",

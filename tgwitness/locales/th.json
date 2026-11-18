@@ -6570,6 +6570,7 @@
   "Start over with another link": "เริ่มใหม่ด้วยลิงก์อื่น",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "ลิงก์นี้จะเปิดไปยังโปรไฟล์ของบุคคลหรือบอท หากต้องการส่งออกการสนทนาส่วนตัว ให้เปิดการสนทนานั้นในส่วน \"Chats\" แล้วใช้ตัวเลือก \"Export\" ที่นั่น",
   "Plan the export": "วางแผนการส่งออก",
+  "The link changed. Plan the export for the new chat.": "ลิงก์เปลี่ยนแล้ว วางแผนการส่งออกสำหรับแชตใหม่",
   "@channel or https://t.me/…": "@channel หรือ https://t.me/…",
   "Just download": "ดาวน์โหลดอย่างเดียว",
   "Easiest": "ง่ายที่สุด",

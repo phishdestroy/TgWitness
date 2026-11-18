@@ -6762,6 +6762,7 @@
   "Start over with another link": "ابدأ من جديد باستخدام رابط آخر",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "يؤدي هذا الرابط إلى فتح صفحة شخص أو روبوت. لتصدير محادثة خاصة، افتحها في قسم «المحادثات» واستخدم خيار «تصدير» الموجود هناك.",
   "Plan the export": "تخطيط عملية التصدير",
+  "The link changed. Plan the export for the new chat.": "تغيّر الرابط. خطّط لتصدير الدردشة الجديدة.",
   "@channel or https://t.me/…": "@channel أو https://t.me/…",
   "Just download": "تنزيل فقط",
   "Easiest": "الأسهل",

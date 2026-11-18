@@ -6609,6 +6609,7 @@
   "Start over with another link": "Volver a empezar con otro enlace",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "Este enlace abre un perfil de persona o de bot. Para exportar un chat privado, ábrelo en «Chats» y utiliza la opción «Exportar» que encontrarás allí.",
   "Plan the export": "Planificar la exportación",
+  "The link changed. Plan the export for the new chat.": "El enlace cambió. Planifica la exportación del nuevo chat.",
   "@channel or https://t.me/…": "@channel o https://t.me/…",
   "Just download": "Solo descargar",
   "Easiest": "Lo más fácil",
