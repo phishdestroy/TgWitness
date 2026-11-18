@@ -16,7 +16,7 @@ export function createCollectionControl({node, tr, status, workspace}) {
     const state = current?.demo ? "demo" : ({empty:"offline", collecting:"observing"}[account.kind] || account.kind);
     const text = {demo: tr("Demo"), offline: tr("Offline"), observing: tr("Observing"), reconnecting: tr("Reconnecting"),
       paused: tr("Paused"), sign_in: tr("Sign-in required"), failed: tr("Needs attention"), unavailable: tr("Unavailable")}[state];
-    indicator.dataset.state = state; indicator.title = text; indicator.setAttribute("aria-label", text);
+    indicator.dataset.state = state; indicator.title = text;
     if (label.textContent !== text) label.textContent = text;
   }
   return {update, confirmPause};

@@ -13,7 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator
 
 from . import __version__
 from .adapters import BrowserCapture, sqlite_snapshot
-from .export import export_zip
+from .export import ExportLimit, export_zip
 from .format import HEX, canonical, decode, digest
 from .journal import Journal, durable_write
 from .official import OfficialBrowser, OfficialOptions
@@ -480,6 +480,8 @@ def create_app(root, config=None):
             destination = recorder.journal.root / "exports" / (uuid.uuid4().hex + ".zip")
             try:
                 await asyncio.to_thread(export_zip, recorder.journal, destination)
+            except ExportLimit as exc:
+                raise HTTPException(409, str(exc)) from None
             except Exception:
                 raise HTTPException(503, "Export verification failed; no package was released") from None
             return FileResponse(destination, media_type="application/zip", filename="capture-" + config.kind + ".zip")

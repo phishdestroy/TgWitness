@@ -8,8 +8,8 @@ SETTING = "mode"
 RENAMED = {"mossad": "maximum"}
 PENDING = "mode_pending"
 EXISTING = "witnessed"
-MEANING = ("Only what the panel shows and suggests changed. Recording, signing and saved settings "
-           "are the same in every mode; a hidden section keeps working.")
+MEANING = ("The protection target the panel names and the setup it suggests changed. Recording, signing and saved "
+           "settings are the same in every mode, and nothing is deleted.")
 
 
 @dataclass(frozen=True)
@@ -101,7 +101,7 @@ NOT_YET = ("Threshold signing by several keys (FROST)", "Checkpoint mirror on Gi
            "Anchoring on Nostr relays", "Co-signers who countersign checkpoints")
 
 UNKNOWN = "Choose one of the protection modes."
-LOWER = "Confirm the lower mode: its hidden sections keep working and nothing is deleted."
+LOWER = "Confirm the lower mode: recording and signing stay the same and nothing is deleted."
 
 
 class Downgrade(ValueError):
@@ -167,17 +167,6 @@ def measure(facts, now=None):
     }
 
 
-def hidden_between(old, new):
-    low = RANK[old] if old else len(MODES)
-    return [f.id for f in FEATURES if RANK[new] < RANK[f.mode] <= low]
-
-
-def shown_between(old, new):
-    if old is None:
-        return []
-    return [f.id for f in FEATURES if RANK[old] < RANK[f.mode] <= RANK[new]]
-
-
 def state(store, facts, now=None):
     measured = measure(facts, now)
     layers = [{**asdict(layer), "state": measured[layer.id]} for layer in LAYERS]
@@ -201,8 +190,7 @@ def change(store, new, by, confirm_downgrade=False, reason="chosen", active=None
         store.set_setting(SETTING, new)
         store.db.execute("DELETE FROM settings WHERE key=?", (PENDING,))
         store.append("workspace.mode_changed", {
-            "from": old, "to": new, "reason": reason, "shown": shown_between(old, new),
-            "hidden": hidden_between(old, new), "active_layers": active, "total_layers": len(LAYERS),
+            "from": old, "to": new, "reason": reason, "active_layers": active, "total_layers": len(LAYERS),
             "by": by, "meaning": MEANING})
     return True
 
@@ -216,7 +204,6 @@ def migrate(store):
     with store.transaction():
         store.set_setting(SETTING, EXISTING)
         store.append("workspace.mode_changed", {
-            "from": None, "to": EXISTING, "reason": "existing installation", "shown": [],
-            "hidden": hidden_between(None, EXISTING), "active_layers": None, "total_layers": len(LAYERS),
-            "by": None, "meaning": MEANING})
+            "from": None, "to": EXISTING, "reason": "existing installation", "active_layers": None,
+            "total_layers": len(LAYERS), "by": None, "meaning": MEANING})
     return EXISTING

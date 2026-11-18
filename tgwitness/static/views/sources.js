@@ -91,6 +91,16 @@ export function createSources(context) {
   }
   buildMedia();
 
+  // The form edits only these fields; the rest of a saved rule, such as its own action, is kept.
+  function rules(saved, pick) {
+    return Object.fromEntries(media.map(([key]) => {
+      const rule = {...saved?.[key]}, value = pick(key);
+      rule.enabled = value.enabled; rule.max_mb = value.max_mb;
+      if (find('media-seconds-'+key)) {if (value.max_seconds) rule.max_seconds = value.max_seconds; else delete rule.max_seconds;}
+      return [key, rule];
+    }));
+  }
+
   function read() {
     return {
       monitoring: Object.fromEntries(monitoring.map(key => [key, find("monitor-" + key).checked])),
@@ -98,10 +108,10 @@ export function createSources(context) {
         ...baseline?.capture,
         download_media: find("download-media").checked, max_media_mb: Number(find("max-media").value),
         preserve_ephemeral_media: find("preserve-ephemeral-media").checked,
-        types: Object.fromEntries(media.map(([key]) => [key, {
+        types: rules(baseline?.capture?.types, key => ({
           enabled: find("media-on-" + key).checked, max_mb: Number(find("media-max-" + key).value),
-          ...(Number(find('media-seconds-'+key)?.value) ? {max_seconds:Number(find('media-seconds-'+key).value)} : {}),
-        }])),
+          max_seconds: Number(find('media-seconds-'+key)?.value),
+        })),
       },
       recheck: {recheck_minutes: Number(find("recheck-priority").value),
         recheck_other_minutes: Number(find("recheck-other").value)},
@@ -143,7 +153,8 @@ export function createSources(context) {
     if (!value || !baseline) return null;
     const {download_media, max_media_mb, preserve_ephemeral_media, types} = value.capture;
     return {monitoring: value.monitoring, recheck: value.recheck,
-      capture: {...baseline.capture, download_media, max_media_mb, preserve_ephemeral_media, types}};
+      capture: {...baseline.capture, download_media, max_media_mb, preserve_ephemeral_media,
+        types: rules(baseline.capture.types, key => types[key])}};
   }
 
   function renderDraft() {
