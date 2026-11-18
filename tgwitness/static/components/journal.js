@@ -178,10 +178,14 @@ export function createJournal(context){
   range.id="journal-window-range";pager.append(newer,older,latest);
   const windowStatus=node("span","journal-window-status");windowStatus.role="status";footer.replaceChildren(shown,range,pager,windowStatus);
   for(const [control,direction] of [[older,"older"],[newer,"newer"],[latest,"latest"]])control.addEventListener("click",async()=>{
-    if(pageBusy)return;const ticket=++pageTicket;pageBusy=true;syncPage();windowStatus.textContent=tr("Loading records…");
+    if(pageBusy)return;const ticket=++pageTicket,focused=document.activeElement===control;pageBusy=true;syncPage();windowStatus.textContent=tr("Loading records…");
     try{await context.page(direction);if(ticket===pageTicket)$("events-body").closest(".table-wrap").scrollTop=0;}
     catch(error){if(!["AbortError","StaleView"].includes(error.name))context.error(error.message);}
-    finally{if(ticket===pageTicket){pageBusy=false;windowStatus.textContent="";syncPage();}}
+    finally{if(ticket===pageTicket){pageBusy=false;windowStatus.textContent="";syncPage();
+      // The pressed button is disabled while the page loads, which drops keyboard focus to the page; give it back,
+      // or to the next pager button when this one has no further page.
+      if(focused&&(!document.activeElement||document.activeElement===document.body))
+        [control,older,newer,latest].find(button=>!button.disabled&&!button.hidden)?.focus();}}
   });
   const visibleRows=()=>[...$("events-body").querySelectorAll(".event-row")].filter(row=>!row.hidden);
   function selectRow(row,focus=false){

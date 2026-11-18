@@ -109,7 +109,8 @@ dialog[open]::backdrop { background: rgb(10 16 30 / .42); backdrop-filter: blur(
 .toast .toast-close:hover { opacity: 1; background: rgb(127 127 127 / .18); }
 .toast .toast-close .icon { width: 14px; height: 14px; }
 .toast::after { content: ""; position: absolute; inset: auto 0 0 0; height: 3px; background: currentColor; opacity: .28; transform-origin: left; animation: toast-life 5s linear forwards; }
-.toast.error::after { background: var(--danger); opacity: .7; animation-duration: 9s; }
+/* An error stays until it is closed: its line does not count down. */
+.toast.error::after { background: var(--danger); opacity: .7; animation: none; }
 .toast .toast-close { pointer-events: auto; cursor: pointer; }
 [dir=rtl] .toast::after { transform-origin: right; }
 @keyframes toast-life { to { transform: scaleX(0); } }
