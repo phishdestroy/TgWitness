@@ -10305,5 +10305,6 @@
   "Telegram asked to wait before the next account action.": "Telegram попросив зачекати перед наступною дією облікового запису.",
   "{n} s after loading": "через {n} с після завантаження",
   "Whole page": "Уся сторінка",
-  "Page after loading": "Сторінка після завантаження"
+  "Page after loading": "Сторінка після завантаження",
+  "Global search": "Глобальний пошук"
 }

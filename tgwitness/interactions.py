@@ -14,7 +14,7 @@ from telethon.tl import functions, types
 
 from . import keyboard, opsec, tuning
 from .collector import buttons_of, plain
-from .scope import kind_of, scope_settings, unexclude, visibility
+from .scope import kind_of, public_username, scope_settings, unexclude, visibility
 from .store import canonical
 
 ACTION = "interaction.action."
@@ -89,6 +89,9 @@ class Action(BaseModel):
 class ReadOnly(BaseModel):
     model_config = ConfigDict(extra="forbid")
     enabled: StrictBool
+
+
+SEARCH_LIMIT = 20
 
 
 def parse_link(value):
@@ -314,6 +317,35 @@ async def preview(collector, body):
         result["preview_event"] = event["seq"]
         collector.store.set_setting("interaction.preview." + result["preview_id"], result)
     return {k: v for k, v in result.items() if k not in ("raw", "target")}
+
+
+async def search_telegram(collector, query):
+    """Telegram's own search by name or username: the account's chats first, then public chats, as in the app."""
+    check_pause(collector)
+    query = query.strip().lstrip("@").strip()
+    if len(query) < 2:
+        return {"query": query, "results": []}
+    await collector.restore()
+    found = await collector.client(functions.contacts.SearchRequest(q=query, limit=SEARCH_LIMIT))
+    entities = {utils.get_peer_id(entity): entity for entity in [*found.chats, *found.users]}
+    results, seen = [], set()
+    for mine, peers in ((True, found.my_results), (False, found.results)):
+        for peer in peers:
+            chat_id = utils.get_peer_id(peer)
+            entity = entities.get(chat_id)
+            if entity is None or chat_id in seen or isinstance(entity, (types.ChannelForbidden, types.ChatForbidden)):
+                continue
+            seen.add(chat_id)
+            if isinstance(entity, types.User):
+                member = mine or bool(entity.contact)
+            else:
+                member = not getattr(entity, "left", False) and not getattr(entity, "deactivated", False)
+            results.append({"chat_id": chat_id, "title": utils.get_display_name(entity) or None,
+                            "kind": kind_of(entity), "username": public_username(entity),
+                            "participants_count": getattr(entity, "participants_count", None),
+                            "member": member, "verified": bool(getattr(entity, "verified", False)),
+                            "scam": bool(getattr(entity, "scam", False)), "fake": bool(getattr(entity, "fake", False))})
+    return {"query": query, "results": results}
 
 
 def observe(collector, entity, add=True):
