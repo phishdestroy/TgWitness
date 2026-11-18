@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The `search`, `context`, `messages`, `stats` and `export` commands refuse a chat, message, sender or sequence number
+  that does not fit in a signed 64-bit integer with a usage error naming the argument. Before, such a number stopped
+  the command with a Python traceback from the database.
 - An account export made by a sealed capture travels inside the evidence archive as `account-export.zip`, and its
   verify commands now name that file. Before, they named the panel download, `tgwitness-account-export-<id>.zip`, so a
   command copied as written ended in "file not found". A sharing copy of such an export names the same file for
