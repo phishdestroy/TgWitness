@@ -515,8 +515,10 @@ async def verify(*, ctx=Depends(current_context)):
             409,
             "Journal integrity verification failed. Preserve the directory for inspection.",
         ) from None
-    return {**checked, "conditions": evidence_status(ctx.app.state.store, ctx.app.state.vault,
-                                                     getattr(ctx.app.state, "run_receipt", None))}
+    conditions = evidence_status(ctx.app.state.store, ctx.app.state.vault, getattr(ctx.app.state, "run_receipt", None))
+    stamping = ctx.timestamps_health(ctx.outside_state())
+    conditions["timestamp_state"] = {"state": stamping["state"], "reason": stamping["reason"]}
+    return {**checked, "conditions": conditions}
 
 
 class EvidenceOperations:

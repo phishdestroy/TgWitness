@@ -59,6 +59,10 @@
   with verify.py; the JSON seal covers the report's canonical content, not its formatting; the PDF also carries a PDF
   signature; the exact bytes of a delivered file are compared by SHA-256 with the receipt or signed manifest. Before,
   one sentence said every report's seal covers all of its bytes and can be checked by dropping it onto the report.
+- **Verify journal** no longer promises the next timestamp and asks to turn on Evidence mode at the same time. With
+  timestamps on and no receipt yet it says it is waiting for the service, or that requests outside Telegram are
+  turned off so no timestamp can be requested, and the summary reads "Integrity only until a timestamp receipt covers
+  the last record". `/api/verify` adds `conditions.timestamp_state`.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
