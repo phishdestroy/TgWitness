@@ -67,7 +67,8 @@ GLOBAL_FIELDS = {kind: frozenset(fields.split()) for kind, fields in {
     "anchor.completed": "checkpoint results covered deferred meaning",
     "storage.low": "free_bytes threshold_bytes media_jobs",
     "storage.ok": "free_bytes media_jobs",
-    "scope.applied": "mode folder types own_actions added paused resumed excluded dialogs_inspected coverage",
+    "scope.applied": "mode folder types own_actions added paused resumed excluded dialogs_inspected dialog_refresh_failed "
+                     "coverage",
     "scope.changed": "before after acknowledged warning coverage",
     "recheck.completed": "chats duration_seconds recovered edited missing checked meaning"}.items()}
 PROBE_FIELDS = ("probe_chat_id", "probe_message_id", "ack_message_id", "witness_account_id")
