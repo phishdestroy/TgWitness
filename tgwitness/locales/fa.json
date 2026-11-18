@@ -3056,9 +3056,6 @@
   "None of the sources was found among the account's chats.": "هیچ‌یک از منابع در میان گفتگوهای حساب پیدا نشد.",
   "Sources are checked when observation starts.": "منابع هنگام شروع مشاهده بررسی می‌شوند.",
   "No source is selected.": "هیچ منبعی انتخاب نشده است.",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "نظرسنجی کوتاه {polled} کانال از {total} کانال را بررسی می‌کند؛ بقیه همچنان به‌روزرسانی‌های ارسالی و بررسی‌های دوباره را دریافت می‌کنند.",
-  "Channels of the same priority take turns every 10 minutes.": "کانال‌های هم‌اولویت هر ۱۰ دقیقه به نوبت جابه‌جا می‌شوند.",
-  "Not short-polled now: {names}": "اکنون خارج از نظرسنجی کوتاه: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "قابل مشاهده: {visible} · افزوده‌شده به‌طور خودکار: {added} · پیدا نشده: {unconfirmed}",
   "Attachments are being saved.": "پیوست‌ها در حال ذخیره شدن هستند.",
   "Disk almost full: downloads are paused until space is free.": "دیسک تقریباً پر است: بارگیری‌ها تا آزاد شدن فضا متوقف شده‌اند.",
@@ -10276,5 +10273,10 @@
   "Record #{n} is hidden by the filters": "رکورد #{n} با فیلترها پنهان شده است",
   "Enter a record number": "شماره رکورد را وارد کنید",
   "Copy description": "کپی توضیح",
-  "No text to copy": "متنی برای کپی وجود ندارد"
+  "No text to copy": "متنی برای کپی وجود ندارد",
+  "ASiC-E container damaged: {reason}": "کانتینر ASiC-E آسیب دیده است: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "کانتینر ASiC-E شناسایی شد: مانیفست آن {n} فایل را فهرست می‌کند و SHA-256 آن‌ها مطابقت دارد.",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "امضای CAdES کانتینر (META-INF/signature.p7s) در این مرورگر بررسی نشد.",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml یا META-INF/signature.p7s وجود ندارد",
+  "its manifest cannot be read": "مانیفست آن خوانده نمی‌شود"
 }

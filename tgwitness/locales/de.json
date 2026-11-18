@@ -3056,9 +3056,6 @@
   "None of the sources was found among the account's chats.": "Keine der Quellen wurde unter den Chats des Kontos gefunden.",
   "Sources are checked when observation starts.": "Quellen werden beim Start der Beobachtung geprüft.",
   "No source is selected.": "Keine Quelle ausgewählt.",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "Die Kurzabfrage prüft {polled} von {total} Kanälen; die übrigen erhalten weiterhin zugestellte Updates und erneute Prüfungen.",
-  "Channels of the same priority take turns every 10 minutes.": "Kanäle derselben Priorität wechseln sich alle 10 Minuten ab.",
-  "Not short-polled now: {names}": "Derzeit nicht in der Kurzabfrage: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Sichtbar: {visible} · automatisch hinzugefügt: {added} · nicht gefunden: {unconfirmed}",
   "Attachments are being saved.": "Anhänge werden gespeichert.",
   "Disk almost full: downloads are paused until space is free.": "Speicher fast voll: Downloads sind pausiert, bis Platz frei wird.",
@@ -10276,5 +10273,10 @@
   "Record #{n} is hidden by the filters": "Datensatz #{n} ist durch die Filter ausgeblendet",
   "Enter a record number": "Datensatznummer eingeben",
   "Copy description": "Beschreibung kopieren",
-  "No text to copy": "Kein Text zum Kopieren"
+  "No text to copy": "Kein Text zum Kopieren",
+  "ASiC-E container damaged: {reason}": "ASiC-E-Container beschädigt: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E-Container erkannt: sein Manifest führt {n} Dateien auf, ihre SHA-256 stimmen überein.",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Die CAdES-Signatur des Containers (META-INF/signature.p7s) wurde in diesem Browser nicht geprüft.",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml oder META-INF/signature.p7s fehlt",
+  "its manifest cannot be read": "sein Manifest ist nicht lesbar"
 }

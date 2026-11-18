@@ -3056,9 +3056,6 @@
   "None of the sources was found among the account's chats.": "कोई भी स्रोत खाते की चैट में नहीं मिला।",
   "Sources are checked when observation starts.": "स्रोतों की जाँच निरीक्षण शुरू होने पर होती है।",
   "No source is selected.": "कोई स्रोत चुना नहीं गया है।",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "छोटी पोलिंग {total} में से {polled} चैनल जाँचती है; बाकी चैनलों को भेजे गए अपडेट और दोबारा जाँच मिलती रहती है।",
-  "Channels of the same priority take turns every 10 minutes.": "एक ही प्राथमिकता वाले चैनल हर 10 मिनट में बारी-बारी से आते हैं।",
-  "Not short-polled now: {names}": "अभी छोटी पोलिंग से बाहर: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "दिखाई देने वाले: {visible} · अपने आप जोड़े गए: {added} · नहीं मिले: {unconfirmed}",
   "Attachments are being saved.": "अटैचमेंट सहेजे जा रहे हैं।",
   "Disk almost full: downloads are paused until space is free.": "डिस्क लगभग भर गई है: जगह खाली होने तक डाउनलोड रुके हुए हैं।",
@@ -10276,5 +10273,10 @@
   "Record #{n} is hidden by the filters": "रिकॉर्ड #{n} फ़िल्टर के कारण छिपा है",
   "Enter a record number": "रिकॉर्ड संख्या दर्ज करें",
   "Copy description": "विवरण कॉपी करें",
-  "No text to copy": "कॉपी करने के लिए कोई पाठ नहीं"
+  "No text to copy": "कॉपी करने के लिए कोई पाठ नहीं",
+  "ASiC-E container damaged: {reason}": "ASiC-E कंटेनर क्षतिग्रस्त: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E कंटेनर पहचाना गया: इसके मैनिफेस्ट में {n} फ़ाइलें हैं और उनके SHA-256 मेल खाते हैं।",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "इस ब्राउज़र में कंटेनर के CAdES हस्ताक्षर (META-INF/signature.p7s) की जाँच नहीं की गई।",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml या META-INF/signature.p7s मौजूद नहीं है",
+  "its manifest cannot be read": "इसका मैनिफेस्ट पढ़ा नहीं जा सकता"
 }

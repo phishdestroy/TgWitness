@@ -3040,9 +3040,6 @@
   "None of the sources was found among the account's chats.": "ไม่พบแหล่งข้อมูลใดเลยในแชตของบัญชี",
   "Sources are checked when observation starts.": "แหล่งข้อมูลจะถูกตรวจสอบเมื่อเริ่มการสังเกต",
   "No source is selected.": "ยังไม่ได้เลือกแหล่งข้อมูล",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "การสำรวจแบบสั้นตรวจสอบ {polled} จาก {total} ช่อง ช่องอื่นยังคงได้รับการอัปเดตที่ส่งมาและการตรวจสอบซ้ำ",
-  "Channels of the same priority take turns every 10 minutes.": "ช่องที่มีลำดับความสำคัญเดียวกันจะผลัดกันทุก 10 นาที",
-  "Not short-polled now: {names}": "ขณะนี้อยู่นอกการสำรวจแบบสั้น: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "มองเห็นได้: {visible} · เพิ่มอัตโนมัติ: {added} · ไม่พบ: {unconfirmed}",
   "Attachments are being saved.": "กำลังบันทึกไฟล์แนบ",
   "Disk almost full: downloads are paused until space is free.": "ดิสก์ใกล้เต็ม: หยุดดาวน์โหลดชั่วคราวจนกว่าจะมีพื้นที่ว่าง",
@@ -10225,5 +10222,10 @@
   "Record #{n} is hidden by the filters": "ระเบียน #{n} ถูกซ่อนโดยตัวกรอง",
   "Enter a record number": "ป้อนหมายเลขระเบียน",
   "Copy description": "คัดลอกคำอธิบาย",
-  "No text to copy": "ไม่มีข้อความให้คัดลอก"
+  "No text to copy": "ไม่มีข้อความให้คัดลอก",
+  "ASiC-E container damaged: {reason}": "คอนเทนเนอร์ ASiC-E เสียหาย: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "รู้จำคอนเทนเนอร์ ASiC-E แล้ว: แมนิเฟสต์ระบุ {n} ไฟล์ และ SHA-256 ตรงกัน",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "ไม่ได้ตรวจสอบลายเซ็น CAdES ของคอนเทนเนอร์ (META-INF/signature.p7s) ในเบราว์เซอร์นี้",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "ไม่มี META-INF/ASiCManifest.xml หรือ META-INF/signature.p7s",
+  "its manifest cannot be read": "อ่านแมนิเฟสต์ไม่ได้"
 }

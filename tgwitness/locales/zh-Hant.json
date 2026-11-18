@@ -3040,9 +3040,6 @@
   "None of the sources was found among the account's chats.": "未在帳號的聊天中找到任何來源。",
   "Sources are checked when observation starts.": "來源會在觀察開始時檢查。",
   "No source is selected.": "未選擇任何來源。",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "短輪詢檢查 {total} 個頻道中的 {polled} 個；其餘頻道仍會收到推送的更新與重新檢查。",
-  "Channels of the same priority take turns every 10 minutes.": "同一優先順序的頻道每 10 分鐘輪替一次。",
-  "Not short-polled now: {names}": "目前不在短輪詢中：{names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "可見：{visible} · 自動加入：{added} · 未找到：{unconfirmed}",
   "Attachments are being saved.": "正在儲存附件。",
   "Disk almost full: downloads are paused until space is free.": "磁碟即將用盡：下載已暫停，直到有可用空間。",
@@ -10225,5 +10222,10 @@
   "Record #{n} is hidden by the filters": "記錄 #{n} 已被篩選條件隱藏",
   "Enter a record number": "請輸入記錄編號",
   "Copy description": "複製說明",
-  "No text to copy": "沒有可複製的文字"
+  "No text to copy": "沒有可複製的文字",
+  "ASiC-E container damaged: {reason}": "ASiC-E 容器已損壞：{reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "已識別 ASiC-E 容器：其清單列出 {n} 個檔案，SHA-256 均相符。",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "此瀏覽器未檢查容器的 CAdES 簽章（META-INF/signature.p7s）。",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "缺少 META-INF/ASiCManifest.xml 或 META-INF/signature.p7s",
+  "its manifest cannot be read": "無法讀取其清單"
 }

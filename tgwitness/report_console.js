@@ -471,17 +471,22 @@ async function startViewer(meta){
       const signed=await crypto.subtle.verify({name:"Ed25519"},key,bytes(sigText.trim()),manifestBytes);
       if(!signed)throw new Error(say("Manifest signature NOT valid."));
       const fp=await sha(bytes(manifest.public_key)),same=fp===meta.fingerprint;
-      const names=Object.keys(manifest.files||{}),wrong=[],absent=[];let done=0;
+      const names=Object.keys(manifest.files||{}),wrong=[],absent=[],hashes=new Map();let done=0;
       if(!names.length||names.some(n=>!safeName(n)||!/^([a-f0-9]{64})$/.test(manifest.files[n])))throw new Error(say("Invalid file inventory."));
       if(!same||!manifest.report||manifest.report.id!==meta.report_id)throw new Error(say("This archive belongs to a different report or signing key."));
       for(const file of names){const data=await source.bytes(file);done++;if(done%5===0||done===names.length)
         out.innerHTML='<div class="callout info">'+esc(sayf("Checking files: {a} of {b}",{a:done,b:names.length}))+"</div>";
-        if(!data){absent.push(file);continue;}if(await sha(data)!==manifest.files[file])wrong.push(file);}
-      const extra=(await source.list()).filter(n=>!names.includes(n)&&!["manifest.json","manifest.sig"].includes(n));
-      const good=signed&&same&&!wrong.length&&!absent.length&&!extra.length;
+        if(!data){absent.push(file);continue;}const digest=await sha(data);hashes.set(file,digest);if(digest!==manifest.files[file])wrong.push(file);}
+      const listed=await source.list();
+      const asic=await container(source,listed,hashes);
+      const extra=listed.filter(n=>!names.includes(n)&&!["manifest.json","manifest.sig"].includes(n)&&!(asic&&asic.members.includes(n)));
+      const good=signed&&same&&!wrong.length&&!absent.length&&!extra.length&&!(asic&&asic.problem);
       out.innerHTML='<div class="callout '+(good?"ok":"bad")+'"><b>'+esc(good?sayf("All {n} files match the signed manifest.",{n:names.length}):say("The archive does not match its signed manifest."))+"</b><ul>"
         +"<li>"+esc(signed?say("Manifest signature valid (Ed25519)."):say("Manifest signature NOT valid."))+"</li>"
         +"<li>"+esc(same?say("Signed by the key of this report."):sayf("Signed by a different key: {fp}",{fp}))+"</li>"
+        +(asic?"<li>"+esc(asic.problem?sayf("ASiC-E container damaged: {reason}",{reason:asic.problem})
+          :sayf("ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.",{n:asic.references}))+"</li>"
+          +"<li>"+esc(say("The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser."))+"</li>":"")
         +(wrong.length?"<li>"+esc(sayf("Changed: {list}",{list:wrong.slice(0,30).join(", ")}))+"</li>":"")
         +(absent.length?"<li>"+esc(sayf("Missing: {list}",{list:absent.slice(0,30).join(", ")}))+"</li>":"")
         +(extra.length?"<li>"+esc(sayf("Not in the manifest (not covered by the signature): {list}",{list:extra.slice(0,30).join(", ")}))+"</li>":"")
@@ -492,6 +497,36 @@ async function startViewer(meta){
     catch(e){out.innerHTML='<div class="callout bad">'+esc(e&&e.message?e.message:String(e))+"</div>";V.checked=out.innerHTML;}
     finally{V.checking=false;for(const input of $$("#c-zip,#c-dir")){input.disabled=false;input.value="";}}}
 
+  // ASiC-E (ETSI EN 319 162): a stored "mimetype" entry with this exact text, META-INF/ASiCManifest.xml listing every
+  // data object with its SHA-256, and the CAdES signature over that manifest. Only these known entries are container
+  // objects; anything else under META-INF/ stays outside the signed manifest.
+  async function container(source,listed,hashes){
+    if(!listed.includes("mimetype"))return null;
+    const type=await source.text("mimetype");
+    if(type!=="application/vnd.etsi.asic-e+zip")return null;
+    const known=["mimetype","META-INF/ASiCManifest.xml","META-INF/signature.p7s","META-INF/evidencerecord.ers","META-INF/ASiCEvidenceRecordManifest.xml"];
+    const members=listed.filter(n=>known.includes(n)),result={members,references:0,problem:""};
+    const xml=await source.text("META-INF/ASiCManifest.xml");
+    if(!xml||!listed.includes("META-INF/signature.p7s")){result.problem=say("META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing");return result;}
+    const doc=new DOMParser().parseFromString(xml,"application/xml"),NS="http://uri.etsi.org/02918/v1.2.1#",DS="http://www.w3.org/2000/09/xmldsig#";
+    const refs=doc.getElementsByTagName("parsererror").length?[]:[...doc.getElementsByTagNameNS(NS,"DataObjectReference")];
+    const sig=[...doc.getElementsByTagNameNS(NS,"SigReference")].map(r=>r.getAttribute("URI"));
+    if(!refs.length||sig.length!==1||sig[0]!=="META-INF/signature.p7s"){result.problem=say("its manifest cannot be read");return result;}
+    const objects=listed.filter(n=>n!=="mimetype"&&!n.startsWith("META-INF/")),seen=new Set(),changed=[];
+    for(const ref of refs){
+      let uri;try{uri=decodeURIComponent(ref.getAttribute("URI")||"");}catch{uri="";}
+      const method=ref.getElementsByTagNameNS(DS,"DigestMethod")[0]?.getAttribute("Algorithm"),value=ref.getElementsByTagNameNS(DS,"DigestValue")[0]?.textContent.trim();
+      if(!safeName(uri)||seen.has(uri)||method!=="http://www.w3.org/2001/04/xmlenc#sha256"||!value){result.problem=say("its manifest cannot be read");return result;}
+      seen.add(uri);const cached=hashes.get(uri),data=cached?null:await source.bytes(uri);
+      let expected="";try{expected=[...atob(value)].map(c=>c.charCodeAt(0).toString(16).padStart(2,"0")).join("");}catch{}
+      if((cached||(data&&await sha(data)))!==expected)changed.push(uri);
+    }
+    const unlisted=objects.filter(n=>!seen.has(n));
+    result.references=seen.size;
+    if(changed.length||unlisted.length)result.problem=[changed.length?sayf("Changed: {list}",{list:changed.slice(0,30).join(", ")}):"",
+      unlisted.length?sayf("Not in the manifest (not covered by the signature): {list}",{list:unlisted.slice(0,30).join(", ")}):""].filter(Boolean).join(" · ");
+    return result;
+  }
   const MAX_FILE=256*1024*1024,MAX_TOTAL=4*1024**3;
   function safeName(name){return typeof name==="string"&&name.length>0&&!/[\\\x00-\x1f\x7f:]/.test(name)
     &&!name.startsWith("/")&&name.split("/").every(p=>p&&p!=="."&&p!=="..");}

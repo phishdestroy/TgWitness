@@ -3120,9 +3120,6 @@
   "None of the sources was found among the account's chats.": "لم يُعثر على أي مصدر بين دردشات الحساب.",
   "Sources are checked when observation starts.": "تُفحص المصادر عند بدء المراقبة.",
   "No source is selected.": "لم يُحدَّد أي مصدر.",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "يفحص الاستطلاع القصير {polled} من أصل {total} قناة؛ وتواصل القنوات الأخرى تلقي التحديثات المرسلة وعمليات إعادة الفحص.",
-  "Channels of the same priority take turns every 10 minutes.": "تتناوب القنوات ذات الأولوية نفسها كل 10 دقائق.",
-  "Not short-polled now: {names}": "خارج الاستطلاع القصير الآن: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "ظاهرة: {visible} · أضيفت تلقائيًا: {added} · غير موجودة: {unconfirmed}",
   "Attachments are being saved.": "يجري حفظ المرفقات.",
   "Disk almost full: downloads are paused until space is free.": "القرص ممتلئ تقريبًا: التنزيلات متوقفة مؤقتًا حتى تتوفر مساحة.",
@@ -10480,5 +10477,10 @@
   "Record #{n} is hidden by the filters": "السجل رقم {n} مخفي بسبب عوامل التصفية",
   "Enter a record number": "أدخل رقم السجل",
   "Copy description": "نسخ الوصف",
-  "No text to copy": "لا يوجد نص للنسخ"
+  "No text to copy": "لا يوجد نص للنسخ",
+  "ASiC-E container damaged: {reason}": "حاوية ASiC-E تالفة: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "تم التعرف على حاوية ASiC-E: يسرد بيانها {n} ملفًا وتتطابق قيم SHA-256 الخاصة بها.",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "لم يتم التحقق من توقيع CAdES للحاوية (META-INF/signature.p7s) في هذا المتصفح.",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "الملف META-INF/ASiCManifest.xml أو META-INF/signature.p7s مفقود",
+  "its manifest cannot be read": "تعذّر قراءة بيانه"
 }
