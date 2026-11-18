@@ -139,7 +139,9 @@ export function createCaseBoard(ctx){
     const mentions=new Set(draft.mentions);
     const mention=select(form,'Mention investigator',[['','No mention'],...participants.map(item=>[item.id,item.label])]);
     mention.addEventListener('change',()=>{const person=participants.find(item=>item.id===mention.value);if(!person)return;mentions.add(person.id);text.value+=(text.value&&!text.value.endsWith(' ')?' ':'')+'@'+person.label+' ';draft.text=text.value;draft.mentions=[...mentions];mention.value='';text.focus();});
-    form.prepend(replyLabel);form.append(btn('Post comment',async()=>{if(!text.reportValidity())return;const saved=await post('comment',{parent_id:replyTo,text:text.value,mentions:[...mentions]});if(saved){drafts.delete(id);await choose(id);}},'primary'));
+    form.prepend(replyLabel);form.append(btn('Post comment',async()=>{if(!text.reportValidity())return;const sent=text.value,sentMentions=[...mentions];const saved=await post('comment',{parent_id:replyTo,text:sent,mentions:sentMentions});
+      if(saved){if(draft.text.startsWith(sent)){draft.text=draft.text.slice(sent.length).trimStart();const named=item=>participants.find(person=>person.id===item)?.label;draft.mentions=draft.mentions.filter(item=>!sentMentions.includes(item)||named(item)&&draft.text.includes('@'+named(item)));}
+        if(!draft.text.trim())drafts.delete(id);await choose(id);}},'primary'));
     form.addEventListener('submit',event=>event.preventDefault());if(may('board.write'))right.append(form);
     if(focused&&may('board.write')){text.focus({preventScroll:true});if(caret)text.setSelectionRange(...caret);}
     if(detail.status_history.length){right.append(n('h3','',t('Status history')));for(const item of detail.status_history)right.append(n('p','board-status-history',item.access_label+' · '+item.state+' · '+time(item.at)+(item.reason?' — '+item.reason:'')));}
@@ -154,11 +156,13 @@ export function createCaseBoard(ctx){
     const body=n('div');dialog.append(head,body);dialog.setAttribute('aria-label',t(title));dialog.addEventListener('close',()=>{own.remove();if(dialog===own)dialog=null;},{once:true});document.body.append(dialog);dialog.showModal();return body;}
   async function post(action,payload){const stamp=key(),rev=revision;const saved=await json('board/'+action,payload);if(!valid(stamp,rev))return null;
     if(action==='remove'&&selected?.card.id===payload.card_id){selected=null;right.hidden=true;threadTicket++;}
-    liveCursor=Math.max(liveCursor,saved.seq);toast(t('Added to Case Board. Nothing was sent to Telegram.'));if(state.view==='board')await load();return saved;}
+    liveCursor=Math.max(liveCursor,saved.seq);toast(t('Added to Case Board. Nothing was sent to Telegram.'));if(state.view==='board')await load().catch(error=>toast(error.message,true));return saved;}
   async function bookmark(event){if(!may('board.write'))return;await post('bookmark',{target:{event_hash:event.hash,seq:event.seq}});}
   async function bookmarkOptions(event){const stamp=key(),rev=revision,result=await json('board?limit=1');if(!valid(stamp,rev))return;
-    const body=modal('Bookmark options'),title=field(body,'Title'),note=field(body,'Note','textarea'),labels=field(body,'Labels, separated by commas'),collection=select(body,'Collection',[['','Inbox'],...result.collections.map(item=>[item.id,item.title])]);
-    body.append(btn('Add to board',async()=>{const saved=await post('bookmark',{target:{event_hash:event.hash,seq:event.seq},title:title.value,note:note.value,labels:labels.value.split(',').map(value=>value.trim()).filter(Boolean)});
+    const fits=item=>!item.chat_ids?.length||event.chat_id!=null&&item.chat_ids.includes(event.chat_id);
+    const body=modal('Bookmark options'),title=field(body,'Title'),note=field(body,'Note','textarea'),labels=field(body,'Labels, separated by commas'),collection=select(body,'Collection',[['','Inbox'],...result.collections.filter(fits).map(item=>[item.id,item.title])]);
+    let saved=null;body.append(btn('Add to board',async()=>{saved=saved||await post('bookmark',{target:{event_hash:event.hash,seq:event.seq},title:title.value,note:note.value,labels:labels.value.split(',').map(value=>value.trim()).filter(Boolean)});
+      if(saved)for(const input of [title,note,labels])input.readOnly=true;
       if(saved&&collection.value)await post('move',{card_id:saved.payload.id,collection_id:collection.value});if(saved)closeDialog(body.closest('dialog'));},'primary'));}
   async function editDialog(card){const body=modal('Edit card'),title=field(body,'Title','text',card.title||''),note=field(body,'Note','textarea',card.note||''),labels=field(body,'Labels, separated by commas','text',(card.labels||[]).join(', '));
     body.append(n('p','hint',t('Saving appends a signed revision. The previous version remains in the annotations history.')),
