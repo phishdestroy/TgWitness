@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- **Delete workspace** on the account page of an additional workspace is reachable before a Telegram account is
+  connected. It sits in its own **Workspace** group, apart from signing out of Telegram and forgetting the session.
 - After a collector process that ended without an orderly stop, the next start checks every attachment recorded
   as saved during that run against its SHA-256. A missing or different file is recorded as
   `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
