@@ -25,6 +25,14 @@
 
 ## Unreleased
 
+- `verify.py` checks the ASiC-E layer of an evidence container the way the report's Check tab does.
+  `META-INF/ASiCManifest.xml` must list every file of the archive with its SHA-256, an added
+  `META-INF/ASiCManifestNNN.xml` or `META-INF/ASiCEvidenceRecordManifest.xml` must match the files it lists, and an
+  entry under `META-INF/` that none of them covers fails the check with its name. The CAdES signatures are still not
+  checked and are named as such. Before, `verify.py` reported an ASiC-E with a changed `ASiCManifest.xml` digest or an
+  added `META-INF/notes.txt` as verified and only counted the container entries, while the Check tab called the same
+  file damaged. When only the container is damaged, the Check tab now says that all files match the signed manifest
+  but the ASiC-E container is damaged, instead of saying that the archive does not match its signed manifest.
 - The first setup step shows the three goals as short cards with one line on what each gives (**Download once**,
   **Track changes**, **Collect case records**) and the full description of the chosen goal under them, so all three
   titles fit above the bottom buttons at 320 and 390 px. Before, the long descriptions pushed the third goal below

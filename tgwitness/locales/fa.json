@@ -10320,5 +10320,6 @@
   "Choose a chat type or account data to export.": "یک نوع گفتگو یا دادهٔ حساب را برای خروجی گرفتن انتخاب کنید.",
   "{data} · no chats or attachments": "{data} · بدون گفتگو و پیوست",
   "No observation period recorded": "هیچ دورهٔ مشاهده‌ای ثبت نشده است",
-  "0 records selected": "۰ رکورد انتخاب شده"
+  "0 records selected": "۰ رکورد انتخاب شده",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "همهٔ {n} فایل با مانیفست امضاشده مطابقت دارند، اما کانتینر ASiC-E آسیب دیده است."
 }

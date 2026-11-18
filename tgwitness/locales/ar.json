@@ -10524,5 +10524,6 @@
   "Choose a chat type or account data to export.": "اختر نوع محادثة أو بيانات حساب للتصدير.",
   "{data} · no chats or attachments": "{data} · بلا محادثات أو مرفقات",
   "No observation period recorded": "لم تُسجَّل فترة مراقبة",
-  "0 records selected": "لم يُختر أي سجل"
+  "0 records selected": "لم يُختر أي سجل",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "تتطابق جميع الملفات ({n}) مع قائمة البيانات الموقعة، لكن حاوية ASiC-E تالفة."
 }

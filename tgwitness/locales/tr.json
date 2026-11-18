@@ -10320,5 +10320,6 @@
   "Choose a chat type or account data to export.": "Dışa aktarmak için bir sohbet türü veya hesap verisi seçin.",
   "{data} · no chats or attachments": "{data} · sohbet ve ek yok",
   "No observation period recorded": "Kaydedilmiş gözlem dönemi yok",
-  "0 records selected": "0 kayıt seçildi"
+  "0 records selected": "0 kayıt seçildi",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "{n} dosyanın tümü imzalı manifest ile uyumlu, ancak ASiC-E kapsayıcısı bozuk."
 }

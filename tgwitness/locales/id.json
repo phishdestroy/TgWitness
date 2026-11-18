@@ -10269,5 +10269,6 @@
   "Choose a chat type or account data to export.": "Pilih jenis obrolan atau data akun untuk diekspor.",
   "{data} · no chats or attachments": "{data} · tanpa obrolan atau lampiran",
   "No observation period recorded": "Tidak ada periode pengamatan yang tercatat",
-  "0 records selected": "0 catatan dipilih"
+  "0 records selected": "0 catatan dipilih",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Semua {n} berkas sesuai dengan manifes yang ditandatangani, tetapi kontainer ASiC-E rusak."
 }

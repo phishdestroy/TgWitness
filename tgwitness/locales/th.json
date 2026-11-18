@@ -10269,5 +10269,6 @@
   "Choose a chat type or account data to export.": "เลือกประเภทแชตหรือข้อมูลบัญชีที่จะส่งออก",
   "{data} · no chats or attachments": "{data} · ไม่มีแชตหรือไฟล์แนบ",
   "No observation period recorded": "ไม่มีการบันทึกช่วงเวลาการสังเกต",
-  "0 records selected": "เลือก 0 รายการ"
+  "0 records selected": "เลือก 0 รายการ",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "ไฟล์ทั้ง {n} ไฟล์ตรงกับ manifest ที่ลงนามแล้ว แต่คอนเทนเนอร์ ASiC-E เสียหาย"
 }

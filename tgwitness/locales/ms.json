@@ -10269,5 +10269,6 @@
   "Choose a chat type or account data to export.": "Pilih jenis sembang atau data akaun untuk dieksport.",
   "{data} · no chats or attachments": "{data} · tanpa sembang atau lampiran",
   "No observation period recorded": "Tiada tempoh pemerhatian direkodkan",
-  "0 records selected": "0 rekod dipilih"
+  "0 records selected": "0 rekod dipilih",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Semua {n} fail sepadan dengan manifes yang ditandatangani, tetapi bekas ASiC-E rosak."
 }

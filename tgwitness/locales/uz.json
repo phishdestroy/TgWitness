@@ -10320,5 +10320,6 @@
   "Choose a chat type or account data to export.": "Eksport uchun chat turini yoki akkaunt ma'lumotlarini tanlang.",
   "{data} · no chats or attachments": "{data} · chatlar va ilovalarsiz",
   "No observation period recorded": "Kuzatuv davri qayd etilmagan",
-  "0 records selected": "0 ta yozuv tanlandi"
+  "0 records selected": "0 ta yozuv tanlandi",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Barcha {n} ta fayl imzolangan manifestga mos keladi, lekin ASiC-E konteyneri shikastlangan."
 }

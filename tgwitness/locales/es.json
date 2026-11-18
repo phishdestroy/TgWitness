@@ -10330,5 +10330,6 @@
   "Choose a chat type or account data to export.": "Elige un tipo de chat o datos de la cuenta para exportar.",
   "{data} · no chats or attachments": "{data} · sin chats ni adjuntos",
   "No observation period recorded": "No se registró ningún periodo de observación",
-  "0 records selected": "0 registros seleccionados"
+  "0 records selected": "0 registros seleccionados",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Los {n} archivos coinciden con el manifiesto firmado, pero el contenedor ASiC-E está dañado."
 }

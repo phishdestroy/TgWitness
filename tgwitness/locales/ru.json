@@ -10392,5 +10392,6 @@
   "Choose a chat type or account data to export.": "Выберите тип чатов или данные аккаунта для экспорта.",
   "{data} · no chats or attachments": "{data} · без чатов и вложений",
   "No observation period recorded": "Период наблюдения не зафиксирован",
-  "0 records selected": "Выбрано записей: 0"
+  "0 records selected": "Выбрано записей: 0",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Все файлы ({n}) соответствуют подписанному манифесту, но контейнер ASiC-E повреждён."
 }

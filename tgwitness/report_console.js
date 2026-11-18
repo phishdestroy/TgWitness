@@ -481,7 +481,10 @@ async function startViewer(meta){
       const asic=await container(source,listed,hashes);
       const extra=listed.filter(n=>!names.includes(n)&&!["manifest.json","manifest.sig"].includes(n)&&!(asic&&asic.members.includes(n)));
       const good=signed&&same&&!wrong.length&&!absent.length&&!extra.length&&!(asic&&asic.problem);
-      out.innerHTML='<div class="callout '+(good?"ok":"bad")+'"><b>'+esc(good?sayf("All {n} files match the signed manifest.",{n:names.length}):say("The archive does not match its signed manifest."))+"</b><ul>"
+      const sealed=signed&&same&&!wrong.length&&!absent.length&&extra.every(n=>n.startsWith("META-INF/"));
+      out.innerHTML='<div class="callout '+(good?"ok":"bad")+'"><b>'+esc(good?sayf("All {n} files match the signed manifest.",{n:names.length})
+        :asic&&sealed?sayf("All {n} files match the signed manifest, but the ASiC-E container is damaged.",{n:names.length})
+        :say("The archive does not match its signed manifest."))+"</b><ul>"
         +"<li>"+esc(signed?say("Manifest signature valid (Ed25519)."):say("Manifest signature NOT valid."))+"</li>"
         +"<li>"+esc(same?say("Signed by the key of this report."):sayf("Signed by a different key: {fp}",{fp}))+"</li>"
         +(asic?"<li>"+esc(asic.problem?sayf("ASiC-E container damaged: {reason}",{reason:asic.problem})

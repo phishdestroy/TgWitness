@@ -10269,5 +10269,6 @@
   "Choose a chat type or account data to export.": "내보낼 채팅 유형이나 계정 데이터를 선택하세요.",
   "{data} · no chats or attachments": "{data} · 채팅 및 첨부 파일 없음",
   "No observation period recorded": "기록된 관찰 기간 없음",
-  "0 records selected": "선택한 기록 0개"
+  "0 records selected": "선택한 기록 0개",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "파일 {n}개가 모두 서명된 매니페스트와 일치하지만 ASiC-E 컨테이너가 손상되었습니다."
 }

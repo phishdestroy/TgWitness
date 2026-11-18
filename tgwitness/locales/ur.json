@@ -10320,5 +10320,6 @@
   "Choose a chat type or account data to export.": "برآمد کے لیے چیٹ کی قسم یا اکاؤنٹ کا ڈیٹا منتخب کریں۔",
   "{data} · no chats or attachments": "{data} · بغیر چیٹس یا اٹیچمنٹس کے",
   "No observation period recorded": "کوئی مشاہداتی مدت درج نہیں ہوئی",
-  "0 records selected": "0 ریکارڈ منتخب"
+  "0 records selected": "0 ریکارڈ منتخب",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "تمام {n} فائلیں دستخط شدہ مینیفیسٹ سے مطابقت رکھتی ہیں، لیکن ASiC-E کنٹینر خراب ہے۔"
 }

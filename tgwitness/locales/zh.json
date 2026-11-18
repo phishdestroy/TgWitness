@@ -10269,5 +10269,6 @@
   "Choose a chat type or account data to export.": "请选择要导出的聊天类型或账号数据。",
   "{data} · no chats or attachments": "{data} · 不含聊天和附件",
   "No observation period recorded": "未记录观察期间",
-  "0 records selected": "已选择 0 条记录"
+  "0 records selected": "已选择 0 条记录",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "全部 {n} 个文件均与签名清单一致，但 ASiC-E 容器已损坏。"
 }

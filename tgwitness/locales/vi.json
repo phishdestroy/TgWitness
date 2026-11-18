@@ -10269,5 +10269,6 @@
   "Choose a chat type or account data to export.": "Chọn một loại cuộc trò chuyện hoặc dữ liệu tài khoản để xuất.",
   "{data} · no chats or attachments": "{data} · không có cuộc trò chuyện hay tệp đính kèm",
   "No observation period recorded": "Không ghi nhận khoảng thời gian quan sát nào",
-  "0 records selected": "Đã chọn 0 bản ghi"
+  "0 records selected": "Đã chọn 0 bản ghi",
+  "All {n} files match the signed manifest, but the ASiC-E container is damaged.": "Tất cả {n} tệp đều khớp với bản kê khai đã ký, nhưng vùng chứa ASiC-E bị hỏng."
 }
