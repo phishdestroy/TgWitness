@@ -10366,5 +10366,10 @@
   "Select and copy the link.": "Виділіть і скопіюйте посилання.",
   "Global search": "Глобальний пошук",
   "Checkpoint not timestamped": "Контрольна точка без мітки часу",
-  "Checkpoint timestamp pending": "Мітка часу контрольної точки очікує підтвердження"
+  "Checkpoint timestamp pending": "Мітка часу контрольної точки очікує підтвердження",
+  "Record #{n} not found": "Запис №{n} не знайдено",
+  "Record #{n} is hidden by the filters": "Запис №{n} приховано фільтрами",
+  "Enter a record number": "Введіть номер запису",
+  "Copy description": "Копіювати опис",
+  "No text to copy": "Немає тексту для копіювання"
 }

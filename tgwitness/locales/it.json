@@ -10274,5 +10274,10 @@
   "Select and copy the link.": "Seleziona e copia il link.",
   "Global search": "Ricerca globale",
   "Checkpoint not timestamped": "Checkpoint senza marca temporale",
-  "Checkpoint timestamp pending": "Marca temporale del checkpoint in attesa"
+  "Checkpoint timestamp pending": "Marca temporale del checkpoint in attesa",
+  "Record #{n} not found": "Record n. {n} non trovato",
+  "Record #{n} is hidden by the filters": "Il record n. {n} è nascosto dai filtri",
+  "Enter a record number": "Inserire un numero di record",
+  "Copy description": "Copia descrizione",
+  "No text to copy": "Nessun testo da copiare"
 }

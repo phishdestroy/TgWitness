@@ -10274,5 +10274,10 @@
   "Select and copy the link.": "Selecione e copie o link.",
   "Global search": "Pesquisa global",
   "Checkpoint not timestamped": "Ponto de verificação sem carimbo de tempo",
-  "Checkpoint timestamp pending": "Carimbo de tempo do ponto de verificação pendente"
+  "Checkpoint timestamp pending": "Carimbo de tempo do ponto de verificação pendente",
+  "Record #{n} not found": "Registo n.º {n} não encontrado",
+  "Record #{n} is hidden by the filters": "O registo n.º {n} está oculto pelos filtros",
+  "Enter a record number": "Introduza um número de registo",
+  "Copy description": "Copiar descrição",
+  "No text to copy": "Sem texto para copiar"
 }

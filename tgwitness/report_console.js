@@ -195,8 +195,14 @@ async function startViewer(meta){
       V.filter.from=V.filter.to="";V.filter.cats=new Set(Object.keys(meta.cats).filter(c=>!(meta.hidden||[]).includes(c)));
       $("#v-q").value=$("#v-from").value=$("#v-to").value=$("#v-people-q").value="";for(const c of $$("#v-only input,#v-chats input"))c.checked=false;
       for(const b of $$("#v-cats [data-cat]"))b.setAttribute("aria-pressed",String(V.filter.cats.has(b.dataset.cat)));V.drawPeople();apply();});
-    $("#v-jump").addEventListener("keydown",e=>{if(e.key!=="Enter"||!V.results.length)return;const want=parseInt(e.target.value.replace(/\D/g,""),10);if(isNaN(want))return;
-      const asc=V.filter.sort==="asc";let i=V.results.findIndex(it=>asc?it.n>=want:it.n<=want);if(i<0)i=V.results.length-1;focusRow(V.results[i].key,i);});
+    $("#v-jump").addEventListener("input",e=>e.target.setCustomValidity(""));
+    $("#v-jump").addEventListener("keydown",e=>{if(e.key!=="Enter")return;const raw=e.target.value.trim();if(!raw)return;e.preventDefault();
+      const want=/^[#№]?\s*\d+$/.test(raw)?parseInt(raw.replace(/\D/g,""),10):NaN;
+      const i=isNaN(want)?-1:V.results.findIndex(it=>it.n===want);
+      if(i>=0){e.target.setCustomValidity("");focusRow(V.results[i].key,i);return;}
+      const hidden=!isNaN(want)&&V.items.some(it=>it.n===want);
+      e.target.setCustomValidity(isNaN(want)?say("Enter a record number"):hidden?sayf("Record #{n} is hidden by the filters",{n:want}):sayf("Record #{n} not found",{n:want}));
+      e.target.reportValidity();});
     $("#v-pick-all").addEventListener("click",()=>{if(V.results.length>5000&&!confirm(sayf("Select all {n} shown items?",{n:num(V.results.length)})))return;
       for(const it of V.results)V.selected.add(it.key);selectionChanged();});
     $("#v-earlier").addEventListener("click",()=>render(Math.max(0,V.from-200)));
@@ -217,6 +223,9 @@ async function startViewer(meta){
       out.push(it);}
     V.off=off;
     if(f.sort==="desc")out.reverse();V.results=out;V.terms=want.filter(t=>t.text).map(t=>t.text);
+    const box=$("#v-detail");
+    if(box&&!box.hidden&&V.detailKey&&!out.some(it=>it.key===V.detailKey)){const inside=box.contains(document.activeElement);
+      box.hidden=true;V.detailKey=null;for(const r of $$("#v-list .open"))r.classList.remove("open");if(inside)$("#v-q").focus({preventScroll:true});}
     V.plain=f.sort==="asc"&&!f.q&&!f.people.size&&!f.keys&&!f.only.size&&!f.from&&!f.to
       &&Object.keys(meta.cats).every(c=>f.cats.has(c))&&!V.files.bad.length&&!V.files.missing.length;
     countBox.textContent=sayf("{a} of {b}",{a:num(out.length),b:num(V.items.length)});
@@ -343,7 +352,8 @@ async function startViewer(meta){
         +same.map(x=>'<li><a href="#" data-goto="'+x.key+'">#'+x.n+"</a> · "+esc(kindLabel(x))+" · "+esc(when(x.at))+(x.text?"<div>"+esc(x.text.slice(0,300))+"</div>":"")+"</li>").join("")+"</ul></div>";}
     const proof=chat?esc(sayf("Message #{n} of chat.json; the archive's manifest signs chat.json (SHA-256 {hash}).",{n:it.n,hash:String(meta.data_sha256||"").slice(0,16)+"…"}))
       :esc(say("Record hash"))+'<br><code>'+esc(it.hash)+"</code><br>"+esc(say("Each record is signed when it is captured; verify.py checks the record, its signature and its place in the chain."));
-    const [glyph,tone]=CAT[it.cat]||CAT.system;
+    const [glyph,tone]=CAT[it.cat]||CAT.system,visible=V.results.some(x=>x.key===key);
+    const copyable=it.textWithheld?"":it.text||it.service||it.p||"",copyLabel=it.text&&!it.textWithheld?say("Copy text"):copyable?say("Copy description"):say("No text to copy");
     const head=chat?'<div class="ava '+colour(it.uid??it.who)+'">'+esc(initials(it.who))+"</div><div><b>"+esc(it.who)+"</b><small>"+(it.user?"@"+esc(it.user)+" · ":"")
       +(it.uid!=null?"ID "+esc(it.uid):"")+"</small></div>":'<span class="rec-icon tone-'+tone+'">'+ic(glyph)+"</span><div><b>"+esc(kindLabel(it))+" · #"+it.n+"</b><small>"+esc(when(it.at))+"</small></div>";
     box.innerHTML='<div class="d-head">'+head+'<button type="button" class="d-close" data-close aria-label="'+esc(say("Close"))+'">'+ic("x")+'</button></div><div class="d-body">'
@@ -357,16 +367,19 @@ async function startViewer(meta){
       +'<div class="d-proof">'+ic("shield")+"<div>"+proof+"</div></div>"
       +(!chat&&meta.raw_records&&it.raw.r?'<details class="d-section d-raw"><summary>'+esc(say("Full record data"))
         +'</summary><pre><code>'+esc(JSON.stringify(it.raw.r,null,2))+'</code></pre></details>':"")
-      +'<div class="d-actions"><button type="button" class="v-btn" data-pick>'+esc(V.selected.has(key)?say("Unselect"):say("Select"))
-      +'</button><button type="button" class="v-btn ghost" data-copy>'+ic("copy")+esc(say("Copy text"))+'</button><button type="button" class="v-btn ghost" data-ref>'
+      +'<div class="d-actions"><button type="button" class="v-btn" data-pick'+(!visible&&!V.selected.has(key)?' disabled title="'+esc(say("Nothing matches these filters."))+'"':"")+">"
+      +esc(V.selected.has(key)?say("Unselect"):say("Select"))
+      +'</button><button type="button" class="v-btn ghost" data-copy'+(copyable?"":" disabled")+">"+ic("copy")+esc(copyLabel)+'</button><button type="button" class="v-btn ghost" data-ref>'
       +esc(say("Copy reference"))+"</button></div></div>";
+    V.detailKey=key;
     box.hidden=false;box.scrollTop=0;box.setAttribute("tabindex","-1");box.setAttribute("aria-label",say("Details"));box.focus({preventScroll:true});
-    box.querySelector("[data-close]").onclick=()=>{box.hidden=true;if(shown){shown.classList.remove("open");shown.focus({preventScroll:true});}};
+    box.querySelector("[data-close]").onclick=()=>{box.hidden=true;V.detailKey=null;if(shown){shown.classList.remove("open");shown.focus({preventScroll:true});}};
     box.onkeydown=e=>{if(e.key==="Escape"){e.preventDefault();box.querySelector("[data-close]").click();}};
-    box.querySelector("[data-pick]").onclick=()=>{V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();
-      if(!V.selected.has(key)&&V.filter.only.has("selected"))refilter(false);detail(key);};
-    box.querySelector("[data-copy]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(it.text||"");
-    box.querySelector("[data-ref]").onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(reference(it));}
+    box.querySelector("[data-pick]").onclick=()=>{if(!V.selected.has(key)&&!V.results.some(x=>x.key===key))return;
+      V.selected.has(key)?V.selected.delete(key):V.selected.add(key);selectionChanged();
+      if(!V.selected.has(key)&&V.filter.only.has("selected"))refilter(false);if(V.detailKey===key)detail(key);};
+    box.querySelector("[data-copy]").onclick=()=>{if(copyable&&navigator.clipboard)navigator.clipboard.writeText(copyable).catch(()=>{});};
+    box.querySelector("[data-ref]").onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(reference(it)).catch(()=>{});};}
   function goto(key){if(!V.byKey.has(key))return;let i=V.results.findIndex(x=>x.key===key);
     if(i<0){$("#v-reset").click();i=V.results.findIndex(x=>x.key===key);}if(i<0)return detail(key);focusRow(key,i);detail(key);}
   function reference(it){return (meta.report_id?"TgWitness "+meta.report_id+" · ":"")+(chat?(meta.chat_title||"")+" #"+it.n:"#"+it.n+" "+it.kind+(it.hash?" "+it.hash:""))+" · "+(it.at||"");}
