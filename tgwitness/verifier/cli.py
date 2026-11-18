@@ -683,6 +683,11 @@ def verification_output(args, checked, console, mode):
     verification_print(json.dumps(result, indent=2))
     verification_print(producer_line(result.get("producer")))
     if result.get("container"):
+        if result["container"].get("manifest_files") is not None:
+            others = result["container"]["manifests_checked"][1:]
+            verification_print("ASiC-E container: META-INF/ASiCManifest.xml lists "
+                               + str(result["container"]["manifest_files"]) + " files and their SHA-256 match"
+                               + ("; also matching the files they list: " + ", ".join(others) if others else "") + ".")
         verification_print("ASiC-E container: entries outside the signed manifest (mimetype, META-INF): "
                            + str(len(result["container"]["unchecked_members"]))
                            + "; their CAdES signatures are not checked by this verifier.")
