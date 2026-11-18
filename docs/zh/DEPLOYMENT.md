@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` 会在崩溃或 Docker 守护进程重启后重新启动收集器。在 Linux 服务器上，请使用发行版的服务管理器设置 Docker 开机启动，通常为 `sudo systemctl enable --now docker`。在 Windows/macOS 上，请启用 Docker Desktop 的登录时启动设置。注销桌面会话、睡眠或 Docker 守护进程停止都可能中断采集。被明确停止的容器会一直保持停止状态，直到您再次启动它。
 
-在示例配置中，/tmp 卷的上限为 512 MiB。导出文件改为在持久化 /data 上各工作区的 `temporary-exports/` 中生成。请在该处为同时进行的导出、日志/WAL 增长、媒体和备份预留空间。启动器使用 deploy/constraints.txt 固定经过鉴定的运行时依赖版本。Docker 和高保障服务器使用 pip --require-hashes 从 deploy/requirements.lock 和 deploy/build.lock 安装：每个软件包文件都必须与提交中记录的 SHA-256 一致，因此在 PyPI 或镜像源上被替换的文件会被拒绝。Python 基础镜像和操作系统软件包仍需要独立的发布鉴定。
+在示例配置中，/tmp 卷的上限为 512 MiB。导出文件改为在持久化 /data 上各工作区的 `temporary-exports/` 中生成。请在该处为同时进行的导出、日志/WAL 增长、媒体和备份预留空间。启动器使用 deploy/constraints.txt 固定经过鉴定的运行时依赖版本。Docker 和高保障服务器使用 pip --require-hashes 从 deploy/requirements.lock 和 deploy/build.lock 安装：每个软件包文件都必须与提交中记录的 SHA-256 一致，因此在 PyPI 或镜像源上被替换的文件会被拒绝。Python 基础镜像和操作系统软件包仍需要独立的发布鉴定。 仅提供源代码的软件包（如 jieba、pyaes）是由启动器、Windows 可移植构建工具和 Dockerfile 根据 deploy/build.lock 文件中固定的 setuptools 版本（`--no-build-isolation`）构建的，因此 pip 不会解析一个单独的、未固定的构建环境。
 
 除非您打算销毁日志和密钥，否则不要使用 docker compose down -v。容器健康状态反映的是 Web 服务器的可用性，而不是 Telegram 捕获是否成功。请在面板中检查收集器状态、心跳、错误和覆盖事件。
 
@@ -213,6 +213,8 @@ TgWitness 将账户及每个频道的 Telegram 更新位置（pts、qts、seq �
 媒体队列存储在每个工作区的 SQLite 数据库中。消息及其任务以原子方式提交。被中断的运行中任务会在启动时恢复并重试。每次下载的基础超时为 120 秒，另按 256 KiB/s 的速度根据文件大小增加时间，每种附件类型的上限为 1–2,000 MiB；超时、速度和重试次数位于**更多工具 → 参数**中。收集器会跳过大小未知的文件。暂停会保留队列中的任务。重试使用最初观察到的文件描述符，绝不会使用之后被编辑的消息的最新版本。临时故障的重试次数有限；媒体的 FloodWait 暂停在重启后依然有效。媒体恢复与 Telegram 更新恢复相互独立，无法重新创建已消失的文件。
 
 ## 备份、恢复与容量
+
+`tgwitness backup FOLDER`在面板持续运行的同时复制数据目录：先复制检查点，接着通过在线备份 API 复制 SQLite 文件，然后是键、媒体和配置文件，因此任何被复制的检查点都不会比被复制的日志更新。`backup-manifest.json`列出了每个文件的 SHA-256 值以及日志头。 要恢复数据，请停止 TgWitness 并用该文件夹替换整个数据目录。下次启动时，系统会记录日志是从较旧的副本中恢复的。该记录会将日志与存储在 `TGWITNESS_STATE_DIR` 中的日志头进行比较，该文件夹位于数据目录之外：在 Compose 中为 `tgwitness-state` 卷，在 systemd 单元中为 `/var/lib/tgwitness-state`，其他情况下则为用户本地的状态文件夹。 如果没有可写状态文件夹，系统将无法检测到恢复操作，日志中会记录一次相关提示。
 
 复制**整个数据目录**之前请先停止进程，其中包括 vault.key、signing.enc、credentials.enc、SQLite 数据库/WAL 文件、媒体、令牌、检查点以及所有 profiles/ 子目录。请在目标服务停止时恢复完整副本。缺少保险库密钥或签名密钥不匹配会导致启动失败；不要通过重新生成密钥来强行访问。
 

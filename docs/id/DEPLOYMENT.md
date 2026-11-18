@@ -177,7 +177,7 @@ Peluncur menggunakan deploy/constraints.txt untuk mematok versi dependensi runti
 Docker dan server jaminan tinggi menginstal dari deploy/requirements.lock dan deploy/build.lock
 dengan pip --require-hashes: setiap berkas paket harus cocok dengan SHA-256 yang tercatat dalam commit,
 sehingga berkas yang diganti di PyPI atau mirror akan ditolak. Image dasar Python dan paket sistem
-operasi tetap memerlukan kualifikasi rilis secara independen.
+operasi tetap memerlukan kualifikasi rilis secara independen. Paket yang hanya menyertakan kode sumber (jieba, pyaes) dibangun menggunakan setuptools yang telah ditetapkan dalam berkas deploy/build.lock (`--no-build-isolation`) oleh peluncur, pembangun portabel Windows, dan Dockerfile, sehingga pip tidak akan menentukan lingkungan pembangunan terpisah yang tidak ditetapkan.
 
 Jangan gunakan docker compose down -v kecuali Anda memang ingin memusnahkan jurnal dan kunci.
 Kesehatan kontainer menunjukkan ketersediaan server web, bukan keberhasilan perekaman Telegram.
@@ -357,6 +357,8 @@ Pemulihan media terpisah dari pemulihan update Telegram dan tidak dapat membuat 
 sudah hilang.
 
 ## Pencadangan, pemulihan, dan kapasitas
+
+`tgwitness backup FOLDER` menyalin direktori data sementara panel tetap berjalan: titik pemeriksaan (checkpoint) terlebih dahulu, kemudian berkas SQLite melalui API pencadangan daring, lalu kunci, media, dan profil, sehingga tidak ada titik pemeriksaan yang disalin yang lebih baru daripada jurnal yang disalin. `backup-manifest.json` mencantumkan nilai SHA-256 setiap berkas dan kepala jurnal. Untuk memulihkan, hentikan TgWitness dan ganti seluruh direktori data dengan folder tersebut. Saat dimulai kembali, sistem akan mencatat bahwa jurnal dipulihkan dari salinan yang lebih lama. Catatan tersebut membandingkan jurnal dengan header yang disimpan di `TGWITNESS_STATE_DIR`, sebuah folder di luar direktori data: volume `tgwitness-state` di Compose, `/var/lib/tgwitness-state` di unit systemd, dan folder status lokal pengguna jika tidak ada yang lain. Tanpa folder status yang dapat ditulis, pemulihan tidak terdeteksi dan log akan mencatat hal tersebut sekali.
 
 Hentikan proses sebelum menyalin **seluruh direktori data**, termasuk vault.key, signing.enc,
 credentials.enc, berkas basis data/WAL SQLite, media, token, titik pemeriksaan, dan semua subdirektori
