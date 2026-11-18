@@ -512,10 +512,10 @@ async def profiles_rename(
         raise HTTPException(400, str(exc)) from None
 
 
-async def profiles_delete(profile_id: str, *, ctx=Depends(current_context)):
+async def profiles_delete(profile_id: str, kept_copy: str | None = None, *, ctx=Depends(current_context)):
     ctx.require_live()
     try:
-        return await ctx.app.state.profiles.delete(profile_id)
+        return await ctx.app.state.profiles.delete(profile_id, kept_copy=kept_copy)
     except JournalNotExported as exc:
         raise HTTPException(409, str(exc)) from None
     except ValueError as exc:

@@ -60,8 +60,8 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
     <header class="tp-head">
       <div class="tp-title"><h1>${t('Network topology')}</h1><span class="tp-live" data-tp="live"></span></div>
       <div class="tp-tools" role="group" aria-label="${t('Layers')}">
-        ${[['traffic','activity','Traffic'],['ports','link','Ports'],['threats','alert','Threats']].map(([id,g,l])=>`<button type="button" class="tp-tool" data-tp-layer="${id}" aria-pressed="${layers[id]}">${icon(g)}<span>${t(l)}</span></button>`).join('')}
-        <button type="button" class="tp-tool" data-tp-action="reveal" aria-pressed="false">${icon('eye')}<span>${t('Addresses')}</span></button>
+        ${[['traffic','activity','Traffic'],['ports','link','Ports'],['threats','alert','Threats']].map(([id,g,l])=>`<button type="button" class="tp-tool" data-tp-layer="${id}" aria-pressed="${layers[id]}" aria-label="${t(l)}">${icon(g)}<span>${t(l)}</span></button>`).join('')}
+        <button type="button" class="tp-tool" data-tp-action="reveal" aria-pressed="false" aria-label="${t('Addresses')}">${icon('eye')}<span>${t('Addresses')}</span></button>
         <button type="button" class="tp-tool tp-tool-icon" data-tp-action="refresh" aria-label="${t('Refresh')}" title="${t('Refresh')}">${icon('refresh')}</button>
       </div>
     </header>
@@ -541,6 +541,12 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
     }
   }
   function choose(key){selected=!key||selected===key?null:key;renderCard();dims();if(card._html&&!card.hidden)card.scrollTop=0;wires._html=null;schedule();}
+  function closeCard(){
+    const from=selected;choose(null);
+    if(!visible||getState().view!=='topology')return;
+    const node=[...root.querySelectorAll('[data-tp-node]')].find(item=>item.dataset.tpNode===from)||root.querySelector('[data-tp-node]');
+    node?.focus({preventScroll:true});
+  }
   function clearDots(){particles.forEach(p=>p.dots?.forEach(d=>d.remove()));particles=[];}
   root.addEventListener('click',event=>{
     if(!data)return;
@@ -551,12 +557,12 @@ export function createTopology({root,json,tr,getState,options,openSettings,toast
     const button=event.target.closest('[data-tp-action]');if(!button)return;
     const action=button.dataset.tpAction;
     if(action==='refresh')void load();
-    else if(action==='close')choose(null);
+    else if(action==='close')closeCard();
     else if(action==='reveal'){reveal=!reveal;button.setAttribute('aria-pressed',String(reveal));renderAll();}
     else if(action==='open'){const [,id]=split(selected||'');Promise.resolve(openSettings?.(id,'connection')).catch(error=>toast(error.message,true));}
   },{signal:listeners.signal});
   root.addEventListener('keydown',event=>{
-    if(event.key==='Escape'&&selected){choose(null);return;}
+    if(event.key==='Escape'&&selected){closeCard();return;}
     if(event.key!=='Enter'&&event.key!==' ')return;
     const node=event.target.closest?.('[data-tp-node]');if(!node||!data||node.tagName==='BUTTON')return;event.preventDefault();choose(node.dataset.tpNode);
   },{signal:listeners.signal});

@@ -27,13 +27,18 @@
     box.dataset.state=result.state;box.setAttribute("role","status");box.setAttribute("aria-live","polite");
     box.replaceChildren();box.hidden=result.state==="empty";
     if(box.hidden){controls();return;}
-    const icons={ready:"✓",missing_session:"!",invalid:"!",incomplete:"!",checking:"…"};
+    const icons={ready:"✓",missing_session:"!",invalid:"!",incomplete:"!",checking:"…",selected:"?"};
     const head=node("div","import-check-head"),mark=node("span","import-check-mark",icons[result.state]||"!");
     mark.setAttribute("aria-hidden","true");
-    const titles={ready:"Session found",missing_session:"No login session",invalid:"File cannot be used",incomplete:"More information needed",checking:"Checking your files…"};
+    const titles={ready:"Session found",missing_session:"No login session",invalid:"File cannot be used",incomplete:"More information needed",checking:"Checking your files…",selected:"Not checked yet"};
     head.append(mark,node("strong","",tr(titles[result.state]||"File cannot be used")));box.append(head);
+    if(result.state==="selected"){
+      const actions=node("div","import-check-actions"),button=node("button","secondary small",tr("Check files"));
+      button.type="button";button.addEventListener("click",()=>check());actions.append(button);box.append(actions);
+    }
     if(result.message)box.append(node("p","",tr(result.message)));
     if(result.formats?.length)box.append(node("p","hint",result.formats.map(format=>tr(format)).join(" + ")));
+    if(result.state==="ready"&&result.expected_user_id)box.append(node("p","hint",tr("User ID {id}",{id:result.expected_user_id})));
     const profile=result.client_profile,independent=result.state==="ready"&&$("import-new-session").checked;
     const device=shown=>{const details=node("dl","import-check-details");
       for(const [label,value] of [["Device",shown.device_model],["Platform",shown.system_version],
@@ -59,7 +64,7 @@
     }
     if(result.state==="invalid"){
       const retry=node("button","quiet small",tr("Check again"));retry.type="button";
-      retry.addEventListener("click",()=>inspect());box.append(retry);
+      retry.addEventListener("click",()=>check());box.append(retry);
     }
     controls();
   }
@@ -72,7 +77,7 @@
     }
     return encoded;
   }
-  async function inspect(){
+  async function check(){
     const owner=context(),ticket=++inspectionSerial,files=selected(),passcode=$("tdata-passcode").value;
     inspection=null;
     if(!files.length){pending=null;render({state:"empty",can_connect:false});return null;}
@@ -107,8 +112,13 @@
     })();
     pending=work;controls();return work;
   }
+  // A new selection, passcode or API pair only resets the result: files reach the server through check() on a button.
+  function inspect(){
+    inspectionSerial++;inspection=null;pending=null;
+    render({state:selected().length?"selected":"empty",can_connect:false});return null;
+  }
   async function checked(){
-    const item=pending?await pending:inspection&&current(inspection.owner)?inspection:await inspect();
+    const item=pending?await pending:inspection&&current(inspection.owner)?inspection:await check();
     if(!item?.result.can_connect)throw new Error(tr(item?.result.message||"Choose a valid session before connecting."));
     return item;
   }
@@ -153,10 +163,11 @@
   async function removeWorkspace(){
     const profile=state.profile,revision=state.workspaceRevision,p=state.profiles.find(entry=>entry.id===profile);
     if(!p||profile==="default")return;
+    const kept=await confirmKeptCopy(p);if(kept===null)return;
     if(!(await askTyped(tr("Delete \"{name}\" permanently? This stops its collector and erases its journal, sources, signing key and the copy of its session kept here. The session stays active in Telegram: deleting does not sign it out. This cannot be undone.",{name:p.label}),p.label,
       {title:tr("Delete workspace"),confirmText:tr("Delete workspace")})))return;
     if(profile!==state.profile||revision!==state.workspaceRevision)throw new StaleView();
-    try{await api("profiles/"+encodeURIComponent(profile),undefined,{root:true,method:"DELETE"});}
+    try{await api("profiles/"+encodeURIComponent(profile)+(kept?"?kept_copy="+encodeURIComponent(kept):""),undefined,{root:true,method:"DELETE"});}
     catch(error){await loadProfiles().catch(()=>{});throw error;}
     await switchProfile("default");toast(tr("Workspace deleted."));
   }

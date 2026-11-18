@@ -124,7 +124,7 @@ themselves. Private groups need no public username, but your account must have a
 For existing accounts, see [accounts and session formats](ACCOUNTS.md): the
 panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData
 ZIP, and supported account JSON. Select a session and its companion JSON together,
-press **Connect account**. QR login is also
+press **Check files**, then **Connect account**. QR login is also
 available with the same optional API settings. TDLib, bot sessions and CSV/JSON
 account inventories are unsupported.
 

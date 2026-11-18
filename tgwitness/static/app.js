@@ -104,13 +104,13 @@ const settingsHubReady=import('./views/settings-hub.js?v=layout17').then(({creat
   catalog();
 });
 let connectionView;
-const connectionViewReady=import('./views/connection.js?v=4').then(({createConnectionView})=>{
+const connectionViewReady=import('./views/connection.js?v=5').then(({createConnectionView})=>{
   connectionView=createConnectionView({root:$('connect-guide'),tr,json,state,refreshStatus,askConfirm,formatTime});
 });
 const accountStateReady=import('./components/account-state.js?v=4').then(module=>{
   accountState=module.accountState;accountActivity=module.accountActivity;});
 let homeView,homeTask;
-const homeReady=Promise.all([import('./views/home.js?v=17'),accountStateReady]).then(([module])=>{
+const homeReady=Promise.all([import('./views/home.js?v=18'),accountStateReady]).then(([module])=>{
   homeTask=module.taskInfo;
   homeView=module.createHome({root:$('home-dashboard'),tr,node,getState:()=>state,accountState,switchProfile,navigate,json,signInText,openJournal:kind=>openJournalFilter(kind),
     refresh:async()=>{await refreshStatus();await loadProfiles();renderWorkflowControls();},formatTime,busy,toast,humanSize,
@@ -344,6 +344,7 @@ const labels = {
   "collector.error": [tr("Collection error"), "alert", "coverage"], "demo.created": [tr("Synthetic demo created"), "sparkle", "system"],
   "media.retry": [tr("Attachment retry scheduled"), "refresh", "coverage"],
   "media.recovered": [tr("Interrupted media jobs recovered"), "refresh", "system"],
+  "media.missing_after_restart": [tr("Attachment missing after an unexpected stop"), "alert", "coverage"],
   "source.access_unconfirmed": [tr("Source access unconfirmed"), "question", "coverage"],
   "monitoring.changed": [tr("Monitoring settings changed"), "settings", "coverage"],
   "account.authorized": [tr("Account connected"), "account", "system"],
@@ -1940,10 +1941,11 @@ function renderAccounts(){
       const del=node("button","danger",tr("Delete"));del.dataset.action='delete';del.disabled=state.status.demo||!!p.deletion_blocked;
       if(p.deletion_blocked)del.title=tr(p.deletion_blocked);
       del.addEventListener("click",()=>busy(del,async()=>{
+        const kept=await confirmKeptCopy(p);if(kept===null)return;
         if(!(await askTyped(tr("Delete \"{name}\" permanently? This stops its collector and erases its journal, sources, signing key and the copy of its session kept here. The session stays active in Telegram: deleting does not sign it out. This cannot be undone.",{name:p.label}),p.label,{title:tr("Delete"),confirmText:tr("Delete")})))return;
         const revision=state.workspaceRevision;
         try{
-          await api("profiles/"+encodeURIComponent(p.id),undefined,{root:true,method:"DELETE"});
+          await api("profiles/"+encodeURIComponent(p.id)+(kept?"?kept_copy="+encodeURIComponent(kept):""),undefined,{root:true,method:"DELETE"});
         }catch(error){
           if(error instanceof StaleView||revision!==state.workspaceRevision)throw error;
           await loadProfiles().catch(()=>{});
@@ -2052,19 +2054,30 @@ $("account-add-form").addEventListener("submit",event=>{
   });
 });
 $("accounts-refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await loadProfiles();}));
+async function confirmKeptCopy(p){
+  const copy=p?.evidence_copy;
+  if(!copy)return "";
+  const facts=copy.sha256?tr("Last downloaded signed archive: {format}, {size}, prepared {time}. SHA-256: {sha256}",
+    {format:(copy.format||"zip").toUpperCase(),size:humanSize(copy.bytes||0),time:fmtFull(copy.created_at),sha256:copy.sha256}):
+    tr("The last signed archive was downloaded {time}; its SHA-256 was not recorded.",{time:fmtFull(copy.delivered_at)});
+  const ok=await askConfirm(facts+" "+tr("Deleting the workspace also deletes the copies kept in it. Continue only if this archive is saved outside this workspace."),
+    {title:tr("Copy outside this workspace"),confirmText:tr("The archive is saved elsewhere"),danger:true});
+  return ok?(copy.sha256||"confirmed"):null;
+}
 function accessName(p) {
   return p.access_id==="admin"||p.label==="Main administrator"?tr("Main administrator"):p.label||state.accessNames?.[p.access_id]||p.access_id||"";
 }
 const DELETION_ATTRIBUTION={
-  account_cannot_delete_here:()=>tr("Not deleted by this account: it had no right to delete this message in this chat. Its author, a chat administrator or Telegram removed it."),
-  no_other_session:seconds=>tr("Not deleted by this account: it had no other signed-in session at the session check {seconds} s earlier, and this workspace does not delete messages. The other side, a chat administrator or Telegram removed it.",{seconds}),
+  account_cannot_delete_here:(seconds,rights)=>Number.isInteger(rights)?tr("Who deleted it is not known: the deletion notice names no one. At the last rights check, {seconds} s earlier, this account had no right to delete this message in this chat.",{seconds:rights}):
+    tr("Who deleted it is not known: the deletion notice names no one. At the last rights check this account had no right to delete this message in this chat."),
+  no_other_session:seconds=>tr("Who deleted it is not known: the deletion notice names no one. At the last session check, {seconds} s earlier, this account had no other signed-in session, and this workspace does not delete messages.",{seconds}),
   this_account_may_have_deleted:()=>tr("Who deleted it is not known: this account itself, from another session or device, could also have deleted it.")};
 function deletionAttribution(p,link){
   if(link&&Number.isInteger(link.actor_id))return link.actor_is_this_account?tr("The chat's admin log names this account as the one that deleted it."):tr("The chat's admin log names user {id} as the account that deleted it.",{id:link.actor_id});
   const facts=p.attribution_facts||{},text=DELETION_ATTRIBUTION[facts.rule];
-  if(!["own_action","peer_or_admin","unknown_other_session_present"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
+  if(!["own_action","peer_or_admin","unknown_other_session_present","not_named"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
   const seconds=facts.sessions_check?.age_seconds??facts.sessions_age_seconds;
-  return text(Number.isInteger(seconds)?seconds:"?");
+  return text(Number.isInteger(seconds)?seconds:"?",facts.rights?.age_seconds??facts.rights_age_seconds);
 }
 function deletionExcerpt(e){
   const p=e.payload;
@@ -5300,7 +5313,7 @@ async function loadAuthKey(){
   const record={auth_key:key,dc_id:dc,...(user?{user_id:Number(user)}:{})};
   authProgress(tr("Reading your authorization key…"));
   try{
-    const result=await json("auth/import",{files:[{name:"auth-key.json",content:btoa(JSON.stringify(record))}]},{profile});
+    const result=await json("auth/import",{files:[{name:"auth-key.json",content:btoa(JSON.stringify(record))}],new_session:$("import-new-session").checked},{profile});
     if(revision!==state.workspaceRevision||selection!==accountImportRevision||!state.token)return;
     $("session-string").value=result.session||"";importExpectedId=result.expected_user_id||null;
     importClientProfile=result.client_profile||null;
@@ -5313,7 +5326,9 @@ for(const id of ["auth-key","auth-dc","auth-user-id"])$(id).addEventListener("in
   $("session-import-warning").open=!!$("auth-key").value.trim();
 });
 $("import-account").addEventListener("click",e=>busy(e.currentTarget,loadAccountFiles));
-$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";$("session-import-warning").open=!!$("session-string").value.trim();});
+$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";
+  if($("session-string").value.trim()&&$("session-file").files.length){$("session-file").value="";renderSelectedFiles();}
+  $("session-import-warning").open=!!$("session-string").value.trim();});
 $("import-new-session").addEventListener("change",()=>{importTwoFactor="";});
 $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(state.status.demo){toast(tr("Demo workspace. Connect accounts in your live installation."),true);return;}
@@ -7317,7 +7332,7 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 let topologyView=null;
-const topologyReady=import('./views/topology.js?v=6').then(({createTopology})=>{
+const topologyReady=import('./views/topology.js?v=7').then(({createTopology})=>{
   topologyView=createTopology({root:$('view-topology'),tr,json,getState:()=>state,options:()=>viewOptions('topology'),toast,
     openSettings:async (profile,card)=>{
       if(profile&&state.profile!==profile&&await switchProfile(profile)===false)return;
