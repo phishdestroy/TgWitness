@@ -1292,7 +1292,7 @@ class Collector:
         scope = scope_settings(self.store)
         self.scope_rejected = set()
         failure = None
-        attempted = refresh or (scope["mode"] != "selected" and not self.dialog_cache)
+        attempted = scope["mode"] != "selected" and (refresh or not self.dialog_cache)
         if attempted:
             try:
                 await self.dialogs()

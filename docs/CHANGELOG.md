@@ -195,6 +195,13 @@
   posted stay in the editor instead of being cleared. A note, comment or
   status that was saved is no longer reported as failed when only the following board refresh fails, so trying again
   no longer adds it twice.
+- **Save chat selection** in Settings and at the end of first setup keep the source types, excluded chats, own
+  actions and new-chat settings of Sources → Scope, take a chosen chat off the excluded chats and keep it as a
+  hand-picked source. Before, they replaced the whole scope with defaults, so a previously excluded chat or private
+  chats could be added again and own messages recorded again, and a chosen chat that the scope had added was paused
+  on the next application. Saving a chosen-chats scope while observing no longer rereads the account's chat list,
+  and saving the same scope again after a failed application applies it again instead of reporting success without
+  applying.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
