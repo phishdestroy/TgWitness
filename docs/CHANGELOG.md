@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The live journal stream of a workspace ends quietly when the workspace is deleted or the panel shuts down. Before,
+  the open stream of a deleted workspace kept reading its closed database and wrote "Cannot operate on a closed
+  database" errors to the server log after every deletion from the panel.
 - The Network topology heading moves its live status under the title when the screen is narrow. Before, a long title
   such as the German "Netzwerktopologie" pushed the page 2 pixels wider than a 390-pixel phone screen.
 - The report's Check tab keeps an evidence ASiC-E intact after external signatures or an evidence record were added to

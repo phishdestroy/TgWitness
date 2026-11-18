@@ -1,6 +1,7 @@
 import asyncio
 import copy
 import json
+import sqlite3
 import time
 
 from starlette.responses import JSONResponse, StreamingResponse
@@ -75,12 +76,17 @@ def notifications(store, after, allowed, limit=100, hide_admin=False):
 
 
 async def stream(store, after, authorize, disconnected, *, interval=1, lifetime=300,
-                 board_after=0, board_authorize=None, workspace="default", hide_admin=False):
+                 board_after=0, board_authorize=None, workspace="default", hide_admin=False, closed=lambda: False):
     cursor = after
     deadline = time.monotonic() + lifetime
-    while time.monotonic() < deadline and not await disconnected():
+    while time.monotonic() < deadline and not closed() and not await disconnected():
         allowed = authorize()
-        records = await asyncio.to_thread(notifications, store, cursor, allowed, hide_admin=hide_admin)
+        try:
+            records = await asyncio.to_thread(notifications, store, cursor, allowed, hide_admin=hide_admin)
+        except sqlite3.ProgrammingError:
+            if closed():
+                return
+            raise
         if allowed != authorize():
             await asyncio.sleep(0.05)
             continue
@@ -88,7 +94,12 @@ async def stream(store, after, authorize, disconnected, *, interval=1, lifetime=
             from .board import notifications as board_notifications
             principal = board_authorize()
             authorization = copy.deepcopy((principal.public(), principal.chats(workspace))) if principal else None
-            notes, next_board = await asyncio.to_thread(board_notifications, store, board_after, principal, workspace)
+            try:
+                notes, next_board = await asyncio.to_thread(board_notifications, store, board_after, principal, workspace)
+            except sqlite3.ProgrammingError:
+                if closed():
+                    return
+                raise
             current = board_authorize()
             if principal and current and authorization == (current.public(), current.chats(workspace)):
                 board_after = next_board
