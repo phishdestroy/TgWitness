@@ -60,6 +60,11 @@
   (`received_sha256`, `received_bytes`) next to those of the saved file, with the rule that removed secret fields
   (`transformation`). Before, only the sanitized copy was described, so the receipt could not be compared with an
   original obtained separately.
+- Analyzer insights (`/api/analyzer/insights`, format `tgwitness-insights-v2`) count deletion notices that removed
+  several messages as `deletion_batches` and list suspected history clears separately as `suspected_history_clears`,
+  each with the conditions and meaning of its `history.cleared_by_peer_suspected` record. Before,
+  `cleared_histories` counted every `deletion.batch`, so an ordinary deletion of two messages read as a cleared
+  history; that field is removed.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
