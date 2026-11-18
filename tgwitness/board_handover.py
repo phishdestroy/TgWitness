@@ -38,12 +38,13 @@ def prepare(snapshot, records_path, vault, options, minimiser, people=None):
     names = {label: authors[identifier] for identifier, labels in identities.items()
              for label in labels | known.get(identifier, set())}
 
-    def clean(text):
+    def clean(text, whole=False):
         text = minimiser.clean(text)
         if options.board_pseudonyms:
             for name, alias in sorted(names.items(), key=lambda item: -len(item[0])):
                 if name:
-                    text = re.sub(r"(?<!\w)" + re.escape(name) + r"(?!\w)", lambda match: alias, text, flags=re.IGNORECASE)
+                    pattern = r"(?<!\w)" + re.escape(name) + r"(?!\w)" if whole else re.escape(name)
+                    text = re.sub(pattern, lambda match: alias, text, flags=re.IGNORECASE)
         return text
 
     def author(item):
@@ -88,7 +89,7 @@ def prepare(snapshot, records_path, vault, options, minimiser, people=None):
                         if item["observation"].get("minimised") or options.text == "none":
                             item["range"] = {"quote": "[highlight withheld in minimised disclosure]", "field": item["range"]["field"], "offsets_withheld": True}
                         else:
-                            item["range"]["quote"] = clean(item["range"]["quote"])
+                            item["range"]["quote"] = clean(item["range"]["quote"], whole=True)
                 else:
                     item["current"] = board_slice_summary(db, item["query"])
                     if not item["current"]["record_count"]:

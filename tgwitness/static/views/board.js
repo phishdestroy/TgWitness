@@ -140,7 +140,7 @@ export function createCaseBoard(ctx){
     const mention=select(form,'Mention investigator',[['','No mention'],...participants.map(item=>[item.id,item.label])]);
     mention.addEventListener('change',()=>{const person=participants.find(item=>item.id===mention.value);if(!person)return;mentions.add(person.id);text.value+=(text.value&&!text.value.endsWith(' ')?' ':'')+'@'+person.label+' ';draft.text=text.value;draft.mentions=[...mentions];mention.value='';text.focus();});
     form.prepend(replyLabel);form.append(btn('Post comment',async()=>{if(!text.reportValidity())return;const sent=text.value,sentMentions=[...mentions];const saved=await post('comment',{parent_id:replyTo,text:sent,mentions:sentMentions});
-      if(saved){if(draft.text.startsWith(sent)){draft.text=draft.text.slice(sent.length).trimStart();draft.mentions=draft.mentions.filter(item=>!sentMentions.includes(item));}
+      if(saved){if(draft.text.startsWith(sent)){draft.text=draft.text.slice(sent.length).trimStart();const named=item=>participants.find(person=>person.id===item)?.label;draft.mentions=draft.mentions.filter(item=>!sentMentions.includes(item)||named(item)&&draft.text.includes('@'+named(item)));}
         if(!draft.text.trim())drafts.delete(id);await choose(id);}},'primary'));
     form.addEventListener('submit',event=>event.preventDefault());if(may('board.write'))right.append(form);
     if(focused&&may('board.write')){text.focus({preventScroll:true});if(caret)text.setSelectionRange(...caret);}
