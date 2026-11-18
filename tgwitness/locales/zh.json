@@ -10249,5 +10249,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "模式设定保护目标，并列出仍缺少的内容。面板显示哪些部分由界面级别决定，而不是由模式决定；录制和签名在每种模式下都相同，不会删除任何内容。",
   "I understand: recording and signing stay the same and nothing is deleted.": "我明白了：录制和签名保持不变，不会删除任何内容。",
   "A mode sets the protection target. The status of each layer is below.": "模式设定保护目标。各层状态见下方。",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "确认切换至较低模式：录制和签名保持不变，不会删除任何内容。"
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "确认切换至较低模式：录制和签名保持不变，不会删除任何内容。",
+  "Connected · no chats chosen": "已连接 · 尚未选择聊天"
 }

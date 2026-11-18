@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- A connected account with **Chosen chats** and no chat enabled is shown as **Connected · no chats chosen** on Home
+  and in the top bar, in amber, with **Choose chats** on Home. Before, both said a green **Observing** although no
+  conversation was being recorded. Home also says **Reconnecting** while the connection is down, as the top bar did.
 - **Filters** above an open chat stays open, with the focus where it was, when the panel refreshes the chat status
   in the background. Before, it closed by itself within seconds. Choosing a filter, a view or another chat still
   closes it.

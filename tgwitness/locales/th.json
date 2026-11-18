@@ -10249,5 +10249,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "โหมดกำหนดเป้าหมายการป้องกันและแสดงสิ่งที่ยังขาดอยู่ ระดับอินเทอร์เฟซ ไม่ใช่โหมด เป็นตัวกำหนดว่าแผงควบคุมจะแสดงส่วนใด การบันทึกและการลงลายมือชื่อเหมือนกันในทุกโหมด และไม่มีสิ่งใดถูกลบ",
   "I understand: recording and signing stay the same and nothing is deleted.": "ฉันเข้าใจแล้ว: การบันทึกและการลงลายมือชื่อยังคงเหมือนเดิม และไม่มีสิ่งใดถูกลบ",
   "A mode sets the protection target. The status of each layer is below.": "โหมดกำหนดเป้าหมายการป้องกัน สถานะของแต่ละชั้นอยู่ด้านล่าง",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "ยืนยันการเปลี่ยนไปใช้โหมดที่ต่ำกว่า: การบันทึกและการลงลายมือชื่อยังคงเหมือนเดิม และไม่มีสิ่งใดถูกลบ"
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "ยืนยันการเปลี่ยนไปใช้โหมดที่ต่ำกว่า: การบันทึกและการลงลายมือชื่อยังคงเหมือนเดิม และไม่มีสิ่งใดถูกลบ",
+  "Connected · no chats chosen": "เชื่อมต่อแล้ว · ยังไม่ได้เลือกแชต"
 }

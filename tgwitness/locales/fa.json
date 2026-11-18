@@ -10300,5 +10300,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "حالت، هدف حفاظتی را تعیین می‌کند و آنچه هنوز کم است را نشان می‌دهد. اینکه پنل کدام بخش‌ها را نمایش دهد را سطح رابط تعیین می‌کند، نه حالت؛ ضبط و امضا در همه حالت‌ها یکسان است و هیچ‌چیز حذف نمی‌شود.",
   "I understand: recording and signing stay the same and nothing is deleted.": "می‌فهمم: ضبط و امضا تغییری نمی‌کند و هیچ‌چیز حذف نمی‌شود.",
   "A mode sets the protection target. The status of each layer is below.": "حالت، هدف حفاظتی را تعیین می‌کند. وضعیت هر لایه در پایین آمده است.",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "تأیید حالت پایین‌تر: ضبط و امضا تغییری نمی‌کند و هیچ‌چیز حذف نمی‌شود."
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "تأیید حالت پایین‌تر: ضبط و امضا تغییری نمی‌کند و هیچ‌چیز حذف نمی‌شود.",
+  "Connected · no chats chosen": "متصل · هیچ گفتگویی انتخاب نشده است"
 }

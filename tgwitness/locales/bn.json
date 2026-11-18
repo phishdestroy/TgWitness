@@ -10300,5 +10300,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "মোড সুরক্ষার লক্ষ্য ঠিক করে এবং এখনও কী বাকি আছে তা দেখায়। প্যানেল কোন বিভাগগুলো দেখাবে তা মোড নয়, ইন্টারফেসের স্তর ঠিক করে; রেকর্ডিং এবং স্বাক্ষর প্রতিটি মোডে একই থাকে এবং কিছুই মুছে যায় না।",
   "I understand: recording and signing stay the same and nothing is deleted.": "আমি বুঝি: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকে এবং কিছুই মুছে যায় না।",
   "A mode sets the protection target. The status of each layer is below.": "মোড সুরক্ষার লক্ষ্য ঠিক করে। প্রতিটি স্তরের অবস্থা নিচে দেখানো আছে।",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "নিম্ন মোড নিশ্চিত করুন: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকবে এবং কিছুই মুছে যাবে না।"
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "নিম্ন মোড নিশ্চিত করুন: রেকর্ডিং এবং স্বাক্ষর আগের মতোই থাকবে এবং কিছুই মুছে যাবে না।",
+  "Connected · no chats chosen": "সংযুক্ত · কোনো চ্যাট বেছে নেওয়া হয়নি"
 }

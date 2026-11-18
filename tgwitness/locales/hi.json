@@ -10300,5 +10300,6 @@
   "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "मोड सुरक्षा का लक्ष्य तय करता है और बताता है कि अभी क्या कमी है। पैनल कौन-से सेक्शन दिखाए, यह मोड नहीं बल्कि इंटरफ़ेस स्तर तय करता है; रिकॉर्डिंग और साइनिंग हर मोड में समान रहती हैं और कुछ भी हटाया नहीं जाता।",
   "I understand: recording and signing stay the same and nothing is deleted.": "मैं समझता हूँ: रिकॉर्डिंग और साइनिंग पहले जैसी रहती हैं और कुछ भी हटाया नहीं जाता।",
   "A mode sets the protection target. The status of each layer is below.": "मोड सुरक्षा का लक्ष्य तय करता है। हर परत की स्थिति नीचे है।",
-  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "निचले मोड की पुष्टि करें: रिकॉर्डिंग और साइनिंग पहले जैसी रहती हैं और कुछ भी हटाया नहीं जाता।"
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "निचले मोड की पुष्टि करें: रिकॉर्डिंग और साइनिंग पहले जैसी रहती हैं और कुछ भी हटाया नहीं जाता।",
+  "Connected · no chats chosen": "कनेक्टेड · कोई चैट नहीं चुनी गई"
 }
