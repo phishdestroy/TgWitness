@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- The Network topology heading moves its live status under the title when the screen is narrow. Before, a long title
+  such as the German "Netzwerktopologie" pushed the page 2 pixels wider than a 390-pixel phone screen.
 - The report's Check tab keeps an evidence ASiC-E intact after external signatures or an evidence record were added to
   it. Each `META-INF/ASiCManifestNNN.xml` and `META-INF/ASiCEvidenceRecordManifest.xml` is checked against the SHA-256
   of the files it lists, and the signature or record it points to is named as not checked in the browser. Before, the
