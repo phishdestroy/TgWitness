@@ -37,6 +37,10 @@
   saving a checkpoint is serialized per workspace and `checkpoints/latest.json` never moves back to a smaller record
   number. Private files are written through a unique temporary file instead of a shared `NAME.tmp`, so two writers
   of one file no longer truncate or remove each other's temporary copy.
+- An evidence export with only OpenTimestamps calendars configured is sealed at the checkpoint the calendar answered
+  for, as it is with an RFC 3161 reply. Before, the export ignored the `.ots` proof and reported that no timestamp
+  authority answered. The response names what covers the sealed record in `X-TgWitness-Seal` (`rfc3161`,
+  `opentimestamps-pending`, `opentimestamps-bitcoin-unverified`) or the reason the export was not sealed.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
