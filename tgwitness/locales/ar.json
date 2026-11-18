@@ -10513,5 +10513,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "إذا حُفظ الملف باسم آخر، مثلًا بواسطة المتصفح، فاستخدم ذلك الاسم في هذه الأوامر.",
   "Keep a copy of the checkpoint outside the collector.": "احتفظ بنسخة من نقطة التحقق خارج المُجمِّع.",
   "Keep the encryption key apart from this computer.": "احتفظ بمفتاح التشفير بعيدًا عن هذا الحاسوب.",
-  "Step 3 shows how to start your witness.": "تشرح الخطوة 3 كيفية تشغيل الشاهد."
+  "Step 3 shows how to start your witness.": "تشرح الخطوة 3 كيفية تشغيل الشاهد.",
+  "Choose a chat type or account data to export.": "اختر نوع محادثة أو بيانات حساب للتصدير.",
+  "{data} · no chats or attachments": "{data} · بلا محادثات أو مرفقات"
 }

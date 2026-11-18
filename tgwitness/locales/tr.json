@@ -10309,5 +10309,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Dosya başka bir adla kaydedildiyse, örneğin tarayıcı tarafından, bu komutlarda o adı kullanın.",
   "Keep a copy of the checkpoint outside the collector.": "Kontrol noktasının bir kopyasını toplayıcının dışında saklayın.",
   "Keep the encryption key apart from this computer.": "Şifreleme anahtarını bu bilgisayardan ayrı saklayın.",
-  "Step 3 shows how to start your witness.": "Adım 3, tanığınızı nasıl başlatacağınızı gösterir."
+  "Step 3 shows how to start your witness.": "Adım 3, tanığınızı nasıl başlatacağınızı gösterir.",
+  "Choose a chat type or account data to export.": "Dışa aktarmak için bir sohbet türü veya hesap verisi seçin.",
+  "{data} · no chats or attachments": "{data} · sohbet ve ek yok"
 }

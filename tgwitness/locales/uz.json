@@ -10309,5 +10309,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Agar fayl boshqa nom bilan saqlangan bo'lsa, masalan brauzer tomonidan, bu buyruqlarda o'sha nomni ishlating.",
   "Keep a copy of the checkpoint outside the collector.": "Nazorat nuqtasining nusxasini yig'uvchidan tashqarida saqlang.",
   "Keep the encryption key apart from this computer.": "Shifrlash kalitini bu kompyuterdan alohida saqlang.",
-  "Step 3 shows how to start your witness.": "3-qadam guvohingizni qanday ishga tushirishni ko'rsatadi."
+  "Step 3 shows how to start your witness.": "3-qadam guvohingizni qanday ishga tushirishni ko'rsatadi.",
+  "Choose a chat type or account data to export.": "Eksport uchun chat turini yoki akkaunt ma'lumotlarini tanlang.",
+  "{data} · no chats or attachments": "{data} · chatlar va ilovalarsiz"
 }

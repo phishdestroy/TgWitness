@@ -10381,5 +10381,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Если файл сохранён под другим именем, например браузером, подставьте это имя в команды.",
   "Keep a copy of the checkpoint outside the collector.": "Храните копию контрольной точки вне сборщика.",
   "Keep the encryption key apart from this computer.": "Храните ключ шифрования отдельно от этого компьютера.",
-  "Step 3 shows how to start your witness.": "Шаг 3 объясняет, как запустить свидетеля."
+  "Step 3 shows how to start your witness.": "Шаг 3 объясняет, как запустить свидетеля.",
+  "Choose a chat type or account data to export.": "Выберите тип чатов или данные аккаунта для экспорта.",
+  "{data} · no chats or attachments": "{data} · без чатов и вложений"
 }

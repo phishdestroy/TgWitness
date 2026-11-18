@@ -10360,5 +10360,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "אם הקובץ נשמר בשם אחר, למשל על ידי הדפדפן, השתמשו בשם הזה בפקודות.",
   "Keep a copy of the checkpoint outside the collector.": "שמרו עותק של נקודת הביקורת מחוץ לאוסף.",
   "Keep the encryption key apart from this computer.": "שמרו את מפתח ההצפנה בנפרד ממחשב זה.",
-  "Step 3 shows how to start your witness.": "שלב 3 מראה איך להפעיל את העד."
+  "Step 3 shows how to start your witness.": "שלב 3 מראה איך להפעיל את העד.",
+  "Choose a chat type or account data to export.": "בחרו סוג צ'אט או נתוני חשבון לייצוא.",
+  "{data} · no chats or attachments": "{data} · ללא צ'אטים וקבצים מצורפים"
 }

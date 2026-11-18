@@ -10258,5 +10258,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Jika fail disimpan dengan nama lain, contohnya oleh pelayar, gunakan nama itu dalam arahan ini.",
   "Keep a copy of the checkpoint outside the collector.": "Simpan salinan titik semak di luar pengumpul.",
   "Keep the encryption key apart from this computer.": "Simpan kunci penyulitan berasingan daripada komputer ini.",
-  "Step 3 shows how to start your witness.": "Langkah 3 menunjukkan cara memulakan saksi anda."
+  "Step 3 shows how to start your witness.": "Langkah 3 menunjukkan cara memulakan saksi anda.",
+  "Choose a chat type or account data to export.": "Pilih jenis sembang atau data akaun untuk dieksport.",
+  "{data} · no chats or attachments": "{data} · tanpa sembang atau lampiran"
 }

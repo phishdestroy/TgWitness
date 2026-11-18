@@ -10309,5 +10309,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "اگر فایل با نام دیگری ذخیره شده است، مثلاً توسط مرورگر، همان نام را در این فرمان‌ها به کار ببرید.",
   "Keep a copy of the checkpoint outside the collector.": "یک نسخه از نقطهٔ بازبینی را بیرون از گردآورنده نگه دارید.",
   "Keep the encryption key apart from this computer.": "کلید رمزگذاری را جدا از این رایانه نگه دارید.",
-  "Step 3 shows how to start your witness.": "گام ۳ نشان می‌دهد شاهد را چگونه راه‌اندازی کنید."
+  "Step 3 shows how to start your witness.": "گام ۳ نشان می‌دهد شاهد را چگونه راه‌اندازی کنید.",
+  "Choose a chat type or account data to export.": "یک نوع گفتگو یا دادهٔ حساب را برای خروجی گرفتن انتخاب کنید.",
+  "{data} · no chats or attachments": "{data} · بدون گفتگو و پیوست"
 }

@@ -10319,5 +10319,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Se o ficheiro foi guardado com outro nome, por exemplo pelo navegador, use esse nome nestes comandos.",
   "Keep a copy of the checkpoint outside the collector.": "Guarde uma cópia do ponto de controlo fora do coletor.",
   "Keep the encryption key apart from this computer.": "Guarde a chave de cifragem separada deste computador.",
-  "Step 3 shows how to start your witness.": "O passo 3 mostra como iniciar a sua testemunha."
+  "Step 3 shows how to start your witness.": "O passo 3 mostra como iniciar a sua testemunha.",
+  "Choose a chat type or account data to export.": "Escolha um tipo de chat ou dados da conta para exportar.",
+  "{data} · no chats or attachments": "{data} · sem chats nem anexos"
 }

@@ -10258,5 +10258,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "Nếu tệp được lưu dưới tên khác, ví dụ do trình duyệt đổi tên, hãy dùng tên đó trong các lệnh này.",
   "Keep a copy of the checkpoint outside the collector.": "Giữ một bản sao của điểm kiểm tra bên ngoài bộ thu thập.",
   "Keep the encryption key apart from this computer.": "Giữ khóa mã hóa tách biệt khỏi máy tính này.",
-  "Step 3 shows how to start your witness.": "Bước 3 hướng dẫn cách khởi động nhân chứng của bạn."
+  "Step 3 shows how to start your witness.": "Bước 3 hướng dẫn cách khởi động nhân chứng của bạn.",
+  "Choose a chat type or account data to export.": "Chọn một loại cuộc trò chuyện hoặc dữ liệu tài khoản để xuất.",
+  "{data} · no chats or attachments": "{data} · không có cuộc trò chuyện hay tệp đính kèm"
 }

@@ -10258,5 +10258,7 @@
   "If the file was saved under another name, for example by the browser, use that name in these commands.": "如果檔案以其他名稱儲存（例如被瀏覽器重新命名），請在這些命令中使用該名稱。",
   "Keep a copy of the checkpoint outside the collector.": "請將檢查點的副本保存在收集器之外。",
   "Keep the encryption key apart from this computer.": "請將加密金鑰與這台電腦分開保存。",
-  "Step 3 shows how to start your witness.": "第 3 步說明如何啟動見證端。"
+  "Step 3 shows how to start your witness.": "第 3 步說明如何啟動見證端。",
+  "Choose a chat type or account data to export.": "請選擇要匯出的聊天類型或帳號資料。",
+  "{data} · no chats or attachments": "{data} · 不含聊天與附件"
 }
