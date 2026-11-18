@@ -10237,5 +10237,12 @@
   "Check files": "ファイルを確認",
   "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "ファイルを選んだりセッションテキストを貼り付けたりしただけでは何も送信されません。<strong>ファイルを確認</strong>を押すと、このパネルを動かしている TgWitness サーバーに送信され、サーバーは Telegram にログインせずに読み取ります。",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegramはこれらのチャットを1台のデバイスにのみ保存します。TgWitnessはこのアカウント自身の認証に基づいて動作し、相手側が削除した後であっても、すべてのメッセージ、タイマー、削除通知を署名付きジャーナルに記録します。既読通知や入力中のステータスは「相手側に表示される内容」で選択された設定に従ってのみ送信され、スクリーンショットの通知は一切送信しません。ファイルは、添付ファイルのダウンロードが有効で、サイズとディスクの空き容量が許す場合に保存されます。それまではキューに残り、延期または失敗したダウンロードはそれぞれ記録されます。",
-  "Recorded in the journal": "ジャーナルに記録"
+  "Recorded in the journal": "ジャーナルに記録",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "署名付きジャーナルのハッシュと一致しないローカルファイルが{count}個ありました。そのバイトは変更されずに、このワークスペースの storage-conflicts フォルダーに EXPECTED_SHA256.LOCAL_SHA256 という名前で保存されています。それぞれジャーナルに storage.local_conflict として記録されています。",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "後の変更が同じ設定に影響しています。この変更を元に戻すのではなく、設定を直接変更してください。",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "セットアップは既に完了しているため、新たに開始されたものはありません。チャットの選択の変更は「チャットの選択を保存」でのみ保存されます。",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "モードは保護の目標を決め、まだ足りないものを示します。パネルに表示されるセクションを決めるのはモードではなくインターフェイスのレベルです。記録と署名はどのモードでも同じで、何も削除されません。",
+  "I understand: recording and signing stay the same and nothing is deleted.": "理解しました：記録と署名は変わらず、何も削除されません。",
+  "A mode sets the protection target. The status of each layer is below.": "モードは保護の目標を決めます。各レイヤーの状態は下に表示されます。",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "低いモードへの切り替えを確認してください：記録と署名は変わらず、何も削除されません。"
 }

@@ -247,7 +247,7 @@ export function createSwarm({root,json,tr,trn,getState,options,toast,openAccount
       jobBusy=true;bulkBar();
       try{
         const result=await download('swarm/bulk-export?profiles='+encodeURIComponent(profiles.join(',')),'tgwitness-selected-accounts.zip',true,true);
-        if(result!==false)toast(tr('Group export saved: each account’s signed export and a signed list of them.'));
+        if(result===true)toast(tr('Group export saved: each account’s signed export and a signed list of them.'));
       }catch(error){toast(error.message,true);}
       finally{jobBusy=false;bulkBar();}
       return;

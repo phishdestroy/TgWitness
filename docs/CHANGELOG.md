@@ -25,6 +25,16 @@
 
 ## Unreleased
 
+- **Delete workspace** on the account page of an additional workspace is reachable before a Telegram account is
+  connected. It sits in its own **Workspace** group, apart from signing out of Telegram and forgetting the session.
+- Turning off a chat type in the scope applies to chats the scope added earlier at once: a new message of an
+  automatically added group is no longer recorded after **Groups** is unchecked, even before the scope is recalculated
+  or while Telegram cannot be reached. Chats chosen by hand keep their own rules.
+- A `scope.applied` record says whether the dialog list was read in that pass. When it could not be read or was not
+  read, the record gives `dialog_list` (`unavailable` or `saved`), the size of the saved list as `saved_dialogs` and
+  the error, and its coverage text no longer claims that all accessible dialogs were inspected. Before, a failed read
+  was described as a full inspection and the size of the old list appeared as `dialogs_inspected`. Earlier records
+  are unchanged.
 - After a collector process that ended without an orderly stop, the next start checks every attachment recorded
   as saved during that run against its SHA-256. A missing or different file is recorded as
   `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
@@ -73,6 +83,31 @@
   is written and names the limit, instead of writing the whole archive and then reporting a failed verification. The
   pseudo-secret description no longer says that every file is saved: a file waits while downloads are off or its
   size or free disk space stops it, and each deferred or failed download is recorded.
+- Undoing an entry in **Recent changes** brings back only the settings that entry changed. Before, it brought back
+  every setting saved with the entry, so a later change of another setting was reverted as well, a custom file rule
+  made in Sources was replaced, and observation started from the main screen could stop. When a later change touched
+  the same settings, the undo is refused and nothing changes. An undo now names its journal record by number and hash,
+  and after a workspace switch Settings no longer lists or undoes the previous workspace's changes. A settings edit or
+  its undo is no longer refused because timestamps were on while requests outside Telegram were off, as in a new
+  workspace before a goal is chosen. The Sources recording form keeps a media type's own action, such as hashes only or
+  exclude, where any save used to drop it, and no longer shows unsaved changes right after loading. An unchecked proxy
+  address stays in the connection form when the server address question or another setting there changes, and focus
+  stays on that question. Finishing a first setup opened again from Settings says that nothing new was started and
+  opens Exports or Home, instead of showing the recording check as done. The administrator key reissue confirmation is
+  titled with the operation and announces its warning, and a cancelled confirmation returns focus to the button that
+  opened it.
+- Panel states and keyboard use from the external review. **Settings → Which chats?** shows the scope in use, the
+  number of chats being recorded and whether they are observed, with a green dot only while they are, and follows a
+  saved chat selection and the recording state while Settings is open; before, it showed the first-setup draft, such
+  as **Choose chats · 0**, always with a green dot. The protection mode dialog and the **Protection level** card no
+  longer promise to hide or show sections where the interface level decides what the panel shows, which is every real
+  workspace, and with no mode chosen the switcher next to the version number reads **Not chosen** instead of **All
+  sections**; new `workspace.mode_changed` records no longer carry `shown` and `hidden` lists of sections the panel
+  did not actually hide; earlier records are unchanged. On a phone, an empty Chats page keeps the chat list with its
+  search and **Add** menu in view when the account is connected and the access can choose chats, open a Telegram link
+  or start a pseudo-secret chat, instead of covering it with a page that had no way back to the list. A journal row is
+  no longer a button with the bookmark button inside it: each row has its own open button of at least 24 × 24 px next
+  to the bookmark button, and only the buttons of the selected row are in the Tab order, matching the arrow keys.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
@@ -129,6 +164,19 @@
   `tgwitness-<profile>-<export>.pdf` or `.html`. A password-protected PDF or JSON report holds the file under the
   same name, `tgwitness-report.pdf` or `tgwitness-report.json`, instead of `tgwitness-evidence.pdf` or `.json`. The
   case assessment of a chat export points to `../tgwitness-chat-export.zip`, like its Verify section.
+- The panel says that a chat export, handover, account archive, disclosure, group export or flight record was saved
+  only after it wrote the file through the browser's save picker. When it hands the file to the browser's downloads it
+  says that the download started, and the chat export keeps **Download signed bundle**. Before, it reported
+  "downloaded" or "saved" as soon as the browser took the file, also when its save dialog was then cancelled, and hid
+  the chat export's button. The Storage panel now lists the local files kept in `storage-conflicts/` because their
+  bytes differed from the signed journal hash, `python -m tgwitness.storage recover` prints each with both hashes and
+  its path, and a full evidence export asks to restore such a file first; before, the conflict was only a journal
+  record and the export failed with a general error. `python -m tgwitness.storage recover` runs again; since the
+  storage module became a package it stopped with "No module named tgwitness.storage.__main__". On Windows an
+  attachment, a decrypted secret-chat file and a file restored from storage are renamed into `media/` with
+  `MoveFileExW` write-through, which Windows documents as returning once the move is on disk; secret-chat and restored
+  files are now also flushed, with the folder entry on Linux and macOS, before they are recorded. Before, Windows
+  renamed them without a flush, and secret-chat and restored files were not flushed at all.
 - Case Board: with **Replace investigator names with R01, R02…**, a handover now also gives a pseudonym to an
   investigator mentioned in a comment who wrote nothing on the board; before, the inserted @name stayed in the
   comment. In the quoted message of a highlight names are replaced as whole words only, so a short name such as "Al"
@@ -142,6 +190,11 @@
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
   downloaded.
+- The link preview of a public channel or group by username says whether the account is already a member, from
+  Telegram's `left` flag, and offers **Join / open** instead of **Send join request** to a member of a group that
+  approves new members. The result of **Join / open** records `already_member` when the account was already in the
+  chat, and the panel says so. Before, `already_member` was empty for usernames and a successful receipt did not tell
+  a new join from an existing membership.
 - Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
   app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
   taken from an invite join now comes from Telegram's answer, without another invite check.

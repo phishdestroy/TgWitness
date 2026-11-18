@@ -10237,5 +10237,12 @@
   "Check files": "파일 확인",
   "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "파일을 선택하거나 세션 텍스트를 붙여 넣는 것만으로는 아무것도 전송되지 않습니다. <strong>파일 확인</strong>을 누르면 이 패널을 실행하는 TgWitness 서버로 전송되며, 서버는 Telegram에 로그인하지 않고 읽습니다.",
   "Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.": "Telegram는 이러한 채팅을 단일 기기에서만 보관합니다. TgWitness는 해당 계정의 인증을 통해 참여하며, 상대방이 메시지를 삭제한 후에도 모든 메시지, 타이머 및 삭제 알림을 서명된 저널에 기록합니다. 또한 “상대방이 보는 내용”에서 선택한 경우에만 읽음 확인 및 입력 중 상태를 전송하며, 스크린샷 알림은 절대 전송하지 않습니다. 파일은 첨부 파일 다운로드가 켜져 있고 파일 크기와 디스크 여유 공간이 허용할 때 저장됩니다. 그때까지는 대기열에 남으며, 연기되거나 실패한 다운로드는 각각 기록됩니다.",
-  "Recorded in the journal": "저널에 기록"
+  "Recorded in the journal": "저널에 기록",
+  "{count} local file(s) differed from the signed journal hash. Their bytes are kept unchanged in this workspace’s storage-conflicts folder as EXPECTED_SHA256.LOCAL_SHA256; each is recorded in the journal as storage.local_conflict.": "로컬 파일 {count}개가 서명된 저널의 해시와 달랐습니다. 해당 바이트는 이 작업 공간의 storage-conflicts 폴더에 EXPECTED_SHA256.LOCAL_SHA256 이름으로 변경 없이 보관되며, 각 파일은 저널에 storage.local_conflict로 기록됩니다.",
+  "A later change affects the same settings. Change them directly instead of undoing this one.": "이후의 변경이 같은 설정에 영향을 줍니다. 이 변경을 되돌리는 대신 설정을 직접 변경하세요.",
+  "Setup was already completed, so nothing new was started. Chat selection changes are saved only with “Save chat selection”.": "설정이 이미 완료되어 새로 시작된 것은 없습니다. 채팅 선택 변경 사항은 “채팅 선택 저장”으로만 저장됩니다.",
+  "A mode sets the protection target and lists what is still missing. The interface level, not the mode, decides which sections the panel shows; recording and signing are the same in every mode and nothing is deleted.": "모드는 보호 목표를 정하고 아직 부족한 것을 보여 줍니다. 패널에 어떤 섹션을 표시할지는 모드가 아니라 인터페이스 수준이 결정합니다. 기록과 서명은 모든 모드에서 같으며 아무것도 삭제되지 않습니다.",
+  "I understand: recording and signing stay the same and nothing is deleted.": "알겠습니다: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다.",
+  "A mode sets the protection target. The status of each layer is below.": "모드는 보호 목표를 정합니다. 각 계층의 상태는 아래에 있습니다.",
+  "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "하위 모드 확인: 기록과 서명은 그대로이며 아무것도 삭제되지 않습니다."
 }

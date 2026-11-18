@@ -178,12 +178,13 @@
       const add=node("button","secondary",tr("Add another account"));add.id="account-add-another";add.type="button";
       add.addEventListener("click",beginAdd);$("account-manage").before(add);
       const remove=node("button","quiet danger-text",tr("Delete workspace"));remove.id="account-delete-workspace";remove.type="button";
-      remove.addEventListener("click",()=>busy(remove,removeWorkspace).then(renderAccount));$("account-manage").querySelector(".account-manage-row").append(remove);
-      const reason=node("p","hint");reason.id="account-delete-reason";$("account-manage").querySelector(".account-manage-row").after(reason);
+      remove.addEventListener("click",()=>busy(remove,removeWorkspace).then(renderAccount));$("workspace-remove-row").append(remove);
+      const reason=node("p","hint");reason.id="account-delete-reason";$("workspace-remove-row").after(reason);
     }
     const blocked=state.profiles?.find(entry=>entry.id===state.profile)?.deletion_blocked;
     $("account-add-another").hidden=!state.me?.admin||!connected;
     $("account-delete-workspace").hidden=!state.me?.admin||state.profile==="default";
+    $("workspace-remove").hidden=$("account-delete-workspace").hidden;
     if(!$("account-delete-workspace").hasAttribute("aria-busy"))$("account-delete-workspace").disabled=!!blocked;
     $("account-delete-reason").hidden=!blocked||$("account-delete-workspace").hidden;$("account-delete-reason").textContent=blocked?tr(blocked):"";
     const heading=$("account-heading");

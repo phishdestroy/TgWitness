@@ -61,8 +61,8 @@ from .monitoring import (capture_settings, media_kind, monitoring_settings, dura
 from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
-from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, failure_outcome, lane_limits,
-                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_directory, sync_file,
+from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, durable_replace, failure_outcome,
+                         lane_limits, plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_file,
                          validate_observation)
 from .media.dedup_queue import DOWNLOADS
 from .media.workers import AdaptiveSlots
@@ -709,6 +709,7 @@ class Collector:
         self.pool_retry_at = 0
         self.target_ids = set()
         self.scope_ids = set()
+        self.scope_kinds = {}
         self.known_ids = set()
         self.target_revision = -1
         self.folders = {}
@@ -903,6 +904,7 @@ class Collector:
             targets = self.store.targets()
             self.target_ids = {t["chat_id"] for t in targets if t["enabled"]}
             self.scope_ids = {t["chat_id"] for t in targets if t["enabled"] and t["origin"] == "scope"}
+            self.scope_kinds = {t["chat_id"]: t["kind"] for t in targets if t["chat_id"] in self.scope_ids}
             self.known_ids = {t["chat_id"] for t in targets}
             self.target_revision = self.store.targets_revision
 
@@ -917,7 +919,12 @@ class Collector:
         if chat_id in scope["exclude"]:
             return False
         if self.selected(chat_id):
-            return not (scope["mode"] == "selected" and chat_id in self.scope_ids)
+            if chat_id not in self.scope_ids:
+                return True
+            if scope["mode"] == "selected":
+                return False
+            kind = (self.dialog_cache.get(chat_id) or {}).get("kind") or self.scope_kinds.get(chat_id)
+            return kind is None or allowed(scope, kind)
         if scope["mode"] == "selected":
             return False
         if chat_id in self.known_ids or chat_id in self.scope_rejected:
@@ -1232,13 +1239,15 @@ class Collector:
         scope = scope_settings(self.store)
         self.scope_rejected = set()
         failure = None
-        if refresh or (scope["mode"] != "selected" and not self.dialog_cache):
+        attempted = refresh or (scope["mode"] != "selected" and not self.dialog_cache)
+        if attempted:
             try:
                 await self.dialogs()
             except (asyncio.CancelledError, *AUTHORIZATION_ERRORS):
                 raise
             except Exception as exc:
                 failure = exc
+        listing = "unavailable" if failure is not None else "refreshed" if attempted else "saved"
         self.scope_refreshed_at = time.time()
         excluded, rule = set(scope["exclude"]), self.folder_for(scope)
         if scope["mode"] == "folder" and rule is None and failure is None:
@@ -1292,10 +1301,16 @@ class Collector:
                     "added": [{"chat_id": c, "title": self.dialog_cache[c]["title"], "kind": self.dialog_cache[c]["kind"]}
                               for c in added],
                     "paused": paused, "resumed": resumed, "excluded": sorted(excluded),
-                    "dialogs_inspected": len(self.dialog_cache),
+                    "dialog_list": listing,
+                    **({"dialogs_inspected": len(self.dialog_cache)} if listing == "refreshed"
+                       else {"saved_dialogs": len(self.dialog_cache)}),
                     **({"dialog_refresh_failed": type(failure).__name__} if failure else {}),
-                    "coverage": ("all accessible dialogs inspected; " if scope["mode"] != "selected"
-                                 else "configured dialog list inspected; ") + "new matching chats are added as they appear; " + (
+                    "coverage": (("all accessible dialogs inspected; " if scope["mode"] != "selected"
+                                  else "configured dialog list inspected; ") if listing == "refreshed"
+                                 else ("the dialog list could not be read in this pass" if failure is not None
+                                       else "the dialog list was not read in this pass")
+                                 + "; the saved list of " + str(len(self.dialog_cache)) + " dialogs and the saved "
+                                 "targets were used; ") + "new matching chats are added as they appear; " + (
                                     "the latest " + str(scope["new_chats"]["history"]) + " messages of each added chat "
                                     "are read once, earlier history is not fetched" if scope["new_chats"]["history"]
                                     else "earlier history of added chats is not fetched")})
@@ -1304,7 +1319,7 @@ class Collector:
                 self.request_intake(chat_id, self.dialog_cache[chat_id]["entity"])
         if failure is not None:
             raise failure
-        return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
+        return {"added": len(added), "paused": len(paused), "resumed": len(resumed), "dialog_list": listing}
 
     def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):
         from . import client_identity
@@ -5818,10 +5833,15 @@ class Collector:
                 raise ValueError("existing_content_addressed_file_is_corrupt")
             temp.unlink()
         else:
-            temp.replace(destination)
-            await complete_in_thread(sync_directory, media_root)
-            if self.media_library is not None:
-                await complete_in_thread(self.media_library.adopt, destination, digest)
+            try:
+                await complete_in_thread(durable_replace, temp, destination)
+            except OSError:
+                if not temp.is_file() or not destination.is_file() or await complete_in_thread(file_digest, destination) != digest:
+                    raise
+                temp.unlink()
+            else:
+                if self.media_library is not None:
+                    await complete_in_thread(self.media_library.adopt, destination, digest)
         attempt.advance("stored")
         attempt.finish(MediaOutcome("done", {
             "media_sha256": digest, "size": actual_size,
