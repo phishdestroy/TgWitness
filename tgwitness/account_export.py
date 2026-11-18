@@ -782,11 +782,15 @@ class AccountExport:
                 return writer
             writer = await self.retry(download_once)
             digest, size = writer.digest.hexdigest(), writer.total
+            received = {}
             if isinstance(media, types.InputTakeoutFileLocation):
                 if size > 64 * 1024**2:
                     raise ValueError("additional_json_exceeds_sanitizer_limit")
                 sanitized = canonical(transport.safe(json.loads(temporary.read_bytes())))
                 durable_write(temporary, sanitized)
+                received = {"received_sha256": digest, "received_bytes": size, "transformation": {
+                    "kind": "sanitized_json", "version": 1, "removed_fields": sorted(transport.SECRET_FIELDS),
+                    "output": "canonical JSON", "applies_to": "sha256 and bytes describe the saved file"}}
                 digest, size = sha(sanitized), len(sanitized)
             target = directory / "media" / digest
             if target.exists():
@@ -802,7 +806,7 @@ class AccountExport:
             if not recorded and digest not in self.pending_media:
                 self.pending_bytes += size
                 self.pending_media.add(digest)
-            result = {**info, "outcome": "saved", "file": "media/" + digest, "sha256": digest, "bytes": size}
+            result = {**info, "outcome": "saved", "file": "media/" + digest, "sha256": digest, "bytes": size, **received}
             if representation:
                 account_attachment_cache.save(self, result)
                 self.cache_attachment(result)

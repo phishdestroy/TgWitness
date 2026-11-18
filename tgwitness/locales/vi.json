@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Xóa nguồn này? Tin nhắn và tệp đã lưu vẫn được giữ lại. Hồ sơ người dùng trong bộ nhớ đệm sẽ bị xóa.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "Xóa {n} nguồn? Tin nhắn và tệp đã lưu vẫn được giữ lại. Hồ sơ người dùng trong bộ nhớ đệm sẽ bị xóa.",
   "Reply to #{id} · outside this loaded window": "Trả lời #{id} · ngoài vùng đã tải này",
+  "Reply to #{id} in another chat": "Trả lời #{id} trong cuộc trò chuyện khác",
   "Resolved": "Đã giải quyết",
   "Restore default for {name}": "Khôi phục mặc định cho {name}",
   "Restore defaults…": "Khôi phục mặc định…",

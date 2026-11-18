@@ -40,6 +40,8 @@ HASHES = {
 REMOTE_TYPES = {"mega", "drive", "onedrive", "dropbox", "box", "pcloud", "webdav", "b2", "s3",
                 "swift", "azureblob", "google cloud storage", "koofr", "yandex", "protondrive", "jottacloud"}
 MAX_RECOVERY_OBJECTS = 100000
+CONFLICT_MEANING = ("The local file under this attachment's name had different bytes. They were moved to kept_as "
+                    "unchanged, and the copy matching the signed journal hash was restored from storage.")
 MAX_MEDIA_BYTES = 32 * 1024**3
 MIB = 1024**2
 SPACE_MESSAGE = "Not enough free space to prepare this file. Free disk space or offload smaller files first. Local files are kept."
@@ -148,6 +150,14 @@ def safe_file(root, digest):
 def file_hash(path):
     with path.open("rb") as source:
         return hashlib.file_digest(source, "sha256").hexdigest()
+
+
+def held_locally(root, row):
+    path = safe_file(root, row["sha256"])
+    try:
+        return path.is_file() and path.stat().st_size == row["bytes"] and file_hash(path) == row["sha256"]
+    except OSError:
+        return False
 
 
 def parse_config(text):
@@ -626,7 +636,23 @@ class Storage:
             finally:
                 self.busy = False
 
-    async def restore_locked(self, digest):
+    def keep_conflict(self, path, digest):
+        actual = file_hash(path)
+        folder = self.store.root / "storage-conflicts"
+        if replica.filesystem_link(folder):
+            raise ValueError("The storage-conflicts folder must not be a filesystem link.")
+        folder.mkdir(exist_ok=True, mode=0o700)
+        target = folder / (digest + "." + actual)
+        if target.is_file() and file_hash(target) == actual:
+            path.unlink()
+        else:
+            path.replace(target)
+        kept = {"sha256": digest, "local_sha256": actual, "bytes": target.stat().st_size,
+                "kept_as": "storage-conflicts/" + target.name}
+        self.store.append("storage.local_conflict", {**kept, "meaning": CONFLICT_MEANING})
+        return kept
+
+    async def restore_locked(self, digest, conflicts=None):
         receipts = Receipts(self.store.root)
         backend = None
         try:
@@ -639,8 +665,8 @@ class Storage:
             if path.is_file() and file_hash(path) == digest:
                 receipts.evict(digest, False)
                 return path
-            if path.exists():
-                raise ValueError("A local file has different bytes. Keep it separately for review before restoring the verified copy.")
+            if path.exists() and not path.is_file():
+                raise ValueError("A local entry with this name is not a file. Move it aside before restoring the verified copy.")
             reserve = self.reserve_bytes()
             self.require_space(2 * receipt["cipher_bytes"] + receipt["bytes"], reserve)
             backend = self.backend()
@@ -679,6 +705,10 @@ class Storage:
                     raise ValueError("Recovered file does not match its signed journal hash.")
                 path.parent.mkdir(exist_ok=True, mode=0o700)
                 safe_file(self.store.root, digest)
+                if path.is_file():
+                    kept = self.keep_conflict(path, digest)
+                    if conflicts is not None:
+                        conflicts.append(kept)
                 restored.replace(path)
             receipts.evict(digest, False)
             self.save_refreshed(backend)
@@ -701,12 +731,14 @@ class Storage:
                     pending = [r["sha256"] for r in receipts.rows() if r["evicted"]]
                 finally:
                     receipts.close()
+                conflicts = []
                 self.store.set_setting("storage_last", {"at": utcnow(), "operation": "restore", "files": 0, "pending": len(pending), "error": None})
                 for index, digest in enumerate(pending):
-                    await self.restore_locked(digest)
+                    await self.restore_locked(digest, conflicts)
                     self.store.set_setting("storage_last", {"at": utcnow(), "operation": "restore", "files": index + 1,
-                                                            "pending": len(pending) - index - 1, "error": None})
-                return {"restored": len(pending)}
+                                                            "pending": len(pending) - index - 1, "error": None,
+                                                            "conflicts": len(conflicts)})
+                return {"restored": len(pending), "conflicts": conflicts}
             finally:
                 self.busy = False
 
@@ -761,7 +793,7 @@ class Storage:
             self.store.set_setting("storage", {**value["settings"], "enabled": False})
             if value["settings"]["backend"] == "s3":
                 self.store.set_setting("replica", {**value["s3"], "enabled": False})
-            current.import_all([{**row, "evicted": not safe_file(self.store.root, row["sha256"]).is_file()}
+            current.import_all([{**row, "evicted": not held_locally(self.store.root, row)}
                                 for row in value["objects"]])
             self.store.append("storage.recovery_imported", {"files": len(value["objects"])})
         finally:
