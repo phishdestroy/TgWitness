@@ -177,6 +177,15 @@
   `MoveFileExW` write-through, which Windows documents as returning once the move is on disk; secret-chat and restored
   files are now also flushed, with the folder entry on Linux and macOS, before they are recorded. Before, Windows
   renamed them without a flush, and secret-chat and restored files were not flushed at all.
+- Case Board: with **Replace investigator names with R01, R02…**, a handover now also gives a pseudonym to an
+  investigator mentioned in a comment who wrote nothing on the board; before, the inserted @name stayed in the
+  comment. In the quoted message of a highlight names are replaced as whole words only, so a short name such as "Al"
+  no longer changes "Totally" or "legal" there; in notes and comments every occurrence is still replaced. **Add to
+  board** in the bookmark options lists only collections that can hold the record, and after a refused move it moves
+  the card it already added instead of adding a second one. Text and mentions typed into a comment while it is being
+  posted stay in the editor instead of being cleared. A note, comment or
+  status that was saved is no longer reported as failed when only the following board refresh fails, so trying again
+  no longer adds it twice.
 - Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
   preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
   differed. The expected size and the size estimates for exports and storage now come from the image that is
