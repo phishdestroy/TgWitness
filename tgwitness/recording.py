@@ -48,6 +48,10 @@ def scope_change(previous, body):
 def save(store, body):
     before, changed = settings(store), []
     scope, widening = scope_change(before["scope"], body.scope) if body.scope is not None else (None, False)
+    if scope is not None and scope["mode"] != "selected":
+        first = store.get_setting("first_run", None) or {}
+        if first.get("account_kind") == "main" and (first.get("goal") != "copy" or store.get_setting("resume", False)):
+            raise Invalid(409, "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.")
     with store.transaction():
         if body.monitoring is not None:
             current = body.monitoring.model_dump()

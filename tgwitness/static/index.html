@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/components/modes.css?v=1">
 <link rel="stylesheet" href="/components/session-warnings.css?v=1">
-<link rel="stylesheet" href="/views/sources.css?v=28">
+<link rel="stylesheet" href="/views/sources.css?v=29">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=33">
 <link rel="stylesheet" href="/views/group.css?v=1">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/components/journal.css?v=7">
 <link rel="stylesheet" href="/views/chats.css?v=25">
 <link rel="stylesheet" href="/views/mini-apps.css?v=1">
-<link rel="stylesheet" href="/views/chat-list.css?v=21">
+<link rel="stylesheet" href="/views/chat-list.css?v=22">
 <link rel="stylesheet" href="/views/visibility.css?v=1">
 <link rel="stylesheet" href="/views/board.css?v=3">
-<link rel="stylesheet" href="/views/topology.css?v=3">
+<link rel="stylesheet" href="/views/topology.css?v=4">
 <link rel="stylesheet" href="/views/swarm.css?v=4">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
@@ -43,11 +43,11 @@
 <script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=2"></script>
 <script defer src="/chat-safety.js?v=2"></script>
-<script defer src="/app.js?v=0.9.3-audit2"></script>
+<script defer src="/app.js?v=0.9.3-anchor1"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/independent-capture.js?v=2"></script>
 <script defer src="/investigate.js?v=17"></script>
-<script defer src="/account-import.js?v=5"></script>
+<script defer src="/account-import.js?v=6"></script>
 <script defer src="/integrations.js?v=6"></script>
 <script defer src="/analysis.js?v=5"></script>
 <script defer src="/media-analysis.js?v=2"></script>
@@ -469,7 +469,7 @@
   <section class="card secret-chats" id="secret-chats">
     <div class="secret-top"><span class="tile secret-mark" data-tone="violet"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg></span>
     <div class="secret-top-text"><p class="secret-status" id="secret-status" role="status"></p>
-    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer, file and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices.</p>
+    <details class="secret-explanation"><summary>Details</summary><p>Telegram keeps these chats on one device only. TgWitness takes part with this account's own authorization and records every message, timer and deletion notice in the signed journal, also after the other side deletes them. It sends read receipts and the typing status only as chosen under What the other side sees, and never sends screenshot notices. A file is saved when attachment downloads are on and its size and free disk space allow; until then it stays queued, and each deferred or failed download is recorded.</p>
     <p>An accepted chat moves to TgWitness: this account's other devices, such as the phone, do not get it. Without this option a request waits here for your decision. While pseudo-secret is on, the account stays connected so messages arrive.</p>
     <p id="secret-module" hidden><span id="secret-module-text"></span> <a id="secret-module-source" target="_blank" rel="noopener noreferrer">Source code and license</a><code id="secret-module-digest"></code></p></details></div>
     <div class="secret-settings"><label class="check-label"><input id="secret-enabled" type="checkbox" role="switch" disabled> Turn on pseudo-secret for this account</label>
@@ -610,6 +610,7 @@
       <p class="hint"><a data-go-reports="settings" href="#">Choose report language &amp; case details</a></p>
       <button class="primary" data-export="zip"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed ZIP</button>
       <small>Includes all sources through a fixed journal boundary, regardless of filters. Streaming export · ZIP limit: 4 GiB uncompressed unless changed in Parameters.</small>
+      <p class="hint" hidden id="export-browser-limit">This browser cannot write a download to disk as it arrives. A file over 2 GiB is not kept for a second download: download such a file in Chrome or Edge, or with the command line under Large downloads &amp; verification.</p>
     </div>
   </div>
   <section class="card padded report-card report-download-card" id="export-readable-report">
@@ -673,7 +674,7 @@
   </details>
   <section class="card padded exports-history" aria-labelledby="exports-history-title">
     <div class="card-heading compact"><div><h2 id="exports-history-title">Prepared exports</h2><p id="exports-last" class="hint"></p></div><button class="quiet" type="button" id="exports-history-refresh">Refresh</button></div>
-    <p class="hint">Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, plus the latest file. SHA-256 identifies the exact file.</p>
+    <p class="hint">Prepared files stay on this machine for repeat downloads: up to 20 files within 2 GiB, always including the latest file if it fits in 2 GiB. A larger file is not kept: save it during its first download. SHA-256 identifies the exact file.</p>
     <div id="exports-history-list"></div><p id="exports-history-status" class="hint" role="status"></p>
   </section>
   </div>
@@ -1501,7 +1502,8 @@
         <div class="key-metadata"><div><label for="auth-dc">DC ID</label><select id="auth-dc"><option value="">Select DC</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div><label for="auth-user-id">User ID <span class="subtle">· optional</span></label><input autocomplete="off" id="auth-user-id" inputmode="numeric" maxlength="19" placeholder="User ID" type="text"></div></div>
       </div>
       <div hidden id="import-details">
-        <label class="account-file-picker" for="session-file"><svg aria-hidden="true" class="icon"><use href="#i-upload"/></svg><strong id="file-picker-title">Choose account files</strong><span id="file-picker-caption">One account · up to 4 files · 8 MiB total</span><input accept=".session,.zip,.json,.tgwitness-session,.tgwatch-session,.txt" aria-label="Choose account files" id="session-file" multiple type="file"></label>
+        <label class="account-file-picker" for="session-file"><svg aria-hidden="true" class="icon"><use href="#i-upload"/></svg><strong id="file-picker-title">Choose account files</strong><span id="file-picker-caption">One account · up to 4 files · 8 MiB total</span><input accept=".session,.zip,.json,.tgwitness-session,.tgwatch-session,.txt" aria-describedby="import-destination" aria-label="Choose account files" id="session-file" multiple type="file"></label>
+        <p class="hint" id="import-destination">Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.</p>
         <p class="hint selected-files" hidden id="selected-files" role="status"></p>
 
         <details class="import-advanced"><summary>Passcode or session text</summary>

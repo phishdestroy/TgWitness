@@ -59,6 +59,21 @@ def unexclude(store, chat_id):
     return True
 
 
+OPERATOR_PAUSED = "scope_operator_paused"
+
+
+def operator_paused(store):
+    """Automatically added chats that the operator paused; scope recalculation leaves them paused until resumed."""
+    return {chat_id for chat_id in store.get_setting(OPERATOR_PAUSED, []) or [] if type(chat_id) is int}
+
+
+def hold_operator_pause(store, paused=(), resumed=()):
+    held = operator_paused(store)
+    updated = (held | set(paused)) - set(resumed)
+    if updated != held:
+        store.set_setting(OPERATOR_PAUSED, sorted(updated))
+
+
 def recheck_settings(store):
     return {key: store.get_setting(key, default) for key, default in RECHECK_DEFAULTS.items()}
 
