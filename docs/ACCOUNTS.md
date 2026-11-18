@@ -530,6 +530,9 @@ sign in.
 - The main panel token controls all workspaces. [Issued access](ACCESS.md) can restrict other people to selected accounts and chats, with separate permissions and session limits.
 - **Accounts** renames a workspace and deletes an added one, with its session, journal,
   sources and signing key. The main workspace cannot be deleted from the panel.
+  The account page of an added workspace offers the same **Delete workspace** in its own
+  **Workspace** section, also before any Telegram account is connected; it does not sign
+  the session out of Telegram.
 
 ### Bulk import and account groups
 
