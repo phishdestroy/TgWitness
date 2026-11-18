@@ -2520,11 +2520,12 @@ document.addEventListener("keydown",e=>{
   }
 });
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js?v=6").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=7").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
     renderScope,focusObservation:()=>$("collector-toggle").focus({preventScroll:true}),
+    needsSignIn:s=>!!accountState?.(s)?.needsSignIn,canConnect:()=>viewAllowed("connection"),connect:()=>navigate("connection"),
     confirm:(message,options)=>askConfirm(message,options),
     scopeExclusions:(ids,excluded)=>{if(state.scopeDirty)state.scopeExclude=excluded?
       [...new Set([...state.scopeExclude,...ids])]:state.scopeExclude.filter(id=>!ids.includes(id));},

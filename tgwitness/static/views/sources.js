@@ -378,6 +378,7 @@ export function createSources(context) {
   }
   for (const id of ["target-search", "target-filter", "target-kind", "target-sort"])
     on(find(id), id === "target-search" ? "input" : "change", () => {sourcePage = 0; renderTargets();});
+  on(find("sources-connect"), "click", () => context.connect());
   on(find("target-clear-filters"), "click", () => {
     for (const id of ["target-search", "target-filter", "target-kind"]) find(id).value = "";
     sourcePage = 0; renderTargets(); find("target-search").focus();
@@ -587,8 +588,14 @@ export function createSources(context) {
     });
     find("sources-scope-summary").textContent = context.scopeName(status.scope?.mode || "selected");
     find("sources-count-summary").textContent = tr("{n} enabled sources", {n: status.targets.filter(item => item.enabled).length});
-    find("sources-recording-summary").textContent = tr(status.collector.running ? "Observation enabled" : "Observation paused");
-    find("sources-recording-summary").dataset.tone = status.demo ? "info" : status.collector.running ? "ok" : "off";
+    const collector = status.collector, signIn = !status.demo && context.needsSignIn(status);
+    const linked = status.demo || (collector.has_session && !signIn);
+    find("sources-recording-summary").textContent = status.demo ? tr(collector.running ? "Observation enabled" : "Observation paused")
+      : signIn ? tr("Sign in again") : !collector.has_session ? tr("Telegram is not connected")
+      : !collector.running ? tr("Observation stopped")
+      : collector.connected ? tr("Observation enabled") : tr("Observation enabled") + " · " + tr("Reconnecting to Telegram");
+    find("sources-recording-summary").dataset.tone = status.demo ? "info" : linked && collector.running && collector.connected ? "ok" : "off";
+    find("sources-connect").hidden = linked || !context.canConnect();
     find("sources-tab-count").textContent = String(status.targets.length);
     const note = find("recording-result");
     if (status.demo) note.textContent = tr("This demo is read-only. Recording settings can be changed in your own workspace.");
@@ -686,6 +693,7 @@ export function createSources(context) {
       find(id)?.replaceChildren();
     for (const id of ["sources-scope-summary", "sources-count-summary", "sources-recording-summary"])
       find(id).textContent = "";
+    find("sources-connect").hidden = true;
     find("sources-tab-count").textContent = "0";
     showTab("scope", false, {history: false});
   }

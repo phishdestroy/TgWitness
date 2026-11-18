@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- **Sources** no longer says **Observation paused** for a workspace without a Telegram account. The summary says
+  **Telegram is not connected** with **Connect account** for an access that may open the account page, **Sign in
+  again** when Telegram signed the account out, **Observation stopped** when an account is connected but nothing
+  runs, and **Observation enabled · Reconnecting to Telegram** while recording waits for the connection.
 - A report whose selection matched nothing says in its summary that no journal record matches the selection, and
   the summary says **No observation period recorded** instead of listing observed periods that do not exist. The
   cover says **Not recorded in this export** when the export carries no coverage data and keeps **0 records

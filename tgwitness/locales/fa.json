@@ -522,6 +522,7 @@
   "Waiting for 2FA": "در انتظار احراز هویت دو مرحله‌ای",
   "Waiting for QR": "در انتظار QR",
   "Account not connected": "حساب متصل نیست",
+  "Telegram is not connected": "تلگرام وصل نیست",
   "Pause observation": "موقف کردن مشاهده",
   "Demo uses fictional observations": "دمو از مشاهدات خیالی استفاده می‌کند",
   "Connect an account first": "ابتدا یک حساب کاربری را متصل کنید",
