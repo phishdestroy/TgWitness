@@ -90,6 +90,9 @@
   FileNotFoundError.
 - **Choose the ZIP** and **Choose the folder** on a report's Check tab are buttons reachable with Tab and opened
   with Enter or Space; before, they were labels around hidden file fields and the keyboard skipped them.
+- With **Show selected** on, unselecting a record in a report's Records tab removes it from the list and the count at
+  once, and moves the focus to the next selected record or to the filter; before, the row and "1 of 3" stayed until
+  the search changed.
 
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
