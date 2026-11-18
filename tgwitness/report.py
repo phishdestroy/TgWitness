@@ -200,13 +200,11 @@ def duration_text(say, seconds):
 
 
 def observed_text(say, coverage, window=None):
-    """Observation period on a cover. Missing coverage data stays "—"; a known empty list of periods is said as such;
-    a selection without records gets no duration of its own, even when the journal has observation periods."""
     periods = (coverage or {}).get("continuous")
-    if periods is None:
-        return "—"
     if window is not None and not all(window):
-        return say("0 records selected") + ("" if periods else " · " + say("No observation period recorded"))
+        return say("0 records selected") + (" · " + say("No observation period recorded") if periods == [] else "")
+    if periods is None:
+        return say("Not recorded in this export")
     if not periods:
         return say("No observation period recorded")
     if window is None:
@@ -1267,6 +1265,8 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
     if selected:
         summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
                       n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
+        if not count:
+            summary += " " + say("No record of the journal matches the selection.")
     elif digest.get("telegram_observations") and digest["chats"] and account_text:
         period = say("{account} observed {chats} from {first} to {last}.", account=account_text,
                      chats=counted(say, "{n} chats", len(digest["chats"])), first=utc_text(digest["first"]),
@@ -1287,7 +1287,8 @@ def evidence_brief(say, digest, count, anchors, coverage, account_text, handover
                          n=latest.get("event_count"), time=utc_text(latest.get("time")), service=latest.get("service")))
     gaps = len((coverage or {}).get("gaps") or [])
     includes = [say("Observed periods and gaps in observation ({n}), listed under Coverage.", n=gaps)
-                if gaps else say("Observed periods, listed under Coverage.")]
+                if gaps else say("No observation period recorded") if (coverage or {}).get("continuous") == []
+                else say("Observed periods, listed under Coverage.")]
     if digest.get("telegram_observations") and cats["message"]:
         includes.insert(0, say("Each sender by the Telegram ID and name delivered with the message."))
     if not handover and (cats["edited"] or cats["deleted"]):

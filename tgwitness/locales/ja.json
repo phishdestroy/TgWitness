@@ -4542,6 +4542,7 @@
   "Text unchanged": "テキストは変更なし",
   "Changes": "変更点",
   "Not recorded in this export": "このエクスポートには記録されていません",
+  "No record of the journal matches the selection.": "選択に一致するジャーナルのレコードはありません。",
   "saved in the archive": "アーカイブに保存済み",
   "type not collected by the attachment settings": "添付ファイル設定で収集されていないタイプ",
   "larger than the attachment limit": "添付ファイルのサイズ制限を超えています",

@@ -4542,6 +4542,7 @@
   "Text unchanged": "텍스트 변경 없음",
   "Changes": "변경 사항",
   "Not recorded in this export": "이 내보내기 파일에는 기록되지 않음",
+  "No record of the journal matches the selection.": "선택과 일치하는 저널 기록이 없습니다.",
   "saved in the archive": "아카이브에 저장됨",
   "type not collected by the attachment settings": "첨부 파일 설정에서 수집되지 않은 유형",
   "larger than the attachment limit": "첨부 파일 용량 제한을 초과함",

@@ -4542,6 +4542,7 @@
   "Text unchanged": "文本未作更改",
   "Changes": "更改",
   "Not recorded in this export": "未包含在此导出文件中",
+  "No record of the journal matches the selection.": "日志中没有与所选条件匹配的记录。",
   "saved in the archive": "已保存至归档库",
   "type not collected by the attachment settings": "附件设置中未收集的类型",
   "larger than the attachment limit": "超过附件大小限制",

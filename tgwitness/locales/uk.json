@@ -4623,6 +4623,7 @@
   "Text unchanged": "Текст без змін",
   "Changes": "Зміни",
   "Not recorded in this export": "Не включено до цього експорту",
+  "No record of the journal matches the selection.": "Жоден запис журналу не відповідає відбору.",
   "saved in the archive": "збережено в архіві",
   "type not collected by the attachment settings": "тип, який не збирається налаштуваннями вкладень",
   "larger than the attachment limit": "розмір перевищує обмеження на вкладення",

@@ -4542,6 +4542,7 @@
   "Text unchanged": "ข้อความไม่เปลี่ยนแปลง",
   "Changes": "การเปลี่ยนแปลง",
   "Not recorded in this export": "ไม่รวมในไฟล์ส่งออกนี้",
+  "No record of the journal matches the selection.": "ไม่มีบันทึกในสมุดบันทึกที่ตรงกับการเลือก",
   "saved in the archive": "เก็บไว้ในคลังข้อมูล",
   "type not collected by the attachment settings": "ประเภทที่ไม่ได้เก็บรวบรวมโดยตั้งค่าไฟล์แนบ",
   "larger than the attachment limit": "ใหญ่กว่าขีดจำกัดของไฟล์แนบ",
