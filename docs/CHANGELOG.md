@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
+  macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
+  could leave the journal naming a file whose bytes were never written.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed

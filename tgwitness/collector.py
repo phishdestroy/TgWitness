@@ -62,7 +62,8 @@ from . import file_hashes
 from . import ephemeral
 from . import deletions, history_admin
 from .media_jobs import (MediaAttempt, MediaLocks, MediaOutcome, REUSE_MEANING, download_key, failure_outcome, lane_limits,
-                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, validate_observation)
+                         plan_media, remember_file, reuse_download, reuse_into, stored_copy, sync_directory, sync_file,
+                         validate_observation)
 from .media.dedup_queue import DOWNLOADS
 from .media.workers import AdaptiveSlots
 from .export.batch_requests import MessageBatcher
@@ -5781,6 +5782,7 @@ class Collector:
             result = await download(media)
         if result is None:
             raise ValueError("download_unavailable")
+        await complete_in_thread(sync_file, temp)
         digest = await complete_in_thread(file_digest, temp)
         attempt.advance("hashed_bytes")
         actual_size = temp.stat().st_size
@@ -5795,6 +5797,7 @@ class Collector:
             temp.unlink()
         else:
             temp.replace(destination)
+            await complete_in_thread(sync_directory, media_root)
             if self.media_library is not None:
                 await complete_in_thread(self.media_library.adopt, destination, digest)
         attempt.advance("stored")
