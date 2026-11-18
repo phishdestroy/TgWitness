@@ -354,7 +354,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
     async def goal_preview(body: GoalChange):
         return preview(app, body)
 
-    async def apply_values(desired, note=None, capture=None, keep_conflicts=False):
+    async def apply_values(desired, note=None, capture=None, keep_conflicts=False, allowed=()):
         s, c = app.state.store, app.state.collector
         before, before_capture = values(app), capture_settings(app.state.store)
         if desired["continuous"]:
@@ -362,7 +362,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                 validate_collection_scope(s)
             except ValueError as exc:
                 raise HTTPException(409, str(exc)) from None
-        if conflicts(desired) - (conflicts(before) if keep_conflicts else set()):
+        if conflicts(desired) - (conflicts(before) if keep_conflicts else set()) - set(allowed):
             raise HTTPException(409, "The preserved manual settings conflict with this goal. Review external requests and timestamps.")
         if desired["replica"]:
             destination = replica.replica_settings(s)
@@ -456,9 +456,11 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             payload = found[0]["payload"]
             before, after = payload.get("before") or {}, payload.get("after") or {}
             keys = [key for key in KEYS if key in before and key in after and before[key] != after[key]]
-            current = values(app)
-            goal = (app.state.store.get_setting("goal_preset", None) or {}).get("goal")
-            if any(current[key] != after[key] for key in keys) or "goal_after" in payload and goal != payload["goal_after"]:
+            current, s = values(app), app.state.store
+            seen = {**current, "continuous": current["continuous"]
+                    or bool(s.get_setting("collection_problem", None)) and s.get_setting("collection_intent", False)}
+            goal = (s.get_setting("goal_preset", None) or {}).get("goal")
+            if any(seen[key] != after[key] for key in keys) or "goal_after" in payload and goal != payload["goal_after"]:
                 raise HTTPException(409, LATER_CHANGE)
             desired = {**current, **{key: before[key] for key in keys}}
             capture = payload.get("capture_before") if "files" in keys and desired["files"] == "custom" else None
@@ -469,12 +471,13 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
                     capture = None
             if desired["files"] == "custom" and capture is None:
                 desired["files"] = current["files"]
-            if conflicts(desired) - conflicts(current):
+            earlier = conflicts({**current, **{key: before[key] for key in KEYS if key in before}})
+            if conflicts(desired) - conflicts(current) - earlier:
                 raise HTTPException(409, LATER_CHANGE)
             note = {"restored": body.seq}
             if "goal_after" in payload:
                 note.update(goal_before=goal, goal_after=payload.get("goal_before"))
-            await apply_values(desired, note, capture, keep_conflicts=True)
+            await apply_values(desired, note, capture, keep_conflicts=True, allowed=earlier)
             if "goal_after" in payload:
                 if payload.get("goal_before") in PRESETS:
                     save_goal(app.state.store, payload["goal_before"])
