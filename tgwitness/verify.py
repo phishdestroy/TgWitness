@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 35e8315e4fdbba6a4bb4fb186a74ed78f091403cfec07a1b0b879922a124d608
+# TgWitness verifier sources SHA-256: cab9300743df4030b387f3a6569004b383e5ba4f3f7d81faa37a288122c87d84
 """Standalone verifier"""
 import argparse
 import base64
@@ -7386,9 +7386,25 @@ def cross_check_witness(witness, bundle_path, bundle_result):
     prefixes = bundle_capture_prefixes(bundle_path, {a["event_count"] for a in mine
                                                     if a.get("capture") and a["seq"] in comparable
                                                     and a["event_count"] <= count})
+    held = []
     with open_archive(bundle_path) as archive:
         manifest = read_manifest(archive)
-    created = manifest.get("snapshot_at") if isinstance(manifest.get("snapshot_at"), str) else manifest.get("created_at")
+        for name in archive.namelist():
+            if name.startswith("anchors/") and name.endswith(".json"):
+                try:
+                    statement = json.loads(read_member(archive, name, MAX_JSON_BYTES)).get("statement")
+                except (ValueError, AttributeError):
+                    continue
+                if (isinstance(statement, dict) and statement.get("event_count") == count
+                        and isinstance(statement.get("created_at"), str)):
+                    held.append(statement["created_at"])
+    boundary = manifest.get("boundary") if isinstance(manifest.get("boundary"), dict) else {}
+    if boundary.get("event_count") == count and isinstance(boundary.get("chosen_at"), str):
+        created = boundary["chosen_at"]
+    elif held:
+        created = min(held, key=witness_moment)
+    else:
+        created = manifest.get("snapshot_at") if isinstance(manifest.get("snapshot_at"), str) else manifest.get("created_at")
     created_at = witness_moment(created) if isinstance(created, str) else None
     consistent, conflicts, later, anomalies, matched, beyond = 0, [], 0, [], [], []
     for anchor in mine:
