@@ -29,7 +29,7 @@
 - Helper accounts in profile collection open a public group the main account has not joined: its username is looked
   up when the group is not among the main account's dialogs. Before, the helpers stopped with `no_access`.
 - After an export, a chat with no journal messages says that the exported messages are in the archive instead of
-  “No messages saved for this chat yet”.
+  “No messages saved for this chat yet”. An empty chat view opens at its top instead of scrolled past its title.
 - Reports show one line instead of an all-zero weekday heatmap, its tables of zeros and zero composition bars.
 - The home page says “Observation off” with “Start observation”, as the header does; Swarm summary cards wrap their
   notes instead of cutting them off.

@@ -5930,7 +5930,7 @@ function renderChatFeed(){
     const empty=filtered?viewState("filtered-empty",tr("No messages match these filters"),tr("Search and filters cover all saved messages in this chat, including earlier versions."),tr("Clear filters"),()=>setChatQuery({chatFilter:"all",chatAuthor:null,chatSearch:""})):
       viewState("empty",tr(exported?"No messages from this chat in the journal yet":"No messages saved for this chat yet"),tr(s.demo?"This demo chat has no messages.":exported?"The messages are in the archive (chat.json, chat.html, authors.csv). This chat view shows what observation and “Load history” saved in the journal.":"Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions."),tr("Load last 100 messages"),!s.demo&&s.collector.has_session&&info.enabled?()=>loadHistory(null,100):null);
     empty.classList.add("chat-feed-empty");if(exported)empty.dataset.exported="1";
-    next.push(empty);newer();placeChildren(feed,next);return;
+    next.push(empty);newer();placeChildren(feed,next);feed.scrollTop=0;return;
   }
   const byId=new Map(state.chatMessages.map(m=>[m.message_id,m])),channel=['channel','broadcast'].includes(info?.kind);
   const sentAt=m=>m.sent_at||m.versions[0]?.observed_at||m.deleted_observed_at,instant=m=>{const value=sentAt(m);return value?new Date(value).getTime():0;};
