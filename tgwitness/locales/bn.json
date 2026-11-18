@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected}টি নির্বাচিত · {total}-এর মধ্যে {shown}টি প্রদর্শিত",
   "{shown} of {total}": "{total}-এর মধ্যে {shown}টি",
   "{shown} of {total} matching records": "{total}-এর মধ্যে {shown}টি মেলে এমন রেকর্ড",
+  "Results {from}–{to}": "ফলাফল {from}–{to}",
   "{shown} of {total} parameters": "{total}-এর মধ্যে {shown}টি প্যারামিটার",
   "{shown} records in this window": "এই উইন্ডোতে {shown}টি রেকর্ড",
   "Русский": "রুশ",

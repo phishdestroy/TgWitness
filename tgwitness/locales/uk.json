@@ -3755,6 +3755,7 @@
   "{selected} selected · {shown} of {total} shown": "Вибрано: {selected} · Показано: {shown} із {total}",
   "{shown} of {total}": "{shown} із {total}",
   "{shown} of {total} matching records": "Відповідних записів: {shown} із {total}",
+  "Results {from}–{to}": "Результати {from}–{to}",
   "{shown} of {total} parameters": "Параметрів: {shown} із {total}",
   "{shown} records in this window": "Записів у цьому вікні: {shown}",
   "Русский": "Русский",

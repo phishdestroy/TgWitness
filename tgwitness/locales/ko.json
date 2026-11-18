@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected}개 선택됨 · 전체 {total}개 중 {shown}개 표시됨",
   "{shown} of {total}": "전체 {total}개 중 {shown}개",
   "{shown} of {total} matching records": "일치하는 레코드 {total}개 중 {shown}개",
+  "Results {from}–{to}": "결과 {from}–{to}",
   "{shown} of {total} parameters": "매개변수 {total}개 중 {shown}개",
   "{shown} records in this window": "이 창의 레코드 {shown}개",
   "Русский": "Русский",

@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} dipilih · {shown} daripada {total} ditunjukkan",
   "{shown} of {total}": "{shown} daripada {total}",
   "{shown} of {total} matching records": "{shown} daripada {total} rekod yang sepadan",
+  "Results {from}–{to}": "Keputusan {from}–{to}",
   "{shown} of {total} parameters": "{shown} daripada {total} parameter",
   "{shown} records in this window": "{shown} rekod dalam tetingkap ini",
   "Русский": "Rusia",

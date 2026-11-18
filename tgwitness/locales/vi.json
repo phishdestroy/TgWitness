@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "Đã chọn {selected} · Hiển thị {shown} trong tổng số {total}",
   "{shown} of {total}": "{shown} trong tổng số {total}",
   "{shown} of {total} matching records": "{shown} trong tổng số {total} bản ghi khớp",
+  "Results {from}–{to}": "Kết quả {from}–{to}",
   "{shown} of {total} parameters": "{shown} trong tổng số {total} tham số",
   "{shown} records in this window": "{shown} bản ghi trong khung thời gian này",
   "Русский": "Русский",

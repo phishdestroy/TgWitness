@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} انتخاب‌شده · {shown} از {total} نمایش داده‌شده",
   "{shown} of {total}": "{shown} از {total}",
   "{shown} of {total} matching records": "{shown} از {total} رکورد منطبق",
+  "Results {from}–{to}": "نتایج {from}–{to}",
   "{shown} of {total} parameters": "{shown} از {total} پارامتر",
   "{shown} records in this window": "{shown} رکورد در این بازه",
   "Русский": "روسی (Русский)",
