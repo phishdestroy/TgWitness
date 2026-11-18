@@ -29,9 +29,9 @@
   the run with the notice "No archive" instead of a failed run reading "RuntimeError"; a failed run names the
   supervisor's reason, which is fixed text without private data. The temporary panel opens in the browser's
   language when it is English or Russian, and the QR sign-in button no longer touches the line above it.
-- GitHub Actions capture runs the current collector: the approved workflow `3aedb45c` checks out collector
-  `1d07ebb1` instead of the 0.9.3 build of 11 November, and the pair is the newest entry of the sealed release
-  policy. Archives from earlier approved pairs still verify.
+- GitHub Actions capture runs the current collector: the approved workflow `c292ca0a` checks out collector
+  `f5c131ec` instead of the 0.9.3 build of 11 November, and the pair is the newest entry of the sealed release
+  policy. Archives from earlier approved pairs, including `3aedb45c` with `1d07ebb1`, still verify.
 - A mini application capture no longer lists Chromium's own sign-in and update traffic as the application's
   connections: the application runs in its own browser context behind the recording gate, and the browser's
   background requests go to a gate that refuses them. A Google host Chromium contacts on its own, and the page never
