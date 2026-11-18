@@ -5319,6 +5319,7 @@
   "Recording waits for a working connection": "記錄正在等待可用連線",
   "Chats to record chosen": "已選擇要記錄的聊天",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "你的主要帳戶只能記錄所選聊天。請選擇聊天，或使用獨立帳戶。",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "此工作區已在記錄所選聊天以外的內容。將此帳號標示為主帳號之前，請在「哪些聊天？」中將其縮小為所選聊天。",
   "Only on a separate account.": "僅限獨立帳戶。",
   "Is this a separate account or your main one?": "這是獨立帳戶還是你的主要帳戶？",
   "Setup is applied.": "設定已套用。",

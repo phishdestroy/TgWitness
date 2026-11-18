@@ -5346,6 +5346,7 @@
   "Recording waits for a working connection": "Yozuv ishlaydigan ulanishni kutmoqda",
   "Chats to record chosen": "Yoziladigan chatlar tanlandi",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Asosiy hisobingizda faqat tanlangan chatlarni yozish mumkin. Chatlarni tanlang yoki alohida hisobdan foydalaning.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Bu ish maydoni allaqachon tanlangan chatlardan ko'prog'ini yozib olmoqda. Bu hisobni asosiy hisob deb belgilashdan oldin uni “Qaysi chatlar?” bo'limida tanlangan chatlar bilan cheklang.",
   "Only on a separate account.": "Faqat alohida hisobda.",
   "Is this a separate account or your main one?": "Bu alohida hisobmi yoki asosiy hisobingizmi?",
   "Setup is applied.": "Sozlash qo'llandi.",

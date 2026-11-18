@@ -5346,6 +5346,7 @@
   "Recording waits for a working connection": "ضبط منتظر اتصال فعال است",
   "Chats to record chosen": "گفتگوهای قابل ضبط انتخاب شدند",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "روی حساب اصلی شما فقط گفتگوهای انتخابی ضبط می‌شوند. گفتگو انتخاب کنید یا از حساب جداگانه استفاده کنید.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "این فضای کاری از پیش بیش از گفتگوهای انتخاب‌شده را ضبط می‌کند. پیش از علامت‌گذاری این حساب به‌عنوان حساب اصلی، آن را در «کدام گفتگوها؟» به گفتگوهای انتخاب‌شده محدود کنید.",
   "Only on a separate account.": "فقط روی حساب جداگانه.",
   "Is this a separate account or your main one?": "این یک حساب جداگانه است یا حساب اصلی شما؟",
   "Setup is applied.": "راه‌اندازی اعمال شد.",

@@ -5346,6 +5346,7 @@
   "Recording waits for a working connection": "Kayıt, çalışan bir bağlantıyı bekliyor",
   "Chats to record chosen": "Kaydedilecek sohbetler seçildi",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "Ana hesabınızda yalnızca seçilen sohbetler kaydedilebilir. Sohbet seçin veya ayrı bir hesap kullanın.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Bu çalışma alanı zaten seçilen sohbetlerden fazlasını kaydediyor. Bu hesabı ana hesabınız olarak işaretlemeden önce “Hangi sohbetler?” bölümünde seçilen sohbetlerle sınırlayın.",
   "Only on a separate account.": "Yalnızca ayrı bir hesapta.",
   "Is this a separate account or your main one?": "Bu ayrı bir hesap mı yoksa ana hesabınız mı?",
   "Setup is applied.": "Kurulum uygulandı.",

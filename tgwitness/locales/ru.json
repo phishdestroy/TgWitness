@@ -5645,6 +5645,7 @@
   "Recording waits for a working connection": "Запись ждёт рабочего подключения",
   "Chats to record chosen": "Выбраны чаты для записи",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "На основном аккаунте можно записывать только выбранные чаты. Выберите чаты или используйте отдельный аккаунт.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "Эта рабочая область уже записывает не только выбранные чаты. Прежде чем отметить аккаунт как основной, сузьте запись до выбранных чатов в разделе «Какие чаты?».",
   "Activity and participants": "Активность и участники",
   "Activity by chat": "Активность по чатам",
   "Activity by weekday and hour": "Активность по дням недели и часам",

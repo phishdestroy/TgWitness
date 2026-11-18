@@ -5346,6 +5346,7 @@
   "Recording waits for a working connection": "রেকর্ডিং চালু সংযোগের অপেক্ষায়",
   "Chats to record chosen": "রেকর্ড করার চ্যাট বেছে নেওয়া হয়েছে",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "আপনার প্রধান অ্যাকাউন্টে শুধু বেছে নেওয়া চ্যাট রেকর্ড করা যায়। চ্যাট বেছে নিন বা আলাদা অ্যাকাউন্ট ব্যবহার করুন।",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "এই ওয়ার্কস্পেস ইতিমধ্যে বেছে নেওয়া চ্যাটের চেয়ে বেশি রেকর্ড করে। এই অ্যাকাউন্টকে প্রধান অ্যাকাউন্ট হিসেবে চিহ্নিত করার আগে “কোন চ্যাট?” অংশে এটি বেছে নেওয়া চ্যাটে সীমিত করুন।",
   "Only on a separate account.": "শুধু আলাদা অ্যাকাউন্টে।",
   "Is this a separate account or your main one?": "এটি কি আলাদা অ্যাকাউন্ট নাকি আপনার প্রধান অ্যাকাউন্ট?",
   "Setup is applied.": "সেটআপ প্রয়োগ হয়েছে।",

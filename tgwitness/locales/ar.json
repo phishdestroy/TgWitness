@@ -5454,6 +5454,7 @@
   "Recording waits for a working connection": "التسجيل بانتظار اتصال يعمل",
   "Chats to record chosen": "تم اختيار المحادثات المراد تسجيلها",
   "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.": "على حسابك الرئيسي لا يمكن تسجيل إلا المحادثات المختارة. اختر محادثات أو استخدم حسابًا منفصلًا.",
+  "This workspace already records more than chosen chats. Narrow it to chosen chats under Which chats? before marking this account as your main one.": "تسجّل مساحة العمل هذه بالفعل أكثر من الدردشات المختارة. قيّدها بالدردشات المختارة في «أي دردشات؟» قبل تحديد هذا الحساب كحسابك الرئيسي.",
   "Only on a separate account.": "على حساب منفصل فقط.",
   "Is this a separate account or your main one?": "هل هذا حساب منفصل أم حسابك الرئيسي؟",
   "Setup is applied.": "تم تطبيق الإعداد.",
