@@ -5616,7 +5616,7 @@ async function openSecretChat(id,start=false){
   if(revision!==state.workspaceRevision||state.view!=='secret-chats')return;
   if(start)secretChatsView?.startNew();else await secretChatsView?.selectChat(id);
 }
-const chatListReady=import('./views/chat-list.js?v=telegram4').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=telegram5').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats(),
     adds:{chooseChats:()=>navigate('sources'),canChoose:()=>viewAllowed('sources'),
@@ -5625,6 +5625,11 @@ const chatListReady=import('./views/chat-list.js?v=telegram4').then(({createChat
       dialogs:()=>state.dialogs||[],
       loadDialogs:async()=>{const profile=state.profile,result=await json('dialogs',undefined,{profile});if(profile===state.profile)state.dialogs=result.dialogs||[];},
       searchTelegram:q=>json('telegram-search?'+new URLSearchParams({q}),undefined,{profile:state.profile}),
+      canJoin:()=>may('interact')&&!state.status?.demo&&accountSignedIn(),
+      join:async username=>{const profile=state.profile,revision=state.workspaceRevision;
+        const preview=await json('interactions/preview',{link:'@'+username},{profile});
+        if(profile!==state.profile||revision!==state.workspaceRevision)return null;
+        return panelAction({action:'open',preview_id:preview.preview_id,observe:true},{profile,revision});},
       canWatch:()=>may('sources')&&!state.status?.demo&&!state.status?.chats_limited&&!!state.status?.collector?.has_session&&accountSignedIn(),
       watch:async id=>{const profile=state.profile;await json('targets',{chat_id:id,enabled:true},{profile});await refreshStatus();await refreshChats();}},
     secret:{allowed:secretAllowed,load:()=>json('secret-chats'),open:id=>openSecretChat(id)},

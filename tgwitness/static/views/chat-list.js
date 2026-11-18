@@ -144,23 +144,36 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
         .finally(() => {if (request === globalRequest && current === getSession()) {globalLoading = false; render();}});
     }, 400);
   }
+  async function join(result, button) {
+    const current = getSession(); button.disabled = true;
+    try {
+      const done = await adds.join(result.username);
+      if (current !== getSession() || !done?.chat_id) return;
+      search.value = ''; changed(true);
+      await openChat(done.chat_id);
+    } catch (error) {
+      if (current === getSession() && error.name !== 'StaleView') toast(error.message, true);
+    } finally {if (button.isConnected) button.disabled = false;}
+  }
   function globalRow(result) {
     const row = node('div', 'chat-item chat-item-new'), open = node('button', 'chat-choice');
     const title = result.title || (result.username ? '@' + result.username : tr('Chat {id}', {id: result.chat_id}));
-    const join = !result.member && result.username;
-    const add = node('button', 'primary small chat-watch', tr(join ? 'Join / open' : 'Add'));
+    const joinable = !result.member && !!result.username && ['channel', 'supergroup', 'group'].includes(result.kind);
+    const person = !result.member && !!result.username && !joinable;
+    const add = node('button', 'primary small chat-watch', tr(joinable ? 'Join / open' : person ? 'Open' : 'Add'));
     open.type = add.type = 'button'; row.dataset.dialog = String(result.chat_id);
     const body = node('span', 'chat-item-body'), top = node('span', 'chat-item-top'), bottom = node('span', 'chat-item-bottom');
     top.append(node('span', 'chat-item-title', title));
     if (result.verified) top.append(icon('check'));
     const facts = [tr(kindWords[result.kind] || 'Channel'), result.username ? '@' + result.username : '',
-      result.participants_count != null ? tr('Members') + ': ' + Number(result.participants_count).toLocaleString() : '',
+      result.participants_count != null ? tr('Members') + ': '
+        + Number(result.participants_count).toLocaleString(document.documentElement.lang || undefined) : '',
       result.scam ? 'SCAM' : result.fake ? 'FAKE' : ''].filter(Boolean);
     bottom.append(node('span', 'chat-item-preview', facts.join(' · ')));
     body.append(top, bottom); open.append(avatarNode(result.chat_id, title), body);
     add.setAttribute('aria-label', add.textContent + ': ' + title);
-    const choose = () => join ? openLink('@' + result.username, true) : watch(result, add);
-    if (!result.member && !result.username) add.disabled = true;
+    const choose = joinable ? () => join(result, add) : person ? () => openLink('@' + result.username, true) : () => watch(result, add);
+    if (!result.member && (!result.username || !adds.canJoin?.())) add.disabled = true;
     else {open.addEventListener('click', choose); add.addEventListener('click', choose);}
     row.append(open, add); return row;
   }
