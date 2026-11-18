@@ -949,6 +949,7 @@
   "No live event types selected. Only operational and other group service records will continue.": "선택된 실시간 이벤트 유형이 없습니다. 운영 관련 및 기타 그룹 서비스 기록만 계속됩니다.",
   "No matching sections. Try another name.": "일치하는 섹션이 없습니다. 다른 이름을 입력해 보세요.",
   "No messages saved for this chat yet": "이 채팅에 대해 아직 저장된 메시지가 없습니다.",
+  "No messages from this chat in the journal yet": "이 채팅의 메시지가 아직 저널에 없습니다",
   "No messages saved yet": "아직 저장된 메시지가 없습니다.",
   "No name, photo, username or bio from your other accounts, no personal contacts.": "다른 계정의 이름, 사진, 사용자 이름, 소개글 및 개인 연락처는 포함하지 마십시오.",
   "No observations here yet": "아직 여기에 대한 의견은 없습니다.",

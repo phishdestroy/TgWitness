@@ -163,13 +163,15 @@ class DistributedExport:
             scan_end = min(scan_end, now) if scan_end else now
             username = public_username(entity)
             workers, bounds, densities, entities = [], [], [], {}
-            for profile in chosen:
+
+            async def prepare(profile):
                 app = self.app_for(profile)
                 collector = app.state.collector
                 worker = {"profile_id": profile, "label": self.profiles.entries[profile].get("label", profile),
                           "account_id": (app.state.store.get_setting("account", {}) or {}).get("id"),
                           "public_key": app.state.vault.public_key, "state": "pending", "captured": 0,
                           "ranges": 0, "wait_until": None, "error": None}
+                bound = density = peer = None
                 try:
                     peer = entity if profile == lead_id else await collector.resolve_for_export(chat_id, username)
                     try:
@@ -181,21 +183,30 @@ class DistributedExport:
                         upper = await collector.number_before(peer, datetime.fromisoformat(scan_end))
                         count = None
                     if type(count) is int and count > 0:
-                        densities.append(max(1, upper // count))
+                        density = max(1, upper // count)
                         worker.update(planning_count=count, planning_count_scope="visible history estimate; precision unknown")
                     lower = 1
                     if upper and options.from_utc:
                         lower = await collector.number_before(peer,
                             datetime.fromisoformat(options.from_utc) - timedelta(seconds=1)) + 1
                     if upper >= lower:
-                        bounds.append((lower, upper, profile))
+                        bound = (lower, upper, profile)
                     worker.update(low=lower, high=upper)
-                    entities[profile] = peer
                 except asyncio.CancelledError:
                     raise
                 except Exception as exc:
+                    peer = None
                     worker.update(state="skipped", error=type(exc).__name__,
                                   reason=str(exc) if isinstance(exc, ValueError) else None)
+                return worker, bound, density, peer
+
+            for profile, (worker, bound, density, peer) in zip(chosen, await asyncio.gather(*map(prepare, chosen))):
+                if bound:
+                    bounds.append(bound)
+                if density:
+                    densities.append(density)
+                if peer is not None:
+                    entities[profile] = peer
                 workers.append(worker)
             if lead_id not in entities:
                 lead_worker = next(w for w in workers if w["profile_id"] == lead_id)

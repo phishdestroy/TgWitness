@@ -841,6 +841,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "पुराने संदेश अभी तक लोड नहीं हुए हैं — \"पुराने संदेश दिखाएँ\" का उपयोग करें।",
   "Deletions and edits appear here while observation is on.": "जब अवलोकन चालू हो, तब यहां हटाने और संपादन दिखाई देते हैं।",
   "No messages saved for this chat yet": "इस चैट के लिए अभी तक कोई संदेश सहेजा नहीं गया है",
+  "No messages from this chat in the journal yet": "इस चैट का कोई संदेश अभी जर्नल में नहीं है",
   "This demo chat has no messages.": "इस डेमो चैट में कोई संदेश नहीं हैं।",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "चर्चा देखने के लिए टेलीग्राम से हालिया संदेश लोड करें। नए संदेशों, संपादनों और हटाने की सूचनाओं को पकड़ने के लिए अवलोकन चालू रखें।",
   "Load last 100 messages": "पिछले 100 संदेश लोड करें",

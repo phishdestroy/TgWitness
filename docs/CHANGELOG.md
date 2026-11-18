@@ -25,6 +25,15 @@
 
 ## Unreleased
 
+- Distributed exports prepare all chosen accounts at once instead of one after another.
+- TgWitness remembers the username of a public group it opened without joining, so profile-collection helpers and
+  “Load history” still find the group after a restart. Before, the helpers stopped with `no_access` and loading
+  history refused the chat as not among the dialogs.
+- After an export, a chat with no journal messages says that the exported messages are in the archive instead of
+  “No messages saved for this chat yet”. An empty chat view opens at its top instead of scrolled past its title.
+- Reports show one line instead of an all-zero weekday heatmap, its tables of zeros and zero composition bars.
+- The home page says “Observation off” with “Start observation”, as the header does; Swarm summary cards wrap their
+  notes instead of cutting them off.
 - `migrate-to-external` also re-encrypts resumable account-export queues and saved profiling peers; before, it removed
   `vault.key` while they still needed it. Profiling re-resolves a saved peer that no longer opens.
 - `tgwitness backup` copies checkpoints before the journal, so a backup taken during collection starts after restore,

@@ -837,6 +837,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "Các tin nhắn cũ hơn chưa được tải — vui lòng sử dụng tùy chọn “Hiển thị các tin nhắn cũ hơn”.",
   "Deletions and edits appear here while observation is on.": "Các thao tác xóa và chỉnh sửa sẽ hiển thị tại đây khi chế độ quan sát đang được kích hoạt.",
   "No messages saved for this chat yet": "Chưa có tin nhắn nào được lưu cho cuộc trò chuyện này",
+  "No messages from this chat in the journal yet": "Nhật ký chưa có tin nhắn nào của cuộc trò chuyện này",
   "This demo chat has no messages.": "Cuộc trò chuyện demo này không có tin nhắn nào.",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "Tải các tin nhắn gần đây từ Telegram để xem nội dung cuộc trò chuyện. Tiếp tục theo dõi để phát hiện các tin nhắn mới, các chỉnh sửa và các tin nhắn bị xóa.",
   "Load last 100 messages": "Tải 100 tin nhắn gần nhất",

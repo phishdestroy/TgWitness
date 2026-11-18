@@ -849,6 +849,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "Старіші повідомлення ще не завантажено — скористайтеся функцією «Показати старіші повідомлення».",
   "Deletions and edits appear here while observation is on.": "Під час спостереження тут відображаються видалення та редагування.",
   "No messages saved for this chat yet": "Поки що для цього чату не збережено жодних повідомлень",
+  "No messages from this chat in the journal yet": "У журналі поки немає повідомлень цього чату",
   "This demo chat has no messages.": "У цьому демонстраційному чаті немає повідомлень.",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "Завантажте останні повідомлення з Telegram, щоб переглянути переписку. Продовжуйте спостереження, щоб фіксувати нові повідомлення, редагування та видалення.",
   "Load last 100 messages": "Завантажити останні 100 повідомлень",

@@ -841,6 +841,7 @@
   "Older messages are not loaded yet — use “Show older messages”.": "پیام‌های قدیمی‌تر هنوز بارگذاری نشده‌اند — از «نمایش پیام‌های قدیمی‌تر» استفاده کنید.",
   "Deletions and edits appear here while observation is on.": "حذف‌ها و ویرایش‌ها در حالی که مشاهده فعال است، در اینجا نمایش داده می‌شوند.",
   "No messages saved for this chat yet": "هنوز هیچ پیامی برای این گفتگو ذخیره نشده است",
+  "No messages from this chat in the journal yet": "هنوز هیچ پیامی از این گفتگو در ژورنال نیست",
   "This demo chat has no messages.": "این چت نمایشی هیچ پیامی ندارد.",
   "Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions.": "پیام‌های اخیر تلگرام را بارگذاری کنید تا گفتگو را ببینید. مشاهده را فعال نگه دارید تا پیام‌های جدید، ویرایش‌ها و حذف‌ها را ثبت کنید.",
   "Load last 100 messages": "بارگذاری ۱۰۰ پیام آخر",

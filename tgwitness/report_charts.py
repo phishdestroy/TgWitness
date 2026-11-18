@@ -196,9 +196,12 @@ def html(data, say):
                                [(r["period"], r["total"], '; '.join(say(KINDS[k])+': '+str(v) for k, v in r["counts"].items() if v)) for r in rows], say))
         parts.append('</figure>')
     if chart := data.get("hourly"):
-        parts.append('<figure class="analytics-figure chart-card chart-heatmap"><figcaption>'+_e(say("Observation times by weekday and hour"))+'</figcaption>'+heat_svg(chart, say))
-        parts.append(_table([say("Period (UTC)"), say("Observations")],
-                           [(say(DAYS[d])+f' {hour:02d}:00', value) for d, row in enumerate(chart["rows"]) for hour, value in enumerate(row)], say))
+        observed = any(value for row in chart["rows"] for value in row)
+        parts.append('<figure class="analytics-figure chart-card chart-heatmap"><figcaption>'+_e(say("Observation times by weekday and hour"))+'</figcaption>'
+                     +(heat_svg(chart, say) if observed else '<p>'+_e(say("No observations in this selection."))+'</p>'))
+        if observed:
+            parts.append(_table([say("Period (UTC)"), say("Observations")],
+                               [(say(DAYS[d])+f' {hour:02d}:00', value) for d, row in enumerate(chart["rows"]) for hour, value in enumerate(row)], say))
         parts.append('</figure>')
     parts.append('<div class="analytics-pair">')
     for key, title in (("participants", "Most observed participants"), ("chats", "Activity by chat")):
@@ -214,7 +217,8 @@ def html(data, say):
     if composition := data.get("composition"):
         rows = [{"label": KINDS[k], "total": value} for k, value in composition.items()]
         parts.append('<figure class="analytics-figure chart-card chart-composition"><figcaption>'+_e(say("Record composition"))+'</figcaption>'
-                     +bars_html({"rows": rows}, say)+'</figure>')
+                     +(bars_html({"rows": rows}, say) if any(composition.values())
+                       else '<p>'+_e(say("No observations in this selection."))+'</p>')+'</figure>')
     parts.append('<p>'+_e(say("All bars start at zero. Values are counts, not percentages."))+'</p>')
     if data.get("invalid_time_events"):
         parts.append('<p>'+_e(say("Observations with an unusable time: {n}", n=data["invalid_time_events"]))+'</p>')
@@ -296,31 +300,34 @@ def pdf(lay, data):
             lay.text(say("No observations in this selection."),size=9)
     if chart := data.get("hourly"):
         lay.heading(say("Observation times by weekday and hour"))
-        if pdf.get_y()+65 > pdf.page_break_trigger:
-            pdf.add_page()
-        rows = chart["rows"]
-        maximum = max((v for row in rows for v in row), default=0) or 1
-        left, top, step = pdf.l_margin+32, pdf.get_y()+3, (pdf.epw-32)/24
-        for day, row in enumerate(rows):
-            pdf.set_xy(pdf.l_margin, top+day*6)
-            pdf.set_font("Sans",size=7)
-            pdf.multi_cell(30,3,say(DAYS[day]),align=lay.align[0])
-            for hour, value in enumerate(row):
-                fraction = value/maximum
-                color = tuple(round(a+(b-a)*fraction) for a,b in zip((231,240,241),(36,126,140)))
-                with pdf.local_context(fill_color=color):
-                    pdf.rect(left+hour*step,top+day*6,step-.5,5.4,style="F")
-        for hour in range(0,24,3):
-            pdf.set_xy(left+hour*step,top+44)
-            pdf.set_font("Sans",size=6)
-            pdf.cell(step,3,f'{hour:02d}')
-        pdf.set_y(top+50)
-        lay.text(say(TIME_NOTE),size=8)
-        lay.heading(say("Exact figures"))
-        for start in (0,12):
-            lay.grid([say("Hour (UTC)"), *[f'{hour:02d}' for hour in range(start,start+12)]],
-                     [(say(DAYS[day]), *row[start:start+12]) for day,row in enumerate(rows)],
-                     [24]+[76/12]*12)
+        if not any(value for row in chart["rows"] for value in row):
+            lay.text(say("No observations in this selection."), size=9)
+        else:
+            if pdf.get_y()+65 > pdf.page_break_trigger:
+                pdf.add_page()
+            rows = chart["rows"]
+            maximum = max((v for row in rows for v in row), default=0) or 1
+            left, top, step = pdf.l_margin+32, pdf.get_y()+3, (pdf.epw-32)/24
+            for day, row in enumerate(rows):
+                pdf.set_xy(pdf.l_margin, top+day*6)
+                pdf.set_font("Sans",size=7)
+                pdf.multi_cell(30,3,say(DAYS[day]),align=lay.align[0])
+                for hour, value in enumerate(row):
+                    fraction = value/maximum
+                    color = tuple(round(a+(b-a)*fraction) for a,b in zip((231,240,241),(36,126,140)))
+                    with pdf.local_context(fill_color=color):
+                        pdf.rect(left+hour*step,top+day*6,step-.5,5.4,style="F")
+            for hour in range(0,24,3):
+                pdf.set_xy(left+hour*step,top+44)
+                pdf.set_font("Sans",size=6)
+                pdf.cell(step,3,f'{hour:02d}')
+            pdf.set_y(top+50)
+            lay.text(say(TIME_NOTE),size=8)
+            lay.heading(say("Exact figures"))
+            for start in (0,12):
+                lay.grid([say("Hour (UTC)"), *[f'{hour:02d}' for hour in range(start,start+12)]],
+                         [(say(DAYS[day]), *row[start:start+12]) for day,row in enumerate(rows)],
+                         [24]+[76/12]*12)
     for key, title in (("participants","Most observed participants"),("chats","Activity by chat")):
         if not (chart := data.get(key)):
             continue
@@ -349,12 +356,15 @@ def pdf(lay, data):
         lay.need(90)
         lay.heading(say("Record composition"))
         maximum = max(composition.values(), default=0) or 1
-        for kind, count in composition.items():
-            lay.need(15)
-            lay.text(say(KINDS[kind])+" · "+str(count), size=8)
-            with pdf.local_context(fill_color=_rgb(COLORS[kind])):
-                pdf.rect(pdf.l_margin, pdf.get_y(), pdf.epw*count/maximum, 2, style="F")
-            lay.gap(5)
+        if not any(composition.values()):
+            lay.text(say("No observations in this selection."), size=9)
+        else:
+            for kind, count in composition.items():
+                lay.need(15)
+                lay.text(say(KINDS[kind])+" · "+str(count), size=8)
+                with pdf.local_context(fill_color=_rgb(COLORS[kind])):
+                    pdf.rect(pdf.l_margin, pdf.get_y(), pdf.epw*count/maximum, 2, style="F")
+                lay.gap(5)
     lay.text(say("All bars start at zero. Values are counts, not percentages."),size=8)
     if data.get("invalid_time_events"):
         lay.text(say("Observations with an unusable time: {n}",n=data["invalid_time_events"]),size=8)

@@ -949,6 +949,7 @@
   "No live event types selected. Only operational and other group service records will continue.": "ライブイベントの種類は選択されていません。運用記録およびその他のグループサービス記録のみが継続されます。",
   "No matching sections. Try another name.": "一致するセクションはありません。別の名前をお試しください。",
   "No messages saved for this chat yet": "このチャットにはまだ保存されたメッセージがありません",
+  "No messages from this chat in the journal yet": "このチャットのメッセージはまだジャーナルにありません",
   "No messages saved yet": "まだ保存されたメッセージはありません",
   "No name, photo, username or bio from your other accounts, no personal contacts.": "他のアカウントからの名前、写真、ユーザー名、プロフィール、および個人の連絡先は一切使用しないでください。",
   "No observations here yet": "ここにはまだコメントがありません",
