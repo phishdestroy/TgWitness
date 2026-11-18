@@ -548,8 +548,10 @@ async def export_handover(
     )
 
     def build():
+        with ctx.app.state.access.lock:
+            people = dict(ctx.app.state.access.names)
         path, recorded = handover.export(
-            ctx.app.state.store, ctx.app.state.vault, selection, options
+            ctx.app.state.store, ctx.app.state.vault, selection, options, people=people
         )
         try:
             summary.update(recorded)

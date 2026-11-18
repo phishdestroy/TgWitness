@@ -447,7 +447,7 @@ def selection_text(options, titles, people, minimiser):
             "pseudonyms": len(minimiser.labels)}
 
 
-def export(store, vault, options, report_options=None):
+def export(store, vault, options, report_options=None, people=None):
     report_options = report_options or report.resolved()
     directory = store.root / "temporary-exports"
     directory.mkdir(mode=0o700, exist_ok=True)
@@ -483,7 +483,7 @@ def export(store, vault, options, report_options=None):
             titles = {t["chat_id"]: t["title"] for t in store.targets()
                       if t["chat_id"] in minimiser.chats and t.get("title")}
             from .board_handover import prepare as prepare_board
-            board_export = prepare_board(snapshot, records_path, vault, options, minimiser)
+            board_export = prepare_board(snapshot, records_path, vault, options, minimiser, people)
         if not minimiser.messages:
             raise EmptySelection("No message in the journal matches these chats, period and people.")
         head = survey.head or {}
