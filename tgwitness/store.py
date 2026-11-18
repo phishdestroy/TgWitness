@@ -477,6 +477,13 @@ class Store:
                 "SELECT seq, hash, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
                 " ORDER BY seq", (chat_id, *ids, *CHAT_KINDS)).fetchall()
+            slots = ",".join("?" * len(ids))
+            outcomes = {r["message_id"]: (r["kind"], json.loads(r["payload"])) for r in db.execute(
+                "SELECT message_id, kind, payload FROM events WHERE chat_id=? AND message_id IN (" + slots + ")"
+                " AND kind IN ('media.skipped','media.failed','media.retry') ORDER BY seq", (chat_id, *ids))}
+            queued = {r[0] for r in db.execute(
+                "SELECT message_id FROM media_jobs WHERE chat_id=? AND message_id IN (" + slots + ")"
+                " AND state IN ('queued','retry')", (chat_id, *ids))}
         messages = {}
         for row in rows:
             payload = json.loads(row["payload"])
@@ -551,6 +558,11 @@ class Store:
             item["buttons"] = current["buttons"] if current else None
             item["missing"] = bool(states[item["message_id"]]["missing"])
             item["edited"] = bool(states[item["message_id"]]["edited"] or item["telegram_edited_at"])
+            outcome = outcomes.get(item["message_id"])
+            item["file"] = ({"state": "saved"} if item["media"] else {"state": "queued"} if item["message_id"] in queued
+                            else {"state": outcome[0].removeprefix("media."), "kind": outcome[0],
+                                  "reason": outcome[1].get("reason"), "error_type": outcome[1].get("error_type")}
+                            if outcome else None) if item["has_media"] or item["media"] else None
             result.append(item)
         return {"messages": result, "next_before": min(ids) if older else None,
                 "next_after": max(ids) if newer else None}

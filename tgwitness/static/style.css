@@ -944,6 +944,9 @@ form > .health-detail { margin-top: 14px; }
 .pill-deleted { background: var(--danger-soft); border-color: var(--danger-border); color: var(--danger); }
 .pill-edited { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent-text); }
 .pill-missing { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning); }
+.pill-file { background: var(--success-soft); border-color: var(--success-border); color: var(--success); }
+.pill-file-waiting { background: var(--surface-3); border-color: var(--border-strong); color: var(--text-2); }
+.pill-file-missing { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning); white-space: normal; }
 button.pill { cursor: pointer; font-family: inherit; }
 .chat-pane { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 #chat-main { display: flex; flex-direction: column; min-height: 0; height: 100%; }

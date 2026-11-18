@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- A message with an attachment in an open chat says what happened to the file: **File saved**, **Queued** while the
+  download waits, or the recorded reason it was not saved, such as **Larger than the size limit** or **Telegram did
+  not provide the file**. A message whose file outcome is not recorded keeps the paper-clip mark. The time under a
+  message names both times with the display time zone: **Sent** by Telegram and **Saved** by the collector.
 - The journal's download button is named **Download entire journal (ZIP)** and asks first, naming the workspace
   and account, every source, the period up to the latest record with its time zone, the number of records and of
   saved files, and, when the list is filtered, that the filters and search do not apply. **Choose records to
