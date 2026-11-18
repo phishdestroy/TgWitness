@@ -104,7 +104,7 @@ def verify_handover(path, expected_fingerprint=None, chosen=None):
                 key.verify(base64.b64decode(record["signature"], validate=True), bytes.fromhex(record["hash"]))
                 if seq == count and record["hash"] != head:
                     raise ValueError("The last record differs from the journal head")
-                if record["kind"] in ("media.saved", "actor.avatar_saved", "secret_chat.file"):
+                if record["kind"] in ("media.saved", "actor.avatar_saved", "secret_chat.file", "webapp.file"):
                     digest = (record["payload"] or {}).get("media_sha256")
                     if "media/" + str(digest) in files:
                         referenced.add("media/" + digest)

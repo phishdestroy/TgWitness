@@ -109,7 +109,7 @@ def verify_event_lines(lines, public_key, take=None, remember=None):
 
 
 def media_reference(event):
-    if event["kind"] not in ("media.saved", "actor.avatar_saved", "secret_chat.file"):
+    if event["kind"] not in ("media.saved", "actor.avatar_saved", "secret_chat.file", "webapp.file"):
         return None
     payload = event["payload"]
     digest, size = payload.get("media_sha256"), payload.get("size")

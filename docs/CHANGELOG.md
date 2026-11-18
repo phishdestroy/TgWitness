@@ -25,6 +25,15 @@
 
 ## Unreleased
 
+- Mini applications open from the panel: **Open mini app** under a button and **Info → Mini apps** in a chat list
+  the chat's mini application buttons, `t.me/<bot>/<app>` and `?startapp` links, and a bot's menu and main app.
+  Opening one asks Telegram for its address as the account, loads it once in an isolated headless Chromium through
+  the workspace route and records every request, WebSocket frame, Telegram WebApp call (phone, payment, links,
+  data to the bot), dialog, window and download, with screenshots, the page and its scripts, in the signed
+  journal. The signed launch data is removed from everything recorded. Screenshots appear in the investigation
+  timeline, indicators in reports, and files in evidence archives, where `verify.py` binds them to the journal.
+  Without a browser, the page and its own scripts are fetched and parsed. Before, mini applications could only
+  be fetched as one page through the API, which missed every address inside its scripts.
 - Investigation has one place and one name: **Investigation** sits on the navigation rail and in the main menu, with a
   red dot while a record runs. Before, “Documentation” hid under More tools and could not be opened at all in the
   Simple interface level. Its panel shows whether investigation mode is on and turns it on after a confirmation that

@@ -76,7 +76,8 @@ From the panel you can preview and join links, send messages and press bot butto
 are real actions by the selected account and they're journaled with their results.
 
 If an outcome is unknown, check before retrying. Button presses in another Telegram app
-aren't visible to the collector. Payments, phone/location and web apps aren't supported.
+aren't visible to the collector. Payments and phone/location buttons aren't supported. Mini application
+buttons open in an isolated browser and are recorded; see [Mini applications](../MINI-APPS.md).
 
 ## Document as you go
 

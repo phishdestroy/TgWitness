@@ -353,7 +353,7 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                         name = "hashes/" + hashlib.sha256(data).hexdigest() + ".json"
                         if name not in hashes:
                             write_member(name, [data])
-                    digest = event["payload"].get("media_sha256") if event["kind"] in ("media.saved", "actor.avatar_saved", "secret_chat.file") else None
+                    digest = event["payload"].get("media_sha256") if event["kind"] in ("media.saved", "actor.avatar_saved", "secret_chat.file", "webapp.file") else None
                     if not digest:
                         continue
                     if len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):

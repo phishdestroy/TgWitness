@@ -5908,7 +5908,17 @@ async function openPersonCard(userId){
 }
 personCardHost.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePersonCard();}});
 window.addEventListener('tgwitness:lock',closePersonCard);
-const CHAT_PANELS=[['profile','Profile'],['activity','People'],['people','Authors']];
+const CHAT_PANELS=[['profile','Profile'],['activity','People'],['people','Authors'],['miniapps','Mini apps']];
+let miniAppsView=null;
+const miniAppsReady=()=>miniAppsView?Promise.resolve(miniAppsView):import("./views/mini-apps.js?v=1").then(({createMiniApps})=>miniAppsView=createMiniApps({
+  node,icon,tr,json,busy,confirm:(message,options)=>askConfirm(message,options),toast,fmtFull,isAdmin:()=>!!state.me?.admin,
+  may:permission=>may(permission)&&!state.status?.demo&&!!state.status?.collector?.has_session,
+  preview:path=>api(path).then(r=>r.ok?r.blob():null).then(b=>b&&URL.createObjectURL(b)),mask:value=>window.TgWitnessPrivacy.preview(value),
+  openRecord,current:chat=>state.view==='chats'&&state.chat===chat}));
+function showMiniApps(seq=null){
+  const body=$("chat-info-body");miniAppsView?.reset();if(seq)miniAppsView?.focus(seq);
+  state.chatPanel='miniapps';state.lastChatPanel='miniapps';body.replaceChildren();body.dataset.miniChat=String(state.chat);renderChatInfo();
+}
 function renderChatInfo(){
   const panel=$("chat-info"),body=$("chat-info-body"),shell=viewQuery("chats",".chats-shell");
   const open=state.view==='chats'&&state.chat!==null&&!!state.chatPanel&&!$("chat-main").hidden&&!!state.chatInfo;
@@ -5923,6 +5933,16 @@ function renderChatInfo(){
   for(const tab of tabs.children)tab.setAttribute("aria-pressed",String(tab.dataset.panel===state.chatPanel));
   const s=state.status;
   if(state.chatPanel==='activity'){peopleTimelineReady.then(view=>view.load());return;}
+  if(state.chatPanel==='miniapps'){
+    const chat=state.chat;
+    if(body.firstElementChild&&body.dataset.miniChat===String(chat))return;
+    if(body.dataset.miniChat!==String(chat))miniAppsView?.reset();
+    body.dataset.miniChat=String(chat);body.replaceChildren(viewState("loading",tr("Loading…")));
+    miniAppsReady().then(view=>view.render(body,chat)).catch(error=>{
+      if(error instanceof StaleView||state.chat!==chat||state.chatPanel!=='miniapps')return;
+      body.replaceChildren(viewState("error",tr("Could not load data"),error.message||"",tr("Retry"),()=>{body.replaceChildren();renderChatInfo();}));
+    });return;
+  }
   if(state.chatPanel==="people"){
     const generation=chatGeneration;
     if(!body.querySelector(".people"))body.replaceChildren(viewState("loading",tr("Loading…")));
@@ -6343,6 +6363,15 @@ function buttonsNode(keyboard,message=null){
           await panelAction({action:"press",chat_id:chat,message_id:message.message_id,
             keyboard_event:(message.current_version||message.versions.at(-1)).seq,row:rowIndex,column},{profile,revision});
         }));item.append(press);
+      }
+      if(b.type==="web_app"&&b.url&&message&&!message.deleted&&!state.status?.demo&&state.me?.admin&&may('interact')&&state.status?.collector.has_session){
+        const launch=node("button","secondary small",tr("Open mini app"));launch.type="button";
+        launch.addEventListener("click",()=>busy(launch,async()=>{
+          if(generation!==chatGeneration||revision!==state.workspaceRevision||chat!==state.chat)return;
+          const view=await miniAppsReady();
+          const result=await view.open(chat,{type:"button",seq:(message.current_version||message.versions.at(-1)).seq,row:rowIndex,column,inline:keyboard.inline},null);
+          if(result&&chat===state.chat)showMiniApps(result.seq);
+        }));item.append(launch);
       }
       line.append(item);
     }

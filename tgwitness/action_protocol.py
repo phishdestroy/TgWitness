@@ -13,7 +13,7 @@ MAX_DELETIONS = 200
 MAX_TEXT = 2000
 MAX_EVENTS = 20000
 CHAT_KINDS = ("message.new,message.edited,message.deleted,media.saved,source.added,conversation.draft_generated,"
-              "media.qr_decoded,watchlist.hit")
+              "media.qr_decoded,watchlist.hit,webapp.launch_requested,webapp.captured")
 ACCOUNT_KINDS = ("account.profile_updated", "account.privacy_updated", "account.global_privacy_updated",
                  "account.avatar_updated", "account.avatar_removed")
 DRAFT_SIMILARITY = 0.8
@@ -309,6 +309,13 @@ def drafted(text, drafts):
     return None
 
 
+WEBAPP_ASKS = {"phone": "Phone number", "write_access": "Permission to message this account", "payment": "Payment",
+               "link": "Open a link", "telegram_link": "Open a Telegram link", "data": "Send data to the bot",
+               "message": "Send a prepared message", "inline": "Inline query", "download": "File download",
+               "clipboard": "Read the clipboard", "location": "Location", "emoji_status": "Emoji status",
+               "story": "Post a story", "popup": "Pop-up", "biometry": "Biometric access",
+               "home_screen": "Home-screen shortcut"}
+
 def visual_step(event, payload):
     files = [{"sha256": item["sha256"], "mime_type": item.get("media_type"), "role": item.get("role")}
              for item in payload.get("artifacts") or [] if isinstance(item, dict) and isinstance(item.get("sha256"), str)]
@@ -319,6 +326,21 @@ def visual_step(event, payload):
         "http_status": payload.get("http_status"), "server_ip": server.get("ip"), "issuer": tls.get("issuer"),
         "subject": mapping(payload.get("subject")), "recorder": payload.get("fingerprint"),
         "recorder_seq": payload.get("recorder_seq"), "files": files,
+        "errors": [item.get("component") for item in payload.get("errors") or [] if isinstance(item, dict)]})
+
+
+def webapp_step(event, payload):
+    files = [{"sha256": item["sha256"], "mime_type": item.get("mime_type"), "role": item.get("role")}
+             for item in payload.get("files") or [] if isinstance(item, dict) and isinstance(item.get("sha256"), str)
+             and item.get("role") == "screenshot"]
+    bot = mapping(payload.get("bot"))
+    return compact({
+        "type": "visual", "source": "webapp", "at": event.get("observed_at"), "ref": reference(event),
+        "url": payload.get("address"), "final_url": payload.get("final_url"), "title": clip(payload.get("title")),
+        "http_status": payload.get("status"), "files": files, "method": payload.get("method"),
+        "subject": compact({"telegram": "@" + bot["username"] if bot.get("username") else None, "chat_id": bot.get("id")}),
+        "hosts": len(payload.get("hosts") or []), "third_party": len(payload.get("third_party_hosts") or []),
+        "asks": [item.get("kind") for item in payload.get("asks") or [] if isinstance(item, dict)],
         "errors": [item.get("component") for item in payload.get("errors") or [] if isinstance(item, dict)]})
 
 
@@ -408,6 +430,12 @@ def build(events, window_seconds=WINDOW_SECONDS, max_following=MAX_FOLLOWING, ch
             if (chat_id is None and chats is not None) or (chat_id is not None and not allowed(chat_id)):
                 continue
             protocol.add(chat_id, visual_step(event, payload))
+        elif kind == "webapp.launch_requested":
+            if chat_id is not None and allowed(chat_id):
+                protocol.act(chat_id, event.get("observed_at"), "request")
+        elif kind == "webapp.captured":
+            if chat_id is not None and allowed(chat_id):
+                protocol.add(chat_id, webapp_step(event, payload))
         elif kind == "account.opsec_checked":
             if account:
                 protocol.add(None, self_step(event, payload))
@@ -672,6 +700,22 @@ def sentence(step, say, clock=same):
             line += " " + say("{label}: {now}; recommended: {better}.", label=say(item.get("label") or ""),
                               now=say("visible to " + str(item.get("visible_to"))),
                               better=say("visible to " + str(item.get("recommended"))))
+        return line
+    if kind == "visual" and step.get("source") == "webapp":
+        line = say("Opened the mini application at {url} in the isolated browser.", url=step.get("url", ""))
+        if step.get("final_url") and step["final_url"] != step.get("url"):
+            line += " " + say("It ended at {url}.", url=step["final_url"])
+        if step.get("title"):
+            line += " " + say("Page title: {title}.", title=quoted(step["title"]))
+        if step.get("hosts"):
+            line += " " + say("It contacted {n} hosts, {m} of them other than its own.", n=step["hosts"],
+                              m=step.get("third_party", 0))
+        if step.get("asks"):
+            line += " " + say("It asked Telegram for: {asks}.", asks=", ".join(say(WEBAPP_ASKS.get(a, a)) for a in step["asks"]))
+        if step.get("method") == "static":
+            line += " " + say("No browser was available; only the page and its scripts were fetched.")
+        if step.get("errors"):
+            line += " " + say("Not captured: {parts}.", parts=", ".join(step["errors"]))
         return line
     if kind == "visual":
         line = say("Opened {url} in the isolated browser.", url=step.get("url", ""))

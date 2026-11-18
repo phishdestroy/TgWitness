@@ -104,6 +104,7 @@ DEMO_STATIC["demo/views/chat-picker.js"] = "tgwitness/static/views/chat-picker.j
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name for name in ("visibility.js", "visibility.css")})
 DEMO_STATIC["demo/views/profile-collection.js"] = "tgwitness/static/views/profile-collection.js"
 DEMO_STATIC["demo/views/authors-collect.js"] = "tgwitness/static/views/authors-collect.js"
+DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name for name in ("mini-apps.js", "mini-apps.css")})
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
                     for name in ("system-map.js", "system-map-scene.js", "system-map.css")})
 DEMO_STATIC.update({"demo/views/topology.js": "tgwitness/static/views/topology.js",
