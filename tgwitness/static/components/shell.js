@@ -29,6 +29,17 @@ export function createResponsiveShell({node, icon, tr}) {
     return item;
   });
   workspace.prepend(rail);
+  const measure = document.createElement("canvas").getContext("2d");
+  function fitRail() {
+    const shown = railItems.filter(item => !item.hidden && item.lastElementChild.textContent);
+    if (!measure || !shown.length) return;
+    const style = getComputedStyle(shown[0]), room = 112 - 18;
+    measure.font = style.fontWeight + " " + style.fontSize + " " + style.fontFamily;
+    const widest = Math.max(...shown.flatMap(item => item.lastElementChild.textContent.split(/\s+|(?<=-)/)).map(word => measure.measureText(word).width));
+    rail.style.setProperty("--nav-rail", Math.min(112, Math.max(82, Math.ceil(widest) + 18)) + "px");
+    const size = widest > room ? Math.max(8.5, parseFloat(style.fontSize) * room / widest).toFixed(1) + "px" : "";
+    for (const item of railItems) item.lastElementChild.style.fontSize = size;
+  }
   function syncRail(current = null) {
     for (const item of railItems) {
       const source = sidebar.querySelector('.nav[data-view="' + item.dataset.railView + '"]');
@@ -39,9 +50,11 @@ export function createResponsiveShell({node, icon, tr}) {
       const active = current ? current === item.dataset.railView : source.classList.contains("active");
       if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
     }
+    fitRail();
   }
   new MutationObserver(() => syncRail()).observe(sidebar.querySelector("nav"), {attributes: true, subtree: true, childList: true, characterData: true, attributeFilter: ["class", "hidden"]});
   syncRail();
+  document.fonts?.ready.then(fitRail);
   let opened = false, previousFocus = null, openMenu = null;
   const closeMenus = (except = null) => {
     if (openMenu && openMenu !== except) {openMenu.open = false; openMenu = null;}

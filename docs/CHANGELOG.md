@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- The navigation rail widens to the longest word of its labels in the panel language, so labels such as
+  “Псевдосекрет”, “Einstellungen” or “Configuración” no longer break in the middle of a word.
 - Pseudo-secret reports read long chats in linear time, stop embedding image previews in HTML after 48 MB, skip PDF
   images above 50 megapixels and let a message taller than a page continue on the next page instead of drawing its
   frame past the page edge.
