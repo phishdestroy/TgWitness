@@ -63,6 +63,9 @@
   timestamps on and no receipt yet it says it is waiting for the service, or that requests outside Telegram are
   turned off so no timestamp can be requested, and the summary reads "Integrity only until a timestamp receipt covers
   the last record". `/api/verify` adds `conditions.timestamp_state`.
+- Escape closes the command palette first when it was opened from the mobile menu, returning the focus to **Go to…**;
+  the next Escape closes the menu. Before, the first Escape closed the menu under the palette and the focus was lost
+  after the second.
 
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
