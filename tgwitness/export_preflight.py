@@ -194,7 +194,7 @@ async def preview_capture(collector, chat_id, settings, remaining_seconds):
             if not getattr(message, "file", None):
                 continue
             rule = effective_media_rule(settings, media_kind(message), ephemeral.describe(message.media))
-            size = getattr(message.file, "size", None)
+            size = file_hashes.expected_bytes(message)
             action = media_action(settings, rule, size) if duration_allowed(message, rule) else "exclude"
             if action == "exclude":
                 sample["excluded_attachments"] += 1

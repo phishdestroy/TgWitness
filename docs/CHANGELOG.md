@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- Very small photos are saved again. When a photo's largest image was smaller than the estimate for its blurred
+  preview, about 1 KB, TgWitness expected the preview's size and discarded the downloaded image because its size
+  differed. The expected size and the size estimates for exports and storage now come from the image that is
+  downloaded.
 - Joining a chat from the Chats page no longer reports success when Telegram first asks for a check in a bot's mini
   app. The action is recorded as not accepted, with the bot ID, and the chat is not added to observation. The chat
   taken from an invite join now comes from Telegram's answer, without another invite check.

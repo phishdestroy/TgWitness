@@ -113,7 +113,7 @@ def validate_observation(job, original):
 
 def plan_media(job, policy, capture, message):
     ephemeral_media = ephemeral.describe(message.media)
-    size = getattr(message.file, "size", None) if message.file else None
+    size = file_hashes.expected_bytes(message)
     kind = policy.get("media_type") or media_kind(message)
     rule = effective_media_rule(capture, kind, ephemeral_media)
     limit = rule["max_mb"] * 1024**2
