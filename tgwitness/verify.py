@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 65e3ad5ca9459217eb5f4582274aafa96bc352585fc6b9a57990d2a8b49f684d
+# TgWitness verifier sources SHA-256: 35e8315e4fdbba6a4bb4fb186a74ed78f091403cfec07a1b0b879922a124d608
 """Standalone verifier"""
 import argparse
 import base64
@@ -10869,7 +10869,7 @@ def interactive_verify(args):
     if fp:
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
-                 "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
+                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
         value = getattr(args, name)
         for item in value if isinstance(value, list) else [value] if value else ():
             command += ["--" + name.replace("_", "-"), str(item)]
@@ -11043,7 +11043,8 @@ def archive_kind(path):
 def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
-                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require_tier", "sealed_attestation", "board")
+                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require", "require_tier", "sealed_attestation",
+                    "board")
                    if getattr(args, name)]
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
