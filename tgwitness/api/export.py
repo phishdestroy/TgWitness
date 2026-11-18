@@ -944,9 +944,9 @@ class ExportOperations:
                     path,
                     release=release,
                     # The same names the panel saves these files under and their verify commands point at.
-                    filename=delivered_file(
-                        disclosure_id or export_id, sharing=bool(disclosure_id)
-                    ),
+                    filename=delivered_file(disclosure_id, sharing=True)
+                    if disclosure_id
+                    else delivered_file(export_id),
                     media_type="application/zip",
                     headers=headers,
                 )

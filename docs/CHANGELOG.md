@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- An account export made by a sealed capture travels inside the evidence archive as `account-export.zip`, and its
+  verify commands now name that file. Before, they named the panel download, `tgwitness-account-export-<id>.zip`, so a
+  command copied as written ended in "file not found". A sharing copy of such an export names the same file for
+  `--evidence`. The account export guide now shows the names the panel saves, `tgwitness-account-export-<id>.zip` and
+  `tgwitness-disclosure-<id>.zip`, instead of `account-export.zip` and `minimized-disclosure.zip`.
 - A chat ID, message cursor, record number or channel seed beyond SQLite's 64-bit integers is refused with a 422
   answer by the translation, QR code, mini application, channel graph, conversation plan and visibility requests, by
   the chat message, author, coverage, profile, scale and dossier requests, by journal records filtered by chat or
