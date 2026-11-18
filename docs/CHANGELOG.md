@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The live journal stream of a workspace ends quietly when the workspace is deleted or the panel shuts down. Before,
+  the open stream of a deleted workspace kept reading its closed database and wrote "Cannot operate on a closed
+  database" errors to the server log after every deletion from the panel.
 - The report's Check tab keeps an evidence ASiC-E intact after external signatures or an evidence record were added to
   it. Each `META-INF/ASiCManifestNNN.xml` and `META-INF/ASiCEvidenceRecordManifest.xml` is checked against the SHA-256
   of the files it lists, and the signature or record it points to is named as not checked in the browser. Before, the
