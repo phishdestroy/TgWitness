@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- The tab row of **Sources** scrolls inside itself when it does not fit, at any width. At 200% browser zoom it used to
+  push the page about 60 px wider than the window for a moment while the screen loaded.
 - A chat that the scope added automatically stays paused after the operator pauses it from the source list. Before,
   the next scope recalculation — on a source-list refresh, at start or in the background — turned it back on in the
   whole-account mode and reported it as resumed. **Resume** releases the pause and the scope rules apply again;
