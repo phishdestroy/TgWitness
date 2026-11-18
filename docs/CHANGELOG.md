@@ -41,6 +41,11 @@
   for, as it is with an RFC 3161 reply. Before, the export ignored the `.ots` proof and reported that no timestamp
   authority answered. The response names what covers the sealed record in `X-TgWitness-Seal` (`rfc3161`,
   `opentimestamps-pending`, `opentimestamps-bitcoin-unverified`) or the reason the export was not sealed.
+- `verify.py --witness` no longer reports a conflict when the witness saw a longer journal after a timestamped export
+  had fixed its last record but before packaging started. The evidence manifest records `boundary` (record count, the
+  moment it was chosen and whether it came from the snapshot or the sealed checkpoint); for older archives the
+  sealed checkpoint of the last record is used when the archive carries it. A witness that saw more records before
+  that moment, or a different hash for the same record, is still a conflict.
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed

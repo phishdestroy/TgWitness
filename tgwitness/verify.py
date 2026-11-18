@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 35e8315e4fdbba6a4bb4fb186a74ed78f091403cfec07a1b0b879922a124d608
+# TgWitness verifier sources SHA-256: ba48892314e99b03e4be52b6d6b64f4ed90f297a4bfb63b610597ff3ce6c3e81
 """Standalone verifier"""
 import argparse
 import base64
@@ -1734,32 +1734,28 @@ TSA_NO_MATCHING_ROOT = "no matching root in --tsa-ca"
 TSA_UNTRUSTED = "The timestamp certificate does not chain to a trusted root"
 
 
-def tsa_signature_check(reply, roots):
+def tsa_signature_status(reply, roots):
     try:
-        checked = timestamp_signature(reply, roots)
+        timestamp_signature(reply, roots)
     except ValueError as exc:
         if str(exc) == TSA_UNTRUSTED:
-            return TSA_NO_MATCHING_ROOT, None
+            return TSA_NO_MATCHING_ROOT
         raise
-    return TSA_CHECKED, checked["signer_sha256"]
+    return TSA_CHECKED
 
 
-def qualified_timestamp(reply, signer_sha256):
-    service = QUALIFIED_TSU.get(signer_sha256 or "")
-    if not service:
-        return {}
+def qualified_timestamp(reply):
     for data in timestamp_token(reply)["certificates"]:
         certificate = x509.load_der_x509_certificate(data)
-        if certificate.fingerprint(hashes.SHA256()).hex() != signer_sha256:
+        service = QUALIFIED_TSU.get(certificate.fingerprint(hashes.SHA256()).hex())
+        if not service:
             continue
         try:
             statements = certificate.extensions.get_extension_for_oid(x509.ObjectIdentifier(QC_STATEMENTS)).value.value
         except x509.ExtensionNotFound:
-            return {}
+            continue
         if QC_COMPLIANCE in statements:
-            return {"qualified": {"service": service, "provider": QUALIFIED_PROVIDER, "trusted_list": QUALIFIED_LIST,
-                                  "signer_sha256": signer_sha256}}
-        return {}
+            return {"qualified": {"service": service, "provider": QUALIFIED_PROVIDER, "trusted_list": QUALIFIED_LIST}}
     return {}
 
 
@@ -1910,9 +1906,9 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                 query_name = proof_name[:-4] + ".tsq"
                 query = read_member(archive, query_name) if query_name in names else None
                 entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query, data))
-                entry["signature"], signer = tsa_signature_check(reply, roots) if roots else ("not checked (use --tsa-ca)", None)
+                entry["signature"] = tsa_signature_status(reply, roots) if roots else "not checked (use --tsa-ca)"
                 if entry["signature"] == TSA_CHECKED:
-                    entry.update(qualified_timestamp(reply, signer))
+                    entry.update(qualified_timestamp(reply))
                 try:
                     entry.update(timestamp_certificate_reference(reply))
                 except (ValueError, IndexError, TypeError):
@@ -2562,8 +2558,7 @@ def ers_check(data, measure, roots=None, now=None):
             if not index and not position and stamp["partials"]:
                 other = len([value for value in stamp["partials"][0] if value not in values])
             if roots is not None:
-                status, last_signer = tsa_signature_check(stamp["reply"], roots)
-                signatures.append(status)
+                signatures.append(tsa_signature_status(stamp["reply"], roots))
             if stamps and stamp["time"] < stamps[-1]["time"]:
                 raise ValueError("ArchiveTimeStamp " + str(position + 1) + where + " is older than the one it renews")
             stamps.append(stamp)
@@ -2582,7 +2577,7 @@ def ers_check(data, measure, roots=None, now=None):
                   "expires": stamp_time(expires) if expires else None,
                   "state": "unknown" if expires is None else "in force" if now <= expires else "expired"}
     if signatures and signatures[-1] == TSA_CHECKED:
-        protection.update(qualified_timestamp(newest["reply"], last_signer))
+        protection.update(qualified_timestamp(newest["reply"]))
     chains = record["chains"]
     signature = ("not checked (use --tsa-ca)" if roots is None else TSA_CHECKED if set(signatures) == {TSA_CHECKED}
                  else TSA_NO_MATCHING_ROOT)
@@ -7386,9 +7381,25 @@ def cross_check_witness(witness, bundle_path, bundle_result):
     prefixes = bundle_capture_prefixes(bundle_path, {a["event_count"] for a in mine
                                                     if a.get("capture") and a["seq"] in comparable
                                                     and a["event_count"] <= count})
+    held = []
     with open_archive(bundle_path) as archive:
         manifest = read_manifest(archive)
-    created = manifest.get("snapshot_at") if isinstance(manifest.get("snapshot_at"), str) else manifest.get("created_at")
+        for name in archive.namelist():
+            if name.startswith("anchors/") and name.endswith(".json"):
+                try:
+                    statement = json.loads(read_member(archive, name, MAX_JSON_BYTES)).get("statement")
+                except (ValueError, AttributeError):
+                    continue
+                if (isinstance(statement, dict) and statement.get("event_count") == count
+                        and isinstance(statement.get("created_at"), str)):
+                    held.append(statement["created_at"])
+    boundary = manifest.get("boundary") if isinstance(manifest.get("boundary"), dict) else {}
+    if boundary.get("event_count") == count and isinstance(boundary.get("chosen_at"), str):
+        created = boundary["chosen_at"]
+    elif held:
+        created = min(held, key=witness_moment)
+    else:
+        created = manifest.get("snapshot_at") if isinstance(manifest.get("snapshot_at"), str) else manifest.get("created_at")
     created_at = witness_moment(created) if isinstance(created, str) else None
     consistent, conflicts, later, anomalies, matched, beyond = 0, [], 0, [], [], []
     for anchor in mine:
@@ -7620,10 +7631,10 @@ def evidence_conditions(result, kind="evidence"):
         times.append(runtime["attested_at"])
     unchecked = [a for a in anchors if a not in checked] + [e for e in records if e not in proven]
     stamped = max([a.get("event_count") or 0 for a in checked] + [count for count, _ in covered], default=0)
-    qualified = next((a for a in checked if a.get("event_count") == events and a.get("qualified") and a.get("time")), None)
-    if qualified:
+    qualified = next((a["qualified"] for a in checked if a.get("event_count") == events and a.get("qualified")), None)
+    if times and qualified:
         status, text, values = ("met", "last exported record existed by {time}; qualified eIDAS time stamp from {service}",
-                                {"time": qualified["time"], "service": qualified["qualified"]["service"]})
+                                {"time": min(times), "service": qualified["service"]})
     elif times:
         status, text, values = "met", "last exported record existed by {time}", {"time": min(times)}
     elif checked or covered:
@@ -10869,7 +10880,7 @@ def interactive_verify(args):
     if fp:
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
-                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
+                 "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
         value = getattr(args, name)
         for item in value if isinstance(value, list) else [value] if value else ():
             command += ["--" + name.replace("_", "-"), str(item)]
@@ -11043,8 +11054,7 @@ def archive_kind(path):
 def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
-                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require", "require_tier", "sealed_attestation",
-                    "board")
+                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require_tier", "sealed_attestation", "board")
                    if getattr(args, name)]
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")

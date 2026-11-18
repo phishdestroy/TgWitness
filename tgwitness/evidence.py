@@ -463,6 +463,11 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                             "case_assessment": data.get("case_assessment", {})}
                 if compact:
                     manifest["packaging"] = packaging
+                if snapshot.through is None:
+                    manifest["boundary"] = {"event_count": result["events"], "chosen_at": snapshot_at, "basis": "snapshot"}
+                elif retained and retained["statement"]["event_count"] == result["events"]:
+                    manifest["boundary"] = {"event_count": result["events"], "chosen_at": retained["statement"]["created_at"],
+                                            "basis": "sealed checkpoint"}
                 if board_export:
                     manifest["annotations_head"] = board_export["statement"]["state"]["annotations_head"]
                 manifest_bytes = canonical(manifest)
