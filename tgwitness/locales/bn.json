@@ -6609,6 +6609,7 @@
   "Start over with another link": "অন্য একটি লিঙ্ক দিয়ে আবার শুরু করুন",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "এই লিঙ্কটি একটি ব্যক্তি বা একটি বট খুলবে। ব্যক্তিগত চ্যাট রপ্তানি করতে, এটি চ্যাটস-এ খুলুন এবং সেখানে রপ্তানি ব্যবহার করুন।",
   "Plan the export": "রপ্তানি পরিকল্পনা করুন",
+  "The link changed. Plan the export for the new chat.": "লিংক বদলেছে। নতুন চ্যাটের জন্য রপ্তানির পরিকল্পনা করুন।",
   "@channel or https://t.me/…": "@channel অথবা https://t.me/…",
   "Just download": "শুধু ডাউনলোড",
   "Easiest": "সবচেয়ে সহজ",

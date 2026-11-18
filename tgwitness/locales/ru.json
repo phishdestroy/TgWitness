@@ -7197,6 +7197,7 @@
   "Start over with another link": "Начать заново с другой ссылкой",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "Ссылка ведёт на человека или бота. Чтобы выгрузить личный чат, откройте его в «Чатах» и нажмите там «Экспорт чата».",
   "Plan the export": "Составить план",
+  "The link changed. Plan the export for the new chat.": "Ссылка изменена. Рассчитайте план для нового чата.",
   "@channel or https://t.me/…": "@канал или https://t.me/…",
   "Checking briefly uses one permitted account. Starting an export requires a separate click.": "Проверка ненадолго использует один доступный аккаунт. Экспорт запускается отдельным нажатием.",
   "Planning rate: {rate} messages/s per account ({source}).": "Скорость для оценки: {rate} сообщений/с на аккаунт ({source}).",

@@ -6570,6 +6570,7 @@
   "Start over with another link": "別のリンクからやり直す",
   "This link opens a person or a bot. To export a private chat, open it in Chats and use Export there.": "このリンクをクリックすると、ユーザーまたはボットのページが開きます。プライベートチャットをエクスポートするには、「チャット」でそのチャットを開き、そこで「エクスポート」機能をご利用ください。",
   "Plan the export": "エクスポートの計画",
+  "The link changed. Plan the export for the new chat.": "リンクが変更されました。新しいチャットのエクスポートを計画してください。",
   "@channel or https://t.me/…": "@channel または https://t.me/…",
   "Just download": "ダウンロードのみ",
   "Easiest": "いちばん簡単",
