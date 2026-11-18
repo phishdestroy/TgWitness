@@ -5906,6 +5906,10 @@ function renderChatStatus(){
   if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const focusedView=box.contains(document.activeElement)?document.activeElement.dataset.chatView:null;
+  // A background refresh keeps the filter menu as it was left; choosing a filter, a view or another chat closes it.
+  const filterKey=[state.workspaceRevision,state.chat,state.chatFilter,state.chatView].join('|'),oldFilters=box.querySelector('details.chat-filter-row');
+  const filtersOpen=!!oldFilters?.open&&box.filterKey===filterKey,filtersSummary=!!oldFilters&&oldFilters.querySelector('summary')===document.activeElement;
+  box.filterKey=filterKey;
   const c=s.collector,silence=!s.demo&&c.running&&c.connected?chatSilence(s,state.chat):null;box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text,description=text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=description;state_.append(t);};
   state_.setAttribute('role','status');
@@ -5942,7 +5946,7 @@ function renderChatStatus(){
       state.chatView=name;renderChatStatus();renderChatFeed();renderComposer();});tabs.append(tab);}
   const toolbar=node("details","action-menu chat-filter-row"),summary=node('summary'),filterPanel=node('div','action-menu-panel');
   summary.append(icon('settings'),node('span','',tr({all:'Filters',deleted:'Deleted',missing:'Not found at recheck',edited:'Edited',media:'Media'}[state.chatFilter]||'Filters')));
-  filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';
+  filterPanel.append(filters);toolbar.append(summary,filterPanel);toolbar.hidden=state.chatView!=='messages';toolbar.open=filtersOpen;
   const recording=$('chat-recording-options');recording.replaceChildren();
   if(!s.demo){
     if(!info.enabled||!c.has_session||c.running&&(c.storage_low||!c.connected)||silence)box.append(state_);
@@ -6005,7 +6009,8 @@ function renderChatStatus(){
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
   forwardButton.hidden = !state.me?.admin || s.demo;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
-  if(focusedFilter)summary.focus({preventScroll:true});
+  if(focusedFilter)(filtersOpen&&box.querySelector('[data-chat-filter="'+focusedFilter+'"]')||summary).focus({preventScroll:true});
+  else if(filtersSummary)summary.focus({preventScroll:true});
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;

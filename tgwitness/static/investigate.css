@@ -81,6 +81,10 @@
 .doc-start .primary{justify-self:start}
 .doc-scope{display:grid;gap:4px;min-width:0;margin:0;padding:0;border:0;color:var(--text-2);font-size:12.5px}
 .doc-scope legend{margin:0 0 4px;padding:0}
+.doc-scope-choices{display:flex;flex-wrap:wrap;gap:4px 16px}
+.doc-scope-choice{display:inline-flex;align-items:center;gap:6px;padding:4px 0;color:var(--text);font-size:13px;cursor:pointer}
+.doc-scope-choice input{margin:0}
+.doc-chat-picks[hidden]{display:none}
 .doc-chat-picks{display:grid;gap:1px;max-height:172px;overflow:auto;padding:4px;border:1px solid var(--border);
   border-radius:var(--radius);background:var(--surface)}
 .doc-chat-pick{display:flex;align-items:center;gap:8px;min-width:0;padding:6px 8px;border-radius:6px;color:var(--text);font-size:13px;cursor:pointer}
