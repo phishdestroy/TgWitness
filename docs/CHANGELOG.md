@@ -36,6 +36,11 @@
   that record is not in the report or hidden by the filters; before, typing #2 in a report with only #1 highlighted
   #1. **Copy text** copies the message text, a system record offers **Copy description** for the description it
   shows, and a record with neither says **No text to copy**; before, the button wrote an empty clipboard.
+- The connection form takes an explicit port 80 from a pasted HTTP proxy URL. The browser drops a default port, so
+  `http://host:80` used to leave the previous port, for example 8080, in the form with no message; an address that
+  cannot be used now clears the prepared plan and keeps its error visible after the field loses focus. With
+  **Public MTProto** the external-requests box shows what is sent — off — instead of a checked, disabled box, and the
+  earlier choice comes back when another route is chosen.
 - A timestamp pass in the journal is named by its outcome. When no service answered and no earlier answer covers
   the checkpoint, the record reads **Checkpoint not timestamped** and is marked as a coverage problem; when only
   OpenTimestamps calendars accepted it, **Checkpoint timestamp pending**; **Checkpoint timestamped** stays for a
