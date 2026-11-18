@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} ta tanlandi · {shown} / {total} ko‘rsatilgan",
   "{shown} of {total}": "{shown} / {total}",
   "{shown} of {total} matching records": "{shown} / {total} ta mos yozuv",
+  "Results {from}–{to}": "Natijalar {from}–{to}",
   "{shown} of {total} parameters": "{shown} / {total} ta parametr",
   "{shown} records in this window": "Ushbu oynada {shown} ta yozuv",
   "Русский": "Rus tili",

@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "已選取 {selected} 項 · 顯示 {shown} / {total}",
   "{shown} of {total}": "{shown} / {total}",
   "{shown} of {total} matching records": "顯示 {shown} 筆（共 {total} 筆符合的記錄）",
+  "Results {from}–{to}": "結果 {from}–{to}",
   "{shown} of {total} parameters": "顯示 {shown} 個（共 {total} 個參數）",
   "{shown} records in this window": "此範圍內有 {shown} 筆記錄",
   "Русский": "Русский",

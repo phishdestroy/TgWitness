@@ -3686,6 +3686,7 @@
   "{selected} selected · {shown} of {total} shown": "已选择 {selected} 项 · 显示 {shown} / {total}",
   "{shown} of {total}": "{shown} / {total}",
   "{shown} of {total} matching records": "匹配记录：{shown} / {total}",
+  "Results {from}–{to}": "结果 {from}–{to}",
   "{shown} of {total} parameters": "参数：{shown} / {total}",
   "{shown} records in this window": "此窗口中有 {shown} 条记录",
   "Русский": "Русский",

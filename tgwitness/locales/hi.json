@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} चयनित · {total} में से {shown} प्रदर्शित",
   "{shown} of {total}": "कुल {total} में से {shown}",
   "{shown} of {total} matching records": "कुल {total} में से {shown} मिलते-जुलते रिकॉर्ड",
+  "Results {from}–{to}": "परिणाम {from}–{to}",
   "{shown} of {total} parameters": "कुल {total} में से {shown} पैरामीटर",
   "{shown} records in this window": "इस विंडो में {shown} रिकॉर्ड",
   "Русский": "रूसी",

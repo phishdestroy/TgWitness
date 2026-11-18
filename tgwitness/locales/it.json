@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} selezionati · {shown} di {total} mostrati",
   "{shown} of {total}": "{shown} di {total}",
   "{shown} of {total} matching records": "{shown} di {total} record corrispondenti",
+  "Results {from}–{to}": "Risultati {from}–{to}",
   "{shown} of {total} parameters": "{shown} di {total} parametri",
   "{shown} records in this window": "{shown} record in questa finestra",
   "Русский": "Русский",

@@ -3755,6 +3755,7 @@
   "{selected} selected · {shown} of {total} shown": "Wybrano: {selected} · wyświetlono {shown} z {total}",
   "{shown} of {total}": "{shown} z {total}",
   "{shown} of {total} matching records": "Pasujące rekordy: {shown} z {total}",
+  "Results {from}–{to}": "Wyniki {from}–{to}",
   "{shown} of {total} parameters": "Parametry: {shown} z {total}",
   "{shown} records in this window": "Rekordy w tym oknie: {shown}",
   "Русский": "Rosyjski",

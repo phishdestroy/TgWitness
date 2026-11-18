@@ -3709,6 +3709,7 @@
   "{selected} selected · {shown} of {total} shown": "{selected} seçili · {total} içinden {shown} gösteriliyor",
   "{shown} of {total}": "{total} içinden {shown}",
   "{shown} of {total} matching records": "{total} eşleşen kayıttan {shown} tanesi",
+  "Results {from}–{to}": "Sonuçlar {from}–{to}",
   "{shown} of {total} parameters": "{total} parametreden {shown} tanesi",
   "{shown} records in this window": "Bu pencerede {shown} kayıt",
   "Русский": "Русский",
