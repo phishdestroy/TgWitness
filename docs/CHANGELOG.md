@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- 48 panel error messages and two download parameter explanations are translated into the panel's 24 other
+  languages, among them the Case Board, conversation plan, presence watch, storage, watchlist, translation and export
+  errors. Before, the panel showed them in English whatever its language.
 - The investigation record, action protocol, case package, certification of authenticity and undercover activity
   record are now fully translated into the panel's 24 other languages. Before, 141 of their headings, notes and
   explanations stayed in English, so a document made in another language mixed the two, including the declaration
