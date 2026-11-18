@@ -3614,9 +3614,11 @@ async function reportFor(chat,sender,messages=null){
 }
 function journalDownloadFacts(){
   const s=state.status,stats=s?.stats||{},head=stats.head,files=stats.counts?.["media.saved"];
-  const account=s?.collector?.account,who=account?[account.username?"@"+account.username:"",account.id?"ID "+account.id:""].filter(Boolean).join(" · "):"";
+  // The account as the workspace menu names it, then its @username and ID once each.
+  const account=s?.collector?.account,shown=account?.name||state.profiles.find(p=>p.id===state.profile)?.label||workspaceSafety.name(state.profile);
+  const who=account?[account.username?"@"+account.username:"",account.id?"ID "+account.id:""].filter(text=>text&&text!==shown).join(" · "):"";
   const filtered=!!(state.filter||state.source||state.search||state.eventSince||state.eventUntil);
-  return [tr("Account: {account}",{account:workspaceSafety.name(state.profile)+(who?" ("+who+")":"")}),
+  return [tr("Account: {account}",{account:shown+(who?" ("+who+")":"")}),
     tr("Sources: every source of this workspace"),
     head?tr("Period: every record up to #{n}, {time}",{n:Number(head.seq).toLocaleString(LANG),time:fmtTime(head.observed_at)}):tr("Period: every record"),
     tr("Records: {n}",{n:Number(stats.total||0).toLocaleString(LANG)}),
