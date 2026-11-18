@@ -1,4 +1,4 @@
-import {createVisibility} from "./visibility.js?v=2";
+import {createVisibility} from "./visibility.js?v=3";
 
 export function createSecretChats(context) {
   const {root, tr, trn, json, toast, busy, node, icon, avatar, formatTime, download, confirm, getSession, may, isAdmin, humanSize, actionText,
