@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import binascii
 import hashlib
@@ -57,6 +58,8 @@ KEYS = {name: key for name, key, *_ in SETTINGS}
 GLOBAL_KEYS = {name for name, *_ in GLOBAL}
 USERNAME = r"@?[A-Za-z][A-Za-z0-9_]{3,31}"
 MAX_AVATAR = 5 * 1024 * 1024
+PARTIAL_MEANING = ("Telegram stopped this change part way (interrupted_by). The changes listed here were applied "
+                   "before it; the rest of the request was not.")
 AVATAR_FORMATS = {"JPEG": "image/jpeg", "PNG": "image/png"}
 
 
@@ -218,14 +221,24 @@ async def update_profile(collector, body):
     me, before = await current(client)
     wanted = {key: getattr(body, key) for key in body.model_fields_set}
     wanted = {key: value if value is not None else "" for key, value in wanted.items()}
-    if any(key in wanted and wanted[key] != before[key] for key in ("first_name", "last_name", "about")):
-        await client(functions.account.UpdateProfileRequest(
-            first_name=wanted.get("first_name", before["first_name"]), last_name=wanted.get("last_name", before["last_name"]),
-            about=wanted.get("about", before["about"])))
-    if "username" in wanted and wanted["username"] != before["username"]:
-        if wanted["username"] and not await client(functions.account.CheckUsernameRequest(wanted["username"])):
-            raise ValueError("This username is taken or not allowed.")
-        await client(functions.account.UpdateUsernameRequest(wanted["username"]))
+    applied = {}
+    try:
+        if any(key in wanted and wanted[key] != before[key] for key in ("first_name", "last_name", "about")):
+            await client(functions.account.UpdateProfileRequest(
+                first_name=wanted.get("first_name", before["first_name"]), last_name=wanted.get("last_name", before["last_name"]),
+                about=wanted.get("about", before["about"])))
+            applied.update({key: wanted[key] for key in ("first_name", "last_name", "about") if key in wanted})
+        if "username" in wanted and wanted["username"] != before["username"]:
+            if wanted["username"] and not await client(functions.account.CheckUsernameRequest(wanted["username"])):
+                raise ValueError("This username is taken or not allowed.")
+            await client(functions.account.UpdateUsernameRequest(wanted["username"]))
+    except (Exception, asyncio.CancelledError) as exc:
+        if any(applied[key] != before[key] for key in applied):
+            collector.store.append("account.profile_updated", {
+                "before": before, "after": {**before, **applied},
+                "changed": sorted(key for key in applied if applied[key] != before[key]),
+                "interrupted_by": type(exc).__name__, "meaning": PARTIAL_MEANING}, actor_id=me.id)
+        raise
     after = {**before, **wanted}
     changed = sorted(key for key in wanted if wanted[key] != before[key])
     event = collector.store.append("account.profile_updated", {"before": before, "after": after, "changed": changed},
@@ -282,6 +295,20 @@ async def update_privacy(collector, body):
     await collector.restore()
     client = collector.client
     before, applied, failed, kept = {}, {}, {}, {}
+    try:
+        await set_privacy(client, body, before, applied, failed, kept)
+    except (Exception, asyncio.CancelledError) as exc:
+        if applied:
+            collector.store.append("account.privacy_updated", {
+                "before": before, "applied": applied, "exceptions_kept": kept, "failed": failed,
+                "interrupted_by": type(exc).__name__, "meaning": PARTIAL_MEANING})
+        raise
+    event = collector.store.append("account.privacy_updated", {"before": before, "applied": applied,
+                                                               "exceptions_kept": kept, "failed": failed})
+    return {"before": before, "applied": applied, "exceptions_kept": kept, "failed": failed, "event": event["seq"]}
+
+
+async def set_privacy(client, body, before, applied, failed, kept):
     for name, rule in body.rules.items():
         kind = getattr(types, KEYS[name], None)
         if kind is None:
@@ -318,9 +345,6 @@ async def update_privacy(collector, body):
             raise
         except RPCError as exc:
             failed[name] = type(exc).__name__
-    event = collector.store.append("account.privacy_updated", {"before": before, "applied": applied,
-                                                               "exceptions_kept": kept, "failed": failed})
-    return {"before": before, "applied": applied, "exceptions_kept": kept, "failed": failed, "event": event["seq"]}
 
 
 async def update_global(collector, body):
