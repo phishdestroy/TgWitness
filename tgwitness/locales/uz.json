@@ -10355,5 +10355,8 @@
   "Report: {scope}": "Hisobot: {scope}",
   "Case: {name}": "Ish: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari yuboriladigan yangilanishlarni olishda davom etadi, lekin qayta tekshiruvlar ulardan faqat {rechecked} tasi uchun yoqilgan.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari faqat yuboriladigan yangilanishlarni oladi: ular uchun qayta tekshiruvlar o'chirilgan."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari faqat yuboriladigan yangilanishlarni oladi: ular uchun qayta tekshiruvlar o'chirilgan.",
+  "By observation time": "Kuzatuv vaqti bo'yicha",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram yuborish vaqti yozib olinmagan; bu xabar TgWitness uni kuzatgan vaqt bo'yicha sanalanadi va joylashtiriladi.",
+  "Copy URL": "URL'ni nusxalash"
 }

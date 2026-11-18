@@ -10304,5 +10304,8 @@
   "Report: {scope}": "Báo cáo: {scope}",
   "Case: {name}": "Vụ việc: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Thăm dò ngắn kiểm tra {polled} trên {total} kênh; các kênh còn lại vẫn nhận cập nhật được gửi đến, nhưng kiểm tra lại chỉ bật cho {rechecked} kênh trong số đó.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Thăm dò ngắn kiểm tra {polled} trên {total} kênh; các kênh còn lại chỉ nhận cập nhật được gửi đến: kiểm tra lại đang tắt cho các kênh này."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Thăm dò ngắn kiểm tra {polled} trên {total} kênh; các kênh còn lại chỉ nhận cập nhật được gửi đến: kiểm tra lại đang tắt cho các kênh này.",
+  "By observation time": "Theo thời gian quan sát",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Thời gian gửi của Telegram không được ghi lại; tin nhắn này được ghi ngày và sắp xếp theo thời điểm TgWitness quan sát được.",
+  "Copy URL": "Sao chép URL"
 }

@@ -10304,5 +10304,8 @@
   "Report: {scope}": "Laporan: {scope}",
   "Case: {name}": "Kes: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "Tinjauan pendek menyemak {polled} daripada {total} saluran; saluran lain masih menerima kemas kini yang dihantar, tetapi semakan semula hanya dihidupkan untuk {rechecked} daripadanya.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Tinjauan pendek menyemak {polled} daripada {total} saluran; saluran lain hanya menerima kemas kini yang dihantar: semakan semula dimatikan untuknya."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Tinjauan pendek menyemak {polled} daripada {total} saluran; saluran lain hanya menerima kemas kini yang dihantar: semakan semula dimatikan untuknya.",
+  "By observation time": "Mengikut masa pemantauan",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Masa hantar Telegram tidak direkodkan; mesej ini diberi tarikh dan disusun mengikut masa TgWitness memantaunya.",
+  "Copy URL": "Salin URL"
 }

@@ -10304,5 +10304,8 @@
   "Report: {scope}": "보고서: {scope}",
   "Case: {name}": "사건: {name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "짧은 폴링은 채널 {total}개 중 {polled}개를 확인합니다. 나머지 채널도 전송되는 업데이트는 계속 받지만, 재확인은 그중 {rechecked}개에만 켜져 있습니다.",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "짧은 폴링은 채널 {total}개 중 {polled}개를 확인합니다. 나머지 채널은 전송되는 업데이트만 받습니다. 이 채널들의 재확인은 꺼져 있습니다."
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "짧은 폴링은 채널 {total}개 중 {polled}개를 확인합니다. 나머지 채널은 전송되는 업데이트만 받습니다. 이 채널들의 재확인은 꺼져 있습니다.",
+  "By observation time": "관찰 시각 기준",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram 전송 시각이 기록되지 않았습니다. 이 메시지의 날짜와 위치는 TgWitness가 관찰한 시각을 기준으로 합니다.",
+  "Copy URL": "URL 복사"
 }

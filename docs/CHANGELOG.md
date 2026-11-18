@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- In a chat, a message without a recorded Telegram send time shows **By observation time** next to its time: its time,
+  day divider and place in the feed come from when TgWitness observed it. Web addresses in message text
+  (`http://`, `https://`, `www.`, `t.me/`) get a **Copy URL** button that copies the address without opening it; an
+  address that runs into a masked secret gets none. On touch screens **Back**, **Select**, the message checkbox in
+  select mode and the priority star in the chat list take taps over at least 44 × 44 px.
 - **Sources** in the observation status no longer says that channels outside short polling always get rechecks. With
   rechecks off for them (**Other chats, every … minutes** or **Priority chats, every … minutes** set to 0) it says
   they get only pushed updates, and when rechecks are on for some of them it says for how many.

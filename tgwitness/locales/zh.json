@@ -10304,5 +10304,8 @@
   "Report: {scope}": "报告：{scope}",
   "Case: {name}": "案件：{name}",
   "Short polling checks {polled} of {total} channels; the others still get pushed updates, but rechecks are on for only {rechecked} of them.": "短轮询检查 {total} 个频道中的 {polled} 个；其余频道仍会收到推送的更新，但其中只有 {rechecked} 个开启了重新检查。",
-  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短轮询检查 {total} 个频道中的 {polled} 个；其余频道只会收到推送的更新：它们的重新检查已关闭。"
+  "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短轮询检查 {total} 个频道中的 {polled} 个；其余频道只会收到推送的更新：它们的重新检查已关闭。",
+  "By observation time": "按观察时间",
+  "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "未记录 Telegram 的发送时间；此消息按 TgWitness 观察到它的时间标注日期并排序。",
+  "Copy URL": "复制 URL"
 }
