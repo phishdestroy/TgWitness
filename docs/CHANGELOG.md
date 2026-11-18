@@ -30,6 +30,9 @@
   when it had sent the last byte; Linux kept a whole 1.6 MB archive in its socket buffer, so a download broken off
   after 7 KB was still counted and **Delete** became available. Downloads the browser makes on its own and other HTTP
   clients still count when the server has sent the whole response; the operations guide says what that cannot see.
+- A minimised handover keeps only the selected chats in the observed-chat list of `process.started`. Before, every
+  start record carried the ID, title and type of each observed chat into the handover, so a handover of one chat
+  named all the others.
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
   could leave the journal naming a file whose bytes were never written.
@@ -51,6 +54,41 @@
   moment it was chosen and whether it came from the snapshot or the sealed checkpoint); for older archives the
   sealed checkpoint of the last record is used when the archive carries it. A witness that saw more records before
   that moment, or a different hash for the same record, is still a conflict.
+- Importing a storage recovery file checks each local attachment by size and SHA-256 instead of by its name, and
+  **Restore all files** restores the verified copy over a local file with different bytes after moving those bytes
+  unchanged to `storage-conflicts/` (`storage.local_conflict`). Before, a damaged local file with the expected name
+  was treated as present and the restore reported 0 files.
+- With more than 50 selected channels, the short update poll takes the probe channel and priority sources first.
+  Before, priority 0 and 1 sorted alike, so the first 50 channels by title were polled and a priority source or the
+  probe channel later in the alphabet could be left out.
+- The Telegram Desktop JSON of an account export lists only contacts in `contacts.list`. Before, each saved page of
+  frequent correspondents (`top_peers`) added an empty contact entry. The top-peer pages stay in the export's signed
+  data files.
+- An account export keeps the SHA-256 and size of the additional Takeout JSON as Telegram sent it
+  (`received_sha256`, `received_bytes`) next to those of the saved file, with the rule that removed secret fields
+  (`transformation`). Before, only the sanitized copy was described, so the receipt could not be compared with an
+  original obtained separately.
+- Analyzer insights (`/api/analyzer/insights`, format `tgwitness-insights-v2`) count deletion notices that removed
+  several messages as `deletion_batches` and list suspected history clears separately as `suspected_history_clears`,
+  each with the conditions and meaning of its `history.cleared_by_peer_suspected` record. Before,
+  `cleared_histories` counted every `deletion.batch`, so an ordinary deletion of two messages read as a cleared
+  history; that field is removed.
+- `start.py` and the Windows portable builder install `deploy/requirements.lock` with `--no-build-isolation`, as the
+  Dockerfile does: source-only packages build with the setuptools pinned in `deploy/build.lock` instead of a build
+  environment pip resolves on its own.
+- A reply to a message in another chat no longer quotes the message with the same number in the open chat: the
+  chat view reads the replied chat from the saved Telegram record and shows "Reply to #N in another chat". Messages
+  saved earlier are read the same way. The Telegram Desktop JSON of an account export adds `reply_to_peer_id` for
+  such replies.
+- An open panel follows changes to its access: `/api/status` carries the access's current permissions, and the panel
+  updates its views and actions when they change. Before, a granted or removed export permission showed only after
+  the page was reloaded; the server already checked each request against the current permissions.
+- Verification commands in HTML and PDF reports, their case assessment and the report viewer's Check tab use
+  `TRUSTED_SHA256` instead of the fingerprint carried by the report itself, so a copied command no longer compares the
+  archive with its own key. Inside an archive they name the original ZIP as `../tgwitness-evidence.zip`, as README.txt
+  does, and the HTML says to run them from the extracted folder; before, the HTML command failed there with
+  FileNotFoundError.
+
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed

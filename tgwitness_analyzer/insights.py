@@ -5,11 +5,12 @@ from statistics import median
 
 from tgwitness.action_protocol import moment, reference, seconds
 
-FORMAT = "tgwitness-insights-v1"
+FORMAT = "tgwitness-insights-v2"
 LIMIT = 50000
 BURST_SECONDS = 60
 CONTEXT_SECONDS = 600
-KINDS = "message.new,message.snapshot,message.recovered,message.deleted,deletion.batch,actor.status"
+KINDS = ("message.new,message.snapshot,message.recovered,message.deleted,deletion.batch,history.cleared_by_peer_suspected,"
+         "actor.status")
 MESSAGE_KINDS = ("message.new", "message.snapshot", "message.recovered")
 LIFETIMES = ((60, "under 1 minute"), (600, "1–10 minutes"), (3600, "10–60 minutes"), (86400, "1–24 hours"),
              (None, "over 1 day"))
@@ -47,7 +48,7 @@ def counted(values, buckets):
 
 def analyze(events, chat_id=None, offset_minutes=0, lookup=None):
     events = sorted((e for e in events if type(e.get("seq")) is int), key=lambda e: e["seq"])
-    messages, deletions, batches, presence = {}, [], [], {}
+    messages, deletions, batches, clears, presence = {}, [], [], [], {}
     for event in events:
         payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
         kind, message_id = event.get("kind"), event.get("message_id")
@@ -60,6 +61,11 @@ def analyze(events, chat_id=None, offset_minutes=0, lookup=None):
             deletions.append(event)
         elif kind == "deletion.batch":
             batches.append({"at": event.get("observed_at"), "count": payload.get("count"), "ref": reference(event)})
+        elif kind == "history.cleared_by_peer_suspected":
+            clears.append({"at": event.get("observed_at"), "message_ids": payload.get("message_ids"),
+                           "first_id": payload.get("first_id"), "last_id": payload.get("last_id"),
+                           "outgoing": payload.get("outgoing"), "basis": payload.get("conditions"),
+                           "meaning": payload.get("meaning"), "ref": reference(event)})
         elif kind == "actor.status":
             status = payload.get("status") if isinstance(payload.get("status"), dict) else {}
             person = presence.setdefault(payload.get("user_id"), {"user_id": payload.get("user_id"), "online": [0] * 24,
@@ -133,7 +139,7 @@ def analyze(events, chat_id=None, offset_minutes=0, lookup=None):
             "counts": {"messages": len(ordered), "incoming": sum(not m["outgoing"] for m in ordered),
                        "outgoing": sum(m["outgoing"] for m in ordered), "deletions": len(removed),
                        "own_deletions": sum(item["outgoing"] is True for item in removed),
-                       "cleared_histories": len(batches)},
+                       "deletion_batches": len(batches), "suspected_history_clears": len(clears)},
             "hours": hours,
             "senders": sorted(senders.values(), key=lambda p: -p["count"])[:5],
             "replies": {**summary([p["seconds"] for p in pairs]), "unanswered": unanswered,
@@ -141,7 +147,7 @@ def analyze(events, chat_id=None, offset_minutes=0, lookup=None):
                         "pairs": pairs[-200:]},
             "deletions": {**summary(lifetimes), "lifetimes": counted(lifetimes, LIFETIMES), "waves": waves[-100:],
                           "per_day": [{"day": day, "count": count} for day, count in sorted(per_day.items())],
-                          "cleared_histories": batches[-20:]},
+                          "batches": batches[-20:], "suspected_history_clears": clears[-20:]},
             "presence": sorted(presence.values(), key=lambda p: -p["observations"])[:10],
             "limits": list(LIMITS)}
 

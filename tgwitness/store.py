@@ -82,6 +82,18 @@ def event_hash(event):
     return hashlib.sha256(canonical({k: event[k] for k in EVENT_FIELDS})).hexdigest()
 
 
+def reply_chat(payload, chat_id):
+    reply = (payload.get("raw") or {}).get("reply_to") if isinstance(payload.get("raw"), dict) else None
+    peer = reply.get("reply_to_peer_id") if isinstance(reply, dict) else None
+    if not isinstance(peer, dict):
+        return None
+    for field, factor, offset in (("user_id", 1, 0), ("chat_id", -1, 0), ("channel_id", -1, -1000000000000)):
+        if type(peer.get(field)) is int:
+            found = peer[field] * factor + offset
+            return found if found != chat_id else None
+    return None
+
+
 class Store:
     def __init__(self, root: Path):
         self.root = root
@@ -471,7 +483,7 @@ class Store:
             item = messages.setdefault(row["message_id"], {
                 "message_id": row["message_id"], "first_seq": row["seq"],
                 "reference": {"event_hash": row["hash"], "seq": row["seq"], "kind": row["kind"]}, "sender": None, "sent_at": None,
-                "reply_to": None, "has_media": False, "service_action": None, "grouped_id": None,
+                "reply_to": None, "reply_to_chat": None, "has_media": False, "service_action": None, "grouped_id": None,
                 "versions": [], "current_version": None, "media": [], "deleted": False, "deleted_observed_at": None,
                 "missing": False, "missing_observed_at": None, "auto_deleted": False,
                 "telegram_edited_at": None, "from_scheduled": False, "origins": []})
@@ -488,6 +500,7 @@ class Store:
                                       "name": observed.get("display_name"), "username": observed.get("username")}
                 item["sent_at"] = item["sent_at"] or payload.get("sent_at") or row["source_at"]
                 item["reply_to"] = item["reply_to"] or payload.get("reply_to_message_id")
+                item["reply_to_chat"] = item["reply_to_chat"] or reply_chat(payload, chat_id)
                 item["has_media"] = item["has_media"] or bool(payload.get("has_media"))
                 item["service_action"] = item["service_action"] or payload.get("service_action")
                 item["grouped_id"] = item["grouped_id"] or payload.get("grouped_id")

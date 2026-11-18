@@ -858,7 +858,7 @@ def signatures_section(lay, say, certificate, fp, name):
                  "the certificate is qualified. Compare the Ed25519 fingerprint with a copy kept apart from the "
                  "collector as well."), size=8.8)
     lay.gap(1)
-    lay.command("python verify.py " + name + " --fingerprint " + fp)
+    lay.command("python verify.py " + name + " --fingerprint TRUSTED_SHA256")
     if lay.pdf.missing:
         lay.callout(say("Some characters of the recorded texts have no font on this server and are not shown in this "
                         "PDF. The HTML and JSON reports and the journal carry the exact text."), WARN)
@@ -1192,10 +1192,11 @@ class EvidencePDF:
 
     def render_verify(self):
         say = self.say
-        archive = "tgwitness-handover.zip" if self.handover else "tgwitness-evidence.zip"
+        archive = ("../" if self.context.get("archive") else "") + (
+            "tgwitness-handover.zip" if self.handover else "tgwitness-evidence.zip")
         self.lay.section(say("Verify"), say("Get the signer's key fingerprint from a trusted channel, not from this archive."))
-        self.lay.command("python verify.py " + archive + " --fingerprint " + self.fp)
-        self.lay.command("python verify.py report.pdf --fingerprint " + self.fp + " --evidence " + archive)
+        self.lay.command("python verify.py " + archive + " --fingerprint TRUSTED_SHA256")
+        self.lay.command("python verify.py report.pdf --fingerprint TRUSTED_SHA256 --evidence " + archive)
 
     def render_files(self):
         say = self.say
@@ -1545,7 +1546,7 @@ class ChatPDF:
     def render_verify(self):
         say = self.say
         self.lay.section(say("Verify"), say("Get the signer's key fingerprint from a trusted channel, not from this archive."))
-        self.lay.command("python verify.py tgwitness-chat-export.zip --fingerprint " + self.fp)
+        self.lay.command("python verify.py ../tgwitness-chat-export.zip --fingerprint TRUSTED_SHA256")
 
     def render_files(self):
         say = self.say

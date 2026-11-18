@@ -128,8 +128,12 @@ finished with the local copies.
 
 Restoration verifies the ciphertext, authenticates decryption, decompresses if
 needed and checks the original plaintext SHA-256 before placing a file in `media/`.
-A corrupt remote object never replaces a local file. An existing local file with
-different bytes is kept for review rather than overwritten.
+A corrupt remote object never replaces a local file. Importing a recovery file counts
+a local file as present only when its size and SHA-256 match the receipt, so **Restore
+all files** also restores a local file whose bytes differ. Those bytes are not
+overwritten: once the verified copy is ready they are moved unchanged to
+`storage-conflicts/EXPECTED_SHA256.LOCAL_SHA256`, the journal records
+`storage.local_conflict`, and the restore result lists each conflict.
 
 ## Recover after losing the installation
 
