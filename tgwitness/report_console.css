@@ -70,6 +70,7 @@ code{direction:ltr;unicode-bidi:isolate}
 .v-active{display:flex;flex-wrap:wrap;gap:6px}.v-active:empty{display:none}
 .v-link{padding:0;border:0;background:none;color:var(--accent-text);font-family:inherit;font-weight:600;font-size:13px;line-height:1.4;cursor:pointer}
 .v-link:hover{text-decoration:underline}
+.d-file{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px}.d-file small{color:var(--muted)}
 .v-earlier{display:flex;margin:2px auto 10px}
 .v-feed{min-height:320px;padding:12px 18px 24px;border-radius:22px}
 .v-feed.chat{background-color:var(--bg2);background-image:radial-gradient(var(--dot) .7px,transparent 1px);

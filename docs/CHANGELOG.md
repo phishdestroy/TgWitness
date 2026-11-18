@@ -25,6 +25,16 @@
 
 ## Unreleased
 
+- Reports in other languages translate the sender name notes (**name at export**, **from the account's contacts**,
+  **from the Telegram profile**) and the two auto-delete timer explanations, and **Investigation** translates step
+  delays and durations of a day or more. Before, these stayed in English. Hindi, Urdu, Bengali and Persian durations
+  in minutes and seconds now read as minutes (Hindi said "minimum"), and 15 Persian, Urdu and Bengali texts lost a
+  stray leading space.
+- The record details of an HTML report offer **Download file** for a saved attachment once the archive or its folder
+  was chosen under **Check** and matched its signed manifest. The file is read from that archive, its SHA-256 is
+  checked again and it is saved under its original name as a plain download, so the browser does not open it. Before
+  the check the details point to **Check**; a missing or changed file is named as such. Before, a saved file other
+  than an image could not be reached from the report.
 - The panel saves an account export and its sharing copies under the name the server gives, the same name their
   verify commands point at. Before, the panel built the names itself, and an export made by a sealed capture was saved
   as `tgwitness-account-export-<id>.zip` while its commands named `account-export.zip`.
