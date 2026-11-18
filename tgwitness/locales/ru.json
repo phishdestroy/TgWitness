@@ -3135,9 +3135,6 @@
   "None of the sources was found among the account's chats.": "Ни один из источников не был обнаружен в чатах аккаунта.",
   "Sources are checked when observation starts.": "Источники проверяются при начале наблюдения.",
   "No source is selected.": "Источник не выбран.",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "Короткий опрос проверяет {polled} из {total} каналов; остальные по-прежнему получают присылаемые обновления и повторные проверки.",
-  "Channels of the same priority take turns every 10 minutes.": "Каналы одного приоритета сменяют друг друга каждые 10 минут.",
-  "Not short-polled now: {names}": "Сейчас вне короткого опроса: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Видимое: {visible} · добавлено автоматически: {added} · не найдено: {unconfirmed}",
   "Attachments are being saved.": "Вложения сохраняются.",
   "Disk almost full: downloads are paused until space is free.": "Диск почти заполнен: загрузка приостанавливается до освобождения места.",
@@ -10347,5 +10344,10 @@
   "Record #{n} is hidden by the filters": "Запись №{n} скрыта фильтрами",
   "Enter a record number": "Введите номер записи",
   "Copy description": "Копировать описание",
-  "No text to copy": "Нет текста для копирования"
+  "No text to copy": "Нет текста для копирования",
+  "ASiC-E container damaged: {reason}": "Контейнер ASiC-E повреждён: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "Контейнер ASiC-E распознан: в его манифесте {n} файлов, их SHA-256 совпадают.",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Подпись CAdES контейнера (META-INF/signature.p7s) в этом браузере не проверялась.",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "Нет META-INF/ASiCManifest.xml или META-INF/signature.p7s",
+  "its manifest cannot be read": "его манифест не читается"
 }

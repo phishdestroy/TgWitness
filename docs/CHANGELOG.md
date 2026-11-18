@@ -25,14 +25,16 @@
 
 ## Unreleased
 
+- The **Check** tab of a report accepts the ASiC-E container it was delivered in. It recognizes the container from the
+  exact `mimetype` text and `META-INF/ASiCManifest.xml`, checks the SHA-256 of every file that manifest lists, and
+  says that the CAdES signature in `META-INF/signature.p7s` was not checked in the browser. Before, an intact ASiC-E
+  got the red verdict **The archive does not match its signed manifest** because of its `mimetype` and `META-INF`
+  entries. Any other entry under `META-INF/`, a file missing from either manifest or a changed file still fails.
 - The Telegram Desktop JSON of an account export with contacts adds `frequent_contacts`: each frequent
   correspondent, inline bot and call partner from the saved top-peer pages with its ID, category, chat type, name and
   rating. These pages stay out of `contacts.list`.
 - The tab row of **Sources** scrolls inside itself when it does not fit, at any width. At 200% browser zoom it used to
   push the page about 60 px wider than the window for a moment while the screen loaded.
-- When more channels are observed than short polling covers, channels of the priority class that does not fit
-  take turns every 10 minutes instead of the same channels staying out, and Collector health → Sources names the
-  channels outside short polling. Higher priority classes and the probe channel stay in.
 - A chat that the scope added automatically stays paused after the operator pauses it from the source list. Before,
   the next scope recalculation — on a source-list refresh, at start or in the background — turned it back on in the
   whole-account mode and reported it as resumed. **Resume** releases the pause and the scope rules apply again;

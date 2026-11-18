@@ -1461,15 +1461,6 @@ function collectorLines(name,p){
     return [tr("Observation is paused.")];
   }
   if(name==="sources"){
-    const lines=sourceLines(p,c),waiting=c.short_poll_waiting||[];
-    if(!waiting.length)return lines;
-    const names=waiting.slice(0,10).join(", ")+(waiting.length>10?" "+tr("+{n} more",{n:waiting.length-10}):"");
-    return [...lines,tr("Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.",{polled:c.short_poll_polled,total:c.short_poll_channels}),
-      c.short_poll_rotating&&tr("Channels of the same priority take turns every 10 minutes."),tr("Not short-polled now: {names}",{names})];
-  }
-  return mediaLines(p,c);
-}
-function sourceLines(p,c){
     const counts=c.checked?tr("Visible: {visible} · added automatically: {added} · not found: {unconfirmed}",c):"";
     if(p.reason==="visible")return [tr("All checked sources are visible in the account's dialogs."),counts];
     if(p.reason==="some_unconfirmed")return [tr("Some sources were not found among the account's chats; the others continue."),counts];
@@ -1478,8 +1469,7 @@ function sourceLines(p,c){
     if(p.reason==="some_access_lost")return [tr("The account was removed from some sources or can no longer read them; nothing arrives from those. The others continue."),counts];
     if(p.reason==="not_checked")return [tr("Sources are checked when observation starts.")];
     return [tr("No source is selected.")];
-}
-function mediaLines(p,c){
+  }
   const facts=[tr("Waiting: {pending} · retrying: {retry} · not saved: {failed}",c),
     p.oldest_pending_at&&tr("Oldest pending attachment")+": "+fmtFull(p.oldest_pending_at),
     p.disk_free_bytes!=null&&tr("Free disk")+": "+humanSize(p.disk_free_bytes)];

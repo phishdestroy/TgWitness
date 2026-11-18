@@ -3055,9 +3055,6 @@
   "None of the sources was found among the account's chats.": "کوئی بھی ذریعہ اکاؤنٹ کی چیٹس میں نہیں ملا۔",
   "Sources are checked when observation starts.": "ذرائع مشاہدہ شروع ہونے پر جانچے جاتے ہیں۔",
   "No source is selected.": "کوئی ذریعہ منتخب نہیں ہے۔",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "مختصر پولنگ {total} میں سے {polled} چینلز کو جانچتی ہے؛ باقی چینلز کو بھیجی گئی اپ ڈیٹس اور دوبارہ جانچ ملتی رہتی ہے۔",
-  "Channels of the same priority take turns every 10 minutes.": "ایک ہی ترجیح والے چینلز ہر 10 منٹ میں باری باری آتے ہیں۔",
-  "Not short-polled now: {names}": "اس وقت مختصر پولنگ سے باہر: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "نظر آنے والے: {visible} · خودکار طور پر شامل: {added} · نہیں ملے: {unconfirmed}",
   "Attachments are being saved.": "منسلکات محفوظ کیے جا رہے ہیں۔",
   "Disk almost full: downloads are paused until space is free.": "ڈسک تقریباً بھر گئی ہے: جگہ خالی ہونے تک ڈاؤن لوڈ رکے ہوئے ہیں۔",
@@ -10275,5 +10272,10 @@
   "Record #{n} is hidden by the filters": "ریکارڈ #{n} فلٹرز کی وجہ سے پوشیدہ ہے",
   "Enter a record number": "ریکارڈ نمبر درج کریں",
   "Copy description": "تفصیل کاپی کریں",
-  "No text to copy": "کاپی کرنے کے لیے کوئی متن نہیں"
+  "No text to copy": "کاپی کرنے کے لیے کوئی متن نہیں",
+  "ASiC-E container damaged: {reason}": "ASiC-E کنٹینر خراب ہے: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E کنٹینر پہچانا گیا: اس کے مینی فیسٹ میں {n} فائلیں ہیں اور ان کے SHA-256 مماثل ہیں۔",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "اس براؤزر میں کنٹینر کے CAdES دستخط (META-INF/signature.p7s) کی جانچ نہیں کی گئی۔",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml یا META-INF/signature.p7s موجود نہیں",
+  "its manifest cannot be read": "اس کا مینی فیسٹ پڑھا نہیں جا سکتا"
 }

@@ -3055,9 +3055,6 @@
   "None of the sources was found among the account's chats.": "Manbalarning hech biri hisob chatlari orasida topilmadi.",
   "Sources are checked when observation starts.": "Manbalar kuzatuv boshlanganda tekshiriladi.",
   "No source is selected.": "Hech qanday manba tanlanmagan.",
-  "Short polling checks {polled} of {total} channels; the others still get pushed updates and rechecks.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari yuboriladigan yangilanishlar va qayta tekshiruvlarni olishda davom etadi.",
-  "Channels of the same priority take turns every 10 minutes.": "Bir xil ustuvorlikdagi kanallar har 10 daqiqada navbatma-navbat almashadi.",
-  "Not short-polled now: {names}": "Hozir qisqa so'rovdan tashqarida: {names}",
   "Visible: {visible} · added automatically: {added} · not found: {unconfirmed}": "Ko'rinadigan: {visible} · avtomatik qo'shilgan: {added} · topilmagan: {unconfirmed}",
   "Attachments are being saved.": "Ilovalar saqlanmoqda.",
   "Disk almost full: downloads are paused until space is free.": "Disk deyarli to'lgan: joy bo'shaguncha yuklab olish to'xtatilgan.",
@@ -10275,5 +10272,10 @@
   "Record #{n} is hidden by the filters": "#{n}-yozuv filtrlar tufayli yashirilgan",
   "Enter a record number": "Yozuv raqamini kiriting",
   "Copy description": "Tavsifni nusxalash",
-  "No text to copy": "Nusxalash uchun matn yo‘q"
+  "No text to copy": "Nusxalash uchun matn yo‘q",
+  "ASiC-E container damaged: {reason}": "ASiC-E konteyneri shikastlangan: {reason}",
+  "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E konteyneri aniqlandi: manifestida {n} ta fayl bor va ularning SHA-256 qiymatlari mos.",
+  "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Konteynerning CAdES imzosi (META-INF/signature.p7s) ushbu brauzerda tekshirilmadi.",
+  "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml yoki META-INF/signature.p7s yo‘q",
+  "its manifest cannot be read": "uning manifestini o‘qib bo‘lmaydi"
 }

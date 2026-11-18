@@ -239,11 +239,6 @@ def sources(c, enabled_sources):
               "ignored": sum(s.get("state") == "access_unconfirmed" and bool(s.get("ignored")) for s in statuses),
               "unconfirmed": sum(s.get("state") == "access_unconfirmed" and not s.get("ignored") for s in statuses),
               "lost": sum(s.get("state") == "access_lost" for s in statuses)}
-    poll = c.get("short_poll") or {}
-    if poll.get("waiting"):
-        counts.update(short_poll_polled=poll.get("polled"), short_poll_channels=poll.get("channels"),
-                      short_poll_waiting=[item.get("title") or str(item.get("chat_id")) for item in poll["waiting"]],
-                      short_poll_rotating=poll.get("rotating_priority") is not None)
     scope = (c.get("scope") or {}).get("mode", "selected")
     if not enabled_sources and scope == "selected":
         return part("off", "no_sources", counts=counts)
