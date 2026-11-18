@@ -599,6 +599,7 @@ class SystemOperations:
                 or not collector.running
                 and name in {
                     "dialogs",
+                    "search_telegram",
                     "save_profile",
                     "preview",
                     "execute",
@@ -616,6 +617,7 @@ class SystemOperations:
                 )
             if not collector.running and name in {
                 "dialogs",
+                "search_telegram",
                 "save_profile",
                 "preview",
                 "execute",

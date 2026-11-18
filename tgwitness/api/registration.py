@@ -478,6 +478,7 @@ def register(app, ctx):
     router.post("/api/interactions/preview", dependencies=[Depends(authenticate)])(
         routes_chats.interaction_preview
     )
+    router.get("/api/telegram-search", dependencies=[Depends(authenticate)])(routes_chats.telegram_search)
     router.post("/api/interactions", dependencies=[Depends(authenticate)])(
         routes_chats.interaction_action
     )

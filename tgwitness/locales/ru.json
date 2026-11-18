@@ -10274,5 +10274,6 @@
   "Telegram asked to wait before the next account action.": "Telegram попросил подождать перед следующим действием аккаунта.",
   "{n} s after loading": "через {n} с после загрузки",
   "Whole page": "Вся страница",
-  "Page after loading": "Страница после загрузки"
+  "Page after loading": "Страница после загрузки",
+  "Global search": "Глобальный поиск"
 }

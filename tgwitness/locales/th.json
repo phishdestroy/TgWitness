@@ -10151,5 +10151,6 @@
   "Telegram asked to wait before the next account action.": "Telegram ขอให้รอก่อนการดำเนินการครั้งถัดไปของบัญชี",
   "{n} s after loading": "{n} วินาทีหลังโหลด",
   "Whole page": "ทั้งหน้า",
-  "Page after loading": "หน้าหลังโหลด"
+  "Page after loading": "หน้าหลังโหลด",
+  "Global search": "ค้นหาทั่วโลก"
 }

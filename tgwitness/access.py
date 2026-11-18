@@ -225,6 +225,7 @@ POLICY = {
     "POST /api/multi-export/{export_id}/cancel": ("export", "root"),
     "GET /api/multi-export/{export_id}/download": ("export", "root"),
     "GET /api/dialogs": ("sources", None),
+    "GET /api/telegram-search": ("sources", None),
     "POST /api/targets": ("sources", "body"),
     "POST /api/targets/batch": ("sources", "body"),
     "POST /api/targets/ignore-unconfirmed": ("sources", "body"),

@@ -10151,5 +10151,6 @@
   "Telegram asked to wait before the next account action.": "Telegram から次のアカウント操作まで待つよう求められました。",
   "{n} s after loading": "読み込みの {n} 秒後",
   "Whole page": "ページ全体",
-  "Page after loading": "読み込み後のページ"
+  "Page after loading": "読み込み後のページ",
+  "Global search": "グローバル検索"
 }
