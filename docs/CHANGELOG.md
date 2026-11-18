@@ -34,6 +34,9 @@
   part way, for example with a FloodWait: the record counts the sessions already ended and names the refusal.
   Before, those sessions ended without a journal record. The verifier no longer reads such a run as "All other
   sessions ended": it states how many were ended and that the approving session was kept.
+- A profile or privacy change that Telegram stops part way is recorded with what it already changed: a new name
+  saved before the username was refused, or the privacy settings applied before a FloodWait. Before, the account
+  changed without a journal record.
 - A new workspace's connection screen no longer names two routes at once: until the account signs in, the route bar
   reads "Chosen at sign-in" and **What Telegram sees** follows the route picked in the sign-in form, instead of the
   public MTProxy default the form replaces. The route bar updates when the route changes, for example after signing
