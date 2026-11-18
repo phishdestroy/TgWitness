@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- The Telegram Desktop JSON of an account export with contacts adds `frequent_contacts`: each frequent
+  correspondent, inline bot and call partner from the saved top-peer pages with its ID, category, chat type, name and
+  rating. These pages stay out of `contacts.list`.
 - A chat that the scope added automatically stays paused after the operator pauses it from the source list. Before,
   the next scope recalculation — on a source-list refresh, at start or in the background — turned it back on in the
   whole-account mode and reported it as resumed. **Resume** releases the pause and the scope rules apply again;
