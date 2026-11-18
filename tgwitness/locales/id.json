@@ -10253,5 +10253,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Saya mengerti: perekaman dan penandatanganan tetap sama dan tidak ada yang dihapus.",
   "A mode sets the protection target. The status of each layer is below.": "Mode menetapkan target perlindungan. Status setiap lapisan ada di bawah.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Konfirmasi mode yang lebih rendah: perekaman dan penandatanganan tetap sama dan tidak ada yang dihapus.",
-  "Connected · no chats chosen": "Terhubung · belum ada obrolan yang dipilih"
+  "Connected · no chats chosen": "Terhubung · belum ada obrolan yang dipilih",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Jalankan perintah ini di folder hasil ekstraksi, dengan berkas yang diterima {name} di folder induknya.",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Jika berkas disimpan dengan nama lain, misalnya oleh peramban, gunakan nama itu dalam perintah ini."
 }

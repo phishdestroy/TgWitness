@@ -111,7 +111,7 @@ def condition(key, status, detail, check, **values):
 
 
 def evidence_conditions(kind, context, count=0, latest=None, signals=None):
-    archive = ("../" if context.get("archive") or kind == "chat" else "") + ARCHIVES.get(kind, "archive.zip")
+    archive = ("../" if context.get("archive") or kind == "chat" else "") + (context.get("archive_name") or ARCHIVES.get(kind, "archive.zip"))
     fp = "TRUSTED_SHA256"
     journal = kind == "evidence"
     anchors, latest = ((context.get("anchors") or []), latest) if journal else ([], None)

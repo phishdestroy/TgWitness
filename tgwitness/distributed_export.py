@@ -927,12 +927,12 @@ class Run:
             out = directory / "export.zip"
             max_gib = tuning.value(lead.store, "export_max_gib")
             names = await complete_in_thread(chat_export.journal_names, lead.store, self.job["chat_id"], scratch)
+            filename = chat_export.archive_name(lead.store, self.job["chat_id"], self.job["chat"]["title"])
             await complete_in_thread(chat_export.build_bundle, scratch, meta, lead.vault, out,
-                                     max_gib * 1024**3, self.job["report"], directory / "media", names)
+                                     max_gib * 1024**3, self.job["report"], directory / "media", names, filename)
             await complete_in_thread(verify_chat_export, out, fingerprint(lead.vault.public_key), max_gib)
             replica.outbox(lead.store, out)
-            self.state.update(phase="done", ready=True, error=None, filename=chat_export.archive_name(
-                lead.store, self.job["chat_id"], self.job["chat"]["title"]))
+            self.state.update(phase="done", ready=True, error=None, filename=filename)
             self.set_phase("done")
             lead.store.append("chat_export.completed", {"export_id": self.job["id"], "mode": "distributed_selection",
                               "counts": self.state["counts"], "performance": self.state["performance"]}, self.job["chat_id"])

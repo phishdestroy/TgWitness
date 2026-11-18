@@ -10253,5 +10253,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Tôi hiểu: việc ghi và ký vẫn như cũ và không có gì bị xóa.",
   "A mode sets the protection target. The status of each layer is below.": "Chế độ đặt mục tiêu bảo vệ. Trạng thái của từng lớp ở bên dưới.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Xác nhận chế độ thấp hơn: việc ghi và ký vẫn như cũ và không có gì bị xóa.",
-  "Connected · no chats chosen": "Đã kết nối · chưa chọn cuộc trò chuyện nào"
+  "Connected · no chats chosen": "Đã kết nối · chưa chọn cuộc trò chuyện nào",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Chạy các lệnh này trong thư mục đã giải nén, với tệp nhận được {name} nằm ở thư mục cha.",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Nếu tệp được lưu dưới tên khác, ví dụ do trình duyệt đổi tên, hãy dùng tên đó trong các lệnh này."
 }

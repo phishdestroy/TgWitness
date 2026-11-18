@@ -1202,9 +1202,12 @@ class EvidencePDF:
 
     def render_verify(self):
         say = self.say
-        archive = ("../" if self.context.get("archive") else "") + (
-            "tgwitness-handover.zip" if self.handover else "tgwitness-evidence.zip")
-        self.lay.section(say("Verify"), say("Get the signer's key fingerprint from a trusted channel, not from this archive."))
+        name = report.received_archive(self.context, "handover" if self.handover else "evidence")
+        archive = ("../" if self.context.get("archive") else "") + name
+        lead = say("Get the signer's key fingerprint from a trusted channel, not from this archive.")
+        if self.context.get("archive"):
+            lead += " " + say(report.RECEIVED_WHERE, name=name) + " " + say(report.RECEIVED_RENAMED)
+        self.lay.section(say("Verify"), lead)
         self.lay.command("python verify.py " + archive + " --fingerprint TRUSTED_SHA256")
         self.lay.command("python verify.py " + self.own + " --fingerprint TRUSTED_SHA256 --evidence " + archive)
 
@@ -1554,8 +1557,10 @@ class ChatPDF:
 
     def render_verify(self):
         say = self.say
-        self.lay.section(say("Verify"), say("Get the signer's key fingerprint from a trusted channel, not from this archive."))
-        self.lay.command("python verify.py ../tgwitness-chat-export.zip --fingerprint TRUSTED_SHA256")
+        name = report.received_archive(self.context, "chat")
+        self.lay.section(say("Verify"), say("Get the signer's key fingerprint from a trusted channel, not from this archive.")
+                         + " " + say(report.RECEIVED_WHERE, name=name) + " " + say(report.RECEIVED_RENAMED))
+        self.lay.command("python verify.py ../" + name + " --fingerprint TRUSTED_SHA256")
 
     def render_files(self):
         say = self.say

@@ -34,6 +34,14 @@
   removes the plan and its **Start export** button and says the link changed; a plan answer that arrives after the
   link was edited, another link was checked or the panel was locked is dropped. Before, the plan of the first chat
   stayed under a new link and **Start export** exported the first chat.
+- The verify commands inside an export name the file it is delivered as: `tgwitness-evidence.asice` for an ASiC-E
+  container, `tgwitness-evidence.zip` for the ZIP, and the chat's own archive name (for example
+  `Telegram_Tips_2026-11-18_1.zip`) for a chat export, in README.txt, the HTML and PDF reports, the case assessment
+  and the report's Check tab. Before, an ASiC-E and every chat export told the recipient to check
+  `../tgwitness-evidence.zip` or `../tgwitness-chat-export.zip`, which did not exist, and the command failed. Next to
+  the commands the reports now say to use the file's own name if the browser saved it under another one. Chat
+  archive names keep letters, digits, `.`, `_` and `-` of any script and replace other characters with `_`, so the
+  name can be pasted into a shell unquoted.
 - A connected account with **Chosen chats** and no chat enabled is shown as **Connected · no chats chosen** on Home
   and in the top bar, in amber, with **Choose chats** on Home. Before, both said a green **Observing** although no
   conversation was being recorded. Home also says **Reconnecting** while the connection is down, as the top bar did.

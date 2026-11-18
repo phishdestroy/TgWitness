@@ -10304,5 +10304,7 @@
   "I understand: recording and signing stay the same and nothing is deleted.": "Anladım: kayıt ve imzalama aynı kalır ve hiçbir şey silinmez.",
   "A mode sets the protection target. The status of each layer is below.": "Mod, koruma hedefini belirler. Her katmanın durumu aşağıdadır.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Daha düşük modu onaylayın: kayıt ve imzalama aynı kalır ve hiçbir şey silinmez.",
-  "Connected · no chats chosen": "Bağlı · sohbet seçilmedi"
+  "Connected · no chats chosen": "Bağlı · sohbet seçilmedi",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Bu komutları çıkarılan klasörde çalıştırın; alınan {name} dosyası üst klasörde bulunmalıdır.",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Dosya başka bir adla kaydedildiyse, örneğin tarayıcı tarafından, bu komutlarda o adı kullanın."
 }
