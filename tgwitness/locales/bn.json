@@ -753,6 +753,7 @@
   "Installation help ↗": "ইনস্টলেশন সহায়তা ↗",
   "Integrity confirmed": "অখণ্ডতা নিশ্চিত",
   "Interrupted media jobs recovered": "বাধাগ্রস্ত মিডিয়া কাজ পুনরুদ্ধার",
+  "Attachment missing after an unexpected stop": "অপ্রত্যাশিত বন্ধের পরে সংযুক্তি অনুপস্থিত",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "অবৈধ MTProxy লিঙ্ক। একটি বৈধ হোস্ট, পোর্ট 1–65535 এবং 32-অঙ্কের হেক্স বা dd সিক্রেট ব্যবহার করুন; Fake TLS ee সমর্থিত নয়।",
   "Invalid TData account or authorization count.": "অবৈধ TData অ্যাকাউন্ট বা অনুমোদন গণনা।",
   "Invalid Telethon StringSession.": "অবৈধ টেলিথন স্ট্রিং সেশন।",

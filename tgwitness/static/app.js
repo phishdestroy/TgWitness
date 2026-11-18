@@ -344,6 +344,7 @@ const labels = {
   "collector.error": [tr("Collection error"), "alert", "coverage"], "demo.created": [tr("Synthetic demo created"), "sparkle", "system"],
   "media.retry": [tr("Attachment retry scheduled"), "refresh", "coverage"],
   "media.recovered": [tr("Interrupted media jobs recovered"), "refresh", "system"],
+  "media.missing_after_restart": [tr("Attachment missing after an unexpected stop"), "alert", "coverage"],
   "source.access_unconfirmed": [tr("Source access unconfirmed"), "question", "coverage"],
   "monitoring.changed": [tr("Monitoring settings changed"), "settings", "coverage"],
   "account.authorized": [tr("Account connected"), "account", "system"],

@@ -25,6 +25,9 @@
 
 ## Unreleased
 
+- After a collector process that ended without an orderly stop, the next start checks every attachment recorded
+  as saved during that run against its SHA-256. A missing or different file is recorded as
+  `media.missing_after_restart`, its download is queued again and differing bytes are kept in `media-damaged/`.
 - The **Check** tab of a report accepts the ASiC-E container it was delivered in. It recognizes the container from the
   exact `mimetype` text and `META-INF/ASiCManifest.xml`, checks the SHA-256 of every file that manifest lists, and
   says that the CAdES signature in `META-INF/signature.p7s` was not checked in the browser. Before, an intact ASiC-E

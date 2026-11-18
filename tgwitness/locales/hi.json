@@ -463,6 +463,7 @@
   "Synthetic demo created": "सिंथेटिक डेमो बनाया गया",
   "Attachment retry scheduled": "संलग्नक पुनः प्रयास निर्धारित",
   "Interrupted media jobs recovered": "अवरुद्ध मीडिया कार्य पुनः प्राप्त",
+  "Attachment missing after an unexpected stop": "अप्रत्याशित रुकावट के बाद अटैचमेंट गायब",
   "Source access unconfirmed": "स्रोत पहुँच की पुष्टि नहीं हुई",
   "Monitoring settings changed": "निगरानी सेटिंग्स बदल गईं",
   "Source selection changed": "स्रोत चयन बदल गया",

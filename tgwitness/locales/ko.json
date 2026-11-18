@@ -751,6 +751,7 @@
   "Installation help ↗": "설치 안내 ↗",
   "Integrity confirmed": "무결성 확인됨",
   "Interrupted media jobs recovered": "중단된 미디어 작업 복구",
+  "Attachment missing after an unexpected stop": "예기치 않은 중지 후 첨부 파일 없음",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "MTProxy 링크가 유효하지 않습니다. 유효한 호스트, 1~65535번 포트 및 32자리 16진수 또는 dd 형식의 비밀 키를 사용하십시오. 가짜 TLS ee는 지원되지 않습니다.",
   "Invalid TData account or authorization count.": "TData 계정 또는 인증 횟수가 유효하지 않습니다.",
   "Invalid Telethon StringSession.": "유효하지 않은 Telethon StringSession입니다.",

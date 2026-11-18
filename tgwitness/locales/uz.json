@@ -753,6 +753,7 @@
   "Installation help ↗": "O'rnatish bo'yicha yordam ↗",
   "Integrity confirmed": "Butunlik tasdiqlandi",
   "Interrupted media jobs recovered": "To'xtatilgan media ishlar tiklandi",
+  "Attachment missing after an unexpected stop": "Kutilmagan to'xtashdan keyin ilova yo'qolgan",
   "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Noto'g'ri MTProxy havolasi. Amal qiluvchi host, 1–65535 port va 32 raqamli hex yoki dd sirli kalitdan foydalaning; Fake TLS ee qo'llab-quvvatlanmaydi.",
   "Invalid TData account or authorization count.": "Noto'g'ri TData hisob qaydnomasi yoki avtorizatsiya soni.",
   "Invalid Telethon StringSession.": "Noto'g'ri Telethon StringSession.",

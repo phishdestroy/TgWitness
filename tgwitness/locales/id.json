@@ -463,6 +463,7 @@
   "Synthetic demo created": "Demo sintetis yang dibuat",
   "Attachment retry scheduled": "Jadwal ulang pengiriman lampiran",
   "Interrupted media jobs recovered": "Pekerjaan media yang terputus telah dipulihkan",
+  "Attachment missing after an unexpected stop": "Lampiran hilang setelah berhenti tak terduga",
   "Source access unconfirmed": "Akses sumber belum dikonfirmasi",
   "Monitoring settings changed": "Pengaturan pemantauan telah diubah",
   "Source selection changed": "Pemilihan sumber telah diubah",

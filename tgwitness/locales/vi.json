@@ -463,6 +463,7 @@
   "Synthetic demo created": "Bản demo tổng hợp đã được tạo",
   "Attachment retry scheduled": "Lịch trình thử lại việc tải tệp đính kèm",
   "Interrupted media jobs recovered": "Các tác vụ truyền thông bị gián đoạn đã được khôi phục",
+  "Attachment missing after an unexpected stop": "Tệp đính kèm bị mất sau khi dừng bất ngờ",
   "Source access unconfirmed": "Chưa xác nhận quyền truy cập vào mã nguồn",
   "Monitoring settings changed": "Cài đặt giám sát đã thay đổi",
   "Source selection changed": "Đã thay đổi tiêu chí lựa chọn nguồn",
