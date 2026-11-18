@@ -30,6 +30,7 @@
   up when the group is not among the main account's dialogs. Before, the helpers stopped with `no_access`.
 - After an export, a chat with no journal messages says that the exported messages are in the archive instead of
   “No messages saved for this chat yet”.
+- Reports show one line instead of an all-zero weekday heatmap, its tables of zeros and zero composition bars.
 - `migrate-to-external` also re-encrypts resumable account-export queues and saved profiling peers; before, it removed
   `vault.key` while they still needed it. Profiling re-resolves a saved peer that no longer opens.
 - `tgwitness backup` copies checkpoints before the journal, so a backup taken during collection starts after restore,
