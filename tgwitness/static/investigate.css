@@ -36,8 +36,16 @@
 .doc-title h2{margin:0;font-size:16px;font-weight:650;line-height:1.3;overflow-wrap:anywhere}
 .doc-head-meta{margin:4px 0 0;font-family:var(--mono);font-size:11.5px}
 .doc-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.doc-tabs{display:flex;gap:2px;margin:10px -14px 0;padding:0 10px;overflow-x:auto;scrollbar-width:none}
-.doc-tabs::-webkit-scrollbar{display:none}
+.doc-tabs{display:flex;flex-wrap:wrap;gap:2px;margin:10px -14px 0;padding:0 10px}
+.doc-mode{display:flex;align-items:center;gap:10px;margin-top:10px;padding:9px 12px;border:1px solid var(--border);
+  border-radius:var(--radius);background:var(--surface-2)}
+.doc-mode>.doc-icon{width:20px;height:20px;color:var(--muted)}
+.doc-mode.on{border-color:var(--success-border,var(--border));background:var(--success-soft,var(--surface-2))}
+.doc-mode.on>.doc-icon{color:var(--success)}
+.doc-mode-text{flex:1;min-width:0;display:grid;gap:3px}
+.doc-mode-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px}
+.doc-mode .hint{display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.doc-mode>button{flex:none}
 .doc-tab{position:relative;display:inline-flex;align-items:center;gap:6px;padding:9px 10px 11px;border:0;background:none;
   color:var(--muted);font-size:13px;font-weight:550;white-space:nowrap;cursor:pointer;border-radius:var(--radius) var(--radius) 0 0}
 .doc-tab:hover{color:var(--text);background:var(--surface-2)}
@@ -71,8 +79,14 @@
 
 .doc-start{display:grid;gap:8px}
 .doc-start .primary{justify-self:start}
-.doc-scope{display:grid;gap:4px;color:var(--text-2);font-size:12.5px}
-.doc-scope select{padding-right:12px;background-image:none}
+.doc-scope{display:grid;gap:4px;min-width:0;margin:0;padding:0;border:0;color:var(--text-2);font-size:12.5px}
+.doc-scope legend{margin:0 0 4px;padding:0}
+.doc-chat-picks{display:grid;gap:1px;max-height:172px;overflow:auto;padding:4px;border:1px solid var(--border);
+  border-radius:var(--radius);background:var(--surface)}
+.doc-chat-pick{display:flex;align-items:center;gap:8px;min-width:0;padding:6px 8px;border-radius:6px;color:var(--text);font-size:13px;cursor:pointer}
+.doc-chat-pick:hover{background:var(--surface-2)}
+.doc-chat-pick input{flex:none;margin:0}
+.doc-chat-pick span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .doc-list{display:grid;gap:6px;margin:0;padding:0;list-style:none}
 .doc-session{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);
   background:var(--surface-2);color:var(--text);text-align:left;cursor:pointer}

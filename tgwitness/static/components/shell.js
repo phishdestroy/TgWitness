@@ -1,4 +1,5 @@
-const RAIL = [["chats", "message"], ["secret-chats", "lock"], ["evidence", "export"], ["accounts", "users"], ["settings", "settings"]];
+const RAIL = [["chats", "message"], ["secret-chats", "lock"], ["investigation", "eye"], ["evidence", "export"], ["accounts", "users"],
+  ["settings", "settings"]];
 
 export function createResponsiveShell({node, icon, tr}) {
   const workspace = document.getElementById("workspace"), sidebar = workspace.querySelector(".sidebar");
@@ -20,11 +21,13 @@ export function createResponsiveShell({node, icon, tr}) {
   railMenu.type = "button"; railMenu.title = tr("Main navigation"); railMenu.setAttribute("aria-label", tr("Main navigation"));
   railMenu.setAttribute("aria-controls", sidebar.id); railMenu.setAttribute("aria-expanded", "false"); railMenu.append(icon("menu"));
   rail.append(railMenu);
+  const sourceOf = view => view === "investigation" ? sidebar.querySelector(".doc-toggle")
+    : sidebar.querySelector('.nav[data-view="' + view + '"]');
   const railItems = RAIL.map(([view, glyph]) => {
     const item = node("button", "rail-item");
     item.type = "button"; item.dataset.railView = view;
     item.append(icon(glyph), node("span", "rail-label"));
-    item.addEventListener("click", () => sidebar.querySelector('.nav[data-view="' + view + '"]')?.click());
+    item.addEventListener("click", () => sourceOf(view)?.click());
     rail.append(item);
     return item;
   });
@@ -42,17 +45,23 @@ export function createResponsiveShell({node, icon, tr}) {
   }
   function syncRail(current = null) {
     for (const item of railItems) {
-      const source = sidebar.querySelector('.nav[data-view="' + item.dataset.railView + '"]');
+      const view = item.dataset.railView, source = sourceOf(view);
       item.hidden = !source || source.hidden;
       if (!source) continue;
-      const label = [...source.childNodes].filter(child => child.nodeType === Node.TEXT_NODE).map(child => child.textContent).join("").trim();
+      const label = [...source.childNodes].filter(child => child.nodeType === Node.TEXT_NODE).map(child => child.textContent).join("").trim()
+        || source.querySelector("span")?.textContent.trim() || "";
       item.lastElementChild.textContent = label; item.title = label;
-      const active = current ? current === item.dataset.railView : source.classList.contains("active");
+      if (view === "investigation") {
+        item.setAttribute("aria-expanded", source.getAttribute("aria-expanded") === "true" ? "true" : "false");
+        item.classList.toggle("live", source.classList.contains("live"));
+        continue;
+      }
+      const active = current ? current === view : source.classList.contains("active");
       if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
     }
     fitRail();
   }
-  new MutationObserver(() => syncRail()).observe(sidebar.querySelector("nav"), {attributes: true, subtree: true, childList: true, characterData: true, attributeFilter: ["class", "hidden"]});
+  new MutationObserver(() => syncRail()).observe(sidebar.querySelector("nav"), {attributes: true, subtree: true, childList: true, characterData: true, attributeFilter: ["class", "hidden", "aria-expanded"]});
   syncRail();
   document.fonts?.ready.then(fitRail);
   let opened = false, previousFocus = null, openMenu = null;

@@ -10090,5 +10090,20 @@
   "Pseudo-secret chats": "نیم خفیہ چیٹس",
   "Other side": "دوسری طرف",
   "Encryption key": "خفیہ کاری کلید",
-  "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them.": "یہاں اس چیٹ کے صرف پہلے {n} پیغامات دکھائے گئے ہیں؛ جریدے اور ریکارڈ کے حصے میں سب موجود ہیں۔"
+  "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them.": "یہاں اس چیٹ کے صرف پہلے {n} پیغامات دکھائے گئے ہیں؛ جریدے اور ریکارڈ کے حصے میں سب موجود ہیں۔",
+  "received": "موصول",
+  "sent": "بھیجے گئے",
+  "deletion notices": "حذف کی اطلاعات",
+  "own messages deleted": "اپنے حذف شدہ پیغامات",
+  "after the request": "درخواست کے بعد",
+  "after the button press": "بٹن دبانے کے بعد",
+  "after the message": "پیغام کے بعد",
+  "online": "آن لائن",
+  "last seen recently": "حال ہی میں دیکھا گیا",
+  "last seen within a week": "اس ہفتے دیکھا گیا",
+  "last seen within a month": "اس مہینے دیکھا گیا",
+  "status not available": "حیثیت دستیاب نہیں",
+  "Turn on": "آن کریں",
+  "Turn on investigation mode?": "تفتیشی موڈ آن کریں؟",
+  "Investigation mode is on.": "تفتیشی موڈ آن ہے۔"
 }
