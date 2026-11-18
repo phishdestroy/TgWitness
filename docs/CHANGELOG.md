@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- The first setup step shows the three goals as short cards with one line on what each gives (**Download once**,
+  **Track changes**, **Collect case records**) and the full description of the chosen goal under them, so all three
+  titles fit above the bottom buttons at 320 and 390 px. Before, the long descriptions pushed the third goal below
+  the bottom bar on a phone, and a goal reached with Tab could sit under it.
 - **Sources** no longer says **Observation paused** for a workspace without a Telegram account. The summary says
   **Telegram is not connected** with **Connect account** for an access that may open the account page, **Sign in
   again** when Telegram signed the account out, **Observation stopped** when an account is connected but nothing

@@ -111,6 +111,22 @@ export function createSettingsHub(ctx) {
       b.append(glyph(emoji,'answer-icon'),node('strong','',tr(name)),node('span','hint',tr(note)));group.append(b);
     }box.append(group);
   }
+  const goalResults={copy:'Download once: one signed archive, nothing keeps running.',
+    watch:'Track changes: new messages, edits and deletions as they happen.',
+    evidence:'Collect case records: every file, each record signed as it is saved.'};
+  function goalCards(box,value,fn){
+    const group=node('div','answer-cards goal-cards');group.setAttribute('role','group');group.setAttribute('aria-label',tr('Goal'));
+    for(const [key,emoji,name] of goals){
+      const b=button('',()=>fn(key),'answer-card');b.dataset.answer=key;b.setAttribute('aria-pressed',String(key===value));
+      b.append(glyph(emoji,'answer-icon'),node('strong','',tr(name)),node('span','hint',tr(goalResults[key])));
+      if(key===value)b.setAttribute('aria-describedby','goal-details');
+      group.append(b);
+    }
+    box.append(group);
+    const chosen=goals.find(([key])=>key===value);if(!chosen)return;
+    const details=node('div','goal-details');details.id='goal-details';
+    details.append(node('strong','',tr('Chosen: {goal}',{goal:tr(chosen[2])})),node('p','hint',tr(chosen[3])));box.append(details);
+  }
   function heading(){const box=node('div','hub-heading'),title=node('h1','',tr('Settings'));title.tabIndex=-1;box.append(title);return box;}
   function closed(text){
     const box=node('div','hub-closed'),mark=glyph('settings:slate','hub-closed-mark');
@@ -797,7 +813,7 @@ export function createSettingsHub(ctx) {
     if(choosing)pane.append(message('Save a copy of your Telegram account, or keep a record of conversations as they change.','wizard-lead'));
     const body=node('div','first-run-body');pane.append(body);
     if(choosing){
-      cards(body,goals,draft.goal,async goal=>{
+      goalCards(body,draft.goal,async goal=>{
         draft.goal=goal;await saveDraft();
         if(!levelChosen&&!draft.completed&&prefs.level!==goalLevels[goal])await savePreferences({level:goalLevels[goal]});
         await renderWizard();
