@@ -5687,7 +5687,9 @@ const chatListReady=import('./views/chat-list.js?v=telegram5').then(({createChat
 function renderChatsList(){chatListView?.render();}
 $("chat-back").addEventListener("click",()=>{
   viewQuery("chats",".chats-shell").dataset.panel="list";
-  $("chat-search").focus({preventScroll:true});
+  const row=viewQueries("chats",".chat-item").find(item=>item.dataset.chat===String(state.chat))?.querySelector(".chat-choice");
+  if(row){row.focus({preventScroll:true});row.scrollIntoView({block:"nearest"});}
+  else $("chat-search").focus({preventScroll:true});
 });
 document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventListener("click",()=>busy(button,async()=>{
   if(!state.status?.demo)return;
@@ -5725,6 +5727,8 @@ $("chat-message-search").addEventListener("input",()=>{
 $("chat-search-clear").addEventListener("click",()=>{setChatQuery({chatSearch:""});$("chat-message-search").focus();});
 async function openChat(id,options={}){
   viewQuery("chats",".chats-shell").dataset.panel="chat";
+  const focused=document.activeElement;
+  if(focused&&focused!==document.body&&focused.checkVisibility?.()===false&&$("chat-back").checkVisibility?.())$("chat-back").focus({preventScroll:true});
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
   const s=state.status,c=s?.collector,info=state.chats.find(chat=>chat.chat_id===id),key=state.profile+":"+id;
