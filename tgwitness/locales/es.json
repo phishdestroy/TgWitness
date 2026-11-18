@@ -522,6 +522,7 @@
   "Waiting for 2FA": "A la espera de la autenticación de dos factores (2FA)",
   "Waiting for QR": "A la espera del código QR",
   "Account not connected": "Cuenta no conectada",
+  "Telegram is not connected": "Telegram no está conectado",
   "Pause observation": "Pausar la observación",
   "Demo uses fictional observations": "La demostración utiliza observaciones ficticias.",
   "Connect an account first": "Conecte primero una cuenta",

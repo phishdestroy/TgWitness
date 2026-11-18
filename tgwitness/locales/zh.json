@@ -522,6 +522,7 @@
   "Waiting for 2FA": "正在等待双因素认证",
   "Waiting for QR": "正在等待二维码",
   "Account not connected": "账户未连接",
+  "Telegram is not connected": "Telegram 未连接",
   "Pause observation": "暂停观察",
   "Demo uses fictional observations": "演示中使用的观察记录均为虚构",
   "Connect an account first": "请先连接一个账户",

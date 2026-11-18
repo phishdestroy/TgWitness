@@ -522,6 +522,7 @@
   "Waiting for 2FA": "Đang chờ xác thực hai yếu tố (2FA)",
   "Waiting for QR": "Đang chờ mã QR",
   "Account not connected": "Tài khoản chưa được kết nối",
+  "Telegram is not connected": "Telegram chưa được kết nối",
   "Pause observation": "Tạm dừng quan sát",
   "Demo uses fictional observations": "Bản demo sử dụng các quan sát giả định",
   "Connect an account first": "Vui lòng kết nối tài khoản trước tiên",

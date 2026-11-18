@@ -522,6 +522,7 @@
   "Waiting for 2FA": "في انتظار المصادقة الثنائية (2FA)",
   "Waiting for QR": "في انتظار رمز الاستجابة السريعة (QR)",
   "Account not connected": "الحساب غير متصل",
+  "Telegram is not connected": "Telegram غير متصل",
   "Pause observation": "إيقاف المراقبة مؤقتًا",
   "Demo uses fictional observations": "يستخدم العرض التوضيحي ملاحظات خيالية",
   "Connect an account first": "قم بتوصيل حساب أولاً",

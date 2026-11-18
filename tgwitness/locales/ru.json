@@ -592,6 +592,7 @@
   "Waiting for 2FA": "Ожидание 2FA",
   "Waiting for QR": "Ожидание QR-кода",
   "Account not connected": "Аккаунт не подключён",
+  "Telegram is not connected": "Telegram не подключён",
   "Pause observation": "Приостановить наблюдение",
   "Demo uses fictional observations": "В демо-версии используются вымышленные наблюдения",
   "Connect an account first": "Сначала подключите аккаунт",
