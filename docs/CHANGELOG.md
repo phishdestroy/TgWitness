@@ -25,6 +25,13 @@
 
 ## Unreleased
 
+- A new workspace's connection screen no longer names two routes at once: until the account signs in, the route bar
+  reads "Chosen at sign-in" and **What Telegram sees** follows the route picked in the sign-in form, instead of the
+  public MTProxy default the form replaces. The route bar updates when the route changes, for example after signing
+  in through WARP; before, it kept "Public MTProxy" until the page was reopened.
+- Account table headers fit their columns in every panel language (Sources, Events and Queue overflowed into each
+  other in Russian, Ukrainian, Turkish, Uzbek, French and German), and the number columns' headers align with their
+  numbers.
 - The verifier counts the checked GitHub attestation time of a sealed run as external time on the assurance ladder too.
   Before, the same output read "[met] External time" under `EVIDENCE` and `ASSURANCE: self_attested`, because only
   the evidence minimum counted that time.

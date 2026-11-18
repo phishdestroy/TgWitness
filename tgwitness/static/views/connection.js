@@ -107,7 +107,9 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
       if(!touched&&!draft&&!plan&&root.querySelector('[data-connect-mode="'+saved+'"]')&&saved!==mode)choose(saved);
       get('connect-current').textContent=routeName(current.current.mode)+
         (current.current.managed?' · '+tr(current.current.process_running?'Local tunnel running':'Local tunnel stopped'):'');
-      get('connect-toggle').textContent=tr('Connection route')+' · '+routeName(current.current.mode);
+      const collector=state.status?.collector,network=collector?.network;
+      const atSignIn=!!(collector&&network&&!collector.account&&!network.chosen&&!network.managed&&network.kind==='mtproxy_auto');
+      get('connect-toggle').textContent=tr('Connection route')+' · '+(atSignIn?tr('Chosen at sign-in'):routeName(current.current.mode));
       get('connect-check-result').textContent=proof(current.current.check);
       get('connect-stop').hidden=!current.current.managed||!current.current.process_running;
       get('connect-start').hidden=!current.current.managed||current.current.process_running;
@@ -196,6 +198,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
   return {
     preset(options){pending=options;applyPreset();},
     enter(){visible=true;root.hidden=!state.me?.admin||!!state.status?.demo;clearTimeout(timer);if(!root.hidden)return load();},
+    refresh(){if(visible&&!root.hidden){clearTimeout(timer);return load();}},
     leave(){visible=false;generation++;clearTimeout(timer);},
     reset(){generation++;clearTimeout(timer);data=null;touched=false;invalidate();get('connect-current').textContent=tr('Current connection');
       get('connect-check-result').textContent=tr('Not checked yet');status('');
