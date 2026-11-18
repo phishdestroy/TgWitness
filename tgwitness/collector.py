@@ -278,6 +278,7 @@ DISPATCH_QUEUE_LIMIT = 5000
 DISPATCH_DRAIN_SECONDS = 30
 SHORT_POLL_LIMIT = 50
 SHORT_POLL_SEED_RETRY = 60
+SHORT_POLL_TURN_SECONDS = 600
 GAP_DETAIL_LIMIT = 1000
 SCOPE_RETRY_SECONDS = 300
 SCOPE_UNDETERMINED_MEANING = ("Telegram delivered updates from this chat, but the chat's details could not be read, "
@@ -428,6 +429,38 @@ def recovered_kind(source):
 def method_of(exc):
     request = getattr(exc, "request", None)
     return request_method(request)["method"] if request is not None else None
+
+
+def short_poll_choice(probe, targets, limit, turn):
+    channel = lambda chat_id: type(chat_id) is int and chat_id < -1000000000000
+    classes, seen = [], set()
+    if channel(probe):
+        classes.append((None, [probe]))
+        seen.add(probe)
+    for target in sorted(targets, key=lambda target: -(target.get("priority") or 0)):
+        chat_id, priority = target["chat_id"], target.get("priority") or 0
+        if not channel(chat_id) or chat_id in seen:
+            continue
+        seen.add(chat_id)
+        if classes and classes[-1][0] == priority:
+            classes[-1][1].append(chat_id)
+        else:
+            classes.append((priority, [chat_id]))
+    chosen, waiting, rotating = [], [], None
+    for priority, members in classes:
+        room = limit - len(chosen)
+        if len(members) <= room:
+            chosen.extend(members)
+            continue
+        if room > 0:
+            start = (turn * room) % len(members)
+            ordered = members[start:] + members[:start]
+            chosen.extend(ordered[:room])
+            waiting.extend(ordered[room:])
+            rotating = priority
+        else:
+            waiting.extend(members)
+    return chosen, waiting, rotating
 
 
 def probe_settings(store):
@@ -798,6 +831,7 @@ class Collector:
             "last_update_at": self.last_update_at,
             "updates_diverted": self.updates_diverted if self.running else None,
             "probe_missed": self.probe_missed if self.running else None,
+            "short_poll": getattr(self, "short_poll_state", None) if self.running else None,
             "session_revoked": self.session_revoked if self.running else None,
             "max_handler_ms": round(self.max_handler_ms, 2),
             "rpc_backoff_until": backoff,
@@ -1672,14 +1706,19 @@ class Collector:
         client = self.client
         if not isinstance(client, WitnessClient) or not client.is_connected():
             return 0
-        mark = (id(getattr(client, "_message_box", None)), self.store.targets_revision)
+        turn = int(time.time() // SHORT_POLL_TURN_SECONDS)
+        mark = (id(getattr(client, "_message_box", None)), self.store.targets_revision, turn)
         if mark != getattr(self, "polled_mark", None):
             self.polled_mark, self.polled_retry_at = mark, 0
-            targets = sorted(self.store.targets(True), key=lambda target: -(target.get("priority") or 0))
-            probe = probe_settings(self.store)["chat_id"]
-            ids = list(dict.fromkeys([probe] + [target["chat_id"] for target in targets]))
-            client.poll_channels([-chat_id - 1000000000000 for chat_id in ids
-                                  if type(chat_id) is int and chat_id < -1000000000000][:SHORT_POLL_LIMIT])
+            targets = self.store.targets(True)
+            chosen, waiting, rotating = short_poll_choice(probe_settings(self.store)["chat_id"], targets,
+                                                          SHORT_POLL_LIMIT, turn)
+            client.poll_channels([-chat_id - 1000000000000 for chat_id in chosen])
+            titles = {target["chat_id"]: target.get("title") for target in targets}
+            self.short_poll_state = {
+                "limit": SHORT_POLL_LIMIT, "channels": len(chosen) + len(waiting), "polled": len(chosen),
+                "waiting": [{"chat_id": chat_id, "title": titles.get(chat_id)} for chat_id in waiting],
+                "rotating_priority": rotating, "turn_seconds": SHORT_POLL_TURN_SECONDS if rotating is not None else None}
         missing = client.unseeded_channels()
         if not missing or time.monotonic() < getattr(self, "polled_retry_at", 0):
             return 0
@@ -3635,7 +3674,7 @@ class Collector:
         self.running = False
         if isinstance(self.client, WitnessClient):
             self.client.poll_channels([])
-        self.polled_mark = None
+        self.polled_mark = self.short_poll_state = None
         self.buffered, self.buffering = [], False
         await self.cancel_workers()
         async with self.capture_lock:
