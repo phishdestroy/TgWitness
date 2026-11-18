@@ -2056,15 +2056,16 @@ function accessName(p) {
   return p.access_id==="admin"||p.label==="Main administrator"?tr("Main administrator"):p.label||state.accessNames?.[p.access_id]||p.access_id||"";
 }
 const DELETION_ATTRIBUTION={
-  account_cannot_delete_here:()=>tr("Not deleted by this account: it had no right to delete this message in this chat. Its author, a chat administrator or Telegram removed it."),
-  no_other_session:seconds=>tr("Not deleted by this account: it had no other signed-in session at the session check {seconds} s earlier, and this workspace does not delete messages. The other side, a chat administrator or Telegram removed it.",{seconds}),
+  account_cannot_delete_here:(seconds,rights)=>Number.isInteger(rights)?tr("Who deleted it is not known: the deletion notice names no one. At the last rights check, {seconds} s earlier, this account had no right to delete this message in this chat.",{seconds:rights}):
+    tr("Who deleted it is not known: the deletion notice names no one. At the last rights check this account had no right to delete this message in this chat."),
+  no_other_session:seconds=>tr("Who deleted it is not known: the deletion notice names no one. At the last session check, {seconds} s earlier, this account had no other signed-in session, and this workspace does not delete messages.",{seconds}),
   this_account_may_have_deleted:()=>tr("Who deleted it is not known: this account itself, from another session or device, could also have deleted it.")};
 function deletionAttribution(p,link){
   if(link&&Number.isInteger(link.actor_id))return link.actor_is_this_account?tr("The chat's admin log names this account as the one that deleted it."):tr("The chat's admin log names user {id} as the account that deleted it.",{id:link.actor_id});
   const facts=p.attribution_facts||{},text=DELETION_ATTRIBUTION[facts.rule];
-  if(!["own_action","peer_or_admin","unknown_other_session_present"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
+  if(!["own_action","peer_or_admin","unknown_other_session_present","not_named"].includes(p.attribution)||!text)return tr("Who deleted it was not determined.");
   const seconds=facts.sessions_check?.age_seconds??facts.sessions_age_seconds;
-  return text(Number.isInteger(seconds)?seconds:"?");
+  return text(Number.isInteger(seconds)?seconds:"?",facts.rights?.age_seconds??facts.rights_age_seconds);
 }
 function deletionExcerpt(e){
   const p=e.payload;
