@@ -55,6 +55,7 @@ from fastapi.responses import Response
 from pydantic import BaseModel
 from telethon import utils
 from telethon.errors import RPCError
+from typing import Annotated
 from typing import Literal
 from datetime import datetime
 from pathlib import Path
@@ -64,6 +65,9 @@ import json
 import re
 import secrets
 
+
+ChatId = Annotated[int, ApiPath(ge=-(2**63), le=2**63 - 1)]
+MessageCursor = Annotated[int | None, Query(ge=-(2**63), le=2**63 - 1)]
 
 class Reveal(BaseModel):
     chat_id: int
@@ -263,7 +267,7 @@ async def ignore_sources(
 
 
 async def target_remove(
-    request: Request, chat_id: int, *, ctx=Depends(current_context)
+    request: Request, chat_id: ChatId, *, ctx=Depends(current_context)
 ):
     ctx.require_live()
     ctx.require_chat(request, chat_id)
@@ -583,7 +587,7 @@ async def interaction_state(
 
 
 async def image_attestation(
-    request: Request, chat_id: int, body: ImageAttestation, *, ctx=Depends(current_context)
+    request: Request, chat_id: ChatId, body: ImageAttestation, *, ctx=Depends(current_context)
 ):
     ctx.require_chat(request, chat_id)
     if not request.state.principal.may("export"):
@@ -604,13 +608,13 @@ async def image_qr(body: QrText, *, ctx=Depends(current_context)):
 
 
 async def chat_messages(
-    chat_id: int,
-    before_id: int | None = None,
+    chat_id: ChatId,
+    before_id: MessageCursor = None,
     limit: int = 60,
-    after_id: int | None = None,
+    after_id: MessageCursor = None,
     filter: Literal["all", "deleted", "edited", "media", "missing"] = "all",
     q: str = Query(default="", max_length=512),
-    author_id: int | None = None,
+    author_id: MessageCursor = None,
     *,
     ctx=Depends(current_context),
 ):
@@ -651,7 +655,7 @@ COVERAGE_KINDS = ("coverage.gap", "connection.restored", "process.started", "pro
 
 async def chat_coverage(
     request: Request,
-    chat_id: int,
+    chat_id: ChatId,
     since: str | None = None,
     until: str | None = None,
     *,
@@ -674,16 +678,16 @@ async def chat_coverage(
         raise HTTPException(503, "The journal is busy. Retry in a moment.") from None
 
 
-async def chat_authors(chat_id: int, *, ctx=Depends(current_context)):
+async def chat_authors(chat_id: ChatId, *, ctx=Depends(current_context)):
     return await asyncio.to_thread(ctx.app.state.store.chat_authors, chat_id)
 
 
-async def chat_profile(chat_id: int, *, ctx=Depends(current_context)):
+async def chat_profile(chat_id: ChatId, *, ctx=Depends(current_context)):
     saved = ctx.app.state.store.events(chat_id, None, "source.profile", None, 1, None)
     return ctx.profile_view(saved[0] if saved else None)
 
 
-async def chat_profile_save(chat_id: int, *, ctx=Depends(current_context)):
+async def chat_profile_save(chat_id: ChatId, *, ctx=Depends(current_context)):
     return ctx.profile_view(
         await ctx.operation(ctx.app.state.collector.save_profile, chat_id)
     )
@@ -752,7 +756,7 @@ async def person_rhythm(
 
 
 async def dossier_switch(
-    request: Request, chat_id: int, body: DossierSwitch, *, ctx=Depends(current_context)
+    request: Request, chat_id: ChatId, body: DossierSwitch, *, ctx=Depends(current_context)
 ):
     ctx.require_live()
     dossier.set_enabled(ctx.app.state.store, chat_id, body.enabled)
@@ -767,7 +771,7 @@ async def dossier_switch(
     }
 
 
-async def dossier_view(request: Request, chat_id: int, *, ctx=Depends(current_context)):
+async def dossier_view(request: Request, chat_id: ChatId, *, ctx=Depends(current_context)):
     title = ctx.dossier_title(chat_id)
     allowed = ctx.visible_chats(request)
     value = await asyncio.to_thread(
@@ -784,7 +788,7 @@ async def dossier_view(request: Request, chat_id: int, *, ctx=Depends(current_co
 
 
 async def dossier_export(
-    request: Request, chat_id: int, *, ctx=Depends(current_context)
+    request: Request, chat_id: ChatId, *, ctx=Depends(current_context)
 ):
     path = await ctx.dossier_file(request, chat_id)
     return TemporaryDownload(
@@ -796,7 +800,7 @@ async def dossier_export(
 
 async def dossier_export_encrypted(
     request: Request,
-    chat_id: int,
+    chat_id: ChatId,
     body: ExportPassword,
     *,
     ctx=Depends(current_context),
@@ -824,7 +828,7 @@ async def notifications(request: Request, *, ctx=Depends(current_context)):
     return {"items": items}
 
 
-async def chat_scale(chat_id: int, *, ctx=Depends(current_context)):
+async def chat_scale(chat_id: ChatId, *, ctx=Depends(current_context)):
     return await ctx.operation(ctx.app.state.collector.chat_scale, chat_id)
 
 

@@ -25,9 +25,11 @@
 
 ## Unreleased
 
-- A chat ID, record number or channel seed beyond SQLite's 64-bit integers is refused with a 422 answer by the
-  translation, QR code, mini application, channel graph, conversation plan and visibility requests. Before, such a
-  value reached the database and the request failed with an unexpected server error.
+- A chat ID, message cursor, record number or channel seed beyond SQLite's 64-bit integers is refused with a 422
+  answer by the translation, QR code, mini application, channel graph, conversation plan and visibility requests, by
+  the chat message, author, coverage, profile, scale and dossier requests, by journal records filtered by chat or
+  message, by the pseudo-secret chat list and by the witness probe setting. Before, such a value reached the database
+  and the request failed with an unexpected server error.
 - **Sources** and the **Selected sources** card in the journal say **Observation paused** only after the operator
   paused observation from the panel or with `/pause` in the operator bot. Without an account they say **Telegram is not
   connected**, otherwise **Observation stopped**. Before, the journal card said paused on a profile with no account.
