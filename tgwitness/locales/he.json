@@ -10410,5 +10410,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "התשאול הקצר בודק {polled} מתוך {total} ערוצים; השאר מקבלים רק עדכונים שנשלחים: בדיקות חוזרות כבויות עבורם.",
   "By observation time": "לפי זמן התצפית",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "זמן השליחה של Telegram לא נרשם; ההודעה מתוארכת וממוקמת לפי הזמן שבו TgWitness צפה בה.",
-  "Copy URL": "העתקת כתובת URL"
+  "Copy URL": "העתקת כתובת URL",
+  "The original source, identity map and private selection criteria are NOT included.": "המקור המקורי, טבלת הזהויות וקריטריוני הבחירה הפרטיים אינם כלולים.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "בחבילות גדולות הוסיפו --max-gib עם הגודל לאחר החילוץ. index.html מוגן על ידי המניפסט."
 }

@@ -10308,5 +10308,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "การสำรวจแบบสั้นตรวจสอบ {polled} จาก {total} ช่อง ช่องอื่นได้รับเพียงการอัปเดตที่ส่งมา: การตรวจสอบซ้ำปิดอยู่สำหรับช่องเหล่านั้น",
   "By observation time": "ตามเวลาที่สังเกต",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "ไม่ได้บันทึกเวลาส่งของ Telegram ข้อความนี้จึงลงวันที่และจัดลำดับตามเวลาที่ TgWitness สังเกตเห็น",
-  "Copy URL": "คัดลอก URL"
+  "Copy URL": "คัดลอก URL",
+  "The original source, identity map and private selection criteria are NOT included.": "ไม่รวมแหล่งข้อมูลต้นฉบับ ตารางจับคู่ตัวตน และเกณฑ์การคัดเลือกแบบส่วนตัว",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "สำหรับแพ็กเกจขนาดใหญ่ ให้เพิ่ม --max-gib พร้อมขนาดหลังแตกไฟล์ index.html ได้รับการปกป้องด้วยแมนิเฟสต์"
 }

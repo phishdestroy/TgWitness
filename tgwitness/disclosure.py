@@ -529,15 +529,7 @@ class Disclosures:
                 write('verify.py', [Path(__file__).with_name('verify.py').read_bytes()])
                 verification_kit.write(write, policy.report_language)
                 write('README.txt', [verification_kit.quickstart(policy.report_language), b'\n',
-                    ('Minimized disclosure\n\n' + '\n'.join(WARNINGS)
-                    + '\n\nThe original source, identity map and private selection criteria are NOT included.\n'
-                    + 'Verify from an independently trusted installation:\n'
-                    + account_report.RECEIVED_WHERE.format(name=report_context['archive_name']) + '\n'
-                    + account_report.RECEIVED_RENAMED + '\n'
-                    + 'python verify.py ../' + report_context['archive_name'] + ' --fingerprint TRUSTED_SHA256\n'
-                    + 'Optional --evidence ../' + report_context['source_archive_name']
-                    + ' checks source linkage, not the correctness of redaction.\n'
-                    + 'For large packages add --max-gib with the expanded size. index.html is protected by the manifest.\n').encode()])
+                                     account_report.sharing_readme(report_context).encode()])
                 write('SHA256SUMS', [''.join(f'{v}  {k}\n' for k, v in sorted(hashes.items())).encode()])
                 manifest = dict(format='tgwitness-account-disclosure-v2', public_key=self.vault.public_key,
                     report_language=policy.report_language, report_presentation=policy.report_presentation.model_dump(),
@@ -551,7 +543,7 @@ class Disclosures:
             self.vault.save('disclosure-' + identity, {'source_job': ticket['job_id'], 'source_sha256': digest,
                 'policy': policy.model_dump(), 'pseudonym_key': base64.b64encode(ticket['seed']).decode()})
             stage.replace(final)
-            info = dict(id=identity, ready=True, summary=ticket['summary'], created_at=created,
+            info = dict(id=identity, ready=True, summary=ticket['summary'], created_at=created, filename=report_context['archive_name'],
                         download_url=f'account-export/{ticket["job_id"]}/disclosures/{identity}/download')
             private_write(root / (identity + '.json'), canonical(info))
             return info
@@ -567,7 +559,7 @@ class Disclosures:
             if re.fullmatch(r'[a-f0-9]{32}', item.stem) and not item.is_symlink() and item.stat().st_size < 65536:
                 row = json.loads(item.read_bytes())
                 if self.result_path(job_id, item.stem):
-                    result.append(row)
+                    result.append({**row, 'filename': account_report.delivered_file(item.stem, sharing=True)})
         return sorted(result, key=lambda item: item['created_at'], reverse=True)
 
     def result_path(self, job_id, identity):

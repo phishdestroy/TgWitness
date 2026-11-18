@@ -10308,5 +10308,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "짧은 폴링은 채널 {total}개 중 {polled}개를 확인합니다. 나머지 채널은 전송되는 업데이트만 받습니다. 이 채널들의 재확인은 꺼져 있습니다.",
   "By observation time": "관찰 시각 기준",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram 전송 시각이 기록되지 않았습니다. 이 메시지의 날짜와 위치는 TgWitness가 관찰한 시각을 기준으로 합니다.",
-  "Copy URL": "URL 복사"
+  "Copy URL": "URL 복사",
+  "The original source, identity map and private selection criteria are NOT included.": "원본 소스, 신원 대응표, 비공개 선택 기준은 포함되지 않습니다.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "큰 패키지는 압축을 푼 크기와 함께 --max-gib를 추가하세요. index.html은 매니페스트로 보호됩니다."
 }

@@ -10359,5 +10359,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Qisqa so'rov {total} ta kanaldan {polled} tasini tekshiradi; qolganlari faqat yuboriladigan yangilanishlarni oladi: ular uchun qayta tekshiruvlar o'chirilgan.",
   "By observation time": "Kuzatuv vaqti bo'yicha",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram yuborish vaqti yozib olinmagan; bu xabar TgWitness uni kuzatgan vaqt bo'yicha sanalanadi va joylashtiriladi.",
-  "Copy URL": "URL'ni nusxalash"
+  "Copy URL": "URL'ni nusxalash",
+  "The original source, identity map and private selection criteria are NOT included.": "Asl manba, shaxslar moslik jadvali va yopiq tanlov mezonlari kiritilmagan.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Katta paketlar uchun ochilgan hajm bilan --max-gib qo'shing. index.html manifest bilan himoyalangan."
 }

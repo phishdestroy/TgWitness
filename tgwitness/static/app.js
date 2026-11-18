@@ -3030,9 +3030,8 @@ function accountExportNextStep(job){
     return tr('This job continues while TgWitness is running. You can leave this page and return.');
   return '';
 }
-function accountDisclosureFilename(item){return 'tgwitness-disclosure-'+String(item.id).replace(/[^a-zA-Z0-9_-]/g,'')+'.zip';}
 function accountDisclosureRecipientNote(item){
-  return [tr('File: {filename}',{filename:accountDisclosureFilename(item)}),
+  return [tr('File: {filename}',{filename:item.filename}),
     tr('Extract the ZIP and open index.html to read this sharing copy. Review its scope, omissions and disclosure settings.'),
     tr('Keep the ZIP unchanged. Follow README.txt to check its integrity using a signing-key fingerprint obtained independently from the sender.'),
     tr('TgWitness signs these files with the collector key; any change to a file breaks the signature.')].join('\n\n');
@@ -3235,8 +3234,8 @@ async function accountExportAction(job,verb){
 }
 async function accountExportDownload(job){
   if(!job.ready)throw new Error(tr("This account archive is not ready to download."));
-  const name="tgwitness-account-export-"+String(job.id).replace(/[^a-zA-Z0-9_-]/g,"")+".zip";
-  if(await download("account-export/"+encodeURIComponent(job.id)+"/download",name,true)===true)
+  // The server names the file: its verify commands point at the same name.
+  if(await download("account-export/"+encodeURIComponent(job.id)+"/download",job.filename,true)===true)
     toast(tr("Signed account archive saved. You can download it again from this job."));
 }
 async function accountExportDelete(job){
@@ -3381,7 +3380,7 @@ async function createAccountDisclosure(){
 async function accountDisclosureDownload(job,item){
   if(!item.ready)throw new Error(tr("This disclosure is still being prepared."));
   const path="account-export/"+encodeURIComponent(job.id)+"/disclosures/"+encodeURIComponent(item.id)+"/download";
-  if(await download(path,accountDisclosureFilename(item),true)===true)
+  if(await download(path,item.filename,true)===true)
     toast(tr("Signed disclosure saved. Review it before sharing."));
 }
 $("account-disclosure-form").addEventListener("input",accountDisclosureInvalidate);

@@ -10308,5 +10308,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "短いポーリングは{total}件中{polled}件のチャンネルを確認します。残りのチャンネルに届くのはプッシュ更新だけです。これらの再確認はオフです。",
   "By observation time": "観察時刻による",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Telegram の送信時刻は記録されていません。このメッセージの日付と位置は TgWitness が観察した時刻に基づきます。",
-  "Copy URL": "URL をコピー"
+  "Copy URL": "URL をコピー",
+  "The original source, identity map and private selection criteria are NOT included.": "元のソース、身元対応表、非公開の選択条件は含まれていません。",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "大きなパッケージでは、展開後のサイズを --max-gib で指定してください。index.html はマニフェストで保護されています。"
 }

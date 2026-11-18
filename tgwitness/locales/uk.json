@@ -10461,5 +10461,7 @@
   "Short polling checks {polled} of {total} channels; the others get only pushed updates: rechecks are off for them.": "Коротке опитування перевіряє {polled} з {total} каналів; решта отримують лише надіслані оновлення: повторні перевірки для них вимкнено.",
   "By observation time": "За часом спостереження",
   "Telegram's send time was not recorded; this message is dated and placed by when TgWitness observed it.": "Час надсилання з Telegram не записано; повідомлення датовано й розміщено за часом, коли його зафіксував TgWitness.",
-  "Copy URL": "Скопіювати URL"
+  "Copy URL": "Скопіювати URL",
+  "The original source, identity map and private selection criteria are NOT included.": "Вихідний архів, таблицю відповідності особистостей і закриті критерії відбору НЕ включено.",
+  "For large packages add --max-gib with the expanded size. index.html is protected by the manifest.": "Для великих пакетів додайте --max-gib із розміром після розпакування. index.html захищений маніфестом."
 }
