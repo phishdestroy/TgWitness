@@ -25,6 +25,10 @@
 
 ## Unreleased
 
+- The investigation record, action protocol, case package, certification of authenticity and undercover activity
+  record are now fully translated into the panel's 24 other languages. Before, 141 of their headings, notes and
+  explanations stayed in English, so a document made in another language mixed the two, including the declaration
+  the declarant signs.
 - Reports in other languages translate the sender name notes (**name at export**, **from the account's contacts**,
   **from the Telegram profile**) and the two auto-delete timer explanations, and **Investigation** translates step
   delays and durations of a day or more. Before, these stayed in English. Hindi, Urdu, Bengali and Persian durations
