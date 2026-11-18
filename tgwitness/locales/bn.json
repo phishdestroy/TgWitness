@@ -10261,5 +10261,10 @@
   "Select and copy the link.": "লিংকটি নির্বাচন করে কপি করুন।",
   "Global search": "বিশ্বব্যাপী অনুসন্ধান",
   "Checkpoint not timestamped": "চেকপয়েন্টে টাইমস্ট্যাম্প পাওয়া যায়নি",
-  "Checkpoint timestamp pending": "চেকপয়েন্টের টাইমস্ট্যাম্প অপেক্ষমাণ"
+  "Checkpoint timestamp pending": "চেকপয়েন্টের টাইমস্ট্যাম্প অপেক্ষমাণ",
+  "Record #{n} not found": "রেকর্ড #{n} পাওয়া যায়নি",
+  "Record #{n} is hidden by the filters": "রেকর্ড #{n} ফিল্টারের কারণে লুকানো",
+  "Enter a record number": "রেকর্ড নম্বর লিখুন",
+  "Copy description": "বিবরণ কপি করুন",
+  "No text to copy": "কপি করার মতো লেখা নেই"
 }

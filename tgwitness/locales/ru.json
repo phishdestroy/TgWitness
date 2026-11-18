@@ -10333,5 +10333,10 @@
   "Select and copy the link.": "Выделите и скопируйте ссылку.",
   "Global search": "Глобальный поиск",
   "Checkpoint not timestamped": "Контрольная точка без метки времени",
-  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения"
+  "Checkpoint timestamp pending": "Метка времени контрольной точки ожидает подтверждения",
+  "Record #{n} not found": "Запись №{n} не найдена",
+  "Record #{n} is hidden by the filters": "Запись №{n} скрыта фильтрами",
+  "Enter a record number": "Введите номер записи",
+  "Copy description": "Копировать описание",
+  "No text to copy": "Нет текста для копирования"
 }

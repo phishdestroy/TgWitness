@@ -10210,5 +10210,10 @@
   "Select and copy the link.": "請選取並複製連結。",
   "Global search": "全域搜尋",
   "Checkpoint not timestamped": "檢查點未取得時間戳記",
-  "Checkpoint timestamp pending": "檢查點時間戳記待確認"
+  "Checkpoint timestamp pending": "檢查點時間戳記待確認",
+  "Record #{n} not found": "找不到記錄 #{n}",
+  "Record #{n} is hidden by the filters": "記錄 #{n} 已被篩選條件隱藏",
+  "Enter a record number": "請輸入記錄編號",
+  "Copy description": "複製說明",
+  "No text to copy": "沒有可複製的文字"
 }

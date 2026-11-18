@@ -10210,5 +10210,10 @@
   "Select and copy the link.": "링크를 선택해 복사하세요.",
   "Global search": "전체 검색",
   "Checkpoint not timestamped": "체크포인트에 타임스탬프 없음",
-  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중"
+  "Checkpoint timestamp pending": "체크포인트 타임스탬프 확인 대기 중",
+  "Record #{n} not found": "기록 #{n}을(를) 찾을 수 없음",
+  "Record #{n} is hidden by the filters": "기록 #{n}은(는) 필터로 숨겨져 있음",
+  "Enter a record number": "기록 번호를 입력하세요",
+  "Copy description": "설명 복사",
+  "No text to copy": "복사할 텍스트 없음"
 }

@@ -10312,5 +10312,10 @@
   "Select and copy the link.": "סמנו והעתיקו את הקישור.",
   "Global search": "חיפוש גלובלי",
   "Checkpoint not timestamped": "נקודת הביקורת לא קיבלה חותמת זמן",
-  "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה"
+  "Checkpoint timestamp pending": "חותמת הזמן של נקודת הביקורת ממתינה",
+  "Record #{n} not found": "רשומה #{n} לא נמצאה",
+  "Record #{n} is hidden by the filters": "רשומה #{n} מוסתרת על ידי המסננים",
+  "Enter a record number": "הזינו מספר רשומה",
+  "Copy description": "העתקת התיאור",
+  "No text to copy": "אין טקסט להעתקה"
 }

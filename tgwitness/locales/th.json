@@ -10210,5 +10210,10 @@
   "Select and copy the link.": "เลือกและคัดลอกลิงก์",
   "Global search": "ค้นหาทั่วโลก",
   "Checkpoint not timestamped": "จุดตรวจสอบไม่ได้รับการประทับเวลา",
-  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน"
+  "Checkpoint timestamp pending": "การประทับเวลาของจุดตรวจสอบรอการยืนยัน",
+  "Record #{n} not found": "ไม่พบระเบียน #{n}",
+  "Record #{n} is hidden by the filters": "ระเบียน #{n} ถูกซ่อนโดยตัวกรอง",
+  "Enter a record number": "ป้อนหมายเลขระเบียน",
+  "Copy description": "คัดลอกคำอธิบาย",
+  "No text to copy": "ไม่มีข้อความให้คัดลอก"
 }

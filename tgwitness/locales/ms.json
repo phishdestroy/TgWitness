@@ -10210,5 +10210,10 @@
   "Select and copy the link.": "Pilih dan salin pautan.",
   "Global search": "Carian global",
   "Checkpoint not timestamped": "Titik semak tidak dicap masa",
-  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan"
+  "Checkpoint timestamp pending": "Cap masa titik semak belum disahkan",
+  "Record #{n} not found": "Rekod #{n} tidak ditemui",
+  "Record #{n} is hidden by the filters": "Rekod #{n} disembunyikan oleh penapis",
+  "Enter a record number": "Masukkan nombor rekod",
+  "Copy description": "Salin keterangan",
+  "No text to copy": "Tiada teks untuk disalin"
 }

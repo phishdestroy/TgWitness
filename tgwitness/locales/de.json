@@ -10261,5 +10261,10 @@
   "Select and copy the link.": "Link markieren und kopieren.",
   "Global search": "Globale Suche",
   "Checkpoint not timestamped": "Prüfpunkt ohne Zeitstempel",
-  "Checkpoint timestamp pending": "Zeitstempel des Prüfpunkts ausstehend"
+  "Checkpoint timestamp pending": "Zeitstempel des Prüfpunkts ausstehend",
+  "Record #{n} not found": "Datensatz #{n} nicht gefunden",
+  "Record #{n} is hidden by the filters": "Datensatz #{n} ist durch die Filter ausgeblendet",
+  "Enter a record number": "Datensatznummer eingeben",
+  "Copy description": "Beschreibung kopieren",
+  "No text to copy": "Kein Text zum Kopieren"
 }

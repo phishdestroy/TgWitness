@@ -10210,5 +10210,10 @@
   "Select and copy the link.": "リンクを選択してコピーしてください。",
   "Global search": "グローバル検索",
   "Checkpoint not timestamped": "チェックポイントにタイムスタンプなし",
-  "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち"
+  "Checkpoint timestamp pending": "チェックポイントのタイムスタンプは確認待ち",
+  "Record #{n} not found": "記録 #{n} が見つかりません",
+  "Record #{n} is hidden by the filters": "記録 #{n} はフィルターで非表示です",
+  "Enter a record number": "記録番号を入力してください",
+  "Copy description": "説明をコピー",
+  "No text to copy": "コピーできるテキストはありません"
 }

@@ -10261,5 +10261,10 @@
   "Select and copy the link.": "Havolani belgilang va nusxalang.",
   "Global search": "Global qidiruv",
   "Checkpoint not timestamped": "Nazorat nuqtasiga vaqt belgisi qo‘yilmadi",
-  "Checkpoint timestamp pending": "Nazorat nuqtasining vaqt belgisi tasdiq kutmoqda"
+  "Checkpoint timestamp pending": "Nazorat nuqtasining vaqt belgisi tasdiq kutmoqda",
+  "Record #{n} not found": "#{n}-yozuv topilmadi",
+  "Record #{n} is hidden by the filters": "#{n}-yozuv filtrlar tufayli yashirilgan",
+  "Enter a record number": "Yozuv raqamini kiriting",
+  "Copy description": "Tavsifni nusxalash",
+  "No text to copy": "Nusxalash uchun matn yo‘q"
 }

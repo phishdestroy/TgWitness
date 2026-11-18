@@ -10210,5 +10210,10 @@
   "Select and copy the link.": "Pilih dan salin tautan.",
   "Global search": "Pencarian global",
   "Checkpoint not timestamped": "Titik periksa tidak diberi stempel waktu",
-  "Checkpoint timestamp pending": "Stempel waktu titik periksa tertunda"
+  "Checkpoint timestamp pending": "Stempel waktu titik periksa tertunda",
+  "Record #{n} not found": "Catatan #{n} tidak ditemukan",
+  "Record #{n} is hidden by the filters": "Catatan #{n} tersembunyi oleh filter",
+  "Enter a record number": "Masukkan nomor catatan",
+  "Copy description": "Salin deskripsi",
+  "No text to copy": "Tidak ada teks untuk disalin"
 }
