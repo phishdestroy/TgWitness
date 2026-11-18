@@ -10261,5 +10261,7 @@
   "Keep the encryption key apart from this computer.": "暗号鍵はこのコンピューターとは別の場所に保管してください。",
   "Step 3 shows how to start your witness.": "ステップ 3 でウィットネスの起動方法を説明しています。",
   "Choose a chat type or account data to export.": "エクスポートするチャットの種類またはアカウントデータを選択してください。",
-  "{data} · no chats or attachments": "{data} · チャットと添付ファイルなし"
+  "{data} · no chats or attachments": "{data} · チャットと添付ファイルなし",
+  "No observation period recorded": "観測期間は記録されていません",
+  "0 records selected": "選択されたレコード: 0 件"
 }

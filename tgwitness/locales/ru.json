@@ -10384,5 +10384,7 @@
   "Keep the encryption key apart from this computer.": "Храните ключ шифрования отдельно от этого компьютера.",
   "Step 3 shows how to start your witness.": "Шаг 3 объясняет, как запустить свидетеля.",
   "Choose a chat type or account data to export.": "Выберите тип чатов или данные аккаунта для экспорта.",
-  "{data} · no chats or attachments": "{data} · без чатов и вложений"
+  "{data} · no chats or attachments": "{data} · без чатов и вложений",
+  "No observation period recorded": "Период наблюдения не зафиксирован",
+  "0 records selected": "Выбрано записей: 0"
 }

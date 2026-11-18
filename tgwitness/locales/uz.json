@@ -10312,5 +10312,7 @@
   "Keep the encryption key apart from this computer.": "Shifrlash kalitini bu kompyuterdan alohida saqlang.",
   "Step 3 shows how to start your witness.": "3-qadam guvohingizni qanday ishga tushirishni ko'rsatadi.",
   "Choose a chat type or account data to export.": "Eksport uchun chat turini yoki akkaunt ma'lumotlarini tanlang.",
-  "{data} · no chats or attachments": "{data} · chatlar va ilovalarsiz"
+  "{data} · no chats or attachments": "{data} · chatlar va ilovalarsiz",
+  "No observation period recorded": "Kuzatuv davri qayd etilmagan",
+  "0 records selected": "0 ta yozuv tanlandi"
 }

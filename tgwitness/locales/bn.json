@@ -10312,5 +10312,7 @@
   "Keep the encryption key apart from this computer.": "এনক্রিপশন কী এই কম্পিউটার থেকে আলাদা জায়গায় রাখুন।",
   "Step 3 shows how to start your witness.": "ধাপ ৩-এ আপনার সাক্ষী চালু করার উপায় দেখানো আছে।",
   "Choose a chat type or account data to export.": "এক্সপোর্টের জন্য একটি চ্যাটের ধরন বা অ্যাকাউন্টের ডেটা বেছে নিন।",
-  "{data} · no chats or attachments": "{data} · কোনো চ্যাট বা সংযুক্তি নেই"
+  "{data} · no chats or attachments": "{data} · কোনো চ্যাট বা সংযুক্তি নেই",
+  "No observation period recorded": "কোনো পর্যবেক্ষণকাল রেকর্ড হয়নি",
+  "0 records selected": "০টি রেকর্ড নির্বাচিত"
 }

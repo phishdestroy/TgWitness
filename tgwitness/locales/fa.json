@@ -10312,5 +10312,7 @@
   "Keep the encryption key apart from this computer.": "کلید رمزگذاری را جدا از این رایانه نگه دارید.",
   "Step 3 shows how to start your witness.": "گام ۳ نشان می‌دهد شاهد را چگونه راه‌اندازی کنید.",
   "Choose a chat type or account data to export.": "یک نوع گفتگو یا دادهٔ حساب را برای خروجی گرفتن انتخاب کنید.",
-  "{data} · no chats or attachments": "{data} · بدون گفتگو و پیوست"
+  "{data} · no chats or attachments": "{data} · بدون گفتگو و پیوست",
+  "No observation period recorded": "هیچ دورهٔ مشاهده‌ای ثبت نشده است",
+  "0 records selected": "۰ رکورد انتخاب شده"
 }

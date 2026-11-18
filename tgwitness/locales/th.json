@@ -10261,5 +10261,7 @@
   "Keep the encryption key apart from this computer.": "เก็บกุญแจเข้ารหัสแยกจากคอมพิวเตอร์เครื่องนี้",
   "Step 3 shows how to start your witness.": "ขั้นตอนที่ 3 อธิบายวิธีเริ่มพยานของคุณ",
   "Choose a chat type or account data to export.": "เลือกประเภทแชตหรือข้อมูลบัญชีที่จะส่งออก",
-  "{data} · no chats or attachments": "{data} · ไม่มีแชตหรือไฟล์แนบ"
+  "{data} · no chats or attachments": "{data} · ไม่มีแชตหรือไฟล์แนบ",
+  "No observation period recorded": "ไม่มีการบันทึกช่วงเวลาการสังเกต",
+  "0 records selected": "เลือก 0 รายการ"
 }

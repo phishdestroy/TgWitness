@@ -10516,5 +10516,7 @@
   "Keep the encryption key apart from this computer.": "احتفظ بمفتاح التشفير بعيدًا عن هذا الحاسوب.",
   "Step 3 shows how to start your witness.": "تشرح الخطوة 3 كيفية تشغيل الشاهد.",
   "Choose a chat type or account data to export.": "اختر نوع محادثة أو بيانات حساب للتصدير.",
-  "{data} · no chats or attachments": "{data} · بلا محادثات أو مرفقات"
+  "{data} · no chats or attachments": "{data} · بلا محادثات أو مرفقات",
+  "No observation period recorded": "لم تُسجَّل فترة مراقبة",
+  "0 records selected": "لم يُختر أي سجل"
 }

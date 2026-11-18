@@ -10261,5 +10261,7 @@
   "Keep the encryption key apart from this computer.": "Giữ khóa mã hóa tách biệt khỏi máy tính này.",
   "Step 3 shows how to start your witness.": "Bước 3 hướng dẫn cách khởi động nhân chứng của bạn.",
   "Choose a chat type or account data to export.": "Chọn một loại cuộc trò chuyện hoặc dữ liệu tài khoản để xuất.",
-  "{data} · no chats or attachments": "{data} · không có cuộc trò chuyện hay tệp đính kèm"
+  "{data} · no chats or attachments": "{data} · không có cuộc trò chuyện hay tệp đính kèm",
+  "No observation period recorded": "Không ghi nhận khoảng thời gian quan sát nào",
+  "0 records selected": "Đã chọn 0 bản ghi"
 }

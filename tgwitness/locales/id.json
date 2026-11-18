@@ -10261,5 +10261,7 @@
   "Keep the encryption key apart from this computer.": "Simpan kunci enkripsi terpisah dari komputer ini.",
   "Step 3 shows how to start your witness.": "Langkah 3 menunjukkan cara menjalankan saksi Anda.",
   "Choose a chat type or account data to export.": "Pilih jenis obrolan atau data akun untuk diekspor.",
-  "{data} · no chats or attachments": "{data} · tanpa obrolan atau lampiran"
+  "{data} · no chats or attachments": "{data} · tanpa obrolan atau lampiran",
+  "No observation period recorded": "Tidak ada periode pengamatan yang tercatat",
+  "0 records selected": "0 catatan dipilih"
 }
