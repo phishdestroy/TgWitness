@@ -3586,6 +3586,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Ushbu manba olib tashlansinmi? Saqlangan xabarlar va fayllar qoladi. Keshlangan foydalanuvchi profillari o‘chiriladi.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "{n} ta manba olib tashlansinmi? Saqlangan xabarlar va fayllar qoladi. Keshlangan foydalanuvchi profillari o‘chiriladi.",
   "Reply to #{id} · outside this loaded window": "#{id} xabariga javob · ushbu yuklangan oynadan tashqarida",
+  "Reply to #{id} in another chat": "Boshqa chatdagi #{id} ga javob",
   "Resolved": "Hal qilindi",
   "Restore default for {name}": "{name} uchun standart qiymatni tiklash",
   "Restore defaults…": "Standart qiymatlarni tiklash…",

@@ -3678,6 +3678,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "هل تريد إزالة هذا المصدر؟ ستبقى الرسائل والملفات المحفوظة، وستُزال الملفات الشخصية المخزّنة مؤقتًا للأشخاص.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "هل تريد إزالة عدد {n} من المصادر؟ ستبقى الرسائل والملفات المحفوظة، وستُزال الملفات الشخصية المخزّنة مؤقتًا للأشخاص.",
   "Reply to #{id} · outside this loaded window": "رد على #{id} · خارج هذا النطاق المحمّل",
+  "Reply to #{id} in another chat": "رد على #{id} في محادثة أخرى",
   "Resolved": "تم الحل",
   "Restore default for {name}": "استعادة القيمة الافتراضية لـ {name}",
   "Restore defaults…": "استعادة الإعدادات الافتراضية…",

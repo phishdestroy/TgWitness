@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Buang sumber ini? Mesej dan fail yang disimpan akan kekal. Profil pengguna dalam cache akan dibuang.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "Buang {n} sumber? Mesej dan fail yang disimpan akan kekal. Profil pengguna dalam cache akan dibuang.",
   "Reply to #{id} · outside this loaded window": "Balas kepada #{id} · di luar tetingkap yang dimuatkan ini",
+  "Reply to #{id} in another chat": "Balasan kepada #{id} dalam sembang lain",
   "Resolved": "Diselesaikan",
   "Restore default for {name}": "Pulihkan lalai untuk {name}",
   "Restore defaults…": "Pulihkan lalai…",

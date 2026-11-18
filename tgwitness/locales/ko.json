@@ -3563,6 +3563,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "이 소스를 제거하시겠습니까? 저장된 메시지와 파일은 유지되며, 캐시된 사용자 프로필은 삭제됩니다.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "소스 {n}개를 제거하시겠습니까? 저장된 메시지와 파일은 유지되며, 캐시된 사용자 프로필은 삭제됩니다.",
   "Reply to #{id} · outside this loaded window": "#{id}에 대한 답장 · 현재 로드된 범위 밖",
+  "Reply to #{id} in another chat": "다른 채팅의 #{id}에 대한 답장",
   "Resolved": "해결됨",
   "Restore default for {name}": "{name}의 기본값 복원",
   "Restore defaults…": "기본값 복원…",

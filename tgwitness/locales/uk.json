@@ -3632,6 +3632,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "Видалити це джерело? Збережені повідомлення та файли залишаться. Кешовані профілі людей буде видалено.",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "Видалити джерела ({n})? Збережені повідомлення та файли залишаться. Кешовані профілі людей буде видалено.",
   "Reply to #{id} · outside this loaded window": "Відповідь на #{id} · поза цим завантаженим вікном",
+  "Reply to #{id} in another chat": "Відповідь на № {id} в іншому чаті",
   "Resolved": "Вирішено",
   "Restore default for {name}": "Відновити стандартне значення для {name}",
   "Restore defaults…": "Відновити стандартні…",
