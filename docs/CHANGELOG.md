@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- The record details of an HTML report offer **Download file** for a saved attachment once the archive or its folder
+  was chosen under **Check** and matched its signed manifest. The file is read from that archive, its SHA-256 is
+  checked again and it is saved under its original name as a plain download, so the browser does not open it. Before
+  the check the details point to **Check**; a missing or changed file is named as such. Before, a saved file other
+  than an image could not be reached from the report.
 - The `search`, `context`, `messages`, `stats` and `export` commands refuse a chat, message, sender or sequence number
   that does not fit in a signed 64-bit integer with a usage error naming the argument. Before, such a number stopped
   the command with a Python traceback from the database.
