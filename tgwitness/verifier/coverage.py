@@ -545,7 +545,7 @@ def coverage_lines(coverage):
         return (str(hours) + " h " if hours else "") + str(rest // 60) + " min"
     lines = ["Continuously observed from " + p["from"] + " to " + p["to"] + " (" + span(p["seconds"]) + ")"
              + (", observing at the last capture confirmation" if p.get("still_observing") else "")
-             for p in coverage["continuous"]]
+             for p in coverage["continuous"]] or ["No observation period recorded."]
     lines += ["Gap from " + g["from"] + " to " + g["to"] + ": " + str(g["reason"]) for g in coverage["gaps"]]
     lines += session_lines(coverage)
     lines += source_lines(coverage)
@@ -562,6 +562,6 @@ def coverage_lines(coverage):
                      + str(account["gap_ranges"]) + " range(s)")
     elif account:
         extra.append("Account-wide sequence not measured: " + str(account.get("reason")))
-    return (lines or ["No observation period recorded."]) + extra
+    return lines + extra
 
 

@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: f2335662a88c72969f7e05fad9f40a5421871be2978d4ad1523263a2fa202cdc
+# TgWitness verifier sources SHA-256: f685af34def044189ef038e2a98058b32305d517550fbd32dcc567bb24662ea6
 """Standalone verifier"""
 import argparse
 import base64
@@ -3555,7 +3555,7 @@ def coverage_lines(coverage):
         return (str(hours) + " h " if hours else "") + str(rest // 60) + " min"
     lines = ["Continuously observed from " + p["from"] + " to " + p["to"] + " (" + span(p["seconds"]) + ")"
              + (", observing at the last capture confirmation" if p.get("still_observing") else "")
-             for p in coverage["continuous"]]
+             for p in coverage["continuous"]] or ["No observation period recorded."]
     lines += ["Gap from " + g["from"] + " to " + g["to"] + ": " + str(g["reason"]) for g in coverage["gaps"]]
     lines += session_lines(coverage)
     lines += source_lines(coverage)
@@ -3572,7 +3572,7 @@ def coverage_lines(coverage):
                      + str(account["gap_ranges"]) + " range(s)")
     elif account:
         extra.append("Account-wide sequence not measured: " + str(account.get("reason")))
-    return (lines or ["No observation period recorded."]) + extra
+    return lines + extra
 
 
 COMPLETENESS_FORMAT = "tgwitness-sequence-continuity-v1"

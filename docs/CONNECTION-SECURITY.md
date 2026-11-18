@@ -135,7 +135,7 @@ rights. The chat's settings decide whether members see history from before they 
 
 Telethon SQLite, Pyrogram SQLite, and Telegram Desktop TData use different formats.
 The panel detects and converts the supported structures; renaming a file is not
-conversion. Select one session and its companion JSON under **Files**, then press **Connect account**. Up to four matching files and
+conversion. Select one session and its companion JSON under **Files**, press **Check files**, then **Connect account**. Up to four matching files and
 8 MiB total are accepted. See [format limits](ACCOUNTS.md) for TData/JSON details.
 There is no passcode recovery. Phone/2FA or QR login creates a separate authorization.
 

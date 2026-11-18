@@ -10,12 +10,14 @@ from starlette.responses import JSONResponse
 
 from . import health
 from .account_import import session_key
-from .export_history import unexported
+from .export_history import delivered_archive, unexported
 
 
 OPEN_AT_ONCE = 6
 UNEXPORTED = ("Export evidence before deleting: the journal has records that are not in a signed evidence ZIP yet. "
               "Pause observation and download the signed ZIP under Export records.")
+COPY_UNCONFIRMED = ("Confirm that you keep a copy of the signed evidence archive outside this workspace before "
+                    "deleting it.")
 UNREADABLE = ("This workspace could not start, so its journal cannot be exported here. Preserve its data directory: "
               "deleting it would lose records that are not in a signed evidence ZIP.")
 GROUP_SECTIONS = {
@@ -221,7 +223,26 @@ class Profiles:
         except (sqlite3.Error, ValueError, KeyError, TypeError):
             return UNREADABLE
 
-    async def delete(self, profile_id, require_export=True):
+    def kept_copy(self, profile_id):
+        entry = self.entries.get(profile_id)
+        if profile_id == "default" or not entry:
+            return None
+        if entry.get("app") is not None:
+            with entry["app"].state.store.reading() as db:
+                return delivered_archive(db)
+        journal = self.root / "profiles" / profile_id / "journal.sqlite3"
+        if not journal.is_file():
+            return None
+        try:
+            db = sqlite3.connect(journal.as_uri() + "?mode=ro", uri=True)
+            try:
+                return delivered_archive(db)
+            finally:
+                db.close()
+        except (sqlite3.Error, ValueError, KeyError, TypeError):
+            return None
+
+    async def delete(self, profile_id, require_export=True, kept_copy=None):
         async with self.lock:
             if profile_id == "default":
                 raise ValueError("The main account workspace cannot be deleted.")
@@ -234,6 +255,9 @@ class Profiles:
             reason = self.deletion_blocked(profile_id) if require_export else None
             if reason:
                 raise JournalNotExported(reason)
+            archive = self.kept_copy(profile_id) if require_export else None
+            if archive is not None and kept_copy != (archive["sha256"] or "confirmed"):
+                raise JournalNotExported(COPY_UNCONFIRMED)
 
 
             multi = getattr(self.app.state, "multi_export", None)
@@ -441,6 +465,7 @@ class Profiles:
                     "sources_total": sources["total"] if sources else None,
                     "error_type": profile.get("error_type"),
                     "deletion_blocked": self.deletion_blocked(profile["id"]),
+                    "evidence_copy": self.kept_copy(profile["id"]),
                 })
             return result
 
