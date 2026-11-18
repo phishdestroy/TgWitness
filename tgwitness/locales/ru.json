@@ -10206,7 +10206,7 @@
   "checksum valid": "контрольная сумма верна",
   "Other hosts it contacted": "Другие хосты, к которым оно обращалось",
   "Dialogs it showed": "Диалоги, которые оно показало",
-  "Windows it opened": "Окна, которые оно открыло",
+  "Windows it tried to open": "Окна, которые оно пыталось открыть",
   "Downloads it started": "Загрузки, которые оно начало",
   "Forms": "Формы",
   "Input fields": "Поля ввода",

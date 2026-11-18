@@ -10134,7 +10134,7 @@
   "checksum valid": "sağlama toplamı geçerli",
   "Other hosts it contacted": "Bağlandığı diğer ana makineler",
   "Dialogs it showed": "Gösterdiği iletişim kutuları",
-  "Windows it opened": "Açtığı pencereler",
+  "Windows it tried to open": "Açmaya çalıştığı pencereler",
   "Downloads it started": "Başlattığı indirmeler",
   "Forms": "Formlar",
   "Input fields": "Giriş alanları",

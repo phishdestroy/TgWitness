@@ -10134,7 +10134,7 @@
   "checksum valid": "checksum معتبر",
   "Other hosts it contacted": "میزبان‌های دیگری که با آن‌ها تماس گرفت",
   "Dialogs it showed": "پنجره‌های گفتگویی که نشان داد",
-  "Windows it opened": "پنجره‌هایی که باز کرد",
+  "Windows it tried to open": "پنجره‌هایی که خواست باز کند",
   "Downloads it started": "بارگیری‌هایی که آغاز کرد",
   "Forms": "فرم‌ها",
   "Input fields": "فیلدهای ورودی",

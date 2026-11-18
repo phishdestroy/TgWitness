@@ -10083,7 +10083,7 @@
   "checksum valid": "checksum sah",
   "Other hosts it contacted": "Hos lain yang dihubunginya",
   "Dialogs it showed": "Dialog yang dipaparkannya",
-  "Windows it opened": "Tetingkap yang dibukanya",
+  "Windows it tried to open": "Tetingkap yang cuba dibukanya",
   "Downloads it started": "Muat turun yang dimulakannya",
   "Forms": "Borang",
   "Input fields": "Medan input",

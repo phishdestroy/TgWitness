@@ -415,7 +415,7 @@ export function createChatList({root, tr, node, icon, avatarNode, timeNode, getS
     session = getSession(); pending.clear(); resetFilters(); list.replaceChildren(); list.removeAttribute('aria-busy');
     activeFilters.replaceChildren(); activeFilters.hidden = true; resultCount.textContent = ''; results.hidden = true;
     secretItems = []; secretAt = 0; secretBusy = false; closeAdd(false); linkBox.open = false;
-    dialogRows.clear(); linkRow = null; dialogsError = '';
+    dialogRows.clear(); linkRow = null; dialogsError = ''; dialogsLoading = false; dialogsFor = null;
   }
   function snapshot() {return {chatFilter:status.value, chatSort:sort.value, chatKind:kind.value, chatQuery:search.value};}
   function restore(route) {

@@ -10134,7 +10134,7 @@
   "checksum valid": "चेकसम मान्य",
   "Other hosts it contacted": "अन्य होस्ट जिनसे इसने संपर्क किया",
   "Dialogs it showed": "इसके दिखाए डायलॉग",
-  "Windows it opened": "इसकी खोली गई विंडो",
+  "Windows it tried to open": "विंडो जिन्हें इसने खोलने की कोशिश की",
   "Downloads it started": "इसके शुरू किए डाउनलोड",
   "Forms": "फ़ॉर्म",
   "Input fields": "इनपुट फ़ील्ड",

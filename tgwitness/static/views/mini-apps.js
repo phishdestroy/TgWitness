@@ -179,7 +179,7 @@ export function createMiniApps({node, icon, tr, json, busy, confirm, toast, fmtF
       list(item.third_party_hosts, host_ => {const row = node("li", "");row.append(code(host_));return row;})));
     for (const [title, entries, row] of [
       [tr("Dialogs it showed"), item.dialogs, d => {const r = node("li", "");r.append(text("strong", "", d.type), code(d.message));return r;}],
-      [tr("Windows it opened"), item.popups, p => {const r = node("li", "");r.append(code(p.url));return r;}],
+      [tr("Windows it tried to open"), item.popups, p => {const r = node("li", "");r.append(code(p.url));return r;}],
       [tr("Downloads it started"), item.downloads, d => {const r = node("li", "");r.append(text("strong", "", d.file), code(d.url));return r;}],
       [tr("Forms"), item.forms, f => {const r = node("li", "");r.append(code(f));return r;}],
       [tr("Input fields"), item.inputs, f => {const r = node("li", "");r.append(code(f));return r;}]]) {

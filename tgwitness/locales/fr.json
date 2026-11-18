@@ -10144,7 +10144,7 @@
   "checksum valid": "somme de contrôle valide",
   "Other hosts it contacted": "Autres hôtes contactés",
   "Dialogs it showed": "Boîtes de dialogue affichées",
-  "Windows it opened": "Fenêtres ouvertes",
+  "Windows it tried to open": "Fenêtres qu’elle a tenté d’ouvrir",
   "Downloads it started": "Téléchargements lancés",
   "Forms": "Formulaires",
   "Input fields": "Champs de saisie",

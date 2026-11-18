@@ -10185,7 +10185,7 @@
   "checksum valid": "סכום ביקורת תקין",
   "Other hosts it contacted": "שרתים אחרים שאליהם פנתה",
   "Dialogs it showed": "חלונות דו-שיח שהציגה",
-  "Windows it opened": "חלונות שפתחה",
+  "Windows it tried to open": "חלונות שניסתה לפתוח",
   "Downloads it started": "הורדות שהתחילה",
   "Forms": "טפסים",
   "Input fields": "שדות קלט",

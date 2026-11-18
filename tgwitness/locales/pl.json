@@ -10236,7 +10236,7 @@
   "checksum valid": "suma kontrolna poprawna",
   "Other hosts it contacted": "Inne hosty, z którymi się łączyła",
   "Dialogs it showed": "Okna dialogowe, które pokazała",
-  "Windows it opened": "Okna, które otworzyła",
+  "Windows it tried to open": "Okna, które próbowała otworzyć",
   "Downloads it started": "Pobierania, które rozpoczęła",
   "Forms": "Formularze",
   "Input fields": "Pola wprowadzania",
