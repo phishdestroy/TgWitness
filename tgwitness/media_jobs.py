@@ -234,6 +234,20 @@ def reuse_into(store, directory, media, size):
     return {"sha256": known["sha256"], "source": {"media_event": known["seq"]}}
 
 
+def sync_file(path):
+    with open(path, "r+b") as stream:
+        os.fsync(stream.fileno())
+
+
+def sync_directory(path):
+    if os.name != "nt":
+        descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+
+
 def reuse_download(directory, saved, size):
     if saved is None or saved["bytes"] != size:
         return None
@@ -250,7 +264,9 @@ def reuse_download(directory, saved, size):
             shutil.copyfile(source, temporary)
             if not intact(temporary, digest, size):
                 return None
+            sync_file(temporary)
             temporary.replace(target)
+            sync_directory(directory)
         return {"sha256": digest, "source": saved["source"]}
     except OSError:
         return None
