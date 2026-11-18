@@ -744,7 +744,7 @@ def records(lay, say, events, titles, options):
 
 def custody_steps(say, data):
     acquisition, latest = data["custody"]["acquisition"], data["custody"].get("latest_timestamped_record")
-    steps = [(say("Observed and recorded"), report.utc_text(acquisition.get("first_record_at")) + " — "
+    steps = [(say("Recorded in the journal"), report.utc_text(acquisition.get("first_record_at")) + " — "
               + report.utc_text(acquisition.get("last_record_at"))),
              (say("Each record hashed and signed at capture"), say("Records: {n}", n=acquisition.get("record_count")))]
     if data.get("minimisation"):
@@ -864,6 +864,11 @@ def signatures_section(lay, say, certificate, fp, name):
                         "PDF. The HTML and JSON reports and the journal carry the exact text."), WARN)
 
 
+def own_pdf(context, default):
+    name = context.get("report_file")
+    return name.removesuffix(".html") + ".pdf" if name else default
+
+
 class EvidencePDF:
     def __init__(self, data, context, events, certificate):
         self.data = data
@@ -878,6 +883,7 @@ class EvidencePDF:
         self.handover, self.case = self.data.get("minimisation"), self.data["case"]
         self.filtered = bool((self.data.get("selection") or {}).get("selection", {}).get("enabled"))
         self.report_id, self.fp = self.data["report_id"], self.data["subject"].get("fingerprint") or ""
+        self.own = own_pdf(self.context, "report.pdf" if self.context.get("archive") else "tgwitness-report.pdf")
         footer = " · ".join(x for x in ((say("Case ID") + " " + self.case["id"]) if self.case.get("id") else "",
                                         say("Report ID") + " " + self.report_id[:8]) if x)
         pdf = document(say, footer, self.options.get("design", "classic"))
@@ -919,7 +925,8 @@ class EvidencePDF:
                          (say("Files"), summary["files"]),
                          (say("Timestamps"), summary["timestamps"] if summary["timestamps"] or self.context.get("archive")
                           else None),
-                         (say("Observation period"), report.span_text(say, summary["first_record_at"], summary["last_record_at"]))])
+                         (say("Observation period"), report.observed_text(say, self.coverage, (
+                             summary["first_record_at"], summary["last_record_at"]) if self.filtered else None))])
             data_name = "records.jsonl" if self.handover else "events.jsonl"
             self.lay.gap(5)
             self.lay.qr(paper_lines(self.report_id, self.fp, data_name, self.data["subject"].get("records_sha256" if self.handover else "events_sha256")))
@@ -980,7 +987,7 @@ class EvidencePDF:
             declaration(self.lay, say, self.case)
             self.lay.qr(paper_lines(self.report_id, self.fp, data_name, self.data["subject"].get("records_sha256" if self.handover else "events_sha256")))
             if self.certificate is not None:
-                signatures_section(self.lay, say, self.certificate, self.fp, "report.pdf")
+                signatures_section(self.lay, say, self.certificate, self.fp, self.own)
             return add_signature_field(pdf, say)
         finally:
             logging.getLogger("fpdf").removeHandler(found)
@@ -1199,7 +1206,7 @@ class EvidencePDF:
             "tgwitness-handover.zip" if self.handover else "tgwitness-evidence.zip")
         self.lay.section(say("Verify"), say("Get the signer's key fingerprint from a trusted channel, not from this archive."))
         self.lay.command("python verify.py " + archive + " --fingerprint TRUSTED_SHA256")
-        self.lay.command("python verify.py report.pdf --fingerprint TRUSTED_SHA256 --evidence " + archive)
+        self.lay.command("python verify.py " + self.own + " --fingerprint TRUSTED_SHA256 --evidence " + archive)
 
     def render_files(self):
         say = self.say
@@ -1368,7 +1375,7 @@ class ChatPDF:
             declaration(self.lay, say, self.case)
             self.lay.qr(paper_lines(self.report_id, self.fp, "chat.json", self.context.get("chat_json_sha256")))
             if self.certificate is not None:
-                signatures_section(self.lay, say, self.certificate, self.fp, "chat.pdf")
+                signatures_section(self.lay, say, self.certificate, self.fp, own_pdf(self.context, "chat.pdf"))
             return add_signature_field(pdf, say)
         finally:
             logging.getLogger("fpdf").removeHandler(found)

@@ -190,7 +190,7 @@ class EmptyReport(ValueError):
 
 
 def export_file(store, vault, fmt, options=None, *, include_board=True, compact=False, output_stream=None,
-                max_uncompressed_bytes=None, require_records=False, container=None, through=None):
+                max_uncompressed_bytes=None, require_records=False, container=None, through=None, chosen_at=None):
     if fmt not in ("jsonl", "csv", "html", "json", "pdf", "zip"):
         raise ValueError("Unsupported export format")
     if container is not None and (fmt != "zip" or output_stream is not None):
@@ -213,9 +213,11 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
         temp.close()
     try:
         sealed = store.root / "checkpoints" / ("checkpoint-" + str(through).zfill(12) + ".json") if through else None
-        retained = json.loads(sealed.read_bytes()) if sealed and sealed.is_file() else store.retained_checkpoint()
-        if through and retained and retained["statement"]["event_count"] > through:
-            retained = None
+        if sealed and not sealed.is_file():
+            raise ValueError("Sealed checkpoint " + sealed.name + " is missing")
+        retained = json.loads(sealed.read_bytes()) if sealed else store.retained_checkpoint()
+        if sealed and retained["statement"]["event_count"] != through:
+            raise ValueError("Sealed checkpoint " + sealed.name + " names another record")
         with store.snapshot(through=through) as snapshot:
             snapshot_at = utcnow()
             from . import board
@@ -468,7 +470,8 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
                 if snapshot.through is None:
                     manifest["boundary"] = {"event_count": result["events"], "chosen_at": snapshot_at, "basis": "snapshot"}
                 elif retained and retained["statement"]["event_count"] == result["events"]:
-                    manifest["boundary"] = {"event_count": result["events"], "chosen_at": retained["statement"]["created_at"],
+                    manifest["boundary"] = {"event_count": result["events"],
+                                            "chosen_at": chosen_at or retained["statement"]["created_at"],
                                             "basis": "sealed checkpoint"}
                 if board_export:
                     manifest["annotations_head"] = board_export["statement"]["state"]["annotations_head"]
@@ -572,12 +575,12 @@ def report_entry(context, options, file="report.html"):
 
 
 def encrypt_export(path, fmt, password, inner_name=None, mode="zip"):
+    inner_name = inner_name or ("tgwitness-report." if fmt in ("json", "pdf") else "tgwitness-evidence.") + fmt
     if mode == "tgwpw":
         from .verifier.password import encrypt_password_file
 
         try:
-            return encrypt_password_file(path, path.with_name(path.name + ".tgwpw"), password,
-                                         inner_name or "tgwitness-evidence." + fmt)
+            return encrypt_password_file(path, path.with_name(path.name + ".tgwpw"), password, inner_name)
         finally:
             path.unlink(missing_ok=True)
     if mode != "zip":
@@ -592,7 +595,7 @@ def encrypt_export(path, fmt, password, inner_name=None, mode="zip"):
                                      encryption=pyzipper.WZ_AES) as archive:
                 archive.setpassword(password.encode("utf-8"))
                 archive.setencryption(pyzipper.WZ_AES, nbits=256)
-                archive.write(path, inner_name or "tgwitness-evidence." + fmt)
+                archive.write(path, inner_name)
         return out
     except BaseException:
         if created:

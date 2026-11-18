@@ -4,5 +4,5 @@
 .observation-indicator[data-state=reconnecting] .observation-dot { color: var(--warning); }
 @media (max-width: 767px) {
   .topbar .profile-switch > .observation-indicator:not([hidden]) { display: inline-flex; margin-inline-end: 6px; }
-  .observation-label { display: none; }
+  .observation-label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }

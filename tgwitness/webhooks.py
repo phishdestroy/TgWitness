@@ -14,6 +14,7 @@ from .store import utcnow
 
 EVENTS = {"collector.error": "collector", "coverage.gap": "collector", "connection.restored": "collector",
           "observation.started": "collector", "media.failed": "media", "media.recovered": "media",
+          "media.missing_after_restart": "media",
           "chat_export.completed": "export", "export.completed": "export",
           "message.new": "changes", "message.edited": "changes", "message.deleted": "changes",
           "message.missing_on_recheck": "changes", "message.recovered": "changes"}

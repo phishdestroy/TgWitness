@@ -31,7 +31,8 @@ export function createSystemLog({root,tr,json,getState,getSession,options,format
   find('console-refresh').addEventListener('click',()=>load().catch(error=>{if(error.name!=='StaleView')toast(error.message,true);}),{signal:listeners.signal});
   find('console-flight').addEventListener('click',async event=>{
     const button=event.currentTarget;if(button.disabled)return;button.disabled=true;
-    try{if(await download?.('flight','tgwitness-flight-'+new Date().toISOString().replace(/[:.]/g,'-')+'.jsonl',false,true)!==false)toast(tr('Flight record saved.'));}
+    try{const saved=await download?.('flight','tgwitness-flight-'+new Date().toISOString().replace(/[:.]/g,'-')+'.jsonl',false,true);
+      if(saved===true)toast(tr('Flight record saved.'));else if(saved)toast(tr('Download started. Check your browser’s downloads.'));}
     catch(error){if(error.name!=='StaleView')toast(error.message,true);}
     finally{button.disabled=false;}
   },{signal:listeners.signal});
