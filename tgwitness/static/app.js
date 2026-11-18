@@ -568,7 +568,7 @@ const timeReady=import("./core/time.js?v=2").then(({createTimeFormatter})=>{
     updateTimes();window.dispatchEvent(new CustomEvent("tgwitness:time-zone",{detail:{zone:panelTime.zone}}));
   });
 });
-const shellReady=import("./components/shell.js?v=rail2").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
+const shellReady=import("./components/shell.js?v=rail3").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
 let connectionNotice=null;
 const connectionReady=import('./components/connection-notice.js').then(({createConnectionNotice})=>{
   connectionNotice=createConnectionNotice({host:document.querySelector('.topbar').parentElement,tr,retry:()=>refreshStatus(),
@@ -4012,13 +4012,26 @@ function scopeDraft(){
     new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))}};
 }
 
-$("scope-investigation").addEventListener("click",()=>{
-  viewQueries("sources","[name=scope-mode]").forEach(r=>{r.checked=r.value==="account";});
-  for(const k of scopeTypes)$("scope-"+k).checked=true;
-  $("scope-own").checked=true;$("scope-new-profile").checked=true;
-  if(Number($("scope-new-history").value)<200)$("scope-new-history").value="200";
-  state.scopeDirty=true;renderScope();$("scope-form").requestSubmit($("scope-form").querySelector("button[type=submit]"));
-});
+const investigationScope=saved=>({mode:"account",folder_id:null,types:Object.fromEntries(scopeTypes.map(k=>[k,true])),
+  exclude:[...(saved.exclude||[])],own_actions:true,new_chats:{profile:true,history:Math.max(200,Math.min(1000,Number(saved.new_chats?.history)||0))}});
+const investigating=saved=>!!saved&&saved.mode==="account"&&scopeTypes.every(k=>saved.types?.[k])&&!!saved.own_actions&&!!saved.new_chats?.profile&&(saved.new_chats?.history||0)>=200;
+async function enableInvestigationMode(){
+  if(!state.scope)await loadScope();
+  const saved=state.scope?.settings;if(!saved)throw new Error(tr("Connect a Telegram account first."));
+  const draft=investigationScope(saved),widening=saved.mode!=="account",revision=state.workspaceRevision,profile=state.profile;
+  const text=tr("Turn on investigation mode?")+"\n\n"+tr("For a dedicated account that joins teams and talks to bots: records every chat, group, private chat and bot it sees, its own messages and button presses, and for each new chat or bot saves its profile and earlier visible messages at once. Applied as soon as you confirm the whole-account scope.")
+    +"\n\n"+wideWarning()+"\n\n"+tr("Continue only with a dedicated account. Your confirmation is recorded in the signed journal.");
+  if(!(await askConfirm(text,{danger:true})))return false;
+  const r=await json("scope",{...draft,acknowledged:widening},{profile});
+  if(revision!==state.workspaceRevision)return false;
+  state.scopeDirty=false;state.scope={...r,folders:r.folders.length?r.folders:(state.scope?.folders||[])};
+  await refreshStatus();
+  if(state.view==="sources")renderScope();
+  toast(tr("Investigation mode is on."));
+  return true;
+}
+window.TgWitnessScope={investigate:enableInvestigationMode};
+$("scope-investigation").addEventListener("click",e=>busy(e.currentTarget,enableInvestigationMode));
 function chatTitle(id){
   return state.status?.targets.find(t=>t.chat_id===id)?.title||state.dialogs.find(d=>d.chat_id===id)?.title||tr("Chat {id}",{id});
 }
@@ -4027,7 +4040,8 @@ function renderScope(){
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=demo||!sc);
   show("scope-discard",!!sc&&state.scopeDirty);
   if(!sc){$("scope-unsaved").textContent=demo?tr("The scope can be changed in a real workspace, not in the demo."):"";return;}
-  const saved=sc.settings,select=$("scope-folder");
+  const saved=sc.settings,select=$("scope-folder"),preset=$("scope-investigation");
+  preset.disabled=demo||investigating(saved);preset.title=investigating(saved)?tr("Investigation mode is on."):"";
   if(!state.scopeDirty){
     form.querySelectorAll("[name=scope-mode]").forEach(r=>{r.checked=r.value===saved.mode;});
     for(const k of scopeTypes)$("scope-"+k).checked=saved.types[k];

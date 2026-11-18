@@ -4,6 +4,8 @@
     ['decision', 'Decision and rationale'],
     ['adult', '18+'], ['obscene', 'Obscene language'], ['violence', 'Violence'], ['personal', 'Personal data']];
   const HIDING = ['adult', 'obscene', 'violence', 'personal'];
+  const MODE_HISTORY = 200;
+  const MODE_HINT = 'For a dedicated account that joins teams and talks to bots: records every chat, group, private chat and bot it sees, its own messages and button presses, and for each new chat or bot saves its profile and earlier visible messages at once. Applied as soon as you confirm the whole-account scope.';
   const STATES = {recording: 'Recording', paused: 'Paused', stopped: 'Stopped'};
   const AFTER = {request: 'after the request', 'button press': 'after the button press', message: 'after the message'};
   const RISKS = {telegram_proxy: 'Telegram proxy link: opening it in a Telegram app contacts that server and reveals the IP address.',
@@ -66,6 +68,8 @@
     down: 'M12 5v14M6 13l6 6 6-6',
     copy: 'M9 9h11v11H9zM5 15H4V4h11v1',
     refresh: 'M20 12a8 8 0 11-2.3-5.6M20 4v5h-5',
+    flag: 'M5 21V4M5 4h12l-2.5 4L17 12H5',
+    timer: 'M12 21a8 8 0 100-16 8 8 0 000 16zM12 9v4l2.5 2M9.5 2.5h5',
     more: 'M5 12h.5M12 12h.5M19 12h.5'};
   const SYSTEM = {checked_link: 'link', requested: 'send', observing: 'eye', outcome: 'check', deleted: 'trash',
     not_listed: 'more', account_change: 'key', ai_draft: 'spark', search_recorded: 'search', qr_code: 'image',
@@ -78,7 +82,7 @@
   const thumbnails = new Map();
   const analysisState = {chat: null, zone: null, data: null};
   let toggle = null, drawer = null, current = null, data = null, timer = null, owner = '', editing = null, refreshes = 0;
-  let modules = null, homeList = null, shieldInfo = null, homeTab = 'documents', sessionTab = 'timeline';
+  let modules = null, homeList = null, shieldInfo = null, scopeInfo = null, homeTab = 'documents', sessionTab = 'timeline';
   let wide = false, accountInfo = null, plans = null, plan = null, planTab = 'work';
   let accountDraft = {profile: {}, privacy: {}, global: {}, errors: {}}, avatarUrl = null, accountReport = null;
   let cover = null, presence = null, watchPattern = null, watchlists = null, watchHits = null, appearanceSaves = Promise.resolve();
@@ -203,12 +207,10 @@
     if (!toggle) return;
     const recording = !!current && !current.fixed && current.state === 'recording';
     toggle.classList.toggle('live', recording);
-    const host = document.querySelector(recording ? '.sidebar nav' : '#nav-more');
-    if (host && toggle.parentElement !== host) host.append(toggle);
   }
 
   function reset() {
-    current = data = editing = homeList = shieldInfo = accountInfo = plans = plan = null;
+    current = data = editing = homeList = shieldInfo = scopeInfo = accountInfo = plans = plan = null;
     cover = presence = watchPattern = watchlists = watchHits = null;
     clearInterval(timer); timer = null;
     Object.assign(assist, {intent: '', goal: '', preview: null, result: null}); planTab = 'work';
@@ -224,12 +226,14 @@
 
   function mount() {
     if (toggle) return;
-    toggle = el('button', 'nav doc-toggle', icon('doc'), node('span', '', tr('Documentation')), node('span', 'doc-live-dot'));
+    toggle = el('button', 'nav doc-toggle', icon('eye'), node('span', '', tr('Investigation')), node('span', 'doc-live-dot'));
     toggle.type = 'button'; toggle.setAttribute('aria-expanded', 'false');
     drawer = node('aside', 'doc-drawer' + (wide ? ' wide' : '')); drawer.hidden = true;
-    drawer.setAttribute('aria-label', tr('Documentation'));
+    drawer.setAttribute('aria-label', tr('Investigation'));
     toggle.addEventListener('click', () => (open() ? hide() : show()));
-    document.getElementById('nav-more').append(toggle); document.body.append(drawer);
+    const anchor = document.querySelector('.sidebar nav .nav[data-view="secret-chats"]');
+    if (anchor) anchor.after(toggle); else document.querySelector('.sidebar nav').append(toggle);
+    document.body.append(drawer);
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && open()) {
         const composer = drawer.querySelector('.doc-mark');
@@ -249,6 +253,7 @@
     if (owner !== key()) {owner = key(); reset();}
     drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true');
     if (!modules) modules = await json('extensions').catch(() => ({loaded: [], goal: null}));
+    if (!scopeInfo && may('sources') && !state.status?.demo) scopeInfo = await json('scope').catch(() => null);
     clearInterval(timer);
     timer = setInterval(() => {if (open() && current && !current.fixed && !typing()) refresh().catch(() => {});}, 5000);
     current ? await refresh() : await listing();
@@ -261,8 +266,9 @@
 
   function hide() {
     drawer.hidden = true; toggle.setAttribute('aria-expanded', 'false'); clearInterval(timer); timer = null;
-    if (matchMedia('(max-width: 767px)').matches) document.getElementById('navigation-toggle').focus();
-    else {if (toggle.closest('#nav-more')) document.getElementById('nav-more').open = true; toggle.focus();}
+    const rail = document.querySelector('.rail-item[data-rail-view="investigation"]');
+    if (matchMedia('(max-width: 767px)').matches) document.getElementById('navigation-toggle')?.focus();
+    else (rail && !rail.hidden ? rail : toggle).focus();
   }
 
   function analysisAvailable() {
@@ -338,7 +344,7 @@
       ...(may('account') ? [['protection', 'Protection', 'shield'], ['account', 'Account', 'user'],
         ['cover', 'Cover and authority', 'lock', (cover?.personas.length || 0) + (cover?.authorisations.length || 0)]] : [])];
     if (!tabs.some(tab => tab[0] === homeTab)) homeTab = 'documents';
-    const head = el('header', 'doc-head', topRow(null, tr('Documentation')),
+    const head = el('header', 'doc-head', topRow(null, tr('Investigation')), modeStrip(),
       tabs.length > 1 ? tabBar(tabs, homeTab, id => {homeTab = id; renderHome();}) : '');
     const body = node('div', 'doc-body');
     body.dataset.view = 'home:' + homeTab + (homeTab === 'plans' && plan ? ':' + plan.id + ':' + planTab : '');
@@ -351,6 +357,26 @@
     updateToggle();
   }
 
+  function investigating(settings) {
+    return !!settings && settings.mode === 'account' && Object.values(settings.types || {}).every(Boolean)
+      && !!settings.own_actions && !!settings.new_chats?.profile && (settings.new_chats?.history || 0) >= MODE_HISTORY;
+  }
+
+  function modeStrip() {
+    const settings = scopeInfo?.settings;
+    if (!settings) return '';
+    const on = investigating(settings);
+    const state_ = el('span', 'doc-pill' + (on ? ' fixed' : ''), node('span', 'doc-dot'), tr(on ? 'On' : 'Off'));
+    const action = on ? button('Change', 'ghost', async () => {hide(); navigate('sources');})
+      : button('Turn on', 'secondary', async () => {
+        if (!(await window.TgWitnessScope?.investigate())) return;
+        scopeInfo = await json('scope').catch(() => scopeInfo); renderHome();
+      });
+    return el('div', 'doc-mode' + (on ? ' on' : ''), icon('eye'),
+      el('div', 'doc-mode-text', el('div', 'doc-mode-title', node('strong', '', tr('Investigation mode')), state_),
+        on ? '' : node('p', 'hint', tr(MODE_HINT))), action);
+  }
+
   function documentsPanel() {
     const form = node('form', 'doc-start');
     const title = node('input'); title.required = true; title.maxLength = 200; title.placeholder = tr('What are you documenting?');
@@ -358,14 +384,17 @@
     const purpose = node('textarea'); purpose.maxLength = 2000; purpose.rows = 2; purpose.placeholder = tr('Purpose (optional)');
     purpose.setAttribute('aria-label', tr('Purpose (optional)'));
     const start = el('button', 'primary', icon('play'), node('span', '', tr('Start documenting'))); start.type = 'submit';
-    const chats = node('select'); chats.multiple = true; chats.size = 4; chats.setAttribute('aria-label', tr('Only these chats'));
-    for (const target of state.status?.targets || []) chats.append(new Option(target.title || String(target.chat_id), String(target.chat_id)));
-    const scope = el('label', 'doc-scope', tr('Only these chats (none selected: all chats)'), chats);
-    form.append(title, purpose, ...(chats.options.length ? [scope] : []), start,
+    const picks = (state.status?.targets || []).map(target => {
+      const box = node('input'); box.type = 'checkbox'; box.value = String(target.chat_id);
+      return el('label', 'doc-chat-pick', box, node('span', '', target.title || String(target.chat_id)));
+    });
+    const scope = el('fieldset', 'doc-scope', node('legend', '', tr('Only these chats (none selected: all chats)')),
+      el('div', 'doc-chat-picks', ...picks));
+    form.append(title, purpose, ...(picks.length ? [scope] : []), start,
       node('p', 'hint', tr('A draft can be paused, restarted or deleted. Only a fixed document is signed.')));
     form.addEventListener('submit', event => {event.preventDefault(); busy(start, async () => {
       const session = await json('documentation', {title: title.value, purpose: purpose.value,
-        chat_ids: [...chats.selectedOptions].map(option => Number(option.value))});
+        chat_ids: picks.map(pick => pick.querySelector('input')).filter(box => box.checked).map(box => Number(box.value))});
       current = session; sessionTab = 'timeline';
       for (const chat of session.chat_ids || []) await snapshot(chat, true).catch(error => toast(error.message, true));
       await refresh();

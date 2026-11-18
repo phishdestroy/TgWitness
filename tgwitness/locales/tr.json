@@ -10090,5 +10090,20 @@
   "Pseudo-secret chats": "Sözde gizli sohbetler",
   "Other side": "Karşı taraf",
   "Encryption key": "Şifreleme anahtarı",
-  "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them.": "Burada bu sohbetin yalnızca ilk {n} mesajı gösteriliyor; günlük ve kayıtlar bölümü hepsini içerir."
+  "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them.": "Burada bu sohbetin yalnızca ilk {n} mesajı gösteriliyor; günlük ve kayıtlar bölümü hepsini içerir.",
+  "received": "alınan",
+  "sent": "gönderilen",
+  "deletion notices": "silme bildirimi",
+  "own messages deleted": "silinen kendi mesajları",
+  "after the request": "istekten sonra",
+  "after the button press": "düğmeye basıldıktan sonra",
+  "after the message": "mesajdan sonra",
+  "online": "çevrimiçi",
+  "last seen recently": "yakın zamanda görüldü",
+  "last seen within a week": "bu hafta görüldü",
+  "last seen within a month": "bu ay görüldü",
+  "status not available": "durum kullanılamıyor",
+  "Turn on": "Aç",
+  "Turn on investigation mode?": "Soruşturma modu açılsın mı?",
+  "Investigation mode is on.": "Soruşturma modu açık."
 }

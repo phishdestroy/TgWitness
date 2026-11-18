@@ -10162,5 +10162,20 @@
   "Pseudo-secret chats": "Псевдосекретные чаты",
   "Other side": "Собеседник",
   "Encryption key": "Ключ шифрования",
-  "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them.": "Здесь показаны только первые {n} сообщений этого чата; все они есть в журнале и в разделе записей."
+  "Only the first {n} messages of this chat are shown here; the journal and the records section hold all of them.": "Здесь показаны только первые {n} сообщений этого чата; все они есть в журнале и в разделе записей.",
+  "received": "получено",
+  "sent": "отправлено",
+  "deletion notices": "уведомлений об удалении",
+  "own messages deleted": "своих сообщений удалено",
+  "after the request": "после запроса",
+  "after the button press": "после нажатия кнопки",
+  "after the message": "после сообщения",
+  "online": "в сети",
+  "last seen recently": "был(а) недавно",
+  "last seen within a week": "был(а) на этой неделе",
+  "last seen within a month": "был(а) в этом месяце",
+  "status not available": "статус недоступен",
+  "Turn on": "Включить",
+  "Turn on investigation mode?": "Включить режим расследования?",
+  "Investigation mode is on.": "Режим расследования включён."
 }

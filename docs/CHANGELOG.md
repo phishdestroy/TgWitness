@@ -25,6 +25,13 @@
 
 ## Unreleased
 
+- Investigation has one place and one name: **Investigation** sits on the navigation rail and in the main menu, with a
+  red dot while a record runs. Before, “Documentation” hid under More tools and could not be opened at all in the
+  Simple interface level. Its panel shows whether investigation mode is on and turns it on after a confirmation that
+  says what changes; all of its tabs stay visible instead of scrolling out of view, chats for a record are chosen with
+  checkboxes, and the analysis counts, reply delays and online states are translated.
+- “On” was translated as a preposition in 19 languages (“Auf”, “En”, “Sur”, “На”) wherever the panel shows a setting
+  state; it now reads as a state.
 - `verify.py --compare` names a non-chat archive only for formats it knows; an archive from a newer TgWitness
   again reports that the verifier is too old, with exit code 3 under `--strict`.
 - A FloodWait while exporting chat history waits on the history request only and no longer pauses observation
