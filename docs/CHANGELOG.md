@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- The journal's download button is named **Download entire journal (ZIP)** and asks first, naming the workspace
+  and account, every source, the period up to the latest record with its time zone, the number of records and of
+  saved files, and, when the list is filtered, that the filters and search do not apply. **Choose records to
+  export** next to it opens the export selection, with the journal's chosen source when there is one. The overview
+  moved below the list, so search and filters come right after the page title.
 - The first setup step shows the three goals as short cards with one line on what each gives (**Download once**,
   **Track changes**, **Collect case records**) and the full description of the chosen goal under them, so all three
   titles fit above the bottom buttons at 320 and 390 px. Before, the long descriptions pushed the third goal below
