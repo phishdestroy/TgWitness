@@ -25,6 +25,11 @@
 
 ## Unreleased
 
+- An evidence export downloaded in the panel counts for workspace deletion only after the panel has received and
+  saved every byte and confirmed it with `POST /api/exports/{id}/received`. Before, the server counted the download
+  when it had sent the last byte; Linux kept a whole 1.6 MB archive in its socket buffer, so a download broken off
+  after 7 KB was still counted and **Delete** became available. Downloads the browser makes on its own and other HTTP
+  clients still count when the server has sent the whole response; the operations guide says what that cannot see.
 - A downloaded or reused attachment is flushed to disk before it is renamed into the media folder, and on Linux and
   macOS the folder entry is flushed too, before `media.saved` is written. Before, a power loss right after the record
   could leave the journal naming a file whose bytes were never written.

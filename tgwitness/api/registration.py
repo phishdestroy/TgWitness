@@ -782,6 +782,9 @@ def register(app, ctx):
     router.post(
         "/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)]
     )(routes_export.export_ticket)
+    router.post(
+        "/api/exports/{export_id}/received", dependencies=[Depends(authenticate)]
+    )(routes_export.export_received)
     router.get("/api/exports/{export_id}/download")(routes_export.export_again)
     router.get("/api/exports/{export_id}/external-signatures", dependencies=[Depends(authenticate)])(
         routes_export.external_signatures

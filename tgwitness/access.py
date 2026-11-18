@@ -131,6 +131,7 @@ POLICY = {
     "POST /api/auth/import/preview": ("account", None),
     "GET /api/exports/{export_id}/download": ("export", None),
     "POST /api/exports/{export_id}/ticket": ("export", None),
+    "POST /api/exports/{export_id}/received": ("export", None),
     "GET /api/exports/{export_id}/external-signatures": ("export", None),
     "POST /api/exports/{export_id}/external-signatures/request": ("export", None),
     "POST /api/exports/{export_id}/external-signatures/ticket": ("export", None),

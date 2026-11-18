@@ -9,7 +9,7 @@ from pathlib import Path
 from fastapi import Depends, HTTPException, Request
 
 from . import export_history
-from .downloads import TemporaryDownload
+from .downloads import TemporaryDownload, delivery
 from .store import canonical, utcnow
 from .verify import fingerprint
 
@@ -72,7 +72,9 @@ async def export_members(app, request, members, group, language=None):
             member = entry["app"]
             path, headers = await member.state.build_export("zip", request, language=language)
             parts.append((workspace_id, entry["label"], path, member.state.vault.public_key))
-            marks.append(member.state.export_delivered(headers))
+            mark, _ = member.state.export_delivered(headers)
+            if mark is not None:
+                marks.append(mark)
         directory = store.root / "temporary-exports"
         directory.mkdir(mode=0o700, exist_ok=True)
         path, accounts = await asyncio.to_thread(bundle, directory, group, parts, app.state.vault)
@@ -87,9 +89,10 @@ async def export_members(app, request, members, group, language=None):
     except BaseException:
         path.unlink(missing_ok=True)
         raise
+    mark, held = delivery(app, request, receipt["id"], (lambda: [mark() for mark in marks]) if marks else None)
     return TemporaryDownload(path, filename="tgwitness-group-" + safe(group["label"]) + ".zip",
-                             media_type="application/zip", headers=export_history.headers(receipt),
-                             delivered=lambda: [mark() for mark in marks])
+                             media_type="application/zip", headers={**export_history.headers(receipt), **held},
+                             delivered=mark)
 
 
 def register(app, authenticate):
