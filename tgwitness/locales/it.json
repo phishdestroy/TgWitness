@@ -10315,6 +10315,8 @@
   "A mode sets the protection target. The status of each layer is below.": "Una modalità fissa l'obiettivo di protezione. Lo stato di ogni livello è riportato sotto.",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "Conferma la modalità inferiore: la registrazione e la firma restano le stesse e nulla viene eliminato.",
   "Connected · no chats chosen": "Connesso · nessuna chat scelta",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "Esegui questi comandi nella cartella estratta, con il file ricevuto {name} nella cartella superiore.",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "Se il file è stato salvato con un altro nome, ad esempio dal browser, usa quel nome in questi comandi.",
   "Keep a copy of the checkpoint outside the collector.": "Conserva una copia del checkpoint fuori dal collettore.",
   "Keep the encryption key apart from this computer.": "Conserva la chiave di cifratura separata da questo computer.",
   "Step 3 shows how to start your witness.": "Il passaggio 3 mostra come avviare il testimone."

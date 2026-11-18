@@ -10254,6 +10254,8 @@
   "A mode sets the protection target. The status of each layer is below.": "模式設定保護目標。各層狀態見下方。",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "確認切換至較低模式：錄製與簽署維持不變，不會刪除任何內容。",
   "Connected · no chats chosen": "已連線 · 尚未選擇聊天",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "請在解壓後的資料夾中執行這些命令，並將收到的檔案 {name} 保留在其上層資料夾中。",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "如果檔案以其他名稱儲存（例如被瀏覽器重新命名），請在這些命令中使用該名稱。",
   "Keep a copy of the checkpoint outside the collector.": "請將檢查點的副本保存在收集器之外。",
   "Keep the encryption key apart from this computer.": "請將加密金鑰與這台電腦分開保存。",
   "Step 3 shows how to start your witness.": "第 3 步說明如何啟動見證端。"

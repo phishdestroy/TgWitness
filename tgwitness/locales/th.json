@@ -10254,6 +10254,8 @@
   "A mode sets the protection target. The status of each layer is below.": "โหมดกำหนดเป้าหมายการป้องกัน สถานะของแต่ละชั้นอยู่ด้านล่าง",
   "Confirm the lower mode: recording and signing stay the same and nothing is deleted.": "ยืนยันการเปลี่ยนไปใช้โหมดที่ต่ำกว่า: การบันทึกและการลงลายมือชื่อยังคงเหมือนเดิม และไม่มีสิ่งใดถูกลบ",
   "Connected · no chats chosen": "เชื่อมต่อแล้ว · ยังไม่ได้เลือกแชต",
+  "Run these commands in the extracted folder, with the received file {name} in its parent folder.": "เรียกใช้คำสั่งเหล่านี้ในโฟลเดอร์ที่แตกไฟล์แล้ว โดยให้ไฟล์ที่ได้รับ {name} อยู่ในโฟลเดอร์ระดับบน",
+  "If the file was saved under another name, for example by the browser, use that name in these commands.": "หากไฟล์ถูกบันทึกด้วยชื่ออื่น เช่น โดยเบราว์เซอร์ ให้ใช้ชื่อนั้นในคำสั่งเหล่านี้",
   "Keep a copy of the checkpoint outside the collector.": "เก็บสำเนาของจุดตรวจสอบไว้นอกตัวเก็บข้อมูล",
   "Keep the encryption key apart from this computer.": "เก็บกุญแจเข้ารหัสแยกจากคอมพิวเตอร์เครื่องนี้",
   "Step 3 shows how to start your witness.": "ขั้นตอนที่ 3 อธิบายวิธีเริ่มพยานของคุณ"
