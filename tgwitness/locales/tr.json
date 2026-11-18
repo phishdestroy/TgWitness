@@ -10286,6 +10286,8 @@
   "Copy description": "Açıklamayı kopyala",
   "No text to copy": "Kopyalanacak metin yok",
   "ASiC-E container damaged: {reason}": "ASiC-E kapsayıcısı bozuk: {reason}",
+  "{name} does not match the files it lists": "{name}, listelediği dosyalarla eşleşmiyor",
+  "Other container entries not checked in this browser: {list}": "Kapsayıcının bu tarayıcıda denetlenmeyen diğer girdileri: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E kapsayıcısı tanındı: bildirimi {n} dosya listeliyor ve SHA-256 değerleri eşleşiyor.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Kapsayıcının CAdES imzası (META-INF/signature.p7s) bu tarayıcıda denetlenmedi.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml veya META-INF/signature.p7s eksik",

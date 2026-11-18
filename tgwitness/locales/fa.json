@@ -10286,6 +10286,8 @@
   "Copy description": "کپی توضیح",
   "No text to copy": "متنی برای کپی وجود ندارد",
   "ASiC-E container damaged: {reason}": "کانتینر ASiC-E آسیب دیده است: {reason}",
+  "{name} does not match the files it lists": "{name} با فایل‌هایی که فهرست می‌کند مطابقت ندارد",
+  "Other container entries not checked in this browser: {list}": "ورودی‌های دیگر کانتینر که در این مرورگر بررسی نشدند: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "کانتینر ASiC-E شناسایی شد: مانیفست آن {n} فایل را فهرست می‌کند و SHA-256 آن‌ها مطابقت دارد.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "امضای CAdES کانتینر (META-INF/signature.p7s) در این مرورگر بررسی نشد.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml یا META-INF/signature.p7s وجود ندارد",

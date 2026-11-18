@@ -10358,6 +10358,8 @@
   "Copy description": "Копировать описание",
   "No text to copy": "Нет текста для копирования",
   "ASiC-E container damaged: {reason}": "Контейнер ASiC-E повреждён: {reason}",
+  "{name} does not match the files it lists": "{name} не совпадает с перечисленными в нём файлами",
+  "Other container entries not checked in this browser: {list}": "Другие записи контейнера, не проверенные в этом браузере: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "Контейнер ASiC-E распознан: в его манифесте {n} файлов, их SHA-256 совпадают.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Подпись CAdES контейнера (META-INF/signature.p7s) в этом браузере не проверялась.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "Нет META-INF/ASiCManifest.xml или META-INF/signature.p7s",

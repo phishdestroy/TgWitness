@@ -10235,6 +10235,8 @@
   "Copy description": "Sao chép mô tả",
   "No text to copy": "Không có văn bản để sao chép",
   "ASiC-E container damaged: {reason}": "Vùng chứa ASiC-E bị hỏng: {reason}",
+  "{name} does not match the files it lists": "{name} không khớp với các tệp mà nó liệt kê",
+  "Other container entries not checked in this browser: {list}": "Các mục khác của vùng chứa chưa được kiểm tra trong trình duyệt này: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "Đã nhận diện vùng chứa ASiC-E: tệp kê khai liệt kê {n} tệp và SHA-256 của chúng khớp.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Chữ ký CAdES của vùng chứa (META-INF/signature.p7s) chưa được kiểm tra trong trình duyệt này.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "Thiếu META-INF/ASiCManifest.xml hoặc META-INF/signature.p7s",

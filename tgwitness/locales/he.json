@@ -10337,6 +10337,8 @@
   "Copy description": "העתקת התיאור",
   "No text to copy": "אין טקסט להעתקה",
   "ASiC-E container damaged: {reason}": "מכל ASiC-E פגום: {reason}",
+  "{name} does not match the files it lists": "{name} אינו תואם לקבצים שהוא מפרט",
+  "Other container entries not checked in this browser: {list}": "רשומות אחרות במכל שלא נבדקו בדפדפן זה: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "מכל ASiC-E זוהה: המניפסט שלו מפרט {n} קבצים וערכי SHA-256 שלהם תואמים.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "חתימת ה-CAdES של המכל (META-INF/signature.p7s) לא נבדקה בדפדפן זה.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml או META-INF/signature.p7s חסר",

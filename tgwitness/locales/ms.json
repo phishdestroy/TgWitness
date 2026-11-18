@@ -10235,6 +10235,8 @@
   "Copy description": "Salin keterangan",
   "No text to copy": "Tiada teks untuk disalin",
   "ASiC-E container damaged: {reason}": "Bekas ASiC-E rosak: {reason}",
+  "{name} does not match the files it lists": "{name} tidak sepadan dengan fail yang disenaraikannya",
+  "Other container entries not checked in this browser: {list}": "Entri bekas lain yang tidak disemak dalam pelayar ini: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "Bekas ASiC-E dikenal pasti: manifesnya menyenaraikan {n} fail dan SHA-256 fail itu sepadan.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Tandatangan CAdES bekas (META-INF/signature.p7s) tidak disemak dalam pelayar ini.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml atau META-INF/signature.p7s tiada",

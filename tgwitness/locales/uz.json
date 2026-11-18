@@ -10286,6 +10286,8 @@
   "Copy description": "Tavsifni nusxalash",
   "No text to copy": "Nusxalash uchun matn yo‘q",
   "ASiC-E container damaged: {reason}": "ASiC-E konteyneri shikastlangan: {reason}",
+  "{name} does not match the files it lists": "{name} o‘zida sanalgan fayllarga mos kelmaydi",
+  "Other container entries not checked in this browser: {list}": "Konteynerning ushbu brauzerda tekshirilmagan boshqa yozuvlari: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E konteyneri aniqlandi: manifestida {n} ta fayl bor va ularning SHA-256 qiymatlari mos.",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "Konteynerning CAdES imzosi (META-INF/signature.p7s) ushbu brauzerda tekshirilmadi.",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml yoki META-INF/signature.p7s yo‘q",

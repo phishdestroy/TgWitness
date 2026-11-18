@@ -10286,6 +10286,8 @@
   "Copy description": "বিবরণ কপি করুন",
   "No text to copy": "কপি করার মতো লেখা নেই",
   "ASiC-E container damaged: {reason}": "ASiC-E কন্টেইনার ক্ষতিগ্রস্ত: {reason}",
+  "{name} does not match the files it lists": "{name} এর তালিকাভুক্ত ফাইলের সাথে মেলে না",
+  "Other container entries not checked in this browser: {list}": "কন্টেইনারের অন্যান্য এন্ট্রি এই ব্রাউজারে যাচাই করা হয়নি: {list}",
   "ASiC-E container recognized: its manifest lists {n} files and their SHA-256 match.": "ASiC-E কন্টেইনার শনাক্ত হয়েছে: এর ম্যানিফেস্টে {n}টি ফাইল আছে এবং সেগুলোর SHA-256 মেলে।",
   "The container's CAdES signature (META-INF/signature.p7s) was not checked in this browser.": "এই ব্রাউজারে কন্টেইনারের CAdES স্বাক্ষর (META-INF/signature.p7s) যাচাই করা হয়নি।",
   "META-INF/ASiCManifest.xml or META-INF/signature.p7s is missing": "META-INF/ASiCManifest.xml বা META-INF/signature.p7s নেই",
