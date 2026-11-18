@@ -244,7 +244,7 @@ class AutoOnlySession(BaseModel):
 class WitnessProbe(BaseModel):
     model_config = ConfigDict(extra="forbid")
     enabled: StrictBool = False
-    chat_id: StrictInt | None = None
+    chat_id: StrictInt | None = Field(default=None, ge=-(2**63), le=2**63 - 1)
     witness: str | None = Field(default=None, pattern=r"^(default|[a-f0-9]{32})$")
 
 

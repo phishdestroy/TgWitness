@@ -29,6 +29,7 @@ from datetime import datetime
 from datetime import timezone
 from fastapi import Depends
 from fastapi import HTTPException
+from fastapi import Query
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from fastapi.responses import Response
@@ -244,8 +245,8 @@ async def status(request: Request, *, ctx=Depends(current_context)):
 
 async def get_events(
     request: Request,
-    chat_id: int | None = None,
-    message_id: int | None = None,
+    chat_id: int | None = Query(None, ge=-(2**63), le=2**63 - 1),
+    message_id: int | None = Query(None, ge=-(2**63), le=2**63 - 1),
     kind: str | None = None,
     before: int | None = None,
     search: str | None = None,

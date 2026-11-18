@@ -54,8 +54,8 @@ async def connected(ctx, call, *args, **kwargs):
         raise HTTPException(409, "The other side has not accepted this chat yet.")
 
 
-async def view(*, before: int | None = Query(default=None, ge=1),
-               after: int | None = Query(default=None, ge=0), ctx=Depends(current_context)):
+async def view(*, before: int | None = Query(default=None, ge=1, le=2**63 - 1),
+               after: int | None = Query(default=None, ge=0, le=2**63 - 1), ctx=Depends(current_context)):
     if before is not None and after is not None:
         raise HTTPException(422, "Choose an older or newer history page, not both.")
     return chats_of(ctx).view(before=before, after=after)
