@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "शोकेस एक्सेस बनाया गया। आप इसे कभी भी वापस ले सकते हैं।",
   "Showcase link copied.": "शोकेस लिंक कॉपी हुआ।",
   "Select and copy the link.": "लिंक चुनें और कॉपी करें।",
-  "Global search": "वैश्विक खोज"
+  "Global search": "वैश्विक खोज",
+  "Check files": "फ़ाइलें जाँचें",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "फ़ाइलें चुनने या सत्र टेक्स्ट चिपकाने से कुछ नहीं भेजा जाता। <strong>फ़ाइलें जाँचें</strong> उन्हें उस TgWitness सर्वर पर भेजता है जिस पर यह पैनल चलता है; सर्वर उन्हें Telegram में साइन इन किए बिना पढ़ता है।"
 }

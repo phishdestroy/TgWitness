@@ -10310,5 +10310,7 @@
   "Showcase access created. You can revoke it at any time.": "הגישה לחלון הראווה נוצרה. אפשר לבטל אותה בכל עת.",
   "Showcase link copied.": "הקישור לחלון הראווה הועתק.",
   "Select and copy the link.": "סמנו והעתיקו את הקישור.",
-  "Global search": "חיפוש גלובלי"
+  "Global search": "חיפוש גלובלי",
+  "Check files": "בדוק קבצים",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "בחירת קבצים או הדבקת טקסט הפעלה אינן שולחות דבר. הכפתור <strong>בדוק קבצים</strong> שולח אותם לשרת TgWitness שמריץ את הלוח הזה; השרת קורא אותם בלי להתחבר ל-Telegram."
 }

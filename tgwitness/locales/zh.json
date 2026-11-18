@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "已创建展示页访问。你可以随时撤销。",
   "Showcase link copied.": "已复制展示页链接。",
   "Select and copy the link.": "请选择并复制链接。",
-  "Global search": "全局搜索"
+  "Global search": "全局搜索",
+  "Check files": "检查文件",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "选择文件或粘贴会话文本不会发送任何内容。<strong>检查文件</strong>会将其发送到运行此面板的 TgWitness 服务器；服务器在不登录 Telegram 的情况下读取它们。"
 }

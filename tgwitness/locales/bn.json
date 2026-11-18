@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "শোকেস অ্যাক্সেস তৈরি হয়েছে। যেকোনো সময় প্রত্যাহার করতে পারবেন।",
   "Showcase link copied.": "শোকেস লিংক কপি হয়েছে।",
   "Select and copy the link.": "লিংকটি নির্বাচন করে কপি করুন।",
-  "Global search": "বিশ্বব্যাপী অনুসন্ধান"
+  "Global search": "বিশ্বব্যাপী অনুসন্ধান",
+  "Check files": "ফাইল পরীক্ষা করুন",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "ফাইল বেছে নিলে বা সেশন টেক্সট পেস্ট করলে কিছুই পাঠানো হয় না। <strong>ফাইল পরীক্ষা করুন</strong> সেগুলো সেই TgWitness সার্ভারে পাঠায় যেখানে এই প্যানেল চলে; সার্ভার Telegram-এ সাইন ইন না করেই সেগুলো পড়ে।"
 }

@@ -10463,5 +10463,7 @@
   "Showcase access created. You can revoke it at any time.": "أُنشئ الوصول إلى واجهة العرض. يمكنك إلغاؤه في أي وقت.",
   "Showcase link copied.": "نُسخ رابط واجهة العرض.",
   "Select and copy the link.": "حدد الرابط وانسخه.",
-  "Global search": "البحث العام"
+  "Global search": "البحث العام",
+  "Check files": "تحقق من الملفات",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "اختيار الملفات أو لصق نص الجلسة لا يرسل شيئًا. يرسلها زر <strong>تحقق من الملفات</strong> إلى خادم TgWitness الذي تعمل عليه هذه اللوحة، ويقرؤها الخادم دون تسجيل الدخول إلى Telegram."
 }

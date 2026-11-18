@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "Akses etalase dibuat. Anda dapat mencabutnya kapan saja.",
   "Showcase link copied.": "Tautan etalase disalin.",
   "Select and copy the link.": "Pilih dan salin tautan.",
-  "Global search": "Pencarian global"
+  "Global search": "Pencarian global",
+  "Check files": "Periksa berkas",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Memilih berkas atau menempelkan teks sesi tidak mengirim apa pun. <strong>Periksa berkas</strong> mengirimkannya ke server TgWitness yang menjalankan panel ini; server membacanya tanpa masuk ke Telegram."
 }

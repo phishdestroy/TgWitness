@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "دسترسی ویترین ساخته شد. هر زمان می‌توانید آن را لغو کنید.",
   "Showcase link copied.": "پیوند ویترین کپی شد.",
   "Select and copy the link.": "پیوند را انتخاب و کپی کنید.",
-  "Global search": "جستجوی سراسری"
+  "Global search": "جستجوی سراسری",
+  "Check files": "بررسی فایل‌ها",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "انتخاب فایل‌ها یا چسباندن متن جلسه چیزی ارسال نمی‌کند. دکمهٔ <strong>بررسی فایل‌ها</strong> آن‌ها را به سرور TgWitness که این پنل روی آن اجرا می‌شود می‌فرستد؛ سرور آن‌ها را بدون ورود به Telegram می‌خواند."
 }

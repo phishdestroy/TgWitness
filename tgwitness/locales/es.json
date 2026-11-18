@@ -10269,5 +10269,7 @@
   "Showcase access created. You can revoke it at any time.": "Acceso al escaparate creado. Puede revocarlo en cualquier momento.",
   "Showcase link copied.": "Enlace del escaparate copiado.",
   "Select and copy the link.": "Seleccione y copie el enlace.",
-  "Global search": "Búsqueda global"
+  "Global search": "Búsqueda global",
+  "Check files": "Comprobar archivos",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Elegir archivos o pegar texto de sesión no envía nada. <strong>Comprobar archivos</strong> los envía al servidor de TgWitness que ejecuta este panel; el servidor los lee sin iniciar sesión en Telegram."
 }

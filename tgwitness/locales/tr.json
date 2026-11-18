@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "Vitrin erişimi oluşturuldu. İstediğiniz zaman iptal edebilirsiniz.",
   "Showcase link copied.": "Vitrin bağlantısı kopyalandı.",
   "Select and copy the link.": "Bağlantıyı seçip kopyalayın.",
-  "Global search": "Genel arama"
+  "Global search": "Genel arama",
+  "Check files": "Dosyaları kontrol et",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Dosya seçmek veya oturum metni yapıştırmak hiçbir şey göndermez. <strong>Dosyaları kontrol et</strong> bunları bu paneli çalıştıran TgWitness sunucusuna gönderir; sunucu onları Telegram'a giriş yapmadan okur."
 }

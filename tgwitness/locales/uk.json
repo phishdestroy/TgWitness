@@ -10361,5 +10361,7 @@
   "Showcase access created. You can revoke it at any time.": "Доступ до вітрини створено. Його можна відкликати будь-коли.",
   "Showcase link copied.": "Посилання на вітрину скопійовано.",
   "Select and copy the link.": "Виділіть і скопіюйте посилання.",
-  "Global search": "Глобальний пошук"
+  "Global search": "Глобальний пошук",
+  "Check files": "Перевірити файли",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Під час вибору файлів або вставлення тексту сеансу нічого не надсилається. Кнопка <strong>Перевірити файли</strong> передає їх на сервер TgWitness, на якому працює ця панель; сервер читає їх без входу в Telegram."
 }

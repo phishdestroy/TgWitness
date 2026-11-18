@@ -10259,5 +10259,7 @@
   "Showcase access created. You can revoke it at any time.": "Vitrinaga kirish yaratildi. Uni istalgan vaqtda bekor qilishingiz mumkin.",
   "Showcase link copied.": "Vitrina havolasi nusxalandi.",
   "Select and copy the link.": "Havolani belgilang va nusxalang.",
-  "Global search": "Global qidiruv"
+  "Global search": "Global qidiruv",
+  "Check files": "Fayllarni tekshirish",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Fayllarni tanlash yoki sessiya matnini joylash hech narsa yubormaydi. <strong>Fayllarni tekshirish</strong> ularni ushbu panel ishlayotgan TgWitness serveriga yuboradi; server ularni Telegramga kirmasdan o‘qiydi."
 }

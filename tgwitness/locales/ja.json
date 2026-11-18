@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "ショーケースへのアクセスを作成しました。いつでも取り消せます。",
   "Showcase link copied.": "ショーケースのリンクをコピーしました。",
   "Select and copy the link.": "リンクを選択してコピーしてください。",
-  "Global search": "グローバル検索"
+  "Global search": "グローバル検索",
+  "Check files": "ファイルを確認",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "ファイルを選んだりセッションテキストを貼り付けたりしただけでは何も送信されません。<strong>ファイルを確認</strong>を押すと、このパネルを動かしている TgWitness サーバーに送信され、サーバーは Telegram にログインせずに読み取ります。"
 }

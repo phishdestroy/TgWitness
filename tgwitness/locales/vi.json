@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "Đã tạo quyền truy cập trang trưng bày. Bạn có thể thu hồi bất cứ lúc nào.",
   "Showcase link copied.": "Đã sao chép liên kết trang trưng bày.",
   "Select and copy the link.": "Chọn và sao chép liên kết.",
-  "Global search": "Tìm kiếm toàn cầu"
+  "Global search": "Tìm kiếm toàn cầu",
+  "Check files": "Kiểm tra tệp",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Chọn tệp hoặc dán văn bản phiên không gửi đi bất cứ thứ gì. <strong>Kiểm tra tệp</strong> gửi chúng đến máy chủ TgWitness đang chạy bảng điều khiển này; máy chủ đọc chúng mà không đăng nhập vào Telegram."
 }

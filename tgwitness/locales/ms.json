@@ -10208,5 +10208,7 @@
   "Showcase access created. You can revoke it at any time.": "Akses pameran dicipta. Anda boleh membatalkannya pada bila-bila masa.",
   "Showcase link copied.": "Pautan pameran disalin.",
   "Select and copy the link.": "Pilih dan salin pautan.",
-  "Global search": "Carian global"
+  "Global search": "Carian global",
+  "Check files": "Semak fail",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Memilih fail atau menampal teks sesi tidak menghantar apa-apa. <strong>Semak fail</strong> menghantarnya ke pelayan TgWitness yang menjalankan panel ini; pelayan membacanya tanpa log masuk ke Telegram."
 }

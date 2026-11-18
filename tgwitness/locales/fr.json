@@ -10269,5 +10269,7 @@
   "Showcase access created. You can revoke it at any time.": "Accès à la vitrine créé. Vous pouvez le révoquer à tout moment.",
   "Showcase link copied.": "Lien de la vitrine copié.",
   "Select and copy the link.": "Sélectionnez et copiez le lien.",
-  "Global search": "Recherche globale"
+  "Global search": "Recherche globale",
+  "Check files": "Vérifier les fichiers",
+  "Choosing files or pasting session text sends nothing. <strong>Check files</strong> sends them to the TgWitness server that runs this panel; it reads them without signing in to Telegram.": "Choisir des fichiers ou coller un texte de session n’envoie rien. <strong>Vérifier les fichiers</strong> les envoie au serveur TgWitness qui exécute ce panneau ; il les lit sans se connecter à Telegram."
 }

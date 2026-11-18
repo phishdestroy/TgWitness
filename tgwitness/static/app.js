@@ -5279,7 +5279,7 @@ async function loadAuthKey(){
   const record={auth_key:key,dc_id:dc,...(user?{user_id:Number(user)}:{})};
   authProgress(tr("Reading your authorization key…"));
   try{
-    const result=await json("auth/import",{files:[{name:"auth-key.json",content:btoa(JSON.stringify(record))}]},{profile});
+    const result=await json("auth/import",{files:[{name:"auth-key.json",content:btoa(JSON.stringify(record))}],new_session:$("import-new-session").checked},{profile});
     if(revision!==state.workspaceRevision||selection!==accountImportRevision||!state.token)return;
     $("session-string").value=result.session||"";importExpectedId=result.expected_user_id||null;
     importClientProfile=result.client_profile||null;
@@ -5292,7 +5292,9 @@ for(const id of ["auth-key","auth-dc","auth-user-id"])$(id).addEventListener("in
   $("session-import-warning").open=!!$("auth-key").value.trim();
 });
 $("import-account").addEventListener("click",e=>busy(e.currentTarget,loadAccountFiles));
-$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";$("session-import-warning").open=!!$("session-string").value.trim();});
+$("session-string").addEventListener("input",()=>{accountImportRevision++;importExpectedId=null;importClientProfile=null;importFormats=[];importTwoFactor="";$("import-result").textContent="";
+  if($("session-string").value.trim()&&$("session-file").files.length){$("session-file").value="";renderSelectedFiles();}
+  $("session-import-warning").open=!!$("session-string").value.trim();});
 $("import-new-session").addEventListener("change",()=>{importTwoFactor="";});
 $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(state.status.demo){toast(tr("Demo workspace. Connect accounts in your live installation."),true);return;}
