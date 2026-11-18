@@ -28,6 +28,11 @@
 - Turning off a chat type in the scope applies to chats the scope added earlier at once: a new message of an
   automatically added group is no longer recorded after **Groups** is unchecked, even before the scope is recalculated
   or while Telegram cannot be reached. Chats chosen by hand keep their own rules.
+- The same rule now holds outside new messages: until the scope is recalculated, a chat the scope added earlier
+  and that a saved type, exclusion or switch to chosen chats no longer allows gets no history pass, new-chat
+  history, peer-settings record, profile observation or record of the account's removal from it; a history pass
+  already running stops at the next message. A chat the scope meets for the first time is decided on the scope
+  saved when Telegram answers the lookup, not on the one read before it.
 - A `scope.applied` record says whether the dialog list was read in that pass. When it could not be read or was not
   read, the record gives `dialog_list` (`unavailable` or `saved`), the size of the saved list as `saved_dialogs` and
   the error, and its coverage text no longer claims that all accessible dialogs were inspected. Before, a failed read
