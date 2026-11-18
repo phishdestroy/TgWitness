@@ -147,6 +147,21 @@ async def change_mode(
     return ctx.mode_state()
 
 
+async def acknowledge_journal_rollback(request: Request, *, ctx=Depends(current_context)):
+    ctx.require_live()
+    store, principal = ctx.app.state.store, request.state.principal
+    with store.transaction():
+        rolled_back = store.get_setting("journal_rollback", None)
+        if not rolled_back:
+            return {"acknowledged": False}
+        store.append("journal.rollback_acknowledged", {
+            "detected_at": rolled_back.get("detected_at"), "reason": rolled_back.get("reason"),
+            "remembered": rolled_back.get("remembered"), "journal_head": rolled_back.get("journal_head"),
+            "by": {"access_id": principal.owner, "label": principal.label}})
+        store.set_setting("journal_rollback", None)
+    return {"acknowledged": True}
+
+
 async def run_source_check(body: SourceCheck, *, ctx=Depends(current_context)):
     ctx.require_live()
     try:

@@ -273,6 +273,7 @@ POLICY = {
     "POST /api/alerts/test": ("settings", None),
     "POST /api/parameters": ("settings", None),
     "PATCH /api/mode": ("settings", None),
+    "POST /api/journal/rollback/acknowledge": ("settings", None),
     "GET /api/witness": ("settings", None),
     "POST /api/witness/tokens": ("settings", None),
     "DELETE /api/witness/tokens/{token_id}": ("settings", None),

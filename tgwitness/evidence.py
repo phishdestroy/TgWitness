@@ -258,6 +258,13 @@ def export_file(store, vault, fmt, options=None, *, include_board=True, compact=
             if not compact and (selection.enabled or selection.id_gaps) and fmt in ("html", "json", "pdf", "zip"):
                 selected = report.report_selection.analyze(snapshot, selection, preview_limit=0, scratch_root=directory)
                 context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps", "messages_not_found")}
+            if not compact and fmt in ("html", "json", "pdf", "zip") and (not selection.enabled or selection.secret_chats):
+                from . import report_secret
+                context["encrypted_chats"] = report_secret.collect(
+                    snapshot.connection, snapshot.through, selection.secret_chats if selection.enabled else None, summary["titles"])
+                context["media_root"] = str(store.root / "media")
+                context["encrypted_only"] = bool(selection.enabled and selection.secret_chats and not selection.chats
+                                              and not selection.messages and context["encrypted_chats"])
 
             if require_records and fmt in ("html", "json", "pdf"):
                 count = context["selection"]["counts"]["selected_records"] if "selection" in context else result["events"]

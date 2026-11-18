@@ -1,6 +1,6 @@
 from itertools import islice
 
-from . import report, report_analytics, jurisdiction_guidance
+from . import report, report_analytics, report_secret, jurisdiction_guidance
 from .store import utcnow
 
 PREVIEW_LIMIT = 50000
@@ -26,13 +26,18 @@ def preview(store, options):
                 analytics.add(event)
                 count += 1
         sampled = next(rows, None) is not None
+        conversations = report_secret.collect(snapshot.connection, None, selection.secret_chats,
+                                              {t["chat_id"]: t["title"] for t in store.targets()})             if selection.enabled and selection.secret_chats else []
     material = report.report_material({"kind": "evidence", "options": options, "digest": {"analytics": analytics.result()}, "event_count": count})
     sections = [report.report_charts.examination_html(material.get("examination"), say),
                 report.report_charts.html(material.get("analytics"), say)]
     if options.get("template") == "activity":
         sections.reverse()
     sections.append(jurisdiction_guidance.html(jurisdiction_guidance.build(options.get("jurisdiction_guidance"))))
-    title = options.get("case_title") or say("Telegram observation journal")
+    if conversations:
+        sections.insert(0, report_secret.html(conversations, say, 2, report.utc_text, report.size_text, store.root / "media"))
+    title = options.get("case_title") or (report_secret.title_of(say, conversations) if conversations and not selection.chats
+                                          and not selection.messages else say("Telegram observation journal"))
     document = ('<!doctype html><html lang="' + report.e(say.language) + '" dir="' + say.direction
         + '" data-report-design="' + report.report_design.normalized(options.get("design")) + '" data-theme="' + report.e(options["theme"])
         + '" data-report-template="' + report.e(options.get("template", "dossier"))

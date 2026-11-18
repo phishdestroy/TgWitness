@@ -185,7 +185,9 @@ html[data-ui-level=simple] #view-sources #sources-tab-secret { display: none; }
 #view-secret-chats .secret-pill { padding: 2px 9px; border-radius: 999px; background: var(--surface-2); color: var(--text-2); font-size: 12px; font-weight: 600; }
 #view-secret-chats .secret-pill[data-state=ready], #view-secret-chats .secret-pill[data-state=rekeying] { background: var(--success-soft); color: var(--success); }
 #view-secret-chats .secret-pill[data-state=pending], #view-secret-chats .secret-pill[data-state=requested] { background: var(--warning-soft); color: var(--warning); }
-#view-secret-chats .secret-thread-head .route-actions { margin: 0; flex-wrap: nowrap; }
+#view-secret-chats .secret-thread-head .route-actions { grid-column: 1 / -1; margin: 0; flex-wrap: wrap; }
+#view-secret-chats .secret-thread-head .route-actions button { white-space: nowrap; }
+#view-secret-chats .secret-image { display: block; max-width: min(100%, 320px); max-height: 320px; border-radius: 10px; object-fit: contain; background: var(--surface-2); }
 #view-secret-chats .secret-key-box { grid-column: 1 / -1; grid-row: 2; display: grid; gap: 2px; padding: 8px 12px; border-radius: 10px; background: var(--surface-2); }
 #view-secret-chats .secret-key { font-size: 12px; overflow-wrap: anywhere; color: var(--text-2); }
 #view-secret-chats .secret-key-box .hint { font-size: 12px; }

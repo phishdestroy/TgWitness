@@ -25,7 +25,7 @@ CHANGES = {"message.deleted": "deleted", "message.edited": "edited", "message.mi
 PROBLEM_KINDS = ("storage.low", "storage.ok", "coverage.gap", "collector.error", "connection.retry_failed",
                  "source.access_unconfirmed", "export.failed", "chat_export.interrupted", "replica.completed",
                  "anchor.completed", "profile.unavailable", "host.state", "storage.completed", "account.security_event",
-                 "session.exclusive_ended", "account.sessions")
+                 "session.exclusive_ended", "account.sessions", "session.takeover_risk", "journal.rolled_back")
 COMPLETION_KINDS = ("account_export.completed", "chat_export.completed", "snapshot.completed", "storage.completed")
 
 CHANGE_SCAN = 5000
@@ -420,7 +420,25 @@ def problem_line(event, titles, words):
             return tr(words, "Telegram sent a sign-in code for this account during observation.")
         if p.get("event_kind") == "new_login":
             return tr(words, "Telegram reported a new sign-in to this account during observation.")
+    if kind == "session.takeover_risk" and p.get("risks"):
+        return tr(words, "Someone else may still sign in to this account: {risks}.", risks=takeover_risks(p["risks"], words))
+    if kind == "journal.rolled_back":
+        seen, head = (p.get("remembered") or {}).get("seq"), (p.get("journal_head") or {}).get("seq")
+        if p.get("reason") == "shorter":
+            return tr(words, "The journal was restored from an older copy: record #{seen} was seen before, "
+                             "the journal now ends at #{head}.", seen=seen, head=head)
+        return tr(words, "The journal was replaced by a different copy: record #{seen} differs from the one seen before.",
+                  seen=seen)
     return None
+
+
+def takeover_risks(risks, words):
+    names = {"login_email": tr(words, "login email"), "recovery_email": tr(words, "recovery email"),
+             "two_step_password": tr(words, "two-step password"),
+             "app_id_mismatch": tr(words, "session key made by another app")}
+    found = [" ".join(filter(None, (names.get(risk.get("kind"), str(risk.get("kind"))), risk.get("pattern"))))
+             for risk in risks if isinstance(risk, dict)]
+    return ", ".join(found)
 
 
 def host_line(state, words):
@@ -543,6 +561,9 @@ def problem_group(event):
         fields = [p.get("reason")]
     elif kind == "storage.low":
         fields, family = [], "storage"
+    elif kind == "session.takeover_risk":
+        risks = p.get("risks") if isinstance(p.get("risks"), list) else []
+        fields = [sorted(str(r.get("kind")) + ":" + str(r.get("pattern") or "") for r in risks if isinstance(r, dict))]
     identity = [kind, chat, *fields] if fields is not None else [kind, chat, event["seq"]]
     return identity, (family, chat), fields is not None
 
@@ -572,7 +593,8 @@ def notice_destination(event, level):
         "replica.completed": ("replica", "replica"), "anchor.completed": ("timestamps", "timestamps"),
         "profile.unavailable": ("accounts", "accounts"), "host.state": ("server", "server"),
         "account.security_event": ("connection", "connection"), "session.exclusive_ended": ("connection", "connection"),
-        "account.sessions": ("connection", "connection"),
+        "account.sessions": ("connection", "connection"), "session.takeover_risk": ("connection", "connection"),
+        "journal.rolled_back": ("collection", None),
     }.get(kind, ("collection", None))
     if kind == "coverage.gap" and p.get("reason") == "authorization_required":
         category, part = "connection", "connection"
@@ -581,7 +603,8 @@ def notice_destination(event, level):
     severity = "warning"
     if level == "ok":
         severity = "success"
-    elif kind in ("collector.error", "export.failed", "chat_export.interrupted", "profile.unavailable", "replica.completed") \
+    elif kind in ("collector.error", "export.failed", "chat_export.interrupted", "profile.unavailable", "replica.completed",
+                  "journal.rolled_back") \
             or category == "connection" and p.get("reason") == "authorization_required":
         severity = "error"
     action = {"type": "diagnostics", "part": part} if part else {"type": "record"}
@@ -628,7 +651,8 @@ def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="def
         if not text:
             continue
         identity, family, grouped = problem_group(event)
-        read_key = notice_key(workspace_id, identity, notice_hour(event))
+        read_key = notice_key(workspace_id, identity,
+                              "" if event["kind"] == "session.takeover_risk" else notice_hour(event))
         key = notice_key(read_key, recovered.get(family, 0))
         item = notice_entry(event, "ok" if event["kind"] == "storage.ok" else "problem", text, read_key,
                             group_id=key, count_exact=not (grouped and truncated))

@@ -28,7 +28,7 @@ def chapter_plan(design, kind="journal"):
             Chapter("profiles", "Observed profiles", ("profiles",)),
             Chapter("directory", "Chats", ("directory", "participants")),
             Chapter("histories", "Changes", ("histories", "journal_changes")),
-            Chapter("journal", "Records" if kind != "chat" else "Messages", ("journal",)),
+            Chapter("journal", "Records" if kind != "chat" else "Messages", ("conversations", "journal")),
             Chapter("case", "Findings & assessment", ("case", "brief", "examination", "assessment", "case_board")),
             Chapter("scope", "Scope & coverage", ("selection", "minimisation", "source", "coverage", "message_numbers")),
             Chapter("artifacts", "Files, relationships & indicators", ("relations", "files", "indicators", "admin_log", "actions")),
@@ -42,7 +42,7 @@ def chapter_plan(design, kind="journal"):
             Chapter("scope", "Scope & coverage", ("selection", "minimisation", "source", "coverage", "message_numbers")),
             Chapter("histories", "Change dossiers", ("histories", "journal_changes")),
             Chapter("activity", "Activity & observed accounts", ("analytics", "directory", "participants")),
-            Chapter("journal", "Observation journal" if kind != "chat" else "Message transcript", ("journal",)),
+            Chapter("journal", "Observation journal" if kind != "chat" else "Message transcript", ("conversations", "journal")),
             Chapter("artifacts", "Files, relationships & indicators", ("relations", "files", "indicators", "admin_log", "actions")),
             Chapter("assurance", "Custody, integrity & verification", ("integrity", "timestamps", "custody", "verify", "standards", "seal")),
             Chapter("limitations", "Reading this record", ("limitations",)),
@@ -60,7 +60,7 @@ def chapter_plan(design, kind="journal"):
             Chapter("actions", "Operator actions", ("actions", "admin_log")),
             Chapter("indicators", "Extracted indicators", ("indicators",)),
             Chapter("assurance", "Provenance, custody & integrity", ("integrity", "timestamps", "custody", "verify", "standards", "seal")),
-            Chapter("journal", "Observation journal" if kind != "chat" else "Message transcript", ("journal",)),
+            Chapter("journal", "Observation journal" if kind != "chat" else "Message transcript", ("conversations", "journal")),
             Chapter("limitations", "Reading this record", ("limitations",)),
         )
     return ()
@@ -277,7 +277,7 @@ SECTION_KEYS = {
     "actions": "actions", "indicators": "indicators", "integrity": "integrity", "timestamps": "timestamps",
     "coverage": "coverage", "custody": "custody", "verify": "verify", "files": "files",
     "standards": "standards", "limits": "limitations", "limitations": "limitations",
-    "records": "journal", "messages": "journal", "source": "source", "people": "participants",
+    "records": "journal", "messages": "journal", "secret-conversation": "conversations", "source": "source", "people": "participants",
     "message-ids": "message_numbers", "ids": "message_numbers", "admin-log": "admin_log", "seal": "seal",
     "journal-changes": "journal_changes",
 }

@@ -22,7 +22,7 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   eventBefore:null,eventAfter:null,eventMatched:null,cursor: null, request: 0, drawerSeq: null,
   profile: sessionStorage.getItem("tgwitness-profile") || "default", profiles: [], demoToken: "", monitoringDirty: false,
   captureDirty: false, workspaceRevision: 0, verification: null, opened:false, connectionSettings:false,
-  chat: null, chats: [], chatsLoading: false, chatsError: false, chatMessages: [], chatNextBefore: null, chatNextAfter: null, chatInfo: null, chatFilter: "all", chatSearch: "", chatView: "messages", chatAuthor: null,
+  chat: null, chats: [], chatsLoading: false, chatsError: false, chatMessages: [], chatNextBefore: null, chatNextAfter: null, chatInfo: null, chatFilter: "all", chatSearch: "", chatView: "messages", chatAuthor: null, chatPanel: null,
   scope: null, scopeDirty: false, dossier: null, notifications: [], witnessToken: null, parameters: null, parametersDirty: false,
   me: null, access: null, accessEdit: null, accessChats: {}, consoleAfter: 0,
   accountExportJobs: [], accountExportDefaults: null, accountExportCapabilities: null,
@@ -359,6 +359,9 @@ const labels = {
   "session.security_baseline": [tr("Telegram security notices read"), "shield", "system"],
   "session.fingerprint": [tr("Session key fingerprint recorded"), "fingerprint", "system"],
   "session.concurrent_at_start": [tr("Other sessions at start"), "users", "system"],
+  "session.takeover_risk": [tr("Account takeover check"), "shield", "system"],
+  "journal.rolled_back": [tr("Journal restored from an older copy"), "alert", "coverage"],
+  "journal.rollback_acknowledged": [tr("Journal restore confirmed"), "check", "system"],
   "account.forgotten": [tr("Session forgotten on this computer"), "account", "system"],
   "account.restricted": [tr("Telegram restricted the account"), "alert", "coverage"],
   "account.authorization_error": [tr("Another client lost its authorization"), "alert", "system"],
@@ -430,9 +433,9 @@ const labels = {
 };
 function secretActionText(p){
   const d=p.details||{},n=(d.random_ids||[]).length;
-  return {DeleteMessages:tr("The other side deleted {n} messages; TgWitness keeps them.",{n}),FlushHistory:tr("The other side cleared the history; TgWitness keeps it."),
+  return {DeleteMessages:trn("The other side deleted {n} message; TgWitness keeps it.","The other side deleted {n} messages; TgWitness keeps them.",n),FlushHistory:tr("The other side cleared the history; TgWitness keeps it."),
     SetMessageTTL:tr("Timer set to {n} s",{n:d.ttl_seconds??0}),ScreenshotMessages:tr("The other side took a screenshot."),
-    ReadMessages:tr("The other side read {n} messages.",{n}),Typing:tr("The other side is typing.")}[p.action]||p.action;
+    ReadMessages:trn("The other side read {n} message.","The other side read {n} messages.",n),Typing:tr("The other side is typing.")}[p.action]||p.action;
 }
 function node(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }
 function placeChildren(parent,children){
@@ -565,7 +568,7 @@ const timeReady=import("./core/time.js?v=2").then(({createTimeFormatter})=>{
     updateTimes();window.dispatchEvent(new CustomEvent("tgwitness:time-zone",{detail:{zone:panelTime.zone}}));
   });
 });
-const shellReady=import("./components/shell.js?v=layout1").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
+const shellReady=import("./components/shell.js?v=rail1").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
 let connectionNotice=null;
 const connectionReady=import('./components/connection-notice.js').then(({createConnectionNotice})=>{
   connectionNotice=createConnectionNotice({host:document.querySelector('.topbar').parentElement,tr,retry:()=>refreshStatus(),
@@ -804,7 +807,7 @@ async function unlock(prefetched=null) {
   workspaceSafety?.acceptStatus(state.status);
   applyAccess();
   if(!state.opened&&(!requested.explicit||requested.error)){
-    state.view=state.status.demo?'chats':viewAllowed('start')?'start':'chats';
+    state.view=state.status.demo||state.status.collector?.has_session&&viewAllowed('chats')?'chats':viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view))state.view="chats";
   state.opened=true;
@@ -922,7 +925,7 @@ function navigate(view,options={}) {
   if(view!==state.view&&$("toast").classList.contains("error")){clearTimeout(toastTimer);show("toast",false);}
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
   if(view!=="connection")window.TgWitnessProxies?.stop?.();
-  state.view=view;syncHiddenNav();
+  state.view=view;syncHiddenNav();if(state.status)sessionWarnings?.update(state.status,warningScope(),view==="start");
   if(view==='start')state.workflow=null;
   const advanced=document.querySelector('#nav-more [data-view="'+CSS.escape(view)+'"]');
   if(advanced)$('nav-more').open=true;
@@ -1029,7 +1032,7 @@ function renderWorkflowControls(){
 }
 import("./components/glow.js?v=3").then(({createGlow})=>createGlow()).catch(error=>toast(error.message,true));
 let chatGaps=null;
-import("./views/chat-gaps.js?v=6").then(({createChatGaps})=>{
+import("./views/chat-gaps.js?v=7").then(({createChatGaps})=>{
   chatGaps=createChatGaps({node,tr,icon,json,fmtTime,openJournal:openJournalFilter,allowJournal:()=>viewAllowed('observations'),
     fmtDay:value=>panelTime?.day(value),dayKey:value=>panelTime?.dayKey(value)});
   if(state.view==='chats'&&state.chat!==null&&chatReady)renderChatFeed();
@@ -1525,6 +1528,18 @@ const modesReady=import("./components/modes.js?v=3").then(({createModes})=>{
   return modesUI;
 });
 modesReady.catch(error=>toast(error.message,true));
+const takeoverRiskNames={login_email:tr("Login email"),recovery_email:tr("Recovery email"),two_step_password:tr("Two-step password"),
+  app_id_mismatch:tr("Session key made by another app")};
+const warningScope=()=>state.profile+":"+(state.status?.fingerprint||"");
+let sessionWarnings=null;
+const sessionWarningsReady=import("./components/session-warnings.js?v=1").then(({createSessionWarnings})=>{
+  sessionWarnings=createSessionWarnings({host:$("session-warnings"),node,icon,tr,fmtFull,riskNames:takeoverRiskNames,may,askConfirm,json,refreshStatus,toast,
+    openJournal:openJournalFilter,canJournal:()=>viewAllowed("observations"),canSessions:()=>viewAllowed("connection"),
+    openSessions:async()=>{await navigate("connection");const show=$("account-sessions-show");show.scrollIntoView({block:"center"});show.click();}});
+  if(state.status)sessionWarnings.update(state.status,warningScope(),state.view==="start");
+  return sessionWarnings;
+});
+sessionWarningsReady.catch(error=>toast(error.message,true));
 function renderStatus() {
   const s=state.status,c=s.collector;
   renderFavicon();
@@ -1547,7 +1562,7 @@ function renderStatus() {
   const navCount=$("nav-count"),total=s.stats.total.toLocaleString(LANG);
   if(navCount.textContent!==total){if(navCount.dataset.profile===state.profile&&/\d/.test(navCount.textContent))replay(navCount,"count-bump",700);navCount.textContent=total;}
   navCount.dataset.profile=state.profile;
-  renderCollectorHealth(s.health);collectionUI?.update();accountSwitch?.update();
+  renderCollectorHealth(s.health);collectionUI?.update();accountSwitch?.update();sessionWarnings?.update(s,warningScope(),state.view==="start");
   const signIn=accountState(s).needsSignIn;
   compactCollectorError();
   show("collector-error",!!c.last_error||signIn);
@@ -1759,7 +1774,7 @@ function accountIdentity(p){
   return (a.username?"@"+a.username+" · ":"")+"ID "+a.id;
 }
 let accountsView=null;
-import("./views/accounts.js?v=layout1").then(({createAccounts})=>{
+import("./views/accounts.js?v=warnings1").then(({createAccounts})=>{
   accountsView=createAccounts({root:$("view-accounts"),tr,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
     json,loadProfiles,refreshStatus,toast,switchProfile,navigate,diagnose:openDiagnostics});
   window.TgWitnessAccounts=accountsView;
@@ -2148,6 +2163,11 @@ function excerpt(e) {
     case "account.sessions": return tr("Other sessions: {n}",{n:(p.others||[]).length})+
       ((p.added||[]).length?" · "+tr("new: {n}",{n:p.added.length}):"")+((p.removed||[]).length?" · "+tr("ended: {n}",{n:p.removed.length}):"");
     case "account.session_ended": return [p.device_model,[p.app_name,p.app_version].filter(Boolean).join(" "),p.country].filter(Boolean).join(" · ");
+    case "session.takeover_risk": return (p.risks||[]).length?tr("Can sign in without this session: {list}",
+      {list:p.risks.map(r=>[takeoverRiskNames[r.kind]||r.kind,r.pattern].filter(Boolean).join(" ")).join(", ")}):tr("No other way to sign in found");
+    case "journal.rolled_back": return p.reason==="shorter"?tr("Seen before: record #{seen} · journal now ends at #{head}",{seen:p.remembered?.seq,head:p.journal_head?.seq}):
+      tr("Record #{seen} differs from the one seen before",{seen:p.remembered?.seq});
+    case "journal.rollback_acknowledged": return p.by?.label?tr("Confirmed by {name}",{name:p.by.label}):"";
     case "account.restricted": case "account.restriction_expired": return restrictionText(p.kind);
     case "account.read_only": return tr(p.enabled?"On":"Off");
     case "account.content_settings": return [tr(p.sensitive_enabled?"On":"Off"),p.changed?tr("turned on by TgWitness"):"",
@@ -2465,9 +2485,10 @@ async function showSecretChats(visible){
     if(source&&!$('view-secret-chats').querySelector('[data-secret-demo-open]'))$('secret-thread').append(source.cloneNode(true));
     $('secret-refresh').hidden=$('secret-report').hidden=true;return;
   }
-  secretChatsLoading??=import("./views/secret-chats.js?v=14").then(({createSecretChats})=>secretChatsView=createSecretChats({
+  secretChatsLoading??=import("./views/secret-chats.js?v=15").then(({createSecretChats})=>secretChatsView=createSecretChats({
     root:$("view-secret-chats"),tr,trn,json,toast,busy,node,icon,avatar:avatarNode,formatTime,download,confirm:(message,options)=>askConfirm(message,options),
     getSession:()=>state.workspaceRevision+":"+state.profile,may:permission=>may(permission)&&!state.status?.demo,isAdmin:()=>!!state.me?.admin,humanSize,actionText:secretActionText,
+    preview:path=>api(path).then(r=>r.ok?r.blob():null).then(b=>b&&URL.createObjectURL(b)),
     openReport:async id=>{const owner=actionOwner();await navigate('evidence');if(!owner.current())return;
       (await exportsReady).select('settings');reportSelection?.selectSecrets(id===null?[]:[id]);}}));
   await (await secretChatsLoading).enter();
@@ -5667,7 +5688,7 @@ async function loadChatMessages(mode){
   const anchor=visible?{id:visible.id,offset:visible.getBoundingClientRect().top-bounds.top}:null,top=feed.scrollTop;
   const reset=mode==='open'||mode==='latest'||(mode==='refresh'&&(state.chatFilter!=='all'||state.chatSearch||state.chatAuthor!==null||result.messages.length&&result.messages[0].message_id>known));
   const previousBefore=state.chatNextBefore,previousAfter=state.chatNextAfter;
-  if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);
+  if(reset)chatGaps?.reset();chatGaps?.add(result.gaps);chatGaps?.offline?.(result.offline);
   const merged=new Map((reset?[]:state.chatMessages).map(m=>[m.message_id,m]));
   result.messages.forEach(m=>merged.set(m.message_id,m));
   const ordered=[...merged.values()].sort((a,b)=>a.message_id-b.message_id);
@@ -5688,6 +5709,7 @@ async function loadChatMessages(mode){
   return true;
 }
 function renderChatEmpty(){
+  renderChatInfo();
   viewQuery("chats",".chats-shell").dataset.panel="chat";
   const box=$("chat-empty"),s=state.status;show("chat-main",false);show("chat-empty",true);box.replaceChildren();
   if(!s)return;
@@ -5729,7 +5751,7 @@ function renderChat(){
     split?(info.deleted_saved?tr("{n} deleted, text kept",{n:info.deleted_saved}):""):(info.deleted?tr("{n} deleted",{n:info.deleted}):""),
     split&&info.deleted_unsaved?tr("{n} deleted before saving",{n:info.deleted_unsaved}):"",
     info.missing?tr("{n} not found on recheck",{n:info.missing}):"",info.edited?tr("{n} edited",{n:info.edited}):""].filter(Boolean).join(" · ");
-  renderChatStatus();renderMulti();renderChatFeed();renderComposer();
+  renderChatStatus();renderMulti();renderChatFeed();renderComposer();renderChatInfo();
 }
 function renderChatStatus(){
   if(state.view!=='chats')return;
@@ -5771,8 +5793,9 @@ function renderChatStatus(){
     f.addEventListener("click",()=>setChatQuery({chatFilter:key}));filters.append(f);
   }
   const tabs=node('div','chat-view-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label',tr('Chat views'));
-  const views=[['messages',tr('Messages')],['activity',tr('People')],['people',tr('Authors')],['profile',tr('Profile')]];
+  const views=[['messages',tr('Messages')]];
   if(s.analysis?.enabled&&!s.demo&&viewAllowed('analysis'))views.push(['ai',tr('AI context')]);
+  tabs.hidden=views.length<2;
   for(const [name,label] of views){const tab=node('button','filter'+(state.chatView===name?' active':''),label);tab.type='button';tab.dataset.chatView=name;
     tab.setAttribute('aria-pressed',String(state.chatView===name));tab.addEventListener('click',()=>{
       if(name==='ai'){busy(tab,async()=>{const chat=state.chat,revision=state.workspaceRevision;await navigate('analysis');
@@ -5847,10 +5870,10 @@ function renderChatStatus(){
   if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 let peopleTimeline;
-const peopleTimelineReady=import('./views/people-timeline.js?v=6').then(({createPeopleTimeline})=>{
-  peopleTimeline=createPeopleTimeline({root:$("chat-feed"),json,tr,
+const peopleTimelineReady=import('./views/people-timeline.js?v=7').then(({createPeopleTimeline})=>{
+  peopleTimeline=createPeopleTimeline({root:$("chat-info-body"),json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
-    active:()=>state.view==='chats'&&state.chatView==='activity'&&state.chat!==null,
+    active:()=>state.view==='chats'&&state.chatPanel==='activity'&&state.chat!==null&&!$("chat-info").hidden,
     record:openRecord,formatTime:fmtFull,canCollect:()=>!!state.me?.admin&&!state.status?.demo,attachment:mediaNode});return peopleTimeline;
 });
 window.addEventListener('tgwitness:lock',()=>peopleTimeline?.reset());
@@ -5859,7 +5882,7 @@ $('chat-feed').after(personCardHost);
 let personCard=null;
 function closePersonCard(){personCardHost.hidden=true;personCard?.reset();personCardHost.replaceChildren();}
 async function openPersonCard(userId){
-  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=6');
+  const {createPeopleTimeline}=await import('./views/people-timeline.js?v=7');
   personCard||=createPeopleTimeline({root:personCardHost,json,tr,
     owner:()=>state.workspaceRevision+':'+state.profile+':'+state.chat,
     active:()=>state.view==='chats'&&state.chat!==null&&!personCardHost.hidden,
@@ -5871,25 +5894,65 @@ async function openPersonCard(userId){
 }
 personCardHost.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePersonCard();}});
 window.addEventListener('tgwitness:lock',closePersonCard);
+const CHAT_PANELS=[['profile','Profile'],['activity','People'],['people','Authors']];
+function renderChatInfo(){
+  const panel=$("chat-info"),body=$("chat-info-body"),shell=viewQuery("chats",".chats-shell");
+  const open=state.view==='chats'&&state.chat!==null&&!!state.chatPanel&&!$("chat-main").hidden&&!!state.chatInfo;
+  panel.hidden=!open;if(shell)shell.dataset.info=open?"open":"closed";
+  $("chat-info-toggle").setAttribute("aria-expanded",String(open));$("chat-info-toggle").classList.toggle("active",open);
+  if(!open)return;
+  const tabs=$("chat-info-tabs");
+  if(!tabs.childElementCount)for(const [name,label] of CHAT_PANELS){
+    const tab=node("button","chat-info-tab",tr(label));tab.type="button";tab.dataset.panel=name;
+    tab.addEventListener("click",()=>{if(state.chatPanel===name)return;body.replaceChildren();state.chatPanel=name;renderChatInfo();});tabs.append(tab);
+  }
+  for(const tab of tabs.children)tab.setAttribute("aria-pressed",String(tab.dataset.panel===state.chatPanel));
+  const s=state.status;
+  if(state.chatPanel==='activity'){peopleTimelineReady.then(view=>view.load());return;}
+  if(state.chatPanel==="people"){
+    const generation=chatGeneration;
+    if(!body.querySelector(".people"))body.replaceChildren(viewState("loading",tr("Loading…")));
+    renderPeople(body).catch(error=>{
+      if(error instanceof StaleView||state.chatPanel!=="people"||generation!==chatGeneration)return;
+      const notice=viewState("error",tr("Could not load data"),"",tr("Retry"),()=>renderChatInfo());
+      if(body.querySelector(".people")){body.querySelector(".refresh-notice")?.remove();notice.classList.add("refresh-notice");body.prepend(notice);}
+      else body.replaceChildren(notice);
+    });return;
+  }
+  if(state.chatProfile?.chat!==state.chat)loadChatProfile().catch(()=>{});
+  const info=state.chatInfo,key=JSON.stringify([state.chat,state.chatProfile,info,s.demo,s.collector.has_session,may('sources'),viewAllowed('evidence')]);
+  if(body.firstElementChild?.profileKey!==key){const card=chatInfoCard(info);card.profileKey=key;body.replaceChildren(card,profileNode(true));}
+}
+function chatInfoCard(info){
+  const title=info.title||tr("Chat {id}",{id:info.chat_id}),card=node("section","chat-info-card"),head=node("div","chat-info-identity");
+  const name=node("div");name.append(node("h3","",title),node("p","hint",$("chat-sub").title||""));
+  head.append(avatarNode(info.chat_id,title,"xl"),name);card.append(head);
+  const actions=node("div","chat-info-actions"),action=(glyph,label,run,disabled=false)=>{
+    const button=node("button","chat-info-action");button.type="button";button.disabled=disabled;
+    button.append(icon(glyph),node("span","",label));button.addEventListener("click",()=>busy(button,run));actions.append(button);
+  };
+  action("search",tr("Search saved messages"),async()=>{state.chatPanel=null;renderChatInfo();$("chat-message-search").focus();});
+  const exporter=$("chat-export-start");
+  action("archive",tr("Export chat"),async()=>exporter.click(),exporter.disabled);
+  if(viewAllowed('evidence'))action("report",tr("Build report"),async()=>{const owner=actionOwner(),chat=state.chat;await navigate('evidence');if(!owner.current())return;
+    (await exportsReady).select('settings');reportSelection?.selectChats([chat]);});
+  action("users",tr("Collect all authors"),async()=>{$("chat-info-body").replaceChildren();state.chatPanel='people';state.lastChatPanel='people';renderChatInfo();});
+  card.append(actions);return card;
+}
+function toggleChatInfo(panel=null){
+  const next=panel||(state.chatPanel&&!$("chat-info").hidden?null:state.lastChatPanel||'profile');
+  if(next!==state.chatPanel)$("chat-info-body").replaceChildren();
+  state.chatPanel=next;if(next)state.lastChatPanel=next;renderChatInfo();
+  if(next)$("chat-info-tabs").querySelector('[aria-pressed="true"]')?.focus({preventScroll:true});else $("chat-info-toggle").focus({preventScroll:true});
+}
+$("chat-info-toggle").addEventListener("click",()=>toggleChatInfo());
+$("chat-info-close").addEventListener("click",()=>{state.chatPanel=null;renderChatInfo();$("chat-info-toggle").focus({preventScroll:true});});
+document.querySelector("#chat-main .chat-title").addEventListener("click",event=>{if(!event.target.closest("button"))toggleChatInfo();});
+$("chat-info").addEventListener("keydown",event=>{if(event.key==="Escape"&&!event.target.closest("dialog")){event.preventDefault();state.chatPanel=null;renderChatInfo();$("chat-info-toggle").focus({preventScroll:true});}});
 function renderChatFeed(){
   if(state.view!=='chats')return;
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
-  if(state.chatView==='activity'){peopleTimelineReady.then(view=>view.load());return;}
-  if(state.chatView==="people"){
-    const generation=chatGeneration;
-    if(!feed.querySelector(".people"))feed.replaceChildren(viewState("loading",tr("Loading…")));
-    renderPeople(feed).catch(error=>{
-      if(error instanceof StaleView||state.chatView!=="people"||generation!==chatGeneration)return;
-      const notice=viewState("error",tr("Could not load data"),"",tr("Retry"),()=>renderChatFeed());
-      if(feed.querySelector(".people")){feed.querySelector(".refresh-notice")?.remove();notice.classList.add("refresh-notice");feed.prepend(notice);}
-      else feed.replaceChildren(notice);
-    });return;
-  }
-  if(state.chatView==='profile'){
-    if(state.chatProfile?.chat!==state.chat)loadChatProfile().catch(()=>{});
-    const key=JSON.stringify([state.chat,state.chatProfile,s.demo,s.collector.has_session,may('sources')]);
-    if(feed.firstElementChild?.profileKey!==key){const profile=profileNode(true);profile.profileKey=key;feed.replaceChildren(profile);}return;
-  }
+  if(state.chatView!=='messages')state.chatView='messages';
   const expanded=new Map([...feed.querySelectorAll(".msg")].map(row=>[row.id,{
     versions:!!row.querySelector(".versions"),author:!!row.querySelector(".sender-details[open]")
   }]));
@@ -6052,15 +6115,15 @@ async function authorsCollectView(){
   if(authorsCollect)return authorsCollect;
   const {createAuthorsCollect}=await import('./views/authors-collect.js?v=1');
   authorsCollect||=createAuthorsCollect({json,tr,duration:fmtDuration,canCollect:()=>!!state.me?.admin&&!state.status?.demo,accounts:otherAccounts,
-    groups:()=>json('profile-groups',undefined,{root:true}),active:chat=>state.view==='chats'&&state.chatView==='people'&&state.chat===chat,
-    onComplete:()=>renderChatFeed()});
+    groups:()=>json('profile-groups',undefined,{root:true}),active:chat=>state.view==='chats'&&state.chatPanel==='people'&&state.chat===chat,
+    onComplete:()=>renderChatInfo()});
   return authorsCollect;
 }
 window.addEventListener('tgwitness:lock',()=>authorsCollect?.reset());
 async function renderPeople(feed){
   const id=state.chat,generation=chatGeneration,request=++peopleRequest,result=await json("chats/"+encodeURIComponent(id)+"/authors",undefined,viewOptions('chats'));
   const collect=await authorsCollectView();
-  if(request!==peopleRequest||state.view!=='chats'||id!==state.chat||generation!==chatGeneration||state.chatView!=="people")return;
+  if(request!==peopleRequest||state.view!=='chats'||id!==state.chat||generation!==chatGeneration||state.chatPanel!=="people")return;
   const collectBox=collect.mount(id,result,state.chatInfo);
   const old=feed.querySelector('.people'),profiled=(state.status.dossiers||[]).includes(id),key=JSON.stringify([result,profiled]);
   if(old?.renderKey===key&&old.chat===id){feed.querySelector('.refresh-notice')?.remove();return;}
@@ -6543,9 +6606,9 @@ async function loadChatProfile(){
     let r;
     try{r=await json("chats/"+encodeURIComponent(id)+"/profile",undefined,options);}
     catch(error){if(id===state.chat&&revision===state.workspaceRevision&&generation===chatGeneration&&!(error instanceof StaleView)){
-      state.chatProfile={chat:id,error:true};if(state.chatView==='profile')renderChatFeed();}throw error;}
+      state.chatProfile={chat:id,error:true};if(state.chatPanel==='profile')renderChatInfo();}throw error;}
     if(id!==state.chat||revision!==state.workspaceRevision||generation!==chatGeneration)return;
-    state.chatProfile={chat:id,...r};renderChatStatus();if(state.chatView==='profile')renderChatFeed();
+    state.chatProfile={chat:id,...r};renderChatStatus();if(state.chatPanel==='profile')renderChatInfo();
   })();
   chatProfileRead=read;
   try{return await read.promise;}finally{if(chatProfileRead===read)chatProfileRead=null;}
@@ -6579,7 +6642,7 @@ function profileNode(standalone=false){
   save.addEventListener("click",()=>busy(save,async()=>{
     const id=state.chat,r=await json("chats/"+encodeURIComponent(id)+"/profile",{});
     if(id!==state.chat)return;
-    state.chatProfile={chat:id,...r};state.chatProfileOpen=true;renderChatStatus();if(state.chatView==='profile')renderChatFeed();toast(tr("Profile saved in the signed journal."));
+    state.chatProfile={chat:id,...r};state.chatProfileOpen=true;renderChatStatus();if(state.chatPanel==='profile')renderChatInfo();toast(tr("Profile saved in the signed journal."));
   }));
   box.append(save);return box;
 }

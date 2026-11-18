@@ -19,7 +19,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from cryptography.x509.oid import NameOID
 
-from . import report, report_design_pdf, report_composition_pdf
+from . import report, report_design_pdf, report_composition_pdf, report_secret
 from .store import canonical
 from .verify import coverage_lines, fingerprint
 
@@ -888,6 +888,8 @@ class EvidencePDF:
             self.lay = Layout(pdf, say)
             label = say("Handover extract") if self.handover else say("Evidence report")
             title = self.case.get("title") or (say("Handover extract") if self.handover else say("Telegram observation journal"))
+            if self.context.get("encrypted_only") and not self.case.get("title"):
+                title = report_secret.title_of(say, self.data.get("encrypted_chats") or [])
             pdf.set_title(title)
             pdf.set_author(self.case.get("examiner") or self.case.get("organization") or "TgWitness")
             pdf.set_subject(label + " · " + self.report_id)
@@ -931,6 +933,7 @@ class EvidencePDF:
             callbacks = {
                 "brief": self.render_brief,
                 "selection": self.render_selection,
+                "conversations": self.render_conversations,
                 "assessment": self.render_assessment,
                 "case": self.render_case,
                 "minimisation": self.render_minimisation,
@@ -952,11 +955,12 @@ class EvidencePDF:
                 "directory": self.render_directory,
                 "relations": self.render_relations,
             }
-            default_order = ['brief', 'selection', 'examination', 'analytics', 'histories', 'journal', 'assessment', 'case', 'minimisation', 'case_board', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations']
+            default_order = ['brief', 'selection', 'conversations', 'examination', 'analytics', 'histories', 'journal', 'assessment', 'case', 'minimisation', 'case_board', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations']
             if self.options.get("template") == "activity":
                 default_order[2:4] = ["analytics", "examination"]
             visible = {
                 "selection": bool(self.data.get("selection")), "minimisation": bool(self.handover),
+                "conversations": bool(self.data.get("encrypted_chats")),
                 "case_board": bool((self.data.get("case_board") or {}).get("cards")),
                 "examination": bool(self.data.get("examination")),
                 "analytics": bool(self.data.get("analytics") or self.data.get("processors")),
@@ -984,6 +988,10 @@ class EvidencePDF:
 
     def render_selection(self):
         report.report_selection_view.pdf(self.lay, self.data.get("selection"))
+
+    def render_conversations(self):
+        report_secret.pdf(self.lay, self.data.get("encrypted_chats") or [], self.say, report.utc_text, report.size_text,
+                          (INK, MUTED, BAD, WARN), self.context.get("media_root"))
 
     def render_assessment(self):
         report.case_assessment.pdf(self.lay, self.data.get("case_assessment") or report.case_assessment.journal(self.context, self.coverage))

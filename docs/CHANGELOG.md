@@ -66,6 +66,22 @@
   fails the address check for its own running panel; `verify.py --compare` explains that it compares chat exports.
 - Account export status carries `terminal`; duplicate panel routes are gone; Python files keep LF line endings on
   every checkout, so `verify.py` hashes the same on Windows.
+- The panel shows the takeover risk and a restored journal as cards on Home and as one line elsewhere. Each risk says
+  what it allows and where to change it in the official app; “I restored it myself” clears the restore warning and
+  records `journal.rollback_acknowledged`. Both appear in notifications, external alerts and the accounts list.
+- Coverage gaps in a chat say when TgWitness was not running and how many deletions arrived afterwards without a chat.
+- Pseudo-secret chats name each attachment by kind and file name, preview saved images and keep “End chat” on one
+  line; one deleted or read message no longer reads as “1 messages”.
+- The panel is laid out like Telegram: it opens on Chats, a narrow rail keeps Chats, Pseudo-secret, Exports, Accounts
+  and Settings one click away, ☰ opens every other section. Profile, People and Authors of a chat moved from tabs
+  above the messages to an info panel that opens from the chat header, with search, export, report and author
+  collection at hand.
+- Reports of pseudo-secret chats show the conversation itself: the other side, start, status and encryption key, then
+  every message as a bubble with saved photos, “deleted by the other side; kept here”, timers, screenshots, read
+  notices and the end of the chat in place. The report title names the other side, the Report studio preview shows
+  the same conversation, and new pseudo-secret records keep the other side's name.
+- The People panel hides the profile collection form under one heading and drops status columns that hold only
+  “Unknown”; chat filter chips wrap instead of being cut off.
 - Messages can be forwarded from the chat view: “Forward” under a message or for up to 100 selected messages, to a
   chat picked by name. It uses the account's message pace and is recorded in the journal. “Forward chat” now picks an
   existing destination by name instead of asking for its numeric Telegram ID.
