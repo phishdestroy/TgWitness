@@ -44,7 +44,11 @@ export function createFormControls({forms, roots, tr, getSession, toast}) {
     const candidates=[...records.values()].filter(entry=>visible(entry.form)&&entry.form.dataset.dirty==='true').map(entry=>entry.form);
     const native=[...document.querySelectorAll('#parameters-form,#recording-form,#scope-form,#access-admin-form')].filter(visible);
     let form=event.target.closest?.('form');
-    if(!form||!records.has(form.id)&&!native.includes(form))form=candidates.length===1?candidates[0]:native.length===1?native[0]:null;
+    const layer=document.querySelector('dialog:modal')||[...document.querySelectorAll('[role=dialog][aria-modal=true]:not([hidden])')].pop();
+    if(layer){
+      if(!form||!layer.contains(form)||!records.has(form.id)&&!native.includes(form)){event.preventDefault();return;}
+    }
+    else if(!form||!records.has(form.id)&&!native.includes(form))form=candidates.length===1?candidates[0]:native.length===1?native[0]:null;
     if(!form)return;
     event.preventDefault();const submit=form.querySelector('button[type=submit]:not(:disabled),button:not([type]):not(:disabled)');
     if(submit&&!submit.closest('fieldset:disabled'))form.requestSubmit(submit);
