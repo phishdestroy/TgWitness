@@ -53,6 +53,10 @@
   account is in is added with **Add**; a public chat it is not in opens the link preview with **Join / open** and
   **Observe**. Before, the search only filtered the account's existing chat list, so typing the name of a group the
   account had not joined found nothing.
+- On screens up to 767 px, opening a chat from the keyboard moves the focus to **Chats** (back) in the open
+  conversation, and going back returns it to that chat's row. Before, the focus stayed on the hidden list and
+  going back focused the search field.
+
 - An evidence export downloaded in the panel counts for workspace deletion only after the panel has received and
   saved every byte and confirmed it with `POST /api/exports/{id}/received`. Before, the server counted the download
   when it had sent the last byte; Linux kept a whole 1.6 MB archive in its socket buffer, so a download broken off
