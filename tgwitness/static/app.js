@@ -881,7 +881,7 @@ function applyAccess(){
   $("collector-toggle").hidden=!may("collect")||!!state.status?.chats_limited;
   $("manage-profiles").hidden=!state.me?.admin;
   if(state.view==="analysis"&&!viewAllowed("analysis")&&!$("workspace").hidden)navigate("chats");
-  panelQueries("[data-export], .report-card, .export-language").forEach(n=>n.hidden=!viewAllowed("evidence"));
+  panelQueries("[data-export], [data-export-selection], .report-card, .export-language").forEach(n=>n.hidden=!viewAllowed("evidence"));
   show("account-export-card",!!state.me?.admin&&viewAllowed("evidence"));
   renderWorkflowControls();
 
@@ -3496,6 +3496,11 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
   const encryption=$("export-encryption").value;
   const journalZip=(fmt==="zip"||fmt==="asice")&&!!b.closest(".evidence-hero");
+  if(b.id==="journal-download-all"){
+    workspaceSafety.assert();const zipOwner=state.profile,zipRevision=state.workspaceRevision;
+    if(!await askConfirm(journalDownloadFacts(),{title:tr("Download entire journal (ZIP)"),confirmText:tr("Download entire journal (ZIP)")}))return;
+    workspaceSafety.assert();if(zipOwner!==state.profile||zipRevision!==state.workspaceRevision)throw new StaleView();
+  }
   if(journalZip){
     workspaceSafety.assert();const zipOwner=state.profile,zipRevision=state.workspaceRevision,asice=fmt==="asice";
     if(!await askConfirm(tr(asice?"Download the signed ASiC-E container of the journal of {account}?":"Download the signed ZIP of the journal of {account}?",{account:workspaceSafety.name(zipOwner)}),
@@ -3601,6 +3606,30 @@ async function reportFor(chat,sender,messages=null){
   $("exports-tab-settings").click();
   $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
 }
+function journalDownloadFacts(){
+  const s=state.status,stats=s?.stats||{},head=stats.head,files=stats.counts?.["media.saved"];
+  const account=s?.collector?.account,who=account?[account.username?"@"+account.username:"",account.id?"ID "+account.id:""].filter(Boolean).join(" · "):"";
+  const filtered=!!(state.filter||state.source||state.search||state.eventSince||state.eventUntil);
+  return [tr("Account: {account}",{account:workspaceSafety.name(state.profile)+(who?" ("+who+")":"")}),
+    tr("Sources: every source of this workspace"),
+    head?tr("Period: every record up to #{n}, {time}",{n:Number(head.seq).toLocaleString(LANG),time:fmtTime(head.observed_at)}):tr("Period: every record"),
+    tr("Records: {n}",{n:Number(stats.total||0).toLocaleString(LANG)}),
+    ...(typeof files==="number"?[tr("Saved files: {n}",{n:files.toLocaleString(LANG)})]:[]),
+    ...(filtered?[tr("The filters and search of the list do not apply: records hidden in the list are included.")]:[])].join("\n\n");
+}
+$("journal-export-selection").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const chat=/^-?\d+$/.test(String(state.source||""))?Number(state.source):null;
+  if(chat!==null){await reportFor(chat);return;}
+  const revision=state.workspaceRevision,profile=state.profile;
+  await navigate('evidence');
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence')return;
+  selectExportTask('journal');await loadReportSettings();
+  if(revision!==state.workspaceRevision||profile!==state.profile||state.view!=='evidence'||!reportReady)return;
+  reportSelection.load({...reportSelection.read(),enabled:true});
+  $("exports-tab-settings").click();
+  $("report-selection-chosen").dispatchEvent(new Event('input',{bubbles:true}));
+  $("report-data-title").focus();
+}));
 function reportControls(){
   $("report-fields").disabled=!reportReady||reportOwner!==reportKey()||reportSaving||!!window.TGW_ONLINE_DEMO;
   $("report-preview-refresh").disabled=reportPreviewBusy;

@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/workspace-safety.css?v=1">
 <link rel="stylesheet" href="/account-import.css?v=3">
 <link rel="stylesheet" href="/views/access.css?v=30">
-<link rel="stylesheet" href="/components/journal.css?v=8">
+<link rel="stylesheet" href="/components/journal.css?v=9">
 <link rel="stylesheet" href="/views/chats.css?v=25">
 <link rel="stylesheet" href="/views/mini-apps.css?v=1">
 <link rel="stylesheet" href="/views/chat-list.css?v=22">
@@ -287,14 +287,8 @@
 <section class="view" id="view-observations">
   <div class="page-heading">
     <div><h1 id="journal-title">Journal</h1><p class="page-description">Captured messages. Preserved changes. One record.</p></div>
-    <button class="primary" data-export="zip" data-mode-feature="signed_exports"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Export signed ZIP</button>
+    <div class="route-actions"><button class="primary" data-export="zip" data-mode-feature="signed_exports" id="journal-download-all" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download entire journal (ZIP)</button><button class="text-link" data-export-selection data-mode-feature="signed_exports" id="journal-export-selection" type="button">Choose records to export</button></div>
   </div>
-  <details class="journal-overview" id="journal-overview"><summary>Overview</summary><div class="stats">
-    <div class="stat"><span>Messages observed</span><strong id="stat-messages">0</strong><small>Live messages + history snapshots</small></div>
-    <div class="stat"><span>Edits recorded</span><strong id="stat-edits">0</strong><small>Observed versions, preserved</small></div>
-    <div class="stat"><span>Deletion notices</span><strong id="stat-deletes">0</strong><small>Scoped Telegram notifications</small></div>
-    <div class="stat"><span>Selected sources</span><strong id="stat-sources">0</strong><small id="sources-footnote">Ready for observation</small></div>
-  </div><div class="overview-empty" hidden id="overview-empty"></div></details>
   <div class="journal card">
     <div class="card-heading">
       <h2>Event timeline <span class="subtle" id="event-total"></span></h2>
@@ -318,6 +312,12 @@
     <div class="empty" hidden id="empty-events"><div class="empty-mark"><svg aria-hidden="true" class="icon"><use href="#i-inbox"/></svg></div><h3>No observations here yet</h3><p id="empty-copy">Connect an account, choose your sources, then start observation.</p><button class="secondary" id="empty-action" type="button">Connect account →</button></div>
     <div class="table-footer"><span id="shown-count">0 events shown</span><button class="quiet" hidden id="load-more">Load earlier events ↓</button><span class="subtle">Append-only journal</span></div>
   </div>
+  <details class="journal-overview" id="journal-overview"><summary>Overview</summary><div class="stats">
+    <div class="stat"><span>Messages observed</span><strong id="stat-messages">0</strong><small>Live messages + history snapshots</small></div>
+    <div class="stat"><span>Edits recorded</span><strong id="stat-edits">0</strong><small>Observed versions, preserved</small></div>
+    <div class="stat"><span>Deletion notices</span><strong id="stat-deletes">0</strong><small>Scoped Telegram notifications</small></div>
+    <div class="stat"><span>Selected sources</span><strong id="stat-sources">0</strong><small id="sources-footnote">Ready for observation</small></div>
+  </div><div class="overview-empty" hidden id="overview-empty"></div></details>
   <div class="coverage-note"><button class="text-link" data-open="evidence" type="button">About this record</button></div>
 </section>
 
