@@ -316,10 +316,14 @@ def archive_kind(path):
     except (OSError, KeyError, ValueError, zipfile.BadZipFile):
         return None
     value = str(manifest.get("format", "")) if isinstance(manifest, dict) else ""
-    for kind, marker in (("chat", "chat-export"), ("account", "account-export"), ("evidence", "evidence")):
-        if marker in value:
+    if is_format(value, "chat-export-v1"):
+        return "chat"
+    if value == "tgwitness-account-export-v1" or value in DISCLOSURE_FORMATS:
+        return "account"
+    for kind in ("evidence", "witness"):
+        if is_format(value, kind + "-v1"):
             return kind
-    return value or None
+    return None
 
 
 def verification_comparison(args, parser, mode):

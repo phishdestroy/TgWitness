@@ -25,6 +25,8 @@
 
 ## Unreleased
 
+- `verify.py --compare` names a non-chat archive only for formats it knows; an archive from a newer TgWitness
+  again reports that the verifier is too old, with exit code 3 under `--strict`.
 - Pseudo-secret reports read long chats in linear time, stop embedding image previews in HTML after 48 MB, skip PDF
   images above 50 megapixels and let a message taller than a page continue on the next page instead of drawing its
   frame past the page edge.

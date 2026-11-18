@@ -1,4 +1,4 @@
-# TgWitness verifier sources SHA-256: 12cf6c55b8321f39238264f6457643120165b9c376323d2694de380e9ea163a8
+# TgWitness verifier sources SHA-256: 7ca8bef4b7f1266be3096a3b18d33cc56527ba51233a04fe8c376ef2195cbab2
 """Standalone verifier"""
 import argparse
 import base64
@@ -11013,10 +11013,14 @@ def archive_kind(path):
     except (OSError, KeyError, ValueError, zipfile.BadZipFile):
         return None
     value = str(manifest.get("format", "")) if isinstance(manifest, dict) else ""
-    for kind, marker in (("chat", "chat-export"), ("account", "account-export"), ("evidence", "evidence")):
-        if marker in value:
+    if is_format(value, "chat-export-v1"):
+        return "chat"
+    if value == "tgwitness-account-export-v1" or value in DISCLOSURE_FORMATS:
+        return "account"
+    for kind in ("evidence", "witness"):
+        if is_format(value, kind + "-v1"):
             return kind
-    return value or None
+    return None
 
 
 def verification_comparison(args, parser, mode):
