@@ -155,7 +155,7 @@ def interactive_verify(args):
     if fp:
         command += ["--fingerprint", fp]
     for name in ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "channel", "evidence",
-                 "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
+                 "require", "require_tier", "sealed_attestation", "sealed_policy", "sealed_repo"):
         value = getattr(args, name)
         for item in value if isinstance(value, list) else [value] if value else ():
             command += ["--" + name.replace("_", "-"), str(item)]
@@ -329,7 +329,8 @@ def archive_kind(path):
 def verification_comparison(args, parser, mode):
     unsupported = ["--" + name.replace("_", "-") for name in
                    ("checkpoint", "tsa_ca", "witness", "witness_fingerprint", "require_witness", "channel",
-                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require_tier", "sealed_attestation", "board")
+                    "evidence", "check_drand", "check_bitcoin", "bitcoin_source", "require", "require_tier", "sealed_attestation",
+                    "board")
                    if getattr(args, name)]
     if unsupported:
         parser.error(", ".join(unsupported) + " cannot be used with --compare; verify the evidence archive separately")
