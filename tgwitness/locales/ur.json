@@ -3586,6 +3586,7 @@
   "Remove this source? Saved messages and files stay. Cached people profiles are removed.": "کیا یہ ذریعہ ہٹانا ہے؟ محفوظ شدہ پیغامات اور فائلیں برقرار رہیں گی۔ لوگوں کی کیش شدہ پروفائلز ہٹا دی جائیں گی۔",
   "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.": "کیا {n} ذرائع ہٹانے ہیں؟ محفوظ شدہ پیغامات اور فائلیں برقرار رہیں گی۔ لوگوں کی کیش شدہ پروفائلز ہٹا دی جائیں گی۔",
   "Reply to #{id} · outside this loaded window": "‏#{id} کا جواب · اس لوڈ شدہ ونڈو سے باہر",
+  "Reply to #{id} in another chat": "دوسری چیٹ میں #{id} کا جواب",
   "Resolved": "حل شدہ",
   "Restore default for {name}": "{name} کے لیے طے شدہ ترتیب بحال کریں",
   "Restore defaults…": "طے شدہ ترتیبات بحال کریں…",
