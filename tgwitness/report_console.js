@@ -423,7 +423,7 @@ async function startViewer(meta){
       +'</div><h3>'+esc(say("Check every file of the archive"))+'</h3><p class="lead">'+esc(say("Choose the archive as it was handed over (ZIP) or its unpacked folder. The manifest's signature and the SHA-256 of every file are checked here; nothing is uploaded."))
       +'</p><div class="d-actions"><label class="v-btn">'+ic("zip")+esc(say("Choose the ZIP"))+'<input type="file" id="c-zip" accept=".zip,application/zip" hidden></label>'
       +'<label class="v-btn ghost">'+ic("files")+esc(say("Choose the folder"))+'<input type="file" id="c-dir" webkitdirectory multiple hidden></label></div><div id="c-out">'+(V.checked||"")+"</div>"
-      +'<h3>'+esc(say("With verify.py"))+'</h3><pre class="cmd"><code>python verify.py '+esc(meta.archive||"ARCHIVE.zip")+" --fingerprint "+esc(meta.fingerprint||"")+"</code></pre></div>";
+      +'<h3>'+esc(say("With verify.py"))+'</h3><pre class="cmd"><code>python verify.py '+esc(meta.archive?"../"+meta.archive:"ARCHIVE.zip")+" --fingerprint TRUSTED_SHA256</code></pre></div>";
     $("#c-zip").addEventListener("change",e=>e.target.files[0]&&fullCheck(zipSource(e.target.files[0]),e.target.files[0].name));
     $("#c-dir").addEventListener("change",e=>e.target.files.length&&fullCheck(folderSource(e.target.files),"folder"));
     for(const t of tabs)if(t.dataset.view==="check")t.classList.toggle("bad",!!bad.length);}

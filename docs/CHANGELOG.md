@@ -75,6 +75,12 @@
 - An open panel follows changes to its access: `/api/status` carries the access's current permissions, and the panel
   updates its views and actions when they change. Before, a granted or removed export permission showed only after
   the page was reloaded; the server already checked each request against the current permissions.
+- Verification commands in HTML and PDF reports, their case assessment and the report viewer's Check tab use
+  `TRUSTED_SHA256` instead of the fingerprint carried by the report itself, so a copied command no longer compares the
+  archive with its own key. Inside an archive they name the original ZIP as `../tgwitness-evidence.zip`, as README.txt
+  does, and the HTML says to run them from the extracted folder; before, the HTML command failed there with
+  FileNotFoundError.
+
 - A workspace can be deleted after its evidence ZIP was downloaded. The export seals the journal up to a record and
   then writes the timestamp of that seal as a later record, which the deletion check counted as not exported, so
   every export left a new blocking record. Timestamp and evidence-record entries no longer block deletion; observed
